@@ -6,8 +6,8 @@
   applied to both html and body. https://gist.github.com/jfirebaugh/bd225bcfdd3a633850c4
 */
 html, body {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 body {
@@ -872,7 +872,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .entity-editor-pane .preset-icon-wrap {
     border-bottom: 1px solid #ccc;
-    padding: 10px 20px;
+    padding: 20px;
 }
 
 .entity-editor-pane .preset-icon-wrap::after {
@@ -889,12 +889,14 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-bottom-color: #ccc;
 }
 
-.entity-editor-pane .preset-icon-wrap > div {
+.entity-editor-pane .preset-icon-wrap > button {
+    display: block;
     height: 60px;
     width: 60px;
     margin: auto;
     border-radius: 4px;
     position: relative;
+    background-color: transparent;
 }
 
 .form-field {
@@ -1001,9 +1003,9 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* hide but preserve in layout */
 .inspector-hover .modified .form-label .modified-icon,
-.inspector-hover button.minor,
+.inspector-hover .entity-editor-pane button.minor,
 .inspector-hover .combobox-carat,
-.inspector-hover button,
+.inspector-hover .entity-editor-pane .header button,
 .inspector-hover .spin-control,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-buttons,
@@ -1081,19 +1083,8 @@ textarea,
             transition: all 200ms;
 }
 
-.modified .form-label .modified-icon,
-button.minor,
-.combobox-carat,
-button,
-.spin-control,
-.more-buttons {
-    -webkit-transition: opacity 200ms;
-       -moz-transition: opacity 200ms;
-         -o-transition: opacity 200ms;
-            transition: opacity 200ms;
-}
-
 /* second phase hover-to-active animations */
+
 input,
 .checkselect label:last-of-type {
     -webkit-transition: all 200ms 200ms;
@@ -1102,6 +1093,12 @@ input,
             transition: all 200ms 200ms;
 }
 
+.modified .form-label .modified-icon,
+.entity-editor-pane button.minor,
+.combobox-carat,
+.entity-editor-pane .header button,
+.spin-control,
+.more-buttons,
 .inspector-external-links,
 .hide-toggle:before,
 .radio-wrap button::before,
@@ -1147,10 +1144,10 @@ a.hide-toggle {
 button.preset-add-field {
     width: 25%;
     height: 40px;
-    -webkit-transition: width 200ms 400ms;
-       -moz-transition: width 200ms 400ms;
-         -o-transition: width 200ms 400ms;
-            transition: width 200ms 400ms;
+    -webkit-transition: width 200ms;
+       -moz-transition: width 200ms;
+         -o-transition: width 200ms;
+            transition: width 200ms;
 }
 
 /* set width based on # of buttons */
@@ -1200,6 +1197,10 @@ button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
 
 .entity-editor-pane .tooltip.left .tooltip-arrow {
     border-left-color: #000;
+}
+
+.entity-editor-pane .tooltip.right .tooltip-arrow {
+    border-right-color: #000;
 }
 
 .entity-editor-pane .tooltip-inner {

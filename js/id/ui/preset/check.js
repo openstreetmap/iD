@@ -21,7 +21,7 @@ iD.ui.preset.check = function(field) {
             .attr('id', 'preset-input-' + field.id);
 
         enter.append('span')
-            .text('unknown')
+            .text('Unknown')
             .attr('class', 'value');
 
         box = label.select('input')
@@ -39,7 +39,7 @@ iD.ui.preset.check = function(field) {
         value = tags[field.key];
         box.property('indeterminate', !value);
         box.property('checked', value === 'yes');
-        text.text(value || 'unknown');
+        text.text(value || 'Unknown');
         label.classed('set', !!value);
     };
 

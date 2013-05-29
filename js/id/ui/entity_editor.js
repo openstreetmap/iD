@@ -36,11 +36,6 @@ iD.ui.EntityEditor = function(context) {
         $header.select('h3')
             .text(preset.name());
 
-        $header.select('.preset-reset')
-            .on('click', function() {
-                event.choose(preset);
-            });
-
         $header.select('.preset-close')
             .on('click', function() {
                 context.enter(iD.modes.Browse(context));
@@ -56,7 +51,11 @@ iD.ui.EntityEditor = function(context) {
 
         $enter.append('div')
             .attr('class', 'preset-icon-wrap inspector-inner col12')
-            .append('div');
+            .append('button')
+            .attr('class', 'preset-reset preset-icon-button')
+            .call(bootstrap.tooltip()
+                .title(t('inspector.back_tooltip'))
+                .placement('right'));
 
         $enter.append('div')
             .attr('class', 'inspector-border inspector-preset col12');
@@ -73,9 +72,14 @@ iD.ui.EntityEditor = function(context) {
         $enter.append('div')
             .attr('class', 'inspector-external-links inspector-inner col12');
 
+        selection.selectAll('.preset-reset')
+            .on('click', function() {
+                event.choose(preset);
+            });
+
         // Update
 
-        $body.select('.preset-icon-wrap div')
+        $body.select('.preset-icon-wrap button')
             .call(iD.ui.PresetIcon()
                 .geometry(context.geometry(id))
                 .preset(preset));
