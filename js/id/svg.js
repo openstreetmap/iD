@@ -61,32 +61,29 @@ iD.svg = {
                     b = [x, y];
 
                     if (a) {
-                        var segment = 'M' + a[0] + ',' + a[1];
+                        var span = iD.geo.dist(a, b) - offset;
 
-                        var span = iD.geo.dist(a, b),
-                            angle = Math.atan2(b[1] - a[1], b[0] - a[0]),
-                            dx = dt * Math.cos(angle),
-                            dy = dt * Math.sin(angle),
-                            p;
+                        if (span >= 0) {
+                            var angle = Math.atan2(b[1] - a[1], b[0] - a[0]),
+                                dx = dt * Math.cos(angle),
+                                dy = dt * Math.sin(angle),
+                                p = [a[0] + offset * Math.cos(angle),
+                                     a[1] + offset * Math.sin(angle)];
 
-                        if (offset < span) {
-                            p = [a[0] + offset * Math.cos(angle),
-                                 a[1] + offset * Math.sin(angle)];
+                            var segment = 'M' + a[0] + ',' + a[1] +
+                                          'L' + p[0] + ',' + p[1];
 
-                            segment += 'L' + p[0] + ',' + p[1];
+                            for (span -= dt; span >= 0; span -= dt) {
+                                p[0] += dx;
+                                p[1] += dy;
+                                segment += 'L' + p[0] + ',' + p[1];
+                            }
+
+                            segment += 'L' + b[0] + ',' + b[1];
+                            segments.push({id: entity.id, index: i, d: segment});
                         }
 
-                        while ((offset + dt) < span) {
-                            offset += dt;
-                            p[0] += dx;
-                            p[1] += dy;
-                            segment += 'L' + p[0] + ',' + p[1];
-                        }
-
-                        offset = dt - (span - offset);
-
-                        segment += 'L' + b[0] + ',' + b[1];
-                        segments.push({id: entity.id, index: i, d: segment});
+                        offset = -span;
                         i++;
                     }
 
