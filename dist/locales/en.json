@@ -91,13 +91,7 @@
             "incomplete_relation": "This feature can't be deleted because it hasn't been fully downloaded."
         },
         "delete_member": {
-            "annotation": {
-                "point": "Removed a point from a relation.",
-                "vertex": "Removed a node from a relation.",
-                "line": "Removed a line from a relation.",
-                "area": "Removed an area from a relation.",
-                "relation": "Removed a relation from a relation."
-            }
+            "annotation": "Removed a member from a relation."
         },
         "connect": {
             "annotation": {

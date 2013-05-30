@@ -15,7 +15,7 @@ iD.ui.RawMembershipEditor = function(context) {
     function deleteMembership(d) {
         context.perform(
             iD.actions.DeleteMember(d.relation.id, d.index),
-            t('operations.delete_member.annotation.' + context.geometry(d.member.id)));
+            t('operations.delete_member.annotation'));
     }
 
     function rawMembershipEditor(selection) {

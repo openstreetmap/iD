@@ -2,20 +2,20 @@ iD.ui.RawMemberEditor = function(context) {
     var id;
 
     function selectMember(d) {
-        context.enter(iD.modes.Select(context, [d.member.id]));
+        context.enter(iD.modes.Select(context, [d.id]));
     }
 
     function changeRole(d) {
         var role = d3.select(this).property('value');
         context.perform(
-            iD.actions.ChangeMember(id, _.extend({}, d.member, {role: role}), d.index),
+            iD.actions.ChangeMember(d.relation.id, _.extend({}, d.id, {role: role}), d.index),
             t('operations.change_role.annotation'));
     }
 
     function deleteMember(d) {
         context.perform(
-            iD.actions.DeleteMember(id, d.index),
-            t('operations.delete_member.annotation.' + context.geometry(d.member.id)));
+            iD.actions.DeleteMember(d.relation.id, d.index),
+            t('operations.delete_member.annotation'));
     }
 
     function rawMemberEditor(selection) {
@@ -23,7 +23,13 @@ iD.ui.RawMemberEditor = function(context) {
             memberships = [];
 
         entity.members.forEach(function(member, index) {
-            memberships.push({member: member, index: index, entity: context.hasEntity(member.id)});
+            memberships.push({
+                index: index,
+                id: member.id,
+                role: member.role,
+                relation: entity,
+                member: context.hasEntity(member.id)
+            });
         });
 
         selection.call(iD.ui.Disclosure()
@@ -46,13 +52,13 @@ iD.ui.RawMemberEditor = function(context) {
                 .attr('class', 'member-list');
 
             var $items = $list.selectAll('li')
-                .data(memberships, function(d) { return iD.Entity.key(entity) + ',' + d.index; });
+                .data(memberships, function(d) { return iD.Entity.key(d.relation) + ',' + d.index; });
 
             var $enter = $items.enter().append('li')
                 .attr('class', 'member-row form-field');
 
             $enter.each(function(d) {
-                if (d.entity) {
+                if (d.member) {
                     var $label = d3.select(this).append('label')
                         .attr('class', 'form-label')
                         .append('a')
@@ -61,11 +67,11 @@ iD.ui.RawMemberEditor = function(context) {
 
                     $label.append('span')
                         .attr('class', 'member-entity-type')
-                        .text(function(d) { return context.presets().match(d.entity, context.graph()).name(); });
+                        .text(function(d) { return context.presets().match(d.member, context.graph()).name(); });
 
                     $label.append('span')
                         .attr('class', 'member-entity-name')
-                        .text(function(d) { return iD.util.localeName(d.entity); });
+                        .text(function(d) { return iD.util.localeName(d.member); });
 
                 } else {
                     d3.select(this).append('label')
@@ -79,7 +85,7 @@ iD.ui.RawMemberEditor = function(context) {
                 .property('type', 'text')
                 .attr('maxlength', 255)
                 .attr('placeholder', t('inspector.role'))
-                .property('value', function(d) { return d.member.role; })
+                .property('value', function(d) { return d.role; })
                 .on('change', changeRole);
 
             $enter.append('button')
