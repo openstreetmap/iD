@@ -415,8 +415,16 @@ button.minor {
     right: 0;
     height: 100%;
     width: 10%;
-    opacity: .5;
     border-radius: 0;
+    background-color: #fafafa;
+}
+
+button.minor .icon {
+    opacity: .5;
+}
+
+button.minor:hover {
+    background-color: #f1f1f1;
 }
 
 .button-wrap {
@@ -425,8 +433,13 @@ button.minor {
     margin: 0;
 }
 
-.button-wrap button:only-child { width: 100%;}
-.button-wrap:last-of-type { padding-right: 0;}
+.button-wrap button:only-child {
+    width: 100%;
+}
+
+.button-wrap:last-of-type {
+    padding-right: 0;
+}
 
 .joined button {
     border-radius:0;
@@ -1196,23 +1209,6 @@ button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
     width: 12.5%;
 }
 
-.entity-editor-pane .tooltip.top .tooltip-arrow {
-    border-top-color: #000;
-}
-
-.entity-editor-pane .tooltip.left .tooltip-arrow {
-    border-left-color: #000;
-}
-
-.entity-editor-pane .tooltip.right .tooltip-arrow {
-    border-right-color: #000;
-}
-
-.entity-editor-pane .tooltip-inner {
-    background: #000;
-    color: #ccc;
-}
-
 .preset-fav button.fav {
     height: 30px;
     margin: 5px;
@@ -1608,8 +1604,7 @@ div.combobox {
 /* Tag reference */
 
 .tag-reference-loading {
-    background-color: #f1f1f1;
-    opacity: 1;
+    background-color: #f5f5f5;
 }
 
 .tag-reference-loading .icon {
@@ -2488,15 +2483,6 @@ img.wiki-image {
     border-width: 0 5px 5px;
 }
 
-/* Exceptions for tooltips that are up against the edge of the screen */
-.add-point .tooltip {
-    left: -20px !important; }
-
-.curtain-tooltip.intro-points-add .tooltip-arrow,
-.add-point .tooltip .tooltip-arrow {
-    left: 60px;
-}
-
 .keyhint-wrap {
     background: #F6F6F6;
     padding: 10px;
@@ -2526,6 +2512,39 @@ img.wiki-image {
     left: -1px;
     border: 1px solid #CCC;
     border-top: 0;
+}
+
+/* Exceptions for tooltip layouts */
+
+/* make tooltips in editor pane dark */
+.entity-editor-pane .tooltip.top .tooltip-arrow {
+    border-top-color: #000;
+}
+
+.entity-editor-pane .tooltip.left .tooltip-arrow {
+    border-left-color: #000;
+}
+
+.entity-editor-pane .tooltip.right .tooltip-arrow {
+    border-right-color: #000;
+}
+
+.entity-editor-pane .tooltip-inner {
+    background: #000;
+    color: #ccc;
+}
+
+/* Uncramp map-control tooltips */
+.map-control .tooltip.right {
+    min-width: 160px;
+}
+/* Move over tooltips that are near the edge of screen */
+.add-point .tooltip {
+    left: -20px !important; }
+
+.curtain-tooltip.intro-points-add .tooltip-arrow,
+.add-point .tooltip .tooltip-arrow {
+    left: 60px;
 }
 
 .radial-menu-tooltip {
