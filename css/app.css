@@ -1038,10 +1038,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* Unstyle button fields */
 .inspector-hover .form-field.preset-radio button.active,
-.inspector-hover a.hide-toggle {
+.inspector-hover .entity-editor-pane a.hide-toggle {
     opacity: 1;
     background-color: transparent;
-    color: #a9a9a9;
+    color: #666;
     padding-left: 0;
     border-width: 0;
 }
@@ -1053,14 +1053,24 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 /* Add placeholder only on hover for radio buttons */
 .inspector-hover .form-field.preset-radio .placeholder {
     color: #a9a9a9;
-    display: block;
-    padding: 5px 10px;
+    padding-top: 5px;
+    padding-left: 10px;
+    opacity: 1;
+    width: 100%;
 }
 
 /* Hide placeholder for radio buttons if another is active, or not in hover state */
 .form-field.preset-radio button.active ~ .placeholder,
 .form-field.preset-radio .placeholder {
-    display: none;
+    padding: 0;
+    opacity: 0;
+    width: 0;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-transition: opacity 200ms, width 0 200ms, padding-top 200ms, padding-left 0 200ms;
+       -moz-transition: opacity 200ms, width 0 200ms, padding-top 200ms, padding-left 0 200ms;
+         -o-transition: opacity 200ms, width 0 200ms, padding-top 200ms, padding-left 0 200ms;
+            transition: opacity 200ms, width 0 200ms, padding-top 200ms, padding-left 0 200ms;
 }
 
 /* first phase hover-to-active animations */
@@ -1117,17 +1127,17 @@ input,
 }
 
 .form-field.preset-radio button.active {
-    -webkit-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms;
-       -moz-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms;
-         -o-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms;
-            transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms;
+    -webkit-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+       -moz-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+         -o-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+            transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
 }
 
-a.hide-toggle {
-    -webkit-transition: padding-left 200ms 200ms, color 200ms;
-       -moz-transition: padding-left 200ms 200ms, color 200ms;
-         -o-transition: padding-left 200ms 200ms, color 200ms;
-            transition: padding-left 200ms 200ms, color 200ms;
+.entity-editor-pane a.hide-toggle {
+    -webkit-transition: padding-left 200ms 200ms, color 200ms 200ms;
+       -moz-transition: padding-left 200ms 200ms, color 200ms 200ms;
+         -o-transition: padding-left 200ms 200ms, color 200ms 200ms;
+            transition: padding-left 200ms 200ms, color 200ms 200ms;
 }
 
 /* adding additional preset fields */
