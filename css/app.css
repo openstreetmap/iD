@@ -977,12 +977,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-hover .preset-input-wrap,
 .inspector-hover .preset-input-wrap li {
     color: #666;
-    border-color: #DFDFDF;
-}
-
-.inspector-hover .preset-input-wrap .label,
-.inspector-hover .form-label {
-    background-color: #fafafa;
 }
 
 /* hide and remove from layout */
@@ -1053,8 +1047,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 /* Add placeholder only on hover for radio buttons */
 .inspector-hover .form-field.preset-radio .placeholder {
     color: #a9a9a9;
-    padding-top: 5px;
-    padding-left: 10px;
+    padding: 5px 10px;
     opacity: 1;
     width: 100%;
 }
@@ -1067,10 +1060,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     width: 0;
     display: inline-block;
     overflow: hidden;
-    -webkit-transition: opacity 200ms, width 0 200ms, padding-top 200ms, padding-left 0 200ms;
-       -moz-transition: opacity 200ms, width 0 200ms, padding-top 200ms, padding-left 0 200ms;
-         -o-transition: opacity 200ms, width 0 200ms, padding-top 200ms, padding-left 0 200ms;
-            transition: opacity 200ms, width 0 200ms, padding-top 200ms, padding-left 0 200ms;
+    -webkit-transition: opacity 200ms, width 0 200ms, padding 0 200ms;
+       -moz-transition: opacity 200ms, width 0 200ms, padding 0 200ms;
+         -o-transition: opacity 200ms, width 0 200ms, padding 0 200ms;
+            transition: opacity 200ms, width 0 200ms, padding 0 200ms;
 }
 
 /* first phase hover-to-active animations */
@@ -1576,6 +1569,10 @@ div.combobox {
     width: 40%;
     float: left;
     height: 29px;
+    -webkit-transition: width 200ms;
+       -moz-transition: width 200ms;
+         -o-transition: width 200ms;
+            transition: width 200ms;
 }
 
 .tag-row input.key {
