@@ -946,7 +946,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .modified .form-label .modified-icon {
-    opacity: .5;
+    opacity: 1;
     z-index: 1;
 }
 
