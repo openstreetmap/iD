@@ -1372,7 +1372,6 @@ input[type=number] {
 .form-field .maxspeed-unit {
     border-radius: 0 0 4px 0;
     width: 20%;
-    color: #A9A9A9;
 }
 
 /* Name + translate form */
@@ -1608,7 +1607,7 @@ div.combobox {
 
 /* Tag reference */
 
-.tag-reference-loading { 
+.tag-reference-loading {
     background-color: #f1f1f1;
     opacity: 1;
 }
@@ -1735,7 +1734,7 @@ img.wiki-image {
 
 /* Background Settings */
 
-.toggle-list.layer-list { 
+.toggle-list.layer-list {
     margin-bottom: 10px;
 }
 
@@ -2269,7 +2268,7 @@ img.wiki-image {
     margin-bottom: 0;
 }
 
-.mode-save button.action { 
+.mode-save button.action {
     float: none;
     margin: auto;
     display: block;
