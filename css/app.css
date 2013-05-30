@@ -1048,7 +1048,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     color: #a9a9a9;
     padding: 5px 10px;
     opacity: 1;
-    line-height: 19px;
+    line-height: 20px;
     width: 100%;
 }
 
@@ -1110,13 +1110,6 @@ input,
        -moz-transition: opacity 200ms 200ms;
          -o-transition: opacity 200ms 200ms;
             transition: opacity 200ms 200ms;
-}
-
-.entity-editor-pane .toggle-list button {
-    -webkit-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-       -moz-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-         -o-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-            transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
 }
 
 .entity-editor-pane a.hide-toggle {
