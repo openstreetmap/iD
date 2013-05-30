@@ -25,7 +25,8 @@ d3.combobox = function() {
                     sibling = this.nextSibling;
 
                 var carat = d3.select(parent).selectAll('.combobox-carat')
-                    .data([0]);
+                    .filter(function(d) { return d === input.node(); })
+                    .data([input.node()]);
 
                 carat.enter().insert('div', function() { return sibling; })
                     .attr('class', 'combobox-carat');
