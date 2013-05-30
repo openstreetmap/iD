@@ -11,7 +11,7 @@ html, body {
 }
 
 body {
-    font:normal 12px/1.6666 'Helvetica Neue', Arial, sans-serif;
+    font:normal 12px/1.6667 'Helvetica Neue', Arial, sans-serif;
     margin:0;
     padding:0;
     min-width: 768px;
@@ -237,37 +237,62 @@ table.tags, table.tags td, table.tags th {
 
 ul li { list-style: none;}
 
-ul.toggle-list {
+.toggle-list {
     border-radius: 4px;
     border: 1px solid #CCC;
-    margin-bottom: 10px;
 }
 
-ul.toggle-list li a {
+.toggle-list > button {
+    text-align: left;
     position: relative;
     padding: 5px 10px 5px 30px;
     display:block;
-    border-top: 1px solid #ccc;
+    border-radius: 0;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    height: 30px;
+    color: #7092FF;
 }
 
-ul.toggle-list li:first-child a {
-    border-top: 0;
+.toggle-list > button:first-child {
     border-radius: 3px 3px 0 0;
 }
 
-ul.toggle-list li:last-child a {
+.toggle-list > button:last-child {
     border-radius: 0 0 3px 3px;
+    border-bottom-width: 0;
 }
 
-ul.toggle-list li:only-child a {
+.toggle-list > button:only-child {
     border-radius: 3px;
 }
 
-ul.toggle-list li a:hover { background-color: #ececec;}
+.toggle-list > button.active {
+    background: #E8EBFF;
+}
 
-ul.toggle-list li a.selected { background-color: #e8ebff;}
+.toggle-list > button::before {
+    content: "";
+    display: inline-block;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    margin-right: 10px;
+    background: #808080;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
 
-ul.link-list li {
+.toggle-list > button.active::before {
+    background: #7092ff;
+}
+
+.toggle-list.check-list > button::before {
+    border-radius: 2px;
+}
+
+.link-list li {
     float: right;
     border-left: 1px solid rgba(255,255,255,.5);
     padding: 5px 0 5px 5px;
@@ -278,41 +303,6 @@ ul.link-list li:last-child {
     border-left: 0;
     margin-left: 0;
     padding-left: 0;
-}
-
-.toggle-list a::before {
-    content: "";
-    display: inline-block;
-    border-radius: 50%;
-    height: 16px;
-    width: 16px;
-    margin-right: 10px;
-    border: 1px solid #CCC;
-    position: absolute;
-    left: 5px;
-    top: 5px;
-}
-
-.toggle-list a:hover::before {
-    box-shadow: inset 0 0 0 2px white;
-}
-
-.toggle-list a.selected::before {
-    background: #7092ff;
-    box-shadow: inset 0 0 0 2px white;
-}
-
-.toggle-list.check-list a::before {
-    border-radius: 2px;
-}
-
-.toggle-list.check-list a:hover::before {
-    background: white url(img/sprite.svg) no-repeat -480px -0px;
-    box-shadow: none;
-}
-
-.toggle-list.check-list a.selected::before {
-    background: white url(img/sprite.svg) no-repeat -480px -20px;
 }
 
 /* Utility Classes
@@ -386,7 +376,6 @@ a.hide {
 
 button {
     text-align: center;
-    font-weight:bold;
     line-height:20px;
     border:0;
     background: white;
@@ -414,7 +403,7 @@ button.disabled {
     cursor: auto;
 }
 
-button.active:not([disabled]):not(.disabled) {
+button.active {
     background: #7092ff;
 }
 
@@ -992,10 +981,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 /* hide and remove from layout */
 .inspector-hidden,
 .inspector-hover .checkselect label input[type="checkbox"],
-.inspector-hover .radio-wrap button::before,
-.inspector-hover .preset-radio button:not(.active),
+.inspector-hover .toggle-list button::before,
+.inspector-hover .toggle-list button:not(.active),
 .inspector-hover .inspector-inner .add-tag,
-.inspector-hover .radio-wrap button.remove .icon {
+.inspector-hover .toggle-list button.remove .icon {
     height: 0;
     width: 0;
     overflow: hidden;
@@ -1041,7 +1030,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 /* Unstyle button fields */
-.inspector-hover .form-field.preset-radio button.active,
+.inspector-hover .toggle-list button.active,
 .inspector-hover .entity-editor-pane a.hide-toggle {
     opacity: 1;
     background-color: transparent;
@@ -1050,30 +1039,32 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-width: 0;
 }
 
-.inspector-hover .form-field.preset-radio button.active {
+.inspector-hover .toggle-list button.active {
     padding-left: 10px;
 }
 
 /* Add placeholder only on hover for radio buttons */
-.inspector-hover .form-field.preset-radio .placeholder {
+.inspector-hover .toggle-list .placeholder {
     color: #a9a9a9;
     padding: 5px 10px;
     opacity: 1;
+    line-height: 19px;
     width: 100%;
 }
 
 /* Hide placeholder for radio buttons if another is active, or not in hover state */
-.form-field.preset-radio button.active ~ .placeholder,
-.form-field.preset-radio .placeholder {
+.toggle-list button.active ~ .placeholder,
+.toggle-list .placeholder {
     padding: 0;
     opacity: 0;
     width: 0;
-    display: inline-block;
+    line-height: 0;
+    display: block;
     overflow: hidden;
-    -webkit-transition: opacity 200ms, width 0 200ms, padding 0 200ms;
-       -moz-transition: opacity 200ms, width 0 200ms, padding 0 200ms;
-         -o-transition: opacity 200ms, width 0 200ms, padding 0 200ms;
-            transition: opacity 200ms, width 0 200ms, padding 0 200ms;
+    -webkit-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
+       -moz-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
+         -o-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
+            transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
 }
 
 /* first phase hover-to-active animations */
@@ -1088,7 +1079,6 @@ header,
 textarea,
 .form-label,
 .preset-input-wrap,
-.preset-input-wrap li,
 .preset-input-wrap .label {
     -webkit-transition: all 200ms;
        -moz-transition: all 200ms;
@@ -1114,26 +1104,19 @@ input,
 .more-buttons,
 .view-on-osm,
 .hide-toggle:before,
-.radio-wrap button::before,
-.radio-wrap button.remove .icon {
+.entity-editor-pane .toggle-list button::before,
+.entity-editor-pane .toggle-list button.remove .icon {
     -webkit-transition: opacity 200ms 200ms;
        -moz-transition: opacity 200ms 200ms;
          -o-transition: opacity 200ms 200ms;
             transition: opacity 200ms 200ms;
 }
 
-.preset-radio button:not(.active) {
-    -webkit-transition: height 200ms 200ms, padding-left 200ms 200ms, border-width 100ms 300ms;
-       -moz-transition: height 200ms 200ms, padding-left 200ms 200ms, border-width 100ms 300ms;
-         -o-transition: height 200ms 200ms, padding-left 200ms 200ms, border-width 100ms 300ms;
-            transition: height 200ms 200ms, padding-left 200ms 200ms, border-width 100ms 300ms;
-}
-
-.form-field.preset-radio button.active {
-    -webkit-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-       -moz-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-         -o-transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-            transition: border-width 100ms 300ms, padding-left 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+.entity-editor-pane .toggle-list button {
+    -webkit-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+       -moz-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+         -o-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+            transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
 }
 
 .entity-editor-pane a.hide-toggle {
@@ -1141,6 +1124,20 @@ input,
        -moz-transition: padding-left 200ms 200ms, color 200ms 200ms;
          -o-transition: padding-left 200ms 200ms, color 200ms 200ms;
             transition: padding-left 200ms 200ms, color 200ms 200ms;
+}
+
+.entity-editor-pane .toggle-list button:not(.active) {
+    -webkit-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
+       -moz-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
+         -o-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
+            transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
+}
+
+.entity-editor-pane .toggle-list button {
+    -webkit-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+       -moz-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+         -o-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+            transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
 }
 
 /* adding additional preset fields */
@@ -1229,17 +1226,17 @@ button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
 
 /* preset form access */
 
-.preset-input-wrap li {
-    border-bottom: 1px solid #CCC;
-}
-.preset-input-wrap li:last-child {
-    border-bottom: 0;
-}
-
 .preset-input-wrap .label {
     height: 30px;
     background: #F6F6F6;
     padding: 5px 10px;
+}
+
+.form-field-access .preset-input-wrap li {
+    border-bottom: 1px solid #CCC;
+}
+.form-field-access .preset-input-wrap li:last-child {
+    border-bottom: 0;
 }
 
 .preset-input-access-wrap input {
@@ -1335,58 +1332,16 @@ input[type=number] {
 
 /* Preset form radio button */
 
-.radio-wrap button {
-    position: relative;
-    text-align: left;
-    float: left;
-    font-weight: normal;
-    height: 30px;
-    border-radius: 0;
-    border-bottom: 1px solid #CCC;
-    color: #7092FF;
-    width: 100%;
-    padding-left: 30px;
-}
-
-.radio-wrap button::before {
-    content: "";
-    display: inline-block;
-    border-radius: 50%;
-    height: 16px;
-    width: 16px;
-    margin-right: 10px;
-    border: 1px solid #CCC;
-    position: absolute;
-    left: 5px;
-    top: 5px;
-}
-
-.radio-wrap button:hover::before {
-    box-shadow: inset 0 0 0 2px white;
-}
-
-.radio-wrap button.active::before {
-    background: #7092ff;
-    box-shadow: inset 0 0 0 2px white;
-}
-
-.radio-wrap button:last-child {
-    border-bottom: 0;
-}
-
-.form-field .radio-wrap button.active {
-    background-color: #E8EBFF;
-}
-
-.radio-wrap button.remove {
+.toggle-list button.remove {
     border-radius: 0 0 3px 3px;
 }
-.radio-wrap button.remove .icon {
+
+.toggle-list button.remove .icon {
     position: absolute;
     left: 5px;
 }
 
-.radio-wrap button.remove::before {
+.toggle-list button.remove::before {
     content: none;
 }
 
@@ -1586,6 +1541,7 @@ div.combobox {
 }
 
 .tag-row input.key {
+    font-weight: bold;
     background-color: #f6f6f6;
 }
 
@@ -1778,6 +1734,10 @@ img.wiki-image {
 }
 
 /* Background Settings */
+
+.toggle-list.layer-list { 
+    margin-bottom: 10px;
+}
 
 .background-control button {
     border-radius:0 4px 0 0;

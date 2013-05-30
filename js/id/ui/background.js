@@ -27,14 +27,14 @@ iD.ui.Background = function(context) {
                 .attr('data-opacity', d);
 
             opacityList.selectAll('li')
-                .classed('selected', function(_) { return _ === d; });
+                .classed('active', function(_) { return _ === d; });
 
             context.storage('background-opacity', d);
         }
 
         function selectLayer() {
-            content.selectAll('a.layer')
-                .classed('selected', function(d) {
+            content.selectAll('button.layer')
+                .classed('active', function(d) {
                     var overlay = context.map().layers[2].source();
                     return d.data.name === context.background().source().data.name ||
                         (overlay.data && overlay.data.name === d.data.name);
@@ -78,21 +78,20 @@ iD.ui.Background = function(context) {
                 context.map().layers[1]
                     .enable(!context.map().layers[1].enable());
                 d3.select(this)
-                    .classed('selected', context.map().layers[1].enable());
+                    .classed('active', context.map().layers[1].enable());
                 context.redraw();
             }
         }
 
         function drawList(layerList, click, filter) {
 
-            var layerLinks = layerList.selectAll('a.layer')
+            var layerLinks = layerList.selectAll('button.layer')
                 .data(getSources().filter(filter), function(d) {
                     return d.data.name;
                 });
 
             var layerInner = layerLinks.enter()
-                .append('li')
-                .append('a');
+                .append('button');
 
             layerInner
                 .attr('href', '#')
@@ -114,7 +113,7 @@ iD.ui.Background = function(context) {
             layerLinks.exit()
                 .remove();
 
-            layerList.style('display', layerList.selectAll('a.layer').data().length > 0 ? 'block' : 'none');
+            layerList.style('display', layerList.selectAll('button.layer').data().length > 0 ? 'block' : 'none');
         }
 
         function update() {
@@ -128,7 +127,7 @@ iD.ui.Background = function(context) {
             });
 
             gpxLayerItem
-                .classed('selected', function() {
+                .classed('active', function() {
                     var gpxLayer = context.map().layers[1];
                     return !_.isEmpty(gpxLayer.geojson()) &&
                         gpxLayer.enable();
@@ -170,7 +169,7 @@ iD.ui.Background = function(context) {
             if (d3.event) d3.event.preventDefault();
             tooltip.hide(button);
             setVisible(!button.classed('active'));
-            content.selectAll('.toggle-list li:first-child a').node().focus();
+            content.selectAll('.toggle-list button:first-child').node().focus();
         }
 
         function setVisible(show) {
@@ -235,19 +234,18 @@ iD.ui.Background = function(context) {
             .style('opacity', String);
 
         var backgroundList = content
-            .append('ul')
-            .attr('class', 'toggle-list');
+            .append('div')
+            .attr('class', 'toggle-list layer-list');
 
         var overlayList = content
-            .append('ul')
-            .attr('class', 'toggle-list check-list');
+            .append('div')
+            .attr('class', 'toggle-list layer-list check-list');
 
         var gpxLayerItem = content
-            .append('ul')
+            .append('div')
             .style('display', iD.detect().filedrop ? 'block' : 'none')
-            .attr('class', 'toggle-list check-list')
-            .append('li')
-            .append('a')
+            .attr('class', 'toggle-list layer-list check-list')
+            .append('button')
             .classed('layer-toggle-gpx', true)
             .on('click.set-gpx', clickGpx);
 

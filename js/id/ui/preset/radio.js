@@ -10,13 +10,13 @@ iD.ui.preset.radio = function(field) {
             .data([0]);
 
         var buttonWrap = wrap.enter().append('div')
-            .attr('class', 'preset-input-wrap toggle-list radio-wrap');
+            .attr('class', 'preset-input-wrap toggle-list');
 
         buttons = wrap.selectAll('button')
             .data(field.options || field.keys);
 
         buttons.enter().append('button')
-            .text(function(d) { return field.t('options.' + d, { 'default': d }); });
+                .text(function(d) { return field.t('options.' + d, { 'default': d }); });
 
         buttons
             .on('click', function(d) {
@@ -28,6 +28,7 @@ iD.ui.preset.radio = function(field) {
         buttonWrap.append('span')
             .attr('class','placeholder')
             .text(field.placeholder());
+
 
         var remove = wrap.selectAll('button.remove')
             .data([0]);
