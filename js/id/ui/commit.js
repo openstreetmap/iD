@@ -26,8 +26,6 @@ iD.ui.Commit = function(context) {
         var changes = context.history().changes(),
             user = context.connection().user();
 
-        selection.classed('commit-modal', true);
-
         function changesLength(d) { return changes[d].length; }
 
         var header = selection.append('div')
@@ -47,7 +45,7 @@ iD.ui.Commit = function(context) {
 
         // Comment Section
         var commentSection = body.append('div')
-            .attr('class', 'modal-section form-field');
+            .attr('class', 'modal-section form-field commit-form');
 
         commentSection.append('label')
             .attr('class', 'form-label')
@@ -61,7 +59,7 @@ iD.ui.Commit = function(context) {
 
         // Save Section
         var saveSection = body.append('div')
-            .attr('class','modal-section cf');
+            .attr('class','modal-section fillL cf');
 
         var userLink = d3.select(document.createElement('div'));
 
@@ -84,7 +82,7 @@ iD.ui.Commit = function(context) {
 
         // Confirm Button
         var saveButton = saveSection.append('button')
-            .attr('class', 'action col2 button')
+            .attr('class', 'action col3 button')
             .on('click.save', function() {
                 var comment = commentField.node().value;
                 localStorage.comment = comment;

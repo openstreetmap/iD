@@ -243,6 +243,7 @@ ul li { list-style: none;}
 }
 
 .toggle-list > button {
+    font-weight: normal;
     text-align: left;
     position: relative;
     padding: 5px 10px 5px 30px;
@@ -379,6 +380,7 @@ button {
     line-height:20px;
     border:0;
     background: white;
+    font-weight: bold;
     color:#333;
     font-size:12px;
     display: inline-block;
@@ -1608,6 +1610,7 @@ div.combobox {
 
 .tag-reference-loading { 
     background-color: #f1f1f1;
+    opacity: 1;
 }
 
 .tag-reference-loading .icon {
@@ -2254,25 +2257,29 @@ img.wiki-image {
 /* Commit Modal
 ------------------------------------------------------- */
 
-.commit-modal {
-    width: 100%;
-    height: 100%;
-}
-
-.commit-modal a.user-info {
+.mode-save a.user-info {
     display: inline-block;
 }
 
-.commit-modal .commit-info {
-    margin-top: 10px;
-    padding-bottom: 20px;
+.mode-save .commit-info {
+    padding-bottom: 10px;
 }
 
-.commit-modal .user-info img {
+.mode-save .commit-form {
+    margin-bottom: 0;
+}
+
+.mode-save button.action { 
+    float: none;
+    margin: auto;
+    display: block;
+}
+
+.mode-save .user-info img {
     float: left;
 }
 
-.commit-modal h3 small.count {
+.mode-save h3 small.count {
     margin-right: 10px;
     text-align: center;
     float: left;
@@ -2286,7 +2293,7 @@ img.wiki-image {
     color:#fff;
 }
 
-.commit-modal .changeset-list {
+.mode-save .changeset-list {
     overflow: auto;
     border:1px solid #ccc;
     border-radius: 4px;
@@ -2294,11 +2301,11 @@ img.wiki-image {
     max-height: 160px;
 }
 
-.commit-modal .warning-section .changeset-list button {
+.mode-save .warning-section .changeset-list button {
     border-left: 1px solid #CCC;
 }
 
-.commit-modal .changeset-list li {
+.mode-save .changeset-list li {
     position: relative;
     border-top:1px solid #ccc;
     padding:5px 10px;
