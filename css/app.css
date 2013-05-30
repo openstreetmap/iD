@@ -1606,6 +1606,10 @@ div.combobox {
 
 /* Tag reference */
 
+.tag-reference-loading { 
+    background-color: #f1f1f1;
+}
+
 .tag-reference-loading .icon {
     background-image: url(img/mini-loader.gif);
     background-position: 0 0;
