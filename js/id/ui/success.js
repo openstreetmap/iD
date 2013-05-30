@@ -7,7 +7,13 @@ iD.ui.Success = function(context) {
             ' ' + context.connection().changesetURL(changeset.id);
 
         var header = selection.append('div')
-            .attr('class', 'header');
+            .attr('class', 'header fillL');
+
+        header.append('button')
+            .attr('class', 'fr')
+            .append('span')
+            .attr('class', 'icon close')
+            .on('click', event.cancel);
 
         header.append('h3')
             .text(t('just_edited'));

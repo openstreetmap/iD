@@ -31,7 +31,13 @@ iD.ui.Commit = function(context) {
         function changesLength(d) { return changes[d].length; }
 
         var header = selection.append('div')
-            .attr('class', 'header');
+            .attr('class', 'header fillL');
+
+        header.append('button')
+            .attr('class', 'fr')
+            .append('span')
+            .attr('class', 'icon close')
+            .on('click', event.cancel);
 
         header.append('h3')
             .text(t('commit.title'));
