@@ -33,6 +33,16 @@ iD.ui.Inspector = function(context) {
         var showEditor = state === 'hover' || context.entity(entityID).isUsed(context.graph());
         $wrap.style('right', showEditor ? '-0%' : '-100%');
 
+        var $footer = selection.selectAll('.footer')
+            .data([0]);
+
+        $footer.enter().append('div')
+            .attr('class', 'footer col12');
+
+        selection.select('.footer')
+            .call(iD.ui.ViewOnOSM(context)
+                .entityID(entityID));
+
         function showList(preset) {
             $wrap.transition()
                 .style('right', '-100%');

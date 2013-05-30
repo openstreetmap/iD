@@ -67,10 +67,7 @@ iD.ui.EntityEditor = function(context) {
             .attr('class', 'inspector-border raw-member-editor inspector-inner col12');
 
         $enter.append('div')
-            .attr('class', 'inspector-border raw-membership-editor inspector-inner col12');
-
-        $enter.append('div')
-            .attr('class', 'inspector-external-links inspector-inner col12');
+            .attr('class', 'raw-membership-editor inspector-inner col12');
 
         selection.selectAll('.preset-reset')
             .on('click', function() {
@@ -109,10 +106,6 @@ iD.ui.EntityEditor = function(context) {
 
         $body.select('.raw-membership-editor')
             .call(iD.ui.RawMembershipEditor(context)
-                .entityID(id));
-
-        $body.select('.inspector-external-links')
-            .call(iD.ui.ViewOnOSM(context)
                 .entityID(id));
 
         function historyChanged() {

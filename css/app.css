@@ -370,7 +370,8 @@ a.hide {
 .pane {
     position:absolute;
     width:50%;
-    height:100%;
+    top: 0;
+    bottom: 30px;
 }
 
 .pane:first-child {
@@ -653,6 +654,15 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     top: 0;
     height: 59px;
     z-index: 3;
+}
+
+.footer {
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    padding: 5px 10px 5px 10px;
+    border-top: 1px solid #ccc;
+    text-align: center;
 }
 
 /* Inspector
@@ -1003,7 +1013,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-hover .spin-control,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-buttons,
-.inspector-hover .inspector-external-links {
+.inspector-hover .view-on-osm {
     opacity: 0;
 }
 
@@ -1102,7 +1112,7 @@ input,
 .entity-editor-pane .header button,
 .spin-control,
 .more-buttons,
-.inspector-external-links,
+.view-on-osm,
 .hide-toggle:before,
 .radio-wrap button::before,
 .radio-wrap button.remove .icon {
