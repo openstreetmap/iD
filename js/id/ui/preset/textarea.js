@@ -9,7 +9,7 @@ iD.ui.preset.textarea = function(field) {
 
         input.enter().append('textarea')
             .attr('id', 'preset-input-' + field.id)
-            .attr('placeholder', field.placeholder())
+            .attr('placeholder', field.placeholder() || t('inspector.unknown'))
             .attr('maxlength', 255);
 
         input
