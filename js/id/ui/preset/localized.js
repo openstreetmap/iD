@@ -137,7 +137,6 @@ iD.ui.preset.localized = function(field, context) {
                         d3.select(this.parentNode)
                             .style('top','0')
                             .style('max-height','240px')
-                            .style('overflow','hidden')
                             .transition()
                             .style('opacity', '0')
                             .style('max-height','0px')
@@ -148,11 +147,11 @@ iD.ui.preset.localized = function(field, context) {
             });
 
         innerWrap.transition()
-            .style('margin-top','0')
-            .style('max-height', '0')
-            .style('padding', '0')
+            .style('margin-top','0px')
+            .style('max-height', '0px')
+            .style('padding', '0px')
             .style('opacity', '0')
-            .style('border-width', '0')
+            .style('border-width', '0px')
             .transition()
             .duration(200)
             .style('margin-top','10px')
@@ -166,11 +165,9 @@ iD.ui.preset.localized = function(field, context) {
             });;
 
         wraps.exit()
-            .style('top','0')
-            .style('overflow','hidden')
-            .style('max-height','240px')
             .transition()
-            .style('max-height','0')
+            .duration(200)
+            .style('max-height','0px')
             .style('opacity', '0')
             .style('top','-10px')
             .remove();

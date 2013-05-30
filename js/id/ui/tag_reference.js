@@ -127,7 +127,7 @@ iD.ui.TagReference = function(tag) {
     tagReference.hide = function() {
         body.transition()
             .duration(200)
-            .style('max-height', '0')
+            .style('max-height', '0px')
             .style('opacity', '0');
 
         showing = false;

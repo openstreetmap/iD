@@ -139,7 +139,7 @@ iD.ui.PresetList = function(context) {
 
             box = selection.append('div')
                 .attr('class', 'subgrid col12')
-                .style('max-height', '0');
+                .style('max-height', '0px');
 
             box.append('div')
                 .attr('class', 'arrow');
@@ -154,8 +154,8 @@ iD.ui.PresetList = function(context) {
                 box.transition()
                     .duration(200)
                     .style('opacity', '0')
-                    .style('max-height', '0')
-                    .style('padding-bottom', '0');
+                    .style('max-height', '0px')
+                    .style('padding-bottom', '0px');
             } else {
                 shown = true;
                 sublist.call(drawList, preset.members);
