@@ -724,6 +724,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .preset-list-button-wrap {
+    position: relative;
     margin-bottom: 10px;
     height: 60px;
 }
@@ -777,9 +778,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .preset-list-item button.tag-reference-button {
-    float: right;
-    position: static;
-    margin-top: -60px;
     height: 100%;
     border: 1px solid #CCC;
     border-radius: 0 3px 3px 0;
