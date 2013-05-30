@@ -141,7 +141,7 @@ en:
     localized_translation_label: Multilingual name
     localized_translation_language: Choose language
     localized_translation_name: Name
-  zoom_in_edit: zoom in to edit the map
+  zoom_in_edit: Zoom in to Edit
   logout: logout
   loading_auth: "Connecting to OpenStreetMap..."
   report_a_bug: report a bug

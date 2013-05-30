@@ -2600,7 +2600,6 @@ img.wiki-image {
 ------------------------------------------------------- */
 
 @media only screen and (max-width: 840px) {
-    #bar .label {display: none;}
     #bar .icon.icon-pre-text { margin-right: 0;}
     /* override hide for save button */
     #bar .save .label { display: block;}
