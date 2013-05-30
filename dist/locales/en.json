@@ -696,6 +696,10 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Address",
+                "terms": ""
+            },
             "aeroway": {
                 "name": "Aeroway",
                 "terms": ""

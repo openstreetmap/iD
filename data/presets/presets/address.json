@@ -1,0 +1,13 @@
+{
+    "fields": [
+        "address"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "addr:housenumber": "*"
+    },
+    "matchScore": 0.2,
+    "name": "Address"
+}
