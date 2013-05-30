@@ -131,6 +131,7 @@ iD.ui.preset.localized = function(field, context) {
                 wrap.append('button')
                     .attr('class', 'minor button-input-action remove')
                     .on('click', function(d) {
+                        d3.event.preventDefault();
                         var t = {};
                         t[key(d.lang)] = undefined;
                         event.change(t);

@@ -20,13 +20,6 @@ iD.ui.preset.url = function(field) {
             .on('blur', change)
             .on('change', change);
 
-        function pm(elem, x) {
-            var num = elem.value ?
-                parseInt(elem.value, 10) : 0;
-            if (!isNaN(num)) elem.value = num + x;
-            change();
-        }
-
         if (field.type == 'number') {
             input.attr('type', 'text');
 
@@ -46,7 +39,10 @@ iD.ui.preset.url = function(field) {
 
             spinControl.selectAll('button')
                 .on('click', function(d) {
-                    pm(input.node(), d);
+                    d3.event.preventDefault();
+                    var num = parseInt(input.node().value || 0, 10);
+                    if (!isNaN(num)) input.node().value = num + d;
+                    change();
                 });
         }
     }
