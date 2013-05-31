@@ -30,8 +30,8 @@ iD.ui.UndoRedo = function(context) {
             .attr('class', function(d) { return 'icon ' + d.id; });
 
         var keybinding = d3.keybinding('undo')
-            .on(commands[0].cmd, commands[0].action)
-            .on(commands[1].cmd, commands[1].action);
+            .on(commands[0].cmd, function() { d3.event.preventDefault(); commands[0].action(); })
+            .on(commands[1].cmd, function() { d3.event.preventDefault(); commands[1].action(); });
 
         d3.select(document)
             .call(keybinding);
