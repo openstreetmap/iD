@@ -82,7 +82,10 @@ iD.ui.preset.address = function(field, context) {
             .on('change', change);
 
         street
-            .call(d3.combobox().data(getStreets()));
+            .call(d3.combobox()
+                .fetcher(function(value, __, callback) {
+                    callback(getStreets());
+                }));
     }
 
     function change() {
