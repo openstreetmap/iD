@@ -59,7 +59,7 @@ iD.behavior.drag = function() {
             offset = [0, 0];
         }
 
-        if (touchId === null) d3_eventCancel();
+        if (touchId === null) d3.event.stopPropagation();
 
         function point() {
             var p = target.parentNode || surface;
