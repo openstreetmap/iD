@@ -6,6 +6,16 @@ iD.ui.Inspector = function(context) {
         newFeature = false;
 
     function inspector(selection) {
+        presetList
+            .entityID(entityID)
+            .autofocus(newFeature)
+            .on('choose', setPreset);
+
+        entityEditor
+            .state(state)
+            .entityID(entityID)
+            .on('choose', showList);
+
         var $wrap = selection.selectAll('.panewrap')
             .data([0]);
 
@@ -18,20 +28,17 @@ iD.ui.Inspector = function(context) {
         $enter.append('div')
             .attr('class', 'entity-editor-pane pane');
 
-        var $presetPane = $wrap.select('.preset-list-pane')
-            .call(presetList
-                .entityID(entityID)
-                .autofocus(newFeature)
-                .on('choose', setPreset));
-
-        var $editorPane = $wrap.select('.entity-editor-pane')
-            .call(entityEditor
-                .state(state)
-                .entityID(entityID)
-                .on('choose', showList));
+        var $presetPane = $wrap.select('.preset-list-pane');
+        var $editorPane = $wrap.select('.entity-editor-pane');
 
         var showEditor = state === 'hover' || context.entity(entityID).isUsed(context.graph());
-        $wrap.style('right', showEditor ? '-0%' : '-100%');
+        if (showEditor) {
+            $wrap.style('right', '0%');
+            $editorPane.call(entityEditor);
+        } else {
+            $wrap.style('right', '-100%');
+            $presetPane.call(presetList);
+        }
 
         var $footer = selection.selectAll('.footer')
             .data([0]);
