@@ -159,18 +159,5 @@ iD.ui.EntityEditor = function(context) {
         return entityEditor;
     };
 
-    entityEditor.close = function() {
-        // Blur focused element so that tag changes are dispatched
-        // See #1295
-        document.activeElement.blur();
-
-        // Firefox incorrectly implements blur, so typeahead elements
-        // are not correctly removed. Remove any stragglers manually.
-        d3.selectAll('div.typeahead').remove();
-
-        context.history()
-            .on('change.entity-editor', null);
-    };
-
     return d3.rebind(entityEditor, event, 'on');
 };

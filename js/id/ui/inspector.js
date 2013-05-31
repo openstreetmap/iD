@@ -61,12 +61,6 @@ iD.ui.Inspector = function(context) {
         }
     }
 
-    inspector.close = function(selection) {
-        entityEditor.close();
-
-        selection.style('display', 'none');
-    };
-
     inspector.state = function(_) {
         if (!arguments.length) return state;
         state = _;
