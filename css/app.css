@@ -1601,7 +1601,7 @@ div.combobox {
 
 /* Tag reference */
 
-.tag-reference-loading {
+button.minor.tag-reference-loading {
     background-color: #f5f5f5;
 }
 
