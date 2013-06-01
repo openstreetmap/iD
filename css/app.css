@@ -1348,12 +1348,13 @@ input[type=number] {
 
 .form-field .wiki-link {
     float: right;
+    background: #fafafa;
     padding: 5px;
     text-align: center;
 }
 
 .form-field .wiki-link:hover {
-    background: #ececec;
+    background: #f1f1f1;
 }
 
 #preset-input-maxspeed {
