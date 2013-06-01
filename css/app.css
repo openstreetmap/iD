@@ -1510,6 +1510,7 @@ div.combobox {
 }
 
 .tag-row input {
+    height: 31px;
     border: 0;
     border-radius: 0;
     border-bottom: 1px solid #CCC;
@@ -1520,7 +1521,7 @@ div.combobox {
 .tag-row .input-wrap-position {
     width: 40%;
     float: left;
-    height: 29px;
+    height: 30px;
     -webkit-transition: width 200ms;
        -moz-transition: width 200ms;
          -o-transition: width 200ms;
@@ -1547,7 +1548,7 @@ div.combobox {
 
 .tag-row button {
     position: absolute;
-    height: 30px;
+    height: 31px;
     right: 10%;
     border: 1px solid #CCC;
     border-top-width: 0; border-left-width: 0;
