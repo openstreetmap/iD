@@ -1551,10 +1551,8 @@ div.combobox {
     height: 31px;
     right: 10%;
     border: 1px solid #CCC;
-    border-top-width: 0; border-left-width: 0;
-    border-radius: 0;
-    opacity: 1;
-    background: #fafafa;
+    border-top-width: 0; 
+    border-left-width: 0;
 }
 
 .tag-row button:hover {
