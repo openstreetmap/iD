@@ -1672,10 +1672,12 @@ img.wiki-image {
     padding-top: 10px;
 }
 
+.raw-member-editor .member-row,
 .raw-membership-editor .member-row {
     position: relative;
 }
 
+.raw-member-editor .member-row .member-entity-name,
 .raw-membership-editor .member-row .member-entity-name {
     font-weight: normal;
     padding-left: 10px;
