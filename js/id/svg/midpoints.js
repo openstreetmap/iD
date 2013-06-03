@@ -6,7 +6,7 @@ iD.svg.Midpoints = function(projection, context) {
             var entity = entities[i];
 
             if (entity.type !== 'way') continue;
-            if (context.selection().indexOf(entity.id) < 0) continue;
+            if (context.selectedIDs().indexOf(entity.id) < 0) continue;
 
             var nodes = graph.childNodes(entity);
 

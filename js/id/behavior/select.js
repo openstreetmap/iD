@@ -22,19 +22,19 @@ iD.behavior.Select = function(context) {
 
         } else if (!d3.event.shiftKey && !lasso) {
             // Avoid re-entering Select mode with same entity.
-            if (context.selection().length !== 1 || context.selection()[0] !== datum.id) {
+            if (context.selectedIDs().length !== 1 || context.selectedIDs()[0] !== datum.id) {
                 context.enter(iD.modes.Select(context, [datum.id]));
             } else {
                 context.mode().reselect();
             }
-        } else if (context.selection().indexOf(datum.id) >= 0) {
-            var selection = _.without(context.selection(), datum.id);
-            context.enter(selection.length ?
-                iD.modes.Select(context, selection) :
+        } else if (context.selectedIDs().indexOf(datum.id) >= 0) {
+            var selectedIDs = _.without(context.selectedIDs(), datum.id);
+            context.enter(selectedIDs.length ?
+                iD.modes.Select(context, selectedIDs) :
                 iD.modes.Browse(context));
 
         } else {
-            context.enter(iD.modes.Select(context, context.selection().concat([datum.id])));
+            context.enter(iD.modes.Select(context, context.selectedIDs().concat([datum.id])));
         }
     }
 

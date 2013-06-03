@@ -64,7 +64,7 @@ iD.ui.intro.line = function(context, reveal) {
             var pointBox = iD.ui.intro.pad(context.projection(intersection), 30);
             reveal(pointBox, 'intro.lines.restart');
             timeout(function() {
-                context.replace(iD.actions.DeleteMultiple(mode.selection()));
+                context.replace(iD.actions.DeleteMultiple(mode.selectedIDs()));
                 step.exit();
                 step.enter();
             }, 3000);

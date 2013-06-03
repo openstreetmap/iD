@@ -1,4 +1,4 @@
-iD.modes.Select = function(context, selection) {
+iD.modes.Select = function(context, selectedIDs) {
     var mode = {
         id: 'select',
         button: 'browse'
@@ -11,7 +11,7 @@ iD.modes.Select = function(context, selection) {
             iD.behavior.Select(context),
             iD.behavior.Lasso(context),
             iD.modes.DragNode(context)
-                .selection(selection)
+                .selectedIDs(selectedIDs)
                 .behavior],
         inspector,
         radialMenu,
@@ -22,8 +22,8 @@ iD.modes.Select = function(context, selection) {
         .select('.inspector-wrap');
 
     function singular() {
-        if (selection.length === 1) {
-            return context.entity(selection[0]);
+        if (selectedIDs.length === 1) {
+            return context.entity(selectedIDs[0]);
         }
     }
 
@@ -43,8 +43,8 @@ iD.modes.Select = function(context, selection) {
             .call(radialMenu);
     }
 
-    mode.selection = function() {
-        return selection;
+    mode.selectedIDs = function() {
+        return selectedIDs;
     };
 
     mode.reselect = function() {
@@ -75,9 +75,9 @@ iD.modes.Select = function(context, selection) {
         });
 
         var operations = _.without(d3.values(iD.operations), iD.operations.Delete)
-            .map(function(o) { return o(selection, context); })
+            .map(function(o) { return o(selectedIDs, context); })
             .filter(function(o) { return o.available(); });
-        operations.unshift(iD.operations.Delete(selection, context));
+        operations.unshift(iD.operations.Delete(selectedIDs, context));
 
         keybinding.on('⎋', function() {
             context.enter(iD.modes.Browse(context));
@@ -93,7 +93,7 @@ iD.modes.Select = function(context, selection) {
             });
         });
 
-        var notNew = selection.filter(function(id) {
+        var notNew = selectedIDs.filter(function(id) {
             return !context.entity(id).isNew();
         });
 
@@ -111,7 +111,7 @@ iD.modes.Select = function(context, selection) {
         function update() {
             context.surface().call(radialMenu.close);
 
-            if (_.any(selection, function(id) { return !context.hasEntity(id); })) {
+            if (_.any(selectedIDs, function(id) { return !context.hasEntity(id); })) {
                 // Exit mode if selected entity gets undone
                 context.enter(iD.modes.Browse(context));
             }
@@ -142,9 +142,9 @@ iD.modes.Select = function(context, selection) {
         }
 
         function selected() {
-            var s = iD.util.entitySelector(selection);
+            var s = iD.util.entitySelector(selectedIDs);
 
-            selection.forEach(function(id) {
+            selectedIDs.forEach(function(id) {
                 var entity = context.hasEntity(id);
                 if (entity && entity.type === 'relation') {
                     entity.members.forEach(function(member) {

@@ -1,13 +1,13 @@
-iD.operations.Split = function(selection, context) {
-    var vertices = _.filter(selection, function vertex(entityId) {
+iD.operations.Split = function(selectedIDs, context) {
+    var vertices = _.filter(selectedIDs, function vertex(entityId) {
         return context.geometry(entityId) === 'vertex';
     });
 
     var entityId = vertices[0],
         action = iD.actions.Split(entityId);
 
-    if (selection.length > 1) {
-        action.limitWays(_.without(selection, entityId));
+    if (selectedIDs.length > 1) {
+        action.limitWays(_.without(selectedIDs, entityId));
     }
 
     var operation = function() {

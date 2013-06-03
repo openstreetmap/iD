@@ -1,5 +1,5 @@
-iD.operations.Circularize = function(selection, context) {
-    var entityId = selection[0],
+iD.operations.Circularize = function(selectedIDs, context) {
+    var entityId = selectedIDs[0],
         geometry = context.geometry(entityId),
         action = iD.actions.Circularize(entityId, context.projection);
 
@@ -9,7 +9,7 @@ iD.operations.Circularize = function(selection, context) {
     };
 
     operation.available = function() {
-        return selection.length === 1 &&
+        return selectedIDs.length === 1 &&
             context.entity(entityId).type === 'way';
     };
 

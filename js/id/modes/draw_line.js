@@ -31,7 +31,7 @@ iD.modes.DrawLine = function(context, wayId, direction, baseGraph) {
         context.uninstall(behavior);
     };
 
-    mode.selection = function() {
+    mode.selectedIDs = function() {
         return [wayId];
     };
 

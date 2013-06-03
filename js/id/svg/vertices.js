@@ -108,7 +108,7 @@ iD.svg.Vertices = function(projection, context) {
     }
 
     function drawVertices(surface, graph, entities, filter, extent, zoom) {
-        var selected = siblingAndChildVertices(context.selection(), graph, extent),
+        var selected = siblingAndChildVertices(context.selectedIDs(), graph, extent),
             vertices = [];
 
         for (var i = 0; i < entities.length; i++) {

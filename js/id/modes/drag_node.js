@@ -8,7 +8,7 @@ iD.modes.DragNode = function(context) {
         activeIDs,
         wasMidpoint,
         cancelled,
-        selection = [],
+        selectedIDs = [],
         hover = iD.behavior.Hover(context).altDisables(true);
 
     function edge(point, size) {
@@ -136,7 +136,7 @@ iD.modes.DragNode = function(context) {
                 moveAnnotation(entity));
         }
 
-        var reselection = selection.filter(function(id) {
+        var reselection = selectedIDs.filter(function(id) {
             return context.graph().hasEntity(id);
         });
 
@@ -195,9 +195,9 @@ iD.modes.DragNode = function(context) {
         stopNudge();
     };
 
-    mode.selection = function(_) {
-        if (!arguments.length) return selection;
-        selection = _;
+    mode.selectedIDs = function(_) {
+        if (!arguments.length) return selectedIDs;
+        selectedIDs = _;
         return mode;
     };
 

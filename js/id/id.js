@@ -100,7 +100,7 @@ window.iD = function () {
 
     /* Modes */
     context.enter = function(newMode) {
-        var s0 = context.selection();
+        var s0 = context.selectedIDs();
 
         if (mode) {
             mode.exit();
@@ -111,7 +111,7 @@ window.iD = function () {
         mode.enter();
         dispatch.enter(mode);
 
-        var s1 = context.selection();
+        var s1 = context.selectedIDs();
         dispatch.select(s1, s0);
     };
 
@@ -119,9 +119,9 @@ window.iD = function () {
         return mode;
     };
 
-    context.selection = function() {
-        if (mode && mode.selection) {
-            return mode.selection();
+    context.selectedIDs = function() {
+        if (mode && mode.selectedIDs) {
+            return mode.selectedIDs();
         } else {
             return [];
         }

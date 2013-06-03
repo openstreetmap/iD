@@ -1,15 +1,15 @@
-iD.operations.Delete = function(selection, context) {
-    var action = iD.actions.DeleteMultiple(selection);
+iD.operations.Delete = function(selectedIDs, context) {
+    var action = iD.actions.DeleteMultiple(selectedIDs);
 
     var operation = function() {
         var annotation,
             mode;
 
-        if (selection.length > 1) {
-            annotation = t('operations.delete.annotation.multiple', {n: selection.length});
+        if (selectedIDs.length > 1) {
+            annotation = t('operations.delete.annotation.multiple', {n: selectedIDs.length});
             mode = iD.modes.Browse(context);
         } else {
-            var id = selection[0],
+            var id = selectedIDs[0],
                 entity = context.entity(id),
                 geometry = context.geometry(id),
                 parents = context.graph().parentWays(entity),

@@ -1,10 +1,10 @@
-iD.operations.Merge = function(selection, context) {
-    var join = iD.actions.Join(selection),
-        merge = iD.actions.Merge(selection),
-        mergePolygon = iD.actions.MergePolygon(selection);
+iD.operations.Merge = function(selectedIDs, context) {
+    var join = iD.actions.Join(selectedIDs),
+        merge = iD.actions.Merge(selectedIDs),
+        mergePolygon = iD.actions.MergePolygon(selectedIDs);
 
     var operation = function() {
-        var annotation = t('operations.merge.annotation', {n: selection.length}),
+        var annotation = t('operations.merge.annotation', {n: selectedIDs.length}),
             action;
 
         if (!join.disabled(context.graph())) {
@@ -20,7 +20,7 @@ iD.operations.Merge = function(selection, context) {
     };
 
     operation.available = function() {
-        return selection.length >= 2;
+        return selectedIDs.length >= 2;
     };
 
     operation.disabled = function() {

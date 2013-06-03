@@ -27,7 +27,7 @@ describe("iD.modes.AddPoint", function() {
             happen.mousedown(context.surface().node(), {});
             happen.mouseup(window, {});
             expect(context.mode().id).to.equal('select');
-            expect(context.mode().selection()).to.eql([context.changes().created[0].id]);
+            expect(context.mode().selectedIDs()).to.eql([context.changes().created[0].id]);
             context.mode().exit();
         });
     });

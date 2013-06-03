@@ -1,15 +1,15 @@
-iD.operations.Move = function(selection, context) {
+iD.operations.Move = function(selectedIDs, context) {
     var operation = function() {
-        context.enter(iD.modes.Move(context, selection));
+        context.enter(iD.modes.Move(context, selectedIDs));
     };
 
     operation.available = function() {
-        return selection.length > 1 ||
-            context.entity(selection[0]).type !== 'node';
+        return selectedIDs.length > 1 ||
+            context.entity(selectedIDs[0]).type !== 'node';
     };
 
     operation.disabled = function() {
-        return iD.actions.Move(selection)
+        return iD.actions.Move(selectedIDs)
             .disabled(context.graph());
     };
 

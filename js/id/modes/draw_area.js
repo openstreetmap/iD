@@ -31,7 +31,7 @@ iD.modes.DrawArea = function(context, wayId, baseGraph) {
         context.uninstall(behavior);
     };
 
-    mode.selection = function() {
+    mode.selectedIDs = function() {
         return [wayId];
     };
 

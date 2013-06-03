@@ -7,7 +7,7 @@ iD.ui.Sidebar = function(context) {
             .attr('class', 'inspector-hidden inspector-wrap fr');
 
         context.on('hover.sidebar', function(entity) {
-            if (context.selection().length === 1) return;
+            if (context.selectedIDs().length === 1) return;
 
             if (!current && entity) {
                 wrap.classed('inspector-hidden', false)
@@ -25,15 +25,15 @@ iD.ui.Sidebar = function(context) {
             }
         });
 
-        context.on('select.sidebar', function(selection) {
-            if (!current && selection.length === 1) {
+        context.on('select.sidebar', function(selectedIDs) {
+            if (!current && selectedIDs.length === 1) {
                 wrap.classed('inspector-hidden', false)
                     .classed('inspector-hover', false);
 
-                if (inspector.entityID() !== selection[0] || inspector.state() !== 'select') {
+                if (inspector.entityID() !== selectedIDs[0] || inspector.state() !== 'select') {
                     inspector
                         .state('select')
-                        .entityID(selection[0]);
+                        .entityID(selectedIDs[0]);
 
                     wrap.call(inspector);
                 }
