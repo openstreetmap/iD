@@ -6,41 +6,40 @@ iD.ui.Sidebar = function(context) {
         var wrap = selection.append('div')
             .attr('class', 'inspector-hidden inspector-wrap fr');
 
-        context.on('hover.sidebar', function(entity) {
-            if (context.selectedIDs().length === 1) return;
-
-            if (!current && entity) {
+        sidebar.hover = function(id) {
+            if (!current && id) {
                 wrap.classed('inspector-hidden', false)
                     .classed('inspector-hover', true);
 
-                if (inspector.entityID() !== entity.id || inspector.state() !== 'hover') {
+                if (inspector.entityID() !== id || inspector.state() !== 'hover') {
                     inspector
                         .state('hover')
-                        .entityID(entity.id);
+                        .entityID(id);
 
                     wrap.call(inspector);
                 }
             } else {
                 wrap.classed('inspector-hidden', true);
             }
-        });
+        };
 
-        context.on('select.sidebar', function(selectedIDs) {
-            if (!current && selectedIDs.length === 1) {
+        sidebar.select = function(id, newFeature) {
+            if (!current && id) {
                 wrap.classed('inspector-hidden', false)
                     .classed('inspector-hover', false);
 
-                if (inspector.entityID() !== selectedIDs[0] || inspector.state() !== 'select') {
+                if (inspector.entityID() !== id || inspector.state() !== 'select') {
                     inspector
                         .state('select')
-                        .entityID(selectedIDs[0]);
+                        .entityID(id)
+                        .newFeature(newFeature);
 
                     wrap.call(inspector);
                 }
             } else {
                 wrap.classed('inspector-hidden', true);
             }
-        });
+        };
 
         sidebar.show = function(component) {
             wrap.classed('inspector-hidden', true);

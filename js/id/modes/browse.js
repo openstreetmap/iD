@@ -8,7 +8,8 @@ iD.modes.Browse = function(context) {
     };
 
     var behaviors = [
-        iD.behavior.Hover(context),
+        iD.behavior.Hover(context)
+            .on('hover', context.ui().sidebar.hover),
         iD.behavior.Select(context),
         iD.behavior.Lasso(context),
         iD.modes.DragNode(context).behavior];
@@ -17,6 +18,8 @@ iD.modes.Browse = function(context) {
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });
+
+        context.ui().sidebar.select(null);
     };
 
     mode.exit = function() {

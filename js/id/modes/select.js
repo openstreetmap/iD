@@ -104,6 +104,11 @@ iD.modes.Select = function(context, selectedIDs) {
             }), true));
         }
 
+        if (singular()) {
+            context.ui().sidebar
+                .select(singular().id, newFeature);
+        }
+
         context.history()
             .on('undone.select', update)
             .on('redone.select', update);

@@ -8,13 +8,14 @@
    have the .hover class.
  */
 iD.behavior.Hover = function(context) {
-    var selection,
+    var dispatch = d3.dispatch('hover'),
+        selection,
         altDisables,
         target;
 
     function keydown() {
         if (altDisables && d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
-            context.hover(null);
+            dispatch.hover(null);
             selection.selectAll('.hover')
                 .classed('hover-suppressed', true)
                 .classed('hover', false);
@@ -23,7 +24,7 @@ iD.behavior.Hover = function(context) {
 
     function keyup() {
         if (altDisables && d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
-            context.hover(target);
+            dispatch.hover(target ? target.id : null);
             selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false)
                 .classed('hover', true);
@@ -50,12 +51,12 @@ iD.behavior.Hover = function(context) {
                 selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
-                context.hover(target);
+                dispatch.hover(target.id);
             }
         }
 
         function mouseout() {
-            context.hover(null);
+            dispatch.hover(null);
             target = null;
 
             selection.selectAll('.hover')
@@ -94,5 +95,5 @@ iD.behavior.Hover = function(context) {
         return hover;
     };
 
-    return hover;
+    return d3.rebind(hover, dispatch, 'on');
 };

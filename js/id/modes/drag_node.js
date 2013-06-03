@@ -9,7 +9,9 @@ iD.modes.DragNode = function(context) {
         wasMidpoint,
         cancelled,
         selectedIDs = [],
-        hover = iD.behavior.Hover(context).altDisables(true);
+        hover = iD.behavior.Hover(context)
+            .altDisables(true)
+            .on('hover', context.ui().sidebar.hover);
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
