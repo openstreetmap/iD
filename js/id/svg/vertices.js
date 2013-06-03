@@ -128,7 +128,7 @@ iD.svg.Vertices = function(projection, context) {
             .filter(filter)
             .call(draw, vertices, 'vertex-persistent', graph, zoom);
 
-        drawHover(surface, graph, zoom);
+        drawHover(surface, graph, extent, zoom);
     }
 
     function drawHover(surface, graph, extent, zoom) {
@@ -138,10 +138,10 @@ iD.svg.Vertices = function(projection, context) {
             .call(draw, d3.values(hovered), 'vertex-hover', graph, zoom);
     }
 
-    drawVertices.drawHover = function(surface, graph, _, zoom) {
+    drawVertices.drawHover = function(surface, graph, _, extent, zoom) {
         if (hover !== _) {
             hover = _;
-            drawHover(surface, graph, zoom);
+            drawHover(surface, graph, extent, zoom);
         }
     };
 
