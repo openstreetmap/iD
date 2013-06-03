@@ -86,13 +86,15 @@ iD.ui.EntityEditor = function(context) {
                 .preset(preset)
                 .entityID(id)
                 .tags(tags)
+                .state(state)
                 .on('change', changeTags));
 
         $body.select('.raw-tag-editor')
             .call(rawTagEditor
                 .preset(preset)
                 .entityID(id)
-                .tags(tags));
+                .tags(tags)
+                .state(state));
 
         if (entity.type === 'relation') {
             $body.select('.raw-member-editor')

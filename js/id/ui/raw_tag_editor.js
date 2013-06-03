@@ -2,6 +2,7 @@ iD.ui.RawTagEditor = function(context) {
     var event = d3.dispatch('change'),
         taginfo = iD.taginfo(),
         showBlank = false,
+        state,
         preset,
         tags,
         id;
@@ -86,6 +87,11 @@ iD.ui.RawTagEditor = function(context) {
 
         $items.each(function(tag) {
             var reference = iD.ui.TagReference({key: tag.key});
+
+            if (state === 'hover') {
+                reference.showing(false);
+            }
+
             d3.select(this)
                 .each(bindTypeahead)
                 .call(reference.button)
@@ -190,6 +196,12 @@ iD.ui.RawTagEditor = function(context) {
             }, 0);
         }
     }
+
+    rawTagEditor.state = function(_) {
+        if (!arguments.length) return state;
+        state = _;
+        return rawTagEditor;
+    };
 
     rawTagEditor.preset = function(_) {
         if (!arguments.length) return preset;

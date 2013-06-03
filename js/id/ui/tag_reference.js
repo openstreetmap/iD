@@ -1,9 +1,10 @@
 iD.ui.TagReference = function(tag) {
     var tagReference = {},
         taginfo = iD.taginfo(),
-        button, body,
-        loaded = false,
-        showing = false;
+        button,
+        body,
+        loaded,
+        showing;
 
     function findLocal(docs) {
         var locale = iD.detect().locale.toLowerCase(),
@@ -30,44 +31,7 @@ iD.ui.TagReference = function(tag) {
         });
     }
 
-    tagReference.button = function(selection) {
-        button = selection.selectAll('.tag-reference-button')
-            .data([0]);
-
-        var enter = button.enter().append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'tag-reference-button minor');
-
-        enter.append('span')
-            .attr('class', 'icon inspect');
-
-        button.on('click', function () {
-            d3.event.stopPropagation();
-            d3.event.preventDefault();
-            if (showing) {
-                tagReference.hide();
-            } else {
-                tagReference.load();
-            }
-        });
-    };
-
-    tagReference.body = function(selection) {
-        body = selection.selectAll('.tag-reference-body')
-            .data([0]);
-
-        body.enter().append('div')
-            .attr('class', 'tag-reference-body cf')
-            .style('max-height', '0')
-            .style('opacity', '0');
-    };
-
-    tagReference.load = function() {
-        if (loaded) {
-            tagReference.show();
-            return;
-        }
-
+    function load() {
         button.classed('tag-reference-loading', true);
 
         taginfo.docs(tag, function(err, docs) {
@@ -79,7 +43,7 @@ iD.ui.TagReference = function(tag) {
 
             if (!docs || !docs.description) {
                 body.append('p').text(t('inspector.no_documentation_key'));
-                tagReference.show();
+                show();
                 return;
             }
 
@@ -88,10 +52,10 @@ iD.ui.TagReference = function(tag) {
                     .append('img')
                     .attr('class', 'wiki-image')
                     .attr('src', docs.image.thumb_url_prefix + "100" + docs.image.thumb_url_suffix)
-                    .on('load', function() { tagReference.show(); })
-                    .on('error', function() { d3.select(this).remove(); tagReference.show(); });
+                    .on('load', function() { show(); })
+                    .on('error', function() { d3.select(this).remove(); show(); });
             } else {
-                tagReference.show();
+                show();
             }
 
             body
@@ -109,9 +73,9 @@ iD.ui.TagReference = function(tag) {
             wikiLink.append('span')
                 .text(t('inspector.reference'));
         });
-    };
+    }
 
-    tagReference.show = function() {
+    function show() {
         loaded = true;
 
         button.classed('tag-reference-loading', false);
@@ -122,15 +86,60 @@ iD.ui.TagReference = function(tag) {
             .style('opacity', '1');
 
         showing = true;
-    };
+    }
 
-    tagReference.hide = function() {
-        body.transition()
-            .duration(200)
+    function hide(selection) {
+        selection = selection || body.transition().duration(200);
+
+        selection
             .style('max-height', '0px')
             .style('opacity', '0');
 
         showing = false;
+    }
+
+    tagReference.button = function(selection) {
+        button = selection.selectAll('.tag-reference-button')
+            .data([0]);
+
+        var enter = button.enter().append('button')
+            .attr('tabindex', -1)
+            .attr('class', 'tag-reference-button minor');
+
+        enter.append('span')
+            .attr('class', 'icon inspect');
+
+        button.on('click', function () {
+            d3.event.stopPropagation();
+            d3.event.preventDefault();
+            if (showing) {
+                hide();
+            } else if (loaded) {
+                show();
+            } else {
+                load();
+            }
+        });
+    };
+
+    tagReference.body = function(selection) {
+        body = selection.selectAll('.tag-reference-body')
+            .data([0]);
+
+        body.enter().append('div')
+            .attr('class', 'tag-reference-body cf')
+            .style('max-height', '0')
+            .style('opacity', '0');
+
+        if (showing === false) {
+            hide(body);
+        }
+    };
+
+    tagReference.showing = function(_) {
+        if (!arguments.length) return showing;
+        showing = _;
+        return tagReference;
     };
 
     return tagReference;

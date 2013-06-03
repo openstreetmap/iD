@@ -1,5 +1,6 @@
 iD.ui.preset = function(context) {
     var event = d3.dispatch('change'),
+        state,
         fields,
         preset,
         tags,
@@ -10,8 +11,6 @@ iD.ui.preset = function(context) {
 
         field.input = iD.ui.preset[field.type](field, context)
             .on('change', event.change);
-
-        field.reference = iD.ui.TagReference({key: field.key});
 
         if (field.type === 'address' ||
             field.type === 'wikipedia' ||
@@ -106,20 +105,22 @@ iD.ui.preset = function(context) {
         $fields.select('.modified-icon')
             .on('click', revert);
 
-        $fields.select('.form-label')
-            .each(function(field) {
-                d3.select(this)
-                    .call(field.reference.button);
-            });
-
         $fields
             .classed('modified', function(field) {
                 return field.modified();
             })
             .each(function(field) {
+                var reference = iD.ui.TagReference({key: field.key});
+
+                if (state === 'hover') {
+                    reference.showing(false);
+                }
+
                 d3.select(this)
                     .call(field.input)
-                    .call(field.reference.body);
+                    .call(reference.body)
+                    .select('.form-label')
+                    .call(reference.button);
 
                 field.input.tags(tags);
             });
@@ -167,6 +168,12 @@ iD.ui.preset = function(context) {
         if (!arguments.length) return preset;
         preset = _;
         fields = null;
+        return presets;
+    };
+
+    presets.state = function(_) {
+        if (!arguments.length) return state;
+        state = _;
         return presets;
     };
 
