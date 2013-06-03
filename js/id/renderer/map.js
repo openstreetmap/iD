@@ -75,7 +75,7 @@ iD.Map = function(context) {
             }
         });
 
-        context.on('select.map', function() {
+        context.on('enter.map', function() {
             if (map.editable() && !transformed) {
                 var all = context.intersects(map.extent()),
                     filter = d3.functor(true),
