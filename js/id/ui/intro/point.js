@@ -61,7 +61,7 @@ iD.ui.intro.point = function(context, reveal) {
 
         function selectedPreset() {
             setTimeout(function() {
-                reveal('.tag-wrap', 'intro.points.describe');
+                reveal('.entity-editor-pane', 'intro.points.describe');
                 context.history().on('change.intro', closeEditor);
                 context.on('exit.intro', selectPoint);
             }, 400);
