@@ -19,6 +19,8 @@ iD.modes.Browse = function(context) {
             context.install(behavior);
         });
 
+        // Get focus on the body.
+        document.activeElement.blur();
         context.ui().sidebar.select(null);
     };
 
