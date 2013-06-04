@@ -54,5 +54,10 @@ iD.ui.Sidebar = function(context) {
         };
     }
 
+    sidebar.hover = function() {};
+    sidebar.select = function() {};
+    sidebar.show = function() {};
+    sidebar.hide = function() {};
+
     return sidebar;
 };
