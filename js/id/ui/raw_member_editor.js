@@ -52,7 +52,10 @@ iD.ui.RawMemberEditor = function(context) {
                 .attr('class', 'member-list');
 
             var $items = $list.selectAll('li')
-                .data(memberships, function(d) { return iD.Entity.key(d.relation) + ',' + d.index; });
+                .data(memberships, function(d) {
+                    return iD.Entity.key(d.relation) + ',' + d.index + ',' +
+                        (d.member ? iD.Entity.key(d.member) : 'incomplete');
+                });
 
             var $enter = $items.enter().append('li')
                 .attr('class', 'member-row form-field');
