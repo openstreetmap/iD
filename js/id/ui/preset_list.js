@@ -74,7 +74,7 @@ iD.ui.PresetList = function(context) {
         var searchWrap = selection.append('div')
             .attr('class', 'preset-search');
 
-        var search = selection.append('input')
+        var search = searchWrap.append('input')
             .attr('class', 'preset-search-input major')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
