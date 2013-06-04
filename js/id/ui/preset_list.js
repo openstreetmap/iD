@@ -72,17 +72,16 @@ iD.ui.PresetList = function(context) {
         }
 
         var searchWrap = selection.append('div')
-            .attr('class', 'preset-search');
+            .attr('class', 'search-header');
 
         var search = searchWrap.append('input')
-            .attr('class', 'preset-search-input major')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
             .on('keydown', keydown)
             .on('keyup', keyup);
 
         searchWrap.append('span')
-            .attr('class', 'preset-search-icon icon search');
+            .attr('class', 'icon search');
 
         if (autofocus) {
             search.node().focus();

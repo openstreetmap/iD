@@ -2,20 +2,26 @@ iD.ui.PresetIcon = function() {
     var preset, geometry;
 
     function presetIcon(selection) {
+        selection.each(setup);
+    }
+
+    function setup() {
+        var selection = d3.select(this),
+            p = preset.apply(this, arguments),
+            geom = geometry.apply(this, arguments);
+
         var $fill = selection.selectAll('.preset-icon-fill')
             .data([0]);
 
         $fill.enter().append('div');
 
         $fill.attr('class', function() {
-            var s = 'preset-icon-fill icon-' + geometry;
-            for (var i in preset.tags) {
-                s += ' tag-' + i + ' tag-' + i + '-' + preset.tags[i];
+            var s = 'preset-icon-fill icon-' + geom;
+            for (var i in p.tags) {
+                s += ' tag-' + i + ' tag-' + i + '-' + p.tags[i];
             }
             return s;
         });
-
-        var fallbackIcon = geometry === 'line' ? 'other-line' : 'marker-stroked';
 
         var $icon = selection.selectAll('.preset-icon')
             .data([0]);
@@ -23,12 +29,12 @@ iD.ui.PresetIcon = function() {
         $icon.enter().append('div');
 
         $icon.attr('class', function() {
-            var icon = preset.icon || fallbackIcon,
+            var icon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked'),
                 klass = 'feature-' + icon + ' preset-icon';
 
             var featureicon = iD.data.featureIcons[icon];
-            if (featureicon && featureicon[geometry]) {
-                klass += ' preset-icon-' + geometry;
+            if (featureicon && featureicon[geom]) {
+                klass += ' preset-icon-' + geom;
             } else if (icon === 'multipolygon') {
                 // Special case (geometry === 'area')
                 klass += ' preset-icon-relation';
@@ -40,13 +46,13 @@ iD.ui.PresetIcon = function() {
 
     presetIcon.preset = function(_) {
         if (!arguments.length) return preset;
-        preset = _;
+        preset = d3.functor(_);
         return presetIcon;
     };
 
     presetIcon.geometry = function(_) {
         if (!arguments.length) return geometry;
-        geometry = _;
+        geometry = d3.functor(_);
         return presetIcon;
     };
 

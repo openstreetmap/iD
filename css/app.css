@@ -182,14 +182,6 @@ input:focus {
     background-color: #F1F1F1;
 }
 
-input.major {
-    width: 100%;
-    padding:5px 10px;
-    font-size: 18px;
-    font-weight: bold;
-    height:60px;
-}
-
 /* remove bottom border radius when combobox is open */
 .combobox + * textarea:focus,
 .combobox + * input:focus {
@@ -698,6 +690,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     bottom: 0;
 }
 
+.feature-list-pane .inspector-body {
+    top: 120px;
+}
+
 .preset-list-pane .inspector-body {
     top: 120px;
 }
@@ -709,6 +705,78 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-inner {
     padding: 20px;
     position: relative;
+}
+
+#sidebar .search-header .icon {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 80px;
+    pointer-events: none;
+}
+
+#sidebar .search-header input {
+    position: absolute;
+    top: 60px;
+    height: 60px;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 0;
+    border-width: 0;
+    border-bottom-width: 1px;
+    text-indent: 30px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Feature list */
+
+.feature-list  {
+    width:100%;
+    padding: 20px 20px 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.feature-list-button-wrap {
+    position: relative;
+    margin-bottom: 10px;
+    height: 60px;
+}
+
+.feature-list-button {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border: 1px solid #ccc;
+}
+
+.feature-list-button .label {
+    background-color: #f6f6f6;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: 5px 10px;
+    left: 60px;
+    line-height: 50px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-left: 1px solid rgba(0, 0, 0, .1);
+    -moz-transition: all 100ms;
+    -o-transition: all 100ms;
+    transition: all 100ms;
+    border-radius: 0 3px 3px 0;
+}
+
+.feature-list-button:hover .label {
+    background-color: #ececec;
+}
+
+.feature-list-button .entity-name {
+    font-weight: normal;
+    padding-left: 10px;
 }
 
 /* Presets
@@ -801,23 +869,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .category .preset-list-button:before {
     top: -3px;
-}
-
-.preset-list-pane .preset-search-icon {
-    display: block;
-    position: absolute;
-    left: 10px;
-    top: 80px;
-    pointer-events: none;
-}
-
-.preset-list-pane .preset-search-input {
-    position: absolute;
-    top: 60px;
-    border-radius: 0;
-    border-width: 0;
-    border-bottom-width: 1px;
-    text-indent: 30px;
 }
 
 .subgrid .preset-list {

@@ -182,6 +182,7 @@ en:
     search: Search
     unknown: Unknown
     incomplete: <not downloaded>
+    feature_list: Feature List
   background:
     title: Background
     description: Background settings

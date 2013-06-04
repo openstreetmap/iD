@@ -223,7 +223,8 @@
         "remove": "Remove",
         "search": "Search",
         "unknown": "Unknown",
-        "incomplete": "<not downloaded>"
+        "incomplete": "<not downloaded>",
+        "feature_list": "Feature List"
     },
     "background": {
         "title": "Background",
