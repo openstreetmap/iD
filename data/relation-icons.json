@@ -13,5 +13,6 @@
     "route-tram": [680, 25],
     "route-ferry": [740, 25],
     "route-power": [800, 25],
-    "route-pipeline": [860, 25]
+    "route-pipeline": [860, 25],
+    "route-master": [920, 25]
 }

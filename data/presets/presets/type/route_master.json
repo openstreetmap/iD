@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route_master"
+    },
+    "name": "Route Master",
+    "icon": "route-master",
+    "fields": [
+        "route_master"
+    ]
+}

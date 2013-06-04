@@ -4661,6 +4661,19 @@
         "name": "Tram Route",
         "icon": "route-tram"
     },
+    "type/route_master": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route_master"
+        },
+        "name": "Route Master",
+        "icon": "route-master",
+        "fields": [
+            "route_master"
+        ]
+    },
     "vertex": {
         "name": "Other",
         "tags": {},

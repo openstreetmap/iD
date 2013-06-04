@@ -453,6 +453,11 @@
         "type": "combo",
         "label": "Type"
     },
+    "route_master": {
+        "key": "route_master",
+        "type": "combo",
+        "label": "Type"
+    },
     "sac_scale": {
         "key": "sac_scale",
         "type": "combo",

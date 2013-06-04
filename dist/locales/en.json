@@ -620,6 +620,9 @@
             "route": {
                 "label": "Type"
             },
+            "route_master": {
+                "label": "Type"
+            },
             "sac_scale": {
                 "label": "Path Difficulty"
             },
@@ -1872,6 +1875,10 @@
             },
             "type/route/tram": {
                 "name": "Tram Route",
+                "terms": ""
+            },
+            "type/route_master": {
+                "name": "Route Master",
                 "terms": ""
             },
             "vertex": {
