@@ -10,9 +10,9 @@ iD.util.entitySelector = function(ids) {
     return ids.length ? '.' + ids.join(',.') : 'nothing';
 };
 
-iD.util.localeName = function(entity) {
+iD.util.displayName = function(entity) {
     var localeName = 'name:' + iD.detect().locale.toLowerCase().split('-')[0];
-    return entity.tags[localeName] || entity.tags.name;
+    return entity.tags[localeName] || entity.tags.name || entity.tags.ref;
 };
 
 iD.util.stringQs = function(str) {

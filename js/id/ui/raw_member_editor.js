@@ -71,7 +71,7 @@ iD.ui.RawMemberEditor = function(context) {
 
                     $label.append('span')
                         .attr('class', 'member-entity-name')
-                        .text(function(d) { return iD.util.localeName(d.member); });
+                        .text(function(d) { return iD.util.displayName(d.member); });
 
                 } else {
                     d3.select(this).append('label')

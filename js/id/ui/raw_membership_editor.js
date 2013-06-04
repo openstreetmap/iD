@@ -67,7 +67,7 @@ iD.ui.RawMembershipEditor = function(context) {
 
             $label.append('span')
                 .attr('class', 'member-entity-name')
-                .text(function(d) { return iD.util.localeName(d.relation); });
+                .text(function(d) { return iD.util.displayName(d.relation); });
 
             $enter.append('input')
                 .attr('class', 'member-role')

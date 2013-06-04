@@ -104,7 +104,7 @@ iD.svg.Labels = function(projection, context) {
                 'startOffset': '50%',
                 'xlink:href': function(d) { return '#labelpath-' + d.id; }
             })
-            .text(iD.util.localeName);
+            .text(iD.util.displayName);
 
         texts.exit().remove();
 
@@ -140,8 +140,8 @@ iD.svg.Labels = function(projection, context) {
         texts.attr('x', get(labels, 'x'))
             .attr('y', get(labels, 'y'))
             .style('text-anchor', get(labels, 'textAnchor'))
-            .text(iD.util.localeName)
-            .each(function(d, i) { textWidth(iD.util.localeName(d), labels[i].height, this); });
+            .text(iD.util.displayName)
+            .each(function(d, i) { textWidth(iD.util.displayName(d), labels[i].height, this); });
 
         texts.exit().remove();
         return texts;
@@ -267,7 +267,7 @@ iD.svg.Labels = function(projection, context) {
                 preset = geometry === 'area' && context.presets().match(entity, graph),
                 icon = preset && !blacklisted(preset) && preset.icon;
 
-            if ((iD.util.localeName(entity) || icon) && !(hidePoints && geometry === 'point')) {
+            if ((iD.util.displayName(entity) || icon) && !(hidePoints && geometry === 'point')) {
 
                 for (k = 0; k < label_stack.length; k ++) {
                     if (entity.geometry(graph) === label_stack[k][0] &&
@@ -296,7 +296,7 @@ iD.svg.Labels = function(projection, context) {
             var font_size = font_sizes[k];
             for (i = 0; i < labelable[k].length; i ++) {
                 entity = labelable[k][i];
-                var name = iD.util.localeName(entity),
+                var name = iD.util.displayName(entity),
                     width = name && textWidth(name, font_size),
                     p;
                 if (entity.geometry(graph) === 'point') {
