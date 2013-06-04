@@ -1043,6 +1043,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-hover .toggle-list button::before,
 .inspector-hover .toggle-list button:not(.active),
 .inspector-hover .inspector-inner .add-tag,
+.inspector-hover .inspector-inner .add-relation,
 .inspector-hover .toggle-list button.remove .icon {
     height: 0;
     width: 0;
@@ -1728,6 +1729,23 @@ img.wiki-image {
 .raw-membership-editor .member-row .member-entity-name {
     font-weight: normal;
     padding-left: 10px;
+}
+
+.member-row-new .member-entity-input {
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #cfcfcf;
+}
+
+.add-relation {
+    width: 40%;
+    height: 30px;
+    background: rgba(0,0,0,.5);
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.add-relation:hover {
+    background: rgba(0,0,0,.8);
 }
 
 /* Map Controls */

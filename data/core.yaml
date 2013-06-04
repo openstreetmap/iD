@@ -68,6 +68,8 @@ en:
         relation: Deleted a relation.
         multiple: "Deleted {n} objects."
       incomplete_relation: This feature can't be deleted because it hasn't been fully downloaded.
+    add_member:
+      annotation: Added a member to a relation.
     delete_member:
       annotation: Removed a member from a relation.
     connect:
@@ -168,7 +170,6 @@ en:
     no_documentation_combination: There is no documentation available for this tag combination
     no_documentation_key: There is no documentation available for this key
     show_more: Show More
-    new_tag: New tag
     view_on_osm: View on openstreetmap.org
     all_tags: All tags
     all_members: All members

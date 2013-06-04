@@ -47,10 +47,6 @@ iD.ui.RawTagEditor = function(context) {
         $enter.append('span')
             .attr('class', 'icon plus light');
 
-        $enter.append('span')
-            .attr('class', 'label')
-            .text(t('inspector.new_tag'));
-
         $newTag.on('click', addTag);
 
         var $items = $list.selectAll('li')

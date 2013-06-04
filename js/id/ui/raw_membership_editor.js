@@ -1,5 +1,5 @@
 iD.ui.RawMembershipEditor = function(context) {
-    var id;
+    var id, showBlank;
 
     function selectRelation(d) {
         context.enter(iD.modes.Select(context, [d.relation.id]));
@@ -12,10 +12,41 @@ iD.ui.RawMembershipEditor = function(context) {
             t('operations.change_role.annotation'));
     }
 
+    function addMembership(d, role) {
+        showBlank = false;
+        context.perform(
+            iD.actions.AddMember(d.relation.id, {id: id, type: context.entity(id).type, role: role}),
+            t('operations.add_member.annotation'))
+    }
+
     function deleteMembership(d) {
         context.perform(
             iD.actions.DeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation'));
+    }
+
+    function relations(q) {
+        var result = [],
+            graph = context.graph();
+
+        context.intersects(context.extent()).forEach(function(entity) {
+            if (entity.type !== 'relation')
+                return;
+
+            var presetName = context.presets().match(entity, graph).name(),
+                entityName = iD.util.displayName(entity) || '';
+
+            if (q && entityName.toLowerCase().indexOf(q) === -1 &&
+                presetName.toLowerCase().indexOf(q) === -1)
+                return;
+
+            result.push({
+                relation: entity,
+                value: presetName + ' ' + entityName
+            });
+        });
+
+        return result;
     }
 
     function rawMembershipEditor(selection) {
@@ -49,11 +80,11 @@ iD.ui.RawMembershipEditor = function(context) {
             $list.enter().append('ul')
                 .attr('class', 'member-list');
 
-            var $items = $list.selectAll('li')
+            var $items = $list.selectAll('li.member-row-normal')
                 .data(memberships, function(d) { return iD.Entity.key(d.relation) + ',' + d.index; });
 
             var $enter = $items.enter().append('li')
-                .attr('class', 'member-row form-field');
+                .attr('class', 'member-row member-row-normal form-field');
 
             var $label = $enter.append('label')
                 .attr('class', 'form-label')
@@ -62,7 +93,7 @@ iD.ui.RawMembershipEditor = function(context) {
                 .on('click', selectRelation);
 
             $label.append('span')
-                .attr('class','member-entity-type')
+                .attr('class', 'member-entity-type')
                 .text(function(d) { return context.presets().match(d.relation, context.graph()).name(); });
 
             $label.append('span')
@@ -86,6 +117,58 @@ iD.ui.RawMembershipEditor = function(context) {
 
             $items.exit()
                 .remove();
+
+            if (showBlank) {
+                var $new = $list.selectAll('.member-row-new')
+                    .data([0]);
+
+                $enter = $new.enter().append('li')
+                    .attr('class', 'member-row member-row-new form-field');
+
+                $enter.append('input')
+                    .attr('type', 'text')
+                    .attr('class', 'member-entity-input')
+                    .call(d3.combobox()
+                        .fetcher(function(value, _, callback) {
+                            callback(relations(value));
+                        })
+                        .on('accept', function(d) {
+                            addMembership(d, $new.select('.member-role').property('value'));
+                        }));
+
+                $enter.append('input')
+                    .attr('class', 'member-role')
+                    .property('type', 'text')
+                    .attr('maxlength', 255)
+                    .attr('placeholder', t('inspector.role'))
+                    .on('change', changeRole);
+
+                $enter.append('button')
+                    .attr('tabindex', -1)
+                    .attr('class', 'remove button-input-action member-delete minor')
+                    .on('click', deleteMembership)
+                    .append('span')
+                    .attr('class', 'icon delete');
+
+            } else {
+                $list.selectAll('.member-row-new')
+                    .remove();
+            }
+
+            var $add = $wrap.selectAll('.add-relation')
+                .data([0]);
+
+            $add.enter().append('button')
+                .attr('class', 'add-relation')
+                .append('span')
+                .attr('class', 'icon plus light');
+
+            $wrap.selectAll('.add-relation')
+                .on('click', function() {
+                    showBlank = true;
+                    content($wrap);
+                    $list.selectAll('.member-entity-input').node().focus();
+                });
         }
     }
 
