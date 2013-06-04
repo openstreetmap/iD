@@ -8,6 +8,7 @@
     "name": "Route",
     "icon": "route",
     "fields": [
-        "route"
+        "route",
+        "ref"
     ]
 }

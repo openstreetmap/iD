@@ -62,6 +62,8 @@ en:
         label: Type
       bicycle_parking: 
         label: Type
+      boundary: 
+        label: Type
       building: 
         label: Building
       building_area: 
@@ -190,6 +192,8 @@ en:
           hindu: Hindu
           shinto: Shinto
           taoist: Taoist
+      restriction: 
+        label: Type
       route: 
         label: Type
       route_master: 

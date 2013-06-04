@@ -6,5 +6,8 @@
         "type": "boundary"
     },
     "name": "Boundary",
-    "icon": "boundary"
+    "icon": "boundary",
+    "fields": [
+        "boundary"
+    ]
 }

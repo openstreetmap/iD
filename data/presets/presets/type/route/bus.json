@@ -7,5 +7,10 @@
         "route": "bus"
     },
     "name": "Bus Route",
-    "icon": "route-bus"
+    "icon": "route-bus",
+    "fields": [
+        "ref",
+        "operator",
+        "network"
+    ]
 }

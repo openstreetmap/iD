@@ -7,5 +7,9 @@
         "route": "pipeline"
     },
     "name": "Pipeline Route",
-    "icon": "route-pipeline"
+    "icon": "route-pipeline",
+    "fields": [
+        "ref",
+        "operator"
+    ]
 }

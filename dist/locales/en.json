@@ -435,6 +435,9 @@
             "bicycle_parking": {
                 "label": "Type"
             },
+            "boundary": {
+                "label": "Type"
+            },
             "building": {
                 "label": "Building"
             },
@@ -617,6 +620,9 @@
                     "shinto": "Shinto",
                     "taoist": "Taoist"
                 }
+            },
+            "restriction": {
+                "label": "Type"
             },
             "route": {
                 "label": "Type"

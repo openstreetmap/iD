@@ -8,6 +8,9 @@
     "name": "Route Master",
     "icon": "route-master",
     "fields": [
-        "route_master"
+        "route_master",
+        "ref",
+        "operator",
+        "network"
     ]
 }

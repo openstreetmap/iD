@@ -6,5 +6,8 @@
         "type": "restriction"
     },
     "name": "Restriction",
-    "icon": "restriction"
+    "icon": "restriction",
+    "fields": [
+        "restriction"
+    ]
 }

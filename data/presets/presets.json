@@ -4512,7 +4512,10 @@
             "type": "boundary"
         },
         "name": "Boundary",
-        "icon": "boundary"
+        "icon": "boundary",
+        "fields": [
+            "boundary"
+        ]
     },
     "type/multipolygon": {
         "geometry": [
@@ -4536,7 +4539,10 @@
             "type": "restriction"
         },
         "name": "Restriction",
-        "icon": "restriction"
+        "icon": "restriction",
+        "fields": [
+            "restriction"
+        ]
     },
     "type/route": {
         "geometry": [
@@ -4548,7 +4554,8 @@
         "name": "Route",
         "icon": "route",
         "fields": [
-            "route"
+            "route",
+            "ref"
         ]
     },
     "type/route/bicycle": {
@@ -4560,7 +4567,11 @@
             "route": "bicycle"
         },
         "name": "Cycle Route",
-        "icon": "route-bicycle"
+        "icon": "route-bicycle",
+        "fields": [
+            "ref",
+            "network"
+        ]
     },
     "type/route/bus": {
         "geometry": [
@@ -4571,7 +4582,12 @@
             "route": "bus"
         },
         "name": "Bus Route",
-        "icon": "route-bus"
+        "icon": "route-bus",
+        "fields": [
+            "ref",
+            "operator",
+            "network"
+        ]
     },
     "type/route/detour": {
         "geometry": [
@@ -4582,7 +4598,10 @@
             "route": "detour"
         },
         "name": "Detour Route",
-        "icon": "route-detour"
+        "icon": "route-detour",
+        "fields": [
+            "ref"
+        ]
     },
     "type/route/ferry": {
         "geometry": [
@@ -4593,7 +4612,12 @@
             "route": "ferry"
         },
         "name": "Ferry Route",
-        "icon": "route-ferry"
+        "icon": "route-ferry",
+        "fields": [
+            "ref",
+            "operator",
+            "network"
+        ]
     },
     "type/route/foot": {
         "geometry": [
@@ -4604,7 +4628,12 @@
             "route": "foot"
         },
         "name": "Foot Route",
-        "icon": "route-foot"
+        "icon": "route-foot",
+        "fields": [
+            "ref",
+            "operator",
+            "network"
+        ]
     },
     "type/route/pipeline": {
         "geometry": [
@@ -4615,7 +4644,11 @@
             "route": "pipeline"
         },
         "name": "Pipeline Route",
-        "icon": "route-pipeline"
+        "icon": "route-pipeline",
+        "fields": [
+            "ref",
+            "operator"
+        ]
     },
     "type/route/power": {
         "geometry": [
@@ -4626,7 +4659,11 @@
             "route": "power"
         },
         "name": "Power Route",
-        "icon": "route-power"
+        "icon": "route-power",
+        "fields": [
+            "ref",
+            "operator"
+        ]
     },
     "type/route/road": {
         "geometry": [
@@ -4637,7 +4674,10 @@
             "route": "road"
         },
         "name": "Road Route",
-        "icon": "route-road"
+        "icon": "route-road",
+        "fields": [
+            "ref"
+        ]
     },
     "type/route/train": {
         "geometry": [
@@ -4648,7 +4688,11 @@
             "route": "train"
         },
         "name": "Train Route",
-        "icon": "route-train"
+        "icon": "route-train",
+        "fields": [
+            "ref",
+            "operator"
+        ]
     },
     "type/route/tram": {
         "geometry": [
@@ -4659,7 +4703,11 @@
             "route": "tram"
         },
         "name": "Tram Route",
-        "icon": "route-tram"
+        "icon": "route-tram",
+        "fields": [
+            "ref",
+            "operator"
+        ]
     },
     "type/route_master": {
         "geometry": [
@@ -4671,7 +4719,10 @@
         "name": "Route Master",
         "icon": "route-master",
         "fields": [
-            "route_master"
+            "route_master",
+            "ref",
+            "operator",
+            "network"
         ]
     },
     "vertex": {

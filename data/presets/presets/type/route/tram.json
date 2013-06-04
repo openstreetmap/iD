@@ -7,5 +7,9 @@
         "route": "tram"
     },
     "name": "Tram Route",
-    "icon": "route-tram"
+    "icon": "route-tram",
+    "fields": [
+        "ref",
+        "operator"
+    ]
 }

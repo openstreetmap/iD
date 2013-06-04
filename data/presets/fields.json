@@ -98,6 +98,11 @@
         "type": "combo",
         "label": "Type"
     },
+    "boundary": {
+        "key": "boundary",
+        "type": "combo",
+        "label": "Type"
+    },
     "building": {
         "key": "building",
         "type": "combo",
@@ -447,6 +452,11 @@
                 "taoist": "Taoist"
             }
         }
+    },
+    "restriction": {
+        "key": "restriction",
+        "type": "combo",
+        "label": "Type"
     },
     "route": {
         "key": "route",
