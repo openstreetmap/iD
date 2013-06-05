@@ -38,23 +38,30 @@ iD.ui.FeatureList = function(context) {
             .on('change.feature-list', drawList);
 
         context.map()
-            .on('move', drawList);
+            .on('drawn', drawList);
 
         function features() {
             var result = [],
                 graph = context.graph(),
                 q = search.property('value').toLowerCase();
 
-            context.intersects(context.extent()).forEach(function(entity) {
+            if (!context.map().editable()) {
+                return result;
+            }
+
+            var entities = context.intersects(context.extent());
+            for (var i = 0; i < entities.length; i++) {
+                var entity = entities[i];
+
+                if (entity.geometry(graph) === 'vertex')
+                    continue;
+
                 var preset = context.presets().match(entity, context.graph()),
                     name = iD.util.displayName(entity) || '';
 
-                if (entity.geometry(graph) === 'vertex')
-                    return;
-
                 if (q && name.toLowerCase().indexOf(q) === -1 &&
                     preset.name().toLowerCase().indexOf(q) === -1)
-                    return;
+                    continue;
 
                 result.push({
                     entity: entity,
@@ -62,7 +69,10 @@ iD.ui.FeatureList = function(context) {
                     preset: preset,
                     name: name
                 });
-            });
+
+                if (result.length > 200)
+                    break;
+            }
 
             return result;
         }

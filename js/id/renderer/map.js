@@ -151,6 +151,7 @@ iD.Map = function(context) {
 
     function editOff() {
         surface.selectAll('.layer *').remove();
+        dispatch.drawn(map);
     }
 
     function zoomPan() {
