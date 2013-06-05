@@ -225,7 +225,7 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '1.0.1';
+iD.version = '1.1.0beta1';
 
 (function() {
     var detected = {};
