@@ -227,35 +227,35 @@ window.iD = function () {
 
 iD.version = '1.0.1';
 
-iD.detect = function() {
-    var browser = {};
+(function() {
+    var detected = {};
 
     var ua = navigator.userAgent,
         msie = new RegExp("MSIE ([0-9]{1,}[\\.0-9]{0,})");
 
     if (msie.exec(ua) !== null) {
         var rv = parseFloat(RegExp.$1);
-        browser.support = !(rv && rv < 9);
+        detected.support = !(rv && rv < 9);
     } else {
-        browser.support = true;
+        detected.support = true;
     }
 
     // Added due to incomplete svg style support. See #715
-    browser.opera = ua.indexOf('Opera') >= 0;
+    detected.opera = ua.indexOf('Opera') >= 0;
 
-    browser.locale = navigator.language || navigator.userLanguage;
+    detected.locale = navigator.language || navigator.userLanguage;
 
-    browser.filedrop = (window.FileReader && 'ondrop' in window);
+    detected.filedrop = (window.FileReader && 'ondrop' in window);
 
     function nav(x) {
         return navigator.userAgent.indexOf(x) !== -1;
     }
 
-    if (nav('Win')) browser.os = 'win';
-    else if (nav('Mac')) browser.os = 'mac';
-    else if (nav('X11')) browser.os = 'linux';
-    else if (nav('Linux')) browser.os = 'linux';
-    else browser.os = 'win';
+    if (nav('Win')) detected.os = 'win';
+    else if (nav('Mac')) detected.os = 'mac';
+    else if (nav('X11')) detected.os = 'linux';
+    else if (nav('Linux')) detected.os = 'linux';
+    else detected.os = 'win';
 
-    return browser;
-};
+    iD.detect = function() { return detected; };
+})();
