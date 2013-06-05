@@ -1,3 +1,38 @@
+## 1.1.0beta1
+
+* Performance improvements
+* Added a UI for multilingual name tags
+* "Report a bug" in footer is now an icon
+* New style for radio buttons and check boxes
+* Incomplete relations can no longer be deleted (previously, attempting to do so would generate a JS error)
+* Render bridge casing for bridge=viaduct, etc. (#1500)
+* Only draw intersections for {high,water,rail,aero}way lines (#1471)
+* Improve tag reference loading feedback (#1262)
+* Added relation presets
+* Display relation members and memberships in inspector
+* The sidebar is now persistent, rather than sliding in and out
+* The feature being hovered over is previewed in the sidebar
+* Zoom to feature only if map parameter isn't also specified
+* Don't zoom too far in (>z20) (#1511)
+* Don't zoom too far out (<z16). (#1522)
+* Added the ability to create multipolygons
+* Fix URL template host rotation
+* Fix strokes sometimes being clipped as polygons (#1527)
+* Refine selection behavior when dragging a node:
+  * Preserve the sidebar state (#1401)
+  * Show vertices of selected way (#1478)
+  * Reselect exact previous selection when finished
+* Fix one way marker rendering (#1534)
+* You can now click the preset icon to return to the preset list
+* All preset fields now have placeholders
+* The save dialog now appears in the sidebar
+* Added Address preset (#1524)
+* Shorten "Zoom in" text, don't hide it on narrow screens (#1477)
+* Fix "View on OSM" in sidebar footer (#1473)
+* When deleting a vertex, reselect another vertex if possible (#1457)
+* The sidebar now has a searchable Feature List (#1545)
+* You can add a member to a relation via the "All relations" section of the sidebar
+
 ## 1.0.1
 
 * Test, imagery, translation, and preset updates
