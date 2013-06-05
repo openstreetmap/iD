@@ -73,21 +73,16 @@ iD.ui.FeatureList = function(context) {
             var items = list.selectAll('.feature-list-item')
                 .data(features(), function(d) { return d.entity.id; });
 
-            var enter = items.enter().append('div')
-                .attr('class', 'feature-list-item');
-
-            var wrap = enter.append('div')
-                .attr('class', 'feature-list-button-wrap col12');
-
-            var label = wrap.append('button')
-                .attr('class', 'feature-list-button')
+            var enter = items.enter().append('button')
+                .attr('class', 'feature-list-item')
                 .call(iD.ui.PresetIcon()
                     .geometry(function(d) { return d.geometry })
                     .preset(function(d) { return d.preset; }))
                 .on('mouseover', function(d) { mouseover(d.entity); })
                 .on('mouseout', function(d) { mouseout(); })
-                .on('click', function(d) { click(d.entity); })
-                .append('div')
+                .on('click', function(d) { click(d.entity); });
+
+            var label = enter.append('div')
                 .attr('class', 'label');
 
             label.append('span')

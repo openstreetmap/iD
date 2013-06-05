@@ -737,20 +737,15 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-bottom: 1px solid #ccc;
 }
 
-.feature-list-button-wrap {
-    position: relative;
-    margin-bottom: 10px;
-    height: 60px;
-}
-
-.feature-list-button {
+.feature-list-item {
     width: 100%;
-    height: 100%;
+    height: 60px;
+    margin-bottom: 10px;
     position: relative;
     border: 1px solid #ccc;
 }
 
-.feature-list-button .label {
+.feature-list-item .label {
     background-color: #f6f6f6;
     text-align: left;
     position: absolute;
@@ -770,11 +765,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-radius: 0 3px 3px 0;
 }
 
-.feature-list-button:hover .label {
+.feature-list-item:hover .label {
     background-color: #ececec;
 }
 
-.feature-list-button .entity-name {
+.feature-list-item .entity-name {
     font-weight: normal;
     padding-left: 10px;
 }
