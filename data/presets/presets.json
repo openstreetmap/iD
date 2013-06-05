@@ -4517,6 +4517,20 @@
             "boundary"
         ]
     },
+    "type/boundary/administrative": {
+        "name": "Administrative Boundary",
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "boundary",
+            "boundary": "administrative"
+        },
+        "fields": [
+            "admin_level"
+        ],
+        "icon": "boundary"
+    },
     "type/multipolygon": {
         "geometry": [
             "area",

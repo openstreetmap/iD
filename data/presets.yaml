@@ -1095,6 +1095,9 @@ en:
       type/boundary: 
         name: Boundary
         terms: ""
+      type/boundary/administrative: 
+        name: Administrative Boundary
+        terms: ""
       type/multipolygon: 
         name: Multipolygon
         terms: ""
