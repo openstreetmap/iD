@@ -73,7 +73,7 @@ iD.geo.joinMemberWays = function(members, graph) {
     }
 
     while (members.length) {
-        member = members.pop();
+        member = members.shift();
         current = [member];
         current.locs = locs = resolve(member);
         joined.push(current);

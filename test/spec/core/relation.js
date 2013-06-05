@@ -233,7 +233,7 @@ describe('iD.Relation', function () {
                 d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
                 w2 = iD.Way({nodes: [c.id, d.id, a.id]}),
-                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                r  = iD.Relation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc, a.loc]]]); // TODO: not the only valid ordering
@@ -246,7 +246,7 @@ describe('iD.Relation', function () {
                 d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
                 w2 = iD.Way({nodes: [a.id, d.id, c.id]}),
-                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                r  = iD.Relation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc, a.loc]]]); // TODO: not the only valid ordering
@@ -261,7 +261,7 @@ describe('iD.Relation', function () {
                 f  = iD.Node({loc: [6, 6]}),
                 w1 = iD.Way({nodes: [a.id, b.id, c.id, a.id]}),
                 w2 = iD.Way({nodes: [d.id, e.id, f.id, d.id]}),
-                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                r  = iD.Relation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, e, f, w1, w2, r]);
 
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]], [[d.loc, e.loc, f.loc, d.loc]]]);
@@ -285,7 +285,7 @@ describe('iD.Relation', function () {
                 d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
                 w2 = iD.Way({nodes: [c.id, d.id]}),
-                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                r  = iD.Relation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc]]]);
@@ -298,7 +298,7 @@ describe('iD.Relation', function () {
                 d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [c.id, d.id]}),
                 w2 = iD.Way({nodes: [a.id, b.id, c.id]}),
-                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                r  = iD.Relation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc]]]);
@@ -311,7 +311,7 @@ describe('iD.Relation', function () {
                 d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [a.id, b.id, c.id]}),
                 w2 = iD.Way({nodes: [d.id, c.id]}),
-                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                r  = iD.Relation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc]]]);
@@ -324,7 +324,7 @@ describe('iD.Relation', function () {
                 d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [c.id, d.id]}),
                 w2 = iD.Way({nodes: [c.id, b.id, a.id]}),
-                r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),
+                r  = iD.Relation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]}),
                 g  = iD.Graph([a, b, c, d, w1, w2, r]);
 
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, d.loc]]]);
@@ -357,8 +357,8 @@ describe('iD.Relation', function () {
                 inner2 = iD.Way({nodes: [e.id, f.id, d.id]}),
                 r = iD.Relation({members: [
                     {id: outer.id, type: 'way'},
-                    {id: inner2.id, role: 'inner', type: 'way'},
-                    {id: inner1.id, role: 'inner', type: 'way'}]}),
+                    {id: inner1.id, role: 'inner', type: 'way'},
+                    {id: inner2.id, role: 'inner', type: 'way'}]}),
                 graph = iD.Graph([a, b, c, d, e, f, outer, inner1, inner2, r]);
 
             expect(r.multipolygon(graph)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc]]]);
@@ -379,8 +379,8 @@ describe('iD.Relation', function () {
                 inner2 = iD.Way({nodes: [g.id, h.id, i.id, g.id]}),
                 r = iD.Relation({members: [
                     {id: outer.id, type: 'way'},
-                    {id: inner2.id, role: 'inner', type: 'way'},
-                    {id: inner1.id, role: 'inner', type: 'way'}]}),
+                    {id: inner1.id, role: 'inner', type: 'way'},
+                    {id: inner2.id, role: 'inner', type: 'way'}]}),
                 graph = iD.Graph([a, b, c, d, e, f, g, h, i, outer, inner1, inner2, r]);
 
             expect(r.multipolygon(graph)).to.eql([[[a.loc, b.loc, c.loc, a.loc], [d.loc, e.loc, f.loc, d.loc], [g.loc, h.loc, i.loc, g.loc]]]);
@@ -400,8 +400,8 @@ describe('iD.Relation', function () {
                 outer2 = iD.Way({nodes: [g.id, h.id, i.id, g.id]}),
                 inner = iD.Way({nodes: [d.id, e.id, f.id, d.id]}),
                 r = iD.Relation({members: [
-                    {id: outer2.id, type: 'way'},
                     {id: outer1.id, type: 'way'},
+                    {id: outer2.id, type: 'way'},
                     {id: inner.id, role: 'inner', type: 'way'}]}),
                 graph = iD.Graph([a, b, c, d, e, f, g, h, i, outer1, outer2, inner, r]);
 
