@@ -124,7 +124,7 @@ iD.ui.PresetList = function(context) {
 
         function item(selection) {
             var wrap = selection.append('div')
-                .attr('class', 'preset-list-button-wrap category col12');
+                .attr('class', 'preset-list-button-wrap category');
 
             wrap.append('button')
                 .attr('class', 'preset-list-button')
@@ -137,7 +137,7 @@ iD.ui.PresetList = function(context) {
                 .text(preset.name());
 
             box = selection.append('div')
-                .attr('class', 'subgrid col12')
+                .attr('class', 'subgrid')
                 .style('max-height', '0px');
 
             box.append('div')
@@ -174,7 +174,7 @@ iD.ui.PresetList = function(context) {
     function PresetItem(preset) {
         function item(selection) {
             var wrap = selection.append('div')
-                .attr('class', 'preset-list-button-wrap col12');
+                .attr('class', 'preset-list-button-wrap');
 
             wrap.append('button')
                 .attr('class', 'preset-list-button')

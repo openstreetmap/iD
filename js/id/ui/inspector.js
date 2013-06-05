@@ -44,7 +44,7 @@ iD.ui.Inspector = function(context) {
             .data([0]);
 
         $footer.enter().append('div')
-            .attr('class', 'footer col12');
+            .attr('class', 'footer');
 
         selection.select('.footer')
             .call(iD.ui.ViewOnOSM(context)

@@ -658,6 +658,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     padding: 5px 30px 5px 30px;
     border-top: 1px solid #ccc;
     background-color: #fafafa;
+    width: 100%;
 }
 
 /* Inspector

@@ -42,7 +42,7 @@ iD.ui.RawTagEditor = function(context) {
             .data([0]);
 
         var $enter = $newTag.enter().append('button')
-            .attr('class', 'add-tag col6');
+            .attr('class', 'add-tag');
 
         $enter.append('span')
             .attr('class', 'icon plus light');
@@ -69,7 +69,7 @@ iD.ui.RawTagEditor = function(context) {
             .attr('maxlength', 255);
 
         $enter.append('div')
-            .attr('class', 'input-wrap-position col6')
+            .attr('class', 'input-wrap-position')
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
