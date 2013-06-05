@@ -99,6 +99,13 @@ describe('iD.Relation', function () {
         });
     });
 
+    describe("#indexedMembers", function () {
+        it("returns an array of members extended with indexes", function () {
+            var r = iD.Relation({members: [{id: '1'}, {id: '3'}]});
+            expect(r.indexedMembers()).to.eql([{id: '1', index: 0}, {id: '3', index: 1}]);
+        });
+    });
+
     describe("#addMember", function () {
         it("adds a member at the end of the relation", function () {
             var r = iD.Relation();

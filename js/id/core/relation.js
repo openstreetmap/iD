@@ -31,6 +31,16 @@ _.extend(iD.Relation.prototype, {
         });
     },
 
+    // Return an array of members, each extended with an 'index' property whose value
+    // is the member index.
+    indexedMembers: function() {
+        var result = new Array(this.members.length);
+        for (var i = 0; i < this.members.length; i++) {
+            result[i] = _.extend({}, this.members[i], {index: i})
+        }
+        return result;
+    },
+
     // Return the first member with the given role. A copy of the member object
     // is returned, extended with an 'index' property whose value is the member index.
     memberByRole: function(role) {
