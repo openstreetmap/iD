@@ -39,3 +39,53 @@ describe("iD.geo.simpleMultipolygonOuterMember", function() {
         expect(iD.geo.simpleMultipolygonOuterMember(way, graph)).to.be.undefined;
     });
 });
+
+describe("iD.geo.joinMemberWays", function() {
+    it("returns an array of members with locs properties", function() {
+        var node = iD.Node({loc: [0, 0]}),
+            way  = iD.Way({nodes: [node.id]}),
+            member = {id: way.id, type: 'way'},
+            graph = iD.Graph([node, way]),
+            result = iD.geo.joinMemberWays([member], graph);
+
+        expect(result.length).to.equal(1);
+        expect(result[0].locs.length).to.equal(1);
+        expect(result[0].locs[0]).to.equal(node.loc);
+        expect(result[0].length).to.equal(1);
+        expect(result[0][0]).to.equal(member);
+    });
+
+    it("returns the members in the correct order", function() {
+        // a<===b--->c~~~>d
+        var graph = iD.Graph({
+            'a': iD.Node({id: 'a', loc: [0, 0]}),
+            'b': iD.Node({id: 'b', loc: [0, 0]}),
+            'c': iD.Node({id: 'c', loc: [0, 0]}),
+            'd': iD.Node({id: 'd', loc: [0, 0]}),
+            '=': iD.Way({id: '=', nodes: ['b', 'a']}),
+            '-': iD.Way({id: '-', nodes: ['b', 'c']}),
+            '~': iD.Way({id: '~', nodes: ['c', 'd']}),
+            'r': iD.Relation({id: 'r', members: [
+                {id: '-', type: 'way'},
+                {id: '~', type: 'way'},
+                {id: '=', type: 'way'}
+            ]})
+        });
+
+        var result = iD.geo.joinMemberWays(graph.entity('r').members, graph);
+        expect(_.pluck(result[0], 'id')).to.eql(['=', '-', '~']);
+    });
+
+    it("ignores non-way members", function() {
+        var node = iD.Node({loc: [0, 0]}),
+            member = {id: 'n', type: 'node'},
+            graph = iD.Graph([node]);
+        expect(iD.geo.joinMemberWays([member], graph)).to.eql([]);
+    });
+
+    it("ignores incomplete members", function() {
+        var member = {id: 'w', type: 'way'},
+            graph = iD.Graph();
+        expect(iD.geo.joinMemberWays([member], graph)).to.eql([]);
+    });
+});

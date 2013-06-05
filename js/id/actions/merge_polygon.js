@@ -20,18 +20,16 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
     var action = function(graph) {
         var entities = groupEntities(graph);
 
-        // An array of objects representing all the polygons that are part of the multipolygon.
+        // An array representing all the polygons that are part of the multipolygon.
         //
-        // Each object has two properties:
-        //     ids - an array of ids of entities that are part of that polygon
-        //     locs - an array of the locations forming the polygon
+        // Each element is itself an array of objects with an id property, and has a
+        // locs property which is an array of the locations forming the polygon.
         var polygons = entities.multipolygon.reduce(function(polygons, m) {
-            return polygons.concat(m.joinMemberWays(null, graph));
+            return polygons.concat(iD.geo.joinMemberWays(m.members, graph));
         }, []).concat(entities.closedWay.map(function(d) {
-            return {
-                ids: [d.id],
-                locs: graph.childNodes(d).map(function(n) { return n.loc; })
-            };
+            var member = [{id: d.id}];
+            member.locs = graph.childNodes(d).map(function(n) { return n.loc; });
+            return member;
         }));
 
         // contained is an array of arrays of boolean values,
@@ -65,10 +63,10 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
         function extractUncontained(polygons) {
             polygons.forEach(function(d, i) {
                 if (!isContained(d, i)) {
-                    d.ids.forEach(function(id) {
+                    d.forEach(function(member) {
                         members.push({
                             type: 'way',
-                            id: id,
+                            id: member.id,
                             role: outer ? 'outer' : 'inner'
                         });
                     });

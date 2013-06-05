@@ -318,10 +318,10 @@ describe('iD.Relation', function () {
         });
 
         specify("invalid geometry: unclosed ring consisting of multiple ways, one needing reversal, alternate order", function () {
-            var a  = iD.Node(),
-                b  = iD.Node(),
-                c  = iD.Node(),
-                d  = iD.Node(),
+            var a  = iD.Node({loc: [1, 1]}),
+                b  = iD.Node({loc: [2, 2]}),
+                c  = iD.Node({loc: [3, 3]}),
+                d  = iD.Node({loc: [4, 4]}),
                 w1 = iD.Way({nodes: [c.id, d.id]}),
                 w2 = iD.Way({nodes: [c.id, b.id, a.id]}),
                 r  = iD.Relation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]}),

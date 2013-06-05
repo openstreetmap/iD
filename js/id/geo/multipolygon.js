@@ -48,3 +48,74 @@ iD.geo.simpleMultipolygonOuterMember = function(entity, graph) {
 
     return outerMember && graph.hasEntity(outerMember.id);
 };
+
+// Join an array of relation `members` into sequences of connecting segments.
+//
+// Segments which share identical start/end nodes will, as much as possible,
+// be connected with each other.
+//
+// The return value is a nested array. Each constituent array contains elements
+// of `members` which have been determined to connect. Each consitituent array
+// also has a `locs` property whose value is an ordered array of member coordinates,
+// with appropriate order reversal and start/end coordinate de-duplication.
+//
+// Incomplete members are ignored.
+//
+iD.geo.joinMemberWays = function(members, graph) {
+    var joined = [], member, current, locs, first, last, i, how, what;
+
+    members = members.filter(function(member) {
+        return member.type === 'way' && graph.hasEntity(member.id);
+    });
+
+    function resolve(member) {
+        return _.pluck(graph.childNodes(graph.entity(member.id)), 'loc');
+    }
+
+    while (members.length) {
+        member = members.pop();
+        current = [member];
+        current.locs = locs = resolve(member);
+        joined.push(current);
+
+        while (members.length && _.first(locs) !== _.last(locs)) {
+            first = _.first(locs);
+            last  = _.last(locs);
+
+            for (i = 0; i < members.length; i++) {
+                member = members[i];
+                what = resolve(member);
+
+                if (last === _.first(what)) {
+                    how  = locs.push;
+                    what = what.slice(1);
+                    break;
+                } else if (last === _.last(what)) {
+                    how  = locs.push;
+                    what = what.slice(0, -1).reverse();
+                    break;
+                } else if (first === _.last(what)) {
+                    how  = locs.unshift;
+                    what = what.slice(0, -1);
+                    break;
+                } else if (first === _.first(what)) {
+                    how  = locs.unshift;
+                    what = what.slice(1).reverse();
+                    break;
+                } else {
+                    what = how = null;
+                }
+            }
+
+            if (!what)
+                break; // No more joinable ways.
+
+            how.apply(current, [member]);
+            how.apply(locs, what);
+
+            members.splice(i, 1);
+        }
+    }
+
+    return joined;
+};
