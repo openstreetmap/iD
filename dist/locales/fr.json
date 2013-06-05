@@ -48,6 +48,9 @@
         "cancel_draw": {
             "annotation": "Modification annulée."
         },
+        "change_role": {
+            "annotation": "Rôle d'un membre de la relation modifié."
+        },
         "change_tags": {
             "annotation": "Attributs modifiés."
         },
@@ -84,12 +87,16 @@
                 "area": "Polygone supprimé.",
                 "relation": "Relation supprimée.",
                 "multiple": "{n} objets supprimés."
-            }
+            },
+            "incomplete_relation": "Cet élément ne peut pas être supprimé car il n'a pas été téléchargé dans son intégralité."
+        },
+        "delete_member": {
+            "annotation": "Membre supprimé d'une relation."
         },
         "connect": {
             "annotation": {
                 "point": "Joindre une ligne à un point.",
-                "vertex": "Joindre les noeuds à une ligne.",
+                "vertex": "Joindre les nœuds à une ligne.",
                 "line": "Joindre les chemins ensemble.",
                 "area": "Joindre une ligne à un polygone."
             }
@@ -105,9 +112,9 @@
             "title": "Fusionner",
             "description": "Fusionne ces lignes.",
             "key": "C",
-            "annotation": "Fusionne les {n} ligne.",
+            "annotation": "Fusionne les {n} lignes.",
             "not_eligible": "Ces éléments ne peuvent pas être fusionnés.",
-            "not_adjacent": "Ces lignes ne peuvent pas être fusionnées car elles ne sont pas connectés."
+            "not_adjacent": "Ces lignes ne peuvent pas être fusionnées car elles ne sont pas connectées."
         },
         "move": {
             "title": "Déplacer",
@@ -124,7 +131,7 @@
         },
         "rotate": {
             "title": "Rotation",
-            "description": "Fait pivoter cet objet en fonction de son centroïde.",
+            "description": "Fait pivoter cet objet autour de son centroïde.",
             "key": "R",
             "annotation": {
                 "line": "Pivoter la ligne.",
@@ -156,10 +163,17 @@
     },
     "nothing_to_undo": "Rien à annuler.",
     "nothing_to_redo": "Rien à refaire.",
+    "tooltip_keyhint": "Raccourci:",
     "just_edited": "Vous venez de participer à OpenStreetMap !",
     "browser_notice": "Les navigateurs supportés par cet éditeur sont : Firefox, Chrome, Safari, Opera et Internet Explorer (version 9 et supérieures). Pour éditer la carte, veuillez mettre à jour votre navigateur ou utiliser Potlatch 2.",
     "view_on_osm": "Consulter dans OSM",
-    "zoom_in_edit": "Zoomer pour modifier la carte",
+    "translate": {
+        "translate": "Traduire",
+        "localized_translation_label": "Nom multi-langues",
+        "localized_translation_language": "Choisir une langue",
+        "localized_translation_name": "Nom"
+    },
+    "zoom_in_edit": "Zoomer pour Modifier",
     "logout": "Déconnexion",
     "loading_auth": "Connexion à OpenStreetMap...",
     "report_a_bug": "Signaler un bug",
@@ -171,7 +185,7 @@
     "commit": {
         "title": "Sauvegarder vos modifications",
         "description_placeholder": "Description succinte de vos contributions",
-        "message_label": "Description de l'édition",
+        "message_label": "Description des changements",
         "upload_explanation": "{user} : les modifications apportées seront visibles par l'ensemble des services utilisant les données d'OpenStreetMap.",
         "save": "Sauvegarder",
         "cancel": "Annuler",
@@ -181,8 +195,8 @@
         "created": "Créé"
     },
     "contributors": {
-        "list": "Contributions réalisées par {users}",
-        "truncated_list": "Contributions réalisées par {users} et {count} autres personnes"
+        "list": "Editions de {users}",
+        "truncated_list": "Editions de {users} et de {count} autres"
     },
     "geocoder": {
         "title": "Trouver un emplacement",
@@ -193,19 +207,23 @@
         "title": "Me localiser"
     },
     "inspector": {
-        "no_documentation_combination": "Aucune documentation n'est disponible pour cette combinaison de tag",
+        "no_documentation_combination": "Aucune documentation n'est disponible pour cette combinaison d'étiquettes",
         "no_documentation_key": "Aucune documentation n'est disponible pour cette clé",
-        "show_more": "Plus d'infornations",
+        "show_more": "Plus d'informations",
         "new_tag": "Nouvel attribut",
         "view_on_osm": "Visualiser sur openstreetmap.org",
-        "editing_feature": "Édition de {feature}",
         "all_tags": "Tous les tags",
+        "all_members": "Tous les membres",
+        "all_relations": "Toutes les relations",
+        "role": "Rôle",
         "choose": "Que souhaitez vous ajouter?",
         "results": "{n} résultats pour {search}",
         "reference": "Consulter sur le Wiki d'OpenStreetMap",
-        "back_tooltip": "Changer le type de l'objet ",
+        "back_tooltip": "Changer l'objet",
         "remove": "Supprimer",
-        "search": "Rechercher"
+        "search": "Rechercher",
+        "unknown": "Inconnu",
+        "incomplete": "<non téléchargé>"
     },
     "background": {
         "title": "Fond de carte",
@@ -229,6 +247,7 @@
         "unsaved_changes": "Vous avez des modifications non enregistrées"
     },
     "success": {
+        "edited_osm": "OSM Edité!",
         "facebook": "Partager sur Facebook",
         "tweet": "Tweeter",
         "okay": "OK"
@@ -238,6 +257,7 @@
     },
     "splash": {
         "welcome": "Bienvenue sur ID, l'éditeur en ligne d'OpenStreetMap",
+        "text": "ID est un outil convivial mais puissant pour contribuer à la meilleure carte libre du monde. Ceci est la version {version}. Pour plus d'informations consultez {website} et reportez les bugs sur {github}.",
         "walkthrough": "Commencer le tutorial",
         "start": "Editer"
     },
@@ -248,14 +268,14 @@
     },
     "tag_reference": {
         "description": "Description",
-        "on_wiki": "{tag} sur le wiki.osm.org",
+        "on_wiki": "{tag} sur wiki.osm.org",
         "used_with": "Utilisé avec {type}"
     },
     "validations": {
         "untagged_point": "Point sans attribut",
         "untagged_line": "Ligne sans aucun attribut",
         "untagged_area": "Polygone sans aucun attribut",
-        "many_deletions": "Vous allez supprimer {n} objets. Êtes-vous sûr de vouloir faire-cela ? Ces éléments seront supprimés de la carte visible sur openstreetmap.org.",
+        "many_deletions": "Vous allez supprimer {n} objets. Êtes-vous sûr de vouloir faire cela ? Ces éléments seront supprimés de la carte visible sur openstreetmap.org.",
         "tag_suggests_area": "Cet attribut {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
         "deprecated_tags": "Attributs obsolètes : {tags}"
     },
@@ -270,16 +290,18 @@
     },
     "help": {
         "title": "Aide",
-        "help": "#Aide\n\n Ceci est un éditeur pour [OpenStreetMap](http://www.openstreetmap.org/), la carte du\n monde gratuite et éditable. Vous pouvez l'utiliser pour ajouter ou corriger les données\n dans votre zone, et participer ainsi à la réalisation d'une carte du monde libre de droits.\n\n Les modifications que vous réaliserez seront visibles de tout le monde. Pour commencer\n à éditer, vous devez créer un [compte gratuit sur OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n [iD editor](http://ideditor.com/) est un projet collaboratif dont le [code source est\n disponible sur GitHub](https://github.com/systemed/iD).\n",
-        "editing_saving": "# Édition et sauvegarde\n\nCet éditeur est conçu pour fonctionner en ligne - vous y accédez en ce moment-même au travers d'un site web.\n\n# Sélectionner des éléments\n\nPour sélectionner un élément de la carte, comme un route ou un point d'intérêt, cliquez dessus. Cela mettra en valeur l'élément sélectionné, ouvrira un panneau descriptif et un menu des actions possibles.\n\nPour sélectionner plusieurs éléments ensemble, maintenez la touche 'Shift' (majuscule) appuyée, cliquez et déplacez la souris sur la carte. Tous les éléments situés dans le cadre qui apparait seront sélectionnés.\n\n# Sauvegarder les modifications\n\nLes modifications apportées à la carte sont stockées localement tant qu'elles ne sont pas envoyées vers le serveur. En cas d'erreur, pas d'inquiétudes : vous pouvez annuler une action en cliquant sur 'annuler' et rétablir en cliquant sur 'rétablir'.\n\nCliquez sur 'enregistrer' pour terminer un ensemble de modifications - par exemple, si vous avez complété un secteur de votre ville et souhaitez commencer à travailler sur un autre secteur. Vous aurez la possibilité de récapituler les modifications effectuées, et l'éditeur peut faire d'utiles suggestions ou vous avertir si quoi que ce soit dans les modifications semble poser problème.\n\nSi tout vous semble être correct, vous pouvez indiquer en quelques lignes en quoi consistent les modifications. Cliquez ensuite sur 'enregistrer' pour envoyer les changements sur [OpenStreetMap.org](http://www.openstreetmap.org/), où elles seront visibles par tous, et modifiables et améliorables par d'autres utilisateurs.\n\nSi vous n'avez pas terminé vos modifications et souhaitez vous y remettre plus tard, vous pouvez quitter la fenêtre de l'éditeur et revenir plus tard (avec le même ordinateur et le même navigateur), vous retrouverez votre travail là où vous l'avez quitté.\n",
+        "help": "#Aide\n\n Ceci est un éditeur pour [OpenStreetMap](http://www.openstreetmap.org/), la carte du\n monde gratuite et éditable. Vous pouvez l'utiliser pour ajouter ou corriger les données\n dans votre zone, et participer ainsi à la réalisation d'une carte du monde libre de droits.\n\n Les modifications que vous réaliserez seront visibles par tout le monde. Pour commencer\n à éditer, vous devez créer un [compte gratuit sur OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n [iD editor](http://ideditor.com/) est un projet collaboratif dont le [code source est\n disponible sur GitHub](https://github.com/systemed/iD).\n",
+        "editing_saving": "# Édition et sauvegarde\n\nCet éditeur est conçu pour fonctionner en ligne - vous y accédez en ce moment-même au travers d'un site web.\n\n### Sélectionner des éléments\n\nPour sélectionner un élément de la carte, comme un route ou un point d'intérêt, cliquez dessus. Cela mettra en valeur l'élément sélectionné, ouvrira un panneau descriptif et un menu des actions possibles.\n\nPour sélectionner plusieurs éléments ensemble, maintenez la touche 'Shift' (majuscule) appuyée, cliquez et déplacez la souris sur la carte. Tous les éléments situés dans le cadre qui apparaît seront sélectionnés.\n\n### Sauvegarder les modifications\n\nLes modifications apportées à la carte sont stockées localement tant qu'elles ne sont pas envoyées vers le serveur. En cas d'erreur, pas d'inquiétude : vous pouvez annuler une action en cliquant sur 'annuler' et rétablir en cliquant sur 'rétablir'.\n\nCliquez sur 'enregistrer' pour terminer un ensemble de modifications - par exemple, si vous avez complété un secteur de votre ville et souhaitez commencer à travailler sur un autre secteur. Vous aurez la possibilité de récapituler les modifications effectuées, et l'éditeur peut faire d'utiles suggestions ou vous avertir si quoi que ce soit dans les modifications semble poser problème.\n\nSi tout vous semble être correct, vous pouvez indiquer en quelques lignes en quoi consistent les modifications. Cliquez ensuite sur 'enregistrer' pour envoyer les changements sur [OpenStreetMap.org](http://www.openstreetmap.org/), où elles seront visibles par tous, et modifiables et améliorables par d'autres utilisateurs.\n\nSi vous n'avez pas terminé vos modifications et souhaitez vous y remettre plus tard, vous pouvez quitter la fenêtre de l'éditeur et revenir plus tard (avec le même ordinateur et le même navigateur), vous retrouverez votre travail tel que vous l'aurez laissé.\n",
         "roads": "# Routes\n\nVous pouvez créer, mettre à jour et supprimer des routes à l'aide de l'éditeur. Il peut s'agir de tous types de routes : chemins, autoroutes, pistes cyclables, et plus encore : toute voie régulièrement fréquentée peut être cartographiée.\n\n### Sélection\n\nCliquez sur une route pour la sélectionner. Elle sera alors surlignée et un menu 'outils' apparaîtra sur la carte, ainsi qu'une barre d'état affichant des informations supplémentaires.\n\n### Modification\n\nIl est fréquent que les routes ne soient pas bien alignées avec l'imagerie satellite ou avec les traces GPS. Vous pouvez ajuster et corriger la position des routes.\n\nCliquez d'abord sur la route à modifier. Elle est alors surlignée et des points de contrôle apparaissent qui permettent de corriger sa position. Pour ajouter des points de contrôle, double-cliquez sur un segment de la route sans nœuds.\n\nSi la route est connectée à une autre, mais que la connexion est incorrecte, vous pouvez déplacer un de ses points de contrôle sur la seconde route pour corriger la connexion. Des routes bien connectées sont essentielles pour la carte et pour fournir de bonnes informations d'itinéraire.\n\nVous pouvez également cliquer sur l'outil 'Déplacer' ou appuyer sur le raccourci `M` pour déplacer l'ensemble de la route en une fois, puis cliquer de nouveau une fois pour sauvegarder le déplacement.\n\n### Suppression\n\nSi une route est complètement fausse - c'est-à-dire qu'elle n'apparaît pas sur l'image satellite, et que dans l'idéal, vous avez confirmé qu'elle n'existe pas sur le terrain - vous pouvez la supprimer, ce qui l'enlèvera de la carte. Faites attention lorsque vous supprimez des éléments : comme n'importe quelle autre modification, le résultat sera visible par tout le monde sur la carte. Les photos aériennes sont souvent dépassées et la route est peut-être tout simplement récente.\n\nPour supprimer une route, sélectionnez-la en cliquant dessus, puis cliquez sur l'icône 'Poubelle' ou appuyez sur la touche 'Suppr'.\n\n### Création\n\nVous avez constaté qu'une route de votre connaissance manque à la carte ? Cliquez sur l'icône 'Ligne' en haut à gauche de l'éditeur ou appuyez sur le raccourci `2` pour dessiner une route. \n\nPour commencer le dessin, cliquez sur l'endroit où commence la route. Si elle commence à l'embranchement d'une autre route, commencez le dessin en cliquant à l'endroit de la connexion.\n\nCliquez ensuite régulièrement le long de la route pour ajouter des points, en utilisant l'imagerie satellite comme référence. Si la route que vous dessinez croise une autre route, connectez les deux en cliquant à l'endroit de l'intersection. Lorsque vous avez terminé le dessin, double-cliquez ou appuyez sur 'Entrée'.\n",
-        "gps": "# GPS\n\nLes traces GPS sont les données les plus sûres pour OpenStreetMap. Cet\néditeur supporte les traces au format `.gpx`. Vous pouvez enregistrer ce\ntype de traces avec un grand nombre d'applications pour smartphones\nainsi qu'avec certains GPS de randonnées.\n\nPour plus d'informations sur la manière de relever des traces GPS, vous\npouvez consulter le guide [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPour utiliser un relevé GPX, il vous suffit de glisser-déposer le fichier GPX\ndirectement sur la carte. S'il est reconnu, il sera ajouté sur la carte sous\nla forme d'une ligne vert clair. Cliquez sur le menu \"Configuration du fond\nde carte\" à gauche pour activer et désactiver l'affichage de la trace, ou\nencore pour centrer le zoom sur la trace.\n\nLes traces GPX ne sont pas directement enregistrée dans OpenStreetMap.\nUne fois visible, il vous incombe de décalquer les routes empruntées à\npartir de ces traces.\n",
-        "imagery": "# Fond de carte\n\nLes photos aériennes sont une source importantes pour cartographier. Une\ncompilation de photos prises d'avion, imageries satellites, et autres sources\nlibre d'utilisation sont disponibles dans l'éditeur dans le menu \"Configuration\ndu fond de carte\" à gauche.\n\nPar défaut, l'imagerie aérienne de [Bing Maps](http://www.bing.com/maps/)\nest utilisée dans l'éditeur, mais lorsque vous zoomez sur la carte, d'autres sources\nsont parfois disponibles dans certaines zones. Certains pays tels que la France, les\nEtats-Unis ou le Danemark disposent d'image de très haute qualité sur certaines\nzones.\n\nCertaines images sont parfois décalées par rapport aux données, notamment\nà cause d'un mauvais calibrage. Si vous voyez de nombreux éléments tous décalés\npar rapport au fond de carte, ne déplacez pas immédiatement ces éléments. A la\nplace, vous pouvez ajuster le fond de carte afin qu'il soit aligné aux données en\ncliquant sur \"Corriger l'alignement\" en bas de l'interface de configuration du fond\nde carte.\n",
-        "addresses": "# Adresses\n\nLes adresses sont des informations très utiles.\n\nDans OpenStreetMap, les adresses sont enregistrées comme attributs des\nbâtiments le long des routes.\n\nVous pouvez ajouter une adresse sur les éléments modélisés avec un polygone\net sur ceux modélisés avec des points. La meilleure source de données afin\nde cartographier les adresses reste le relevé sur le terrain, car la copie de\ndonnées à partir de contenu non libre de droits est interdite.\n",
-        "inspector": "# Utilisation de l'inspecteur\n\nL'inspecteur est l'élément de l'interface utilisateur qui apparaît à droite de la page quand un élément est sélectionné. Il permet de mettre à jour les détails le concernant.\n\n### Sélectionner un type d'élément\n\nAprès ajout d'un point, d'une ligne ou d'un polygone, vous pouvez indiquer de quel type d'élément il s'agit : une route principale ou résidentielle, un supermarché, un café... L'inspecteur affiche des boutons pour les éléments les plus communs, et vous pouvez trouver les autres à l'aide du formulaire de recherche.\n\nCliquez sur 'i' dans le coin en bas à droite des boutons pour en savoir plus sur l'élément dont il s'agit. Cliquez sur le bouton pour choisir cet élément.\n\n### Utiliser les formulaires et les tags\n\nAprès avoir choisi le type d'élément, ou lorsque vous sélectionnez un élément dont la nature est déjà indiquée, l'inspecteur affiche des champs comprenant des détails sur l'élément concerné - adresse, nom, etc.\n\nEn-dessous des champs, vous pouvez cliquer sur les icônes pour ajouter des détails supplémentaires, comme des informations issues de [Wikipedia](http://www.wikipedia.org/), des renseignements sur l'accès handicapé, ou plus encore.\n\nEn bas de l'inspecteur, cliquez sur 'attributs supplémentaires' pour ajouter des attributs arbitraires à l'élément. [Taginfo](http://taginfo.openstreetmap.org/) est une excellente ressource pour en savoir plus sur les combinaisons d'attributs les plus fréquentes.\n\nLes changements que vous effectuez dans l'inspecteur sont immédiatement visibles sur la carte. Vous pouvez les annulez dès que vous le souhaitez en cliquant sur 'annuler'. \n\n### Fermer l'inspecteur\n\nPour fermer l'inspecteur, vous pouvez cliquer sur le bouton 'fermer' en haut à droite, appuyer sur Échap ou encore cliquer sur la carte.\n"
+        "gps": "# GPS\n\nLes traces GPS sont les données les plus sûres pour OpenStreetMap. Cet\néditeur supporte les traces au format `.gpx`. Vous pouvez enregistrer ce\ntype de traces avec un grand nombre d'applications pour smartphones\nainsi qu'avec certains GPS de randonnées.\n\nPour plus d'informations sur la manière de relever des traces GPS, vous\npouvez consulter le guide [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPour utiliser un relevé GPX, il vous suffit de glisser-déposer le fichier GPX\ndirectement sur la carte. S'il est reconnu, il sera ajouté sur la carte sous\nla forme d'une ligne vert clair. Cliquez sur le menu \"Configuration du fond\nde carte\" à gauche pour activer et désactiver l'affichage de la trace, ou\nencore pour centrer le zoom sur la trace.\n\nLes traces GPX ne sont pas directement enregistrées dans OpenStreetMap.\nUne fois visibles, il vous incombe de décalquer les routes empruntées à\npartir de ces traces.\n",
+        "imagery": "# Fond de carte\n\nLes photos aériennes sont une source importante pour cartographier. Une\ncompilation de photos prises d'avion, imageries satellites, et autres sources\nlibres d'utilisation sont disponibles dans l'éditeur dans le menu \"Configuration\ndu fond de carte\" à gauche.\n\nPar défaut, l'imagerie aérienne de [Bing Maps](http://www.bing.com/maps/)\nest utilisée dans l'éditeur, mais lorsque vous zoomez sur la carte, d'autres sources\nsont parfois disponibles dans certaines zones. Certains pays tels que la France, les\nÉtats-Unis ou le Danemark disposent d'image de très haute qualité sur certaines\nzones.\n\nCertaines images sont parfois décalées par rapport aux données, notamment\nà cause d'un mauvais calibrage. Si vous voyez de nombreux éléments tous décalés\npar rapport au fond de carte, ne déplacez pas immédiatement ces éléments. À la\nplace, vous pouvez ajuster le fond de carte afin qu'il soit aligné aux données en\ncliquant sur \"Corriger l'alignement\" en bas de l'interface de configuration du fond\nde carte.\n",
+        "addresses": "# Adresses\n\nLes adresses sont des informations très utiles.\n\nDans OpenStreetMap, les adresses sont enregistrées comme attributs des\nbâtiments le long des routes.\n\nVous pouvez ajouter une adresse sur les éléments modélisés avec un polygone\net sur ceux modélisés avec des points. La meilleure source de données afin\nde cartographier les adresses reste le relevé sur le terrain, car la copie de\ndonnées à partir de contenus non libres de droits est interdite.\n",
+        "inspector": "# Utilisation de l'inspecteur\n\nL'inspecteur est l'élément de l'interface utilisateur qui apparaît à droite de la page quand un élément est sélectionné. Il permet de mettre à jour les détails le concernant.\n\n### Sélectionner un type d'élément\n\nAprès ajout d'un point, d'une ligne ou d'un polygone, vous pouvez indiquer de quel type d'élément il s'agit : une route principale ou résidentielle, un supermarché, un café… L'inspecteur affiche des boutons pour les éléments les plus communs, et vous pouvez trouver les autres à l'aide du formulaire de recherche.\n\nCliquez sur 'i' dans le coin en bas à droite des boutons pour en savoir plus sur l'élément dont il s'agit. Cliquez sur le bouton pour choisir cet élément.\n\n### Utiliser les formulaires et les tags\n\nAprès avoir choisi le type d'élément, ou lorsque vous sélectionnez un élément dont la nature est déjà indiquée, l'inspecteur affiche des champs comprenant des détails sur l'élément concerné — adresse, nom, etc.\n\nEn-dessous des champs, vous pouvez cliquer sur les icônes pour ajouter des détails supplémentaires, comme des informations issues de [Wikipedia](http://www.wikipedia.org/), des renseignements sur l'accès pour les personnes handicapées, ou plus encore.\n\nEn bas de l'inspecteur, cliquez sur 'attributs supplémentaires' pour ajouter des attributs arbitraires à l'élément. [Taginfo](http://taginfo.openstreetmap.org/) est une excellente ressource pour en savoir plus sur les combinaisons d'attributs les plus fréquentes.\n\nLes changements que vous effectuez dans l'inspecteur sont immédiatement visibles sur la carte. Vous pouvez les annulez dès que vous le souhaitez en cliquant sur 'annuler'. \n\n### Fermer l'inspecteur\n\nPour fermer l'inspecteur, vous pouvez cliquer sur le bouton 'fermer' en haut à droite, appuyer sur Échap ou encore cliquer sur la carte.\n",
+        "buildings": "# Bâtiments\n\nOpenStreetMap est la plus grande base de données au monde sur le bâti.\nVous pouvez améliorer cette base de données.\n\n### Sélection\n\nVous pouvez sélectionner un bâtiment en cliquant sur son contour. Le bâtiment\nsera ainsi surligné, une boîte à outils apparaîtra, ainsi qu'un panneau contenant\nles informations sur le bâtiment.\n\n### Correction\n\nParfois, un bâtiment est mal placé ou possède des informations incorrectes.\n\nPour déplacer un bâtiment dans son intégralité, sélectionnez-le, puis cliquez\nsur l'outil \"Déplacer\". Déplacez ensuite la souris, puis cliquez lorsque le\nbâtiment est placé correctement.\n\nPour corriger la forme d'un bâtiment, glissez-déposez les points du contour\ndu bâtiment.\n\n### Création\n\nL'une des problématiques concernant les bâtiments est qu'ils peuvent être\nreprésentés à la fois par un point ou par un polygone. La règle d'or est de\n_dessiner les bâtiments avec des polygone dès que c'est possible_, et de\ncartographier les entreprises, équipements, adresses, et tout ce qui ne\ndépend pas directement de la construction comme des points placés\nau sein de la forme du bâtiment.\n\nDessinez un bâtiment en cliquant sur le bouton \"Polygone\" en haut à gauche\nde l'interface, ajoutez des points en cliquant sur la carte et terminez la forme\nen cliquant sur le premier point, ou en appuyant sur la touche \"Entrée\" de\nvotre clavier.\n\n### Suppression\n\nSi un bâtiment dessiné est inexistant (par exemple s'il n'existe pas sur l'image\nsatellite et que vous avez vérifié sur place que ce n'était pas une construction\nrécente), vous pouvez le supprimer. Attention avant de supprimer un élément ;\ntout le monde peut constater que vous l'avez supprimé, et il peut s'agir d'un\nélément plus récent que l'image satellite.\n\nVous pouvez supprimer un bâtiment en le sélectionnant, puis en cliquant sur\nl'icône représentant une poubelle, ou en appuyant sur la touche \"Suppr\" de\nvotre clavier.\n"
     },
     "intro": {
         "navigation": {
+            "title": "Navigation",
             "drag": "La vue principale montre les données OpenStreetMap par dessus un fond de carte. Vous pouvez naviguer au sein de la vue en faisant du cliquer-glisser, ou avec les barres de navigation, comme n'importe quelle carte sur Internet. **Faites glisser la carte !**",
             "select": "Les éléments cartographiques sont de trois types : les points, les lignes et les polygones. Chaque élément peut être sélectionné en cliquant dessus. **Cliquez sur le point pour le sélectionner.**",
             "header": "L'entête nous montre le type d'élément.",
@@ -289,6 +311,7 @@
             "title": "Points",
             "add": "Des points peuvent être utilisés pour représenter des éléments comme des magasins, restaurants ou monuments. Ils indiquent une position précise et décrivent ce qu'il y a à cet endroit. **Cliquez sur le bouton \"Point\" pour ajouter un point.**",
             "place": "Le point peut être placé en cliquant sur la carte. **Placer le point sur le dessus du bâtiment.**",
+            "search": "De nombreux éléments peuvent être représentés par des points. Le point que vous venez d'ajouter est un café (Cafe). **Cherchez \"Cafe\".**",
             "choose": "**Choisi Café dans la liste.**",
             "describe": "Le point est désormais marqué comme étant un café. Nous pouvons ajouter davantage d'informations grâce à l'éditeur d'élément. **Ajoutez un nom au café.**",
             "close": "L'éditeur d'éléments peut être fermé en cliquant sur le bouton de fermeture. **Fermez l'éditeur d'éléments.**",
@@ -298,6 +321,8 @@
             "delete": "Le menu autour du point contient des opérations que vous pouvez lui appliquer, notamment sa suppression. **Supprimez le point.**"
         },
         "areas": {
+            "title": "Polygone",
+            "add": "Les polygones permettent de détailler plus précisément des éléments cartographiques. Ils permettent de renseigner les limites géographiques d'un élément. Les polygones peuvent être utilisés pour décrire les mêmes éléments que les points, et sont souvent à privilégier. **Cliquez sur le bouton \"Polygone\" pour ajouter un nouveau polygone.**",
             "corner": "Les polygones sont dessinés en plaçant des nœuds l'un après l'autre. **Ajoutez un premier nœud sur un coin de l'aire de jeu.**",
             "place": "Dessinez le polygone en ajoutant des nœuds. Terminez le polygone en cliquant sur le nœud de départ. **Dessinez un polygone pour l'aire de jeu.**",
             "search": "**Recherchez \"Jeux pour enfants\".**",
@@ -316,7 +341,8 @@
             "restart": "La route nécessite d'être interconnectée avec Flower Street."
         },
         "startediting": {
-            "help": "Plus d'informations et ce tutorial sont disponibles ici.",
+            "title": "Commencer à éditer",
+            "help": "Ce tutoriel et d'autres informations sont disponibles ici.",
             "save": "N'oubliez pas de sauver régulièrement vos modifications !",
             "start": "Commencer à cartographier !"
         }
@@ -335,6 +361,9 @@
             "category-road": {
                 "name": "Route"
             },
+            "category-route": {
+                "name": "Route"
+            },
             "category-water": {
                 "name": "Eau"
             }
@@ -342,6 +371,7 @@
         "fields": {
             "access": {
                 "label": "Accès",
+                "placeholder": "Inconnu",
                 "types": {
                     "access": "Général",
                     "foot": "À pied",
@@ -414,7 +444,8 @@
                 "label": "Bâtiment"
             },
             "capacity": {
-                "label": "Capacité"
+                "label": "Capacité",
+                "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
                 "label": "Sens"
@@ -447,6 +478,9 @@
             "denotation": {
                 "label": "Signification"
             },
+            "description": {
+                "label": "Description"
+            },
             "elevation": {
                 "label": "Altitude"
             },
@@ -457,10 +491,14 @@
                 "label": "Type"
             },
             "fax": {
-                "label": "Fax"
+                "label": "Fax",
+                "placeholder": "+33 1 23 45 67 89"
             },
             "fee": {
                 "label": "Prix"
+            },
+            "fixme": {
+                "label": "Corrigez-Moi"
             },
             "highway": {
                 "label": "Type"
@@ -489,7 +527,8 @@
                 "label": "Type"
             },
             "lanes": {
-                "label": "Lignes"
+                "label": "Lignes",
+                "placeholder": "1, 2, 3..."
             },
             "layer": {
                 "label": "Couche"
@@ -498,7 +537,8 @@
                 "label": "Type"
             },
             "levels": {
-                "label": "Niveaux"
+                "label": "Niveaux",
+                "placeholder": "2, 4, 6..."
             },
             "location": {
                 "label": "Lieu"
@@ -507,10 +547,12 @@
                 "label": "Type"
             },
             "maxspeed": {
-                "label": "Vitesse maximale autorisée"
+                "label": "Vitesse maximale autorisée",
+                "placeholder": "50, 70, 90..."
             },
             "name": {
-                "label": "Nom"
+                "label": "Nom",
+                "placeholder": "Nom courant (si existant)"
             },
             "natural": {
                 "label": "Nature"
@@ -543,7 +585,8 @@
                 "label": "Type"
             },
             "phone": {
-                "label": "Téléphone "
+                "label": "Téléphone ",
+                "placeholder": "+33 1 23 45 67 89"
             },
             "place": {
                 "label": "Type"
@@ -557,6 +600,9 @@
             "ref": {
                 "label": "Référence"
             },
+            "relation": {
+                "label": "Type"
+            },
             "religion": {
                 "label": "Religion",
                 "options": {
@@ -568,6 +614,9 @@
                     "shinto": "Shintoïste",
                     "taoist": "Taoïste"
                 }
+            },
+            "route": {
+                "label": "Type"
             },
             "sac_scale": {
                 "label": "Difficulté du chemin"
@@ -589,6 +638,7 @@
             },
             "structure": {
                 "label": "Structure",
+                "placeholder": "Inconnu",
                 "options": {
                     "bridge": "Pont",
                     "tunnel": "Tunnel",
@@ -621,7 +671,8 @@
                 "label": "Type"
             },
             "website": {
-                "label": "Site Internet"
+                "label": "Site Internet",
+                "placeholder": "http://example.com"
             },
             "wetland": {
                 "label": "Type"
@@ -637,6 +688,9 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Adresse"
+            },
             "aeroway": {
                 "name": "Aviation"
             },
@@ -755,7 +809,7 @@
                 "terms": "église, chapelle, mosquée, synagogue, espace prière, cathédrale, sanctuaire, temple"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Cynagogue",
+                "name": "Synagogue",
                 "terms": "juif, synagogue"
             },
             "amenity/place_of_worship/muslim": {
@@ -808,6 +862,9 @@
             "amenity/waste_basket": {
                 "name": "Corbeille",
                 "terms": "poubelle"
+            },
+            "area": {
+                "name": "Polygone"
             },
             "barrier": {
                 "name": "Barrière"
@@ -1109,7 +1166,8 @@
                 "name": "Terrain de volleyball"
             },
             "leisure/playground": {
-                "name": "Jeux pour enfants"
+                "name": "Jeux pour enfants",
+                "terms": "cage à poule, aire de jeu"
             },
             "leisure/slipway": {
                 "name": "Plan incliné"
@@ -1119,6 +1177,9 @@
             },
             "leisure/swimming_pool": {
                 "name": "Piscine"
+            },
+            "line": {
+                "name": "Ligne"
             },
             "man_made": {
                 "name": "Édifices"
@@ -1218,12 +1279,6 @@
             "office": {
                 "name": "Bureau"
             },
-            "other": {
-                "name": "Autre"
-            },
-            "other_area": {
-                "name": "Autre"
-            },
             "place": {
                 "name": "Toponymie"
             },
@@ -1248,6 +1303,9 @@
             },
             "place/village": {
                 "name": "Village"
+            },
+            "point": {
+                "name": "Point"
             },
             "power": {
                 "name": "Énergie"
@@ -1304,6 +1362,12 @@
             "railway/tram": {
                 "name": "Tramway",
                 "terms": "Autopartage"
+            },
+            "relation": {
+                "name": "Relation"
+            },
+            "route/ferry": {
+                "name": "Trajet de Ferry"
             },
             "shop": {
                 "name": "Magasin"
@@ -1515,6 +1579,51 @@
             },
             "tourism/zoo": {
                 "name": "Zoo"
+            },
+            "type/boundary": {
+                "name": "Frontière"
+            },
+            "type/multipolygon": {
+                "name": "Multi-polygone"
+            },
+            "type/restriction": {
+                "name": "Restriction"
+            },
+            "type/route": {
+                "name": "Route"
+            },
+            "type/route/bicycle": {
+                "name": "Trajet Cyclable"
+            },
+            "type/route/bus": {
+                "name": "Trajet de Bus"
+            },
+            "type/route/detour": {
+                "name": "Trajet de Contournement"
+            },
+            "type/route/ferry": {
+                "name": "Trajet de Ferry"
+            },
+            "type/route/foot": {
+                "name": "Trajet Pédestre"
+            },
+            "type/route/pipeline": {
+                "name": "Trajet de Pipeline"
+            },
+            "type/route/power": {
+                "name": "Trajet Electrique"
+            },
+            "type/route/road": {
+                "name": "Trajet Routier"
+            },
+            "type/route/train": {
+                "name": "Trajet Ferroviaire"
+            },
+            "type/route/tram": {
+                "name": "Trajet de Tramway"
+            },
+            "vertex": {
+                "name": "Autre"
             },
             "waterway": {
                 "name": "Eau"

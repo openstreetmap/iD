@@ -48,6 +48,9 @@
         "cancel_draw": {
             "annotation": "Додавання скасовано."
         },
+        "change_role": {
+            "annotation": "Змінено роль члена зв’язку."
+        },
         "change_tags": {
             "annotation": "Теґи змінені."
         },
@@ -84,7 +87,11 @@
                 "area": "Вилучено полігон.",
                 "relation": "Вилучено зв’язок.",
                 "multiple": "Вилучено {n} об’єктів."
-            }
+            },
+            "incomplete_relation": "Цей об’єкт неможливо вилучити, бо він не повністю завантажений."
+        },
+        "delete_member": {
+            "annotation": "Вилучено члена зв’язку."
         },
         "connect": {
             "annotation": {
@@ -156,10 +163,17 @@
     },
     "nothing_to_undo": "Скасовувати нічого.",
     "nothing_to_redo": "Повертати нічого.",
+    "tooltip_keyhint": "Клавішна клмбінація:",
     "just_edited": "Ви щойно відредагували мапу OpenStreetMap!",
     "browser_notice": "Цей редактор працює в оглядачах Firefox, Chrome, Safari, Opera і Internet Explorer версії 9 і вище.  Будь ласка, оновіть свій оглядач або скористайтеся редактором Potlatch 2.",
     "view_on_osm": "Подивитись в ОСМ",
-    "zoom_in_edit": "наблизьтесь, щоб редагувати",
+    "translate": {
+        "translate": "Перекласти",
+        "localized_translation_label": "Багатомовна назва",
+        "localized_translation_language": "Обрати мову",
+        "localized_translation_name": "Назва"
+    },
+    "zoom_in_edit": "Наблизтесь, щоб редагувати",
     "logout": "вийти",
     "loading_auth": "З’єднання з OpenStreetMap…",
     "report_a_bug": "повідомити про помилку",
@@ -181,8 +195,8 @@
         "created": "Створено"
     },
     "contributors": {
-        "list": "Тут мапу редагували: {users}",
-        "truncated_list": "Тут мапу редагували {users} та ще {count} інших"
+        "list": "Змінено: {users}",
+        "truncated_list": "Змінено {users} та {count} іншими"
     },
     "geocoder": {
         "title": "Знайти місце",
@@ -198,14 +212,18 @@
         "show_more": "Ще",
         "new_tag": "Новий теґ",
         "view_on_osm": "Подивитись на openstreetmap.org",
-        "editing_feature": "{feature}",
         "all_tags": "Всі теґи",
+        "all_members": "Всі члени",
+        "all_relations": "Всі зв’язки",
+        "role": "Роль",
         "choose": "Виберіть тип об’єкту",
         "results": "знайдено {n} об’єктів на запит {search}",
         "reference": "Подивитись на OpenStreetMap Wiki",
-        "back_tooltip": "Змінити тип об’єкта",
+        "back_tooltip": "Змінити об’єкт",
         "remove": "Вилучити",
-        "search": "Пошук"
+        "search": "Пошук",
+        "unknown": "Невідомо",
+        "incomplete": "<не завантажено>"
     },
     "background": {
         "title": "Фон",
@@ -343,6 +361,9 @@
             "category-road": {
                 "name": "Дорога"
             },
+            "category-route": {
+                "name": "Маршрут"
+            },
             "category-water": {
                 "name": "Вода"
             }
@@ -350,6 +371,7 @@
         "fields": {
             "access": {
                 "label": "Доступ",
+                "placeholder": "Невідомо",
                 "types": {
                     "access": "Загальний",
                     "foot": "Пішки",
@@ -422,7 +444,8 @@
                 "label": "Будинок"
             },
             "capacity": {
-                "label": "Міськість"
+                "label": "Міськість",
+                "placeholder": "50, 100, 200…"
             },
             "cardinal_direction": {
                 "label": "Напрямок"
@@ -455,6 +478,9 @@
             "denotation": {
                 "label": "Позначення"
             },
+            "description": {
+                "label": "Опис"
+            },
             "elevation": {
                 "label": "Висота"
             },
@@ -465,7 +491,8 @@
                 "label": "Тип"
             },
             "fax": {
-                "label": "Факс"
+                "label": "Факс",
+                "placeholder": "+31 42 123 4567"
             },
             "fee": {
                 "label": "Плата"
@@ -497,7 +524,8 @@
                 "label": "Тип"
             },
             "lanes": {
-                "label": "Смуги"
+                "label": "Смуги",
+                "placeholder": "1, 2, 3…"
             },
             "layer": {
                 "label": "Шар"
@@ -506,7 +534,8 @@
                 "label": "Тип"
             },
             "levels": {
-                "label": "Поверхи"
+                "label": "Поверхи",
+                "placeholder": "2, 4, 6…"
             },
             "location": {
                 "label": "Місцезнаходження"
@@ -515,10 +544,12 @@
                 "label": "Тип"
             },
             "maxspeed": {
-                "label": "Обмеження швидкості"
+                "label": "Обмеження швидкості",
+                "placeholder": "40, 50, 60…"
             },
             "name": {
-                "label": "Назва"
+                "label": "Назва",
+                "placeholder": "Загальна назва (якщо є)"
             },
             "natural": {
                 "label": "Природа"
@@ -551,7 +582,8 @@
                 "label": "Тип"
             },
             "phone": {
-                "label": "Телефон"
+                "label": "Телефон",
+                "placeholder": "+31 42 123 4567"
             },
             "place": {
                 "label": "Тип"
@@ -565,6 +597,9 @@
             "ref": {
                 "label": "Посилання"
             },
+            "relation": {
+                "label": "Тип"
+            },
             "religion": {
                 "label": "Релігія",
                 "options": {
@@ -577,6 +612,9 @@
                     "taoist": "Даосизм"
                 }
             },
+            "route": {
+                "label": "Тип"
+            },
             "sac_scale": {
                 "label": "Складність маршруту"
             },
@@ -584,7 +622,7 @@
                 "label": "Тип"
             },
             "shelter": {
-                "label": "Притулок"
+                "label": "Навіс"
             },
             "shop": {
                 "label": "Тип"
@@ -597,6 +635,7 @@
             },
             "structure": {
                 "label": "Споруда",
+                "placeholder": "Невідомо",
                 "options": {
                     "bridge": "Міст",
                     "tunnel": "Тунель",
@@ -629,7 +668,8 @@
                 "label": "Тип"
             },
             "website": {
-                "label": "Вебсайт"
+                "label": "Вебсайт",
+                "placeholder": "http://example.com/"
             },
             "wetland": {
                 "label": "Тип"
@@ -645,6 +685,9 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Адреса"
+            },
             "aeroway": {
                 "name": "Аеропорт"
             },
@@ -804,7 +847,11 @@
                 "terms": "коледж"
             },
             "amenity/waste_basket": {
-                "name": "Бак для сміття"
+                "name": "Бак для сміття",
+                "terms": "контейнер для сміття,відро для сміття,урна,сміттєвий бак"
+            },
+            "area": {
+                "name": "Полігон"
             },
             "barrier": {
                 "name": "Перепони"
@@ -888,7 +935,8 @@
                 "name": "Автобусна зупинка"
             },
             "highway/crossing": {
-                "name": "Прехресття"
+                "name": "Прехресття",
+                "terms": "пішохідний перехід,зебра"
             },
             "highway/cycleway": {
                 "name": "Вело-доріжка"
@@ -909,7 +957,8 @@
                 "name": "З’єднання з автомагістраллю"
             },
             "highway/motorway_link": {
-                "name": "З’їзд з/на автомагістраль"
+                "name": "З’їзд з/на автомагістраль",
+                "terms": "естакада,виїзд з,виїзд на, з’їзд з,з’їзд на"
             },
             "highway/path": {
                 "name": "Тропа"
@@ -921,7 +970,8 @@
                 "name": "Головна дорога"
             },
             "highway/primary_link": {
-                "name": "З’їзд з/на головну дорогу"
+                "name": "З’їзд з/на головну дорогу",
+                "terms": "естакада,виїзд з,виїзд на, з’їзд з,з’їзд на"
             },
             "highway/residential": {
                 "name": "Дорога місцевого значення"
@@ -933,7 +983,8 @@
                 "name": "Другорядна дорога"
             },
             "highway/secondary_link": {
-                "name": "З’їзд з/на другорядну дорогу"
+                "name": "З’їзд з/на другорядну дорогу",
+                "terms": "естакада,виїзд з,виїзд на, з’їзд з,з’їзд на"
             },
             "highway/service": {
                 "name": "Службовий проїзд"
@@ -954,13 +1005,15 @@
                 "name": "Проїзд по стоянці"
             },
             "highway/steps": {
-                "name": "Сходи"
+                "name": "Сходи",
+                "terms": "сходи,драбина,сходова клітка"
             },
             "highway/tertiary": {
                 "name": "Третинна дорога"
             },
             "highway/tertiary_link": {
-                "name": "З’їзд з/на третинну дорогу"
+                "name": "З’їзд з/на третинну дорогу",
+                "terms": "естакада,виїзд з,виїзд на, з’їзд з,з’їзд на"
             },
             "highway/track": {
                 "name": "Грунтовка"
@@ -972,7 +1025,8 @@
                 "name": "Шосе"
             },
             "highway/trunk_link": {
-                "name": "З’їзд з/на шосе"
+                "name": "З’їзд з/на шосе",
+                "terms": "естакада,виїзд з,виїзд на, з’їзд з,з’їзд на"
             },
             "highway/turning_circle": {
                 "name": "Місце для розвороту"
@@ -1106,6 +1160,9 @@
             "leisure/swimming_pool": {
                 "name": "Басейн"
             },
+            "line": {
+                "name": "Лінія"
+            },
             "man_made": {
                 "name": "Штучні споруди"
             },
@@ -1183,10 +1240,12 @@
                 "name": "Вода"
             },
             "natural/water/lake": {
-                "name": "Озеро"
+                "name": "Озеро",
+                "terms": "озерце,озеро,ставок"
             },
             "natural/water/pond": {
-                "name": "Ставок"
+                "name": "Ставок",
+                "terms": "озерце,загата,гірське озеро,калюжа,ставок"
             },
             "natural/water/reservoir": {
                 "name": "Резервуар"
@@ -1200,12 +1259,6 @@
             "office": {
                 "name": "Офіс"
             },
-            "other": {
-                "name": "Інше"
-            },
-            "other_area": {
-                "name": "Інше"
-            },
             "place": {
                 "name": "Місцевість"
             },
@@ -1216,7 +1269,8 @@
                 "name": "Хутір"
             },
             "place/island": {
-                "name": "Острів"
+                "name": "Острів",
+                "terms": "архіпелаг,атол,мис,бар’єр,мілина,острів,острівець,риф,коса"
             },
             "place/isolated_dwelling": {
                 "name": "Відокремлене житло"
@@ -1229,6 +1283,9 @@
             },
             "place/village": {
                 "name": "Село"
+            },
+            "point": {
+                "name": "Точка"
             },
             "power": {
                 "name": "Енергетика"
@@ -1284,6 +1341,12 @@
             "railway/tram": {
                 "name": "Трамвай",
                 "terms": "трамвай"
+            },
+            "relation": {
+                "name": "Зв’язок"
+            },
+            "route/ferry": {
+                "name": "Паром"
             },
             "shop": {
                 "name": "Магазини/Майстерні"
@@ -1492,6 +1555,51 @@
             },
             "tourism/zoo": {
                 "name": "Зоопарк"
+            },
+            "type/boundary": {
+                "name": "Кордон"
+            },
+            "type/multipolygon": {
+                "name": "Мультиполігон"
+            },
+            "type/restriction": {
+                "name": "Обмеження"
+            },
+            "type/route": {
+                "name": "Маршрут"
+            },
+            "type/route/bicycle": {
+                "name": "Велосипедний маршрут"
+            },
+            "type/route/bus": {
+                "name": "Автобусний маршрут"
+            },
+            "type/route/detour": {
+                "name": "Об’їзд"
+            },
+            "type/route/ferry": {
+                "name": "Паром"
+            },
+            "type/route/foot": {
+                "name": "Пішохідний маршрут"
+            },
+            "type/route/pipeline": {
+                "name": "Трубопровід"
+            },
+            "type/route/power": {
+                "name": "Лінія електропередач"
+            },
+            "type/route/road": {
+                "name": "Автомобільний маршрут"
+            },
+            "type/route/train": {
+                "name": "Залізнийчни маршрут"
+            },
+            "type/route/tram": {
+                "name": "Трамвайний маршрут"
+            },
+            "vertex": {
+                "name": "Інше"
             },
             "waterway": {
                 "name": "Водний шлях"

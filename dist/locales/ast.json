@@ -72,7 +72,8 @@
                 "area": "Dresaniciáu un área.",
                 "relation": "Desaniciada una rellación.",
                 "multiple": "Desaniciaos {n} oxetos."
-            }
+            },
+            "incomplete_relation": "Esta carauterística nun pue desaniciase porque nun se descargó completamente."
         },
         "connect": {
             "annotation": {
@@ -126,9 +127,14 @@
     },
     "nothing_to_undo": "Ren que desfacer.",
     "nothing_to_redo": "Ren pa refacer.",
+    "tooltip_keyhint": "Atayu:",
     "just_edited": "¡Acaba d'editar OpenStreetMap!",
     "browser_notice": "Esti editor tien sofitu en Firefox, Chrome, Safari, Opera, ya Internet Explorer 9 y superior. Anueve'l so navegador o use Potlatch 2 pa editar el mapa.",
-    "zoom_in_edit": "amplíe pa editar el mapa",
+    "view_on_osm": "Ver en OSM",
+    "translate": {
+        "localized_translation_language": "Escoyer idioma",
+        "localized_translation_name": "Nome"
+    },
     "logout": "zarrar sesión",
     "report_a_bug": "informar d'un fallu",
     "commit": {
@@ -143,10 +149,6 @@
         "deleted": "Desaniciáu",
         "created": "Creáu"
     },
-    "contributors": {
-        "list": "Unviao por {users}",
-        "truncated_list": "Unviao por {users} y otros {count}"
-    },
     "geocoder": {
         "title": "Alcontrar un llugar",
         "placeholder": "Alcontrar un llugar",
@@ -160,10 +162,8 @@
         "no_documentation_key": "Nun hai documentación disponible pa esta clave",
         "show_more": "Ver más",
         "new_tag": "Etiqueta nueva",
-        "editing_feature": "Editando {feature}",
         "choose": "Seleicione un tipu de carauterística",
-        "results": "{n} resultaos pa {search}",
-        "back_tooltip": "Camudar tipu de carauterística"
+        "results": "{n} resultaos pa {search}"
     },
     "background": {
         "title": "Fondu",
@@ -185,8 +185,19 @@
         "uploading": "Xubiendo cambios a OpenStreetMap.",
         "unsaved_changes": "Tien cambios ensin guardar"
     },
+    "success": {
+        "edited_osm": "¡Editáu OSM!",
+        "facebook": "Compartir en Facebook",
+        "tweet": "Tuitear",
+        "okay": "Aceutar"
+    },
+    "confirm": {
+        "okay": "Aceutar"
+    },
     "splash": {
-        "welcome": "Bienllegáu al editor d'OpenStreetMap iD"
+        "welcome": "Bienllegáu al editor d'OpenStreetMap iD",
+        "text": "iD ye una ferramienta amistosa pero potente pa collaborar col meyor mapamundi llibre del mundu. Esta ye la versión {version}. Pa más información visite {website} ya informe de fallos en {github}.",
+        "start": "Editar yá"
     },
     "source_switch": {
         "live": "en vivo",
@@ -214,7 +225,29 @@
     },
     "help": {
         "title": "Ayuda",
-        "help": "# Ayuda\n\nEsti ye un editor pa [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa del mundu llibre y editable. Pue usalu p'amestar y anovar los\ndatos nel to área, faciendo un mapa del mundu de códigu y datos\nabiertos meyor pa tol mundu.\n\nLes ediciones que faiga nesti mapa sedrán visibles pa cualquiera qu'use\nOpenStreetMap. Pa poder editar, necesitará una\n[cuenta de baldre n'OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) ye un proyeutu collaborativu col [códigu\nfonte disponible en GitHub](https://github.com/systemed/iD).\n"
+        "help": "# Ayuda\n\nEsti ye un editor pa [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa del mundu llibre y editable. Pue usalu p'amestar y anovar los\ndatos nel to área, faciendo un mapa del mundu de códigu y datos\nabiertos meyor pa tol mundu.\n\nLes ediciones que faiga nesti mapa sedrán visibles pa cualquiera qu'use\nOpenStreetMap. Pa poder editar, necesitará una\n[cuenta de baldre n'OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) ye un proyeutu collaborativu col [códigu\nfonte disponible en GitHub](https://github.com/systemed/iD).\n",
+        "editing_saving": "# Editar y guardar\n\nEsti editor ta diseñáu pa funcionar en llinia principalmente, y agora mesmo\nta usandolu per aciu d'un sitiu web.\n\n### Seleicionar carauterístiques\n\nPa seleicionar una carauterística del mapa, como una carretera o puntu\nd'interés, calque nella nel mapa. Esto destacará la carauterística seleicionada,\nabrirá un panel con detalles de la mesma, y amosará un menú de les coses\nque pue facer cola carauterística.\n\nPuen esbillase múltiples carauterístiques calteniendo pulsada la tecla 'Mayús',\ncalcando y arrastrando nel mapa. Esto seleiciona toles carauterístiques que\nqueden dientro del cuadru dibuxáu, permitiendo-y que faiga coses con delles\ncarauterístiques al empar.\n\n### Guardar les ediciones\n\nCuando fai cambios como editar carreteres, edificios, y llugares, estos\nguardense de mou llocal fasta que los guarde nel sirvidor. Nun s'apure si fai\nun error, pue desfacer los cambios calcando nel botón desfacer, y refacer los\ncambios calcando nel botón refacer.\n\nCalque 'Guardar' p'acabar un grupu d'ediciones; por exemplu, si completó\nun área de la ciudá y quier empezar nun área nuevu. Tendrá ocasión de\nrevisar lo que tien fecho, y l'editor ufre suxerencies y avisos afayadizos si\ndaqué nun paez tar correuto nos cambios.\n\nSi too paez tar bien, pue escribir un comentariu curtiu esplicando'l cambiu\nque fexo, y calcar 'Guardar' otra vuelta pa espublizar los cambios en\n[OpenStreetMap.org](http://www.openstreetmap.org/), onde son visibles\npa tolos demás usuarios y tan disponibles pa qu'otros enanten y ameyoren\nlos mesmos.\n\nSi nun pue terminar les ediciones d'una sentada, pue dexar abierta la ventana\ndel editor y volver (nel mesmu navegador y ordenador), y l'aplicación del editor\nufrirá-y restaurar el trabayu.\n"
+    },
+    "intro": {
+        "navigation": {
+            "title": "Navegacion",
+            "drag": "L'área principal del mapa presenta los datos d'OpenStreetMap enriba d'un fondu. Pue navegar arrastrando y moviendo, igual que cualquier mapa web. **¡Arrastre'l mapa!**",
+            "select": "Les carauterístiques del mapa representense de trés maneres: usando puntos, llinies o árees. Toles carauterístiques puen seleicionase calcando nelles. **Calque nel puntu pa selicionalu.**",
+            "header": "La testera amuesanos el tipu de carauterística."
+        },
+        "points": {
+            "title": "Puntos"
+        },
+        "areas": {
+            "title": "Árees",
+            "add": "Les árees son una manera más detallada de representar carauterístiques. Ufren información de les llendes de la carauterística. Les árees puen usase pa la mayoría de tipos de carauterística pa los que puen usase puntos, y de vezu prefierense. **Calque nel botón Área p'amestar un área nueva.**"
+        },
+        "lines": {
+            "title": "Llinies"
+        },
+        "startediting": {
+            "title": "Principiar la edición"
+        }
     },
     "presets": {
         "fields": {

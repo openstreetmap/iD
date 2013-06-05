@@ -48,6 +48,9 @@
         "cancel_draw": {
             "annotation": "Đã hủy vẽ đối tượng."
         },
+        "change_role": {
+            "annotation": "Đã thay đổi vai trò của thành viên quan hệ."
+        },
         "change_tags": {
             "annotation": "Đã thay đổi thẻ."
         },
@@ -84,7 +87,11 @@
                 "area": "Đã xóa vùng.",
                 "relation": "Đã xóa quan hệ.",
                 "multiple": "Đã xóa {n} đối tượng."
-            }
+            },
+            "incomplete_relation": "Không thể xóa đối tượng chưa được tải về hoàn toàn."
+        },
+        "delete_member": {
+            "annotation": "Đã gỡ thành viên khỏi quan hệ."
         },
         "connect": {
             "annotation": {
@@ -97,14 +104,14 @@
         "disconnect": {
             "title": "Tháo gỡ",
             "description": "Gỡ các lối này khỏi nhau.",
-            "key": "G",
+            "key": "T",
             "annotation": "Đã tháo gỡ đường kẻ và vùng.",
             "not_connected": "Không có đủ đường kẻ hoặc vùng ở đây để tháo gỡ."
         },
         "merge": {
             "title": "Gộp",
             "description": "Gộp các đường kẻ này.",
-            "key": "H",
+            "key": "G",
             "annotation": "Đã gộp {n} đường kẻ.",
             "not_eligible": "Không thể gộp các đối tượng này.",
             "not_adjacent": "Không thể gộp các đường kẻ không nối liền với nhau."
@@ -156,10 +163,17 @@
     },
     "nothing_to_undo": "Không có gì để hoàn tác.",
     "nothing_to_redo": "Không có gì để làm lại.",
+    "tooltip_keyhint": "Phím tắt:",
     "just_edited": "Bạn vừa sửa đổi OpenStreetMap!",
     "browser_notice": "Chường trình vẽ bản đồ này chạy tốt trong Firefox, Chrome, Safari, Opera, và Internet Explorer 9 trở lên. Xin vui lòng nâng cấp trình duyệt của bạn hoặc dùng Potlach 2 để biên tập bản đồ.",
     "view_on_osm": "Xem tại OSM",
-    "zoom_in_edit": "phóng to để sửa đổi bản đồ",
+    "translate": {
+        "translate": "Biên dịch",
+        "localized_translation_label": "Tên đa ngôn ngữ",
+        "localized_translation_language": "Chọn ngôn ngữ",
+        "localized_translation_name": "Tên"
+    },
+    "zoom_in_edit": "Phong to để Sửa đổi",
     "logout": "đăng xuất",
     "loading_auth": "Đang kết nối với OpenStreetMap…",
     "report_a_bug": "báo cáo lỗi",
@@ -181,8 +195,8 @@
         "created": "Đã Tạo"
     },
     "contributors": {
-        "list": "Đang xem các đóng góp của {users}",
-        "truncated_list": "Đang xem các đóng góp của {users} và {count} người khác"
+        "list": "Đóng góp bởi {users}",
+        "truncated_list": "Đóng góp bởi {users} và {count} người khác"
     },
     "geocoder": {
         "title": "Tìm kiếm Địa phương",
@@ -198,14 +212,18 @@
         "show_more": "Xem thêm",
         "new_tag": "Thẻ mới",
         "view_on_osm": "Xem tại openstreetmap.org",
-        "editing_feature": "Đang sửa {feature}",
         "all_tags": "Tất cả các thẻ",
+        "all_members": "Tất cả các thành viên",
+        "all_relations": "Tất cả các quan hệ",
+        "role": "Vai trò",
         "choose": "Chọn thể loại đối tượng",
         "results": "{n} kết quả cho {search}",
         "reference": "Tra cứu OpenStreetMap Wiki",
-        "back_tooltip": "Thay đổi thể loại đối tượng",
+        "back_tooltip": "Thay đổi đối tượng",
         "remove": "Xóa",
-        "search": "Tìm kiếm"
+        "search": "Tìm kiếm",
+        "unknown": "Không rõ",
+        "incomplete": "<chưa tải về>"
     },
     "background": {
         "title": "Hình nền",
@@ -305,10 +323,10 @@
         "areas": {
             "title": "Vùng",
             "add": "Bạn có thể vẽ kỹ hơn bằng cách vẽ vùng thay vì địa điểm. Phần nhiều thể loại địa điểm có thể được vẽ như vùng. Khuyên bạn cố gắng vẽ vùng thay vì địa điểm để cho biết đường biên của đối tượng. **Nhấn vào nút Vùng để bắt đầu vẽ vùng mới.**",
-            "corner": "Để vẽ vùng, đặt các nốt theo đường biên của vùng. **Đặt nốt đầu tiên vào một góc của khu vui chơi trẻ em.**",
-            "place": "Đặt thêm nốt để tiếp tục vẽ vùng, rồi nhấn vào nốt đầu tiên để “đóng” vùng này. **Vẽ một vùng cho khu vui chơi trẻ em.**",
-            "search": "**Tìm Khu Vui chơi Trẻ em.**",
-            "choose": "**Chọn Khu Vui chơi Trẻ em từ danh sách.**",
+            "corner": "Để vẽ vùng, đặt các nốt theo đường biên của vùng. **Đặt nốt đầu tiên vào một góc của sân chơi trẻ em.**",
+            "place": "Đặt thêm nốt để tiếp tục vẽ vùng, rồi nhấn vào nốt đầu tiên để “đóng” vùng này. **Vẽ một vùng cho sân chơI trẻ em.**",
+            "search": "**Tìm Sân chơi.**",
+            "choose": "**Chọn Sân chơi từ danh sách.**",
             "describe": "**Đặt tên và đóng biểu mẫu.**"
         },
         "lines": {
@@ -343,6 +361,9 @@
             "category-road": {
                 "name": "Đường"
             },
+            "category-route": {
+                "name": "Tuyến đường"
+            },
             "category-water": {
                 "name": "Nước"
             }
@@ -350,6 +371,7 @@
         "fields": {
             "access": {
                 "label": "Quyền Truy cập",
+                "placeholder": "Không rõ",
                 "types": {
                     "access": "Tổng quát",
                     "foot": "Người Đi bộ",
@@ -422,7 +444,8 @@
                 "label": "Tòa nhà"
             },
             "capacity": {
-                "label": "Sức chứa"
+                "label": "Sức chứa",
+                "placeholder": "50, 100, 200…"
             },
             "cardinal_direction": {
                 "label": "Chiều"
@@ -455,6 +478,9 @@
             "denotation": {
                 "label": "Tầm Quan trọng"
             },
+            "description": {
+                "label": "Miêu tả"
+            },
             "elevation": {
                 "label": "Cao độ"
             },
@@ -465,10 +491,14 @@
                 "label": "Kiểu"
             },
             "fax": {
-                "label": "Số Fax"
+                "label": "Số Fax",
+                "placeholder": "+84 1 234 5678"
             },
             "fee": {
                 "label": "Phí"
+            },
+            "fixme": {
+                "label": "Cần Sửa chữa"
             },
             "highway": {
                 "label": "Kiểu"
@@ -497,7 +527,8 @@
                 "label": "Mục đích"
             },
             "lanes": {
-                "label": "Số Làn"
+                "label": "Số Làn",
+                "placeholder": "1, 2, 3…"
             },
             "layer": {
                 "label": "Lớp"
@@ -506,7 +537,8 @@
                 "label": "Loại"
             },
             "levels": {
-                "label": "Số Tầng"
+                "label": "Số Tầng",
+                "placeholder": "2, 4, 6…"
             },
             "location": {
                 "label": "Vị trí"
@@ -515,10 +547,12 @@
                 "label": "Loại"
             },
             "maxspeed": {
-                "label": "Tốc độ Tối đa"
+                "label": "Tốc độ Tối đa",
+                "placeholder": "40, 50, 60…"
             },
             "name": {
-                "label": "Tên"
+                "label": "Tên",
+                "placeholder": "Tên phổ biến (nếu có)"
             },
             "natural": {
                 "label": "Thiên nhiên"
@@ -551,7 +585,8 @@
                 "label": "Kiểu"
             },
             "phone": {
-                "label": "Số Điện thoại"
+                "label": "Số Điện thoại",
+                "placeholder": "+84 1 234 5678"
             },
             "place": {
                 "label": "Kiểu"
@@ -565,6 +600,9 @@
             "ref": {
                 "label": "Số"
             },
+            "relation": {
+                "label": "Kiểu"
+            },
             "religion": {
                 "label": "Tôn giáo",
                 "options": {
@@ -576,6 +614,9 @@
                     "shinto": "Thần đạo",
                     "taoist": "Đạo giáo"
                 }
+            },
+            "route": {
+                "label": "Kiểu"
             },
             "sac_scale": {
                 "label": "Độ Hiểm trở Đường mòn"
@@ -597,6 +638,7 @@
             },
             "structure": {
                 "label": "Cấu trúc",
+                "placeholder": "Không rõ",
                 "options": {
                     "bridge": "Cầu",
                     "tunnel": "Đường hầm",
@@ -629,7 +671,8 @@
                 "label": "Loại"
             },
             "website": {
-                "label": "Trang Web"
+                "label": "Trang Web",
+                "placeholder": "http://example.com/"
             },
             "wetland": {
                 "label": "Loại"
@@ -645,6 +688,9 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Địa chỉ"
+            },
             "aeroway": {
                 "name": "Hàng không"
             },
@@ -816,6 +862,9 @@
             "amenity/waste_basket": {
                 "name": "Thùng rác",
                 "terms": "thùng rác,sọt rác"
+            },
+            "area": {
+                "name": "Vùng"
             },
             "barrier": {
                 "name": "Chướng ngại"
@@ -1117,7 +1166,8 @@
                 "name": "Sân Bóng chuyền"
             },
             "leisure/playground": {
-                "name": "Khu Vui chơi Trẻ em"
+                "name": "Sân chơi",
+                "terms": "sân chơi,khu vui chơi,khu vui chơi trẻ em,đồ chơi,công viên trẻ em,cầu tuột,đu,xích đu,thang leo"
             },
             "leisure/slipway": {
                 "name": "Đường Trượt tàu"
@@ -1127,6 +1177,9 @@
             },
             "leisure/swimming_pool": {
                 "name": "Hồ Bơi"
+            },
+            "line": {
+                "name": "Đường kẻ"
             },
             "man_made": {
                 "name": "Công trình"
@@ -1226,12 +1279,6 @@
             "office": {
                 "name": "Văn phòng"
             },
-            "other": {
-                "name": "Khác"
-            },
-            "other_area": {
-                "name": "Khác"
-            },
             "place": {
                 "name": "Địa phương"
             },
@@ -1256,6 +1303,9 @@
             },
             "place/village": {
                 "name": "Làng"
+            },
+            "point": {
+                "name": "Địa điểm"
             },
             "power": {
                 "name": "Điện năng"
@@ -1312,6 +1362,12 @@
             "railway/tram": {
                 "name": "Đường Tàu điện",
                 "terms": "đường tàu điện,tàu điện,đường xe điện,xe điện"
+            },
+            "relation": {
+                "name": "Quan hệ"
+            },
+            "route/ferry": {
+                "name": "Tuyến đường Phà"
             },
             "shop": {
                 "name": "Tiệm"
@@ -1523,6 +1579,51 @@
             },
             "tourism/zoo": {
                 "name": "Vườn thú"
+            },
+            "type/boundary": {
+                "name": "Biên giới"
+            },
+            "type/multipolygon": {
+                "name": "Tổ hợp Đa giác"
+            },
+            "type/restriction": {
+                "name": "Hạn chế"
+            },
+            "type/route": {
+                "name": "Tuyến đường"
+            },
+            "type/route/bicycle": {
+                "name": "Tuyến đường Xe đạp"
+            },
+            "type/route/bus": {
+                "name": "Tuyến Buýt"
+            },
+            "type/route/detour": {
+                "name": "Tuyến đường Tránh Kẹt xe"
+            },
+            "type/route/ferry": {
+                "name": "Tuyến Phà"
+            },
+            "type/route/foot": {
+                "name": "Tuyến đường Đi bộ"
+            },
+            "type/route/pipeline": {
+                "name": "Tuyến Đường ống"
+            },
+            "type/route/power": {
+                "name": "Tuyến đường Dây điện"
+            },
+            "type/route/road": {
+                "name": "Tuyến đường Xe hơi"
+            },
+            "type/route/train": {
+                "name": "Tuyến Đường sắt"
+            },
+            "type/route/tram": {
+                "name": "Tuyến đường Xe điện"
+            },
+            "vertex": {
+                "name": "Khác"
             },
             "waterway": {
                 "name": "Đường sông"

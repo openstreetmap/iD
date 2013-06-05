@@ -151,7 +151,6 @@
     "just_edited": "Jy het nou net 'n OpenStreetMapKaart bydra gemaak!",
     "browser_notice": "Hierdie program is bruikbaar in Firefox, Chrome, Safair, Opera en Internet Explorer 9 en later weergawes. Gradeer asseblief jou webbrowser op of gebruik Potlatch 2 om die kaart te verander.",
     "view_on_osm": "Besigtig op OSM",
-    "zoom_in_edit": "zoom in om die kaart te verander",
     "logout": "voetsek",
     "loading_auth": "Maak kontak met OpenStreetMap...",
     "report_a_bug": "Raporteer 'n probleem",
@@ -172,10 +171,6 @@
         "deleted": "Verwyder",
         "created": "Gemaak"
     },
-    "contributors": {
-        "list": "Kaartdata bygedra deur {users} ",
-        "truncated_list": "Kaartdata bygedrae deur {users} en {count} ander"
-    },
     "geocoder": {
         "title": "Soek 'n plek",
         "placeholder": "Soek 'n plek",
@@ -190,11 +185,9 @@
         "show_more": "Wys meer",
         "new_tag": "Nuwe kenteken",
         "view_on_osm": "Kyk daarna op openstreetmap.org",
-        "editing_feature": "Verander {feature}",
         "choose": "Kies funksie tipe",
         "results": "{n} resultate vir {search}",
         "reference": "Kyk daarna op OpenStreetMap Wiki",
-        "back_tooltip": "Verander funksie tipe",
         "remove": "Verwyder"
     },
     "background": {
@@ -969,12 +962,6 @@
             },
             "office": {
                 "name": "Kantoor"
-            },
-            "other": {
-                "name": "Ander"
-            },
-            "other_area": {
-                "name": "Ander"
             },
             "place": {
                 "name": "Plek"

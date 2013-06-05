@@ -48,6 +48,9 @@
         "cancel_draw": {
             "annotation": "Cancellato il disegno."
         },
+        "change_role": {
+            "annotation": "Cambia il ruolo di un membro della relazione."
+        },
         "change_tags": {
             "annotation": "Cambiati i tag."
         },
@@ -84,7 +87,11 @@
                 "area": "Cancellata un'area.",
                 "relation": "Cancellata una relazione.",
                 "multiple": "Cancellati {n} oggetti."
-            }
+            },
+            "incomplete_relation": "Questo elemento non può essere cancellato perché non è stato completamente scaricato."
+        },
+        "delete_member": {
+            "annotation": "Membro rimosso dalla relazione"
         },
         "connect": {
             "annotation": {
@@ -156,10 +163,17 @@
     },
     "nothing_to_undo": "Niente da ripristinare.",
     "nothing_to_redo": "Niente da rifare.",
+    "tooltip_keyhint": "Scorciatoia da tastiera:",
     "just_edited": "Hai appena modificato OpenStreetMap!",
     "browser_notice": "Questo editor è supportato in Firefox, Chrome, Safari, Opera, e Internet Explorer 9 e superiori. Aggiorna il tuo browser o usa Potlatch 2 per modificare la mappa.",
     "view_on_osm": "Guarda su OSM",
-    "zoom_in_edit": "ingrandisci per modificare la mappa",
+    "translate": {
+        "translate": "Traduci",
+        "localized_translation_label": "Nome multilingua",
+        "localized_translation_language": "Scegli la lingua",
+        "localized_translation_name": "Nome"
+    },
+    "zoom_in_edit": "Ingrandisci per modificare",
     "logout": "logout",
     "loading_auth": "Connettendomi ad OpenStreetMap...",
     "report_a_bug": "segnala un bug",
@@ -181,8 +195,8 @@
         "created": "Creati"
     },
     "contributors": {
-        "list": "Stai vedendo i contributi di {users}",
-        "truncated_list": "Stai vedendo i contributi di {users} ed altri {count}"
+        "list": "Modifiche di {users}",
+        "truncated_list": "Modifiche di {users} e {count} altri"
     },
     "geocoder": {
         "title": "Trova un luogo",
@@ -198,14 +212,18 @@
         "show_more": "Mostra di più",
         "new_tag": "Nuovo Tag",
         "view_on_osm": "Vedi su openstreetmap.org",
-        "editing_feature": "Modificando {feature}",
         "all_tags": "Tutti i tag",
+        "all_members": "Tutti i membri",
+        "all_relations": "Tutte le relazioni",
+        "role": "Ruolo",
         "choose": "Seleziona il tipo di caratteristica",
         "results": "{n} risultati per {search}",
         "reference": "Vedi sulla Wiki di OpenStreetMap →",
-        "back_tooltip": "Cambia il tipo di caratteristica",
+        "back_tooltip": "Cambia elemento",
         "remove": "Rimuovere",
-        "search": "Cercare"
+        "search": "Cercare",
+        "unknown": "Sconosciuto",
+        "incomplete": "<non scaricato>"
     },
     "background": {
         "title": "Sfondo",
@@ -229,6 +247,7 @@
         "unsaved_changes": "Hai modifiche non salvate"
     },
     "success": {
+        "edited_osm": "OSMI Modificato",
         "facebook": "Condividi su Facebook",
         "tweet": "Condividi su Twitter",
         "okay": "Okay"
@@ -330,11 +349,20 @@
     },
     "presets": {
         "categories": {
+            "category-landuse": {
+                "name": "Utilizzo del terreno"
+            },
             "category-path": {
                 "name": "Sentiero"
             },
+            "category-rail": {
+                "name": "Binario"
+            },
             "category-road": {
                 "name": "Strada"
+            },
+            "category-route": {
+                "name": "Percorso"
             },
             "category-water": {
                 "name": "Acqua"
@@ -343,7 +371,9 @@
         "fields": {
             "access": {
                 "label": "Accesso",
+                "placeholder": "Sconosciuto",
                 "types": {
+                    "access": "Generale",
                     "foot": "A piedi",
                     "motor_vehicle": "Veicoli a Motore",
                     "bicycle": "Biciclette",
@@ -351,13 +381,28 @@
                 },
                 "options": {
                     "yes": {
-                        "title": "Permesso"
+                        "title": "Permesso",
+                        "description": "Accesso consentito a norma di legge; diritto di passaggio"
                     },
                     "no": {
-                        "title": "Vietato"
+                        "title": "Vietato",
+                        "description": "Accesso consentito ai soli autorizzati"
+                    },
+                    "permissive": {
+                        "title": "Permissivo",
+                        "description": "Accesso consentito fino a quando il proprietario lo consente"
                     },
                     "private": {
-                        "title": "Privato"
+                        "title": "Privato",
+                        "description": "Accesso consentito solo con il permesso individuale del proprietario"
+                    },
+                    "designated": {
+                        "title": "Preferenziale",
+                        "description": "Accesso consentito stando ai cartelli stradali od alle norme locali"
+                    },
+                    "destination": {
+                        "title": "Destinazione",
+                        "description": "Accesso consentito solo se la destinazione coincide con l'elemento stesso"
                     }
                 }
             },
@@ -370,6 +415,9 @@
                     "city": "Città",
                     "postcode": "Codice postale"
                 }
+            },
+            "admin_level": {
+                "label": "Livello di Amministrazione"
             },
             "aeroway": {
                 "label": "Tipo"
@@ -396,9 +444,14 @@
                 "label": "Edificio"
             },
             "capacity": {
-                "label": "Capienza"
+                "label": "Capienza",
+                "placeholder": "50, 100, 200..."
+            },
+            "cardinal_direction": {
+                "label": "Direzione"
             },
             "clock_direction": {
+                "label": "Direzione",
                 "options": {
                     "clockwise": "Senso orario",
                     "anticlockwise": "Senso antiorario"
@@ -425,6 +478,9 @@
             "denotation": {
                 "label": "Denotazione"
             },
+            "description": {
+                "label": "Descrizione"
+            },
             "elevation": {
                 "label": "Altitudine"
             },
@@ -435,16 +491,26 @@
                 "label": "Tipo"
             },
             "fax": {
-                "label": "Fax"
+                "label": "Fax",
+                "placeholder": "+39 01 123 456"
             },
             "fee": {
                 "label": "Tariffa"
+            },
+            "fixme": {
+                "label": "Sistemare"
             },
             "highway": {
                 "label": "Tipo"
             },
             "historic": {
                 "label": "Tipo"
+            },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
             },
             "incline": {
                 "label": "Pendenza"
@@ -461,7 +527,8 @@
                 "label": "Tipo"
             },
             "lanes": {
-                "label": "Corsie"
+                "label": "Corsie",
+                "placeholder": "1, 2, 3..."
             },
             "layer": {
                 "label": "Livello"
@@ -470,16 +537,22 @@
                 "label": "Tipo"
             },
             "levels": {
-                "label": "Piani"
+                "label": "Piani",
+                "placeholder": "2, 4, 6..."
+            },
+            "location": {
+                "label": "Posizione"
             },
             "man_made": {
                 "label": "Tipo"
             },
             "maxspeed": {
-                "label": "Limite di velocità"
+                "label": "Limite di velocità",
+                "placeholder": "40, 50, 60..."
             },
             "name": {
-                "label": "Nome"
+                "label": "Nome",
+                "placeholder": "Nome comune (se presente)"
             },
             "natural": {
                 "label": "Naturale"
@@ -505,11 +578,15 @@
             "operator": {
                 "label": "Operatore"
             },
+            "park_ride": {
+                "label": "Parcheggio di Interscambio"
+            },
             "parking": {
                 "label": "Tipo"
             },
             "phone": {
-                "label": "Telefono"
+                "label": "Telefono",
+                "placeholder": "+39 01 123 456"
             },
             "place": {
                 "label": "Tipo"
@@ -523,6 +600,9 @@
             "ref": {
                 "label": "Riferimento"
             },
+            "relation": {
+                "label": "Tipo"
+            },
             "religion": {
                 "label": "Religione",
                 "options": {
@@ -534,6 +614,9 @@
                     "shinto": "Shintoista",
                     "taoist": "Taoista"
                 }
+            },
+            "route": {
+                "label": "Tipo"
             },
             "sac_scale": {
                 "label": "Difficoltà del sentiero"
@@ -555,6 +638,7 @@
             },
             "structure": {
                 "label": "Struttura",
+                "placeholder": "Sconosciuto",
                 "options": {
                     "bridge": "Ponte",
                     "tunnel": "Tunnel",
@@ -571,6 +655,9 @@
             "tourism": {
                 "label": "Tipo"
             },
+            "towertype": {
+                "label": "Tipo di torre"
+            },
             "tracktype": {
                 "label": "Tipo"
             },
@@ -584,7 +671,8 @@
                 "label": "Tipo"
             },
             "website": {
-                "label": "Sito web"
+                "label": "Sito web",
+                "placeholder": "http://example.com/"
             },
             "wetland": {
                 "label": "Tipo"
@@ -600,6 +688,9 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Indirizzo"
+            },
             "aeroway": {
                 "name": "Pista aeroportuale"
             },
@@ -611,6 +702,9 @@
                 "name": "Area di sosta per aeromobili",
                 "terms": "rampa"
             },
+            "aeroway/gate": {
+                "name": "Gate dell'aeroporto"
+            },
             "aeroway/hangar": {
                 "name": "Hangar"
             },
@@ -619,10 +713,15 @@
                 "terms": "elicottero,elisuperficie,eliporto"
             },
             "aeroway/runway": {
-                "name": "Pista di decollo/atterraggio"
+                "name": "Pista di decollo/atterraggio",
+                "terms": "pista di atterraggio"
             },
             "aeroway/taxiway": {
                 "name": "Pista di rullaggio"
+            },
+            "aeroway/terminal": {
+                "name": "Terminale di aeroporto",
+                "terms": "aeroporto,aerodromo"
             },
             "amenity": {
                 "name": "Servizi"
@@ -680,7 +779,8 @@
                 "name": "Cimitero"
             },
             "amenity/hospital": {
-                "name": "Ospedale"
+                "name": "Ospedale",
+                "terms": "clinica,pronto soccorso,servizio sanitario,salute,hospice,ospizio,infermeria,istituzione,casa di cura,casa di riposo,sanatorio,ambulatorio,chirurgia,reparto"
             },
             "amenity/kindergarten": {
                 "name": "Scuola d'infanzia",
@@ -703,7 +803,8 @@
                 "terms": "abbazia,basilica,sinagoga,cattedrale,presbiterio,cappella,chiesa,casa di Dio,luogo di preghiera,luogo di culto,missione,moschea,oratorio,parrocchia,sacello,edicola votiva,tabernacolo,tempio"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Chiesa"
+                "name": "Chiesa",
+                "terms": "cristiano,abbazia,basilica,cattedrale,presbiterio,cappella,chiesa,casa di Dio,luogo di preghiera,luogo di culto,missione,oratorio,parrocchia,sacello,edicola votiva,tabernacolo,tempio"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Sinagoga",
@@ -717,7 +818,8 @@
                 "name": "Forze di polizia"
             },
             "amenity/post_box": {
-                "name": "Buca delle lettere"
+                "name": "Buca delle lettere",
+                "terms": "cassetta postale"
             },
             "amenity/post_office": {
                 "name": "Ufficio Postale"
@@ -729,7 +831,8 @@
                 "name": "Ristorante"
             },
             "amenity/school": {
-                "name": "Scuola"
+                "name": "Scuola",
+                "terms": "accademia,alma mater,lavagna,collegio,dipartimento,disciplina,classe,facoltà,aula,istituto,istituzione,riformatorio,scuola,edificio scolastico,seminario,università"
             },
             "amenity/swimming_pool": {
                 "name": "Piscina"
@@ -745,7 +848,8 @@
                 "name": "Bagni"
             },
             "amenity/townhall": {
-                "name": "Municipio"
+                "name": "Municipio",
+                "terms": "sala del comune,palazzo di governo,tribunale,munipio"
             },
             "amenity/university": {
                 "name": "Università",
@@ -754,6 +858,9 @@
             "amenity/waste_basket": {
                 "name": "Cestino della spazzatura",
                 "terms": "sacchetto della spazzatura,cestino della spazzatura,cassonetto della spazzatura"
+            },
+            "area": {
+                "name": "Area"
             },
             "barrier": {
                 "name": "Barriera"
@@ -806,6 +913,9 @@
             "barrier/wall": {
                 "name": "Muro"
             },
+            "boundary/administrative": {
+                "name": "Confine di Amministrazione"
+            },
             "building": {
                 "name": "Edificio"
             },
@@ -828,7 +938,8 @@
                 "name": "Strada"
             },
             "highway/bridleway": {
-                "name": "Ippovia"
+                "name": "Ippovia",
+                "terms": "ippovia, percorso per cavalli, percorso equestre"
             },
             "highway/bus_stop": {
                 "name": "Fermata dell'autobus"
@@ -843,14 +954,21 @@
             "highway/footway": {
                 "name": "Percorso pedonale"
             },
+            "highway/living_street": {
+                "name": "Strada residenziale prevalentemente pedonale"
+            },
             "highway/mini_roundabout": {
                 "name": "Mini rotatoria"
             },
             "highway/motorway": {
                 "name": "Autostrada"
             },
+            "highway/motorway_junction": {
+                "name": "Svincolo da o verso Autostrada"
+            },
             "highway/motorway_link": {
-                "name": "Raccordo autostradale"
+                "name": "Raccordo autostradale",
+                "terms": "svincolo,rampa"
             },
             "highway/path": {
                 "name": "Sentiero"
@@ -861,6 +979,10 @@
             "highway/primary": {
                 "name": "Strada di importanza nazionale"
             },
+            "highway/primary_link": {
+                "name": "Svincolo da o verso una strada di importanza nazionale",
+                "terms": "svincolo,rampa"
+            },
             "highway/residential": {
                 "name": "Strada residenziale"
             },
@@ -870,8 +992,27 @@
             "highway/secondary": {
                 "name": "Strada di importanza regionale"
             },
+            "highway/secondary_link": {
+                "name": "Svincolo da o verso una strada di importanza regionale",
+                "terms": "svincolo,rampa"
+            },
             "highway/service": {
                 "name": "Strada di servizio"
+            },
+            "highway/service/alley": {
+                "name": "Vialetto tra i palazzi"
+            },
+            "highway/service/drive-through": {
+                "name": "Accesso al servizio Drive-through"
+            },
+            "highway/service/driveway": {
+                "name": "Accesso ad edifici/aziende"
+            },
+            "highway/service/emergency_access": {
+                "name": "Accesso per i veicoli di soccorso/emergenza"
+            },
+            "highway/service/parking_aisle": {
+                "name": "Corsia di un parcheggio"
             },
             "highway/steps": {
                 "name": "Scale",
@@ -879,6 +1020,10 @@
             },
             "highway/tertiary": {
                 "name": "Strada di importanza locale"
+            },
+            "highway/tertiary_link": {
+                "name": "Svincolo da o verso una strada di importanza comunale",
+                "terms": "svincolo,rampa"
             },
             "highway/track": {
                 "name": "Strada ad uso agricolo / forestale"
@@ -889,6 +1034,10 @@
             },
             "highway/trunk": {
                 "name": "Superstrada"
+            },
+            "highway/trunk_link": {
+                "name": "Svincolo da o verso una superstrada",
+                "terms": "svincolo,rampa"
             },
             "highway/turning_circle": {
                 "name": "Slargo per inversione"
@@ -968,6 +1117,9 @@
             "landuse/residential": {
                 "name": "Residenziale"
             },
+            "landuse/retail": {
+                "name": "Negozio di vendita al dettaglio"
+            },
             "landuse/vineyard": {
                 "name": "Vigneto"
             },
@@ -1004,8 +1156,12 @@
             "leisure/pitch/tennis": {
                 "name": "Campo da tennis"
             },
+            "leisure/pitch/volleyball": {
+                "name": "Campo di Pallavolo"
+            },
             "leisure/playground": {
-                "name": "Parco giochi"
+                "name": "Parco giochi",
+                "terms": "area giochi,scivolo"
             },
             "leisure/slipway": {
                 "name": "Scivolo per barche"
@@ -1015,6 +1171,9 @@
             },
             "leisure/swimming_pool": {
                 "name": "Piscina"
+            },
+            "line": {
+                "name": "Linea"
             },
             "man_made": {
                 "name": "Costruzioni civili"
@@ -1041,13 +1200,17 @@
                 "name": "Torre"
             },
             "man_made/wastewater_plant": {
-                "name": "Impianto di depurazione delle acque"
+                "name": "Impianto di depurazione delle acque",
+                "terms": "fognatura, impianto di trattamento delle acque nere, impianto di purificazione dell'acqua,impianto di trattamento delle acque reflue"
             },
             "man_made/water_tower": {
                 "name": "Torre Idrica"
             },
             "man_made/water_well": {
                 "name": "Pozzo"
+            },
+            "man_made/water_works": {
+                "name": "Impianto Idrico"
             },
             "natural": {
                 "name": "Naturale"
@@ -1075,7 +1238,8 @@
                 "name": "Brughiera"
             },
             "natural/peak": {
-                "name": "Picco"
+                "name": "Picco",
+                "terms": "culmine,guglia,alpe,apice,cresta,sommità,cima,cocuzzolo,collina,monte,montagna,pinnacolo,estremità,vertice,vetta"
             },
             "natural/scrub": {
                 "name": "Macchia mediterranea"
@@ -1094,7 +1258,8 @@
                 "terms": "stagno,lago,laghetto"
             },
             "natural/water/pond": {
-                "name": "Stagno"
+                "name": "Stagno",
+                "terms": "laghetto,gora,pozza"
             },
             "natural/water/reservoir": {
                 "name": "Bacino idrico"
@@ -1108,12 +1273,6 @@
             "office": {
                 "name": "Uffici"
             },
-            "other": {
-                "name": "Altro"
-            },
-            "other_area": {
-                "name": "Altro"
-            },
             "place": {
                 "name": "Luogo"
             },
@@ -1124,13 +1283,23 @@
                 "name": "Paese"
             },
             "place/island": {
-                "name": "Isola"
+                "name": "Isola",
+                "terms": "arcipelago,atollo,banco,isola,isolotto,scogliera"
+            },
+            "place/isolated_dwelling": {
+                "name": "Case Sparse"
             },
             "place/locality": {
                 "name": "Località"
             },
+            "place/town": {
+                "name": "Centro abitato tra 10000 e 100000 abitanti"
+            },
             "place/village": {
                 "name": "Villaggio"
+            },
+            "point": {
+                "name": "Punto"
             },
             "power": {
                 "name": "Energia"
@@ -1169,6 +1338,9 @@
             "railway/monorail": {
                 "name": "Monorotaia"
             },
+            "railway/platform": {
+                "name": "Piattaforma della stazione ferroviaria"
+            },
             "railway/rail": {
                 "name": "Binario"
             },
@@ -1184,6 +1356,12 @@
             "railway/tram": {
                 "name": "Tram",
                 "terms": "Tram"
+            },
+            "relation": {
+                "name": "Relazione"
+            },
+            "route/ferry": {
+                "name": "Rotta"
             },
             "shop": {
                 "name": "Negozio"
@@ -1380,7 +1558,8 @@
                 "name": "Motel"
             },
             "tourism/museum": {
-                "name": "Museo"
+                "name": "Museo",
+                "terms": "esibizione,mostra,esposizione,fondazione,galleria,archivio,istituzione,serraglio,sala,salone,tesoreria,pinacoteca,magazzino,caveau,palazzo"
             },
             "tourism/picnic_site": {
                 "name": "Area picnic"
@@ -1393,6 +1572,51 @@
             },
             "tourism/zoo": {
                 "name": "Zoo"
+            },
+            "type/boundary": {
+                "name": "Confine"
+            },
+            "type/multipolygon": {
+                "name": "Multipoligono"
+            },
+            "type/restriction": {
+                "name": "Limitazione"
+            },
+            "type/route": {
+                "name": "Percorso"
+            },
+            "type/route/bicycle": {
+                "name": "Pista ciclabile"
+            },
+            "type/route/bus": {
+                "name": "Percorso bus"
+            },
+            "type/route/detour": {
+                "name": "Deviazione"
+            },
+            "type/route/ferry": {
+                "name": "Rotta"
+            },
+            "type/route/foot": {
+                "name": "Escursione"
+            },
+            "type/route/pipeline": {
+                "name": "Condotta"
+            },
+            "type/route/power": {
+                "name": "Linea elettrica"
+            },
+            "type/route/road": {
+                "name": "Percorso stradale"
+            },
+            "type/route/train": {
+                "name": "Linea ferroviaria"
+            },
+            "type/route/tram": {
+                "name": "Linea tramviaria"
+            },
+            "vertex": {
+                "name": "Altro"
             },
             "waterway": {
                 "name": "Corso d'acqua"
@@ -1410,7 +1634,8 @@
                 "name": "Canale di scolo"
             },
             "waterway/river": {
-                "name": "Fiume"
+                "name": "Fiume",
+                "terms": "ruscello,affluente,corso d'acqua,torrente,estuario,rivolo,rigagnolo,immissario"
             },
             "waterway/riverbank": {
                 "name": "Argine"

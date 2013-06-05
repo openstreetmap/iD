@@ -48,6 +48,9 @@
         "cancel_draw": {
             "annotation": "Zrušenie kreslenia."
         },
+        "change_role": {
+            "annotation": "Zmena roly člena relácie."
+        },
         "change_tags": {
             "annotation": "Zmenenie označenia."
         },
@@ -84,7 +87,11 @@
                 "area": "Odstránenie plochy.",
                 "relation": "Odstránenie relácie.",
                 "multiple": "Odstránenie {n} objektov."
-            }
+            },
+            "incomplete_relation": "Tento objekt nemožno vymazať, pretože nebol úplne stiahnutý."
+        },
+        "delete_member": {
+            "annotation": "Odstránenie člena z relácie."
         },
         "connect": {
             "annotation": {
@@ -115,7 +122,7 @@
             "key": "M",
             "annotation": {
                 "point": "Presunutie bodu.",
-                "vertex": "Presunutie uzlu cesty.",
+                "vertex": "Presunutie uzla cesty.",
                 "line": "Presunutie čiary.",
                 "area": "Presunutie plochy.",
                 "multiple": "Presunutie viacerých objektov."
@@ -156,10 +163,17 @@
     },
     "nothing_to_undo": "Nič na vrátenie.",
     "nothing_to_redo": "Nič na zopakovanie.",
+    "tooltip_keyhint": "Skratka:",
     "just_edited": "Práve ste upravili OpenStreetMap!",
     "browser_notice": "Tento editor je podporovaný v prehliadačoch Firefox, Chrome, Safari, Opera, a Internet Explorer 9 a vyšší. Prosím aktualizujte svoj prehliadač alebo použite  Potlatch 2 na editovanie mapy.",
-    "view_on_osm": "Zobraz na OSM",
-    "zoom_in_edit": "Priblíž pre editovanie mapy",
+    "view_on_osm": "Ukáž na OSM",
+    "translate": {
+        "translate": "Prelož",
+        "localized_translation_label": "Viacjazyčný názov",
+        "localized_translation_language": "Zvoľte jazyk",
+        "localized_translation_name": "Názov"
+    },
+    "zoom_in_edit": "Priblíž mapu pre editovanie",
     "logout": "odhlásiť",
     "loading_auth": "Pripájam na OpenStreetMap...",
     "report_a_bug": "nahlásiť chybu",
@@ -169,10 +183,10 @@
         "readonly": "API je iba na čítanie. Budete musieť počkať, aby ste mohli uložiť vaše zmeny."
     },
     "commit": {
-        "title": "Ulož zmeny",
-        "description_placeholder": "Stručný popis tvojho prispievania",
+        "title": "Ukladanie zmien",
+        "description_placeholder": "Stručný popis vašich úprav",
         "message_label": "Pripojiť správu",
-        "upload_explanation": "Zmeny, ktoré nahráš ako {user}, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
+        "upload_explanation": "Zmeny, ktoré nahráte ako {user}, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
         "save": "Ulož",
         "cancel": "Zruš",
         "warnings": "Varovania",
@@ -181,8 +195,8 @@
         "created": "Vytvorené"
     },
     "contributors": {
-        "list": "S prispením {users}",
-        "truncated_list": "S prispením {users} a {count} dalších "
+        "list": "Úpravy od {users}",
+        "truncated_list": "Úpravy od {users} a {count} ďalších"
     },
     "geocoder": {
         "title": "Nájdi miesto",
@@ -197,15 +211,19 @@
         "no_documentation_key": "Pre toto označenie nie je dostupná dokumentácia",
         "show_more": "Ukáž viac",
         "new_tag": "Nové označenie",
-        "view_on_osm": "Zobraz na openstreetmap.org",
-        "editing_feature": "Upravovanie {feature}",
+        "view_on_osm": "Ukáž na openstreetmap.org",
         "all_tags": "Všetky označenia",
-        "choose": "Zvoľ typ vlastnosti",
+        "all_members": "Všetky členy",
+        "all_relations": "Všetky relácie",
+        "role": "Rola",
+        "choose": "Zvoľte typ objektu",
         "results": "{n} výsledkov pre {search}",
-        "reference": "Zobraz na OpenStreetMap Wiki",
-        "back_tooltip": "Zmeň typ vlastnosti",
+        "reference": "Ukáž na OpenStreetMap Wiki",
+        "back_tooltip": "Zmeň typ objektu",
         "remove": "Odstráň",
-        "search": "Hľadaj"
+        "search": "Hľadaj",
+        "unknown": "Neznámy",
+        "incomplete": "<nebolo stiahnuté>"
     },
     "background": {
         "title": "Pozadie",
@@ -262,8 +280,8 @@
         "deprecated_tags": "Neschválené označenie: {tags}"
     },
     "zoom": {
-        "in": "Priblížiť",
-        "out": "Oddialiť"
+        "in": "Priblíž",
+        "out": "Oddiaľ"
     },
     "cannot_zoom": "V tomto móde nemožno viac oddialiť.",
     "gpx": {
@@ -323,7 +341,7 @@
             "restart": "Cesta musí pretínať ulicu Flower Street."
         },
         "startediting": {
-            "title": "Začnite upravovať",
+            "title": "Začať upravovať",
             "help": "Ďalšia dokumentácia a táto prehliadka sú dostupné tu.",
             "save": "Nezabudnite pravidelne ukladať vaše zmeny!",
             "start": "Začnite mapovať!"
@@ -343,6 +361,9 @@
             "category-road": {
                 "name": "Cesta"
             },
+            "category-route": {
+                "name": "Trasa"
+            },
             "category-water": {
                 "name": "Vodná plocha"
             }
@@ -350,6 +371,7 @@
         "fields": {
             "access": {
                 "label": "Prístup",
+                "placeholder": "Neznámy",
                 "types": {
                     "access": "Všeobecné",
                     "foot": "Chodci",
@@ -422,7 +444,8 @@
                 "label": "Budova"
             },
             "capacity": {
-                "label": "Kapacita"
+                "label": "Kapacita",
+                "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
                 "label": "Smer"
@@ -455,6 +478,9 @@
             "denotation": {
                 "label": "Označenie"
             },
+            "description": {
+                "label": "Popis"
+            },
             "elevation": {
                 "label": "Nadmorská výška"
             },
@@ -465,10 +491,14 @@
                 "label": "Typ"
             },
             "fax": {
-                "label": "Fax"
+                "label": "Fax",
+                "placeholder": "+31 42 123 4567"
             },
             "fee": {
                 "label": "Poplatok"
+            },
+            "fixme": {
+                "label": "Oprav ma!"
             },
             "highway": {
                 "label": "Typ"
@@ -497,7 +527,8 @@
                 "label": "Typ"
             },
             "lanes": {
-                "label": "Pruhov"
+                "label": "Pruhov",
+                "placeholder": "1, 2, 3..."
             },
             "layer": {
                 "label": "Vrstva"
@@ -506,7 +537,8 @@
                 "label": "Typ"
             },
             "levels": {
-                "label": "Poschodia"
+                "label": "Poschodia",
+                "placeholder": "2, 4, 6..."
             },
             "location": {
                 "label": "Poloha"
@@ -515,10 +547,12 @@
                 "label": "Typ"
             },
             "maxspeed": {
-                "label": "Povolená rýchlosť"
+                "label": "Povolená rýchlosť",
+                "placeholder": "40, 50, 60..."
             },
             "name": {
-                "label": "Názov"
+                "label": "Názov",
+                "placeholder": "Zaužívané meno (ak existuje)"
             },
             "natural": {
                 "label": "Prírodný"
@@ -551,7 +585,8 @@
                 "label": "Typ"
             },
             "phone": {
-                "label": "Telefón"
+                "label": "Telefón",
+                "placeholder": "+31 42 123 4567"
             },
             "place": {
                 "label": "Typ"
@@ -565,6 +600,9 @@
             "ref": {
                 "label": "Referenčné čislo"
             },
+            "relation": {
+                "label": "Typ"
+            },
             "religion": {
                 "label": "Náboženstvo",
                 "options": {
@@ -576,6 +614,9 @@
                     "shinto": "Šintuizmus",
                     "taoist": "Taoizmus"
                 }
+            },
+            "route": {
+                "label": "Typ"
             },
             "sac_scale": {
                 "label": "Obtiažnosť chodníka"
@@ -597,6 +638,7 @@
             },
             "structure": {
                 "label": "Štruktúra",
+                "placeholder": "Neznáme",
                 "options": {
                     "bridge": "Most",
                     "tunnel": "Tunel",
@@ -629,7 +671,8 @@
                 "label": "Typ"
             },
             "website": {
-                "label": "Internetová stránka"
+                "label": "Internetová stránka",
+                "placeholder": "http://adresa.sk/"
             },
             "wetland": {
                 "label": "Typ"
@@ -645,6 +688,9 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Adresa"
+            },
             "aeroway": {
                 "name": "Letectvo"
             },
@@ -817,6 +863,9 @@
                 "name": "Odpadový kôš",
                 "terms": "kontajner,kôš,smeti"
             },
+            "area": {
+                "name": "Plocha"
+            },
             "barrier": {
                 "name": "Bariera"
             },
@@ -904,10 +953,10 @@
                 "terms": "Prechod pre chodcov,zebra"
             },
             "highway/cycleway": {
-                "name": "Cestička pre cyklistov"
+                "name": "Cyklocesta"
             },
             "highway/footway": {
-                "name": "Cestička pre chodcov",
+                "name": "Chodník",
                 "terms": "cesta,cestička,chodník,turistický chodník,horská cesta,chodníček,cesta pre peších"
             },
             "highway/living_street": {
@@ -1117,7 +1166,8 @@
                 "name": "Volejbalový kurt"
             },
             "leisure/playground": {
-                "name": "Ihrisko pre deti"
+                "name": "Ihrisko pre deti",
+                "terms": "ihrisko,preliezačky,pieskovisko,pre deti"
             },
             "leisure/slipway": {
                 "name": "Spúšťanie lodí"
@@ -1127,6 +1177,9 @@
             },
             "leisure/swimming_pool": {
                 "name": "Plaváreň/Kúpalisko"
+            },
+            "line": {
+                "name": "Čiara"
             },
             "man_made": {
                 "name": "Výtvor ľudskej činnosti"
@@ -1226,12 +1279,6 @@
             "office": {
                 "name": "Úrad"
             },
-            "other": {
-                "name": "Iné"
-            },
-            "other_area": {
-                "name": "Iné"
-            },
             "place": {
                 "name": "Obec"
             },
@@ -1256,6 +1303,9 @@
             },
             "place/village": {
                 "name": "Dedina"
+            },
+            "point": {
+                "name": "Bod"
             },
             "power": {
                 "name": "Elektrická energia"
@@ -1312,6 +1362,12 @@
             "railway/tram": {
                 "name": "Električka",
                 "terms": "električka"
+            },
+            "relation": {
+                "name": "Relácia"
+            },
+            "route/ferry": {
+                "name": "Trajektová trasa"
             },
             "shop": {
                 "name": "Obchod"
@@ -1523,6 +1579,51 @@
             },
             "tourism/zoo": {
                 "name": "Zoo"
+            },
+            "type/boundary": {
+                "name": "Hranica"
+            },
+            "type/multipolygon": {
+                "name": "Multipolygón"
+            },
+            "type/restriction": {
+                "name": "Obmedzenie"
+            },
+            "type/route": {
+                "name": "Trasa"
+            },
+            "type/route/bicycle": {
+                "name": "Bicyklová trasa"
+            },
+            "type/route/bus": {
+                "name": "Autobusová trasa"
+            },
+            "type/route/detour": {
+                "name": "Obchádzková trasa"
+            },
+            "type/route/ferry": {
+                "name": "Trajektová trasa"
+            },
+            "type/route/foot": {
+                "name": "Turistická trasa"
+            },
+            "type/route/pipeline": {
+                "name": "Potrubná trasa"
+            },
+            "type/route/power": {
+                "name": "Elektrická trasa"
+            },
+            "type/route/road": {
+                "name": "Cestná trasa"
+            },
+            "type/route/train": {
+                "name": "Vlaková trasa"
+            },
+            "type/route/tram": {
+                "name": "Električková trasa"
+            },
+            "vertex": {
+                "name": "Iné"
             },
             "waterway": {
                 "name": "Vodná cesta"

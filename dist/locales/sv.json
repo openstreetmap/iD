@@ -152,7 +152,6 @@
     "just_edited": "Du har nu redigerat OpenStreetMap!",
     "browser_notice": "Denna redigerare funkar i Firefox, Chrome, Safari, Opera och Internet Explorer 9 och högre. Uppgradera din webbläsare eller använd Potlatch 2 för att redigera på kartan.",
     "view_on_osm": "Visa på OSM",
-    "zoom_in_edit": "Zooma in för att rita på kartan",
     "logout": "logga ut",
     "loading_auth": "Ansluter till OpenStreetMap...",
     "report_a_bug": "rapportera ett fel",
@@ -168,10 +167,6 @@
         "deleted": "Borttaget",
         "created": "Skapat"
     },
-    "contributors": {
-        "list": "Visa bidrag från {users}",
-        "truncated_list": "Visa bidrag från {users} och {count} andra"
-    },
     "geocoder": {
         "title": "Hitta en plats",
         "placeholder": "Hitta en plats",
@@ -186,12 +181,10 @@
         "show_more": "Visa mer",
         "new_tag": "Ny tagg",
         "view_on_osm": "Visa på openstreetmap.org",
-        "editing_feature": "Ändrar {feature}",
         "all_tags": "Alla taggar",
         "choose": "Välj typ av objekt",
         "results": "{n} sökresult för {search}",
         "reference": "Visa på OpenStreetmaps wiki",
-        "back_tooltip": "Ändra typ av objekt",
         "remove": "Ta bort",
         "search": "Sök"
     },
@@ -459,6 +452,9 @@
             },
             "service": {
                 "label": "Typ"
+            },
+            "shelter": {
+                "label": "Shelter"
             },
             "shop": {
                 "label": "Typ"
@@ -910,12 +906,6 @@
             },
             "office": {
                 "name": "Kontor"
-            },
-            "other": {
-                "name": "Övrigt"
-            },
-            "other_area": {
-                "name": "Övrigt"
             },
             "place": {
                 "name": "Plats"

@@ -48,6 +48,9 @@
         "cancel_draw": {
             "annotation": "Dibujo cancelado."
         },
+        "change_role": {
+            "annotation": "Se ha cambiado el rol de un miembro de la relación."
+        },
         "change_tags": {
             "annotation": "Etiquetas modificadas."
         },
@@ -84,7 +87,11 @@
                 "area": "Área eliminada.",
                 "relation": "Relación eliminada.",
                 "multiple": "{n} objetos eliminados."
-            }
+            },
+            "incomplete_relation": "Está característica no puede ser borrada porque no se ha descargado completa."
+        },
+        "delete_member": {
+            "annotation": "Eliminar un miembro de una relación"
         },
         "connect": {
             "annotation": {
@@ -156,10 +163,17 @@
     },
     "nothing_to_undo": "Nada que deshacer.",
     "nothing_to_redo": "Nada que rehacer.",
+    "tooltip_keyhint": "Acceso directo:",
     "just_edited": "¡Acaba de editar OpenStreetMap!",
     "browser_notice": "Este editor soporta Firefox, Chrome, Safari, Opera e Internet Explorer 9 o superior. Por favor actualice su navegador o utilice Potlatch 2 para editar el mapa.",
     "view_on_osm": "Ver en OSM",
-    "zoom_in_edit": "Haga zoom para editar el mapa",
+    "translate": {
+        "translate": "Traducir",
+        "localized_translation_label": "Nombre multilingüe",
+        "localized_translation_language": "Elegir idioma",
+        "localized_translation_name": "Nombre"
+    },
+    "zoom_in_edit": "Zoom para editar",
     "logout": "Cerrar sesión",
     "loading_auth": "Conectando a OpenStreetMap...",
     "report_a_bug": "Informar de un error",
@@ -172,7 +186,7 @@
         "title": "Guardar cambios",
         "description_placeholder": "Breve descripción de tus contribuciones",
         "message_label": "Mensaje del registro",
-        "upload_explanation": "Los cambios que sube como {user} serán visibles en todos los mapas que usen datos de OpenStreetMap.",
+        "upload_explanation": "Los cambios que va a subir como {user} serán visibles en todos los mapas que usen datos de OpenStreetMap.",
         "save": "Guardar",
         "cancel": "Cancelar",
         "warnings": "Avisos",
@@ -181,8 +195,8 @@
         "created": "Creado"
     },
     "contributors": {
-        "list": "Viendo las contribuciones de {users}",
-        "truncated_list": "Viendo las contribuciones de {users} y {count} más"
+        "list": "Ediciones de {users}",
+        "truncated_list": "Ediciones de {users} y {count} otros"
     },
     "geocoder": {
         "title": "Buscar un lugar",
@@ -198,14 +212,18 @@
         "show_more": "Ver más",
         "new_tag": "Nueva etiqueta",
         "view_on_osm": "Ver en openstreetmap.org",
-        "editing_feature": "Editando {feature}",
         "all_tags": "Todas las etiquetas",
+        "all_members": "Todos los miembros",
+        "all_relations": "Todas las relaciones",
+        "role": "Rol",
         "choose": "Selecciona tipo de elemento",
         "results": "{n} resultados para {search}",
         "reference": "Ver en la wiki de OpenStreetMap",
         "back_tooltip": "Cambiar tipo de elemento",
         "remove": "Eliminar",
-        "search": "Buscar"
+        "search": "Buscar",
+        "unknown": "Desconocido",
+        "incomplete": "<no descargado>"
     },
     "background": {
         "title": "Fondo",
@@ -315,7 +333,7 @@
             "title": "Líneas",
             "add": "Las líneas son utilizadas para representar elementos lineales como caminos, líneas férreas o ríos. **Haga clic en el botón Línea para agregar una nueva línea.**",
             "start": "**Inicie la línea haciendo clic al final de la vía.**",
-            "intersect": "Haga clic para añadir más puntos a la línea. Si es necesario, puede arrastrar el mapa mientras dibujas. Los caminos, y muchos otros tipos de líneas, son parte de una red más grande. Es importante que estas líneas estén conectadas apropiadamente para que las aplicaciones de enrutamiento, como los navegadores de automóvil, puedan funcionar correctamente. **Haga clic en nodo de la calle para crear una intersección conectando las dos líneas.**   ",
+            "intersect": "Haga clic para añadir más puntos a la línea. Si es necesario, puede arrastrar el mapa mientras dibujas. Los caminos, y muchos otros tipos de líneas, son parte de una red más grande. Es importante que estas líneas estén conectadas apropiadamente para que las aplicaciones de enrutamiento, como los navegadores de automóvil, puedan funcionar correctamente. **Haga clic en la calle 'Flower Street' para crear una intersección conectando las dos líneas.**   ",
             "finish": "Las líneas pueden finalizarse haciendo clic nuevamente en el ultimo punto. **Termine de dibujar la vía.** ",
             "road": "**Seleccione 'Carretera de tipología desconocida' de la lista**",
             "residential": "Existen diferentes tipos de vías, el más común de las cuales es el de calle urbana. **Elija el tipo 'Calle urbana'**",
@@ -343,6 +361,9 @@
             "category-road": {
                 "name": "Carretera de tipología desconocida"
             },
+            "category-route": {
+                "name": "Ruta"
+            },
             "category-water": {
                 "name": "Lámina de agua"
             }
@@ -350,6 +371,7 @@
         "fields": {
             "access": {
                 "label": "Acceso",
+                "placeholder": "Desconocido",
                 "types": {
                     "access": "General",
                     "foot": "A pie",
@@ -422,7 +444,8 @@
                 "label": "Edificio"
             },
             "capacity": {
-                "label": "Capacidad"
+                "label": "Capacidad",
+                "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
                 "label": "Dirección"
@@ -455,6 +478,9 @@
             "denotation": {
                 "label": "Denotación"
             },
+            "description": {
+                "label": "Descripción"
+            },
             "elevation": {
                 "label": "Altura"
             },
@@ -465,10 +491,14 @@
                 "label": "Tipo"
             },
             "fax": {
-                "label": "Fax"
+                "label": "Fax",
+                "placeholder": "+31 42 123 4567"
             },
             "fee": {
                 "label": "Tarifa"
+            },
+            "fixme": {
+                "label": "Arreglame"
             },
             "highway": {
                 "label": "Tipo"
@@ -497,7 +527,8 @@
                 "label": "Tipo"
             },
             "lanes": {
-                "label": "Carriles"
+                "label": "Carriles",
+                "placeholder": "1, 2, 3..."
             },
             "layer": {
                 "label": "Capa"
@@ -506,7 +537,8 @@
                 "label": "Tipo"
             },
             "levels": {
-                "label": "Niveles"
+                "label": "Niveles",
+                "placeholder": "2, 4, 6..."
             },
             "location": {
                 "label": "Localización"
@@ -515,10 +547,12 @@
                 "label": "Tipo"
             },
             "maxspeed": {
-                "label": "Límite de velocidad"
+                "label": "Límite de velocidad",
+                "placeholder": "40, 50, 60..."
             },
             "name": {
-                "label": "Nombre"
+                "label": "Nombre",
+                "placeholder": "Nombre común (si existe)"
             },
             "natural": {
                 "label": "Natural"
@@ -551,7 +585,8 @@
                 "label": "Tipo"
             },
             "phone": {
-                "label": "Teléfono"
+                "label": "Teléfono",
+                "placeholder": "+31 42 123 4567"
             },
             "place": {
                 "label": "Tipo"
@@ -565,6 +600,9 @@
             "ref": {
                 "label": "Referencia"
             },
+            "relation": {
+                "label": "Tipo"
+            },
             "religion": {
                 "label": "Religión",
                 "options": {
@@ -576,6 +614,9 @@
                     "shinto": "Sintoísta",
                     "taoist": "Taoísta"
                 }
+            },
+            "route": {
+                "label": "Tipo"
             },
             "sac_scale": {
                 "label": "Dificultad del sendero"
@@ -597,6 +638,7 @@
             },
             "structure": {
                 "label": "Estructura",
+                "placeholder": "Desconocido",
                 "options": {
                     "bridge": "Puente",
                     "tunnel": "Túnel",
@@ -629,7 +671,8 @@
                 "label": "Tipo"
             },
             "website": {
-                "label": "Sitio Web"
+                "label": "Sitio Web",
+                "placeholder": "http://ejemplo.com/"
             },
             "wetland": {
                 "label": "Tipo"
@@ -645,6 +688,9 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Dirección"
+            },
             "aeroway": {
                 "name": "Aerovía"
             },
@@ -817,6 +863,9 @@
                 "name": "Papelera",
                 "terms": "papelera,cubo de basura,contenedor de basura"
             },
+            "area": {
+                "name": "Área"
+            },
             "barrier": {
                 "name": "Barrera"
             },
@@ -930,7 +979,7 @@
                 "name": "Camino"
             },
             "highway/pedestrian": {
-                "name": "Peatonal"
+                "name": "Vía peatonal"
             },
             "highway/primary": {
                 "name": "Carretera primaria"
@@ -992,7 +1041,7 @@
                 "name": "Carretera principal"
             },
             "highway/trunk_link": {
-                "name": "Enlace a carretera primaria",
+                "name": "Enlace a carretera principal",
                 "terms": "salida"
             },
             "highway/turning_circle": {
@@ -1117,7 +1166,8 @@
                 "name": "Cancha de voleibol"
             },
             "leisure/playground": {
-                "name": "Parque infantil"
+                "name": "Parque infantil",
+                "terms": "columpios,zona de juego,juego infantil,balancín"
             },
             "leisure/slipway": {
                 "name": "Grada"
@@ -1127,6 +1177,9 @@
             },
             "leisure/swimming_pool": {
                 "name": "Piscina"
+            },
+            "line": {
+                "name": "Línea"
             },
             "man_made": {
                 "name": "Hecho por el hombre"
@@ -1226,12 +1279,6 @@
             "office": {
                 "name": "Oficina"
             },
-            "other": {
-                "name": "Otro"
-            },
-            "other_area": {
-                "name": "Otro"
-            },
             "place": {
                 "name": "Lugar"
             },
@@ -1256,6 +1303,9 @@
             },
             "place/village": {
                 "name": "Pueblo"
+            },
+            "point": {
+                "name": "Punto"
             },
             "power": {
                 "name": "Electricidad"
@@ -1312,6 +1362,9 @@
             "railway/tram": {
                 "name": "Tranvía",
                 "terms": "tranvía"
+            },
+            "relation": {
+                "name": "Relación"
             },
             "shop": {
                 "name": "Tienda"
@@ -1523,6 +1576,39 @@
             },
             "tourism/zoo": {
                 "name": "Zoo"
+            },
+            "type/boundary": {
+                "name": "Límite"
+            },
+            "type/multipolygon": {
+                "name": "Multipoligono"
+            },
+            "type/restriction": {
+                "name": "Restricción"
+            },
+            "type/route": {
+                "name": "Ruta"
+            },
+            "type/route/bicycle": {
+                "name": "Ruta en bicicleta"
+            },
+            "type/route/bus": {
+                "name": "Ruta del colectivo"
+            },
+            "type/route/foot": {
+                "name": "Ruta a pie"
+            },
+            "type/route/road": {
+                "name": "Ruta de carretera"
+            },
+            "type/route/train": {
+                "name": "Ruta del tren"
+            },
+            "type/route/tram": {
+                "name": "Ruta del tranvía"
+            },
+            "vertex": {
+                "name": "Otro"
             },
             "waterway": {
                 "name": "Vía fluvial"

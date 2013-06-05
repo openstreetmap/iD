@@ -1,20 +1,1202 @@
 {
+    "modes": {
+        "add_area": {
+            "title": "Area",
+            "description": "Menambah taman, bangunan, danau atau area lain pada peta.",
+            "tail": "Klik pada peta untuk mulai menggambar sebuah area, seperti sebuah taman, danau, atau bangunan."
+        },
+        "add_line": {
+            "title": "Garis",
+            "description": "Menambahkan jalan raya, jalan, jalur pejalan kaki, saluran air atau garis lain pada peta.",
+            "tail": "Klik pada peta untuk mulai menggambar sebuah jalan, jalur, atau rute."
+        },
+        "add_point": {
+            "title": "Titik",
+            "description": "Menambahkan restoran, monumen, kotak surat atau titik lain pada peta.",
+            "tail": "Klik pada peta untuk menambah sebuah titik."
+        },
+        "browse": {
+            "title": "Lihat",
+            "description": "Geser dan perbesar tampilan peta."
+        },
+        "draw_area": {
+            "tail": "Klik untuk menambah simpul di area anda. Klik simpul awal untuk menyelesaikan area."
+        },
+        "draw_line": {
+            "tail": "Klik untuk menambahkan simpul di garis. Klik pada garis lain untuk menghubungkan dengan mereka, dan klik ganda untuk mengakhiri suatu garis."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Telah ditambahkan sebuah titik.",
+                "vertex": "Ditambahkan simpul pada jalan."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Dimulai sebuah garis.",
+                "area": "Dimulai sebuah area."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Dilanjutkan sebuah garis.",
+                "area": "Dilanjutkan sebuah area."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Batal menggambar."
+        },
+        "change_role": {
+            "annotation": "Ubah aturan dari relasi anggota."
+        },
+        "change_tags": {
+            "annotation": "Tags "
+        },
+        "circularize": {
+            "title": "Melingkar",
+            "description": {
+                "line": "Buat garis ini melingkar.",
+                "area": "Buat area ini melingkar."
+            },
+            "key": "O",
+            "annotation": {
+                "line": "Buat garis melingkar.",
+                "area": "Buat sebuah area melingkar."
+            },
+            "not_closed": "Ini tidak bisa dibuat berputar karena bukan sebuah garis tertutup."
+        },
+        "orthogonalize": {
+            "description": "Kotakan sudut ini.",
+            "key": "Q",
+            "annotation": {
+                "line": "Mengotakkan sudut dari garis",
+                "area": "Mengotakkan sudut sebuah area."
+            },
+            "not_closed": "Tidak bisa dibuat mengkotak karena bukan garis tertutup."
+        },
+        "delete": {
+            "title": "Hapus",
+            "description": "Buang ini dari peta.",
+            "annotation": {
+                "point": "Menghapus sebuah titik.",
+                "vertex": "Menghapus sebuah simpul dari jalan.",
+                "line": "Mengapus sebuah jalan.",
+                "area": "Menghapus sebuah area.",
+                "relation": "Menghapus sebuah relasi.",
+                "multiple": "Menghapus {n} obyek."
+            },
+            "incomplete_relation": "Fitur ini tidak bisa dihapus karena belum sepenuhnya terunduh."
+        },
+        "connect": {
+            "annotation": {
+                "point": "Menyambungkan sebuah jalan ke sebuah titik.",
+                "vertex": "Menyambungkan sebuah jalan ke lainnya.",
+                "line": "Menyambungkan sebuah jalan ke sebuah garis.",
+                "area": "Menyambungkan sebuah jalan ke sebuah area."
+            }
+        },
+        "disconnect": {
+            "title": "Memutuskan",
+            "description": "Putuskan garis/area masing-masing.",
+            "key": "D",
+            "annotation": "Putuskan garis/area.",
+            "not_connected": "Kurang garis/area di sini untuk diputuskan."
+        },
+        "merge": {
+            "title": "Gabung",
+            "description": "Gabungkan garis-garis ini.",
+            "key": "C",
+            "annotation": "Menggabungkan {n} garis.",
+            "not_eligible": "Fitur-fitur ini tidak bisa digabung.",
+            "not_adjacent": "Garis-garis ini tidak bisa digabung karena mereka tidak terhubung."
+        },
+        "move": {
+            "title": "Geser",
+            "description": "Geser ini ke lokasi lain.",
+            "key": "M",
+            "annotation": {
+                "point": "Menggeser sebuah titik.",
+                "vertex": "Menggeser simpul dari sebuah jalan.",
+                "line": "Menggeser sebuah garis.",
+                "area": "Menggeser sebuah area.",
+                "multiple": "Menggeser beberapa obyek."
+            },
+            "incomplete_relation": "Fitur ini tidak bisa dipindahkan karena belum sepenuhnya terunduh."
+        },
+        "rotate": {
+            "title": "Putar",
+            "description": "Putar obyek ini berdasarkan titik pusatnya.",
+            "key": "R",
+            "annotation": {
+                "line": "Memutas sebua garis.",
+                "area": "Memutar sebuah area."
+            }
+        },
+        "reverse": {
+            "title": "Balik",
+            "description": "Buat garis ini menjadi berlawanan arah.",
+            "key": "V",
+            "annotation": "Sebuah garis dibalik."
+        },
+        "split": {
+            "title": "Pisah",
+            "description": {
+                "line": "Pisahkan garis ini menjadi dua di simpul ini.",
+                "area": "Pisahkan batas area ini menjadi dua.",
+                "multiple": "Pisahkan batas garis/area di simpul ini menjadi dua."
+            },
+            "key": "X",
+            "annotation": {
+                "line": "Pisahkan sebuah garis.",
+                "area": "Pisahkan sebuah batas area.",
+                "multiple": "Pisahkan {n} batas garis/area."
+            },
+            "not_eligible": "Garis tidak bisa dipisahkan di awal atau akhir bagian mereka.",
+            "multiple_ways": "Terlalu banyak garis untuk dipisahkan"
+        }
+    },
+    "nothing_to_undo": "Tak ada yang bisa di ulang.",
+    "nothing_to_redo": "Tak ada yang bisa di redo.",
+    "tooltip_keyhint": "Pintasan:",
+    "just_edited": "Anda baru saja menyunting OpenStreetMap!",
+    "browser_notice": "Penyuting ini mendukung di Firefox, Chrome, Safari, Opera, dan Internet Explorer 9 dan di atasnya. Sila tingkatnya peramban anda atau gunakan Potlatc 2 untuk menyuting peta.",
+    "view_on_osm": "Lihat di OSM",
+    "translate": {
+        "translate": "Terjemahkan",
+        "localized_translation_label": "Nama banyak-bahasa",
+        "localized_translation_language": "Pilih Bahasa",
+        "localized_translation_name": "Nama"
+    },
+    "logout": "keluar",
+    "loading_auth": "Menghubungkan dengan OpenStreetMap...",
+    "report_a_bug": "laporkan sebuah kerusakan",
+    "status": {
+        "error": "Tak bisa terhubung dengan API.",
+        "offline": "API-nya offline. Coba menyunting lagi nanti.",
+        "readonly": "API dalam kondisi hanya-baca. Anda perlu menunggu untuk menyimpan perubahan."
+    },
+    "commit": {
+        "title": "Simpan Perubahan",
+        "description_placeholder": "Deskripsi singkat kontribusi anda",
+        "message_label": "Sampaikan pesan",
+        "upload_explanation": "Perubahan yang anda unggah sebagai {user} akan terlihat di seluruh peta yang menggunakan data OpenStreetMap.",
+        "save": "Simpan",
+        "cancel": "Batal",
+        "warnings": "Peringatan",
+        "modified": "Berubah",
+        "deleted": "Terhapus",
+        "created": "Tercipta"
+    },
+    "contributors": {
+        "list": "Disunting oleh {users}",
+        "truncated_list": "Disunting oleh {users} dan {count} lainnya"
+    },
+    "geocoder": {
+        "title": "Temukan sebuah tempat",
+        "placeholder": "Temukan sebuah tempat",
+        "no_results": "Tidak dapat menemukan tempat dengan nama '{name}'"
+    },
+    "geolocate": {
+        "title": "Tunjukan Lokasi Saya"
+    },
+    "inspector": {
+        "no_documentation_combination": "Tidak ada dokumentasi yang tersedia untuk kombinasi tanda ini",
+        "no_documentation_key": "Tidak ada dokumentasi tersedia untuk kunci ini",
+        "show_more": "Tampilkan Lainnya",
+        "new_tag": "Penanda Baru",
+        "view_on_osm": "Lihat di openstreetmap.org",
+        "all_tags": "Semua Tags",
+        "all_members": "Semua anggota",
+        "all_relations": "Seluruh relasi",
+        "role": "Aturan",
+        "choose": "Pilih Tipe Fitur",
+        "results": "{n}hasil untuk {search}",
+        "reference": "Lihat di OpenStreetMap Wiki",
+        "remove": "Buang",
+        "search": "Cari",
+        "incomplete": "<tak terunduh>"
+    },
+    "background": {
+        "title": "Latar",
+        "description": "Pengaturan Latar",
+        "percent_brightness": "{opacity}% kecerahan",
+        "reset": "ulang"
+    },
+    "restore": {
+        "heading": "Anda memiliki perubahan yang belum disimpan",
+        "description": "Apakah anda ingin mengembalikan perubahan yang belum tersimpan dari sesi penyuntingan sebelumnya?",
+        "restore": "Kembalikan",
+        "reset": "Ulang"
+    },
+    "save": {
+        "title": "Simpan",
+        "help": "Simpan perubahan ke OpenStreetMap, jadikan mereka terlihat oleh pengguna lain.",
+        "no_changes": "Tak ada perubahan yang bisa disimpan.",
+        "error": "Sebuah kesalahan terjadi ketika penyimpanan.",
+        "uploading": "Mengunggah perubahan ke OpenStreetMap.",
+        "unsaved_changes": "Anda mememiliki perubahan yang belum tersimpan"
+    },
+    "success": {
+        "edited_osm": "OSM tersunting!",
+        "facebook": "Bagikan di Facebook",
+        "tweet": "Tweet",
+        "okay": "Baiklah"
+    },
+    "confirm": {
+        "okay": "Baiklah"
+    },
+    "splash": {
+        "welcome": "Selamat datang di penyuting iD OpenStreetMap",
+        "text": "iD begitu bersahabat namun juga alat yang kuat untuk berperan dalam peta dunia gratis terbaik. Ini adalah versi {version}. Untuk informasi lebih lihat {website} dan laporkan kesalahan di {github}.",
+        "walkthrough": "Memulai Perjalanan",
+        "start": "Sunting Sekarang"
+    },
+    "source_switch": {
+        "lose_changes": "Perubahan anda belum disimpan. Mengganti server peta akan membatalkan perubahan. Anda yakin akan mengganti server?",
+        "dev": "dev"
+    },
+    "tag_reference": {
+        "description": "Deskripsi",
+        "on_wiki": "{tag} di wiki.osm.org",
+        "used_with": "digunakan dengan {type}"
+    },
+    "validations": {
+        "untagged_point": "Titik Tak-bertanda",
+        "untagged_line": "Garis tak bertanda",
+        "untagged_area": "Area tak bertanda",
+        "many_deletions": "Anda menghapus {n} obyek. Apakah anda yakin? Ini akan menghapus dari peta yang semua orang lihat pada openstreetmap.org.",
+        "tag_suggests_area": "Penanda {tag} menyarankan garis sebaiknya dalam bentuk area, tapi ini bukan sebuah area"
+    },
+    "zoom": {
+        "in": "Perbesar tampilan",
+        "out": "Perkecil tampilan"
+    },
+    "cannot_zoom": "Tidak bisa memperbesar tampilan lebih jauh dengan mode ini.",
+    "gpx": {
+        "local_layer": "File GPX lokal",
+        "drag_drop": "Geser dan letakkan sebuah file .gpx ke halaman"
+    },
+    "help": {
+        "title": "Bantuan",
+        "help": "#Bantuan\n\nIni adalah penyunting untuk [OpenStreetMap] (http://www.openstreetmap.org/), peta dunia gratis dan bisa disunting. Anda dapat menggunakannya dengan menambahkan dan memperbarui data di area anda, membangun sebuah peta sumber-terbuka dan data-terbuka yang lebih baik untuk semua orang.\n\nPerubahan yang anda buat akan terlihat ke semua orang yang menggunakan OpenStreetMap. Untuk melakukan penyutingan, anda membutuhkan [free OpenStreetMap account] (https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) adalah proyek kolaborasi dengan [kode sumber tersedia di GitHub](http://github.com/systemed/iD).\n",
+        "gps": "# GPS⏎\n⏎\nData GPS adalah sumber data paling terpercaya untuk OpenStreetMap. Penyunting ini⏎\nmendukung penyusuran lokal file - `.gpx` pada komputer anda. Anda dapat mengumpulkan⏎\npenyusuran GPS seperti ini dengan banyak aplikasi handphone pintar yang sebaik⏎\nalat GPS personal.⏎\n⏎\nInformasi mengenai bagaimana melakukan sebuah survei GPS, baca⏎\n[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).⏎\n⏎\nUntuk menggunakan trek GPX untuk pemetaan, geser dan letakan file GPX ke dalam penyunting peta.⏎\nJika dikenali, file tersebut akan ditambahkan ke peta dan tampil sebagai garis hijau cerah.⏎\nKlik pada pilihan 'Pengaturan Latar' di sisi kiri untuk membolehkan, melumpuhkan,⏎\natau memperbesar tampilan ke berkas GPX baru tersebut.⏎\n⏎\nTrek GPX tidak terunggah langsung ke OpenStreetMap - cara terbaik untuk⏎\nmenggunakannya adalah menggambar ulangnya di peta, gunakan sebagai panduan untuk fitur baru⏎\nyang anda tambahkan.⏎\n",
+        "imagery": "# Citra⏎\n⏎\nCitra Foto Udara menjadi sumber penting untuk pemetaan. Kombinasi dari⏎\npemotretan pesawat, pandangan satelit, dan sumber gabungan lain yang tersedia⏎\ndi penyunting ada di pilihan 'Pengaturan Latar' di sebelah kiri.⏎\n⏎\nBiasanya lapisan satelit [Bing Maps](http://www.bing.com/maps/) ditampilkan di⏎\ndi penyunting ini, tapi ketika anda geser atau perbesar tampilan di suatu wilayah baru,⏎\nsumber baru lain juga bisa tersedia. Di beberapa negara, seperti Amerika Serikat,⏎\nPerancis, dan Denmark memiliki citra berkualitas tinggi yang tersedia di beberapa area.⏎\n⏎\nCitra kadang melenceng dari data peta karena ada kesalahan pada⏎\npenyedia data citra. Jika anda melihat banyak jalan yang bergeser dari latarnya,⏎\njangan semerta-merta memindahkan mereka semua ke latar yang pas. Namun, anda bisa menyesuaikan⏎\ncitranya agar pas dengan data yang ada dengan mengklik 'Fix alignment' pada⏎\nbagian bawah Pengaturan Latar.⏎\n"
+    },
+    "intro": {
+        "navigation": {
+            "title": "Navigasi",
+            "drag": "Area peta utama menampilkan data OpenStreetMap pada bagian atas dari latar. Anda dapat bernavigasi dengan menggeser dan mengskrol, seperti peta web lainnya. **Geser petanya!**",
+            "header": "Header menunjukan tipe fitur.",
+            "pane": "Ketika sebuah fitur terpilih, fitur penyunting akan tampil. Header menunjukan tipe fitur dan panel utama yang menunjukan atribut fitur, seperti nama dan alamat. **Tutup fitur penyunting dengan mengklik tombol tutup di bagian kanan atas.**"
+        },
+        "points": {
+            "title": "Titik",
+            "place": "Titik bisa diletakkan dengan mengklik pada peta. **Letakan titik di atap gedungnya.**",
+            "search": "Terdapat banyak fitur berbeda yang bisa ditampilkan dengan titik. Titik yang baru saja anda tambahkan adalah sebuah Cafe. **Carilah 'cafe' **",
+            "choose": "**Pilih Cafe dari daftar.**",
+            "describe": "Kini titik bisa ditandai sebagai cafe. Gunakan penyunting fitur, kita dapat tambahkan informasi lebih tentang fitur. **Tambahkan sebuah nama**",
+            "close": "Penyunting fitur dapat ditutup dengan mengklik tombol tutup. **Tutup penyunting fitur**",
+            "reselect": "Terkadang titik sudah ada, tapi ada kesalahan atau kurang lengkap. Kita dapat memperbaiki titik yang sudah ada. **Pilih titik yang baru saja anda buat.**",
+            "fixname": "**Ubah nama dan tutup fitur penyunting.**",
+            "reselect_delete": "Seluruh fitur pada peta dapat dihapus. **Klik pada titik yang anda buat**",
+            "delete": "Menu di sekitar titik berisi operasi yang bisa dilakukannya, termasuk menghapus. **Hapus titik**"
+        },
+        "areas": {
+            "title": "Area",
+            "add": "Area merupakan bentuk lain yang lebih rinci untuk mewakili sebuah fitur. Mereka memberikan informasi batas wilayah sebuah fitur. Area dapat digunakan untuk banyak tipe fitur yang diwakili titik, bahkan sering lebih disarankan. **Klik tombol Area untuk menambahkan sebuah area baru. **",
+            "corner": "Area tergambar dengan meletakkan simpul yang menandakan batas suatu area. **Letakan simpul pemula di satu sudut dari tempat-bermain.**",
+            "place": "Gambar area dengan meletakan lebih banyak simpul. Selesaikan area dengan mengklik pada simpul awal. **Gambar sebuah area untuk tempat bermain.**",
+            "search": "**Cari Tempat bermain.**",
+            "choose": "**Pilih Tempat-bermain dari daftar.**",
+            "describe": "**Tambahkan nama, dan tutup fitur penyunting**"
+        },
+        "lines": {
+            "title": "Garis",
+            "add": "Garis biasanya digunakan untuk mewakili fitur seperti jalan, jalan raya, dan sungai. **Klik tombol Garis untuk menambahkan garis baru.**",
+            "start": "**Mulai garis dengan mengklik pada ujung sebuah jalan.**",
+            "intersect": "Klik untuk menambahkan lagi simpul pada garis. Anda dapat menggeser peta ketika menggambar jika diperlukan. Jalan, dan banyak tipe lain dari garis, adalah bagian dari jaringan yang lebih besar. Ini penting untuk garis-garis ini untuk terhubung dengan baik agar alat penelusuran rute bisa berjalan. **Klik di Jalan Flower, untuk membuat percabangan yang menghubungkan dua garis.**",
+            "finish": "Garis bisa diselesaikan dengan mengklik ulang pada simpul terakhir. **Selesaikan menggambar jalan.**",
+            "road": "**Pilih Jalan dari daftar**",
+            "residential": "Ada beberapa tipe jalan berbeda, yang paling umum adalah Jalan Perumahan. **Pilih tipe jalan Perumahan**",
+            "describe": "**Namakan jalan dan tutup fitur penyunting.**",
+            "restart": "Jalan perlu memotong Jalan Flower."
+        },
+        "startediting": {
+            "title": "Mulai Menyunting",
+            "help": "Dokumentasi lebih dan ujicoba tersedia di sini.",
+            "save": "Jangan lupa menyimpan perubahan secara berkala!",
+            "start": "Mulai memetakan!"
+        }
+    },
     "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "Penggunaan Tanah"
+            },
+            "category-path": {
+                "name": "Gang"
+            },
+            "category-rail": {
+                "name": "Rel"
+            },
+            "category-road": {
+                "name": "Jalan"
+            },
+            "category-water": {
+                "name": "Air"
+            }
+        },
         "fields": {
+            "access": {
+                "label": "Akses",
+                "types": {
+                    "access": "Umum",
+                    "bicycle": "Sepeda",
+                    "horse": "Kuda"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Diizinkan"
+                    },
+                    "no": {
+                        "title": "Terlarang",
+                        "description": "Akses terbatas untuk umum"
+                    },
+                    "permissive": {
+                        "title": "Dibolehkan"
+                    },
+                    "private": {
+                        "title": "Pribadi"
+                    },
+                    "destination": {
+                        "title": "Tujuan"
+                    }
+                }
+            },
             "address": {
                 "label": "Alamat",
                 "placeholders": {
+                    "housename": "Nama rumah",
+                    "number": "123",
                     "street": "Jalan",
-                    "city": "Kota"
+                    "city": "Kota",
+                    "postcode": "Kode Pos"
                 }
+            },
+            "admin_level": {
+                "label": "Tingkat Admin"
+            },
+            "aeroway": {
+                "label": "Tipe"
+            },
+            "amenity": {
+                "label": "TIpe"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "barrier": {
+                "label": "Tipe"
+            },
+            "bicycle_parking": {
+                "label": "Tipe"
+            },
+            "building": {
+                "label": "Bangunan"
+            },
+            "building_area": {
+                "label": "Bangunan"
+            },
+            "building_yes": {
+                "label": "Bangunan"
+            },
+            "capacity": {
+                "label": "Kapasitas"
+            },
+            "cardinal_direction": {
+                "label": "Arah"
+            },
+            "clock_direction": {
+                "label": "Arah",
+                "options": {
+                    "clockwise": "Searah Jarum Jam",
+                    "anticlockwise": "Berlawanan Jarum Jam"
+                }
+            },
+            "collection_times": {
+                "label": "Waktu Pengumpulan"
+            },
+            "construction": {
+                "label": "Tipe"
+            },
+            "crossing": {
+                "label": "Tipe"
+            },
+            "elevation": {
+                "label": "Ketinggian"
+            },
+            "entrance": {
+                "label": "Tipe"
+            },
+            "fee": {
+                "label": "Biaya"
+            },
+            "highway": {
+                "label": "TIpe"
+            },
+            "historic": {
+                "label": "TIpe"
+            },
+            "internet_access": {
+                "label": "Akses Internet",
+                "options": {
+                    "wlan": "Wifi",
+                    "wired": "Kabel"
+                }
+            },
+            "landuse": {
+                "label": "Tipe"
+            },
+            "layer": {
+                "label": "Lapis"
+            },
+            "leisure": {
+                "label": "Tipe"
+            },
+            "levels": {
+                "label": "Tingkatan"
+            },
+            "location": {
+                "label": "Lokasi"
+            },
+            "man_made": {
+                "label": "Tipe"
+            },
+            "maxspeed": {
+                "label": "Batas Kecepatan"
+            },
+            "name": {
+                "label": "Nama"
+            },
+            "natural": {
+                "label": "Alami"
+            },
+            "network": {
+                "label": "Jaringan"
+            },
+            "note": {
+                "label": "Catatan"
+            },
+            "office": {
+                "label": "Tipe"
+            },
+            "oneway": {
+                "label": "Satu Arah"
+            },
+            "oneway_yes": {
+                "label": "Satu Arah"
+            },
+            "opening_hours": {
+                "label": "Jam"
+            },
+            "operator": {
+                "label": "Operator"
+            },
+            "parking": {
+                "label": "Tipe"
+            },
+            "phone": {
+                "label": "Telepon"
+            },
+            "place": {
+                "label": "Tipe"
+            },
+            "power": {
+                "label": "Tipe"
+            },
+            "railway": {
+                "label": "Tipe"
+            },
+            "ref": {
+                "label": "Referensi"
+            },
+            "religion": {
+                "label": "Agama",
+                "options": {
+                    "christian": "Kristen",
+                    "muslim": "Islam",
+                    "buddhist": "Budha",
+                    "jewish": "Yahudi",
+                    "hindu": "Hindu",
+                    "shinto": "Shinto",
+                    "taoist": "Tao"
+                }
+            },
+            "service": {
+                "label": "Tipe"
+            },
+            "shelter": {
+                "label": "Halte"
+            },
+            "shop": {
+                "label": "Tipe"
+            },
+            "source": {
+                "label": "Sumber"
+            },
+            "sport": {
+                "label": "Olahraga"
+            },
+            "structure": {
+                "options": {
+                    "bridge": "Jembatan"
+                }
+            },
+            "surface": {
+                "label": "Permukaan"
+            },
+            "tourism": {
+                "label": "Tipe"
+            },
+            "towertype": {
+                "label": "Tipe Tower"
+            },
+            "tracktype": {
+                "label": "Tipe"
+            },
+            "water": {
+                "label": "Tipe"
+            },
+            "waterway": {
+                "label": "Tipe"
+            },
+            "website": {
+                "label": "Website"
+            },
+            "wetland": {
+                "label": "Tipe"
+            },
+            "wheelchair": {
+                "label": "Akses Kursi Roda"
+            },
+            "wikipedia": {
+                "label": "Wikipedia"
+            },
+            "wood": {
+                "label": "Tipe"
             }
         },
         "presets": {
+            "aeroway": {
+                "name": "Landas pacu"
+            },
+            "aeroway/aerodrome": {
+                "name": "Bandar udara"
+            },
+            "aeroway/gate": {
+                "name": "Gerbang Bandar Udara"
+            },
+            "aeroway/hangar": {
+                "name": "Hangar"
+            },
+            "aeroway/helipad": {
+                "name": "Helipad",
+                "terms": "helikopter, pendaratan helikopter, bandar helikopter"
+            },
+            "aeroway/runway": {
+                "name": "Landaspacu",
+                "terms": "landasan pacu"
+            },
+            "aeroway/taxiway": {
+                "name": "Jalur taksi"
+            },
+            "aeroway/terminal": {
+                "name": "Terminal Bandarudara"
+            },
+            "amenity": {
+                "name": "Keramahan"
+            },
+            "amenity/atm": {
+                "name": "ATM"
+            },
+            "amenity/bank": {
+                "name": "Bank"
+            },
+            "amenity/bar": {
+                "name": "Bar"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Parkir Sepeda"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Penyewaan Sepeda"
+            },
+            "amenity/cafe": {
+                "name": "Cafe",
+                "terms": "kopi, teh, warung kopi"
+            },
+            "amenity/car_wash": {
+                "name": "Pencucian Mobil"
+            },
+            "amenity/cinema": {
+                "name": "Bioskop"
+            },
+            "amenity/college": {
+                "name": "Kampus"
+            },
+            "amenity/courthouse": {
+                "name": "Pengadilan"
+            },
             "amenity/embassy": {
                 "name": "Kedutaan besar"
             },
+            "amenity/fast_food": {
+                "name": "Makanan Cepat Saji"
+            },
+            "amenity/fire_station": {
+                "name": "Kantor Pemadam Kebakaran"
+            },
+            "amenity/fuel": {
+                "name": "Pom Bensin"
+            },
+            "amenity/grave_yard": {
+                "name": "Kuburan"
+            },
+            "amenity/hospital": {
+                "name": "Rumah Sakit"
+            },
+            "amenity/kindergarten": {
+                "name": "Taman Kanak-kanak"
+            },
+            "amenity/library": {
+                "name": "Perpustakaan"
+            },
+            "amenity/marketplace": {
+                "name": "Pasar"
+            },
+            "amenity/parking": {
+                "name": "Parkir"
+            },
+            "amenity/pharmacy": {
+                "name": "Farmasi"
+            },
+            "amenity/place_of_worship": {
+                "name": "Tempat Beribadah"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "Gereja"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "Mesjid",
+                "terms": "muslim, mesjid"
+            },
+            "amenity/police": {
+                "name": "Polisi"
+            },
+            "amenity/post_box": {
+                "name": "Kotak surat"
+            },
+            "amenity/post_office": {
+                "name": "Kantor Pos"
+            },
+            "amenity/pub": {
+                "name": "Pub"
+            },
+            "amenity/restaurant": {
+                "name": "Restoran"
+            },
+            "amenity/school": {
+                "name": "Sekolah"
+            },
+            "amenity/swimming_pool": {
+                "name": "Kolam Renang"
+            },
+            "amenity/telephone": {
+                "name": "Telepon"
+            },
+            "amenity/theatre": {
+                "name": "Teater",
+                "terms": "teater, pertunjukan, permainan, musik"
+            },
+            "amenity/toilets": {
+                "name": "Toilet"
+            },
+            "amenity/townhall": {
+                "name": "Balai Kota"
+            },
+            "amenity/university": {
+                "name": "Universitas",
+                "terms": "kampus"
+            },
+            "amenity/waste_basket": {
+                "name": "Tong Sampah"
+            },
+            "area": {
+                "name": "Area"
+            },
+            "barrier/gate": {
+                "name": "Gerbang"
+            },
+            "boundary/administrative": {
+                "name": "Batas Administrasi"
+            },
+            "building": {
+                "name": "Bangunan"
+            },
+            "building/apartments": {
+                "name": "Apartemen"
+            },
             "building/entrance": {
                 "name": "Masuk"
+            },
+            "building/house": {
+                "name": "Rumah"
+            },
+            "emergency/phone": {
+                "name": "Telepon Darurat"
+            },
+            "entrance": {
+                "name": "Pintu Masuk"
+            },
+            "highway": {
+                "name": "Jalan Raya"
+            },
+            "highway/bus_stop": {
+                "name": "Pemberhentian Bis"
+            },
+            "highway/crossing": {
+                "name": "Penyebrangan",
+                "terms": "penyebrangan, zebra cross"
+            },
+            "highway/cycleway": {
+                "name": "Jalur Sepeda"
+            },
+            "highway/footway": {
+                "name": "Jalur Pejalan Kaki"
+            },
+            "highway/living_street": {
+                "name": "Jalan TInggal"
+            },
+            "highway/motorway": {
+                "name": "Jalur Motor"
+            },
+            "highway/path": {
+                "name": "Jalur"
+            },
+            "highway/pedestrian": {
+                "name": "Pejalan kaki"
+            },
+            "highway/primary": {
+                "name": "Jalan Utama"
+            },
+            "highway/residential": {
+                "name": "Jalan Perumahan"
+            },
+            "highway/secondary": {
+                "name": "Jalan Sekunder"
+            },
+            "highway/service": {
+                "name": "Jalan Layanan"
+            },
+            "highway/service/emergency_access": {
+                "name": "Akses Darurat"
+            },
+            "highway/steps": {
+                "name": "Titian",
+                "terms": "tangga"
+            },
+            "highway/tertiary": {
+                "name": "Jalan Tersier"
+            },
+            "highway/track": {
+                "name": "Titian"
+            },
+            "highway/traffic_signals": {
+                "name": "Lampu Lalu lintas"
+            },
+            "highway/turning_circle": {
+                "name": "Putaran"
+            },
+            "highway/unclassified": {
+                "name": "Jalan Tak Diklasifikasi"
+            },
+            "historic": {
+                "name": "Situs Bersejarah"
+            },
+            "historic/monument": {
+                "name": "Monumen"
+            },
+            "landuse": {
+                "name": "Penggunaan Tanah"
+            },
+            "landuse/allotments": {
+                "name": "Peruntukan"
+            },
+            "landuse/basin": {
+                "name": "Cekungan"
+            },
+            "landuse/cemetery": {
+                "name": "Kuburan"
+            },
+            "landuse/commercial": {
+                "name": "Komersil"
+            },
+            "landuse/construction": {
+                "name": "Konstruksi"
+            },
+            "landuse/farm": {
+                "name": "Ternak"
+            },
+            "landuse/farmyard": {
+                "name": "Peternakan"
+            },
+            "landuse/forest": {
+                "name": "Hutan"
+            },
+            "landuse/grass": {
+                "name": "Rumput"
+            },
+            "landuse/industrial": {
+                "name": "Industri"
+            },
+            "landuse/meadow": {
+                "name": "Padang Rumput"
+            },
+            "landuse/orchard": {
+                "name": "Kebun Buah"
+            },
+            "landuse/quarry": {
+                "name": "Pertambangan"
+            },
+            "landuse/residential": {
+                "name": "Pemukiman"
+            },
+            "landuse/vineyard": {
+                "name": "Kebun Anggur"
+            },
+            "leisure/garden": {
+                "name": "Kebun"
+            },
+            "leisure/golf_course": {
+                "name": "Lapangan Golf"
+            },
+            "leisure/park": {
+                "name": "Taman"
+            },
+            "leisure/pitch": {
+                "name": "Lapangan Olahraga"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Lapangan Rugby"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Lapangan Basket"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Lapangan Bola"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Lapangan Tenis"
+            },
+            "leisure/pitch/volleyball": {
+                "name": "Lapangan Voli"
+            },
+            "leisure/playground": {
+                "name": "Lapangan Bermain"
+            },
+            "leisure/stadium": {
+                "name": "Stadion"
+            },
+            "leisure/swimming_pool": {
+                "name": "Kolam Renang"
+            },
+            "line": {
+                "name": "Garis"
+            },
+            "man_made/lighthouse": {
+                "name": "Mercusuar"
+            },
+            "man_made/pier": {
+                "name": "Dermaga"
+            },
+            "man_made/survey_point": {
+                "name": "Titik Survei"
+            },
+            "man_made/tower": {
+                "name": "Menara"
+            },
+            "man_made/water_tower": {
+                "name": "Tower Air"
+            },
+            "natural": {
+                "name": "Alami"
+            },
+            "natural/bay": {
+                "name": "Teluk"
+            },
+            "natural/beach": {
+                "name": "Pantai"
+            },
+            "natural/cliff": {
+                "name": "Jurang"
+            },
+            "natural/coastline": {
+                "name": "Garis Pantai"
+            },
+            "natural/glacier": {
+                "name": "Sungai Es"
+            },
+            "natural/grassland": {
+                "name": "Padang Rumput"
+            },
+            "natural/peak": {
+                "name": "Puncak"
+            },
+            "natural/scrub": {
+                "name": "Belukar"
+            },
+            "natural/spring": {
+                "name": "Mata air"
+            },
+            "natural/tree": {
+                "name": "Pohon"
+            },
+            "natural/water": {
+                "name": "Air"
+            },
+            "natural/water/lake": {
+                "name": "Danau"
+            },
+            "natural/water/pond": {
+                "name": "Empang"
+            },
+            "natural/water/reservoir": {
+                "name": "Serapan Air"
+            },
+            "natural/wetland": {
+                "name": "Lahan Basah"
+            },
+            "natural/wood": {
+                "name": "Hutan"
+            },
+            "office": {
+                "name": "Kantor"
+            },
+            "place": {
+                "name": "Tempat"
+            },
+            "place/city": {
+                "name": "Kota"
+            },
+            "place/hamlet": {
+                "name": "Dusun"
+            },
+            "place/island": {
+                "name": "Pulau"
+            },
+            "place/locality": {
+                "name": "Daerah Sekitar"
+            },
+            "place/village": {
+                "name": "Desa"
+            },
+            "point": {
+                "name": "Titik"
+            },
+            "railway": {
+                "name": "Jalur Rel"
+            },
+            "railway/rail": {
+                "name": "Rel Kereta"
+            },
+            "railway/station": {
+                "name": "Stasiun Kereta"
+            },
+            "railway/subway": {
+                "name": "Terowongan"
+            },
+            "railway/subway_entrance": {
+                "name": "Pintu Terowongan"
+            },
+            "relation": {
+                "name": "Relasi"
+            },
+            "route/ferry": {
+                "name": "Rute Fery"
+            },
+            "shop": {
+                "name": "Toko"
+            },
+            "shop/alcohol": {
+                "name": "Toko Minuman",
+                "terms": "alkohol"
+            },
+            "shop/bakery": {
+                "name": "Toko Roti"
+            },
+            "shop/beauty": {
+                "name": "Salon Kecantikan"
+            },
+            "shop/bicycle": {
+                "name": "Toko Sepeda"
+            },
+            "shop/books": {
+                "name": "Toko Buku"
+            },
+            "shop/boutique": {
+                "name": "Butik"
+            },
+            "shop/butcher": {
+                "name": "Penjagalan"
+            },
+            "shop/car": {
+                "name": "Dealer Mobil"
+            },
+            "shop/car_repair": {
+                "name": "Bengkel Mobil"
+            },
+            "shop/clothes": {
+                "name": "Toko Baju"
+            },
+            "shop/computer": {
+                "name": "Toko Komputer"
+            },
+            "shop/florist": {
+                "name": "Toko Bunga"
+            },
+            "shop/furniture": {
+                "name": "Toko Furnitur"
+            },
+            "shop/jewelry": {
+                "name": "Toko Perhiasan"
+            },
+            "shop/laundry": {
+                "name": "Laundri"
+            },
+            "shop/mall": {
+                "name": "Mall"
+            },
+            "shop/mobile_phone": {
+                "name": "Toko Handphone"
+            },
+            "shop/motorcycle": {
+                "name": "Dealer Motor"
+            },
+            "shop/music": {
+                "name": "Toko Musik"
+            },
+            "shop/optician": {
+                "name": "Optik"
+            },
+            "shop/outdoor": {
+                "name": "Toko Outdoor"
+            },
+            "shop/pet": {
+                "name": "Toko Peliharaan"
+            },
+            "shop/shoes": {
+                "name": "Toko Sepatu"
+            },
+            "shop/sports": {
+                "name": "Toko Olahraga"
+            },
+            "shop/stationery": {
+                "name": "Toko Perlengkapan Kantor"
+            },
+            "shop/supermarket": {
+                "name": "Supermarket"
+            },
+            "shop/toys": {
+                "name": "Toko Mainan"
+            },
+            "shop/travel_agency": {
+                "name": "Biro Perjalanan"
+            },
+            "shop/tyres": {
+                "name": "Toko Ban"
+            },
+            "tourism": {
+                "name": "Wisata"
+            },
+            "tourism/artwork": {
+                "name": "Karyaseni"
+            },
+            "tourism/attraction": {
+                "name": "Atraksi Wisata"
+            },
+            "tourism/camp_site": {
+                "name": "Tempat Berkemah"
+            },
+            "tourism/hotel": {
+                "name": "Hotel"
+            },
+            "tourism/information": {
+                "name": "Informasi"
+            },
+            "tourism/motel": {
+                "name": "Motel"
+            },
+            "tourism/museum": {
+                "name": "Museum"
+            },
+            "tourism/picnic_site": {
+                "name": "Tempat Piknik"
+            },
+            "tourism/viewpoint": {
+                "name": "Titik Pandang"
+            },
+            "tourism/zoo": {
+                "name": "Kebun Binatang"
+            },
+            "type/multipolygon": {
+                "name": "Banyak-poligon"
+            },
+            "type/route": {
+                "name": "Rute"
+            },
+            "type/route/bicycle": {
+                "name": "Rute Sepeda"
+            },
+            "type/route/bus": {
+                "name": "Rute Bis"
+            },
+            "type/route/ferry": {
+                "name": "Rute Feri"
+            },
+            "type/route/foot": {
+                "name": "Rute Jalan Kaki"
+            },
+            "type/route/pipeline": {
+                "name": "Rute Pipa"
+            },
+            "type/route/power": {
+                "name": "Rute Energi Listrik"
+            },
+            "type/route/road": {
+                "name": "Rute Jalan"
+            },
+            "type/route/train": {
+                "name": "Rute Kereta"
+            },
+            "type/route/tram": {
+                "name": "Rute Trem"
+            },
+            "vertex": {
+                "name": "Lainnya"
+            },
+            "waterway": {
+                "name": "Jalur Air"
+            },
+            "waterway/canal": {
+                "name": "Kanal"
+            },
+            "waterway/dam": {
+                "name": "Bendungan"
+            },
+            "waterway/river": {
+                "name": "Sungai"
             }
         }
     }

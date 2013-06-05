@@ -48,6 +48,9 @@
         "cancel_draw": {
             "annotation": "描画のキャンセル"
         },
+        "change_role": {
+            "annotation": "リレーションメンバーの役割を変更"
+        },
         "change_tags": {
             "annotation": "タグの変更"
         },
@@ -84,7 +87,11 @@
                 "area": "エリア削除",
                 "relation": "リレーション削除",
                 "multiple": "{n} 個のオブジェクトを削除"
-            }
+            },
+            "incomplete_relation": "関連する地物データをすべてダウンロードしていないため、この地物を削除できません。"
+        },
+        "delete_member": {
+            "annotation": "リレーションからメンバーを削除"
         },
         "connect": {
             "annotation": {
@@ -156,10 +163,17 @@
     },
     "nothing_to_undo": "やり直す変更点がありません",
     "nothing_to_redo": "やり直した変更点がありません",
+    "tooltip_keyhint": "ショートカット",
     "just_edited": "OpenStreetMap編集完了！",
     "browser_notice": "このエディタは Firefox, Chrome, Safari, Opera, および Internet Explorer 9 以上をサポートしています。ブラウザのバージョンを更新するか、Potlatch 2を使用して編集してください",
     "view_on_osm": "オブジェクト情報をOSMで確認",
-    "zoom_in_edit": "編集するにはさらに地図を拡大してください",
+    "translate": {
+        "translate": "翻訳",
+        "localized_translation_label": "多言語名称",
+        "localized_translation_language": "言語選択",
+        "localized_translation_name": "名称"
+    },
+    "zoom_in_edit": "編集するには地図を拡大してください",
     "logout": "ログアウト",
     "loading_auth": "OpenStreetMapへ接続中...",
     "report_a_bug": "バグ報告",
@@ -181,8 +195,8 @@
         "created": "作成した地物"
     },
     "contributors": {
-        "list": "{users} による編集履歴を表示",
-        "truncated_list": "{users} とその他 {count} 人による編集履歴を表示"
+        "list": "{users} による編集",
+        "truncated_list": "{users} とその他 {count} 人による編集"
     },
     "geocoder": {
         "title": "特定地点を検索",
@@ -198,14 +212,18 @@
         "show_more": "次を表示",
         "new_tag": "新規タグ",
         "view_on_osm": "openstreetmap.orgで確認",
-        "editing_feature": "{feature}を編集",
         "all_tags": "すべてのタグ",
+        "all_members": "全てのメンバー",
+        "all_relations": "全てのリレーション",
+        "role": "役割",
         "choose": "地物の種類を選択",
         "results": "検索結果{n}件: {search}",
         "reference": "OpenStreetMap WIkiで確認",
-        "back_tooltip": "地物の種別を変更",
+        "back_tooltip": "地物の編集",
         "remove": "削除",
-        "search": "検索"
+        "search": "検索",
+        "unknown": "不明",
+        "incomplete": "<ダウンロード未完了>"
     },
     "background": {
         "title": "背景画像",
@@ -343,6 +361,9 @@
             "category-road": {
                 "name": "道路"
             },
+            "category-route": {
+                "name": "ルート"
+            },
             "category-water": {
                 "name": "水路"
             }
@@ -350,6 +371,7 @@
         "fields": {
             "access": {
                 "label": "通行制限",
+                "placeholder": "その他",
                 "types": {
                     "access": "一般",
                     "foot": "歩行者",
@@ -422,7 +444,8 @@
                 "label": "建物種別"
             },
             "capacity": {
-                "label": "収容可能な数量"
+                "label": "収容可能な数量",
+                "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
                 "label": "方向"
@@ -455,6 +478,9 @@
             "denotation": {
                 "label": "表示"
             },
+            "description": {
+                "label": "詳しい内容"
+            },
             "elevation": {
                 "label": "標高"
             },
@@ -465,10 +491,14 @@
                 "label": "タイプ"
             },
             "fax": {
-                "label": "Fax"
+                "label": "Fax",
+                "placeholder": "+31 42 123 4567"
             },
             "fee": {
                 "label": "利用料金"
+            },
+            "fixme": {
+                "label": "Fix Me"
             },
             "highway": {
                 "label": "道路区分"
@@ -497,7 +527,8 @@
                 "label": "土地区分"
             },
             "lanes": {
-                "label": "車線数"
+                "label": "車線数",
+                "placeholder": "1, 2, 3..."
             },
             "layer": {
                 "label": "レイヤ"
@@ -506,7 +537,8 @@
                 "label": "タイプ"
             },
             "levels": {
-                "label": "階数"
+                "label": "階数",
+                "placeholder": "2, 4, 6..."
             },
             "location": {
                 "label": "位置"
@@ -515,10 +547,12 @@
                 "label": "タイプ"
             },
             "maxspeed": {
-                "label": "最高速度"
+                "label": "最高速度",
+                "placeholder": "40, 50, 60..."
             },
             "name": {
-                "label": "名称"
+                "label": "名称",
+                "placeholder": "一般的な呼称 (もしあれば)"
             },
             "natural": {
                 "label": "自然"
@@ -551,7 +585,8 @@
                 "label": "タイプ"
             },
             "phone": {
-                "label": "電話番号"
+                "label": "電話番号",
+                "placeholder": "+31 42 123 4567"
             },
             "place": {
                 "label": "タイプ"
@@ -565,6 +600,9 @@
             "ref": {
                 "label": "管理番号"
             },
+            "relation": {
+                "label": "タイプ"
+            },
             "religion": {
                 "label": "宗教",
                 "options": {
@@ -576,6 +614,9 @@
                     "shinto": "神道",
                     "taoist": "道教"
                 }
+            },
+            "route": {
+                "label": "タイプ"
             },
             "sac_scale": {
                 "label": "通行の困難さ"
@@ -597,6 +638,7 @@
             },
             "structure": {
                 "label": "構造",
+                "placeholder": "不明",
                 "options": {
                     "bridge": "橋梁",
                     "tunnel": "トンネル",
@@ -629,7 +671,8 @@
                 "label": "水路区分"
             },
             "website": {
-                "label": "ウェブサイト"
+                "label": "ウェブサイト",
+                "placeholder": "http://example.com/"
             },
             "wetland": {
                 "label": "タイプ"
@@ -645,6 +688,9 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "住所"
+            },
             "aeroway": {
                 "name": "航空施設"
             },
@@ -816,6 +862,9 @@
             "amenity/waste_basket": {
                 "name": "ゴミ箱",
                 "terms": "くず入れ, くずかご, 収集ボックス, 護美箱"
+            },
+            "area": {
+                "name": "エリア"
             },
             "barrier": {
                 "name": "障害物"
@@ -1117,7 +1166,8 @@
                 "name": "バレーボールコート"
             },
             "leisure/playground": {
-                "name": "児童公園"
+                "name": "児童公園",
+                "terms": "ジャングルジム, 遊び場"
             },
             "leisure/slipway": {
                 "name": "進水所"
@@ -1127,6 +1177,9 @@
             },
             "leisure/swimming_pool": {
                 "name": "プール"
+            },
+            "line": {
+                "name": "ライン"
             },
             "man_made": {
                 "name": "人工物"
@@ -1226,12 +1279,6 @@
             "office": {
                 "name": "オフィス"
             },
-            "other": {
-                "name": "その他"
-            },
-            "other_area": {
-                "name": "その他"
-            },
             "place": {
                 "name": "地名"
             },
@@ -1256,6 +1303,9 @@
             },
             "place/village": {
                 "name": "村"
+            },
+            "point": {
+                "name": "ポイント"
             },
             "power": {
                 "name": "電力"
@@ -1312,6 +1362,12 @@
             "railway/tram": {
                 "name": "路面電車",
                 "terms": "路面電車"
+            },
+            "relation": {
+                "name": "リレーション"
+            },
+            "route/ferry": {
+                "name": "フェリー・ルート"
             },
             "shop": {
                 "name": "店舗"
@@ -1523,6 +1579,51 @@
             },
             "tourism/zoo": {
                 "name": "遊園地"
+            },
+            "type/boundary": {
+                "name": "行政境界"
+            },
+            "type/multipolygon": {
+                "name": "マルチポリゴン"
+            },
+            "type/restriction": {
+                "name": "制限"
+            },
+            "type/route": {
+                "name": "ルート"
+            },
+            "type/route/bicycle": {
+                "name": "サイクリングルート"
+            },
+            "type/route/bus": {
+                "name": "バスルート"
+            },
+            "type/route/detour": {
+                "name": "迂回ルート"
+            },
+            "type/route/ferry": {
+                "name": "フェリールート"
+            },
+            "type/route/foot": {
+                "name": "歩道ルート"
+            },
+            "type/route/pipeline": {
+                "name": "パイプラインルート"
+            },
+            "type/route/power": {
+                "name": "電力線ルート"
+            },
+            "type/route/road": {
+                "name": "道路ルート"
+            },
+            "type/route/train": {
+                "name": "鉄道ルート"
+            },
+            "type/route/tram": {
+                "name": "路面電車ルート"
+            },
+            "vertex": {
+                "name": "その他"
             },
             "waterway": {
                 "name": "水路, 河川"

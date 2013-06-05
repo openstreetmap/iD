@@ -151,7 +151,6 @@
     "just_edited": "Şu an OpenStreetMap'de bir değişiklik yaptınız!",
     "browser_notice": "Bu editör sadece Firefox, Chrome, Safari, Opera ile Internet Explorer 9 ve üstü tarayıcılarda çalışmaktadır. Lütfen tarayınıcı güncelleyin ya da Potlatch 2'yi kullanarak haritada güncelleme yapınız.",
     "view_on_osm": "OSM üstünde Gör",
-    "zoom_in_edit": "Güncelleme yapmak için haritada yakınlaşmalısınız",
     "logout": "Çıkış",
     "loading_auth": "OpenStreetMap'e bağlanıyor...",
     "report_a_bug": "Hata rapor et",
@@ -167,10 +166,6 @@
         "deleted": "Silindi",
         "created": "Oluşturuldu"
     },
-    "contributors": {
-        "list": "{users} tarafından yapılan katkılar",
-        "truncated_list": "{users} ve diğer {count} tarafından yapılan katkılar"
-    },
     "geocoder": {
         "title": "Bir Yer Bul",
         "placeholder": "Bir yer bul",
@@ -184,10 +179,8 @@
         "no_documentation_key": "Bu anahtar için dökümantasyon bulunmamaktadır.",
         "show_more": "Daha fazla göster",
         "new_tag": "Yeni Etiket",
-        "editing_feature": "{feature} düzenleniyor",
         "choose": "Kısım tipini seçiniz",
-        "results": "{search} kelimesi için {n} adet sonuç ",
-        "back_tooltip": "Kısım tipini değiştir"
+        "results": "{search} kelimesi için {n} adet sonuç "
     },
     "background": {
         "title": "Arkaplan",
@@ -814,12 +807,6 @@
             },
             "office": {
                 "name": "Ofis"
-            },
-            "other": {
-                "name": "Diğer"
-            },
-            "other_area": {
-                "name": "Diğer"
             },
             "place": {
                 "name": "Yer"

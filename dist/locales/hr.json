@@ -13,6 +13,9 @@
             "category-road": {
                 "name": "Cesta"
             },
+            "category-route": {
+                "name": "Ruta"
+            },
             "category-water": {
                 "name": "Voda"
             }
@@ -20,9 +23,11 @@
         "fields": {
             "access": {
                 "label": "Pristup",
+                "placeholder": "Nepoznat",
                 "types": {
+                    "access": "Općeniti pristup",
                     "foot": "Pješice",
-                    "motor_vehicle": "Morotna vozila",
+                    "motor_vehicle": "Motorna vozila",
                     "bicycle": "Bicikli",
                     "horse": "Konji"
                 },
@@ -62,10 +67,22 @@
                     "postcode": "Poštanski broj"
                 }
             },
+            "admin_level": {
+                "label": "Administratorsko područje"
+            },
+            "aeroway": {
+                "label": "Tip"
+            },
+            "amenity": {
+                "label": "Tip"
+            },
             "atm": {
                 "label": "Bankomat"
             },
             "barrier": {
+                "label": "Tip"
+            },
+            "bicycle_parking": {
                 "label": "Tip"
             },
             "building": {
@@ -78,19 +95,27 @@
                 "label": "Građevina"
             },
             "capacity": {
-                "label": "Kapacitet"
+                "label": "Kapacitet",
+                "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
                 "label": "Smijer"
             },
             "clock_direction": {
+                "label": "Smjer",
                 "options": {
                     "clockwise": "U smijeru kazaljke za satu",
                     "anticlockwise": "U suprotnom smijeru od kazaljke na satu"
                 }
             },
+            "construction": {
+                "label": "Tip"
+            },
             "country": {
                 "label": "Država"
+            },
+            "crossing": {
+                "label": "Tip"
             },
             "cuisine": {
                 "label": "Hrana"
@@ -100,6 +125,9 @@
             },
             "denotation": {
                 "label": "Denotacija"
+            },
+            "description": {
+                "label": "Opis"
             },
             "elevation": {
                 "label": "Visina"
@@ -111,10 +139,29 @@
                 "label": "Tip"
             },
             "fax": {
-                "label": "Fax"
+                "label": "Fax",
+                "placeholder": "+385 01 123 4567"
             },
             "fee": {
                 "label": "Plaćanje"
+            },
+            "fixme": {
+                "label": "Popravi me"
+            },
+            "highway": {
+                "label": "Tip"
+            },
+            "historic": {
+                "label": "Tip"
+            },
+            "iata": {
+                "label": "Međunarodni IATA kôd zračne luke"
+            },
+            "icao": {
+                "label": "Međunarodni ICAO kôd zračne luke"
+            },
+            "incline": {
+                "label": "Nagib"
             },
             "internet_access": {
                 "label": "Dostupan internet",
@@ -128,7 +175,8 @@
                 "label": "Tip"
             },
             "lanes": {
-                "label": "Broj traka"
+                "label": "Broj traka",
+                "placeholder": "1, 2, 3..."
             },
             "layer": {
                 "label": "Sloj"
@@ -137,16 +185,22 @@
                 "label": "Tip"
             },
             "levels": {
-                "label": "Razina"
+                "label": "Razina",
+                "placeholder": "2, 4, 6..."
+            },
+            "location": {
+                "label": "Lokacija"
             },
             "man_made": {
                 "label": "Tip"
             },
             "maxspeed": {
-                "label": "Ograničenje brzine"
+                "label": "Ograničenje brzine",
+                "placeholder": "40, 50, 60..."
             },
             "name": {
-                "label": "Ime"
+                "label": "Ime",
+                "placeholder": "Opće ime (ako postoji)"
             },
             "natural": {
                 "label": "Priroda"
@@ -172,11 +226,15 @@
             "operator": {
                 "label": "Operator"
             },
+            "park_ride": {
+                "label": "Parkiraj i idi javnim prijevozom"
+            },
             "parking": {
                 "label": "Tip"
             },
             "phone": {
-                "label": "Telefon"
+                "label": "Telefon",
+                "placeholder": "+385 01 123 4567"
             },
             "place": {
                 "label": "Tip"
@@ -190,6 +248,9 @@
             "ref": {
                 "label": "Broj ceste"
             },
+            "relation": {
+                "label": "Tip"
+            },
             "religion": {
                 "label": "Religija",
                 "options": {
@@ -201,6 +262,12 @@
                     "shinto": "Šintoistički",
                     "taoist": "Taoistički"
                 }
+            },
+            "route": {
+                "label": "Tip"
+            },
+            "sac_scale": {
+                "label": "Težina staze"
             },
             "service": {
                 "label": "Tip"
@@ -219,6 +286,7 @@
             },
             "structure": {
                 "label": "Konstrukcija",
+                "placeholder": "Nepoznat",
                 "options": {
                     "bridge": "Most",
                     "tunnel": "Tunel",
@@ -235,8 +303,14 @@
             "tourism": {
                 "label": "Tip"
             },
+            "towertype": {
+                "label": "Vrsta tornja"
+            },
             "tracktype": {
                 "label": "Tip"
+            },
+            "trail_visibility": {
+                "label": "Vidljivost staze"
             },
             "water": {
                 "label": "Tip"
@@ -245,7 +319,8 @@
                 "label": "Tip"
             },
             "website": {
-                "label": "Web stranica"
+                "label": "Web stranica",
+                "placeholder": "http://primjer.com/"
             },
             "wetland": {
                 "label": "Tip"
@@ -261,6 +336,9 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Adresa"
+            },
             "aeroway": {
                 "name": "Pista"
             },
@@ -268,12 +346,35 @@
                 "name": "Zračna luka",
                 "terms": "zrakoplov,zračna luka, zračna luka"
             },
+            "aeroway/apron": {
+                "name": "Betonirano područje"
+            },
+            "aeroway/gate": {
+                "name": "Aerodromski ulaz"
+            },
+            "aeroway/hangar": {
+                "name": "Hangar"
+            },
             "aeroway/helipad": {
                 "name": "Heliodrom",
                 "terms": "helikopter,heliodrom,heliodrom"
             },
+            "aeroway/runway": {
+                "name": "Pista",
+                "terms": "pista za slijetanje"
+            },
+            "aeroway/taxiway": {
+                "name": "Staza za voženje"
+            },
+            "aeroway/terminal": {
+                "name": "Terminal zračne luke",
+                "terms": "zračna luka, zračna luka"
+            },
             "amenity": {
                 "name": "Usluge"
+            },
+            "amenity/atm": {
+                "name": "Bankomat"
             },
             "amenity/bank": {
                 "name": "Banka"
@@ -300,6 +401,9 @@
             "amenity/cinema": {
                 "name": "Kino"
             },
+            "amenity/college": {
+                "name": "Fakultet"
+            },
             "amenity/courthouse": {
                 "name": "Zgrada suda"
             },
@@ -323,6 +427,10 @@
             },
             "amenity/hospital": {
                 "name": "Bolnica"
+            },
+            "amenity/kindergarten": {
+                "name": "Vrtić",
+                "terms": "predškolski, jaslice, dječji vrtić, igraonica"
             },
             "amenity/library": {
                 "name": "Knjižnica"
@@ -385,10 +493,15 @@
                 "name": "Gradska vjećnica"
             },
             "amenity/university": {
-                "name": "Sveučilište"
+                "name": "Sveučilište",
+                "terms": "fakultet"
             },
             "amenity/waste_basket": {
-                "name": "Kanta za smeće"
+                "name": "Kanta za smeće",
+                "terms": "kanta za smeće, koš za otpatke, koš za smeće, koš za smeće"
+            },
+            "area": {
+                "name": "Površina"
             },
             "barrier": {
                 "name": "Prepreka"
@@ -423,6 +536,9 @@
             "barrier/lift_gate": {
                 "name": "Rampa"
             },
+            "barrier/retaining_wall": {
+                "name": "Potporni zid"
+            },
             "barrier/toll_booth": {
                 "name": "Naplatna kućica"
             },
@@ -444,6 +560,9 @@
             "building/house": {
                 "name": "Kuća"
             },
+            "emergency/phone": {
+                "name": "Telefon za nuždu"
+            },
             "entrance": {
                 "name": "Ulaz"
             },
@@ -451,7 +570,8 @@
                 "name": "Prometnica"
             },
             "highway/bridleway": {
-                "name": "Staza za konje"
+                "name": "Staza za konje",
+                "terms": "put za pješake konje i bicikliste, konjička staza, staza za jahanje, cesta za jahanje, konjski put"
             },
             "highway/bus_stop": {
                 "name": "Autobusna stanica"
@@ -479,7 +599,8 @@
                 "name": "Sjecište autoceste"
             },
             "highway/motorway_link": {
-                "name": "Pristupna cesta autoceste"
+                "name": "Pristupna cesta autoceste",
+                "terms": "prilazna cesta autocesti, ulaz na autocestu, izlaz sa autoceste"
             },
             "highway/path": {
                 "name": "Staza"
@@ -491,7 +612,8 @@
                 "name": "Državna cesta"
             },
             "highway/primary_link": {
-                "name": "Pristupna cesta državne ceste"
+                "name": "Pristupna cesta državne ceste",
+                "terms": "spojna cesta državne ceste, ulaz na cestu, izlaz sa ceste"
             },
             "highway/residential": {
                 "name": "Gradska ceste"
@@ -503,10 +625,23 @@
                 "name": "Županijska cesta"
             },
             "highway/secondary_link": {
-                "name": "Pristupna cesta županijske ceste"
+                "name": "Pristupna cesta županijske ceste",
+                "terms": "spojna cesta županijske ceste, ulaz na cestu, izlaz sa ceste"
             },
             "highway/service": {
                 "name": "Servisna cesta"
+            },
+            "highway/service/alley": {
+                "name": "Uska uličica"
+            },
+            "highway/service/driveway": {
+                "name": "Prilaz"
+            },
+            "highway/service/emergency_access": {
+                "name": "Pristup za nuždu"
+            },
+            "highway/service/parking_aisle": {
+                "name": "Parkirališni prolaz"
             },
             "highway/steps": {
                 "name": "Stepenice",
@@ -516,13 +651,15 @@
                 "name": "Lokalna cesta"
             },
             "highway/tertiary_link": {
-                "name": "Pristupna cesta lokalne ceste"
+                "name": "Pristupna cesta lokalne ceste",
+                "terms": "spojna cesta lokalne ceste, ulaz na cestu, izlaz sa ceste"
             },
             "highway/track": {
                 "name": "Put"
             },
             "highway/traffic_signals": {
-                "name": "Semafor"
+                "name": "Semafor",
+                "terms": "svjetlo, stop svjetlo, semafor"
             },
             "highway/turning_circle": {
                 "name": "Kružni tok"
@@ -550,6 +687,9 @@
             },
             "historic/ruins": {
                 "name": "Ruševina"
+            },
+            "historic/wayside_cross": {
+                "name": "Povijesno raspelo uz put"
             },
             "landuse": {
                 "name": "Korištenje"
@@ -596,6 +736,9 @@
             "landuse/residential": {
                 "name": "Stambeno"
             },
+            "landuse/retail": {
+                "name": "Maloprodajna trgovina"
+            },
             "landuse/vineyard": {
                 "name": "Vinograd"
             },
@@ -632,8 +775,14 @@
             "leisure/pitch/tennis": {
                 "name": "Teniski teren"
             },
+            "leisure/pitch/volleyball": {
+                "name": "Odbojkaško igralište"
+            },
             "leisure/playground": {
                 "name": "Igralište"
+            },
+            "leisure/slipway": {
+                "name": "Navoz za brodove"
             },
             "leisure/stadium": {
                 "name": "Stadion"
@@ -641,14 +790,26 @@
             "leisure/swimming_pool": {
                 "name": "Sportski bazen"
             },
+            "line": {
+                "name": "Linija"
+            },
             "man_made": {
                 "name": "Ljudske tvorevine"
+            },
+            "man_made/breakwater": {
+                "name": "Lukobran"
+            },
+            "man_made/cutline": {
+                "name": "Prosjeka"
             },
             "man_made/lighthouse": {
                 "name": "Svjetionik"
             },
             "man_made/pier": {
                 "name": "Mol"
+            },
+            "man_made/pipeline": {
+                "name": "Cjevovod"
             },
             "man_made/survey_point": {
                 "name": "Geodetske točke"
@@ -661,6 +822,9 @@
             },
             "man_made/water_tower": {
                 "name": "Vodo-toranj"
+            },
+            "man_made/water_well": {
+                "name": "Izvor vode"
             },
             "man_made/water_works": {
                 "name": "Vodocrpilište"
@@ -723,12 +887,6 @@
             "office": {
                 "name": "Ured"
             },
-            "other": {
-                "name": "Ostalo"
-            },
-            "other_area": {
-                "name": "Ostalo"
-            },
             "place": {
                 "name": "Mjesto"
             },
@@ -741,6 +899,9 @@
             "place/island": {
                 "name": "Otok"
             },
+            "place/isolated_dwelling": {
+                "name": "Usamljena kuća"
+            },
             "place/locality": {
                 "name": "Lokalitet"
             },
@@ -750,14 +911,26 @@
             "place/village": {
                 "name": "Selo"
             },
+            "point": {
+                "name": "Točka"
+            },
+            "power": {
+                "name": "Struja"
+            },
             "power/generator": {
                 "name": "Elektrana"
             },
             "power/line": {
                 "name": "Energetska mreža"
             },
+            "power/pole": {
+                "name": "Električni stup"
+            },
             "power/sub_station": {
-                "name": "Podzemna postaja"
+                "name": "Mala trafostanica"
+            },
+            "power/tower": {
+                "name": "Visokonaponski toranj"
             },
             "power/transformer": {
                 "name": "Transformator"
@@ -773,6 +946,9 @@
             },
             "railway/level_crossing": {
                 "name": "Željeznično-cestovni prijelaz"
+            },
+            "railway/monorail": {
+                "name": "Pruga sa jednim kolosjekom"
             },
             "railway/platform": {
                 "name": "Željeznički peron"
@@ -790,10 +966,21 @@
                 "name": "Ulaz u podzemnu željeznicu"
             },
             "railway/tram": {
-                "name": "Tramvaj"
+                "name": "Tramvaj",
+                "terms": "tramvaj"
+            },
+            "relation": {
+                "name": "Relacija"
+            },
+            "route/ferry": {
+                "name": "Trajektna ruta"
             },
             "shop": {
                 "name": "Prodavaonica"
+            },
+            "shop/alcohol": {
+                "name": "Prodavaonica alkoholnih pića",
+                "terms": "alkohol"
             },
             "shop/bakery": {
                 "name": "Pekara"
@@ -842,6 +1029,9 @@
             },
             "shop/deli": {
                 "name": "Prodavaonica delikatesa"
+            },
+            "shop/department_store": {
+                "name": "Robna kuća"
             },
             "shop/doityourself": {
                 "name": "Uradi sam"
@@ -933,6 +1123,12 @@
             "shop/tyres": {
                 "name": "Prodavaonica pneumaticima"
             },
+            "shop/vacant": {
+                "name": "Prazan dućanski prostor"
+            },
+            "shop/variety_store": {
+                "name": "Prodavaonica mješovite robe"
+            },
             "shop/video": {
                 "name": "Videoteka"
             },
@@ -986,6 +1182,51 @@
             },
             "tourism/zoo": {
                 "name": "Zološki vrt"
+            },
+            "type/boundary": {
+                "name": "Granica"
+            },
+            "type/multipolygon": {
+                "name": "Multipoligon"
+            },
+            "type/restriction": {
+                "name": "Ograničenje"
+            },
+            "type/route": {
+                "name": "Ruta"
+            },
+            "type/route/bicycle": {
+                "name": "Biciklistička ruta"
+            },
+            "type/route/bus": {
+                "name": "Autobusna ruta"
+            },
+            "type/route/detour": {
+                "name": "Obilazna ruta"
+            },
+            "type/route/ferry": {
+                "name": "Trajektna ruta"
+            },
+            "type/route/foot": {
+                "name": "Pješačka ruta"
+            },
+            "type/route/pipeline": {
+                "name": "Putanja cjevovoda"
+            },
+            "type/route/power": {
+                "name": "Putanja energetske mreže"
+            },
+            "type/route/road": {
+                "name": "Cestovna ruta"
+            },
+            "type/route/train": {
+                "name": "Ruta vlaka"
+            },
+            "type/route/tram": {
+                "name": "Tramvajska putanja"
+            },
+            "vertex": {
+                "name": "Drugo"
             },
             "waterway": {
                 "name": "Vodni put"

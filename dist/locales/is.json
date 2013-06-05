@@ -159,7 +159,6 @@
     "just_edited": "Þú hefur breytt OpenStreetMap!",
     "browser_notice": "Þessi ritill er studdur af Firefox, Chrome, Safari, Opera og Internet Explorer 9 og betri. Vinsamlegast uppfærðu vafrann þinn eða notaðu Potlatch 2 til að breyta kortinu.",
     "view_on_osm": "Skoða á OSM",
-    "zoom_in_edit": "þysja inn til að breyta kortinu",
     "logout": "útskrá",
     "loading_auth": "Tengist við OpenStreetMap...",
     "report_a_bug": "tilkynna villu",
@@ -180,10 +179,6 @@
         "deleted": "Eytt",
         "created": "Búið til"
     },
-    "contributors": {
-        "list": "Innsent af {users}",
-        "truncated_list": "Innsent af {users} og {count} öðrum"
-    },
     "geocoder": {
         "title": "Finna stað",
         "placeholder": "Finna stað",
@@ -198,12 +193,10 @@
         "show_more": "Sýna meira",
         "new_tag": "Ný merking",
         "view_on_osm": "Skoða á openstreetmap.org",
-        "editing_feature": "Breyti {feature}",
         "all_tags": "Öll merki",
         "choose": "Veldu tegund",
         "results": "{n} niðurstöður fyrir {leit}",
         "reference": "Skoða á OpenStreetMap Wiki",
-        "back_tooltip": "Breyta tegund",
         "remove": "Fjarlægja",
         "search": "Leita"
     },
@@ -1204,12 +1197,6 @@
             },
             "office": {
                 "name": "Skrifstofa"
-            },
-            "other": {
-                "name": "Annað"
-            },
-            "other_area": {
-                "name": "Annað"
             },
             "place": {
                 "name": "Staður"

@@ -1,0 +1,267 @@
+{
+    "modes": {
+        "add_point": {
+            "title": "బిందువు"
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "ఒక బిందువును చేర్చారు."
+            }
+        },
+        "delete": {
+            "title": "తొలగించు"
+        },
+        "move": {
+            "title": "తరలించు",
+            "description": "దీన్ని వేరే చోటకు తరలించండి."
+        }
+    },
+    "translate": {
+        "translate": "అనువదించండి",
+        "localized_translation_language": "భాషను ఎంచుకోండి",
+        "localized_translation_name": "పేరు"
+    },
+    "commit": {
+        "title": "మార్పులను భద్రపరచు",
+        "description_placeholder": "మీ మార్పులకు టూకీ వివరణ",
+        "save": "భద్రపరచు",
+        "cancel": "రద్దుచేయి",
+        "warnings": "హెచ్చరికలు"
+    },
+    "inspector": {
+        "show_more": "మరింత చూపించు",
+        "all_members": "అందరు సభ్యులు",
+        "remove": "తొలగించు",
+        "search": "వెతుకు"
+    },
+    "background": {
+        "title": "వెనుతలం",
+        "description": "వెనుతలపు అమరికలు"
+    },
+    "save": {
+        "title": "భద్రపరచు"
+    },
+    "success": {
+        "facebook": "ఫేస్‌బుక్‌లో పంచుకోండి",
+        "tweet": "ట్వీటండి",
+        "okay": "సరే"
+    },
+    "confirm": {
+        "okay": "సరే"
+    },
+    "tag_reference": {
+        "description": "వివరణ"
+    },
+    "help": {
+        "title": "సహాయం"
+    },
+    "intro": {
+        "points": {
+            "title": "బిందువులు"
+        }
+    },
+    "presets": {
+        "categories": {
+            "category-water": {
+                "name": "నీళ్ళు"
+            }
+        },
+        "fields": {
+            "access": {
+                "types": {
+                    "access": "సాధారణం"
+                }
+            },
+            "address": {
+                "label": "చిరునామా",
+                "placeholders": {
+                    "number": "123",
+                    "street": "వీధి",
+                    "city": "నగరం"
+                }
+            },
+            "aeroway": {
+                "label": "రకం"
+            },
+            "amenity": {
+                "label": "రకం"
+            },
+            "bicycle_parking": {
+                "label": "రకం"
+            },
+            "building": {
+                "label": "కట్టడం"
+            },
+            "building_area": {
+                "label": "కట్టడం"
+            },
+            "building_yes": {
+                "label": "కట్టడం"
+            },
+            "capacity": {
+                "label": "సామర్థ్యం"
+            },
+            "cardinal_direction": {
+                "label": "దిశ"
+            },
+            "clock_direction": {
+                "label": "దిశ"
+            },
+            "construction": {
+                "label": "రకం"
+            },
+            "crossing": {
+                "label": "రకం"
+            },
+            "emergency": {
+                "label": "అత్యవసరం"
+            },
+            "highway": {
+                "label": "రకం"
+            },
+            "historic": {
+                "label": "రకం"
+            },
+            "landuse": {
+                "label": "రకం"
+            },
+            "layer": {
+                "label": "పొర"
+            },
+            "leisure": {
+                "label": "రకం"
+            },
+            "levels": {
+                "label": "స్థాయిలు"
+            },
+            "man_made": {
+                "label": "రకం"
+            },
+            "name": {
+                "label": "పేరు"
+            },
+            "office": {
+                "label": "రకం"
+            },
+            "opening_hours": {
+                "label": "గంటలు"
+            },
+            "parking": {
+                "label": "రకం"
+            },
+            "religion": {
+                "label": "మతం",
+                "options": {
+                    "muslim": "ముస్లిం",
+                    "hindu": "హిందు"
+                }
+            },
+            "service": {
+                "label": "రకం"
+            },
+            "source": {
+                "label": "మూలం"
+            },
+            "surface": {
+                "label": "ఉపరితలం"
+            },
+            "tracktype": {
+                "label": "రకం"
+            },
+            "water": {
+                "label": "రకం"
+            },
+            "waterway": {
+                "label": "రకం"
+            },
+            "wikipedia": {
+                "label": "వికీపీడియా"
+            }
+        },
+        "presets": {
+            "amenity/bank": {
+                "name": "బ్యాంకు"
+            },
+            "amenity/hospital": {
+                "name": "ఆసుపత్రి"
+            },
+            "amenity/library": {
+                "name": "గ్రంథాలయం"
+            },
+            "amenity/post_office": {
+                "name": "తపాలా కార్యాలయం"
+            },
+            "amenity/school": {
+                "name": "బడి"
+            },
+            "amenity/swimming_pool": {
+                "name": "ఈత కొలను"
+            },
+            "amenity/university": {
+                "name": "విశ్వవిద్యాలయం"
+            },
+            "barrier/fence": {
+                "name": "కంచె"
+            },
+            "barrier/wall": {
+                "name": "గోడ"
+            },
+            "building/house": {
+                "name": "ఇల్లు"
+            },
+            "highway/primary_link": {
+                "name": "ముఖ్య లంకె"
+            },
+            "highway/steps": {
+                "name": "మెట్లు"
+            },
+            "landuse/forest": {
+                "name": "అడవి"
+            },
+            "landuse/grass": {
+                "name": "పచ్చిక"
+            },
+            "leisure/playground": {
+                "name": "ఆటమైదానం"
+            },
+            "natural/tree": {
+                "name": "చెట్టు"
+            },
+            "office": {
+                "name": "కార్యాలయం"
+            },
+            "place/city": {
+                "name": "నగరం"
+            },
+            "place/town": {
+                "name": "పట్టణం"
+            },
+            "place/village": {
+                "name": "గ్రామం"
+            },
+            "tourism/information": {
+                "name": "సమాచారం"
+            },
+            "tourism/zoo": {
+                "name": "జూ"
+            },
+            "type/route/foot": {
+                "name": "కాలి బాట"
+            },
+            "vertex": {
+                "name": "ఇతర"
+            },
+            "waterway/canal": {
+                "name": "కాలువ"
+            },
+            "waterway/dam": {
+                "name": "ఆనకట్ట"
+            },
+            "waterway/river": {
+                "name": "నది"
+            }
+        }
+    }
+}
