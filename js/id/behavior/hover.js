@@ -34,8 +34,15 @@ iD.behavior.Hover = function(context) {
     var hover = function(__) {
         selection = __;
 
-        function mouseover() {
-            target = d3.event.target.__data__;
+        function enter(d) {
+            if (d === target) return;
+
+            target = d;
+
+            selection.selectAll('.hover')
+                .classed('hover', false);
+            selection.selectAll('.hover-suppressed')
+                .classed('hover-suppressed', false);
 
             if (target && target.type) {
                 var selector = '.' + target.id;
@@ -52,17 +59,19 @@ iD.behavior.Hover = function(context) {
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
                 dispatch.hover(target.id);
+            } else {
+                dispatch.hover(null);
             }
         }
 
-        function mouseout() {
-            dispatch.hover(null);
-            target = null;
+        function mouseover() {
+            var target = d3.event.target;
+            enter(target ? target.__data__ : null);
+        }
 
-            selection.selectAll('.hover')
-                .classed('hover', false);
-            selection.selectAll('.hover-suppressed')
-                .classed('hover-suppressed', false);
+        function mouseout() {
+            var target = d3.event.relatedTarget;
+            enter(target ? target.__data__ : null);
         }
 
         selection
