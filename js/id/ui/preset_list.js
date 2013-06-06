@@ -75,6 +75,7 @@ iD.ui.PresetList = function(context) {
             .attr('class', 'search-header');
 
         var search = searchWrap.append('input')
+            .attr('class', 'preset-search-input')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
             .on('keydown', keydown)
