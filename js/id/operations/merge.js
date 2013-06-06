@@ -31,9 +31,10 @@ iD.operations.Merge = function(selectedIDs, context) {
 
     operation.tooltip = function() {
         var j = join.disabled(context.graph()),
-            m = merge.disabled(context.graph());
+            m = merge.disabled(context.graph()),
+            p = mergePolygon.disabled(context.graph());
 
-        if (j && m)
+        if (j && m && p)
             return t('operations.merge.' + j);
 
         return t('operations.merge.description');
