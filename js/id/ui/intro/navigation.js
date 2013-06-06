@@ -32,7 +32,7 @@ iD.ui.intro.navigation = function(context, reveal) {
 
         context.map().centerZoom([-85.63591, 41.94285], 19);
 
-        reveal(map, 'intro.navigation.drag');
+        reveal(map, t('intro.navigation.drag'));
 
         context.map().on('move.intro', _.debounce(function() {
             context.map().on('move.intro', null);
@@ -50,11 +50,11 @@ iD.ui.intro.navigation = function(context, reveal) {
                 point = context.projection(hall);
             }
             var box = iD.ui.intro.pointBox(point);
-            reveal(box, 'intro.navigation.select');
+            reveal(box, t('intro.navigation.select'));
 
             context.map().on('move.intro', function() {
                 var box = iD.ui.intro.pointBox(context.projection(hall));
-                reveal(box, 'intro.navigation.select', 0);
+                reveal(box, t('intro.navigation.select'), {duration: 0});
             });
         }
 
@@ -63,7 +63,7 @@ iD.ui.intro.navigation = function(context, reveal) {
             context.on('enter.intro', null);
             context.map().on('move.intro', null);
             set(function() {
-                reveal('.entity-editor-pane', 'intro.navigation.pane');
+                reveal('.entity-editor-pane', t('intro.navigation.pane'));
                 context.on('exit.intro', event.done);
             }, 700);
         }

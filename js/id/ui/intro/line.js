@@ -23,7 +23,7 @@ iD.ui.intro.line = function(context, reveal) {
         var intersection = [-85.62974496187628, 41.95742515554585];
 
         context.map().centerZoom(start, 18);
-        reveal('button.add-line', 'intro.lines.add');
+        reveal('button.add-line', t('intro.lines.add'), {tooltipClass: 'intro-areas-add'});
 
         context.on('enter.intro', addLine);
 
@@ -33,12 +33,12 @@ iD.ui.intro.line = function(context, reveal) {
 
             var padding = 150 * Math.pow(2, context.map().zoom() - 18);
             var pointBox = iD.ui.intro.pad(context.projection(start), padding);
-            reveal(pointBox, 'intro.lines.start');
+            reveal(pointBox, t('intro.lines.start'));
 
             context.map().on('move.intro', function() {
                 padding = 150 * Math.pow(2, context.map().zoom() - 18);
                 pointBox = iD.ui.intro.pad(context.projection(start), padding);
-                reveal(pointBox, 'intro.lines.start', 0);
+                reveal(pointBox, t('intro.lines.start'), {duration: 0});
             });
         }
 
@@ -49,12 +49,12 @@ iD.ui.intro.line = function(context, reveal) {
 
             var padding = 300 * Math.pow(2, context.map().zoom() - 19);
             var pointBox = iD.ui.intro.pad(context.projection(midpoint), padding);
-            reveal(pointBox, 'intro.lines.intersect');
+            reveal(pointBox, t('intro.lines.intersect'));
 
             context.map().on('move.intro', function() {
                 padding = 300 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = iD.ui.intro.pad(context.projection(midpoint), padding);
-                reveal(pointBox, 'intro.lines.intersect', 0);
+                reveal(pointBox, t('intro.lines.intersect'), {duration: 0});
             });
         }
 
@@ -62,7 +62,7 @@ iD.ui.intro.line = function(context, reveal) {
         function retry(mode) {
             if (mode.id !== 'select') return;
             var pointBox = iD.ui.intro.pad(context.projection(intersection), 30);
-            reveal(pointBox, 'intro.lines.restart');
+            reveal(pointBox, t('intro.lines.restart'));
             timeout(function() {
                 context.replace(iD.actions.DeleteMultiple(mode.selectedIDs()));
                 step.exit();
@@ -79,12 +79,12 @@ iD.ui.intro.line = function(context, reveal) {
 
                 var padding = 900 * Math.pow(2, context.map().zoom() - 19);
                 var pointBox = iD.ui.intro.pad(context.projection(centroid), padding);
-                reveal(pointBox, 'intro.lines.finish');
+                reveal(pointBox, t('intro.lines.finish'));
 
                 context.map().on('move.intro', function() {
                     padding = 900 * Math.pow(2, context.map().zoom() - 19);
                     pointBox = iD.ui.intro.pad(context.projection(centroid), padding);
-                    reveal(pointBox, 'intro.lines.finish', 0);
+                    reveal(pointBox, t('intro.lines.finish'), {duration: 0});
                 });
             }
         }
@@ -98,7 +98,7 @@ iD.ui.intro.line = function(context, reveal) {
             timeout(function() {
                 d3.select('#curtain').style('pointer-events', 'none');
                 var road = d3.select('.preset-category-road .preset-list-button');
-                reveal(road.node(), 'intro.lines.road');
+                reveal(road.node(), t('intro.lines.road'));
                 road.one('click.intro', roadCategory);
             }, 500);
         }
@@ -106,14 +106,14 @@ iD.ui.intro.line = function(context, reveal) {
         function roadCategory() {
             timeout(function() {
                 var grid = d3.select('.subgrid');
-                reveal(grid.node(), 'intro.lines.residential');
+                reveal(grid.node(), t('intro.lines.residential'));
                 grid.selectAll('.preset-highway-residential .preset-list-button')
                     .one('click.intro', roadDetails);
             }, 200);
         }
 
         function roadDetails() {
-            reveal('.pane', 'intro.lines.describe');
+            reveal('.pane', t('intro.lines.describe'));
             context.on('exit.intro', event.done);
         }
 

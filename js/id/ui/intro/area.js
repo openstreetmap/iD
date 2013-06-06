@@ -12,7 +12,7 @@ iD.ui.intro.area = function(context, reveal) {
         var playground = [-85.63552, 41.94159],
             corner = [-85.63565411045074, 41.9417715536927];
         context.map().centerZoom(playground, 19);
-        reveal('button.add-area', 'intro.areas.add');
+        reveal('button.add-area', t('intro.areas.add'), {tooltipClass: 'intro-areas-add'});
 
         context.on('enter.intro', addArea);
 
@@ -22,12 +22,12 @@ iD.ui.intro.area = function(context, reveal) {
 
             var padding = 120 * Math.pow(2, context.map().zoom() - 19);
             var pointBox = iD.ui.intro.pad(context.projection(corner), padding);
-            reveal(pointBox, 'intro.areas.corner');
+            reveal(pointBox, t('intro.areas.corner'));
 
             context.map().on('move.intro', function() {
                 padding = 120 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = iD.ui.intro.pad(context.projection(corner), padding);
-                reveal(pointBox, 'intro.areas.corner', 0);
+                reveal(pointBox, t('intro.areas.corner'), {duration: 0});
             });
         }
 
@@ -37,12 +37,12 @@ iD.ui.intro.area = function(context, reveal) {
 
             var padding = 150 * Math.pow(2, context.map().zoom() - 19);
             var pointBox = iD.ui.intro.pad(context.projection(playground), padding);
-            reveal(pointBox, 'intro.areas.place');
+            reveal(pointBox, t('intro.areas.place'));
 
             context.map().on('move.intro', function() {
                 padding = 150 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = iD.ui.intro.pad(context.projection(playground), padding);
-                reveal(pointBox, 'intro.areas.place', 0);
+                reveal(pointBox, t('intro.areas.place'), {duration: 0});
             });
         }
 
@@ -52,7 +52,7 @@ iD.ui.intro.area = function(context, reveal) {
             context.on('enter.intro', null);
 
             timeout = setTimeout(function() {
-                reveal('.preset-search-input', 'intro.areas.search');
+                reveal('.preset-search-input', t('intro.areas.search', {name: context.presets().item('leisure/playground').name()}));
                 d3.select('.preset-search-input').on('keyup.intro', keySearch);
             }, 500);
         }
@@ -60,14 +60,14 @@ iD.ui.intro.area = function(context, reveal) {
         function keySearch() {
             var first = d3.select('.preset-list-item:first-child');
             if (first.classed('preset-leisure-playground')) {
-                reveal(first.select('.preset-list-button').node(), 'intro.areas.choose');
+                reveal(first.select('.preset-list-button').node(), t('intro.areas.choose'));
                 d3.selection.prototype.one.call(context.history(), 'change.intro', selectedPreset);
                 d3.select('.preset-search-input').on('keyup.intro', null);
             }
         }
 
         function selectedPreset() {
-            reveal('.pane', 'intro.areas.describe');
+            reveal('.pane', t('intro.areas.describe'));
             context.on('exit.intro', event.done);
         }
     };

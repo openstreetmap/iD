@@ -36,9 +36,10 @@ iD.ui.intro = function(context) {
         var curtain = d3.curtain();
         selection.call(curtain);
 
-        function reveal(box, textid, duration) {
-            if (textid) curtain.reveal(box, t(textid), textid.replace(/\./g, '-'), duration);
-            else curtain.reveal(box, '', '', duration);
+        function reveal(box, text, options) {
+            options = options || {};
+            if (text) curtain.reveal(box, text, options.tooltipClass, options.duration);
+            else curtain.reveal(box, '', '', options.duration);
         }
 
         var steps = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(step, i) {

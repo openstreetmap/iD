@@ -14,7 +14,7 @@ iD.ui.intro.point = function(context, reveal) {
     step.enter = function() {
 
         context.map().centerZoom([-85.63279, 41.94394], 19);
-        reveal('button.add-point', 'intro.points.add');
+        reveal('button.add-point', t('intro.points.add'), {tooltipClass: 'intro-points-add'});
 
         var corner = [-85.632481,41.944094];
 
@@ -25,11 +25,11 @@ iD.ui.intro.point = function(context, reveal) {
             context.on('enter.intro', enterSelect);
 
             var pointBox = iD.ui.intro.pad(context.projection(corner), 150);
-            reveal(pointBox, 'intro.points.place');
+            reveal(pointBox, t('intro.points.place'));
 
             context.map().on('move.intro', function() {
                 pointBox = iD.ui.intro.pad(context.projection(corner), 150);
-                reveal(pointBox, 'intro.points.place', 0);
+                reveal(pointBox, t('intro.points.place'), {duration: 0});
             });
 
         }
@@ -40,7 +40,7 @@ iD.ui.intro.point = function(context, reveal) {
             context.on('enter.intro', null);
 
             setTimeout(function() {
-                reveal('.preset-search-input', 'intro.points.search');
+                reveal('.preset-search-input', t('intro.points.search', {name: context.presets().item('amenity/cafe').name()}));
                 d3.select('.preset-search-input').on('keyup.intro', keySearch);
             }, 500);
         }
@@ -48,7 +48,7 @@ iD.ui.intro.point = function(context, reveal) {
         function keySearch() {
             var first = d3.select('.preset-list-item:first-child');
             if (first.classed('preset-amenity-cafe')) {
-                reveal(first.select('.preset-list-button').node(), 'intro.points.choose');
+                reveal(first.select('.preset-list-button').node(), t('intro.points.choose'));
                 d3.selection.prototype.one.call(context.history(), 'change.intro', selectedPreset);
 
                 d3.select('.preset-search-input').on('keydown.intro', function() {
@@ -61,7 +61,7 @@ iD.ui.intro.point = function(context, reveal) {
 
         function selectedPreset() {
             setTimeout(function() {
-                reveal('.entity-editor-pane', 'intro.points.describe');
+                reveal('.entity-editor-pane', t('intro.points.describe'), {tooltipClass: 'intro-points-describe'});
                 context.history().on('change.intro', closeEditor);
                 context.on('exit.intro', selectPoint);
             }, 400);
@@ -70,7 +70,7 @@ iD.ui.intro.point = function(context, reveal) {
         function closeEditor() {
             d3.select('.preset-search-input').on('keydown.intro', null);
             context.history().on('change.intro', null);
-            reveal('.entity-editor-pane', 'intro.points.close');
+            reveal('.entity-editor-pane', t('intro.points.close'));
         }
 
         function selectPoint() {
@@ -79,11 +79,11 @@ iD.ui.intro.point = function(context, reveal) {
             context.on('enter.intro', enterReselect);
 
             var pointBox = iD.ui.intro.pad(context.projection(corner), 150);
-            reveal(pointBox, 'intro.points.reselect');
+            reveal(pointBox, t('intro.points.reselect'));
 
             context.map().on('move.intro', function() {
                 pointBox = iD.ui.intro.pad(context.projection(corner), 150);
-                reveal(pointBox, 'intro.points.reselect', 0);
+                reveal(pointBox, t('intro.points.reselect'), {duration: 0});
             });
         }
 
@@ -93,7 +93,7 @@ iD.ui.intro.point = function(context, reveal) {
             context.on('enter.intro', null);
 
             setTimeout(function() {
-                reveal('.entity-editor-pane', 'intro.points.fixname');
+                reveal('.entity-editor-pane', t('intro.points.fixname'));
                 context.on('exit.intro', deletePoint);
             }, 500);
         }
@@ -103,11 +103,11 @@ iD.ui.intro.point = function(context, reveal) {
             context.on('enter.intro', enterDelete);
 
             var pointBox = iD.ui.intro.pad(context.projection(corner), 150);
-            reveal(pointBox, 'intro.points.reselect_delete');
+            reveal(pointBox, t('intro.points.reselect_delete'));
 
             context.map().on('move.intro', function() {
                 pointBox = iD.ui.intro.pad(context.projection(corner), 150);
-                reveal(pointBox, 'intro.points.reselect_delete', 0);
+                reveal(pointBox, t('intro.points.reselect_delete'), {duration: 0});
             });
         }
 
@@ -122,7 +122,7 @@ iD.ui.intro.point = function(context, reveal) {
             setTimeout(function() {
                 var node = d3.select('.radial-menu-item-delete').node();
                 var pointBox = iD.ui.intro.pad(node.getBoundingClientRect(), 50);
-                reveal(pointBox, 'intro.points.delete');
+                reveal(pointBox, t('intro.points.delete'));
             }, 300);
         }
 

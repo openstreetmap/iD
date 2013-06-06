@@ -486,7 +486,7 @@ en:
       add: "Points can be used to represent features such as shops, restaurants and monuments. They mark a specific location, and describe what's there. **Click the Point button to add a new point.**"
       place: "Click to place the point on the map. The point we are adding is a Cafe. **Place the point at the corner of This Street and That Street**"
       place: "The point can be placed by clicking on the map. **Place the point on top of the building.**"
-      search: "There are many different features that can be represented by points. The point you just added is a Cafe. **Search for 'Cafe' **"
+      search: "There are many different features that can be represented by points. The point you just added is a Cafe. **Search for '{name}'**"
       choose: "**Choose Cafe from the list.**"
       describe: "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name**"
       close: "The feature editor can be closed by clicking on the close button. **Close the feature editor**"
@@ -499,7 +499,7 @@ en:
       add: "Areas are a more detailed way to represent features. They provide information on the boundaries of the feature. Areas can be used for most feature types points can be used for, and are often preferred. **Click the Area button to add a new area.**"
       corner: "Areas are drawn by placing nodes that mark the boundary of the area. **Place the starting node on one of the corners of the playground.**"
       place: "Draw the area by placing more nodes. Finish the area by clicking on the starting node. **Draw an area for the playground.**"
-      search: "**Search for Playground.**"
+      search: "**Search for '{name}'.**"
       choose: "**Choose Playground from the list.**"
       describe: "**Add a name, and close the feature editor**"
     lines:

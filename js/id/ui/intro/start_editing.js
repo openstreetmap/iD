@@ -14,10 +14,10 @@ iD.ui.intro.startEditing = function(context, reveal) {
 
     step.enter = function() {
 
-        reveal('.map-control.help-control', 'intro.startediting.help');
+        reveal('.map-control.help-control', t('intro.startediting.help'));
 
         timeout(function() {
-            reveal('#bar button.save', 'intro.startediting.save');
+            reveal('#bar button.save', t('intro.startediting.save'));
         }, 3500);
 
         timeout(function() {
