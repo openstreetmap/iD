@@ -82,14 +82,8 @@ iD.ui.Geocoder = function(context) {
             } else {
                 context.map().on('drawn.geocoder', function() {
                     if (!context.hasEntity(id)) return;
+                    context.map().on('drawn.geocoder', null);
                     context.enter(iD.modes.Select(context, [id]));
-                });
-
-                context.on('enter.geocoder', function() {
-                    if (context.mode().id !== 'browse') {
-                        context.on('enter.geocoder', null)
-                            .map().on('drawn.geocoder', null);
-                    }
                 });
             }
         }
