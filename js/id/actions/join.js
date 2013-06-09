@@ -15,7 +15,13 @@ iD.actions.Join = function(ids) {
 
     var action = function(graph) {
         var existing = 0,
+            nodes,
+            a, b,
             i, j;
+
+        function replaceWithA(parent) {
+            graph = graph.replace(parent.replaceMember(b, a));
+        }
 
         // Prefer to keep an existing way.
         for (i = 0; i < ids.length; i++) {
@@ -25,8 +31,6 @@ iD.actions.Join = function(ids) {
             }
         }
 
-        var nodes;
-
         // Join ways to 'a' in the following order: a-1, a-2, ..., 0, a+1, a+2, ..., ids.length-1
         for (i = 0; i < ids.length; i++) {
             j = (i <= existing) ? (existing - i) : i;
@@ -34,8 +38,8 @@ iD.actions.Join = function(ids) {
                 continue;
             }
 
-            var a = graph.entity(ids[existing]),
-                b = graph.entity(ids[j]);
+            a = graph.entity(ids[existing]);
+            b = graph.entity(ids[j]);
 
             if (a.first() === b.first()) {
                 // a <-- b ==> c
@@ -64,9 +68,7 @@ iD.actions.Join = function(ids) {
                 nodes = a.nodes.concat(b.nodes.slice().slice(1));
             }
 
-            graph.parentRelations(b).forEach(function(parent) {
-                graph = graph.replace(parent.replaceMember(b, a));
-            });
+            graph.parentRelations(b).forEach(replaceWithA);
 
             graph = graph.replace(a.mergeTags(b.tags).update({ nodes: nodes }));
             graph = iD.actions.DeleteWay(ids[j])(graph);
