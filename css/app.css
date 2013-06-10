@@ -2758,6 +2758,7 @@ img.wiki-image {
 .intro-points-add .tooltip-inner::before,
 .intro-areas-add .tooltip-inner::before,
 .intro-lines-add .tooltip-inner::before {
+    margin-left: -20px;
     display: block;
     content: "";
     height: 80px;
