@@ -1,19 +1,24 @@
 iD.ui.Contributors = function(context) {
-    function update(selection) {
-        var users = {},
-            limit = 4,
-            entities = context.intersects(context.map().extent());
 
-        entities.forEach(function(entity) {
-            if (entity && entity.user) users[entity.user] = true;
-        });
+    var lineheight;
 
-        var u = Object.keys(users),
-            subset = u.slice(0, u.length > limit ? limit - 1 : limit);
+    function update(selection, u, limit) {
 
-        selection.html('')
-            .append('span')
-            .attr('class', 'icon nearby light icon-pre-text');
+        if (!u) {
+            var users = {},
+                entities = context.intersects(context.map().extent());
+
+            entities.forEach(function(entity) {
+                if (entity && entity.user) users[entity.user] = true;
+            });
+
+            limit = 4;
+            u = Object.keys(users);
+        }
+
+        var subset = u.slice(0, u.length > limit ? limit - 1 : limit);
+
+        selection.html('');
 
         var userList = d3.select(document.createElement('span'));
 
@@ -45,11 +50,16 @@ iD.ui.Contributors = function(context) {
                 .html(t('contributors.list', {users: userList.html()}));
         }
 
-        if (!u.length) {
+        lineheight = lineheight || parseInt(selection.style('line-height'), 10);
+
+        if (selection.size()[1] > lineheight && limit > 1) {
+            return update(selection, u, limit - 1);
+        } else if (!u.length) {
             selection.transition().style('opacity', 0);
         } else if (selection.style('opacity') === '0') {
             selection.transition().style('opacity', 1);
         }
+
     }
 
     return function(selection) {

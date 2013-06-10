@@ -82,49 +82,6 @@ iD.ui = function(context) {
             .attr('class', 'map-control geolocate-control')
             .call(iD.ui.Geolocate(map));
 
-        var about = content.append('div')
-            .attr('class','col12 about-block fillD');
-
-        about.append('div')
-            .attr('class', 'api-status')
-            .call(iD.ui.Status(context));
-
-        if (!context.embed()) {
-            about.append('div')
-                .attr('class', 'account')
-                .call(iD.ui.Account(context));
-        }
-
-        var linkList = about.append('ul')
-            .attr('id', 'about')
-            .attr('class', 'link-list');
-
-        linkList.append('li')
-            .append('a')
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .attr('href', 'http://github.com/systemed/iD')
-            .text(iD.version);
-
-        var bugReport = linkList.append('li')
-            .append('a')
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .attr('href', 'https://github.com/systemed/iD/issues');
-
-        bugReport.append('span')
-            .attr('class','icon bug light');
-
-        bugReport.call(bootstrap.tooltip()
-                .title(t('report_a_bug'))
-                .placement('top')
-            );
-
-        linkList.append('li')
-            .attr('class', 'user-list')
-            .attr('tabindex', -1)
-            .call(iD.ui.Contributors(context));
-
         window.onbeforeunload = function() {
             history.save();
             if (history.hasChanges()) return t('save.unsaved_changes');

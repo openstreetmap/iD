@@ -76,9 +76,21 @@ iD.ui.Commit = function(context) {
             .attr('tabindex', -1)
             .attr('target', '_blank');
 
+        if (!context.embed() && user.display_name) {
+            userLink.append('a')
+                .attr('class', 'logout')
+                .attr('href', '#')
+                .text(' (' + t('logout') + ')');
+        }
+
         saveSection.append('p')
             .attr('class', 'commit-info')
             .html(t('commit.upload_explanation', {user: userLink.html()}));
+
+        saveSection.selectAll('.logout').on('click.logout', function() {
+            d3.event.preventDefault();
+            connection.logout();
+        });
 
         // Confirm Button
         var saveButton = saveSection.append('button')

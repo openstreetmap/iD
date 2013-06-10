@@ -32,6 +32,26 @@ iD.ui.FeatureList = function(context) {
         var list = listWrap.append('div')
             .attr('class', 'feature-list fillL cf');
 
+        var footer = selection.append('div')
+            .attr('class', 'footer');
+
+        var bugReport = footer.append('a')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .attr('class', 'bug-report')
+            .attr('href', 'https://github.com/systemed/iD/issues')
+            .call(bootstrap.tooltip()
+                .title(t('report_a_bug'))
+                .placement('top'))
+            .append('span')
+            .attr('class','icon bug');
+
+
+        footer.append('span')
+            .attr('class', 'user-list')
+            .attr('tabindex', -1)
+            .call(iD.ui.Contributors(context));
+
         drawList();
 
         context.history()
