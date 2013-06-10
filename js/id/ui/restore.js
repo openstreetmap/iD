@@ -13,7 +13,7 @@ iD.ui.Restore = function(context) {
         introModal.attr('class','cf');
 
         introModal.append('div')
-            .attr('class', 'modal-section header')
+            .attr('class', 'modal-section')
             .append('h3')
                 .text(t('restore.heading'));
 
