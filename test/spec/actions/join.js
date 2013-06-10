@@ -185,13 +185,13 @@ describe("iD.actions.Join", function () {
                 'c': iD.Node({id: 'c'}),
                 'd': iD.Node({id: 'd'}),
                 'w-1': iD.Way({id: 'w-1', nodes: ['a', 'b']}),
-                'w1': iD.Way({id: 'w1', nodes: ['b', 'c']})
-                'w-2': iD.Way({id: 'w-2', nodes: ['c', 'd']}),
+                'w1': iD.Way({id: 'w1', nodes: ['b', 'c']}),
+                'w-2': iD.Way({id: 'w-2', nodes: ['c', 'd']})
             });
 
         graph = iD.actions.Join(['w-1', 'w1', 'w-2'])(graph);
 
-        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c']);
+        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
         expect(graph.hasEntity('w-1')).to.be.undefined;
         expect(graph.hasEntity('w-2')).to.be.undefined;
     });
