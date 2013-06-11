@@ -19,6 +19,8 @@ iD.BackgroundSource.template = function(data) {
             .replace('{u}', u)
             .replace('{x}', coord[0])
             .replace('{y}', coord[1])
+            // TMS-flipped y coordinate
+            .replace('{ty}', Math.pow(2, coord[2]) - coord[1] - 1)
             .replace('{z}', coord[2])
             // JOSM style
             .replace('{zoom}', coord[2])
