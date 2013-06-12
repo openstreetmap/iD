@@ -17,6 +17,9 @@ img.tile {
 img.tile-loaded {
     opacity: 1;
 }
+img.tile-removing {
+    opacity: 0;
+}
 
 /* base styles */
 path {
