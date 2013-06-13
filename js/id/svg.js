@@ -56,7 +56,9 @@ iD.svg = {
                 coordinates: coordinates
             }, projection.stream({
                 lineStart: function() {},
-                lineEnd: function() {},
+                lineEnd: function() {
+                    a = null;
+                },
                 point: function(x, y) {
                     b = [x, y];
 
