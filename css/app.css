@@ -775,6 +775,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     padding-left: 10px;
 }
 
+.bug-report {
+    float: right;
+}
+
 /* Presets
 ------------------------------------------------------- */
 
@@ -2130,6 +2134,12 @@ img.wiki-image {
     margin-right: 10px;
 }
 
+.source-switch {
+    position: absolute;
+    bottom: 40px;
+    left: 10px;
+}
+
 .source-switch a {
     padding: 2px 4px 4px 4px;
     border-radius: 2px;
@@ -2142,7 +2152,7 @@ img.wiki-image {
 /* Attribution overlay */
 .attribution {
     position: absolute;
-    bottom: 35px;
+    bottom: 10px;
     left:10px;
     color:#888;
     font-size:10px;
@@ -2153,6 +2163,10 @@ img.wiki-image {
     vertical-align:top;
 }
 
+.user-list {
+    width: 90%;
+    display: inline-block;
+}
 .user-list a:not(:last-child):after {
     content: ', ';
 }

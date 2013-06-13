@@ -44,7 +44,17 @@ iD.ui.Inspector = function(context) {
             .data([0]);
 
         $footer.enter().append('div')
-            .attr('class', 'footer');
+            .attr('class', 'footer')
+            .append('a')
+              .attr('target', '_blank')
+              .attr('tabindex', -1)
+              .attr('class', 'bug-report')
+              .attr('href', 'https://github.com/systemed/iD/issues')
+              .call(bootstrap.tooltip()
+                  .title(t('report_a_bug'))
+                  .placement('top'))
+              .append('span')
+              .attr('class','icon bug');
 
         selection.select('.footer')
             .call(iD.ui.ViewOnOSM(context)
