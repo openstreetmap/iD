@@ -7,6 +7,8 @@ iD.ui.Sidebar = function(context) {
             .attr('class', 'feature-list-pane')
             .call(iD.ui.FeatureList(context));
 
+        selection.call(iD.ui.Notice(context));
+
         var inspectorWrap = selection.append('div')
             .attr('class', 'inspector-hidden inspector-wrap fr');
 

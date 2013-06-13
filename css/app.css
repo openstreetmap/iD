@@ -2382,18 +2382,22 @@ img.wiki-image {
 ------------------------------------------------------- */
 
 .notice {
-    float:left;
-    width:25%;
-    padding-right: 10px;
-    text-align:center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: #fff;
+    z-index: 2;
 }
 
 .notice .zoom-to {
-    width:100%;
-    height: 40px;
+    margin: auto;
+    width: 80%;
+    height: 100px;
     border-radius: 5px;
     line-height: 40px;
-    background: #fff;
     color: #000;
     opacity: 0.9;
 }
