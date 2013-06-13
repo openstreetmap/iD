@@ -844,7 +844,7 @@
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Buddhist Temple",
-                "terms": ""
+                "terms": "stupa,vihara,monastery,temple,pagoda,zendo,dojo"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Church",

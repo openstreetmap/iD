@@ -10,6 +10,15 @@
         "vertex",
         "area"
     ],
+    "terms": [
+        "stupa",
+        "vihara",
+        "monastery",
+        "temple",
+        "pagoda",
+        "zendo",
+        "dojo"
+    ],
     "tags": {
         "amenity": "place_of_worship",
         "religion": "buddhist"
