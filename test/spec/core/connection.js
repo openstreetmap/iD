@@ -9,12 +9,6 @@ describe('iD.Connection', function () {
         expect(c).to.be.ok;
     });
 
-    it('gets/sets user', function () {
-        var user = { name: 'tom' };
-        expect(c.user(user)).to.equal(c);
-        expect(c.user()).to.equal(user);
-    });
-
     describe('#changesetUrl', function() {
         it('provides a changeset url', function() {
             expect(c.changesetURL(2)).to.eql('http://www.openstreetmap.org/browse/changeset/2');
@@ -134,7 +128,7 @@ describe('iD.Connection', function () {
 
     describe('#osmChangeJXON', function() {
         it('converts change data to JXON', function() {
-            var jxon = c.osmChangeJXON('jfire', '1234', {created: [], modified: [], deleted: []});
+            var jxon = c.osmChangeJXON('1234', {created: [], modified: [], deleted: []});
 
             expect(jxon).to.eql({
                 osmChange: {
@@ -152,7 +146,7 @@ describe('iD.Connection', function () {
                 w = iD.Way(),
                 r = iD.Relation(),
                 changes = {created: [r, w, n], modified: [], deleted: []},
-                jxon = c.osmChangeJXON('jfire', '1234', changes);
+                jxon = c.osmChangeJXON('1234', changes);
 
             expect(d3.entries(jxon.osmChange['create'])).to.eql([
                 {key: 'node', value: [n.asJXON('1234').node]},
@@ -166,7 +160,7 @@ describe('iD.Connection', function () {
                 w = iD.Way(),
                 r = iD.Relation(),
                 changes = {created: [], modified: [r, w, n], deleted: []},
-                jxon = c.osmChangeJXON('jfire', '1234', changes);
+                jxon = c.osmChangeJXON('1234', changes);
 
             expect(jxon.osmChange['modify']).to.eql({
                 node: [n.asJXON('1234').node],
@@ -180,7 +174,7 @@ describe('iD.Connection', function () {
                 w = iD.Way(),
                 r = iD.Relation(),
                 changes = {created: [], modified: [], deleted: [n, w, r]},
-                jxon = c.osmChangeJXON('jfire', '1234', changes);
+                jxon = c.osmChangeJXON('1234', changes);
 
             expect(d3.entries(jxon.osmChange['delete'])).to.eql([
                 {key: 'relation', value: [r.asJXON('1234').relation]},

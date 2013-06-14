@@ -3,7 +3,6 @@ iD.Connection = function() {
     var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'load', 'loaded'),
         url = 'http://www.openstreetmap.org',
         connection = {},
-        user = {},
         inflight = {},
         loadedTiles = {},
         oauth = osmAuth({
@@ -173,7 +172,7 @@ iD.Connection = function() {
 
     // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
     // XML. Returns a string.
-    connection.osmChangeJXON = function(userid, changeset_id, changes) {
+    connection.osmChangeJXON = function(changeset_id, changes) {
         function nest(x, order) {
             var groups = {};
             for (var i = 0; i < x.length; i++) {
@@ -228,7 +227,7 @@ iD.Connection = function() {
                     method: 'POST',
                     path: '/api/0.6/changeset/' + changeset_id + '/upload',
                     options: { header: { 'Content-Type': 'text/xml' } },
-                    content: JXON.stringify(connection.osmChangeJXON(user.id, changeset_id, changes))
+                    content: JXON.stringify(connection.osmChangeJXON(changeset_id, changes))
                 }, function(err) {
                     if (err) return callback(err);
                     oauth.xhr({
@@ -241,21 +240,34 @@ iD.Connection = function() {
             });
     };
 
+    var userDetails;
+
     connection.userDetails = function(callback) {
+        if (userDetails) {
+            callback(undefined, userDetails);
+            return;
+        }
+
         function done(err, user_details) {
             if (err) return callback(err);
+
             var u = user_details.getElementsByTagName('user')[0],
                 img = u.getElementsByTagName('img'),
                 image_url = '';
+
             if (img && img[0] && img[0].getAttribute('href')) {
                 image_url = img[0].getAttribute('href');
             }
-            callback(undefined, connection.user({
+
+            userDetails = {
                 display_name: u.attributes.display_name.nodeValue,
                 image_url: image_url,
                 id: u.attributes.id.nodeValue
-            }).user());
+            };
+
+            callback(undefined, userDetails);
         }
+
         oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, done);
     };
 
@@ -346,12 +358,6 @@ iD.Connection = function() {
 
     connection.toggle = function(_) {
         off = !_;
-        return connection;
-    };
-
-    connection.user = function(_) {
-        if (!arguments.length) return user;
-        user = _;
         return connection;
     };
 
