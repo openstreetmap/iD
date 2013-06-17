@@ -22,8 +22,8 @@ describe("iD.behavior.Hover", function() {
 
     describe("mouseover", function () {
         it("adds the .hover class to all elements to which the same datum is bound", function () {
-            var a = {id: 'a', type: 'node'},
-                b = {id: 'b', type: 'node'};
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'});
 
             container.selectAll('span')
                 .data([a, b, a, b])
@@ -38,7 +38,7 @@ describe("iD.behavior.Hover", function() {
 
         it("adds the .hover class to all members of a relation", function() {
             container.selectAll('span')
-                .data([{id: 'a', type: 'relation', members: [{id: 'b'}]}, {id: 'b'}])
+                .data([iD.Relation({id: 'a', members: [{id: 'b'}]}), iD.Node({id: 'b'})])
                 .enter().append('span').attr('class', function(d) { return d.id; });
 
             container.call(iD.behavior.Hover(context));
