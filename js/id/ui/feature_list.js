@@ -25,8 +25,8 @@ iD.ui.FeatureList = function(context) {
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
             .on('keypress', keypress)
-	    .on('input', inputevent);
-	
+            .on('input', inputevent);
+
         searchWrap.append('span')
             .attr('class', 'icon search');
 
