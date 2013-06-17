@@ -59,7 +59,7 @@ iD.ui.PresetList = function(context) {
             }
         }
 
-	function inputevent() {
+        function inputevent() {
             var value = search.property('value');
             list.classed('filtered', value.length);
             if (value.length) {
@@ -72,7 +72,7 @@ iD.ui.PresetList = function(context) {
             } else {
                 list.call(drawList, context.presets().defaults(geometry, 36));
             }
-	}
+        }
 
         var searchWrap = selection.append('div')
             .attr('class', 'search-header');

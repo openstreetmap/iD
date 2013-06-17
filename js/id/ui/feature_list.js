@@ -13,10 +13,9 @@ iD.ui.FeatureList = function(context) {
             }
         }
 
-
-	function inputevent() {
-	    drawList();
-	}
+        function inputevent() {
+            drawList();
+        }
 
         var searchWrap = selection.append('div')
             .attr('class', 'search-header');
