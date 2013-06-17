@@ -611,7 +611,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .header {
     border-bottom: 1px solid #ccc;
-    z-index: 2;
     height: 60px;
     position: relative;
 }
@@ -671,6 +670,14 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     overflow: hidden;
     z-index: 2;
     background: #f6f6f6;
+}
+
+.sidebar-component {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
 .inspector-wrap {
@@ -2389,7 +2396,6 @@ img.wiki-image {
     right: 0;
     text-align: center;
     background: #fff;
-    z-index: 2;
 }
 
 .notice .zoom-to {
