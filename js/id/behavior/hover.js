@@ -44,7 +44,7 @@ iD.behavior.Hover = function(context) {
             selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            if (target && target.type) {
+            if (target instanceof iD.Entity) {
                 var selector = '.' + target.id;
 
                 if (target.type === 'relation') {
