@@ -6,13 +6,15 @@ iD.ui.FeatureList = function(context) {
         header.append('h3')
             .text(t('inspector.feature_list'));
 
-        function keyup() {
+        function keypress() {
             var q = search.property('value');
             if (d3.event.keyCode === 13 && q.length) {
                 click(list.selectAll('.feature-list-item:first-child').datum());
-            } else {
-                drawList();
             }
+        }
+
+        function inputevent() {
+            drawList();
         }
 
         var searchWrap = selection.append('div')
@@ -21,7 +23,8 @@ iD.ui.FeatureList = function(context) {
         var search = searchWrap.append('input')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
-            .on('keyup', keyup);
+            .on('keypress', keypress)
+            .on('input', inputevent);
 
         searchWrap.append('span')
             .attr('class', 'icon search');
