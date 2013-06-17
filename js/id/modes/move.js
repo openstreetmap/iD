@@ -4,9 +4,12 @@ iD.modes.Move = function(context, entityIDs) {
         button: 'browse'
     };
 
-    var keybinding = d3.keybinding('move');
+    var keybinding = d3.keybinding('move'),
+        edit = iD.behavior.Edit(context);
 
     mode.enter = function() {
+        context.install(edit);
+
         var origin,
             nudgeInterval,
             annotation = entityIDs.length === 1 ?
@@ -94,6 +97,8 @@ iD.modes.Move = function(context, entityIDs) {
     };
 
     mode.exit = function() {
+        context.uninstall(edit);
+
         context.surface()
             .on('mousemove.move', null)
             .on('click.move', null);

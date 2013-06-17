@@ -10,16 +10,12 @@ iD.behavior.AddWay = function(context) {
             .on('finish', addWay.cancel);
 
         context.map()
-            .minzoom(16)
             .dblclickEnable(false);
 
         surface.call(draw);
     };
 
     addWay.off = function(surface) {
-        context.map()
-            .minzoom(0);
-
         surface.call(draw.off);
     };
 

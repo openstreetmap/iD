@@ -27,9 +27,6 @@ iD.ui.Modes = function(context) {
 
         function disableTooHigh() {
             buttons.attr('disabled', context.map().editable() ? null : 'disabled');
-            if (!context.map().editable()) {
-                context.enter(iD.modes.Browse(context));
-            }
         }
 
         context.map()

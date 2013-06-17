@@ -11,7 +11,8 @@ iD.modes.DragNode = function(context) {
         selectedIDs = [],
         hover = iD.behavior.Hover(context)
             .altDisables(true)
-            .on('hover', context.ui().sidebar.hover);
+            .on('hover', context.ui().sidebar.hover),
+        edit = iD.behavior.Edit(context);
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
@@ -171,6 +172,7 @@ iD.modes.DragNode = function(context) {
 
     mode.enter = function() {
         context.install(hover);
+        context.install(edit);
 
         context.history()
             .on('undone.drag-node', cancel);
@@ -183,6 +185,7 @@ iD.modes.DragNode = function(context) {
 
     mode.exit = function() {
         context.uninstall(hover);
+        context.uninstall(edit);
 
         context.history()
             .on('undone.drag-node', null);

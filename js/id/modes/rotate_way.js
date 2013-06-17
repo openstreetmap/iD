@@ -4,9 +4,11 @@ iD.modes.RotateWay = function(context, wayId) {
         button: 'browse'
     };
 
-    var keybinding = d3.keybinding('rotate-way');
+    var keybinding = d3.keybinding('rotate-way'),
+        edit = iD.behavior.Edit(context);
 
     mode.enter = function() {
+        context.install(edit);
 
         var annotation = t('operations.rotate.annotation.' + context.geometry(wayId)),
             way = context.graph().entity(wayId),
@@ -63,6 +65,8 @@ iD.modes.RotateWay = function(context, wayId) {
     };
 
     mode.exit = function() {
+        context.uninstall(edit);
+
         context.surface()
             .on('mousemove.rotate-way', null)
             .on('click.rotate-way', null);

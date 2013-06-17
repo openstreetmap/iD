@@ -6,6 +6,7 @@ iD.behavior.Draw = function(context) {
             .altDisables(true)
             .on('hover', context.ui().sidebar.hover),
         tail = iD.behavior.Tail(),
+        edit = iD.behavior.Edit(context),
         closeTolerance = 4,
         tolerance = 12;
 
@@ -91,6 +92,7 @@ iD.behavior.Draw = function(context) {
     function draw(selection) {
         context.install(hover);
         context.install(tail);
+        context.install(edit);
 
         keybinding
             .on('⌫', backspace)
@@ -111,6 +113,7 @@ iD.behavior.Draw = function(context) {
     draw.off = function(selection) {
         context.uninstall(hover);
         context.uninstall(tail);
+        context.uninstall(edit);
 
         selection
             .on('mousedown.draw', null)
