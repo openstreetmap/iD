@@ -144,27 +144,12 @@ iD.modes.Select = function(context, selectedIDs) {
             }
         }
 
-        function selected() {
-            var s = iD.util.entitySelector(selectedIDs);
-
-            selectedIDs.forEach(function(id) {
-                var entity = context.hasEntity(id);
-                if (entity && entity.type === 'relation') {
-                    entity.members.forEach(function(member) {
-                        s += ',.' + member.id
-                    });
-                }
-            });
-
-            return s;
-        }
-
         d3.select(document)
             .call(keybinding);
 
         function selectElements() {
             context.surface()
-                .selectAll(selected())
+                .selectAll(iD.util.entityOrMemberSelector(selectedIDs, context.graph()))
                 .classed('selected', true);
         }
 

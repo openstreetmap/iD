@@ -63,7 +63,7 @@ iD.Map = function(context) {
             if (map.editable() && !transformed) {
                 var hover = d3.event.target.__data__;
                 surface.call(vertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                dispatch.drawn(map);
+                dispatch.drawn(map, {full: false});
             }
         });
 
@@ -71,7 +71,7 @@ iD.Map = function(context) {
             if (map.editable() && !transformed) {
                 var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
                 surface.call(vertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                dispatch.drawn(map);
+                dispatch.drawn(map, {full: false});
             }
         });
 
@@ -83,7 +83,7 @@ iD.Map = function(context) {
                     graph = context.graph();
                 surface.call(vertices, graph, all, filter, extent, map.zoom());
                 surface.call(midpoints, graph, all, filter, extent);
-                dispatch.drawn(map);
+                dispatch.drawn(map, {full: false});
             }
         });
 
@@ -146,12 +146,12 @@ iD.Map = function(context) {
             .call(midpoints, graph, all, filter, map.extent())
             .call(labels, graph, all, filter, dimensions, !difference && !extent);
 
-        dispatch.drawn(map);
+        dispatch.drawn(map, {full: true});
     }
 
     function editOff() {
         surface.selectAll('.layer *').remove();
-        dispatch.drawn(map);
+        dispatch.drawn(map, {full: true});
     }
 
     function zoomPan() {

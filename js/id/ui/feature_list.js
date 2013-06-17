@@ -41,7 +41,13 @@ iD.ui.FeatureList = function(context) {
             .on('change.feature-list', drawList);
 
         context.map()
-            .on('drawn', drawList);
+            .on('drawn.feature-list', mapDrawn);
+
+        function mapDrawn(e) {
+            if (e.full) {
+                drawList();
+            }
+        }
 
         function features() {
             var result = [],
@@ -57,6 +63,9 @@ iD.ui.FeatureList = function(context) {
                 var entity = entities[i];
 
                 if (entity.geometry(graph) === 'vertex')
+                    continue;
+
+                if (context.surface().selectAll(iD.util.entityOrMemberSelector([entity.id], graph)).empty())
                     continue;
 
                 var preset = context.presets().match(entity, context.graph()),
@@ -117,15 +126,7 @@ iD.ui.FeatureList = function(context) {
         }
 
         function mouseover(entity) {
-            var selector = '.' + entity.id;
-
-            if (entity.type === 'relation') {
-                entity.members.forEach(function(member) {
-                    selector += ', .' + member.id;
-                });
-            }
-
-            context.surface().selectAll(selector)
+            context.surface().selectAll(iD.util.entityOrMemberSelector([entity.id], context.graph()))
                 .classed('hover', true);
         }
 

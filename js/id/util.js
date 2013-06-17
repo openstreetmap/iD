@@ -10,6 +10,21 @@ iD.util.entitySelector = function(ids) {
     return ids.length ? '.' + ids.join(',.') : 'nothing';
 };
 
+iD.util.entityOrMemberSelector = function(ids, graph) {
+    var s = iD.util.entitySelector(ids);
+
+    ids.forEach(function(id) {
+        var entity = graph.hasEntity(id);
+        if (entity && entity.type === 'relation') {
+            entity.members.forEach(function(member) {
+                s += ',.' + member.id
+            });
+        }
+    });
+
+    return s;
+};
+
 iD.util.displayName = function(entity) {
     var localeName = 'name:' + iD.detect().locale.toLowerCase().split('-')[0];
     return entity.tags[localeName] || entity.tags.name || entity.tags.ref;
