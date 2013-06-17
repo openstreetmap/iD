@@ -9,7 +9,7 @@ iD.ui.FeatureList = function(context) {
         function keypress() {
             var q = search.property('value');
             if (d3.event.keyCode === 13 && q.length) {
-                click(list.selectAll('.feature-list-item:first-child').datum());
+                click(list.selectAll('.feature-list-item:first-child').datum().entity);
             }
         }
 
