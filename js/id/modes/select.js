@@ -104,10 +104,8 @@ iD.modes.Select = function(context, selectedIDs) {
             }), true));
         }
 
-        if (singular()) {
-            context.ui().sidebar
-                .select(singular().id, newFeature);
-        }
+        context.ui().sidebar
+            .select(singular() ? singular().id : null, newFeature);
 
         context.history()
             .on('undone.select', update)
