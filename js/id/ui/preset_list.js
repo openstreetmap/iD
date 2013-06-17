@@ -51,25 +51,28 @@ iD.ui.PresetList = function(context) {
             }
         }
 
-        function keyup() {
+        function keypress() {
             // enter
             var value = search.property('value');
-            if (d3.event.keyCode === 13 && value.length) {
+            if (d3.event.keyCode === 13 && value.length && false) {
                 list.selectAll('.preset-list-item:first-child').datum().choose();
-            } else {
-                list.classed('filtered', value.length);
-                if (value.length) {
-                    var results = presets.search(value, geometry);
-                    message.text(t('inspector.results', {
-                        n: results.collection.length,
-                        search: value
-                    }));
-                    list.call(drawList, results);
-                } else {
-                    list.call(drawList, context.presets().defaults(geometry, 36));
-                }
             }
         }
+
+	function inputevent() {
+            var value = search.property('value');
+            list.classed('filtered', value.length);
+            if (value.length) {
+                var results = presets.search(value, geometry);
+                message.text(t('inspector.results', {
+                    n: results.collection.length,
+                    search: value
+                }));
+                list.call(drawList, results);
+            } else {
+                list.call(drawList, context.presets().defaults(geometry, 36));
+            }
+	}
 
         var searchWrap = selection.append('div')
             .attr('class', 'search-header');
@@ -79,7 +82,8 @@ iD.ui.PresetList = function(context) {
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
             .on('keydown', keydown)
-            .on('keyup', keyup);
+	    .on('keypress', keypress)
+	    .on('input', inputevent);
 
         searchWrap.append('span')
             .attr('class', 'icon search');
