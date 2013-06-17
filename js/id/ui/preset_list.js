@@ -54,7 +54,7 @@ iD.ui.PresetList = function(context) {
         function keypress() {
             // enter
             var value = search.property('value');
-            if (d3.event.keyCode === 13 && value.length) {
+            if (d3.event.keyCode === 13 && value.length && false) {
                 list.selectAll('.preset-list-item:first-child').datum().choose();
             }
         }
