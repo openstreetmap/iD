@@ -2,7 +2,7 @@
     "modes": {
         "add_area": {
             "title": "Àrea",
-            "description": "Afegeix parcs, edificis, llacs o altres tipus d'àrea sobre el mapa.",
+            "description": "Afegeix parcs, edificis, llacs o altres tipus d'àrees sobre el mapa.",
             "tail": "Feu clic sobre el mapa per començar a un tipus d'àrea com per exemple un parc, un llac o un edifici."
         },
         "add_line": {
@@ -20,10 +20,10 @@
             "description": "Allunya o amplia el mapa"
         },
         "draw_area": {
-            "tail": "Clica per afegir nodes a la teva àrea. Clica el primer node per acabar l'àrea."
+            "tail": "Feu clic per afegir nodes a la vostra àrea. Feu clic al primer node per finalitzar l'àrea."
         },
         "draw_line": {
-            "tail": "Clica per afegir més nodes a la línia. Clica a altres línies per connectar amb elles, i fes doble clic per acabar la línia."
+            "tail": "Feu clic per afegir més nodes a la línia. Feu clic a altres línies per connectar amb elles, i feu doble clic per acabar la línia."
         }
     },
     "operations": {
@@ -88,7 +88,10 @@
                 "relation": "Heu eliminat una relació.",
                 "multiple": "Heu eliminat {n} objectes."
             },
-            "incomplete_relation": "No es pot eliminar aquesta característica ja que no ha estat descarregada completament."
+            "incomplete_relation": "No es pot eliminar aquesta característica ja que no s'ha baixat completament."
+        },
+        "add_member": {
+            "annotation": "Heu afegit un membre a la relació."
         },
         "delete_member": {
             "annotation": "Heu eliminat un membre d'una relació"
@@ -168,7 +171,7 @@
     "browser_notice": "Aquest editor és compatible amb Firefox, Chrome, Safari, Opera i Internet Explorer 9 o superior.\nSiusplau actualitza el teu navegador o bé fes servir Potlach 2 per editar el mapa.",
     "view_on_osm": "Mostra-ho a OSM",
     "translate": {
-        "translate": "Tradueix",
+        "translate": "Traduïu",
         "localized_translation_label": "Nom multilingüe",
         "localized_translation_language": "Escull l'idioma",
         "localized_translation_name": "Nom"
@@ -185,10 +188,11 @@
     "commit": {
         "title": "Desa els canvis",
         "description_placeholder": "Breu descripció de les teves contribucions",
-        "message_label": "Tramet el missatge",
-        "upload_explanation": "Els canvis que desis com a {user} seràn visibles en tots els mapes que utilitzin dades de OpenStreetMap.",
+        "message_label": "Afegeix un comentari",
+        "upload_explanation": "Els canvis que desis seran visibles a tots els maps que utilitzin dades d'OpenStreetMap.",
+        "upload_explanation_with_user": "Els canvis que desis com a {user} seran visibles en tots els mapes que utilitzin dades d'OpenStreetMap.",
         "save": "Desa",
-        "cancel": "Anul·la",
+        "cancel": "Cancel·la",
         "warnings": "Avisos",
         "modified": "Modificat",
         "deleted": "Suprimit",
@@ -199,8 +203,8 @@
         "truncated_list": "Edicions fetes per {users} i {count} més"
     },
     "geocoder": {
-        "title": "Troba un lloc",
-        "placeholder": "Troba un lloc",
+        "title": "Cerca un lloc",
+        "placeholder": "Cerca un lloc",
         "no_results": "No s'ha pogut localitzar el lloc anomenat '{name}'"
     },
     "geolocate": {
@@ -210,7 +214,6 @@
         "no_documentation_combination": "No hi ha documentació per a aquesta combinació d'etiquetes",
         "no_documentation_key": "No hi ha documentació per a aquesta clau",
         "show_more": "Mostra'n més",
-        "new_tag": "Nova etiqueta",
         "view_on_osm": "Mostra-ho a openstreetmap.org",
         "all_tags": "Totes les etiquetes",
         "all_members": "Tots els membres",
@@ -218,12 +221,13 @@
         "role": "Rol",
         "choose": "Seleccioneu un tipus de característica",
         "results": "{n} resultats per {search}",
-        "reference": "Mostra-ho al wiki d'OpenStreetMap",
+        "reference": "Mostra-ho al wiki de l'OpenStreetMap",
         "back_tooltip": "Canvia la característica",
         "remove": "Elimina",
         "search": "Cerca",
         "unknown": "Desconegut",
-        "incomplete": "<no descarregat>"
+        "incomplete": "<no baixat>",
+        "feature_list": "Llista de característiques"
     },
     "background": {
         "title": "Fons",
@@ -296,7 +300,7 @@
         "gps": "# GPS\n\nLes dades de GPS són la font més fiable de dades per a l'OpenStreetMap. Aquest editor és compatible amb les taces locals - fitxers`.gpx`al teu ordinador local. Pots recollir \naquest tipus de traça GPS amb algunes aplicacions per a smartphones com també \ndispositius personals de GPS.\n\nPer a més informació sobre com recollir dades amb GPS, llegeix\n[Recollir dades amb GPS](http://learnosm.org/en/beginner/using-gps/).\n\nper fer servir una traça GPX per editar el mapa, arrossega i deixa el fitxer GPX a l'editor. \nSi es detecta, s'afegirà el mapa com una línia verda llampant. \nClica a 'Paràmetres de configuració del fons'  al cantó esquerre per activar,\ndesactivar, o per ajustar la vista a aquesta capa GPX.\n\nLa traça GPX no és pujada directament a OpenStreetMap - la millor manera de \nfer-la servir és dibuixar tu el mapa, fent-la servir com a guia per a les noves característiques que afegiràs.\n",
         "imagery": "# Imatgeria\n\nLa imatgeria aèriaés un recurs important per a l'edició de mapes. Una combinació de\nvols d'aeronaus, fotografies de satèl·lit, i d'altres fonts compilades gratuïtament \nestàn disponibles a l'editor dins del menú de l'esquerra 'Paràmetres de configuració del fons'.\n\nPer defecte, l'editor mostra la capa de satèl·lit de [Bing Maps](http://www.bing.com/maps/), però a mesura que et mous i ajustes la vista del mapa a noves àrees geogràfiques, noves fonts estaran disponibles. En alguns països, com ara els Estats Units, França, i Dinamarca tenen\n una imatgeria d'alta qualitat disponible per a determinades àrees.\n\nLa imatgeria a vegades no es correspon amb les dades del mapa, això és degut a un error\nper part del proveïdor de la imatge. Si veus moltes carreteres mogudes del seu lloc a la imatge,\nno les moguis per tal que encaixin amb aquesta. Ja que pots ajustar la imatgeria per tal de que quadri amb les dades existents clicant a 'Corregeix la desalineació' a sota de la pestanya dels\n'Paràmetres de configuració del fons'.\n",
         "addresses": "# Adreçes\n\nLes adreçes són una de les informacions més útils per al mapa.\n\nTot i que les adreçes sovint es representen com a part del carrer, a OpenStreetMap\nes desen com a atributs dels edificis i llocs al llarg dels carrers\n\nPots afegir la informació de l'adreça a llocs cartografiats com a edificis com també\na aquells llocs cartografiats com a simples punts. La forma òptima d'obtenir dades \nde les adreçes és a partir d'un estudi al carrer o bé el coneixement pròpi - com a qualsevol altra característica, la còpia de fonts comercials com ara Google Maps està estrictament prohibida.\n",
-        "inspector": "# Utilitzant l'inspector\n\nL'Inspector és l'element de l'interfície d'usuari que es troba al cantó dret de la pàgina i que+\napareix quan una característica és seleccionada i permet editar-ne els detalls.\n\n### Selecció del tipus de característica\n\nDesprés d'afegir un punt, línia, o àrea, pots escollir quin tipus de característica és,\nTant si és una autopista com un carrer residencial, un supermercat o un cafè.\nL'inspector mostrarà botons per els tipus de característica més comuns, i en pots trobar d'altres escrivint el que estàs buscant al quadre de cerca.\n\nClica la 'i' al cantó inferior dret del botó  del tipus de característica per saber-ne més. Clica el botó per seleccionar-la.\n\n### Utilització dels camps i les etiquetes d'edició\n\nDesprés d'escollir la característica, o quan selecciones una característica que ja té\nun tipus assignat, l'inspector mostrarà uns camps amb detalls de la característica \ncom ara el seu nom o la seva adreça .\n\nA sota dels camps que veus, pots clicar algunes icones per afegir altres detalls,\ncom ara infrmació de la [Viquipèdia](http://www.wikipedia.org/), l'accés per a cadires de rodes,\ni alguna cosa més.\n\nAl capdavall de l'inspector, clica 'Etiquetes adicionals' per afegir altres etiquetes arbitràries a l'element. [Taginfo](http://taginfo.openstreetmap.org/) és una gran eina per aprendre'n més sobre les combinacions d'etiquetes més populars.\n\nEls canvis que facis a l'inspector s'aplicaran automàticament al mapa.\nEls pots desfer en qualsevol moment clicant al botó de 'Desfer' .\n\n##Tancament de l'inspector\n\nPots tancar l'inspector clicant el botó de tancament al cantó superior dret,\nprement la tecla 'Escape', o bé clicant al mapa.\n",
+        "inspector": "# Ús de l'inspector\n\nL'Inspector és l'element de l'interfície d'usuari que es troba al cantó dret de la pàgina i que \napareix quan una característica és seleccionada i permet editar-ne els detalls.\n\n### Selecció del tipus de característica\n\nDesprés d'afegir un punt, línia, o àrea, pots escollir quin tipus de característica és,\nTant si és una autopista com un carrer residencial, un supermercat o un cafè.\nL'inspector mostrarà botons per els tipus de característica més comuns, i en pots trobar d'altres escrivint el que esteu cercant al quadre de cerca.\n\nFeu clic a la 'i' al cantó inferior dret del botó  del tipus de característica per saber-ne més. Feu clic al botó per seleccionar-la.\n\n### Utilització dels camps i les etiquetes d'edició\n\nDesprés d'escollir la característica, o quan seleccioneu una característica que ja té\nun tipus assignat, l'inspector mostrarà uns camps amb detalls de la característica \ncom ara el seu nom o la seva adreça .\n\nA sota dels camps que veieu, podeu clicar algunes icones per afegir altres detalls,\ncom ara informació de la [Viquipèdia](http://ca.wikipedia.org/), l'accés per a cadires de rodes,\ni alguna cosa més.\n\nAl capdavall de l'inspector, cliqueu «Etiquetes adicionals» per afegir altres etiquetes arbitràries a l'element. [Taginfo](http://taginfo.openstreetmap.org/) és una gran eina per aprendre'n més sobre les combinacions d'etiquetes més populars.\n\nEls canvis que feu a l'inspector s'aplicaran automàticament al mapa.\nEls podeu desfer en qualsevol moment clicant al botó de 'Desfés' .\n\n##Tancament de l'inspector\n\nPodeu tancar l'inspector clicant el botó de tancament al cantó superior dret,\nprement la tecla «Esc», o bé clicant al mapa.\n",
         "buildings": "# Edificis\n\nL'OpenStreetMap és la base de dades d'edificis més gran del món. Tu pots crear \ni millorar aquesta base de dades.\n\n### Selecció\n\nPots seleccionar un edifici clicant al seu marge. Això farà ressaltar\nl'edifici i obrirà un petit menú d'eines i una barra lateral mostrant més informació\nsobre l'edifici.\n\n### Modificació\n\nAlguns caps els edificis estan mal col·locats o tenen etiquetes incorrectes.\n\nPer moure l'edifici sencer, selecciona'l, tot seguit clica l'eina 'Moure'. Mou el\nteu cursor per desplaçar l'edifici, i torna a clicar quan estigui posicionat correctament.\n\nPer ajustar la forma específica d'un edifici, clica i arrossega els nodes que componen \nel seu marge als llocs desitjats.\n\n### Creació\n\nUna de les principals temes sobre l'addició d'edificis al mapa és que\nl'OpenStreetMap pot desar edificis com a punts però també com a figures. La norma general\nper _cartografiar un edifici diu que aquest s'ha d'expressar, sempre que sigui possible, com a una figura_, i les companyies, cases,\nequipaments, i d'altres coses que operen als edificis, s'han de cartografiar com a punts \ncol·locats dins de la figura de l'edifici.\n\n\nComença a dibuixar un edifici com a figura clicant el botó 'Àrea' a la zona superior esquerra de la interfície, i acaba'l o bé prement 'Retorn' al teu teclat\no clicant al primer node que has col·locat per tancar la figura.\n\n### Eliminació\n\nSi un edifici està totalment malament - pots apreciar que no existeix a la imatge per satèl·lit\ni a més a més, els veïns ens han confirmat que no existeix - el pots eliminar, cosa que el treurà del mapa. Vés amb molt de compte a l'hora d'eliminar característiques -\ncom ara altres edicions, els resultats podran ser vistos per tothom i moltes vegades la imatgeria per satèl·lit està desactualitzada, per tant l'edifici es pot haver construït recentment.\n\nPots eliminar un edifici clicant-lo, i llavors clicant la icona de la paperera o bé prement la tecla 'Suprimir'.\n"
     },
     "intro": {
@@ -311,7 +315,7 @@
             "title": "Punts",
             "add": "Els punts es poden fer servir per representar característiques del mapa com ara botigues, restaurants i monuments. Marquen una ubicació específica i descriuen el que estroba allà. **Clica el botó del punt per afegir un nou punt.**",
             "place": "El punt pot ser col·locat clicant al mapa. **Col·loca el punt a sobre de l'edifici.**",
-            "search": "Hi ha moltes característiques que poden ser representades amb punts. El punt que acabes d'afegir és un cafè **Busca \"Cafè\"**",
+            "search": "Hi ha moltes característiques que es poden representar amb punts. El punt que heu afegit és un cafè . **Cerca «{name}»**",
             "choose": "**Tria cafè de la llista.**",
             "describe": "El punt està marcat com un cafè. Utilitzant l'editor de característica, podem afegir més informació sobre la característica. **Afegeix un nom**",
             "close": "L'editor de característica pot ser tancat clicant a la creu. **Tanca l'editor de característica**",
@@ -322,10 +326,10 @@
         },
         "areas": {
             "title": "Àrees",
-            "add": "Les àrees són una forma més detallada de representar característiques. Dónen informació sobre els límits d'aquesta. Les arees poden ser fetes sevir casi bé per representar els mateixos tipus de característiques que els punts, i moltes vegades, s'escull fer servir l'àrea. **Clica el botó Àrea per afegir una nova àrea**",
+            "add": "Les àrees són una forma més detallada de representar característiques. Dónen informació sobre els límits d'aquestes. Les arees poden fer-se sevir per representar casi bé els mateixos tipus de característiques que els punts, i moltes vegades, s'escull fer servir l'àrea. **Clica el botó Àrea per afegir una nova àrea**",
             "corner": "Les àrees es dibuixen col·locant nodes que marquen els límits de l'àrea. **Col·loca el node inicial en una de les cantonades del parc.**",
             "place": "Dibuixa l'àrea col·locant més nodes. Acaba l'àrea clicant al node inicial. **Dibuixa\nuna àrea per al parc.**",
-            "search": "**Busca el terme parc.**",
+            "search": "**Cerca «{name}»**",
             "choose": "**Tria Parc de la llista.**",
             "describe": "**Afegeix un nom, i tanca l'editor de característica**"
         },
@@ -333,7 +337,7 @@
             "title": "Línies",
             "add": "Les línies acostumen a representar característiques com ara carreteres, vies de tren o rius. **Clica el botó línia per afegir una nova línia**",
             "start": "**Comença a dibuixar la línia clicant al final de la carretera.**",
-            "intersect": "Clica per afegur més nodes a la línia. Pots arrosegar el mapa mentre dibuixes si és necessari. Les carreteres i molts altres tipus de línies, són part de una xarxa més gran. És de vital importància connectar aquestes línies a d'altres per tal que les aplicacions navegador funcionin. **Clica a Flower Street per crear una intersecció que connecti aquestes dues línies.**",
+            "intersect": "Clica al mapa per afegir més nodes a la línia. Pots arrosegar el mapa mentre dibuixes si és necessari. Les carreteres i molts altres tipus de línies, són part d'una xarxa més gran. És de vital importància connectar aquestes línies a d'altres per tal que les aplicacions navegador funcionin. **Clica a Flower Street per crear una intersecció que connecti aquestes dues línies.**",
             "finish": "Les línies poden ser acabades clicant al últim node una altra vegada. **Acaba el dibuix de la carretera.**",
             "road": "**Tria Carretera de la llista**",
             "residential": "Hi ha molts tipus de carreteres, les més comunes són els carrers. **Selecciona el carrer**",
@@ -432,6 +436,9 @@
                 "label": "Tipus"
             },
             "bicycle_parking": {
+                "label": "Tipus"
+            },
+            "boundary": {
                 "label": "Tipus"
             },
             "building": {
@@ -615,7 +622,13 @@
                     "taoist": "Taoista"
                 }
             },
+            "restriction": {
+                "label": "Tipus"
+            },
             "route": {
+                "label": "Tipus"
+            },
+            "route_master": {
                 "label": "Tipus"
             },
             "sac_scale": {
@@ -692,14 +705,14 @@
                 "name": "Adreça"
             },
             "aeroway": {
-                "name": "Ruta aèria"
+                "name": "Infraestructura aeroportuària"
             },
             "aeroway/aerodrome": {
                 "name": "Aeroport",
                 "terms": "avió,aeroport,aeròdrom"
             },
             "aeroway/apron": {
-                "name": "Àrea d'embarcament",
+                "name": "Àrea d'aparcament",
                 "terms": "rampa"
             },
             "aeroway/gate": {
@@ -713,7 +726,7 @@
                 "terms": "helicòpter,helisuperfície,heliport"
             },
             "aeroway/runway": {
-                "name": "Pista d'enlairament",
+                "name": "Pista d'enlairament/aterratge",
                 "terms": "Pista d'aterratge"
             },
             "aeroway/taxiway": {
@@ -757,7 +770,7 @@
                 "terms": "gran pantalla, petit, cinema, autocine, pel·lícula, llargmetratge, cine, imatges en moviment, agafar, obre de teatre filmada, teatre, sessió, pantalla cinematogràfica"
             },
             "amenity/college": {
-                "name": "Universitat"
+                "name": "Campus universitari"
             },
             "amenity/courthouse": {
                 "name": "Jutjat"
@@ -766,7 +779,7 @@
                 "name": "Ambaixada"
             },
             "amenity/fast_food": {
-                "name": "Menjar ràpid"
+                "name": "Local de menjar ràpid"
             },
             "amenity/fire_station": {
                 "name": "Parc de bombers"
@@ -804,6 +817,10 @@
                 "name": "Lloc de culte",
                 "terms": "abadia, basílica,església cristiana incomformista,catedral, presbiteri,sacristia,capella,església,casa de Déu, casa d'oració, casa de culte,missió,mesquita,oratori,parròquia, mausoleu, santuari,sinagoga,taberacle, temple"
             },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Temple budista",
+                "terms": "estupa,vihara,monastir,temple,pagoda,zendo,dojo"
+            },
             "amenity/place_of_worship/christian": {
                 "name": "Església",
                 "terms": "cristià, abadia, basílica, església baptista, catedral,capella,església,casa de Déu,casa d'oració,casa de lloança,lloc de pregària,monestir,missió,oratori,parròquia,sacellum,santuari,tabernacle,temple"
@@ -817,7 +834,8 @@
                 "terms": "islam,mesquita"
             },
             "amenity/police": {
-                "name": "Comissaria de Policia"
+                "name": "Comissaria de Policia",
+                "terms": "detectius,gendarmeria,guàrdia urbana,mossos d'esquadra,policia,guàrdia civil"
             },
             "amenity/post_box": {
                 "name": "Bústia de correus",
@@ -830,10 +848,12 @@
                 "name": "Pub"
             },
             "amenity/restaurant": {
-                "name": "Restaurant"
+                "name": "Restaurant",
+                "terms": "bar,cafeteria,cafè,cantina,steakhouse,botiga de cafè,restaurant,menjador,antre,botiga de dònuts,autorestaurant,casa de menjars,lloc per menjar,lloc de menjar ràpid,greasy spoon,grill,hamburgueseria,frankfurt,posada,berenador,discoteca,pizzeria,saló,taverna"
             },
             "amenity/school": {
-                "name": "Escola"
+                "name": "Escola",
+                "terms": "acadèmia,escola,escola universitària,facultat,institut,seminari,universitat"
             },
             "amenity/swimming_pool": {
                 "name": "Piscina"
@@ -953,7 +973,8 @@
                 "name": "Carril bici"
             },
             "highway/footway": {
-                "name": "Camí per a vianants"
+                "name": "Camí per a vianants",
+                "terms": "bulevard,camí,carrer,carretera,carril,sender,passatge,pista,via"
             },
             "highway/living_street": {
                 "name": "Carrer residencial"
@@ -1004,7 +1025,7 @@
                 "name": "Carreró"
             },
             "highway/service/drive-through": {
-                "name": "Via per a vehicles dins una propietat."
+                "name": "Via dins una propietat."
             },
             "highway/service/driveway": {
                 "name": "Via d'accés a una propietat"
@@ -1013,7 +1034,7 @@
                 "name": "Accés per a emergències"
             },
             "highway/service/parking_aisle": {
-                "name": "Carril de circulació d'un aparcament"
+                "name": "Carrer d'aparcament"
             },
             "highway/steps": {
                 "name": "Escales",
@@ -1030,7 +1051,7 @@
                 "name": "Pista"
             },
             "highway/traffic_signals": {
-                "name": "Senyals reguladors del trànsit",
+                "name": "Semàfors",
                 "terms": "llum, llum d'aturada, semàfor"
             },
             "highway/trunk": {
@@ -1041,7 +1062,7 @@
                 "terms": "via d'accés,incorporació,sortida"
             },
             "highway/turning_circle": {
-                "name": "Cercle de viratje"
+                "name": "Cul de sac"
             },
             "highway/unclassified": {
                 "name": "Altres carreteres"
@@ -1068,10 +1089,10 @@
                 "name": "Ruïnes"
             },
             "historic/wayside_cross": {
-                "name": "Viacrucis"
+                "name": "Creu Cristiana"
             },
             "historic/wayside_shrine": {
-                "name": "ermita"
+                "name": "Capella"
             },
             "landuse": {
                 "name": "Aprofitament del terreny"
@@ -1092,10 +1113,10 @@
                 "name": "Zona en construcció"
             },
             "landuse/farm": {
-                "name": "Granja"
+                "name": "Terrenys de granja"
             },
             "landuse/farmyard": {
-                "name": "Tancat per a bestiar"
+                "name": "Granja"
             },
             "landuse/forest": {
                 "name": "Bosc"
@@ -1113,7 +1134,7 @@
                 "name": "Verger"
             },
             "landuse/quarry": {
-                "name": "Pedrera"
+                "name": "Mina a cel obert"
             },
             "landuse/residential": {
                 "name": "Zona residencial"
@@ -1137,10 +1158,11 @@
                 "name": "Port esportiu"
             },
             "leisure/park": {
-                "name": "Parc"
+                "name": "Parc",
+                "terms": "esplanada,bosc,jardí,herba,zona verda,gespa,prat,parc,jocs infantils,zona d'esbarjo,àrea de recreació,plaça,verd urbà,arbrat"
             },
             "leisure/pitch": {
-                "name": "Camp poliesportiu"
+                "name": "Camp d'esports"
             },
             "leisure/pitch/american_football": {
                 "name": "Camp de futbol americà"
@@ -1189,7 +1211,7 @@
                 "name": "Far"
             },
             "man_made/pier": {
-                "name": "Moll"
+                "name": "Moll de pilons"
             },
             "man_made/pipeline": {
                 "name": "Canonada"
@@ -1266,7 +1288,7 @@
                 "name": "Embassament"
             },
             "natural/wetland": {
-                "name": "Zona humida"
+                "name": "Aiguamolls"
             },
             "natural/wood": {
                 "name": "Bosc"
@@ -1501,7 +1523,8 @@
                 "name": "Papereria"
             },
             "shop/supermarket": {
-                "name": "Supermercat"
+                "name": "Supermercat",
+                "terms": "basar,botiga,boutique,cadena de botigues, cooperativa,botigues de baix preu,tot a cent,encants,galeria,centre comercial,outlet,grans magatzems,supermercat,botiga de segona mà"
             },
             "shop/toys": {
                 "name": "Botiga de joguines"
@@ -1577,6 +1600,9 @@
             "type/boundary": {
                 "name": "Límit"
             },
+            "type/boundary/administrative": {
+                "name": "Límit administratiu"
+            },
             "type/multipolygon": {
                 "name": "Multipolígon"
             },
@@ -1615,6 +1641,9 @@
             },
             "type/route/tram": {
                 "name": "Ruta de tramvia"
+            },
+            "type/route_master": {
+                "name": "Patró de la Ruta"
             },
             "vertex": {
                 "name": "Altres"

@@ -141,7 +141,6 @@
         "title": "Guardar cambios",
         "description_placeholder": "Descripción curtia de les collaboraciones",
         "message_label": "Mensaxe d'unviu",
-        "upload_explanation": "Los cambios que xuba como {user} tarán visibles en tolos mapes qu'usen los datos d'OpenStreetMap.",
         "save": "Guardar",
         "cancel": "Encaboxar",
         "warnings": "Avisos",
@@ -161,7 +160,6 @@
         "no_documentation_combination": "Nun hai documentación disponible pa esta combinación d'etiquetes",
         "no_documentation_key": "Nun hai documentación disponible pa esta clave",
         "show_more": "Ver más",
-        "new_tag": "Etiqueta nueva",
         "choose": "Seleicione un tipu de carauterística",
         "results": "{n} resultaos pa {search}"
     },

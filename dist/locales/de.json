@@ -90,6 +90,9 @@
             },
             "incomplete_relation": "Dieses Objekt kann nicht gelöscht werden, da es nicht vollständig heruntergeladen wurde."
         },
+        "add_member": {
+            "annotation": "Ein Mitglied zu einer Relation hinzugefügt."
+        },
         "delete_member": {
             "annotation": "Ein Mitglied aus einer Relation entfernt."
         },
@@ -186,7 +189,8 @@
         "title": "Änderungen speichern",
         "description_placeholder": "Eine kurze Beschreibung deiner Beiträge",
         "message_label": "Änderungskommentar",
-        "upload_explanation": "Änderungen, die du als {user} hochlädst erscheinen auf allen Karten, die Daten von OpenStreetMap nutzen.",
+        "upload_explanation": "Änderungen, die du hochlädst, werden auf allen Karten sichtbar, die OpenStreetMap nutzen.",
+        "upload_explanation_with_user": "Änderungen, die du als {user} hochlädst, werden auf allen Karten sichtbar, die OpenStreetMap nutzen.",
         "save": "Speichern",
         "cancel": "Abbrechen",
         "warnings": "Warnungen",
@@ -210,7 +214,6 @@
         "no_documentation_combination": "Für dieses Attribut ist keine Dokumentation verfügbar.",
         "no_documentation_key": "Für dieses Schlüsselwort ist keine Dokumentation verfügbar",
         "show_more": "Zeige mehr",
-        "new_tag": "Neues Attribut",
         "view_on_osm": "Auf openstreetmap.org ansehen",
         "all_tags": "Alle Tags",
         "all_members": "Alle Mitglieder",
@@ -223,7 +226,8 @@
         "remove": "Entfernen",
         "search": "Suchen",
         "unknown": "Unbekannt",
-        "incomplete": "<nicht heruntergeladen>"
+        "incomplete": "<nicht heruntergeladen>",
+        "feature_list": "Objektliste"
     },
     "background": {
         "title": "Hintergrund",
@@ -311,7 +315,7 @@
             "title": "Punkte",
             "add": "Punkte können verwendet werden, um Objekte wie Läden, Restaurants oder Denkmäler darzustellen. Sie markieren eine bestimmte Stelle und beschreiben, was sich dort befindet. **Klicke den Punkt-Knopf an, um einen neuen Punkt hinzuzufügen**",
             "place": "Punkte können durch Klicken auf die Karte platziert werden. **Platziere einen Punkt auf dem Gebäude**",
-            "search": "Es gibt viele verschiedene Objekte, die ein Punkt repräsentieren kann. Der Punkt, den du gerade hinzugefügt hast, ist ein Café. **Suche nach \"Café\"**",
+            "search": "Es gibt viele verschiedene Objekte, die ein Punkt repräsentieren kann. Der Punkt, den du gerade hinzugefügt hast, ist ein Café. **Suche nach '{name}'**",
             "choose": "**Wähle \"Café\" aus der Liste aus.**",
             "describe": "Der Knoten wurde nun als Café markiert. Mit dem Eigenschaftseditor können wir mehr Informationen über das Objekt angeben. **Füge einen Namen hinzu.**",
             "close": "Der Eigenschaftseditor kann mithilfe des Schließen-Buttons beendet werden. **Schließe den Eigenschaftseditor.**",
@@ -325,7 +329,7 @@
             "add": "Flächen sind eine Möglichkeit, Objekte detailliert wiederzugeben. Diese bieten Information über die Grenzen des Objektes. Flächen können fast immer da verwendet werden, wo auch Knoten Verwendung finden, werden aber oft bevorzugt. **Benutze den Flächen-Button, um ein neues Gebiet hinzuzufügen.**",
             "corner": "Flächen werden gezeichnet, indem man Punkte platziert, die den Umriss der Fläche repräsentieren. **Setze den Startpunkt auf eine Ecke des Spielplatzes**",
             "place": "Zeichne eine Fläche, indem du mehr Punkte hinzufügst. Beende die Fläche, indem du auf den Startpunkt klickst. **Zeichne eine Fläche für den Spielplatz.**",
-            "search": "**Suche nach Spielplatz**",
+            "search": "**Suche nach '{name}'.**",
             "choose": "**Wähle \"Spielplatz\" aus der Liste aus.**",
             "describe": "**Füge einen Namen hinzu und schließe den Eigenschaftseditor**"
         },
@@ -432,6 +436,9 @@
                 "label": "Typ"
             },
             "bicycle_parking": {
+                "label": "Typ"
+            },
+            "boundary": {
                 "label": "Typ"
             },
             "building": {
@@ -612,7 +619,13 @@
                     "taoist": "Tao"
                 }
             },
+            "restriction": {
+                "label": "Typ"
+            },
             "route": {
+                "label": "Typ"
+            },
+            "route_master": {
                 "label": "Typ"
             },
             "sac_scale": {
@@ -800,6 +813,9 @@
             "amenity/place_of_worship": {
                 "name": "Gebetsort",
                 "terms": "Abtei, Basilika, geweihter Ort, Kathedrale, Altarraum, Kantorei, Kapelle, Kirche, Kirchgemeinde, Gotteshaus, Gebetshaus, Dom, Moschee, Oratorium, Heiligtum, Sacellum, Schrein, Synagoge, Tabernakel, Tempel"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Buddhistischer Tempel"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Kirche"
@@ -1572,6 +1588,9 @@
             "type/boundary": {
                 "name": "Grenze"
             },
+            "type/boundary/administrative": {
+                "name": "Administrative Grenze"
+            },
             "type/multipolygon": {
                 "name": "Multipolygon"
             },
@@ -1610,6 +1629,9 @@
             },
             "type/route/tram": {
                 "name": "Tramlinie"
+            },
+            "type/route_master": {
+                "name": "Hauptroute"
             },
             "vertex": {
                 "name": "Andere"
