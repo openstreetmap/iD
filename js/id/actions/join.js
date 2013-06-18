@@ -55,6 +55,20 @@ iD.actions.Join = function(ids) {
         var joined = iD.geo.joinWays(ids.map(graph.entity, graph), graph);
         if (joined.length > 1)
             return 'not_adjacent';
+
+        var nodeIds = _.pluck(joined[0].nodes, 'id').slice(1, -1),
+            relation;
+
+        joined[0].forEach(function(way) {
+            var parents = graph.parentRelations(way);
+            parents.forEach(function(parent) {
+                if (parent.isRestriction() && parent.members.some(function(m) { return nodeIds.indexOf(m.id) >= 0; }))
+                    relation = parent;
+            });
+        });
+
+        if (relation)
+            return 'restriction';
     };
 
     return action;
