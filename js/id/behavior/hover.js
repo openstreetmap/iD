@@ -64,21 +64,37 @@ iD.behavior.Hover = function(context) {
             }
         }
 
+        var down;
+
         function mouseover() {
+            if (down) return;
             var target = d3.event.target;
             enter(target ? target.__data__ : null);
         }
 
         function mouseout() {
+            if (down) return;
             var target = d3.event.relatedTarget;
             enter(target ? target.__data__ : null);
         }
 
+        function mousedown() {
+            down = true;
+            d3.select(window)
+                .on('mouseup.hover', mouseup)
+        }
+
+        function mouseup() {
+            down = false;
+        }
+
         selection
             .on('mouseover.hover', mouseover)
-            .on('mouseout.hover', mouseout);
+            .on('mouseout.hover', mouseout)
+            .on('mousedown.hover', mousedown)
+            .on('mouseup.hover', mouseup);
 
-        d3.select(document)
+        d3.select(window)
             .on('keydown.hover', keydown)
             .on('keyup.hover', keyup);
     };
@@ -91,11 +107,14 @@ iD.behavior.Hover = function(context) {
 
         selection
             .on('mouseover.hover', null)
-            .on('mouseout.hover', null);
+            .on('mouseout.hover', null)
+            .on('mousedown.hover', null)
+            .on('mouseup.hover', null);
 
-        d3.select(document)
+        d3.select(window)
             .on('keydown.hover', null)
-            .on('keyup.hover', null);
+            .on('keyup.hover', null)
+            .on('mouseup.hover', null)
     };
 
     hover.altDisables = function(_) {
