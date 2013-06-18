@@ -87,7 +87,7 @@ iD.geo.joinWays = function(array, graph) {
     while (array.length) {
         member = array.shift();
         current = [member];
-        current.nodes = nodes = resolve(member);
+        current.nodes = nodes = resolve(member).slice();
         joined.push(current);
 
         while (array.length && _.first(nodes) !== _.last(nodes)) {
