@@ -6,7 +6,7 @@ iD.actions.AddMember = function(relationId, member, memberIndex) {
             var members = relation.indexedMembers();
             members.push(member);
 
-            var joined = iD.geo.joinMemberWays(members, graph);
+            var joined = iD.geo.joinWays(members, graph);
             for (var i = 0; i < joined.length; i++) {
                 var segment = joined[i];
                 for (var j = 0; j < segment.length && segment.length >= 2; j++) {

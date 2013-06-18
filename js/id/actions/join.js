@@ -14,99 +14,47 @@ iD.actions.Join = function(ids) {
     }
 
     var action = function(graph) {
-        var existing = 0,
-            nodes,
-            a, b,
-            i, j;
-
-        function replaceWithA(parent) {
-            graph = graph.replace(parent.replaceMember(b, a));
-        }
+        var ways = ids.map(graph.entity, graph),
+            survivor = ways[0];
 
         // Prefer to keep an existing way.
-        for (i = 0; i < ids.length; i++) {
-            if (!graph.entity(ids[i]).isNew()) {
-                existing = i;
+        for (var i = 0; i < ways.length; i++) {
+            if (!ways[i].isNew()) {
+                survivor = ways[i];
                 break;
             }
         }
 
-        // Join ways to 'a' in the following order: a-1, a-2, ..., 0, a+1, a+2, ..., ids.length-1
-        for (i = 0; i < ids.length; i++) {
-            j = (i <= existing) ? (existing - i) : i;
-            if (j === existing) {
-                continue;
-            }
+        var joined = iD.geo.joinWays(ways, graph)[0];
 
-            a = graph.entity(ids[existing]);
-            b = graph.entity(ids[j]);
+        survivor = survivor.update({nodes: _.pluck(joined.nodes, 'id')});
+        graph = graph.replace(survivor);
 
-            if (a.first() === b.first()) {
-                // a <-- b ==> c
-                // Expected result:
-                // a <-- b <-- c
-                b = iD.actions.Reverse(ids[j])(graph).entity(ids[j]);
-                nodes = b.nodes.slice().concat(a.nodes.slice(1));
+        joined.forEach(function(way) {
+            if (way.id === survivor.id)
+                return;
 
-            } else if (a.first() === b.last()) {
-                // a <-- b <== c
-                // Expected result:
-                // a <-- b <-- c
-                nodes = b.nodes.concat(a.nodes.slice(1));
+            graph.parentRelations(way).forEach(function(parent) {
+                graph = graph.replace(parent.replaceMember(way, survivor));
+            });
 
-            } else if (a.last()  === b.first()) {
-                // a --> b ==> c
-                // Expected result:
-                // a --> b --> c
-                nodes = a.nodes.concat(b.nodes.slice(1));
+            survivor = survivor.mergeTags(way.tags);
 
-            } else if (a.last()  === b.last()) {
-                // a --> b <== c
-                // Expected result:
-                // a --> b --> c
-                b = iD.actions.Reverse(ids[j])(graph).entity(ids[j]);
-                nodes = a.nodes.concat(b.nodes.slice().slice(1));
-            }
-
-            graph.parentRelations(b).forEach(replaceWithA);
-
-            graph = graph.replace(a.mergeTags(b.tags).update({ nodes: nodes }));
-            graph = iD.actions.DeleteWay(ids[j])(graph);
-        }
+            graph = graph.replace(survivor);
+            graph = iD.actions.DeleteWay(way.id)(graph);
+        });
 
         return graph;
     };
 
     action.disabled = function(graph) {
-        var geometries = groupEntitiesByGeometry(graph),
-            i;
-
-        // direction of the previous way -- the next way can join only on the opposite side than the previous joint
-        var prev_direction = 0;
-
+        var geometries = groupEntitiesByGeometry(graph);
         if (ids.length < 2 || ids.length !== geometries.line.length)
             return 'not_eligible';
 
-        for (i = 0; i+1 < ids.length; i++) {
-            var a = graph.entity(ids[i+0]),
-                b = graph.entity(ids[i+1]);
-
-            if (a.first() === b.first() && prev_direction <= 0) {
-                prev_direction = 1;
-                continue;
-            } else if (a.first() === b.last() && prev_direction <= 0) {
-                prev_direction = -1;
-                continue;
-            } else if (a.last() === b.first() && prev_direction >= 0) {
-                prev_direction = 1;
-                continue;
-            } else if (a.last() === b.last() && prev_direction >= 0) {
-                prev_direction = -1;
-                continue;
-            }
-
+        var joined = iD.geo.joinWays(ids.map(graph.entity, graph), graph);
+        if (joined.length > 1)
             return 'not_adjacent';
-        }
     };
 
     return action;

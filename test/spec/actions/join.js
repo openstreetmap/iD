@@ -52,6 +52,26 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
+        it("returns falsy for more than two ways when connected, regardless of order", function () {
+            // a --> b ==> c ~~> d
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    'c': iD.Node({id: 'c'}),
+                    'd': iD.Node({id: 'd'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b']}),
+                    '=': iD.Way({id: '=', nodes: ['b', 'c']}),
+                    '~': iD.Way({id: '~', nodes: ['c', 'd']})
+            });
+
+            expect(iD.actions.Join(['-', '=', '~']).disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Join(['-', '~', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Join(['=', '-', '~']).disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Join(['=', '~', '-']).disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Join(['~', '=', '-']).disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Join(['~', '-', '=']).disabled(graph)).not.to.be.ok;
+        });
+
         it("returns 'not_eligible' for non-line geometries", function () {
             var graph = iD.Graph({
                     'a': iD.Node({id: 'a'})

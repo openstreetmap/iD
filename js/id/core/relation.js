@@ -185,11 +185,11 @@ _.extend(iD.Relation.prototype, {
         var outers = this.members.filter(function(m) { return 'outer' === (m.role || 'outer'); }),
             inners = this.members.filter(function(m) { return 'inner' === m.role; });
 
-        outers = iD.geo.joinMemberWays(outers, resolver);
-        inners = iD.geo.joinMemberWays(inners, resolver);
+        outers = iD.geo.joinWays(outers, resolver);
+        inners = iD.geo.joinWays(inners, resolver);
 
-        outers = _.pluck(outers, 'locs');
-        inners = _.pluck(inners, 'locs');
+        outers = outers.map(function(outer) { return _.pluck(outer.nodes, 'loc'); });
+        inners = inners.map(function(inner) { return _.pluck(inner.nodes, 'loc'); });
 
         var result = outers.map(function(o) { return [o]; });
 
