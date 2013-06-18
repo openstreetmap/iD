@@ -138,12 +138,17 @@ iD.Map = function(context) {
         }
 
         surface
-            .call(points)
             .call(vertices, graph, all, filter, map.extent(), map.zoom())
             .call(lines, graph, all, filter)
             .call(areas, graph, all, filter)
             .call(midpoints, graph, all, filter, map.extent())
             .call(labels, graph, all, filter, dimensions, !difference && !extent);
+
+        if (points.points(context.intersects(map.extent())).length > 100) {
+            surface.select('.layer-hit').selectAll('g.point').remove();
+        } else {
+            surface.call(points, points.points(all), filter);
+        }
 
         dispatch.drawn({full: true});
     }
