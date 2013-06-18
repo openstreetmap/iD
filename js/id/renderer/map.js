@@ -47,7 +47,7 @@ iD.Map = function(context) {
         var dataLayer = supersurface.append('div')
             .attr('class', 'layer-layer layer-data');
 
-        surface = dataLayer.append('svg')
+        map.surface = surface = dataLayer.append('svg')
             .on('mousedown.zoom', function() {
                 if (d3.event.button == 2) {
                     d3.event.stopPropagation();
@@ -88,7 +88,6 @@ iD.Map = function(context) {
         });
 
         map.size(selection.size());
-        map.surface = surface;
 
         labels.supersurface(supersurface);
         mouse = iD.util.fastMouse(supersurface.node());
