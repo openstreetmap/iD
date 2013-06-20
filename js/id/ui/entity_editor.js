@@ -2,7 +2,8 @@ iD.ui.EntityEditor = function(context) {
     var event = d3.dispatch('choose'),
         state = 'select',
         id,
-        preset;
+        preset,
+        reference;
 
     var rawTagEditor = iD.ui.RawTagEditor(context)
         .on('change', changeTags);
@@ -45,7 +46,9 @@ iD.ui.EntityEditor = function(context) {
             .attr('class', 'inspector-body');
 
         $enter.append('div')
-            .attr('class', 'preset-icon-wrap inspector-inner fillL')
+            .attr('class', 'preset-list-item inspector-inner fillL')
+            .append('div')
+            .attr('class', 'preset-list-button-wrap')
             .append('button')
             .attr('class', 'preset-list-button preset-reset')
             .call(bootstrap.tooltip()
@@ -53,6 +56,12 @@ iD.ui.EntityEditor = function(context) {
                 .placement('bottom'))
             .append('div')
             .attr('class', 'label');
+
+        $body.select('.preset-list-button-wrap')
+            .call(reference.button);
+
+        $body.select('.preset-list-item')
+            .call(reference.body);
 
         $enter.append('div')
             .attr('class', 'inspector-border inspector-preset');
@@ -73,12 +82,12 @@ iD.ui.EntityEditor = function(context) {
 
         // Update
 
-        $body.select('.preset-icon-wrap button')
+        $body.select('.preset-list-item button')
             .call(iD.ui.PresetIcon()
                 .geometry(context.geometry(id))
                 .preset(preset));
 
-        $body.select('.preset-icon-wrap .label')
+        $body.select('.preset-list-item .label')
             .text(preset.name());
 
         $body.select('.inspector-preset')
@@ -113,7 +122,7 @@ iD.ui.EntityEditor = function(context) {
         function historyChanged() {
             var entity = context.hasEntity(id);
             if (!entity) return;
-            preset = context.presets().match(entity, context.graph());
+            entityEditor.preset(context.presets().match(entity, context.graph()));
             entityEditor(selection);
         }
 
@@ -151,13 +160,17 @@ iD.ui.EntityEditor = function(context) {
     entityEditor.entityID = function(_) {
         if (!arguments.length) return id;
         id = _;
-        preset = context.presets().match(context.entity(id), context.graph());
+        entityEditor.preset(context.presets().match(context.entity(id), context.graph()));
         return entityEditor;
     };
 
     entityEditor.preset = function(_) {
         if (!arguments.length) return preset;
-        preset = _;
+        if (_ !== preset) {
+            preset = _;
+            reference = iD.ui.TagReference(preset.reference())
+                .showing(false);
+        }
         return entityEditor;
     };
 

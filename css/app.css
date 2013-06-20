@@ -941,13 +941,12 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     padding: 20px;
 }
 
-.entity-editor-pane .preset-icon-wrap {
+.entity-editor-pane .preset-list-item {
     border-bottom: 1px solid #ccc;
     padding: 20px;
-    height: 100px;
 }
 
-.entity-editor-pane .preset-icon-wrap::after {
+.entity-editor-pane .preset-list-item::after {
     content: "";
     position: absolute;
     height: 0;
