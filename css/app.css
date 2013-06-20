@@ -944,6 +944,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .entity-editor-pane .preset-icon-wrap {
     border-bottom: 1px solid #ccc;
     padding: 20px;
+    height: 100px;
 }
 
 .entity-editor-pane .preset-icon-wrap::after {
@@ -958,16 +959,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border: solid rgba(0, 0, 0, 0);
     border-width: 10px;
     border-bottom-color: #ccc;
-}
-
-.entity-editor-pane .preset-icon-wrap > button {
-    display: block;
-    height: 60px;
-    width: 60px;
-    margin: auto;
-    border-radius: 4px;
-    position: relative;
-    background-color: transparent;
 }
 
 .form-field {

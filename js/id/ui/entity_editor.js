@@ -34,7 +34,7 @@ iD.ui.EntityEditor = function(context) {
         // Update
 
         $header.select('h3')
-            .text(preset.name());
+            .text(t('inspector.edit'));
 
         $header.select('.preset-close')
             .on('click', function() {
@@ -49,11 +49,15 @@ iD.ui.EntityEditor = function(context) {
         $enter = $body.enter().append('div')
             .attr('class', 'inspector-body');
 
-        $enter.append('div')
-            .attr('class', 'preset-icon-wrap inspector-inner')
-            .append('button')
-            .attr('class', 'preset-reset preset-icon-button')
-            .call(bootstrap.tooltip()
+        var headerbutton = $enter.append('div')
+            .attr('class', 'preset-icon-wrap inspector-inner fillL')
+                .append('button')
+                .attr('class', 'preset-list-button preset-reset')
+                    .append('div')
+                    .attr('class', 'label')
+                    .text(preset.name())
+
+            headerbutton.call(bootstrap.tooltip()
                 .title(t('inspector.back_tooltip'))
                 .placement('right'));
 
