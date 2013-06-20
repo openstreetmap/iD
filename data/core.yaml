@@ -186,7 +186,7 @@ en:
     unknown: Unknown
     incomplete: <not downloaded>
     feature_list: Feature list
-    edit: edit feature
+    edit: Edit feature
   background:
     title: Background
     description: Background settings
