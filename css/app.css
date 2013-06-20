@@ -354,7 +354,7 @@ a.hide {
     position:absolute;
     width:50%;
     top: 0;
-    bottom: 30px;
+    bottom: 40px;
 }
 
 .pane:first-child {
@@ -652,14 +652,24 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     z-index: 3;
 }
 
+/* Sidebar Footer
+------------------------------------------------------- */
+
 .footer {
     position: absolute;
     bottom: 0;
-    padding: 5px 30px 5px 30px;
+    height: 40px;
     border-top: 1px solid #ccc;
     background-color: #fafafa;
     width: 100%;
 }
+
+.footer .footer-link {
+    border-right: 1px solid #ccc;
+    padding: 10px;
+    float: left;
+}
+
 
 /* Inspector
 ------------------------------------------------------- */
@@ -773,10 +783,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .feature-list-item .entity-name {
     font-weight: normal;
     padding-left: 10px;
-}
-
-.bug-report {
-    float: right;
 }
 
 /* Presets
@@ -1602,7 +1608,7 @@ div.combobox {
     height: 31px;
     right: 10%;
     border: 1px solid #CCC;
-    border-top-width: 0; 
+    border-top-width: 0;
     border-left-width: 0;
 }
 

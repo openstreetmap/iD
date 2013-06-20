@@ -9,8 +9,8 @@ iD.ui.ViewOnOSM = function(context) {
         var $link = selection.selectAll('.view-on-osm')
             .data([0]);
 
-        var $enter = $link.enter().append('a')
-            .attr('class', 'view-on-osm')
+        var $enter = $link.enter().insert('a')
+            .attr('class', 'footer-link view-on-osm')
             .attr('target', '_blank');
 
         $enter.append('span')
