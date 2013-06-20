@@ -36,11 +36,14 @@ iD.ui.preset.radio = function(field) {
         var remove = wrap.selectAll('label.remove')
             .data([0]);
 
-        remove.enter().append('label')
-            .attr('class', 'remove')
-            .text(t('inspector.remove'))
-            .append('span')
+        var removeButton = remove.enter().append('label')
+            .attr('class', 'remove');
+
+        removeButton.append('span')
             .attr('class', 'icon remove');
+
+        removeButton.append('span')
+            .text(t('inspector.remove'));
 
         remove
             .on('click', function() {

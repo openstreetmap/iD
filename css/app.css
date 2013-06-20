@@ -185,7 +185,10 @@ input:focus {
 input[type="checkbox"],
 input[type="radio"] {
     width: 20px;
-    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    vertical-align: bottom;
+    height: 14px;
 }
 
 /* remove bottom border radius when combobox is open */
@@ -270,6 +273,11 @@ ul li { list-style: none;}
 
 .toggle-list > label:only-child {
     border-radius: 3px;
+}
+
+.toggle-list > label.remove span {
+    margin-right: 5px;
+    background-position: -201px 0;
 }
 
 .toggle-list > label.active {
@@ -1040,9 +1048,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* hide and remove from layout */
 .inspector-hidden,
-.inspector-hover .checkselect label input[type="checkbox"],
-.inspector-hover .checkselect label input[type="radio"],
+.inspector-hover label input[type="checkbox"],
+.inspector-hover label input[type="radio"],
 .inspector-hover .toggle-list label:not(.active),
+.inspector-hover .toggle-list label span,
 .inspector-hover .inspector-inner .add-tag,
 .inspector-hover .inspector-inner .add-relation,
 .inspector-hover .toggle-list label.remove .icon {
@@ -1144,16 +1153,17 @@ textarea,
 
 input,
 .checkselect label:last-of-type {
-    -webkit-transition: all 200ms 200ms;
-       -moz-transition: all 200ms 200ms;
-         -o-transition: all 200ms 200ms;
-            transition: all 200ms 200ms;
+    -webkit-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
+       -moz-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
+         -o-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
+            transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
 }
 
 .modified .form-label .modified-icon,
 .entity-editor-pane button.minor,
 .combobox-carat,
 .entity-editor-pane .header button,
+.toggle-list label span,
 .spin-control,
 .more-buttons,
 .view-on-osm,
