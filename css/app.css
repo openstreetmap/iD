@@ -182,6 +182,12 @@ input:focus {
     background-color: #F1F1F1;
 }
 
+input[type="checkbox"],
+input[type="radio"] {
+    width: 20px;
+    vertical-align: middle;
+}
+
 /* remove bottom border radius when combobox is open */
 .combobox + * textarea:focus,
 .combobox + * input:focus {
@@ -234,55 +240,40 @@ ul li { list-style: none;}
     border: 1px solid #CCC;
 }
 
-.toggle-list > button {
-    font-weight: normal;
-    text-align: left;
+.toggle-list > label {
     position: relative;
-    padding: 5px 10px 5px 30px;
+    padding: 5px 10px;
     display:block;
-    border-radius: 0;
     width: 100%;
     border-bottom: 1px solid #ccc;
+    background-color: white;
     height: 30px;
     color: #7092FF;
+    cursor: pointer;
+       -moz-transition: all 100ms;
+         -o-transition: all 100ms;
+            transition: all 100ms;
 }
 
-.toggle-list > button:first-child {
+.toggle-list > label:hover {
+    background-color: #ececec;
+}
+
+.toggle-list > label:first-child {
     border-radius: 3px 3px 0 0;
 }
 
-.toggle-list > button:last-child {
+.toggle-list > label:last-child {
     border-radius: 0 0 3px 3px;
     border-bottom-width: 0;
 }
 
-.toggle-list > button:only-child {
+.toggle-list > label:only-child {
     border-radius: 3px;
 }
 
-.toggle-list > button.active {
+.toggle-list > label.active {
     background: #E8EBFF;
-}
-
-.toggle-list > button::before {
-    content: "";
-    display: inline-block;
-    border-radius: 50%;
-    height: 10px;
-    width: 10px;
-    margin-right: 10px;
-    background: #808080;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-}
-
-.toggle-list > button.active::before {
-    background: #7092ff;
-}
-
-.toggle-list.check-list > button::before {
-    border-radius: 2px;
 }
 
 .link-list li {
@@ -518,8 +509,11 @@ button.save.has-count .count::before {
 
 /* Definitions for every icon */
 .icon.browse     { background-position:   0 0;}
+.icon.point,
 .icon.add-point  { background-position: -20px 0;}
+.icon.line,
 .icon.add-line   { background-position: -40px 0;}
+.icon.area,
 .icon.add-area   { background-position: -60px 0;}
 .icon.undo       { background-position: -80px 0;}
 .icon.redo       { background-position: -100px 0;}
@@ -541,7 +535,9 @@ button.save.has-count .count::before {
 .icon.back       { background-position: -420px 0;}
 .icon.forward    { background-position: -440px 0;}
 .icon.help       { background-position: -460px 0;}
-.icon.translate  { background-position: -520px 0;}
+.icon.relation    { background-position: -520px 0;}
+.icon.relation.route         { background-position: -540px 0;}
+.icon.relation.multipolygon  { background-position: -560px 0;}
 
 .icon.plus.light,
 .icon.zoom-in          { background-position: -240px -20px;}
@@ -741,28 +737,18 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .feature-list  {
     width:100%;
-    padding: 20px 20px 10px 20px;
-    border-bottom: 1px solid #ccc;
 }
 
 .feature-list-item {
     width: 100%;
-    height: 60px;
-    margin-bottom: 10px;
     position: relative;
-    border: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
 }
 
 .feature-list-item .label {
-    background-color: #f6f6f6;
     text-align: left;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
     padding: 5px 10px;
-    left: 60px;
-    line-height: 50px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -770,15 +756,27 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     -moz-transition: all 100ms;
     -o-transition: all 100ms;
     transition: all 100ms;
-    border-radius: 0 3px 3px 0;
+}
+
+.feature-list-item .label .icon {
+    opacity: .5;
 }
 
 .feature-list-item:hover .label {
     background-color: #ececec;
 }
 
+.feature-list-item .entity-type {
+    color:#7092ff;
+}
+
+.feature-list-item:hover .entity-type {
+    color:#597be7;
+}
+
 .feature-list-item .entity-name {
     font-weight: normal;
+    color: #666;
     padding-left: 10px;
 }
 
@@ -1030,10 +1028,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 /* Preset form (hover mode) */
 
-.inspector-hover .header {
-    background-color: #f6f6f6;
-}
-
 .inspector-hover textarea,
 .inspector-hover input,
 .inspector-hover .form-label,
@@ -1047,11 +1041,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 /* hide and remove from layout */
 .inspector-hidden,
 .inspector-hover .checkselect label input[type="checkbox"],
-.inspector-hover .toggle-list button::before,
-.inspector-hover .toggle-list button:not(.active),
+.inspector-hover .checkselect label input[type="radio"],
+.inspector-hover .toggle-list label:not(.active),
 .inspector-hover .inspector-inner .add-tag,
 .inspector-hover .inspector-inner .add-relation,
-.inspector-hover .toggle-list button.remove .icon {
+.inspector-hover .toggle-list label.remove .icon {
     height: 0;
     width: 0;
     overflow: hidden;
@@ -1097,7 +1091,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 /* Unstyle button fields */
-.inspector-hover .toggle-list button.active,
+.inspector-hover .toggle-list label.active,
 .inspector-hover .entity-editor-pane a.hide-toggle {
     opacity: 1;
     background-color: transparent;
@@ -1120,7 +1114,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 /* Hide placeholder for radio buttons if another is active, or not in hover state */
-.toggle-list button.active ~ .placeholder,
+.toggle-list label.active ~ .placeholder,
 .toggle-list .placeholder {
     padding: 0;
     opacity: 0;
@@ -1135,14 +1129,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 /* first phase hover-to-active animations */
-.header {
-    -webkit-transition: background-color 200ms;
-       -moz-transition: background-color 200ms;
-         -o-transition: background-color 200ms;
-            transition: background-color 200ms;
-}
 
-header,
 textarea,
 .form-label,
 .preset-input-wrap,
@@ -1171,8 +1158,8 @@ input,
 .more-buttons,
 .view-on-osm,
 .hide-toggle:before,
-.entity-editor-pane .toggle-list button::before,
-.entity-editor-pane .toggle-list button.remove .icon {
+.entity-editor-pane .toggle-list label::before,
+.entity-editor-pane .toggle-list label.remove .icon {
     -webkit-transition: opacity 200ms 200ms;
        -moz-transition: opacity 200ms 200ms;
          -o-transition: opacity 200ms 200ms;
@@ -1186,14 +1173,14 @@ input,
             transition: padding-left 200ms 200ms, color 200ms 200ms;
 }
 
-.entity-editor-pane .toggle-list button:not(.active) {
+.entity-editor-pane .toggle-list label:not(.active) {
     -webkit-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
        -moz-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
          -o-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
             transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
 }
 
-.entity-editor-pane .toggle-list button {
+.entity-editor-pane .toggle-list label {
     -webkit-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
        -moz-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
          -o-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
@@ -1359,12 +1346,6 @@ input[type=number] {
 
 .checkselect .set {
     color: inherit;
-}
-
-.checkselect input[type="checkbox"] {
-    margin-right: 5px;
-    width: 20px;
-    vertical-align: middle;
 }
 
 .checkselect label:not(.set) input[type="checkbox"] {
@@ -1605,7 +1586,7 @@ div.combobox {
     height: 31px;
     right: 10%;
     border: 1px solid #CCC;
-    border-top-width: 0; 
+    border-top-width: 0;
     border-left-width: 0;
 }
 
