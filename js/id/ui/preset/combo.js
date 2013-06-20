@@ -44,12 +44,12 @@ iD.ui.preset.combo = function(field) {
 
     function change() {
         var t = {};
-        t[field.key] = input.property('value').replace(' ', '_') || undefined;
+        t[field.key] = input.value().replace(' ', '_') || undefined;
         event.change(t);
     }
 
     combo.tags = function(tags) {
-        input.property('value', tags[field.key] || '');
+        input.value(tags[field.key] || '');
     };
 
     combo.focus = function() {

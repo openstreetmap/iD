@@ -49,12 +49,12 @@ iD.ui.preset.url = function(field) {
 
     function change() {
         var t = {};
-        t[field.key] = input.property('value') || undefined;
+        t[field.key] = input.value() || undefined;
         event.change(t);
     }
 
     i.tags = function(tags) {
-        input.property('value', tags[field.key] || '');
+        input.value(tags[field.key] || '');
     };
 
     i.focus = function() {

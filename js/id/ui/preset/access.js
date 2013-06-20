@@ -46,7 +46,7 @@ iD.ui.preset.access = function(field, context) {
 
     function change(d) {
         var tag = {};
-        tag[d] = d3.select(this).property('value') || undefined;
+        tag[d] = d3.select(this).value() || undefined;
         event.change(tag);
     }
 
@@ -73,8 +73,7 @@ iD.ui.preset.access = function(field, context) {
 
     access.tags = function(tags) {
         items.selectAll('.preset-input-access')
-            .property('value', function(d) { return tags[d] || ''; });
-        return access;
+            .value(function(d) { return tags[d] || ''; });
     };
 
     access.focus = function() {

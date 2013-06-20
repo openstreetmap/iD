@@ -49,8 +49,8 @@ iD.ui.preset.maxspeed = function(field, context) {
             .call(unitCombobox);
 
         function changeUnits() {
-            imperial = unitInput.property('value') === 'mph';
-            unitInput.property('value', imperial ? 'mph' : 'km/h');
+            imperial = unitInput.value() === 'mph';
+            unitInput.value(imperial ? 'mph' : 'km/h');
             setSuggestions();
             change();
         }
@@ -59,7 +59,7 @@ iD.ui.preset.maxspeed = function(field, context) {
 
     function setSuggestions() {
         combobox.data((imperial ? imperialValues : metricValues).map(comboValues));
-        unitInput.property('value', imperial ? 'mph' : 'km/h');
+        unitInput.value(imperial ? 'mph' : 'km/h');
     }
 
     function comboValues(d) {
@@ -71,7 +71,7 @@ iD.ui.preset.maxspeed = function(field, context) {
 
     function change() {
         var tag = {},
-            value = input.property('value');
+            value = input.value();
 
         if (!value) {
             tag[field.key] = undefined;
@@ -96,7 +96,7 @@ iD.ui.preset.maxspeed = function(field, context) {
 
         setSuggestions();
 
-        input.property('value', value || '');
+        input.value(value || '');
     };
 
     maxspeed.focus = function() {

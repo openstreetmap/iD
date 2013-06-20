@@ -48,14 +48,14 @@ iD.ui.preset.localized = function(field, context) {
 
     function change() {
         var t = {};
-        t[field.key] = d3.select(this).property('value') || undefined;
+        t[field.key] = d3.select(this).value() || undefined;
         event.change(t);
     }
 
     function key(lang) { return field.key + ':' + lang; }
 
     function changeLang(d) {
-        var value = d3.select(this).property('value'),
+        var value = d3.select(this).value(),
             t = {},
             language = _.find(iD.data.wikipedia, function(d) {
                 return d[0].toLowerCase() === value.toLowerCase() ||
@@ -79,7 +79,7 @@ iD.ui.preset.localized = function(field, context) {
 
     function changeValue(d) {
         var t = {};
-        t[key(d.lang)] = d3.select(this).property('value') || '';
+        t[key(d.lang)] = d3.select(this).value() || '';
         event.change(t);
 
     }
@@ -173,18 +173,16 @@ iD.ui.preset.localized = function(field, context) {
             .style('top','-10px')
             .remove();
 
-        selection.selectAll('.entry').select('.localized-lang').property('value', function(d) {
+        selection.selectAll('.entry').select('.localized-lang').value(function(d) {
             var lang = _.find(iD.data.wikipedia, function(lang) {
                 return lang[2] === d.lang;
             });
             return lang ? lang[1] : d.lang;
         });
 
-        selection.selectAll('.entry').select('.localized-value').property('value', function(d) {
+        selection.selectAll('.entry').select('.localized-value').value(function(d) {
             return d.value;
         });
-
-
     }
 
     i.tags = function(tags) {
@@ -200,7 +198,7 @@ iD.ui.preset.localized = function(field, context) {
             }
         }
 
-        input.property('value', tags[field.key] || '');
+        input.value(tags[field.key] || '');
 
         var postfixed = [];
         for (var i in tags) {
