@@ -228,7 +228,8 @@
         "search": "Search",
         "unknown": "Unknown",
         "incomplete": "<not downloaded>",
-        "feature_list": "Feature List"
+        "feature_list": "Feature list",
+        "edit": "Edit feature"
     },
     "background": {
         "title": "Background",
