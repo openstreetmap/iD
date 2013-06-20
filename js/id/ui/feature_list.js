@@ -35,9 +35,6 @@ iD.ui.FeatureList = function(context) {
         var list = listWrap.append('div')
             .attr('class', 'feature-list fillL cf');
 
-        context.history()
-            .on('change.feature-list', drawList);
-
         context.map()
             .on('drawn.feature-list', mapDrawn);
 
