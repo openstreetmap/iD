@@ -96,12 +96,12 @@ iD.ui.RawTagEditor = function(context) {
         });
 
         $items.select('input.key')
-            .property('value', function(d) { return d.key; })
+            .value(function(d) { return d.key; })
             .on('blur', keyChange)
             .on('change', keyChange);
 
         $items.select('input.value')
-            .property('value', function(d) { return d.value; })
+            .value(function(d) { return d.value; })
             .on('blur', valueChange)
             .on('change', valueChange)
             .on('keydown.push-more', pushMore);
@@ -152,7 +152,7 @@ iD.ui.RawTagEditor = function(context) {
                 .fetcher(function(value, __, callback) {
                     taginfo.values({
                         debounce: true,
-                        key: key.property('value'),
+                        key: key.value(),
                         geometry: context.geometry(id),
                         query: value
                     }, function(err, data) {
