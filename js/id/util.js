@@ -77,7 +77,7 @@ iD.util.prefixCSSProperty = function(property) {
 
     while (++i < n)
         if (prefixes[i] + property in s)
-            return '-' + prefixes[i].toLowerCase() + '-' + property.toLowerCase();
+            return '-' + prefixes[i].toLowerCase() + property.replace(/([A-Z])/g, '-$1').toLowerCase();
 
     return false;
 };

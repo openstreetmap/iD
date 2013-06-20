@@ -39,6 +39,23 @@ iD.behavior.drag = function() {
       };
     };
 
+    var d3_event_userSelectProperty = iD.util.prefixCSSProperty("UserSelect"),
+        d3_event_userSelectSuppress = d3_event_userSelectProperty ?
+            function () {
+                var selection = d3.selection(),
+                    select = selection.style(d3_event_userSelectProperty);
+                selection.style(d3_event_userSelectProperty, 'none');
+                return function () {
+                    selection.style(d3_event_userSelectProperty, select);
+                };
+            } :
+            function (type) {
+                var w = d3.select(window).on("selectstart." + type, d3_eventCancel);
+                return function () {
+                    w.on("selectstart." + type, null);
+                };
+            };
+
     function mousedown() {
         target = this;
         event_ = event.of(target, arguments);
@@ -46,7 +63,8 @@ iD.behavior.drag = function() {
             touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
             offset,
             origin_ = point(),
-            moved = 0;
+            moved = 0,
+            selectEnable = d3_event_userSelectSuppress(touchId != null ? "drag-" + touchId : "drag");
 
         var w = d3.select(window)
             .on(touchId !== null ? "touchmove.drag-" + touchId : "mousemove.drag", dragmove)
@@ -103,6 +121,7 @@ iD.behavior.drag = function() {
 
             w.on(touchId !== null ? "touchmove.drag-" + touchId : "mousemove.drag", null)
                 .on(touchId !== null ? "touchend.drag-" + touchId : "mouseup.drag", null);
+            selectEnable();
         }
 
         function click() {
