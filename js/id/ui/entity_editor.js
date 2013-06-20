@@ -46,15 +46,14 @@ iD.ui.EntityEditor = function(context) {
 
         var headerbutton = $enter.append('div')
             .attr('class', 'preset-icon-wrap inspector-inner fillL')
-                .append('button')
-                .attr('class', 'preset-list-button preset-reset')
-                    .append('div')
-                    .attr('class', 'label')
-                    .text(preset.name())
+            .append('button')
+            .attr('class', 'preset-list-button preset-reset')
+            .append('div')
+            .attr('class', 'label');
 
-            headerbutton.call(bootstrap.tooltip()
-                .title(t('inspector.back_tooltip'))
-                .placement('bottom'));
+        headerbutton.call(bootstrap.tooltip()
+            .title(t('inspector.back_tooltip'))
+            .placement('bottom'));
 
         $enter.append('div')
             .attr('class', 'inspector-border inspector-preset');
@@ -79,6 +78,9 @@ iD.ui.EntityEditor = function(context) {
             .call(iD.ui.PresetIcon()
                 .geometry(context.geometry(id))
                 .preset(preset));
+
+        $body.select('.preset-icon-wrap .label')
+            .text(preset.name());
 
         $body.select('.inspector-preset')
             .call(iD.ui.preset(context)
