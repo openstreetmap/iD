@@ -33,7 +33,7 @@ iD.ui.FeatureList = function(context) {
             .attr('class', 'inspector-body');
 
         var list = listWrap.append('div')
-            .attr('class', 'feature-list fillL cf');
+            .attr('class', 'feature-list cf');
 
         context.map()
             .on('drawn.feature-list', mapDrawn);
@@ -90,15 +90,15 @@ iD.ui.FeatureList = function(context) {
 
             var enter = items.enter().append('button')
                 .attr('class', 'feature-list-item')
-                .call(iD.ui.PresetIcon()
-                    .geometry(function(d) { return d.geometry })
-                    .preset(function(d) { return d.preset; }))
                 .on('mouseover', function(d) { mouseover(d.entity); })
                 .on('mouseout', function(d) { mouseout(); })
                 .on('click', function(d) { click(d.entity); });
 
             var label = enter.append('div')
                 .attr('class', 'label');
+
+            label.append('span')
+                .attr('class', function(d) { return d.geometry + ' icon icon-pre-text'; });
 
             label.append('span')
                 .attr('class', 'entity-type')
