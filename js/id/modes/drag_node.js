@@ -93,7 +93,7 @@ iD.modes.DragNode = function(context) {
 
         var nudge = childOf(context.container().node(),
             d3.event.sourceEvent.toElement) &&
-            edge(d3.event.point, context.map().size());
+            edge(d3.event.point, context.map().dimensions());
 
         if (nudge) startNudge(nudge);
         else stopNudge();

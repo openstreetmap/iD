@@ -87,7 +87,7 @@ iD.Map = function(context) {
             }
         });
 
-        map.size(selection.size());
+        map.dimensions(selection.dimensions());
 
         labels.supersurface(supersurface);
         mouse = iD.util.fastMouse(supersurface.node());
@@ -315,13 +315,13 @@ iD.Map = function(context) {
         return redraw();
     };
 
-    map.size = function(_) {
+    map.dimensions = function(_) {
         if (!arguments.length) return dimensions;
         var center = map.center();
         dimensions = _;
-        surface.size(dimensions);
+        surface.dimensions(dimensions);
         layers.forEach(function(layer) {
-            layer.size(dimensions);
+            layer.dimensions(dimensions);
         });
         projection.clipExtent([[0, 0], dimensions]);
         setCenter(center);

@@ -131,7 +131,7 @@ iD.ui = function(context) {
         };
 
         d3.select(window).on('resize.editor', function() {
-            map.size(m.size());
+            map.dimensions(m.dimensions());
         });
 
         function pan(d) {

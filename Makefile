@@ -22,7 +22,7 @@ dist/iD.js: \
 	js/lib/d3.jsonp.js \
 	js/lib/d3.keybinding.js \
 	js/lib/d3.one.js \
-	js/lib/d3.size.js \
+	js/lib/d3.dimensions.js \
 	js/lib/d3.trigger.js \
 	js/lib/d3.typeahead.js \
 	js/lib/d3.curtain.js \

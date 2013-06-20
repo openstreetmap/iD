@@ -101,7 +101,7 @@ describe('iD.Map', function() {
 
     describe('#extent', function() {
         it('gets and sets extent', function() {
-            map.size([100, 100])
+            map.dimensions([100, 100])
                 .center([0, 0]);
 
             expect(map.extent()[0][0]).to.be.closeTo(-17.5, 0.5);

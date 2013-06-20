@@ -57,10 +57,10 @@ d3.curtain = function() {
             var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
             if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
 
-            var size = tooltip.classed('in', true)
+            var dimensions = tooltip.classed('in', true)
                 .select('.tooltip-inner')
                     .html(html)
-                    .size();
+                    .dimensions();
 
             var pos;
 
@@ -69,23 +69,23 @@ d3.curtain = function() {
 
             if (box.top + box.height < Math.min(100, box.width + box.left)) {
                 side = 'bottom';
-                pos = [box.left + box.width / 2 - size[0]/ 2, box.top + box.height];
+                pos = [box.left + box.width / 2 - dimensions[0]/ 2, box.top + box.height];
 
             } else if (box.left + box.width + 300 < window.innerWidth) {
                 side = 'right';
-                pos = [box.left + box.width, box.top + box.height / 2 - size[1] / 2];
+                pos = [box.left + box.width, box.top + box.height / 2 - dimensions[1] / 2];
 
             } else if (box.left > 300) {
                 side = 'left';
-                pos = [box.left - 200, box.top + box.height / 2 - size[1] / 2];
+                pos = [box.left - 200, box.top + box.height / 2 - dimensions[1] / 2];
             } else {
                 side = 'bottom';
                 pos = [box.left, box.top + box.height];
             }
 
             pos = [
-                Math.min(Math.max(10, pos[0]), w - size[0] - 10),
-                Math.min(Math.max(10, pos[1]), h - size[1] - 10)
+                Math.min(Math.max(10, pos[0]), w - dimensions[0] - 10),
+                Math.min(Math.max(10, pos[1]), h - dimensions[1] - 10)
             ];
 
 

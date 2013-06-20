@@ -167,7 +167,7 @@ iD.Background = function(backgroundType) {
         return background;
     };
 
-    background.size = function(_) {
+    background.dimensions = function(_) {
         if (!arguments.length) return tile.size();
         tile.size(_);
         return background;

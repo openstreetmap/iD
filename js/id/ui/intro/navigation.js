@@ -26,8 +26,8 @@ iD.ui.intro.navigation = function(context, reveal) {
         var map = { 
             left: 30,
             top: 60,
-            width: context.map().size()[0] - 60,
-            height: context.map().size()[1] - 200
+            width: context.map().dimensions()[0] - 60,
+            height: context.map().dimensions()[1] - 200
         };
 
         context.map().centerZoom([-85.63591, 41.94285], 19);

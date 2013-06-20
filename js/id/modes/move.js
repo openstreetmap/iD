@@ -54,7 +54,7 @@ iD.modes.Move = function(context, entityIDs) {
                 p[1] - context.projection(origin)[1]] :
                 [0, 0];
 
-            var nudge = edge(p, context.map().size());
+            var nudge = edge(p, context.map().dimensions());
             if (nudge) startNudge(nudge);
             else stopNudge();
 
