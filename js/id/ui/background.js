@@ -33,7 +33,7 @@ iD.ui.Background = function(context) {
         }
 
         function selectLayer() {
-            content.selectAll('button.layer')
+            content.selectAll('label.layer')
                 .classed('active', function(d) {
                     var overlay = context.map().layers[2].source();
                     return d.data.name === context.background().source().data.name ||
@@ -85,16 +85,15 @@ iD.ui.Background = function(context) {
 
         function drawList(layerList, click, filter) {
 
-            var layerLinks = layerList.selectAll('button.layer')
+            var layerLinks = layerList.selectAll('label.layer')
                 .data(getSources().filter(filter), function(d) {
                     return d.data.name;
                 });
 
             var layerInner = layerLinks.enter()
-                .append('button');
+                .append('label');
 
             layerInner
-                .attr('href', '#')
                 .attr('class', 'layer')
                 .on('click.set-source', click);
 
@@ -106,6 +105,11 @@ iD.ui.Background = function(context) {
                     .placement('right')
                 );
 
+            layerInner.insert('input')
+                .attr('type','radio')
+                .attr('name','layers')
+                .attr('value',function(d) { return d.data.name;});
+
             layerInner.insert('span').text(function(d) {
                 return d.data.name;
             });
@@ -113,7 +117,7 @@ iD.ui.Background = function(context) {
             layerLinks.exit()
                 .remove();
 
-            layerList.style('display', layerList.selectAll('button.layer').data().length > 0 ? 'block' : 'none');
+            layerList.style('display', layerList.selectAll('label.layer').data().length > 0 ? 'block' : 'none');
         }
 
         function update() {
@@ -165,11 +169,12 @@ iD.ui.Background = function(context) {
                 .title(iD.ui.tooltipHtml(t('background.description'), key));
 
         function hide() { setVisible(false); }
+
         function toggle() {
             if (d3.event) d3.event.preventDefault();
             tooltip.hide(button);
             setVisible(!button.classed('active'));
-            content.selectAll('.toggle-list button:first-child').node().focus();
+            content.selectAll('.toggle-list label:first-child').node().focus();
         }
 
         function setVisible(show) {
@@ -239,13 +244,13 @@ iD.ui.Background = function(context) {
 
         var overlayList = content
             .append('div')
-            .attr('class', 'toggle-list layer-list check-list');
+            .attr('class', 'toggle-list layer-list');
 
         var gpxLayerItem = content
             .append('div')
             .style('display', iD.detect().filedrop ? 'block' : 'none')
-            .attr('class', 'toggle-list layer-list check-list')
-            .append('button')
+            .attr('class', 'toggle-list layer-list')
+            .append('label')
             .classed('layer-toggle-gpx', true)
             .on('click.set-gpx', clickGpx);
 
