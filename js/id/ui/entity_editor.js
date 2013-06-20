@@ -44,16 +44,15 @@ iD.ui.EntityEditor = function(context) {
         $enter = $body.enter().append('div')
             .attr('class', 'inspector-body');
 
-        var headerbutton = $enter.append('div')
+        $enter.append('div')
             .attr('class', 'preset-icon-wrap inspector-inner fillL')
             .append('button')
             .attr('class', 'preset-list-button preset-reset')
+            .call(bootstrap.tooltip()
+                .title(t('inspector.back_tooltip'))
+                .placement('bottom'))
             .append('div')
             .attr('class', 'label');
-
-        headerbutton.call(bootstrap.tooltip()
-            .title(t('inspector.back_tooltip'))
-            .placement('bottom'));
 
         $enter.append('div')
             .attr('class', 'inspector-border inspector-preset');
