@@ -79,15 +79,11 @@ iD.ui.Background = function(context) {
             selectLayer();
         }
 
-        function clickGpx(d) {
-            d3.event.preventDefault();
-            if (!_.isEmpty(context.map().layers[1].geojson())) {
-                context.map().layers[1]
-                    .enable(!context.map().layers[1].enable());
-                d3.select(this)
-                    .classed('active', context.map().layers[1].enable());
-                context.redraw();
-            }
+        function clickGpx() {
+            context.map().layers[1]
+                .enable(!context.map().layers[1].enable());
+            context.redraw();
+            update();
         }
 
         function drawList(layerList, type, change, filter) {
@@ -126,7 +122,6 @@ iD.ui.Background = function(context) {
         }
 
         function update() {
-
             backgroundList.call(drawList, 'radio', clickSetSource, function(d) {
                 return !d.data.overlay;
             });
@@ -135,12 +130,15 @@ iD.ui.Background = function(context) {
                 return d.data.overlay;
             });
 
+            var gpxLayer = context.map().layers[1],
+                hasGpx = !_.isEmpty(gpxLayer.geojson()),
+                showsGpx = hasGpx && gpxLayer.enable();
+
             gpxLayerItem
-                .classed('active', function() {
-                    var gpxLayer = context.map().layers[1];
-                    return !_.isEmpty(gpxLayer.geojson()) &&
-                        gpxLayer.enable();
-                });
+                .classed('active', hasGpx && gpxLayer.enable())
+                .selectAll('input')
+                .property('disabled', !hasGpx)
+                .property('checked', showsGpx);
 
             selectLayer();
         }
@@ -256,12 +254,16 @@ iD.ui.Background = function(context) {
             .style('display', iD.detect().filedrop ? 'block' : 'none')
             .attr('class', 'toggle-list layer-list')
             .append('label')
-            .classed('layer-toggle-gpx', true)
-            .on('click.set-gpx', clickGpx);
+            .classed('layer-toggle-gpx', true);
 
         gpxLayerItem.call(bootstrap.tooltip()
             .title(t('gpx.drag_drop'))
             .placement('right'));
+
+        gpxLayerItem.append('input')
+            .attr('type', 'checkbox')
+            .property('disabled', true)
+            .on('change', clickGpx);
 
         gpxLayerItem.append('span')
             .text(t('gpx.local_layer'));
@@ -338,7 +340,6 @@ iD.ui.Background = function(context) {
 
         context.surface().on('mousedown.background-outside', hide);
         context.container().on('mousedown.background-outside', hide);
-
     }
 
     return background;
