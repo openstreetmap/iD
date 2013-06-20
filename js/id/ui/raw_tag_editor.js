@@ -77,6 +77,8 @@ iD.ui.RawTagEditor = function(context) {
             .append('span')
             .attr('class', 'icon delete');
 
+        $enter.each(bindTypeahead);
+
         // Update
 
         $items.order();
@@ -89,7 +91,6 @@ iD.ui.RawTagEditor = function(context) {
             }
 
             d3.select(this)
-                .each(bindTypeahead)
                 .call(reference.button)
                 .call(reference.body);
         });
@@ -119,8 +120,7 @@ iD.ui.RawTagEditor = function(context) {
         }
 
         function bindTypeahead() {
-            var geometry = context.geometry(id),
-                row = d3.select(this),
+            var row = d3.select(this),
                 key = row.selectAll('input.key'),
                 value = row.selectAll('input.value');
 
@@ -141,7 +141,7 @@ iD.ui.RawTagEditor = function(context) {
                 .fetcher(function(value, __, callback) {
                     taginfo.keys({
                         debounce: true,
-                        geometry: geometry,
+                        geometry: context.geometry(id),
                         query: value
                     }, function(err, data) {
                         if (!err) callback(sort(value, data));
@@ -153,7 +153,7 @@ iD.ui.RawTagEditor = function(context) {
                     taginfo.values({
                         debounce: true,
                         key: key.property('value'),
-                        geometry: geometry,
+                        geometry: context.geometry(id),
                         query: value
                     }, function(err, data) {
                         if (!err) callback(sort(value, data));
