@@ -1,7 +1,7 @@
 iD.ui.FeatureList = function(context) {
     function featureList(selection) {
         var header = selection.append('div')
-            .attr('class', 'header cf');
+            .attr('class', 'header fillL cf');
 
         header.append('h3')
             .text(t('inspector.feature_list'));

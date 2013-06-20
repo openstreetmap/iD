@@ -535,7 +535,9 @@ button.save.has-count .count::before {
 .icon.back       { background-position: -420px 0;}
 .icon.forward    { background-position: -440px 0;}
 .icon.help       { background-position: -460px 0;}
-.icon.translate  { background-position: -520px 0;}
+.icon.relation    { background-position: -520px 0;}
+.icon.relation.route         { background-position: -540px 0;}
+.icon.relation.multipolygon  { background-position: -560px 0;}
 
 .icon.plus.light,
 .icon.zoom-in          { background-position: -240px -20px;}
