@@ -33,19 +33,26 @@ iD.ui.Background = function(context) {
         }
 
         function selectLayer() {
+            function active(d) {
+                var overlay = context.map().layers[2].source();
+                return d.data.name === context.background().source().data.name ||
+                    (overlay.data && overlay.data.name === d.data.name);
+            }
+
             content.selectAll('label.layer')
-                .classed('active', function(d) {
-                    var overlay = context.map().layers[2].source();
-                    return d.data.name === context.background().source().data.name ||
-                        (overlay.data && overlay.data.name === d.data.name);
-                });
+                .classed('active', active)
+                .selectAll('input')
+                .property('checked', active);
         }
 
         function clickSetSource(d) {
             d3.event.preventDefault();
             if (d.data.name === 'Custom') {
                 var configured = d();
-                if (!configured) return;
+                if (!configured) {
+                    selectLayer();
+                    return;
+                }
                 d = configured;
             }
             context.background().source(d);
@@ -83,7 +90,7 @@ iD.ui.Background = function(context) {
             }
         }
 
-        function drawList(layerList, click, filter) {
+        function drawList(layerList, type, change, filter) {
 
             var layerLinks = layerList.selectAll('label.layer')
                 .data(getSources().filter(filter), function(d) {
@@ -91,11 +98,8 @@ iD.ui.Background = function(context) {
                 });
 
             var layerInner = layerLinks.enter()
-                .append('label');
-
-            layerInner
-                .attr('class', 'layer')
-                .on('click.set-source', click);
+                .append('label')
+                .attr('class', 'layer');
 
             // only set tooltips for layers with tooltips
             layerInner
@@ -105,10 +109,11 @@ iD.ui.Background = function(context) {
                     .placement('right')
                 );
 
-            layerInner.insert('input')
-                .attr('type','radio')
-                .attr('name','layers')
-                .attr('value',function(d) { return d.data.name;});
+            layerInner.append('input')
+                .attr('type', type)
+                .attr('name', 'layers')
+                .attr('value', function(d) { return d.data.name; })
+                .on('change', change);
 
             layerInner.insert('span').text(function(d) {
                 return d.data.name;
@@ -122,11 +127,11 @@ iD.ui.Background = function(context) {
 
         function update() {
 
-            backgroundList.call(drawList, clickSetSource, function(d) {
+            backgroundList.call(drawList, 'radio', clickSetSource, function(d) {
                 return !d.data.overlay;
             });
 
-            overlayList.call(drawList, clickSetOverlay, function(d) {
+            overlayList.call(drawList, 'checkbox', clickSetOverlay, function(d) {
                 return d.data.overlay;
             });
 
