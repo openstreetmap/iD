@@ -290,5 +290,3 @@ d3.combobox = function() {
 
     return d3.rebind(combobox, event, 'on');
 };
-
-d3.combobox.id = 0;
