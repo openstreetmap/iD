@@ -46,6 +46,9 @@ iD.ui.Inspector = function(context) {
         var footerWrap = $footer.enter().append('div')
             .attr('class', 'footer');
 
+            footerWrap.call(iD.ui.ViewOnOSM(context)
+                .entityID(entityID));
+
             footerWrap.append('a')
               .attr('target', '_blank')
               .attr('tabindex', -1)
@@ -57,12 +60,8 @@ iD.ui.Inspector = function(context) {
               .append('span')
               .attr('class','icon bug');
 
-            // footerWrap.append('div')
-            //     .call(iD.ui.Save(context));
-
-            selection.select('.footer')
-                .call(iD.ui.ViewOnOSM(context)
-                    .entityID(entityID));
+            footerWrap.append('div')
+                .call(iD.ui.Save(context));
 
         function showList(preset) {
             $wrap.transition()

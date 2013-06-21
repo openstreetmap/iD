@@ -617,7 +617,7 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
 }
 
 .header h3 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -670,18 +670,13 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
     border-right: 1px solid #ccc;
 }
 
-.footer .footer-item.bug-report {
-    float: right;
-    border-left: 1px solid #ccc;
-}
-
 /* Inspector
 ------------------------------------------------------- */
 
 #sidebar {
-    position: relative;
-    float: right;
-    height: 100%;
+    position: absolute;
+    top: 60px;
+    bottom: 0;
     overflow: hidden;
     z-index: 2;
     background: #f6f6f6;
