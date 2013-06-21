@@ -190,16 +190,16 @@ iD.ui.Background = function(context) {
                         return d3.event.stopPropagation();
                     });
                     content.style('display', 'block')
-                        .style('left', '-500px')
+                        .style('right', '-500px')
                         .transition()
                         .duration(200)
-                        .style('left', '30px');
+                        .style('right', '30px');
                 } else {
                     content.style('display', 'block')
-                        .style('left', '30px')
+                        .style('right', '30px')
                         .transition()
                         .duration(200)
-                        .style('left', '-500px')
+                        .style('right', '-500px')
                         .each('end', function() {
                             d3.select(this).style('display', 'none');
                         });

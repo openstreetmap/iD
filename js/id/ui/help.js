@@ -115,16 +115,16 @@ iD.ui.Help = function(context) {
                 shown = show;
                 if (show) {
                     pane.style('display', 'block')
-                        .style('left', '-500px')
+                        .style('right', '-500px')
                         .transition()
                         .duration(200)
-                        .style('left', '0px')
+                        .style('right', '0px')
                         .each('end', blockClick);
                 } else {
-                    pane.style('left', '0px')
+                    pane.style('right', '0px')
                         .transition()
                         .duration(200)
-                        .style('left', '-500px')
+                        .style('right', '-500px')
                         .each('end', function() {
                             d3.select(this).style('display', 'none');
                         });

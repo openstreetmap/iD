@@ -396,6 +396,7 @@ button.disabled {
     cursor: auto;
 }
 
+.map-control > button.active,
 button.active {
     background: #7092ff;
 }
@@ -1814,11 +1815,10 @@ img.wiki-image {
 
 .map-overlay {
     z-index: -1;
-    right: 75%;
     max-width: 260px;
     min-width: 210px;
     position: fixed;
-    left: 30px;
+    right: 30px;
     display: block;
     padding: 10px 10px 0 10px;
 }
@@ -1826,7 +1826,7 @@ img.wiki-image {
 /* Zoomer */
 
 .zoombuttons button.zoom-in {
-    border-radius:0 4px 0 0;
+    border-radius:4px 0 0 0;
 }
 
 /* Background Settings */
@@ -1836,7 +1836,7 @@ img.wiki-image {
 }
 
 .background-control button {
-    border-radius:0 4px 0 0;
+    border-radius:4px 0 0 0;
 }
 
 .background-control button.active {
@@ -1978,7 +1978,7 @@ img.wiki-image {
 /* Geocoder */
 
 .geocode-control form {
-    top:260px;
+    top:200px;
 }
 
 .geocode-control form {
@@ -2016,7 +2016,7 @@ img.wiki-image {
 /* Geolocator */
 
 .geolocate-control button {
-    border-radius: 0 0 4px 0;
+    border-radius: 0 0 0 4px;
 }
 
 /* Help */
@@ -2026,15 +2026,15 @@ img.wiki-image {
 }
 
 .help-control button {
-    border-radius: 0 0 4px 0;
+    border-radius: 0 0 0 4px;
 }
 
 .help-wrap {
     position: fixed;
-    top:60px;
-    bottom: 30px;
-    padding: 20px 20px 20px 50px;
-    left: 0;
+    top:0;
+    bottom: 0;
+    padding: 20px 50px 20px 20px;
+    right: 0;
     overflow-y: scroll;
 }
 
