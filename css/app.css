@@ -578,12 +578,15 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
     border-right: 0;
 }
 
-#bar .undoredo-buttons button {
-    background: #222;
-}
-
 #bar .undoredo-buttons button:hover {
     background: #111;
+}
+
+#bar .undoredo-buttons button,
+#bar button.disabled,
+#bar button.disabled:hover,
+.mode-save #bar button {
+    background: #222;
 }
 
 #bar .save-button {
@@ -593,6 +596,8 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
 }
 
 #bar button.save {
+    border-left: 1px solid #111;
+    background: #222;
     position: absolute;
     border-right: 0;
     top: -60px;
@@ -602,21 +607,21 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
         transition: background 100ms, top 200ms;
 }
 
+#bar button.save:hover {
+    background: #111;
+}
+
 #bar button.save.has-count {
     top: 0;
 }
 
-#bar button.disabled,
-.mode-save #bar button {
-    background: #222;
-}
-
 .mode-save #bar button.save.has-count {
+    border-left: 1px solid #7092ff;
     background: #7092ff;
     top: 120px;
 }
 
-#bar button.save:hover {
+.mode-save #bar button.save:hover {
     background: #597be7;
 }
 
