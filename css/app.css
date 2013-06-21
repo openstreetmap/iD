@@ -35,11 +35,11 @@ body {
 }
 
 #content {
-    position: relative;
+    position: absolute;
     overflow: hidden;
     height: 100%;
     left: 33.3333%;
-    width: 66.6666%;
+    right: 0;
 }
 
 .spinner {
