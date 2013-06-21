@@ -84,7 +84,7 @@ iD.ui.preset.localized = function(field, context) {
 
     }
 
-    function fetcher(value, __, cb) {
+    function fetcher(value, cb) {
         var v = value.toLowerCase();
 
         cb(iD.data.wikipedia.filter(function(d) {

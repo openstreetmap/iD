@@ -83,7 +83,7 @@ iD.ui.preset.address = function(field, context) {
 
         street
             .call(d3.combobox()
-                .fetcher(function(value, __, callback) {
+                .fetcher(function(value, callback) {
                     callback(getStreets());
                 }));
     }

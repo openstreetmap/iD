@@ -8,7 +8,7 @@ iD.ui.preset.wikipedia = function(field, context) {
     function i(selection) {
 
         var langcombo = d3.combobox()
-            .fetcher(function(value, __, cb) {
+            .fetcher(function(value, cb) {
                 var v = value.toLowerCase();
 
                 cb(iD.data.wikipedia.filter(function(d) {
@@ -21,7 +21,7 @@ iD.ui.preset.wikipedia = function(field, context) {
             });
 
         var titlecombo = d3.combobox()
-            .fetcher(function(value, __, cb) {
+            .fetcher(function(value, cb) {
 
                 if (!value) value = context.entity(entity.id).tags.name || '';
                 var searchfn = value.length > 7 ? wikipedia.search : wikipedia.suggestions;

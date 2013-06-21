@@ -138,7 +138,7 @@ iD.ui.RawTagEditor = function(context) {
             }
 
             key.call(d3.combobox()
-                .fetcher(function(value, __, callback) {
+                .fetcher(function(value, callback) {
                     taginfo.keys({
                         debounce: true,
                         geometry: context.geometry(id),
@@ -149,7 +149,7 @@ iD.ui.RawTagEditor = function(context) {
                 }));
 
             value.call(d3.combobox()
-                .fetcher(function(value, __, callback) {
+                .fetcher(function(value, callback) {
                     taginfo.values({
                         debounce: true,
                         key: key.value(),

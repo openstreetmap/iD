@@ -2,7 +2,7 @@ d3.combobox = function() {
     var event = d3.dispatch('accept'),
         data = [];
 
-    var fetcher = function(val, data, cb) {
+    var fetcher = function(val, cb) {
         cb(data.filter(function(d) {
             return d.title
                 .toString()
@@ -218,7 +218,7 @@ d3.combobox = function() {
                     .remove();
             }
 
-            fetcher.apply(input, [value, data, render]);
+            fetcher.apply(input, [value, render]);
         }
 
         // select the choice given as d
