@@ -960,6 +960,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-bottom-color: #ccc;
 }
 
+.entity-editor-pane .preset-list-item .preset-list-button-wrap {
+    margin-bottom: 0;
+}
+
+
 .form-field {
     margin-bottom: 10px;
     width: 100%;
@@ -2572,6 +2577,10 @@ img.wiki-image {
 /* make tooltips in editor pane dark */
 .entity-editor-pane .tooltip.top .tooltip-arrow {
     border-top-color: #000;
+}
+
+.entity-editor-pane .tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #000;
 }
 
 .entity-editor-pane .tooltip.left .tooltip-arrow {
