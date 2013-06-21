@@ -23,7 +23,7 @@ iD.ui.EntityEditor = function(context) {
         $enter.append('button')
             .attr('class', 'fr preset-close')
             .append('span')
-            .attr('class', 'icon close');
+            .attr('class', 'icon close light');
 
         $enter.append('h3');
 

@@ -508,6 +508,7 @@ button.action:hover {
 .icon.bug.light        { background-position: -400px -20px;}
 .icon.undo             { background-position: -80px -20px;}
 .icon.redo             { background-position: -100px -20px;}
+.icon.close.light      { background-position: -160px -20px;}
 
 .icon.back.blue        { background-position: -420px -20px;}
 .icon.forward.blue     { background-position: -440px -20px;}

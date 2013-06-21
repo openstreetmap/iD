@@ -29,7 +29,7 @@ iD.ui.PresetList = function(context) {
                     context.enter(iD.modes.Browse(context));
                 })
                 .append('span')
-                .attr('class', 'icon close');
+                .attr('class', 'icon close light');
         }
 
         function keydown() {

@@ -12,7 +12,7 @@ iD.ui.Success = function(context) {
         header.append('button')
             .attr('class', 'fr')
             .append('span')
-            .attr('class', 'icon close')
+            .attr('class', 'icon close light')
             .on('click', event.cancel);
 
         header.append('h3')

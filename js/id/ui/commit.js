@@ -33,7 +33,7 @@ iD.ui.Commit = function(context) {
         header.append('button')
             .attr('class', 'fr')
             .append('span')
-            .attr('class', 'icon close')
+            .attr('class', 'icon light close')
             .on('click', event.cancel);
 
         header.append('h3')
