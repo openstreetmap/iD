@@ -396,9 +396,11 @@ button.disabled {
     cursor: auto;
 }
 
+#bar .mode-buttons button.active,
 .map-control > button.active,
 button.active {
     background: #7092ff;
+    color: white;
 }
 
 button.minor {
