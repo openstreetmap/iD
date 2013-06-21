@@ -90,6 +90,9 @@
             },
             "incomplete_relation": "Không thể xóa đối tượng chưa được tải về hoàn toàn."
         },
+        "add_member": {
+            "annotation": "Đã thêm thành viên vào quan hệ."
+        },
         "delete_member": {
             "annotation": "Đã gỡ thành viên khỏi quan hệ."
         },
@@ -186,7 +189,8 @@
         "title": "Lưu các Thay đổi",
         "description_placeholder": "Tóm lược các đóng góp của bạn",
         "message_label": "Tóm lược sửa đổi",
-        "upload_explanation": "Các thay đổi bạn thực hiện dưới tên {user} sẽ xuất hiện trên tất cả các bản đồ sử dụng dữ liệu OpenStreetMap.",
+        "upload_explanation": "Các thay đổi bạn thực hiện sẽ xuất hiện trên tất cả các bản đồ sử dụng dữ liệu OpenStreetMap.",
+        "upload_explanation_with_user": "Các thay đổi bạn thực hiện dưới tên {user} sẽ xuất hiện trên tất cả các bản đồ sử dụng dữ liệu OpenStreetMap.",
         "save": "Lưu",
         "cancel": "Hủy bỏ",
         "warnings": "Cảnh báo",
@@ -210,7 +214,6 @@
         "no_documentation_combination": "Không có tài liệu về tổ hợp thẻ này",
         "no_documentation_key": "Không có tài liệu về chìa khóa này",
         "show_more": "Xem thêm",
-        "new_tag": "Thẻ mới",
         "view_on_osm": "Xem tại openstreetmap.org",
         "all_tags": "Tất cả các thẻ",
         "all_members": "Tất cả các thành viên",
@@ -223,7 +226,8 @@
         "remove": "Xóa",
         "search": "Tìm kiếm",
         "unknown": "Không rõ",
-        "incomplete": "<chưa tải về>"
+        "incomplete": "<chưa tải về>",
+        "feature_list": "Danh sách Đối tượng"
     },
     "background": {
         "title": "Hình nền",
@@ -311,7 +315,7 @@
             "title": "Địa điểm",
             "add": "Một địa điểm chỉ ra và mô tả một vị trí, chẳng hạn tiệm quán, nhà hàng, đài tưởng niệm. **Nhấn nút Điểm để thêm một địa điểm mới.**",
             "place": "Nhấn vào bản đồ để đặt địa điểm. **Đặt địa điểm trên tòa nhà.**",
-            "search": "Có đủ thứ địa điểm. Bạn vừa đặt một địa điểm quán cà phê. **Tìm cho “cà phê”.**",
+            "search": "Có đủ thứ địa điểm. Bạn vừa đặt một địa điểm Quán Cà phê. **Tìm “{name}”.**",
             "choose": "***Chọn Quán Cà phê từ danh sách.***",
             "describe": "Địa điểm hiện là một quán cà phê. Bây giờ bạn có thể cung cấp thêm chi tiết về địa điểm này trong biểu mẫu. **Nhập tên của địa điểm.**",
             "close": "Nhấn vào nút Đóng để đóng biểu mẫu. **Đóng biểu mẫu.**",
@@ -325,7 +329,7 @@
             "add": "Bạn có thể vẽ kỹ hơn bằng cách vẽ vùng thay vì địa điểm. Phần nhiều thể loại địa điểm có thể được vẽ như vùng. Khuyên bạn cố gắng vẽ vùng thay vì địa điểm để cho biết đường biên của đối tượng. **Nhấn vào nút Vùng để bắt đầu vẽ vùng mới.**",
             "corner": "Để vẽ vùng, đặt các nốt theo đường biên của vùng. **Đặt nốt đầu tiên vào một góc của sân chơi trẻ em.**",
             "place": "Đặt thêm nốt để tiếp tục vẽ vùng, rồi nhấn vào nốt đầu tiên để “đóng” vùng này. **Vẽ một vùng cho sân chơI trẻ em.**",
-            "search": "**Tìm Sân chơi.**",
+            "search": "**Tìm “{name}”.**",
             "choose": "**Chọn Sân chơi từ danh sách.**",
             "describe": "**Đặt tên và đóng biểu mẫu.**"
         },
@@ -432,6 +436,9 @@
                 "label": "Kiểu"
             },
             "bicycle_parking": {
+                "label": "Kiểu"
+            },
+            "boundary": {
                 "label": "Kiểu"
             },
             "building": {
@@ -615,7 +622,13 @@
                     "taoist": "Đạo giáo"
                 }
             },
+            "restriction": {
+                "label": "Kiểu"
+            },
             "route": {
+                "label": "Kiểu"
+            },
+            "route_master": {
                 "label": "Kiểu"
             },
             "sac_scale": {
@@ -803,6 +816,10 @@
             "amenity/place_of_worship": {
                 "name": "Nơi Thờ phụng",
                 "terms": "nơi thờ phụng,nhà thờ,giáo xứ,thánh đường,hội đường"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Chùa Phật giáo",
+                "terms": "chùa,chùa chiền,phù đồ,tháp,tháp-bà,thạt,tịnh xá,thiện đường,đạo trường"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Nhà thờ",
@@ -1048,7 +1065,7 @@
                 "name": "Cuối đường Vòng tròn"
             },
             "highway/unclassified": {
-                "name": "Phố"
+                "name": "Ngõ"
             },
             "historic": {
                 "name": "Nơi Lịch sử"
@@ -1583,6 +1600,9 @@
             "type/boundary": {
                 "name": "Biên giới"
             },
+            "type/boundary/administrative": {
+                "name": "Biên giới Hành chính"
+            },
             "type/multipolygon": {
                 "name": "Tổ hợp Đa giác"
             },
@@ -1621,6 +1641,9 @@
             },
             "type/route/tram": {
                 "name": "Tuyến đường Xe điện"
+            },
+            "type/route_master": {
+                "name": "Tuyến đường Chung"
             },
             "vertex": {
                 "name": "Khác"

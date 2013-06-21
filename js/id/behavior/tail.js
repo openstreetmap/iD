@@ -10,11 +10,11 @@ iD.behavior.Tail = function() {
         if (!text) return;
 
         d3.select(window)
-            .on('resize.tail', function() { selection_size = selection.size(); });
+            .on('resize.tail', function() { selection_size = selection.dimensions(); });
 
         function show() {
             container.style('display', 'block');
-            tooltip_size = container.size();
+            tooltip_size = container.dimensions();
         }
 
         function mousemove() {
@@ -55,8 +55,8 @@ iD.behavior.Tail = function() {
         container
             .on('mousemove.tail', mousemove);
 
-        tooltip_size = container.size();
-        selection_size = selection.size();
+        tooltip_size = container.dimensions();
+        selection_size = selection.dimensions();
     }
 
     tail.off = function(selection) {

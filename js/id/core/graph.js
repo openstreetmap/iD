@@ -84,6 +84,8 @@ iD.Graph.prototype = {
             nodes[i] = this.entity(entity.nodes[i]);
         }
 
+        if (iD.debug) Object.freeze(nodes);
+
         this._childNodes[entity.id] = nodes;
         return this._childNodes[entity.id];
     },

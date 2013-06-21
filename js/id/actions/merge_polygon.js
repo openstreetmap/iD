@@ -25,10 +25,10 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
         // Each element is itself an array of objects with an id property, and has a
         // locs property which is an array of the locations forming the polygon.
         var polygons = entities.multipolygon.reduce(function(polygons, m) {
-            return polygons.concat(iD.geo.joinMemberWays(m.members, graph));
+            return polygons.concat(iD.geo.joinWays(m.members, graph));
         }, []).concat(entities.closedWay.map(function(d) {
             var member = [{id: d.id}];
-            member.locs = graph.childNodes(d).map(function(n) { return n.loc; });
+            member.nodes = graph.childNodes(d);
             return member;
         }));
 
@@ -38,7 +38,9 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
         var contained = polygons.map(function(w, i) {
             return polygons.map(function(d, n) {
                 if (i === n) return null;
-                return iD.geo.polygonContainsPolygon(d.locs, w.locs);
+                return iD.geo.polygonContainsPolygon(
+                    _.pluck(d.nodes, 'loc'),
+                    _.pluck(w.nodes, 'loc'));
             });
         });
 

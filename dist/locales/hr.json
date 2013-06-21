@@ -85,6 +85,9 @@
             "bicycle_parking": {
                 "label": "Tip"
             },
+            "boundary": {
+                "label": "Tip"
+            },
             "building": {
                 "label": "Građevina"
             },
@@ -263,7 +266,13 @@
                     "taoist": "Taoistički"
                 }
             },
+            "restriction": {
+                "label": "Tip"
+            },
             "route": {
+                "label": "Tip"
+            },
+            "route_master": {
                 "label": "Tip"
             },
             "sac_scale": {
@@ -446,6 +455,10 @@
             },
             "amenity/place_of_worship": {
                 "name": "Vjerski objekt"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Budistički hram",
+                "terms": "stupa,vihara,samostan,hram,pagoda,zendo,dojo"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Crkva"
@@ -660,6 +673,13 @@
             "highway/traffic_signals": {
                 "name": "Semafor",
                 "terms": "svjetlo, stop svjetlo, semafor"
+            },
+            "highway/trunk": {
+                "name": "Brza cesta"
+            },
+            "highway/trunk_link": {
+                "name": "Pristupna cesta brze ceste",
+                "terms": "spojna cesta brze ceste, ulaz na cestu, izlaz sa ceste"
             },
             "highway/turning_circle": {
                 "name": "Kružni tok"
@@ -1185,6 +1205,9 @@
             },
             "type/boundary": {
                 "name": "Granica"
+            },
+            "type/boundary/administrative": {
+                "name": "Administrativna granica"
             },
             "type/multipolygon": {
                 "name": "Multipoligon"

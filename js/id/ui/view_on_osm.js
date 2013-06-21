@@ -20,7 +20,7 @@ iD.ui.ViewOnOSM = function(context) {
         //     .attr('class', 'icon out-link');
 
 
-        var $enter = $link.enter().insert('a')
+        var $enter = $link.enter().append('a')
             .attr('class', 'footer-item view-on-osm')
             .attr('target', '_blank');
 

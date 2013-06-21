@@ -90,6 +90,9 @@
             },
             "incomplete_relation": "Dette objekt kan ikke slettes, da det ikke er blevet downloadet helt ned."
         },
+        "add_member": {
+            "annotation": "Tilføj et medlem til en relation."
+        },
         "delete_member": {
             "annotation": "Fjernede et medlem fra en relation."
         },
@@ -186,7 +189,8 @@
         "title": "Gem ændringer",
         "description_placeholder": "Kort beskrivelse af dine bidrag",
         "message_label": "Tilføj en besked",
-        "upload_explanation": "Ændringer du som {user} uploader, vil blive synlige på alle kort der bruger OpenStreetMap data.",
+        "upload_explanation": "Dine ændringer du uploader vil blive synlige på alle kort der bruger OpenStreetMap data.",
+        "upload_explanation_with_user": "Ændringer du som brugernavn {user} uploader, vil blive synlige på alle kort der bruger OpenStreetMap data.",
         "save": "Gem",
         "cancel": "Annuller",
         "warnings": "Advarsler",
@@ -210,7 +214,6 @@
         "no_documentation_combination": "Der er ingen tilgængelig dokumentation for denne kombination af tags",
         "no_documentation_key": "Der er ingen tilgængelig dokumentation for denne nøgle",
         "show_more": "Vis mere",
-        "new_tag": "Ny tag",
         "view_on_osm": "Se på openstreetmap.org",
         "all_tags": "Alle tags",
         "all_members": "Alle medlemmer",
@@ -223,7 +226,8 @@
         "remove": "Fjern",
         "search": "Søg",
         "unknown": "Ukendt",
-        "incomplete": "<ikke downloadet>"
+        "incomplete": "<ikke downloadet>",
+        "feature_list": "Geografisk objektliste"
     },
     "background": {
         "title": "Baggrund",
@@ -295,7 +299,7 @@
         "roads": "# Veje\n\nDu kan oprette, tilrette og slette veje med dette tegneværktøj. Veje kan være af mange forskellige typer: stier, landeveje, spor, cykelstier mv. Enhver ofte benyttet rute kan kortlægges.\n\n### Vælg\n\nKlik på en vej for at vælge den. Et omrids dukker op sammen med en lille værktøjsmenu og et sidepanel der viser flere oplysninger om vejen.\n\n### Ændring\n\nOfte ses veje der ikke er justeret i forhold til luftfotoet bag dem eller i forhold til et GPS-spor. Du kan justere disse veje så de er placeret rigtigt.\n\nKlik først på vejen du vil ændre. Dette fremhæver den og viser kontrolpunkter langs med den som kan trækkes det rigtige sted hen. Hvis du har brug for flere kontrolpunkter for at gøre vejen mere detaljeret, kan du dobbeltklikke på en del af vejen, så dukker et punkt op.\n\nHvis vejen er forbundet til andre veje, men ikke er korrekt forbundet på kortet, så træk et af kontrolpunkterne hen på den anden vej for at koble dem sammen. Det er vigtigt for kortet, faktisk vitalt for rutevejledninger, at veje er forbundet.\n\nDu kan også klikke på flytteværktøjet eller trykke på tastegenvejen \"M\" for at flytte hele vejen på en gang, og så klikke igen for at gemme flytningen.\n\n### Sletning\n\nHvis en vej er helt forkert - du kan ikke se den på et luftfoto og du har ideelt set fået bekræftet at vejen ikke findes lokalt - så kan du slette vejen. Men pas på med at slette hvad andre har lavet - som med andre ændringer er resultatet synligt for alle og luftfoto kan være forældede så vejen kunne være bygget i mellemtiden.\n\nDu kan slette en bygning ved at vælge den og klikke på skraldespands-ikonet - alternativt kan du bruge slet-tasten på dit tastatur.\n\n### Oprettelse\n\nHar du fundet et sted hvor der skulle være en vej, men den er ikke på kortet? Klik på linje-ikonet i øverste venstre del af tegneværktøjet eller klik på tastegenvejen \"2\" for at tegne en linje.\n\nKlik på begyndelsen af vejen for at påbegynde den. Hvis vejen forgrener sig fra en eksisterende vej, så begynd vejen der hvor de er forbundet.\n\nKlik derefter på punkter på vejens forløb så det passer med luftfoto eller GPS-spor. Hvis vejen du tegner krydser en anden vej, så kobl dem sammen ved at klikke på punktet hvor de skærer hinanden. Når du er færdig med at tegne, så dobbeltklik eller tryk på enter-tasten på tastaturet.\n",
         "gps": "# GPS\n\nGPS data er den mest pålidelige kilde til data OpenStreetMap. Dette \nredigeringsværktøj understøtter lokale spor -`.gpx` filer på din egen computer. Du\nkan indsamle denne form for GPS spor med diverse smartphone applikationer såvel som med personligt GPS udstyr.\n\nFor mere information om udførelse af GPS opmålinger læs\n[guiden . opmåling med GPS](http://learnosm.org/en/beginner/using-gps/).\n\nFor at bruge et GPX spor til kortlægning - så træk og slip GPX filen ind på redigeringsværktøjet.\n Hvis filen bliver indlæst, så vil du se den som en lys grøn linje på kortet.\nKlik på 'Baggrundsindstillinger' menuen i venstre side for at aktivere, deaktivere eller zoome til dette GPX lag.\n\nGPx-sporet uploades ikke direkte til OpenStreetMap. Den bedste måde at bruge den på er ved at tegne ovenpå den og bruge den som en guide for de nye objekter du tilføjer.\n",
         "imagery": "# Billedlag\n\nLuftfotos er en vigtig resource ved kortlægning. En kombination af \nflyfotos, satellitfoto og frit udarbejdede kilder er tilgængelige i \nværktøjet under \"Baggrundsindstillinger\" menuen i venstre side.\n\nSom standard bruges et [Bing Maps](http://www.bing.com/maps/) satellitlag, men \nzoomer du hen til nye geografiske områder vil andre billedlag være tilgængelige.\nNogle lande som fx USA, Frankrig og Danmark har billedlag i meget høj kvalitet for\nnogle områder.\n\nBilledlag kan nogle gange være forskudte i forhold til kortdata pga fejltagelser fra leverandørens side.\nHvis du ser en masse veje der er forskudt i forhold til billedlaget, skal du\nikke umiddelbart begynde at justere dem alle for at matche dem med billedlaget. I stedet for kan\ndu justere billedlaget, så det matcher de eksisterende date ved at klikke på \"Juster\" nederst i \"Baggrundsindstillinger\".\n",
-        "addresses": "#Adresser⏎\n⏎\nAdresser er nogle af de mest brugbare informationer for kortet.⏎\n⏎\nSelvom adresser ofte repræsenteres som dele af veje, er de i OpenStreetMap⏎\nlagret som attributter for bygninger og steder langs veje.⏎\n⏎\nDu kan tilføje adresseinformation til steder som er kortlagt som bygningspolygoner⏎\nsåvel som de der er kortlagt som enkeltpunkter. Den optimale kilde til⏎\nadressedata⏎\ner indsamling på selve stedet eller personlig kendkskab - som med ethvert andet⏎\ngeografisk objekt, så er kopiering fra kommercielle kilder som fx Google Maps\nstrengt⏎\nforbudt.⏎\n\n\n",
+        "addresses": "#Adresser\n\nAdresser er noget af det mest brugbare information på kortet.\n\nAdresser er ofte repræsenteret som dele af gader. I OpenStreetMap\ner de disse registret som attributter på bygninger eller langs med veje.\n\nDu kan tilføje adresseinformation til steder som er kortlagt som bygninger\neller som enkeltpunkter. Den optimale kilde til adressedata stammer fra \nindsamling på selve stedet eller fra personlig kendskab. Som med mange\nandre objekter, så er det strengt forbudt at kopiere fra kommercielle kilder\nsom fx fra Google Maps.\n",
         "inspector": "# Inspiceringspanelet\n\nInspiceringspanelet er det element i højre side der dukker op når et objekt er markeret. Det lader dig rette i objektets værdier.\n\n### Valg af type\n\nNår du har tilføjet et punkt, eller en linje eller et areal, kan du vælge hvilken type det er, som f.eks. motorvej eller skovvej, supermarked eller café. Panelet har knapper til at vælge almindelige typer, og du kan finde andre ved at indtaste hvad du leder efter i søgefeltet.\n\nKlik på 'i' i nederste højre hjørne på et typeknap for at få flere oplysninger om typen. Klik på knappen for at vælge typen.\n\n### Formularer og rettelse af tags\n\nNår du har valgt en type, eller hvis du har valg et objekt der allerede har en type, viser panelet nogle felter med oplysningerne for typen, f.eks. navn og adresse.\n\nUnder felterne er der ikoner til at tilføje andre oplysninger, som  [Wikipedia](http://www.wikipedia.org/)-information, adgang for rullestol, med flere.\n\nI bunden af panelet kan du klikke på \"Flere tags\" for at tilføje vilkårlige tags til objektet. [Taginfo](http://taginfo.openstreetmap.org/) kan bruges til at lære mere om populære tag-kombinationer.\n\nÆndringer du laver i panelet bliver automatisk anvendt på kortet. Du kan fortryde dem på et vilkårligt tidspunkt ved at klikke på knappen \"Fortryd\".\n\n### Luk inspiceringspanelet\n\nDu kan lukke panelet ved at klikke på lukkeknappen i øverste højre hjørne, ved at trykke på \"Esc\"-knappen på tastaturet eller ved at klikke på kortet.\n",
         "buildings": "# Bygninger\n\nOpenStreetMap udgør verdens største database af bygninger. Du kan opretteendnu flere selv og gøre databasen endnu bedre.\n\n### Vælg\n\nDu vælger en bygning ved at klikke på en af dens sider. Dette vil fremhæve bygningen og vil samtidig åbne en lille værktøjsmenu og et sidepanel der viser flere oplysninger om bygningen.\n\n### Ændring\n\nNogle gange er bygninger placeret forkert eller har forkerte tags.\n\nDu kan flytte en bygning ved vælge den og klikke på flytteværktøjet. Bevæg din mus for at flytte bygningen, og klik så når bygningen er blevet placeret korrekt.\n\nHvis en bygnings form ser forkert ud, så klik og træk i punkterne i omridset af bygningen til den er rigtig.\n\n### Opret\n\nDa OpenStreetMap både kan registre bygninger som et enkelt punkt eller som en polygon, så kan følgende tommelfingerregel gives. Kortlæg så vidt muligt alle bygninger som polygoner og kortlæg så fx butikker, firmaer og andet som opererer fra en bygning som enkeltpunkter.\n\nStart kortlægning af en bygning ved at klikke på \"Område\"-knappen øverst oppe til venstre. Når du er færdig med at indtegne bygningen, så klik på entertasten på dit tastatur eller klik på det første punkt i din indtegnede bygning for at lukke.\n\n### Sletning\n\nHvis en bygning er helt forkert - du kan ikke se den på et luftfoto og du har ideelt set fået bekræftet at bygningen ikke findes lokalt - så kan du slette bygningen. Men pas meget på med at slette hvad andre har lavet. Luftfoto kan fx være forældede og der kan være blevet bygget i mellemtiden i området.\n\nDu kan slette en bygning ved at vælge den og klikke på skraldespands-ikonet - alternativt kan du bruge slet-tasten på dit tastatur.\n"
     },
@@ -311,7 +315,7 @@
             "title": "Punkter",
             "add": "Punkter kan bruges til at beskrive ting som fx butikker, restauranter og mindesmærker. De markerer en bestemt lokalitet og beskriver hvad der er lige der.**Klik på punktknappen for at tilføje et nyt punkt.**",
             "place": "Punktet kan placeres ved at klikke på kortet.**Placerer punktet ovenpå bygningen.**",
-            "search": "Der er mange forskellige kortelementer der kan repræsenteres af punkter. Punktet du lige tilføjede var en café. **Søg efter 'cafe'**",
+            "search": "Der er mange forskellige objekter, der kan repræsenteres ved punkter. Punktet du lige tilføjede var en cafe.** Søg efter '{name}'**",
             "choose": "**Vælg cafe fra listen.**",
             "describe": "Punktet er nu markeret som en cafe. Ved at bruge redigeringsværktøjet kan vi tilføje mere information om elementet.**Tilføj et navn**",
             "close": "Elementeditoren kan lukkes ved at klikke på luk knappen.\n**Luk redigeringsværktøjet**",
@@ -325,7 +329,7 @@
             "add": "Områder er en mere detaljeret måde at repræsentere objekter på. De yder information om objektets afgrænsning. Områder kan bruges for de fleste objekttyper punkter kan bruges til og foretrækkes ofte.**Klik på område knappen for at tilføje et nyt område.**",
             "corner": "Områder indtegnes ved at placere punkter der markerer områdets afgrænsning. **Placerer startpunktet på et af legepladsens hjørner.**",
             "place": "Tegn området ved at placere flere punkter. Afslut området ved at klikke på det først indtegnede punkt.**Tegn legepladsens område.**",
-            "search": "**Søg efter legeplads.**",
+            "search": "**Søg efter  '{name}'.**",
             "choose": "**Vælg legeplads fra listen.**",
             "describe": "**Tilføj et navn og luk så redigeringsværktøjet**"
         },
@@ -432,6 +436,9 @@
                 "label": "Type"
             },
             "bicycle_parking": {
+                "label": "Type"
+            },
+            "boundary": {
                 "label": "Type"
             },
             "building": {
@@ -615,7 +622,13 @@
                     "taoist": "Taoist"
                 }
             },
+            "restriction": {
+                "label": "Type"
+            },
             "route": {
+                "label": "Type"
+            },
+            "route_master": {
                 "label": "Type"
             },
             "sac_scale": {
@@ -803,6 +816,10 @@
             "amenity/place_of_worship": {
                 "name": "Tilbedelsessted",
                 "terms": "katedral,kapel, kirke,Guds hus, bedehus,missionshus, moske, sogn,fristed,synagoge,tempel"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Buddhisttempel",
+                "terms": "stupa,vihara,kloster,tempel,pagode,zendo,dojo"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Kirke",
@@ -1583,6 +1600,9 @@
             "type/boundary": {
                 "name": "Grænse"
             },
+            "type/boundary/administrative": {
+                "name": " Administrativ grænse"
+            },
             "type/multipolygon": {
                 "name": "Multipolygon"
             },
@@ -1621,6 +1641,9 @@
             },
             "type/route/tram": {
                 "name": "Sporvognsrute"
+            },
+            "type/route_master": {
+                "name": "Rutemasterplan"
             },
             "vertex": {
                 "name": "Andre"

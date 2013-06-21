@@ -1,6 +1,32 @@
 This file documents effors toward establishing a public API for iD, one that
 can support plugin development.
 
+## URL parameters
+
+iD supports several URL parameters. When constructing a URL to a standalone instance
+of iD (e.g. `http://openstreetmap.us/iD/release/`), the following parameters are available
+in the hash portion of the URL:
+
+* `map` - A slash separated zoom level, longitude, and latitude. Example:
+  `map=20.00/-77.02271/38.90085`.
+* `id` - The character 'n', 'w', or 'r', followed by the OSM ID of a node,
+   way or relation, respectively. Selects the specified entity, and, unless
+   a `map` parameter is also provided, centers the map on it.
+* `background` - The value from a `sourcetag` property in iD's
+  [imagery list](https://github.com/systemed/iD/blob/master/data/imagery.json),
+  or a custom tile URL. A custom URL is specified in the format `custom:<url>`,
+  where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
+  `{z}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
+  DNS multiplexing. Example:
+  `background=custom:http://{switch:a,b,c}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png`
+
+When constructing a URL to an instance of iD embedded in the OpenStreetMap Rails
+Port (e.g. `http://www.openstreetmap.org/edit?editor=id`), the following parameters
+are available as regular URL query parameters:
+
+* `lat`, `lon`, `zoom` - Self-explanatory.
+* `node`, `way`, `relation` - Select the specified entity.
+
 ## CSS selectors
 
 iD has a documented and stable set of classes that can be used to apply style or

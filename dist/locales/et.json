@@ -152,7 +152,6 @@
     },
     "inspector": {
         "show_more": "Näita rohkem",
-        "new_tag": "Uus silt",
         "all_tags": "Kõik sildid",
         "results": "{n} tulemust otsingule {search}",
         "remove": "Eemalda",

@@ -4,7 +4,7 @@ iD.ui.Modes = function(context) {
         iD.modes.AddLine(context),
         iD.modes.AddArea(context)];
 
-    return function(selection, limiter) {
+    return function(selection) {
         var buttons = selection.selectAll('button.add-button')
             .data(modes);
 
@@ -25,23 +25,12 @@ iD.ui.Modes = function(context) {
                    return iD.ui.tooltipHtml(mode.description, mode.key);
                }));
 
-        var notice = iD.ui.notice(limiter)
-            .message(false)
-            .on('zoom', function() { context.map().zoom(16); });
-
         function disableTooHigh() {
-            if (context.map().editable()) {
-                notice.message(false);
-                buttons.attr('disabled', null);
-            } else {
-                buttons.attr('disabled', 'disabled');
-                notice.message(true);
-                context.enter(iD.modes.Browse(context));
-            }
+            buttons.attr('disabled', context.map().editable() ? null : 'disabled');
         }
 
         context.map()
-            .on('move.mode-buttons', _.debounce(disableTooHigh, 500));
+            .on('move.modes', _.debounce(disableTooHigh, 500));
 
         disableTooHigh();
 

@@ -2,7 +2,6 @@ iD.LocalGpx = function(context) {
     var projection,
         gj = {},
         enable = true,
-        size = [0, 0],
         svg;
 
     function render(selection) {
@@ -50,9 +49,9 @@ iD.LocalGpx = function(context) {
         return render;
     };
 
-    render.size = function(_) {
-        if (!arguments.length) return svg.size();
-        svg.size(_);
+    render.dimensions = function(_) {
+        if (!arguments.length) return svg.dimensions();
+        svg.dimensions(_);
         return render;
     };
 

@@ -27,7 +27,7 @@ iD.ui.UndoRedo = function(context) {
             .call(tooltip);
 
         buttons.append('span')
-            .attr('class', function(d) { return 'icon ' + d.id; });
+            .attr('class', function(d) { return 'icon light ' + d.id; });
 
         var keybinding = d3.keybinding('undo')
             .on(commands[0].cmd, function() { d3.event.preventDefault(); commands[0].action(); })

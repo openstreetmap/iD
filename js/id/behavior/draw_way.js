@@ -60,7 +60,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             .on('finish', drawWay.finish);
 
         context.map()
-            .minzoom(16)
             .dblclickEnable(false)
             .on('drawn.draw', setActiveElements);
 
@@ -77,7 +76,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             context.pop();
 
         context.map()
-            .minzoom(0)
             .on('drawn.draw', null);
 
         surface.call(draw.off)

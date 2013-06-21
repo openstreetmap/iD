@@ -11,7 +11,7 @@ iD.ui.PresetList = function(context) {
         selection.html('');
 
         var messagewrap = selection.append('div')
-            .attr('class', 'header fillL cf');
+            .attr('class', 'header cf');
 
         var message = messagewrap.append('h3')
             .text(t('inspector.choose'));
@@ -51,23 +51,26 @@ iD.ui.PresetList = function(context) {
             }
         }
 
-        function keyup() {
+        function keypress() {
             // enter
             var value = search.property('value');
             if (d3.event.keyCode === 13 && value.length) {
                 list.selectAll('.preset-list-item:first-child').datum().choose();
+            }
+        }
+
+        function inputevent() {
+            var value = search.property('value');
+            list.classed('filtered', value.length);
+            if (value.length) {
+                var results = presets.search(value, geometry);
+                message.text(t('inspector.results', {
+                    n: results.collection.length,
+                    search: value
+                }));
+                list.call(drawList, results);
             } else {
-                list.classed('filtered', value.length);
-                if (value.length) {
-                    var results = presets.search(value, geometry);
-                    message.text(t('inspector.results', {
-                        n: results.collection.length,
-                        search: value
-                    }));
-                    list.call(drawList, results);
-                } else {
-                    list.call(drawList, context.presets().defaults(geometry, 36));
-                }
+                list.call(drawList, context.presets().defaults(geometry, 36));
             }
         }
 
@@ -79,7 +82,8 @@ iD.ui.PresetList = function(context) {
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
             .on('keydown', keydown)
-            .on('keyup', keyup);
+            .on('keypress', keypress)
+            .on('input', inputevent);
 
         searchWrap.append('span')
             .attr('class', 'icon search');

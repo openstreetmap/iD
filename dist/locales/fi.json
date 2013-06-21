@@ -146,7 +146,6 @@
         "title": "Tallenna muutokset",
         "description_placeholder": "Kuvaile lyhyesti karttaan tehtyjä muutoksia",
         "message_label": "Yhteenveto",
-        "upload_explanation": "Karttaan tehdyt muutokset nimimerkillä {user} tulevat kaikkien OpenStreetMap-pohjaisten karttapalvelujen käytettäväksi.",
         "save": "Tallenna",
         "cancel": "Peru",
         "warnings": "Varoitukset",
@@ -166,7 +165,6 @@
         "no_documentation_combination": "Tälle tagille ei löydy käyttöohjeita tai -suosituksia",
         "no_documentation_key": "Tälle avaimelle ei löydy käyttöohjeita tai -suosituksia",
         "show_more": "Näytä lisää",
-        "new_tag": "Uusi tagi",
         "choose": "Valitse ominaisuustyyppi",
         "results": "{n} hakutulosta haulle {search}"
     },
@@ -242,7 +240,6 @@
             "title": "Paikkapisteet",
             "add": "Paikkapisteitä voidaan käyttää kauppojen, ravintoloiden, muistomerkkien ja muiden vastaavien pienten kohteiden merkitsemiseen. Niillä ilmoitetaan vain pieni, hieman epämääräinenkin sijainti. **Lisää uusi paikkapiste napsauttamalla Paikkapiste.**",
             "place": "Lisää paikkapiste kartalle napsauttamalla kartalta kohtaa, jossa se on. **Lisää paikkapiste rakennuksen päälle.**",
-            "search": "Monia paikkoja voidaan merkitä kartalla paikkapisteillä. Sovitaan, että äsken lisätty paikkapiste on kahvila. **Etsi hakusanalla \"Kahvila\"**",
             "choose": "**Valitse Kahvila listalta.**",
             "describe": "Paikkapiste on nyt merkitty kahvilaksi. Lisää paikkapistelle lisätietoja muokkausnäkymässä. **Lisää paikan nimi**",
             "close": "Muokkausnäkymä suljetaan napsauttamalla Sulje-painiketta. **Sulje muokkausnäkymä**",
@@ -256,7 +253,6 @@
             "add": "Alueet ovat tarkempia kuin pelkät viivat tai paikkapisteet. Ne rajaavat kohteen kokonaan. Lähes kaikki kohteet voidaan kartoittaa alueilla, ja alueet ovatkin usein paras vaihtoehto. **Luo uusi alue napsauttamalla Alue-painiketta.**",
             "corner": "Alueet piirretään sijoittamalla (viiva)pisteitä sen reunoille eli \"aitaamalla\" piirrettävä alue. **Aloita alueen piirtäminen napsauttamalla jotain leikkipuiston nurkista.**",
             "place": "Piirrä alue napsauttamalla lisää viivapisteitä. Viimeistele alue napsauttamalla aloituspistettä uudelleen, jolloin alue sulkeutuu. **Piirrä leikkipuisto.**",
-            "search": "**Etsi hakusanalla \"Leikkipuisto\".**",
             "describe": "**Lisää leikkipuistolle nimi ja sulje sitten muokkausnäkymä.**"
         },
         "lines": {

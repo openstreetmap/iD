@@ -60,9 +60,6 @@ iD.ui.Inspector = function(context) {
               .append('span')
               .attr('class','icon bug');
 
-            footerWrap.append('div')
-                .call(iD.ui.Save(context));
-
         function showList(preset) {
             $wrap.transition()
                 .style('right', '-100%');

@@ -31,7 +31,8 @@ iD.validate = function(changes, graph) {
             });
         }
 
-        if (change.geometry(graph) === 'line' && _.isEmpty(change.tags)) {
+        if (change.geometry(graph) === 'line' && _.isEmpty(change.tags) &&
+                graph.parentRelations(change).length === 0) {
             warnings.push({ message: t('validations.untagged_line'), entity: change });
         }
 

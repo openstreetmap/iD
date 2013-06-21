@@ -90,6 +90,9 @@
             },
             "incomplete_relation": "Tego obiektu nie można usunąć, ponieważ nie został w pełni pobrany."
         },
+        "add_member": {
+            "annotation": "Dodano członka relacji."
+        },
         "delete_member": {
             "annotation": "Usunięto członka relacji."
         },
@@ -186,7 +189,8 @@
         "title": "Zapisz zmiany",
         "description_placeholder": "Zwięzły opis twoich zmian",
         "message_label": "Opis zmian",
-        "upload_explanation": "Zmiany, które wyślesz jako {user} będą widoczne na wszystkich mapach używających danych OpenStreetMap.",
+        "upload_explanation": "Zmiany, które wyślesz będą widoczne na wszystkich mapach używających danych OpenStreetMap.",
+        "upload_explanation_with_user": "Zmiany, które wyślesz jako {user} będą widoczne na wszystkich mapach używających danych OpenStreetMap.",
         "save": "Zapisz",
         "cancel": "Anuluj",
         "warnings": "Ostrzeżenia",
@@ -210,7 +214,6 @@
         "no_documentation_combination": "Nie ma dostępnej dokumentacji dla tej kombinacji tagów",
         "no_documentation_key": "Nie ma dostępnej dokumentacji dla tego klucza",
         "show_more": "Pokaż więcej",
-        "new_tag": "Nowy tag",
         "view_on_osm": "Zobacz na openstreetmap.org",
         "all_tags": "Wszystkie tagi",
         "all_members": "Wszyscy członkowie",
@@ -223,7 +226,8 @@
         "remove": "Usuń",
         "search": "Szukaj",
         "unknown": "Nieznane",
-        "incomplete": "<nie pobrane>"
+        "incomplete": "<nie pobrane>",
+        "feature_list": "Lista obiektów"
     },
     "background": {
         "title": "Tło",
@@ -295,7 +299,7 @@
         "roads": "# Drogi\n\nMożesz tworzyć, poprawiać i usuwać drogi używając tego edytora. Drogi mogą być wszelkiego rodzaju:\nścieżki, ulice, szlaki, ścieżki rowerowe i tak dalej - każdy często uczęszczany odcinek powinien dać się\nprzedstawić.\n\n### Zaznaczanie\n\nKliknij drogę, aby ją zaznaczyć. Obwiednia powinna stać się widoczna, wraz z małym menu\nnarzędziowym na mapie oraz panelem bocznym pokazującym więcej informacji na temat drogi.\n\n### Modyfikowanie\n\nCzęsto będziesz widział drogi, które nie są wyrównane ze zdjęciami satelitarnymi lub śladami GPS.\nMożesz dopasować te drogi tak, aby były we właściwym miejscu.\n\nNajpierw kliknij drogę, którą chcesz zmienić. Podświetli ją to oraz pokaże punkty kontrolne, które\nmożesz przesunąć w lepsze miejsce. Jeżeli chcesz dodać nowe punkty kontrolne, aby droga\nbyła bardziej szczegółowa, dwukrotnie kliknij część drogi bez punktu, a w tym miejscu nowy się\npojawi.\n\nJeżeli droga łączy się z inną drogą, ale nie jest prawidłowo połączona z nią na mapie, możesz\nprzeciągnąć jeden z puntów kontrolnych na drugą drogę w celu ich połączenia. Prawidłowe połączenia\ndróg są ważne dla mapy i kluczowe dla wyznaczania tras.\n\nMożesz też kliknąć narzędzie 'Przesuń' lub nacisnąć klawisz `M` aby przesunąć jednocześnie całą\ndrogę, a następnie kliknąć ponownie, aby zachować to przesunięcie.\n\n### Usuwanie\n\nGdy droga jest całkiem błędna - widzisz, że nie istnieje na zdjęciach satelitarnych (a najlepiej sam\nsprawdziłeś w terenie, że jej nie ma) - możesz usunąć ją. Uważaj, gdy usuwasz obiekty - wyniki usunięcia,\ntak jak każdej modyfikacji, są widoczne dla wszystkich, a zdjęcie satelitarne często nie są aktualne,\nwięc droga może być po prostu nowo wybudowana.\n\nMożesz usunąć drogę przez zaznaczenie jej, a następnie kliknięcie ikony kosza lub wciśnięcie\nklawisza 'Delete'.\n\n### Tworzenie\n\nGdzieś tam powinna być droga, ale jej nie ma? Kliknij przycisk 'Linia' w górnym lewym rogu edytora\nlub naciśnij klawisz '2' na klawiaturze, aby zacząć rysować linię.\n\nKliknij początek drogi na mapie, aby zacząć rysować. Jeżeli droga odchodzi od już istniejącej, zacznij\nprzez kliknięcie w miejscu, w którym się łączą.\n\nNastępnie klikaj na punktach wzdłuż drogi tak, aby biegła ona odpowiednio według zdjęć satelitarnych\nlub GPS. Jeżeli droga, którą rysujesz, krzyżuje się z inną, połącz je, klikając na punkcie przecięcia. Gdy\nskończysz rysować, dwukrotnie kliknij ostatni punkt lub naciśnij klawisz 'Enter' na klawiaturze.\n",
         "gps": "# GPS\n\nDane GPS są najbardziej zaufanym źródłem dla OpenStreetMap. Ten edytor obsługuje lokalne ślady -\npliki `.gpx` na twoim komputerze. Możesz zbierać tego rodzaju ślady GPS używając aplikacji na\nsmartfony lub sprzętu GPS.\n\nInformacje jak używać GPS-u do zbierania informacji o okolicy możesz znaleźć pod\n[Zbieranie informacji z GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby użyć śladu GPX do rysowania mapy, przeciągnij i upuść plik GPX na edytor. Jeżeli zostanie\nrozpoznany, zostanie dodany na mapę w postaci jasnozielonej linii. Kliknij menu 'Ustawienia tła'\npo lewej stronie, aby włączyć, wyłączyć lub powiększyć do nowej warstwy GPX.\n\nŚlad GPX nie jest bezpośrednio wysyłany do OpenStreetMap - najlepiej użyć go do rysowania mapy,\nużywając go jako wzoru dla nowych obiektów, które dodasz.\n",
         "imagery": "# Zdjęcia\n\nZdjęcia lotnicze/satelitarne są ważnym zasobem w rysowaniu map. Kolekcja zdjęć lotniczych,\nsatelitarnych i innych wolnodostępnych źródeł jest dostępna w edytorze w menu 'Ustawienia tła' po\nlewej stronie.\n\nDomyślnie wyświetlana jest warstwa zdjęć satelitarnych z [Bing Maps](http://www.bing.com/maps/),\nale w miarę przybliżania i pojawiają się nowe źródła. Niektóre kraje, takie jak Stany Zjednoczone, Francja\nczy Dania mają w pewnych miejscach dostępne zdjęcia bardzo wysokiej jakości.\n\nZdjęcia są czasem przesunięte względem danych na mapie z powodu błędu dostawcy zdjęć. Jeżeli\nwidzisz dużo dróg przesuniętych względem tła, zastanów się, zanim je wszystkie wyrównasz względem\ntła. Zamiast tego może dostosować przesunięcie zdjęć tak, aby zgadzały się z istniejącymi danymi przez\nnaciśnięcie przycisku 'Wyrównaj podkład' na dole Ustawień tła.\n",
-        "addresses": "# Adresy\n\nAdresy są jedną z najbardziej użytecznych informacji na mapie.\n\nMimo że adresy są często reprezentowane jako części ulic, w OpenStreetMap są one zapisywane jako\natrybuty budynków i miejsc wzdłuż ulicy.\n\nMożesz dodać nową informację adresową do miejsc narysowanych w postaci obwiedni budynków jak\nrównież do tych narysowanych w postaci pojedynczych punktów. Najlepszym źródłem danych adresowych\njest jak zwykle zwiedzanie okolicy lub własna wiedza - tak jak z każdym innym obiektem, kopiowanie\ndanych z komercyjnych źródeł takich jak Google Maps jest zabronione.\n",
+        "addresses": "# Adresy\n\nAdresy są jedną z najbardziej użytecznych informacji na mapie.\n\nMimo że adresy są często reprezentowane jako części ulic, w OpenStreetMap są one\nzapisywane jako atrybuty budynków i miejsc wzdłuż ulicy.\n\nMożesz dodać nową informację adresową do miejsc narysowanych w postaci\nobwiedni budynków jak również do tych narysowanych w postaci pojedynczych punktów.\nNajlepszym źródłem danych adresowych jest jak zwykle zwiedzanie okolicy\nlub własna wiedza - tak jak z każdym innym obiektem, kopiowanie danych z komercyjnych\nźródeł takich jak Google Maps jest zabronione.\n",
         "inspector": "# Używanie Inspektora\n\nInspektor jest elementem interfejsu po prawej stronie strony, który pojawia się po zaznaczeniu obiektu\ni który pozwala ci modyfikować jego szczegóły.\n\n### Zaznaczanie typu obiektu\n\nPo dodaniu punktu, linii lub obszaru, możesz wybrać, jakiego rodzaju to jest obiekt, na przykład czy jest\nto autostrada czy droga lokalna, kawiarnia czy supermarket. Inspektor wyświetli przyciski dla\npopularnych typów obiektów, a ty możesz znaleźć inne przez wpisanie tego, czego szukasz do pola\nszukania.\n\nKliknij 'i' w prawym dolnym rogu przycisku typu obiektu, aby dowiedzieć się o nim więcej.\nKliknij przycisk, aby wybrać ten typ.\n\n### Używanie formularzy i edycja tagów\n\nPo wybraniu typu obiektu lub gdy wybierzesz obiekt, który ma już nadany typ, inspektor wyświetli pola\nzawierające szczegóły na temat obiektu, takie jak nazwa i adres.\n\nPoniżej pól, które widzisz, możesz kliknąć ikony w celu dodania innych szczegółów, jak na przykład\ninformacja z [Wikipedii](http://www.wikipedia.org/), dostęp dla wózków inwalidzkich i innych.\n\nNa dole inspektora kliknij 'Dodatkowe tagi', aby dodać dowolne inne tagi do elementu.\n[Taginfo](http://taginfo.openstreetmap.org/) jest świetnym źródłem informacji o popularnych\nkombinacjach tagów.\n\nZmiany, które wprowadzisz w inspektorze, są automatycznie nanoszone na mapę. Możesz je cofnąć w\nkażdym momencie przez wciśnięcie przycisku 'Cofnij'.\n\n### Zamykanie Inspektora\n\nMożesz zamknąć inspektora przez kliknięcie na przycisk zamknij w górnym prawym rogu, wciśnięcie\nklawisza 'Escape' lub kliknięcie mapy.\n",
         "buildings": "# Budynki\n\nOpenStreetMap jest największą na świecie bazą budynków. Możesz\nprzyczynić się do rozwoju owej bazy.\n\n### Zaznaczanie\n\nMożesz zaznaczyć budynek przez kliknięcie jego obwodu. Podświetli\nto obiekt i otworzy małe menu narzędziowe oraz pasek boczny zawierający\ninformacje o budynku.\n\n### Modyfikowanie\n\nZdarza się, że budynki są umieszczone w nieprawidłowych miejscach\nlub mają nieodpowiednie tagi.\n\nAby przesunąć cały budynek, zaznacz go, a następnie wybierz narzędzie\nprzesuwania. Przesuń kursor myszy, aby zmienić pozycję obiektu, a następnie\nkliknij, gdy już będzie w odpowiednim miejscu.\n\nAby poprawić kształt budynku, kliknij i przeciągnij węzły, które tworzą obwód\nobiektu, w lepiej usytuowane miejsce.\n\n### Tworzenie\n\nJednym z głównych problemów podczas tworzenia budynków jest to,\nże OpenStreetMap przechowuje budynki zarówno w postaci punktów\njak i obszarów. Przyjęło się rysowanie budynków w postaci obszarów, a rysowanie\nfirm, domów czy innej infrastruktury w postaci punktów w obszarze budynku.\n\nZacznij rysować budynek w postaci obszaru przez kliknięcie przycisku 'Obszar'\nw górnym lewym rogu edytora i zakończ go przez naciśnięcie klawisza 'Enter'\nna klawiaturze lub przez kliknięcie na pierwszym rysowanym punkcie w celu\nzamknięcia obszaru.\n\n### Usuwanie\n\nJeżeli budynek jest całkiem błędny - widzisz, że nie ma go na zdjęciach satelitarnych,\na najlepiej sprawdziłeś w terenie, że nie istnieje - możesz go usunąć. Bądź ostrożny\nusuwając obiekty - tak jak po każdej innej modyfikacji, rezultaty są widoczne dla wszystkich,\na zdjęcia satelitarne często nie są aktualne, więc budynek może być po prostu nowo\nwybudowany.\n\nMożesz usunąć budynek przez kliknięcie na nim, a następnie na ikonie\nśmietnika lub wciśnięcie klawisza 'Delete'. \n"
     },
@@ -311,7 +315,7 @@
             "title": "Punkty",
             "add": "Punkty mogą być używane do reprezentowania obiektów, takich jak sklepy, restauracje czy pomniki. Zaznaczają one konkretną lokalizację i opisują co się tam znajduje. **Kliknij na przycisk Punkt, aby dodać nowy punkt.**",
             "place": "Punkt może zostać umieszczony przez kliknięcie na mapę. **Umieść punkt na budynku.**",
-            "search": "Wiele różnych obiektów może być reprezentowanych przez punkty. Punkt, który właśnie dodałeś, jest kawiarnią. **Szukaj 'kawiarnia' **",
+            "search": "Istnieje wiele różnych obiektów, które mogą być reprezentowane za pomocą punktów. Dodany przed chwilą punkt jest kawiarnią. **Wyszukaj '{name}'**",
             "choose": "**Wybierz kawiarnię z listy.**",
             "describe": "Punkt jest teraz oznaczony jako kawiarnia. Używając edytora, możemy dodać więcej informacji o obiekcie. **Dodaj nazwę**",
             "close": "Edytor obiektów może zostać ukryty przez kliknięcie przycisku zamykania. **Zamknij edytor obiektów**",
@@ -325,7 +329,7 @@
             "add": "Obszary pozwalają na bardziej szczegółowe przedstawienie obiektu. Dostarczają one informacji o jego granicach. Obszary mogą być używane w przypadku większości obiektów, które mogą być przedstawione w postaci punktów. Często są preferowanym typem. **Użyj przycisku Obszar, aby dodać nowy obszar.**",
             "corner": "Obszary są rysowane przez stawianie punktów oznaczających granicę obszaru. **Umieść punkt początkowy w jednym z rogów placu zabaw.**",
             "place": "Narysuj obszar, umieszczając kolejne punkty. Zakończ go, klikając na początkowy punkt. **Narysuj obszar placu zabaw.**",
-            "search": "**Wyszukaj plac zabaw.**",
+            "search": "**Wyszukaj '{name}'.**",
             "choose": "**Wybierz plac zabaw z listy.**",
             "describe": "**Dodaj nazwę i zamknij edytor obiektów**"
         },
@@ -432,6 +436,9 @@
                 "label": "Typ"
             },
             "bicycle_parking": {
+                "label": "Typ"
+            },
+            "boundary": {
                 "label": "Typ"
             },
             "building": {
@@ -615,7 +622,13 @@
                     "taoist": "Taoizm"
                 }
             },
+            "restriction": {
+                "label": "Typ"
+            },
             "route": {
+                "label": "Typ"
+            },
+            "route_master": {
                 "label": "Typ"
             },
             "sac_scale": {
@@ -803,6 +816,10 @@
             "amenity/place_of_worship": {
                 "name": "Miejsce kultu religijnego",
                 "terms": "opactwo,bazylika,katedra,prezbiterium,kaplica,kościół,owczarnia,dom Boży,dom modlitwy,tum,misja,meczet,parafia,sanktuarium,świątynia,synagoga,tabernakulum"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Świątynia buddyjska",
+                "terms": "stupa,wihara,klasztor,świątynia,pagoda,zendo,dojo"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Kościół",
@@ -1583,6 +1600,9 @@
             "type/boundary": {
                 "name": "Granica"
             },
+            "type/boundary/administrative": {
+                "name": "Granica administracyjna"
+            },
             "type/multipolygon": {
                 "name": "Wielokąt złożony"
             },
@@ -1621,6 +1641,9 @@
             },
             "type/route/tram": {
                 "name": "Trasa tramwajowa"
+            },
+            "type/route_master": {
+                "name": "Trasa główna"
             },
             "vertex": {
                 "name": "Inne"

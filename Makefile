@@ -22,10 +22,11 @@ dist/iD.js: \
 	js/lib/d3.jsonp.js \
 	js/lib/d3.keybinding.js \
 	js/lib/d3.one.js \
-	js/lib/d3.size.js \
+	js/lib/d3.dimensions.js \
 	js/lib/d3.trigger.js \
 	js/lib/d3.typeahead.js \
 	js/lib/d3.curtain.js \
+	js/lib/d3.value.js \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
 	js/lib/osmauth.js \
@@ -112,4 +113,4 @@ D3_FILES = \
 
 js/lib/d3.v3.js: $(D3_FILES)
 	node_modules/.bin/smash $(D3_FILES) > $@
-	@echo 'd3 rebuild. Please reapply 7e2485d and e0d6337'
+	@echo 'd3 rebuilt. Please reapply 7e2485d and 4da529f'

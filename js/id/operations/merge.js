@@ -34,6 +34,9 @@ iD.operations.Merge = function(selectedIDs, context) {
             m = merge.disabled(context.graph()),
             p = mergePolygon.disabled(context.graph());
 
+        if (j === 'restriction' && m && p)
+            return t('operations.merge.restriction', {relation: context.presets().item('type/restriction').name()});
+
         if (j && m && p)
             return t('operations.merge.' + j);
 

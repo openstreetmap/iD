@@ -90,6 +90,9 @@
             },
             "incomplete_relation": "Tento objekt nemožno vymazať, pretože nebol úplne stiahnutý."
         },
+        "add_member": {
+            "annotation": "Pridanie člena do relácie."
+        },
         "delete_member": {
             "annotation": "Odstránenie člena z relácie."
         },
@@ -186,7 +189,8 @@
         "title": "Ukladanie zmien",
         "description_placeholder": "Stručný popis vašich úprav",
         "message_label": "Pripojiť správu",
-        "upload_explanation": "Zmeny, ktoré nahráte ako {user}, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
+        "upload_explanation": "Zmeny, ktoré nahráte, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
+        "upload_explanation_with_user": "Zmeny, ktoré nahráte ako {user}, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
         "save": "Ulož",
         "cancel": "Zruš",
         "warnings": "Varovania",
@@ -210,7 +214,6 @@
         "no_documentation_combination": "Pre túto kombináciu označenia nie je dostupná dokumentácia",
         "no_documentation_key": "Pre toto označenie nie je dostupná dokumentácia",
         "show_more": "Ukáž viac",
-        "new_tag": "Nové označenie",
         "view_on_osm": "Ukáž na openstreetmap.org",
         "all_tags": "Všetky označenia",
         "all_members": "Všetky členy",
@@ -223,7 +226,8 @@
         "remove": "Odstráň",
         "search": "Hľadaj",
         "unknown": "Neznámy",
-        "incomplete": "<nebolo stiahnuté>"
+        "incomplete": "<nebolo stiahnuté>",
+        "feature_list": "Zoznam objektov"
     },
     "background": {
         "title": "Pozadie",
@@ -295,7 +299,7 @@
         "roads": "# Cesty\n\nS týmto editorom môžete cesty vytvoriť, opraviť alebo vymazať. Cesty môžu byť rôzneho druhu: chodníky, diaľnice, lesné cestičky, cyklochodníky a iné. Akýkoľvek často prechádzaný úsek by malo byť možné zmapovať.\n\n### Výber\n\nKliknite na cestu pre jej výber. Viditeľným by sa mal stať jej obrys spolu s malou ponukou nástrojov na mape a postranným panelom, ukazujúcim dodatočné informácie o ceste.\n\n### Úprava\n\nČasto krát uvidíte cesty, ktoré nie sú zarovnané so snímkami pod nimi alebo s GPS stopu. Tieto cesty môžete upraviť tak, aby boli na správnom mieste.\n\nNajskôr kliknite na cestu, ktorú chcete zmeniť. Týmto sa zvýrazní a po jej dĺžke sa ukážu kontrolné body, ktoré môžete pretiahnuť na lepšiu pozíciu. Ak chcete pridať nový kontrolný bod pre viac detailov, dva krát kliknite na časť cesty bez uzla a jeden bude pridaný.\n\nAk sa cesta spája s inou cestou, ale nie je správne spojená na mape, môžete pretiahnuť jeden z jej kontrolných bodov na druhú cestu, aby ste ich spojili. Spojenie ciest je dôležité pre mapu a nevyhnutné pre poskytovanie navigácie na cestách.\n\nMôžete tiež kliknúť na nástroj \"Presuň\" alebo stlačiť kláves \"M\" pre posunutie celej cesty naraz a potom kliknite znovu, aby ste uložili presun.\n\n### Vymazávanie\n\nAk je cesta úplne nesprávna - vidíte, že cesta neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam cesta nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný, rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže cesta môže byť jednoducho novopostavená.\n\nCestu môžete vymazať, tak že na ňu kliknete čim ju vyberiete  a potom kliknete na ikonu smetného koša alebo stlačením klávesu \"Delete\".\n\n### Vytváranie\n\nZistili ste, že niekde by mala byť cesta ale ona tam nie je? Kliknite naľavo hore na ikonu \"Čiara\" alebo stlačte kláves \"2\" pre kreslenie čiary.\n\nAby ste začali kresliť, kliknite na začiatok cesty na mape. Ak cesta odbočuje z inej existujúcej cesty, začnite kliknútím na miesto, kde sa spájajú.\n\nPotom kliknite na body pozdĺž cesty tak, aby nasledovali správny smer podľa satelitných snímkov alebo GPS. Ak cesta, ktorú kreslíte, pretína ďalšiu cestu, spojte ich kliknutím v mieste križovatky. Keď ste hotový s skreslením, dva krát kliknite alebo stlačte kláves \"Enter\" na vašej klávesnici.\n",
         "gps": "# GPS\nGPS údaje sú najviac dôveryhodný zdroj dát pre OpenStreetMap. Tento editor podporuje stopy z lokálnych \".gpx\" súborov na vašom počítači. Tento typ GPS stôp môžete zachytiť pomocou rôznych aplikácií pre múdre telefóny ako aj GPS prístrojmi.\n\nPre informácie, ako robiť GPS prieskum, si prečítajte [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby ste použili GPX trasu pre mapovanie, pretiahnite a pustite GPX súbor na mapový editor. Ak je rozpoznaný, bude pridaný na mapu ako jasná zelená čiara. Kliknite na ponuku \"Nastavenia pozadia\" na ľavej strane pre zapnutie, vypnutie alebo priblíženie na túto novú GPX vrstvu.\n\nGPX trasa nie je priamo nahraná na OpenStreetMap. Najlepší spôsob ako ju využiť je, použiť ju ako predlohu pre zakreslovanie nových objektov.\n",
         "imagery": "# Snímky povrchu\n\nLetecké snímky sú dôležitým zdrojom pre mapovanie. Kombinácia leteckých fotografií, satelitných snímok a voľne skompilovaných zdrojov je v editore dostupná vľavo pod ponukou \"Nastavenia pozadia\".\n\nŠtandardne je v editore predvolená satelitná vrstva z [Bing Maps](http://www.bing.com/maps/), ale ako posuniete a priblížite mapu na nové geografické miesta, dostupnými sa stanú nové zdroje. Niektoré krajiny ako Spojené Štáty, Francúzsko, a Dánsko majú pre niektoré oblasti dostupné veľmi kvalitné snímky.\n\nSnímky môžu byť niekedy posunuté voči mapovým dátam, kvôli chybe na strane poskytovateľa snímkov. Ak uvidíte veľa ciest posunutých voči pozadiu, neposúvajte ich hneď všetky, aby ste ich zarovnali s pozadím. Namiesto toho môžete upraviť snímky, aby odpovedali existujúcim dátam tým, že kliknete na \"Oprav zarovnanie\" naspodku Nastavenia pozadia.\n",
-        "addresses": "# Adresy\n\nAdresy sú niekedy tou najužitočnejšou informáciou na mape.\n\nHoci sú adresy často znázorňované ako časti ulíc, v OpenStreetMap sú zaznamenávané ako atribúty budov a miest pozdĺž ulíc.\n\nInformáciu o adrese môžete pridať ku miestam na mape ako obrysy budov ale tiež ku tým, ktoré boli zmapované ako samostatný bod. Najvhodnejším zdrojom adresných údajov je miestny prieskum alebo znalosť lokality. Tak ako pri iných objektoch, kopírovanie z komerčných zdrojov ako Google Mapy je prísne zakázané.\n",
+        "addresses": "# Adresy\n\nAdresy sú jedny z najužitočnejších informácií na mape.\n\nHoci sú adresy často znázorňované ako časti ulíc, v OpenStreetMap sú zaznamenávané ako atribúty budov a miest pozdĺž ulíc.\n\nInformáciu o adrese môžete pridať ku miestam znázornených ako obrysy budov, ale aj ku tým, ktoré boli zmapované ako jediný bod. Najvhodnejším zdrojom adresných údajov je miestny prieskum alebo znalosť lokality. Tak ako pri iných objektoch, kopírovanie z komerčných zdrojov ako Google Mapy je prísne zakázané.\n",
         "inspector": "# Používanie Inšpektora\n\nInšpektor je používateľské rozhranie na pravej strane stránky, ktoré sa objaví po vybraní objektu a umožní vám upravovať detaily.\n\n### Voľba typu objektu\n\nPo tom ako pridáte bod, čiaru alebo plochu, môžete vybrať aký je to typ objektu. Napríklad či je to diaľnica alebo obytná ulica, či supermarket alebo kaviareň. Inšpektor zobrazí tlačítka pre bežné typy objektov a nájsť ďalšie môžete zadaním toho, čo hľadáte do vyhľadávacieho políčka.\n\nKliknite na \"i\" v pravom dolnom rohu tlačítka pre výber typu objektu, ak sa chcete o ňom dozvedieť viac. Kliknite na tlačítko a vyberte typ objektu.\n\n### Používanie formulárov a upravovanie označenia\n\nPo tom ako zvolíte typ objektu, alebo keď vyberiete objekt, ktorý už má pridelený typ, inšpektor zobrazí polia s detailmi o objekte ako jeho meno a adresa.\n\nPod poliami sú ikony, na ktoré môžete kliknúť a pridať ďalšie detaily ako informácie z [Wikipédie](http://www.wikipedia.org/), prístup pre vozičkárov a ďalšie.\n\nNaspodku inšpektora kliknite na \"Dodatočné označenia\" pre pridanie  ľubovoľných označení pre daný element. [Taginfo](http://taginfo.openstreetmap.org/) je výborný zdroj pre zistenie populárnych kombinácií označení.\n\nZmeny, ktoré spravíte v inšpektorovi, sú automaticky aplikované na mapu. Vrátiť späť ich môžete kedykoľvek kliknutím na tlačítko \"Vrátiť\".\n\n### Zatvorenie inšpektora\n\nInšpektora môžete zatvoriť kliknutím na tlačitko pre zatvorenie vpravo hore, stlačením klávesu \"Escape\" alebo kliknutím na mapu.\n",
         "buildings": "# Budovy\n\nOpenStreetMap je najväčšia databáza budov na svete. Práve vy ju môžete tvoriť a vylepšovať.\n\n### Výber\n\nBudovu môžete vybrať kliknutím na jej hranicu. Týmto sa budova zvýrazní a otvorí sa malá ponuka nástrojov a postranný panel, ukazujúcim dodatočné informácie o budove.\n\n### Úprava\n\nNiekedy môžu byť budovy chybne umiestnené alebo mať nesprávne označenia.\n\nPre presun celej budovy ju vyberte, a potom kliknite na nástroj \"Presunúť\". Posuňte vašu myš, aby ste posunuli budovu a kliknite, keď je umiestnená správne.\n\nPre opravu tvaru budovy, kliknite a ťahajte za uzly, ktoré tvoria jej ohraničenie, na lepšie miesto.\n\n### Vytváranie\n\nJeden z hlavných problémov okolo pridávania budov je, že OpenStreetMap zaznamenáva budovy ako útvary aj ako body. Nepísaným pravidlom je mapovať budovy vo forme útvaru vždy, keď je to možné a mapovať firmy, domovy, služby občianskej vybavenosti a ďalšie subjekty, ktoré v budove pôsobia ako body umiestnené vo vnútri útvaru budovy.\n\nZačnite kresliť budovu ako útvar, klinutím na tlačítko \"Plocha\" vľavo hore a ukončite ju buď stlačením \"Enter\" na vašej klávesnici alebo kliknutím na prvý uzol, ktorý ste zakreslili, čím uzavriete útvar.\n\n### Vymazávanie\n\nAk je budova úplne nesprávna - vidíte, že neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný. Rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže budova môže byť jednoducho novopostavená.\n\nBudovu môžete vymazať tak, že na ňu kliknete, čím ju vyberiete, a potom kliknete na ikonu koša alebo stlačením klávesu \"Delete\".\n"
     },
@@ -311,7 +315,7 @@
             "title": "Body",
             "add": "Body môžu byť použité na znázorňovanie objektov ako sú obchody, reštaurácie a pamätihodnosťi. Označujú špecifickú polohu a popisujú čo sa tam nachádza. **Kliknite na tlačidlo Bod a pridajte nový bod.**",
             "place": "Bod môžete umiestniť kliknutím na mapu. **Umiestnite bod na vrch budovy.**",
-            "search": "Je veľa objektov, ktoré môžu byť znázornené pomocou bodov. Bod, ktorý ste práve pridali, je Kaviareň. **Vyhľadajte \"Kaviareň\"**",
+            "search": "Body môžu znázorňovať veľa rôznych objektov. Bod, ktorý ste práve pridali, je Kaviareň. **Vyhľadajte \"{name}\"**",
             "choose": "**Vyberte Kaviareň zo zoznamu.**",
             "describe": "Bod je teraz označený ako kaviareň. S použitím editora objektu môžeme pridať viac informácií o objekte. **Pridajte meno**",
             "close": "Editor objektu sa zatvára pomocou zatváracieho tlačítka. **Zatvorte editor objektu**",
@@ -325,7 +329,7 @@
             "add": "Plochy sú detailnejší spôsob ako znázorniť objekty. Poskytujú informácie o hraniciach objektu. Plochy môžu byť použité pre väčšinu typov objektov, pre ktoré používame body a sú aj často krát uprednostňované. **Kliknite na tlačítko Plocha a pridajte novú plochu.**",
             "corner": "Plochy sú zakreslované umiestňovaním uzlov, ktoré označujú hranicu plochy. **Umiestnite počiatočný uzol na jeden z rohov ihriska.**",
             "place": "Nakreslite plochu umiestnením ďalších uzlov. Dokončite plochu kliknutím na počiatočný uzol. **Nakreslite plochu pre ihrisko.**",
-            "search": "**Vyhľadajte Ihrisko.**",
+            "search": "**Vyhľadajte \"{name}\".**",
             "choose": "**Vyberte Ihrisko zo zoznamu.**",
             "describe": "**Vyplňte meno a zatvorte editor objektu**"
         },
@@ -432,6 +436,9 @@
                 "label": "Typ"
             },
             "bicycle_parking": {
+                "label": "Typ"
+            },
+            "boundary": {
                 "label": "Typ"
             },
             "building": {
@@ -615,7 +622,13 @@
                     "taoist": "Taoizmus"
                 }
             },
+            "restriction": {
+                "label": "Typ"
+            },
             "route": {
+                "label": "Typ"
+            },
+            "route_master": {
                 "label": "Typ"
             },
             "sac_scale": {
@@ -803,6 +816,10 @@
             "amenity/place_of_worship": {
                 "name": "Náboženské miesto",
                 "terms": "kostol,kaplnka,chrám,katedrála,bazilika,dom Boží,dom modlitieb,misia,mešita,minaret,synagóga,dóm,svätostánok, oratórium,fara,diecéza,stupa"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Budhistický chrám",
+                "terms": "stupa,vihara,kláštor,pagoda,zendo,dojo,chrám"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Kostol",
@@ -1583,6 +1600,9 @@
             "type/boundary": {
                 "name": "Hranica"
             },
+            "type/boundary/administrative": {
+                "name": "Administratívna hranica"
+            },
             "type/multipolygon": {
                 "name": "Multipolygón"
             },
@@ -1621,6 +1641,9 @@
             },
             "type/route/tram": {
                 "name": "Električková trasa"
+            },
+            "type/route_master": {
+                "name": "Hlavná trasa"
             },
             "vertex": {
                 "name": "Iné"

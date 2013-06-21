@@ -90,6 +90,9 @@
             },
             "incomplete_relation": "Questo elemento non può essere cancellato perché non è stato completamente scaricato."
         },
+        "add_member": {
+            "annotation": "Aggiunto membro alla relazione"
+        },
         "delete_member": {
             "annotation": "Membro rimosso dalla relazione"
         },
@@ -186,7 +189,8 @@
         "title": "Salva le modifiche",
         "description_placeholder": "Una breve descrizione delle tue modifiche",
         "message_label": "Messaggio di invio",
-        "upload_explanation": "I cambiamenti che carichi come {user} saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
+        "upload_explanation": "Le modifiche che carichi saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
+        "upload_explanation_with_user": "Le modifiche che carichi come {user} saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
         "save": "Salva",
         "cancel": "Annulla",
         "warnings": "Avvertimenti",
@@ -210,7 +214,6 @@
         "no_documentation_combination": "Non c'è documentazione per questa combinazione di tag",
         "no_documentation_key": "Non c'è documentazione per questa chiave",
         "show_more": "Mostra di più",
-        "new_tag": "Nuovo Tag",
         "view_on_osm": "Vedi su openstreetmap.org",
         "all_tags": "Tutti i tag",
         "all_members": "Tutti i membri",
@@ -223,7 +226,8 @@
         "remove": "Rimuovere",
         "search": "Cercare",
         "unknown": "Sconosciuto",
-        "incomplete": "<non scaricato>"
+        "incomplete": "<non scaricato>",
+        "feature_list": "Lista caratteristiche"
     },
     "background": {
         "title": "Sfondo",
@@ -295,7 +299,7 @@
         "roads": "# Strade\n\nE' possibile creare, aggiustare ed eliminare le strade con questo editor. Le strade possono essere di tutti i tipi: percorsi, autostrade, cammini, piste ciclabili o altro. E' possibile mappare ogni segmento calpestabile.\n\n### Selezione\n\nCliccare su una strada per selezionarla. Verranno visualizzati un contorno e un piccolo menu strumenti sulla mappa oltre ad una barra laterale che mostra informazioni dettagliate sulla strada.\n\n### Modifica\n\nVi capiterà spesso di vedere strade non combacianti con le immagini sullo sfondo o con il tracciato GPS. E' possibile allineare queste strada in modo che si trovino nella giusta posizione.\n\nPer prima cosa cliccare sulla strada che si vuole modificare. Questo farà in modo che la strada venga evidenziata e che vengano visualizzati i punti di controllo lungo di essa che possono essere spostati in luoghi più consoni. Se si vuole aggiungere nuovi punti di controllo per aggiungere maggiori dettagli, basta fare doppio clic su parte della strada senza nodi.\n\nSe la strada è connessa ad un'altra strada ma non è ben connessa sulla mappa, è possibile spostare uno di questi punti di controllo sull'altra strada in modo da unirli. E' importante per la mappa che le strade siano correttamente connesse  anche per garantire giuste indicazioni di guida.\n\nE' possibile cliccare sullo strumento 'Sposta' o premere il tasto rapido `M` per muovere l'intera strada in una volta sola. Cliccare nuovamente per memorizzare lo spostamento.\n\n### Eliminizione\n\nSe la strada è completamente sbagliata, ovvero non compare sulle immagini satellitari e non viene rilevata nella realtà, è possibile eliminarla eliminandola dalla mappa. Attenzione ad effettuare questa operazione di eliminazione poiché, come per ogni altra modifica, i risultati vengono visti da tutti. Considera che le immagini satellitari sono spesso vecchie quindi è possibile che la strada sia stata costruita solo di recente.\n\nE' possibile eliminare una strada cliccando prima su di essa per selezionarla e poi sull'icona cestino o premendo il tasto 'Canc' della tastiera.\n\n### Creazione\n\nHai notato che in un punto della mappa dovrebbe esserci una strada ma non c'è ? Clicca sull'incona 'Linea' in alto a sinistra nell'editor o premi il tasto `2` per iniziare a disegnare una linea.\n\nCliccare sull'inizio della strada sulla mappa per iniziare a disegnarla. Se la strada  è unita ad una strada già esistente, iniziare cliccando nel punto dove sono connesse.\n\nQuindi cliccare i nuovi punti lungo la strada in modo che segua il percorso giusto dettato dall'immagine satellitare o dai dati del GPS. Se la strada che stai disegnando attraversa un'altra strada, collegala cliccando sul punto di intersezione. Quando hai finito di disegnare fai doppio clic o premi 'Invio' o 'Enter' sulla tua tastiera.\n",
         "gps": "# GPS\n\nI dati provenienti dal GPS sono la sorgente dati più sicura per OpenStreetMap. Questo editor\nsupporta i tracciati locali - i file `.gpx` che si trovano sul vostro computer locale.  E' possibile raccogliere questo tipo di tracciati GPS con un gran numero di applicazioni per smartphone o tramite dispositivi GPS personali.\n\nPer informazioni su come effettuare un rilevamento GPS è possibile leggere [Rilevamenti con un GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPer utilizzare un tracciato GPX al fine di effettuare una mappatura, trascinare il file GPX sull'editor di mappe. Se viene riconosciuto verrà aggiunto alla mappa ed evidenziato tramite una linea verde chiaro. Cliccare sul menu 'Impostazioni sfondo' che si trova sulla sinitra per abilitare, disabilitare o zoomare il livello creato dal file GPX.\n\nIl tracciato GPX non viene caricato direttamente su OpenStreetMap - il modo migliore di utilizzarlo è quello di disegnare sulla mappa usando il tracciato come guida per le nuove funzionalità che si deve aggiungere.\n\\n",
         "imagery": "# Immagini satellitari\n\nLe immagini satellitari sono una risorsa importante per le lavorare con le mappe. Tramite il menu sulla sinistra 'Impostazioni dello sfondo' sono disponibili varie immagini, ad es. quelle dei voli a bassa quota, le viste satellitari e altre sorgenti combinate liberamente.\n\nNell'editor viene visualizzato, per impostazione predefinita, il livello satellitare di [Bing Maps](http://www.bing.com/maps/) , ma non appena vi muoverete sulla mappa ed effettuerete degli zoom in altre aree, saranno disponibili nuove sorgenti. Alcuni paesi, come ad esempio gli Stati Uniti, la Francia e la Danimarca dispongono di immagini di altissima qualità in alcune aree.\n\nLe immagini talvolta non sono ben allineate ai dati della mappa a causa di errori compiuti dal fornitore di immagini. Se vedete molte strade spostate rispetto allo sfondo, non muovetele immediatamente per allinearle allo sfondo. Piuttosto potete allineare le immagini in modo che combacino con i dati esistenti facendo clic su 'Allinea' nella parte bassa del riquardo delle 'Impostazioni dello sfondo'.\n",
-        "addresses": "# Indirizzi stradali\n\nGli indirizzi sono tra le informazioni più utili per una mappa.\n\nNonostante gli indirizzi siano spesso rappresentati come parte delle strade, in OpenStreetMap\nvengono memorizzati come attributi degli edifici e dei luoghi lungo le strade.\n\nPotrai aggiungere informazioni sull'indirizzo a dei luoghi mappati come contorni di edificio così come a quelli mappati come singoli punti. La sorgente ottimale dei dati degli indirizzi è un rilevamento per strada o la conoscenza personale dato che copiare da sorgenti commerciali come ad es. Google Maps è severamente vietato.\n",
+        "addresses": "# Indirizzi stradali\n\nGli indirizzi sono tra le informazioni più utili per una mappa.\n\nNonostante gli indirizzi siano spesso rappresentati come parte delle strade, in OpenStreetMap\nvengono memorizzati come attributi degli edifici e dei luoghi lungo le strade.\n\nPotrai aggiungere informazioni sull'indirizzo a dei luoghi mappati come contorni di edificio\ncosì come a quelli mappati come singoli punti. La sorgente ottimale dei dati degli indirizzi\nè un rilevamento per strada o la conoscenza personale dato che copiare da sorgenti\ncommerciali come ad es. Google Maps è severamente vietato.\n",
         "inspector": "# Utilizzo dell'inspector\n\nL'inspector è quell'elemento dell'interfaccia utente sulla parte destra della pagina che appare quando viene selezionata una funzionalità e che consente di modificarne i dettagli.\n\n### Selezione di un tipo di funzionalità\n\nDopo che è stato aggiunto un punto, una linea o un'area, è possibile scegliere quale tipo di caratteristica abbia, come ad esempio se si tratta di una strada principale o una strada residenziale, di un supermarket o di un caffè.\nL'inspector visualizzerà i pulsanti per le caratteristiche più comuni e sarà possibile trovarne altre semplicemente digitando la caratteristica voluta nella casella di ricerca.\n\nFare clic sulla 'i' che si trova nell'angolo in basso a destra del pulsante per saperne di più. Fare clic su un pulsante per scegliere quel tipo.\n\n### Utilizzo di Form e di Tag di modifica\n\nDopo aver scelto un tipo di caratteristica o quando si è selezionato una caratteristica per la quale è già stato assegnato un tipo, l'inspector mostrerà i campi con i dettagli come ad esempio il nome e l'indirizzo.\n\nAl di sotto dei campi è possibile fare clic sulle icone per aggiungere ulteriori dettagli come ad es. informazioni [Wikipedia](http://www.wikipedia.org/), accesso consentito alle carrozzine, e altro.\n\nSotto l'inspector è possibile fare clic su 'Tag aggiuntivi' per aggiungere arbitrariamente altri tag all'elemento. [Taginfo](http://taginfo.openstreetmap.org/) è una buona risorsa per imparare qualcosa sulle combinazioni di tag più comuni.\n\nLe modifiche effettuate nell'inspector vengono applicate automaticamente alla mappa.\nE' possibile annullarle in ogni momento cliccando semplicemente sul pulsante 'Ripristina'.\n\n### Chiusura dell'inspector\n\nE' possibile chiudere l'inspector sia facendo clic sul pulsante chiudi posizionato in alto a destra, sia premendo il tasto 'Esc', che facendo clic sulla mappa.\n\\n",
         "buildings": "# Edifici\n\nOpenStreetMap è il più grande database online di edifici. Puoi creare e migliorare questo database.\n\n### Selezione\n\nPuoi selezionare un edificio cliccando sul suo bordo. Ciò evidenzierà l'edificio e aprirà un piccolo menu degli strumenti ed una barra laterale contenente ulteriori informazioni sull'edificio.\n\n### Modifica\n\nTalvolta gli edifici sono posizionati in maniera errata o hanno tag incorretti.\n\nPer spostare un edificio, selezionalo, quindi clicca sullo strumento 'Sposta'. Sposta il mouse per traslare l'edificio, clicca nuovamente quando è nel posto giusto.\n\nPer migliorare la forma di un edificio, clicca e sposta i nodi che formano il suo contorno in una posizione corretta.\n\n### Creazione\n\nUna delle principali diatribe sulla aggiunta degli edifici alla mappa riguarda il fatto che OpenStreetMap permette di creare edifici come aree o come singoli punti. La regola generale in questi casi è di _mappare un edificio come un'area quando possibile_, e di mappare compagnie, case, amenità e altri oggetti che operano nell'edificio come punti all'interno della forma dell'edificio.\n\nInizia a disegnare un edificio come una forma cliccando sul pulsante 'Area' nella parte alta a sinistra dell'interfaccia, e termina premendo 'Invio' sulla tastiera o cliccando sul primo nodo che hai disegnato per chiudere la forma.\n\n### Eliminazione\n\nSe un edificio è completamente sbagliato - non è presente nelle immagini satellitari e possibilmente hai controllato di persona che esso non esista davvero - puoi eliminarlo, in modo da toglierlo dalla mappa. Sii cauto quando elimini un elemento - come ogni modifica, i risultati sono visibili a tutti e le immagini satellitari sono spesso datate, perciò l'edificio potrebbe essere stato costruito nel frattempo.\n\nPuoi eliminare un edificio cliccandoci sopra per selezionarlo, quindi cliccando sull'icona del cestino o premendo il tasto 'Canc' sulla tastiera.\n\n"
     },
@@ -311,7 +315,7 @@
             "title": "Punti",
             "add": "I punti possono essere usati per rappresentare elementi come negozi, ristoranti e monumenti. Indicano un luogo specifico e descrivono cos'è. **Clicca il bottone Punto per aggiungere un nuovo punto.**",
             "place": "Il punto può essere piazzato cliccando sulla mappa. **Piazza il punto sull'edificio.**",
-            "search": "Ci sono molti elementi che possono essere rappresentati da un punto. Il punto che hai appena creato è un Caffè. **Cerca 'Caffè'**",
+            "search": "Ci sono diversi elementi che possono essere rappresentati da punti. Il punto che hai appena aggiunto è un Caffè. **Cerca '{name}'**",
             "choose": "**Scegli un Caffè dalla lista.**",
             "describe": "Ora il punto è marcato come Caffè. Usando l'editor dell'elemento possiamo aggiungere più informazioni sull'elemento stesso. **Aggiungi un nome**",
             "close": "L'editor dell'elemento può essere chiuso cliccando sul pulsante chiudi. **Chiudi l'editor dell'elemento**",
@@ -325,7 +329,7 @@
             "add": "Le aree sono un modo più dettagliato di rappresentare degli elementi. Esse forniscono le informazioni circa il contorno fisico di un oggetto. Le aree possono essere usate per quasi tutti i casi in cui potresti usare un punto, e sono spesso da preferirsi. **Clicca il pulsante Area per aggiungere una nuova area.**",
             "corner": "Le aree devono essere disegnate posizionando i punti che segnano il confine dell'area. **Posizionare il punto di partenza a uno degli angoli del parchetto.**",
             "place": "Disegna l'area posizionando più punti. Terminare l'area cliccando sul punto di partenza. **Disegnare un'area per il parchetto.**",
-            "search": "**Cerca il parco giochi**",
+            "search": "**Cerca per '{name}'.**",
             "choose": "**Scegli un Parco giochi dalla lista.**",
             "describe": "**Aggiungi un nome e chiudi l'editor dell'elemento**"
         },
@@ -432,6 +436,9 @@
                 "label": "Tipo"
             },
             "bicycle_parking": {
+                "label": "Tipo"
+            },
+            "boundary": {
                 "label": "Tipo"
             },
             "building": {
@@ -615,7 +622,13 @@
                     "taoist": "Taoista"
                 }
             },
+            "restriction": {
+                "label": "Tipo"
+            },
             "route": {
+                "label": "Tipo"
+            },
+            "route_master": {
                 "label": "Tipo"
             },
             "sac_scale": {
@@ -730,7 +743,8 @@
                 "name": "ATM"
             },
             "amenity/bank": {
-                "name": "Banca"
+                "name": "Banca",
+                "terms": "scrigno,ufficio contabile,cooperativa di credito,deposito,erario,fondo,tesoro,società di investimento,archivio,riserva,cassetta di sicurezza,risparmi,azioni,scorte,negozio,magazzino,sconto,tesoreria, società fiduciaria,cassaforte"
             },
             "amenity/bar": {
                 "name": "Bar"
@@ -746,13 +760,14 @@
             },
             "amenity/cafe": {
                 "name": "Caffè",
-                "terms": "caffè,te,bar"
+                "terms": "caffè,tè,bar"
             },
             "amenity/car_wash": {
                 "name": "Autolavaggio"
             },
             "amenity/cinema": {
-                "name": "Cinema"
+                "name": "Cinema",
+                "terms": "cinema,cine,film,cinematografo,proiezione"
             },
             "amenity/college": {
                 "name": "College"
@@ -802,6 +817,10 @@
                 "name": "Luogo di culto",
                 "terms": "abbazia,basilica,sinagoga,cattedrale,presbiterio,cappella,chiesa,casa di Dio,luogo di preghiera,luogo di culto,missione,moschea,oratorio,parrocchia,sacello,edicola votiva,tabernacolo,tempio"
             },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Tempio Buddista",
+                "terms": "stupa,vihara,monastero,tempio,pagoda,zendo,dojo"
+            },
             "amenity/place_of_worship/christian": {
                 "name": "Chiesa",
                 "terms": "cristiano,abbazia,basilica,cattedrale,presbiterio,cappella,chiesa,casa di Dio,luogo di preghiera,luogo di culto,missione,oratorio,parrocchia,sacello,edicola votiva,tabernacolo,tempio"
@@ -815,7 +834,8 @@
                 "terms": "musulmana,moschea"
             },
             "amenity/police": {
-                "name": "Forze di polizia"
+                "name": "Forze di polizia",
+                "terms": "poliziotto,sbirro,investigatore privato,piedipiatti,divisa,ispettore,gendarme,agente di polizia"
             },
             "amenity/post_box": {
                 "name": "Buca delle lettere",
@@ -828,7 +848,8 @@
                 "name": "Pub"
             },
             "amenity/restaurant": {
-                "name": "Ristorante"
+                "name": "Ristorante",
+                "terms": "bar,caffetteria,caffè,ristorante self-service,braceria,trattoria,negozio di ciambelle,bettola,griglieria,venditore di hamburger,venditore di hotdog,pizzeria"
             },
             "amenity/school": {
                 "name": "Scuola",
@@ -952,7 +973,8 @@
                 "name": "Percorso ciclabile"
             },
             "highway/footway": {
-                "name": "Percorso pedonale"
+                "name": "Percorso pedonale",
+                "terms": "percorso battuto,viale,pista pedonale,strada,corsia,percorso,sentiero,cammino,binario,rotaia,strada,rotta,via,traiettoria,camminata"
             },
             "highway/living_street": {
                 "name": "Strada residenziale prevalentemente pedonale"
@@ -1136,7 +1158,8 @@
                 "name": "Marina"
             },
             "leisure/park": {
-                "name": "Parco"
+                "name": "Parco",
+                "terms": "lungomare,tenuta,foresta,giardino,prato,verde,terreni,lotto,pascolo,parco,posto,parco giochi,area ricreativa,piazza,giardino pubblico,bosco"
             },
             "leisure/pitch": {
                 "name": "Campo da gioco"
@@ -1500,7 +1523,8 @@
                 "name": "Negozio di cancelleria"
             },
             "shop/supermarket": {
-                "name": "Supermercato"
+                "name": "Supermercato",
+                "terms": "bazar,boutique,negozio,discount,mercato delle pulci,galleria,centro commerciale,mercato,outlet,chiosco,supermercato,negozio dell'usato"
             },
             "shop/toys": {
                 "name": "Negozio di giocattoli"
@@ -1576,6 +1600,9 @@
             "type/boundary": {
                 "name": "Confine"
             },
+            "type/boundary/administrative": {
+                "name": "Confine Amministrativo"
+            },
             "type/multipolygon": {
                 "name": "Multipoligono"
             },
@@ -1615,6 +1642,9 @@
             "type/route/tram": {
                 "name": "Linea tramviaria"
             },
+            "type/route_master": {
+                "name": "Percorso Principale"
+            },
             "vertex": {
                 "name": "Altro"
             },
@@ -1641,7 +1671,8 @@
                 "name": "Argine"
             },
             "waterway/stream": {
-                "name": "Torrente"
+                "name": "Torrente",
+                "terms": "fiumiciattolo,ramo,ruscello,corso,torrente,corrente,deriva,flusso,rivolo,rigagnolo"
             },
             "waterway/weir": {
                 "name": "Sbarramento"

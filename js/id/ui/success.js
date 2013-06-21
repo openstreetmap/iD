@@ -7,7 +7,7 @@ iD.ui.Success = function(context) {
             ' ' + context.connection().changesetURL(changeset.id);
 
         var header = selection.append('div')
-            .attr('class', 'header fillL');
+            .attr('class', 'header');
 
         header.append('button')
             .attr('class', 'fr')

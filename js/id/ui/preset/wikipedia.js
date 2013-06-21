@@ -69,7 +69,7 @@ iD.ui.preset.wikipedia = function(field, context) {
     }
 
     function changeLang() {
-        var value = lang.property('value').toLowerCase();
+        var value = lang.value().toLowerCase();
         language = _.find(iD.data.wikipedia, function(d) {
             return d[0].toLowerCase() === value ||
                 d[1].toLowerCase() === value ||
@@ -77,7 +77,7 @@ iD.ui.preset.wikipedia = function(field, context) {
         }) || iD.data.wikipedia[0];
 
         if (value !== language[0]) {
-            lang.property('value', language[1]);
+            lang.value(language[1]);
         }
 
         change();
@@ -86,7 +86,7 @@ iD.ui.preset.wikipedia = function(field, context) {
     function change() {
         var t = {};
 
-        var value = title.property('value');
+        var value = title.value();
 
         var m = value.match('http://([a-z]+)\\.wikipedia.org/wiki/(.*)'),
             newlanguage = m && m[1] && m[2] && _.find(iD.data.wikipedia, function(d) {
@@ -98,7 +98,7 @@ iD.ui.preset.wikipedia = function(field, context) {
             value = m[2].replace(/_/g, ' ');
             value = value.slice(0, 1).toUpperCase() + value.slice(1);
             language = newlanguage;
-            lang.property('value', language[0]);
+            lang.value(language[0]);
         }
 
         t[field.key] = value ? language[2] + ':' + value : undefined;
@@ -115,14 +115,14 @@ iD.ui.preset.wikipedia = function(field, context) {
 
         // value in correct format
         if (language) {
-            lang.property('value', language[1]);
-            title.property('value', m[2]);
+            lang.value(language[1]);
+            title.value(m[2]);
             link.attr('href', 'http://' + m[1] + '.wikipedia.org/wiki/' + m[2]);
 
         // unrecognized value format
         } else {
-            lang.property('value', 'English');
-            title.property('value', tags[field.key] || '');
+            lang.value('English');
+            title.value(tags[field.key] || '');
             language = iD.data.wikipedia[0];
             link.attr('href', 'http://en.wikipedia.org/wiki/Special:Search?search=' + tags[field.key]);
         }

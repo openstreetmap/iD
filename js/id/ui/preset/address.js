@@ -90,11 +90,11 @@ iD.ui.preset.address = function(field, context) {
 
     function change() {
         event.change({
-            'addr:housename': housename.property('value') || undefined,
-            'addr:housenumber': housenumber.property('value') || undefined,
-            'addr:street': street.property('value') || undefined,
-            'addr:city': city.property('value') || undefined,
-            'addr:postcode': postcode.property('value') || undefined
+            'addr:housename': housename.value() || undefined,
+            'addr:housenumber': housenumber.value() || undefined,
+            'addr:street': street.value() || undefined,
+            'addr:city': city.value() || undefined,
+            'addr:postcode': postcode.value() || undefined
         });
     }
 
@@ -105,12 +105,11 @@ iD.ui.preset.address = function(field, context) {
     };
 
     address.tags = function(tags) {
-        housename.property('value', tags['addr:housename'] || '');
-        housenumber.property('value', tags['addr:housenumber'] || '');
-        street.property('value', tags['addr:street'] || '');
-        city.property('value', tags['addr:city'] || '');
-        postcode.property('value', tags['addr:postcode'] || '');
-        return address;
+        housename.value(tags['addr:housename'] || '');
+        housenumber.value(tags['addr:housenumber'] || '');
+        street.value(tags['addr:street'] || '');
+        city.value(tags['addr:city'] || '');
+        postcode.value(tags['addr:postcode'] || '');
     };
 
     address.focus = function() {

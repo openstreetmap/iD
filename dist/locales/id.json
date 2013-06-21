@@ -89,6 +89,9 @@
             },
             "incomplete_relation": "Fitur ini tidak bisa dihapus karena belum sepenuhnya terunduh."
         },
+        "delete_member": {
+            "annotation": "Buang anggota dari sebuah relasi."
+        },
         "connect": {
             "annotation": {
                 "point": "Menyambungkan sebuah jalan ke sebuah titik.",
@@ -169,6 +172,7 @@
         "localized_translation_language": "Pilih Bahasa",
         "localized_translation_name": "Nama"
     },
+    "zoom_in_edit": "Perbesar untuk bisa menyunting",
     "logout": "keluar",
     "loading_auth": "Menghubungkan dengan OpenStreetMap...",
     "report_a_bug": "laporkan sebuah kerusakan",
@@ -181,7 +185,6 @@
         "title": "Simpan Perubahan",
         "description_placeholder": "Deskripsi singkat kontribusi anda",
         "message_label": "Sampaikan pesan",
-        "upload_explanation": "Perubahan yang anda unggah sebagai {user} akan terlihat di seluruh peta yang menggunakan data OpenStreetMap.",
         "save": "Simpan",
         "cancel": "Batal",
         "warnings": "Peringatan",
@@ -205,7 +208,6 @@
         "no_documentation_combination": "Tidak ada dokumentasi yang tersedia untuk kombinasi tanda ini",
         "no_documentation_key": "Tidak ada dokumentasi tersedia untuk kunci ini",
         "show_more": "Tampilkan Lainnya",
-        "new_tag": "Penanda Baru",
         "view_on_osm": "Lihat di openstreetmap.org",
         "all_tags": "Semua Tags",
         "all_members": "Semua anggota",
@@ -214,8 +216,10 @@
         "choose": "Pilih Tipe Fitur",
         "results": "{n}hasil untuk {search}",
         "reference": "Lihat di OpenStreetMap Wiki",
+        "back_tooltip": "Ubah Fitur",
         "remove": "Buang",
         "search": "Cari",
+        "unknown": "Tidak diketahui",
         "incomplete": "<tak terunduh>"
     },
     "background": {
@@ -254,6 +258,7 @@
         "start": "Sunting Sekarang"
     },
     "source_switch": {
+        "live": "terhubung",
         "lose_changes": "Perubahan anda belum disimpan. Mengganti server peta akan membatalkan perubahan. Anda yakin akan mengganti server?",
         "dev": "dev"
     },
@@ -281,6 +286,7 @@
     "help": {
         "title": "Bantuan",
         "help": "#Bantuan\n\nIni adalah penyunting untuk [OpenStreetMap] (http://www.openstreetmap.org/), peta dunia gratis dan bisa disunting. Anda dapat menggunakannya dengan menambahkan dan memperbarui data di area anda, membangun sebuah peta sumber-terbuka dan data-terbuka yang lebih baik untuk semua orang.\n\nPerubahan yang anda buat akan terlihat ke semua orang yang menggunakan OpenStreetMap. Untuk melakukan penyutingan, anda membutuhkan [free OpenStreetMap account] (https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) adalah proyek kolaborasi dengan [kode sumber tersedia di GitHub](http://github.com/systemed/iD).\n",
+        "editing_saving": "# Sunting & Simpan\n\nPenyunting ini dirancang untuk berkerja secara daring, dan anda mengaksesnya\nmelalui website sekarang.\n\n### Memilih Fitur\n\nUntuk memilih fitur peta, seperti jalan atau titik menarik, klik\npada titik tersebut di peta. Hal ini akan membuat fitur yang terpilih lebih cerah, terbukanya panel berisi\nrincian titik tersebut, dan menampilkan menu yang bisa dipilih terhadap fitur tersebut.\n\nBeberapa fitur dapat terpilih bersamaan dengan menahan kunci 'Shift', mengklik, dan\nmenggeser pada peta. Maka akan terpilih semua fitur di dalam kotak yang tergambar, memungkinkan\nanda melakukan sesuatu untuk beberapa fitur sekaligus.\n\n### Simpan Suntingan\n\nKetika anda melakukan perubahan seperti menyunting jalan, bangunan, dan tempat, ini akan\ntersimpan lokal sementara sampai anda menyimpannya ke server. Jangan khawatir jika anda melakukan\nkesalahan - anda dapat membatalkan perubahan dengan mengklik tombol Undo, dan redo\nperubahan dengan mengklik tombol redo.\n\nKlik 'Simpan' untuk menyelesaikan kelompok perubahan - seperti, jika anda telah melengkapi\nsebuah area di kota dan akan memulai di area baru lain. Anda memiliki kesempatan \nuntuk meninjau kembali apa yang telah dilakukan, dan penyunting akan memberikan saran berguna\ndan peringatan jika sesuatu yang tidak sesuai terjadi mengenai perubahan.\n\nJika semua terlihat baik, anda dapat memasukan penjelasan pendek mengenai perubahan\nyang anda buat, dan klik 'Simpan' lagi untuk mengirim perubahan\n[OpenStreetMap.org](http://www.openstreetmap.org/), dimana mereka bisa \nterlihat oleh seluruh pengguna dan tersedia bagi yang lain untuk dibangun dan diperbaiki.\n\nJika anda tidak bisa menyelesaikan suntingan dalam sekali waktu, anda dapat meninggalkan jendela\npenyunting dan kembali (pada peramban dan komputer yang sama), dan aplikasi penyunting akan \nmenawarkan untuk mengembalikan kembali apa yang sudah dikerjakan.\n",
         "gps": "# GPS⏎\n⏎\nData GPS adalah sumber data paling terpercaya untuk OpenStreetMap. Penyunting ini⏎\nmendukung penyusuran lokal file - `.gpx` pada komputer anda. Anda dapat mengumpulkan⏎\npenyusuran GPS seperti ini dengan banyak aplikasi handphone pintar yang sebaik⏎\nalat GPS personal.⏎\n⏎\nInformasi mengenai bagaimana melakukan sebuah survei GPS, baca⏎\n[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).⏎\n⏎\nUntuk menggunakan trek GPX untuk pemetaan, geser dan letakan file GPX ke dalam penyunting peta.⏎\nJika dikenali, file tersebut akan ditambahkan ke peta dan tampil sebagai garis hijau cerah.⏎\nKlik pada pilihan 'Pengaturan Latar' di sisi kiri untuk membolehkan, melumpuhkan,⏎\natau memperbesar tampilan ke berkas GPX baru tersebut.⏎\n⏎\nTrek GPX tidak terunggah langsung ke OpenStreetMap - cara terbaik untuk⏎\nmenggunakannya adalah menggambar ulangnya di peta, gunakan sebagai panduan untuk fitur baru⏎\nyang anda tambahkan.⏎\n",
         "imagery": "# Citra⏎\n⏎\nCitra Foto Udara menjadi sumber penting untuk pemetaan. Kombinasi dari⏎\npemotretan pesawat, pandangan satelit, dan sumber gabungan lain yang tersedia⏎\ndi penyunting ada di pilihan 'Pengaturan Latar' di sebelah kiri.⏎\n⏎\nBiasanya lapisan satelit [Bing Maps](http://www.bing.com/maps/) ditampilkan di⏎\ndi penyunting ini, tapi ketika anda geser atau perbesar tampilan di suatu wilayah baru,⏎\nsumber baru lain juga bisa tersedia. Di beberapa negara, seperti Amerika Serikat,⏎\nPerancis, dan Denmark memiliki citra berkualitas tinggi yang tersedia di beberapa area.⏎\n⏎\nCitra kadang melenceng dari data peta karena ada kesalahan pada⏎\npenyedia data citra. Jika anda melihat banyak jalan yang bergeser dari latarnya,⏎\njangan semerta-merta memindahkan mereka semua ke latar yang pas. Namun, anda bisa menyesuaikan⏎\ncitranya agar pas dengan data yang ada dengan mengklik 'Fix alignment' pada⏎\nbagian bawah Pengaturan Latar.⏎\n"
     },
@@ -288,13 +294,14 @@
         "navigation": {
             "title": "Navigasi",
             "drag": "Area peta utama menampilkan data OpenStreetMap pada bagian atas dari latar. Anda dapat bernavigasi dengan menggeser dan mengskrol, seperti peta web lainnya. **Geser petanya!**",
+            "select": "Fitur peta dapat diwakili dengan tiga cara: dengan titik, garis, atau area. Semua fitur dapat dipilih dengan mengklik mereka. **Klik sebuah titik untuk memilihnya.**",
             "header": "Header menunjukan tipe fitur.",
             "pane": "Ketika sebuah fitur terpilih, fitur penyunting akan tampil. Header menunjukan tipe fitur dan panel utama yang menunjukan atribut fitur, seperti nama dan alamat. **Tutup fitur penyunting dengan mengklik tombol tutup di bagian kanan atas.**"
         },
         "points": {
             "title": "Titik",
+            "add": "Titik dapat digunakan untuk mewakili fitur seperti toko, restoran, dan monumen. Mereka menadakan lokasi pasti, dan menggambarkan ada apa di sana. **Klik tombol Titik untuk menambahkan titik baru.**",
             "place": "Titik bisa diletakkan dengan mengklik pada peta. **Letakan titik di atap gedungnya.**",
-            "search": "Terdapat banyak fitur berbeda yang bisa ditampilkan dengan titik. Titik yang baru saja anda tambahkan adalah sebuah Cafe. **Carilah 'cafe' **",
             "choose": "**Pilih Cafe dari daftar.**",
             "describe": "Kini titik bisa ditandai sebagai cafe. Gunakan penyunting fitur, kita dapat tambahkan informasi lebih tentang fitur. **Tambahkan sebuah nama**",
             "close": "Penyunting fitur dapat ditutup dengan mengklik tombol tutup. **Tutup penyunting fitur**",
@@ -308,7 +315,6 @@
             "add": "Area merupakan bentuk lain yang lebih rinci untuk mewakili sebuah fitur. Mereka memberikan informasi batas wilayah sebuah fitur. Area dapat digunakan untuk banyak tipe fitur yang diwakili titik, bahkan sering lebih disarankan. **Klik tombol Area untuk menambahkan sebuah area baru. **",
             "corner": "Area tergambar dengan meletakkan simpul yang menandakan batas suatu area. **Letakan simpul pemula di satu sudut dari tempat-bermain.**",
             "place": "Gambar area dengan meletakan lebih banyak simpul. Selesaikan area dengan mengklik pada simpul awal. **Gambar sebuah area untuk tempat bermain.**",
-            "search": "**Cari Tempat bermain.**",
             "choose": "**Pilih Tempat-bermain dari daftar.**",
             "describe": "**Tambahkan nama, dan tutup fitur penyunting**"
         },

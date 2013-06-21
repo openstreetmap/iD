@@ -351,6 +351,9 @@ en:
       amenity/place_of_worship: 
         name: Place of Worship
         terms: "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple"
+      amenity/place_of_worship/buddhist: 
+        name: Buddhist Temple
+        terms: "stupa,vihara,monastery,temple,pagoda,zendo,dojo"
       amenity/place_of_worship/christian: 
         name: Church
         terms: "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"

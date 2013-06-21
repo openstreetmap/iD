@@ -36,7 +36,8 @@ iD.Entity.key = function(entity) {
 
 iD.Entity.areaPath = d3.geo.path()
     .projection(d3.geo.mercator()
-        .scale(12016420.517592335));
+        .scale(12016420.517592335)
+        .precision(0));
 
 iD.Entity.prototype = {
     tags: {},

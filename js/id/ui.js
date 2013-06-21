@@ -13,32 +13,36 @@ iD.ui = function(context) {
             map.centerZoom([-77.02271, 38.90085], 20);
         }
 
-        container.append('div')
+        var sidebar = container.append('div')
             .attr('id', 'sidebar')
             .attr('class', 'col4')
-            .call(ui.sidebar);
+
+        var bar = sidebar.append('div')
+            .attr('id', 'bar');
+
+        paneWrap = sidebar.append('div')
+            .attr('class','panes');
+
+        paneWrap.call(ui.sidebar);
 
         var content = container.append('div')
             .attr('id', 'content');
-
-        var bar = content.append('div')
-            .attr('id', 'bar')
-            .attr('class', 'fillD');
 
         var m = content.append('div')
             .attr('id', 'map')
             .call(map);
 
-        var limiter = bar.append('div')
-            .attr('class', 'limiter');
+        bar.append('div')
+            .attr('class', 'mode-buttons col9')
+            .call(iD.ui.Modes(context), bar);
 
-        limiter.append('div')
-            .attr('class', 'button-wrap joined col3')
-            .call(iD.ui.Modes(context), limiter);
-
-        limiter.append('div')
-            .attr('class', 'button-wrap joined col1')
+        bar.append('div')
+            .attr('class', 'undoredo-buttons col3')
             .call(iD.ui.UndoRedo(context));
+
+       bar.append('div')
+            .attr('class', 'button-wrap save-button col3')
+            .call(iD.ui.Save(context));
 
         bar.append('div')
             .attr('class', 'spinner')
@@ -53,7 +57,7 @@ iD.ui = function(context) {
             .style('display', 'none')
             .attr('class', 'help-wrap fillL col5 content');
 
-        var controls = bar.append('div')
+        var controls = content.append('div')
             .attr('class', 'map-controls');
 
         controls.append('div')
@@ -84,7 +88,7 @@ iD.ui = function(context) {
         };
 
         d3.select(window).on('resize.editor', function() {
-            map.size(m.size());
+            map.dimensions(m.dimensions());
         });
 
         function pan(d) {

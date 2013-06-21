@@ -90,6 +90,9 @@
             },
             "incomplete_relation": "Tento objekt nelze smazat, protože je stažený jen částečně."
         },
+        "add_member": {
+            "annotation": "Přidán člen do relace."
+        },
         "delete_member": {
             "annotation": "Odstraněn člen z relace."
         },
@@ -186,7 +189,8 @@
         "title": "Uložit změny",
         "description_placeholder": "Stručný popis vašich úprav",
         "message_label": "Zpráva k publikaci",
-        "upload_explanation": "Změny provedené pod jménem {user} budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
+        "upload_explanation": "Vámi provedené změny budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
+        "upload_explanation_with_user": "Změny provedené pod jménem {user} budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
         "save": "Uložit",
         "cancel": "Storno",
         "warnings": "Varování",
@@ -210,7 +214,6 @@
         "no_documentation_combination": "K této kombinaci vlastností není k dispozici dokumentace",
         "no_documentation_key": "K tomuto klíči není k dispozici dokumentace",
         "show_more": "Zobrazit víc",
-        "new_tag": "Nová vlastnost",
         "view_on_osm": "Zobrazit na openstreetmap.org",
         "all_tags": "Všechny vlastnosti",
         "all_members": "Všechny prvky",
@@ -223,7 +226,8 @@
         "remove": "Odstranit",
         "search": "Hledat",
         "unknown": "Není známo",
-        "incomplete": "<nebylo staženo>"
+        "incomplete": "<nebylo staženo>",
+        "feature_list": "Seznam objektů"
     },
     "background": {
         "title": "Pozadí",
@@ -311,7 +315,7 @@
             "title": "Uzly",
             "add": "Reálné objekty jako obchody, hospody nebo rozcestníky můžete do mapy zanést pomocí uzlů. Uzly označují konkrétní bod, kde se něco nachází. **Klikněte na tlačítko Uzel a přidejte tak nový uzel.**",
             "place": "Uzel zanesete do mapy kliknutím. **Umístěte uzel do budovy.**",
-            "search": "Pomocí uzlů lze zachytit spoustu různých reálných objektů. Řekněme že vámi přidávaný bod je kavárna. **Dejte hledat 'Kavárna'.**",
+            "search": "Pomocí uzlů lze zachytit spoustu různých reálných objektů. Řekněme, že vámi přidávaný bod je kavárna. **Dejte hledat '{name}'.**",
             "choose": "**V seznamu zvolte Kavárnu.**",
             "describe": "Uzel je nyní označený jako kavárna. Pomocí editoru vlastností můžete přidat více detailů o objektu. **Přidejte jméno.**",
             "close": "Editor vlastností lze zavřít kliknutím na tlačítko. **Zavřete editor vlastností.**",
@@ -325,7 +329,7 @@
             "add": "Reálný objekt lze podrobněji reprezentovat pomocí plochy, která opisuje jeho hranici. Pro většinu typů objektů lze místo uzlu použít plochu - a často je to tak lepší. **Klikněte na tlačítko Plocha a přidejte tak novou plochu.**",
             "corner": "Plochu nakreslíte tak, že postupně nanášíte jeden uzel za druhým podél hranice plochy. **Umístěte první uzel na jeden z rohů hřiště.**",
             "place": "Plochu zakreslíte tak, že přidáte další uzly. Kreslení zakončíte kliknutím na počáteční uzel. **Nakreslete plochu hřiště.**",
-            "search": "**Dejte hledat Dětské hřiště.**",
+            "search": "**Dejte hledat '{name}'.**",
             "choose": "**V seznamu zvolte Hřiště.**",
             "describe": "**Pridejte název a zavřete editor vlastností.**"
         },
@@ -432,6 +436,9 @@
                 "label": "Typ"
             },
             "bicycle_parking": {
+                "label": "Typ"
+            },
+            "boundary": {
                 "label": "Typ"
             },
             "building": {
@@ -615,7 +622,13 @@
                     "taoist": "Taoismus"
                 }
             },
+            "restriction": {
+                "label": "Typ"
+            },
             "route": {
+                "label": "Typ"
+            },
+            "route_master": {
                 "label": "Typ"
             },
             "sac_scale": {
@@ -803,6 +816,10 @@
             "amenity/place_of_worship": {
                 "name": "Chrám",
                 "terms": "křesťanský,křesťanství,kostel,kostelík,chrám,bazilika,katedrála,kaple,kaplička,chrám páně,rotunda,farnost,diecéze,mešita,minaret,synagoga,pagoda,stúpa,oratorium,motlitebna,náboženský,náboženská,náboženské,sakrální,svatyně"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Budhistický chrám",
+                "terms": "stúpa,vihara,klášter,chrám,pagoda,zendo,dojo"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Kostel",
@@ -1583,6 +1600,9 @@
             "type/boundary": {
                 "name": "Hranice"
             },
+            "type/boundary/administrative": {
+                "name": "Administrativní hranice"
+            },
             "type/multipolygon": {
                 "name": "Multipolygon"
             },
@@ -1621,6 +1641,9 @@
             },
             "type/route/tram": {
                 "name": "Tramvajová trasa"
+            },
+            "type/route_master": {
+                "name": "Řídící relace trasy"
             },
             "vertex": {
                 "name": "Jiné"

@@ -1,18 +1,20 @@
 iD.ui.FeatureList = function(context) {
     function featureList(selection) {
         var header = selection.append('div')
-            .attr('class', 'header fillL cf');
+            .attr('class', 'header cf');
 
         header.append('h3')
             .text(t('inspector.feature_list'));
 
-        function keyup() {
+        function keypress() {
             var q = search.property('value');
             if (d3.event.keyCode === 13 && q.length) {
-                click(list.selectAll('.feature-list-item:first-child').datum());
-            } else {
-                drawList();
+                click(list.selectAll('.feature-list-item:first-child').datum().entity);
             }
+        }
+
+        function inputevent() {
+            drawList();
         }
 
         var searchWrap = selection.append('div')
@@ -21,7 +23,8 @@ iD.ui.FeatureList = function(context) {
         var search = searchWrap.append('input')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
-            .on('keyup', keyup);
+            .on('keypress', keypress)
+            .on('input', inputevent);
 
         searchWrap.append('span')
             .attr('class', 'icon search');
@@ -30,7 +33,7 @@ iD.ui.FeatureList = function(context) {
             .attr('class', 'inspector-body');
 
         var list = listWrap.append('div')
-            .attr('class', 'feature-list fillL cf');
+            .attr('class', 'feature-list cf');
 
         var footer = selection.append('div')
             .attr('class', 'footer');
@@ -51,46 +54,48 @@ iD.ui.FeatureList = function(context) {
             .append('span')
             .attr('class','icon bug');
 
-        drawList();
-
-        context.history()
-            .on('change.feature-list', drawList);
-
         context.map()
-            .on('drawn', drawList);
+            .on('drawn.feature-list', mapDrawn);
+
+        function mapDrawn(e) {
+            if (e.full) {
+                drawList();
+            }
+        }
 
         function features() {
-            var result = [],
+            var entities = {},
+                result = [],
                 graph = context.graph(),
                 q = search.property('value').toLowerCase();
 
-            if (!context.map().editable()) {
-                return result;
-            }
+            function addEntity(entity) {
+                if (entity.id in entities || result.length > 200)
+                    return;
 
-            var entities = context.intersects(context.extent());
-            for (var i = 0; i < entities.length; i++) {
-                var entity = entities[i];
+                entities[entity.id] = true;
 
-                if (entity.geometry(graph) === 'vertex')
-                    continue;
-
-                var preset = context.presets().match(entity, context.graph()),
+                var preset = context.presets().match(entity, graph),
                     name = iD.util.displayName(entity) || '';
 
-                if (q && name.toLowerCase().indexOf(q) === -1 &&
-                    preset.name().toLowerCase().indexOf(q) === -1)
-                    continue;
+                if (!q || name.toLowerCase().indexOf(q) >= 0 ||
+                    preset.name().toLowerCase().indexOf(q) >= 0) {
+                    result.push({
+                        entity: entity,
+                        geometry: context.geometry(entity.id),
+                        preset: preset,
+                        name: name
+                    });
+                }
 
-                result.push({
-                    entity: entity,
-                    geometry: context.geometry(entity.id),
-                    preset: preset,
-                    name: name
+                graph.parentRelations(entity).forEach(function(parent) {
+                    addEntity(parent);
                 });
+            }
 
-                if (result.length > 200)
-                    break;
+            var visible = context.surface().selectAll('.point, .line, .area')[0];
+            for (var i = 0; i < visible.length && result.length <= 200; i++) {
+                addEntity(visible[i].__data__);
             }
 
             return result;
@@ -104,15 +109,15 @@ iD.ui.FeatureList = function(context) {
 
             var enter = items.enter().append('button')
                 .attr('class', 'feature-list-item')
-                .call(iD.ui.PresetIcon()
-                    .geometry(function(d) { return d.geometry })
-                    .preset(function(d) { return d.preset; }))
                 .on('mouseover', function(d) { mouseover(d.entity); })
                 .on('mouseout', function(d) { mouseout(); })
                 .on('click', function(d) { click(d.entity); });
 
             var label = enter.append('div')
                 .attr('class', 'label');
+
+            label.append('span')
+                .attr('class', function(d) { return d.geometry + ' icon icon-pre-text'; });
 
             label.append('span')
                 .attr('class', 'entity-type')
@@ -133,15 +138,7 @@ iD.ui.FeatureList = function(context) {
         }
 
         function mouseover(entity) {
-            var selector = '.' + entity.id;
-
-            if (entity.type === 'relation') {
-                entity.members.forEach(function(member) {
-                    selector += ', .' + member.id;
-                });
-            }
-
-            context.surface().selectAll(selector)
+            context.surface().selectAll(iD.util.entityOrMemberSelector([entity.id], context.graph()))
                 .classed('hover', true);
         }
 

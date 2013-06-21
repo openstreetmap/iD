@@ -90,6 +90,9 @@
             },
             "incomplete_relation": "Az elem nem törölhető, mert nem lett teljesen letöltve."
         },
+        "add_member": {
+            "annotation": "Tag hozzáadva a kapcsolathoz"
+        },
         "delete_member": {
             "annotation": "Egy tag eltávolítva a kapcsolatból"
         },
@@ -186,7 +189,6 @@
         "title": "Módosítások Mentése",
         "description_placeholder": "A közreműködésed rövid összefoglalója",
         "message_label": "Módosítási üzenet",
-        "upload_explanation": "A módosításaid, amiket {user} néven töltesz fel, az összes OpenStreetMap adatokat használó térképen megjelenik.",
         "save": "Mentés",
         "cancel": "Mégsem",
         "warnings": "Figyelmeztetések",
@@ -210,7 +212,6 @@
         "no_documentation_combination": "Ehhez a címkekombinációhoz nem érhető el dokumentáció",
         "no_documentation_key": "Ehhez a kulcshoz nem érhető el dokumentáció",
         "show_more": "Mutass többet",
-        "new_tag": "Új címke",
         "view_on_osm": "Megtekintés openstreetmap.org-on",
         "all_tags": "Összes címke",
         "all_members": "Összes kapcsolattag",
@@ -223,7 +224,8 @@
         "remove": "Eltávolítás",
         "search": "Keresés",
         "unknown": "Ismeretlen",
-        "incomplete": "<nincs letöltve>"
+        "incomplete": "<nincs letöltve>",
+        "feature_list": "Elemlista"
     },
     "background": {
         "title": "Háttér",
@@ -294,7 +296,6 @@
         "roads": "# Utak\n\nA szerkesztőprogrammal tudsz utakat létrehozni, javítani és törölni. Az utak \nsokfélék lehetnek: ösvények, közutak, kerékpárutak, stb. – minden gyakran \nkeresztezett szakaszt térképezni kell.\n\n### Kiválasztás\n\nÚt kiválasztásához kattints rá. Meg fog jelenni kiemelve, mellette egy kis eszköztár \nmenüvel és egy oldalsávval, ami további információkat mutat az útról.\n\n### Módosítás\n\nGyakran láthatod, hogy az út nincs a mögötte lévő légifelvételhez, vagy GPS \nnyomvonalhoz igazítva. Ha megbizonyosodtál arról, hogy nem a légifelvétel téved, \nhelyreigazíthatod az utakat.\n\nElőször is kattints a módosítandó útra. Ettől kiemelődik az út és megjelennek a\nkezelőpontjai, amiket mozgatni tudsz a megfelelő helyre. Ha új kezelőpontot \nszeretnél hozzáadni, hogy részletesebb utat kapj, kattints duplán az útnak egy \nolyan részére, ahol még nincs pont.\n\nHa egy út egy másik útba csatlakozik, de a térképen nincsenek összekapcsolva, \nhúzd az egyik út kezelőpontját a másik útra, és össze fognak kapcsolódni. \nAz utak megfelelő összekapcsolása a térképen nagyon fontos, útvonaltervezéshez \nlétfontosságú.\n\nHasználhatod a 'Mozgatás' eszközt is, vagy megnyomhatod az 'M' gyorsbillentyűt, ha az \naz egész utat szeretnéd mozgatni. Mozgatás után kattintással rögzítheted az új helyén.\n\n### Törlés\n\nHa egy út teljesen hibás – ha azt látod, hogy egyáltalán nincs rajta a légifelvételen, \nés biztos vagy benne, hogy nem is létezik –, törölheted, amivel eltávolítod a térképről. \nLegyél óvatos elemek törlésekor, akárcsak bármilyen más szerkesztésnél, a mindenki \náltal látható eredmény és a légifelvétel gyakran elavult, lehet, hogy az utat nemrég építették.\n\nAz út törléséhez előbb válaszd ki, majd kattints a kuka ikonra, vagy nyomd meg a Delete \nbillentyűt.\n\n### Létrehozás\n\nTaláltál egy utat, ami még nincs rajta a térképen? Kattints a bal felső eszköztár 'Vonal' \nikonjára vagy nyomd meg a '2'-es billentyűt és kezdd el rajzolni a vonalat.\n\nA rajzolás megkezdéséhez kattints a térképen az út elejére. Ha az út \negy másik meglévő útból ágazik ki, arra a helyre kattints, ahol csatlakoznak.\n\nEzután kattintással hozz létre pontokat a műholdkép vagy GPS nyomvonal alapján, \nhogy a vonal az út középvonalát kövesse. Ha az utad keresztez egy másik utat, kapcsold \nössze őket a metszéspontjukra kattintva. Ha kész vagy a rajzolással, kattints duplán, \nvagy nyomj a billentyűzeten egy 'Enter'-t.\n",
         "gps": "# GPS\n\nA GPS adatok az OpenStreetMap legmegbízhatóbb adatforrásai. Ez a\nszerkesztőprogram támogatja a helyi nyomvonalak - `.gpx` fájlok betöltését \na számítógépről. Ilyen GPS nyomvonalakat számos okostelefonnal és kézi \nGPS-szel tudsz rögzíteni.\n\nGPS-es felmérés végzéséhez segítséget találsz a \nFor information on how to perform a GPS survey, read\n[Kezdők kézikönyvében](http://wiki.openstreetmap.org/wiki/Hu:Beginners_Guide_1.1.1).\n\nA GPX nyomvonal használatához húzd rá (drag&drop) a GPX fájlt a szerkesztőprogramra.\nBetöltés után meg fog jelenni a térképen egy világoszöld vonalként.\nKattints a bal oldali menüben a 'Háttérbeállítás' gombra a nyomvonal \nmegjelenítéséhez, elrejtéséhez és a GPX rétegre közelítéshez.\n\nA GPX nyomvonal nem lesz közvetlenül feltöltve az OpenStreetMapre. \nA használathoz legjobb, ha úgy rajzolsz a térképen, hogy segítségként \nhasználod az új elemek felviteléhez.\n",
         "imagery": "# Légifelvétel\n\nA légifelvétel a térképezés egyik fontos forrása. A repülőgépes ortofotók, műholdképek és szabadon összeállított források kombinációja rendelkezésre áll a szerkesztőben a bal oldali menü 'Háttérbeállítások' gombjára kattintva.\n\nAlapértelmezésként a [Bing Maps](http://www.bing.com/maps/) műholdkép réteg \njelenik meg a szerkesztőben, de ahogy új helyekre görgeted a térképet, új források\n jelennek meg. Néhány országban (Egyesül Államok, Franciaország, Dánia) nagyon jó minőségű légifelvételek érhetőek el egyes területeken.\n\nA légifelvételek gyakran el vannak csúszva a valósághoz képest, a légifelvétel szolgáltatók hibájából. Ha látsz egy csomó utat eltolódva a háttértől, ne húzd őket rögtön a háttérképhez. Ehelyett igazítsd úgy a háttérképet, hogy a meglévő adatok illeszkedjenek rá. Ehhez kattints a Háttérbeállítások menü 'Elcsúszás korrigálása' gombjára.\n",
-        "addresses": "# Lakcímek\n\nA lakcímek a térkép egyik leghasznosabb információi.\n\nHabár a címek gyakran az utca részét képzik, az OpenStreetMapen az épületek\nés az utca menti helyek tulajdonságaként kerülnek felvitelre.\n\nHozzáadhatsz lakcímeket az épületkörvonalként feltérképezett helyekhez, akárcsak \na pontként létrehozottakhoz. A javasolt forrás a lakcímadatokhoz a helyszíni felmérés, \nvagy a személyes ismeretek – mint a többi elemnél, a kereskedelmi források, mint a\nGoogle Térképek használata szigorúan tilos.\n",
         "inspector": "# A címkeszerkesztő használata\n\nA címkeszerkesztő az ablak jobb oldalán jelenik meg, amikor egy elemet \nkiválasztasz,lehetővé téve a részleteinek szerkesztését.\n\n### Elemtípus kiválasztása\n\nMiután létrehoztál egy pontot, vonalat, vagy területet, ki tudod választani, hogy \naz elem milyen típusú, például közút, lakóút, szupermarket, vagy egy kávézó.\nA címkeszerkesztő gombokat jelenít meg a leggyakoribb elemtípussal, a többi \ntípust pedig a keresődobozba írva tudod megtalálni.\n\nKattints az 'i'-re az elemtípus gomb jobb sarkában, hogy többet tudj meg róla. \nA típus kiválasztásához kattints a gombra.\n\n### Űrlapok használata és a címkék szerkesztése\n\nMiután választottál egy elemtípust, vagy kiválasztottál egy típussal rendelkező \nelemet, a címkeszerkesztő megjelenít egy űrlapot az elem részletes adataival, \nmint a neve, vagy címe.\n\nA mezők alatt egy ikonsort láthatsz, amivel egyéb részleteket adhatsz meg, \npéldául [Wikipedia](http://www.wikipedia.org/) hivatkozás, kerekesszékes \nmegközelíthetőséget, stb.\n\nA címkeszerkesztő legalján találsz egy 'Összes címke' gombot, amivel bármilyen \ntetszőleges címkét megadhatsz. A [Taginfo](http://taginfo.openstreetmap.org/) \negy jó forrás, ha többet akarsz megtudni a népszerű címkekombinációkról.\n\nA címkeszerkesztőben végzett változtatások automatikusan alkalmazva \nlesznek a térképen. Bármikor visszavonhatod őket a 'Visszavonás' gombbal.\n\n### A címkeszerkesztő bezárása\n\nA címkeszerkesztőt be tudod zárni a jobb felső sarokban található X gombra \nkattintva, az Esc billentyűt megnyomva, vagy a térképre kattintással.\n",
         "buildings": "# Épületek\n\nAz OpenStreetMap a világ legnagyobb épület adatbázisa. Te is bővítheted és \nfejlesztheted ezt az adatbázist.\n\n### Kiválasztás\n\nÉpületet a körvonalára kattintva tudsz kiválasztani. Ez kiemeli az épületet és megnyitja az eszközmenüt és a további információkat mutató oldalsávot.\n\n### Módosítás\n\nAz épületek gyakran pontatlan helyen vannak, vagy pontatlan a címkézésük.\n\nEgy egész épület mozgatásához kattints a 'Mozgatás' eszközre. Mozgasd az \negeret az épület eltolásához, és kattints, ha jó helyre került.\n\nAz épület egyedi alakjának javításához kattints a korvonalának pontjaira és \nhúzd őket jó helyre.\n\n### Létrehozás\n\nAz épületek létrehozása körüli egyik fő kérdés, hogy az OpenStreetMap \naz épületeket alakzatként és pontként is tudja tárolni. Az ökölszabály, hogy \n_az épületet alakzatként kell térképezni, hacsak lehet_ és a cégeket, lakásokat, \nszolgáltatásokat és egyéb a házon belül működő dolgokat a ház körvonalán belüli \npontként kell térképezni.\n\nKezd az épület alakzatként rajzolását a 'Terület' gombra kattintva a bal felső \neszköztáron. Befejezni az 'Enter' billentyűvel, vagy a terület első pontjára kattintva \ntudod, bezárva az alakzatot.\n\n### Törlés\n\nHa egy épület teljesen hibás – például azt látod, hogy nincs rajta a műholdképen és \nbiztos vagy benne, hogy nem létezik – törölheted, ezzel eltávolítva a térképről.\n\nHa egy épület teljesen hibás – ha azt látod, hogy egyáltalán nincs rajta a légifelvételen, \nés biztos vagy benne, hogy nem is létezik –, törölheted, ezzel eltávolítva a térképről.\nLegyél óvatos elemek törlésekor, akárcsak bármilyen más szerkesztésnél, a mindenki \náltal látható eredmény és a légifelvétel gyakran elavult, lehet, hogy a ház egyszerűen új építésű.\n\n\nHáz törléséhez előbb válaszd ki, majd kattints a kuka ikonra, vagy nyomd meg a Delete \nbillentyűt.\n"
     },
@@ -310,7 +311,7 @@
             "title": "Pontok",
             "add": "A pontok általában olyan helyeket ábrázolnak, mint boltok, éttermek, emlékművek. Jelzik az objektum konkrét helyét és leírják, mi van ott. **Kattints a Pont gombra és hozz létre egy új pontot.**",
             "place": "A pont a térképre kattintva helyezhető el. **Tedd a pontot az épület tetejére.**",
-            "search": "Sok különféle elem ábrázolható pontként. A pont, amit az előbb hoztál létre, egy kávézó. **Keress rá a 'Kávézó'-ra.**",
+            "search": "Több elem is van, amit pontként lehet ábrázolni. Az általad létrehozott pont egy kávézó. **Keress rá a '{name}'-ra.**",
             "choose": "**Válaszd a Kávézót a listából.**",
             "describe": "A pont kávézónak lett jelölve. A címkeszerkesztőt használva megadhatsz az elemről további adatokat is. **Adj neki nevet**",
             "close": "A címkeszerkesztő az X gombbal zárható be. **Zárd be a címkeszerkesztőt**",
@@ -324,7 +325,7 @@
             "add": "Az objektumok részletesebb ábrázolásának módja a területek rajzolása, mert információval szolgálnak annak körvonaláról. A legtöbb pontként ábrázolt elemtípust területként is lehet ábrázolni, sőt, gyakran ez a preferált. **Kattints a Terület gombra és hozz létre egy új területet.**",
             "corner": "Területet létrehozni az objektum körvonalát jelölő pontsorozat rajzolásával lehet. **Helyezd el a kezdőpontot a játszótér valamelyik sarkában.**",
             "place": "Rajzol jegy területet több pont elhelyezésével. Befejezni a kezdőpontra kattintva tudod. **Rajzold meg a játszótér területét.**",
-            "search": "**Keress rá a Játszótérre.*",
+            "search": "**Keress rá erre: '{name}'.**",
             "choose": "**Válaszd a Játszóteret a listából.**",
             "describe": "**Adj neki nevet, majd zárd be a címkeszerkesztőt**"
         },

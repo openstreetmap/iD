@@ -77,6 +77,8 @@ iD.ui.RawTagEditor = function(context) {
             .append('span')
             .attr('class', 'icon delete');
 
+        $enter.each(bindTypeahead);
+
         // Update
 
         $items.order();
@@ -89,18 +91,17 @@ iD.ui.RawTagEditor = function(context) {
             }
 
             d3.select(this)
-                .each(bindTypeahead)
                 .call(reference.button)
                 .call(reference.body);
         });
 
         $items.select('input.key')
-            .property('value', function(d) { return d.key; })
+            .value(function(d) { return d.key; })
             .on('blur', keyChange)
             .on('change', keyChange);
 
         $items.select('input.value')
-            .property('value', function(d) { return d.value; })
+            .value(function(d) { return d.value; })
             .on('blur', valueChange)
             .on('change', valueChange)
             .on('keydown.push-more', pushMore);
@@ -119,8 +120,7 @@ iD.ui.RawTagEditor = function(context) {
         }
 
         function bindTypeahead() {
-            var geometry = context.geometry(id),
-                row = d3.select(this),
+            var row = d3.select(this),
                 key = row.selectAll('input.key'),
                 value = row.selectAll('input.value');
 
@@ -141,7 +141,7 @@ iD.ui.RawTagEditor = function(context) {
                 .fetcher(function(value, __, callback) {
                     taginfo.keys({
                         debounce: true,
-                        geometry: geometry,
+                        geometry: context.geometry(id),
                         query: value
                     }, function(err, data) {
                         if (!err) callback(sort(value, data));
@@ -152,8 +152,8 @@ iD.ui.RawTagEditor = function(context) {
                 .fetcher(function(value, __, callback) {
                     taginfo.values({
                         debounce: true,
-                        key: key.property('value'),
-                        geometry: geometry,
+                        key: key.value(),
+                        geometry: context.geometry(id),
                         query: value
                     }, function(err, data) {
                         if (!err) callback(sort(value, data));

@@ -16,9 +16,9 @@ describe('iD.Background', function() {
             expect(c).to.be.ok;
         });
 
-        it('#size', function() {
-            expect(c.size([100, 100])).to.equal(c);
-            expect(c.size()).to.eql([100,100]);
+        it('#dimensions', function() {
+            expect(c.dimensions([100, 100])).to.equal(c);
+            expect(c.dimensions()).to.eql([100,100]);
         });
     });
 });

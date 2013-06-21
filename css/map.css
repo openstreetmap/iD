@@ -17,6 +17,9 @@ img.tile {
 img.tile-loaded {
     opacity: 1;
 }
+img.tile-removing {
+    opacity: 0;
+}
 
 /* base styles */
 path {
@@ -125,8 +128,7 @@ g.vertex.selected .shadow {
 .mode-draw-line g.midpoint,
 .mode-add-area g.midpoint,
 .mode-add-line g.midpoint,
-.mode-add-point g.midpoint,
-.mode-drag-node g.midpoint {
+.mode-add-point g.midpoint {
   display: none;
 }
 

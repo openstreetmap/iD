@@ -52,6 +52,26 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
+        it("returns falsy for more than two ways when connected, regardless of order", function () {
+            // a --> b ==> c ~~> d
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    'c': iD.Node({id: 'c'}),
+                    'd': iD.Node({id: 'd'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b']}),
+                    '=': iD.Way({id: '=', nodes: ['b', 'c']}),
+                    '~': iD.Way({id: '~', nodes: ['c', 'd']})
+            });
+
+            expect(iD.actions.Join(['-', '=', '~']).disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Join(['-', '~', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Join(['=', '-', '~']).disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Join(['=', '~', '-']).disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Join(['~', '=', '-']).disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Join(['~', '-', '=']).disabled(graph)).not.to.be.ok;
+        });
+
         it("returns 'not_eligible' for non-line geometries", function () {
             var graph = iD.Graph({
                     'a': iD.Node({id: 'a'})
@@ -74,6 +94,105 @@ describe("iD.actions.Join", function () {
                 });
 
             expect(iD.actions.Join(['-', '=']).disabled(graph)).to.equal('not_adjacent');
+        });
+
+        it("returns 'restriction' in situations where a turn restriction would be damaged (a)", function () {
+            // a --> b ==> c
+            // from: -
+            // to: =
+            // via: b
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    'c': iD.Node({id: 'c'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b']}),
+                    '=': iD.Way({id: '=', nodes: ['b', 'c']}),
+                    'r': iD.Relation({id: 'r', tags: {type: 'restriction'}, members: [
+                        {type: 'way', id: '-', role: 'from'},
+                        {type: 'way', id: '=', role: 'to'},
+                        {type: 'node', id: 'b', role: 'via'}
+                    ]})
+                });
+
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).to.equal('restriction');
+        });
+
+        it("returns 'restriction' in situations where a turn restriction would be damaged (b)", function () {
+            // a --> b ==> c
+            //       |
+            //       d
+            // from: -
+            // to: |
+            // via: b
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    'c': iD.Node({id: 'c'}),
+                    'd': iD.Node({id: 'd'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b']}),
+                    '=': iD.Way({id: '=', nodes: ['b', 'c']}),
+                    '|': iD.Way({id: '|', nodes: ['b', 'd']}),
+                    'r': iD.Relation({id: 'r', tags: {type: 'restriction'}, members: [
+                        {type: 'way', id: '-', role: 'from'},
+                        {type: 'way', id: '|', role: 'to'},
+                        {type: 'node', id: 'b', role: 'via'}
+                    ]})
+                });
+
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).to.equal('restriction');
+        });
+
+        it("returns falsy in situations where a turn restriction wouldn't be damaged (a)", function () {
+            // a --> b ==> c
+            // |
+            // d
+            // from: -
+            // to: |
+            // via: a
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    'c': iD.Node({id: 'c'}),
+                    'd': iD.Node({id: 'd'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b']}),
+                    '=': iD.Way({id: '=', nodes: ['b', 'c']}),
+                    '|': iD.Way({id: '|', nodes: ['a', 'd']}),
+                    'r': iD.Relation({id: 'r', tags: {type: 'restriction'}, members: [
+                        {type: 'way', id: '-', role: 'from'},
+                        {type: 'way', id: '|', role: 'to'},
+                        {type: 'node', id: 'a', role: 'via'}
+                    ]})
+                });
+
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
+        });
+
+        it("returns falsy in situations where a turn restriction wouldn't be damaged (b)", function () {
+            //       d
+            //       |
+            // a --> b ==> c
+            //       \
+            //        e
+            // from: |
+            // to: \
+            // via: b
+            var graph = iD.Graph({
+                    'a': iD.Node({id: 'a'}),
+                    'b': iD.Node({id: 'b'}),
+                    'c': iD.Node({id: 'c'}),
+                    'd': iD.Node({id: 'd'}),
+                    '-': iD.Way({id: '-', nodes: ['a', 'b']}),
+                    '=': iD.Way({id: '=', nodes: ['b', 'c']}),
+                    '|': iD.Way({id: '|', nodes: ['d', 'b']}),
+                    '\\': iD.Way({id: '\\', nodes: ['b', 'e']}),
+                    'r': iD.Relation({id: 'r', tags: {type: 'restriction'}, members: [
+                        {type: 'way', id: '|', role: 'from'},
+                        {type: 'way', id: '\\', role: 'to'},
+                        {type: 'node', id: 'b', role: 'via'}
+                    ]})
+                });
+
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
     });
 
@@ -149,23 +268,51 @@ describe("iD.actions.Join", function () {
         expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 
-    it("prefers to keep existing ways", function () {
-        // a --> b ==> c
-        // --- is new, === is existing
+    it("joins a --> b <== c <++ d **> e", function () {
         // Expected result:
-        // a ==> b ==> c
+        // a --> b --> c --> d --> e
+        // tags on === reversed
         var graph = iD.Graph({
                 'a': iD.Node({id: 'a'}),
                 'b': iD.Node({id: 'b'}),
                 'c': iD.Node({id: 'c'}),
-                'w-1': iD.Way({id: 'w-1', nodes: ['a', 'b']}),
-                'w1': iD.Way({id: 'w1', nodes: ['b', 'c']})
+                'd': iD.Node({id: 'd'}),
+                'e': iD.Node({id: 'e'}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b']}),
+                '=': iD.Way({id: '=', nodes: ['c', 'b'], tags: {'lanes:forward': 2}}),
+                '+': iD.Way({id: '+', nodes: ['d', 'c']}),
+                '*': iD.Way({id: '*', nodes: ['d', 'e'], tags: {'lanes:backward': 2}})
             });
 
-        graph = iD.actions.Join(['w-1', 'w1'])(graph);
+        graph = iD.actions.Join(['-', '=', '+', '*'])(graph);
 
-        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c']);
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'e']);
+        expect(graph.hasEntity('=')).to.be.undefined;
+        expect(graph.hasEntity('+')).to.be.undefined;
+        expect(graph.hasEntity('*')).to.be.undefined;
+        expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
+    });
+
+    it("prefers to keep existing ways", function () {
+        // a --> b ==> c ++> d
+        // --- is new, === is existing, +++ is new
+        // Expected result:
+        // a ==> b ==> c ==> d
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                'd': iD.Node({id: 'd'}),
+                'w-1': iD.Way({id: 'w-1', nodes: ['a', 'b']}),
+                'w1': iD.Way({id: 'w1', nodes: ['b', 'c']}),
+                'w-2': iD.Way({id: 'w-2', nodes: ['c', 'd']})
+            });
+
+        graph = iD.actions.Join(['w-1', 'w1', 'w-2'])(graph);
+
+        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
         expect(graph.hasEntity('w-1')).to.be.undefined;
+        expect(graph.hasEntity('w-2')).to.be.undefined;
     });
 
     it("merges tags", function () {
@@ -173,13 +320,15 @@ describe("iD.actions.Join", function () {
                 'a': iD.Node({id: 'a'}),
                 'b': iD.Node({id: 'b'}),
                 'c': iD.Node({id: 'c'}),
+                'd': iD.Node({id: 'd'}),
                 '-': iD.Way({id: '-', nodes: ['a', 'b'], tags: {a: 'a', b: '-', c: 'c'}}),
-                '=': iD.Way({id: '=', nodes: ['b', 'c'], tags: {a: 'a', b: '=', d: 'd'}})
+                '=': iD.Way({id: '=', nodes: ['b', 'c'], tags: {a: 'a', b: '=', d: 'd'}}),
+                '+': iD.Way({id: '+', nodes: ['c', 'd'], tags: {a: 'a', b: '=', e: 'e'}})
             });
 
-        graph = iD.actions.Join(['-', '='])(graph);
+        graph = iD.actions.Join(['-', '=', '+'])(graph);
 
-        expect(graph.entity('-').tags).to.eql({a: 'a', b: '-;=', c: 'c', d: 'd'});
+        expect(graph.entity('-').tags).to.eql({a: 'a', b: '-;=', c: 'c', d: 'd', e: 'e'});
     });
 
     it("merges relations", function () {

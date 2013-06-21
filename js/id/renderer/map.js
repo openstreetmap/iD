@@ -47,7 +47,7 @@ iD.Map = function(context) {
         var dataLayer = supersurface.append('div')
             .attr('class', 'layer-layer layer-data');
 
-        surface = dataLayer.append('svg')
+        map.surface = surface = dataLayer.append('svg')
             .on('mousedown.zoom', function() {
                 if (d3.event.button == 2) {
                     d3.event.stopPropagation();
@@ -63,7 +63,7 @@ iD.Map = function(context) {
             if (map.editable() && !transformed) {
                 var hover = d3.event.target.__data__;
                 surface.call(vertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                dispatch.drawn(map);
+                dispatch.drawn({full: false});
             }
         });
 
@@ -71,7 +71,7 @@ iD.Map = function(context) {
             if (map.editable() && !transformed) {
                 var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
                 surface.call(vertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                dispatch.drawn(map);
+                dispatch.drawn({full: false});
             }
         });
 
@@ -83,12 +83,11 @@ iD.Map = function(context) {
                     graph = context.graph();
                 surface.call(vertices, graph, all, filter, extent, map.zoom());
                 surface.call(midpoints, graph, all, filter, extent);
-                dispatch.drawn(map);
+                dispatch.drawn({full: false});
             }
         });
 
-        map.size(selection.size());
-        map.surface = surface;
+        map.dimensions(selection.dimensions());
 
         labels.supersurface(supersurface);
         mouse = iD.util.fastMouse(supersurface.node());
@@ -139,19 +138,24 @@ iD.Map = function(context) {
         }
 
         surface
-            .call(points)
             .call(vertices, graph, all, filter, map.extent(), map.zoom())
             .call(lines, graph, all, filter)
             .call(areas, graph, all, filter)
             .call(midpoints, graph, all, filter, map.extent())
             .call(labels, graph, all, filter, dimensions, !difference && !extent);
 
-        dispatch.drawn(map);
+        if (points.points(context.intersects(map.extent())).length > 100) {
+            surface.select('.layer-hit').selectAll('g.point').remove();
+        } else {
+            surface.call(points, points.points(all), filter);
+        }
+
+        dispatch.drawn({full: true});
     }
 
     function editOff() {
         surface.selectAll('.layer *').remove();
-        dispatch.drawn(map);
+        dispatch.drawn({full: true});
     }
 
     function zoomPan() {
@@ -311,13 +315,13 @@ iD.Map = function(context) {
         return redraw();
     };
 
-    map.size = function(_) {
+    map.dimensions = function(_) {
         if (!arguments.length) return dimensions;
         var center = map.center();
         dimensions = _;
-        surface.size(dimensions);
+        surface.dimensions(dimensions);
         layers.forEach(function(layer) {
-            layer.size(dimensions);
+            layer.dimensions(dimensions);
         });
         projection.clipExtent([[0, 0], dimensions]);
         setCenter(center);

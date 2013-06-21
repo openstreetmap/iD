@@ -22,8 +22,8 @@ describe("iD.behavior.Hover", function() {
 
     describe("mouseover", function () {
         it("adds the .hover class to all elements to which the same datum is bound", function () {
-            var a = {id: 'a', type: 'node'},
-                b = {id: 'b', type: 'node'};
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'});
 
             container.selectAll('span')
                 .data([a, b, a, b])
@@ -38,7 +38,7 @@ describe("iD.behavior.Hover", function() {
 
         it("adds the .hover class to all members of a relation", function() {
             container.selectAll('span')
-                .data([{id: 'a', type: 'relation', members: [{id: 'b'}]}, {id: 'b'}])
+                .data([iD.Relation({id: 'a', members: [{id: 'b'}]}), iD.Node({id: 'b'})])
                 .enter().append('span').attr('class', function(d) { return d.id; });
 
             container.call(iD.behavior.Hover(context));
@@ -65,7 +65,7 @@ describe("iD.behavior.Hover", function() {
             container.append('span').attr('class', 'hover');
 
             container.call(iD.behavior.Hover(context).altDisables(true));
-            happen.keydown(document, {keyCode: 18});
+            happen.keydown(window, {keyCode: 18});
 
             expect(container.selectAll('.hover')[0]).to.have.length(0);
             expect(container.selectAll('.hover-suppressed')[0]).to.have.length(1);
@@ -77,7 +77,7 @@ describe("iD.behavior.Hover", function() {
             container.append('span').attr('class', 'hover-suppressed');
 
             container.call(iD.behavior.Hover(context).altDisables(true));
-            happen.keyup(document, {keyCode: 18});
+            happen.keyup(window, {keyCode: 18});
 
             expect(container.selectAll('.hover')[0]).to.have.length(1);
             expect(container.selectAll('.hover-suppressed')[0]).to.have.length(0);

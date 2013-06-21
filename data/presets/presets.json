@@ -650,6 +650,33 @@
         },
         "name": "Place of Worship"
     },
+    "amenity/place_of_worship/buddhist": {
+        "icon": "place-of-worship",
+        "fields": [
+            "denomination",
+            "building_yes",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [
+            "stupa",
+            "vihara",
+            "monastery",
+            "temple",
+            "pagoda",
+            "zendo",
+            "dojo"
+        ],
+        "tags": {
+            "amenity": "place_of_worship",
+            "religion": "buddhist"
+        },
+        "name": "Buddhist Temple"
+    },
     "amenity/place_of_worship/christian": {
         "icon": "religious-christian",
         "fields": [

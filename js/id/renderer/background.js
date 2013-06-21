@@ -27,7 +27,10 @@ iD.Background = function(backgroundType) {
 
     function lookUp(d) {
         for (var up = -1; up > -d[2]; up--) {
-            if (cache[atZoom(d, up)] !== false) return atZoom(d, up);
+            var tile = atZoom(d, up);
+            if (cache[source(tile)] !== false) {
+                return tile;
+            }
         }
     }
 
@@ -94,6 +97,7 @@ iD.Background = function(backgroundType) {
         function load(d) {
             cache[d[3]] = true;
             d3.select(this)
+                .on('error', null)
                 .on('load', null)
                 .classed('tile-loaded', true);
             render(selection);
@@ -102,6 +106,7 @@ iD.Background = function(backgroundType) {
         function error(d) {
             cache[d[3]] = false;
             d3.select(this)
+                .on('error', null)
                 .on('load', null)
                 .remove();
             render(selection);
@@ -122,13 +127,12 @@ iD.Background = function(backgroundType) {
 
         image.exit()
             .style(transformProp, imageTransform)
-            .classed('tile-loaded', false)
+            .classed('tile-removing', true)
             .each(function() {
-                var tile = this;
+                var tile = d3.select(this);
                 window.setTimeout(function() {
-                    // this tile may already be removed
-                    if (tile.parentNode) {
-                        tile.parentNode.removeChild(tile);
+                    if (tile.classed('tile-removing')) {
+                        tile.remove();
                     }
                 }, 300);
             });
@@ -139,7 +143,9 @@ iD.Background = function(backgroundType) {
             .on('error', error)
             .on('load', load);
 
-        image.style(transformProp, imageTransform);
+        image
+            .style(transformProp, imageTransform)
+            .classed('tile-removing', false);
     }
 
     background.offset = function(_) {
@@ -161,7 +167,7 @@ iD.Background = function(backgroundType) {
         return background;
     };
 
-    background.size = function(_) {
+    background.dimensions = function(_) {
         if (!arguments.length) return tile.size();
         tile.size(_);
         return background;

@@ -98,7 +98,6 @@
     },
     "inspector": {
         "no_documentation_combination": "Za to kombinacijo oznak ni na voljo dokumentacije",
-        "new_tag": "Nova oznaka",
         "results": "{n} zadetkov iskanja {search}"
     },
     "background": {
@@ -235,6 +234,9 @@
             "fax": {
                 "label": "Telefaks"
             },
+            "fee": {
+                "label": "Plačilo"
+            },
             "highway": {
                 "label": "Vrsta"
             },
@@ -260,8 +262,14 @@
             "landuse": {
                 "label": "Vrsta"
             },
+            "layer": {
+                "label": "Plast"
+            },
             "leisure": {
                 "label": "Vrsta"
+            },
+            "levels": {
+                "label": "Nivojev"
             },
             "man_made": {
                 "label": "Vrsta"
@@ -274,6 +282,9 @@
             },
             "natural": {
                 "label": "Naravno"
+            },
+            "network": {
+                "label": "Mreža"
             },
             "note": {
                 "label": "Opomba"
@@ -311,6 +322,9 @@
             "railway": {
                 "label": "Vrsta"
             },
+            "ref": {
+                "label": "Referenca"
+            },
             "religion": {
                 "label": "Veroizpoved",
                 "options": {
@@ -344,7 +358,9 @@
             "structure": {
                 "options": {
                     "bridge": "Most",
-                    "tunnel": "Tunel"
+                    "tunnel": "Tunel",
+                    "embankment": "Nasip",
+                    "cutting": "Usek"
                 }
             },
             "surface": {
@@ -373,6 +389,9 @@
             },
             "wetland": {
                 "label": "Vrsta"
+            },
+            "wheelchair": {
+                "label": "Dostop z vozičkom"
             },
             "wikipedia": {
                 "label": "Wikipedia"
@@ -781,6 +800,9 @@
             "man_made/wastewater_plant": {
                 "name": "Čistilna naprava"
             },
+            "man_made/water_tower": {
+                "name": "Vodni stolp"
+            },
             "natural": {
                 "name": "Naravno"
             },
@@ -886,6 +908,9 @@
             },
             "railway/platform": {
                 "name": "Železniški peron"
+            },
+            "railway/rail": {
+                "name": "Železnica"
             },
             "railway/station": {
                 "name": "Železniška postaja"
@@ -1054,6 +1079,9 @@
             },
             "tourism/artwork": {
                 "name": "Umetnina"
+            },
+            "tourism/attraction": {
+                "name": "Turistična znamenitost"
             },
             "tourism/camp_site": {
                 "name": "Kamp"

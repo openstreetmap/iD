@@ -158,7 +158,6 @@
         "title": "Değişiklikleri kaydet",
         "description_placeholder": "Katkı sağlayanlar hakkında kısa açıklama",
         "message_label": "Mesajı işle",
-        "upload_explanation": "{user} kullanıcısı olarak yaptığınız değişiklikler tüm OpenStreetMap kullanan haritalarda görünür olacaktır.",
         "save": "Kaydet",
         "cancel": "İptal",
         "warnings": "Uyarılar",
@@ -178,7 +177,6 @@
         "no_documentation_combination": "Bu etiket kombinasyonu için dökümantasyon bulunmamaktadır.",
         "no_documentation_key": "Bu anahtar için dökümantasyon bulunmamaktadır.",
         "show_more": "Daha fazla göster",
-        "new_tag": "Yeni Etiket",
         "choose": "Kısım tipini seçiniz",
         "results": "{search} kelimesi için {n} adet sonuç "
     },
@@ -255,7 +253,6 @@
         },
         "areas": {
             "corner": "Alanlar alan sınırlarını belirleyen noktaların konulması ile çizilirler. **Test alanında bir alanın köşe noktasına tıklayarak çizime başlayın.**",
-            "search": "**Bir test alanı arayınız.**",
             "describe": "**Bir ad ekleyerek editörü kapatınız**"
         },
         "lines": {

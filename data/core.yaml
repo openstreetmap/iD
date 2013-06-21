@@ -91,6 +91,7 @@ en:
       annotation: "Merged {n} lines."
       not_eligible: These features can't be merged.
       not_adjacent: These lines can't be merged because they aren't connected.
+      restriction: These lines can't be merged because at least one is a member of a "{relation}" relation.
     move:
       title: Move
       description: Move this to a different location.
@@ -150,7 +151,8 @@ en:
     title: Save Changes
     description_placeholder: Brief description of your contributions
     message_label: Commit message
-    upload_explanation: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
+    upload_explanation: "The changes you upload will be visible on all maps that use OpenStreetMap data."
+    upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
     save: Save
     cancel: Cancel
     warnings: Warnings
@@ -183,7 +185,8 @@ en:
     search: Search
     unknown: Unknown
     incomplete: <not downloaded>
-    feature_list: Feature List
+    feature_list: Feature list
+    edit: Edit feature
   background:
     title: Background
     description: Background settings
@@ -388,7 +391,7 @@ en:
       Although addresses are often represented as parts of streets, in OpenStreetMap
       they're recorded as attributes of buildings and places along streets.
 
-      You can add address information to places mapped as building outlines as well
+      You can add address information to places mapped as building outlines
       as well as those mapped as single points. The optimal source of address
       data is from an on-the-ground survey or personal knowledge - as with any
       other feature, copying from commercial sources like Google Maps is strictly
