@@ -51,7 +51,7 @@ body {
     height: 40px;
     width: 40px;
     right: -50px;
-    top: 10px;
+    top: 70px;
     border-radius: 4px;
     background: black;
 }
@@ -441,42 +441,6 @@ button.action:hover {
     background: #597BE7;
 }
 
-button.save.has-count {
-    padding: 9px;
-}
-
-button.save .count {
-    display: none;
-}
-
-button.save.has-count .count {
-    display: block;
-    position: absolute;
-    top: 5px;
-    background: rgba(255, 255, 255, .5);
-    color: #333;
-    padding: 10px;
-    height: 30px;
-    line-height: 12px;
-    border-radius: 4px;
-    margin: auto;
-    margin-left: 8.3333%;
-}
-
-button.save.has-count .count::before {
-    content: "";
-    margin: auto;
-    width: 0;
-    height: 0;
-    position: absolute;
-    left: -6px;
-    top: 0;
-    bottom: 0;
-    border-top:    6px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-right:  6px solid rgba(255,255,255,.5);
-}
-
 /* Icons */
 
 .icon {
@@ -609,44 +573,65 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
     background: #111;
 }
 
-#bar button.save {
-    background: #7092ff;
-    border-right: 0;
-    color: white;
-   -moz-transition: background 100ms, opacity 200ms, height 200ms;
-     -o-transition: background 100ms, opacity 200ms, height 200ms;
-        transition: background 100ms, opacity 200ms, height 200ms;
-}
-
 #bar .save-button {
     top: 0;
     position: absolute;
     left: 100%;
-   -moz-transition: top 200ms;
-     -o-transition: top 200ms;
-        transition: top 200ms;
+}
+
+#bar button.save {
+    position: absolute;
+    background: #7092ff;
+    border-right: 0;
+    opacity: 1;
+    top: -60px;
+    color: white;
+   -moz-transition: background 100ms, top 200ms;
+     -o-transition: background 100ms, top 200ms;
+        transition: background 100ms, top 200ms;
+}
+
+#bar button.save.has-count {
+    top: 0;
+}
+
+.mode-save #bar button.save.has-count {
+    top: 120px;
 }
 
 #bar button.save:hover {
-    background: #7092ff;
+    background: #597be7;
 }
 
-#bar button.save.disabled {
-    opacity: 0;
+#bar button.save .count {
+    display: none;
+}
+
+#bar button.save.has-count .count {
+    display: block;
+    position: absolute;
+    top: 15px;
+    background: rgba(255, 255, 255, .5);
+    color: #333;
+    padding: 10px;
+    height: 30px;
+    line-height: 12px;
+    border-radius: 4px;
+    right: -40px;
+}
+
+#bar button.save.has-count .count::before {
+    content: "";
+    margin: auto;
+    width: 0;
     height: 0;
-}
-
-#bar button.save.disabled:hover {
-    background: #222;
-}
-
-#bar button[disabled]:hover,
-#bar button.disabled:hover {
-    background: #222;
-}
-
-.mode-save #bar .save-button {
-    top: 120px;
+    position: absolute;
+    left: -6px;
+    top: 0;
+    bottom: 0;
+    border-top:    6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right:  6px solid rgba(255,255,255,.5);
 }
 
 /* Header for modals / panes

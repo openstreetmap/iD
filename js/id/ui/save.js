@@ -12,12 +12,7 @@ iD.ui.Save = function(context) {
         var button = selection.append('button')
             .attr('class', 'save col12 disabled')
             .attr('tabindex', -1)
-            .on('click', save)
-            .attr('data-original-title',
-                iD.ui.tooltipHtml(t('save.no_changes'), key))
-            .call(bootstrap.tooltip()
-                .placement('bottom')
-                .html(true));
+            .on('click', save);
 
         button.append('span')
             .attr('class', 'label')
@@ -40,11 +35,6 @@ iD.ui.Save = function(context) {
             if (_ === numChanges)
                 return;
             numChanges = _;
-
-            button
-                .attr('data-original-title',
-                    iD.ui.tooltipHtml(t(numChanges > 0 ?
-                        'save.help' : 'save.no_changes'), key));
 
             button
                 .classed('disabled', numChanges === 0)
