@@ -566,14 +566,23 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
     color: white;
     border-radius: 0;
     border-right: 1px solid #111;
-    background: #222;
+    background: #7092ff;
+}
+
+#bar button.active,
+#bar button:hover {
+    background: #597be7
 }
 
 #bar .undoredo-buttons button:last-child{
     border-right: 0;
 }
 
-#bar button:hover {
+#bar .undoredo-buttons button {
+    background: #222;
+}
+
+#bar .undoredo-buttons button:hover {
     background: #111;
 }
 
@@ -585,9 +594,7 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
 
 #bar button.save {
     position: absolute;
-    background: #7092ff;
     border-right: 0;
-    opacity: 1;
     top: -60px;
     color: white;
    -moz-transition: background 100ms, top 200ms;
@@ -599,7 +606,13 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
     top: 0;
 }
 
+#bar button.disabled,
+.mode-save #bar button {
+    background: #222;
+}
+
 .mode-save #bar button.save.has-count {
+    background: #7092ff;
     top: 120px;
 }
 
