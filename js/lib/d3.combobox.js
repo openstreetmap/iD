@@ -150,32 +150,6 @@ d3.combobox = function() {
 
         var prevValue, prevCompletion;
 
-        function autocomplete(e, data) {
-
-            var value = input.property('value'),
-                match;
-
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].value.toLowerCase().indexOf(value.toLowerCase()) === 0) {
-                    match = data[i].value;
-                    break;
-                }
-            }
-
-            // backspace
-            if (e.keyCode === 8) {
-                prevValue = value;
-                prevCompletion = '';
-
-            } else if (value && match && value !== prevValue + prevCompletion) {
-                prevValue = value;
-                prevCompletion = match.substr(value.length);
-                input.property('value', prevValue + prevCompletion);
-                input.node().setSelectionRange(value.length, value.length + prevCompletion.length);
-            }
-        }
-
-
         function highlight() {
             container
                 .selectAll('a')
@@ -204,7 +178,25 @@ d3.combobox = function() {
                     document.activeElement === input.node()) show();
                 else return hide();
 
-                autocomplete(e, data);
+                var match;
+
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].value.toLowerCase().indexOf(value.toLowerCase()) === 0) {
+                        match = data[i].value;
+                        break;
+                    }
+                }
+
+                // backspace
+                if (e.keyCode === 8) {
+                    prevValue = value;
+                    prevCompletion = '';
+                } else if (value && match && value !== prevValue + prevCompletion) {
+                    prevValue = value;
+                    prevCompletion = match.substr(value.length);
+                    input.property('value', prevValue + prevCompletion);
+                    input.node().setSelectionRange(value.length, value.length + prevCompletion.length);
+                }
 
                 updateSize();
 
