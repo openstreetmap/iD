@@ -36,13 +36,13 @@ iD.ui.RawMembershipEditor = function(context) {
             var presetName = context.presets().match(entity, graph).name(),
                 entityName = iD.util.displayName(entity) || '';
 
-            if (q && entityName.toLowerCase().indexOf(q) === -1 &&
-                presetName.toLowerCase().indexOf(q) === -1)
+            var value = presetName + ' ' + entityName;
+            if (q && value.toLowerCase().indexOf(q.toLowerCase()) === -1)
                 return;
 
             result.push({
                 relation: entity,
-                value: presetName + ' ' + entityName
+                value: value
             });
         });
 
