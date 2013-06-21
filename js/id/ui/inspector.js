@@ -43,19 +43,13 @@ iD.ui.Inspector = function(context) {
         var $footer = selection.selectAll('.footer')
             .data([0]);
 
-        selection.select('.footer')
-            .call(iD.ui.ViewOnOSM(context)
-                .entityID(entityID));
+        var footerWrap = $footer.enter().append('div')
+            .attr('class', 'footer');
 
-        $footer.append('div')
-            .call(iD.ui.Save(context));
-
-        $footer.enter().append('div')
-            .attr('class', 'footer')
-            .append('a')
+            footerWrap.append('a')
               .attr('target', '_blank')
               .attr('tabindex', -1)
-              .attr('class', 'bug-report footer-link')
+              .attr('class', 'bug-report footer-item')
               .attr('href', 'https://github.com/systemed/iD/issues')
               .call(bootstrap.tooltip()
                   .title(t('report_a_bug'))
@@ -63,6 +57,12 @@ iD.ui.Inspector = function(context) {
               .append('span')
               .attr('class','icon bug');
 
+            // footerWrap.append('div')
+            //     .call(iD.ui.Save(context));
+
+            selection.select('.footer')
+                .call(iD.ui.ViewOnOSM(context)
+                    .entityID(entityID));
 
         function showList(preset) {
             $wrap.transition()

@@ -576,8 +576,8 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
 /* Out link is special */
 
-.icon.out-link   { height: 14px; width: 14px; background-position: -500px 0;}
-a:hover .icon.out-link   { background-position: -500px -14px;}
+.icon.out-link   { background-position: -500px 0;}
+a:hover .icon.out-link   { background-position: -500px -20px;}
 
 .icon.plus-dark    { background-position: -240px -40px;}
 
@@ -664,12 +664,16 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     width: 100%;
 }
 
-.footer .footer-link {
-    border-right: 1px solid #ccc;
+.footer .footer-item {
     padding: 10px;
     float: left;
+    border-right: 1px solid #ccc;
 }
 
+.footer .footer-item.bug-report {
+    float: right;
+    border-left: 1px solid #ccc;
+}
 
 /* Inspector
 ------------------------------------------------------- */
@@ -2169,10 +2173,6 @@ img.wiki-image {
     vertical-align:top;
 }
 
-.user-list {
-    width: 90%;
-    display: inline-block;
-}
 .user-list a:not(:last-child):after {
     content: ', ';
 }
@@ -2598,20 +2598,24 @@ img.wiki-image {
 
 /* Exceptions for tooltip layouts */
 
-/* make tooltips in editor pane dark */
-.entity-editor-pane .tooltip.top .tooltip-arrow {
+/* make tooltips in sidebar dark */
+#sidebar .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
 
-.entity-editor-pane .tooltip.left .tooltip-arrow {
+#sidebar .tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #000;
+}
+
+#sidebar .tooltip.left .tooltip-arrow {
     border-left-color: #000;
 }
 
-.entity-editor-pane .tooltip.right .tooltip-arrow {
+#sidebar .tooltip.right .tooltip-arrow {
     border-right-color: #000;
 }
 
-.entity-editor-pane .tooltip-inner {
+#sidebar .tooltip-inner {
     background: #000;
     color: #ccc;
 }

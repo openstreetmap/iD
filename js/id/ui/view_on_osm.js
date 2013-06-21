@@ -9,8 +9,19 @@ iD.ui.ViewOnOSM = function(context) {
         var $link = selection.selectAll('.view-on-osm')
             .data([0]);
 
+        // var $enter = $link.enter().insert('a')
+        //     .attr('class', 'footer-item view-on-osm')
+        //     .attr('target', '_blank')
+        //     .call(bootstrap.tooltip()
+        //         .title(t('inspector.view_on_osm'))
+        //         .placement('top'));
+
+        // $enter.append('span')
+        //     .attr('class', 'icon out-link');
+
+
         var $enter = $link.enter().insert('a')
-            .attr('class', 'footer-link view-on-osm')
+            .attr('class', 'footer-item view-on-osm')
             .attr('target', '_blank');
 
         $enter.append('span')
