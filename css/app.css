@@ -399,7 +399,7 @@ button.disabled {
 #bar .mode-buttons button.active,
 .map-control > button.active,
 button.active {
-    background: #7092ff;
+    background: #597BE7;
     color: white;
 }
 

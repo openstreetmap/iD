@@ -102,19 +102,19 @@ iD.ui.Commit = function(context) {
         });
 
         // Confirm Button
-        var saveButton = saveSection.append('button')
-            .attr('class', 'action col3 button')
-            .on('click.save', function() {
-                var comment = commentField.node().value;
-                localStorage.comment = comment;
-                event.save({
-                    comment: comment
-                });
-            });
+        // var saveButton = saveSection.append('button')
+        //     .attr('class', 'action col3 button')
+        //     .on('click.save', function() {
+        //         var comment = commentField.node().value;
+        //         localStorage.comment = comment;
+        //         event.save({
+        //             comment: comment
+        //         });
+        //     });
 
-        saveButton.append('span')
-            .attr('class', 'label')
-            .text(t('commit.save'));
+        // saveButton.append('span')
+        //     .attr('class', 'label')
+        //     .text(t('commit.save'));
 
         var warnings = body.selectAll('div.warning-section')
             .data(iD.validate(changes, context.graph()))
