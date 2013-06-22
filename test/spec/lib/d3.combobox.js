@@ -133,7 +133,7 @@ describe("d3.combobox", function() {
     });
 
     it("does not select when value is not a prefix of any suggestion", function() {
-        input.call(combobox.data(data));
+        input.call(combobox.fetcher(function(_, cb) { cb(data); }));
         input.node().focus();
         simulateKeypress('c');
         simulateKeypress('a');

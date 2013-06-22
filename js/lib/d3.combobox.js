@@ -177,10 +177,9 @@ d3.combobox = function() {
         function autocomplete() {
             var v = value();
 
-            if (!v) {
-                idx = -1;
-                return;
-            }
+            idx = -1;
+
+            if (!v) return;
 
             for (var i = 0; i < suggestions.length; i++) {
                 if (suggestions[i].value.toLowerCase().indexOf(v.toLowerCase()) === 0) {
