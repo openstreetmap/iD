@@ -91,7 +91,6 @@ d3.combobox = function() {
                // backspace, delete
                case 8:
                case 46:
-                   console.log('keydown backspace');
                    input.on('input.typeahead', function() {
                        idx = -1;
                        render();
@@ -134,7 +133,6 @@ d3.combobox = function() {
         }
 
         function change() {
-            console.log('input, value=' + input.property('value'));
             fetch(function() {
                 autocomplete();
                 render();
@@ -144,14 +142,12 @@ d3.combobox = function() {
         function next() {
             idx = Math.min(idx + 1, suggestions.length - 1);
             input.property('value', suggestions[idx].value);
-            console.log('next ' + idx + ' ' + suggestions[idx].value)
             render();
         }
 
         function prev() {
             idx = Math.max(idx - 1, 0);
             input.property('value', suggestions[idx].value);
-            console.log('prev ' + idx + ' ' + suggestions[idx].value)
             render();
         }
 
@@ -187,7 +183,6 @@ d3.combobox = function() {
                     idx = i;
                     input.property('value', completion);
                     input.node().setSelectionRange(v.length, completion.length);
-                    console.log('autocompleted ' + v + '[' + suggestions[i].value.substr(v.length) + '] ' + v.length + ',' + completion.length);
                     return;
                 }
             }
@@ -242,7 +237,6 @@ d3.combobox = function() {
 
         function select(d, i) {
             idx = i;
-            console.log('selected ' + idx);
             render();
         }
 
