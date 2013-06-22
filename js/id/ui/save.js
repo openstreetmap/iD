@@ -15,8 +15,12 @@ iD.ui.Save = function(context) {
             .on('click', save);
 
         button.append('span')
-            .attr('class', 'label')
+            .attr('class', 'label save-label')
             .text(t('save.title'));
+
+        button.append('span')
+            .attr('class', 'label commit-label')
+            .text(t('save.commit'));
 
         button.append('span')
             .attr('class', 'count')
