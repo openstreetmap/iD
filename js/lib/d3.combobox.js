@@ -99,7 +99,7 @@ d3.combobox = function() {
                    break;
                // tab
                case 9:
-                   container.selectAll('a.selected').trigger('click');
+                   container.selectAll('a.selected').each(event.accept);
                    break;
                // return
                case 13:
@@ -127,7 +127,8 @@ d3.combobox = function() {
                     break;
                 // return
                 case 13:
-                    container.selectAll('a.selected').trigger('click');
+                    container.selectAll('a.selected').each(event.accept);
+                    hide();
                     break;
             }
         }

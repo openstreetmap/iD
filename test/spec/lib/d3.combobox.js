@@ -30,6 +30,7 @@ describe("d3.combobox", function() {
 
             case '↑':
             case '↓':
+            case '↩':
                 break;
 
             case '⌫':
@@ -117,14 +118,6 @@ describe("d3.combobox", function() {
         expect(input.property('selectionEnd')).to.equal(8);
     });
 
-    it("does not select on ⇥", function() {
-        input.call(combobox.data(data));
-        input.node().focus();
-        simulateKeypress('c');
-        simulateKeypress('⇥');
-        expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
-    });
-
     it("does not select when value is empty", function() {
         input.call(combobox.data(data));
         input.node().focus();
@@ -179,5 +172,34 @@ describe("d3.combobox", function() {
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
         expect(body.selectAll('.combobox-option.selected').text()).to.equal('abbot');
         expect(input.property('value')).to.equal('abbot');
+    });
+
+    it("emits accepted event with selected datum on ⇥", function(done) {
+        combobox.on('accept', function(d) {
+            expect(d).to.eql({title: 'abbot', value: 'abbot'});
+            done();
+        });
+        input.call(combobox.data(data));
+        input.node().focus();
+        simulateKeypress('a');
+        simulateKeypress('⇥');
+    });
+
+    it("emits accepted event with selected datum on ↩", function(done) {
+        combobox.on('accept', function(d) {
+            expect(d).to.eql({title: 'abbot', value: 'abbot'});
+            done();
+        });
+        input.call(combobox.data(data));
+        input.node().focus();
+        simulateKeypress('a');
+        simulateKeypress('↩');
+    });
+
+    it("hides on ↩", function() {
+        input.call(combobox.data(data));
+        input.node().focus();
+        simulateKeypress('↩');
+        expect(body.selectAll('.combobox').size()).to.equal(0);
     });
 });
