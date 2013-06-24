@@ -61,14 +61,6 @@ iD.ui = function(context) {
             .attr('class', 'map-controls');
 
         controls.append('div')
-            .attr('class', 'map-control background-control')
-            .call(iD.ui.Background(context));
-
-        controls.append('div')
-            .attr('class', 'map-control help-control')
-            .call(iD.ui.Help(context));
-
-        controls.append('div')
             .attr('class', 'map-control zoombuttons')
             .call(iD.ui.Zoom(context));
 
@@ -81,6 +73,14 @@ iD.ui = function(context) {
         controls.append('div')
             .attr('class', 'map-control geolocate-control')
             .call(iD.ui.Geolocate(map));
+
+        controls.append('div')
+            .attr('class', 'map-control background-control')
+            .call(iD.ui.Background(context));
+
+        controls.append('div')
+            .attr('class', 'map-control help-control')
+            .call(iD.ui.Help(context));
 
         window.onbeforeunload = function() {
             history.save();

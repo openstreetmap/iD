@@ -828,6 +828,7 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
 }
 
 .feature-list-item {
+    background: #f6f6f6;
     width: 100%;
     position: relative;
     border-bottom: 1px solid #ccc;
@@ -1146,8 +1147,7 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
 .inspector-hover .entity-editor-pane .header button,
 .inspector-hover .spin-control,
 .inspector-hover .hide-toggle:before,
-.inspector-hover .more-buttons,
-.inspector-hover .view-on-osm {
+.inspector-hover .more-buttons {
     opacity: 0;
 }
 
@@ -1234,14 +1234,8 @@ input,
             transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
 }
 
-.modified .form-label .modified-icon,
-.entity-editor-pane button.minor,
-.combobox-carat,
-.entity-editor-pane .header button,
 .toggle-list label span,
-.spin-control,
 .more-buttons,
-.view-on-osm,
 .hide-toggle:before,
 .entity-editor-pane .toggle-list label::before,
 .entity-editor-pane .toggle-list label.remove .icon {
@@ -2047,15 +2041,15 @@ img.wiki-image {
 
 /* Geolocator */
 
+.geolocate-control {
+    margin-bottom: 20px;
+}
+
 .geolocate-control button {
     border-radius: 0 0 0 4px;
 }
 
 /* Help */
-
-.help-control {
-    margin-bottom: 20px;
-}
 
 .help-control button {
     border-radius: 0 0 0 4px;
@@ -2475,12 +2469,6 @@ img.wiki-image {
     height: 100px;
     border-radius: 5px;
     line-height: 40px;
-    color: #000;
-    opacity: 0.9;
-}
-
-.notice .zoom-to:hover {
-    background: #d8e1ff;
 }
 
 .notice .zoom-to .icon {
