@@ -89,7 +89,7 @@ iD.ui.Geocoder = function(context) {
         }
 
         var tooltip = bootstrap.tooltip()
-            .placement('right')
+            .placement('left')
             .html(true)
             .title(iD.ui.tooltipHtml(t('geocoder.title'), key));
 

@@ -19,7 +19,7 @@ iD.ui.Zoom = function(context) {
             .attr('class', function(d) { return d.id; })
             .on('click.editor', function(d) { d.action(); })
             .call(bootstrap.tooltip()
-                .placement('right')
+                .placement('left')
                 .html(true)
                 .title(function(d) {
                     return iD.ui.tooltipHtml(d.title, d.key);
