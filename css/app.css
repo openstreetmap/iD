@@ -1112,13 +1112,36 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
 }
 /* Preset form (hover mode) */
 
-.inspector-hover textarea,
 .inspector-hover input,
-.inspector-hover .form-label,
+.inspector-hover label,
+.inspector-hover .inspector-preset .preset-form {
+    background: #f6f6f6;
+}
+
+.inspector-hover .form-field {
+    margin-bottom: 0;
+}
+
+.inspector-hover .form-field .form-label,
+.inspector-hover .form-field input,
+.inspector-hover .form-field .preset-input-wrap {
+    border-left-color: #f6f6f6;
+    border-right-color: #f6f6f6;
+    border-radius: 0;
+}
+
+.inspector-hover .form-field .preset-input-wrap,
+.inspector-hover .form-field input {
+    border-bottom-color: #f6f6f6;
+}
+
+.inspector-hover .form-field .form-label {
+    border-top-color: #f6f6f6;
+}
+
+
 .inspector-hover a,
-.inspector-hover .checkselect label:last-of-type,
-.inspector-hover .preset-input-wrap,
-.inspector-hover .preset-input-wrap li {
+.inspector-hover .checkselect label:last-of-type {
     color: #666;
 }
 
@@ -1416,7 +1439,6 @@ input[type=number] {
     display: block;
     padding: 5px 10px;
     color: #7092FF;
-    background-color: white;
 }
 
 .checkselect label:hover {
