@@ -305,6 +305,9 @@ iD.Connection = function() {
 
                 return {
                     id: tile.toString(),
+                    z: tile[2],
+                    x: tile[0],
+                    y: tile[1],
                     extent: iD.geo.Extent(
                         projection.invert([x, y + ts]),
                         projection.invert([x + ts, y]))
@@ -312,7 +315,7 @@ iD.Connection = function() {
             });
 
         function bboxUrl(tile) {
-            return 'http://tile.osm.osuosl.org/tiles/tiled_osm/' + z + "/" + tile[0] + "/" + tile[1] + ".osm";
+            return 'http://tile.osm.osuosl.org/tiles/tiled_osm/' + tile.z + "/" + tile.x + "/" + tile.y + ".osm";
         }
 
         _.filter(inflight, function(v, i) {
