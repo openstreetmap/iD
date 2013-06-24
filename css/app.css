@@ -311,7 +311,7 @@ ul.link-list li:last-child {
 }
 
 .fillL3 {
-    background: #f1f1f1;
+    background: #ececec;
     color: #333;
 }
 
@@ -891,15 +891,17 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .subgrid .preset-list {
     padding: 10px 10px 0 10px;
-    border: 1px solid #CCC;
     margin-top: 0;
+    border: 0;
     border-radius: 8px;
+    width: -webkit-calc(100% + 20px);
+    margin-left: -10px;
 }
 
 .subgrid .arrow {
     border: solid rgba(0, 0, 0, 0);
     border-width: 10px;
-    border-bottom-color: #CCC;
+    border-bottom-color: #f1f1f1;
     width: 0;
     height: 0;
     margin-left: 50%;
@@ -947,12 +949,9 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .inspector-preset form.preset-form {
-    padding: 20px;
-}
-
-.entity-editor-pane .preset-list-item {
-    border-bottom: 1px solid #ccc;
-    padding: 20px;
+    padding: 10px;
+    margin: 0 10px 20px 10px;
+    border-radius: 8px;
 }
 
 .entity-editor-pane .preset-list-item::after {
@@ -966,7 +965,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     margin: auto;
     border: solid rgba(0, 0, 0, 0);
     border-width: 10px;
-    border-bottom-color: #ccc;
+    border-bottom-color: #ececec;
 }
 
 .entity-editor-pane .preset-list-item .preset-list-button-wrap {
@@ -1040,13 +1039,14 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 /* Preset form (hover mode) */
 
-.inspector-hover textarea,
+.preset-input-wrap .label,
 .inspector-hover input,
-.inspector-hover .form-label,
+.inspector-hover label {
+    background: #ececec;
+}
+
 .inspector-hover a,
-.inspector-hover .checkselect label:last-of-type,
-.inspector-hover .preset-input-wrap,
-.inspector-hover .preset-input-wrap li {
+.inspector-hover .checkselect label:last-of-type {
     color: #666;
 }
 
@@ -1213,12 +1213,17 @@ input,
 }
 
 button.preset-add-field {
+    background: #f6f6f6;
     width: 25%;
     height: 40px;
     -webkit-transition: width 200ms;
        -moz-transition: width 200ms;
          -o-transition: width 200ms;
             transition: width 200ms;
+}
+
+button.preset-add-field:hover {
+    background: #ececec;
 }
 
 /* set width based on # of buttons */
@@ -1351,7 +1356,6 @@ input[type=number] {
     display: block;
     padding: 5px 10px;
     color: #7092FF;
-    background-color: white;
 }
 
 .checkselect label:hover {
@@ -2325,10 +2329,6 @@ img.wiki-image {
 
 .mode-save a.user-info {
     display: inline-block;
-}
-
-.mode-save .commit-info {
-    padding-bottom: 10px;
 }
 
 .mode-save .commit-form {
