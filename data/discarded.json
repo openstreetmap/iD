@@ -14,5 +14,6 @@
     "yh:STRUCTURE",
     "yh:TOTYUMONO",
     "yh:TYPE",
-    "yh:WIDTH_RANK"
+    "yh:WIDTH_RANK",
+    "SK53_bulk:load"
 ]
