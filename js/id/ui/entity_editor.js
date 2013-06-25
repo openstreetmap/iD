@@ -46,7 +46,7 @@ iD.ui.EntityEditor = function(context) {
             .attr('class', 'inspector-body');
 
         $enter.append('div')
-            .attr('class', 'preset-list-item inspector-inner fillL')
+            .attr('class', 'preset-list-item inspector-inner')
             .append('div')
             .attr('class', 'preset-list-button-wrap')
             .append('button')

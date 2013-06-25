@@ -310,7 +310,7 @@ ul.link-list li:last-child {
 }
 
 .fillL3 {
-    background: #f1f1f1;
+    background: #ececec;
     color: #333;
 }
 
@@ -509,7 +509,7 @@ button.action:hover {
 .icon.avatar.light     { background-position: -320px -20px;}
 .icon.nearby.light     { background-position: -340px -20px;}
 .icon.bug.light        { background-position: -400px -20px;}
-.icon.undo             { background-position: -80px -20px;}
+.icon.undo.light       { background-position: -80px -20px;}
 .icon.redo             { background-position: -100px -20px;}
 .icon.close.light      { background-position: -160px -20px;}
 
@@ -557,12 +557,10 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
 
 #bar {
     position:relative;
-    height:60px;
     z-index: 1;
 }
 
 #bar button {
-    height: 60px;
     color: white;
     border-radius: 0;
     border-right: 1px solid #111;
@@ -578,15 +576,10 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
     border-right: 0;
 }
 
-#bar .undoredo-buttons button:hover {
-    background: #111;
-}
-
-#bar .undoredo-buttons button,
 #bar button.disabled,
 #bar button.disabled:hover,
 .mode-save #bar button {
-    background: #222;
+    background: #444;
 }
 
 #bar .save-button {
@@ -595,20 +588,14 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
     left: 100%;
 }
 
-
 #bar button.save {
     border-left: 1px solid #111;
-    background: #222;
     position: absolute;
     border-right: 0;
     top: -60px;
    -moz-transition: background 100ms, top 200ms;
      -o-transition: background 100ms, top 200ms;
         transition: background 100ms, top 200ms;
-}
-
-#bar button.save:hover {
-    background: #111;
 }
 
 /* label swapping on save button */
@@ -644,7 +631,7 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
 #bar button.save.has-count .count {
     display: block;
     position: absolute;
-    top: 15px;
+    top: 5px;
     background: rgba(255, 255, 255, .5);
     color: #333;
     padding: 10px;
@@ -753,7 +740,7 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
     overflow: hidden;
     position: absolute;
     width: 100%;
-    top: 60px;
+    top: 40px;
     bottom: 0;
 }
 
@@ -963,15 +950,17 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
 
 .subgrid .preset-list {
     padding: 10px 10px 0 10px;
-    border: 1px solid #CCC;
     margin-top: 0;
+    border: 0;
     border-radius: 8px;
+    width: -webkit-calc(100% + 20px);
+    margin-left: -10px;
 }
 
 .subgrid .arrow {
     border: solid rgba(0, 0, 0, 0);
     border-width: 10px;
-    border-bottom-color: #CCC;
+    border-bottom-color: #f1f1f1;
     width: 0;
     height: 0;
     margin-left: 50%;
@@ -1019,12 +1008,9 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
 }
 
 .inspector-preset form.preset-form {
-    padding: 20px;
-}
-
-.entity-editor-pane .preset-list-item {
-    border-bottom: 1px solid #ccc;
-    padding: 20px;
+    padding: 10px;
+    margin: 0 10px 20px 10px;
+    border-radius: 8px;
 }
 
 .entity-editor-pane .preset-list-item::after {
@@ -1038,7 +1024,7 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
     margin: auto;
     border: solid rgba(0, 0, 0, 0);
     border-width: 10px;
-    border-bottom-color: #ccc;
+    border-bottom-color: #ececec;
 }
 
 .entity-editor-pane .preset-list-item .preset-list-button-wrap {
@@ -1112,33 +1098,11 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
 }
 /* Preset form (hover mode) */
 
+.preset-input-wrap .label,
 .inspector-hover input,
-.inspector-hover label,
-.inspector-hover .inspector-preset .preset-form {
-    background: #f6f6f6;
+.inspector-hover label {
+    background: #ececec;
 }
-
-.inspector-hover .form-field {
-    margin-bottom: 0;
-}
-
-.inspector-hover .form-field .form-label,
-.inspector-hover .form-field input,
-.inspector-hover .form-field .preset-input-wrap {
-    border-left-color: #f6f6f6;
-    border-right-color: #f6f6f6;
-    border-radius: 0;
-}
-
-.inspector-hover .form-field .preset-input-wrap,
-.inspector-hover .form-field input {
-    border-bottom-color: #f6f6f6;
-}
-
-.inspector-hover .form-field .form-label {
-    border-top-color: #f6f6f6;
-}
-
 
 .inspector-hover a,
 .inspector-hover .checkselect label:last-of-type {
@@ -1301,12 +1265,17 @@ input,
 }
 
 button.preset-add-field {
+    background: #f6f6f6;
     width: 25%;
     height: 40px;
     -webkit-transition: width 200ms;
        -moz-transition: width 200ms;
          -o-transition: width 200ms;
             transition: width 200ms;
+}
+
+button.preset-add-field:hover {
+    background: #ececec;
 }
 
 /* set width based on # of buttons */
@@ -2411,10 +2380,6 @@ img.wiki-image {
     display: inline-block;
 }
 
-.mode-save .commit-info {
-    padding-bottom: 10px;
-}
-
 .mode-save .commit-form {
     margin-bottom: 0;
 }
@@ -2508,9 +2473,11 @@ img.wiki-image {
 .tooltip {
     position: absolute;
     display: none;
-    color:#333;
+    background: #000;
+    color: #ccc;
     text-align: left;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: bold;
 }
 
 .tooltip.in {
@@ -2544,11 +2511,13 @@ img.wiki-image {
     max-width: 200px;
     min-width: 80px;
     padding: 10px;
-    font-weight: normal;
-    background-color: white;
+    background: #000;
+    color: #ccc;
 }
 
 .tail {
+    font-weight: bold;
+    font-size: 11px;
     width: 200px;
     height: 400px;
     pointer-events: none;
@@ -2568,13 +2537,13 @@ img.wiki-image {
     top: 50%;
     right: -5px;
     margin-top: -5px;
-    border-left-color: white;
+    border-left-color: #000;
     border-width: 5px 0 5px 5px;
 }
 
 .tail div {
     padding: 10px;
-    background: white;
+    background: #000;
     position: absolute;
     top: 180px;
     left: 0;
@@ -2608,7 +2577,7 @@ img.wiki-image {
     bottom: -5px;
     left: 50%;
     margin-left: -5px;
-    border-top-color: white;
+    border-top-color: #000;
     border-width: 5px 5px 0;
 }
 
@@ -2616,7 +2585,7 @@ img.wiki-image {
     top: 50%;
     left: -5px;
     margin-top: -5px;
-    border-right-color: white;
+    border-right-color: #000;
     border-width: 5px 5px 5px 0;
 }
 
@@ -2624,7 +2593,7 @@ img.wiki-image {
     top: 50%;
     right: -5px;
     margin-top: -5px;
-    border-left-color: white;
+    border-left-color: #000;
     border-width: 5px 0 5px 5px;
 }
 
@@ -2632,12 +2601,12 @@ img.wiki-image {
     top: -5px;
     left: 50%;
     margin-left: -5px;
-    border-bottom-color: white;
+    border-bottom-color: #000;
     border-width: 0 5px 5px;
 }
 
 .keyhint-wrap {
-    background: #F6F6F6;
+    background: #444;
     padding: 10px;
     margin: 10px -10px -10px;
 }
@@ -2665,30 +2634,6 @@ img.wiki-image {
     left: -1px;
     border: 1px solid #CCC;
     border-top: 0;
-}
-
-/* Exceptions for tooltip layouts */
-
-/* make tooltips in sidebar dark */
-#sidebar .tooltip.top .tooltip-arrow {
-    border-top-color: #000;
-}
-
-#sidebar .tooltip.bottom .tooltip-arrow {
-    border-bottom-color: #000;
-}
-
-#sidebar .tooltip.left .tooltip-arrow {
-    border-left-color: #000;
-}
-
-#sidebar .tooltip.right .tooltip-arrow {
-    border-right-color: #000;
-}
-
-#sidebar .tooltip-inner {
-    background: #000;
-    color: #ccc;
 }
 
 /* Uncramp map-control tooltips */

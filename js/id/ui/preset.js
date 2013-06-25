@@ -76,7 +76,7 @@ iD.ui.preset = function(context) {
             .data([0]);
 
         $form.enter().append('form')
-            .attr('class', 'fillL preset-form inspector-inner');
+            .attr('class', 'preset-form inspector-inner fillL3');
 
         var $fields = $form.selectAll('.form-field')
             .data(shown, fieldKey);
@@ -132,7 +132,7 @@ iD.ui.preset = function(context) {
             .data([0]);
 
         $more.enter().append('div')
-            .attr('class', 'more-buttons fillL inspector-inner');
+            .attr('class', 'more-buttons inspector-inner');
 
         var $buttons = $more.selectAll('.preset-add-field')
             .data(notShown, fieldKey);

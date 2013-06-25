@@ -54,15 +54,15 @@ iD.ui.Commit = function(context) {
             .attr('placeholder', t('commit.description_placeholder'))
             .property('value', context.storage('comment') || '');
 
-        commentField.node().select();
-
-        // Save Section
-        var saveSection = body.append('div')
-            .attr('class','modal-section fillL cf');
-
-        var prose = saveSection.append('p')
+        var prose = commentSection.append('p')
             .attr('class', 'commit-info')
             .html(t('commit.upload_explanation'));
+
+        commentField.node().select();
+
+        // // Save Section
+        // var saveSection = body.append('div')
+        //     .attr('class','modal-section fillL cf');
 
         context.connection().userDetails(function(err, user) {
             if (err) return;
@@ -96,10 +96,10 @@ iD.ui.Commit = function(context) {
             prose.html(t('commit.upload_explanation_with_user', {user: userLink.html()}));
         });
 
-        saveSection.selectAll('.logout').on('click.logout', function() {
-            d3.event.preventDefault();
-            connection.logout();
-        });
+        // saveSection.selectAll('.logout').on('click.logout', function() {
+        //     d3.event.preventDefault();
+        //     connection.logout();
+        // });
 
         // Confirm Button
         // var saveButton = saveSection.append('button')
