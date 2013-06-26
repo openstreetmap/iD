@@ -948,6 +948,11 @@ a:hover .icon.out-link   { background-position: -500px -20px;}
     top: -3px;
 }
 
+.subgrid {
+    opacity: 0;
+    max-height: 0;
+}
+
 .subgrid .preset-list {
     padding: 10px 10px 0 10px;
     margin-top: 0;
