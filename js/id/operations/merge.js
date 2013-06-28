@@ -15,8 +15,9 @@ iD.operations.Merge = function(selectedIDs, context) {
             action = mergePolygon;
         }
 
-        var difference = context.perform(action, annotation);
-        context.enter(iD.modes.Select(context, difference.extantIDs()));
+        context.perform(action, annotation);
+        context.enter(iD.modes.Select(context, selectedIDs.filter(function(id) { return context.hasEntity(id); }))
+            .suppressMenu(true));
     };
 
     operation.available = function() {
