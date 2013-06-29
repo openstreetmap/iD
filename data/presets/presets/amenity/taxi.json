@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "cab"
+    ],
+    "tags": {
+        "amenity": "taxi"
+    },
+    "name": "Taxi Stand"
+}

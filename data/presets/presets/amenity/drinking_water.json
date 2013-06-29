@@ -1,0 +1,14 @@
+{
+    "icon": "water",
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "amenity": "drinking_water"
+    },
+    "terms": [
+        "water fountain",
+        "potable water"
+    ],
+    "name": "Drinking Water"
+}

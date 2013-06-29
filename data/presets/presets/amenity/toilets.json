@@ -8,7 +8,10 @@
         "vertex",
         "area"
     ],
-    "terms": [],
+    "terms": [
+        "bathroom",
+        "restroom"
+    ],
     "tags": {
         "amenity": "toilets"
     },

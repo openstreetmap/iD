@@ -309,6 +309,33 @@
         },
         "name": "Cafe"
     },
+    "amenity/car_rental": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "car_rental"
+        },
+        "fields": [
+            "operator"
+        ],
+        "name": "Car Rental"
+    },
+    "amenity/car_sharing": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "car_sharing"
+        },
+        "fields": [
+            "operator",
+            "capacity"
+        ],
+        "name": "Car Sharing"
+    },
     "amenity/car_wash": {
         "geometry": [
             "point",
@@ -388,6 +415,20 @@
             "amenity": "courthouse"
         },
         "name": "Courthouse"
+    },
+    "amenity/drinking_water": {
+        "icon": "water",
+        "geometry": [
+            "point"
+        ],
+        "tags": {
+            "amenity": "drinking_water"
+        },
+        "terms": [
+            "water fountain",
+            "potable water"
+        ],
+        "name": "Drinking Water"
     },
     "amenity/embassy": {
         "geometry": [
@@ -965,6 +1006,23 @@
         "searchable": false,
         "name": "Swimming Pool"
     },
+    "amenity/taxi": {
+        "fields": [
+            "operator"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [
+            "cab"
+        ],
+        "tags": {
+            "amenity": "taxi"
+        },
+        "name": "Taxi Stand"
+    },
     "amenity/telephone": {
         "icon": "telephone",
         "geometry": [
@@ -1009,7 +1067,10 @@
             "vertex",
             "area"
         ],
-        "terms": [],
+        "terms": [
+            "bathroom",
+            "restroom"
+        ],
         "tags": {
             "amenity": "toilets"
         },
@@ -3712,6 +3773,27 @@
             "shop": "electronics"
         },
         "name": "Electronics Store"
+    },
+    "shop/farm": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "farm"
+        },
+        "terms": [
+            "farm shop",
+            "farm stand"
+        ],
+        "name": "Produce Stand"
     },
     "shop/fishmonger": {
         "icon": "shop",

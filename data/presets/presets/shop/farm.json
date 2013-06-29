@@ -1,0 +1,21 @@
+{
+    "icon": "shop",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "shop": "farm"
+    },
+    "terms": [
+        "farm shop",
+        "farm stand"
+    ],
+    "name": "Produce Stand"
+}

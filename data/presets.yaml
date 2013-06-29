@@ -300,6 +300,12 @@ en:
       amenity/cafe: 
         name: Cafe
         terms: "coffee,tea,coffee shop"
+      amenity/car_rental: 
+        name: Car Rental
+        terms: ""
+      amenity/car_sharing: 
+        name: Car Sharing
+        terms: ""
       amenity/car_wash: 
         name: Car Wash
         terms: ""
@@ -312,6 +318,9 @@ en:
       amenity/courthouse: 
         name: Courthouse
         terms: ""
+      amenity/drinking_water: 
+        name: Drinking Water
+        terms: "water fountain,potable water"
       amenity/embassy: 
         name: Embassy
         terms: ""
@@ -384,6 +393,9 @@ en:
       amenity/swimming_pool: 
         name: Swimming Pool
         terms: ""
+      amenity/taxi: 
+        name: Taxi Stand
+        terms: cab
       amenity/telephone: 
         name: Telephone
         terms: ""
@@ -392,7 +404,7 @@ en:
         terms: "theatre,performance,play,musical"
       amenity/toilets: 
         name: Toilets
-        terms: ""
+        terms: "bathroom,restroom"
       amenity/townhall: 
         name: Town Hall
         terms: "village hall,city government,courthouse,municipal building,municipal center"
@@ -954,6 +966,9 @@ en:
       shop/electronics: 
         name: Electronics Store
         terms: ""
+      shop/farm: 
+        name: Produce Stand
+        terms: "farm shop,farm stand"
       shop/fishmonger: 
         name: Fishmonger
         terms: ""
