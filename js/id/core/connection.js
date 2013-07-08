@@ -5,6 +5,7 @@ iD.Connection = function() {
         connection = {},
         inflight = {},
         loadedTiles = {},
+        tileZoom = 16,
         oauth = osmAuth({
             url: 'http://www.openstreetmap.org',
             oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
@@ -283,19 +284,25 @@ iD.Connection = function() {
 
     function abortRequest(i) { i.abort(); }
 
+    connection.tileZoom = function(_) {
+        if (!arguments.length) return tileZoom;
+        tileZoom = _;
+        return connection;
+    };
+
     connection.loadTiles = function(projection, dimensions) {
 
         if (off) return;
 
         var s = projection.scale() * 2 * Math.PI,
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
-            ts = 256 * Math.pow(2, z - 16),
+            ts = 256 * Math.pow(2, z - tileZoom),
             origin = [
                 s / 2 - projection.translate()[0],
                 s / 2 - projection.translate()[1]];
 
         var tiles = d3.geo.tile()
-            .scaleExtent([16, 16])
+            .scaleExtent([tileZoom, tileZoom])
             .scale(s)
             .size(dimensions)
             .translate(projection.translate())()
