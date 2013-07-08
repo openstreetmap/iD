@@ -46,7 +46,7 @@ iD.ui.Success = function(context) {
             .attr('target', '_blank')
             .attr('href', function() {
                 return 'https://facebook.com/sharer/sharer.php?u=' +
-                    encodeURIComponent(message);
+                    encodeURIComponent(context.connection().changesetURL(changeset.id));
             })
             .text(t('success.facebook'));
 
