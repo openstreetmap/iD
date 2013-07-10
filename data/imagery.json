@@ -348,23 +348,23 @@
         "sourcetag": "Surrey aerial"
     },
     {
-        "name": "Haiti - GeoEye Jan 13",
-        "template": "http://gravitystorm.dev.openstreetmap.org/imagery/haiti/{z}/{x}/{y}.jpg",
+        "name": "Port au Prince - GeoEye Jan 2010",
+        "template": "http://gravitystorm.dev.openstreetmap.org/imagery/haiti/{z}/{x}/{y}.png",
         "extent": [
             [
-                -74.5,
-                17.95
+                -72.43,
+                18.50
             ],
             [
-                -71.58,
-                20.12
+                -72.31,
+                18.58
             ]
         ],
-        "sourcetag": "Haiti GeoEye"
+        "sourcetag": "GeoEye, 2010-01"
     },
     {
-        "name": "Haiti - GeoEye Jan 13+",
-        "template": "http://maps.nypl.org/tilecache/1/geoeye/{z}/{x}/{y}.jpg",
+        "name": "Haiti - IOM Drone Imagery, 2012-13",
+        "template": "http://wms.openstreetmap.fr/tms/1.0.0/iomhaiti/{zoom}/{x}/{y}",
         "extent": [
             [
                 -74.5,
@@ -375,37 +375,7 @@
                 20.12
             ]
         ],
-        "sourcetag": "Haiti GeoEye"
-    },
-    {
-        "name": "Haiti - DigitalGlobe",
-        "template": "http://maps.nypl.org/tilecache/1/dg_crisis/{z}/{x}/{y}.jpg",
-        "extent": [
-            [
-                -74.5,
-                17.95
-            ],
-            [
-                -71.58,
-                20.12
-            ]
-        ],
-        "sourcetag": "Haiti DigitalGlobe"
-    },
-    {
-        "name": "Haiti - Street names",
-        "template": "http://hypercube.telascience.org/tiles/1.0.0/haiti-city/{z}/{x}/{y}.jpg",
-        "extent": [
-            [
-                -74.5,
-                17.95
-            ],
-            [
-                -71.58,
-                20.12
-            ]
-        ],
-        "sourcetag": "Haiti streetnames"
+        "sourcetag": "iom_image2013"
     },
     {
         "name": "NAIP",
