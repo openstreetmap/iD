@@ -76,18 +76,20 @@ iD.Background = function(backgroundType) {
     function render(selection) {
         var requests = [];
 
-        tile().forEach(function(d) {
-            addSource(d);
-            requests.push(d);
-            if (cache[d[3]] === false && lookUp(d)) {
-                requests.push(addSource(lookUp(d)));
-            }
-        });
+        if (tile.scaleExtent()[0] <= z) {
+            tile().forEach(function(d) {
+                addSource(d);
+                requests.push(d);
+                if (cache[d[3]] === false && lookUp(d)) {
+                    requests.push(addSource(lookUp(d)));
+                }
+            });
 
-        requests = uniqueBy(requests, 3).filter(function(r) {
-            // don't re-request tiles which have failed in the past
-            return cache[r[3]] !== false;
-        });
+            requests = uniqueBy(requests, 3).filter(function(r) {
+                // don't re-request tiles which have failed in the past
+                return cache[r[3]] !== false;
+            });
+        }
 
         var pixelOffset = [
             Math.round(offset[0] * Math.pow(2, z)),
