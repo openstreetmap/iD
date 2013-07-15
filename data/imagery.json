@@ -49,7 +49,7 @@
         ]
     },
     {
-        "name": " TIGER 2012 Roads Overlay",
+        "name": "TIGER 2012 Roads Overlay",
         "template": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
         "overlay": true,
         "scaleExtent": [
@@ -73,7 +73,7 @@
         ]
     },
     {
-        "name": " TIGER 2012 Roads Overlay",
+        "name": "TIGER 2012 Roads Overlay",
         "template": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
         "overlay": true,
         "scaleExtent": [
@@ -97,7 +97,7 @@
         ]
     },
     {
-        "name": " TIGER 2012 Roads Overlay",
+        "name": "TIGER 2012 Roads Overlay",
         "template": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
         "overlay": true,
         "scaleExtent": [
@@ -121,7 +121,7 @@
         ]
     },
     {
-        "name": " USGS Topographic Maps",
+        "name": "USGS Topographic Maps",
         "template": "http://{t}.tile.openstreetmap.us/usgs_scanned_topos/{z}/{x}/{y}.png",
         "subdomains": [
             "a",
@@ -140,7 +140,7 @@
         ]
     },
     {
-        "name": " USGS Topographic Maps",
+        "name": "USGS Topographic Maps",
         "template": "http://{t}.tile.openstreetmap.us/usgs_scanned_topos/{z}/{x}/{y}.png",
         "subdomains": [
             "a",
@@ -159,7 +159,7 @@
         ]
     },
     {
-        "name": " USGS Topographic Maps",
+        "name": "USGS Topographic Maps",
         "template": "http://{t}.tile.openstreetmap.us/usgs_scanned_topos/{z}/{x}/{y}.png",
         "subdomains": [
             "a",
@@ -178,7 +178,7 @@
         ]
     },
     {
-        "name": " USGS Large Scale Aerial Imagery",
+        "name": "USGS Large Scale Aerial Imagery",
         "template": "http://{t}.tile.openstreetmap.us/usgs_large_scale/{z}/{x}/{y}.jpg",
         "subdomains": [
             "a",
