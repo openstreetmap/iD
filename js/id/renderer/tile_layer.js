@@ -52,12 +52,6 @@ iD.TileLayer = function(backgroundType) {
 
     // Update tiles based on current state of `projection`.
     function background(selection) {
-        var layer = selection.selectAll('.' + backgroundType + '-layer')
-            .data([background]);
-
-        layer.enter().append('div')
-            .attr('class', 'layer-layer ' + backgroundType + '-layer', true);
-
         tile.scale(projection.scale() * 2 * Math.PI)
             .translate(projection.translate());
 
@@ -67,7 +61,7 @@ iD.TileLayer = function(backgroundType) {
 
         z = Math.max(Math.log(projection.scale() * 2 * Math.PI) / Math.log(2) - 8, 0);
 
-        render(layer);
+        render(selection);
     }
 
     // Derive the tiles onscreen, remove those offscreen and position them.

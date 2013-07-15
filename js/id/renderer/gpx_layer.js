@@ -9,8 +9,7 @@ iD.GpxLayer = function(context, dispatch) {
             .data([render]);
 
         svg.enter()
-            .append('svg')
-            .attr('class', 'layer-layer gpx-layer');
+            .append('svg');
 
         svg.style('display', enable ? 'block' : 'none');
 

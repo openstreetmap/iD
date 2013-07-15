@@ -4,9 +4,7 @@ iD.Background = function(context) {
             .projection(context.projection),
         gpxLayer = iD.GpxLayer(context, dispatch)
             .projection(context.projection),
-        overlayLayer = iD.TileLayer('overlay')
-            .projection(context.projection),
-        layers = [baseLayer, gpxLayer, overlayLayer];
+        overlayLayers = [];
 
     var backgroundSources = iD.data.imagery.map(function(source) {
         if (source.sourcetag === 'Bing') {
@@ -24,10 +22,35 @@ iD.Background = function(context) {
         });
     }
 
-    function background(supersurface) {
-        layers.forEach(function(layer) {
-            supersurface.call(layer);
+    function background(selection) {
+        var base = selection.selectAll('.background-layer')
+            .data([0]);
+
+        base.enter().insert('div', '.layer-data')
+            .attr('class', 'layer-layer background-layer');
+
+        base.call(baseLayer);
+
+        var gpx = selection.selectAll('.gpx-layer')
+            .data([0]);
+
+        gpx.enter().insert('div', '.layer-data')
+            .attr('class', 'layer-layer gpx-layer');
+
+        gpx.call(gpxLayer);
+
+        var overlays = selection.selectAll('.overlay-layer')
+            .data(overlayLayers, function(d) { return d.source().data.name });
+
+        overlays.enter().insert('div', '.layer-data')
+            .attr('class', 'layer-layer overlay-layer');
+
+        overlays.each(function(layer) {
+            d3.select(this).call(layer);
         });
+
+        overlays.exit()
+            .remove();
     }
 
     background.sources = function(extent) {
@@ -38,7 +61,10 @@ iD.Background = function(context) {
     };
 
     background.dimensions = function(_) {
-        layers.forEach(function(layer) {
+        baseLayer.dimensions(_);
+        gpxLayer.dimensions(_);
+
+        overlayLayers.forEach(function(layer) {
             layer.dimensions(_);
         });
     };
@@ -82,17 +108,27 @@ iD.Background = function(context) {
     };
 
     background.showsLayer = function(d) {
-        var overlay = overlayLayer.source();
-        return d.data.name === baseLayer.source().data.name ||
-            (overlay.data && overlay.data.name === d.data.name);
+        return d === baseLayer.source() || overlayLayers.some(function(l) { return l.source() === d; });
     };
 
     background.toggleOverlayLayer = function(d) {
-        if (overlayLayer.source() === d) {
-            overlayLayer.source(d3.functor(''));
-        } else {
-            overlayLayer.source(d);
+        var layer;
+
+        for (var i = 0; i < overlayLayers.length; i++) {
+            layer = overlayLayers[i];
+            if (layer.source() === d) {
+                overlayLayers.splice(i, 1);
+                dispatch.change();
+                return;
+            }
         }
+
+        layer = iD.TileLayer('overlay')
+            .source(d)
+            .projection(context.projection)
+            .dimensions(baseLayer.dimensions());
+
+        overlayLayers.push(layer);
         dispatch.change();
     };
 
