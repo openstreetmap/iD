@@ -256,6 +256,9 @@ ul li { list-style: none;}
        -moz-transition: all 100ms;
          -o-transition: all 100ms;
             transition: all 100ms;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .toggle-list > label:hover {
