@@ -18,12 +18,12 @@ iD.ui.EntityEditor = function(context) {
         // Enter
 
         var $enter = $header.enter().append('div')
-            .attr('class', 'header fillL cf');
+            .attr('class', 'header cf');
 
         $enter.append('button')
             .attr('class', 'fr preset-close')
             .append('span')
-            .attr('class', 'icon close');
+            .attr('class', 'icon close light');
 
         $enter.append('h3');
 
@@ -46,7 +46,7 @@ iD.ui.EntityEditor = function(context) {
             .attr('class', 'inspector-body');
 
         $enter.append('div')
-            .attr('class', 'preset-list-item inspector-inner fillL')
+            .attr('class', 'preset-list-item inspector-inner')
             .append('div')
             .attr('class', 'preset-list-button-wrap')
             .append('button')

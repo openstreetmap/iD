@@ -11,7 +11,7 @@ iD.ui.PresetList = function(context) {
         selection.html('');
 
         var messagewrap = selection.append('div')
-            .attr('class', 'header fillL cf');
+            .attr('class', 'header cf');
 
         var message = messagewrap.append('h3')
             .text(t('inspector.choose'));
@@ -29,7 +29,7 @@ iD.ui.PresetList = function(context) {
                     context.enter(iD.modes.Browse(context));
                 })
                 .append('span')
-                .attr('class', 'icon close');
+                .attr('class', 'icon close light');
         }
 
         function keydown() {

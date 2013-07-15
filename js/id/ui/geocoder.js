@@ -89,7 +89,7 @@ iD.ui.Geocoder = function(context) {
         }
 
         var tooltip = bootstrap.tooltip()
-            .placement('right')
+            .placement('left')
             .html(true)
             .title(iD.ui.tooltipHtml(t('geocoder.title'), key));
 
@@ -131,18 +131,18 @@ iD.ui.Geocoder = function(context) {
                         return d3.event.stopPropagation();
                     });
                     gcForm.style('display', 'block')
-                        .style('left', '-500px')
+                        .style('right', '-500px')
                         .transition()
                         .duration(200)
-                        .style('left', '30px');
+                        .style('right', '30px');
                         inputNode.node().focus();
                 } else {
                     selection.on('mousedown.geocoder-inside', null);
                     gcForm.style('display', 'block')
-                        .style('left', '30px')
+                        .style('right', '30px')
                         .transition()
                         .duration(200)
-                        .style('left', '-500px')
+                        .style('right', '-500px')
                         .each('end', function() {
                             d3.select(this).style('display', 'none');
                         });

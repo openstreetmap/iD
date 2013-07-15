@@ -31,17 +31,15 @@ body {
     width: 100%;
     position: fixed;
     min-width: 768px;
+    background: #222;
 }
 
 #content {
-    position: relative;
+    position: absolute;
     overflow: hidden;
     height: 100%;
-}
-
-.limiter {
-    position: relative;
-    max-width: 1200px;
+    left: 33.3333%;
+    right: 0;
 }
 
 .spinner {
@@ -52,14 +50,16 @@ body {
     position: absolute;
     height: 40px;
     width: 40px;
-    right:  33.3333%;
-    top: 10px;
+    right: -50px;
+    top: 70px;
     border-radius: 4px;
-    margin-right: 10px;
     background: black;
 }
 
 @media only screen and (min-width: 1200px) {
+    #content {
+        left: 400px;
+    }
     .spinner img {
         right: 400px;
     }
@@ -310,7 +310,7 @@ ul.link-list li:last-child {
 }
 
 .fillL3 {
-    background: #f1f1f1;
+    background: #ececec;
     color: #333;
 }
 
@@ -353,7 +353,7 @@ a.hide {
     position:absolute;
     width:50%;
     top: 0;
-    bottom: 30px;
+    bottom: 0;
 }
 
 .pane:first-child {
@@ -396,8 +396,11 @@ button.disabled {
     cursor: auto;
 }
 
+#bar .mode-buttons button.active,
+.map-control > button.active,
 button.active {
-    background: #7092ff;
+    background: #597BE7;
+    color: white;
 }
 
 button.minor {
@@ -420,7 +423,6 @@ button.minor:hover {
 
 .button-wrap {
     display: inline-block;
-    padding-right:10px;
     margin: 0;
 }
 
@@ -432,63 +434,14 @@ button.minor:hover {
     padding-right: 0;
 }
 
-.joined button {
-    border-radius:0;
-    border-right: 1px solid rgba(0,0,0,.5);
-}
-
-.joined button:first-child {
-    border-radius:4px 0 0 4px;
-}
-
-.joined button:last-child {
-    border-right-width: 0;
-    border-radius:0 4px 4px 0;
-}
-
 button.action {
     background: #7092ff;
+    color: white;
 }
 
 button.action:focus,
 button.action:hover {
     background: #597BE7;
-}
-
-button.save.has-count {
-    padding: 9px;
-}
-
-button.save .count {
-    display: none;
-}
-
-button.save.has-count .count {
-    display: block;
-    position: absolute;
-    top: 5px;
-    background: rgba(255, 255, 255, .5);
-    color: #333;
-    padding: 10px;
-    height: 30px;
-    line-height: 12px;
-    border-radius: 4px;
-    margin: auto;
-    margin-left: 8.3333%;
-}
-
-button.save.has-count .count::before {
-    content: "";
-    margin: auto;
-    width: 0;
-    height: 0;
-    position: absolute;
-    left: -6px;
-    top: 0;
-    bottom: 0;
-    border-top:    6px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-right:  6px solid rgba(255,255,255,.5);
 }
 
 /* Icons */
@@ -517,12 +470,9 @@ button.save.has-count .count::before {
 
 /* Definitions for every icon */
 .icon.browse     { background-position:   0 0;}
-.icon.point,
-.icon.add-point  { background-position: -20px 0;}
-.icon.line,
-.icon.add-line   { background-position: -40px 0;}
-.icon.area,
-.icon.add-area   { background-position: -60px 0;}
+.icon.point      { background-position: -20px 0;}
+.icon.line       { background-position: -40px 0;}
+.icon.area       { background-position: -60px 0;}
 .icon.undo       { background-position: -80px 0;}
 .icon.redo       { background-position: -100px 0;}
 .icon.apply      { background-position: -120px 0;}
@@ -547,6 +497,9 @@ button.save.has-count .count::before {
 .icon.relation.route         { background-position: -540px 0;}
 .icon.relation.multipolygon  { background-position: -560px 0;}
 
+.icon.add-point  { background-position: -20px -20px;}
+.icon.add-line   { background-position: -40px -20px;}
+.icon.add-area   { background-position: -60px -20px;}
 .icon.plus.light,
 .icon.zoom-in          { background-position: -240px -20px;}
 .icon.zoom-out         { background-position: -260px -20px;}
@@ -556,6 +509,9 @@ button.save.has-count .count::before {
 .icon.avatar.light     { background-position: -320px -20px;}
 .icon.nearby.light     { background-position: -340px -20px;}
 .icon.bug.light        { background-position: -400px -20px;}
+.icon.undo.light       { background-position: -80px -20px;}
+.icon.redo             { background-position: -100px -20px;}
+.icon.close.light      { background-position: -160px -20px;}
 
 .icon.back.blue        { background-position: -420px -20px;}
 .icon.forward.blue     { background-position: -440px -20px;}
@@ -580,8 +536,8 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
 /* Out link is special */
 
-.icon.out-link   { height: 14px; width: 14px; background-position: -500px 0;}
-a:hover .icon.out-link   { background-position: -500px -14px;}
+.icon.out-link   { background-position: -500px 0;}
+a:hover .icon.out-link   { background-position: -500px -20px;}
 
 .icon.plus-dark    { background-position: -240px -40px;}
 
@@ -600,27 +556,117 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 ------------------------------------------------------- */
 
 #bar {
-    position:fixed;
-    padding: 10px;
-    left:0;
-    top:0;
-    right:0;
-    height:60px;
+    position:relative;
     z-index: 1;
-    min-width: 768px;
+}
+
+#bar button {
+    color: white;
+    border-radius: 0;
+    border-right: 1px solid #111;
+    background: #7092ff;
+}
+
+#bar button.active,
+#bar button:hover {
+    background: #597be7
+}
+
+#bar .undoredo-buttons button:last-child{
+    border-right: 0;
+}
+
+#bar button.disabled,
+#bar button.disabled:hover,
+.mode-save #bar button {
+    background: #444;
+}
+
+#bar .save-button {
+    top: 0;
+    position: absolute;
+    left: 100%;
+}
+
+#bar button.save {
+    border-left: 1px solid #111;
+    position: absolute;
+    border-right: 0;
+    top: -60px;
+   -moz-transition: background 100ms, top 200ms;
+     -o-transition: background 100ms, top 200ms;
+        transition: background 100ms, top 200ms;
+}
+
+/* label swapping on save button */
+
+.mode-save #bar .save-button span.commit-label,
+#bar .save-button span.save-label {
+    display: block;
+}
+
+#bar .save-button span.commit-label,
+.mode-save #bar .save-button span.save-label {
+    display: none;
+}
+
+#bar button.save.has-count {
+    top: 0;
+}
+
+.mode-save #bar button.save.has-count {
+    border-left: 1px solid #7092ff;
+    background: #7092ff;
+    top: 120px;
+}
+
+.mode-save #bar button.save:hover {
+    background: #597be7;
+}
+
+#bar button.save .count {
+    display: none;
+}
+
+#bar button.save.has-count .count {
+    display: block;
+    position: absolute;
+    top: 5px;
+    background: rgba(255, 255, 255, .5);
+    color: #333;
+    padding: 10px;
+    height: 30px;
+    line-height: 12px;
+    border-radius: 4px;
+    right: -40px;
+}
+
+#bar button.save.has-count .count::before {
+    content: "";
+    margin: auto;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -6px;
+    top: 0;
+    bottom: 0;
+    border-top:    6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right:  6px solid rgba(255,255,255,.5);
 }
 
 /* Header for modals / panes
 ------------------------------------------------------- */
 
 .header {
-    border-bottom: 1px solid #ccc;
     height: 60px;
     position: relative;
+    color: white;
+    background: #111;
 }
 
 .header h3 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -638,7 +684,12 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .header button {
     position: relative;
+    background: transparent;
     height: 100%;
+}
+
+.header button:hover {
+    background: rgba(0,0,0,.5);
 }
 
 .preset-list-pane .header button {
@@ -655,25 +706,42 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     z-index: 3;
 }
 
+/* Sidebar Footer
+------------------------------------------------------- */
+
 .footer {
     position: absolute;
     bottom: 0;
-    padding: 5px 30px 5px 30px;
+    height: 40px;
     border-top: 1px solid #ccc;
     background-color: #fafafa;
     width: 100%;
+}
+
+.footer .footer-item {
+    padding: 10px;
+    float: left;
+    border-right: 1px solid #ccc;
 }
 
 /* Inspector
 ------------------------------------------------------- */
 
 #sidebar {
-    position: relative;
-    float: right;
-    height: 100%;
-    overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
     z-index: 2;
     background: #f6f6f6;
+    overflow: visible;
+}
+
+#sidebar .panes {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 40px;
+    bottom: 0;
 }
 
 .sidebar-component {
@@ -697,17 +765,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     overflow-y: scroll;
     overflow-x: hidden;
     position: absolute;
-    right: 0;
-    left: 0;
-    bottom: 0;
+    width: 100%;
+    bottom: 39px;
 }
 
+.preset-list-pane .inspector-body,
 .feature-list-pane .inspector-body {
-    top: 120px;
-}
-
-.preset-list-pane .inspector-body {
-    top: 120px;
+    top: 100px;
 }
 
 .entity-editor-pane .inspector-body {
@@ -719,26 +783,29 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     position: relative;
 }
 
+#sidebar .search-header {
+    position: relative;
+    height: 60px;
+}
+
 #sidebar .search-header .icon {
     display: block;
     position: absolute;
     left: 10px;
-    top: 80px;
+    top: 10px;
     pointer-events: none;
 }
 
 #sidebar .search-header input {
-    position: absolute;
-    top: 60px;
-    height: 60px;
+    position: relative;
+    height: 40px;
     width: 100%;
     padding: 5px 10px;
     border-radius: 0;
     border-width: 0;
     border-bottom-width: 1px;
     text-indent: 30px;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 14px;
 }
 
 /* Feature list */
@@ -748,6 +815,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .feature-list-item {
+    background: #f6f6f6;
     width: 100%;
     position: relative;
     border-bottom: 1px solid #ccc;
@@ -880,17 +948,24 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     top: -3px;
 }
 
+.subgrid {
+    opacity: 0;
+    max-height: 0;
+}
+
 .subgrid .preset-list {
     padding: 10px 10px 0 10px;
-    border: 1px solid #CCC;
     margin-top: 0;
+    border: 0;
     border-radius: 8px;
+    width: -webkit-calc(100% + 20px);
+    margin-left: -10px;
 }
 
 .subgrid .arrow {
     border: solid rgba(0, 0, 0, 0);
     border-width: 10px;
-    border-bottom-color: #CCC;
+    border-bottom-color: #f1f1f1;
     width: 0;
     height: 0;
     margin-left: 50%;
@@ -938,12 +1013,9 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .inspector-preset form.preset-form {
-    padding: 20px;
-}
-
-.entity-editor-pane .preset-list-item {
-    border-bottom: 1px solid #ccc;
-    padding: 20px;
+    padding: 10px;
+    margin: 0 10px 20px 10px;
+    border-radius: 8px;
 }
 
 .entity-editor-pane .preset-list-item::after {
@@ -957,7 +1029,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     margin: auto;
     border: solid rgba(0, 0, 0, 0);
     border-width: 10px;
-    border-bottom-color: #ccc;
+    border-bottom-color: #ececec;
 }
 
 .entity-editor-pane .preset-list-item .preset-list-button-wrap {
@@ -1031,13 +1103,14 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 /* Preset form (hover mode) */
 
-.inspector-hover textarea,
+.preset-input-wrap .label,
 .inspector-hover input,
-.inspector-hover .form-label,
+.inspector-hover label {
+    background: #ececec;
+}
+
 .inspector-hover a,
-.inspector-hover .checkselect label:last-of-type,
-.inspector-hover .preset-input-wrap,
-.inspector-hover .preset-input-wrap li {
+.inspector-hover .checkselect label:last-of-type {
     color: #666;
 }
 
@@ -1066,8 +1139,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-hover .entity-editor-pane .header button,
 .inspector-hover .spin-control,
 .inspector-hover .hide-toggle:before,
-.inspector-hover .more-buttons,
-.inspector-hover .view-on-osm {
+.inspector-hover .more-buttons {
     opacity: 0;
 }
 
@@ -1154,14 +1226,8 @@ input,
             transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
 }
 
-.modified .form-label .modified-icon,
-.entity-editor-pane button.minor,
-.combobox-carat,
-.entity-editor-pane .header button,
 .toggle-list label span,
-.spin-control,
 .more-buttons,
-.view-on-osm,
 .hide-toggle:before,
 .entity-editor-pane .toggle-list label::before,
 .entity-editor-pane .toggle-list label.remove .icon {
@@ -1204,12 +1270,17 @@ input,
 }
 
 button.preset-add-field {
+    background: #f6f6f6;
     width: 25%;
     height: 40px;
     -webkit-transition: width 200ms;
        -moz-transition: width 200ms;
          -o-transition: width 200ms;
             transition: width 200ms;
+}
+
+button.preset-add-field:hover {
+    background: #ececec;
 }
 
 /* set width based on # of buttons */
@@ -1342,7 +1413,6 @@ input[type=number] {
     display: block;
     padding: 5px 10px;
     color: #7092FF;
-    background-color: white;
 }
 
 .checkselect label:hover {
@@ -1744,10 +1814,10 @@ img.wiki-image {
 /* Map Controls */
 
 .map-controls {
-    left: 0;
-    top: 80px;
+    right: 0;
+    top: 20px;
     width: 30px;
-    position: fixed;
+    position: absolute;
     z-index: 100;
 }
 
@@ -1767,11 +1837,10 @@ img.wiki-image {
 
 .map-overlay {
     z-index: -1;
-    right: 75%;
     max-width: 260px;
     min-width: 210px;
     position: fixed;
-    left: 30px;
+    right: 30px;
     display: block;
     padding: 10px 10px 0 10px;
 }
@@ -1779,7 +1848,7 @@ img.wiki-image {
 /* Zoomer */
 
 .zoombuttons button.zoom-in {
-    border-radius:0 4px 0 0;
+    border-radius:4px 0 0 0;
 }
 
 /* Background Settings */
@@ -1789,7 +1858,7 @@ img.wiki-image {
 }
 
 .background-control button {
-    border-radius:0 4px 0 0;
+    border-radius:4px 0 0 0;
 }
 
 .background-control button.active {
@@ -1931,7 +2000,7 @@ img.wiki-image {
 /* Geocoder */
 
 .geocode-control form {
-    top:260px;
+    top:100px;
 }
 
 .geocode-control form {
@@ -1968,26 +2037,26 @@ img.wiki-image {
 
 /* Geolocator */
 
+.geolocate-control {
+    margin-bottom: 20px;
+}
+
 .geolocate-control button {
-    border-radius: 0 0 4px 0;
+    border-radius: 0 0 0 4px;
 }
 
 /* Help */
 
-.help-control {
-    margin-bottom: 20px;
-}
-
 .help-control button {
-    border-radius: 0 0 4px 0;
+    border-radius: 0 0 0 4px;
 }
 
 .help-wrap {
     position: fixed;
-    top:60px;
-    bottom: 30px;
-    padding: 20px 20px 20px 50px;
-    left: 0;
+    top:0;
+    bottom: 0;
+    padding: 20px 50px 20px 20px;
+    right: 0;
     overflow-y: scroll;
 }
 
@@ -2123,6 +2192,12 @@ img.wiki-image {
     margin-right: 10px;
 }
 
+.source-switch {
+    position: absolute;
+    bottom: 40px;
+    left: 10px;
+}
+
 .source-switch a {
     padding: 2px 4px 4px 4px;
     border-radius: 2px;
@@ -2135,7 +2210,7 @@ img.wiki-image {
 /* Attribution overlay */
 .attribution {
     position: absolute;
-    bottom: 35px;
+    bottom: 10px;
     left:10px;
     color:#888;
     font-size:10px;
@@ -2310,10 +2385,6 @@ img.wiki-image {
     display: inline-block;
 }
 
-.mode-save .commit-info {
-    padding-bottom: 10px;
-}
-
 .mode-save .commit-form {
     margin-bottom: 0;
 }
@@ -2390,12 +2461,6 @@ img.wiki-image {
     height: 100px;
     border-radius: 5px;
     line-height: 40px;
-    color: #000;
-    opacity: 0.9;
-}
-
-.notice .zoom-to:hover {
-    background: #d8e1ff;
 }
 
 .notice .zoom-to .icon {
@@ -2413,9 +2478,11 @@ img.wiki-image {
 .tooltip {
     position: absolute;
     display: none;
-    color:#333;
+    background: #000;
+    color: #ccc;
     text-align: left;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: bold;
 }
 
 .tooltip.in {
@@ -2449,11 +2516,13 @@ img.wiki-image {
     max-width: 200px;
     min-width: 80px;
     padding: 10px;
-    font-weight: normal;
-    background-color: white;
+    background: #000;
+    color: #ccc;
 }
 
 .tail {
+    font-weight: bold;
+    font-size: 11px;
     width: 200px;
     height: 400px;
     pointer-events: none;
@@ -2473,13 +2542,13 @@ img.wiki-image {
     top: 50%;
     right: -5px;
     margin-top: -5px;
-    border-left-color: white;
+    border-left-color: #000;
     border-width: 5px 0 5px 5px;
 }
 
 .tail div {
     padding: 10px;
-    background: white;
+    background: #000;
     position: absolute;
     top: 180px;
     left: 0;
@@ -2513,7 +2582,7 @@ img.wiki-image {
     bottom: -5px;
     left: 50%;
     margin-left: -5px;
-    border-top-color: white;
+    border-top-color: #000;
     border-width: 5px 5px 0;
 }
 
@@ -2521,7 +2590,7 @@ img.wiki-image {
     top: 50%;
     left: -5px;
     margin-top: -5px;
-    border-right-color: white;
+    border-right-color: #000;
     border-width: 5px 5px 5px 0;
 }
 
@@ -2529,7 +2598,7 @@ img.wiki-image {
     top: 50%;
     right: -5px;
     margin-top: -5px;
-    border-left-color: white;
+    border-left-color: #000;
     border-width: 5px 0 5px 5px;
 }
 
@@ -2537,12 +2606,12 @@ img.wiki-image {
     top: -5px;
     left: 50%;
     margin-left: -5px;
-    border-bottom-color: white;
+    border-bottom-color: #000;
     border-width: 0 5px 5px;
 }
 
 .keyhint-wrap {
-    background: #F6F6F6;
+    background: #444;
     padding: 10px;
     margin: 10px -10px -10px;
 }
@@ -2570,30 +2639,6 @@ img.wiki-image {
     left: -1px;
     border: 1px solid #CCC;
     border-top: 0;
-}
-
-/* Exceptions for tooltip layouts */
-
-/* make tooltips in editor pane dark */
-.entity-editor-pane .tooltip.top .tooltip-arrow {
-    border-top-color: #000;
-}
-
-.entity-editor-pane .tooltip.bottom .tooltip-arrow {
-    border-bottom-color: #000;
-}
-
-.entity-editor-pane .tooltip.left .tooltip-arrow {
-    border-left-color: #000;
-}
-
-.entity-editor-pane .tooltip.right .tooltip-arrow {
-    border-right-color: #000;
-}
-
-.entity-editor-pane .tooltip-inner {
-    background: #000;
-    color: #ccc;
 }
 
 /* Uncramp map-control tooltips */

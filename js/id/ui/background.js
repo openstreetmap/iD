@@ -76,7 +76,7 @@ iD.ui.Background = function(context) {
                 .filter(function(d) { return d.data.description; })
                 .call(bootstrap.tooltip()
                     .title(function(d) { return d.data.description; })
-                    .placement('right')
+                    .placement('left')
                 );
 
             layerInner.append('input')
@@ -140,7 +140,7 @@ iD.ui.Background = function(context) {
         var content = selection.append('div')
                 .attr('class', 'fillL map-overlay content hide'),
             tooltip = bootstrap.tooltip()
-                .placement('right')
+                .placement('left')
                 .html(true)
                 .title(iD.ui.tooltipHtml(t('background.description'), key));
 
@@ -163,16 +163,16 @@ iD.ui.Background = function(context) {
                         return d3.event.stopPropagation();
                     });
                     content.style('display', 'block')
-                        .style('left', '-500px')
+                        .style('right', '-500px')
                         .transition()
                         .duration(200)
-                        .style('left', '30px');
+                        .style('right', '30px');
                 } else {
                     content.style('display', 'block')
-                        .style('left', '30px')
+                        .style('right', '30px')
                         .transition()
                         .duration(200)
-                        .style('left', '-500px')
+                        .style('right', '-500px')
                         .each('end', function() {
                             d3.select(this).style('display', 'none');
                         });
@@ -231,7 +231,7 @@ iD.ui.Background = function(context) {
 
         gpxLayerItem.call(bootstrap.tooltip()
             .title(t('gpx.drag_drop'))
-            .placement('right'));
+            .placement('left'));
 
         gpxLayerItem.append('input')
             .attr('type', 'checkbox')
@@ -291,7 +291,7 @@ iD.ui.Background = function(context) {
 
         resetButton.call(bootstrap.tooltip()
             .title(t('background.reset'))
-            .placement('right'));
+            .placement('left'));
 
         context.map()
             .on('move.background-update', _.debounce(update, 1000));

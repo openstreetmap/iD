@@ -215,7 +215,7 @@
                 d3.select('#id-container')
                     .call(id.ui());
 
-                d3.select('#about').insert('li', '.user-list')
+                d3.select('#content').insert('span')
                     .attr('class', 'source-switch')
                     .call(iD.ui.SourceSwitch(id)
                         .keys([

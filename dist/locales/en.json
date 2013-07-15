@@ -246,6 +246,7 @@
     },
     "save": {
         "title": "Save",
+        "commit": "Confirm",
         "help": "Save changes to OpenStreetMap, making them visible to other users.",
         "no_changes": "No changes to save.",
         "error": "An error occurred while trying to save",

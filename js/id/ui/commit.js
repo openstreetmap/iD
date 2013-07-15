@@ -28,12 +28,12 @@ iD.ui.Commit = function(context) {
         function changesLength(d) { return changes[d].length; }
 
         var header = selection.append('div')
-            .attr('class', 'header fillL');
+            .attr('class', 'header');
 
         header.append('button')
             .attr('class', 'fr')
             .append('span')
-            .attr('class', 'icon close')
+            .attr('class', 'icon light close')
             .on('click', event.cancel);
 
         header.append('h3')
@@ -54,20 +54,31 @@ iD.ui.Commit = function(context) {
             .attr('placeholder', t('commit.description_placeholder'))
             .property('value', context.storage('comment') || '');
 
-        commentField.node().select();
-
-        // Save Section
-        var saveSection = body.append('div')
-            .attr('class','modal-section fillL cf');
-
-        var prose = saveSection.append('p')
+        var prose = commentSection.append('p')
             .attr('class', 'commit-info')
             .html(t('commit.upload_explanation'));
+
+        commentField.node().select();
+
+        // // Save Section
+        // var saveSection = body.append('div')
+        //     .attr('class','modal-section fillL cf');
 
         context.connection().userDetails(function(err, user) {
             if (err) return;
 
             var userLink = d3.select(document.createElement('div'));
+
+//         if (!context.embed() && user.display_name) {
+//             userLink.append('a')
+//                 .attr('class', 'logout')
+//                 .attr('href', '#')
+//                 .text(' (' + t('logout') + ')');
+//         }
+
+//         saveSection.append('p')
+//             .attr('class', 'commit-info')
+//             .html(t('commit.upload_explanation', {user: userLink.html()}));
 
             if (user.image_url) {
                 userLink.append('img')
@@ -85,20 +96,25 @@ iD.ui.Commit = function(context) {
             prose.html(t('commit.upload_explanation_with_user', {user: userLink.html()}));
         });
 
-        // Confirm Button
-        var saveButton = saveSection.append('button')
-            .attr('class', 'action col3 button')
-            .on('click.save', function() {
-                var comment = commentField.node().value;
-                localStorage.comment = comment;
-                event.save({
-                    comment: comment
-                });
-            });
+        // saveSection.selectAll('.logout').on('click.logout', function() {
+        //     d3.event.preventDefault();
+        //     connection.logout();
+        // });
 
-        saveButton.append('span')
-            .attr('class', 'label')
-            .text(t('commit.save'));
+        // Confirm Button
+        // var saveButton = saveSection.append('button')
+        //     .attr('class', 'action col3 button')
+        //     .on('click.save', function() {
+        //         var comment = commentField.node().value;
+        //         localStorage.comment = comment;
+        //         event.save({
+        //             comment: comment
+        //         });
+        //     });
+
+        // saveButton.append('span')
+        //     .attr('class', 'label')
+        //     .text(t('commit.save'));
 
         var warnings = body.selectAll('div.warning-section')
             .data(iD.validate(changes, context.graph()))
