@@ -21,7 +21,6 @@ window.iD = function () {
         mode,
         container,
         ui = iD.ui(context),
-        map = iD.Map(context),
         connection = iD.Connection(),
         locale = iD.detect().locale,
         localePath;
@@ -62,7 +61,6 @@ window.iD = function () {
     context.ui = function() { return ui; };
     context.connection = function() { return connection; };
     context.history = function() { return history; };
-    context.map = function() { return map; };
 
     /* History */
     context.graph = history.graph;
@@ -77,7 +75,6 @@ window.iD = function () {
     context.flush = function() {
         history.reset();
         connection.flush();
-        map.redraw();
         return context;
     };
 
@@ -131,31 +128,25 @@ window.iD = function () {
         context.surface().call(behavior.off);
     };
 
+    /* Projection */
+    context.projection = d3.geo.mercator()
+        .scale(512 / Math.PI)
+        .precision(0);
+
+    /* Background */
+    var background = iD.Background(context);
+    context.background = function() { return background; };
+
     /* Map */
+    var map = iD.Map(context);
+    context.map = function() { return map; };
     context.layers = function() { return map.layers; };
-    context.background = function() { return map.layers[0]; };
     context.surface = function() { return map.surface; };
     context.mouse = map.mouse;
-    context.projection = map.projection;
     context.extent = map.extent;
-    context.redraw = map.redraw;
     context.pan = map.pan;
     context.zoomIn = map.zoomIn;
     context.zoomOut = map.zoomOut;
-
-    /* Background */
-    var backgroundSources = iD.data.imagery.map(function(source) {
-        if (source.sourcetag === 'Bing') {
-            return iD.BackgroundSource.Bing(source, context.background().dispatch);
-        } else {
-            return iD.BackgroundSource.template(source);
-        }
-    });
-    backgroundSources.push(iD.BackgroundSource.Custom);
-
-    context.backgroundSources = function() {
-        return backgroundSources;
-    };
 
     /* Presets */
     var presets = iD.presets()
@@ -171,34 +162,6 @@ window.iD = function () {
         container.classed('id-container', true);
         return context;
     };
-
-    var q = iD.util.stringQs(location.hash.substring(1)),
-        detected = false,
-        background = q.background || q.layer;
-
-    if (background && background.indexOf('custom:') === 0) {
-        context.layers()[0]
-           .source(iD.BackgroundSource.template({
-                template: background.replace(/^custom:/, ''),
-                name: 'Custom'
-            }));
-        detected = true;
-    } else if (background) {
-        context.layers()[0]
-           .source(_.find(backgroundSources, function(l) {
-               if (l.data.sourcetag === background) {
-                   detected = true;
-                   return true;
-               }
-           }));
-    }
-
-    if (!detected) {
-        context.background()
-            .source(_.find(backgroundSources, function(l) {
-                return l.data.name === 'Bing aerial imagery';
-            }));
-    }
 
     var embed = false;
     context.embed = function(_) {

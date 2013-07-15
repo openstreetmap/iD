@@ -2,13 +2,13 @@ iD.ui.Attribution = function(context) {
     var selection;
 
     function update() {
-        if (!context.background().source()) {
+        if (!context.background().baseLayerSource()) {
             selection.html('');
             return;
         }
 
         var attribution = selection.selectAll('.provided-by')
-            .data([context.background().source()], function(d) { return d.data.name; });
+            .data([context.background().baseLayerSource()], function(d) { return d.data.name; });
 
         attribution.enter()
             .append('span')

@@ -6,17 +6,8 @@ iD.ui.Background = function(context) {
             ['top', [0, -1]],
             ['right', [-1, 0]],
             ['bottom', [0, 1]]],
-        layers = context.backgroundSources(),
         opacityDefault = (context.storage('background-opacity') !== undefined) ?
             (+context.storage('background-opacity')) : 0.5;
-
-    function getSources() {
-        var ext = context.map().extent();
-        return layers.filter(function(layer) {
-            return !layer.data.extent ||
-                iD.geo.Extent(layer.data.extent).intersects(ext);
-        });
-    }
 
     function background(selection) {
 
@@ -34,9 +25,7 @@ iD.ui.Background = function(context) {
 
         function selectLayer() {
             function active(d) {
-                var overlay = context.map().layers[2].source();
-                return d.data.name === context.background().source().data.name ||
-                    (overlay.data && overlay.data.name === d.data.name);
+                return context.background().showsLayer(d);
             }
 
             content.selectAll('label.layer')
@@ -55,43 +44,28 @@ iD.ui.Background = function(context) {
                 }
                 d = configured;
             }
-            context.background().source(d);
-            if (d.data.name === 'Custom (customized)') {
-                context.history()
-                    .imagery_used('Custom (' + d.data.template + ')');
-            } else {
-                context.history()
-                    .imagery_used(d.data.sourcetag || d.data.name);
-            }
-            context.redraw();
+            context.background().baseLayerSource(d);
             selectLayer();
         }
 
         function clickSetOverlay(d) {
             d3.event.preventDefault();
-            var overlay = context.map().layers[2];
-            if (overlay.source() === d) {
-                overlay.source(d3.functor(''));
-            } else {
-                overlay.source(d);
-            }
-            context.redraw();
+            context.background().toggleOverlayLayer(d);
             selectLayer();
         }
 
         function clickGpx() {
-            context.map().layers[1]
-                .enable(!context.map().layers[1].enable());
-            context.redraw();
+            context.background().toggleGpxLayer();
             update();
         }
 
         function drawList(layerList, type, change, filter) {
+            var sources = context.background()
+                .sources(context.map().extent())
+                .filter(filter);
 
             var layerLinks = layerList.selectAll('label.layer')
-                .data(getSources().filter(filter), function(d) {
-                    return d.data.name;
-                });
+                .data(sources, function(d) { return d.data.name; });
 
             var layerInner = layerLinks.enter()
                 .append('label')
@@ -130,12 +104,11 @@ iD.ui.Background = function(context) {
                 return d.data.overlay;
             });
 
-            var gpxLayer = context.map().layers[1],
-                hasGpx = !_.isEmpty(gpxLayer.geojson()),
-                showsGpx = hasGpx && gpxLayer.enable();
+            var hasGpx = context.background().hasGpxLayer(),
+                showsGpx = context.background().showsGpxLayer();
 
             gpxLayerItem
-                .classed('active', hasGpx && gpxLayer.enable())
+                .classed('active', showsGpx)
                 .selectAll('input')
                 .property('disabled', !hasGpx)
                 .property('checked', showsGpx);
@@ -157,10 +130,10 @@ iD.ui.Background = function(context) {
             });
 
             function nudge() {
-                context.background().nudge(d[1], context.map().zoom());
-                var offset = context.background().offset();
+                var offset = context.background()
+                    .nudge(d[1], context.map().zoom())
+                    .offset();
                 resetButton.classed('disabled', offset[0] === 0 && offset[1] === 0);
-                context.redraw();
             }
         }
 
@@ -274,13 +247,7 @@ iD.ui.Background = function(context) {
             .on('click', function() {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
-                if (context.map().layers[1].geojson().type) {
-                    context.map()
-                        .extent(d3.geo.bounds(context
-                            .map()
-                            .layers[1]
-                            .geojson()));
-                }
+                context.background().zoomToGpxLayer();
             })
             .append('span')
                 .attr('class', 'icon geocode' );
@@ -317,7 +284,6 @@ iD.ui.Background = function(context) {
             .on('click', function () {
                 context.background().offset([0, 0]);
                 resetButton.classed('disabled', true);
-                context.redraw();
             });
 
         resetButton.append('div')

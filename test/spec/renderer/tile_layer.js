@@ -1,9 +1,9 @@
-describe('iD.Background', function() {
+describe('iD.TileLayer', function() {
     var c, d;
 
     beforeEach(function() {
         d = d3.select(document.createElement('div'));
-        c = iD.Background().projection(d3.geo.mercator());
+        c = iD.TileLayer().projection(d3.geo.mercator());
         d.call(c);
     });
 
@@ -11,7 +11,7 @@ describe('iD.Background', function() {
         d.remove();
     });
 
-    describe('iD.Background', function() {
+    describe('iD.TileLayer', function() {
         it('is instantiated', function() {
             expect(c).to.be.ok;
         });

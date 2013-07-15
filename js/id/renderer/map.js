@@ -1,9 +1,7 @@
 iD.Map = function(context) {
     var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
-        projection = d3.geo.mercator()
-            .scale(512 / Math.PI)
-            .precision(0),
+        projection = context.projection,
         roundedProjection = iD.svg.RoundProjection(projection),
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
@@ -14,11 +12,6 @@ iD.Map = function(context) {
         transformStart,
         transformed = false,
         minzoom = 0,
-        layers = [
-            iD.Background().projection(projection),
-            iD.LocalGpx(context).projection(projection),
-            iD.Background('overlay').projection(projection)
-        ],
         transformProp = iD.util.prefixCSSProperty('Transform'),
         points = iD.svg.Points(roundedProjection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
@@ -32,15 +25,15 @@ iD.Map = function(context) {
     function map(selection) {
         context.history()
             .on('change.map', redraw);
+        context.background()
+            .on('change.map', redraw);
 
         selection.call(zoom);
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface');
 
-        layers.forEach(function(layer) {
-            supersurface.call(layer);
-        });
+        supersurface.call(context.background());
 
         // Need a wrapper div because Opera can't cope with an absolutely positioned
         // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
@@ -221,9 +214,7 @@ iD.Map = function(context) {
         }
 
         if (!difference) {
-            layers.forEach(function(layer) {
-                supersurface.call(layer);
-            });
+            supersurface.call(context.background());
         }
 
         if (map.editable()) {
@@ -320,9 +311,7 @@ iD.Map = function(context) {
         var center = map.center();
         dimensions = _;
         surface.dimensions(dimensions);
-        layers.forEach(function(layer) {
-            layer.dimensions(dimensions);
-        });
+        context.background().dimensions(dimensions);
         projection.clipExtent([[0, 0], dimensions]);
         setCenter(center);
         return redraw();
@@ -424,10 +413,6 @@ iD.Map = function(context) {
         minzoom = _;
         return map;
     };
-
-    map.layers = layers;
-    map.projection = projection;
-    map.redraw = redraw;
 
     return d3.rebind(map, dispatch, 'on');
 };
