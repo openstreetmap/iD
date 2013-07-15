@@ -25,7 +25,7 @@ iD.ui.Success = function(context) {
             .attr('class', 'modal-actions cf');
 
         links.append('a')
-            .attr('class', 'col4 osm')
+            .attr('class', 'col12 osm')
             .attr('target', '_blank')
             .attr('href', function() {
                 return context.connection().changesetURL(changeset.id);
@@ -33,7 +33,7 @@ iD.ui.Success = function(context) {
             .text(t('view_on_osm'));
 
         links.append('a')
-            .attr('class', 'col4 twitter')
+            .attr('class', 'col12 twitter')
             .attr('target', '_blank')
             .attr('href', function() {
                 return 'https://twitter.com/intent/tweet?source=webclient&text=' +
@@ -42,7 +42,7 @@ iD.ui.Success = function(context) {
             .text(t('success.tweet'));
 
         links.append('a')
-            .attr('class', 'col4 facebook')
+            .attr('class', 'col12 facebook')
             .attr('target', '_blank')
             .attr('href', function() {
                 return 'https://facebook.com/sharer/sharer.php?u=' +

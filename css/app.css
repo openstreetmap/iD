@@ -664,6 +664,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     width: 100%;
 }
 
+.sidebar-component .body {
+    overflow: auto;
+    top: 60px;
+    bottom: 0;
+    position: absolute;
+}
+
 /* Inspector
 ------------------------------------------------------- */
 
@@ -2232,7 +2239,7 @@ img.wiki-image {
     color: #7092FF;
     border-bottom: 1px solid #CCC;
     border-radius: 0;
-    height: 180px;
+    height: 160px;
     text-align: center;
     display: inline-block;
 }
@@ -2240,7 +2247,7 @@ img.wiki-image {
 .modal-actions a {
     /* `button` elements have box-algin: auto, need
     compensate this for `a`*/
-    padding-top: 25px;
+    padding-top: 15px;
 }
 
 .modal-actions button:hover,
