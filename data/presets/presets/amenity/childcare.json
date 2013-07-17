@@ -11,10 +11,11 @@
     ],
     "terms": [
         "nursery",
-        "preschool"
+        "orphanage",
+        "playgroup"
     ],
     "tags": {
-        "amenity": "kindergarten"
+        "amenity": "childcare"
     },
-    "name": "Kindergarten"
+    "name": "Childcare"
 }
