@@ -39,6 +39,10 @@ body {
     height: 100%;
 }
 
+.spacer {
+    height: 40px;
+}
+
 .limiter {
     position: relative;
     max-width: 1200px;
@@ -52,17 +56,11 @@ body {
     position: absolute;
     height: 40px;
     width: 40px;
-    right:  33.3333%;
+    right: 10px;
     top: 10px;
     border-radius: 4px;
     margin-right: 10px;
     background: black;
-}
-
-@media only screen and (min-width: 1200px) {
-    .spinner img {
-        right: 400px;
-    }
 }
 
 div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
@@ -550,9 +548,9 @@ button.save.has-count .count::before {
 .icon.relation.route         { background-position: -540px 0;}
 .icon.relation.multipolygon  { background-position: -560px 0;}
 
-.icon.plus.light,
-.icon.zoom-in          { background-position: -240px -20px;}
-.icon.zoom-out         { background-position: -260px -20px;}
+.icon.plus.light       { background-position: -240px -20px;}
+.icon.zoom-in          { background-position: -240px 0px;}
+.icon.zoom-out         { background-position: -260px 0px;}
 .icon.inspect.light    { background-position: -220px -20px;}
 .icon.geocode.light    { background-position: -280px -20px;}
 .icon.help.light       { background-position: -460px -20px;}
@@ -603,7 +601,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 ------------------------------------------------------- */
 
 #bar {
-    position:fixed;
+    position: fixed;
     padding: 10px;
     left:0;
     top:0;
@@ -680,7 +678,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 #sidebar {
     position: relative;
-    float: right;
+    float: left;
     height: 100%;
     overflow: hidden;
     z-index: 2;
@@ -1755,25 +1753,22 @@ img.wiki-image {
 /* Map Controls */
 
 .map-controls {
-    left: 0;
-    top: 80px;
-    width: 30px;
+    right: 10px;
+    top: 70px;
+    width: 40px;
     position: fixed;
     z-index: 100;
 }
 
 .map-control > button {
-    width: 30px;
-    background: rgba(0,0,0,.5);
+    width: 40px;
+    background-color: #FFF;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 0;
 }
 
 .map-control > button:hover {
-    background: rgba(0, 0, 0, .8);
-}
-
-.map-control > button.active:hover {
-    background: #7092ff;
+    background-color: #FFF;
 }
 
 .map-overlay {
@@ -1790,21 +1785,32 @@ img.wiki-image {
 /* Zoomer */
 
 .zoombuttons button.zoom-in {
-    border-radius:0 4px 0 0;
+    border-radius: 4px 4px 0 0;
 }
 
 /* Background Settings */
+
 
 .toggle-list.layer-list {
     margin-bottom: 10px;
 }
 
 .background-control button {
-    border-radius:0 4px 0 0;
+    border-radius: 4px 4px 0 0;
 }
 
+
 .background-control button.active {
-    border-radius: 0;
+    border-radius: 0 4px 0 0;
+}
+
+.background-control {
+    position: relative;
+}
+
+.background-control .map-overlay {
+    position: absolute;
+    top: 0;
 }
 
 .nudge-container {
@@ -1941,11 +1947,13 @@ img.wiki-image {
 
 /* Geocoder */
 
-.geocode-control form {
-    top:260px;
+.geocode-control {
+    position: relative;
 }
 
 .geocode-control form {
+    position: absolute;
+    top: 0;
     padding: 5px;
 }
 
@@ -1954,12 +1962,14 @@ img.wiki-image {
 }
 
 .geocode-control div.map-overlay {
+    position: absolute;
+    top: 40px;
+    left: -260px;
     border-top: 1px solid #CCC;
     z-index: 100;
     max-height: 240px;
     overflow-y: auto;
     padding: 0;
-    margin-top: 40px;
 }
 
 .geocode-control div.map-overlay span {
@@ -1979,26 +1989,26 @@ img.wiki-image {
 
 /* Geolocator */
 
+.geolocate-control {
+    margin-bottom: 10px;
+}
+
 .geolocate-control button {
-    border-radius: 0 0 4px 0;
+    border-radius: 0 0 4px 4px;
 }
 
 /* Help */
 
-.help-control {
-    margin-bottom: 20px;
-}
-
 .help-control button {
-    border-radius: 0 0 4px 0;
+    border-radius: 0 0 4px 4px;
 }
 
 .help-wrap {
     position: fixed;
     top:60px;
     bottom: 30px;
-    padding: 20px 20px 20px 50px;
-    left: 0;
+    padding: 20px 50px 20px 20px;
+    right: 0;
     overflow-y: scroll;
 }
 

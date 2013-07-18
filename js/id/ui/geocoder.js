@@ -131,18 +131,18 @@ iD.ui.Geocoder = function(context) {
                         return d3.event.stopPropagation();
                     });
                     gcForm.style('display', 'block')
-                        .style('left', '-500px')
+                        .style('left', '0px')
                         .transition()
                         .duration(200)
-                        .style('left', '30px');
+                        .style('left', '-260px');
                         inputNode.node().focus();
                 } else {
                     selection.on('mousedown.geocoder-inside', null);
                     gcForm.style('display', 'block')
-                        .style('left', '30px')
+                        .style('left', '-260px')
                         .transition()
                         .duration(200)
-                        .style('left', '-500px')
+                        .style('left', '0px')
                         .each('end', function() {
                             d3.select(this).style('display', 'none');
                         });
@@ -156,7 +156,7 @@ iD.ui.Geocoder = function(context) {
             .call(tooltip);
 
         button.append('span')
-            .attr('class', 'icon geocode light');
+            .attr('class', 'icon geocode');
 
         keybinding.on(key, toggle);
 

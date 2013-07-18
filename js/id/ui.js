@@ -29,6 +29,9 @@ iD.ui = function(context) {
             .attr('id', 'map')
             .call(map);
 
+        var spacer = bar.append('div')
+            .attr('class', 'spacer col4');
+
         var limiter = bar.append('div')
             .attr('class', 'limiter');
 
@@ -61,16 +64,16 @@ iD.ui = function(context) {
             .attr('class', 'map-controls');
 
         controls.append('div')
-            .attr('class', 'map-control background-control')
-            .call(iD.ui.Background(context));
-
-        controls.append('div')
-            .attr('class', 'map-control help-control')
-            .call(iD.ui.Help(context));
-
-        controls.append('div')
             .attr('class', 'map-control zoombuttons')
             .call(iD.ui.Zoom(context));
+
+        controls.append('div')
+            .attr('class', 'map-control geolocate-control')
+            .call(iD.ui.Geolocate(map));
+
+        controls.append('div')
+            .attr('class', 'map-control background-control')
+            .call(iD.ui.Background(context));
 
         if (!context.embed()) {
             controls.append('div')
@@ -79,8 +82,8 @@ iD.ui = function(context) {
         }
 
         controls.append('div')
-            .attr('class', 'map-control geolocate-control')
-            .call(iD.ui.Geolocate(map));
+            .attr('class', 'map-control help-control')
+            .call(iD.ui.Help(context));
 
         var about = content.append('div')
             .attr('class','col12 about-block fillD');

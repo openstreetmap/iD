@@ -163,16 +163,16 @@ iD.ui.Background = function(context) {
                         return d3.event.stopPropagation();
                     });
                     content.style('display', 'block')
-                        .style('left', '-500px')
+                        .style('left', '0px')
                         .transition()
                         .duration(200)
-                        .style('left', '30px');
+                        .style('left', '-260px');
                 } else {
                     content.style('display', 'block')
-                        .style('left', '30px')
+                        .style('left', '-260px')
                         .transition()
                         .duration(200)
-                        .style('left', '-500px')
+                        .style('left', '0px')
                         .each('end', function() {
                             d3.select(this).style('display', 'none');
                         });
