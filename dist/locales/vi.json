@@ -117,7 +117,8 @@
             "key": "G",
             "annotation": "Đã gộp {n} đường kẻ.",
             "not_eligible": "Không thể gộp các đối tượng này.",
-            "not_adjacent": "Không thể gộp các đường kẻ không nối liền với nhau."
+            "not_adjacent": "Không thể gộp các đường kẻ không nối liền với nhau.",
+            "restriction": "Không thể gộp các đường kẻ này vì ít nhất một trong những đường kẻ trực thuộc quan hệ “{relation}”."
         },
         "move": {
             "title": "Di chuyển",
@@ -227,7 +228,8 @@
         "search": "Tìm kiếm",
         "unknown": "Không rõ",
         "incomplete": "<chưa tải về>",
-        "feature_list": "Danh sách Đối tượng"
+        "feature_list": "Danh sách đối tượng",
+        "edit": "Sửa đối tượng"
     },
     "background": {
         "title": "Hình nền",
@@ -762,6 +764,12 @@
                 "name": "Quán Cà phê",
                 "terms": "cà phê,quán cà phê,trà,quán trà"
             },
+            "amenity/car_rental": {
+                "name": "Cho thuê Xe"
+            },
+            "amenity/car_sharing": {
+                "name": "Chia sẻ Xe"
+            },
             "amenity/car_wash": {
                 "name": "Rửa xe"
             },
@@ -774,6 +782,10 @@
             },
             "amenity/courthouse": {
                 "name": "Tòa"
+            },
+            "amenity/drinking_water": {
+                "name": "Nước Uống",
+                "terms": "máy nước,vòi nước uống,nước uống,uống"
             },
             "amenity/embassy": {
                 "name": "Tòa đại sứ"
@@ -858,6 +870,10 @@
             "amenity/swimming_pool": {
                 "name": "Hồ Bơi"
             },
+            "amenity/taxi": {
+                "name": "Bến Tắc xi",
+                "terms": "tắc xi,tắc-xi,taxi"
+            },
             "amenity/telephone": {
                 "name": "Điện thoại"
             },
@@ -866,7 +882,8 @@
                 "terms": "nhà hát,rạp hát,sân khấu,kịch"
             },
             "amenity/toilets": {
-                "name": "Phòng Vệ sinh"
+                "name": "Phòng Vệ sinh",
+                "terms": "cầu tiêu,buồng tắm,nhà vệ sinh,phòng vệ sinh,nhà xí,nhà tiêu,nhà xia"
             },
             "amenity/townhall": {
                 "name": "Tòa thị chính Thị xã",
@@ -1452,6 +1469,10 @@
             },
             "shop/electronics": {
                 "name": "Tiệm Thiết bị Điện tử"
+            },
+            "shop/farm": {
+                "name": "Quầy Nông sản",
+                "terms": "quầy bán rau cỏ,quầy rau cỏ,quầy bán trái cây,quầy trái cây,tiệm nông sản,cửa hàng nông sản"
             },
             "shop/fishmonger": {
                 "name": "Tiệm Cá"

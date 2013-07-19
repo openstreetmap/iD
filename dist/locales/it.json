@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "Unite {n} linee.",
             "not_eligible": "Questi elementi non possono essere uniti.",
-            "not_adjacent": "Queste linee non possono essere unite perché non sono connesse."
+            "not_adjacent": "Queste linee non possono essere unite perché non sono connesse.",
+            "restriction": "Queste linee non possono essere unite perché almeno una è membro di una relazione \"{relation}\"."
         },
         "move": {
             "title": "Muovi",
@@ -142,10 +143,10 @@
             }
         },
         "reverse": {
-            "title": "Cambia direzione",
-            "description": "Fai andare questa linea nella direzione opposta.",
+            "title": "Inverti Direzione",
+            "description": "Inverti il senso di direzione di questa linea.",
             "key": "V",
-            "annotation": "Cambiata direzione ad una linea."
+            "annotation": "Cambiato verso ad una linea."
         },
         "split": {
             "title": "Dividi",
@@ -224,10 +225,11 @@
         "reference": "Vedi sulla Wiki di OpenStreetMap →",
         "back_tooltip": "Cambia elemento",
         "remove": "Rimuovere",
-        "search": "Cercare",
+        "search": "Cerca",
         "unknown": "Sconosciuto",
         "incomplete": "<non scaricato>",
-        "feature_list": "Lista caratteristiche"
+        "feature_list": "Elenco elementi",
+        "edit": "Modifica elemento"
     },
     "background": {
         "title": "Sfondo",
@@ -762,6 +764,12 @@
                 "name": "Caffè",
                 "terms": "caffè,tè,bar"
             },
+            "amenity/car_rental": {
+                "name": "Noleggio auto"
+            },
+            "amenity/car_sharing": {
+                "name": "Car Sharing"
+            },
             "amenity/car_wash": {
                 "name": "Autolavaggio"
             },
@@ -774,6 +782,10 @@
             },
             "amenity/courthouse": {
                 "name": "Tribunale"
+            },
+            "amenity/drinking_water": {
+                "name": "Fontanella",
+                "terms": "fontana,fontanella,acqua potabile,nasone"
             },
             "amenity/embassy": {
                 "name": "Ambasciata"
@@ -858,6 +870,10 @@
             "amenity/swimming_pool": {
                 "name": "Piscina"
             },
+            "amenity/taxi": {
+                "name": "Posteggio Taxi",
+                "terms": "taxi"
+            },
             "amenity/telephone": {
                 "name": "Telefono"
             },
@@ -866,7 +882,8 @@
                 "terms": "teatro,spettacoli,giochi,musical"
             },
             "amenity/toilets": {
-                "name": "Bagni"
+                "name": "Bagni",
+                "terms": "bagno,bagni pubblici,toilette"
             },
             "amenity/townhall": {
                 "name": "Municipio",
@@ -935,7 +952,7 @@
                 "name": "Muro"
             },
             "boundary/administrative": {
-                "name": "Confine di Amministrazione"
+                "name": "Confine Amministrativo"
             },
             "building": {
                 "name": "Edificio"
@@ -1452,6 +1469,10 @@
             },
             "shop/electronics": {
                 "name": "Negozio di elettronica"
+            },
+            "shop/farm": {
+                "name": "Banchetto Alimentari Freschi",
+                "terms": "negozio agricolo,banchetto agricolo"
             },
             "shop/fishmonger": {
                 "name": "Pescivendolo"

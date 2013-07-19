@@ -1,0 +1,283 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "المساحة"
+        },
+        "add_line": {
+            "title": "طريق"
+        },
+        "add_point": {
+            "title": "نقطة"
+        },
+        "browse": {
+            "title": "عرض"
+        }
+    },
+    "operations": {
+        "delete": {
+            "title": "حذف",
+            "description": "احذف هذه من الخريطة",
+            "annotation": {
+                "point": "احذف نقطة",
+                "line": "احذف طريق",
+                "area": "احذف مساحة",
+                "multiple": "احذف {n} اشياء"
+            }
+        },
+        "merge": {
+            "title": "دمج",
+            "description": "ادمج هذه الطرق"
+        },
+        "move": {
+            "title": "تحريك"
+        },
+        "rotate": {
+            "title": "تدوير"
+        },
+        "split": {
+            "title": "فصل"
+        }
+    },
+    "nothing_to_undo": "لا يوجد شيء للتراجع",
+    "logout": "تسجيل خروج",
+    "commit": {
+        "save": "حفظ",
+        "cancel": "إلغاء",
+        "deleted": "محذوف"
+    },
+    "restore": {
+        "restore": "إستعادة"
+    },
+    "save": {
+        "title": "حفظ"
+    },
+    "presets": {
+        "fields": {
+            "address": {
+                "label": "العنوان",
+                "placeholders": {
+                    "number": "١٢٣",
+                    "street": "الشارع",
+                    "city": "المدينة"
+                }
+            },
+            "aeroway": {
+                "label": "النوع"
+            },
+            "amenity": {
+                "label": "النوع"
+            },
+            "atm": {
+                "label": "صراف آلي"
+            },
+            "bicycle_parking": {
+                "label": "النوع"
+            },
+            "building": {
+                "label": "المبنى"
+            },
+            "building_area": {
+                "label": "المبنى"
+            },
+            "building_yes": {
+                "label": "المبنى"
+            },
+            "capacity": {
+                "label": "السعة"
+            },
+            "construction": {
+                "label": "النوع"
+            },
+            "crossing": {
+                "label": "النوع"
+            },
+            "entrance": {
+                "label": "النوع"
+            },
+            "fax": {
+                "label": "الناسوخ (الفاكس)"
+            },
+            "internet_access": {
+                "label": "إنترنت",
+                "options": {
+                    "wlan": "واي فاي",
+                    "wired": "سلكي"
+                }
+            },
+            "landuse": {
+                "label": "النوع"
+            },
+            "layer": {
+                "label": "طبقة"
+            },
+            "leisure": {
+                "label": "النوع"
+            },
+            "levels": {
+                "label": "مستوى"
+            },
+            "man_made": {
+                "label": "النوع"
+            },
+            "maxspeed": {
+                "label": "السرعة القصوى"
+            },
+            "network": {
+                "label": "الشبكة"
+            },
+            "note": {
+                "label": "ملاحظة"
+            },
+            "office": {
+                "label": "النوع"
+            },
+            "oneway": {
+                "label": "مسار واحد"
+            },
+            "opening_hours": {
+                "label": "ساعات"
+            },
+            "phone": {
+                "label": "هاتف"
+            },
+            "place": {
+                "label": "النوع"
+            },
+            "railway": {
+                "label": "النوع"
+            },
+            "religion": {
+                "label": "الديانة",
+                "options": {
+                    "christian": "المسيحية",
+                    "muslim": "الإسلام",
+                    "buddhist": "البوذية",
+                    "jewish": "اليهودية",
+                    "hindu": "الهيندوسية"
+                }
+            },
+            "service": {
+                "label": "النوع"
+            },
+            "shop": {
+                "label": "النوع"
+            },
+            "source": {
+                "label": "المصدر"
+            },
+            "sport": {
+                "label": "رياضة"
+            },
+            "surface": {
+                "label": "سطح"
+            },
+            "tourism": {
+                "label": "النوع"
+            },
+            "water": {
+                "label": "النوع"
+            },
+            "waterway": {
+                "label": "النوع"
+            },
+            "website": {
+                "label": "صفحة الويب"
+            },
+            "wetland": {
+                "label": "النوع"
+            },
+            "wikipedia": {
+                "label": "ويكيبيديا"
+            },
+            "wood": {
+                "label": "النوع"
+            }
+        },
+        "presets": {
+            "aeroway/aerodrome": {
+                "name": "مطار"
+            },
+            "amenity/bank": {
+                "name": "بنك"
+            },
+            "amenity/bicycle_parking": {
+                "name": "موقف درجات"
+            },
+            "amenity/cafe": {
+                "name": "مقهى"
+            },
+            "amenity/cinema": {
+                "name": "سينما"
+            },
+            "amenity/fast_food": {
+                "name": "وجبات سريعة"
+            },
+            "amenity/fire_station": {
+                "name": "محطة إطفاء"
+            },
+            "amenity/hospital": {
+                "name": "مستشفى"
+            },
+            "amenity/library": {
+                "name": "مكتبة"
+            },
+            "amenity/parking": {
+                "name": "موقف"
+            },
+            "amenity/pharmacy": {
+                "name": "صيدلية"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "كنيسة"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "مسجد"
+            },
+            "amenity/restaurant": {
+                "name": "مطعم"
+            },
+            "amenity/school": {
+                "name": "مدرسة"
+            },
+            "amenity/toilets": {
+                "name": "دورات مياه"
+            },
+            "amenity/university": {
+                "name": "جامعة"
+            },
+            "building": {
+                "name": "مبنى"
+            },
+            "highway": {
+                "name": "طريق سريع"
+            },
+            "highway/bus_stop": {
+                "name": "محطة باص"
+            },
+            "highway/crossing": {
+                "name": "تقاطع"
+            },
+            "highway/primary": {
+                "name": "طريق رئيسي"
+            },
+            "highway/residential": {
+                "name": "طريق سكني"
+            },
+            "highway/secondary": {
+                "name": "طريق ثانوي"
+            },
+            "highway/service": {
+                "name": "طريق خدمة"
+            },
+            "highway/traffic_signals": {
+                "name": "إشارات مرور"
+            },
+            "highway/unclassified": {
+                "name": "طريق غير مصنف"
+            },
+            "landuse/farm": {
+                "name": "مزرعة"
+            }
+        }
+    }
+}

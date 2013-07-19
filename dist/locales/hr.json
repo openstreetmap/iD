@@ -1,4 +1,12 @@
 {
+    "modes": {
+        "add_area": {
+            "title": "Površina"
+        },
+        "add_line": {
+            "title": "Linija"
+        }
+    },
     "presets": {
         "categories": {
             "category-landuse": {

@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "{n} 本のラインを結合",
             "not_eligible": "地物情報がマージできません",
-            "not_adjacent": "ラインをマージするには、ラインが結合している必要があります。"
+            "not_adjacent": "ラインをマージするには、ラインが結合している必要があります。",
+            "restriction": "\"{relation}\" リレーションに所属しているラインが含まれているため、マージすることができません。"
         },
         "move": {
             "title": "移動",
@@ -227,7 +228,8 @@
         "search": "検索",
         "unknown": "不明",
         "incomplete": "<ダウンロード未完了>",
-        "feature_list": "地物の一覧"
+        "feature_list": "地物リスト",
+        "edit": "地物を編集"
     },
     "background": {
         "title": "背景画像",
@@ -762,6 +764,12 @@
                 "name": "カフェ",
                 "terms": "コーヒー,紅茶,喫茶店"
             },
+            "amenity/car_rental": {
+                "name": "レンタカー"
+            },
+            "amenity/car_sharing": {
+                "name": "カーシェアリング"
+            },
             "amenity/car_wash": {
                 "name": "車の洗浄"
             },
@@ -774,6 +782,10 @@
             },
             "amenity/courthouse": {
                 "name": "裁判所"
+            },
+            "amenity/drinking_water": {
+                "name": "水飲み場",
+                "terms": "飲料泉, 持ち運び用水道"
             },
             "amenity/embassy": {
                 "name": "大使館"
@@ -858,6 +870,10 @@
             "amenity/swimming_pool": {
                 "name": "プール"
             },
+            "amenity/taxi": {
+                "name": "タクシー乗り場",
+                "terms": "タクシー"
+            },
             "amenity/telephone": {
                 "name": "公衆電話"
             },
@@ -866,7 +882,8 @@
                 "terms": "劇場, パフォーマンス, ミュージカル, 大道芸"
             },
             "amenity/toilets": {
-                "name": "お手洗い, トイレ"
+                "name": "お手洗い, トイレ",
+                "terms": "お手洗い"
             },
             "amenity/townhall": {
                 "name": "市町村役場",
@@ -1452,6 +1469,10 @@
             },
             "shop/electronics": {
                 "name": "電子部品"
+            },
+            "shop/farm": {
+                "name": "産地直売",
+                "terms": "農家直売店, フラワースタンド"
             },
             "shop/fishmonger": {
                 "name": "魚屋"

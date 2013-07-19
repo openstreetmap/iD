@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "Спојено {n} путања.",
             "not_eligible": "Ови објекти се не могу спојити.",
-            "not_adjacent": "Ове линије се не могу спојити, јер нису повезане."
+            "not_adjacent": "Ове линије се не могу спојити, јер нису повезане.",
+            "restriction": "Ове линије не могу да се споје јер је бар једна члан \"{relation}\" односа."
         },
         "move": {
             "title": "Премести",
@@ -189,6 +190,8 @@
         "title": "Сачувај измене",
         "description_placeholder": "Кратак опис ваших доприноса",
         "message_label": "Предавање поруке",
+        "upload_explanation": "Промене које учитате ће бити видљиве на свим мапама које користе Опенстреетмап податке.",
+        "upload_explanation_with_user": "Промене које учитате као {user} ће бити видљиве на свим мапама које користе Опенстреетмап податке.",
         "save": "Сачувај",
         "cancel": "Откажи",
         "warnings": "Упозорења",
@@ -225,7 +228,8 @@
         "search": "Претрага",
         "unknown": "Непознато",
         "incomplete": "<није преузето>",
-        "feature_list": "Списак објеката"
+        "feature_list": "Списак објеката",
+        "edit": "Уредите објекат"
     },
     "background": {
         "title": "Позадина",
@@ -760,6 +764,12 @@
                 "name": "Кафе",
                 "terms": "кафа,чај,кафеџиница"
             },
+            "amenity/car_rental": {
+                "name": "Изнајмљивање возила"
+            },
+            "amenity/car_sharing": {
+                "name": "Дељење возила"
+            },
             "amenity/car_wash": {
                 "name": "Ауто-перионица"
             },
@@ -771,6 +781,9 @@
             },
             "amenity/courthouse": {
                 "name": "Судница"
+            },
+            "amenity/drinking_water": {
+                "name": "Пијаћа вода"
             },
             "amenity/embassy": {
                 "name": "Амбасада"
@@ -846,6 +859,10 @@
             },
             "amenity/swimming_pool": {
                 "name": "Базен"
+            },
+            "amenity/taxi": {
+                "name": "Такси стајалиште",
+                "terms": "такси"
             },
             "amenity/telephone": {
                 "name": "Телефонска говорница"
@@ -1438,6 +1455,9 @@
             },
             "shop/electronics": {
                 "name": "Електроника"
+            },
+            "shop/farm": {
+                "name": "Производни штанд"
             },
             "shop/fishmonger": {
                 "name": "Рибарница"

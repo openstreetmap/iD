@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "Spojeno linija: {n}.",
             "not_eligible": "Ove značajke ne mogu biti spojene.",
-            "not_adjacent": "Ove linije ne mogu biti spojene u jednu zato što nisu povezane."
+            "not_adjacent": "Ove linije ne mogu biti spojene u jednu zato što nisu povezane.",
+            "restriction": "Ove linije ne mogu biti spojene u jednu zato što je bar jedna član \"{relation}\" relacije."
         },
         "move": {
             "title": "Pomaknite",
@@ -227,7 +228,8 @@
         "search": "Pretraga",
         "unknown": "Nepoznato",
         "incomplete": "<nije preuzeto>",
-        "feature_list": "Lista značajki"
+        "feature_list": "Lista značajki",
+        "edit": "Urediti značajku"
     },
     "background": {
         "title": "Pozadina",
@@ -762,6 +764,12 @@
                 "name": "Kafe",
                 "terms": "kafa,čaj,coffee shop"
             },
+            "amenity/car_rental": {
+                "name": "Rent-a-car"
+            },
+            "amenity/car_sharing": {
+                "name": "\"Car Sharing\""
+            },
             "amenity/car_wash": {
                 "name": "Autopraonica"
             },
@@ -774,6 +782,10 @@
             },
             "amenity/courthouse": {
                 "name": "Sudnica"
+            },
+            "amenity/drinking_water": {
+                "name": "Voda za piće",
+                "terms": "fontana,prenosiva voda"
             },
             "amenity/embassy": {
                 "name": "Ambasada"
@@ -858,6 +870,10 @@
             "amenity/swimming_pool": {
                 "name": "Bazen"
             },
+            "amenity/taxi": {
+                "name": "Taxi stajalište",
+                "terms": "taxi"
+            },
             "amenity/telephone": {
                 "name": "Telefon"
             },
@@ -866,7 +882,8 @@
                 "terms": "pozorište,predstava,izvedba,muzikl"
             },
             "amenity/toilets": {
-                "name": "Toaleti"
+                "name": "Toaleti",
+                "terms": "kupatilo,toalet"
             },
             "amenity/townhall": {
                 "name": "Gradska vijećnica",
@@ -1452,6 +1469,10 @@
             },
             "shop/electronics": {
                 "name": "Prodavnica elektronike"
+            },
+            "shop/farm": {
+                "name": "Štand proizvodnje",
+                "terms": "prodavnica proizvoda sa farme,štand farme"
             },
             "shop/fishmonger": {
                 "name": "Ribarnica"

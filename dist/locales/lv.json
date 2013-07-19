@@ -149,6 +149,7 @@
     "just_edited": "Jūs nupat rediģējāt OpenStreetMap",
     "browser_notice": "Šis redaktors tiek atbalstīts ar Firefox, Chrome, Safari, Opera, un Internet Explorer 9 un jaunāku. Lūdzu, atjauniniet savu pārlūkprogrammu vai izmantojiet Potlatch 2 kartes rediģēšanai",
     "view_on_osm": "Aplūkot OSM kartē",
+    "zoom_in_edit": "Pietuvināt, lai labotu",
     "logout": "atslēgties",
     "loading_auth": "Savienojas ar OpenStreetMap...",
     "report_a_bug": "ziņot par kļūdu",
@@ -176,10 +177,14 @@
         "no_documentation_key": "Šai vērtībai nav piejama dokumentācija",
         "show_more": "Rādīt vairāk",
         "view_on_osm": "Apskatīt openstreetmap.org",
+        "all_members": "Visi biedri",
+        "role": "Loma",
         "choose": "Izvēlieties objekta tipu",
         "results": "Atrasti {n} rezultāti meklējot {search}",
         "reference": "Skatīt OpenStreetMap wiki →",
-        "search": "Meklēt"
+        "search": "Meklēt",
+        "unknown": "Nezināms",
+        "incomplete": "<nav lejuplādēts>"
     },
     "background": {
         "title": "Fons",
@@ -203,6 +208,8 @@
         "unsaved_changes": "Jums ir nesaglabātas izmaiņas"
     },
     "success": {
+        "facebook": "Dalīties Facebook",
+        "tweet": "Dalīties Twitter",
         "okay": "Labi"
     },
     "confirm": {
@@ -242,7 +249,18 @@
         "help": "# Palīdzība\n\nŠis ir redaktors, kas domāts [OpenStreetMap](http://www.openstreetmap.org/)  -\n tā ir visiem pieejama un brīvi labojama pasaules karte. Tu vari lietot šo redaktoru, lai labotu un papildinātu datus tev labi zināmā apgabalā, tādejādi radot atvērtās piekļuvess pasaules karti labāku priekš ikviena, kas to lieto.\n\nLabojumi, ko tu veiksi kartē, būs redzami ikvienam, kas lieto OpenStreeMap.\nLai veiktu labojumus, tev vajag atvērt \n[brīvu OpenStreetMap kontu](https://www.openstreetmap.org/user/new).\n[iD editor](http://ideditor.com/) ir uz sadarbību orientēts projekts ar pilnu pieeju  [izejas kodam, kas pieejams GitHub](https://github.com/systemed/iD).\n"
     },
     "intro": {
+        "navigation": {
+            "title": "Navigācija"
+        },
+        "points": {
+            "title": "Punkti"
+        },
+        "areas": {
+            "title": "Apgabali",
+            "search": "**Meklēt '{name}'.**"
+        },
         "lines": {
+            "title": "Līnijas",
             "start": "**Uzsāciet līniju, klikšķinot ceļa beigu punktā.**",
             "restart": "Ceļam jākrusto Flower Street."
         },
@@ -978,6 +996,9 @@
             },
             "shop/books": {
                 "name": "Grāmatu veikals"
+            },
+            "shop/boutique": {
+                "name": "Veikals"
             },
             "shop/butcher": {
                 "name": "Miesnieks"

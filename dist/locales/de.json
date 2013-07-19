@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "{n} Linien vereinigt.",
             "not_eligible": "Diese Objekte können nicht vereint werden.",
-            "not_adjacent": "Diese Linien können nicht vereint werden, da sie nicht verbunden sind."
+            "not_adjacent": "Diese Linien können nicht vereint werden, da sie nicht verbunden sind.",
+            "restriction": "Diese Linien können nicht vereinigt werden, da mindestens eine Linie ein Mitglied einer \"{relation}\" Relation ist."
         },
         "move": {
             "title": "Verschieben",
@@ -227,7 +228,8 @@
         "search": "Suchen",
         "unknown": "Unbekannt",
         "incomplete": "<nicht heruntergeladen>",
-        "feature_list": "Objektliste"
+        "feature_list": "Eigenschaftsliste",
+        "edit": "Eigenschaft bearbeiten"
     },
     "background": {
         "title": "Hintergrund",
@@ -759,6 +761,12 @@
                 "name": "Café",
                 "terms": "Kaffee,Tee,Kaffeehandlung"
             },
+            "amenity/car_rental": {
+                "name": "Autovermietung"
+            },
+            "amenity/car_sharing": {
+                "name": "Carsharing"
+            },
             "amenity/car_wash": {
                 "name": "Autowäsche"
             },
@@ -771,6 +779,10 @@
             },
             "amenity/courthouse": {
                 "name": "Gericht"
+            },
+            "amenity/drinking_water": {
+                "name": "Trinkwasserstelle",
+                "terms": "Brunnen,Trinkwasser,Trinkwasserbrunnen,Wasserhahn"
             },
             "amenity/embassy": {
                 "name": "Botschaft"
@@ -815,10 +827,12 @@
                 "terms": "Abtei, Basilika, geweihter Ort, Kathedrale, Altarraum, Kantorei, Kapelle, Kirche, Kirchgemeinde, Gotteshaus, Gebetshaus, Dom, Moschee, Oratorium, Heiligtum, Sacellum, Schrein, Synagoge, Tabernakel, Tempel"
             },
             "amenity/place_of_worship/buddhist": {
-                "name": "Buddhistischer Tempel"
+                "name": "Buddhistischer Tempel",
+                "terms": "Stupa,Vihara,Kloster,Tempel,Pagoda,Tempelanlage,Zendo,Dojo"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Kirche"
+                "name": "Kirche",
+                "terms": "Christlich,Abtei,Basilika,geweihter Ort,Kathedrale,Altarraum,Kantorei,Kapelle,Kirche,Kirchgemeinde,Gotteshaus,Gebetshaus,Dom,Oratorium,Heiligtum,Sacellum,Schrein,Tabernakel,Tempel"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Sy­n­a­go­ge",
@@ -842,13 +856,18 @@
                 "name": "Pub"
             },
             "amenity/restaurant": {
-                "name": "Restaurant"
+                "name": "Restaurant",
+                "terms": "Bar,Cafeteria,Café,Kantine,Speisehaus,Coffee-Shop,Kaffeehaus,Imbiss,Speisesaal,Kneipe,Donut Shop,Drive-In,Restaurant,Speiserestaurant,Wirtschaft,Fast-Food-Restaurant,Grill,Hamburgerstand,Hotdogstand,Gasthaus,Gasthof,Wirtshaus,Imbissstube,Imbiss,Pizzeria,Lokal"
             },
             "amenity/school": {
                 "name": "Schule"
             },
             "amenity/swimming_pool": {
                 "name": "Schwimmbecken"
+            },
+            "amenity/taxi": {
+                "name": "Taxistand",
+                "terms": "Taxi"
             },
             "amenity/telephone": {
                 "name": "Telefon"
@@ -858,7 +877,8 @@
                 "terms": "Theater,Aufführung,Schauspiel,Musical"
             },
             "amenity/toilets": {
-                "name": "Toilette"
+                "name": "Toilette",
+                "terms": "Bad,Toilette,WC"
             },
             "amenity/townhall": {
                 "name": "Rathaus",
@@ -1149,7 +1169,8 @@
                 "name": "Yachthafen"
             },
             "leisure/park": {
-                "name": "Park"
+                "name": "Park",
+                "terms": "Promenade,Esplanade,Gut,Wald,Garten,Gras,Grün,Außenanlagen,Rasen,Land,Wiese,Park,Platz,Spielplatz,Piazza,Lustgarten,Erholungsgebiet,Dorfanger,Dorfwiese,Waldgelände"
             },
             "leisure/pitch": {
                 "name": "Sportplatz"
@@ -1443,6 +1464,10 @@
             "shop/electronics": {
                 "name": "Elektronikfachgeschäft"
             },
+            "shop/farm": {
+                "name": "Obst- und Gemüsestand",
+                "terms": "Hofladen"
+            },
             "shop/fishmonger": {
                 "name": "Fischhändler"
             },
@@ -1571,7 +1596,8 @@
                 "name": "Motel"
             },
             "tourism/museum": {
-                "name": "Museum"
+                "name": "Museum",
+                "terms": "Ausstellung,Exponatarchiv,Stiftung,Galerie,Halle,Institution,Bibliothek,Menagerie,Sammlung,Salon,Lagerhaus,Schatzhaus,Schatzkammer"
             },
             "tourism/picnic_site": {
                 "name": "Picknickplatz"

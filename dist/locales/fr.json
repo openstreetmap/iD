@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "Fusionne les {n} lignes.",
             "not_eligible": "Ces éléments ne peuvent pas être fusionnés.",
-            "not_adjacent": "Ces lignes ne peuvent pas être fusionnées car elles ne sont pas connectées."
+            "not_adjacent": "Ces lignes ne peuvent pas être fusionnées car elles ne sont pas connectées.",
+            "restriction": "Ces lignes ne peuvent pas être fusionnées car au moins l'une d'entre elles est membre d'une relation \"{relation}\"."
         },
         "move": {
             "title": "Déplacer",
@@ -227,7 +228,8 @@
         "search": "Rechercher",
         "unknown": "Inconnu",
         "incomplete": "<non téléchargé>",
-        "feature_list": "Liste d'éléments"
+        "feature_list": "Liste d'éléments",
+        "edit": "Modifier l'élément"
     },
     "background": {
         "title": "Fond de carte",
@@ -762,6 +764,12 @@
                 "name": "Café",
                 "terms": "café, salon de thé"
             },
+            "amenity/car_rental": {
+                "name": "Location de Voiture"
+            },
+            "amenity/car_sharing": {
+                "name": "Partage de Voiture"
+            },
             "amenity/car_wash": {
                 "name": "Lavage de voiture"
             },
@@ -774,6 +782,10 @@
             },
             "amenity/courthouse": {
                 "name": "Tribunal"
+            },
+            "amenity/drinking_water": {
+                "name": "Eau Potable",
+                "terms": "fontaine, eau potable"
             },
             "amenity/embassy": {
                 "name": "Embassade"
@@ -858,6 +870,10 @@
             "amenity/swimming_pool": {
                 "name": "Piscine"
             },
+            "amenity/taxi": {
+                "name": "Station de Taxi",
+                "terms": "taxi"
+            },
             "amenity/telephone": {
                 "name": "Téléphone"
             },
@@ -866,7 +882,8 @@
                 "terms": "théâtre, pièce, représentation, séance"
             },
             "amenity/toilets": {
-                "name": "Toilettes"
+                "name": "Toilettes",
+                "terms": "salle de bains,toilettes"
             },
             "amenity/townhall": {
                 "name": "Mairie",
@@ -1452,6 +1469,10 @@
             },
             "shop/electronics": {
                 "name": "Magasin de matériel électronique"
+            },
+            "shop/farm": {
+                "name": "Étal de Fruits et Légumes",
+                "terms": "Magasin de Ferme"
             },
             "shop/fishmonger": {
                 "name": "Poissonnerie"

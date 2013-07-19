@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "Scalono {n} linii.",
             "not_eligible": "Te obiekty nie mogą zostać scalone.",
-            "not_adjacent": "Tych linii nie da się scalić, gdyż nie są połączone."
+            "not_adjacent": "Tych linii nie da się scalić, gdyż nie są połączone.",
+            "restriction": "Te linie nie mogą zostać połączone, ponieważ przynajmniej jedna z nich jest członkiem relacji \"{relation}\"."
         },
         "move": {
             "title": "Przesuń",
@@ -227,7 +228,8 @@
         "search": "Szukaj",
         "unknown": "Nieznane",
         "incomplete": "<nie pobrane>",
-        "feature_list": "Lista obiektów"
+        "feature_list": "Lista obiektów",
+        "edit": "Edytuj obiekt"
     },
     "background": {
         "title": "Tło",
@@ -762,6 +764,12 @@
                 "name": "Kawiarnia",
                 "terms": "kawa,herbata,kawiarnia"
             },
+            "amenity/car_rental": {
+                "name": "Wypożyczalnia samochodów"
+            },
+            "amenity/car_sharing": {
+                "name": "Car-sharing"
+            },
             "amenity/car_wash": {
                 "name": "Myjnia samochodowa"
             },
@@ -774,6 +782,9 @@
             },
             "amenity/courthouse": {
                 "name": "Sąd"
+            },
+            "amenity/drinking_water": {
+                "name": "Woda pitna"
             },
             "amenity/embassy": {
                 "name": "Ambasada"
@@ -857,6 +868,9 @@
             },
             "amenity/swimming_pool": {
                 "name": "Basen"
+            },
+            "amenity/taxi": {
+                "name": "Postój taksówek"
             },
             "amenity/telephone": {
                 "name": "Telefon"

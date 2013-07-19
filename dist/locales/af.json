@@ -251,16 +251,20 @@
     },
     "intro": {
         "navigation": {
+            "drag": "Die hoofkaartarea toon OpenStreetMap data aan op 'n agtergrond. Jy kan navigeer deur te trek en te sleep net soos met enige ander web gebaseerde kaart. **Probeer dit nou!**",
             "select": "Kaart eienskappe word verteenwoordig op drie maniere: punte, lyne en areas. All eienskappe kan uitgekies word deur daarop te klick. **Klick op 'n punt om dit uit te kies.**",
-            "header": "Die opskrif wys ons die eienskap tipe."
+            "header": "Die opskrif wys ons die eienskap tipe.",
+            "pane": "Die itemkieslys word vertoon sodra jy 'n item op die kaart kies. Die opskrif dui die itemtipe aan en die hoofpaneel dui die item se eienskappe aan soos 'n naam en adres. **Om die itemkieslys toe te maak druk die knoppie regs bo.**"
         },
         "points": {
+            "add": "Punte kan gebruik word om winkels, restaurante, monemente en soortgelyke plekke aan te dui. Dit merk 'n spesifieke punt en beskryf wat daar gevind kan word. **Druk op die Punt knoppe om  'n nuwe punt by te voeg.**",
             "place": "Die punt kan op die kaart geplaas word deur daarop te klick. **Sit die punt bo-op die gebou.**",
             "describe": "Die punt is nou gemerk as 'n kafee. Gebruik die eienskapslys om meer inligting by te sit. **Sit 'n naam by**",
             "close": "Die eienskapslys kan toegemaak word deur op die toemaak knoppie te klick. **Maak die eienskapslys toe**",
             "reselect": "Baie kere gaan 'n punt klaar bestaan, maar met foute of onvolledig. Jy kan bestaande punte verander. **Kies die punt wat jy nou net gemaak het.**",
             "fixname": "**Verander die naam en maak die eienskapslys toe.**",
-            "reselect_delete": "Alle eienskappe op die kaart kan verwyder word. **Klick op die punt wat jy nou net gemaak het. **"
+            "reselect_delete": "Alle eienskappe op die kaart kan verwyder word. **Klick op die punt wat jy nou net gemaak het. **",
+            "delete": "Wanneer jy op 'n punt druk verskyn verskillende opsies, soos verwyder die punt. **Verwyder die punt.**"
         },
         "areas": {
             "describe": "**Sit 'n naam by en maak die eienskappe lys toe**"
@@ -280,11 +284,20 @@
     },
     "presets": {
         "categories": {
+            "category-landuse": {
+                "name": "Landsgebruik"
+            },
+            "category-path": {
+                "name": "Paaidjie"
+            },
             "category-rail": {
                 "name": "Spoor"
             },
             "category-road": {
                 "name": "Pad"
+            },
+            "category-route": {
+                "name": "Roete"
             },
             "category-water": {
                 "name": "Water"
@@ -293,6 +306,7 @@
         "fields": {
             "access": {
                 "label": "Toegang",
+                "placeholder": "Onbekend",
                 "types": {
                     "access": "Algemene",
                     "foot": "Voet",
@@ -305,13 +319,23 @@
                         "title": "Toegelaat"
                     },
                     "no": {
+                        "title": "Toegang Verbode",
                         "description": "Geen toegang vir algemene publiek"
                     },
+                    "permissive": {
+                        "description": "Voorwaardelike toegang"
+                    },
                     "private": {
-                        "title": "Privaat"
+                        "title": "Privaat",
+                        "description": "Toegang slegs soos gereël met eienaar"
+                    },
+                    "designated": {
+                        "title": "Toegewys",
+                        "description": "Voorgeskrewe toegang"
                     },
                     "destination": {
-                        "title": "Eindbestemming"
+                        "title": "Eindbestemming",
+                        "description": "Beperkte toegang"
                     }
                 }
             },
@@ -343,6 +367,9 @@
             "bicycle_parking": {
                 "label": "Tipe"
             },
+            "boundary": {
+                "label": "Tipe"
+            },
             "building": {
                 "label": "Gebou"
             },
@@ -353,7 +380,8 @@
                 "label": "Gebou"
             },
             "capacity": {
-                "label": "Kapasiteit"
+                "label": "Kapasiteit",
+                "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
                 "label": "Rigting"
@@ -364,6 +392,9 @@
                     "clockwise": "Kloksgewys",
                     "anticlockwise": "Antikloksgewys"
                 }
+            },
+            "collection_times": {
+                "label": "Afhaal tye"
             },
             "construction": {
                 "label": "Tipe"
@@ -383,6 +414,9 @@
             "denotation": {
                 "label": "Aanduiding"
             },
+            "description": {
+                "label": "Beskrywing"
+            },
             "elevation": {
                 "label": "Hoogte bo seespiëel"
             },
@@ -393,16 +427,29 @@
                 "label": "Tipe"
             },
             "fax": {
-                "label": "Faks"
+                "label": "Faks",
+                "placeholder": "+27 11 907 1111"
             },
             "fee": {
                 "label": "Fooi"
+            },
+            "fixme": {
+                "label": "Maak My Reg"
             },
             "highway": {
                 "label": "Tipe"
             },
             "historic": {
                 "label": "Tipe"
+            },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
+            "incline": {
+                "label": "Steilte"
             },
             "internet_access": {
                 "label": "Internet Toegang",
@@ -415,20 +462,33 @@
             "landuse": {
                 "label": "Tipe"
             },
+            "lanes": {
+                "label": "Lane",
+                "placeholder": "1, 2, 3..."
+            },
+            "layer": {
+                "label": "Laag"
+            },
             "leisure": {
                 "label": "Tipe"
             },
             "levels": {
-                "label": "Vlakke"
+                "label": "Vlakke",
+                "placeholder": "2, 4, 6..."
+            },
+            "location": {
+                "label": "Plek"
             },
             "man_made": {
                 "label": "Tipe"
             },
             "maxspeed": {
-                "label": "Spoedlimiet"
+                "label": "Spoedlimiet",
+                "placeholder": "40, 50, 60..."
             },
             "name": {
-                "label": "Naam"
+                "label": "Naam",
+                "placeholder": "Algemene naam (indien enige)"
             },
             "natural": {
                 "label": "Natuurlike"
@@ -461,7 +521,8 @@
                 "label": "Tipe"
             },
             "phone": {
-                "label": "Telefoon"
+                "label": "Telefoon",
+                "placeholder": "+27 11 907 1111"
             },
             "place": {
                 "label": "Tipe"
@@ -475,6 +536,9 @@
             "ref": {
                 "label": "Verwyssing"
             },
+            "relation": {
+                "label": "Tipe"
+            },
             "religion": {
                 "label": "Geloof",
                 "options": {
@@ -486,6 +550,15 @@
                     "shinto": "Sjinto",
                     "taoist": "Taoist"
                 }
+            },
+            "restriction": {
+                "label": "Tipe"
+            },
+            "route": {
+                "label": "Tipe"
+            },
+            "route_master": {
+                "label": "Tipe"
             },
             "sac_scale": {
                 "label": "Moeilikheidsgraad van voetslaanpad"
@@ -507,6 +580,7 @@
             },
             "structure": {
                 "label": "Struktuur",
+                "placeholder": "Onbekend",
                 "options": {
                     "bridge": "Brug",
                     "tunnel": "Tonnel",
@@ -514,11 +588,17 @@
                     "cutting": "Uitgrawing"
                 }
             },
+            "supervised": {
+                "label": "Onder toesig"
+            },
             "surface": {
                 "label": "Oppervlakte"
             },
             "tourism": {
                 "label": "Tipe"
+            },
+            "towertype": {
+                "label": "Toring tipe"
             },
             "tracktype": {
                 "label": "Tipe"
@@ -533,7 +613,8 @@
                 "label": "Tipe"
             },
             "website": {
-                "label": "Webwerf"
+                "label": "Webwerf",
+                "placeholder": "http://voorbeeld.co.za/"
             },
             "wetland": {
                 "label": "Tipe"
@@ -549,6 +630,9 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Adres"
+            },
             "aeroway": {
                 "name": "Aanloopbaan"
             },
@@ -556,15 +640,40 @@
                 "name": "Lughawe",
                 "terms": "vliegtuig,lughawe,lughawe"
             },
+            "aeroway/apron": {
+                "name": "Laaiblad",
+                "terms": "Laaiblad"
+            },
+            "aeroway/gate": {
+                "name": "Lughawehek"
+            },
+            "aeroway/hangar": {
+                "name": "Loods"
+            },
             "aeroway/helipad": {
                 "name": "Helipad",
                 "terms": "helikopter,helipad,heliport"
             },
+            "aeroway/runway": {
+                "name": "Aanloopbaan",
+                "terms": "Landingstrook"
+            },
+            "aeroway/taxiway": {
+                "name": "Rolbaan"
+            },
+            "aeroway/terminal": {
+                "name": "Lughaweterminaal",
+                "terms": "lughawe,vliegveld"
+            },
             "amenity": {
                 "name": "Geriewe"
             },
+            "amenity/atm": {
+                "name": "ATM"
+            },
             "amenity/bank": {
-                "name": "Bank"
+                "name": "Bank",
+                "terms": "geldkoffer,bankierskantoor,kredietvereniging,bewaarplek,fiskus,fonds,voorraad,beleggingsbank,bewaarplek,reserwe,opgaarplek,kluis,spaargeld,aandele,voorraadstapel,stoormaatskapy,kluis"
             },
             "amenity/bar": {
                 "name": "Kroeg"
@@ -582,14 +691,28 @@
                 "name": "Kafee",
                 "terms": "koffie,tee,koffiewinkel"
             },
+            "amenity/car_rental": {
+                "name": "Kar huur"
+            },
+            "amenity/car_sharing": {
+                "name": "Kardeel"
+            },
             "amenity/car_wash": {
                 "name": "Karwas"
             },
             "amenity/cinema": {
-                "name": "Fliek"
+                "name": "Fliek",
+                "terms": "silverdoek,rolprentteater,cinema,inryteater,fliek,kunsfliekteater"
+            },
+            "amenity/college": {
+                "name": "Kollege"
             },
             "amenity/courthouse": {
                 "name": "Hof"
+            },
+            "amenity/drinking_water": {
+                "name": "Drinkwater",
+                "terms": "waterfontein, drinkwater"
             },
             "amenity/embassy": {
                 "name": "Ambassade"
@@ -610,10 +733,18 @@
                 "name": "Begrafplaas"
             },
             "amenity/hospital": {
-                "name": "Hospitaal"
+                "name": "Hospitaal",
+                "terms": "kliniek,ongevalle,gesondheidsdiens,hospies,hospitaal,sanatorium,kliniek,dagkliniek,teater,saal"
+            },
+            "amenity/kindergarten": {
+                "name": "Kleuterskool",
+                "terms": "voorskool,kleuterskool,kindersorg,speelgroep,dagsorg"
             },
             "amenity/library": {
                 "name": "Biblioteek"
+            },
+            "amenity/marketplace": {
+                "name": "Markplein"
             },
             "amenity/parking": {
                 "name": "Parkering"
@@ -622,10 +753,16 @@
                 "name": "Apteek"
             },
             "amenity/place_of_worship": {
-                "name": "Plek van aanbidding"
+                "name": "Plek van aanbidding",
+                "terms": "kerk,gebedshuis,moskee,masiet,kapel,abdy,tempel,basilieka,katedraal,sinagoge,altar,koorkapel,Godshuis,aanbiddingsplek,sendingstasie,sendingkerk,gemeente,tabernakel,heiligdom,pelgrimsoord"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Boeddhiste tempel",
+                "terms": "stupa,vihara,klooster,tempel,pagoda,zenod,dojo"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Kerk"
+                "name": "Kerk",
+                "terms": "Christen,kerk,kapel,katedraal,sending,matrosekerk,huis van God,huis van gebed,huis van aanbidding,altaar,kansel,tabernakel"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Sinagoge",
@@ -636,10 +773,12 @@
                 "terms": "moslem,moskee"
             },
             "amenity/police": {
-                "name": "Polisie"
+                "name": "Polisie",
+                "terms": "rangteken,blou,konstabel,polisie,pote,wetstoepasing,speurder,platpoot,mag,gereg,polisiesoldaat,die wet,offisiere"
             },
             "amenity/post_box": {
-                "name": "Posbus"
+                "name": "Posbus",
+                "terms": "posbus,briewebus,possak"
             },
             "amenity/post_office": {
                 "name": "Poskantoor"
@@ -648,35 +787,57 @@
                 "name": "Kroeg"
             },
             "amenity/restaurant": {
-                "name": "Restaurant"
+                "name": "Restaurant",
+                "terms": "bar,kafeteria,kafee,kantien,koffiewinkel,restaurant,deurry,eetplek,kitskos,kosstalletjie,braairestaurant,pizzawinkel,watergat,nagklub,salon"
             },
             "amenity/school": {
-                "name": "Skool"
+                "name": "Skool",
+                "terms": "akademie,alma mater,swartbord,kollege,departement,dissipline,instelling,fakulteit,saal,sale.instituut,skool,universiteit,kweekskool,seminarie"
             },
             "amenity/swimming_pool": {
                 "name": "Swembad"
+            },
+            "amenity/taxi": {
+                "name": "Taxi staanplek",
+                "terms": "huurmotor"
             },
             "amenity/telephone": {
                 "name": "Telefoon"
             },
             "amenity/theatre": {
-                "name": "Teater"
+                "name": "Teater",
+                "terms": "teater,optrede,toneelstuk,musiekblyspel,drama,opvoering"
             },
             "amenity/toilets": {
-                "name": "Toilette"
+                "name": "Toilette",
+                "terms": "badkamer,openbare toilet,toilet,ruskamer"
             },
             "amenity/townhall": {
-                "name": "Stadsaal"
+                "name": "Stadsaal",
+                "terms": "dorpsaal,stadhuis,stadsaal,munisipaliteit,hofgebou,gemeenskapsentrum,plaaslike owerheid"
             },
             "amenity/university": {
-                "name": "Universiteit"
+                "name": "Universiteit",
+                "terms": "kollege,universiteit,tegnikon"
             },
             "amenity/waste_basket": {
                 "name": "Asblik",
                 "terms": "asblik,asblik,asblik,asblik"
             },
+            "area": {
+                "name": "Area"
+            },
+            "barrier": {
+                "name": "Versperring"
+            },
             "barrier/block": {
                 "name": "Blok"
+            },
+            "barrier/bollard": {
+                "name": "Toupaal"
+            },
+            "barrier/cattle_grid": {
+                "name": "roosterhek"
             },
             "barrier/city_wall": {
                 "name": "Stadsmuur"
@@ -698,6 +859,15 @@
             },
             "barrier/hedge": {
                 "name": "Laning"
+            },
+            "barrier/kissing_gate": {
+                "name": "Draaihek"
+            },
+            "barrier/retaining_wall": {
+                "name": "Stuwal"
+            },
+            "barrier/stile": {
+                "name": "Steg"
             },
             "barrier/toll_booth": {
                 "name": "Tolhek"
@@ -730,25 +900,35 @@
                 "name": "Snelweg"
             },
             "highway/bridleway": {
-                "name": "Perdepaaidjie"
+                "name": "Perdepaaidjie",
+                "terms": "ruiterpaaidjie,perdrypad"
             },
             "highway/bus_stop": {
                 "name": "Busstop"
             },
             "highway/crossing": {
-                "name": "Oorgang"
+                "name": "Oorgang",
+                "terms": "voetoorgang,zebrakruising"
             },
             "highway/cycleway": {
                 "name": "Fietsrypad"
             },
             "highway/footway": {
-                "name": "Voetslaanpad"
+                "name": "Voetslaanpad",
+                "terms": "voetpad,voetpaaidjie,boulevard,wandellaan,stap,staproete,roete,deurloop"
             },
             "highway/mini_roundabout": {
                 "name": "Mini-sirkel"
             },
             "highway/motorway": {
                 "name": "Snelweg"
+            },
+            "highway/motorway_junction": {
+                "name": "Snelwegkruising"
+            },
+            "highway/motorway_link": {
+                "name": "Snelwegaansluiting",
+                "terms": "oprit,afrit"
             },
             "highway/path": {
                 "name": "Paadjie"
@@ -759,14 +939,35 @@
             "highway/primary": {
                 "name": "Primere Pad"
             },
+            "highway/primary_link": {
+                "terms": "Oprit,Afrit"
+            },
             "highway/residential": {
                 "name": "Residensieele pad"
             },
             "highway/secondary": {
                 "name": "Sekondere Pad"
             },
+            "highway/secondary_link": {
+                "terms": "Oprit,Afrit"
+            },
             "highway/service": {
                 "name": "Dienspad"
+            },
+            "highway/service/alley": {
+                "name": "Steeg"
+            },
+            "highway/service/drive-through": {
+                "name": "Deurry"
+            },
+            "highway/service/driveway": {
+                "name": "Oprit"
+            },
+            "highway/service/emergency_access": {
+                "name": "Noodtoegang"
+            },
+            "highway/service/parking_aisle": {
+                "name": "Parkeergang"
             },
             "highway/steps": {
                 "name": "Trappe",
@@ -775,11 +976,21 @@
             "highway/tertiary": {
                 "name": "Tertiere Pad"
             },
+            "highway/tertiary_link": {
+                "terms": "Oprit,Afrit"
+            },
             "highway/track": {
                 "name": "Spoor"
             },
             "highway/traffic_signals": {
-                "name": "Robot"
+                "name": "Robot",
+                "terms": "lig,verkeerslig,robot"
+            },
+            "highway/trunk": {
+                "name": "Hoofpad"
+            },
+            "highway/trunk_link": {
+                "terms": "Oprit,Afrit"
             },
             "highway/turning_circle": {
                 "name": "Draai Sirkel"
@@ -793,14 +1004,32 @@
             "historic/archaeological_site": {
                 "name": "Argeologiese Plek"
             },
+            "historic/boundary_stone": {
+                "name": "Grensklip"
+            },
             "historic/castle": {
                 "name": "Kasteel"
+            },
+            "historic/memorial": {
+                "name": "Gedenkteken"
             },
             "historic/monument": {
                 "name": "Monument"
             },
             "historic/ruins": {
                 "name": "Reune"
+            },
+            "historic/wayside_cross": {
+                "name": "Padteken"
+            },
+            "landuse": {
+                "name": "Landsgebruik"
+            },
+            "landuse/allotments": {
+                "name": "Toegewysde lappie grond"
+            },
+            "landuse/basin": {
+                "name": "Laagte"
             },
             "landuse/cemetery": {
                 "name": "Begrafplaas"
@@ -826,6 +1055,9 @@
             "landuse/industrial": {
                 "name": "Industrieel"
             },
+            "landuse/meadow": {
+                "name": "Weiveld"
+            },
             "landuse/orchard": {
                 "name": "Boord"
             },
@@ -834,6 +1066,9 @@
             },
             "landuse/residential": {
                 "name": "Residensieel"
+            },
+            "landuse/retail": {
+                "name": "Kleinhandel"
             },
             "landuse/vineyard": {
                 "name": "Druiweprieel"
@@ -847,8 +1082,12 @@
             "leisure/golf_course": {
                 "name": "Golfbaan"
             },
+            "leisure/marina": {
+                "name": "Vasmeerplek"
+            },
             "leisure/park": {
-                "name": "Park"
+                "name": "Park",
+                "terms": "wandelweg,woud,tuin,gras,groen,gronde,grasperk,weiveld,landgoed,erf,perseel,plek,park,speelgrond,parkie,plein,stadsplein,dorpsmeent"
             },
             "leisure/pitch": {
                 "name": "Sport Veld"
@@ -868,8 +1107,15 @@
             "leisure/pitch/tennis": {
                 "name": "Tennisbaan"
             },
+            "leisure/pitch/volleyball": {
+                "name": "Vlugbalbaan"
+            },
             "leisure/playground": {
-                "name": "Speelpark"
+                "name": "Speelpark",
+                "terms": "wipplank,rondomtalie,glyplank,klimraam,swaai,sandpit"
+            },
+            "leisure/slipway": {
+                "name": "Inglipbaan"
             },
             "leisure/stadium": {
                 "name": "Stadium"
@@ -877,8 +1123,14 @@
             "leisure/swimming_pool": {
                 "name": "Swembad"
             },
+            "line": {
+                "name": "Lyn"
+            },
             "man_made": {
                 "name": "Mens gemaak"
+            },
+            "man_made/breakwater": {
+                "name": "Breekwater"
             },
             "man_made/lighthouse": {
                 "name": "Ligtoring"
@@ -886,8 +1138,14 @@
             "man_made/pier": {
                 "name": "Landingsplek"
             },
+            "man_made/pipeline": {
+                "name": "Pyplyn"
+            },
             "man_made/survey_point": {
                 "name": "Landmeterspunt"
+            },
+            "man_made/tower": {
+                "name": "Toring"
             },
             "man_made/wastewater_plant": {
                 "name": "Rioolplaas",
@@ -895,6 +1153,9 @@
             },
             "man_made/water_tower": {
                 "name": "Watertoring"
+            },
+            "man_made/water_well": {
+                "name": "Put"
             },
             "man_made/water_works": {
                 "name": "Waterwerke"
@@ -925,7 +1186,8 @@
                 "name": "Heide"
             },
             "natural/peak": {
-                "name": "Piek"
+                "name": "Piek",
+                "terms": "koppie,berg,spitskop,kop,kruin,kruin,krans,piek"
             },
             "natural/scrub": {
                 "name": "Bossies"
@@ -969,7 +1231,11 @@
                 "name": "Dorpie"
             },
             "place/island": {
-                "name": "Eiland"
+                "name": "Eiland",
+                "terms": "eiland,rif,eilandsee,ringeiland,kaai"
+            },
+            "place/isolated_dwelling": {
+                "name": "Afgeleë blyplek"
             },
             "place/locality": {
                 "name": "Ligging"
@@ -979,6 +1245,9 @@
             },
             "place/village": {
                 "name": "Dorpie"
+            },
+            "point": {
+                "name": "Punt"
             },
             "power": {
                 "name": "Krag"
@@ -998,6 +1267,9 @@
             "power/tower": {
                 "name": "Hoogspanningstoring"
             },
+            "power/transformer": {
+                "name": "Transformator"
+            },
             "railway": {
                 "name": "Spoorlyn"
             },
@@ -1008,7 +1280,14 @@
                 "name": "Ongebruikte spoorweg"
             },
             "railway/level_crossing": {
-                "name": "Spooroorgang"
+                "name": "Spooroorgang",
+                "terms": "treinoorgang,spooroorgang"
+            },
+            "railway/monorail": {
+                "name": "Enkelspoorbaan"
+            },
+            "railway/platform": {
+                "name": "Spoorwegplatform"
             },
             "railway/rail": {
                 "name": "Treinspoor"
@@ -1023,7 +1302,14 @@
                 "name": "Metro Ingang"
             },
             "railway/tram": {
-                "name": "Trem"
+                "name": "Trem",
+                "terms": "Trem"
+            },
+            "relation": {
+                "name": "Verhouding"
+            },
+            "route/ferry": {
+                "name": "Veerbootroete"
             },
             "shop": {
                 "name": "Winkel"
@@ -1047,11 +1333,20 @@
             "shop/books": {
                 "name": "Boekwinkel"
             },
+            "shop/boutique": {
+                "name": "Boetiek"
+            },
             "shop/butcher": {
                 "name": "Slagter"
             },
             "shop/car": {
                 "name": "Voertuighandelaar"
+            },
+            "shop/car_parts": {
+                "name": "Onderdelewinkel"
+            },
+            "shop/car_repair": {
+                "name": "Werkswinkel"
             },
             "shop/chemist": {
                 "name": "Apteek"
@@ -1062,14 +1357,30 @@
             "shop/computer": {
                 "name": "Rekenaarwinkel"
             },
+            "shop/confectionery": {
+                "name": "Lekkergoedwinkel"
+            },
+            "shop/convenience": {
+                "name": "Geriefswinkel"
+            },
             "shop/deli": {
                 "name": "Deli"
+            },
+            "shop/department_store": {
+                "name": "Afdelingswinkel"
+            },
+            "shop/doityourself": {
+                "name": "Selfdoenwinkel"
             },
             "shop/dry_cleaning": {
                 "name": "Droogskoonmakers"
             },
             "shop/electronics": {
                 "name": "Elektronikawinkel"
+            },
+            "shop/farm": {
+                "name": "Padstal",
+                "terms": "plaaswinkel,plaasstal"
             },
             "shop/fishmonger": {
                 "name": "Viswinkel"
@@ -1080,8 +1391,14 @@
             "shop/furniture": {
                 "name": "Meubelwinkel"
             },
+            "shop/garden_centre": {
+                "name": "Tuinsentrum"
+            },
             "shop/gift": {
                 "name": "Geskenkwinkel"
+            },
+            "shop/greengrocer": {
+                "name": "Groentewinkel"
             },
             "shop/hairdresser": {
                 "name": "Haarkapper"
@@ -1089,8 +1406,20 @@
             "shop/hardware": {
                 "name": "Hardewarewinkel"
             },
+            "shop/hifi": {
+                "name": "Hoëtrouwinkel"
+            },
             "shop/jewelry": {
                 "name": "Juwelier"
+            },
+            "shop/kiosk": {
+                "name": "Kiosk"
+            },
+            "shop/laundry": {
+                "name": "Wassery"
+            },
+            "shop/mall": {
+                "name": "Winkelsentrum"
             },
             "shop/mobile_phone": {
                 "name": "Selfoonwinkel"
@@ -1101,8 +1430,14 @@
             "shop/music": {
                 "name": "Musiekwinkel"
             },
+            "shop/newsagent": {
+                "name": "Nuusagentskap"
+            },
             "shop/optician": {
                 "name": "Oogarts"
+            },
+            "shop/outdoor": {
+                "name": "Buitelewewinkel"
             },
             "shop/pet": {
                 "name": "Troeteldierwinkel"
@@ -1110,11 +1445,15 @@
             "shop/shoes": {
                 "name": "Skoenwinkel"
             },
+            "shop/sports": {
+                "name": "Sportwinkel"
+            },
             "shop/stationery": {
                 "name": "Skryfbehoeftewinkel"
             },
             "shop/supermarket": {
-                "name": "Supermark"
+                "name": "Supermark",
+                "terms": "basaar,boetiek,kettingwinkel,koöperasie,afslagwinkel,vlooimark,inkopiesentrum,arkade,groothandelaar,winkel,supermark,promenade,negosiewinkel,snoepie,spaza winkel,liefdadigheidswinkel,kafee"
             },
             "shop/toys": {
                 "name": "Speelgoedwinkel"
@@ -1127,6 +1466,9 @@
             },
             "shop/vacant": {
                 "name": "Leë winkel"
+            },
+            "shop/variety_store": {
+                "name": "Algemene handelaar"
             },
             "shop/video": {
                 "name": "Videowinkel"
@@ -1153,7 +1495,8 @@
                 "name": "Chalet"
             },
             "tourism/guest_house": {
-                "name": "Gastehuis"
+                "name": "Gastehuis",
+                "terms": "B&B,Bed & Ontbyt, Bed en Ontbyt,oornagplek"
             },
             "tourism/hostel": {
                 "name": "Hostel"
@@ -1168,7 +1511,8 @@
                 "name": "Motel"
             },
             "tourism/museum": {
-                "name": "Musuem"
+                "name": "Musuem",
+                "terms": "uitstalling,uitsalsentrum,argief,stigting,galery,instituut,biblioteek,diereversameling,graftombe,museum,kerker"
             },
             "tourism/picnic_site": {
                 "name": "Piekniek Plek"
@@ -1181,6 +1525,54 @@
             },
             "tourism/zoo": {
                 "name": "Dieretuin"
+            },
+            "type/boundary": {
+                "name": "Grens"
+            },
+            "type/boundary/administrative": {
+                "name": "Administratiewe grens"
+            },
+            "type/multipolygon": {
+                "name": "Multi-veelhoek"
+            },
+            "type/restriction": {
+                "name": "Beperking"
+            },
+            "type/route": {
+                "name": "Roete"
+            },
+            "type/route/bicycle": {
+                "name": "Fietsroete"
+            },
+            "type/route/bus": {
+                "name": "Busroete"
+            },
+            "type/route/detour": {
+                "name": "Ompad"
+            },
+            "type/route/ferry": {
+                "name": "Veerbootroete"
+            },
+            "type/route/foot": {
+                "name": "Voetslaanroete"
+            },
+            "type/route/pipeline": {
+                "name": "Pyplynroete"
+            },
+            "type/route/power": {
+                "name": "Kragdraadroete"
+            },
+            "type/route/road": {
+                "name": "Padroete"
+            },
+            "type/route/train": {
+                "name": "Treinroete"
+            },
+            "type/route/tram": {
+                "name": "Tremroete"
+            },
+            "vertex": {
+                "name": "Ander"
             },
             "waterway": {
                 "name": "Waterweg"
@@ -1198,13 +1590,15 @@
                 "name": "Drein"
             },
             "waterway/river": {
-                "name": "Rivier"
+                "name": "Rivier",
+                "terms": "rivier,stroom,stroompie,spruit,kanaal,sytak,vertakking,riviermonding,loop,beek,syloop"
             },
             "waterway/riverbank": {
                 "name": "Rivierbank"
             },
             "waterway/stream": {
-                "name": "Stroom"
+                "name": "Stroom",
+                "terms": "stroom,stroompie,beek,spruit,loop,lopie,drif,vloed"
             },
             "waterway/weir": {
                 "name": "Studam"

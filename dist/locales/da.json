@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "Fusionerede {n} linjer.",
             "not_eligible": "Disse elementer kan ikke fusioneres.",
-            "not_adjacent": "Disse linjer kan ikke fusioneres fordi de ikke er knyttet sammen"
+            "not_adjacent": "Disse linjer kan ikke fusioneres fordi de ikke er knyttet sammen",
+            "restriction": "Disse linjer kan ikke flettes sammen, da mindst en af disse er medlem af  \"{relation}\" relation."
         },
         "move": {
             "title": "Flyt",
@@ -227,7 +228,8 @@
         "search": "Søg",
         "unknown": "Ukendt",
         "incomplete": "<ikke downloadet>",
-        "feature_list": "Geografisk objektliste"
+        "feature_list": "Objektliste",
+        "edit": "Ret objekt"
     },
     "background": {
         "title": "Baggrund",
@@ -762,6 +764,12 @@
                 "name": "Cafe",
                 "terms": "kaffe,te, kaffebutik"
             },
+            "amenity/car_rental": {
+                "name": "Biludlejning"
+            },
+            "amenity/car_sharing": {
+                "name": "Delebil"
+            },
             "amenity/car_wash": {
                 "name": "Bilvask"
             },
@@ -774,6 +782,10 @@
             },
             "amenity/courthouse": {
                 "name": "Domstolsbygning"
+            },
+            "amenity/drinking_water": {
+                "name": "Drikkevand",
+                "terms": "drikkefontæne"
             },
             "amenity/embassy": {
                 "name": "Ambassade"
@@ -858,6 +870,10 @@
             "amenity/swimming_pool": {
                 "name": "Svømmebassin"
             },
+            "amenity/taxi": {
+                "name": "Taxaholdeplads",
+                "terms": "taxa"
+            },
             "amenity/telephone": {
                 "name": "Telefon"
             },
@@ -866,7 +882,8 @@
                 "terms": "teater,performance,skuespil,musical"
             },
             "amenity/toilets": {
-                "name": "Toiletter"
+                "name": "Toiletter",
+                "terms": "baeværelse,hvilerum"
             },
             "amenity/townhall": {
                 "name": "Rådhus",
@@ -1452,6 +1469,10 @@
             },
             "shop/electronics": {
                 "name": "Elektronikbutik"
+            },
+            "shop/farm": {
+                "name": "Produktionstand",
+                "terms": "gårdbutik, gårdsalgsstade"
             },
             "shop/fishmonger": {
                 "name": "Fiskeforretning"

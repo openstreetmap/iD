@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "{n} líneas combinadas.",
             "not_eligible": "Estos elementos no pueden ser fusionados.",
-            "not_adjacent": "Estas líneas no pueden ser fusionadas porque no están conectadas"
+            "not_adjacent": "Estas líneas no pueden ser fusionadas porque no están conectadas",
+            "restriction": "Estas líneas no se pueden combinar porque al menos una es miembro de una relación de \"{relation}\"."
         },
         "move": {
             "title": "Mover",
@@ -227,7 +228,8 @@
         "search": "Buscar",
         "unknown": "Desconocido",
         "incomplete": "<no descargado>",
-        "feature_list": "Lista de funciones"
+        "feature_list": "Lista de elementos",
+        "edit": "Editar elemento"
     },
     "background": {
         "title": "Fondo",
@@ -762,6 +764,12 @@
                 "name": "Cafetería",
                 "terms": "café,cafetería,tetería,té"
             },
+            "amenity/car_rental": {
+                "name": "Alquiler de vehículos"
+            },
+            "amenity/car_sharing": {
+                "name": "Vehículo compartido"
+            },
             "amenity/car_wash": {
                 "name": "Lavado de coches"
             },
@@ -774,6 +782,10 @@
             },
             "amenity/courthouse": {
                 "name": "Palacio de Justicia"
+            },
+            "amenity/drinking_water": {
+                "name": "Agua potable",
+                "terms": "fuente,surtidor,caño,grifo"
             },
             "amenity/embassy": {
                 "name": "Embajada"
@@ -858,6 +870,10 @@
             "amenity/swimming_pool": {
                 "name": "Piscina"
             },
+            "amenity/taxi": {
+                "name": "Parada de taxis",
+                "terms": "taxi"
+            },
             "amenity/telephone": {
                 "name": "Teléfono"
             },
@@ -866,7 +882,8 @@
                 "terms": "teatro,performance,musical,representación"
             },
             "amenity/toilets": {
-                "name": "Baños"
+                "name": "Baños",
+                "terms": "cuarto de baño,baño,aseo"
             },
             "amenity/townhall": {
                 "name": "Ayuntamiento",
@@ -1452,6 +1469,10 @@
             },
             "shop/electronics": {
                 "name": "Tienda de electrodomésticos"
+            },
+            "shop/farm": {
+                "name": "Expositor de productos",
+                "terms": "Tienda de productos agrícolas,expositor"
             },
             "shop/fishmonger": {
                 "name": "Pescadería"

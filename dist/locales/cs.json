@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "Cesty spojeny (celkem {n}).",
             "not_eligible": "Objekty nelze spojit v jeden.",
-            "not_adjacent": "Tyto cesty nelze spojit v jednu, protože nekončí v jednom bodě."
+            "not_adjacent": "Tyto cesty nelze spojit v jednu, protože nekončí v jednom bodě.",
+            "restriction": "Tyto cesty není možné spojit, protože aspoň jedna z nich je členem relace \"{relation}\"."
         },
         "move": {
             "title": "Posunout",
@@ -227,7 +228,8 @@
         "search": "Hledat",
         "unknown": "Není známo",
         "incomplete": "<nebylo staženo>",
-        "feature_list": "Seznam objektů"
+        "feature_list": "Seznam objektů",
+        "edit": "Editovat objekt"
     },
     "background": {
         "title": "Pozadí",
@@ -762,6 +764,12 @@
                 "name": "Kavárna",
                 "terms": "káva,kafe,kavárna,čaj,čajovna"
             },
+            "amenity/car_rental": {
+                "name": "Půjčovna aut"
+            },
+            "amenity/car_sharing": {
+                "name": "Sdílení aut"
+            },
             "amenity/car_wash": {
                 "name": "Mytí aut"
             },
@@ -774,6 +782,10 @@
             },
             "amenity/courthouse": {
                 "name": "Soud"
+            },
+            "amenity/drinking_water": {
+                "name": "Pitná voda",
+                "terms": "pítko,fontána,fontánka"
             },
             "amenity/embassy": {
                 "name": "Velvyslanectví"
@@ -858,6 +870,10 @@
             "amenity/swimming_pool": {
                 "name": "Plavecký bazén"
             },
+            "amenity/taxi": {
+                "name": "Stanoviště taxi",
+                "terms": "taxi,taxi stání,drožka"
+            },
             "amenity/telephone": {
                 "name": "Telefon"
             },
@@ -866,7 +882,8 @@
                 "terms": "divadlo,divadelní,představení,muzikál"
             },
             "amenity/toilets": {
-                "name": "Záchodky"
+                "name": "Záchodky",
+                "terms": "toalety,toaleta,záchod,záchodky,WC"
             },
             "amenity/townhall": {
                 "name": "Radnice",
@@ -1452,6 +1469,10 @@
             },
             "shop/electronics": {
                 "name": "Elektro"
+            },
+            "shop/farm": {
+                "name": "Stánek s ovocem, zeleninou",
+                "terms": "stánek,ovoce,zelenina,trh,tržiště,farmářský trh,farmářské tržiště,farma"
             },
             "shop/fishmonger": {
                 "name": "Rybárna"

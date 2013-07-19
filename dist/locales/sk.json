@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "Zlúčenie {n} čiar.",
             "not_eligible": "Tieto objekty nemôžu byť zlúčené.",
-            "not_adjacent": "Tieto čiary nemožno zlúčiť, pretože nie sú prepojené."
+            "not_adjacent": "Tieto čiary nemožno zlúčiť, pretože nie sú prepojené.",
+            "restriction": "Tieto čiary nemôžu byť zlúčené, pretože aspoň jedna z nich je členom relácie \"{relation}\"."
         },
         "move": {
             "title": "Presuň",
@@ -227,7 +228,8 @@
         "search": "Hľadaj",
         "unknown": "Neznámy",
         "incomplete": "<nebolo stiahnuté>",
-        "feature_list": "Zoznam objektov"
+        "feature_list": "Zoznam objektov",
+        "edit": "Uprav objekt"
     },
     "background": {
         "title": "Pozadie",
@@ -762,6 +764,12 @@
                 "name": "Kaviareň",
                 "terms": "káva,čaj,pražiareň kávy"
             },
+            "amenity/car_rental": {
+                "name": "Autopožičovňa"
+            },
+            "amenity/car_sharing": {
+                "name": "Zdieľanie áut"
+            },
             "amenity/car_wash": {
                 "name": "Autoumyváreň"
             },
@@ -774,6 +782,10 @@
             },
             "amenity/courthouse": {
                 "name": "Súd"
+            },
+            "amenity/drinking_water": {
+                "name": "Pitná voda",
+                "terms": "fontánka na pitie, voda na pitie"
             },
             "amenity/embassy": {
                 "name": "Ambasáda/Veľvyslanectvo"
@@ -858,6 +870,10 @@
             "amenity/swimming_pool": {
                 "name": "Plaváreň/Kúpalisko"
             },
+            "amenity/taxi": {
+                "name": "Stanovisko taxíkov",
+                "terms": "taxík, taxislužba, taxi"
+            },
             "amenity/telephone": {
                 "name": "Telefón"
             },
@@ -866,7 +882,8 @@
                 "terms": "divadlo,predstavenie,muzikál,hra,scéna"
             },
             "amenity/toilets": {
-                "name": "Toalety"
+                "name": "Toalety",
+                "terms": "záchod, záchody, toaleta, toalety, WC"
             },
             "amenity/townhall": {
                 "name": "Mestský úrad",
@@ -1452,6 +1469,10 @@
             },
             "shop/electronics": {
                 "name": "Elektro obchod"
+            },
+            "shop/farm": {
+                "name": "Voľný predaj ovocia",
+                "terms": "predaj z farmy, voľný predaj"
             },
             "shop/fishmonger": {
                 "name": "Predaj rýb"

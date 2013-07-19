@@ -1,5 +1,11 @@
 {
     "modes": {
+        "add_area": {
+            "title": "ప్రదేశం"
+        },
+        "add_line": {
+            "title": "గీత"
+        },
         "add_point": {
             "title": "బిందువు"
         }
@@ -11,7 +17,10 @@
             }
         },
         "delete": {
-            "title": "తొలగించు"
+            "title": "తొలగించు",
+            "annotation": {
+                "point": "ఒక బిందువును తొలగించారు."
+            }
         },
         "move": {
             "title": "తరలించు",
@@ -41,7 +50,8 @@
         "description": "వెనుతలపు అమరికలు"
     },
     "save": {
-        "title": "భద్రపరచు"
+        "title": "భద్రపరచు",
+        "no_changes": "భద్రపరచాల్సిన మార్పులేమీ లేవు."
     },
     "success": {
         "facebook": "ఫేస్‌బుక్‌లో పంచుకోండి",
@@ -60,6 +70,9 @@
     "intro": {
         "points": {
             "title": "బిందువులు"
+        },
+        "lines": {
+            "title": "గీతలు"
         }
     },
     "presets": {

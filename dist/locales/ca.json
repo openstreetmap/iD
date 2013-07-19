@@ -117,7 +117,8 @@
             "key": "C",
             "annotation": "Heu fusionat {n} línies.",
             "not_eligible": "Aquestes característiques no poden ser fusionades.",
-            "not_adjacent": "Aquestes línies no poden ser com fusionades ja que no estàn connectades."
+            "not_adjacent": "Aquestes línies no poden ser com fusionades ja que no estàn connectades.",
+            "restriction": "Aquestes línies no poden ser fusionades perquè com a mínim una d'elles és membre de la relació \"{relation}\""
         },
         "move": {
             "title": "Mou",
@@ -227,7 +228,8 @@
         "search": "Cerca",
         "unknown": "Desconegut",
         "incomplete": "<no baixat>",
-        "feature_list": "Llista de característiques"
+        "feature_list": "Llista de característiques",
+        "edit": "Editar la característica"
     },
     "background": {
         "title": "Fons",
@@ -261,9 +263,9 @@
     },
     "splash": {
         "welcome": "Benvinguts a l'editor iD per a l'OpenStreetMap",
-        "text": "L'editor iD és una eina fàcil i potent per contribuir al millor mapa lliure del món. Aquesta és la versió {version}. Per obtenir més informació visiteu {website} i si voleu comunixar l'existència d'algun error feu-ho a {github}.",
+        "text": "L'editor iD és una eina fàcil i potent per contribuir al millor mapa lliure del món. Aquesta és la versió {version}. Per obtenir més informació visiteu {website} i si voleu comunicar l'existència d'algun error feu-ho a {github}.",
         "walkthrough": "Comença la visita guiada",
-        "start": "Edita-ho ara"
+        "start": "Edita'l ara"
     },
     "source_switch": {
         "live": "directe",
@@ -762,6 +764,12 @@
                 "name": "Cafè",
                 "terms": "cafè, te, botiga de cafè"
             },
+            "amenity/car_rental": {
+                "name": "Lloguer de cotxes"
+            },
+            "amenity/car_sharing": {
+                "name": "Servei de compartició de cotxe"
+            },
             "amenity/car_wash": {
                 "name": "Rentat de cotxes"
             },
@@ -774,6 +782,10 @@
             },
             "amenity/courthouse": {
                 "name": "Jutjat"
+            },
+            "amenity/drinking_water": {
+                "name": "Aigua apte per al consum",
+                "terms": "font d'aigua, aigua potable"
             },
             "amenity/embassy": {
                 "name": "Ambaixada"
@@ -858,6 +870,10 @@
             "amenity/swimming_pool": {
                 "name": "Piscina"
             },
+            "amenity/taxi": {
+                "name": "Parada de Taxi",
+                "terms": "Taxi"
+            },
             "amenity/telephone": {
                 "name": "Telèfon"
             },
@@ -866,7 +882,8 @@
                 "terms": "teatre, actuació, representació, musical"
             },
             "amenity/toilets": {
-                "name": "Lavabos"
+                "name": "Lavabos",
+                "terms": "lavabos, serveis"
             },
             "amenity/townhall": {
                 "name": "Ajuntament",
@@ -1452,6 +1469,10 @@
             },
             "shop/electronics": {
                 "name": "Botiga d'electrònica"
+            },
+            "shop/farm": {
+                "name": "Estand productiu",
+                "terms": "botiga de granja, estand de granja"
             },
             "shop/fishmonger": {
                 "name": "Peixateria"

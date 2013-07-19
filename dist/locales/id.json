@@ -89,6 +89,9 @@
             },
             "incomplete_relation": "Fitur ini tidak bisa dihapus karena belum sepenuhnya terunduh."
         },
+        "add_member": {
+            "annotation": "Tambahkan anggota ke sebuah relasi"
+        },
         "delete_member": {
             "annotation": "Buang anggota dari sebuah relasi."
         },
@@ -220,7 +223,9 @@
         "remove": "Buang",
         "search": "Cari",
         "unknown": "Tidak diketahui",
-        "incomplete": "<tak terunduh>"
+        "incomplete": "<tak terunduh>",
+        "feature_list": "Daftar Fitur",
+        "edit": "Ubah Fitur"
     },
     "background": {
         "title": "Latar",
@@ -302,6 +307,7 @@
             "title": "Titik",
             "add": "Titik dapat digunakan untuk mewakili fitur seperti toko, restoran, dan monumen. Mereka menadakan lokasi pasti, dan menggambarkan ada apa di sana. **Klik tombol Titik untuk menambahkan titik baru.**",
             "place": "Titik bisa diletakkan dengan mengklik pada peta. **Letakan titik di atap gedungnya.**",
+            "search": "Terdapat banyak fitur berbeda yang dapat diwakili oleh titik. Titik yang baru anda tambahkan adalah Cafe. **Pencarian untuk '{name}'**",
             "choose": "**Pilih Cafe dari daftar.**",
             "describe": "Kini titik bisa ditandai sebagai cafe. Gunakan penyunting fitur, kita dapat tambahkan informasi lebih tentang fitur. **Tambahkan sebuah nama**",
             "close": "Penyunting fitur dapat ditutup dengan mengklik tombol tutup. **Tutup penyunting fitur**",
@@ -315,6 +321,7 @@
             "add": "Area merupakan bentuk lain yang lebih rinci untuk mewakili sebuah fitur. Mereka memberikan informasi batas wilayah sebuah fitur. Area dapat digunakan untuk banyak tipe fitur yang diwakili titik, bahkan sering lebih disarankan. **Klik tombol Area untuk menambahkan sebuah area baru. **",
             "corner": "Area tergambar dengan meletakkan simpul yang menandakan batas suatu area. **Letakan simpul pemula di satu sudut dari tempat-bermain.**",
             "place": "Gambar area dengan meletakan lebih banyak simpul. Selesaikan area dengan mengklik pada simpul awal. **Gambar sebuah area untuk tempat bermain.**",
+            "search": "**Pencarian untuk '{name}'.**",
             "choose": "**Pilih Tempat-bermain dari daftar.**",
             "describe": "**Tambahkan nama, dan tutup fitur penyunting**"
         },
@@ -350,6 +357,9 @@
             "category-road": {
                 "name": "Jalan"
             },
+            "category-route": {
+                "name": "Rute"
+            },
             "category-water": {
                 "name": "Air"
             }
@@ -357,8 +367,10 @@
         "fields": {
             "access": {
                 "label": "Akses",
+                "placeholder": "Tidak diketahui",
                 "types": {
                     "access": "Umum",
+                    "motor_vehicle": "Sepeda Motor",
                     "bicycle": "Sepeda",
                     "horse": "Kuda"
                 },
@@ -409,6 +421,9 @@
             "bicycle_parking": {
                 "label": "Tipe"
             },
+            "boundary": {
+                "label": "Tipe"
+            },
             "building": {
                 "label": "Bangunan"
             },
@@ -437,17 +452,41 @@
             "construction": {
                 "label": "Tipe"
             },
+            "country": {
+                "label": "Negara"
+            },
             "crossing": {
                 "label": "Tipe"
+            },
+            "cuisine": {
+                "label": "Masakan"
+            },
+            "denomination": {
+                "label": "Satuan"
+            },
+            "denotation": {
+                "label": "Penunjuk"
+            },
+            "description": {
+                "label": "Deskripsi"
             },
             "elevation": {
                 "label": "Ketinggian"
             },
+            "emergency": {
+                "label": "Darurat"
+            },
             "entrance": {
                 "label": "Tipe"
             },
+            "fax": {
+                "label": "Faks"
+            },
             "fee": {
                 "label": "Biaya"
+            },
+            "fixme": {
+                "label": "Perbaiki Saya"
             },
             "highway": {
                 "label": "TIpe"
@@ -459,7 +498,8 @@
                 "label": "Akses Internet",
                 "options": {
                     "wlan": "Wifi",
-                    "wired": "Kabel"
+                    "wired": "Kabel",
+                    "terminal": "Terminal"
                 }
             },
             "landuse": {
@@ -484,7 +524,8 @@
                 "label": "Batas Kecepatan"
             },
             "name": {
-                "label": "Nama"
+                "label": "Nama",
+                "placeholder": "Nama yang umum (jika ada)"
             },
             "natural": {
                 "label": "Alami"
@@ -528,6 +569,9 @@
             "ref": {
                 "label": "Referensi"
             },
+            "relation": {
+                "label": "Tipe"
+            },
             "religion": {
                 "label": "Agama",
                 "options": {
@@ -539,6 +583,15 @@
                     "shinto": "Shinto",
                     "taoist": "Tao"
                 }
+            },
+            "restriction": {
+                "label": "Tipe"
+            },
+            "route": {
+                "label": "Tipe"
+            },
+            "route_master": {
+                "label": "Tipe"
             },
             "service": {
                 "label": "Tipe"
@@ -556,8 +609,11 @@
                 "label": "Olahraga"
             },
             "structure": {
+                "label": "Struktur",
+                "placeholder": "Tak Diketahui",
                 "options": {
-                    "bridge": "Jembatan"
+                    "bridge": "Jembatan",
+                    "tunnel": "Terowongan"
                 }
             },
             "surface": {
@@ -579,7 +635,8 @@
                 "label": "Tipe"
             },
             "website": {
-                "label": "Website"
+                "label": "Website",
+                "placeholder": "http://contoh.com/"
             },
             "wetland": {
                 "label": "Tipe"
@@ -595,11 +652,15 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Alamat"
+            },
             "aeroway": {
                 "name": "Landas pacu"
             },
             "aeroway/aerodrome": {
-                "name": "Bandar udara"
+                "name": "Bandar udara",
+                "terms": "pesawat,bandara,bandar udara"
             },
             "aeroway/gate": {
                 "name": "Gerbang Bandar Udara"
@@ -691,8 +752,15 @@
             "amenity/place_of_worship": {
                 "name": "Tempat Beribadah"
             },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Candi Budha"
+            },
             "amenity/place_of_worship/christian": {
                 "name": "Gereja"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "Sinagoga",
+                "terms": "yahudi,sinagoga"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Mesjid",
@@ -742,8 +810,17 @@
             "area": {
                 "name": "Area"
             },
+            "barrier/entrance": {
+                "name": "Pintu Masuk"
+            },
             "barrier/gate": {
                 "name": "Gerbang"
+            },
+            "barrier/retaining_wall": {
+                "name": "Dinding penahan"
+            },
+            "barrier/wall": {
+                "name": "Dinding"
             },
             "boundary/administrative": {
                 "name": "Batas Administrasi"
@@ -822,6 +899,9 @@
             "highway/traffic_signals": {
                 "name": "Lampu Lalu lintas"
             },
+            "highway/trunk": {
+                "name": "Jalan Utama"
+            },
             "highway/turning_circle": {
                 "name": "Putaran"
             },
@@ -830,6 +910,12 @@
             },
             "historic": {
                 "name": "Situs Bersejarah"
+            },
+            "historic/archaeological_site": {
+                "name": "Situs arkeologi"
+            },
+            "historic/castle": {
+                "name": "Kastil"
             },
             "historic/monument": {
                 "name": "Monumen"
@@ -882,6 +968,9 @@
             "landuse/vineyard": {
                 "name": "Kebun Anggur"
             },
+            "leisure": {
+                "name": "Rekreasi"
+            },
             "leisure/garden": {
                 "name": "Kebun"
             },
@@ -921,6 +1010,9 @@
             "line": {
                 "name": "Garis"
             },
+            "man_made": {
+                "name": "Buatan manusia"
+            },
             "man_made/lighthouse": {
                 "name": "Mercusuar"
             },
@@ -956,6 +1048,9 @@
             },
             "natural/grassland": {
                 "name": "Padang Rumput"
+            },
+            "natural/heath": {
+                "name": "Tanah kosong"
             },
             "natural/peak": {
                 "name": "Puncak"
@@ -1005,6 +1100,9 @@
             "place/locality": {
                 "name": "Daerah Sekitar"
             },
+            "place/town": {
+                "name": "Kota"
+            },
             "place/village": {
                 "name": "Desa"
             },
@@ -1013,6 +1111,9 @@
             },
             "railway": {
                 "name": "Jalur Rel"
+            },
+            "railway/platform": {
+                "name": "Peron Kereta Api"
             },
             "railway/rail": {
                 "name": "Rel Kereta"
@@ -1069,11 +1170,20 @@
             "shop/computer": {
                 "name": "Toko Komputer"
             },
+            "shop/electronics": {
+                "name": "Toko Elektronik"
+            },
             "shop/florist": {
                 "name": "Toko Bunga"
             },
             "shop/furniture": {
                 "name": "Toko Furnitur"
+            },
+            "shop/gift": {
+                "name": "Toko Hadiah"
+            },
+            "shop/hardware": {
+                "name": "Toko Perkakas"
             },
             "shop/jewelry": {
                 "name": "Toko Perhiasan"
@@ -1155,6 +1265,12 @@
             },
             "tourism/zoo": {
                 "name": "Kebun Binatang"
+            },
+            "type/boundary": {
+                "name": "Batas"
+            },
+            "type/boundary/administrative": {
+                "name": "Batas Administrasi"
             },
             "type/multipolygon": {
                 "name": "Banyak-poligon"
