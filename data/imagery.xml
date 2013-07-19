@@ -142,25 +142,15 @@
     <url>http://gravitystorm.dev.openstreetmap.org/surrey/$z/$x/$y.png</url>
     <sourcetag>Surrey aerial</sourcetag>
   </set>
-  <set minlat="17.95" minlon="-74.5" maxlat="20.12" maxlon="-71.58">
-    <name>Haiti - GeoEye Jan 13</name>
-    <url>http://gravitystorm.dev.openstreetmap.org/imagery/haiti/$z/$x/$y.jpg</url>
-    <sourcetag>Haiti GeoEye</sourcetag>
+  <set minlat="18.50" minlon="-72.43" maxlat="18.58" maxlon="-72.31">
+    <name>Port au Prince - GeoEye Jan 2010</name>
+    <url>http://gravitystorm.dev.openstreetmap.org/imagery/haiti/$z/$x/$y.png</url>
+    <sourcetag>Port au Prince GeoEye, 2010-01</sourcetag>
   </set>
   <set minlat="17.95" minlon="-74.5" maxlat="20.12" maxlon="-71.58">
-    <name>Haiti - GeoEye Jan 13+</name>
-    <url>http://maps.nypl.org/tilecache/1/geoeye/$z/$x/$y.jpg</url>
-    <sourcetag>Haiti GeoEye</sourcetag>
-  </set>
-  <set minlat="17.95" minlon="-74.5" maxlat="20.12" maxlon="-71.58">
-    <name>Haiti - DigitalGlobe</name>
-    <url>http://maps.nypl.org/tilecache/1/dg_crisis/$z/$x/$y.jpg</url>
-    <sourcetag>Haiti DigitalGlobe</sourcetag>
-  </set>
-  <set minlat="17.95" minlon="-74.5" maxlat="20.12" maxlon="-71.58">
-    <name>Haiti - Street names</name>
-    <url>http://hypercube.telascience.org/tiles/1.0.0/haiti-city/$z/$x/$y.jpg</url>
-    <sourcetag>Haiti streetnames</sourcetag>
+    <name>Haiti - IOM Drone Imagery, 2012-13</name>
+    <url>http://wms.openstreetmap.fr/tms/1.0.0/iomhaiti/{zoom}/{x}/{y}</url>
+    <sourcetag>iom_image2013</sourcetag>
   </set>
   <set minlat="24.2" minlon="-125.8" maxlat="49.5" maxlon="-62.3">
     <name>National Agriculture Imagery Program</name>
