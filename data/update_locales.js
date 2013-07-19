@@ -50,7 +50,7 @@ function getResource(resource, callback) {
 
             var locale = {};
             results.forEach(function(result, i) {
-                locale[codes[i]] = yaml.load(result)[codes[i]];
+                locale[codes[i]] = result;
             });
 
             callback(null, locale);
@@ -63,10 +63,11 @@ function getResource(resource, callback) {
 
 function getLanguage(resource) {
     return function(code, callback) {
+        code = code.replace(/-/g, '_');
         request.get(resource + 'translation/' + code, { auth : auth },
             function(err, resp, body) {
             if (err) return callback(err);
-            callback(null, JSON.parse(body).content);
+            callback(null, yaml.load(JSON.parse(body).content)[code]);
         });
     };
 }
