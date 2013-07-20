@@ -8,7 +8,7 @@ so that you can write code that fits in perfectly.
 We'd love to hear what you think about iD, about any specific problems or
 concerns you have. Here's a quick list of things to consider:
 
-Please [search for your issue before filing it: many bugs and improvements have already been reported](https://github.com/systemed/iD/issues/search?q=)
+Please [search for your issue before filing it: many bugs and improvements have already been reported](https://github.com/search?l=&q=repo%3Asystemed%2FiD&type=Issues)
 
 To report a bug:
 
