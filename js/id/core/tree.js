@@ -19,8 +19,8 @@ iD.Tree = function(graph) {
 
     function entityRectangle(entity) {
         var rect = extentRectangle(entity.extent(head), entity.id);
-        rect.id = id;
-        rectangles[id] = rect;
+        rect.id = entity.id;
+        rectangles[entity.id] = rect;
         return rect;
     }
 
