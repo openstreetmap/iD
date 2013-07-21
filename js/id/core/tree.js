@@ -1,26 +1,30 @@
 iD.Tree = function(graph) {
 
-    var rtree = new RTree(),
+    var rtree = rbush(),
         m = 1000 * 1000 * 100,
         head = graph,
         queuedCreated = [],
         queuedModified = [],
+        rectangles = {},
         x, y, dx, dy, rebased;
 
     function extentRectangle(extent) {
-            x = m * extent[0][0],
-            y = m * extent[0][1],
-            dx = Math.max(m * extent[1][0] - x, 1),
-            dy = Math.max(m * extent[1][1] - y, 1);
-        return new RTree.Rectangle(~~x, ~~y, ~~dx, ~~dy);
+        return [
+            ~~(m * extent[0][0]),
+            ~~(m * extent[0][1]),
+            ~~(m * extent[1][0]),
+            ~~(m * extent[1][1])
+        ];
     }
 
     function insert(entity) {
-        rtree.insert(extentRectangle(entity.extent(head)), entity.id);
+        var rect = rectangles[entity.id] = extentRectangle(entity.extent(head));
+        rect.id = entity.id;
+        rtree.insert(rect);
     }
 
     function remove(entity) {
-        rtree.remove(extentRectangle(entity.extent(graph)), entity.id);
+        rtree.remove(rectangles[entity.id]);
     }
 
     function reinsert(entity) {
@@ -79,8 +83,9 @@ iD.Tree = function(graph) {
                 rebased = false;
             }
 
-            return rtree.search(extentRectangle(extent))
-                .map(function(id) { return graph.entity(id); });
+            return rtree.search(extentRectangle(extent)).map(function (rect) {
+                return graph.entities[rect.id];
+            });
         },
 
         graph: function() {
