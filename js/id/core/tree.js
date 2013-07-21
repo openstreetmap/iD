@@ -17,29 +17,39 @@ iD.Tree = function(graph) {
         ];
     }
 
-    function insert(entity) {
-        var rect = rectangles[entity.id] = extentRectangle(entity.extent(head));
-        rect.id = entity.id;
-        rtree.insert(rect);
+    function entityRectangle(entity) {
+        var rect = extentRectangle(entity.extent(head), entity.id);
+        rect.id = id;
+        rectangles[id] = rect;
+        return rect;
     }
 
     function remove(entity) {
         rtree.remove(rectangles[entity.id]);
+        delete rectangles[entity.id];
     }
 
-    function reinsert(entity) {
-        remove(graph.entities[entity.id]);
-        insert(entity);
+    function bulkInsert(entities) {
+        for (var i = 0, rects = []; i < entities.length; i++) {
+            rects.push(entityRectangle(entities[i]));
+        }
+        rtree.load(rects);
+    }
+
+    function bulkReinsert(entities) {
+        entities.forEach(remove);
+        bulkInsert(entities);
     }
 
     var tree = {
 
         rebase: function(entities) {
-            for (var i = 0; i < entities.length; i++) {
+            for (var i = 0, inserted = []; i < entities.length; i++) {
                 if (!graph.entities.hasOwnProperty(entities[i])) {
-                    insert(graph.entity(entities[i]), true);
+                    inserted.push(graph.entity(entities[i]));
                 }
             }
+            bulkInsert(inserted);
             rebased = true;
             return tree;
         },
@@ -67,15 +77,21 @@ iD.Tree = function(graph) {
                 queuedCreated = [];
                 queuedModified = [];
 
+                var reinserted = [],
+                    inserted = [];
+
                 modified.forEach(function(d) {
-                    if (head.hasAllChildren(d)) reinsert(d);
+                    if (head.hasAllChildren(d)) reinserted.push(d);
                     else queuedModified.push(d);
                 });
 
                 created.forEach(function(d) {
-                    if (head.hasAllChildren(d)) insert(d);
+                    if (head.hasAllChildren(d)) inserted.push(d);
                     else queuedCreated.push(d);
                 });
+
+                bulkReinsert(reinserted);
+                bulkInsert(inserted);
 
                 diff.deleted().forEach(remove);
 
