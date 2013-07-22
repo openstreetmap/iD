@@ -103,8 +103,15 @@ function generatePresets() {
 
         presets[id] = preset;
     });
+
     fs.writeFileSync('data/presets/presets.json', stringify(presets));
-    fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: translations}}));
+
+    var presetsYaml = _.cloneDeep(translations);
+    _.forEach(presetsYaml.presets, function(preset) {
+        preset.terms = "<translate with synonyms or related terms for '" + preset.name + "', separated by commas>"
+    });
+
+    fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: presetsYaml}}));
 }
 
 generateCategories();
@@ -113,7 +120,7 @@ generatePresets();
 
 // Push changes from data/core.yaml into en.json
 var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
-var presets = YAML.load(fs.readFileSync('data/presets.yaml', 'utf8'));
+var presets = {en: {presets: translations}};
 var en = _.merge(core, presets);
 fs.writeFileSync('dist/locales/en.json', stringify(en.en));
 

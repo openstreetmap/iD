@@ -248,964 +248,964 @@ en:
     presets: 
       address: 
         name: Address
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Address', separated by commas>"
       aeroway: 
         name: Aeroway
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Aeroway', separated by commas>"
       aeroway/aerodrome: 
         name: Airport
-        terms: "airplane,airport,aerodrome"
+        terms: "<translate with synonyms or related terms for 'Airport', separated by commas>"
       aeroway/apron: 
         name: Apron
-        terms: ramp
+        terms: "<translate with synonyms or related terms for 'Apron', separated by commas>"
       aeroway/gate: 
         name: Airport gate
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Airport gate', separated by commas>"
       aeroway/hangar: 
         name: Hangar
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Hangar', separated by commas>"
       aeroway/helipad: 
         name: Helipad
-        terms: "helicopter,helipad,heliport"
+        terms: "<translate with synonyms or related terms for 'Helipad', separated by commas>"
       aeroway/runway: 
         name: Runway
-        terms: landing strip
+        terms: "<translate with synonyms or related terms for 'Runway', separated by commas>"
       aeroway/taxiway: 
         name: Taxiway
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Taxiway', separated by commas>"
       aeroway/terminal: 
         name: Airport terminal
-        terms: "airport,aerodrome"
+        terms: "<translate with synonyms or related terms for 'Airport terminal', separated by commas>"
       amenity: 
         name: Amenity
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Amenity', separated by commas>"
       amenity/atm: 
         name: ATM
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'ATM', separated by commas>"
       amenity/bank: 
         name: Bank
-        terms: "coffer,countinghouse,credit union,depository,exchequer,fund,hoard,investment firm,repository,reserve,reservoir,safe,savings,stock,stockpile,store,storehouse,thrift,treasury,trust company,vault"
+        terms: "<translate with synonyms or related terms for 'Bank', separated by commas>"
       amenity/bar: 
         name: Bar
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Bar', separated by commas>"
       amenity/bench: 
         name: Bench
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Bench', separated by commas>"
       amenity/bicycle_parking: 
         name: Bicycle Parking
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Bicycle Parking', separated by commas>"
       amenity/bicycle_rental: 
         name: Bicycle Rental
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Bicycle Rental', separated by commas>"
       amenity/cafe: 
         name: Cafe
-        terms: "coffee,tea,coffee shop"
+        terms: "<translate with synonyms or related terms for 'Cafe', separated by commas>"
       amenity/car_rental: 
         name: Car Rental
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Car Rental', separated by commas>"
       amenity/car_sharing: 
         name: Car Sharing
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Car Sharing', separated by commas>"
       amenity/car_wash: 
         name: Car Wash
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Car Wash', separated by commas>"
       amenity/childcare: 
         name: Childcare
-        terms: "nursery,orphanage,playgroup"
+        terms: "<translate with synonyms or related terms for 'Childcare', separated by commas>"
       amenity/cinema: 
         name: Cinema
-        terms: "big screen,bijou,cine,drive-in,film,flicks,motion pictures,movie house,movie theater,moving pictures,nabes,photoplay,picture show,pictures,playhouse,show,silver screen"
+        terms: "<translate with synonyms or related terms for 'Cinema', separated by commas>"
       amenity/college: 
         name: College
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'College', separated by commas>"
       amenity/courthouse: 
         name: Courthouse
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Courthouse', separated by commas>"
       amenity/drinking_water: 
         name: Drinking Water
-        terms: "water fountain,potable water"
+        terms: "<translate with synonyms or related terms for 'Drinking Water', separated by commas>"
       amenity/embassy: 
         name: Embassy
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Embassy', separated by commas>"
       amenity/fast_food: 
         name: Fast Food
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Fast Food', separated by commas>"
       amenity/fire_station: 
         name: Fire Station
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Fire Station', separated by commas>"
       amenity/fountain: 
         name: Fountain
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Fountain', separated by commas>"
       amenity/fuel: 
         name: Gas Station
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Gas Station', separated by commas>"
       amenity/grave_yard: 
         name: Graveyard
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Graveyard', separated by commas>"
       amenity/hospital: 
         name: Hospital
-        terms: "clinic,emergency room,health service,hospice,infirmary,institution,nursing home,rest home,sanatorium,sanitarium,sick bay,surgery,ward"
+        terms: "<translate with synonyms or related terms for 'Hospital', separated by commas>"
       amenity/kindergarten: 
         name: Kindergarten
-        terms: "nursery,preschool"
+        terms: "<translate with synonyms or related terms for 'Kindergarten', separated by commas>"
       amenity/library: 
         name: Library
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Library', separated by commas>"
       amenity/marketplace: 
         name: Marketplace
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Marketplace', separated by commas>"
       amenity/parking: 
         name: Parking
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Parking', separated by commas>"
       amenity/pharmacy: 
         name: Pharmacy
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Pharmacy', separated by commas>"
       amenity/place_of_worship: 
         name: Place of Worship
-        terms: "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple"
+        terms: "<translate with synonyms or related terms for 'Place of Worship', separated by commas>"
       amenity/place_of_worship/buddhist: 
         name: Buddhist Temple
-        terms: "stupa,vihara,monastery,temple,pagoda,zendo,dojo"
+        terms: "<translate with synonyms or related terms for 'Buddhist Temple', separated by commas>"
       amenity/place_of_worship/christian: 
         name: Church
-        terms: "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+        terms: "<translate with synonyms or related terms for 'Church', separated by commas>"
       amenity/place_of_worship/jewish: 
         name: Synagogue
-        terms: "jewish,synagogue"
+        terms: "<translate with synonyms or related terms for 'Synagogue', separated by commas>"
       amenity/place_of_worship/muslim: 
         name: Mosque
-        terms: "muslim,mosque"
+        terms: "<translate with synonyms or related terms for 'Mosque', separated by commas>"
       amenity/police: 
         name: Police
-        terms: "badge,bear,blue,bluecoat,bobby,boy scout,bull,constable,constabulary,cop,copper,corps,county mounty,detective,fed,flatfoot,force,fuzz,gendarme,gumshoe,heat,law,law enforcement,man,narc,officers,patrolman,police"
+        terms: "<translate with synonyms or related terms for 'Police', separated by commas>"
       amenity/post_box: 
         name: Mailbox
-        terms: "letter drop,letterbox,mail drop,mailbox,pillar box,postbox"
+        terms: "<translate with synonyms or related terms for 'Mailbox', separated by commas>"
       amenity/post_office: 
         name: Post Office
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Post Office', separated by commas>"
       amenity/pub: 
         name: Pub
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Pub', separated by commas>"
       amenity/restaurant: 
         name: Restaurant
-        terms: "bar,cafeteria,café,canteen,chophouse,coffee shop,diner,dining room,dive*,doughtnut shop,drive-in,eatery,eating house,eating place,fast-food place,greasy spoon,grill,hamburger stand,hashery,hideaway,hotdog stand,inn,joint*,luncheonette,lunchroom,night club,outlet*,pizzeria,saloon,soda fountain,watering hole"
+        terms: "<translate with synonyms or related terms for 'Restaurant', separated by commas>"
       amenity/school: 
         name: School
-        terms: "academy,alma mater,blackboard,college,department,discipline,establishment,faculty,hall,halls of ivy,institute,institution,jail*,schoolhouse,seminary,university"
+        terms: "<translate with synonyms or related terms for 'School', separated by commas>"
       amenity/swimming_pool: 
         name: Swimming Pool
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Swimming Pool', separated by commas>"
       amenity/taxi: 
         name: Taxi Stand
-        terms: cab
+        terms: "<translate with synonyms or related terms for 'Taxi Stand', separated by commas>"
       amenity/telephone: 
         name: Telephone
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Telephone', separated by commas>"
       amenity/theatre: 
         name: Theater
-        terms: "theatre,performance,play,musical"
+        terms: "<translate with synonyms or related terms for 'Theater', separated by commas>"
       amenity/toilets: 
         name: Toilets
-        terms: "bathroom,restroom"
+        terms: "<translate with synonyms or related terms for 'Toilets', separated by commas>"
       amenity/townhall: 
         name: Town Hall
-        terms: "village hall,city government,courthouse,municipal building,municipal center"
+        terms: "<translate with synonyms or related terms for 'Town Hall', separated by commas>"
       amenity/university: 
         name: University
-        terms: college
+        terms: "<translate with synonyms or related terms for 'University', separated by commas>"
       amenity/waste_basket: 
         name: Waste Basket
-        terms: "rubbish bin,litter bin,trash can,garbage can"
+        terms: "<translate with synonyms or related terms for 'Waste Basket', separated by commas>"
       area: 
         name: Area
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Area', separated by commas>"
       barrier: 
         name: Barrier
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Barrier', separated by commas>"
       barrier/block: 
         name: Block
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Block', separated by commas>"
       barrier/bollard: 
         name: Bollard
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Bollard', separated by commas>"
       barrier/cattle_grid: 
         name: Cattle Grid
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Cattle Grid', separated by commas>"
       barrier/city_wall: 
         name: City Wall
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'City Wall', separated by commas>"
       barrier/cycle_barrier: 
         name: Cycle Barrier
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Cycle Barrier', separated by commas>"
       barrier/ditch: 
         name: Ditch
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Ditch', separated by commas>"
       barrier/entrance: 
         name: Entrance
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Entrance', separated by commas>"
       barrier/fence: 
         name: Fence
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Fence', separated by commas>"
       barrier/gate: 
         name: Gate
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Gate', separated by commas>"
       barrier/hedge: 
         name: Hedge
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Hedge', separated by commas>"
       barrier/kissing_gate: 
         name: Kissing Gate
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Kissing Gate', separated by commas>"
       barrier/lift_gate: 
         name: Lift Gate
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Lift Gate', separated by commas>"
       barrier/retaining_wall: 
         name: Retaining Wall
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Retaining Wall', separated by commas>"
       barrier/stile: 
         name: Stile
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Stile', separated by commas>"
       barrier/toll_booth: 
         name: Toll Booth
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Toll Booth', separated by commas>"
       barrier/wall: 
         name: Wall
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Wall', separated by commas>"
       boundary/administrative: 
         name: Administrative Boundary
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Administrative Boundary', separated by commas>"
       building: 
         name: Building
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Building', separated by commas>"
       building/apartments: 
         name: Apartments
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Apartments', separated by commas>"
       building/commercial: 
         name: Commercial Building
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Commercial Building', separated by commas>"
       building/entrance: 
         name: Entrance
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Entrance', separated by commas>"
       building/garage: 
         name: Garage
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Garage', separated by commas>"
       building/house: 
         name: House
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'House', separated by commas>"
       building/hut: 
         name: Hut
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Hut', separated by commas>"
       building/industrial: 
         name: Industrial Building
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Industrial Building', separated by commas>"
       building/residential: 
         name: Residential Building
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Residential Building', separated by commas>"
       emergency/phone: 
         name: Emergency Phone
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Emergency Phone', separated by commas>"
       entrance: 
         name: Entrance
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Entrance', separated by commas>"
       highway: 
         name: Highway
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Highway', separated by commas>"
       highway/bridleway: 
         name: Bridle Path
-        terms: "bridleway,equestrian trail,horse riding path,bridle road,horse trail"
+        terms: "<translate with synonyms or related terms for 'Bridle Path', separated by commas>"
       highway/bus_stop: 
         name: Bus Stop
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Bus Stop', separated by commas>"
       highway/crossing: 
         name: Crossing
-        terms: "crosswalk,zebra crossing"
+        terms: "<translate with synonyms or related terms for 'Crossing', separated by commas>"
       highway/cycleway: 
         name: Cycle Path
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Cycle Path', separated by commas>"
       highway/footway: 
         name: Foot Path
-        terms: "beaten path,boulevard,clearing,course,cut*,drag*,footpath,highway,lane,line,orbit,passage,pathway,rail,rails,road,roadway,route,street,thoroughfare,trackway,trail,trajectory,walk"
+        terms: "<translate with synonyms or related terms for 'Foot Path', separated by commas>"
       highway/living_street: 
         name: Living Street
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Living Street', separated by commas>"
       highway/mini_roundabout: 
         name: "Mini-Roundabout"
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Mini-Roundabout', separated by commas>"
       highway/motorway: 
         name: Motorway
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Motorway', separated by commas>"
       highway/motorway_junction: 
         name: Motorway Junction
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Motorway Junction', separated by commas>"
       highway/motorway_link: 
         name: Motorway Link
-        terms: "ramp,on ramp,off ramp"
+        terms: "<translate with synonyms or related terms for 'Motorway Link', separated by commas>"
       highway/path: 
         name: Path
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Path', separated by commas>"
       highway/pedestrian: 
         name: Pedestrian
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Pedestrian', separated by commas>"
       highway/primary: 
         name: Primary Road
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Primary Road', separated by commas>"
       highway/primary_link: 
         name: Primary Link
-        terms: "ramp,on ramp,off ramp"
+        terms: "<translate with synonyms or related terms for 'Primary Link', separated by commas>"
       highway/residential: 
         name: Residential Road
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Residential Road', separated by commas>"
       highway/road: 
         name: Unknown Road
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Unknown Road', separated by commas>"
       highway/secondary: 
         name: Secondary Road
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Secondary Road', separated by commas>"
       highway/secondary_link: 
         name: Secondary Link
-        terms: "ramp,on ramp,off ramp"
+        terms: "<translate with synonyms or related terms for 'Secondary Link', separated by commas>"
       highway/service: 
         name: Service Road
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Service Road', separated by commas>"
       highway/service/alley: 
         name: Alley
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Alley', separated by commas>"
       "highway/service/drive-through": 
         name: "Drive-Through"
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Drive-Through', separated by commas>"
       highway/service/driveway: 
         name: Driveway
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Driveway', separated by commas>"
       highway/service/emergency_access: 
         name: Emergency Access
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Emergency Access', separated by commas>"
       highway/service/parking_aisle: 
         name: Parking Aisle
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Parking Aisle', separated by commas>"
       highway/steps: 
         name: Steps
-        terms: "stairs,staircase"
+        terms: "<translate with synonyms or related terms for 'Steps', separated by commas>"
       highway/tertiary: 
         name: Tertiary Road
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Tertiary Road', separated by commas>"
       highway/tertiary_link: 
         name: Tertiary Link
-        terms: "ramp,on ramp,off ramp"
+        terms: "<translate with synonyms or related terms for 'Tertiary Link', separated by commas>"
       highway/track: 
         name: Track
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Track', separated by commas>"
       highway/traffic_signals: 
         name: Traffic Signals
-        terms: "light,stoplight,traffic light"
+        terms: "<translate with synonyms or related terms for 'Traffic Signals', separated by commas>"
       highway/trunk: 
         name: Trunk Road
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Trunk Road', separated by commas>"
       highway/trunk_link: 
         name: Trunk Link
-        terms: "ramp,on ramp,off ramp"
+        terms: "<translate with synonyms or related terms for 'Trunk Link', separated by commas>"
       highway/turning_circle: 
         name: Turning Circle
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Turning Circle', separated by commas>"
       highway/unclassified: 
         name: Unclassified Road
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Unclassified Road', separated by commas>"
       historic: 
         name: Historic Site
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Historic Site', separated by commas>"
       historic/archaeological_site: 
         name: Archaeological Site
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Archaeological Site', separated by commas>"
       historic/boundary_stone: 
         name: Boundary Stone
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Boundary Stone', separated by commas>"
       historic/castle: 
         name: Castle
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Castle', separated by commas>"
       historic/memorial: 
         name: Memorial
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Memorial', separated by commas>"
       historic/monument: 
         name: Monument
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Monument', separated by commas>"
       historic/ruins: 
         name: Ruins
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Ruins', separated by commas>"
       historic/wayside_cross: 
         name: Wayside Cross
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Wayside Cross', separated by commas>"
       historic/wayside_shrine: 
         name: Wayside Shrine
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Wayside Shrine', separated by commas>"
       landuse: 
         name: Landuse
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Landuse', separated by commas>"
       landuse/allotments: 
         name: Allotments
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Allotments', separated by commas>"
       landuse/basin: 
         name: Basin
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Basin', separated by commas>"
       landuse/cemetery: 
         name: Cemetery
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Cemetery', separated by commas>"
       landuse/commercial: 
         name: Commercial
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Commercial', separated by commas>"
       landuse/construction: 
         name: Construction
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Construction', separated by commas>"
       landuse/farm: 
         name: Farm
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Farm', separated by commas>"
       landuse/farmyard: 
         name: Farmyard
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Farmyard', separated by commas>"
       landuse/forest: 
         name: Forest
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Forest', separated by commas>"
       landuse/grass: 
         name: Grass
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Grass', separated by commas>"
       landuse/industrial: 
         name: Industrial
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Industrial', separated by commas>"
       landuse/meadow: 
         name: Meadow
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Meadow', separated by commas>"
       landuse/orchard: 
         name: Orchard
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Orchard', separated by commas>"
       landuse/quarry: 
         name: Quarry
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Quarry', separated by commas>"
       landuse/residential: 
         name: Residential
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Residential', separated by commas>"
       landuse/retail: 
         name: Retail
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Retail', separated by commas>"
       landuse/vineyard: 
         name: Vineyard
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Vineyard', separated by commas>"
       leisure: 
         name: Leisure
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Leisure', separated by commas>"
       leisure/dog_park: 
         name: Dog Park
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Dog Park', separated by commas>"
       leisure/garden: 
         name: Garden
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Garden', separated by commas>"
       leisure/golf_course: 
         name: Golf Course
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Golf Course', separated by commas>"
       leisure/marina: 
         name: Marina
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Marina', separated by commas>"
       leisure/park: 
         name: Park
-        terms: "esplanade,estate,forest,garden,grass,green,grounds,lawn,lot,meadow,parkland,place,playground,plaza,pleasure garden,recreation area,square,tract,village green,woodland"
+        terms: "<translate with synonyms or related terms for 'Park', separated by commas>"
       leisure/pitch: 
         name: Sport Pitch
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Sport Pitch', separated by commas>"
       leisure/pitch/american_football: 
         name: American Football Field
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'American Football Field', separated by commas>"
       leisure/pitch/baseball: 
         name: Baseball Diamond
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Baseball Diamond', separated by commas>"
       leisure/pitch/basketball: 
         name: Basketball Court
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Basketball Court', separated by commas>"
       leisure/pitch/soccer: 
         name: Soccer Field
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Soccer Field', separated by commas>"
       leisure/pitch/tennis: 
         name: Tennis Court
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Tennis Court', separated by commas>"
       leisure/pitch/volleyball: 
         name: Volleyball Court
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Volleyball Court', separated by commas>"
       leisure/playground: 
         name: Playground
-        terms: "jungle gym,play area"
+        terms: "<translate with synonyms or related terms for 'Playground', separated by commas>"
       leisure/slipway: 
         name: Slipway
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Slipway', separated by commas>"
       leisure/stadium: 
         name: Stadium
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Stadium', separated by commas>"
       leisure/swimming_pool: 
         name: Swimming Pool
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Swimming Pool', separated by commas>"
       line: 
         name: Line
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Line', separated by commas>"
       man_made: 
         name: Man Made
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Man Made', separated by commas>"
       man_made/breakwater: 
         name: Breakwater
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Breakwater', separated by commas>"
       man_made/cutline: 
         name: Cut line
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Cut line', separated by commas>"
       man_made/lighthouse: 
         name: Lighthouse
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Lighthouse', separated by commas>"
       man_made/pier: 
         name: Pier
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Pier', separated by commas>"
       man_made/pipeline: 
         name: Pipeline
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Pipeline', separated by commas>"
       man_made/survey_point: 
         name: Survey Point
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Survey Point', separated by commas>"
       man_made/tower: 
         name: Tower
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Tower', separated by commas>"
       man_made/wastewater_plant: 
         name: Wastewater Plant
-        terms: "sewage works,sewage treatment plant,water treatment plant,reclamation plant"
+        terms: "<translate with synonyms or related terms for 'Wastewater Plant', separated by commas>"
       man_made/water_tower: 
         name: Water Tower
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Water Tower', separated by commas>"
       man_made/water_well: 
         name: Water well
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Water well', separated by commas>"
       man_made/water_works: 
         name: Water Works
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Water Works', separated by commas>"
       natural: 
         name: Natural
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Natural', separated by commas>"
       natural/bay: 
         name: Bay
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Bay', separated by commas>"
       natural/beach: 
         name: Beach
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Beach', separated by commas>"
       natural/cliff: 
         name: Cliff
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Cliff', separated by commas>"
       natural/coastline: 
         name: Coastline
-        terms: shore
+        terms: "<translate with synonyms or related terms for 'Coastline', separated by commas>"
       natural/glacier: 
         name: Glacier
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Glacier', separated by commas>"
       natural/grassland: 
         name: Grassland
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Grassland', separated by commas>"
       natural/heath: 
         name: Heath
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Heath', separated by commas>"
       natural/peak: 
         name: Peak
-        terms: "acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top"
+        terms: "<translate with synonyms or related terms for 'Peak', separated by commas>"
       natural/scrub: 
         name: Scrub
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Scrub', separated by commas>"
       natural/spring: 
         name: Spring
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Spring', separated by commas>"
       natural/tree: 
         name: Tree
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Tree', separated by commas>"
       natural/water: 
         name: Water
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Water', separated by commas>"
       natural/water/lake: 
         name: Lake
-        terms: "lakelet,loch,mere"
+        terms: "<translate with synonyms or related terms for 'Lake', separated by commas>"
       natural/water/pond: 
         name: Pond
-        terms: "lakelet,millpond,tarn,pool,mere"
+        terms: "<translate with synonyms or related terms for 'Pond', separated by commas>"
       natural/water/reservoir: 
         name: Reservoir
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Reservoir', separated by commas>"
       natural/wetland: 
         name: Wetland
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Wetland', separated by commas>"
       natural/wood: 
         name: Wood
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Wood', separated by commas>"
       office: 
         name: Office
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Office', separated by commas>"
       place: 
         name: Place
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Place', separated by commas>"
       place/city: 
         name: City
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'City', separated by commas>"
       place/hamlet: 
         name: Hamlet
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Hamlet', separated by commas>"
       place/island: 
         name: Island
-        terms: "archipelago,atoll,bar,cay,isle,islet,key,reef"
+        terms: "<translate with synonyms or related terms for 'Island', separated by commas>"
       place/isolated_dwelling: 
         name: Isolated Dwelling
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Isolated Dwelling', separated by commas>"
       place/locality: 
         name: Locality
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Locality', separated by commas>"
       place/town: 
         name: Town
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Town', separated by commas>"
       place/village: 
         name: Village
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Village', separated by commas>"
       point: 
         name: Point
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Point', separated by commas>"
       power: 
         name: Power
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Power', separated by commas>"
       power/generator: 
         name: Power Plant
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Power Plant', separated by commas>"
       power/line: 
         name: Power Line
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Power Line', separated by commas>"
       power/pole: 
         name: Power Pole
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Power Pole', separated by commas>"
       power/sub_station: 
         name: Substation
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Substation', separated by commas>"
       power/tower: 
         name: "High-Voltage Tower"
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'High-Voltage Tower', separated by commas>"
       power/transformer: 
         name: Transformer
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Transformer', separated by commas>"
       railway: 
         name: Railway
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Railway', separated by commas>"
       railway/abandoned: 
         name: Abandoned Railway
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Abandoned Railway', separated by commas>"
       railway/disused: 
         name: Disused Railway
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Disused Railway', separated by commas>"
       railway/level_crossing: 
         name: Level Crossing
-        terms: "crossing,railroad crossing,railway crossing,grade crossing,road through railroad,train crossing"
+        terms: "<translate with synonyms or related terms for 'Level Crossing', separated by commas>"
       railway/monorail: 
         name: Monorail
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Monorail', separated by commas>"
       railway/platform: 
         name: Railway Platform
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Railway Platform', separated by commas>"
       railway/rail: 
         name: Rail
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Rail', separated by commas>"
       railway/station: 
         name: Railway Station
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Railway Station', separated by commas>"
       railway/subway: 
         name: Subway
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Subway', separated by commas>"
       railway/subway_entrance: 
         name: Subway Entrance
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Subway Entrance', separated by commas>"
       railway/tram: 
         name: Tram
-        terms: streetcar
+        terms: "<translate with synonyms or related terms for 'Tram', separated by commas>"
       relation: 
         name: Relation
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Relation', separated by commas>"
       route/ferry: 
         name: Ferry Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Ferry Route', separated by commas>"
       shop: 
         name: Shop
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Shop', separated by commas>"
       shop/alcohol: 
         name: Liquor Store
-        terms: alcohol
+        terms: "<translate with synonyms or related terms for 'Liquor Store', separated by commas>"
       shop/bakery: 
         name: Bakery
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Bakery', separated by commas>"
       shop/beauty: 
         name: Beauty Shop
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Beauty Shop', separated by commas>"
       shop/beverages: 
         name: Beverage Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Beverage Store', separated by commas>"
       shop/bicycle: 
         name: Bicycle Shop
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Bicycle Shop', separated by commas>"
       shop/books: 
         name: Bookstore
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Bookstore', separated by commas>"
       shop/boutique: 
         name: Boutique
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Boutique', separated by commas>"
       shop/butcher: 
         name: Butcher
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Butcher', separated by commas>"
       shop/car: 
         name: Car Dealership
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Car Dealership', separated by commas>"
       shop/car_parts: 
         name: Car Parts Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Car Parts Store', separated by commas>"
       shop/car_repair: 
         name: Car Repair Shop
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Car Repair Shop', separated by commas>"
       shop/chemist: 
         name: Chemist
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Chemist', separated by commas>"
       shop/clothes: 
         name: Clothing Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Clothing Store', separated by commas>"
       shop/computer: 
         name: Computer Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Computer Store', separated by commas>"
       shop/confectionery: 
         name: Confectionery
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Confectionery', separated by commas>"
       shop/convenience: 
         name: Convenience Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Convenience Store', separated by commas>"
       shop/deli: 
         name: Deli
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Deli', separated by commas>"
       shop/department_store: 
         name: Department Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Department Store', separated by commas>"
       shop/doityourself: 
         name: DIY Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'DIY Store', separated by commas>"
       shop/dry_cleaning: 
         name: Dry Cleaners
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Dry Cleaners', separated by commas>"
       shop/electronics: 
         name: Electronics Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Electronics Store', separated by commas>"
       shop/farm: 
         name: Produce Stand
-        terms: "farm shop,farm stand"
+        terms: "<translate with synonyms or related terms for 'Produce Stand', separated by commas>"
       shop/fishmonger: 
         name: Fishmonger
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Fishmonger', separated by commas>"
       shop/florist: 
         name: Florist
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Florist', separated by commas>"
       shop/furniture: 
         name: Furniture Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Furniture Store', separated by commas>"
       shop/garden_centre: 
         name: Garden Center
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Garden Center', separated by commas>"
       shop/gift: 
         name: Gift Shop
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Gift Shop', separated by commas>"
       shop/greengrocer: 
         name: Greengrocer
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Greengrocer', separated by commas>"
       shop/hairdresser: 
         name: Hairdresser
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Hairdresser', separated by commas>"
       shop/hardware: 
         name: Hardware Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Hardware Store', separated by commas>"
       shop/hifi: 
         name: Hifi Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Hifi Store', separated by commas>"
       shop/jewelry: 
         name: Jeweler
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Jeweler', separated by commas>"
       shop/kiosk: 
         name: Kiosk
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Kiosk', separated by commas>"
       shop/laundry: 
         name: Laundry
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Laundry', separated by commas>"
       shop/mall: 
         name: Mall
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Mall', separated by commas>"
       shop/mobile_phone: 
         name: Mobile Phone Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Mobile Phone Store', separated by commas>"
       shop/motorcycle: 
         name: Motorcycle Dealership
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Motorcycle Dealership', separated by commas>"
       shop/music: 
         name: Music Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Music Store', separated by commas>"
       shop/newsagent: 
         name: Newsagent
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Newsagent', separated by commas>"
       shop/optician: 
         name: Optician
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Optician', separated by commas>"
       shop/outdoor: 
         name: Outdoor Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Outdoor Store', separated by commas>"
       shop/pet: 
         name: Pet Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Pet Store', separated by commas>"
       shop/shoes: 
         name: Shoe Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Shoe Store', separated by commas>"
       shop/sports: 
         name: Sporting Goods Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Sporting Goods Store', separated by commas>"
       shop/stationery: 
         name: Stationery Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Stationery Store', separated by commas>"
       shop/supermarket: 
         name: Supermarket
-        terms: "bazaar,boutique,chain,co-op,cut-rate store,discount store,five-and-dime,flea market,galleria,mall,mart,outlet,outlet store,shop,shopping center,shopping plaza,stand,store,supermarket,thrift shop"
+        terms: "<translate with synonyms or related terms for 'Supermarket', separated by commas>"
       shop/toys: 
         name: Toy Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Toy Store', separated by commas>"
       shop/travel_agency: 
         name: Travel Agency
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Travel Agency', separated by commas>"
       shop/tyres: 
         name: Tire Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Tire Store', separated by commas>"
       shop/vacant: 
         name: Vacant Shop
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Vacant Shop', separated by commas>"
       shop/variety_store: 
         name: Variety Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Variety Store', separated by commas>"
       shop/video: 
         name: Video Store
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Video Store', separated by commas>"
       tourism: 
         name: Tourism
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Tourism', separated by commas>"
       tourism/alpine_hut: 
         name: Alpine Hut
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Alpine Hut', separated by commas>"
       tourism/artwork: 
         name: Artwork
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Artwork', separated by commas>"
       tourism/attraction: 
         name: Tourist Attraction
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Tourist Attraction', separated by commas>"
       tourism/camp_site: 
         name: Camp Site
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Camp Site', separated by commas>"
       tourism/caravan_site: 
         name: RV Park
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'RV Park', separated by commas>"
       tourism/chalet: 
         name: Chalet
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Chalet', separated by commas>"
       tourism/guest_house: 
         name: Guest House
-        terms: "B&B,Bed & Breakfast,Bed and Breakfast"
+        terms: "<translate with synonyms or related terms for 'Guest House', separated by commas>"
       tourism/hostel: 
         name: Hostel
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Hostel', separated by commas>"
       tourism/hotel: 
         name: Hotel
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Hotel', separated by commas>"
       tourism/information: 
         name: Information
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Information', separated by commas>"
       tourism/motel: 
         name: Motel
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Motel', separated by commas>"
       tourism/museum: 
         name: Museum
-        terms: "exhibition,exhibits archive,foundation,gallery,hall,institution,library,menagerie,repository,salon,storehouse,treasury,vault"
+        terms: "<translate with synonyms or related terms for 'Museum', separated by commas>"
       tourism/picnic_site: 
         name: Picnic Site
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Picnic Site', separated by commas>"
       tourism/theme_park: 
         name: Theme Park
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Theme Park', separated by commas>"
       tourism/viewpoint: 
         name: Viewpoint
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Viewpoint', separated by commas>"
       tourism/zoo: 
         name: Zoo
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Zoo', separated by commas>"
       type/boundary: 
         name: Boundary
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Boundary', separated by commas>"
       type/boundary/administrative: 
         name: Administrative Boundary
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Administrative Boundary', separated by commas>"
       type/multipolygon: 
         name: Multipolygon
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Multipolygon', separated by commas>"
       type/restriction: 
         name: Restriction
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Restriction', separated by commas>"
       type/route: 
         name: Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Route', separated by commas>"
       type/route/bicycle: 
         name: Cycle Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Cycle Route', separated by commas>"
       type/route/bus: 
         name: Bus Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Bus Route', separated by commas>"
       type/route/detour: 
         name: Detour Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Detour Route', separated by commas>"
       type/route/ferry: 
         name: Ferry Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Ferry Route', separated by commas>"
       type/route/foot: 
         name: Foot Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Foot Route', separated by commas>"
       type/route/pipeline: 
         name: Pipeline Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Pipeline Route', separated by commas>"
       type/route/power: 
         name: Power Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Power Route', separated by commas>"
       type/route/road: 
         name: Road Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Road Route', separated by commas>"
       type/route/train: 
         name: Train Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Train Route', separated by commas>"
       type/route/tram: 
         name: Tram Route
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Tram Route', separated by commas>"
       type/route_master: 
         name: Route Master
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Route Master', separated by commas>"
       vertex: 
         name: Other
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Other', separated by commas>"
       waterway: 
         name: Waterway
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Waterway', separated by commas>"
       waterway/canal: 
         name: Canal
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Canal', separated by commas>"
       waterway/dam: 
         name: Dam
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Dam', separated by commas>"
       waterway/ditch: 
         name: Ditch
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Ditch', separated by commas>"
       waterway/drain: 
         name: Drain
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Drain', separated by commas>"
       waterway/river: 
         name: River
-        terms: "beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse"
+        terms: "<translate with synonyms or related terms for 'River', separated by commas>"
       waterway/riverbank: 
         name: Riverbank
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Riverbank', separated by commas>"
       waterway/stream: 
         name: Stream
-        terms: "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
+        terms: "<translate with synonyms or related terms for 'Stream', separated by commas>"
       waterway/weir: 
         name: Weir
-        terms: ""
+        terms: "<translate with synonyms or related terms for 'Weir', separated by commas>"
