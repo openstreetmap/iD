@@ -87,9 +87,8 @@ iD translates strings with a `t` function - `t('foo.bar')` translate the key
 `foo.bar` into the current language. If you introduce new translatable strings
 to iD, only display them in the interface through the `t()` function.
 
-Then, add the new string to `data/core.yaml` or `data/presets.yaml` (depending
-on whether it pertains to core code or presets). The translation system,
-Transiflex, will automatically detect the change.
+Then, add the new string to `data/core.yaml`. The translation system, Transifex,
+will automatically detect the change.
 
 Use `make` to build the translations with the local changes.
 `make translate` can be used to pull the latest translations from Transifex.
