@@ -233,15 +233,15 @@ iD.svg.Labels = function(projection, context) {
 
         var mouse = context.mouse(),
             pad = 50,
-            rect = new RTree.Rectangle(mouse[0] - pad, mouse[1] - pad, 2*pad, 2*pad),
-            ids = _.pluck(rtree.search(rect, this), 'leaf');
+            rect = [mouse[0] - pad, mouse[1] - pad, mouse[0] + pad, mouse[1] + pad],
+            ids = _.pluck(rtree.search(rect), 'id');
 
         if (!ids.length) return;
         layers.selectAll('.' + ids.join(', .'))
             .classed('proximate', true);
     }
 
-    var rtree = new RTree(),
+    var rtree = rbush(),
         rectangles = {};
 
     function labels(surface, graph, entities, filter, dimensions, fullRedraw) {
@@ -252,11 +252,11 @@ iD.svg.Labels = function(projection, context) {
         for (i = 0; i < label_stack.length; i++) labelable.push([]);
 
         if (fullRedraw) {
-            rtree = new RTree();
+            rtree.clear();
             rectangles = {};
         } else {
             for (i = 0; i < entities.length; i++) {
-                rtree.remove(rectangles[entities[i].id], entities[i].id);
+                rtree.remove(rectangles[entities[i].id]);
             }
         }
 
@@ -325,7 +325,7 @@ iD.svg.Labels = function(projection, context) {
                     y: coord[1] + offset[1],
                     textAnchor: offset[2]
                 };
-            var rect = new RTree.Rectangle(p.x - m, p.y - m, width + 2*m, height + 2*m);
+            var rect = [p.x - m, p.y - m, p.x + width + m, p.y + height + m];
             if (tryInsert(rect, entity.id)) return p;
         }
 
@@ -342,12 +342,12 @@ iD.svg.Labels = function(projection, context) {
                 if (start < 0 || start + width > length) continue;
                 var sub = subpath(nodes, start, start + width),
                     rev = reverse(sub),
-                    rect = new RTree.Rectangle(
-                    Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
-                    Math.min(sub[0][1], sub[sub.length - 1][1]) - 10,
-                    Math.abs(sub[0][0] - sub[sub.length - 1][0]) + 20,
-                    Math.abs(sub[0][1] - sub[sub.length - 1][1]) + 30
-                );
+                    rect = [
+                        Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
+                        Math.min(sub[0][1], sub[sub.length - 1][1]) - 10,
+                        Math.max(sub[0][0], sub[sub.length - 1][0]) + 20,
+                        Math.max(sub[0][1], sub[sub.length - 1][1]) + 30
+                    ];
                 if (rev) sub = sub.reverse();
                 if (tryInsert(rect, entity.id)) return {
                     'font-size': height + 2,
@@ -379,9 +379,9 @@ iD.svg.Labels = function(projection, context) {
                 p.y = centroid[1] + textOffset;
                 p.textAnchor = 'middle';
                 p.height = height;
-                rect = new RTree.Rectangle(p.x - width/2, p.y, width, height + textOffset);
+                rect = [p.x - width/2, p.y, p.x + width/2, p.y + height + textOffset];
             } else {
-                rect = new RTree.Rectangle(iconX, iconY, iconSize, iconSize);
+                rect = [iconX, iconY, iconX + iconSize, iconY + iconSize];
             }
 
             if (tryInsert(rect, entity.id)) return p;
@@ -390,11 +390,12 @@ iD.svg.Labels = function(projection, context) {
 
         function tryInsert(rect, id) {
             // Check that label is visible
-            if (rect.x1 < 0 || rect.y1 < 0 || rect.x2 > dimensions[0] ||
-                rect.y2 > dimensions[1]) return false;
-            var v = rtree.search(rect, true).length === 0;
+            if (rect[0] < 0 || rect[1] < 0 || rect[2] > dimensions[0] ||
+                rect[3] > dimensions[1]) return false;
+            var v = rtree.search(rect).length === 0;
             if (v) {
-                rtree.insert(rect, id);
+                rect.id = id;
+                rtree.insert(rect);
                 rectangles[id] = rect;
             }
             return v;
