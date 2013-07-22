@@ -19,12 +19,9 @@ iD.ui.Success = function(context) {
             .text(t('just_edited'));
 
         var body = selection.append('div')
-            .attr('class', 'body');
+            .attr('class', 'body save-success');
 
-        var links = body.append('div')
-            .attr('class', 'modal-actions cf');
-
-        links.append('a')
+        body.append('a')
             .attr('class', 'col12 osm')
             .attr('target', '_blank')
             .attr('href', function() {
@@ -32,7 +29,7 @@ iD.ui.Success = function(context) {
             })
             .text(t('view_on_osm'));
 
-        links.append('a')
+        body.append('a')
             .attr('class', 'col12 twitter')
             .attr('target', '_blank')
             .attr('href', function() {
@@ -41,7 +38,7 @@ iD.ui.Success = function(context) {
             })
             .text(t('success.tweet'));
 
-        links.append('a')
+        body.append('a')
             .attr('class', 'col12 facebook')
             .attr('target', '_blank')
             .attr('href', function() {

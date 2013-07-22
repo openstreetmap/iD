@@ -2237,8 +2237,7 @@ img.wiki-image {
 }
 
 .modal-actions button,
-.modal-actions a {
-    background-size: white;
+.save-success a {
     font-weight: normal;
     color: #7092FF;
     border-bottom: 1px solid #CCC;
@@ -2248,21 +2247,14 @@ img.wiki-image {
     display: inline-block;
 }
 
-.modal-actions a {
-    /* `button` elements have box-algin: auto, need
-    compensate this for `a`*/
-    padding-top: 15px;
-}
-
-.modal-actions button:hover,
-.modal-actions a:hover {
+.modal-actions button:hover
+.save-success a:hover {
     background-color: #ececec;
 }
 
-.modal-actions a:before,
 .modal-actions button:before,
+.save-success a:before,
 .walkthrough a:before {
-    background-size: white;
     display: block;
     content: '';
     height: 100px;
@@ -2290,15 +2282,19 @@ img.wiki-image {
 /* Success Modal
 ------------------------------------------------------- */
 
-.modal-actions .twitter:before {
+.save-success a {
+    padding-top: 15px;
+}
+
+.save-success .osm:before {
+    background-position: 0px -220px;
+}
+
+.save-success .twitter:before {
     background-position: -100px -220px;
 }
 
-.modal-actions .facebook {
-    border-left: 1px solid #ccc;
-}
-
-.modal-actions .facebook:before {
+.save-success .facebook:before {
     background-position: -200px -220px;
 }
 
