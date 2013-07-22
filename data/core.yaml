@@ -25,6 +25,7 @@ en:
       annotation:
         point: Added a point.
         vertex: Added a node to a way.
+        relation: Added a relation.
     start:
       annotation:
         line: Started a line.
@@ -176,6 +177,7 @@ en:
     all_tags: All tags
     all_members: All members
     all_relations: All relations
+    new_relation: New relation...
     role: Role
     choose: Select feature type
     results: "{n} results for {search}"

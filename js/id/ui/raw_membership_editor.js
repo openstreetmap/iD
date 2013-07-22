@@ -14,9 +14,22 @@ iD.ui.RawMembershipEditor = function(context) {
 
     function addMembership(d, role) {
         showBlank = false;
-        context.perform(
-            iD.actions.AddMember(d.relation.id, {id: id, type: context.entity(id).type, role: role}),
-            t('operations.add_member.annotation'))
+
+        if (d.relation) {
+            context.perform(
+                iD.actions.AddMember(d.relation.id, {id: id, type: context.entity(id).type, role: role}),
+                t('operations.add_member.annotation'));
+
+        } else {
+            var relation = iD.Relation();
+
+            context.perform(
+                iD.actions.AddEntity(relation),
+                iD.actions.AddMember(relation.id, {id: id, type: context.entity(id).type, role: role}),
+                t('operations.add.annotation.relation'));
+
+            context.enter(iD.modes.Select(context, [relation.id]));
+        }
     }
 
     function deleteMembership(d) {
@@ -26,7 +39,10 @@ iD.ui.RawMembershipEditor = function(context) {
     }
 
     function relations(q) {
-        var result = [],
+        var result = [{
+                relation: null,
+                value: t('inspector.new_relation')
+            }],
             graph = context.graph();
 
         context.intersects(context.extent()).forEach(function(entity) {
