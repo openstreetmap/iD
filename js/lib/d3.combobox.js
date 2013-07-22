@@ -107,12 +107,12 @@ d3.combobox = function() {
                    break;
                // up arrow
                case 38:
-                   prev();
+                   nav(-1);
                    d3.event.preventDefault();
                    break;
                // down arrow
                case 40:
-                   next();
+                   nav(+1);
                    d3.event.preventDefault();
                    break;
            }
@@ -140,16 +140,11 @@ d3.combobox = function() {
             });
         }
 
-        function next() {
-            idx = Math.min(idx + 1, suggestions.length - 1);
+        function nav(dir) {
+            idx = Math.max(Math.min(idx + dir, suggestions.length - 1), 0);
             input.property('value', suggestions[idx].value);
             render();
-        }
-
-        function prev() {
-            idx = Math.max(idx - 1, 0);
-            input.property('value', suggestions[idx].value);
-            render();
+            ensureVisible();
         }
 
         function value() {
@@ -222,23 +217,16 @@ d3.combobox = function() {
                 'width': rect.width + 'px',
                 'top': rect.height + rect.top + 'px'
             });
-
-            if (idx >= 0) {
-                var height = container.node().offsetHeight,
-                    top = container.selectAll('a.selected').node().offsetTop,
-                    selectedHeight = container.selectAll('a.selected').node().offsetHeight;
-
-                if ((top + selectedHeight) < height) {
-                    container.node().scrollTop = 0;
-                } else {
-                    container.node().scrollTop = top;
-                }
-            }
         }
 
         function select(d, i) {
             idx = i;
             render();
+        }
+
+        function ensureVisible() {
+            var node = container.selectAll('a.selected').node();
+            if (node) node.scrollIntoView();
         }
 
         function accept(d) {
