@@ -1,5 +1,5 @@
 d3 = (function(){
-  var d3 = {version: "3.2.1"}; // semver
+  var d3 = {version: "3.2.7"}; // semver
 d3.ascending = function(a, b) {
   return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
 };
@@ -417,6 +417,36 @@ function d3_rebind(target, source, method) {
   };
 }
 
+function d3_vendorSymbol(object, name) {
+  if (name in object) return name;
+  name = name.charAt(0).toUpperCase() + name.substring(1);
+  for (var i = 0, n = d3_vendorPrefixes.length; i < n; ++i) {
+    var prefixName = d3_vendorPrefixes[i] + name;
+    if (prefixName in object) return prefixName;
+  }
+}
+
+var d3_vendorPrefixes = ["webkit", "ms", "moz", "Moz", "o", "O"];
+
+var d3_array = d3_arraySlice; // conversion for NodeLists
+
+function d3_arrayCopy(pseudoarray) {
+  var i = -1, n = pseudoarray.length, array = [];
+  while (++i < n) array.push(pseudoarray[i]);
+  return array;
+}
+
+function d3_arraySlice(pseudoarray) {
+  return Array.prototype.slice.call(pseudoarray);
+}
+
+try {
+  d3_array(d3_documentElement.childNodes)[0].nodeType;
+} catch(e) {
+  d3_array = d3_arrayCopy;
+}
+function d3_noop() {}
+
 d3.dispatch = function() {
   var dispatch = new d3_dispatch,
       i = -1,
@@ -487,8 +517,7 @@ function d3_dispatch_event(dispatch) {
 
 d3.event = null;
 
-function d3_eventCancel() {
-  d3.event.stopPropagation();
+function d3_eventPreventDefault() {
   d3.event.preventDefault();
 }
 
@@ -496,15 +525,6 @@ function d3_eventSource() {
   var e = d3.event, s;
   while (s = e.sourceEvent) e = s;
   return e;
-}
-
-// Registers an event listener for the specified target that cancels the next
-// event for the specified type, but only if it occurs immediately. This is
-// useful to disambiguate dragging from clicking.
-function d3_eventSuppress(target, type) {
-  function off() { target.on(type, null); }
-  target.on(type, function() { d3_eventCancel(); off(); }, true);
-  setTimeout(off, 0); // clear the handler if it doesn't fire
 }
 
 // Like d3.dispatch, but for custom events abstracting native UI events. These
@@ -543,110 +563,25 @@ function d3_eventDispatch(target) {
 
   return dispatch;
 }
-
-d3.mouse = function(container) {
-  return d3_mousePoint(container, d3_eventSource());
+d3.requote = function(s) {
+  return s.replace(d3_requote_re, "\\$&");
 };
 
-// https://bugs.webkit.org/show_bug.cgi?id=44083
-var d3_mouse_bug44083 = /WebKit/.test(d3_window.navigator.userAgent) ? -1 : 0;
-
-function d3_mousePoint(container, e) {
-  var svg = container.ownerSVGElement || container;
-  if (svg.createSVGPoint) {
-    var point = svg.createSVGPoint();
-    if (d3_mouse_bug44083 < 0 && (d3_window.scrollX || d3_window.scrollY)) {
-      svg = d3.select("body").append("svg").style({
-        position: "absolute",
-        top: 0,
-        left: 0,
-        margin: 0,
-        padding: 0,
-        border: "none"
-      }, "important");
-      var ctm = svg[0][0].getScreenCTM();
-      d3_mouse_bug44083 = !(ctm.f || ctm.e);
-      svg.remove();
-    }
-    if (d3_mouse_bug44083) {
-      point.x = e.pageX;
-      point.y = e.pageY;
-    } else {
-      point.x = e.clientX;
-      point.y = e.clientY;
-    }
-    point = point.matrixTransform(container.getScreenCTM().inverse());
-    return [point.x, point.y];
-  }
-  var rect = container.getBoundingClientRect();
-  return [e.clientX - rect.left - container.clientLeft, e.clientY - rect.top - container.clientTop];
-};
-
-var d3_array = d3_arraySlice; // conversion for NodeLists
-
-function d3_arrayCopy(pseudoarray) {
-  var i = -1, n = pseudoarray.length, array = [];
-  while (++i < n) array.push(pseudoarray[i]);
-  return array;
-}
-
-function d3_arraySlice(pseudoarray) {
-  return Array.prototype.slice.call(pseudoarray);
-}
-
-try {
-  d3_array(d3_documentElement.childNodes)[0].nodeType;
-} catch(e) {
-  d3_array = d3_arrayCopy;
-}
-
-var d3_arraySubclass = [].__proto__?
+var d3_requote_re = /[\\\^\$\*\+\?\|\[\]\(\)\.\{\}]/g;
+var d3_subclass = {}.__proto__?
 
 // Until ECMAScript supports array subclassing, prototype injection works well.
-function(array, prototype) {
-  array.__proto__ = prototype;
+function(object, prototype) {
+  object.__proto__ = prototype;
 }:
 
 // And if your browser doesn't support __proto__, we'll use direct extension.
-function(array, prototype) {
-  for (var property in prototype) array[property] = prototype[property];
+function(object, prototype) {
+  for (var property in prototype) object[property] = prototype[property];
 };
-
-d3.touches = function(container, touches) {
-  if (arguments.length < 2) touches = d3_eventSource().touches;
-  return touches ? d3_array(touches).map(function(touch) {
-    var point = d3_mousePoint(container, touch);
-    point.identifier = touch.identifier;
-    return point;
-  }) : [];
-};
-
-function d3_vendorSymbol(object, name) {
-  if (name in object) return name;
-  name = name.charAt(0).toUpperCase() + name.substring(1);
-  for (var i = 0, n = d3_vendorPrefixes.length; i < n; ++i) {
-    var prefixName = d3_vendorPrefixes[i] + name;
-    if (prefixName in object) return prefixName;
-  }
-}
-
-var d3_vendorPrefixes = ["webkit", "ms", "moz", "Moz", "o", "O"];
-
-var d3_event_userSelectProperty = d3_vendorSymbol(d3_documentElement.style, "userSelect"),
-    d3_event_userSelectSuppress = d3_event_userSelectProperty
-      ? function() {
-          var style = d3_documentElement.style,
-              select = style[d3_event_userSelectProperty];
-          style[d3_event_userSelectProperty] = "none";
-          return function() { style[d3_event_userSelectProperty] = select; };
-        }
-      : function(type) {
-          var w = d3.select(d3_window).on("selectstart." + type, d3_eventCancel);
-          return function() { w.on("selectstart." + type, null); };
-        };
 
 function d3_selection(groups) {
-  d3_arraySubclass(groups, d3_selectionPrototype);
+  d3_subclass(groups, d3_selectionPrototype);
   return groups;
 }
 
@@ -676,14 +611,14 @@ d3_selectionPrototype.select = function(selector) {
       group,
       node;
 
-  if (typeof selector !== "function") selector = d3_selection_selector(selector);
+  selector = d3_selection_selector(selector);
 
   for (var j = -1, m = this.length; ++j < m;) {
     subgroups.push(subgroup = []);
     subgroup.parentNode = (group = this[j]).parentNode;
     for (var i = -1, n = group.length; ++i < n;) {
       if (node = group[i]) {
-        subgroup.push(subnode = selector.call(node, node.__data__, i));
+        subgroup.push(subnode = selector.call(node, node.__data__, i, j));
         if (subnode && "__data__" in node) subnode.__data__ = node.__data__;
       } else {
         subgroup.push(null);
@@ -695,7 +630,7 @@ d3_selectionPrototype.select = function(selector) {
 };
 
 function d3_selection_selector(selector) {
-  return function() {
+  return typeof selector === "function" ? selector : function() {
     return d3_select(selector, this);
   };
 }
@@ -705,12 +640,12 @@ d3_selectionPrototype.selectAll = function(selector) {
       subgroup,
       node;
 
-  if (typeof selector !== "function") selector = d3_selection_selectorAll(selector);
+  selector = d3_selection_selectorAll(selector);
 
   for (var j = -1, m = this.length; ++j < m;) {
     for (var group = this[j], i = -1, n = group.length; ++i < n;) {
       if (node = group[i]) {
-        subgroups.push(subgroup = d3_array(selector.call(node, node.__data__, i)));
+        subgroups.push(subgroup = d3_array(selector.call(node, node.__data__, i, j)));
         subgroup.parentNode = node;
       }
     }
@@ -720,7 +655,7 @@ d3_selectionPrototype.selectAll = function(selector) {
 };
 
 function d3_selection_selectorAll(selector) {
-  return function() {
+  return typeof selector === "function" ? selector : function() {
     return d3_selectAll(selector, this);
   };
 }
@@ -809,11 +744,6 @@ function d3_selection_attr(name, value) {
 function d3_collapse(s) {
   return s.trim().replace(/\s+/g, " ");
 }
-d3.requote = function(s) {
-  return s.replace(d3_requote_re, "\\$&");
-};
-
-var d3_requote_re = /[\\\^\$\*\+\?\|\[\]\(\)\.\{\}]/g;
 
 d3_selectionPrototype.classed = function(name, value) {
   if (arguments.length < 2) {
@@ -998,40 +928,25 @@ d3_selectionPrototype.html = function(value) {
       : this.node().innerHTML;
 };
 
-// TODO append(node)?
-// TODO append(function)?
 d3_selectionPrototype.append = function(name) {
-  name = d3.ns.qualify(name);
-
-  function append() {
-    return this.appendChild(d3_document.createElementNS(this.namespaceURI, name));
-  }
-
-  function appendNS() {
-    return this.appendChild(d3_document.createElementNS(name.space, name.local));
-  }
-
-  return this.select(name.local ? appendNS : append);
+  name = d3_selection_creator(name);
+  return this.select(function() {
+    return this.appendChild(name.apply(this, arguments));
+  });
 };
 
+function d3_selection_creator(name) {
+  return typeof name === "function" ? name
+      : (name = d3.ns.qualify(name)).local ? function() { return d3_document.createElementNS(name.space, name.local); }
+      : function() { return d3_document.createElementNS(this.namespaceURI, name); };
+}
+
 d3_selectionPrototype.insert = function(name, before) {
-  name = d3.ns.qualify(name);
-
-  if (typeof before !== "function") before = d3_selection_selector(before);
-
-  function insert(d, i) {
-    return this.insertBefore(
-        d3_document.createElementNS(this.namespaceURI, name),
-        before.call(this, d, i));
-  }
-
-  function insertNS(d, i) {
-    return this.insertBefore(
-        d3_document.createElementNS(name.space, name.local),
-        before.call(this, d, i));
-  }
-
-  return this.select(name.local ? insertNS : insert);
+  name = d3_selection_creator(name);
+  before = d3_selection_selector(before);
+  return this.select(function() {
+    return this.insertBefore(name.apply(this, arguments), before.apply(this, arguments));
+  });
 };
 
 // TODO remove(selector)?
@@ -1217,7 +1132,140 @@ function d3_selection_sortComparator(comparator) {
     return (!a - !b) || comparator(a.__data__, b.__data__);
   };
 }
-function d3_noop() {}
+
+d3_selectionPrototype.each = function(callback) {
+  return d3_selection_each(this, function(node, i, j) {
+    callback.call(node, node.__data__, i, j);
+  });
+};
+
+function d3_selection_each(groups, callback) {
+  for (var j = 0, m = groups.length; j < m; j++) {
+    for (var group = groups[j], i = 0, n = group.length, node; i < n; i++) {
+      if (node = group[i]) callback(node, i, j);
+    }
+  }
+  return groups;
+}
+
+d3_selectionPrototype.call = function(callback) {
+  var args = d3_array(arguments);
+  callback.apply(args[0] = this, args);
+  return this;
+};
+
+d3_selectionPrototype.empty = function() {
+  return !this.node();
+};
+
+d3_selectionPrototype.node = function() {
+  for (var j = 0, m = this.length; j < m; j++) {
+    for (var group = this[j], i = 0, n = group.length; i < n; i++) {
+      var node = group[i];
+      if (node) return node;
+    }
+  }
+  return null;
+};
+
+d3_selectionPrototype.size = function() {
+  var n = 0;
+  this.each(function() { ++n; });
+  return n;
+};
+
+function d3_selection_enter(selection) {
+  d3_subclass(selection, d3_selection_enterPrototype);
+  return selection;
+}
+
+var d3_selection_enterPrototype = [];
+
+d3.selection.enter = d3_selection_enter;
+d3.selection.enter.prototype = d3_selection_enterPrototype;
+
+d3_selection_enterPrototype.append = d3_selectionPrototype.append;
+d3_selection_enterPrototype.empty = d3_selectionPrototype.empty;
+d3_selection_enterPrototype.node = d3_selectionPrototype.node;
+d3_selection_enterPrototype.call = d3_selectionPrototype.call;
+d3_selection_enterPrototype.size = d3_selectionPrototype.size;
+
+
+d3_selection_enterPrototype.select = function(selector) {
+  var subgroups = [],
+      subgroup,
+      subnode,
+      upgroup,
+      group,
+      node;
+
+  for (var j = -1, m = this.length; ++j < m;) {
+    upgroup = (group = this[j]).update;
+    subgroups.push(subgroup = []);
+    subgroup.parentNode = group.parentNode;
+    for (var i = -1, n = group.length; ++i < n;) {
+      if (node = group[i]) {
+        subgroup.push(upgroup[i] = subnode = selector.call(group.parentNode, node.__data__, i, j));
+        subnode.__data__ = node.__data__;
+      } else {
+        subgroup.push(null);
+      }
+    }
+  }
+
+  return d3_selection(subgroups);
+};
+
+d3_selection_enterPrototype.insert = function(name, before) {
+  if (arguments.length < 2) before = d3_selection_enterInsertBefore(this);
+  return d3_selectionPrototype.insert.call(this, name, before);
+};
+
+function d3_selection_enterInsertBefore(enter) {
+  var i0, j0;
+  return function(d, i, j) {
+    var group = enter[j].update,
+        n = group.length,
+        node;
+    if (j != j0) j0 = j, i0 = 0;
+    if (i >= i0) i0 = i + 1;
+    while (!(node = group[i0]) && ++i0 < n);
+    return node;
+  };
+}
+
+d3_selectionPrototype.transition = function() {
+  var id = d3_transitionInheritId || ++d3_transitionId,
+      subgroups = [],
+      subgroup,
+      node,
+      transition = d3_transitionInherit || {time: Date.now(), ease: d3_ease_cubicInOut, delay: 0, duration: 250};
+
+  for (var j = -1, m = this.length; ++j < m;) {
+    subgroups.push(subgroup = []);
+    for (var group = this[j], i = -1, n = group.length; ++i < n;) {
+      if (node = group[i]) d3_transitionNode(node, i, id, transition);
+      subgroup.push(node);
+    }
+  }
+
+  return d3_transition(subgroups, id);
+};
+
+// TODO fast singleton implementation?
+d3.select = function(node) {
+  var group = [typeof node === "string" ? d3_select(node, d3_document) : node];
+  group.parentNode = d3_documentElement;
+  return d3_selection([group]);
+};
+
+d3.selectAll = function(nodes) {
+  var group = d3_array(typeof nodes === "string" ? d3_selectAll(nodes, d3_document) : nodes);
+  group.parentNode = d3_documentElement;
+  return d3_selection([group]);
+};
+
+var d3_selectionRoot = d3.select(d3_documentElement);
 
 d3_selectionPrototype.on = function(type, listener, capture) {
   var n = arguments.length;
@@ -1317,132 +1365,85 @@ function d3_selection_onFilter(listener, argumentz) {
   };
 }
 
-d3_selectionPrototype.each = function(callback) {
-  return d3_selection_each(this, function(node, i, j) {
-    callback.call(node, node.__data__, i, j);
-  });
-};
+var d3_event_dragSelect = d3_vendorSymbol(d3_documentElement.style, "userSelect"),
+    d3_event_dragId = 0;
 
-function d3_selection_each(groups, callback) {
-  for (var j = 0, m = groups.length; j < m; j++) {
-    for (var group = groups[j], i = 0, n = group.length, node; i < n; i++) {
-      if (node = group[i]) callback(node, i, j);
+function d3_event_dragSuppress() {
+  var name = ".dragsuppress-" + ++d3_event_dragId,
+      touchmove = "touchmove" + name,
+      selectstart = "selectstart" + name,
+      dragstart = "dragstart" + name,
+      click = "click" + name,
+      w = d3.select(d3_window).on(touchmove, d3_eventPreventDefault).on(selectstart, d3_eventPreventDefault).on(dragstart, d3_eventPreventDefault),
+      style = d3_documentElement.style,
+      select = style[d3_event_dragSelect];
+  style[d3_event_dragSelect] = "none";
+  return function(suppressClick) {
+    w.on(name, null);
+    style[d3_event_dragSelect] = select;
+    if (suppressClick) { // suppress the next click, but only if it’s immediate
+      function off() { w.on(click, null); }
+      w.on(click, function() { d3_eventPreventDefault(); off(); }, true);
+      setTimeout(off, 0);
     }
-  }
-  return groups;
+  };
 }
 
-d3_selectionPrototype.call = function(callback) {
-  var args = d3_array(arguments);
-  callback.apply(args[0] = this, args);
-  return this;
+d3.mouse = function(container) {
+  return d3_mousePoint(container, d3_eventSource());
 };
 
-d3_selectionPrototype.empty = function() {
-  return !this.node();
-};
+// https://bugs.webkit.org/show_bug.cgi?id=44083
+var d3_mouse_bug44083 = /WebKit/.test(d3_window.navigator.userAgent) ? -1 : 0;
 
-d3_selectionPrototype.node = function() {
-  for (var j = 0, m = this.length; j < m; j++) {
-    for (var group = this[j], i = 0, n = group.length; i < n; i++) {
-      var node = group[i];
-      if (node) return node;
+function d3_mousePoint(container, e) {
+  var svg = container.ownerSVGElement || container;
+  if (svg.createSVGPoint) {
+    var point = svg.createSVGPoint();
+    if (d3_mouse_bug44083 < 0 && (d3_window.scrollX || d3_window.scrollY)) {
+      svg = d3.select("body").append("svg").style({
+        position: "absolute",
+        top: 0,
+        left: 0,
+        margin: 0,
+        padding: 0,
+        border: "none"
+      }, "important");
+      var ctm = svg[0][0].getScreenCTM();
+      d3_mouse_bug44083 = !(ctm.f || ctm.e);
+      svg.remove();
     }
-  }
-  return null;
-};
-
-d3_selectionPrototype.size = function() {
-  var n = 0;
-  this.each(function() { ++n; });
-  return n;
-};
-
-function d3_selection_enter(selection) {
-  d3_arraySubclass(selection, d3_selection_enterPrototype);
-  return selection;
-}
-
-var d3_selection_enterPrototype = [];
-
-d3.selection.enter = d3_selection_enter;
-d3.selection.enter.prototype = d3_selection_enterPrototype;
-
-d3_selection_enterPrototype.append = d3_selectionPrototype.append;
-d3_selection_enterPrototype.insert = d3_selectionPrototype.insert;
-d3_selection_enterPrototype.empty = d3_selectionPrototype.empty;
-d3_selection_enterPrototype.node = d3_selectionPrototype.node;
-d3_selection_enterPrototype.call = d3_selectionPrototype.call;
-d3_selection_enterPrototype.size = d3_selectionPrototype.size;
-
-
-d3_selection_enterPrototype.select = function(selector) {
-  var subgroups = [],
-      subgroup,
-      subnode,
-      upgroup,
-      group,
-      node;
-
-  for (var j = -1, m = this.length; ++j < m;) {
-    upgroup = (group = this[j]).update;
-    subgroups.push(subgroup = []);
-    subgroup.parentNode = group.parentNode;
-    for (var i = -1, n = group.length; ++i < n;) {
-      if (node = group[i]) {
-        subgroup.push(upgroup[i] = subnode = selector.call(group.parentNode, node.__data__, i));
-        subnode.__data__ = node.__data__;
-      } else {
-        subgroup.push(null);
-      }
+    if (d3_mouse_bug44083) {
+      point.x = e.pageX;
+      point.y = e.pageY;
+    } else {
+      point.x = e.clientX;
+      point.y = e.clientY;
     }
+    point = point.matrixTransform(container.getScreenCTM().inverse());
+    return [point.x, point.y];
   }
-
-  return d3_selection(subgroups);
+  var rect = container.getBoundingClientRect();
+  return [e.clientX - rect.left - container.clientLeft, e.clientY - rect.top - container.clientTop];
 };
 
-d3_selectionPrototype.transition = function() {
-  var id = d3_transitionInheritId || ++d3_transitionId,
-      subgroups = [],
-      subgroup,
-      node,
-      transition = Object.create(d3_transitionInherit);
-
-  transition.time = Date.now();
-
-  for (var j = -1, m = this.length; ++j < m;) {
-    subgroups.push(subgroup = []);
-    for (var group = this[j], i = -1, n = group.length; ++i < n;) {
-      if (node = group[i]) d3_transitionNode(node, i, id, transition);
-      subgroup.push(node);
-    }
-  }
-
-  return d3_transition(subgroups, id);
+d3.touches = function(container, touches) {
+  if (arguments.length < 2) touches = d3_eventSource().touches;
+  return touches ? d3_array(touches).map(function(touch) {
+    var point = d3_mousePoint(container, touch);
+    point.identifier = touch.identifier;
+    return point;
+  }) : [];
 };
-
-// TODO fast singleton implementation?
-d3.select = function(node) {
-  var group = [typeof node === "string" ? d3_select(node, d3_document) : node];
-  group.parentNode = d3_documentElement;
-  return d3_selection([group]);
-};
-
-d3.selectAll = function(nodes) {
-  var group = d3_array(typeof nodes === "string" ? d3_selectAll(nodes, d3_document) : nodes);
-  group.parentNode = d3_documentElement;
-  return d3_selection([group]);
-};
-
-var d3_selectionRoot = d3.select(d3_documentElement);
 
 d3.behavior.zoom = function() {
   var translate = [0, 0],
       translate0, // translate when we started zooming (to avoid drift)
       scale = 1,
-      distance0, // distance² between initial touches
-      scale0, // scale when we started touching
       scaleExtent = d3_behavior_zoomInfinity,
+      mousedown = "mousedown.zoom",
+      mousemove = "mousemove.zoom",
+      mouseup = "mouseup.zoom",
       event = d3_eventDispatch(zoom, "zoom"),
       x0,
       x1,
@@ -1451,13 +1452,11 @@ d3.behavior.zoom = function() {
       touchtime; // time of last touchstart (to detect double-tap)
 
   function zoom() {
-    this.on("mousedown.zoom", mousedown)
-        .on("mousemove.zoom", mousemove)
-        .on(d3_behavior_zoomWheel + ".zoom", mousewheel)
-        .on("dblclick.zoom", dblclick)
-        .on("touchstart.zoom", touchstart)
-        .on("touchmove.zoom", touchmove)
-        .on("touchend.zoom", touchstart);
+    this.on(mousedown, mousedowned)
+        .on(d3_behavior_zoomWheel + ".zoom", mousewheeled)
+        .on(mousemove, mousewheelreset)
+        .on("dblclick.zoom", dblclicked)
+        .on("touchstart.zoom", touchstarted);
   }
 
   zoom.translate = function(x) {
@@ -1523,66 +1522,54 @@ d3.behavior.zoom = function() {
 
   function dispatch(event) {
     rescale();
-    d3.event.preventDefault();
     event({type: "zoom", scale: scale, translate: translate});
   }
 
-  function mousedown() {
+  function mousedowned() {
     var target = this,
         event_ = event.of(target, arguments),
         eventTarget = d3.event.target,
-        moved = 0,
-        w = d3.select(d3_window).on("mousemove.zoom", mousemove).on("mouseup.zoom", mouseup),
+        dragged = 0,
+        w = d3.select(d3_window).on(mousemove, moved).on(mouseup, ended),
         l = location(d3.mouse(target)),
-        selectEnable = d3_event_userSelectSuppress("zoom");
+        dragRestore = d3_event_dragSuppress();
 
-    function mousemove() {
-      moved = 1;
+    function moved() {
+      dragged = 1;
       translateTo(d3.mouse(target), l);
       dispatch(event_);
     }
 
-    function mouseup() {
-      if (moved) d3_eventCancel();
-      w.on("mousemove.zoom", null).on("mouseup.zoom", null);
-      selectEnable();
-      if (moved && d3.event.target === eventTarget) d3_eventSuppress(w, "click.zoom");
+    function ended() {
+      w.on(mousemove, d3_window === target ? mousewheelreset : null).on(mouseup, null);
+      dragRestore(dragged && d3.event.target === eventTarget);
     }
   }
 
-  function mousewheel() {
-    if (!translate0) translate0 = location(d3.mouse(this));
-    scaleTo(Math.pow(2, d3_behavior_zoomDelta() * .002) * scale);
-    translateTo(d3.mouse(this), translate0);
-    dispatch(event.of(this, arguments));
-  }
+  function touchstarted() {
+    var target = this,
+        event_ = event.of(target, arguments),
+        touches = d3.touches(target),
+        locations = {},
+        distance0 = 0, // distance² between initial touches
+        scale0 = scale, // scale when we started touching
+        now = Date.now(),
+        name = "zoom-" + d3.event.changedTouches[0].identifier,
+        touchmove = "touchmove." + name,
+        touchend = "touchend." + name,
+        w = d3.select(d3_window).on(touchmove, moved).on(touchend, ended),
+        t = d3.select(target).on(mousedown, null), // prevent duplicate events
+        dragRestore = d3_event_dragSuppress();
 
-  function mousemove() {
-    translate0 = null;
-  }
-
-  function dblclick() {
-    var p = d3.mouse(this), l = location(p), k = Math.log(scale) / Math.LN2;
-    scaleTo(Math.pow(2, d3.event.shiftKey ? Math.ceil(k) - 1 : Math.floor(k) + 1));
-    translateTo(p, l);
-    dispatch(event.of(this, arguments));
-  }
-
-  function touchstart() {
-    var touches = d3.touches(this),
-        now = Date.now();
-
-    scale0 = scale;
-    translate0 = {};
-    distance0 = 0;
-    touches.forEach(function(t) { translate0[t.identifier] = location(t); });
+    touches.forEach(function(t) { locations[t.identifier] = location(t); });
 
     if (touches.length === 1) {
       if (now - touchtime < 500) { // dbltap
         var p = touches[0], l = location(touches[0]);
         scaleTo(scale * 2);
         translateTo(p, l);
-        dispatch(event.of(this, arguments));
+        d3_eventPreventDefault();
+        dispatch(event_);
       }
       touchtime = now;
     } else if (touches.length > 1) {
@@ -1590,25 +1577,52 @@ d3.behavior.zoom = function() {
           dx = p[0] - q[0], dy = p[1] - q[1];
       distance0 = dx * dx + dy * dy;
     }
+
+    function moved() {
+      var touches = d3.touches(target),
+          p0 = touches[0],
+          l0 = locations[p0.identifier];
+
+      if (p1 = touches[1]) {
+        var p1, l1 = locations[p1.identifier],
+            scale1 = d3.event.scale;
+        if (scale1 == null) {
+          var distance1 = (distance1 = p1[0] - p0[0]) * distance1 + (distance1 = p1[1] - p0[1]) * distance1;
+          scale1 = distance0 && Math.sqrt(distance1 / distance0);
+        }
+        p0 = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2];
+        l0 = [(l0[0] + l1[0]) / 2, (l0[1] + l1[1]) / 2];
+        scaleTo(scale1 * scale0);
+      }
+
+      touchtime = null;
+      translateTo(p0, l0);
+      dispatch(event_);
+    }
+
+    function ended() {
+      w.on(touchmove, null).on(touchend, null);
+      t.on(mousedown, mousedowned);
+      dragRestore();
+    }
   }
 
-  function touchmove() {
-    var touches = d3.touches(this),
-        p0 = touches[0],
-        l0 = translate0[p0.identifier];
-    if (p1 = touches[1]) {
-      var p1, l1 = translate0[p1.identifier],
-          scale1 = d3.event.scale;
-      if (scale1 == null) {
-        var distance1 = (distance1 = p1[0] - p0[0]) * distance1 + (distance1 = p1[1] - p0[1]) * distance1;
-        scale1 = distance0 && Math.sqrt(distance1 / distance0);
-      }
-      p0 = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2];
-      l0 = [(l0[0] + l1[0]) / 2, (l0[1] + l1[1]) / 2];
-      scaleTo(scale1 * scale0);
-    }
-    translateTo(p0, l0);
-    touchtime = null;
+  function mousewheeled() {
+    d3_eventPreventDefault();
+    if (!translate0) translate0 = location(d3.mouse(this));
+    scaleTo(Math.pow(2, d3_behavior_zoomDelta() * .002) * scale);
+    translateTo(d3.mouse(this), translate0);
+    dispatch(event.of(this, arguments));
+  }
+
+  function mousewheelreset() {
+    translate0 = null;
+  }
+
+  function dblclicked() {
+    var p = d3.mouse(this), l = location(p), k = Math.log(scale) / Math.LN2;
+    scaleTo(Math.pow(2, d3.event.shiftKey ? Math.ceil(k) - 1 : Math.floor(k) + 1));
+    translateTo(p, l);
     dispatch(event.of(this, arguments));
   }
 
@@ -1631,20 +1645,18 @@ d3.functor = d3_functor;
 var d3_timer_queueHead,
     d3_timer_queueTail,
     d3_timer_interval, // is an interval (or frame) active?
-    d3_timer_timeout; // is a timeout active?
+    d3_timer_timeout, // is a timeout active?
+    d3_timer_active, // active timer object
+    d3_timer_frame = d3_window[d3_vendorSymbol(d3_window, "requestAnimationFrame")] || function(callback) { setTimeout(callback, 17); };
 
 // The timer will continue to fire until callback returns true.
 d3.timer = function(callback, delay, then) {
-  if (arguments.length < 3) {
-    if (arguments.length < 2) delay = 0;
-    else if (!isFinite(delay)) return;
-    then = Date.now();
-  }
-
-  var time = then + delay;
+  var n = arguments.length;
+  if (n < 2) delay = 0;
+  if (n < 3) then = Date.now();
 
   // Add the callback to the tail of the queue.
-  var timer = {callback: callback, time: time, next: null};
+  var time = then + delay, timer = {callback: callback, time: time, next: null};
   if (d3_timer_queueTail) d3_timer_queueTail.next = timer;
   else d3_timer_queueHead = timer;
   d3_timer_queueTail = timer;
@@ -1677,12 +1689,20 @@ d3.timer.flush = function() {
   d3_timer_sweep();
 };
 
+function d3_timer_replace(callback, delay, then) {
+  var n = arguments.length;
+  if (n < 2) delay = 0;
+  if (n < 3) then = Date.now();
+  d3_timer_active.callback = callback;
+  d3_timer_active.time = then + delay;
+}
+
 function d3_timer_mark() {
-  var now = Date.now(),
-      timer = d3_timer_queueHead;
-  while (timer) {
-    if (now >= timer.time) timer.flush = timer.callback(now - timer.time);
-    timer = timer.next;
+  var now = Date.now();
+  d3_timer_active = d3_timer_queueHead;
+  while (d3_timer_active) {
+    if (now >= d3_timer_active.time) d3_timer_active.flush = d3_timer_active.callback(now - d3_timer_active.time);
+    d3_timer_active = d3_timer_active.next;
   }
   return now;
 }
@@ -1704,9 +1724,6 @@ function d3_timer_sweep() {
   d3_timer_queueTail = t0;
   return time;
 }
-
-var d3_timer_frame = d3_window[d3_vendorSymbol(d3_window, "requestAnimationFrame")]
-    || function(callback) { setTimeout(callback, 17); };
 var π = Math.PI,
     ε = 1e-6,
     ε2 = ε * ε,
@@ -3633,6 +3650,7 @@ function d3_geo_pathContext(context) {
 
 function d3_geo_resample(project) {
   var δ2 = .5, // precision, px²
+      cosMinDistance = Math.cos(30 * d3_radians), // cos(minimum angular distance)
       maxDepth = 16;
 
   function resample(stream) {
@@ -3659,9 +3677,8 @@ function d3_geo_resample(project) {
     }
 
     function linePoint(λ, φ) {
-      var c = d3_geo_cartesian([λ, φ]), p = project(λ, φ), buffer = [];
-      resampleLineTo(x0, y0, λ0, a0, b0, c0, x0 = p[0], y0 = p[1], λ0 = λ, a0 = c[0], b0 = c[1], c0 = c[2], maxDepth, buffer);
-      streamLine(buffer, stream);
+      var c = d3_geo_cartesian([λ, φ]), p = project(λ, φ);
+      resampleLineTo(x0, y0, λ0, a0, b0, c0, x0 = p[0], y0 = p[1], λ0 = λ, a0 = c[0], b0 = c[1], c0 = c[2], maxDepth, stream);
       stream.point(x0, y0);
     }
 
@@ -3682,23 +3699,15 @@ function d3_geo_resample(project) {
     }
 
     function ringEnd() {
-      var buffer = [];
-      resampleLineTo(x0, y0, λ0, a0, b0, c0, x00, y00, λ00, a00, b00, c00, maxDepth, buffer);
-      streamLine(buffer, stream);
+      resampleLineTo(x0, y0, λ0, a0, b0, c0, x00, y00, λ00, a00, b00, c00, maxDepth, stream);
       resample.lineEnd = lineEnd;
       lineEnd();
-    }
-
-    function streamLine(line, stream) {
-      for (var i = 0, n = line.length, point; i < n; ++i) {
-        stream.point((point = line[i])[0], point[1]);
-      }
     }
 
     return resample;
   }
 
-  function resampleLineTo(x0, y0, λ0, a0, b0, c0, x1, y1, λ1, a1, b1, c1, depth, buffer) {
+  function resampleLineTo(x0, y0, λ0, a0, b0, c0, x1, y1, λ1, a1, b1, c1, depth, stream) {
     var dx = x1 - x0,
         dy = y1 - y0,
         d2 = dx * dx + dy * dy;
@@ -3714,13 +3723,13 @@ function d3_geo_resample(project) {
           y2 = p[1],
           dx2 = x2 - x0,
           dy2 = y2 - y0,
-          dz = dy * dx2 - dx * dy2,
-          tooFar = false;
-      if (dz * dz / d2 > δ2 || Math.abs((dx * dx2 + dy * dy2) / d2 - .5) > .3 || (tooFar = dx2 * dx2 + dy2 * dy2 > 256 * δ2)) {
-        var s0 = resampleLineTo(x0, y0, λ0, a0, b0, c0, x2, y2, λ2, a /= m, b /= m, c, depth, buffer);
-        buffer.push(p);
-        var s1 = resampleLineTo(x2, y2, λ2, a, b, c, x1, y1, λ1, a1, b1, c1, depth, buffer);
-        return !tooFar || s0 || s1 || (buffer.pop(), false);
+          dz = dy * dx2 - dx * dy2;
+      if (dz * dz / d2 > δ2 // perpendicular projected distance
+          || Math.abs((dx * dx2 + dy * dy2) / d2 - .5) > .3 // midpoint close to an end
+          || a0 * a1 + b0 * b1 + c0 * c1 < cosMinDistance) { // angular distance
+        resampleLineTo(x0, y0, λ0, a0, b0, c0, x2, y2, λ2, a /= m, b /= m, c, depth, stream);
+        stream.point(x2, y2);
+        resampleLineTo(x2, y2, λ2, a, b, c, x1, y1, λ1, a1, b1, c1, depth, stream);
       }
     }
   }
@@ -3983,72 +3992,87 @@ function d3_geo_mercatorProjection(project) {
 d3.geom = {};
 
 d3.geom.polygon = function(coordinates) {
+  d3_subclass(coordinates, d3_geom_polygonPrototype);
+  return coordinates;
+};
 
-  coordinates.area = function() {
-    var i = 0,
-        n = coordinates.length,
-        area = coordinates[n - 1][1] * coordinates[0][0] - coordinates[n - 1][0] * coordinates[0][1];
-    while (++i < n) {
-      area += coordinates[i - 1][1] * coordinates[i][0] - coordinates[i - 1][0] * coordinates[i][1];
-    }
-    return area * .5;
-  };
+var d3_geom_polygonPrototype = d3.geom.polygon.prototype = [];
 
-  coordinates.centroid = function(k) {
-    var i = -1,
-        n = coordinates.length,
-        x = 0,
-        y = 0,
-        a,
-        b = coordinates[n - 1],
-        c;
-    if (!arguments.length) k = -1 / (6 * coordinates.area());
-    while (++i < n) {
-      a = b;
-      b = coordinates[i];
-      c = a[0] * b[1] - b[0] * a[1];
-      x += (a[0] + b[0]) * c;
-      y += (a[1] + b[1]) * c;
-    }
-    return [x * k, y * k];
-  };
+d3_geom_polygonPrototype.area = function() {
+  var i = -1,
+      n = this.length,
+      a,
+      b = this[n - 1],
+      area = 0;
 
-  // The Sutherland-Hodgman clipping algorithm.
-  // Note: requires the clip polygon to be counterclockwise and convex.
-  coordinates.clip = function(subject) {
-    var input,
-        i = -1,
-        n = coordinates.length,
-        j,
-        m,
-        a = coordinates[n - 1],
-        b,
-        c,
-        d;
-    while (++i < n) {
-      input = subject.slice();
-      subject.length = 0;
-      b = coordinates[i];
-      c = input[(m = input.length) - 1];
-      j = -1;
-      while (++j < m) {
-        d = input[j];
-        if (d3_geom_polygonInside(d, a, b)) {
-          if (!d3_geom_polygonInside(c, a, b)) {
-            subject.push(d3_geom_polygonIntersect(c, d, a, b));
-          }
-          subject.push(d);
-        } else if (d3_geom_polygonInside(c, a, b)) {
+  while (++i < n) {
+    a = b;
+    b = this[i];
+    area += a[1] * b[0] - a[0] * b[1];
+  }
+
+  return area * .5;
+};
+
+d3_geom_polygonPrototype.centroid = function(k) {
+  var i = -1,
+      n = this.length,
+      x = 0,
+      y = 0,
+      a,
+      b = this[n - 1],
+      c;
+
+  if (!arguments.length) k = -1 / (6 * this.area());
+
+  while (++i < n) {
+    a = b;
+    b = this[i];
+    c = a[0] * b[1] - b[0] * a[1];
+    x += (a[0] + b[0]) * c;
+    y += (a[1] + b[1]) * c;
+  }
+
+  return [x * k, y * k];
+};
+
+// The Sutherland-Hodgman clipping algorithm.
+// Note: requires the clip polygon to be counterclockwise and convex.
+d3_geom_polygonPrototype.clip = function(subject) {
+  var input,
+      closed = d3_geom_polygonClosed(subject),
+      i = -1,
+      n = this.length - d3_geom_polygonClosed(this),
+      j,
+      m,
+      a = this[n - 1],
+      b,
+      c,
+      d;
+
+  while (++i < n) {
+    input = subject.slice();
+    subject.length = 0;
+    b = this[i];
+    c = input[(m = input.length - closed) - 1];
+    j = -1;
+    while (++j < m) {
+      d = input[j];
+      if (d3_geom_polygonInside(d, a, b)) {
+        if (!d3_geom_polygonInside(c, a, b)) {
           subject.push(d3_geom_polygonIntersect(c, d, a, b));
         }
-        c = d;
+        subject.push(d);
+      } else if (d3_geom_polygonInside(c, a, b)) {
+        subject.push(d3_geom_polygonIntersect(c, d, a, b));
       }
-      a = b;
+      c = d;
     }
-    return subject;
-  };
+    if (closed) subject.push(subject[0]);
+    a = b;
+  }
 
-  return coordinates;
+  return subject;
 };
 
 function d3_geom_polygonInside(p, a, b) {
@@ -4061,6 +4085,13 @@ function d3_geom_polygonIntersect(c, d, a, b) {
       y1 = c[1], y3 = a[1], y21 = d[1] - y1, y43 = b[1] - y3,
       ua = (x43 * (y1 - y3) - y43 * (x1 - x3)) / (y43 * x21 - x43 * y21);
   return [x1 + ua * x21, y1 + ua * y21];
+}
+
+// Returns true if the polygon is closed.
+function d3_geom_polygonClosed(coordinates) {
+  var a = coordinates[0],
+      b = coordinates[coordinates.length - 1];
+  return !(a[0] - b[0] || a[1] - b[1]);
 }
 
 var d3_ease_default = function() { return d3_identity; };
@@ -4171,7 +4202,7 @@ function d3_ease_bounce(t) {
 }
 
 function d3_transition(groups, id) {
-  d3_arraySubclass(groups, d3_transitionPrototype);
+  d3_subclass(groups, d3_transitionPrototype);
 
   groups.id = id; // Note: read-only!
 
@@ -4181,11 +4212,12 @@ function d3_transition(groups, id) {
 var d3_transitionPrototype = [],
     d3_transitionId = 0,
     d3_transitionInheritId,
-    d3_transitionInherit = {ease: d3_ease_cubicInOut, delay: 0, duration: 250};
+    d3_transitionInherit;
 
 d3_transitionPrototype.call = d3_selectionPrototype.call;
 d3_transitionPrototype.empty = d3_selectionPrototype.empty;
 d3_transitionPrototype.node = d3_selectionPrototype.node;
+d3_transitionPrototype.size = d3_selectionPrototype.size;
 
 d3.transition = function(selection) {
   return arguments.length
@@ -4203,12 +4235,12 @@ d3_transitionPrototype.select = function(selector) {
       subnode,
       node;
 
-  if (typeof selector !== "function") selector = d3_selection_selector(selector);
+  selector = d3_selection_selector(selector);
 
   for (var j = -1, m = this.length; ++j < m;) {
     subgroups.push(subgroup = []);
     for (var group = this[j], i = -1, n = group.length; ++i < n;) {
-      if ((node = group[i]) && (subnode = selector.call(node, node.__data__, i))) {
+      if ((node = group[i]) && (subnode = selector.call(node, node.__data__, i, j))) {
         if ("__data__" in node) subnode.__data__ = node.__data__;
         d3_transitionNode(subnode, i, id, node.__transition__[id]);
         subgroup.push(subnode);
@@ -4230,13 +4262,13 @@ d3_transitionPrototype.selectAll = function(selector) {
       subnode,
       transition;
 
-  if (typeof selector !== "function") selector = d3_selection_selectorAll(selector);
+  selector = d3_selection_selectorAll(selector);
 
   for (var j = -1, m = this.length; ++j < m;) {
     for (var group = this[j], i = -1, n = group.length; ++i < n;) {
       if (node = group[i]) {
         transition = node.__transition__[id];
-        subnodes = selector.call(node, node.__data__, i);
+        subnodes = selector.call(node, node.__data__, i, j);
         subgroups.push(subgroup = []);
         for (var k = -1, o = subnodes.length; ++k < o;) {
           if (subnode = subnodes[k]) d3_transitionNode(subnode, k, id, transition);
@@ -4266,7 +4298,7 @@ d3_transitionPrototype.filter = function(filter) {
     }
   }
 
-  return d3_transition(subgroups, this.id, this.time).ease(this.ease());
+  return d3_transition(subgroups, this.id);
 };
 function d3_Color() {}
 
@@ -4452,6 +4484,14 @@ d3.rgb = function(r, g, b) {
       : d3_rgb(~~r, ~~g, ~~b);
 };
 
+function d3_rgbNumber(value) {
+  return d3_rgb(value >> 16, value >> 8 & 0xff, value & 0xff);
+}
+
+function d3_rgbString(value) {
+  return d3_rgbNumber(value) + "";
+}
+
 function d3_rgb(r, g, b) {
   return new d3_Rgb(r, g, b);
 }
@@ -4474,18 +4514,12 @@ d3_rgbPrototype.brighter = function(k) {
   if (r && r < i) r = i;
   if (g && g < i) g = i;
   if (b && b < i) b = i;
-  return d3_rgb(
-      Math.min(255, Math.floor(r / k)),
-      Math.min(255, Math.floor(g / k)),
-      Math.min(255, Math.floor(b / k)));
+  return d3_rgb(Math.min(255, ~~(r / k)), Math.min(255, ~~(g / k)), Math.min(255, ~~(b / k)));
 };
 
 d3_rgbPrototype.darker = function(k) {
   k = Math.pow(0.7, arguments.length ? k : 1);
-  return d3_rgb(
-      Math.floor(k * this.r),
-      Math.floor(k * this.g),
-      Math.floor(k * this.b));
+  return d3_rgb(~~(k * this.r), ~~(k * this.g), ~~(k * this.b));
 };
 
 d3_rgbPrototype.hsl = function() {
@@ -4594,157 +4628,157 @@ function d3_rgb_parseNumber(c) { // either integer or percentage
 }
 
 var d3_rgb_names = d3.map({
-  aliceblue: "#f0f8ff",
-  antiquewhite: "#faebd7",
-  aqua: "#00ffff",
-  aquamarine: "#7fffd4",
-  azure: "#f0ffff",
-  beige: "#f5f5dc",
-  bisque: "#ffe4c4",
-  black: "#000000",
-  blanchedalmond: "#ffebcd",
-  blue: "#0000ff",
-  blueviolet: "#8a2be2",
-  brown: "#a52a2a",
-  burlywood: "#deb887",
-  cadetblue: "#5f9ea0",
-  chartreuse: "#7fff00",
-  chocolate: "#d2691e",
-  coral: "#ff7f50",
-  cornflowerblue: "#6495ed",
-  cornsilk: "#fff8dc",
-  crimson: "#dc143c",
-  cyan: "#00ffff",
-  darkblue: "#00008b",
-  darkcyan: "#008b8b",
-  darkgoldenrod: "#b8860b",
-  darkgray: "#a9a9a9",
-  darkgreen: "#006400",
-  darkgrey: "#a9a9a9",
-  darkkhaki: "#bdb76b",
-  darkmagenta: "#8b008b",
-  darkolivegreen: "#556b2f",
-  darkorange: "#ff8c00",
-  darkorchid: "#9932cc",
-  darkred: "#8b0000",
-  darksalmon: "#e9967a",
-  darkseagreen: "#8fbc8f",
-  darkslateblue: "#483d8b",
-  darkslategray: "#2f4f4f",
-  darkslategrey: "#2f4f4f",
-  darkturquoise: "#00ced1",
-  darkviolet: "#9400d3",
-  deeppink: "#ff1493",
-  deepskyblue: "#00bfff",
-  dimgray: "#696969",
-  dimgrey: "#696969",
-  dodgerblue: "#1e90ff",
-  firebrick: "#b22222",
-  floralwhite: "#fffaf0",
-  forestgreen: "#228b22",
-  fuchsia: "#ff00ff",
-  gainsboro: "#dcdcdc",
-  ghostwhite: "#f8f8ff",
-  gold: "#ffd700",
-  goldenrod: "#daa520",
-  gray: "#808080",
-  green: "#008000",
-  greenyellow: "#adff2f",
-  grey: "#808080",
-  honeydew: "#f0fff0",
-  hotpink: "#ff69b4",
-  indianred: "#cd5c5c",
-  indigo: "#4b0082",
-  ivory: "#fffff0",
-  khaki: "#f0e68c",
-  lavender: "#e6e6fa",
-  lavenderblush: "#fff0f5",
-  lawngreen: "#7cfc00",
-  lemonchiffon: "#fffacd",
-  lightblue: "#add8e6",
-  lightcoral: "#f08080",
-  lightcyan: "#e0ffff",
-  lightgoldenrodyellow: "#fafad2",
-  lightgray: "#d3d3d3",
-  lightgreen: "#90ee90",
-  lightgrey: "#d3d3d3",
-  lightpink: "#ffb6c1",
-  lightsalmon: "#ffa07a",
-  lightseagreen: "#20b2aa",
-  lightskyblue: "#87cefa",
-  lightslategray: "#778899",
-  lightslategrey: "#778899",
-  lightsteelblue: "#b0c4de",
-  lightyellow: "#ffffe0",
-  lime: "#00ff00",
-  limegreen: "#32cd32",
-  linen: "#faf0e6",
-  magenta: "#ff00ff",
-  maroon: "#800000",
-  mediumaquamarine: "#66cdaa",
-  mediumblue: "#0000cd",
-  mediumorchid: "#ba55d3",
-  mediumpurple: "#9370db",
-  mediumseagreen: "#3cb371",
-  mediumslateblue: "#7b68ee",
-  mediumspringgreen: "#00fa9a",
-  mediumturquoise: "#48d1cc",
-  mediumvioletred: "#c71585",
-  midnightblue: "#191970",
-  mintcream: "#f5fffa",
-  mistyrose: "#ffe4e1",
-  moccasin: "#ffe4b5",
-  navajowhite: "#ffdead",
-  navy: "#000080",
-  oldlace: "#fdf5e6",
-  olive: "#808000",
-  olivedrab: "#6b8e23",
-  orange: "#ffa500",
-  orangered: "#ff4500",
-  orchid: "#da70d6",
-  palegoldenrod: "#eee8aa",
-  palegreen: "#98fb98",
-  paleturquoise: "#afeeee",
-  palevioletred: "#db7093",
-  papayawhip: "#ffefd5",
-  peachpuff: "#ffdab9",
-  peru: "#cd853f",
-  pink: "#ffc0cb",
-  plum: "#dda0dd",
-  powderblue: "#b0e0e6",
-  purple: "#800080",
-  red: "#ff0000",
-  rosybrown: "#bc8f8f",
-  royalblue: "#4169e1",
-  saddlebrown: "#8b4513",
-  salmon: "#fa8072",
-  sandybrown: "#f4a460",
-  seagreen: "#2e8b57",
-  seashell: "#fff5ee",
-  sienna: "#a0522d",
-  silver: "#c0c0c0",
-  skyblue: "#87ceeb",
-  slateblue: "#6a5acd",
-  slategray: "#708090",
-  slategrey: "#708090",
-  snow: "#fffafa",
-  springgreen: "#00ff7f",
-  steelblue: "#4682b4",
-  tan: "#d2b48c",
-  teal: "#008080",
-  thistle: "#d8bfd8",
-  tomato: "#ff6347",
-  turquoise: "#40e0d0",
-  violet: "#ee82ee",
-  wheat: "#f5deb3",
-  white: "#ffffff",
-  whitesmoke: "#f5f5f5",
-  yellow: "#ffff00",
-  yellowgreen: "#9acd32"
+  aliceblue: 0xf0f8ff,
+  antiquewhite: 0xfaebd7,
+  aqua: 0x00ffff,
+  aquamarine: 0x7fffd4,
+  azure: 0xf0ffff,
+  beige: 0xf5f5dc,
+  bisque: 0xffe4c4,
+  black: 0x000000,
+  blanchedalmond: 0xffebcd,
+  blue: 0x0000ff,
+  blueviolet: 0x8a2be2,
+  brown: 0xa52a2a,
+  burlywood: 0xdeb887,
+  cadetblue: 0x5f9ea0,
+  chartreuse: 0x7fff00,
+  chocolate: 0xd2691e,
+  coral: 0xff7f50,
+  cornflowerblue: 0x6495ed,
+  cornsilk: 0xfff8dc,
+  crimson: 0xdc143c,
+  cyan: 0x00ffff,
+  darkblue: 0x00008b,
+  darkcyan: 0x008b8b,
+  darkgoldenrod: 0xb8860b,
+  darkgray: 0xa9a9a9,
+  darkgreen: 0x006400,
+  darkgrey: 0xa9a9a9,
+  darkkhaki: 0xbdb76b,
+  darkmagenta: 0x8b008b,
+  darkolivegreen: 0x556b2f,
+  darkorange: 0xff8c00,
+  darkorchid: 0x9932cc,
+  darkred: 0x8b0000,
+  darksalmon: 0xe9967a,
+  darkseagreen: 0x8fbc8f,
+  darkslateblue: 0x483d8b,
+  darkslategray: 0x2f4f4f,
+  darkslategrey: 0x2f4f4f,
+  darkturquoise: 0x00ced1,
+  darkviolet: 0x9400d3,
+  deeppink: 0xff1493,
+  deepskyblue: 0x00bfff,
+  dimgray: 0x696969,
+  dimgrey: 0x696969,
+  dodgerblue: 0x1e90ff,
+  firebrick: 0xb22222,
+  floralwhite: 0xfffaf0,
+  forestgreen: 0x228b22,
+  fuchsia: 0xff00ff,
+  gainsboro: 0xdcdcdc,
+  ghostwhite: 0xf8f8ff,
+  gold: 0xffd700,
+  goldenrod: 0xdaa520,
+  gray: 0x808080,
+  green: 0x008000,
+  greenyellow: 0xadff2f,
+  grey: 0x808080,
+  honeydew: 0xf0fff0,
+  hotpink: 0xff69b4,
+  indianred: 0xcd5c5c,
+  indigo: 0x4b0082,
+  ivory: 0xfffff0,
+  khaki: 0xf0e68c,
+  lavender: 0xe6e6fa,
+  lavenderblush: 0xfff0f5,
+  lawngreen: 0x7cfc00,
+  lemonchiffon: 0xfffacd,
+  lightblue: 0xadd8e6,
+  lightcoral: 0xf08080,
+  lightcyan: 0xe0ffff,
+  lightgoldenrodyellow: 0xfafad2,
+  lightgray: 0xd3d3d3,
+  lightgreen: 0x90ee90,
+  lightgrey: 0xd3d3d3,
+  lightpink: 0xffb6c1,
+  lightsalmon: 0xffa07a,
+  lightseagreen: 0x20b2aa,
+  lightskyblue: 0x87cefa,
+  lightslategray: 0x778899,
+  lightslategrey: 0x778899,
+  lightsteelblue: 0xb0c4de,
+  lightyellow: 0xffffe0,
+  lime: 0x00ff00,
+  limegreen: 0x32cd32,
+  linen: 0xfaf0e6,
+  magenta: 0xff00ff,
+  maroon: 0x800000,
+  mediumaquamarine: 0x66cdaa,
+  mediumblue: 0x0000cd,
+  mediumorchid: 0xba55d3,
+  mediumpurple: 0x9370db,
+  mediumseagreen: 0x3cb371,
+  mediumslateblue: 0x7b68ee,
+  mediumspringgreen: 0x00fa9a,
+  mediumturquoise: 0x48d1cc,
+  mediumvioletred: 0xc71585,
+  midnightblue: 0x191970,
+  mintcream: 0xf5fffa,
+  mistyrose: 0xffe4e1,
+  moccasin: 0xffe4b5,
+  navajowhite: 0xffdead,
+  navy: 0x000080,
+  oldlace: 0xfdf5e6,
+  olive: 0x808000,
+  olivedrab: 0x6b8e23,
+  orange: 0xffa500,
+  orangered: 0xff4500,
+  orchid: 0xda70d6,
+  palegoldenrod: 0xeee8aa,
+  palegreen: 0x98fb98,
+  paleturquoise: 0xafeeee,
+  palevioletred: 0xdb7093,
+  papayawhip: 0xffefd5,
+  peachpuff: 0xffdab9,
+  peru: 0xcd853f,
+  pink: 0xffc0cb,
+  plum: 0xdda0dd,
+  powderblue: 0xb0e0e6,
+  purple: 0x800080,
+  red: 0xff0000,
+  rosybrown: 0xbc8f8f,
+  royalblue: 0x4169e1,
+  saddlebrown: 0x8b4513,
+  salmon: 0xfa8072,
+  sandybrown: 0xf4a460,
+  seagreen: 0x2e8b57,
+  seashell: 0xfff5ee,
+  sienna: 0xa0522d,
+  silver: 0xc0c0c0,
+  skyblue: 0x87ceeb,
+  slateblue: 0x6a5acd,
+  slategray: 0x708090,
+  slategrey: 0x708090,
+  snow: 0xfffafa,
+  springgreen: 0x00ff7f,
+  steelblue: 0x4682b4,
+  tan: 0xd2b48c,
+  teal: 0x008080,
+  thistle: 0xd8bfd8,
+  tomato: 0xff6347,
+  turquoise: 0x40e0d0,
+  violet: 0xee82ee,
+  wheat: 0xf5deb3,
+  white: 0xffffff,
+  whitesmoke: 0xf5f5f5,
+  yellow: 0xffff00,
+  yellowgreen: 0x9acd32
 });
 
 d3_rgb_names.forEach(function(key, value) {
-  d3_rgb_names.set(key, d3_rgb_parse(value, d3_rgb, d3_hsl_rgb));
+  d3_rgb_names.set(key, d3_rgbNumber(value));
 });
 
 d3.interpolateRgb = d3_interpolateRgb;
@@ -4766,128 +4800,6 @@ function d3_interpolateRgb(a, b) {
   };
 }
 
-d3.transform = function(string) {
-  var g = d3_document.createElementNS(d3.ns.prefix.svg, "g");
-  return (d3.transform = function(string) {
-    if (string != null) {
-      g.setAttribute("transform", string);
-      var t = g.transform.baseVal.consolidate();
-    }
-    return new d3_transform(t ? t.matrix : d3_transformIdentity);
-  })(string);
-};
-
-// Compute x-scale and normalize the first row.
-// Compute shear and make second row orthogonal to first.
-// Compute y-scale and normalize the second row.
-// Finally, compute the rotation.
-function d3_transform(m) {
-  var r0 = [m.a, m.b],
-      r1 = [m.c, m.d],
-      kx = d3_transformNormalize(r0),
-      kz = d3_transformDot(r0, r1),
-      ky = d3_transformNormalize(d3_transformCombine(r1, r0, -kz)) || 0;
-  if (r0[0] * r1[1] < r1[0] * r0[1]) {
-    r0[0] *= -1;
-    r0[1] *= -1;
-    kx *= -1;
-    kz *= -1;
-  }
-  this.rotate = (kx ? Math.atan2(r0[1], r0[0]) : Math.atan2(-r1[0], r1[1])) * d3_degrees;
-  this.translate = [m.e, m.f];
-  this.scale = [kx, ky];
-  this.skew = ky ? Math.atan2(kz, ky) * d3_degrees : 0;
-};
-
-d3_transform.prototype.toString = function() {
-  return "translate(" + this.translate
-      + ")rotate(" + this.rotate
-      + ")skewX(" + this.skew
-      + ")scale(" + this.scale
-      + ")";
-};
-
-function d3_transformDot(a, b) {
-  return a[0] * b[0] + a[1] * b[1];
-}
-
-function d3_transformNormalize(a) {
-  var k = Math.sqrt(d3_transformDot(a, a));
-  if (k) {
-    a[0] /= k;
-    a[1] /= k;
-  }
-  return k;
-}
-
-function d3_transformCombine(a, b, k) {
-  a[0] += k * b[0];
-  a[1] += k * b[1];
-  return a;
-}
-
-var d3_transformIdentity = {a: 1, b: 0, c: 0, d: 1, e: 0, f: 0};
-d3.interpolateNumber = d3_interpolateNumber;
-
-function d3_interpolateNumber(a, b) {
-  b -= a = +a;
-  return function(t) { return a + b * t; };
-}
-
-d3.interpolateTransform = d3_interpolateTransform;
-
-function d3_interpolateTransform(a, b) {
-  var s = [], // string constants and placeholders
-      q = [], // number interpolators
-      n,
-      A = d3.transform(a),
-      B = d3.transform(b),
-      ta = A.translate,
-      tb = B.translate,
-      ra = A.rotate,
-      rb = B.rotate,
-      wa = A.skew,
-      wb = B.skew,
-      ka = A.scale,
-      kb = B.scale;
-
-  if (ta[0] != tb[0] || ta[1] != tb[1]) {
-    s.push("translate(", null, ",", null, ")");
-    q.push({i: 1, x: d3_interpolateNumber(ta[0], tb[0])}, {i: 3, x: d3_interpolateNumber(ta[1], tb[1])});
-  } else if (tb[0] || tb[1]) {
-    s.push("translate(" + tb + ")");
-  } else {
-    s.push("");
-  }
-
-  if (ra != rb) {
-    if (ra - rb > 180) rb += 360; else if (rb - ra > 180) ra += 360; // shortest path
-    q.push({i: s.push(s.pop() + "rotate(", null, ")") - 2, x: d3_interpolateNumber(ra, rb)});
-  } else if (rb) {
-    s.push(s.pop() + "rotate(" + rb + ")");
-  }
-
-  if (wa != wb) {
-    q.push({i: s.push(s.pop() + "skewX(", null, ")") - 2, x: d3_interpolateNumber(wa, wb)});
-  } else if (wb) {
-    s.push(s.pop() + "skewX(" + wb + ")");
-  }
-
-  if (ka[0] != kb[0] || ka[1] != kb[1]) {
-    n = s.push(s.pop() + "scale(", null, ",", null, ")");
-    q.push({i: n - 4, x: d3_interpolateNumber(ka[0], kb[0])}, {i: n - 2, x: d3_interpolateNumber(ka[1], kb[1])});
-  } else if (kb[0] != 1 || kb[1] != 1) {
-    s.push(s.pop() + "scale(" + kb + ")");
-  }
-
-  n = q.length;
-  return function(t) {
-    var i = -1, o;
-    while (++i < n) s[(o = q[i]).i] = o.x(t);
-    return s.join("");
-  };
-}
-
 d3.interpolateObject = d3_interpolateObject;
 
 function d3_interpolateObject(a, b) {
@@ -4896,7 +4808,7 @@ function d3_interpolateObject(a, b) {
       k;
   for (k in a) {
     if (k in b) {
-      i[k] = d3_interpolateByName(k)(a[k], b[k]);
+      i[k] = d3_interpolate(a[k], b[k]);
     } else {
       c[k] = a[k];
     }
@@ -4928,6 +4840,12 @@ function d3_interpolateArray(a, b) {
     for (i = 0; i < n0; ++i) c[i] = x[i](t);
     return c;
   };
+}
+d3.interpolateNumber = d3_interpolateNumber;
+
+function d3_interpolateNumber(a, b) {
+  b -= a = +a;
+  return function(t) { return a + b * t; };
 }
 
 d3.interpolateString = d3_interpolateString;
@@ -5025,12 +4943,6 @@ function d3_interpolate(a, b) {
   return f;
 }
 
-function d3_interpolateByName(name) {
-  return name == "transform"
-      ? d3_interpolateTransform
-      : d3_interpolate;
-}
-
 d3.interpolators = [
   function(a, b) {
     var t = typeof b;
@@ -5040,6 +4952,122 @@ d3.interpolators = [
         : d3_interpolateNumber)(a, b);
   }
 ];
+
+d3.transform = function(string) {
+  var g = d3_document.createElementNS(d3.ns.prefix.svg, "g");
+  return (d3.transform = function(string) {
+    if (string != null) {
+      g.setAttribute("transform", string);
+      var t = g.transform.baseVal.consolidate();
+    }
+    return new d3_transform(t ? t.matrix : d3_transformIdentity);
+  })(string);
+};
+
+// Compute x-scale and normalize the first row.
+// Compute shear and make second row orthogonal to first.
+// Compute y-scale and normalize the second row.
+// Finally, compute the rotation.
+function d3_transform(m) {
+  var r0 = [m.a, m.b],
+      r1 = [m.c, m.d],
+      kx = d3_transformNormalize(r0),
+      kz = d3_transformDot(r0, r1),
+      ky = d3_transformNormalize(d3_transformCombine(r1, r0, -kz)) || 0;
+  if (r0[0] * r1[1] < r1[0] * r0[1]) {
+    r0[0] *= -1;
+    r0[1] *= -1;
+    kx *= -1;
+    kz *= -1;
+  }
+  this.rotate = (kx ? Math.atan2(r0[1], r0[0]) : Math.atan2(-r1[0], r1[1])) * d3_degrees;
+  this.translate = [m.e, m.f];
+  this.scale = [kx, ky];
+  this.skew = ky ? Math.atan2(kz, ky) * d3_degrees : 0;
+};
+
+d3_transform.prototype.toString = function() {
+  return "translate(" + this.translate
+      + ")rotate(" + this.rotate
+      + ")skewX(" + this.skew
+      + ")scale(" + this.scale
+      + ")";
+};
+
+function d3_transformDot(a, b) {
+  return a[0] * b[0] + a[1] * b[1];
+}
+
+function d3_transformNormalize(a) {
+  var k = Math.sqrt(d3_transformDot(a, a));
+  if (k) {
+    a[0] /= k;
+    a[1] /= k;
+  }
+  return k;
+}
+
+function d3_transformCombine(a, b, k) {
+  a[0] += k * b[0];
+  a[1] += k * b[1];
+  return a;
+}
+
+var d3_transformIdentity = {a: 1, b: 0, c: 0, d: 1, e: 0, f: 0};
+
+d3.interpolateTransform = d3_interpolateTransform;
+
+function d3_interpolateTransform(a, b) {
+  var s = [], // string constants and placeholders
+      q = [], // number interpolators
+      n,
+      A = d3.transform(a),
+      B = d3.transform(b),
+      ta = A.translate,
+      tb = B.translate,
+      ra = A.rotate,
+      rb = B.rotate,
+      wa = A.skew,
+      wb = B.skew,
+      ka = A.scale,
+      kb = B.scale;
+
+  if (ta[0] != tb[0] || ta[1] != tb[1]) {
+    s.push("translate(", null, ",", null, ")");
+    q.push({i: 1, x: d3_interpolateNumber(ta[0], tb[0])}, {i: 3, x: d3_interpolateNumber(ta[1], tb[1])});
+  } else if (tb[0] || tb[1]) {
+    s.push("translate(" + tb + ")");
+  } else {
+    s.push("");
+  }
+
+  if (ra != rb) {
+    if (ra - rb > 180) rb += 360; else if (rb - ra > 180) ra += 360; // shortest path
+    q.push({i: s.push(s.pop() + "rotate(", null, ")") - 2, x: d3_interpolateNumber(ra, rb)});
+  } else if (rb) {
+    s.push(s.pop() + "rotate(" + rb + ")");
+  }
+
+  if (wa != wb) {
+    q.push({i: s.push(s.pop() + "skewX(", null, ")") - 2, x: d3_interpolateNumber(wa, wb)});
+  } else if (wb) {
+    s.push(s.pop() + "skewX(" + wb + ")");
+  }
+
+  if (ka[0] != kb[0] || ka[1] != kb[1]) {
+    n = s.push(s.pop() + "scale(", null, ",", null, ")");
+    q.push({i: n - 4, x: d3_interpolateNumber(ka[0], kb[0])}, {i: n - 2, x: d3_interpolateNumber(ka[1], kb[1])});
+  } else if (kb[0] != 1 || kb[1] != 1) {
+    s.push(s.pop() + "scale(" + kb + ")");
+  }
+
+  n = q.length;
+  return function(t) {
+    var i = -1, o;
+    while (++i < n) s[(o = q[i]).i] = o.x(t);
+    return s.join("");
+  };
+}
 
 d3_transitionPrototype.tween = function(name, tween) {
   var id = this.id;
@@ -5066,7 +5094,7 @@ d3_transitionPrototype.attr = function(nameNS, value) {
     return this;
   }
 
-  var interpolate = d3_interpolateByName(nameNS),
+  var interpolate = nameNS == "transform" ? d3_interpolateTransform : d3_interpolate,
       name = d3.ns.qualify(nameNS);
 
   // For attr(string, null), remove the attribute with the specified name.
@@ -5128,8 +5156,6 @@ d3_transitionPrototype.style = function(name, value, priority) {
     priority = "";
   }
 
-  var interpolate = d3_interpolateByName(name);
-
   // For style(name, null) or style(name, null, priority), remove the style
   // property with the specified name. The priority is ignored.
   function styleNull() {
@@ -5142,7 +5168,7 @@ d3_transitionPrototype.style = function(name, value, priority) {
   function styleString(b) {
     return b == null ? styleNull : (b += "", function() {
       var a = d3_window.getComputedStyle(this, null).getPropertyValue(name), i;
-      return a !== b && (i = interpolate(a, b), function(t) { this.style.setProperty(name, i(t), priority); });
+      return a !== b && (i = d3_interpolate(a, b), function(t) { this.style.setProperty(name, i(t), priority); });
     });
   }
 
@@ -5211,7 +5237,8 @@ d3_transitionPrototype.each = function(type, listener) {
     d3_transitionInheritId = inheritId;
   } else {
     d3_selection_each(this, function(node) {
-      node.__transition__[id].event.on(type, listener);
+      var transition = node.__transition__[id];
+      (transition.event || (transition.event = d3.dispatch("start", "end"))).on(type, listener);
     });
   }
   return this;
@@ -5250,7 +5277,6 @@ function d3_transitionNode(node, i, id, inherit) {
 
     transition = lock[id] = {
       tween: new d3_Map,
-      event: d3.dispatch("start", "end"), // TODO construct lazily?
       time: time,
       ease: inherit.ease,
       delay: inherit.delay,
@@ -5262,19 +5288,17 @@ function d3_transitionNode(node, i, id, inherit) {
     d3.timer(function(elapsed) {
       var d = node.__data__,
           ease = transition.ease,
-          event = transition.event,
           delay = transition.delay,
           duration = transition.duration,
           tweened = [];
 
-      return delay <= elapsed
-          ? start(elapsed)
-          : d3.timer(start, delay, time), 1;
+      if (delay <= elapsed) return start(elapsed);
+      d3_timer_replace(start, delay, time);
 
       function start(elapsed) {
         if (lock.active > id) return stop();
         lock.active = id;
-        event.start.call(node, d, i);
+        transition.event && transition.event.start.call(node, d, i);
 
         transition.tween.forEach(function(key, value) {
           if (value = value.call(node, d, i)) {
@@ -5282,8 +5306,8 @@ function d3_transitionNode(node, i, id, inherit) {
           }
         });
 
-        if (!tick(elapsed)) d3.timer(tick, 0, time);
-        return 1;
+        if (tick(elapsed)) return 1;
+        d3_timer_replace(tick, 0, time);
       }
 
       function tick(elapsed) {
@@ -5299,7 +5323,7 @@ function d3_transitionNode(node, i, id, inherit) {
 
         if (t >= 1) {
           stop();
-          event.end.call(node, d, i);
+          transition.event && transition.event.end.call(node, d, i);
           return 1;
         }
       }
@@ -5310,8 +5334,6 @@ function d3_transitionNode(node, i, id, inherit) {
         return 1;
       }
     }, 0, time);
-
-    return transition;
   }
 }
 
