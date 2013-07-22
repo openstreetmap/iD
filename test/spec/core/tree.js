@@ -32,7 +32,7 @@ describe("iD.Tree", function() {
             expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([]);
             var node = iD.Node({id: 'n', loc: [0.5, 0.5]});
             g = tree.graph().replace(node);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([way, node]);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([node, way]);
         });
 
         it("includes entities that used to have missing children, after rebase added them", function() {
@@ -43,7 +43,7 @@ describe("iD.Tree", function() {
             var node = iD.Node({id: 'n', loc: [0.5, 0.5]});
             base.rebase({ 'n': node });
             tree.rebase(['n']);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([way, node]);
+            expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([node, way]);
         });
 
         it("includes entities within extent, excludes those without", function() {

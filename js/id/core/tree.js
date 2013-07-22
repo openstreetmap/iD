@@ -1,41 +1,55 @@
 iD.Tree = function(graph) {
 
-    var rtree = new RTree(),
+    var rtree = rbush(),
         m = 1000 * 1000 * 100,
         head = graph,
         queuedCreated = [],
         queuedModified = [],
+        rectangles = {},
         x, y, dx, dy, rebased;
 
     function extentRectangle(extent) {
-            x = m * extent[0][0],
-            y = m * extent[0][1],
-            dx = Math.max(m * extent[1][0] - x, 1),
-            dy = Math.max(m * extent[1][1] - y, 1);
-        return new RTree.Rectangle(~~x, ~~y, ~~dx, ~~dy);
+        return [
+            ~~(m * extent[0][0]),
+            ~~(m * extent[0][1]),
+            ~~(m * extent[1][0]),
+            ~~(m * extent[1][1])
+        ];
     }
 
-    function insert(entity) {
-        rtree.insert(extentRectangle(entity.extent(head)), entity.id);
+    function entityRectangle(entity) {
+        var rect = extentRectangle(entity.extent(head), entity.id);
+        rect.id = entity.id;
+        rectangles[entity.id] = rect;
+        return rect;
     }
 
     function remove(entity) {
-        rtree.remove(extentRectangle(entity.extent(graph)), entity.id);
+        rtree.remove(rectangles[entity.id]);
+        delete rectangles[entity.id];
     }
 
-    function reinsert(entity) {
-        remove(graph.entities[entity.id]);
-        insert(entity);
+    function bulkInsert(entities) {
+        for (var i = 0, rects = []; i < entities.length; i++) {
+            rects.push(entityRectangle(entities[i]));
+        }
+        rtree.load(rects);
+    }
+
+    function bulkReinsert(entities) {
+        entities.forEach(remove);
+        bulkInsert(entities);
     }
 
     var tree = {
 
         rebase: function(entities) {
-            for (var i = 0; i < entities.length; i++) {
+            for (var i = 0, inserted = []; i < entities.length; i++) {
                 if (!graph.entities.hasOwnProperty(entities[i])) {
-                    insert(graph.entity(entities[i]), true);
+                    inserted.push(graph.entity(entities[i]));
                 }
             }
+            bulkInsert(inserted);
             rebased = true;
             return tree;
         },
@@ -63,15 +77,21 @@ iD.Tree = function(graph) {
                 queuedCreated = [];
                 queuedModified = [];
 
+                var reinserted = [],
+                    inserted = [];
+
                 modified.forEach(function(d) {
-                    if (head.hasAllChildren(d)) reinsert(d);
+                    if (head.hasAllChildren(d)) reinserted.push(d);
                     else queuedModified.push(d);
                 });
 
                 created.forEach(function(d) {
-                    if (head.hasAllChildren(d)) insert(d);
+                    if (head.hasAllChildren(d)) inserted.push(d);
                     else queuedCreated.push(d);
                 });
+
+                bulkReinsert(reinserted);
+                bulkInsert(inserted);
 
                 diff.deleted().forEach(remove);
 
@@ -79,8 +99,9 @@ iD.Tree = function(graph) {
                 rebased = false;
             }
 
-            return rtree.search(extentRectangle(extent))
-                .map(function(id) { return graph.entity(id); });
+            return rtree.search(extentRectangle(extent)).map(function (rect) {
+                return graph.entities[rect.id];
+            });
         },
 
         graph: function() {
