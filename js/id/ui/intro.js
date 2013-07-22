@@ -98,20 +98,24 @@ iD.ui.intro = function(context) {
     return intro;
 };
 
-iD.ui.intro.pointBox = function(point) {
+iD.ui.intro.pointBox = function(point, context) {
+    var rect = context.surface().node().getBoundingClientRect();
+    point = context.projection(point);
     return {
-        left: point[0] - 30,
-        top: point[1] - 50,
+        left: point[0] + rect.left - 30,
+        top: point[1] + rect.top - 50,
         width: 60,
         height: 70
     };
 };
 
-iD.ui.intro.pad = function(box, padding) {
+iD.ui.intro.pad = function(box, padding, context) {
     if (box instanceof Array) {
+        var rect = context.surface().node().getBoundingClientRect();
+        box = context.projection(box);
         box = {
-            left: box[0],
-            top: box[1]
+            left: box[0] + rect.left,
+            top: box[1] + rect.top
         };
     }
     return {

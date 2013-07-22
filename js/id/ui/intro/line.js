@@ -32,12 +32,12 @@ iD.ui.intro.line = function(context, reveal) {
             context.on('enter.intro', drawLine);
 
             var padding = 150 * Math.pow(2, context.map().zoom() - 18);
-            var pointBox = iD.ui.intro.pad(context.projection(start), padding);
+            var pointBox = iD.ui.intro.pad(start, padding, context);
             reveal(pointBox, t('intro.lines.start'));
 
             context.map().on('move.intro', function() {
                 padding = 150 * Math.pow(2, context.map().zoom() - 18);
-                pointBox = iD.ui.intro.pad(context.projection(start), padding);
+                pointBox = iD.ui.intro.pad(start, padding, context);
                 reveal(pointBox, t('intro.lines.start'), {duration: 0});
             });
         }
@@ -48,12 +48,12 @@ iD.ui.intro.line = function(context, reveal) {
             context.on('enter.intro', retry);
 
             var padding = 300 * Math.pow(2, context.map().zoom() - 19);
-            var pointBox = iD.ui.intro.pad(context.projection(midpoint), padding);
+            var pointBox = iD.ui.intro.pad(midpoint, padding, context);
             reveal(pointBox, t('intro.lines.intersect'));
 
             context.map().on('move.intro', function() {
                 padding = 300 * Math.pow(2, context.map().zoom() - 19);
-                pointBox = iD.ui.intro.pad(context.projection(midpoint), padding);
+                pointBox = iD.ui.intro.pad(midpoint, padding, context);
                 reveal(pointBox, t('intro.lines.intersect'), {duration: 0});
             });
         }
@@ -61,7 +61,7 @@ iD.ui.intro.line = function(context, reveal) {
         // ended line before creating intersection
         function retry(mode) {
             if (mode.id !== 'select') return;
-            var pointBox = iD.ui.intro.pad(context.projection(intersection), 30);
+            var pointBox = iD.ui.intro.pad(intersection, 30);
             reveal(pointBox, t('intro.lines.restart'));
             timeout(function() {
                 context.replace(iD.actions.DeleteMultiple(mode.selectedIDs()));
@@ -78,12 +78,12 @@ iD.ui.intro.line = function(context, reveal) {
                 context.on('enter.intro', enterSelect);
 
                 var padding = 900 * Math.pow(2, context.map().zoom() - 19);
-                var pointBox = iD.ui.intro.pad(context.projection(centroid), padding);
+                var pointBox = iD.ui.intro.pad(centroid, padding, context);
                 reveal(pointBox, t('intro.lines.finish'));
 
                 context.map().on('move.intro', function() {
                     padding = 900 * Math.pow(2, context.map().zoom() - 19);
-                    pointBox = iD.ui.intro.pad(context.projection(centroid), padding);
+                    pointBox = iD.ui.intro.pad(centroid, padding, context);
                     reveal(pointBox, t('intro.lines.finish'), {duration: 0});
                 });
             }

@@ -23,12 +23,13 @@ iD.ui.intro.navigation = function(context, reveal) {
 
     step.enter = function() {
 
-        var map = { 
-            left: 30,
-            top: 60,
-            width: context.map().dimensions()[0] - 60,
-            height: context.map().dimensions()[1] - 200
-        };
+        var rect = context.surface().node().getBoundingClientRect(),
+            map = {
+                left: rect.left + 10,
+                top: rect.top + 70,
+                width: rect.width - 70,
+                height: rect.height - 170
+            };
 
         context.map().centerZoom([-85.63591, 41.94285], 19);
 
@@ -42,18 +43,18 @@ iD.ui.intro.navigation = function(context, reveal) {
 
         function townhall() {
             var hall = [-85.63645945147184, 41.942986488012565];
-            var point = context.projection(hall);
 
-            if (point[0] < 0 || point[0] > window.innerWidth - 200 ||
-                point[1] < 0 || point[1] > window.innerHeight) {
+            var point = context.projection(hall);
+            if (point[0] < 0 || point[0] > rect.width ||
+                point[1] < 0 || point[1] > rect.height) {
                 context.map().center(hall);
-                point = context.projection(hall);
             }
-            var box = iD.ui.intro.pointBox(point);
+
+            var box = iD.ui.intro.pointBox(hall, context);
             reveal(box, t('intro.navigation.select'));
 
             context.map().on('move.intro', function() {
-                var box = iD.ui.intro.pointBox(context.projection(hall));
+                var box = iD.ui.intro.pointBox(hall, context);
                 reveal(box, t('intro.navigation.select'), {duration: 0});
             });
         }

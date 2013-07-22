@@ -21,12 +21,12 @@ iD.ui.intro.area = function(context, reveal) {
             context.on('enter.intro', drawArea);
 
             var padding = 120 * Math.pow(2, context.map().zoom() - 19);
-            var pointBox = iD.ui.intro.pad(context.projection(corner), padding);
+            var pointBox = iD.ui.intro.pad(corner, padding, context);
             reveal(pointBox, t('intro.areas.corner'));
 
             context.map().on('move.intro', function() {
                 padding = 120 * Math.pow(2, context.map().zoom() - 19);
-                pointBox = iD.ui.intro.pad(context.projection(corner), padding);
+                pointBox = iD.ui.intro.pad(corner, padding, context);
                 reveal(pointBox, t('intro.areas.corner'), {duration: 0});
             });
         }
@@ -36,12 +36,12 @@ iD.ui.intro.area = function(context, reveal) {
             context.on('enter.intro', enterSelect);
 
             var padding = 150 * Math.pow(2, context.map().zoom() - 19);
-            var pointBox = iD.ui.intro.pad(context.projection(playground), padding);
+            var pointBox = iD.ui.intro.pad(playground, padding, context);
             reveal(pointBox, t('intro.areas.place'));
 
             context.map().on('move.intro', function() {
                 padding = 150 * Math.pow(2, context.map().zoom() - 19);
-                pointBox = iD.ui.intro.pad(context.projection(playground), padding);
+                pointBox = iD.ui.intro.pad(playground, padding, context);
                 reveal(pointBox, t('intro.areas.place'), {duration: 0});
             });
         }
