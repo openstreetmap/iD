@@ -1665,7 +1665,7 @@ button.minor.tag-reference-loading {
 
 .tag-reference-body p,
 .tag-reference-body img {
-    padding-top: 20px;
+    margin-top: 20px;
 }
 
 .tag-reference-body p:last-child {
@@ -1688,7 +1688,7 @@ button.minor.tag-reference-loading {
 
 .preset-list .tag-reference-body p,
 .preset-list .tag-reference-body img {
-    padding-top: 10px;
+    margin-top: 10px;
 }
 
 .raw-tag-editor .tag-reference-body {
