@@ -789,6 +789,10 @@
                 "name": "Car Wash",
                 "terms": ""
             },
+            "amenity/childcare": {
+                "name": "Childcare",
+                "terms": "nursery,orphanage,playgroup"
+            },
             "amenity/cinema": {
                 "name": "Cinema",
                 "terms": "big screen,bijou,cine,drive-in,film,flicks,motion pictures,movie house,movie theater,moving pictures,nabes,photoplay,picture show,pictures,playhouse,show,silver screen"
@@ -835,7 +839,7 @@
             },
             "amenity/kindergarten": {
                 "name": "Kindergarten",
-                "terms": "preschool,nursery,childcare,playgroup"
+                "terms": "nursery,preschool"
             },
             "amenity/library": {
                 "name": "Library",
@@ -1271,6 +1275,10 @@
             },
             "leisure": {
                 "name": "Leisure",
+                "terms": ""
+            },
+            "leisure/dog_park": {
+                "name": "Dog Park",
                 "terms": ""
             },
             "leisure/garden": {

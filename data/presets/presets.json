@@ -349,6 +349,27 @@
         ],
         "name": "Car Wash"
     },
+    "amenity/childcare": {
+        "icon": "school",
+        "fields": [
+            "building_area",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [
+            "nursery",
+            "orphanage",
+            "playgroup"
+        ],
+        "tags": {
+            "amenity": "childcare"
+        },
+        "name": "Childcare"
+    },
     "amenity/cinema": {
         "icon": "cinema",
         "fields": [
@@ -567,10 +588,8 @@
             "area"
         ],
         "terms": [
-            "preschool",
             "nursery",
-            "childcare",
-            "playgroup"
+            "preschool"
         ],
         "tags": {
             "amenity": "kindergarten"
@@ -2387,6 +2406,17 @@
             "leisure": "*"
         },
         "name": "Leisure"
+    },
+    "leisure/dog_park": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "leisure": "dog_park"
+        },
+        "name": "Dog Park"
     },
     "leisure/garden": {
         "icon": "garden",
