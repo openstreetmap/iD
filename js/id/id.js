@@ -73,8 +73,8 @@ window.iD = function () {
     context.intersects = history.intersects;
 
     context.flush = function() {
-        history.reset();
         connection.flush();
+        history.reset();
         return context;
     };
 
