@@ -49,15 +49,6 @@ iD.ui.Success = function(context) {
                     encodeURIComponent(context.connection().changesetURL(changeset.id));
             })
             .text(t('success.facebook'));
-
-        var section = body.append('div')
-            .attr('class', 'modal-section cf');
-
-        section.append('button')
-            .attr('class', 'action col2')
-            .on('click', event.cancel)
-            .text(t('success.okay'))
-            .node().focus();
     }
 
     success.changeset = function(_) {

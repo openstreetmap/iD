@@ -668,6 +668,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .sidebar-component .body {
+    width: 100%;
     overflow: auto;
     top: 60px;
     bottom: 0;
