@@ -1,24 +1,23 @@
 iD.Tree = function(graph) {
 
     var rtree = rbush(),
-        m = 1000 * 1000 * 100,
         head = graph,
         queuedCreated = [],
         queuedModified = [],
         rectangles = {},
-        x, y, dx, dy, rebased;
+        rebased;
 
     function extentRectangle(extent) {
         return [
-            ~~(m * extent[0][0]),
-            ~~(m * extent[0][1]),
-            ~~(m * extent[1][0]),
-            ~~(m * extent[1][1])
+            extent[0][0],
+            extent[0][1],
+            extent[1][0],
+            extent[1][1]
         ];
     }
 
     function entityRectangle(entity) {
-        var rect = extentRectangle(entity.extent(head), entity.id);
+        var rect = extentRectangle(entity.extent(head));
         rect.id = entity.id;
         rectangles[entity.id] = rect;
         return rect;
