@@ -119,6 +119,10 @@ window.iD = function () {
         }
     };
 
+    context.editable = function() {
+        return map.editable() && mode && mode.id !== 'save';
+    };
+
     /* Behaviors */
     context.install = function(behavior) {
         context.surface().call(behavior);

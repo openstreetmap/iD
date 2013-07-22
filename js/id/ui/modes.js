@@ -25,14 +25,13 @@ iD.ui.Modes = function(context) {
                    return iD.ui.tooltipHtml(mode.description, mode.key);
                }));
 
-        function disableTooHigh() {
-            buttons.attr('disabled', context.map().editable() ? null : 'disabled');
-        }
-
         context.map()
-            .on('move.modes', _.debounce(disableTooHigh, 500));
+            .on('move.modes', _.debounce(update, 500));
 
-        disableTooHigh();
+        context
+            .on('enter.modes', update);
+
+        update();
 
         buttons.append('span')
             .attr('class', function(mode) { return mode.id + ' icon icon-pre-text'; });
@@ -55,10 +54,14 @@ iD.ui.Modes = function(context) {
         var keybinding = d3.keybinding('mode-buttons');
 
         modes.forEach(function(m) {
-            keybinding.on(m.key, function() { if (context.map().editable()) context.enter(m); });
+            keybinding.on(m.key, function() { if (context.editable()) context.enter(m); });
         });
 
         d3.select(document)
             .call(keybinding);
+
+        function update() {
+            buttons.property('disabled', !context.editable());
+        }
     };
 };

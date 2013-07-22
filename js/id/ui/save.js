@@ -2,22 +2,28 @@ iD.ui.Save = function(context) {
     var history = context.history(),
         key = iD.ui.cmd('⌘S');
 
+    function saving() {
+        return context.mode().id === 'save';
+    }
+
     function save() {
         d3.event.preventDefault();
-        if (!history.hasChanges()) return;
-        context.enter(iD.modes.Save(context));
+        if (!saving() && history.hasChanges()) {
+            context.enter(iD.modes.Save(context));
+        }
     }
 
     return function(selection) {
+        var tooltip = bootstrap.tooltip()
+            .placement('bottom')
+            .html(true)
+            .title(iD.ui.tooltipHtml(t('save.no_changes'), key));
+
         var button = selection.append('button')
             .attr('class', 'save col12 disabled')
             .attr('tabindex', -1)
             .on('click', save)
-            .attr('data-original-title',
-                iD.ui.tooltipHtml(t('save.no_changes'), key))
-            .call(bootstrap.tooltip()
-                .placement('bottom')
-                .html(true));
+            .call(tooltip);
 
         button.append('span')
             .attr('class', 'label')
@@ -41,10 +47,8 @@ iD.ui.Save = function(context) {
                 return;
             numChanges = _;
 
-            button
-                .attr('data-original-title',
-                    iD.ui.tooltipHtml(t(numChanges > 0 ?
-                        'save.help' : 'save.no_changes'), key));
+            tooltip.title(iD.ui.tooltipHtml(t(numChanges > 0 ?
+                    'save.help' : 'save.no_changes'), key))
 
             button
                 .classed('disabled', numChanges === 0)
@@ -52,6 +56,11 @@ iD.ui.Save = function(context) {
 
             button.select('span.count')
                 .text(numChanges);
+        });
+
+        context.on('enter.save', function() {
+            button.property('disabled', saving());
+            if (saving()) button.call(tooltip.hide);
         });
     };
 };

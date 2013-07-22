@@ -68,9 +68,6 @@ iD.modes.Save = function(context) {
         iD.modes.DragNode(context).behavior];
 
     mode.enter = function() {
-        context.container().selectAll('#bar button.save')
-            .classed('active', true);
-
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });
@@ -81,9 +78,6 @@ iD.modes.Save = function(context) {
     };
 
     mode.exit = function() {
-        context.container().selectAll('#bar button.save')
-            .classed('active', false);
-
         behaviors.forEach(function(behavior) {
             context.uninstall(behavior);
         });
