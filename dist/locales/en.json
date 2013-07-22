@@ -1019,12 +1019,32 @@
                 "name": "Apartments",
                 "terms": ""
             },
+            "building/commercial": {
+                "name": "Commercial Building",
+                "terms": ""
+            },
             "building/entrance": {
                 "name": "Entrance",
                 "terms": ""
             },
+            "building/garage": {
+                "name": "Garage",
+                "terms": ""
+            },
             "building/house": {
                 "name": "House",
+                "terms": ""
+            },
+            "building/hut": {
+                "name": "Hut",
+                "terms": ""
+            },
+            "building/industrial": {
+                "name": "Industrial Building",
+                "terms": ""
+            },
+            "building/residential": {
+                "name": "Residential Building",
                 "terms": ""
             },
             "emergency/phone": {

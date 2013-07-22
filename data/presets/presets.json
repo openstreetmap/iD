@@ -1403,6 +1403,18 @@
         },
         "name": "Apartments"
     },
+    "building/commercial": {
+        "icon": "commercial",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "building": "commercial"
+        },
+        "name": "Commercial Building"
+    },
     "building/entrance": {
         "geometry": [
             "vertex"
@@ -1413,7 +1425,19 @@
         "name": "Entrance",
         "searchable": false
     },
+    "building/garage": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "building": "garage"
+        },
+        "name": "Garage"
+    },
     "building/house": {
+        "icon": "building",
         "fields": [
             "address",
             "levels"
@@ -1426,6 +1450,49 @@
             "building": "house"
         },
         "name": "House"
+    },
+    "building/hut": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "building": "hut"
+        },
+        "name": "Hut"
+    },
+    "building/industrial": {
+        "icon": "industrial",
+        "fields": [
+            "address",
+            "levels"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "building": "industrial"
+        },
+        "name": "Industrial Building"
+    },
+    "building/residential": {
+        "icon": "building",
+        "fields": [
+            "address",
+            "levels"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "building": "residential"
+        },
+        "name": "Residential Building"
     },
     "emergency/phone": {
         "icon": "emergency-telephone",

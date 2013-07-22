@@ -1,0 +1,12 @@
+{
+    "icon": "commercial",
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "building": "commercial"
+    },
+    "name": "Commercial Building"
+}

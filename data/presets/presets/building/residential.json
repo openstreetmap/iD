@@ -6,10 +6,11 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
-        "building": "house"
+        "building": "residential"
     },
-    "name": "House"
+    "name": "Residential Building"
 }

@@ -1,15 +1,16 @@
 {
-    "icon": "building",
+    "icon": "industrial",
     "fields": [
         "address",
         "levels"
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
-        "building": "house"
+        "building": "industrial"
     },
-    "name": "House"
+    "name": "Industrial Building"
 }
