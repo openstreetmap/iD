@@ -202,7 +202,7 @@ iD.ui.preset.localized = function(field, context) {
 
         var postfixed = [];
         for (var i in tags) {
-            var m = i.match(new RegExp(field.key + ':([a-z]+)'));
+            var m = i.match(new RegExp(field.key + ':([a-zA-Z_-]+)$'));
             if (m && m[1]) {
                 postfixed.push({ lang: m[1], value: tags[i]});
             }
