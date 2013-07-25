@@ -55,8 +55,10 @@ iD.Background = function(context) {
 
     background.sources = function(extent) {
         return backgroundSources.filter(function(layer) {
-            return !layer.data.extent ||
-                iD.geo.Extent(layer.data.extent).intersects(extent);
+            return !layer.data.extents ||
+                layer.data.extents.some(function(layerExtent) {
+                    return iD.geo.Extent(layerExtent).intersects(extent);
+                });
         });
     };
 
