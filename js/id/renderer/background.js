@@ -22,13 +22,13 @@ iD.Background = function(context) {
         });
     }
 
-    function updateHash() {
+    function updateImagery() {
         var b = background.baseLayerSource().data,
             o = overlayLayers.map(function (d) { return d.source().data.sourcetag; }).join(','),
             q = iD.util.stringQs(location.hash.substring(1));
 
-        var tag = b && b.sourcetag;
-        if (!tag && b && b.name === 'Custom') {
+        var tag = b.sourcetag;
+        if (!tag && b.name === 'Custom') {
             tag = 'custom:' + b.template;
         }
 
@@ -45,6 +45,23 @@ iD.Background = function(context) {
         }
 
         location.replace('#' + iD.util.qsString(q, true));
+
+        var imageryUsed = [];
+        if (b.name === 'Custom') {
+            imageryUsed.push('Custom (' + b.template + ')');
+        } else {
+            imageryUsed.push(b.sourcetag || b.name);
+        }
+
+        overlayLayers.forEach(function (d) {
+            imageryUsed.push(d.source().data.sourcetag || d.source().data.name);
+        });
+
+        if (background.showsGpxLayer()) {
+            imageryUsed.push('Local GPX');
+        }
+
+        context.history().imageryUsed(imageryUsed);
     }
 
     function background(selection) {
@@ -101,15 +118,7 @@ iD.Background = function(context) {
 
         baseLayer.source(d);
         dispatch.change();
-        updateHash();
-
-        if (d.data.name === 'Custom (customized)') {
-            context.history()
-                .imagery_used('Custom (' + d.data.template + ')');
-        } else {
-            context.history()
-                .imagery_used(d.data.sourcetag || d.data.name);
-        }
+        updateImagery();
 
         return background;
     };
@@ -150,7 +159,7 @@ iD.Background = function(context) {
             if (layer.source() === d) {
                 overlayLayers.splice(i, 1);
                 dispatch.change();
-                updateHash();
+                updateImagery();
                 return;
             }
         }
@@ -162,7 +171,7 @@ iD.Background = function(context) {
 
         overlayLayers.push(layer);
         dispatch.change();
-        updateHash();
+        updateImagery();
     };
 
     background.nudge = function(d, zoom) {

@@ -203,9 +203,9 @@ iD.Connection = function() {
         };
     };
 
-    connection.changesetTags = function(comment, imagery_used) {
+    connection.changesetTags = function(comment, imageryUsed) {
         var tags = {
-            imagery_used: imagery_used.join(';'),
+            imagery_used: imageryUsed.join(';'),
             created_by: 'iD ' + iD.version
         };
 
@@ -216,12 +216,12 @@ iD.Connection = function() {
         return tags;
     };
 
-    connection.putChangeset = function(changes, comment, imagery_used, callback) {
+    connection.putChangeset = function(changes, comment, imageryUsed, callback) {
         oauth.xhr({
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
-                content: JXON.stringify(connection.changesetJXON(connection.changesetTags(comment, imagery_used)))
+                content: JXON.stringify(connection.changesetJXON(connection.changesetTags(comment, imageryUsed)))
             }, function(err, changeset_id) {
                 if (err) return callback(err);
                 oauth.xhr({

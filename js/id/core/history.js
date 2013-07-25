@@ -1,6 +1,6 @@
 iD.History = function(context) {
     var stack, index, tree,
-        imagery_used = 'Bing',
+        imageryUsed = ['Bing'],
         dispatch = d3.dispatch('change', 'undone', 'redone'),
         lock = false;
 
@@ -21,7 +21,7 @@ iD.History = function(context) {
         return {
             graph: graph,
             annotation: annotation,
-            imagery_used: imagery_used
+            imageryUsed: imageryUsed
         };
     }
 
@@ -162,11 +162,18 @@ iD.History = function(context) {
             return this.difference().length();
         },
 
-        imagery_used: function(source) {
-            if (source) imagery_used = source;
-            else return _.without(
-                    _.unique(_.pluck(stack.slice(1, index + 1), 'imagery_used')),
-                    undefined, 'Custom');
+        imageryUsed: function(sources) {
+            if (sources) {
+                imageryUsed = sources;
+                return history;
+            } else {
+                return _(stack.slice(1, index + 1))
+                    .pluck('imageryUsed')
+                    .flatten()
+                    .unique()
+                    .without(undefined, 'Custom')
+                    .value();
+            }
         },
 
         reset: function() {
@@ -182,7 +189,7 @@ iD.History = function(context) {
 
             var s = stack.map(function(i) {
                 var x = { entities: i.graph.entities };
-                if (i.imagery_used) x.imagery_used = i.imagery_used;
+                if (i.imageryUsed) x.imageryUsed = i.imageryUsed;
                 if (i.annotation) x.annotation = i.annotation;
                 return x;
             });

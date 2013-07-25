@@ -24,7 +24,7 @@ iD.modes.Save = function(context) {
         context.connection().putChangeset(
             context.history().changes(iD.actions.DiscardTags(context.history().difference())),
             e.comment,
-            context.history().imagery_used(),
+            context.history().imageryUsed(),
             function(err, changeset_id) {
                 loading.close();
                 if (err) {
