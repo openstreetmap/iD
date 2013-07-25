@@ -50,21 +50,20 @@ iD.ui.FeatureList = function(context) {
                 graph = context.graph(),
                 q = search.property('value').toLowerCase();
 
+            if (!q) return result;
+
             function addEntity(entity) {
                 if (entity.id in entities || result.length > 200)
                     return;
 
                 entities[entity.id] = true;
 
-                var preset = context.presets().match(entity, graph),
-                    name = iD.util.displayName(entity) || '';
-
-                if (!q || name.toLowerCase().indexOf(q) >= 0 ||
-                    preset.name().toLowerCase().indexOf(q) >= 0) {
+                var name = iD.util.displayName(entity) || '';
+                if (name.toLowerCase().indexOf(q) >= 0) {
                     result.push({
                         entity: entity,
                         geometry: context.geometry(entity.id),
-                        preset: preset,
+                        preset: context.presets().match(entity, graph),
                         name: name
                     });
                 }
