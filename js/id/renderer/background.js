@@ -148,7 +148,9 @@ iD.Background = function(context) {
     };
 
     background.showsLayer = function(d) {
-        return d === baseLayer.source() || overlayLayers.some(function(l) { return l.source() === d; });
+        return d === baseLayer.source() ||
+            (d.data.name === 'Custom' && baseLayer.source().data.name === 'Custom') ||
+            overlayLayers.some(function(l) { return l.source() === d; });
     };
 
     background.toggleOverlayLayer = function(d) {
