@@ -169,20 +169,6 @@ iD.TileLayer = function(backgroundType) {
         return background;
     };
 
-    function setHash(source) {
-        var tag = source.data && source.data.sourcetag;
-        if (!tag && source.data && source.data.name === 'Custom') {
-            tag = 'custom:' + source.data.template;
-        }
-        var q = iD.util.stringQs(location.hash.substring(1));
-        if (tag) {
-            q[backgroundType] = tag;
-            location.replace('#' + iD.util.qsString(q, true));
-        } else {
-            location.replace('#' + iD.util.qsString(_.omit(q, backgroundType), true));
-        }
-    }
-
     background.source = function(_) {
         if (!arguments.length) return source;
         source = _;
@@ -193,7 +179,6 @@ iD.TileLayer = function(backgroundType) {
         }
         cache = {};
         tile.scaleExtent((source.data && source.data.scaleExtent) || [1, 20]);
-        setHash(source);
         return background;
     };
 

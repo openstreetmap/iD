@@ -22,6 +22,31 @@ iD.Background = function(context) {
         });
     }
 
+    function updateHash() {
+        var b = background.baseLayerSource().data,
+            o = overlayLayers.map(function (d) { return d.source().data.sourcetag; }).join(','),
+            q = iD.util.stringQs(location.hash.substring(1));
+
+        var tag = b && b.sourcetag;
+        if (!tag && b && b.name === 'Custom') {
+            tag = 'custom:' + b.template;
+        }
+
+        if (tag) {
+            q.background = tag;
+        } else {
+            delete q.background;
+        }
+
+        if (o) {
+            q.overlays = o;
+        } else {
+            delete q.overlays;
+        }
+
+        location.replace('#' + iD.util.qsString(q, true));
+    }
+
     function background(selection) {
         var base = selection.selectAll('.background-layer')
             .data([0]);
@@ -73,8 +98,11 @@ iD.Background = function(context) {
 
     background.baseLayerSource = function(d) {
         if (!arguments.length) return baseLayer.source();
+
         baseLayer.source(d);
         dispatch.change();
+        updateHash();
+
         if (d.data.name === 'Custom (customized)') {
             context.history()
                 .imagery_used('Custom (' + d.data.template + ')');
@@ -82,6 +110,7 @@ iD.Background = function(context) {
             context.history()
                 .imagery_used(d.data.sourcetag || d.data.name);
         }
+
         return background;
     };
 
@@ -121,6 +150,7 @@ iD.Background = function(context) {
             if (layer.source() === d) {
                 overlayLayers.splice(i, 1);
                 dispatch.change();
+                updateHash();
                 return;
             }
         }
@@ -132,6 +162,7 @@ iD.Background = function(context) {
 
         overlayLayers.push(layer);
         dispatch.change();
+        updateHash();
     };
 
     background.nudge = function(d, zoom) {
@@ -158,6 +189,12 @@ iD.Background = function(context) {
     } else {
         background.baseLayerSource(findSource(chosen) || findSource("Bing"));
     }
+
+    var overlays = (q.overlays || '').split(',');
+    overlays.forEach(function(overlay) {
+        overlay = findSource(overlay);
+        if (overlay) background.toggleOverlayLayer(overlay);
+    });
 
     return d3.rebind(background, dispatch, 'on');
 };
