@@ -25,7 +25,7 @@ iD.ui.Sidebar = function(context) {
 
                     inspectorWrap.call(inspector);
                 }
-            } else {
+            } else if (!current) {
                 featureListWrap.classed('inspector-hidden', false);
                 inspectorWrap.classed('inspector-hidden', true);
             }
@@ -45,7 +45,7 @@ iD.ui.Sidebar = function(context) {
 
                     inspectorWrap.call(inspector);
                 }
-            } else {
+            } else if (!current) {
                 featureListWrap.classed('inspector-hidden', false);
                 inspectorWrap.classed('inspector-hidden', true);
             }
@@ -54,6 +54,7 @@ iD.ui.Sidebar = function(context) {
         sidebar.show = function(component) {
             featureListWrap.classed('inspector-hidden', true);
             inspectorWrap.classed('inspector-hidden', true);
+            if (current) current.remove();
             current = selection.append('div')
                 .attr('class', 'sidebar-component')
                 .call(component);
@@ -61,7 +62,7 @@ iD.ui.Sidebar = function(context) {
 
         sidebar.hide = function() {
             featureListWrap.classed('inspector-hidden', false);
-            current.remove();
+            if (current) current.remove();
             current = null;
         };
     }

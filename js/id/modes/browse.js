@@ -5,7 +5,7 @@ iD.modes.Browse = function(context) {
         title: t('modes.browse.title'),
         description: t('modes.browse.description'),
         key: '1'
-    };
+    }, sidebar;
 
     var behaviors = [
         iD.behavior.Hover(context)
@@ -21,13 +21,28 @@ iD.modes.Browse = function(context) {
 
         // Get focus on the body.
         document.activeElement.blur();
-        context.ui().sidebar.select(null);
+
+        if (sidebar) {
+            context.ui().sidebar.show(sidebar);
+        } else {
+            context.ui().sidebar.select(null);
+        }
     };
 
     mode.exit = function() {
         behaviors.forEach(function(behavior) {
             context.uninstall(behavior);
         });
+
+        if (sidebar) {
+            context.ui().sidebar.hide(sidebar);
+        }
+    };
+
+    mode.sidebar = function(_) {
+        if (!arguments.length) return sidebar;
+        sidebar = _;
+        return mode;
     };
 
     return mode;

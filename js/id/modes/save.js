@@ -45,16 +45,15 @@ iD.modes.Save = function(context) {
     }
 
     function success(e, changeset_id) {
-        context.ui().sidebar.hide(ui);
-
-        ui = iD.ui.Success(context)
-            .changeset({
-                id: changeset_id,
-                comment: e.comment
-            })
-            .on('cancel', cancel);
-
-        context.ui().sidebar.show(ui);
+        context.enter(iD.modes.Browse(context)
+            .sidebar(iD.ui.Success(context)
+                .changeset({
+                    id: changeset_id,
+                    comment: e.comment
+                })
+                .on('cancel', function(ui) {
+                    context.ui().sidebar.hide(ui);
+                })));
     }
 
     var mode = {
