@@ -41,6 +41,7 @@ body {
 
 .spacer {
     height: 40px;
+    margin-right: 10px;
 }
 
 .limiter {
@@ -602,7 +603,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 #bar {
     position: fixed;
-    padding: 10px;
+    padding: 10px 0;
     left:0;
     top:0;
     right:0;
