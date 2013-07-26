@@ -37,33 +37,6 @@ iD.behavior.Hash = function(context) {
         }
     }
 
-    // the hash can declare that the map should select a feature, but it can
-    // do so before any features are loaded. thus wait for the feature to
-    // be loaded and then select
-    function willselect(id, hasMap) {
-        if (!hasMap) {
-            context.connection().loadEntity(id, function(error, entity) {
-                if (entity) {
-                    context.map().zoomTo(entity);
-                }
-            });
-        }
-
-        context.map().on('drawn.hash', function() {
-            if (!context.hasEntity(id)) return;
-            selectoff();
-            context.enter(iD.modes.Select(context, [id]));
-        });
-
-        context.on('enter.hash', function() {
-            if (context.mode().id !== 'browse') selectoff();
-        });
-    }
-
-    function selectoff() {
-        context.map().on('drawn.hash', null);
-    }
-
     function hash() {
         context.map()
             .on('move.hash', move);
@@ -73,7 +46,7 @@ iD.behavior.Hash = function(context) {
 
         if (location.hash) {
             var q = iD.util.stringQs(location.hash.substring(1));
-            if (q.id) willselect(q.id, q.map);
+            if (q.id) context.loadEntity(q.id, !q.map);
             hashchange();
             if (q.map) hash.hadHash = true;
         }

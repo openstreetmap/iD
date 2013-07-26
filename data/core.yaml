@@ -164,9 +164,8 @@ en:
     list: "Edits by {users}"
     truncated_list: "Edits by {users} and {count} others"
   geocoder:
-    title: Find a place
-    placeholder: Find a place
-    no_results: "Couldn't locate a place named '{name}'"
+    search: Continue search on server...
+    no_results: No results found
   geolocate:
     title: Show My Location
   inspector:

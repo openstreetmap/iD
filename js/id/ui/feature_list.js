@@ -1,4 +1,6 @@
 iD.ui.FeatureList = function(context) {
+    var geocodeResults;
+
     function featureList(selection) {
         var header = selection.append('div')
             .attr('class', 'header fillL cf');
@@ -14,6 +16,7 @@ iD.ui.FeatureList = function(context) {
         }
 
         function inputevent() {
+            geocodeResults = undefined;
             drawList();
         }
 
@@ -61,9 +64,10 @@ iD.ui.FeatureList = function(context) {
                 var name = iD.util.displayName(entity) || '';
                 if (name.toLowerCase().indexOf(q) >= 0) {
                     result.push({
+                        id: entity.id,
                         entity: entity,
                         geometry: context.geometry(entity.id),
-                        preset: context.presets().match(entity, graph),
+                        type: context.presets().match(entity, graph).name(),
                         name: name
                     });
                 }
@@ -78,22 +82,56 @@ iD.ui.FeatureList = function(context) {
                 addEntity(visible[i].__data__);
             }
 
+            (geocodeResults || []).forEach(function(d) {
+                result.push({
+                    id: iD.Entity.id.fromOSM(d.osm_type, d.osm_id),
+                    geometry: d.osm_type === 'relation' ? 'relation' : d.osm_type === 'way' ? 'line' : 'point',
+                    type: (d.type.charAt(0).toUpperCase() + d.type.slice(1)).replace('_', ' '),
+                    name: d.display_name,
+                    extent: new iD.geo.Extent(
+                        [parseFloat(d.boundingbox[3]), parseFloat(d.boundingbox[0])],
+                        [parseFloat(d.boundingbox[2]), parseFloat(d.boundingbox[1])])
+                })
+            });
+
             return result;
         }
 
         function drawList() {
-            list.classed('filtered', search.property('value').length);
+            var value = search.property('value');
+
+            list.classed('filtered', value.length);
+
+            var geocodeButton = list.selectAll('.geocode-item')
+                .data([0])
+                .enter().append('button')
+                .attr('class', 'geocode-item')
+                .on('click', geocode);
+
+            var label = geocodeButton.append('div')
+                .attr('class', 'label');
+
+            label.append('span')
+                .attr('class', 'entity-name');
+
+            var noResults = geocodeResults && geocodeResults.length === 0;
+
+            list.selectAll('.geocode-item')
+                .style('display', noResults || (value && geocodeResults === undefined) ? 'block' : 'none')
+                .property('disabled', noResults)
+                .selectAll('.entity-name')
+                .text(noResults ? t('geocoder.no_results') : t('geocoder.search'));
 
             var items = list.selectAll('.feature-list-item')
-                .data(features(), function(d) { return d.entity.id; });
+                .data(features(), function(d) { return d.id; });
 
-            var enter = items.enter().append('button')
+            var enter = items.enter().insert('button', '.geocode-item')
                 .attr('class', 'feature-list-item')
-                .on('mouseover', function(d) { mouseover(d.entity); })
-                .on('mouseout', function(d) { mouseout(); })
-                .on('click', function(d) { click(d.entity); });
+                .on('mouseover', mouseover)
+                .on('mouseout', mouseout)
+                .on('click', click);
 
-            var label = enter.append('div')
+            label = enter.append('div')
                 .attr('class', 'label');
 
             label.append('span')
@@ -101,7 +139,7 @@ iD.ui.FeatureList = function(context) {
 
             label.append('span')
                 .attr('class', 'entity-type')
-                .text(function(d) { return d.preset.name(); });
+                .text(function(d) { return d.type; });
 
             label.append('span')
                 .attr('class', 'entity-name')
@@ -117,8 +155,8 @@ iD.ui.FeatureList = function(context) {
                 .remove();
         }
 
-        function mouseover(entity) {
-            context.surface().selectAll(iD.util.entityOrMemberSelector([entity.id], context.graph()))
+        function mouseover(d) {
+            context.surface().selectAll(iD.util.entityOrMemberSelector([d.id], context.graph()))
                 .classed('hover', true);
         }
 
@@ -127,8 +165,20 @@ iD.ui.FeatureList = function(context) {
                 .classed('hover', false);
         }
 
-        function click(entity) {
-            context.enter(iD.modes.Select(context, [entity.id]));
+        function click(d) {
+            if (d.entity) {
+                context.enter(iD.modes.Select(context, [d.entity.id]));
+            } else {
+                context.loadEntity(d.id);
+            }
+        }
+
+        function geocode() {
+            var searchVal = encodeURIComponent(search.property('value'));
+            d3.json('http://nominatim.openstreetmap.org/search/' + searchVal + '?limit=10&format=json', function(err, resp) {
+                geocodeResults = resp || [];
+                drawList();
+            });
         }
     }
 

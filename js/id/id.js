@@ -119,6 +119,30 @@ window.iD = function () {
         }
     };
 
+    context.loadEntity = function(id, zoomTo) {
+        if (zoomTo !== false) {
+            connection.loadEntity(id, function(error, entity) {
+                if (entity) {
+                    map.zoomTo(entity);
+                }
+            });
+        }
+
+        map.on('drawn.loadEntity', function() {
+            if (!context.hasEntity(id)) return;
+            map.on('drawn.loadEntity', null);
+            context.on('enter.loadEntity', null);
+            context.enter(iD.modes.Select(context, [id]));
+        });
+
+        context.on('enter.loadEntity', function() {
+            if (mode.id !== 'browse') {
+                map.on('drawn.loadEntity', null);
+                context.on('enter.loadEntity', null);
+            }
+        });
+    };
+
     context.editable = function() {
         return map.editable() && mode && mode.id !== 'save';
     };

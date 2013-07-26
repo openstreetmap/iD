@@ -75,12 +75,6 @@ iD.ui = function(context) {
             .attr('class', 'map-control background-control')
             .call(iD.ui.Background(context));
 
-        if (!context.embed()) {
-            controls.append('div')
-                .attr('class', 'map-control geocode-control')
-                .call(iD.ui.Geocoder(context));
-        }
-
         controls.append('div')
             .attr('class', 'map-control help-control')
             .call(iD.ui.Help(context));
