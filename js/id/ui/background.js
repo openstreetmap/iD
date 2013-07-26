@@ -149,8 +149,9 @@ iD.ui.Background = function(context) {
         function toggle() {
             if (d3.event) d3.event.preventDefault();
             tooltip.hide(button);
-            setVisible(!button.classed('active'));
-            content.selectAll('.toggle-list label:first-child').node().focus();
+            var visible = !button.classed('active');
+            setVisible(visible);
+            if (visible) content.selectAll('.toggle-list label:first-child').node().focus();
         }
 
         function setVisible(show) {
