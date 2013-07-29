@@ -2594,7 +2594,8 @@ img.wiki-image {
 }
 /* Move over tooltips that are near the edge of screen */
 .add-point .tooltip {
-    left: -20px !important; }
+    left: 33.3333% !important; 
+}
 
 .curtain-tooltip.intro-points-add .tooltip-arrow,
 .add-point .tooltip .tooltip-arrow {
