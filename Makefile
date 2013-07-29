@@ -113,4 +113,4 @@ D3_FILES = \
 
 js/lib/d3.v3.js: $(D3_FILES)
 	node_modules/.bin/smash $(D3_FILES) > $@
-	@echo 'd3 rebuilt. Please reapply 7e2485d and 4da529f'
+	@echo 'd3 rebuilt. Please reapply 7e2485d, 4da529f, and 223974d'
