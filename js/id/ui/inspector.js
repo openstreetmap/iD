@@ -51,8 +51,10 @@ iD.ui.Inspector = function(context) {
                 .entityID(entityID));
 
         function showList(preset) {
+            var right = $wrap.style('right').indexOf('%') > 0 ? '-100%' : '-' + selection.style('width');
+
             $wrap.transition()
-                .style('right', '-100%');
+                .style('right', right);
 
             $presetPane.call(presetList
                 .preset(preset)
@@ -60,8 +62,10 @@ iD.ui.Inspector = function(context) {
         }
 
         function setPreset(preset) {
+            var right = $wrap.style('right').indexOf('%') > 0 ? '0%' : '0px';
+
             $wrap.transition()
-                .style('right', '0%');
+                .style('right', right);
 
             $editorPane.call(entityEditor
                 .preset(preset));
