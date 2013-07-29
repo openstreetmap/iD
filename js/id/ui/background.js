@@ -140,7 +140,7 @@ iD.ui.Background = function(context) {
         var content = selection.append('div')
                 .attr('class', 'fillL map-overlay content hide'),
             tooltip = bootstrap.tooltip()
-                .placement('right')
+                .placement('left')
                 .html(true)
                 .title(iD.ui.tooltipHtml(t('background.description'), key));
 
