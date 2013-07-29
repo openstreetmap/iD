@@ -192,7 +192,7 @@ iD.ui.Background = function(context) {
             shown = false;
 
         button.append('span')
-            .attr('class', 'layers icon');
+            .attr('class', 'icon layers light');
 
         opa.append('h4')
             .text(t('background.title'));

@@ -549,15 +549,17 @@ button.save.has-count .count::before {
 .icon.relation.route         { background-position: -540px 0;}
 .icon.relation.multipolygon  { background-position: -560px 0;}
 
-.icon.plus.light       { background-position: -240px -20px;}
-.icon.zoom-in          { background-position: -240px 0px;}
-.icon.zoom-out         { background-position: -260px 0px;}
 .icon.inspect.light    { background-position: -220px -20px;}
+.icon.plus.light       { background-position: -240px -20px;}
+.icon.zoom-in          { background-position: -240px -20px;}
+.icon.zoom-out         { background-position: -260px -20px;}
 .icon.geocode.light    { background-position: -280px -20px;}
-.icon.help.light       { background-position: -460px -20px;}
+.icon.layers.light     { background-position: -300px -20px;}
 .icon.avatar.light     { background-position: -320px -20px;}
 .icon.nearby.light     { background-position: -340px -20px;}
+.icon.geolocate.light  { background-position: -360px -20px;}
 .icon.bug.light        { background-position: -400px -20px;}
+.icon.help.light       { background-position: -460px -20px;}
 
 .icon.back.blue        { background-position: -420px -20px;}
 .icon.forward.blue     { background-position: -440px -20px;}
@@ -1759,7 +1761,7 @@ img.wiki-image {
 /* Map Controls */
 
 .map-controls {
-    right: 10px;
+    right: 0;
     top: 70px;
     width: 40px;
     position: fixed;
@@ -1768,13 +1770,16 @@ img.wiki-image {
 
 .map-control > button {
     width: 40px;
-    background-color: #FFF;
-    background-color: rgba(255, 255, 255, 0.8);
+    background: rgba(0,0,0,.5);
     border-radius: 0;
 }
 
 .map-control > button:hover {
-    background-color: #FFF;
+    background: rgba(0, 0, 0, .8);
+}
+
+.map-control > button.active:hover {
+    background: #7092ff;
 }
 
 .map-overlay {
@@ -1791,7 +1796,7 @@ img.wiki-image {
 /* Zoomer */
 
 .zoombuttons button.zoom-in {
-    border-radius: 4px 4px 0 0;
+    border-radius: 4px 0 0 0;
 }
 
 /* Background Settings */
@@ -1802,12 +1807,12 @@ img.wiki-image {
 }
 
 .background-control button {
-    border-radius: 4px 4px 0 0;
+    border-radius: 4px 0 0 0;
 }
 
 
 .background-control button.active {
-    border-radius: 0 4px 0 0;
+    border-radius: 0;
 }
 
 .background-control {
@@ -1958,13 +1963,13 @@ img.wiki-image {
 }
 
 .geolocate-control button {
-    border-radius: 0 0 4px 4px;
+    border-radius: 0 0 0 4px;
 }
 
 /* Help */
 
 .help-control button {
-    border-radius: 0 0 4px 4px;
+    border-radius: 0 0 0 4px;
 }
 
 .help-wrap {

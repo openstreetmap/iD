@@ -144,7 +144,7 @@ iD.ui.Help = function(context) {
             .call(tooltip);
 
         button.append('span')
-            .attr('class', 'icon help');
+            .attr('class', 'icon help light');
 
         context.surface().on('mousedown.help-outside', hide);
         context.container().on('mousedown.b.help-outside', hide);
