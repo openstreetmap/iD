@@ -1047,9 +1047,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-border {
     border-bottom: 1px solid #CCC
 }
+
 /* Preset form (hover mode) */
 
-.preset-input-wrap .label,
+.inspector-hover .checkselect label:last-of-type,
+.inspector-hover .preset-input-wrap .label,
 .inspector-hover input,
 .inspector-hover label {
     background: #ececec;
@@ -1364,6 +1366,7 @@ input[type=number] {
 
 .checkselect label:last-of-type {
     display: block;
+    background: white;
     padding: 5px 10px;
     color: #7092FF;
 }
