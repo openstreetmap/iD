@@ -183,11 +183,11 @@ input:focus {
 
 input[type="checkbox"],
 input[type="radio"] {
-    width: 20px;
-    margin-right: 5px;
-    margin-bottom: 3px;
-    vertical-align: bottom;
+    float: left;
+    width: 14px;
     height: 14px;
+    margin-right: 5px;
+    margin-top: 3px;
 }
 
 /* remove bottom border radius when combobox is open */
@@ -246,18 +246,14 @@ ul li { list-style: none;}
     position: relative;
     padding: 5px 10px;
     display:block;
-    width: 100%;
+    height: 30px;
     border-bottom: 1px solid #ccc;
     background-color: white;
-    height: 30px;
     color: #7092FF;
     cursor: pointer;
        -moz-transition: all 100ms;
          -o-transition: all 100ms;
             transition: all 100ms;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 .toggle-list > label:hover {
@@ -277,9 +273,19 @@ ul li { list-style: none;}
     border-radius: 3px;
 }
 
-.toggle-list > label.remove span {
+.toggle-list label > span { 
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.toggle-list > label.remove span.icon {
+    display: block;
+    width: 14px;
+    float: left;
     margin-right: 5px;
-    background-position: -201px 0;
+    background-position: -204px 0;
 }
 
 .toggle-list > label.active {
@@ -1950,6 +1956,7 @@ img.wiki-image {
 
 .background-control .layer-toggle-gpx .layer-extent {
     border-left: 1px solid #CCC;
+    border-radius: 0 4px 4px 0;
 }
 
 .background-control .layer-toggle-gpx.selected .layer-extent {

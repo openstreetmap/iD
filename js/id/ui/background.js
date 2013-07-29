@@ -76,7 +76,7 @@ iD.ui.Background = function(context) {
                 .filter(function(d) { return d.data.description; })
                 .call(bootstrap.tooltip()
                     .title(function(d) { return d.data.description; })
-                    .placement('right')
+                    .placement('left')
                 );
 
             layerInner.append('input')
@@ -232,7 +232,7 @@ iD.ui.Background = function(context) {
 
         gpxLayerItem.call(bootstrap.tooltip()
             .title(t('gpx.drag_drop'))
-            .placement('right'));
+            .placement('left'));
 
         gpxLayerItem.append('input')
             .attr('type', 'checkbox')
@@ -292,7 +292,7 @@ iD.ui.Background = function(context) {
 
         resetButton.call(bootstrap.tooltip()
             .title(t('background.reset'))
-            .placement('right'));
+            .placement('bottom'));
 
         context.map()
             .on('move.background-update', _.debounce(update, 1000));
