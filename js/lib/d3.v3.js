@@ -521,6 +521,11 @@ function d3_eventPreventDefault() {
   d3.event.preventDefault();
 }
 
+function d3_eventCancel() {
+  d3.event.preventDefault();
+  d3.event.stopPropagation();
+}
+
 function d3_eventSource() {
   var e = d3.event, s;
   while (s = e.sourceEvent) e = s;
@@ -1383,7 +1388,7 @@ function d3_event_dragSuppress() {
     style[d3_event_dragSelect] = select;
     if (suppressClick) { // suppress the next click, but only if it’s immediate
       function off() { w.on(click, null); }
-      w.on(click, function() { d3_eventPreventDefault(); off(); }, true);
+      w.on(click, function() { d3_eventCancel(); off(); }, true);
       setTimeout(off, 0);
     }
   };
