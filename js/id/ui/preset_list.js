@@ -143,7 +143,8 @@ iD.ui.PresetList = function(context) {
 
             box = selection.append('div')
                 .attr('class', 'subgrid col12')
-                .style('max-height', '0px');
+                .style('max-height', '0px')
+                .style('opacity', 0);
 
             box.append('div')
                 .attr('class', 'arrow');
