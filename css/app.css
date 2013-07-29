@@ -524,7 +524,7 @@ button.save.has-count .count::before {
 }
 
 /* Definitions for every icon */
-.icon.browse     { background-position:   0 0;}
+.icon.alert     { background-position:   0 0;}
 .icon.point,
 .icon.add-point  { background-position: -20px 0;}
 .icon.line,
@@ -570,7 +570,7 @@ button.save.has-count .count::before {
 .icon.back.blue        { background-position: -420px -20px;}
 .icon.forward.blue     { background-position: -440px -20px;}
 
-button[disabled] .icon.browse     { background-position:   0 -40px;}
+button[disabled] .icon.alert      { background-position:   0 -40px;}
 button[disabled] .icon.add-point  { background-position: -20px -40px;}
 button[disabled] .icon.add-line   { background-position: -40px -40px;}
 button[disabled] .icon.add-area   { background-position: -60px -40px;}
