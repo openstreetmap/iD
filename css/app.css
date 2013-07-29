@@ -2589,7 +2589,7 @@ img.wiki-image {
 }
 
 /* Uncramp map-control tooltips */
-.map-control .tooltip.right {
+.map-control .tooltip {
     min-width: 160px;
 }
 /* Move over tooltips that are near the edge of screen */
