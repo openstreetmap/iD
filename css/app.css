@@ -2433,7 +2433,7 @@ img.wiki-image {
 
 .tooltip.left {
     margin-left: -20px;
-    text-align: center;
+    text-align: right;
 }
 
 .tooltip-inner {
