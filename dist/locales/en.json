@@ -205,8 +205,9 @@
         "truncated_list": "Edits by {users} and {count} others"
     },
     "geocoder": {
-        "search": "Continue search on server...",
-        "no_results": "No results found"
+        "search": "Search worldwide...",
+        "no_results_visible": "No results in visible map area",
+        "no_results_worldwide": "No results found"
     },
     "geolocate": {
         "title": "Show My Location"

@@ -98,32 +98,47 @@ iD.ui.FeatureList = function(context) {
         }
 
         function drawList() {
-            var value = search.property('value');
+            var value = search.property('value'),
+                results = features();
 
             list.classed('filtered', value.length);
 
-            var geocodeButton = list.selectAll('.geocode-item')
+            var noResultsWorldwide = geocodeResults && geocodeResults.length === 0;
+
+            var resultsIndicator = list.selectAll('.no-results-item')
+                .data([0])
+                .enter().append('button')
+                .property('disabled', true)
+                .attr('class', 'no-results-item');
+
+            resultsIndicator.append('span')
+                .attr('class', 'icon alert');
+
+            resultsIndicator.append('span')
+                .attr('class', 'entity-name');
+
+            list.selectAll('.no-results-item .entity-name')
+                .text(noResultsWorldwide ? t('geocoder.no_results_worldwide') : t('geocoder.no_results_visible'));
+
+            list.selectAll('.geocode-item')
                 .data([0])
                 .enter().append('button')
                 .attr('class', 'geocode-item')
-                .on('click', geocode);
+                .on('click', geocode)
+                .append('div')
+                .attr('class', 'label')
+                .append('span')
+                .attr('class', 'entity-name')
+                .text(t('geocoder.search'));
 
-            var label = geocodeButton.append('div')
-                .attr('class', 'label');
-
-            label.append('span')
-                .attr('class', 'entity-name');
-
-            var noResults = geocodeResults && geocodeResults.length === 0;
+            list.selectAll('.no-results-item')
+                .style('display', (value.length && !results.length) ? 'block' : 'none');
 
             list.selectAll('.geocode-item')
-                .style('display', noResults || (value && geocodeResults === undefined) ? 'block' : 'none')
-                .property('disabled', noResults)
-                .selectAll('.entity-name')
-                .text(noResults ? t('geocoder.no_results') : t('geocoder.search'));
+                .style('display', (value && geocodeResults === undefined) ? 'block' : 'none');
 
             var items = list.selectAll('.feature-list-item')
-                .data(features(), function(d) { return d.id; });
+                .data(results, function(d) { return d.id; });
 
             var enter = items.enter().insert('button', '.geocode-item')
                 .attr('class', 'feature-list-item')
@@ -131,7 +146,7 @@ iD.ui.FeatureList = function(context) {
                 .on('mouseout', mouseout)
                 .on('click', click);
 
-            label = enter.append('div')
+            var label = enter.append('div')
                 .attr('class', 'label');
 
             label.append('span')

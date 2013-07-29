@@ -765,6 +765,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     width:100%;
 }
 
+.no-results-item,
 .geocode-item,
 .feature-list-item {
     width: 100%;
