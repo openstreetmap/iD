@@ -1,3 +1,19 @@
+## 1.1.0rc1
+
+* Custom layers support TMS-flipped Y coordinate with {ty} replacement.
+* Allow to join more than two ways (#649)
+* Many preset additions and improvements
+* Fix Japanese language input (#1594)
+* Prevent merging over restriction relations (#1512)
+* Support multiple overlay layers
+* Fix name field for suffixed ISO 639-1 codes (#1628)
+* Add ability to create a new relation (#1576)
+* Permit translating all preset term lists (#1633)
+* Include GPX and overlay layers in imagery_used (#1463)
+* Move sidebar to left, map controls to right
+* Rework search UI and consolidate with geocoder
+* More dramatic different between hover and active edit feature pane
+
 ## 1.1.0beta1
 
 * Performance improvements
