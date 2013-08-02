@@ -1,4 +1,8 @@
 {
+    "fields": [
+        "artwork_type",
+        "artist"
+    ],
     "icon": "art-gallery",
     "geometry": [
         "point",
