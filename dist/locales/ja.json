@@ -30,7 +30,8 @@
         "add": {
             "annotation": {
                 "point": "ポイントの追加",
-                "vertex": "ウェイへのノード追加"
+                "vertex": "ウェイへのノード追加",
+                "relation": "リレーションを追加しました。"
             }
         },
         "start": {
@@ -204,9 +205,9 @@
         "truncated_list": "{users} とその他 {count} 人による編集"
     },
     "geocoder": {
-        "title": "特定地点を検索",
-        "placeholder": "対象地点の名称",
-        "no_results": "'{name}' という名称の地点が見つかりません"
+        "search": "世界中のデータから検索",
+        "no_results_visible": "表示中のエリアからの検索結果はありませんでした",
+        "no_results_worldwide": "検索結果がありません"
     },
     "geolocate": {
         "title": "編集画面を現在地へ移動"
@@ -217,8 +218,9 @@
         "show_more": "次を表示",
         "view_on_osm": "openstreetmap.orgで確認",
         "all_tags": "すべてのタグ",
-        "all_members": "全てのメンバー",
-        "all_relations": "全てのリレーション",
+        "all_members": "すべてのメンバー",
+        "all_relations": "すべてのリレーション",
+        "new_relation": "新しいリレーション...",
         "role": "役割",
         "choose": "地物の種類を選択",
         "results": "検索結果{n}件: {search}",
@@ -228,7 +230,7 @@
         "search": "検索",
         "unknown": "不明",
         "incomplete": "<ダウンロード未完了>",
-        "feature_list": "地物リスト",
+        "feature_list": "地物を検索",
         "edit": "地物を編集"
     },
     "background": {
@@ -711,11 +713,10 @@
             },
             "aeroway/aerodrome": {
                 "name": "空港",
-                "terms": "航空機,空港,飛行場"
+                "terms": "空港,飛行場"
             },
             "aeroway/apron": {
-                "name": "エプロン",
-                "terms": "スロープ"
+                "name": "エプロン"
             },
             "aeroway/gate": {
                 "name": "空港ゲート"
@@ -724,19 +725,16 @@
                 "name": "格納庫"
             },
             "aeroway/helipad": {
-                "name": "ヘリポート",
-                "terms": "ヘリコプター,ヘリポート,ヘリ発着場"
+                "name": "ヘリポート"
             },
             "aeroway/runway": {
-                "name": "滑走路",
-                "terms": "離着陸場"
+                "name": "滑走路"
             },
             "aeroway/taxiway": {
                 "name": "航空機誘導路"
             },
             "aeroway/terminal": {
-                "name": "空港ターミナル",
-                "terms": "空港, 発着場"
+                "name": "空港ターミナル"
             },
             "amenity": {
                 "name": "(公共)施設"
@@ -745,8 +743,7 @@
                 "name": "ATM"
             },
             "amenity/bank": {
-                "name": "銀行",
-                "terms": "資金調達,会計事務所,信用組合,受託銀行,ファンド,投資信託,準備銀行"
+                "name": "銀行"
             },
             "amenity/bar": {
                 "name": "バー"
@@ -761,8 +758,7 @@
                 "name": "レンタル自転車店"
             },
             "amenity/cafe": {
-                "name": "カフェ",
-                "terms": "コーヒー,紅茶,喫茶店"
+                "name": "カフェ"
             },
             "amenity/car_rental": {
                 "name": "レンタカー"
@@ -773,9 +769,11 @@
             "amenity/car_wash": {
                 "name": "車の洗浄"
             },
+            "amenity/childcare": {
+                "name": "保育施設"
+            },
             "amenity/cinema": {
-                "name": "映画館",
-                "terms": "映画館,上映施設,スクリーン,銀幕"
+                "name": "映画館"
             },
             "amenity/college": {
                 "name": "単科大学"
@@ -784,8 +782,7 @@
                 "name": "裁判所"
             },
             "amenity/drinking_water": {
-                "name": "水飲み場",
-                "terms": "飲料泉, 持ち運び用水道"
+                "name": "水飲み場"
             },
             "amenity/embassy": {
                 "name": "大使館"
@@ -806,12 +803,10 @@
                 "name": "墓地"
             },
             "amenity/hospital": {
-                "name": "病院",
-                "terms": "クリニック,緊急医療施設,健保サービス,ホスピス,診療所,老人ホーム,療養所,病室,外科医,病棟"
+                "name": "病院"
             },
             "amenity/kindergarten": {
-                "name": "幼稚園",
-                "terms": "幼稚園, 保育園, 育児施設, 一時預かり, 保育施設"
+                "name": "幼稚園"
             },
             "amenity/library": {
                 "name": "図書館"
@@ -826,32 +821,25 @@
                 "name": "薬局, ドラッグストア"
             },
             "amenity/place_of_worship": {
-                "name": "宗教施設",
-                "terms": "修道院,会堂,礼拝堂,聖堂,内陣,教会,チャペル,祈祷所,神の家,祈りの場所,モスク,神社,寺院,シナゴーグ"
+                "name": "宗教施設"
             },
             "amenity/place_of_worship/buddhist": {
-                "name": "仏閣",
-                "terms": "仏閣, 寺院, 寺, ストゥーパ, 僧院, パゴダ "
+                "name": "仏閣"
             },
             "amenity/place_of_worship/christian": {
-                "name": "教会",
-                "terms": "修道院,会堂,礼拝堂,聖堂,内陣,教会,チャペル,祈祷所,神の家,祈りの場所,モスク,神社,寺院,シナゴーグ"
+                "name": "教会"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "シナゴーグ",
-                "terms": "ユダヤ教,シナゴーグ"
+                "name": "シナゴーグ"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "モスク",
-                "terms": "イスラム教,モスク"
+                "name": "モスク"
             },
             "amenity/police": {
-                "name": "警察",
-                "terms": "警察署,警察,交番,派出所"
+                "name": "警察"
             },
             "amenity/post_box": {
-                "name": "郵便ポスト",
-                "terms": "投函箱,郵便ポスト"
+                "name": "郵便ポスト"
             },
             "amenity/post_office": {
                 "name": "郵便局"
@@ -860,42 +848,34 @@
                 "name": "居酒屋"
             },
             "amenity/restaurant": {
-                "name": "レストラン",
-                "terms": "バー,カフェテリア,カフェ,喫茶店,喫茶室,ダイナー,ディナールーム,ドーナツ店,軽飲食,食事処,休憩所,茶屋,ハンバーガースタンド,ホットドッグスタンド,ランチルーム,ピッツァリア,サロン,お休み処"
+                "name": "レストラン"
             },
             "amenity/school": {
-                "name": "学校",
-                "terms": "大学、短大、単科大学、職業訓練所、専門学校、研究所、牢獄、校舎、学舎"
+                "name": "学校"
             },
             "amenity/swimming_pool": {
                 "name": "プール"
             },
             "amenity/taxi": {
-                "name": "タクシー乗り場",
-                "terms": "タクシー"
+                "name": "タクシー乗り場"
             },
             "amenity/telephone": {
                 "name": "公衆電話"
             },
             "amenity/theatre": {
-                "name": "劇場",
-                "terms": "劇場, パフォーマンス, ミュージカル, 大道芸"
+                "name": "劇場"
             },
             "amenity/toilets": {
-                "name": "お手洗い, トイレ",
-                "terms": "お手洗い"
+                "name": "お手洗い, トイレ"
             },
             "amenity/townhall": {
-                "name": "市町村役場",
-                "terms": "村役場、市役所、郡庁舎、市営ビル、市区センター"
+                "name": "市町村役場"
             },
             "amenity/university": {
-                "name": "大学",
-                "terms": "単科大学"
+                "name": "大学"
             },
             "amenity/waste_basket": {
-                "name": "ゴミ箱",
-                "terms": "くず入れ, くずかご, 収集ボックス, 護美箱"
+                "name": "ゴミ箱"
             },
             "area": {
                 "name": "エリア"
@@ -960,11 +940,26 @@
             "building/apartments": {
                 "name": "アパート"
             },
+            "building/commercial": {
+                "name": "商業建築"
+            },
             "building/entrance": {
                 "name": "エントランス"
             },
+            "building/garage": {
+                "name": "ガレージ"
+            },
             "building/house": {
                 "name": "番地"
+            },
+            "building/hut": {
+                "name": "山小屋"
+            },
+            "building/industrial": {
+                "name": "工場"
+            },
+            "building/residential": {
+                "name": "住宅建築"
             },
             "emergency/phone": {
                 "name": "緊急電話"
@@ -976,22 +971,19 @@
                 "name": "道路"
             },
             "highway/bridleway": {
-                "name": "乗馬道",
-                "terms": "大通り、乗馬道、馬道"
+                "name": "乗馬道"
             },
             "highway/bus_stop": {
                 "name": "バス停"
             },
             "highway/crossing": {
-                "name": "横断歩道",
-                "terms": "横断歩道"
+                "name": "横断歩道"
             },
             "highway/cycleway": {
                 "name": "自転車道"
             },
             "highway/footway": {
-                "name": "歩道",
-                "terms": "けもの道、山道、コース、歩道、自動車道、路地、航路、軌道、抜け道、通路、小路、線路、道路、経路、街道、農道、大通り"
+                "name": "歩道"
             },
             "highway/living_street": {
                 "name": "路地"
@@ -1006,8 +998,7 @@
                 "name": "高速道ジャンクション"
             },
             "highway/motorway_link": {
-                "name": "高速道路 - 接続道",
-                "terms": "スロープ有無"
+                "name": "高速道路 - 接続道"
             },
             "highway/path": {
                 "name": "小道"
@@ -1019,8 +1010,7 @@
                 "name": "主要地方道"
             },
             "highway/primary_link": {
-                "name": "主要地方道 - 接続路",
-                "terms": "スロープ有無"
+                "name": "主要地方道 - 接続路"
             },
             "highway/residential": {
                 "name": "住宅道路"
@@ -1032,8 +1022,7 @@
                 "name": "一般地方道"
             },
             "highway/secondary_link": {
-                "name": "一般地方道 - 接続路",
-                "terms": "スロープ有無"
+                "name": "一般地方道 - 接続路"
             },
             "highway/service": {
                 "name": "私道"
@@ -1054,29 +1043,25 @@
                 "name": "駐車構内路"
             },
             "highway/steps": {
-                "name": "階段",
-                "terms": "階段"
+                "name": "階段"
             },
             "highway/tertiary": {
                 "name": "主要な一般道"
             },
             "highway/tertiary_link": {
-                "name": "主要な一般道 - 接続路",
-                "terms": "スロープ有無"
+                "name": "主要な一般道 - 接続路"
             },
             "highway/track": {
                 "name": "農道"
             },
             "highway/traffic_signals": {
-                "name": "信号機",
-                "terms": "街灯, スポットライト, 交通照明"
+                "name": "信号機"
             },
             "highway/trunk": {
                 "name": "国道"
             },
             "highway/trunk_link": {
-                "name": "国道 - 接続路",
-                "terms": "スロープ有無"
+                "name": "国道 - 接続路"
             },
             "highway/turning_circle": {
                 "name": "車回し"
@@ -1165,6 +1150,9 @@
             "leisure": {
                 "name": "レジャー"
             },
+            "leisure/dog_park": {
+                "name": "公園 (飼い犬用)"
+            },
             "leisure/garden": {
                 "name": "庭園"
             },
@@ -1175,8 +1163,7 @@
                 "name": "停泊所"
             },
             "leisure/park": {
-                "name": "公園",
-                "terms": "遊歩道、森林、庭園、芝生、緑地、遊び場、プラザ、レクリエーションエリア、スクエア、広場"
+                "name": "公園"
             },
             "leisure/pitch": {
                 "name": "運動場"
@@ -1200,8 +1187,7 @@
                 "name": "バレーボールコート"
             },
             "leisure/playground": {
-                "name": "児童公園",
-                "terms": "ジャングルジム, 遊び場"
+                "name": "児童公園"
             },
             "leisure/slipway": {
                 "name": "進水所"
@@ -1240,8 +1226,7 @@
                 "name": "塔"
             },
             "man_made/wastewater_plant": {
-                "name": "下水処理施設",
-                "terms": "浄水設備、排水処理施設、下水処理場"
+                "name": "下水処理施設"
             },
             "man_made/water_tower": {
                 "name": "給水塔"
@@ -1265,8 +1250,7 @@
                 "name": "崖"
             },
             "natural/coastline": {
-                "name": "海岸線",
-                "terms": "海岸"
+                "name": "海岸線"
             },
             "natural/glacier": {
                 "name": "氷河, 凍土"
@@ -1278,8 +1262,7 @@
                 "name": "低木地"
             },
             "natural/peak": {
-                "name": "山頂",
-                "terms": "岩峰、山頂、頂、頂点、てっぺん、山、丘、丘陵、極み"
+                "name": "山頂"
             },
             "natural/scrub": {
                 "name": "茂み"
@@ -1294,12 +1277,10 @@
                 "name": "水域"
             },
             "natural/water/lake": {
-                "name": "湖",
-                "terms": "湖、入江、池"
+                "name": "湖"
             },
             "natural/water/pond": {
-                "name": "池",
-                "terms": "池、水車用貯水池、ため池、小さな湖"
+                "name": "池"
             },
             "natural/water/reservoir": {
                 "name": "貯水池"
@@ -1323,8 +1304,7 @@
                 "name": "Hamlet"
             },
             "place/island": {
-                "name": "島",
-                "terms": "群島、サンゴ礁、小島、岩礁、砂州、湾岸"
+                "name": "島"
             },
             "place/isolated_dwelling": {
                 "name": "街区外居住地"
@@ -1372,8 +1352,7 @@
                 "name": "廃路線"
             },
             "railway/level_crossing": {
-                "name": "踏切",
-                "terms": "踏切"
+                "name": "踏切"
             },
             "railway/monorail": {
                 "name": "モノレール"
@@ -1394,8 +1373,7 @@
                 "name": "地下鉄入り口"
             },
             "railway/tram": {
-                "name": "路面電車",
-                "terms": "路面電車"
+                "name": "路面電車"
             },
             "relation": {
                 "name": "リレーション"
@@ -1407,8 +1385,7 @@
                 "name": "店舗"
             },
             "shop/alcohol": {
-                "name": "酒屋",
-                "terms": "酒屋"
+                "name": "酒屋"
             },
             "shop/bakery": {
                 "name": "パン屋"
@@ -1471,8 +1448,7 @@
                 "name": "電子部品"
             },
             "shop/farm": {
-                "name": "産地直売",
-                "terms": "農家直売店, フラワースタンド"
+                "name": "産地直売"
             },
             "shop/fishmonger": {
                 "name": "魚屋"
@@ -1544,8 +1520,7 @@
                 "name": "文具店"
             },
             "shop/supermarket": {
-                "name": "スーパーマーケット",
-                "terms": "店舗、ショッピングプラザ、バザー、ブティック、チェーン店、安売り販売、ガレリア、モール、マート、アウトレット、ショッピングセンター、スーパーマーケット、中古品販売"
+                "name": "スーパーマーケット"
             },
             "shop/toys": {
                 "name": "おもちゃ屋"
@@ -1587,8 +1562,7 @@
                 "name": "コテージ"
             },
             "tourism/guest_house": {
-                "name": "民宿",
-                "terms": "B&B、ベッドアンドブレックファスト"
+                "name": "民宿"
             },
             "tourism/hostel": {
                 "name": "共同宿泊"
@@ -1603,8 +1577,7 @@
                 "name": "モーテル"
             },
             "tourism/museum": {
-                "name": "博物館, 美術館",
-                "terms": "展示、ギャラリー、ホール、図書館、現代美術、見世物"
+                "name": "博物館, 美術館"
             },
             "tourism/picnic_site": {
                 "name": "ピクニック場"
@@ -1667,16 +1640,19 @@
                 "name": "ルートマスター"
             },
             "vertex": {
-                "name": "その他"
+                "name": "その他",
+                "terms": "その他"
             },
             "waterway": {
                 "name": "水路, 河川"
             },
             "waterway/canal": {
-                "name": "運河"
+                "name": "運河",
+                "terms": "運河"
             },
             "waterway/dam": {
-                "name": "ダム"
+                "name": "ダム",
+                "terms": "ダム"
             },
             "waterway/ditch": {
                 "name": "堀, 用水路"
@@ -1686,14 +1662,13 @@
             },
             "waterway/river": {
                 "name": "河川",
-                "terms": "小川、渓流、支流、流れ、細流、入江、河口、水脈、川床、水路"
+                "terms": "川,河川"
             },
             "waterway/riverbank": {
                 "name": "河川流域"
             },
             "waterway/stream": {
-                "name": "小川",
-                "terms": "小川、渓流、支流、流れ、細流、入江、河口、水脈、川床、水路、氾濫、浸水域、湿地"
+                "name": "小川"
             },
             "waterway/weir": {
                 "name": "堰"

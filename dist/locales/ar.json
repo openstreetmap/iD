@@ -122,6 +122,9 @@
             "maxspeed": {
                 "label": "السرعة القصوى"
             },
+            "natural": {
+                "label": "طبيعه"
+            },
             "network": {
                 "label": "الشبكة"
             },
@@ -277,6 +280,27 @@
             },
             "landuse/farm": {
                 "name": "مزرعة"
+            },
+            "leisure/garden": {
+                "name": "حديقة"
+            },
+            "tourism/alpine_hut": {
+                "name": "داراستراحة"
+            },
+            "tourism/artwork": {
+                "name": "رسم فنّي"
+            },
+            "tourism/attraction": {
+                "name": "معلم سياحي"
+            },
+            "tourism/chalet": {
+                "name": "شاليه"
+            },
+            "tourism/guest_house": {
+                "name": "استراحة"
+            },
+            "tourism/zoo": {
+                "name": "حديقة حيوانات"
             }
         }
     }

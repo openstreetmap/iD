@@ -142,11 +142,6 @@
         "deleted": "Kustutatud",
         "created": "Loodud"
     },
-    "geocoder": {
-        "title": "Leia koht",
-        "placeholder": "Leia koht",
-        "no_results": "Ei õnnestunud leida kohta '{name}'"
-    },
     "geolocate": {
         "title": "Näita minu asukohta"
     },
@@ -169,6 +164,12 @@
         "uploading": "Muudatuste üleslaadimine OpenStreetMap'i.",
         "unsaved_changes": "Sul on salvestamata muudatusi"
     },
+    "splash": {
+        "welcome": "Tere tulemast kasutama iD OpenStreetMap redaktorit",
+        "text": "iD on kasutajasõbralik ja samas võimas töövahend parima vaba maailmakaardi täiendamiseks. See on versioon {version}. Rohkem infot võib leida veebilehelt {website} ja vigadest saab teatada lehel {github}.",
+        "walkthrough": "Alusta tutvustust",
+        "start": "Kohe redigeerima"
+    },
     "tag_reference": {
         "description": "Kirjeldus"
     },
@@ -188,6 +189,11 @@
         "title": "Abi"
     },
     "intro": {
+        "navigation": {
+            "title": "Navigeerimine",
+            "drag": "Peamises kaardivaates on näha aluskaardi peal olevad OpenStreetMap andmed. Vaate liigutamine toimub hiirega lohistades ja kerides, sarnaselt teiste kaartidega. **Lohista kaarti!**",
+            "select": "Kaardi objekte saab esitada kolmel viisil: kasutades punkte, jooni või alasid. Kõiki objekte saab valida nendel klikkides. **Kliki punktil, et see valida.**"
+        },
         "points": {
             "title": "Punktid"
         },
@@ -198,6 +204,7 @@
             "title": "Jooned"
         },
         "startediting": {
+            "title": "Alusta redigeerimist",
             "save": "Ära unusta oma muudatusi regulaarselt salvestada!",
             "start": "Alusta kaardistamist!"
         }
@@ -335,15 +342,13 @@
         },
         "presets": {
             "aeroway/aerodrome": {
-                "name": "Lennujaam",
-                "terms": "lennujaam,lennuväli"
+                "name": "Lennujaam"
             },
             "aeroway/hangar": {
                 "name": "Angaar"
             },
             "aeroway/helipad": {
-                "name": "Kopteriväljak",
-                "terms": "kopteriplats,helikopteriplats,kopteriväljak,helikopteriväljak"
+                "name": "Kopteriväljak"
             },
             "aeroway/terminal": {
                 "name": "Lennujaama terminal"
@@ -367,15 +372,13 @@
                 "name": "Rattarent"
             },
             "amenity/cafe": {
-                "name": "Kohvik",
-                "terms": "kohvik,teemaja"
+                "name": "Kohvik"
             },
             "amenity/car_wash": {
                 "name": "Autopesula"
             },
             "amenity/cinema": {
-                "name": "Kino",
-                "terms": "kino,kinomaja,liikuvad pildid"
+                "name": "Kino"
             },
             "amenity/courthouse": {
                 "name": "Kohtumaja"
@@ -399,8 +402,7 @@
                 "name": "Surnuaed"
             },
             "amenity/hospital": {
-                "name": "Haigla",
-                "terms": "kliinik"
+                "name": "Haigla"
             },
             "amenity/kindergarten": {
                 "name": "Lasteaed"
@@ -427,8 +429,7 @@
                 "name": "Mošee"
             },
             "amenity/police": {
-                "name": "Politsei",
-                "terms": "ment"
+                "name": "Politsei"
             },
             "amenity/post_box": {
                 "name": "Kirjakast"
@@ -443,8 +444,7 @@
                 "name": "Restoraan"
             },
             "amenity/school": {
-                "name": "Kool",
-                "terms": "koolimaja,põhikool,gümnaasium,algkool,kool"
+                "name": "Kool"
             },
             "amenity/swimming_pool": {
                 "name": "Ujumisbassein"
@@ -516,8 +516,7 @@
                 "name": "Bussipeatus"
             },
             "highway/crossing": {
-                "name": "Ülekäik",
-                "terms": "ülekäigukoht,ülekäigurada,sebra"
+                "name": "Ülekäik"
             },
             "highway/cycleway": {
                 "name": "Rattatee"
@@ -655,8 +654,7 @@
                 "name": "Torn"
             },
             "man_made/wastewater_plant": {
-                "name": "Reoveepuhastusjaam",
-                "terms": "reoveejaam,reoveepuhasti"
+                "name": "Reoveepuhastusjaam"
             },
             "man_made/water_tower": {
                 "name": "Veetorn"
@@ -689,8 +687,7 @@
                 "name": "Nõmm"
             },
             "natural/peak": {
-                "name": "Mäetipp",
-                "terms": "mägi,tipp"
+                "name": "Mäetipp"
             },
             "natural/scrub": {
                 "name": "Võsa"
@@ -705,12 +702,10 @@
                 "name": "Vesi"
             },
             "natural/water/lake": {
-                "name": "Järv",
-                "terms": "loik"
+                "name": "Järv"
             },
             "natural/water/pond": {
-                "name": "Tiik",
-                "terms": "loik"
+                "name": "Tiik"
             },
             "natural/water/reservoir": {
                 "name": "Reservuaar"
@@ -725,8 +720,7 @@
                 "name": "Linn"
             },
             "place/island": {
-                "name": "Saar",
-                "terms": "saareke,rahu"
+                "name": "Saar"
             },
             "place/village": {
                 "name": "Küla"
@@ -756,8 +750,7 @@
                 "name": "Kasutusest väljasolev raudtee"
             },
             "railway/level_crossing": {
-                "name": "Raudtee ülesõidukoht",
-                "terms": "ülesõit,raudteeülesõit"
+                "name": "Raudtee ülesõidukoht"
             },
             "railway/monorail": {
                 "name": "Monorelss"
@@ -865,8 +858,7 @@
                 "name": "Sporditarvete pood"
             },
             "shop/supermarket": {
-                "name": "Supermarket",
-                "terms": "supermarket,market,hüpermarket,pood"
+                "name": "Supermarket"
             },
             "shop/toys": {
                 "name": "Mänguasjapood"
@@ -929,8 +921,7 @@
                 "name": "Kraav"
             },
             "waterway/river": {
-                "name": "Jõgi",
-                "terms": "jõeke"
+                "name": "Jõgi"
             },
             "waterway/riverbank": {
                 "name": "Jõekallas"

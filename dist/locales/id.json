@@ -199,11 +199,6 @@
         "list": "Disunting oleh {users}",
         "truncated_list": "Disunting oleh {users} dan {count} lainnya"
     },
-    "geocoder": {
-        "title": "Temukan sebuah tempat",
-        "placeholder": "Temukan sebuah tempat",
-        "no_results": "Tidak dapat menemukan tempat dengan nama '{name}'"
-    },
     "geolocate": {
         "title": "Tunjukan Lokasi Saya"
     },
@@ -224,7 +219,6 @@
         "search": "Cari",
         "unknown": "Tidak diketahui",
         "incomplete": "<tak terunduh>",
-        "feature_list": "Daftar Fitur",
         "edit": "Ubah Fitur"
     },
     "background": {
@@ -659,8 +653,7 @@
                 "name": "Landas pacu"
             },
             "aeroway/aerodrome": {
-                "name": "Bandar udara",
-                "terms": "pesawat,bandara,bandar udara"
+                "name": "Bandar udara"
             },
             "aeroway/gate": {
                 "name": "Gerbang Bandar Udara"
@@ -669,12 +662,10 @@
                 "name": "Hangar"
             },
             "aeroway/helipad": {
-                "name": "Helipad",
-                "terms": "helikopter, pendaratan helikopter, bandar helikopter"
+                "name": "Helipad"
             },
             "aeroway/runway": {
-                "name": "Landaspacu",
-                "terms": "landasan pacu"
+                "name": "Landaspacu"
             },
             "aeroway/taxiway": {
                 "name": "Jalur taksi"
@@ -701,8 +692,7 @@
                 "name": "Penyewaan Sepeda"
             },
             "amenity/cafe": {
-                "name": "Cafe",
-                "terms": "kopi, teh, warung kopi"
+                "name": "Cafe"
             },
             "amenity/car_wash": {
                 "name": "Pencucian Mobil"
@@ -759,12 +749,10 @@
                 "name": "Gereja"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Sinagoga",
-                "terms": "yahudi,sinagoga"
+                "name": "Sinagoga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Mesjid",
-                "terms": "muslim, mesjid"
+                "name": "Mesjid"
             },
             "amenity/police": {
                 "name": "Polisi"
@@ -791,8 +779,7 @@
                 "name": "Telepon"
             },
             "amenity/theatre": {
-                "name": "Teater",
-                "terms": "teater, pertunjukan, permainan, musik"
+                "name": "Teater"
             },
             "amenity/toilets": {
                 "name": "Toilet"
@@ -801,8 +788,7 @@
                 "name": "Balai Kota"
             },
             "amenity/university": {
-                "name": "Universitas",
-                "terms": "kampus"
+                "name": "Universitas"
             },
             "amenity/waste_basket": {
                 "name": "Tong Sampah"
@@ -850,8 +836,7 @@
                 "name": "Pemberhentian Bis"
             },
             "highway/crossing": {
-                "name": "Penyebrangan",
-                "terms": "penyebrangan, zebra cross"
+                "name": "Penyebrangan"
             },
             "highway/cycleway": {
                 "name": "Jalur Sepeda"
@@ -887,8 +872,7 @@
                 "name": "Akses Darurat"
             },
             "highway/steps": {
-                "name": "Titian",
-                "terms": "tangga"
+                "name": "Titian"
             },
             "highway/tertiary": {
                 "name": "Jalan Tersier"
@@ -1137,8 +1121,7 @@
                 "name": "Toko"
             },
             "shop/alcohol": {
-                "name": "Toko Minuman",
-                "terms": "alkohol"
+                "name": "Toko Minuman"
             },
             "shop/bakery": {
                 "name": "Toko Roti"

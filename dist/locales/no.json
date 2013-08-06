@@ -140,11 +140,6 @@
         "deleted": "Fjernet",
         "created": "Opprettet"
     },
-    "geocoder": {
-        "title": "Finn et sted",
-        "placeholder": "Finn et sted",
-        "no_results": "Kunne ikke finne et sted som heter '{name}'"
-    },
     "geolocate": {
         "title": "Vis min posisjon"
     },
@@ -541,9 +536,6 @@
             "aeroway/aerodrome": {
                 "name": "Flyplass"
             },
-            "aeroway/apron": {
-                "terms": "rampe"
-            },
             "aeroway/gate": {
                 "name": "Flyplassgate"
             },
@@ -554,8 +546,7 @@
                 "name": "Helikopterlandingsplass"
             },
             "aeroway/runway": {
-                "name": "Rullebane",
-                "terms": "Landingsbane"
+                "name": "Rullebane"
             },
             "aeroway/taxiway": {
                 "name": "Taxibane"
@@ -603,8 +594,7 @@
                 "name": "Videregående skole"
             },
             "amenity/drinking_water": {
-                "name": "Drikkevann",
-                "terms": "vannfontene, drikkevann"
+                "name": "Drikkevann"
             },
             "amenity/fast_food": {
                 "name": "Hurtigmat"
@@ -625,8 +615,7 @@
                 "name": "Sykehus"
             },
             "amenity/kindergarten": {
-                "name": "Barnehage",
-                "terms": "barnehage"
+                "name": "Barnehage"
             },
             "amenity/library": {
                 "name": "Bibliotek"
@@ -677,26 +666,22 @@
                 "name": "Svømmebasseng"
             },
             "amenity/taxi": {
-                "name": "Taxiholdeplass",
-                "terms": "drosje"
+                "name": "Taxiholdeplass"
             },
             "amenity/telephone": {
                 "name": "Telefon"
             },
             "amenity/toilets": {
-                "name": "Toaletter",
-                "terms": "badet,toalettet"
+                "name": "Toaletter"
             },
             "amenity/townhall": {
                 "name": "Rådhus"
             },
             "amenity/university": {
-                "name": "Universitet",
-                "terms": "videregående skole"
+                "name": "Universitet"
             },
             "amenity/waste_basket": {
-                "name": "Søppel",
-                "terms": "søppelkurv"
+                "name": "Søppel"
             },
             "area": {
                 "name": "Areal"
@@ -774,8 +759,7 @@
                 "name": "Motorveikrysning"
             },
             "highway/motorway_link": {
-                "name": "Motorveirampe",
-                "terms": "påkjøringsrampe avkjøringsrampe rampe"
+                "name": "Motorveirampe"
             },
             "highway/path": {
                 "name": "Sti"
@@ -786,9 +770,6 @@
             "highway/primary": {
                 "name": "Primær hovedvei"
             },
-            "highway/primary_link": {
-                "terms": "påkjøringsrampe avkjøringsrampe rampe"
-            },
             "highway/residential": {
                 "name": "Boligvei"
             },
@@ -797,9 +778,6 @@
             },
             "highway/secondary": {
                 "name": "Sekundær hovedvei"
-            },
-            "highway/secondary_link": {
-                "terms": "påkjøringsrampe avkjøringsrampe rampe"
             },
             "highway/service": {
                 "name": "Stikkvei"
@@ -825,14 +803,8 @@
             "highway/tertiary": {
                 "name": "Tertiær hovedvei"
             },
-            "highway/tertiary_link": {
-                "terms": "påkjøringsrampe avkjøringsrampe rampe"
-            },
             "highway/traffic_signals": {
                 "name": "Trafikklys"
-            },
-            "highway/trunk_link": {
-                "terms": "påkjøringsrampe avkjøringsrampe rampe"
             },
             "highway/unclassified": {
                 "name": "Uklassifisert vei"
@@ -937,8 +909,7 @@
                 "name": "Volleyballbane"
             },
             "leisure/playground": {
-                "name": "Lekeplass",
-                "terms": "lekeplass"
+                "name": "Lekeplass"
             },
             "leisure/swimming_pool": {
                 "name": "Svømmebasseng"
@@ -1097,8 +1068,7 @@
                 "name": "Butikk"
             },
             "shop/alcohol": {
-                "name": "Vinutsalg",
-                "terms": "alkohol"
+                "name": "Vinutsalg"
             },
             "shop/bakery": {
                 "name": "Bakeri"
@@ -1129,9 +1099,6 @@
             },
             "shop/electronics": {
                 "name": "Elektronikkbutikk"
-            },
-            "shop/farm": {
-                "terms": "gårdsutsalg"
             },
             "shop/fishmonger": {
                 "name": "Fiskeforhandler"

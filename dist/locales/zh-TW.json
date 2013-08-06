@@ -203,11 +203,6 @@
         "list": "正顯示 {users} 的編輯",
         "truncated_list": "正顯示 {users} 和另外 {count} 位用戶的編輯"
     },
-    "geocoder": {
-        "title": "尋找一地方",
-        "placeholder": "尋找一地方",
-        "no_results": "找不到名為 '{name}' 的地方"
-    },
     "geolocate": {
         "title": "顯示我的位置"
     },
@@ -228,7 +223,6 @@
         "search": "搜尋",
         "unknown": "未知種類",
         "incomplete": "<未有下載>",
-        "feature_list": "特徵名單",
         "edit": "編輯特徵"
     },
     "background": {
@@ -710,12 +704,10 @@
                 "name": "機場相關設施"
             },
             "aeroway/aerodrome": {
-                "name": "機場",
-                "terms": "飛機,飛機場,飛行場"
+                "name": "機場"
             },
             "aeroway/apron": {
-                "name": "停機坪",
-                "terms": "引道"
+                "name": "停機坪"
             },
             "aeroway/gate": {
                 "name": "機場閘口"
@@ -724,19 +716,16 @@
                 "name": "飛機庫"
             },
             "aeroway/helipad": {
-                "name": "直昇機場",
-                "terms": "直升機,直升機坪,直升機場,停機坪"
+                "name": "直昇機場"
             },
             "aeroway/runway": {
-                "name": "跑道",
-                "terms": "着陸跑道"
+                "name": "跑道"
             },
             "aeroway/taxiway": {
                 "name": "滑行道"
             },
             "aeroway/terminal": {
-                "name": "機場大堂",
-                "terms": "飛機,飛機場,機場"
+                "name": "機場大堂"
             },
             "amenity": {
                 "name": "便利設施"
@@ -745,8 +734,7 @@
                 "name": "自動櫃員機"
             },
             "amenity/bank": {
-                "name": "銀行",
-                "terms": "保險箱,帳房,信用合作社,受托人,國庫,基金,窖藏,投資機構,儲存庫,儲備,存款,庫存,倉庫,儲蓄及貸款協會,信託公司,窖,金庫"
+                "name": "銀行"
             },
             "amenity/bar": {
                 "name": "酒吧"
@@ -761,8 +749,7 @@
                 "name": "單車租賃"
             },
             "amenity/cafe": {
-                "name": "咖啡廳",
-                "terms": "咖啡,茶,咖啡店,咖啡廳,咖啡館"
+                "name": "咖啡廳"
             },
             "amenity/car_rental": {
                 "name": "租車"
@@ -774,8 +761,7 @@
                 "name": "洗車店"
             },
             "amenity/cinema": {
-                "name": "戲院",
-                "terms": "大銀幕,電影院,電影,得來速影院,劇場,表演,銀幕,影城"
+                "name": "戲院"
             },
             "amenity/college": {
                 "name": "書院"
@@ -784,8 +770,7 @@
                 "name": "法院"
             },
             "amenity/drinking_water": {
-                "name": "飲水",
-                "terms": "飲水機,活水,飲用水,奉茶"
+                "name": "飲水"
             },
             "amenity/embassy": {
                 "name": "使館"
@@ -806,12 +791,10 @@
                 "name": "墓地"
             },
             "amenity/hospital": {
-                "name": "醫院",
-                "terms": "診所,急診室,衛生服務,安養院,醫院,療養院,醫務室,手術室,病房"
+                "name": "醫院"
             },
             "amenity/kindergarten": {
-                "name": "幼稚園",
-                "terms": "preschool,nursery,childcare,playgroup,幼兒院"
+                "name": "幼稚園"
             },
             "amenity/library": {
                 "name": "圖書館"
@@ -826,31 +809,25 @@
                 "name": "藥房"
             },
             "amenity/place_of_worship": {
-                "name": "宗教祟拜場所",
-                "terms": "隱修院,宗座聖殿,伯特利,座堂,聖壇,附屬小教堂,小聖堂,教堂,信徒,神殿,祈禱場所,宗教場所,修道院附屬的教堂,傳道部,清真寺,小教堂,教區,聖所,聖地,猶太教堂,禮拜堂,寺廟,神壇,土地公,佛寺,道觀,祭壇,宮觀,神社,龕"
+                "name": "宗教祟拜場所"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "佛寺"
             },
             "amenity/place_of_worship/christian": {
-                "name": "教堂",
-                "terms": "基督教,隱修院,宗座聖殿,伯特利,座堂,聖壇,附屬小教堂,小聖堂,教堂,信徒,神殿,祈禱場所,宗教場所,修道院附屬的教堂,傳道部,小教堂,教區,聖所,聖地,禮拜堂,寺廟"
+                "name": "教堂"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "猶太教堂",
-                "terms": "猶太教,猶太教堂"
+                "name": "猶太教堂"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "清真寺",
-                "terms": "穆斯林,清真寺,muslim,mosque"
+                "name": "清真寺"
             },
             "amenity/police": {
-                "name": "警察局",
-                "terms": "徽章,警官,男童軍,軍團,警車,偵探,部隊,憲兵,刑警,法律,執法,警察"
+                "name": "警察局"
             },
             "amenity/post_box": {
-                "name": "郵箱",
-                "terms": "信箱,郵箱,郵筒"
+                "name": "郵箱"
             },
             "amenity/post_office": {
                 "name": "郵局"
@@ -868,8 +845,7 @@
                 "name": "游泳池"
             },
             "amenity/taxi": {
-                "name": "計程車招呼站",
-                "terms": "計程車,出租車,的士,小黃"
+                "name": "計程車招呼站"
             },
             "amenity/telephone": {
                 "name": "電話"
@@ -878,15 +854,13 @@
                 "name": "劇院"
             },
             "amenity/toilets": {
-                "name": "廁所",
-                "terms": "浴室,廁所"
+                "name": "廁所"
             },
             "amenity/townhall": {
                 "name": "市政廳"
             },
             "amenity/university": {
-                "name": "大學",
-                "terms": "學院"
+                "name": "大學"
             },
             "amenity/waste_basket": {
                 "name": "廢物箱"
@@ -976,8 +950,7 @@
                 "name": "公共汽車站"
             },
             "highway/crossing": {
-                "name": "過路處",
-                "terms": "行人穿越道,斑馬線,crosswalk,zebra crossing "
+                "name": "過路處"
             },
             "highway/cycleway": {
                 "name": "單車徑"
@@ -998,8 +971,7 @@
                 "name": "高速公路交匯處"
             },
             "highway/motorway_link": {
-                "name": "高速公路引道",
-                "terms": "ramp,on ramp,off ramp,連接"
+                "name": "高速公路引道"
             },
             "highway/path": {
                 "name": "路徑"
@@ -1011,8 +983,7 @@
                 "name": "主要道路"
             },
             "highway/primary_link": {
-                "name": "主要道路連接路",
-                "terms": "ramp,on ramp,off ramp,連接"
+                "name": "主要道路連接路"
             },
             "highway/residential": {
                 "name": "住宅區道路"
@@ -1024,8 +995,7 @@
                 "name": "次要道路"
             },
             "highway/secondary_link": {
-                "name": "次級道路連接路",
-                "terms": "ramp,on ramp,off ramp,連接"
+                "name": "次級道路連接路"
             },
             "highway/service": {
                 "name": "輔助道路"
@@ -1046,15 +1016,13 @@
                 "name": "停車場通道"
             },
             "highway/steps": {
-                "name": "樓梯",
-                "terms": "樓梯,階梯"
+                "name": "樓梯"
             },
             "highway/tertiary": {
                 "name": "三級道路"
             },
             "highway/tertiary_link": {
-                "name": "三級道路連接路",
-                "terms": "ramp,on ramp,off ramp,連接"
+                "name": "三級道路連接路"
             },
             "highway/track": {
                 "name": "未舖設路面的車徑"
@@ -1066,8 +1034,7 @@
                 "name": "幹道"
             },
             "highway/trunk_link": {
-                "name": "幹道連接路",
-                "terms": "ramp,on ramp,off ramp,連接"
+                "name": "幹道連接路"
             },
             "highway/turning_circle": {
                 "name": "回轉圈"
@@ -1190,8 +1157,7 @@
                 "name": "排球場"
             },
             "leisure/playground": {
-                "name": "遊樂場",
-                "terms": "攀登架,遊樂區,jungle gym,play area"
+                "name": "遊樂場"
             },
             "leisure/slipway": {
                 "name": "船架滑道"
@@ -1230,8 +1196,7 @@
                 "name": "塔"
             },
             "man_made/wastewater_plant": {
-                "name": "污水處理廠",
-                "terms": "sewage works,sewage treatment plant,water treatment plant,reclamation plant,污水廠,污水處理廠"
+                "name": "污水處理廠"
             },
             "man_made/water_tower": {
                 "name": "水塔"
@@ -1255,8 +1220,7 @@
                 "name": "懸崖"
             },
             "natural/coastline": {
-                "name": "海岸線",
-                "terms": "岸"
+                "name": "海岸線"
             },
             "natural/glacier": {
                 "name": "冰川"
@@ -1379,8 +1343,7 @@
                 "name": "地鐵入口"
             },
             "railway/tram": {
-                "name": "電車",
-                "terms": "路面電車"
+                "name": "電車"
             },
             "relation": {
                 "name": "關係"
@@ -1392,8 +1355,7 @@
                 "name": "商店"
             },
             "shop/alcohol": {
-                "name": "酒類商店",
-                "terms": "美酒店"
+                "name": "酒類商店"
             },
             "shop/bakery": {
                 "name": "麵包店"

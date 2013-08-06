@@ -30,7 +30,8 @@
         "add": {
             "annotation": {
                 "point": "Punkt hinzugefügt.",
-                "vertex": "Einen Punkt zum Weg hinzugefügt."
+                "vertex": "Einen Punkt zum Weg hinzugefügt.",
+                "relation": "Relation hinzugefügt."
             }
         },
         "start": {
@@ -204,9 +205,9 @@
         "truncated_list": "Bearbeitet von {users} und {count} anderen"
     },
     "geocoder": {
-        "title": "Suche einen Ort",
-        "placeholder": "suche einen Ort",
-        "no_results": "Ein Ort namens '{name}' konnte nicht gefunden werden"
+        "search": "Suche weltweit...",
+        "no_results_visible": "Keine Ergebnisse im sichtbaren Kartenbereich",
+        "no_results_worldwide": "Keine Ergebnisse gefunden"
     },
     "geolocate": {
         "title": "Zeige meine Position"
@@ -219,6 +220,7 @@
         "all_tags": "Alle Tags",
         "all_members": "Alle Mitglieder",
         "all_relations": "Alle Relationen",
+        "new_relation": "Neue Relation...",
         "role": "Rolle",
         "choose": "Eigenschafts-Typ auswählen",
         "results": "{n} Resultate für {search}",
@@ -228,7 +230,7 @@
         "search": "Suchen",
         "unknown": "Unbekannt",
         "incomplete": "<nicht heruntergeladen>",
-        "feature_list": "Eigenschaftsliste",
+        "feature_list": "Objekte suchen",
         "edit": "Eigenschaft bearbeiten"
     },
     "background": {
@@ -726,7 +728,7 @@
             },
             "aeroway/runway": {
                 "name": "Piste",
-                "terms": "Start-/Landebahn"
+                "terms": "Start-/Landebahn,Startbahn,Landebahn"
             },
             "aeroway/taxiway": {
                 "name": "Rollweg"
@@ -770,9 +772,13 @@
             "amenity/car_wash": {
                 "name": "Autowäsche"
             },
+            "amenity/childcare": {
+                "name": "Kindertagesbetreuung",
+                "terms": "Hort"
+            },
             "amenity/cinema": {
                 "name": "Kino",
-                "terms": "Großbildleinwand, Kino, Autokino, Filmtheater, Filmpalast"
+                "terms": "Großbildleinwand,Kino,Autokino,Filmtheater,Filmpalast"
             },
             "amenity/college": {
                 "name": "Hochschule"
@@ -804,7 +810,7 @@
             },
             "amenity/hospital": {
                 "name": "Krankenhaus",
-                "terms": "Klinik, Notaufnahme, Gesundheitswesen, Hospiz, Krankenhaus, Pflegeheim, Altersheim, Nervenheilanstalt, Sanatorium, Lazarett, Chirurgie, Krankenstation"
+                "terms": "Klinik,Notaufnahme,Gesundheitswesen,Hospiz,Krankenhaus,Pflegeheim,Altersheim,Nervenheilanstalt,Sanatorium,Lazarett,Chirurgie,Krankenstation"
             },
             "amenity/kindergarten": {
                 "name": "Kindergaten",
@@ -824,7 +830,7 @@
             },
             "amenity/place_of_worship": {
                 "name": "Gebetsort",
-                "terms": "Abtei, Basilika, geweihter Ort, Kathedrale, Altarraum, Kantorei, Kapelle, Kirche, Kirchgemeinde, Gotteshaus, Gebetshaus, Dom, Moschee, Oratorium, Heiligtum, Sacellum, Schrein, Synagoge, Tabernakel, Tempel"
+                "terms": "Abtei,Basilika,geweihter Ort,Kathedrale,Altarraum,Kantorei,Kapelle,Kirche,Kirchgemeinde,Gotteshaus,Gebetshaus,Dom,Moschee,Oratorium,Heiligtum,Sacellum,Schrein,Synagoge,Tabernakel,Tempel"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Buddhistischer Tempel",
@@ -832,7 +838,7 @@
             },
             "amenity/place_of_worship/christian": {
                 "name": "Kirche",
-                "terms": "Christlich,Abtei,Basilika,geweihter Ort,Kathedrale,Altarraum,Kantorei,Kapelle,Kirche,Kirchgemeinde,Gotteshaus,Gebetshaus,Dom,Oratorium,Heiligtum,Sacellum,Schrein,Tabernakel,Tempel"
+                "terms": "christlich,Abtei,Basilika,geweihter Ort,Kathedrale,Altarraum,Kantorei,Kapelle,Kirche,Kirchgemeinde,Gotteshaus,Gebetshaus,Dom,Oratorium,Heiligtum,Sacellum,Schrein,Tabernakel,Tempel"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Sy­n­a­go­ge",
@@ -882,7 +888,7 @@
             },
             "amenity/townhall": {
                 "name": "Rathaus",
-                "terms": "Gemeindezentrum, Stadtverwaltung, Landratsamt, Rathaus, Verwaltungszentrum"
+                "terms": "Gemeindezentrum,Stadtverwaltung,Landratsamt,Rathaus,Verwaltungszentrum"
             },
             "amenity/university": {
                 "name": "Universität",
@@ -955,11 +961,29 @@
             "building/apartments": {
                 "name": "Wohnungen"
             },
+            "building/commercial": {
+                "name": "Geschäftshaus",
+                "terms": "Gewerbehaus,gewerblich genutztes Gebäude,"
+            },
             "building/entrance": {
                 "name": "Eingang"
             },
+            "building/garage": {
+                "name": "Garage"
+            },
             "building/house": {
                 "name": "Haus"
+            },
+            "building/hut": {
+                "name": "Hütte",
+                "terms": "Baracke,Holzhütte,Berghütte"
+            },
+            "building/industrial": {
+                "name": "Industriegebäude"
+            },
+            "building/residential": {
+                "name": "Wohngebäude",
+                "terms": "Wohnhaus,Einfamilienhaus,Mehrfamilienhaus"
             },
             "emergency/phone": {
                 "name": "Notruftelefon"
@@ -1049,7 +1073,7 @@
             },
             "highway/steps": {
                 "name": "Treppen",
-                "terms": "Treppe"
+                "terms": "Treppe,Stufen"
             },
             "highway/tertiary": {
                 "name": "Kreisstraße"
@@ -1063,7 +1087,7 @@
             },
             "highway/traffic_signals": {
                 "name": "Ampeln",
-                "terms": "Ampel"
+                "terms": "Ampel,Lichtzeichenanlage,Lichtsignalanlage,Verkehrslichtsignalanlage"
             },
             "highway/trunk": {
                 "name": "Kraftfahrstraße"
@@ -1159,6 +1183,10 @@
             "leisure": {
                 "name": "Erholung"
             },
+            "leisure/dog_park": {
+                "name": "Hundepark",
+                "terms": "Hundefreilaufzone,Hundeauslaufzone,Hundezone,Hundeauslaufplatz"
+            },
             "leisure/garden": {
                 "name": "Garten"
             },
@@ -1235,7 +1263,7 @@
             },
             "man_made/wastewater_plant": {
                 "name": "Kläranlage",
-                "terms": "Kläranlage, Abwasseranlage, Abwasserreinigungsanlage, Wasseraufbereitungsanlage"
+                "terms": "Kläranlage,Abwasseranlage,Abwasserreinigungsanlage,Wasseraufbereitungsanlage,Wasserrückgewinnungsanlage"
             },
             "man_made/water_tower": {
                 "name": "Wasserturm"
@@ -1273,7 +1301,7 @@
             },
             "natural/peak": {
                 "name": "Gipfel",
-                "terms": "Gipfel, Felsnadel, Alpe, Höhepunkt, Kamm, Scheitelpunkt, Hügel, Berg, , Bergspitze, Bergkuppe, Zipfel"
+                "terms": "Gipfel,Felsnadel,Alpe,Höhepunkt,Kamm,Scheitelpunkt,Hügel,Berg,Bergspitze,Bergkuppe,Zipfel"
             },
             "natural/scrub": {
                 "name": "Gestrüpp"
@@ -1289,11 +1317,11 @@
             },
             "natural/water/lake": {
                 "name": "See",
-                "terms": "See, Loch"
+                "terms": "See,Loch"
             },
             "natural/water/pond": {
                 "name": "Teich",
-                "terms": "See, Mühlteich, Bergsee, Tümpel, Teich"
+                "terms": "See,Mühlteich,Bergsee,Tümpel,Teich"
             },
             "natural/water/reservoir": {
                 "name": "Speicherbecken"
@@ -1318,7 +1346,7 @@
             },
             "place/island": {
                 "name": "Insel",
-                "terms": "Inselgruppe, Archipel, Atoll, Inselchen, Insel, Koralleninsel, Riff"
+                "terms": "Inselgruppe,Archipel,Atoll,Inselchen,Insel,Koralleninsel,Riff"
             },
             "place/isolated_dwelling": {
                 "name": "abgelegene Siedlung"
@@ -1581,7 +1609,7 @@
             },
             "tourism/guest_house": {
                 "name": "Gästehaus",
-                "terms": "Frühstückspension,Frühstückspension,Frühstückspension"
+                "terms": "Frühstückspension"
             },
             "tourism/hostel": {
                 "name": "Hostel"

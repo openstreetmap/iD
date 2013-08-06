@@ -27,6 +27,7 @@
             "description": "దీన్ని వేరే చోటకు తరలించండి."
         }
     },
+    "just_edited": "మీరు ఓపెన్‌స్ట్రీట్‌మ్యాపుని సవరించారు!",
     "translate": {
         "translate": "అనువదించండి",
         "localized_translation_language": "భాషను ఎంచుకోండి",
@@ -39,19 +40,34 @@
         "cancel": "రద్దుచేయి",
         "warnings": "హెచ్చరికలు"
     },
+    "geocoder": {
+        "no_results_visible": "కనిపిస్తూన్న పటంలో ఫలితాలు ఏమీ లేవు",
+        "no_results_worldwide": "ఫలితాలు ఏమీ లేవు"
+    },
+    "geolocate": {
+        "title": "నా ప్రాంతాన్ని చూపించు"
+    },
     "inspector": {
         "show_more": "మరింత చూపించు",
         "all_members": "అందరు సభ్యులు",
+        "all_relations": "అన్ని సంబంధాలు",
+        "role": "పాత్ర",
+        "results": "{search} కి {n} ఫలితాలు",
         "remove": "తొలగించు",
-        "search": "వెతుకు"
+        "search": "వెతుకు",
+        "unknown": "గుర్తు తెలియని"
     },
     "background": {
         "title": "వెనుతలం",
         "description": "వెనుతలపు అమరికలు"
     },
+    "restore": {
+        "heading": "భద్రపరచని మార్పులు ఉన్నాయి"
+    },
     "save": {
         "title": "భద్రపరచు",
-        "no_changes": "భద్రపరచాల్సిన మార్పులేమీ లేవు."
+        "no_changes": "భద్రపరచాల్సిన మార్పులేమీ లేవు.",
+        "unsaved_changes": "భద్రపరచని మార్పులు ఉన్నాయి"
     },
     "success": {
         "facebook": "ఫేస్‌బుక్‌లో పంచుకోండి",
@@ -60,6 +76,9 @@
     },
     "confirm": {
         "okay": "సరే"
+    },
+    "splash": {
+        "start": "ఇప్పుడే సవరించండి"
     },
     "tag_reference": {
         "description": "వివరణ"
@@ -101,7 +120,13 @@
             "amenity": {
                 "label": "రకం"
             },
+            "barrier": {
+                "label": "రకం"
+            },
             "bicycle_parking": {
+                "label": "రకం"
+            },
+            "boundary": {
                 "label": "రకం"
             },
             "building": {
@@ -114,7 +139,8 @@
                 "label": "కట్టడం"
             },
             "capacity": {
-                "label": "సామర్థ్యం"
+                "label": "సామర్థ్యం",
+                "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
                 "label": "దిశ"
@@ -125,11 +151,20 @@
             "construction": {
                 "label": "రకం"
             },
+            "country": {
+                "label": "దేశం"
+            },
             "crossing": {
                 "label": "రకం"
             },
+            "description": {
+                "label": "వివరణ"
+            },
             "emergency": {
                 "label": "అత్యవసరం"
+            },
+            "entrance": {
+                "label": "రకం"
             },
             "highway": {
                 "label": "రకం"
@@ -139,6 +174,9 @@
             },
             "landuse": {
                 "label": "రకం"
+            },
+            "lanes": {
+                "placeholder": "1, 2, 3..."
             },
             "layer": {
                 "label": "పొర"
@@ -152,8 +190,14 @@
             "man_made": {
                 "label": "రకం"
             },
+            "maxspeed": {
+                "label": "వేగ పరిమితి"
+            },
             "name": {
                 "label": "పేరు"
+            },
+            "note": {
+                "label": "గమనిక"
             },
             "office": {
                 "label": "రకం"
@@ -164,21 +208,62 @@
             "parking": {
                 "label": "రకం"
             },
+            "phone": {
+                "label": "ఫోన్"
+            },
+            "place": {
+                "label": "రకం"
+            },
+            "power": {
+                "label": "రకం"
+            },
+            "railway": {
+                "label": "రకం"
+            },
+            "relation": {
+                "label": "రకం"
+            },
             "religion": {
                 "label": "మతం",
                 "options": {
+                    "christian": "క్రైస్తవం",
                     "muslim": "ముస్లిం",
+                    "buddhist": "బౌద్ధం",
                     "hindu": "హిందు"
                 }
             },
+            "restriction": {
+                "label": "రకం"
+            },
+            "route": {
+                "label": "రకం"
+            },
+            "route_master": {
+                "label": "రకం"
+            },
             "service": {
+                "label": "రకం"
+            },
+            "shop": {
                 "label": "రకం"
             },
             "source": {
                 "label": "మూలం"
             },
+            "sport": {
+                "label": "క్రీడ"
+            },
+            "structure": {
+                "options": {
+                    "bridge": "వంతెన",
+                    "tunnel": "సొరంగం"
+                }
+            },
             "surface": {
                 "label": "ఉపరితలం"
+            },
+            "tourism": {
+                "label": "రకం"
             },
             "tracktype": {
                 "label": "రకం"
@@ -189,13 +274,40 @@
             "waterway": {
                 "label": "రకం"
             },
+            "website": {
+                "label": "జాలగూడు"
+            },
+            "wetland": {
+                "label": "రకం"
+            },
             "wikipedia": {
                 "label": "వికీపీడియా"
+            },
+            "wood": {
+                "label": "రకం"
             }
         },
         "presets": {
+            "address": {
+                "name": "చిరునామా",
+                "terms": "చిరునామా"
+            },
+            "aeroway/aerodrome": {
+                "name": "విమానాశ్రయం",
+                "terms": "విమానాశ్రయం"
+            },
             "amenity/bank": {
-                "name": "బ్యాంకు"
+                "name": "బ్యాంకు",
+                "terms": "బ్యాంకు"
+            },
+            "amenity/cinema": {
+                "name": "సినిమా హాలు"
+            },
+            "amenity/drinking_water": {
+                "name": "తాగే నీరు"
+            },
+            "amenity/grave_yard": {
+                "name": "స్మశానం"
             },
             "amenity/hospital": {
                 "name": "ఆసుపత్రి"
@@ -203,14 +315,37 @@
             "amenity/library": {
                 "name": "గ్రంథాలయం"
             },
+            "amenity/pharmacy": {
+                "name": "మందుల షాపు"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "చర్చి",
+                "terms": "చర్చి, చర్చ్"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "మసీదు",
+                "terms": "మసీదు, మాస్క్"
+            },
+            "amenity/police": {
+                "name": "పోలీసు"
+            },
             "amenity/post_office": {
                 "name": "తపాలా కార్యాలయం"
+            },
+            "amenity/pub": {
+                "name": "పబ్"
+            },
+            "amenity/restaurant": {
+                "name": "రెస్టారెంట్"
             },
             "amenity/school": {
                 "name": "బడి"
             },
             "amenity/swimming_pool": {
                 "name": "ఈత కొలను"
+            },
+            "amenity/toilets": {
+                "name": "మరుగుదొడ్లు"
             },
             "amenity/university": {
                 "name": "విశ్వవిద్యాలయం"
@@ -221,8 +356,23 @@
             "barrier/wall": {
                 "name": "గోడ"
             },
+            "building": {
+                "name": "కట్టడం"
+            },
             "building/house": {
                 "name": "ఇల్లు"
+            },
+            "building/hut": {
+                "name": "గుడిసె"
+            },
+            "entrance": {
+                "name": "ప్రవేశ ద్వారం"
+            },
+            "highway/footway": {
+                "name": "కాల్దారి"
+            },
+            "highway/path": {
+                "name": "దారి"
             },
             "highway/primary_link": {
                 "name": "ముఖ్య లంకె"
@@ -230,17 +380,59 @@
             "highway/steps": {
                 "name": "మెట్లు"
             },
+            "highway/traffic_signals": {
+                "name": "ట్రాఫిక్ సిగ్నళ్ళు"
+            },
+            "historic": {
+                "name": "చారిత్రక ప్రదేశం"
+            },
+            "landuse/farm": {
+                "name": "పొలం"
+            },
             "landuse/forest": {
                 "name": "అడవి"
             },
             "landuse/grass": {
                 "name": "పచ్చిక"
             },
+            "landuse/industrial": {
+                "name": "పారిశ్రామికం"
+            },
+            "landuse/residential": {
+                "name": "నివాస ప్రాంతం"
+            },
+            "leisure/garden": {
+                "name": "తోట"
+            },
+            "leisure/park": {
+                "name": "పార్కు"
+            },
+            "leisure/pitch/tennis": {
+                "name": "టెన్నిస్ కోర్టు"
+            },
             "leisure/playground": {
                 "name": "ఆటమైదానం"
             },
+            "leisure/swimming_pool": {
+                "name": "ఈత కొలను"
+            },
+            "line": {
+                "name": "గీత"
+            },
             "natural/tree": {
                 "name": "చెట్టు"
+            },
+            "natural/water": {
+                "name": "నీళ్ళు"
+            },
+            "natural/water/lake": {
+                "name": "చెరువు"
+            },
+            "natural/water/pond": {
+                "name": "సరస్సు"
+            },
+            "natural/wetland": {
+                "name": "తడినేల"
             },
             "office": {
                 "name": "కార్యాలయం"
@@ -254,11 +446,38 @@
             "place/village": {
                 "name": "గ్రామం"
             },
+            "point": {
+                "name": "బిందువు"
+            },
+            "power/pole": {
+                "name": "కరెంటు స్తంభం"
+            },
+            "railway": {
+                "name": "రైల్వే"
+            },
+            "relation": {
+                "name": "సంబంధం"
+            },
+            "shop/supermarket": {
+                "name": "సుపర్ మార్కెట్"
+            },
+            "shop/vacant": {
+                "name": "ఖాళీ దుకాణం"
+            },
+            "tourism/hotel": {
+                "name": "హోటెల్"
+            },
             "tourism/information": {
                 "name": "సమాచారం"
             },
+            "tourism/museum": {
+                "name": "మ్యూజియం"
+            },
             "tourism/zoo": {
                 "name": "జూ"
+            },
+            "type/boundary/administrative": {
+                "name": "పరిపాలనా సరిహద్దు"
             },
             "type/route/foot": {
                 "name": "కాలి బాట"
@@ -267,13 +486,22 @@
                 "name": "ఇతర"
             },
             "waterway/canal": {
-                "name": "కాలువ"
+                "name": "కాలువ",
+                "terms": "కాలువ"
             },
             "waterway/dam": {
-                "name": "ఆనకట్ట"
+                "name": "ఆనకట్ట",
+                "terms": "ఆనకట్ట"
             },
             "waterway/river": {
-                "name": "నది"
+                "name": "నది",
+                "terms": "నది"
+            },
+            "waterway/riverbank": {
+                "name": "నది ఒడ్డు"
+            },
+            "waterway/stream": {
+                "name": "కాలువ"
             }
         }
     }

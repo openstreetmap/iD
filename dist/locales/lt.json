@@ -85,10 +85,6 @@
         "deleted": "Ištrinta",
         "created": "Sukurta"
     },
-    "geocoder": {
-        "title": "Surasti vietą",
-        "placeholder": "Surasti vietą"
-    },
     "geolocate": {
         "title": "Rodyti mano vietą"
     },
@@ -506,9 +502,6 @@
             },
             "natural/cliff": {
                 "name": "Uola"
-            },
-            "natural/coastline": {
-                "terms": "krantas"
             },
             "natural/tree": {
                 "name": "Medis"

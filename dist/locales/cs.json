@@ -30,7 +30,8 @@
         "add": {
             "annotation": {
                 "point": "Uzel přidán.",
-                "vertex": "Uzel byl přidán k cestě."
+                "vertex": "Uzel byl přidán k cestě.",
+                "relation": "Přidána relace."
             }
         },
         "start": {
@@ -204,9 +205,9 @@
         "truncated_list": "Přispěli {users} a {count} další."
     },
     "geocoder": {
-        "title": "Hledat místo",
-        "placeholder": "Hledat místo",
-        "no_results": "Místo '{name}' nenalezeno"
+        "search": "Hledat celosvětově...",
+        "no_results_visible": "Na zobrazené části mapy nic nalezeno",
+        "no_results_worldwide": "Nic nenalezeno"
     },
     "geolocate": {
         "title": "Ukázat moji polohu"
@@ -219,6 +220,7 @@
         "all_tags": "Všechny vlastnosti",
         "all_members": "Všechny prvky",
         "all_relations": "Všechny relace",
+        "new_relation": "Nová relace...",
         "role": "Role",
         "choose": "Zvolte typ objektu",
         "results": "{search} nalezeno {n} krát",
@@ -228,7 +230,7 @@
         "search": "Hledat",
         "unknown": "Není známo",
         "incomplete": "<nebylo staženo>",
-        "feature_list": "Seznam objektů",
+        "feature_list": "Hledat objekty",
         "edit": "Editovat objekt"
     },
     "background": {
@@ -704,10 +706,12 @@
         },
         "presets": {
             "address": {
-                "name": "Adresa"
+                "name": "Adresa",
+                "terms": "adresa,PSČ,ulice"
             },
             "aeroway": {
-                "name": "Přistávací dráha"
+                "name": "Přistávací dráha",
+                "terms": "letitiště,přistávací dráha,letadlo,terminál"
             },
             "aeroway/aerodrome": {
                 "name": "Letiště",
@@ -718,10 +722,12 @@
                 "terms": "apron"
             },
             "aeroway/gate": {
-                "name": "Letištní gate"
+                "name": "Letištní gate",
+                "terms": "letadlo,letiště,přistávací dráha,terminál"
             },
             "aeroway/hangar": {
-                "name": "Hangár"
+                "name": "Hangár",
+                "terms": "hangár,garáž,letadlo,letiště"
             },
             "aeroway/helipad": {
                 "name": "Heliport",
@@ -732,46 +738,60 @@
                 "terms": "runway,přistávací dráha,vzletová dráha,přistávací plocha"
             },
             "aeroway/taxiway": {
-                "name": "Pojezdová dráha"
+                "name": "Pojezdová dráha",
+                "terms": "pojezdová dráha,taxiway,letiště"
             },
             "aeroway/terminal": {
                 "name": "Letištní terminál",
                 "terms": "letiště,terminál"
             },
             "amenity": {
-                "name": "Zařízení"
+                "name": "Zařízení",
+                "terms": "vybavenost,zařízení,služba"
             },
             "amenity/atm": {
-                "name": "Bankomat"
+                "name": "Bankomat",
+                "terms": "bankomat,ATM,automat,banka,výběr"
             },
             "amenity/bank": {
                 "name": "Banka",
                 "terms": "banka,spořitelna,kampelička,záložna,směnárna,bankomat,bank,depozit"
             },
             "amenity/bar": {
-                "name": "Bar"
+                "name": "Bar",
+                "terms": "bar,klub,hospoda"
             },
             "amenity/bench": {
-                "name": "Lavička"
+                "name": "Lavička",
+                "terms": "lavička,sezení"
             },
             "amenity/bicycle_parking": {
-                "name": "Parkování kol"
+                "name": "Parkování kol",
+                "terms": "stojan,kolo,stojan na kolo,parkoviště na kolo,cyklostojan"
             },
             "amenity/bicycle_rental": {
-                "name": "Půjčovna kol"
+                "name": "Půjčovna kol",
+                "terms": "půjčovna kol,cyklopůjčovna"
             },
             "amenity/cafe": {
                 "name": "Kavárna",
                 "terms": "káva,kafe,kavárna,čaj,čajovna"
             },
             "amenity/car_rental": {
-                "name": "Půjčovna aut"
+                "name": "Půjčovna aut",
+                "terms": "půjčovna aut,autopůjčovna"
             },
             "amenity/car_sharing": {
-                "name": "Sdílení aut"
+                "name": "Sdílení aut",
+                "terms": "sdílení aut,car sharing"
             },
             "amenity/car_wash": {
-                "name": "Mytí aut"
+                "name": "Mytí aut",
+                "terms": "myčka,automyčka,mytí,čistění,umývání,čistírna"
+            },
+            "amenity/childcare": {
+                "name": "Mimoškolní péče",
+                "terms": "družina,školka,péče o děti,kroužek,tábor"
             },
             "amenity/cinema": {
                 "name": "Kino",

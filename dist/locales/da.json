@@ -30,7 +30,8 @@
         "add": {
             "annotation": {
                 "point": "Tilføjede et punkt.",
-                "vertex": "Tilføjede et punkt til en vej."
+                "vertex": "Tilføjede et punkt til en vej.",
+                "relation": "Tilføjede en relation."
             }
         },
         "start": {
@@ -204,9 +205,9 @@
         "truncated_list": "Redigeringer af  {users}  og {count} andre"
     },
     "geocoder": {
-        "title": "Find et sted",
-        "placeholder": "Find et sted",
-        "no_results": "Kunne ikke lokalisere et sted kaldet '{name}'"
+        "search": "Søg i hele verden...",
+        "no_results_visible": "Ingen resultater i det synlige kortudsnit",
+        "no_results_worldwide": "Ingen søgeresultater fundet"
     },
     "geolocate": {
         "title": "Vis hvor jeg er"
@@ -219,6 +220,7 @@
         "all_tags": "Alle tags",
         "all_members": "Alle medlemmer",
         "all_relations": "Alle relationer",
+        "new_relation": "Ny relation...",
         "role": "Rolle",
         "choose": "Vælg elementtype",
         "results": "{n} resultater for {search}",
@@ -228,7 +230,7 @@
         "search": "Søg",
         "unknown": "Ukendt",
         "incomplete": "<ikke downloadet>",
-        "feature_list": "Objektliste",
+        "feature_list": "Søgefunktioner",
         "edit": "Ret objekt"
     },
     "background": {
@@ -704,999 +706,1288 @@
         },
         "presets": {
             "address": {
-                "name": "Adresse"
+                "name": "Adresse",
+                "terms": "adresse, adresser"
             },
             "aeroway": {
-                "name": "Lufthavnsveje"
+                "name": "Lufthavnsveje",
+                "terms": "Lufthavnsveje"
             },
             "aeroway/aerodrome": {
                 "name": "Lufthavn",
-                "terms": "fly,lufthavn,lufthavnsområde"
+                "terms": "Lufthavn, Flyveplads"
             },
             "aeroway/apron": {
                 "name": "Apron",
-                "terms": "rampe"
+                "terms": "Apron"
             },
             "aeroway/gate": {
-                "name": "Lufthavns gate"
+                "name": "Lufthavns gate",
+                "terms": "Lufthavns gate"
             },
             "aeroway/hangar": {
-                "name": "Hangar"
+                "name": "Hangar",
+                "terms": "Hangar"
             },
             "aeroway/helipad": {
                 "name": "Helikopterlandingsplads",
-                "terms": "helikopter,helipad,helikopterlandsplads"
+                "terms": "Helipad, Helikopterlandingsplads"
             },
             "aeroway/runway": {
                 "name": "Runway",
-                "terms": "Landingsstribe"
+                "terms": "Runway"
             },
             "aeroway/taxiway": {
-                "name": "Taxiway"
+                "name": "Taxiway",
+                "terms": "Taxiway"
             },
             "aeroway/terminal": {
                 "name": "Lufthavnsterminal",
-                "terms": "lufthavn,lufthavnlandingsbaner"
+                "terms": "Lufthavnsterminal"
             },
             "amenity": {
-                "name": "Facilitet"
+                "name": "Facilitet",
+                "terms": "Facilitet"
             },
             "amenity/atm": {
-                "name": "Pengeautomat"
+                "name": "Pengeautomat",
+                "terms": "Hæveautomat, kontantautomat"
             },
             "amenity/bank": {
                 "name": "Bank",
-                "terms": "kreditfirma,investeringsfirma,investeringsforening,kreditrådgivning"
+                "terms": "Bank, Pengeinstitut,  Sparekasse, Andelskasse"
             },
             "amenity/bar": {
-                "name": "Bar"
+                "name": "Bar",
+                "terms": "Bar"
             },
             "amenity/bench": {
-                "name": "Bænk"
+                "name": "Bænk",
+                "terms": "Bænk, Havebænk, Parkbænk"
             },
             "amenity/bicycle_parking": {
-                "name": "Cykelparkering"
+                "name": "Cykelparkering",
+                "terms": "Cykelparkering"
             },
             "amenity/bicycle_rental": {
-                "name": "Cykeludlejning"
+                "name": "Cykeludlejning",
+                "terms": "Cykeludlejning, Rent-a-Bike"
             },
             "amenity/cafe": {
                 "name": "Cafe",
-                "terms": "kaffe,te, kaffebutik"
+                "terms": "Cafe, Café"
             },
             "amenity/car_rental": {
-                "name": "Biludlejning"
+                "name": "Biludlejning",
+                "terms": "Biludlejning"
             },
             "amenity/car_sharing": {
-                "name": "Delebil"
+                "name": "Delebil",
+                "terms": "Delebil, Delebilsordning"
             },
             "amenity/car_wash": {
-                "name": "Bilvask"
+                "name": "Bilvask",
+                "terms": "Bilvask, Automobilvask"
+            },
+            "amenity/childcare": {
+                "name": "Børnepasning",
+                "terms": "Børnehave, Børnepasning, Vuggestue, Dagpleje, Fritidshjem"
             },
             "amenity/cinema": {
                 "name": "Biograf",
-                "terms": "storskærm,drive-in-bio,film,bio,biograf,biografteater,film"
+                "terms": "Biograf, Bio"
             },
             "amenity/college": {
-                "name": "Gymnasie"
+                "name": "Gymnasie",
+                "terms": "Gymnasie, Handelsgymnasie"
             },
             "amenity/courthouse": {
-                "name": "Domstolsbygning"
+                "name": "Domstolsbygning",
+                "terms": "Domstolsbygning, Domstol"
             },
             "amenity/drinking_water": {
                 "name": "Drikkevand",
-                "terms": "drikkefontæne"
+                "terms": "<oversæt med synonymer eller beslægtet termer for 'Drikkevand', adskilt med kommaer>"
             },
             "amenity/embassy": {
-                "name": "Ambassade"
+                "name": "Ambassade",
+                "terms": "Ambassade"
             },
             "amenity/fast_food": {
-                "name": "Fast food"
+                "name": "Fast food",
+                "terms": "Fastfood, Grillbar, Pølsevogn"
             },
             "amenity/fire_station": {
-                "name": "Brandstation"
+                "name": "Brandstation",
+                "terms": "<oversæt med synonymer eller beslægtet termer for 'Brandstation', adskilt med kommaer>"
             },
             "amenity/fountain": {
-                "name": "Springvand"
+                "name": "Springvand",
+                "terms": "Springvand"
             },
             "amenity/fuel": {
-                "name": "Tankstation"
+                "name": "Tankstation",
+                "terms": "Tankstation, Benzinstation"
             },
             "amenity/grave_yard": {
-                "name": "Kirkegård"
+                "name": "Kirkegård",
+                "terms": "Kirkegård, Gravsted"
             },
             "amenity/hospital": {
                 "name": "Hospital",
-                "terms": "klinik, skadestue, sundhedsvæsen, hospice, ambulatorium, institution, plejehjem,ældrebolig,sanatorium,kirurgi"
+                "terms": "Hospital, Sygehus"
             },
             "amenity/kindergarten": {
                 "name": "Børnehave",
-                "terms": "vuggestue,dagpleje,småbørnslegegruppe"
+                "terms": "Børnehave, Vuggestue, Dagpleje, Fritidshjem"
             },
             "amenity/library": {
-                "name": "Bibliotek"
+                "name": "Bibliotek",
+                "terms": "<oversæt med synonymer eller beslægtet termer for 'Bibliotek', adskilt med kommaer>"
             },
             "amenity/marketplace": {
-                "name": "Markedsplads"
+                "name": "Markedsplads",
+                "terms": "Markedsplads"
             },
             "amenity/parking": {
-                "name": "Parkering"
+                "name": "Parkering",
+                "terms": "Parkering, Bilparkering"
             },
             "amenity/pharmacy": {
-                "name": "Apotek"
+                "name": "Apotek",
+                "terms": "Apotek"
             },
             "amenity/place_of_worship": {
                 "name": "Tilbedelsessted",
-                "terms": "katedral,kapel, kirke,Guds hus, bedehus,missionshus, moske, sogn,fristed,synagoge,tempel"
+                "terms": "Tilbedelsessted, Religiøst tilbedelsessted"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Buddhisttempel",
-                "terms": "stupa,vihara,kloster,tempel,pagode,zendo,dojo"
+                "terms": "Buddisttempel"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Kirke",
-                "terms": "katedral,kapel, kirke,Guds hus, bedehus,missionshus, moske, sogn,fristed,synagoge,tempel"
+                "terms": "Kirke, Folkekirke"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Synagoge",
-                "terms": "jødisk,synagoge"
+                "terms": "Synagoge, Jødisk Synagoge"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Moské",
-                "terms": "muslimsk,moské"
+                "terms": "Moske, Moské"
             },
             "amenity/police": {
                 "name": "Politi",
-                "terms": "spejder,betjent, politikorps, strisser,detektiv, retshåndhævelse,politi"
+                "terms": "Politistation, Politi"
             },
             "amenity/post_box": {
                 "name": "Postkasse",
-                "terms": "brevkasse,postboks"
+                "terms": "Postkasse"
             },
             "amenity/post_office": {
-                "name": "Postkontor"
+                "name": "Postkontor",
+                "terms": "Posthus, Postkontor"
             },
             "amenity/pub": {
-                "name": "Værtshus"
+                "name": "Værtshus",
+                "terms": "Værtshus, Pub, Ølstue"
             },
             "amenity/restaurant": {
                 "name": "Restaurant",
-                "terms": "bar, cafeteria, cafe, kantine,kaffebar,spisestue,drive-in, spisested, spisehus,fastfood sted,grill, hamburgerbar,pølsevogn, kro, madpakkerum,natklub,pizzeria, salon,vandingshul"
+                "terms": "Restaurant, Spisested, Spisehus"
             },
             "amenity/school": {
                 "name": "Skole",
-                "terms": "akademi,kollegium, afdeling, disciplin,fakultet,institut, institution, fængsel*, skole, seminarium, universitet"
+                "terms": "Skole, Folkeskole, Privatskole"
             },
             "amenity/swimming_pool": {
-                "name": "Svømmebassin"
+                "name": "Svømmebassin",
+                "terms": "Svømmebassin, Swimming Pool, Pool"
             },
             "amenity/taxi": {
                 "name": "Taxaholdeplads",
-                "terms": "taxa"
+                "terms": "<oversæt med synonymer eller beslægtet termer for 'Taxaholdeplads', adskilt med kommaer>"
             },
             "amenity/telephone": {
-                "name": "Telefon"
+                "name": "Telefon",
+                "terms": "Telefon, Telefonboks"
             },
             "amenity/theatre": {
                 "name": "Teater",
-                "terms": "teater,performance,skuespil,musical"
+                "terms": "Teater, Revy"
             },
             "amenity/toilets": {
                 "name": "Toiletter",
-                "terms": "baeværelse,hvilerum"
+                "terms": "Toiletter, WC"
             },
             "amenity/townhall": {
                 "name": "Rådhus",
-                "terms": "medborgerhus,forsamlingshus,rådhus,medborgercenter"
+                "terms": "Rådhus, Kommunerådhus"
             },
             "amenity/university": {
                 "name": "Universitet",
-                "terms": "gymnasie"
+                "terms": "Universitet"
             },
             "amenity/waste_basket": {
                 "name": "Skraldespand",
-                "terms": "affaldspand,skraldespand"
+                "terms": "<oversæt med synonymer eller beslægtet termer for 'Skraldespand', adskilt med kommaer>"
             },
             "area": {
-                "name": "Område"
+                "name": "Område",
+                "terms": "Område"
             },
             "barrier": {
-                "name": "Barriere"
+                "name": "Barriere",
+                "terms": "Barriere"
             },
             "barrier/block": {
-                "name": "Blokering"
+                "name": "Blokering",
+                "terms": "Blokering, Blok"
             },
             "barrier/bollard": {
-                "name": "Pullert"
+                "name": "Pullert",
+                "terms": "Pullert"
             },
             "barrier/cattle_grid": {
-                "name": "Kreaturrist"
+                "name": "Kreaturrist",
+                "terms": "Kreaturrist"
             },
             "barrier/city_wall": {
-                "name": "Bymur"
+                "name": "Bymur",
+                "terms": "Bymur"
             },
             "barrier/cycle_barrier": {
-                "name": "Cykelbarriere"
+                "name": "Cykelbarriere",
+                "terms": "Cykelbarriere"
             },
             "barrier/ditch": {
-                "name": "Grøft"
+                "name": "Grøft",
+                "terms": "Grøft, Grøftekant"
             },
             "barrier/entrance": {
-                "name": "Indgang"
+                "name": "Indgang",
+                "terms": "Indgang, Indgangsparti"
             },
             "barrier/fence": {
-                "name": "Hegn"
+                "name": "Hegn",
+                "terms": "Hegn, Elhegn"
             },
             "barrier/gate": {
-                "name": "Led/låge"
+                "name": "Led/låge",
+                "terms": "Led, Låge, Havelåge"
             },
             "barrier/hedge": {
-                "name": "Læhegn/hæk"
+                "name": "Læhegn/hæk",
+                "terms": "Læhegn, Hæk"
             },
             "barrier/kissing_gate": {
-                "name": "Dyrefoldsport"
+                "name": "Dyrefoldsport",
+                "terms": "Dyrefoldsport"
             },
             "barrier/lift_gate": {
-                "name": "Løftebom"
+                "name": "Løftebom",
+                "terms": "Løftebom, Bom"
             },
             "barrier/retaining_wall": {
-                "name": "Støttemur"
+                "name": "Støttemur",
+                "terms": "Støttemur"
             },
             "barrier/stile": {
-                "name": "Stente"
+                "name": "Stente",
+                "terms": "Stente"
             },
             "barrier/toll_booth": {
-                "name": "Vejafgifthus"
+                "name": "Vejafgifthus",
+                "terms": "Vejafgifthus, Betalingsanlæg"
             },
             "barrier/wall": {
-                "name": "Mur"
+                "name": "Mur",
+                "terms": "<oversæt med synonymer eller beslægtet termer for 'Mur', adskilt med kommaer>"
             },
             "boundary/administrative": {
-                "name": "Administrativt grænse"
+                "name": "Administrativt grænse",
+                "terms": "Administrativt grænse"
             },
             "building": {
-                "name": "Bygning"
+                "name": "Bygning",
+                "terms": "Bygning"
             },
             "building/apartments": {
-                "name": "Lejligheder"
+                "name": "Lejligheder",
+                "terms": "Lejligheder, Ejerlejligheder"
+            },
+            "building/commercial": {
+                "name": "Indkøbscenter",
+                "terms": "Indkøbscenter, Storcenter"
             },
             "building/entrance": {
-                "name": "Indgang"
+                "name": "Indgang",
+                "terms": "Indgang"
+            },
+            "building/garage": {
+                "name": "Garage",
+                "terms": "Garage, Carport"
             },
             "building/house": {
-                "name": "Hus"
+                "name": "Hus",
+                "terms": "Hus, Parcelhus"
+            },
+            "building/hut": {
+                "name": "Hytte",
+                "terms": "Hytte, Bjerghytte"
+            },
+            "building/industrial": {
+                "name": "Industribygning",
+                "terms": "Industribygning"
+            },
+            "building/residential": {
+                "name": "Beboelsesbygning",
+                "terms": "Beboelsesbygning, Parcelhus"
             },
             "emergency/phone": {
-                "name": "Nødtelefon"
+                "name": "Nødtelefon",
+                "terms": "Nødtelefon, Nødopkaldstelefon"
             },
             "entrance": {
-                "name": "Indgang"
+                "name": "Indgang",
+                "terms": "Indgang, Indgangsparti"
             },
             "highway": {
-                "name": "Veje"
+                "name": "Veje",
+                "terms": "Veje, Gader"
             },
             "highway/bridleway": {
                 "name": "Ridesti",
-                "terms": "ridesti, ridning sti,hestesti"
+                "terms": "Ridesti, Hestesti"
             },
             "highway/bus_stop": {
-                "name": "Busstoppested"
+                "name": "Busstoppested",
+                "terms": "Bustoppested, Rutebilstoppested"
             },
             "highway/crossing": {
                 "name": "Kryds",
-                "terms": "fodgængerovergang"
+                "terms": "Kryds"
             },
             "highway/cycleway": {
-                "name": "Cykelsti"
+                "name": "Cykelsti",
+                "terms": "Cykelsti"
             },
             "highway/footway": {
                 "name": "Gangsti",
-                "terms": "sti,boulevard,gangsti,vej,bane,linje,passage,sti,jernbane,jernbanespor,vej,gade,rute,gennemkørsel,spor,gå"
+                "terms": "Gangsti"
             },
             "highway/living_street": {
-                "name": "Stillevej"
+                "name": "Stillevej",
+                "terms": "Stillevej"
             },
             "highway/mini_roundabout": {
-                "name": "Minirundkørsel"
+                "name": "Minirundkørsel",
+                "terms": "Minirundkørsel"
             },
             "highway/motorway": {
-                "name": "Motorvej"
+                "name": "Motorvej",
+                "terms": "Motorvej"
             },
             "highway/motorway_junction": {
-                "name": "Motorvejskryds"
+                "name": "Motorvejskryds",
+                "terms": "Motorvejskryds"
             },
             "highway/motorway_link": {
                 "name": "Motorvejsafkørsel",
-                "terms": "rampe, tilkørelsesrampe, afkørelsesrampe"
+                "terms": "Motorvejsafkørsel"
             },
             "highway/path": {
-                "name": "Sti"
+                "name": "Sti",
+                "terms": "Sti"
             },
             "highway/pedestrian": {
-                "name": "Gågade"
+                "name": "Gågade",
+                "terms": "Gågade"
             },
             "highway/primary": {
-                "name": "Primærvej"
+                "name": "Primærvej",
+                "terms": "Primærvej"
             },
             "highway/primary_link": {
                 "name": "Link til primær vej",
-                "terms": "rampe, påkørelsesrampe, afkørelsesrampe"
+                "terms": "Link til primær vej"
             },
             "highway/residential": {
-                "name": "Villavej"
+                "name": "Villavej",
+                "terms": "Villavej"
             },
             "highway/road": {
-                "name": "Ukendt vejtype"
+                "name": "Ukendt vejtype",
+                "terms": "Ukendt vejtype"
             },
             "highway/secondary": {
-                "name": "Sekundær vej"
+                "name": "Sekundær vej",
+                "terms": "Sekundærvej"
             },
             "highway/secondary_link": {
                 "name": "Link til sekundær vej",
-                "terms": "ramp,on ramp,off ramp"
+                "terms": "Link til sekundær vej"
             },
             "highway/service": {
-                "name": "Servicevej"
+                "name": "Servicevej",
+                "terms": "Servicevej"
             },
             "highway/service/alley": {
-                "name": "Stræde (gade)"
+                "name": "Stræde (gade)",
+                "terms": "Stræde (gade)"
             },
             "highway/service/drive-through": {
-                "name": "Gennemkørsel (uden stop)"
+                "name": "Gennemkørsel (uden stop)",
+                "terms": "Gennemkørsel (uden stop)"
             },
             "highway/service/driveway": {
-                "name": "Indkørsel"
+                "name": "Indkørsel",
+                "terms": "Indkørsel"
             },
             "highway/service/emergency_access": {
-                "name": "Ambulancevej"
+                "name": "Ambulancevej",
+                "terms": "Ambulancevej, Udrykningsvej, Brandvej"
             },
             "highway/service/parking_aisle": {
-                "name": "Vej mellem parkeringspladser"
+                "name": "Vej mellem parkeringspladser",
+                "terms": "Parkeringsvej"
             },
             "highway/steps": {
                 "name": "Trappe",
-                "terms": "trapper,trappe"
+                "terms": "Trapper"
             },
             "highway/tertiary": {
-                "name": " Tertiær vej"
+                "name": " Tertiær vej",
+                "terms": "Tertiær vej, Tertiærvej"
             },
             "highway/tertiary_link": {
                 "name": "Link til tertiær vej",
-                "terms": "ramp,on ramp,off ramp"
+                "terms": "Link til tertiær vej"
             },
             "highway/track": {
-                "name": "Mark/Skovvej"
+                "name": "Mark/Skovvej",
+                "terms": "Mark/Skovvej"
             },
             "highway/traffic_signals": {
                 "name": "Trafiksignal",
-                "terms": "lys,stoplys,traffiklys"
+                "terms": "Trafiksignal, Lyskryds"
             },
             "highway/trunk": {
-                "name": "Motortrafikvej"
+                "name": "Motortrafikvej",
+                "terms": "Motortrafikvej"
             },
             "highway/trunk_link": {
                 "name": "Afkørsel motortrafikvej",
-                "terms": "rampe, påkørelsesrampe, afkørelsesrampe"
+                "terms": "Afkørsel motortrafikvej"
             },
             "highway/turning_circle": {
-                "name": "Vendeplads"
+                "name": "Vendeplads",
+                "terms": "Vendeplads"
             },
             "highway/unclassified": {
-                "name": "Mindre vej"
+                "name": "Mindre vej",
+                "terms": "Ukendt vejtype"
             },
             "historic": {
-                "name": "Historisk sted"
+                "name": "Historisk sted",
+                "terms": "Historisk sted"
             },
             "historic/archaeological_site": {
-                "name": "Arkæologisk sted"
+                "name": "Arkæologisk sted",
+                "terms": "Arkæologisk sted"
             },
             "historic/boundary_stone": {
-                "name": "Grænsesten"
+                "name": "Grænsesten",
+                "terms": "Grænsesten"
             },
             "historic/castle": {
-                "name": "Slot"
+                "name": "Slot",
+                "terms": "Slot, Kongeslotte"
             },
             "historic/memorial": {
-                "name": "Mindesmærke"
+                "name": "Mindesmærke",
+                "terms": "Mindesmærke, Mindesten"
             },
             "historic/monument": {
-                "name": "Monument"
+                "name": "Monument",
+                "terms": "Monument"
             },
             "historic/ruins": {
-                "name": "Ruiner"
+                "name": "Ruiner",
+                "terms": "Ruiner, Slotsruiner"
             },
             "historic/wayside_cross": {
-                "name": "Vejsidemindesmærker"
+                "name": "Vejsidemindesmærker",
+                "terms": "Vejsidemindesmærker"
             },
             "historic/wayside_shrine": {
-                "name": "Vejsideskrin"
+                "name": "Vejsideskrin",
+                "terms": "Vejsideskrin"
             },
             "landuse": {
-                "name": "Brug af land"
+                "name": "Brug af land",
+                "terms": "Brug af land"
             },
             "landuse/allotments": {
-                "name": "Kolonihaver"
+                "name": "Kolonihaver",
+                "terms": "Kolonihaver, Haveforeninger, Nyttehaver"
             },
             "landuse/basin": {
-                "name": "Basin"
+                "name": "Basin",
+                "terms": "Basin"
             },
             "landuse/cemetery": {
-                "name": "Gravplads "
+                "name": "Gravplads ",
+                "terms": "Gravplads "
             },
             "landuse/commercial": {
-                "name": "Kommercielt område"
+                "name": "Kommercielt område",
+                "terms": "Kommercielt område"
             },
             "landuse/construction": {
-                "name": "Under konstruktion"
+                "name": "Under konstruktion",
+                "terms": "Under konstruktion"
             },
             "landuse/farm": {
-                "name": "Landbrugsjord"
+                "name": "Landbrugsjord",
+                "terms": "Landbrugsjord"
             },
             "landuse/farmyard": {
-                "name": "Gårdsplads"
+                "name": "Gårdsplads",
+                "terms": "Gård, Bondegård"
             },
             "landuse/forest": {
-                "name": "Skov"
+                "name": "Skov",
+                "terms": "Skov, Plantageskov"
             },
             "landuse/grass": {
-                "name": "Græs"
+                "name": "Græs",
+                "terms": "Græs"
             },
             "landuse/industrial": {
-                "name": "Industriområde"
+                "name": "Industriområde",
+                "terms": "Industriområde, Fabriksområde"
             },
             "landuse/meadow": {
-                "name": "Eng"
+                "name": "Eng",
+                "terms": "Eng"
             },
             "landuse/orchard": {
-                "name": "Frugtplantage"
+                "name": "Frugtplantage",
+                "terms": "Frugtplantage, Æbleplantage"
             },
             "landuse/quarry": {
-                "name": "Stenbrud/Grusgrav"
+                "name": "Stenbrud/Grusgrav",
+                "terms": "Grusgrav, Stenbrud, Minedriftsområde"
             },
             "landuse/residential": {
-                "name": "Beboelsesområde"
+                "name": "Beboelsesområde",
+                "terms": "Boligområde"
             },
             "landuse/retail": {
-                "name": "Handelsområde"
+                "name": "Handelsområde",
+                "terms": "Handelsområde, Butiksområde"
             },
             "landuse/vineyard": {
-                "name": "Vingård"
+                "name": "Vingård",
+                "terms": "Vingård, Vinmark"
             },
             "leisure": {
-                "name": "Fritids"
+                "name": "Fritids",
+                "terms": "Fritid"
+            },
+            "leisure/dog_park": {
+                "name": "Hundepark",
+                "terms": "Hundepark"
             },
             "leisure/garden": {
-                "name": "Have"
+                "name": "Have",
+                "terms": "Have"
             },
             "leisure/golf_course": {
-                "name": "Golfbane"
+                "name": "Golfbane",
+                "terms": "Golfbane, Golfkurser"
             },
             "leisure/marina": {
-                "name": "Lystbådehavn"
+                "name": "Lystbådehavn",
+                "terms": "Lystbådehavn, Marina"
             },
             "leisure/park": {
                 "name": "Park",
-                "terms": "have,græsplæne,eng,park,rekreativt område,legeplads"
+                "terms": "Park, Parkområde"
             },
             "leisure/pitch": {
-                "name": "Sportsbane"
+                "name": "Sportsbane",
+                "terms": "Sportsbane, Sportområde"
             },
             "leisure/pitch/american_football": {
-                "name": "Amerikansk fodboldbane"
+                "name": "Amerikansk fodboldbane",
+                "terms": "Amerikansk Fodboldbane"
             },
             "leisure/pitch/baseball": {
-                "name": "Baseballbane"
+                "name": "Baseballbane",
+                "terms": "Baseballbane"
             },
             "leisure/pitch/basketball": {
-                "name": "Basketballbane"
+                "name": "Basketballbane",
+                "terms": "Basketballbane"
             },
             "leisure/pitch/soccer": {
-                "name": "Fodboldbane"
+                "name": "Fodboldbane",
+                "terms": "Fodboldbane"
             },
             "leisure/pitch/tennis": {
-                "name": "Tennisbane"
+                "name": "Tennisbane",
+                "terms": "Tennisbane"
             },
             "leisure/pitch/volleyball": {
-                "name": "Volleyballbane"
+                "name": "Volleyballbane",
+                "terms": "Volleyballbane"
             },
             "leisure/playground": {
                 "name": "Legeplads",
-                "terms": "klatrestativ, legeområde"
+                "terms": "Legeplads, Naturlegeplads, Børnelegeplads"
             },
             "leisure/slipway": {
-                "name": "Bådrampe"
+                "name": "Bådrampe",
+                "terms": "Bådrampe, Skibsrampe"
             },
             "leisure/stadium": {
-                "name": "Stadion"
+                "name": "Stadion",
+                "terms": "Stadion"
             },
             "leisure/swimming_pool": {
-                "name": "Svømmebassin"
+                "name": "Svømmebassin",
+                "terms": "Svømmebassin, Swimming Pool, Pool"
             },
             "line": {
-                "name": "Linje"
+                "name": "Linje",
+                "terms": "Linje"
             },
             "man_made": {
-                "name": "Menneskeskabt"
+                "name": "Menneskeskabt",
+                "terms": "Menneskeskabt"
             },
             "man_made/breakwater": {
-                "name": "Bølgebryder"
+                "name": "Bølgebryder",
+                "terms": "Bølgebryder"
             },
             "man_made/cutline": {
-                "name": "Skærelinje"
+                "name": "Skærelinje",
+                "terms": "Skærelinje"
             },
             "man_made/lighthouse": {
-                "name": "Fyr (navigation)"
+                "name": "Fyr (navigation)",
+                "terms": "Fyr (navigation)"
             },
             "man_made/pier": {
-                "name": "Bådebro"
+                "name": "Bådebro",
+                "terms": "Bådebro"
             },
             "man_made/pipeline": {
-                "name": "Rørledning"
+                "name": "Rørledning",
+                "terms": "Rørledning"
             },
             "man_made/survey_point": {
-                "name": "Geografisk fixpunkt"
+                "name": "Geografisk fixpunkt",
+                "terms": "Geografisk fixpunkt"
             },
             "man_made/tower": {
-                "name": "Tårn"
+                "name": "Tårn",
+                "terms": "Tårn"
             },
             "man_made/wastewater_plant": {
                 "name": "Spildevandsanlæg ",
-                "terms": "rensningsanlæg, genvindingsanlæg, vandbehandlingsanlæg"
+                "terms": "Spildevandsanlæg, Vandrensningsanlæg, Rensningsanlæg "
             },
             "man_made/water_tower": {
-                "name": "Vandtårn"
+                "name": "Vandtårn",
+                "terms": "Vandtårn"
             },
             "man_made/water_well": {
-                "name": "Brønd"
+                "name": "Brønd",
+                "terms": "Brønd, Vandbrønd"
             },
             "man_made/water_works": {
-                "name": "Vandforsyning"
+                "name": "Vandforsyning",
+                "terms": "Vandforsyning, Vandværk"
             },
             "natural": {
-                "name": "Naturlig"
+                "name": "Naturlig",
+                "terms": "Naturlig"
             },
             "natural/bay": {
-                "name": "Bugt"
+                "name": "Bugt",
+                "terms": "Bugt"
             },
             "natural/beach": {
-                "name": "Strand"
+                "name": "Strand",
+                "terms": "Strand"
             },
             "natural/cliff": {
-                "name": "Klint"
+                "name": "Klint",
+                "terms": "Klippe"
             },
             "natural/coastline": {
                 "name": "Kystlinje",
-                "terms": "bred"
+                "terms": "Kystlinje"
             },
             "natural/glacier": {
-                "name": "Gletsjer"
+                "name": "Gletsjer",
+                "terms": "Gletsjer, Isbræ"
             },
             "natural/grassland": {
-                "name": "Græsmark"
+                "name": "Græsmark",
+                "terms": "Græsmark"
             },
             "natural/heath": {
-                "name": "Hede"
+                "name": "Hede",
+                "terms": "Hede"
             },
             "natural/peak": {
                 "name": "Højdedrag",
-                "terms": "alpetop,bjergtop,bakke,bjerg,top,bakketop"
+                "terms": "Højdedrag, Bakketop, Bjergtop"
             },
             "natural/scrub": {
-                "name": "Buskområde"
+                "name": "Buskområde",
+                "terms": "Buskområde"
             },
             "natural/spring": {
-                "name": "Kilde (vand)"
+                "name": "Kilde (vand)",
+                "terms": "Kilde (vand), Kildeudspring"
             },
             "natural/tree": {
-                "name": "Træ"
+                "name": "Træ",
+                "terms": "Træ"
             },
             "natural/water": {
-                "name": "Vand"
+                "name": "Vand",
+                "terms": "Vand"
             },
             "natural/water/lake": {
                 "name": "Sø",
-                "terms": "sø, dam, mose"
+                "terms": "Sø"
             },
             "natural/water/pond": {
                 "name": "Dam",
-                "terms": "mølledam,pool"
+                "terms": "Dam"
             },
             "natural/water/reservoir": {
-                "name": "Reservoir"
+                "name": "Reservoir",
+                "terms": "Reservoir, Vandreservoir"
             },
             "natural/wetland": {
-                "name": "Vådområde"
+                "name": "Vådområde",
+                "terms": "Vådområde"
             },
             "natural/wood": {
-                "name": "Naturskov"
+                "name": "Naturskov",
+                "terms": "Naturskov"
             },
             "office": {
-                "name": "Kontor"
+                "name": "Kontor",
+                "terms": "Kontor"
             },
             "place": {
-                "name": "Lokalitet"
+                "name": "Lokalitet",
+                "terms": "Lokalitet, Sted"
             },
             "place/city": {
-                "name": "Storby"
+                "name": "Storby",
+                "terms": "Storby"
             },
             "place/hamlet": {
-                "name": "Mindre beboet område"
+                "name": "Mindre beboet område",
+                "terms": "Mindre beboet område"
             },
             "place/island": {
                 "name": "Ø",
-                "terms": "skærgård, atol,holm,rev,"
+                "terms": "Ø"
             },
             "place/isolated_dwelling": {
-                "name": "Lille beboet område (1-2 hustande)"
+                "name": "Lille beboet område (1-2 hustande)",
+                "terms": "Lille beboet område (1-2 hustande)"
             },
             "place/locality": {
-                "name": "Lokalitet"
+                "name": "Lokalitet",
+                "terms": "Lokalitet"
             },
             "place/town": {
-                "name": "By"
+                "name": "By",
+                "terms": "By"
             },
             "place/village": {
-                "name": "Landsby"
+                "name": "Landsby",
+                "terms": "Landsby"
             },
             "point": {
-                "name": "Punkt"
+                "name": "Punkt",
+                "terms": "Punkt"
             },
             "power": {
-                "name": "Energi"
+                "name": "Energi",
+                "terms": "Energi"
             },
             "power/generator": {
-                "name": "Kraftværk"
+                "name": "Kraftværk",
+                "terms": "Kraftværk"
             },
             "power/line": {
-                "name": "Elledning"
+                "name": "Elledning",
+                "terms": "Elledning"
             },
             "power/pole": {
-                "name": "Elmast (telefonmast)"
+                "name": "Elmast (telefonmast)",
+                "terms": "Elmast (telefonmast)"
             },
             "power/sub_station": {
-                "name": "Transformatorstation"
+                "name": "Transformatorstation",
+                "terms": "Transformatorstation"
             },
             "power/tower": {
-                "name": "Højspændingsmast"
+                "name": "Højspændingsmast",
+                "terms": "Højspændingsmast"
             },
             "power/transformer": {
-                "name": "Transformer"
+                "name": "Transformer",
+                "terms": "Transformer"
             },
             "railway": {
-                "name": "Jernbane"
+                "name": "Jernbane",
+                "terms": "Jernbane"
             },
             "railway/abandoned": {
-                "name": "Ej brugt jernbanespor"
+                "name": "Ej brugt jernbanespor",
+                "terms": "Ej brugt jernbanespor"
             },
             "railway/disused": {
-                "name": "Ej brugt jernbanespor"
+                "name": "Ej brugt jernbanespor",
+                "terms": "Ej brugt jernbanespor"
             },
             "railway/level_crossing": {
                 "name": "Jernbaneoverskæring",
-                "terms": "passage,jernbaneoverskæring, jernbaneoverskæring, vej gennem jernbane"
+                "terms": "Jernbaneoverskæring"
             },
             "railway/monorail": {
-                "name": "Monorail"
+                "name": "Monorail",
+                "terms": "Monorail"
             },
             "railway/platform": {
-                "name": "Jernbaneperron"
+                "name": "Jernbaneperron",
+                "terms": "Jernbaneperron, Perron "
             },
             "railway/rail": {
-                "name": "Jernbanespor"
+                "name": "Jernbanespor",
+                "terms": "Jernbanespor"
             },
             "railway/station": {
-                "name": "Togstation"
+                "name": "Togstation",
+                "terms": "Togstation"
             },
             "railway/subway": {
-                "name": "S-togspor"
+                "name": "S-togspor",
+                "terms": "S-togspor"
             },
             "railway/subway_entrance": {
-                "name": "S-togstationsindgang"
+                "name": "S-togstationsindgang",
+                "terms": "S-togstationsindgang"
             },
             "railway/tram": {
                 "name": "Sporvogn",
-                "terms": "sporvogn"
+                "terms": "Sporvogn"
             },
             "relation": {
-                "name": "Relation"
+                "name": "Relation",
+                "terms": "Relation"
             },
             "route/ferry": {
-                "name": "Færgerute"
+                "name": "Færgerute",
+                "terms": "Færgerute"
             },
             "shop": {
-                "name": "Butik"
+                "name": "Butik",
+                "terms": "Butik, Forretning"
             },
             "shop/alcohol": {
                 "name": "Vinforhandler",
-                "terms": "alkohol "
+                "terms": "Vinforhandler, Vinbutik, Vinforretning"
             },
             "shop/bakery": {
-                "name": "Bager"
+                "name": "Bager",
+                "terms": "Bager, Bageri"
             },
             "shop/beauty": {
-                "name": "Parfumebutik"
+                "name": "Parfumebutik",
+                "terms": "Parfumebutik, Skønhedbutik"
             },
             "shop/beverages": {
-                "name": "Vinforhandler"
+                "name": "Vinforhandler",
+                "terms": "Vinforretning"
             },
             "shop/bicycle": {
-                "name": "Cykelbutik"
+                "name": "Cykelbutik",
+                "terms": "Cykelforretning, Cykelbutik"
             },
             "shop/books": {
-                "name": "Boghandler"
+                "name": "Boghandler",
+                "terms": "Boghandler"
             },
             "shop/boutique": {
-                "name": "Boutique"
+                "name": "Boutique",
+                "terms": "Boutique"
             },
             "shop/butcher": {
-                "name": "Slagter"
+                "name": "Slagter",
+                "terms": "Slagter, Slagterbutik, Slagterforretning"
             },
             "shop/car": {
-                "name": "Bilforhandler"
+                "name": "Bilforhandler",
+                "terms": "Bilforhandler"
             },
             "shop/car_parts": {
-                "name": "Autoudstyrsbutik"
+                "name": "Autoudstyrsbutik",
+                "terms": "Autoudstyrsbutik, Biludstyrsbutik"
             },
             "shop/car_repair": {
-                "name": "Autoværksted"
+                "name": "Autoværksted",
+                "terms": "Autoværksted, Bilværksted"
             },
             "shop/chemist": {
-                "name": "Kemiforhandler"
+                "name": "Kemiforhandler",
+                "terms": "Kemiforhandler"
             },
             "shop/clothes": {
-                "name": "Tøjbutik"
+                "name": "Tøjbutik",
+                "terms": "Tøjbutik, Herretøjsbutik, Dametøjsbutik, Børnetøjsbutik"
             },
             "shop/computer": {
-                "name": "Computerforhandler"
+                "name": "Computerforhandler",
+                "terms": "Computerbutik, PC-butik"
             },
             "shop/confectionery": {
-                "name": "Slikbutik"
+                "name": "Slikbutik",
+                "terms": "Slikbutik, Chokoladeforretning, Chokoladebutik, Slikforretning"
             },
             "shop/convenience": {
-                "name": "Minimarked"
+                "name": "Minimarked",
+                "terms": "Minimarked, Minikøbmand"
             },
             "shop/deli": {
-                "name": "Deli"
+                "name": "Deli",
+                "terms": "Deli"
             },
             "shop/department_store": {
-                "name": "Stormagasin"
+                "name": "Stormagasin",
+                "terms": "Stormagasin"
             },
             "shop/doityourself": {
-                "name": "Gør-det-selv butik"
+                "name": "Gør-det-selv butik",
+                "terms": "Gør-det-selv butik"
             },
             "shop/dry_cleaning": {
-                "name": "Tøjrenseri"
+                "name": "Tøjrenseri",
+                "terms": "Tøjrenseri, Renseri"
             },
             "shop/electronics": {
-                "name": "Elektronikbutik"
+                "name": "Elektronikbutik",
+                "terms": "Elektronikbutik"
             },
             "shop/farm": {
                 "name": "Produktionstand",
-                "terms": "gårdbutik, gårdsalgsstade"
+                "terms": "Produktionstand"
             },
             "shop/fishmonger": {
-                "name": "Fiskeforretning"
+                "name": "Fiskeforretning",
+                "terms": "Fiskeforretning, Fiskebutik"
             },
             "shop/florist": {
-                "name": "Blomsterbutik"
+                "name": "Blomsterbutik",
+                "terms": "Blomsterbutik, Blomsterforretning"
             },
             "shop/furniture": {
-                "name": "Møbelforhandler"
+                "name": "Møbelforhandler",
+                "terms": "Møbelbutik, Møbelhandler"
             },
             "shop/garden_centre": {
-                "name": "Havecenter"
+                "name": "Havecenter",
+                "terms": "Havecenter, Plantecenter"
             },
             "shop/gift": {
-                "name": "Gavebutik"
+                "name": "Gavebutik",
+                "terms": "Gavebutik, Gaveforretning"
             },
             "shop/greengrocer": {
-                "name": "Grønthandler"
+                "name": "Grønthandler",
+                "terms": "Grønthandler, Frugtbutik"
             },
             "shop/hairdresser": {
-                "name": "Frisør"
+                "name": "Frisør",
+                "terms": "Frisør, Herrefrisør, Damefrisør"
             },
             "shop/hardware": {
-                "name": "Værktøjsbutik"
+                "name": "Værktøjsbutik",
+                "terms": "Værktøjsbutik"
             },
             "shop/hifi": {
-                "name": "Radioforhandler"
+                "name": "Radioforhandler",
+                "terms": "Værktøjsbutik"
             },
             "shop/jewelry": {
-                "name": "Juvelér"
+                "name": "Juvelér",
+                "terms": "Juvelér, Smykkeforretning"
             },
             "shop/kiosk": {
-                "name": "Kiosk"
+                "name": "Kiosk",
+                "terms": "Kiosk"
             },
             "shop/laundry": {
-                "name": "Vaskeri"
+                "name": "Vaskeri",
+                "terms": "Vaskeri, Møntvaskeri"
             },
             "shop/mall": {
-                "name": "Indkøbscenter"
+                "name": "Indkøbscenter",
+                "terms": "Indkøbscenter"
             },
             "shop/mobile_phone": {
-                "name": "Mobiltelefonforhandler"
+                "name": "Mobiltelefonforhandler",
+                "terms": "Mobiltelefonforhandler"
             },
             "shop/motorcycle": {
-                "name": "Motorcykelforhandler"
+                "name": "Motorcykelforhandler",
+                "terms": "Motorcykelforhandler"
             },
             "shop/music": {
-                "name": "Musikbutik"
+                "name": "Musikbutik",
+                "terms": "Musikbutik, Musikforretning"
             },
             "shop/newsagent": {
-                "name": "Bladforhandler"
+                "name": "Bladforhandler",
+                "terms": "Bladforhandler"
             },
             "shop/optician": {
-                "name": "Optiker"
+                "name": "Optiker",
+                "terms": "Optiker, Optikerforretning"
             },
             "shop/outdoor": {
-                "name": "Friluftudstyrsbutik"
+                "name": "Friluftudstyrsbutik",
+                "terms": "Friluftudstyrsbutik"
             },
             "shop/pet": {
-                "name": "Kæledyrsbutik"
+                "name": "Kæledyrsbutik",
+                "terms": "Kæledyrsbutik, Dyreforhandler"
             },
             "shop/shoes": {
-                "name": "Skobutik"
+                "name": "Skobutik",
+                "terms": "Skobutik, Skoforretning"
             },
             "shop/sports": {
-                "name": "Sportsudstyrsbutik"
+                "name": "Sportsudstyrsbutik",
+                "terms": "Sportsudstyrsbutik"
             },
             "shop/stationery": {
-                "name": "Papirforhandler"
+                "name": "Papirforhandler",
+                "terms": "Papirforhandler"
             },
             "shop/supermarket": {
                 "name": "Supermarked",
-                "terms": "basar, butik, butikskæde,discountbutik,loppemarked, galleri,outlet-butik, shop, shoppingcenter, shopping,butik, supermarked"
+                "terms": "Supermarked, Lavprisbutik, Discountbutik"
             },
             "shop/toys": {
-                "name": "Legetøjsbutik"
+                "name": "Legetøjsbutik",
+                "terms": "Legetøjsforretning, Legetøjsbutik"
             },
             "shop/travel_agency": {
-                "name": "Rejsebureau"
+                "name": "Rejsebureau",
+                "terms": "Rejsebureau, Rejseagent"
             },
             "shop/tyres": {
-                "name": "Dækforhandler"
+                "name": "Dækforhandler",
+                "terms": "Dækforhandler"
             },
             "shop/vacant": {
-                "name": "Lukket butik (ingen salg pt)"
+                "name": "Lukket butik (ingen salg pt)",
+                "terms": "Lukket butik (ingen salg pt)"
             },
             "shop/variety_store": {
-                "name": "Spøg og skæmtbutik "
+                "name": "Spøg og skæmtbutik ",
+                "terms": "Spøg og skæmtbutik "
             },
             "shop/video": {
-                "name": "Videobutik"
+                "name": "Videobutik",
+                "terms": "Videobutik, Videoforretning, Videoudlejning"
             },
             "tourism": {
-                "name": "Turisme"
+                "name": "Turisme",
+                "terms": "Turisme"
             },
             "tourism/alpine_hut": {
-                "name": "Bjerghytte"
+                "name": "Bjerghytte",
+                "terms": "Bjerghytte"
             },
             "tourism/artwork": {
-                "name": "Kunstværk"
+                "name": "Kunstværk",
+                "terms": "Kunstværk"
             },
             "tourism/attraction": {
-                "name": "Turistattraktion"
+                "name": "Turistattraktion",
+                "terms": "Turistattraktion, Seværdighed"
             },
             "tourism/camp_site": {
-                "name": "Campingplads"
+                "name": "Campingplads",
+                "terms": "Campingplads"
             },
             "tourism/caravan_site": {
-                "name": "Autocamperplads"
+                "name": "Autocamperplads",
+                "terms": "Autocamperplads"
             },
             "tourism/chalet": {
-                "name": "Bjergferiehytte"
+                "name": "Bjergferiehytte",
+                "terms": "Bjergferiehytte"
             },
             "tourism/guest_house": {
                 "name": "Gæstehus",
-                "terms": "B&B,Bed & Breakfast,Bed and Breakfast"
+                "terms": "Gæstehus, Bed&Breakfast, B&B"
             },
             "tourism/hostel": {
-                "name": "Vandrehjem"
+                "name": "Vandrehjem",
+                "terms": "Vandrehjem"
             },
             "tourism/hotel": {
-                "name": "Hotel"
+                "name": "Hotel",
+                "terms": "Hotel"
             },
             "tourism/information": {
-                "name": "Information"
+                "name": "Information",
+                "terms": "Turistinformation"
             },
             "tourism/motel": {
-                "name": "Motel"
+                "name": "Motel",
+                "terms": "Motel, Bilmotel"
             },
             "tourism/museum": {
                 "name": "Museum",
-                "terms": "udstilling, udstillinger,arkiver,galleri,bibliotek,salon"
+                "terms": "Museum"
             },
             "tourism/picnic_site": {
-                "name": "Picnic"
+                "name": "Picnic",
+                "terms": "Picnic"
             },
             "tourism/theme_park": {
-                "name": "Forlystelsespark"
+                "name": "Forlystelsespark",
+                "terms": "Forlystelsespark"
             },
             "tourism/viewpoint": {
-                "name": "Udsigtspunkt"
+                "name": "Udsigtspunkt",
+                "terms": "Udsigtspunkt"
             },
             "tourism/zoo": {
-                "name": "Zoologisk have"
+                "name": "Zoologisk have",
+                "terms": "Zoologisk have, Zoo"
             },
             "type/boundary": {
-                "name": "Grænse"
+                "name": "Grænse",
+                "terms": "Grænse"
             },
             "type/boundary/administrative": {
-                "name": " Administrativ grænse"
+                "name": " Administrativ grænse",
+                "terms": "Administrativt grænse"
             },
             "type/multipolygon": {
-                "name": "Multipolygon"
+                "name": "Multipolygon",
+                "terms": "Multipolygon"
             },
             "type/restriction": {
-                "name": "Restriktion"
+                "name": "Restriktion",
+                "terms": "Restriktion"
             },
             "type/route": {
-                "name": "Rute"
+                "name": "Rute",
+                "terms": "Rute"
             },
             "type/route/bicycle": {
-                "name": "Cykelrute"
+                "name": "Cykelrute",
+                "terms": "Cykelrute"
             },
             "type/route/bus": {
-                "name": "Busrute"
+                "name": "Busrute",
+                "terms": "Busrute"
             },
             "type/route/detour": {
-                "name": "Omvejsrute"
+                "name": "Omvejsrute",
+                "terms": "Omvejsrute"
             },
             "type/route/ferry": {
-                "name": "Færgerute"
+                "name": "Færgerute",
+                "terms": "Færgerute"
             },
             "type/route/foot": {
-                "name": "Vandrerute"
+                "name": "Vandrerute",
+                "terms": "Vandrerute, Hikingrute"
             },
             "type/route/pipeline": {
-                "name": "Rørledningsnet"
+                "name": "Rørledningsnet",
+                "terms": "Rørledningsnet"
             },
             "type/route/power": {
-                "name": "Elledningsnet"
+                "name": "Elledningsnet",
+                "terms": "Elledningsnet"
             },
             "type/route/road": {
-                "name": "Vejrute"
+                "name": "Vejrute",
+                "terms": "Vejrute"
             },
             "type/route/train": {
-                "name": "Togrute"
+                "name": "Togrute",
+                "terms": "Togrute, Togplan"
             },
             "type/route/tram": {
-                "name": "Sporvognsrute"
+                "name": "Sporvognsrute",
+                "terms": "Sporvognsrute"
             },
             "type/route_master": {
-                "name": "Rutemasterplan"
+                "name": "Rutemasterplan",
+                "terms": "Rutemasterplan"
             },
             "vertex": {
-                "name": "Andre"
+                "name": "Andre",
+                "terms": "Andre"
             },
             "waterway": {
-                "name": "Vandvej"
+                "name": "Vandvej",
+                "terms": "Vandvej"
             },
             "waterway/canal": {
-                "name": "Kanal"
+                "name": "Kanal",
+                "terms": "Kanal"
             },
             "waterway/dam": {
-                "name": "Dam"
+                "name": "Dam",
+                "terms": "Dam"
             },
             "waterway/ditch": {
-                "name": "Grøft"
+                "name": "Grøft",
+                "terms": "Grøft, Grøftekant"
             },
             "waterway/drain": {
-                "name": "Drænløb"
+                "name": "Drænløb",
+                "terms": "Drænløb"
             },
             "waterway/river": {
                 "name": "Flod/å",
-                "terms": "bæk,kurs,å,vandvej"
+                "terms": "Flod, Å"
             },
             "waterway/riverbank": {
-                "name": "Flodbred"
+                "name": "Flodbred",
+                "terms": "Flodbred"
             },
             "waterway/stream": {
                 "name": "Bæk",
-                "terms": "vandløb, kanal,flod, vand,å"
+                "terms": "Bæk"
             },
             "waterway/weir": {
-                "name": "Stemmeværk"
+                "name": "Stemmeværk",
+                "terms": "Stemmeværk"
             }
         }
     }

@@ -164,11 +164,6 @@
         "deleted": "Dzēsts",
         "created": "Izveidots"
     },
-    "geocoder": {
-        "title": "Atrast vietu",
-        "placeholder": "meklēt vietu",
-        "no_results": "Nevar atrast vietu '{name}'"
-    },
     "geolocate": {
         "title": "Parādīt manu atrašanās vietu"
     },
@@ -531,12 +526,10 @@
                 "name": "Skrejceļš"
             },
             "aeroway/aerodrome": {
-                "name": "Lidosta",
-                "terms": "lidmašīna, lidosta"
+                "name": "Lidosta"
             },
             "aeroway/helipad": {
-                "name": "Helikopteru nosēšanās laukums",
-                "terms": "helikopters, helikoteru nosēšanās laukums"
+                "name": "Helikopteru nosēšanās laukums"
             },
             "amenity/bank": {
                 "name": "Banka"
@@ -554,8 +547,7 @@
                 "name": "Velonoma"
             },
             "amenity/cafe": {
-                "name": "Kafejnīca",
-                "terms": "kafija, tēja, kafejnīca"
+                "name": "Kafejnīca"
             },
             "amenity/cinema": {
                 "name": "Kino"
@@ -579,8 +571,7 @@
                 "name": "Kapi"
             },
             "amenity/hospital": {
-                "name": "Slimnīca",
-                "terms": "Slimnīca, Ātrās palīdzības punkts, veselības dienests, sanatorija"
+                "name": "Slimnīca"
             },
             "amenity/library": {
                 "name": "Bibliotēka"
@@ -595,19 +586,16 @@
                 "name": "Aptieka"
             },
             "amenity/place_of_worship": {
-                "name": "Dievnams",
-                "terms": "bazilika, katedrāle, kapellam baznīca, Dieva nams, Lūgšanu nams, mošeja"
+                "name": "Dievnams"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Baznīca"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Sinagoga",
-                "terms": "jūdu, sinagoga"
+                "name": "Sinagoga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Mošeja",
-                "terms": "musulmaņu, mošeja"
+                "name": "Mošeja"
             },
             "amenity/police": {
                 "name": "Policija"
@@ -856,8 +844,7 @@
                 "name": "Novērošanas punkts"
             },
             "man_made/wastewater_plant": {
-                "name": "Notekūdeņu stacija",
-                "terms": "kanalizācija, notekūdeņu attīrīšanas stacija, ūdens attīrīšanas stacija"
+                "name": "Notekūdeņu stacija"
             },
             "man_made/water_tower": {
                 "name": "Ūdenstornis"

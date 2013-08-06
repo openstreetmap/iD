@@ -165,11 +165,6 @@
         "deleted": "Silindi",
         "created": "Oluşturuldu"
     },
-    "geocoder": {
-        "title": "Bir Yer Bul",
-        "placeholder": "Bir yer bul",
-        "no_results": "'{name}' ismindeki yer bulunamadı"
-    },
     "geolocate": {
         "title": "Konumumu göster"
     },
@@ -524,8 +519,7 @@
                 "name": "Bisiklet Kiralama"
             },
             "amenity/cafe": {
-                "name": "Kafe",
-                "terms": "kahve,çay,kahveci"
+                "name": "Kafe"
             },
             "amenity/cinema": {
                 "name": "Sinema"
@@ -570,12 +564,10 @@
                 "name": "Kilise"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Sinagog",
-                "terms": "yahudi,sinagog"
+                "name": "Sinagog"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Cami",
-                "terms": "müslüman,cami"
+                "name": "Cami"
             },
             "amenity/police": {
                 "name": "Polis"
@@ -774,9 +766,6 @@
             },
             "natural/beach": {
                 "name": "Plaj"
-            },
-            "natural/coastline": {
-                "terms": "kıyı"
             },
             "natural/grassland": {
                 "name": "Otlak"

@@ -92,10 +92,6 @@
         "deleted": "Izbrisano",
         "created": "Ustvarjeno"
     },
-    "geocoder": {
-        "title": "Najdi kraj",
-        "placeholder": "Najdi kraj"
-    },
     "inspector": {
         "no_documentation_combination": "Za to kombinacijo oznak ni na voljo dokumentacije",
         "results": "{n} zadetkov iskanja {search}"
@@ -816,8 +812,7 @@
                 "name": "Klif"
             },
             "natural/coastline": {
-                "name": "Obala",
-                "terms": "Obala"
+                "name": "Obala"
             },
             "natural/glacier": {
                 "name": "Ledenik"

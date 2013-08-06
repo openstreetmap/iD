@@ -202,11 +202,6 @@
         "list": "{user}编辑的",
         "truncated_list": " {users}和其他{count}位用戶编辑的"
     },
-    "geocoder": {
-        "title": "查找位置",
-        "placeholder": "查找位置",
-        "no_results": "无法找到叫'{name}'的地方"
-    },
     "geolocate": {
         "title": "显示我的位置"
     },
@@ -227,7 +222,6 @@
         "search": "搜索",
         "unknown": "未知",
         "incomplete": "<没有下载>",
-        "feature_list": "特征列表",
         "edit": "编辑要素"
     },
     "background": {
@@ -699,12 +693,10 @@
                 "name": "机场相关道路"
             },
             "aeroway/aerodrome": {
-                "name": "机场",
-                "terms": "飞机,机场,机场"
+                "name": "机场"
             },
             "aeroway/apron": {
-                "name": "停机坪",
-                "terms": "匝道"
+                "name": "停机坪"
             },
             "aeroway/gate": {
                 "name": "机场门"
@@ -713,19 +705,16 @@
                 "name": "机库"
             },
             "aeroway/helipad": {
-                "name": "直升机场",
-                "terms": "直升机,直升机停机坪,直升机场"
+                "name": "直升机场"
             },
             "aeroway/runway": {
-                "name": "跑道",
-                "terms": "着陆跑道"
+                "name": "跑道"
             },
             "aeroway/taxiway": {
                 "name": "滑行道"
             },
             "aeroway/terminal": {
-                "name": "机场航站楼",
-                "terms": "机场"
+                "name": "机场航站楼"
             },
             "amenity": {
                 "name": "便利设施"
@@ -734,8 +723,7 @@
                 "name": "自动柜员机（ATM）。"
             },
             "amenity/bank": {
-                "name": "银行",
-                "terms": "保险箱,信用社,存款,基金,囤积,投资公司,金库"
+                "name": "银行"
             },
             "amenity/bar": {
                 "name": "酒吧"
@@ -750,15 +738,13 @@
                 "name": "自行车租赁处"
             },
             "amenity/cafe": {
-                "name": "咖啡",
-                "terms": "咖啡,茶,咖啡馆"
+                "name": "咖啡"
             },
             "amenity/car_wash": {
                 "name": "洗车"
             },
             "amenity/cinema": {
-                "name": "电影院",
-                "terms": "大屏幕,电影,电影院,图片展示,图片,剧场,表演,银幕"
+                "name": "电影院"
             },
             "amenity/college": {
                 "name": "学院"
@@ -788,8 +774,7 @@
                 "name": "医院"
             },
             "amenity/kindergarten": {
-                "name": "幼儿园",
-                "terms": "幼儿园,托儿所"
+                "name": "幼儿园"
             },
             "amenity/library": {
                 "name": "图书馆"
@@ -810,19 +795,16 @@
                 "name": "教堂"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "犹太教堂",
-                "terms": "犹太人,犹太教堂"
+                "name": "犹太教堂"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "清真寺",
-                "terms": "穆斯林,清真寺"
+                "name": "清真寺"
             },
             "amenity/police": {
                 "name": "警察局"
             },
             "amenity/post_box": {
-                "name": "邮箱",
-                "terms": "邮件投递,信箱,邮筒,邮箱"
+                "name": "邮箱"
             },
             "amenity/post_office": {
                 "name": "邮局"
@@ -843,23 +825,19 @@
                 "name": "电话"
             },
             "amenity/theatre": {
-                "name": "剧院",
-                "terms": "戏剧,表演,播放,音乐"
+                "name": "剧院"
             },
             "amenity/toilets": {
                 "name": "厕所"
             },
             "amenity/townhall": {
-                "name": "市政府",
-                "terms": "村政厅,市政府,法院,市政建设,市政中心"
+                "name": "市政府"
             },
             "amenity/university": {
-                "name": "大学",
-                "terms": "学院"
+                "name": "大学"
             },
             "amenity/waste_basket": {
-                "name": "垃圾箱",
-                "terms": "垃圾桶,垃圾箱"
+                "name": "垃圾箱"
             },
             "area": {
                 "name": "面"
@@ -940,15 +918,13 @@
                 "name": "公路"
             },
             "highway/bridleway": {
-                "name": "马道",
-                "terms": "楼梯"
+                "name": "马道"
             },
             "highway/bus_stop": {
                 "name": "公交车站"
             },
             "highway/crossing": {
-                "name": "人行横道",
-                "terms": "人行横道,斑马线"
+                "name": "人行横道"
             },
             "highway/cycleway": {
                 "name": "自行车道"
@@ -969,8 +945,7 @@
                 "name": "高速公路连接点"
             },
             "highway/motorway_link": {
-                "name": "高速公路匝道",
-                "terms": "坡道,匝道,出口匝道"
+                "name": "高速公路匝道"
             },
             "highway/path": {
                 "name": "路径"
@@ -982,8 +957,7 @@
                 "name": "主要道路"
             },
             "highway/primary_link": {
-                "name": "主要道路匝道",
-                "terms": "坡道,匝道,出口匝道"
+                "name": "主要道路匝道"
             },
             "highway/residential": {
                 "name": "住宅区道路"
@@ -995,8 +969,7 @@
                 "name": "次要道路"
             },
             "highway/secondary_link": {
-                "name": "次要道路匝道",
-                "terms": "坡道,匝道,出口匝道"
+                "name": "次要道路匝道"
             },
             "highway/service": {
                 "name": "辅助道路"
@@ -1017,29 +990,25 @@
                 "name": "停车场通道"
             },
             "highway/steps": {
-                "name": "楼梯",
-                "terms": "楼梯"
+                "name": "楼梯"
             },
             "highway/tertiary": {
                 "name": "三级道路"
             },
             "highway/tertiary_link": {
-                "name": "三级道路匝道",
-                "terms": "坡道,匝道,出口匝道"
+                "name": "三级道路匝道"
             },
             "highway/track": {
                 "name": "未铺设路面的车径"
             },
             "highway/traffic_signals": {
-                "name": "红绿灯",
-                "terms": "灯,刹车灯,交通灯"
+                "name": "红绿灯"
             },
             "highway/trunk": {
                 "name": "干线道路"
             },
             "highway/trunk_link": {
-                "name": "干线道路匝道",
-                "terms": "坡道,匝道,出口匝道"
+                "name": "干线道路匝道"
             },
             "highway/turning_circle": {
                 "name": "环岛"
@@ -1201,8 +1170,7 @@
                 "name": "塔"
             },
             "man_made/wastewater_plant": {
-                "name": "废水处理厂",
-                "terms": "污水处理厂,回收厂"
+                "name": "废水处理厂"
             },
             "man_made/water_tower": {
                 "name": "水塔"
@@ -1226,8 +1194,7 @@
                 "name": "悬崖"
             },
             "natural/coastline": {
-                "name": "海岸线",
-                "terms": "岸"
+                "name": "海岸线"
             },
             "natural/glacier": {
                 "name": "冰川"
@@ -1254,12 +1221,10 @@
                 "name": "水"
             },
             "natural/water/lake": {
-                "name": "湖泊",
-                "terms": "小湖,湖"
+                "name": "湖泊"
             },
             "natural/water/pond": {
-                "name": "池塘",
-                "terms": "小湖,贮水池,游泳池"
+                "name": "池塘"
             },
             "natural/water/reservoir": {
                 "name": "水库"
@@ -1352,8 +1317,7 @@
                 "name": "地铁口"
             },
             "railway/tram": {
-                "name": "电车",
-                "terms": "电车"
+                "name": "电车"
             },
             "relation": {
                 "name": "关系"
@@ -1365,8 +1329,7 @@
                 "name": "商店"
             },
             "shop/alcohol": {
-                "name": "酒品店",
-                "terms": "酒精"
+                "name": "酒品店"
             },
             "shop/bakery": {
                 "name": "面包店"
@@ -1540,8 +1503,7 @@
                 "name": "木屋"
             },
             "tourism/guest_house": {
-                "name": "宾馆",
-                "terms": "床和早餐,民宿"
+                "name": "宾馆"
             },
             "tourism/hostel": {
                 "name": "招待所"

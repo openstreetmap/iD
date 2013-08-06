@@ -30,7 +30,8 @@
         "add": {
             "annotation": {
                 "point": "Bætti punkti við.",
-                "vertex": "Bætti hnút við leið."
+                "vertex": "Bætti hnút við leið.",
+                "relation": "Bætti við tengslum."
             }
         },
         "start": {
@@ -117,7 +118,8 @@
             "key": "C",
             "annotation": "Sameinaði {n} línur.",
             "not_eligible": "Það er ekki hægt að samfella þessa hluti.",
-            "not_adjacent": "Ekki er hægt að samfella þessar línur því að þær tengjast ekki hvor annari."
+            "not_adjacent": "Ekki er hægt að samfella þessar línur því að þær tengjast ekki hvor annari.",
+            "restriction": "Ekki er hægt að sameina þessar línur því að önnur þeirra er hluti af \"{relation}\" venslunum."
         },
         "move": {
             "title": "Færa",
@@ -203,9 +205,9 @@
         "truncated_list": "Breytingar frá {users} og {count} öðrum"
     },
     "geocoder": {
-        "title": "Finna stað",
-        "placeholder": "Finna stað",
-        "no_results": "Fann ekki stað með nafninu '{name}'"
+        "search": "Leita hnattrænt...",
+        "no_results_visible": "Engar niðurstöður á sýndu korti",
+        "no_results_worldwide": "Engar niðurstöður fundust"
     },
     "geolocate": {
         "title": "Sýna mína staðsetningu"
@@ -218,6 +220,7 @@
         "all_tags": "Öll merki",
         "all_members": "Allir meðlimir",
         "all_relations": "Öll tengsl",
+        "new_relation": "Ný tengsl...",
         "role": "Hlutverk",
         "choose": "Veldu tegund",
         "results": "{n} niðurstöður fyrir {leit}",
@@ -226,7 +229,9 @@
         "remove": "Fjarlægja",
         "search": "Leita",
         "unknown": "Óþekkt",
-        "incomplete": "<ekki hlaðið niður>"
+        "incomplete": "<ekki hlaðið niður>",
+        "feature_list": "Leitareigindi",
+        "edit": "Breyta eigindi"
     },
     "background": {
         "title": "Bakgrunnur",
@@ -701,18 +706,18 @@
         },
         "presets": {
             "address": {
-                "name": "Heimilisfang"
+                "name": "Heimilisfang",
+                "terms": "<heimilisfang,staðsetning>"
             },
             "aeroway": {
                 "name": "Loftlína"
             },
             "aeroway/aerodrome": {
                 "name": "Flugvöllur",
-                "terms": "flugvél,flugvöllur,flugvöllur"
+                "terms": "<flugvöllur>"
             },
             "aeroway/apron": {
-                "name": "Tengibrú",
-                "terms": "rampur"
+                "name": "Tengibrú"
             },
             "aeroway/gate": {
                 "name": "Flugvallarhlið"
@@ -721,19 +726,16 @@
                 "name": "Flugskýli"
             },
             "aeroway/helipad": {
-                "name": "Þyrlupallur",
-                "terms": "þyrla,þyrlupallur,þyrluvöllur"
+                "name": "Þyrlupallur"
             },
             "aeroway/runway": {
-                "name": "Flugbraut",
-                "terms": "lendingarbraut"
+                "name": "Flugbraut"
             },
             "aeroway/taxiway": {
                 "name": "Flugrein"
             },
             "aeroway/terminal": {
-                "name": "Flugstöð",
-                "terms": "airport,aerodrome"
+                "name": "Flugstöð"
             },
             "amenity": {
                 "name": "Þjónusta"
@@ -742,8 +744,7 @@
                 "name": "Hraðbanki"
             },
             "amenity/bank": {
-                "name": "Banki",
-                "terms": "coffer,countinghouse,credit union,depository,exchequer,fund,hoard,investment firm,repository,reserve,reservoir,safe,savings,stock,stockpile,store,storehouse,thrift,treasury,trust company,vault"
+                "name": "Banki"
             },
             "amenity/bar": {
                 "name": "Knæpa"
@@ -758,21 +759,25 @@
                 "name": "Hjólaleiga"
             },
             "amenity/cafe": {
-                "name": "Kaffihús",
-                "terms": "kaffi,te,kaffibúð"
+                "name": "Kaffihús"
+            },
+            "amenity/car_rental": {
+                "name": "Bílaleiga"
             },
             "amenity/car_wash": {
                 "name": "Bílaþvottur"
             },
             "amenity/cinema": {
-                "name": "Kvikmyndahús",
-                "terms": "big screen,bijou,cine,drive-in,film,flicks,motion pictures,movie house,movie theater,moving pictures,nabes,photoplay,picture show,pictures,playhouse,show,silver screen"
+                "name": "Kvikmyndahús"
             },
             "amenity/college": {
                 "name": "Háskóli"
             },
             "amenity/courthouse": {
                 "name": "Dómhús"
+            },
+            "amenity/drinking_water": {
+                "name": "Drykkjarvatn"
             },
             "amenity/embassy": {
                 "name": "Sendiráð"
@@ -793,12 +798,10 @@
                 "name": "Grafreitur"
             },
             "amenity/hospital": {
-                "name": "Sjúkrahús",
-                "terms": "læknastöð,neyðarmóttaka,heilsuvernd,líknardeild,infirmary,institution,hjúkrunarheimili,rest home,sanatorium,sanitarium,sick bay,skurðdeild,deild"
+                "name": "Sjúkrahús"
             },
             "amenity/kindergarten": {
-                "name": "Leikskóli",
-                "terms": "preschool,nursery,childcare,playgroup"
+                "name": "Leikskóli"
             },
             "amenity/library": {
                 "name": "Bókasafn"
@@ -813,32 +816,25 @@
                 "name": "Lyfjaverslun"
             },
             "amenity/place_of_worship": {
-                "name": "Tilbeiðsluhús",
-                "terms": "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple"
+                "name": "Tilbeiðsluhús"
             },
             "amenity/place_of_worship/buddhist": {
-                "name": "Búddistamusteri",
-                "terms": "stupa,vihara,klaustur,hof,pagóða,zendo,dojo"
+                "name": "Búddistamusteri"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Kirkja",
-                "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                "name": "Kirkja"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Bænahús gyðinga",
-                "terms": "jewish,synagogue"
+                "name": "Bænahús gyðinga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Moska",
-                "terms": "muslim,mosque"
+                "name": "Moska"
             },
             "amenity/police": {
-                "name": "Lögregla",
-                "terms": "badge,bear,blue,bluecoat,bobby,boy scout,bull,constable,constabulary,cop,copper,corps,county mounty,detective,fed,flatfoot,force,fuzz,gendarme,gumshoe,heat,law,law enforcement,man,narc,officers,patrolman,police"
+                "name": "Lögregla"
             },
             "amenity/post_box": {
-                "name": "Póstkassi",
-                "terms": "letter drop,letterbox,mail drop,mailbox,pillar box,postbox"
+                "name": "Póstkassi"
             },
             "amenity/post_office": {
                 "name": "Pósthús"
@@ -847,37 +843,34 @@
                 "name": "Krá"
             },
             "amenity/restaurant": {
-                "name": "Veitingahús",
-                "terms": "bar,cafeteria,café,canteen,chophouse,coffee shop,diner,dining room,dive*,doughtnut shop,drive-in,eatery,eating house,eating place,fast-food place,greasy spoon,grill,hamburger stand,hashery,hideaway,hotdog stand,inn,joint*,luncheonette,lunchroom,night club,outlet*,pizzeria,saloon,soda fountain,watering hole"
+                "name": "Veitingahús"
             },
             "amenity/school": {
-                "name": "Skóli",
-                "terms": "academy,alma mater,blackboard,college,department,discipline,establishment,faculty,hall,halls of ivy,institute,institution,jail*,schoolhouse,seminary,university"
+                "name": "Skóli"
             },
             "amenity/swimming_pool": {
                 "name": "Sundlaug"
+            },
+            "amenity/taxi": {
+                "name": "Leigubílastæði"
             },
             "amenity/telephone": {
                 "name": "Sími"
             },
             "amenity/theatre": {
-                "name": "Leikhús",
-                "terms": "theatre,performance,play,musical"
+                "name": "Leikhús"
             },
             "amenity/toilets": {
                 "name": "Salerni"
             },
             "amenity/townhall": {
-                "name": "Ráðhús",
-                "terms": "village hall,city government,courthouse,municipal building,municipal center"
+                "name": "Ráðhús"
             },
             "amenity/university": {
-                "name": "Háskóli",
-                "terms": "háskóli"
+                "name": "Háskóli"
             },
             "amenity/waste_basket": {
-                "name": "Ruslafata",
-                "terms": "rubbish bin,litter bin,trash can,garbage can"
+                "name": "Ruslafata"
             },
             "area": {
                 "name": "Svæði"
@@ -958,22 +951,19 @@
                 "name": "Þjóðvegur"
             },
             "highway/bridleway": {
-                "name": "Reiðleið",
-                "terms": "bridleway,equestrian trail,horse riding path,bridle road,horse trail"
+                "name": "Reiðleið"
             },
             "highway/bus_stop": {
                 "name": "Stoppistöð"
             },
             "highway/crossing": {
-                "name": "Þverun",
-                "terms": "gangbraut,gangbraut"
+                "name": "Þverun"
             },
             "highway/cycleway": {
                 "name": "Hjólastígur"
             },
             "highway/footway": {
-                "name": "Göngustígur",
-                "terms": "beaten path,boulevard,clearing,course,cut*,drag*,footpath,highway,lane,line,orbit,passage,pathway,rail,rails,road,roadway,route,street,thoroughfare,trackway,trail,trajectory,walk"
+                "name": "Göngustígur"
             },
             "highway/living_street": {
                 "name": "Íbúagata"
@@ -988,8 +978,7 @@
                 "name": "Hraðbrautarmót"
             },
             "highway/motorway_link": {
-                "name": "Hraðbrautarrein",
-                "terms": "ramp,on ramp,off ramp"
+                "name": "Hraðbrautarrein"
             },
             "highway/path": {
                 "name": "Stígur"
@@ -1001,8 +990,7 @@
                 "name": "Stofnbraut"
             },
             "highway/primary_link": {
-                "name": "Stofnrein",
-                "terms": "ramp,on ramp,off ramp"
+                "name": "Stofnrein"
             },
             "highway/residential": {
                 "name": "Íbúagata"
@@ -1014,8 +1002,7 @@
                 "name": "Tengibraut"
             },
             "highway/secondary_link": {
-                "name": "Tengibrautarrein",
-                "terms": "ramp,on ramp,off ramp"
+                "name": "Tengibrautarrein"
             },
             "highway/service": {
                 "name": "Þjónustugata"
@@ -1036,29 +1023,25 @@
                 "name": "Bílastæðagangur"
             },
             "highway/steps": {
-                "name": "Tröppur",
-                "terms": "stairs,staircase"
+                "name": "Tröppur"
             },
             "highway/tertiary": {
                 "name": "Safnbraut"
             },
             "highway/tertiary_link": {
-                "name": "Safnbrautarrein",
-                "terms": "ramp,on ramp,off ramp"
+                "name": "Safnbrautarrein"
             },
             "highway/track": {
                 "name": "Slóð"
             },
             "highway/traffic_signals": {
-                "name": "Umferðarskilti",
-                "terms": "light,stoplight,traffic light"
+                "name": "Umferðarskilti"
             },
             "highway/trunk": {
                 "name": "Umferðaræð"
             },
             "highway/trunk_link": {
-                "name": "Umferðaræðarrein",
-                "terms": "ramp,on ramp,off ramp"
+                "name": "Umferðaræðarrein"
             },
             "highway/turning_circle": {
                 "name": "Beygjuhringur"
@@ -1157,8 +1140,7 @@
                 "name": "Bátahöfn"
             },
             "leisure/park": {
-                "name": "Garður",
-                "terms": "esplanade,estate,forest,garden,grass,green,grounds,lawn,lot,meadow,parkland,place,playground,plaza,pleasure garden,recreation area,square,tract,village green,woodland"
+                "name": "Garður"
             },
             "leisure/pitch": {
                 "name": "Íþróttavöllur"
@@ -1182,8 +1164,7 @@
                 "name": "Blakvöllur"
             },
             "leisure/playground": {
-                "name": "Leikvöllur",
-                "terms": "aparóla,leiksvæði"
+                "name": "Leikvöllur"
             },
             "leisure/slipway": {
                 "name": "Dráttarbraut"
@@ -1222,8 +1203,7 @@
                 "name": "Turn"
             },
             "man_made/wastewater_plant": {
-                "name": "Skolphreinsistöð",
-                "terms": "sewage works,sewage treatment plant,water treatment plant,reclamation plant"
+                "name": "Skolphreinsistöð"
             },
             "man_made/water_tower": {
                 "name": "Vatnsturn"
@@ -1247,8 +1227,7 @@
                 "name": "Klettur"
             },
             "natural/coastline": {
-                "name": "Strandlengja",
-                "terms": "strönd"
+                "name": "Strandlengja"
             },
             "natural/glacier": {
                 "name": "Jökull"
@@ -1260,8 +1239,7 @@
                 "name": "Mói"
             },
             "natural/peak": {
-                "name": "Tindur",
-                "terms": "acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top"
+                "name": "Tindur"
             },
             "natural/scrub": {
                 "name": "Kjarr"
@@ -1276,12 +1254,10 @@
                 "name": "Vatn"
             },
             "natural/water/lake": {
-                "name": "Stöðuvatn",
-                "terms": "lakelet,loch,mere"
+                "name": "Stöðuvatn"
             },
             "natural/water/pond": {
-                "name": "Tjörn",
-                "terms": "lakelet,millpond,tarn,pool,mere"
+                "name": "Tjörn"
             },
             "natural/water/reservoir": {
                 "name": "Lón"
@@ -1305,8 +1281,7 @@
                 "name": "Þéttbýliskjarni"
             },
             "place/island": {
-                "name": "Eyja",
-                "terms": "archipelago,atoll,bar,cay,isle,islet,key,reef"
+                "name": "Eyja"
             },
             "place/isolated_dwelling": {
                 "name": "Einöngruð búseta"
@@ -1354,8 +1329,7 @@
                 "name": "Ónotaðir lestarteinar"
             },
             "railway/level_crossing": {
-                "name": "Jöfn vegamót",
-                "terms": "crossing,railroad crossing,railway crossing,grade crossing,road through railroad,train crossing"
+                "name": "Jöfn vegamót"
             },
             "railway/monorail": {
                 "name": "Monorail"
@@ -1376,8 +1350,7 @@
                 "name": "Inngangur að neðanjarðarlest"
             },
             "railway/tram": {
-                "name": "Sporvagn",
-                "terms": "sporvagn"
+                "name": "Sporvagn"
             },
             "relation": {
                 "name": "Tengsl"
@@ -1389,8 +1362,7 @@
                 "name": "Verslun"
             },
             "shop/alcohol": {
-                "name": "Vínbúð",
-                "terms": "áfengi"
+                "name": "Vínbúð"
             },
             "shop/bakery": {
                 "name": "Bakarí"
@@ -1451,6 +1423,9 @@
             },
             "shop/electronics": {
                 "name": "Raftækjaverslun"
+            },
+            "shop/farm": {
+                "name": "Vörubás"
             },
             "shop/fishmonger": {
                 "name": "Fisksali"
@@ -1522,8 +1497,7 @@
                 "name": "Skriffangaverslun"
             },
             "shop/supermarket": {
-                "name": "Stórmarkaður",
-                "terms": "bazaar,boutique,chain,co-op,cut-rate store,discount store,five-and-dime,flea market,galleria,mall,mart,outlet,outlet store,shop,shopping center,shopping plaza,stand,store,supermarket,thrift shop"
+                "name": "Stórmarkaður"
             },
             "shop/toys": {
                 "name": "Dótabúð"
@@ -1565,8 +1539,7 @@
                 "name": "Bjálkakofi"
             },
             "tourism/guest_house": {
-                "name": "Gestahús",
-                "terms": "B&B,Bed & Breakfast,Bed and Breakfast"
+                "name": "Gestahús"
             },
             "tourism/hostel": {
                 "name": "Farfuglaheimili"
@@ -1581,8 +1554,7 @@
                 "name": "Mótel"
             },
             "tourism/museum": {
-                "name": "Safn",
-                "terms": "exhibition,exhibits archive,foundation,gallery,hall,institution,library,menagerie,repository,salon,storehouse,treasury,vault"
+                "name": "Safn"
             },
             "tourism/picnic_site": {
                 "name": "Áningarstaður"
@@ -1663,15 +1635,13 @@
                 "name": "Frárennsli"
             },
             "waterway/river": {
-                "name": "Á",
-                "terms": "beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse"
+                "name": "Á"
             },
             "waterway/riverbank": {
                 "name": "Árbakki"
             },
             "waterway/stream": {
-                "name": "Straumvatn",
-                "terms": "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
+                "name": "Straumvatn"
             },
             "waterway/weir": {
                 "name": "Yfirfall"

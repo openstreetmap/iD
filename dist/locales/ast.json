@@ -148,11 +148,6 @@
         "deleted": "Desaniciáu",
         "created": "Creáu"
     },
-    "geocoder": {
-        "title": "Alcontrar un llugar",
-        "placeholder": "Alcontrar un llugar",
-        "no_results": "Nun pudo alcontrase dengún llugar llamáu «{name}»"
-    },
     "geolocate": {
         "title": "Amosar el mio allugamientu"
     },

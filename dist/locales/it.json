@@ -30,7 +30,8 @@
         "add": {
             "annotation": {
                 "point": "Aggiunto un punto.",
-                "vertex": "Aggiunto un punto ad una linea."
+                "vertex": "Aggiunto un punto ad una linea.",
+                "relation": "Aggiunta una relazione."
             }
         },
         "start": {
@@ -204,9 +205,9 @@
         "truncated_list": "Modifiche di {users} e {count} altri"
     },
     "geocoder": {
-        "title": "Trova un luogo",
-        "placeholder": "Trova un luogo",
-        "no_results": "Non trovo un luogo chiamato '{name}'"
+        "search": "Cerca in tutto il mondo...",
+        "no_results_visible": "Nessun risultato nell'area visibile della mappa",
+        "no_results_worldwide": "Nessun risultato trovato"
     },
     "geolocate": {
         "title": "Mostra la mia posizione"
@@ -219,6 +220,7 @@
         "all_tags": "Tutti i tag",
         "all_members": "Tutti i membri",
         "all_relations": "Tutte le relazioni",
+        "new_relation": "Nuova relazione...",
         "role": "Ruolo",
         "choose": "Seleziona il tipo di caratteristica",
         "results": "{n} risultati per {search}",
@@ -228,7 +230,7 @@
         "search": "Cerca",
         "unknown": "Sconosciuto",
         "incomplete": "<non scaricato>",
-        "feature_list": "Elenco elementi",
+        "feature_list": "Cerca elementi",
         "edit": "Modifica elemento"
     },
     "background": {
@@ -710,12 +712,10 @@
                 "name": "Pista aeroportuale"
             },
             "aeroway/aerodrome": {
-                "name": "Aeroporto",
-                "terms": "aeroplano,aeroporto,aerodromo"
+                "name": "Aeroporto"
             },
             "aeroway/apron": {
-                "name": "Area di sosta per aeromobili",
-                "terms": "rampa"
+                "name": "Area di sosta per aeromobili"
             },
             "aeroway/gate": {
                 "name": "Gate dell'aeroporto"
@@ -724,19 +724,16 @@
                 "name": "Hangar"
             },
             "aeroway/helipad": {
-                "name": "Elisuperficie",
-                "terms": "elicottero,elisuperficie,eliporto"
+                "name": "Elisuperficie"
             },
             "aeroway/runway": {
-                "name": "Pista di decollo/atterraggio",
-                "terms": "pista di atterraggio"
+                "name": "Pista di decollo/atterraggio"
             },
             "aeroway/taxiway": {
                 "name": "Pista di rullaggio"
             },
             "aeroway/terminal": {
-                "name": "Terminale di aeroporto",
-                "terms": "aeroporto,aerodromo"
+                "name": "Terminale di aeroporto"
             },
             "amenity": {
                 "name": "Servizi"
@@ -745,8 +742,7 @@
                 "name": "ATM"
             },
             "amenity/bank": {
-                "name": "Banca",
-                "terms": "scrigno,ufficio contabile,cooperativa di credito,deposito,erario,fondo,tesoro,società di investimento,archivio,riserva,cassetta di sicurezza,risparmi,azioni,scorte,negozio,magazzino,sconto,tesoreria, società fiduciaria,cassaforte"
+                "name": "Banca"
             },
             "amenity/bar": {
                 "name": "Bar"
@@ -761,8 +757,7 @@
                 "name": "Stazione del Bike Sharing"
             },
             "amenity/cafe": {
-                "name": "Caffè",
-                "terms": "caffè,tè,bar"
+                "name": "Caffè"
             },
             "amenity/car_rental": {
                 "name": "Noleggio auto"
@@ -774,8 +769,7 @@
                 "name": "Autolavaggio"
             },
             "amenity/cinema": {
-                "name": "Cinema",
-                "terms": "cinema,cine,film,cinematografo,proiezione"
+                "name": "Cinema"
             },
             "amenity/college": {
                 "name": "College"
@@ -784,8 +778,7 @@
                 "name": "Tribunale"
             },
             "amenity/drinking_water": {
-                "name": "Fontanella",
-                "terms": "fontana,fontanella,acqua potabile,nasone"
+                "name": "Fontanella"
             },
             "amenity/embassy": {
                 "name": "Ambasciata"
@@ -806,12 +799,10 @@
                 "name": "Cimitero"
             },
             "amenity/hospital": {
-                "name": "Ospedale",
-                "terms": "clinica,pronto soccorso,servizio sanitario,salute,hospice,ospizio,infermeria,istituzione,casa di cura,casa di riposo,sanatorio,ambulatorio,chirurgia,reparto"
+                "name": "Ospedale"
             },
             "amenity/kindergarten": {
-                "name": "Scuola d'infanzia",
-                "terms": "scuola di infanzia,asilo,assistenza all'infanzia,asilo d'infanzia"
+                "name": "Scuola d'infanzia"
             },
             "amenity/library": {
                 "name": "Biblioteca"
@@ -826,32 +817,25 @@
                 "name": "Farmacia"
             },
             "amenity/place_of_worship": {
-                "name": "Luogo di culto",
-                "terms": "abbazia,basilica,sinagoga,cattedrale,presbiterio,cappella,chiesa,casa di Dio,luogo di preghiera,luogo di culto,missione,moschea,oratorio,parrocchia,sacello,edicola votiva,tabernacolo,tempio"
+                "name": "Luogo di culto"
             },
             "amenity/place_of_worship/buddhist": {
-                "name": "Tempio Buddista",
-                "terms": "stupa,vihara,monastero,tempio,pagoda,zendo,dojo"
+                "name": "Tempio Buddista"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Chiesa",
-                "terms": "cristiano,abbazia,basilica,cattedrale,presbiterio,cappella,chiesa,casa di Dio,luogo di preghiera,luogo di culto,missione,oratorio,parrocchia,sacello,edicola votiva,tabernacolo,tempio"
+                "name": "Chiesa"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Sinagoga",
-                "terms": "ebrea,sinagoga"
+                "name": "Sinagoga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Moschea",
-                "terms": "musulmana,moschea"
+                "name": "Moschea"
             },
             "amenity/police": {
-                "name": "Forze di polizia",
-                "terms": "poliziotto,sbirro,investigatore privato,piedipiatti,divisa,ispettore,gendarme,agente di polizia"
+                "name": "Forze di polizia"
             },
             "amenity/post_box": {
-                "name": "Buca delle lettere",
-                "terms": "cassetta postale"
+                "name": "Buca delle lettere"
             },
             "amenity/post_office": {
                 "name": "Ufficio Postale"
@@ -860,42 +844,34 @@
                 "name": "Pub"
             },
             "amenity/restaurant": {
-                "name": "Ristorante",
-                "terms": "bar,caffetteria,caffè,ristorante self-service,braceria,trattoria,negozio di ciambelle,bettola,griglieria,venditore di hamburger,venditore di hotdog,pizzeria"
+                "name": "Ristorante"
             },
             "amenity/school": {
-                "name": "Scuola",
-                "terms": "accademia,alma mater,lavagna,collegio,dipartimento,disciplina,classe,facoltà,aula,istituto,istituzione,riformatorio,scuola,edificio scolastico,seminario,università"
+                "name": "Scuola"
             },
             "amenity/swimming_pool": {
                 "name": "Piscina"
             },
             "amenity/taxi": {
-                "name": "Posteggio Taxi",
-                "terms": "taxi"
+                "name": "Posteggio Taxi"
             },
             "amenity/telephone": {
                 "name": "Telefono"
             },
             "amenity/theatre": {
-                "name": "Teatro",
-                "terms": "teatro,spettacoli,giochi,musical"
+                "name": "Teatro"
             },
             "amenity/toilets": {
-                "name": "Bagni",
-                "terms": "bagno,bagni pubblici,toilette"
+                "name": "Bagni"
             },
             "amenity/townhall": {
-                "name": "Municipio",
-                "terms": "sala del comune,palazzo di governo,tribunale,munipio"
+                "name": "Municipio"
             },
             "amenity/university": {
-                "name": "Università",
-                "terms": "college"
+                "name": "Università"
             },
             "amenity/waste_basket": {
-                "name": "Cestino della spazzatura",
-                "terms": "sacchetto della spazzatura,cestino della spazzatura,cassonetto della spazzatura"
+                "name": "Cestino della spazzatura"
             },
             "area": {
                 "name": "Area"
@@ -976,22 +952,19 @@
                 "name": "Strada"
             },
             "highway/bridleway": {
-                "name": "Ippovia",
-                "terms": "ippovia, percorso per cavalli, percorso equestre"
+                "name": "Ippovia"
             },
             "highway/bus_stop": {
                 "name": "Fermata dell'autobus"
             },
             "highway/crossing": {
-                "name": "Attraversamento",
-                "terms": "attraversamento pedonale,strisce pedonali"
+                "name": "Attraversamento"
             },
             "highway/cycleway": {
                 "name": "Percorso ciclabile"
             },
             "highway/footway": {
-                "name": "Percorso pedonale",
-                "terms": "percorso battuto,viale,pista pedonale,strada,corsia,percorso,sentiero,cammino,binario,rotaia,strada,rotta,via,traiettoria,camminata"
+                "name": "Percorso pedonale"
             },
             "highway/living_street": {
                 "name": "Strada residenziale prevalentemente pedonale"
@@ -1006,8 +979,7 @@
                 "name": "Svincolo da o verso Autostrada"
             },
             "highway/motorway_link": {
-                "name": "Raccordo autostradale",
-                "terms": "svincolo,rampa"
+                "name": "Raccordo autostradale"
             },
             "highway/path": {
                 "name": "Sentiero"
@@ -1019,8 +991,7 @@
                 "name": "Strada di importanza nazionale"
             },
             "highway/primary_link": {
-                "name": "Svincolo da o verso una strada di importanza nazionale",
-                "terms": "svincolo,rampa"
+                "name": "Svincolo da o verso una strada di importanza nazionale"
             },
             "highway/residential": {
                 "name": "Strada residenziale"
@@ -1032,8 +1003,7 @@
                 "name": "Strada di importanza regionale"
             },
             "highway/secondary_link": {
-                "name": "Svincolo da o verso una strada di importanza regionale",
-                "terms": "svincolo,rampa"
+                "name": "Svincolo da o verso una strada di importanza regionale"
             },
             "highway/service": {
                 "name": "Strada di servizio"
@@ -1054,29 +1024,25 @@
                 "name": "Corsia di un parcheggio"
             },
             "highway/steps": {
-                "name": "Scale",
-                "terms": "scale,scalinata"
+                "name": "Scale"
             },
             "highway/tertiary": {
                 "name": "Strada di importanza locale"
             },
             "highway/tertiary_link": {
-                "name": "Svincolo da o verso una strada di importanza comunale",
-                "terms": "svincolo,rampa"
+                "name": "Svincolo da o verso una strada di importanza comunale"
             },
             "highway/track": {
                 "name": "Strada ad uso agricolo / forestale"
             },
             "highway/traffic_signals": {
-                "name": "Semaforo",
-                "terms": "semaforo,luce semaforica,lanterna semaforica"
+                "name": "Semaforo"
             },
             "highway/trunk": {
                 "name": "Superstrada"
             },
             "highway/trunk_link": {
-                "name": "Svincolo da o verso una superstrada",
-                "terms": "svincolo,rampa"
+                "name": "Svincolo da o verso una superstrada"
             },
             "highway/turning_circle": {
                 "name": "Slargo per inversione"
@@ -1175,8 +1141,7 @@
                 "name": "Marina"
             },
             "leisure/park": {
-                "name": "Parco",
-                "terms": "lungomare,tenuta,foresta,giardino,prato,verde,terreni,lotto,pascolo,parco,posto,parco giochi,area ricreativa,piazza,giardino pubblico,bosco"
+                "name": "Parco"
             },
             "leisure/pitch": {
                 "name": "Campo da gioco"
@@ -1200,8 +1165,7 @@
                 "name": "Campo di Pallavolo"
             },
             "leisure/playground": {
-                "name": "Parco giochi",
-                "terms": "area giochi,scivolo"
+                "name": "Parco giochi"
             },
             "leisure/slipway": {
                 "name": "Scivolo per barche"
@@ -1240,8 +1204,7 @@
                 "name": "Torre"
             },
             "man_made/wastewater_plant": {
-                "name": "Impianto di depurazione delle acque",
-                "terms": "fognatura, impianto di trattamento delle acque nere, impianto di purificazione dell'acqua,impianto di trattamento delle acque reflue"
+                "name": "Impianto di depurazione delle acque"
             },
             "man_made/water_tower": {
                 "name": "Torre Idrica"
@@ -1265,8 +1228,7 @@
                 "name": "Scogliera"
             },
             "natural/coastline": {
-                "name": "Linea di costa",
-                "terms": "riva"
+                "name": "Linea di costa"
             },
             "natural/glacier": {
                 "name": "Ghiacciaio"
@@ -1278,8 +1240,7 @@
                 "name": "Brughiera"
             },
             "natural/peak": {
-                "name": "Picco",
-                "terms": "culmine,guglia,alpe,apice,cresta,sommità,cima,cocuzzolo,collina,monte,montagna,pinnacolo,estremità,vertice,vetta"
+                "name": "Picco"
             },
             "natural/scrub": {
                 "name": "Macchia mediterranea"
@@ -1294,12 +1255,10 @@
                 "name": "Specchio d'acqua"
             },
             "natural/water/lake": {
-                "name": "Lago",
-                "terms": "stagno,lago,laghetto"
+                "name": "Lago"
             },
             "natural/water/pond": {
-                "name": "Stagno",
-                "terms": "laghetto,gora,pozza"
+                "name": "Stagno"
             },
             "natural/water/reservoir": {
                 "name": "Bacino idrico"
@@ -1323,8 +1282,7 @@
                 "name": "Paese"
             },
             "place/island": {
-                "name": "Isola",
-                "terms": "arcipelago,atollo,banco,isola,isolotto,scogliera"
+                "name": "Isola"
             },
             "place/isolated_dwelling": {
                 "name": "Case Sparse"
@@ -1372,8 +1330,7 @@
                 "name": "Ferrovia in disuso"
             },
             "railway/level_crossing": {
-                "name": "Passaggio a livello",
-                "terms": "passaggio a livello,incrocio ferroviario"
+                "name": "Passaggio a livello"
             },
             "railway/monorail": {
                 "name": "Monorotaia"
@@ -1394,8 +1351,7 @@
                 "name": "Entrata di metropolitana"
             },
             "railway/tram": {
-                "name": "Tram",
-                "terms": "Tram"
+                "name": "Tram"
             },
             "relation": {
                 "name": "Relazione"
@@ -1407,8 +1363,7 @@
                 "name": "Negozio"
             },
             "shop/alcohol": {
-                "name": "Negozio di liquori",
-                "terms": "alcool"
+                "name": "Negozio di liquori"
             },
             "shop/bakery": {
                 "name": "Panificio"
@@ -1471,8 +1426,7 @@
                 "name": "Negozio di elettronica"
             },
             "shop/farm": {
-                "name": "Banchetto Alimentari Freschi",
-                "terms": "negozio agricolo,banchetto agricolo"
+                "name": "Banchetto Alimentari Freschi"
             },
             "shop/fishmonger": {
                 "name": "Pescivendolo"
@@ -1544,8 +1498,7 @@
                 "name": "Negozio di cancelleria"
             },
             "shop/supermarket": {
-                "name": "Supermercato",
-                "terms": "bazar,boutique,negozio,discount,mercato delle pulci,galleria,centro commerciale,mercato,outlet,chiosco,supermercato,negozio dell'usato"
+                "name": "Supermercato"
             },
             "shop/toys": {
                 "name": "Negozio di giocattoli"
@@ -1587,8 +1540,7 @@
                 "name": "Chalet"
             },
             "tourism/guest_house": {
-                "name": "Affittacamere",
-                "terms": "B&B,Bed & Breakfast,Bed and Breakfast"
+                "name": "Affittacamere"
             },
             "tourism/hostel": {
                 "name": "Ostello"
@@ -1603,8 +1555,7 @@
                 "name": "Motel"
             },
             "tourism/museum": {
-                "name": "Museo",
-                "terms": "esibizione,mostra,esposizione,fondazione,galleria,archivio,istituzione,serraglio,sala,salone,tesoreria,pinacoteca,magazzino,caveau,palazzo"
+                "name": "Museo"
             },
             "tourism/picnic_site": {
                 "name": "Area picnic"
@@ -1685,15 +1636,13 @@
                 "name": "Canale di scolo"
             },
             "waterway/river": {
-                "name": "Fiume",
-                "terms": "ruscello,affluente,corso d'acqua,torrente,estuario,rivolo,rigagnolo,immissario"
+                "name": "Fiume"
             },
             "waterway/riverbank": {
                 "name": "Argine"
             },
             "waterway/stream": {
-                "name": "Torrente",
-                "terms": "fiumiciattolo,ramo,ruscello,corso,torrente,corrente,deriva,flusso,rivolo,rigagnolo"
+                "name": "Torrente"
             },
             "waterway/weir": {
                 "name": "Sbarramento"
