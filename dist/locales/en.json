@@ -433,6 +433,12 @@
             "amenity": {
                 "label": "Type"
             },
+            "artist": {
+                "label": "Artist"
+            },
+            "artwork_type": {
+                "label": "Type"
+            },
             "atm": {
                 "label": "ATM"
             },
@@ -1045,6 +1051,10 @@
             },
             "building/residential": {
                 "name": "Residential Building",
+                "terms": ""
+            },
+            "emergency/ambulance_station": {
+                "name": "Ambulance Station",
                 "terms": ""
             },
             "emergency/phone": {

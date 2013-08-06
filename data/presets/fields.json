@@ -83,6 +83,16 @@
         "type": "combo",
         "label": "Type"
     },
+    "artist": {
+        "key": "artist_name",
+        "type": "text",
+        "label": "Artist"
+    },
+    "artwork_type": {
+        "key": "artwork_type",
+        "type": "combo",
+        "label": "Type"
+    },
     "atm": {
         "key": "atm",
         "type": "check",

@@ -1494,6 +1494,20 @@
         },
         "name": "Residential Building"
     },
+    "emergency/ambulance_station": {
+        "fields": [
+            "operator"
+        ],
+        "geometry": [
+            "area",
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "emergency": "ambulance_station"
+        },
+        "name": "Ambulance Station"
+    },
     "emergency/phone": {
         "icon": "emergency-telephone",
         "fields": [
@@ -4455,6 +4469,10 @@
         "name": "Alpine Hut"
     },
     "tourism/artwork": {
+        "fields": [
+            "artwork_type",
+            "artist"
+        ],
         "icon": "art-gallery",
         "geometry": [
             "point",

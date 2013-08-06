@@ -56,6 +56,10 @@ en:
         label: Type
       amenity: 
         label: Type
+      artist: 
+        label: Artist
+      artwork_type: 
+        label: Type
       atm: 
         label: ATM
       barrier: 
@@ -501,6 +505,9 @@ en:
       building/residential: 
         name: Residential Building
         terms: "<translate with synonyms or related terms for 'Residential Building', separated by commas>"
+      emergency/ambulance_station: 
+        name: Ambulance Station
+        terms: "<translate with synonyms or related terms for 'Ambulance Station', separated by commas>"
       emergency/phone: 
         name: Emergency Phone
         terms: "<translate with synonyms or related terms for 'Emergency Phone', separated by commas>"
