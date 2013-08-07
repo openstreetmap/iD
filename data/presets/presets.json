@@ -1508,6 +1508,20 @@
         },
         "name": "Emergency Phone"
     },
+	"emergency/fire_hydrant": {
+        "icon": "emergency-fire_hydrant",
+        "fields": [
+            "fire_hydrant_type"
+        ],
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "emergency": "fire_hydrant"
+        },
+        "name": "Fire Hydrant"
+    },
     "entrance": {
         "geometry": [
             "vertex"
