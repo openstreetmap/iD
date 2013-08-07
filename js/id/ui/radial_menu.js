@@ -1,4 +1,4 @@
-iD.ui.RadialMenu = function(operations) {
+iD.ui.RadialMenu = function(context, operations) {
     var menu,
         center = [0, 0],
         tooltip;
@@ -66,9 +66,10 @@ iD.ui.RadialMenu = function(operations) {
             .attr('class', 'tooltip-inner radial-menu-tooltip');
 
         function mouseover(d, i) {
-            var angle = a0 + i * a,
-                dx = angle < 0 ? -200 : 0,
-                dy = 0;
+            var rect = context.surface().node().getBoundingClientRect(),
+                angle = a0 + i * a,
+                dx = rect.left - (angle < 0 ? 200 : 0),
+                dy = rect.top;
 
             tooltip
                 .style('left', (r + 25) * Math.sin(angle) + dx + center[0] + 'px')
