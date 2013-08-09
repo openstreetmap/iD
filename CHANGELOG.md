@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Fix radial menu tooltip positioning
+
 ## 1.1.0rc1
 
 * Custom layers support TMS-flipped Y coordinate with {ty} replacement.
