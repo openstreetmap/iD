@@ -75,6 +75,7 @@ iD.ui.Inspector = function(context) {
     inspector.state = function(_) {
         if (!arguments.length) return state;
         state = _;
+        entityEditor.state(state);
         return inspector;
     };
 
