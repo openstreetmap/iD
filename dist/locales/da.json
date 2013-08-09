@@ -433,6 +433,12 @@
             "amenity": {
                 "label": "Type"
             },
+            "artist": {
+                "label": "Kunster"
+            },
+            "artwork_type": {
+                "label": "Type"
+            },
             "atm": {
                 "label": "Pengeautomat"
             },
@@ -1044,6 +1050,10 @@
             "building/residential": {
                 "name": "Beboelsesbygning",
                 "terms": "Beboelsesbygning, Parcelhus"
+            },
+            "emergency/ambulance_station": {
+                "name": "Udrykningsstation",
+                "terms": "Ambulancestation, Falckstation"
             },
             "emergency/phone": {
                 "name": "Nødtelefon",

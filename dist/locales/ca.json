@@ -433,6 +433,12 @@
             "amenity": {
                 "label": "Tipus"
             },
+            "artist": {
+                "label": "Artista"
+            },
+            "artwork_type": {
+                "label": "Tipus"
+            },
             "atm": {
                 "label": "Caixer automàtic"
             },
@@ -954,49 +960,62 @@
                 "terms": "Reixat, reixat ramader"
             },
             "barrier/city_wall": {
-                "name": "Muralla"
+                "name": "Muralla",
+                "terms": "Muralla, Muralla Medieval, Paret de la ciutat, Mur, Tanca, Tancament, Medieval, Monument"
             },
             "barrier/cycle_barrier": {
-                "name": "Barrera per a ciclistes"
+                "name": "Barrera per a ciclistes",
+                "terms": "Barrera per a ciclistes, Ciclisme, Bicicleta, Ruta cicloturista, Valla, Tanca, Tancament, Tanca per a bicicletes"
             },
             "barrier/ditch": {
-                "name": "Sèquia"
+                "name": "Sèquia",
+                "terms": "Sèquia, Canal, Aigua, Via aquífera, Torrent, Conducció d'aigua, Aquífer, Rierol"
             },
             "barrier/entrance": {
-                "name": "Entrada"
+                "name": "Entrada",
+                "terms": "Entrada, Porta, Portes, Portalada, Accés"
             },
             "barrier/fence": {
-                "name": "Tanca"
+                "name": "Tanca",
+                "terms": "Valla, Tanca, Tancament, Barrera, "
             },
             "barrier/gate": {
-                "name": "Porta"
+                "name": "Porta",
+                "terms": "Porta d'embarcament d'avions, Porta d'aeroport, Porta"
             },
             "barrier/hedge": {
-                "name": "Tanca de bardissa"
+                "name": "Tanca de bardissa",
+                "terms": "Seto, Tanca de Bardissa, Valla de seto, Valla verda, Valla de plantes, Tanca de plantes"
             },
             "barrier/kissing_gate": {
-                "name": "Porta giratòria"
+                "name": "Porta giratòria",
+                "terms": "Porta giratòria, Porta sense retorn, Accés giratori, Porta de no retorn"
             },
             "barrier/lift_gate": {
                 "name": "Barrera per a vehicles"
             },
             "barrier/retaining_wall": {
-                "name": "Mur de contenció"
+                "name": "Mur de contenció",
+                "terms": "Mur de contenció, Paret de contenció"
             },
             "barrier/stile": {
                 "name": "esgraons"
             },
             "barrier/toll_booth": {
-                "name": "Peatge"
+                "name": "Peatge",
+                "terms": "Peatge, Autopista de peatge, Cabina de peatge, Estació de peatge, Punt de peatge"
             },
             "barrier/wall": {
-                "name": "Mur"
+                "name": "Mur",
+                "terms": "Mur, Paret, Muralla"
             },
             "boundary/administrative": {
-                "name": "Límit administratiu"
+                "name": "Límit administratiu",
+                "terms": "Límit administratiu, Frontera administrativa, Delimitació administrativa"
             },
             "building": {
-                "name": "Edifici"
+                "name": "Edifici",
+                "terms": "Edifici, Bloc de pisos, Nau industrial, Centre comercial, Oficines, Bloc, Casa, Barraca"
             },
             "building/apartments": {
                 "name": "Apartaments"
@@ -1021,6 +1040,9 @@
             },
             "building/residential": {
                 "name": "Edifici residencial"
+            },
+            "emergency/ambulance_station": {
+                "name": "Parada d'ambulàncies"
             },
             "emergency/phone": {
                 "name": "Telèfon per a emergències"

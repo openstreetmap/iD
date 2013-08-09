@@ -433,6 +433,12 @@
             "amenity": {
                 "label": "Loại"
             },
+            "artist": {
+                "label": "Nghệ sĩ"
+            },
+            "artwork_type": {
+                "label": "Kiểu"
+            },
             "atm": {
                 "label": "Máy Rút tiền"
             },
@@ -1044,6 +1050,10 @@
             "building/residential": {
                 "name": "Tòa nhà Dân cư",
                 "terms": "tòa nhà dân cư,toà nhà dân cư,nhà ở,căn nhà,toa nha dan cu,nha o,can nha"
+            },
+            "emergency/ambulance_station": {
+                "name": "Trạm Xe cứu thương",
+                "terms": "trạm xe cứu thương,trạm xe cấp cứu,tram xe cuu thuong,tram xe cap cuu"
             },
             "emergency/phone": {
                 "name": "Điện thoại Khẩn cấp",

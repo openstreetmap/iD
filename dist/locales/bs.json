@@ -433,6 +433,12 @@
             "amenity": {
                 "label": "Vrsta"
             },
+            "artist": {
+                "label": "Javna umjetnost"
+            },
+            "artwork_type": {
+                "label": "Vrsta"
+            },
             "atm": {
                 "label": "Bankomat"
             },
@@ -1044,6 +1050,10 @@
             "building/residential": {
                 "name": "Stambena zgrada",
                 "terms": "stambena zgrada,zgrada za stanovanje"
+            },
+            "emergency/ambulance_station": {
+                "name": "Stanica hitne pomoći",
+                "terms": "stanica hitne pomoći,hitna pomoć,hitna medicinska pomoć"
             },
             "emergency/phone": {
                 "name": "Telefon za hitne slučajeve",

@@ -433,6 +433,12 @@
             "amenity": {
                 "label": "種別"
             },
+            "artist": {
+                "label": "アーティスト"
+            },
+            "artwork_type": {
+                "label": "タイプ"
+            },
             "atm": {
                 "label": "ATM"
             },
@@ -960,6 +966,9 @@
             },
             "building/residential": {
                 "name": "住宅建築"
+            },
+            "emergency/ambulance_station": {
+                "name": "救急看護"
             },
             "emergency/phone": {
                 "name": "緊急電話"

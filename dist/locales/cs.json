@@ -433,6 +433,12 @@
             "amenity": {
                 "label": "Typ"
             },
+            "artist": {
+                "label": "Umělec"
+            },
+            "artwork_type": {
+                "label": "Typ"
+            },
             "atm": {
                 "label": "Bankomat"
             },
@@ -985,6 +991,9 @@
             },
             "building/house": {
                 "name": "Dům"
+            },
+            "emergency/ambulance_station": {
+                "name": "Zdravotní pohotovost"
             },
             "emergency/phone": {
                 "name": "Tísňový telefon"

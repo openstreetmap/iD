@@ -433,6 +433,12 @@
             "amenity": {
                 "label": "Typ"
             },
+            "artist": {
+                "label": "Umelec"
+            },
+            "artwork_type": {
+                "label": "Typ"
+            },
             "atm": {
                 "label": "Bankomat"
             },
@@ -1044,6 +1050,10 @@
             "building/residential": {
                 "name": "Obytná budova",
                 "terms": "obytna budova,ubytovanie,bývanie,byvanie"
+            },
+            "emergency/ambulance_station": {
+                "name": "Stanovište sanitiek",
+                "terms": "stanoviste sanitiek,garaze,garáže,sanitky,sanitka,garaz,garáž"
             },
             "emergency/phone": {
                 "name": "Núdzový telefón",

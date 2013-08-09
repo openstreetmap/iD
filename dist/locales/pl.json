@@ -717,7 +717,8 @@
                 "terms": "port lotniczy, dworzec lotniczy"
             },
             "aeroway/apron": {
-                "name": "Płyta postojowa"
+                "name": "Płyta postojowa",
+                "terms": "rampa"
             },
             "aeroway/gate": {
                 "name": "Brama lotniska",
@@ -739,7 +740,8 @@
                 "name": "Droga kołowania"
             },
             "aeroway/terminal": {
-                "name": "Terminal pasażerski"
+                "name": "Terminal pasażerski",
+                "terms": "samolot,port lotniczy"
             },
             "amenity": {
                 "name": "Udogodnienie"
@@ -765,7 +767,8 @@
                 "name": "Wypożyczalnia rowerów"
             },
             "amenity/cafe": {
-                "name": "Kawiarnia"
+                "name": "Kawiarnia",
+                "terms": "kawa,herbata,kawiarnia"
             },
             "amenity/car_rental": {
                 "name": "Wypożyczalnia samochodów"
@@ -780,7 +783,8 @@
                 "name": "Żłobek"
             },
             "amenity/cinema": {
-                "name": "Kino"
+                "name": "Kino",
+                "terms": "duży ekran,drive-in,film,ruchomy obraz,pokaz zdjęć,zdjęcia,pokaz,silver screen"
             },
             "amenity/college": {
                 "name": "Uczelnia"
@@ -789,7 +793,8 @@
                 "name": "Sąd"
             },
             "amenity/drinking_water": {
-                "name": "Woda pitna"
+                "name": "Woda pitna",
+                "terms": "wodotrysk,woda pitna"
             },
             "amenity/embassy": {
                 "name": "Ambasada"
@@ -810,10 +815,12 @@
                 "name": "Cmentarz"
             },
             "amenity/hospital": {
-                "name": "Szpital"
+                "name": "Szpital",
+                "terms": "przychodnia,klinika,pomoc,służba zdrowia,hospicjum,ambulatorium,instytucja,dom opieki,sanatorium,chirurgia,oddział"
             },
             "amenity/kindergarten": {
-                "name": "Przedszkole"
+                "name": "Przedszkole",
+                "terms": "zerówka,żłobek,opieka nad dzieckiem"
             },
             "amenity/library": {
                 "name": "Biblioteka"
@@ -828,13 +835,16 @@
                 "name": "Apteka"
             },
             "amenity/place_of_worship": {
-                "name": "Miejsce kultu religijnego"
+                "name": "Miejsce kultu religijnego",
+                "terms": "opactwo,bazylika,katedra,prezbiterium,kaplica,kościół,owczarnia,dom Boży,dom modlitwy,tum,misja,meczet,parafia,sanktuarium,świątynia,synagoga,tabernakulum"
             },
             "amenity/place_of_worship/buddhist": {
-                "name": "Świątynia buddyjska"
+                "name": "Świątynia buddyjska",
+                "terms": "stupa,wihara,klasztor,świątynia,pagoda,zendo,dojo"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Kościół"
+                "name": "Kościół",
+                "terms": "chrześcijaństwo,opactwo,bazylika,katedra,prezbiterium,kaplica,dom Boży,dom modlitwy,misja,oratorium,parafia,sanktuarium,świątynia,tabernakulum"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Synagoga"
@@ -843,7 +853,8 @@
                 "name": "Meczet"
             },
             "amenity/police": {
-                "name": "Policja"
+                "name": "Policja",
+                "terms": "odznaka,niebiescy,gliniarz,detektyw,glina,żandarm,smerfy,psy,prawo,egzekucja prawa,funkcjonariusze"
             },
             "amenity/post_box": {
                 "name": "Skrzynka pocztowa"
@@ -855,7 +866,8 @@
                 "name": "Pub"
             },
             "amenity/restaurant": {
-                "name": "Restauracja"
+                "name": "Restauracja",
+                "terms": "bar,kawiarnia,stołówka,jadalnia,drive-in,knajpa,jadłodajnia,fast food,grill,gospoda,klub nocny,pizzeria"
             },
             "amenity/school": {
                 "name": "Szkoła"
@@ -876,13 +888,16 @@
                 "name": "Toalety"
             },
             "amenity/townhall": {
-                "name": "Ratusz"
+                "name": "Ratusz",
+                "terms": "władze miasta,ratusz,urząd miasta,urząd gminy,starostwo"
             },
             "amenity/university": {
-                "name": "Uniwersytet"
+                "name": "Uniwersytet",
+                "terms": "college,uniwersytet,szkoła wyższa"
             },
             "amenity/waste_basket": {
-                "name": "Kosz na śmieci"
+                "name": "Kosz na śmieci",
+                "terms": "kosz,kubeł,śmietnik"
             },
             "area": {
                 "name": "Obszar"
@@ -978,7 +993,8 @@
                 "name": "Droga"
             },
             "highway/bridleway": {
-                "name": "Ścieżka do jazdy konnej"
+                "name": "Ścieżka do jazdy konnej",
+                "terms": "jazda konna,szlak jeździecki,szlak konny"
             },
             "highway/bus_stop": {
                 "name": "Przystanek autobusowy"
@@ -990,7 +1006,8 @@
                 "name": "Ścieżka rowerowa"
             },
             "highway/footway": {
-                "name": "Ścieżka dla pieszych"
+                "name": "Ścieżka dla pieszych",
+                "terms": "pobocze,bulwar,ścieżka,deptak,szosa,spacer"
             },
             "highway/living_street": {
                 "name": "Strefa zamieszkania"
@@ -1005,7 +1022,8 @@
                 "name": "Węzeł autostradowy"
             },
             "highway/motorway_link": {
-                "name": "Autostrada - wjazd/zjazd"
+                "name": "Autostrada - wjazd/zjazd",
+                "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/path": {
                 "name": "Ścieżka"
@@ -1017,7 +1035,8 @@
                 "name": "Droga krajowa"
             },
             "highway/primary_link": {
-                "name": "Droga krajowa - wjazd/zjazd"
+                "name": "Droga krajowa - wjazd/zjazd",
+                "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/residential": {
                 "name": "Droga lokalna"
@@ -1029,7 +1048,8 @@
                 "name": "Droga wojewódzka"
             },
             "highway/secondary_link": {
-                "name": "Droga wojewódzka - wjazd/zjazd"
+                "name": "Droga wojewódzka - wjazd/zjazd",
+                "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/service": {
                 "name": "Droga serwisowa"
@@ -1056,19 +1076,22 @@
                 "name": "Droga powiatowa"
             },
             "highway/tertiary_link": {
-                "name": "Droga powiatowa - wjazd/zjazd"
+                "name": "Droga powiatowa - wjazd/zjazd",
+                "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/track": {
                 "name": "Droga gruntowa"
             },
             "highway/traffic_signals": {
-                "name": "Sygnalizacja świetlna"
+                "name": "Sygnalizacja świetlna",
+                "terms": "światła,sygnalizacja świetlna,sygnalizator"
             },
             "highway/trunk": {
                 "name": "Droga ekspresowa"
             },
             "highway/trunk_link": {
-                "name": "Droga ekspresowa - zjazd/wjazd"
+                "name": "Droga ekspresowa - zjazd/wjazd",
+                "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/turning_circle": {
                 "name": "Miejsce do zawracania"
@@ -1167,7 +1190,8 @@
                 "name": "Przystań"
             },
             "leisure/park": {
-                "name": "Park"
+                "name": "Park",
+                "terms": "las,ogród,trawa,zieleń,trawnik,łąka,miejsce,plac,teren rekreacyjny"
             },
             "leisure/pitch": {
                 "name": "Boisko"
@@ -1263,7 +1287,8 @@
                 "name": "Łąka"
             },
             "natural/heath": {
-                "name": "Wrzosowisko"
+                "name": "Wrzosowisko",
+                "terms": "Zdrowie, medycyna, szpital,"
             },
             "natural/peak": {
                 "name": "Szczyt"
@@ -1275,22 +1300,28 @@
                 "name": "Źródło"
             },
             "natural/tree": {
-                "name": "Drzewo"
+                "name": "Drzewo",
+                "terms": "Drzewo, dąb, drzewko, krzew,"
             },
             "natural/water": {
-                "name": "Woda"
+                "name": "Woda",
+                "terms": "Woda, rzeka, potok, strumyk, strumień"
             },
             "natural/water/lake": {
-                "name": "Jezioro"
+                "name": "Jezioro",
+                "terms": "Jezioro, zalew"
             },
             "natural/water/pond": {
-                "name": "Staw"
+                "name": "Staw",
+                "terms": "staw, sadzawka, bajoro"
             },
             "natural/water/reservoir": {
-                "name": "Zbiornik retencyjny"
+                "name": "Zbiornik retencyjny",
+                "terms": "Zbiornik wodny, zbiornik"
             },
             "natural/wetland": {
-                "name": "Bagno"
+                "name": "Bagno",
+                "terms": "bagna, bagno, mokradło, mokradła"
             },
             "natural/wood": {
                 "name": "Puszcza"
@@ -1332,7 +1363,8 @@
                 "name": "Elektrownia"
             },
             "power/line": {
-                "name": "Linia elektryczna"
+                "name": "Linia elektryczna",
+                "terms": "lina wysokiego napięcia, lina energetyczna"
             },
             "power/pole": {
                 "name": "Słup elektryczny"
@@ -1347,10 +1379,12 @@
                 "name": "Transformator"
             },
             "railway": {
-                "name": "Kolej"
+                "name": "Kolej",
+                "terms": "torowisko, kolej"
             },
             "railway/abandoned": {
-                "name": "Nieużywany tor"
+                "name": "Nieużywany tor",
+                "terms": "opuszczona kolej"
             },
             "railway/disused": {
                 "name": "Nieużywany tor"
@@ -1662,13 +1696,15 @@
                 "name": "Odpływ"
             },
             "waterway/river": {
-                "name": "Rzeka"
+                "name": "Rzeka",
+                "terms": "odpływ,potok,ujście,strumyk,dopływ,ciek wodny"
             },
             "waterway/riverbank": {
                 "name": "Brzeg rzeki"
             },
             "waterway/stream": {
-                "name": "Strumień"
+                "name": "Strumień",
+                "terms": "potok,odpływ,strumień,prąd,dryf,zalew,wezbranie,strumyk,fala,ciek wodny"
             },
             "waterway/weir": {
                 "name": "Jaz"

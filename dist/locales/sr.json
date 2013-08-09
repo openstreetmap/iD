@@ -433,6 +433,12 @@
             "amenity": {
                 "label": "Врста"
             },
+            "artist": {
+                "label": "Уметник"
+            },
+            "artwork_type": {
+                "label": "Врста"
+            },
             "atm": {
                 "label": "Банкомат"
             },
@@ -768,6 +774,9 @@
             "amenity/car_wash": {
                 "name": "Ауто-перионица"
             },
+            "amenity/childcare": {
+                "name": "Обданиште"
+            },
             "amenity/cinema": {
                 "name": "Биоскоп"
             },
@@ -936,11 +945,29 @@
             "building/apartments": {
                 "name": "Апартмани"
             },
+            "building/commercial": {
+                "name": "Пословна зграда"
+            },
             "building/entrance": {
                 "name": "Улаз"
             },
+            "building/garage": {
+                "name": "Гаража"
+            },
             "building/house": {
                 "name": "Кућа"
+            },
+            "building/hut": {
+                "name": "Колиба"
+            },
+            "building/industrial": {
+                "name": "Индустријска зграда"
+            },
+            "building/residential": {
+                "name": "Стамбена зграда"
+            },
+            "emergency/ambulance_station": {
+                "name": "Амбуланта"
             },
             "emergency/phone": {
                 "name": "Телефон за хитне случајеве"
@@ -1130,6 +1157,9 @@
             },
             "leisure": {
                 "name": "Рекреација"
+            },
+            "leisure/dog_park": {
+                "name": "Парк за псе"
             },
             "leisure/garden": {
                 "name": "Башта"
