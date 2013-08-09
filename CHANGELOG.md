@@ -1,3 +1,9 @@
+## 1.1.1
+
+* Improve performance when drawing
+* Tail should appear only first time
+* Fix radial menu tooltip positioning on Firefox
+
 ## 1.1.0
 
 * Fix radial menu tooltip positioning
