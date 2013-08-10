@@ -55,7 +55,7 @@ iD.taginfo = function() {
     }
 
     function popularValues() {
-        return function(d) { return parseFloat(d.fraction) > 0.01; };
+        return function(d) { return parseFloat(d.fraction) > 0.01 || d.in_wiki; };
     }
 
     function valKey(d) { return { value: d.key }; }
