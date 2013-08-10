@@ -10,7 +10,11 @@ iD.ui.preset.combo = function(field) {
 
         input.enter().append('input')
             .attr('type', 'text')
-            .attr('id', 'preset-input-' + field.id)
+            .attr('id', 'preset-input-' + field.id);
+
+        input
+            .on('change', change)
+            .on('blur', change)
             .each(function() {
                 if (field.options) {
                     options(field.options);
@@ -21,11 +25,7 @@ iD.ui.preset.combo = function(field) {
                         if (!err) options(_.pluck(data, 'value'));
                     });
                 }
-            });
-
-        input
-            .on('change', change)
-            .on('blur', change)
+            })
             .call(combobox);
 
         function options(opts) {
