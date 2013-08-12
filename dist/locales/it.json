@@ -433,6 +433,12 @@
             "amenity": {
                 "label": "Tipo"
             },
+            "artist": {
+                "label": "Artista"
+            },
+            "artwork_type": {
+                "label": "Tipo"
+            },
             "atm": {
                 "label": "Bancomat"
             },
@@ -942,6 +948,18 @@
             "building/house": {
                 "name": "Casa"
             },
+            "building/hut": {
+                "name": "Capanno"
+            },
+            "building/industrial": {
+                "name": "Edificio industriale"
+            },
+            "building/residential": {
+                "name": "Edificio residenziale"
+            },
+            "emergency/ambulance_station": {
+                "name": "Stazione ambulanze"
+            },
             "emergency/phone": {
                 "name": "Telefono di Emergenza"
             },
@@ -1130,6 +1148,9 @@
             },
             "leisure": {
                 "name": "Svago"
+            },
+            "leisure/dog_park": {
+                "name": "Area per cani"
             },
             "leisure/garden": {
                 "name": "Giardino"
