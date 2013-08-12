@@ -1,3 +1,9 @@
+## 1.1.2
+
+* Fix cursor offset when clicking/dragging after resizing the window (#1678)
+* Include low-frequency tag values if they have a wiki entry
+* Fix tag value suggestions in preset comboboxes (#1679, #1680)
+
 ## 1.1.1
 
 * Improve performance when drawing
