@@ -83,7 +83,6 @@ iD.Map = function(context) {
         map.dimensions(selection.dimensions());
 
         labels.supersurface(supersurface);
-        mouse = iD.util.fastMouse(supersurface.node());
     }
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
@@ -313,6 +312,7 @@ iD.Map = function(context) {
         surface.dimensions(dimensions);
         context.background().dimensions(dimensions);
         projection.clipExtent([[0, 0], dimensions]);
+        mouse = iD.util.fastMouse(supersurface.node());
         setCenter(center);
         return redraw();
     };
