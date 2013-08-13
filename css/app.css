@@ -2227,7 +2227,7 @@ img.wiki-image {
 }
 
 .modal-actions button,
-.save-success a {
+.save-success a.button {
     font-weight: normal;
     color: #7092FF;
     border-bottom: 1px solid #CCC;
@@ -2238,12 +2238,12 @@ img.wiki-image {
 }
 
 .modal-actions button:hover
-.save-success a:hover {
+.save-success a.button:hover {
     background-color: #ececec;
 }
 
 .modal-actions button:before,
-.save-success a:before,
+.save-success a.button:before,
 .walkthrough a:before {
     display: block;
     content: '';
@@ -2272,7 +2272,11 @@ img.wiki-image {
 /* Success Modal
 ------------------------------------------------------- */
 
-.save-success a {
+.save-success p {
+    padding: 15px;
+}
+
+.save-success .button {
     padding-top: 15px;
 }
 

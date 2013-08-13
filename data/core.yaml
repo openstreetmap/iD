@@ -136,9 +136,7 @@ en:
     tooltip: "Redo: {action}"
     nothing: Nothing to redo.
   tooltip_keyhint: "Shortcut:"
-  just_edited: "You just edited OpenStreetMap!"
   browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map."
-  view_on_osm: "View on OSM"
   translate:
     translate: Translate
     localized_translation_label: Multilingual name
@@ -213,9 +211,13 @@ en:
     unsaved_changes: You have unsaved changes
   success:
     edited_osm: "Edited OSM!"
+    just_edited: "You just edited OpenStreetMap!"
+    view_on_osm: "View on OSM"
     facebook: "Share on Facebook"
     tweet: "Tweet"
-    okay: "Okay"
+    help_html: |
+      Your changes should appear in the "Standard" layer in a few minutes. Other layers, and certain features, may take longer
+      (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>details</a>).
   confirm:
     okay: "Okay"
   splash:

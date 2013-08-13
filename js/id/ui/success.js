@@ -16,21 +16,24 @@ iD.ui.Success = function(context) {
             .on('click', function() { event.cancel(success) });
 
         header.append('h3')
-            .text(t('just_edited'));
+            .text(t('success.just_edited'));
 
         var body = selection.append('div')
             .attr('class', 'body save-success');
 
+        body.append('p')
+            .html(t('success.help_html'));
+
         body.append('a')
-            .attr('class', 'col12 osm')
+            .attr('class', 'button col12 osm')
             .attr('target', '_blank')
             .attr('href', function() {
                 return context.connection().changesetURL(changeset.id);
             })
-            .text(t('view_on_osm'));
+            .text(t('success.view_on_osm'));
 
         body.append('a')
-            .attr('class', 'col12 twitter')
+            .attr('class', 'button col12 twitter')
             .attr('target', '_blank')
             .attr('href', function() {
                 return 'https://twitter.com/intent/tweet?source=webclient&text=' +
@@ -39,7 +42,7 @@ iD.ui.Success = function(context) {
             .text(t('success.tweet'));
 
         body.append('a')
-            .attr('class', 'col12 facebook')
+            .attr('class', 'button col12 facebook')
             .attr('target', '_blank')
             .attr('href', function() {
                 return 'https://facebook.com/sharer/sharer.php?u=' +
