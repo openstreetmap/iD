@@ -20,7 +20,9 @@ iD.modes.Browse = function(context) {
         });
 
         // Get focus on the body.
-        document.activeElement.blur();
+        if (document.activeElement) {
+            document.activeElement.blur();
+        }
 
         if (sidebar) {
             context.ui().sidebar.show(sidebar);
