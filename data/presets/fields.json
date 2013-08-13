@@ -243,6 +243,17 @@
         "type": "check",
         "label": "Fee"
     },
+	"fire_hydrant_type": {
+        "key": "fire_hydrant:type",
+        "type": "combo",
+        "options": [
+            "pillar",
+            "pond",
+            "underground",
+            "wall"
+        ],
+        "label": "Type"
+    },
     "fixme": {
         "key": "fixme",
         "type": "textarea",
