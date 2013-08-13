@@ -9,9 +9,10 @@ iD.ui.FeatureList = function(context) {
             .text(t('inspector.feature_list'));
 
         function keypress() {
-            var q = search.property('value');
-            if (d3.event.keyCode === 13 && q.length) {
-                click(list.selectAll('.feature-list-item:first-child').datum().entity);
+            var q = search.property('value'),
+                items = list.selectAll('.feature-list-item');
+            if (d3.event.keyCode === 13 && q.length && items.size()) {
+                click(items.datum().entity);
             }
         }
 
