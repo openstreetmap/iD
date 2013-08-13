@@ -111,6 +111,8 @@ en:
         placeholder: +31 42 123 4567
       fee: 
         label: Fee
+      fire_hydrant/type: 
+        label: Type
       fixme: 
         label: Fix Me
       generator/method: 
@@ -514,6 +516,9 @@ en:
       emergency/ambulance_station: 
         name: Ambulance Station
         terms: "<translate with synonyms or related terms for 'Ambulance Station', separated by commas>"
+      emergency/fire_hydrant: 
+        name: Fire Hydrant
+        terms: "<translate with synonyms or related terms for 'Fire Hydrant', separated by commas>"
       emergency/phone: 
         name: Emergency Phone
         terms: "<translate with synonyms or related terms for 'Emergency Phone', separated by commas>"

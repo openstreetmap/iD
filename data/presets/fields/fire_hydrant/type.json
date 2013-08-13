@@ -1,0 +1,11 @@
+{
+    "key": "fire_hydrant:type",
+    "type": "combo",
+    "options": [
+        "pillar",
+        "pond",
+        "underground",
+        "wall"
+    ],
+    "label": "Type"
+}

@@ -514,6 +514,9 @@
             "fee": {
                 "label": "Fee"
             },
+            "fire_hydrant/type": {
+                "label": "Type"
+            },
             "fixme": {
                 "label": "Fix Me"
             },
@@ -1064,6 +1067,10 @@
             },
             "emergency/ambulance_station": {
                 "name": "Ambulance Station",
+                "terms": ""
+            },
+            "emergency/fire_hydrant": {
+                "name": "Fire Hydrant",
                 "terms": ""
             },
             "emergency/phone": {

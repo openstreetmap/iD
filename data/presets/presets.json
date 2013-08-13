@@ -1508,6 +1508,19 @@
         },
         "name": "Ambulance Station"
     },
+    "emergency/fire_hydrant": {
+        "fields": [
+            "fire_hydrant/type"
+        ],
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "emergency": "fire_hydrant"
+        },
+        "name": "Fire Hydrant"
+    },
     "emergency/phone": {
         "icon": "emergency-telephone",
         "fields": [
