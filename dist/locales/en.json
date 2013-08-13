@@ -1373,6 +1373,10 @@
                 "name": "Swimming Pool",
                 "terms": ""
             },
+            "leisure/track": {
+                "name": "Race Track",
+                "terms": ""
+            },
             "line": {
                 "name": "Line",
                 "terms": ""

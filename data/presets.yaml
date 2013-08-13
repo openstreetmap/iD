@@ -745,6 +745,9 @@ en:
       leisure/swimming_pool: 
         name: Swimming Pool
         terms: "<translate with synonyms or related terms for 'Swimming Pool', separated by commas>"
+      leisure/track: 
+        name: Race Track
+        terms: "<translate with synonyms or related terms for 'Race Track', separated by commas>"
       line: 
         name: Line
         terms: "<translate with synonyms or related terms for 'Line', separated by commas>"

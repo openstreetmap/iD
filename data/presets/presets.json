@@ -2730,6 +2730,21 @@
         "icon": "swimming",
         "name": "Swimming Pool"
     },
+    "leisure/track": {
+        "icon": "pitch",
+        "fields": [
+            "surface"
+        ],
+        "geometry": [
+            "point",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "leisure": "track"
+        },
+        "name": "Race Track"
+    },
     "line": {
         "name": "Line",
         "tags": {},
