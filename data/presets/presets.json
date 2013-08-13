@@ -3284,6 +3284,7 @@
         "name": "Power"
     },
     "power/generator": {
+        "name": "Power Generator",
         "geometry": [
             "point",
             "vertex",
@@ -3292,7 +3293,11 @@
         "tags": {
             "power": "generator"
         },
-        "name": "Power Plant"
+        "fields": [
+            "generator/source",
+            "generator/method",
+            "generator/type"
+        ]
     },
     "power/line": {
         "geometry": [

@@ -113,6 +113,12 @@ en:
         label: Fee
       fixme: 
         label: Fix Me
+      generator/method: 
+        label: Method
+      generator/source: 
+        label: Source
+      generator/type: 
+        label: Type
       highway: 
         label: Type
       historic: 
@@ -875,8 +881,8 @@ en:
         name: Power
         terms: "<translate with synonyms or related terms for 'Power', separated by commas>"
       power/generator: 
-        name: Power Plant
-        terms: "<translate with synonyms or related terms for 'Power Plant', separated by commas>"
+        name: Power Generator
+        terms: "<translate with synonyms or related terms for 'Power Generator', separated by commas>"
       power/line: 
         name: Power Line
         terms: "<translate with synonyms or related terms for 'Power Line', separated by commas>"

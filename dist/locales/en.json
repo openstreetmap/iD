@@ -517,6 +517,15 @@
             "fixme": {
                 "label": "Fix Me"
             },
+            "generator/method": {
+                "label": "Method"
+            },
+            "generator/source": {
+                "label": "Source"
+            },
+            "generator/type": {
+                "label": "Type"
+            },
             "highway": {
                 "label": "Type"
             },
@@ -1546,7 +1555,7 @@
                 "terms": ""
             },
             "power/generator": {
-                "name": "Power Plant",
+                "name": "Power Generator",
                 "terms": ""
             },
             "power/line": {

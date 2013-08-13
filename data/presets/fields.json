@@ -248,6 +248,21 @@
         "type": "textarea",
         "label": "Fix Me"
     },
+    "generator/method": {
+        "key": "generator:method",
+        "type": "combo",
+        "label": "Method"
+    },
+    "generator/source": {
+        "key": "generator:source",
+        "type": "combo",
+        "label": "Source"
+    },
+    "generator/type": {
+        "key": "generator:type",
+        "type": "combo",
+        "label": "Type"
+    },
     "highway": {
         "key": "highway",
         "type": "combo",
