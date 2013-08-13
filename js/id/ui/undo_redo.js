@@ -20,7 +20,9 @@ iD.ui.UndoRedo = function(context) {
             .placement('bottom')
             .html(true)
             .title(function (d) {
-                return iD.ui.tooltipHtml(d.annotation() || t('nothing_to_' + d.id), d.cmd);
+                return iD.ui.tooltipHtml(d.annotation() ?
+                    t(d.id + '.tooltip', {action: d.annotation()}) :
+                    t(d.id + '.nothing'), d.cmd);
             });
 
         var buttons = selection.selectAll('button')
