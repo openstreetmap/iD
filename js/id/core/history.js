@@ -187,33 +187,85 @@ iD.History = function(context) {
         toJSON: function() {
             if (stack.length <= 1) return;
 
+            var allEntities = {};
+
             var s = stack.map(function(i) {
-                var x = { entities: i.graph.entities };
+                var modified = [], deleted = [];
+
+                _.forEach(i.graph.entities, function(entity, id) {
+                    if (entity) {
+                        var key = iD.Entity.key(entity);
+                        allEntities[key] = entity;
+                        modified.push(key);
+                    } else {
+                        deleted.push(id);
+                    }
+                });
+
+                var x = {};
+
+                if (modified.length) x.modified = modified;
+                if (deleted.length) x.deleted = deleted;
                 if (i.imageryUsed) x.imageryUsed = i.imageryUsed;
                 if (i.annotation) x.annotation = i.annotation;
+
                 return x;
             });
 
             return JSON.stringify({
+                version: 2,
+                entities: _.values(allEntities),
                 stack: s,
                 nextIDs: iD.Entity.id.next,
                 index: index
-            }, function includeUndefined(key, value) {
-                if (typeof value === 'undefined') return 'undefined';
-                return value;
             });
         },
 
         fromJSON: function(json) {
-
             var h = JSON.parse(json);
 
             iD.Entity.id.next = h.nextIDs;
             index = h.index;
-            stack = h.stack.map(function(d) {
-                d.graph = iD.Graph(stack[0].graph).load(d.entities);
-                return d;
-            });
+
+            if (h.version === 2) {
+                var allEntities = {};
+
+                h.entities.forEach(function(entity) {
+                    allEntities[iD.Entity.key(entity)] = iD.Entity(entity);
+                });
+
+                stack = h.stack.map(function(d) {
+                    var entities = {}, entity;
+
+                    d.modified && d.modified.forEach(function(key) {
+                        entity = allEntities[key];
+                        entities[entity.id] = entity;
+                    });
+
+                    d.deleted && d.deleted.forEach(function(id) {
+                        entities[id] = undefined;
+                    });
+
+                    return {
+                        graph: iD.Graph(stack[0].graph).load(entities),
+                        annotation: d.annotation,
+                        imageryUsed: d.imageryUsed
+                    };
+                });
+            } else { // original version
+                stack = h.stack.map(function(d) {
+                    var entities = {};
+
+                    for (var i in d.entities) {
+                        var entity = d.entities[i];
+                        entities[i] = entity === 'undefined' ? undefined : iD.Entity(entity);
+                    }
+
+                    d.graph = iD.Graph(stack[0].graph).load(entities);
+                    return d;
+                });
+            }
+
             stack[0].graph.inherited = false;
             dispatch.change();
 

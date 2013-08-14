@@ -3,7 +3,9 @@ iD.Entity = function(attrs) {
     if (this instanceof iD.Entity) return;
 
     // Create the appropriate subtype.
-    if (attrs && attrs.type) {
+    if (attrs && attrs.id) {
+        return iD.Entity[iD.Entity.id.type(attrs.id)].apply(this, arguments);
+    } else if (attrs && attrs.type) {
         return iD.Entity[attrs.type].apply(this, arguments);
     }
 
@@ -31,7 +33,7 @@ iD.Entity.id.type = function(id) {
 
 // A function suitable for use as the second argument to d3.selection#data().
 iD.Entity.key = function(entity) {
-    return entity.id + ',' + entity.v;
+    return entity.id + 'v' + (entity.v || 0);
 };
 
 iD.Entity.areaPath = d3.geo.path()

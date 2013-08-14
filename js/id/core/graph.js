@@ -263,28 +263,14 @@ iD.Graph.prototype = {
 
     // Obliterates any existing entities
     load: function(entities) {
-
-        var base = this.base(),
-            i, entity, prefix;
+        var base = this.base();
         this.entities = Object.create(base.entities);
 
-        for (i in entities) {
-            entity = entities[i];
-            prefix = i[0];
-
-            if (entity === 'undefined') {
-                this.entities[i] = undefined;
-            } else if (prefix == 'n') {
-                this.entities[i] = new iD.Node(entity);
-
-            } else if (prefix == 'w') {
-                this.entities[i] = new iD.Way(entity);
-
-            } else if (prefix == 'r') {
-                this.entities[i] = new iD.Relation(entity);
-            }
+        for (var i in entities) {
+            this.entities[i] = entities[i];
             this._updateCalculated(base.entities[i], this.entities[i]);
         }
+
         return this;
     }
 };
