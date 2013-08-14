@@ -3,10 +3,10 @@ iD.Entity = function(attrs) {
     if (this instanceof iD.Entity) return;
 
     // Create the appropriate subtype.
-    if (attrs && attrs.id) {
-        return iD.Entity[iD.Entity.id.type(attrs.id)].apply(this, arguments);
-    } else if (attrs && attrs.type) {
+    if (attrs && attrs.type) {
         return iD.Entity[attrs.type].apply(this, arguments);
+    } else if (attrs && attrs.id) {
+        return iD.Entity[iD.Entity.id.type(attrs.id)].apply(this, arguments);
     }
 
     // Initialize a generic Entity (used only in tests).
