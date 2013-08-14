@@ -65,6 +65,10 @@ d3.combobox = function() {
                         position: 'absolute',
                         display: 'block',
                         left: '0px'
+                    })
+                    .on('mousedown', function () {
+                        // prevent moving focus out of the text field
+                        d3.event.preventDefault();
                     });
 
                 d3.select(document.body)
