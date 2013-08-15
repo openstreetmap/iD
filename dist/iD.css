@@ -1,0 +1,4165 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a { text-decoration: none;}
+/*
+ * 1. Corrects font family not being inherited in all browsers.
+ * 2. Corrects font size not being inherited in all browsers.
+ * 3. Addresses margins set differently in Firefox 4+, Safari 5, and Chrome
+ */
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 2 */
+    margin: 0; /* 3 */
+    padding: 0;
+}
+
+/*
+ * Addresses Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+button,
+input {
+    line-height: normal;
+}
+
+/* Hide default number spinner controls */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+display: none;
+}
+
+/*
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Corrects inability to style clickable `input` types in iOS.
+ * 3. Improves usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+}
+
+/*
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+input[disabled] {
+    cursor: default;
+}
+
+/*
+ * 1. Addresses box sizing set to `content-box` in IE 8/9.
+ * 2. Removes excess padding in IE 8/9.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+}
+
+/*
+ * 1. Addresses `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Addresses `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+
+input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box; /* 2 */
+    box-sizing: border-box;
+}
+
+/*
+ * Removes inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/*
+ * Removes inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/*
+** Markup free clearing
+** Details: http://www.positioniseverything.net/easyclearing.html
+*/
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+/* tiles */
+img.tile {
+    position:absolute;
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+
+    opacity: 0;
+
+    -webkit-transition: opacity 200ms linear;
+    transition: opacity 200ms linear;
+    -moz-transition: opacity 200ms linear;
+}
+
+img.tile-loaded {
+    opacity: 1;
+}
+img.tile-removing {
+    opacity: 0;
+}
+
+/* base styles */
+path {
+    fill: none;
+}
+
+use {
+    pointer-events: none;
+}
+
+g.point .shadow,
+g.vertex .shadow,
+g.midpoint .shadow {
+    pointer-events: all;
+}
+
+path.shadow {
+    pointer-events: stroke;
+}
+
+.shadow {
+    -webkit-transition: 200ms;
+       -moz-transition: 200ms;
+            transition: 200ms;
+}
+
+/* points */
+
+g.point .stroke {
+    stroke: #444;
+    stroke-width: 1;
+    fill: #fff;
+}
+
+g.point .shadow {
+    fill: none;
+    stroke: #f6634f;
+    stroke-width: 8;
+    stroke-opacity: 0;
+}
+
+g.point.hover:not(.selected) .shadow {
+    stroke-opacity: 0.5;
+}
+
+g.point.selected .shadow {
+    stroke-opacity: 0.7;
+}
+
+g.point.active, g.point.active * {
+    pointer-events: none;
+}
+
+/* vertices and midpoints */
+
+g.vertex .fill {
+    fill: #000;
+}
+
+g.vertex .stroke {
+    stroke: #666;
+    stroke-width: 1;
+    fill: white;
+}
+
+g.vertex.shared .stroke {
+    fill: #aaa;
+}
+
+g.midpoint .fill {
+    fill: #ddd;
+    stroke: black;
+    stroke-opacity: .5;
+    opacity: .5;
+}
+
+g.vertex .shadow,
+g.midpoint .shadow {
+    fill: #f6634f;
+    fill-opacity: 0;
+}
+
+g.vertex.vertex-hover {
+    display: none;
+}
+
+.mode-draw-area g.vertex.vertex-hover,
+.mode-draw-line g.vertex.vertex-hover,
+.mode-add-area  g.vertex.vertex-hover,
+.mode-add-line  g.vertex.vertex-hover,
+.mode-add-point g.vertex.vertex-hover,
+.mode-drag-node g.vertex.vertex-hover {
+    display: block;
+}
+
+g.vertex.hover:not(.selected) .shadow,
+g.midpoint.hover:not(.selected) .shadow {
+    fill-opacity: 0.3;
+}
+
+g.vertex.selected .shadow {
+    fill-opacity: 0.5;
+}
+
+.mode-draw-area g.midpoint,
+.mode-draw-line g.midpoint,
+.mode-add-area g.midpoint,
+.mode-add-line g.midpoint,
+.mode-add-point g.midpoint {
+  display: none;
+}
+
+/* lines */
+
+path.line {
+    stroke-linecap: round;
+    stroke-linejoin: bevel;
+}
+
+path.stroke {
+    stroke: black;
+    stroke-width: 4;
+}
+
+path.shadow {
+    stroke: #f6634f;
+    stroke-width: 10;
+    stroke-opacity: 0;
+}
+
+path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.3;
+}
+
+path.shadow.selected {
+    stroke-opacity: 0.7;
+}
+
+path.area.stroke {
+    stroke: white;
+    stroke-width: 1;
+}
+
+path.area.fill {
+    fill:#fff;
+    fill-opacity:0.3;
+    fill-rule: evenodd;
+}
+
+path.line.stroke {
+    stroke: white;
+    stroke-width: 2;
+}
+
+path.stroke.tag-natural {
+    stroke: #b6e199;
+}
+path.fill.tag-natural {
+    fill: #b6e199;
+}
+
+path.stroke.tag-natural-water {
+    stroke: #77d3de;
+}
+path.fill.tag-natural-water {
+    fill: #77d3de;
+}
+
+path.stroke.tag-amenity-school {
+    stroke: #ffff94;
+}
+path.fill.tag-amenity-school {
+    fill: #ffff94;
+    fill-opacity: 0.2;
+}
+
+path.stroke.tag-amenity-university {
+    stroke: #ffff94;
+}
+path.fill.tag-amenity-university {
+    fill: #ffff94;
+    fill-opacity: 0.1;
+}
+
+path.stroke.tag-building {
+    stroke: #e06e5f;
+}
+path.fill.tag-building {
+    fill: #e06e5f;
+}
+
+/* Landuse */
+
+
+path.stroke.tag-landuse,
+path.stroke.tag-natural-wood,
+path.stroke.tag-natural-tree,
+path.stroke.tag-natural-grassland,
+path.stroke.tag-leisure-pitch,
+path.stroke.tag-leisure-park {
+    stroke: #8cd05f;
+}
+
+path.stroke.tag-landuse-residential {
+    stroke: #e06e5f;
+}
+
+path.stroke.tag-landuse-retail,
+path.stroke.tag-landuse-commercial {
+    stroke: #eab056;
+}
+
+path.stroke.tag-landuse-industrial {
+    stroke: #e4a4f5;
+}
+
+path.stroke.tag-landuse-basin,
+path.stroke.tag-landuse-reservoir {
+    stroke: #77d3de;
+}
+
+path.stroke.tag-landuse-quarry {
+    stroke: #a6957b;
+}
+
+path.stroke.tag-landuse-residential,
+path.stroke.tag-landuse-construction {
+    stroke: #e06e5f;
+}
+
+path.stroke.tag-landuse-meadow,
+path.stroke.tag-natural-wetland {
+    stroke: #b6e199;
+}
+
+path.stroke.tag-natural-beach {
+    stroke: #ffff7e;
+}
+
+path.stroke.tag-natural-scrub {
+    stroke: #dbf08b;
+}
+
+path.fill.tag-landuse,
+path.fill.tag-natural-wood,
+path.fill.tag-natural-tree,
+path.fill.tag-natural-grassland,
+path.fill.tag-natural-grass,
+path.fill.tag-leisure-pitch,
+path.fill.tag-leisure-park {
+    fill: #8cd05f;
+    fill-opacity: 0.2;
+}
+
+path.fill.tag-landuse-retail,
+path.fill.tag-landuse-residential,
+path.fill.tag-landuse-commercial,
+path.fill.tag-landuse-industrial {
+    fill-opacity: 0.1;
+}
+
+path.fill.tag-natural-wetland,
+path.fill.tag-natural-beach,
+path.fill.tag-natural-scrub,
+path.fill.tag-landuse-cemetery,
+path.fill.tag-landuse-meadow,
+path.fill.tag-landuse-farm,
+path.fill.tag-landuse-farmland,
+path.fill.tag-landuse-construction,
+path.fill.tag-landuse-orchard {
+    /* background color is applied a further opacity later */
+    fill-opacity: 0.8;
+}
+
+.pattern-color-beach,
+.pattern-color-scrub,
+.pattern-color-meadow,
+.pattern-color-wetland,
+.pattern-color-cemetery,
+.pattern-color-farm,
+.pattern-color-farmland,
+.pattern-color-construction,
+.pattern-color-orchard {
+    fill-opacity: 0.2;
+}
+
+path.fill.tag-landuse-basin,
+path.fill.tag-landuse-reservoir {
+    fill: #77d3de;
+}
+
+path.fill.tag-landuse-quarry {
+    fill: #a6957b;
+}
+
+path.fill.tag-landuse-residential {
+    fill: #e06e5f;
+}
+
+path.fill.tag-landuse-farm,
+path.fill.tag-landuse-farmland {
+    fill: url(#pattern-farmland) #8cd05f;
+}
+
+.pattern-color-farm,
+.pattern-color-farmland {
+    fill: url(#pattern-farmland) #8cd05f;
+}
+
+path.fill.tag-landuse-meadow {
+    fill: url(#pattern-meadow) #b6e199;
+}
+.pattern-color-meadow {
+    fill: #b6e199;
+}
+
+path.fill.tag-natural-wetland {
+    fill: url(#pattern-wetland) #b6e199;
+}
+.pattern-color-wetland {
+    fill: #B6E199;
+}
+
+path.fill.tag-natural-beach {
+    fill: url(#pattern-beach) #ffff7e;
+}
+.pattern-color-beach {
+    fill: #ffff7e;
+}
+
+path.fill.tag-natural-scrub {
+    fill: url(#pattern-scrub) #dbf08b;
+}
+.pattern-color-scrub {
+    fill: #dbf08b;
+}
+
+path.fill.tag-landuse-cemetery {
+    fill: url(#pattern-cemetery) #8cd05f;
+}
+.pattern-color-cemetery {
+    fill: #8cd05f
+}
+
+path.fill.tag-landuse-orchard {
+    fill: url(#pattern-orchard) #8cd05f;
+}
+.pattern-color-orchard {
+    fill: #8cd05f
+}
+
+path.fill.tag-landuse-construction {
+    fill: url(#pattern-construction) #e06e5f;
+}
+.pattern-color-construction {
+    fill: #e06e5f;
+}
+
+path.fill.tag-landuse-retail,
+path.fill.tag-landuse-commercial {
+    fill: #eab056;
+}
+
+path.fill.tag-landuse-industrial {
+    fill: #e4a4f5;
+}
+
+path.stroke.tag-amenity-parking {
+    stroke: #aaa;
+}
+path.fill.tag-amenity-parking {
+    fill: #aaa;
+}
+
+path.fill.tag-place,
+path.fill.tag-boundary {
+    fill: none;
+}
+
+/* highways */
+
+path.shadow.tag-highway {
+    stroke-width:16;
+}
+path.casing.tag-highway {
+    stroke:#444;
+    stroke-width:10;
+}
+path.stroke.tag-highway {
+    stroke:#ccc;
+    stroke-width:8;
+}
+
+svg[data-zoom="16"] path.shadow.tag-highway {
+    stroke-width:12;
+}
+svg[data-zoom="16"] path.casing.tag-highway {
+    stroke-width:6;
+}
+svg[data-zoom="16"] path.stroke.tag-highway {
+    stroke-width:4;
+}
+
+path.stroke.tag-highway-motorway,
+path.stroke.tag-highway-motorway_link,
+path.stroke.tag-construction-motorway {
+    stroke:#58a9ed;
+}
+
+path.casing.tag-highway-motorway,
+path.casing.tag-highway-motorway_link,
+path.casing.tag-construction-motorway {
+    stroke:#2c5476;
+}
+
+path.stroke.tag-highway-trunk,
+path.stroke.tag-highway-trunk_link,
+path.stroke.tag-construction-trunk {
+    stroke:#8cd05f;
+}
+path.casing.tag-highway-trunk,
+path.casing.tag-highway-trunk_link,
+path.casing.tag-construction-trunk {
+    stroke:#46682f;
+}
+
+path.stroke.tag-highway-primary,
+path.stroke.tag-highway-primary_link,
+path.stroke.tag-construction-primary {
+    stroke:#e06d5f;
+}
+path.casing.tag-highway-primary,
+path.casing.tag-highway-primary_link,
+path.casing.tag-construction-primary {
+    stroke:#70372f;
+}
+
+path.stroke.tag-highway-secondary,
+path.stroke.tag-highway-secondary_link,
+path.stroke.tag-construction-secondary {
+    stroke:#eab056;
+}
+path.casing.tag-highway-secondary,
+path.casing.tag-highway-secondary_link,
+path.casing.tag-construction-secondary {
+    stroke:#75582b;
+}
+
+path.stroke.tag-highway-tertiary,
+path.stroke.tag-highway-tertiary_link,
+path.stroke.tag-construction-tertiary {
+    stroke:#ffff7e;
+}
+path.casing.tag-highway-tertiary,
+path.casing.tag-highway-tertiary_link,
+path.casing.tag-construction-tertiary {
+    stroke:#7f7f3f;
+}
+
+path.stroke.tag-highway-unclassified,
+path.stroke.tag-construction-unclassified {
+    stroke:#eaeaea;
+}
+path.casing.tag-highway-unclassified,
+path.casing.tag-construction-unclassified {
+    stroke:#444;
+}
+
+path.stroke.tag-highway-residential,
+path.stroke.tag-construction-residential {
+    stroke:#fff;
+}
+path.casing.tag-highway-residential,
+path.casing.tag-construction-residential {
+    stroke:#444;
+}
+
+path.stroke.tag-highway-living_street {
+    stroke:#ccc;
+    stroke-width:4;
+}
+path.casing.tag-highway-living_street {
+    stroke:#fff;
+    stroke-width:6;
+}
+
+path.stroke.line.tag-highway-pedestrian {
+    stroke:#fff;
+    stroke-dasharray: 2, 8;
+    stroke-width:4 !important;
+    shapeRendering: auto;
+}
+path.casing.line.tag-highway-pedestrian {
+    stroke:#8cd05f;
+    stroke-width:6 !important;
+}
+path.stroke.area.tag-highway-pedestrian {
+    stroke:#fff;
+    stroke-width: 2;
+}
+path.fill.area.tag-highway-pedestrian {
+    fill:#ccc;
+}
+
+path.stroke.tag-highway-service {
+    stroke:#fff;
+    stroke-width:4;
+}
+path.casing.tag-highway-service {
+    stroke:#666;
+    stroke-width:6;
+}
+svg[data-zoom="16"] path.stroke.tag-highway-service {
+    stroke-width:2;
+}
+svg[data-zoom="16"] path.casing.tag-highway-service {
+    stroke-width:4;
+}
+
+path.stroke.tag-highway-track {
+    stroke: #fff;
+    stroke-width: 4;
+}
+path.casing.tag-highway-track {
+    stroke: #996600;
+    stroke-width: 6;
+    stroke-linecap: butt;
+    stroke-dasharray: 6, 6;
+}
+svg[data-zoom="16"] path.stroke.tag-highway-track {
+    stroke-width:2;
+}
+svg[data-zoom="16"] path.casing.tag-highway-track {
+    stroke-width:4;
+}
+
+path.stroke.tag-highway-path {
+    stroke: #000;
+    stroke-width: 1 !important;
+    stroke-linecap: butt;
+    stroke-dasharray: 8, 4;
+}
+path.casing.tag-highway-path {
+    stroke-width: 1 !important;
+    stroke: #fff;
+}
+
+path.stroke.tag-highway-footway,
+path.stroke.tag-highway-cycleway,
+path.stroke.tag-highway-bridleway {
+    stroke-width: 4;
+    stroke-linecap: butt;
+    stroke-dasharray: 6, 6;
+}
+path.casing.tag-highway-footway,
+path.casing.tag-highway-cycleway,
+path.casing.tag-highway-bridleway {
+    stroke-width: 6;
+    stroke: #fff;
+}
+
+svg[data-zoom="16"] path.stroke.tag-highway-footway,
+svg[data-zoom="16"] path.stroke.tag-highway-cycleway,
+svg[data-zoom="16"] path.stroke.tag-highway-bridleway {
+    stroke-width: 2;
+}
+svg[data-zoom="16"] path.casing.tag-highway-footway,
+svg[data-zoom="16"] path.casing.tag-highway-cycleway,
+svg[data-zoom="16"] path.casing.tag-highway-bridleway {
+    stroke-width: 4;
+}
+
+path.stroke.tag-highway-footway {
+    stroke: #ae8681;
+}
+path.stroke.tag-highway-cycleway {
+    stroke: #58a9ed;
+}
+path.stroke.tag-highway-bridleway {
+    stroke: #e06d5f;
+}
+
+path.stroke.tag-highway-steps {
+    stroke: #81d25c;
+    stroke-width: 4;
+    stroke-linecap: butt;
+    stroke-dasharray: 3, 3;
+}
+path.casing.tag-highway-steps {
+    stroke-width: 6;
+    stroke: #fff;
+}
+
+/* aeroways */
+
+path.stroke.tag-aeroway-taxiway {
+    stroke: #805C80;
+    stroke-width: 4;
+}
+path.shadow.tag-aeroway-runway {
+    stroke-width: 20;
+}
+path.stroke.tag-aeroway-runway {
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 24, 48;
+}
+path.casing.tag-aeroway-runway {
+    stroke-width: 10;
+    stroke: #000;
+    stroke-linecap: square;
+}
+path.fill.tag-aeroway-runway {
+    fill: #000;
+    fill-opacity: 0.6;
+}
+path.stroke.tag-aeroway-apron {
+    stroke: #805C80;
+}
+path.fill.tag-aeroway-apron {
+    fill: #805C80;
+    fill-opacity: 0.2;
+}
+
+
+/* bridges */
+
+path.casing.tag-bridge {
+    stroke-width: 14;
+    stroke-opacity: 0.5;
+    stroke: #000;
+}
+
+path.casing.tag-highway-living_street.tag-bridge,
+path.casing.tag-highway-path.tag-bridge {
+    stroke-width: 6;
+}
+
+path.casing.line.tag-highway-pedestrian,
+path.casing.tag-highway-service.tag-bridge,
+path.casing.tag-highway-track.tag-bridge,
+path.casing.tag-highway-steps.tag-bridge,
+path.casing.tag-highway-footway.tag-bridge,
+path.casing.tag-highway-cycleway.tag-bridge,
+path.casing.tag-highway-bridleway.tag-bridge {
+    stroke-width: 8;
+}
+
+path.shadow.tag-highway-residential.tag-bridge {
+    stroke-width:22;
+}
+
+path.shadow.tag-highway-living_street.tag-bridge,
+path.shadow.tag-highway-path.tag-bridge,
+path.shadow.line.tag-highway-pedestrian,
+path.shadow.tag-highway-service.tag-bridge,
+path.shadow.tag-highway-track.tag-bridge,
+path.shadow.tag-highway-steps.tag-bridge,
+path.shadow.tag-highway-footway.tag-bridge,
+path.shadow.tag-highway-cycleway.tag-bridge,
+path.shadow.tag-highway-bridleway.tag-bridge {
+    stroke-width: 16;
+}
+
+/* tunnels */
+
+path.stroke.tag-highway.tag-tunnel {
+    stroke-opacity: 0.3;
+}
+
+path.casing.tag-highway.tag-tunnel {
+    stroke-opacity: 0.5;
+}
+
+path.stroke.tag-highway-construction,
+path.casing.tag-highway-construction {
+    stroke-linecap: butt;
+    stroke-dasharray: 7, 7;
+}
+
+/* construction */
+
+svg[data-zoom="16"] path.stroke.tag-highway-construction,
+svg[data-zoom="16"] path.casing.tag-highway-construction {
+    stroke-linecap: butt;
+    stroke-dasharray: 5, 5;
+}
+
+/* railways */
+
+.line.stroke.tag-railway {
+    stroke: #eee;
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 12,12;
+}
+.line.casing.tag-railway {
+    stroke: #555;
+    stroke-width: 4;
+}
+
+.line.stroke.tag-railway-abandoned {
+    stroke: #eee;
+}
+.line.casing.tag-railway-abandoned {
+    stroke: #999;
+}
+
+.line.stroke.tag-railway-subway {
+    stroke: #666;
+}
+.line.casing.tag-railway-subway {
+    stroke: #222;
+}
+
+.line.stroke.tag-railway-platform {
+    stroke: #999;
+    stroke-width: 4;
+    stroke-dasharray: none;
+}
+.line.casing.tag-railway-platform {
+    stroke: none;
+}
+
+/* waterways */
+
+path.fill.tag-waterway {
+    fill: #77d3de;
+}
+
+path.stroke.tag-waterway {
+    stroke: #77d3de;
+    stroke-width: 2;
+}
+path.casing.tag-waterway {
+    stroke: #77d3de;
+    stroke-width: 4;
+}
+
+path.stroke.tag-waterway-river {
+    stroke-width: 4;
+}
+path.casing.tag-waterway-river {
+    stroke-width: 6;
+}
+
+svg[data-zoom="16"] path.stroke.tag-waterway-river {
+    stroke-width: 4;
+}
+svg[data-zoom="16"] path.casing.tag-waterway-river {
+    stroke-width: 6;
+}
+
+path.stroke.tag-waterway-ditch {
+    stroke: #6591ff;
+    stroke-width: 1;
+}
+path.casing.tag-waterway-ditch {
+    stroke: #6591ff;
+    stroke-width: 3;
+}
+
+/* power */
+
+path.stroke.tag-power {
+    stroke: #939393;
+    stroke-width: 2;
+}
+path.casing.tag-power {
+    stroke: none;
+}
+
+/* boundary */
+
+path.stroke.tag-boundary {
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 20, 5, 5, 5;
+}
+path.casing.tag-boundary {
+    stroke: #82B5FE;
+    stroke-width: 6;
+}
+
+path.casing.tag-boundary-protected_area,
+path.casing.tag-boundary-national_park {
+    stroke: #b0e298;
+}
+
+
+text {
+    font-size:10px;
+    pointer-events: none;
+    color: #222;
+    opacity: 1;
+}
+
+.oneway .textpath.tag-waterway {
+    fill: #002F35;
+}
+
+marker#oneway-marker path {
+    fill:#000;
+    opacity: .5;
+}
+
+path.oneway {
+    stroke-width: 6px;
+}
+
+/*
+ * Labels
+ */
+
+text.arealabel-halo,
+text.linelabel-halo,
+text.pointlabel-halo,
+text.arealabel,
+text.linelabel,
+text.pointlabel {
+    font-size: 12px;
+    font-weight: bold;
+    fill: #333;
+    text-anchor: middle;
+    pointer-events: none;
+    -webkit-transition: opacity 100ms linear;
+    transition: opacity 100ms linear;
+    -moz-transition: opacity 100ms linear;
+}
+
+.linelabel-halo .textpath,
+.linelabel .textpath {
+  dominant-baseline: middle;
+}
+
+/* Opera doesn't support dominant-baseline. See #715 */
+.opera .linelabel-halo .textpath,
+.opera .linelabel .textpath {
+  baseline-shift: -33%;
+  dominant-baseline: auto;
+}
+
+.layer-halo text {
+    opacity: 0.7;
+    stroke: #fff;
+    stroke-width: 5px;
+    stroke-miterlimit: 1;
+}
+
+text.proximate {
+    opacity: 0;
+}
+
+text.point {
+  font-size: 10px;
+}
+
+/* Cursors */
+
+#map {
+    cursor: auto; /* Opera */
+    cursor: url(img/cursor-grab.png) 9 9, auto; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-grab.png) 1x,
+        url(img/cursor-grab2x.png) 2x
+        ) 9 9, auto;
+}
+
+.mode-browse .point,
+.mode-select .point {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-point.png), pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-select-point.png) 1x,
+        url(img/cursor-select-point2x.png) 2x
+        ), pointer;
+}
+
+.mode-select .vertex,
+.mode-browse .vertex {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-vertex.png), pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-select-vertex.png) 1x,
+        url(img/cursor-select-vertex2x.png) 2x
+        ), pointer;
+}
+
+.mode-browse .line,
+.mode-select .line {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-line.png), pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-select-line.png) 1x,
+        url(img/cursor-select-line2x.png) 2x
+        ), pointer;
+}
+
+.mode-select .area,
+.mode-browse .area {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-area.png), pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-select-area.png) 1x,
+        url(img/cursor-select-area2x.png) 2x
+        ), pointer;
+}
+
+.mode-select .midpoint,
+.mode-browse .midpoint {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-split.png), pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-select-split.png) 1x,
+        url(img/cursor-select-split2x.png) 2x
+        ), pointer;
+}
+
+.mode-select .behavior-multiselect .point,
+.mode-select .behavior-multiselect .vertex,
+.mode-select .behavior-multiselect .line,
+.mode-select .behavior-multiselect .area {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-add.png), pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-select-add.png) 1x,
+        url(img/cursor-select-add2x.png) 2x
+        ), pointer;
+}
+
+.mode-select .behavior-multiselect .selected {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-remove.png), pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-select-remove.png) 1x,
+        url(img/cursor-select-remove2x.png) 2x
+        ), pointer;
+}
+
+#map .point:active,
+#map .vertex:active,
+#map .line:active,
+#map .area:active,
+#map .midpoint:active,
+#map .mode-select .selected {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-acting.png), pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-select-acting.png) 1x,
+        url(img/cursor-select-acting2x.png) 2x
+        ), pointer;
+}
+
+.mode-draw-line #map,
+.mode-draw-area #map,
+.mode-add-line  #map,
+.mode-add-area  #map,
+.mode-drag-node #map {
+    cursor: crosshair; /* Opera */
+    cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-draw.png) 1x,
+        url(img/cursor-draw2x.png) 2x
+        ) 9 9, crosshair;
+}
+
+.mode-draw-line .way.hover,
+.mode-draw-area .way.hover,
+.mode-add-line  .way.hover,
+.mode-add-area  .way.hover,
+.mode-drag-node .way.hover {
+    cursor: crosshair; /* Opera */
+    cursor: url(img/cursor-draw-connect-line.png) 9 9, crosshair; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-draw-connect-line.png) 1x,
+        url(img/cursor-draw-connect-line2x.png) 2x
+        ) 9 9, crosshair;
+}
+
+.mode-draw-line .vertex.hover,
+.mode-draw-area .vertex.hover,
+.mode-add-line  .vertex.hover,
+.mode-add-area  .vertex.hover,
+.mode-drag-node .vertex.hover {
+    cursor: crosshair; /* Opera */
+    cursor: url(img/cursor-draw-connect-vertex.png) 9 9, crosshair; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-draw-connect-vertex.png) 1x,
+        url(img/cursor-draw-connect-vertex2x.png) 2x
+        ) 9 9, crosshair;
+}
+
+.mode-add-point #map,
+.lasso #map,
+.lasso .way,
+.lasso .vertex {
+    cursor: crosshair; /* Opera */
+    cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-draw.png) 1x,
+        url(img/cursor-draw2x.png) 2x
+        ) 9 9, crosshair;
+}
+
+.lasso #map {
+    pointer-events: visibleStroke;
+}
+
+/* GPX Paths */
+path.gpx {
+    stroke: #6AFF25;
+    stroke-width: 2;
+    fill: none;
+    pointer-events: none;
+}
+
+/* Modes */
+
+.mode-draw-line .vertex.active,
+.mode-draw-area .vertex.active,
+.mode-drag-node .vertex.active {
+    display: none;
+}
+
+.mode-draw-line .way.active,
+.mode-draw-area .way.active,
+.mode-drag-node .active {
+    pointer-events: none;
+}
+
+/* Ensure drawing doesn't interact with area fills. */
+.mode-add-point .area.fill,
+.mode-draw-line .area.fill,
+.mode-draw-area .area.fill,
+.mode-add-line .area.fill,
+.mode-add-area .area.fill,
+.mode-drag-node .area.fill {
+    pointer-events: none;
+}
+/* Basics
+------------------------------------------------------- */
+
+/*
+  Opera misbehaves when the window is resized vertically unless 100% width + height are
+  applied to both html and body. https://gist.github.com/jfirebaugh/bd225bcfdd3a633850c4
+*/
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font:normal 12px/1.6667 'Helvetica Neue', Arial, sans-serif;
+    margin:0;
+    padding:0;
+    min-width: 768px;
+    color:#333;
+    overflow: hidden;
+}
+
+.unsupported {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 100px;
+    font-size: 15px;
+}
+
+.id-container {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    min-width: 768px;
+}
+
+#content {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.spacer {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.limiter {
+    position: relative;
+    max-width: 1200px;
+}
+
+.spinner {
+    opacity: .5;
+}
+
+.spinner img {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    right: 10px;
+    top: 10px;
+    border-radius: 4px;
+    margin-right: 10px;
+    background: black;
+}
+
+div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a, button, input, textarea {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-touch-callout:none;
+}
+
+a,
+button,
+.checkselect label:hover,
+.opacity-options li,
+.radial-menu-item {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-pointer.png) 1x,
+        url(img/cursor-pointer2x.png) 2x
+        ) 6 1, pointer;
+}
+
+h2 {
+    font-size: 25px;
+    line-height: 1.25;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h3:last-child,
+h2:last-child,
+h4:last-child { margin-bottom: 0;}
+
+h3 {
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+h4, h5 {
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+:focus {
+    outline-color: transparent;
+    outline-style: none;
+}
+
+p {
+    font-size: 12px;
+    margin:0;
+    padding:0;
+}
+
+p:last-child {
+    padding-bottom: 0;
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+a:visited, a {
+    color: #7092ff;
+    -webkit-transition: all 100ms;
+       -moz-transition: all 100ms;
+         -o-transition: all 100ms;
+            transition: all 100ms;
+}
+
+a:hover {
+    color:#597be7;
+}
+
+/* Forms
+------------------------------------------------------- */
+
+textarea  {
+    resize: vertical;
+    font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
+}
+
+textarea,
+input[type=text],
+input[type=search],
+input[type=number],
+input[type=url],
+input[type=tel],
+input[type=email] {
+    background-color: white;
+    border:1px solid #ccc;
+    padding:5px 10px;
+    height:30px;
+    width: 100%;
+    border-radius:4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-transition: all 200ms;
+       -moz-transition: all 200ms;
+         -o-transition: all 200ms;
+            transition: all 200ms;
+}
+
+textarea:focus,
+input:focus {
+    background-color: #F1F1F1;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    float: left;
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+/* remove bottom border radius when combobox is open */
+.combobox + * textarea:focus,
+.combobox + * input:focus {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* tables */
+
+table {
+    background-color: white;
+    border-collapse: collapse;
+    width:100%;
+    border-spacing:0;
+}
+
+table th {
+    text-align:left;
+}
+
+table.tags, table.tags td, table.tags th {
+    border: 1px solid #CCC;
+    padding: 4px;
+}
+
+/* Grid
+------------------------------------------------------- */
+
+.col0    { float:left; width:04.1666%; }
+.col1    { float:left; width:08.3333%; }
+.col2    { float:left; width:16.6666%; }
+.col3    { float:left; width:25.0000%; max-width: 300px; }
+.col4    { float:left; width:33.3333%; max-width: 400px; }
+.col5    { float:left; width:41.6666%; max-width: 500px; }
+.col6    { float:left; width:50.0000%; max-width: 600px; }
+.col7    { float:left; width:58.3333%; }
+.col8    { float:left; width:66.6666%; }
+.col9    { float:left; width:75.0000%; }
+.col10   { float:left; width:83.3333%; }
+.col11   { float:left; width:91.6666%; }
+.col12   { float:left; width:100.0000%; }
+
+/* UI Lists
+------------------------------------------------------- */
+
+ul li { list-style: none;}
+
+.toggle-list {
+    border-radius: 4px;
+    border: 1px solid #CCC;
+}
+
+.toggle-list > label {
+    position: relative;
+    padding: 5px 10px;
+    display:block;
+    height: 30px;
+    border-bottom: 1px solid #ccc;
+    background-color: white;
+    color: #7092FF;
+    cursor: pointer;
+       -moz-transition: all 100ms;
+         -o-transition: all 100ms;
+            transition: all 100ms;
+}
+
+.toggle-list > label:hover {
+    background-color: #ececec;
+}
+
+.toggle-list > label:first-child {
+    border-radius: 3px 3px 0 0;
+}
+
+.toggle-list > label:last-child {
+    border-radius: 0 0 3px 3px;
+    border-bottom-width: 0;
+}
+
+.toggle-list > label:only-child {
+    border-radius: 3px;
+}
+
+.toggle-list label > span { 
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.toggle-list > label.remove span.icon {
+    display: block;
+    width: 14px;
+    float: left;
+    margin-right: 5px;
+    background-position: -204px 0;
+}
+
+.toggle-list > label.active {
+    background: #E8EBFF;
+}
+
+.link-list li {
+    float: right;
+    border-left: 1px solid rgba(255,255,255,.5);
+    padding: 5px 0 5px 5px;
+    margin-left: 5px;
+}
+
+ul.link-list li:last-child {
+    border-left: 0;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+/* Utility Classes
+------------------------------------------------------- */
+.fillL {
+    background: white;
+    color: #333;
+}
+
+.fillL2 {
+    background: #f6f6f6;
+    color: #333;
+}
+
+.fillL3 {
+    background: #ececec;
+    color: #333;
+}
+
+.fillD {
+    background:rgba(0,0,0,.5);
+    color: white;
+}
+
+.fl { float: left;}
+.fr { float: right;}
+
+div.hide,
+form.hide,
+button.hide,
+a.hide {
+    display: none;
+}
+
+.deemphasize {
+    color: #a9a9a9;
+}
+
+.content {
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
+}
+
+.loading {
+    background: url(img/loader_bg.gif);
+    background-size:5px 5px;
+}
+
+.panewrap {
+    position:absolute;
+    width:200%;
+    height:100%;
+    right: -100%;
+}
+
+.pane {
+    position:absolute;
+    width:50%;
+    top: 0;
+    bottom: 30px;
+}
+
+.pane:first-child {
+    left: 0;
+}
+
+.pane:last-child {
+    right: 0;
+}
+
+/* Buttons */
+
+button {
+    text-align: center;
+    line-height:20px;
+    border:0;
+    background: white;
+    font-weight: bold;
+    color:#333;
+    font-size:12px;
+    display: inline-block;
+    height:40px;
+    border-radius:4px;
+    /* Crashes Safari: https://github.com/systemed/iD/issues/1188 */
+    /*-webkit-transition: all 100ms;*/
+       -moz-transition: all 100ms;
+         -o-transition: all 100ms;
+            transition: all 100ms;
+}
+
+button:focus,
+button:hover {
+    background-color: #ececec;
+}
+
+button[disabled],
+button.disabled {
+    background-color: rgba(255,255,255,.25);
+    color: rgba(0,0,0,.5);
+    cursor: auto;
+}
+
+button.active {
+    background: #7092ff;
+}
+
+button.minor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 10%;
+    border-radius: 0;
+    background-color: #fafafa;
+}
+
+button.minor .icon {
+    opacity: .5;
+}
+
+button.minor:hover {
+    background-color: #f1f1f1;
+}
+
+.button-wrap {
+    display: inline-block;
+    padding-right:10px;
+    margin: 0;
+}
+
+.button-wrap button:only-child {
+    width: 100%;
+}
+
+.button-wrap:last-of-type {
+    padding-right: 0;
+}
+
+.joined button {
+    border-radius:0;
+    border-right: 1px solid rgba(0,0,0,.5);
+}
+
+.joined button:first-child {
+    border-radius:4px 0 0 4px;
+}
+
+.joined button:last-child {
+    border-right-width: 0;
+    border-radius:0 4px 4px 0;
+}
+
+button.action {
+    background: #7092ff;
+}
+
+button.action:focus,
+button.action:hover {
+    background: #597BE7;
+}
+
+button.save.has-count {
+    padding: 9px;
+}
+
+button.save .count {
+    display: none;
+}
+
+button.save.has-count .count {
+    display: block;
+    position: absolute;
+    top: 5px;
+    background: rgba(255, 255, 255, .5);
+    color: #333;
+    padding: 10px;
+    height: 30px;
+    line-height: 12px;
+    border-radius: 4px;
+    margin: auto;
+    margin-left: 8.3333%;
+}
+
+button.save.has-count .count::before {
+    content: "";
+    margin: auto;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -6px;
+    top: 0;
+    bottom: 0;
+    border-top:    6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right:  6px solid rgba(255,255,255,.5);
+}
+
+/* Icons */
+
+.icon {
+  display:inline-block;
+  vertical-align:top;
+  width:20px;
+  height:20px;
+  background:transparent url(img/sprite.svg) no-repeat 0 0;
+  text-indent:-9999px;
+  overflow:hidden;
+  }
+
+.icon-pre-text {
+    margin-right: 3px;
+}
+
+.user-icon {
+    max-height: 20px;
+    max-width: 20px;
+    height: auto;
+    width: auto;
+    border-radius: 3px;
+}
+
+/* Definitions for every icon */
+.icon.alert     { background-position:   0 0;}
+.icon.point,
+.icon.add-point  { background-position: -20px 0;}
+.icon.line,
+.icon.add-line   { background-position: -40px 0;}
+.icon.area,
+.icon.add-area   { background-position: -60px 0;}
+.icon.undo       { background-position: -80px 0;}
+.icon.redo       { background-position: -100px 0;}
+.icon.apply      { background-position: -120px 0;}
+.icon.save       { background-position: -140px 0;}
+.icon.close      { background-position: -160px 0;}
+.icon.delete     { background-position: -180px 0;}
+.icon.remove     { background-position: -200px 0;}
+.icon.inspect    { background-position: -220px 0;}
+.icon.plus       { background-position: -240px 0;}
+.icon.search     { background-position: -280px 0;}
+.icon.geocode    { background-position: -280px 0;}
+.icon.layers     { background-position: -300px 0;}
+.icon.avatar     { background-position: -320px 0;}
+.icon.nearby     { background-position: -340px 0;}
+.icon.geolocate  { background-position: -360px 0;}
+.icon.warning    { background-position: -380px 0;}
+.icon.bug        { background-position: -400px 0;}
+.icon.back       { background-position: -420px 0;}
+.icon.forward    { background-position: -440px 0;}
+.icon.help       { background-position: -460px 0;}
+.icon.relation    { background-position: -520px 0;}
+.icon.relation.route         { background-position: -540px 0;}
+.icon.relation.multipolygon  { background-position: -560px 0;}
+
+.icon.inspect.light    { background-position: -220px -20px;}
+.icon.plus.light       { background-position: -240px -20px;}
+.icon.zoom-in          { background-position: -240px -20px;}
+.icon.zoom-out         { background-position: -260px -20px;}
+.icon.geocode.light    { background-position: -280px -20px;}
+.icon.layers.light     { background-position: -300px -20px;}
+.icon.avatar.light     { background-position: -320px -20px;}
+.icon.nearby.light     { background-position: -340px -20px;}
+.icon.geolocate.light  { background-position: -360px -20px;}
+.icon.bug.light        { background-position: -400px -20px;}
+.icon.help.light       { background-position: -460px -20px;}
+
+.icon.back.blue        { background-position: -420px -20px;}
+.icon.forward.blue     { background-position: -440px -20px;}
+
+button[disabled] .icon.alert      { background-position:   0 -40px;}
+button[disabled] .icon.add-point  { background-position: -20px -40px;}
+button[disabled] .icon.add-line   { background-position: -40px -40px;}
+button[disabled] .icon.add-area   { background-position: -60px -40px;}
+button.disabled  .icon.undo       { background-position: -80px -40px;}
+button.disabled  .icon.redo       { background-position: -100px -40px;}
+button[disabled] .apply.icon      { background-position: -120px -40px;}
+button[disabled] .close.icon      { background-position: -160px -40px;}
+button[disabled] .delete.icon     { background-position: -180px -40px;}
+button[disabled] .icon.remove     { background-position: -200px -40px;}
+button[disabled] .icon.inspect    { background-position: -220px -40px;}
+button[disabled] .icon.zoom-in    { background-position: -240px -40px;}
+button[disabled] .icon.zoom-out   { background-position: -260px -40px;}
+button[disabled] .icon.geocode    { background-position: -280px -40px;}
+button[disabled] .icon.layers     { background-position: -300px -40px;}
+button[disabled] .icon.avatar     { background-position: -320px -40px;}
+button[disabled] .icon.nearby     { background-position: -340px -40px;}
+
+/* Out link is special */
+
+.icon.out-link   { height: 14px; width: 14px; background-position: -500px 0;}
+a:hover .icon.out-link   { background-position: -500px -14px;}
+
+.icon.plus-dark    { background-position: -240px -40px;}
+
+/* Universal preset icons */
+
+.icon.source     { background-position:   0 -200px;}
+.icon.address    { background-position: -20px -200px;}
+.icon.telephone  { background-position: -40px -200px;}
+.icon.website    { background-position: -60px -200px;}
+.icon.elevation  { background-position: -80px -200px;}
+.icon.wikipedia  { background-position: -100px -200px;}
+.icon.note       { background-position: -120px -200px;}
+.icon.wheelchair { background-position: -140px -200px;}
+
+/* ToolBar / Persistent UI Elements
+------------------------------------------------------- */
+
+#bar {
+    position: fixed;
+    padding: 10px 0;
+    left:0;
+    top:0;
+    right:0;
+    height:60px;
+    z-index: 1;
+    min-width: 768px;
+}
+
+/* Header for modals / panes
+------------------------------------------------------- */
+
+.header {
+    border-bottom: 1px solid #ccc;
+    height: 60px;
+    position: relative;
+}
+
+.header h3 {
+    text-align: center;
+    margin-bottom: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.header button,
+.modal > button {
+    border-radius: 0;
+    width: 40px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.header button {
+    position: relative;
+    height: 100%;
+}
+
+.preset-list-pane .header button {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.modal > button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 59px;
+    z-index: 3;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    padding: 5px 30px 5px 30px;
+    border-top: 1px solid #ccc;
+    background-color: #fafafa;
+    width: 100%;
+}
+
+.sidebar-component .body {
+    width: 100%;
+    overflow: auto;
+    top: 60px;
+    bottom: 0;
+    position: absolute;
+}
+
+/* Inspector
+------------------------------------------------------- */
+
+#sidebar {
+    position: relative;
+    float: left;
+    height: 100%;
+    overflow: hidden;
+    z-index: 2;
+    background: #f6f6f6;
+}
+
+.sidebar-component {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.inspector-wrap {
+    width: 100%;
+    height: 100%;
+}
+
+.inspector-hidden {
+    display: none;
+}
+
+.inspector-body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.feature-list-pane .inspector-body {
+    top: 120px;
+}
+
+.preset-list-pane .inspector-body {
+    top: 120px;
+}
+
+.entity-editor-pane .inspector-body {
+    top: 60px;
+}
+
+.inspector-inner {
+    padding: 20px;
+    position: relative;
+}
+
+#sidebar .search-header .icon {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 80px;
+    pointer-events: none;
+}
+
+#sidebar .search-header input {
+    position: absolute;
+    top: 60px;
+    height: 60px;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 0;
+    border-width: 0;
+    border-bottom-width: 1px;
+    text-indent: 30px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Feature list */
+
+.feature-list  {
+    width:100%;
+}
+
+.no-results-item,
+.geocode-item,
+.feature-list-item {
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+}
+
+.feature-list-item .label {
+    text-align: left;
+    padding: 5px 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-left: 1px solid rgba(0, 0, 0, .1);
+    -moz-transition: all 100ms;
+    -o-transition: all 100ms;
+    transition: all 100ms;
+}
+
+.feature-list-item .label .icon {
+    opacity: .5;
+}
+
+.feature-list-item:hover .label {
+    background-color: #ececec;
+}
+
+.feature-list-item .entity-type {
+    color:#7092ff;
+}
+
+.feature-list-item:hover .entity-type {
+    color:#597be7;
+}
+
+.feature-list-item .entity-name {
+    font-weight: normal;
+    color: #666;
+    padding-left: 10px;
+}
+
+/* Presets
+------------------------------------------------------- */
+
+/* Preset grid  */
+
+.preset-list  {
+    width:100%;
+    padding: 20px 20px 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.preset-list-button-wrap {
+    position: relative;
+    margin-bottom: 10px;
+    height: 60px;
+}
+
+.preset-list-button {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border: 1px solid #ccc;
+}
+
+.preset-list.filtered .preset-list-item:first-child .preset-list-button {
+    background: #ececec;
+}
+
+.preset-icon {
+    position: absolute;
+    top: 17px;
+    left: 17px;
+    margin: auto;
+}
+
+.preset-icon-line,
+.preset-icon-relation {
+    top: 0;
+    left: 0;
+}
+
+.preset-list-button .label {
+    background-color: #f6f6f6;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: 5px 10px;
+    left: 60px;
+    line-height: 50px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-left: 1px solid rgba(0, 0, 0, .1);
+    -moz-transition: all 100ms;
+    -o-transition: all 100ms;
+    transition: all 100ms;
+    border-radius: 0 3px 3px 0;
+    }
+
+.preset-list-button:hover .label {
+    background-color: #ececec;
+}
+
+.preset-list-item button.tag-reference-button {
+    height: 100%;
+    border: 1px solid #CCC;
+    border-radius: 0 3px 3px 0;
+}
+
+.current .preset-list-button,
+.current .preset-list-button .label {
+    background-color: #E8EBFF;
+}
+
+.category .preset-list-button:after,
+.category .preset-list-button:before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -1px; right: -1px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    height: 6px;
+}
+
+.category .preset-list-button:before {
+    top: -3px;
+}
+
+.subgrid .preset-list {
+    padding: 10px 10px 0 10px;
+    margin-top: 0;
+    border: 0;
+    border-radius: 8px;
+    width: -webkit-calc(100% + 20px);
+    margin-left: -10px;
+}
+
+.subgrid .arrow {
+    border: solid rgba(0, 0, 0, 0);
+    border-width: 10px;
+    border-bottom-color: #f1f1f1;
+    width: 0;
+    height: 0;
+    margin-left: 50%;
+    margin-left: -webkit-calc(50% - 10px);
+    margin-top: -10px;
+}
+
+/* Preset icon colors */
+
+.preset-icon-fill.icon-area {
+    cursor: inherit;
+    height: 45px;
+    width: 45px;
+    margin: auto;
+    position: absolute;
+    left: 7px; top: 7px;
+    background:transparent url(img/sprite.svg) no-repeat -240px -80px;
+}
+
+.preset-icon-fill.tag-shop,
+.preset-icon-fill.tag-building {
+    background:transparent url(img/sprite.svg) no-repeat 0 -80px;
+}
+
+.preset-icon-fill.tag-natural-water {
+    background:transparent url(img/sprite.svg) no-repeat -60px -80px;
+}
+
+.preset-icon-fill.tag-landuse,
+.preset-icon-fill.tag-natural-wood,
+.preset-icon-fill.tag-natural-tree,
+.preset-icon-fill.tag-natural-grassland,
+.preset-icon-fill.tag-leisure-park {
+    background:transparent url(img/sprite.svg) no-repeat -120px -80px;
+}
+
+.preset-icon-fill.tag-amenity-parking {
+    background:transparent url(img/sprite.svg) no-repeat -180px -80px;
+}
+
+/* preset form basics */
+
+.inspector-preset {
+    overflow: hidden;
+}
+
+.inspector-preset .preset-form {
+    padding: 10px;
+    margin: 0 10px 20px 10px;
+    border-radius: 8px;
+}
+
+.entity-editor-pane .preset-list-item::after {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: solid rgba(0, 0, 0, 0);
+    border-width: 10px;
+    border-bottom-color: #ececec;
+}
+
+.entity-editor-pane .preset-list-item .preset-list-button-wrap {
+    margin-bottom: 0;
+}
+
+
+.form-field {
+    margin-bottom: 10px;
+    width: 100%;
+    -webkit-transition: margin-bottom 200ms;
+       -moz-transition: margin-bottom 200ms;
+         -o-transition: margin-bottom 200ms;
+            transition: margin-bottom 200ms;
+}
+
+.form-field:last-child {
+    margin-bottom: 0;
+}
+
+.form-label {
+    position: relative;
+    font-weight: bold;
+    border: 1px solid #cfcfcf;
+    padding: 5px 0 5px 10px;
+    background: #f6f6f6;
+    display: block;
+    border-radius: 4px 4px 0 0;
+}
+
+.form-label button {
+    border-left: 1px solid #CCC;
+}
+
+.form-label .modified-icon {
+    border-right: 0;
+    opacity: 0;
+    z-index: -10;
+    right: 10%;
+}
+
+.modified .form-label .modified-icon {
+    opacity: 1;
+    z-index: 1;
+}
+
+.form-label button.tag-reference-button {
+    border-top-right-radius: 3px;
+}
+
+.form-field > input,
+.form-field > textarea,
+.form-field .preset-input-wrap {
+    border: 1px solid #CCC;
+    min-height: 30px;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+}
+
+.form-field textarea {
+    height: 65px;
+}
+
+.form-field button.remove {
+    border-radius: 0 0 4px 0;
+}
+
+.inspector-border {
+    border-bottom: 1px solid #CCC
+}
+
+/* Preset form (hover mode) */
+
+.inspector-hover .checkselect label:last-of-type,
+.inspector-hover .preset-input-wrap .label,
+.inspector-hover input,
+.inspector-hover label {
+    background: #ececec;
+}
+
+.inspector-hover a,
+.inspector-hover .checkselect label:last-of-type {
+    color: #666;
+}
+
+/* hide and remove from layout */
+.inspector-hidden,
+.inspector-hover label input[type="checkbox"],
+.inspector-hover label input[type="radio"],
+.inspector-hover .toggle-list label:not(.active),
+.inspector-hover .toggle-list label span,
+.inspector-hover .inspector-inner .add-tag,
+.inspector-hover .inspector-inner .add-relation,
+.inspector-hover .toggle-list label.remove .icon {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    opacity: 0 !important;
+    border-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* hide but preserve in layout */
+.inspector-hover .modified .form-label .modified-icon,
+.inspector-hover .entity-editor-pane button.minor,
+.inspector-hover .combobox-carat,
+.inspector-hover .entity-editor-pane .header button,
+.inspector-hover .spin-control,
+.inspector-hover .hide-toggle:before,
+.inspector-hover .more-buttons,
+.inspector-hover .view-on-osm {
+    opacity: 0;
+}
+
+/* Styles for raw tag inspector on hover */
+.inspector-hover .tag-row .key-wrap,
+.inspector-hover .tag-row .input-wrap-position {
+    width: 50%;
+}
+
+.inspector-hover .tag-row:first-child input.value {
+    border-top-right-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.value {
+    border-bottom-right-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.key {
+    border-bottom-left-radius: 4px;
+}
+
+.inspector-hover .inspector-body .more-buttons {
+    max-height: 0;
+    padding-bottom: 0;
+}
+
+/* Unstyle button fields */
+.inspector-hover .toggle-list label.active,
+.inspector-hover .entity-editor-pane a.hide-toggle {
+    opacity: 1;
+    background-color: transparent;
+    color: #666;
+    padding-left: 0;
+    border-width: 0;
+}
+
+.inspector-hover .toggle-list button.active {
+    padding-left: 10px;
+}
+
+/* Add placeholder only on hover for radio buttons */
+.inspector-hover .toggle-list .placeholder {
+    color: #a9a9a9;
+    padding: 5px 10px;
+    opacity: 1;
+    line-height: 20px;
+    width: 100%;
+}
+
+/* Hide placeholder for radio buttons if another is active, or not in hover state */
+.toggle-list label.active ~ .placeholder,
+.toggle-list .placeholder {
+    padding: 0;
+    opacity: 0;
+    width: 0;
+    line-height: 0;
+    display: block;
+    overflow: hidden;
+    -webkit-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
+       -moz-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
+         -o-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
+            transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
+}
+
+/* first phase hover-to-active animations */
+
+textarea,
+.form-label,
+.preset-input-wrap,
+.preset-input-wrap .label {
+    -webkit-transition: all 200ms;
+       -moz-transition: all 200ms;
+         -o-transition: all 200ms;
+            transition: all 200ms;
+}
+
+/* second phase hover-to-active animations */
+
+input,
+.checkselect label:last-of-type {
+    -webkit-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
+       -moz-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
+         -o-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
+            transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
+}
+
+.modified .form-label .modified-icon,
+.entity-editor-pane button.minor,
+.combobox-carat,
+.entity-editor-pane .header button,
+.toggle-list label span,
+.spin-control,
+.more-buttons,
+.view-on-osm,
+.hide-toggle:before,
+.entity-editor-pane .toggle-list label::before,
+.entity-editor-pane .toggle-list label.remove .icon {
+    -webkit-transition: opacity 200ms 200ms;
+       -moz-transition: opacity 200ms 200ms;
+         -o-transition: opacity 200ms 200ms;
+            transition: opacity 200ms 200ms;
+}
+
+.entity-editor-pane a.hide-toggle {
+    -webkit-transition: padding-left 200ms 200ms, color 200ms 200ms;
+       -moz-transition: padding-left 200ms 200ms, color 200ms 200ms;
+         -o-transition: padding-left 200ms 200ms, color 200ms 200ms;
+            transition: padding-left 200ms 200ms, color 200ms 200ms;
+}
+
+.entity-editor-pane .toggle-list label:not(.active) {
+    -webkit-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
+       -moz-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
+         -o-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
+            transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
+}
+
+.entity-editor-pane .toggle-list label {
+    -webkit-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+       -moz-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+         -o-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+            transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
+}
+
+/* adding additional preset fields */
+
+.inspector-body .more-buttons {
+    max-height: 100px;
+    padding-top: 0;
+    -webkit-transition: padding 200ms 200ms, max-height 200ms 200ms;
+       -moz-transition: padding 200ms 200ms, max-height 200ms 200ms;
+         -o-transition: padding 200ms 200ms, max-height 200ms 200ms;
+            transition: padding 200ms 200ms, max-height 200ms 200ms;
+}
+
+button.preset-add-field {
+    background: #f6f6f6;
+    width: 25%;
+    height: 40px;
+    -webkit-transition: width 200ms;
+       -moz-transition: width 200ms;
+         -o-transition: width 200ms;
+            transition: width 200ms;
+}
+
+button.preset-add-field:hover {
+    background: #ececec;
+}
+
+/* set width based on # of buttons */
+
+button.preset-add-field:only-child {
+    width: 100%;
+}
+
+button.preset-add-field:nth-last-child(2),
+button.preset-add-field:nth-last-child(2) ~ button.preset-add-field {
+    width: 50%;
+}
+
+button.preset-add-field:nth-last-child(3),
+button.preset-add-field:nth-last-child(3) ~ button.preset-add-field {
+    width: 33.3333%;
+}
+
+button.preset-add-field:nth-last-child(4),
+button.preset-add-field:nth-last-child(4) ~ button.preset-add-field {
+    width: 25%;
+}
+
+button.preset-add-field:nth-last-child(5),
+button.preset-add-field:nth-last-child(5) ~ button.preset-add-field {
+    width: 20%;
+}
+
+button.preset-add-field:nth-last-child(6),
+button.preset-add-field:nth-last-child(6) ~ button.preset-add-field {
+    width: 16.6666%;
+}
+
+button.preset-add-field:nth-last-child(7),
+button.preset-add-field:nth-last-child(7) ~ button.preset-add-field {
+    width: 14.2857%;
+}
+
+button.preset-add-field:nth-last-child(8),
+button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
+    width: 12.5%;
+}
+
+.preset-fav button.fav {
+    height: 30px;
+    margin: 5px;
+    padding: 0 10px;
+}
+
+/* preset form access */
+
+.preset-input-wrap .label {
+    height: 30px;
+    background: #F6F6F6;
+    padding: 5px 10px;
+}
+
+.form-field-access .preset-input-wrap li {
+    border-bottom: 1px solid #CCC;
+}
+.form-field-access .preset-input-wrap li:last-child {
+    border-bottom: 0;
+}
+
+.preset-input-access-wrap input {
+    border-radius: 0;
+    border-width: 0;
+    border-left-width: 1px;
+}
+
+.preset-input-wrap li:last-child input {
+    border-bottom-right-radius: 4px;
+}
+
+/* preset form numbers */
+
+input[type=number] {
+    position: relative;
+    padding-right: 20%;
+}
+
+.spin-control {
+    width: 20%;
+    height: 29px;
+    display: inline-block;
+    margin-left: -20%;
+    margin-bottom: -11px;
+    position: relative;
+}
+
+.spin-control button {
+    right: 1px;
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 50%;
+    border-left: 1px solid #CCC;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0);
+}
+
+.spin-control button.decrement {
+    border-bottom-right-radius: 3px;
+}
+
+.spin-control button.decrement::after,
+.spin-control button.increment::after {
+    content:"";
+    height: 0; width: 0;
+    position: absolute;
+    left: 0; right: 0; bottom: 0; top: 0;
+    margin: auto;
+}
+
+.spin-control button.decrement::after {
+    border-top: 5px solid #CCC;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+.spin-control button.increment::after {
+    border-bottom: 5px solid #CCC;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+/* preset form checkbox */
+
+.checkselect label:last-of-type {
+    display: block;
+    background: white;
+    padding: 5px 10px;
+    color: #7092FF;
+}
+
+.checkselect label:hover {
+    background: #f1f1f1;
+}
+
+.checkselect .set {
+    color: inherit;
+}
+
+.checkselect label:not(.set) input[type="checkbox"] {
+    opacity: .5;
+}
+
+/* Preset form radio button */
+
+.toggle-list button.remove {
+    border-radius: 0 0 3px 3px;
+}
+
+.toggle-list button.remove .icon {
+    position: absolute;
+    left: 5px;
+}
+
+.toggle-list button.remove::before {
+    content: none;
+}
+
+.form-field .wiki-lang {
+    border-radius: 0;
+}
+
+.form-field .wiki-title {
+    padding-right: 10%;
+}
+
+.form-field .wiki-title ~ .combobox-carat {
+    margin-left: -18%;
+    margin-right: 9%;
+}
+
+.form-field .wiki-link {
+    float: right;
+    background: #fafafa;
+    padding: 5px;
+    text-align: center;
+}
+
+.form-field .wiki-link:hover {
+    background: #f1f1f1;
+}
+
+#preset-input-maxspeed {
+    border-right: none;
+    border-radius: 0 0 0 4px;
+    width: 80%;
+}
+
+.form-field .maxspeed-unit {
+    border-radius: 0 0 4px 0;
+    width: 20%;
+}
+
+/* Name + translate form */
+
+.form-field .localized-main {
+    padding-right: 10%;
+}
+
+.form-field .button-input-action {
+    position: relative;
+    right: 1px;
+    width: 10%;
+    margin-left: -10%;
+    border: 1px solid #CCC;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-radius: 0 0 4px 0;
+    height: 30px;
+    vertical-align: top;
+}
+
+.form-field .localized-wrap .entry {
+    position: relative;
+    overflow: hidden;
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-width: 0;
+    border-radius: 4px;
+}
+
+.form-field .localized-wrap .entry::before {
+    content: "";
+    display: block;
+    position: absolute;
+    background:#ccc;
+    height: 11px;
+    width: 1px;
+    left: 0;
+    right: 0;
+    top: -11px;
+    margin: auto;
+}
+
+.form-field .localized-wrap .entry .localized-lang {
+    border-radius: 0;
+    border-top-width: 0;
+}
+
+.form-field .localized-wrap .entry .localized-value {
+    padding-right: 10%;
+    border-top-width: 0;
+    border-radius: 0 0 4px 4px;
+}
+
+/* Preset form address */
+
+.form-field .addr-housename {
+    border: 0;
+    border-radius: 0;
+}
+
+.form-field .addr-number {
+    width: 33.3333%;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 0;
+}
+
+.form-field .addr-street {
+    width: 66.6666%;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 0;
+}
+
+.form-field .addr-city {
+    width: 66.6666%;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 0 0 0 4px;
+}
+
+.form-field .addr-postcode {
+    width: 33.3333%;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 0 0 4px 0;
+}
+/* combobox dropdown */
+
+div.combobox {
+    z-index: 9999;
+    display: none;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+    margin-top: -1px;
+    background: white;
+    max-height: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
+}
+
+.combobox a {
+    display: block;
+    padding: 5px 10px;
+    border-top:1px solid #ccc;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.combobox a.selected,
+.combobox a:hover {
+    background: #ececec;
+}
+
+.combobox a:first-child {
+    border-top: 0;
+}
+
+.combobox-carat {
+    margin-left: -20px;
+    margin-right: 10px;
+    display:inline-block;
+    border-top: 5px solid #ccc;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+/* Raw Tag Editor */
+
+.tag-list {
+    padding-top: 10px;
+}
+
+.tag-row {
+    width: 100%;
+    position: relative;
+    clear: both;
+}
+
+.tag-row input {
+    height: 31px;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #CCC;
+    border-left: 1px solid #CCC;
+}
+
+.tag-row .key-wrap,
+.tag-row .input-wrap-position {
+    width: 40%;
+    float: left;
+    height: 30px;
+    -webkit-transition: width 200ms;
+       -moz-transition: width 200ms;
+         -o-transition: width 200ms;
+            transition: width 200ms;
+}
+
+.tag-row input.key {
+    font-weight: bold;
+    background-color: #f6f6f6;
+}
+
+.tag-row input.value {
+    border-right: 1px solid #CCC;
+}
+
+.tag-row:first-child input.key {
+    border-top: 1px solid #CCC;
+    border-top-left-radius: 4px;
+}
+
+.tag-row:first-child input.value {
+    border-top: 1px solid #CCC;
+}
+
+.tag-row button {
+    position: absolute;
+    height: 31px;
+    right: 10%;
+    border: 1px solid #CCC;
+    border-top-width: 0;
+    border-left-width: 0;
+}
+
+.tag-row button:hover {
+    background: #f1f1f1;
+}
+
+.tag-row button .icon {
+    opacity: .5;
+}
+
+.tag-row:first-child button {
+    border-top-width: 1px;
+}
+
+.tag-row:first-child .tag-reference-button {
+    border-top-right-radius: 4px;
+}
+
+.tag-row:last-child .tag-reference-button {
+    border-bottom-right-radius: 4px;
+}
+
+.tag-row .tag-reference-button {
+    right: 0;
+}
+
+/* Adding form fields to tag editor */
+
+.inspector-inner .add-tag {
+    width: 40%;
+    height: 30px;
+    border-top: 0;
+    background: rgba(0,0,0,.5);
+    border-radius: 0 0 4px 4px;
+}
+
+.inspector-inner .add-tag:hover {
+    background: rgba(0,0,0,.8);
+}
+
+.inspector-inner .add-tag .label {
+    display: none;
+}
+
+/* Tag reference */
+
+button.minor.tag-reference-loading {
+    background-color: #f5f5f5;
+}
+
+.tag-reference-loading .icon {
+    background-image: url(img/mini-loader.gif);
+    background-position: 0 0;
+}
+
+.tag-reference-body {
+    overflow: hidden;
+}
+
+.tag-reference-body p,
+.tag-reference-body img {
+    margin-top: 20px;
+}
+
+.tag-reference-body p:last-child {
+    padding-bottom: 10px;
+}
+
+.tag-reference-body a {
+    display: block;
+    padding-bottom: 10px;
+}
+
+.preset-list .tag-reference-body {
+    position: relative;
+    width: 100%;
+}
+
+.preset-list .tag-reference-body a {
+    padding-bottom: 20px;
+}
+
+.preset-list .tag-reference-body p,
+.preset-list .tag-reference-body img {
+    margin-top: 10px;
+}
+
+.raw-tag-editor .tag-reference-body {
+    border-bottom: 1px solid #ccc;
+    float: left;
+    width: 100%;
+}
+
+.raw-tag-editor .tag-reference-body p:last-child {
+    padding-bottom: 20px;
+}
+
+.raw-tag-editor .tag-reference-body a {
+    padding-bottom: 20px;
+}
+
+img.wiki-image {
+    float: right;
+    width: 33.3333%;
+    width: -webkit-calc(33.3333% - 10px);
+    width: calc(33.3333% - 10px);
+    margin-left: 20px;
+    margin-right: 10px;
+    border-radius: 4px;
+    max-height: 200px;
+    margin-bottom: 20px;
+}
+
+/* Raw relation membership editor */
+
+.raw-member-editor .member-list li:first-child,
+.raw-membership-editor .member-list li:first-child {
+    padding-top: 10px;
+}
+
+.raw-member-editor .member-row,
+.raw-membership-editor .member-row {
+    position: relative;
+}
+
+.raw-member-editor .member-row .member-entity-name,
+.raw-membership-editor .member-row .member-entity-name {
+    font-weight: normal;
+    padding-left: 10px;
+}
+
+.member-row-new .member-entity-input {
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #cfcfcf;
+}
+
+.add-relation {
+    width: 40%;
+    height: 30px;
+    background: rgba(0,0,0,.5);
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.add-relation:hover {
+    background: rgba(0,0,0,.8);
+}
+
+/* Map Controls */
+
+.map-controls {
+    right: 0;
+    top: 70px;
+    width: 40px;
+    position: fixed;
+    z-index: 100;
+}
+
+.map-control > button {
+    width: 40px;
+    background: rgba(0,0,0,.5);
+    border-radius: 0;
+}
+
+.map-control > button:hover {
+    background: rgba(0, 0, 0, .8);
+}
+
+.map-control > button.active:hover {
+    background: #7092ff;
+}
+
+.map-overlay {
+    z-index: -1;
+    right: 75%;
+    max-width: 260px;
+    min-width: 210px;
+    position: fixed;
+    left: 30px;
+    display: block;
+    padding: 10px 10px 0 10px;
+}
+
+/* Zoomer */
+
+.zoombuttons button.zoom-in {
+    border-radius: 4px 0 0 0;
+}
+
+/* Background Settings */
+
+
+.toggle-list.layer-list {
+    margin-bottom: 10px;
+}
+
+.background-control button {
+    border-radius: 4px 0 0 0;
+}
+
+
+.background-control button.active {
+    border-radius: 0;
+}
+
+.background-control {
+    position: relative;
+}
+
+.background-control .map-overlay {
+    position: absolute;
+    top: 0;
+}
+
+.nudge-container {
+    border-top: 1px solid #CCC;
+    margin: 0 -10px;
+}
+
+.background-control .adjustments button:last-child {
+    border: 0;
+}
+
+.background-control .hide-toggle  {
+    padding-bottom: 10px;
+}
+
+.hide-toggle {
+    display: block;
+    padding-left:12px;
+    position: relative;
+}
+
+.hide-toggle:before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 0;
+    width: 0;
+    left: 0;
+    top: 5px;
+    border-top:  4px solid transparent;
+    border-bottom:  4px solid transparent;
+    border-left:  8px solid #7092ff;
+}
+
+.hide-toggle.expanded:before {
+    border-top:  8px solid #7092ff;
+    border-bottom: 0;
+    border-right:  4px solid transparent;
+    border-left:  4px solid transparent;
+}
+
+.background-control .nudge-container button {
+    float: left;
+    display: block;
+    width:20%;
+    border-radius: 0;
+    border-right: 1px solid #CCC;
+    position: relative;
+}
+
+.background-control .nudge::after {
+    content: '';
+    display: block;
+    position: absolute;
+    margin: auto;
+    left: 0; right: 0; top: 0; bottom: 0;
+    height: 0;
+    width: 0;
+}
+
+.background-control .nudge.left::after {
+    border-top:  5px solid transparent;
+    border-bottom:  5px solid transparent;
+    border-left:  5px solid #222;
+}
+
+.background-control .nudge.right::after {
+    border-top:  5px solid transparent;
+    border-bottom:  5px solid transparent;
+    border-right:  5px solid #222;
+}
+
+.background-control .nudge.top::after {
+    border-right:  5px solid transparent;
+    border-left:  5px solid transparent;
+    border-bottom:  5px solid #222;
+}
+
+.background-control .nudge.bottom::after {
+    border-right:  5px solid transparent;
+    border-left:  5px solid transparent;
+    border-top:  5px solid #222;
+}
+
+.opacity-options {
+    background: url(img/background-pattern-opacity.png) 0 0 repeat;
+    height:20px;
+    width:62px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: 1px solid #ccc;
+}
+
+.opacity-options li {
+    height: 100%;
+    display: block;
+    float: left;
+}
+
+.opacity-options li .select-box{
+    position: absolute;
+    width:20px;
+    height:18px;
+    z-index: 9999;
+}
+
+.background-control li:hover .select-box,
+.background-control li.selected .select-box {
+    border: 2px solid #7092ff;
+    background: rgba(89, 123, 231, .5);
+    opacity: .5;
+}
+
+.background-control li.selected:hover .select-box,
+.background-control li.selected .select-box {
+    opacity: 1;
+}
+
+.background-control .opacity {
+    background:#222;
+    display:inline-block;
+    width:20px;
+    height:18px;
+}
+
+.background-control .layer-toggle-gpx .layer-extent {
+    border-left: 1px solid #CCC;
+    border-radius: 0 4px 4px 0;
+}
+
+.background-control .layer-toggle-gpx.selected .layer-extent {
+    display:inline-block;
+}
+
+/* Geolocator */
+
+.geolocate-control {
+    margin-bottom: 10px;
+}
+
+.geolocate-control button {
+    border-radius: 0 0 0 4px;
+}
+
+/* Help */
+
+.help-control button {
+    border-radius: 0 0 0 4px;
+}
+
+.help-wrap {
+    position: fixed;
+    top:60px;
+    bottom: 30px;
+    padding: 20px 50px 20px 20px;
+    right: 0;
+    overflow-y: scroll;
+}
+
+.help-wrap p {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.help-wrap .left-content .body p code {
+    padding:2px 4px;
+    background:#eee;
+}
+
+.help-wrap .toc {
+    /* This is two columns, 41.66666 x .4 = 16.6666 */
+    width:40%;
+    float:right;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding-left: 5px
+}
+
+.help-wrap .toc li a,
+.help-wrap .nav a {
+    display: block;
+    border: 1px solid #CCC;
+    padding: 5px 10px;
+}
+
+.help-wrap .toc li a {
+    border-bottom: 0;
+}
+
+.help-wrap .toc li a:hover,
+.help-wrap .nav a:hover  {
+    background: #ececec;
+}
+
+.help-wrap .toc li a.selected {
+    background: #E8EBFF;
+}
+
+.help-wrap .toc li:first-child a {
+    border-radius: 4px 4px 0 0;
+}
+
+.help-wrap .toc li:nth-last-child(2) a {
+    border-bottom: 1px solid #CCC;
+    border-radius: 0 0 4px 4px
+}
+
+.help-wrap .toc li.walkthrough a {
+    overflow: hidden;
+    margin-top: 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.help-wrap .nav {
+    position: relative;
+}
+
+.help-wrap .nav a {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.help-wrap .nav a:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.help-wrap .nav a:last-child:not(:only-child) {
+    border-radius: 0 4px 4px 0;
+    border-left: 0;
+}
+
+.help-wrap .nav a:only-child {
+    width: 100%;
+    border-radius: 4px;
+}
+
+/* Map
+------------------------------------------------------- */
+
+#map {
+    position:relative;
+    overflow:hidden;
+    height:100%;
+    background:#000;
+}
+
+#supersurface {
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#supersurface, .layer-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* About Section
+------------------------------------------------------- */
+
+.about-block {
+    position: absolute;
+    right:0;
+    bottom:0;
+    border-radius: 0;
+    opacity: .625;
+    -webkit-transition: opacity 200ms;
+    -moz-transition: opacity 200ms;
+    transition: opacity 200ms;
+}
+
+.about-block:hover {
+    opacity: 1;
+}
+
+#about {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.source-switch a {
+    padding: 2px 4px 4px 4px;
+    border-radius: 2px;
+}
+.source-switch a.live {
+    background: #d32232;
+    color:#fff;
+}
+
+/* Attribution overlay */
+.attribution {
+    position: absolute;
+    bottom: 35px;
+    left:10px;
+    color:#888;
+    font-size:10px;
+}
+
+.source-image {
+    height:20px;
+    vertical-align:top;
+}
+
+.user-list a:not(:last-child):after {
+    content: ', ';
+}
+
+/* API Status */
+
+.api-status {
+    float: left;
+}
+
+.api-status.offline,
+.api-status.readonly {
+    background: red;
+    padding: 5px 10px;
+}
+
+/* Account Information */
+
+.account {
+    float: left;
+    padding: 5px 10px;
+}
+
+.account .logout {
+    margin-left:10px;
+    border-left: 1px solid white;
+    padding-left: 10px;
+}
+
+/* Modals
+------------------------------------------------------- */
+
+.modal {
+    display: inline-block;
+    position:absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 3;
+}
+
+.modal .loader {
+    margin-bottom: 10px;
+}
+
+.modal .description {
+    text-align: center;
+}
+
+.shaded {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+}
+
+.shaded:before {
+    content:'';
+    background:rgba(0,0,0,0.5);
+    position:fixed;
+    left:0px; right:0px; top:0px; bottom:0px;
+}
+
+.modal-section {
+    padding: 20px;
+    border-bottom: 1px solid #CCC;
+}
+
+.modal-section:last-child {
+    border-bottom: 0;
+}
+
+.loading-modal {
+    text-align: center;
+}
+
+.modal-actions button,
+.save-success a.button {
+    font-weight: normal;
+    color: #7092FF;
+    border-bottom: 1px solid #CCC;
+    border-radius: 0;
+    height: 160px;
+    text-align: center;
+    display: inline-block;
+}
+
+.modal-actions button:hover
+.save-success a.button:hover {
+    background-color: #ececec;
+}
+
+.modal-actions button:before,
+.save-success a.button:before,
+.walkthrough a:before {
+    display: block;
+    content: '';
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    margin-bottom: 10px;
+    background:transparent url(img/sprite.svg) no-repeat 0 -220px;
+}
+
+.modal-actions :first-child {
+    border-right: 1px solid #CCC;
+}
+
+/* Restore Modal
+------------------------------------------------------- */
+
+.modal-actions .restore:before {
+    background-position: -500px -220px;
+}
+
+.modal-actions .reset:before {
+    background-position: -600px -220px;
+}
+
+/* Success Modal
+------------------------------------------------------- */
+
+.save-success p {
+    padding: 15px;
+}
+
+.save-success .button {
+    padding-top: 15px;
+}
+
+.save-success .osm:before {
+    background-position: 0px -220px;
+}
+
+.save-success .twitter:before {
+    background-position: -100px -220px;
+}
+
+.save-success .facebook:before {
+    background-position: -200px -220px;
+}
+
+/* Splash Modal
+------------------------------------------------------- */
+
+.modal-actions .walkthrough:before,
+.walkthrough a:before {
+    background-position: -300px -220px;
+}
+
+.modal-actions .start:before {
+    background-position: -400px -220px;
+}
+
+/* Commit Modal
+------------------------------------------------------- */
+
+.mode-save a.user-info {
+    display: inline-block;
+}
+
+.mode-save .commit-form {
+    margin-bottom: 0;
+}
+
+.mode-save button.action {
+    float: none;
+    margin: auto;
+    display: block;
+}
+
+.mode-save .user-info img {
+    float: left;
+}
+
+.mode-save h3 small.count {
+    margin-right: 10px;
+    text-align: center;
+    float: left;
+    height: 12px;
+    min-width: 12px;
+    font-size:12px;
+    line-height: 12px;
+    border-radius:24px;
+    padding:5px;
+    background:#7092ff;
+    color:#fff;
+}
+
+.mode-save .changeset-list {
+    overflow: auto;
+    border:1px solid #ccc;
+    border-radius: 4px;
+    background:#fff;
+    max-height: 160px;
+}
+
+.mode-save .warning-section .changeset-list button {
+    border-left: 1px solid #CCC;
+}
+
+.mode-save .changeset-list li {
+    position: relative;
+    border-top:1px solid #ccc;
+    padding:5px 10px;
+}
+
+.changeset-list li span.count {
+    font-size:10px;
+    color:#555;
+}
+
+.changeset-list li span.count:before { content: '('; }
+
+.changeset-list li span.count:after { content: ')'; }
+
+.changeset-list li:first-child { border-top: 0;}
+
+/* Notices
+------------------------------------------------------- */
+
+.notice {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: #fff;
+}
+
+.notice .zoom-to {
+    margin: auto;
+    width: 80%;
+    height: 100px;
+    border-radius: 5px;
+    line-height: 40px;
+    color: #000;
+    opacity: 0.9;
+}
+
+.notice .zoom-to:hover {
+    background: #d8e1ff;
+}
+
+.notice .zoom-to .icon {
+    margin-top:10px;
+    margin-right:10px;
+}
+
+.icon.zoom-in-invert {
+    background-position: -240px -40px;
+}
+
+/* Tooltips
+------------------------------------------------------- */
+
+.tooltip {
+    position: absolute;
+    display: none;
+    color:#333;
+    text-align: left;
+    font-size: 12px;
+}
+
+.tooltip.in {
+    opacity: 0.8;
+    z-index: 1030;
+    height: auto;
+    display: block;
+}
+
+.tooltip.top {
+    margin-top: -20px;
+    text-align: center;
+}
+
+.tooltip.right {
+    margin-left: 20px;
+}
+
+.tooltip.bottom {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.tooltip.left {
+    margin-left: -20px;
+    text-align: right;
+}
+
+.tooltip-inner {
+    display: inline-block;
+    max-width: 200px;
+    min-width: 80px;
+    padding: 10px;
+    font-weight: normal;
+    background-color: white;
+}
+
+.tail {
+    width: 200px;
+    height: 400px;
+    pointer-events: none;
+    opacity: .8;
+    margin-top: -200px;
+    position: absolute;
+    background: transparent;
+}
+
+.tail::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    top: 50%;
+    right: -5px;
+    margin-top: -5px;
+    border-left-color: white;
+    border-width: 5px 0 5px 5px;
+}
+
+.tail div {
+    padding: 10px;
+    background: white;
+    position: absolute;
+    top: 180px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.left.tail::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    top: 50%;
+    left: -5px;
+    margin-top: -5px;
+    border-right-color: white;
+    border-width: 5px 5px 5px 0;
+}
+
+.tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.tooltip.top .tooltip-arrow {
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-top-color: white;
+    border-width: 5px 5px 0;
+}
+
+.tooltip.right .tooltip-arrow {
+    top: 50%;
+    left: -5px;
+    margin-top: -5px;
+    border-right-color: white;
+    border-width: 5px 5px 5px 0;
+}
+
+.tooltip.left .tooltip-arrow {
+    top: 50%;
+    right: -5px;
+    margin-top: -5px;
+    border-left-color: white;
+    border-width: 5px 0 5px 5px;
+}
+
+.tooltip.bottom .tooltip-arrow {
+    top: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-bottom-color: white;
+    border-width: 0 5px 5px;
+}
+
+.keyhint-wrap {
+    background: #F6F6F6;
+    padding: 10px;
+    margin: 10px -10px -10px;
+}
+
+.tooltip-inner .keyhint {
+    font-size: 10px;
+    padding: 0 7px;
+    font-weight: bold;
+    display: inline-block;
+    border-radius: 2px;
+    border: 1px solid #CCC;
+    position: relative;
+    z-index: 1;
+    text-align: left;
+}
+
+.tooltip-inner .keyhint::after {
+    content: "";
+    position: absolute;
+    border-radius: 2px;
+    height: 10px;
+    width: 100%;
+    z-index: 0;
+    bottom: -4px;
+    left: -1px;
+    border: 1px solid #CCC;
+    border-top: 0;
+}
+
+/* Exceptions for tooltip layouts */
+
+/* make tooltips in editor pane dark */
+.entity-editor-pane .tooltip.top .tooltip-arrow {
+    border-top-color: #000;
+}
+
+.entity-editor-pane .tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #000;
+}
+
+.entity-editor-pane .tooltip.left .tooltip-arrow {
+    border-left-color: #000;
+}
+
+.entity-editor-pane .tooltip.right .tooltip-arrow {
+    border-right-color: #000;
+}
+
+.entity-editor-pane .tooltip-inner {
+    background: #000;
+    color: #ccc;
+}
+
+/* Uncramp map-control tooltips */
+.map-control .tooltip {
+    min-width: 160px;
+}
+/* Move over tooltips that are near the edge of screen */
+.add-point .tooltip {
+    left: 33.3333% !important; 
+}
+
+.curtain-tooltip.intro-points-add .tooltip-arrow,
+.add-point .tooltip .tooltip-arrow {
+    left: 60px;
+}
+
+.radial-menu-tooltip {
+    opacity: 0.8;
+    display: none;
+    position: absolute;
+    width: 200px;
+}
+
+.radial-menu-background {
+    stroke: black;
+    stroke-opacity: 0.5;
+}
+
+.radial-menu-item {
+    fill: white;
+}
+
+.radial-menu-item:hover {
+    fill: #ececec;
+}
+
+.radial-menu-item:active {
+    fill: #ececec;
+}
+
+.radial-menu-item.disabled {
+    cursor: auto;
+    fill: rgba(255,255,255,.5);
+}
+
+.radial-menu .icon {
+    pointer-events: none;
+}
+
+.lasso-box {
+    fill-opacity:0.1;
+    stroke: #fff;
+    stroke-width: 1;
+    stroke-opacity: 1;
+    stroke-dasharray: 5, 5;
+}
+
+/* Media Queries
+------------------------------------------------------- */
+
+@media only screen and (max-width: 840px) {
+    #bar .icon.icon-pre-text { margin-right: 0;}
+    /* override hide for save button */
+    #bar .save .label { display: block;}
+}
+
+/* Scrollbars
+ ----------------------------------------------------- */
+
+::-webkit-scrollbar {
+    height: 20px;
+    overflow: visible;
+    width: 10px;
+    background: white;
+    border-left: 1px solid #DDD;
+}
+
+::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.2);
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 3px 3px 3px 4px;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-track:hover,
+::-webkit-scrollbar-track:active {
+    background-color: rgba(0,0,0,.05);
+}
+
+/* Intro walkthrough
+ ----------------------------------------------------- */
+
+.curtain-darkness {
+    pointer-events: all;
+    fill-opacity: 0.7;
+    fill: #222;
+    fill-rule: evenodd;
+}
+
+.intro-nav-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.intro-nav-wrap button.step {
+    width: 20%;
+}
+
+.intro-nav-wrap button.step.finished {
+    background: #8cd05f;
+}
+
+.intro-nav-wrap button.step .icon {
+    display: none;
+}
+
+.intro-nav-wrap button.step.finished .icon {
+    display: inline-block;
+}
+
+
+.curtain-tooltip .tooltip-inner {
+    text-align: left;
+    padding: 20px;
+}
+
+.curtain-tooltip .tooltip-inner {
+    font-size: 15px;
+}
+
+.curtain-tooltip .tooltip-inner .bold {
+    font-weight: bold;
+    display: block;
+    border-top: 1px solid #CCC;
+    margin-top: 10px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 10px 20px 0 20px;
+}
+
+.curtain-tooltip .tooltip-inner .bold:only-child {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.curtain-tooltip.intro-points-describe {
+    top: 133px !important;
+}
+
+/* Tooltip illustrations */
+
+.intro-points-add .tooltip-inner::before,
+.intro-areas-add .tooltip-inner::before,
+.intro-lines-add .tooltip-inner::before {
+    margin-left: -20px;
+    display: block;
+    content: "";
+    height: 80px;
+    width: 200px;
+    background:transparent url(img/sprite.svg) no-repeat 0 -320px;
+}
+
+.intro-areas-add .tooltip-inner::before {
+    background-position: 0 -400px;
+}
+
+.intro-lines-add .tooltip-inner::before {
+    background-position: 0 -480px;
+}
+
+.huge-modal-button {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+}
+
+.huge-modal-button .illustration {
+    height: 100px;
+    width: 100px;
+    background: rgba(0, 0, 0, 0) url(img/sprite.svg) no-repeat -301px -220px;
+    margin: auto;
+}
+/* This file is generated by make. Do NOT edit manually. */
+
+.preset-icon{background-image:url(img/maki-sprite.png);background-repeat:no-repeat;width:24px;height:24px;}
+.preset-icon-line{background-image:url(img/line-presets.png);background-repeat:no-repeat;width:60px;height:60px;}
+.preset-icon-relation{background-image:url(img/relation-presets.png);background-repeat:no-repeat;width:60px;height:60px;}
+.feature-airfield{background-position:-0px -34px;}
+.feature-airport{background-position:-0px -94px;}
+.feature-alcohol-shop{background-position:-0px -154px;}
+.feature-america-football{background-position:-0px -214px;}
+.feature-art-gallery{background-position:-0px -274px;}
+.feature-bank{background-position:-0px -334px;}
+.feature-bar{background-position:-0px -394px;}
+.feature-baseball{background-position:-0px -454px;}
+.feature-basketball{background-position:-0px -514px;}
+.feature-beer{background-position:-0px -574px;}
+.feature-bicycle{background-position:-0px -634px;}
+.feature-building{background-position:-0px -694px;}
+.feature-bus{background-position:-0px -754px;}
+.feature-cafe{background-position:-0px -814px;}
+.feature-campsite{background-position:-0px -874px;}
+.feature-cemetery{background-position:-0px -934px;}
+.feature-cinema{background-position:-0px -994px;}
+.feature-circle{background-position:-0px -1054px;}
+.feature-circle-stroked{background-position:-0px -1114px;}
+.feature-city{background-position:-0px -1174px;}
+.feature-college{background-position:-0px -1234px;}
+.feature-commercial{background-position:-0px -1294px;}
+.feature-cricket{background-position:-0px -1354px;}
+.feature-cross{background-position:-0px -1414px;}
+.feature-dam{background-position:-0px -1474px;}
+.feature-danger{background-position:-0px -1534px;}
+.feature-disability{background-position:-0px -1594px;}
+.feature-embassy{background-position:-0px -1654px;}
+.feature-emergency-telephone{background-position:-0px -1714px;}
+.feature-farm{background-position:-0px -1774px;}
+.feature-fast-food{background-position:-0px -1834px;}
+.feature-ferry{background-position:-0px -1894px;}
+.feature-fire-station{background-position:-0px -1954px;}
+.feature-fuel{background-position:-0px -2014px;}
+.feature-garden{background-position:-0px -2074px;}
+.feature-golf{background-position:-0px -2134px;}
+.feature-grocery{background-position:-0px -2194px;}
+.feature-harbor{background-position:-0px -2254px;}
+.feature-heliport{background-position:-0px -2314px;}
+.feature-hospital{background-position:-0px -2374px;}
+.feature-industrial{background-position:-0px -2434px;}
+.feature-land-use{background-position:-0px -2494px;}
+.feature-library{background-position:-0px -2554px;}
+.feature-lodging{background-position:-0px -2614px;}
+.feature-logging{background-position:-0px -2674px;}
+.feature-marker{background-position:-0px -2734px;}
+.feature-marker-stroked{background-position:-0px -2794px;}
+.feature-monument{background-position:-0px -2854px;}
+.feature-museum{background-position:-0px -2914px;}
+.feature-music{background-position:-0px -2974px;}
+.feature-oil-well{background-position:-0px -3034px;}
+.feature-park{background-position:-0px -3094px;}
+.feature-park2{background-position:-0px -3154px;}
+.feature-parking{background-position:-0px -3214px;}
+.feature-parking-garage{background-position:-0px -3274px;}
+.feature-pharmacy{background-position:-0px -3334px;}
+.feature-pitch{background-position:-0px -3394px;}
+.feature-place-of-worship{background-position:-0px -3454px;}
+.feature-police{background-position:-0px -3514px;}
+.feature-post{background-position:-0px -3574px;}
+.feature-prison{background-position:-0px -3634px;}
+.feature-rail{background-position:-0px -3694px;}
+.feature-rail-above{background-position:-0px -3754px;}
+.feature-rail-underground{background-position:-0px -3814px;}
+.feature-religious-christian{background-position:-0px -3874px;}
+.feature-religious-jewish{background-position:-0px -3934px;}
+.feature-religious-muslim{background-position:-0px -3994px;}
+.feature-restaurant{background-position:-0px -4054px;}
+.feature-roadblock{background-position:-0px -4114px;}
+.feature-school{background-position:-0px -4174px;}
+.feature-shop{background-position:-0px -4234px;}
+.feature-skiing{background-position:-0px -4294px;}
+.feature-slaughterhouse{background-position:-0px -4354px;}
+.feature-soccer{background-position:-0px -4414px;}
+.feature-square{background-position:-0px -4474px;}
+.feature-square-stroked{background-position:-0px -4534px;}
+.feature-star{background-position:-0px -4594px;}
+.feature-star-stroked{background-position:-0px -4654px;}
+.feature-swimming{background-position:-0px -4714px;}
+.feature-telephone{background-position:-0px -4774px;}
+.feature-tennis{background-position:-0px -4834px;}
+.feature-theatre{background-position:-0px -4894px;}
+.feature-toilets{background-position:-0px -4954px;}
+.feature-town{background-position:-0px -5014px;}
+.feature-town-hall{background-position:-0px -5074px;}
+.feature-triangle{background-position:-0px -5134px;}
+.feature-triangle-stroked{background-position:-0px -5194px;}
+.feature-village{background-position:-0px -5254px;}
+.feature-warehouse{background-position:-0px -5314px;}
+.feature-waste-basket{background-position:-0px -5374px;}
+.feature-water{background-position:-0px -5434px;}
+.feature-wetland{background-position:-0px -5494px;}
+.feature-zoo{background-position:-0px -5554px;}
+.preset-icon-line.feature-highway-motorway{background-position:-20px -25px;}
+.preset-icon-line.feature-highway-trunk{background-position:-80px -25px;}
+.preset-icon-line.feature-highway-primary{background-position:-140px -25px;}
+.preset-icon-line.feature-highway-secondary{background-position:-200px -25px;}
+.preset-icon-line.feature-highway-tertiary{background-position:-260px -25px;}
+.preset-icon-line.feature-highway-motorway-link{background-position:-320px -25px;}
+.preset-icon-line.feature-highway-trunk-link{background-position:-380px -25px;}
+.preset-icon-line.feature-highway-primary-link{background-position:-440px -25px;}
+.preset-icon-line.feature-highway-secondary-link{background-position:-500px -25px;}
+.preset-icon-line.feature-highway-tertiary-link{background-position:-560px -25px;}
+.preset-icon-line.feature-highway-residential{background-position:-620px -25px;}
+.preset-icon-line.feature-highway-unclassified{background-position:-680px -25px;}
+.preset-icon-line.feature-highway-service{background-position:-740px -25px;}
+.preset-icon-line.feature-highway-road{background-position:-800px -25px;}
+.preset-icon-line.feature-highway-track{background-position:-860px -25px;}
+.preset-icon-line.feature-highway-living-street{background-position:-920px -25px;}
+.preset-icon-line.feature-highway-path{background-position:-980px -25px;}
+.preset-icon-line.feature-highway-cycleway{background-position:-1040px -25px;}
+.preset-icon-line.feature-highway-footway{background-position:-1100px -25px;}
+.preset-icon-line.feature-highway-bridleway{background-position:-1160px -25px;}
+.preset-icon-line.feature-highway-steps{background-position:-1220px -25px;}
+.preset-icon-line.feature-railway-rail{background-position:-1280px -25px;}
+.preset-icon-line.feature-railway-disused{background-position:-1340px -25px;}
+.preset-icon-line.feature-railway-abandoned{background-position:-1400px -25px;}
+.preset-icon-line.feature-railway-subway{background-position:-1460px -25px;}
+.preset-icon-line.feature-railway-light-rail{background-position:-1520px -25px;}
+.preset-icon-line.feature-railway-monorail{background-position:-1580px -25px;}
+.preset-icon-line.feature-waterway-river{background-position:-1640px -25px;}
+.preset-icon-line.feature-waterway-stream{background-position:-1700px -25px;}
+.preset-icon-line.feature-waterway-canal{background-position:-1760px -25px;}
+.preset-icon-line.feature-waterway-ditch{background-position:-1820px -25px;}
+.preset-icon-line.feature-power-line{background-position:-1880px -25px;}
+.preset-icon-line.feature-other-line{background-position:-1940px -25px;}
+.preset-icon-line.feature-category-roads{background-position:-2000px -25px;}
+.preset-icon-line.feature-category-rail{background-position:-2060px -25px;}
+.preset-icon-line.feature-category-path{background-position:-2120px -25px;}
+.preset-icon-line.feature-category-water{background-position:-2180px -25px;}
+.preset-icon-line.feature-ferry{background-position:-2240px -25px;}
+.preset-icon-line.feature-pipeline{background-position:-2300px -25px;}
+.preset-icon-relation.feature-relation{background-position:-20px -25px;}
+.preset-icon-relation.feature-restriction{background-position:-80px -25px;}
+.preset-icon-relation.feature-multipolygon{background-position:-140px -25px;}
+.preset-icon-relation.feature-boundary{background-position:-200px -25px;}
+.preset-icon-relation.feature-route{background-position:-260px -25px;}
+.preset-icon-relation.feature-route-road{background-position:-320px -25px;}
+.preset-icon-relation.feature-route-bicycle{background-position:-380px -25px;}
+.preset-icon-relation.feature-route-foot{background-position:-440px -25px;}
+.preset-icon-relation.feature-route-bus{background-position:-500px -25px;}
+.preset-icon-relation.feature-route-train{background-position:-560px -25px;}
+.preset-icon-relation.feature-route-detour{background-position:-620px -25px;}
+.preset-icon-relation.feature-route-tram{background-position:-680px -25px;}
+.preset-icon-relation.feature-route-ferry{background-position:-740px -25px;}
+.preset-icon-relation.feature-route-power{background-position:-800px -25px;}
+.preset-icon-relation.feature-route-pipeline{background-position:-860px -25px;}
+.preset-icon-relation.feature-route-master{background-position:-920px -25px;}
