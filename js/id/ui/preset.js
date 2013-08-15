@@ -72,10 +72,10 @@ iD.ui.preset = function(context) {
         var shown = fields.filter(function(field) { return field.shown(); }),
             notShown = fields.filter(function(field) { return !field.shown(); });
 
-        var $form = selection.selectAll('form')
+        var $form = selection.selectAll('.preset-form')
             .data([0]);
 
-        $form.enter().append('form')
+        $form.enter().append('div')
             .attr('class', 'preset-form inspector-inner fillL3');
 
         var $fields = $form.selectAll('.form-field')
