@@ -1157,7 +1157,9 @@
     },
     "area": {
         "name": "Area",
-        "tags": {},
+        "tags": {
+            "area": "yes"
+        },
         "geometry": [
             "area"
         ]
