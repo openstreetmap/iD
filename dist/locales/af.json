@@ -146,11 +146,13 @@
             "multiple_ways": "Daar is te veel lyne hier om te split."
         }
     },
-    "nothing_to_undo": "Niks om ongedaan te maak.",
-    "nothing_to_redo": "Niks om weer te doen nie.",
-    "just_edited": "Jy het nou net 'n OpenStreetMapKaart bydra gemaak!",
+    "undo": {
+        "nothing": "Niks om ongedaan te maak."
+    },
+    "redo": {
+        "nothing": "Niks om weer te doen nie."
+    },
     "browser_notice": "Hierdie program is bruikbaar in Firefox, Chrome, Safair, Opera en Internet Explorer 9 en later weergawes. Gradeer asseblief jou webbrowser op of gebruik Potlatch 2 om die kaart te verander.",
-    "view_on_osm": "Besigtig op OSM",
     "logout": "voetsek",
     "loading_auth": "Maak kontak met OpenStreetMap...",
     "report_a_bug": "Raporteer 'n probleem",
@@ -203,6 +205,10 @@
         "error": "'n Fout het ingekruip toe jy probeer stoor het",
         "uploading": "Laai verandering op na OpenStreetMap.",
         "unsaved_changes": "Jy het ongestoorde veranderinge"
+    },
+    "success": {
+        "just_edited": "Jy het nou net 'n OpenStreetMapKaart bydra gemaak!",
+        "view_on_osm": "Besigtig op OSM"
     },
     "splash": {
         "welcome": "Welkom by die iD OpenStreetMap program",
@@ -1194,9 +1200,6 @@
             },
             "power": {
                 "name": "Krag"
-            },
-            "power/generator": {
-                "name": "Kragstasie"
             },
             "power/line": {
                 "name": "Kraglyn"

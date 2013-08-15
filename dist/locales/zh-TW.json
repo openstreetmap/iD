@@ -165,12 +165,14 @@
             "multiple_ways": "太多線段，未能進行分割。"
         }
     },
-    "nothing_to_undo": "沒有動作可以撤銷。",
-    "nothing_to_redo": "沒有動作可以重做。",
+    "undo": {
+        "nothing": "沒有動作可以撤銷。"
+    },
+    "redo": {
+        "nothing": "沒有動作可以重做。"
+    },
     "tooltip_keyhint": "快速鍵",
-    "just_edited": "您剛剛編輯了OpenStreetMap！",
     "browser_notice": "這編輯器支援Firefox、Chrome、Safari、Opera及Internet Explorer 9或以上。請先把你的瀏覽器升級或使用Potlatch 2來編輯地圖。",
-    "view_on_osm": "於OSM上顯示",
     "translate": {
         "translate": "翻譯",
         "localized_translation_label": "多語言名稱",
@@ -248,9 +250,10 @@
     },
     "success": {
         "edited_osm": "已編輯了OSM！",
+        "just_edited": "您剛剛編輯了OpenStreetMap！",
+        "view_on_osm": "於OSM上顯示",
         "facebook": "在 Facebook 上分享",
-        "tweet": "發Tweet",
-        "okay": "確定"
+        "tweet": "發Tweet"
     },
     "confirm": {
         "okay": "確定"
@@ -1293,9 +1296,6 @@
             },
             "power": {
                 "name": "電力設施"
-            },
-            "power/generator": {
-                "name": "發電廠"
             },
             "power/line": {
                 "name": "電線"

@@ -166,12 +166,16 @@
             "multiple_ways": "Aquí hi ha masses línies a dividir."
         }
     },
-    "nothing_to_undo": "Res a desfer.",
-    "nothing_to_redo": "Res a refer.",
+    "undo": {
+        "tooltip": "Desfés: {action}",
+        "nothing": "Res a desfer"
+    },
+    "redo": {
+        "tooltip": "Refés: {action}",
+        "nothing": "Res a refer."
+    },
     "tooltip_keyhint": "Drecera:",
-    "just_edited": "Acabes d'editar l'OpenStreetMap!",
     "browser_notice": "Aquest editor és compatible amb Firefox, Chrome, Safari, Opera i Internet Explorer 9 o superior.\nSiusplau actualitza el teu navegador o bé fes servir Potlach 2 per editar el mapa.",
-    "view_on_osm": "Mostra-ho a OSM",
     "translate": {
         "translate": "Traduïu",
         "localized_translation_label": "Nom multilingüe",
@@ -256,9 +260,11 @@
     },
     "success": {
         "edited_osm": "Heu editat l'OSM!",
+        "just_edited": "Acabes d'editar l'OpenStreetMap!",
+        "view_on_osm": "Mostra-ho a OSM",
         "facebook": "Comparteix a Facebook",
         "tweet": "Tuiteja-ho",
-        "okay": "D'acord"
+        "help_html": "Els canvis haurien d'aparèxier a la capa \"Estàndard\" en pocs minuts. Altres capes i algunes característiques, poden trigar més temps.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detalls</a>).\n"
     },
     "confirm": {
         "okay": "D'acord"
@@ -514,8 +520,20 @@
             "fee": {
                 "label": "Pagament"
             },
+            "fire_hydrant/type": {
+                "label": "Tipus"
+            },
             "fixme": {
                 "label": "Arregla'm"
+            },
+            "generator/method": {
+                "label": "Mètode"
+            },
+            "generator/source": {
+                "label": "Font"
+            },
+            "generator/type": {
+                "label": "Tipus"
             },
             "highway": {
                 "label": "Tipus"
@@ -1044,6 +1062,10 @@
             "emergency/ambulance_station": {
                 "name": "Parada d'ambulàncies"
             },
+            "emergency/fire_hydrant": {
+                "name": "Boca d'incendis",
+                "terms": "Boca d'incendis, presa d'aigua per a bombers, incendi, bombers, sortida d'aigua, aigua"
+            },
             "emergency/phone": {
                 "name": "Telèfon per a emergències"
             },
@@ -1087,7 +1109,8 @@
                 "name": "Camí"
             },
             "highway/pedestrian": {
-                "name": "Transeünt"
+                "name": "Via Peatonal",
+                "terms": "Carrer Peatonal, Àrea per a peatons, Trànsit tallat, Carrer tancat al trànsit, Carrer per a vianants, Àrea per a vianants, Carrer per a transeünts, Peatons, Peatonal, Carrer per a Transeünts, Àrea peatonal"
             },
             "highway/primary": {
                 "name": "Carretera primària"
@@ -1281,6 +1304,9 @@
             "leisure/swimming_pool": {
                 "name": "Piscina"
             },
+            "leisure/track": {
+                "name": "Circuit de carreres"
+            },
             "line": {
                 "name": "Línia"
             },
@@ -1408,7 +1434,7 @@
                 "name": "Electricitat"
             },
             "power/generator": {
-                "name": "Planta de generació d'electricitat"
+                "name": "Generador elèctric"
             },
             "power/line": {
                 "name": "Línia elèctrica"

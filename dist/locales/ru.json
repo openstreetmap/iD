@@ -164,12 +164,14 @@
             "multiple_ways": "Слишком много линий для разрезания."
         }
     },
-    "nothing_to_undo": "Отменять нечего.",
-    "nothing_to_redo": "Повторять нечего.",
+    "undo": {
+        "nothing": "Отменять нечего."
+    },
+    "redo": {
+        "nothing": "Повторять нечего."
+    },
     "tooltip_keyhint": "Горячая клавиша:",
-    "just_edited": "Вы только что отредактировали карту OpenStreetMap!",
     "browser_notice": "Этот редактор работает в браузерах Firefox, Chrome, Safari, Opera и Internet Explorer версии 9 и выше. Пожалуйста, обновите свой браузер или воспользуйтесь редактором Potlatch 2.",
-    "view_on_osm": "Посмотреть на OSM",
     "translate": {
         "translate": "Перевести",
         "localized_translation_label": "Многоязычное  название",
@@ -246,9 +248,10 @@
     },
     "success": {
         "edited_osm": "ОСМ отредактирована!",
+        "just_edited": "Вы только что отредактировали карту OpenStreetMap!",
+        "view_on_osm": "Посмотреть в OSM",
         "facebook": "Поделиться на Facebook",
-        "tweet": "Затвитить",
-        "okay": "Ок"
+        "tweet": "Затвитить"
     },
     "confirm": {
         "okay": "Ок"
@@ -1287,9 +1290,6 @@
             },
             "power": {
                 "name": "Электричество"
-            },
-            "power/generator": {
-                "name": "Электростанция"
             },
             "power/line": {
                 "name": "ЛЭП"

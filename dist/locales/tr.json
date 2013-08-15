@@ -146,11 +146,13 @@
             "multiple_ways": "Burada ayrılacak çok fazla çizgi var"
         }
     },
-    "nothing_to_undo": "Geri alınacak birşey yok.",
-    "nothing_to_redo": "Tekrar yapılacak birşey yok.",
-    "just_edited": "Şu an OpenStreetMap'de bir değişiklik yaptınız!",
+    "undo": {
+        "nothing": "Geri alınacak birşey yok."
+    },
+    "redo": {
+        "nothing": "Tekrar yapılacak birşey yok."
+    },
     "browser_notice": "Bu editör sadece Firefox, Chrome, Safari, Opera ile Internet Explorer 9 ve üstü tarayıcılarda çalışmaktadır. Lütfen tarayınıcı güncelleyin ya da Potlatch 2'yi kullanarak haritada güncelleme yapınız.",
-    "view_on_osm": "OSM üstünde Gör",
     "logout": "Çıkış",
     "loading_auth": "OpenStreetMap'e bağlanıyor...",
     "report_a_bug": "Hata rapor et",
@@ -195,6 +197,10 @@
         "error": "Kaydederken bir hata oluştu",
         "uploading": "Değişiklikleriniz OpenStreetMap'e gönderiliyor.",
         "unsaved_changes": "Kaydedilmemiş değişiklikleriniz var"
+    },
+    "success": {
+        "just_edited": "Şu an OpenStreetMap'de bir değişiklik yaptınız!",
+        "view_on_osm": "OSM üzerinde gör"
     },
     "splash": {
         "welcome": "OpenStreetMap Editörü iD'ye hoşgeldiniz",
@@ -811,9 +817,6 @@
             },
             "power": {
                 "name": "Güç"
-            },
-            "power/generator": {
-                "name": "Elektrik Santrali"
             },
             "power/line": {
                 "name": "Güç Hattı"

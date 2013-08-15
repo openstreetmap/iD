@@ -166,12 +166,14 @@
             "multiple_ways": "Existem aqui demasiadas linhas para dividir."
         }
     },
-    "nothing_to_undo": "Nada a desfazer.",
-    "nothing_to_redo": "Nada a refazer.",
+    "undo": {
+        "nothing": "Nada a desfazer."
+    },
+    "redo": {
+        "nothing": "Nada a refazer."
+    },
     "tooltip_keyhint": "Atalho:",
-    "just_edited": "Acaba de editar o OpenStreetMap!",
     "browser_notice": "Este editor suporta Firefox, Chrome, Safari, Opera e Internet Explorer 9 ou superior. Por favor atualize o seu navegador de internet ou utilize Potlatch 2 para editar o mapa.",
-    "view_on_osm": "Ver no OSM",
     "translate": {
         "translate": "Traduzir",
         "localized_translation_label": "Nome noutras línguas",
@@ -256,9 +258,10 @@
     },
     "success": {
         "edited_osm": "Acabou de editar o OSM!",
+        "just_edited": "Acaba de editar o OpenStreetMap!",
+        "view_on_osm": "Ver em OSM",
         "facebook": "Partilhar no Facebook",
-        "tweet": "Partilhar no Twitter",
-        "okay": "OK"
+        "tweet": "Partilhar no Twitter"
     },
     "confirm": {
         "okay": "OK"
@@ -1329,9 +1332,6 @@
             },
             "power": {
                 "name": "Energia"
-            },
-            "power/generator": {
-                "name": "Central de Geração de Energia"
             },
             "power/line": {
                 "name": "Linha de Transmissão"

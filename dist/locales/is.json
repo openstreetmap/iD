@@ -166,12 +166,14 @@
             "multiple_ways": "Of margar línur hér til að hægt sé að aðskilja."
         }
     },
-    "nothing_to_undo": "Ekkert til að hætta við.",
-    "nothing_to_redo": "Ekkert til að endurtaka.",
+    "undo": {
+        "nothing": "Ekkert til að hætta við."
+    },
+    "redo": {
+        "nothing": "Ekkert til að endurtaka."
+    },
     "tooltip_keyhint": "Flýtival:",
-    "just_edited": "Þú hefur breytt OpenStreetMap!",
     "browser_notice": "Þessi ritill er studdur af Firefox, Chrome, Safari, Opera og Internet Explorer 9 og betri. Vinsamlegast uppfærðu vafrann þinn eða notaðu Potlatch 2 til að breyta kortinu.",
-    "view_on_osm": "Skoða á OSM",
     "translate": {
         "translate": "Þýða",
         "localized_translation_label": "Margtyngt nafn",
@@ -256,9 +258,10 @@
     },
     "success": {
         "edited_osm": "Þú breyttir OSM!",
+        "just_edited": "Þú hefur breytt OpenStreetMap!",
+        "view_on_osm": "Skoða á OSM",
         "facebook": "Deila á Facebook",
-        "tweet": "Tísta",
-        "okay": "Í lagi"
+        "tweet": "Tísta"
     },
     "confirm": {
         "okay": "Í lagi"
@@ -1300,9 +1303,6 @@
             },
             "power": {
                 "name": "Orka"
-            },
-            "power/generator": {
-                "name": "Orkuver"
             },
             "power/line": {
                 "name": "Orkulína"

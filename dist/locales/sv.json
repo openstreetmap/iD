@@ -166,12 +166,14 @@
             "multiple_ways": "Det är för många linjer här för att kunna dela dem."
         }
     },
-    "nothing_to_undo": "Inget att ångra.",
-    "nothing_to_redo": "Inget att upprepa.",
+    "undo": {
+        "nothing": "Inget att ångra."
+    },
+    "redo": {
+        "nothing": "Inget att upprepa."
+    },
     "tooltip_keyhint": "Genväg:",
-    "just_edited": "Du har nu redigerat OpenStreetMap!",
     "browser_notice": "Denna redigerare funkar i Firefox, Chrome, Safari, Opera och Internet Explorer 9 eller högre. Uppgradera din webbläsare eller använd Potlatch 2 för att redigera kartan.",
-    "view_on_osm": "Visa på OSM",
     "translate": {
         "translate": "Översätt",
         "localized_translation_label": "Flerspråkigt namn",
@@ -250,9 +252,10 @@
     },
     "success": {
         "edited_osm": "Redigerat OSM!",
+        "just_edited": "Du har nu redigerat OpenStreetMap!",
+        "view_on_osm": "Visa på OSM",
         "facebook": "Dela på Facebook",
-        "tweet": "Tweet",
-        "okay": "OK"
+        "tweet": "Tweet"
     },
     "confirm": {
         "okay": "Ok"
@@ -985,9 +988,6 @@
             },
             "power": {
                 "name": "Kraft"
-            },
-            "power/generator": {
-                "name": "Kraftverk"
             },
             "power/line": {
                 "name": "Kraftledning"

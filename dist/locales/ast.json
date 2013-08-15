@@ -125,12 +125,14 @@
             "key": "X"
         }
     },
-    "nothing_to_undo": "Ren que desfacer.",
-    "nothing_to_redo": "Ren pa refacer.",
+    "undo": {
+        "nothing": "Ren que desfacer."
+    },
+    "redo": {
+        "nothing": "Ren pa refacer."
+    },
     "tooltip_keyhint": "Atayu:",
-    "just_edited": "¡Acaba d'editar OpenStreetMap!",
     "browser_notice": "Esti editor tien sofitu en Firefox, Chrome, Safari, Opera, ya Internet Explorer 9 y superior. Anueve'l so navegador o use Potlatch 2 pa editar el mapa.",
-    "view_on_osm": "Ver en OSM",
     "translate": {
         "localized_translation_language": "Escoyer idioma",
         "localized_translation_name": "Nome"
@@ -180,9 +182,10 @@
     },
     "success": {
         "edited_osm": "¡Editáu OSM!",
+        "just_edited": "¡Acaba d'editar OpenStreetMap!",
+        "view_on_osm": "Ver en OSM",
         "facebook": "Compartir en Facebook",
-        "tweet": "Tuitear",
-        "okay": "Aceutar"
+        "tweet": "Tuitear"
     },
     "confirm": {
         "okay": "Aceutar"

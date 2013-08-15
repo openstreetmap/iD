@@ -164,12 +164,14 @@
             "multiple_ways": "这里有太多的线条待分割。"
         }
     },
-    "nothing_to_undo": "没有可撤消的。",
-    "nothing_to_redo": "没有可重做的。",
+    "undo": {
+        "nothing": "没有可撤消的。"
+    },
+    "redo": {
+        "nothing": "没有可重做的。"
+    },
     "tooltip_keyhint": "快捷方式",
-    "just_edited": "你正在编辑的OpenStreetMap！",
     "browser_notice": "该编辑器支持Firefox、Chrome、Safari、Opera和Internet Explorer9及以上的浏览器。请升级您的浏览器或者使用Potlatch 2来编辑地图。",
-    "view_on_osm": "在OSM上查看",
     "translate": {
         "translate": "翻译",
         "localized_translation_label": "多种语言名称",
@@ -247,9 +249,10 @@
     },
     "success": {
         "edited_osm": "编辑OSM！",
+        "just_edited": "你正在编辑的OpenStreetMap！",
+        "view_on_osm": "在OSM上查看",
         "facebook": "在Facebook上分享",
-        "tweet": "Tweet",
-        "okay": "确定"
+        "tweet": "Tweet"
     },
     "confirm": {
         "okay": "确定"
@@ -1267,9 +1270,6 @@
             },
             "power": {
                 "name": "电力设施"
-            },
-            "power/generator": {
-                "name": "发电厂"
             },
             "power/line": {
                 "name": "电路线"

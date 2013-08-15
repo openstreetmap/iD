@@ -166,12 +166,14 @@
             "multiple_ways": "Ci sono troppe linee da dividere."
         }
     },
-    "nothing_to_undo": "Niente da ripristinare.",
-    "nothing_to_redo": "Niente da rifare.",
+    "undo": {
+        "nothing": "Niente da ripristinare."
+    },
+    "redo": {
+        "nothing": "Niente da rifare."
+    },
     "tooltip_keyhint": "Scorciatoia da tastiera:",
-    "just_edited": "Hai appena modificato OpenStreetMap!",
     "browser_notice": "Questo editor è supportato in Firefox, Chrome, Safari, Opera, e Internet Explorer 9 e superiori. Aggiorna il tuo browser o usa Potlatch 2 per modificare la mappa.",
-    "view_on_osm": "Guarda su OSM",
     "translate": {
         "translate": "Traduci",
         "localized_translation_label": "Nome multilingua",
@@ -256,9 +258,10 @@
     },
     "success": {
         "edited_osm": "OSMI Modificato",
+        "just_edited": "Hai appena modificato OpenStreetMap!",
+        "view_on_osm": "Mostra su OSM",
         "facebook": "Condividi su Facebook",
-        "tweet": "Condividi su Twitter",
-        "okay": "Okay"
+        "tweet": "Condividi su Twitter"
     },
     "confirm": {
         "okay": "Okay"
@@ -1322,9 +1325,6 @@
             },
             "power": {
                 "name": "Energia"
-            },
-            "power/generator": {
-                "name": "Centrale elettrica"
             },
             "power/line": {
                 "name": "Linea elettrica"

@@ -166,12 +166,14 @@
             "multiple_ways": "Ovdje postoji previše linija za razdvajanje."
         }
     },
-    "nothing_to_undo": "Ništa za poništiti.",
-    "nothing_to_redo": "Ništa za vratiti.",
+    "undo": {
+        "nothing": "Ništa za poništiti."
+    },
+    "redo": {
+        "nothing": "Ništa za vratiti."
+    },
     "tooltip_keyhint": "Prečica:",
-    "just_edited": "Upravo ste uredili OpenStreetMap kartu!",
     "browser_notice": "Ovaj uređivač je podržan u preglednicima interneta: Firefox, Chrome, Safari, Opera, i Internet Explorer 9 i iznad. Molimo nadogradite Vaš browser ili koristite Potlach 2 da uređujete kartu.",
-    "view_on_osm": "Pogledajte na OSM-u",
     "translate": {
         "translate": "Prevesti",
         "localized_translation_label": "Višejezični naziv",
@@ -256,9 +258,10 @@
     },
     "success": {
         "edited_osm": "OSM uređen!",
+        "just_edited": "Upravo ste uredili OpenStreetMap kartu!",
+        "view_on_osm": "Pogledajte na OSM-u",
         "facebook": "Podijeliti na Facebooku",
-        "tweet": "Podijeliti na Twitteru",
-        "okay": "Uredu"
+        "tweet": "Podijeliti na Twitteru"
     },
     "confirm": {
         "okay": "Uredu"
@@ -1538,10 +1541,6 @@
             "power": {
                 "name": "Energija",
                 "terms": "enegija,napajanje"
-            },
-            "power/generator": {
-                "name": "Elektrana",
-                "terms": "elektrana,postrojenje za proizvodnju el. energije"
             },
             "power/line": {
                 "name": "Energetski vod",

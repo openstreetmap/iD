@@ -166,12 +166,16 @@
             "multiple_ways": "Previše linija za razdvajanje."
         }
     },
-    "nothing_to_undo": "Nema ništa za opovrgnuti.",
-    "nothing_to_redo": "Nema ništa za ponoviti.",
+    "undo": {
+        "tooltip": "Opovrgni: {action}",
+        "nothing": "Nema ništa za opovrgnuti."
+    },
+    "redo": {
+        "tooltip": "Ponovi: {action}",
+        "nothing": "Nema ništa za ponoviti."
+    },
     "tooltip_keyhint": "Kratica:",
-    "just_edited": "Upravo si uredio/la OpenStreetMap!",
     "browser_notice": "Ovaj uređivač je podržan u preglednicima: Firefox, Chrome, Safari, Opera i Internet Explorer 9 ili novijim. Molimo nadogradite svoj preglednik ili koristite Potlatch 2 za uređivanje karte.",
-    "view_on_osm": "Pogledaj na OSM-u",
     "translate": {
         "translate": "Prevedi",
         "localized_translation_label": "Višejezični naziv",
@@ -256,9 +260,11 @@
     },
     "success": {
         "edited_osm": "Uređen OSM!",
+        "just_edited": "Upravo si uredio/la OpenStreetMap!",
+        "view_on_osm": "Pogledaj na OSM",
         "facebook": "Podijeli na Facebook-u.",
         "tweet": "Tweet",
-        "okay": "Ok"
+        "help_html": "Tvoje promjene bi se trebale pojaviti u sloju \"Standard\" kroz par minuta. Za druge slojeve i određena svojstva trebati će više vremena.⏎\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detalji</a>).⏎\n"
     },
     "confirm": {
         "okay": "Ok"
@@ -420,22 +426,28 @@
                 "label": "Administratorsko područje"
             },
             "aeroway": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "amenity": {
-                "label": "Tip"
+                "label": "Vrsta"
+            },
+            "artist": {
+                "label": "Umjetnik"
+            },
+            "artwork_type": {
+                "label": "Vrsta"
             },
             "atm": {
                 "label": "Bankomat"
             },
             "barrier": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "bicycle_parking": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "boundary": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "building": {
                 "label": "Građevina"
@@ -460,14 +472,17 @@
                     "anticlockwise": "U suprotnom smijeru od kazaljke na satu"
                 }
             },
+            "collection_times": {
+                "label": "Vrijeme preuzimanja"
+            },
             "construction": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "country": {
                 "label": "Država"
             },
             "crossing": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "cuisine": {
                 "label": "Hrana"
@@ -488,7 +503,7 @@
                 "label": "Hitna pomoć"
             },
             "entrance": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "fax": {
                 "label": "Fax",
@@ -497,14 +512,26 @@
             "fee": {
                 "label": "Plaćanje"
             },
+            "fire_hydrant/type": {
+                "label": "Vrsta"
+            },
             "fixme": {
                 "label": "Popravi me"
             },
+            "generator/method": {
+                "label": "Metoda"
+            },
+            "generator/source": {
+                "label": "Izvor"
+            },
+            "generator/type": {
+                "label": "Vrsta"
+            },
             "highway": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "historic": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "iata": {
                 "label": "Međunarodni IATA kôd zračne luke"
@@ -524,7 +551,7 @@
                 }
             },
             "landuse": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "lanes": {
                 "label": "Broj traka",
@@ -534,7 +561,7 @@
                 "label": "Sloj"
             },
             "leisure": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "levels": {
                 "label": "Razina",
@@ -544,7 +571,7 @@
                 "label": "Lokacija"
             },
             "man_made": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "maxspeed": {
                 "label": "Ograničenje brzine",
@@ -564,7 +591,7 @@
                 "label": "Bilješka"
             },
             "office": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "oneway": {
                 "label": "Jednosmjerna"
@@ -582,26 +609,26 @@
                 "label": "Parkiraj i idi javnim prijevozom"
             },
             "parking": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "phone": {
                 "label": "Telefon",
                 "placeholder": "+385 01 123 4567"
             },
             "place": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "power": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "railway": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "ref": {
                 "label": "Broj ceste"
             },
             "relation": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "religion": {
                 "label": "Religija",
@@ -616,25 +643,25 @@
                 }
             },
             "restriction": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "route": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "route_master": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "sac_scale": {
                 "label": "Težina staze"
             },
             "service": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "shelter": {
                 "label": "Sklonište"
             },
             "shop": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "source": {
                 "label": "Izvor"
@@ -659,29 +686,29 @@
                 "label": "Površina"
             },
             "tourism": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "towertype": {
                 "label": "Vrsta tornja"
             },
             "tracktype": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "trail_visibility": {
                 "label": "Vidljivost staze"
             },
             "water": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "waterway": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "website": {
                 "label": "Web stranica",
                 "placeholder": "http://primjer.com/"
             },
             "wetland": {
-                "label": "Tip"
+                "label": "Vrsta"
             },
             "wheelchair": {
                 "label": "Pristup s invalidskim kolicima"
@@ -690,7 +717,7 @@
                 "label": "Wikipedia"
             },
             "wood": {
-                "label": "Tip"
+                "label": "Vrsta"
             }
         },
         "presets": {
@@ -750,6 +777,9 @@
             },
             "amenity/car_rental": {
                 "name": "Iznajmljivanje vozila"
+            },
+            "amenity/car_sharing": {
+                "name": "Servis za razmjenu automobila"
             },
             "amenity/car_wash": {
                 "name": "Autopraonica"
@@ -885,6 +915,9 @@
             "barrier/bollard": {
                 "name": "Stup"
             },
+            "barrier/cattle_grid": {
+                "name": "Mreža koja sprječava prijelaz stoke preko ceste"
+            },
             "barrier/city_wall": {
                 "name": "Gradske zidine",
                 "terms": "Gradske zidine"
@@ -908,11 +941,17 @@
             "barrier/hedge": {
                 "name": "Živica"
             },
+            "barrier/kissing_gate": {
+                "name": "Rotirajući prolaz za ljude"
+            },
             "barrier/lift_gate": {
                 "name": "Rampa"
             },
             "barrier/retaining_wall": {
                 "name": "Potporni zid"
+            },
+            "barrier/stile": {
+                "name": "Ograda preko koje pješaci mogu preći"
             },
             "barrier/toll_booth": {
                 "name": "Naplatna kućica"
@@ -949,6 +988,12 @@
             },
             "building/residential": {
                 "name": "Stambena zgrada"
+            },
+            "emergency/ambulance_station": {
+                "name": "Ambulantna garaža"
+            },
+            "emergency/fire_hydrant": {
+                "name": "Požarni hidrant"
             },
             "emergency/phone": {
                 "name": "Telefon za nuždu"
@@ -1018,6 +1063,9 @@
             },
             "highway/service/alley": {
                 "name": "Uska uličica"
+            },
+            "highway/service/drive-through": {
+                "name": "Provezi-kroz"
             },
             "highway/service/driveway": {
                 "name": "Prilaz"
@@ -1184,6 +1232,9 @@
             "leisure/swimming_pool": {
                 "name": "Sportski bazen"
             },
+            "leisure/track": {
+                "name": "Autodrom"
+            },
             "line": {
                 "name": "Linija"
             },
@@ -1311,7 +1362,7 @@
                 "name": "Struja"
             },
             "power/generator": {
-                "name": "Elektrana"
+                "name": "Generator struje"
             },
             "power/line": {
                 "name": "Energetska mreža"
@@ -1621,6 +1672,9 @@
             },
             "type/route/tram": {
                 "name": "Tramvajska putanja"
+            },
+            "type/route_master": {
+                "name": "Glavna ruta"
             },
             "vertex": {
                 "name": "Drugo"

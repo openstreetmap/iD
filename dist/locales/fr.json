@@ -166,12 +166,14 @@
             "multiple_ways": "Il y a trop de ligne à cet endroit pour pouvoir couper."
         }
     },
-    "nothing_to_undo": "Rien à annuler.",
-    "nothing_to_redo": "Rien à refaire.",
+    "undo": {
+        "nothing": "Rien à annuler."
+    },
+    "redo": {
+        "nothing": "Rien à refaire."
+    },
     "tooltip_keyhint": "Raccourci:",
-    "just_edited": "Vous venez de participer à OpenStreetMap !",
     "browser_notice": "Les navigateurs supportés par cet éditeur sont : Firefox, Chrome, Safari, Opera et Internet Explorer (version 9 et supérieures). Pour éditer la carte, veuillez mettre à jour votre navigateur ou utiliser Potlatch 2.",
-    "view_on_osm": "Consulter dans OSM",
     "translate": {
         "translate": "Traduire",
         "localized_translation_label": "Nom multi-langues",
@@ -256,9 +258,10 @@
     },
     "success": {
         "edited_osm": "OSM Edité!",
+        "just_edited": "Vous venez de participer à OpenStreetMap !",
+        "view_on_osm": "Visualiser sur OSM",
         "facebook": "Partager sur Facebook",
-        "tweet": "Tweeter",
-        "okay": "OK"
+        "tweet": "Tweeter"
     },
     "confirm": {
         "okay": "OK"
@@ -1519,10 +1522,6 @@
             "power": {
                 "name": "Énergie",
                 "terms": "Electricité"
-            },
-            "power/generator": {
-                "name": "Centrale de production d'électricité",
-                "terms": "Centrale électrique"
             },
             "power/line": {
                 "name": "Câble aérien",

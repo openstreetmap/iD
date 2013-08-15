@@ -166,12 +166,16 @@
             "multiple_ways": "Забагато ліній для розділення."
         }
     },
-    "nothing_to_undo": "Скасовувати нічого.",
-    "nothing_to_redo": "Повертати нічого.",
+    "undo": {
+        "tooltip": "Відмінити: {action}",
+        "nothing": "Нема чого відміняти."
+    },
+    "redo": {
+        "tooltip": "Повернути: {action}",
+        "nothing": "Немає чого повертати."
+    },
     "tooltip_keyhint": "Клавішна клмбінація:",
-    "just_edited": "Ви щойно відредагували мапу OpenStreetMap!",
     "browser_notice": "Цей редактор працює в оглядачах Firefox, Chrome, Safari, Opera і Internet Explorer версії 9 і вище.  Будь ласка, оновіть свій оглядач або скористайтеся редактором Potlatch 2.",
-    "view_on_osm": "Подивитись в ОСМ",
     "translate": {
         "translate": "Перекласти",
         "localized_translation_label": "Багатомовна назва",
@@ -256,9 +260,11 @@
     },
     "success": {
         "edited_osm": "Відредаговано OSM!",
+        "just_edited": "Ви щойно відредагували мапу OpenStreetMap!",
+        "view_on_osm": "Подивтись в OSM",
         "facebook": "Поділитись на Facebook",
         "tweet": "у Твітер",
-        "okay": "Готово"
+        "help_html": "Ваші зміни повинні з’явитись в «Стандартному» шарі через кілька хвилин. Зміни інших шарів, та певниї об’єктів,\nможуть відбуватись довше (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>подробиці</a>).\n"
     },
     "confirm": {
         "okay": "Готово"
@@ -1416,9 +1422,6 @@
             },
             "power": {
                 "name": "Енергетика"
-            },
-            "power/generator": {
-                "name": "Електростанція"
             },
             "power/line": {
                 "name": "Лінія електропередач"

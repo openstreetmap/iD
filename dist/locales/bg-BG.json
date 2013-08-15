@@ -165,12 +165,14 @@
             "multiple_ways": "Има твърде много линии за разделяне тук."
         }
     },
-    "nothing_to_undo": "Нищо за отменяне.",
-    "nothing_to_redo": "Нищо за повторение.",
+    "undo": {
+        "nothing": "Нищо за отменяне."
+    },
+    "redo": {
+        "nothing": "Нищо за повторение."
+    },
     "tooltip_keyhint": "Бързи клавиши:",
-    "just_edited": "Вие редактирахте OpenStreetMap!",
     "browser_notice": "Този редактор поддържа Firefox, Chrome, Safari, Opera, Internet Explorer 9 и нагоре. Моля обновете вашия браузър или използвайте Potlatch 2, за да редактирате картата.",
-    "view_on_osm": "Вижте в OSM",
     "translate": {
         "translate": "Превод",
         "localized_translation_label": "Многоезично име",
@@ -248,9 +250,10 @@
     },
     "success": {
         "edited_osm": "Редактирахте OSM!",
+        "just_edited": "Вие редактирахте OpenStreetMap!",
+        "view_on_osm": "Вижте в OSM",
         "facebook": "Споделете във Facebook",
-        "tweet": "Tweet",
-        "okay": "Окей"
+        "tweet": "Tweet"
     },
     "confirm": {
         "okay": "Окей"
@@ -1293,9 +1296,6 @@
             },
             "power": {
                 "name": "Енергетика"
-            },
-            "power/generator": {
-                "name": "Електроцентрала"
             },
             "power/line": {
                 "name": "Електропровод"

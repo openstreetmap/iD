@@ -29,31 +29,31 @@
     "operations": {
         "add": {
             "annotation": {
-                "point": "Đã thêm địa điểm.",
-                "vertex": "Đã thêm nốt vào lối.",
-                "relation": "Đã thêm quan hệ."
+                "point": "thêm địa điểm",
+                "vertex": "thêm nốt vào lối",
+                "relation": "thêm quan hệ"
             }
         },
         "start": {
             "annotation": {
-                "line": "Đã bắt đầu vẽ đường kẻ.",
-                "area": "Đã bắt đầu vẽ vùng."
+                "line": "bắt đầu vẽ đường kẻ",
+                "area": "bắt đầu vẽ vùng"
             }
         },
         "continue": {
             "annotation": {
-                "line": "Đã vẽ tiếp đường kẻ.",
-                "area": "Đã vẽ tiếp vùng."
+                "line": "vẽ tiếp đường kẻ",
+                "area": "vẽ tiếp vùng"
             }
         },
         "cancel_draw": {
-            "annotation": "Đã hủy vẽ đối tượng."
+            "annotation": "hủy vẽ đối tượng"
         },
         "change_role": {
-            "annotation": "Đã thay đổi vai trò của thành viên quan hệ."
+            "annotation": "thay đổi vai trò của thành viên quan hệ"
         },
         "change_tags": {
-            "annotation": "Đã thay đổi thẻ."
+            "annotation": "thay đổi thẻ"
         },
         "circularize": {
             "title": "Làm Tròn",
@@ -63,8 +63,8 @@
             },
             "key": "O",
             "annotation": {
-                "line": "Đã làm tròn một đường kẻ.",
-                "area": "Đã làm tròn một vùng."
+                "line": "làm tròn một đường kẻ",
+                "area": "làm tròn một vùng"
             },
             "not_closed": "Không thể làm tròn một đối tượng không phải là đa giác kín."
         },
@@ -73,8 +73,8 @@
             "description": "Làm vuông góc một đối tượng.",
             "key": "Q",
             "annotation": {
-                "line": "Đã làm vuông góc một đường kẻ.",
-                "area": "Đã làm vuông góc một vùng."
+                "line": "làm vuông góc một đường kẻ",
+                "area": "làm vuông góc một vùng"
             },
             "not_closed": "Không thể làm vuông góc một đối tượng không phải là đa giác kín."
         },
@@ -82,41 +82,41 @@
             "title": "Xóa",
             "description": "Xóa đối tượng này khỏi bản đồ.",
             "annotation": {
-                "point": "Đã xóa địa điểm.",
-                "vertex": "Đã xóa nốt khỏi lối.",
-                "line": "Đã xóa đường kẻ.",
-                "area": "Đã xóa vùng.",
-                "relation": "Đã xóa quan hệ.",
-                "multiple": "Đã xóa {n} đối tượng."
+                "point": "xóa địa điểm",
+                "vertex": "xóa nốt khỏi lối",
+                "line": "xóa đường kẻ",
+                "area": "xóa vùng",
+                "relation": "xóa quan hệ",
+                "multiple": "xóa {n} đối tượng"
             },
             "incomplete_relation": "Không thể xóa đối tượng chưa được tải về hoàn toàn."
         },
         "add_member": {
-            "annotation": "Đã thêm thành viên vào quan hệ."
+            "annotation": "thêm thành viên vào quan hệ"
         },
         "delete_member": {
-            "annotation": "Đã gỡ thành viên khỏi quan hệ."
+            "annotation": "gỡ thành viên khỏi quan hệ"
         },
         "connect": {
             "annotation": {
-                "point": "Đã nối liền lối với địa điểm.",
-                "vertex": "Đã nối liền đường kẻ với đường khác.",
-                "line": "Đã nối liền lối với đường kẻ.",
-                "area": "Đã nối liền đường kẻ với vùng."
+                "point": "nối liền lối với địa điểm",
+                "vertex": "nối liền đường kẻ với đường khác",
+                "line": "nối liền lối với đường kẻ",
+                "area": "nối liền đường kẻ với vùng"
             }
         },
         "disconnect": {
             "title": "Tháo gỡ",
             "description": "Gỡ các lối này khỏi nhau.",
             "key": "T",
-            "annotation": "Đã tháo gỡ đường kẻ và vùng.",
+            "annotation": "tháo gỡ đường kẻ và vùng",
             "not_connected": "Không có đủ đường kẻ hoặc vùng ở đây để tháo gỡ."
         },
         "merge": {
             "title": "Gộp",
             "description": "Gộp các đường kẻ này.",
             "key": "G",
-            "annotation": "Đã gộp {n} đường kẻ.",
+            "annotation": "gộp {n} đường kẻ",
             "not_eligible": "Không thể gộp các đối tượng này.",
             "not_adjacent": "Không thể gộp các đường kẻ không nối liền với nhau.",
             "restriction": "Không thể gộp các đường kẻ này vì ít nhất một trong những đường kẻ trực thuộc quan hệ “{relation}”."
@@ -126,11 +126,11 @@
             "description": "Di chuyển đối tượng này sang chỗ khác.",
             "key": "D",
             "annotation": {
-                "point": "Đã di chuyển địa điểm.",
-                "vertex": "Đã di chuyển nốt trong lối.",
-                "line": "Đã di chuyển đường kẻ.",
-                "area": "Đã di chuyển vùng.",
-                "multiple": "Đã di chuyển hơn một đối tượng."
+                "point": "di chuyển địa điểm",
+                "vertex": "di chuyển nốt trong lối",
+                "line": "di chuyển đường kẻ",
+                "area": "di chuyển vùng",
+                "multiple": "di chuyển hơn một đối tượng"
             },
             "incomplete_relation": "Không thể di chuyển đối tượng chưa được tải về hoàn toàn."
         },
@@ -139,15 +139,15 @@
             "description": "Xoay đối tượng này quanh trung tâm.",
             "key": "X",
             "annotation": {
-                "line": "Đã xoay đường kẻ.",
-                "area": "Đã xoay vùng."
+                "line": "xoay đường kẻ",
+                "area": "xoay vùng"
             }
         },
         "reverse": {
             "title": "Đảo ngược",
             "description": "Đảo nguợc chiều đường kẻ này.",
             "key": "V",
-            "annotation": "Đã đảo ngược đường kẻ."
+            "annotation": "đảo ngược đường kẻ"
         },
         "split": {
             "title": "Chia cắt",
@@ -158,20 +158,24 @@
             },
             "key": "C",
             "annotation": {
-                "line": "Đã cắt đôi một đường kẻ.",
-                "area": "Đã cắt đôi một đường biên của vùng.",
-                "multiple": "Đã cắt đôi {n} đường kẻ và đường biên."
+                "line": "cắt đôi một đường kẻ",
+                "area": "cắt đôi một đường biên của vùng",
+                "multiple": "cắt đôi {n} đường kẻ và đường biên"
             },
             "not_eligible": "Không thể cắt đôi đường kẻ vào đầu hoặc cuối đường.",
             "multiple_ways": "Có quá nhiều đường kẻ tại đây để cắt đôi."
         }
     },
-    "nothing_to_undo": "Không có gì để hoàn tác.",
-    "nothing_to_redo": "Không có gì để làm lại.",
+    "undo": {
+        "tooltip": "Hoàn tác việc {action}.",
+        "nothing": "Không có gì để hoàn tác."
+    },
+    "redo": {
+        "tooltip": "Làm lại việc {action}.",
+        "nothing": "Không có gì để làm lại."
+    },
     "tooltip_keyhint": "Phím tắt:",
-    "just_edited": "Bạn vừa sửa đổi OpenStreetMap!",
     "browser_notice": "Chường trình vẽ bản đồ này chạy tốt trong Firefox, Chrome, Safari, Opera, và Internet Explorer 9 trở lên. Xin vui lòng nâng cấp trình duyệt của bạn hoặc dùng Potlach 2 để biên tập bản đồ.",
-    "view_on_osm": "Xem tại OSM",
     "translate": {
         "translate": "Biên dịch",
         "localized_translation_label": "Tên đa ngôn ngữ",
@@ -256,9 +260,11 @@
     },
     "success": {
         "edited_osm": "Bạn đã sửa đổi OSM!",
+        "just_edited": "Bạn vừa sửa đổi OpenStreetMap!",
+        "view_on_osm": "Xem tại OSM",
         "facebook": "Chia sẻ trên Facebook",
         "tweet": "Tweet",
-        "okay": "OK"
+        "help_html": "Các thay đổi của bạn sẽ xuất hiện trên lớp “Chuẩn” trong vòng vài phút. Các lớp và tính năng kia có thể được cập nhật chậm hơn \n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>chi tiết</a>).\n"
     },
     "confirm": {
         "okay": "OK"
@@ -514,8 +520,20 @@
             "fee": {
                 "label": "Phí"
             },
+            "fire_hydrant/type": {
+                "label": "Kiểu"
+            },
             "fixme": {
                 "label": "Cần Sửa chữa"
+            },
+            "generator/method": {
+                "label": "Phương pháp"
+            },
+            "generator/source": {
+                "label": "Nguồn"
+            },
+            "generator/type": {
+                "label": "Kiểu"
             },
             "highway": {
                 "label": "Kiểu"
@@ -1055,6 +1073,10 @@
                 "name": "Trạm Xe cứu thương",
                 "terms": "trạm xe cứu thương,trạm xe cấp cứu,tram xe cuu thuong,tram xe cap cuu"
             },
+            "emergency/fire_hydrant": {
+                "name": "Trụ Cứu hỏa",
+                "terms": "trụ cứu hỏa,trụ cứu hoả,trụ chữa cháy,cột cứu hỏa,cột cứu hoả,cột chữa cháy,tru cuu hoa,tru chua chay,cot cuu hoa,cot chua chay"
+            },
             "emergency/phone": {
                 "name": "Điện thoại Khẩn cấp",
                 "terms": "điện thoại khẩn cấp,dien thoai khan cap"
@@ -1371,6 +1393,10 @@
                 "name": "Hồ Bơi",
                 "terms": "hồ bơi,hồ tắm,ho boi,ho tam"
             },
+            "leisure/track": {
+                "name": "Đường Đua",
+                "terms": "đường đua,trường đua,đường chạy điền kinh,đua ngựa,đua xe đạp,duong dua,truong dua,duong chay dien kinh,dua ngua,dua xe dap"
+            },
             "line": {
                 "name": "Đường kẻ",
                 "terms": "đường kẻ,đường,lối,duong ke,duong,loi"
@@ -1540,8 +1566,8 @@
                 "terms": "điện năng,dien nang"
             },
             "power/generator": {
-                "name": "Nhà máy Điện",
-                "terms": "nhà máy điện,nha may dien"
+                "name": "Máy phát điện",
+                "terms": "máy phát điện,động cơ,tua bin,tuabin,may phat dien,dong co"
             },
             "power/line": {
                 "name": "Đường Dây điện",

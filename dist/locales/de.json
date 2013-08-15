@@ -166,12 +166,14 @@
             "multiple_ways": "Es gibt hier zu viele Linien, um diese teilen zu können."
         }
     },
-    "nothing_to_undo": "Nichts zum Rückgängigmachen.",
-    "nothing_to_redo": "Nichts zum Wiederherstellen.",
+    "undo": {
+        "nothing": "Nichts zum Rückgängigmachen."
+    },
+    "redo": {
+        "nothing": "Nichts zum Wiederherstellen."
+    },
     "tooltip_keyhint": "Tastenkürzel:",
-    "just_edited": "Sie haben gerade OpenStreetMap editiert!",
     "browser_notice": "Dieser Editor wird von Firefox, Chrome, Safari, Opera, und Internet Explorer (Version 9 und höher) unterstützt. Bitte aktualisieren Sie Ihren Browser oder nutzen Sie Potlatch 2, um die Karte zu modifizieren.",
-    "view_on_osm": "Auf OpenStreetMap anschauen",
     "translate": {
         "translate": "Übersetzen",
         "localized_translation_label": "Mehrsprachiger Name",
@@ -256,9 +258,10 @@
     },
     "success": {
         "edited_osm": "OSM bearbeitet!",
+        "just_edited": "Sie haben gerade OpenStreetMap editiert!",
+        "view_on_osm": "auf OpenStreetMap ansehen",
         "facebook": "Auf Facebook teilen",
-        "tweet": "Twittern",
-        "okay": "OK"
+        "tweet": "Twittern"
     },
     "confirm": {
         "okay": "OK"
@@ -1365,9 +1368,6 @@
             },
             "power": {
                 "name": "Energieversorgung"
-            },
-            "power/generator": {
-                "name": "Kraftwerk"
             },
             "power/line": {
                 "name": "Stromleitung"

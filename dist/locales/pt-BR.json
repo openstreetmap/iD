@@ -166,12 +166,14 @@
             "multiple_ways": "Há muitas linhas para dividir aqui."
         }
     },
-    "nothing_to_undo": "Nada para desfazer.",
-    "nothing_to_redo": "Nada para refazer.",
+    "undo": {
+        "nothing": "Nada para desfazer."
+    },
+    "redo": {
+        "nothing": "Nada para refazer."
+    },
     "tooltip_keyhint": "Atalho:",
-    "just_edited": "Você acaba de editar o OpenStreetMap!",
     "browser_notice": "Este editor é suportado no Firefox, Chrome, Safari, Opera e Internet Explorer 9 ou superior. Por favor atualize seu navegador ou use o Potlatch 2 para editar o mapa.",
-    "view_on_osm": "Ver no OSM",
     "translate": {
         "translate": "Traduzir",
         "localized_translation_label": "Nome multilíngue",
@@ -256,9 +258,10 @@
     },
     "success": {
         "edited_osm": "OSM editado!",
+        "just_edited": "Você acaba de editar o OpenStreetMap!",
+        "view_on_osm": "Ver no OSM",
         "facebook": "Compartilhar no Facebook",
-        "tweet": "Tuitar",
-        "okay": "OK"
+        "tweet": "Tuitar"
     },
     "confirm": {
         "okay": "O.K."
@@ -1538,10 +1541,6 @@
             "power": {
                 "name": "Eletricidade",
                 "terms": "Eletricidade"
-            },
-            "power/generator": {
-                "name": "Usina Elétrica",
-                "terms": "Usina Elétrica, Hidrelétrica, Termoelétrica, Parque Eólico, Central Nuclear, Usina Nuclear"
             },
             "power/line": {
                 "name": "Linha de Transmissão de Energia Elétrica",

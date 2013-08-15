@@ -163,12 +163,14 @@
             "multiple_ways": "Terlalu banyak garis untuk dipisahkan"
         }
     },
-    "nothing_to_undo": "Tak ada yang bisa di ulang.",
-    "nothing_to_redo": "Tak ada yang bisa di redo.",
+    "undo": {
+        "nothing": "Tak ada yang bisa di ulang."
+    },
+    "redo": {
+        "nothing": "Tak ada yang bisa di redo."
+    },
     "tooltip_keyhint": "Pintasan:",
-    "just_edited": "Anda baru saja menyunting OpenStreetMap!",
     "browser_notice": "Penyuting ini mendukung di Firefox, Chrome, Safari, Opera, dan Internet Explorer 9 dan di atasnya. Sila tingkatnya peramban anda atau gunakan Potlatc 2 untuk menyuting peta.",
-    "view_on_osm": "Lihat di OSM",
     "translate": {
         "translate": "Terjemahkan",
         "localized_translation_label": "Nama banyak-bahasa",
@@ -243,9 +245,10 @@
     },
     "success": {
         "edited_osm": "OSM tersunting!",
+        "just_edited": "Anda baru saja menyunting OpenStreetMap!",
+        "view_on_osm": "Lihat di OSM",
         "facebook": "Bagikan di Facebook",
-        "tweet": "Tweet",
-        "okay": "Baiklah"
+        "tweet": "Tweet"
     },
     "confirm": {
         "okay": "Baiklah"

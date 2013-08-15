@@ -30,7 +30,8 @@
         "add": {
             "annotation": {
                 "point": "Pont hozzáadása.",
-                "vertex": "Pont hozzáadása a vonalhoz."
+                "vertex": "Pont hozzáadása a vonalhoz.",
+                "relation": "Kapcsolat hozzáadva."
             }
         },
         "start": {
@@ -165,12 +166,14 @@
             "multiple_ways": "Túl sok kettévágandó vonal van itt."
         }
     },
-    "nothing_to_undo": "Nincs mit visszavonni.",
-    "nothing_to_redo": "Nincs mit visszaállítani.",
+    "undo": {
+        "nothing": "Nincs mit visszavonni."
+    },
+    "redo": {
+        "nothing": "Nincs mit visszaállítani."
+    },
     "tooltip_keyhint": "Gyorsbillentyű:",
-    "just_edited": "Szerkesztetted az OpenStreetMapet!",
     "browser_notice": "Ez a szerkesztőprogram Firefoxban, Chrome-ban, Safariban, Operában és Internet Explorer 9-ben támogatott. Kérlek, frissítsd a böngésződet, vagy szerkeszd a térképet Potlatch 2-vel.",
-    "view_on_osm": "Megtekintés OSM-en",
     "translate": {
         "translate": "Fordítás",
         "localized_translation_label": "Többnyelvű név",
@@ -203,6 +206,11 @@
         "list": "Szerkesztette {users}",
         "truncated_list": "Szerkesztette {users} és {count} másik szerkesztő"
     },
+    "geocoder": {
+        "search": "Keresés a világban…",
+        "no_results_visible": "Nincs találat a térkép látható részén",
+        "no_results_worldwide": "Nincs találat"
+    },
     "geolocate": {
         "title": "Pozícióm megjelenítése"
     },
@@ -224,6 +232,7 @@
         "search": "Keresés",
         "unknown": "Ismeretlen",
         "incomplete": "<nincs letöltve>",
+        "feature_list": "Elem keresése",
         "edit": "Elem szerkesztése"
     },
     "background": {
@@ -249,9 +258,10 @@
     },
     "success": {
         "edited_osm": "OSM szerkesztve!",
+        "just_edited": "Szerkesztetted az OpenStreetMap-et!",
+        "view_on_osm": "Megtekintés OSM-en",
         "facebook": "Megosztás Facebookon",
-        "tweet": "Twittelés",
-        "okay": "Oké"
+        "tweet": "Twittelés"
     },
     "confirm": {
         "okay": "Oké"
@@ -425,6 +435,12 @@
             },
             "amenity": {
                 "label": "típus"
+            },
+            "artist": {
+                "label": "Művész"
+            },
+            "artwork_type": {
+                "label": "Típus"
             },
             "atm": {
                 "label": "Bankautomata"
@@ -923,11 +939,27 @@
             "building/apartments": {
                 "name": "Lakások"
             },
+            "building/commercial": {
+                "name": "Kereskedelmi épület"
+            },
             "building/entrance": {
                 "name": "Bejárat"
             },
+            "building/garage": {
+                "name": "Garázs"
+            },
             "building/house": {
                 "name": "Ház"
+            },
+            "building/industrial": {
+                "name": "Ipari épület"
+            },
+            "building/residential": {
+                "name": "Lakóépület"
+            },
+            "emergency/ambulance_station": {
+                "name": "Mentőállomás",
+                "terms": "Mentőautó állomás"
             },
             "emergency/phone": {
                 "name": "Segélykérő telefon"
@@ -1118,6 +1150,10 @@
             "leisure": {
                 "name": "Szabadidő"
             },
+            "leisure/dog_park": {
+                "name": "Kutyafuttató",
+                "terms": "Kutyasétáltató"
+            },
             "leisure/garden": {
                 "name": "Kert"
             },
@@ -1288,9 +1324,6 @@
             },
             "power": {
                 "name": "Energia"
-            },
-            "power/generator": {
-                "name": "Erőmű"
             },
             "power/line": {
                 "name": "Távvezeték"

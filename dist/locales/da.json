@@ -166,12 +166,16 @@
             "multiple_ways": "Der er for mange linjer her til at dele op."
         }
     },
-    "nothing_to_undo": "Intet at fortryde.",
-    "nothing_to_redo": "Intet at gendanne.",
+    "undo": {
+        "tooltip": "Fortryd:{action}",
+        "nothing": "Ingenting at fortryde."
+    },
+    "redo": {
+        "tooltip": "Gendan:{action}",
+        "nothing": "Ingenting at gendanne."
+    },
     "tooltip_keyhint": "Genvejstast:",
-    "just_edited": "Du redigerede lige OpenStreetMap!",
     "browser_notice": "Dette værktøj er understøttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og højere. Vær venlig at opgradere din browser eller benyt Potlatch 2 for at rette i kortet.",
-    "view_on_osm": "Vis på OSM",
     "translate": {
         "translate": "Oversæt",
         "localized_translation_label": "Flersproget navne",
@@ -256,9 +260,11 @@
     },
     "success": {
         "edited_osm": "Redigerede OSM!",
+        "just_edited": "Du har lige redigeret OpenStreetMap!",
+        "view_on_osm": "Vis på OSM",
         "facebook": "Del på Facebook",
         "tweet": "Tweet",
-        "okay": "Okay"
+        "help_html": "Dine ændringer skulle blive synlige om nogle få minutter i \"Standard\" laget. Andre lag og specielle objekter kan tage længere tid\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>mere information</a>).\n"
     },
     "confirm": {
         "okay": "Okay"
@@ -514,8 +520,20 @@
             "fee": {
                 "label": "Gebyr"
             },
+            "fire_hydrant/type": {
+                "label": "Type"
+            },
             "fixme": {
                 "label": "Ret mig"
+            },
+            "generator/method": {
+                "label": "Metode"
+            },
+            "generator/source": {
+                "label": "Kilde"
+            },
+            "generator/type": {
+                "label": "Type"
             },
             "highway": {
                 "label": "Type"
@@ -1055,6 +1073,10 @@
                 "name": "Udrykningsstation",
                 "terms": "Ambulancestation, Falckstation"
             },
+            "emergency/fire_hydrant": {
+                "name": "Brandhane",
+                "terms": "Brandhane"
+            },
             "emergency/phone": {
                 "name": "Nødtelefon",
                 "terms": "Nødtelefon, Nødopkaldstelefon"
@@ -1370,6 +1392,10 @@
             "leisure/swimming_pool": {
                 "name": "Svømmebassin",
                 "terms": "Svømmebassin, Swimming Pool, Pool"
+            },
+            "leisure/track": {
+                "name": "Racerbane",
+                "terms": "Racerbane"
             },
             "line": {
                 "name": "Linje",

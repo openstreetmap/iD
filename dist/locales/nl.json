@@ -166,12 +166,14 @@
             "multiple_ways": "Er zijn hier teveel lijnen om op te splitsen."
         }
     },
-    "nothing_to_undo": "Niets om ongedaan te maken.",
-    "nothing_to_redo": "Niets om opnieuw uit te voeren.",
+    "undo": {
+        "nothing": "Niets om ongedaan te maken."
+    },
+    "redo": {
+        "nothing": "Niets om opnieuw uit te voeren."
+    },
     "tooltip_keyhint": "Sneltoetscombinatie:",
-    "just_edited": "Je hebt zojuist OpenStreetMap aangepast!",
     "browser_notice": "Deze editor wordt door Firefox, Chrome, Safari, Opera en Internet Explorer (versie 9 en hoger) ondersteund. Download een nieuwere versie van je browser of gebruik Potlatch 2 om de kaart aan te passen.",
-    "view_on_osm": "Bekijk op OSM",
     "translate": {
         "translate": "Vertaal",
         "localized_translation_label": "Meertalige naam",
@@ -256,9 +258,10 @@
     },
     "success": {
         "edited_osm": "OSM aangepast!",
+        "just_edited": "Je hebt zojuist OpenStreetMap aangepast!",
+        "view_on_osm": "Bekijk op OSM",
         "facebook": "Deel op Facebook",
-        "tweet": "Tweet",
-        "okay": "OK"
+        "tweet": "Tweet"
     },
     "confirm": {
         "okay": "OK"
@@ -1301,9 +1304,6 @@
             },
             "power": {
                 "name": "Stroomvoorziening"
-            },
-            "power/generator": {
-                "name": "Electriciteitscentrale"
             },
             "power/line": {
                 "name": "Electriciteitsdraad"

@@ -144,11 +144,13 @@
             "not_eligible": "Līnijas nevar sadalīt to sākumā vai beigās."
         }
     },
-    "nothing_to_undo": "Nav nekā, ko atcelt",
-    "nothing_to_redo": "Nav nekā, ko atsaukt",
-    "just_edited": "Jūs nupat rediģējāt OpenStreetMap",
+    "undo": {
+        "nothing": "Nav nekā, ko atcelt"
+    },
+    "redo": {
+        "nothing": "Nav nekā, ko atsaukt"
+    },
     "browser_notice": "Šis redaktors tiek atbalstīts ar Firefox, Chrome, Safari, Opera, un Internet Explorer 9 un jaunāku. Lūdzu, atjauniniet savu pārlūkprogrammu vai izmantojiet Potlatch 2 kartes rediģēšanai",
-    "view_on_osm": "Aplūkot OSM kartē",
     "zoom_in_edit": "Pietuvināt, lai labotu",
     "logout": "atslēgties",
     "loading_auth": "Savienojas ar OpenStreetMap...",
@@ -203,9 +205,10 @@
         "unsaved_changes": "Jums ir nesaglabātas izmaiņas"
     },
     "success": {
+        "just_edited": "Jūs nupat rediģējāt OpenStreetMap",
+        "view_on_osm": "Apskatīt OSM",
         "facebook": "Dalīties Facebook",
-        "tweet": "Dalīties Twitter",
-        "okay": "Labi"
+        "tweet": "Dalīties Twitter"
     },
     "confirm": {
         "okay": "Labi"
@@ -920,9 +923,6 @@
             },
             "power": {
                 "name": "Enerģija"
-            },
-            "power/generator": {
-                "name": "Elektrostacija"
             },
             "power/line": {
                 "name": "Elektrolīnija"

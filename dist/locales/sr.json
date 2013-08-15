@@ -166,12 +166,16 @@
             "multiple_ways": "Има превише линија за раздвајање."
         }
     },
-    "nothing_to_undo": "Ништа за поништити.",
-    "nothing_to_redo": "Ништа за поновити.",
+    "undo": {
+        "tooltip": "Опозови: {action}",
+        "nothing": "Ништа за поништити."
+    },
+    "redo": {
+        "tooltip": "Врати: {action}",
+        "nothing": "Ништа за поновити."
+    },
     "tooltip_keyhint": "Пречица:",
-    "just_edited": "Управо сте уређивали Опенстреетмап!",
     "browser_notice": "Овај уређивач је подржан у Фирефоксу, Хрому, Сафарију, Опери и Интернет екплореру 9 и новијим. Надоградите прегледач или користите Потлач 2 како бисте уређивали мапу.",
-    "view_on_osm": "Прикажи на ОСМ",
     "translate": {
         "translate": "Преведи",
         "localized_translation_label": "Вишејезички назив",
@@ -256,9 +260,10 @@
     },
     "success": {
         "edited_osm": "Уреди ОСМ!",
+        "just_edited": "Управо сте уређивали OpenStreetMap!",
+        "view_on_osm": "Преглед на OSM",
         "facebook": "Подели на Фејсбуку",
-        "tweet": "Твитуј",
-        "okay": "У реду"
+        "tweet": "Твитуј"
     },
     "confirm": {
         "okay": "У реду"
@@ -514,8 +519,20 @@
             "fee": {
                 "label": "Провизија"
             },
+            "fire_hydrant/type": {
+                "label": "Врста"
+            },
             "fixme": {
                 "label": "Поправи ме"
+            },
+            "generator/method": {
+                "label": "Начин"
+            },
+            "generator/source": {
+                "label": "Извор"
+            },
+            "generator/type": {
+                "label": "Врста"
             },
             "highway": {
                 "label": "Врста"
@@ -969,6 +986,9 @@
             "emergency/ambulance_station": {
                 "name": "Амбуланта"
             },
+            "emergency/fire_hydrant": {
+                "name": "Хидрант"
+            },
             "emergency/phone": {
                 "name": "Телефон за хитне случајеве"
             },
@@ -1206,6 +1226,9 @@
             "leisure/swimming_pool": {
                 "name": "Базен"
             },
+            "leisure/track": {
+                "name": "Тркачка стаза"
+            },
             "line": {
                 "name": "Путања"
             },
@@ -1333,7 +1356,7 @@
                 "name": "Енергија"
             },
             "power/generator": {
-                "name": "Електрана"
+                "name": "Електро-генератор"
             },
             "power/line": {
                 "name": "Енергетски вод"

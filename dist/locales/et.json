@@ -127,8 +127,12 @@
             "not_eligible": "Jooni ei saa tükeldada nende algusest või lõpust."
         }
     },
-    "nothing_to_undo": "Pole midagi tagasi võtta.",
-    "nothing_to_redo": "Pole midagi uuesti teha.",
+    "undo": {
+        "nothing": "Pole midagi tagasi võtta."
+    },
+    "redo": {
+        "nothing": "Pole midagi uuesti teha."
+    },
     "browser_notice": "See redaktor on toetatud järgnevates veebilehitsejates: Firefox, Chrome, Safari, Opera, ja Internet Explorer 9 ning uuemates. Palun uuenda oma veebilehitsejat või kasuta Potlatch 2'te kaardi muutmiseks.",
     "logout": "Logi välja",
     "loading_auth": "OpenStreetMap'iga ühendamine...",
@@ -727,9 +731,6 @@
             },
             "power": {
                 "name": "Elekter"
-            },
-            "power/generator": {
-                "name": "Elektrijaam"
             },
             "power/line": {
                 "name": "Elektriliin"

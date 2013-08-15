@@ -166,12 +166,16 @@
             "multiple_ways": "Hay demasiadas líneas para dividir."
         }
     },
-    "nothing_to_undo": "Nada que deshacer.",
-    "nothing_to_redo": "Nada que rehacer.",
+    "undo": {
+        "tooltip": "Deshacer: {action}",
+        "nothing": "Nada que deshacer"
+    },
+    "redo": {
+        "tooltip": "Rehacer: {action}",
+        "nothing": "Nada que rehacer"
+    },
     "tooltip_keyhint": "Acceso directo:",
-    "just_edited": "¡Acaba de editar OpenStreetMap!",
     "browser_notice": "Este editor soporta Firefox, Chrome, Safari, Opera e Internet Explorer 9 o superior. Por favor actualice su navegador o utilice Potlatch 2 para editar el mapa.",
-    "view_on_osm": "Ver en OSM",
     "translate": {
         "translate": "Traducir",
         "localized_translation_label": "Nombre multilingüe",
@@ -256,9 +260,10 @@
     },
     "success": {
         "edited_osm": "¡OSM editado!",
+        "just_edited": "¡Acaba de editar OpenStreetMap!",
+        "view_on_osm": "Ver en OSM",
         "facebook": "Compartir en Facebook",
-        "tweet": "Tweet",
-        "okay": "De acuerdo"
+        "tweet": "Tweet"
     },
     "confirm": {
         "okay": "De acuerdo"
@@ -514,8 +519,20 @@
             "fee": {
                 "label": "Tarifa"
             },
+            "fire_hydrant/type": {
+                "label": "Tipo"
+            },
             "fixme": {
                 "label": "Arreglame"
+            },
+            "generator/method": {
+                "label": "Método"
+            },
+            "generator/source": {
+                "label": "Fuente"
+            },
+            "generator/type": {
+                "label": "Tipo"
             },
             "highway": {
                 "label": "Tipo"
@@ -1009,6 +1026,10 @@
             "emergency/ambulance_station": {
                 "name": "Estación de ambulancias"
             },
+            "emergency/fire_hydrant": {
+                "name": "Boca de incendio",
+                "terms": "boca de incendio,hidrante de incendio"
+            },
             "emergency/phone": {
                 "name": "Teléfono de emergencias"
             },
@@ -1379,9 +1400,6 @@
             },
             "power": {
                 "name": "Electricidad"
-            },
-            "power/generator": {
-                "name": "Planta de energía"
             },
             "power/line": {
                 "name": "Línea de alta tensión"

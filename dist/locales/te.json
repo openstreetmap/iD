@@ -27,7 +27,6 @@
             "description": "దీన్ని వేరే చోటకు తరలించండి."
         }
     },
-    "just_edited": "మీరు ఓపెన్‌స్ట్రీట్‌మ్యాపుని సవరించారు!",
     "translate": {
         "translate": "అనువదించండి",
         "localized_translation_language": "భాషను ఎంచుకోండి",
@@ -71,8 +70,7 @@
     },
     "success": {
         "facebook": "ఫేస్‌బుక్‌లో పంచుకోండి",
-        "tweet": "ట్వీటండి",
-        "okay": "సరే"
+        "tweet": "ట్వీటండి"
     },
     "confirm": {
         "okay": "సరే"

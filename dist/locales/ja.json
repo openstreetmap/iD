@@ -166,12 +166,14 @@
             "multiple_ways": "複数のラインを分割します"
         }
     },
-    "nothing_to_undo": "やり直す変更点がありません",
-    "nothing_to_redo": "やり直した変更点がありません",
+    "undo": {
+        "nothing": "やり直す変更点がありません"
+    },
+    "redo": {
+        "nothing": "やり直した変更点がありません"
+    },
     "tooltip_keyhint": "ショートカット",
-    "just_edited": "OpenStreetMap編集完了！",
     "browser_notice": "このエディタは Firefox, Chrome, Safari, Opera, および Internet Explorer 9 以上をサポートしています。ブラウザのバージョンを更新するか、Potlatch 2を使用して編集してください",
-    "view_on_osm": "オブジェクト情報をOSMで確認",
     "translate": {
         "translate": "翻訳",
         "localized_translation_label": "多言語名称",
@@ -256,9 +258,10 @@
     },
     "success": {
         "edited_osm": "OSM編集完了！",
+        "just_edited": "OpenStreetMap編集完了！",
+        "view_on_osm": "詳細情報確認",
         "facebook": "Facebookでシェア",
-        "tweet": "Tweet",
-        "okay": "OK"
+        "tweet": "Tweet"
     },
     "confirm": {
         "okay": "OK"
@@ -514,8 +517,20 @@
             "fee": {
                 "label": "利用料金"
             },
+            "fire_hydrant/type": {
+                "label": "タイプ"
+            },
             "fixme": {
                 "label": "Fix Me"
+            },
+            "generator/method": {
+                "label": "方式"
+            },
+            "generator/source": {
+                "label": "参照した情報"
+            },
+            "generator/type": {
+                "label": "タイプ"
             },
             "highway": {
                 "label": "道路区分"
@@ -970,6 +985,9 @@
             "emergency/ambulance_station": {
                 "name": "救急看護"
             },
+            "emergency/fire_hydrant": {
+                "name": "消火栓"
+            },
             "emergency/phone": {
                 "name": "緊急電話"
             },
@@ -1206,6 +1224,9 @@
             },
             "leisure/swimming_pool": {
                 "name": "プール"
+            },
+            "leisure/track": {
+                "name": "競技場"
             },
             "line": {
                 "name": "ライン"

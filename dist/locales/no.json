@@ -124,9 +124,12 @@
             "key": "X"
         }
     },
-    "nothing_to_undo": "Ingen ting å gjøre.",
-    "nothing_to_redo": "Ingen ting å gjøre tilbake.",
-    "just_edited": "Du har akkurat endret OpenStreetMap!",
+    "undo": {
+        "nothing": "Ingen ting å gjøre."
+    },
+    "redo": {
+        "nothing": "Ingen ting å gjøre tilbake."
+    },
     "browser_notice": "Denne editor er støttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og høyere. Vennligst oppgrader din nettleser eller bruk Potlatch 2 for å redigere kartet.",
     "logout": "logg ut",
     "report_a_bug": "meld en programvarefeil",
@@ -167,6 +170,9 @@
         "error": "Det oppstod en feil ved forsøk på å lagre",
         "uploading": "Laster opp endringer til OpenStreetMap.",
         "unsaved_changes": "Du har ulagrede endringer"
+    },
+    "success": {
+        "just_edited": "Du har akkurat endret OpenStreetMap!"
     },
     "splash": {
         "welcome": "Velkommen til iD OpenStreetMap editor"
@@ -1018,9 +1024,6 @@
             },
             "power": {
                 "name": "Strøm"
-            },
-            "power/generator": {
-                "name": "Kraftverk"
             },
             "power/line": {
                 "name": "Høyspentlinje"

@@ -166,12 +166,16 @@
             "multiple_ways": "Není jasné, kterou cestu rozdělit."
         }
     },
-    "nothing_to_undo": "Není co vracet.",
-    "nothing_to_redo": "Není co znovu provádět.",
+    "undo": {
+        "tooltip": "Zpět: {action}",
+        "nothing": "Není co vracet."
+    },
+    "redo": {
+        "tooltip": "Znovu: {action}",
+        "nothing": "Není co znovu provádět."
+    },
     "tooltip_keyhint": "Zkratka:",
-    "just_edited": "Právě jste upravil/a OpenStreetMap!",
     "browser_notice": "Tento editor funguje ve Firefoxu, Chrome, Safari, Opeře a Internet Exploreru od verze 9. Musíte tedy upgradovat na novější verzi prohlížeče; nebo použijte editor Potlatch 2.",
-    "view_on_osm": "Zobrazit na OSM",
     "translate": {
         "translate": "Přeložit",
         "localized_translation_label": "Mezinárodní název",
@@ -256,9 +260,11 @@
     },
     "success": {
         "edited_osm": "OSM upraveno!",
+        "just_edited": "Právě jste upravil OpenStreetMap!",
+        "view_on_osm": "Zobrazit na OSM",
         "facebook": "Sdílet na Facebooku",
         "tweet": "Tweet",
-        "okay": "OK"
+        "help_html": "Vaše úpravy by se obvykle měly objevit na \"Standardní\" vrstvě během několika minut. U některých objektů a ostatních vrstev to může trvat déle⏎\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detaily anglicky</a>).⏎\n"
     },
     "confirm": {
         "okay": "OK"
@@ -609,7 +615,7 @@
                 "label": "Typ"
             },
             "power": {
-                "label": "yp"
+                "label": "typ"
             },
             "railway": {
                 "label": "Typ"
@@ -939,7 +945,8 @@
                 "name": "Přejezdový rošt"
             },
             "barrier/city_wall": {
-                "name": "Hradby"
+                "name": "Hradby",
+                "terms": "hradby"
             },
             "barrier/cycle_barrier": {
                 "name": "Zábrana proti kolům"
@@ -951,10 +958,12 @@
                 "name": "Vchod"
             },
             "barrier/fence": {
-                "name": "Plot"
+                "name": "Plot",
+                "terms": "plot,oplocení"
             },
             "barrier/gate": {
-                "name": "Brána"
+                "name": "Brána",
+                "terms": "brána"
             },
             "barrier/hedge": {
                 "name": "Živý plot"
@@ -963,10 +972,12 @@
                 "name": "Turniket"
             },
             "barrier/lift_gate": {
-                "name": "Závora"
+                "name": "Závora",
+                "terms": "závora"
             },
             "barrier/retaining_wall": {
-                "name": "Opěrná zeď"
+                "name": "Opěrná zeď",
+                "terms": "opěrná zeď"
             },
             "barrier/stile": {
                 "name": "Schůdky přes ohradu"
@@ -975,22 +986,26 @@
                 "name": "Mýtná brána"
             },
             "barrier/wall": {
-                "name": "Zeď"
+                "name": "Zeď",
+                "terms": "zděný plot, zeď"
             },
             "boundary/administrative": {
                 "name": "Administrativní hranice"
             },
             "building": {
-                "name": "Budova"
+                "name": "Budova",
+                "terms": "budova"
             },
             "building/apartments": {
                 "name": "Byty"
             },
             "building/entrance": {
-                "name": "Vchod"
+                "name": "Vchod",
+                "terms": "vchod"
             },
             "building/house": {
-                "name": "Dům"
+                "name": "Dům",
+                "terms": "dům"
             },
             "emergency/ambulance_station": {
                 "name": "Zdravotní pohotovost"
@@ -1002,119 +1017,144 @@
                 "name": "Vchod"
             },
             "highway": {
-                "name": "Pozemní komunikace"
+                "name": "Pozemní komunikace",
+                "terms": "komunikace"
             },
             "highway/bridleway": {
                 "name": "Jezdecká stezka",
                 "terms": "jezdecká stezka,jezdecká trasa,stezka pro jezdce,stezka pro koně,koňská stezka"
             },
             "highway/bus_stop": {
-                "name": "Autobusová zastávka"
+                "name": "Autobusová zastávka",
+                "terms": "zastávka autobusu"
             },
             "highway/crossing": {
                 "name": "Přechod",
                 "terms": "přechod,zebra"
             },
             "highway/cycleway": {
-                "name": "Cyklostezka"
+                "name": "Cyklostezka",
+                "terms": "cyklotrasa"
             },
             "highway/footway": {
                 "name": "Pěšina",
                 "terms": "cesta,silnice,ulice,ulička,chodník,třída,bulvár,avenue,pasáž,stezka,trasa,trať,magistrála,radiála,pěšina"
             },
             "highway/living_street": {
-                "name": "Obytná zóna"
+                "name": "Obytná zóna",
+                "terms": "obytná zóna"
             },
             "highway/mini_roundabout": {
-                "name": "Malý kruhový objezd"
+                "name": "Malý kruhový objezd",
+                "terms": "malý kruhový objezd, kruháč"
             },
             "highway/motorway": {
-                "name": "Dálnice"
+                "name": "Dálnice",
+                "terms": "dálnice"
             },
             "highway/motorway_junction": {
-                "name": "Dálniční sjezd"
+                "name": "Dálniční sjezd",
+                "terms": "dálniční nájezd, dálniční výjezd, dálniční exit"
             },
             "highway/motorway_link": {
                 "name": "Dálnice - nájezd",
                 "terms": "nájezd,sjezd,výjezd,příjezd,rampa,exit"
             },
             "highway/path": {
-                "name": "Pěšina"
+                "name": "Pěšina",
+                "terms": "cesta"
             },
             "highway/pedestrian": {
-                "name": "Pěší zóna"
+                "name": "Pěší zóna",
+                "terms": "pěší zóna"
             },
             "highway/primary": {
-                "name": "Silnice 1. třídy"
+                "name": "Silnice 1. třídy",
+                "terms": "silnice I. třídy"
             },
             "highway/primary_link": {
                 "name": "Silnice 1. třídy - nájezd",
                 "terms": "nájezd,sjezd,výjezd,příjezd,rampa,exit"
             },
             "highway/residential": {
-                "name": "Ulice"
+                "name": "Ulice",
+                "terms": "obytná zóna"
             },
             "highway/road": {
-                "name": "Silnice neznámého typu"
+                "name": "Silnice neznámého typu",
+                "terms": "neznámá komunikace"
             },
             "highway/secondary": {
-                "name": "Silnice 2. třídy"
+                "name": "Silnice 2. třídy",
+                "terms": "silnice II. třídy"
             },
             "highway/secondary_link": {
                 "name": "Silnice 2. třídy - nájezd",
                 "terms": "nájezd,sjezd,výjezd,příjezd,rampa,exit"
             },
             "highway/service": {
-                "name": "Účelová komunikace, příjezd"
+                "name": "Účelová komunikace, příjezd",
+                "terms": "účelová komunikace"
             },
             "highway/service/alley": {
-                "name": "Ulička"
+                "name": "Ulička",
+                "terms": "ulička"
             },
             "highway/service/drive-through": {
-                "name": "Drive-through"
+                "name": "Drive-through",
+                "terms": "okénko pro řidiče, pult pro řidiče, obsluha řidiče, obsluha do auta"
             },
             "highway/service/driveway": {
-                "name": "Příjezdová cesta"
+                "name": "Příjezdová cesta",
+                "terms": "příjezdová cesta, příjezd"
             },
             "highway/service/emergency_access": {
-                "name": "Nouzový vjezd"
+                "name": "Nouzový vjezd",
+                "terms": "přístup záchranářů"
             },
             "highway/service/parking_aisle": {
-                "name": "Parkovací ulička"
+                "name": "Parkovací ulička",
+                "terms": "jízdní pruh na parkovišti"
             },
             "highway/steps": {
                 "name": "Schody",
                 "terms": "schody,schodiště"
             },
             "highway/tertiary": {
-                "name": "Silnice 3. třídy"
+                "name": "Silnice 3. třídy",
+                "terms": "silnice III. třídy"
             },
             "highway/tertiary_link": {
                 "name": "Silnice 3. třídy - nájezd",
                 "terms": "nájezd,sjezd,výjezd,příjezd,rampa,exit"
             },
             "highway/track": {
-                "name": "Polní, lesní cesta"
+                "name": "Polní, lesní cesta",
+                "terms": "polní cesta, lesní cesta, cesta, polní a lesní cesta"
             },
             "highway/traffic_signals": {
                 "name": "Semafory",
                 "terms": "světla,semafor,dopravní signalizace"
             },
             "highway/trunk": {
-                "name": "Víceproudá silnice"
+                "name": "Víceproudá silnice",
+                "terms": "rychlostní komunikace, vícepruhá komunikace"
             },
             "highway/trunk_link": {
                 "name": "Víceproudá silnice - nájezd",
                 "terms": "nájezd,sjezd,výjezd,příjezd,rampa,exit"
             },
             "highway/turning_circle": {
-                "name": "Obratiště"
+                "name": "Obratiště",
+                "terms": "místo k otočení"
             },
             "highway/unclassified": {
-                "name": "Silnice bez klasifikace"
+                "name": "Silnice bez klasifikace",
+                "terms": "silnice bez klasifikace"
             },
             "historic": {
-                "name": "Památné místo"
+                "name": "Památné místo",
+                "terms": "historické místo"
             },
             "historic/archaeological_site": {
                 "name": "Archeologické naleziště"
@@ -1150,7 +1190,8 @@
                 "name": "Umělá vodní plocha"
             },
             "landuse/cemetery": {
-                "name": "Hřbitov"
+                "name": "Hřbitov",
+                "terms": "hřbitov,pohřebiště"
             },
             "landuse/commercial": {
                 "name": "Obchody"
@@ -1165,10 +1206,12 @@
                 "name": "Farma"
             },
             "landuse/forest": {
-                "name": "Les"
+                "name": "Les",
+                "terms": "les,hospodářský les"
             },
             "landuse/grass": {
-                "name": "Tráva"
+                "name": "Tráva",
+                "terms": "tráva"
             },
             "landuse/industrial": {
                 "name": "Průmysl"
@@ -1195,7 +1238,8 @@
                 "name": "Volný čas"
             },
             "leisure/garden": {
-                "name": "Zahrada"
+                "name": "Zahrada",
+                "terms": "zahrada"
             },
             "leisure/golf_course": {
                 "name": "Golfové hřiště"
@@ -1337,7 +1381,8 @@
                 "name": "Mokřad"
             },
             "natural/wood": {
-                "name": "Les"
+                "name": "Les",
+                "terms": "prales,přírodní les"
             },
             "office": {
                 "name": "Kanceláře"
@@ -1371,16 +1416,16 @@
                 "name": "Uzel"
             },
             "power": {
-                "name": "Energetika"
-            },
-            "power/generator": {
-                "name": "Elektrárna"
+                "name": "Energetika",
+                "terms": "Energetika"
             },
             "power/line": {
-                "name": "Elektrické vedení"
+                "name": "Elektrické vedení",
+                "terms": "elektrické vedení"
             },
             "power/pole": {
-                "name": "Eletrický sloup"
+                "name": "Eletrický sloup",
+                "terms": "sloup el.vedení,elektrický sloup,sloup elektrického vedení,sloupový stožár"
             },
             "power/sub_station": {
                 "name": "Transformátorová stanice"

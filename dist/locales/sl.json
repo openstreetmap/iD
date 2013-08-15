@@ -877,9 +877,6 @@
             "power": {
                 "name": "Elektro"
             },
-            "power/generator": {
-                "name": "Elektrarna"
-            },
             "power/line": {
                 "name": "Daljnovod"
             },

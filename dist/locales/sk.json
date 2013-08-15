@@ -166,12 +166,16 @@
             "multiple_ways": "Príliš veľa čiar na rozdelenie."
         }
     },
-    "nothing_to_undo": "Nič na vrátenie.",
-    "nothing_to_redo": "Nič na zopakovanie.",
+    "undo": {
+        "tooltip": "Vrátiť: {action}",
+        "nothing": "Nič na vrátenie."
+    },
+    "redo": {
+        "tooltip": "Zopakuj: {action}",
+        "nothing": "Nič na zopakovanie."
+    },
     "tooltip_keyhint": "Skratka:",
-    "just_edited": "Práve ste upravili OpenStreetMap!",
     "browser_notice": "Tento editor je podporovaný v prehliadačoch Firefox, Chrome, Safari, Opera, a Internet Explorer 9 a vyšší. Prosím aktualizujte svoj prehliadač alebo použite  Potlatch 2 na editovanie mapy.",
-    "view_on_osm": "Ukáž na OSM",
     "translate": {
         "translate": "Prelož",
         "localized_translation_label": "Viacjazyčný názov",
@@ -256,9 +260,11 @@
     },
     "success": {
         "edited_osm": "OSM bol upravený!",
+        "just_edited": "Práve ste upravili OpenStreetMap!",
+        "view_on_osm": "Zobraz na OSM",
         "facebook": "Zdieľaj na Facebooku",
         "tweet": "Tweetuj",
-        "okay": "OK"
+        "help_html": "Vaše zmeny by sa mali objaviť na \"Základnej\" vrstve v priebehu niekoľkých minút. Ostatným vrstvám a niektorým objektom to môže trvať dlhšie.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detaily</a>).\n"
     },
     "confirm": {
         "okay": "OK"
@@ -514,8 +520,20 @@
             "fee": {
                 "label": "Poplatok"
             },
+            "fire_hydrant/type": {
+                "label": "Typ"
+            },
             "fixme": {
                 "label": "Oprav ma!"
+            },
+            "generator/method": {
+                "label": "Metóda"
+            },
+            "generator/source": {
+                "label": "Zroj"
+            },
+            "generator/type": {
+                "label": "Typ"
             },
             "highway": {
                 "label": "Typ"
@@ -1055,6 +1073,10 @@
                 "name": "Stanovište sanitiek",
                 "terms": "stanoviste sanitiek,garaze,garáže,sanitky,sanitka,garaz,garáž"
             },
+            "emergency/fire_hydrant": {
+                "name": "Požiarny hydrant",
+                "terms": "poziarny hydrant,hydrant, zdroj vody,hadica,uzáver vod,uzaver vody"
+            },
             "emergency/phone": {
                 "name": "Núdzový telefón",
                 "terms": "nudzovy telefon,SOS,tiesňová linka,tiesnova linka,núdzový telefón.nudzovy telefon"
@@ -1371,6 +1393,10 @@
                 "name": "Plaváreň",
                 "terms": "Plavaren,kúpalisko,kupalisko"
             },
+            "leisure/track": {
+                "name": "Závodná dráha",
+                "terms": "závodisko,zavodisko,okruh,preteky"
+            },
             "line": {
                 "name": "Čiara",
                 "terms": "ciara,cesta,trat,kanal,trasa,trať,trat"
@@ -1541,7 +1567,7 @@
             },
             "power/generator": {
                 "name": "Elektráreň",
-                "terms": "elektraren,tepelna elektraren,tepelná elektráreň,atomova elektraren,atómova elektráreň,vodná elektráreň,vodna elektraren"
+                "terms": "elektraren,veterna elektraren,veterná elektráreň,atómka,atomka,vodná,vodna,tepelna,tepelna"
             },
             "power/line": {
                 "name": "Elektrické vedenie",

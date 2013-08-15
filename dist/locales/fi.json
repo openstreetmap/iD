@@ -166,12 +166,14 @@
             "multiple_ways": "Viivoja on liian monta jotta niitä voitaisiin jakaa osiin."
         }
     },
-    "nothing_to_undo": "Ei muokkaushistoriaa.",
-    "nothing_to_redo": "Ei muokkaushistoriaa.",
+    "undo": {
+        "nothing": "Ei muokkaushistoriaa."
+    },
+    "redo": {
+        "nothing": "Ei muokkaushistoriaa."
+    },
     "tooltip_keyhint": "Pikanäppäin:",
-    "just_edited": "Muokkasit juuri OpenStreetMapia!",
     "browser_notice": "Tämä kartanmuokkausohjelma toimii Firefox-, Chrome-, Safari- ja Opera-selaimissa sekä Internet Explorer 9 tai uudemmalla selaimella. Nykyinen verkkoselain ei ole tuettu, joten päivitä verkkoselain tai muokkaa karttaa Potlatch 2 -ohjelmalla.",
-    "view_on_osm": "Näytä OSM-kartalla",
     "translate": {
         "translate": "Käännä",
         "localized_translation_label": "Monikielinen nimi",
@@ -256,9 +258,10 @@
     },
     "success": {
         "edited_osm": "OSM:ia muokattu!",
+        "just_edited": "Muokkasit juuri OpenStreetMapia!",
+        "view_on_osm": "Näytä OSM-kartalla",
         "facebook": "Jaa Facebookissa",
-        "tweet": "Twiittaa",
-        "okay": "OK"
+        "tweet": "Twiittaa"
     },
     "confirm": {
         "okay": "OK"
@@ -1305,9 +1308,6 @@
             },
             "power": {
                 "name": "Sähkö"
-            },
-            "power/generator": {
-                "name": "Voimalaitos"
             },
             "power/line": {
                 "name": "Voimalinja"
