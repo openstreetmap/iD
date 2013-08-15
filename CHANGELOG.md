@@ -1,3 +1,15 @@
+## 1.1.3
+
+* Fix behavior of enter key in name field (#1681)
+* Remove area=yes when choosing an area preset (#1684)
+* Save history more frequently (#1345)
+* Fix combobox menu scroll bar behavior (#963)
+* After editing, give a sense when map is updated (#1660)
+* Clarify undo/redo tooltips (#1670)
+* Add emergency=fire_hydrant preset (#1674)
+* Refine power=generator preset (#1675)
+* Add leisure=track preset (#1683)
+
 ## 1.1.2
 
 * Fix cursor offset when clicking/dragging after resizing the window (#1678)
