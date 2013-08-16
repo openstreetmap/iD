@@ -64,7 +64,9 @@ iD.ui.preset.localized = function(field, context) {
 
         if (language) value = language[2];
 
-        t[key(d.lang)] = '';
+        if (d.lang) {
+            t[key(d.lang)] = '';
+        }
 
         if (d.value) {
             t[key(value)] = d.value;
