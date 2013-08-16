@@ -2280,15 +2280,15 @@ img.wiki-image {
     padding-top: 15px;
 }
 
-.save-success .osm:before {
+.save-success .button.osm:before {
     background-position: 0px -220px;
 }
 
-.save-success .twitter:before {
+.save-success .button.twitter:before {
     background-position: -100px -220px;
 }
 
-.save-success .facebook:before {
+.save-success .button.facebook:before {
     background-position: -200px -220px;
 }
 
