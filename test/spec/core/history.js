@@ -256,7 +256,7 @@ describe("iD.History", function () {
             var key = history._getKey('saved_history');
             context.storage(key, null);
             history.save();
-            expect(context.storage(key)).to.be.undefined;
+            expect(context.storage(key)).to.be.null;
             context.storage(key, 'something');
             expect(context.storage(key)).to.equal('something');
             history.save();
