@@ -8,11 +8,14 @@ window.iD = function () {
     // https://github.com/systemed/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
     try { storage = localStorage; } catch (e) {}
-    storage = storage || {
-        getItem: function() {},
-        setItem: function() {},
-        removeItem: function() {}
-    };
+    storage = storage || (function() {
+        var s = {};
+        return {
+            getItem: function(k) { return s[k]; },
+            setItem: function(k, v) { s[k] = v; },
+            removeItem: function(k) { delete s[k] }
+        };
+    })();
 
     context.storage = function(k, v) {
         if (arguments.length === 1) return storage.getItem(k);
