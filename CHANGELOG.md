@@ -1,3 +1,9 @@
+## 1.1.4
+
+* Fix adding multilingual name (#1694)
+* Fix social buttons (#1690)
+* Work around a Firefox bug that sometimes caused elements to be unselectable or stuck dragging (#1691, #1692)
+
 ## 1.1.3
 
 * Fix behavior of enter key in name field (#1681)
