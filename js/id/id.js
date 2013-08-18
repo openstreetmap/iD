@@ -212,8 +212,16 @@ window.iD = function () {
         return context;
     };
 
+    var assetMap = {};
+    context.assetMap = function(_) {
+        if (!arguments.length) return assetMap;
+        assetMap = _;
+        return context;
+    };
+
     context.imagePath = function(_) {
-        return assetPath + 'img/' + _;
+        var asset = 'img/' + _;
+        return assetMap[asset] || assetPath + asset;
     };
 
     context.toggleFullscreen = function() {
