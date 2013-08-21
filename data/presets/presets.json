@@ -1078,8 +1078,10 @@
     },
     "amenity/toilets": {
         "fields": [
+            "toilets/disposal",
             "operator",
-            "building_area"
+            "building_area",
+            "access"
         ],
         "geometry": [
             "point",
@@ -1088,7 +1090,15 @@
         ],
         "terms": [
             "bathroom",
-            "restroom"
+            "restroom",
+            "outhouse",
+            "privy",
+            "head",
+            "lavatory",
+            "latrine",
+            "water closet",
+            "WC",
+            "W.C."
         ],
         "tags": {
             "amenity": "toilets"

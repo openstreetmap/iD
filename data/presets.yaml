@@ -234,6 +234,8 @@ en:
         label: Supervised
       surface: 
         label: Surface
+      toilets/disposal: 
+        label: Disposal
       tourism: 
         label: Type
       towertype: 

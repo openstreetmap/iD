@@ -695,6 +695,9 @@
             "surface": {
                 "label": "Surface"
             },
+            "toilets/disposal": {
+                "label": "Disposal"
+            },
             "tourism": {
                 "label": "Type"
             },
@@ -945,7 +948,7 @@
             },
             "amenity/toilets": {
                 "name": "Toilets",
-                "terms": "bathroom,restroom"
+                "terms": "bathroom,restroom,outhouse,privy,head,lavatory,latrine,water closet,WC,W.C."
             },
             "amenity/townhall": {
                 "name": "Town Hall",

@@ -572,6 +572,11 @@
         "type": "combo",
         "label": "Surface"
     },
+    "toilets/disposal": {
+        "key": "toilets:disposal",
+        "type": "combo",
+        "label": "Disposal"
+    },
     "tourism": {
         "key": "tourism",
         "type": "combo",
