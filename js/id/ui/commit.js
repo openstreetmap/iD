@@ -32,9 +32,9 @@ iD.ui.Commit = function(context) {
 
         header.append('button')
             .attr('class', 'fr')
+            .on('click', event.cancel)
             .append('span')
-            .attr('class', 'icon close')
-            .on('click', event.cancel);
+            .attr('class', 'icon close');
 
         header.append('h3')
             .text(t('commit.title'));
