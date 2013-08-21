@@ -3,11 +3,11 @@ iD.operations.Delete = function(selectedIDs, context) {
 
     var operation = function() {
         var annotation,
-            mode;
+            nextSelectedID;
 
         if (selectedIDs.length > 1) {
             annotation = t('operations.delete.annotation.multiple', {n: selectedIDs.length});
-            mode = iD.modes.Browse(context);
+
         } else {
             var id = selectedIDs[0],
                 entity = context.entity(id),
@@ -16,7 +16,6 @@ iD.operations.Delete = function(selectedIDs, context) {
                 parent = parents[0];
 
             annotation = t('operations.delete.annotation.' + geometry);
-            mode = iD.modes.Browse(context);
 
             // Select the next closest node in the way.
             if (geometry === 'vertex' && parents.length === 1 && parent.nodes.length > 2) {
@@ -33,7 +32,7 @@ iD.operations.Delete = function(selectedIDs, context) {
                     i = a < b ? i - 1 : i + 1;
                 }
 
-                mode = iD.modes.Select(context, [nodes[i]]);
+                nextSelectedID = nodes[i];
             }
         }
 
@@ -41,8 +40,11 @@ iD.operations.Delete = function(selectedIDs, context) {
             action,
             annotation);
 
-        context.enter(mode);
-
+        if (nextSelectedID && context.hasEntity(nextSelectedID)) {
+            context.enter(iD.modes.Select(context, [nextSelectedID]));
+        } else {
+            context.enter(iD.modes.Browse(context));
+        }
     };
 
     operation.available = function() {
