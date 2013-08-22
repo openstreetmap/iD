@@ -4,7 +4,6 @@ describe('iD.TileLayer', function() {
     beforeEach(function() {
         d = d3.select(document.createElement('div'));
         c = iD.TileLayer().projection(d3.geo.mercator());
-        d.call(c);
     });
 
     afterEach(function() {
