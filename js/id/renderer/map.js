@@ -20,7 +20,8 @@ iD.Map = function(context) {
         midpoints = iD.svg.Midpoints(roundedProjection, context),
         labels = iD.svg.Labels(roundedProjection, context),
         supersurface, surface,
-        mouse;
+        mouse,
+        mousemove;
 
     function map(selection) {
         context.history()
@@ -51,6 +52,10 @@ iD.Map = function(context) {
             })
             .attr('id', 'surface')
             .call(iD.svg.Surface(context));
+
+        surface.on('mousemove.map', function() {
+            mousemove = d3.event;
+        });
 
         surface.on('mouseover.vertices', function() {
             if (map.editable() && !transformed) {
@@ -249,7 +254,7 @@ iD.Map = function(context) {
     }
 
     map.mouse = function() {
-        var e = d3.event, s;
+        var e = mousemove, s;
         while (s = e.sourceEvent) e = s;
         return mouse(e);
     };

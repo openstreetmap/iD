@@ -41,25 +41,13 @@ iD.modes.AddLine = function(context) {
     }
 
     function startFromNode(node) {
-        var graph = context.graph(),
-            parent = graph.parentWays(node)[0],
-            isLine = parent && parent.geometry(graph) === 'line';
+        var way = iD.Way();
 
-        if (isLine && parent.first() === node.id) {
-            context.enter(iD.modes.DrawLine(context, parent.id, 'backward', graph));
+        context.perform(
+            iD.actions.AddEntity(way),
+            iD.actions.AddVertex(way.id, node.id));
 
-        } else if (isLine && parent.last() === node.id) {
-            context.enter(iD.modes.DrawLine(context, parent.id, 'forward', graph));
-
-        } else {
-            var way = iD.Way();
-
-            context.perform(
-                iD.actions.AddEntity(way),
-                iD.actions.AddVertex(way.id, node.id));
-
-            context.enter(iD.modes.DrawLine(context, way.id, 'forward', graph));
-        }
+        context.enter(iD.modes.DrawLine(context, way.id, 'forward', context.graph()));
     }
 
     mode.enter = function() {

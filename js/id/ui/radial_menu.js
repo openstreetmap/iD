@@ -34,7 +34,7 @@ iD.ui.RadialMenu = function(context, operations) {
             .attr('class', 'radial-menu-background')
             .attr('d', 'M' + r * Math.sin(a0) + ',' +
                              r * Math.cos(a0) +
-                      ' A' + r + ',' + r + ' 0 0,0 ' +
+                      ' A' + r + ',' + r + ' 0 ' + (operations.length > 5 ? '1' : '0') + ',0 ' +
                              (r * Math.sin(a1) + 1e-3) + ',' +
                              (r * Math.cos(a1) + 1e-3)) // Force positive-length path (#1305)
             .attr('stroke-width', 50)
@@ -68,14 +68,32 @@ iD.ui.RadialMenu = function(context, operations) {
         function mouseover(d, i) {
             var rect = context.surfaceRect(),
                 angle = a0 + i * a,
-                dx = rect.left - (angle < 0 ? 200 : 0),
-                dy = rect.top;
+                top = rect.top + (r + 25) * Math.cos(angle) + center[1] + 'px',
+                left = rect.left + (r + 25) * Math.sin(angle) + center[0] + 'px',
+                bottom = rect.height - (r + 25) * Math.cos(angle) - center[1] + 'px',
+                right = rect.width - (r + 25) * Math.sin(angle) - center[0] + 'px';
 
             tooltip
-                .style('left', (r + 25) * Math.sin(angle) + dx + center[0] + 'px')
-                .style('top', (r + 25) * Math.cos(angle) + dy + center[1]+ 'px')
+                .style('top', null)
+                .style('left', null)
+                .style('bottom', null)
+                .style('right', null)
                 .style('display', 'block')
                 .html(iD.ui.tooltipHtml(d.tooltip(), d.keys[0]));
+
+            if (i === 0) {
+                tooltip
+                    .style('right', right)
+                    .style('top', top);
+            } else if (i >= 4) {
+                tooltip
+                    .style('left', left)
+                    .style('bottom', bottom);
+            } else {
+                tooltip
+                    .style('left', left)
+                    .style('top', top);
+            }
         }
 
         function mouseout() {
