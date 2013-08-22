@@ -2262,11 +2262,11 @@ img.wiki-image {
 ------------------------------------------------------- */
 
 .modal-actions .restore:before {
-    background-position: -500px -220px;
+    background-position: -600px -220px;
 }
 
 .modal-actions .reset:before {
-    background-position: -600px -220px;
+    background-position: -700px -220px;
 }
 
 /* Success Modal
@@ -2280,16 +2280,28 @@ img.wiki-image {
     padding-top: 15px;
 }
 
+.save-success .button.social {
+    height: 80px;
+}
+
+.save-success .button.social:before {
+    height: 50px;
+}
+
 .save-success .button.osm:before {
     background-position: 0px -220px;
 }
 
 .save-success .button.twitter:before {
-    background-position: -100px -220px;
+    background-position: -100px -245px;
 }
 
 .save-success .button.facebook:before {
-    background-position: -200px -220px;
+    background-position: -200px -245px;
+}
+
+.save-success .button.google:before {
+    background-position: -300px -245px;
 }
 
 /* Splash Modal
@@ -2297,11 +2309,11 @@ img.wiki-image {
 
 .modal-actions .walkthrough:before,
 .walkthrough a:before {
-    background-position: -300px -220px;
+    background-position: -400px -220px;
 }
 
 .modal-actions .start:before {
-    background-position: -400px -220px;
+    background-position: -500px -220px;
 }
 
 /* Commit Modal

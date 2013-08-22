@@ -265,7 +265,8 @@
         "just_edited": "You just edited OpenStreetMap!",
         "view_on_osm": "View on OSM",
         "facebook": "Share on Facebook",
-        "tweet": "Tweet",
+        "twitter": "Share on Twitter",
+        "google": "Share on Google+",
         "help_html": "Your changes should appear in the \"Standard\" layer in a few minutes. Other layers, and certain features, may take longer\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>details</a>).\n"
     },
     "confirm": {

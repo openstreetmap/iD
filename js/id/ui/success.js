@@ -24,31 +24,29 @@ iD.ui.Success = function(context) {
         body.append('p')
             .html(t('success.help_html'));
 
+        var changesetURL = context.connection().changesetURL(changeset.id);
+
         body.append('a')
             .attr('class', 'button col12 osm')
             .attr('target', '_blank')
-            .attr('href', function() {
-                return context.connection().changesetURL(changeset.id);
-            })
+            .attr('href', changesetURL)
             .text(t('success.view_on_osm'));
 
-        body.append('a')
-            .attr('class', 'button col12 twitter')
-            .attr('target', '_blank')
-            .attr('href', function() {
-                return 'https://twitter.com/intent/tweet?source=webclient&text=' +
-                    encodeURIComponent(message);
-            })
-            .text(t('success.tweet'));
+        var sharing = {
+            facebook: 'https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(changesetURL),
+            twitter: 'https://twitter.com/intent/tweet?source=webclient&text=' + encodeURIComponent(message),
+            google: 'https://plus.google.com/share?url=' + encodeURIComponent(changesetURL)
+        };
 
-        body.append('a')
-            .attr('class', 'button col12 facebook')
+        body.selectAll('.button.social')
+            .data(d3.entries(sharing))
+            .enter().append('a')
+            .attr('class', function(d) { return 'button social col4 ' + d.key; })
             .attr('target', '_blank')
-            .attr('href', function() {
-                return 'https://facebook.com/sharer/sharer.php?u=' +
-                    encodeURIComponent(context.connection().changesetURL(changeset.id));
-            })
-            .text(t('success.facebook'));
+            .attr('href', function(d) { return d.value; })
+            .call(bootstrap.tooltip()
+                .title(function(d) { return t('success.' + d.key); })
+                .placement('bottom'));
     }
 
     success.changeset = function(_) {
