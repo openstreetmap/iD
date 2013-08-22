@@ -1,9 +1,22 @@
-iD.BackgroundSource = {};
+iD.BackgroundSource = function(data) {
+    var source = _.clone(data),
+        offset = [0, 0];
 
-// derive the url of a 'quadkey' style tile from a coordinate object
-iD.BackgroundSource.template = function(data) {
+    source.scaleExtent = data.scaleExtent || [0, 20];
 
-    function generator(coord) {
+    source.offset = function(_) {
+        if (!arguments.length) return offset;
+        offset = _;
+        return source;
+    };
+
+    source.nudge = function(_, zoomlevel) {
+        offset[0] += _[0] / Math.pow(2, zoomlevel);
+        offset[1] += _[1] / Math.pow(2, zoomlevel);
+        return source;
+    };
+
+    source.url = function(coord) {
         var u = '';
         for (var zoom = coord[2]; zoom > 0; zoom--) {
             var b = 0;
@@ -28,19 +41,24 @@ iD.BackgroundSource.template = function(data) {
                 var subdomains = r.split(':')[1].split(',');
                 return subdomains[coord[2] % subdomains.length];
             });
-    }
+    };
 
-    generator.data = data;
-    generator.copyrightNotices = function() {};
+    source.intersects = function(extent) {
+        return !data.extents || data.extents.some(function(ex) {
+            return iD.geo.Extent(ex).intersects(extent);
+        });
+    };
 
-    return generator;
+    source.copyrightNotices = function() {};
+
+    return source;
 };
 
 iD.BackgroundSource.Bing = function(data, dispatch) {
     // http://msdn.microsoft.com/en-us/library/ff701716.aspx
     // http://msdn.microsoft.com/en-us/library/ff701701.aspx
 
-    var bing = iD.BackgroundSource.template(data),
+    var bing = iD.BackgroundSource(data),
         key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU', // Same as P2 and JOSM
         url = 'http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
             key + '&jsonp={callback}',
@@ -76,15 +94,3 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
 
     return bing;
 };
-
-iD.BackgroundSource.Custom = function() {
-    var template = window.prompt('Enter a tile template. ' +
-        'Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.');
-    if (!template) return null;
-    return iD.BackgroundSource.template({
-        template: template,
-        name: 'Custom'
-    });
-};
-
-iD.BackgroundSource.Custom.data = { 'name': 'Custom' };

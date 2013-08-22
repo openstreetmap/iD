@@ -241,6 +241,8 @@
         "title": "Background",
         "description": "Background settings",
         "percent_brightness": "{opacity}% brightness",
+        "custom": "Custom",
+        "custom_prompt": "Enter a tile template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.",
         "fix_misalignment": "Fix misalignment",
         "reset": "reset"
     },
