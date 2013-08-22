@@ -145,8 +145,7 @@ iD.ui = function(context) {
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
-            .on('↓', pan([0, -pa]))
-            .on('M', function() { context.toggleFullscreen(); });
+            .on('↓', pan([0, -pa]));
 
         d3.select(document)
             .call(keybinding);
