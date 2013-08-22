@@ -166,7 +166,7 @@ iD.Background = function(context) {
             }
         }
 
-        layer = iD.TileLayer('overlay')
+        layer = iD.TileLayer()
             .source(d)
             .projection(context.projection)
             .dimensions(baseLayer.dimensions());
