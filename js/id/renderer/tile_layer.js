@@ -65,7 +65,7 @@ iD.TileLayer = function() {
     function render(selection) {
         var requests = [];
 
-        if (tile.scaleExtent()[0] <= z) {
+        if (source.validZoom(z)) {
             tile().forEach(function(d) {
                 addSource(d);
                 requests.push(d);

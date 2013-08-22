@@ -49,6 +49,11 @@ iD.BackgroundSource = function(data) {
         });
     };
 
+    source.validZoom = function(z) {
+        return source.scaleExtent[0] <= z &&
+            (source.name !== 'Locator Overlay' || source.scaleExtent[1] > z);
+    };
+
     source.copyrightNotices = function() {};
 
     return source;

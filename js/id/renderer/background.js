@@ -196,6 +196,14 @@ iD.Background = function(context) {
         background.baseLayerSource(findSource(chosen) || findSource("Bing"));
     }
 
+    var locator = _.find(backgroundSources, function(d) {
+        return d.overlay && d.default;
+    });
+
+    if (locator) {
+        background.toggleOverlayLayer(locator);
+    }
+
     var overlays = (q.overlays || '').split(',');
     overlays.forEach(function(overlay) {
         overlay = findSource(overlay);

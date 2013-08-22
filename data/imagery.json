@@ -13,11 +13,28 @@
             "2",
             "3"
         ],
-        "default": "yes",
+        "default": true,
         "sourcetag": "Bing",
         "logo": "bing_maps.png",
         "logo_url": "http://www.bing.com/maps",
         "terms_url": "http://opengeodata.org/microsoft-imagery-details"
+    },
+    {
+        "name": "Locator Overlay",
+        "template": "http://{t}.tiles.mapbox.com/v3/openstreetmap.map-btyhiati/{z}/{x}/{y}.png",
+        "description": "Shows major features to help orient you.",
+        "overlay": true,
+        "default": true,
+        "scaleExtent": [
+            0,
+            16
+        ],
+        "subdomains": [
+            "a",
+            "b",
+            "c"
+        ],
+        "terms_url": "http://mapbox.com/tos/"
     },
     {
         "name": "MapBox Satellite",
