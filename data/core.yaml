@@ -487,6 +487,41 @@ en:
 
       You can delete a building by clicking on it to select it, then clicking the
       trash can icon or pressing the 'Delete' key.
+    relations: |
+      # Relations
+
+      A relation is a special type of feature in OpenStreetMap that groups together
+      other features. For example, two common types of relations are *route relations*,
+      which group together sections of road that belong to a specific freeway or
+      highway, and *multipolygons*, which group together several lines that define
+      a complex area (one with several pieces or holes in it like a donut).
+
+      The group of features in a relation are called *members*. In the sidebar, you can
+      see which relations a feature is a member of, and click on a relation there
+      to select the it. When the relation is selected, you can see all of its
+      members listed in the sidebar and highlighted on the map.
+
+      For the most part, iD will take care of maintaining relations automatically
+      while you edit. The main thing you should be aware of is that if you delete a
+      section of road to redraw it more accurately, you should make sure that the
+      new section is a member of the same relations as the original.
+
+      ## Editing Relations
+
+      If you want to edit relations, here are the basics.
+
+      To add a feature to a relation, select the feature, click the "+" button in the
+      "All relations" section of the sidebar, and select or type the name of the relation.
+
+      To create a new relation, select the first feature that should be a member,
+      click the "+" button in the "All relations" section, and select "New relation...".
+
+      To remove a feature from a relation, select the feature and click the trash
+      button next to the relation you want to remove it from.
+
+      You can create multipolygons with holes using the "Merge" tool. Draw two areas (inner
+      and outer), hold the Shift key and click on each of them to select them both, and then
+      click the "Merge" (+) button.
   intro:
     navigation:
       title: "Navigation"

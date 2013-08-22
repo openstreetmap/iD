@@ -54,7 +54,8 @@ iD.ui.Help = function(context) {
                 'help.imagery',
                 'help.addresses',
                 'help.inspector',
-                'help.buildings'];
+                'help.buildings',
+                'help.relations'];
 
             function one(f) { return function(x) { return f(x); }; }
             var docs = docKeys.map(one(t)).map(function(text) {
