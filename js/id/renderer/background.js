@@ -52,7 +52,10 @@ iD.Background = function(context) {
         }
 
         overlayLayers.forEach(function (d) {
-            imageryUsed.push(d.source().sourcetag || d.source().name);
+            var source = d.source();
+            if (!source.isLocatorOverlay()) {
+                imageryUsed.push(source.sourcetag || source.name);
+            }
         });
 
         if (background.showsGpxLayer()) {
