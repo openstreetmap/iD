@@ -71,6 +71,7 @@ iD.ui.PresetList = function(context) {
                 list.call(drawList, results);
             } else {
                 list.call(drawList, context.presets().defaults(geometry, 36));
+                message.text(t('inspector.choose'));
             }
         }
 
