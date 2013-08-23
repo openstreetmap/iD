@@ -39,3 +39,7 @@ development, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 iD is available under the [WTFPL](http://sam.zoy.org/wtfpl/), though obviously, if you want to dual-license
 any contributions that's cool. It includes [d3js](http://d3js.org/), which BSD-licensed.
+
+## Thank you
+
+Initial development of iD was made possible by a grant of the [Knight Foundation](http://www.mapbox.com/blog/knight-invests-openstreetmap/).
