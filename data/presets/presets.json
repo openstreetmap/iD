@@ -4527,6 +4527,11 @@
         "tags": {
             "tourism": "artwork"
         },
+        "terms": [
+            "mural",
+            "sculpture",
+            "statue"
+        ],
         "name": "Artwork"
     },
     "tourism/attraction": {

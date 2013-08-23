@@ -1872,7 +1872,7 @@
             },
             "tourism/artwork": {
                 "name": "Artwork",
-                "terms": ""
+                "terms": "mural,sculpture,statue"
             },
             "tourism/attraction": {
                 "name": "Tourist Attraction",
