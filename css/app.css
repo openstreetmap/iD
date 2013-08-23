@@ -1453,13 +1453,13 @@ input[type=number] {
     vertical-align: top;
 }
 
+.form-field .localized-wrap {
+    padding: 0 10px;
+}
+
 .form-field .localized-wrap .entry {
     position: relative;
     overflow: hidden;
-    background: #f1f1f1;
-    border: 1px solid #ccc;
-    border-width: 0;
-    border-radius: 4px;
 }
 
 .form-field .localized-wrap .entry::before {
