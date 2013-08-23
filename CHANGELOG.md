@@ -1,3 +1,17 @@
+## 1.1.5
+
+* Add amenity=ranger_station preset (1723)
+* Add terms for tourism=artwork (#1726)
+* Reduce prominence of share links, add G+
+* Default wildcard tag values to "yes" (#1715)
+* Add help topic on relations (#1708)
+* Add default "Locator Overlay" layer (#1301)
+* Refine toilet preset (#1697)
+* Change delete shortcut to ⌘⌫/Ctrl-Backspace (#1698)
+* Fix close button event binding in save dialog (#1713)
+* Fix error when deleting a triangle vertex (#1712)
+* Add support for an externally provided asset map (#1699)
+
 ## 1.1.4
 
 * Fix adding multilingual name (#1694)
