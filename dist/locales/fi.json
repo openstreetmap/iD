@@ -261,7 +261,7 @@
         "just_edited": "Muokkasit juuri OpenStreetMapia!",
         "view_on_osm": "Näytä OSM-kartalla",
         "facebook": "Jaa Facebookissa",
-        "tweet": "Twiittaa"
+        "help_html": "Muutokset tulevat näkyviin Perinteisessä karttanäkymässä muutaman minuutin kuluessa. Muissa karttanäkymissä ja -sovelluksissa ja hieman erikoisempien karttaominaisuuksien ilmestyminen kartalle voi viedä pidempään. Lue <a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>lisätietoja</a> englanniksi.\n"
     },
     "confirm": {
         "okay": "OK"
@@ -696,43 +696,58 @@
                 "name": "Osoite"
             },
             "aeroway": {
-                "name": "Kiitorata"
+                "name": "Kiitorata",
+                "terms": "kiitorata, kiitotie, lentokone, lentoonlähtörata, lentoonlähtötie, rullaustie, lentokenttätie, lentokonetie, lentokoneväylä"
             },
             "aeroway/aerodrome": {
-                "name": "Lentokenttä"
+                "name": "Lentokenttä",
+                "terms": "lentokenttä, lentoasema, terminaali, lentokone, lentoterminaali"
+            },
+            "aeroway/apron": {
+                "name": "Asemataso",
+                "terms": "asemataso, lentoterminaali, lentokenttä, lentokone, lentoasema"
             },
             "aeroway/gate": {
-                "name": "Lähtöportti"
+                "name": "Lähtöportti",
+                "terms": "lähtöportti, lentoportti, lentokenttä, lentoasema, lähtöputki, portti"
             },
             "aeroway/hangar": {
-                "name": "Lentokonehalli"
+                "name": "Lentokonehalli",
+                "terms": "hangaari, lentokonehalli, lentohalli, lentosuoja, lentokonesuoja, lentoasema, lentokenttä, lentokone"
             },
             "aeroway/helipad": {
-                "name": "Helikopterikenttä"
+                "name": "Helikopterikenttä",
+                "terms": "helikopterikenttä, helikopteri"
             },
             "aeroway/runway": {
-                "name": "Kiitorata"
+                "name": "Kiitorata",
+                "terms": "kiitorata, kiitotie, lentokone, lentoonlähtörata, lentoonlähtötie"
             },
             "aeroway/taxiway": {
-                "name": "Rullaustie"
+                "name": "Rullaustie",
+                "terms": "rullaustie, lentokone, lentokenttä, lentoasema, siirtymätie"
             },
             "aeroway/terminal": {
-                "name": "Lentokenttäterminaali"
+                "name": "Lentokenttäterminaali",
+                "terms": "lentoterminaali, lentokenttäterminaali, lentoasematerminaali, terminaali, lentokenttä, lentoasema"
             },
             "amenity": {
                 "name": "Palvelu"
             },
             "amenity/atm": {
-                "name": "Pankkiautomaatti"
+                "name": "Pankkiautomaatti",
+                "terms": "otto, pankkiautomaatti, rahannostoautomaatti, pankki"
             },
             "amenity/bank": {
-                "name": "Pankki"
+                "name": "Pankki",
+                "terms": "pankki, pankkikonttori, pankkitoimisto, pankkitoimipiste"
             },
             "amenity/bar": {
                 "name": "Baari"
             },
             "amenity/bench": {
-                "name": "Penkki"
+                "name": "Penkki",
+                "terms": "penkki, tuoli, istuin"
             },
             "amenity/bicycle_parking": {
                 "name": "Pyöräpysäköinti",
@@ -746,7 +761,8 @@
                 "name": "Kahvila"
             },
             "amenity/car_rental": {
-                "name": "Auton vuokraus"
+                "name": "Auton vuokraus",
+                "terms": "autovuokraamo, autonvuokraus, auton vuokraus, auto, vuokra-auto"
             },
             "amenity/car_sharing": {
                 "name": "KImppakyyti"
@@ -755,11 +771,17 @@
                 "name": "Autopesula",
                 "terms": "autopesu, automaattipesu, pesula, pesukone, pesuhalli, auto, autot"
             },
+            "amenity/childcare": {
+                "name": "Esikoulu",
+                "terms": "esikoulu, eskari, leikkikoulu"
+            },
             "amenity/cinema": {
-                "name": "Elokuvateatteri"
+                "name": "Elokuvateatteri",
+                "terms": "leffa, leffateatteri, elokuva, elokuvateatteri"
             },
             "amenity/college": {
-                "name": "Ammattikorkeakoulu"
+                "name": "Ammattikorkeakoulu",
+                "terms": "college, ammattikorkeakoulu, amk"
             },
             "amenity/courthouse": {
                 "name": "Käräjäoikeus",
@@ -775,34 +797,42 @@
                 "name": "Pikaruokaravintola"
             },
             "amenity/fire_station": {
-                "name": "Paloasema"
+                "name": "Paloasema",
+                "terms": "paloasema, palokeskus, vpk, vapaapalokunta"
             },
             "amenity/fountain": {
                 "name": "Suihkulähde"
             },
             "amenity/fuel": {
-                "name": "Huoltoasema"
+                "name": "Huoltoasema",
+                "terms": "huoltoasema, bensa-asema, liikennemyymälä, huoltamo, bensis, tankkausasema, bensapiste, tankkauspiste, kylmäasema"
             },
             "amenity/grave_yard": {
-                "name": "Hautausmaa"
+                "name": "Hautausmaa",
+                "terms": "hautausmaa, kalmisto, luutarha"
             },
             "amenity/hospital": {
-                "name": "Sairaala"
+                "name": "Sairaala",
+                "terms": "sairaala, terveyskeskus, hoitokoti, hoitolaitos, klinikka, parantola, sanatorio, lasaretti, hospitaali"
             },
             "amenity/kindergarten": {
-                "name": "Päiväkoti"
+                "name": "Päiväkoti",
+                "terms": "päiväkoti, päivähoito, lastenhoito, lastenvahti"
             },
             "amenity/library": {
-                "name": "Kirjasto"
+                "name": "Kirjasto",
+                "terms": "kirjasto, kirjalainaamo, kirjanlainaus, kirjan lainaus, kirja, kirjan lainaaminen"
             },
             "amenity/marketplace": {
                 "name": "Tori"
             },
             "amenity/parking": {
-                "name": "Pysäköintialue"
+                "name": "Pysäköintialue",
+                "terms": "pysäköinti, parkkipaikka, pysäköintipaikka, parkki, pysäköintitalo, parkkitalo"
             },
             "amenity/pharmacy": {
-                "name": "Apteekki"
+                "name": "Apteekki",
+                "terms": "apteekki, lääke, lääkkeet, lääkemyymälä, lääkkeenmyynti, farmasia, farmaseutti"
             },
             "amenity/place_of_worship": {
                 "name": "Rukoilupaikka"
@@ -823,10 +853,12 @@
                 "name": "Poliisiasema"
             },
             "amenity/post_box": {
-                "name": "Postilaatikko"
+                "name": "Postilaatikko",
+                "terms": "postilaatikko, postinlähetys, oranssi laatikko, kirjeenlähetys, posti, kirje"
             },
             "amenity/post_office": {
-                "name": "Postitoimisto"
+                "name": "Postitoimisto",
+                "terms": "postitoimisto, postikonttori, posti, kirje, paketti, postipiste"
             },
             "amenity/pub": {
                 "name": "Pubi"
@@ -860,7 +892,8 @@
                 "name": "Yliopisto"
             },
             "amenity/waste_basket": {
-                "name": "Roskakori"
+                "name": "Roskakori",
+                "terms": "roska-astia, roskis, roskapönttö, jäte-astia, kierrätyspiste, kierrätyslaatikko, roska, kierrätys, jäte, jätteet"
             },
             "area": {
                 "name": "Alue"
@@ -973,7 +1006,8 @@
                 "name": "Pihakatu"
             },
             "highway/mini_roundabout": {
-                "name": "Pienliikenneympyrä"
+                "name": "Pieni liikenneympyrä",
+                "terms": "pienliikenneympyrä, pieni liikenneympyrä, liikenneympyrä, ympyrä"
             },
             "highway/motorway": {
                 "name": "Moottoritie"

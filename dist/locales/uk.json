@@ -261,10 +261,9 @@
     "success": {
         "edited_osm": "Відредаговано OSM!",
         "just_edited": "Ви щойно відредагували мапу OpenStreetMap!",
-        "view_on_osm": "Подивтись в OSM",
+        "view_on_osm": "Подивитись в OSM",
         "facebook": "Поділитись на Facebook",
-        "tweet": "у Твітер",
-        "help_html": "Ваші зміни повинні з’явитись в «Стандартному» шарі через кілька хвилин. Зміни інших шарів, та певниї об’єктів,\nможуть відбуватись довше (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>подробиці</a>).\n"
+        "help_html": "Ваші зміни повинні з’явитись в «Стандартному» шарі за кілька хвилин. Зміни інших шарів та певних об’єктів\nможуть відбуватись довше (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>подробиці</a>).\n"
     },
     "confirm": {
         "okay": "Готово"
@@ -520,8 +519,17 @@
             "fee": {
                 "label": "Плата"
             },
+            "fire_hydrant/type": {
+                "label": "Тип"
+            },
             "fixme": {
                 "label": "Потребує виправлення"
+            },
+            "generator/source": {
+                "label": "Джерело"
+            },
+            "generator/type": {
+                "label": "Тип"
             },
             "highway": {
                 "label": "Тип"
@@ -1035,6 +1043,9 @@
                 "name": "Станція швидкої медичної допомоги",
                 "terms": "перша допомога"
             },
+            "emergency/fire_hydrant": {
+                "name": "Пожежний гідрант"
+            },
             "emergency/phone": {
                 "name": "Телефон виклику екстрених служб"
             },
@@ -1422,6 +1433,9 @@
             },
             "power": {
                 "name": "Енергетика"
+            },
+            "power/generator": {
+                "name": "Електростанція"
             },
             "power/line": {
                 "name": "Лінія електропередач"

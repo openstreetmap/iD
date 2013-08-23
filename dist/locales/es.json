@@ -228,7 +228,7 @@
         "role": "Rol",
         "choose": "Selecciona tipo de elemento",
         "results": "{n} resultados para {search}",
-        "reference": "Ver en la wiki de OpenStreetMap",
+        "reference": "Ver más información en la wiki de OpenStreetMap",
         "back_tooltip": "Cambiar tipo de elemento",
         "remove": "Eliminar",
         "search": "Buscar",
@@ -263,7 +263,7 @@
         "just_edited": "¡Acaba de editar OpenStreetMap!",
         "view_on_osm": "Ver en OSM",
         "facebook": "Compartir en Facebook",
-        "tweet": "Tweet"
+        "help_html": "Tus cambios deberán aparecer en la capa \"Estándar\" en unos pocos minutos. Otras capas, y algunos determinados elementos del mapa, pueden tomar más tiempo en actualizarse (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>más detalles acerca de esto</a>).\n"
     },
     "confirm": {
         "okay": "De acuerdo"
@@ -692,6 +692,9 @@
             "surface": {
                 "label": "Superficie"
             },
+            "toilets/disposal": {
+                "label": "Disponible"
+            },
             "tourism": {
                 "label": "Tipo"
             },
@@ -747,16 +750,20 @@
                 "name": "Puerta de embarque"
             },
             "aeroway/hangar": {
-                "name": "Hangar"
+                "name": "Hangar",
+                "terms": "hangar"
             },
             "aeroway/helipad": {
-                "name": "Helipuerto"
+                "name": "Helipuerto",
+                "terms": "helisuperficie,plataforma para helicópteros,helipad"
             },
             "aeroway/runway": {
-                "name": "Pista de aeropuerto"
+                "name": "Pista de aeropuerto",
+                "terms": "pista,pista de aterrizaje,pista de despegue"
             },
             "aeroway/taxiway": {
-                "name": "Pista de rodaje"
+                "name": "Pista de rodaje",
+                "terms": "pista de carreteo,pista de rodaje,pista de taxeo,calle de rodaje"
             },
             "aeroway/terminal": {
                 "name": "Terminal de aeropuerto"
@@ -765,10 +772,12 @@
                 "name": "Servicios"
             },
             "amenity/atm": {
-                "name": "Cajero automático"
+                "name": "Cajero automático",
+                "terms": "cajero automático,redbanc,ATM,ATH"
             },
             "amenity/bank": {
-                "name": "Banco"
+                "name": "Banco",
+                "terms": "banco,banca,bancario,cooperativa de ahorro y crédito,cooperativa de crédito,SACCO"
             },
             "amenity/bar": {
                 "name": "Bar"
@@ -801,7 +810,8 @@
                 "terms": "canguro,cuidadora"
             },
             "amenity/cinema": {
-                "name": "Cine"
+                "name": "Cine",
+                "terms": "cinematógrafo,cine"
             },
             "amenity/college": {
                 "name": "Universidad",
@@ -820,7 +830,8 @@
                 "terms": "embajada,consulado,consul"
             },
             "amenity/fast_food": {
-                "name": "Comida rápida"
+                "name": "Comida rápida",
+                "terms": "comida rápida,platos preparados"
             },
             "amenity/fire_station": {
                 "name": "Parque de bomberos",
@@ -842,7 +853,8 @@
                 "terms": "clínica, sanatorio, policlínica, manicomio,hospital"
             },
             "amenity/kindergarten": {
-                "name": "Jardín de infancia"
+                "name": "Jardín de infancia",
+                "terms": "parvulario,jardín de infancia,jardín infantil,kínder,educación inicial,parvulos,jardín de infantes,educación preescolar"
             },
             "amenity/library": {
                 "name": "Biblioteca",
@@ -886,7 +898,8 @@
                 "name": "Buzón de correos"
             },
             "amenity/post_office": {
-                "name": "Oficina de correos"
+                "name": "Oficina de correos",
+                "terms": "correos,casa de correos,oficina de correos,oficina postal"
             },
             "amenity/pub": {
                 "name": "Pub",
@@ -955,14 +968,16 @@
                 "name": "Zanja"
             },
             "barrier/entrance": {
-                "name": "Entrada"
+                "name": "Entrada",
+                "terms": "puerta, portal, vestíbulo, umbral, soportal, pórtico, abertura, acceso, boca, embocadura, agujero, hueco, entrada, llegada"
             },
             "barrier/fence": {
                 "name": "Cerca",
                 "terms": "valla, vallado, cercado, seto, muro, empalizada, barrera, tapia, verja, estacada, alambrada"
             },
             "barrier/gate": {
-                "name": "Puerta"
+                "name": "Puerta",
+                "terms": "portón, abertura, pórtico, portillo, cancela, entrada, salida, paso, puerta"
             },
             "barrier/hedge": {
                 "name": "Seto"
@@ -1151,7 +1166,8 @@
                 "name": "Mojón"
             },
             "historic/castle": {
-                "name": "Castillo"
+                "name": "Castillo",
+                "terms": "castillo,castro,fuerte"
             },
             "historic/memorial": {
                 "name": "Monumento"
@@ -1210,7 +1226,8 @@
                 "name": "Huerta"
             },
             "landuse/quarry": {
-                "name": "Cantera"
+                "name": "Cantera",
+                "terms": "cantera"
             },
             "landuse/residential": {
                 "name": "Urbano"
@@ -1235,7 +1252,8 @@
                 "name": "Campo de golf"
             },
             "leisure/marina": {
-                "name": "Marina"
+                "name": "Marina",
+                "terms": "marina"
             },
             "leisure/park": {
                 "name": "Parque"
@@ -1268,10 +1286,15 @@
                 "name": "Grada"
             },
             "leisure/stadium": {
-                "name": "Estadio"
+                "name": "Estadio",
+                "terms": "estadio,cancha"
             },
             "leisure/swimming_pool": {
                 "name": "Piscina"
+            },
+            "leisure/track": {
+                "name": "Pista de carreras",
+                "terms": "circuito, pista"
             },
             "line": {
                 "name": "Línea"
@@ -1286,7 +1309,8 @@
                 "name": "Cortafuegos"
             },
             "man_made/lighthouse": {
-                "name": "Faro"
+                "name": "Faro",
+                "terms": "faro"
             },
             "man_made/pier": {
                 "name": "Embarcadero"
@@ -1373,7 +1397,8 @@
                 "name": "Lugar"
             },
             "place/city": {
-                "name": "Ciudad"
+                "name": "Ciudad",
+                "terms": "urbe, capital, metrópoli, ciudad, núcleo urbano, localidad, villa"
             },
             "place/hamlet": {
                 "name": "Aldea",
@@ -1400,6 +1425,10 @@
             },
             "power": {
                 "name": "Electricidad"
+            },
+            "power/generator": {
+                "name": "Generador de energía",
+                "terms": "energía, potencia, electricidad, subestación "
             },
             "power/line": {
                 "name": "Línea de alta tensión"
@@ -1674,7 +1703,8 @@
                 "name": "Vista panorámica"
             },
             "tourism/zoo": {
-                "name": "Zoo"
+                "name": "Zoo",
+                "terms": "zoo, zoológico "
             },
             "type/boundary": {
                 "name": "Límite"
@@ -1729,10 +1759,12 @@
                 "name": "Otro"
             },
             "waterway": {
-                "name": "Vía fluvial"
+                "name": "Vía fluvial",
+                "terms": "canal, cauce, acueducto, fluvial"
             },
             "waterway/canal": {
-                "name": "Canal"
+                "name": "Canal",
+                "terms": "canaleta, canaleja, canalón, canalizo, caño, cañería, reguero, reguera, tubería, conducto, caz, cacera, zanja, acequia, cauce, cloaca, acueducto, canal"
             },
             "waterway/dam": {
                 "name": "Presa"
@@ -1747,10 +1779,12 @@
                 "name": "Río"
             },
             "waterway/riverbank": {
-                "name": "Ribera de un río"
+                "name": "Ribera de un río",
+                "terms": "borde, orilla, ribazo, riba, ribera"
             },
             "waterway/stream": {
-                "name": "Arroyo"
+                "name": "Arroyo",
+                "terms": "torrente, riachuelo, arroyuelo, regato, reguero, torrentera, rivera, corriente, afluente, brazo, toma, río, arroyo"
             },
             "waterway/weir": {
                 "name": "Vertedero"

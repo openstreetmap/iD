@@ -260,8 +260,7 @@
         "edited_osm": "Acabou de editar o OSM!",
         "just_edited": "Acaba de editar o OpenStreetMap!",
         "view_on_osm": "Ver em OSM",
-        "facebook": "Partilhar no Facebook",
-        "tweet": "Partilhar no Twitter"
+        "facebook": "Partilhar no Facebook"
     },
     "confirm": {
         "okay": "OK"

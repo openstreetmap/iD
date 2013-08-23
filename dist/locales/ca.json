@@ -263,7 +263,6 @@
         "just_edited": "Acabes d'editar l'OpenStreetMap!",
         "view_on_osm": "Mostra-ho a OSM",
         "facebook": "Comparteix a Facebook",
-        "tweet": "Tuiteja-ho",
         "help_html": "Els canvis haurien d'aparèxier a la capa \"Estàndard\" en pocs minuts. Altres capes i algunes característiques, poden trigar més temps.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detalls</a>).\n"
     },
     "confirm": {
@@ -692,6 +691,9 @@
             },
             "surface": {
                 "label": "Superfície"
+            },
+            "toilets/disposal": {
+                "label": "Contenidor"
             },
             "tourism": {
                 "label": "Tipus"

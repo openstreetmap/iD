@@ -254,8 +254,7 @@
         "edited_osm": "Redigerat OSM!",
         "just_edited": "Du har nu redigerat OpenStreetMap!",
         "view_on_osm": "Visa på OSM",
-        "facebook": "Dela på Facebook",
-        "tweet": "Tweet"
+        "facebook": "Dela på Facebook"
     },
     "confirm": {
         "okay": "Ok"

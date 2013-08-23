@@ -167,9 +167,11 @@
         }
     },
     "undo": {
+        "tooltip": "Poništiti: {action}",
         "nothing": "Ništa za poništiti."
     },
     "redo": {
+        "tooltip": "Obnoviti: {action}",
         "nothing": "Ništa za vratiti."
     },
     "tooltip_keyhint": "Prečica:",
@@ -261,7 +263,7 @@
         "just_edited": "Upravo ste uredili OpenStreetMap kartu!",
         "view_on_osm": "Pogledajte na OSM-u",
         "facebook": "Podijeliti na Facebooku",
-        "tweet": "Podijeliti na Twitteru"
+        "help_html": "Vaše promjene bi se trebale pojaviti u \"standardnom\" sloju za nekoliko minuta. Drugi slojevi, i određene značajke, mogu uzeti više vremena\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>details</a>).\n"
     },
     "confirm": {
         "okay": "Uredu"
@@ -517,8 +519,20 @@
             "fee": {
                 "label": "Provizija"
             },
+            "fire_hydrant/type": {
+                "label": "Vrsta"
+            },
             "fixme": {
                 "label": "Popravi me"
+            },
+            "generator/method": {
+                "label": "Način"
+            },
+            "generator/source": {
+                "label": "Izvor"
+            },
+            "generator/type": {
+                "label": "Vrsta"
             },
             "highway": {
                 "label": "Vrsta"
@@ -677,6 +691,9 @@
             },
             "surface": {
                 "label": "Površina"
+            },
+            "toilets/disposal": {
+                "label": "Način odlaganja otpada iz toaleta"
             },
             "tourism": {
                 "label": "Vrsta"
@@ -1058,6 +1075,10 @@
                 "name": "Stanica hitne pomoći",
                 "terms": "stanica hitne pomoći,hitna pomoć,hitna medicinska pomoć"
             },
+            "emergency/fire_hydrant": {
+                "name": "Hidrant za požar",
+                "terms": "hidrant,hidrant za požar"
+            },
             "emergency/phone": {
                 "name": "Telefon za hitne slučajeve",
                 "terms": "telefon za hitne slučajeve,hitna telefonska linija"
@@ -1374,6 +1395,10 @@
                 "name": "Bazen",
                 "terms": "bazen,bazen za plivanje,plivački bazen"
             },
+            "leisure/track": {
+                "name": "Staza za utrku",
+                "terms": "staza za utrku,trkaća staza"
+            },
             "line": {
                 "name": "Linija",
                 "terms": "linija"
@@ -1541,6 +1566,10 @@
             "power": {
                 "name": "Energija",
                 "terms": "enegija,napajanje"
+            },
+            "power/generator": {
+                "name": "Generator električne energije",
+                "terms": "generator el. energije,generator "
             },
             "power/line": {
                 "name": "Energetski vod",

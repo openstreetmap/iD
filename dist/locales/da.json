@@ -241,6 +241,8 @@
         "title": "Baggrund",
         "description": "Baggrundsindstillinger",
         "percent_brightness": "{opacity}% lysstyrke",
+        "custom": "Brugerdefineret",
+        "custom_prompt": "Angiv en tile skabelon. Valide værdier er {z}, {x}, {y} for Z/X/Y skemaer og {u} for quadtile skema. ",
         "fix_misalignment": "Ret fejljustering",
         "reset": "nulstil"
     },
@@ -263,7 +265,8 @@
         "just_edited": "Du har lige redigeret OpenStreetMap!",
         "view_on_osm": "Vis på OSM",
         "facebook": "Del på Facebook",
-        "tweet": "Tweet",
+        "twitter": "Del på Twitter",
+        "google": "Del på Google+",
         "help_html": "Dine ændringer skulle blive synlige om nogle få minutter i \"Standard\" laget. Andre lag og specielle objekter kan tage længere tid\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>mere information</a>).\n"
     },
     "confirm": {
@@ -692,6 +695,9 @@
             },
             "surface": {
                 "label": "Overflade"
+            },
+            "toilets/disposal": {
+                "label": "Bortskaffelse affald"
             },
             "tourism": {
                 "label": "Type"

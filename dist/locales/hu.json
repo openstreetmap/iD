@@ -260,8 +260,7 @@
         "edited_osm": "OSM szerkesztve!",
         "just_edited": "Szerkesztetted az OpenStreetMap-et!",
         "view_on_osm": "Megtekintés OSM-en",
-        "facebook": "Megosztás Facebookon",
-        "tweet": "Twittelés"
+        "facebook": "Megosztás Facebookon"
     },
     "confirm": {
         "okay": "Oké"

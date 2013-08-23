@@ -263,7 +263,6 @@
         "just_edited": "Práve ste upravili OpenStreetMap!",
         "view_on_osm": "Zobraz na OSM",
         "facebook": "Zdieľaj na Facebooku",
-        "tweet": "Tweetuj",
         "help_html": "Vaše zmeny by sa mali objaviť na \"Základnej\" vrstve v priebehu niekoľkých minút. Ostatným vrstvám a niektorým objektom to môže trvať dlhšie.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detaily</a>).\n"
     },
     "confirm": {

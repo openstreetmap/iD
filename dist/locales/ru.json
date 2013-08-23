@@ -250,8 +250,7 @@
         "edited_osm": "ОСМ отредактирована!",
         "just_edited": "Вы только что отредактировали карту OpenStreetMap!",
         "view_on_osm": "Посмотреть в OSM",
-        "facebook": "Поделиться на Facebook",
-        "tweet": "Затвитить"
+        "facebook": "Поделиться на Facebook"
     },
     "confirm": {
         "okay": "Ок"

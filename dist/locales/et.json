@@ -5,19 +5,25 @@
             "description": "Lisa kaardile parke, hooneid, järvi ja muid alasid."
         },
         "add_line": {
-            "title": "Joon"
+            "title": "Joon",
+            "description": "Lisa teid, tänavaid, jalgteid, ojasid ja teisi jooni kaardile."
         },
         "add_point": {
             "title": "Punkt",
             "description": "Lisa kaardile restorane, monumente, postkaste ja muid punkte.",
             "tail": "Klõpsa kaardil punkti lisamiseks."
+        },
+        "browse": {
+            "title": "Sirvi",
+            "description": "Nihuta ja suumi kaarti."
         }
     },
     "operations": {
         "add": {
             "annotation": {
                 "point": "Punkt lisatud.",
-                "vertex": "Joonele lisatud punkt."
+                "vertex": "Joonele lisatud punkt.",
+                "relation": "Relatsioon lisatud."
             }
         },
         "start": {
@@ -34,6 +40,9 @@
         },
         "cancel_draw": {
             "annotation": "Joonistamine katkestatud."
+        },
+        "change_role": {
+            "annotation": "Relatsiooni liikme roll on muudetud."
         },
         "change_tags": {
             "annotation": "Muudetud silte."
@@ -52,6 +61,7 @@
             "not_closed": "Seda ei saa teha ringikujuliseks kuna see ei ole silmus."
         },
         "orthogonalize": {
+            "title": "Nurgad täisnurkseks",
             "description": "Täisnurgasta need nurgad.",
             "key": "Q",
             "annotation": {
@@ -72,10 +82,18 @@
                 "multiple": "{n} objekti kustutatud."
             }
         },
+        "add_member": {
+            "annotation": "Lisatud relatsiooni liige."
+        },
+        "delete_member": {
+            "annotation": "Relatsiooni liige kustutatud."
+        },
         "connect": {
             "annotation": {
                 "point": "Joon ühendatud punktiga.",
-                "vertex": "Joon ühendatud teise joonega."
+                "vertex": "Joon ühendatud teise joonega.",
+                "line": "Tee on ühendatud jooneks.",
+                "area": "Tee on ühendatud alaks."
             }
         },
         "disconnect": {
@@ -112,7 +130,10 @@
             }
         },
         "reverse": {
-            "key": "V"
+            "title": "Pööra",
+            "description": "Pööra tee vastassuunda.",
+            "key": "V",
+            "annotation": "Tee on pööratud."
         },
         "split": {
             "title": "Tükelda",
@@ -139,6 +160,9 @@
     "report_a_bug": "teata veast",
     "commit": {
         "title": "Salvesta muudatused",
+        "message_label": "Salvestuse kommentaar",
+        "upload_explanation": "Su salvestatavad muudatused on nähtaval kõikidel kaartidel mis kasutavad OpenStreetMap-i andmeid.",
+        "upload_explanation_with_user": "Su kasutajana {user} salvestatavad muudatused on nähtaval kõikidel kaartidel, mis kasutavad OpenStreetMap-i andmeid.",
         "save": "Salvesta",
         "cancel": "Tühista",
         "warnings": "Hoiatused",
@@ -152,14 +176,19 @@
     "inspector": {
         "show_more": "Näita rohkem",
         "all_tags": "Kõik sildid",
+        "all_relations": "Kõik relatsioonid",
+        "new_relation": "Uus relatsioon...",
         "results": "{n} tulemust otsingule {search}",
         "remove": "Eemalda",
-        "search": "Otsi"
+        "search": "Otsi",
+        "feature_list": "Otsi objekte",
+        "edit": "Muuda objekti"
     },
     "background": {
         "title": "Taust",
         "description": "Tausta seaded",
-        "percent_brightness": "{opacity}% heledus"
+        "percent_brightness": "{opacity}% heledus",
+        "fix_misalignment": "Korrigeeri nihet"
     },
     "save": {
         "title": "Salvesta",
@@ -215,6 +244,12 @@
     },
     "presets": {
         "categories": {
+            "category-landuse": {
+                "name": "Maakasutus"
+            },
+            "category-path": {
+                "name": "Rada (path)"
+            },
             "category-rail": {
                 "name": "Raudtee"
             },
@@ -226,6 +261,9 @@
             }
         },
         "fields": {
+            "access": {
+                "label": "Ligipääs"
+            },
             "address": {
                 "label": "Aadress",
                 "placeholders": {
@@ -236,8 +274,17 @@
                     "postcode": "Postiindeks"
                 }
             },
+            "aeroway": {
+                "label": "Tüüp"
+            },
+            "amenity": {
+                "label": "Tüüp"
+            },
             "atm": {
                 "label": "Pangaautomaat"
+            },
+            "bicycle_parking": {
+                "label": "Tüüp"
             },
             "building": {
                 "label": "Hoone"
@@ -260,6 +307,12 @@
             "collection_times": {
                 "label": "Tühjendusajad"
             },
+            "construction": {
+                "label": "Tüüp"
+            },
+            "crossing": {
+                "label": "Tüüp"
+            },
             "cuisine": {
                 "label": "Köök"
             },
@@ -270,7 +323,8 @@
                 "label": "Kõrgus merepinnast"
             },
             "fax": {
-                "label": "Faks"
+                "label": "Faks",
+                "placeholder": "+372 123 4567"
             },
             "iata": {
                 "label": "IATA"
@@ -284,6 +338,9 @@
                     "wired": "Juhtmega",
                     "terminal": "Terminal"
                 }
+            },
+            "lanes": {
+                "label": "Sõiduread"
             },
             "levels": {
                 "label": "Korruseid"
@@ -338,13 +395,17 @@
                 "label": "Torni tüüp"
             },
             "website": {
-                "label": "Veebileht"
+                "label": "Veebileht",
+                "placeholder": "http://näidis24.ee/"
             },
             "wikipedia": {
                 "label": "Wikipeedia"
             }
         },
         "presets": {
+            "address": {
+                "name": "Aadress"
+            },
             "aeroway/aerodrome": {
                 "name": "Lennujaam"
             },
@@ -377,6 +438,9 @@
             },
             "amenity/cafe": {
                 "name": "Kohvik"
+            },
+            "amenity/car_rental": {
+                "name": "Autorent"
             },
             "amenity/car_wash": {
                 "name": "Autopesula"
@@ -468,6 +532,9 @@
             "amenity/waste_basket": {
                 "name": "Prügikast"
             },
+            "area": {
+                "name": "Ala"
+            },
             "barrier": {
                 "name": "Barjäär"
             },
@@ -528,6 +595,9 @@
             "highway/footway": {
                 "name": "Kõnnitee"
             },
+            "highway/living_street": {
+                "name": "Majadevaheline tänav"
+            },
             "highway/mini_roundabout": {
                 "name": "Mini-ringtee"
             },
@@ -536,6 +606,9 @@
             },
             "highway/path": {
                 "name": "Rada"
+            },
+            "highway/pedestrian": {
+                "name": "Jalajäija"
             },
             "highway/primary": {
                 "name": "Põhimaantee"
@@ -642,6 +715,9 @@
             "leisure/swimming_pool": {
                 "name": "Ujumisbassein"
             },
+            "line": {
+                "name": "Joon"
+            },
             "man_made/cutline": {
                 "name": "Siht"
             },
@@ -729,6 +805,9 @@
             "place/village": {
                 "name": "Küla"
             },
+            "point": {
+                "name": "Punkt"
+            },
             "power": {
                 "name": "Elekter"
             },
@@ -773,6 +852,12 @@
             },
             "railway/tram": {
                 "name": "Tramm"
+            },
+            "relation": {
+                "name": "Relatsioon"
+            },
+            "route/ferry": {
+                "name": "Praamitee"
             },
             "shop": {
                 "name": "Pood"
@@ -911,6 +996,9 @@
             },
             "tourism/zoo": {
                 "name": "Loomaaed"
+            },
+            "type/boundary/administrative": {
+                "name": "Administratiivpiir"
             },
             "waterway/canal": {
                 "name": "Kanal"

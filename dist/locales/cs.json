@@ -263,7 +263,6 @@
         "just_edited": "Právě jste upravil OpenStreetMap!",
         "view_on_osm": "Zobrazit na OSM",
         "facebook": "Sdílet na Facebooku",
-        "tweet": "Tweet",
         "help_html": "Vaše úpravy by se obvykle měly objevit na \"Standardní\" vrstvě během několika minut. U některých objektů a ostatních vrstev to může trvat déle⏎\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detaily anglicky</a>).⏎\n"
     },
     "confirm": {
@@ -810,32 +809,40 @@
                 "terms": "kino,film,cinema,multikino,bio,biograf,kinematograf"
             },
             "amenity/college": {
-                "name": "College"
+                "name": "College",
+                "terms": "Vysoká škola,univerzita,akademie"
             },
             "amenity/courthouse": {
-                "name": "Soud"
+                "name": "Soud",
+                "terms": "soud,soudní budova,soudní dvůr"
             },
             "amenity/drinking_water": {
                 "name": "Pitná voda",
                 "terms": "pítko,fontána,fontánka"
             },
             "amenity/embassy": {
-                "name": "Velvyslanectví"
+                "name": "Velvyslanectví",
+                "terms": "velvyslanectví,vyslanectví,ambasáda,zastupitelství"
             },
             "amenity/fast_food": {
-                "name": "Rychlé občerstvení"
+                "name": "Rychlé občerstvení",
+                "terms": "rychlé občerstvení"
             },
             "amenity/fire_station": {
-                "name": "Hasiči"
+                "name": "Hasiči",
+                "terms": "požární stanice,hasičská stanice"
             },
             "amenity/fountain": {
-                "name": "Fontána, vodotrysk"
+                "name": "Fontána, vodotrysk",
+                "terms": "vodotrysk,fontána,fontánka,kašna"
             },
             "amenity/fuel": {
-                "name": "Čerpací stanice"
+                "name": "Čerpací stanice",
+                "terms": "benzinová pumpa,čerpací stanice,pumpa"
             },
             "amenity/grave_yard": {
-                "name": "Pohřebiště"
+                "name": "Pohřebiště",
+                "terms": "hřbitov,pohřebiště"
             },
             "amenity/hospital": {
                 "name": "Nemocnice",
@@ -846,16 +853,20 @@
                 "terms": "jesle,školka,kindergarten,předškolní"
             },
             "amenity/library": {
-                "name": "Knihovna"
+                "name": "Knihovna",
+                "terms": "knihovna"
             },
             "amenity/marketplace": {
-                "name": "Trhoviště"
+                "name": "Trhoviště",
+                "terms": "tržiště,trh"
             },
             "amenity/parking": {
-                "name": "Parkoviště"
+                "name": "Parkoviště",
+                "terms": "parkoviště,parkování,parkovací stání"
             },
             "amenity/pharmacy": {
-                "name": "Lékárna"
+                "name": "Lékárna",
+                "terms": "lékárna,apatyka"
             },
             "amenity/place_of_worship": {
                 "name": "Chrám",
@@ -886,10 +897,12 @@
                 "terms": "schránka,poštovní schránka,schránka na dopisy"
             },
             "amenity/post_office": {
-                "name": "Pošta"
+                "name": "Pošta",
+                "terms": "pošta,poštovní úřad,hlavní pošta"
             },
             "amenity/pub": {
-                "name": "Hospoda"
+                "name": "Hospoda",
+                "terms": "hospoda,hostinec,hospůdka,pivnice,výčep,lokál"
             },
             "amenity/restaurant": {
                 "name": "Restaurace",
@@ -900,14 +913,16 @@
                 "terms": "univerzita,universita,fakulta,vysoká škola,univerzitní,universitní,katedra,ústav,college"
             },
             "amenity/swimming_pool": {
-                "name": "Plavecký bazén"
+                "name": "Plavecký bazén",
+                "terms": "koupaliště,bazén,plovárna"
             },
             "amenity/taxi": {
                 "name": "Stanoviště taxi",
                 "terms": "taxi,taxi stání,drožka"
             },
             "amenity/telephone": {
-                "name": "Telefon"
+                "name": "Telefon",
+                "terms": "telefon"
             },
             "amenity/theatre": {
                 "name": "Divadlo",
@@ -930,32 +945,40 @@
                 "terms": "popelnice,kontejner,odpadkový koš,odpadky"
             },
             "area": {
-                "name": "Plocha"
+                "name": "Plocha",
+                "terms": "území,oblast,plocha,prostor"
             },
             "barrier": {
-                "name": "Zábrana"
+                "name": "Zábrana",
+                "terms": "zábrana,ohrada,bariéra"
             },
             "barrier/block": {
-                "name": "Masivní blok"
+                "name": "Masivní blok",
+                "terms": "betonový blok,beton,zátaras,překážka"
             },
             "barrier/bollard": {
-                "name": "Sloupek"
+                "name": "Sloupek",
+                "terms": "patník,sloupek"
             },
             "barrier/cattle_grid": {
-                "name": "Přejezdový rošt"
+                "name": "Přejezdový rošt",
+                "terms": "Mříž proti pohybu dobytka,mříž,příkop,krávy"
             },
             "barrier/city_wall": {
                 "name": "Hradby",
                 "terms": "hradby"
             },
             "barrier/cycle_barrier": {
-                "name": "Zábrana proti kolům"
+                "name": "Zábrana proti kolům",
+                "terms": "zábrana pro cyklisty"
             },
             "barrier/ditch": {
-                "name": "Příkop"
+                "name": "Příkop",
+                "terms": "příkop,járek,jáma,strouha,škarpa,stoka"
             },
             "barrier/entrance": {
-                "name": "Vchod"
+                "name": "Vchod",
+                "terms": "vstup,vchod,přístup,vjezd"
             },
             "barrier/fence": {
                 "name": "Plot",
@@ -966,10 +989,12 @@
                 "terms": "brána"
             },
             "barrier/hedge": {
-                "name": "Živý plot"
+                "name": "Živý plot",
+                "terms": "živý plot,keříky,křoví,okrasný plot"
             },
             "barrier/kissing_gate": {
-                "name": "Turniket"
+                "name": "Turniket",
+                "terms": "Zábrana pro dobytek,krávy"
             },
             "barrier/lift_gate": {
                 "name": "Závora",
@@ -980,41 +1005,67 @@
                 "terms": "opěrná zeď"
             },
             "barrier/stile": {
-                "name": "Schůdky přes ohradu"
+                "name": "Schůdky přes ohradu",
+                "terms": "schůdky,žebřík"
             },
             "barrier/toll_booth": {
-                "name": "Mýtná brána"
+                "name": "Mýtná brána",
+                "terms": "budka pro výběr mýta,mýtnice,výběr mýta,mýto,myto,poplatek,vstupné,kasa,pokladna"
             },
             "barrier/wall": {
                 "name": "Zeď",
                 "terms": "zděný plot, zeď"
             },
             "boundary/administrative": {
-                "name": "Administrativní hranice"
+                "name": "Administrativní hranice",
+                "terms": "administrativní hranice,stát,kraj,okres"
             },
             "building": {
                 "name": "Budova",
                 "terms": "budova"
             },
             "building/apartments": {
-                "name": "Byty"
+                "name": "Byty",
+                "terms": "bytovka,obytná budova,panelák,věžák,barák,činžák"
+            },
+            "building/commercial": {
+                "name": "Obchodní budova",
+                "terms": "Obchody,firmy,firma,prodej,podnik,podniky,kanceláře"
             },
             "building/entrance": {
                 "name": "Vchod",
                 "terms": "vchod"
             },
+            "building/garage": {
+                "name": "Garáž",
+                "terms": "garáž,garáže,parkování,kryté parkování"
+            },
             "building/house": {
                 "name": "Dům",
                 "terms": "dům"
+            },
+            "building/hut": {
+                "name": "Chata",
+                "terms": "chatka,dřevěnice"
+            },
+            "building/industrial": {
+                "name": "Průmyslová budova",
+                "terms": "průmyslová budova,industriální,výroba"
+            },
+            "building/residential": {
+                "name": "Obytná budova",
+                "terms": "obytná budova,ubytování,bývání,byt"
             },
             "emergency/ambulance_station": {
                 "name": "Zdravotní pohotovost"
             },
             "emergency/phone": {
-                "name": "Tísňový telefon"
+                "name": "Tísňový telefon",
+                "terms": "nouzový telefon,SOS,tísňová linka"
             },
             "entrance": {
-                "name": "Vchod"
+                "name": "Vchod",
+                "terms": "vchod,východ,únikový východ,brána,dveře,vrata"
             },
             "highway": {
                 "name": "Pozemní komunikace",
@@ -1157,53 +1208,68 @@
                 "terms": "historické místo"
             },
             "historic/archaeological_site": {
-                "name": "Archeologické naleziště"
+                "name": "Archeologické naleziště",
+                "terms": "archeologické naleziště,vykopávky,archeologický průzkum"
             },
             "historic/boundary_stone": {
-                "name": "Hraniční káme"
+                "name": "Hraniční káme",
+                "terms": "hraniční kámen,hranice,značka"
             },
             "historic/castle": {
-                "name": "Hrad, zámek"
+                "name": "Hrad, zámek",
+                "terms": "hradiště,zámek,král,sídlo,ruina,zřícenina"
             },
             "historic/memorial": {
-                "name": "Památník"
+                "name": "Památník",
+                "terms": "pamětihodnost,památník,pomník,hrdina"
             },
             "historic/monument": {
-                "name": "Monument"
+                "name": "Monument",
+                "terms": "pamětihodnost,památník,pomník,hrdina"
             },
             "historic/ruins": {
-                "name": "Zřícenina, ruiny"
+                "name": "Zřícenina, ruiny",
+                "terms": "zříceniny,zřícenina"
             },
             "historic/wayside_cross": {
-                "name": "Kříž"
+                "name": "Kříž",
+                "terms": "boží muka,křesťanský,kříž při cestě,krucifix"
             },
             "historic/wayside_shrine": {
-                "name": "Boží muka"
+                "name": "Boží muka",
+                "terms": "svatostánek u cesty,svatyně,svatostánek"
             },
             "landuse": {
-                "name": "Užití krajiny"
+                "name": "Užití krajiny",
+                "terms": "využití území,využití,les,louka,hora,pole"
             },
             "landuse/allotments": {
-                "name": "Zahrádky"
+                "name": "Zahrádky",
+                "terms": "zahradkářská osada,zahrádky,zahrady,zahradkářská kolonie"
             },
             "landuse/basin": {
-                "name": "Umělá vodní plocha"
+                "name": "Umělá vodní plocha",
+                "terms": "zdrž,nádrž,voda,jezero,rybník"
             },
             "landuse/cemetery": {
                 "name": "Hřbitov",
                 "terms": "hřbitov,pohřebiště"
             },
             "landuse/commercial": {
-                "name": "Obchody"
+                "name": "Obchody",
+                "terms": "obchodní,komerční"
             },
             "landuse/construction": {
-                "name": "Výstavba"
+                "name": "Výstavba",
+                "terms": "stavba,konstrukce,výstavba"
             },
             "landuse/farm": {
-                "name": "Zemědělská půda"
+                "name": "Zemědělská půda",
+                "terms": "pole,farma,dobytek,zahrady,pěstitelská plocha"
             },
             "landuse/farmyard": {
-                "name": "Farma"
+                "name": "Farma",
+                "terms": "pole,farma,dobytek,zahrady,pěstitelská plocha"
             },
             "landuse/forest": {
                 "name": "Les",
@@ -1214,110 +1280,144 @@
                 "terms": "tráva"
             },
             "landuse/industrial": {
-                "name": "Průmysl"
+                "name": "Průmysl",
+                "terms": "průmyslové,výroba,industriální"
             },
             "landuse/meadow": {
-                "name": "Louka"
+                "name": "Louka",
+                "terms": "louka,pastviny,tráva"
             },
             "landuse/orchard": {
-                "name": "Sad"
+                "name": "Sad",
+                "terms": "sad,stromy,ovoce,ovocné stromy,ovocný sad"
             },
             "landuse/quarry": {
-                "name": "Lom"
+                "name": "Lom",
+                "terms": "kamenolom,lom,důl,skála,kameny,štěrk"
             },
             "landuse/residential": {
-                "name": "Rezidenční oblast"
+                "name": "Rezidenční oblast",
+                "terms": "obytné,domy"
             },
             "landuse/retail": {
-                "name": "Obchody"
+                "name": "Obchody",
+                "terms": "obchod,maloobchodní"
             },
             "landuse/vineyard": {
-                "name": "Vinice"
+                "name": "Vinice",
+                "terms": "vinice,vinohrad,hrozny,víno"
             },
             "leisure": {
-                "name": "Volný čas"
+                "name": "Volný čas",
+                "terms": "oddech,volno,volná chvíle,odpočinek,volný čas"
+            },
+            "leisure/dog_park": {
+                "name": "Psí park",
+                "terms": "park pro psy,psí park"
             },
             "leisure/garden": {
                 "name": "Zahrada",
                 "terms": "zahrada"
             },
             "leisure/golf_course": {
-                "name": "Golfové hřiště"
+                "name": "Golfové hřiště",
+                "terms": "golfové hřiště,golf"
             },
             "leisure/marina": {
-                "name": "Přístaviště"
+                "name": "Přístaviště",
+                "terms": "přístav,jachta,jachty,loď"
             },
             "leisure/park": {
                 "name": "Park",
                 "terms": "les,prales,louka,trávník,park,hřiště,parčík,zeleň,lesní,strom,křoví"
             },
             "leisure/pitch": {
-                "name": "Hřiště"
+                "name": "Hřiště",
+                "terms": "sportovní kurt,hřiště,dvorec,kurt,stadion"
             },
             "leisure/pitch/american_football": {
-                "name": "Hřiště pro americký fotbal"
+                "name": "Hřiště pro americký fotbal",
+                "terms": "hřiště amerického fotbalu,americký fotbal"
             },
             "leisure/pitch/baseball": {
-                "name": "Baseballové hřiště"
+                "name": "Baseballové hřiště",
+                "terms": "basebalové hřiště,basebal"
             },
             "leisure/pitch/basketball": {
-                "name": "Basketbalové hřiště"
+                "name": "Basketbalové hřiště",
+                "terms": "basketbalové hřiště,basketbal"
             },
             "leisure/pitch/soccer": {
-                "name": "Fotbalové hřiště"
+                "name": "Fotbalové hřiště",
+                "terms": "fotbalové hřiště,fotbal"
             },
             "leisure/pitch/tennis": {
-                "name": "Tenisové kurty"
+                "name": "Tenisové kurty",
+                "terms": "tenisové hřiště,tenis,kurt,dvorec"
             },
             "leisure/pitch/volleyball": {
-                "name": "Volejbalové hřiště"
+                "name": "Volejbalové hřiště",
+                "terms": "volejbalové hřiště,volejbal"
             },
             "leisure/playground": {
                 "name": "Dětské hřiště",
                 "terms": "hřiště,dětské hřiště,prolézačky,prolézačka,pískoviště,houpačky,houpačka,skluzavky,skluzavka"
             },
             "leisure/slipway": {
-                "name": "Vodní skluz"
+                "name": "Vodní skluz",
+                "terms": "spouštění lodi,dok,loděnice,skluz v loděnici,skluzavka"
             },
             "leisure/stadium": {
-                "name": "Stadion"
+                "name": "Stadion",
+                "terms": "stadion,fotbal,fotbalový stadión,hřiště"
             },
             "leisure/swimming_pool": {
-                "name": "Plavecký bazén"
+                "name": "Plavecký bazén",
+                "terms": "plovárna,koupaliště"
             },
             "line": {
-                "name": "Cesta"
+                "name": "Cesta",
+                "terms": "čára,cesta,trať,kanál,trasa"
             },
             "man_made": {
-                "name": "Umělý objekt"
+                "name": "Umělý objekt",
+                "terms": "lidský výtvor,artefakt,konstrukce,dílo,stavba,objekt,mechanizmus"
             },
             "man_made/breakwater": {
-                "name": "Vlnolam"
+                "name": "Vlnolam",
+                "terms": "pobřežní hráz,násep,kameny,molo,zábrana"
             },
             "man_made/cutline": {
-                "name": "Průsek"
+                "name": "Průsek",
+                "terms": "lesní průsek,holina"
             },
             "man_made/lighthouse": {
-                "name": "Maják"
+                "name": "Maják",
+                "terms": "maják,světlo"
             },
             "man_made/pier": {
-                "name": "Molo"
+                "name": "Molo",
+                "terms": "molo,sloupy,pilíř,vlnolam,hráz,kotva,kotvení,ukotvení,lodě,promenáda,lávka,promenáda a přístaviště,přístavní hráz"
             },
             "man_made/pipeline": {
-                "name": "Dálkové potrubí"
+                "name": "Dálkové potrubí",
+                "terms": "rouura,roury,transport,vodovod,ropovod,plynovod,kanál,rozvod"
             },
             "man_made/survey_point": {
-                "name": "Triangulační bod"
+                "name": "Triangulační bod",
+                "terms": "triangulační bod,nivelizační bod,nivelace,referenční bod"
             },
             "man_made/tower": {
-                "name": "Věž"
+                "name": "Věž",
+                "terms": "věž,sloup,stožár,bašta,pevnost,hrad"
             },
             "man_made/wastewater_plant": {
                 "name": "Čistička odpadních vod",
                 "terms": "čistírna,čistička,čistírna odpadních vod,ČOV,čovka"
             },
             "man_made/water_tower": {
-                "name": "Vodárenská věž"
+                "name": "Vodárenská věž",
+                "terms": "vodojem,věž s vodojemem,věž,vodárenská věž"
             },
             "man_made/water_well": {
                 "name": "Studna"
@@ -1431,7 +1531,8 @@
                 "name": "Transformátorová stanice"
             },
             "power/tower": {
-                "name": "Elektrický stožár"
+                "name": "Elektrický stožár",
+                "terms": "sloup vysokého napětí,vysoké napětí"
             },
             "power/transformer": {
                 "name": "Transformátor"

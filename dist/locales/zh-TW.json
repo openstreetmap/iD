@@ -253,7 +253,8 @@
         "just_edited": "您剛剛編輯了OpenStreetMap！",
         "view_on_osm": "於OSM上顯示",
         "facebook": "在 Facebook 上分享",
-        "tweet": "發Tweet"
+        "twitter": "分享到 Twitter",
+        "google": "分享到 Google+"
     },
     "confirm": {
         "okay": "確定"

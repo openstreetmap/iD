@@ -241,6 +241,7 @@
         "title": "Tło",
         "description": "Ustawienia tła",
         "percent_brightness": "jasność {opacity}%",
+        "custom": "Własne",
         "fix_misalignment": "Wyrównaj podkład",
         "reset": "resetuj"
     },
@@ -263,7 +264,8 @@
         "just_edited": "Właśnie wprowadziłeś zmiany w OpenStreetMap!",
         "view_on_osm": "Zobacz na OSM",
         "facebook": "Podziel się na Facebooku",
-        "tweet": "Tweetnij",
+        "twitter": "Podziel się na Twitterze",
+        "google": "Podziel się na Google+",
         "help_html": "Twoje zmiany powinny się pojawić w przeciągu kilku minut na standardowej warstwie mapy. Odświeżenie innych warstw może potrwać nieco dłużej (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>szczegóły</a>).\n"
     },
     "confirm": {

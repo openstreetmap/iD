@@ -251,8 +251,7 @@
         "edited_osm": "编辑OSM！",
         "just_edited": "你正在编辑的OpenStreetMap！",
         "view_on_osm": "在OSM上查看",
-        "facebook": "在Facebook上分享",
-        "tweet": "Tweet"
+        "facebook": "在Facebook上分享"
     },
     "confirm": {
         "okay": "确定"

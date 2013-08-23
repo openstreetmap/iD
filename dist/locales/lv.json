@@ -207,8 +207,7 @@
     "success": {
         "just_edited": "Jūs nupat rediģējāt OpenStreetMap",
         "view_on_osm": "Apskatīt OSM",
-        "facebook": "Dalīties Facebook",
-        "tweet": "Dalīties Twitter"
+        "facebook": "Dalīties Facebook"
     },
     "confirm": {
         "okay": "Labi"

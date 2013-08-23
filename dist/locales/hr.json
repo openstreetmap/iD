@@ -241,6 +241,8 @@
         "title": "Pozadina",
         "description": "Postavke pozadine",
         "percent_brightness": "{opacity}% svjetline",
+        "custom": "Podesivo",
+        "custom_prompt": "Unesi predložak za popločavanje. Ispravni znakovi su {z}, {x}, {y} za Z/X/Y shemu i {u} za quadtile shemu.",
         "fix_misalignment": "Popravi odstupanje",
         "reset": "resetiraj"
     },
@@ -262,8 +264,9 @@
         "edited_osm": "Uređen OSM!",
         "just_edited": "Upravo si uredio/la OpenStreetMap!",
         "view_on_osm": "Pogledaj na OSM",
-        "facebook": "Podijeli na Facebook-u.",
-        "tweet": "Tweet",
+        "facebook": "Podijeli na mreži Facebook",
+        "twitter": "Podijeli na mreži Twitter",
+        "google": "Podijeli na mreži Google+",
         "help_html": "Tvoje promjene bi se trebale pojaviti u sloju \"Standard\" kroz par minuta. Za druge slojeve i određena svojstva trebati će više vremena.⏎\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detalji</a>).⏎\n"
     },
     "confirm": {
@@ -685,6 +688,9 @@
             "surface": {
                 "label": "Površina"
             },
+            "toilets/disposal": {
+                "label": "Vrsta odvoda"
+            },
             "tourism": {
                 "label": "Vrsta"
             },
@@ -773,7 +779,8 @@
                 "name": "Najam bicikla"
             },
             "amenity/cafe": {
-                "name": "Kafić"
+                "name": "Kafić",
+                "terms": "Kafić,Cafe,Caffee,Kafeterija,Caffe bar"
             },
             "amenity/car_rental": {
                 "name": "Iznajmljivanje vozila"
@@ -862,7 +869,7 @@
             },
             "amenity/pub": {
                 "name": "Pivnica",
-                "terms": "Pivnica"
+                "terms": "Pivnica,Birtija,Birc,Bircuz"
             },
             "amenity/restaurant": {
                 "name": "Restoran",
@@ -1047,7 +1054,7 @@
                 "name": "Pristupna cesta državne ceste"
             },
             "highway/residential": {
-                "name": "Gradska cesta"
+                "name": "Ulica"
             },
             "highway/road": {
                 "name": "Nepoznata cesta"
@@ -1224,7 +1231,8 @@
                 "name": "Igralište"
             },
             "leisure/slipway": {
-                "name": "Navoz za brodove"
+                "name": "Navoz za brodove",
+                "terms": "Istezalište"
             },
             "leisure/stadium": {
                 "name": "Stadion"
@@ -1338,7 +1346,8 @@
                 "name": "Grad s više od 100 000 stanovnika"
             },
             "place/hamlet": {
-                "name": "Zaseok"
+                "name": "Zaseok",
+                "terms": "Zaseok,Seoce"
             },
             "place/island": {
                 "name": "Otok"

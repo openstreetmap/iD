@@ -260,8 +260,7 @@
         "edited_osm": "OSM aangepast!",
         "just_edited": "Je hebt zojuist OpenStreetMap aangepast!",
         "view_on_osm": "Bekijk op OSM",
-        "facebook": "Deel op Facebook",
-        "tweet": "Tweet"
+        "facebook": "Deel op Facebook"
     },
     "confirm": {
         "okay": "OK"
