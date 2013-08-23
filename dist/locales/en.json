@@ -926,6 +926,10 @@
                 "name": "Pub",
                 "terms": ""
             },
+            "amenity/ranger_station": {
+                "name": "Ranger Station",
+                "terms": "visitor center,permit center,backcountry office"
+            },
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "bar,cafeteria,café,canteen,chophouse,coffee shop,diner,dining room,dive*,doughtnut shop,drive-in,eatery,eating house,eating place,fast-food place,greasy spoon,grill,hamburger stand,hashery,hideaway,hotdog stand,inn,joint*,luncheonette,lunchroom,night club,outlet*,pizzeria,saloon,soda fountain,watering hole"

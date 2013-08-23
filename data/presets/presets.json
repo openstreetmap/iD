@@ -927,6 +927,27 @@
         "terms": [],
         "name": "Pub"
     },
+    "amenity/ranger_station": {
+        "fields": [
+            "building_area",
+            "opening_hours",
+            "operator",
+            "phone"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "visitor center",
+            "permit center",
+            "backcountry office"
+        ],
+        "tags": {
+            "amenity": "ranger_station"
+        },
+        "name": "Ranger Station"
+    },
     "amenity/restaurant": {
         "icon": "restaurant",
         "fields": [

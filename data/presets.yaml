@@ -401,6 +401,9 @@ en:
       amenity/pub: 
         name: Pub
         terms: "<translate with synonyms or related terms for 'Pub', separated by commas>"
+      amenity/ranger_station: 
+        name: Ranger Station
+        terms: "<translate with synonyms or related terms for 'Ranger Station', separated by commas>"
       amenity/restaurant: 
         name: Restaurant
         terms: "<translate with synonyms or related terms for 'Restaurant', separated by commas>"
