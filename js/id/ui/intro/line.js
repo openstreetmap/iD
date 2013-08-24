@@ -95,6 +95,10 @@ iD.ui.intro.line = function(context, reveal) {
             context.on('enter.intro', null);
             d3.select('#curtain').style('pointer-events', 'all');
 
+            presetCategory();
+        }
+
+        function presetCategory() {
             timeout(function() {
                 d3.select('#curtain').style('pointer-events', 'none');
                 var road = d3.select('.preset-category-road .preset-list-button');
@@ -107,8 +111,19 @@ iD.ui.intro.line = function(context, reveal) {
             timeout(function() {
                 var grid = d3.select('.subgrid');
                 reveal(grid.node(), t('intro.lines.residential'));
+                grid.selectAll(':not(.preset-highway-residential) .preset-list-button')
+                    .one('click.intro', retryPreset);
                 grid.selectAll('.preset-highway-residential .preset-list-button')
                     .one('click.intro', roadDetails);
+            }, 500);
+        }
+
+        // selected wrong road type
+        function retryPreset(mode) {
+            timeout(function() {
+                var preset = d3.select('.entity-editor-pane .preset-list-button');
+                reveal(preset.node(), t('intro.lines.wrong_preset'));
+                preset.one('click.intro', presetCategory);
             }, 500);
         }
 
