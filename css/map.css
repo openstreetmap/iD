@@ -223,10 +223,6 @@ path.stroke.tag-leisure-park {
     stroke: #8cd05f;
 }
 
-path.stroke.tag-landuse-residential {
-    stroke: #e06e5f;
-}
-
 path.stroke.tag-landuse-retail,
 path.stroke.tag-landuse-commercial {
     stroke: #eab056;
