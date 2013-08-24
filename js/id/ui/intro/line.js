@@ -23,7 +23,7 @@ iD.ui.intro.line = function(context, reveal) {
         var intersection = [-85.62974496187628, 41.95742515554585];
 
         context.map().centerZoom(start, 18);
-        reveal('button.add-line', t('intro.lines.add'), {tooltipClass: 'intro-areas-add'});
+        reveal('button.add-line', t('intro.lines.add'), {tooltipClass: 'intro-lines-add'});
 
         context.on('enter.intro', addLine);
 
@@ -61,7 +61,7 @@ iD.ui.intro.line = function(context, reveal) {
         // ended line before creating intersection
         function retry(mode) {
             if (mode.id !== 'select') return;
-            var pointBox = iD.ui.intro.pad(intersection, 30);
+            var pointBox = iD.ui.intro.pad(intersection, 30, context);
             reveal(pointBox, t('intro.lines.restart'));
             timeout(function() {
                 context.replace(iD.actions.DeleteMultiple(mode.selectedIDs()));
@@ -109,7 +109,7 @@ iD.ui.intro.line = function(context, reveal) {
                 reveal(grid.node(), t('intro.lines.residential'));
                 grid.selectAll('.preset-highway-residential .preset-list-button')
                     .one('click.intro', roadDetails);
-            }, 200);
+            }, 500);
         }
 
         function roadDetails() {
