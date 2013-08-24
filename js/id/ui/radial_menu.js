@@ -66,9 +66,7 @@ iD.ui.RadialMenu = function(context, operations) {
             .attr('class', 'tooltip-inner radial-menu-tooltip');
 
         function mouseover(d, i) {
-            // Avoid getBoundingClientRect on SVG element; browser implementations
-            // differ: http://stackoverflow.com/questions/18153989/
-            var rect = context.surface().node().parentNode.getBoundingClientRect(),
+            var rect = context.surfaceRect(),
                 angle = a0 + i * a,
                 dx = rect.left - (angle < 0 ? 200 : 0),
                 dy = rect.top;

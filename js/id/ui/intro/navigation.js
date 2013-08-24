@@ -23,7 +23,7 @@ iD.ui.intro.navigation = function(context, reveal) {
 
     step.enter = function() {
 
-        var rect = context.surface().node().getBoundingClientRect(),
+        var rect = context.surfaceRect(),
             map = {
                 left: rect.left + 10,
                 top: rect.top + 70,

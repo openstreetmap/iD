@@ -105,7 +105,7 @@ iD.ui.intro = function(context) {
 };
 
 iD.ui.intro.pointBox = function(point, context) {
-    var rect = context.surface().node().getBoundingClientRect();
+    var rect = context.surfaceRect();
     point = context.projection(point);
     return {
         left: point[0] + rect.left - 30,
@@ -117,7 +117,7 @@ iD.ui.intro.pointBox = function(point, context) {
 
 iD.ui.intro.pad = function(box, padding, context) {
     if (box instanceof Array) {
-        var rect = context.surface().node().getBoundingClientRect();
+        var rect = context.surfaceRect();
         box = context.projection(box);
         box = {
             left: box[0] + rect.left,

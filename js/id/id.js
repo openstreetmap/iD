@@ -183,6 +183,13 @@ window.iD = function () {
     context.zoomIn = map.zoomIn;
     context.zoomOut = map.zoomOut;
 
+    context.surfaceRect = function() {
+        // Work around a bug in Firefox.
+        //   http://stackoverflow.com/questions/18153989/
+        //   https://bugzilla.mozilla.org/show_bug.cgi?id=530985
+        return context.surface().node().parentNode.getBoundingClientRect();
+    };
+
     /* Presets */
     var presets = iD.presets()
         .load(iD.data.presets);
