@@ -109,7 +109,7 @@ iD.ui.intro.line = function(context, reveal) {
                 reveal(grid.node(), t('intro.lines.residential'));
                 grid.selectAll('.preset-highway-residential .preset-list-button')
                     .one('click.intro', roadDetails);
-            }, 200);
+            }, 500);
         }
 
         function roadDetails() {
