@@ -924,6 +924,10 @@
                 "name": "Quán rượu Pub",
                 "terms": "quán rượu pub,quán nhậu pub,tiệm rượu pub,tiệm nhậu pub,pub,quan ruou pub,quan nhau pub,tiem ruou pub,tiem nhau pub"
             },
+            "amenity/ranger_station": {
+                "name": "Trạm Kiểm lâm",
+                "terms": "trạm kiểm lâm,trạm lâm nghiệp,tram kiem lam,tram lam nghiep"
+            },
             "amenity/restaurant": {
                 "name": "Nhà hàng",
                 "terms": "quán ăn,nhà hàng,tiệm ăn,nhà ăn,phòng ăn,quán ăn nhanh,nhà hàng ăn nhanh,quán ăn qua loa,căng tin,căng-tin,xe đẩy,quán rượu,quán bia,tiệm rượu,hiệu chả cá,quán chả nướng,quán phở,tiệm phở,quán cơm,quán bánh cuốn,tiệm bánh cuốn,quán bánh mì,tiệm bánh mì,quán bánh xèo,tiệm bánh xèo,quán chè,tiệm chè,quán gỏi cuốn,quán bún,quán hải sản,quán gà,quán cà ri,quán cà-ri,tiệm cà ri, tiệm cà-ri,quan an,nha hang,tiem an,nha an,phong an,quan an nhanh,nha hang an nhanh,quan an qua loa,can tin,cang-tin,xe day,quan ruou,quan bia,tiem ruou,hieu cha ca,quan cha nuong,quan pho,tiem pho,quan com,quan banh cuon,tiem banh cuon,quan banh mi,tiem banh mi,quan banh xeo,tiem banh xeo,quan che,tiem che,quan goi cuon,quan bun,quan hai san,quan ga,quan ca ri,quan ca-ri,tiem ca ri,tiem ca-ri"

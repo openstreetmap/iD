@@ -18,6 +18,12 @@
         "browse": {
             "title": "Dolaş",
             "description": "Harita üzerinde dolan ve yaklaş."
+        },
+        "draw_area": {
+            "tail": "Alanınıza nokta eklemek için tıklayınız. İlk noktaya tıklayarak alan çizimini bitirebilirsiniz."
+        },
+        "draw_line": {
+            "tail": "Çizgiye daha fazla nokta eklemek için tıklayınız. Diğer çizgilerle bağlamak için üstlerine tıklayınız ve bitirmek için de son noktada çift tıklayınız."
         }
     },
     "operations": {
@@ -134,7 +140,9 @@
         "split": {
             "title": "Ayır",
             "description": {
-                "area": "Bu alanın sınırını ikiye ayır."
+                "line": "Bu çizgiyi bu noktadan ikiye ayır.",
+                "area": "Bu alanın sınırını ikiye ayır.",
+                "multiple": "Çizgi/Alan sınırlarını bu noktadan ikiye ayır."
             },
             "key": "X",
             "annotation": {
@@ -153,6 +161,9 @@
         "nothing": "Tekrar yapılacak birşey yok."
     },
     "browser_notice": "Bu editör sadece Firefox, Chrome, Safari, Opera ile Internet Explorer 9 ve üstü tarayıcılarda çalışmaktadır. Lütfen tarayınıcı güncelleyin ya da Potlatch 2'yi kullanarak haritada güncelleme yapınız.",
+    "translate": {
+        "localized_translation_name": "İsim"
+    },
     "logout": "Çıkış",
     "loading_auth": "OpenStreetMap'e bağlanıyor...",
     "report_a_bug": "Hata rapor et",
@@ -167,6 +178,9 @@
         "deleted": "Silindi",
         "created": "Oluşturuldu"
     },
+    "contributors": {
+        "list": "{users} tarafından yapılan katkılar"
+    },
     "geolocate": {
         "title": "Konumumu göster"
     },
@@ -174,8 +188,13 @@
         "no_documentation_combination": "Bu etiket kombinasyonu için dökümantasyon bulunmamaktadır.",
         "no_documentation_key": "Bu anahtar için dökümantasyon bulunmamaktadır.",
         "show_more": "Daha fazla göster",
+        "view_on_osm": "OpenStreetMap.org üzerinde gör",
+        "all_tags": "Tüm etiketler",
         "choose": "Kısım tipini seçiniz",
-        "results": "{search} kelimesi için {n} adet sonuç "
+        "results": "{search} kelimesi için {n} adet sonuç ",
+        "reference": "OpenStreetMap Wiki'de gör",
+        "remove": "Kaldır",
+        "unknown": "Bilinmeyen"
     },
     "background": {
         "title": "Arkaplan",
@@ -200,7 +219,11 @@
     },
     "success": {
         "just_edited": "Şu an OpenStreetMap'de bir değişiklik yaptınız!",
-        "view_on_osm": "OSM üzerinde gör"
+        "view_on_osm": "OSM üzerinde gör",
+        "facebook": "Facebook'da Paylaş"
+    },
+    "confirm": {
+        "okay": "Tamam"
     },
     "splash": {
         "welcome": "OpenStreetMap Editörü iD'ye hoşgeldiniz",
@@ -218,6 +241,7 @@
         "used_with": "{type} ile birlikte"
     },
     "validations": {
+        "untagged_point": "Etiketlenmemiş nokta",
         "untagged_line": "Etiketlenmemiş çizgi",
         "untagged_area": "Etiketlenmemiş alan",
         "many_deletions": "Şu an {n} adet objeyi siliyorsunuz. Bunu yapmak istediğinize emin misiniz? Bu işlem ile ilgili objelerin tamamı herkesin ziyaret ettiği openstreetmap.org üzerinden de silinmiş olacaktır.",
@@ -243,6 +267,7 @@
             "pane": "Bir nesne seçildiği zaman, nesne editörü görünür hale gelir. Başlık kısmı bize nesnenin tipini, ana panel ise nesnenin adı ya da adresi gibi özelliklerini gösterir. **Nesne editörünü sağ üst köşesindeki kapat butonu yardımıyla kapatınız.**"
         },
         "points": {
+            "title": "Noktalar",
             "add": "Noktalar dükkanları, restoranları ya da anıtları göstermek için kullanılabilir. Bunlar bir lokasyonu işaretler ve orada ne olduğunu tarif eder. **Nokta butonuna tıklayarak yeni bir nokta ekleyiniz.**",
             "place": "Bir noktayı haritaya tıklayarak yerleştirebilirsiniz. **Bir binanın üstüne noktayı yerleştiriniz.**",
             "describe": "Nokta artık kafe olarak işaretlendi. Nesne editörü ile nesneye daha fazla bilgi ekleyebiliriz. **Bir ad ekleyiniz**",
@@ -253,10 +278,12 @@
             "delete": "Nokta çevresindeki menü ile farklı operasyonlar gerçekleştirilebilir, silme de bunlardan birisidir. **Noktayı siliniz.**"
         },
         "areas": {
+            "title": "Alanlar",
             "corner": "Alanlar alan sınırlarını belirleyen noktaların konulması ile çizilirler. **Test alanında bir alanın köşe noktasına tıklayarak çizime başlayın.**",
             "describe": "**Bir ad ekleyerek editörü kapatınız**"
         },
         "lines": {
+            "title": "Çizgiler",
             "add": "Çizgiler yollar, tren yolları ve akarsu gibi nesneleri göstermek amacıyla kullanılır. **Çizgi butonuna tıklyarak yeni bir çizgi ekleyiniz.**",
             "start": "**Çizimi başlatmak için yolun sonuna tıklayınız.**",
             "residential": "Çok farklı tiplerde yollar bulunmaktadır, en yaygın olanı Şehir İçi olanlardır. **Şehir için yol tipini şeçiniz**",
@@ -273,6 +300,7 @@
         "fields": {
             "access": {
                 "label": "Ulaşım",
+                "placeholder": "Bilinmeyen",
                 "types": {
                     "foot": "Yürüyerek"
                 },
@@ -347,6 +375,9 @@
             },
             "denotation": {
                 "label": "Ünvan"
+            },
+            "description": {
+                "label": "Açıklama"
             },
             "elevation": {
                 "label": "Yükseklik"
@@ -440,6 +471,9 @@
             "ref": {
                 "label": "Referans"
             },
+            "relation": {
+                "label": "Tip"
+            },
             "religion": {
                 "label": "Dini",
                 "options": {
@@ -451,6 +485,9 @@
                     "shinto": "Şinto",
                     "taoist": "Taoist"
                 }
+            },
+            "route": {
+                "label": "Tip"
             },
             "service": {
                 "label": "Tip"
@@ -480,6 +517,9 @@
             "tourism": {
                 "label": "Tip"
             },
+            "tracktype": {
+                "label": "Tip"
+            },
             "water": {
                 "label": "Tip"
             },
@@ -487,7 +527,8 @@
                 "label": "Tip"
             },
             "website": {
-                "label": "Web Sitesi"
+                "label": "Web Sitesi",
+                "placeholder": "http://ornek.com/"
             },
             "wetland": {
                 "label": "Tip"
@@ -503,6 +544,9 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Adres"
+            },
             "aeroway/aerodrome": {
                 "name": "Havaalanı"
             },
@@ -517,6 +561,9 @@
             },
             "amenity/bar": {
                 "name": "Bar"
+            },
+            "amenity/bench": {
+                "name": "Bank"
             },
             "amenity/bicycle_parking": {
                 "name": "Bisiklet Parkı"
@@ -608,6 +655,9 @@
             "amenity/university": {
                 "name": "Üniversite"
             },
+            "area": {
+                "name": "Alan"
+            },
             "barrier": {
                 "name": "Bariyer"
             },
@@ -617,6 +667,9 @@
             "barrier/city_wall": {
                 "name": "Şehir Duvarı"
             },
+            "barrier/ditch": {
+                "name": "Sulama kanalı"
+            },
             "barrier/entrance": {
                 "name": "Giriş"
             },
@@ -625,6 +678,9 @@
             },
             "barrier/gate": {
                 "name": "Kapı"
+            },
+            "barrier/stile": {
+                "name": "Çit basamağı"
             },
             "barrier/wall": {
                 "name": "Duvar"
@@ -659,23 +715,50 @@
             "highway/footway": {
                 "name": "Yaya Yolu"
             },
+            "highway/motorway": {
+                "name": "Otoyol"
+            },
             "highway/path": {
                 "name": "Patika"
+            },
+            "highway/primary": {
+                "name": "Devlet Yolu"
             },
             "highway/road": {
                 "name": "Bilinmeyen Yol"
             },
+            "highway/secondary": {
+                "name": "İl Yolu"
+            },
+            "highway/service": {
+                "name": "Servis Yolu"
+            },
             "highway/steps": {
                 "name": "Adım"
             },
+            "highway/tertiary": {
+                "name": "Köy arası yolu"
+            },
+            "highway/track": {
+                "name": "Toprak yol"
+            },
             "highway/traffic_signals": {
                 "name": "Trafik Sinyali"
+            },
+            "highway/trunk": {
+                "name": "Bölünmüş Anayol"
+            },
+            "highway/unclassified": {
+                "name": "Sınıflandırılmamış Yol"
             },
             "historic": {
                 "name": "Tarihi Site"
             },
             "historic/archaeological_site": {
                 "name": "Arkeolojik Alan"
+            },
+            "historic/boundary_stone": {
+                "name": "Sınır Taşı"
             },
             "historic/castle": {
                 "name": "Kale"
@@ -688,6 +771,9 @@
             },
             "historic/ruins": {
                 "name": "Harabeler"
+            },
+            "landuse/allotments": {
+                "name": "Bostanlar"
             },
             "landuse/basin": {
                 "name": "Havza"
@@ -704,6 +790,9 @@
             "landuse/farm": {
                 "name": "Tarla"
             },
+            "landuse/farmyard": {
+                "name": "Çiftlik avlusu"
+            },
             "landuse/forest": {
                 "name": "Orman"
             },
@@ -716,8 +805,17 @@
             "landuse/meadow": {
                 "name": "Çayır"
             },
+            "landuse/orchard": {
+                "name": "Meyve Bahçesi"
+            },
+            "landuse/quarry": {
+                "name": "Ocak"
+            },
             "landuse/residential": {
                 "name": "Yerleşim"
+            },
+            "landuse/vineyard": {
+                "name": "Bağ"
             },
             "leisure": {
                 "name": "Keyif"
@@ -727,6 +825,9 @@
             },
             "leisure/golf_course": {
                 "name": "Golf Alanı"
+            },
+            "leisure/marina": {
+                "name": "Marina"
             },
             "leisure/park": {
                 "name": "Park"
@@ -749,11 +850,17 @@
             "leisure/playground": {
                 "name": "Oyun Alanı"
             },
+            "leisure/slipway": {
+                "name": "Kızak yolu"
+            },
             "leisure/stadium": {
                 "name": "Stadyum"
             },
             "leisure/swimming_pool": {
                 "name": "Yüzme Havuzu"
+            },
+            "line": {
+                "name": "Çizgi"
             },
             "man_made": {
                 "name": "İnsan Yapımı"
@@ -770,14 +877,29 @@
             "natural": {
                 "name": "Doğal"
             },
+            "natural/bay": {
+                "name": "Koy / körfez"
+            },
             "natural/beach": {
                 "name": "Plaj"
+            },
+            "natural/cliff": {
+                "name": "Uçurum"
+            },
+            "natural/glacier": {
+                "name": "Buzul"
             },
             "natural/grassland": {
                 "name": "Otlak"
             },
             "natural/heath": {
                 "name": "Sağlık"
+            },
+            "natural/peak": {
+                "name": "Tepe / zirve"
+            },
+            "natural/scrub": {
+                "name": "Çalılık"
             },
             "natural/spring": {
                 "name": "Kaynak"
@@ -797,6 +919,12 @@
             "natural/water/reservoir": {
                 "name": "Reservuar"
             },
+            "natural/wetland": {
+                "name": "Sulak Alan"
+            },
+            "natural/wood": {
+                "name": "Orman"
+            },
             "office": {
                 "name": "Ofis"
             },
@@ -806,14 +934,23 @@
             "place/city": {
                 "name": "Şehir"
             },
+            "place/hamlet": {
+                "name": "Mezra"
+            },
             "place/island": {
                 "name": "Ada"
+            },
+            "place/locality": {
+                "name": "Yer/mevkii"
             },
             "place/town": {
                 "name": "Kasaba"
             },
             "place/village": {
                 "name": "Köy"
+            },
+            "point": {
+                "name": "Nokta"
             },
             "power": {
                 "name": "Güç"
@@ -825,6 +962,12 @@
                 "name": "Ara istasyon"
             },
             "railway": {
+                "name": "Demiryolu"
+            },
+            "railway/level_crossing": {
+                "name": "Demiryolu Geçidi"
+            },
+            "railway/rail": {
                 "name": "Demiryolu"
             },
             "railway/station": {
@@ -868,6 +1011,9 @@
             },
             "shop/car_repair": {
                 "name": "Tamirci"
+            },
+            "shop/chemist": {
+                "name": "Eczacı"
             },
             "shop/convenience": {
                 "name": "Bakkal"
@@ -923,11 +1069,23 @@
             "tourism": {
                 "name": "Turizm"
             },
+            "tourism/alpine_hut": {
+                "name": "Dağ evi"
+            },
             "tourism/artwork": {
                 "name": "Sanat eseri"
             },
+            "tourism/attraction": {
+                "name": "Turistik yer"
+            },
             "tourism/camp_site": {
                 "name": "Kamp Alanı"
+            },
+            "tourism/chalet": {
+                "name": "Yayla evi"
+            },
+            "tourism/guest_house": {
+                "name": "Konuk Evi"
             },
             "tourism/hostel": {
                 "name": "Hostel"
@@ -956,6 +1114,9 @@
             "tourism/zoo": {
                 "name": "Hayvanat Bahçesi"
             },
+            "vertex": {
+                "name": "Diğer"
+            },
             "waterway": {
                 "name": "Su Yolu"
             },
@@ -965,11 +1126,23 @@
             "waterway/dam": {
                 "name": "Baraj"
             },
+            "waterway/ditch": {
+                "name": "Sulama kanalı"
+            },
+            "waterway/drain": {
+                "name": "Atık su kanalı"
+            },
             "waterway/river": {
                 "name": "Akarsu"
             },
+            "waterway/riverbank": {
+                "name": "Irmak kenarı"
+            },
             "waterway/stream": {
                 "name": "Dere"
+            },
+            "waterway/weir": {
+                "name": "Küçük köprü"
             }
         }
     }

@@ -878,6 +878,9 @@
             "amenity/pub": {
                 "name": "居酒屋"
             },
+            "amenity/ranger_station": {
+                "name": "狩猟ステーション"
+            },
             "amenity/restaurant": {
                 "name": "レストラン"
             },

@@ -167,9 +167,11 @@
         }
     },
     "undo": {
+        "tooltip": "Kumoa: {action}",
         "nothing": "Ei muokkaushistoriaa."
     },
     "redo": {
+        "tooltip": "Tee uudelleen: {action}",
         "nothing": "Ei muokkaushistoriaa."
     },
     "tooltip_keyhint": "Pikanäppäin:",
@@ -261,6 +263,8 @@
         "just_edited": "Muokkasit juuri OpenStreetMapia!",
         "view_on_osm": "Näytä OSM-kartalla",
         "facebook": "Jaa Facebookissa",
+        "twitter": "Jaa Twitterissä",
+        "google": "Jaa Google+-palvelussa",
         "help_html": "Muutokset tulevat näkyviin Perinteisessä karttanäkymässä muutaman minuutin kuluessa. Muissa karttanäkymissä ja -sovelluksissa ja hieman erikoisempien karttaominaisuuksien ilmestyminen kartalle voi viedä pidempään. Lue <a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>lisätietoja</a> englanniksi.\n"
     },
     "confirm": {

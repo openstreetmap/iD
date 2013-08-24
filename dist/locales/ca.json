@@ -241,6 +241,7 @@
         "title": "Fons",
         "description": "Paràmetres de configuració del fons",
         "percent_brightness": "{opacity}% brillantor",
+        "custom": "Personalitza",
         "fix_misalignment": "Corregeix la desalineació",
         "reset": "reinicia"
     },
@@ -263,6 +264,8 @@
         "just_edited": "Acabes d'editar l'OpenStreetMap!",
         "view_on_osm": "Mostra-ho a OSM",
         "facebook": "Comparteix a Facebook",
+        "twitter": "Comparteix al Twitter",
+        "google": "Comparteix al Google+",
         "help_html": "Els canvis haurien d'aparèxier a la capa \"Estàndard\" en pocs minuts. Altres capes i algunes característiques, poden trigar més temps.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detalls</a>).\n"
     },
     "confirm": {
@@ -918,6 +921,9 @@
             "amenity/pub": {
                 "name": "Pub",
                 "terms": "Bar, Bar Musical, Pub, Local de copes, Local d'oci nocturn, Bareto"
+            },
+            "amenity/ranger_station": {
+                "name": "Base d'Agents Rurals"
             },
             "amenity/restaurant": {
                 "name": "Restaurant",

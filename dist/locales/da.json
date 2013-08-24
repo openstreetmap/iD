@@ -923,6 +923,10 @@
                 "name": "Værtshus",
                 "terms": "Værtshus, Pub, Ølstue"
             },
+            "amenity/ranger_station": {
+                "name": "Rangerstation",
+                "terms": "Rangerstation"
+            },
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "Restaurant, Spisested, Spisehus"

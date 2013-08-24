@@ -871,6 +871,9 @@
                 "name": "Pivnica",
                 "terms": "Pivnica,Birtija,Birc,Bircuz"
             },
+            "amenity/ranger_station": {
+                "name": "Rendžerska postaja"
+            },
             "amenity/restaurant": {
                 "name": "Restoran",
                 "terms": "Restoran,Buffet,Zdravljak"
