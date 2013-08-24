@@ -12,12 +12,18 @@ iD.ui.intro = function(context) {
             background = context.background().baseLayerSource(),
             opacity = d3.select('.background-layer').style('opacity'),
             loadedTiles = context.connection().loadedTiles(),
-            baseEntities = context.history().graph().base().entities;
+            baseEntities = context.history().graph().base().entities,
+            introGraph;
 
         // Load semi-real data used in intro
         context.connection().toggle(false).flush();
         context.history().save().reset();
-        context.history().merge(iD.Graph().load(JSON.parse(iD.introGraph)).entities);
+        
+        introGraph = JSON.parse(iD.introGraph);
+        for (var key in introGraph) {
+            introGraph[key] = iD.Entity(introGraph[key]);
+        }
+        context.history().merge(iD.Graph().load(introGraph).entities);
         context.background().bing();
 
         // Block saving
