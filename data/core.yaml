@@ -220,7 +220,7 @@ en:
     google: "Share on Google+"
     help_html: |
       Your changes should appear in the "Standard" layer in a few minutes. Other layers, and certain features, may take longer
-      (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>details</a>).
+      (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).
   confirm:
     okay: "Okay"
   splash:
