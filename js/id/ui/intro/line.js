@@ -19,7 +19,7 @@ iD.ui.intro.line = function(context, reveal) {
 
         var centroid = [-85.62830, 41.95699];
         var midpoint = [-85.62975395449628, 41.95787501510204];
-        var start = [-85.6297754121684, 41.9583158176903];
+        var start = [-85.6297754121684, 41.95805253325314];
         var intersection = [-85.62974496187628, 41.95742515554585];
 
         context.map().centerZoom(start, 18);
