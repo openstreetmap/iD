@@ -61,7 +61,7 @@ iD.ui.intro.line = function(context, reveal) {
         // ended line before creating intersection
         function retry(mode) {
             if (mode.id !== 'select') return;
-            var pointBox = iD.ui.intro.pad(intersection, 30);
+            var pointBox = iD.ui.intro.pad(intersection, 30, context);
             reveal(pointBox, t('intro.lines.restart'));
             timeout(function() {
                 context.replace(iD.actions.DeleteMultiple(mode.selectedIDs()));
