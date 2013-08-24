@@ -1,3 +1,9 @@
+## 1.1.6
+
+* Fix walkthrough on Firefox (#1743)
+* Fix icon at end of walkthough (#1740)
+* Fix walkthrough (#1739)
+
 ## 1.1.5
 
 * Add amenity=ranger_station preset (1723)
