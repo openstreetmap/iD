@@ -1701,8 +1701,8 @@
                 "terms": "Computergeschäft"
             },
             "shop/confectionery": {
-                "name": "Konditor",
-                "terms": "Süßwarenladen, Süßigkeiten-Laden"
+                "name": "Süßwarenladen",
+                "terms": "Bonbonladen, Süßigkeiten-Laden"
             },
             "shop/convenience": {
                 "name": "Gemischtwarenhandel"
