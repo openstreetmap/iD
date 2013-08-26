@@ -136,7 +136,7 @@ iD.Map = function(context) {
             .call(midpoints, graph, all, filter, map.extent())
             .call(labels, graph, all, filter, dimensions, !difference && !extent);
 
-        if (points.points(context.intersects(map.extent())).length > 100) {
+        if (points.points(context.intersects(map.extent()), 100).length >= 100) {
             surface.select('.layer-hit').selectAll('g.point').remove();
         } else {
             surface.call(points, points.points(all), filter);
