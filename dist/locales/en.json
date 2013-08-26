@@ -356,7 +356,8 @@
             "road": "**Select Road from the list**",
             "residential": "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**",
             "describe": "**Name the road and close the feature editor.**",
-            "restart": "The road needs to intersect Flower Street."
+            "restart": "The road needs to intersect Flower Street.",
+            "wrong_preset": "You didn't select the Residential road type. **Click here to choose again**"
         },
         "startediting": {
             "title": "Start Editing",
