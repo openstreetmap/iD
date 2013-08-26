@@ -191,7 +191,11 @@ _.extend(iD.Relation.prototype, {
         outers = outers.map(function(outer) { return _.pluck(outer.nodes, 'loc'); });
         inners = inners.map(function(inner) { return _.pluck(inner.nodes, 'loc'); });
 
-        var result = outers.map(function(o) { return [o]; });
+        var result = outers.map(function(o) {
+            // Heuristic for detecting counterclockwise winding order. Assumes
+            // that OpenStreetMap polygons are not hemisphere-spanning.
+            return [d3.geo.area({type: 'Polygon', coordinates: [o]}) > 2 * Math.PI ? o.reverse() : o];
+        });
 
         function findOuter(inner) {
             var o, outer;
@@ -210,6 +214,12 @@ _.extend(iD.Relation.prototype, {
         }
 
         for (var i = 0; i < inners.length; i++) {
+            var inner = inners[i];
+
+            if (d3.geo.area({type: 'Polygon', coordinates: [inner]}) < 2 * Math.PI) {
+                inner = inner.reverse();
+            }
+
             var o = findOuter(inners[i]);
             if (o !== undefined)
                 result[o].push(inners[i]);

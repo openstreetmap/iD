@@ -282,8 +282,8 @@ describe('iD.Way', function() {
 
         it("converts an area to a GeoJSON Polygon feature", function () {
             var a = iD.Node({loc: [1, 2]}),
-                b = iD.Node({loc: [3, 4]}),
-                c = iD.Node({loc: [5, 6]}),
+                b = iD.Node({loc: [5, 6]}),
+                c = iD.Node({loc: [3, 4]}),
                 w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id, a.id]}),
                 graph = iD.Graph([a, b, c, w]),
                 json = w.asGeoJSON(graph, true);
@@ -291,7 +291,18 @@ describe('iD.Way', function() {
             expect(json.type).to.equal('Feature');
             expect(json.properties).to.eql({area: 'yes'});
             expect(json.geometry.type).to.equal('Polygon');
-            expect(json.geometry.coordinates).to.eql([[[1, 2], [3, 4], [5, 6], [1, 2]]]);
+            expect(json.geometry.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
+        });
+
+        it("forces clockwise polygon winding order", function () {
+            var a = iD.Node({loc: [1, 2]}),
+                b = iD.Node({loc: [5, 6]}),
+                c = iD.Node({loc: [3, 4]}),
+                w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, c.id, b.id, a.id]}),
+                graph = iD.Graph([a, b, c, w]),
+                json = w.asGeoJSON(graph, true);
+
+            expect(json.geometry.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
         });
     });
 });
