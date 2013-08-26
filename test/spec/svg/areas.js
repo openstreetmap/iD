@@ -1,7 +1,7 @@
 describe("iD.svg.Areas", function () {
     var surface,
         projection = Object,
-        filter = d3.functor(true);
+        filter = d3.functor(false);
 
     beforeEach(function () {
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
@@ -51,7 +51,7 @@ describe("iD.svg.Areas", function () {
         expect(surface.selectAll('.other')[0].length).to.equal(1);
     });
 
-    it("stacks smaller areas above larger ones", function () {
+    describe("z-indexing", function() {
         var graph = iD.Graph({
                 'a': iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
                 'b': iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
@@ -63,13 +63,37 @@ describe("iD.svg.Areas", function () {
                 'h': iD.Node({id: 'd', loc: [-0.0004, -0.0002]}),
                 's': iD.Way({id: 's', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
                 'l': iD.Way({id: 'l', tags: {landuse: 'park'}, nodes: ['e', 'f', 'g', 'h', 'e']})
-            }),
-            areas = [graph.entity('s'), graph.entity('l')];
+            });
 
-        surface.call(iD.svg.Areas(projection), graph, areas, filter);
+        it("stacks smaller areas above larger ones in a single render", function () {
+            surface.call(iD.svg.Areas(projection), graph, [graph.entity('s'), graph.entity('l')], filter);
 
-        expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
-        expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
+            expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
+            expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
+        });
+
+        it("stacks smaller areas above larger ones in a single render (reverse)", function () {
+            surface.call(iD.svg.Areas(projection), graph, [graph.entity('l'), graph.entity('s')], filter);
+
+            expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
+            expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
+        });
+
+        it("stacks smaller areas above larger ones in separate renders", function () {
+            surface.call(iD.svg.Areas(projection), graph, [graph.entity('s')], filter);
+            surface.call(iD.svg.Areas(projection), graph, [graph.entity('l')], filter);
+
+            expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
+            expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
+        });
+
+        it("stacks smaller areas above larger ones in separate renders (reverse)", function () {
+            surface.call(iD.svg.Areas(projection), graph, [graph.entity('l')], filter);
+            surface.call(iD.svg.Areas(projection), graph, [graph.entity('s')], filter);
+
+            expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
+            expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
+        });
     });
 
     it("renders fills for multipolygon areas", function () {
