@@ -137,39 +137,41 @@ _.extend(iD.Way.prototype, {
     },
 
     asGeoJSON: function(resolver, polygon) {
-        var nodes = resolver.childNodes(this);
+        return resolver.transient(this, 'GeoJSON', function() {
+            var nodes = resolver.childNodes(this);
 
-        if (this.isArea() && polygon && nodes.length >= 4) {
-            if (!this.isClosed()) {
-                nodes = nodes.concat([nodes[0]]);
-            }
-
-            var json = {
-                type: 'Feature',
-                properties: this.tags,
-                geometry: {
-                    type: 'Polygon',
-                    coordinates: [_.pluck(nodes, 'loc')]
+            if (this.isArea() && polygon && nodes.length >= 4) {
+                if (!this.isClosed()) {
+                    nodes = nodes.concat([nodes[0]]);
                 }
-            };
 
-            // Heuristic for detecting counterclockwise winding order. Assumes
-            // that OpenStreetMap polygons are not hemisphere-spanning.
-            if (d3.geo.area(json) > 2 * Math.PI) {
-                json.geometry.coordinates[0] = json.geometry.coordinates[0].reverse();
-            }
+                var json = {
+                    type: 'Feature',
+                    properties: this.tags,
+                    geometry: {
+                        type: 'Polygon',
+                        coordinates: [_.pluck(nodes, 'loc')]
+                    }
+                };
 
-            return json;
-        } else {
-            return {
-                type: 'Feature',
-                properties: this.tags,
-                geometry: {
-                    type: 'LineString',
-                    coordinates: _.pluck(nodes, 'loc')
+                // Heuristic for detecting counterclockwise winding order. Assumes
+                // that OpenStreetMap polygons are not hemisphere-spanning.
+                if (d3.geo.area(json) > 2 * Math.PI) {
+                    json.geometry.coordinates[0] = json.geometry.coordinates[0].reverse();
                 }
-            };
-        }
+
+                return json;
+            } else {
+                return {
+                    type: 'Feature',
+                    properties: this.tags,
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: _.pluck(nodes, 'loc')
+                    }
+                };
+            }
+        });
     }
 });
 

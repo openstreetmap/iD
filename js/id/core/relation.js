@@ -134,24 +134,26 @@ _.extend(iD.Relation.prototype, {
     },
 
     asGeoJSON: function(resolver) {
-        if (this.isMultipolygon()) {
-            return {
-                type: 'Feature',
-                properties: this.tags,
-                geometry: {
-                    type: 'MultiPolygon',
-                    coordinates: this.multipolygon(resolver)
-                }
-            };
-        } else {
-            return {
-                type: 'FeatureCollection',
-                properties: this.tags,
-                features: this.members.map(function(member) {
-                    return _.extend({role: member.role}, resolver.entity(member.id).asGeoJSON(resolver));
-                })
-            };
-        }
+        return resolver.transient(this, 'GeoJSON', function () {
+            if (this.isMultipolygon()) {
+                return {
+                    type: 'Feature',
+                    properties: this.tags,
+                    geometry: {
+                        type: 'MultiPolygon',
+                        coordinates: this.multipolygon(resolver)
+                    }
+                };
+            } else {
+                return {
+                    type: 'FeatureCollection',
+                    properties: this.tags,
+                    features: this.members.map(function (member) {
+                        return _.extend({role: member.role}, resolver.entity(member.id).asGeoJSON(resolver));
+                    })
+                };
+            }
+        });
     },
 
     isMultipolygon: function() {
