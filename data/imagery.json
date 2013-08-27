@@ -1,574 +1,1008 @@
 [
     {
-        "name": "Bing aerial imagery",
-        "template": "http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z",
-        "description": "Satellite imagery.",
-        "scaleExtent": [
-            0,
-            20
-        ],
-        "subdomains": [
-            "0",
-            "1",
-            "2",
-            "3"
-        ],
-        "default": true,
-        "sourcetag": "Bing",
-        "logo": "bing_maps.png",
-        "logo_url": "http://www.bing.com/maps",
-        "terms_url": "http://opengeodata.org/microsoft-imagery-details"
-    },
-    {
-        "name": "Locator Overlay",
-        "template": "http://{t}.tiles.mapbox.com/v3/openstreetmap.map-btyhiati/{z}/{x}/{y}.png",
-        "description": "Shows major features to help orient you.",
-        "overlay": true,
-        "default": true,
-        "scaleExtent": [
-            0,
-            16
-        ],
-        "subdomains": [
-            "a",
-            "b",
-            "c"
-        ],
-        "terms_url": "http://mapbox.com/tos/"
-    },
-    {
-        "name": "MapBox Satellite",
-        "template": "http://{t}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{z}/{x}/{y}.png",
-        "description": "Satellite and aerial imagery.",
-        "scaleExtent": [
-            0,
-            16
-        ],
-        "subdomains": [
-            "a",
-            "b",
-            "c"
-        ],
-        "terms_url": "http://mapbox.com/tos/"
-    },
-    {
-        "name": "OpenStreetMap",
-        "template": "http://{t}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        "description": "The default OpenStreetMap layer.",
-        "scaleExtent": [
-            0,
-            18
-        ],
-        "subdomains": [
-            "a",
-            "b",
-            "c"
+        "name": "7th Series (OS7)",
+        "type": "tms",
+        "template": "http://ooc.openstreetmap.org/os7/{zoom}/{x}/{y}.jpg",
+        "extents": [
+            [
+                [
+                    -9,
+                    49.8
+                ],
+                [
+                    1.9,
+                    61.1
+                ]
+            ]
         ]
     },
     {
-        "name": "TIGER 2012 Roads Overlay",
-        "template": "http://{t}.tile.openstreetmap.us/tiger2012_roads_expanded/{z}/{x}/{y}.png",
-        "sourcetag": "TIGER 2012",
-        "overlay": true,
+        "name": "AGRI black-and-white 2.5m",
+        "type": "tms",
+        "template": "http://agri.openstreetmap.org/{zoom}/{x}/{y}.png",
+        "extents": [
+            [
+                [
+                    112.28778,
+                    -44.062107
+                ],
+                [
+                    156.62761,
+                    -9.992408
+                ]
+            ]
+        ],
+        "terms_text": "AGRI"
+    },
+    {
+        "name": "Bing aerial imagery",
+        "type": "bing",
+        "description": "Satellite and aerial imagery.",
+        "template": "http://www.bing.com/maps/",
         "scaleExtent": [
-            16,
+            0,
+            22
+        ],
+        "id": "Bing",
+        "default": true
+    },
+    {
+        "name": "British Columbia Mosaic",
+        "type": "tms",
+        "template": "http://{switch:a,b,c,d}.imagery.paulnorman.ca/tiles/bc_mosaic/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            9,
+            20
+        ],
+        "extents": [
+            [
+                [
+                    -123.440717,
+                    48.9954007
+                ],
+                [
+                    -121.3462885,
+                    50.4256959
+                ]
+            ]
+        ],
+        "terms_url": "http://imagery.paulnorman.ca/tiles/about.html",
+        "terms_text": "Copyright Province of British Columbia, City of Surrey"
+    },
+    {
+        "name": "Cambodia, Laos, Thailand, Vietnam bilingual",
+        "type": "tms",
+        "template": "http://{switch:a,b,c,d}.tile.osm-tools.org/osm_then/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
             19
         ],
-        "subdomains": [
-            "a",
-            "b",
-            "c"
+        "extents": [
+            [
+                [
+                    97.3,
+                    5.6
+                ],
+                [
+                    109.6,
+                    23.4
+                ]
+            ]
         ],
-        "extents": [[
-            [
-                -124.81,
-                24.055
-            ],
-            [
-                -66.865,
-                49.386
-            ]
-        ],[
-            [
-                -179.754,
-                50.858
-            ],
-            [
-                -129.899,
-                71.463
-            ]
-        ],[
-            [
-                -174.46,
-                18.702
-            ],
-            [
-                -154.516,
-                26.501
-            ]
-        ]]
+        "terms_url": "http://www.osm-tools.org/",
+        "terms_text": "© osm-tools.org & OpenStreetMap contributors, CC-BY-SA"
     },
     {
-        "name": "USGS Topographic Maps",
-        "template": "http://{t}.tile.openstreetmap.us/usgs_scanned_topos/{z}/{x}/{y}.png",
-        "subdomains": [
-            "a",
-            "b",
-            "c"
+        "name": "Freemap.sk Car",
+        "type": "tms",
+        "template": "http://t{switch:1,2,3,4}.freemap.sk/A/{zoom}/{x}/{y}.jpeg",
+        "scaleExtent": [
+            8,
+            16
         ],
-        "extents": [[
+        "extents": [
             [
-                -125.991,
-                24.005
-            ],
-            [
-                -65.988,
-                50.009
+                [
+                    16.7988747,
+                    47.7145247
+                ],
+                [
+                    22.5884098,
+                    49.6375827
+                ]
             ]
-        ],[
-            [
-                -160.579,
-                18.902
-            ],
-            [
-                -154.793,
-                22.508
-            ]
-        ],[
-            [
-                -178.001,
-                51.255
-            ],
-            [
-                -130.004,
-                71.999
-            ]
-        ]]
-    },
-    {
-        "name": "USGS Large Scale Aerial Imagery",
-        "template": "http://{t}.tile.openstreetmap.us/usgs_large_scale/{z}/{x}/{y}.jpg",
-        "subdomains": [
-            "a",
-            "b",
-            "c"
         ],
-        "extents": [[
-            [
-                -124.819,
-                24.496
-            ],
-            [
-                -66.931,
-                49.443
-            ]
-        ]]
+        "terms_text": "Copyright ©2007-2012 Freemap Slovakia (www.freemap.sk). Some rights reserved."
     },
     {
-        "name": "British Columbia bc_mosaic",
-        "template": "http://{t}.imagery.paulnorman.ca/tiles/bc_mosaic/{z}/{x}/{y}.png",
-        "subdomains": [
-            "a",
-            "b",
-            "c",
-            "d"
+        "name": "Freemap.sk Cyclo",
+        "type": "tms",
+        "template": "http://t{switch:1,2,3,4}.freemap.sk/C/{zoom}/{x}/{y}.jpeg",
+        "scaleExtent": [
+            8,
+            16
         ],
-        "extents": [[
+        "extents": [
             [
-                -123.441,
-                48.995
-            ],
-            [
-                -121.346,
-                50.426
+                [
+                    16.7988747,
+                    47.7145247
+                ],
+                [
+                    22.5884098,
+                    49.6375827
+                ]
             ]
-        ]],
-        "sourcetag": "bc_mosaic",
-        "terms_url": "http://imagery.paulnorman.ca/tiles/about.html"
-    },
-    {
-        "name": "OS OpenData Streetview",
-        "template": "http://os.openstreetmap.org/sv/{z}/{x}/{y}.png",
-        "extents": [[
-            [
-                -8.72,
-                49.86
-            ],
-            [
-                1.84,
-                60.92
-            ]
-        ]],
-        "sourcetag": "OS_OpenData_StreetView"
-    },
-    {
-        "name": "OS OpenData Locator",
-        "template": "http://tiles.itoworld.com/os_locator/{z}/{x}/{y}.png",
-        "extents": [[
-            [
-                -9,
-                49.8
-            ],
-            [
-                1.9,
-                61.1
-            ]
-        ]],
-        "sourcetag": "OS_OpenData_Locator"
-    },
-    {
-        "name": "OS 1:25k historic (OSM)",
-        "template": "http://ooc.openstreetmap.org/os1/{z}/{x}/{y}.jpg",
-        "extents": [[
-            [
-                -9,
-                49.8
-            ],
-            [
-                1.9,
-                61.1
-            ]
-        ]],
-        "sourcetag": "OS 1:25k"
-    },
-    {
-        "name": "OS 1:25k historic (NLS)",
-        "template": "http://geo.nls.uk/mapdata2/os/25000/{z}/{x}/{y}.png",
-        "extents": [[
-            [
-                -9,
-                49.8
-            ],
-            [
-                1.9,
-                61.1
-            ]
-        ]],
-        "sourcetag": "OS 1:25k",
-        "logo": "icons/logo_nls70-nq8.png",
-        "logo_url": "http://geo.nls.uk/maps/"
-    },
-    {
-        "name": "OS 7th Series historic (OSM)",
-        "template": "http://ooc.openstreetmap.org/os7/{z}/{x}/{y}.jpg",
-        "extents": [[
-            [
-                -9,
-                49.8
-            ],
-            [
-                1.9,
-                61.1
-            ]
-        ]],
-        "sourcetag": "OS7"
-    },
-    {
-        "name": "OS 7th Series historic (NLS)",
-        "template": "http://geo.nls.uk/mapdata2/os/seventh/{z}/{x}/{y}.png",
-        "extents": [[
-            [
-                -9,
-                49.8
-            ],
-            [
-                1.9,
-                61.1
-            ]
-        ]],
-        "sourcetag": "OS7",
-        "logo": "icons/logo_nls70-nq8.png",
-        "logo_url": "http://geo.nls.uk/maps/"
-    },
-    {
-        "name": "OS New Popular Edition historic",
-        "template": "http://ooc.openstreetmap.org/npe/{z}/{x}/{y}.png",
-        "extents": [[
-            [
-                -5.8,
-                49.8
-            ],
-            [
-                1.9,
-                55.8
-            ]
-        ]],
-        "sourcetag": "NPE"
-    },
-    {
-        "name": "OS Scottish Popular historic",
-        "template": "http://ooc.openstreetmap.org/npescotland/tiles/{z}/{x}/{y}.jpg",
-        "extents": [[
-            [
-                -7.8,
-                54.5
-            ],
-            [
-                -1.1,
-                61.1
-            ]
-        ]],
-        "sourcetag": "NPE"
-    },
-    {
-        "name": "Surrey aerial",
-        "template": "http://gravitystorm.dev.openstreetmap.org/surrey/{z}/{x}/{y}.png",
-        "extents": [[
-            [
-                -0.856,
-                51.071
-            ],
-            [
-                0.062,
-                51.473
-            ]
-        ]],
-        "sourcetag": "Surrey aerial"
-    },
-    {
-        "name": "Port au Prince - GeoEye Jan 2010",
-        "template": "http://gravitystorm.dev.openstreetmap.org/imagery/haiti/{z}/{x}/{y}.png",
-        "extents": [[
-            [
-                -72.43,
-                18.50
-            ],
-            [
-                -72.31,
-                18.58
-            ]
-        ]],
-        "sourcetag": "GeoEye, 2010-01"
-    },
-    {
-        "name": "Haiti - IOM Drone Imagery, 2012-13",
-        "template": "http://wms.openstreetmap.fr/tms/1.0.0/iomhaiti/{zoom}/{x}/{y}",
-        "extents": [[
-            [
-                -74.5,
-                17.95
-            ],
-            [
-                -71.58,
-                20.12
-            ]
-        ]],
-        "sourcetag": "iom_image2013"
-    },
-    {
-        "name": "NAIP",
-        "template": "http://cube.telascience.org/tilecache/tilecache.py/NAIP_ALL/{z}/{x}/{y}.png",
-        "description": "National Agriculture Imagery Program",
-        "extents": [[
-            [
-                -125.8,
-                24.2
-            ],
-            [
-                -62.3,
-                49.5
-            ]
-        ],[
-            [
-                -168.5,
-                55.3
-            ],
-            [
-                -140,
-                71.5
-            ]
-        ]],
-        "sourcetag": "NAIP"
-    },
-    {
-        "name": "Ireland - NLS Historic Maps",
-        "template": "http://geo.nls.uk/maps/ireland/gsgs4136/{z}/{x}/{y}.png",
-        "extents": [[
-            [
-                -10.71,
-                51.32
-            ],
-            [
-                -5.37,
-                55.46
-            ]
-        ]],
-        "sourcetag": "NLS Historic Maps",
-        "logo": "icons/logo_nls70-nq8.png",
-        "logo_url": "http://geo.nls.uk/maps/"
-    },
-    {
-        "name": "Denmark - Fugro Aerial Imagery",
-        "template": "http://tile.openstreetmap.dk/fugro2005/{z}/{x}/{y}.jpg",
-        "extents": [[
-            [
-                7.81,
-                54.44
-            ],
-            [
-                15.49,
-                57.86
-            ]
-        ]],
-        "sourcetag": "Fugro (2005)"
-    },
-    {
-        "name": "Denmark - Stevns Kommune",
-        "template": "http://tile.openstreetmap.dk/stevns/2009/{z}/{x}/{y}.jpg",
-        "extents": [[
-            [
-                12.09144,
-                55.23403
-            ],
-            [
-                12.47712,
-                55.43647
-            ]
-        ]],
-        "sourcetag": "Stevns Kommune (2009)"
-    },
-    {
-        "name": "Austria - geoimage.at",
-        "template": "http://geoimage.openstreetmap.at/4d80de696cd562a63ce463a58a61488d/{z}/{x}/{y}.jpg",
-        "extents": [[
-            [
-                9.36,
-                46.33
-            ],
-            [
-                17.28,
-                49.09
-            ]
-        ]],
-        "sourcetag": "geoimage.at"
-    },
-    {
-        "name": "Russia - Kosmosnimki.ru IRS Satellite",
-        "template": "http://irs.gis-lab.info/?layers=irs&request=GetTile&z={z}&x={x}&y={y}",
-        "extents": [[
-            [
-                19.02,
-                40.96
-            ],
-            [
-                77.34,
-                70.48
-            ]
-        ]],
-        "sourcetag": "Kosmosnimki.ru IRS"
-    },
-    {
-        "name": "Belarus - Kosmosnimki.ru SPOT4 Satellite",
-        "template": "http://irs.gis-lab.info/?layers=spot&request=GetTile&z={z}&x={x}&y={y}",
-        "extents": [[
-            [
-                23.16,
-                51.25
-            ],
-            [
-                32.83,
-                56.19
-            ]
-        ]],
-        "sourcetag": "Kosmosnimki.ru SPOT4"
-    },
-    {
-        "name": "Australia - Geographic Reference Image",
-        "template": "http://agri.openstreetmap.org/{z}/{x}/{y}.png",
-        "extents": [[
-            [
-                96,
-                -44
-            ],
-            [
-                168,
-                -9
-            ]
-        ]],
-        "sourcetag": "AGRI"
-    },
-    {
-        "name": "Switzerland - Canton Aargau - AGIS 25cm 2011",
-        "template": "http://tiles.poole.ch/AGIS/OF2011/{z}/{x}/{y}.png",
-        "extents": [[
-            [
-                7.69,
-                47.13
-            ],
-            [
-                8.48,
-                47.63
-            ]
-        ]],
-        "sourcetag": "AGIS OF2011"
-    },
-    {
-        "name": "Switzerland - Canton Solothurn - SOGIS 2007",
-        "template": "http://mapproxy.sosm.ch:8080/tiles/sogis2007/EPSG900913/{z}/{x}/{y}.png?origin=nw",
-        "extents": [[
-            [
-                7.33,
-                47.06
-            ],
-            [
-                8.04,
-                47.5
-            ]
-        ]],
-        "sourcetag": "Orthofoto 2007 WMS Solothurn"
-    },
-    {
-        "name": "Poland - Media-Lab fleet GPS masstracks",
-        "template": "http://masstracks.media-lab.com.pl/{z}/{x}/{y}.png",
-        "extents": [[
-            [
-                14,
-                48.9
-            ],
-            [
-                24.2,
-                55
-            ]
-        ]],
-        "sourcetag": "masstracks"
-    },
-    {
-        "name": "South Africa - CD:NGI Aerial",
-        "template": "http://{t}.aerial.openstreetmap.org.za/ngi-aerial/{z}/{x}/{y}.jpg",
-        "subdomains": [
-            "a",
-            "b",
-            "c"
         ],
-        "extents": [[
+        "terms_text": "Copyright ©2007-2012 Freemap Slovakia (www.freemap.sk). Some rights reserved."
+    },
+    {
+        "name": "Freemap.sk Hiking",
+        "type": "tms",
+        "template": "http://t{switch:1,2,3,4}.freemap.sk/T/{zoom}/{x}/{y}.jpeg",
+        "scaleExtent": [
+            8,
+            16
+        ],
+        "extents": [
             [
-                17.64,
-                -34.95
-            ],
-            [
-                32.87,
-                -22.05
+                [
+                    16.7988747,
+                    47.7145247
+                ],
+                [
+                    22.5884098,
+                    49.6375827
+                ]
             ]
-        ]],
-        "sourcetag": "ngi-aerial"
+        ],
+        "terms_text": "Copyright ©2007-2012 Freemap Slovakia (www.freemap.sk). Some rights reserved."
+    },
+    {
+        "name": "Freemap.sk Ski",
+        "type": "tms",
+        "template": "http://t{switch:1,2,3,4}.freemap.sk/K/{zoom}/{x}/{y}.jpeg",
+        "scaleExtent": [
+            8,
+            16
+        ],
+        "extents": [
+            [
+                [
+                    16.7988747,
+                    47.7145247
+                ],
+                [
+                    22.5884098,
+                    49.6375827
+                ]
+            ]
+        ],
+        "terms_text": "Copyright ©2007-2012 Freemap Slovakia (www.freemap.sk). Some rights reserved."
+    },
+    {
+        "name": "Fugro (Denmark)",
+        "type": "tms",
+        "template": "http://{switch:a,b,c}.tile.openstreetmap.dk/fugro2005/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            19
+        ],
+        "extents": [
+            [
+                [
+                    8.0185123,
+                    54.4681655
+                ],
+                [
+                    15.309925,
+                    57.8228945
+                ]
+            ]
+        ],
+        "terms_url": "http://wiki.openstreetmap.org/wiki/Fugro",
+        "terms_text": "Fugro Aerial Mapping"
+    },
+    {
+        "name": "Ireland Bartholomew Quarter-Inch 1940",
+        "type": "tms",
+        "template": "http://geo.nls.uk/maps/ireland/bartholomew/{zoom}/{x}/{-y}.png",
+        "scaleExtent": [
+            5,
+            13
+        ],
+        "extents": [
+            [
+                [
+                    -10.6702376,
+                    51.3091083
+                ],
+                [
+                    -5.3614762,
+                    55.4530757
+                ]
+            ]
+        ],
+        "terms_url": "http://geo.nls.uk/maps/",
+        "terms_text": "National Library of Scotland Historic Maps"
+    },
+    {
+        "name": "Ireland British War Office One-Inch 1941-43 GSGS 4136",
+        "type": "tms",
+        "template": "http://geo.nls.uk/maps/ireland/gsgs4136/{zoom}/{x}/{-y}.png",
+        "scaleExtent": [
+            5,
+            15
+        ],
+        "extents": [
+            [
+                [
+                    -10.5005905,
+                    51.4147902
+                ],
+                [
+                    -5.3618278,
+                    55.3874955
+                ]
+            ]
+        ],
+        "terms_url": "http://geo.nls.uk/maps/",
+        "terms_text": "National Library of Scotland Historic Maps"
+    },
+    {
+        "name": "Ireland EEA CORINE 2006",
+        "type": "tms",
+        "template": "http://a.tile.openstreetmap.ie/tiles/corine/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            5,
+            16
+        ],
+        "extents": [
+            [
+                [
+                    -11.035318,
+                    51.1991221
+                ],
+                [
+                    -5.0649187,
+                    55.6205288
+                ]
+            ]
+        ],
+        "terms_url": "http://www.eea.europa.eu/data-and-maps/data/clc-2006-vector-data-version-1",
+        "terms_text": "EEA Corine 2006"
+    },
+    {
+        "name": "Ireland EEA GMES Urban Atlas",
+        "type": "tms",
+        "template": "http://a.tile.openstreetmap.ie/tiles/urbanatlas/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            5,
+            17
+        ],
+        "extents": [
+            [
+                [
+                    -10.71,
+                    51.32
+                ],
+                [
+                    -5.37,
+                    55.46
+                ]
+            ]
+        ],
+        "terms_url": "http://www.eea.europa.eu/data-and-maps/data/urban-atlas",
+        "terms_text": "EEA GMES Urban Atlas"
+    },
+    {
+        "name": "Kanton Aargau 25cm (AGIS 2011)",
+        "type": "tms",
+        "template": "http://tiles.poole.ch/AGIS/OF2011/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            14,
+            19
+        ],
+        "extents": [
+            [
+                [
+                    7.7,
+                    47.12
+                ],
+                [
+                    8.5,
+                    47.63
+                ]
+            ]
+        ],
+        "terms_text": "AGIS OF2011"
+    },
+    {
+        "name": "Katastrálna mapa Slovenska (KaPor, 2010-04)",
+        "type": "tms",
+        "template": "http://www.freemap.sk/tms/kapor2/{zoom}/{x}/{y}.jpg",
+        "extents": [
+            [
+                [
+                    16.7988747,
+                    47.7145247
+                ],
+                [
+                    22.5884098,
+                    49.6375827
+                ]
+            ]
+        ],
+        "terms_url": "http://wiki.freemap.sk/KatasterPortal",
+        "terms_text": "Permisssion by UGKK"
+    },
+    {
+        "name": "Katastrálna mapa Slovenska (KaPor, 2011-05)",
+        "type": "tms",
+        "template": "http://www.freemap.sk/tms/kapor2_201105/{zoom}/{x}/{y}.jpg",
+        "extents": [
+            [
+                [
+                    16.7988747,
+                    47.7145247
+                ],
+                [
+                    22.5884098,
+                    49.6375827
+                ]
+            ]
+        ],
+        "terms_url": "http://wiki.freemap.sk/KatasterPortal",
+        "terms_text": "Permisssion by UGKK"
     },
     {
         "name": "Lithuania - ORT10LT",
+        "type": "tms",
         "template": "http://mapproxy.openmap.lt/ort10lt/g/{z}/{x}/{y}.jpeg",
-        "extents": [[
-            [
-                21,
-                53.88
-            ],
-            [
-                26.85,
-                56.45
-            ]
-        ]],
         "scaleExtent": [
             4,
             18
         ],
-        "sourcetag": "NŽT ORT10LT"
+        "extents": [
+            [
+                [
+                    21,
+                    53.88
+                ],
+                [
+                    26.85,
+                    56.45
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "Locator Overlay",
+        "type": "tms",
+        "template": "http://{switch:a,b,c}.tiles.mapbox.com/v3/openstreetmap.map-btyhiati/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            16
+        ],
+        "default": true,
+        "overlay": true
+    },
+    {
+        "name": "MapBox Satellite",
+        "type": "tms",
+        "description": "Satellite and aerial imagery.",
+        "template": "http://{switch:a,b,c}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            16
+        ],
+        "default": true
+    },
+    {
+        "name": "MapQuest Open Aerial",
+        "type": "tms",
+        "template": "http://oatile{switch:1,2,3,4}.mqcdn.com/tiles/1.0.0/sat/{zoom}/{x}/{y}.png",
+        "default": true
+    },
+    {
+        "name": "NLS - OS 1-inch 7th Series 1955-61",
+        "type": "tms",
+        "template": "http://geo.nls.uk/mapdata2/os/seventh/{zoom}/{x}/{-y}.png",
+        "scaleExtent": [
+            5,
+            16
+        ],
+        "extents": [
+            [
+                [
+                    -8.6710698,
+                    49.8591793
+                ],
+                [
+                    1.7933451,
+                    60.8634056
+                ]
+            ]
+        ],
+        "terms_url": "http://geo.nls.uk/maps/",
+        "terms_text": "National Library of Scotland Historic Maps"
+    },
+    {
+        "name": "NLS - OS 1:25k 1st Series 1937-61",
+        "type": "tms",
+        "template": "http://geo.nls.uk/mapdata2/os/25000/{zoom}/{x}/{-y}.png",
+        "scaleExtent": [
+            5,
+            16
+        ],
+        "extents": [
+            [
+                [
+                    -6.46676,
+                    49.8159968
+                ],
+                [
+                    1.8345714,
+                    58.7036341
+                ]
+            ]
+        ],
+        "terms_url": "http://geo.nls.uk/maps/",
+        "terms_text": "National Library of Scotland Historic Maps"
+    },
+    {
+        "name": "NLS - OS 6-inch Scotland 1842-82",
+        "type": "tms",
+        "template": "http://geo.nls.uk/maps/os/six_inch/{zoom}/{x}/{-y}.png",
+        "scaleExtent": [
+            5,
+            16
+        ],
+        "extents": [
+            [
+                [
+                    -7.7901222,
+                    54.6297227
+                ],
+                [
+                    -0.635467,
+                    60.8943762
+                ]
+            ]
+        ],
+        "terms_url": "http://geo.nls.uk/maps/",
+        "terms_text": "National Library of Scotland Historic Maps"
+    },
+    {
+        "name": "OS 1:25k historic (OSM)",
+        "type": "tms",
+        "template": "http://ooc.openstreetmap.org/os1/{zoom}/{x}/{y}.jpg",
+        "scaleExtent": [
+            6,
+            17
+        ],
+        "extents": [
+            [
+                [
+                    -9,
+                    49.8
+                ],
+                [
+                    1.9,
+                    61.1
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "OS New Popular Edition historic",
+        "type": "tms",
+        "template": "http://ooc.openstreetmap.org/npe/{zoom}/{x}/{y}.png",
+        "extents": [
+            [
+                [
+                    -5.8,
+                    49.8
+                ],
+                [
+                    1.9,
+                    55.8
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "OS OpenData Locator",
+        "type": "tms",
+        "template": "http://tiles.itoworld.com/os_locator/{zoom}/{x}/{y}.png",
+        "extents": [
+            [
+                [
+                    -9,
+                    49.8
+                ],
+                [
+                    1.9,
+                    61.1
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "OS OpenData StreetView",
+        "type": "tms",
+        "template": "http://os.openstreetmap.org/sv/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            1,
+            18
+        ],
+        "extents": [
+            [
+                [
+                    -8.7163482,
+                    49.8673563
+                ],
+                [
+                    1.8333912,
+                    60.9103862
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "OS Scottish Popular historic",
+        "type": "tms",
+        "template": "http://ooc.openstreetmap.org/npescotland/tiles/{zoom}/{x}/{y}.jpg",
+        "scaleExtent": [
+            6,
+            15
+        ],
+        "extents": [
+            [
+                [
+                    -7.8,
+                    54.5
+                ],
+                [
+                    -1.1,
+                    61.1
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "OpenPT Map (overlay)",
+        "type": "tms",
+        "template": "http://openptmap.de/tiles/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            5,
+            16
+        ],
+        "extents": [
+            [
+                [
+                    5.8800796,
+                    45.7953255
+                ],
+                [
+                    17.2017097,
+                    55.0952362
+                ]
+            ]
+        ],
+        "terms_url": "http://openstreetmap.org/",
+        "terms_text": "© OpenStreetMap contributors, CC-BY-SA"
+    },
+    {
+        "name": "OpenStreetMap (Mapnik)",
+        "type": "tms",
+        "description": "The default OpenStreetMap layer.",
+        "template": "http://tile.openstreetmap.org/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            18
+        ],
+        "terms_url": "http://openstreetmap.org/",
+        "terms_text": "© OpenStreetMap contributors, CC-BY-SA",
+        "default": true
+    },
+    {
+        "name": "Pangasinán/Bulacan (Phillipines HiRes)",
+        "type": "tms",
+        "template": "http://gravitystorm.dev.openstreetmap.org/imagery/philippines/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            12,
+            19
+        ],
+        "extents": [
+            [
+                [
+                    120.33659,
+                    14.7025
+                ],
+                [
+                    121.2699,
+                    16.21853
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "Slovakia EEA CORINE 2006",
+        "type": "tms",
+        "template": "http://www.freemap.sk/tms/clc/{zoom}/{x}/{y}.png",
+        "extents": [
+            [
+                [
+                    16.7988747,
+                    47.7145247
+                ],
+                [
+                    22.5884098,
+                    49.6375827
+                ]
+            ]
+        ],
+        "terms_url": "http://www.eea.europa.eu/data-and-maps/data/clc-2006-vector-data-version-1",
+        "terms_text": "EEA Corine 2006"
+    },
+    {
+        "name": "Slovakia EEA GMES Urban Atlas",
+        "type": "tms",
+        "template": "http://www.freemap.sk/tms/urbanatlas/{zoom}/{x}/{y}.png",
+        "extents": [
+            [
+                [
+                    16.7988747,
+                    47.7145247
+                ],
+                [
+                    22.5884098,
+                    49.6375827
+                ]
+            ]
+        ],
+        "terms_url": "http://www.eea.europa.eu/data-and-maps/data/urban-atlas",
+        "terms_text": "EEA GMES Urban Atlas"
+    },
+    {
+        "name": "Slovakia Historic Maps",
+        "type": "tms",
+        "template": "http://tms.freemap.sk/historicke/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            12
+        ],
+        "extents": [
+            [
+                [
+                    16.8196949,
+                    47.4927236
+                ],
+                [
+                    22.8388318,
+                    49.5030322
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "South Africa CD:NGI Aerial",
+        "type": "tms",
+        "template": "http://{switch:a,b,c}.aerial.openstreetmap.org.za/ngi-aerial/{zoom}/{x}/{y}.jpg",
+        "scaleExtent": [
+            1,
+            22
+        ],
+        "extents": [
+            [
+                [
+                    16.4491046,
+                    -34.8379056
+                ],
+                [
+                    32.899986,
+                    -22.1186426
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "Stadt Uster Orthophoto 2008 10cm",
+        "type": "tms",
+        "template": "http://mapproxy.sosm.ch:8080/tiles/uster/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
+        "extents": [
+            [
+                [
+                    8.6,
+                    47.31
+                ],
+                [
+                    8.77,
+                    47.39
+                ]
+            ]
+        ],
+        "terms_text": "Stadt Uster Vermessung Orthophoto 2008"
+    },
+    {
+        "name": "Stevns (Denmark)",
+        "type": "tms",
+        "template": "http://{switch:a,b,c}.tile.openstreetmap.dk/stevns/2009/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            20
+        ],
+        "extents": [
+            [
+                [
+                    12.0913942,
+                    55.2340267
+                ],
+                [
+                    12.4707413,
+                    55.4364665
+                ]
+            ]
+        ],
+        "terms_text": "Stevns Kommune"
+    },
+    {
+        "name": "Surrey Air Survey",
+        "type": "tms",
+        "template": "http://gravitystorm.dev.openstreetmap.org/surrey/{zoom}/{x}/{y}.png",
+        "extents": [
+            [
+                [
+                    -0.856,
+                    51.071
+                ],
+                [
+                    0.062,
+                    51.473
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "TIGER 2012 Roads Overlay",
+        "type": "tms",
+        "description": "Public domain road data from the US Government.",
+        "template": "http://{switch:a,b,c}.tile.openstreetmap.us/tiger2012_roads_expanded/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            16,
+            19
+        ],
+        "extents": [
+            [
+                [
+                    -178.000097,
+                    18.7586966
+                ],
+                [
+                    -66.9452845,
+                    71.5633329
+                ]
+            ]
+        ],
+        "overlay": true
+    },
+    {
+        "name": "Toulouse - Orthophotoplan 2007",
+        "type": "tms",
+        "template": "http://wms.openstreetmap.fr/tms/1.0.0/toulouse_ortho2007/{zoom}/{x}/{y}",
+        "scaleExtent": [
+            0,
+            22
+        ],
+        "extents": [
+            [
+                [
+                    1.1919978,
+                    43.5102543
+                ],
+                [
+                    1.5810859,
+                    43.7312235
+                ]
+            ]
+        ],
+        "terms_url": "https://wiki.openstreetmap.org/wiki/Toulouse/ToulouseMetropoleData",
+        "terms_text": "ToulouseMetropole"
+    },
+    {
+        "name": "Toulouse - Orthophotoplan 2011",
+        "type": "tms",
+        "template": "http://wms.openstreetmap.fr/tms/1.0.0/toulouse_ortho2011/{zoom}/{x}/{y}",
+        "scaleExtent": [
+            0,
+            22
+        ],
+        "extents": [
+            [
+                [
+                    1.1135067,
+                    43.5094658
+                ],
+                [
+                    1.6384146,
+                    43.7815757
+                ]
+            ]
+        ],
+        "terms_url": "https://wiki.openstreetmap.org/wiki/Toulouse/ToulouseMetropoleData",
+        "terms_text": "ToulouseMetropole"
+    },
+    {
+        "name": "Tours - Orthophotos 2008",
+        "type": "tms",
+        "template": "http://tms.mapspot.ge/tms/2/nonstandard/{zoom}/{x}/{y}.jpeg",
+        "extents": [
+            [
+                [
+                    0.4541016,
+                    47.3369074
+                ],
+                [
+                    0.77497,
+                    47.4881952
+                ]
+            ]
+        ],
+        "terms_url": "http://wiki.openstreetmap.org/wiki/Tours/Orthophoto",
+        "terms_text": "Orthophoto Tour(s) Plus 2008"
+    },
+    {
+        "name": "Tours - Orthophotos 2008-2010",
+        "type": "tms",
+        "template": "http://wms.openstreetmap.fr/tms/1.0.0/tours/{zoom}/{x}/{y}",
+        "scaleExtent": [
+            0,
+            20
+        ],
+        "extents": [
+            [
+                [
+                    0.3864341,
+                    47.2594616
+                ],
+                [
+                    0.8201963,
+                    47.4911439
+                ]
+            ]
+        ],
+        "terms_url": "http://wiki.openstreetmap.org/wiki/Tours/Orthophoto",
+        "terms_text": "Orthophoto Tour(s) Plus 2008"
+    },
+    {
+        "name": "USGS Large Scale Imagery",
+        "type": "tms",
+        "template": "http://{switch:a,b,c}.tile.openstreetmap.us/usgs_large_scale/{zoom}/{x}/{y}.jpg",
+        "scaleExtent": [
+            12,
+            20
+        ],
+        "extents": [
+            [
+                [
+                    -124.8185282,
+                    24.496294
+                ],
+                [
+                    -66.9311098,
+                    49.4425264
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "USGS Topographic Maps",
+        "type": "tms",
+        "template": "http://{switch:a,b,c}.tile.openstreetmap.us/usgs_scanned_topos/{zoom}/{x}/{y}.png",
+        "extents": [
+            [
+                [
+                    -178.000097,
+                    18.9023432
+                ],
+                [
+                    -65.9892568,
+                    71.9983391
+                ]
+            ]
+        ]
+    },
+    {
+        "name": "Vejmidte (Denmark)",
+        "type": "tms",
+        "template": "http://{switch:a,b,c}.tile.openstreetmap.dk/danmark/vejmidte/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            20
+        ],
+        "extents": [
+            [
+                [
+                    8.0185123,
+                    54.4681655
+                ],
+                [
+                    15.309925,
+                    57.8228945
+                ]
+            ]
+        ],
+        "terms_url": "http://wiki.openstreetmap.org/wiki/Vejmidte",
+        "terms_text": "Danish municipalities"
+    },
+    {
+        "name": "Vienna: Beschriftungen (annotations)",
+        "type": "tms",
+        "template": "http://www.wien.gv.at/wmts/beschriftung/normal/google3857/{zoom}/{y}/{x}.png",
+        "scaleExtent": [
+            0,
+            19
+        ],
+        "extents": [
+            [
+                [
+                    16.17,
+                    48.1
+                ],
+                [
+                    16.58,
+                    48.33
+                ]
+            ]
+        ],
+        "terms_url": "http://data.wien.gv.at/",
+        "terms_text": "Stadt Wien"
+    },
+    {
+        "name": "Vienna: Mehrzweckkarte (general purpose)",
+        "type": "tms",
+        "template": "http://www.wien.gv.at/wmts/fmzk/pastell/google3857/{zoom}/{y}/{x}.jpeg",
+        "scaleExtent": [
+            0,
+            19
+        ],
+        "extents": [
+            [
+                [
+                    16.17,
+                    48.1
+                ],
+                [
+                    16.58,
+                    48.33
+                ]
+            ]
+        ],
+        "terms_url": "http://data.wien.gv.at/",
+        "terms_text": "Stadt Wien"
+    },
+    {
+        "name": "Vienna: Orthofoto (aerial image)",
+        "type": "tms",
+        "template": "http://www.wien.gv.at/wmts/lb/farbe/google3857/{zoom}/{y}/{x}.jpeg",
+        "scaleExtent": [
+            0,
+            19
+        ],
+        "extents": [
+            [
+                [
+                    16.17,
+                    48.1
+                ],
+                [
+                    16.58,
+                    48.33
+                ]
+            ]
+        ],
+        "terms_url": "http://data.wien.gv.at/",
+        "terms_text": "Stadt Wien"
     }
 ]

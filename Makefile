@@ -84,6 +84,9 @@ clean:
 translations:
 	node data/update_locales
 
+imagery:
+	node data/update_imagery
+
 SPRITE = inkscape --export-area-page
 
 dist/img/line-presets.png: svg/line-presets.svg

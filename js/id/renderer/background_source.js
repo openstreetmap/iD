@@ -17,29 +17,15 @@ iD.BackgroundSource = function(data) {
     };
 
     source.url = function(coord) {
-        var u = '';
-        for (var zoom = coord[2]; zoom > 0; zoom--) {
-            var b = 0;
-            var mask = 1 << (zoom - 1);
-            if ((coord[0] & mask) !== 0) b++;
-            if ((coord[1] & mask) !== 0) b += 2;
-            u += b.toString();
-        }
-
         return data.template
-            .replace('{t}', data.subdomains ?
-                data.subdomains[(coord[0] + coord[1]) % data.subdomains.length] : '')
-            .replace('{u}', u)
             .replace('{x}', coord[0])
             .replace('{y}', coord[1])
             // TMS-flipped y coordinate
             .replace('{ty}', Math.pow(2, coord[2]) - coord[1] - 1)
-            .replace('{z}', coord[2])
-            // JOSM style
-            .replace('{zoom}', coord[2])
-            .replace(/\{(switch\:[^\}]*)\}/, function(s, r) {
-                var subdomains = r.split(':')[1].split(',');
-                return subdomains[coord[2] % subdomains.length];
+            .replace(/\{z(oom)?\}/, coord[2])
+            .replace(/\{switch:([^}]+)\}/, function(s, r) {
+                var subdomains = r.split(',');
+                return subdomains[(coord[0] + coord[1]) % subdomains.length];
             });
     };
 
@@ -88,6 +74,25 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
         dispatch.change();
     });
 
+    var template = "http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z",
+        subdomains = [0, 1, 2, 3];
+
+    bing.url = function(coord) {
+        var u = '';
+
+        for (var zoom = coord[2]; zoom > 0; zoom--) {
+            var b = 0;
+            var mask = 1 << (zoom - 1);
+            if ((coord[0] & mask) !== 0) b++;
+            if ((coord[1] & mask) !== 0) b += 2;
+            u += b.toString();
+        }
+
+        return template
+            .replace('{t}', subdomains[(coord[0] + coord[1]) % 4])
+            .replace('{u}', u);
+    };
+
     bing.copyrightNotices = function(zoom, extent) {
         zoom = Math.min(zoom, 21);
         return providers.filter(function(provider) {
@@ -100,6 +105,9 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
             return provider.attribution;
         }).join(', ');
     };
+
+    bing.logo = "bing_maps.png";
+    bing.terms_url = "http://opengeodata.org/microsoft-imagery-details";
 
     return bing;
 };

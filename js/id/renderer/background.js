@@ -7,31 +7,31 @@ iD.Background = function(context) {
         overlayLayers = [];
 
     var backgroundSources = iD.data.imagery.map(function(source) {
-        if (source.sourcetag === 'Bing') {
+        if (source.type === 'bing') {
             return iD.BackgroundSource.Bing(source, dispatch);
         } else {
             return iD.BackgroundSource(source);
         }
     });
 
-    function findSource(sourcetag) {
+    function findSource(id) {
         return _.find(backgroundSources, function(d) {
-            return d.sourcetag && d.sourcetag === sourcetag;
+            return d.id && d.id === id;
         });
     }
 
     function updateImagery() {
         var b = background.baseLayerSource(),
-            o = overlayLayers.map(function (d) { return d.source().sourcetag; }).join(','),
+            o = overlayLayers.map(function (d) { return d.source().id; }).join(','),
             q = iD.util.stringQs(location.hash.substring(1));
 
-        var tag = b.sourcetag;
-        if (!tag && b.name === 'Custom') {
-            tag = 'custom:' + b.template;
+        var id = b.id;
+        if (!id && b.name === 'Custom') {
+            id = 'custom:' + b.template;
         }
 
-        if (tag) {
-            q.background = tag;
+        if (id) {
+            q.background = id;
         } else {
             delete q.background;
         }
@@ -48,13 +48,13 @@ iD.Background = function(context) {
         if (b.name === 'Custom') {
             imageryUsed.push('Custom (' + b.template + ')');
         } else {
-            imageryUsed.push(b.sourcetag || b.name);
+            imageryUsed.push(b.id || b.name);
         }
 
         overlayLayers.forEach(function (d) {
             var source = d.source();
             if (!source.isLocatorOverlay()) {
-                imageryUsed.push(source.sourcetag || source.name);
+                imageryUsed.push(source.id || source.name);
             }
         });
 

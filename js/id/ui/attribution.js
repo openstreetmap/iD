@@ -14,7 +14,7 @@ iD.ui.Attribution = function(context) {
             .append('span')
             .attr('class', 'provided-by')
             .each(function(d) {
-                var source = d.sourcetag || d.name;
+                var source = d.terms_text || d.id || d.name;
 
                 if (d.logo) {
                     source = '<img class="source-image" src="' + context.imagePath(d.logo) + '">';
