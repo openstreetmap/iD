@@ -31,6 +31,10 @@ _.extend(iD.Relation.prototype, {
         });
     },
 
+    isDegenerate: function() {
+        return this.members.length === 0;
+    },
+
     // Return an array of members, each extended with an 'index' property whose value
     // is the member index.
     indexedMembers: function() {

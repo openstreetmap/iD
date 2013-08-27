@@ -11,7 +11,12 @@ iD.actions.DeleteWay = function(wayId) {
 
         graph.parentRelations(way)
             .forEach(function(parent) {
-                graph = graph.replace(parent.removeMembersWithID(wayId));
+                parent = parent.removeMembersWithID(wayId);
+                graph = graph.replace(parent);
+
+                if (parent.isDegenerate()) {
+                    graph = iD.actions.DeleteRelation(parent.id)(graph);
+                }
             });
 
         _.uniq(way.nodes).forEach(function(nodeId) {

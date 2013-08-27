@@ -42,4 +42,12 @@ describe("iD.actions.DeleteNode", function () {
             graph  = action(iD.Graph([node1, node2, way]));
         expect(graph.hasEntity(way.id)).to.be.undefined;
     });
+
+    it("deletes parent relations that become empty", function () {
+        var node1    = iD.Node(),
+            relation = iD.Relation({members: [{ id: node1.id }]}),
+            action   = iD.actions.DeleteNode(node1.id),
+            graph    = action(iD.Graph([node1, relation]));
+        expect(graph.hasEntity(relation.id)).to.be.undefined;
+    });
 });

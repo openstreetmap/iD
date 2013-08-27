@@ -56,6 +56,16 @@ describe('iD.Relation', function () {
         });
     });
 
+    describe("#isDegenerate", function () {
+        it("returns true for a relation without members", function () {
+            expect(iD.Relation().isDegenerate()).to.equal(true);
+        });
+
+        it("returns false for a relation with members", function () {
+            expect(iD.Relation({members: [{id: 'a', role: 'inner'}]}).isDegenerate()).to.equal(false);
+        });
+    });
+
     describe("#memberByRole", function () {
         it("returns the first member with the given role", function () {
             var r = iD.Relation({members: [
