@@ -278,9 +278,9 @@ en:
       on it on the map. This will highlight the selected feature, open a panel with
       details about it, and show a menu of things you can do with the feature.
 
-      Multiple features can be selected by holding the 'Shift' key, clicking,
-      and dragging on the map. This will select all features within the box
-      that's drawn, allowing you to do things with several features at once.
+      To select multiple features, hold down the 'Shift' key. Then either click
+      on the features you want to select, or drag on the map to draw a rectangle.
+      This will draw a box and select all the points within it.
 
       ### Saving Edits
 
