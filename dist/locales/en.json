@@ -425,6 +425,9 @@
                     }
                 }
             },
+            "access_toilets": {
+                "label": "Access"
+            },
             "address": {
                 "label": "Address",
                 "placeholders": {

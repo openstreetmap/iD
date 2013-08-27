@@ -3,7 +3,7 @@
         "toilets/disposal",
         "operator",
         "building_area",
-        "access"
+        "access_toilets"
     ],
     "geometry": [
         "point",
