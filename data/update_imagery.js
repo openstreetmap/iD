@@ -46,15 +46,20 @@ sources.forEach(function(source) {
 
     if (extent.min_zoom || extent.max_zoom) {
         im.scaleExtent = [
-            +(extent.min_zoom || 0),
-            +(extent.max_zoom || 20)
+            extent.min_zoom || 0,
+            extent.max_zoom || 20
         ];
     }
 
-    if (extent.bbox) {
-        im.extents = [[
-            [+extent.bbox.min_lon, +extent.bbox.min_lat],
-            [+extent.bbox.max_lon, +extent.bbox.max_lat]
+    if (extent.polygon) {
+        im.polygon = extent.polygon;
+    } else if (extent.bbox) {
+        im.polygon = [[
+            [extent.bbox.min_lon, extent.bbox.min_lat],
+            [extent.bbox.min_lon, extent.bbox.max_lat],
+            [extent.bbox.max_lon, extent.bbox.max_lat],
+            [extent.bbox.max_lon, extent.bbox.min_lat],
+            [extent.bbox.min_lon, extent.bbox.min_lat]
         ]];
     }
 
