@@ -20,7 +20,7 @@
      bordercolor="#666666"
      borderopacity="1"
      objecttolerance="10"
-     gridtolerance="10"
+     gridtolerance="10000"
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
@@ -28,10 +28,10 @@
      inkscape:window-height="1032"
      id="namedview392"
      showgrid="true"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="239.3439"
-     inkscape:cy="322.32003"
-     inkscape:window-x="0"
+     inkscape:zoom="4.2527422"
+     inkscape:cx="305.14936"
+     inkscape:cy="354.08338"
+     inkscape:window-x="2"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer12"
@@ -2098,5 +2098,56 @@
        inkscape:export-filename="/Users/saman/Desktop/id-google-plus.svg.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <g
+       transform="translate(301,-5.0000027)"
+       style="display:inline"
+       id="g7018">
+      <rect
+         style="opacity:0.5;color:#000000;fill:none;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect6728-7"
+         width="20"
+         height="20"
+         x="-56"
+         y="145" />
+      <g
+         id="g6893-0"
+         style="display:inline"
+         transform="translate(-21,0.2499569)">
+        <path
+           style="color:#000000;fill:#222222;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.79999375;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path4812-0-2"
+           d="m -33,152.75004 c -1.10457,0 -2.000003,0.89543 -2.000003,2 0,1.10457 0.895433,2 2.000003,2 1.104562,0 1.999996,-0.89543 1.999996,-2 0,-1.10457 -0.895434,-2 -1.999996,-2 z"
+           inkscape:connector-curvature="0" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path4808-3-3"
+           transform="translate(46,-0.24995996)"
+           d="m -67,149 c -3.313744,0 -6,2.68627 -6,6 0,3.31375 2.686256,6 6,6 3.313731,0 6,-2.68625 6,-6 0,-3.31373 -2.686269,-6 -6,-6 z m -1,2 2,0 0,3 3,0 0,2 -3,0 0,3 -2,0 0,-3 -3,0 0,-2 3,0 0,-3 z m -8,3 0,2 2,0 0,-2 -2,0 z"
+           style="color:#000000;fill:#7092ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.79999375;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      </g>
+    </g>
+    <g
+       id="g7098"
+       style="fill:#222222;fill-opacity:1;display:inline"
+       transform="translate(301,14.999997)">
+      <rect
+         y="145"
+         x="-56"
+         height="20"
+         width="20"
+         id="rect7100"
+         style="opacity:0.5;color:#000000;fill:none;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <g
+         transform="translate(-21,0.2499569)"
+         style="fill:#222222;fill-opacity:1;display:inline"
+         id="g7102">
+        <path
+           style="opacity:0.25;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="m 14,24 c -3.313744,0 -6,2.68627 -6,6 0,3.31375 2.686256,6 6,6 3.313731,0 6,-2.68625 6,-6 0,-3.31373 -2.686269,-6 -6,-6 z m -1,2 2,0 0,3 3,0 0,2 -3,0 0,3 -2,0 0,-3 -3,0 0,-2 3,0 0,-3 z M 2,28 c -1.10457,0 -2,0.89543 -2,2 0,1.10457 0.89543,2 2,2 1.104562,0 2,-0.89543 2,-2 0,-1.10457 -0.895438,-2 -2,-2 z m 3,1 0,2 2,0 0,-2 -2,0 z"
+           transform="translate(-35,124.75004)"
+           id="path7104"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
   </g>
 </svg>
