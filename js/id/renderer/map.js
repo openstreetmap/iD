@@ -254,7 +254,7 @@ iD.Map = function(context) {
     }
 
     map.mouse = function() {
-        var e = mousemove, s;
+        var e = mousemove || d3.event, s;
         while (s = e.sourceEvent) e = s;
         return mouse(e);
     };
