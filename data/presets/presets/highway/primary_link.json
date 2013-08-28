@@ -2,9 +2,9 @@
     "icon": "highway-primary-link",
     "fields": [
         "oneway",
+        "maxspeed",
         "structure",
         "access",
-        "maxspeed",
         "surface",
         "ref"
     ],

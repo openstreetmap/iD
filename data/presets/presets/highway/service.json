@@ -3,9 +3,9 @@
     "fields": [
         "service",
         "oneway",
+        "maxspeed",
         "structure",
         "access",
-        "maxspeed",
         "surface"
     ],
     "geometry": [

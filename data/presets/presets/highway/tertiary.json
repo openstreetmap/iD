@@ -2,10 +2,10 @@
     "icon": "highway-tertiary",
     "fields": [
         "oneway",
+        "maxspeed",
         "structure",
         "access",
         "lanes",
-        "maxspeed",
         "surface",
         "ref"
     ],

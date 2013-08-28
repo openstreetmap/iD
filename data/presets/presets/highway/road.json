@@ -2,9 +2,9 @@
     "icon": "highway-road",
     "fields": [
         "oneway",
+        "maxspeed",
         "structure",
         "access",
-        "maxspeed",
         "surface"
     ],
     "geometry": [

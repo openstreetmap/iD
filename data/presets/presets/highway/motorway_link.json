@@ -2,9 +2,9 @@
     "icon": "highway-motorway-link",
     "fields": [
         "oneway_yes",
+        "maxspeed",
         "structure",
         "access",
-        "maxspeed",
         "surface",
         "ref"
     ],

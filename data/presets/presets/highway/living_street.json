@@ -2,9 +2,9 @@
     "icon": "highway-living-street",
     "fields": [
         "oneway",
+        "maxspeed",
         "structure",
         "access",
-        "maxspeed",
         "surface"
     ],
     "geometry": [

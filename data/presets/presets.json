@@ -1712,9 +1712,9 @@
         "icon": "highway-living-street",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [
@@ -1741,10 +1741,10 @@
         "icon": "highway-motorway",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
             "lanes",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1773,9 +1773,9 @@
         "icon": "highway-motorway-link",
         "fields": [
             "oneway_yes",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1832,10 +1832,10 @@
         "icon": "highway-primary",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
             "lanes",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1852,9 +1852,9 @@
         "icon": "highway-primary-link",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1875,9 +1875,9 @@
         "icon": "highway-residential",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [
@@ -1893,9 +1893,9 @@
         "icon": "highway-road",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [
@@ -1911,10 +1911,10 @@
         "icon": "highway-secondary",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
             "lanes",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1931,9 +1931,9 @@
         "icon": "highway-secondary-link",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1955,9 +1955,9 @@
         "fields": [
             "service",
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [
@@ -2071,10 +2071,10 @@
         "icon": "highway-tertiary",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
             "lanes",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -2091,9 +2091,9 @@
         "icon": "highway-tertiary-link",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -2115,9 +2115,9 @@
         "fields": [
             "tracktype",
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [
@@ -2147,10 +2147,10 @@
         "icon": "highway-trunk",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
             "lanes",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -2167,9 +2167,9 @@
         "icon": "highway-trunk-link",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -2201,9 +2201,9 @@
         "icon": "highway-unclassified",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [

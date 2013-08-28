@@ -2,10 +2,10 @@
     "icon": "highway-primary",
     "fields": [
         "oneway",
+        "maxspeed",
         "structure",
         "access",
         "lanes",
-        "maxspeed",
         "surface",
         "ref"
     ],

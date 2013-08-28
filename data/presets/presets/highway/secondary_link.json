@@ -2,9 +2,9 @@
     "icon": "highway-secondary-link",
     "fields": [
         "oneway",
+        "maxspeed",
         "structure",
         "access",
-        "maxspeed",
         "surface",
         "ref"
     ],
