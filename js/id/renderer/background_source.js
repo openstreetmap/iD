@@ -21,7 +21,7 @@ iD.BackgroundSource = function(data) {
             .replace('{x}', coord[0])
             .replace('{y}', coord[1])
             // TMS-flipped y coordinate
-            .replace('{ty}', Math.pow(2, coord[2]) - coord[1] - 1)
+            .replace(/\{[t-]y\}/, Math.pow(2, coord[2]) - coord[1] - 1)
             .replace(/\{z(oom)?\}/, coord[2])
             .replace(/\{switch:([^}]+)\}/, function(s, r) {
                 var subdomains = r.split(',');
