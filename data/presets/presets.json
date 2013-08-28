@@ -1285,7 +1285,8 @@
         "tags": {
             "barrier": "entrance"
         },
-        "name": "Entrance"
+        "name": "Entrance",
+        "searchable": false
     },
     "barrier/fence": {
         "geometry": [
@@ -1576,7 +1577,8 @@
             "entrance": "*"
         },
         "fields": [
-            "entrance"
+            "entrance",
+            "address"
         ],
         "name": "Entrance"
     },
