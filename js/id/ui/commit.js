@@ -12,12 +12,12 @@ iD.ui.Commit = function(context) {
                 tagText: iD.util.tagText(d[i])
             };
 
-			var fingerprint = desc.name + desc.tagText;
-			if (c[fingerprint]) {
-				c[fingerprint].count++;
-			} else {
-				c[fingerprint] = desc;
-			}
+            var fingerprint = desc.name + desc.tagText;
+            if (c[fingerprint]) {
+                c[fingerprint].count++;
+            } else {
+                c[fingerprint] = desc;
+            }
         }
         return _.values(c);
     }
