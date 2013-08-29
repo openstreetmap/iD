@@ -5292,6 +5292,8 @@
             0,
             16
         ],
+        "terms_url": "http://www.mapbox.com/about/maps/",
+        "terms_text": "Terms & Feedback",
         "default": true,
         "overlay": true
     },
@@ -5304,6 +5306,8 @@
             0,
             16
         ],
+        "terms_url": "http://www.mapbox.com/about/maps/",
+        "terms_text": "Terms & Feedback",
         "default": true
     },
     {
@@ -9984,7 +9988,8 @@
                     49.8
                 ]
             ]
-        ]
+        ],
+        "overlay": true
     },
     {
         "name": "OS OpenData StreetView",
