@@ -3,7 +3,7 @@ iD.ui.Commit = function(context) {
         presets = context.presets();
 
     function zipSame(d) {
-        var c = [], n = -1;
+        var c = {}, n = -1;
         for (var i = 0; i < d.length; i++) {
             var desc = {
                 name: d[i].tags.name || presets.match(d[i], context.graph()).name(),
@@ -11,15 +11,15 @@ iD.ui.Commit = function(context) {
                 count: 1,
                 tagText: iD.util.tagText(d[i])
             };
-            if (c[n] &&
-                c[n].name == desc.name &&
-                c[n].tagText == desc.tagText) {
-                c[n].count++;
-            } else {
-                c[++n] = desc;
-            }
+
+			var fingerprint = desc.name + desc.tagText;
+			if (c[fingerprint]) {
+				c[fingerprint].count++;
+			} else {
+				c[fingerprint] = desc;
+			}
         }
-        return c;
+        return _.values(c);
     }
 
     function commit(selection) {
