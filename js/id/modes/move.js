@@ -59,13 +59,15 @@ iD.modes.Move = function(context, entityIDs) {
 
     function finish() {
         d3.event.stopPropagation();
-        context.enter(iD.modes.Select(context, entityIDs));
+        context.enter(iD.modes.Select(context, entityIDs)
+            .suppressMenu(true));
         stopNudge();
     }
 
     function cancel() {
         context.pop();
-        context.enter(iD.modes.Select(context, entityIDs));
+        context.enter(iD.modes.Select(context, entityIDs)
+            .suppressMenu(true));
         stopNudge();
     }
 
