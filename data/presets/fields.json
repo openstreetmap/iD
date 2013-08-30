@@ -358,6 +358,11 @@
         "label": "Levels",
         "placeholder": "2, 4, 6..."
     },
+    "lit": {
+        "key": "lit",
+        "type": "check",
+        "label": "Lit"
+    },
     "location": {
         "key": "location",
         "type": "combo",

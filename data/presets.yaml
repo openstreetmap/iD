@@ -153,6 +153,8 @@ en:
       levels: 
         label: Levels
         placeholder: "2, 4, 6..."
+      lit: 
+        label: Lit
       location: 
         label: Location
       man_made: 

@@ -1654,10 +1654,11 @@
     "highway/cycleway": {
         "icon": "highway-cycleway",
         "fields": [
-            "oneway",
+            "surface",
+            "lit",
             "structure",
             "access",
-            "surface"
+            "oneway"
         ],
         "geometry": [
             "line"
