@@ -1,0 +1,22 @@
+{
+    "name": "Arts Centre",
+
+    "geometry": [
+        "point", "area"
+    ],
+    "terms": [
+        "arts",
+        "arts centre",
+        "arts center"
+    ],
+    "tags": {
+        "amenity": "arts_centre"
+    },
+    // the icon in iD which represents this feature
+    "icon": "theatre",
+    // An array of field names. See the fields documentation for details of what's valid here.
+    "fields": [
+        "building_area",
+        "address"
+    ]
+}
