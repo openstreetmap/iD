@@ -1,5 +1,5 @@
 {
-    "name": "Arts Centre",
+    "name": "Arts Center",
 
     "geometry": [
         "point", "area"
@@ -12,9 +12,7 @@
     "tags": {
         "amenity": "arts_centre"
     },
-    // the icon in iD which represents this feature
     "icon": "theatre",
-    // An array of field names. See the fields documentation for details of what's valid here.
     "fields": [
         "building_area",
         "address"
