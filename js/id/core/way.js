@@ -32,6 +32,11 @@ _.extend(iD.Way.prototype, {
         return this.nodes.indexOf(node) >= 0;
     },
 
+    affix: function(node) {
+        if (this.nodes[0] === node) return 'prefix';
+        if (this.nodes[this.nodes.length - 1] === node) return 'suffix';
+    },
+
     isOneWay: function() {
         return this.tags.oneway === 'yes' ||
             this.tags.oneway === '1' ||

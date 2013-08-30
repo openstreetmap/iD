@@ -48,6 +48,21 @@ describe('iD.Way', function() {
         });
     });
 
+    describe("#affix", function () {
+        it("returns 'prefix' if the way starts with the given node", function () {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).affix('a')).to.equal('prefix');
+        });
+
+        it("returns 'suffix' if the way ends with the given node", function () {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).affix('c')).to.equal('suffix');
+        });
+
+        it("returns falsy if the way does not start or end with the given node", function () {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).affix('b')).not.to.be.ok;
+            expect(iD.Way({nodes: []}).affix('b')).not.to.be.ok;
+        });
+    });
+
     describe("#extent", function () {
         it("returns the minimal extent containing all member nodes", function () {
             var node1 = iD.Node({loc: [0, 0]}),

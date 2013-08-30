@@ -1,4 +1,4 @@
-iD.modes.DrawLine = function(context, wayId, direction, baseGraph) {
+iD.modes.DrawLine = function(context, wayId, baseGraph, affix) {
     var mode = {
         button: 'line',
         id: 'draw-line'
@@ -8,8 +8,8 @@ iD.modes.DrawLine = function(context, wayId, direction, baseGraph) {
 
     mode.enter = function() {
         var way = context.entity(wayId),
-            index = (direction === 'forward') ? undefined : 0,
-            headId = (direction === 'forward') ? way.last() : way.first();
+            index = (affix === 'prefix') ? 0 : undefined,
+            headId = (affix === 'prefix') ? way.first() : way.last();
 
         behavior = iD.behavior.DrawWay(context, wayId, index, mode, baseGraph)
             .tail(t('modes.draw_line.tail'));

@@ -8,7 +8,7 @@ iD.operations.Continue = function(selectedIDs, context) {
     function candidateWays() {
         return graph.parentWays(vertex).filter(function(parent) {
             return parent.geometry(graph) === 'line' &&
-                (parent.first() === vertex.id || parent.last() === vertex.id) &&
+                parent.affix(vertex.id) &&
                 (geometries.line.length === 0 || geometries.line[0] === parent);
         });
     }
@@ -18,8 +18,8 @@ iD.operations.Continue = function(selectedIDs, context) {
         context.enter(iD.modes.DrawLine(
             context,
             candidate.id,
-            candidate.first() === vertex.id ? 'backward' : 'forward',
-            context.graph()));
+            context.graph(),
+            candidate.affix(vertex.id)));
     };
 
     operation.available = function() {

@@ -23,7 +23,7 @@ iD.modes.AddLine = function(context) {
             iD.actions.AddEntity(way),
             iD.actions.AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawLine(context, way.id, 'forward', graph));
+        context.enter(iD.modes.DrawLine(context, way.id, graph));
     }
 
     function startFromWay(loc, edge) {
@@ -37,7 +37,7 @@ iD.modes.AddLine = function(context) {
             iD.actions.AddVertex(way.id, node.id),
             iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
 
-        context.enter(iD.modes.DrawLine(context, way.id, 'forward', graph));
+        context.enter(iD.modes.DrawLine(context, way.id, graph));
     }
 
     function startFromNode(node) {
@@ -47,7 +47,7 @@ iD.modes.AddLine = function(context) {
             iD.actions.AddEntity(way),
             iD.actions.AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawLine(context, way.id, 'forward', context.graph()));
+        context.enter(iD.modes.DrawLine(context, way.id, context.graph()));
     }
 
     mode.enter = function() {
