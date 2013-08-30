@@ -794,6 +794,10 @@
                 "name": "Amenity",
                 "terms": ""
             },
+            "amenity/arts_centre": {
+                "name": "Arts Center",
+                "terms": "arts,arts centre"
+            },
             "amenity/atm": {
                 "name": "ATM",
                 "terms": ""

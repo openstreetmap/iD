@@ -297,6 +297,9 @@ en:
       amenity: 
         name: Amenity
         terms: "<translate with synonyms or related terms for 'Amenity', separated by commas>"
+      amenity/arts_centre: 
+        name: Arts Center
+        terms: "<translate with synonyms or related terms for 'Arts Center', separated by commas>"
       amenity/atm: 
         name: ATM
         terms: "<translate with synonyms or related terms for 'ATM', separated by commas>"

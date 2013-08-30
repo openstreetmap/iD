@@ -170,6 +170,25 @@
         },
         "name": "Amenity"
     },
+    "amenity/arts_centre": {
+        "name": "Arts Center",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "arts",
+            "arts centre"
+        ],
+        "tags": {
+            "amenity": "arts_centre"
+        },
+        "icon": "theatre",
+        "fields": [
+            "building_area",
+            "address"
+        ]
+    },
     "amenity/atm": {
         "icon": "bank",
         "fields": [
