@@ -1,0 +1,20 @@
+{
+    "name": "Arts Center",
+
+    "geometry": [
+        "point", "area"
+    ],
+    "terms": [
+        "arts",
+        "arts centre",
+        "arts center"
+    ],
+    "tags": {
+        "amenity": "arts_centre"
+    },
+    "icon": "theatre",
+    "fields": [
+        "building_area",
+        "address"
+    ]
+}
