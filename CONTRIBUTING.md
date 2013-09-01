@@ -96,8 +96,9 @@ Use `make` to build the translations with the local changes.
 ## Contributing Documentation
 
 Documentation is maintained as a series of [Markdown](http://daringfireball.net/projects/markdown/)
-documents in the `data/doc/` path. The first line of each page of documentation
-should be of the form
+documents in [core.yaml](/data/core.yaml). The documentation 
+is in the `help` section (currently starting at line 258). The first line 
+of each new section of documentation should be of the form
 
     # GPS
 
@@ -105,8 +106,7 @@ This will be used for navigation and as its title in iD. Documentation is
 shown in alphabetical order, so most documentation is prefixed with `02-` and
 so on in order to keep it in a certain order.
 
-To add a new page of documentation, simply create a new Markdown file in
-`data/doc` in the same format as the rest.
+To add a new piece of documentation, simply add to [core.yaml](/data/core.yaml) in the same format as the rest.
 
 ## Adding or Refining Presets
 
