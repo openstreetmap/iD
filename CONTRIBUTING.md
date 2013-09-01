@@ -108,6 +108,12 @@ so on in order to keep it in a certain order.
 To add a new page of documentation, simply create a new Markdown file in
 `data/doc` in the same format as the rest.
 
+## Adding or Refining Presets
+
+Presets save time for iD users by automatically showing them the tags they are 
+likely to add for a given feature. They are stored in `data/presets/presets`. If 
+you're going to update the presets, [review the Presets README](/data/presets/README.md).
+
 ## Javascript
 
 We use the [Airbnb style for Javascript](https://github.com/airbnb/javascript) with
