@@ -34,4 +34,21 @@ describe("iD.actions.AddMidpoint", function () {
         expect(graph.entity(w1.id).nodes).to.eql([]);
         expect(graph.entity(w2.id).nodes).to.eql([b.id, node.id, a.id]);
     });
+
+    it("turns an invalid double-back into a self-intersection", function () {
+        // a====b (aba)
+        // Expected result (converts to a valid loop):
+        // a---b (acba)
+        //  \ /
+        //   c
+
+        var a = iD.Node(),
+            b = iD.Node(),
+            c = iD.Node(),
+            w = iD.Way({nodes: [a.id, b.id, a.id]}),
+            midpoint = {loc: [1, 2], edge: [a.id, b.id]},
+            graph = iD.actions.AddMidpoint(midpoint, c)(iD.Graph([a, b, w]));
+
+        expect(graph.entity(w.id).nodes).to.eql([a.id, c.id, b.id, a.id]);
+    });
 });
