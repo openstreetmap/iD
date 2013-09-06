@@ -53,7 +53,7 @@ iD.ui.Commit = function(context) {
         var commentField = commentSection.append('textarea')
             .attr('placeholder', t('commit.description_placeholder'))
             .property('value', context.storage('comment') || '')
-            .on('keyup.save', function () {
+            .on('blur.save', function () {
                 context.storage('comment', this.value);
             });
 
