@@ -90,14 +90,7 @@ iD.ui.Commit = function(context) {
 
         // Confirm Button
         var saveButton = saveSection.append('button')
-            .attr('class', 'action col3 button')
-            .on('click.save', function() {
-                var comment = commentField.node().value;
-                localStorage.comment = comment;
-                event.save({
-                    comment: comment
-                });
-            });
+            .attr('class', 'action col3 button');
 
         saveButton.append('span')
             .attr('class', 'label')
