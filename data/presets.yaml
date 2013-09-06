@@ -924,6 +924,9 @@ en:
       railway/disused: 
         name: Disused Railway
         terms: "<translate with synonyms or related terms for 'Disused Railway', separated by commas>"
+      railway/halt: 
+        name: Railway Halt
+        terms: "<translate with synonyms or related terms for 'Railway Halt', separated by commas>"
       railway/level_crossing: 
         name: Level Crossing
         terms: "<translate with synonyms or related terms for 'Level Crossing', separated by commas>"

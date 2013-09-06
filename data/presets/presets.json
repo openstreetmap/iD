@@ -3463,6 +3463,24 @@
         "terms": [],
         "name": "Disused Railway"
     },
+    "railway/halt": {
+        "icon": "rail",
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "railway": "halt"
+        },
+        "name": "Railway Halt",
+        "terms": [
+            "break",
+            "interrupt",
+            "rest",
+            "wait",
+            "interruption"
+        ]
+    },
     "railway/level_crossing": {
         "icon": "cross",
         "geometry": [

@@ -1630,6 +1630,10 @@
                 "name": "Disused Railway",
                 "terms": ""
             },
+            "railway/halt": {
+                "name": "Railway Halt",
+                "terms": "break,interrupt,rest,wait,interruption"
+            },
             "railway/level_crossing": {
                 "name": "Level Crossing",
                 "terms": "crossing,railroad crossing,railway crossing,grade crossing,road through railroad,train crossing"
