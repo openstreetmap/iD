@@ -1,6 +1,5 @@
 {
     "name": "Arts Center",
-<<<<<<< HEAD
     "geometry": [
         "point",
         "area"
@@ -8,16 +7,6 @@
     "terms": [
         "arts",
         "arts centre"
-=======
-
-    "geometry": [
-        "point", "area"
-    ],
-    "terms": [
-        "arts",
-        "arts centre",
-        "arts center"
->>>>>>> d34f61593154b0f4de366d2f909c02519653e13e
     ],
     "tags": {
         "amenity": "arts_centre"
