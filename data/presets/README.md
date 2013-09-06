@@ -84,7 +84,7 @@ names when identifying the icon to be used for a given preset.
 
 ## Building
 
-To build presets, all you need to to is run `make`.
+To build presets, all you need to do is run `make`.
 
 This command will take care of running the build script, which packages all presets
 together with imagery data, and deprecated or discarded tags into one file, `data/data.js`,
