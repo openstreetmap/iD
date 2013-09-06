@@ -1,0 +1,23 @@
+{
+    "icon": "rail",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "railway": "halt"
+    },
+    "name": "Railway Halt",
+    "fields":{
+        "key": "name",
+        "type": "textarea"
+          },
+    "terms": [
+        "break",
+        "interrupt",
+        "rest",
+        "wait",
+        "interruption"
+    ]    
+        
+}
