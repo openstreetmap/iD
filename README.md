@@ -2,8 +2,6 @@
 
 [![Build Status](https://secure.travis-ci.org/systemed/iD.png)](https://travis-ci.org/systemed/iD)
 
-[![](http://ideditor.com/img/editor.png)](http://ideditor.com/)
-
 ## Basics
 
 * iD is a JavaScript [OpenStreetMap](http://www.openstreetmap.org/) editor.
