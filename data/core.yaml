@@ -381,7 +381,8 @@ en:
 
       The GPX track isn't directly uploaded to OpenStreetMap - the best way to
       use it is to draw on the map, using it as a guide for the new features that
-      you add.
+      you add, and also to [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create)
+      for other users to use.
     imagery: |
       # Imagery
 
