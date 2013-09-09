@@ -248,6 +248,8 @@ en:
         label: Type
       trail_visibility: 
         label: Trail Visibility
+      vending: 
+        label: Type of Goods
       water: 
         label: Type
       waterway: 
@@ -438,6 +440,9 @@ en:
       amenity/university: 
         name: University
         terms: "<translate with synonyms or related terms for 'University', separated by commas>"
+      amenity/vending_machine: 
+        name: Vending Machine
+        terms: "<translate with synonyms or related terms for 'Vending Machine', separated by commas>"
       amenity/waste_basket: 
         name: Waste Basket
         terms: "<translate with synonyms or related terms for 'Waste Basket', separated by commas>"

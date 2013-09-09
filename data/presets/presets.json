@@ -1188,6 +1188,19 @@
         ],
         "name": "University"
     },
+    "amenity/vending_machine": {
+        "fields": [
+            "vending",
+            "operator"
+        ],
+        "geometry": [
+            "point"
+        ],
+        "tags": {
+            "amenity": "vending_machine"
+        },
+        "name": "Vending Machine"
+    },
     "amenity/waste_basket": {
         "icon": "waste-basket",
         "geometry": [
