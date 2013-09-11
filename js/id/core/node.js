@@ -24,7 +24,7 @@ _.extend(iD.Node.prototype, {
     move: function(loc) {
         return this.update({loc: loc});
     },
-
+    
     isIntersection: function(resolver) {
         return resolver.transient(this, 'isIntersection', function() {
             return resolver.parentWays(this).filter(function(parent) {
