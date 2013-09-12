@@ -44,7 +44,7 @@ iD.actions.Split = function(nodeId, newWayIds) {
                 return iD.util.wrap(index,nodes.length);
             }
             function _dist(nA, nB) {
-                return iD.geo.dist(graph.entity(nA).loc, graph.entity(nB).loc);
+                return iD.geo.geoDist(graph.entity(nA).loc, graph.entity(nB).loc);
             }
 
             // calculate lengths

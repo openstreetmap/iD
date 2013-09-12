@@ -14,6 +14,11 @@ iD.geo.dist = function(a, b) {
     var x = a[0] - b[0], y = a[1] - b[1];
     return Math.sqrt((x * x) + (y * y));
 };
+iD.geo.geoDist = function(a, b) {
+    var x = Math.cos(a[1]*Math.PI/180) * (a[0] - b[0]),
+        y = a[1] - b[1];
+    return Math.sqrt((x * x) + (y * y));
+};
 
 // Choose the edge with the minimal distance from `point` to its orthogonal
 // projection onto that edge, if such a projection exists, or the distance to
