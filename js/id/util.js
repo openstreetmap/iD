@@ -146,3 +146,10 @@ iD.util.asyncMap = function(inputs, func, callback) {
         });
     });
 };
+
+// wraps an index to an interval [0..length-1]
+iD.util.wrap = function(index, length) {
+    if (index < 0)
+        index += Math.ceil(-index/length)*length;
+    return index % length;
+};
