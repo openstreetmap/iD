@@ -48,7 +48,7 @@ describe("iD.actions.Circularize", function () {
 
         graph = iD.actions.Circularize('-', projection)(graph);
 
-        expect(iD.geo.dist(graph.entity('d').loc, [2, -2])).to.be.lt(0.5);
+        expect(iD.geo.euclideanDistance(graph.entity('d').loc, [2, -2])).to.be.lt(0.5);
     });
 
     function angle(point1, point2, center) {
@@ -56,10 +56,10 @@ describe("iD.actions.Circularize", function () {
             vector2 = [point2[0] - center[0], point2[1] - center[1]],
             distance;
 
-        distance = iD.geo.dist(vector1, [0, 0]);
+        distance = iD.geo.euclideanDistance(vector1, [0, 0]);
         vector1 = [vector1[0] / distance, vector1[1] / distance];
 
-        distance = iD.geo.dist(vector2, [0, 0]);
+        distance = iD.geo.euclideanDistance(vector2, [0, 0]);
         vector2 = [vector2[0] / distance, vector2[1] / distance];
 
         return 180 / Math.PI * Math.acos(vector1[0] * vector2[0] + vector1[1] * vector2[1]);

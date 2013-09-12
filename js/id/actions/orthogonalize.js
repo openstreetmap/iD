@@ -84,7 +84,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
                 p = subtractPoints(a, b),
                 q = subtractPoints(c, b);
 
-            var scale = 2*Math.min(iD.geo.dist(p, [0, 0]), iD.geo.dist(q, [0, 0]));
+            var scale = 2*Math.min(iD.geo.euclideanDistance(p, [0, 0]), iD.geo.euclideanDistance(q, [0, 0]));
             p = normalizePoint(p, 1.0);
             q = normalizePoint(q, 1.0);
 

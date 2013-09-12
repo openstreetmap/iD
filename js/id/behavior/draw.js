@@ -34,8 +34,8 @@ iD.behavior.Draw = function(context) {
 
         d3.select(window).on('mouseup.draw', function() {
             element.on('mousemove.draw', mousemove);
-            if (iD.geo.dist(pos, point()) < closeTolerance ||
-                (iD.geo.dist(pos, point()) < tolerance &&
+            if (iD.geo.euclideanDistance(pos, point()) < closeTolerance ||
+                (iD.geo.euclideanDistance(pos, point()) < tolerance &&
                 (+new Date() - time) < 500)) {
 
                 // Prevent a quick second click
