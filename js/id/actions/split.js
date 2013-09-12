@@ -16,6 +16,16 @@ iD.actions.Split = function(nodeId, newWayIds) {
     var wayIds;
 
     function split(graph, wayA, newWayId) {
+        // if the way is closed, we need to search for a partner node
+        // to split the way at.
+        //
+        // The following looks for a node that is both far away from
+        // the initial node in terms of way segment length and nearby
+        // in terms of beeline-distance. This assures that areas get
+        // split on the most "natural" points (independent of the number
+        // of nodes).
+        // For example: bone-shaped areas get split across their waist
+        // line, circles across the diameter.
         var wayB = iD.Way({id: newWayId, tags: wayA.tags}),
             nodesA,
             nodesB,
@@ -24,10 +34,41 @@ iD.actions.Split = function(nodeId, newWayIds) {
         if (wayA.isClosed()) {
             var nodes = wayA.nodes.slice(0, -1),
                 idxA = _.indexOf(nodes, nodeId),
-                idxB = idxA + Math.floor(nodes.length / 2);
+                idxB,
+                lengths = Array(nodes.length),
+                cum_length,
+                i,
+                best = 0.0;
 
-            if (idxB >= nodes.length) {
-                idxB %= nodes.length;
+            function _wrap(index) {
+                return iD.util.wrap(index,nodes.length);
+            }
+            function _dist(nA, nB) {
+                return iD.geo.dist(graph.entity(nA).loc, graph.entity(nB).loc);
+            }
+
+            // calculate lengths
+            cum_length = 0.0;
+            for (i = _wrap(idxA+1); i != idxA; i = _wrap(i+1)) {
+                cum_length += _dist(nodes[i], nodes[_wrap(i-1)]);
+                lengths[i] = cum_length;
+            }
+            cum_length = 0.0;
+            for (i = _wrap(idxA-1); i != idxA; i = _wrap(i-1)) {
+                cum_length += _dist(nodes[i], nodes[_wrap(i+1)]);
+                if (cum_length < lengths[i])
+                    lengths[i] = cum_length;
+            }
+            // determine best opposite node to split
+            for (i = 0; i < nodes.length; i++) {
+                var cost = lengths[i] / _dist(nodes[idxA], nodes[i]);
+                if (cost > best) {
+                    idxB = i;
+                    best = cost;
+                }
+            }
+
+            if (idxB < idxA) {
                 nodesA = nodes.slice(idxA).concat(nodes.slice(0, idxB + 1));
                 nodesB = nodes.slice(idxB, idxA + 1);
             } else {
