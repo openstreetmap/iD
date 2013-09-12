@@ -259,10 +259,10 @@ describe("iD.actions.Split", function () {
         //    d ==== c
         //
         var graph = iD.Graph({
-                'a': iD.Node({id: 'a'}),
-                'b': iD.Node({id: 'b'}),
-                'c': iD.Node({id: 'c'}),
-                'd': iD.Node({id: 'd'}),
+                'a': iD.Node({id: 'a', loc: [0,1]}),
+                'b': iD.Node({id: 'b', loc: [1,1]}),
+                'c': iD.Node({id: 'c', loc: [1,0]}),
+                'd': iD.Node({id: 'd', loc: [0,0]}),
                 '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             });
 
@@ -285,10 +285,10 @@ describe("iD.actions.Split", function () {
 
     it("splits an area by converting it to a multipolygon", function () {
         var graph = iD.Graph({
-                'a': iD.Node({id: 'a'}),
-                'b': iD.Node({id: 'b'}),
-                'c': iD.Node({id: 'c'}),
-                'd': iD.Node({id: 'd'}),
+                'a': iD.Node({id: 'a', loc: [0,1]}),
+                'b': iD.Node({id: 'b', loc: [1,1]}),
+                'c': iD.Node({id: 'c', loc: [1,0]}),
+                'd': iD.Node({id: 'd', loc: [0,0]}),
                 '-': iD.Way({id: '-', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']})
             });
 
