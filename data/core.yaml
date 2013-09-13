@@ -376,7 +376,7 @@ en:
 
       To use a GPX track for mapping, drag and drop the GPX file onto the map
       editor. If it's recognized, it will be added to the map as a bright green
-      line. Click on the 'Background Settings' menu on the left side to enable,
+      line. Click on the 'Background Settings' menu on the right side to enable,
       disable, or zoom to this new GPX-powered layer.
 
       The GPX track isn't directly uploaded to OpenStreetMap - the best way to
