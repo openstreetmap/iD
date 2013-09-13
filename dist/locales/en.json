@@ -1994,6 +1994,10 @@
                 "name": "Foot Route",
                 "terms": ""
             },
+            "type/route/hiking": {
+                "name": "Hiking Route",
+                "terms": ""
+            },
             "type/route/pipeline": {
                 "name": "Pipeline Route",
                 "terms": ""
