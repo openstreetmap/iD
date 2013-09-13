@@ -726,6 +726,9 @@
             "trail_visibility": {
                 "label": "Trail Visibility"
             },
+            "vending": {
+                "label": "Type of Goods"
+            },
             "water": {
                 "label": "Type"
             },
@@ -981,6 +984,10 @@
             "amenity/university": {
                 "name": "University",
                 "terms": "college"
+            },
+            "amenity/vending_machine": {
+                "name": "Vending Machine",
+                "terms": ""
             },
             "amenity/waste_basket": {
                 "name": "Waste Basket",

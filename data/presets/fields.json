@@ -613,6 +613,11 @@
         "type": "combo",
         "label": "Trail Visibility"
     },
+    "vending": {
+        "key": "vending",
+        "type": "combo",
+        "label": "Type of Goods"
+    },
     "water": {
         "key": "water",
         "type": "combo",
