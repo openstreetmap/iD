@@ -13,14 +13,19 @@ window.iD = function () {
         return {
             getItem: function(k) { return s[k]; },
             setItem: function(k, v) { s[k] = v; },
-            removeItem: function(k) { delete s[k] }
+            removeItem: function(k) { delete s[k]; }
         };
     })();
 
     context.storage = function(k, v) {
-        if (arguments.length === 1) return storage.getItem(k);
-        else if (v === null) storage.removeItem(k);
-        else storage.setItem(k, v);
+        try {
+            if (arguments.length === 1) return storage.getItem(k);
+            else if (v === null) storage.removeItem(k);
+            else storage.setItem(k, v);
+        } catch(e) {
+            // localstorage quota exceeded
+            if (typeof console !== 'undefined') console.error('localStorage quota exceeded');
+        }
     };
 
     var history = iD.History(context),
