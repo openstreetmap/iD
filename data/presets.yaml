@@ -1197,6 +1197,9 @@ en:
       type/route/foot: 
         name: Foot Route
         terms: "<translate with synonyms or related terms for 'Foot Route', separated by commas>"
+      type/route/hiking: 
+        name: Hiking Route
+        terms: "<translate with synonyms or related terms for 'Hiking Route', separated by commas>"
       type/route/pipeline: 
         name: Pipeline Route
         terms: "<translate with synonyms or related terms for 'Pipeline Route', separated by commas>"

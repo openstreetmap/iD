@@ -1,0 +1,16 @@
+{
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route",
+        "route": "hiking"
+    },
+    "name": "Hiking Route",
+    "icon": "route-foot",
+    "fields": [
+        "ref",
+        "operator",
+        "network"
+    ]
+}
