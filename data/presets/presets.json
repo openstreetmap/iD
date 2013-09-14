@@ -959,7 +959,9 @@
         ],
         "terms": [
             "visitor center",
+            "visitor centre",
             "permit center",
+            "permit centre",
             "backcountry office"
         ],
         "tags": {
@@ -1162,7 +1164,8 @@
             "city government",
             "courthouse",
             "municipal building",
-            "municipal center"
+            "municipal center",
+            "municipal centre"
         ],
         "tags": {
             "amenity": "townhall"
@@ -4088,6 +4091,9 @@
             "vertex",
             "area"
         ],
+        "terms": [
+            "garden centre"
+        ],
         "tags": {
             "shop": "garden_centre"
         },
@@ -4444,6 +4450,7 @@
             "outlet store",
             "shop",
             "shopping center",
+            "shopping centre",
             "shopping plaza",
             "stand",
             "store",
