@@ -14,7 +14,8 @@
         "city government",
         "courthouse",
         "municipal building",
-        "municipal center"
+        "municipal center",
+        "municipal centre"
     ],
     "tags": {
         "amenity": "townhall"
