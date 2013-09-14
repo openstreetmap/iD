@@ -111,7 +111,7 @@ en:
       incomplete_relation: This feature can't be moved because it hasn't been fully downloaded.
     rotate:
       title: Rotate
-      description: Rotate this object around its centre point.
+      description: Rotate this object around its center point.
       key: R
       annotation:
         line: Rotated a line.
@@ -558,7 +558,7 @@ en:
       describe: "**Add a name, and close the feature editor**"
     lines:
       title: "Lines"
-      add: "Lines are used to represent features such as roads, railways and rivers. **Click the Line button to add a new line.**"
+      add: "Lines are used to represent features such as roads, railroads and rivers. **Click the Line button to add a new line.**"
       start: "**Start the line by clicking on the end of the road.**"
       intersect: "Click to add more nodes to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on Flower Street, to create an intersection connecting the two lines.**"
       finish: "Lines can be finished by clicking on the last node again. **Finish drawing the road.**"
