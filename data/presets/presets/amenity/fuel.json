@@ -10,6 +10,10 @@
         "vertex",
         "area"
     ],
+    "terms": [
+        "petrol",
+        "fuel"
+    ],
     "tags": {
         "amenity": "fuel"
     },
