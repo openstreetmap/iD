@@ -543,6 +543,10 @@
             "vertex",
             "area"
         ],
+        "terms": [
+            "petrol",
+            "fuel"
+        ],
         "tags": {
             "amenity": "fuel"
         },
@@ -997,6 +1001,7 @@
             "eating house",
             "eating place",
             "fast-food place",
+            "fish and chips",
             "greasy spoon",
             "grill",
             "hamburger stand",
