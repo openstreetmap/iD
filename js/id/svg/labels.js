@@ -81,10 +81,10 @@ iD.svg.Labels = function(projection, context) {
 
         } else {
             var str = encodeURIComponent(text).match(/%[CDEFcdef]/g);
-            if (str == null) {
+            if (str === null) {
                 return size / 3 * 2 * text.length;
             } else {
-                return size / 3 * ( 2 * text.length + str.length);
+                return size / 3 * (2 * text.length + str.length);
             }
         }
     }
