@@ -320,6 +320,9 @@ en:
       amenity/bicycle_rental: 
         name: Bicycle Rental
         terms: "<translate with synonyms or related terms for 'Bicycle Rental', separated by commas>"
+      amenity/boat_rental: 
+        name: Boat Rental
+        terms: "<translate with synonyms or related terms for 'Boat Rental', separated by commas>"
       amenity/cafe: 
         name: Cafe
         terms: "<translate with synonyms or related terms for 'Cafe', separated by commas>"

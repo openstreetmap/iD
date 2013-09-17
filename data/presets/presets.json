@@ -305,6 +305,19 @@
         },
         "name": "Bicycle Rental"
     },
+    "amenity/boat_rental": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "boat_rental"
+        },
+        "fields": [
+            "operator"
+        ],
+        "name": "Boat Rental"
+    },
     "amenity/cafe": {
         "icon": "cafe",
         "fields": [

@@ -825,6 +825,10 @@
                 "name": "Bicycle Rental",
                 "terms": ""
             },
+            "amenity/boat_rental": {
+                "name": "Boat Rental",
+                "terms": ""
+            },
             "amenity/cafe": {
                 "name": "Cafe",
                 "terms": "coffee,tea,coffee shop"

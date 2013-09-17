@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "boat_rental"
+    },
+    "fields": [
+        "operator"
+    ],
+    "name": "Boat Rental"
+}
