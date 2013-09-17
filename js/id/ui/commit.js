@@ -52,7 +52,10 @@ iD.ui.Commit = function(context) {
 
         var commentField = commentSection.append('textarea')
             .attr('placeholder', t('commit.description_placeholder'))
-            .property('value', context.storage('comment') || '');
+            .property('value', context.storage('comment') || '')
+            .on('blur.save', function () {
+                context.storage('comment', this.value);
+            });
 
         commentField.node().select();
 
@@ -89,10 +92,8 @@ iD.ui.Commit = function(context) {
         var saveButton = saveSection.append('button')
             .attr('class', 'action col3 button')
             .on('click.save', function() {
-                var comment = commentField.node().value;
-                localStorage.comment = comment;
                 event.save({
-                    comment: comment
+                    comment: commentField.node().value
                 });
             });
 
