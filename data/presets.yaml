@@ -830,6 +830,9 @@ en:
       natural/coastline: 
         name: Coastline
         terms: "<translate with synonyms or related terms for 'Coastline', separated by commas>"
+      natural/fell: 
+        name: Fell
+        terms: "<translate with synonyms or related terms for 'Fell', separated by commas>"
       natural/glacier: 
         name: Glacier
         terms: "<translate with synonyms or related terms for 'Glacier', separated by commas>"
@@ -842,6 +845,9 @@ en:
       natural/peak: 
         name: Peak
         terms: "<translate with synonyms or related terms for 'Peak', separated by commas>"
+      natural/scree: 
+        name: Scree
+        terms: "<translate with synonyms or related terms for 'Scree', separated by commas>"
       natural/scrub: 
         name: Scrub
         terms: "<translate with synonyms or related terms for 'Scrub', separated by commas>"

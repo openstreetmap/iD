@@ -3049,6 +3049,16 @@
         },
         "name": "Coastline"
     },
+    "natural/fell": {
+        "geometry": [
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "natural": "fell"
+        },
+        "name": "Fell"
+    },
     "natural/glacier": {
         "geometry": [
             "area"
@@ -3108,6 +3118,18 @@
             "top"
         ],
         "name": "Peak"
+    },
+    "natural/scree": {
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "natural": "scree"
+        },
+        "terms": [
+            "loose rocks"
+        ],
+        "name": "Scree"
     },
     "natural/scrub": {
         "geometry": [
