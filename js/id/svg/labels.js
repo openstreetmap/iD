@@ -80,7 +80,12 @@ iD.svg.Labels = function(projection, context) {
             return c[text];
 
         } else {
-            return size / 3 * 2 * text.length;
+            var str = encodeURIComponent(text).match(/%[CDEFcdef]/g);
+            if (str == null) {
+                return size / 3 * 2 * text.length;
+            } else {
+                return size / 3 * ( 2 * text.length + str.length);
+            }
         }
     }
 
