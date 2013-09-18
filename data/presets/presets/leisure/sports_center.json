@@ -1,0 +1,14 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "sports_centre"
+    },
+    "terms": [
+        "gym"
+    ],
+    "icon": "sports",
+    "name": "Sports Center"
+}

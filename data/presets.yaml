@@ -755,6 +755,9 @@ en:
       leisure/pitch/basketball: 
         name: Basketball Court
         terms: "<translate with synonyms or related terms for 'Basketball Court', separated by commas>"
+      leisure/pitch/skateboard: 
+        name: Skate Park
+        terms: "<translate with synonyms or related terms for 'Skate Park', separated by commas>"
       leisure/pitch/soccer: 
         name: Soccer Field
         terms: "<translate with synonyms or related terms for 'Soccer Field', separated by commas>"
@@ -770,6 +773,9 @@ en:
       leisure/slipway: 
         name: Slipway
         terms: "<translate with synonyms or related terms for 'Slipway', separated by commas>"
+      leisure/sports_center: 
+        name: Sports Center
+        terms: "<translate with synonyms or related terms for 'Sports Center', separated by commas>"
       leisure/stadium: 
         name: Stadium
         terms: "<translate with synonyms or related terms for 'Stadium', separated by commas>"
