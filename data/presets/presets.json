@@ -558,7 +558,12 @@
         ],
         "terms": [
             "petrol",
-            "fuel"
+            "fuel",
+            "propane",
+            "diesel",
+            "lng",
+            "cng",
+            "biodiesel"
         ],
         "tags": {
             "amenity": "fuel"
