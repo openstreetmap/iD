@@ -1405,6 +1405,10 @@
                 "name": "Basketball Court",
                 "terms": ""
             },
+            "leisure/pitch/skateboard": {
+                "name": "Skate Park",
+                "terms": ""
+            },
             "leisure/pitch/soccer": {
                 "name": "Soccer Field",
                 "terms": ""
@@ -1424,6 +1428,10 @@
             "leisure/slipway": {
                 "name": "Slipway",
                 "terms": ""
+            },
+            "leisure/sports_center": {
+                "name": "Sports Center",
+                "terms": "gym"
             },
             "leisure/stadium": {
                 "name": "Stadium",
@@ -1707,7 +1715,7 @@
             },
             "shop/beauty": {
                 "name": "Beauty Shop",
-                "terms": ""
+                "terms": "nail spa,spa,salon,tanning"
             },
             "shop/beverages": {
                 "name": "Beverage Store",

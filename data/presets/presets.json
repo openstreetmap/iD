@@ -2740,6 +2740,22 @@
         "terms": [],
         "name": "Basketball Court"
     },
+    "leisure/pitch/skateboard": {
+        "icon": "pitch",
+        "fields": [
+            "surface"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "pitch",
+            "sport": "skateboard"
+        },
+        "terms": [],
+        "name": "Skate Park"
+    },
     "leisure/pitch/soccer": {
         "icon": "soccer",
         "fields": [
@@ -2811,6 +2827,20 @@
             "leisure": "slipway"
         },
         "name": "Slipway"
+    },
+    "leisure/sports_center": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "sports_centre"
+        },
+        "terms": [
+            "gym"
+        ],
+        "icon": "sports",
+        "name": "Sports Center"
     },
     "leisure/stadium": {
         "geometry": [
@@ -3740,6 +3770,12 @@
             "point",
             "vertex",
             "area"
+        ],
+        "terms": [
+            "nail spa",
+            "spa",
+            "salon",
+            "tanning"
         ],
         "tags": {
             "shop": "beauty"
