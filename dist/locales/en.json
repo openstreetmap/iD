@@ -883,7 +883,7 @@
             },
             "amenity/fuel": {
                 "name": "Gas Station",
-                "terms": "petrol,fuel"
+                "terms": "petrol,fuel,propane,diesel,lng,cng,biodiesel"
             },
             "amenity/grave_yard": {
                 "name": "Graveyard",
