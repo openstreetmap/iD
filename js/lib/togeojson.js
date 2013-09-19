@@ -96,6 +96,7 @@ toGeoJSON = (function() {
         },
         gpx: function(doc, o) {
             var i, j, tracks = get(doc, 'trk'), track, pt, gj = fc();
+            var points = get(doc,'wpt');
             for (i = 0; i < tracks.length; i++) {
                 track = tracks[i];
                 var name = nodeVal(get1(track, 'name'));
@@ -109,6 +110,18 @@ toGeoJSON = (function() {
                         name: name || ''
                     },
                     geometry: { type: 'LineString', coordinates: line }
+                });
+            }
+            for(i = 0; i < points.length; i++){
+                point = points[i];
+                var name = nodeVal(get1(point, 'name'));
+                var pt = [attrf(point,'lon'),attrf(point,'lat')];
+                gj.features.push({
+                    type: 'Feature',
+                    properties: {
+                        name: name || ''
+                    },
+                    geometry: { type: 'Point', coordinates: pt }
                 });
             }
             return gj;
