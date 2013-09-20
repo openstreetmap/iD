@@ -1034,6 +1034,11 @@ path.gpx {
     pointer-events: none;
 }
 
+/* GPS Labels */
+text.gpx {
+    fill:#FF26D4;
+}
+
 /* Modes */
 
 .mode-draw-line .vertex.active,
