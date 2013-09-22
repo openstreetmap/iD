@@ -269,6 +269,9 @@
         "tags": {
             "amenity": "bench"
         },
+        "fields": [
+            "backrest"
+        ],
         "name": "Bench"
     },
     "amenity/bicycle_parking": {
@@ -2127,6 +2130,18 @@
             "staircase"
         ],
         "name": "Steps"
+    },
+    "highway/stop": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "highway": "stop"
+        },
+        "terms": [
+            "stop sign"
+        ],
+        "name": "Stop Sign"
     },
     "highway/tertiary": {
         "icon": "highway-tertiary",
