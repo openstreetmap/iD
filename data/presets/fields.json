@@ -109,6 +109,11 @@
         "type": "check",
         "label": "ATM"
     },
+    "backrest": {
+        "key": "backrest",
+        "type": "check",
+        "label": "Backrest"
+    },
     "barrier": {
         "key": "barrier",
         "type": "combo",

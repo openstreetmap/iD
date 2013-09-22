@@ -1,0 +1,12 @@
+{
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "stop"
+    },
+    "terms": [
+        "stop sign"
+    ],
+    "name": "Stop Sign"
+}
