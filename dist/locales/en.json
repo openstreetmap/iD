@@ -469,6 +469,9 @@
             "atm": {
                 "label": "ATM"
             },
+            "backrest": {
+                "label": "Backrest"
+            },
             "barrier": {
                 "label": "Type"
             },
@@ -1236,6 +1239,10 @@
             "highway/steps": {
                 "name": "Steps",
                 "terms": "stairs,staircase"
+            },
+            "highway/stop": {
+                "name": "Stop Sign",
+                "terms": "stop sign"
             },
             "highway/tertiary": {
                 "name": "Tertiary Road",

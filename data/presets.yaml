@@ -64,6 +64,8 @@ en:
         label: Type
       atm: 
         label: ATM
+      backrest: 
+        label: Backrest
       barrier: 
         label: Type
       bicycle_parking: 
@@ -623,6 +625,9 @@ en:
       highway/steps: 
         name: Steps
         terms: "<translate with synonyms or related terms for 'Steps', separated by commas>"
+      highway/stop: 
+        name: Stop Sign
+        terms: "<translate with synonyms or related terms for 'Stop Sign', separated by commas>"
       highway/tertiary: 
         name: Tertiary Road
         terms: "<translate with synonyms or related terms for 'Tertiary Road', separated by commas>"
