@@ -25,7 +25,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
                 .move(projection.invert(points[corner.i])));
         } else {
             var best;
-            points = nodes.map(function(n) { return projection(n.loc); });
+            points = _.uniq(nodes).map(function(n) { return projection(n.loc); });
             score = squareness();
 
             for (i = 0; i < 1000; i++) {
@@ -45,7 +45,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
 
             points = best;
 
-            for (i = 0; i < points.length - 1; i++) {
+            for (i = 0; i < points.length; i++) {
                 graph = graph.replace(graph.entity(nodes[i].id)
                     .move(projection.invert(points[i])));
             }
@@ -59,7 +59,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
                 p = subtractPoints(a, b),
                 q = subtractPoints(c, b);
 
-            var scale = iD.geo.dist(p, [0, 0]) + iD.geo.dist(q, [0, 0]);
+            var scale = 2*Math.min(iD.geo.dist(p, [0, 0]), iD.geo.dist(q, [0, 0]));
             p = normalizePoint(p, 1.0);
             q = normalizePoint(q, 1.0);
 
