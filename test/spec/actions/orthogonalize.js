@@ -29,17 +29,20 @@ describe("iD.actions.Orthogonalize", function () {
     });
 
     it("should not shrink skinny quads", function () {
-        var tests = [[[-77.0339864831478, 38.8616391227204],
-                      [-77.0209775298677, 38.8613609264884],
-                      [-77.0210405781065, 38.8607390721519],
-                      [-77.0339024188294, 38.8610663645859]
-                     ],
-                     [[-89.4706683, 40.6261177],
-                      [-89.4706664, 40.6260574],
-                      [-89.4693973, 40.6260830],
-                      [-89.4694012, 40.6261355]
-                     ]
-                    ];
+        var tests = [
+            [
+                [-77.0339864831478, 38.8616391227204],
+                [-77.0209775298677, 38.8613609264884],
+                [-77.0210405781065, 38.8607390721519],
+                [-77.0339024188294, 38.8610663645859]
+            ],
+            [
+                [-89.4706683, 40.6261177],
+                [-89.4706664, 40.6260574],
+                [-89.4693973, 40.6260830],
+                [-89.4694012, 40.6261355]
+            ]
+        ];
 
         for (var i = 0; i < tests.length; i++) {
             var graph = iD.Graph({
@@ -55,7 +58,7 @@ describe("iD.actions.Orthogonalize", function () {
             graph = iD.actions.Orthogonalize('-', projection)(graph);
 
             finalWidth = iD.geo.dist(graph.entity('a').loc, graph.entity('b').loc);
-            expect(finalWidth/initialWidth).within(0.90, 1.10);
+            expect(finalWidth / initialWidth).within(0.90, 1.10);
         }
     });
 });
