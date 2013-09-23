@@ -156,6 +156,15 @@
                 "area": "Rotated an area."
             }
         },
+        "scale": {
+            "title": "Scale",
+            "description": "Scale this object around its center point.",
+            "key": "S",
+            "annotation": {
+                "line": "Scale a line.",
+                "area": "Scale an area."
+            }
+        },
         "reverse": {
             "title": "Reverse",
             "description": "Make this line go in the opposite direction.",

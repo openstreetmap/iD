@@ -123,6 +123,13 @@ en:
       annotation:
         line: Rotated a line.
         area: Rotated an area.
+    scale:
+      title: Scale
+      description: Scale this object around its center point.
+      key: S
+      annotation:
+        line: Scaled a line.
+        area: Scaled an area.
     reverse:
       title: Reverse
       description: Make this line go in the opposite direction.

@@ -143,6 +143,15 @@
                 "area": "Ruotata un'area."
             }
         },
+        "scale": {
+            "title": "Scala",
+            "description": "Scala questo oggetto intorno al suo centro.",
+            "key": "S",
+            "annotation": {
+                "line": "Scalata una linea.",
+                "area": "Scalata un area."
+            }
+        },
         "reverse": {
             "title": "Inverti Direzione",
             "description": "Inverti il senso di direzione di questa linea.",
