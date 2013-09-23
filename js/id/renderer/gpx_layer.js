@@ -26,7 +26,7 @@ iD.GpxLayer = function(context, dispatch) {
             .attr('d', d3.geo.path().projection(projection));
 
         
-        if (typeof gj.features != 'undefined') {
+        if (typeof gj.features !== 'undefined') {
             svg
                 .selectAll('text')
                 .remove();
