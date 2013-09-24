@@ -22,7 +22,7 @@ iD.svg.Midpoints = function(projection, context) {
                     var clipped = iD.geo.clip(a.loc, b.loc, extent);
 
                     if (clipped != null) {
-                        loc = iD.geo.interp(clipped[0], clipped[1], 0.5);
+                        var loc = iD.geo.interp(clipped[0], clipped[1], 0.5);
 
                         if (extent.intersects(loc) && iD.geo.dist(projection(a.loc), projection(b.loc)) > 40) {
                             midpoints[id] = {
