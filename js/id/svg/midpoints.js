@@ -19,14 +19,19 @@ iD.svg.Midpoints = function(projection, context) {
 
                 // If neither of the nodes changed, no need to redraw midpoint
                 if (!midpoints[id] && (filter(a) || filter(b))) {
-                    var loc = iD.geo.interp(a.loc, b.loc, 0.5);
-                    if (extent.intersects(loc) && iD.geo.dist(projection(a.loc), projection(b.loc)) > 40) {
-                        midpoints[id] = {
-                            type: 'midpoint',
-                            id: id,
-                            loc: loc,
-                            edge: [a.id, b.id]
-                        };
+                    var clipped = iD.geo.clip(a.loc, b.loc, extent);
+
+                    if (clipped != null) {
+                        loc = iD.geo.interp(clipped[0], clipped[1], 0.5);
+
+                        if (extent.intersects(loc) && iD.geo.dist(projection(a.loc), projection(b.loc)) > 40) {
+                            midpoints[id] = {
+                                type: 'midpoint',
+                                id: id,
+                                loc: loc,
+                                edge: [a.id, b.id]
+                            };
+                        }
                     }
                 }
             }

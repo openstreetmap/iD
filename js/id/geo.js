@@ -109,3 +109,70 @@ iD.geo.pathLength = function(path) {
     }
     return length;
 };
+
+// Returns an array of the original points if they are both within the bounds,
+// or an array of clipped points if they can be clipped to the bounds,
+// or null if there is no overlap.
+//
+// Cohen-Sutherland algorithm based on
+// http://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
+iD.geo.clip = function(p0, p1, bounds) {
+    function computeOutcode(x, y, xmin, ymin, xmax, ymax) {
+        var code = 0;
+
+        if (x < xmin) {
+            code |= 1;
+        } else if (x > xmax) {
+            code |= 2;
+        }
+
+        if (y < ymin) {
+            code |= 4;
+        } else if (y > ymax) {
+            code |= 8;
+        }
+
+        return code;
+    }
+
+    var x0 = p0[0], y0 = p0[1];
+    var x1 = p1[0], y1 = p1[1];
+
+    var outcode0 = computeOutcode(x0, y0, bounds[0][0], bounds[0][1], bounds[1][0], bounds[1][1]);
+    var outcode1 = computeOutcode(x1, y1, bounds[0][0], bounds[0][1], bounds[1][0], bounds[1][1]);
+
+    while (true) {
+        if (!(outcode0 | outcode1)) {
+            return [[x0, y0], [x1, y1]];
+        } else if (outcode0 & outcode1) {
+            return null;
+        } else {
+            var outcodeOut = outcode0 ? outcode0 : outcode1;
+            var x, y;
+
+            if (outcodeOut & 8) { // above
+                    x = x0 + (x1 - x0) * (bounds[1][1] - y0) / (y1 - y0);
+                    y = bounds[1][1];
+            } else if (outcodeOut & 4) { // below
+                    x = x0 + (x1 - x0) * (bounds[0][1] - y0) / (y1 - y0);
+                    y = bounds[0][1];
+            } else if (outcodeOut & 2) { // to right
+                    y = y0 + (y1 - y0) * (bounds[1][0] - x0) / (x1 - x0);
+                    x = bounds[1][0];
+            } else if (outcodeOut & 1) { // to left
+                    y = y0 + (y1 - y0) * (bounds[0][0] - x0) / (x1 - x0);
+                    x = bounds[0][0];
+            }
+
+            if (outcodeOut === outcode0) {
+                x0 = x;
+                y0 = y;
+                outcode0 = computeOutcode(x0, y0, bounds[0][0], bounds[0][1], bounds[1][0], bounds[1][1]);
+            } else {
+                x1 = x;
+                y1 = y;
+                outcode1 = computeOutcode(x1, y1, bounds[0][0], bounds[0][1], bounds[1][0], bounds[1][1]);
+            }
+        }
+    }
+}
