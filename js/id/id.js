@@ -84,6 +84,20 @@ window.iD = function () {
     context.changes = history.changes;
     context.intersects = history.intersects;
 
+    var inIntro = false;
+
+    context.inIntro = function(_) {
+        if (!arguments.length) return inIntro;
+        inIntro = _;
+        return context;
+    };
+
+    context.save = function() {
+        if (inIntro) return;
+        history.save();
+        if (history.hasChanges()) return t('save.unsaved_changes');
+    };
+
     context.flush = function() {
         connection.flush();
         history.reset();

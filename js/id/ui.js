@@ -123,8 +123,7 @@ iD.ui = function(context) {
             .call(iD.ui.Contributors(context));
 
         window.onbeforeunload = function() {
-            history.save();
-            if (history.hasChanges()) return t('save.unsaved_changes');
+            return context.save();
         };
 
         d3.select(window).on('resize.editor', function() {

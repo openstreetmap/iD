@@ -30,9 +30,7 @@ iD.ui.intro = function(context) {
         var savebutton = d3.select('#bar button.save'),
             save = savebutton.on('click');
         savebutton.on('click', null);
-
-        var beforeunload = window.onbeforeunload;
-        window.onbeforeunload = null;
+        context.inIntro(true);
 
         d3.select('.background-layer').style('opacity', 1);
 
@@ -65,7 +63,7 @@ iD.ui.intro = function(context) {
             context.background().baseLayerSource(background);
             if (history) context.history().fromJSON(history);
             window.location.replace(hash);
-            window.onbeforeunload = beforeunload;
+            context.inIntro(false);
             d3.select('#bar button.save').on('click', save);
         });
 
