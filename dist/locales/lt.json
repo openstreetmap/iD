@@ -27,9 +27,6 @@
         "circularize": {
             "key": "O"
         },
-        "orthogonalize": {
-            "key": "Q"
-        },
         "delete": {
             "title": "Ištrinti",
             "description": "Pašalinti tai iš žemėlapio.",

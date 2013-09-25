@@ -41,6 +41,11 @@
             }
         },
         "continue": {
+            "key": "A",
+            "title": "Continuar",
+            "description": "Continuar esta línea.",
+            "not_eligible": "Aquí no se pueden continuar líneas",
+            "multiple": "Varias líneas pueden continuar aquí. Para seleccionar una, presione la tecla \"Shift\" y haga click en una línea para seleccionarla.",
             "annotation": {
                 "line": "Línea continuada.",
                 "area": "Área continuada."
@@ -69,18 +74,19 @@
             "not_closed": "Esto no se puede redondear porque no es un bucle."
         },
         "orthogonalize": {
-            "title": "Escuadrar",
-            "description": "Escuadrar esquinas.",
-            "key": "E",
             "annotation": {
                 "line": "Esquinas de la línea escuadrados.",
                 "area": "Esquinas del área escuadrados."
-            },
-            "not_closed": "Esto no se puede encuadrar porque no es un bucle."
+            }
+        },
+        "straighten": {
+            "title": "Enderezado",
+            "description": "Enderezar esta línea",
+            "key": "S"
         },
         "delete": {
             "title": "Eliminar",
-            "description": "Eliminar del mapa.",
+            "description": "Eliminar esto del mapa.",
             "annotation": {
                 "point": "Punto eliminado.",
                 "vertex": "Vértice elimnado de la ruta.",
@@ -136,7 +142,7 @@
         },
         "rotate": {
             "title": "Rotar",
-            "description": "Rotar este objeto sobre su punto central.",
+            "description": "Rotar este objeto alrededor de su punto central",
             "key": "R",
             "annotation": {
                 "line": "Línea rotada.",
@@ -175,7 +181,7 @@
         "nothing": "Nada que rehacer"
     },
     "tooltip_keyhint": "Acceso directo:",
-    "browser_notice": "Este editor soporta Firefox, Chrome, Safari, Opera e Internet Explorer 9 o superior. Por favor actualice su navegador o utilice Potlatch 2 para editar el mapa.",
+    "browser_notice": "Este editor soporta Firefox, Chrome, Safari, Opera e Internet Explorer 9 o superior. Por favor, actualice su navegador o utilice Potlatch 2 para editar el mapa.",
     "translate": {
         "translate": "Traducir",
         "localized_translation_label": "Nombre multilingüe",
@@ -218,7 +224,7 @@
     },
     "inspector": {
         "no_documentation_combination": "No hay documentación disponible para esta combinación de etiquetas",
-        "no_documentation_key": "No hay documentación disponible para esta combinación de etiquetas",
+        "no_documentation_key": "No hay documentación disponible para esta etiqueta",
         "show_more": "Ver más",
         "view_on_osm": "Ver en openstreetmap.org",
         "all_tags": "Todas las etiquetas",
@@ -241,6 +247,8 @@
         "title": "Fondo",
         "description": "Configuración del fondo",
         "percent_brightness": "{opacity}% brillo",
+        "custom": "Personalizado",
+        "custom_prompt": "Introduzca una plantilla de teselas. Los símbolos válidos son {z}, {x}, {y} para el esquema Z\\/X\\/Y y {u} para el esquema quadtile.",
         "fix_misalignment": "Corregir alineación",
         "reset": "reiniciar"
     },
@@ -263,14 +271,16 @@
         "just_edited": "¡Acaba de editar OpenStreetMap!",
         "view_on_osm": "Ver en OSM",
         "facebook": "Compartir en Facebook",
-        "help_html": "Tus cambios deberán aparecer en la capa \"Estándar\" en unos pocos minutos. Otras capas, y algunos determinados elementos del mapa, pueden tomar más tiempo en actualizarse (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>más detalles acerca de esto</a>).\n"
+        "twitter": "Compartir en Twitter",
+        "google": "Compartir en Google+",
+        "help_html": "Tus cambios deberán aparecer en la capa \"Estándar\" en unos pocos minutos. Otras capas, y  determinados elementos del mapa, pueden tomar más tiempo en actualizarse (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>más detalles acerca de esto</a>).\n"
     },
     "confirm": {
         "okay": "De acuerdo"
     },
     "splash": {
         "welcome": "Bienvenido al editor de OpenStreetMap iD",
-        "text": "iD es una herramienta amigable pero poderosa para contribuir al mejor mapa libre del mundo. Esta es la versión {}. Para más información vea {Web} e informe de errores en {github}.",
+        "text": "iD es una herramienta amigable pero poderosa para contribuir al mejor mapa libre del mundo. Esta es la versión {version}. Para más información vea {website} e informe de errores en {github}.",
         "walkthrough": "Iniciar el tutorial",
         "start": "Editar"
     },
@@ -303,14 +313,15 @@
     },
     "help": {
         "title": "Ayuda",
-        "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el mapa libre y editable del mundo. Puede utilizarlo para agregar y actualizar datos de su área, haciendo este mapa, de fuente abierta y datos abiertos, mejor para todos.\n\nLos cambios que haga en este mapa serán visibles para todo el que use OpenStreetMap. Para poder hacer una edición, necesitara una [cuenta gratuita en OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con el [código fuente disponible en GitHub](https://github.com/systemed/iD).\n",
-        "editing_saving": "# Editar & Guardar\n\nEste editor está diseñado para trabajar en línea principalmente, ya que usted en estos momentos estas accediendo a través de un sitio web.\n\n### Seleccionar elementos gráficos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de interés, simplemente haga clic sobre él. Esto resaltará el elemento seleccionado, abriendo un panel con sus características, y  mostrará un menú de cosas que puede hacer con ese elemento.\n\nSe pueden seleccionar múltiples elementos de una vez pulsando la tecla 'Mayús' y haciendo clic y arrastrando el ratón sobre el mapa. Esto seleccionará todas los elementos que están dentro del recuadro que se dibuja, lo que le permite realizar cosas con todos ellos al mismo tiempo.\n\n### Guardar ediciones\n\nCuando haga cambios -como editar carreteras, edificios o lugares- estos se  almacenarán localmente en su ordenador hasta que decida guardarlos en el servidor. No se preocupes si comete un error, puede deshacer los cambios haciendo clic en el botón 'Deshacer', y rehacerlos de nuevo pulsando en el botón 'Rehacer'.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones (por ejemplo, si ha completado una zona de la ciudad y quisiera empezar en una nueva área).  Antes de subir los cambios al servidor tendrá oportunidad de revisar lo que ha hecho, y el editor le proporcionará avisos y sugerencias útiles si algo parece que no es correcto en los cambios.\n\nSi ve que todo es correcto escriba un breve comentario explicando el cambio que ha realizado y haga clic en 'Guardar' de nuevo para registrar los cambios en [OpenStreetMap.org](http:\\/\\/www.openstreetmap.org\\/). Estos cambios serán visibles para todos los demás usuarios y estará disponible para que otros puedan construir y mejorar el mapa.\n\nSi durante su sesión aún no ha terminado de editar, no se preocupe. Puede dejar la ventana del editor abierta y volver más tarde (en el mismo navegador y ordenador), y el editor le permitirá retomar su trabajo donde lo dejó.\n",
+        "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el mapa libre y editable del mundo. Puede utilizarlo para agregar y actualizar datos de su área, haciendo este mapa, de fuente y datos abiertos, mejor para todos.\n\nLos cambios que haga en este mapa serán visibles para todo el que use OpenStreetMap. Para poder hacer una edición, necesitara una [cuenta gratuita en OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con el [código fuente disponible en GitHub](https://github.com/systemed/iD).\n",
+        "editing_saving": "# Editar & Guardar\n\nEste editor está diseñado para trabajar en línea principalmente, ya que en estos momentos esta accediendo a través de un sitio web.\n\n### Seleccionar elementos gráficos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de interés, simplemente haz clic sobre él. Esto resaltará el elemento seleccionado, abriendo un panel con sus características, y  mostrará un menú de cosas que puedes hacer con ese elemento.\n\nSe pueden seleccionar múltiples elementos de una vez manteniendo pulsada la tecla 'Mayús' y haciendo clic y arrastrando el ratón sobre el mapa. Esto seleccionará todas los elementos que están dentro del recuadro que se dibuja, lo que le permite realizar acciones con todos ellos al mismo tiempo.\n\n### Guardar ediciones\n\nCuando haga cambios -como editar carreteras, edificios o lugares- estos se  almacenan localmente en tu ordenador hasta que decidas guardarlos en el servidor. No se preocupe si cometes un error - puede deshacer los cambios haciendo clic en el botón 'Deshacer', y rehacerlos de nuevo haciendo clic en el botón 'Rehacer'.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones (por ejemplo, si ha completado una zona de la ciudad y quisiera empezar en una nueva área).  Antes de subir los cambios al servidor tendrás oportunidad de revisar lo que has hecho, y el editor proporciona avisos y sugerencias útiles si algo parece que no es correcto en los cambios.\n\nSi ve que todo es correcto escriba un breve comentario explicando el cambio que ha hecho y haga clic en 'Guardar' de nuevo para registrar los cambios en [OpenStreetMap.org](http:\\/\\/www.openstreetmap.org\\/), donde serán visibles para todos los demás usuarios y estarán disponible para que otros colaboradores del proyecto puedan seguir construyendo y mejorando el mapa.\n\nSi aún no ha terminado sus ediciones en una sesión, puede dejar la ventana del editor abierta y volver más tarde (en el mismo navegador y ordenador), y el editor le permitirá retomar tu trabajo.\n",
         "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formada por nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía. \n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar uno de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para los navegadores GPS.\n\n### Eliminar\n\nSi un camino es totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa. Como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido. \n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado que es el acceso rápido para comenzar a dibujar una línea. \n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
-        "gps": "# GPS\n\nLos datos procedentes de un GPS son la fuente más fiable para OpenStreetMap. Este editor soporta archivos con extensión GPX con trazas guardadas en su equipo local.  Este tipo de trazas GPS se pueden obtener con un gran número de aplicaciones para teléfonos inteligentes, así como con receptores GPS normales.\n\nPara más información acerca de como obtener datos en campo mediante GPS lea [Capturando información mediante GPS] (http://learnosm.org/en/beginner/using-gps/)\n\nPara utilizar una traza GPX para cartografiar simplemente arrastre y suelte el archivo GPX sobre el editor de mapas. Si es reconocido, se añadirá al mapa como una línea verde brillante. Haga clic en el icono 'Configuración de fondo' de la derecha de la pantalla para activar, desactivar o hacer zoom sobre esta nueva capa de con la traza GPX.\n\nTenga en cuenta que la traza GPX no es subida directamente a OpenStreetMap, sino que únicamente se utiliza para dibujar sobre ella en el mapa, ayudándole como guía para los nuevos elementos que desea añadir.\n",
+        "gps": "# GPS\n\nLos datos procedentes de un GPS son la fuente más fiable para OpenStreetMap. Este editor soporta archivos `.gpx` con trazas guardadas en su equipo local.  Este tipo de trazas GPS se pueden obtener con un gran número de aplicaciones para teléfonos inteligentes, así como con receptores GPS normales.\n\nPara más información acerca de como obtener datos en campo mediante GPS lea [Capturando información mediante GPS] (http://learnosm.org/en/beginner/using-gps/).\n\nPara utilizar una traza GPX para cartografiar simplemente arrastre y suelte el archivo GPX sobre el editor de mapas. Si es reconocido, se añadirá al mapa como una línea verde brillante. Haga clic en el menú 'Configuración de fondo' de la izquierda para activar, desactivar o hacer zoom sobre esta nueva capa de con la traza GPX.\n\nTenga en cuenta que la traza GPX no es subida directamente a OpenStreetMap, sino que se utiliza para dibujar sobre ella en el mapa, ayudándole como guía para los nuevos elementos que desea añadir.\n",
         "imagery": "# Imágenes\n\nLas imágenes aéreas son un importante recurso para cartografiar. Una combinación de vuelos aéreos, fotografías de satélite  y otros tipos de fuentes libres se encuentran disponibles en el editor bajo el icono de la derecha llamado 'Configuración de fondo'.\n\nPor defecto el editor muestra la capa imágenes de satélite de [Bing Maps](http://www.bing.com/maps/) , pero una vez se vaya desplazando por el mapa y haciendo zoom sobre diferentes zonas, nuevas fuentes de imágenes podrán estar disponibles.\n\nLas imágenes aéreas a veces se encuentran desplazadas del mapa debido a errores por parte de los proveedores de los datos que las suministran. Si observa que existen numerosas carreteras que no coinciden con el fondo de imagen no las muevas para ajustarlas. En vez de ello puede ajustar la fotografía aérea para que esta coincida con los datos existentes, haciendo clic en el apartado 'Corregir alineación' del menú 'Configuración de fondo'.\n",
         "addresses": "# Addresses\n\n# Direcciones\n\nLas direcciones son parte de la información más útil que se puede añadir al mapa. \n\nAunque las direcciones se representan a menudo como parte de las calles, en OpenStreetMap esta información es guardada como atributos de los edificios y lugares presentes a lo largo de los viales.\n\nPuede agregar información sobre direcciones a lugares dibujados en el mapa como contornos de edificios, así como aquellos localizados únicamente con un punto. La fuente óptima para obtener datos de direcciones es la consulta sobre el terreno o el conocimiento personal. El uso de fuentes comerciales, como Google Maps, para obtener estos datos está estrictamente prohibido.\n",
         "inspector": "# Usar el inspector\n\nEl inspector es el elemento del interfaz de usuario situado el lateral izquierdo de la pantalla, el cual aparece cuando un elemento del mapa es seleccionado. Permite editar los detalles de este.\n\n### Seleccionar una tipo de elemento\n\nDespués de agregar una punto, una línea o un área, puede indicar que tipo de elemento representa en el mapa: una carretera, una calle urbana, un supermercado o una cafetería. El inspector mostrará botones con los tipos de elementos más comunes, no obstante se pueden encontrar otros simplemente escribiendo lo que está buscando en la caja de búsqueda.\n\nHaciendo clic con el ratón en el botón 'i' que aparece en la esquina inferior derecha es posible conocer más acerca de ese tipo de elemento. Pulsando sobre el botón le seleccionaremos. \n\n### Utilizar los formularios y editar etiquetas\n\nUna vez elegido el tipo de elemento que representa el dibujo del mapa, o seleccionado un tipo de elemento ya previamente asignado, el inspector mostrará una serie de campos con las características de este, tales como su nombre o dirección.   \n\nUna vez visto los campos, puede hacer clic en los iconos para añadir nuevos detalles que lo complemente, como agregar un enlace a su artículo en la  [Wikipedia](http://www.wikipedia.org/), si es posible el acceso en silla de ruedas y muchos más.\n\nEn la parte inferior del inspector puede hacer clic sobre 'Etiquetas adicionales' para agregar tantas etiquetas como desee. [Taginfo](http://taginfo.openstreetmap.org/) es un gran recurso para aprender más acerca de la combinación de etiquetas más populares.\n\nLos cambios aplicados en el inspector se aplican automáticamente al mapa. Puede anularlo en cualquier momento haciendo clic sobre el botón 'Deshacer'.\n\n### Cerrar el inspector\n\nPuede cerrar el inspector bien pulsando clic con el ratón sobre el botón cerrar de la esquina superior derecha, bien presionando la tecla 'Escape' del teclado o sencillamente haciendo clic sobre el mapa.\n",
-        "buildings": "# Edificios\n\nOpenStreetMap es la base de datos cartográfica más grande del mundo sobre edificios. Puede crear y mejorar esta base de datos.\n\n### Seleccionar\n\nPuede seleccionar un edificio haciendo clic con el ratón sobre su borde. Esto resaltará el edificio y abrirá un pequeño menú de herramientas y una barra lateral que mostrará más información sobre la edificación. \n\n### Modificar\n\nAlgunas veces los edificios están situados incorrectamente o poseen etiquetas erróneas.\n\nPara mover un edificio completo selecciónelo y haga clic en la herramienta 'Mover'. Desplace el ratón para trasladar el edificio y haga clic cuando esté correctamente situado. \n\nPara corregir la forma del edificio de manera puntual haga clic con el ratón sobre uno de los nodos que forma el borde del edificio y sin soltar arrástrelo al lugar adecuado.\n\n### Crear\n\nUna de las principales preguntas acerca de cómo añadir edificios al mapa es por qué OpenStreetMap almacena los edificios independientemente bien como polígonos o como puntos. La regla general es \"dibujar un edificio como un polígono siempre que sea posible\" y cartografiar la situación de las empresas, hogares, servicios y otros elementos que alberga el edificio como puntos situados dentro de este. \n\nComience a dibujar un edificio como un polígono haciendo clic en el botón 'Área' situado en la parte superior izquierda del interfaz y finalice bien pulsando la tecla 'Return' o 'Intro' de su teclado o simplemente haciendo clic en el primer nodo dibujado para cerrar el polígono.\n\n### Eliminar\n\nSi un edificio es totalmente incorrecto -puede ver que no existe en la imagen por satélite y de manera ideal lo ha confirmado visitando el lugar- puede borrarlo para que se elimine del mapa. Sea precavido cuando suprima elementos del mapa, como en cualquier otra edición los cambios que realice serán visibles por todo el mundo y a veces las imágenes de satélite pueden estar desactualizadas, por lo que el edifico simplemente es de nueva construcción y ha sido añadido por otro usuario.\n\nPuede eliminar un edificio haciendo clic con el ratón sobre él para seleccionarlo  y a continuación pulsar en el icono de la papelera o simplemente pulsando la tecla 'Supr' de su teclado.\n"
+        "buildings": "# Edificios\n\nOpenStreetMap es la base de datos cartográfica más grande del mundo sobre edificios. Puede crear y mejorar esta base de datos.\n\n### Seleccionar\n\nPuede seleccionar un edificio haciendo clic con el ratón sobre su borde. Esto resaltará el edificio y abrirá un pequeño menú de herramientas y una barra lateral que mostrará más información sobre la edificación. \n\n### Modificar\n\nAlgunas veces los edificios están situados incorrectamente o poseen etiquetas erróneas.\n\nPara mover un edificio completo selecciónelo y haga clic en la herramienta 'Mover'. Desplace el ratón para trasladar el edificio y haga clic cuando esté correctamente situado. \n\nPara corregir la forma del edificio de manera puntual haga clic con el ratón sobre uno de los nodos que forma el borde del edificio y sin soltar arrástrelo al lugar adecuado.\n\n### Crear\n\nUna de las principales preguntas acerca de cómo añadir edificios al mapa es por qué OpenStreetMap almacena los edificios independientemente bien como polígonos o como puntos. La regla general es \"dibujar un edificio como un polígono siempre que sea posible\" y cartografiar la situación de las empresas, hogares, servicios y otros elementos que alberga el edificio como puntos situados dentro de este. \n\nComience a dibujar un edificio como un polígono haciendo clic en el botón 'Área' situado en la parte superior izquierda del interfaz y finalice bien pulsando la tecla 'Return' o 'Intro' de su teclado o simplemente haciendo clic en el primer nodo dibujado para cerrar el polígono.\n\n### Eliminar\n\nSi un edificio es totalmente incorrecto -puede ver que no existe en la imagen por satélite y de manera ideal lo ha confirmado visitando el lugar- puede borrarlo para que se elimine del mapa. Sea precavido cuando suprima elementos del mapa, como en cualquier otra edición los cambios que realice serán visibles por todo el mundo y a veces las imágenes de satélite pueden estar desactualizadas, por lo que el edifico simplemente es de nueva construcción y ha sido añadido por otro usuario.\n\nPuede eliminar un edificio haciendo clic con el ratón sobre él para seleccionarlo  y a continuación pulsar en el icono de la papelera o simplemente pulsando la tecla 'Supr' de su teclado.\n",
+        "relations": "# Relaciones\n\nUna relación es un tipo especial de elemento en OpenStreetMap que permite agrupar  diferentes elementos juntos. Por ejemplo, existen dos tipos muy comunes de relaciones en OSM:\n\n- Por un lado están las * relaciones de ruta*, que agrupan a tramos de carreteras que juntos pertenecen a una autopista y poseen una denominación común (ej: Autopista del Cantábrico).  \n\n- Por otro lado podemos encontrar los *multipolígonos*, que agrupan a varias áreas que definen superficies complejas (polígonos donuts, parcelas aisladas pero que forman en su conjunto una única propiedad, etc.)\n\nEl grupo de elementos en una relación reciben el nombre de *miembros*. En el panel lateral podrá ver de que relaciones forma parte un elemento, y haciendo clic sobre una de las relaciones lo seleccionará. Así mismo, si selecciona una relación podrá ver una lista con todos los miembros que la componen en el panel lateral y todos ellos se resaltarán en el mapa.\n\nEn su mayor parte, el editor ID se encargará de mantener las relaciones de manera automática a medida que se edita. Lo principal que debe tener en cuenta es que si elimina una sección de carretera para redibujarla de manera más precisa deberá asegurarse de que la nueva sección es un miembro de la misma relación como lo fue la sección original.\n\n## Editando relaciones\n\nSi deseas editar relaciones aquí encontrará los conceptos básicos.\n\nPara añadir un elemento a una relación seleccione aquel, haga clic en el botón \"+\" que encontrará en la sección \"Todas las relaciones\" de panel lateral y seleccione el nombre y tipo de relación.\n\nPara crear una nueva relación seleccione el primer elemento que compondrá la relación, haga clic en el botón \"+\" que encontrará en el apartado \"Todas las relaciones\" del panel lateral y seleccione \"Nueva  relación...\".\n \nPara eliminar un elemento de una relación selecciones aquel y haga clic en el botón con el icono de cubo de basura próximo a la relación de la que queremos eliminarlo.\n\nPuede crear multipolígonos con agujeros (donut) usando la herramienta \"Unir\". Dibuje dos áreas (una que delimite el interior del donut y otra el exterior), mantenga pulsada la tecla Mayúsculas y haga clic con el ratón en uno de ellos para seleccionarlos. A continuación pulse el botón \"Unir\" (+).\n\n"
     },
     "intro": {
         "navigation": {
@@ -344,14 +355,15 @@
         },
         "lines": {
             "title": "Líneas",
-            "add": "Las líneas son utilizadas para representar elementos lineales como caminos, líneas de ferrocarril o ríos. **Haga clic en el botón Línea para agregar una nueva línea.**",
+            "add": "Las líneas son utilizadas para representar elementos como caminos, líneas férreas y ríos. **Haga clic en el botón Línea para agregar una nueva línea.**",
             "start": "**Inicie la línea haciendo clic al final de la vía.**",
             "intersect": "Haga clic para añadir más puntos a la línea. Si es necesario, puede arrastrar el mapa mientras dibuja. Los caminos, y muchos otros tipos de líneas, son parte de una red más grande. Es importante que estas líneas estén conectadas apropiadamente para que las aplicaciones de enrutamiento, como los navegadores de automóvil, puedan funcionar correctamente. **Haga clic en la calle 'Flower Street' para crear una intersección conectando las dos líneas.**   ",
             "finish": "Las líneas pueden finalizarse haciendo clic nuevamente en el ultimo punto. **Termine de dibujar la vía.** ",
             "road": "**Seleccione 'Carretera de tipología desconocida' de la lista**",
             "residential": "Existen diferentes tipos de vías, la más común de las cuales es la de calle urbana. **Elija el tipo 'Calle urbana'**",
             "describe": "**Asigne un nombre a la vía y cierre el editor de elementos.**",
-            "restart": "El vía debe intersectar con la calle Flores."
+            "restart": "El vía debe intersectar con la calle Flores.",
+            "wrong_preset": "No ha seleccionado el tipo 'Calle urbana'. **Haga clic aquí para elegir de nuevo**"
         },
         "startediting": {
             "title": "Empezar a editar",
@@ -418,6 +430,9 @@
                         "description": "Acceso permitido sólo para llegar a un destino concreto"
                     }
                 }
+            },
+            "access_toilets": {
+                "label": "Acceso"
             },
             "address": {
                 "label": "Dirección",
@@ -573,6 +588,9 @@
             "levels": {
                 "label": "Niveles",
                 "placeholder": "2, 4, 6..."
+            },
+            "lit": {
+                "label": "farola"
             },
             "location": {
                 "label": "Localización"
@@ -747,7 +765,8 @@
                 "terms": "plataforma"
             },
             "aeroway/gate": {
-                "name": "Puerta de embarque"
+                "name": "Puerta de embarque",
+                "terms": "puerta de embarque, puerta, embarque, aeropuerto"
             },
             "aeroway/hangar": {
                 "name": "Hangar",
@@ -766,10 +785,15 @@
                 "terms": "pista de carreteo,pista de rodaje,pista de taxeo,calle de rodaje"
             },
             "aeroway/terminal": {
-                "name": "Terminal de aeropuerto"
+                "name": "Terminal de aeropuerto",
+                "terms": "terminal, aeropuerto, finger, aeródromo"
             },
             "amenity": {
-                "name": "Servicios"
+                "name": "Servicios",
+                "terms": "servicios,instalaciones,equipamiento"
+            },
+            "amenity/arts_centre": {
+                "name": "Centro de Arte"
             },
             "amenity/atm": {
                 "name": "Cajero automático",
@@ -780,23 +804,27 @@
                 "terms": "banco,banca,bancario,cooperativa de ahorro y crédito,cooperativa de crédito,SACCO"
             },
             "amenity/bar": {
-                "name": "Bar"
+                "name": "Bar",
+                "terms": "bar, pub, tasca, cantina, café, taberna"
             },
             "amenity/bench": {
                 "name": "Banco"
             },
             "amenity/bicycle_parking": {
-                "name": "Aparcamiento de bibicletas"
+                "name": "Aparcamiento de bibicletas",
+                "terms": "bicicleta, bici, aparcamiento, parking"
             },
             "amenity/bicycle_rental": {
-                "name": "Alquiler de bicicletas"
+                "name": "Alquiler de bicicletas",
+                "terms": "bicicleta, alquilar, bici"
             },
             "amenity/cafe": {
                 "name": "Cafetería",
                 "terms": "café,cafetería,bar"
             },
             "amenity/car_rental": {
-                "name": "Alquiler de vehículos"
+                "name": "Alquiler de vehículos",
+                "terms": "coche, automóvil, alquiler, vehículo, rent, car"
             },
             "amenity/car_sharing": {
                 "name": "Vehículo compartido"
@@ -838,7 +866,8 @@
                 "terms": "surtidor, chorro, grifo, caño,fuente,fontana,fontanal"
             },
             "amenity/fountain": {
-                "name": "Fuente ornamental"
+                "name": "Fuente ornamental",
+                "terms": "fuente, surtidor, chorro"
             },
             "amenity/fuel": {
                 "name": "Gasolinera",
@@ -861,7 +890,8 @@
                 "terms": "biblioteca,archivo"
             },
             "amenity/marketplace": {
-                "name": "Mercado"
+                "name": "Mercado",
+                "terms": "mercado, mercadillo"
             },
             "amenity/parking": {
                 "name": "Aparcamiento",
@@ -895,7 +925,8 @@
                 "terms": "policía,comisaría,gendarmería,cuartel,guardia cicvil"
             },
             "amenity/post_box": {
-                "name": "Buzón de correos"
+                "name": "Buzón de correos",
+                "terms": "buzón, casillero, apartado, correos, correo"
             },
             "amenity/post_office": {
                 "name": "Oficina de correos",
@@ -904,6 +935,9 @@
             "amenity/pub": {
                 "name": "Pub",
                 "terms": "cervecería, pub, club"
+            },
+            "amenity/ranger_station": {
+                "name": "Puesto de guardaparques"
             },
             "amenity/restaurant": {
                 "name": "Restaurante",
@@ -928,7 +962,8 @@
                 "name": "Teatro"
             },
             "amenity/toilets": {
-                "name": "Baños"
+                "name": "Baños",
+                "terms": "baños, baño, aseo, letrina, lavabo, servicio, tocador, ducha"
             },
             "amenity/townhall": {
                 "name": "Ayuntamiento",
@@ -939,7 +974,8 @@
                 "terms": "universidad,facultad, escuela, seminario, colegio, cátedra, claustro, paraninfo,"
             },
             "amenity/waste_basket": {
-                "name": "Papelera"
+                "name": "Papelera",
+                "terms": "papelera, cubo, contenedor, basura, papeles, deshecho"
             },
             "area": {
                 "name": "Área",
@@ -950,10 +986,12 @@
                 "terms": "barrera,valla, muro, tapia, seto, barda, bardal, vallado, cerca, empalizada, parapeto, verja\nobstáculo, impedimento, oposición, inconveniente, estorbo"
             },
             "barrier/block": {
-                "name": "Bloque"
+                "name": "Bloque",
+                "terms": "bloque, piedra, pedrusco, monolito, obstáculo"
             },
             "barrier/bollard": {
-                "name": "Bolardo"
+                "name": "Bolardo",
+                "terms": "bolardo, baliza, noray, amarre, horquilla, poste, obstáculo"
             },
             "barrier/cattle_grid": {
                 "name": "Barrera canadiense"
@@ -1002,13 +1040,16 @@
                 "terms": "muro, murete, tapia, pared, paredón, tabique, valla, muralla, cerca, dique"
             },
             "boundary/administrative": {
-                "name": "Límite administrativo"
+                "name": "Límite administrativo",
+                "terms": "frontera, límites"
             },
             "building": {
-                "name": "Edificio"
+                "name": "Edificio",
+                "terms": "edificio, inmueble, casa, vivienda, obra, bloque, finca, construcción, edificación, fábrica, manzana, chalet"
             },
             "building/apartments": {
-                "name": "Apartamentos"
+                "name": "Apartamentos",
+                "terms": "apartamento, piso, vivienda, alojamiento, buhardilla, estudio, edificio"
             },
             "building/commercial": {
                 "name": "Edificio comercial",
@@ -1049,7 +1090,8 @@
                 "name": "Teléfono de emergencias"
             },
             "entrance": {
-                "name": "Entrada"
+                "name": "Entrada",
+                "terms": "puerta, portal, vestíbulo, umbral, soportal, pórtico, abertura, acceso, boca, entrada, portilla"
             },
             "highway": {
                 "name": "Vía",
@@ -1059,7 +1101,8 @@
                 "name": "Camino de herradura"
             },
             "highway/bus_stop": {
-                "name": "Parada de autobús"
+                "name": "Parada de autobús",
+                "terms": "parada, bus, autobús, marquesina"
             },
             "highway/crossing": {
                 "name": "Cruce peatonal",
@@ -1072,50 +1115,63 @@
                 "name": "Senda peatonal"
             },
             "highway/living_street": {
-                "name": "Calle residencial"
+                "name": "Calle residencial",
+                "terms": "calle, residencial, urbanización"
             },
             "highway/mini_roundabout": {
-                "name": "Minirotonda"
+                "name": "Minirotonda",
+                "terms": "rotonda, glorieta, giro"
             },
             "highway/motorway": {
                 "name": "Autopista",
                 "terms": "autopista, autovía, vía rápida"
             },
             "highway/motorway_junction": {
-                "name": "Cruce de autopista"
+                "name": "Cruce de autopista",
+                "terms": "enlace, acceso, autopista, autovía, salida"
             },
             "highway/motorway_link": {
-                "name": "Enlace de autopista"
+                "name": "Enlace de autopista",
+                "terms": "enlace, acceso, autopista, autovía, salida"
             },
             "highway/path": {
-                "name": "Camino"
+                "name": "Camino",
+                "terms": "vereda, sendero, camino, vía, calzada, ramal, trocha, atajo, travesía, huella, rastro"
             },
             "highway/pedestrian": {
                 "name": "Vía peatonal"
             },
             "highway/primary": {
-                "name": "Carretera primaria"
+                "name": "Carretera primaria",
+                "terms": "carretera, primaria, principal"
             },
             "highway/primary_link": {
-                "name": "Enlace a carretera primaria"
+                "name": "Enlace a carretera primaria",
+                "terms": "enlace, carretera, primaria"
             },
             "highway/residential": {
-                "name": "Calle urbana"
+                "name": "Calle urbana",
+                "terms": "calle, vía, paseo, avenida, bulevar, rambla, ronda, carrera, arteria, corredera, callejón, travesía, pasadizo, pasaje, rúa, vial, costanilla, callejuela"
             },
             "highway/road": {
-                "name": "Carretera sin categoría conocida"
+                "name": "Carretera sin categoría conocida",
+                "terms": "calle, ronda, carril, ruta, arteria, rúa, trayecto, avenida, carretera, paseo, camino, vía"
             },
             "highway/secondary": {
-                "name": "Carretera secundaria"
+                "name": "Carretera secundaria",
+                "terms": "calle, ronda, carril, ruta, arteria, rúa, trayecto, avenida, carretera, paseo, camino, vía, secundaria"
             },
             "highway/secondary_link": {
-                "name": "Enlace a carretera secundaria"
+                "name": "Enlace a carretera secundaria",
+                "terms": "enlace, unión, cruce, calle, ronda, carril, ruta, arteria, rúa, trayecto, avenida, carretera, paseo, camino, vía, secundaria"
             },
             "highway/service": {
-                "name": "Vía de servicio"
+                "name": "Vía de servicio",
+                "terms": "calle, ronda, carril, ruta, arteria, rúa, trayecto, avenida, carretera, paseo, camino, vía"
             },
             "highway/service/alley": {
-                "name": "Callejón"
+                "name": "Callejón",
+                "terms": "calle, callejón, calleja, callejuela, callizo, pasadizo, travesía"
             },
             "highway/service/drive-through": {
                 "name": "Ventanilla de autoservicio"
@@ -1127,22 +1183,27 @@
                 "name": "Acceso de emergencia"
             },
             "highway/service/parking_aisle": {
-                "name": "Pasillo de aparcamiento"
+                "name": "Pasillo de aparcamiento",
+                "terms": "aparcamiento, parking"
             },
             "highway/steps": {
-                "name": "Escaleras"
+                "name": "Escaleras",
+                "terms": "escalera, escalinata, grada, gradería, escala, escalerilla, peldaños, escalones"
             },
             "highway/tertiary": {
-                "name": "Carretera local"
+                "name": "Carretera local",
+                "terms": "calle, ronda, carril, ruta, arteria, rúa, trayecto, avenida, carretera, paseo, camino, vía, local, terciaria"
             },
             "highway/tertiary_link": {
-                "name": "Enlace a carretera local"
+                "name": "Enlace a carretera local",
+                "terms": "enlace, unión, cruce, calle, ronda, carril, ruta, arteria, rúa, trayecto, avenida, carretera, paseo, camino, vía, local, terciaria"
             },
             "highway/track": {
                 "name": "Pista"
             },
             "highway/traffic_signals": {
-                "name": "Semáforos"
+                "name": "Semáforos",
+                "terms": "señal, tráfico, semáforo"
             },
             "highway/trunk": {
                 "name": "Carretera principal"
@@ -1151,7 +1212,8 @@
                 "name": "Enlace a carretera principal"
             },
             "highway/turning_circle": {
-                "name": "Círculo de giro"
+                "name": "Círculo de giro",
+                "terms": "círculo, giro, retorno, cul de sac"
             },
             "highway/unclassified": {
                 "name": "Carretera sin clasificación"
@@ -1160,7 +1222,8 @@
                 "name": "Lugar histórico"
             },
             "historic/archaeological_site": {
-                "name": "Sitio arqueológico"
+                "name": "Sitio arqueológico",
+                "terms": "arqueológico, sitio, lugar, histórico, excavación"
             },
             "historic/boundary_stone": {
                 "name": "Mojón"
@@ -1170,23 +1233,28 @@
                 "terms": "castillo,castro,fuerte"
             },
             "historic/memorial": {
-                "name": "Monumento"
+                "name": "Monumento",
+                "terms": "memorial, monolito, obelisco, pirámide, estatua, túmulo, panteón, mausoleo, menhir, dolmen"
             },
             "historic/monument": {
-                "name": "Monumento"
+                "name": "Monumento",
+                "terms": "memorial, memorial, monolito, obelisco, pirámide, estatua, túmulo, panteón, mausoleo, menhir, dolmen"
             },
             "historic/ruins": {
                 "name": "Ruinas",
                 "terms": "restos, escombros, cascotes, vestigios, reliquias, despojos"
             },
             "historic/wayside_cross": {
-                "name": "Crucero"
+                "name": "Crucero",
+                "terms": "crucero, cruz, humilladero"
             },
             "historic/wayside_shrine": {
-                "name": "Humilladero"
+                "name": "Humilladero",
+                "terms": "santuario, humilladero, crucero, cruz, sagrario"
             },
             "landuse": {
-                "name": "Uso del suelo"
+                "name": "Uso del suelo",
+                "terms": "uso, suelo, usos"
             },
             "landuse/allotments": {
                 "name": "Huertos de ocio",
@@ -1196,7 +1264,8 @@
                 "name": "Cuenca "
             },
             "landuse/cemetery": {
-                "name": "Cementerio"
+                "name": "Cementerio",
+                "terms": "cementerio, camposanto, necrópolis, sacramental"
             },
             "landuse/commercial": {
                 "name": "de negocios"
@@ -1214,7 +1283,8 @@
                 "name": "Bosque"
             },
             "landuse/grass": {
-                "name": "Hierba"
+                "name": "Hierba",
+                "terms": "herbazal, pradera, pradería, prado, pasto, majada, monte, dehesa"
             },
             "landuse/industrial": {
                 "name": "Industrial"
@@ -1223,30 +1293,35 @@
                 "name": "Prado"
             },
             "landuse/orchard": {
-                "name": "Huerta"
+                "name": "Huerta",
+                "terms": "herbazal, pradera, pradería, prado, pasto, majada, monte, dehesa, huerta, riego, sembrado"
             },
             "landuse/quarry": {
                 "name": "Cantera",
                 "terms": "cantera"
             },
             "landuse/residential": {
-                "name": "Urbano"
+                "name": "Urbano",
+                "terms": "zona, residencial, urbano"
             },
             "landuse/retail": {
                 "name": "Zona comercial"
             },
             "landuse/vineyard": {
-                "name": "Viñedo"
+                "name": "Viñedo",
+                "terms": "viña, viñedo, majuelo, parral"
             },
             "leisure": {
-                "name": "Ocio"
+                "name": "Ocio",
+                "terms": "zona, diversión, entretenimiento, pasatiempo, distracción, recreo, ocio, esparcimiento"
             },
             "leisure/dog_park": {
                 "name": "Parque canino",
                 "terms": "perro,can,parque"
             },
             "leisure/garden": {
-                "name": "Jardín"
+                "name": "Jardín",
+                "terms": "parque, parterre, vergel, floresta, huerto, rosaleda, jardín"
             },
             "leisure/golf_course": {
                 "name": "Campo de golf"
@@ -1256,13 +1331,15 @@
                 "terms": "marina"
             },
             "leisure/park": {
-                "name": "Parque"
+                "name": "Parque",
+                "terms": "parque, jardín"
             },
             "leisure/pitch": {
                 "name": "Cancha de deporte"
             },
             "leisure/pitch/american_football": {
-                "name": "Campo de fútbol americano"
+                "name": "Campo de fútbol americano",
+                "terms": "Cancha de fútbol americano"
             },
             "leisure/pitch/baseball": {
                 "name": "Diamante de Béisbol"
@@ -1284,6 +1361,10 @@
             },
             "leisure/slipway": {
                 "name": "Grada"
+            },
+            "leisure/sports_center": {
+                "name": "Centro deportivo",
+                "terms": "Complejo deportivo"
             },
             "leisure/stadium": {
                 "name": "Estadio",
@@ -1343,10 +1424,12 @@
                 "name": "Bahía"
             },
             "natural/beach": {
-                "name": "Playa"
+                "name": "Playa",
+                "terms": "playa, arenal, cala"
             },
             "natural/cliff": {
-                "name": "Acantilado"
+                "name": "Acantilado",
+                "terms": "acantilado, despeñadero, risco, precipicio, escarpadura"
             },
             "natural/coastline": {
                 "name": "Línea de costa"
@@ -1355,13 +1438,15 @@
                 "name": "Glaciar"
             },
             "natural/grassland": {
-                "name": "Pradera"
+                "name": "Pradera",
+                "terms": "prado, pradera, pastizal, pasto"
             },
             "natural/heath": {
                 "name": "Landa"
             },
             "natural/peak": {
-                "name": "Pico"
+                "name": "Pico",
+                "terms": "pico, montaña, cresta, cima, cúspide, cumbre, picacho, aguja"
             },
             "natural/scrub": {
                 "name": "Matorral"
@@ -1370,19 +1455,23 @@
                 "name": "Fuente o manantial"
             },
             "natural/tree": {
-                "name": "Árbol"
+                "name": "Árbol",
+                "terms": "árbol, arbusto"
             },
             "natural/water": {
-                "name": "Lámina de agua"
+                "name": "Lámina de agua",
+                "terms": "río, agua, lago, laguna, albufera, ibón, estanque, embalse, pantano, balsa"
             },
             "natural/water/lake": {
-                "name": "Lago"
+                "name": "Lago",
+                "terms": "agua, lago, laguna, ibón, estanque, embalse, pantano, balsa"
             },
             "natural/water/pond": {
                 "name": "Balsa de agua"
             },
             "natural/water/reservoir": {
-                "name": "Embalse"
+                "name": "Embalse",
+                "terms": "agua, lago, ibón, estanque, embalse, pantano, balsa, laguna, dique, presa, represa, reservorio"
             },
             "natural/wetland": {
                 "name": "Pantano"
@@ -1418,23 +1507,26 @@
                 "name": "Ciudad"
             },
             "place/village": {
-                "name": "Pueblo"
+                "name": "Pueblo",
+                "terms": "localidad, población, aldea, pueblo, villa, ciudad, lugar, sitio, parroquia"
             },
             "point": {
                 "name": "Punto"
             },
             "power": {
-                "name": "Electricidad"
+                "name": "Línea eléctrica de baja o media tensión"
             },
             "power/generator": {
                 "name": "Generador de energía",
-                "terms": "energía, potencia, electricidad, subestación "
+                "terms": "energía, potencia, electricidad, subestación, tendido, eléctrico, línea, eléctrica"
             },
             "power/line": {
-                "name": "Línea de alta tensión"
+                "name": "Línea de alta tensión",
+                "terms": "energía, potencia, electricidad, subestación, tendido, eléctrico, línea, eléctrica, torre"
             },
             "power/pole": {
-                "name": "Poste eléctrico"
+                "name": "Poste eléctrico",
+                "terms": "torre, torreta, alta, tensión, poste, electricidad"
             },
             "power/sub_station": {
                 "name": "Subestación"
@@ -1446,13 +1538,18 @@
                 "name": "Transformador"
             },
             "railway": {
-                "name": "Ferrocarril"
+                "name": "Ferrocarril",
+                "terms": "ferrocarril, tren, convoy, suburbano, línea férrea, metro"
             },
             "railway/abandoned": {
                 "name": "Ferrocarril abandonado"
             },
             "railway/disused": {
                 "name": "Ferrocarril en desuso"
+            },
+            "railway/halt": {
+                "name": "Apeadero",
+                "terms": "apeadero,estación,ferrocarril,tren,andén"
             },
             "railway/level_crossing": {
                 "name": "Cruce a nivel"
@@ -1491,7 +1588,8 @@
                 "name": "Licorería"
             },
             "shop/bakery": {
-                "name": "Panadería"
+                "name": "Panadería",
+                "terms": "panadería, horno, tahona, tienda, pastelería"
             },
             "shop/beauty": {
                 "name": "Salón de belleza"
@@ -1624,10 +1722,12 @@
                 "name": "Papelería"
             },
             "shop/supermarket": {
-                "name": "Supermercado"
+                "name": "Supermercado",
+                "terms": "supermercado, autoservicio, mercado, hipermercado, alimentación, víveres"
             },
             "shop/toys": {
-                "name": "Tienda de juguetes"
+                "name": "Tienda de juguetes",
+                "terms": "juguetería,juguetes"
             },
             "shop/travel_agency": {
                 "name": "Agencia de viajes"

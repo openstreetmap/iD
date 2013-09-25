@@ -1,1 +1,1168 @@
-{}
+{
+    "modes": {
+        "add_area": {
+            "title": "지역",
+            "description": "지도에 공원, 건물, 호수나 다른 지역을 추가합니다.",
+            "tail": "공원, 호수나 건물과 같은, 지역 그리기를 시작하려면 지도를 클릭하세요."
+        },
+        "add_line": {
+            "title": "선",
+            "description": "지도에 고속도로, 도로, 보도, 보행자 도로, 운하나 다른 선을 추가합니다.",
+            "tail": "도로, 경로나 노선 그리기를 시작하려면 지도를 클릭하세요."
+        },
+        "add_point": {
+            "title": "지점",
+            "description": "지도에 음식점, 산, 우편 상자나 다른 지점을 추가합니다.",
+            "tail": "지점을 추가하려면 지도를 클릭하세요."
+        },
+        "browse": {
+            "title": "찾아보기",
+            "description": "지도를 이동하고 확대합니다."
+        },
+        "draw_area": {
+            "tail": "지역에 노드를 추가하려면 클릭하세요. 지역을 마치려면 첫 노드를 클릭하세요."
+        },
+        "draw_line": {
+            "tail": "선에 더 많은 노드를 추가하려면 클릭하세요. 노드로 연결하려면 다른 선을 클릭하고 선을 끝내려면 더블 클릭하세요."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "지점을 추가했습니다.",
+                "vertex": "길에 노드를 추가했습니다.",
+                "relation": "관계를 추가했습니다."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "선을 시작했습니다.",
+                "area": "지역을 시작했습니다."
+            }
+        },
+        "continue": {
+            "key": "A",
+            "title": "계속",
+            "description": "이 선을 계속합니다.",
+            "not_eligible": "여기에 계속할 수 있는 선이 없습니다.",
+            "multiple": "여러 선은 여기에서 계속할 수 있습니다. 선을 선택하려면, Shift 키를 누르고 선택할 것을 클릭하세요.",
+            "annotation": {
+                "line": "선을 계속했습니다.",
+                "area": "지역을 계속했습니다."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "그리기를 취소했습니다."
+        },
+        "change_role": {
+            "annotation": "관계 구성원의 역할을 바꾸었습니다."
+        },
+        "change_tags": {
+            "annotation": "태그를 바꿨습니다."
+        },
+        "circularize": {
+            "title": "순환하기",
+            "description": {
+                "line": "이 선 순환을 만듭니다.",
+                "area": "이 지역 순환을 만듭니다."
+            },
+            "key": "O",
+            "annotation": {
+                "line": "선 순환을 만들었습니다.",
+                "area": "지역 순환을 만들었습니다."
+            },
+            "not_closed": "지역이 닫혀있지 않기 때문에 순환을 만들 수 없습니다."
+        },
+        "orthogonalize": {
+            "annotation": {
+                "line": "선의 모서리를 직교로 만들었습니다.",
+                "area": "지역의 모서리를 직교로 만들었습니다."
+            }
+        },
+        "delete": {
+            "title": "삭제",
+            "description": "지도에서 제거합니다.",
+            "annotation": {
+                "point": "지점을 삭제했습니다.",
+                "vertex": "길에서 노드를 삭제했습니다.",
+                "line": "선을 삭제했습니다.",
+                "area": "지역을 삭제했습니다.",
+                "relation": "관계를 삭제했습니다.",
+                "multiple": "개체 {n}개를 삭제했습니다."
+            },
+            "incomplete_relation": "이 기능은 완전히 다운로드되어 있지 않기 때문에 삭제할 수 없습니다."
+        },
+        "add_member": {
+            "annotation": "관계에 구성원을 추가했습니다."
+        },
+        "delete_member": {
+            "annotation": "관계에서 구성원을 제거했습니다."
+        },
+        "connect": {
+            "annotation": {
+                "point": "지점에 길을 연결했습니다.",
+                "vertex": "다른 곳에 길을 연결했습니다.",
+                "line": "선에 길을 연결했습니다.",
+                "area": "지역에 길을 연결했습니다."
+            }
+        },
+        "disconnect": {
+            "title": "연결 해제",
+            "description": "서로 이 선/지역을 연결 해제합니다.",
+            "key": "D",
+            "annotation": "선/지역을 연결 해제했습니다.",
+            "not_connected": "여기에 연결 해제할 충분한 선/지역이 없습니다."
+        },
+        "merge": {
+            "title": "병합",
+            "description": "이 선을 병합합니다.",
+            "key": "C",
+            "annotation": "선 {n}개를 병합했습니다.",
+            "not_eligible": "이 기능은 병합할 수 없습니다.",
+            "not_adjacent": "이 선은 연결되어 있지 않기 때문에 병합할 수 없습니다.",
+            "restriction": "이 선은 적어도 하나가 \"{relation}\" 관계의 구성원이기 때문에 병합할 수 없습니다."
+        },
+        "move": {
+            "title": "이동",
+            "description": "다른 위치로 이동합니다.",
+            "key": "M",
+            "annotation": {
+                "point": "지점을 이동했습니다.",
+                "vertex": "길에서 노드를 이동했습니다.",
+                "line": "선을 이동했습니다.",
+                "area": "지역을 이동했습니다.",
+                "multiple": "여러 개체를 이동했습니다."
+            },
+            "incomplete_relation": "이 기능은 완전히 다운로드되어 있지 않기 때문에 이동할 수 없습니다."
+        },
+        "rotate": {
+            "title": "회전",
+            "key": "R",
+            "annotation": {
+                "line": "선을 회전했습니다.",
+                "area": "지역을 회전했습니다."
+            }
+        },
+        "reverse": {
+            "title": "반대로",
+            "description": "이 선을 반대 방향으로 가게 합니다.",
+            "key": "V",
+            "annotation": "길을 반대로 했습니다."
+        },
+        "split": {
+            "title": "분할",
+            "description": {
+                "line": "이 노드에서 이 선을 둘로 분할합니다.",
+                "area": "이 지억을 둘로 경계를 분할합니다.",
+                "multiple": "선/지역 경계를 이 노드에서 둘로 분할합니다."
+            },
+            "key": "X",
+            "annotation": {
+                "line": "선을 분할합니다.",
+                "area": "지역 경계를 분할합니다.",
+                "multiple": "선/지역 {n}개 경계를 분할합니다."
+            },
+            "not_eligible": "선은 시작이나 끝에서 분할할 수 없습니다.",
+            "multiple_ways": "분할하는 데 너무 많은 선이 있습니다."
+        }
+    },
+    "undo": {
+        "tooltip": "실행 취소: {action}",
+        "nothing": "실행 취소할 것이 없습니다."
+    },
+    "redo": {
+        "tooltip": "다시 실행: {action}",
+        "nothing": "다시 실행할 것이 없습니다."
+    },
+    "tooltip_keyhint": "바로가기:",
+    "browser_notice": "이 편집기는 파이어폭스, 크롬, 사파리, 오페라와 인터넷 익스플로러 9 이상을 지원합니다. 지도를 편집하려면 사용하고 있는 브라우저를 업그레이드하거나 Potlatch 2를 사용하세요.",
+    "translate": {
+        "translate": "번역",
+        "localized_translation_label": "다언어 이름",
+        "localized_translation_language": "언어 선택",
+        "localized_translation_name": "이름"
+    },
+    "zoom_in_edit": "편집하려면 확대",
+    "logout": "로그아웃",
+    "loading_auth": "OpenStreetMap에 연결 중...",
+    "report_a_bug": "버그 보고",
+    "status": {
+        "error": "API에 연결할 수 없습니다.",
+        "offline": "API가 오프라인입니다. 나중에 편집을 시도하세요.",
+        "readonly": "API가 읽기 전용입니다. 바뀜을 저장하려면 기다릴 필요가 있습니다."
+    },
+    "commit": {
+        "title": "바뀜 저장",
+        "description_placeholder": "기여에 대한 간단한 설명",
+        "message_label": "커밋 메시지",
+        "upload_explanation": "올린 바뀜은 OpenStreetMap 데이터를 사용하는 모든 지도에 보여집니다.",
+        "upload_explanation_with_user": "{user} 사용자로 올린 바뀜은 OpenStreetMap 데이터를 사용하는 모든 지도에 보여집니다.",
+        "save": "저장",
+        "cancel": "취소",
+        "warnings": "경고",
+        "modified": "수정됨",
+        "deleted": "삭제됨",
+        "created": "만듦"
+    },
+    "contributors": {
+        "list": "{users} 사용자의 편집",
+        "truncated_list": "{users} 사용자와 다른 {count}명의 편집"
+    },
+    "geocoder": {
+        "search": "전세계 찾기...",
+        "no_results_visible": "보이는 지도 지역에 결과가 없습니다",
+        "no_results_worldwide": "결과가 없습니다"
+    },
+    "geolocate": {
+        "title": "내 위치 보기"
+    },
+    "inspector": {
+        "no_documentation_combination": "이 태그 조합에 사용할 수 있는 설명문이 없습니다",
+        "no_documentation_key": "이 키에 사용할 수 있는 설명문이 없습니다",
+        "show_more": "더 보기",
+        "view_on_osm": "openstreetmap.org에서 보기",
+        "all_tags": "모든 태그",
+        "all_members": "모든 구성원",
+        "all_relations": "모든 관계",
+        "new_relation": "새 관계...",
+        "role": "역할",
+        "choose": "기능 유형 선택",
+        "results": "{search}에 대한 결과 {n}개",
+        "reference": "OpenStreetMap 위키에서 보기",
+        "back_tooltip": "기능 바꾸기",
+        "remove": "제거",
+        "search": "찾기",
+        "unknown": "알 수 없음",
+        "incomplete": "<다운로드되지 않음>",
+        "feature_list": "기능 찾기",
+        "edit": "기능 편집"
+    },
+    "background": {
+        "title": "배경",
+        "description": "배경 설정",
+        "percent_brightness": "명도 {opacity}%",
+        "custom": "사용자 지정",
+        "custom_prompt": "타일 템플릿을 입력하세요. 올바른 토큰은 Z/X/Y scheme에 대해 {z}, {x}, {y}이고 quadtile scheme에 대해 {u}입니다.",
+        "fix_misalignment": "어긋난 것을 고치기",
+        "reset": "재설정"
+    },
+    "restore": {
+        "heading": "저장하지 않은 바뀜이 있습니다",
+        "description": "이전 저장 세션에서 저장하지 않은 바뀜을 되살리겠습니까?",
+        "restore": "되돌리기",
+        "reset": "재설정"
+    },
+    "save": {
+        "title": "저장",
+        "help": "OpenStreetMap에 바뀜을 저장하며, 다른 사용자에게 보이도록 합니다.",
+        "no_changes": "저장할 바뀜이 없습니다.",
+        "error": "저장하는 동안 오류가 발생했습니다",
+        "uploading": "OpenStreetMap에 바뀜을 올리고 있습니다.",
+        "unsaved_changes": "저장하지 않은 바뀜이 있습니다"
+    },
+    "success": {
+        "edited_osm": "OSM을 편집했습니다!",
+        "just_edited": "OpenStreetMap을 편집했습니다!",
+        "view_on_osm": "OSM에서 보기",
+        "facebook": "페이스북에 공유",
+        "twitter": "트위터에 공유",
+        "google": "Google+에 공유",
+        "help_html": "바뀐 내용은 몇 분이 되면 \"표준\" 레이어에 나타나야 합니다. 다른 레이어와 특정 기능은, 더 오래 걸릴 수 있습니다.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>자세한 정보</a>)\n"
+    },
+    "confirm": {
+        "okay": "확인"
+    },
+    "splash": {
+        "welcome": "iD OpenStreetMap 편집기에 오신 것을 환영합니다",
+        "text": "iD는 세계 최고의 자유 세계 지도에 기여하기 위한 친절하지만 강력한 도구입니다. 버전은 {version}입니다. 자세한 정보에 대해서는 {website}을 참고하고 {github}에서 버그를 보고하세요.",
+        "walkthrough": "연습 시작",
+        "start": "지금 편집"
+    },
+    "source_switch": {
+        "live": "실시간",
+        "lose_changes": "저장하지 않은 바뀜이 있습니다. 지도 서버를 전환하면 바뀜을 버려집니다. 서버를 전환하겠습니까?",
+        "dev": "개발"
+    },
+    "tag_reference": {
+        "description": "설명",
+        "on_wiki": "wiki.osm.org에 있는 {tag}",
+        "used_with": "{type}로 사용됨"
+    },
+    "validations": {
+        "untagged_point": "태그되지 않은 지점",
+        "untagged_line": "태그되지 않은 선",
+        "untagged_area": "태그되지 않은 지역",
+        "many_deletions": "개체 {n}개를 삭제하고 있습니다. 이를 수행하겠습니까? 다른 사람이 openstreetmap.org에서 보는 지도에서 삭제됩니다.",
+        "tag_suggests_area": "{tag} 태그 제안 선은 지역이여야 하지만 태그는 지역이 아닙니다",
+        "deprecated_tags": "사용되지 않는 태그: {tags}"
+    },
+    "zoom": {
+        "in": "확대",
+        "out": "축소"
+    },
+    "cannot_zoom": "현재 모드에서 더 축소할 수 없습니다.",
+    "gpx": {
+        "local_layer": "로컬 GPX 파일",
+        "drag_drop": "페이지에 .gpx 파일을 끌어서 놓으세요"
+    },
+    "help": {
+        "title": "도움말",
+        "help": "# 도움말\n\n이 편집기는 세계의 자유롭고 편집 가능한 지도인,\n[OpenStreetMap](http://www.openstreetmap.org/)을 위한 편집기입니다.\n모두를 위한 더 나은 세계의 오픈 소스 및 오픈 데이터 지도를 만들고, 당신의\n지역에서 데이터를 추가하거나 업데이드하려면 이를 사용할 수 있습니다.\n\n이 지도에서 만든 편집은 OpenStreetMap을 사용하는 모두에게\n보여질 수 있습니다. 편집을 하기 위해, [무료 OpenStreetMap\n계정](https://www.openstreetmap.org/user/new)이 필요합니다.\n\n[iD 편집기](http://ideditor.com/)는 [GitHub에 사용할 수 있는 소스\n코드](https://github.com/systemed/iD)로 된 협업 프로젝트입니다.\n"
+    },
+    "intro": {
+        "navigation": {
+            "title": "둘러보기",
+            "drag": "주 지도 지역은 배경의 위에 OpenStreetMap 데이터를 보여줍니다. 어떤 웹 지도와 같이 드래그하고 스크롤해서 둘러볼 수 있습니다. **지도를 드래그하세요!**",
+            "select": "지도 기능은 세 길로 표현됩니다: 사용 중인 지점, 선이나 지역. 모든 기능은 이를 클릭해서 선택할 수 있습니다. **선택하려면 지점을 클릭하세요.**",
+            "header": "머리 부분은 기능 유형을 보여줍니다.",
+            "pane": "기능이 선택되면, 기능 편집기가 보여집니다. 머리 부분은 기능 유형을 보여주고 주 패널은 이름과 주소와 같은 기능의 특성을 보여줍니다. **위 오른쪽의 닫기 버튼으로 기능 편집기를 닫으세요.**"
+        },
+        "points": {
+            "title": "지점",
+            "add": "지점은 상점, 음식점과 산과 같은 기능으로 표현하는 데 사용될 수 있습니다. 지점은 특정 위치와 거기에 무엇이 있는지 설명을 표시합니다. **새 지점을 추가하려면 지점 버튼을 클릭하세요.**",
+            "place": "지점은 지도에 클릭하여 배치할 수 있습니다. **건물의 위에 지점을 배치하세요.**",
+            "search": "여기에 지점이 표현할 수 있는 많은 다른 기능이 있습니다. 추가하는 지점은 카페입니다. **'{name}'에 대해 찾으세요**",
+            "choose": "**목록에서 카페를 선택하세요.**",
+            "describe": "지점은 이제 카페로 표시됩니다. 기능 편집기를 사용하여, 기능에 대한 더 많은 정보를 추가할 수 있습니다. **이름을 추가하세요**",
+            "close": "기능 편집기는 닫기 버튼을 클릭하여 닫을 수 있습니다. **기능 편집기를 닫으세요**",
+            "reselect": "흔히 지점은 이미 존재하지만, 실수가 있거나 완전하지 않을 수 있습니다. 기존 지점을 편집할 수 있습니다. **만든 지점을 선택하세요.**",
+            "fixname": "**이름을 바꾸고 기능 편집기를 닫으세요.**",
+            "reselect_delete": "지도에 있는 모든 기능이 삭제됩니다. **만든 지점을 클릭하세요.**",
+            "delete": "지점 주변의 메뉴는 삭제를 포함해서, 수행할 수 있는 작업을 포함합니다. **지점을 삭제하세요.**"
+        },
+        "areas": {
+            "title": "지역",
+            "add": "지역은 기능을 표현하는 자세한 길입니다. 지역은 기능의 경계에 대한 정보를 제공합니다. 지역은 사용할 수 있고, 자주 참조되는 대부분의 기능 유형 지점에 대해 사용할 수 있습니다. **새 지역을 추가하려면 지역 버튼을 클릭하세요.**",
+            "corner": "지역은 지역의 경계를 표시하는 노드를 배치하여 그려집니다. **놀이터의 구석 중 하나에 시작 노드를 배치하세요.**",
+            "place": "더 많은 노드를 배치하여 지역을 그리세요. 시작 노드를 클릭하여 지역을 마치세요. **놀이터에 대한 지역을 그리세요.**",
+            "search": "**'{name}'에 대해 찾으세요.**",
+            "choose": "**목록에서 놀이터를 선택하세요.**",
+            "describe": "**이름을 추가하고, 기능 편집기를 닫으세요**"
+        },
+        "lines": {
+            "title": "선",
+            "start": "**도로의 끝에 클릭하여 선을 시작하세요.**",
+            "intersect": "선에 더 많은 노드를 추가하려면 클릭하세요. 필요하다면 그리는 동안 지도를 드래그할 수 있습니다. 도로와 선의 다른 많은 유형은 큰 네트워크의 부분입니다. 이 선이 작동하는 애플리케이션을 경로 지정하기 위해서는 제대로 연결하는 것이 중요합니다. **두 선을 연결하는 교차로를 만드려면, Flower Street를 클릭하세요.**",
+            "finish": "선은 마지막 노드를 다시 클릭하여 마칠 수 있습니다. **도로 그리기를 마치세요.**",
+            "road": "**목록에서 도로를 선택하세요**",
+            "residential": "여기에 도로의 여러 종류가 있지만, 가장 자주 그리게 되는 것은 주거 도로입니다. **주거 도로 유형을 선택하세요**",
+            "describe": "**도로의 이름을 정하고 기능 편집기를 닫으세요.**",
+            "restart": "도로는 Flower Street과 교차해야 합니다.",
+            "wrong_preset": "주거 도로 유형을 선택하지 않았습니다. **다시 선택하려면 여기를 클릭하세요**"
+        },
+        "startediting": {
+            "title": "편집 시작",
+            "help": "더 많은 설명서와 이 연습은 여기에서 사용할 수 있습니다.",
+            "save": "정기적으로 바뀜을 저장하는 것을 잊지 마세요!",
+            "start": "매핑 시작!"
+        }
+    },
+    "presets": {
+        "categories": {
+            "category-road": {
+                "name": "도로"
+            },
+            "category-route": {
+                "name": "노선"
+            }
+        },
+        "fields": {
+            "access": {
+                "label": "통행 제한"
+            },
+            "address": {
+                "label": "주소",
+                "placeholders": {
+                    "housename": "건물 이름",
+                    "number": "123",
+                    "street": "거리",
+                    "city": "도시"
+                }
+            },
+            "admin_level": {
+                "label": "관리 수준"
+            },
+            "aeroway": {
+                "label": "유형"
+            },
+            "amenity": {
+                "label": "유형"
+            },
+            "artwork_type": {
+                "label": "유형"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "barrier": {
+                "label": "유형"
+            },
+            "bicycle_parking": {
+                "label": "유형"
+            },
+            "boundary": {
+                "label": "유형"
+            },
+            "building": {
+                "label": "건물"
+            },
+            "building_area": {
+                "label": "건물"
+            },
+            "building_yes": {
+                "label": "건물"
+            },
+            "capacity": {
+                "label": "수용 가능한 수"
+            },
+            "collection_times": {
+                "label": "모은 시간"
+            },
+            "construction": {
+                "label": "유형"
+            },
+            "country": {
+                "label": "국가"
+            },
+            "crossing": {
+                "label": "유형"
+            },
+            "cuisine": {
+                "label": "요리 종류"
+            },
+            "denomination": {
+                "label": "교단"
+            },
+            "denotation": {
+                "label": "명시"
+            },
+            "elevation": {
+                "label": "고도"
+            },
+            "emergency": {
+                "label": "응급 의료"
+            },
+            "entrance": {
+                "label": "유형"
+            },
+            "fax": {
+                "label": "팩스"
+            },
+            "fee": {
+                "label": "요금"
+            },
+            "fire_hydrant/type": {
+                "label": "유형"
+            },
+            "generator/type": {
+                "label": "유형"
+            },
+            "highway": {
+                "label": "유형"
+            },
+            "historic": {
+                "label": "유형"
+            },
+            "internet_access": {
+                "label": "인터넷 액세스",
+                "options": {
+                    "wlan": "와이파이",
+                    "wired": "유선",
+                    "terminal": "단말기"
+                }
+            },
+            "landuse": {
+                "label": "유형"
+            },
+            "layer": {
+                "label": "레이어"
+            },
+            "leisure": {
+                "label": "유형"
+            },
+            "levels": {
+                "label": "수준"
+            },
+            "man_made": {
+                "label": "유형"
+            },
+            "maxspeed": {
+                "label": "제한 속도"
+            },
+            "natural": {
+                "label": "자연"
+            },
+            "network": {
+                "label": "네트워크"
+            },
+            "note": {
+                "label": "참고"
+            },
+            "office": {
+                "label": "유형"
+            },
+            "oneway": {
+                "label": "일방 통행"
+            },
+            "opening_hours": {
+                "label": "이용할 수 있는 시간"
+            },
+            "operator": {
+                "label": "운영자"
+            },
+            "parking": {
+                "label": "유형"
+            },
+            "phone": {
+                "label": "전화"
+            },
+            "place": {
+                "label": "유형"
+            },
+            "power": {
+                "label": "유형"
+            },
+            "railway": {
+                "label": "유형"
+            },
+            "ref": {
+                "label": "참고"
+            },
+            "relation": {
+                "label": "유형"
+            },
+            "religion": {
+                "label": "종교",
+                "options": {
+                    "christian": "기독교",
+                    "muslim": "이슬람교",
+                    "buddhist": "불교",
+                    "jewish": "유대교",
+                    "hindu": "힌두교",
+                    "shinto": "신도",
+                    "taoist": "도교"
+                }
+            },
+            "restriction": {
+                "label": "유형"
+            },
+            "route": {
+                "label": "유형"
+            },
+            "route_master": {
+                "label": "유형"
+            },
+            "service": {
+                "label": "유형"
+            },
+            "shelter": {
+                "label": "피난처"
+            },
+            "shop": {
+                "label": "유형"
+            },
+            "source": {
+                "label": "원본"
+            },
+            "sport": {
+                "label": "스포츠"
+            },
+            "structure": {
+                "options": {
+                    "bridge": "다리",
+                    "tunnel": "터널"
+                }
+            },
+            "surface": {
+                "label": "노면"
+            },
+            "tourism": {
+                "label": "유형"
+            },
+            "towertype": {
+                "label": "탑 용도"
+            },
+            "tracktype": {
+                "label": "유형"
+            },
+            "water": {
+                "label": "유형"
+            },
+            "waterway": {
+                "label": "유형"
+            },
+            "website": {
+                "label": "웹사이트"
+            },
+            "wetland": {
+                "label": "유형"
+            },
+            "wikipedia": {
+                "label": "위키백과"
+            },
+            "wood": {
+                "label": "유형"
+            }
+        },
+        "presets": {
+            "aeroway": {
+                "name": "항공 시설"
+            },
+            "aeroway/aerodrome": {
+                "name": "공항"
+            },
+            "aeroway/helipad": {
+                "name": "헬기 착륙장"
+            },
+            "amenity": {
+                "name": "시설"
+            },
+            "amenity/bank": {
+                "name": "은행"
+            },
+            "amenity/bar": {
+                "name": "주점"
+            },
+            "amenity/bench": {
+                "name": "벤치"
+            },
+            "amenity/bicycle_parking": {
+                "name": "자전거 주차장"
+            },
+            "amenity/bicycle_rental": {
+                "name": "자전거 대여소"
+            },
+            "amenity/cafe": {
+                "name": "카페"
+            },
+            "amenity/cinema": {
+                "name": "영화관"
+            },
+            "amenity/courthouse": {
+                "name": "법원"
+            },
+            "amenity/embassy": {
+                "name": "대사관"
+            },
+            "amenity/fast_food": {
+                "name": "패스트 푸드"
+            },
+            "amenity/fire_station": {
+                "name": "소방서"
+            },
+            "amenity/fuel": {
+                "name": "주유소"
+            },
+            "amenity/hospital": {
+                "name": "병원"
+            },
+            "amenity/library": {
+                "name": "도서관"
+            },
+            "amenity/marketplace": {
+                "name": "시장"
+            },
+            "amenity/parking": {
+                "name": "주차장"
+            },
+            "amenity/pharmacy": {
+                "name": "약국"
+            },
+            "amenity/place_of_worship": {
+                "name": "예배당"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "교회"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "유대교 회당"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "모스크"
+            },
+            "amenity/police": {
+                "name": "경찰서"
+            },
+            "amenity/post_box": {
+                "name": "우체통"
+            },
+            "amenity/post_office": {
+                "name": "우체국"
+            },
+            "amenity/pub": {
+                "name": "술집"
+            },
+            "amenity/restaurant": {
+                "name": "음식점"
+            },
+            "amenity/school": {
+                "name": "학교"
+            },
+            "amenity/swimming_pool": {
+                "name": "수영장"
+            },
+            "amenity/telephone": {
+                "name": "전화"
+            },
+            "amenity/theatre": {
+                "name": "극장"
+            },
+            "amenity/toilets": {
+                "name": "화장실"
+            },
+            "amenity/townhall": {
+                "name": "마을 회관"
+            },
+            "amenity/university": {
+                "name": "대학교"
+            },
+            "area": {
+                "name": "지역"
+            },
+            "barrier/city_wall": {
+                "name": "성벽"
+            },
+            "barrier/ditch": {
+                "name": "구거"
+            },
+            "barrier/entrance": {
+                "name": "입구"
+            },
+            "barrier/gate": {
+                "name": "문"
+            },
+            "barrier/stile": {
+                "name": "회전식 문"
+            },
+            "barrier/toll_booth": {
+                "name": "전화 부스"
+            },
+            "barrier/wall": {
+                "name": "벽"
+            },
+            "building": {
+                "name": "건물"
+            },
+            "building/entrance": {
+                "name": "입구"
+            },
+            "entrance": {
+                "name": "입구"
+            },
+            "highway": {
+                "name": "고속도로"
+            },
+            "highway/bus_stop": {
+                "name": "버스 정류장"
+            },
+            "highway/crossing": {
+                "name": "건널목"
+            },
+            "highway/cycleway": {
+                "name": "자전거 경로"
+            },
+            "highway/footway": {
+                "name": "보도"
+            },
+            "highway/motorway": {
+                "name": "고속도로"
+            },
+            "highway/path": {
+                "name": "경로"
+            },
+            "highway/primary": {
+                "name": "주요 도로"
+            },
+            "highway/residential": {
+                "name": "주거 도로"
+            },
+            "highway/road": {
+                "name": "알 수 없는 도로"
+            },
+            "highway/secondary": {
+                "name": "보조 도로"
+            },
+            "highway/service": {
+                "name": "취부 도로"
+            },
+            "highway/steps": {
+                "name": "계단"
+            },
+            "highway/tertiary": {
+                "name": "3차 도로"
+            },
+            "highway/track": {
+                "name": "트랙"
+            },
+            "highway/traffic_signals": {
+                "name": "교통 신호"
+            },
+            "highway/trunk": {
+                "name": "간선 도로"
+            },
+            "highway/unclassified": {
+                "name": "분류하지 않은 도로"
+            },
+            "historic": {
+                "name": "사적지"
+            },
+            "historic/archaeological_site": {
+                "name": "고고학장"
+            },
+            "historic/boundary_stone": {
+                "name": "경계석"
+            },
+            "historic/castle": {
+                "name": "성"
+            },
+            "historic/memorial": {
+                "name": "기념관"
+            },
+            "historic/monument": {
+                "name": "기념물"
+            },
+            "historic/ruins": {
+                "name": "유적"
+            },
+            "historic/wayside_cross": {
+                "name": "도로변의 십자가"
+            },
+            "historic/wayside_shrine": {
+                "name": "길가의 신사"
+            },
+            "landuse/allotments": {
+                "name": "텃밭"
+            },
+            "landuse/basin": {
+                "name": "분지"
+            },
+            "landuse/cemetery": {
+                "name": "묘지"
+            },
+            "landuse/commercial": {
+                "name": "상업"
+            },
+            "landuse/construction": {
+                "name": "공사중"
+            },
+            "landuse/farm": {
+                "name": "농장"
+            },
+            "landuse/farmyard": {
+                "name": "농지"
+            },
+            "landuse/forest": {
+                "name": "숲"
+            },
+            "landuse/grass": {
+                "name": "잔디"
+            },
+            "landuse/industrial": {
+                "name": "산업"
+            },
+            "landuse/meadow": {
+                "name": "목초지"
+            },
+            "landuse/orchard": {
+                "name": "과수원"
+            },
+            "landuse/quarry": {
+                "name": "채석장"
+            },
+            "landuse/residential": {
+                "name": "주거"
+            },
+            "landuse/vineyard": {
+                "name": "포도밭"
+            },
+            "leisure": {
+                "name": "여가"
+            },
+            "leisure/garden": {
+                "name": "정원"
+            },
+            "leisure/golf_course": {
+                "name": "골프장"
+            },
+            "leisure/marina": {
+                "name": "마리나"
+            },
+            "leisure/park": {
+                "name": "공원"
+            },
+            "leisure/pitch": {
+                "name": "운동장"
+            },
+            "leisure/pitch/american_football": {
+                "name": "미식 축구장"
+            },
+            "leisure/pitch/baseball": {
+                "name": "야구장"
+            },
+            "leisure/pitch/basketball": {
+                "name": "농구장"
+            },
+            "leisure/pitch/soccer": {
+                "name": "축구장"
+            },
+            "leisure/pitch/tennis": {
+                "name": "테니스장"
+            },
+            "leisure/playground": {
+                "name": "놀이터"
+            },
+            "leisure/slipway": {
+                "name": "슬립 웨이"
+            },
+            "leisure/stadium": {
+                "name": "경기장"
+            },
+            "leisure/swimming_pool": {
+                "name": "수영장"
+            },
+            "leisure/track": {
+                "name": "경주로"
+            },
+            "man_made": {
+                "name": "사람에 의한"
+            },
+            "man_made/lighthouse": {
+                "name": "등대"
+            },
+            "man_made/pier": {
+                "name": "부두"
+            },
+            "man_made/water_tower": {
+                "name": "급수탑"
+            },
+            "natural": {
+                "name": "자연"
+            },
+            "natural/bay": {
+                "name": "만"
+            },
+            "natural/beach": {
+                "name": "해변"
+            },
+            "natural/cliff": {
+                "name": "절벽"
+            },
+            "natural/coastline": {
+                "name": "해안선"
+            },
+            "natural/glacier": {
+                "name": "빙하"
+            },
+            "natural/grassland": {
+                "name": "초원"
+            },
+            "natural/heath": {
+                "name": "황무지"
+            },
+            "natural/peak": {
+                "name": "정상"
+            },
+            "natural/scrub": {
+                "name": "우거진 숲"
+            },
+            "natural/spring": {
+                "name": "온천"
+            },
+            "natural/tree": {
+                "name": "나무"
+            },
+            "natural/water": {
+                "name": "물"
+            },
+            "natural/water/lake": {
+                "name": "호수"
+            },
+            "natural/water/pond": {
+                "name": "호수"
+            },
+            "natural/water/reservoir": {
+                "name": "저수지"
+            },
+            "natural/wetland": {
+                "name": "습지"
+            },
+            "natural/wood": {
+                "name": "산림"
+            },
+            "office": {
+                "name": "사무실"
+            },
+            "place": {
+                "name": "장소"
+            },
+            "place/hamlet": {
+                "name": "작은 마을"
+            },
+            "place/island": {
+                "name": "섬"
+            },
+            "place/locality": {
+                "name": "지역"
+            },
+            "place/village": {
+                "name": "마을"
+            },
+            "power": {
+                "name": "전력"
+            },
+            "power/line": {
+                "name": "전력선"
+            },
+            "power/pole": {
+                "name": "전봇대"
+            },
+            "power/sub_station": {
+                "name": "변전소"
+            },
+            "power/tower": {
+                "name": "송전탑"
+            },
+            "railway": {
+                "name": "철도"
+            },
+            "railway/level_crossing": {
+                "name": "건널목"
+            },
+            "railway/subway": {
+                "name": "지하철"
+            },
+            "railway/subway_entrance": {
+                "name": "지하철 입구"
+            },
+            "railway/tram": {
+                "name": "노면 전차"
+            },
+            "route/ferry": {
+                "name": "페리 노선"
+            },
+            "shop": {
+                "name": "상점"
+            },
+            "shop/bakery": {
+                "name": "제과점"
+            },
+            "shop/butcher": {
+                "name": "정육점"
+            },
+            "shop/supermarket": {
+                "name": "수퍼마켓"
+            },
+            "tourism": {
+                "name": "관광 여행"
+            },
+            "tourism/alpine_hut": {
+                "name": "고산장"
+            },
+            "tourism/artwork": {
+                "name": "예술 작품"
+            },
+            "tourism/attraction": {
+                "name": "관광 명소"
+            },
+            "tourism/camp_site": {
+                "name": "캠프장"
+            },
+            "tourism/chalet": {
+                "name": "별장"
+            },
+            "tourism/guest_house": {
+                "name": "게스트 하우스"
+            },
+            "tourism/hostel": {
+                "name": "호스텔"
+            },
+            "tourism/hotel": {
+                "name": "호텔"
+            },
+            "tourism/information": {
+                "name": "안내소"
+            },
+            "tourism/motel": {
+                "name": "모텔"
+            },
+            "tourism/museum": {
+                "name": "박물관"
+            },
+            "tourism/picnic_site": {
+                "name": "피크닉장"
+            },
+            "tourism/theme_park": {
+                "name": "테마 파크"
+            },
+            "tourism/viewpoint": {
+                "name": "경승지"
+            },
+            "tourism/zoo": {
+                "name": "동물원"
+            },
+            "type/route": {
+                "name": "노선"
+            },
+            "type/route/bicycle": {
+                "name": "자전거 노선"
+            },
+            "type/route/bus": {
+                "name": "버스 노선"
+            },
+            "type/route/detour": {
+                "name": "우회 노선"
+            },
+            "type/route/ferry": {
+                "name": "페리 노선"
+            },
+            "type/route/foot": {
+                "name": "보도 노선"
+            },
+            "type/route/pipeline": {
+                "name": "파이프 라인 노선"
+            },
+            "type/route/power": {
+                "name": "전력 노선"
+            },
+            "type/route/road": {
+                "name": "도로 노선"
+            },
+            "type/route/train": {
+                "name": "철도 노선"
+            },
+            "type/route/tram": {
+                "name": "노면 전차 노선"
+            },
+            "type/route_master": {
+                "name": "노선 마스터"
+            },
+            "waterway": {
+                "name": "수로"
+            },
+            "waterway/canal": {
+                "name": "운하"
+            },
+            "waterway/dam": {
+                "name": "댐"
+            },
+            "waterway/ditch": {
+                "name": "구거"
+            },
+            "waterway/drain": {
+                "name": "배수로"
+            },
+            "waterway/river": {
+                "name": "강"
+            },
+            "waterway/riverbank": {
+                "name": "강가"
+            },
+            "waterway/stream": {
+                "name": "개울"
+            },
+            "waterway/weir": {
+                "name": "둑"
+            }
+        }
+    }
+}

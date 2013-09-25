@@ -58,9 +58,6 @@
             }
         },
         "orthogonalize": {
-            "title": "Maak Vierkantig",
-            "description": "Maak hoeke reghoekig.",
-            "key": "Q",
             "annotation": {
                 "line": "Maak die hoeke van 'n lyn reghoekig.",
                 "area": "Maak die hoeke van 'n area reghoekig."
@@ -116,7 +113,6 @@
         },
         "rotate": {
             "title": "Draai",
-            "description": "Draai die stuk rondom sy middelpunt.",
             "key": "R",
             "annotation": {
                 "line": "'n Lyn is gedraai.",
@@ -245,8 +241,6 @@
     "help": {
         "title": "Help",
         "help": "# Help\n\nHierdie is 'n probram vir  [OpenStreetMap](http://www.openstreetmap.org/), die gratis en veranderbarie kaart van die wêreld. Jy kan dit gebruik om nuwe data by te voeg of op te dateer waar jy bly en die \"open-source\" en \"open-data\" kaart beter te maak vir almal wat dit gebruik.\n\nVerandering wat jy aanbring op die kaart sal sigbaar wees vir almal at OpenStreetMap gebruik. Jy het nodig om 'n [nuwe gebruikersnaam](https://www.openstreetmap.org/user/new) vir jou self te skep voor jy data kan toevoeg by die kaart. \n\nDie [iD editor](http://ideditor.com/) is 'n gemeenskapsprojek met die [kode beskikbaar op GitHub](https://github.com/systemed/iD).\n",
-        "editing_saving": "# Verander en Bêre\n\nDie program is ontwerp om primêr aanlyn te werk en gebruik dit via 'n webwerf op die oomblik.\n\n### Uitkies van eienskappe\nOm 'n kaart item soos 'n pad, of gebou uit te kies, klick daarop. Dit sal die item uitlig en 'n paneel oopmaak met met meer detail oor die item. Dit sal ook 'n lys van dinge wys wat jy met die item kan doen.\n\nVerskeie items can gelyktydig gekies word deur die 'Shift' sleutel in te hou en dan 'n boksie met die muis te teken deur te klick en te sleep. Jy kan dan ooreenstemmende eienskappe tegelyktydig verander vir al die uitgekiesde items.\n\n### Bêre van veranderinge\nEnige verandering wat gemaak word, word lokaal gestoor totdat jy die bêre op die server. As jy 'n fout maak kan jy onklaar maak deur op die \n",
-        "gps": "# GPS\n\nGPS data is die mees betroubare bron van data vir OpenStreetMap. Die program kan gebruik maak van `.gpx` lêers op jou rekenaar. Jy kan GPS spoor lêers genereer deur programme op toepastlike selfone of GPS hardeware.\n\nOm meer uit te vind oor hoe om GPS opname te doen gaan kyk na [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nOm 'n GPS spoor te gebruik vir kaartwerk, sleep en laat val die lêer met jou muis op die kaart program. As die program dit kan verwerk sal dit 'n as 'n helder groen lyn op die kaart verskyn. Jy kan die GPS lyne sigbaar, onsigbaar maak en uit zoom om die hele GPS lyn te sien deur op 'Agtergrond Stellings' te klick.\n\nDie beste manier om die GPX spoor te gebruik is as 'n riglyn vir byvoegings op die kaart, aangesien dit nie op OpenStreetMap gelaai word nie.\n",
         "imagery": "# Lugfotos\n\nLugfotos is 'n belangrike bron vir kaartwerk. 'n Kombinasie van vliegtuie, satelliete en ander gratis bronne is beskikbaar in die program en soos wat jy rondbeweeg en in uit zoom na ander geografiese areas, gaan ander bronne beskikbaar word. \n\nLugfotos is partykeer uit fase uit met die kaart data en is gewoonlik as gevolg van 'n probleem an die lugfotoverskaffer se kant. As jy dus 'n gedeelte van die kaart sien wat lyk of dit als geskuif is moet dit nie dadelik reg skuif nie. Jy kan die lugfotos regskuif deur op 'Verbeter ligging' te klick aan die onderkant van Agtergrond Stellings.\n",
         "inspector": "# Gebruik van die eienskapslys\n\nDie eienskapslys verskyn op die regterkant wanneer jy 'n item kies met die muis en laat jou toe om eienskappe te verander of by te voeg.\n\n### Kies 'n eienskap tipe\nWanneer jy punt, lyn of area bygevoeg het dan kan jy die eienskap tipe kies soos byvoorbeeld 'n snelweg, residentieele pad, supermark of 'n kafee. Die eienskapslys sal knoppies wys vir al die algmene eienskap tipes en jy kan meer vind deur in die soek boks te tik vir wat jy soek. \n\nOm meer van 'n eienskap te leer klick op die 'i' in die onder regterkantse hoek van die eienskapsknoppie. Klick om 'n eienskapsknoppie om dit aan die kaart item toe te ken.\n\n### Gebruik van vorms en verandering van eienskappe\n\nNa jy 'n eienskaptipe gekies het of wanneer jy 'n item gekies het wat reeds eienskappe het, dan sal die eienskaps lys die detail wys van die item soos die naam en adres. \n\nOnder die lys van eienskappe is 'n lys van ikone met meer detail soos die [Wikipedia](http://www.wikipedia.org/) bladsy, rolstoel toegang en meer.\n\nJy kan ook op Aditioneele Eienskappe klick aan die onderkant van die eienskapslys om meer eienskappe by te voeg wat relevant is. [Taginfo](http://taginfo.openstreetmap.org/) is 'n goeie bron in Engels om meer van die gewilde eienskapkombinasies te leer.\n\nVerandering wat jy in die eienskapslys maak word automaties deel van die kaart. Jy kan dit ongedaan maak deur op die 'Ongedaan' knoppie te klick. \n\n### Toemaak van die eienskapslys\n\nJy kan die eienskapslys toemaak deur op die teomaakknoppie regs bo te klick or deur die 'Esc' sleutel te druk, of om op die kaart te klick.\n\n\n"
     },
@@ -271,7 +265,6 @@
             "describe": "**Sit 'n naam by en maak die eienskappe lys toe**"
         },
         "lines": {
-            "add": "Lyne word gebruik om items soos paaie, spoorwee en riviere te verteenwoordig. **Klick die Lyn knoppie om 'n nuwe lyn by te sit.**",
             "start": "** Begin die lyn deur op die einde van die pad te klick.**",
             "residential": "Daar is verskillende tipes paaie, die mees algemeenste is 'n residensieel pad. ** Kies die Residentieele Pad tipe**",
             "describe": "**Gee die pad 'n naam en maak die eienskappe lys toe.**",

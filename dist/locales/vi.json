@@ -41,6 +41,11 @@
             }
         },
         "continue": {
+            "key": "A",
+            "title": "Vẽ tiếp",
+            "description": "Vẽ tiếp đường kẻ này.",
+            "not_eligible": "Không thể vẽ tiếp đường kẻ nào từ chỗ này.",
+            "multiple": "Có thể vẽ tiếp hơn một đường kẻ từ chỗ này. Hãy nhấn giữ phím Shift trong khi nhấn chuột vào đường kẻ mà bạn muốn vẽ tiếp.",
             "annotation": {
                 "line": "vẽ tiếp đường kẻ",
                 "area": "vẽ tiếp vùng"
@@ -69,14 +74,15 @@
             "not_closed": "Không thể làm tròn một đối tượng không phải là đa giác kín."
         },
         "orthogonalize": {
-            "title": "Làm Vuông góc",
-            "description": "Làm vuông góc một đối tượng.",
-            "key": "Q",
             "annotation": {
                 "line": "làm vuông góc một đường kẻ",
                 "area": "làm vuông góc một vùng"
-            },
-            "not_closed": "Không thể làm vuông góc một đối tượng không phải là đa giác kín."
+            }
+        },
+        "straighten": {
+            "title": "Làm thẳng",
+            "description": "Làm thẳng đường kẻ này.",
+            "key": "L"
         },
         "delete": {
             "title": "Xóa",
@@ -136,7 +142,7 @@
         },
         "rotate": {
             "title": "Xoay",
-            "description": "Xoay đối tượng này quanh trung tâm.",
+            "description": "Xoay đối tượng này quanh điểm trung tâm.",
             "key": "X",
             "annotation": {
                 "line": "xoay đường kẻ",
@@ -267,7 +273,7 @@
         "facebook": "Chia sẻ trên Facebook",
         "twitter": "Chia sẻ trên Twitter",
         "google": "Chia sẻ trên Google+",
-        "help_html": "Các thay đổi của bạn sẽ xuất hiện trên lớp “Chuẩn” trong vòng vài phút. Các lớp và tính năng kia có thể được cập nhật chậm hơn \n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>chi tiết</a>).\n"
+        "help_html": "Các thay đổi của bạn sẽ xuất hiện trên lớp “Chuẩn” trong vòng vài phút. Một số lớp và tính năng khác có thể được cập nhật chậm hơn \n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>chi tiết</a>).\n"
     },
     "confirm": {
         "okay": "OK"
@@ -308,9 +314,9 @@
     "help": {
         "title": "Trợ giúp",
         "help": "# Trợ giúp\n\nĐây là trình vẽ của [OpenStreetMap](http://www.openstreetmap.org/), bản đồ có mã nguồn mở và dữ liệu mở cho phép mọi người cùng sửa đổi. Bạn có thể sử dụng chương trình này để bổ sung và cập nhật dữ liệu bản đồ tại khu vực của bạn. Bạn có thể cải tiến bản đồ thế giới mở để cho mọi người sử dụng.\n\nCác sửa đổi của bạn trên bản đồ này sẽ xuất hiện cho mọi người dùng OpenStreetMap. Để sửa bản đồ, bạn cần có một [tài khoản OpenStreetMap miễn phí](https://www.openstreetmap.org/user/new).\n\n[Trình vẽ iD](http://ideditor.com/) là một dự án cộng tác. [Tất cả mã nguồn](https://github.com/systemed/iD) được xuất bản tại GitHub.\n",
-        "editing_saving": "# Sửa đổi & Lưu giữ\n\nĐây là một chương trình vẽ trực tuyến, hiện tại bạn đang truy cập nó qua một trang Web.\n\n### Lựa chọn Đối tượng\n\nĐể lựa chọn một đối tượng, thí dụ con đường hay một điểm, nhấn chuột vào nó trên bản đồ. Khi đối tượng được chọn, bạn sẽ thấy một biểu mẫu ở bên phải chứa các chi tiết về đối tượng, cũng như một trình đơn giống bảng màu của họa sĩ chứa các tác vụ để thực hiện với đối tượng.\n\nCó thể lựa chọn nhiều đối tượng cùng lúc bằng cách nhấn giữ phím Shift và kéo chuột trên bản đồ. Khi kéo chuột, một hộp sẽ xuất hiện và các đối tượng nằm ở trong hộp này sẽ được chọn. Bạn có thể thực hiện một tác vụ với tất cả các đối tượng này cùng lúc.\n\n### Lưu giữ Sửa đổi\n\nKhi bạn sửa đổi các tuyến đường, tòa nhà, và địa điểm, các thay đổi này được lưu giữ trên máy cho đến khi bạn đăng nó lên máy chủ. Đừng lo nhầm lẫn: chỉ việc nhấn vào các nút Hoàn tác và Làm lại.\n\nNhấn “Lưu” để hoàn thành các sửa đổi, thí dụ bạn vừa vẽ xong một khu và muốn bắt đầu vẽ khu mới. Trình vẽ sẽ trình bày các thay đổi để bạn xem lại, cũng như các gợi ý và cảnh báo nếu bạn đã sửa nhầm lẫn.\n\nSau khi vẽ xong, bạn sẽ nhập lời tóm lược các thay đổi và nhấn “Lưu” lần nữa để đăng các thay đổi lên [OpenStreetMap.org](http://www.openstreetmap.org/). Các thay đổi sẽ xuất hiện tại trang web này để mọi người xem và cập nhật nếu có sai sót.\n\nNếu bạn chưa xong mà cần rời khỏi máy tính, bạn có thể đóng trình vẽ này. Lần sau trở lại, trình vẽ này sẽ cho phép khôi phục các thay đổi chưa lưu của bạn (miễn là bạn sử dụng cùng máy tính và trình duyệt).\n",
+        "editing_saving": "# Sửa đổi & Lưu giữ\n\nĐây là một chương trình vẽ trực tuyến, hiện tại bạn đang truy cập nó qua một trang Web.\n\n### Lựa chọn Đối tượng\n\nĐể lựa chọn một đối tượng, thí dụ con đường hay một điểm, nhấn chuột vào nó trên bản đồ. Khi đối tượng được chọn, bạn sẽ thấy một biểu mẫu ở bên phải chứa các chi tiết về đối tượng, cũng như một trình đơn giống bảng màu của họa sĩ chứa các tác vụ để thực hiện với đối tượng.\n\nĐể lựa chọn nhiều đối tượng cùng lúc, nhấn giữ phím Shift và nhấn chuột vào từng đối tượng một. Thay thế, nhấn giữ Shift và kéo chuột trên bản đồ để vẽ hộp bao. Các đối tượng nằm vào hộp này sẽ được chọn.\n\n### Lưu giữ Sửa đổi\n\nKhi bạn sửa đổi các tuyến đường, tòa nhà, và địa điểm, các thay đổi này được lưu giữ trên máy cho đến khi bạn đăng nó lên máy chủ. Đừng lo nhầm lẫn: chỉ việc nhấn vào các nút Hoàn tác và Làm lại.\n\nNhấn “Lưu” để hoàn thành các sửa đổi, thí dụ bạn vừa vẽ xong một khu và muốn bắt đầu vẽ khu mới. Trình vẽ sẽ trình bày các thay đổi để bạn xem lại, cũng như các gợi ý và cảnh báo nếu bạn đã sửa nhầm lẫn.\n\nSau khi vẽ xong, bạn sẽ nhập lời tóm lược các thay đổi và nhấn “Lưu” lần nữa để đăng các thay đổi lên [OpenStreetMap.org](http://www.openstreetmap.org/). Các thay đổi sẽ xuất hiện tại trang web này để mọi người xem và cập nhật nếu có sai sót.\n\nNếu bạn chưa xong mà cần rời khỏi máy tính, bạn có thể đóng trình vẽ này. Lần sau trở lại, trình vẽ này sẽ cho phép khôi phục các thay đổi chưa lưu của bạn (miễn là bạn sử dụng cùng máy tính và trình duyệt).\n",
         "roads": "# Đường sá\n\nTrình vẽ này cho phép tạo, sửa, và xóa các con đường. Con đường không nhất thiết phải là đường phố: có thể vẽ đường cao tốc, đường mòn, đường đi bộ, đường xe đạp…\n\n### Lựa chọn\n\nNhấn vào con đường để lựa chọn nó. Con đường sẽ được tô sáng, một trình đơn công cụ sẽ xuất hiện bên cạnh đường, và thanh bên sẽ trình bày các chi tiết của con đường.\n\n### Sửa đổi\n\nNhiều khi bạn sẽ gặp những con đường bị chệch đối với hình nền hoặc tuyến đường GPS. Bạn có thể chỉnh lại các con đường này để chính xác hơn.\n\nTrước tiên, nhấn vào con đường cần chỉnh lại. Đường sẽ được tô sáng và các nốt sẽ xuất hiện để bạn kéo sang vị trí đúng hơn. Để thêm chi tiết, nhấn đúp vào một khúc đường chưa có nốt, và một nốt mới sẽ xuất hiện để bạn kéo.\n\nNếu con đường nối với đường khác trên thực tiếp, nhưng trên bản đồ thì chưa nối liền, hãy kéo một nốt của một con đường sang đường kia để nối liền hai con đường. Nối liền các đường tại giao lộ là một điều rất quan trọng tăng khả năng chỉ đường.\n\nĐể di chuyển toàn bộ con đường cùng lúc, nhấn vào công cụ “Di chuyển” hoặc nhấn phím tắt `M`, chuyển chuột sang vị trí mới, rồi nhấn chuột để hoàn thành việc di chuyển.\n\n### Xóa\n\nHãy tưởng tượng bạn gặp một con đường hoàn toàn sai: bạn không thấy được con đường trong hình ảnh trên không và, theo lý tưởng, cũng đã ghé vào chỗ đó để xác nhận rằng nó không tồn tại. Nếu trường hợp này, bạn có thể xóa con đường hoàn toàn khỏi bản đồ. Xin cẩn thận khi xóa đối tượng: giống như mọi sửa đổi khác, mọi người sẽ thấy được kết quả. Ngoài ra, hình ảnh trên không nhiều khi lỗi thời – con đường có thể mới xây – thành thử tốt nhất là ghé vào chỗ đó để quan sát chắc chắn, nếu có thể.\n\nĐể xóa một con đường, lựa chọn nó bằng cách nhấn vào nó, rồi nhấn vào hình thùng rác hoặc nhấn phím Delete.\n\n### Tạo mới\n\nBạn có tìm ra một con đường chưa được vẽ trên bản đồ? Hãy bắt đầu vẽ đường kẻ mới bằng cách nhấn vào nút “Đường” ở phía trên bên trái của trình vẽ, hoặc nhấn phím tắt `2`.\n\nNhấn vào bản đồ tại điểm bắt đầu của con đường. Hoặc nếu con đường chia ra từ đường khác đã tồn tại, trước tiên nhấn chuột tại giao lộ giữa hai con đường này.\n\nSau đó, nhấn chuột lần lượt theo lối đường dùng hình ảnh trên không hoặc tuyến đường GPS. Khi nào con đường giao với đường khác, nhấn chuột tại giao lộ để nối liền hai con đường này. Sau khi vẽ xong, nhấn đúp vào nốt cuối dùng hoặc nhấn phím Return hay Enter.\n",
-        "gps": "# GPS\n\nHệ thống định vị toàn cầu, còn gọi GPS, là nguồn dữ liệu tin tưởng nhất trong dự án OpenStreetMap. Trình vẽ này hỗ trợ các tuyến đường thu thập được từ máy GPS, tức tập tin `.gpx` trên máy tính của bạn. Bạn có thể thu loại tuyến đường GPS này bằng một ứng dụng cài đặt trên điện thoại thông minh hoặc máy thu GPS.\n\nĐọc thêm về cách thu thập dữ liệu bằng GPS tại “[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/)”.\n\nĐể sử dụng một tuyến đường GPX trong việc vẽ bản đồ, kéo thả tập tin GPX vào trình vẽ bản đồ này. Nếu trình vẽ nhận ra tuyến đường, tuyến đường sẽ được tô màu xanh nõn chuối trên bản đồ. Mở hộp “Tùy chọn Hình nền” ở thanh công cụ bên trái để bật tắt hoặc thu phóng lớp GPX này.\n\nTuyến đường GPX không được tải lên OpenStreetMap trực tiếp. Cách tốt nhất sử dụng nó là vạch đường theo nó trên bản đồ.\n",
+        "gps": "# GPS\n\nHệ thống định vị toàn cầu, còn gọi GPS, là nguồn dữ liệu tin tưởng nhất trong dự án OpenStreetMap. Trình vẽ này hỗ trợ các tuyến đường thu thập được từ máy GPS, tức tập tin `.gpx` trên máy tính của bạn. Bạn có thể thu loại tuyến đường GPS này bằng một ứng dụng cài đặt trên điện thoại thông minh hoặc máy thu GPS, chẳng hạn máy Garmin.\n\nĐọc thêm về cách thu thập dữ liệu bằng GPS tại “[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/)”.\n\nĐể sử dụng một tuyến đường GPX trong việc vẽ bản đồ, kéo thả tập tin GPX vào trình vẽ bản đồ này. Nếu trình vẽ nhận ra tuyến đường, tuyến đường sẽ được tô màu xanh nõn chuối trên bản đồ. Mở hộp “Tùy chọn Hình nền” ở thanh công cụ bên phải để bật tắt hoặc thu phóng lớp GPX này.\n\nTuyến đường GPX không được tải lên OpenStreetMap trực tiếp. Cách tốt nhất để sử dụng nó là vạch đường theo nó trên bản đồ, cũng như [tải nó lên OpenStreetMap](http://www.openstreetmap.org/trace/create) để cho người khác sử dụng.\n",
         "imagery": "# Hình ảnh\n\nẢnh hàng không (chụp từ máy bay, vệ tinh) là tài nguyên quan trọng trong việc vẽ bản đồ. Có sẵn một số nguồn hình ảnh từ máy bay, vệ tinh, và dịch vụ mở trong trình vẽ này, dưới trình đơn “Tùy chọn Hình nền” ở bên trái.\n\nTheo mặc định, trình vẽ hiển thị lớp trên không của [Bản đồ Bing](http://www.bing.com/maps/), nhưng có sẵn nguồn khác tùy theo vị trí đang xem trong trình duyệt. Ngoài ra có hình ảnh rất rõ tại nhiều vùng ở một số quốc gia như Hoa Kỳ, Pháp, và Đan Mạch.\n\nHình ảnh đôi khi bị chệch đối với dữ liệu bản đồ vì dịch vụ hình ảnh có lỗi. Nếu bạn nhận thấy nhiều con đường bị chệch đối với hình nền, xin đừng di chuyển các đường này để trùng hợp với hình ảnh. Thay vì di chuyển các con đường, hãy chỉnh lại hình ảnh để phù hợp với dữ liệu tồn tại bằng cách nhấn “Chỉnh lại hình nền bị chệch” ở cuối hộp Tùy chọn Hình nền.\n",
         "addresses": "# Địa chỉ\n\nĐịa chỉ là những thông tin rất cần thiết trên bản đồ.\n\nTuy bản đồ thường trình bày các địa chỉ như một thuộc tính của đường sá, nhưng OpenStreetMap liên kết các địa chỉ với các tòa nhà hoặc miếng đất dọc đường.\n\nBạn có thể thêm thông tin địa chỉ vào các hình dạng tòa nhà hoặc các địa điểm quan tâm. Tốt nhất là lấy thông tin địa chỉ từ kinh nghiệm cá nhân, thí dụ đi dạo trên phố và ghi chép các địa chỉ hoặc nhớ lại những chi tiết từ hoạt động hàng ngày của bạn. Cũng như bất cứ chi tiết nào, dự án này hoàn toàn cấm sao chép từ các nguồn thương mại như Bản đồ Google.\n",
         "inspector": "# Biểu mẫu\n\nBiểu mẫu là hộp xuất hiện ở bên phải của trang khi nào một đối tượng được chọn. Biểu mẫu này cho phép sửa đổi các chi tiết của các đối tượng được chọn.\n\n### Chọn Thể loại\n\nSau khi thêm địa điểm, đường kẻ, hoặc vùng vào bản đồ, bạn có thể cho biết đối tượng này tượng trưng cho gì, chẳng hạn con đường, siêu thị, hoặc quán cà phê. Biểu mẫu trình bày các nút tiện để chọn các thể loại đối tượng thường gặp, hoặc bạn có thể gõ một vài chữ mô tả vào hộp tìm kiếm để tìm ra các thể loại khác.\n\nNhấn vào hình dấu trang ở phía dưới bên phải của một nút thể loại để tìm hiểu thêm về thể loại đó. Nhấn vào nút để chọn thể loại đó.\n\n### Điền đơn và Gắn thẻ\n\nSau khi bạn chọn thể loại, hoặc nếu chọn một đối tượng đã có thể loại, biểu mẫu trình bày các trường văn bản và điều khiển để xem và sửa các thuộc tính của đối tượng như tên và địa chỉ.\n\nỞ dưới các điều khiển có một số hình tượng có thể nhấn để thêm chi tiết, chẳng hạn tên bài [Wikipedia](http://www.wikipedia.org/) và mức hỗ trợ xe lăn.\n\nNhấn vào “Các thẻ năng cao” ở cuối biểu mẫu để gắn bất cứ thẻ nào vào đối tượng. [Taginfo](http://taginfo.openstreetmap.org/) là một công cụ rất hữu ích để tìm ra những phối hợp thẻ phổ biến.\n\nCác thay đổi trong biểu mẫu được tự động áp dụng vào bản đồ. Bạn có thể nhấn vào nút “Hoàn tác” vào bất cứ lúc nào để hoàn tác các thay đổi.\n\n### Đóng Biểu mẫu\n\nĐể đóng biểu mẫu, nhấn vào nút Đóng ở phía trên bên phải, nhấn phím Esc, hoặc nhấn vào một khoảng trống trên bản đồ.\n",
@@ -356,7 +362,8 @@
             "road": "**Chọn Đường Giao thông từ danh sách.**",
             "residential": "Có nhiều kiểu con đường; kiểu phổ biến nhất là Ngõ Dân cư. **Chọn kiểu con đường là Ngõ Dân cư.**",
             "describe": "**Đặt tên cho con đường và đóng biểu mẫu.**",
-            "restart": "Con đường phải giao với đường Flower Street."
+            "restart": "Con đường phải giao với đường Flower Street.",
+            "wrong_preset": "Bạn không chọn kiểu đường Ngõ Dân cư. **Nhấn chuột vào đây để thử lần nữa.**"
         },
         "startediting": {
             "title": "Bắt đầu Sửa đổi",
@@ -419,10 +426,13 @@
                         "description": "Được xây với mục đích cho phép vận chuyển bằng phương thức này, theo bảng hay luật pháp địa phương"
                     },
                     "destination": {
-                        "title": "Để tới nơi",
+                        "title": "Nơi đến",
                         "description": "Chỉ cho phép truy cập để tới nơi"
                     }
                 }
+            },
+            "access_toilets": {
+                "label": "Quyền Truy cập"
             },
             "address": {
                 "label": "Địa chỉ",
@@ -451,6 +461,9 @@
             },
             "atm": {
                 "label": "Máy Rút tiền"
+            },
+            "backrest": {
+                "label": "Dựa Lưng"
             },
             "barrier": {
                 "label": "Kiểu"
@@ -578,6 +591,9 @@
             "levels": {
                 "label": "Số Tầng",
                 "placeholder": "2, 4, 6…"
+            },
+            "lit": {
+                "label": "Có Đèn Sáng"
             },
             "location": {
                 "label": "Vị trí"
@@ -712,6 +728,9 @@
             "trail_visibility": {
                 "label": "Tầm nhìn trên Đường mòn"
             },
+            "vending": {
+                "label": "Loại Hàng hóa"
+            },
             "water": {
                 "label": "Loại"
             },
@@ -780,6 +799,10 @@
                 "name": "Tiện nghi",
                 "terms": "tiện nghi,tien nghi"
             },
+            "amenity/arts_centre": {
+                "name": "Trung tâm Nghệ thuật",
+                "terms": "nghệ thuật,mỹ thuật,trung tâm nghệ thuật,trung tâm mỹ thuật,nhà nghệ thuật,hội trường nghệ thuật,nghe thuat,my thuat,trung tam nghe thuat,trung tam my thuat,nha nghe thuat,hoi truong nghe thuat"
+            },
             "amenity/atm": {
                 "name": "Máy Rút tiền",
                 "terms": "máy rút tiền,máy rút tiền tự động,atm,may rut tien,may rut tien tu dong"
@@ -801,8 +824,12 @@
                 "terms": "chỗ đậu xe đạp,đậu xe đạp,cho dau xe dap,dau xe dap"
             },
             "amenity/bicycle_rental": {
-                "name": "Chỗ Mướn Xe đạp",
-                "terms": "chỗ mướn xe đạp,tiệm mướn xe đạp,mướn xe đạp,chỗ thuê xe đạp,tiệm thuê xe đạp,thuê xe đạp,cho muon xe dap,tiem muon xe dap,muon xe dap,cho thue xe dap,tiem thue xe dap,thue xe dap"
+                "name": "Cho thuê Xe đạp",
+                "terms": "dịch vụ cho mướn xe đạp,chỗ mướn xe đạp,tiệm mướn xe đạp,mướn xe đạp,dịch vụ cho thuê xe đạp,chỗ thuê xe đạp,tiệm thuê xe đạp,thuê xe đạp,dich vu cho muon xe dap,cho muon xe dap,tiem muon xe dap,muon xe dap,dich vu cho thue xe dap,cho thue xe dap,tiem thue xe dap,thue xe dap"
+            },
+            "amenity/boat_rental": {
+                "name": "Cho thuê Tàu",
+                "terms": "dịch vụ cho thuê tàu,chỗ thuê tàu,tiệm thuê tàu,thuê tàu,dịch vụ cho mướn tàu,chỗ mướn tàu,tiệm mướn tàu,mướn tàu,dịch vụ cho thuê thuyền,chỗ thuê thuyền,tiệm thuê thuyền,thuê thuyền,dịch vụ cho mướn thuyền,chỗ mướn thuyền,tiệm mướn thuyền,mướn thuyền,dich vu cho thue tau,cho thue tau,tiem thue tau,thue tau,dich vu cho muon tau,cho muon tau,tiem muon tau,muon tau,dich vu cho thue thuyen,cho thue thuyen,tiem thue thuyen,thue thuyen,dich vu cho muon thuyen,cho muon thuyen,tiem muon thuyen,muon thuyen"
             },
             "amenity/cafe": {
                 "name": "Quán Cà phê",
@@ -810,7 +837,7 @@
             },
             "amenity/car_rental": {
                 "name": "Cho thuê Xe",
-                "terms": "chỗ thuê xe,tiệm thuê xe,thuê xe,chỗ mướn xe,tiệm mướn xe,mướn xe,cho thue xe,tiem thue xe,thue xe,cho muon xe,tiem muon xe,muon xe"
+                "terms": "dịch vụ cho thuê xe,chỗ thuê xe,tiệm thuê xe,thuê xe,dịch vụ cho mướn xe,chỗ mướn xe,tiệm mướn xe,mướn xe,dich vu cho thue xe,cho thue xe,tiem thue xe,thue xe,dich vu cho muon xe,cho muon xe,tiem muon xe,muon xe"
             },
             "amenity/car_sharing": {
                 "name": "Chia sẻ Xe",
@@ -964,6 +991,10 @@
                 "name": "Trường Đại học",
                 "terms": "cao đẳng,trường cao đẳng,đại học,CĐ,ĐH,cao dang,truong cao dang,dai hoc,CD,DH"
             },
+            "amenity/vending_machine": {
+                "name": "Máy bán hàng",
+                "terms": "máy bán hàng,máy bán hàng tự động,máy bán nước uống,máy bán đồ ăn,máy bán kẹo,máy bán dao cạo,máy bán tem,quán ăn tự động,may ban hang,may ban hang tu dong,may ban nuoc uong,may ban do an,may ban keo,may ban dao cao,may ban tem,quan an tu dong"
+            },
             "amenity/waste_basket": {
                 "name": "Thùng rác",
                 "terms": "thùng rác,sọt rác,thung rac,sot rac"
@@ -1041,7 +1072,7 @@
                 "terms": "tường,tuong"
             },
             "boundary/administrative": {
-                "name": "Biên giới Hành chính",
+                "name": "Ranh giới Hành chính",
                 "terms": "biên giới hành chính,ranh giới hanh chính,bien gioi hanh chinh,ranh gioi hanh chinh"
             },
             "building": {
@@ -1200,6 +1231,10 @@
                 "name": "Cầu thang",
                 "terms": "cầu thang,cau thang"
             },
+            "highway/stop": {
+                "name": "Bảng Dừng lại",
+                "terms": "bảng dừng lại,biển dừng lại,bảng dừng xe,biển dừng xe,bang dung lai,bien dung lai,bang dung xe,bien dung xe"
+            },
             "highway/tertiary": {
                 "name": "Phố",
                 "terms": "phố,đường,đường liên huyện,huyện lộ,pho,duong,duong lien huyen,huyen lo"
@@ -1341,7 +1376,7 @@
                 "terms": "giải trí,thể thao,thể dục,giai tri,the thao,thể dục"
             },
             "leisure/dog_park": {
-                "name": "Công viên Chó",
+                "name": "Công viên dành cho Chó",
                 "terms": "công viên chó,công viên cho chó,công viên dành cho chó,công viên chó chạy nhảy,cong vien cho,cong vien cho cho,cong vien danh cho cho,cong vien cho chay nhay"
             },
             "leisure/garden": {
@@ -1376,6 +1411,10 @@
                 "name": "Sân Bóng rổ",
                 "terms": "sân bóng rổ,san bong ro"
             },
+            "leisure/pitch/skateboard": {
+                "name": "Công viên Trượt ván",
+                "terms": "công viên trượt ván,sân trượt ván,công viên trượt patin,sân trượt patin,cong vien truot van,san truot van,cong vien truot patin,san truot patin"
+            },
             "leisure/pitch/soccer": {
                 "name": "Sân cỏ Bóng đá",
                 "terms": "sân cỏ bóng đá,sân cỏ banh đá,sân cỏ đá banh,san co bong da,san co banh da,san co da banh"
@@ -1395,6 +1434,10 @@
             "leisure/slipway": {
                 "name": "Đường Trượt tàu",
                 "terms": "đường trượt tàu,duong truot tau"
+            },
+            "leisure/sports_center": {
+                "name": "Trung tâm Thể thao",
+                "terms": "trung tâm thể thao,tòa nhà thể thao,toà nhà thể thao,trung tâm bơi lội,trung tâm spa,trung tâm thể dục,sân vận động trong nhà,SVĐ trong nhà,trung tam the thao,toa nha the thao,trung tam boi loi,trung tam spa,trung tam the duc,san van dong trong nha,svd trong nha"
             },
             "leisure/stadium": {
                 "name": "Sân vận động",
@@ -1480,6 +1523,10 @@
                 "name": "Bờ biển",
                 "terms": "bờ biển,bờ sông,bờ,bo bien,bo song,bo"
             },
+            "natural/fell": {
+                "name": "Đồi Cằn cỗi",
+                "terms": "đồi cằn cỗi,đồi đá,núi cằn cỗi,núi đá,doi can coi,doi da,nui can coi,nui da"
+            },
             "natural/glacier": {
                 "name": "Sông băng",
                 "terms": "sông băng,song bang"
@@ -1495,6 +1542,10 @@
             "natural/peak": {
                 "name": "Đỉnh núi",
                 "terms": "đồi,núi,đỉnh núi,đỉnh,chỏm núi,chỏm,chóp núi,chóp,chỏm chóp,doi,nui,dinh nui,dinh,chom nui,chom,chop nui,chop,chom chop"
+            },
+            "natural/scree": {
+                "name": "Sườn Núi Đá",
+                "terms": "sườn núi đá,sườn đồi đá,ta-luy,ta luy,taluy,bãi đá,suon nui da,suon doi da,bai da"
             },
             "natural/scrub": {
                 "name": "Đất Bụi rậm",
@@ -1612,6 +1663,10 @@
                 "name": "Đường sắt Không hoạt động",
                 "terms": "đường sắt không hoạt động,duong sat khong hoat dong"
             },
+            "railway/halt": {
+                "name": "Ga xép",
+                "terms": "ga xép,ga nhỏ,ga xep,ga nho"
+            },
             "railway/level_crossing": {
                 "name": "Giao lộ Đường sắt",
                 "terms": "giao lộ đường sắt,giao lộ đường ray,nút giao đường sắt,giao lo duong sat,giao lo duong ray,nut giao duong sat"
@@ -1621,7 +1676,7 @@
                 "terms": "đường sắt một ray,duong sat mot ray"
             },
             "railway/platform": {
-                "name": "Ke ga",
+                "name": "Nhà ga",
                 "terms": "ke ga"
             },
             "railway/rail": {
@@ -1733,11 +1788,11 @@
                 "terms": "tiệm vật liệu xây dựng,tiệm ngũ kim,cửa hàng vật liệu xây dựng,cửa hàng ngũ kim,tiem vat lieu xay dung,tiem ngu kim,cua hang vat lieu xay dung,cua hang ngu kim"
             },
             "shop/dry_cleaning": {
-                "name": "Tiệm Giặt Hấp tẩy",
+                "name": "Tiệm Giặt khô",
                 "terms": "tiệm giặt hấp tẩy,cửa hàng giặt hấp tẩy,tiệm giặt sấy,cửa hàng giặt sấy,tiem giat hap tay,cua hang giat hap tay,tiem giat say,cua hang giat say"
             },
             "shop/electronics": {
-                "name": "Tiệm Thiết bị Điện tử",
+                "name": "Cửa hàng điện tử",
                 "terms": "chỗ bán đồ điện,tiệm bán đồ điện,nơi bán đồ điện,cửa hàng bán đồ điện,cửa hiệu bán đồ điện,quầy bán đồ điện,cửa tiệm đồ điện,tiệm điện tử,cửa hàng điện tử,máy tính,vi tính,điện thoại,tivi,TV,máy giặt,máy lạnh,máy sưởi,loa,máy ảnh,máy chụp hình,cho ban do dien,tiem ban do dien,noi ban do dien,cua hang ban do dien,cua hieu ban do dien,quay ban do dien,cua tiem do dien,tiem dien tu,cua hang dien tu,may tinh,vi tinh,dien thoai,may giat,may lanh,may suoi,may anh,may chup hinh"
             },
             "shop/farm": {
@@ -1753,7 +1808,7 @@
                 "terms": "quầy bán hoa,tiệm bán hoa,chỗ bán hoa,nơi bán hoa,cửa hàng hoa,cửa hàng bán hoa,nơi bán hoa,bông hoa,quay ban hoa,tiem ban hoa,cho ban hoa,noi ban hoa,cua hang hoa,cua hang ban hoa,noi ban hoa,bong hoa"
             },
             "shop/furniture": {
-                "name": "Tiệm Đồ đạc",
+                "name": "Cửa hàng Nội thất",
                 "terms": "cửa hàng đồ đạc,chỗ đồ đạc,cửa hàng bán đồ đạc,tiệm bán đồ đạc,quầy bán đồ đạc,nơi bán đồ đạc,đồ gỗ,giường,bàn,ghế,đèn,cua hang do dac,cho do dac,cua hang ban do dac,tiem ban do dac,quay ban do dac,noi ban do dac,do go,giuong,ban,ghe,den"
             },
             "shop/garden_centre": {
@@ -1933,11 +1988,11 @@
                 "terms": "vườn thú,vườn bách thú,vuon thu,vuon bach thu"
             },
             "type/boundary": {
-                "name": "Biên giới",
+                "name": "Ranh giới",
                 "terms": "biên giới,ranh giới,bien gioi,ranh gioi"
             },
             "type/boundary/administrative": {
-                "name": "Biên giới Hành chính",
+                "name": "Ranh giới Hành chính",
                 "terms": "biên giới hành chính,ranh giới hành chính,bien gioi hanh chinh,ranh gioi hanh chinh"
             },
             "type/multipolygon": {
@@ -1971,6 +2026,10 @@
             "type/route/foot": {
                 "name": "Tuyến đường Đi bộ",
                 "terms": "tuyến đường đi bộ,lộ trình đi bộ,tuyen duong di bo,lo trinh di bo"
+            },
+            "type/route/hiking": {
+                "name": "Tuyến Đường đi bộ dài",
+                "terms": "tuyến đường đi bộ dài,tuyến đi bộ đường dài,tuyen duong di bo dai,tuyen di bo duong dai"
             },
             "type/route/pipeline": {
                 "name": "Tuyến Đường ống",

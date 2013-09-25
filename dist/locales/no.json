@@ -54,9 +54,6 @@
             }
         },
         "orthogonalize": {
-            "title": "Lag åttekantet",
-            "description": "Lag vinkelrette hjørner.",
-            "key": "Q",
             "annotation": {
                 "line": "Laget hjørnene på linjen vinkelrette.",
                 "area": "Laget hjørnene på arealet vinkelrette."
@@ -106,7 +103,6 @@
         },
         "rotate": {
             "title": "Rotér",
-            "description": "Rotér dette objektet rundt sitt midtpunkt.",
             "key": "R",
             "annotation": {
                 "line": "Rotér en linje.",
@@ -132,10 +128,12 @@
     },
     "browser_notice": "Denne editor er støttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og høyere. Vennligst oppgrader din nettleser eller bruk Potlatch 2 for å redigere kartet.",
     "logout": "logg ut",
+    "loading_auth": "Kobler til OpenStreetMap...",
     "report_a_bug": "meld en programvarefeil",
     "commit": {
         "title": "Lagre endringer",
         "description_placeholder": "Kort beskrivelse av dine bidrag",
+        "message_label": "Lagre beskjed",
         "save": "Lagre",
         "cancel": "Avbryt",
         "warnings": "Advarsler",
@@ -158,7 +156,8 @@
         "title": "Bakgrunn",
         "description": "Bakgrunnsinnstillinger",
         "percent_brightness": "{opacity}% lysstyrke",
-        "fix_misalignment": "Rett opp skjevstilling"
+        "fix_misalignment": "Rett opp skjevstilling",
+        "reset": "tilbakestill"
     },
     "restore": {
         "heading": "Du har ulagrede endringer"
@@ -175,7 +174,9 @@
         "just_edited": "Du har akkurat endret OpenStreetMap!"
     },
     "splash": {
-        "welcome": "Velkommen til iD OpenStreetMap editor"
+        "welcome": "Velkommen til iD OpenStreetMap editor",
+        "walkthrough": "Begynn Gjennomgangen",
+        "start": "Rediger Nå"
     },
     "source_switch": {
         "live": "direkte",
@@ -193,7 +194,8 @@
         "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal"
     },
     "zoom": {
-        "in": "Forstørr"
+        "in": "Forstørr",
+        "out": "Forminsk"
     },
     "gpx": {
         "local_layer": "Lokal GPX-fil",
@@ -201,6 +203,11 @@
     },
     "help": {
         "title": "Hjelp"
+    },
+    "intro": {
+        "navigation": {
+            "drag": "Hovedkartet viser data fra OpenstreetMap lagt over en bakgrunn. Du kan navigere ved å dra eller scrolle, slik som et vanlig nettkart. **Dra kartet!**"
+        }
     },
     "presets": {
         "categories": {

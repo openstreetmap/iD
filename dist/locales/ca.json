@@ -41,6 +41,11 @@
             }
         },
         "continue": {
+            "key": "A",
+            "title": "Continua",
+            "description": "Continua aquesta línia",
+            "not_eligible": "No es pot continuar cap línia aquí",
+            "multiple": "Aquí es poden continuar diferents línies. Per escollir una línia, prem la tecla shift i clica-hi a sobre per seleccionar-la.",
             "annotation": {
                 "line": "Heu continuat una línia.",
                 "area": "Heu continuat una àrea."
@@ -69,14 +74,15 @@
             "not_closed": "Això no es pot fer circular perquè no té els extrems units."
         },
         "orthogonalize": {
-            "title": "Fes-ho ortogonal",
-            "description": "Quadra les cantonades",
-            "key": "Q",
             "annotation": {
                 "line": "Heu quadrat les cantonades d'una línia.",
                 "area": "Heu quadrat les cantonades d'una àrea."
-            },
-            "not_closed": "Això no es pot quadrar perquè no té els extrems units."
+            }
+        },
+        "straighten": {
+            "title": "Fer recta",
+            "description": "Fes aquesta línia recta",
+            "key": "S"
         },
         "delete": {
             "title": "Suprimeix",
@@ -242,6 +248,7 @@
         "description": "Paràmetres de configuració del fons",
         "percent_brightness": "{opacity}% brillantor",
         "custom": "Personalitza",
+        "custom_prompt": "Introdueix una plantilla de casella. Els paràmetres vàlids són {z}, {x}, {y} per a l'esquema Z/X/Y i  {u} per a l'esquema quadtile.",
         "fix_misalignment": "Corregeix la desalineació",
         "reset": "reinicia"
     },
@@ -307,13 +314,14 @@
     "help": {
         "title": "Ajuda",
         "help": "# Ajuda\n\nAixò és un editor per al [OpenStreetMap](http://www.openstreetmap.org/), el mapa lliure i editable del món. Podeu utilitzar-lo per afegir i actualitzar\nles dades a la vostra àrea, contribuint així a fer un mapa de codi obert,  amb dades lliures del món i\nmillor per a tothom.\n\nLes edicions que feu en aquest mapa seran visibles per tothom que faci servir OpenStreetMap. per tal de començar a editar, necessitareu un\n[compte gratuït d'OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n L'[Editor iD](http://ideditor.com/) és un projecte cooperatiu que té el [codi font\ndisponible a GitHub](https://github.com/systemed/iD).\n",
-        "editing_saving": "# Edició i desat\n\nAquest editor està dissenyat per treballar principalment en línia, i hi heu accedit mitjançant una pàgina web.\n\n### Selecció de característiques\n\nPer seleccionar una característica del mapa, com ara una carretera o un punt d'interès, cliqueu-hi a sobre. Això ressaltarà la característica, obrirà un panell amb els detalls d'aquesta, i un menú amb les coses que hi podeu fer .\n\nPodeu seleccionar múltiples característiques prement la tecla 'Majúscula' i clicant i arrossegant el cursor. Això seleccionarà totes les característiques que englobi el requadre que es dibuixarà i permetrà modificar totes les característiques seleccionades en un sol cop.\n\n### Desant les edicions\n\nQuan feu canvis com ara editar carreteres, edificis, o llocs, aquests canvis es desen localment fins que els desis al servidor. No us preocupeu si feu algun error, podeu desfer els canvis clicant el botó de desfer, i podeu refer els canvis clicant el botó de refer.\n\nCliqueu 'Desa' per acabar un grup d'edicions - per exemple, si heu acabat de delimitar l'àrea d'una ciutat i voleu començar a fer-ne una altra. Tindreu l'oportunitat de revisar la feina feta, \ni l'editor proporcionarà suggeriments que us podran ajudar i també mostrarà alertes \nsi alguna cosa no està del tot bé als teus canvis.\n\nSi tot sembla correcte, podeu escriure un breu comentari explicant el canvis\nque heu fet, i clicar 'Desa' un altre cop per publicar els canvis\na [OpenStreetMap.org](http://www.openstreetmap.org/), on seran visibles\nper a tots els altres usuaris i disponibles per a altres editors per refer-los o bé millorar-los.\n\nSi no podeu acabar les edicions en una sessió, podeu sortir de la finestra d'edició i tornar més tard (al mateix navegador i ordinador), i l'aplicació d'edició\npreguntarà si vols restaurar els canvis anteriors.\n",
+        "editing_saving": "# Edició i desat\n\nAquest editor està dissenyat per treballar principalment en línia, i hi has accedit mitjançant una pàgina web.\n\n### Selecció de característiques\n\nPer selecionar una característica del mapa, com ara una carretera o un punt d'interès, clica-hi a sobre. Això ressaltarà la característica, obrirà un panell amb els detalls sobre aquesta, i un menú amb les coses que hi pots fer .\n\nPots seleccionar múltiples característiques, prement la tecla 'Shift' i clicant-les per separat, o bé clicant i arrossegant el cursor. Això seleccionarà totes les característiques que englobi el requadre que es dibuixarà i permetrà modificar totes les característiques seleccionades en un sol cop.\n\n### Desant les edicions\n\nQuan facis canvis com ara editar carreteres, edificis, o llocs, aquests canvis es guarden localment fins que els desis al servidor. No et preocupis si comets algun error- pots desfer els canvis clicant el botó de desfer, i pots refer els canvis clicant el botó de refer.\n\nClica 'Desa' per acabar un grup d'edicions - per exemple, si has acabat de delimitar l'àrea d'una ciutat i vols començar a fer-ne una altra. Tindràs la oportunitat de revisar la feina feta,\ni l'editor proporcionarà suggeriments que et podràn ajudar\ni també mostrarà alertes si alguna cosa no està del tot bé als teus canvis.\n\nSi tot sembla correcte, pots escriure un breu comentari explicant el canvis\nque has fet, i clicar desa un altre cop per publicar els canvis\na [OpenStreetMap.org](http://www.openstreetmap.org/), on seràn visibles\nper a tots els altres usuaris i disponibles per a altres editors per refer-los o bé millorar-los.\n\nSi no pots acabar les teves edicions en una sessió, pots sortir de la finestra d'edició i tornar més tard (al mateix navegador i ordinador), i l'aplicació d'edició\npreguntarà si vols restaurar els canvis anteriors.\n",
         "roads": "# Carreteres\n\nPots crear, ajustar i eliminar carreteres amb aquest editor. Les carreteres poden ser\nde molts tipus: pistes, autovies, camins, carrils bici, i molts més - tots els segments\nmés comuns han de ser cartografiables.\n\n### Selecció\n\nClica a la carretera per seleccionar-la. Al fer això els seus contorns es faran visibles, \ncom també un petit menú d'eines i una barra lateral que mostrarà més informació\nsobre la carretera.\n\n### Modificació\n\nDe vegades veuràs carreteres que no estan alineades amb la imatge del darrere \no amb una traça de GPS. Podeu ajustar aquestes carreteres per tal que estiguin al lloc\ncorrecte.\n\nPrimer clica a la carretera que vols canviar. Això la ressaltarà i mostrarà els punts de control\nque pots arrossegar a les ubicacions desitjades. Si el que\nvols és afegir nous punts per obtenir un grau de detall més alt, fes doble clic en una part de la carretera sense cap punt, i se'n afegirà un.\n\nSi la carretera es connecta amb una altra, però no ho reflecteix al mapa, \npots arrossegar un dels punts de control cap a l'altre carretera \nper tal d'unir-les. Fer que les carreteres es connectin és molt important \nper al mapa i essencial per proveir direccions per a la conducció.\n\nTambé pots clicar l'eina «Moure» o prémer la tecla «M» per moure la carretera sencera, tota de cop, i llavors clicar altra vegada per guardar aquest moviment.\n\n### Eliminació\n\nSi una carretera està totalment malament -pots apreciar que no existeix a la imatge per satèl·lit\ni a més a més, els veïns ens han confirmat que no existeix - la pots eliminar, cosa que la treurà del mapa. Vés amb molt de compte a l'hora d'eliminar característiques -\ncom ara altres edicions; els resultats podran ser vistos per tothom i moltes vegades la imatgeria per satèl·lit no està actualitzada, per tant la carretera es pot haver estat construida recentment.\n\nPots eliminar una carretera clicant-la, i llavors clicant la icona de la paperera o bé prement la tecla «Suprimir».\n\n### Creació\n\nHas trobat que en algun lloc hi hauria d'haver una carretera però no hi és? Clica la icona «Línia»\nal marge superior esquerre de la zona del mapa o bé prem la tecla «2» per començar a dibuixar\nuna línia.\n\nClica a l'inici de la carretera al mapa per començar a dibuixar. Si la carretera comença amb una bifurcació en una carretera existent, cliqueu al lloc a on connecten.\n\nA continuació clica a diferents punts al llarg de la carretera per tal que segueixi el traçat correcte, d'acord  amb la imatge del satèl·lit o la traça del GPS. Si la carretera que estàs dibuixant s'encreua amb una altra carretera, connecta-les clicant al punt d'intersecció. Quan acabis el dibuix, fes doble clic o prem «Retorn» del teclat.\n",
-        "gps": "# GPS\n\nLes dades de GPS són la font més fiable de dades per a l'OpenStreetMap. Aquest editor és compatible amb les traces locals - fitxers`.gpx`al ordinador local. Pots recollir \naquest tipus de traça GPS amb algunes aplicacions per a telèfons avançats com també \ndispositius personals de GPS.\n\nPer a més informació sobre com recollir dades amb GPS, llegiu\n[Recollir dades amb GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPer a fer servir una traça GPX per editar el mapa, arrossega i deixa el fitxer GPX a l'editor. \nSi es detecta, s'afegirà el mapa com una línia verda llampant. \nClica a 'Paràmetres de configuració del fons'  al menú del cantó dret per activar,\ndesactivar, o per ajustar la vista a aquesta capa GPX.\n\nLa traça GPX no es puja directament a l'OpenStreetMap - la millor manera de \nfer-la servir és dibuixar el mapa, fent-la servir com a guia per a les noves característiques que afegiràs.\n",
+        "gps": "# GPS\n\nLes dades de GPS són la font més fiable de dades per a l'OpenStreetMap. Aquest editor és compatible amb les taces locals - fitxers`.gpx`al teu ordinador local. Pots recollir \naquest tipus de traça GPS amb algunes aplicacions per a smartphones com també \ndispositius personals de GPS.\n\nPer a més informació sobre com recollir dades amb GPS, llegeix\n[Recollir dades amb GPS](http://learnosm.org/en/beginner/using-gps/).\n\nper fer servir una traça GPX per editar el mapa, arrossega i deixa el fitxer GPX a l'editor. \nSi es detecta, s'afegirà el mapa com una línia verda llampant. \nClica a 'Paràmetres de configuració del fons'  al cantó esquerre per activar,\ndesactivar, o per ajustar la vista a aquesta capa GPX.\n\nLa traça GPX no és pujada directament a OpenStreetMap - la millor manera de \nfer-la servir és dibuixar tu el mapa, fent-la servir com a guia per a les noves característiques que afegiràs. també les pots [pujar a l'OpenStreetMap] \n(http://www.openstreetmap.org/trace/create)\nperquè d'altres persones les utilitzin.\n",
         "imagery": "# Imatgeria\n\nLa imatgeria aèria és un recurs important per a l'edició de mapes. Una combinació de\nvols d'aeronaus, fotografies de satèl·lit, i d'altres fonts compilades gratuïtament \nestan disponibles a l'editor dins del menú de l'esquerre 'Paràmetres de configuració del fons'.\n\nPer defecte, l'editor mostra la capa de satèl·lit de [Bing Maps](http://www.bing.com/maps/), però a mesura que et mous i ajustes la vista del mapa a noves àrees geogràfiques, noves fonts estaran disponibles. En alguns països, com ara els Estats Units, França, i Dinamarca tenen\n una imatgeria d'alta qualitat disponible per a determinades àrees.\n\nLa imatgeria de vegades no es correspon amb les dades del mapa, això és degut a un error\nper part del proveïdor de la imatge. Si veieu moltes carreteres mogudes del seu lloc a la imatge,\nno les mogueu per tal que encaixin amb aquesta. Ja que pots ajustar la imatgeria per tal de que quadri amb les dades existents clicant a 'Corregeix la desalineació' a sota de la pestanya dels\n'Paràmetres de configuració del fons'.\n",
         "addresses": "# Adreçes\n\nLes adreçes són una de les informacions més útils per al mapa.\n\nTot i que les adreces sovint es representen com a part del carrer, a l'OpenStreetMap\nes desen com a atributs dels edificis i llocs al llarg dels carrers\n\nPodeu afegir la informació de l'adreça a llocs cartografiats com a edificis com també\na aquells llocs cartografiats com a simples punts. La forma òptima d'obtenir dades \nde les adreces és a partir d'un estudi al carrer o bé el coneixement propi - com a qualsevol altra característica, la còpia de fonts comercials com ara el Google Maps és estrictament prohibida.\n",
         "inspector": "# Ús de l'inspector\n\nL'Inspector és l'element de la interfície d'usuari que es troba al cantó esquerre de la pàgina i que \napareix quan una característica és seleccionada i permet editar-ne els detalls.\n\n### Selecció del tipus de característica\n\nDesprés d'afegir un punt, línia, o àrea, pots escollir quin tipus de característica és.\nTant si és una autopista com un carrer residencial, un supermercat o un cafè.\nL'inspector mostrarà botons per als tipus de característica més comuns, i en pots trobar d'altres escrivint el que estàs cercant al quadre de cerca.\n\nFes clic a la «i» al cantó inferior dret del botó  del tipus de característica per saber-ne més. Fes clic al botó per seleccionar-la.\n\n### Utilització dels camps i les etiquetes d'edició\n\nDesprés d'escollir la característica, o quan seleccionis una característica que ja té\nun tipus assignat, l'inspector mostrarà uns camps amb detalls de la característica \ncom ara el seu nom o la seva adreça .\n\nA sota dels camps que veus, pots clicar algunes icones per afegir altres detalls,\ncom ara informació de la [Viquipèdia](http://ca.wikipedia.org/), l'accés per a cadires de rodes,\ni alguna cosa més.\n\nAl capdavall de l'inspector, clica «Etiquetes addicionals» per afegir altres etiquetes arbitràries a l'element. [Taginfo](http://taginfo.openstreetmap.org/) és una gran eina per aprendre'n més sobre les combinacions d'etiquetes més populars.\n\nEls canvis que facis a l'inspector s'aplicaran automàticament al mapa.\nEls pots desfer en qualsevol moment clicant al botó de «Desfés».\n\n##Tancament de l'inspector\n\nPots tancar l'inspector clicant el botó de tancament al cantó superior dret,\nprement la tecla «Esc», o bé clicant al mapa.\n",
-        "buildings": "# Edificis\n\nL'OpenStreetMap és la base de dades d'edificis més gran del món. Podeu ampliar \ni millorar aquesta base de dades.\n\n### Selecció\n\nPots seleccionar un edifici clicant al seu marge. Això farà ressaltar\nl'edifici i obrirà un petit menú d'eines i una barra lateral mostrant més informació\nsobre l'edifici.\n\n### Modificació\n\nA vegades els edificis estan mal col·locats o tenen etiquetes incorrectes.\n\nPer moure l'edifici sencer, selecciona'l, tot seguit clica l'eina 'Mou'. Desplaça el\ncursor per desplaçar l'edifici, i torna a clicar quan estigui posicionat correctament.\n\nPer ajustar la forma específica d'un edifici, clica i arrossega els nodes que componen \nel seu marge als llocs desitjats.\n\n### Creació\n\nUn dels principals temes sobre l'addició d'edificis al mapa és que\nl'OpenStreetMap pot desar edificis com a punts però també com a figures. La norma general\nper a cartografiar un edifici diu que _aquest s'ha d'expressar, sempre que sigui possible, com a una figura_, i les companyies, empreses,\nequipaments, i d'altres coses que operen als edificis, s'han de cartografiar com a punts \ncol·locats dins de la figura de l'edifici.\n\n\nComença a dibuixar un edifici com a figura clicant el botó 'Àrea' a la zona superior esquerra de la interfície, i finalitzeu-lo o bé prement la tecla 'Retorn' del teclat\no clicant al primer node que heu col·locat per tancar la figura.\n\n### Eliminació\n\nSi un edifici està totalment malament - pots apreciar que no existeix a la imatge per satèl·lit\ni a més a més, els veïns ens han confirmat que no existeix - el pots eliminar, cosa que el traurà del mapa. S'ha d'anar amb molt de compte a l'hora d'eliminar característiques -\ncom totes les altres edicions, els resultats podran ser vistos per tothom i moltes vegades la imatgeria per satèl·lit no està actualitzada, per tant l'edifici pot haver estat construït recentment.\n\nPots eliminar un edifici clicant-lo, i llavors clicant la icona de la paperera o bé prement la tecla 'Suprimir'.\n"
+        "buildings": "# Edificis\n\nL'OpenStreetMap és la base de dades d'edificis més gran del món. Podeu ampliar \ni millorar aquesta base de dades.\n\n### Selecció\n\nPots seleccionar un edifici clicant al seu marge. Això farà ressaltar\nl'edifici i obrirà un petit menú d'eines i una barra lateral mostrant més informació\nsobre l'edifici.\n\n### Modificació\n\nA vegades els edificis estan mal col·locats o tenen etiquetes incorrectes.\n\nPer moure l'edifici sencer, selecciona'l, tot seguit clica l'eina 'Mou'. Desplaça el\ncursor per desplaçar l'edifici, i torna a clicar quan estigui posicionat correctament.\n\nPer ajustar la forma específica d'un edifici, clica i arrossega els nodes que componen \nel seu marge als llocs desitjats.\n\n### Creació\n\nUn dels principals temes sobre l'addició d'edificis al mapa és que\nl'OpenStreetMap pot desar edificis com a punts però també com a figures. La norma general\nper a cartografiar un edifici diu que _aquest s'ha d'expressar, sempre que sigui possible, com a una figura_, i les companyies, empreses,\nequipaments, i d'altres coses que operen als edificis, s'han de cartografiar com a punts \ncol·locats dins de la figura de l'edifici.\n\n\nComença a dibuixar un edifici com a figura clicant el botó 'Àrea' a la zona superior esquerra de la interfície, i finalitzeu-lo o bé prement la tecla 'Retorn' del teclat\no clicant al primer node que heu col·locat per tancar la figura.\n\n### Eliminació\n\nSi un edifici està totalment malament - pots apreciar que no existeix a la imatge per satèl·lit\ni a més a més, els veïns ens han confirmat que no existeix - el pots eliminar, cosa que el traurà del mapa. S'ha d'anar amb molt de compte a l'hora d'eliminar característiques -\ncom totes les altres edicions, els resultats podran ser vistos per tothom i moltes vegades la imatgeria per satèl·lit no està actualitzada, per tant l'edifici pot haver estat construït recentment.\n\nPots eliminar un edifici clicant-lo, i llavors clicant la icona de la paperera o bé prement la tecla 'Suprimir'.\n",
+        "relations": "# Relacions\n\nUna relació és un tipus especial de característica a l'OpenStreetMap que reuneix altres característiques. Per exemple, dos tipus comuns de relacions són les *relacions de ruta*,\nque reuneixen seccions de carreteres que pertanyen a una autovia o autopista en concret, i els *multipolígons*, que reuneixen diferents línies que defineixen una àrea complexa (amb vàris segments o amb forats, com un donut).\n\nEl grup de característiques en una relació s'anomena *els membres*. A la barra lateral, pots veure a quines relacions n'és membre una característica, i clicar una relació des d'un membre per seleccionar-la i entrar-hi. Quan selecciones i entres a la relació, pots veure tots els seus membres llistats a la barra lateral i subratllats al mapa .\n\nLa majoria de vegades, l'iD s'encarregarà de mantenir les relacions automàticament\nmentre tu edites. L'única cosa que has de procurar és de reconnectar la relació si esborres algun tram de l'original, és a dir si esborres un tram d'una relació per refer-lo amb més precisió, has de incloure el nou tram a la relació, igual que ho era el tram original.\n\n## Edició de les relacions\n\nSi el que vols és editar relacions, aquí hi han les pautes bàsiques.\n\nPer afegir una característica a una relació, selecciona la característica, clica el botó \"+\" a la secció \"Totes les relacions\" de la barra lateral, i selecciona o escriu el nom de la relació.\n\nPer crear una nova relació, selecciona la primera característica que n'hauria de ser membre, clica el botó \"+\" a la secció \"Totes les relacions\", i selecciona \"Nova relació...\".\n\nPer eliminar una característica d'una relació, selecciona la característica i clica el botó de la paperera que es troba al costat de la relació que vols eliminar.\n\nPots crear multipolígons amb forats utilitzant l'eina \"Fusionar\". Dibuixa dues àrees (la interior i la exterior), mantén premuda la tecla Shift i clica a les dues àrees per seleccionar-les alhora, llavors clica el botó \"Fusiona\" (+).\n"
     },
     "intro": {
         "navigation": {
@@ -354,11 +362,12 @@
             "road": "**Tria Carretera de la llista**",
             "residential": "Hi ha molts tipus de carreteres, les més comunes són els carrers. **Escull el carrer**",
             "describe": "**Posa nom al carrer i tanca l'editor de característica.**",
-            "restart": "El carrer necessita unir-se a Flower Street. "
+            "restart": "El carrer necessita unir-se a Flower Street. ",
+            "wrong_preset": "No has seleccionat el Carrer. **Clica aquí per seleccionar-lo de nou**"
         },
         "startediting": {
             "title": "Comença a editar",
-            "help": "Més documentació i aquest tutorial estàn disponibles aquí.",
+            "help": "Més documentació i aquest tutorial estan disponibles aquí.",
             "save": "No oblidis que els canvis s'han de desar regularment!",
             "start": "Comença a editar el mapa!"
         }
@@ -422,6 +431,9 @@
                     }
                 }
             },
+            "access_toilets": {
+                "label": "Accés"
+            },
             "address": {
                 "label": "Adreça",
                 "placeholders": {
@@ -449,6 +461,9 @@
             },
             "atm": {
                 "label": "Caixer automàtic"
+            },
+            "backrest": {
+                "label": "Banc públic"
             },
             "barrier": {
                 "label": "Tipus"
@@ -576,6 +591,9 @@
             "levels": {
                 "label": "Nivells",
                 "placeholder": "2, 4, 6..."
+            },
+            "lit": {
+                "label": "Il·luminació"
             },
             "location": {
                 "label": "Ubicació"
@@ -710,6 +728,9 @@
             "trail_visibility": {
                 "label": "Visibilitat del camí"
             },
+            "vending": {
+                "label": "Tipus de mercaderies"
+            },
             "water": {
                 "label": "Tipus"
             },
@@ -778,6 +799,9 @@
                 "name": "Instal·lació",
                 "terms": "Instal·lació, Equipament, Edifici públic, Àrea pública, "
             },
+            "amenity/arts_centre": {
+                "name": "Centre artístic"
+            },
             "amenity/atm": {
                 "name": "Caixer automàtic",
                 "terms": "Caixer automàtic, Màquina expenedora de bitllets"
@@ -796,11 +820,14 @@
             },
             "amenity/bicycle_parking": {
                 "name": "Aparcament per a  bicicletes",
-                "terms": "Aparcament per a Bicicletes, Àrea d'aparcament de bicicletes, Estació de bicicletes públiques "
+                "terms": "Aparcament per a Bicicletes, Àrea d'aparcament de bicicletes, Estació de bicicletes públiques, parking de bicis, pàrquing de bicicletes, parking de bicicletes, pàrquing de bicis"
             },
             "amenity/bicycle_rental": {
                 "name": "Lloguer de bicicletes",
                 "terms": "Lloguer de bicicletes, Servei de lloguer de bicicletes"
+            },
+            "amenity/boat_rental": {
+                "name": "Lloguer d'embarcacions"
             },
             "amenity/cafe": {
                 "name": "Cafè",
@@ -880,7 +907,7 @@
             },
             "amenity/parking": {
                 "name": "Aparcament",
-                "terms": "Aparcament, Lloc per a estacionar, Lloc d'estacionament limitat, cotxera, cotxeria, garatge"
+                "terms": "Aparcament, Lloc per a estacionar, Lloc d'estacionament limitat, cotxera, cotxeria, garatge, parking, pàrquing, Lloc per aparcar, Parada"
             },
             "amenity/pharmacy": {
                 "name": "Farmàcia",
@@ -960,6 +987,9 @@
             "amenity/university": {
                 "name": "Universitat",
                 "terms": "Universitat, Campus universitàri, Grau, facultat, Llicenciatura, càtedra, seminari, "
+            },
+            "amenity/vending_machine": {
+                "name": "Màquina de vending"
             },
             "amenity/waste_basket": {
                 "name": "Paperera",
@@ -1145,7 +1175,7 @@
                 "name": "Carreró"
             },
             "highway/service/drive-through": {
-                "name": "Via dins una propietat."
+                "name": "Via dins una propietat"
             },
             "highway/service/driveway": {
                 "name": "Via d'accés a una propietat"
@@ -1154,10 +1184,14 @@
                 "name": "Accés per a emergències"
             },
             "highway/service/parking_aisle": {
-                "name": "Carrer d'aparcament"
+                "name": "Carrer d'aparcament",
+                "terms": "Passadís de pàrquing, pàrquing, parking, aparcament, carrer interior d'aparcament, carrer per aparcar, carrer de pàrqquing, carrer de parking"
             },
             "highway/steps": {
                 "name": "Escales"
+            },
+            "highway/stop": {
+                "name": "Senyal de stop"
             },
             "highway/tertiary": {
                 "name": "Carretera terciària"
@@ -1291,6 +1325,9 @@
             "leisure/pitch/basketball": {
                 "name": "Pista de bàsquet"
             },
+            "leisure/pitch/skateboard": {
+                "name": "Parc per a skates"
+            },
             "leisure/pitch/soccer": {
                 "name": "Camp de futbol"
             },
@@ -1305,6 +1342,9 @@
             },
             "leisure/slipway": {
                 "name": "Pendent per a embarcacions"
+            },
+            "leisure/sports_center": {
+                "name": "Centre d'esports"
             },
             "leisure/stadium": {
                 "name": "Estadi"
@@ -1369,6 +1409,9 @@
             "natural/coastline": {
                 "name": "Línia costanera"
             },
+            "natural/fell": {
+                "name": "Prat d'alta muntanya"
+            },
             "natural/glacier": {
                 "name": "Glacera"
             },
@@ -1380,6 +1423,9 @@
             },
             "natural/peak": {
                 "name": "Pic"
+            },
+            "natural/scree": {
+                "name": "Tartera"
             },
             "natural/scrub": {
                 "name": "Matollar"
@@ -1467,6 +1513,9 @@
             },
             "railway/disused": {
                 "name": "Vià de tren fora d'ús"
+            },
+            "railway/halt": {
+                "name": "Parada de Ferrocarril"
             },
             "railway/level_crossing": {
                 "name": "Pas a nivell"
@@ -1742,6 +1791,9 @@
             },
             "type/route/foot": {
                 "name": "Ruta a peu"
+            },
+            "type/route/hiking": {
+                "name": "Ruta senderista"
             },
             "type/route/pipeline": {
                 "name": "Traçat d'una canonada"

@@ -78,8 +78,7 @@
             }
         },
         "rotate": {
-            "title": "Zasuči",
-            "description": "Zasuči ta predmed okrog njegovega središča."
+            "title": "Zasuči"
         }
     },
     "logout": "odjava",

@@ -54,9 +54,6 @@
             }
         },
         "orthogonalize": {
-            "title": "Ortogonalizar",
-            "description": "Escuadrar eses esquines.",
-            "key": "Q",
             "annotation": {
                 "line": "Escuadraes les esquines d'una llinia.",
                 "area": "Escuadraes les esquines d'un área."
@@ -107,7 +104,6 @@
         },
         "rotate": {
             "title": "Xirar",
-            "description": "Xirar esti oxetu alredor del puntu central.",
             "key": "R",
             "annotation": {
                 "line": "Xirada una llinia.",
@@ -138,6 +134,7 @@
         "localized_translation_name": "Nome"
     },
     "logout": "zarrar sesión",
+    "loading_auth": "Coneutando con OpenStreetMap...",
     "report_a_bug": "informar d'un fallu",
     "commit": {
         "title": "Guardar cambios",
@@ -196,7 +193,8 @@
     },
     "source_switch": {
         "live": "en vivo",
-        "lose_changes": "Tien cambios ensin guardar. Camudar el sirvidor de mapes descartarálos. ¿Ta seguru de que quier intercambiar de sirvidores?"
+        "lose_changes": "Tien cambios ensin guardar. Camudar el sirvidor de mapes descartarálos. ¿Ta seguru de que quier intercambiar de sirvidores?",
+        "dev": "dev"
     },
     "tag_reference": {
         "description": "Descripción",
@@ -221,7 +219,7 @@
     "help": {
         "title": "Ayuda",
         "help": "# Ayuda\n\nEsti ye un editor pa [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa del mundu llibre y editable. Pue usalu p'amestar y anovar los\ndatos nel to área, faciendo un mapa del mundu de códigu y datos\nabiertos meyor pa tol mundu.\n\nLes ediciones que faiga nesti mapa sedrán visibles pa cualquiera qu'use\nOpenStreetMap. Pa poder editar, necesitará una\n[cuenta de baldre n'OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) ye un proyeutu collaborativu col [códigu\nfonte disponible en GitHub](https://github.com/systemed/iD).\n",
-        "editing_saving": "# Editar y guardar\n\nEsti editor ta diseñáu pa funcionar en llinia principalmente, y agora mesmo\nta usandolu per aciu d'un sitiu web.\n\n### Seleicionar carauterístiques\n\nPa seleicionar una carauterística del mapa, como una carretera o puntu\nd'interés, calque nella nel mapa. Esto destacará la carauterística seleicionada,\nabrirá un panel con detalles de la mesma, y amosará un menú de les coses\nque pue facer cola carauterística.\n\nPuen esbillase múltiples carauterístiques calteniendo pulsada la tecla 'Mayús',\ncalcando y arrastrando nel mapa. Esto seleiciona toles carauterístiques que\nqueden dientro del cuadru dibuxáu, permitiendo-y que faiga coses con delles\ncarauterístiques al empar.\n\n### Guardar les ediciones\n\nCuando fai cambios como editar carreteres, edificios, y llugares, estos\nguardense de mou llocal fasta que los guarde nel sirvidor. Nun s'apure si fai\nun error, pue desfacer los cambios calcando nel botón desfacer, y refacer los\ncambios calcando nel botón refacer.\n\nCalque 'Guardar' p'acabar un grupu d'ediciones; por exemplu, si completó\nun área de la ciudá y quier empezar nun área nuevu. Tendrá ocasión de\nrevisar lo que tien fecho, y l'editor ufre suxerencies y avisos afayadizos si\ndaqué nun paez tar correuto nos cambios.\n\nSi too paez tar bien, pue escribir un comentariu curtiu esplicando'l cambiu\nque fexo, y calcar 'Guardar' otra vuelta pa espublizar los cambios en\n[OpenStreetMap.org](http://www.openstreetmap.org/), onde son visibles\npa tolos demás usuarios y tan disponibles pa qu'otros enanten y ameyoren\nlos mesmos.\n\nSi nun pue terminar les ediciones d'una sentada, pue dexar abierta la ventana\ndel editor y volver (nel mesmu navegador y ordenador), y l'aplicación del editor\nufrirá-y restaurar el trabayu.\n"
+        "imagery": "# Imaxes\n\nLes imaxes aérees son un recursu importante pa facer mapes. Ta disponible\nnel editor una combinación de vuelos d'aviones, vistes de satélite, y fontes compilaes\nde mou llibre baxo'l menú 'Preferencies del fondu' a la izquierda.\n\nDe mou predetermináu, nel editor apaez una capa de satélite de\n [Bing Maps](http://www.bing.com/maps/), pero cuando mueva y faiga zoom nel mapa a\nnueves árees xeográfiques, apaecerán fontes nueves. Dalgunos países, como los Estaos\nXuníos, Francia y Dinamarca tienen imaxes de calidá mui alta pa delles árees.\n\nLes imaxes, dacuando, tan desplazaes del mapa por aciu d'un fallu del fornidor\nde les imaxes. Si ve munches carreteres que nun casen col fondu, nun\nmueva nel intre toes elles p'axustales al fondu. Al aviesu, axuste la\nimaxe pa que case colos datos esistentes calcando 'Iguar alliniamientu' abaxo\nde la interfaz de les Preferencies del fondu.\n"
     },
     "intro": {
         "navigation": {
@@ -258,6 +256,9 @@
                     "city": "Ciudá"
                 }
             },
+            "admin_level": {
+                "label": "Nivel alministrativu"
+            },
             "aeroway": {
                 "label": "Tipu"
             },
@@ -266,6 +267,9 @@
             },
             "atm": {
                 "label": "Caxeru automáticu"
+            },
+            "barrier": {
+                "label": "Tipu"
             },
             "bicycle_parking": {
                 "label": "Tipu"
@@ -287,6 +291,9 @@
             },
             "construction": {
                 "label": "Tipu"
+            },
+            "country": {
+                "label": "País"
             },
             "crossing": {
                 "label": "Tipu"
@@ -347,6 +354,9 @@
             "maxspeed": {
                 "label": "Velocidá máxima"
             },
+            "name": {
+                "label": "Nome"
+            },
             "natural": {
                 "label": "Natural"
             },
@@ -374,8 +384,14 @@
             "place": {
                 "label": "Tipu"
             },
+            "power": {
+                "label": "Tipu"
+            },
             "railway": {
                 "label": "Tipu"
+            },
+            "ref": {
+                "label": "Referencia"
             },
             "religion": {
                 "label": "Relixon",
@@ -404,10 +420,20 @@
             "sport": {
                 "label": "Deporte"
             },
+            "structure": {
+                "label": "Estructura",
+                "options": {
+                    "bridge": "Ponte",
+                    "tunnel": "Túnel"
+                }
+            },
             "surface": {
                 "label": "Superficie"
             },
             "tourism": {
+                "label": "Tipu"
+            },
+            "tracktype": {
                 "label": "Tipu"
             },
             "water": {
@@ -421,6 +447,9 @@
             },
             "wetland": {
                 "label": "Tipu"
+            },
+            "wheelchair": {
+                "label": "Accesu pa siella de ruedes"
             },
             "wikipedia": {
                 "label": "Wikipedia"
@@ -448,6 +477,9 @@
             "amenity/bar": {
                 "name": "Bar"
             },
+            "amenity/bench": {
+                "name": "Asientu"
+            },
             "amenity/bicycle_parking": {
                 "name": "Aparcaderu de bicicletes"
             },
@@ -460,11 +492,20 @@
             "amenity/cinema": {
                 "name": "Cine"
             },
+            "amenity/courthouse": {
+                "name": "Xulgáu"
+            },
+            "amenity/embassy": {
+                "name": "Embaxada"
+            },
             "amenity/fast_food": {
                 "name": "Comida rápida"
             },
             "amenity/fire_station": {
                 "name": "Parque de bomberos"
+            },
+            "amenity/fuel": {
+                "name": "Gasolinera"
             },
             "amenity/grave_yard": {
                 "name": "Enterramientos"
@@ -474,6 +515,9 @@
             },
             "amenity/library": {
                 "name": "Biblioteca"
+            },
+            "amenity/marketplace": {
+                "name": "Mercáu"
             },
             "amenity/parking": {
                 "name": "Aparcaderu"
@@ -511,6 +555,15 @@
             "amenity/school": {
                 "name": "Escuela"
             },
+            "amenity/swimming_pool": {
+                "name": "Piscina"
+            },
+            "amenity/telephone": {
+                "name": "Teléfonu"
+            },
+            "amenity/theatre": {
+                "name": "Teatru"
+            },
             "amenity/toilets": {
                 "name": "Aseos"
             },
@@ -520,8 +573,29 @@
             "amenity/university": {
                 "name": "Universidá"
             },
+            "barrier": {
+                "name": "Barrera"
+            },
+            "barrier/bollard": {
+                "name": "Bolardu"
+            },
+            "barrier/entrance": {
+                "name": "Entrada"
+            },
+            "barrier/toll_booth": {
+                "name": "Cabina de peaxe"
+            },
+            "boundary/administrative": {
+                "name": "Llende alministrativa"
+            },
             "building": {
                 "name": "Edificiu"
+            },
+            "building/entrance": {
+                "name": "Entrada"
+            },
+            "building/house": {
+                "name": "Casa"
             },
             "entrance": {
                 "name": "Entrada"
@@ -583,6 +657,9 @@
             "historic": {
                 "name": "Sitiu históricu"
             },
+            "historic/castle": {
+                "name": "Castiellu"
+            },
             "historic/monument": {
                 "name": "Monumentu"
             },
@@ -634,6 +711,9 @@
             "leisure": {
                 "name": "Recréu"
             },
+            "leisure/garden": {
+                "name": "Xardín"
+            },
             "leisure/golf_course": {
                 "name": "Campu de golf"
             },
@@ -661,6 +741,12 @@
             "leisure/playground": {
                 "name": "Xuegos infantiles"
             },
+            "leisure/stadium": {
+                "name": "Estadiu"
+            },
+            "leisure/swimming_pool": {
+                "name": "Piscina"
+            },
             "man_made": {
                 "name": "Construcciones"
             },
@@ -669,6 +755,9 @@
             },
             "man_made/pier": {
                 "name": "Embarcaderu"
+            },
+            "man_made/survey_point": {
+                "name": "Vértiz xeodésicu"
             },
             "man_made/water_tower": {
                 "name": "Torre de depósitu"
@@ -723,6 +812,102 @@
             },
             "place": {
                 "name": "Llugar"
+            },
+            "place/island": {
+                "name": "Islla"
+            },
+            "power/sub_station": {
+                "name": "Subestación"
+            },
+            "power/tower": {
+                "name": "Torre d'alta tensión"
+            },
+            "power/transformer": {
+                "name": "Tresformador"
+            },
+            "railway": {
+                "name": "Ferrocarril"
+            },
+            "railway/level_crossing": {
+                "name": "Pasu a nivel"
+            },
+            "railway/rail": {
+                "name": "Carril"
+            },
+            "railway/subway": {
+                "name": "Metro"
+            },
+            "railway/subway_entrance": {
+                "name": "Boca del metro"
+            },
+            "railway/tram": {
+                "name": "Tranvía"
+            },
+            "shop": {
+                "name": "Tienda"
+            },
+            "shop/bakery": {
+                "name": "Panadería"
+            },
+            "shop/butcher": {
+                "name": "Carnicería"
+            },
+            "shop/florist": {
+                "name": "Floristería"
+            },
+            "shop/furniture": {
+                "name": "Mueblería"
+            },
+            "shop/hairdresser": {
+                "name": "Peluquería"
+            },
+            "shop/mall": {
+                "name": "Centru comercial"
+            },
+            "shop/optician": {
+                "name": "Óptica"
+            },
+            "shop/shoes": {
+                "name": "Zapatería"
+            },
+            "shop/supermarket": {
+                "name": "Supermercáu"
+            },
+            "tourism": {
+                "name": "Turismu"
+            },
+            "tourism/camp_site": {
+                "name": "Llugar d'acampada"
+            },
+            "tourism/hostel": {
+                "name": "Albergue"
+            },
+            "tourism/hotel": {
+                "name": "Hotel"
+            },
+            "tourism/information": {
+                "name": "Información"
+            },
+            "tourism/motel": {
+                "name": "Motel"
+            },
+            "tourism/museum": {
+                "name": "Muséu"
+            },
+            "tourism/theme_park": {
+                "name": "Parque temáticu"
+            },
+            "tourism/zoo": {
+                "name": "Zoo"
+            },
+            "waterway/canal": {
+                "name": "Canal"
+            },
+            "waterway/river": {
+                "name": "Ríu"
+            },
+            "waterway/riverbank": {
+                "name": "Ribera"
             }
         }
     }

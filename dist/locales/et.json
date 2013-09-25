@@ -61,14 +61,10 @@
             "not_closed": "Seda ei saa teha ringikujuliseks kuna see ei ole silmus."
         },
         "orthogonalize": {
-            "title": "Nurgad täisnurkseks",
-            "description": "Täisnurgasta need nurgad.",
-            "key": "Q",
             "annotation": {
                 "line": "Joone nurgad täisnurgastatud.",
                 "area": "Ala nurgad täisnurgastatud."
-            },
-            "not_closed": "Seda ei saa teha täisnurkseks kuna see ei ole silmus"
+            }
         },
         "delete": {
             "title": "Kustuta",
@@ -122,7 +118,6 @@
         },
         "rotate": {
             "title": "Pööra",
-            "description": "Pööra seda objekti selle keskkoha ümber.",
             "key": "R",
             "annotation": {
                 "line": "Pööratud joont.",
@@ -560,16 +555,25 @@
                 "name": "Vall"
             },
             "building": {
-                "name": "Koone"
+                "name": "Hoone"
             },
             "building/apartments": {
                 "name": "Korterid"
+            },
+            "building/commercial": {
+                "name": "Ärihoone"
             },
             "building/entrance": {
                 "name": "Sissepääs"
             },
             "building/house": {
                 "name": "Maja"
+            },
+            "building/industrial": {
+                "name": "Tööstushoone"
+            },
+            "building/residential": {
+                "name": "Elamu"
             },
             "emergency/phone": {
                 "name": "Hädaabi telefon"

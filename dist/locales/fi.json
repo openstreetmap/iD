@@ -69,14 +69,10 @@
             "not_closed": "Tätä ei voi tehdä ympyränmuotoiseksi, sillä sitä ei ole suljettu."
         },
         "orthogonalize": {
-            "title": "Muuta suorakulmaiseksi",
-            "description": "Muuta kulmat suorakulmaiseksi.",
-            "key": "Q",
             "annotation": {
                 "line": "Viiva muutettu suorakulmaiseksi.",
                 "area": "Alue muutettu suorakulmaiseksi."
-            },
-            "not_closed": "Tätä ei voi tehdä suorakulmaiseksi, sillä sitä ei ole suljettu."
+            }
         },
         "delete": {
             "title": "Poista",
@@ -136,7 +132,6 @@
         },
         "rotate": {
             "title": "Käännä",
-            "description": "Käännä tätä kohdetta sen keskipisteen ympäri.",
             "key": "R",
             "annotation": {
                 "line": "Viiva käännetty.",
@@ -205,8 +200,8 @@
         "created": "Luotu"
     },
     "contributors": {
-        "list": "Muokanneet {users}",
-        "truncated_list": "Muokanneet {users} ja {count} muuta"
+        "list": "Muokkaajat {users}",
+        "truncated_list": "Muokkaajat {users} ja {count} muuta"
     },
     "geocoder": {
         "search": "Etsi maailmanlaajuisesti...",
@@ -264,8 +259,7 @@
         "view_on_osm": "Näytä OSM-kartalla",
         "facebook": "Jaa Facebookissa",
         "twitter": "Jaa Twitterissä",
-        "google": "Jaa Google+-palvelussa",
-        "help_html": "Muutokset tulevat näkyviin Perinteisessä karttanäkymässä muutaman minuutin kuluessa. Muissa karttanäkymissä ja -sovelluksissa ja hieman erikoisempien karttaominaisuuksien ilmestyminen kartalle voi viedä pidempään. Lue <a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>lisätietoja</a> englanniksi.\n"
+        "google": "Jaa Google+-palvelussa"
     },
     "confirm": {
         "okay": "OK"
@@ -304,9 +298,7 @@
     },
     "help": {
         "title": "Ohje",
-        "help": "# Ohje⏎\n⏎\nTämä ohjelma on [OpenStreetMapin](http://www.openstreetmap.org/)⏎\n muokkaamiseen tarkoitettu ohjelma. OpenStreetMap on ilmainen ja⏎\nvapaasti muokattava maailmankartta. Voit lisätä ja muokata vapaasti⏎\nkotiseutusi ympäristön kohteita, jolloin kaikki voivat hyödyntää tietojasi.⏎\n⏎\nKaikki tällä ohjelmalla karttaan tehdyt muutokset tulevat julkisesti näkyviin⏎\nOpenStreetMap-karttapalvelussa. Kartan muokkaamiseen vaaditaan⏎\n[ilmainen OpenStreetMap-käyttäjätunnus](https://www.openstreetmap.org/user/new).⏎\n⏎\n[iD-kartanmuokkausohjelma](http://ideditor.com/) on avoin yhteistyöprojekti, jonka⏎\n[lähdekoodi on saatavilla GitHubista](https://github.com/systemed/iD).⏎\n",
-        "editing_saving": "# Muokkaaminen + tallentaminen⏎\n⏎\nTämä kartanmuokkausohjelma on suunniteltu toimimaan ensisijaisesti Internet-yhteyden kanssa, ja ohjelmaa ei ole mahdollista käyttää ilman Internet-yhteyttä.⏎\n⏎\n### Kohteen valitseminen⏎\n⏎\nValitse muokattava kohde, kuten tie tai paikkapiste napsauttamalla sitä kartalta.⏎\nKohde korostuu ja oikeaan reunaan avautuu kohteenmuokkauspalkki.⏎\nSen avulla muokataan kohteen ominaisuuksia.⏎\n⏎\nMonta kohdetta voi valita kerralla pitämällä Shift-painike pohjassa kohteita⏎ valittaessa ja napsauttamalla kohteita tai vetämällä alueen, jonka sisällä olevat⏎\nkohteet valitaan. Näin voi kätevästi muokata useampaa kohdetta kerralla.⏎\n⏎\n### Muutosten tallentaminen⏎\n⏎\nKarttaan tehdyt muutokset tallennetaan vain omalle tietokoneelle, kunnes⏎\nne tallennetaan palvelimille. Muokkausvirheen tai vahingossa tehdyn⏎\nmuutoksen voi perua Kumoa-painikkeesta ja tehdä kumotut muutokset⏎\nuudelleen napsauttamalla Tee uudelleen.⏎\n⏎\nTallenna karttaan tehdyt muutokset säännöllisesti napsauttamalla Tallenna.⏎\nTässä vaiheessa saattaa tulla joitakin virheilmoituksia tai varoituksia.⏎\n⏎\nJos virheilmoituksia ei kuitenkaan tule, kannattaa kuvailla tehtyjä muutoksia, jotta⏎ muut kartoittajat voivat tunnistaa tehdyt muutokset paremmin. Napsauta jälleen⏎\nTallenna-painiketta, jolloin muutokset tallennetaan⏎\n [OpenStreetMapiin](http://www.openstreetmap.org/) julkisesti nähtäville.⏎\n⏎\nJos muutostöitä on paljon, työskentelyä voi jatkaa myös myöhemmin tallentamatta⏎\nmuutoksia (samalla tietokoneella ja selaimella). Karttamuokkain pystyy palauttamaan⏎\nmuutokset. Säännöllinen tallentaminen on kuitenkin suositeltavaa.\n",
-        "gps": "# GPS\n\nGPS-jäljet ovat luotettavin lähdemateriaali OpenStreetMap:lle. Tämä editori\ntukee lokaaleja jälkiä - '.gpx' tiedostoja sinun tietokoneeltasi. Voi luoda GPS-\njälkiä monilla eri älypuhelin ohjelmilla kuten myös GPS-paikantimilla.\n\nLisätietoa GPS:n hyväksikäytöstä englanniksi, [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nKäyttääksesi GPX-jälkeä kartoittamiseen, raahaa GPX-tiedosto kartalle. Jälki\nnäkyy kartalla kirkkaan vihreänä viivana. Vasemmalta valikosta 'Taustan asetukset' kohdasta voit ottaa käyttöön, poistaa käytöstä ja zoomata tähän uuteen GPX karttatasoon.\n\nGPX-jälkiä ei lähetetä sellaisenaan OpenStreetMap:iin - sitä on hyvä käyttää ohjeena piirrettäessä uusia ominaisuuksia kartalle.\n"
+        "help": "# Ohje⏎\n⏎\nTämä ohjelma on [OpenStreetMapin](http://www.openstreetmap.org/)⏎\n muokkaamiseen tarkoitettu ohjelma. OpenStreetMap on ilmainen ja⏎\nvapaasti muokattava maailmankartta. Voit lisätä ja muokata vapaasti⏎\nkotiseutusi ympäristön kohteita, jolloin kaikki voivat hyödyntää tietojasi.⏎\n⏎\nKaikki tällä ohjelmalla karttaan tehdyt muutokset tulevat julkisesti näkyviin⏎\nOpenStreetMap-karttapalvelussa. Kartan muokkaamiseen vaaditaan⏎\n[ilmainen OpenStreetMap-käyttäjätunnus](https://www.openstreetmap.org/user/new).⏎\n⏎\n[iD-kartanmuokkausohjelma](http://ideditor.com/) on avoin yhteistyöprojekti, jonka⏎\n[lähdekoodi on saatavilla GitHubista](https://github.com/systemed/iD).⏎\n"
     },
     "intro": {
         "navigation": {
@@ -340,7 +332,6 @@
         },
         "lines": {
             "title": "Viivat",
-            "add": "Viivoja käytetään katujen, rautateiden, jokien ja muiden vastaavien viivamaisten karttakohteiden piirtämiseen. **Aloita viivan piirtäminen napsauttamalla Viiva.**",
             "start": "**Aloita viiva napsauttamalla tien loppupistettä.**",
             "intersect": "Lisää pisteitä viivaan napsauttamalla karttaa. Karttaa voi liikuttaa vetämällä viivan piirtämisen aikana. Tiet ja monet muutkin viivat ovat osa isompaa kokonaisuutta. Reitityksen takia on tärkeää, että tiet on yhdistetty toisiinsa oikein. **Luo kahden kadun risteys napsauttamalla Flower Streetiä.**",
             "finish": "Viimeistele viiva kaksoisnapsauttamalla viimeisen viivapisteen kohdalla. **Lopeta viivan piirtäminen.**",
@@ -557,7 +548,8 @@
                 "placeholder": "40, 50, 60..."
             },
             "name": {
-                "label": "Nimi"
+                "label": "Nimi",
+                "placeholder": "Käytettävä nimi (jos on)"
             },
             "natural": {
                 "label": "Luonto"

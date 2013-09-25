@@ -65,14 +65,10 @@
             "not_closed": "Bu daireleştirilemez çünkü döngü içerisinde değil."
         },
         "orthogonalize": {
-            "title": "Doğrultmak",
-            "description": "Köşeleri doğrultun.",
-            "key": "Q",
             "annotation": {
                 "line": "Çizginin köşeleri doğrultuldu.",
                 "area": "Alanın köşeleri doğrultuldu."
-            },
-            "not_closed": "Bu kareye çevrilemez çünkü bir döngü içerisinde değil."
+            }
         },
         "delete": {
             "title": "Sil",
@@ -124,7 +120,6 @@
         },
         "rotate": {
             "title": "Çevir",
-            "description": "Bu objeyi merkezi etrafında çevir.",
             "key": "R",
             "annotation": {
                 "line": "Çizgi çevrildi.",
@@ -284,7 +279,6 @@
         },
         "lines": {
             "title": "Çizgiler",
-            "add": "Çizgiler yollar, tren yolları ve akarsu gibi nesneleri göstermek amacıyla kullanılır. **Çizgi butonuna tıklyarak yeni bir çizgi ekleyiniz.**",
             "start": "**Çizimi başlatmak için yolun sonuna tıklayınız.**",
             "residential": "Çok farklı tiplerde yollar bulunmaktadır, en yaygın olanı Şehir İçi olanlardır. **Şehir için yol tipini şeçiniz**",
             "describe": "**Yola adını verin ve editörü kapatın.**",

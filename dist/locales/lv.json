@@ -59,14 +59,10 @@
             "not_closed": "Šo objektu nevar pārveidot par apļveida, jo tas nav pabeigts."
         },
         "orthogonalize": {
-            "title": "Ortogonalizēt",
-            "description": "Pārveidot, lai visi leņķi būtu taisnleņķi.",
-            "key": "Q",
             "annotation": {
                 "line": "Līnijas leņķi pārvedoti par taisnleņķiem.",
                 "area": "Apgabala leņķi pārvedoti par taisnleņķiem."
-            },
-            "not_closed": "Šim objektam nevar pārveidot visus leņķus par taisnleņķa, jo tas nav pabeigts."
+            }
         },
         "delete": {
             "title": "Dzēst",
@@ -117,7 +113,6 @@
         },
         "rotate": {
             "title": "Pagriezt",
-            "description": "Pagriezt šo objektu ap tā centru.",
             "key": "R",
             "annotation": {
                 "line": "Līnija pagriezta.",

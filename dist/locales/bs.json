@@ -41,6 +41,11 @@
             }
         },
         "continue": {
+            "key": "A",
+            "title": "Nastaviti",
+            "description": "Nastaviti ovu liniju.",
+            "not_eligible": "Ovdje nijedna linija ne može biti nastavljena",
+            "multiple": "Ovdje nekoliko linija mogu biti nastavljene. Da odaberete liniju, pritisnite tipku \"Shift\" i kliknite na nju za odabir.",
             "annotation": {
                 "line": "Nastavljena linija.",
                 "area": "Nastavljeno područje."
@@ -69,14 +74,10 @@
             "not_closed": "Ovo se ne može napraviti kružnim jer to nije petlja."
         },
         "orthogonalize": {
-            "title": "Normaliziraj.",
-            "description": "Ispravite ove uglove.",
-            "key": "Q",
             "annotation": {
                 "line": "Ispravljeni uglovi linije.",
                 "area": "Ispravljeni uglovi područja."
-            },
-            "not_closed": "Ovo se ne može napraviti kvadratom jer to nije petlja."
+            }
         },
         "delete": {
             "title": "Izbrišite",
@@ -267,7 +268,7 @@
         "facebook": "Podijeliti na Facebooku",
         "twitter": "Podijeliti na Twitteru",
         "google": "Podijeliti na Google+",
-        "help_html": "Vaše promjene bi se trebale pojaviti u \"standardnom\" sloju za nekoliko minuta. Drugi slojevi, i određene značajke, mogu uzeti više vremena\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>details</a>).\n"
+        "help_html": "Promjene koje ste napravili bi se trebale pojaviti u \"standardnom\" sloju za nekoliko minuta. Za druge slojeve, i određene značajke, možda bude trebalo duže.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detalji</a>).\n"
     },
     "confirm": {
         "okay": "Uredu"
@@ -308,9 +309,9 @@
     "help": {
         "title": "Pomoć",
         "help": "# Pomoć\n\nOvo je editor za [OpenStreetMap](http://www.openstreetmap.org/), besplatnu kartu svijeta koja se može uređivati. Možete ga koristiti da dodate i osvježite podatke u Vašem području, praveći boljom kartu svijeta koja ima open-source i open-data karakter.\n\nUređivanja koje obavite na ovoj karti će biti vidliva svakome ko koristi OpenStreetMap. Da bi uredili nešto, trebate \n[besplatni OpenStreetMap račun](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je kolaborativni projekat sa [kodom dostupnim na stranici GitHub](https://github.com/systemed/iD).\n",
-        "editing_saving": "# Uređivanje i spašavanje\n\nOvaj editor je dizajniran da prvenstveno radi na internet mreži, i upravo sada mu pristupate kroz web stranicu.\n\n### Odabir značajki\n\nTo select a map feature, like a road or point of interest, click\non it on the map. This will highlight the selected feature, open a panel with\ndetails about it, and show a menu of things you can do with the feature.\n\nMultiple features can be selected by holding the 'Shift' key, clicking,\nand dragging on the map. This will select all features within the box\nthat's drawn, allowing you to do things with several features at once.\n\n### Saving Edits\n\nWhen you make changes like editing roads, buildings, and places, these are\nstored locally until you save them to the server. Don't worry if you make\na mistake - you can undo changes by clicking the undo button, and redo\nchanges by clicking the redo button.\n\nClick 'Save' to finish a group of edits - for instance, if you've completed\nan area of town and would like to start on a new area. You'll have a chance\nto review what you've done, and the editor supplies helpful suggestions\nand warnings if something doesn't seem right about the changes.\n\nIf everything looks good, you can enter a short comment explaining the change\nyou made, and click 'Save' again to post the changes\nto [OpenStreetMap.org](http://www.openstreetmap.org/), where they are visible\nto all other users and available for others to build and improve upon.\n\nIf you can't finish your edits in one sitting, you can leave the editor\nwindow and come back (on the same browser and computer), and the\neditor application will offer to restore your work.\n",
+        "editing_saving": "# Uređivanje i spremanje\n\nOvaj editor je dizajniran da primarno radi online, i pristupate mu\nkroz web stranicu upravo sada.\n\n### Odabir značajki\n\nDa odaberete značajku na karti, kao npr. cestu ili tačku od interesa, kliknite\nna istu na karti. Ovo će osvijetliti odabranu značajku, otvoriti panel sa\ndetaljima o istoj, i pokazati izbor stvari koje možete uraditi sa značajkom.\n\nDa odaberete više značajki odjednom, držite tipku 'Shift'. Onda ili kliknite\nna značajke koje želite odabrati, ili povucite na karti da nacrtate pravougaonik.\nOvo će nacrtati kutiju i odabrati sve tačke unutar iste.\n\n### Spremanje uređivanja\n\nKada uradite promjene kao što su uređivanje cesta, zgrada i mjesta, isti se\npohranjuju lokalno sve dok ih ne spremite na server. Ne brinite ako napravite\ngrešku - možete poništiti promjene klikom na dugme \"Poništiti\", i vratiti\npromjene klikom na dugme \"Vratiti\".\n\nKliknite na 'Spremiti' da završite grupu uređivanja - npr, ako ste završili\ndio grada i želite započeti uređivanje na novom području. Imaćete priliku\nda pregledate šta ste uradili, a editor daje prijedloge od pomoći\ni upozorenja ako se nešto ne čini uredu sa promjenama.\n\nAko sve izgleda uredno, možete unijeti kratak komentar kojim objašnjavate promjene\nkoje ste napravili, i kliknite na 'Spremiti' opet kako bi postavili promjene\nna [OpenStreetMap.org](http://www.openstreetmap.org/), gdje su one vidljive\nsvim drugim korisnicima i dostupne za druge da ih dalje uređuju i poboljšavaju.\n\nAko ne možete završiti vaša uređivanja u jednom sjedenju, možete napustiti prozor\neditora i vratiti se (na istom pregledniku i računaru), i\naplikacija editora će ponuditi da vratite vaš rad.\n",
         "roads": "# Putevi\n\nMožete crtati, popravljati, i brisati puteve sa ovim uređivačem. Putevi mogu biti svih\nvrsta: staze, ceste, tragovi, biciklističke staze, i više - bilo koji često prelaženi\nsegment bi trebao biti moguć za ucrtavanje.\n\n### Odabir\n\nKliknite na put da ga odaberete. vanjska linija bi trebala postati vidljiva, zajedno\nsa malim menijem alata na karti i bočnom trakom koja pokazuje više informacija\no putu.\n\n### Izmjena\n\nČesto ćete vidjeti puteve koji nisu poravnati da satelistskim slikama iza njih\nili sa GPS trasom. Možete podesiti ove puteve tako da su na pravom\nmjestu.\n\nPrvi klik na put koji želite mijenjati. Ovo će ga označiti i pokazati\nkontrolne tačke uz njega koje možete pomjerati na bolje lokacije. Ukoliko\nželite dodati nove kontrolne tačke za više detalja, dva puta kliknite na dio\nputa bez čvora, i jedan će biti dodan.\n\nUkoliko se put povezuje na drugi put, ali se neprikladno povezuje na\nkartu, možete povući jednu od njegovih kontnrolnih tačaka na drugi put u\nnamjeri da ih spojite. Održavanje puteva povezanim je važno za kartu\ni od vitalnoj je značaja za obezbjeđivanje uputa za vožnju.\n\nMožete takođe kliknuti na alat 'Pomjeriti' ili pritisnuti 'M' tipku koja je prečica da pomičete cijeli put\nistovremeno, i onda kliknete opet da spasite to pomicanje. \n\n### Brisanje\n\nUkoliko je put u potpunosti netačan - možete vidjeti da ne postoji na satelitskoj\nslici i idealno bi bilo da potvrdite da nije prisutan lokalno - možete ga izbrisati,\nšto ga uklanja sa karte. Budite pažljivi kada brišete značajke -\nkao i svako drugo uređivanje, rezultati su vidljivi svima i satelitske slike\nsu često stare, tako da bi put mogao ustvari biti novoizgrađeni.\n\nMožete izbrisati put klikom na njega da ga odaberete, i onda klikajući na\nikonu kante za smeće ili pritiskom na tipku 'Delete'.\n\n### Pravljenje\n\nNašli ste negdje da bi tu trebao biti put ali ga nema? Kliknite ikonu 'Linija'\nu donjem lijevom uglu uređivača ili pritisnite tipku`2` da bi započeli crtanje\nlinije.\n\nKliknite na početak puta na kartu da započnete crtanje. Ukoliko se put\ngranan sa postojećeg puta, započnite sa mjesta gdje se povezuju.\n\nOnda kliknite na tačke uzduž puta tako da slijedi pravu putanju, prema\nsatelitskim slikama ili prema GPS-u. Ukoliko se put koji crtate križa sa drugim putem, povežite\nga klikom na tačku križanja. Kada završite crtanje, dva puta kliknite\nili pritisnite 'Backspace' ili 'Enter' na Vašoj tastaturi.\n",
-        "gps": "# GPS\n\nGPS podaci su napouzdaniji izvor podataka za OpenStreetMap. Ovaj uređivač\npodržava lokalne trase - `.gpx` datoteke na Vašem lokalnom računaru. Možete sakupiti\novu vrstu GPS trasa sa brojnim \"smartphone\" aplikacijama kao i sa\nličnim GPS hardverom.\n\nZa informacije kako izbršiti GPS istraživanje, pročitajte\n[Istraživanje sa GPS-om](http://learnosm.org/en/beginner/using-gps/).\n\nDa bi koristili GPX trase za mapiranje, povucite i spustite GPX datoteku na uređivač\nkarte. Ukoliko je prepoznat, biće dodan karti kao svjetlo zelena\nlinija. Kliknite na meni 'Podešavanja pozadine' na lijevoj strani da omogućite,\nonemogućite, ili uvećate ovaj novi sloj pokretan GPX-om.\n\nGPX trasa ne biva direktno postavljena na OpenStreetMap - najbolji način\nda se ona koristi je crtanje na karti, koristeći je kao vodilju za nove značajke koje\nVi dodajete.\n",
+        "gps": "# GPS\n\nGPS podaci su napouzdaniji izvor podataka za OpenStreetMap. Ovaj uređivač\npodržava lokalne trase - `.gpx` datoteke na Vašem lokalnom računaru. Možete sakupiti\novu vrstu GPS trasa sa brojnim \"smartphone\" aplikacijama kao i sa\nličnim GPS hardverom.\n\nZa informacije kako izbršiti GPS istraživanje, pročitajte\n[Istraživanje sa GPS-om](http://learnosm.org/en/beginner/using-gps/).\n\nDa bi koristili GPX trase za mapiranje, povucite i spustite GPX datoteku na uređivač\nkarte. Ukoliko je prepoznat, biće dodan karti kao svjetlo zelena\nlinija. Kliknite na meni 'Podešavanja pozadine' na lijevoj strani da omogućite,\nonemogućite, ili uvećate ovaj novi sloj pokretan GPX-om.\n\nGPX trasa ne biva direktno postavljena na OpenStreetMap - najbolji način\nda se ona koristi je crtanje na karti, koristeći je kao vodilju za nove značajke koje\nVi dodajete, i takođe možete [da je postavite na OpenStreetMap](http://www.openstreetmap.org/trace/create)\nza druge korisnike da je koriste.\n",
         "imagery": "# Satelitske slike\n\nSatelitske slike su važan resurs za mapiranje. Kombinacija\npreleta avionom, satelitski pogledi i slobodno sastavljeni izvori su dostupni\nu uređivaču pod menijem 'Podešavanja pozadine' na lijevoj strani.\n\nU početnik postavkama satelitski sloj [Bing Maps] (http://www.bing.com/maps/) je\nprezentiran u uređivaču, ali kako pomičete i uvećavate kartu na nova geografska\npodručja, novi će izvori postati dostupni. Neke zemlje, poput Sjedinjenih\nDržava, Francuske i Danske imaju slike vrlo visoke kvalitete na raspolaganju za neka područja.\n\nSatelitske slike ponekad odstupaju od podataka karte, zbog greške na\nstrani davatelja satelitskih slika. Ako vidite puno cesta pomjerenih u pozadini.\nnemojte ih odmah sve premještati kako bi se slagale sa pozadinom. Umjesto toga možete podesiti\nsatelitske slike tako da odgovaraju postojećim podacima klikom na 'Popravljanje poravnanja', na\ndnu interfejsa Postavki pozadine.\n",
         "addresses": "# Addrese\n\nAddrese su neke od najkorisnijih informacija na karti.\n\nIako su adrese često predstavljene kao dijelovi ulica, na karti OpenStreetMap\nsu one spremljene kao atributi građevina i mjesta uz ulice.\n\nMožete dodati informaciju o adresama mjesta koja su ucrtana kao i vanjske linije građevina takođe\nkao i onih koja su ucrtana kao obične tačke. Optimalni izvor podataka adresa\nse dobija iz istraživanja na licu mjesta ili ličnim znanjem- kao što je slučaj sam bilo kojom drugom značajkom,\nkopiranje iz komercijalnih izvora kao što je Google Maps je striktno\nzabranjeno.\n",
         "inspector": "# Korištenje inspektora\n\nInspektor je element korisničkog interfejsa na desnoj strani\nstranice koji se pojavljuje kada je značajka odabrana i dozvoljava Vam da uređujete njene detalje.\n\n### Odabir vrste značajke\n\nNakon što dodate tačku, liniju ili područje, možete birati koja je to vrsta značajke,\nkao npr. da li je to cesta ili rezidencijalna cesta, supermarket ili kafe.\nInspector će prikazati dugmad za vrste općih značajki, i možete\nnaći druge unošenjem onoga što tražite u polje za pretragu.\n\nKliknite na 'i' u donjem desnom uglu dugmeta vrste značajke da\nsaznate više o istoj. Kliknite na dugme da odaberete tu vrstu.\n\n### Korištenje obrazaca i oznaka za uređivanje\n\nNakon što odaberete vrstu značajke, ili kada odaberete značajku koja već\nima pripisanu vrstu, inspektor će prikazati polja sa detaljima o\nznačajki kao što je njen naziv i adresa.\n\nIspod polja koje vidite, možete kliknuti na ikone da dodate druge detalje,\nkao što su informacije sa stranice [Wikipedia](http://www.wikipedia.org/), prustup\nza invalidska kolica, i drugo.\n\nNa dnu inspektora, kliknite 'Dodatne oznake' da dodate još neke\ndruge oznake elementu. [Taginfo](http://taginfo.openstreetmap.org/) je\nodličan izvor za više informacija o popularnim kombinacijama oznaka.\n\nPromjene koje napravite u inspektoru bivaju automatski primijenjene na karti.\nMožete ih poništiti bilo kad klikom na dugme za poništavanje.\n\n### Zatvaranje inspektora\n\nMožete zatvoriti inspektor klikom na dugme za zatvaranje u gornjem desnom uglu,\npritiskom na tipku 'Esc', ili klikom na kartu.\n",
@@ -356,7 +357,8 @@
             "road": "**Izaberite cestu sa liste**",
             "residential": "Postoje različite vrste puteva, od kojih su najčešće rezidencijalne ceste. **Odaberite vrstu 'rezidencijalna cesta'**",
             "describe": "**Dajte naziv cesti i zatvorite uređivač značajki.**",
-            "restart": "Put treba da se križa sa ulicom 'Flower Street'."
+            "restart": "Put treba da se križa sa ulicom 'Flower Street'.",
+            "wrong_preset": "Niste odabrali rezidencijalnu vrstu ceste. **Kliknite ovdje da opet odaberete**"
         },
         "startediting": {
             "title": "Počnite uređivati",
@@ -423,6 +425,9 @@
                         "description": "Pristup dozvoljen samo kako bi se dostiglo odredište"
                     }
                 }
+            },
+            "access_toilets": {
+                "label": "Pristup"
             },
             "address": {
                 "label": "Adresa",
@@ -579,6 +584,9 @@
                 "label": "Nivoi",
                 "placeholder": "2, 4, 6..."
             },
+            "lit": {
+                "label": "Osvijetljeno"
+            },
             "location": {
                 "label": "Lokacija"
             },
@@ -712,6 +720,9 @@
             "trail_visibility": {
                 "label": "Vidljivost traga"
             },
+            "vending": {
+                "label": "Vrsta dobara"
+            },
             "water": {
                 "label": "Vrsta"
             },
@@ -779,6 +790,10 @@
             "amenity": {
                 "name": "Pogodnost",
                 "terms": "interesantna lokacija,pogodnost"
+            },
+            "amenity/arts_centre": {
+                "name": "Centar za umjetnost",
+                "terms": "centar za umjetnost,umjetnički centar,art centar"
             },
             "amenity/atm": {
                 "name": "Bankomat",
@@ -924,6 +939,10 @@
                 "name": "Pub",
                 "terms": "pub,kafana,pivnica"
             },
+            "amenity/ranger_station": {
+                "name": "Stanica rendžerske službe",
+                "terms": "rendžerska služba,stanica rendžerske službe,rendžerska stanica"
+            },
             "amenity/restaurant": {
                 "name": "Restoran",
                 "terms": "restoran,gostionica"
@@ -959,6 +978,10 @@
             "amenity/university": {
                 "name": "Univerzitet",
                 "terms": "univerzitet,koledž"
+            },
+            "amenity/vending_machine": {
+                "name": "Automat",
+                "terms": "automat,automat za prodaju pića,automat sa pićem,automat sa slatkišima"
             },
             "amenity/waste_basket": {
                 "name": "Kanta za otpatke",
@@ -1608,6 +1631,10 @@
                 "name": "Nekorištena željeznica",
                 "terms": "nekorištena željeznička pruga,nekorištena željeznica"
             },
+            "railway/halt": {
+                "name": "Željeznička ustava",
+                "terms": "željeznička ustava,željezničko zaustavljanje,željeznički zastoj"
+            },
             "railway/level_crossing": {
                 "name": "Prelaz u nivou",
                 "terms": "prelaz u nivou,ukrštanje željeznice i puta"
@@ -1967,6 +1994,10 @@
             "type/route/foot": {
                 "name": "Pješačka ruta",
                 "terms": "pješačka trasa,pješačka ruta"
+            },
+            "type/route/hiking": {
+                "name": "Planinarska ruta",
+                "terms": "planinarska ruta,pješačka ruta,ruta za šetnju"
             },
             "type/route/pipeline": {
                 "name": "Cjevovodna ruta",
