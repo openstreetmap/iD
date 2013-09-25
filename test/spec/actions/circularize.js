@@ -1,7 +1,7 @@
 describe("iD.actions.Circularize", function () {
     var projection = d3.geo.mercator();
 
-    it("creates a circle of 12 nodes", function () {
+    it("creates nodes if necessary", function () {
         var graph = iD.Graph({
                 'a': iD.Node({id: 'a', loc: [0, 0]}),
                 'b': iD.Node({id: 'b', loc: [2, 0]}),
@@ -12,7 +12,7 @@ describe("iD.actions.Circularize", function () {
 
         graph = iD.actions.Circularize('-', projection)(graph);
 
-        expect(graph.entity('-').nodes).to.have.length(13);
+        expect(graph.entity('-').nodes).to.have.length(20);
     });
 
     it("reuses existing nodes", function () {
@@ -21,43 +21,69 @@ describe("iD.actions.Circularize", function () {
                 'b': iD.Node({id: 'b', loc: [2, 0]}),
                 'c': iD.Node({id: 'c', loc: [2, 2]}),
                 'd': iD.Node({id: 'd', loc: [0, 2]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+                'e': iD.Node({id: 'e', loc: [0, 2]}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
+            }),
+            nodes;
+
+        graph = iD.actions.Circularize('-', projection)(graph);
+
+        nodes = graph.entity('-').nodes;
+        expect(nodes.indexOf('a')).to.be.gte(0);
+        expect(nodes.indexOf('b')).to.be.gte(0);
+        expect(nodes.indexOf('c')).to.be.gte(0);
+        expect(nodes.indexOf('d')).to.be.gte(0);
+        expect(nodes.indexOf('e')).to.be.gte(0);
+    });
+
+    it("limits movement of nodes that are members of other ways", function () {
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a', loc: [2, 2]}),
+                'b': iD.Node({id: 'b', loc: [-2, 2]}),
+                'c': iD.Node({id: 'c', loc: [-2, -2]}),
+                'd': iD.Node({id: 'd', loc: [2, -2]}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']}),
+                '=': iD.Way({id: '=', nodes: ['d']})
             });
 
         graph = iD.actions.Circularize('-', projection)(graph);
 
-        expect(graph.entity('-').nodes.slice(0, 4).sort()).to.eql(['a', 'b', 'c', 'd']);
+        expect(iD.geo.dist(graph.entity('d').loc, [2, -2])).to.be.lt(0.5);
     });
 
-    it("deletes unused nodes that are not members of other ways", function () {
+    function angle(point1, point2, center) {
+        var vector1 = [point1[0] - center[0], point1[1] - center[1]],
+            vector2 = [point2[0] - center[0], point2[1] - center[1]],
+            distance;
+
+        distance = iD.geo.dist(vector1, [0, 0]);
+        vector1 = [vector1[0] / distance, vector1[1] / distance];
+
+        distance = iD.geo.dist(vector2, [0, 0]);
+        vector2 = [vector2[0] / distance, vector2[1] / distance];
+
+        return 180 / Math.PI * Math.acos(vector1[0] * vector2[0] + vector1[1] * vector2[1]);
+    }
+
+    it("creates circle respecting min-angle limit", function() {
         var graph = iD.Graph({
                 'a': iD.Node({id: 'a', loc: [0, 0]}),
                 'b': iD.Node({id: 'b', loc: [2, 0]}),
                 'c': iD.Node({id: 'c', loc: [2, 2]}),
                 'd': iD.Node({id: 'd', loc: [0, 2]}),
                 '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
-            });
+            }),
+            centroid, points;
 
-        graph = iD.actions.Circularize('-', projection, 3)(graph);
+        graph = iD.actions.Circularize('-', projection, 20)(graph);
+        points = _.pluck(graph.childNodes(graph.entity('-')), 'loc').map(projection);
+        centroid = d3.geom.polygon(points).centroid();
 
-        expect(graph.hasEntity('a')).to.be.undefined;
-    });
+        for (var i = 0; i < points.length - 1; i++) {
+            expect(angle(points[i], points[i+1], centroid)).to.be.lte(20);
+        }
 
-    it("reconnects unused nodes that are members of other ways", function () {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [2, 0]}),
-                'c': iD.Node({id: 'c', loc: [2, 2]}),
-                'd': iD.Node({id: 'd', loc: [0, 2]}),
-                'e': iD.Node({id: 'e', loc: [1, 1]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']}),
-                '=': iD.Way({id: '=', nodes: ['a']})
-            });
-
-        graph = iD.actions.Circularize('-', projection, 3)(graph);
-
-        expect(graph.hasEntity('a')).to.be.undefined;
-        expect(graph.entity('=').nodes).to.eql(['c']);
+        expect(angle(points[points.length - 1], points[0], centroid)).to.be.lte(20);
     });
 
     function area(id, graph) {

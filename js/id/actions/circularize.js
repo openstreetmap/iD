@@ -1,59 +1,101 @@
-iD.actions.Circularize = function(wayId, projection, count) {
-    count = count || 12;
-
-    function closestIndex(nodes, loc) {
-        var idx, min = Infinity, dist;
-        for (var i = 0; i < nodes.length; i++) {
-            dist = iD.geo.dist(nodes[i].loc, loc);
-            if (dist < min) {
-                min = dist;
-                idx = i;
-            }
-        }
-        return idx;
-    }
+iD.actions.Circularize = function(wayId, projection, maxAngle) {
+    maxAngle = (maxAngle || 20) * Math.PI / 180;
 
     var action = function(graph) {
         var way = graph.entity(wayId),
             nodes = _.uniq(graph.childNodes(way)),
+            keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length != 1; }),
             points = nodes.map(function(n) { return projection(n.loc); }),
+            keyPoints = keyNodes.map(function(n) { return projection(n.loc); }),
             centroid = d3.geom.polygon(points).centroid(),
-            radius = d3.median(points, function(p) {
-                return iD.geo.dist(centroid, p);
-            }),
-            ids = [],
-            sign = d3.geom.polygon(points).area() > 0 ? -1 : 1;
+            radius = d3.median(points, function(p) { return iD.geo.dist(centroid, p); }),
+            sign = d3.geom.polygon(points).area() > 0 ? 1 : -1,
+            ids;
 
-        for (var i = 0; i < count; i++) {
-            var node,
-                loc = projection.invert([
-                    centroid[0] + Math.cos(sign * (i / 12) * Math.PI * 2) * radius,
-                    centroid[1] + Math.sin(sign * (i / 12) * Math.PI * 2) * radius]);
+        // we need atleast two key nodes for the algorithm to work
+        if (!keyNodes.length) {
+            keyNodes = [nodes[0]];
+            keyPoints = [points[0]];
+        }
 
-            if (nodes.length) {
-                var idx = closestIndex(nodes, loc);
-                node = nodes[idx];
-                nodes.splice(idx, 1);
-            } else {
-                node = iD.Node();
+        if (keyNodes.length == 1) {
+            var index = nodes.indexOf(keyNodes[0]),
+                oppositeIndex = Math.floor((index + nodes.length / 2) % nodes.length);
+
+            keyNodes.push(nodes[oppositeIndex]);
+            keyPoints.push(points[oppositeIndex]);
+        }
+
+        // key points and nodes are those connected to the ways,
+        // they are projected onto the circle, inbetween nodes are moved
+        // to constant internals between key nodes, extra inbetween nodes are
+        // added if necessary.
+        for (var i = 0; i < keyPoints.length; i++) {
+            var nextKeyNodeIndex = (i + 1) % keyNodes.length,
+                startNodeIndex = nodes.indexOf(keyNodes[i]),
+                endNodeIndex = nodes.indexOf(keyNodes[nextKeyNodeIndex]),
+                numberNewPoints = -1,
+                indexRange = endNodeIndex - startNodeIndex,
+                distance, totalAngle, eachAngle, startAngle, endAngle,
+                angle, loc, node, j;
+
+            if (indexRange < 0) {
+                indexRange += nodes.length;
             }
 
-            ids.push(node.id);
-            graph = graph.replace(node.move(loc));
+            // position this key node
+            distance = iD.geo.dist(centroid, keyPoints[i]);
+            keyPoints[i] = [
+                centroid[0] + (keyPoints[i][0] - centroid[0]) / distance * radius,
+                centroid[1] + (keyPoints[i][1] - centroid[1]) / distance * radius];
+            graph = graph.replace(keyNodes[i].move(projection.invert(keyPoints[i])));
+
+            // figure out the between delta angle we want to match to
+            startAngle = Math.atan2(keyPoints[i][1] - centroid[1], keyPoints[i][0] - centroid[0]);
+            endAngle = Math.atan2(keyPoints[nextKeyNodeIndex][1] - centroid[1], keyPoints[nextKeyNodeIndex][0] - centroid[0]);
+            totalAngle = endAngle - startAngle;
+
+            // detects looping around -pi/pi
+            if (totalAngle*sign > 0) {
+                totalAngle = -sign * (2 * Math.PI - Math.abs(totalAngle));
+            }
+
+            do {
+                numberNewPoints++;
+                eachAngle = totalAngle / (indexRange + numberNewPoints);
+            } while (Math.abs(eachAngle) > maxAngle);
+
+            // move existing points
+            for (j = 1; j < indexRange; j++) {
+                angle = startAngle + j * eachAngle;
+                loc = projection.invert([
+                    centroid[0] + Math.cos(angle)*radius,
+                    centroid[1] + Math.sin(angle)*radius]);
+
+                node = nodes[(j + startNodeIndex) % nodes.length].move(loc);
+                graph = graph.replace(node);
+            }
+
+            // add new inbetween nodes if necessary
+            for (j = 0; j < numberNewPoints; j++) {
+                angle = startAngle + (indexRange + j) * eachAngle;
+                loc = projection.invert([
+                    centroid[0] + Math.cos(angle) * radius,
+                    centroid[1] + Math.sin(angle) * radius]);
+
+                node = iD.Node({loc: loc});
+                graph = graph.replace(node);
+
+                nodes.splice(endNodeIndex + j, 0, node);
+            }
         }
 
+        // update the way to have all the new nodes
+        ids = nodes.map(function(n) { return n.id; });
         ids.push(ids[0]);
+
         way = way.update({nodes: ids});
         graph = graph.replace(way);
-
-        for (i = 0; i < nodes.length; i++) {
-            graph.parentWays(nodes[i]).forEach(function(parent) {
-                graph = graph.replace(parent.replaceNode(nodes[i].id,
-                    ids[closestIndex(graph.childNodes(way), nodes[i].loc)]));
-            });
-
-            graph = iD.actions.DeleteNode(nodes[i].id)(graph);
-        }
 
         return graph;
     };
