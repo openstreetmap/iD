@@ -74,22 +74,23 @@
             "not_closed": "This can't be made circular because it's not a loop."
         },
         "orthogonalize": {
-            "title": "Orthogonalize",
-            "description": "Square these corners.",
-            "key": "Q",
+            "title": "Square",
+            "description": {
+                "line": "Square the corners of this line.",
+                "area": "Square the corners of this area."
+            },
+            "key": "S",
             "annotation": {
                 "line": "Squared the corners of a line.",
                 "area": "Squared the corners of an area."
-            },
-            "not_closed": "This can't be made square because it's not a loop."
+            }
         },
         "straighten": {
             "title": "Straighten",
             "description": "Straighten this line.",
             "key": "S",
-            "annotation": "Straightened the line.",
-            "is_closed": "This can't be straightened because it's a loop.",
-            "too_bendy": "This can't be straightened because it's too bendy."
+            "annotation": "Straightened a line.",
+            "too_bendy": "This can't be straightened because it bends too much."
         },
         "delete": {
             "title": "Delete",

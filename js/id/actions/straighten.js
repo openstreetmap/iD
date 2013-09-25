@@ -44,10 +44,6 @@ iD.actions.Straighten = function(wayId, projection) {
     };
     
     action.disabled = function(graph) {
-        if (graph.entity(wayId).isClosed()) {
-            return 'is_closed';
-        }
-
         // check way isn't too bendy
         var way = graph.entity(wayId),
             nodes = graph.childNodes(way),

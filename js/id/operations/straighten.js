@@ -2,15 +2,17 @@ iD.operations.Straighten = function(selectedIDs, context) {
     var entityId = selectedIDs[0],
         action = iD.actions.Straighten(entityId, context.projection);
 
-    var operation = function() {
+    function operation() {
         var annotation = t('operations.straighten.annotation');
         context.perform(action, annotation);
-    };
+    }
 
     operation.available = function() {
+        var entity = context.entity(entityId);
         return selectedIDs.length === 1 &&
-            context.entity(entityId).type === 'way' &&
-            _.uniq(context.entity(entityId).nodes).length > 2;
+            entity.type === 'way' &&
+            !entity.isClosed() &&
+            _.uniq(entity.nodes).length > 2;
     };
 
     operation.disabled = function() {
@@ -26,8 +28,7 @@ iD.operations.Straighten = function(selectedIDs, context) {
 
     operation.id = "straighten";
     operation.keys = [t('operations.straighten.key')];
-    operation.title = "title";
-    operation.description = "description";
+    operation.title = t('operations.straighten.title');
 
     return operation;
 };

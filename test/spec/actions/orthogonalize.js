@@ -1,7 +1,7 @@
 describe("iD.actions.Orthogonalize", function () {
     var projection = d3.geo.mercator();
 
-    it("orthoganalizes a quad", function () {
+    it("orthogonalizes a quad", function () {
         var graph = iD.Graph({
                 'a': iD.Node({id: 'a', loc: [0, 0]}),
                 'b': iD.Node({id: 'b', loc: [4, 0]}),
@@ -15,7 +15,7 @@ describe("iD.actions.Orthogonalize", function () {
         expect(graph.entity('-').nodes).to.have.length(5);
     });
 
-    it("orthoganalizes a triangle", function () {
+    it("orthogonalizes a triangle", function () {
         var graph = iD.Graph({
                 'a': iD.Node({id: 'a', loc: [0, 0]}),
                 'b': iD.Node({id: 'b', loc: [3, 0]}),
@@ -28,7 +28,7 @@ describe("iD.actions.Orthogonalize", function () {
         expect(graph.entity('-').nodes).to.have.length(4);
     });
 
-    it("should not shrink skinny quads", function () {
+    it("preserves the shape of skinny quads", function () {
         var tests = [
             [
                 [-77.0339864831478, 38.8616391227204],
