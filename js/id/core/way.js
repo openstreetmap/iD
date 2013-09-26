@@ -184,22 +184,24 @@ _.extend(iD.Way.prototype, {
 // of the following keys, and the value is _not_ one of the associated
 // values for the respective key.
 iD.Way.areaKeys = {
+    aeroway: { taxiway: true},
+    amenity: {},
     area: {},
+    'area:highway': {},
     building: {},
-    leisure: {},
-    tourism: {},
-    ruins: {},
+    'building:part': {},
     historic: {},
     landuse: {},
+    leisure: {},
+    man_made: { cutline: true, embankment: true, pipeline: true},
     military: {},
     natural: { coastline: true },
-    amenity: {},
-    shop: {},
-    man_made: {},
-    public_transport: {},
+    office: {},
     place: {},
-    aeroway: {},
-    waterway: {},
     power: {},
-    office: {}
+    public_transport: {},
+    ruins: {},
+    shop: {},
+    tourism: {},
+    waterway: {}
 };
