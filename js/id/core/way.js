@@ -200,5 +200,6 @@ iD.Way.areaKeys = {
     place: {},
     aeroway: {},
     waterway: {},
-    power: {}
+    power: {},
+    office: {}
 };
