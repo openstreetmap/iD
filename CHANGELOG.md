@@ -1,3 +1,23 @@
+## 1.2.0
+
+* Don't auto-save intro tutorial edits (#1745, #1795)
+* Added waypoint display to GPX layer
+* Added "Straighten" operation
+* Improve "Orthogonalize" behavior, rename to "Square"
+* Add and improve many presets
+* Save commit messages on blur (#1783)
+* Add KSJ2 tags to discard list (#1794)
+* Fix display of labels with wide characters
+* Catch localStorage quota exception (#1807)
+* Avoid consecutive identical nodes when adding a midpoint (#1296)
+* Stop nudge when exiting move mode (#1766)
+* Add "Continue" operation
+* Delete relations that become empty (#465, #1454)
+* Support polygon imagery bounds (#768)
+* Pull imagery from editor-imagery-index
+* Insert areas in sorted order (#1693)
+* Fix some walkthrough glitches (#1744)
+
 ## 1.1.6
 
 * Fix walkthrough on Firefox (#1743)
