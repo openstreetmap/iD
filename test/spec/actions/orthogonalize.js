@@ -1,6 +1,20 @@
 describe("iD.actions.Orthogonalize", function () {
     var projection = d3.geo.mercator();
 
+    it("orthogonalizes a perfect quad", function () {
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a', loc: [0, 0]}),
+                'b': iD.Node({id: 'b', loc: [2, 0]}),
+                'c': iD.Node({id: 'c', loc: [2, 2]}),
+                'd': iD.Node({id: 'd', loc: [0, 2]}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            });
+
+        graph = iD.actions.Orthogonalize('-', projection)(graph);
+
+        expect(graph.entity('-').nodes).to.have.length(5);
+    });
+
     it("orthogonalizes a quad", function () {
         var graph = iD.Graph({
                 'a': iD.Node({id: 'a', loc: [0, 0]}),
@@ -26,6 +40,37 @@ describe("iD.actions.Orthogonalize", function () {
         graph = iD.actions.Orthogonalize('-', projection)(graph);
 
         expect(graph.entity('-').nodes).to.have.length(4);
+    });
+
+    it("deletes empty redundant nodes", function() {
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a', loc: [0, 0]}),
+                'b': iD.Node({id: 'b', loc: [2, 0]}),
+                'c': iD.Node({id: 'c', loc: [2, 2]}),
+                'd': iD.Node({id: 'd', loc: [1, 2]}),
+                'e': iD.Node({id: 'e', loc: [0, 2]}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
+            });
+
+        graph = iD.actions.Orthogonalize('-', projection)(graph);
+
+        expect(graph.hasEntity('d')).to.eq(undefined);
+    });
+
+    it("preserves non empty redundant nodes", function() {
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a', loc: [0, 0]}),
+                'b': iD.Node({id: 'b', loc: [2, 0]}),
+                'c': iD.Node({id: 'c', loc: [2, 2]}),
+                'd': iD.Node({id: 'd', loc: [1, 2], tags: {foo: 'bar'}}),
+                'e': iD.Node({id: 'e', loc: [0, 2]}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
+            });
+
+        graph = iD.actions.Orthogonalize('-', projection)(graph);
+        
+        expect(graph.entity('-').nodes).to.have.length(6);
+        expect(graph.hasEntity('d')).to.not.eq(undefined);
     });
 
     it("preserves the shape of skinny quads", function () {

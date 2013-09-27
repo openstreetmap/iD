@@ -21,7 +21,10 @@ iD.actions.Straighten = function(wayId, projection) {
             var node = nodes[i], 
                 point = points[i];
 
-            if (graph.parentWays(node).length > 1 || (node.tags && Object.keys(node.tags).length)) {
+            if (graph.parentWays(node).length > 1 || 
+                graph.parentRelations(node).length || 
+                node.hasInterestingTags()) {
+
                 var u = positionAlongWay(point, startPoint, endPoint),
                     p0 = startPoint[0] + u * (endPoint[0] - startPoint[0]),
                     p1 = startPoint[1] + u * (endPoint[1] - startPoint[1]),

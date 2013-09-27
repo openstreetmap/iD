@@ -11,7 +11,7 @@ describe("iD.actions.Straighten", function () {
 
         graph = iD.actions.Straighten('-', projection)(graph);
         
-        expect(graph.hasEntity('b')).to.be.undefined;
+        expect(graph.hasEntity('b')).to.eq(undefined);
     });
 
     it("does not delete tagged nodes", function() {
