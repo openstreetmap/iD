@@ -106,4 +106,19 @@ describe("iD.actions.Orthogonalize", function () {
             expect(finalWidth / initialWidth).within(0.90, 1.10);
         }
     });
+
+    it("only moves nodes which are near right or near straight", function() {
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a', loc: [0, 0]}),
+                'b': iD.Node({id: 'b', loc: [3, 0.001]}),
+                'c': iD.Node({id: 'c', loc: [3, 1]}),
+                'd': iD.Node({id: 'd', loc: [2, 1]}),
+                'e': iD.Node({id: 'e', loc: [1, 2]}),
+                'f': iD.Node({id: 'f', loc: [0, 2]}),
+                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
+            }),
+            diff = iD.Difference(graph, iD.actions.Orthogonalize('-', projection)(graph));
+
+        expect(Object.keys(diff.changes()).sort()).to.eql(['a', 'b', 'c', 'f']);
+    });
 });

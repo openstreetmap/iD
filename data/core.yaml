@@ -64,6 +64,7 @@ en:
       annotation:
         line: Squared the corners of a line.
         area: Squared the corners of an area.
+      not_squarish: This can't be made square because it is not squarish.
     straighten:
       title: Straighten
       description: Straighten this line.
