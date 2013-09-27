@@ -15,12 +15,16 @@ iD.modes.Browse = function(context) {
         iD.modes.DragNode(context).behavior];
 
     mode.enter = function() {
+        context.save();
+
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });
 
         // Get focus on the body.
-        document.activeElement.blur();
+        if (document.activeElement) {
+            document.activeElement.blur();
+        }
 
         if (sidebar) {
             context.ui().sidebar.show(sidebar);

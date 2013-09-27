@@ -3,7 +3,7 @@ iD.ui.Commit = function(context) {
         presets = context.presets();
 
     function zipSame(d) {
-        var c = [], n = -1;
+        var c = {}, n = -1;
         for (var i = 0; i < d.length; i++) {
             var desc = {
                 name: d[i].tags.name || presets.match(d[i], context.graph()).name(),
@@ -11,15 +11,15 @@ iD.ui.Commit = function(context) {
                 count: 1,
                 tagText: iD.util.tagText(d[i])
             };
-            if (c[n] &&
-                c[n].name == desc.name &&
-                c[n].tagText == desc.tagText) {
-                c[n].count++;
+
+            var fingerprint = desc.name + desc.tagText;
+            if (c[fingerprint]) {
+                c[fingerprint].count++;
             } else {
-                c[++n] = desc;
+                c[fingerprint] = desc;
             }
         }
-        return c;
+        return _.values(c);
     }
 
     function commit(selection) {
@@ -32,9 +32,9 @@ iD.ui.Commit = function(context) {
 
         header.append('button')
             .attr('class', 'fr')
+            .on('click', event.cancel)
             .append('span')
-            .attr('class', 'icon close')
-            .on('click', event.cancel);
+            .attr('class', 'icon close');
 
         header.append('h3')
             .text(t('commit.title'));
@@ -52,7 +52,10 @@ iD.ui.Commit = function(context) {
 
         var commentField = commentSection.append('textarea')
             .attr('placeholder', t('commit.description_placeholder'))
-            .property('value', context.storage('comment') || '');
+            .property('value', context.storage('comment') || '')
+            .on('blur.save', function () {
+                context.storage('comment', this.value);
+            });
 
         commentField.node().select();
 
@@ -89,10 +92,8 @@ iD.ui.Commit = function(context) {
         var saveButton = saveSection.append('button')
             .attr('class', 'action col3 button')
             .on('click.save', function() {
-                var comment = commentField.node().value;
-                localStorage.comment = comment;
                 event.save({
-                    comment: comment
+                    comment: commentField.node().value
                 });
             });
 

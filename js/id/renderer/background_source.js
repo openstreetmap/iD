@@ -1,46 +1,60 @@
-iD.BackgroundSource = {};
+iD.BackgroundSource = function(data) {
+    var source = _.clone(data),
+        offset = [0, 0];
 
-// derive the url of a 'quadkey' style tile from a coordinate object
-iD.BackgroundSource.template = function(data) {
+    source.scaleExtent = data.scaleExtent || [0, 20];
 
-    function generator(coord) {
-        var u = '';
-        for (var zoom = coord[2]; zoom > 0; zoom--) {
-            var b = 0;
-            var mask = 1 << (zoom - 1);
-            if ((coord[0] & mask) !== 0) b++;
-            if ((coord[1] & mask) !== 0) b += 2;
-            u += b.toString();
-        }
+    source.offset = function(_) {
+        if (!arguments.length) return offset;
+        offset = _;
+        return source;
+    };
 
+    source.nudge = function(_, zoomlevel) {
+        offset[0] += _[0] / Math.pow(2, zoomlevel);
+        offset[1] += _[1] / Math.pow(2, zoomlevel);
+        return source;
+    };
+
+    source.url = function(coord) {
         return data.template
-            .replace('{t}', data.subdomains ?
-                data.subdomains[(coord[0] + coord[1]) % data.subdomains.length] : '')
-            .replace('{u}', u)
             .replace('{x}', coord[0])
             .replace('{y}', coord[1])
             // TMS-flipped y coordinate
-            .replace('{ty}', Math.pow(2, coord[2]) - coord[1] - 1)
-            .replace('{z}', coord[2])
-            // JOSM style
-            .replace('{zoom}', coord[2])
-            .replace(/\{(switch\:[^\}]*)\}/, function(s, r) {
-                var subdomains = r.split(':')[1].split(',');
-                return subdomains[coord[2] % subdomains.length];
+            .replace(/\{[t-]y\}/, Math.pow(2, coord[2]) - coord[1] - 1)
+            .replace(/\{z(oom)?\}/, coord[2])
+            .replace(/\{switch:([^}]+)\}/, function(s, r) {
+                var subdomains = r.split(',');
+                return subdomains[(coord[0] + coord[1]) % subdomains.length];
             });
-    }
+    };
 
-    generator.data = data;
-    generator.copyrightNotices = function() {};
+    source.intersects = function(extent) {
+        extent = extent.polygon();
+        return !data.polygon || data.polygon.some(function(polygon) {
+            return iD.geo.polygonIntersectsPolygon(polygon, extent);
+        });
+    };
 
-    return generator;
+    source.validZoom = function(z) {
+        return source.scaleExtent[0] <= z &&
+            (!source.isLocatorOverlay() || source.scaleExtent[1] > z);
+    };
+
+    source.isLocatorOverlay = function() {
+        return source.name === 'Locator Overlay';
+    };
+
+    source.copyrightNotices = function() {};
+
+    return source;
 };
 
 iD.BackgroundSource.Bing = function(data, dispatch) {
     // http://msdn.microsoft.com/en-us/library/ff701716.aspx
     // http://msdn.microsoft.com/en-us/library/ff701701.aspx
 
-    var bing = iD.BackgroundSource.template(data),
+    var bing = iD.BackgroundSource(data),
         key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU', // Same as P2 and JOSM
         url = 'http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
             key + '&jsonp={callback}',
@@ -61,6 +75,25 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
         dispatch.change();
     });
 
+    var template = "http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z",
+        subdomains = [0, 1, 2, 3];
+
+    bing.url = function(coord) {
+        var u = '';
+
+        for (var zoom = coord[2]; zoom > 0; zoom--) {
+            var b = 0;
+            var mask = 1 << (zoom - 1);
+            if ((coord[0] & mask) !== 0) b++;
+            if ((coord[1] & mask) !== 0) b += 2;
+            u += b.toString();
+        }
+
+        return template
+            .replace('{t}', subdomains[(coord[0] + coord[1]) % 4])
+            .replace('{u}', u);
+    };
+
     bing.copyrightNotices = function(zoom, extent) {
         zoom = Math.min(zoom, 21);
         return providers.filter(function(provider) {
@@ -74,17 +107,8 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
         }).join(', ');
     };
 
+    bing.logo = "bing_maps.png";
+    bing.terms_url = "http://opengeodata.org/microsoft-imagery-details";
+
     return bing;
 };
-
-iD.BackgroundSource.Custom = function() {
-    var template = window.prompt('Enter a tile template. ' +
-        'Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.');
-    if (!template) return null;
-    return iD.BackgroundSource.template({
-        template: template,
-        name: 'Custom'
-    });
-};
-
-iD.BackgroundSource.Custom.data = { 'name': 'Custom' };

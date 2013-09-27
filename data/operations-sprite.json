@@ -10,6 +10,7 @@
     "icon-operation-orthogonalize": [160, 140],
     "icon-operation-rotate": [180, 140],
     "icon-operation-simplify": [200, 140],
+    "icon-operation-continue": [220, 140],
 
     "icon-operation-disabled-delete": [0, 160],
     "icon-operation-disabled-circularize": [20, 160],
@@ -21,5 +22,6 @@
     "icon-operation-disabled-merge": [140, 160],
     "icon-operation-disabled-orthogonalize": [160, 160],
     "icon-operation-disabled-rotate": [180, 160],
-    "icon-operation-disabled-simplify": [200, 160]
+    "icon-operation-disabled-simplify": [200, 160],
+    "icon-operation-disabled-continue": [220, 160]
 }

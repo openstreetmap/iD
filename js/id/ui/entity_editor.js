@@ -120,6 +120,7 @@ iD.ui.EntityEditor = function(context) {
                 .entityID(id));
 
         function historyChanged() {
+            if (state === 'hide') return;
             var entity = context.hasEntity(id);
             if (!entity) return;
             entityEditor.preset(context.presets().match(entity, context.graph()));

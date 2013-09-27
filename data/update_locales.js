@@ -64,7 +64,9 @@ function getResource(resource, callback) {
 function getLanguage(resource) {
     return function(code, callback) {
         code = code.replace(/-/g, '_');
-        request.get(resource + 'translation/' + code, { auth : auth },
+        var url = resource + 'translation/' + code;
+        if (code === 'vi') url += '?mode=reviewed';
+        request.get(url, { auth : auth },
             function(err, resp, body) {
             if (err) return callback(err);
             callback(null, yaml.load(JSON.parse(body).content)[code]);

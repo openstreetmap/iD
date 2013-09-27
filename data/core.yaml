@@ -31,6 +31,11 @@ en:
         line: Started a line.
         area: Started an area.
     continue:
+      key: A
+      title: Continue
+      description: Continue this line.
+      not_eligible: No line can be continued here.
+      multiple: Several lines can be continued here. To choose a line, press the Shift key and click on it to select it.
       annotation:
         line: Continued a line.
         area: Continued an area.
@@ -51,13 +56,20 @@ en:
         area: Made an area circular.
       not_closed: This can't be made circular because it's not a loop.
     orthogonalize:
-      title: Orthogonalize
-      description: Square these corners.
-      key: Q
+      title: Square
+      description:
+        line: Square the corners of this line.
+        area: Square the corners of this area.
+      key: S
       annotation:
         line: Squared the corners of a line.
         area: Squared the corners of an area.
-      not_closed: This can't be made square because it's not a loop.
+    straighten:
+      title: Straighten
+      description: Straighten this line.
+      key: S
+      annotation: Straightened a line.
+      too_bendy: This can't be straightened because it bends too much.
     delete:
       title: Delete
       description: Remove this from the map.
@@ -106,7 +118,7 @@ en:
       incomplete_relation: This feature can't be moved because it hasn't been fully downloaded.
     rotate:
       title: Rotate
-      description: Rotate this object around its centre point.
+      description: Rotate this object around its center point.
       key: R
       annotation:
         line: Rotated a line.
@@ -129,12 +141,14 @@ en:
         multiple: "Split {n} lines/area boundaries."
       not_eligible: Lines can't be split at their beginning or end.
       multiple_ways: There are too many lines here to split.
-  nothing_to_undo: Nothing to undo.
-  nothing_to_redo: Nothing to redo.
+  undo:
+    tooltip: "Undo: {action}"
+    nothing: Nothing to undo.
+  redo:
+    tooltip: "Redo: {action}"
+    nothing: Nothing to redo.
   tooltip_keyhint: "Shortcut:"
-  just_edited: "You just edited OpenStreetMap!"
   browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map."
-  view_on_osm: "View on OSM"
   translate:
     translate: Translate
     localized_translation_label: Multilingual name
@@ -193,6 +207,8 @@ en:
     title: Background
     description: Background settings
     percent_brightness: "{opacity}% brightness"
+    custom: Custom
+    custom_prompt: "Enter a tile template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
     fix_misalignment: Fix misalignment
     reset: reset
   restore:
@@ -209,9 +225,14 @@ en:
     unsaved_changes: You have unsaved changes
   success:
     edited_osm: "Edited OSM!"
+    just_edited: "You just edited OpenStreetMap!"
+    view_on_osm: "View on OSM"
     facebook: "Share on Facebook"
-    tweet: "Tweet"
-    okay: "Okay"
+    twitter: "Share on Twitter"
+    google: "Share on Google+"
+    help_html: |
+      Your changes should appear in the "Standard" layer in a few minutes. Other layers, and certain features, may take longer
+      (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).
   confirm:
     okay: "Okay"
   splash:
@@ -269,9 +290,9 @@ en:
       on it on the map. This will highlight the selected feature, open a panel with
       details about it, and show a menu of things you can do with the feature.
 
-      Multiple features can be selected by holding the 'Shift' key, clicking,
-      and dragging on the map. This will select all features within the box
-      that's drawn, allowing you to do things with several features at once.
+      To select multiple features, hold down the 'Shift' key. Then either click
+      on the features you want to select, or drag on the map to draw a rectangle.
+      This will draw a box and select all the points within it.
 
       ### Saving Edits
 
@@ -362,12 +383,13 @@ en:
 
       To use a GPX track for mapping, drag and drop the GPX file onto the map
       editor. If it's recognized, it will be added to the map as a bright green
-      line. Click on the 'Background Settings' menu on the left side to enable,
+      line. Click on the 'Background Settings' menu on the right side to enable,
       disable, or zoom to this new GPX-powered layer.
 
       The GPX track isn't directly uploaded to OpenStreetMap - the best way to
       use it is to draw on the map, using it as a guide for the new features that
-      you add.
+      you add, and also to [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create)
+      for other users to use.
     imagery: |
       # Imagery
 
@@ -479,6 +501,41 @@ en:
 
       You can delete a building by clicking on it to select it, then clicking the
       trash can icon or pressing the 'Delete' key.
+    relations: |
+      # Relations
+
+      A relation is a special type of feature in OpenStreetMap that groups together
+      other features. For example, two common types of relations are *route relations*,
+      which group together sections of road that belong to a specific freeway or
+      highway, and *multipolygons*, which group together several lines that define
+      a complex area (one with several pieces or holes in it like a donut).
+
+      The group of features in a relation are called *members*. In the sidebar, you can
+      see which relations a feature is a member of, and click on a relation there
+      to select the it. When the relation is selected, you can see all of its
+      members listed in the sidebar and highlighted on the map.
+
+      For the most part, iD will take care of maintaining relations automatically
+      while you edit. The main thing you should be aware of is that if you delete a
+      section of road to redraw it more accurately, you should make sure that the
+      new section is a member of the same relations as the original.
+
+      ## Editing Relations
+
+      If you want to edit relations, here are the basics.
+
+      To add a feature to a relation, select the feature, click the "+" button in the
+      "All relations" section of the sidebar, and select or type the name of the relation.
+
+      To create a new relation, select the first feature that should be a member,
+      click the "+" button in the "All relations" section, and select "New relation...".
+
+      To remove a feature from a relation, select the feature and click the trash
+      button next to the relation you want to remove it from.
+
+      You can create multipolygons with holes using the "Merge" tool. Draw two areas (inner
+      and outer), hold the Shift key and click on each of them to select them both, and then
+      click the "Merge" (+) button.
   intro:
     navigation:
       title: "Navigation"
@@ -509,7 +566,7 @@ en:
       describe: "**Add a name, and close the feature editor**"
     lines:
       title: "Lines"
-      add: "Lines are used to represent features such as roads, railways and rivers. **Click the Line button to add a new line.**"
+      add: "Lines are used to represent features such as roads, railroads and rivers. **Click the Line button to add a new line.**"
       start: "**Start the line by clicking on the end of the road.**"
       intersect: "Click to add more nodes to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on Flower Street, to create an intersection connecting the two lines.**"
       finish: "Lines can be finished by clicking on the last node again. **Finish drawing the road.**"
@@ -517,6 +574,7 @@ en:
       residential: "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**"
       describe: "**Name the road and close the feature editor.**"
       restart: "The road needs to intersect Flower Street."
+      "wrong_preset": "You didn't select the Residential road type. **Click here to choose again**"
     startediting:
       title: "Start Editing"
       help: "More documentation and this walkthrough are available here."

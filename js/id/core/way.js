@@ -32,6 +32,11 @@ _.extend(iD.Way.prototype, {
         return this.nodes.indexOf(node) >= 0;
     },
 
+    affix: function(node) {
+        if (this.nodes[0] === node) return 'prefix';
+        if (this.nodes[this.nodes.length - 1] === node) return 'suffix';
+    },
+
     isOneWay: function() {
         return this.tags.oneway === 'yes' ||
             this.tags.oneway === '1' ||
@@ -137,31 +142,41 @@ _.extend(iD.Way.prototype, {
     },
 
     asGeoJSON: function(resolver, polygon) {
-        var nodes = resolver.childNodes(this);
+        return resolver.transient(this, 'GeoJSON', function() {
+            var nodes = resolver.childNodes(this);
 
-        if (this.isArea() && polygon && nodes.length >= 4) {
-            if (!this.isClosed()) {
-                nodes = nodes.concat([nodes[0]]);
+            if (this.isArea() && polygon && nodes.length >= 4) {
+                if (!this.isClosed()) {
+                    nodes = nodes.concat([nodes[0]]);
+                }
+
+                var json = {
+                    type: 'Feature',
+                    properties: this.tags,
+                    geometry: {
+                        type: 'Polygon',
+                        coordinates: [_.pluck(nodes, 'loc')]
+                    }
+                };
+
+                // Heuristic for detecting counterclockwise winding order. Assumes
+                // that OpenStreetMap polygons are not hemisphere-spanning.
+                if (d3.geo.area(json) > 2 * Math.PI) {
+                    json.geometry.coordinates[0] = json.geometry.coordinates[0].reverse();
+                }
+
+                return json;
+            } else {
+                return {
+                    type: 'Feature',
+                    properties: this.tags,
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: _.pluck(nodes, 'loc')
+                    }
+                };
             }
-
-            return {
-                type: 'Feature',
-                properties: this.tags,
-                geometry: {
-                    type: 'Polygon',
-                    coordinates: [_.pluck(nodes, 'loc')]
-                }
-            };
-        } else {
-            return {
-                type: 'Feature',
-                properties: this.tags,
-                geometry: {
-                    type: 'LineString',
-                    coordinates: _.pluck(nodes, 'loc')
-                }
-            };
-        }
+        });
     }
 });
 
@@ -169,21 +184,24 @@ _.extend(iD.Way.prototype, {
 // of the following keys, and the value is _not_ one of the associated
 // values for the respective key.
 iD.Way.areaKeys = {
+    aeroway: { taxiway: true},
+    amenity: {},
     area: {},
+    'area:highway': {},
     building: {},
-    leisure: {},
-    tourism: {},
-    ruins: {},
+    'building:part': {},
     historic: {},
     landuse: {},
+    leisure: {},
+    man_made: { cutline: true, embankment: true, pipeline: true},
     military: {},
     natural: { coastline: true },
-    amenity: {},
-    shop: {},
-    man_made: {},
-    public_transport: {},
+    office: {},
     place: {},
-    aeroway: {},
-    waterway: {},
-    power: {}
+    power: {},
+    public_transport: {},
+    ruins: {},
+    shop: {},
+    tourism: {},
+    waterway: {}
 };

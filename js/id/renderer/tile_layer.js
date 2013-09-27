@@ -1,13 +1,8 @@
-iD.TileLayer = function(backgroundType) {
-
-    backgroundType = backgroundType || 'background';
-
+iD.TileLayer = function() {
     var tileSize = 256,
         tile = d3.geo.tile(),
         projection,
         cache = {},
-        offset = [0, 0],
-        offsets = {},
         tileOrigin,
         z,
         transformProp = iD.util.prefixCSSProperty('Transform'),
@@ -28,7 +23,7 @@ iD.TileLayer = function(backgroundType) {
     function lookUp(d) {
         for (var up = -1; up > -d[2]; up--) {
             var tile = atZoom(d, up);
-            if (cache[source(tile)] !== false) {
+            if (cache[source.url(tile)] !== false) {
                 return tile;
             }
         }
@@ -46,7 +41,7 @@ iD.TileLayer = function(backgroundType) {
     }
 
     function addSource(d) {
-        d.push(source(d));
+        d.push(source.url(d));
         return d;
     }
 
@@ -70,7 +65,7 @@ iD.TileLayer = function(backgroundType) {
     function render(selection) {
         var requests = [];
 
-        if (tile.scaleExtent()[0] <= z) {
+        if (source.validZoom(z)) {
             tile().forEach(function(d) {
                 addSource(d);
                 requests.push(d);
@@ -86,8 +81,8 @@ iD.TileLayer = function(backgroundType) {
         }
 
         var pixelOffset = [
-            Math.round(offset[0] * Math.pow(2, z)),
-            Math.round(offset[1] * Math.pow(2, z))
+            Math.round(source.offset()[0] * Math.pow(2, z)),
+            Math.round(source.offset()[1] * Math.pow(2, z))
         ];
 
         function load(d) {
@@ -144,19 +139,6 @@ iD.TileLayer = function(backgroundType) {
             .classed('tile-removing', false);
     }
 
-    background.offset = function(_) {
-        if (!arguments.length) return offset;
-        offset = _;
-        if (source.data) offsets[source.data.name] = offset;
-        return background;
-    };
-
-    background.nudge = function(_, zoomlevel) {
-        offset[0] += _[0] / Math.pow(2, zoomlevel);
-        offset[1] += _[1] / Math.pow(2, zoomlevel);
-        return background;
-    };
-
     background.projection = function(_) {
         if (!arguments.length) return projection;
         projection = _;
@@ -172,13 +154,8 @@ iD.TileLayer = function(backgroundType) {
     background.source = function(_) {
         if (!arguments.length) return source;
         source = _;
-        if (source.data) {
-            offset = offsets[source.data.name] = offsets[source.data.name] || [0, 0];
-        } else {
-            offset = [0, 0];
-        }
         cache = {};
-        tile.scaleExtent((source.data && source.data.scaleExtent) || [1, 20]);
+        tile.scaleExtent(source.scaleExtent);
         return background;
     };
 

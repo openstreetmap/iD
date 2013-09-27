@@ -80,7 +80,12 @@ iD.svg.Labels = function(projection, context) {
             return c[text];
 
         } else {
-            return size / 3 * 2 * text.length;
+            var str = encodeURIComponent(text).match(/%[CDEFcdef]/g);
+            if (str === null) {
+                return size / 3 * 2 * text.length;
+            } else {
+                return size / 3 * (2 * text.length + str.length);
+            }
         }
     }
 
@@ -263,18 +268,23 @@ iD.svg.Labels = function(projection, context) {
         // Split entities into groups specified by label_stack
         for (i = 0; i < entities.length; i++) {
             entity = entities[i];
-            var geometry = entity.geometry(graph),
-                preset = geometry === 'area' && context.presets().match(entity, graph),
+            var geometry = entity.geometry(graph);
+
+            if (geometry === 'vertex')
+                continue;
+            if (hidePoints && geometry === 'point')
+                continue;
+
+            var preset = geometry === 'area' && context.presets().match(entity, graph),
                 icon = preset && !blacklisted(preset) && preset.icon;
 
-            if ((iD.util.displayName(entity) || icon) && !(hidePoints && geometry === 'point')) {
+            if (!icon && !iD.util.displayName(entity))
+                continue;
 
-                for (k = 0; k < label_stack.length; k ++) {
-                    if (entity.geometry(graph) === label_stack[k][0] &&
-                        entity.tags[label_stack[k][1]]) {
-                        labelable[k].push(entity);
-                        break;
-                    }
+            for (k = 0; k < label_stack.length; k ++) {
+                if (geometry === label_stack[k][0] && entity.tags[label_stack[k][1]]) {
+                    labelable[k].push(entity);
+                    break;
                 }
             }
         }

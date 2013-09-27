@@ -2,7 +2,7 @@
     "modes": {
         "add_area": {
             "title": "Område",
-            "description": "Lägg till parker, byggnader, sjöar, eller andra områden på kartan.",
+            "description": "Lägg till parker, byggnader, sjöar eller andra områden på kartan.",
             "tail": "Klicka på kartan för att börja rita ett område, exempelvis en park, sjö eller byggnad."
         },
         "add_line": {
@@ -18,13 +18,20 @@
         "browse": {
             "title": "Bläddra",
             "description": "Panorera och zooma kartan."
+        },
+        "draw_area": {
+            "tail": "Klicka för att lägga till nya punkter till området. Klicka igen på första punkten för att sluta området."
+        },
+        "draw_line": {
+            "tail": "Klicka för att lägga till fler punkter till linje. Klicka på andra linjer för att förbinda dem och dubbelklicka för att avsluta linjen."
         }
     },
     "operations": {
         "add": {
             "annotation": {
                 "point": "Lagt till en punkt.",
-                "vertex": "Lagt till en nod till en linje."
+                "vertex": "Lagt till en nod till en linje.",
+                "relation": "Lade till en relation."
             }
         },
         "start": {
@@ -42,6 +49,9 @@
         "cancel_draw": {
             "annotation": "Avbröt ritning."
         },
+        "change_role": {
+            "annotation": "Ändrade rollen för ett objekt i relationen."
+        },
         "change_tags": {
             "annotation": "Ändrade tagg."
         },
@@ -49,7 +59,7 @@
             "title": "Gör till cirkel",
             "description": {
                 "line": "Gör denna linje rund.",
-                "area": "Gör detta område runt."
+                "area": "Gör området runt."
             },
             "key": "O",
             "annotation": {
@@ -59,18 +69,14 @@
             "not_closed": "Denna kan inte göras rund då den inte är en loop."
         },
         "orthogonalize": {
-            "title": "Ortogonalisering",
-            "description": "Gör hörnen kvadratiska (90 grader).",
-            "key": "Q",
             "annotation": {
                 "line": "Gjort hörnen på en linje fyrkantiga.",
                 "area": "Gjort hörnen på ett område fyrkantiga."
-            },
-            "not_closed": "Denna kan inte göras kvadratisk då den inte är en loop."
+            }
         },
         "delete": {
             "title": "Ta bort",
-            "description": "Tag bort detta från kartan.",
+            "description": "Tag bort från kartan.",
             "annotation": {
                 "point": "Tagit bort en punkt.",
                 "vertex": "Tagit bort en nod från en väg.",
@@ -78,7 +84,14 @@
                 "area": "Tagit bort ett område.",
                 "relation": "Tagit bort en relation.",
                 "multiple": "Tagit bort {n} objekt."
-            }
+            },
+            "incomplete_relation": "Detta objekt kan inte raderas, då det inte är komplett hämtad."
+        },
+        "add_member": {
+            "annotation": "Lägg till ett objekt i relationen."
+        },
+        "delete_member": {
+            "annotation": "Ta bort ett objekt i relationen."
         },
         "connect": {
             "annotation": {
@@ -101,11 +114,12 @@
             "key": "C",
             "annotation": "Sammanfogade {n} linjer.",
             "not_eligible": "Dessa objekt kan inte slås samman.",
-            "not_adjacent": "Dessa linjer kan inte slås ihop då dem inte är ihopsatta."
+            "not_adjacent": "Dessa linjer kan inte slås ihop då dem inte är ihopsatta.",
+            "restriction": "Dessa linjer kan inte slås samman då minst en av dem tillhör relationen \"{relation}\"."
         },
         "move": {
             "title": "Flytta",
-            "description": "Flytta detta till en annan plats.",
+            "description": "Flytta till annan plats.",
             "key": "M",
             "annotation": {
                 "point": "Flyttade en punkt.",
@@ -118,7 +132,6 @@
         },
         "rotate": {
             "title": "Rotera",
-            "description": "Rotera detta objekt runt dess center.",
             "key": "R",
             "annotation": {
                 "line": "Roterade en linje.",
@@ -135,7 +148,8 @@
             "title": "Dela upp",
             "description": {
                 "line": "Dela linjen i två delar vid denna punkt.",
-                "area": "Dela gränserna för detta område i två delar."
+                "area": "Dela gränserna för detta område i två delar.",
+                "multiple": "Dela linjen/området i två, vid denna punkt."
             },
             "key": "X",
             "annotation": {
@@ -147,18 +161,35 @@
             "multiple_ways": "Det är för många linjer här för att kunna dela dem."
         }
     },
-    "nothing_to_undo": "Inget att ångra.",
-    "nothing_to_redo": "Inget att upprepa.",
-    "just_edited": "Du har nu redigerat OpenStreetMap!",
-    "browser_notice": "Denna redigerare funkar i Firefox, Chrome, Safari, Opera och Internet Explorer 9 och högre. Uppgradera din webbläsare eller använd Potlatch 2 för att redigera på kartan.",
-    "view_on_osm": "Visa på OSM",
+    "undo": {
+        "nothing": "Inget att ångra."
+    },
+    "redo": {
+        "nothing": "Inget att upprepa."
+    },
+    "tooltip_keyhint": "Genväg:",
+    "browser_notice": "Denna redigerare funkar i Firefox, Chrome, Safari, Opera och Internet Explorer 9 eller högre. Uppgradera din webbläsare eller använd Potlatch 2 för att redigera kartan.",
+    "translate": {
+        "translate": "Översätt",
+        "localized_translation_label": "Flerspråkigt namn",
+        "localized_translation_language": "Välj språk",
+        "localized_translation_name": "Namn"
+    },
+    "zoom_in_edit": "Zomma in för att redigera",
     "logout": "logga ut",
     "loading_auth": "Ansluter till OpenStreetMap...",
     "report_a_bug": "rapportera ett fel",
+    "status": {
+        "error": "Kan inte ansluta till API:et.",
+        "offline": "API:et är inte tillgängligt. Vänligen försök redigera senare.",
+        "readonly": "API:et är skrivskyddat. Du måste vänta innan du kan spara dina ändringar."
+    },
     "commit": {
         "title": "Spara ändringar",
         "description_placeholder": "Kort beskrivning av dina ändringar",
         "message_label": "Skicka meddelande",
+        "upload_explanation": "De redigeringar du bidrar med kommer att synas på alla kartor som använder OpenStreetMaps data.",
+        "upload_explanation_with_user": "De redigeringar du bidrar med som {user} kommer att synas på alla kartor som använder OpenStreetMaps data.",
         "save": "Spara",
         "cancel": "Avbryt",
         "warnings": "Varningar",
@@ -166,10 +197,9 @@
         "deleted": "Borttaget",
         "created": "Skapat"
     },
-    "geocoder": {
-        "title": "Hitta en plats",
-        "placeholder": "Hitta en plats",
-        "no_results": "Kunde inte hitta '{name}'"
+    "contributors": {
+        "list": "Ändrad av {users}",
+        "truncated_list": "Ändrad av {users} och {count} andra"
     },
     "geolocate": {
         "title": "Visa var jag är"
@@ -180,24 +210,32 @@
         "show_more": "Visa mer",
         "view_on_osm": "Visa på openstreetmap.org",
         "all_tags": "Alla taggar",
+        "all_members": "Alla medlemmar",
+        "all_relations": "Alla relationer",
+        "new_relation": "Ny relation...",
+        "role": "Roll",
         "choose": "Välj typ av objekt",
         "results": "{n} sökresult för {search}",
         "reference": "Visa på OpenStreetmaps wiki",
+        "back_tooltip": "Ändra objekt",
         "remove": "Ta bort",
-        "search": "Sök"
+        "search": "Sök",
+        "unknown": "Okänd",
+        "incomplete": "<inte hämtad>",
+        "edit": "Ändra objekt"
     },
     "background": {
         "title": "Bakgrund",
         "description": "Bakgrundsinställningar",
         "percent_brightness": "{opacity}% ljusstyrka",
-        "fix_misalignment": "Fixa feljustering",
-        "reset": "återställ"
+        "fix_misalignment": "Justera bildplacering",
+        "reset": "ta bort"
     },
     "restore": {
         "heading": "Du har icke-sparade ändringar.",
         "description": "Du har ändringar från förra sessionen som inte har sparats. Vill du hämta dessa ändringar?",
         "restore": "Återställ",
-        "reset": "Återställ"
+        "reset": "Ta bort"
     },
     "save": {
         "title": "Spara",
@@ -207,8 +245,18 @@
         "uploading": "Dina ändringar sparas nu till OpenStreetMap.",
         "unsaved_changes": "Du har icke-sparade ändringar."
     },
+    "success": {
+        "edited_osm": "Redigerat OSM!",
+        "just_edited": "Du har nu redigerat OpenStreetMap!",
+        "view_on_osm": "Visa på OSM",
+        "facebook": "Dela på Facebook"
+    },
+    "confirm": {
+        "okay": "Ok"
+    },
     "splash": {
         "welcome": "Välkommen till iD OpenStreetMap-redigeraren",
+        "text": "iD är ett användarvänligt och kraftfullt verktyg för att bidra till världens bästa fria karta. Detta är version {version}. För mer information besök {website} eller rapportera fel på {github}.",
         "walkthrough": "Starta genomgången",
         "start": "Ändra nu"
     },
@@ -241,16 +289,22 @@
     },
     "help": {
         "title": "Hjälp",
-        "help": "# Hjälp\n\nDet här är en editor för [OpenStreetMap](http://www.openstreetmap.org/), den fria och editerbara världskartan. Du kan använda den för att lägga till och uppdatera data i ditt område och hjälpa till att skapa en världskarta baserad på öppen källkod och öppen data för alla.\n\nUppdateringar som du gör i den här kartan blir synliga för alla som använder OpenStreetMap. För att kunna göra ändringar måste du ha ett \n[gratis OpenStreetMap-konto](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) är ett samarbetsprojekt där [källkoden är tillgänglig på  GitHub](https://github.com/systemed/iD).\n"
+        "help": "# Hjälp\n\nDet här är en editor för [OpenStreetMap](http://www.openstreetmap.org/), den fria och editerbara världskartan. Du kan använda den för att lägga till och uppdatera data i ditt område och hjälpa till att skapa en världskarta för alla, baserad på öppen källkod och öppen data.\n\nUppdateringar som du gör i den här kartan blir synliga för alla som använder OpenStreetMap. För att kunna göra ändringar måste du ha ett \n[gratis OpenStreetMap-konto](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) är ett samarbetsprojekt där [källkoden är tillgänglig på  GitHub](https://github.com/systemed/iD).\n"
     },
     "intro": {
         "navigation": {
+            "title": "Navigation",
             "drag": "Huvudkartområdet visar OpenStreetMap-data ovanpå en bakgrund. Du kan navigera genom att dra och rulla, precis som i vanliga nätkartor. **Dra kartan!**",
             "select": "Kartobjekt representeras på tre olika sätt: med punkter, linjer eller områden. Alla objekt kan markeras genom att klicka på dem.**Klicka på punkten för att markera den.**",
-            "header": "Titeln visar oss typ av objekt."
+            "header": "Titeln visar oss typ av objekt.",
+            "pane": "När ett objekt är markerat visas objektredigeraren till höger. I dess huvud syns vilken typ av objekt du redigerar och nedanför syns dess olika taggar, såsom namn och adress. **Stäng objektredigeraren med knappen uppe till höger.**"
         },
         "points": {
+            "title": "Punkter",
+            "add": "Punkter kan användas för att representera saker som affärer, restauranger och monument. De markerar en viss plats och beskriver vad som finns där. **Klicka på Punkt-knappen för att skapa en ny punkt.**",
             "place": "Punkten kan placeras genom att klicka på kartan. **Placera punkten ovanpå byggnaden.**",
+            "search": "Det finns många olika typer av objekt som kan representeras av en punkt. Punkten du just lade till är ett café. **Sök efter '{name}'**",
+            "choose": "**Välj Café från listan.**",
             "describe": "Punkten är nu taggad som cafe. Via objektredigeraren kan vi lägga till mer information om punkten. **Lägg till ett namn**",
             "close": "Objektredigeraren kan stängas med knappen upp i högra hörnet. **Stäng taggredigeraren nu**",
             "reselect": "Ofta existerar redan punkter, men innehåller misstag eller är ofullständiga. Vi kan ändra redan existerande punkter. **Välj punkten du just skapade.**",
@@ -259,25 +313,37 @@
             "delete": "Menyn runt punkten innehåller operationer som kan utföras på den, inklusive ta bort. **Ta bort punkten.**"
         },
         "areas": {
-            "corner": "Områden ritas genom att placera punkter som representerar gränsen av området. **Placera startpunkten på ett av hörnen på lekplatsen.**",
+            "title": "Områden",
+            "add": "Områden kan vara ett sätt att mer detaljerat beskriva objekt. De ger information om gränserna för objektet. Områden kan i många fall användas istället för punkter och ofta är de att föredra. **Klicka på Område-knappen för att lägga till ett nytt område.**",
+            "corner": "Områden ritas genom att placera punkter som representerar gränsen på området. **Placera startpunkten på ett av lekplatsens hörn.**",
+            "place": "Rita området genom att placera ut fler punkter. Avsluta genom att klicka på startpunken igen. **Rita området för lekplatsen.**",
+            "search": "**Sök efter '{name}'.**",
+            "choose": "**Välj Lekplats från listan.**",
             "describe": "**Lägg till ett namn och stäng sedan objektredigeraren**"
         },
         "lines": {
-            "add": "Linjer används för att representera exempelvis vägar, järnvägar och älvar. **Klicka på Linje-knappen för att lägga till en ny linje.**",
+            "title": "Linjer",
             "start": "**Påbörja linjen genom att klicka på slutet av vägen.**",
             "intersect": "Klicka för att lägga till fler punkter på linjen (vägen). Du kan flytta kartan under tiden du ritar. Vägar och många andra typer av linjer är en del av ett större nät med linjer. Det är därför viktigt att linjer blir korrekt anslutna till varandra för att exempelvis körinstruktioner ska fungera.**Klicka på Flower Street för att skapa en anslutning mellan de två linjerna (vägarna).**",
             "finish": "Linjer avslutas genom att klicka på slutpunkten en gång till.**Avsluta linjen.**",
+            "road": "**Välj Väg från listan**",
             "residential": "Det finns olika typer av vägar. Den vanligaste är \"Residential\". **Välj vägtypen \"Residential\"**",
             "describe": "**Ge vägen ett namn och stäng objektredigeraren.**",
             "restart": "Vägen behöver ha en korsning med Flower Street."
         },
         "startediting": {
+            "title": "Börja redigera",
             "help": "Ytterligare dokumentation samt denna genomgång finns tillgängliga här.",
             "save": "Glöm inte att regelbundet spara dina ändringar!",
             "start": "Börja kartera!"
         }
     },
     "presets": {
+        "categories": {
+            "category-road": {
+                "name": "Väg"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Tillgång",
@@ -471,7 +537,7 @@
                 }
             },
             "surface": {
-                "label": "Yta"
+                "label": "Beläggning"
             },
             "tourism": {
                 "label": "Typ"
@@ -572,12 +638,10 @@
                 "name": "Kyrka"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Synagoga",
-                "terms": "judisk,synagoga"
+                "name": "Synagoga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Moské",
-                "terms": "muslim,moské"
+                "name": "Moské"
             },
             "amenity/police": {
                 "name": "Polis"
@@ -862,8 +926,7 @@
                 "name": "Klippa"
             },
             "natural/coastline": {
-                "name": "Kustlinje",
-                "terms": "kust"
+                "name": "Kustlinje"
             },
             "natural/glacier": {
                 "name": "Glassiär"
@@ -919,9 +982,6 @@
             "power": {
                 "name": "Kraft"
             },
-            "power/generator": {
-                "name": "Kraftverk"
-            },
             "power/line": {
                 "name": "Kraftledning"
             },
@@ -956,14 +1016,10 @@
                 "name": "Tunnelbana"
             },
             "railway/tram": {
-                "name": "Spårvagn",
-                "terms": "spårvagn"
+                "name": "Spårvagn"
             },
             "shop": {
                 "name": "Affär"
-            },
-            "shop/alcohol": {
-                "terms": "alkohol"
             },
             "shop/bakery": {
                 "name": "Bageri"

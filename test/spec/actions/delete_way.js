@@ -8,7 +8,7 @@ describe("iD.actions.DeleteWay", function() {
 
     it("removes a way from parent relations", function() {
         var way      = iD.Way(),
-            relation = iD.Relation({members: [{ id: way.id }]}),
+            relation = iD.Relation({members: [{ id: way.id }, { id: 'w-2' }]}),
             action   = iD.actions.DeleteWay(way.id),
             graph    = iD.Graph([way, relation]).update(action);
         expect(_.pluck(graph.entity(relation.id).members, 'id')).not.to.contain(way.id);
@@ -59,5 +59,13 @@ describe("iD.actions.DeleteWay", function() {
             action = iD.actions.DeleteWay(way.id),
             graph  = iD.Graph([node, way]).update(action);
         expect(graph.hasEntity(node.id)).not.to.be.undefined;
+    });
+
+    it("deletes parent relations that become empty", function () {
+        var way      = iD.Way(),
+            relation = iD.Relation({members: [{ id: way.id }]}),
+            action   = iD.actions.DeleteWay(way.id),
+            graph    = iD.Graph([way, relation]).update(action);
+        expect(graph.hasEntity(relation.id)).to.be.undefined;
     });
 });

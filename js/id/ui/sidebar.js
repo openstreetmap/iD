@@ -28,6 +28,7 @@ iD.ui.Sidebar = function(context) {
             } else if (!current) {
                 featureListWrap.classed('inspector-hidden', false);
                 inspectorWrap.classed('inspector-hidden', true);
+                inspector.state('hide');
             }
         };
 
@@ -48,6 +49,7 @@ iD.ui.Sidebar = function(context) {
             } else if (!current) {
                 featureListWrap.classed('inspector-hidden', false);
                 inspectorWrap.classed('inspector-hidden', true);
+                inspector.state('hide');
             }
         };
 

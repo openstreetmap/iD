@@ -120,7 +120,6 @@ describe("iD.actions.MergePolygon", function () {
     });
 
     it("extends a multipolygon with multi-way rings", function() {
-        console.log('start');
         var r = iD.Relation({ id: 'r', tags: { type: 'multipolygon' }, members: [
             { type: 'way', role: 'outer', id: 'w0' },
             { type: 'way', role: 'inner', id: 'w3' },

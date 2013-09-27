@@ -11,7 +11,12 @@ iD.actions.DeleteRelation = function(relationId) {
 
         graph.parentRelations(relation)
             .forEach(function(parent) {
-                graph = graph.replace(parent.removeMembersWithID(relationId));
+                parent = parent.removeMembersWithID(relationId);
+                graph = graph.replace(parent);
+
+                if (parent.isDegenerate()) {
+                    graph = iD.actions.DeleteRelation(parent.id)(graph);
+                }
             });
 
         _.uniq(_.pluck(relation.members, 'id')).forEach(function(memberId) {

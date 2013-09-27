@@ -1,8 +1,11 @@
 describe('iD.Entity', function () {
     it("returns a subclass of the appropriate type", function () {
-        expect(iD.Entity({type: 'way'})).be.an.instanceOf(iD.Way);
         expect(iD.Entity({type: 'node'})).be.an.instanceOf(iD.Node);
+        expect(iD.Entity({type: 'way'})).be.an.instanceOf(iD.Way);
         expect(iD.Entity({type: 'relation'})).be.an.instanceOf(iD.Relation);
+        expect(iD.Entity({id: 'n1'})).be.an.instanceOf(iD.Node);
+        expect(iD.Entity({id: 'w1'})).be.an.instanceOf(iD.Way);
+        expect(iD.Entity({id: 'r1'})).be.an.instanceOf(iD.Relation);
     });
 
     if (iD.debug) {

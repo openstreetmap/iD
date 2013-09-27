@@ -75,9 +75,16 @@ Each field definition lives in a separate file in `data/presets/fields`. The fie
 name (used in the preset `fields` property) is the name of the file (minus the `.json`
 extension).
 
+## Icons
+
+Preset icons in iD are pulled from the open source POI icon set, 
+[Maki](http://www.mapbox.com/maki/). Icons are stored in `dist/img/maki-sprite.png`.
+The icons are identified in iD by the same name as they are on the Maki home. Use those 
+names when identifying the icon to be used for a given preset. 
+
 ## Building
 
-To build presets, all you need to to is run `make`.
+To build presets, all you need to do is run `make`.
 
 This command will take care of running the build script, which packages all presets
 together with imagery data, and deprecated or discarded tags into one file, `data/data.js`,

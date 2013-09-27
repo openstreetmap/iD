@@ -91,8 +91,11 @@ iD.behavior.Draw = function(context) {
 
     function draw(selection) {
         context.install(hover);
-        context.install(tail);
         context.install(edit);
+
+        if (!iD.behavior.Draw.usedTails[tail.text()]) {
+            context.install(tail);
+        }
 
         keybinding
             .on('⌫', backspace)
@@ -112,8 +115,12 @@ iD.behavior.Draw = function(context) {
 
     draw.off = function(selection) {
         context.uninstall(hover);
-        context.uninstall(tail);
         context.uninstall(edit);
+
+        if (!iD.behavior.Draw.usedTails[tail.text()]) {
+            context.uninstall(tail);
+            iD.behavior.Draw.usedTails[tail.text()] = true;
+        }
 
         selection
             .on('mousedown.draw', null)
@@ -127,10 +134,7 @@ iD.behavior.Draw = function(context) {
     };
 
     draw.tail = function(_) {
-        if (!_ || iD.behavior.Draw.usedTails[_] === undefined) {
-            tail.text(_);
-            iD.behavior.Draw.usedTails[_] = true;
-        }
+        tail.text(_);
         return draw;
     };
 

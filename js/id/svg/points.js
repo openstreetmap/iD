@@ -50,7 +50,7 @@ iD.svg.Points = function(projection, context) {
             .remove();
     }
 
-    drawPoints.points = function(entities) {
+    drawPoints.points = function(entities, limit) {
         var graph = context.graph(),
             points = [];
 
@@ -58,6 +58,7 @@ iD.svg.Points = function(projection, context) {
             var entity = entities[i];
             if (entity.geometry(graph) === 'point') {
                 points.push(entity);
+                if (limit && points.length >= limit) break;
             }
         }
 

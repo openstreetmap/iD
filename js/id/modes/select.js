@@ -70,6 +70,8 @@ iD.modes.Select = function(context, selectedIDs) {
     };
 
     mode.enter = function() {
+        context.save();
+
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });
@@ -156,7 +158,7 @@ iD.modes.Select = function(context, selectedIDs) {
         context.map().on('drawn.select', selectElements);
         selectElements();
 
-        radialMenu = iD.ui.RadialMenu(operations);
+        radialMenu = iD.ui.RadialMenu(context, operations);
         var show = d3.event && !suppressMenu;
 
         if (show) {

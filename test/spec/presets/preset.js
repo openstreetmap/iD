@@ -64,9 +64,9 @@ describe('iD.presets.Preset', function() {
             expect(preset.applyTags({}, 'area')).to.eql({highway: 'residential'});
         });
 
-        it("does not add wildcard tags", function() {
+        it("adds wildcard tags with value 'yes'", function() {
             var preset = iD.presets.Preset('test', {tags: {building: '*'}});
-            expect(preset.applyTags({}, 'area')).to.eql({});
+            expect(preset.applyTags({}, 'area')).to.eql({building: 'yes'});
         });
 
         it("adds default tags of fields with matching geometry", function() {

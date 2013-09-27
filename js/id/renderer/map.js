@@ -20,7 +20,8 @@ iD.Map = function(context) {
         midpoints = iD.svg.Midpoints(roundedProjection, context),
         labels = iD.svg.Labels(roundedProjection, context),
         supersurface, surface,
-        mouse;
+        mouse,
+        mousemove;
 
     function map(selection) {
         context.history()
@@ -51,6 +52,10 @@ iD.Map = function(context) {
             })
             .attr('id', 'surface')
             .call(iD.svg.Surface(context));
+
+        surface.on('mousemove.map', function() {
+            mousemove = d3.event;
+        });
 
         surface.on('mouseover.vertices', function() {
             if (map.editable() && !transformed) {
@@ -83,7 +88,6 @@ iD.Map = function(context) {
         map.dimensions(selection.dimensions());
 
         labels.supersurface(supersurface);
-        mouse = iD.util.fastMouse(supersurface.node());
     }
 
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
@@ -137,7 +141,7 @@ iD.Map = function(context) {
             .call(midpoints, graph, all, filter, map.extent())
             .call(labels, graph, all, filter, dimensions, !difference && !extent);
 
-        if (points.points(context.intersects(map.extent())).length > 100) {
+        if (points.points(context.intersects(map.extent()), 100).length >= 100) {
             surface.select('.layer-hit').selectAll('g.point').remove();
         } else {
             surface.call(points, points.points(all), filter);
@@ -250,7 +254,7 @@ iD.Map = function(context) {
     }
 
     map.mouse = function() {
-        var e = d3.event, s;
+        var e = mousemove || d3.event, s;
         while (s = e.sourceEvent) e = s;
         return mouse(e);
     };
@@ -313,6 +317,7 @@ iD.Map = function(context) {
         surface.dimensions(dimensions);
         context.background().dimensions(dimensions);
         projection.clipExtent([[0, 0], dimensions]);
+        mouse = iD.util.fastMouse(supersurface.node());
         setCenter(center);
         return redraw();
     };

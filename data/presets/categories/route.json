@@ -4,8 +4,9 @@
     "icon": "route",
     "members": [
         "type/route/road",
-        "type/route/foot",
         "type/route/bicycle",
+        "type/route/foot",
+        "type/route/hiking",
         "type/route/bus",
         "type/route/train",
         "type/route/tram",

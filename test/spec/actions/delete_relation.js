@@ -74,6 +74,14 @@ describe("iD.actions.DeleteRelation", function () {
         expect(graph.hasEntity(node.id)).to.be.undefined;
     });
 
+    it("deletes parent relations that become empty", function () {
+        var child  = iD.Relation(),
+            parent = iD.Relation({members: [{ id: child.id }]}),
+            action = iD.actions.DeleteRelation(child.id),
+            graph  = action(iD.Graph([child, parent]));
+        expect(graph.hasEntity(parent.id)).to.be.undefined;
+    });
+
     describe("#disabled", function() {
         it("returns 'incomplete_relation' if the relation is incomplete", function() {
             var relation = iD.Relation({members: [{id: 'w'}]}),

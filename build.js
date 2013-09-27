@@ -63,9 +63,9 @@ function generateCategories() {
 
 function generateFields() {
     var fields = {};
-    glob.sync(__dirname + '/data/presets/fields/*.json').forEach(function(file) {
+    glob.sync(__dirname + '/data/presets/fields/**/*.json').forEach(function(file) {
         var field = read(file),
-            id = path.basename(file, '.json');
+            id = file.match(/presets\/fields\/([^.]*)\.json/)[1];
 
         validate(file, field, fieldSchema);
 

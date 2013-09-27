@@ -19,11 +19,11 @@ iD.ui.intro.line = function(context, reveal) {
 
         var centroid = [-85.62830, 41.95699];
         var midpoint = [-85.62975395449628, 41.95787501510204];
-        var start = [-85.6297754121684, 41.9583158176903];
+        var start = [-85.6297754121684, 41.95805253325314];
         var intersection = [-85.62974496187628, 41.95742515554585];
 
         context.map().centerZoom(start, 18);
-        reveal('button.add-line', t('intro.lines.add'), {tooltipClass: 'intro-areas-add'});
+        reveal('button.add-line', t('intro.lines.add'), {tooltipClass: 'intro-lines-add'});
 
         context.on('enter.intro', addLine);
 
@@ -61,7 +61,7 @@ iD.ui.intro.line = function(context, reveal) {
         // ended line before creating intersection
         function retry(mode) {
             if (mode.id !== 'select') return;
-            var pointBox = iD.ui.intro.pad(intersection, 30);
+            var pointBox = iD.ui.intro.pad(intersection, 30, context);
             reveal(pointBox, t('intro.lines.restart'));
             timeout(function() {
                 context.replace(iD.actions.DeleteMultiple(mode.selectedIDs()));
@@ -95,6 +95,10 @@ iD.ui.intro.line = function(context, reveal) {
             context.on('enter.intro', null);
             d3.select('#curtain').style('pointer-events', 'all');
 
+            presetCategory();
+        }
+
+        function presetCategory() {
             timeout(function() {
                 d3.select('#curtain').style('pointer-events', 'none');
                 var road = d3.select('.preset-category-road .preset-list-button');
@@ -107,9 +111,20 @@ iD.ui.intro.line = function(context, reveal) {
             timeout(function() {
                 var grid = d3.select('.subgrid');
                 reveal(grid.node(), t('intro.lines.residential'));
+                grid.selectAll(':not(.preset-highway-residential) .preset-list-button')
+                    .one('click.intro', retryPreset);
                 grid.selectAll('.preset-highway-residential .preset-list-button')
                     .one('click.intro', roadDetails);
-            }, 200);
+            }, 500);
+        }
+
+        // selected wrong road type
+        function retryPreset(mode) {
+            timeout(function() {
+                var preset = d3.select('.entity-editor-pane .preset-list-button');
+                reveal(preset.node(), t('intro.lines.wrong_preset'));
+                preset.one('click.intro', presetCategory);
+            }, 500);
         }
 
         function roadDetails() {

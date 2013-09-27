@@ -8,16 +8,28 @@ window.iD = function () {
     // https://github.com/systemed/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
     try { storage = localStorage; } catch (e) {}
-    storage = storage || {};
+    storage = storage || (function() {
+        var s = {};
+        return {
+            getItem: function(k) { return s[k]; },
+            setItem: function(k, v) { s[k] = v; },
+            removeItem: function(k) { delete s[k]; }
+        };
+    })();
 
     context.storage = function(k, v) {
-        if (arguments.length === 1) return storage[k];
-        else if (v === null) delete storage[k];
-        else storage[k] = v;
+        try {
+            if (arguments.length === 1) return storage.getItem(k);
+            else if (v === null) storage.removeItem(k);
+            else storage.setItem(k, v);
+        } catch(e) {
+            // localstorage quota exceeded
+            if (typeof console !== 'undefined') console.error('localStorage quota exceeded');
+        }
     };
 
     var history = iD.History(context),
-        dispatch = d3.dispatch('enter', 'exit', 'toggleFullscreen'),
+        dispatch = d3.dispatch('enter', 'exit'),
         mode,
         container,
         ui = iD.ui(context),
@@ -71,6 +83,20 @@ window.iD = function () {
     context.redo = history.redo;
     context.changes = history.changes;
     context.intersects = history.intersects;
+
+    var inIntro = false;
+
+    context.inIntro = function(_) {
+        if (!arguments.length) return inIntro;
+        inIntro = _;
+        return context;
+    };
+
+    context.save = function() {
+        if (inIntro) return;
+        history.save();
+        if (history.hasChanges()) return t('save.unsaved_changes');
+    };
 
     context.flush = function() {
         connection.flush();
@@ -176,6 +202,13 @@ window.iD = function () {
     context.zoomIn = map.zoomIn;
     context.zoomOut = map.zoomOut;
 
+    context.surfaceRect = function() {
+        // Work around a bug in Firefox.
+        //   http://stackoverflow.com/questions/18153989/
+        //   https://bugzilla.mozilla.org/show_bug.cgi?id=530985
+        return context.surface().node().parentNode.getBoundingClientRect();
+    };
+
     /* Presets */
     var presets = iD.presets()
         .load(iD.data.presets);
@@ -205,18 +238,22 @@ window.iD = function () {
         return context;
     };
 
-    context.imagePath = function(_) {
-        return assetPath + 'img/' + _;
+    var assetMap = {};
+    context.assetMap = function(_) {
+        if (!arguments.length) return assetMap;
+        assetMap = _;
+        return context;
     };
 
-    context.toggleFullscreen = function() {
-        dispatch.toggleFullscreen();
+    context.imagePath = function(_) {
+        var asset = 'img/' + _;
+        return assetMap[asset] || assetPath + asset;
     };
 
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '1.1.0rc1';
+iD.version = '1.2.0';
 
 (function() {
     var detected = {};

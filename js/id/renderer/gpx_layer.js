@@ -22,8 +22,35 @@ iD.GpxLayer = function(context, dispatch) {
             .append('path')
             .attr('class', 'gpx');
 
+        var path = d3.geo.path()
+            .projection(projection);
+
         paths
-            .attr('d', d3.geo.path().projection(projection));
+            .attr('d', path);
+
+        if (typeof gj.features !== 'undefined') {
+            svg
+                .selectAll('text')
+                .remove();
+
+            svg
+                .selectAll('path')
+                .data(gj.features)
+                .enter()
+                .append('text')
+                .attr('class', 'gpx')
+                .text(function(d) {
+                    return d.properties.name;
+                })
+                .attr('x', function(d) {
+                    var centroid = path.centroid(d);
+                    return centroid[0] + 5;
+                })
+                .attr('y', function(d) {
+                    var centroid = path.centroid(d);
+                    return centroid[1];
+                });
+        }
     }
 
     function toDom(x) {

@@ -59,14 +59,10 @@
             "not_closed": "Šo objektu nevar pārveidot par apļveida, jo tas nav pabeigts."
         },
         "orthogonalize": {
-            "title": "Ortogonalizēt",
-            "description": "Pārveidot, lai visi leņķi būtu taisnleņķi.",
-            "key": "Q",
             "annotation": {
                 "line": "Līnijas leņķi pārvedoti par taisnleņķiem.",
                 "area": "Apgabala leņķi pārvedoti par taisnleņķiem."
-            },
-            "not_closed": "Šim objektam nevar pārveidot visus leņķus par taisnleņķa, jo tas nav pabeigts."
+            }
         },
         "delete": {
             "title": "Dzēst",
@@ -117,7 +113,6 @@
         },
         "rotate": {
             "title": "Pagriezt",
-            "description": "Pagriezt šo objektu ap tā centru.",
             "key": "R",
             "annotation": {
                 "line": "Līnija pagriezta.",
@@ -144,11 +139,13 @@
             "not_eligible": "Līnijas nevar sadalīt to sākumā vai beigās."
         }
     },
-    "nothing_to_undo": "Nav nekā, ko atcelt",
-    "nothing_to_redo": "Nav nekā, ko atsaukt",
-    "just_edited": "Jūs nupat rediģējāt OpenStreetMap",
+    "undo": {
+        "nothing": "Nav nekā, ko atcelt"
+    },
+    "redo": {
+        "nothing": "Nav nekā, ko atsaukt"
+    },
     "browser_notice": "Šis redaktors tiek atbalstīts ar Firefox, Chrome, Safari, Opera, un Internet Explorer 9 un jaunāku. Lūdzu, atjauniniet savu pārlūkprogrammu vai izmantojiet Potlatch 2 kartes rediģēšanai",
-    "view_on_osm": "Aplūkot OSM kartē",
     "zoom_in_edit": "Pietuvināt, lai labotu",
     "logout": "atslēgties",
     "loading_auth": "Savienojas ar OpenStreetMap...",
@@ -163,11 +160,6 @@
         "modified": "Mainīts",
         "deleted": "Dzēsts",
         "created": "Izveidots"
-    },
-    "geocoder": {
-        "title": "Atrast vietu",
-        "placeholder": "meklēt vietu",
-        "no_results": "Nevar atrast vietu '{name}'"
     },
     "geolocate": {
         "title": "Parādīt manu atrašanās vietu"
@@ -208,9 +200,9 @@
         "unsaved_changes": "Jums ir nesaglabātas izmaiņas"
     },
     "success": {
-        "facebook": "Dalīties Facebook",
-        "tweet": "Dalīties Twitter",
-        "okay": "Labi"
+        "just_edited": "Jūs nupat rediģējāt OpenStreetMap",
+        "view_on_osm": "Apskatīt OSM",
+        "facebook": "Dalīties Facebook"
     },
     "confirm": {
         "okay": "Labi"
@@ -531,12 +523,10 @@
                 "name": "Skrejceļš"
             },
             "aeroway/aerodrome": {
-                "name": "Lidosta",
-                "terms": "lidmašīna, lidosta"
+                "name": "Lidosta"
             },
             "aeroway/helipad": {
-                "name": "Helikopteru nosēšanās laukums",
-                "terms": "helikopters, helikoteru nosēšanās laukums"
+                "name": "Helikopteru nosēšanās laukums"
             },
             "amenity/bank": {
                 "name": "Banka"
@@ -554,8 +544,7 @@
                 "name": "Velonoma"
             },
             "amenity/cafe": {
-                "name": "Kafejnīca",
-                "terms": "kafija, tēja, kafejnīca"
+                "name": "Kafejnīca"
             },
             "amenity/cinema": {
                 "name": "Kino"
@@ -579,8 +568,7 @@
                 "name": "Kapi"
             },
             "amenity/hospital": {
-                "name": "Slimnīca",
-                "terms": "Slimnīca, Ātrās palīdzības punkts, veselības dienests, sanatorija"
+                "name": "Slimnīca"
             },
             "amenity/library": {
                 "name": "Bibliotēka"
@@ -595,19 +583,16 @@
                 "name": "Aptieka"
             },
             "amenity/place_of_worship": {
-                "name": "Dievnams",
-                "terms": "bazilika, katedrāle, kapellam baznīca, Dieva nams, Lūgšanu nams, mošeja"
+                "name": "Dievnams"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Baznīca"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Sinagoga",
-                "terms": "jūdu, sinagoga"
+                "name": "Sinagoga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Mošeja",
-                "terms": "musulmaņu, mošeja"
+                "name": "Mošeja"
             },
             "amenity/police": {
                 "name": "Policija"
@@ -856,8 +841,7 @@
                 "name": "Novērošanas punkts"
             },
             "man_made/wastewater_plant": {
-                "name": "Notekūdeņu stacija",
-                "terms": "kanalizācija, notekūdeņu attīrīšanas stacija, ūdens attīrīšanas stacija"
+                "name": "Notekūdeņu stacija"
             },
             "man_made/water_tower": {
                 "name": "Ūdenstornis"
@@ -933,9 +917,6 @@
             },
             "power": {
                 "name": "Enerģija"
-            },
-            "power/generator": {
-                "name": "Elektrostacija"
             },
             "power/line": {
                 "name": "Elektrolīnija"

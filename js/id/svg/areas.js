@@ -61,13 +61,25 @@ iD.svg.Areas = function(projection) {
             fill: areas
         };
 
+        var bisect = d3.bisector(function(node) {
+            return -node.__data__.area(graph);
+        }).left;
+
+        var fills = surface.selectAll('.layer-fill path.area')[0];
+
+        function sortedByArea(entity) {
+            if (this.__data__ === 'fill') {
+                return fills[bisect(fills, -entity.area(graph))];
+            }
+        }
+
         var paths = surface.selectAll('.layer-shadow, .layer-stroke, .layer-fill')
             .selectAll('path.area')
             .filter(filter)
             .data(function(layer) { return data[layer]; }, iD.Entity.key);
 
         paths.enter()
-            .append('path')
+            .insert('path', sortedByArea)
             .each(function(entity) {
                 var layer = this.parentNode.__data__;
 
@@ -80,7 +92,6 @@ iD.svg.Areas = function(projection) {
             .call(iD.svg.TagClasses());
 
         paths
-            .order()
             .attr('d', path);
 
         paths.exit()

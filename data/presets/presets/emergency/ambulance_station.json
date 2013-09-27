@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "operator"
+    ],
+    "geometry": [
+        "area",
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "emergency": "ambulance_station"
+    },
+    "name": "Ambulance Station"
+}

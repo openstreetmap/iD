@@ -78,8 +78,7 @@
             }
         },
         "rotate": {
-            "title": "Zasuči",
-            "description": "Zasuči ta predmed okrog njegovega središča."
+            "title": "Zasuči"
         }
     },
     "logout": "odjava",
@@ -91,10 +90,6 @@
         "modified": "Spremenjeno",
         "deleted": "Izbrisano",
         "created": "Ustvarjeno"
-    },
-    "geocoder": {
-        "title": "Najdi kraj",
-        "placeholder": "Najdi kraj"
     },
     "inspector": {
         "no_documentation_combination": "Za to kombinacijo oznak ni na voljo dokumentacije",
@@ -816,8 +811,7 @@
                 "name": "Klif"
             },
             "natural/coastline": {
-                "name": "Obala",
-                "terms": "Obala"
+                "name": "Obala"
             },
             "natural/glacier": {
                 "name": "Ledenik"
@@ -881,9 +875,6 @@
             },
             "power": {
                 "name": "Elektro"
-            },
-            "power/generator": {
-                "name": "Elektrarna"
             },
             "power/line": {
                 "name": "Daljnovod"

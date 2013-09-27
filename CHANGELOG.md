@@ -1,3 +1,77 @@
+## 1.2.0
+
+* Don't auto-save intro tutorial edits (#1745, #1795)
+* Added waypoint display to GPX layer
+* Added "Straighten" operation
+* Improve "Orthogonalize" behavior, rename to "Square"
+* Add and improve many presets
+* Save commit messages on blur (#1783)
+* Add KSJ2 tags to discard list (#1794)
+* Fix display of labels with wide characters
+* Catch localStorage quota exception (#1807)
+* Avoid consecutive identical nodes when adding a midpoint (#1296)
+* Stop nudge when exiting move mode (#1766)
+* Add "Continue" operation
+* Delete relations that become empty (#465, #1454)
+* Support polygon imagery bounds (#768)
+* Pull imagery from editor-imagery-index
+* Insert areas in sorted order (#1693)
+* Fix some walkthrough glitches (#1744)
+
+## 1.1.6
+
+* Fix walkthrough on Firefox (#1743)
+* Fix icon at end of walkthough (#1740)
+* Fix walkthrough (#1739)
+
+## 1.1.5
+
+* Add amenity=ranger_station preset (1723)
+* Add terms for tourism=artwork (#1726)
+* Reduce prominence of share links, add G+
+* Default wildcard tag values to "yes" (#1715)
+* Add help topic on relations (#1708)
+* Add default "Locator Overlay" layer (#1301)
+* Refine toilet preset (#1697)
+* Change delete shortcut to ⌘⌫/Ctrl-Backspace (#1698)
+* Fix close button event binding in save dialog (#1713)
+* Fix error when deleting a triangle vertex (#1712)
+* Add support for an externally provided asset map (#1699)
+
+## 1.1.4
+
+* Fix adding multilingual name (#1694)
+* Fix social buttons (#1690)
+* Work around a Firefox bug that sometimes caused elements to be unselectable or stuck dragging (#1691, #1692)
+
+## 1.1.3
+
+* Fix behavior of enter key in name field (#1681)
+* Remove area=yes when choosing an area preset (#1684)
+* Save history more frequently (#1345)
+* Fix combobox menu scroll bar behavior (#963)
+* After editing, give a sense when map is updated (#1660)
+* Clarify undo/redo tooltips (#1670)
+* Add emergency=fire_hydrant preset (#1674)
+* Refine power=generator preset (#1675)
+* Add leisure=track preset (#1683)
+
+## 1.1.2
+
+* Fix cursor offset when clicking/dragging after resizing the window (#1678)
+* Include low-frequency tag values if they have a wiki entry
+* Fix tag value suggestions in preset comboboxes (#1679, #1680)
+
+## 1.1.1
+
+* Improve performance when drawing
+* Tail should appear only first time
+* Fix radial menu tooltip positioning on Firefox
+
+## 1.1.0
+
+* Fix radial menu tooltip positioning
+
 ## 1.1.0rc1
 
 * Custom layers support TMS-flipped Y coordinate with {ty} replacement.

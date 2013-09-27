@@ -8,22 +8,22 @@ iD.ui.Attribution = function(context) {
         }
 
         var attribution = selection.selectAll('.provided-by')
-            .data([context.background().baseLayerSource()], function(d) { return d.data.name; });
+            .data([context.background().baseLayerSource()], function(d) { return d.name; });
 
         attribution.enter()
             .append('span')
             .attr('class', 'provided-by')
             .each(function(d) {
-                var source = d.data.sourcetag || d.data.name;
+                var source = d.terms_text || d.id || d.name;
 
-                if (d.data.logo) {
-                    source = '<img class="source-image" src="' + context.imagePath(d.data.logo) + '">';
+                if (d.logo) {
+                    source = '<img class="source-image" src="' + context.imagePath(d.logo) + '">';
                 }
 
-                if (d.data.terms_url) {
+                if (d.terms_url) {
                     d3.select(this)
                         .append('a')
-                        .attr('href', d.data.terms_url)
+                        .attr('href', d.terms_url)
                         .attr('target', '_blank')
                         .html(source);
                 } else {

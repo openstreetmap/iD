@@ -64,7 +64,9 @@ iD.ui.preset.localized = function(field, context) {
 
         if (language) value = language[2];
 
-        t[key(d.lang)] = '';
+        if (d.lang) {
+            t[key(d.lang)] = '';
+        }
 
         if (d.value) {
             t[key(value)] = d.value;
@@ -103,8 +105,8 @@ iD.ui.preset.localized = function(field, context) {
         var innerWrap = wraps.enter()
             .insert('div', ':first-child');
 
-            innerWrap.attr('class', 'entry')
-            .each(function(d) {
+        innerWrap.attr('class', 'entry')
+            .each(function() {
                 var wrap = d3.select(this);
                 var langcombo = d3.combobox().fetcher(fetcher);
 
@@ -144,26 +146,22 @@ iD.ui.preset.localized = function(field, context) {
                             .remove();
                     })
                     .append('span').attr('class', 'icon delete');
-
             });
 
-        innerWrap.transition()
-            .style('margin-top','0px')
+        innerWrap
+            .style('margin-top', '0px')
             .style('max-height', '0px')
-            .style('padding', '0px')
             .style('opacity', '0')
-            .style('border-width', '0px')
             .transition()
             .duration(200)
-            .style('margin-top','10px')
-            .style('border-width', '1px')
-            .style('padding', '10px')
+            .style('margin-top', '10px')
             .style('max-height', '240px')
             .style('opacity', '1')
-            .each('end', function(d) {
-                d3.select(this).style('max-height', '');
-                d3.select(this).style('overflow', 'visible');
-            });;
+            .each('end', function() {
+                d3.select(this)
+                    .style('max-height', '')
+                    .style('overflow', 'visible');
+            });
 
         wraps.exit()
             .transition()

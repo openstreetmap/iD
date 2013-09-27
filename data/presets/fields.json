@@ -46,6 +46,17 @@
             }
         }
     },
+    "access_toilets": {
+        "key": "access",
+        "type": "combo",
+        "label": "Access",
+        "options": [
+            "public",
+            "permissive",
+            "private",
+            "customers"
+        ]
+    },
     "address": {
         "type": "address",
         "keys": [
@@ -83,10 +94,25 @@
         "type": "combo",
         "label": "Type"
     },
+    "artist": {
+        "key": "artist_name",
+        "type": "text",
+        "label": "Artist"
+    },
+    "artwork_type": {
+        "key": "artwork_type",
+        "type": "combo",
+        "label": "Type"
+    },
     "atm": {
         "key": "atm",
         "type": "check",
         "label": "ATM"
+    },
+    "backrest": {
+        "key": "backrest",
+        "type": "check",
+        "label": "Backrest"
     },
     "barrier": {
         "key": "barrier",
@@ -233,10 +259,36 @@
         "type": "check",
         "label": "Fee"
     },
+    "fire_hydrant/type": {
+        "key": "fire_hydrant:type",
+        "type": "combo",
+        "options": [
+            "pillar",
+            "pond",
+            "underground",
+            "wall"
+        ],
+        "label": "Type"
+    },
     "fixme": {
         "key": "fixme",
         "type": "textarea",
         "label": "Fix Me"
+    },
+    "generator/method": {
+        "key": "generator:method",
+        "type": "combo",
+        "label": "Method"
+    },
+    "generator/source": {
+        "key": "generator:source",
+        "type": "combo",
+        "label": "Source"
+    },
+    "generator/type": {
+        "key": "generator:type",
+        "type": "combo",
+        "label": "Type"
     },
     "highway": {
         "key": "highway",
@@ -310,6 +362,11 @@
         "type": "number",
         "label": "Levels",
         "placeholder": "2, 4, 6..."
+    },
+    "lit": {
+        "key": "lit",
+        "type": "check",
+        "label": "Lit"
     },
     "location": {
         "key": "location",
@@ -536,6 +593,11 @@
         "type": "combo",
         "label": "Surface"
     },
+    "toilets/disposal": {
+        "key": "toilets:disposal",
+        "type": "combo",
+        "label": "Disposal"
+    },
     "tourism": {
         "key": "tourism",
         "type": "combo",
@@ -555,6 +617,11 @@
         "key": "trail_visibility",
         "type": "combo",
         "label": "Trail Visibility"
+    },
+    "vending": {
+        "key": "vending",
+        "type": "combo",
+        "label": "Type of Goods"
     },
     "water": {
         "key": "water",

@@ -2,8 +2,6 @@
 
 [![Build Status](https://secure.travis-ci.org/systemed/iD.png)](https://travis-ci.org/systemed/iD)
 
-[![](http://ideditor.com/img/editor.png)](http://ideditor.com/)
-
 ## Basics
 
 * iD is a JavaScript [OpenStreetMap](http://www.openstreetmap.org/) editor.
@@ -39,3 +37,7 @@ development, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 iD is available under the [WTFPL](http://sam.zoy.org/wtfpl/), though obviously, if you want to dual-license
 any contributions that's cool. It includes [d3js](http://d3js.org/), which BSD-licensed.
+
+## Thank you
+
+Initial development of iD was made possible by a [grant of the Knight Foundation](http://www.mapbox.com/blog/knight-invests-openstreetmap/).

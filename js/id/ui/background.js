@@ -6,7 +6,7 @@ iD.ui.Background = function(context) {
             ['top', [0, -1]],
             ['right', [-1, 0]],
             ['bottom', [0, 1]]],
-        opacityDefault = (context.storage('background-opacity') !== undefined) ?
+        opacityDefault = (context.storage('background-opacity') != undefined) ?
             (+context.storage('background-opacity')) : 0.5;
 
     function background(selection) {
@@ -28,7 +28,7 @@ iD.ui.Background = function(context) {
                 return context.background().showsLayer(d);
             }
 
-            content.selectAll('label.layer')
+            content.selectAll('label.layer, label.custom_layer')
                 .classed('active', active)
                 .selectAll('input')
                 .property('checked', active);
@@ -36,15 +36,21 @@ iD.ui.Background = function(context) {
 
         function clickSetSource(d) {
             d3.event.preventDefault();
-            if (d.data.name === 'Custom') {
-                var configured = d();
-                if (!configured) {
-                    selectLayer();
-                    return;
-                }
-                d = configured;
-            }
             context.background().baseLayerSource(d);
+            selectLayer();
+        }
+
+        function clickCustom() {
+            d3.event.preventDefault();
+            var template = window.prompt(t('background.custom_prompt'));
+            if (!template) {
+                selectLayer();
+                return;
+            }
+            context.background().baseLayerSource(iD.BackgroundSource({
+                template: template,
+                name: 'Custom'
+            }));
             selectLayer();
         }
 
@@ -65,29 +71,27 @@ iD.ui.Background = function(context) {
                 .filter(filter);
 
             var layerLinks = layerList.selectAll('label.layer')
-                .data(sources, function(d) { return d.data.name; });
+                .data(sources, function(d) { return d.name; });
 
             var layerInner = layerLinks.enter()
-                .append('label')
+                .insert('label', '.custom_layer')
                 .attr('class', 'layer');
 
             // only set tooltips for layers with tooltips
             layerInner
-                .filter(function(d) { return d.data.description; })
+                .filter(function(d) { return d.description; })
                 .call(bootstrap.tooltip()
-                    .title(function(d) { return d.data.description; })
-                    .placement('left')
-                );
+                    .title(function(d) { return d.description; })
+                    .placement('left'));
 
             layerInner.append('input')
                 .attr('type', type)
                 .attr('name', 'layers')
-                .attr('value', function(d) { return d.data.name; })
+                .attr('value', function(d) { return d.name; })
                 .on('change', change);
 
-            layerInner.insert('span').text(function(d) {
-                return d.data.name;
-            });
+            layerInner.append('span')
+                .text(function(d) { return d.name; });
 
             layerLinks.exit()
                 .remove();
@@ -96,13 +100,8 @@ iD.ui.Background = function(context) {
         }
 
         function update() {
-            backgroundList.call(drawList, 'radio', clickSetSource, function(d) {
-                return !d.data.overlay;
-            });
-
-            overlayList.call(drawList, 'checkbox', clickSetOverlay, function(d) {
-                return d.data.overlay;
-            });
+            backgroundList.call(drawList, 'radio', clickSetSource, function(d) { return !d.overlay; });
+            overlayList.call(drawList, 'checkbox', clickSetOverlay, function(d) { return d.overlay; });
 
             var hasGpx = context.background().hasGpxLayer(),
                 showsGpx = context.background().showsGpxLayer();
@@ -218,6 +217,19 @@ iD.ui.Background = function(context) {
         var backgroundList = content
             .append('div')
             .attr('class', 'toggle-list layer-list');
+
+        var custom = backgroundList
+            .append('label')
+            .attr('class', 'custom_layer')
+            .datum({name: 'Custom'});
+
+        custom.append('input')
+            .attr('type', 'radio')
+            .attr('name', 'layers')
+            .on('change', clickCustom);
+
+        custom.append('span')
+            .text(t('background.custom'));
 
         var overlayList = content
             .append('div')

@@ -959,7 +959,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     overflow: hidden;
 }
 
-.inspector-preset form.preset-form {
+.inspector-preset .preset-form {
     padding: 10px;
     margin: 0 10px 20px 10px;
     border-radius: 8px;
@@ -1453,13 +1453,13 @@ input[type=number] {
     vertical-align: top;
 }
 
+.form-field .localized-wrap {
+    padding: 0 10px;
+}
+
 .form-field .localized-wrap .entry {
     position: relative;
     overflow: hidden;
-    background: #f1f1f1;
-    border: 1px solid #ccc;
-    border-width: 0;
-    border-radius: 4px;
 }
 
 .form-field .localized-wrap .entry::before {
@@ -2227,7 +2227,7 @@ img.wiki-image {
 }
 
 .modal-actions button,
-.save-success a {
+.save-success a.button {
     font-weight: normal;
     color: #7092FF;
     border-bottom: 1px solid #CCC;
@@ -2238,12 +2238,12 @@ img.wiki-image {
 }
 
 .modal-actions button:hover
-.save-success a:hover {
+.save-success a.button:hover {
     background-color: #ececec;
 }
 
 .modal-actions button:before,
-.save-success a:before,
+.save-success a.button:before,
 .walkthrough a:before {
     display: block;
     content: '';
@@ -2262,30 +2262,46 @@ img.wiki-image {
 ------------------------------------------------------- */
 
 .modal-actions .restore:before {
-    background-position: -500px -220px;
+    background-position: -600px -220px;
 }
 
 .modal-actions .reset:before {
-    background-position: -600px -220px;
+    background-position: -700px -220px;
 }
 
 /* Success Modal
 ------------------------------------------------------- */
 
-.save-success a {
+.save-success p {
+    padding: 15px;
+}
+
+.save-success .button {
     padding-top: 15px;
 }
 
-.save-success .osm:before {
+.save-success .button.social {
+    height: 80px;
+}
+
+.save-success .button.social:before {
+    height: 50px;
+}
+
+.save-success .button.osm:before {
     background-position: 0px -220px;
 }
 
-.save-success .twitter:before {
-    background-position: -100px -220px;
+.save-success .button.twitter:before {
+    background-position: -100px -245px;
 }
 
-.save-success .facebook:before {
-    background-position: -200px -220px;
+.save-success .button.facebook:before {
+    background-position: -200px -245px;
+}
+
+.save-success .button.google:before {
+    background-position: -300px -245px;
 }
 
 /* Splash Modal
@@ -2293,11 +2309,11 @@ img.wiki-image {
 
 .modal-actions .walkthrough:before,
 .walkthrough a:before {
-    background-position: -300px -220px;
+    background-position: -400px -220px;
 }
 
 .modal-actions .start:before {
-    background-position: -400px -220px;
+    background-position: -500px -220px;
 }
 
 /* Commit Modal
@@ -2777,6 +2793,6 @@ img.wiki-image {
 .huge-modal-button .illustration {
     height: 100px;
     width: 100px;
-    background: rgba(0, 0, 0, 0) url(img/sprite.svg) no-repeat -301px -220px;
+    background: rgba(0, 0, 0, 0) url(img/sprite.svg) no-repeat -400px -220px;
     margin: auto;
 }

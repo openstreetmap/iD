@@ -54,9 +54,6 @@
             }
         },
         "orthogonalize": {
-            "title": "Lag åttekantet",
-            "description": "Lag vinkelrette hjørner.",
-            "key": "Q",
             "annotation": {
                 "line": "Laget hjørnene på linjen vinkelrette.",
                 "area": "Laget hjørnene på arealet vinkelrette."
@@ -106,7 +103,6 @@
         },
         "rotate": {
             "title": "Rotér",
-            "description": "Rotér dette objektet rundt sitt midtpunkt.",
             "key": "R",
             "annotation": {
                 "line": "Rotér en linje.",
@@ -124,26 +120,26 @@
             "key": "X"
         }
     },
-    "nothing_to_undo": "Ingen ting å gjøre.",
-    "nothing_to_redo": "Ingen ting å gjøre tilbake.",
-    "just_edited": "Du har akkurat endret OpenStreetMap!",
+    "undo": {
+        "nothing": "Ingen ting å gjøre."
+    },
+    "redo": {
+        "nothing": "Ingen ting å gjøre tilbake."
+    },
     "browser_notice": "Denne editor er støttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og høyere. Vennligst oppgrader din nettleser eller bruk Potlatch 2 for å redigere kartet.",
     "logout": "logg ut",
+    "loading_auth": "Kobler til OpenStreetMap...",
     "report_a_bug": "meld en programvarefeil",
     "commit": {
         "title": "Lagre endringer",
         "description_placeholder": "Kort beskrivelse av dine bidrag",
+        "message_label": "Lagre beskjed",
         "save": "Lagre",
         "cancel": "Avbryt",
         "warnings": "Advarsler",
         "modified": "Endret",
         "deleted": "Fjernet",
         "created": "Opprettet"
-    },
-    "geocoder": {
-        "title": "Finn et sted",
-        "placeholder": "Finn et sted",
-        "no_results": "Kunne ikke finne et sted som heter '{name}'"
     },
     "geolocate": {
         "title": "Vis min posisjon"
@@ -160,7 +156,8 @@
         "title": "Bakgrunn",
         "description": "Bakgrunnsinnstillinger",
         "percent_brightness": "{opacity}% lysstyrke",
-        "fix_misalignment": "Rett opp skjevstilling"
+        "fix_misalignment": "Rett opp skjevstilling",
+        "reset": "tilbakestill"
     },
     "restore": {
         "heading": "Du har ulagrede endringer"
@@ -173,8 +170,13 @@
         "uploading": "Laster opp endringer til OpenStreetMap.",
         "unsaved_changes": "Du har ulagrede endringer"
     },
+    "success": {
+        "just_edited": "Du har akkurat endret OpenStreetMap!"
+    },
     "splash": {
-        "welcome": "Velkommen til iD OpenStreetMap editor"
+        "welcome": "Velkommen til iD OpenStreetMap editor",
+        "walkthrough": "Begynn Gjennomgangen",
+        "start": "Rediger Nå"
     },
     "source_switch": {
         "live": "direkte",
@@ -192,7 +194,8 @@
         "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal"
     },
     "zoom": {
-        "in": "Forstørr"
+        "in": "Forstørr",
+        "out": "Forminsk"
     },
     "gpx": {
         "local_layer": "Lokal GPX-fil",
@@ -200,6 +203,11 @@
     },
     "help": {
         "title": "Hjelp"
+    },
+    "intro": {
+        "navigation": {
+            "drag": "Hovedkartet viser data fra OpenstreetMap lagt over en bakgrunn. Du kan navigere ved å dra eller scrolle, slik som et vanlig nettkart. **Dra kartet!**"
+        }
     },
     "presets": {
         "categories": {
@@ -541,9 +549,6 @@
             "aeroway/aerodrome": {
                 "name": "Flyplass"
             },
-            "aeroway/apron": {
-                "terms": "rampe"
-            },
             "aeroway/gate": {
                 "name": "Flyplassgate"
             },
@@ -554,8 +559,7 @@
                 "name": "Helikopterlandingsplass"
             },
             "aeroway/runway": {
-                "name": "Rullebane",
-                "terms": "Landingsbane"
+                "name": "Rullebane"
             },
             "aeroway/taxiway": {
                 "name": "Taxibane"
@@ -603,8 +607,7 @@
                 "name": "Videregående skole"
             },
             "amenity/drinking_water": {
-                "name": "Drikkevann",
-                "terms": "vannfontene, drikkevann"
+                "name": "Drikkevann"
             },
             "amenity/fast_food": {
                 "name": "Hurtigmat"
@@ -625,8 +628,7 @@
                 "name": "Sykehus"
             },
             "amenity/kindergarten": {
-                "name": "Barnehage",
-                "terms": "barnehage"
+                "name": "Barnehage"
             },
             "amenity/library": {
                 "name": "Bibliotek"
@@ -677,26 +679,22 @@
                 "name": "Svømmebasseng"
             },
             "amenity/taxi": {
-                "name": "Taxiholdeplass",
-                "terms": "drosje"
+                "name": "Taxiholdeplass"
             },
             "amenity/telephone": {
                 "name": "Telefon"
             },
             "amenity/toilets": {
-                "name": "Toaletter",
-                "terms": "badet,toalettet"
+                "name": "Toaletter"
             },
             "amenity/townhall": {
                 "name": "Rådhus"
             },
             "amenity/university": {
-                "name": "Universitet",
-                "terms": "videregående skole"
+                "name": "Universitet"
             },
             "amenity/waste_basket": {
-                "name": "Søppel",
-                "terms": "søppelkurv"
+                "name": "Søppel"
             },
             "area": {
                 "name": "Areal"
@@ -774,8 +772,7 @@
                 "name": "Motorveikrysning"
             },
             "highway/motorway_link": {
-                "name": "Motorveirampe",
-                "terms": "påkjøringsrampe avkjøringsrampe rampe"
+                "name": "Motorveirampe"
             },
             "highway/path": {
                 "name": "Sti"
@@ -786,9 +783,6 @@
             "highway/primary": {
                 "name": "Primær hovedvei"
             },
-            "highway/primary_link": {
-                "terms": "påkjøringsrampe avkjøringsrampe rampe"
-            },
             "highway/residential": {
                 "name": "Boligvei"
             },
@@ -797,9 +791,6 @@
             },
             "highway/secondary": {
                 "name": "Sekundær hovedvei"
-            },
-            "highway/secondary_link": {
-                "terms": "påkjøringsrampe avkjøringsrampe rampe"
             },
             "highway/service": {
                 "name": "Stikkvei"
@@ -825,14 +816,8 @@
             "highway/tertiary": {
                 "name": "Tertiær hovedvei"
             },
-            "highway/tertiary_link": {
-                "terms": "påkjøringsrampe avkjøringsrampe rampe"
-            },
             "highway/traffic_signals": {
                 "name": "Trafikklys"
-            },
-            "highway/trunk_link": {
-                "terms": "påkjøringsrampe avkjøringsrampe rampe"
             },
             "highway/unclassified": {
                 "name": "Uklassifisert vei"
@@ -937,8 +922,7 @@
                 "name": "Volleyballbane"
             },
             "leisure/playground": {
-                "name": "Lekeplass",
-                "terms": "lekeplass"
+                "name": "Lekeplass"
             },
             "leisure/swimming_pool": {
                 "name": "Svømmebasseng"
@@ -1048,9 +1032,6 @@
             "power": {
                 "name": "Strøm"
             },
-            "power/generator": {
-                "name": "Kraftverk"
-            },
             "power/line": {
                 "name": "Høyspentlinje"
             },
@@ -1097,8 +1078,7 @@
                 "name": "Butikk"
             },
             "shop/alcohol": {
-                "name": "Vinutsalg",
-                "terms": "alkohol"
+                "name": "Vinutsalg"
             },
             "shop/bakery": {
                 "name": "Bakeri"
@@ -1129,9 +1109,6 @@
             },
             "shop/electronics": {
                 "name": "Elektronikkbutikk"
-            },
-            "shop/farm": {
-                "terms": "gårdsutsalg"
             },
             "shop/fishmonger": {
                 "name": "Fiskeforhandler"

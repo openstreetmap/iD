@@ -2,10 +2,10 @@
     "icon": "highway-trunk",
     "fields": [
         "oneway",
+        "maxspeed",
         "structure",
         "access",
         "lanes",
-        "maxspeed",
         "surface",
         "ref"
     ],

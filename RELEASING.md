@@ -8,7 +8,7 @@ TODO: turn this into a script.
 - [ ] Update version number in package.json
 - [ ] git checkout release && git reset --hard master
 - [ ] make
-- [ ] Check in dist/iD.css, dist/iD.js, and dist/iD.min.js
+- [ ] git add -f dist/iD.* && git commit -m 'Check in build'
 - [ ] git tag vA.B.C
 - [ ] git push origin -f release vA.B.C
 

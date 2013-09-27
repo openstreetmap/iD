@@ -6,7 +6,8 @@
         "entrance": "*"
     },
     "fields": [
-        "entrance"
+        "entrance",
+        "address"
     ],
     "name": "Entrance"
 }

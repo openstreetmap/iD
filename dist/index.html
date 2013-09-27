@@ -58,9 +58,7 @@
             }
 
             if (typeof iD == 'undefined') {
-                document.getElementById('id-container').innerHTML = 'This editor is supported ' +
-                    'in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. ' +
-                    'Please upgrade your browser or use Potlatch 2 to edit the map.';
+                document.getElementById('id-container').innerHTML = 'Sorry, Internet Explorer is not currently supported. Please use Potlatch 2 to edit the map.';
                 document.getElementById('id-container').className = 'unsupported';
             } else {
                 var id = iD();

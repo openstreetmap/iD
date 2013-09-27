@@ -1,1 +1,418 @@
-{}
+{
+    "modes": {
+        "add_area": {
+            "title": "区域",
+            "description": "向地图中添加公园、建筑物、湖泊或其它区域。",
+            "tail": "在地图上单击开始绘制区域，如公园、湖泊或建筑物。"
+        },
+        "add_line": {
+            "title": "线",
+            "description": "向地图中添加高速公路、街道、人行道、沟渠或其它线。",
+            "tail": "在地图上单击开始绘制道路、小径或路线。"
+        },
+        "add_point": {
+            "title": "点",
+            "description": "添加餐馆、文物、邮筒或其他的点到地图上。",
+            "tail": "点击地图添加一个点。"
+        },
+        "browse": {
+            "title": "浏览",
+            "description": "移动和缩放地图。"
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "添加了一个点。",
+                "vertex": "向路径添加了一个节点。"
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "开始了一条线。",
+                "area": "开始了一个区域。"
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "继续绘制了一条线。"
+            }
+        },
+        "cancel_draw": {
+            "annotation": "绘制已取消。"
+        },
+        "change_tags": {
+            "annotation": "标记已更改。"
+        },
+        "circularize": {
+            "title": "制成圆形",
+            "key": "O",
+            "annotation": {
+                "line": "添加一个线形圆。",
+                "area": "制作一个区域圆。"
+            }
+        },
+        "delete": {
+            "title": "删除",
+            "description": "从地图上删除。",
+            "annotation": {
+                "point": "删除了一个点。",
+                "vertex": "删除了路径上的一个节点。",
+                "line": "删除了一条线。",
+                "area": "删除了一个区域。",
+                "relation": "删除一个关系。",
+                "multiple": "删除了 {n} 个对象。"
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "连接了一条路径到一个点。",
+                "vertex": "连接了两条路径。",
+                "line": "连接了一条路径到一条线。",
+                "area": "连接了一条路径到一区域。"
+            }
+        },
+        "disconnect": {
+            "title": "断开连接",
+            "key": "D"
+        },
+        "merge": {
+            "title": "合并",
+            "description": "合并这些线。",
+            "key": "C",
+            "annotation": "合并了 {n} 条线。"
+        },
+        "move": {
+            "title": "移动",
+            "description": "移动到不同的位置。",
+            "key": "M",
+            "annotation": {
+                "point": "移动了一个点。",
+                "vertex": "移动了路径中的一个节点。",
+                "line": "移动了一条线。",
+                "area": "移动了一个区域",
+                "multiple": "移动了多个对象。"
+            }
+        },
+        "rotate": {
+            "title": "旋转",
+            "key": "R",
+            "annotation": {
+                "line": "旋转了一条线。",
+                "area": "旋转了一个区域。"
+            }
+        },
+        "reverse": {
+            "title": "反转",
+            "description": "使这条线的方向反转。",
+            "key": "V",
+            "annotation": "反转了一条线。"
+        },
+        "split": {
+            "title": "切割",
+            "key": "X",
+            "annotation": {
+                "line": "切割一条线。"
+            }
+        }
+    },
+    "undo": {
+        "tooltip": "撤销：{action}",
+        "nothing": "没有东西可以撤销。"
+    },
+    "redo": {
+        "tooltip": "重做：{action}",
+        "nothing": "没有东西可以重做。"
+    },
+    "tooltip_keyhint": "快捷键：",
+    "browser_notice": "本编辑器仅被 Firefox、Chrome、Safari、Opera 和 Internet Explorer 9 以上所支持。请升级您的浏览器或使用 Potlatch 2 来编辑地图。",
+    "translate": {
+        "translate": "翻译",
+        "localized_translation_language": "选择语言",
+        "localized_translation_name": "名称"
+    },
+    "zoom_in_edit": "放大进行编辑",
+    "logout": "注销",
+    "loading_auth": "正在连接 OpenStreetMap...",
+    "report_a_bug": "反馈 BUG",
+    "status": {
+        "error": "无法连接到 API。",
+        "offline": "API 已下线，请稍后再尝试编辑。",
+        "readonly": "API 目前处于只读状态，您需要等候一段时间才能保存您的更改。"
+    },
+    "commit": {
+        "title": "保存更改",
+        "description_placeholder": "简单说明你的贡献。",
+        "message_label": "提交信息",
+        "save": "保存",
+        "cancel": "取消",
+        "warnings": "警告",
+        "modified": "已更改",
+        "deleted": "已删除",
+        "created": "已创建"
+    },
+    "contributors": {
+        "list": "由 {users} 编辑",
+        "truncated_list": "由 {users} 等 {count} 位编辑"
+    },
+    "geolocate": {
+        "title": "显示我的地理位置"
+    },
+    "inspector": {
+        "no_documentation_key": "此键值没有文档。",
+        "show_more": "显示更多",
+        "all_tags": "所有标记",
+        "all_members": "所有成员",
+        "choose": "选择标记内容种类。",
+        "results": " 搜索 {search} 有 {n} 个结果。",
+        "remove": "删除",
+        "search": "搜索",
+        "unknown": "未知"
+    },
+    "background": {
+        "title": "背景",
+        "description": "背景设置",
+        "custom": "自定义",
+        "fix_misalignment": "修正不对准",
+        "reset": "重置"
+    },
+    "restore": {
+        "heading": "您有未保存的更改",
+        "restore": "恢复",
+        "reset": "重置"
+    },
+    "save": {
+        "title": "保存",
+        "help": "保存改变至OpenStreetMap，让其他用户可见。",
+        "no_changes": "没有要保存的更改。",
+        "error": "尝试保存时发生错误。",
+        "uploading": "正在向 OpenStreetMap 上传更改。",
+        "unsaved_changes": "您有未保存的更改"
+    },
+    "success": {
+        "edited_osm": "编辑了 OSM！",
+        "just_edited": "您刚刚编辑了 OpenStreetMap！",
+        "view_on_osm": "在 OSM 上查看",
+        "facebook": "分享到 Facebook",
+        "twitter": "分享到 Twitter",
+        "google": "分享到 Google+"
+    },
+    "confirm": {
+        "okay": "确定"
+    },
+    "splash": {
+        "welcome": "欢迎使用 iD OpenStreetMap 编辑器",
+        "walkthrough": "开始演示",
+        "start": "现在编辑"
+    },
+    "source_switch": {
+        "dev": "开发版本"
+    },
+    "tag_reference": {
+        "description": "描述",
+        "on_wiki": "wiki.osm.org 上的 {tag}",
+        "used_with": "使用 {type}"
+    },
+    "validations": {
+        "untagged_line": "未标记的线",
+        "untagged_area": "未标记的区域",
+        "many_deletions": "您正在删除 {n} 个对象，您确定要这么做吗？这将会把它们从大家所见的 openstreetmap.org 地图上删除。"
+    },
+    "zoom": {
+        "in": "放大",
+        "out": "缩小"
+    },
+    "gpx": {
+        "local_layer": "本地 GPX 文件"
+    },
+    "help": {
+        "title": "帮助"
+    },
+    "intro": {
+        "navigation": {
+            "title": "导航",
+            "drag": "主地图区域在背景上展示了 OpenStreetMap 数据。您可以像在其它网络地图一样通过拖动和滚动来移动。**拖动地图！**"
+        },
+        "points": {
+            "title": "点"
+        },
+        "areas": {
+            "title": "区域"
+        },
+        "lines": {
+            "title": "线"
+        },
+        "startediting": {
+            "title": "开始编辑",
+            "start": "开始作图！"
+        }
+    },
+    "presets": {
+        "categories": {
+            "category-landuse": {
+                "name": "土地使用"
+            },
+            "category-path": {
+                "name": "路径"
+            },
+            "category-rail": {
+                "name": "铁轨"
+            },
+            "category-road": {
+                "name": "道路"
+            },
+            "category-water": {
+                "name": "水体"
+            }
+        },
+        "fields": {
+            "access": {
+                "placeholder": "未知"
+            },
+            "address": {
+                "label": "地址",
+                "placeholders": {
+                    "street": "街道",
+                    "city": "城市"
+                }
+            },
+            "aeroway": {
+                "label": "类型"
+            },
+            "amenity": {
+                "label": "类型"
+            },
+            "atm": {
+                "label": "自动柜员机"
+            },
+            "bicycle_parking": {
+                "label": "类型"
+            },
+            "boundary": {
+                "label": "类型"
+            },
+            "building": {
+                "label": "建筑物"
+            },
+            "building_area": {
+                "label": "建筑物"
+            },
+            "building_yes": {
+                "label": "建筑物"
+            },
+            "construction": {
+                "label": "类型"
+            },
+            "crossing": {
+                "label": "类型"
+            },
+            "description": {
+                "label": "描述"
+            },
+            "generator/source": {
+                "label": "来源"
+            },
+            "generator/type": {
+                "label": "类型"
+            },
+            "highway": {
+                "label": "类型"
+            },
+            "historic": {
+                "label": "类型"
+            },
+            "internet_access": {
+                "options": {
+                    "wlan": "无线网络",
+                    "terminal": "终点"
+                }
+            },
+            "landuse": {
+                "label": "类型"
+            },
+            "layer": {
+                "label": "层级"
+            },
+            "leisure": {
+                "label": "类型"
+            },
+            "levels": {
+                "label": "层次"
+            },
+            "man_made": {
+                "label": "类型"
+            },
+            "maxspeed": {
+                "label": "限速"
+            },
+            "network": {
+                "label": "网络"
+            },
+            "office": {
+                "label": "类型"
+            },
+            "oneway": {
+                "label": "单向"
+            },
+            "opening_hours": {
+                "label": "小时"
+            },
+            "phone": {
+                "label": "电话"
+            },
+            "place": {
+                "label": "类型"
+            },
+            "railway": {
+                "label": "类型"
+            },
+            "relation": {
+                "label": "类型"
+            },
+            "restriction": {
+                "label": "类型"
+            },
+            "route": {
+                "label": "类型"
+            },
+            "route_master": {
+                "label": "类型"
+            },
+            "service": {
+                "label": "类型"
+            },
+            "source": {
+                "label": "来源"
+            },
+            "sport": {
+                "label": "运动"
+            },
+            "surface": {
+                "label": "表面"
+            },
+            "tourism": {
+                "label": "类型"
+            },
+            "wikipedia": {
+                "label": "维基百科"
+            }
+        },
+        "presets": {
+            "address": {
+                "name": "地址"
+            },
+            "area": {
+                "name": "区域"
+            },
+            "line": {
+                "name": "线"
+            },
+            "point": {
+                "name": "点"
+            },
+            "vertex": {
+                "name": "其它"
+            }
+        }
+    }
+}

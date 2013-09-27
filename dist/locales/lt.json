@@ -27,9 +27,6 @@
         "circularize": {
             "key": "O"
         },
-        "orthogonalize": {
-            "key": "Q"
-        },
         "delete": {
             "title": "Ištrinti",
             "description": "Pašalinti tai iš žemėlapio.",
@@ -85,10 +82,6 @@
         "deleted": "Ištrinta",
         "created": "Sukurta"
     },
-    "geocoder": {
-        "title": "Surasti vietą",
-        "placeholder": "Surasti vietą"
-    },
     "geolocate": {
         "title": "Rodyti mano vietą"
     },
@@ -101,9 +94,6 @@
     },
     "save": {
         "title": "Išsaugoti"
-    },
-    "success": {
-        "okay": "Gerai"
     },
     "confirm": {
         "okay": "Gerai"
@@ -506,9 +496,6 @@
             },
             "natural/cliff": {
                 "name": "Uola"
-            },
-            "natural/coastline": {
-                "terms": "krantas"
             },
             "natural/tree": {
                 "name": "Medis"

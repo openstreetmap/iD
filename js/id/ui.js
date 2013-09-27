@@ -123,8 +123,7 @@ iD.ui = function(context) {
             .call(iD.ui.Contributors(context));
 
         window.onbeforeunload = function() {
-            history.save();
-            if (history.hasChanges()) return t('save.unsaved_changes');
+            return context.save();
         };
 
         d3.select(window).on('resize.editor', function() {
@@ -145,8 +144,7 @@ iD.ui = function(context) {
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
-            .on('↓', pan([0, -pa]))
-            .on('M', function() { context.toggleFullscreen(); });
+            .on('↓', pan([0, -pa]));
 
         d3.select(document)
             .call(keybinding);

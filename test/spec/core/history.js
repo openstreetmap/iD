@@ -252,12 +252,11 @@ describe("iD.History", function () {
     });
 
     describe("#save", function() {
-
         it("doesn't do anything if it doesn't have the lock", function() {
             var key = history._getKey('saved_history');
             context.storage(key, null);
             history.save();
-            expect(context.storage(key)).to.be.undefined;
+            expect(context.storage(key)).to.be.null;
             context.storage(key, 'something');
             expect(context.storage(key)).to.equal('something');
             history.save();
@@ -270,7 +269,7 @@ describe("iD.History", function () {
             history.perform(iD.actions.AddEntity(node));
             history.save();
             var saved = JSON.parse(context.storage(history._getKey('saved_history')));
-            expect(saved.stack[1].entities.n.id).to.eql('n');
+            expect(saved.stack[1].modified[0]).to.eql('nv0');
         });
     });
 
@@ -288,6 +287,130 @@ describe("iD.History", function () {
             history.restore();
             expect(history.graph().entity('n').id).to.equal('n');
             expect(history.graph().hasEntity('n2')).to.be.undefined;
+        });
+    });
+
+    describe("#toJSON", function() {
+        it("generates v2 JSON", function() {
+            var node = iD.Node({id: 'n-1'});
+            history.merge({n1: iD.Node({id: 'n1'})});
+            history.perform(iD.actions.AddEntity(node));
+            var json = JSON.parse(history.toJSON());
+            expect(json.version).to.eql(2);
+            expect(json.entities).to.eql([node]);
+        });
+    });
+
+    describe("#fromJSON", function() {
+        it("restores from v1 JSON (creation)", function() {
+            var json = {
+                "stack": [
+                    {"entities": {}},
+                    {"entities": {"n-1": {"loc": [1, 2], "id": "n-1"}}, "imageryUsed": ["Bing"], "annotation": "Added a point."}
+                ],
+                "nextIDs": {"node": -2, "way": -1, "relation": -1},
+                "index": 1
+            };
+            history.fromJSON(JSON.stringify(json));
+            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [1, 2]}));
+            expect(history.undoAnnotation()).to.eql("Added a point.");
+            expect(history.imageryUsed()).to.eql(["Bing"]);
+            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+        });
+
+        it("restores from v1 JSON (modification)", function() {
+            var json = {
+                "stack": [
+                    {"entities": {}},
+                    {"entities": {"n-1": {"loc": [1, 2], "id": "n-1"}}, "imageryUsed": ["Bing"], "annotation": "Added a point."},
+                    {"entities": {"n-1": {"loc": [2, 3], "id": "n-1", "v": 1}}, "imageryUsed": ["Bing"], "annotation": "Moved a point."}
+                ],
+                "nextIDs": {"node": -2, "way": -1, "relation": -1},
+                "index": 2
+            };
+            history.fromJSON(JSON.stringify(json));
+            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [2, 3], v: 1}));
+            expect(history.undoAnnotation()).to.eql("Moved a point.");
+            expect(history.imageryUsed()).to.eql(["Bing"]);
+            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+        });
+
+        it("restores from v1 JSON (deletion)", function() {
+            var json = {
+                "stack": [
+                    {"entities": {}},
+                    {"entities": {"n1": "undefined"}, "imageryUsed": ["Bing"], "annotation": "Deleted a point."}
+                ],
+                "nextIDs": {"node": -1, "way": -2, "relation": -3},
+                "index": 1
+            };
+            history.fromJSON(JSON.stringify(json));
+            history.merge({n1: iD.Node({id: 'n1'})});
+            expect(history.graph().hasEntity('n1')).to.be.undefined;
+            expect(history.undoAnnotation()).to.eql("Deleted a point.");
+            expect(history.imageryUsed()).to.eql(["Bing"]);
+            expect(iD.Entity.id.next).to.eql({node: -1, way: -2, relation: -3});
+        });
+
+        it("restores from v2 JSON (creation)", function() {
+            var json = {
+                "version": 2,
+                "entities": [
+                    {"loc": [1, 2], "id": "n-1"}
+                ],
+                "stack": [
+                    {},
+                    {"modified": ["n-1v0"], "imageryUsed": ["Bing"], "annotation": "Added a point."}
+                ],
+                "nextIDs": {"node": -2, "way": -1, "relation": -1},
+                "index": 1
+            };
+            history.fromJSON(JSON.stringify(json));
+            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [1, 2]}));
+            expect(history.undoAnnotation()).to.eql("Added a point.");
+            expect(history.imageryUsed()).to.eql(["Bing"]);
+            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+        });
+
+        it("restores from v2 JSON (modification)", function() {
+            var json = {
+                "version": 2,
+                "entities": [
+                    {"loc": [1, 2], "id": "n-1"},
+                    {"loc": [2, 3], "id": "n-1", "v": 1}
+                ],
+                "stack": [
+                    {},
+                    {"modified": ["n-1v0"], "imageryUsed": ["Bing"], "annotation": "Added a point."},
+                    {"modified": ["n-1v1"], "imageryUsed": ["Bing"], "annotation": "Moved a point."}
+                ],
+                "nextIDs": {"node": -2, "way": -1, "relation": -1},
+                "index": 2
+            };
+            history.fromJSON(JSON.stringify(json));
+            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [2, 3], v: 1}));
+            expect(history.undoAnnotation()).to.eql("Moved a point.");
+            expect(history.imageryUsed()).to.eql(["Bing"]);
+            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+        });
+
+        it("restores from v2 JSON (deletion)", function() {
+            var json = {
+                "version": 2,
+                "entities": [],
+                "stack": [
+                    {},
+                    {"deleted": ["n1"], "imageryUsed": ["Bing"], "annotation": "Deleted a point."}
+                ],
+                "nextIDs": {"node": -1, "way": -2, "relation": -3},
+                "index": 1
+            };
+            history.fromJSON(JSON.stringify(json));
+            history.merge({n1: iD.Node({id: 'n1'})});
+            expect(history.graph().hasEntity('n1')).to.be.undefined;
+            expect(history.undoAnnotation()).to.eql("Deleted a point.");
+            expect(history.imageryUsed()).to.eql(["Bing"]);
+            expect(iD.Entity.id.next).to.eql({node: -1, way: -2, relation: -3});
         });
     });
 });

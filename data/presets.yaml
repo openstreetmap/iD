@@ -42,6 +42,8 @@ en:
           destination: 
             title: Destination
             description: Access permitted only to reach a destination
+      access_toilets: 
+        label: Access
       address: 
         label: Address
         placeholders: 
@@ -56,8 +58,14 @@ en:
         label: Type
       amenity: 
         label: Type
+      artist: 
+        label: Artist
+      artwork_type: 
+        label: Type
       atm: 
         label: ATM
+      backrest: 
+        label: Backrest
       barrier: 
         label: Type
       bicycle_parking: 
@@ -107,8 +115,16 @@ en:
         placeholder: +31 42 123 4567
       fee: 
         label: Fee
+      fire_hydrant/type: 
+        label: Type
       fixme: 
         label: Fix Me
+      generator/method: 
+        label: Method
+      generator/source: 
+        label: Source
+      generator/type: 
+        label: Type
       highway: 
         label: Type
       historic: 
@@ -139,6 +155,8 @@ en:
       levels: 
         label: Levels
         placeholder: "2, 4, 6..."
+      lit: 
+        label: Lit
       location: 
         label: Location
       man_made: 
@@ -222,6 +240,8 @@ en:
         label: Supervised
       surface: 
         label: Surface
+      toilets/disposal: 
+        label: Disposal
       tourism: 
         label: Type
       towertype: 
@@ -230,6 +250,8 @@ en:
         label: Type
       trail_visibility: 
         label: Trail Visibility
+      vending: 
+        label: Type of Goods
       water: 
         label: Type
       waterway: 
@@ -279,6 +301,9 @@ en:
       amenity: 
         name: Amenity
         terms: "<translate with synonyms or related terms for 'Amenity', separated by commas>"
+      amenity/arts_centre: 
+        name: Arts Center
+        terms: "<translate with synonyms or related terms for 'Arts Center', separated by commas>"
       amenity/atm: 
         name: ATM
         terms: "<translate with synonyms or related terms for 'ATM', separated by commas>"
@@ -297,6 +322,9 @@ en:
       amenity/bicycle_rental: 
         name: Bicycle Rental
         terms: "<translate with synonyms or related terms for 'Bicycle Rental', separated by commas>"
+      amenity/boat_rental: 
+        name: Boat Rental
+        terms: "<translate with synonyms or related terms for 'Boat Rental', separated by commas>"
       amenity/cafe: 
         name: Cafe
         terms: "<translate with synonyms or related terms for 'Cafe', separated by commas>"
@@ -387,6 +415,9 @@ en:
       amenity/pub: 
         name: Pub
         terms: "<translate with synonyms or related terms for 'Pub', separated by commas>"
+      amenity/ranger_station: 
+        name: Ranger Station
+        terms: "<translate with synonyms or related terms for 'Ranger Station', separated by commas>"
       amenity/restaurant: 
         name: Restaurant
         terms: "<translate with synonyms or related terms for 'Restaurant', separated by commas>"
@@ -414,6 +445,9 @@ en:
       amenity/university: 
         name: University
         terms: "<translate with synonyms or related terms for 'University', separated by commas>"
+      amenity/vending_machine: 
+        name: Vending Machine
+        terms: "<translate with synonyms or related terms for 'Vending Machine', separated by commas>"
       amenity/waste_basket: 
         name: Waste Basket
         terms: "<translate with synonyms or related terms for 'Waste Basket', separated by commas>"
@@ -501,6 +535,12 @@ en:
       building/residential: 
         name: Residential Building
         terms: "<translate with synonyms or related terms for 'Residential Building', separated by commas>"
+      emergency/ambulance_station: 
+        name: Ambulance Station
+        terms: "<translate with synonyms or related terms for 'Ambulance Station', separated by commas>"
+      emergency/fire_hydrant: 
+        name: Fire Hydrant
+        terms: "<translate with synonyms or related terms for 'Fire Hydrant', separated by commas>"
       emergency/phone: 
         name: Emergency Phone
         terms: "<translate with synonyms or related terms for 'Emergency Phone', separated by commas>"
@@ -585,6 +625,9 @@ en:
       highway/steps: 
         name: Steps
         terms: "<translate with synonyms or related terms for 'Steps', separated by commas>"
+      highway/stop: 
+        name: Stop Sign
+        terms: "<translate with synonyms or related terms for 'Stop Sign', separated by commas>"
       highway/tertiary: 
         name: Tertiary Road
         terms: "<translate with synonyms or related terms for 'Tertiary Road', separated by commas>"
@@ -717,6 +760,9 @@ en:
       leisure/pitch/basketball: 
         name: Basketball Court
         terms: "<translate with synonyms or related terms for 'Basketball Court', separated by commas>"
+      leisure/pitch/skateboard: 
+        name: Skate Park
+        terms: "<translate with synonyms or related terms for 'Skate Park', separated by commas>"
       leisure/pitch/soccer: 
         name: Soccer Field
         terms: "<translate with synonyms or related terms for 'Soccer Field', separated by commas>"
@@ -732,12 +778,18 @@ en:
       leisure/slipway: 
         name: Slipway
         terms: "<translate with synonyms or related terms for 'Slipway', separated by commas>"
+      leisure/sports_center: 
+        name: Sports Center
+        terms: "<translate with synonyms or related terms for 'Sports Center', separated by commas>"
       leisure/stadium: 
         name: Stadium
         terms: "<translate with synonyms or related terms for 'Stadium', separated by commas>"
       leisure/swimming_pool: 
         name: Swimming Pool
         terms: "<translate with synonyms or related terms for 'Swimming Pool', separated by commas>"
+      leisure/track: 
+        name: Race Track
+        terms: "<translate with synonyms or related terms for 'Race Track', separated by commas>"
       line: 
         name: Line
         terms: "<translate with synonyms or related terms for 'Line', separated by commas>"
@@ -792,6 +844,9 @@ en:
       natural/coastline: 
         name: Coastline
         terms: "<translate with synonyms or related terms for 'Coastline', separated by commas>"
+      natural/fell: 
+        name: Fell
+        terms: "<translate with synonyms or related terms for 'Fell', separated by commas>"
       natural/glacier: 
         name: Glacier
         terms: "<translate with synonyms or related terms for 'Glacier', separated by commas>"
@@ -804,6 +859,9 @@ en:
       natural/peak: 
         name: Peak
         terms: "<translate with synonyms or related terms for 'Peak', separated by commas>"
+      natural/scree: 
+        name: Scree
+        terms: "<translate with synonyms or related terms for 'Scree', separated by commas>"
       natural/scrub: 
         name: Scrub
         terms: "<translate with synonyms or related terms for 'Scrub', separated by commas>"
@@ -865,8 +923,8 @@ en:
         name: Power
         terms: "<translate with synonyms or related terms for 'Power', separated by commas>"
       power/generator: 
-        name: Power Plant
-        terms: "<translate with synonyms or related terms for 'Power Plant', separated by commas>"
+        name: Power Generator
+        terms: "<translate with synonyms or related terms for 'Power Generator', separated by commas>"
       power/line: 
         name: Power Line
         terms: "<translate with synonyms or related terms for 'Power Line', separated by commas>"
@@ -891,6 +949,9 @@ en:
       railway/disused: 
         name: Disused Railway
         terms: "<translate with synonyms or related terms for 'Disused Railway', separated by commas>"
+      railway/halt: 
+        name: Railway Halt
+        terms: "<translate with synonyms or related terms for 'Railway Halt', separated by commas>"
       railway/level_crossing: 
         name: Level Crossing
         terms: "<translate with synonyms or related terms for 'Level Crossing', separated by commas>"
@@ -1161,6 +1222,9 @@ en:
       type/route/foot: 
         name: Foot Route
         terms: "<translate with synonyms or related terms for 'Foot Route', separated by commas>"
+      type/route/hiking: 
+        name: Hiking Route
+        terms: "<translate with synonyms or related terms for 'Hiking Route', separated by commas>"
       type/route/pipeline: 
         name: Pipeline Route
         terms: "<translate with synonyms or related terms for 'Pipeline Route', separated by commas>"

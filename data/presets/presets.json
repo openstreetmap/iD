@@ -170,6 +170,25 @@
         },
         "name": "Amenity"
     },
+    "amenity/arts_centre": {
+        "name": "Arts Center",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "arts",
+            "arts centre"
+        ],
+        "tags": {
+            "amenity": "arts_centre"
+        },
+        "icon": "theatre",
+        "fields": [
+            "building_area",
+            "address"
+        ]
+    },
     "amenity/atm": {
         "icon": "bank",
         "fields": [
@@ -250,6 +269,9 @@
         "tags": {
             "amenity": "bench"
         },
+        "fields": [
+            "backrest"
+        ],
         "name": "Bench"
     },
     "amenity/bicycle_parking": {
@@ -285,6 +307,19 @@
             "amenity": "bicycle_rental"
         },
         "name": "Bicycle Rental"
+    },
+    "amenity/boat_rental": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "boat_rental"
+        },
+        "fields": [
+            "operator"
+        ],
+        "name": "Boat Rental"
     },
     "amenity/cafe": {
         "icon": "cafe",
@@ -523,6 +558,15 @@
             "point",
             "vertex",
             "area"
+        ],
+        "terms": [
+            "petrol",
+            "fuel",
+            "propane",
+            "diesel",
+            "lng",
+            "cng",
+            "biodiesel"
         ],
         "tags": {
             "amenity": "fuel"
@@ -927,6 +971,29 @@
         "terms": [],
         "name": "Pub"
     },
+    "amenity/ranger_station": {
+        "fields": [
+            "building_area",
+            "opening_hours",
+            "operator",
+            "phone"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "visitor center",
+            "visitor centre",
+            "permit center",
+            "permit centre",
+            "backcountry office"
+        ],
+        "tags": {
+            "amenity": "ranger_station"
+        },
+        "name": "Ranger Station"
+    },
     "amenity/restaurant": {
         "icon": "restaurant",
         "fields": [
@@ -955,6 +1022,7 @@
             "eating house",
             "eating place",
             "fast-food place",
+            "fish and chips",
             "greasy spoon",
             "grill",
             "hamburger stand",
@@ -1078,8 +1146,10 @@
     },
     "amenity/toilets": {
         "fields": [
+            "toilets/disposal",
             "operator",
-            "building_area"
+            "building_area",
+            "access_toilets"
         ],
         "geometry": [
             "point",
@@ -1088,7 +1158,15 @@
         ],
         "terms": [
             "bathroom",
-            "restroom"
+            "restroom",
+            "outhouse",
+            "privy",
+            "head",
+            "lavatory",
+            "latrine",
+            "water closet",
+            "WC",
+            "W.C."
         ],
         "tags": {
             "amenity": "toilets"
@@ -1112,7 +1190,8 @@
             "city government",
             "courthouse",
             "municipal building",
-            "municipal center"
+            "municipal center",
+            "municipal centre"
         ],
         "tags": {
             "amenity": "townhall"
@@ -1138,6 +1217,19 @@
         ],
         "name": "University"
     },
+    "amenity/vending_machine": {
+        "fields": [
+            "vending",
+            "operator"
+        ],
+        "geometry": [
+            "point"
+        ],
+        "tags": {
+            "amenity": "vending_machine"
+        },
+        "name": "Vending Machine"
+    },
     "amenity/waste_basket": {
         "icon": "waste-basket",
         "geometry": [
@@ -1157,7 +1249,9 @@
     },
     "area": {
         "name": "Area",
-        "tags": {},
+        "tags": {
+            "area": "yes"
+        },
         "geometry": [
             "area"
         ]
@@ -1252,7 +1346,8 @@
         "tags": {
             "barrier": "entrance"
         },
-        "name": "Entrance"
+        "name": "Entrance",
+        "searchable": false
     },
     "barrier/fence": {
         "geometry": [
@@ -1494,6 +1589,33 @@
         },
         "name": "Residential Building"
     },
+    "emergency/ambulance_station": {
+        "fields": [
+            "operator"
+        ],
+        "geometry": [
+            "area",
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "emergency": "ambulance_station"
+        },
+        "name": "Ambulance Station"
+    },
+    "emergency/fire_hydrant": {
+        "fields": [
+            "fire_hydrant/type"
+        ],
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "emergency": "fire_hydrant"
+        },
+        "name": "Fire Hydrant"
+    },
     "emergency/phone": {
         "icon": "emergency-telephone",
         "fields": [
@@ -1516,7 +1638,8 @@
             "entrance": "*"
         },
         "fields": [
-            "entrance"
+            "entrance",
+            "address"
         ],
         "name": "Entrance"
     },
@@ -1592,10 +1715,11 @@
     "highway/cycleway": {
         "icon": "highway-cycleway",
         "fields": [
-            "oneway",
+            "surface",
+            "lit",
             "structure",
             "access",
-            "surface"
+            "oneway"
         ],
         "geometry": [
             "line"
@@ -1652,9 +1776,9 @@
         "icon": "highway-living-street",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [
@@ -1681,10 +1805,10 @@
         "icon": "highway-motorway",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
             "lanes",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1713,9 +1837,9 @@
         "icon": "highway-motorway-link",
         "fields": [
             "oneway_yes",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1772,10 +1896,10 @@
         "icon": "highway-primary",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
             "lanes",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1792,9 +1916,9 @@
         "icon": "highway-primary-link",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1815,9 +1939,9 @@
         "icon": "highway-residential",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [
@@ -1833,9 +1957,9 @@
         "icon": "highway-road",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [
@@ -1851,10 +1975,10 @@
         "icon": "highway-secondary",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
             "lanes",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1871,9 +1995,9 @@
         "icon": "highway-secondary-link",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -1895,9 +2019,9 @@
         "fields": [
             "service",
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [
@@ -2007,14 +2131,26 @@
         ],
         "name": "Steps"
     },
+    "highway/stop": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "highway": "stop"
+        },
+        "terms": [
+            "stop sign"
+        ],
+        "name": "Stop Sign"
+    },
     "highway/tertiary": {
         "icon": "highway-tertiary",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
             "lanes",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -2031,9 +2167,9 @@
         "icon": "highway-tertiary-link",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -2055,9 +2191,9 @@
         "fields": [
             "tracktype",
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [
@@ -2087,10 +2223,10 @@
         "icon": "highway-trunk",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
             "lanes",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -2107,9 +2243,9 @@
         "icon": "highway-trunk-link",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface",
             "ref"
         ],
@@ -2141,9 +2277,9 @@
         "icon": "highway-unclassified",
         "fields": [
             "oneway",
+            "maxspeed",
             "structure",
             "access",
-            "maxspeed",
             "surface"
         ],
         "geometry": [
@@ -2619,6 +2755,22 @@
         "terms": [],
         "name": "Basketball Court"
     },
+    "leisure/pitch/skateboard": {
+        "icon": "pitch",
+        "fields": [
+            "surface"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "pitch",
+            "sport": "skateboard"
+        },
+        "terms": [],
+        "name": "Skate Park"
+    },
     "leisure/pitch/soccer": {
         "icon": "soccer",
         "fields": [
@@ -2691,6 +2843,20 @@
         },
         "name": "Slipway"
     },
+    "leisure/sports_center": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "sports_centre"
+        },
+        "terms": [
+            "gym"
+        ],
+        "icon": "sports",
+        "name": "Sports Center"
+    },
     "leisure/stadium": {
         "geometry": [
             "point",
@@ -2715,6 +2881,21 @@
         },
         "icon": "swimming",
         "name": "Swimming Pool"
+    },
+    "leisure/track": {
+        "icon": "pitch",
+        "fields": [
+            "surface"
+        ],
+        "geometry": [
+            "point",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "leisure": "track"
+        },
+        "name": "Race Track"
     },
     "line": {
         "name": "Line",
@@ -2931,6 +3112,16 @@
         },
         "name": "Coastline"
     },
+    "natural/fell": {
+        "geometry": [
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "natural": "fell"
+        },
+        "name": "Fell"
+    },
     "natural/glacier": {
         "geometry": [
             "area"
@@ -2990,6 +3181,18 @@
             "top"
         ],
         "name": "Peak"
+    },
+    "natural/scree": {
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "natural": "scree"
+        },
+        "terms": [
+            "loose rocks"
+        ],
+        "name": "Scree"
     },
     "natural/scrub": {
         "geometry": [
@@ -3255,6 +3458,7 @@
         "name": "Power"
     },
     "power/generator": {
+        "name": "Power Generator",
         "geometry": [
             "point",
             "vertex",
@@ -3263,7 +3467,11 @@
         "tags": {
             "power": "generator"
         },
-        "name": "Power Plant"
+        "fields": [
+            "generator/source",
+            "generator/method",
+            "generator/type"
+        ]
     },
     "power/line": {
         "geometry": [
@@ -3360,6 +3568,24 @@
         ],
         "terms": [],
         "name": "Disused Railway"
+    },
+    "railway/halt": {
+        "icon": "rail",
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "railway": "halt"
+        },
+        "name": "Railway Halt",
+        "terms": [
+            "break",
+            "interrupt",
+            "rest",
+            "wait",
+            "interruption"
+        ]
     },
     "railway/level_crossing": {
         "icon": "cross",
@@ -3559,6 +3785,12 @@
             "point",
             "vertex",
             "area"
+        ],
+        "terms": [
+            "nail spa",
+            "spa",
+            "salon",
+            "tanning"
         ],
         "tags": {
             "shop": "beauty"
@@ -3955,6 +4187,9 @@
             "vertex",
             "area"
         ],
+        "terms": [
+            "garden centre"
+        ],
         "tags": {
             "shop": "garden_centre"
         },
@@ -4311,6 +4546,7 @@
             "outlet store",
             "shop",
             "shopping center",
+            "shopping centre",
             "shopping plaza",
             "stand",
             "store",
@@ -4455,6 +4691,10 @@
         "name": "Alpine Hut"
     },
     "tourism/artwork": {
+        "fields": [
+            "artwork_type",
+            "artist"
+        ],
         "icon": "art-gallery",
         "geometry": [
             "point",
@@ -4464,6 +4704,11 @@
         "tags": {
             "tourism": "artwork"
         },
+        "terms": [
+            "mural",
+            "sculpture",
+            "statue"
+        ],
         "name": "Artwork"
     },
     "tourism/attraction": {
@@ -4848,6 +5093,22 @@
             "route": "foot"
         },
         "name": "Foot Route",
+        "icon": "route-foot",
+        "fields": [
+            "ref",
+            "operator",
+            "network"
+        ]
+    },
+    "type/route/hiking": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "hiking"
+        },
+        "name": "Hiking Route",
         "icon": "route-foot",
         "fields": [
             "ref",

@@ -12,21 +12,25 @@ iD.ui.intro = function(context) {
             background = context.background().baseLayerSource(),
             opacity = d3.select('.background-layer').style('opacity'),
             loadedTiles = context.connection().loadedTiles(),
-            baseEntities = context.history().graph().base().entities;
+            baseEntities = context.history().graph().base().entities,
+            introGraph;
 
         // Load semi-real data used in intro
         context.connection().toggle(false).flush();
         context.history().save().reset();
-        context.history().merge(iD.Graph().load(JSON.parse(iD.introGraph)).entities);
+        
+        introGraph = JSON.parse(iD.introGraph);
+        for (var key in introGraph) {
+            introGraph[key] = iD.Entity(introGraph[key]);
+        }
+        context.history().merge(iD.Graph().load(introGraph).entities);
         context.background().bing();
 
         // Block saving
         var savebutton = d3.select('#bar button.save'),
             save = savebutton.on('click');
         savebutton.on('click', null);
-
-        var beforeunload = window.onbeforeunload;
-        window.onbeforeunload = null;
+        context.inIntro(true);
 
         d3.select('.background-layer').style('opacity', 1);
 
@@ -59,7 +63,7 @@ iD.ui.intro = function(context) {
             context.background().baseLayerSource(background);
             if (history) context.history().fromJSON(history);
             window.location.replace(hash);
-            window.onbeforeunload = beforeunload;
+            context.inIntro(false);
             d3.select('#bar button.save').on('click', save);
         });
 
@@ -99,7 +103,7 @@ iD.ui.intro = function(context) {
 };
 
 iD.ui.intro.pointBox = function(point, context) {
-    var rect = context.surface().node().getBoundingClientRect();
+    var rect = context.surfaceRect();
     point = context.projection(point);
     return {
         left: point[0] + rect.left - 30,
@@ -111,7 +115,7 @@ iD.ui.intro.pointBox = function(point, context) {
 
 iD.ui.intro.pad = function(box, padding, context) {
     if (box instanceof Array) {
-        var rect = context.surface().node().getBoundingClientRect();
+        var rect = context.surfaceRect();
         box = context.projection(box);
         box = {
             left: box[0] + rect.left,

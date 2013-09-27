@@ -48,6 +48,21 @@ describe('iD.Way', function() {
         });
     });
 
+    describe("#affix", function () {
+        it("returns 'prefix' if the way starts with the given node", function () {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).affix('a')).to.equal('prefix');
+        });
+
+        it("returns 'suffix' if the way ends with the given node", function () {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).affix('c')).to.equal('suffix');
+        });
+
+        it("returns falsy if the way does not start or end with the given node", function () {
+            expect(iD.Way({nodes: ['a', 'b', 'c']}).affix('b')).not.to.be.ok;
+            expect(iD.Way({nodes: []}).affix('b')).not.to.be.ok;
+        });
+    });
+
     describe("#extent", function () {
         it("returns the minimal extent containing all member nodes", function () {
             var node1 = iD.Node({loc: [0, 0]}),
@@ -282,8 +297,8 @@ describe('iD.Way', function() {
 
         it("converts an area to a GeoJSON Polygon feature", function () {
             var a = iD.Node({loc: [1, 2]}),
-                b = iD.Node({loc: [3, 4]}),
-                c = iD.Node({loc: [5, 6]}),
+                b = iD.Node({loc: [5, 6]}),
+                c = iD.Node({loc: [3, 4]}),
                 w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id, a.id]}),
                 graph = iD.Graph([a, b, c, w]),
                 json = w.asGeoJSON(graph, true);
@@ -291,7 +306,18 @@ describe('iD.Way', function() {
             expect(json.type).to.equal('Feature');
             expect(json.properties).to.eql({area: 'yes'});
             expect(json.geometry.type).to.equal('Polygon');
-            expect(json.geometry.coordinates).to.eql([[[1, 2], [3, 4], [5, 6], [1, 2]]]);
+            expect(json.geometry.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
+        });
+
+        it("forces clockwise polygon winding order", function () {
+            var a = iD.Node({loc: [1, 2]}),
+                b = iD.Node({loc: [5, 6]}),
+                c = iD.Node({loc: [3, 4]}),
+                w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, c.id, b.id, a.id]}),
+                graph = iD.Graph([a, b, c, w]),
+                json = w.asGeoJSON(graph, true);
+
+            expect(json.geometry.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
         });
     });
 });

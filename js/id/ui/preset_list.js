@@ -16,7 +16,7 @@ iD.ui.PresetList = function(context) {
         var message = messagewrap.append('h3')
             .text(t('inspector.choose'));
 
-        if (currentPreset) {
+        if (context.entity(id).isUsed(context.graph())) {
             messagewrap.append('button')
                 .attr('class', 'preset-choose')
                 .on('click', function() { event.choose(currentPreset); })
@@ -71,6 +71,7 @@ iD.ui.PresetList = function(context) {
                 list.call(drawList, results);
             } else {
                 list.call(drawList, context.presets().defaults(geometry, 36));
+                message.text(t('inspector.choose'));
             }
         }
 
@@ -226,6 +227,7 @@ iD.ui.PresetList = function(context) {
     presetList.entityID = function(_) {
         if (!arguments.length) return id;
         id = _;
+        presetList.preset(context.presets().match(context.entity(id), context.graph()));
         return presetList;
     };
 

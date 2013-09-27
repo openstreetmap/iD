@@ -3,9 +3,9 @@
     "fields": [
         "tracktype",
         "oneway",
+        "maxspeed",
         "structure",
         "access",
-        "maxspeed",
         "surface"
     ],
     "geometry": [

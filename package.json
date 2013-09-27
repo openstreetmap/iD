@@ -1,6 +1,6 @@
 {
   "name": "iD",
-  "version": "1.1.0rc1",
+  "version": "1.2.0",
   "description": "a new editor for openstreetmap",
   "main": "iD.js",
   "directories": {
@@ -29,13 +29,14 @@
     "chai": "~1.4",
     "sinon": "~1.6",
     "sinon-chai": "~2.3.1",
-    "happen": "~0.1.2",
+    "happen": "0.1.2",
     "glob": "~3.1.21",
     "js-yaml": "~2.0.3",
     "request": "~2.16.2",
     "jsonschema": "~0.3.2",
     "node-sprite": "~0.1.2",
-    "delve": "0.2"
+    "delve": "0.2",
+    "editor-imagery-index": "git://github.com/osmlab/editor-imagery-index.git#gh-pages"
   },
   "engines": {
     "node": ">=0.10.0"

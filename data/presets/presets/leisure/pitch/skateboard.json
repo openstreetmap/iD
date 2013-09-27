@@ -1,0 +1,16 @@
+{
+    "icon": "pitch",
+    "fields": [
+        "surface"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "skateboard"
+    },
+    "terms": [],
+    "name": "Skate Park"
+}

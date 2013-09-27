@@ -7,33 +7,31 @@ iD.Background = function(context) {
         overlayLayers = [];
 
     var backgroundSources = iD.data.imagery.map(function(source) {
-        if (source.sourcetag === 'Bing') {
+        if (source.type === 'bing') {
             return iD.BackgroundSource.Bing(source, dispatch);
         } else {
-            return iD.BackgroundSource.template(source);
+            return iD.BackgroundSource(source);
         }
     });
 
-    backgroundSources.push(iD.BackgroundSource.Custom);
-
-    function findSource(sourcetag) {
+    function findSource(id) {
         return _.find(backgroundSources, function(d) {
-            return d.data.sourcetag && d.data.sourcetag === sourcetag;
+            return d.id && d.id === id;
         });
     }
 
     function updateImagery() {
-        var b = background.baseLayerSource().data,
-            o = overlayLayers.map(function (d) { return d.source().data.sourcetag; }).join(','),
+        var b = background.baseLayerSource(),
+            o = overlayLayers.map(function (d) { return d.source().id; }).join(','),
             q = iD.util.stringQs(location.hash.substring(1));
 
-        var tag = b.sourcetag;
-        if (!tag && b.name === 'Custom') {
-            tag = 'custom:' + b.template;
+        var id = b.id;
+        if (!id && b.name === 'Custom') {
+            id = 'custom:' + b.template;
         }
 
-        if (tag) {
-            q.background = tag;
+        if (id) {
+            q.background = id;
         } else {
             delete q.background;
         }
@@ -50,11 +48,14 @@ iD.Background = function(context) {
         if (b.name === 'Custom') {
             imageryUsed.push('Custom (' + b.template + ')');
         } else {
-            imageryUsed.push(b.sourcetag || b.name);
+            imageryUsed.push(b.id || b.name);
         }
 
         overlayLayers.forEach(function (d) {
-            imageryUsed.push(d.source().data.sourcetag || d.source().data.name);
+            var source = d.source();
+            if (!source.isLocatorOverlay()) {
+                imageryUsed.push(source.id || source.name);
+            }
         });
 
         if (background.showsGpxLayer()) {
@@ -82,7 +83,7 @@ iD.Background = function(context) {
         gpx.call(gpxLayer);
 
         var overlays = selection.selectAll('.overlay-layer')
-            .data(overlayLayers, function(d) { return d.source().data.name });
+            .data(overlayLayers, function(d) { return d.source().name });
 
         overlays.enter().insert('div', '.layer-data')
             .attr('class', 'layer-layer overlay-layer');
@@ -96,11 +97,8 @@ iD.Background = function(context) {
     }
 
     background.sources = function(extent) {
-        return backgroundSources.filter(function(layer) {
-            return !layer.data.extents ||
-                layer.data.extents.some(function(layerExtent) {
-                    return iD.geo.Extent(layerExtent).intersects(extent);
-                });
+        return backgroundSources.filter(function(source) {
+            return source.intersects(extent);
         });
     };
 
@@ -149,7 +147,7 @@ iD.Background = function(context) {
 
     background.showsLayer = function(d) {
         return d === baseLayer.source() ||
-            (d.data.name === 'Custom' && baseLayer.source().data.name === 'Custom') ||
+            (d.name === 'Custom' && baseLayer.source().name === 'Custom') ||
             overlayLayers.some(function(l) { return l.source() === d; });
     };
 
@@ -166,7 +164,7 @@ iD.Background = function(context) {
             }
         }
 
-        layer = iD.TileLayer('overlay')
+        layer = iD.TileLayer()
             .source(d)
             .projection(context.projection)
             .dimensions(baseLayer.dimensions());
@@ -177,14 +175,14 @@ iD.Background = function(context) {
     };
 
     background.nudge = function(d, zoom) {
-        baseLayer.nudge(d, zoom);
+        baseLayer.source().nudge(d, zoom);
         dispatch.change();
         return background;
     };
 
     background.offset = function(d) {
-        if (!arguments.length) return baseLayer.offset();
-        baseLayer.offset(d);
+        if (!arguments.length) return baseLayer.source().offset();
+        baseLayer.source().offset(d);
         dispatch.change();
         return background;
     };
@@ -193,12 +191,20 @@ iD.Background = function(context) {
         chosen = q.background || q.layer;
 
     if (chosen && chosen.indexOf('custom:') === 0) {
-        background.baseLayerSource(iD.BackgroundSource.template({
+        background.baseLayerSource(iD.BackgroundSource({
             template: chosen.replace(/^custom:/, ''),
             name: 'Custom'
         }));
     } else {
         background.baseLayerSource(findSource(chosen) || findSource("Bing"));
+    }
+
+    var locator = _.find(backgroundSources, function(d) {
+        return d.overlay && d.default;
+    });
+
+    if (locator) {
+        background.toggleOverlayLayer(locator);
     }
 
     var overlays = (q.overlays || '').split(',');

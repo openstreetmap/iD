@@ -27,6 +27,8 @@ are available as regular URL query parameters:
 * `lat`, `lon`, `zoom` - Self-explanatory.
 * `node`, `way`, `relation` - Select the specified entity.
 
+In addition, the `background` parameter is available as a hash parameter as above.
+
 ## CSS selectors
 
 iD has a documented and stable set of classes that can be used to apply style or

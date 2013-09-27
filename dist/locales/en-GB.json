@@ -1,0 +1,20 @@
+{
+    "operations": {
+        "rotate": {
+            "description": "Rotate this object around its centre point."
+        }
+    },
+    "intro": {
+        "lines": {
+            "add": "Lines are used to represent features such as roads, railways and rivers. **Click the Line button to add a new line.**"
+        }
+    },
+    "presets": {
+        "presets": {
+            "amenity/fuel": {
+                "name": "Petrol Station",
+                "terms": "gas, fuel, propane, diesel, lng, cng, biodiesel"
+            }
+        }
+    }
+}

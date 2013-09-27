@@ -75,7 +75,11 @@ iD.presets.Preset = function(id, preset, fields) {
         tags = _.clone(tags);
 
         for (var k in applyTags) {
-            if (applyTags[k] !== '*') tags[k] = applyTags[k];
+            if (applyTags[k] === '*') {
+                tags[k] = 'yes';
+            } else {
+                tags[k] = applyTags[k];
+            }
         }
 
         for (var f in preset.fields) {

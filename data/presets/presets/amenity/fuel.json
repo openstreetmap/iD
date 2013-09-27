@@ -10,6 +10,15 @@
         "vertex",
         "area"
     ],
+    "terms": [
+        "petrol",
+        "fuel",
+        "propane",
+        "diesel",
+        "lng",
+        "cng",
+        "biodiesel"
+    ],
     "tags": {
         "amenity": "fuel"
     },
