@@ -1068,10 +1068,10 @@
                 "name": "Deptak"
             },
             "highway/primary": {
-                "name": "Droga krajowa"
+                "name": "Droga pierwszorzędna"
             },
             "highway/primary_link": {
-                "name": "Droga krajowa - wjazd/zjazd",
+                "name": "Droga pierwszorzędna - łącznik",
                 "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/residential": {
@@ -1081,10 +1081,10 @@
                 "name": "Nieokreślona droga"
             },
             "highway/secondary": {
-                "name": "Droga wojewódzka"
+                "name": "Droga drugorzędna"
             },
             "highway/secondary_link": {
-                "name": "Droga wojewódzka - wjazd/zjazd",
+                "name": "Droga drugorzędna - łącznik",
                 "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/service": {
@@ -1109,10 +1109,10 @@
                 "name": "Schody"
             },
             "highway/tertiary": {
-                "name": "Droga powiatowa"
+                "name": "Droga trzeciorzędna"
             },
             "highway/tertiary_link": {
-                "name": "Droga powiatowa - wjazd/zjazd",
+                "name": "Droga trzeciorzędna - łącznik",
                 "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/track": {
@@ -1126,14 +1126,14 @@
                 "name": "Droga ekspresowa"
             },
             "highway/trunk_link": {
-                "name": "Droga ekspresowa - zjazd/wjazd",
+                "name": "Droga ekspresowa - łącznik",
                 "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/turning_circle": {
                 "name": "Miejsce do zawracania"
             },
             "highway/unclassified": {
-                "name": "Droga niesklasyfikowana"
+                "name": "Droga czwartorzędna"
             },
             "historic": {
                 "name": "Miejsce historyczne"
@@ -1157,16 +1157,16 @@
                 "name": "Ruiny"
             },
             "historic/wayside_cross": {
-                "name": "Przydrożny krzyż"
+                "name": "Krzyż przydrożny"
             },
             "historic/wayside_shrine": {
-                "name": "Przydrożna kapliczka"
+                "name": "Kapliczka przydrożna"
             },
             "landuse": {
                 "name": "Użytkowanie gruntów"
             },
             "landuse/allotments": {
-                "name": "Działki"
+                "name": "Ogródki działkowe"
             },
             "landuse/basin": {
                 "name": "Zbiornik wodny"
@@ -1184,7 +1184,7 @@
                 "name": "Teren rolny"
             },
             "landuse/farmyard": {
-                "name": "Podwórze gospodarskie"
+                "name": "Zabudowa rolnicza"
             },
             "landuse/forest": {
                 "name": "Las"
@@ -1205,7 +1205,7 @@
                 "name": "Kamieniołom"
             },
             "landuse/residential": {
-                "name": "Zabudowa mieszkaniowa"
+                "name": "Zabudowa mieszkalna"
             },
             "landuse/retail": {
                 "name": "Obszar handlowy"
