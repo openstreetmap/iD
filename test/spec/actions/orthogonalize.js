@@ -97,12 +97,12 @@ describe("iD.actions.Orthogonalize", function () {
                     'd': iD.Node({id: 'd', loc: tests[i][3]}),
                     '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 }),
-                initialWidth = iD.geo.dist(graph.entity('a').loc, graph.entity('b').loc),
+                initialWidth = iD.geo.sphericalDistance(graph.entity('a').loc, graph.entity('b').loc),
                 finalWidth;
 
             graph = iD.actions.Orthogonalize('-', projection)(graph);
 
-            finalWidth = iD.geo.dist(graph.entity('a').loc, graph.entity('b').loc);
+            finalWidth = iD.geo.sphericalDistance(graph.entity('a').loc, graph.entity('b').loc);
             expect(finalWidth / initialWidth).within(0.90, 1.10);
         }
     });

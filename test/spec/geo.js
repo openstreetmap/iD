@@ -18,21 +18,49 @@ describe('iD.geo', function() {
         });
     });
 
-    describe('.dist', function() {
+    describe('.euclideanDistance', function() {
         it('distance between two same points is zero', function() {
             var a = [0, 0],
                 b = [0, 0];
-            expect(iD.geo.dist(a, b)).to.eql(0);
+            expect(iD.geo.euclideanDistance(a, b)).to.eql(0);
         });
         it('a straight 10 unit line is 10', function() {
             var a = [0, 0],
                 b = [10, 0];
-            expect(iD.geo.dist(a, b)).to.eql(10);
+            expect(iD.geo.euclideanDistance(a, b)).to.eql(10);
         });
         it('a pythagorean triangle is right', function() {
             var a = [0, 0],
                 b = [4, 3];
-            expect(iD.geo.dist(a, b)).to.eql(5);
+            expect(iD.geo.euclideanDistance(a, b)).to.eql(5);
+        });
+    });
+
+    describe('.sphericalDistance', function() {
+        it('distance between two same points is zero', function() {
+            var a = [0, 0],
+                b = [0, 0];
+            expect(iD.geo.sphericalDistance(a, b)).to.eql(0);
+        });
+        it('a straight 1 degree line at the equator is aproximately 111 km', function() {
+            var a = [0, 0],
+                b = [1, 0];
+            expect(iD.geo.sphericalDistance(a, b)).to.be.within(100E3,120E3);
+        });
+        it('a pythagorean triangle is right', function() {
+            var a = [0, 0],
+                b = [4, 3];
+            expect(iD.geo.sphericalDistance(a, b)).to.be.within(500E3,600E3);
+        });
+        it('east-west distances at high latitude are shorter', function() {
+            var a = [0, 60],
+                b = [1, 60];
+            expect(iD.geo.sphericalDistance(a, b)).to.be.within(50E3,60E3);
+        });
+        it('north-south distances at high latitude are not shorter', function() {
+            var a = [0, 60],
+                b = [0, 61];
+            expect(iD.geo.sphericalDistance(a, b)).to.be.within(100E3,120E3);
         });
     });
 

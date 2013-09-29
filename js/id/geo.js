@@ -10,14 +10,15 @@ iD.geo.interp = function(p1, p2, t) {
 };
 
 // http://jsperf.com/id-dist-optimization
-iD.geo.dist = function(a, b) {
+iD.geo.euclideanDistance = function(a, b) {
     var x = a[0] - b[0], y = a[1] - b[1];
     return Math.sqrt((x * x) + (y * y));
 };
-iD.geo.geoDist = function(a, b) {
+// Equirectangular approximation of spherical distances on Earth
+iD.geo.sphericalDistance = function(a, b) {
     var x = Math.cos(a[1]*Math.PI/180) * (a[0] - b[0]),
         y = a[1] - b[1];
-    return Math.sqrt((x * x) + (y * y));
+    return 6.3710E6 * Math.sqrt((x * x) + (y * y)) * Math.PI/180;
 };
 
 // Choose the edge with the minimal distance from `point` to its orthogonal
@@ -25,7 +26,7 @@ iD.geo.geoDist = function(a, b) {
 // the closest vertex on that edge. Returns an object with the `index` of the
 // chosen edge, the chosen `loc` on that edge, and the `distance` to to it.
 iD.geo.chooseEdge = function(nodes, point, projection) {
-    var dist = iD.geo.dist,
+    var dist = iD.geo.euclideanDistance,
         points = nodes.map(function(n) { return projection(n.loc); }),
         min = Infinity,
         idx, loc;

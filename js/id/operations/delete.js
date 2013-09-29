@@ -27,8 +27,8 @@ iD.operations.Delete = function(selectedIDs, context) {
                 } else if (i === nodes.length - 1) {
                     i--;
                 } else {
-                    var a = iD.geo.geoDist(entity.loc, context.entity(nodes[i - 1]).loc),
-                        b = iD.geo.geoDist(entity.loc, context.entity(nodes[i + 1]).loc);
+                    var a = iD.geo.sphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc),
+                        b = iD.geo.sphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
                     i = a < b ? i - 1 : i + 1;
                 }
 

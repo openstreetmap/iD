@@ -8,7 +8,7 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
             points = nodes.map(function(n) { return projection(n.loc); }),
             keyPoints = keyNodes.map(function(n) { return projection(n.loc); }),
             centroid = d3.geom.polygon(points).centroid(),
-            radius = d3.median(points, function(p) { return iD.geo.dist(centroid, p); }),
+            radius = d3.median(points, function(p) { return iD.geo.euclideanDistance(centroid, p); }),
             sign = d3.geom.polygon(points).area() > 0 ? 1 : -1,
             ids;
 
@@ -44,7 +44,7 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
             }
 
             // position this key node
-            distance = iD.geo.dist(centroid, keyPoints[i]);
+            distance = iD.geo.euclideanDistance(centroid, keyPoints[i]);
             keyPoints[i] = [
                 centroid[0] + (keyPoints[i][0] - centroid[0]) / distance * radius,
                 centroid[1] + (keyPoints[i][1] - centroid[1]) / distance * radius];
