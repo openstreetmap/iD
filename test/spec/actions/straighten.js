@@ -24,7 +24,7 @@ describe("iD.actions.Straighten", function () {
 
         graph = iD.actions.Straighten('-', projection)(graph);
         
-        expect(graph.entity('-').nodes.sort()).to.eql(['a', 'b', 'c']); 
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
     });
     
     it("does not delete nodes connected to other ways", function() {
