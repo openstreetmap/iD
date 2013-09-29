@@ -39,8 +39,8 @@ iD.modes.DragNode = function(context) {
         return t('operations.move.annotation.' + entity.geometry(context.graph()));
     }
 
-    function connectAnnotation(datum) {
-        return t('operations.connect.annotation.' + datum.geometry(context.graph()));
+    function connectAnnotation(entity) {
+        return t('operations.connect.annotation.' + entity.geometry(context.graph()));
     }
 
     function origin(entity) {
@@ -109,7 +109,7 @@ iD.modes.DragNode = function(context) {
 
         context.replace(
             iD.actions.MoveNode(entity.id, loc),
-            t('operations.move.annotation.' + entity.geometry(context.graph())));
+            moveAnnotation(entity));
     }
 
     function end(entity) {
