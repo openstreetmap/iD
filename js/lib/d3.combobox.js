@@ -5,7 +5,7 @@ d3.combobox = function() {
 
     var fetcher = function(val, cb) {
         cb(data.filter(function(d) {
-            return d.title
+            return d.value
                 .toString()
                 .toLowerCase()
                 .indexOf(val.toLowerCase()) !== -1;
