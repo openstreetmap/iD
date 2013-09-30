@@ -96,26 +96,19 @@ iD.actions.Split = function(nodeId, newWayIds) {
                     graph = graph.replace(relation);
                 }
             } else {
-                var role = relation.memberById(wayA.id).role,
-                    last = wayB.last(),
-                    i = relation.memberById(wayA.id).index,
-                    j;
-
-                for (j = 0; j < relation.members.length; j++) {
-                    var entity = graph.hasEntity(relation.members[j].id);
-                    if (entity && entity.type === 'way' && entity.contains(last)) {
-                        break;
-                    }
-                }
-
                 if (relation === isOuter) {
-                    relation = relation.mergeTags(wayA.tags);
+                    graph = graph.replace(relation.mergeTags(wayA.tags));
                     graph = graph.replace(wayA.update({tags: {}}));
                     graph = graph.replace(wayB.update({tags: {}}));
                 }
 
-                relation = relation.addMember({id: wayB.id, type: 'way', role: role}, i <= j ? i + 1 : i);
-                graph = graph.replace(relation);
+                var member = {
+                    id: wayB.id,
+                    type: 'way',
+                    role: relation.memberById(wayA.id).role
+                };
+
+                graph = iD.actions.AddMember(relation.id, member)(graph);
             }
         });
 
