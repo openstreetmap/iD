@@ -29,7 +29,8 @@ iD.actions.Split = function(nodeId, newWayIds) {
         var wayB = iD.Way({id: newWayId, tags: wayA.tags}),
             nodesA,
             nodesB,
-            isArea = wayA.isArea();
+            isArea = wayA.isArea(),
+            isOuter = iD.geo.isSimpleMultipolygonOuterMember(wayA, graph);
 
         if (wayA.isClosed()) {
             var nodes = wayA.nodes.slice(0, -1),
@@ -107,12 +108,18 @@ iD.actions.Split = function(nodeId, newWayIds) {
                     }
                 }
 
+                if (relation === isOuter) {
+                    relation = relation.mergeTags(wayA.tags);
+                    graph = graph.replace(wayA.update({tags: {}}));
+                    graph = graph.replace(wayB.update({tags: {}}));
+                }
+
                 relation = relation.addMember({id: wayB.id, type: 'way', role: role}, i <= j ? i + 1 : i);
                 graph = graph.replace(relation);
             }
         });
 
-        if (isArea) {
+        if (!isOuter && isArea) {
             var multipolygon = iD.Relation({
                 tags: _.extend({}, wayA.tags, {type: 'multipolygon'}),
                 members: [

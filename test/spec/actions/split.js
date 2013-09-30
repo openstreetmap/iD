@@ -398,6 +398,22 @@ describe("iD.actions.Split", function () {
         expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['~', '-', '=']);
     });
 
+    it("converts simple multipolygon to a proper multipolygon", function () {
+        var graph = iD.Graph({
+                'a': iD.Node({id: 'a'}),
+                'b': iD.Node({id: 'b'}),
+                'c': iD.Node({id: 'c'}),
+                '-': iD.Way({'id': '-', nodes: ['a', 'b', 'c'], tags: {natural: 'water'}}),
+                'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way', role: 'outer'}], tags: {type: 'multipolygon'}})
+            });
+
+        graph = iD.actions.Split('b', ['='])(graph);
+
+        expect(graph.entity('-').tags).to.eql({});
+        expect(graph.entity('r').tags).to.eql({type: 'multipolygon', natural: 'water'});
+        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['-', '=']);
+    });
+
     ['restriction', 'restriction:bus'].forEach(function (type) {
         it("updates a restriction's 'from' role", function () {
             // Situation:
