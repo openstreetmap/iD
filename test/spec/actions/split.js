@@ -305,6 +305,23 @@ describe("iD.actions.Split", function () {
         ]);
     });
 
+    it("splits only the line of a node shared by a line and an area", function () {
+        var graph = iD.Graph({
+            'a': iD.Node({id: 'a', loc: [0,1]}),
+            'b': iD.Node({id: 'b', loc: [1,1]}),
+            'c': iD.Node({id: 'c', loc: [1,0]}),
+            '-': iD.Way({id: '-',  nodes: ['a', 'b', 'c']}),
+            '=': iD.Way({id: '=',  nodes: ['a', 'b', 'c', 'a'], tags: {area: 'yes'}})
+        });
+
+        graph = iD.actions.Split('b', ['~'])(graph);
+
+        expect(graph.entity('-').nodes).to.eql(['a', 'b']);
+        expect(graph.entity('~').nodes).to.eql(['b', 'c']);
+        expect(graph.entity('=').nodes).to.eql(['a', 'b', 'c', 'a']);
+        expect(graph.parentRelations(graph.entity('='))).to.have.length(0);
+    });
+
     it("adds the new way to parent relations (no connections)", function () {
         // Situation:
         //    a ---- b ---- c
