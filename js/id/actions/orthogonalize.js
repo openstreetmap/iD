@@ -59,8 +59,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
 
             // remove empty nodes on straight sections
             for (i = 0; i < points.length; i++) {
-                var node = nodes[i],
-                    a, b, c, p, q, dotp;
+                var node = nodes[i];
 
                 if (graph.parentWays(node).length > 1 || 
                     graph.parentRelations(node).length || 
@@ -69,7 +68,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
                     continue;
                 }
 
-                dotp = normalizedDotProduct(i, points);
+                var dotp = normalizedDotProduct(i, points);
                 if (dotp < -1 + epsilon) {
                     graph = iD.actions.DeleteNode(nodes[i].id)(graph);
                 }
