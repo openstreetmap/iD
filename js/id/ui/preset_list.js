@@ -213,7 +213,7 @@ iD.ui.PresetList = function(context) {
         };
 
         item.preset = preset;
-        item.reference = iD.ui.TagReference(preset.reference());
+        item.reference = iD.ui.TagReference(preset.reference(context.geometry(id)));
 
         return item;
     }

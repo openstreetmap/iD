@@ -46,8 +46,14 @@ iD.presets.Preset = function(id, preset, fields) {
         return Object.keys(preset.tags).length === 0;
     };
 
-    preset.reference = function() {
-        var reference = {key: Object.keys(preset.tags)[0]};
+    preset.reference = function(geometry) {
+        var key = Object.keys(preset.tags)[0];
+
+        if (geometry === 'relation' && key === 'type') {
+            return {rtype: preset.tags[key]};
+        }
+        
+        var reference = {key: key};
 
         if (preset.tags[reference.key] !== '*') {
             reference.value = preset.tags[reference.key];

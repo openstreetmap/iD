@@ -169,7 +169,7 @@ iD.ui.EntityEditor = function(context) {
         if (!arguments.length) return preset;
         if (_ !== preset) {
             preset = _;
-            reference = iD.ui.TagReference(preset.reference())
+            reference = iD.ui.TagReference(preset.reference(context.geometry(id)))
                 .showing(false);
         }
         return entityEditor;
