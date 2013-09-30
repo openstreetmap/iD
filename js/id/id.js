@@ -76,11 +76,6 @@ window.iD = function () {
 
     /* History */
     context.graph = history.graph;
-    context.perform = history.perform;
-    context.replace = history.replace;
-    context.pop = history.pop;
-    context.undo = history.undo;
-    context.redo = history.redo;
     context.changes = history.changes;
     context.intersects = history.intersects;
 
@@ -103,6 +98,23 @@ window.iD = function () {
         history.reset();
         return context;
     };
+
+    // Debounce save, since it's a synchronous localStorage write,
+    // and history changes can happen frequently (e.g. when dragging).
+    var debouncedSave = _.debounce(context.save, 350);
+    function withDebouncedSave(fn) {
+        return function() {
+            var result = fn.apply(history, arguments);
+            debouncedSave();
+            return result;
+        }
+    }
+
+    context.perform = withDebouncedSave(history.perform);
+    context.replace = withDebouncedSave(history.replace);
+    context.pop = withDebouncedSave(history.pop);
+    context.undo = withDebouncedSave(history.undo);
+    context.redo = withDebouncedSave(history.redo);
 
     /* Graph */
     context.hasEntity = function(id) {

@@ -15,8 +15,6 @@ iD.modes.Browse = function(context) {
         iD.modes.DragNode(context).behavior];
 
     mode.enter = function() {
-        context.save();
-
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });

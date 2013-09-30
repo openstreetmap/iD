@@ -70,8 +70,6 @@ iD.modes.Select = function(context, selectedIDs) {
     };
 
     mode.enter = function() {
-        context.save();
-
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });
