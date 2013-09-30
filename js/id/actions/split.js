@@ -31,6 +31,13 @@ iD.actions.Split = function(nodeId, newWayIds) {
             nodesB,
             isArea = wayA.isArea();
 
+        function _wrap(index) {
+            return iD.util.wrap(index,nodes.length);
+        }
+        function _dist(nA, nB) {
+            return iD.geo.sphericalDistance(graph.entity(nA).loc, graph.entity(nB).loc);
+        }
+
         if (wayA.isClosed()) {
             var nodes = wayA.nodes.slice(0, -1),
                 idxA = _.indexOf(nodes, nodeId),
@@ -39,13 +46,6 @@ iD.actions.Split = function(nodeId, newWayIds) {
                 cum_length,
                 i,
                 best = 0.0;
-
-            function _wrap(index) {
-                return iD.util.wrap(index,nodes.length);
-            }
-            function _dist(nA, nB) {
-                return iD.geo.sphericalDistance(graph.entity(nA).loc, graph.entity(nB).loc);
-            }
 
             // calculate lengths
             cum_length = 0.0;
