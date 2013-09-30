@@ -46,7 +46,7 @@ iD.ui.RawMembershipEditor = function(context) {
             graph = context.graph();
 
         context.intersects(context.extent()).forEach(function(entity) {
-            if (entity.type !== 'relation')
+            if (entity.type !== 'relation' || entity.id === id)
                 return;
 
             var presetName = context.presets().match(entity, graph).name(),
