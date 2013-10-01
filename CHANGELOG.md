@@ -1,3 +1,18 @@
+## 1.2.1
+
+* Split only the line of a node shared by a line and an area
+* Handle multipolygon corner case when splitting (#1799)
+* Don't automatically apply building tags to shop=car (#1813)
+* Don't suggest adding a relation to itself (#1820)
+* Fix restoring changes when something is selected (#1857)
+* Use generic access value as placeholder (#1780)
+* Filter on combobox value, not title (#1836)
+* Show relation documentation for relation presets (#1862)
+* Limit squaring to near square or near straight nodes (#1733)
+* More clever splitting of closed ways
+* Improve circularize action
+* Add more tags to areas list
+
 ## 1.2.0
 
 * Don't auto-save intro tutorial edits (#1745, #1795)
