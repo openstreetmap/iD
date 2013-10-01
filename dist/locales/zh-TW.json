@@ -700,7 +700,8 @@
                 "name": "機場相關設施"
             },
             "aeroway/aerodrome": {
-                "name": "機場"
+                "name": "機場",
+                "terms": "機場,飛機"
             },
             "aeroway/apron": {
                 "name": "停機坪"
@@ -760,7 +761,8 @@
                 "name": "戲院"
             },
             "amenity/college": {
-                "name": "書院"
+                "name": "書院",
+                "terms": "學院,大學,專校,大專"
             },
             "amenity/courthouse": {
                 "name": "法院"
@@ -787,7 +789,8 @@
                 "name": "墓地"
             },
             "amenity/hospital": {
-                "name": "醫院"
+                "name": "醫院",
+                "terms": "醫院,醫學中心"
             },
             "amenity/kindergarten": {
                 "name": "幼稚園"
@@ -808,7 +811,8 @@
                 "name": "宗教祟拜場所"
             },
             "amenity/place_of_worship/buddhist": {
-                "name": "佛寺"
+                "name": "佛寺",
+                "terms": "寺,廟,閣,寶殿"
             },
             "amenity/place_of_worship/christian": {
                 "name": "教堂"
@@ -835,10 +839,12 @@
                 "name": "餐廳"
             },
             "amenity/school": {
-                "name": "學校"
+                "name": "學校",
+                "terms": "學校,小學,中學,國小,國中,高中,校園,校區"
             },
             "amenity/swimming_pool": {
-                "name": "游泳池"
+                "name": "游泳池",
+                "terms": "游泳池,泳池"
             },
             "amenity/taxi": {
                 "name": "計程車站"
@@ -1012,7 +1018,8 @@
                 "name": "停車場通道"
             },
             "highway/steps": {
-                "name": "樓梯"
+                "name": "樓梯",
+                "terms": "樓梯,階梯,石階"
             },
             "highway/tertiary": {
                 "name": "三級道路"
@@ -1084,7 +1091,8 @@
                 "name": "建築工程"
             },
             "landuse/farm": {
-                "name": "農場"
+                "name": "農場",
+                "terms": "農田,稻田,農地,田"
             },
             "landuse/farmyard": {
                 "name": "農莊"
@@ -1120,7 +1128,8 @@
                 "name": "休閒設施"
             },
             "leisure/garden": {
-                "name": "花園"
+                "name": "花園",
+                "terms": "花園,果園,菜園,植物園,公園"
             },
             "leisure/golf_course": {
                 "name": "高爾夫球場"
@@ -1141,7 +1150,8 @@
                 "name": "棒球場"
             },
             "leisure/pitch/basketball": {
-                "name": "籃球場"
+                "name": "籃球場",
+                "terms": "籃球場,球場"
             },
             "leisure/pitch/soccer": {
                 "name": "足球場"
@@ -1219,7 +1229,8 @@
                 "name": "海岸線"
             },
             "natural/glacier": {
-                "name": "冰川"
+                "name": "冰川",
+                "terms": "冰川,冰河"
             },
             "natural/grassland": {
                 "name": "草原"
@@ -1252,7 +1263,8 @@
                 "name": "水塘"
             },
             "natural/wetland": {
-                "name": "濕地"
+                "name": "濕地",
+                "terms": "濕地,潮間帶"
             },
             "natural/wood": {
                 "name": "樹林"
@@ -1348,7 +1360,8 @@
                 "name": "商店"
             },
             "shop/alcohol": {
-                "name": "酒類商店"
+                "name": "酒類商店",
+                "terms": "酒店,酒莊"
             },
             "shop/bakery": {
                 "name": "麵包店"

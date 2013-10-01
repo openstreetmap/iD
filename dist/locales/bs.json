@@ -74,10 +74,23 @@
             "not_closed": "Ovo se ne može napraviti kružnim jer to nije petlja."
         },
         "orthogonalize": {
+            "title": "Kvadrat",
+            "description": {
+                "line": "Oblikovati uglove ove linije u kvadrat.",
+                "area": "Oblikovati uglove ovo područje u kvadrat."
+            },
+            "key": "Oblikovati",
             "annotation": {
                 "line": "Ispravljeni uglovi linije.",
                 "area": "Ispravljeni uglovi područja."
             }
+        },
+        "straighten": {
+            "title": "Ispraviti",
+            "description": "Ispraviti ovu liniju.",
+            "key": "Oblikovati",
+            "annotation": "Ispravljena linija.",
+            "too_bendy": "Ovo ne može biti ispralvjeno jer se previše savija."
         },
         "delete": {
             "title": "Izbrišite",
@@ -457,6 +470,9 @@
             "atm": {
                 "label": "Bankomat"
             },
+            "backrest": {
+                "label": "Naslon za leđa"
+            },
             "barrier": {
                 "label": "Vrsta"
             },
@@ -818,6 +834,10 @@
             "amenity/bicycle_rental": {
                 "name": "Iznajmljivanje bicikala",
                 "terms": "iznajmljivanje bicikala,najam bicikla"
+            },
+            "amenity/boat_rental": {
+                "name": "Iznajmljivanje plovila",
+                "terms": "iznajmljivanje čamaca,iznajmljivanje brodova,iznajmljivanje plovila"
             },
             "amenity/cafe": {
                 "name": "Kafe",
@@ -1219,6 +1239,10 @@
                 "name": "Stepenice",
                 "terms": "stepenice,stube"
             },
+            "highway/stop": {
+                "name": "Znak stop",
+                "terms": "znak stop,saobraćajni znak stop,saobraćajni znak zaustavljanja"
+            },
             "highway/tertiary": {
                 "name": "Tercijarna cesta",
                 "terms": "tercijarna cesta,cesta od tercijarnog značaja"
@@ -1395,6 +1419,10 @@
                 "name": "Košarkaški teren",
                 "terms": "košarkaški teren,igralište za košarku"
             },
+            "leisure/pitch/skateboard": {
+                "name": "Poligon za skateboard",
+                "terms": "poligon za skateboard,park za skateboard,poligon za klizanje"
+            },
             "leisure/pitch/soccer": {
                 "name": "Fudbalski teren",
                 "terms": "fudbalski teren,igralište za fudbal"
@@ -1414,6 +1442,10 @@
             "leisure/slipway": {
                 "name": "Navoz",
                 "terms": "navoz,navoz na šine"
+            },
+            "leisure/sports_center": {
+                "name": "Sportski centar",
+                "terms": "sportski centar,centar za sport, centar za sportske aktivnosti"
             },
             "leisure/stadium": {
                 "name": "Stadion",
@@ -1499,6 +1531,10 @@
                 "name": "Obala",
                 "terms": "obala,obalno područje"
             },
+            "natural/fell": {
+                "name": "Planinska golet",
+                "terms": "nekultivirana zemlja na visokim nadmorskim visinama,neobrađena zemlja,visoki pašnjak"
+            },
             "natural/glacier": {
                 "name": "Glečer",
                 "terms": "glečer,ledenjak"
@@ -1514,6 +1550,10 @@
             "natural/peak": {
                 "name": "Vrh",
                 "terms": "vrh,kota"
+            },
+            "natural/scree": {
+                "name": "Osulina",
+                "terms": "sipar,sipina,osulina,nakupina osutog oštrobridnog materijala"
             },
             "natural/scrub": {
                 "name": "Gustiš",

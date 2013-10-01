@@ -74,6 +74,12 @@
             "not_closed": "Неможливо перетворити на коло — лінія не замкнена."
         },
         "orthogonalize": {
+            "title": "Випрямити кути",
+            "description": {
+                "line": "Зробити кути цієї лінії прямими.",
+                "area": "Зробити кути цього полігону прямими."
+            },
+            "key": "S",
             "annotation": {
                 "line": "Випрямлено кути лінії.",
                 "area": "Випрямлено кути полігону."
@@ -82,7 +88,9 @@
         "straighten": {
             "title": "Випрямити",
             "description": "Зробити цю лінію прямою.",
-            "key": "S"
+            "key": "S",
+            "annotation": "Лінія випрямлена.",
+            "too_bendy": "Цю лінію не вдалось випрямити, бо вона надто вигнута."
         },
         "delete": {
             "title": "Вилучити",
@@ -378,16 +386,16 @@
                 "name": "Землекористування"
             },
             "category-path": {
-                "name": "Тропа"
+                "name": "Стежки"
             },
             "category-rail": {
                 "name": "Рейки"
             },
             "category-road": {
-                "name": "Дорога"
+                "name": "Дороги"
             },
             "category-route": {
-                "name": "Маршрут"
+                "name": "Маршрути"
             },
             "category-water": {
                 "name": "Вода"
@@ -757,1106 +765,1343 @@
         "presets": {
             "address": {
                 "name": "Адреса",
-                "terms": "адреса,місце"
+                "terms": "Address, flhtcf, місце"
             },
             "aeroway": {
                 "name": "Аеропорт",
-                "terms": "повітряний транспорт,повітряне сполучення"
+                "terms": "Aeroway, fthjgjhn, повітряний транспорт,повітряне сполучення"
             },
             "aeroway/aerodrome": {
-                "name": "Аеропорт"
+                "name": "Аеропорт",
+                "terms": "Airport, fthjgjhn, аеродром, летовище"
             },
             "aeroway/apron": {
-                "name": "Перон"
+                "name": "Перон",
+                "terms": "Apron, gthjy"
             },
             "aeroway/gate": {
-                "name": "Вихід на посадку"
+                "name": "Вихід на посадку",
+                "terms": "Airport gate, dbsl yf gjcflre"
             },
             "aeroway/hangar": {
-                "name": "Ангар"
+                "name": "Ангар",
+                "terms": "Hangar, fyufh"
             },
             "aeroway/helipad": {
                 "name": "Вертолітний майданчик",
-                "terms": "вертоліт,вертолітний майданчик,вертодром"
+                "terms": "Helipad, dthnjksnybq vfqlfyxbr, вертоліт, вертодром"
             },
             "aeroway/runway": {
                 "name": "Злітно-посадкова смуга",
-                "terms": "посадкова смуга,злітна смуга"
+                "terms": "Runway, pksnyj-gjcflrjdf cveuf, посадкова смуга,злітна смуга"
             },
             "aeroway/taxiway": {
-                "name": "Руліжна доріжка"
+                "name": "Руліжна доріжка",
+                "terms": "Taxiway, heksyf ljhsrf"
             },
             "aeroway/terminal": {
-                "name": "Термінал"
+                "name": "Термінал",
+                "terms": "Airport terminal, nthvsyfk"
             },
             "amenity": {
                 "name": "Зручності",
-                "terms": "зручності,комфорт,комфортабельність,комунальні зручності"
+                "terms": "Amenity, phexyjcns, комфорт,комфортабельність,комунальні зручності"
             },
             "amenity/arts_centre": {
-                "name": "Мистецький центр"
+                "name": "Мистецький центр",
+                "terms": "Arts Center,vbcntwmrbq wtynh, галерея"
             },
             "amenity/atm": {
                 "name": "Банкомат",
-                "terms": "банкомат"
+                "terms": "ATM, fyrjvfn"
             },
             "amenity/bank": {
                 "name": "Банк",
-                "terms": "банк,каса,кредитна спілка,скарбниця,казначейство,відділення,кредит,депозит,платіж,готівка,переказ"
+                "terms": "Bank, fyr,каса,кредитна спілка,скарбниця,казначейство,відділення,кредит,депозит,платіж,готівка,переказ"
             },
             "amenity/bar": {
-                "name": "Бар"
+                "name": "Бар",
+                "terms": "Bar, fh"
             },
             "amenity/bench": {
-                "name": "Лавка"
+                "name": "Лавка",
+                "terms": "Bench, kfdrf"
             },
             "amenity/bicycle_parking": {
-                "name": "Вело-парковка"
+                "name": "Вело-парковка",
+                "terms": "Bicycle Parking, dtkj-gfhrjdrf"
             },
             "amenity/bicycle_rental": {
-                "name": "Прокат велосипедів"
+                "name": "Прокат велосипедів",
+                "terms": "Bicycle Rental, ghjrfn dtkjcbgtlsd"
             },
             "amenity/boat_rental": {
                 "name": "Прокат човнів",
-                "terms": "катамарани"
+                "terms": "Boat Rental,ghjrfn xjdysd, катамарани"
             },
             "amenity/cafe": {
-                "name": "Кафе"
+                "name": "Кафе",
+                "terms": "Cafe, rfat"
             },
             "amenity/car_rental": {
-                "name": "Прокат автомобілів"
+                "name": "Прокат автомобілів",
+                "terms": "Car Rental, ghjrfn fdnjvjsksd"
             },
             "amenity/car_sharing": {
-                "name": "Короткострокова оренда автомобіля"
+                "name": "Короткострокова оренда автомобіля",
+                "terms": "Car Sharing, rjhjnrjcnhjrjdf jhtylf fdnjvjskz"
             },
             "amenity/car_wash": {
-                "name": "Автомийка"
+                "name": "Автомийка",
+                "terms": "Car Wash, fdnjvbqrf, мийка"
             },
             "amenity/childcare": {
                 "name": "Дитяча кімната",
-                "terms": "догляд за дітьми, ігрова зона, ігрова кімната"
+                "terms": "Childcare, lbnzxf rsvyfnf, догляд за дітьми, ігрова зона, ігрова кімната"
             },
             "amenity/cinema": {
                 "name": "Кінотеатр",
-                "terms": "кіно,кінотеатр,кінематографія"
+                "terms": "Cinema, rsyjntfnh,кіно,кінематографія"
             },
             "amenity/college": {
                 "name": "Коледж",
-                "terms": "коледж,училище,технікум"
+                "terms": "College, rjktl,училище,технікум"
             },
             "amenity/courthouse": {
                 "name": "Суд",
-                "terms": "суд"
+                "terms": "Courthouse, cel, суд"
             },
             "amenity/drinking_water": {
                 "name": "Питна вода",
-                "terms": "питна вода"
+                "terms": "Drinking Water, gbnyf djlf"
             },
             "amenity/embassy": {
                 "name": "Амбасада",
-                "terms": "амбасада,посольство,місія"
+                "terms": "Embassy, fvfcflf,посольство,місія"
             },
             "amenity/fast_food": {
                 "name": "Фаст-Фуд",
-                "terms": "фаст-фуд,проста їжа,швидкі страви"
+                "terms": "Fast Food, afcn-ael,проста їжа,швидкі страви"
             },
             "amenity/fire_station": {
                 "name": "Пожежна станція",
-                "terms": "пожежне депо"
+                "terms": "Fire Station, gjtyf cnfywsz, пожежне депо"
             },
             "amenity/fountain": {
                 "name": "Фонтан",
-                "terms": "фонтан,вода"
+                "terms": "Fountain, ajynfy,вода"
             },
             "amenity/fuel": {
                 "name": "Заправка",
-                "terms": "азс,заправка,паливо,бензин,дизельне паливо"
+                "terms": "Gas Station, pfghfdrf,азс,паливо,бензин,дизельне паливо"
             },
             "amenity/grave_yard": {
                 "name": "Цвинтар",
-                "terms": "цвинтар,кладовище"
+                "terms": "Graveyard, wdbynfh,кладовище"
             },
             "amenity/hospital": {
                 "name": "Лікарня",
-                "terms": "шпиталь,лікарня,госпіталь,стаціонар,лазарет"
+                "terms": "Hospital, ksrfhyz,шпиталь,госпіталь,стаціонар,лазарет"
             },
             "amenity/kindergarten": {
                 "name": "Дитячий садок",
-                "terms": "дитячий садок,ясла"
+                "terms": "Kindergarten, lbnzxbq cfljr,ясла"
             },
             "amenity/library": {
                 "name": "Бібліотека",
-                "terms": "бібліотека"
+                "terms": "Library, sksjntrf"
             },
             "amenity/marketplace": {
                 "name": "Ринок",
-                "terms": "ринок,базар,базарна площа"
+                "terms": "Marketplace, hbyjr,базар,базарна площа"
             },
             "amenity/parking": {
                 "name": "Стоянка",
-                "terms": "парковка,паркування,стоянка"
+                "terms": "Parking, cnjzyrf,парковка,паркування"
             },
             "amenity/pharmacy": {
                 "name": "Аптека",
-                "terms": "аптека,ліки,фармація"
+                "terms": "Pharmacy, fgntrf,ліки,фармація"
             },
             "amenity/place_of_worship": {
                 "name": "Культове місце",
-                "terms": "культове місце,церква,собор,мечеть,синагога,молитовний дім"
+                "terms": "Place of Worship, rekmnjdt vscwt,церква,собор,мечеть,синагога,молитовний дім"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Буддійський храм",
-                "terms": "буддійський храм"
+                "terms": "Buddhist Temple, ellsqcmrbq hfv"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Церква",
-                "terms": "церква,храм,собор,костьол"
+                "terms": "Church, wthrdf,храм,собор,костьол"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Синагога",
-                "terms": "синагога"
+                "terms": "Synagogue, cbyfujuf"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Мечеть",
-                "terms": "мечеть"
+                "terms": "Mosque, vtxtnm"
             },
             "amenity/police": {
                 "name": "Міліція/Поліція",
-                "terms": "міліція,поліція,охорона порядку"
+                "terms": "Police, vskswsz,gjkswsz,міліція,поліція,охорона порядку"
             },
             "amenity/post_box": {
                 "name": "Поштова скриня",
-                "terms": "поштова скринька"
+                "terms": "Mailbox, gjinjdf crhbyz,поштова скринька"
             },
             "amenity/post_office": {
                 "name": "Пошта",
-                "terms": "пошта,поштамт"
+                "terms": "Post Office, gjinf,поштамт"
             },
             "amenity/pub": {
                 "name": "Паб",
-                "terms": "бар,пивна,шинок,пивниця,трактир"
+                "terms": "Pub, gf,бар,пивна,шинок,пивниця,трактир"
             },
             "amenity/ranger_station": {
-                "name": "Контора лісництва"
+                "name": "Контора лісництва",
+                "terms": "Ranger Station,rjynjhf kscybwndf, лісник, лісництво"
             },
             "amenity/restaurant": {
                 "name": "Ресторан",
-                "terms": "ресторан"
+                "terms": "Restaurant, htcnjhfy"
             },
             "amenity/school": {
                 "name": "Школа",
-                "terms": "школа,навчання,факультет"
+                "terms": "School, irjkf,навчання,факультет"
             },
             "amenity/swimming_pool": {
                 "name": "Басейн",
-                "terms": "басейн"
+                "terms": "Swimming Pool, fctqy"
             },
             "amenity/taxi": {
                 "name": "Стоянка таксі",
-                "terms": "стоянка таксі,таксі"
+                "terms": "Taxi Stand, cnjzyrf nfrcs,таксі"
             },
             "amenity/telephone": {
                 "name": "Телефон",
-                "terms": "телефон"
+                "terms": "Telephone, ntktajy"
             },
             "amenity/theatre": {
                 "name": "Театр",
-                "terms": "театр"
+                "terms": "Theater, ntfnh"
             },
             "amenity/toilets": {
                 "name": "Туалет",
-                "terms": "туалет"
+                "terms": "Toilets, nefktn"
             },
             "amenity/townhall": {
                 "name": "Міська державна адміністрація",
-                "terms": "мерія,ратуша,міськвиконком"
+                "terms": "Town Hall, vscmrf lthfdyf flvsyscnhfwsz, мерія,ратуша,міськвиконком"
             },
             "amenity/university": {
                 "name": "Університет",
-                "terms": "університет"
+                "terms": "University, eysdthcbntn"
             },
             "amenity/vending_machine": {
                 "name": "Торговельний автомат",
-                "terms": "торгівельний автомат, торговий автомат"
+                "terms": "Vending Machine,njhujdtkmybq fdnjvfn, торгівельний автомат, торговий автомат"
             },
             "amenity/waste_basket": {
                 "name": "Бак для сміття",
-                "terms": "кошик для сміття"
+                "terms": "Waste Basket, fr lkz cvsnnz, кошик для сміття"
             },
             "area": {
                 "name": "Полігон",
-                "terms": "район,область,площа,простір,ділянка,край,площина"
+                "terms": "Area, gjksujy,район,область,площа,простір,ділянка,край,площина"
             },
             "barrier": {
                 "name": "Перепони",
-                "terms": "бар’єр,шлагбаум,перешкода,рубіж,межа,застава,лінія поділу,огорожа,перемичка,поручні "
+                "terms": "Barrier, gthtgjyb, бар’єр,шлагбаум,перешкода,рубіж,межа,застава,лінія поділу,огорожа,перемичка,поручні "
             },
             "barrier/block": {
                 "name": "Блок",
-                "terms": "перешкода,кам’яна брила"
+                "terms": "Block, kjr, перешкода,кам’яна брила"
             },
             "barrier/bollard": {
                 "name": "Стовпчик",
-                "terms": "стовп,кнехт"
+                "terms": "Bollard, cnjdgxbr, стовп,кнехт"
             },
             "barrier/cattle_grid": {
                 "name": "Перешкода для худоби",
-                "terms": "перешкода для виходу худоби з пасовища на дорогу"
+                "terms": "Cattle Grid, gthtirjlf lkz eljb, перешкода для виходу худоби з пасовища на дорогу"
             },
             "barrier/city_wall": {
                 "name": "Міська стіна",
-                "terms": "міська стіна"
+                "terms": "City Wall, vscmrf cnsyf"
             },
             "barrier/cycle_barrier": {
                 "name": "Перешкода для велосипедистів",
-                "terms": "перешкода для велосипедів"
+                "terms": "Cycle Barrier, gthtirjlf lkz dtkjcbgtlbcnsd, перешкода для велосипедів"
             },
             "barrier/ditch": {
                 "name": "Канава",
-                "terms": "рів,кювет,канава,рівчак,канал,траншея"
+                "terms": "Ditch, rfyfdf,рів,кювет,рівчак,канал,траншея"
             },
             "barrier/entrance": {
                 "name": "Вхід",
-                "terms": "вхід,під’їзд,в’їзд,доступ,хід,двері"
+                "terms": "Entrance,dsl,під’їзд,в’їзд,доступ,хід,двері"
             },
             "barrier/fence": {
                 "name": "Огорожа",
-                "terms": "паркан, тин"
+                "terms": "Fence,jujhjf,паркан, тин"
             },
             "barrier/gate": {
-                "name": "Ворота"
+                "name": "Ворота",
+                "terms": "Gate,djhjnf"
             },
             "barrier/hedge": {
-                "name": "Жива огорожа"
+                "name": "Жива огорожа",
+                "terms": "Hedge,bdf jujhjf"
             },
             "barrier/kissing_gate": {
-                "name": "Вузька хвіртка"
+                "name": "Вузька хвіртка",
+                "terms": "Kissing Gate,depmrf dshnrf"
             },
             "barrier/lift_gate": {
-                "name": "Шлагбаум"
+                "name": "Шлагбаум",
+                "terms": "Lift Gate,ikfufev"
             },
             "barrier/retaining_wall": {
-                "name": "Підпірна стіна"
+                "name": "Підпірна стіна",
+                "terms": "Retaining Wall,gslgshyf cnsyf"
             },
             "barrier/stile": {
-                "name": "Перелаз/Турнікет"
+                "name": "Перелаз/Турнікет",
+                "terms": "Stile,gthtkfp, nehysrtn"
             },
             "barrier/toll_booth": {
-                "name": "Пункт сплати за проїзд"
+                "name": "Пункт сплати за проїзд",
+                "terms": "Toll Booth,geyrn cgkfnb pf ghjpl"
             },
             "barrier/wall": {
-                "name": "Стіна"
+                "name": "Стіна",
+                "terms": "Wall,cnsyf"
             },
             "boundary/administrative": {
-                "name": "Адміністративний кордон"
+                "name": "Адміністративний кордон",
+                "terms": "Administrative Boundary,flvsyscnhfnbdybq rjhljy"
             },
             "building": {
                 "name": "Будинок",
-                "terms": "будинок,будівля,споруда,нерухомість"
+                "terms": "Building,elbyjr,будівля,споруда,нерухомість"
             },
             "building/apartments": {
-                "name": "Житло"
+                "name": "Житло",
+                "terms": "Apartments,bnkj"
             },
             "building/commercial": {
                 "name": "Комерційна нерухомість",
-                "terms": "комерційна нерухомість"
+                "terms": "Commercial Building,rjvthwsqyf ythejvscnm"
             },
             "building/entrance": {
                 "name": "Вхід",
-                "terms": "вхід,двері,ворота,вихід,фіртка"
+                "terms": "Entrance,dsl,двері,ворота,вихід,фіртка"
             },
             "building/garage": {
                 "name": "Гараж",
-                "terms": "гараж"
+                "terms": "Garage,ufhf"
             },
             "building/house": {
                 "name": "Дім",
-                "terms": "житловий будинок"
+                "terms": "House,lsv,житловий будинок"
             },
             "building/hut": {
                 "name": "Сторожка",
-                "terms": "хатина,барак,сторожка"
+                "terms": "Hut,cnjhjrf,хатина,барак"
             },
             "building/industrial": {
-                "name": "Промислова будівля"
+                "name": "Промислова будівля",
+                "terms": "Industrial Building,ghjvbckjdf elsdkz"
             },
             "building/residential": {
-                "name": "Житлова будівля"
+                "name": "Житлова будівля",
+                "terms": "Residential Building,bnkjdf elsdkz"
             },
             "emergency/ambulance_station": {
                 "name": "Станція швидкої медичної допомоги",
-                "terms": "перша допомога"
+                "terms": "Ambulance Station,cnfywsz idblrj vtlbxyj ljgjvjub, швидка допомога, перша допомога"
             },
             "emergency/fire_hydrant": {
-                "name": "Пожежний гідрант"
+                "name": "Пожежний гідрант",
+                "terms": "Fire Hydrant,gjtybq uslhfyn"
             },
             "emergency/phone": {
-                "name": "Телефон виклику екстрених служб"
+                "name": "Телефон виклику екстрених служб",
+                "terms": "Emergency Phone,tekeajy dbrkbre trchtyb cke"
             },
             "entrance": {
                 "name": "Вхід",
-                "terms": "вхід,двері,ворота,вихід,фіртка"
+                "terms": "Entrance,dsl,двері,ворота,вихід,фіртка"
             },
             "highway": {
                 "name": "Дорога",
-                "terms": "дорога,шлях,автомагістраль,шосе,тротуар,стежка,тропа,путівець,напрямок,проїзд"
+                "terms": "Highway,ljhjuf,шлях,автомагістраль,шосе,тротуар,стежка,тропа,путівець,напрямок,проїзд"
             },
             "highway/bridleway": {
                 "name": "Доріжка для вершників ",
-                "terms": "доріжка для кінних прогулянок,доріжка для верхової їзди"
+                "terms": "Bridle Path,ljhsrf lkz dthiybrsd,доріжка для кінних прогулянок,доріжка для верхової їзди"
             },
             "highway/bus_stop": {
-                "name": "Автобусна зупинка"
+                "name": "Автобусна зупинка",
+                "terms": "Bus Stop,fdnjecyf pegbyrf"
             },
             "highway/crossing": {
                 "name": "Пішохідний перехід",
-                "terms": "пішохідний перехід,зебра"
+                "terms": "Crossing,gsijslybq gthtsl,зебра"
             },
             "highway/cycleway": {
-                "name": "Вело-доріжка"
+                "name": "Вело-доріжка",
+                "terms": "Cycle Path,dtkj-ljhsrf"
             },
             "highway/footway": {
                 "name": "Тротуар",
-                "terms": "стежка,маршрут,доріжка"
+                "terms": "Foot Path,nhjnefh,стежка,маршрут,доріжка"
             },
             "highway/living_street": {
-                "name": "Житлова зона"
+                "name": "Житлова зона",
+                "terms": "Living Street,bnkjdf pjyf"
             },
             "highway/mini_roundabout": {
-                "name": "Малий круговий рух "
+                "name": "Малий круговий рух ",
+                "terms": "Mini-Roundabout,vfkbq rheujdbq he"
             },
             "highway/motorway": {
                 "name": "Автомагістраль",
-                "terms": "автомагістраль"
+                "terms": "Motorway,fdnjvfuscnhfkm"
             },
             "highway/motorway_junction": {
                 "name": "З’єднання з автомагістраллю",
-                "terms": "розв’язка,естакада,з’їзд,заїзд"
+                "terms": "Motorway Junction,plyfyyz p fdnjvfuscnhfkk, розв’язка,естакада,з’їзд,заїзд"
             },
             "highway/motorway_link": {
                 "name": "З’їзд з/на автомагістраль",
-                "terms": "естакада,виїзд з,виїзд на,з’їзд з,з’їзд на"
+                "terms": "Motorway Link,ppl fdnjvfuscnhfkm,естакада,виїзд з,виїзд на,з’їзд з,з’їзд на"
             },
             "highway/path": {
-                "name": "Тропа"
+                "name": "Стежка",
+                "terms": "Path,cntrf, тропа"
             },
             "highway/pedestrian": {
-                "name": "Пішохідна доріжка"
+                "name": "Пішохідна доріжка",
+                "terms": "Pedestrian,gsijslyf ljhsrf"
             },
             "highway/primary": {
-                "name": "Головна дорога"
+                "name": "Головна дорога",
+                "terms": "Primary Road,ujkjdyf ljhjuf"
             },
             "highway/primary_link": {
                 "name": "З’їзд з/на головну дорогу",
-                "terms": "естакада,виїзд з,виїзд на,з’їзд з,з’їзд на"
+                "terms": "Primary Link,ppl ujkjdye ljhjue, естакада,виїзд з,виїзд на,з’їзд з,з’їзд на"
             },
             "highway/residential": {
-                "name": "Дорога місцевого значення"
+                "name": "Вулиця",
+                "terms": "Residential Road,dekbwz,дорога місцевого значення"
             },
             "highway/road": {
-                "name": "Тип невідомий"
+                "name": "Тип невідомий",
+                "terms": "Unknown Road,nbg ytdsljvbq"
             },
             "highway/secondary": {
-                "name": "Другорядна дорога"
+                "name": "Другорядна дорога",
+                "terms": "Secondary Road,lheujhzlyf ljhjuf"
             },
             "highway/secondary_link": {
                 "name": "З’їзд з/на другорядну дорогу",
-                "terms": "естакада,виїзд з,виїзд на,з’їзд з,з’їзд на"
+                "terms": "Secondary Link,ppl lheujhzlye ljhjue,естакада,виїзд з,виїзд на,з’їзд з,з’їзд на"
             },
             "highway/service": {
-                "name": "Службовий проїзд"
+                "name": "Службовий проїзд",
+                "terms": "Service Road,ckejdbq ghjpl"
             },
             "highway/service/alley": {
-                "name": "Провулок"
+                "name": "Провулок",
+                "terms": "Alley,ghjdekjr"
             },
             "highway/service/drive-through": {
-                "name": "Проїзд біля пункту обслуговування"
+                "name": "Проїзд біля пункту обслуговування",
+                "terms": "Drive-Through,ghjpl skz geyrne jckeujdedfyyz"
             },
             "highway/service/driveway": {
-                "name": "Проїзд"
+                "name": "Проїзд",
+                "terms": "Driveway,ghjpl"
             },
             "highway/service/emergency_access": {
-                "name": "Невідкладна допомога"
+                "name": "Невідкладна допомога",
+                "terms": "Emergency Access,ytdslrkflyf ljgjvjuf"
             },
             "highway/service/parking_aisle": {
-                "name": "Проїзд по стоянці"
+                "name": "Проїзд по стоянці",
+                "terms": "Parking Aisle,ghjpl gj cnjzyws"
             },
             "highway/steps": {
                 "name": "Сходи",
-                "terms": "сходи,драбина,сходова клітка"
+                "terms": "Steps,cjlb,драбина,сходова клітка"
             },
             "highway/stop": {
                 "name": "Знак СТОП",
-                "terms": "Проїзд без зупинки заборонено"
+                "terms": "Stop Sign,pyfr cnjg, Проїзд без зупинки заборонено"
             },
             "highway/tertiary": {
-                "name": "Третинна дорога"
+                "name": "Третинна дорога",
+                "terms": "Tertiary Road,nhtnbyyf ljhjuf"
             },
             "highway/tertiary_link": {
                 "name": "З’їзд з/на третинну дорогу",
-                "terms": "естакада,виїзд з,виїзд на,з’їзд з,з’їзд на"
+                "terms": "Tertiary Link,ppl nhtnbyye ljhjue,естакада,виїзд з,виїзд на,з’їзд з,з’їзд на"
             },
             "highway/track": {
-                "name": "Грунтовка"
+                "name": "Грунтовка",
+                "terms": "Track,uheynjdrf"
             },
             "highway/traffic_signals": {
                 "name": "Світлофор",
-                "terms": " світлофор"
+                "terms": "Traffic Signals,cdsnkjajh"
             },
             "highway/trunk": {
-                "name": "Шосе"
+                "name": "Шосе",
+                "terms": "Trunk Road,ijct"
             },
             "highway/trunk_link": {
                 "name": "З’їзд з/на шосе",
-                "terms": "естакада,виїзд з,виїзд на,з’їзд з,з’їзд на"
+                "terms": "Trunk Link,ppl ijct,естакада,виїзд з,виїзд на,з’їзд з,з’їзд на"
             },
             "highway/turning_circle": {
-                "name": "Місце для розвороту"
+                "name": "Місце для розвороту",
+                "terms": "Turning Circle,vscwt lkz hjdjhjne"
             },
             "highway/unclassified": {
-                "name": "Не має класифікації"
+                "name": "Не має класифікації",
+                "terms": "Unclassified Road,yt vf rkfcbasrfws"
             },
             "historic": {
-                "name": "Історичні місця"
+                "name": "Історичні місця",
+                "terms": "Historic Site,scnjhbxys vscwz"
             },
             "historic/archaeological_site": {
-                "name": "Археологічні пам’ятки"
+                "name": "Археологічні пам’ятки",
+                "terms": "Archaeological Site,fhtjkjusxys gfvznrb"
             },
             "historic/boundary_stone": {
-                "name": "Прикордонний камінь"
+                "name": "Прикордонний камінь",
+                "terms": "Boundary Stone,ghbrjhljyybq rfvsym"
             },
             "historic/castle": {
-                "name": "За́мок"
+                "name": "За́мок",
+                "terms": "Castle,pfvjr"
             },
             "historic/memorial": {
-                "name": "Пам’ятник"
+                "name": "Пам’ятник",
+                "terms": "Memorial,gfvznybr"
             },
             "historic/monument": {
-                "name": "Монумент"
+                "name": "Монумент",
+                "terms": "Monument,vjyevtyn"
             },
             "historic/ruins": {
-                "name": "Руїни"
+                "name": "Руїни",
+                "terms": "Ruins,heyb"
             },
             "historic/wayside_cross": {
-                "name": "Придорожній хрест"
+                "name": "Придорожній хрест",
+                "terms": "Wayside Cross,ghbljhjysq htcn"
             },
             "historic/wayside_shrine": {
-                "name": "Придорожня рака"
+                "name": "Придорожня рака",
+                "terms": "Wayside Shrine,ghbljhjyz hfrf, гробниця"
             },
             "landuse": {
-                "name": "Землекористування"
+                "name": "Землекористування",
+                "terms": "Landuse,ptvktrjhbcnedfyyz"
             },
             "landuse/allotments": {
                 "name": "Дачі/горо́ди",
-                "terms": "дача,город,ділянка"
+                "terms": "Allotments,lfxs ujhjlb,дача,город,ділянка"
             },
             "landuse/basin": {
-                "name": "Водойма"
+                "name": "Водойма",
+                "terms": "Basin,djljqvf"
             },
             "landuse/cemetery": {
-                "name": "Кладовище"
+                "name": "Кладовище",
+                "terms": "Cemetery,rkfljdbot, цвинтар"
             },
             "landuse/commercial": {
-                "name": "Діловий район"
+                "name": "Діловий район",
+                "terms": "Commercial,lskjdbq hfqjy"
             },
             "landuse/construction": {
-                "name": "Будівництво"
+                "name": "Будівництво",
+                "terms": "Construction,elsdybwndj"
             },
             "landuse/farm": {
-                "name": "Ферма"
+                "name": "Ферма",
+                "terms": "Farm,athvf"
             },
             "landuse/farmyard": {
-                "name": "Двір ферми"
+                "name": "Двір ферми",
+                "terms": "Farmyard,ldsh athvb"
             },
             "landuse/forest": {
-                "name": "Лісовий масив"
+                "name": "Лісовий масив",
+                "terms": "Forest,kscjdbq vfcbd, ліс"
             },
             "landuse/grass": {
-                "name": "Трава"
+                "name": "Трава",
+                "terms": "Grass,nhfdf"
             },
             "landuse/industrial": {
-                "name": "Промзона"
+                "name": "Промзона",
+                "terms": "Industrial,ghjvpjyf"
             },
             "landuse/meadow": {
-                "name": "Левада"
+                "name": "Левада",
+                "terms": "Meadow,ktdflf"
             },
             "landuse/orchard": {
-                "name": "Сад"
+                "name": "Сад",
+                "terms": "Orchard,cfl"
             },
             "landuse/quarry": {
-                "name": "Кар’єр"
+                "name": "Кар’єр",
+                "terms": "Quarry,rfhh"
             },
             "landuse/residential": {
-                "name": "Житлова зона"
+                "name": "Житлова зона",
+                "terms": "Residential,bnkjdf pjyf"
             },
             "landuse/retail": {
-                "name": "Роздрібна торгівля"
+                "name": "Роздрібна торгівля",
+                "terms": "Retail,hjplhsyf njhusdkz"
             },
             "landuse/vineyard": {
-                "name": "Виноградник"
+                "name": "Виноградник",
+                "terms": "Vineyard,dbyjuhflybr"
             },
             "leisure": {
-                "name": "Дозвілля"
+                "name": "Дозвілля",
+                "terms": "Leisure,ljpdskkz"
             },
             "leisure/dog_park": {
-                "name": "Парк для собак"
+                "name": "Парк для собак",
+                "terms": "Dog Park,gfhr lkz cjfr"
             },
             "leisure/garden": {
-                "name": "Сад"
+                "name": "Сад",
+                "terms": "Garden,cfl"
             },
             "leisure/golf_course": {
-                "name": "Поле для гольфу"
+                "name": "Поле для гольфу",
+                "terms": "Golf Course,gjkt lkz ujkmae"
             },
             "leisure/marina": {
-                "name": "Пристань для яхт"
+                "name": "Пристань для яхт",
+                "terms": "Marina,ghbcnfym lkz zn"
             },
             "leisure/park": {
-                "name": "Парк"
+                "name": "Парк",
+                "terms": "Park,gfhr"
             },
             "leisure/pitch": {
-                "name": "Спортивний майданчик"
+                "name": "Спортивний майданчик",
+                "terms": "Sport Pitch,cgjhnbdybq vfqlfyxbr"
             },
             "leisure/pitch/american_football": {
-                "name": "Поле для американського футболу"
+                "name": "Поле для американського футболу",
+                "terms": "American Football Field,gjkt lkz fvthbrfycmrjuj aenjke"
             },
             "leisure/pitch/baseball": {
-                "name": "Бейсбольний майданчик"
+                "name": "Бейсбольний майданчик",
+                "terms": "Baseball Diamond,tqcjkmybq vfqlfyxbr"
             },
             "leisure/pitch/basketball": {
-                "name": "Баскетбольний майданчик"
+                "name": "Баскетбольний майданчик",
+                "terms": "Basketball Court,fcrtnjkmybq vfqlfyxbr"
             },
             "leisure/pitch/skateboard": {
-                "name": "Скейт-парк"
+                "name": "Скейт-парк",
+                "terms": "Skate Park,crtqn-gfhr, екстрим"
             },
             "leisure/pitch/soccer": {
-                "name": "Футбольне поле"
+                "name": "Футбольне поле",
+                "terms": "Soccer Field,aenjkmyt gjkt"
             },
             "leisure/pitch/tennis": {
-                "name": "Тенісний майданчик"
+                "name": "Тенісний майданчик",
+                "terms": "Tennis Court,ntyscybq vfqlfyxbr"
             },
             "leisure/pitch/volleyball": {
-                "name": "Волейбольний майданчик"
+                "name": "Волейбольний майданчик",
+                "terms": "Volleyball Court,gjktqjkmybq vfqlfyxbr"
             },
             "leisure/playground": {
                 "name": "Ігровий майданчик",
-                "terms": "дитячий ігровий майданчик "
+                "terms": "Playground,suhjdbq vfqlfyxbr, дитячий ігровий майданчик "
             },
             "leisure/slipway": {
-                "name": "Стапель"
+                "name": "Стапель",
+                "terms": "Slipway,cnfgtkm"
             },
             "leisure/sports_center": {
-                "name": "Спортивний центр"
+                "name": "Спортивний центр",
+                "terms": "Sports Center,cgjhnbdybq wtynh"
             },
             "leisure/stadium": {
-                "name": "Стадіон"
+                "name": "Стадіон",
+                "terms": "Stadium,cnflsjy"
             },
             "leisure/swimming_pool": {
-                "name": "Басейн"
+                "name": "Басейн",
+                "terms": "Swimming Pool,fctqy"
             },
             "leisure/track": {
-                "name": "Гоночний трек"
+                "name": "Гоночний трек",
+                "terms": "Race Track,ujyjxybq nhtr, бігова доріжка"
             },
             "line": {
-                "name": "Лінія"
+                "name": "Лінія",
+                "terms": "Line,ksysz"
             },
             "man_made": {
                 "name": "Штучні споруди",
-                "terms": "штучні споруди"
+                "terms": "Man Made,inexys cgjhelb"
             },
             "man_made/breakwater": {
-                "name": "Хвилеріз"
+                "name": "Хвилеріз",
+                "terms": "Breakwater,dbkthsp"
             },
             "man_made/cutline": {
-                "name": "Просіка"
+                "name": "Просіка",
+                "terms": "Cut line,ghjcsrf"
             },
             "man_made/lighthouse": {
                 "name": "Маяк",
-                "terms": "маяк,сигнал,вогонь"
+                "terms": "Lighthouse,vfzr,сигнал,вогонь"
             },
             "man_made/pier": {
                 "name": "Пірс",
-                "terms": "пірс,причал"
+                "terms": "Pier,gshc,причал"
             },
             "man_made/pipeline": {
-                "name": "Трубопровід"
+                "name": "Трубопровід",
+                "terms": "Pipeline,nhejghjdsl"
             },
             "man_made/survey_point": {
-                "name": "Геодезичний пункт"
+                "name": "Геодезичний пункт",
+                "terms": "Survey Point,utjltpbxybq geyrn"
             },
             "man_made/tower": {
-                "name": "Вежа"
+                "name": "Вежа",
+                "terms": "Tower,dtf, башта"
             },
             "man_made/wastewater_plant": {
                 "name": "Очисні споруди",
-                "terms": "очисні споруди,дренаж,стічна канава"
+                "terms": "Wastewater Plant,jxbcys cgjhelb,дренаж"
             },
             "man_made/water_tower": {
-                "name": "Водонапірна вежа"
+                "name": "Водонапірна вежа",
+                "terms": "Water Tower,djljyfgshyf dtf"
             },
             "man_made/water_well": {
                 "name": "Колодязь",
-                "terms": "колодязь,вода"
+                "terms": "Water well,rjkjlzpm,вода"
             },
             "man_made/water_works": {
-                "name": "Водозабір"
+                "name": "Водозабір",
+                "terms": "Water Works,djljpfsh"
             },
             "natural": {
-                "name": "Природа"
+                "name": "Природа",
+                "terms": "Natural,ghbhjlf"
             },
             "natural/bay": {
-                "name": "Затока"
+                "name": "Затока",
+                "terms": "Bay,pfnjrf"
             },
             "natural/beach": {
-                "name": "Пляж"
+                "name": "Пляж",
+                "terms": "Beach,gkz"
             },
             "natural/cliff": {
-                "name": "Скеля/Яр"
+                "name": "Скеля/Яр",
+                "terms": "Cliff,crtkz zh"
             },
             "natural/coastline": {
-                "name": "Берегова лінія"
+                "name": "Берегова лінія",
+                "terms": "Coastline,thtujdf ksysz"
             },
             "natural/fell": {
-                "name": "Пасовище"
+                "name": "Пасовище",
+                "terms": "Fell,gfcjdbot"
             },
             "natural/glacier": {
                 "name": "Льодовик",
-                "terms": "льодовик"
+                "terms": "Glacier,kmjljdbr"
             },
             "natural/grassland": {
                 "name": "Трави",
-                "terms": "луг, вигін"
+                "terms": "Grassland,nhfdb, луг, вигін"
             },
             "natural/heath": {
-                "name": "Пустир/Вереск"
+                "name": "Пустир/Вереск",
+                "terms": "Heath,gecnbh, степ"
             },
             "natural/peak": {
                 "name": "Пік",
-                "terms": "пагорб,круча,вершина,гора,найвища точка,гребінь,узгір’я,скеля"
+                "terms": "Peak,gsr,пагорб,круча,вершина,гора,найвища точка,гребінь,узгір’я,скеля"
             },
             "natural/scree": {
                 "name": "Кам’яний обвал",
-                "terms": "щебінь, осип"
+                "terms": "Scree,rfvzybq jdfk, щебінь, осип"
             },
             "natural/scrub": {
-                "name": "Чагарник"
+                "name": "Чагарник",
+                "terms": "Scrub,xfufhybr, кущі"
             },
             "natural/spring": {
                 "name": "Джерело",
-                "terms": "вода,джерело"
+                "terms": "Spring,lthtkj, вода"
             },
             "natural/tree": {
-                "name": "Дерево"
+                "name": "Дерево",
+                "terms": "Tree,lthtdj"
             },
             "natural/water": {
-                "name": "Вода"
+                "name": "Вода",
+                "terms": "Water,djlf"
             },
             "natural/water/lake": {
-                "name": "Озеро"
+                "name": "Озеро",
+                "terms": "Lake,jpthj"
             },
             "natural/water/pond": {
-                "name": "Ставок"
+                "name": "Ставок",
+                "terms": "Pond,cnfdjr"
             },
             "natural/water/reservoir": {
-                "name": "Резервуар"
+                "name": "Резервуар",
+                "terms": "Reservoir,htpthdefh"
             },
             "natural/wetland": {
-                "name": "Заболочені землі"
+                "name": "Заболочені землі",
+                "terms": "Wetland,pfjkjxtys ptvks"
             },
             "natural/wood": {
-                "name": "Дерева"
+                "name": "Дерева",
+                "terms": "Wood,lthtdf"
             },
             "office": {
-                "name": "Офіс"
+                "name": "Офіс",
+                "terms": "Office,jasc"
             },
             "place": {
-                "name": "Місцевість"
+                "name": "Місцевість",
+                "terms": "Place,vscwtdscnm"
             },
             "place/city": {
-                "name": "Місто"
+                "name": "Місто",
+                "terms": "City,vscnj"
             },
             "place/hamlet": {
-                "name": "Хутір"
+                "name": "Хутір",
+                "terms": "Hamlet,ensh"
             },
             "place/island": {
                 "name": "Острів",
-                "terms": "архіпелаг,атол,мис,бар’єр,мілина,острів,острівець,риф,коса"
+                "terms": "Island,jcnhsd,архіпелаг,атол,мис,бар’єр,мілина,острівець,риф,коса"
             },
             "place/isolated_dwelling": {
-                "name": "Відокремлене житло"
+                "name": "Відокремлене житло",
+                "terms": "Isolated Dwelling,dsljrhtvktyt bnkj"
             },
             "place/locality": {
-                "name": "Місцевість"
+                "name": "Місцевість",
+                "terms": "Locality,vscwtdscnm"
             },
             "place/town": {
-                "name": "Місто"
+                "name": "Місто",
+                "terms": "Town,vscnj"
             },
             "place/village": {
-                "name": "Село"
+                "name": "Село",
+                "terms": "Village,ctkj"
             },
             "point": {
-                "name": "Точка"
+                "name": "Точка",
+                "terms": "Point,njxrf"
             },
             "power": {
-                "name": "Енергетика"
+                "name": "Енергетика",
+                "terms": "Power,tythutnbrf"
             },
             "power/generator": {
-                "name": "Електростанція"
+                "name": "Електростанція",
+                "terms": "Power Generator,tktrnhjcnfywsz"
             },
             "power/line": {
-                "name": "Лінія електропередач"
+                "name": "Лінія електропередач",
+                "terms": "Power Line,ksysz tktrnhjgthtlfx"
             },
             "power/pole": {
-                "name": "Опора"
+                "name": "Опора",
+                "terms": "Power Pole,jgjhf"
             },
             "power/sub_station": {
-                "name": "Підстанція"
+                "name": "Підстанція",
+                "terms": "Substation,gslcnfywsz"
             },
             "power/tower": {
-                "name": "Опора ЛЕП"
+                "name": "Опора ЛЕП",
+                "terms": "High-Voltage Tower,jgjhf KTG"
             },
             "power/transformer": {
-                "name": "Трансформатор"
+                "name": "Трансформатор",
+                "terms": "Transformer,nhfycajhvfnjh"
             },
             "railway": {
-                "name": "Залізниця"
+                "name": "Залізниця",
+                "terms": "Railway,pfkspybwz"
             },
             "railway/abandoned": {
-                "name": "Занедбані колії"
+                "name": "Занедбані колії",
+                "terms": "Abandoned Railway,pfytlfys gjks"
             },
             "railway/disused": {
-                "name": "Путі, що не використовуються"
+                "name": "Колії, що не використовуються",
+                "terms": "Disused Railway,rjks oj yt dbrjhbcnjdenmcz"
             },
             "railway/halt": {
-                "name": "Залізнична зупинка"
+                "name": "Залізнична зупинка",
+                "terms": "Railway Halt,pfkspybxyf pegbyrf"
             },
             "railway/level_crossing": {
                 "name": "Залізничний переїзд",
-                "terms": "залізничний переїзд"
+                "terms": "Level Crossing,pfkspybxybq gthtpl"
             },
             "railway/monorail": {
-                "name": "Монорейка"
+                "name": "Монорейка",
+                "terms": "Monorail,vjyjhtqrf"
             },
             "railway/platform": {
-                "name": "Залізнична платформа"
+                "name": "Залізнична платформа",
+                "terms": "Railway Platform,pfkspybxyf gkfanajhvf"
             },
             "railway/rail": {
-                "name": "Рейки"
+                "name": "Рейки",
+                "terms": "Rail,htqrb, колії"
             },
             "railway/station": {
-                "name": "Залізнична станція"
+                "name": "Залізнична станція",
+                "terms": "Railway Station,pfkspybxyf cnfywsz"
             },
             "railway/subway": {
-                "name": "Метрополітен"
+                "name": "Метрополітен",
+                "terms": "Subway,vtnhjgjksnty"
             },
             "railway/subway_entrance": {
-                "name": "Вхід до метро"
+                "name": "Вхід до метро",
+                "terms": "Subway Entrance,dsl lj vtnhj"
             },
             "railway/tram": {
                 "name": "Трамвай",
-                "terms": "трамвай"
+                "terms": "Tram,nhfvdfq"
             },
             "relation": {
-                "name": "Зв’язок"
+                "name": "Зв’язок",
+                "terms": "Relation,pdzpjr"
             },
             "route/ferry": {
                 "name": "Паром",
-                "terms": "паром"
+                "terms": "Ferry Route,gfhjv"
             },
             "shop": {
-                "name": "Магазини/Майстерні"
+                "name": "Магазини/Майстерні",
+                "terms": "Shop,vfufpbyb vfqcnthys, продаж, послуги, крамниці"
             },
             "shop/alcohol": {
                 "name": "Алкогольні напої",
-                "terms": "алкоголь"
+                "terms": "Liquor Store,fkrjujkmys yfgj, алкоголь"
             },
             "shop/bakery": {
-                "name": "Булочна"
+                "name": "Булочна",
+                "terms": "Bakery,ekjxyf, хліб"
             },
             "shop/beauty": {
-                "name": "Cалон краси"
+                "name": "Cалон краси",
+                "terms": "Beauty Shop,cfkjy rhfcb"
             },
             "shop/beverages": {
-                "name": "Напої"
+                "name": "Напої",
+                "terms": "Beverage Store,yfgj"
             },
             "shop/bicycle": {
-                "name": "Веломагазин"
+                "name": "Веломагазин",
+                "terms": "Bicycle Shop,dtkjvfufpby"
             },
             "shop/books": {
-                "name": "Книгарня"
+                "name": "Книгарня",
+                "terms": "Bookstore,rybufhyz"
             },
             "shop/boutique": {
-                "name": "Бутік"
+                "name": "Бутік",
+                "terms": "Boutique,ensr"
             },
             "shop/butcher": {
-                "name": "М’ясна лавка"
+                "name": "М’ясна лавка",
+                "terms": "Butcher,vzcyf kfdrf, м’ясо, м’ясний відділ"
             },
             "shop/car": {
-                "name": "Автосалон"
+                "name": "Автосалон",
+                "terms": "Car Dealership,fdnjcfkjy"
             },
             "shop/car_parts": {
-                "name": "Автозапчастини"
+                "name": "Автозапчастини",
+                "terms": "Car Parts Store,fdnjpfgxfcnbyb"
             },
             "shop/car_repair": {
-                "name": "Автомайстерня"
+                "name": "Автомайстерня",
+                "terms": "Car Repair Shop,fdnjvfqcnthyz"
             },
             "shop/chemist": {
-                "name": "Побутова хімія"
+                "name": "Побутова хімія",
+                "terms": "Chemist,gjenjdf svsz"
             },
             "shop/clothes": {
-                "name": "Одяг"
+                "name": "Одяг",
+                "terms": "Clothing Store,jlzu"
             },
             "shop/computer": {
-                "name": "Комп’ютери"
+                "name": "Комп’ютери",
+                "terms": "Computer Store,rjvgnthb"
             },
             "shop/confectionery": {
-                "name": "Кондитерська"
+                "name": "Кондитерська",
+                "terms": "Confectionery,rjylbnthcmrf, цукерки, солодощі"
             },
             "shop/convenience": {
-                "name": "міні-маркет"
+                "name": "Міні-маркет",
+                "terms": "Convenience Store,vsys-vfhrtn, ларьок, магазин"
             },
             "shop/deli": {
-                "name": "Делікатеси/Вишукана їжа"
+                "name": "Делікатеси/Вишукана їжа",
+                "terms": "Deli,ltksrfntcb"
             },
             "shop/department_store": {
-                "name": "Універмаг"
+                "name": "Універмаг",
+                "terms": "Department Store,eysdthvfu"
             },
             "shop/doityourself": {
-                "name": "Зроби сам"
+                "name": "Зроби сам",
+                "terms": "DIY Store,phjb cfv"
             },
             "shop/dry_cleaning": {
-                "name": "Хімчистка"
+                "name": "Хімчистка",
+                "terms": "Dry Cleaners,vsxbcnrf"
             },
             "shop/electronics": {
-                "name": "Електроніка"
+                "name": "Електроніка",
+                "terms": "Electronics Store,tktrnhjysrf"
             },
             "shop/farm": {
                 "name": "Стелаж з фермерськими товарами",
-                "terms": "фермерський магазин,стелаж"
+                "terms": "Produce Stand,cntkf p athvthcmrbvb njdfhfvb, фермерський магазин, стелаж"
             },
             "shop/fishmonger": {
-                "name": "Риба"
+                "name": "Риба",
+                "terms": "Fishmonger,hbf"
             },
             "shop/florist": {
-                "name": "Квіти"
+                "name": "Квіти",
+                "terms": "Florist,rdsnb"
             },
             "shop/furniture": {
-                "name": "Меблі"
+                "name": "Меблі",
+                "terms": "Furniture Store,vtks"
             },
             "shop/garden_centre": {
-                "name": "Садово-парковий центр"
+                "name": "Садово-парковий центр",
+                "terms": "Garden Center,cfljdj-gfhrjdbq wtynh"
             },
             "shop/gift": {
-                "name": "Подарунки"
+                "name": "Подарунки",
+                "terms": "Gift Shop,gjlfheyrb"
             },
             "shop/greengrocer": {
-                "name": "Овочевий"
+                "name": "Овочевий",
+                "terms": "Greengrocer,jdjxtdbq"
             },
             "shop/hairdresser": {
-                "name": "Перукарня"
+                "name": "Перукарня",
+                "terms": "Hairdresser,gtherfhyz"
             },
             "shop/hardware": {
-                "name": "Господарські товари"
+                "name": "Господарські товари",
+                "terms": "Hardware Store,ujcgjlfhcmrs njdfhb"
             },
             "shop/hifi": {
-                "name": "Аудіо апаратура"
+                "name": "Аудіо апаратура",
+                "terms": "Hifi Store,flesj jgfhfnehf"
             },
             "shop/jewelry": {
-                "name": "Ювелірні прикраси"
+                "name": "Ювелірні прикраси",
+                "terms": "Jeweler,dtkshys ghbrhfcb"
             },
             "shop/kiosk": {
                 "name": "Кіоск",
-                "terms": "МАФ, ларьок"
+                "terms": "Kiosk,rsjcr, МАФ, ларьок"
             },
             "shop/laundry": {
-                "name": "Пральня"
+                "name": "Пральня",
+                "terms": "Laundry,ghfkmyz"
             },
             "shop/mall": {
-                "name": "Торгівельний центр"
+                "name": "Торгівельний центр",
+                "terms": "Mall,njhusdtkmybq wtynh"
             },
             "shop/mobile_phone": {
-                "name": "Мобільні телефони"
+                "name": "Мобільні телефони",
+                "terms": "Mobile Phone Store,vjskmys ntktajyb"
             },
             "shop/motorcycle": {
-                "name": "Мотомагазин"
+                "name": "Мотомагазин",
+                "terms": "Motorcycle Dealership,vjnjvfufpby, мотоцикли"
             },
             "shop/music": {
-                "name": "Музичний магазин"
+                "name": "Музичний магазин",
+                "terms": "Music Store,vepbxybq vfufpby"
             },
             "shop/newsagent": {
-                "name": "Газетний кіоск"
+                "name": "Газетний кіоск",
+                "terms": "Newsagent,ufptnybq rsjcr"
             },
             "shop/optician": {
-                "name": "Оптика"
+                "name": "Оптика",
+                "terms": "Optician,jgnbrf"
             },
             "shop/outdoor": {
-                "name": "Товари для активного відпочинку"
+                "name": "Товари для активного відпочинку",
+                "terms": "Outdoor Store,njdfhb lkz frnbdyjuj dslgjxbyre, туризм, туристичне спорядження"
             },
             "shop/pet": {
-                "name": "Товари для тварин"
+                "name": "Товари для тварин",
+                "terms": "Pet Store,njdfhb lkz ndfhby"
             },
             "shop/shoes": {
-                "name": "Взуття"
+                "name": "Взуття",
+                "terms": "Shoe Store,dpennz"
             },
             "shop/sports": {
-                "name": "Спорттовари"
+                "name": "Спорттовари",
+                "terms": "Sporting Goods Store,cgjhnnjdfhb"
             },
             "shop/stationery": {
-                "name": "Канцтовари"
+                "name": "Канцтовари",
+                "terms": "Stationery Store,rfywnjdfhb"
             },
             "shop/supermarket": {
-                "name": "Супермаркет"
+                "name": "Супермаркет",
+                "terms": "Supermarket,cegthvfhrtn"
             },
             "shop/toys": {
-                "name": "Іграшки"
+                "name": "Іграшки",
+                "terms": "Toy Store,suhfirb"
             },
             "shop/travel_agency": {
-                "name": "Туристична агенція"
+                "name": "Туристична агенція",
+                "terms": "Travel Agency,nehbcnbxyf futywsz"
             },
             "shop/tyres": {
-                "name": "Колеса та шини"
+                "name": "Колеса та шини",
+                "terms": "Tire Store,ibyb"
             },
             "shop/vacant": {
-                "name": "Здається в оренду"
+                "name": "Здається в оренду",
+                "terms": "Vacant Shop,plfnmcz d jhtyle"
             },
             "shop/variety_store": {
-                "name": "Універсам"
+                "name": "Універсам",
+                "terms": "Variety Store,eysdthcfv"
             },
             "shop/video": {
-                "name": "Відео"
+                "name": "Відео",
+                "terms": "Video Store,dsltj, відеомагазин"
             },
             "tourism": {
-                "name": "Туризм"
+                "name": "Туризм",
+                "terms": "Tourism,nehbpv"
             },
             "tourism/alpine_hut": {
-                "name": "Гірський притулок"
+                "name": "Гірський притулок",
+                "terms": "Alpine Hut,ushcmrbq ghbnekjr, колиба"
             },
             "tourism/artwork": {
-                "name": "Витвори мистецтв"
+                "name": "Витвори мистецтв",
+                "terms": "Artwork,dbndjhb vbcntwnd"
             },
             "tourism/attraction": {
-                "name": "Визначне місце"
+                "name": "Визначне місце",
+                "terms": "Tourist Attraction,dbpyfxyt vscwt"
             },
             "tourism/camp_site": {
-                "name": "Кемпінг"
+                "name": "Кемпінг",
+                "terms": "Camp Site,rtvgsyu"
             },
             "tourism/caravan_site": {
-                "name": "Караван-парк"
+                "name": "Караван-парк",
+                "terms": "RV Park,rfhfdfy-gfhr"
             },
             "tourism/chalet": {
-                "name": "Шале"
+                "name": "Шале",
+                "terms": "Chalet,ifkt"
             },
             "tourism/guest_house": {
                 "name": "Гостьовий будинок",
-                "terms": "хостел,міні-готель,ліжко та сніданок"
+                "terms": "Guest House,ujcnmjdbq elbyjr,хостел,міні-готель,ліжко та сніданок"
             },
             "tourism/hostel": {
-                "name": "Хостел"
+                "name": "Хостел",
+                "terms": "Hostel,jcntk"
             },
             "tourism/hotel": {
-                "name": "Готель"
+                "name": "Готель",
+                "terms": "Hotel,ujntkm"
             },
             "tourism/information": {
-                "name": "Інформація"
+                "name": "Інформація",
+                "terms": "Information,syajhvfwsz"
             },
             "tourism/motel": {
-                "name": "Мотель"
+                "name": "Мотель",
+                "terms": "Motel,vjntkm"
             },
             "tourism/museum": {
-                "name": "Музей"
+                "name": "Музей",
+                "terms": "Museum,veptq"
             },
             "tourism/picnic_site": {
-                "name": "Місце для пікніка"
+                "name": "Місце для пікніка",
+                "terms": "Picnic Site,vscwt lkz gsrysrf"
             },
             "tourism/theme_park": {
-                "name": "Тематичний парк"
+                "name": "Тематичний парк",
+                "terms": "Theme Park,ntvfnbxybq gfhr"
             },
             "tourism/viewpoint": {
-                "name": "Оглядовий майданчик"
+                "name": "Оглядовий майданчик",
+                "terms": "Viewpoint,jukzljddbq vfqlfyxbr"
             },
             "tourism/zoo": {
-                "name": "Зоопарк"
+                "name": "Зоопарк",
+                "terms": "Zoo,pjjgfhr"
             },
             "type/boundary": {
-                "name": "Кордон"
+                "name": "Кордон",
+                "terms": "Boundary,rjhljy"
             },
             "type/boundary/administrative": {
-                "name": "Адміністративний кордон"
+                "name": "Адміністративний кордон",
+                "terms": "Administrative Boundary,flvsyscnhfnbdybq rjhljy"
             },
             "type/multipolygon": {
-                "name": "Мультиполігон"
+                "name": "Мультиполігон",
+                "terms": "Multipolygon,vekmnbgjksujy"
             },
             "type/restriction": {
-                "name": "Обмеження"
+                "name": "Обмеження",
+                "terms": "Restriction,jvttyyz"
             },
             "type/route": {
-                "name": "Маршрут"
+                "name": "Маршрут",
+                "terms": "Route,vfhihen"
             },
             "type/route/bicycle": {
-                "name": "Велосипедний маршрут"
+                "name": "Велосипедний маршрут",
+                "terms": "Cycle Route,dtkjcbgtlybq vfhihen"
             },
             "type/route/bus": {
-                "name": "Автобусний маршрут"
+                "name": "Автобусний маршрут",
+                "terms": "Bus Route,fdnjecybq vfhihen"
             },
             "type/route/detour": {
-                "name": "Об’їзд"
+                "name": "Об’їзд",
+                "terms": "Detour Route,jpl"
             },
             "type/route/ferry": {
-                "name": "Паром"
+                "name": "Паром",
+                "terms": "Ferry Route,gfhjv"
             },
             "type/route/foot": {
-                "name": "Пішохідний маршрут"
+                "name": "Пішохідний маршрут",
+                "terms": "Foot Route,gsijslybq vfhihen"
             },
             "type/route/hiking": {
                 "name": "Туристичний маршрут",
-                "terms": "пішохідний маршрут"
+                "terms": "Hiking Route,nehbcnbxybq vfhihen, пішохідний маршрут"
             },
             "type/route/pipeline": {
-                "name": "Трубопровід"
+                "name": "Трубопровід",
+                "terms": "Pipeline Route,nhejghjdsl"
             },
             "type/route/power": {
-                "name": "Лінія електропередач"
+                "name": "Лінія електропередач",
+                "terms": "Power Route,ksysz tktrnhjgthtlfx"
             },
             "type/route/road": {
-                "name": "Автомобільний маршрут"
+                "name": "Автомобільний маршрут",
+                "terms": "Road Route,fdnjvjskmybq vfhihen"
             },
             "type/route/train": {
-                "name": "Залізнийчни маршрут"
+                "name": "Залізничний маршрут",
+                "terms": "Train Route,pfkspybxybq vfhihen"
             },
             "type/route/tram": {
-                "name": "Трамвайний маршрут"
+                "name": "Трамвайний маршрут",
+                "terms": "Tram Route,nhfvdfqybq vfhihen"
             },
             "type/route_master": {
-                "name": "Майстер маршрут"
+                "name": "Транспортний маршрут",
+                "terms": "Route Master,nhfycgjhnybq vfhihen"
             },
             "vertex": {
-                "name": "Інше"
+                "name": "Інше",
+                "terms": "Other,syit"
             },
             "waterway": {
-                "name": "Водний шлях"
+                "name": "Водний шлях",
+                "terms": "Waterway,djlybq ikz"
             },
             "waterway/canal": {
-                "name": "Канал"
+                "name": "Канал",
+                "terms": "Canal,rfyfk"
             },
             "waterway/dam": {
-                "name": "Дамба"
+                "name": "Дамба",
+                "terms": "Dam,lfvf"
             },
             "waterway/ditch": {
-                "name": "Канава"
+                "name": "Канава",
+                "terms": "Ditch,rfyfdf"
             },
             "waterway/drain": {
-                "name": "Дренажний канал"
+                "name": "Дренажний канал",
+                "terms": "Drain,lhtyfybq rfyfk"
             },
             "waterway/river": {
-                "name": "Ріка"
+                "name": "Ріка",
+                "terms": "River,hsrf, річка"
             },
             "waterway/riverbank": {
-                "name": "Берег ріки"
+                "name": "Берег ріки",
+                "terms": "Riverbank,thtu hsrb"
             },
             "waterway/stream": {
-                "name": "Струмок"
+                "name": "Струмок",
+                "terms": "Stream,cnhevjr"
             },
             "waterway/weir": {
-                "name": "Водозлив"
+                "name": "Водозлив",
+                "terms": "Weir,djljpkbd"
             }
         }
     }

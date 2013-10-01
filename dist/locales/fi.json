@@ -41,6 +41,9 @@
             }
         },
         "continue": {
+            "key": "A",
+            "title": "Pidennä",
+            "description": "Jatka ja pidennä tätä viivaa.",
             "annotation": {
                 "line": "Viivan muokkaaminen aloitettu.",
                 "area": "Alueen muokkaaminen aloitettu."
@@ -69,10 +72,22 @@
             "not_closed": "Tätä ei voi tehdä ympyränmuotoiseksi, sillä sitä ei ole suljettu."
         },
         "orthogonalize": {
+            "title": "Muuta suorakulmaiseksi",
+            "description": {
+                "line": "Muuta tämän viivan kulmat suorakulmiksi.",
+                "area": "Muuta tämän alueen kulmat suorakulmiksi."
+            },
+            "key": "S",
             "annotation": {
                 "line": "Viiva muutettu suorakulmaiseksi.",
                 "area": "Alue muutettu suorakulmaiseksi."
             }
+        },
+        "straighten": {
+            "title": "Suorista",
+            "description": "Suorista tämä viiva.",
+            "key": "S",
+            "annotation": "Viiva suoristettiin."
         },
         "delete": {
             "title": "Poista",
@@ -132,6 +147,7 @@
         },
         "rotate": {
             "title": "Käännä",
+            "description": "Käännä tätä kappaletta sen keskipisteen ympäri.",
             "key": "R",
             "annotation": {
                 "line": "Viiva käännetty.",
@@ -170,14 +186,14 @@
         "nothing": "Ei muokkaushistoriaa."
     },
     "tooltip_keyhint": "Pikanäppäin:",
-    "browser_notice": "Tämä kartanmuokkausohjelma toimii Firefox-, Chrome-, Safari- ja Opera-selaimissa sekä Internet Explorer 9 tai uudemmalla selaimella. Nykyinen verkkoselain ei ole tuettu, joten päivitä verkkoselain tai muokkaa karttaa Potlatch 2 -ohjelmalla.",
+    "browser_notice": "Tätä karttamuokkainta voi käyttää Firefox-, Chrome-, Safari- ja Opera-selaimilla sekä Internet Explorer 9 tai uudemmalla selaimella. Nykyinen verkkoselain ei ole tuettu, joten päivitä verkkoselain tai muokkaa karttaa Potlatch 2 -ohjelmalla.",
     "translate": {
         "translate": "Käännä",
         "localized_translation_label": "Monikielinen nimi",
         "localized_translation_language": "Valitse kieli",
         "localized_translation_name": "Nimi"
     },
-    "zoom_in_edit": "Muokkaa lähentämällä karttaa",
+    "zoom_in_edit": "Lähennä karttaa ennen muokkaamista",
     "logout": "kirjaudu ulos",
     "loading_auth": "Yhdistetään OpenStreetMap-palveluun...",
     "report_a_bug": "ilmoita ongelmasta",
@@ -191,7 +207,7 @@
         "description_placeholder": "Kuvaile lyhyesti karttaan tehtyjä muutoksia",
         "message_label": "Yhteenveto",
         "upload_explanation": "Palvelimelle lähetettävät muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
-        "upload_explanation_with_user": "Palvelimelle lähetettävät muutokset käyttäjänä {user} tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
+        "upload_explanation_with_user": "Palvelimelle lähetetään muutokset käyttäjätunnisteella {user}. Muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
         "save": "Tallenna",
         "cancel": "Peru",
         "warnings": "Varoitukset",
@@ -236,6 +252,7 @@
         "title": "Tausta",
         "description": "Taustan asetukset",
         "percent_brightness": "{opacity}% kirkkaus",
+        "custom": "Mukautettu",
         "fix_misalignment": "Korjaa ilmakuvavirhe",
         "reset": "palauta"
     },
@@ -259,7 +276,8 @@
         "view_on_osm": "Näytä OSM-kartalla",
         "facebook": "Jaa Facebookissa",
         "twitter": "Jaa Twitterissä",
-        "google": "Jaa Google+-palvelussa"
+        "google": "Jaa Google+-palvelussa",
+        "help_html": "Karttaan tehdyt muutokset ilmestyvät perinteiseen karttanäkymään muutaman minuutin kuluessa. Tiettyjen ominaisuuksien ilmestyminen kartalle ja muutokset tiettyihin karttanäkymiin voivat viedä kauemmin\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>lisätietoja</a>).\n"
     },
     "confirm": {
         "okay": "OK"
@@ -537,6 +555,9 @@
                 "label": "Kerrokset",
                 "placeholder": "2, 4, 6..."
             },
+            "lit": {
+                "label": "Valaistus"
+            },
             "location": {
                 "label": "Sijainti"
             },
@@ -730,6 +751,9 @@
             "amenity": {
                 "name": "Palvelu"
             },
+            "amenity/arts_centre": {
+                "name": "Taidekeskus"
+            },
             "amenity/atm": {
                 "name": "Pankkiautomaatti",
                 "terms": "otto, pankkiautomaatti, rahannostoautomaatti, pankki"
@@ -752,6 +776,10 @@
             "amenity/bicycle_rental": {
                 "name": "Pyörävuokraamo",
                 "terms": "pyörävuokraamo, kaupunkipyörä, pyöränvuokraus, pyörän vuokraus, polkupyörävuokraamo, polkupyörän vuokraus, polkupyöränvuokraus, polkupyörä, pyörä"
+            },
+            "amenity/boat_rental": {
+                "name": "Venevuokraamo",
+                "terms": "vene, laiva, paatti, jolla, veneenvuokraus, venevuokra, vuokra, venevuokraus, venevuokraamo, veneenvuokraamo"
             },
             "amenity/cafe": {
                 "name": "Kahvila"
@@ -776,8 +804,8 @@
                 "terms": "leffa, leffateatteri, elokuva, elokuvateatteri"
             },
             "amenity/college": {
-                "name": "Ammattikorkeakoulu",
-                "terms": "college, ammattikorkeakoulu, amk"
+                "name": "Ammattiopisto",
+                "terms": "ammattiopisto, amis, ammattikoulu, koulu, koulutus, oppilaitos, toinen aste"
             },
             "amenity/courthouse": {
                 "name": "Käräjäoikeus",
@@ -824,7 +852,7 @@
             },
             "amenity/parking": {
                 "name": "Pysäköintialue",
-                "terms": "pysäköinti, parkkipaikka, pysäköintipaikka, parkki, pysäköintitalo, parkkitalo"
+                "terms": "pysäköinti, parkkipaikka, pysäköintipaikka, parkki, pysäköintitalo, parkkitalo, autoparkki, auto"
             },
             "amenity/pharmacy": {
                 "name": "Apteekki",
@@ -863,16 +891,19 @@
                 "name": "Ravintola"
             },
             "amenity/school": {
-                "name": "Koulu"
+                "name": "Koulu",
+                "terms": "koulu, alakoulu, ala-aste, yläaste, yläkoulu, lukio, yhteislukio, keskikoulu, koulutus, opiskelu, oppilaitos"
             },
             "amenity/swimming_pool": {
                 "name": "Uima-allas"
             },
             "amenity/taxi": {
-                "name": "Taksitolppa"
+                "name": "Taksitolppa",
+                "terms": "taksitolppa, taksiasema, taksipiste, taksi, taksikyltti, taxi"
             },
             "amenity/telephone": {
-                "name": "Puhelin"
+                "name": "Yleinen puhelin",
+                "terms": "puhelinkoppi, puhelin, puhelinkioski, yleinen puhelin, julkinen puhelin"
             },
             "amenity/theatre": {
                 "name": "Teatteri"
@@ -885,7 +916,8 @@
                 "terms": "kunnantalo, kaupungintalo, valtuusto,"
             },
             "amenity/university": {
-                "name": "Yliopisto"
+                "name": "Korkeakoulu",
+                "terms": "yliopisto, korkeakoulu, college, ammattikorkeakoulu, amk"
             },
             "amenity/waste_basket": {
                 "name": "Roskakori",
@@ -954,6 +986,9 @@
             "building/apartments": {
                 "name": "Asunnot"
             },
+            "building/commercial": {
+                "name": "Kaupallinen rakennus"
+            },
             "building/entrance": {
                 "name": "Sisäänkäynti"
             },
@@ -968,9 +1003,19 @@
                 "name": "Mökki",
                 "terms": "maja, mökki, kesämökki, tönö, pikkutalo, pieni rakennus"
             },
+            "building/industrial": {
+                "name": "Teollisuusrakennus"
+            },
+            "building/residential": {
+                "name": "Asuinrakennus"
+            },
             "emergency/ambulance_station": {
                 "name": "Ambulanssiasema",
                 "terms": "ambulanssi, ambulanssit, hälytysajoneuvo, ambulanssihalli, ambulanssivarasto, ambulanssitalli, hälytysajoneuvohalli, hälytysajoneuvotalli, hälytysajoneuvovarasto"
+            },
+            "emergency/fire_hydrant": {
+                "name": "Paloposti",
+                "terms": "paloposti, vedensyöttö, vesisyöttö, palokunta, vesiposti"
             },
             "emergency/phone": {
                 "name": "Hätäpuhelin",
@@ -1192,6 +1237,10 @@
             "leisure/pitch/basketball": {
                 "name": "Koripallokenttä"
             },
+            "leisure/pitch/skateboard": {
+                "name": "Rullalautailupuisto",
+                "terms": "skeittipuisto, skeittaus, skeitti, rullalautailu, rullalauta, rullalautailupuisto, parkit, parkki, skeittiparkki, skeittiparkit"
+            },
             "leisure/pitch/soccer": {
                 "name": "Jalkapallokenttä"
             },
@@ -1287,7 +1336,7 @@
                 "name": "Lähde"
             },
             "natural/tree": {
-                "name": "Havupu"
+                "name": "Havupuu"
             },
             "natural/water": {
                 "name": "Vesi"
@@ -1516,7 +1565,8 @@
                 "name": "Lehtikoju"
             },
             "shop/optician": {
-                "name": "Optikko"
+                "name": "Optikko",
+                "terms": "optikko, optiikko, optometristi, optometri, optometria, silmälasi, silmälasit, aurinkolasi, aurinkolasit, silmälasiliike"
             },
             "shop/outdoor": {
                 "name": "Ulkoilmamyymälä"

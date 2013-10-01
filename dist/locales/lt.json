@@ -1,8 +1,8 @@
 {
     "modes": {
         "add_area": {
-            "title": "Teritorija",
-            "description": "Pridėti parkus, pastatus, ežerus ar kitas vietas į žemėlapį."
+            "title": "Plotas",
+            "description": "Pridėkite parkus, pastatus, ežerus ar kitas vietas į žemėlapį."
         },
         "add_line": {
             "title": "Linija",

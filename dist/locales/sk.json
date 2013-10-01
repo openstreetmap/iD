@@ -74,6 +74,12 @@
             "not_closed": "Tento objekt nemožno usporiadať do kruhu, pretože nie je uzavretý do slučky."
         },
         "orthogonalize": {
+            "title": "Usporiadaj do pravého uhla.",
+            "description": {
+                "line": "Sprav rohy tejto čiary do pravého uhla.",
+                "area": "Sprav rohy tejto plochy do pravého uhla."
+            },
+            "key": "S",
             "annotation": {
                 "line": "Usporiadanie rohov čiary do pravého uhla.",
                 "area": "Usporiadanie rohov plochy do pravého uhla."
@@ -81,8 +87,10 @@
         },
         "straighten": {
             "title": "Vyrovnaj",
-            "description": "Vyrovná túto čiaru",
-            "key": "S"
+            "description": "Vyrovnaj túto čiaru.",
+            "key": "S",
+            "annotation": "Vyrovnanie čiary.",
+            "too_bendy": "Tento objekt nemožno vyrovnať, pretože je príliš nepravidelný."
         },
         "delete": {
             "title": "Vymaž",

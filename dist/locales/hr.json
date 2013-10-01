@@ -74,6 +74,12 @@
             "not_closed": "Ovo se ne može zaokružiti jer nije zatvoren objekt."
         },
         "orthogonalize": {
+            "title": "Stavi pod pravi kut",
+            "description": {
+                "line": "Stavi pod pravi kut uglove linije.",
+                "area": "Stavi pod pravi kut uglove područja."
+            },
+            "key": "S",
             "annotation": {
                 "line": "Kutovi linije su pod pravim kutom.",
                 "area": "Kutovi područja su pod pravim kutom."
@@ -82,7 +88,9 @@
         "straighten": {
             "title": "Izravnaj",
             "description": "Izravnaj ovu liniju.",
-            "key": "S"
+            "key": "S",
+            "annotation": "Linija je izravnana.",
+            "too_bendy": "Ovo se ne može izravnati jer je previše krivudavo."
         },
         "delete": {
             "title": "Izbriši",
@@ -1378,7 +1386,7 @@
                 "terms": "svjetionik,svjetlosni signal,toranj za svjetlosnu navigaciju"
             },
             "man_made/pier": {
-                "name": "Pristanište",
+                "name": "Mol",
                 "terms": "pristanište,mol,lukobran,molo,mul,gat"
             },
             "man_made/pipeline": {
@@ -1454,8 +1462,8 @@
                 "terms": "hrpa gruha,sip,plazina,kršlje,krš,sitno kamenje na strmini,kamenje na strmini,kamenjar,kamen"
             },
             "natural/scrub": {
-                "name": "Šikara",
-                "terms": "šikara,zaraslo zemljište,gust šibljak,guštara,guštik,šiprag,šipražje,gustiš,šiblje, samoniklo šiblje,šibljar,šibljik"
+                "name": "Makija",
+                "terms": "šikara,zaraslo zemljište,gust šibljak,guštara,guštik,šiprag,šipražje,gustiš,šiblje, samoniklo šiblje,šibljar,šibljik,makija"
             },
             "natural/spring": {
                 "name": "Izvor",

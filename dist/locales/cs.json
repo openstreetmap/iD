@@ -74,6 +74,12 @@
             "not_closed": "Z objektu nelze udělat kruh, protože nejde o smyčku."
         },
         "orthogonalize": {
+            "title": "Zhranatit",
+            "description": {
+                "line": "Udělat rohy této cesty do hranata.",
+                "area": "Udělat rohy této plochy do hranata."
+            },
+            "key": "S",
             "annotation": {
                 "line": "Úhly cesty do pravého úhle.",
                 "area": "Rohy plochy do pravého úhle."
@@ -82,7 +88,9 @@
         "straighten": {
             "title": "Narovnat",
             "description": "Narovnat tuto cestu.",
-            "key": "S"
+            "key": "S",
+            "annotation": "Narovnána cesta",
+            "too_bendy": "Objekt není možné narovnat, protože je příliš zakroucený."
         },
         "delete": {
             "title": "Smazat",

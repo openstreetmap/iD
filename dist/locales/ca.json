@@ -74,6 +74,12 @@
             "not_closed": "Això no es pot fer circular perquè no té els extrems units."
         },
         "orthogonalize": {
+            "title": "Quadrar",
+            "description": {
+                "line": "Quadrar les cantonades d'aquesta línia",
+                "area": "Quadrar les cantonades d'aquesta àrea"
+            },
+            "key": "Q",
             "annotation": {
                 "line": "Heu quadrat les cantonades d'una línia.",
                 "area": "Heu quadrat les cantonades d'una àrea."
@@ -82,7 +88,9 @@
         "straighten": {
             "title": "Fer recta",
             "description": "Fes aquesta línia recta",
-            "key": "S"
+            "key": "S",
+            "annotation": "Quadrar una línia",
+            "too_bendy": "Això no es pot quadrar perquè és massa sinuós."
         },
         "delete": {
             "title": "Suprimeix",

@@ -74,6 +74,12 @@
             "not_closed": "Không thể làm tròn một đối tượng không phải là đa giác kín."
         },
         "orthogonalize": {
+            "title": "Làm Vuông góc",
+            "description": {
+                "line": "Làm vuông góc đường kẻ này.",
+                "area": "Làm vuông góc vùng này."
+            },
+            "key": "L",
             "annotation": {
                 "line": "làm vuông góc một đường kẻ",
                 "area": "làm vuông góc một vùng"
@@ -82,7 +88,9 @@
         "straighten": {
             "title": "Làm thẳng",
             "description": "Làm thẳng đường kẻ này.",
-            "key": "L"
+            "key": "L",
+            "annotation": "làm thẳng một đường kẻ",
+            "too_bendy": "Không thể làm thẳng đường kẻ này vì nó ngoằn ngoèo quá mức."
         },
         "delete": {
             "title": "Xóa",

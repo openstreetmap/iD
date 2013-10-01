@@ -453,6 +453,9 @@
             "atm": {
                 "label": "Distributeur de billets"
             },
+            "backrest": {
+                "label": "Dossier"
+            },
             "barrier": {
                 "label": "Type"
             },
@@ -1184,6 +1187,9 @@
                 "name": "Escalier",
                 "terms": "Escalier"
             },
+            "highway/stop": {
+                "name": "Paneau Stop"
+            },
             "highway/tertiary": {
                 "name": "Route tertiaire",
                 "terms": "Route tertiaire"
@@ -1871,7 +1877,8 @@
                 "terms": "Point de vue"
             },
             "tourism/zoo": {
-                "name": "Zoo"
+                "name": "Zoo",
+                "terms": "Zoo"
             },
             "type/boundary": {
                 "name": "Frontière"
@@ -1943,7 +1950,8 @@
                 "name": "Canal d'évacuation d'eau pluviale"
             },
             "waterway/river": {
-                "name": "Rivière"
+                "name": "Rivière",
+                "terms": "Rivière"
             },
             "waterway/riverbank": {
                 "name": "Berge"
