@@ -1,0 +1,15 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "lookout tower",
+        "fire tower"
+    ],
+    "tags": {
+        "man_made": "tower",
+        "tower:type": "observation"
+    },
+    "name": "Observation Tower"
+}
