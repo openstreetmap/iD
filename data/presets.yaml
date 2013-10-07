@@ -805,6 +805,9 @@ en:
       man_made/lighthouse: 
         name: Lighthouse
         terms: "<translate with synonyms or related terms for 'Lighthouse', separated by commas>"
+      man_made/observation: 
+        name: Observation Tower
+        terms: "<translate with synonyms or related terms for 'Observation Tower', separated by commas>"
       man_made/pier: 
         name: Pier
         terms: "<translate with synonyms or related terms for 'Pier', separated by commas>"
