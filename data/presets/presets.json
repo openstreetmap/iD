@@ -2948,6 +2948,21 @@
         },
         "name": "Lighthouse"
     },
+    "man_made/observation": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "lookout tower",
+            "fire tower"
+        ],
+        "tags": {
+            "man_made": "tower",
+            "tower:type": "observation"
+        },
+        "name": "Observation Tower"
+    },
     "man_made/pier": {
         "geometry": [
             "line",

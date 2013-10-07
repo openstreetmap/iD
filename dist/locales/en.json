@@ -1482,6 +1482,10 @@
                 "name": "Lighthouse",
                 "terms": ""
             },
+            "man_made/observation": {
+                "name": "Observation Tower",
+                "terms": "lookout tower,fire tower"
+            },
             "man_made/pier": {
                 "name": "Pier",
                 "terms": ""
