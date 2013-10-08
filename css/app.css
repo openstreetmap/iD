@@ -169,7 +169,6 @@ input[type=email] {
     width: 100%;
     border-radius:4px;
     text-overflow: ellipsis;
-    overflow: hidden;
     -webkit-transition: all 200ms;
        -moz-transition: all 200ms;
          -o-transition: all 200ms;
@@ -1034,7 +1033,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     min-height: 30px;
     border-top: 0;
     border-radius: 0 0 4px 4px;
-    overflow: hidden;
 }
 
 .form-field textarea {
