@@ -1,9 +1,13 @@
 iD.svg.TagClasses = function() {
-    var keys = d3.set([
-        'highway', 'railway', 'waterway', 'power', 'motorway', 'amenity',
-        'natural', 'landuse', 'building', 'oneway', 'bridge', 'boundary',
-        'tunnel', 'leisure', 'construction', 'place', 'aeroway'
-    ]), tagClassRe = /^tag-/,
+    var primary = [
+            'highway', 'railway', 'waterway', 'aeroway', 'motorway',
+            'power', 'amenity', 'natural', 'landuse', 'building', 'leisure',
+            'place', 'boundary'
+        ],
+        secondary = [
+            'oneway', 'bridge', 'tunnel', 'construction'
+        ],
+        tagClassRe = /^tag-/,
         tags = function(entity) { return entity.tags; };
 
     var tagClasses = function(selection) {
@@ -16,10 +20,21 @@ iD.svg.TagClasses = function() {
                 return name.length && !tagClassRe.test(name);
             }).join(' ');
 
-            var t = tags(entity);
-            for (var k in t) {
-                if (!keys.has(k) || t[k] === 'no') continue;
-                classes += ' tag-' + k + ' tag-' + k + '-' + t[k];
+            var t = tags(entity), i, k, v;
+
+            for (i = 0; i < primary.length; i++) {
+                k = primary[i];
+                v = t[k];
+                if (!v || v === 'no') continue;
+                classes += ' tag-' + k + ' tag-' + k + '-' + v;
+                break;
+            }
+
+            for (i = 0; i < secondary.length; i++) {
+                k = secondary[i];
+                v = t[k];
+                if (!v || v === 'no') continue;
+                classes += ' tag-' + k + ' tag-' + k + '-' + v;
             }
 
             classes = classes.trim();
