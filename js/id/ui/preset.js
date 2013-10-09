@@ -106,6 +106,7 @@ iD.ui.preset = function(context) {
             .on('click', revert);
 
         $fields
+            .order()
             .classed('modified', function(field) {
                 return field.modified();
             })
