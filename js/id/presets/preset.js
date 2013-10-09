@@ -73,7 +73,7 @@ iD.presets.Preset = function(id, preset, fields) {
         return tags;
     };
 
-    var applyTags = preset.applyTags || preset.tags;
+    var applyTags = preset.addTags || preset.tags;
     preset.applyTags = function(tags, geometry) {
         tags = _.clone(tags);
 

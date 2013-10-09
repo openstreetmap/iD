@@ -69,6 +69,11 @@ describe('iD.presets.Preset', function() {
             expect(preset.applyTags({}, 'area')).to.eql({building: 'yes'});
         });
 
+        it("prefers to add tags of addTags property", function() {
+            var preset = iD.presets.Preset('test', {tags: {building: '*'}, addTags: {building: 'ok'}});
+            expect(preset.applyTags({}, 'area')).to.eql({building: 'ok'});
+        });
+
         it("adds default tags of fields with matching geometry", function() {
             var field = iD.presets.Field('field', {key: 'building', geometry: 'area', default: 'yes'}),
                 preset = iD.presets.Preset('test', {fields: ['field']}, {field: field});
