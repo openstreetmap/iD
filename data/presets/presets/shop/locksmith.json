@@ -1,0 +1,20 @@
+{
+    "icon": "shop",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "keys"
+    ],
+    "tags": {
+        "shop": "locksmith"
+    },
+    "name": "Locksmith"
+}

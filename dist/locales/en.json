@@ -1862,6 +1862,10 @@
                 "name": "Laundry",
                 "terms": ""
             },
+            "shop/locksmith": {
+                "name": "Locksmith",
+                "terms": "keys"
+            },
             "shop/mall": {
                 "name": "Mall",
                 "terms": ""

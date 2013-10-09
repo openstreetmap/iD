@@ -1090,6 +1090,9 @@ en:
       shop/laundry: 
         name: Laundry
         terms: "<translate with synonyms or related terms for 'Laundry', separated by commas>"
+      shop/locksmith: 
+        name: Locksmith
+        terms: "<translate with synonyms or related terms for 'Locksmith', separated by commas>"
       shop/mall: 
         name: Mall
         terms: "<translate with synonyms or related terms for 'Mall', separated by commas>"
