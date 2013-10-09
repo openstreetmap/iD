@@ -2,7 +2,6 @@ iD.ui.preset.wikipedia = function(field, context) {
 
     var event = d3.dispatch('change'),
         wikipedia = iD.wikipedia(),
-        language = iD.data.wikipedia[0],
         link, entity, lang, title;
 
     function i(selection) {
@@ -26,7 +25,7 @@ iD.ui.preset.wikipedia = function(field, context) {
                 if (!value) value = context.entity(entity.id).tags.name || '';
                 var searchfn = value.length > 7 ? wikipedia.search : wikipedia.suggestions;
 
-                searchfn(language && language[2], value, function(query, data) {
+                searchfn(language()[2], value, function(query, data) {
                     cb(data.map(function(d) {
                         return { value: d };
                     }));
@@ -38,7 +37,8 @@ iD.ui.preset.wikipedia = function(field, context) {
 
         lang.enter().append('input')
             .attr('type', 'text')
-            .attr('class', 'wiki-lang');
+            .attr('class', 'wiki-lang')
+            .value('English');
 
         lang
             .on('blur', changeLang)
@@ -68,18 +68,17 @@ iD.ui.preset.wikipedia = function(field, context) {
             .attr('class', 'icon out-link');
     }
 
-    function changeLang() {
+    function language() {
         var value = lang.value().toLowerCase();
-        language = _.find(iD.data.wikipedia, function(d) {
+        return _.find(iD.data.wikipedia, function(d) {
             return d[0].toLowerCase() === value ||
                 d[1].toLowerCase() === value ||
                 d[2].toLowerCase() === value;
         }) || iD.data.wikipedia[0];
+    }
 
-        if (value !== language[0]) {
-            lang.value(language[1]);
-        }
-
+    function changeLang() {
+        lang.value(language()[1]);
         change();
     }
 
@@ -97,13 +96,12 @@ iD.ui.preset.wikipedia = function(field, context) {
             // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
             value = m[2].replace(/_/g, ' ');
             value = value.slice(0, 1).toUpperCase() + value.slice(1);
-            language = newlanguage;
-            lang.value(language[0]);
+            lang.value(newlanguage[0]);
         }
 
-        t[field.key] = value ? language[2] + ':' + value : undefined;
+        t[field.key] = value ? language()[2] + ':' + value : undefined;
         event.change(t);
-        link.attr('href', 'http://' + language[2] + '.wikipedia.org/wiki/' + (value || ''));
+        link.attr('href', 'http://' + language()[2] + '.wikipedia.org/wiki/' + (value || ''));
     }
 
     i.tags = function(tags) {
@@ -121,9 +119,7 @@ iD.ui.preset.wikipedia = function(field, context) {
 
         // unrecognized value format
         } else {
-            lang.value('English');
             title.value(tags[field.key] || '');
-            language = iD.data.wikipedia[0];
             link.attr('href', 'http://en.wikipedia.org/wiki/Special:Search?search=' + tags[field.key]);
         }
     };
