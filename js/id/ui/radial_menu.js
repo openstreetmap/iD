@@ -53,6 +53,7 @@ iD.ui.RadialMenu = function(context, operations) {
             .attr('r', 15)
             .classed('disabled', function(d) { return d.disabled(); })
             .on('click', click)
+            .on('mousedown', mousedown)
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
 
@@ -64,6 +65,10 @@ iD.ui.RadialMenu = function(context, operations) {
         tooltip = d3.select(document.body)
             .append('div')
             .attr('class', 'tooltip-inner radial-menu-tooltip');
+
+        function mousedown() {
+            d3.event.stopPropagation(); // https://github.com/systemed/iD/issues/1869
+        }
 
         function mouseover(d, i) {
             var rect = context.surfaceRect(),
