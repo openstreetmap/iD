@@ -83,44 +83,38 @@ iD.ui.preset.wikipedia = function(field, context) {
     }
 
     function change() {
-        var t = {};
+        var value = title.value(),
+            m = value.match(/http:\/\/([a-z]+)\.wikipedia\.org\/wiki\/(.+)/),
+            l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; });
 
-        var value = title.value();
-
-        var m = value.match('http://([a-z]+)\\.wikipedia.org/wiki/(.*)'),
-            newlanguage = m && m[1] && m[2] && _.find(iD.data.wikipedia, function(d) {
-                return m[1] === d[2];
-            });
-
-        if (newlanguage) {
+        if (l) {
             // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
             value = m[2].replace(/_/g, ' ');
             value = value.slice(0, 1).toUpperCase() + value.slice(1);
-            lang.value(newlanguage[0]);
+            lang.value(l[1]);
+            title.value(value);
         }
 
+        var t = {};
         t[field.key] = value ? language()[2] + ':' + value : undefined;
         event.change(t);
-        link.attr('href', 'http://' + language()[2] + '.wikipedia.org/wiki/' + (value || ''));
     }
 
     i.tags = function(tags) {
-        var m = tags[field.key] ? tags[field.key].match(/([^:]+):(.+)/) : null;
-
-        var language = m && m[1] && m[2] && _.find(iD.data.wikipedia, function(d) {
-            return m[1] === d[2];
-        });
+        var value = tags[field.key] || '',
+            m = value.match(/([^:]+):(.+)/),
+            l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; });
 
         // value in correct format
-        if (language) {
-            lang.value(language[1]);
+        if (l) {
+            lang.value(l[1]);
             title.value(m[2]);
             link.attr('href', 'http://' + m[1] + '.wikipedia.org/wiki/' + m[2]);
 
         // unrecognized value format
         } else {
-            title.value(tags[field.key] || '');
-            link.attr('href', 'http://en.wikipedia.org/wiki/Special:Search?search=' + tags[field.key]);
+            title.value(value);
+            link.attr('href', 'http://en.wikipedia.org/wiki/Special:Search?search=' + value);
         }
     };
 

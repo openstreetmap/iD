@@ -34,6 +34,17 @@ describe('iD.ui.preset.wikipedia', function() {
         happen.once(selection.selectAll('.wiki-title').node(), {type: 'change'});
     });
 
+    it('recognizes pasted URLs', function() {
+        var wikipedia = iD.ui.preset.wikipedia(field, {});
+        selection.call(wikipedia);
+
+        selection.selectAll('.wiki-title').value('http://de.wikipedia.org/wiki/Title');
+        happen.once(selection.selectAll('.wiki-title').node(), {type: 'change'});
+
+        expect(selection.selectAll('.wiki-lang').value()).to.equal('Deutsch');
+        expect(selection.selectAll('.wiki-title').value()).to.equal('Title');
+    });
+
     it('preserves existing language', function() {
         selection.call(iD.ui.preset.wikipedia(field, {}));
         selection.selectAll('.wiki-lang').value('Deutsch');
