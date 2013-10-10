@@ -39,7 +39,7 @@ iD.ui.preset.check = function(field) {
         value = tags[field.key];
         box.property('indeterminate', !value);
         box.property('checked', value === 'yes');
-        text.text(value || t('inspector.unknown'));
+        text.text(value ? t('inspector.check.' + value, {default: value}) : t('inspector.unknown'));
         label.classed('set', !!value);
     };
 

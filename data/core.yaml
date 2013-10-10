@@ -204,6 +204,9 @@ en:
     incomplete: <not downloaded>
     feature_list: Search features
     edit: Edit feature
+    check:
+      yes: Yes
+      no: No
   background:
     title: Background
     description: Background settings
