@@ -123,12 +123,13 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     // Connect the way to an existing way.
     drawWay.addWay = function(loc, edge) {
+        var previousEdge = startIndex ?
+            [way.nodes[startIndex], way.nodes[startIndex - 1]] :
+            [way.nodes[0], way.nodes[1]];
 
         // Avoid creating duplicate segments
-        if (!isArea) {
-            if (edge[0] === way.nodes[way.nodes.length - 1] ||
-                edge[1] === way.nodes[way.nodes.length - 1]) return;
-        }
+        if (!isArea && iD.geo.edgeEqual(edge, previousEdge))
+            return;
 
         var newNode = iD.Node({ loc: loc });
 
