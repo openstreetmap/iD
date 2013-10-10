@@ -1,5 +1,5 @@
 {
     "key": "waterway",
-    "type": "combo",
+    "type": "typeCombo",
     "label": "Type"
 }

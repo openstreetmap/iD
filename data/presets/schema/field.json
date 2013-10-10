@@ -32,7 +32,8 @@
                 "radio",
                 "textarea",
                 "localized",
-                "wikipedia"
+                "wikipedia",
+                "typeCombo"
             ],
             "required": true
         },

@@ -1,5 +1,5 @@
 {
     "key": "barrier",
-    "type": "combo",
+    "type": "typeCombo",
     "label": "Type"
 }

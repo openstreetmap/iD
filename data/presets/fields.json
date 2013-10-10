@@ -86,12 +86,12 @@
     },
     "aeroway": {
         "key": "aeroway",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "amenity": {
         "key": "amenity",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "artist": {
@@ -116,7 +116,7 @@
     },
     "barrier": {
         "key": "barrier",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "bicycle_parking": {
@@ -131,7 +131,7 @@
     },
     "building": {
         "key": "building",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Building"
     },
     "building_area": {
@@ -245,7 +245,7 @@
     },
     "entrance": {
         "key": "entrance",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "fax": {
@@ -292,12 +292,12 @@
     },
     "highway": {
         "key": "highway",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "historic": {
         "key": "historic",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "iata": {
@@ -338,7 +338,7 @@
     },
     "landuse": {
         "key": "landuse",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "lanes": {
@@ -354,7 +354,7 @@
     },
     "leisure": {
         "key": "leisure",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "levels": {
@@ -375,7 +375,7 @@
     },
     "man_made": {
         "key": "man_made",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "maxspeed": {
@@ -392,7 +392,7 @@
     },
     "natural": {
         "key": "natural",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Natural"
     },
     "network": {
@@ -409,7 +409,7 @@
     },
     "office": {
         "key": "office",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "oneway": {
@@ -462,17 +462,17 @@
     },
     "place": {
         "key": "place",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "power": {
         "key": "power",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "railway": {
         "key": "railway",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "ref": {
@@ -549,7 +549,7 @@
     },
     "shop": {
         "key": "shop",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "source": {
@@ -600,7 +600,7 @@
     },
     "tourism": {
         "key": "tourism",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "towertype": {
@@ -630,7 +630,7 @@
     },
     "waterway": {
         "key": "waterway",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "website": {

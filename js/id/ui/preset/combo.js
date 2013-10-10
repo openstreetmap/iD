@@ -1,4 +1,5 @@
-iD.ui.preset.combo = function(field) {
+iD.ui.preset.combo =
+iD.ui.preset.typeCombo = function(field) {
     var event = d3.dispatch('change'),
         input;
 
@@ -43,13 +44,18 @@ iD.ui.preset.combo = function(field) {
     }
 
     function change() {
+        var value = input.value().replace(' ', '_');
+        if (field.type === 'typeCombo' && !value) value = 'yes';
+
         var t = {};
-        t[field.key] = input.value().replace(' ', '_') || undefined;
+        t[field.key] = value || undefined;
         event.change(t);
     }
 
     combo.tags = function(tags) {
-        input.value(tags[field.key] || '');
+        var value = tags[field.key] || '';
+        if (field.type === 'typeCombo' && value === 'yes') value = '';
+        input.value(value);
     };
 
     combo.focus = function() {
