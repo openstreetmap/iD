@@ -2,7 +2,7 @@ iD.History = function(context) {
     var stack, index, tree,
         imageryUsed = ['Bing'],
         dispatch = d3.dispatch('change', 'undone', 'redone'),
-        lock = false;
+        lock = iD.util.SessionMutex('lock');
 
     function perform(actions) {
         actions = Array.prototype.slice.call(actions);
@@ -273,39 +273,37 @@ iD.History = function(context) {
         },
 
         save: function() {
-            if (!lock) return history;
-            context.storage(getKey('lock'), null);
-            context.storage(getKey('saved_history'), this.toJSON() || null);
+            if (lock.locked()) context.storage(getKey('saved_history'), history.toJSON() || null);
             return history;
         },
 
         clearSaved: function() {
-            if (!lock) return;
-            context.storage(getKey('saved_history'), null);
+            if (lock.locked()) context.storage(getKey('saved_history'), null);
+            return history;
         },
 
         lock: function() {
-            if (context.storage(getKey('lock'))) return false;
-            context.storage(getKey('lock'), true);
-            lock = true;
-            return lock;
+            return lock.lock();
+        },
+
+        unlock: function() {
+            lock.unlock();
         },
 
         // is iD not open in another window and it detects that
         // there's a history stored in localStorage that's recoverable?
         restorableChanges: function() {
-            return lock && !!context.storage(getKey('saved_history'));
+            return lock.locked() && !!context.storage(getKey('saved_history'));
         },
 
         // load history from a version stored in localStorage
         restore: function() {
-            if (!lock) return;
+            if (!lock.locked()) return;
 
             var json = context.storage(getKey('saved_history'));
-            if (json) this.fromJSON(json);
+            if (json) history.fromJSON(json);
 
             context.storage(getKey('saved_history', null));
-
         },
 
         _getKey: getKey

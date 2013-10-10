@@ -37,6 +37,7 @@ dist/iD.js: \
 	js/id/id.js \
 	js/id/services/*.js \
 	js/id/util.js \
+	js/id/util/*.js \
 	js/id/geo.js \
 	js/id/geo/*.js \
 	js/id/actions.js \

@@ -126,6 +126,10 @@ iD.ui = function(context) {
             return context.save();
         };
 
+        window.onunload = function() {
+            context.history().unlock();
+        };
+
         d3.select(window).on('resize.editor', function() {
             map.dimensions(m.dimensions());
         });

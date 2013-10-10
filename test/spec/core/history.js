@@ -244,52 +244,6 @@ describe("iD.History", function () {
         });
     });
 
-    describe("#lock", function() {
-        it("acquires lock if possible", function() {
-            expect(history.lock()).to.be.true;
-            expect(history.lock()).to.be.false;
-        });
-    });
-
-    describe("#save", function() {
-        it("doesn't do anything if it doesn't have the lock", function() {
-            var key = history._getKey('saved_history');
-            context.storage(key, null);
-            history.save();
-            expect(context.storage(key)).to.be.null;
-            context.storage(key, 'something');
-            expect(context.storage(key)).to.equal('something');
-            history.save();
-            context.storage(key, null);
-        });
-
-        it("saves to localStorage", function() {
-            var node = iD.Node({ id: 'n' });
-            history.lock();
-            history.perform(iD.actions.AddEntity(node));
-            history.save();
-            var saved = JSON.parse(context.storage(history._getKey('saved_history')));
-            expect(saved.stack[1].modified[0]).to.eql('nv0');
-        });
-    });
-
-    describe("#restore", function() {
-        it("saves and restores a created and deleted entities", function() {
-            var node = iD.Node({ id: 'n' }),
-                node2 = iD.Node({ id: 'n2' });
-            history.lock();
-            history.perform(iD.actions.AddEntity(node));
-            history.perform(iD.actions.AddEntity(node2));
-            history.perform(iD.actions.DeleteNode('n2'));
-            history.save();
-            history.reset();
-            expect(history.graph().hasEntity('n')).to.be.undefined
-            history.restore();
-            expect(history.graph().entity('n').id).to.equal('n');
-            expect(history.graph().hasEntity('n2')).to.be.undefined;
-        });
-    });
-
     describe("#toJSON", function() {
         it("generates v2 JSON", function() {
             var node = iD.Node({id: 'n-1'});
