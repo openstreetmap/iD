@@ -21,6 +21,11 @@ iD.geo.sphericalDistance = function(a, b) {
     return 6.3710E6 * Math.sqrt((x * x) + (y * y)) * Math.PI/180;
 };
 
+iD.geo.edgeEqual = function(a, b) {
+    return (a[0] === b[0] && a[1] === b[1]) ||
+        (a[0] === b[1] && a[1] === b[0]);
+};
+
 // Choose the edge with the minimal distance from `point` to its orthogonal
 // projection onto that edge, if such a projection exists, or the distance to
 // the closest vertex on that edge. Returns an object with the `index` of the
