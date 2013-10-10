@@ -17,7 +17,7 @@ iD.ui.intro = function(context) {
 
         // Load semi-real data used in intro
         context.connection().toggle(false).flush();
-        context.history().save().reset();
+        context.history().reset();
         
         introGraph = JSON.parse(iD.introGraph);
         for (var key in introGraph) {
