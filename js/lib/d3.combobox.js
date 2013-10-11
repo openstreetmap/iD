@@ -30,14 +30,14 @@ d3.combobox = function() {
                 var parent = this.parentNode,
                     sibling = this.nextSibling;
 
-                var carat = d3.select(parent).selectAll('.combobox-carat')
+                var caret = d3.select(parent).selectAll('.combobox-caret')
                     .filter(function(d) { return d === input.node(); })
                     .data([input.node()]);
 
-                carat.enter().insert('div', function() { return sibling; })
-                    .attr('class', 'combobox-carat');
+                caret.enter().insert('div', function() { return sibling; })
+                    .attr('class', 'combobox-caret');
 
-                carat
+                caret
                     .on('mousedown', function () {
                         // prevent the form element from blurring. it blurs
                         // on mousedown

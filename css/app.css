@@ -1082,7 +1082,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 /* hide but preserve in layout */
 .inspector-hover .modified .form-label .modified-icon,
 .inspector-hover .entity-editor-pane button.minor,
-.inspector-hover .combobox-carat,
+.inspector-hover .combobox-caret,
 .inspector-hover .entity-editor-pane .header button,
 .inspector-hover .spin-control,
 .inspector-hover .hide-toggle:before,
@@ -1176,7 +1176,7 @@ input,
 
 .modified .form-label .modified-icon,
 .entity-editor-pane button.minor,
-.combobox-carat,
+.combobox-caret,
 .entity-editor-pane .header button,
 .toggle-list label span,
 .spin-control,
@@ -1405,7 +1405,7 @@ input[type=number] {
     padding-right: 10%;
 }
 
-.form-field .wiki-title ~ .combobox-carat {
+.form-field .wiki-title ~ .combobox-caret {
     margin-left: -18%;
     margin-right: 9%;
 }
@@ -1553,7 +1553,7 @@ div.combobox {
     border-top: 0;
 }
 
-.combobox-carat {
+.combobox-caret {
     margin-left: -20px;
     margin-right: 10px;
     display:inline-block;
