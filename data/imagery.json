@@ -13913,6 +13913,18 @@
         "default": true
     },
     {
+        "name": "OpenStreetMap GPS traces",
+        "type": "tms",
+        "template": "http://{switch:a,b,c}.gps-tile.openstreetmap.org/lines/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            20
+        ],
+        "terms_url": "http://www.openstreetmap.org/copyright",
+        "terms_text": "© OpenStreetMap contributors",
+        "overlay": true
+    },
+    {
         "name": "Pangasinán/Bulacan (Phillipines HiRes)",
         "type": "tms",
         "template": "http://gravitystorm.dev.openstreetmap.org/imagery/philippines/{zoom}/{x}/{y}.png",
