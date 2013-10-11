@@ -42,7 +42,7 @@ describe('iD.ui.preset.localized', function() {
         happen.once(selection.selectAll('.localized-value').node(), {type: 'blur'});
     });
 
-    it("creates a tag when the language and value are both set", function() {
+    it("creates a tag after setting language then value", function() {
         var localized = iD.ui.preset.localized(field, {});
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
@@ -56,6 +56,22 @@ describe('iD.ui.preset.localized', function() {
 
         selection.selectAll('.localized-value').value('Value');
         happen.once(selection.selectAll('.localized-value').node(), {type: 'change'});
+    });
+
+    it("creates a tag after setting value then language", function() {
+        var localized = iD.ui.preset.localized(field, {});
+        selection.call(localized);
+        happen.click(selection.selectAll('.localized-add').node());
+
+        selection.selectAll('.localized-value').value('Value');
+        happen.once(selection.selectAll('.localized-value').node(), {type: 'change'});
+
+        localized.on('change', function(tags) {
+            expect(tags).to.eql({'name:de': 'Value'});
+        });
+
+        selection.selectAll('.localized-lang').value('Deutsch');
+        happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
     });
 
     it("changes an existing language", function() {

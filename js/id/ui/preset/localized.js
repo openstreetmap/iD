@@ -55,26 +55,30 @@ iD.ui.preset.localized = function(field, context) {
     function key(lang) { return field.key + ':' + lang; }
 
     function changeLang(d) {
-        var value = d3.select(this).value(),
+        var lang = d3.select(this).value(),
             t = {},
             language = _.find(iD.data.wikipedia, function(d) {
-                return d[0].toLowerCase() === value.toLowerCase() ||
-                    d[1].toLowerCase() === value.toLowerCase();
+                return d[0].toLowerCase() === lang.toLowerCase() ||
+                    d[1].toLowerCase() === lang.toLowerCase();
             });
 
-        if (language) value = language[2];
+        if (language) lang = language[2];
 
-        if (d.lang && d.lang !== value) {
+        if (d.lang && d.lang !== lang) {
             t[key(d.lang)] = undefined;
         }
 
-        if (value && d.value) {
-            t[key(value)] = d.value;
-        } else if (value && wikiTitles && wikiTitles[d.lang]) {
-            t[key(value)] = wikiTitles[d.lang];
+        var value = d3.select(this.parentNode)
+            .selectAll('.localized-value')
+            .value();
+
+        if (lang && value) {
+            t[key(lang)] = value;
+        } else if (lang && wikiTitles && wikiTitles[d.lang]) {
+            t[key(lang)] = wikiTitles[d.lang];
         }
 
-        d.lang = value;
+        d.lang = lang;
         event.change(t);
     }
 
