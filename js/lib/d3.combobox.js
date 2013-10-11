@@ -189,7 +189,7 @@ d3.combobox = function() {
         }
 
         function render() {
-            if (suggestions.length && document.activeElement === input.node()) {
+            if (suggestions.length > 1 && document.activeElement === input.node()) {
                 show();
             } else {
                 hide();
