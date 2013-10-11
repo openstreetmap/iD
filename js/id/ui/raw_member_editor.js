@@ -58,7 +58,8 @@ iD.ui.RawMemberEditor = function(context) {
                 });
 
             var $enter = $items.enter().append('li')
-                .attr('class', 'member-row form-field');
+                .attr('class', 'member-row form-field')
+                .classed('member-incomplete', function(d) { return !d.member; });
 
             $enter.each(function(d) {
                 if (d.member) {
@@ -78,7 +79,7 @@ iD.ui.RawMemberEditor = function(context) {
 
                 } else {
                     d3.select(this).append('label')
-                        .attr('class', 'form-label member-incomplete')
+                        .attr('class', 'form-label')
                         .text(t('inspector.incomplete'));
                 }
             });

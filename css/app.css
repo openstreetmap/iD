@@ -1760,6 +1760,10 @@ img.wiki-image {
     padding-left: 10px;
 }
 
+.member-incomplete .member-delete {
+    display: none;
+}
+
 .member-row-new .member-entity-input {
     border-radius: 4px 4px 0 0;
     border: 1px solid #cfcfcf;
