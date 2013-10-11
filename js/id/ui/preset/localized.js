@@ -64,13 +64,13 @@ iD.ui.preset.localized = function(field, context) {
 
         if (language) value = language[2];
 
-        if (d.lang) {
-            t[key(d.lang)] = '';
+        if (d.lang && d.lang !== value) {
+            t[key(d.lang)] = undefined;
         }
 
-        if (d.value) {
+        if (value && d.value) {
             t[key(value)] = d.value;
-        } else if (wikiTitles && wikiTitles[d.lang]) {
+        } else if (value && wikiTitles && wikiTitles[d.lang]) {
             t[key(value)] = wikiTitles[d.lang];
         }
 
@@ -80,10 +80,10 @@ iD.ui.preset.localized = function(field, context) {
     }
 
     function changeValue(d) {
+        if (!d.lang) return;
         var t = {};
-        t[key(d.lang)] = d3.select(this).value() || '';
+        t[key(d.lang)] = d3.select(this).value() || undefined;
         event.change(t);
-
     }
 
     function fetcher(value, cb) {
@@ -171,16 +171,16 @@ iD.ui.preset.localized = function(field, context) {
             .style('top','-10px')
             .remove();
 
-        selection.selectAll('.entry').select('.localized-lang').value(function(d) {
-            var lang = _.find(iD.data.wikipedia, function(lang) {
-                return lang[2] === d.lang;
-            });
-            return lang ? lang[1] : d.lang;
-        });
+        var entry = selection.selectAll('.entry');
 
-        selection.selectAll('.entry').select('.localized-value').value(function(d) {
-            return d.value;
-        });
+        entry.select('.localized-lang')
+            .value(function(d) {
+                var lang = _.find(iD.data.wikipedia, function(lang) { return lang[2] === d.lang; });
+                return lang ? lang[1] : d.lang;
+            });
+
+        entry.select('.localized-value')
+            .value(function(d) { return d.value; });
     }
 
     i.tags = function(tags) {
