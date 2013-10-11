@@ -74,9 +74,8 @@ iD.ui.preset.localized = function(field, context) {
             t[key(value)] = wikiTitles[d.lang];
         }
 
-        event.change(t);
-
         d.lang = value;
+        event.change(t);
     }
 
     function changeValue(d) {
