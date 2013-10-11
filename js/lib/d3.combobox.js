@@ -44,11 +44,12 @@ d3.combobox = function() {
                         d3.event.stopPropagation();
                         d3.event.preventDefault();
                         input.node().focus();
+                        fetch('', render);
                     });
             });
 
         function focus() {
-            fetch(render);
+            fetch(value(), render);
         }
 
         function blur() {
@@ -138,7 +139,7 @@ d3.combobox = function() {
         }
 
         function change() {
-            fetch(function() {
+            fetch(value(), function() {
                 autocomplete();
                 render();
             });
@@ -163,8 +164,8 @@ d3.combobox = function() {
             return value;
         }
 
-        function fetch(cb) {
-            fetcher.call(input, value(), function(_) {
+        function fetch(v, cb) {
+            fetcher.call(input, v, function(_) {
                 suggestions = _;
                 cb();
             });

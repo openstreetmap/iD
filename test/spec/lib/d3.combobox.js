@@ -95,6 +95,13 @@ describe("d3.combobox", function() {
         expect(body.selectAll('.combobox-option').size()).to.equal(0);
     });
 
+    it("shows all entries when clicking on the caret", function() {
+        input.property('value', 'foo').call(combobox.data(data));
+        happen.mousedown(body.selectAll('.combobox-caret').node());
+        expect(body.selectAll('.combobox-option').size()).to.equal(3);
+        expect(body.selectAll('.combobox-option').text()).to.equal('foo');
+    });
+
     it("is initially shown with no selection", function() {
         input.call(combobox.data(data));
         input.node().focus();
