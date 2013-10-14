@@ -14,6 +14,8 @@ iD.Background = function(context) {
         }
     });
 
+    backgroundSources.unshift(iD.BackgroundSource.None());
+
     function findSource(id) {
         return _.find(backgroundSources, function(d) {
             return d.id && d.id === id;

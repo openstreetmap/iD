@@ -68,6 +68,7 @@ iD.TileLayer = function() {
         if (source.validZoom(z)) {
             tile().forEach(function(d) {
                 addSource(d);
+                if (d[3] === '') return;
                 requests.push(d);
                 if (cache[d[3]] === false && lookUp(d)) {
                     requests.push(addSource(lookUp(d)));

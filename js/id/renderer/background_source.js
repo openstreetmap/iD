@@ -112,3 +112,7 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
 
     return bing;
 };
+
+iD.BackgroundSource.None = function() {
+    return iD.BackgroundSource({ name: t('background.none'), id: 'None', template: '' });
+};
