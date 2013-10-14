@@ -2,13 +2,23 @@ iD.NotesLayer = function(context, dispatch) {
     var projection = context.projection,
         dimensions = [1, 1],
         notes = [],
+        queue = [],
         enable = true,
         svg;
 
-    context.history()
-        .on('change.notes', redraw);
+    function mergeNotes(err, result) {
+        if (err) return;
+        if (result && result.features) {
+            result.features.forEach(function(feature) {
+                queue.push(feature.properties.id);
+            });
+            notes = notes.concat(result.features);
+        }
+    }
 
     function render(selection) {
+
+        context.connection().on('loadnote.layer', mergeNotes);
 
         svg = selection.selectAll('svg')
             .data([render]);
@@ -16,7 +26,8 @@ iD.NotesLayer = function(context, dispatch) {
         svg.enter()
             .append('svg');
 
-        svg.style('display', enable ? 'block' : 'none');
+        // svg.style('display', enable ? 'block' : 'none');
+        svg.style('display', 'block');
 
         var circles = svg
             .selectAll('circle')
@@ -24,11 +35,20 @@ iD.NotesLayer = function(context, dispatch) {
 
         circles
             .enter()
-            .append('notes')
-            .attr('class', 'gpx');
+            .append('circle')
+            .attr('r', 5)
+            .attr('class', 'note')
+            .on('click', clickNote);
 
         circles
-            .attr('transform', iD.svg.PointTransform(projection));
+            .attr('transform', function(d) {
+                var p = projection(d.geometry.coordinates);
+                return 'translate(' + p[0] + ',' + p[1] + ')';
+            });
+    }
+
+    function clickNote(d) {
+        context.enter(iD.modes.Note(context, d));
     }
 
     function redraw() {

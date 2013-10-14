@@ -6,7 +6,7 @@ iD.ui.Background = function(context) {
             ['top', [0, -1]],
             ['right', [-1, 0]],
             ['bottom', [0, 1]]],
-        opacityDefault = (context.storage('background-opacity') != undefined) ?
+        opacityDefault = (context.storage('background-opacity') !== undefined) ?
             (+context.storage('background-opacity')) : 0.5;
 
     function background(selection) {
@@ -67,6 +67,7 @@ iD.ui.Background = function(context) {
 
         function clickNotes() {
             context.background().toggleNotesLayer();
+            context.connection().toggleNotes(this.checked);
             update();
         }
 
@@ -277,7 +278,7 @@ iD.ui.Background = function(context) {
             .classed('layer-toggle-notes', true);
 
         notesLayerItem.call(bootstrap.tooltip()
-            .title(t('notes.drag_drop'))
+            .title(t('notes.description'))
             .placement('left'));
 
         notesLayerItem.append('input')
@@ -285,7 +286,7 @@ iD.ui.Background = function(context) {
             .on('change', clickNotes);
 
         notesLayerItem.append('span')
-            .text(t('notes.local_layer'));
+            .text(t('notes.title'));
 
         var adjustments = content
             .append('div')

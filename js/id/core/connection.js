@@ -41,17 +41,15 @@ iD.Connection = function() {
     };
 
     connection.loadNotesFromURL = function(url, callback) {
-        function done(data) {
+        return d3.json(url).get().on('load', function done(data) {
             return callback(null, data);
-        }
-        return d3.json(url).get().on('load', done);
+        });
     };
 
     connection.loadFromURL = function(url, callback) {
-        function done(dom) {
+        return d3.xml(url).get().on('load', function done(dom) {
             return callback(null, parse(dom));
-        }
-        return d3.xml(url).get().on('load', done);
+        });
     };
 
     connection.loadEntity = function(id, callback) {
@@ -336,6 +334,8 @@ iD.Connection = function() {
 
     connection.loadNotes = function(projection, dimensions) {
 
+        if (notesOff) return;
+
         var tiles = getTiles(projection, dimensions);
 
         _.filter(inflight, notWanted).map(abortRequest);
@@ -447,11 +447,10 @@ iD.Connection = function() {
     };
 
     connection.authenticate = function(callback) {
-        function done(err, res) {
+        return oauth.authenticate(function done(err, res) {
             event.auth();
             if (callback) callback(err, res);
-        }
-        return oauth.authenticate(done);
+        });
     };
 
     return d3.rebind(connection, event, 'on');
