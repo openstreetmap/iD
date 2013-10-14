@@ -103,7 +103,7 @@ iD.modes.DragNode = function(context) {
         var d = datum();
         if (d.type === 'node' && d.id !== entity.id) {
             loc = d.loc;
-        } else if (d.type === 'way') {
+        } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
             loc = iD.geo.chooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
         }
 
