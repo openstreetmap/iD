@@ -1,8 +1,12 @@
 iD.NotesLayer = function(context, dispatch) {
-    var projection,
+    var projection = context.projection,
+        dimensions = [1, 1],
         notes = [],
         enable = true,
         svg;
+
+    context.history()
+        .on('change.notes', redraw);
 
     function render(selection) {
 
@@ -25,6 +29,10 @@ iD.NotesLayer = function(context, dispatch) {
 
         circles
             .attr('transform', iD.svg.PointTransform(projection));
+    }
+
+    function redraw() {
+        context.connection().loadNotes(projection, dimensions);
     }
 
     render.projection = function(_) {
