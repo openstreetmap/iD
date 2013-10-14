@@ -84,15 +84,18 @@ iD.ui.FeatureList = function(context) {
             }
 
             (geocodeResults || []).forEach(function(d) {
-                result.push({
-                    id: iD.Entity.id.fromOSM(d.osm_type, d.osm_id),
-                    geometry: d.osm_type === 'relation' ? 'relation' : d.osm_type === 'way' ? 'line' : 'point',
-                    type: (d.type.charAt(0).toUpperCase() + d.type.slice(1)).replace('_', ' '),
-                    name: d.display_name,
-                    extent: new iD.geo.Extent(
-                        [parseFloat(d.boundingbox[3]), parseFloat(d.boundingbox[0])],
-                        [parseFloat(d.boundingbox[2]), parseFloat(d.boundingbox[1])])
-                })
+                // https://github.com/systemed/iD/issues/1890
+                if (d.osm_type && d.osm_id) {
+                    result.push({
+                        id: iD.Entity.id.fromOSM(d.osm_type, d.osm_id),
+                        geometry: d.osm_type === 'relation' ? 'relation' : d.osm_type === 'way' ? 'line' : 'point',
+                        type: (d.type.charAt(0).toUpperCase() + d.type.slice(1)).replace('_', ' '),
+                        name: d.display_name,
+                        extent: new iD.geo.Extent(
+                            [parseFloat(d.boundingbox[3]), parseFloat(d.boundingbox[0])],
+                            [parseFloat(d.boundingbox[2]), parseFloat(d.boundingbox[1])])
+                    });
+                }
             });
 
             return result;
