@@ -2,6 +2,7 @@ iD.ui.RawMemberEditor = function(context) {
     var id;
 
     function selectMember(d) {
+        d3.event.preventDefault();
         context.enter(iD.modes.Select(context, [d.id]));
     }
 

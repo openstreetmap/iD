@@ -2,6 +2,7 @@ iD.ui.RawMembershipEditor = function(context) {
     var id, showBlank;
 
     function selectRelation(d) {
+        d3.event.preventDefault();
         context.enter(iD.modes.Select(context, [d.relation.id]));
     }
 
