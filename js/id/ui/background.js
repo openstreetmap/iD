@@ -1,6 +1,6 @@
 iD.ui.Background = function(context) {
     var key = 'b',
-        opacities = [1, 0.5, 0],
+        opacities = [1, 0.75, 0.5, 0.25],
         directions = [
             ['left', [1, 0]],
             ['top', [0, -1]],
