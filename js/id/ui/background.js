@@ -65,6 +65,11 @@ iD.ui.Background = function(context) {
             update();
         }
 
+        function clickNotes() {
+            context.background().toggleNotesLayer();
+            update();
+        }
+
         function drawList(layerList, type, change, filter) {
             var sources = context.background()
                 .sources(context.map().extent())
@@ -264,6 +269,23 @@ iD.ui.Background = function(context) {
             })
             .append('span')
                 .attr('class', 'icon geocode' );
+
+        var notesLayerItem = content
+            .append('div')
+            .attr('class', 'toggle-list layer-list')
+            .append('label')
+            .classed('layer-toggle-notes', true);
+
+        notesLayerItem.call(bootstrap.tooltip()
+            .title(t('notes.drag_drop'))
+            .placement('left'));
+
+        notesLayerItem.append('input')
+            .attr('type', 'checkbox')
+            .on('change', clickNotes);
+
+        notesLayerItem.append('span')
+            .text(t('notes.local_layer'));
 
         var adjustments = content
             .append('div')

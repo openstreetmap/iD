@@ -4,6 +4,8 @@ iD.Background = function(context) {
             .projection(context.projection),
         gpxLayer = iD.GpxLayer(context, dispatch)
             .projection(context.projection),
+        notesLayer = iD.NotesLayer(context, dispatch)
+            .projection(context.projection),
         overlayLayers = [];
 
     var backgroundSources = iD.data.imagery.map(function(source) {
@@ -83,7 +85,7 @@ iD.Background = function(context) {
         gpx.call(gpxLayer);
 
         var overlays = selection.selectAll('.overlay-layer')
-            .data(overlayLayers, function(d) { return d.source().name });
+            .data(overlayLayers, function(d) { return d.source().name; });
 
         overlays.enter().insert('div', '.layer-data')
             .attr('class', 'layer-layer overlay-layer');
@@ -94,6 +96,14 @@ iD.Background = function(context) {
 
         overlays.exit()
             .remove();
+
+        var notes = selection.selectAll('.notes-layer')
+            .data([0]);
+
+        notes.enter().insert('div', '.layer-data')
+            .attr('class', 'layer-layer notes-layer');
+
+        notes.call(notesLayer);
     }
 
     background.sources = function(extent) {
@@ -105,6 +115,7 @@ iD.Background = function(context) {
     background.dimensions = function(_) {
         baseLayer.dimensions(_);
         gpxLayer.dimensions(_);
+        notesLayer.dimensions(_);
 
         overlayLayers.forEach(function(layer) {
             layer.dimensions(_);
@@ -142,6 +153,11 @@ iD.Background = function(context) {
 
     background.toggleGpxLayer = function() {
         gpxLayer.enable(!gpxLayer.enable());
+        dispatch.change();
+    };
+
+    background.toggleNotesLayer = function() {
+        notesLayer.enable(!notesLayer.enable());
         dispatch.change();
     };
 
