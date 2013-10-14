@@ -104,7 +104,7 @@ iD.ui.TagReference = function(tag) {
 
         var enter = button.enter().append('button')
             .attr('tabindex', -1)
-            .attr('class', 'tag-reference-button minor');
+            .attr('class', 'tag-reference-button');
 
         enter.append('span')
             .attr('class', 'icon inspect');

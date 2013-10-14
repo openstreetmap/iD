@@ -42,6 +42,20 @@ iD.ui.preset = function(context) {
             return t;
         };
 
+        field.present = function() {
+            return _.any(field.keys, function(key) {
+                return tags[key];
+            });
+        };
+
+        field.remove = function() {
+            var t = {};
+            field.keys.forEach(function(key) {
+                t[key] = undefined;
+            });
+            return t;
+        };
+
         return field;
     }
 
@@ -94,13 +108,23 @@ iD.ui.preset = function(context) {
             .attr('for', function(field) { return 'preset-input-' + field.id; })
             .text(function(field) { return field.label(); });
 
-        $label.append('button')
-            .attr('class', 'modified-icon minor')
+        var wrap = $label.append('div')
+            .attr('class', 'form-label-button-wrap');
+
+        wrap.append('button')
+            .attr('class', 'remove-icon')
+            .append('span').attr('class', 'icon delete');
+
+        wrap.append('button')
+            .attr('class', 'modified-icon')
             .attr('tabindex', -1)
             .append('div')
             .attr('class', 'icon undo');
 
         // Update
+
+        $fields.select('.form-label-button-wrap .remove-icon')
+            .on('click', remove);
 
         $fields.select('.modified-icon')
             .on('click', revert);
@@ -109,6 +133,9 @@ iD.ui.preset = function(context) {
             .order()
             .classed('modified', function(field) {
                 return field.modified();
+            })
+            .classed('present', function(field) {
+                return field.present();
             })
             .each(function(field) {
                 var reference = iD.ui.TagReference({key: field.key});
@@ -120,7 +147,7 @@ iD.ui.preset = function(context) {
                 d3.select(this)
                     .call(field.input)
                     .call(reference.body)
-                    .select('.form-label')
+                    .select('.form-label-button-wrap')
                     .call(reference.button);
 
                 field.input.tags(tags);
@@ -162,6 +189,12 @@ iD.ui.preset = function(context) {
             d3.event.stopPropagation();
             d3.event.preventDefault();
             event.change(field.revert());
+        }
+
+        function remove(field) {
+            d3.event.stopPropagation();
+            d3.event.preventDefault();
+            event.change(field.remove());
         }
     }
 

@@ -876,6 +876,15 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     height: 100%;
     border: 1px solid #CCC;
     border-radius: 0 3px 3px 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10%;
+    background: #fafafa;
+}
+
+.preset-list-item button.tag-reference-button .icon {
+    opacity: .5;
 }
 
 .current .preset-list-button,
@@ -1006,20 +1015,50 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-radius: 4px 4px 0 0;
 }
 
+.form-label-button-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    text-align: right;
+}
+
+.form-label-button-wrap .icon {
+    opacity: .5;
+}
+
 .form-label button {
     border-left: 1px solid #CCC;
+    width: 10%;
+    height: 100%;
+    display: inline-block;
+    border-radius: 0;
+    background: #fafafa;
 }
 
 .form-label .modified-icon {
     border-right: 0;
-    opacity: 0;
+    display: none;
     z-index: -10;
     right: 10%;
 }
 
 .modified .form-label .modified-icon {
+    display: inline-block;
     opacity: 1;
     z-index: 1;
+}
+
+.present .form-label .remove-icon {
+    display: inline-block;
+    z-index: 1;
+}
+
+.form-field .remove-icon {
+    border-radius: 0 0 4px 0;
+    display: none;
 }
 
 .form-label button.tag-reference-button {
@@ -1037,10 +1076,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .form-field textarea {
     height: 65px;
-}
-
-.form-field button.remove {
-    border-radius: 0 0 4px 0;
 }
 
 .inspector-border {
@@ -1087,6 +1122,8 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-hover .spin-control,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-buttons,
+.inspector-hover .form-label-button-wrap button,
+.inspector-hover .tag-reference-button,
 .inspector-hover .view-on-osm {
     opacity: 0;
 }
@@ -1653,6 +1690,10 @@ div.combobox {
 
 .tag-row .tag-reference-button {
     right: 0;
+    border-radius: 0;
+    width: 10%;
+    top: 0;
+    background: #fafafa;
 }
 
 /* Adding form fields to tag editor */
