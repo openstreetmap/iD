@@ -8,6 +8,7 @@ iD.Note.prototype = {
     extent: function() {
         return new iD.geo.Extent(this.loc);
     },
+    type: 'note',
     geometry: function() {
         return 'note';
     },

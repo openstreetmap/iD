@@ -28,6 +28,10 @@ iD.Connection = function() {
         return url + '/browse/changeset/' + changesetId;
     };
 
+    connection.noteURL = function(noteId) {
+        return url + '/?note=' + noteId;
+    };
+
     connection.changesetsURL = function(extent) {
         return url + '/browse/changesets?bbox=' + extent.toParam();
     };
@@ -247,6 +251,14 @@ iD.Connection = function() {
                     });
                 });
             });
+    };
+
+    connection.putNoteComment = function(id, comment, callback) {
+        oauth.xhr({
+                method: 'POST',
+                path: '/api/0.6/notes/' + id + '/comment',
+                content: 'text=' + encodeURIComponent(comment)
+            }, callback);
     };
 
     var userDetails;

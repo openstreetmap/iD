@@ -331,7 +331,8 @@
             "title": "Note",
             "view": "Note",
             "link": "View on OpenStreetMap",
-            "comment": "Add your comments",
+            "text": "Add a new comment",
+            "failed": "Failed to save your comment",
             "save": "Save"
         }
     },

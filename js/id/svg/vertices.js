@@ -24,7 +24,8 @@ iD.svg.Vertices = function(projection, context) {
                         addChildVertices(member);
                     }
                 }
-            } else if (entity.intersects(extent, graph)) {
+            } else if (entity.type !== 'note' &&
+                entity.intersects(extent, graph)) {
                 vertices[entity.id] = entity;
             }
         }
@@ -75,7 +76,7 @@ iD.svg.Vertices = function(projection, context) {
                 this.setAttribute('cx', c);
                 this.setAttribute('cy', -c);
                 this.setAttribute('r', r);
-            }
+            };
         }
 
         var enter = groups.enter().append('g')
@@ -120,7 +121,7 @@ iD.svg.Vertices = function(projection, context) {
             if (entity.id in selected ||
                 entity.hasInterestingTags() ||
                 entity.isIntersection(graph)) {
-                vertices.push(entity)
+                vertices.push(entity);
             }
         }
 

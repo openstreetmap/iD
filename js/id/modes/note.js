@@ -1,4 +1,6 @@
-iD.modes.Note = function(context, data) {
+iD.modes.Note = function(context, id) {
+    var data = context.entity(id);
+
     var ui = iD.ui.Note(context, data);
 
     function cancel() {

@@ -13,13 +13,13 @@ iD.svg.Notes = function(projection, context) {
     function drawPoints(surface, points, filter) {
         points.sort(sortY);
 
-        var groups = surface.select('.layer-hit').selectAll('g.note')
+        var groups = surface.select('.layer-hit').selectAll('g.note.point')
             .filter(filter)
             .data(points, iD.Entity.key);
 
         var group = groups.enter()
             .append('g')
-            .attr('class', function(d) { return 'node note ' + d.id; })
+            .attr('class', function(d) { return 'note point ' + d.id; })
             .order();
 
         group.append('path')
@@ -41,9 +41,7 @@ iD.svg.Notes = function(projection, context) {
         groups.select('.shadow');
         groups.select('.stroke');
         groups.select('.icon')
-            .attr('xlink:href', function(entity) {
-                return '#maki-marker-12';
-            });
+            .attr('xlink:href', '');
 
         groups.exit()
             .remove();

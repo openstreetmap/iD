@@ -1,6 +1,9 @@
 (function(e){if("function"==typeof bootstrap)bootstrap("osmauth",e);else if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else if("undefined"!=typeof ses){if(!ses.ok())return;ses.makeOsmAuth=e}else"undefined"!=typeof window?window.osmAuth=e():global.osmAuth=e()})(function(){var define,ses,bootstrap,module,exports;
 return (function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({1:[function(require,module,exports){
+'use strict';
+
 var ohauth = require('ohauth'),
+    xtend = require('xtend'),
     store = require('store');
 
 // # osm-auth
@@ -39,15 +42,17 @@ module.exports = function(o) {
             o.oauth_secret, '',
             ohauth.baseString('POST', url, params));
 
-        // Create a 600x550 popup window in the center of the screen
-        var w = 600, h = 550,
-            settings = [
-                ['width', w], ['height', h],
-                ['left', screen.width / 2 - w / 2],
-                ['top', screen.height / 2 - h / 2]].map(function(x) {
-                    return x.join('=');
-                }).join(','),
-            popup = window.open('about:blank', 'oauth_window', settings);
+        if (!o.singlepage) {
+            // Create a 600x550 popup window in the center of the screen
+            var w = 600, h = 550,
+                settings = [
+                    ['width', w], ['height', h],
+                    ['left', screen.width / 2 - w / 2],
+                    ['top', screen.height / 2 - h / 2]].map(function(x) {
+                        return x.join('=');
+                    }).join(','),
+                popup = window.open('about:blank', 'oauth_window', settings);
+        }
 
         // Request a request token. When this is complete, the popup
         // window is redirected to OSM's authorization page.
@@ -59,11 +64,17 @@ module.exports = function(o) {
             if (err) return callback(err);
             var resp = ohauth.stringQs(xhr.response);
             token('oauth_request_token_secret', resp.oauth_token_secret);
-            popup.location = o.url + '/oauth/authorize?' + ohauth.qsString({
+            var authorize_url = o.url + '/oauth/authorize?' + ohauth.qsString({
                 oauth_token: resp.oauth_token,
                 oauth_callback: location.href.replace('index.html', '')
-                    .replace(/#.+/, '') + o.landing
+                    .replace(/#.*/, '') + o.landing
             });
+
+            if (o.singlepage) {
+                location.href = authorize_url;
+            } else {
+                popup.location = authorize_url;
+            }
         }
 
         // Called by a function in a landing page, in the popup window. The
@@ -106,6 +117,39 @@ module.exports = function(o) {
         }
     };
 
+    oauth.bootstrapToken = function(oauth_token, callback) {
+        // ## Getting an request token
+        // At this point we have an `oauth_token`, brought in from a function
+        // call on a landing page popup.
+        function get_access_token(oauth_token) {
+            var url = o.url + '/oauth/access_token',
+                params = timenonce(getAuth(o)),
+                request_token_secret = token('oauth_request_token_secret');
+            params.oauth_token = oauth_token;
+            params.oauth_signature = ohauth.signature(
+                o.oauth_secret,
+                request_token_secret,
+                ohauth.baseString('POST', url, params));
+
+            // ## Getting an access token
+            // The final token required for authentication. At this point
+            // we have a `request token secret`
+            ohauth.xhr('POST', url, params, null, {}, accessTokenDone);
+            o.loading();
+        }
+
+        function accessTokenDone(err, xhr) {
+            o.done();
+            if (err) return callback(err);
+            var access_token = ohauth.stringQs(xhr.response);
+            token('oauth_token', access_token.oauth_token);
+            token('oauth_token_secret', access_token.oauth_token_secret);
+            callback(null, oauth);
+        }
+
+        get_access_token(oauth_token);
+    };
+
     // # xhr
     //
     // A single XMLHttpRequest wrapper that does authenticated calls if the
@@ -120,6 +164,13 @@ module.exports = function(o) {
             var params = timenonce(getAuth(o)),
                 url = o.url + options.path,
                 oauth_token_secret = token('oauth_token_secret');
+
+            // https://tools.ietf.org/html/rfc5849#section-3.4.1.3.1
+            if ((!options.headers ||
+                options.headers['Content-Type'] === 'application/x-www-form-urlencoded') &&
+                options.content) {
+                params = xtend(params, ohauth.stringQs(options.content));
+            }
 
             params.oauth_token = token('oauth_token');
             params.oauth_signature = ohauth.signature(
@@ -154,6 +205,8 @@ module.exports = function(o) {
 
         o.url = o.url || 'http://www.openstreetmap.org';
         o.landing = o.landing || 'land.html';
+
+        o.singlepage = o.singlepage || false;
 
         // Optional loading and loading-done functions for nice UI feedback.
         // by default, no-ops
@@ -196,34 +249,11 @@ module.exports = function(o) {
     return oauth;
 };
 
-},{"ohauth":2,"store":3}],3:[function(require,module,exports){
-/* Copyright (c) 2010-2012 Marcus Westin
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
-;(function(){
+},{"ohauth":2,"xtend":3,"store":4}],4:[function(require,module,exports){
+(function(global){;(function(win){
 	var store = {},
-		win = window,
 		doc = win.document,
 		localStorageName = 'localStorage',
-		namespace = '__storejs__',
 		storage
 
 	store.disabled = false
@@ -242,6 +272,7 @@ module.exports = function(o) {
 		store.set(key, val)
 	}
 	store.getAll = function() {}
+	store.forEach = function() {}
 
 	store.serialize = function(value) {
 		return JSON.stringify(value)
@@ -272,11 +303,16 @@ module.exports = function(o) {
 		store.clear = function() { storage.clear() }
 		store.getAll = function() {
 			var ret = {}
-			for (var i=0; i<storage.length; ++i) {
-				var key = storage.key(i)
-				ret[key] = store.get(key)
-			}
+			store.forEach(function(key, val) {
+				ret[key] = val
+			})
 			return ret
+		}
+		store.forEach = function(callback) {
+			for (var i=0; i<storage.length; i++) {
+				var key = storage.key(i)
+				callback(key, store.get(key))
+			}
 		}
 	} else if (doc.documentElement.addBehavior) {
 		var storageOwner,
@@ -294,7 +330,7 @@ module.exports = function(o) {
 		try {
 			storageContainer = new ActiveXObject('htmlfile')
 			storageContainer.open()
-			storageContainer.write('<s' + 'cript>document.w=window</s' + 'cript><iframe src="/favicon.ico"></frame>')
+			storageContainer.write('<s' + 'cript>document.w=window</s' + 'cript><iframe src="/favicon.ico"></iframe>')
 			storageContainer.close()
 			storageOwner = storageContainer.w.frames[0].document
 			storage = storageOwner.createElement('div')
@@ -348,178 +384,82 @@ module.exports = function(o) {
 			}
 			storage.save(localStorageName)
 		})
-		store.getAll = withIEStorage(function(storage) {
-			var attributes = storage.XMLDocument.documentElement.attributes
-			storage.load(localStorageName)
+		store.getAll = function(storage) {
 			var ret = {}
-			for (var i=0, attr; attr=attributes[i]; ++i) {
-				ret[attr] = store.get(attr)
-			}
+			store.forEach(function(key, val) {
+				ret[key] = val
+			})
 			return ret
+		}
+		store.forEach = withIEStorage(function(storage, callback) {
+			var attributes = storage.XMLDocument.documentElement.attributes
+			for (var i=0, attr; attr=attributes[i]; ++i) {
+				callback(attr.name, store.deserialize(storage.getAttribute(attr.name)))
+			}
 		})
 	}
 
 	try {
-		store.set(namespace, namespace)
-		if (store.get(namespace) != namespace) { store.disabled = true }
-		store.remove(namespace)
+		var testKey = '__storejs__'
+		store.set(testKey, testKey)
+		if (store.get(testKey) != testKey) { store.disabled = true }
+		store.remove(testKey)
 	} catch(e) {
 		store.disabled = true
 	}
 	store.enabled = !store.disabled
-
-	if (typeof module != 'undefined' && typeof module != 'function') { module.exports = store }
+	
+	if (typeof module != 'undefined' && module.exports) { module.exports = store }
 	else if (typeof define === 'function' && define.amd) { define(store) }
-	else { this.store = store }
-})();
+	else { win.store = store }
+	
+})(this.window || global);
 
-},{}],2:[function(require,module,exports){
-'use strict';
+})(window)
+},{}],5:[function(require,module,exports){
+module.exports = hasKeys
 
-var hashes = require('jshashes'),
-    xtend = require('xtend'),
-    sha1 = new hashes.SHA1();
+function hasKeys(source) {
+    return source !== null &&
+        (typeof source === "object" ||
+        typeof source === "function")
+}
 
-var ohauth = {};
+},{}],3:[function(require,module,exports){
+var Keys = require("object-keys")
+var hasKeys = require("./has-keys")
 
-ohauth.qsString = function(obj) {
-    return Object.keys(obj).sort().map(function(key) {
-        return ohauth.percentEncode(key) + '=' +
-            ohauth.percentEncode(obj[key]);
-    }).join('&');
-};
+module.exports = extend
 
-ohauth.stringQs = function(str) {
-    return str.split('&').reduce(function(obj, pair){
-        var parts = pair.split('=');
-        obj[decodeURIComponent(parts[0])] = (null === parts[1]) ?
-            '' : decodeURIComponent(parts[1]);
-        return obj;
-    }, {});
-};
+function extend() {
+    var target = {}
 
-ohauth.rawxhr = function(method, url, data, headers, callback) {
-    var xhr = new XMLHttpRequest(),
-        twoHundred = /^20\d$/;
-    xhr.onreadystatechange = function() {
-        if (4 == xhr.readyState && 0 !== xhr.status) {
-            if (twoHundred.test(xhr.status)) callback(null, xhr);
-            else return callback(xhr, null);
+    for (var i = 0; i < arguments.length; i++) {
+        var source = arguments[i]
+
+        if (!hasKeys(source)) {
+            continue
         }
-    };
-    xhr.onerror = function(e) { return callback(e, null); };
-    xhr.open(method, url, true);
-    for (var h in headers) xhr.setRequestHeader(h, headers[h]);
-    xhr.send(data);
-};
 
-ohauth.xhr = function(method, url, auth, data, options, callback) {
-    var headers = (options && options.header) || {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    };
-    headers.Authorization = 'OAuth ' + ohauth.authHeader(auth);
-    ohauth.rawxhr(method, url, data, headers, callback);
-};
+        var keys = Keys(source)
 
-ohauth.nonce = function() {
-    for (var o = ''; o.length < 6;) {
-        o += '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'[Math.floor(Math.random() * 61)];
+        for (var j = 0; j < keys.length; j++) {
+            var name = keys[j]
+            target[name] = source[name]
+        }
     }
-    return o;
-};
 
-ohauth.authHeader = function(obj) {
-    return Object.keys(obj).sort().map(function(key) {
-        return encodeURIComponent(key) + '="' + encodeURIComponent(obj[key]) + '"';
-    }).join(', ');
-};
+    return target
+}
 
-ohauth.timestamp = function() { return ~~((+new Date()) / 1000); };
-
-ohauth.percentEncode = function(s) {
-    return encodeURIComponent(s)
-        .replace(/\!/g, '%21').replace(/\'/g, '%27')
-        .replace(/\*/g, '%2A').replace(/\(/g, '%28').replace(/\)/g, '%29');
-};
-
-ohauth.baseString = function(method, url, params) {
-    if (params.oauth_signature) delete params.oauth_signature;
-    return [
-        method,
-        ohauth.percentEncode(url),
-        ohauth.percentEncode(ohauth.qsString(params))].join('&');
-};
-
-ohauth.signature = function(oauth_secret, token_secret, baseString) {
-    return sha1.b64_hmac(
-        ohauth.percentEncode(oauth_secret) + '&' +
-        ohauth.percentEncode(token_secret),
-        baseString);
-};
-
-/**
- * Takes an options object for configuration (consumer_key,
- * consumer_secret, version, signature_method, token) and returns a
- * function that generates the Authorization header for given data.
- *
- * The returned function takes these parameters:
- * - method: GET/POST/...
- * - uri: full URI with protocol, port, path and query string
- * - extra_params: any extra parameters (that are passed in the POST data),
- *   can be an object or a from-urlencoded string.
- *
- * Returned function returns full OAuth header with "OAuth" string in it.
- */
-
-ohauth.headerGenerator = function(options) {
-    options = options || {};
-    var consumer_key = options.consumer_key || '',
-        consumer_secret = options.consumer_secret || '',
-        signature_method = options.signature_method || 'HMAC-SHA1',
-        version = options.version || '1.0',
-        token = options.token || '';
-
-    return function(method, uri, extra_params) {
-        method = method.toUpperCase();
-        if (typeof extra_params === 'string' && extra_params.length > 0) {
-            extra_params = ohauth.stringQs(extra_params);
-        }
-
-        var uri_parts = uri.split('?', 2),
-        base_uri = uri_parts[0];
-
-        var query_params = uri_parts.length === 2 ?
-            ohauth.stringQs(uri_parts[1]) : {};
-
-        var oauth_params = {
-            oauth_consumer_key: consumer_key,
-            oauth_signature_method: signature_method,
-            oauth_version: version,
-            oauth_timestamp: ohauth.timestamp(),
-            oauth_nonce: ohauth.nonce()
-        };
-
-        if (token) oauth_params.oauth_token = token;
-
-        var all_params = xtend({}, oauth_params, query_params, extra_params),
-            base_str = ohauth.baseString(method, base_uri, all_params);
-
-        oauth_params.oauth_signature = ohauth.signature(consumer_secret, token, base_str);
-
-        return 'OAuth ' + ohauth.authHeader(oauth_params);
-    };
-};
-
-module.exports = ohauth;
-
-},{"jshashes":4,"xtend":5}],4:[function(require,module,exports){
+},{"./has-keys":5,"object-keys":6}],7:[function(require,module,exports){
 (function(global){/**
- * jsHashes - A fast and independent hashing library pure JavaScript implemented (ES5 compliant) for both server and client side
+ * jsHashes - A fast and independent hashing library pure JavaScript implemented (ES3 compliant) for both server and client side
  * 
  * @class Hashes
  * @author Tomas Aparicio <tomas@rijndael-project.com>
  * @license New BSD (see LICENSE file)
- * @version 1.0.3
+ * @version 1.0.4
  *
  * Algorithms specification:
  *
@@ -535,57 +475,65 @@ module.exports = ohauth;
   var Hashes;
   
   // private helper methods
-  function utf8Encode(input) {
-    var  x, y, output = '', i = -1, l = input.length;
-    while ((i+=1) < l) {
-      /* Decode utf-16 surrogate pairs */
-      x = input.charCodeAt(i);
-      y = i + 1 < l ? input.charCodeAt(i + 1) : 0;
-      if (0xD800 <= x && x <= 0xDBFF && 0xDC00 <= y && y <= 0xDFFF) {
-          x = 0x10000 + ((x & 0x03FF) << 10) + (y & 0x03FF);
-          i += 1;
-      }
-      /* Encode output as utf-8 */
-      if (x <= 0x7F) {
-          output += String.fromCharCode(x);
-      } else if (x <= 0x7FF) {
-          output += String.fromCharCode(0xC0 | ((x >>> 6 ) & 0x1F),
-                      0x80 | ( x & 0x3F));
-      } else if (x <= 0xFFFF) {
-          output += String.fromCharCode(0xE0 | ((x >>> 12) & 0x0F),
-                      0x80 | ((x >>> 6 ) & 0x3F),
-                      0x80 | ( x & 0x3F));
-      } else if (x <= 0x1FFFFF) {
-          output += String.fromCharCode(0xF0 | ((x >>> 18) & 0x07),
-                      0x80 | ((x >>> 12) & 0x3F),
-                      0x80 | ((x >>> 6 ) & 0x3F),
-                      0x80 | ( x & 0x3F));
+  function utf8Encode(str) {
+    var  x, y, output = '', i = -1, l;
+    
+    if (str && str.length) {
+      l = str.length;
+      while ((i+=1) < l) {
+        /* Decode utf-16 surrogate pairs */
+        x = str.charCodeAt(i);
+        y = i + 1 < l ? str.charCodeAt(i + 1) : 0;
+        if (0xD800 <= x && x <= 0xDBFF && 0xDC00 <= y && y <= 0xDFFF) {
+            x = 0x10000 + ((x & 0x03FF) << 10) + (y & 0x03FF);
+            i += 1;
+        }
+        /* Encode output as utf-8 */
+        if (x <= 0x7F) {
+            output += String.fromCharCode(x);
+        } else if (x <= 0x7FF) {
+            output += String.fromCharCode(0xC0 | ((x >>> 6 ) & 0x1F),
+                        0x80 | ( x & 0x3F));
+        } else if (x <= 0xFFFF) {
+            output += String.fromCharCode(0xE0 | ((x >>> 12) & 0x0F),
+                        0x80 | ((x >>> 6 ) & 0x3F),
+                        0x80 | ( x & 0x3F));
+        } else if (x <= 0x1FFFFF) {
+            output += String.fromCharCode(0xF0 | ((x >>> 18) & 0x07),
+                        0x80 | ((x >>> 12) & 0x3F),
+                        0x80 | ((x >>> 6 ) & 0x3F),
+                        0x80 | ( x & 0x3F));
+        }
       }
     }
     return output;
   }
   
-  function utf8Decode(str_data) {
-    var i, ac, c1, c2, c3, arr = [], l = str_data.length;
+  function utf8Decode(str) {
+    var i, ac, c1, c2, c3, arr = [], l;
     i = ac = c1 = c2 = c3 = 0;
-    str_data += '';
-
-    while (i < l) {
-        c1 = str_data.charCodeAt(i);
-        ac += 1;
-        if (c1 < 128) {
-            arr[ac] = String.fromCharCode(c1);
-            i+=1;
-        } else if (c1 > 191 && c1 < 224) {
-            c2 = str_data.charCodeAt(i + 1);
-            arr[ac] = String.fromCharCode(((c1 & 31) << 6) | (c2 & 63));
-            i += 2;
-        } else {
-            c2 = str_data.charCodeAt(i + 1);
-            c3 = str_data.charCodeAt(i + 2);
-            arr[ac] = String.fromCharCode(((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
-            i += 3;
-        }
+    
+    if (str && str.length) {
+      l = str.length;
+      str += '';
+    
+      while (i < l) {
+          c1 = str.charCodeAt(i);
+          ac += 1;
+          if (c1 < 128) {
+              arr[ac] = String.fromCharCode(c1);
+              i+=1;
+          } else if (c1 > 191 && c1 < 224) {
+              c2 = str.charCodeAt(i + 1);
+              arr[ac] = String.fromCharCode(((c1 & 31) << 6) | (c2 & 63));
+              i += 2;
+          } else {
+              c2 = str.charCodeAt(i + 1);
+              c3 = str.charCodeAt(i + 2);
+              arr[ac] = String.fromCharCode(((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+              i += 3;
+          }
+      }
     }
     return arr.join('');
   }
@@ -2133,46 +2081,925 @@ module.exports = ohauth;
     }
   }( this ));
 }()); // IIFE
+
 })(window)
-},{}],5:[function(require,module,exports){
-var Keys = Object.keys || objectKeys
+},{}],2:[function(require,module,exports){
+'use strict';
 
-module.exports = extend
+var hashes = require('jshashes'),
+    xtend = require('xtend'),
+    sha1 = new hashes.SHA1();
 
-function extend() {
-    var target = {}
+var ohauth = {};
 
-    for (var i = 0; i < arguments.length; i++) {
-        var source = arguments[i]
+ohauth.qsString = function(obj) {
+    return Object.keys(obj).sort().map(function(key) {
+        return ohauth.percentEncode(key) + '=' +
+            ohauth.percentEncode(obj[key]);
+    }).join('&');
+};
 
-        if (!isObject(source)) {
-            continue
+ohauth.stringQs = function(str) {
+    return str.split('&').reduce(function(obj, pair){
+        var parts = pair.split('=');
+        obj[decodeURIComponent(parts[0])] = (null === parts[1]) ?
+            '' : decodeURIComponent(parts[1]);
+        return obj;
+    }, {});
+};
+
+ohauth.rawxhr = function(method, url, data, headers, callback) {
+    var xhr = new XMLHttpRequest(),
+        twoHundred = /^20\d$/;
+    xhr.onreadystatechange = function() {
+        if (4 == xhr.readyState && 0 !== xhr.status) {
+            if (twoHundred.test(xhr.status)) callback(null, xhr);
+            else return callback(xhr, null);
+        }
+    };
+    xhr.onerror = function(e) { return callback(e, null); };
+    xhr.open(method, url, true);
+    for (var h in headers) xhr.setRequestHeader(h, headers[h]);
+    xhr.send(data);
+};
+
+ohauth.xhr = function(method, url, auth, data, options, callback) {
+    var headers = (options && options.header) || {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    headers.Authorization = 'OAuth ' + ohauth.authHeader(auth);
+    ohauth.rawxhr(method, url, data, headers, callback);
+};
+
+ohauth.nonce = function() {
+    for (var o = ''; o.length < 6;) {
+        o += '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'[Math.floor(Math.random() * 61)];
+    }
+    return o;
+};
+
+ohauth.authHeader = function(obj) {
+    return Object.keys(obj).sort().map(function(key) {
+        return encodeURIComponent(key) + '="' + encodeURIComponent(obj[key]) + '"';
+    }).join(', ');
+};
+
+ohauth.timestamp = function() { return ~~((+new Date()) / 1000); };
+
+ohauth.percentEncode = function(s) {
+    return encodeURIComponent(s)
+        .replace(/\!/g, '%21').replace(/\'/g, '%27')
+        .replace(/\*/g, '%2A').replace(/\(/g, '%28').replace(/\)/g, '%29');
+};
+
+ohauth.baseString = function(method, url, params) {
+    if (params.oauth_signature) delete params.oauth_signature;
+    return [
+        method,
+        ohauth.percentEncode(url),
+        ohauth.percentEncode(ohauth.qsString(params))].join('&');
+};
+
+ohauth.signature = function(oauth_secret, token_secret, baseString) {
+    return sha1.b64_hmac(
+        ohauth.percentEncode(oauth_secret) + '&' +
+        ohauth.percentEncode(token_secret),
+        baseString);
+};
+
+/**
+ * Takes an options object for configuration (consumer_key,
+ * consumer_secret, version, signature_method, token) and returns a
+ * function that generates the Authorization header for given data.
+ *
+ * The returned function takes these parameters:
+ * - method: GET/POST/...
+ * - uri: full URI with protocol, port, path and query string
+ * - extra_params: any extra parameters (that are passed in the POST data),
+ *   can be an object or a from-urlencoded string.
+ *
+ * Returned function returns full OAuth header with "OAuth" string in it.
+ */
+
+ohauth.headerGenerator = function(options) {
+    options = options || {};
+    var consumer_key = options.consumer_key || '',
+        consumer_secret = options.consumer_secret || '',
+        signature_method = options.signature_method || 'HMAC-SHA1',
+        version = options.version || '1.0',
+        token = options.token || '';
+
+    return function(method, uri, extra_params) {
+        method = method.toUpperCase();
+        if (typeof extra_params === 'string' && extra_params.length > 0) {
+            extra_params = ohauth.stringQs(extra_params);
         }
 
-        var keys = Keys(source)
+        var uri_parts = uri.split('?', 2),
+        base_uri = uri_parts[0];
 
-        for (var j = 0; j < keys.length; j++) {
-            var name = keys[j]
-            target[name] = source[name]
+        var query_params = uri_parts.length === 2 ?
+            ohauth.stringQs(uri_parts[1]) : {};
+
+        var oauth_params = {
+            oauth_consumer_key: consumer_key,
+            oauth_signature_method: signature_method,
+            oauth_version: version,
+            oauth_timestamp: ohauth.timestamp(),
+            oauth_nonce: ohauth.nonce()
+        };
+
+        if (token) oauth_params.oauth_token = token;
+
+        var all_params = xtend({}, oauth_params, query_params, extra_params),
+            base_str = ohauth.baseString(method, base_uri, all_params);
+
+        oauth_params.oauth_signature = ohauth.signature(consumer_secret, token, base_str);
+
+        return 'OAuth ' + ohauth.authHeader(oauth_params);
+    };
+};
+
+module.exports = ohauth;
+
+},{"jshashes":7,"xtend":3}],6:[function(require,module,exports){
+module.exports = Object.keys || require('./shim');
+
+
+},{"./shim":8}],8:[function(require,module,exports){
+(function () {
+	"use strict";
+
+	// modified from https://github.com/kriskowal/es5-shim
+	var has = Object.prototype.hasOwnProperty,
+		is = require('is'),
+		forEach = require('foreach'),
+		hasDontEnumBug = !({'toString': null}).propertyIsEnumerable('toString'),
+		dontEnums = [
+			"toString",
+			"toLocaleString",
+			"valueOf",
+			"hasOwnProperty",
+			"isPrototypeOf",
+			"propertyIsEnumerable",
+			"constructor"
+		],
+		keysShim;
+
+	keysShim = function keys(object) {
+		if (!is.object(object) && !is.array(object)) {
+			throw new TypeError("Object.keys called on a non-object");
+		}
+
+		var name, theKeys = [];
+		for (name in object) {
+			if (has.call(object, name)) {
+				theKeys.push(name);
+			}
+		}
+
+		if (hasDontEnumBug) {
+			forEach(dontEnums, function (dontEnum) {
+				if (has.call(object, dontEnum)) {
+					theKeys.push(dontEnum);
+				}
+			});
+		}
+		return theKeys;
+	};
+
+	module.exports = keysShim;
+}());
+
+
+},{"is":9,"foreach":10}],9:[function(require,module,exports){
+
+/**!
+ * is
+ * the definitive JavaScript type testing library
+ * 
+ * @copyright 2013 Enrico Marino
+ * @license MIT
+ */
+
+var objProto = Object.prototype;
+var owns = objProto.hasOwnProperty;
+var toString = objProto.toString;
+var isActualNaN = function (value) {
+  return value !== value;
+};
+var NON_HOST_TYPES = {
+  "boolean": 1,
+  "number": 1,
+  "string": 1,
+  "undefined": 1
+};
+
+/**
+ * Expose `is`
+ */
+
+var is = module.exports = {};
+
+/**
+ * Test general.
+ */
+
+/**
+ * is.type
+ * Test if `value` is a type of `type`.
+ *
+ * @param {Mixed} value value to test
+ * @param {String} type type
+ * @return {Boolean} true if `value` is a type of `type`, false otherwise
+ * @api public
+ */
+
+is.a =
+is.type = function (value, type) {
+  return typeof value === type;
+};
+
+/**
+ * is.defined
+ * Test if `value` is defined.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if 'value' is defined, false otherwise
+ * @api public
+ */
+
+is.defined = function (value) {
+  return value !== undefined;
+};
+
+/**
+ * is.empty
+ * Test if `value` is empty.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is empty, false otherwise
+ * @api public
+ */
+
+is.empty = function (value) {
+  var type = toString.call(value);
+  var key;
+
+  if ('[object Array]' === type || '[object Arguments]' === type) {
+    return value.length === 0;
+  }
+
+  if ('[object Object]' === type) {
+    for (key in value) if (owns.call(value, key)) return false;
+    return true;
+  }
+
+  if ('[object String]' === type) {
+    return '' === value;
+  }
+
+  return false;
+};
+
+/**
+ * is.equal
+ * Test if `value` is equal to `other`.
+ *
+ * @param {Mixed} value value to test
+ * @param {Mixed} other value to compare with
+ * @return {Boolean} true if `value` is equal to `other`, false otherwise
+ */
+
+is.equal = function (value, other) {
+  var type = toString.call(value)
+  var key;
+
+  if (type !== toString.call(other)) {
+    return false;
+  }
+
+  if ('[object Object]' === type) {
+    for (key in value) {
+      if (!is.equal(value[key], other[key])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  if ('[object Array]' === type) {
+    key = value.length;
+    if (key !== other.length) {
+      return false;
+    }
+    while (--key) {
+      if (!is.equal(value[key], other[key])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  if ('[object Function]' === type) {
+    return value.prototype === other.prototype;
+  }
+
+  if ('[object Date]' === type) {
+    return value.getTime() === other.getTime();
+  }
+
+  return value === other;
+};
+
+/**
+ * is.hosted
+ * Test if `value` is hosted by `host`.
+ *
+ * @param {Mixed} value to test
+ * @param {Mixed} host host to test with
+ * @return {Boolean} true if `value` is hosted by `host`, false otherwise
+ * @api public
+ */
+
+is.hosted = function (value, host) {
+  var type = typeof host[value];
+  return type === 'object' ? !!host[value] : !NON_HOST_TYPES[type];
+};
+
+/**
+ * is.instance
+ * Test if `value` is an instance of `constructor`.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is an instance of `constructor`
+ * @api public
+ */
+
+is.instance = is['instanceof'] = function (value, constructor) {
+  return value instanceof constructor;
+};
+
+/**
+ * is.null
+ * Test if `value` is null.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is null, false otherwise
+ * @api public
+ */
+
+is['null'] = function (value) {
+  return value === null;
+};
+
+/**
+ * is.undefined
+ * Test if `value` is undefined.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is undefined, false otherwise
+ * @api public
+ */
+
+is.undefined = function (value) {
+  return value === undefined;
+};
+
+/**
+ * Test arguments.
+ */
+
+/**
+ * is.arguments
+ * Test if `value` is an arguments object.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is an arguments object, false otherwise
+ * @api public
+ */
+
+is.arguments = function (value) {
+  var isStandardArguments = '[object Arguments]' === toString.call(value);
+  var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
+  return isStandardArguments || isOldArguments;
+};
+
+/**
+ * Test array.
+ */
+
+/**
+ * is.array
+ * Test if 'value' is an array.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is an array, false otherwise
+ * @api public
+ */
+
+is.array = function (value) {
+  return '[object Array]' === toString.call(value);
+};
+
+/**
+ * is.arguments.empty
+ * Test if `value` is an empty arguments object.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is an empty arguments object, false otherwise
+ * @api public
+ */
+is.arguments.empty = function (value) {
+  return is.arguments(value) && value.length === 0;
+};
+
+/**
+ * is.array.empty
+ * Test if `value` is an empty array.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is an empty array, false otherwise
+ * @api public
+ */
+is.array.empty = function (value) {
+  return is.array(value) && value.length === 0;
+};
+
+/**
+ * is.arraylike
+ * Test if `value` is an arraylike object.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is an arguments object, false otherwise
+ * @api public
+ */
+
+is.arraylike = function (value) {
+  return !!value && !is.boolean(value)
+    && owns.call(value, 'length')
+    && isFinite(value.length)
+    && is.number(value.length)
+    && value.length >= 0;
+};
+
+/**
+ * Test boolean.
+ */
+
+/**
+ * is.boolean
+ * Test if `value` is a boolean.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a boolean, false otherwise
+ * @api public
+ */
+
+is.boolean = function (value) {
+  return '[object Boolean]' === toString.call(value);
+};
+
+/**
+ * is.false
+ * Test if `value` is false.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is false, false otherwise
+ * @api public
+ */
+
+is['false'] = function (value) {
+  return is.boolean(value) && (value === false || value.valueOf() === false);
+};
+
+/**
+ * is.true
+ * Test if `value` is true.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is true, false otherwise
+ * @api public
+ */
+
+is['true'] = function (value) {
+  return is.boolean(value) && (value === true || value.valueOf() === true);
+};
+
+/**
+ * Test date.
+ */
+
+/**
+ * is.date
+ * Test if `value` is a date.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a date, false otherwise
+ * @api public
+ */
+
+is.date = function (value) {
+  return '[object Date]' === toString.call(value);
+};
+
+/**
+ * Test element.
+ */
+
+/**
+ * is.element
+ * Test if `value` is an html element.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is an HTML Element, false otherwise
+ * @api public
+ */
+
+is.element = function (value) {
+  return value !== undefined
+    && typeof HTMLElement !== 'undefined'
+    && value instanceof HTMLElement
+    && value.nodeType === 1;
+};
+
+/**
+ * Test error.
+ */
+
+/**
+ * is.error
+ * Test if `value` is an error object.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is an error object, false otherwise
+ * @api public
+ */
+
+is.error = function (value) {
+  return '[object Error]' === toString.call(value);
+};
+
+/**
+ * Test function.
+ */
+
+/**
+ * is.fn / is.function (deprecated)
+ * Test if `value` is a function.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a function, false otherwise
+ * @api public
+ */
+
+is.fn = is['function'] = function (value) {
+  var isAlert = typeof window !== 'undefined' && value === window.alert;
+  return isAlert || '[object Function]' === toString.call(value);
+};
+
+/**
+ * Test number.
+ */
+
+/**
+ * is.number
+ * Test if `value` is a number.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a number, false otherwise
+ * @api public
+ */
+
+is.number = function (value) {
+  return '[object Number]' === toString.call(value);
+};
+
+/**
+ * is.infinite
+ * Test if `value` is positive or negative infinity.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is positive or negative Infinity, false otherwise
+ * @api public
+ */
+is.infinite = function (value) {
+  return value === Infinity || value === -Infinity;
+};
+
+/**
+ * is.decimal
+ * Test if `value` is a decimal number.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a decimal number, false otherwise
+ * @api public
+ */
+
+is.decimal = function (value) {
+  return is.number(value) && !isActualNaN(value) && value % 1 !== 0;
+};
+
+/**
+ * is.divisibleBy
+ * Test if `value` is divisible by `n`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} n dividend
+ * @return {Boolean} true if `value` is divisible by `n`, false otherwise
+ * @api public
+ */
+
+is.divisibleBy = function (value, n) {
+  var isDividendInfinite = is.infinite(value);
+  var isDivisorInfinite = is.infinite(n);
+  var isNonZeroNumber = is.number(value) && !isActualNaN(value) && is.number(n) && !isActualNaN(n) && n !== 0;
+  return isDividendInfinite || isDivisorInfinite || (isNonZeroNumber && value % n === 0);
+};
+
+/**
+ * is.int
+ * Test if `value` is an integer.
+ *
+ * @param value to test
+ * @return {Boolean} true if `value` is an integer, false otherwise
+ * @api public
+ */
+
+is.int = function (value) {
+  return is.number(value) && !isActualNaN(value) && value % 1 === 0;
+};
+
+/**
+ * is.maximum
+ * Test if `value` is greater than 'others' values.
+ *
+ * @param {Number} value value to test
+ * @param {Array} others values to compare with
+ * @return {Boolean} true if `value` is greater than `others` values
+ * @api public
+ */
+
+is.maximum = function (value, others) {
+  if (isActualNaN(value)) {
+    throw new TypeError('NaN is not a valid value');
+  } else if (!is.arraylike(others)) {
+    throw new TypeError('second argument must be array-like');
+  }
+  var len = others.length;
+
+  while (--len >= 0) {
+    if (value < others[len]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+/**
+ * is.minimum
+ * Test if `value` is less than `others` values.
+ *
+ * @param {Number} value value to test
+ * @param {Array} others values to compare with
+ * @return {Boolean} true if `value` is less than `others` values
+ * @api public
+ */
+
+is.minimum = function (value, others) {
+  if (isActualNaN(value)) {
+    throw new TypeError('NaN is not a valid value');
+  } else if (!is.arraylike(others)) {
+    throw new TypeError('second argument must be array-like');
+  }
+  var len = others.length;
+
+  while (--len >= 0) {
+    if (value > others[len]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+/**
+ * is.nan
+ * Test if `value` is not a number.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is not a number, false otherwise
+ * @api public
+ */
+
+is.nan = function (value) {
+  return !is.number(value) || value !== value;
+};
+
+/**
+ * is.even
+ * Test if `value` is an even number.
+ *
+ * @param {Number} value value to test
+ * @return {Boolean} true if `value` is an even number, false otherwise
+ * @api public
+ */
+
+is.even = function (value) {
+  return is.infinite(value) || (is.number(value) && value === value && value % 2 === 0);
+};
+
+/**
+ * is.odd
+ * Test if `value` is an odd number.
+ *
+ * @param {Number} value value to test
+ * @return {Boolean} true if `value` is an odd number, false otherwise
+ * @api public
+ */
+
+is.odd = function (value) {
+  return is.infinite(value) || (is.number(value) && value === value && value % 2 !== 0);
+};
+
+/**
+ * is.ge
+ * Test if `value` is greater than or equal to `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean}
+ * @api public
+ */
+
+is.ge = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value >= other;
+};
+
+/**
+ * is.gt
+ * Test if `value` is greater than `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean}
+ * @api public
+ */
+
+is.gt = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value > other;
+};
+
+/**
+ * is.le
+ * Test if `value` is less than or equal to `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean} if 'value' is less than or equal to 'other'
+ * @api public
+ */
+
+is.le = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value <= other;
+};
+
+/**
+ * is.lt
+ * Test if `value` is less than `other`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} other value to compare with
+ * @return {Boolean} if `value` is less than `other`
+ * @api public
+ */
+
+is.lt = function (value, other) {
+  if (isActualNaN(value) || isActualNaN(other)) {
+    throw new TypeError('NaN is not a valid value');
+  }
+  return !is.infinite(value) && !is.infinite(other) && value < other;
+};
+
+/**
+ * is.within
+ * Test if `value` is within `start` and `finish`.
+ *
+ * @param {Number} value value to test
+ * @param {Number} start lower bound
+ * @param {Number} finish upper bound
+ * @return {Boolean} true if 'value' is is within 'start' and 'finish'
+ * @api public
+ */
+is.within = function (value, start, finish) {
+  if (isActualNaN(value) || isActualNaN(start) || isActualNaN(finish)) {
+    throw new TypeError('NaN is not a valid value');
+  } else if (!is.number(value) || !is.number(start) || !is.number(finish)) {
+    throw new TypeError('all arguments must be numbers');
+  }
+  var isAnyInfinite = is.infinite(value) || is.infinite(start) || is.infinite(finish);
+  return isAnyInfinite || (value >= start && value <= finish);
+};
+
+/**
+ * Test object.
+ */
+
+/**
+ * is.object
+ * Test if `value` is an object.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is an object, false otherwise
+ * @api public
+ */
+
+is.object = function (value) {
+  return value && '[object Object]' === toString.call(value);
+};
+
+/**
+ * is.hash
+ * Test if `value` is a hash - a plain object literal.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a hash, false otherwise
+ * @api public
+ */
+
+is.hash = function (value) {
+  return is.object(value) && value.constructor === Object && !value.nodeType && !value.setInterval;
+};
+
+/**
+ * Test regexp.
+ */
+
+/**
+ * is.regexp
+ * Test if `value` is a regular expression.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if `value` is a regexp, false otherwise
+ * @api public
+ */
+
+is.regexp = function (value) {
+  return '[object RegExp]' === toString.call(value);
+};
+
+/**
+ * Test string.
+ */
+
+/**
+ * is.string
+ * Test if `value` is a string.
+ *
+ * @param {Mixed} value value to test
+ * @return {Boolean} true if 'value' is a string, false otherwise
+ * @api public
+ */
+
+is.string = function (value) {
+  return '[object String]' === toString.call(value);
+};
+
+
+},{}],10:[function(require,module,exports){
+
+var hasOwn = Object.prototype.hasOwnProperty;
+var toString = Object.prototype.toString;
+
+module.exports = function forEach (obj, fn, ctx) {
+    if (toString.call(fn) !== '[object Function]') {
+        throw new TypeError('iterator must be a function');
+    }
+    var l = obj.length;
+    if (l === +l) {
+        for (var i = 0; i < l; i++) {
+            fn.call(ctx, obj[i], i, obj);
+        }
+    } else {
+        for (var k in obj) {
+            if (hasOwn.call(obj, k)) {
+                fn.call(ctx, obj[k], k, obj);
+            }
         }
     }
+};
 
-    return target
-}
-
-function objectKeys(obj) {
-    var keys = []
-    for (var k in obj) {
-        keys.push(k)
-    }
-    return keys
-}
-
-function isObject(obj) {
-    return obj !== null && typeof obj === "object"
-}
 
 },{}]},{},[1])(1)
 });
 ;
-
