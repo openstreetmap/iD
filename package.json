@@ -20,7 +20,7 @@
   ],
   "license": "WTFPL",
   "devDependencies": {
-    "d3": "3",
+    "d3": "3.3.8",
     "smash": "0.0",
     "uglify-js": "~2.2.5",
     "maki": "0.1",
