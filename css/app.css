@@ -534,6 +534,7 @@ button.save.has-count .count::before {
 .icon.relation    { background-position: -520px 0;}
 .icon.relation.route         { background-position: -540px 0;}
 .icon.relation.multipolygon  { background-position: -560px 0;}
+.icon.vertex     { background-position: -580px 0;}
 
 .icon.inspect.light    { background-position: -220px -20px;}
 .icon.plus.light       { background-position: -240px -20px;}

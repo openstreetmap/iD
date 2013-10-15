@@ -28,16 +28,19 @@
      inkscape:window-height="1032"
      id="namedview392"
      showgrid="true"
-     inkscape:zoom="4.2527422"
-     inkscape:cx="305.14936"
-     inkscape:cy="354.08338"
+     inkscape:zoom="6.0142857"
+     inkscape:cx="517.7483"
+     inkscape:cy="535.87471"
      inkscape:window-x="2"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer12"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
-     inkscape:snap-global="false">
+     inkscape:snap-global="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-nodes="false">
     <inkscape:grid
        type="xygrid"
        id="grid6326"
@@ -2149,5 +2152,15 @@
            inkscape:connector-curvature="0" />
       </g>
     </g>
+    <path
+       inkscape:connector-curvature="0"
+       style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path17942-7"
+       d="m 614,7.9999969 -1,1.0000001 0,2 1,1 2,0 1,-1 0,-2 -1,-1.0000001 -2,0 z m 1,1.0000001 c 0.5523,0 1,0.4477 1,1 0,0.5523 -0.4477,1 -1,1 -0.5523,0 -1,-0.4477 -1,-1 0,-0.5523 0.4477,-1 1,-1 z" />
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:0.5;color:#000000;fill:#1a1a1a;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path17944-2"
+       d="m 614,47.999997 -1,1 0,2 1,1 2,0 1,-1 0,-2 -1,-1 -2,0 z m 1,1 c 0.5523,0 1,0.4477 1,1 0,0.5523 -0.4477,1 -1,1 -0.5523,0 -1,-0.4477 -1,-1 0,-0.5523 0.4477,-1 1,-1 z" />
   </g>
 </svg>
