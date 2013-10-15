@@ -242,6 +242,29 @@ iD.ui.Background = function(context) {
             .title(t('gpx.drag_drop'))
             .placement('left'));
 
+        gpxLayerItem.append('button')
+            .attr('class', 'layer-extent')
+            .on('click', function() {
+                d3.event.preventDefault();
+                d3.event.stopPropagation();
+                context.background().zoomToGpxLayer();
+            })
+            .append('span')
+            .attr('class', 'icon geolocate');
+
+        gpxLayerItem.append('button')
+            .attr('class', 'layer-browse')
+            .on('click', function() {
+                d3.select(document.createElement('input'))
+                    .attr('type', 'file')
+                    .on('change', function() {
+                        context.background().gpxLayerFiles(d3.event.target.files);
+                    })
+                    .node().click();
+            })
+            .append('span')
+            .attr('class', 'icon geocode');
+
         label = gpxLayerItem.append('label');
 
         label.append('input')
@@ -252,18 +275,7 @@ iD.ui.Background = function(context) {
         label.append('span')
             .text(t('gpx.local_layer'));
 
-        label.append('button')
-            .attr('class', 'minor layer-extent')
-            .on('click', function() {
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
-                context.background().zoomToGpxLayer();
-            })
-            .append('span')
-                .attr('class', 'icon geocode' );
-
-        var adjustments = content
-            .append('div')
+        var adjustments = content.append('div')
             .attr('class', 'adjustments');
 
         adjustments.append('a')
@@ -278,8 +290,7 @@ iD.ui.Background = function(context) {
                 d3.event.preventDefault();
             });
 
-        var nudgeContainer = adjustments
-            .append('div')
+        var nudgeContainer = adjustments.append('div')
             .attr('class', 'nudge-container cf')
             .style('display', 'none');
 

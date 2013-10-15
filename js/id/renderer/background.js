@@ -135,6 +135,23 @@ iD.Background = function(context) {
         return background.hasGpxLayer() && gpxLayer.enable();
     };
 
+    function toDom(x) {
+        return (new DOMParser()).parseFromString(x, 'text/xml');
+    }
+
+    background.gpxLayerFiles = function(fileList) {
+        var f = fileList[0],
+            reader = new FileReader();
+
+        reader.onload = function(e) {
+            gpxLayer.geojson(toGeoJSON.gpx(toDom(e.target.result)));
+            dispatch.change();
+            context.map().pan([0, 0]);
+        };
+
+        reader.readAsText(f);
+    };
+
     background.zoomToGpxLayer = function() {
         if (background.hasGpxLayer()) {
             context.map()

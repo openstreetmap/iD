@@ -2040,13 +2040,20 @@ img.wiki-image {
     height:18px;
 }
 
-.background-control .layer-toggle-gpx .layer-extent {
+.background-control .layer-toggle-gpx button {
+    float: right;
+    height: 100%;
+    width: 10%;
     border-left: 1px solid #CCC;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0;
 }
 
-.background-control .layer-toggle-gpx.selected .layer-extent {
-    display:inline-block;
+.background-control .layer-toggle-gpx button .icon {
+    opacity: 0.5;
+}
+
+.background-control .layer-toggle-gpx button.layer-extent {
+    border-radius: 0 3px 3px 0;
 }
 
 /* Geolocator */
