@@ -238,12 +238,11 @@ iD.ui.Background = function(context) {
             .append('li')
             .classed('layer-toggle-gpx', true);
 
-        gpxLayerItem.call(bootstrap.tooltip()
-            .title(t('gpx.drag_drop'))
-            .placement('left'));
-
         gpxLayerItem.append('button')
             .attr('class', 'layer-extent')
+            .call(bootstrap.tooltip()
+                .title(t('gpx.zoom'))
+                .placement('left'))
             .on('click', function() {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
@@ -254,6 +253,9 @@ iD.ui.Background = function(context) {
 
         gpxLayerItem.append('button')
             .attr('class', 'layer-browse')
+            .call(bootstrap.tooltip()
+                .title(t('gpx.browse'))
+                .placement('left'))
             .on('click', function() {
                 d3.select(document.createElement('input'))
                     .attr('type', 'file')
@@ -265,7 +267,10 @@ iD.ui.Background = function(context) {
             .append('span')
             .attr('class', 'icon geocode');
 
-        label = gpxLayerItem.append('label');
+        label = gpxLayerItem.append('label')
+            .call(bootstrap.tooltip()
+                .title(t('gpx.drag_drop'))
+                .placement('left'));
 
         label.append('input')
             .attr('type', 'checkbox')
