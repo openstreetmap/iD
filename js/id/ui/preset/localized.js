@@ -113,10 +113,27 @@ iD.ui.preset.localized = function(field, context) {
                 var wrap = d3.select(this);
                 var langcombo = d3.combobox().fetcher(fetcher);
 
-                wrap.append('label')
+                var label = wrap.append('label')
                     .attr('class','form-label')
                     .text(t('translate.localized_translation_label'))
                     .attr('for','localized-lang');
+
+                label.append('button')
+                    .attr('class', 'minor remove')
+                    .on('click', function(d){
+                        d3.event.preventDefault();
+                        var t = {};
+                        t[key(d.lang)] = undefined;
+                        event.change(t);
+                        d3.select(this.parentNode.parentNode)
+                            .style('top','0')
+                            .style('max-height','240px')
+                            .transition()
+                            .style('opacity', '0')
+                            .style('max-height','0px')
+                            .remove();
+                    })
+                    .append('span').attr('class', 'icon delete');
 
                 wrap.append('input')
                     .attr('class', 'localized-lang')
@@ -132,23 +149,6 @@ iD.ui.preset.localized = function(field, context) {
                     .attr('type', 'text')
                     .attr('placeholder', t('translate.localized_translation_name'))
                     .attr('class', 'localized-value');
-
-                wrap.append('button')
-                    .attr('class', 'minor button-input-action remove')
-                    .on('click', function(d) {
-                        d3.event.preventDefault();
-                        var t = {};
-                        t[key(d.lang)] = undefined;
-                        event.change(t);
-                        d3.select(this.parentNode)
-                            .style('top','0')
-                            .style('max-height','240px')
-                            .transition()
-                            .style('opacity', '0')
-                            .style('max-height','0px')
-                            .remove();
-                    })
-                    .append('span').attr('class', 'icon delete');
             });
 
         innerWrap

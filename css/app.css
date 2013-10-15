@@ -1516,9 +1516,12 @@ input[type=number] {
 }
 
 .form-field .localized-wrap .entry .localized-value {
-    padding-right: 10%;
     border-top-width: 0;
     border-radius: 0 0 4px 4px;
+}
+
+.form-field .localized-wrap .form-label button {
+    border-top-right-radius: 3px;
 }
 
 /* Preset form address */
