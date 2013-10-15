@@ -6,7 +6,7 @@ iD.ui.Background = function(context) {
             ['top', [0, -1]],
             ['right', [-1, 0]],
             ['bottom', [0, 1]]],
-        opacityDefault = (context.storage('background-opacity') != undefined) ?
+        opacityDefault = (context.storage('background-opacity') !== undefined) ?
             (+context.storage('background-opacity')) : 0.5;
 
     function background(selection) {
@@ -62,6 +62,12 @@ iD.ui.Background = function(context) {
 
         function clickGpx() {
             context.background().toggleGpxLayer();
+            update();
+        }
+
+        function clickNotes() {
+            context.background().toggleNotesLayer();
+            context.connection().toggleNotes(this.checked);
             update();
         }
 
@@ -264,6 +270,23 @@ iD.ui.Background = function(context) {
             })
             .append('span')
                 .attr('class', 'icon geocode' );
+
+        var notesLayerItem = content
+            .append('div')
+            .attr('class', 'toggle-list layer-list')
+            .append('label')
+            .classed('layer-toggle-notes', true);
+
+        notesLayerItem.call(bootstrap.tooltip()
+            .title(t('notes.description'))
+            .placement('left'));
+
+        notesLayerItem.append('input')
+            .attr('type', 'checkbox')
+            .on('change', clickNotes);
+
+        notesLayerItem.append('span')
+            .text(t('notes.title'));
 
         var adjustments = content
             .append('div')

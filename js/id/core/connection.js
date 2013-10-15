@@ -4,7 +4,9 @@ iD.Connection = function() {
         url = 'http://www.openstreetmap.org',
         connection = {},
         inflight = {},
+        inflightNotes = {},
         loadedTiles = {},
+        loadedNotes = {},
         tileZoom = 16,
         oauth = osmAuth({
             url: 'http://www.openstreetmap.org',
@@ -19,10 +21,15 @@ iD.Connection = function() {
         nodeStr = 'node',
         wayStr = 'way',
         relationStr = 'relation',
-        off;
+        off,
+        notesOff;
 
     connection.changesetURL = function(changesetId) {
         return url + '/browse/changeset/' + changesetId;
+    };
+
+    connection.noteURL = function(noteId) {
+        return url + '/?note=' + noteId;
     };
 
     connection.changesetsURL = function(extent) {
@@ -34,14 +41,19 @@ iD.Connection = function() {
     };
 
     connection.userURL = function(username) {
-        return url + "/user/" + username;
+        return url + '/user/' + username;
+    };
+
+    connection.loadNotesFromURL = function(url, callback) {
+        return d3.json(url).get().on('load', function done(data) {
+            return callback(null, data);
+        });
     };
 
     connection.loadFromURL = function(url, callback) {
-        function done(dom) {
+        return d3.xml(url).get().on('load', function done(dom) {
             return callback(null, parse(dom));
-        }
-        return d3.xml(url).get().on('load', done);
+        });
     };
 
     connection.loadEntity = function(id, callback) {
@@ -241,6 +253,14 @@ iD.Connection = function() {
             });
     };
 
+    connection.putNoteComment = function(id, comment, callback) {
+        oauth.xhr({
+                method: 'POST',
+                path: '/api/0.6/notes/' + id + '/comment',
+                content: 'text=' + encodeURIComponent(comment)
+            }, callback);
+    };
+
     var userDetails;
 
     connection.userDetails = function(callback) {
@@ -290,10 +310,7 @@ iD.Connection = function() {
         return connection;
     };
 
-    connection.loadTiles = function(projection, dimensions) {
-
-        if (off) return;
-
+    function getTiles(projection, dimensions) {
         var s = projection.scale() * 2 * Math.PI,
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
             ts = 256 * Math.pow(2, z - tileZoom),
@@ -301,7 +318,7 @@ iD.Connection = function() {
                 s / 2 - projection.translate()[0],
                 s / 2 - projection.translate()[1]];
 
-        var tiles = d3.geo.tile()
+        return d3.geo.tile()
             .scaleExtent([tileZoom, tileZoom])
             .scale(s)
             .size(dimensions)
@@ -315,22 +332,79 @@ iD.Connection = function() {
                     extent: iD.geo.Extent(
                         projection.invert([x, y + ts]),
                         projection.invert([x + ts, y]))
-                }
+                };
             });
+    }
 
-        function bboxUrl(tile) {
-            return url + '/api/0.6/map?bbox=' + tile.extent.toParam();
+    function bboxURL(tile) {
+        return url + '/api/0.6/map?bbox=' + tile.extent.toParam();
+    }
+
+    function notesBboxURL(tile) {
+        return url + '/api/0.6/notes.json?bbox=' + tile.extent.toParam();
+    }
+
+    function parseNotes(notes) {
+        if (!notes || !notes.features || !notes.features.length) return {};
+        return notes.features.reduce(function(memo, note) {
+            memo['e' + note.properties.id] = new iD.Note(note);
+            return memo;
+        }, {});
+    }
+
+    connection.loadNotes = function(projection, dimensions) {
+
+        if (notesOff) return;
+
+        var tiles = getTiles(projection, dimensions);
+
+        _.filter(inflight, notWanted).map(abortRequest);
+
+        tiles.forEach(loadNotes);
+
+        function notWanted(v, i) {
+            var wanted = _.find(tiles, function(tile) {
+                return i === tile.id;
+            });
+            if (!wanted) delete inflightNotes[i];
+            return !wanted;
         }
 
-        _.filter(inflight, function(v, i) {
+        function loadNotes(tile) {
+            var id = tile.id;
+
+            if (loadedNotes[id] || inflightNotes[id]) return;
+
+            inflightNotes[id] = connection.loadNotesFromURL(notesBboxURL(tile), onload);
+
+            function onload(err, notes) {
+                loadedTiles[id] = true;
+                delete inflight[id];
+
+                event.load(err, _.extend({data: parseNotes(notes)}, tile));
+            }
+        }
+    };
+
+    connection.loadTiles = function(projection, dimensions) {
+
+        if (off) return;
+
+        var tiles = getTiles(projection, dimensions);
+
+        _.filter(inflight, notWanted).map(abortRequest);
+
+        tiles.forEach(loadTile);
+
+        function notWanted(v, i) {
             var wanted = _.find(tiles, function(tile) {
                 return i === tile.id;
             });
             if (!wanted) delete inflight[i];
             return !wanted;
-        }).map(abortRequest);
+        }
 
-        tiles.forEach(function(tile) {
+        function loadTile(tile) {
             var id = tile.id;
 
             if (loadedTiles[id] || inflight[id]) return;
@@ -339,17 +413,17 @@ iD.Connection = function() {
                 event.loading();
             }
 
-            inflight[id] = connection.loadFromURL(bboxUrl(tile), function(err, parsed) {
+            inflight[id] = connection.loadFromURL(bboxURL(tile), onload);
+
+            function onload(err, parsed) {
                 loadedTiles[id] = true;
                 delete inflight[id];
 
                 event.load(err, _.extend({data: parsed}, tile));
 
-                if (_.isEmpty(inflight)) {
-                    event.loaded();
-                }
-            });
-        });
+                if (_.isEmpty(inflight)) event.loaded();
+            }
+        }
     };
 
     connection.switch = function(options) {
@@ -365,6 +439,11 @@ iD.Connection = function() {
 
     connection.toggle = function(_) {
         off = !_;
+        return connection;
+    };
+
+    connection.toggleNotes = function(_) {
+        notesOff = !_;
         return connection;
     };
 
@@ -388,11 +467,10 @@ iD.Connection = function() {
     };
 
     connection.authenticate = function(callback) {
-        function done(err, res) {
+        return oauth.authenticate(function done(err, res) {
             event.auth();
             if (callback) callback(err, res);
-        }
-        return oauth.authenticate(done);
+        });
     };
 
     return d3.rebind(connection, event, 'on');

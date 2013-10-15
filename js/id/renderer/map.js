@@ -14,6 +14,7 @@ iD.Map = function(context) {
         minzoom = 0,
         transformProp = iD.util.prefixCSSProperty('Transform'),
         points = iD.svg.Points(roundedProjection, context),
+        notes = iD.svg.Notes(roundedProjection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
         lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(roundedProjection),
@@ -139,6 +140,7 @@ iD.Map = function(context) {
             .call(lines, graph, all, filter)
             .call(areas, graph, all, filter)
             .call(midpoints, graph, all, filter, map.extent())
+            .call(notes, notes.notes(all), filter)
             .call(labels, graph, all, filter, dimensions, !difference && !extent);
 
         if (points.points(context.intersects(map.extent()), 100).length >= 100) {
@@ -223,6 +225,7 @@ iD.Map = function(context) {
 
         if (map.editable()) {
             context.connection().loadTiles(projection, dimensions);
+            context.connection().loadNotes(projection, dimensions);
             drawVector(difference, extent);
         } else {
             editOff();

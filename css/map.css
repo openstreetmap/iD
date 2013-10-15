@@ -1062,3 +1062,10 @@ text.gpx {
 .mode-drag-node .area.fill {
     pointer-events: none;
 }
+
+/* OSM Notes API */
+.note {
+    fill:#fff;
+    stroke-width:2;
+    stroke:#666;
+}

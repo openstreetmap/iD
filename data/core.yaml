@@ -268,6 +268,16 @@ en:
   gpx:
     local_layer: "Local GPX file"
     drag_drop: "Drag and drop a .gpx file on the page"
+  notes:
+    title: "Map Notes"
+    description: "Notes from other users"
+    panel:
+      title: "Note"
+      view: "Note"
+      link: "View on OpenStreetMap"
+      text: "Add a new comment"
+      failed: "Failed to save your comment"
+      save: "Save"
   help:
     title: "Help"
     help: |

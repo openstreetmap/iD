@@ -1,4 +1,4 @@
-iD.svg.Points = function(projection, context) {
+iD.svg.Notes = function(projection, context) {
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
@@ -13,13 +13,13 @@ iD.svg.Points = function(projection, context) {
     function drawPoints(surface, points, filter) {
         points.sort(sortY);
 
-        var groups = surface.select('.layer-hit').selectAll('g.node.point')
+        var groups = surface.select('.layer-hit').selectAll('g.note.point')
             .filter(filter)
             .data(points, iD.Entity.key);
 
         var group = groups.enter()
             .append('g')
-            .attr('class', function(d) { return 'node point ' + d.id; })
+            .attr('class', function(d) { return 'note point ' + d.id; })
             .order();
 
         group.append('path')
@@ -41,28 +41,25 @@ iD.svg.Points = function(projection, context) {
         groups.select('.shadow');
         groups.select('.stroke');
         groups.select('.icon')
-            .attr('xlink:href', function(entity) {
-                var preset = context.presets().match(entity, context.graph());
-                return preset.icon ? '#maki-' + preset.icon + '-12' : '';
-            });
+            .attr('xlink:href', '');
 
         groups.exit()
             .remove();
     }
 
-    drawPoints.points = function(entities, limit) {
+    drawPoints.notes = function(entities, limit) {
         var graph = context.graph(),
-            points = [];
+            notes = [];
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            if (entity.geometry(graph) === 'point') {
-                points.push(entity);
+            if (entity.geometry(graph) === 'note') {
+                notes.push(entity);
                 if (limit && points.length >= limit) break;
             }
         }
 
-        return points;
+        return notes;
     };
 
     return drawPoints;

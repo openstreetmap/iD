@@ -731,6 +731,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     top: 60px;
 }
 
+.mode-note .inspector-body {
+    top: 60px;
+}
+
 .inspector-inner {
     padding: 20px;
     position: relative;
@@ -2365,6 +2369,7 @@ img.wiki-image {
     margin-bottom: 0;
 }
 
+.mode-note button.action,
 .mode-save button.action {
     float: none;
     margin: auto;
@@ -2833,4 +2838,9 @@ img.wiki-image {
     width: 100px;
     background: rgba(0, 0, 0, 0) url(img/sprite.svg) no-repeat -400px -220px;
     margin: auto;
+}
+
+/* notes */
+div.note-comment {
+    padding:8px;
 }

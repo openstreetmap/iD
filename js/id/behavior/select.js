@@ -16,7 +16,9 @@ iD.behavior.Select = function(context) {
     function click() {
         var datum = d3.event.target.__data__;
         var lasso = d3.select('#surface .lasso').node();
-        if (!(datum instanceof iD.Entity)) {
+        if (datum && datum.type === 'note') {
+            context.enter(iD.modes.Note(context, datum.id));
+        } else if (!(datum instanceof iD.Entity)) {
             if (!d3.event.shiftKey && !lasso)
                 context.enter(iD.modes.Browse(context));
 
