@@ -6,7 +6,7 @@ iD.ui.Background = function(context) {
             ['top', [0, -1]],
             ['right', [-1, 0]],
             ['bottom', [0, 1]]],
-        opacityDefault = (context.storage('background-opacity') != undefined) ?
+        opacityDefault = (context.storage('background-opacity') !== undefined) ?
             (+context.storage('background-opacity')) : 0.5;
 
     function background(selection) {
@@ -43,7 +43,7 @@ iD.ui.Background = function(context) {
         function clickCustom() {
             d3.event.preventDefault();
             var template = window.prompt(t('background.custom_prompt'));
-            if (!template) {
+            if (!template || template.indexOf('google.com') !== -1) {
                 selectLayer();
                 return;
             }
