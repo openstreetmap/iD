@@ -8,7 +8,6 @@ iD.ui.preset.address = function(field, context) {
         entity;
 
     function getStreets() {
-
         var extent = entity.extent(context.graph()),
             l = extent.center(),
             box = iD.geo.Extent(l).padByMeters(200);
@@ -31,6 +30,62 @@ iD.ui.preset.address = function(field, context) {
 
         function isAddressable(d) {
             return d.tags.highway && d.tags.name && d.type === 'way';
+        }
+    }
+
+    function getCities() {
+        var extent = entity.extent(context.graph()),
+            l = extent.center(),
+            box = iD.geo.Extent(l).padByMeters(200);
+
+        return context.intersects(box)
+            .filter(isAddressable)
+            .map(function(d) {
+                return {
+                    title: d.tags['addr:city'] || d.tags.name,
+                    value: d.tags['addr:city'] || d.tags.name,
+                    dist: iD.geo.sphericalDistance(d.extent(context.graph()).center(), l)
+                };
+            }).sort(function(a, b) {
+                return a.dist - b.dist;
+            });
+
+        function isAddressable(d) {
+            if (d.tags.name &&
+                (d.tags.admin_level === '8' || d.tags.border_type === 'city'))
+                return true;
+
+            if (d.tags.place && d.tags.name && (
+                    d.tags.place === 'city' ||
+                    d.tags.place === 'town' ||
+                    d.tags.place === 'village'))
+                return true;
+
+            if (d.tags['addr:city']) return true;
+
+            return false;
+        }
+    }
+
+    function getPostCodes() {
+        var extent = entity.extent(context.graph()),
+            l = extent.center(),
+            box = iD.geo.Extent(l).padByMeters(200);
+
+        return context.intersects(box)
+            .filter(isAddressable)
+            .map(function(d) {
+                return {
+                    title: d.tags['addr:postcode'],
+                    value: d.tags['addr:postcode'],
+                    dist: iD.geo.sphericalDistance(d.extent(context.graph()).center(), l)
+                };
+            }).sort(function(a, b) {
+                return a.dist - b.dist;
+            });
+
+        function isAddressable(d) {
+            return d.tags['addr:postcode'];
         }
     }
 
@@ -85,6 +140,18 @@ iD.ui.preset.address = function(field, context) {
             .call(d3.combobox()
                 .fetcher(function(value, callback) {
                     callback(getStreets());
+                }));
+
+        city
+            .call(d3.combobox()
+                .fetcher(function(value, callback) {
+                    callback(getCities());
+                }));
+
+        postcode
+            .call(d3.combobox()
+                .fetcher(function(value, callback) {
+                    callback(getPostCodes());
                 }));
     }
 
