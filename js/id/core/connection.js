@@ -1,6 +1,6 @@
 iD.Connection = function() {
 
-    var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'load', 'loaded', 'loadnote'),
+    var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'load', 'loaded'),
         url = 'http://www.openstreetmap.org',
         connection = {},
         inflight = {},
@@ -37,7 +37,7 @@ iD.Connection = function() {
     };
 
     connection.userURL = function(username) {
-        return url + "/user/" + username;
+        return url + '/user/' + username;
     };
 
     connection.loadNotesFromURL = function(url, callback) {
@@ -332,6 +332,14 @@ iD.Connection = function() {
         return url + '/api/0.6/notes.json?bbox=' + tile.extent.toParam();
     }
 
+    function parseNotes(notes) {
+        if (!notes || !notes.features || !notes.features.length) return {};
+        return notes.features.reduce(function(memo, note) {
+            memo['e' + note.properties.id] = new iD.Note(note);
+            return memo;
+        }, {});
+    }
+
     connection.loadNotes = function(projection, dimensions) {
 
         if (notesOff) return;
@@ -361,7 +369,7 @@ iD.Connection = function() {
                 loadedTiles[id] = true;
                 delete inflight[id];
 
-                event.loadnote(err, notes);
+                event.load(err, _.extend({data: parseNotes(notes)}, tile));
             }
         }
     };
