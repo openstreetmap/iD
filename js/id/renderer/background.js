@@ -145,10 +145,6 @@ iD.Background = function(context) {
         dispatch.change();
     };
 
-    background.toggleNotesLayer = function() {
-        dispatch.change();
-    };
-
     background.showsLayer = function(d) {
         return d === baseLayer.source() ||
             (d.name === 'Custom' && baseLayer.source().name === 'Custom') ||

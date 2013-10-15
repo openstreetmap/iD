@@ -66,8 +66,7 @@ iD.ui.Background = function(context) {
         }
 
         function clickNotes() {
-            context.background().toggleNotesLayer();
-            context.connection().toggleNotes(this.checked);
+            context.map().showNotes(this.checked);
             update();
         }
 
@@ -283,6 +282,7 @@ iD.ui.Background = function(context) {
 
         notesLayerItem.append('input')
             .attr('type', 'checkbox')
+            .attr('checked', true)
             .on('change', clickNotes);
 
         notesLayerItem.append('span')

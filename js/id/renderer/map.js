@@ -11,6 +11,7 @@ iD.Map = function(context) {
         dblclickEnabled = true,
         transformStart,
         transformed = false,
+        showNotes = true,
         minzoom = 0,
         transformProp = iD.util.prefixCSSProperty('Transform'),
         points = iD.svg.Points(roundedProjection, context),
@@ -140,8 +141,11 @@ iD.Map = function(context) {
             .call(lines, graph, all, filter)
             .call(areas, graph, all, filter)
             .call(midpoints, graph, all, filter, map.extent())
-            .call(notes, notes.notes(all), filter)
             .call(labels, graph, all, filter, dimensions, !difference && !extent);
+
+        if (map.showNotes()) {
+            surface.call(notes, notes.notes(all), filter);
+        }
 
         if (points.points(context.intersects(map.extent()), 100).length >= 100) {
             surface.select('.layer-hit').selectAll('g.point').remove();
@@ -154,6 +158,11 @@ iD.Map = function(context) {
 
     function editOff() {
         surface.selectAll('.layer *').remove();
+        dispatch.drawn({full: true});
+    }
+
+    function notesOff() {
+        surface.selectAll('.layer .note').remove();
         dispatch.drawn({full: true});
     }
 
@@ -223,9 +232,14 @@ iD.Map = function(context) {
             supersurface.call(context.background());
         }
 
+        if (map.showNotes()) {
+            context.connection().loadNotes(projection, dimensions);
+        } else {
+            notesOff();
+        }
+
         if (map.editable()) {
             context.connection().loadTiles(projection, dimensions);
-            context.connection().loadNotes(projection, dimensions);
             drawVector(difference, extent);
         } else {
             editOff();
@@ -410,6 +424,13 @@ iD.Map = function(context) {
             newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
 
         return newZoom;
+    };
+
+    map.showNotes = function(_) {
+        if (!arguments.length) return showNotes;
+        showNotes = _;
+        redraw();
+        return map;
     };
 
     map.editable = function() {
