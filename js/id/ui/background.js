@@ -43,7 +43,8 @@ iD.ui.Background = function(context) {
         function clickCustom() {
             d3.event.preventDefault();
             var template = window.prompt(t('background.custom_prompt'));
-            if (!template || template.indexOf('google.com') !== -1) {
+            if (!template || template.indexOf('google.com') !== -1 ||
+               template.indexOf('google.ru') !== -1) {
                 selectLayer();
                 return;
             }
