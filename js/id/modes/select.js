@@ -171,6 +171,11 @@ iD.modes.Select = function(context, selectedIDs) {
             context.surface()
                 .on('dblclick.select', dblclick);
         }, 200);
+
+        if (selectedIDs.length > 1) {
+            var entities = iD.ui.SelectionList(context, selectedIDs);
+            context.ui().sidebar.show(entities);
+        }
     };
 
     mode.exit = function() {
@@ -198,6 +203,7 @@ iD.modes.Select = function(context, selectedIDs) {
             .classed('selected', false);
 
         context.map().on('drawn.select', null);
+        context.ui().sidebar.hide();
     };
 
     return mode;

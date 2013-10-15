@@ -712,6 +712,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     top: 60px;
 }
 
+.selection-list-pane .inspector-body {
+    top: 60px;
+}
+
 .inspector-inner {
     padding: 20px;
     position: relative;
