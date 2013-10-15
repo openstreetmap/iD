@@ -19,7 +19,7 @@ iD.ui.Success = function(context) {
             .text(t('success.just_edited'));
 
         var body = selection.append('div')
-            .attr('class', 'body save-success');
+            .attr('class', 'body save-success fillL');
 
         body.append('p')
             .html(t('success.help_html'));
