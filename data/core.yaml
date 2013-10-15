@@ -400,7 +400,7 @@ en:
 
       Aerial imagery is an important resource for mapping. A combination of
       airplane flyovers, satellite views, and freely-compiled sources are available
-      in the editor under the 'Background Settings' menu on the left.
+      in the editor under the 'Background Settings' menu on the right.
 
       By default a [Bing Maps](http://www.bing.com/maps/) satellite layer is
       presented in the editor, but as you pan and zoom the map to new geographical
