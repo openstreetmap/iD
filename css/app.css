@@ -1100,7 +1100,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-hidden,
 .inspector-hover label input[type="checkbox"],
 .inspector-hover label input[type="radio"],
-.inspector-hover .toggle-list label:not(.active),
+.inspector-hover .toggle-list label,
 .inspector-hover .toggle-list label span,
 .inspector-hover .inspector-inner .add-tag,
 .inspector-hover .inspector-inner .add-relation,
