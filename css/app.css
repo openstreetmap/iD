@@ -236,17 +236,11 @@ table.tags, table.tags td, table.tags th {
 
 ul li { list-style: none;}
 
-.toggle-list {
-    border-radius: 4px;
-    border: 1px solid #CCC;
-}
-
 .toggle-list > label {
     position: relative;
     padding: 5px 10px;
-    display:block;
+    display: block;
     height: 30px;
-    border-bottom: 1px solid #ccc;
     background-color: white;
     color: #7092FF;
     cursor: pointer;
@@ -259,17 +253,12 @@ ul li { list-style: none;}
     background-color: #ececec;
 }
 
-.toggle-list > label:first-child {
-    border-radius: 3px 3px 0 0;
+.toggle-list > label:not(:last-child) {
+    border-bottom: 1px solid #ccc;
 }
 
 .toggle-list > label:last-child {
     border-radius: 0 0 3px 3px;
-    border-bottom-width: 0;
-}
-
-.toggle-list > label:only-child {
-    border-radius: 3px;
 }
 
 .toggle-list label > span { 
@@ -277,14 +266,6 @@ ul li { list-style: none;}
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-}
-
-.toggle-list > label.remove span.icon {
-    display: block;
-    width: 14px;
-    float: left;
-    margin-right: 5px;
-    background-position: -204px 0;
 }
 
 .toggle-list > label.active {
