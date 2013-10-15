@@ -12,8 +12,10 @@ iD.ui.preset.radio = function(field) {
         var buttonWrap = wrap.enter().append('div')
             .attr('class', 'preset-input-wrap toggle-list');
 
-        placeholder = buttonWrap.append('span')
+        buttonWrap.append('span')
             .attr('class', 'placeholder');
+
+        placeholder = selection.selectAll('.placeholder');
 
         labels = wrap.selectAll('label')
             .data(field.options || field.keys);
