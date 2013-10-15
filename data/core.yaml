@@ -207,6 +207,7 @@ en:
     check:
       yes: Yes
       no: No
+    none: None
   background:
     title: Background
     description: Background settings
