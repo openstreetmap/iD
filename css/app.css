@@ -1013,6 +1013,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     background: #f6f6f6;
     display: block;
     border-radius: 4px 4px 0 0;
+    overflow: hidden;
 }
 
 .form-label-button-wrap {
@@ -1033,36 +1034,18 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-left: 1px solid #CCC;
     width: 10%;
     height: 100%;
-    display: inline-block;
     border-radius: 0;
     background: #fafafa;
 }
 
-.form-label .modified-icon {
-    border-right: 0;
+.form-label .modified-icon,
+.form-field .remove-icon {
     display: none;
-    z-index: -10;
-    right: 10%;
 }
 
-.modified .form-label .modified-icon {
-    display: inline-block;
-    opacity: 1;
-    z-index: 1;
-}
-
+.modified .form-label .modified-icon,
 .present .form-label .remove-icon {
     display: inline-block;
-    z-index: 1;
-}
-
-.form-field .remove-icon {
-    border-radius: 0 0 4px 0;
-    display: none;
-}
-
-.form-label button.tag-reference-button {
-    border-top-right-radius: 3px;
 }
 
 .form-field > input,
@@ -1115,14 +1098,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 /* hide but preserve in layout */
-.inspector-hover .modified .form-label .modified-icon,
 .inspector-hover .entity-editor-pane button.minor,
 .inspector-hover .combobox-caret,
 .inspector-hover .entity-editor-pane .header button,
 .inspector-hover .spin-control,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-buttons,
-.inspector-hover .form-label-button-wrap button,
+.inspector-hover .form-label-button-wrap,
 .inspector-hover .tag-reference-button,
 .inspector-hover .view-on-osm {
     opacity: 0;
@@ -1211,7 +1193,6 @@ input,
             transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
 }
 
-.modified .form-label .modified-icon,
 .entity-editor-pane button.minor,
 .combobox-caret,
 .entity-editor-pane .header button,
