@@ -1849,15 +1849,9 @@ img.wiki-image {
 
 /* Background Settings */
 
-
-.toggle-list.layer-list {
-    margin-bottom: 10px;
-}
-
 .background-control button {
     border-radius: 4px 0 0 0;
 }
-
 
 .background-control button.active {
     border-radius: 0;
@@ -1883,6 +1877,56 @@ img.wiki-image {
 
 .background-control .hide-toggle  {
     padding-bottom: 10px;
+}
+
+.layer-list {
+    margin-bottom: 10px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+}
+
+.layer-list li {
+    position: relative;
+    height: 30px;
+    background-color: white;
+    color: #7092FF;
+}
+
+.layer-list > li:first-child {
+    border-radius: 3px 3px 0 0;
+}
+
+.layer-list > li:last-child {
+    border-radius: 0 0 3px 3px;
+}
+
+.layer-list > li:only-child {
+    border-radius: 3px;
+}
+
+.layer-list li:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+}
+
+.layer-list li:hover {
+    background-color: #ececec;
+}
+
+.layer-list li.active {
+    background: #E8EBFF;
+}
+
+.layer-list label {
+    display: block;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.layer-list label > span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .hide-toggle {

@@ -28,7 +28,7 @@ iD.ui.Background = function(context) {
                 return context.background().showsLayer(d);
             }
 
-            content.selectAll('label.layer, label.custom_layer')
+            content.selectAll('.layer, .custom_layer')
                 .classed('active', active)
                 .selectAll('input')
                 .property('checked', active);
@@ -70,33 +70,33 @@ iD.ui.Background = function(context) {
                 .sources(context.map().extent())
                 .filter(filter);
 
-            var layerLinks = layerList.selectAll('label.layer')
+            var layerLinks = layerList.selectAll('li.layer')
                 .data(sources, function(d) { return d.name; });
 
-            var layerInner = layerLinks.enter()
-                .insert('label', '.custom_layer')
+            var enter = layerLinks.enter()
+                .insert('li', '.custom_layer')
                 .attr('class', 'layer');
 
             // only set tooltips for layers with tooltips
-            layerInner
-                .filter(function(d) { return d.description; })
+            enter.filter(function(d) { return d.description; })
                 .call(bootstrap.tooltip()
                     .title(function(d) { return d.description; })
                     .placement('left'));
 
-            layerInner.append('input')
+            var label = enter.append('label');
+
+            label.append('input')
                 .attr('type', type)
                 .attr('name', 'layers')
-                .attr('value', function(d) { return d.name; })
                 .on('change', change);
 
-            layerInner.append('span')
+            label.append('span')
                 .text(function(d) { return d.name; });
 
             layerLinks.exit()
                 .remove();
 
-            layerList.style('display', layerList.selectAll('label.layer').data().length > 0 ? 'block' : 'none');
+            layerList.style('display', layerList.selectAll('li.layer').data().length > 0 ? 'block' : 'none');
         }
 
         function update() {
@@ -148,9 +148,7 @@ iD.ui.Background = function(context) {
         function toggle() {
             if (d3.event) d3.event.preventDefault();
             tooltip.hide(button);
-            var visible = !button.classed('active');
-            setVisible(visible);
-            if (visible) content.selectAll('.toggle-list label:first-child').node().focus();
+            setVisible(!button.classed('active'));
         }
 
         function setVisible(show) {
@@ -214,48 +212,47 @@ iD.ui.Background = function(context) {
             .attr('class', 'opacity')
             .style('opacity', String);
 
-        var backgroundList = content
-            .append('div')
-            .attr('class', 'toggle-list layer-list');
+        var backgroundList = content.append('ul')
+            .attr('class', 'layer-list');
 
-        var custom = backgroundList
-            .append('label')
+        var custom = backgroundList.append('li')
             .attr('class', 'custom_layer')
             .datum({name: 'Custom'});
 
-        custom.append('input')
+        var label = custom.append('label');
+
+        label.append('input')
             .attr('type', 'radio')
             .attr('name', 'layers')
             .on('change', clickCustom);
 
-        custom.append('span')
+        label.append('span')
             .text(t('background.custom'));
 
-        var overlayList = content
-            .append('div')
-            .attr('class', 'toggle-list layer-list');
+        var overlayList = content.append('ul')
+            .attr('class', 'layer-list');
 
-        var gpxLayerItem = content
-            .append('div')
+        var gpxLayerItem = content.append('ul')
             .style('display', iD.detect().filedrop ? 'block' : 'none')
-            .attr('class', 'toggle-list layer-list')
-            .append('label')
+            .attr('class', 'layer-list')
+            .append('li')
             .classed('layer-toggle-gpx', true);
 
         gpxLayerItem.call(bootstrap.tooltip()
             .title(t('gpx.drag_drop'))
             .placement('left'));
 
-        gpxLayerItem.append('input')
+        label = gpxLayerItem.append('label');
+
+        label.append('input')
             .attr('type', 'checkbox')
             .property('disabled', true)
             .on('change', clickGpx);
 
-        gpxLayerItem.append('span')
+        label.append('span')
             .text(t('gpx.local_layer'));
 
-        gpxLayerItem
-            .append('button')
+        label.append('button')
             .attr('class', 'minor layer-extent')
             .on('click', function() {
                 d3.event.preventDefault();
