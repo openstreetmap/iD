@@ -2449,6 +2449,10 @@ img.wiki-image {
     color:#555;
 }
 
+.mode-save .commit-section .changeset-list button {
+    border-left: 1px solid #CCC;
+}
+
 .changeset-list li span.count:before { content: '('; }
 
 .changeset-list li span.count:after { content: ')'; }

@@ -1,31 +1,16 @@
 iD.ui.Commit = function(context) {
-    var event = d3.dispatch('cancel', 'save', 'fix'),
+    var event = d3.dispatch('cancel', 'save'),
         presets = context.presets();
-
-    function zipSame(d) {
-        var c = {}, n = -1;
-        for (var i = 0; i < d.length; i++) {
-            var desc = {
-                name: d[i].tags.name || presets.match(d[i], context.graph()).name(),
-                geometry: d[i].geometry(context.graph()),
-                count: 1,
-                tagText: iD.util.tagText(d[i])
-            };
-
-            var fingerprint = desc.name + desc.tagText;
-            if (c[fingerprint]) {
-                c[fingerprint].count++;
-            } else {
-                c[fingerprint] = desc;
-            }
-        }
-        return _.values(c);
-    }
 
     function commit(selection) {
         var changes = context.history().changes();
 
         function changesLength(d) { return changes[d].length; }
+
+        function zoomToEntity(entity) {
+            context.map().zoomTo(entity);
+            context.enter(iD.modes.Select(context, [entity.id]));
+        }
 
         var header = selection.append('div')
             .attr('class', 'header fillL');
@@ -121,7 +106,9 @@ iD.ui.Commit = function(context) {
         warningLi.filter(function(d) { return d.entity; })
             .append('button')
             .attr('class', 'minor')
-            .on('click', event.fix)
+            .on('click', function(d) {
+                zoomToEntity(d.entity);
+            })
             .append('span')
             .attr('class', 'icon warning');
 
@@ -144,23 +131,23 @@ iD.ui.Commit = function(context) {
         var li = section.append('ul')
             .attr('class', 'changeset-list')
             .selectAll('li')
-            .data(function(d) { return zipSame(changes[d]); })
+            .data(function(d) { return changes[d]; })
             .enter()
             .append('li');
 
         li.append('strong')
-            .text(function(d) {
-                return d.geometry + ' ';
+            .text(function(entity) {
+                return entity.geometry(context.graph()) + ' ';
             });
 
         li.append('span')
-            .text(function(d) { return d.name; })
-            .attr('title', function(d) { return d.tagText; });
+            .text(function(entity) { return iD.util.displayName(entity); });
 
-        li.filter(function(d) { return d.count > 1; })
+        li.append('button')
+            .attr('class', 'minor')
+            .on('click', zoomToEntity)
             .append('span')
-            .attr('class', 'count')
-            .text(function(d) { return d.count; });
+            .attr('class', 'icon warning');
     }
 
     return d3.rebind(commit, event, 'on');
