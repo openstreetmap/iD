@@ -131,7 +131,7 @@ iD.ui.Commit = function(context) {
         var li = section.append('ul')
             .attr('class', 'changeset-list')
             .selectAll('li')
-            .data(function(d) { return changes[d]; })
+            .data(function(d) { return iD.util.relevantChanges(context.graph(), changes[d]); })
             .enter()
             .append('li');
 
