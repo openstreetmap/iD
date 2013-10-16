@@ -432,8 +432,8 @@ en:
     inspector: |
       # Using the Inspector
 
-      The inspector is the user interface element on the right-hand side of the
-      page that appears when a feature is selected and allows you to edit its details.
+      The inspector is the section on the left side of the page that allows you to
+      edit the details of the selected feature.
 
       ### Selecting a Feature Type
 
@@ -461,11 +461,6 @@ en:
 
       Changes you make in the inspector are automatically applied to the map.
       You can undo them at any time by clicking the 'Undo' button.
-
-      ### Closing the Inspector
-
-      You can close the inspector by clicking the close button in the top-right,
-      pressing the 'Escape' key, or clicking on the map.
     buildings: |
       # Buildings
 
