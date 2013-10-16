@@ -3,9 +3,8 @@ iD.ui.Commit = function(context) {
         presets = context.presets();
 
     function commit(selection) {
-        var changes = context.history().changes();
-
-        function changesLength(d) { return changes[d].length; }
+        var changes = context.history().changes(),
+            allChanges = _.flatten(d3.values(changes));
 
         function zoomToEntity(entity) {
             context.map().zoomTo(entity);
@@ -86,68 +85,84 @@ iD.ui.Commit = function(context) {
             .attr('class', 'label')
             .text(t('commit.save'));
 
-        var warnings = body.selectAll('div.warning-section')
-            .data(iD.validate(changes, context.graph()))
-            .enter()
-            .append('div')
-            .attr('class', 'modal-section warning-section fillL2');
+        // Warnings
+        var warningList = body.append('div')
+            .attr('class', 'feature-list cf');
 
-        warnings.append('h3')
-            .text(t('commit.warnings'));
+        var warning = warningList.selectAll('.feature-list-item')
+            .data(iD.validate(changes, context.graph()));
 
-        var warningLi = warnings.append('ul')
-            .attr('class', 'changeset-list')
-            .selectAll('li')
-            .data(function(d) { return d; })
-            .enter()
-            .append('li');
+        var warningEnter = warning.enter().append('button')
+            .attr('class', 'feature-list-item')
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
+            .on('click', warningClick);
 
-        // only show the fix icon when an entity is given
-        warningLi.filter(function(d) { return d.entity; })
-            .append('button')
-            .attr('class', 'minor')
-            .on('click', function(d) {
-                zoomToEntity(d.entity);
-            })
-            .append('span')
-            .attr('class', 'icon warning');
+        var label = warningEnter.append('div')
+            .attr('class', 'label');
 
-        warningLi.append('strong').text(function(d) {
-            return d.message;
-        });
+        label.append('span')
+            .attr('class', 'alert icon icon-pre-text');
 
-        var section = body.selectAll('div.commit-section')
-            .data(['modified', 'deleted', 'created'].filter(changesLength))
-            .enter()
-            .append('div')
-            .attr('class', 'commit-section modal-section fillL2');
+        label.append('span')
+            .attr('class', 'entity-type strong')
+            .text(function(d) { return d.message; });
 
-        section.append('h3')
-            .text(function(d) { return t('commit.' + d); })
-            .append('small')
-            .attr('class', 'count')
-            .text(changesLength);
+        // Entities
+        var entityList = body.append('div')
+            .attr('class', 'feature-list cf');
 
-        var li = section.append('ul')
-            .attr('class', 'changeset-list')
-            .selectAll('li')
-            .data(function(d) { return iD.util.relevantChanges(context.graph(), changes[d]); })
-            .enter()
-            .append('li');
-
-        li.append('strong')
-            .text(function(entity) {
-                return entity.geometry(context.graph()) + ' ';
+        var entity = entityList.selectAll('.feature-list-item')
+            .data(function() {
+                return iD.util.relevantChanges(context.graph(), allChanges);
             });
 
-        li.append('span')
-            .text(function(entity) { return iD.util.displayName(entity); });
+        var entityEnter = entity.enter().append('button')
+            .attr('class', 'feature-list-item')
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
+            .on('click', zoomToEntity);
 
-        li.append('button')
-            .attr('class', 'minor')
-            .on('click', zoomToEntity)
-            .append('span')
-            .attr('class', 'icon warning');
+        label = entityEnter.append('div')
+            .attr('class', 'label');
+
+        label.append('span')
+            .attr('class', function(d) { return context.geometry(d.id) + ' icon icon-pre-text'; });
+
+        label.append('span')
+            .attr('class', 'entity-type')
+            .text(function(d) { return context.geometry(d.id); });
+
+        label.append('span')
+            .attr('class', 'entity-name')
+            .text(function(d) { return iD.util.displayName(d); });
+
+        entityEnter.style('opacity', 0)
+            .transition()
+            .style('opacity', 1);
+
+        warningEnter.style('opacity', 0)
+            .transition()
+            .style('opacity', 1);
+
+        function mouseover(d) {
+            if (d.entity) {
+                // need to get the extent for this entity some how
+                context.surface().selectAll(iD.util.entityOrMemberSelector([d.entity.id], context.graph()))
+                    .classed('hover', true);
+            }
+        }
+
+        function mouseout() {
+            context.surface().selectAll('.hover')
+                .classed('hover', false);
+        }
+
+        function warningClick(d) {
+            if (d.entity) {
+                context.enter(iD.modes.Select(context, [d.entity.id]));
+            }
+        }
     }
 
     return d3.rebind(commit, event, 'on');
