@@ -151,29 +151,21 @@ _.extend(iD.Way.prototype, {
                 }
 
                 var json = {
-                    type: 'Feature',
-                    properties: this.tags,
-                    geometry: {
-                        type: 'Polygon',
-                        coordinates: [_.pluck(nodes, 'loc')]
-                    }
+                    type: 'Polygon',
+                    coordinates: [_.pluck(nodes, 'loc')]
                 };
 
                 // Heuristic for detecting counterclockwise winding order. Assumes
                 // that OpenStreetMap polygons are not hemisphere-spanning.
                 if (d3.geo.area(json) > 2 * Math.PI) {
-                    json.geometry.coordinates[0] = json.geometry.coordinates[0].reverse();
+                    json.coordinates[0] = json.coordinates[0].reverse();
                 }
 
                 return json;
             } else {
                 return {
-                    type: 'Feature',
-                    properties: this.tags,
-                    geometry: {
-                        type: 'LineString',
-                        coordinates: _.pluck(nodes, 'loc')
-                    }
+                    type: 'LineString',
+                    coordinates: _.pluck(nodes, 'loc')
                 };
             }
         });

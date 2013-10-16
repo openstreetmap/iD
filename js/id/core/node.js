@@ -55,12 +55,8 @@ _.extend(iD.Node.prototype, {
 
     asGeoJSON: function() {
         return {
-            type: 'Feature',
-            properties: this.tags,
-            geometry: {
-                type: 'Point',
-                coordinates: this.loc
-            }
+            type: 'Point',
+            coordinates: this.loc
         };
     }
 });

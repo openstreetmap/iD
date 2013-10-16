@@ -141,12 +141,8 @@ _.extend(iD.Relation.prototype, {
         return resolver.transient(this, 'GeoJSON', function () {
             if (this.isMultipolygon()) {
                 return {
-                    type: 'Feature',
-                    properties: this.tags,
-                    geometry: {
-                        type: 'MultiPolygon',
-                        coordinates: this.multipolygon(resolver)
-                    }
+                    type: 'MultiPolygon',
+                    coordinates: this.multipolygon(resolver)
                 };
             } else {
                 return {

@@ -204,7 +204,7 @@ describe('iD.Relation', function () {
     });
 
     describe("#asGeoJSON", function (){
-        it('converts a multipolygon to a GeoJSON MultiPolygon feature', function() {
+        it('converts a multipolygon to a GeoJSON MultiPolygon geometry', function() {
             var a = iD.Node({loc: [1, 1]}),
                 b = iD.Node({loc: [3, 3]}),
                 c = iD.Node({loc: [2, 2]}),
@@ -213,10 +213,8 @@ describe('iD.Relation', function () {
                 g = iD.Graph([a, b, c, w, r]),
                 json = r.asGeoJSON(g);
 
-            expect(json.type).to.equal('Feature');
-            expect(json.properties).to.eql({type: 'multipolygon'});
-            expect(json.geometry.type).to.equal('MultiPolygon');
-            expect(json.geometry.coordinates).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
+            expect(json.type).to.equal('MultiPolygon');
+            expect(json.coordinates).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         it('forces clockwise winding order for outer multipolygon ways', function() {
@@ -228,7 +226,7 @@ describe('iD.Relation', function () {
                 g = iD.Graph([a, b, c, w, r]),
                 json = r.asGeoJSON(g);
 
-            expect(json.geometry.coordinates[0][0]).to.eql([a.loc, b.loc, c.loc, a.loc]);
+            expect(json.coordinates[0][0]).to.eql([a.loc, b.loc, c.loc, a.loc]);
         });
 
         it('forces counterclockwise winding order for inner multipolygon ways', function() {

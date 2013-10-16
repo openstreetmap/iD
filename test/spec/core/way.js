@@ -282,20 +282,18 @@ describe('iD.Way', function() {
     });
 
     describe("#asGeoJSON", function () {
-        it("converts a line to a GeoJSON LineString feature", function () {
+        it("converts a line to a GeoJSON LineString geometry", function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [3, 4]}),
                 w = iD.Way({tags: {highway: 'residential'}, nodes: [a.id, b.id]}),
                 graph = iD.Graph([a, b, w]),
                 json = w.asGeoJSON(graph);
 
-            expect(json.type).to.equal('Feature');
-            expect(json.properties).to.eql({highway: 'residential'});
-            expect(json.geometry.type).to.equal('LineString');
-            expect(json.geometry.coordinates).to.eql([[1, 2], [3, 4]]);
+            expect(json.type).to.equal('LineString');
+            expect(json.coordinates).to.eql([[1, 2], [3, 4]]);
         });
 
-        it("converts an area to a GeoJSON Polygon feature", function () {
+        it("converts an area to a GeoJSON Polygon geometry", function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [5, 6]}),
                 c = iD.Node({loc: [3, 4]}),
@@ -303,10 +301,8 @@ describe('iD.Way', function() {
                 graph = iD.Graph([a, b, c, w]),
                 json = w.asGeoJSON(graph, true);
 
-            expect(json.type).to.equal('Feature');
-            expect(json.properties).to.eql({area: 'yes'});
-            expect(json.geometry.type).to.equal('Polygon');
-            expect(json.geometry.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
+            expect(json.type).to.equal('Polygon');
+            expect(json.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
         });
 
         it("forces clockwise polygon winding order", function () {
@@ -317,7 +313,7 @@ describe('iD.Way', function() {
                 graph = iD.Graph([a, b, c, w]),
                 json = w.asGeoJSON(graph, true);
 
-            expect(json.geometry.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
+            expect(json.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
         });
     });
 });

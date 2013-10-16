@@ -78,14 +78,12 @@ describe('iD.Node', function () {
     });
 
     describe("#asGeoJSON", function () {
-        it("converts to a GeoJSON Point features", function () {
+        it("converts to a GeoJSON Point geometry", function () {
             var node = iD.Node({tags: {amenity: 'cafe'}, loc: [1, 2]}),
                 json = node.asGeoJSON();
 
-            expect(json.type).to.equal('Feature');
-            expect(json.properties).to.eql({amenity: 'cafe'});
-            expect(json.geometry.type).to.equal('Point');
-            expect(json.geometry.coordinates).to.eql([1, 2]);
+            expect(json.type).to.equal('Point');
+            expect(json.coordinates).to.eql([1, 2]);
         });
     });
 });
