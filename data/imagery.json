@@ -23479,7 +23479,7 @@
         "name": "OpenStreetMap GPS traces",
         "type": "tms",
         "description": "Public GPS traces uploaded to OpenStreetMap.",
-        "template": "http://{switch:a,b,c}.gps-tile.openstreetmap.org/gps-lines/tile/{zoom}/{x}/{y}.png",
+        "template": "http://{switch:a,b,c}.gps-tile.openstreetmap.org/lines/{zoom}/{x}/{y}.png",
         "scaleExtent": [
             0,
             20
