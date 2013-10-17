@@ -7658,6 +7658,7 @@
     {
         "name": "Locator Overlay",
         "type": "tms",
+        "description": "Shows major features to help orient you.",
         "template": "http://{switch:a,b,c}.tiles.mapbox.com/v3/openstreetmap.map-btyhiati/{zoom}/{x}/{y}.png",
         "scaleExtent": [
             0,
@@ -7686,6 +7687,41 @@
         "type": "tms",
         "template": "http://oatile{switch:1,2,3,4}.mqcdn.com/tiles/1.0.0/sat/{zoom}/{x}/{y}.png",
         "default": true
+    },
+    {
+        "name": "NLS - Bartholomew Half Inch, 1897-1907",
+        "type": "tms",
+        "template": "http://geo.nls.uk/mapdata2/bartholomew/great_britain/{zoom}/{x}/{-y}.png",
+        "scaleExtent": [
+            0,
+            15
+        ],
+        "polygon": [
+            [
+                [
+                    -9,
+                    49.8
+                ],
+                [
+                    -9,
+                    61.1
+                ],
+                [
+                    1.9,
+                    61.1
+                ],
+                [
+                    1.9,
+                    49.8
+                ],
+                [
+                    -9,
+                    49.8
+                ]
+            ]
+        ],
+        "terms_url": "http://geo.nls.uk/maps/",
+        "terms_text": "National Library of Scotland Historic Maps"
     },
     {
         "name": "NLS - OS 1-inch 7th Series 1955-61",
@@ -13915,6 +13951,7 @@
     {
         "name": "OpenStreetMap GPS traces",
         "type": "tms",
+        "description": "Public GPS traces uploaded to OpenStreetMap.",
         "template": "http://{switch:a,b,c}.gps-tile.openstreetmap.org/lines/{zoom}/{x}/{y}.png",
         "scaleExtent": [
             0,

@@ -19,7 +19,7 @@ var censor = {
     "Public Transport (\u00d6PNV)": true // https://github.com/osmlab/editor-imagery-index/issues/15
 };
 
-var description = {
+var descriptions = {
     'MapBox Satellite': 'Satellite and aerial imagery.',
     'OpenStreetMap (Mapnik)': 'The default OpenStreetMap layer.',
     'TIGER 2012 Roads Overlay': 'Public domain road data from the US Government.',
@@ -38,7 +38,8 @@ sources.forEach(function(source) {
         type: source.type
     };
 
-    if (description[im.name]) im.description = description[im.name];
+    var description = source.description || descriptions[im.name];
+    if (description) im.description = description;
 
     im.template = source.url;
 
