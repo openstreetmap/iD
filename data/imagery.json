@@ -23523,5 +23523,42 @@
         ],
         "terms_url": "http://data.wien.gv.at/",
         "terms_text": "Stadt Wien"
+    },
+    {
+        "name": "OpenStreetMap GPS traces",
+        "type": "tms",
+        "description": "Public GPS traces uploaded to OpenStreetMap.",
+        "template": "http://{switch:a,b,c}.gps-tile.openstreetmap.org/lines/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            20
+        ],
+        "polygon": [
+            [
+                [
+                    -180,
+                    -90 
+                ],
+                [
+                    -180,
+                    90
+                ],
+                [
+                    180,
+                    90
+                ],
+                [
+                    180,
+                    -90
+                ],
+                [
+                    -180,
+                    -90
+                ]
+            ]
+        ],
+        "terms_url": "http://www.openstreetmap.org/copyright",
+        "terms_text": "© OpenStreetMap contributors",
+        "overlay": true
     }
 ]
