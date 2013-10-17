@@ -16,9 +16,9 @@ iD.Map = function(context) {
         points = iD.svg.Points(roundedProjection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
         lines = iD.svg.Lines(projection),
-        areas = iD.svg.Areas(roundedProjection),
+        areas = iD.svg.Areas(projection),
         midpoints = iD.svg.Midpoints(roundedProjection, context),
-        labels = iD.svg.Labels(roundedProjection, context),
+        labels = iD.svg.Labels(projection, context),
         supersurface, surface,
         mouse,
         mousemove;
