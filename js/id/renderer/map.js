@@ -269,10 +269,10 @@ iD.Map = function(context) {
         return map;
     };
 
-    function setZoom(z, force) {
-        if (z === map.zoom() && !force)
+    function setZoom(_, force) {
+        if (_ === map.zoom() && !force)
             return false;
-        var scale = 256 * Math.pow(2, z),
+        var scale = 256 * Math.pow(2, _),
             center = pxCenter(),
             l = pointLocation(center);
         scale = Math.max(1024, Math.min(256 * Math.pow(2, 24), scale));
@@ -287,15 +287,16 @@ iD.Map = function(context) {
         return true;
     }
 
-    function setCenter(loc) {
-        var t = projection.translate(),
-            c = pxCenter(),
-            ll = projection(loc);
-        if (ll[0] === c[0] && ll[1] === c[1])
+    function setCenter(_) {
+        var c = map.center();
+        if (_[0] === c[0] && _[1] === c[1])
             return false;
+        var t = projection.translate(),
+            pxC = pxCenter(),
+            ll = projection(_);
         projection.translate([
-            t[0] - ll[0] + c[0],
-            t[1] - ll[1] + c[1]]);
+            t[0] - ll[0] + pxC[0],
+            t[1] - ll[1] + pxC[1]]);
         zoom.translate(projection.translate());
         return true;
     }
