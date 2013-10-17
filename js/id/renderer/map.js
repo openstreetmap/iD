@@ -316,7 +316,7 @@ iD.Map = function(context) {
         dimensions = _;
         surface.dimensions(dimensions);
         context.background().dimensions(dimensions);
-        projection.clipExtent([[0, 0], dimensions]);
+//        projection.clipExtent([[0, 0], dimensions]);
         mouse = iD.util.fastMouse(supersurface.node());
         setCenter(center);
         return redraw();
