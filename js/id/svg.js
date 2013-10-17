@@ -13,29 +13,26 @@ iD.svg = {
         };
     },
 
+    Round: function () {
+        return d3.geo.transform({
+            point: function(x, y) { return this.stream.point(Math.floor(x), Math.floor(y)); }
+        });
+    },
+
     Path: function(projection, graph, polygon) {
         var cache = {},
-            path = d3.geo.path().projection(projection);
+            round = iD.svg.Round().stream,
+            project = projection.stream,
+            path = d3.geo.path()
+                .projection({stream: function(output) { return project(round(output)); }});
 
-        function result(entity) {
-            if (entity.id in cache) return cache[entity.id];
-
-            var buffer = '';
-
-            path.context({
-                beginPath: function() {},
-                moveTo: function(x, y) { buffer += 'M' + Math.floor(x) + ',' + Math.floor(y); },
-                lineTo: function(x, y) { buffer += 'L' + Math.floor(x) + ',' + Math.floor(y); },
-                arc: function() {},
-                closePath: function() { buffer += 'Z'; }
-            });
-
-            path(entity.asGeoJSON(graph, polygon));
-
-            return cache[entity.id] = buffer;
-        }
-
-        return result;
+        return function(entity) {
+            if (entity.id in cache) {
+                return cache[entity.id];
+            } else {
+                return cache[entity.id] = path(entity.asGeoJSON(graph, polygon));
+            }
+        };
     },
 
     OneWaySegments: function(projection, graph, dt) {
