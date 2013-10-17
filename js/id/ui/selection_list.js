@@ -15,83 +15,52 @@ iD.ui.SelectionList = function(context, selectedIDs) {
         var list = listWrap.append('div')
             .attr('class', 'feature-list cf');
 
+        context.history().on('change.selection-list', drawList);
         drawList();
 
-        function features() {
-            var entities = {},
-                result = [],
-                graph = context.graph();
-
-            function addEntity(entity) {
-                var name = iD.util.displayName(entity) || '';
-                result.push({
-                    id: entity.id,
-                    entity: entity,
-                    geometry: context.geometry(entity.id),
-                    type: context.presets().match(entity, graph).name(),
-                    name: name
-                });
-            }
-
-            for (var i = 0; i < selectedIDs.length; i++) {
-                addEntity(context.entity(selectedIDs[i]));
-            }
-
-            return result;
-        }
-
         function drawList() {
-            var results = features();
+            var entities = selectedIDs
+                .map(function(id) { return context.hasEntity(id); })
+                .filter(function(entity) { return entity; });
 
             var items = list.selectAll('.feature-list-item')
-                .data(results, function(d) { return d.id; });
+                .data(entities, iD.Entity.key);
 
-            var enter = items.enter().insert('button', '.geocode-item')
+            var enter = items.enter().append('button')
                 .attr('class', 'feature-list-item')
-                .on('mouseover', mouseover)
-                .on('mouseout', mouseout)
-                .on('click', click);
+                .on('click', function(entity) {
+                    context.enter(iD.modes.Select(context, [entity.id]));
+                });
+
+            // Enter
 
             var label = enter.append('div')
                 .attr('class', 'label');
 
             label.append('span')
-                .attr('class', function(d) { return d.geometry + ' icon icon-pre-text'; });
+                .attr('class', 'icon icon-pre-text');
 
             label.append('span')
-                .attr('class', 'entity-type')
-                .text(function(d) { return d.type; });
+                .attr('class', 'entity-type');
 
             label.append('span')
-                .attr('class', 'entity-name')
-                .text(function(d) { return d.name; });
+                .attr('class', 'entity-name');
 
-            enter.style('opacity', 0)
-                .transition()
-                .style('opacity', 1);
+            // Update
 
-            items.order();
+            items.selectAll('.icon')
+                .attr('class', function(entity) { return context.geometry(entity.id) + ' icon icon-pre-text'; });
+
+            items.selectAll('.entity-type')
+                .text(function(entity) { return context.presets().match(entity, context.graph()).name(); });
+
+            items.selectAll('.entity-name')
+                .text(function(entity) { return iD.util.displayName(entity); });
+
+            // Exit
 
             items.exit()
                 .remove();
-        }
-
-        function mouseover(d) {
-            context.surface().selectAll(iD.util.entityOrMemberSelector([d.id], context.graph()))
-                .classed('hover', true);
-        }
-
-        function mouseout() {
-            context.surface().selectAll('.hover')
-                .classed('hover', false);
-        }
-
-        function click(d) {
-            if (d.entity) {
-                context.enter(iD.modes.Select(context, [d.entity.id]));
-            } else {
-                context.loadEntity(d.id);
-            }
         }
     }
 
