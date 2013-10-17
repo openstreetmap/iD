@@ -198,7 +198,8 @@ window.iD = function () {
     function rawMercator() {
         var project = d3.geo.mercator.raw,
             k = 512 / Math.PI, // scale
-            x = 0, y = 0; // translate
+            x = 0, y = 0, // translate
+            clipExtent = [[0, 0], [0, 0]];
 
         function projection(point) {
             point = project(point[0] * Math.PI / 180, point[1] * Math.PI / 180);
@@ -220,6 +221,12 @@ window.iD = function () {
             if (!arguments.length) return [x, y];
             x = +_[0];
             y = +_[1];
+            return projection;
+        };
+
+        projection.clipExtent = function(_) {
+            if (!arguments.length) return clipExtent;
+            clipExtent = _;
             return projection;
         };
 

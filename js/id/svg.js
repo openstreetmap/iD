@@ -22,9 +22,10 @@ iD.svg = {
     Path: function(projection, graph, polygon) {
         var cache = {},
             round = iD.svg.Round().stream,
+            clip = d3.geo.clipExtent().extent(projection.clipExtent()).stream,
             project = projection.stream,
             path = d3.geo.path()
-                .projection({stream: function(output) { return project(round(output)); }});
+                .projection({stream: function(output) { return polygon ? project(round(output)) : project(clip(round(output))); }});
 
         return function(entity) {
             if (entity.id in cache) {
