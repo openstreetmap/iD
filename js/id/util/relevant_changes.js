@@ -1,18 +1,35 @@
 // filters out verticies where the parent entity is already present
 // for simpler changeset listing
-iD.util.relevantChanges = function(graph, entities) {
+iD.util.relevantChanges = function(graph, changes, base) {
     var relevant = {};
-    for (var i = entities.length - 1; i >= 0; i--) {
-        var entity = entities[i];
-        if (entity.geometry(graph) === 'vertex') {
-            var parents = graph.parentWays(entity);
-            for (var j = parents.length - 1; j >= 0; j--) {
-                var parent = parents[j];
-                relevant[parent.id] = parent;
-            }
-        } else {
-            relevant[entity.id] = entity;
+
+    function addEntity(entity, changeType) {
+        relevant[entity.id] = {
+            entity: entity,
+            changeType: changeType
+        };
+    }
+
+    function addParents(entity) {
+        var parents = graph.parentWays(entity);
+        for (var j = parents.length - 1; j >= 0; j--) {
+            var parent = parents[j];
+            if (!(parent.id in relevant)) addEntity(parent, 'modified');
         }
     }
+
+    _.each(changes, function(entities, change) {
+        _.each(entities, function(entity) {
+            if (entity.geometry(change === 'deleted' ? base : graph) === 'vertex') {
+                addParents(entity);
+                if (change === 'modified' && (entity.tags !== base.entity(entity.id).tags)) {
+                    addEntity(entity, change);
+                }
+            } else {
+                addEntity(entity, change);
+            }
+        });
+    });
+
     return d3.values(relevant);
 };

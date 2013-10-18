@@ -3,12 +3,14 @@ iD.ui.Commit = function(context) {
         presets = context.presets();
 
     function commit(selection) {
-        var changes = context.history().changes(),
-            allChanges = _.flatten(d3.values(changes));
+        var changes = context.history().changes();
 
-        function zoomToEntity(entity) {
-            context.map().zoomTo(entity);
-            context.enter(iD.modes.Select(context, [entity.id]));
+        function zoomToEntity(change) {
+            var entity = change.entity;
+            if (change.changeType !== 'deleted') {
+                context.map().zoomTo(entity);
+                context.enter(iD.modes.Select(context, [entity.id]));
+            }
         }
 
         var header = selection.append('div')
@@ -114,7 +116,7 @@ iD.ui.Commit = function(context) {
 
         var entity = entityList.selectAll('.feature-list-item')
             .data(function() {
-                return iD.util.relevantChanges(context.graph(), allChanges);
+                return iD.util.relevantChanges(context.graph(), changes, context.history().base());
             });
 
         var entityEnter = entity.enter().append('button')
@@ -127,15 +129,28 @@ iD.ui.Commit = function(context) {
             .attr('class', 'label');
 
         label.append('span')
-            .attr('class', function(d) { return context.geometry(d.id) + ' icon icon-pre-text'; });
+            .attr('class', function(d) {
+                return d.entity.geometry(context.graph()) + ' icon icon-pre-text';
+        });
+
+        label.append('span')
+            .attr('class', 'entity-change-type')
+            .text(function(d) {
+                // need to determine if we're doing some kind of changetype icon or text
+                // + or - icon? red/green/yellow tinted geometry type icons?
+                // for deleted: maybe cross out (like no smoking signs) the same geometry icon
+                return d.changeType + ' ';
+            });
 
         label.append('span')
             .attr('class', 'entity-type')
-            .text(function(d) { return context.geometry(d.id); });
+            .text(function(d) {
+                return context.presets().match(d.entity, context.graph()).name();
+            });
 
         label.append('span')
             .attr('class', 'entity-name')
-            .text(function(d) { return iD.util.displayName(d); });
+            .text(function(d) { return iD.util.displayName(d.entity) || ''; });
 
         entityEnter.style('opacity', 0)
             .transition()
@@ -147,7 +162,6 @@ iD.ui.Commit = function(context) {
 
         function mouseover(d) {
             if (d.entity) {
-                // need to get the extent for this entity some how
                 context.surface().selectAll(iD.util.entityOrMemberSelector([d.entity.id], context.graph()))
                     .classed('hover', true);
             }
@@ -159,11 +173,15 @@ iD.ui.Commit = function(context) {
         }
 
         function warningClick(d) {
-            if (d.entity) {
-                context.enter(iD.modes.Select(context, [d.entity.id]));
-            }
+            if (d.entity) context.enter(iD.modes.Select(context, [d.entity.id]));
         }
     }
 
     return d3.rebind(commit, event, 'on');
 };
+
+// TODO:
+// indicate changetype
+// indicate changed geo/tags
+// check for and indicate if entity is a member of a multipolygon
+    // there's probably something somewhere for doing that

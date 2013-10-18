@@ -46,7 +46,7 @@ iD.ui.SelectionList = function(context, selectedIDs) {
             var items = list.selectAll('.feature-list-item')
                 .data(results, function(d) { return d.id; });
 
-            var enter = items.enter().insert('button', '.geocode-item')
+            var enter = items.enter().append('button')
                 .attr('class', 'feature-list-item')
                 .on('mouseover', mouseover)
                 .on('mouseout', mouseout)
