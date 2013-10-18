@@ -62,22 +62,27 @@ iD.svg.Areas = function(projection) {
             fill: areas
         };
 
+        var paths = surface.selectAll('.layer-shadow, .layer-stroke, .layer-fill')
+            .selectAll('path.area')
+            .filter(filter)
+            .data(function(layer) { return data[layer]; }, iD.Entity.key);
+
+        // Remove exiting areas first, so they aren't included in the `fills`
+        // array used for sorting below (https://github.com/systemed/iD/issues/1903).
+        paths.exit()
+            .remove();
+
+        var fills = surface.selectAll('.layer-fill path.area')[0];
+
         var bisect = d3.bisector(function(node) {
             return -node.__data__.area(graph);
         }).left;
-
-        var fills = surface.selectAll('.layer-fill path.area')[0];
 
         function sortedByArea(entity) {
             if (this.__data__ === 'fill') {
                 return fills[bisect(fills, -entity.area(graph))];
             }
         }
-
-        var paths = surface.selectAll('.layer-shadow, .layer-stroke, .layer-fill')
-            .selectAll('path.area')
-            .filter(filter)
-            .data(function(layer) { return data[layer]; }, iD.Entity.key);
 
         paths.enter()
             .insert('path', sortedByArea)
@@ -94,8 +99,5 @@ iD.svg.Areas = function(projection) {
 
         paths
             .attr('d', path);
-
-        paths.exit()
-            .remove();
     };
 };
