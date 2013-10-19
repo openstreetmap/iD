@@ -2611,6 +2611,19 @@
         },
         "name": "Leisure"
     },
+    "leisure/common": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "open space"
+        ],
+        "tags": {
+            "leisure": "common"
+        },
+        "name": "Common"
+    },
     "leisure/dog_park": {
         "geometry": [
             "point",

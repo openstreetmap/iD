@@ -733,6 +733,9 @@ en:
       leisure: 
         name: Leisure
         terms: "<translate with synonyms or related terms for 'Leisure', separated by commas>"
+      leisure/common: 
+        name: Common
+        terms: "<translate with synonyms or related terms for 'Common', separated by commas>"
       leisure/dog_park: 
         name: Dog Park
         terms: "<translate with synonyms or related terms for 'Dog Park', separated by commas>"
