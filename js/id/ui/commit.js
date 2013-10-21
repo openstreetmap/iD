@@ -98,9 +98,7 @@ iD.ui.Commit = function(context) {
 
         // Warnings
         var warnings = body.selectAll('div.warning-section')
-            .data(function() {
-                return iD.validate(changes, context.graph());
-            })
+            .data(iD.validate(changes, context.graph()))
             .enter()
             .append('div')
             .attr('class', 'modal-section warning-section fillL2');
@@ -110,9 +108,6 @@ iD.ui.Commit = function(context) {
 
         var warningLi = warnings.append('ul')
             .attr('class', 'changeset-list')
-            .selectAll('li')
-            .data(function(d) { if (d) return [d]; })
-            .enter()
             .append('li')
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
