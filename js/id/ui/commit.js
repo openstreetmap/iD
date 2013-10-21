@@ -3,13 +3,22 @@ iD.ui.Commit = function(context) {
         presets = context.presets();
 
     function commit(selection) {
-        var changes = context.history().changes();
+        var changes = context.history().changes(),
+            relevantChanges = iD.util.relevantChanges(
+                context.graph(),
+                changes,
+                context.history().base()
+            );
 
         function zoomToEntity(change) {
+            // need to filter out verticies, they aren't/can't be highlighted?
             var entity = change.entity;
             if (change.changeType !== 'deleted') {
                 context.map().zoomTo(entity);
-                context.enter(iD.modes.Select(context, [entity.id]));
+                // context.enter(iD.modes.Select(context, [entity.id]));
+                context.surface().selectAll(
+                    iD.util.entityOrMemberSelector([entity.id], context.graph()))
+                    .classed('hover', true);
             }
         }
 
@@ -88,82 +97,107 @@ iD.ui.Commit = function(context) {
             .text(t('commit.save'));
 
         // Warnings
-        var warningList = body.append('div')
-            .attr('class', 'feature-list cf');
+        var warnings = body.selectAll('div.warning-section')
+            .data([iD.validate(changes, context.graph())])
+            .enter()
+            .append('div')
+            .attr('class', 'modal-section warning-section fillL2');
 
-        var warning = warningList.selectAll('.feature-list-item')
-            .data(iD.validate(changes, context.graph()));
+        warnings.append('h3')
+            .text(t('commit.warnings'));
 
-        var warningEnter = warning.enter().append('button')
-            .attr('class', 'feature-list-item')
+        var warningLi = warnings.append('ul')
+            .attr('class', 'changeset-list')
+            .selectAll('li')
+            .data(function(d) { return d; })
+            .enter()
+            .append('li')
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
             .on('click', warningClick);
 
-        var label = warningEnter.append('div')
-            .attr('class', 'label');
-
-        label.append('span')
+        warningLi.append('span')
             .attr('class', 'alert icon icon-pre-text');
 
-        label.append('span')
-            .attr('class', 'entity-type strong')
-            .text(function(d) { return d.message; });
+        warningLi.append('strong').text(function(d) {
+            return d.message;
+        });
 
-        // Entities
-        var entityList = body.append('div')
-            .attr('class', 'feature-list cf');
+        // icon or no icon?
+        // warningLi.filter(function(d) { return d.entity; })
+        //     .append('button')
+        //     .attr('class', 'minor')
+        //     .on('click', event.fix)
+        //     .append('span')
+        //     .attr('class', 'icon warning');
 
-        var entity = entityList.selectAll('.feature-list-item')
-            .data(function() {
-                return iD.util.relevantChanges(context.graph(), changes, context.history().base());
-            });
+        var changeSection = body.selectAll('div.commit-section')
+            .data([0])
+            .enter()
+            .append('div')
+            .attr('class', 'commit-section modal-section fillL2');
 
-        var entityEnter = entity.enter().append('button')
-            .attr('class', 'feature-list-item')
+        changeSection.append('h3')
+            .text('Changes')
+            .append('small')
+            .attr('class', 'count')
+            .text(relevantChanges.length);
+
+        var li = changeSection.append('ul')
+            .attr('class', 'changeset-list')
+            .selectAll('li')
+            .data(function(d) {
+                return relevantChanges;
+            })
+            .enter()
+            .append('li')
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
             .on('click', zoomToEntity);
 
-        label = entityEnter.append('div')
-            .attr('class', 'label');
+        // icon or no icon?
+        // li.append('button')
+        //     .attr('class', 'minor')
+        //     .append('span')
+        //     .attr('class', 'icon warning');
 
-        label.append('span')
+        li.append('span')
             .attr('class', function(d) {
-                return d.entity.geometry(context.graph()) + ' icon icon-pre-text';
-        });
+                return context.geometry(d.entity.id) + ' icon icon-pre-text';
+            });
 
-        label.append('span')
-            .attr('class', 'entity-change-type')
+        // we want to change this to an icon/bg color/something else
+        li.append('span')
+            .attr('class', 'change-type')
             .text(function(d) {
-                // need to determine if we're doing some kind of changetype icon or text
-                // + or - icon? red/green/yellow tinted geometry type icons?
-                // for deleted: maybe cross out (like no smoking signs) the same geometry icon
                 return d.changeType + ' ';
             });
 
-        label.append('span')
+        li.append('strong')
             .attr('class', 'entity-type')
             .text(function(d) {
                 return context.presets().match(d.entity, context.graph()).name();
             });
 
-        label.append('span')
+        li.append('span')
             .attr('class', 'entity-name')
-            .text(function(d) { return iD.util.displayName(d.entity) || ''; });
+            .text(function(d) {
+                return ' ' + (iD.util.displayName(d.entity) || '');
+            });
 
-        entityEnter.style('opacity', 0)
+        li.style('opacity', 0)
             .transition()
             .style('opacity', 1);
 
-        warningEnter.style('opacity', 0)
+        li.style('opacity', 0)
             .transition()
             .style('opacity', 1);
 
         function mouseover(d) {
             if (d.entity) {
-                context.surface().selectAll(iD.util.entityOrMemberSelector([d.entity.id], context.graph()))
-                    .classed('hover', true);
+                context.surface().selectAll(
+                    iD.util.entityOrMemberSelector([d.entity.id], context.graph())
+                ).classed('hover', true);
             }
         }
 
@@ -181,7 +215,8 @@ iD.ui.Commit = function(context) {
 };
 
 // TODO:
-// indicate changetype
-// indicate changed geo/tags
+// indicate changed geometry/tags
 // check for and indicate if entity is a member of a multipolygon
-    // there's probably something somewhere for doing that
+    // there's probably something somewhere for doing that, parent?
+// deleted changeset items majorly BORK the list
+    // handle deleted items better in relevant-changes

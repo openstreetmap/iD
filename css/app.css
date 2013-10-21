@@ -2431,7 +2431,7 @@ img.wiki-image {
     border:1px solid #ccc;
     border-radius: 4px;
     background:#fff;
-    max-height: 160px;
+    max-height: 400px;
 }
 
 .mode-save .warning-section .changeset-list button {
@@ -2442,6 +2442,15 @@ img.wiki-image {
     position: relative;
     border-top:1px solid #ccc;
     padding:5px 10px;
+    cursor: pointer;
+}
+
+.mode-save .changeset-list li:hover {
+    background-color: #ececec;
+}
+
+.mode-save .changeset-list .icon {
+    opacity: 0.5;
 }
 
 .changeset-list li span.count {
