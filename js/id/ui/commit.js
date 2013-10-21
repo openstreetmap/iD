@@ -4,10 +4,11 @@ iD.ui.Commit = function(context) {
 
     function commit(selection) {
         var changes = context.history().changes(),
+            base = context.history().base(),
             relevantChanges = iD.util.relevantChanges(
                 context.graph(),
                 changes,
-                context.history().base()
+                base
             );
 
         function zoomToEntity(change) {
@@ -163,7 +164,7 @@ iD.ui.Commit = function(context) {
 
         li.append('span')
             .attr('class', function(d) {
-                return d.geometryType + ' icon icon-pre-text';
+                return base.entity(d.entity.id).geometry(base) + ' icon icon-pre-text';
             });
 
         // we want to change this to an icon/bg color/something else
@@ -176,13 +177,13 @@ iD.ui.Commit = function(context) {
         li.append('strong')
             .attr('class', 'entity-type')
             .text(function(d) {
-                return context.presets().match(d.entity, context.history().base()).name();
+                return context.presets().match(d.entity, base).name();
             });
 
         li.append('span')
             .attr('class', 'entity-name')
             .text(function(d) {
-                return ' ' + d.name;
+                return ' ' + (iD.util.displayName(d.entity) || '');
             });
 
         li.style('opacity', 0)

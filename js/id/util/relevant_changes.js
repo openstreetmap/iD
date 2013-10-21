@@ -5,15 +5,14 @@ iD.util.relevantChanges = function(graph, changes, base) {
 
     function addEntity(entity, changeType) {
         relevant[entity.id] = {
-            name: iD.util.displayName(entity) || '',
             entity: entity,
             changeType: changeType,
-            geometryType: base.entity(entity.id).geometry(base)
         };
     }
 
-    function addParents(entity) {
-        var parents = graph.parentWays(entity);
+    function addParents(entity, theGraph) {
+        if (!theGraph) theGraph = graph;
+        var parents = theGraph.parentWays(entity);
         for (var j = parents.length - 1; j >= 0; j--) {
             var parent = parents[j];
             if (!(parent.id in relevant)) addEntity(parent, 'modified');
@@ -22,8 +21,9 @@ iD.util.relevantChanges = function(graph, changes, base) {
 
     _.each(changes, function(entities, change) {
         _.each(entities, function(entity) {
-            if (entity.geometry(change === 'deleted' ? base : graph) === 'vertex') {
-                addParents(entity);
+            var relevantGraph = change === 'deleted' ? base : graph;
+            if (entity.geometry(relevantGraph) === 'vertex') {
+                addParents(entity, relevantGraph);
                 if (change === 'modified' && (entity.tags !== base.entity(entity.id).tags)) {
                     addEntity(entity, change);
                 }
