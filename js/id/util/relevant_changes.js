@@ -5,8 +5,10 @@ iD.util.relevantChanges = function(graph, changes, base) {
 
     function addEntity(entity, changeType) {
         relevant[entity.id] = {
+            name: iD.util.displayName(entity) || '',
             entity: entity,
-            changeType: changeType
+            changeType: changeType,
+            geometryType: base.entity(entity.id).geometry(base)
         };
     }
 

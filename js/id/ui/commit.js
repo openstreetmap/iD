@@ -163,7 +163,7 @@ iD.ui.Commit = function(context) {
 
         li.append('span')
             .attr('class', function(d) {
-                return context.geometry(d.entity.id) + ' icon icon-pre-text';
+                return d.geometryType + ' icon icon-pre-text';
             });
 
         // we want to change this to an icon/bg color/something else
@@ -176,13 +176,13 @@ iD.ui.Commit = function(context) {
         li.append('strong')
             .attr('class', 'entity-type')
             .text(function(d) {
-                return context.presets().match(d.entity, context.graph()).name();
+                return context.presets().match(d.entity, context.history().base()).name();
             });
 
         li.append('span')
             .attr('class', 'entity-name')
             .text(function(d) {
-                return ' ' + (iD.util.displayName(d.entity) || '');
+                return ' ' + d.name;
             });
 
         li.style('opacity', 0)
