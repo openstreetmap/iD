@@ -16,6 +16,12 @@ iD.ui.Attribution = function(context) {
             .append('span')
             .attr('class', 'attribution')
             .each(function(d) {
+                if (d.terms_html) {
+                    d3.select(this)
+                        .html(d.terms_html);
+                    return;
+                }
+
                 var source = d.terms_text || d.id || d.name;
 
                 if (d.logo) {

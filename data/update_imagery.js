@@ -71,6 +71,9 @@ sources.forEach(function(source) {
     if (attribution.text) {
         im.terms_text = attribution.text;
     }
+    if (attribution.html) {
+        im.terms_html = attribution.html;
+    }
 
     ['id', 'default', 'overlay'].forEach(function(a) {
         if (source[a]) {
