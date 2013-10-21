@@ -2209,12 +2209,24 @@ img.wiki-image {
 }
 
 /* Attribution overlay */
-.attribution {
+.base-layer-attribution,
+.overlay-layer-attribution {
     position: absolute;
     bottom: 35px;
-    left:10px;
-    color:#888;
-    font-size:10px;
+    color: #888;
+    font-size: 10px;
+}
+
+.base-layer-attribution {
+    left: 10px;
+}
+
+.overlay-layer-attribution {
+    right: 10px;
+}
+
+.overlay-layer-attribution .attribution:not(:last-child):after {
+    content: '; ';
 }
 
 .source-image {

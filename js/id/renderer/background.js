@@ -170,6 +170,10 @@ iD.Background = function(context) {
             overlayLayers.some(function(l) { return l.source() === d; });
     };
 
+    background.overlayLayerSources = function() {
+        return overlayLayers.map(function (l) { return l.source(); });
+    };
+
     background.toggleOverlayLayer = function(d) {
         var layer;
 

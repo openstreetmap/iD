@@ -1,18 +1,20 @@
 iD.ui.Attribution = function(context) {
     var selection;
 
-    function update() {
-        if (!context.background().baseLayerSource()) {
-            selection.html('');
-            return;
-        }
+    function attribution(data, klass) {
+        var div = selection.selectAll('.' + klass)
+            .data([0]);
 
-        var attribution = selection.selectAll('.provided-by')
-            .data([context.background().baseLayerSource()], function(d) { return d.name; });
+        div.enter()
+            .append('div')
+            .attr('class', klass);
 
-        attribution.enter()
+        var background = div.selectAll('.attribution')
+            .data(data, function(d) { return d.name; });
+
+        background.enter()
             .append('span')
-            .attr('class', 'provided-by')
+            .attr('class', 'attribution')
             .each(function(d) {
                 var source = d.terms_text || d.id || d.name;
 
@@ -32,10 +34,10 @@ iD.ui.Attribution = function(context) {
                 }
             });
 
-        attribution.exit()
+        background.exit()
             .remove();
 
-        var copyright = attribution.selectAll('.copyright-notice')
+        var copyright = background.selectAll('.copyright-notice')
             .data(function(d) {
                 var notice = d.copyrightNotices(context.map().zoom(), context.map().extent());
                 return notice ? [notice] : [];
@@ -49,6 +51,13 @@ iD.ui.Attribution = function(context) {
 
         copyright.exit()
             .remove();
+    }
+
+    function update() {
+        attribution([context.background().baseLayerSource()], 'base-layer-attribution');
+        attribution(context.background().overlayLayerSources().filter(function (s) {
+            return s.validZoom(context.map().zoom());
+        }), 'overlay-layer-attribution');
     }
 
     return function(select) {

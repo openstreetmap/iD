@@ -51,9 +51,7 @@ iD.ui = function(context) {
             .attr('class', 'spinner')
             .call(iD.ui.Spinner(context));
 
-        content.append('div')
-            .attr('class', 'attribution')
-            .attr('tabindex', -1)
+        content
             .call(iD.ui.Attribution(context));
 
         content.append('div')
