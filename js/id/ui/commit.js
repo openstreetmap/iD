@@ -12,11 +12,10 @@ iD.ui.Commit = function(context) {
             );
 
         function zoomToEntity(change) {
-            // need to filter out verticies, they aren't/can't be highlighted?
             var entity = change.entity;
-            if (change.changeType !== 'deleted') {
+            if (change.changeType !== 'deleted' &&
+                context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
                 context.map().zoomTo(entity);
-                // context.enter(iD.modes.Select(context, [entity.id]));
                 context.surface().selectAll(
                     iD.util.entityOrMemberSelector([entity.id], context.graph()))
                     .classed('hover', true);
@@ -99,7 +98,9 @@ iD.ui.Commit = function(context) {
 
         // Warnings
         var warnings = body.selectAll('div.warning-section')
-            .data([iD.validate(changes, context.graph())])
+            .data(function() {
+                return iD.validate(changes, context.graph());
+            })
             .enter()
             .append('div')
             .attr('class', 'modal-section warning-section fillL2');
@@ -110,7 +111,7 @@ iD.ui.Commit = function(context) {
         var warningLi = warnings.append('ul')
             .attr('class', 'changeset-list')
             .selectAll('li')
-            .data(function(d) { return d; })
+            .data(function(d) { if (d) return [d]; })
             .enter()
             .append('li')
             .on('mouseover', mouseover)
@@ -123,14 +124,6 @@ iD.ui.Commit = function(context) {
         warningLi.append('strong').text(function(d) {
             return d.message;
         });
-
-        // icon or no icon?
-        // warningLi.filter(function(d) { return d.entity; })
-        //     .append('button')
-        //     .attr('class', 'minor')
-        //     .on('click', event.fix)
-        //     .append('span')
-        //     .attr('class', 'icon warning');
 
         var changeSection = body.selectAll('div.commit-section')
             .data([0])
@@ -156,18 +149,12 @@ iD.ui.Commit = function(context) {
             .on('mouseout', mouseout)
             .on('click', zoomToEntity);
 
-        // icon or no icon?
-        // li.append('button')
-        //     .attr('class', 'minor')
-        //     .append('span')
-        //     .attr('class', 'icon warning');
-
         li.append('span')
             .attr('class', function(d) {
-                return base.entity(d.entity.id).geometry(base) + ' icon icon-pre-text';
+                var graph = d.changeType === 'deleted' ? base : context.graph();
+                return graph.entity(d.entity.id).geometry(graph) + ' icon icon-pre-text';
             });
 
-        // we want to change this to an icon/bg color/something else
         li.append('span')
             .attr('class', 'change-type')
             .text(function(d) {
@@ -177,7 +164,8 @@ iD.ui.Commit = function(context) {
         li.append('strong')
             .attr('class', 'entity-type')
             .text(function(d) {
-                return context.presets().match(d.entity, base).name();
+                var graph = d.changeType === 'deleted' ? base : context.graph();
+                return context.presets().match(d.entity, graph).name();
             });
 
         li.append('span')
@@ -214,10 +202,3 @@ iD.ui.Commit = function(context) {
 
     return d3.rebind(commit, event, 'on');
 };
-
-// TODO:
-// indicate changed geometry/tags
-// check for and indicate if entity is a member of a multipolygon
-    // there's probably something somewhere for doing that, parent?
-// deleted changeset items majorly BORK the list
-    // handle deleted items better in relevant-changes

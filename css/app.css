@@ -2431,7 +2431,6 @@ img.wiki-image {
     border:1px solid #ccc;
     border-radius: 4px;
     background:#fff;
-    max-height: 400px;
 }
 
 .mode-save .warning-section .changeset-list button {
