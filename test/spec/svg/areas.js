@@ -1,6 +1,7 @@
 describe("iD.svg.Areas", function () {
     var surface,
-        projection = Object,
+        projection = d3.geo.projection(function(x) { return x; })
+            .clipExtent([[0, 0], [Infinity, Infinity]]),
         all = d3.functor(true),
         none = d3.functor(false);
 

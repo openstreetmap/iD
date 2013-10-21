@@ -1,8 +1,8 @@
 describe("iD.svg.Lines", function () {
     var surface,
-        projection = d3.geo.mercator(),
-        filter = d3.functor(true),
-        dimensions = [10, 10];
+        projection = d3.geo.projection(function(x) { return x; })
+            .clipExtent([[0, 0], [Infinity, Infinity]]),
+        filter = d3.functor(true);
 
     beforeEach(function () {
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
