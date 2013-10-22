@@ -98,16 +98,20 @@ iD.ui.Commit = function(context) {
 
         // Warnings
         var warnings = body.selectAll('div.warning-section')
-            .data(iD.validate(changes, context.graph()))
+            .data([iD.validate(changes, context.graph())])
             .enter()
             .append('div')
-            .attr('class', 'modal-section warning-section fillL2');
+            .attr('class', 'modal-section warning-section fillL2')
+            .style('display', function(d) { return _.isEmpty(d) ? 'none' : null; });
 
         warnings.append('h3')
             .text(t('commit.warnings'));
 
         var warningLi = warnings.append('ul')
             .attr('class', 'changeset-list')
+            .selectAll('li')
+            .data(function(d) { return d; })
+            .enter()
             .append('li')
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
