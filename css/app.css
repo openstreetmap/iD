@@ -261,7 +261,7 @@ ul li { list-style: none;}
     border-radius: 0 0 3px 3px;
 }
 
-.toggle-list label > span { 
+.toggle-list label > span {
     display: block;
     overflow: hidden;
     white-space: nowrap;
@@ -568,6 +568,14 @@ button[disabled] .icon.geocode    { background-position: -280px -40px;}
 button[disabled] .icon.layers     { background-position: -300px -40px;}
 button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
+
+.icon.point.deleted  { background-position: -300px -80px;}
+.icon.line.deleted   { background-position: -320px -80px;}
+.icon.area.deleted   { background-position: -340px -80px;}
+
+.icon.point.created  { background-position: -300px -100px;}
+.icon.line.created   { background-position: -320px -100px;}
+.icon.area.created   { background-position: -340px -100px;}
 
 /* Out link is special */
 
@@ -2704,7 +2712,7 @@ img.wiki-image {
 }
 /* Move over tooltips that are near the edge of screen */
 .add-point .tooltip {
-    left: 33.3333% !important; 
+    left: 33.3333% !important;
 }
 
 .curtain-tooltip.intro-points-add .tooltip-arrow,
