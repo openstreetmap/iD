@@ -2406,6 +2406,8 @@ img.wiki-image {
     float: none;
     margin: auto;
     display: block;
+    color: white;
+    font-size: 14px;
 }
 
 .mode-save .user-info img {
@@ -2424,6 +2426,10 @@ img.wiki-image {
     padding:5px;
     background:#7092ff;
     color:#fff;
+}
+
+.mode-save .commit-info {
+    margin-bottom: 10px;
 }
 
 .mode-save .changeset-list {
