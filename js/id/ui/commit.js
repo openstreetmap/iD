@@ -151,7 +151,8 @@ iD.ui.Commit = function(context) {
         li.append('span')
             .attr('class', function(d) {
                 var graph = d.changeType === 'deleted' ? base : context.graph();
-                return graph.entity(d.entity.id).geometry(graph) + ' icon icon-pre-text';
+                return graph.entity(d.entity.id).geometry(graph) + ' ' + d.changeType +
+                ' icon icon-pre-text';
             });
 
         li.append('span')
@@ -170,7 +171,10 @@ iD.ui.Commit = function(context) {
         li.append('span')
             .attr('class', 'entity-name')
             .text(function(d) {
-                return ' ' + (iD.util.displayName(d.entity) || '');
+                var name = iD.util.displayName(d.entity) || '',
+                    string = '';
+                if (name !== '') string += ':';
+                return string += ' ' + name;
             });
 
         li.style('opacity', 0)

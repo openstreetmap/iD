@@ -577,6 +577,8 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon.line.created   { background-position: -320px -100px;}
 .icon.area.created   { background-position: -340px -100px;}
 
+.icon.modified { opacity: .5; }
+
 /* Out link is special */
 
 .icon.out-link   { height: 14px; width: 14px; background-position: -500px 0;}
@@ -2462,7 +2464,7 @@ img.wiki-image {
     background-color: #ececec;
 }
 
-.mode-save .changeset-list .icon {
+.mode-save .changeset-list .alert {
     opacity: 0.5;
 }
 
