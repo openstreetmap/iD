@@ -242,7 +242,30 @@
         "tags": {
             "amenity": "bank"
         },
-        "name": "Bank"
+        "name": "Bank",
+        "suggestions": [
+            "Sparkasse",
+            "Сбербанк",
+            "Volksbank",
+            "Raiffeisenbank",
+            "Santander",
+            "Crédit Agricole",
+            "HSBC",
+            "Bank of America",
+            "Barclays",
+            "Deutsche Bank",
+            "Commerzbank",
+            "Wells Fargo",
+            "Rabobank",
+            "Société Générale",
+            "Crédit Mutuel",
+            "BBVA",
+            "BNP Paribas",
+            "Kreissparkasse",
+            "HypoVereinsbank",
+            "La Caixa",
+            "LCL"
+        ]
     },
     "amenity/bar": {
         "icon": "bar",
@@ -343,7 +366,29 @@
         "tags": {
             "amenity": "cafe"
         },
-        "name": "Cafe"
+        "name": "Cafe",
+        "suggestions": [
+            "Starbucks",
+            "Столовая",
+            "Costa",
+            "Costa Coffee",
+            "Кафе",
+            "Dunkin' Donuts",
+            "スターバックス (Starbucks)",
+            "Second Cup",
+            "Шоколадница",
+            "Pret A Manger",
+            "Eiscafe",
+            "Eiscafe Venezia",
+            "Bar",
+            "Cafe Coffee Day",
+            "Кофе Хауз",
+            "Caribou Coffee",
+            "ドトール",
+            "Caffè Nero",
+            "Panera Bread",
+            "Café"
+        ]
     },
     "amenity/car_rental": {
         "geometry": [
@@ -356,7 +401,34 @@
         "fields": [
             "operator"
         ],
-        "name": "Car Rental"
+        "name": "Car Rental",
+        "suggestions": [
+            "Hertz",
+            "Europcar",
+            "Avis",
+            "stadtmobil CarSharing-Station",
+            "Sixt",
+            "Enterprise",
+            "Budget",
+            "AVIS",
+            "Enterprise Rent-A-Car",
+            "ニッポンレンタカー",
+            "Autolib",
+            "U-Haul",
+            "トヨタレンタリース",
+            "Localiza",
+            "Buchbinder",
+            "ADA",
+            "Enterprise Rent-a-Car",
+            "トヨタレンタカー",
+            "Rent a Car",
+            "Enterprise rent-a-car",
+            "オリックスレンタカー",
+            "マツダレンタカー",
+            "National",
+            "Enterprise Car Rental",
+            "日産レンタカー"
+        ]
     },
     "amenity/car_sharing": {
         "geometry": [
@@ -518,7 +590,34 @@
             "amenity": "fast_food"
         },
         "terms": [],
-        "name": "Fast Food"
+        "name": "Fast Food",
+        "suggestions": [
+            "McDonald's",
+            "Subway",
+            "Burger King",
+            "KFC",
+            "McDonalds",
+            "Wendy's",
+            "Pizza Hut",
+            "Dairy Queen",
+            "Arby's",
+            "Quick",
+            "マクドナルド",
+            "Jack in the Box",
+            "Culver's",
+            "Domino's Pizza",
+            "Jollibee",
+            "Sonic",
+            "Макдоналдс",
+            "Kentucky Fried Chicken",
+            "Dunkin Donuts",
+            "A&W",
+            "Döner",
+            "Panda Express",
+            "マクドナルド (McDonald's)",
+            "Pizza Pizza",
+            "Domino's"
+        ]
     },
     "amenity/fire_station": {
         "icon": "fire-station",
@@ -572,7 +671,34 @@
         "tags": {
             "amenity": "fuel"
         },
-        "name": "Gas Station"
+        "name": "Gas Station",
+        "suggestions": [
+            "Shell",
+            "Esso",
+            "Agip",
+            "BP",
+            "Лукойл",
+            "Aral",
+            "Q8",
+            "АЗС",
+            "Caltex",
+            "IP",
+            "Petron",
+            "Chevron",
+            "OMV",
+            "ENEOS",
+            "Erg",
+            "Роснефть",
+            "Lukoil",
+            "Mobil",
+            "Statoil",
+            "Avia",
+            "Orlen",
+            "ТНК",
+            "Copec",
+            "REPSOL",
+            "Газпромнефть"
+        ]
     },
     "amenity/grave_yard": {
         "icon": "cemetery",
@@ -710,7 +836,34 @@
             "amenity": "pharmacy"
         },
         "terms": [],
-        "name": "Pharmacy"
+        "name": "Pharmacy",
+        "suggestions": [
+            "Аптека",
+            "Walgreens",
+            "CVS",
+            "Boots",
+            "Farmacia",
+            "Rite Aid",
+            "Pharmacie",
+            "Mercury Drug",
+            "Shoppers Drug Mart",
+            "Walgreen's",
+            "CVS Pharmacy",
+            "Apteka",
+            "Lloyds Pharmacy",
+            "Löwen-Apotheke",
+            "Apotheke",
+            "Marien-Apotheke",
+            "Adler-Apotheke",
+            "Adler Apotheke",
+            "Sonnen-Apotheke",
+            "Аптечный пункт",
+            "Farmatodo",
+            "Farmacias SalcoBrand",
+            "CVS/pharmacy",
+            "Stadt-Apotheke",
+            "Pharmacy"
+        ]
     },
     "amenity/place_of_worship": {
         "icon": "place-of-worship",
@@ -1044,7 +1197,34 @@
         "tags": {
             "amenity": "restaurant"
         },
-        "name": "Restaurant"
+        "name": "Restaurant",
+        "suggestions": [
+            "Pizza Hut",
+            "Subway",
+            "Denny's",
+            "Applebee's",
+            "Pizzeria",
+            "Chili's",
+            "IHOP",
+            "Pizza Express",
+            "Olive Garden",
+            "Red Lobster",
+            "Zur Linde",
+            "Buffalo Grill",
+            "McDonald's",
+            "KFC",
+            "Waffle House",
+            "Outback Steakhouse",
+            "Panera Bread",
+            "Krone",
+            "Red Robin",
+            "Nando's",
+            "Cracker Barrel",
+            "Adler",
+            "ガスト",
+            "Buffalo Wild Wings",
+            "Ratskeller"
+        ]
     },
     "amenity/school": {
         "icon": "school",
@@ -3784,7 +3964,34 @@
         "terms": [
             "alcohol"
         ],
-        "name": "Liquor Store"
+        "name": "Liquor Store",
+        "suggestions": [
+            "Gall & Gall",
+            "LCBO",
+            "Systembolaget",
+            "Alko",
+            "Nicolas",
+            "Botilleria",
+            "SAQ",
+            "Живое пиво",
+            "BWS",
+            "Bargain Booze",
+            "Ароматный мир",
+            "Красное & Белое",
+            "Liquorland",
+            "Норман",
+            "Красное и белое",
+            "Mitra",
+            "Getränkemarkt",
+            "Dan Murphy's",
+            "Vinmonopolet",
+            "Разливное пиво",
+            "BC Liquor Store",
+            "Красное&Белое",
+            "Liquor Store",
+            "Majestic Wine Warehouse",
+            "Liquor City"
+        ]
     },
     "shop/bakery": {
         "icon": "shop",
@@ -3801,7 +4008,34 @@
         "tags": {
             "shop": "bakery"
         },
-        "name": "Bakery"
+        "name": "Bakery",
+        "suggestions": [
+            "Greggs",
+            "Kamps",
+            "Boulangerie",
+            "Bäckerei",
+            "Steinecke",
+            "Hofpfisterei",
+            "Der Beck",
+            "Backwerk",
+            "Müller",
+            "Panaderia",
+            "Хлеб",
+            "Ihle",
+            "Boulangerie Patisserie",
+            "Paul",
+            "Bakery",
+            "Panadería",
+            "Anker",
+            "Bäcker",
+            "Panificio",
+            "Dat Backhus",
+            "Stadtbäckerei",
+            "Oebel",
+            "K&U",
+            "Bäckerei Schmidt",
+            "Stadtbäckerei Junge"
+        ]
     },
     "shop/beauty": {
         "icon": "shop",
@@ -3824,7 +4058,21 @@
         "tags": {
             "shop": "beauty"
         },
-        "name": "Beauty Shop"
+        "name": "Beauty Shop",
+        "suggestions": [
+            "Douglas",
+            "Yves Rocher",
+            "Sally Beauty Supply",
+            "Салон красоты",
+            "Nagelstudio",
+            "Sephora",
+            "Nails",
+            "Marionnaud",
+            "Sunpoint",
+            "Nocibé",
+            "Point Soleil",
+            "Hollywood Nails"
+        ]
     },
     "shop/beverages": {
         "icon": "shop",
@@ -3858,7 +4106,27 @@
         "tags": {
             "shop": "bicycle"
         },
-        "name": "Bicycle Shop"
+        "name": "Bicycle Shop",
+        "suggestions": [
+            "Halfords",
+            "Evans Cycles",
+            "サイクルベースあさひ",
+            "Giant",
+            "Decathlon",
+            "Radhaus",
+            "Fahrradladen",
+            "Performance Bicycle",
+            "Little John Bikes",
+            "Drahtesel",
+            "Culture Vélo",
+            "Bike Shop",
+            "Cycle King",
+            "Stadler",
+            "Cycle Surgery",
+            "B.O.C.",
+            "Intersport",
+            "Der Fahrradladen"
+        ]
     },
     "shop/books": {
         "icon": "shop",
@@ -3875,7 +4143,34 @@
         "tags": {
             "shop": "books"
         },
-        "name": "Bookstore"
+        "name": "Bookstore",
+        "suggestions": [
+            "Barnes & Noble",
+            "Книги",
+            "Waterstones",
+            "Barnes and Noble",
+            "Weltbild",
+            "Libro",
+            "Bruna",
+            "WHSmith",
+            "Буква",
+            "Empik",
+            "Chapters",
+            "Maison de la Presse",
+            "Книгомир",
+            "ブックオフ",
+            "Дом книги",
+            "Edicola",
+            "Книжный магазин",
+            "Standaard Boekhandel",
+            "National Bookstore",
+            "Borders",
+            "Буквоед",
+            "WH Smith",
+            "Waterstone's",
+            "Hugendubel",
+            "Księgarnia"
+        ]
     },
     "shop/boutique": {
         "icon": "shop",
@@ -3925,7 +4220,34 @@
         "tags": {
             "shop": "car"
         },
-        "name": "Car Dealership"
+        "name": "Car Dealership",
+        "suggestions": [
+            "Renault",
+            "Автозапчасти",
+            "Peugeot",
+            "Ford",
+            "Шиномонтаж",
+            "Nissan",
+            "Opel",
+            "Hyundai",
+            "BMW",
+            "Volkswagen",
+            "Honda",
+            "Citroen",
+            "Citroën",
+            "Audi",
+            "Mazda",
+            "Skoda",
+            "Mercedes-Benz",
+            "Fiat",
+            "Volvo",
+            "Chevrolet",
+            "Mercedes",
+            "Suzuki",
+            "Mitsubishi",
+            "VW",
+            "Автомагазин"
+        ]
     },
     "shop/car_parts": {
         "icon": "shop",
@@ -3942,7 +4264,30 @@
         "tags": {
             "shop": "car_parts"
         },
-        "name": "Car Parts Store"
+        "name": "Car Parts Store",
+        "suggestions": [
+            "Автозапчасти",
+            "Advance Auto Parts",
+            "O'Reilly Auto Parts",
+            "Halfords",
+            "AutoZone",
+            "Autozone",
+            "Napa Auto Parts",
+            "NAPA Auto Parts",
+            "Auto Zone",
+            "Автомагазин",
+            "Автомаг",
+            "Exist.ru",
+            "Вираж",
+            "Автомир",
+            "オートバックス",
+            "Forstinger",
+            "Norauto",
+            "автозапчасти",
+            "Автомаркет",
+            "Exist",
+            "Pep Boys"
+        ]
     },
     "shop/car_repair": {
         "icon": "shop",
@@ -3959,7 +4304,34 @@
         "tags": {
             "shop": "car_repair"
         },
-        "name": "Car Repair Shop"
+        "name": "Car Repair Shop",
+        "suggestions": [
+            "Шиномонтаж",
+            "СТО",
+            "Автосервис",
+            "Jiffy Lube",
+            "Автозапчасти",
+            "Midas",
+            "Renault",
+            "Norauto",
+            "Feu Vert",
+            "Speedy",
+            "Carglass",
+            "Peugeot",
+            "Euromaster",
+            "Firestone",
+            "Kwik Fit",
+            "O'Reilly Auto Parts",
+            "Pit Stop",
+            "Garage",
+            "Roady",
+            "AutoZone",
+            "шиномонтаж",
+            "Kwik-Fit",
+            "Citroën",
+            "Pit-Stop",
+            "Auto Zone"
+        ]
     },
     "shop/chemist": {
         "icon": "shop",
@@ -3976,7 +4348,34 @@
         "tags": {
             "shop": "chemist"
         },
-        "name": "Chemist"
+        "name": "Chemist",
+        "suggestions": [
+            "Rossmann",
+            "Etos",
+            "dm",
+            "DM",
+            "Schlecker",
+            "Müller",
+            "Bipa",
+            "Kruidvat",
+            "BIPA",
+            "Boots",
+            "Ihr Platz",
+            "dm-drogerie markt",
+            "Superdrug",
+            "Douglas",
+            "dm Drogeriemarkt",
+            "Farmacity",
+            "DM Drogeriemarkt",
+            "Бытовая химия",
+            "Budnikowsky",
+            "Улыбка радуги",
+            "dm drogerie markt",
+            "Впрок",
+            "Walgreens",
+            "ШиК",
+            "101 Drogerie"
+        ]
     },
     "shop/clothes": {
         "icon": "shop",
@@ -3993,7 +4392,34 @@
         "tags": {
             "shop": "clothes"
         },
-        "name": "Clothing Store"
+        "name": "Clothing Store",
+        "suggestions": [
+            "H&M",
+            "C&A",
+            "NKD",
+            "Kik",
+            "kik",
+            "KiK",
+            "KIK",
+            "Esprit",
+            "Zara",
+            "New Yorker",
+            "Next",
+            "Old Navy",
+            "Bonita",
+            "Kiabi",
+            "Pep",
+            "Ernsting's family",
+            "Vögele",
+            "Woolworths",
+            "Mango",
+            "Edgars",
+            "New Look",
+            "Zeeman",
+            "Kohl's",
+            "Benetton",
+            "Ackermans"
+        ]
     },
     "shop/computer": {
         "icon": "shop",
@@ -4010,7 +4436,34 @@
         "tags": {
             "shop": "computer"
         },
-        "name": "Computer Store"
+        "name": "Computer Store",
+        "suggestions": [
+            "DNS",
+            "PC World",
+            "ДНС",
+            "Apple Store",
+            "Позитроника",
+            "Компьютерный мир",
+            "Apple",
+            "Cartridge World",
+            "Komputronik",
+            "Юлмарт",
+            "Vobis",
+            "Game",
+            "Компьютеры",
+            "PC Spezialist",
+            "Internet",
+            "Формоза",
+            "Atelco",
+            "PC-Spezialist",
+            "Matrix",
+            "Трилайн",
+            "Кей",
+            "MyCom",
+            "Incredible Connection",
+            "Gravis",
+            "Dixons"
+        ]
     },
     "shop/confectionery": {
         "icon": "shop",
@@ -4044,7 +4497,34 @@
         "tags": {
             "shop": "convenience"
         },
-        "name": "Convenience Store"
+        "name": "Convenience Store",
+        "suggestions": [
+            "Продукты",
+            "7-Eleven",
+            "セブン-イレブン (Seven-Eleven)",
+            "セブンイレブン",
+            "7-11",
+            "Spar",
+            "ファミリーマート",
+            "ローソン",
+            "Магазин",
+            "Магнит",
+            "ローソン (LAWSON)",
+            "Żabka",
+            "Oxxo",
+            "ファミリーマート (FamilyMart)",
+            "サンクス",
+            "Londis",
+            "7 Eleven",
+            "サークルK",
+            "FamilyMart",
+            "Пятёрочка",
+            "Costcutter",
+            "Circle K",
+            "Stewart's",
+            "Coop",
+            "LAWSON"
+        ]
     },
     "shop/deli": {
         "icon": "restaurant",
@@ -4078,7 +4558,34 @@
         "tags": {
             "shop": "department_store"
         },
-        "name": "Department Store"
+        "name": "Department Store",
+        "suggestions": [
+            "Walmart",
+            "Sears",
+            "Kmart",
+            "Kohl's",
+            "Wal-Mart",
+            "Macy's",
+            "Costco",
+            "Woolworth",
+            "Walmart Supercenter",
+            "Debenhams",
+            "Karstadt",
+            "Marks & Spencer",
+            "Универмаг",
+            "Galeria Kaufhof",
+            "Big W",
+            "Argos",
+            "JCPenney",
+            "K-Mart",
+            "Sam's Club",
+            "Big Lots",
+            "Blokker",
+            "Marks and Spencer",
+            "BHS",
+            "Myer",
+            "Falabella"
+        ]
     },
     "shop/doityourself": {
         "icon": "shop",
@@ -4095,7 +4602,34 @@
         "tags": {
             "shop": "doityourself"
         },
-        "name": "DIY Store"
+        "name": "DIY Store",
+        "suggestions": [
+            "Lowes",
+            "Home Depot",
+            "OBI",
+            "Lowe's",
+            "Homebase",
+            "B&Q",
+            "Bricomarché",
+            "Leroy Merlin",
+            "Praktiker",
+            "Bauhaus",
+            "Стройматериалы",
+            "Castorama",
+            "Ace Hardware",
+            "Hornbach",
+            "Wickes",
+            "Hagebaumarkt",
+            "Gamma",
+            "Obi",
+            "Brico",
+            "Baumax",
+            "Mr Bricolage",
+            "Max Bahr",
+            "Bunnings Warehouse",
+            "Lagerhaus",
+            "Weldom"
+        ]
     },
     "shop/dry_cleaning": {
         "icon": "shop",
@@ -4112,7 +4646,24 @@
         "tags": {
             "shop": "dry_cleaning"
         },
-        "name": "Dry Cleaners"
+        "name": "Dry Cleaners",
+        "suggestions": [
+            "ホワイト急便",
+            "Cleaners",
+            "Химчистка",
+            "Диана",
+            "Pressing",
+            "Reinigung",
+            "Johnsons",
+            "クリーニング",
+            "Dry Cleaners",
+            "白洋舎",
+            "Stichweh",
+            "Sauberland",
+            "Sketchley Cleaners",
+            "ポニークリーニング",
+            "5 à Sec"
+        ]
     },
     "shop/electronics": {
         "icon": "shop",
@@ -4129,7 +4680,34 @@
         "tags": {
             "shop": "electronics"
         },
-        "name": "Electronics Store"
+        "name": "Electronics Store",
+        "suggestions": [
+            "Best Buy",
+            "Radio Shack",
+            "Эльдорадо",
+            "Media Markt",
+            "Saturn",
+            "Expert",
+            "Euronics",
+            "Currys",
+            "М.Видео",
+            "Darty",
+            "Future Shop",
+            "Maplin",
+            "Comet",
+            "MediaMarkt",
+            "RadioShack",
+            "Mediamarkt",
+            "ケーズデンキ",
+            "Эксперт",
+            "Boulanger",
+            "ヤマダ電機",
+            "Elgiganten",
+            "Фокстрот",
+            "Техносила",
+            "Vodafone",
+            "Fry's Electronics"
+        ]
     },
     "shop/farm": {
         "icon": "shop",
@@ -4201,7 +4779,34 @@
         "tags": {
             "shop": "furniture"
         },
-        "name": "Furniture Store"
+        "name": "Furniture Store",
+        "suggestions": [
+            "Dänisches Bettenlager",
+            "Мебель",
+            "IKEA",
+            "Jysk",
+            "Conforama",
+            "But",
+            "Roller",
+            "Matratzen Concord",
+            "Kika",
+            "Fly",
+            "Ikea",
+            "Casa",
+            "XXXLutz",
+            "Pier 1 Imports",
+            "Möbelix",
+            "Möbel Boss",
+            "JYSK",
+            "ニトリ",
+            "Dreams",
+            "Ellerines",
+            "Black Red White",
+            "Sotka",
+            "Poco",
+            "Harveys",
+            "Шатура"
+        ]
     },
     "shop/garden_centre": {
         "icon": "shop",
@@ -4221,7 +4826,34 @@
         "tags": {
             "shop": "garden_centre"
         },
-        "name": "Garden Center"
+        "name": "Garden Center",
+        "suggestions": [
+            "Jardiland",
+            "Gamm Vert",
+            "Dehner",
+            "Botanic",
+            "Point Vert",
+            "Plantagen",
+            "Landi",
+            "Семена",
+            "Intratuin",
+            "Садовод",
+            "Raiffeisen-Markt",
+            "OBI",
+            "Aveve",
+            "Magasin Vert",
+            "Dehner Gartencenter",
+            "Raiffeisen",
+            "Gärtnerei",
+            "Mountfield",
+            "Vivero",
+            "Plantasjen",
+            "Дачник",
+            "Walmart Garden Center",
+            "Gamm vert",
+            "Усадьба",
+            "Villaverde"
+        ]
     },
     "shop/gift": {
         "icon": "shop",
@@ -4255,7 +4887,29 @@
         "tags": {
             "shop": "greengrocer"
         },
-        "name": "Greengrocer"
+        "name": "Greengrocer",
+        "suggestions": [
+            "Овощи-фрукты",
+            "Verduleria",
+            "لا اسماء مسجلة",
+            "Фрукты-овощи",
+            "Овощи и фрукты",
+            "Hofladen",
+            "Овощи",
+            "Zöldséges",
+            "Frutas y Verduras",
+            "Obst & Gemüse",
+            "Овощи, фрукты",
+            "Grand Frais",
+            "Фрукты и овощи",
+            "Фрукты",
+            "Овощи фрукты",
+            "Warzywniak",
+            "Frutta e Verdura",
+            "Fruteria",
+            "Фрукты-Овощи",
+            "Продукты"
+        ]
     },
     "shop/hairdresser": {
         "icon": "shop",
@@ -4289,7 +4943,34 @@
         "tags": {
             "shop": "hardware"
         },
-        "name": "Hardware Store"
+        "name": "Hardware Store",
+        "suggestions": [
+            "Хозтовары",
+            "Ace Hardware",
+            "Home Depot",
+            "1000 мелочей",
+            "Стройматериалы",
+            "Lowe's",
+            "Home Hardware",
+            "Метизы",
+            "Сантехника",
+            "Товары для дома",
+            "Промтовары",
+            "Ferreteria",
+            "Домовой",
+            "Всё для дома",
+            "Lowes",
+            "Ferretería",
+            "Хозяйственный",
+            "Электротовары",
+            "Все для дома",
+            "Мастер",
+            "Leroy Merlin",
+            "Уют",
+            "Wilkinson",
+            "Iloilo avenue hardware",
+            "Хозяюшка"
+        ]
     },
     "shop/hifi": {
         "icon": "shop",
@@ -4306,7 +4987,34 @@
         "tags": {
             "shop": "hifi"
         },
-        "name": "Hifi Store"
+        "name": "Hifi Store",
+        "suggestions": [
+            "Best Buy",
+            "Media Markt",
+            "Expert",
+            "Darty",
+            "Radio Shack",
+            "Bang & Olufsen",
+            "Saturn",
+            "Euronics",
+            "Эльдорадо",
+            "Евросеть",
+            "Boulanger",
+            "Связной",
+            "Mediamarkt",
+            "Richer Sounds",
+            "Currys",
+            "MediaMarkt",
+            "Эксперт",
+            "Позитроника",
+            "Gitem",
+            "Staples",
+            "MediMax",
+            "Elgiganten",
+            "DNS",
+            "Comet",
+            "RadioShack"
+        ]
     },
     "shop/jewelry": {
         "icon": "shop",
@@ -4323,7 +5031,34 @@
         "tags": {
             "shop": "jewelry"
         },
-        "name": "Jeweler"
+        "name": "Jeweler",
+        "suggestions": [
+            "Swarovski",
+            "Christ",
+            "Bijou Brigitte",
+            "585",
+            "Pandora",
+            "Claire's",
+            "Алмаз",
+            "Адамас",
+            "Яшма Золото",
+            "Kay Jewelers",
+            "H Samuel",
+            "Рубин",
+            "Изумруд",
+            "ND",
+            "Ювелирный",
+            "Julien d'Orcel",
+            "Золото",
+            "Cartier",
+            "Romero - Exchange, Pawn, Western Union",
+            "H. Samuel",
+            "Guldfynd",
+            "Ernest Jones",
+            "Кристалл",
+            "Карат",
+            "American Swiss"
+        ]
     },
     "shop/kiosk": {
         "icon": "shop",
@@ -4340,7 +5075,34 @@
         "tags": {
             "shop": "kiosk"
         },
-        "name": "Kiosk"
+        "name": "Kiosk",
+        "suggestions": [
+            "Kiosk",
+            "R-Kioski",
+            "Продукты",
+            "Роспечать",
+            "Kios",
+            "მარკეტი (Market)",
+            "R-kioski",
+            "Киоск",
+            "Kiosco",
+            "Narvesen",
+            "Shell",
+            "Союзпечать",
+            "Pressbyrån",
+            "Ruch",
+            "Мороженое",
+            "Aral",
+            "Kiosko",
+            "Edicola",
+            "Esso",
+            "Warung",
+            "Lietuvos spauda",
+            "Белсоюзпечать",
+            "iNovine",
+            "Maison de la Presse",
+            "Lotto"
+        ]
     },
     "shop/laundry": {
         "icon": "shop",
@@ -4357,7 +5119,25 @@
         "tags": {
             "shop": "laundry"
         },
-        "name": "Laundry"
+        "name": "Laundry",
+        "suggestions": [
+            "Laverie",
+            "Laundromat",
+            "Laundry",
+            "Lavanderia",
+            "Coin Laundry",
+            "Laundrette",
+            "Launderette",
+            "Прачечная",
+            "Eco-Express",
+            "Lavomatique",
+            "Pressing",
+            "Laverap",
+            "Waschsalon",
+            "コインランドリー",
+            "SB-Waschsalon",
+            "Laverie Libre Service"
+        ]
     },
     "shop/locksmith": {
         "icon": "shop",
@@ -4411,7 +5191,34 @@
         "tags": {
             "shop": "mobile_phone"
         },
-        "name": "Mobile Phone Store"
+        "name": "Mobile Phone Store",
+        "suggestions": [
+            "Евросеть",
+            "Связной",
+            "МТС",
+            "Vodafone",
+            "ソフトバンクショップ (SoftBank shop)",
+            "Мегафон",
+            "Orange",
+            "O2",
+            "Билайн",
+            "Carphone Warehouse",
+            "Verizon Wireless",
+            "Sprint",
+            "Bitė",
+            "SFR",
+            "au",
+            "Movistar",
+            "auショップ (au shop)",
+            "Verizon",
+            "Rogers",
+            "Claro",
+            "3 Store",
+            "vodafone",
+            "SoftBank",
+            "EE",
+            "Wind"
+        ]
     },
     "shop/motorcycle": {
         "icon": "shop",
@@ -4445,7 +5252,12 @@
         "tags": {
             "shop": "music"
         },
-        "name": "Music Store"
+        "name": "Music Store",
+        "suggestions": [
+            "HMV",
+            "Guitar Center",
+            "Free Record Shop"
+        ]
     },
     "shop/newsagent": {
         "icon": "shop",
@@ -4513,7 +5325,33 @@
         "tags": {
             "shop": "pet"
         },
-        "name": "Pet Store"
+        "name": "Pet Store",
+        "suggestions": [
+            "Fressnapf",
+            "PetSmart",
+            "Зоомагазин",
+            "Petco",
+            "Das Futterhaus",
+            "Petsmart",
+            "Pets at Home",
+            "Pet Valu",
+            "Зоотовары",
+            "Бетховен",
+            "Pets At Home",
+            "Pet Smart",
+            "Maxi Zoo",
+            "Global Pet Foods",
+            "Четыре лапы",
+            "Futterhaus",
+            "Freßnapf",
+            "Природа",
+            "Petland",
+            "Zoo & Co.",
+            "Зоомир",
+            "PetCo",
+            "Любимчик",
+            "Arken Zoo"
+        ]
     },
     "shop/shoes": {
         "icon": "shop",
@@ -4547,7 +5385,34 @@
         "tags": {
             "shop": "sports"
         },
-        "name": "Sporting Goods Store"
+        "name": "Sporting Goods Store",
+        "suggestions": [
+            "Intersport",
+            "Decathlon",
+            "Sport 2000",
+            "Спортмастер",
+            "Décathlon",
+            "Sports Authority",
+            "Dick's Sporting Goods",
+            "Sports Direct",
+            "Adidas",
+            "Спорттовары",
+            "Go Sport",
+            "Hervis",
+            "JJB Sports",
+            "Big 5 Sporting Goods",
+            "Stadium",
+            "InterSport",
+            "Big 5",
+            "Спортландия",
+            "Nike",
+            "Running Room",
+            "Play It Again Sports",
+            "Sports Experts",
+            "Inter Sport",
+            "JD Sports",
+            "Sports World"
+        ]
     },
     "shop/stationery": {
         "icon": "shop",
@@ -4605,7 +5470,34 @@
         "tags": {
             "shop": "supermarket"
         },
-        "name": "Supermarket"
+        "name": "Supermarket",
+        "suggestions": [
+            "Lidl",
+            "Aldi",
+            "Netto",
+            "Spar",
+            "Penny",
+            "Edeka",
+            "Магнит",
+            "REWE",
+            "Billa",
+            "Biedronka",
+            "Rewe",
+            "Coop",
+            "Intermarché",
+            "Norma",
+            "ALDI",
+            "Пятёрочка",
+            "Kaufland",
+            "Carrefour",
+            "LIDL",
+            "Mercadona",
+            "Carrefour Market",
+            "Supermarket",
+            "Dia",
+            "Дикси",
+            "Co-op"
+        ]
     },
     "shop/toys": {
         "icon": "shop",
@@ -4622,7 +5514,34 @@
         "tags": {
             "shop": "toys"
         },
-        "name": "Toy Store"
+        "name": "Toy Store",
+        "suggestions": [
+            "Детский мир",
+            "La Grande Récré",
+            "Intertoys",
+            "Игрушки",
+            "King Jouet",
+            "Bart Smit",
+            "Dráčik",
+            "Rofu Kinderland",
+            "GameStop",
+            "JouéClub",
+            "Dreamland",
+            "Joué Club",
+            "Дети",
+            "Games Workshop",
+            "Game Stop",
+            "Кораблик",
+            "Jumbo",
+            "Early Learning Centre",
+            "Детский Мир",
+            "Spiele Max",
+            "Fun",
+            "Здоровый малыш",
+            "ROFU Kinderland",
+            "Daiso",
+            "Малыш"
+        ]
     },
     "shop/travel_agency": {
         "icon": "shop",
@@ -4707,7 +5626,31 @@
         "tags": {
             "shop": "video"
         },
-        "name": "Video Store"
+        "name": "Video Store",
+        "suggestions": [
+            "Blockbuster",
+            "World of Video",
+            "Video World",
+            "Blockbuster Video",
+            "Family Video",
+            "Videothek",
+            "Makuuni",
+            "Mr Video",
+            "Videoland",
+            "GEO",
+            "Filmtown",
+            "ゲオ",
+            "Cinebank",
+            "Blockbusters",
+            "Video Ezy",
+            "Vidéo Futur",
+            "Hollywood Video",
+            "Hemmakväll",
+            "empire",
+            "Videorama",
+            "Xtravision",
+            "Movie Vision"
+        ]
     },
     "tourism": {
         "fields": [

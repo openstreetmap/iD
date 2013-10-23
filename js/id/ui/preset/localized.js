@@ -18,6 +18,8 @@ iD.ui.preset.localized = function(field, context) {
             .on('blur', change)
             .on('change', change);
 
+        input.call(d3.combobox().fetcher(suggestNames));
+
         var translateButton = selection.selectAll('.localized-add')
             .data([0]);
 
@@ -89,16 +91,36 @@ iD.ui.preset.localized = function(field, context) {
         event.change(t);
     }
 
-    function fetcher(value, cb) {
-        var v = value.toLowerCase();
+    function suggestNames(value, callback) {
+        var suggestions = [];
+        if (value && value.length > 2) {
+            var selected = context.selectedIDs(),
+                entity = context.entity(selected),
+                tags = entity.tags;
+            for (var tag in tags) {
+                var kv = tag + '/' + tags[tag],
+                    preset = iD.data.presets.presets[kv];
+                if (preset && preset.suggestions) {
+                    for (var i = 0; i < preset.suggestions.length; i++) {
+                        var sugg = preset.suggestions[i],
+                            dist = iD.util.editDistance(value, sugg.substring(0, value.length));
+                        if (dist < 4) {
+                            suggestions.push({
+                                title: sugg,
+                                value: sugg,
+                                dist: dist
+                            });
+                        }
+                    }
+                }
+            }
+            suggestions.sort(function(a, b) {
+                return a.dist - b.dist;
+            });
+        }
 
-        cb(iD.data.wikipedia.filter(function(d) {
-            return d[0].toLowerCase().indexOf(v) >= 0 ||
-            d[1].toLowerCase().indexOf(v) >= 0 ||
-            d[2].toLowerCase().indexOf(v) >= 0;
-        }).map(function(d) {
-            return { value: d[1] };
-        }));
+        suggestions = suggestions.slice(0,3);
+        callback(suggestions);
     }
 
     function render(selection, data) {
