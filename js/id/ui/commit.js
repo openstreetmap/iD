@@ -1,31 +1,26 @@
 iD.ui.Commit = function(context) {
-    var event = d3.dispatch('cancel', 'save', 'fix'),
+    var event = d3.dispatch('cancel', 'save'),
         presets = context.presets();
 
-    function zipSame(d) {
-        var c = {}, n = -1;
-        for (var i = 0; i < d.length; i++) {
-            var desc = {
-                name: d[i].tags.name || presets.match(d[i], context.graph()).name(),
-                geometry: d[i].geometry(context.graph()),
-                count: 1,
-                tagText: iD.util.tagText(d[i])
-            };
+    function commit(selection) {
+        var changes = context.history().changes(),
+            base = context.history().base(),
+            relevantChanges = iD.util.relevantChanges(
+                context.graph(),
+                changes,
+                base
+            );
 
-            var fingerprint = desc.name + desc.tagText;
-            if (c[fingerprint]) {
-                c[fingerprint].count++;
-            } else {
-                c[fingerprint] = desc;
+        function zoomToEntity(change) {
+            var entity = change.entity;
+            if (change.changeType !== 'deleted' &&
+                context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
+                context.map().zoomTo(entity);
+                context.surface().selectAll(
+                    iD.util.entityOrMemberSelector([entity.id], context.graph()))
+                    .classed('hover', true);
             }
         }
-        return _.values(c);
-    }
-
-    function commit(selection) {
-        var changes = context.history().changes();
-
-        function changesLength(d) { return changes[d].length; }
 
         var header = selection.append('div')
             .attr('class', 'header fillL');
@@ -90,7 +85,7 @@ iD.ui.Commit = function(context) {
 
         // Confirm Button
         var saveButton = saveSection.append('button')
-            .attr('class', 'action col3 button')
+            .attr('class', 'action col4 button')
             .on('click.save', function() {
                 event.save({
                     comment: commentField.node().value
@@ -101,11 +96,13 @@ iD.ui.Commit = function(context) {
             .attr('class', 'label')
             .text(t('commit.save'));
 
+        // Warnings
         var warnings = body.selectAll('div.warning-section')
-            .data(iD.validate(changes, context.graph()))
+            .data([iD.validate(changes, context.graph())])
             .enter()
             .append('div')
-            .attr('class', 'modal-section warning-section fillL2');
+            .attr('class', 'modal-section warning-section fillL2')
+            .style('display', function(d) { return _.isEmpty(d) ? 'none' : null; });
 
         warnings.append('h3')
             .text(t('commit.warnings'));
@@ -115,52 +112,95 @@ iD.ui.Commit = function(context) {
             .selectAll('li')
             .data(function(d) { return d; })
             .enter()
-            .append('li');
+            .append('li')
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
+            .on('click', warningClick);
 
-        // only show the fix icon when an entity is given
-        warningLi.filter(function(d) { return d.entity; })
-            .append('button')
-            .attr('class', 'minor')
-            .on('click', event.fix)
-            .append('span')
-            .attr('class', 'icon warning');
+        warningLi.append('span')
+            .attr('class', 'alert icon icon-pre-text');
 
         warningLi.append('strong').text(function(d) {
             return d.message;
         });
 
-        var section = body.selectAll('div.commit-section')
-            .data(['modified', 'deleted', 'created'].filter(changesLength))
+        var changeSection = body.selectAll('div.commit-section')
+            .data([0])
             .enter()
             .append('div')
             .attr('class', 'commit-section modal-section fillL2');
 
-        section.append('h3')
-            .text(function(d) { return t('commit.' + d); })
-            .append('small')
-            .attr('class', 'count')
-            .text(changesLength);
+        changeSection.append('h3')
+            .text(relevantChanges.length + ' Changes');
 
-        var li = section.append('ul')
+        var li = changeSection.append('ul')
             .attr('class', 'changeset-list')
             .selectAll('li')
-            .data(function(d) { return zipSame(changes[d]); })
+            .data(function(d) {
+                return relevantChanges;
+            })
             .enter()
-            .append('li');
+            .append('li')
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
+            .on('click', zoomToEntity);
 
-        li.append('strong')
-            .text(function(d) {
-                return d.geometry + ' ';
+        li.append('span')
+            .attr('class', function(d) {
+                var graph = d.changeType === 'deleted' ? base : context.graph();
+                return graph.entity(d.entity.id).geometry(graph) + ' ' + d.changeType +
+                ' icon icon-pre-text';
             });
 
         li.append('span')
-            .text(function(d) { return d.name; })
-            .attr('title', function(d) { return d.tagText; });
+            .attr('class', 'change-type')
+            .text(function(d) {
+                return d.changeType + ' ';
+            });
 
-        li.filter(function(d) { return d.count > 1; })
-            .append('span')
-            .attr('class', 'count')
-            .text(function(d) { return d.count; });
+        li.append('strong')
+            .attr('class', 'entity-type')
+            .text(function(d) {
+                var graph = d.changeType === 'deleted' ? base : context.graph();
+                return context.presets().match(d.entity, graph).name();
+            });
+
+        li.append('span')
+            .attr('class', 'entity-name')
+            .text(function(d) {
+                var name = iD.util.displayName(d.entity) || '',
+                    string = '';
+                if (name !== '') string += ':';
+                return string += ' ' + name;
+            });
+
+        li.style('opacity', 0)
+            .transition()
+            .style('opacity', 1);
+
+        li.style('opacity', 0)
+            .transition()
+            .style('opacity', 1);
+
+        function mouseover(d) {
+            if (d.entity) {
+                context.surface().selectAll(
+                    iD.util.entityOrMemberSelector([d.entity.id], context.graph())
+                ).classed('hover', true);
+            }
+        }
+
+        function mouseout() {
+            context.surface().selectAll('.hover')
+                .classed('hover', false);
+        }
+
+        function warningClick(d) {
+            if (d.entity) {
+                context.map().zoomTo(d.entity);
+                context.enter(iD.modes.Select(context, [d.entity.id]));
+            }
+        }
     }
 
     return d3.rebind(commit, event, 'on');

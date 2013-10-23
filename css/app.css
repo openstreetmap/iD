@@ -261,7 +261,7 @@ ul li { list-style: none;}
     border-radius: 0 0 3px 3px;
 }
 
-.toggle-list label > span { 
+.toggle-list label > span {
     display: block;
     overflow: hidden;
     white-space: nowrap;
@@ -568,6 +568,18 @@ button[disabled] .icon.geocode    { background-position: -280px -40px;}
 button[disabled] .icon.layers     { background-position: -300px -40px;}
 button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
+
+.icon.point.deleted  { background-position: -302px -80px;}
+.icon.line.deleted   { background-position: -320px -80px;}
+.icon.area.deleted   { background-position: -340px -80px;}
+
+.icon.point.created  { background-position: -302px -100px;}
+.icon.line.created   { background-position: -320px -100px;}
+.icon.area.created   { background-position: -340px -100px;}
+
+.icon.point.modified  { background-position: -24px 0; }
+
+.icon.modified { opacity: .5; }
 
 /* Out link is special */
 
@@ -2418,6 +2430,8 @@ img.wiki-image {
     float: none;
     margin: auto;
     display: block;
+    color: white;
+    font-size: 14px;
 }
 
 .mode-save .user-info img {
@@ -2438,12 +2452,15 @@ img.wiki-image {
     color:#fff;
 }
 
+.mode-save .commit-info {
+    margin-bottom: 10px;
+}
+
 .mode-save .changeset-list {
     overflow: auto;
     border:1px solid #ccc;
     border-radius: 4px;
     background:#fff;
-    max-height: 160px;
 }
 
 .mode-save .warning-section .changeset-list button {
@@ -2454,11 +2471,24 @@ img.wiki-image {
     position: relative;
     border-top:1px solid #ccc;
     padding:5px 10px;
+    cursor: pointer;
+}
+
+.mode-save .changeset-list li:hover {
+    background-color: #ececec;
+}
+
+.mode-save .changeset-list .alert {
+    opacity: 0.5;
 }
 
 .changeset-list li span.count {
     font-size:10px;
     color:#555;
+}
+
+.mode-save .commit-section .changeset-list button {
+    border-left: 1px solid #CCC;
 }
 
 .changeset-list li span.count:before { content: '('; }
@@ -2698,7 +2728,7 @@ img.wiki-image {
 }
 /* Move over tooltips that are near the edge of screen */
 .add-point .tooltip {
-    left: 33.3333% !important; 
+    left: 33.3333% !important;
 }
 
 .curtain-tooltip.intro-points-add .tooltip-arrow,
