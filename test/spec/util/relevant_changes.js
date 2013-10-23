@@ -1,6 +1,6 @@
 describe("iD.util.relevantChanges", function() {
     var base = iD.Graph({
-        'a': iD.Node({id: 'a', loc: [0, 0]}),
+        'a': iD.Node({id: 'a', loc: [0, 0], tags: {crossing: 'zebra'}}),
         'b': iD.Node({id: 'b', loc: [2, 0]}),
         'c': iD.Node({id: 'c', loc: [2, 2]}),
         'd': iD.Node({id: 'd', loc: [0, 2]}),
@@ -84,7 +84,7 @@ describe("iD.util.relevantChanges", function() {
     });
 
     it("reports an existing vertex with added tags as modified", function() {
-        var vertex = iD.Node({id: 'f', tags: {yes: 'it works'}}),
+        var vertex = base.entity('a').mergeTags({highway: 'traffic_signals'}),
             graph = base.replace(vertex),
             changes = { modified: [vertex] },
             a = iD.util.relevantChanges(graph, changes, base);
@@ -92,5 +92,16 @@ describe("iD.util.relevantChanges", function() {
             changeType: 'modified',
             entity: vertex
         }]);
+    });
+
+    it("reports an existing tagged vertex that is moved as modified", function() {
+        var vertex = base.entity('a').move([1, 2]),
+            graph = base.replace(vertex),
+            changes = { modified: [vertex] },
+            a = iD.util.relevantChanges(graph, changes, base);
+        expect(a[1]).to.eql({
+            changeType: 'modified',
+            entity: vertex
+        });
     });
 });

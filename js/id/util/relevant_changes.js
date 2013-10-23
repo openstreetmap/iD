@@ -6,7 +6,7 @@ iD.util.relevantChanges = function(graph, changes, base) {
     function addEntity(entity, changeType) {
         relevant[entity.id] = {
             entity: entity,
-            changeType: changeType,
+            changeType: changeType
         };
     }
 
@@ -21,14 +21,20 @@ iD.util.relevantChanges = function(graph, changes, base) {
 
     _.each(changes, function(entities, change) {
         _.each(entities, function(entity) {
-            var relevantGraph = change === 'deleted' ? base : graph;
-            if (entity.geometry(relevantGraph) === 'vertex') {
-                addParents(entity, relevantGraph);
-                if (change === 'modified' && (entity.tags !== base.entity(entity.id).tags)) {
+            if (entity.geometry(change === 'deleted' ? base : graph) !== 'vertex') {
+                addEntity(entity, change);
+
+            } else if (change === 'modified') {
+                var moved    = entity.loc  !== base.entity(entity.id).loc,
+                    retagged = entity.tags !== base.entity(entity.id).tags;
+
+                if (moved) {
+                    addParents(entity, graph);
+                }
+
+                if (retagged || (moved && entity.hasInterestingTags())) {
                     addEntity(entity, change);
                 }
-            } else {
-                addEntity(entity, change);
             }
         });
     });
