@@ -123,6 +123,18 @@ iD.ui.preset.localized = function(field, context) {
         callback(suggestions);
     }
 
+    function fetcher(value, cb) {
+        var v = value.toLowerCase();
+
+        cb(iD.data.wikipedia.filter(function(d) {
+            return d[0].toLowerCase().indexOf(v) >= 0 ||
+            d[1].toLowerCase().indexOf(v) >= 0 ||
+            d[2].toLowerCase().indexOf(v) >= 0;
+        }).map(function(d) {
+            return { value: d[1] };
+        }));
+    }
+
     function render(selection, data) {
         var wraps = selection.selectAll('div.entry').
             data(data, function(d) { return d.lang; });
