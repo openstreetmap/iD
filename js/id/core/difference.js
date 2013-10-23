@@ -128,6 +128,12 @@ iD.Difference = function(base, head) {
                 if (retagged || (moved && change.head.hasInterestingTags())) {
                     addEntity(change.head, head, 'modified');
                 }
+
+            } else if (change.head && change.head.hasInterestingTags()) { // created vertex
+                addEntity(change.head, head, 'created');
+
+            } else if (change.base && change.base.hasInterestingTags()) { // deleted vertex
+                addEntity(change.base, base, 'deleted');
             }
         });
 

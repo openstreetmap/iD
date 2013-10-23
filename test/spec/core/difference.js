@@ -130,6 +130,7 @@ describe("iD.Difference", function () {
         var base = iD.Graph({
             'a': iD.Node({id: 'a', tags: {crossing: 'zebra'}}),
             'b': iD.Node({id: 'b'}),
+            'v': iD.Node({id: 'v'}),
             '-': iD.Way({id: '-', nodes: ['a', 'b']})
         });
 
@@ -236,7 +237,7 @@ describe("iD.Difference", function () {
             }]);
         });
 
-        it("reports an existing vertex with added tags as modified", function() {
+        it("reports a vertex as modified when it has tags and they are changed", function() {
             var vertex = base.entity('a').mergeTags({highway: 'traffic_signals'}),
                 head = base.replace(vertex),
                 diff = iD.Difference(base, head);
@@ -248,16 +249,49 @@ describe("iD.Difference", function () {
             }]);
         });
 
-        it("reports an existing tagged vertex that is moved as modified", function() {
+        it("reports a vertex as modified when it has tags and is moved", function() {
             var vertex = base.entity('a').move([1, 2]),
                 head = base.replace(vertex),
                 diff = iD.Difference(base, head);
 
-            expect(diff.summary()[1]).to.eql({
+            expect(diff.summary()).to.eql([{
+                changeType: 'modified',
+                entity: head.entity('-'),
+                graph: head
+            }, {
                 changeType: 'modified',
                 entity: vertex,
                 graph: head
-            });
+            }]);
+        });
+
+        it("reports a vertex as deleted when it had tags", function() {
+            var vertex = base.entity('v'),
+                head = base.remove(vertex),
+                diff = iD.Difference(base, head);
+
+            expect(diff.summary()).to.eql([{
+                changeType: 'deleted',
+                entity: vertex,
+                graph: base
+            }]);
+        });
+
+        it("reports a vertex as created when it has tags", function() {
+            var vertex = iD.Node({id: 'c', tags: {crossing: 'zebra'}}),
+                way = base.entity('-').addNode('c'),
+                head = base.replace(way).replace(vertex),
+                diff = iD.Difference(base, head);
+
+            expect(diff.summary()).to.eql([{
+                changeType: 'modified',
+                entity: way,
+                graph: head
+            }, {
+                changeType: 'created',
+                entity: vertex,
+                graph: head
+            }]);
         });
     });
 
