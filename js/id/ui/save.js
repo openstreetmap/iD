@@ -42,13 +42,13 @@ iD.ui.Save = function(context) {
         var numChanges = 0;
 
         context.history().on('change.save', function() {
-            var _ = history.numChanges();
+            var _ = history.difference().summary().length;
             if (_ === numChanges)
                 return;
             numChanges = _;
 
             tooltip.title(iD.ui.tooltipHtml(t(numChanges > 0 ?
-                    'save.help' : 'save.no_changes'), key))
+                    'save.help' : 'save.no_changes'), key));
 
             button
                 .classed('disabled', numChanges === 0)

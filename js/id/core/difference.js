@@ -84,12 +84,60 @@ iD.Difference = function(base, head) {
     };
 
     difference.addParents = function(entities) {
-
         for (var i in entities) {
             addParents(head.parentWays(entities[i]), entities);
             addParents(head.parentRelations(entities[i]), entities);
         }
         return entities;
+    };
+
+    difference.summary = function() {
+        var relevant = {};
+
+        function addEntity(entity, graph, changeType) {
+            relevant[entity.id] = {
+                entity: entity,
+                graph: graph,
+                changeType: changeType
+            };
+        }
+
+        function addParents(entity) {
+            var parents = head.parentWays(entity);
+            for (var j = parents.length - 1; j >= 0; j--) {
+                var parent = parents[j];
+                if (!(parent.id in relevant)) addEntity(parent, head, 'modified');
+            }
+        }
+
+        _.each(changes, function(change) {
+            if (change.head && change.head.geometry(head) !== 'vertex') {
+                addEntity(change.head, head, change.base ? 'modified' : 'created');
+
+            } else if (change.base && change.base.geometry(base) !== 'vertex') {
+                addEntity(change.base, base, 'deleted');
+
+            } else if (change.base && change.head) { // modified vertex
+                var moved    = change.base.loc  !== change.head.loc,
+                    retagged = change.base.tags !== change.head.tags;
+
+                if (moved) {
+                    addParents(change.head);
+                }
+
+                if (retagged || (moved && change.head.hasInterestingTags())) {
+                    addEntity(change.head, head, 'modified');
+                }
+
+            } else if (change.head && change.head.hasInterestingTags()) { // created vertex
+                addEntity(change.head, head, 'created');
+
+            } else if (change.base && change.base.hasInterestingTags()) { // deleted vertex
+                addEntity(change.base, base, 'deleted');
+            }
+        });
+
+        return d3.values(relevant);
     };
 
     difference.complete = function(extent) {

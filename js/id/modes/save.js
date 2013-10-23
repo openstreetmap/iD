@@ -1,16 +1,10 @@
 iD.modes.Save = function(context) {
     var ui = iD.ui.Commit(context)
         .on('cancel', cancel)
-        .on('fix', fix)
         .on('save', save);
 
     function cancel() {
         context.enter(iD.modes.Browse(context));
-    }
-
-    function fix(d) {
-        context.map().zoomTo(d.entity);
-        context.enter(iD.modes.Select(context, [d.entity.id]));
     }
 
     function save(e) {

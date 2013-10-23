@@ -48,5 +48,5 @@ iD.validate = function(changes, graph) {
         }
     }
 
-    return warnings.length ? [warnings] : [];
+    return warnings;
 };
