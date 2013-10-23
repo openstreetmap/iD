@@ -158,10 +158,6 @@ iD.History = function(context) {
             return this.difference().length() > 0;
         },
 
-        numChanges: function() {
-            return this.difference().length();
-        },
-
         imageryUsed: function(sources) {
             if (sources) {
                 imageryUsed = sources;
