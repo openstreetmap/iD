@@ -569,13 +569,15 @@ button[disabled] .icon.layers     { background-position: -300px -40px;}
 button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
 
-.icon.point.deleted  { background-position: -300px -80px;}
+.icon.point.deleted  { background-position: -302px -80px;}
 .icon.line.deleted   { background-position: -320px -80px;}
 .icon.area.deleted   { background-position: -340px -80px;}
 
-.icon.point.created  { background-position: -300px -100px;}
+.icon.point.created  { background-position: -302px -100px;}
 .icon.line.created   { background-position: -320px -100px;}
 .icon.area.created   { background-position: -340px -100px;}
+
+.icon.point.modified  { background-position: -24px 0; }
 
 .icon.modified { opacity: .5; }
 
