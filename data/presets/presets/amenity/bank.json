@@ -36,5 +36,28 @@
     "tags": {
         "amenity": "bank"
     },
-    "name": "Bank"
+    "name": "Bank",
+    "suggestions" : [
+        "Sparkasse",
+        "Сбербанк",
+        "Volksbank",
+        "Raiffeisenbank",
+        "Santander",
+        "Crédit Agricole",
+        "HSBC",
+        "Bank of America",
+        "Barclays",
+        "Deutsche Bank",
+        "Commerzbank",
+        "Wells Fargo",
+        "Rabobank",
+        "Société Générale",
+        "Crédit Mutuel",
+        "BBVA",
+        "BNP Paribas",
+        "Kreissparkasse",
+        "HypoVereinsbank",
+        "La Caixa",
+        "LCL"
+    ]
 }

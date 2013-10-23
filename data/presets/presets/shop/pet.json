@@ -13,5 +13,31 @@
     "tags": {
         "shop": "pet"
     },
-    "name": "Pet Store"
+    "name": "Pet Store",
+    "suggestions": [
+        "Fressnapf",
+        "PetSmart",
+        "Зоомагазин",
+        "Petco",
+        "Das Futterhaus",
+        "Petsmart",
+        "Pets at Home",
+        "Pet Valu",
+        "Зоотовары",
+        "Бетховен",
+        "Pets At Home",
+        "Pet Smart",
+        "Maxi Zoo",
+        "Global Pet Foods",
+        "Четыре лапы",
+        "Futterhaus",
+        "Freßnapf",
+        "Природа",
+        "Petland",
+        "Zoo & Co.",
+        "Зоомир",
+        "PetCo",
+        "Любимчик",
+        "Arken Zoo"
+    ]
 }

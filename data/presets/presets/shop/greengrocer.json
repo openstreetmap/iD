@@ -13,5 +13,27 @@
     "tags": {
         "shop": "greengrocer"
     },
-    "name": "Greengrocer"
+    "name": "Greengrocer",
+    "suggestions": [
+        "Овощи-фрукты",
+        "Verduleria",
+        "لا اسماء مسجلة",
+        "Фрукты-овощи",
+        "Овощи и фрукты",
+        "Hofladen",
+        "Овощи",
+        "Zöldséges",
+        "Frutas y Verduras",
+        "Obst & Gemüse",
+        "Овощи, фрукты",
+        "Grand Frais",
+        "Фрукты и овощи",
+        "Фрукты",
+        "Овощи фрукты",
+        "Warzywniak",
+        "Frutta e Verdura",
+        "Fruteria",
+        "Фрукты-Овощи",
+        "Продукты"
+    ]
 }

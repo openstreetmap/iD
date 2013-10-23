@@ -37,5 +37,32 @@
     "tags": {
         "shop": "supermarket"
     },
-    "name": "Supermarket"
+    "name": "Supermarket",
+    "suggestions": [
+        "Lidl",
+        "Aldi",
+        "Netto",
+        "Spar",
+        "Penny",
+        "Edeka",
+        "Магнит",
+        "REWE",
+        "Billa",
+        "Biedronka",
+        "Rewe",
+        "Coop",
+        "Intermarché",
+        "Norma",
+        "ALDI",
+        "Пятёрочка",
+        "Kaufland",
+        "Carrefour",
+        "LIDL",
+        "Mercadona",
+        "Carrefour Market",
+        "Supermarket",
+        "Dia",
+        "Дикси",
+        "Co-op"
+    ]
 }

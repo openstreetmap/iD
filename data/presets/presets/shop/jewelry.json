@@ -13,5 +13,32 @@
     "tags": {
         "shop": "jewelry"
     },
-    "name": "Jeweler"
+    "name": "Jeweler",
+    "suggestions": [
+        "Swarovski",
+        "Christ",
+        "Bijou Brigitte",
+        "585",
+        "Pandora",
+        "Claire's",
+        "Алмаз",
+        "Адамас",
+        "Яшма Золото",
+        "Kay Jewelers",
+        "H Samuel",
+        "Рубин",
+        "Изумруд",
+        "ND",
+        "Ювелирный",
+        "Julien d'Orcel",
+        "Золото",
+        "Cartier",
+        "Romero - Exchange, Pawn, Western Union",
+        "H. Samuel",
+        "Guldfynd",
+        "Ernest Jones",
+        "Кристалл",
+        "Карат",
+        "American Swiss"
+    ]
 }

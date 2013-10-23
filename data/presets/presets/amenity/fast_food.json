@@ -14,5 +14,32 @@
         "amenity": "fast_food"
     },
     "terms": [],
-    "name": "Fast Food"
+    "name": "Fast Food",
+    "suggestions": [
+        "McDonald's",
+        "Subway",
+        "Burger King",
+        "KFC",
+        "McDonalds",
+        "Wendy's",
+        "Pizza Hut",
+        "Dairy Queen",
+        "Arby's",
+        "Quick",
+        "マクドナルド",
+        "Jack in the Box",
+        "Culver's",
+        "Domino's Pizza",
+        "Jollibee",
+        "Sonic",
+        "Макдоналдс",
+        "Kentucky Fried Chicken",
+        "Dunkin Donuts",
+        "A&W",
+        "Döner",
+        "Panda Express",
+        "マクドナルド (McDonald's)",
+        "Pizza Pizza",
+        "Domino's"
+    ]
 }

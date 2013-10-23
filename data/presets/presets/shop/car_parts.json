@@ -13,5 +13,28 @@
     "tags": {
         "shop": "car_parts"
     },
-    "name": "Car Parts Store"
+    "name": "Car Parts Store",
+    "suggestions": [
+        "Автозапчасти",
+        "Advance Auto Parts",
+        "O'Reilly Auto Parts",
+        "Halfords",
+        "AutoZone",
+        "Autozone",
+        "Napa Auto Parts",
+        "NAPA Auto Parts",
+        "Auto Zone",
+        "Автомагазин",
+        "Автомаг",
+        "Exist.ru",
+        "Вираж",
+        "Автомир",
+        "オートバックス",
+        "Forstinger",
+        "Norauto",
+        "автозапчасти",
+        "Автомаркет",
+        "Exist",
+        "Pep Boys"
+    ]
 }

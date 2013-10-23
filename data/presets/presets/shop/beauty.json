@@ -19,5 +19,19 @@
     "tags": {
         "shop": "beauty"
     },
-    "name": "Beauty Shop"
+    "name": "Beauty Shop",
+    "suggestions": [
+        "Douglas",
+        "Yves Rocher",
+        "Sally Beauty Supply",
+        "Салон красоты",
+        "Nagelstudio",
+        "Sephora",
+        "Nails",
+        "Marionnaud",
+        "Sunpoint",
+        "Nocibé",
+        "Point Soleil",
+        "Hollywood Nails"
+    ]
 }

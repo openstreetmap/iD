@@ -13,5 +13,32 @@
     "tags": {
         "shop": "hardware"
     },
-    "name": "Hardware Store"
+    "name": "Hardware Store",
+    "suggestions": [
+        "Хозтовары",
+        "Ace Hardware",
+        "Home Depot",
+        "1000 мелочей",
+        "Стройматериалы",
+        "Lowe's",
+        "Home Hardware",
+        "Метизы",
+        "Сантехника",
+        "Товары для дома",
+        "Промтовары",
+        "Ferreteria",
+        "Домовой",
+        "Всё для дома",
+        "Lowes",
+        "Ferretería",
+        "Хозяйственный",
+        "Электротовары",
+        "Все для дома",
+        "Мастер",
+        "Leroy Merlin",
+        "Уют",
+        "Wilkinson",
+        "Iloilo avenue hardware",
+        "Хозяюшка"
+    ]
 }

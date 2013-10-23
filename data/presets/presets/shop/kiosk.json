@@ -13,5 +13,32 @@
     "tags": {
         "shop": "kiosk"
     },
-    "name": "Kiosk"
+    "name": "Kiosk",
+    "suggestions": [
+        "Kiosk",
+        "R-Kioski",
+        "Продукты",
+        "Роспечать",
+        "Kios",
+        "მარკეტი (Market)",
+        "R-kioski",
+        "Киоск",
+        "Kiosco",
+        "Narvesen",
+        "Shell",
+        "Союзпечать",
+        "Pressbyrån",
+        "Ruch",
+        "Мороженое",
+        "Aral",
+        "Kiosko",
+        "Edicola",
+        "Esso",
+        "Warung",
+        "Lietuvos spauda",
+        "Белсоюзпечать",
+        "iNovine",
+        "Maison de la Presse",
+        "Lotto"
+    ]
 }

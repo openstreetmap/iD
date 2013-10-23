@@ -13,5 +13,32 @@
     "tags": {
         "shop": "clothes"
     },
-    "name": "Clothing Store"
+    "name": "Clothing Store",
+    "suggestions": [
+        "H&M",
+        "C&A",
+        "NKD",
+        "Kik",
+        "kik",
+        "KiK",
+        "KIK",
+        "Esprit",
+        "Zara",
+        "New Yorker",
+        "Next",
+        "Old Navy",
+        "Bonita",
+        "Kiabi",
+        "Pep",
+        "Ernsting's family",
+        "Vögele",
+        "Woolworths",
+        "Mango",
+        "Edgars",
+        "New Look",
+        "Zeeman",
+        "Kohl's",
+        "Benetton",
+        "Ackermans"
+    ]
 }

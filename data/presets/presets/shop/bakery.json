@@ -13,5 +13,32 @@
     "tags": {
         "shop": "bakery"
     },
-    "name": "Bakery"
+    "name": "Bakery",
+    "suggestions": [
+        "Greggs",
+        "Kamps",
+        "Boulangerie",
+        "Bäckerei",
+        "Steinecke",
+        "Hofpfisterei",
+        "Der Beck",
+        "Backwerk",
+        "Müller",
+        "Panaderia",
+        "Хлеб",
+        "Ihle",
+        "Boulangerie Patisserie",
+        "Paul",
+        "Bakery",
+        "Panadería",
+        "Anker",
+        "Bäcker",
+        "Panificio",
+        "Dat Backhus",
+        "Stadtbäckerei",
+        "Oebel",
+        "K&U",
+        "Bäckerei Schmidt",
+        "Stadtbäckerei Junge"
+    ]
 }

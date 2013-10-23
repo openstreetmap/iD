@@ -13,5 +13,32 @@
     "tags": {
         "shop": "computer"
     },
-    "name": "Computer Store"
+    "name": "Computer Store",
+    "suggestions": [
+        "DNS",
+        "PC World",
+        "ДНС",
+        "Apple Store",
+        "Позитроника",
+        "Компьютерный мир",
+        "Apple",
+        "Cartridge World",
+        "Komputronik",
+        "Юлмарт",
+        "Vobis",
+        "Game",
+        "Компьютеры",
+        "PC Spezialist",
+        "Internet",
+        "Формоза",
+        "Atelco",
+        "PC-Spezialist",
+        "Matrix",
+        "Трилайн",
+        "Кей",
+        "MyCom",
+        "Incredible Connection",
+        "Gravis",
+        "Dixons"
+    ]
 }

@@ -13,5 +13,29 @@
     "tags": {
         "shop": "video"
     },
-    "name": "Video Store"
+    "name": "Video Store",
+    "suggestions": [
+        "Blockbuster",
+        "World of Video",
+        "Video World",
+        "Blockbuster Video",
+        "Family Video",
+        "Videothek",
+        "Makuuni",
+        "Mr Video",
+        "Videoland",
+        "GEO",
+        "Filmtown",
+        "ゲオ",
+        "Cinebank",
+        "Blockbusters",
+        "Video Ezy",
+        "Vidéo Futur",
+        "Hollywood Video",
+        "Hemmakväll",
+        "empire",
+        "Videorama",
+        "Xtravision",
+        "Movie Vision"
+    ]
 }

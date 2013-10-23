@@ -13,5 +13,32 @@
     "tags": {
         "shop": "furniture"
     },
-    "name": "Furniture Store"
+    "name": "Furniture Store",
+    "suggestions": [
+        "Dänisches Bettenlager",
+        "Мебель",
+        "IKEA",
+        "Jysk",
+        "Conforama",
+        "But",
+        "Roller",
+        "Matratzen Concord",
+        "Kika",
+        "Fly",
+        "Ikea",
+        "Casa",
+        "XXXLutz",
+        "Pier 1 Imports",
+        "Möbelix",
+        "Möbel Boss",
+        "JYSK",
+        "ニトリ",
+        "Dreams",
+        "Ellerines",
+        "Black Red White",
+        "Sotka",
+        "Poco",
+        "Harveys",
+        "Шатура"
+    ]
 }

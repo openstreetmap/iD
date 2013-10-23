@@ -13,5 +13,32 @@
     "tags": {
         "shop": "books"
     },
-    "name": "Bookstore"
+    "name": "Bookstore",
+    "suggestions": [
+        "Barnes & Noble",
+        "Книги",
+        "Waterstones",
+        "Barnes and Noble",
+        "Weltbild",
+        "Libro",
+        "Bruna",
+        "WHSmith",
+        "Буква",
+        "Empik",
+        "Chapters",
+        "Maison de la Presse",
+        "Книгомир",
+        "ブックオフ",
+        "Дом книги",
+        "Edicola",
+        "Книжный магазин",
+        "Standaard Boekhandel",
+        "National Bookstore",
+        "Borders",
+        "Буквоед",
+        "WH Smith",
+        "Waterstone's",
+        "Hugendubel",
+        "Księgarnia"
+    ]
 }
