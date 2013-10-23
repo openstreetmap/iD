@@ -68,6 +68,10 @@
             "description": "The quality score this preset will receive when being compared with other matches (higher is better)",
             "type": "number",
             "default": 1.0
+        },
+        "suggestions": {
+            "description": "Suggestions of common names to autocomplete for the feature type",
+            "type": "array"
         }
     },
     "additionalProperties": false
