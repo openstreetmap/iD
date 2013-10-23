@@ -22,11 +22,8 @@
         "Boots",
         "Farmacia",
         "Rite Aid",
-        "Pharmacie",
         "Mercury Drug",
         "Shoppers Drug Mart",
-        "Walgreen's",
-        "CVS Pharmacy",
         "Apteka",
         "Lloyds Pharmacy",
         "Löwen-Apotheke",
@@ -38,8 +35,6 @@
         "Аптечный пункт",
         "Farmatodo",
         "Farmacias SalcoBrand",
-        "CVS/pharmacy",
-        "Stadt-Apotheke",
-        "Pharmacy"
+        "Stadt-Apotheke"
     ]
 }
