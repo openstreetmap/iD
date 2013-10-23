@@ -41,10 +41,6 @@ iD.History = function(context) {
             return stack[index].graph;
         },
 
-        base: function() {
-            return stack[0].graph;
-        },
-
         merge: function(entities, extent) {
 
             var base = stack[0].graph.base(),

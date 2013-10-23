@@ -1,15 +1,9 @@
 iD.ui.Commit = function(context) {
-    var event = d3.dispatch('cancel', 'save'),
-        presets = context.presets();
+    var event = d3.dispatch('cancel', 'save');
 
     function commit(selection) {
         var changes = context.history().changes(),
-            base = context.history().base(),
-            relevantChanges = iD.util.relevantChanges(
-                context.graph(),
-                changes,
-                base
-            );
+            summary = context.history().difference().summary();
 
         function zoomToEntity(change) {
             var entity = change.entity;
@@ -131,14 +125,12 @@ iD.ui.Commit = function(context) {
             .attr('class', 'commit-section modal-section fillL2');
 
         changeSection.append('h3')
-            .text(relevantChanges.length + ' Changes');
+            .text(summary.length + ' Changes');
 
         var li = changeSection.append('ul')
             .attr('class', 'changeset-list')
             .selectAll('li')
-            .data(function(d) {
-                return relevantChanges;
-            })
+            .data(summary)
             .enter()
             .append('li')
             .on('mouseover', mouseover)
@@ -147,9 +139,7 @@ iD.ui.Commit = function(context) {
 
         li.append('span')
             .attr('class', function(d) {
-                var graph = d.changeType === 'deleted' ? base : context.graph();
-                return graph.entity(d.entity.id).geometry(graph) + ' ' + d.changeType +
-                ' icon icon-pre-text';
+                return d.entity.geometry(d.graph) + ' ' + d.changeType + ' icon icon-pre-text';
             });
 
         li.append('span')
@@ -161,8 +151,7 @@ iD.ui.Commit = function(context) {
         li.append('strong')
             .attr('class', 'entity-type')
             .text(function(d) {
-                var graph = d.changeType === 'deleted' ? base : context.graph();
-                return context.presets().match(d.entity, graph).name();
+                return context.presets().match(d.entity, d.graph).name();
             });
 
         li.append('span')
