@@ -63,7 +63,7 @@ iD.behavior.drag = function() {
             touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
             offset,
             origin_ = point(),
-            moved = 0,
+            started = false,
             selectEnable = d3_event_userSelectSuppress(touchId != null ? "drag-" + touchId : "drag");
 
         var w = d3.select(window)
@@ -92,13 +92,13 @@ iD.behavior.drag = function() {
                 dx = p[0] - origin_[0],
                 dy = p[1] - origin_[1];
 
-            if (!moved) {
+            if (!started) {
+                started = true;
                 event_({
                     type: "start"
                 });
             }
 
-            moved |= dx | dy;
             origin_ = p;
             d3_eventCancel();
 
@@ -110,7 +110,7 @@ iD.behavior.drag = function() {
         }
 
         function dragend() {
-            if (moved) {
+            if (started) {
                 event_({
                     type: "end"
                 });
