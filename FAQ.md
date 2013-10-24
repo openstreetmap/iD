@@ -1,3 +1,7 @@
+## How is "iD" pronounced?
+
+Two syllables: "eye dee".
+
 ## Why not use canvas rather than SVG?
 
 Using canvas rather than SVG would require implementing a scenegraph, hit-testing,
