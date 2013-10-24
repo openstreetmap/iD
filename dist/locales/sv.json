@@ -284,8 +284,7 @@
     },
     "cannot_zoom": "Går ej att zooma ut ytterligare med nuvarande sätt.",
     "gpx": {
-        "local_layer": "Lokal gpx-fil",
-        "drag_drop": "Dra och släpp en .gpx-fil på sidan"
+        "local_layer": "Lokal gpx-fil"
     },
     "help": {
         "title": "Hjälp",

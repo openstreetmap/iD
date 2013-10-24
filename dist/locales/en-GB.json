@@ -14,6 +14,26 @@
             "amenity/fuel": {
                 "name": "Petrol Station",
                 "terms": "gas, fuel, propane, diesel, lng, cng, biodiesel"
+            },
+            "amenity/kindergarten": {
+                "name": "Nursery",
+                "terms": "Nursery, Pre-school, preschool"
+            },
+            "amenity/parking": {
+                "name": "Car Parking"
+            },
+            "amenity/post_box": {
+                "name": "Post Box",
+                "terms": "Mailbox"
+            },
+            "railway/station": {
+                "terms": "train station, station"
+            },
+            "tourism/camp_site": {
+                "terms": "camping"
+            },
+            "tourism/caravan_site": {
+                "name": "Caravan Park"
             }
         }
     }

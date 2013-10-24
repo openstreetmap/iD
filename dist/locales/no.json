@@ -198,8 +198,7 @@
         "out": "Forminsk"
     },
     "gpx": {
-        "local_layer": "Lokal GPX-fil",
-        "drag_drop": "Dra og slipp en .gpx-fil på denne siden"
+        "local_layer": "Lokal GPX-fil"
     },
     "help": {
         "title": "Hjelp"

@@ -44,6 +44,7 @@
             "key": "A",
             "title": "Pidennä",
             "description": "Jatka ja pidennä tätä viivaa.",
+            "not_eligible": "Viivaa ei voi jatkaa tästä.",
             "annotation": {
                 "line": "Viivan muokkaaminen aloitettu.",
                 "area": "Alueen muokkaaminen aloitettu."
@@ -240,18 +241,21 @@
         "choose": "Valitse ominaisuustyyppi",
         "results": "{n} hakutulosta haulle {search}",
         "reference": "Näytä OpenStreetMap Wikissä.",
-        "back_tooltip": "Muuta ominaisuutta",
+        "back_tooltip": "Vaihda ominaisuustyyppi",
         "remove": "Poista",
         "search": "Hae",
+        "multiselect": "Valitut kohteet",
         "unknown": "Ei tiedossa",
         "incomplete": "<ei ladattu>",
         "feature_list": "Etsi ominaisuuksia",
-        "edit": "Muokkaa ominaisuutta"
+        "edit": "Muokkaa ominaisuutta",
+        "none": "Ei kohteita"
     },
     "background": {
         "title": "Tausta",
         "description": "Taustan asetukset",
         "percent_brightness": "{opacity}% kirkkaus",
+        "none": "Ei kohteita",
         "custom": "Mukautettu",
         "fix_misalignment": "Korjaa ilmakuvavirhe",
         "reset": "palauta"
@@ -312,7 +316,8 @@
     "cannot_zoom": "Nykyisessä tilassa ei voi loitontaa enempää.",
     "gpx": {
         "local_layer": "Oma GPX-tiedosto",
-        "drag_drop": "Vedä ja pudota GPX-tiedosto tälle sivulle"
+        "drag_drop": "Vedä ja pudota GPX-tiedosto tähän tai selaa tiedostoja napsauttamalla oikean yläreunan painiketta",
+        "browse": "Selaa GPX-tiedostoja"
     },
     "help": {
         "title": "Ohje",
@@ -448,6 +453,9 @@
             },
             "atm": {
                 "label": "Pankkiautomaatti"
+            },
+            "backrest": {
+                "label": "Selkänoja"
             },
             "barrier": {
                 "label": "Tyyppi"
@@ -878,7 +886,7 @@
             },
             "amenity/post_box": {
                 "name": "Postilaatikko",
-                "terms": "postilaatikko, postinlähetys, oranssi laatikko, kirjeenlähetys, posti, kirje"
+                "terms": "postilaatikko, postinlähetys, oranssi laatikko, kirjeenlähetys, posti, kirje, itella"
             },
             "amenity/post_office": {
                 "name": "Postitoimisto",
@@ -994,10 +1002,11 @@
             },
             "building/garage": {
                 "name": "Autotalli",
-                "terms": "autotalli, autonsäilytys, autohalli, autovarasto"
+                "terms": "autotalli, autonsäilytys, autohalli, autovarasto, auto"
             },
             "building/house": {
-                "name": "Talo"
+                "name": "Omakotitalo",
+                "terms": "omakotitalo, omakoti, yksityisasunto, yksityistalo, talo, asunto"
             },
             "building/hut": {
                 "name": "Mökki",
@@ -1099,7 +1108,7 @@
                 "name": "Pelastustie"
             },
             "highway/service/parking_aisle": {
-                "name": "Pysäköintiväyl"
+                "name": "Pysäköintiväylä"
             },
             "highway/steps": {
                 "name": "Portaat"
@@ -1123,7 +1132,8 @@
                 "name": "Valtatien ramppi"
             },
             "highway/turning_circle": {
-                "name": "Kääntymispaikka"
+                "name": "Kääntymispaikka",
+                "terms": "kääntymispaikka, kääntöpaikka, U-käännös, kääntöympyrä, kääntymisympyrä, U-käännöksen tekopaikka"
             },
             "highway/unclassified": {
                 "name": "Luokittelematon tie"
@@ -1168,7 +1178,7 @@
                 "name": "Hautausmaa"
             },
             "landuse/commercial": {
-                "name": "Liiketoiminta"
+                "name": "Yritysalue"
             },
             "landuse/construction": {
                 "name": "Rakennustyömaa"
@@ -1186,7 +1196,7 @@
                 "name": "Ruohokenttä"
             },
             "landuse/industrial": {
-                "name": "Teollisuus"
+                "name": "Teollisuusalue"
             },
             "landuse/meadow": {
                 "name": "Niitty/pelto"
@@ -1198,7 +1208,7 @@
                 "name": "Louhos"
             },
             "landuse/residential": {
-                "name": "Asutus"
+                "name": "Asuinalue"
             },
             "landuse/retail": {
                 "name": "Vähittäiskauppa"
@@ -1612,7 +1622,8 @@
                 "terms": "alppimaja, alppimökki, alppitalo, vuorimaja, vuoritalo, vuorimökki, vuoristomaja, vuoristomökki, vuoristotalo"
             },
             "tourism/artwork": {
-                "name": "Taideteos"
+                "name": "Taideteos",
+                "terms": "taideteos, patsas, veistos, taide, taiteellinen, teos"
             },
             "tourism/attraction": {
                 "name": "Turistikohde"
@@ -1648,7 +1659,8 @@
                 "name": "Piknikpuisto"
             },
             "tourism/theme_park": {
-                "name": "Teemapuisto"
+                "name": "Huvipuisto",
+                "terms": "teemapuisto, huvipuisto, elämyspuisto, huvilaite"
             },
             "tourism/viewpoint": {
                 "name": "Näköalapaikka"
@@ -1698,6 +1710,9 @@
             },
             "type/route/tram": {
                 "name": "Raitiovaunulinja"
+            },
+            "type/route_master": {
+                "name": "Pääreitti"
             },
             "vertex": {
                 "name": "Muu"

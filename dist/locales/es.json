@@ -74,15 +74,24 @@
             "not_closed": "Esto no se puede redondear porque no es un bucle."
         },
         "orthogonalize": {
+            "title": "Escuadrar",
+            "description": {
+                "line": "Escuadrar las esquinas de esta línea.",
+                "area": "Escuadrar las esquinas de esta área."
+            },
+            "key": "S",
             "annotation": {
-                "line": "Esquinas de la línea escuadrados.",
-                "area": "Esquinas del área escuadrados."
-            }
+                "line": "Escuadra las esquinas de una línea.",
+                "area": "Escuadra las esquinas de un área."
+            },
+            "not_squarish": "Esto no puede escuadrarse porque no es cuadrado."
         },
         "straighten": {
             "title": "Enderezado",
             "description": "Enderezar esta línea",
-            "key": "S"
+            "key": "S",
+            "annotation": "Enderezar una línea.",
+            "too_bendy": "Esto no puede ser enderezado porque es demasiado sinuoso."
         },
         "delete": {
             "title": "Eliminar",
@@ -238,15 +247,18 @@
         "back_tooltip": "Cambiar tipo de elemento",
         "remove": "Eliminar",
         "search": "Buscar",
+        "multiselect": "Elementos seleccionados",
         "unknown": "Desconocido",
         "incomplete": "<no descargado>",
         "feature_list": "Buscar elementos",
-        "edit": "Editar elemento"
+        "edit": "Editar elemento",
+        "none": "Ninguno"
     },
     "background": {
         "title": "Fondo",
         "description": "Configuración del fondo",
         "percent_brightness": "{opacity}% brillo",
+        "none": "Ninguno",
         "custom": "Personalizado",
         "custom_prompt": "Introduzca una plantilla de teselas. Los símbolos válidos son {z}, {x}, {y} para el esquema Z\\/X\\/Y y {u} para el esquema quadtile.",
         "fix_misalignment": "Corregir alineación",
@@ -309,7 +321,9 @@
     "cannot_zoom": "No se puede alejar más la imagen en el modo actual.",
     "gpx": {
         "local_layer": "Archivo GPX local",
-        "drag_drop": "Arrastra y suelte un fichero .gpx a la página"
+        "drag_drop": "Arrastre un archivo .gpx a la página, o de click en el botón a la derecha para buscar",
+        "zoom": "Acercar a la traza GPX",
+        "browse": "Buscar un archivo .gpx"
     },
     "help": {
         "title": "Ayuda",
@@ -317,9 +331,9 @@
         "editing_saving": "# Editar & Guardar\n\nEste editor está diseñado para trabajar en línea principalmente, ya que en estos momentos esta accediendo a través de un sitio web.\n\n### Seleccionar elementos gráficos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de interés, simplemente haz clic sobre él. Esto resaltará el elemento seleccionado, abriendo un panel con sus características, y  mostrará un menú de cosas que puedes hacer con ese elemento.\n\nSe pueden seleccionar múltiples elementos de una vez manteniendo pulsada la tecla 'Mayús' y haciendo clic y arrastrando el ratón sobre el mapa. Esto seleccionará todas los elementos que están dentro del recuadro que se dibuja, lo que le permite realizar acciones con todos ellos al mismo tiempo.\n\n### Guardar ediciones\n\nCuando haga cambios -como editar carreteras, edificios o lugares- estos se  almacenan localmente en tu ordenador hasta que decidas guardarlos en el servidor. No se preocupe si cometes un error - puede deshacer los cambios haciendo clic en el botón 'Deshacer', y rehacerlos de nuevo haciendo clic en el botón 'Rehacer'.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones (por ejemplo, si ha completado una zona de la ciudad y quisiera empezar en una nueva área).  Antes de subir los cambios al servidor tendrás oportunidad de revisar lo que has hecho, y el editor proporciona avisos y sugerencias útiles si algo parece que no es correcto en los cambios.\n\nSi ve que todo es correcto escriba un breve comentario explicando el cambio que ha hecho y haga clic en 'Guardar' de nuevo para registrar los cambios en [OpenStreetMap.org](http:\\/\\/www.openstreetmap.org\\/), donde serán visibles para todos los demás usuarios y estarán disponible para que otros colaboradores del proyecto puedan seguir construyendo y mejorando el mapa.\n\nSi aún no ha terminado sus ediciones en una sesión, puede dejar la ventana del editor abierta y volver más tarde (en el mismo navegador y ordenador), y el editor le permitirá retomar tu trabajo.\n",
         "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formada por nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía. \n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar uno de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para los navegadores GPS.\n\n### Eliminar\n\nSi un camino es totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa. Como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido. \n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado que es el acceso rápido para comenzar a dibujar una línea. \n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
         "gps": "# GPS\n\nLos datos procedentes de un GPS son la fuente más fiable para OpenStreetMap. Este editor soporta archivos `.gpx` con trazas guardadas en su equipo local.  Este tipo de trazas GPS se pueden obtener con un gran número de aplicaciones para teléfonos inteligentes, así como con receptores GPS normales.\n\nPara más información acerca de como obtener datos en campo mediante GPS lea [Capturando información mediante GPS] (http://learnosm.org/en/beginner/using-gps/).\n\nPara utilizar una traza GPX para cartografiar simplemente arrastre y suelte el archivo GPX sobre el editor de mapas. Si es reconocido, se añadirá al mapa como una línea verde brillante. Haga clic en el menú 'Configuración de fondo' de la izquierda para activar, desactivar o hacer zoom sobre esta nueva capa de con la traza GPX.\n\nTenga en cuenta que la traza GPX no es subida directamente a OpenStreetMap, sino que se utiliza para dibujar sobre ella en el mapa, ayudándole como guía para los nuevos elementos que desea añadir.\n",
-        "imagery": "# Imágenes\n\nLas imágenes aéreas son un importante recurso para cartografiar. Una combinación de vuelos aéreos, fotografías de satélite  y otros tipos de fuentes libres se encuentran disponibles en el editor bajo el icono de la derecha llamado 'Configuración de fondo'.\n\nPor defecto el editor muestra la capa imágenes de satélite de [Bing Maps](http://www.bing.com/maps/) , pero una vez se vaya desplazando por el mapa y haciendo zoom sobre diferentes zonas, nuevas fuentes de imágenes podrán estar disponibles.\n\nLas imágenes aéreas a veces se encuentran desplazadas del mapa debido a errores por parte de los proveedores de los datos que las suministran. Si observa que existen numerosas carreteras que no coinciden con el fondo de imagen no las muevas para ajustarlas. En vez de ello puede ajustar la fotografía aérea para que esta coincida con los datos existentes, haciendo clic en el apartado 'Corregir alineación' del menú 'Configuración de fondo'.\n",
-        "addresses": "# Addresses\n\n# Direcciones\n\nLas direcciones son parte de la información más útil que se puede añadir al mapa. \n\nAunque las direcciones se representan a menudo como parte de las calles, en OpenStreetMap esta información es guardada como atributos de los edificios y lugares presentes a lo largo de los viales.\n\nPuede agregar información sobre direcciones a lugares dibujados en el mapa como contornos de edificios, así como aquellos localizados únicamente con un punto. La fuente óptima para obtener datos de direcciones es la consulta sobre el terreno o el conocimiento personal. El uso de fuentes comerciales, como Google Maps, para obtener estos datos está estrictamente prohibido.\n",
-        "inspector": "# Usar el inspector\n\nEl inspector es el elemento del interfaz de usuario situado el lateral izquierdo de la pantalla, el cual aparece cuando un elemento del mapa es seleccionado. Permite editar los detalles de este.\n\n### Seleccionar una tipo de elemento\n\nDespués de agregar una punto, una línea o un área, puede indicar que tipo de elemento representa en el mapa: una carretera, una calle urbana, un supermercado o una cafetería. El inspector mostrará botones con los tipos de elementos más comunes, no obstante se pueden encontrar otros simplemente escribiendo lo que está buscando en la caja de búsqueda.\n\nHaciendo clic con el ratón en el botón 'i' que aparece en la esquina inferior derecha es posible conocer más acerca de ese tipo de elemento. Pulsando sobre el botón le seleccionaremos. \n\n### Utilizar los formularios y editar etiquetas\n\nUna vez elegido el tipo de elemento que representa el dibujo del mapa, o seleccionado un tipo de elemento ya previamente asignado, el inspector mostrará una serie de campos con las características de este, tales como su nombre o dirección.   \n\nUna vez visto los campos, puede hacer clic en los iconos para añadir nuevos detalles que lo complemente, como agregar un enlace a su artículo en la  [Wikipedia](http://www.wikipedia.org/), si es posible el acceso en silla de ruedas y muchos más.\n\nEn la parte inferior del inspector puede hacer clic sobre 'Etiquetas adicionales' para agregar tantas etiquetas como desee. [Taginfo](http://taginfo.openstreetmap.org/) es un gran recurso para aprender más acerca de la combinación de etiquetas más populares.\n\nLos cambios aplicados en el inspector se aplican automáticamente al mapa. Puede anularlo en cualquier momento haciendo clic sobre el botón 'Deshacer'.\n\n### Cerrar el inspector\n\nPuede cerrar el inspector bien pulsando clic con el ratón sobre el botón cerrar de la esquina superior derecha, bien presionando la tecla 'Escape' del teclado o sencillamente haciendo clic sobre el mapa.\n",
+        "imagery": "# imágenes\n\nimágenes aéreas es un importante recurso para el trazado de mapas. Una combinación\nde vuelos aéreos, vistas de satélite, y compilaciones grátis están disponibles\nen el editor bajo el menú 'Ajustes de Fondo' a la derecha.\n\nPor defecto [Bing Maps](http://www.bing.com/maps/) capa satelital es\npresentado en el editor, pero mientras se mueve y hace zoom a nuevas áreas\ngeográficas, nuevas fuentes estarán disponibles. Algunos Países, como los Estados\nUnidos, Francia, y Dinamarca poseen imágenes de muy alta calidad disponible\npara algunas áreas.\n\nImágenes aveces están desplazadas de la data del mapa por un error en el\nproveedor de imágenes. Si observa muchos caminos desplazados del fondo,\nno los mueva inmediatamente para emparejarlos. En cambio puede ajustar\nlas imágenes para que ella se empareje con los datos existentes dando click\nen  'Corregir Alineación' en el botón de Ajustes de Fondo.\n",
+        "addresses": "# Direcciones\n\nLas direcciones son parte de la información más útil que se puede añadir al mapa. \n\nAunque las direcciones se representan a menudo como parte de las calles, en OpenStreetMap esta información es guardada como atributos de los edificios y lugares presentes a lo largo de los viales.\n\nPuede agregar información sobre direcciones a lugares dibujados en el mapa como contornos de edificios, así como aquellos localizados únicamente con un punto. La fuente óptima para obtener datos de direcciones es la consulta sobre el terreno o el conocimiento personal. El uso de fuentes comerciales, como Google Maps, para obtener estos datos está estrictamente prohibido.\n",
+        "inspector": "# Usar el inspector\n\nEl inspector es la sección situado al lado izquierdo de la pantalla, el cual permite editar los detalles del elemento seleccionado en el mapa.\n\n### Seleccionar una tipo de elemento\n\nDespués de agregar una punto, una línea o un área, puede indicar que tipo de elemento representa en el mapa: una carretera, una calle urbana, un supermercado o una cafetería. El inspector mostrará botones con los tipos de elementos más comunes, no obstante se pueden encontrar otros simplemente escribiendo lo que está buscando en la caja de búsqueda.\n\nHaciendo clic con el ratón en el botón 'i' que aparece en la esquina inferior derecha es posible conocer más acerca de ese tipo de elemento. Pulsando sobre el botón le seleccionaremos. \n\n### Utilizar los formularios y editar etiquetas\n\nUna vez elegido el tipo de elemento que representa el dibujo del mapa, o seleccionado un tipo de elemento ya previamente asignado, el inspector mostrará una serie de campos con las características de este, tales como su nombre o dirección.   \n\nUna vez visto los campos, puede hacer clic en los iconos para añadir nuevos detalles que lo complemente, como agregar un enlace a su artículo en la  [Wikipedia](http://www.wikipedia.org/), si es posible el acceso en silla de ruedas y muchas más.\n\nEn la parte inferior del inspector puede hacer clic sobre 'Etiquetas adicionales' para agregar tantas etiquetas como desee. [Taginfo](http://taginfo.openstreetmap.org/) es un gran recurso para aprender más acerca de la combinación de etiquetas más populares.\n\nLos cambios aplicados en el inspector se aplican automáticamente al mapa. Puede anularlo en cualquier momento haciendo clic sobre el botón 'Deshacer'.\n",
         "buildings": "# Edificios\n\nOpenStreetMap es la base de datos cartográfica más grande del mundo sobre edificios. Puede crear y mejorar esta base de datos.\n\n### Seleccionar\n\nPuede seleccionar un edificio haciendo clic con el ratón sobre su borde. Esto resaltará el edificio y abrirá un pequeño menú de herramientas y una barra lateral que mostrará más información sobre la edificación. \n\n### Modificar\n\nAlgunas veces los edificios están situados incorrectamente o poseen etiquetas erróneas.\n\nPara mover un edificio completo selecciónelo y haga clic en la herramienta 'Mover'. Desplace el ratón para trasladar el edificio y haga clic cuando esté correctamente situado. \n\nPara corregir la forma del edificio de manera puntual haga clic con el ratón sobre uno de los nodos que forma el borde del edificio y sin soltar arrástrelo al lugar adecuado.\n\n### Crear\n\nUna de las principales preguntas acerca de cómo añadir edificios al mapa es por qué OpenStreetMap almacena los edificios independientemente bien como polígonos o como puntos. La regla general es \"dibujar un edificio como un polígono siempre que sea posible\" y cartografiar la situación de las empresas, hogares, servicios y otros elementos que alberga el edificio como puntos situados dentro de este. \n\nComience a dibujar un edificio como un polígono haciendo clic en el botón 'Área' situado en la parte superior izquierda del interfaz y finalice bien pulsando la tecla 'Return' o 'Intro' de su teclado o simplemente haciendo clic en el primer nodo dibujado para cerrar el polígono.\n\n### Eliminar\n\nSi un edificio es totalmente incorrecto -puede ver que no existe en la imagen por satélite y de manera ideal lo ha confirmado visitando el lugar- puede borrarlo para que se elimine del mapa. Sea precavido cuando suprima elementos del mapa, como en cualquier otra edición los cambios que realice serán visibles por todo el mundo y a veces las imágenes de satélite pueden estar desactualizadas, por lo que el edifico simplemente es de nueva construcción y ha sido añadido por otro usuario.\n\nPuede eliminar un edificio haciendo clic con el ratón sobre él para seleccionarlo  y a continuación pulsar en el icono de la papelera o simplemente pulsando la tecla 'Supr' de su teclado.\n",
         "relations": "# Relaciones\n\nUna relación es un tipo especial de elemento en OpenStreetMap que permite agrupar  diferentes elementos juntos. Por ejemplo, existen dos tipos muy comunes de relaciones en OSM:\n\n- Por un lado están las * relaciones de ruta*, que agrupan a tramos de carreteras que juntos pertenecen a una autopista y poseen una denominación común (ej: Autopista del Cantábrico).  \n\n- Por otro lado podemos encontrar los *multipolígonos*, que agrupan a varias áreas que definen superficies complejas (polígonos donuts, parcelas aisladas pero que forman en su conjunto una única propiedad, etc.)\n\nEl grupo de elementos en una relación reciben el nombre de *miembros*. En el panel lateral podrá ver de que relaciones forma parte un elemento, y haciendo clic sobre una de las relaciones lo seleccionará. Así mismo, si selecciona una relación podrá ver una lista con todos los miembros que la componen en el panel lateral y todos ellos se resaltarán en el mapa.\n\nEn su mayor parte, el editor ID se encargará de mantener las relaciones de manera automática a medida que se edita. Lo principal que debe tener en cuenta es que si elimina una sección de carretera para redibujarla de manera más precisa deberá asegurarse de que la nueva sección es un miembro de la misma relación como lo fue la sección original.\n\n## Editando relaciones\n\nSi deseas editar relaciones aquí encontrará los conceptos básicos.\n\nPara añadir un elemento a una relación seleccione aquel, haga clic en el botón \"+\" que encontrará en la sección \"Todas las relaciones\" de panel lateral y seleccione el nombre y tipo de relación.\n\nPara crear una nueva relación seleccione el primer elemento que compondrá la relación, haga clic en el botón \"+\" que encontrará en el apartado \"Todas las relaciones\" del panel lateral y seleccione \"Nueva  relación...\".\n \nPara eliminar un elemento de una relación selecciones aquel y haga clic en el botón con el icono de cubo de basura próximo a la relación de la que queremos eliminarlo.\n\nPuede crear multipolígonos con agujeros (donut) usando la herramienta \"Unir\". Dibuje dos áreas (una que delimite el interior del donut y otra el exterior), mantenga pulsada la tecla Mayúsculas y haga clic con el ratón en uno de ellos para seleccionarlos. A continuación pulse el botón \"Unir\" (+).\n\n"
     },
@@ -461,6 +475,9 @@
             },
             "atm": {
                 "label": "Cajero automático"
+            },
+            "backrest": {
+                "label": "Respaldo"
             },
             "barrier": {
                 "label": "Tipo"
@@ -725,6 +742,9 @@
             "trail_visibility": {
                 "label": "Visibilidad de la senda"
             },
+            "vending": {
+                "label": "Tipo de producto"
+            },
             "water": {
                 "label": "Tipo"
             },
@@ -754,7 +774,8 @@
                 "terms": "dirección, domicilio, señas, residencia"
             },
             "aeroway": {
-                "name": "Aerovía"
+                "name": "Aerovía",
+                "terms": "Zonas de un aeropuerto"
             },
             "aeroway/aerodrome": {
                 "name": "Aéropuerto",
@@ -808,7 +829,8 @@
                 "terms": "bar, pub, tasca, cantina, café, taberna"
             },
             "amenity/bench": {
-                "name": "Banco"
+                "name": "Banco",
+                "terms": "Asiento público, Banco"
             },
             "amenity/bicycle_parking": {
                 "name": "Aparcamiento de bibicletas",
@@ -817,6 +839,9 @@
             "amenity/bicycle_rental": {
                 "name": "Alquiler de bicicletas",
                 "terms": "bicicleta, alquilar, bici"
+            },
+            "amenity/boat_rental": {
+                "name": "Alquiler de barcos"
             },
             "amenity/cafe": {
                 "name": "Cafetería",
@@ -827,7 +852,8 @@
                 "terms": "coche, automóvil, alquiler, vehículo, rent, car"
             },
             "amenity/car_sharing": {
-                "name": "Vehículo compartido"
+                "name": "Vehículo compartido",
+                "terms": "Auto compartido"
             },
             "amenity/car_wash": {
                 "name": "Lavado de coches",
@@ -906,7 +932,8 @@
                 "terms": "templo, basílica, capilla, colegiata, parroquia, santuario, ermita, oratorio,iglesia, basílica, catedral, sinagoga, mezquita, pagoda,morabito, rábida,templo,aljama"
             },
             "amenity/place_of_worship/buddhist": {
-                "name": "Templo budista"
+                "name": "Templo budista",
+                "terms": "Templo Budista"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Iglesia",
@@ -952,14 +979,16 @@
                 "terms": "piscina,estanque,pileta"
             },
             "amenity/taxi": {
-                "name": "Parada de taxis"
+                "name": "Parada de taxis",
+                "terms": "Parada de Taxis"
             },
             "amenity/telephone": {
                 "name": "Teléfono",
                 "terms": "teatro,sala, salón, anfiteatro, coliseo, escenario"
             },
             "amenity/theatre": {
-                "name": "Teatro"
+                "name": "Teatro",
+                "terms": "Teatro"
             },
             "amenity/toilets": {
                 "name": "Baños",
@@ -972,6 +1001,9 @@
             "amenity/university": {
                 "name": "Universidad",
                 "terms": "universidad,facultad, escuela, seminario, colegio, cátedra, claustro, paraninfo,"
+            },
+            "amenity/vending_machine": {
+                "name": "Máquina expendedora"
             },
             "amenity/waste_basket": {
                 "name": "Papelera",
@@ -994,16 +1026,20 @@
                 "terms": "bolardo, baliza, noray, amarre, horquilla, poste, obstáculo"
             },
             "barrier/cattle_grid": {
-                "name": "Barrera canadiense"
+                "name": "Barrera canadiense",
+                "terms": "Paso con rejas para animales"
             },
             "barrier/city_wall": {
-                "name": "Muralla de la ciudad"
+                "name": "Muralla de la ciudad",
+                "terms": "muralla, muro, pared, murallón, fortificación, fortaleza, cercado, baluarte, contrafuerte"
             },
             "barrier/cycle_barrier": {
-                "name": "Barrera para bicicletas"
+                "name": "Barrera para bicicletas",
+                "terms": "Barrera para bicicletas"
             },
             "barrier/ditch": {
-                "name": "Zanja"
+                "name": "Zanja",
+                "terms": "Zanja"
             },
             "barrier/entrance": {
                 "name": "Entrada",
@@ -1018,22 +1054,28 @@
                 "terms": "portón, abertura, pórtico, portillo, cancela, entrada, salida, paso, puerta"
             },
             "barrier/hedge": {
-                "name": "Seto"
+                "name": "Seto",
+                "terms": "Seto"
             },
             "barrier/kissing_gate": {
-                "name": "Portilla giratoria"
+                "name": "Portilla giratoria",
+                "terms": "Puerta de seguridad para ganado"
             },
             "barrier/lift_gate": {
-                "name": "Puerta levadiza"
+                "name": "Puerta levadiza",
+                "terms": "Barrera elevada"
             },
             "barrier/retaining_wall": {
-                "name": "Muro de contención"
+                "name": "Muro de contención",
+                "terms": "Muro de contención"
             },
             "barrier/stile": {
-                "name": "Escalones"
+                "name": "Escalones",
+                "terms": "Peldaños en una valla"
             },
             "barrier/toll_booth": {
-                "name": "Peaje"
+                "name": "Peaje",
+                "terms": "Cabina de peaje"
             },
             "barrier/wall": {
                 "name": "Pared",
@@ -1087,7 +1129,8 @@
                 "terms": "boca de incendio,hidrante de incendio"
             },
             "emergency/phone": {
-                "name": "Teléfono de emergencias"
+                "name": "Teléfono de emergencias",
+                "terms": "Teléfono de emergencia"
             },
             "entrance": {
                 "name": "Entrada",
@@ -1098,7 +1141,8 @@
                 "terms": "calle, cañada, ronda, carril, pista, ruta, arteria, rúa, trayecto, avenida, carretera, paseo, camino, senda"
             },
             "highway/bridleway": {
-                "name": "Camino de herradura"
+                "name": "Camino de herradura",
+                "terms": "Camino de herradura"
             },
             "highway/bus_stop": {
                 "name": "Parada de autobús",
@@ -1109,10 +1153,12 @@
                 "terms": "cruce peatonal, paso peatonal, paso de cebra, paso de peatones, paso semafórico"
             },
             "highway/cycleway": {
-                "name": "Senda ciclable"
+                "name": "Senda ciclable",
+                "terms": "Camino para bicicletas"
             },
             "highway/footway": {
-                "name": "Senda peatonal"
+                "name": "Senda peatonal",
+                "terms": "Camino peatonal"
             },
             "highway/living_street": {
                 "name": "Calle residencial",
@@ -1139,7 +1185,8 @@
                 "terms": "vereda, sendero, camino, vía, calzada, ramal, trocha, atajo, travesía, huella, rastro"
             },
             "highway/pedestrian": {
-                "name": "Vía peatonal"
+                "name": "Vía peatonal",
+                "terms": "Peatonal"
             },
             "highway/primary": {
                 "name": "Carretera primaria",
@@ -1174,13 +1221,16 @@
                 "terms": "calle, callejón, calleja, callejuela, callizo, pasadizo, travesía"
             },
             "highway/service/drive-through": {
-                "name": "Ventanilla de autoservicio"
+                "name": "Ventanilla de autoservicio",
+                "terms": "Parada sin bajar del vehiculo"
             },
             "highway/service/driveway": {
-                "name": "Vía privada de acceso"
+                "name": "Vía privada de acceso",
+                "terms": "calle, carril, pista, trayecto, avenida, carretera, vía de servicio, vía"
             },
             "highway/service/emergency_access": {
-                "name": "Acceso de emergencia"
+                "name": "Acceso de emergencia",
+                "terms": "Acceso de emergencia"
             },
             "highway/service/parking_aisle": {
                 "name": "Pasillo de aparcamiento",
@@ -1189,6 +1239,9 @@
             "highway/steps": {
                 "name": "Escaleras",
                 "terms": "escalera, escalinata, grada, gradería, escala, escalerilla, peldaños, escalones"
+            },
+            "highway/stop": {
+                "name": "Señal de Stop"
             },
             "highway/tertiary": {
                 "name": "Carretera local",
@@ -1199,34 +1252,40 @@
                 "terms": "enlace, unión, cruce, calle, ronda, carril, ruta, arteria, rúa, trayecto, avenida, carretera, paseo, camino, vía, local, terciaria"
             },
             "highway/track": {
-                "name": "Pista"
+                "name": "Pista",
+                "terms": "Vía"
             },
             "highway/traffic_signals": {
                 "name": "Semáforos",
                 "terms": "señal, tráfico, semáforo"
             },
             "highway/trunk": {
-                "name": "Carretera principal"
+                "name": "Carretera principal",
+                "terms": "Carretera principal"
             },
             "highway/trunk_link": {
-                "name": "Enlace a carretera principal"
+                "name": "Enlace a carretera principal",
+                "terms": "Enlace principal"
             },
             "highway/turning_circle": {
                 "name": "Círculo de giro",
                 "terms": "círculo, giro, retorno, cul de sac"
             },
             "highway/unclassified": {
-                "name": "Carretera sin clasificación"
+                "name": "Carretera sin clasificación",
+                "terms": "Carretera sin clasificación"
             },
             "historic": {
-                "name": "Lugar histórico"
+                "name": "Lugar histórico",
+                "terms": "Lugar histórico"
             },
             "historic/archaeological_site": {
                 "name": "Sitio arqueológico",
                 "terms": "arqueológico, sitio, lugar, histórico, excavación"
             },
             "historic/boundary_stone": {
-                "name": "Mojón"
+                "name": "Mojón",
+                "terms": "Mojón"
             },
             "historic/castle": {
                 "name": "Castillo",
@@ -1261,36 +1320,44 @@
                 "terms": "parcela,solar, terreno, superficie, tierra, propiedad, zona, fracción, parte, trozo"
             },
             "landuse/basin": {
-                "name": "Cuenca "
+                "name": "Cuenca ",
+                "terms": "Cuenca"
             },
             "landuse/cemetery": {
                 "name": "Cementerio",
                 "terms": "cementerio, camposanto, necrópolis, sacramental"
             },
             "landuse/commercial": {
-                "name": "de negocios"
+                "name": "de negocios",
+                "terms": "Comercial"
             },
             "landuse/construction": {
-                "name": "Construcción"
+                "name": "Construcción",
+                "terms": "Construcción"
             },
             "landuse/farm": {
-                "name": "Granja"
+                "name": "Granja",
+                "terms": "Granja"
             },
             "landuse/farmyard": {
-                "name": "Tierras de cultivo"
+                "name": "Tierras de cultivo",
+                "terms": "Edificios de la granja"
             },
             "landuse/forest": {
-                "name": "Bosque"
+                "name": "Bosque",
+                "terms": "Bosque"
             },
             "landuse/grass": {
                 "name": "Hierba",
                 "terms": "herbazal, pradera, pradería, prado, pasto, majada, monte, dehesa"
             },
             "landuse/industrial": {
-                "name": "Industrial"
+                "name": "Industrial",
+                "terms": "Industrial"
             },
             "landuse/meadow": {
-                "name": "Prado"
+                "name": "Prado",
+                "terms": "prado, pradera, campo, mies, braniza, braña"
             },
             "landuse/orchard": {
                 "name": "Huerta",
@@ -1305,7 +1372,8 @@
                 "terms": "zona, residencial, urbano"
             },
             "landuse/retail": {
-                "name": "Zona comercial"
+                "name": "Zona comercial",
+                "terms": "negocio, venta, comercio, tienda, despacho, colmado, al por menor"
             },
             "landuse/vineyard": {
                 "name": "Viñedo",
@@ -1314,6 +1382,9 @@
             "leisure": {
                 "name": "Ocio",
                 "terms": "zona, diversión, entretenimiento, pasatiempo, distracción, recreo, ocio, esparcimiento"
+            },
+            "leisure/common": {
+                "name": "Común"
             },
             "leisure/dog_park": {
                 "name": "Parque canino",
@@ -1324,7 +1395,8 @@
                 "terms": "parque, parterre, vergel, floresta, huerto, rosaleda, jardín"
             },
             "leisure/golf_course": {
-                "name": "Campo de golf"
+                "name": "Campo de golf",
+                "terms": "Campo de golf"
             },
             "leisure/marina": {
                 "name": "Marina",
@@ -1335,32 +1407,43 @@
                 "terms": "parque, jardín"
             },
             "leisure/pitch": {
-                "name": "Cancha de deporte"
+                "name": "Cancha de deporte",
+                "terms": "cancha, frontón, campo, pista, polideportivo, terreno de juego, juego, deporte"
             },
             "leisure/pitch/american_football": {
                 "name": "Campo de fútbol americano",
                 "terms": "Cancha de fútbol americano"
             },
             "leisure/pitch/baseball": {
-                "name": "Diamante de Béisbol"
+                "name": "Diamante de Béisbol",
+                "terms": "Campo de Beisbol"
             },
             "leisure/pitch/basketball": {
-                "name": "Cancha de Baloncesto"
+                "name": "Cancha de Baloncesto",
+                "terms": "Cancha de Baloncesto"
+            },
+            "leisure/pitch/skateboard": {
+                "name": "Parque de patinaje"
             },
             "leisure/pitch/soccer": {
-                "name": "Campo de fútbol"
+                "name": "Campo de fútbol",
+                "terms": "terreno, campo, pista, fútbol, juego, balompie"
             },
             "leisure/pitch/tennis": {
-                "name": "Cancha de tenis"
+                "name": "Cancha de tenis",
+                "terms": "Pista de Tenis"
             },
             "leisure/pitch/volleyball": {
-                "name": "Cancha de voleibol"
+                "name": "Cancha de voleibol",
+                "terms": "Pista de Voleibol"
             },
             "leisure/playground": {
-                "name": "Parque infantil"
+                "name": "Parque infantil",
+                "terms": "parque infantil, columpios, zona de juegos, juegos, niños"
             },
             "leisure/slipway": {
-                "name": "Grada"
+                "name": "Grada",
+                "terms": "Grada"
             },
             "leisure/sports_center": {
                 "name": "Centro deportivo",
@@ -1371,57 +1454,75 @@
                 "terms": "estadio,cancha"
             },
             "leisure/swimming_pool": {
-                "name": "Piscina"
+                "name": "Piscina",
+                "terms": "piscina, natación, parque acuático"
             },
             "leisure/track": {
                 "name": "Pista de carreras",
                 "terms": "circuito, pista"
             },
             "line": {
-                "name": "Línea"
+                "name": "Línea",
+                "terms": "Línea"
             },
             "man_made": {
-                "name": "Hecho por el hombre"
+                "name": "Hecho por el hombre",
+                "terms": "manufactura, industrial, fabricado, manufacturado, fábrica, industria, hecho por el hombre"
             },
             "man_made/breakwater": {
-                "name": "Rompeolas"
+                "name": "Rompeolas",
+                "terms": "rompeolas, escollera, dique, malecón, espigón, andén, muelle, desembarcadero"
             },
             "man_made/cutline": {
-                "name": "Cortafuegos"
+                "name": "Cortafuegos",
+                "terms": "Corte de línea"
             },
             "man_made/lighthouse": {
                 "name": "Faro",
                 "terms": "faro"
             },
+            "man_made/observation": {
+                "name": "Torre de Observación"
+            },
             "man_made/pier": {
-                "name": "Embarcadero"
+                "name": "Embarcadero",
+                "terms": "Pilote, Embarcadero"
             },
             "man_made/pipeline": {
-                "name": "Tubería"
+                "name": "Tubería",
+                "terms": "tubería, cañería, caño, conducto, red"
             },
             "man_made/survey_point": {
-                "name": "Vértice geodésico"
+                "name": "Vértice geodésico",
+                "terms": "Vértice geodésico"
             },
             "man_made/tower": {
-                "name": "Torre"
+                "name": "Torre",
+                "terms": "torre, mástil, torreta"
             },
             "man_made/wastewater_plant": {
-                "name": "Planta depuradora de aguas"
+                "name": "Planta depuradora de aguas",
+                "terms": "depuradora, aguas residuales, agua, EDAR, PTAR, tratamiento, plan de depuración, planta depuradora, saneamiento"
             },
             "man_made/water_tower": {
-                "name": "Torre de agua"
+                "name": "Torre de agua",
+                "terms": "Depósito de agua elevado"
             },
             "man_made/water_well": {
-                "name": "Pozo de agua"
+                "name": "Pozo de agua",
+                "terms": "Pozo de agua"
             },
             "man_made/water_works": {
-                "name": "Trabajos hídricos"
+                "name": "Trabajos hídricos",
+                "terms": "Depósito de agua"
             },
             "natural": {
-                "name": "Natural"
+                "name": "Natural",
+                "terms": "natural, naturaleza"
             },
             "natural/bay": {
-                "name": "Bahía"
+                "name": "Bahía",
+                "terms": "bahía, cala, ensenada, golfo, refugio, abrigo, rada, abra"
             },
             "natural/beach": {
                 "name": "Playa",
@@ -1432,27 +1533,38 @@
                 "terms": "acantilado, despeñadero, risco, precipicio, escarpadura"
             },
             "natural/coastline": {
-                "name": "Línea de costa"
+                "name": "Línea de costa",
+                "terms": "costa, litoral, playa, orilla, acantilado, margen"
+            },
+            "natural/fell": {
+                "name": "Meseta"
             },
             "natural/glacier": {
-                "name": "Glaciar"
+                "name": "Glaciar",
+                "terms": "glaciar, nevero, helero, ventisquero"
             },
             "natural/grassland": {
                 "name": "Pradera",
                 "terms": "prado, pradera, pastizal, pasto"
             },
             "natural/heath": {
-                "name": "Landa"
+                "name": "Landa",
+                "terms": "brezal, landa, jaral, matorral, llanura, páramo, meseta, arenal, estepa, planicie, descampado, escajo, tojo"
             },
             "natural/peak": {
                 "name": "Pico",
                 "terms": "pico, montaña, cresta, cima, cúspide, cumbre, picacho, aguja"
             },
+            "natural/scree": {
+                "name": "Acumulación de piedras y rocas"
+            },
             "natural/scrub": {
-                "name": "Matorral"
+                "name": "Matorral",
+                "terms": "monte bajo, maleza, matorral, mata, monte"
             },
             "natural/spring": {
-                "name": "Fuente o manantial"
+                "name": "Fuente o manantial",
+                "terms": "Manantial"
             },
             "natural/tree": {
                 "name": "Árbol",
@@ -1467,23 +1579,28 @@
                 "terms": "agua, lago, laguna, ibón, estanque, embalse, pantano, balsa"
             },
             "natural/water/pond": {
-                "name": "Balsa de agua"
+                "name": "Balsa de agua",
+                "terms": "Estanque"
             },
             "natural/water/reservoir": {
                 "name": "Embalse",
                 "terms": "agua, lago, ibón, estanque, embalse, pantano, balsa, laguna, dique, presa, represa, reservorio"
             },
             "natural/wetland": {
-                "name": "Pantano"
+                "name": "Pantano",
+                "terms": "Humedal"
             },
             "natural/wood": {
-                "name": "Bosque natural"
+                "name": "Bosque natural",
+                "terms": "bosque, bosque natural, madera, foresta, arbolado, monte, árbol, boscaje, frondosidad"
             },
             "office": {
-                "name": "Oficina"
+                "name": "Oficina",
+                "terms": "Puesto, Oficina"
             },
             "place": {
-                "name": "Lugar"
+                "name": "Lugar",
+                "terms": "sitio, emplazamiento, parte, punto, lado, espacio, zona, área, paraje, lugar"
             },
             "place/city": {
                 "name": "Ciudad",
@@ -1494,27 +1611,32 @@
                 "terms": "aldea, caserío, poblado, pueblo, aldehuela, aldeorrio, villorrio, pueblecito"
             },
             "place/island": {
-                "name": "Isla"
+                "name": "Isla",
+                "terms": "Isla"
             },
             "place/isolated_dwelling": {
-                "name": "Vivienda aislada"
+                "name": "Vivienda aislada",
+                "terms": "Viviendas aisladas"
             },
             "place/locality": {
                 "name": "Paraje",
                 "terms": "paraje, lugar, sitio, rincón"
             },
             "place/town": {
-                "name": "Ciudad"
+                "name": "Ciudad",
+                "terms": "ciudad, pueblo, población, localidad, villa, núcleo urbano, urbano"
             },
             "place/village": {
                 "name": "Pueblo",
                 "terms": "localidad, población, aldea, pueblo, villa, ciudad, lugar, sitio, parroquia"
             },
             "point": {
-                "name": "Punto"
+                "name": "Punto",
+                "terms": "Punto"
             },
             "power": {
-                "name": "Línea eléctrica de baja o media tensión"
+                "name": "Línea eléctrica de baja o media tensión",
+                "terms": "Energía"
             },
             "power/generator": {
                 "name": "Generador de energía",
@@ -1529,54 +1651,68 @@
                 "terms": "torre, torreta, alta, tensión, poste, electricidad"
             },
             "power/sub_station": {
-                "name": "Subestación"
+                "name": "Subestación",
+                "terms": "Subestación"
             },
             "power/tower": {
-                "name": "Torre de alta tensión"
+                "name": "Torre de alta tensión",
+                "terms": "Torre de alto voltaje"
             },
             "power/transformer": {
-                "name": "Transformador"
+                "name": "Transformador",
+                "terms": "Transformador"
             },
             "railway": {
                 "name": "Ferrocarril",
                 "terms": "ferrocarril, tren, convoy, suburbano, línea férrea, metro"
             },
             "railway/abandoned": {
-                "name": "Ferrocarril abandonado"
+                "name": "Ferrocarril abandonado",
+                "terms": "Ferrocarril abandonado"
             },
             "railway/disused": {
-                "name": "Ferrocarril en desuso"
+                "name": "Ferrocarril en desuso",
+                "terms": "Ferrocarril en deshuso"
             },
             "railway/halt": {
                 "name": "Apeadero",
                 "terms": "apeadero,estación,ferrocarril,tren,andén"
             },
             "railway/level_crossing": {
-                "name": "Cruce a nivel"
+                "name": "Cruce a nivel",
+                "terms": "Paso a nivel"
             },
             "railway/monorail": {
-                "name": "Monorraíl "
+                "name": "Monorraíl ",
+                "terms": "Monorail"
             },
             "railway/platform": {
-                "name": "Andén"
+                "name": "Andén",
+                "terms": "Andén de ferrocarril"
             },
             "railway/rail": {
-                "name": "Raíl"
+                "name": "Raíl",
+                "terms": "Rail"
             },
             "railway/station": {
-                "name": "Estación de ferrocarril"
+                "name": "Estación de ferrocarril",
+                "terms": "Estación de Ferrocarril"
             },
             "railway/subway": {
-                "name": "Metro"
+                "name": "Metro",
+                "terms": "Metro"
             },
             "railway/subway_entrance": {
-                "name": "Entrada de metro"
+                "name": "Entrada de metro",
+                "terms": "Entrada de metro"
             },
             "railway/tram": {
-                "name": "Tranvía"
+                "name": "Tranvía",
+                "terms": "Tranvía"
             },
             "relation": {
-                "name": "Relación"
+                "name": "Relación",
+                "terms": "Relación, Vínculo, Asociación"
             },
             "route/ferry": {
                 "name": "Ruta de Ferry"
@@ -1686,6 +1822,9 @@
             },
             "shop/laundry": {
                 "name": "Lavandería"
+            },
+            "shop/locksmith": {
+                "name": "Cerrajero"
             },
             "shop/mall": {
                 "name": "Centro comercial",
@@ -1836,6 +1975,9 @@
             },
             "type/route/foot": {
                 "name": "Ruta a pie"
+            },
+            "type/route/hiking": {
+                "name": "Ruta de senderismo"
             },
             "type/route/pipeline": {
                 "name": "Ruta de tubería"

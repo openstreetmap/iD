@@ -44,6 +44,7 @@
             "title": "Continuar",
             "description": "Continuar esta linha.",
             "not_eligible": "Nenhuma linha pode ser continuada aqui.",
+            "multiple": "Muitas linhas podem ser continuadas aqui. Para escolher uma linha, pressione a tecla Shift e clique nela para selecioná-la.",
             "annotation": {
                 "line": "Continuou uma linha.",
                 "area": "Continuou uma área."
@@ -72,10 +73,22 @@
             "not_closed": "Não é possível fazer disso um círculo, pois não forma um ciclo fechado."
         },
         "orthogonalize": {
+            "title": "Ortogonalizar",
+            "description": {
+                "line": "Ajustar os cantos de uma linha para 90°.",
+                "area": "Ajustar os cantos de uma área para 90°."
+            },
             "annotation": {
                 "line": "Ajustou os cantos de uma linha para 90°.",
                 "area": "Ajustou os cantos de uma área para 90°."
-            }
+            },
+            "not_squarish": "Isto não pode ser ortogonalizado porque não é um polígono."
+        },
+        "straighten": {
+            "title": "Endireitar",
+            "description": "Endireitar esta linha.",
+            "annotation": "Endireitar uma linha.",
+            "too_bendy": "Isto não pode ser alinhado porque possui muitas curvas."
         },
         "delete": {
             "title": "Deletar",
@@ -135,6 +148,7 @@
         },
         "rotate": {
             "title": "Girar",
+            "description": "Girar este objeto em torno de seu ponto central.",
             "key": "R",
             "annotation": {
                 "line": "Girou uma linha.",
@@ -230,15 +244,18 @@
         "back_tooltip": "Alterar elemento",
         "remove": "Remover",
         "search": "Procurar",
+        "multiselect": "Itens Selecionados",
         "unknown": "Desconhecido",
         "incomplete": "<não baixado>",
         "feature_list": "Buscar elementos",
-        "edit": "Editar elemento"
+        "edit": "Editar elemento",
+        "none": "Nenhum"
     },
     "background": {
         "title": "Imagem de Fundo",
         "description": "Configurações da imagem de fundo",
         "percent_brightness": "Brilho de {opacity}%",
+        "none": "Nenhum",
         "custom": "Customizado",
         "custom_prompt": "Entre com um template de tiles. Tokens válidos são {z}, {x}, {y} para esquema Z/X/Y e {u} para esquema de quadtile.",
         "fix_misalignment": "Corrigir desalinhamento",
@@ -264,7 +281,8 @@
         "view_on_osm": "Ver no OSM",
         "facebook": "Compartilhar no Facebook",
         "twitter": "Compartilhar no Twitter",
-        "google": "Compartilhar Google+"
+        "google": "Compartilhar Google+",
+        "help_html": "Suas mudanças devem aparecer na camada \"Padrão\" do OSM em poucos minutos. Outras camadas e certos recursos podem demorar mais\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detalhes</a>).\n"
     },
     "confirm": {
         "okay": "O.K."
@@ -300,15 +318,19 @@
     "cannot_zoom": "Não é possível afastar mais no modo atual.",
     "gpx": {
         "local_layer": "Arquivo GPX local",
-        "drag_drop": "Arraste e solte um arquivo .gpx nessa página"
+        "drag_drop": "Arraste e solte um arquivo .gpx na página, ou clique no botão à direita para procurar",
+        "zoom": "Aproximar para a trilha GPX",
+        "browse": "Procurar um arquivo .gpx"
     },
     "help": {
         "title": "Ajuda",
         "help": "# Ajuda\n\nEsse é um editor para o [OpenStreetMap](http://www.openstreetmap.org/), o\nmapa livre e editável do mundo. Você pode usá-lo para adicionar e atualizar\no mapa na sua área, contribuindo com um mapa do mundo de código fonte\ne dados abertos para todos.\n\nAlterações feitas por você nesse mapa serão visíveis a todo mundo que usa o\nOpenStreetMap. Para poder editar o mapa, você precisará de uma\n[conta do OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nO [editor iD](http://ideditor.com/) é um projeto colaborativo com [código\nfonte disponível no GitHub](https://github.com/systemed/iD).\n",
+        "editing_saving": "# Editando e Salvando\n\nEsse editor é feito para trabalhar primariamente online e você está\nneste momento acessando-o através de um sítio eletrônico.\n\n### Selecionando Elementos\n\nPara selecionar um elemento do mapa, como uma estrada ou \num ponto de interesse, clique sobre ele. Isso vai pôr o elemento\nselecionado em destaque, abrir um painel com detalhes sobre\nele e mostrar um menu de coisas que podem ser feitas com ele.\n\nMúltiplos elementos podem ser selecionados segurando a tecla\n\"Shift\", clicando e arrastando no mapa. Isso vai selecionar todos\nos elementos que estiverem dentro da caixa que foi desenhada,\npermitindo você fazer coisas com vários elementos de uma vez\nsó.\n\n### Salvando as Alterações\n\nQuando você faz alterações como editar ruas, prédios e lugares, elas\nsão guardadas localmente até que você as envie para o servidor. Não\nse preocupe se você cometer algum deslize: você pode desfazer\nalterações clicando no botão de desfazer e também refazer as\nalterações clicando no botão de refazer.\n\nClique em \"Salvar\" para salvar um conjunto de alterações. Por exemplo,\nvocê completou uma área de uma cidade e gostaria de começar a\neditar uma outra área. Você terá a chance de revisar o que foi feito\naté o momento e o editor mostrará sugestões e dicas se alguma coisa\nparecer estar errada com as suas alterações.\n\nSe tudo parecer estar OK, você pode inserir um breve comentário\nexplicando as mudanças que você fez e clicar em \"Salvar\" de novo\npara lançar as mudanças para o [OpenStreetMap](http://www.openstreetmap.org/),\nonde elas estarão visíveis para todos os outros usuários.\n\nSe você não conseguir concluir uma sessão de edição, você pode\ndeixar a janela do seu editor aberta e voltar mais tarde (no mesmo\nnavegador e computador) que o editor irá oferecer a possibilidade\nde restaurar o seu trabalho.\n",
         "roads": "# Estradas \n\nVocê pode criar, corrigir e excluir estradas com este editor. Estradas podem ser de vários \ntipos: caminhos, estradas, trilhas, ciclovias e muito mais - qualquer segmento\nonde se passa, mesmo que às vezes, pode ser mapeado. \n\n### Selecionando \n\nClique em uma estrada para selecioná-la. Um esboço deve tornar-se visível, junto \ncom um pequeno menu de ferramentas no mapa e uma barra lateral mostrando mais informações \nsobre a estrada. \n\n### Modificando \n\nMuitas vezes você vai encontrar estradas que não estão alinhadas com as imagens por trás delas \nou com uma faixa de GPS. Você pode ajustar estas estradas para que elas fiquem no \nlugar certo. \n\nPrimeiro clique no caminho que você deseja alterar. Isso irá destacá-lo e mostrar \npontos de controle ao longo dela que você pode arrastar para locais melhores. Se \no que você deseja é adicionar novos pontos de controle para obter mais detalhes, clique duas vezes em uma parte \nda estrada sem um nó, e um ponto será adicionado.\n\nSe a estrada se conecta a uma outra estrada, mas não está corretamente conectada no \nmapa, você pode arrastar um de seus pontos de controle para a outra estrada \na fim de juntá-las. Ter estradas que se conectam é importante para o mapa \ne essencial para fornecer instruções de direção. \n\nVocê também pode clicar na ferramenta 'Mover' ou pressione a tecla 'M' para mover o caminho inteiro de \numa vez, e em seguida, clique novamente para salvar esse movimento. \n\n### Apagando \n\nSe uma estrada está completamente errada - você pode ver que ela não existe nas imagens \nde satélite e, junto a isso, ter confirmado localmente que ela não existe - você pode apagá-la do mapa.\nSeja cauteloso ao excluir recursos - \ncomo qualquer outra edição, os resultados são vistos por todos, e como as imagens de satélite \npodem estar desatualizadas, a estrada pode simplesmente ser recém-construída. \n\nVocê pode excluir um caminho, clicando sobre ele para selecioná-lo, em seguida, clicar no \nícone de lixeira ou pressionando a tecla 'Delete'.\n\n### Criando \n\nEncontrou um lugar onde deveria ter uma estrada, mas não tem? Clique no botão 'Linha' \nno canto superior esquerdo do editor ou pressione a tecla de atalho '2' para começar a desenhar \numa linha. \n\nClique no início da estrada no mapa para começar a desenhar. Se a estrada \nse ramifica de uma estrada existente, comece clicando sobre o lugar onde eles se conectam. \n\nEm seguida, clique em pontos ao longo da estrada para que ela siga o caminho certo, de acordo \ncom imagens de satélite ou GPS. Se a estrada que você está desenhando atravessa outra estrada, ligue-as \nclicando sobre o ponto de intersecção. Quando você terminar de desenhar, clique duas vezes \nou pressione 'Voltar' ou 'Enter' no seu teclado.\n",
-        "imagery": "# Imagens Aéreas\n\nAs imagens aéreas são um recurso muito importante para o mapeamento.\nFotos de avião, de satélite e outras fontes estão disponíveis no editor,\nno menu \"Configurações da imagem de fundo\", na esquerda.\n\nPor padrão as imagens aéreas do [Bing Mapas](http://www.bing.com/maps/)\nficam habilitadas no editor, mas, ao mover o mapa para certas áreas, novas\nfontes de imagens são disponibilizadas. Alguns países, tais como os EUA, a\nFrança e a Dinamarca, têm imagens aéreas de alta qualidade em algumas áreas.\n\nAtenção: as imagens aéreas algumas vezes não batem exatamente com o\nque há em terra, isto é, têm algum deslocamento por causa de algum erro por\nparte de quem as gerou. Se você notar que muitas ruas estão deslocadas\nem comparação com a imagem de fundo, não as alinhe imediatamente com\na imagem. Em vez disso ajuste a imagem para que ela se alinhe com as ruas\natravés do botão \"Corrigir desalinhamento\" no final do painel de Configurações\nde Fundo.\n",
+        "gps": "# GPS\n\nO GPS é a fonte de dados mais confiável do OpenStreetMap. Esse editor\nsuporta trilhas locais, isto é, arquivos \".gpx\" guardados no seu computador.\nVocê pode coletar esse tipo de trilha usando um smartphone ou um\num aparelho de GPS dedicado.\n\nPara mais informações sobre como fazer mapeamento por GPS, leia\n[Utilizando o GPS](http://learnosm.org/pt/beginner/using-gps/).\n\nPara utilizar uma trilha GPS no iD, arraste o arquivo GPX para o mapa. Se\na trilha for reconhecida, ela será adicionada ao mapa como uma linha\nem verde brilhante. Clique no menu \"Configurações da imagem de fundo\",\nno lado esquerdo, para habilitar, desabilitar ou focar o zoom na camada\nreferente a essa trilha.\n\nNote que a trilha GPX não é enviada diretamente ao OpenStreetMap. A\nmelhor maneira de utilizá-la é usando-a como uma linha guia, isto é, desenhando\npor cima dela os novos elementos que estão sendo adicionados no mapa.\nAlém disso, [envie a trilha para o OpenStreetMap](http://www.openstreetmap.org/trace/create)\npara que outras pessoas possam usá-la.\n",
+        "imagery": "# Imagens Aéreas\n\nAs imagens aéreas são um recurso muito importante para o mapeamento.\nFotos de avião, de satélite e de outras fontes livre estão disponíveis no editor,\nno menu \"Configurações da Imagem de Fundo\", no lado esquerdo.\n\nPor padrão as imagens de satélite do [Bing Maps](http://www.bing.com/maps/)\nestão habilitadas no editor, mas ao mover e aproximar o mapa para certas áreas,\nnovas fontes de imagens estarão disponíveis. Alguns países, tais como os EUA, a\nFrança e a Dinamarca, têm imagens aéreas de alta qualidade em algumas áreas.\n\nAtenção: as imagens aéreas algumas vezes não batem exatamente com o\nque há em terra, isto é, têm algum deslocamento por causa de algum erro por\nparte de quem as gerou. Se você notar que muitas ruas estão deslocadas\nem comparação com a imagem de fundo, não as alinhe imediatamente com\na imagem. Em vez disso ajuste a imagem para que ela se alinhe com as ruas\natravés do botão \"Corrigir desalinhamento\" no final do painel de Configurações\nda Imagem de Fundo.\n",
         "addresses": "# Endereços\n\nOs endereços são uma das informações mais úteis do mapa.\n\nApesar de os endereços serem representados como parte de uma rua, no OpenStreetMap\neles também são gravados como atributos de prédios e outros lugares ao longo das ruas.\n\nVocê pode adicionar informações de endereço nos locais mapeados como área de edifícios\nou mapeados como pontos. A melhor fonte de informações sobre endereços\né a que vem de pesquisas de campo ou conhecimento pessoal do local - assim\ncomo qualquer outra informação, copiar de fontes comerciais como o Google Maps é estritamente\nproibido.\n",
-        "inspector": "# Usando o Inspetor\n\nO inspetor é o elemento de interface do usuário no lado direito da\npágina que aparece quando um recurso é selecionado e permite que você edite seus detalhes.\n\n### Selecionando um tipo de recurso\n\nDepois de adicionar um ponto, linha ou área, você pode escolher que tipo de característica ele\ntem, como se é uma autoestrada ou via residencial, supermercado ou cafeteria.\nO inspetor vai exibir botões para os tipos de recursos mais comuns, e você pode\nencontrar outras, digitando o que você está procurando na caixa de pesquisa.\n\nClique no botão \"i\" no canto inferior direito de um botão de recurso para\naprender mais sobre ele. Clique em um botão para escolher o tipo.\n\n### Usando formas e editando etiquetas\n\nDepois de escolher um tipo de recurso, ou quando você seleciona um recurso que já \ntem um tipo atribuído, o inspetor vai exibir campos com detalhes sobre \no recurso como seu nome e endereço. \n\nAbaixo dos campos que você vê, você pode clicar nos ícones para adicionar outros detalhes, \ncomo informações da [Wikipedia] (http://www.wikipedia.org/), acesso para cadeirantes, \nentre outros. \n\nNa parte inferior do inspetor, clique em 'Etiquetas adicionais' para adicionar \noutras etiquetas ao elemento. O [Taginfo] (http://taginfo.openstreetmap.org/) é um \nexcelente recurso para aprender mais sobre as combinações de etiquetas mais populares.\n\nAs alterações feitas no Inspetor são automaticamente aplicadas ao mapa.\nVocê pode desfazê-los a qualquer momento, clicando no botão 'Desfazer'.\n\n### Fechando o Inspetor\n\nVocê pode fechar o inspetor, clicando no botão Fechar no canto superior direito, \nou pressionando a tecla 'Esc', ou clicando no mapa.\n",
+        "inspector": "# Usando o Inspetor\n\nO inspetor é a seção no lado direito da página que aparece quando um recurso\né selecionado e permite que você edite seus detalhes.\n\n### Selecionando um tipo de recurso\n\nDepois de adicionar um ponto, linha ou área, você pode escolher que tipo de característica ele\ntem, como por exemplo se é uma autoestrada ou via residencial, supermercado ou cafeteria.\nO inspetor vai exibir botões para os tipos de recursos mais comuns, e você pode\nencontrar outros, digitando o que você está procurando na caixa de pesquisa.\n\nClique no botão \"i\" no canto inferior direito de um botão de recurso para\naprender mais sobre ele. Clique em um botão para escolher o tipo.\n\n### Usando formas e editando etiquetas\n\nDepois de escolher um tipo de recurso, ou quando você seleciona um recurso que já \ntem um tipo atribuído, o inspetor vai exibir campos com detalhes sobre \no recurso como seu nome e endereço. \n\nAbaixo dos campos que você vê, você pode clicar nos ícones para adicionar outros detalhes, \ncomo informações da [Wikipedia] (http://www.wikipedia.org/), acesso para cadeirantes, \nentre outros. \n\nNa parte inferior do inspetor, clique em 'Etiquetas adicionais' para adicionar \noutras etiquetas ao elemento. O [Taginfo] (http://taginfo.openstreetmap.org/) é um \nexcelente recurso para aprender mais sobre as combinações de etiquetas mais populares.\n\nAs alterações feitas no Inspetor são automaticamente aplicadas ao mapa.\nVocê pode desfazê-los a qualquer momento, clicando no botão 'Desfazer'.\n",
         "buildings": "# Edifícios\n\nO OpenStreetMap é a maior base de dados de edifícios do mundo. Você pode criar\ne melhorar esta base de dados.\n\n### Selecionando\n\nVocê pode selecionar um edifício clicando em sua borda. Isto vai destacar o\nedifício, abrir um pequeno menu de ferramentas e uma barra lateral, mostrando mais informações\nsobre o edifício.\n\n### Modificando\n\nÀs vezes um edifício está no lugar errado ou tem etiquetas erradas.\n\nPara mover um edifício inteiro, selecione-o, e clique na ferramenta 'Mover'. Mova o\nmouse para deslocar o edifício, e clique novamente quando ele estiver no local certo.\n\nPara corrigir o formato de um edifício, clique e arraste os nós que formam as bordas\npara o lugar apropriado.\n\n### Criando\n\nUma das principais questões sobre adicionar edifícios ao mapa é que o\nOpenStreetMap registra-os tanto como formas quanto como pontos. A regra geral é\n_mapeie um edifício como uma forma sempre que possível_, e mapeie empresas, casas,\nserviços, e outros locais que operam fora de um edifício como pontos\ndentro da forma do edifício.\n\nComece desenhando um edifício como forma clicando no botão 'Área' no canto superior\nesquerdo da interface, e finalize pressionando 'Enter' no teclado\nou clicando no primeiro nó que você desenhou para fechar a forma.\n\n### Deletando\n\nSe um edifício estiver totalmente errado - você vê que ele não existe na imagem de satélite\ne também confirmou pessoalmente que ele não está lá - você pode deletá-lo,\nremovendo-o do mapa. Seja cuidadoso ao remover coisas -\nassim como qualquer outra edição, os resultados são vistos por todos, e as imagens de satélite\npodem estar desatualizadas, ou seja, pode ser que o edifício seja bem recente.\n\nVocê pode remover um edifício clicando nele para selecioná-lo, e depois clicando \nna lixeira ou pressionando a tecla 'Delete'.\n",
         "relations": "# Relações\n\nUma relação é um tipo especial de feição do OpenStreetMap que agrupa outras feições.\nPor exemplo, dois tipos comuns de relações são as *relações de rotas*, que agrupam \ntrecho de vias que pertecem a uma mesma estrada ou rodovia, e as *relações de\n multipolígonos*, que agrupam várias linhas para definir áreas complexas, que podem\nconter áreas não contínuas ou vazios dentro de áreas.\n\nO grupo de feições em uma relação é chamado de *membros*. Na barra lateral, você \npode ver de qual relação uma feição é membro, e clicar em uma destas relações para \nselecioná-la. Quando uma relação é selecionada, você pode ver todos os seus membros \nlistados na barra lateral e selecionados no mapa.\n\nPara a maioria dos casos, o iD vai cuidar automaticamente das relações enquanto você \nedita. O mais importante a se levar em conta é que se você deletar um trecho de via \nque faz parte de uma relação para redesenhá-lo, você terá que adicioná-lo novamente \ncomo membro da relação original.\n\n## Editando Relações\n\nSe você quer editar relações, aqui estão instruções básicas.\n\nPara adicionar uma feição a uma relação, clique no botão \"+\" na seção \"Todas relações\"\nda barra lateral, e selecione ou digite o nome da relação.\n\nPara criar uma nova relação, primeiro selecione a feição que deverá ser um membro,\ndepois clique no botão \"+\" da seção \"Todas relações\" e selecione \"Nova relação...\".\n\nPara remover uma feição de uma relação, selecione ela e clique no botão de lixeira\npróximo à relação da qual você quer fazer a remoção.\n\nVocê pode criar multipolígonos com vazios usando a ferramenta \"Mesclar\". Desenhe \nduas áreas (interior e exterior), segure a tecla Shift, clique em cada uma dessas áreas\npara selecioná-las e clique no botão \"Mesclar\" (+).\n\n"
     },
@@ -344,13 +366,15 @@
         },
         "lines": {
             "title": "Linhas",
+            "add": "As linhas são usadas para representar elementos como estradas, ferrovias e rios. **Clique no botão Linha para adicionar uma nova linha.**",
             "start": "**Comece a desenhar a linha clicando no final da estrada.**",
             "intersect": "Clique para adicionar mais nós à linha. Você pode arrastar o mapa enquanto desenha, se for necessário. Estradas, e muitos outros tipos de linhas, são partes de uma rede maior. É importante que essas linhas estejam conectadas corretamente para que as aplicações de roteamento funcionem bem. **Clique na Flower Street para criar uma interseção que conecta as duas linhas.**",
             "finish": "Para indicar o final da criação de uma linha, clique novamente no seu último nó. **Termine de criar a rua.**",
             "road": "**Selecione \"Estrada\" na lista**",
             "residential": "Há vários tipos diferentes de estrada, o mais comum entre elas é a via residencial. **Escolha o tipo Via Residencial.**",
             "describe": "**Coloque o nome da rua e feche o editor de elementos.**",
-            "restart": "A rua precisa ter um ponto de interseção com a Flower Street."
+            "restart": "A rua precisa ter um ponto de interseção com a Flower Street.",
+            "wrong_preset": "Você não selecionou o tipo de via Residencial. **Clique aqui para escolher novamente**"
         },
         "startediting": {
             "title": "Começar a editar",
@@ -448,6 +472,9 @@
             },
             "atm": {
                 "label": "Caixa Eletrônico"
+            },
+            "backrest": {
+                "label": "Encosto"
             },
             "barrier": {
                 "label": "Tipo"
@@ -575,6 +602,9 @@
             "levels": {
                 "label": "Níveis",
                 "placeholder": "2, 4, 6..."
+            },
+            "lit": {
+                "label": "Iluminado"
             },
             "location": {
                 "label": "Local"
@@ -808,6 +838,10 @@
                 "name": "Aluguel de Bicicletas",
                 "terms": "Aluguel de Bicicletas"
             },
+            "amenity/boat_rental": {
+                "name": "Aluguel de Barcos",
+                "terms": "Aluguel de Embarcações"
+            },
             "amenity/cafe": {
                 "name": "Cafeteria",
                 "terms": "Cafeteria, Café"
@@ -967,6 +1001,10 @@
             "amenity/university": {
                 "name": "Universidade",
                 "terms": "Universidade"
+            },
+            "amenity/vending_machine": {
+                "name": "Máquina de Venda",
+                "terms": "Totem de vendas, Máquina de Venda Automática"
             },
             "amenity/waste_basket": {
                 "name": "Cesto de Lixo",
@@ -1177,7 +1215,7 @@
                 "terms": "Acesso a Via Secundária"
             },
             "highway/service": {
-                "name": "Estrada coletora",
+                "name": "Via de Serviço",
                 "terms": "Via de Serviço"
             },
             "highway/service/alley": {
@@ -1203,6 +1241,10 @@
             "highway/steps": {
                 "name": "Escadaria",
                 "terms": "Degraus, Escada"
+            },
+            "highway/stop": {
+                "name": "Placa de Pare",
+                "terms": "Sinal de Pare, Placa Pare"
             },
             "highway/tertiary": {
                 "name": "Via Terciária",
@@ -1344,6 +1386,9 @@
                 "name": "Lazer",
                 "terms": "Lazer"
             },
+            "leisure/common": {
+                "name": "Área Comunitária"
+            },
             "leisure/dog_park": {
                 "name": "Parque de Cães",
                 "terms": "Parque de Cães"
@@ -1380,6 +1425,10 @@
                 "name": "Quadra de Basquetebol",
                 "terms": "Quadra de Basquete"
             },
+            "leisure/pitch/skateboard": {
+                "name": "Pista de Skate",
+                "terms": "Parque de Skate, Área para prática de Skate"
+            },
             "leisure/pitch/soccer": {
                 "name": "Campo de Futebol",
                 "terms": "Campo de Futebol"
@@ -1399,6 +1448,10 @@
             "leisure/slipway": {
                 "name": "Rampa Náutica",
                 "terms": "Rampa Náutica"
+            },
+            "leisure/sports_center": {
+                "name": "Centro Esportivo",
+                "terms": "Ginásio de Esportes, Ginásio Poliesportivo, Academia de Esportes,"
             },
             "leisure/stadium": {
                 "name": "Estádio",
@@ -1431,6 +1484,9 @@
             "man_made/lighthouse": {
                 "name": "Farol",
                 "terms": "Farol"
+            },
+            "man_made/observation": {
+                "name": "Torre de Observação"
             },
             "man_made/pier": {
                 "name": "Píer",
@@ -1484,6 +1540,9 @@
                 "name": "Orla Marítima",
                 "terms": "Orla Marítima, Linha Costeira"
             },
+            "natural/fell": {
+                "name": "Colina"
+            },
             "natural/glacier": {
                 "name": "Geleira",
                 "terms": "Geleira, Glaciar"
@@ -1499,6 +1558,9 @@
             "natural/peak": {
                 "name": "Pico",
                 "terms": "Pico, Topo de Montanha, Serra, Montanha, Monte"
+            },
+            "natural/scree": {
+                "name": "Cascalho"
             },
             "natural/scrub": {
                 "name": "Arbustos",
@@ -1615,6 +1677,10 @@
             "railway/disused": {
                 "name": "Ferrovia em Desuso",
                 "terms": "Ferrovia em Desuso"
+            },
+            "railway/halt": {
+                "name": "Interrupção de Ferrovia",
+                "terms": "Final de Ferrovia, Interrupção de Estrada de Ferro"
             },
             "railway/level_crossing": {
                 "name": "Passagem de Nível",
@@ -1796,6 +1862,10 @@
                 "name": "Lavanderia",
                 "terms": "Lavanderia"
             },
+            "shop/locksmith": {
+                "name": "Chaveiro",
+                "terms": "Técnico de Chaves e Cadeados, Cópia de Chaves, Conserto de Cadeados"
+            },
             "shop/mall": {
                 "name": "Shopping Center",
                 "terms": "Centro Comercial, Galeria"
@@ -1975,6 +2045,10 @@
             "type/route/foot": {
                 "name": "Rota de Pedestres",
                 "terms": "Rota de Caminhada"
+            },
+            "type/route/hiking": {
+                "name": "Rota de Caminhada",
+                "terms": "Rota de Trekking, "
             },
             "type/route/pipeline": {
                 "name": "Rota de Tubulação",

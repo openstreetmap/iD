@@ -83,7 +83,8 @@
             "annotation": {
                 "line": "Úhly cesty do pravého úhle.",
                 "area": "Rohy plochy do pravého úhle."
-            }
+            },
+            "not_squarish": "Z objektu není možné udělat čtverec, protože se čtverci vůbec nepodobá."
         },
         "straighten": {
             "title": "Narovnat",
@@ -246,15 +247,18 @@
         "back_tooltip": "Změnit objekt",
         "remove": "Odstranit",
         "search": "Hledat",
+        "multiselect": "Zvolené objekty",
         "unknown": "Není známo",
         "incomplete": "<nebylo staženo>",
         "feature_list": "Hledat objekty",
-        "edit": "Editovat objekt"
+        "edit": "Editovat objekt",
+        "none": "Žádné"
     },
     "background": {
         "title": "Pozadí",
         "description": "Nastavení pozadí",
         "percent_brightness": "{opacity}% viditelnost",
+        "none": "Žádné",
         "custom": "Vlastní",
         "custom_prompt": "Vložte šablonu adres dlaždic. Lze použít tokeny {z}, {x}, {y} pro schéma Z/X/Y a {u} pro hierarchické schéma quadtile.",
         "fix_misalignment": "Zarovnat pozadí",
@@ -317,7 +321,9 @@
     "cannot_zoom": "Aktuální nastavení nedovoluje větší zvětšení.",
     "gpx": {
         "local_layer": "Vlastní GPX soubor",
-        "drag_drop": "Přetáhněte do editoru soubor .gpx"
+        "drag_drop": "Přetáhněte do editoru soubor .gpx nebo klikněte na tlačítko vpravo a zvolte soubor pomocí dialogu.",
+        "zoom": "Zvětšit na stopu GPX",
+        "browse": "Zvolit .gpx soubor v dialogu"
     },
     "help": {
         "title": "Pomoc",
@@ -325,9 +331,9 @@
         "editing_saving": "# Editace a publikace\n\nTento editor pracuje primárně online - právě teď k němu přistupujete prostřednictvím webové stránky.\n\n### Výběr objektů\n\nChcete-li vybrat objekt, jako třeba silnici nebo obchod, klikněte na něj v mapě. Objekt se tím označí, otevře se boční panel s vlastnostmi objektu a zobrazí se nabídka akcemi, které lze s objektem provést.\n\nMůžete označit a pracovat s několika objekty najednou: podržte klávesu 'Shift', a pak buď postupně označte dotyčné objekty, anebo klikněte na mapu a táhněte myší či prstem - editor označí všechny objekty uvnitř příslušného obdélníku.\n\n### Publikace změn\n\nKdyž provedete nějaké úpravy objektů v mapě, úpravy jsou uloženy lokálně ve vašem prohlížeči. Nelekejte se, když uděláte chybu - úpravy lze vrátit zpět tlačítkem Zpět, a naopak je znovu provést tlačítkem Znovu.\n\nPo dokončení bloku úprav klikněte na 'Uložit' - například když jste upravili jednu část města, a chcete začít úpravy někde jinde. Zobrazí se přehled úprav, které jste provedli, editor tyto úpravy zkontroluje, a když se mu něco nebude zdát, zobrazí varování a návrhy.\n\nKdyž bude všechno v pořádku, můžete přidat krátký komentář s vysvětlením vašich úprav a kliknout znovu 'Uložit'. Úpravy se tímto publikují na [OpenStreetMap.org](http://www.openstreetmap.org/), kde za chvíli budou viditelné pro všechny uživatele a bude na nich možné provádět další úpravy.\n\nPokud nechcete nebo nemůžete pravy dokončit teď, stačí prostě odejít ze stránky pryč. Až příště navštívíte stránku (na stejném počítači, ve stejném prohlížeči), editor vám nabídne možnost znovu načíst neuložené úpravy.\n",
         "roads": "# Cesty\n\nEditor umožňuje vytvářet, opravovat a mazat silnice, pěšiny, cyklostezky, železnice atd. Zmapovat by mělo jít jakýkoli druh komunikace.\n\n### Výběr\n\nKdyž na cestu kliknete, zbarví se její obrys, otevře se u ní malá nabídka s nástroji a dále boční panel s informacemi o cestě.\n\n### Úpravy\n\nČasto narazíte na cesty, které jen nepřesně sledují pozadí či trasu GPS. Takové cesty můžete zarovnat na správné místo.\n\nNapřed klikněte na cestu, kterou chcete upravit. Cesta se rozsvítí a podél ní se objeví kontrolní uzly, které můžete posunout na správné místo. Pokud chcete přidat další kontrolní body a zpřesnit tak průběh cesty, stačí dvakrát kliknout na kus cesty mezi dvěma uzly - na zvolené místo přibude nový uzel.\n\nKdyž je reálná cesta napojena na jinou, ale v mapě spojeny nejsou, posuňte myší kontrolní uzel jedné cesty nad druhou - cesty se pak spojí. Propojení cest je velmi důležité pro správnou funkci navigací.\n\nTaké můžete posunout najednou celou cestu: buď klikněte na ikonu posunu v menu zobrazeném u cesty nebo stiskněte klávesu `M` a potom klikněte myší pro ukončení posunu. Jen pozor - pokud jsou vůči pozadí či GPS stopě všechny objekty v okolí, pravděpodobně to bude chybným pozadím a ne chybnou polohou objektů.\n\n### Mazání\n\nPokud je cesta úplně špatně, můžete ji zcela odstranit z mapy. Neměli byste se spoléhat pouze na satelitní snímky - mohou být zastaralé nebo zavádějící -, ideální je se přesvědčit na místě, že cesta opravdu neexistuje. Zvlášť při mazání objektů buďte opatrní - výsledek vaší úpravy se projeví v mapě pro všechny její uživatele.\n\nCestu smažete tak, že na ni kliknete a zvolíte ikonu odpadkového koše nebo stisknete klávesu Delete.\n\n### Vytváření\n\nNarazili jste na cestu, která by v mapě měla být, ale není? Klikněte na tlačítko 'Cesta' vlevo nahoře nebo stiskněte klávesu `2` - to vám umožní nakreslit novou cestu.\n\nKlikněte na místo, kde cesta začíná. Pokud cesta vychází z jiné, existující cesty, klikněte na místo, kde se cesty oddělují.\n\nPotom postupně klikejte na body, kudy cesta vede, podle satelitních snímků nebo trasy z GPS. Pokud vaše cesta protíná jinou, je třeba je propojit tak, že kliknete na bod křížení. Nakonec dvakrát klikněte na stejné místo nebo stiskněte klávesu 'Return' nebo 'Enter', cesta se tak ukončí.\n",
         "gps": "# GPS\n\nData z GPS jsou nejdůvěryhodnějším zdrojem informací pro OpenStreetMap. Tento editor podporuje zobrazení tras ve formátu `.gpx` nahraných z vašeho počítače. Takovou trasu můžete nasbírat s pomocí nejrůznějších aplikací pro mobily nebo s pomocí specializované navigace.\n\nPro více informací, jak provést takový sběr dat z GPS, viz např. návod anglicky:\n[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPokud už máte záznam ve formátu GPX, přetáhněte soubor myší či prstem nad editor. Rozpozná-li editor formát souboru, zobrazí se trasa v mapě jako světle zelená čára. Pokud chcete tuto novou vrstvu zapnout, vypnout nebo zvětšit na velikost pracovní plochy, klikněte na menu 'Nastavení pozadí' na pravé straně.\n\nTrasa GPX nebude přímo nahrána na OpenStreetMap - pouze slouží jako vodítko, podle kterého se můžete orientovat, a podle kterého můžete kreslit nové objekty do mapy. Pokud chcete přímo trasu GPX poskytnout i ostatním, můžete ji [nahrát do samostatné databáze OpenStreetMap](http://www.openstreetmap.org/trace/create).⏎\n",
-        "imagery": "# Podkladové snímky\n\nSatelitní a letecké snímky jsou důležitým zdrojem mapových dat. V menu 'Nastavení pozadí' na levé straně editoru je k dispozici kombinace leteckých snímků, satelitních snímků a dalších volně dostupných podkladů.\n\nImplicitní vrstvou jsou satelitní snímky [Bing](http://www.bing.com/maps/), ale jakmile se přesunete do konkrétní geografické oblasti a nastavíte dostatečné zvětšení, nabídnou se vám nové mapové podklady. V některých státech, jako jsou Spojené státy, Francie či Dánskou, jsou k dispozici snímky ve vysoké kvalitě. Pro velkou část České republiky jsou také dostupné velmi detailní satelitní snímky (data z katastru nemovitostí zatím editor nepodporuje).\n\nPodklady jsou někdy posunuté vůči mapě, kvůli chybám na straně poskytovatele snímů. Pokud uvidíte, že je mnoho cest v mapě posunuto vůči pozadí, nesnažte se je přesunout - posun obvykle znamená chybu v podkladu a ne chybu v mapě. V menu 'Nastavení pozadí' klikněte na 'Zarovnat pozadí' - to vám dovolí posunout podklad, aby lícoval s mapou.\n",
+        "imagery": "# Podkladové snímky\n\nSatelitní a letecké snímky jsou důležitým zdrojem mapových dat. V menu 'Nastavení pozadí' na levé straně editoru je k dispozici kombinace leteckých snímků, satelitních snímků a dalších volně dostupných podkladů.\n\nImplicitní vrstvou jsou satelitní snímky [Bing](http://www.bing.com/maps/), ale jakmile se přesunete do konkrétní geografické oblasti a nastavíte dostatečné zvětšení, nabídnou se vám další mapové podklady. V některých státech, jako jsou Spojené státy, Francie či Dánskou, jsou k dispozici snímky ve vysoké kvalitě. Pro velkou část České republiky jsou také dostupné velmi detailní satelitní snímky a navíc data z katastru nemovitostí.\n\nPodklady jsou někdy posunuté vůči mapě, kvůli chybám na straně poskytovatele snímů. Pokud uvidíte, že je mnoho cest v mapě posunuto vůči pozadí, nesnažte se je hned přesunout - posun obvykle znamená chybu v podkladu a ne chybu v mapě. V menu 'Nastavení pozadí' klikněte na 'Zarovnat pozadí' - to vám dovolí posunout podklad, aby lícoval s mapou.\n",
         "addresses": "# Adresy\n\nJednou z nejužitečnějších součástí mapy jsou adresy.\n\nAdresy jsou sice někdy chápány jako označení kousku ulice, ale v OpenStreetMap jsou uloženy v budovách či objektech podél ulice. V České republice jsou adresy většinou samostatným uzlem uvnitř budovy.\n\nMůžete tedy data o adrese vkládat jak k samostatnému bodu, tak k ploše označující budovu.\nNejlepším zdrojem informací o adresách je průzkum přímo v terénu či jeho dobrá znalost - stejně jako u celého projektu OpenStreetMap je přebírání dat z komerčních zdrojů typu Google Maps přísně zakázáno.\n",
-        "inspector": "# Používání Inspektoru\n\nInspektor je prvek uživatelského rozhraní na pravé straně. Inspektor se objeví, když je vybraný nějaký objekt, a umožní vám editovat jeho vlastnosti.\n\n### Výběr typu objektu\n\nJakmile vytvoříte uzel, cestu nebo plochu, můžete zvolit typ objektu. Např. jestli jde o silnici nebo pěšinu, obchod nebo hospodu. Inspektor zobrazí tlačítka pro nejčastější typy objektů; další můžete najít prostřednictvím pole pro vyhledávání.\n\nKdyž u tlačítka typu objektu kliknete na 'i' vpravo dole, zobrazí se vám o něm více informací. Když kliknete na samotné tlačítko, vyberete příslušný typ.\n\n### Formuláře a editace vlastností\n\nPoté, co vyberete typ objektu nebo když vyberete objekt s už přiřazeným typem, v inspektoru se zobrazí pole s bližšími informacemi o objektu - jako třeba název nebo adresa.\n\nPod těmito poli jsou další ikony. Když na ně kliknete, tak můžete přidávat další detaily, jako vazbu na [Wikipedii](http://www.wikipedia.org/), přístup pro vozíčkáře atd.\n\nPokud chcete přidat k objektu ještě nějaké jiné vlastnosti, klikněte na 'Další vlastnosti' úplně dole. Jedním z informačních zdrojů pak může být [Taginfo](http://taginfo.openstreetmap.org/), kde se dozvíte o nejčastějších kombinacích tagů.\n\nZměny provedené v inspektoru jsou ihned vidět na mapě zobrazené ve vašem prohlížeči. Můžete je vrátit zpět kliknutím na tlačítko 'Undo'.\n\n### Zavření inspektoru\n\nInspektor můžete zavřít kliknutím na tlačítko vpravo nahoře, nebo stisknutím Escape, nebo kliknutím jinam na mapu.\n",
+        "inspector": "# Používání Inspektoru\n\nInspektor je prvek uživatelského rozhraní na levé straně, který umožňuje editovat vlastnosti zvoleného objektu.\n\n### Výběr typu objektu\n\nJakmile vytvoříte uzel, cestu nebo plochu, můžete zvolit typ vytvořeného objektu. Např. jestli jde o silnici nebo pěšinu, obchod nebo hospodu. Inspektor zobrazí tlačítka pro nejčastější typy objektů; další můžete najít prostřednictvím pole pro vyhledávání.\n\nKdyž u tlačítka typu objektu kliknete na 'i' vpravo dole, zobrazí se vám o něm více informací. Když kliknete na samotné tlačítko, vyberete příslušný typ.\n\n### Formuláře a editace vlastností\n\nPoté, co vyberete typ objektu nebo když vyberete objekt s už přiřazeným typem, v inspektoru se zobrazí pole s bližšími informacemi o objektu - jako třeba název nebo adresa.\n\nPod těmito poli jsou další ikony. Když na ně kliknete, tak můžete přidávat další detaily, jako vazbu na [Wikipedii](http://www.wikipedia.org/), přístup pro vozíčkáře atd.\n\nPokud chcete přidat k objektu ještě nějaké jiné vlastnosti, klikněte na 'Další vlastnosti' úplně dole. Jedním z informačních zdrojů pak může být [Taginfo](http://taginfo.openstreetmap.org/), kde se dozvíte o nejčastějších kombinacích tagů.\n\nZměny provedené v inspektoru jsou ihned vidět na mapě zobrazené ve vašem prohlížeči. Můžete je vrátit zpět kliknutím na tlačítko 'Undo'.\n",
         "buildings": "# Budovy\n\nOpenStreetMap je největší databází budov na světě. Můžete tuto databázi rozšiřovat a vylepšovat.\n\n### Výběr\n\nBudovu označíte kliknutím na její hranici. Budova se v editoru rozsvítí, otevře se malá nabídka nástrojů a boční panel s informacemi o budově.\n\n### Úpravy\n\nBudovy někdy mohou mít špatnou polohu, tvar nebo nesprávné vlastnosti.\n\nPokud chcete posunout celou budovu, označte ji a kliněte na ikonu posunu - pak můžete pohnout budovou myší. Posun ukončíte kliknutím.\n\nKdyž má budova špatný tvar, klikněte na uzel na hranici budovy a posuňte ho na správné místo.\n\n### Vytváření\n\nMohou být budovy v mapě zaznamenané jako plochy, nebo jako samostatné uzly? Pravidlo je takové, že _pokud je to možné, budovy by se měly mapovat jako plochy_, a firmy, podniky, zařízení a další subjekty působící v budově by se měly mapovat jako uzly uvnitř budovy. V České republice se jako uzly uvnitř budovy obvykle mapují i adresy.\n\nChcete-li nakreslit novou budovu, klikněte na tlačítko 'Plocha' vlevo nahoře a klikáním nakreslete obrys budovy. Kreslení ukončíte buď kliknutím na první nakreslený uzel nebo stisknutím klávesy 'Enter' nebo 'Return'.\n\n### Smazání\n\nBudovy lze také mazat - ale dělejte to pouze v případě, že jste si opravdu jistí, že budova ve skutečnosti neexistuje. Satelitní snímky nejsou dostatečným důkazem, protože mohou být zastaralé nebo zavádějící. Buďte opatrní - když budovu smažete, budova zmizí z mapy pro všechny její uživatele.\n\nBudovu smažete tak, že ji označíte kliknutím a potom buď kliknete na ikonu odpadkového koše, nebo stisknete klávesu 'Delete'.\n",
         "relations": "# Relace\n\nRelace je speciálním typem objektu OpenStreetMap, který seskupuje dohromady jiné objekty.\nDvěma nejčastějšími příklady relací jsou *relace trasy*, které obsahují seznam částí cest, po kterých vede nějaká trasa, a *multipolygony*, které obsahují seznam jednoduchých ploch tvořících dohromady složitější plochu (např. plochu z několika částí nebo s dírami uvnitř).\n\nObjekty seznamu v relaci se nazývají *prvky*. V bočním panelu jsou vidět relace, kterých je zvolený objekt prvkem, a relaci pak můžete kliknutím zvolit. Po zvolení relace jsou všechny její prvky jednak uvedené v bočním panelu a také označené na mapě.\n\nVe většině případů iD dokáže relace udržovat při editacích automaticky. Měli byste si být vědomi jistých omezení: třeba když smažete kus cesty a potom ji nakreslíte znovu, je třeba zkontrolovat, že nový kus cesty je prvkem stejných relací jako původní kus.\n\n## Editace relací\n\nPři editaci relací se držte následujících principů.\n\nNový prvek do relace přidáte tak, že zvolíte daný objekt, kliknete na tlačítko \"+\" v bočním panelu v sekci \"Všechny relace\", a zvolíte nebo napíšete jméno relace.\n\nPodobně novou relaci založíte tak, že zvolíte objekt, který by se měl stát prvním prvkem relace, kliknete na tlačítko \"+\" v sekci \"Všechny relace\" a zvolíte \"Nová relace...\".\n\nPrvek z relace vyjmete tím způsobem, že zvolíte daný objekt a kliknete na tlačítko odpadkového koše vedle relace, ze které objekt chcete vyjmout.\n\nMultipolygony s dírami můžete vytvořit pomocí nástroje \"Spojit\". Nakreslete dvě plochy (vnitřní a vnější), stiskněte klávesu Shift a klikněte postupně na obě plochy, čímž je označíte. Multipolygon pak vytvoříte kliknutím na tlačítko \"Spojit\" (+).\n"
     },
@@ -1108,8 +1114,8 @@
                 "terms": "dům"
             },
             "building/hut": {
-                "name": "Chata",
-                "terms": "chatka,dřevěnice"
+                "name": "Chatička",
+                "terms": "chatička,chatka,chata,bouda,dřevěnice,kůlna,dřevník"
             },
             "building/industrial": {
                 "name": "Průmyslová budova",
@@ -1120,7 +1126,8 @@
                 "terms": "obytná budova,ubytování,bývání,byt"
             },
             "emergency/ambulance_station": {
-                "name": "Zdravotní pohotovost"
+                "name": "Stanice záchranné služby",
+                "terms": "ambulance,pohotovost,zdravotní pohotovost,pohotovostní stanice,záchranná služba,služba"
             },
             "emergency/fire_hydrant": {
                 "name": "Požární hydrant",
@@ -1382,6 +1389,10 @@
                 "name": "Volný čas",
                 "terms": "oddech,volno,volná chvíle,odpočinek,volný čas"
             },
+            "leisure/common": {
+                "name": "Volně přístupný prostor",
+                "terms": "volně přístupný prostor,volně přístupné,veřejně přístupné"
+            },
             "leisure/dog_park": {
                 "name": "Psí park",
                 "terms": "park pro psy,psí park"
@@ -1477,6 +1488,10 @@
             "man_made/lighthouse": {
                 "name": "Maják",
                 "terms": "maják,světlo"
+            },
+            "man_made/observation": {
+                "name": "Rozhledna",
+                "terms": "rozhledna,pozorovatelna,věž"
             },
             "man_made/pier": {
                 "name": "Molo",
@@ -1595,33 +1610,40 @@
                 "terms": "kancelář,kancelářský,úřad,úřadovna,administrativa,office,sídlo"
             },
             "place": {
-                "name": "Místo"
+                "name": "Místo",
+                "terms": "obec,místo,lokace,město,vesnice"
             },
             "place/city": {
-                "name": "Velkoměsto"
+                "name": "Velkoměsto",
+                "terms": "velkoměsto,město,city"
             },
             "place/hamlet": {
-                "name": "Vesnička"
+                "name": "Vesnička",
+                "terms": "vesnička,vesnice,obec,lhota"
             },
             "place/island": {
                 "name": "Ostrov",
                 "terms": "ostrov,ostrůvek,souostroví,archipel,atol,útes"
             },
             "place/isolated_dwelling": {
-                "name": "Samota"
+                "name": "Samota",
+                "terms": "samota,vesnička,obec"
             },
             "place/locality": {
-                "name": "Neobydlené místo"
+                "name": "Neobydlené místo",
+                "terms": "neobydlené místo,místo,lokalita"
             },
             "place/town": {
-                "name": "Město"
+                "name": "Město",
+                "terms": "město,městys,městečko,velkoměsto,obec"
             },
             "place/village": {
                 "name": "Vesnice",
                 "terms": "vesnice"
             },
             "point": {
-                "name": "Uzel"
+                "name": "Uzel",
+                "terms": "uzel,bod,vrchol,tečka,puntík"
             },
             "power": {
                 "name": "Energetika",
@@ -1648,14 +1670,16 @@
                 "terms": "sloup vysokého napětí,vysoké napětí"
             },
             "power/transformer": {
-                "name": "Transformátor"
+                "name": "Transformátor",
+                "terms": "transformátor,transformátorová stanice,elektrická stanice,adaptér"
             },
             "railway": {
                 "name": "Železnice",
                 "terms": "železnice, železniční dráha"
             },
             "railway/abandoned": {
-                "name": "Opuštěná železnice"
+                "name": "Opuštěná železnice",
+                "terms": "opuštěná železnice,opuštěná trať,nepoužívaná"
             },
             "railway/disused": {
                 "name": "Nepoužívaná železnice",
@@ -1670,37 +1694,44 @@
                 "terms": "přejezd,železniční přejezd,přejezd přes koleje,přejezd přes železnici,přejezd přes vlak,vlakový přejezd"
             },
             "railway/monorail": {
-                "name": "Jednokolejka"
+                "name": "Jednokolejka",
+                "terms": "jednokolejka,monorail,jednokolejná trať"
             },
             "railway/platform": {
                 "name": "Nástupiště",
                 "terms": "železniční nástupiště, nástupiště"
             },
             "railway/rail": {
-                "name": "Kolej"
+                "name": "Kolej",
+                "terms": "koleje,železnice,vlak,trať"
             },
             "railway/station": {
-                "name": "Nádraží"
+                "name": "Nádraží",
+                "terms": "stanice,železniční stanice,zastávka,železniční zastávka,nádraží,vlak"
             },
             "railway/subway": {
                 "name": "Metro",
                 "terms": "metro"
             },
             "railway/subway_entrance": {
-                "name": "Vstup do metra"
+                "name": "Vstup do metra",
+                "terms": "vstup do metra,vchod do metra,vlez do metra,vestibul,metro"
             },
             "railway/tram": {
                 "name": "Tramvaj",
                 "terms": "tramvaj,tranvaj,šalina,šmirgl,tramvajka,elektrika,električka,tram"
             },
             "relation": {
-                "name": "Relace"
+                "name": "Relace",
+                "terms": "relace,vztah,seznam,objekt"
             },
             "route/ferry": {
-                "name": "Trasa trajektu"
+                "name": "Trasa trajektu",
+                "terms": "trajekt,trasa,linka,loď,trasa trajektu"
             },
             "shop": {
-                "name": "Obchod"
+                "name": "Obchod",
+                "terms": "obchod,prodej,nákup,stánek,market,obchodní,nákupní"
             },
             "shop/alcohol": {
                 "name": "Prodejna alkoholu",
@@ -1711,60 +1742,76 @@
                 "terms": "Pekařství"
             },
             "shop/beauty": {
-                "name": "Kosmetický salón"
+                "name": "Kosmetický salón",
+                "terms": "kosmetický salón,kadeřnictví,vizážista,kosmetika,salón krásy,nehty,kosmetika,depilace"
             },
             "shop/beverages": {
-                "name": "Prodejna nápojů"
+                "name": "Prodejna nápojů",
+                "terms": "prodejna nápojů,obchod s nápoji,nápoje,pití,malinovka,kofola,občerstvení,nealkoholické nápoje"
             },
             "shop/bicycle": {
-                "name": "Cykloprodejna"
+                "name": "Cykloprodejna",
+                "terms": "obchod s koly,kola,horská kola,jízdní kola,cyklistika,cykloprodejna"
             },
             "shop/books": {
                 "name": "Knihkupectví",
                 "terms": "Knihovnictví"
             },
             "shop/boutique": {
-                "name": "Módní butik"
+                "name": "Módní butik",
+                "terms": "oblečení,šaty,oděv,oděvy,butik,móda,módní"
             },
             "shop/butcher": {
                 "name": "Řeznictví",
                 "terms": "Řezník"
             },
             "shop/car": {
-                "name": "Prodejna aut"
+                "name": "Prodejna aut",
+                "terms": "prodejna aut,autosalón,autobazar"
             },
             "shop/car_parts": {
-                "name": "Náhradní díly pro auta"
+                "name": "Náhradní díly pro auta",
+                "terms": "prodejna autodílů,autodíly,automobilový,auto"
             },
             "shop/car_repair": {
-                "name": "Autoopravna"
+                "name": "Autoopravna",
+                "terms": "opravna aut,autoservis,servis,pneuservis,opravna"
             },
             "shop/chemist": {
-                "name": "Drogérie"
+                "name": "Drogérie",
+                "terms": "drogérie,parfumérie,kosmetika,hygiena,čisticí prostředky"
             },
             "shop/clothes": {
-                "name": "Oblečení"
+                "name": "Oblečení",
+                "terms": "oděvy,oděv,šaty,oblečení,obchod s oblečením,móda,módní"
             },
             "shop/computer": {
-                "name": "Počítače"
+                "name": "Počítače",
+                "terms": "obchod s výpočetní technikou,počítače,elektro,elektronika,výpočetní technika"
             },
             "shop/confectionery": {
-                "name": "Cukrovinky"
+                "name": "Cukrovinky",
+                "terms": "cukrárna,cukrovinky,cukrářství,cukrářské zboží,sladkosti,cukroví"
             },
             "shop/convenience": {
-                "name": "Smíšené zboží"
+                "name": "Smíšené zboží",
+                "terms": "smíšené zboží,krám,obchod,potraviny,večerka"
             },
             "shop/deli": {
-                "name": "Lahůdkářství"
+                "name": "Lahůdkářství",
+                "terms": "lahůdky,lahůdkářství,delikatesy,delikatesa,deli"
             },
             "shop/department_store": {
-                "name": "Obchodní dům"
+                "name": "Obchodní dům",
+                "terms": "obchodní dům,nákupní středisko,obchodní středisko,nákupní centrum"
             },
             "shop/doityourself": {
-                "name": "Obchod pro kutily"
+                "name": "Obchod pro kutily",
+                "terms": "obchod pro kutily,stavební materiál,stavebniny,staviva,potřeby pro kutily,zahradní potřeby,železářství,kutil"
             },
             "shop/dry_cleaning": {
-                "name": "Čistírna"
+                "name": "Čistírna",
+                "terms": "čistírna,chemické čištění,čištění oděvů za sucha"
             },
             "shop/electronics": {
                 "name": "Elektro",
@@ -1775,74 +1822,100 @@
                 "terms": "stánek,ovoce,zelenina,trh,tržiště,farmářský trh,farmářské tržiště,farma"
             },
             "shop/fishmonger": {
-                "name": "Rybárna"
+                "name": "Rybárna",
+                "terms": "prodej ryb,prodavač ryb,ryby,obchodník s rybami,obchod s rybami,rybárna,mořské plody,plody moře"
             },
             "shop/florist": {
-                "name": "Květinářství"
+                "name": "Květinářství",
+                "terms": "květinář,květinářství,květy,květiny,kytice"
             },
             "shop/furniture": {
-                "name": "Nábytek"
+                "name": "Nábytek",
+                "terms": "obchod s nábytkem,nábytek,domácnost"
             },
             "shop/garden_centre": {
-                "name": "Zahradnictví"
+                "name": "Zahradnictví",
+                "terms": "zahradnictví,zahradní centrum,zahradnické středisko,zahradnické centrum"
             },
             "shop/gift": {
-                "name": "Dárky, suvenýry"
+                "name": "Dárky, suvenýry",
+                "terms": "obchod s dárky,suvenýry"
             },
             "shop/greengrocer": {
-                "name": "Ovoce a zelenina"
+                "name": "Ovoce a zelenina",
+                "terms": "zelinář,zelinářství,prodejna zeleniny,zelenina,ovoce,ovoce a zelenina"
             },
             "shop/hairdresser": {
-                "name": "Kadeřnictví"
+                "name": "Kadeřnictví",
+                "terms": "kadeřník,holič,vizážista,kadeřnictví"
             },
             "shop/hardware": {
                 "name": "Železářství",
                 "terms": "Železářství"
             },
             "shop/hifi": {
-                "name": "Hifi elektronika"
+                "name": "Hifi elektronika",
+                "terms": "obchod se zvukovými systémy,obchod s ozvučením,ozvučení,hifi"
             },
             "shop/jewelry": {
-                "name": "Klenotnictví"
+                "name": "Klenotnictví",
+                "terms": "zlatnictví,šperky,klenotník,klenoty,klenotnictví,bižutérie,náramky,náušnice,prsteny"
             },
             "shop/kiosk": {
-                "name": "Stánek"
+                "name": "Stánek",
+                "terms": "stánek,noviny,kiosek,občerstvení,tabák"
             },
             "shop/laundry": {
-                "name": "Prádelna"
+                "name": "Prádelna",
+                "terms": "prádelna,čistírna,prádlo"
+            },
+            "shop/locksmith": {
+                "name": "Zámečnictví",
+                "terms": "zámečnictví,zámečník,klíč,zámek"
             },
             "shop/mall": {
-                "name": "Obchodní centrum"
+                "name": "Obchodní centrum",
+                "terms": "nákupní středisko,obchodní středisko,obchody,nákupní centrum"
             },
             "shop/mobile_phone": {
-                "name": "Obchod s mobily"
+                "name": "Obchod s mobily",
+                "terms": "obchod s mobilními telefony,přenosné telefony,mobil,telefon"
             },
             "shop/motorcycle": {
-                "name": "Obchod s motocykly"
+                "name": "Obchod s motocykly",
+                "terms": "prodejna motocyklů,prodejna motorek,motocykly,motorky"
             },
             "shop/music": {
-                "name": "Obchod s hudbou"
+                "name": "Obchod s hudbou",
+                "terms": "hudební obchod,obchod s hudbou,cd,lp"
             },
             "shop/newsagent": {
-                "name": "Trafika"
+                "name": "Trafika",
+                "terms": "prodavač novin,trafikant,trafika,noviny,časopisy,tabák"
             },
             "shop/optician": {
-                "name": "Optika"
+                "name": "Optika",
+                "terms": "optik,optika,brýle,zrak,kontaktní čočky,čočky"
             },
             "shop/outdoor": {
-                "name": "Vybavení do přírody"
+                "name": "Vybavení do přírody",
+                "terms": "obchod s vybavením pro pobyt v přírodě,stany,spacáky,outdoor"
             },
             "shop/pet": {
-                "name": "Chovatelské potřeby"
+                "name": "Chovatelské potřeby",
+                "terms": "obchod pro domácí zvířata,obchod pro domácí mazlíčky,zverimex"
             },
             "shop/shoes": {
-                "name": "Obuvnictví"
+                "name": "Obuvnictví",
+                "terms": "dům obuvi,boty,obuvnictví,obuvník,švec"
             },
             "shop/sports": {
-                "name": "Sportovní potřeby"
+                "name": "Sportovní potřeby",
+                "terms": "sport,obchod se sportovními potřebami,sportovní potřeby,vybavení pro sport"
             },
             "shop/stationery": {
-                "name": "Kancelářské potřeby"
+                "name": "Kancelářské potřeby",
+                "terms": "papírnictví,papír,kancelářské potřeby,papírnické zboží,psací potřeby"
             },
             "shop/supermarket": {
                 "name": "Supermarket",
@@ -1853,134 +1926,172 @@
                 "terms": "Hračkářství"
             },
             "shop/travel_agency": {
-                "name": "Cestovní kancelář"
+                "name": "Cestovní kancelář",
+                "terms": "cestovní kancelář,cestovka,cestování,dovolená"
             },
             "shop/tyres": {
-                "name": "Pneuservis"
+                "name": "Pneuservis",
+                "terms": "prodejna pneumatik,pneumatiky,pneuservis"
             },
             "shop/vacant": {
-                "name": "Neobsazený obchod"
+                "name": "Neobsazený obchod",
+                "terms": "prázdný obchod,neobsazený obchod"
             },
             "shop/variety_store": {
-                "name": "Laciné zboží"
+                "name": "Laciné zboží",
+                "terms": "laciné zboží,levné zboží,sleva,slevy,krach,výprodej,za babku,všechno pod,smíšené zboží,retail,variety"
             },
             "shop/video": {
-                "name": "Video obchod"
+                "name": "Video obchod",
+                "terms": "videopůjčovna,videokazety,videokazeta,dvd"
             },
             "tourism": {
-                "name": "Turismus"
+                "name": "Turismus",
+                "terms": "turismus,turistika,cestování,cestovní ruch,turistický ruch"
             },
             "tourism/alpine_hut": {
-                "name": "Horská chata"
+                "name": "Horská chata",
+                "terms": "horská chata,alpská chata,chata,noclehárna,horská bouda,bouda,alpská chata"
             },
             "tourism/artwork": {
-                "name": "Umělecké dílo"
+                "name": "Umělecké dílo",
+                "terms": "umělecké dílo,socha,sousoší,plastika,obraz,architektonické dílo,malba,freska,mozaika"
             },
             "tourism/attraction": {
-                "name": "Pamětihodnost"
+                "name": "Pamětihodnost",
+                "terms": "pamětihodnost,turistická atrakce,turistická zajímavost,turistické lákadlo,atrakce,zajímavost,lákadlo"
             },
             "tourism/camp_site": {
-                "name": "Kemp"
+                "name": "Kemp",
+                "terms": "kemp,camp,camping,kamp,kamping,stan,přívěs,karavan,tábořiště,tábor"
             },
             "tourism/caravan_site": {
-                "name": "Místo pro karavany"
+                "name": "Místo pro karavany",
+                "terms": "místo pro karavany,kemp,camp,camping,karavan"
             },
             "tourism/chalet": {
-                "name": "Horská bouda"
+                "name": "Chata",
+                "terms": "chata,chalupa,chatka"
             },
             "tourism/guest_house": {
                 "name": "Penzion",
                 "terms": "B&B,Bed & Breakfast,Bed and Breakfast"
             },
             "tourism/hostel": {
-                "name": "Hostel"
+                "name": "Hostel",
+                "terms": "hostel,noclehárna,ubytovna,ubytování"
             },
             "tourism/hotel": {
-                "name": "Hotel"
+                "name": "Hotel",
+                "terms": "hotel,ubytování"
             },
             "tourism/information": {
-                "name": "Informace"
+                "name": "Informace",
+                "terms": "informace,údaje,údaj,cedule,tabule"
             },
             "tourism/motel": {
-                "name": "Motel"
+                "name": "Motel",
+                "terms": "motel,hotel,penzion,ubytování"
             },
             "tourism/museum": {
                 "name": "Muzeum",
                 "terms": "knihovna,galerie,výstavní,muzeum,repozitář,depozitář,archiv,sklad,lapidárium"
             },
             "tourism/picnic_site": {
-                "name": "Místo pro piknik"
+                "name": "Místo pro piknik",
+                "terms": "piknik,místo pro piknik,tábořiště,ohniště,stůl,lavička,lavice,gril"
             },
             "tourism/theme_park": {
-                "name": "Zábavní park"
+                "name": "Zábavní park",
+                "terms": "zábavní park,pouť,lunapark,atrakce,kolotoč"
             },
             "tourism/viewpoint": {
-                "name": "Výhled"
+                "name": "Výhled",
+                "terms": "výhled,rozhledna,rozhled"
             },
             "tourism/zoo": {
                 "name": "ZOO",
                 "terms": "zoo"
             },
             "type/boundary": {
-                "name": "Hranice"
+                "name": "Hranice",
+                "terms": "hranice,hraniční,čára"
             },
             "type/boundary/administrative": {
-                "name": "Administrativní hranice"
+                "name": "Administrativní hranice",
+                "terms": "administrativní hranice,správní hranice,hranice správní oblasti,hranice kraje,hranice oblasti,hranice regionu"
             },
             "type/multipolygon": {
-                "name": "Multipolygon"
+                "name": "Multipolygon",
+                "terms": "multipolygon,polygon,mnohoúhelník"
             },
             "type/restriction": {
-                "name": "Omezení"
+                "name": "Omezení",
+                "terms": "omezení,dopravní omezení"
             },
             "type/route": {
-                "name": "Trasa"
+                "name": "Trasa",
+                "terms": "trasa,cesta,linka,stopa,značka,spojení"
             },
             "type/route/bicycle": {
-                "name": "Cyklotrasa"
+                "name": "Cyklotrasa",
+                "terms": "cyklotrasa,cyklistická trasa,cyklistická značka"
             },
             "type/route/bus": {
-                "name": "Autobusová trasa"
+                "name": "Autobusová trasa",
+                "terms": "autobusová trasa,autobusová linka,autobus,bus,autobusové spojení,autobusový spoj"
             },
             "type/route/detour": {
-                "name": "Trasa objížďky"
+                "name": "Trasa objížďky",
+                "terms": "objížďka,trasa objížďky,náhradní trasa"
             },
             "type/route/ferry": {
-                "name": "Trajektová trasa"
+                "name": "Trajektová trasa",
+                "terms": "trajekt,trasa,linka,loď,trasa trajektu"
             },
             "type/route/foot": {
-                "name": "Pěší trasa"
+                "name": "Pěší trasa",
+                "terms": "pěší trasa,trasa pro pěší,turistická značka,turistická trasa,značka pro pěší,klub českých turistů,kčt"
             },
             "type/route/hiking": {
                 "name": "Turistická trasa",
-                "terms": "turistická trasa,turistická značka"
+                "terms": "pěší trasa,trasa pro pěší,turistická značka,turistická trasa,značka pro pěší,klub českých turistů,kčt"
             },
             "type/route/pipeline": {
-                "name": "Potrubní trasa"
+                "name": "Potrubní trasa",
+                "terms": "potrubí,potrubní trasa,roura,roury,transport,vodovod,ropovod,produktovod,plynovod,kanál,rozvod"
             },
             "type/route/power": {
-                "name": "Elektrická trasa"
+                "name": "Elektrická trasa",
+                "terms": "trasa elektrického vedení,elektrické vedení,elektrika,napětí,vysoké napětí,drát,dráty,kabel,kabely"
             },
             "type/route/road": {
-                "name": "Silniční trasa"
+                "name": "Silniční trasa",
+                "terms": "silnice,silniční trasa,trasa silnice,trasa dálnice,dálnice"
             },
             "type/route/train": {
-                "name": "Železniční trasa"
+                "name": "Železniční trasa",
+                "terms": "železniční trasa,vlaková trasa,železniční linka,vlaková linka,kolej,koleje,železnice,dráhy,dráha,železniční cesta,železniční cesty,drážní"
             },
             "type/route/tram": {
-                "name": "Tramvajová trasa"
+                "name": "Tramvajová trasa",
+                "terms": "tramvajová trasa,tramvajová linka,kolej,koleje,tramvaj,linka tramvaje"
             },
             "type/route_master": {
-                "name": "Řídící relace trasy"
+                "name": "Řídící relace trasy",
+                "terms": "řídící relace trasy,route master,hlavní relace,nadrelace,master"
             },
             "vertex": {
-                "name": "Jiné"
+                "name": "Jiné",
+                "terms": "další,ostatní,jiné,jiná,jiný,jinak"
             },
             "waterway": {
-                "name": "Vodní tok"
+                "name": "Vodní tok",
+                "terms": "vodní tok,řeka,potok,kanál,tok"
             },
             "waterway/canal": {
-                "name": "Vodní kanál"
+                "name": "Vodní kanál",
+                "terms": "vodní kanál,kanál,přivaděč,náhon,průplav,závlaha"
             },
             "waterway/dam": {
                 "name": "Hráz",
@@ -1991,14 +2102,16 @@
                 "terms": "příkop, strouha, škarpa"
             },
             "waterway/drain": {
-                "name": "Odvodňovací strouha"
+                "name": "Odvodňovací strouha",
+                "terms": "odvodňovací strouha,strouha,odvodňovací kanál,odvaděč"
             },
             "waterway/river": {
                 "name": "Řeka",
                 "terms": "potok,potůček,strouha,říčka,přítok,koryto"
             },
             "waterway/riverbank": {
-                "name": "Břeh řeky"
+                "name": "Břeh řeky",
+                "terms": "břeh řeky,břeh,nábřeží,pobřeží"
             },
             "waterway/stream": {
                 "name": "Potok",

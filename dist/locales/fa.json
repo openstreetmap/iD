@@ -1,0 +1,214 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "مساحت"
+        },
+        "add_point": {
+            "title": "نقطه"
+        },
+        "browse": {
+            "title": "جستجو"
+        }
+    },
+    "operations": {
+        "delete": {
+            "title": "حذف"
+        }
+    },
+    "presets": {
+        "fields": {
+            "access": {
+                "label": "دسترسي"
+            },
+            "address": {
+                "label": "ادرس",
+                "placeholders": {
+                    "housename": "نام خانه",
+                    "number": "123",
+                    "street": "خيابان",
+                    "city": "شهر"
+                }
+            },
+            "aeroway": {
+                "label": "نوع"
+            },
+            "amenity": {
+                "label": "نوع"
+            },
+            "artwork_type": {
+                "label": "نوع"
+            },
+            "barrier": {
+                "label": "نوع"
+            },
+            "bicycle_parking": {
+                "label": "نوع"
+            },
+            "boundary": {
+                "label": "نوع"
+            },
+            "building": {
+                "label": "ساختمان"
+            },
+            "building_area": {
+                "label": "ساختمان"
+            },
+            "building_yes": {
+                "label": "ساختمان"
+            },
+            "capacity": {
+                "label": "ظرفيت"
+            },
+            "construction": {
+                "label": "نوع"
+            },
+            "crossing": {
+                "label": "نوع"
+            },
+            "elevation": {
+                "label": "ارتفاع"
+            },
+            "entrance": {
+                "label": "نوع"
+            },
+            "fax": {
+                "label": "نمابر"
+            },
+            "fire_hydrant/type": {
+                "label": "نوع"
+            },
+            "generator/type": {
+                "label": "نوع"
+            },
+            "highway": {
+                "label": "نوع"
+            },
+            "historic": {
+                "label": "نوع"
+            },
+            "internet_access": {
+                "options": {
+                    "wlan": "واي فاي",
+                    "wired": "سيمي",
+                    "terminal": "پايانه"
+                }
+            },
+            "landuse": {
+                "label": "نوع"
+            },
+            "layer": {
+                "label": "لايه"
+            },
+            "leisure": {
+                "label": "نوع"
+            },
+            "man_made": {
+                "label": "نوع"
+            },
+            "network": {
+                "label": "شبکه"
+            },
+            "note": {
+                "label": "يادداشت"
+            },
+            "office": {
+                "label": "نوع"
+            },
+            "oneway": {
+                "label": "يک طرفه"
+            },
+            "opening_hours": {
+                "label": "ساعت"
+            },
+            "operator": {
+                "label": "اپراتور"
+            },
+            "parking": {
+                "label": "نوع"
+            },
+            "phone": {
+                "label": "تلفن"
+            },
+            "place": {
+                "label": "نوع"
+            },
+            "power": {
+                "label": "نوع"
+            },
+            "railway": {
+                "label": "نوع"
+            },
+            "relation": {
+                "label": "نوع"
+            },
+            "restriction": {
+                "label": "نوع"
+            },
+            "route": {
+                "label": "نوع"
+            },
+            "route_master": {
+                "label": "نوع"
+            },
+            "service": {
+                "label": "نوع"
+            },
+            "shop": {
+                "label": "نوع"
+            },
+            "sport": {
+                "label": "ورزشي"
+            },
+            "tourism": {
+                "label": "نوع"
+            },
+            "towertype": {
+                "label": "نوع برج"
+            },
+            "tracktype": {
+                "label": "نوع"
+            },
+            "vending": {
+                "label": "نوع محموله"
+            },
+            "water": {
+                "label": "نوع"
+            },
+            "waterway": {
+                "label": "نوع"
+            },
+            "website": {
+                "label": "وب سايت"
+            },
+            "wetland": {
+                "label": "نوع"
+            },
+            "wikipedia": {
+                "label": "ويکي پديا"
+            },
+            "wood": {
+                "label": "نوع"
+            }
+        },
+        "presets": {
+            "aeroway/aerodrome": {
+                "name": "فرودگاه"
+            },
+            "amenity/bank": {
+                "name": "بانک"
+            },
+            "amenity/bar": {
+                "name": "بار"
+            },
+            "amenity/cafe": {
+                "name": "کافه"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "مسجد"
+            },
+            "amenity/police": {
+                "name": "پليس"
+            }
+        }
+    }
+}

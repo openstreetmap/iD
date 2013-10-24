@@ -30,7 +30,8 @@
         "add": {
             "annotation": {
                 "point": "Telah ditambahkan sebuah titik.",
-                "vertex": "Ditambahkan simpul pada jalan."
+                "vertex": "Ditambahkan simpul pada jalan.",
+                "relation": "Tambahkan relasi"
             }
         },
         "start": {
@@ -40,6 +41,9 @@
             }
         },
         "continue": {
+            "title": "Lanjutkan",
+            "description": "Lanjutkan garis ini.",
+            "not_eligible": "Tidak ada garis yang dapat dilanjutkan disini.",
             "annotation": {
                 "line": "Dilanjutkan sebuah garis.",
                 "area": "Dilanjutkan sebuah area."
@@ -68,10 +72,22 @@
             "not_closed": "Ini tidak bisa dibuat berputar karena bukan sebuah garis tertutup."
         },
         "orthogonalize": {
+            "title": "Persegi",
+            "description": {
+                "line": "Kotakkan sudut garis ini.",
+                "area": "Mengotakkan sudut area ini."
+            },
             "annotation": {
                 "line": "Mengotakkan sudut dari garis",
                 "area": "Mengotakkan sudut sebuah area."
-            }
+            },
+            "not_squarish": "Tidak bisa dibuat mengkotak karena bukan segi empat."
+        },
+        "straighten": {
+            "title": "Luruskan",
+            "description": "Luruskan garis ini.",
+            "annotation": "Luruskan kembali sebuah garis.",
+            "too_bendy": "Garis ini tidak dapat diluruskan karena terlalu banyak lekukan."
         },
         "delete": {
             "title": "Hapus",
@@ -197,6 +213,11 @@
         "list": "Disunting oleh {users}",
         "truncated_list": "Disunting oleh {users} dan {count} lainnya"
     },
+    "geocoder": {
+        "search": "Cari di seluruh dunia...",
+        "no_results_visible": "Hasil pencarian tidak ditemukan pada peta yang ditampilkan",
+        "no_results_worldwide": "Hasil pencarian tidak ditemukan"
+    },
     "geolocate": {
         "title": "Tunjukan Lokasi Saya"
     },
@@ -208,6 +229,7 @@
         "all_tags": "Semua Tags",
         "all_members": "Semua anggota",
         "all_relations": "Seluruh relasi",
+        "new_relation": "Buat relasi baru",
         "role": "Aturan",
         "choose": "Pilih Tipe Fitur",
         "results": "{n}hasil untuk {search}",
@@ -217,12 +239,14 @@
         "search": "Cari",
         "unknown": "Tidak diketahui",
         "incomplete": "<tak terunduh>",
+        "feature_list": "Cari fitur",
         "edit": "Ubah Fitur"
     },
     "background": {
         "title": "Latar",
         "description": "Pengaturan Latar",
         "percent_brightness": "{opacity}% kecerahan",
+        "fix_misalignment": "Perbaiki Kesalahan Penempatan",
         "reset": "ulang"
     },
     "restore": {
@@ -243,7 +267,9 @@
         "edited_osm": "OSM tersunting!",
         "just_edited": "Anda baru saja menyunting OpenStreetMap!",
         "view_on_osm": "Lihat di OSM",
-        "facebook": "Bagikan di Facebook"
+        "facebook": "Bagikan di Facebook",
+        "twitter": "Berbagi di Twitter",
+        "google": "Berbagi di Google+"
     },
     "confirm": {
         "okay": "Baiklah"
@@ -277,13 +303,11 @@
     },
     "cannot_zoom": "Tidak bisa memperbesar tampilan lebih jauh dengan mode ini.",
     "gpx": {
-        "local_layer": "File GPX lokal",
-        "drag_drop": "Geser dan letakkan sebuah file .gpx ke halaman"
+        "local_layer": "File GPX lokal"
     },
     "help": {
         "title": "Bantuan",
-        "help": "#Bantuan\n\nIni adalah penyunting untuk [OpenStreetMap] (http://www.openstreetmap.org/), peta dunia gratis dan bisa disunting. Anda dapat menggunakannya dengan menambahkan dan memperbarui data di area anda, membangun sebuah peta sumber-terbuka dan data-terbuka yang lebih baik untuk semua orang.\n\nPerubahan yang anda buat akan terlihat ke semua orang yang menggunakan OpenStreetMap. Untuk melakukan penyutingan, anda membutuhkan [free OpenStreetMap account] (https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) adalah proyek kolaborasi dengan [kode sumber tersedia di GitHub](http://github.com/systemed/iD).\n",
-        "imagery": "# Citra⏎\n⏎\nCitra Foto Udara menjadi sumber penting untuk pemetaan. Kombinasi dari⏎\npemotretan pesawat, pandangan satelit, dan sumber gabungan lain yang tersedia⏎\ndi penyunting ada di pilihan 'Pengaturan Latar' di sebelah kiri.⏎\n⏎\nBiasanya lapisan satelit [Bing Maps](http://www.bing.com/maps/) ditampilkan di⏎\ndi penyunting ini, tapi ketika anda geser atau perbesar tampilan di suatu wilayah baru,⏎\nsumber baru lain juga bisa tersedia. Di beberapa negara, seperti Amerika Serikat,⏎\nPerancis, dan Denmark memiliki citra berkualitas tinggi yang tersedia di beberapa area.⏎\n⏎\nCitra kadang melenceng dari data peta karena ada kesalahan pada⏎\npenyedia data citra. Jika anda melihat banyak jalan yang bergeser dari latarnya,⏎\njangan semerta-merta memindahkan mereka semua ke latar yang pas. Namun, anda bisa menyesuaikan⏎\ncitranya agar pas dengan data yang ada dengan mengklik 'Fix alignment' pada⏎\nbagian bawah Pengaturan Latar.⏎\n"
+        "help": "#Bantuan\n\nIni adalah penyunting untuk [OpenStreetMap] (http://www.openstreetmap.org/), peta dunia gratis dan bisa disunting. Anda dapat menggunakannya dengan menambahkan dan memperbarui data di area anda, membangun sebuah peta sumber-terbuka dan data-terbuka yang lebih baik untuk semua orang.\n\nPerubahan yang anda buat akan terlihat ke semua orang yang menggunakan OpenStreetMap. Untuk melakukan penyutingan, anda membutuhkan [free OpenStreetMap account] (https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) adalah proyek kolaborasi dengan [kode sumber tersedia di GitHub](http://github.com/systemed/iD).\n"
     },
     "intro": {
         "navigation": {
@@ -1148,6 +1172,12 @@
             "shop/computer": {
                 "name": "Toko Komputer"
             },
+            "shop/convenience": {
+                "name": "Toko Kelontong"
+            },
+            "shop/department_store": {
+                "name": "Pasar Swalayan"
+            },
             "shop/electronics": {
                 "name": "Toko Elektronik"
             },
@@ -1180,6 +1210,9 @@
             },
             "shop/music": {
                 "name": "Toko Musik"
+            },
+            "shop/newsagent": {
+                "name": "Agen Koran dan Majalah"
             },
             "shop/optician": {
                 "name": "Optik"

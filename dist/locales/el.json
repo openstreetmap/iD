@@ -100,6 +100,7 @@
         "disconnect": {
             "title": "Αποσύνδεση",
             "key": "D",
+            "annotation": "Αποσύνδεση γραμμών/περιοχών.",
             "not_connected": "Δεν υπάρχουν αρκετές γραμμές/περιοχές εδώ για αποσύνδεση."
         },
         "merge": {
@@ -203,6 +204,7 @@
         "no_documentation_key": "Δεν υπάρχει διαθέσιμη τεκμηρίωση για αυτό το κλειδί",
         "show_more": "Εμφάνιση Περισσότερων",
         "view_on_osm": "Προβολή στο openstreetmap.org",
+        "all_tags": "Όλες οι ετικέτες",
         "all_members": "Όλα τα μέλη",
         "all_relations": "Όλες οι σχέσεις",
         "new_relation": "Νέα σχέση",
@@ -213,14 +215,17 @@
         "back_tooltip": "Αλλαγή χαρακτηριστικού",
         "remove": "Αφαίρεση",
         "search": "Αναζήτηση",
+        "multiselect": "Επιλεγμένα αντικείμενα",
         "unknown": "Άγνωστο",
         "feature_list": "Αναζήτηση χαρακτηριστικών",
-        "edit": "Επεξεργασία χαρακτηριστικού"
+        "edit": "Επεξεργασία χαρακτηριστικού",
+        "none": "Κανένα"
     },
     "background": {
         "title": "Παρασκήνιο",
         "description": "Ρυθμίσεις παρασκηνίου",
         "percent_brightness": "{opacity}% φωτεινότητα",
+        "none": "Κανένα",
         "custom": "Προσαρμοσμένο",
         "fix_misalignment": "Διόρθωση ευθυγράμμισης",
         "reset": "Μηδενισμός"
@@ -240,6 +245,7 @@
         "unsaved_changes": "Έχετε μη αποθηκευμένες αλλαγές"
     },
     "success": {
+        "edited_osm": "Επεξεργαστήκατε τον OSM",
         "just_edited": "Μόλις επεξεργαστήκατε το OpenStreetMap!",
         "view_on_osm": "Εμφάνιση στο OSM",
         "facebook": "Διαμοιρασμός στο Facebook",
@@ -276,7 +282,7 @@
     },
     "gpx": {
         "local_layer": "Τοπικό αρχείο GPX",
-        "drag_drop": "Σύρετε και αφήστε ένα αρχείο .gpx στη σελίδα"
+        "browse": "Εξερεύνηση για αρχείο .gpx"
     },
     "help": {
         "title": "Βοήθεια",
@@ -467,6 +473,9 @@
             "fire_hydrant/type": {
                 "label": "Τύπος"
             },
+            "fixme": {
+                "label": "Διορθώστε με"
+            },
             "generator/method": {
                 "label": "Μέθοδος"
             },
@@ -570,6 +579,9 @@
             "railway": {
                 "label": "Είδος"
             },
+            "ref": {
+                "label": "Αναφορά"
+            },
             "relation": {
                 "label": "Είδος"
             },
@@ -581,6 +593,7 @@
                     "buddhist": "Βουδισμός",
                     "jewish": "Ιουδαϊσμός",
                     "hindu": "Ινδουισμός",
+                    "shinto": "Σιντοϊσμός",
                     "taoist": "Ταοϊσμός"
                 }
             },
@@ -1098,6 +1111,9 @@
                 "name": "Σκαλοπάτια",
                 "terms": "Σκαλιά, Σκαλοπάτια"
             },
+            "highway/stop": {
+                "name": "Σήμα Στοπ"
+            },
             "highway/tertiary": {
                 "name": "Τριτεύων Δρόμος"
             },
@@ -1212,6 +1228,9 @@
             "leisure": {
                 "name": "Αναψυχή"
             },
+            "leisure/common": {
+                "name": "Κοινό"
+            },
             "leisure/dog_park": {
                 "name": "Πάρκο Σκύλων",
                 "terms": "Πάρκο σκύλων"
@@ -1265,6 +1284,9 @@
             "leisure/slipway": {
                 "name": "Γλύστρα",
                 "terms": "Γλίστρα"
+            },
+            "leisure/sports_center": {
+                "name": "Αθλητικό Κέντρο"
             },
             "leisure/stadium": {
                 "name": "Στάδιο",
@@ -1353,6 +1375,7 @@
                 "terms": "Τόπος με γρασίδι, Λιβάδι"
             },
             "natural/heath": {
+                "name": "Θαμνότοπος",
                 "terms": "Λόγγος, Χέρσο, Ακαλιέργητο"
             },
             "natural/peak": {
@@ -1630,6 +1653,9 @@
                 "name": "Καθαριστήριο",
                 "terms": "Πλυντήριο"
             },
+            "shop/locksmith": {
+                "name": "Κλειδαράς"
+            },
             "shop/mall": {
                 "name": "Εμπορικό Κέντρο",
                 "terms": "Εμπορικό κέντρο"
@@ -1829,6 +1855,9 @@
             "waterway/ditch": {
                 "name": "Χαντάκι",
                 "terms": "Χαντάκι, Τάφρος"
+            },
+            "waterway/drain": {
+                "name": "Οχετός"
             },
             "waterway/river": {
                 "name": "Ποταμός",

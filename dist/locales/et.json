@@ -2,11 +2,13 @@
     "modes": {
         "add_area": {
             "title": "Ala",
-            "description": "Lisa kaardile parke, hooneid, järvi ja muid alasid."
+            "description": "Lisa kaardile parke, hooneid, järvi või muid alasid.",
+            "tail": "Ala (park, järv, ehitis vms) joonistamiseks kliki kaardil."
         },
         "add_line": {
             "title": "Joon",
-            "description": "Lisa teid, tänavaid, jalgteid, ojasid ja teisi jooni kaardile."
+            "description": "Lisa teid, tänavaid, jalgteid, ojasid ja teisi jooni kaardile.",
+            "tail": "Joone (tee, rada, marsruut vms) joonistamiseks kliki kaardil."
         },
         "add_point": {
             "title": "Punkt",
@@ -33,9 +35,12 @@
             }
         },
         "continue": {
+            "key": "A",
+            "title": "Jätka",
+            "description": "Jätka seda joont.",
             "annotation": {
-                "line": "Jätkatud joont.",
-                "area": "Jätkatud ala."
+                "line": "Joon jätkatud.",
+                "area": "Ala jätkatud."
             }
         },
         "cancel_draw": {
@@ -45,7 +50,7 @@
             "annotation": "Relatsiooni liikme roll on muudetud."
         },
         "change_tags": {
-            "annotation": "Muudetud silte."
+            "annotation": "Sildid muudetud."
         },
         "circularize": {
             "title": "Muuda ringikujuliseks",
@@ -61,14 +66,28 @@
             "not_closed": "Seda ei saa teha ringikujuliseks kuna see ei ole silmus."
         },
         "orthogonalize": {
+            "title": "Nurgad täisnurkseks",
+            "description": {
+                "line": "Täisnurgasta selle joone nurgad.",
+                "area": "Täisnurgasta selle ala nurgad."
+            },
+            "key": "S",
             "annotation": {
                 "line": "Joone nurgad täisnurgastatud.",
                 "area": "Ala nurgad täisnurgastatud."
-            }
+            },
+            "not_squarish": "Seda ei saa teha täisnurkseks kuna see ei ole nurgeline."
+        },
+        "straighten": {
+            "title": "Tee sirgeks",
+            "description": "Tee see joon sirgeks.",
+            "key": "S",
+            "annotation": "Joon tehti sirgeks.",
+            "too_bendy": "Seda ei saa sirgeks teha kuna see painduks liiga palju."
         },
         "delete": {
             "title": "Kustuta",
-            "description": "Eemalda see kaardilt.",
+            "description": "Eemalda kaardilt.",
             "annotation": {
                 "point": "Punkt kustutatud.",
                 "vertex": "Punkt kustutatud joonelt.",
@@ -95,13 +114,15 @@
         "disconnect": {
             "title": "Ühenda lahti",
             "description": "Ühenda need jooned/alad üksteisest lahti.",
-            "key": "D"
+            "key": "D",
+            "annotation": "Lahtiühendatud jooned/alad."
         },
         "merge": {
             "title": "Ühenda",
             "description": "Ühenda need jooned.",
             "key": "C",
             "annotation": "{n} joont ühendatud.",
+            "not_eligible": "Neid objekte ei saa ühendada.",
             "not_adjacent": "Neid jooni ei saa ühendada kuna need ei ole üksteisega seotud."
         },
         "move": {
@@ -133,7 +154,8 @@
         "split": {
             "title": "Tükelda",
             "description": {
-                "line": "Tükelda see joon kaheks sellest punktist."
+                "line": "Tükelda see joon kaheks sellest punktist.",
+                "area": "Jaga selle ala piir kaheks."
             },
             "key": "X",
             "annotation": {
@@ -144,17 +166,28 @@
         }
     },
     "undo": {
+        "tooltip": "Tühista: : {action}",
         "nothing": "Pole midagi tagasi võtta."
     },
     "redo": {
+        "tooltip": "Tee uuesti: {action}",
         "nothing": "Pole midagi uuesti teha."
     },
+    "tooltip_keyhint": "Kiirvalik:",
     "browser_notice": "See redaktor on toetatud järgnevates veebilehitsejates: Firefox, Chrome, Safari, Opera, ja Internet Explorer 9 ning uuemates. Palun uuenda oma veebilehitsejat või kasuta Potlatch 2'te kaardi muutmiseks.",
+    "translate": {
+        "translate": "Tõlgi",
+        "localized_translation_label": "Mitmekeelne nimi",
+        "localized_translation_language": "Vali keel",
+        "localized_translation_name": "Nimi"
+    },
+    "zoom_in_edit": "Muutmiseks zuumi sisse",
     "logout": "Logi välja",
     "loading_auth": "OpenStreetMap'iga ühendamine...",
     "report_a_bug": "teata veast",
     "commit": {
         "title": "Salvesta muudatused",
+        "description_placeholder": "Muudatuste lühikirjeldus",
         "message_label": "Salvestuse kommentaar",
         "upload_explanation": "Su salvestatavad muudatused on nähtaval kõikidel kaartidel mis kasutavad OpenStreetMap-i andmeid.",
         "upload_explanation_with_user": "Su kasutajana {user} salvestatavad muudatused on nähtaval kõikidel kaartidel, mis kasutavad OpenStreetMap-i andmeid.",
@@ -165,32 +198,76 @@
         "deleted": "Kustutatud",
         "created": "Loodud"
     },
+    "contributors": {
+        "list": "Muutjad: {users}",
+        "truncated_list": "Muutjad: {users} ja {count} teist"
+    },
+    "geocoder": {
+        "search": "Otsi kogu maailmast...",
+        "no_results_visible": "Nähtaval kaardialal tulemusi ei leitud",
+        "no_results_worldwide": "Tulemusi ei leitud"
+    },
     "geolocate": {
         "title": "Näita minu asukohta"
     },
     "inspector": {
+        "no_documentation_combination": "Selle sildi kohta puudub dokumentatsioon",
+        "no_documentation_key": "Selle objektiliigi kohta puudub informatsioon",
         "show_more": "Näita rohkem",
+        "view_on_osm": "Vaata openstreetmap.org lehel",
         "all_tags": "Kõik sildid",
+        "all_members": "Kõik liikmed",
         "all_relations": "Kõik relatsioonid",
         "new_relation": "Uus relatsioon...",
+        "role": "Roll",
+        "choose": "Vali objekti liik",
         "results": "{n} tulemust otsingule {search}",
+        "reference": "Vaata OpenStreetMap Wiki lehel",
+        "back_tooltip": "Muuda objekti",
         "remove": "Eemalda",
         "search": "Otsi",
+        "multiselect": "Valitud ühikud",
+        "unknown": "Teadmata",
+        "incomplete": "<alla laadimata>",
         "feature_list": "Otsi objekte",
-        "edit": "Muuda objekti"
+        "edit": "Muuda objekti",
+        "none": "Puudub"
     },
     "background": {
         "title": "Taust",
         "description": "Tausta seaded",
         "percent_brightness": "{opacity}% heledus",
-        "fix_misalignment": "Korrigeeri nihet"
+        "none": "Puudub",
+        "custom": "Kohandatud",
+        "custom_prompt": "Sisesta kohandatud tausta URL. Kasutatavad muutujad on {z}, {x}, {y} Z/X/Y skeemi jaoks ja {u} quadtile skeemi jaoks.",
+        "fix_misalignment": "Korrigeeri nihet",
+        "reset": "lähtesta"
+    },
+    "restore": {
+        "heading": "Sul on salvestamata muudatusi",
+        "description": "Kas soovid taastada eelmise sessiooni käigus tehtud muudatused?",
+        "restore": "Taasta",
+        "reset": "Lähtesta"
     },
     "save": {
         "title": "Salvesta",
         "help": "Salvesta muudatused OpenStreetMap'i, tehes need teistele kasutajatele nähtavaks.",
+        "no_changes": "Salvestamist vajavad muudatused puuduvad.",
         "error": "Salvestamisel ilmnes tõrge",
         "uploading": "Muudatuste üleslaadimine OpenStreetMap'i.",
         "unsaved_changes": "Sul on salvestamata muudatusi"
+    },
+    "success": {
+        "edited_osm": "Sa täiendasid OSM-i!",
+        "just_edited": "Sa täiendasid just OpenStreetMap-i!",
+        "view_on_osm": "Vaata OSM lehel",
+        "facebook": "Jaga Facebook-is",
+        "twitter": "Jaga Twitteris",
+        "google": "Jaga Google+-is",
+        "help_html": "Sinu muudatused peaks \"Standard\" kihile ilmuma mõne minuti pärast. Teiste kihtidega ja teatud objektidega võib kauem aega minna, \n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>vaata lisaks</a>).\n"
+    },
+    "confirm": {
+        "okay": "Korras"
     },
     "splash": {
         "welcome": "Tere tulemast kasutama iD OpenStreetMap redaktorit",
@@ -198,8 +275,15 @@
         "walkthrough": "Alusta tutvustust",
         "start": "Kohe redigeerima"
     },
+    "source_switch": {
+        "live": "live",
+        "lose_changes": "Sul on salvestamata muudatusi. Kaardiserveri vahetamine kaotab need. Kas oled kindel, et soovid serverit vahetada?",
+        "dev": "dev"
+    },
     "tag_reference": {
-        "description": "Kirjeldus"
+        "description": "Kirjeldus",
+        "on_wiki": "{tag} wiki.osm.org-is",
+        "used_with": "kasutatakse koos liigiga {type}"
     },
     "validations": {
         "untagged_point": "Sildistamata punkt",
@@ -213,8 +297,14 @@
         "in": "Suurenda sisse",
         "out": "Suurenda välja"
     },
+    "gpx": {
+        "local_layer": "Kohalik GPX fail",
+        "zoom": "Zuumi GPX jälg sisse",
+        "browse": "Vali .gpx fail"
+    },
     "help": {
-        "title": "Abi"
+        "title": "Abi",
+        "imagery": "# Aerofoto\n\nAerofotod on kaardistamisel oluliseks algallikaks. Valik aerofotosid on kättesaadavad paremal asuva redaktori taustaseadete menüü kaudu, vaikimisi on taustaks [Bing Maps](http://www.bing.com/maps/) satelliitfoto.\n\nMaa-ameti aerofoto taustana kasutamiseks lisa kohandatud tausta valikusse aadress kujul http://kaart.maakaart.ee/orto/{z}/{x}/{y}.jpeg. Selleks, et avada OSM ID-redaktor vaikimisi Maa-ameti ortofoto taustaga, kasuta veebibrauseris aadressi http://www.openstreetmap.org/edit#background=custom:http://kaart.maakaart.ee/orto/{z}/{x}/{y}.jpeg&map=@zoom/@lon/@lat, milles @zoom/@lon/@lat asenda reaalsete väärtustega (näit. 15/59.3438/24.5892).\n\nMõnikord on aerofoto kaardiandmete suhtes nihkes. Kui märkad mitmeid taustaga nihkes olevaid teid, ära asu kohe nende asukohti muutma, vaid kohanda vastavalt aerofoto asendit taustaseadete menüü valiku 'Korrigeeri nihet' abil.\n"
     },
     "intro": {
         "navigation": {
@@ -223,13 +313,18 @@
             "select": "Kaardi objekte saab esitada kolmel viisil: kasutades punkte, jooni või alasid. Kõiki objekte saab valida nendel klikkides. **Kliki punktil, et see valida.**"
         },
         "points": {
-            "title": "Punktid"
+            "title": "Punktid",
+            "add": "Punkte saab kasutada objektide nagu kauplused, restoranid ja monumendid esitamiseks. Punktid märgistavad konkreetse koha ja kirjeldavad, mis seal asub. **Uue punkti lisamiseks kliki nupul Punkt.** ",
+            "choose": "**Vali nimekirjast kohvik**"
         },
         "areas": {
-            "title": "Alad"
+            "title": "Alad",
+            "search": "**Otsi '{name}'.**",
+            "choose": "**Vali nimekirjast mänguväljak**"
         },
         "lines": {
-            "title": "Jooned"
+            "title": "Jooned",
+            "road": "**Vali nimekirjast tee**"
         },
         "startediting": {
             "title": "Alusta redigeerimist",

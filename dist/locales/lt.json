@@ -82,12 +82,16 @@
         "deleted": "Ištrinta",
         "created": "Sukurta"
     },
+    "geocoder": {
+        "search": "Ieškoti visam pasaulyje..."
+    },
     "geolocate": {
         "title": "Rodyti mano vietą"
     },
     "inspector": {
         "all_members": "Visi nariai",
         "all_relations": "Visi ryšiai",
+        "results": "{n} paieškos {search} rezultatai",
         "remove": "Pašalinti",
         "search": "Ieškoti",
         "unknown": "Nežinoma"
@@ -114,9 +118,56 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-road": {
+                "name": "Kelias"
+            },
+            "category-route": {
+                "name": "Maršrutas"
+            },
+            "category-water": {
+                "name": "Vanduo"
+            }
+        },
         "fields": {
             "access": {
-                "label": "Prieiga"
+                "label": "Prieiga",
+                "placeholder": "Nežinoma",
+                "types": {
+                    "foot": "Pėstieji",
+                    "motor_vehicle": "Motorinis transportas",
+                    "bicycle": "Dviračiai",
+                    "horse": "Arkliai"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Leidžiamas",
+                        "description": "Priėjimas leidžiamas įstatymų; pirmumo teisė"
+                    },
+                    "no": {
+                        "title": "Draudžiamas",
+                        "description": "Priėjimas draudžiamas plačiajai visuomenei"
+                    },
+                    "permissive": {
+                        "title": "Leistinas",
+                        "description": "Priėjimas leistinas, kai savininkas konkrečiu laiku panaikina draudimą"
+                    },
+                    "private": {
+                        "title": "Privatus",
+                        "description": "Priėjimas leistinas tik su savininko leidimu"
+                    },
+                    "designated": {
+                        "title": "Skirtas",
+                        "description": "Priėjimas galimas remiantis ženklais ir savitais vietos įstatymais"
+                    },
+                    "destination": {
+                        "title": "Tikslinis",
+                        "description": "Priėjimas leistinas tik atvykti į tikslą"
+                    }
+                }
+            },
+            "access_toilets": {
+                "label": "Priėjimas"
             },
             "address": {
                 "label": "Adresas",
@@ -124,7 +175,8 @@
                     "housename": "Namo pavadinimas",
                     "number": "123",
                     "street": "Gatvė",
-                    "city": "Miestas"
+                    "city": "Miestas",
+                    "postcode": "Pašto kodas"
                 }
             },
             "aeroway": {
@@ -142,6 +194,9 @@
             "bicycle_parking": {
                 "label": "Tipas"
             },
+            "boundary": {
+                "label": "Tipas"
+            },
             "building": {
                 "label": "Pastatas"
             },
@@ -152,13 +207,27 @@
                 "label": "Pastatas"
             },
             "capacity": {
-                "label": "Talpumas"
+                "label": "Talpumas",
+                "placeholder": "50, 100, 200..."
+            },
+            "cardinal_direction": {
+                "label": "Kryptis"
+            },
+            "clock_direction": {
+                "label": "Kryptis",
+                "options": {
+                    "clockwise": "Pagal laikrodžio rodyklę",
+                    "anticlockwise": "Prieš laikrodžio rodyklę"
+                }
             },
             "collection_times": {
                 "label": "Surinkimo laikas"
             },
             "construction": {
                 "label": "Tipas"
+            },
+            "country": {
+                "label": "Šalis"
             },
             "crossing": {
                 "label": "Tipas"
@@ -169,14 +238,33 @@
             "denomination": {
                 "label": "Pavadinimas"
             },
+            "description": {
+                "label": "Aprašymas"
+            },
             "entrance": {
                 "label": "Tipas"
             },
             "fax": {
-                "label": "Faksas"
+                "label": "Faksas",
+                "placeholder": "+31 42 123 4567"
             },
             "fee": {
                 "label": "Mokestis"
+            },
+            "fire_hydrant/type": {
+                "label": "Tipas"
+            },
+            "fixme": {
+                "label": "Sutvarkyk Mane"
+            },
+            "generator/method": {
+                "label": "Metodas"
+            },
+            "generator/source": {
+                "label": "Šaltinis"
+            },
+            "generator/type": {
+                "label": "Tipas"
             },
             "highway": {
                 "label": "Tipas"
@@ -195,6 +283,10 @@
             "landuse": {
                 "label": "Tipas"
             },
+            "lanes": {
+                "label": "Juostos",
+                "placeholder": "1, 2, 3..."
+            },
             "layer": {
                 "label": "Sluoksnis"
             },
@@ -202,16 +294,25 @@
                 "label": "Tipas"
             },
             "levels": {
-                "label": "Lygiai"
+                "label": "Lygiai",
+                "placeholder": "2, 4, 6..."
+            },
+            "lit": {
+                "label": "Apšvietimas"
+            },
+            "location": {
+                "label": "Vieta"
             },
             "man_made": {
                 "label": "Tipas"
             },
             "maxspeed": {
-                "label": "Greičio limitas"
+                "label": "Greičio limitas",
+                "placeholder": "40, 50, 60..."
             },
             "name": {
-                "label": "Pavadinimas"
+                "label": "Pavadinimas",
+                "placeholder": "Pagrindinis pavadinimas (jeigu yra)"
             },
             "natural": {
                 "label": "Normalus"
@@ -225,14 +326,27 @@
             "office": {
                 "label": "Tipas"
             },
+            "oneway": {
+                "label": "Vienpusis eismas"
+            },
+            "oneway_yes": {
+                "label": "Vienpusis eismas"
+            },
             "opening_hours": {
                 "label": "Valandos"
             },
             "operator": {
                 "label": "Operatorius"
             },
+            "park_ride": {
+                "label": "Palik automobilį ir važiuok"
+            },
+            "parking": {
+                "label": "Tipas"
+            },
             "phone": {
-                "label": "Telefonas"
+                "label": "Telefonas",
+                "placeholder": "+31 42 123 4567"
             },
             "place": {
                 "label": "Tipas"
@@ -241,6 +355,12 @@
                 "label": "Tipas"
             },
             "railway": {
+                "label": "Tipas"
+            },
+            "ref": {
+                "label": "Šaltinis"
+            },
+            "relation": {
                 "label": "Tipas"
             },
             "religion": {
@@ -254,6 +374,15 @@
                     "shinto": "Šintoistas",
                     "taoist": "Daoistas"
                 }
+            },
+            "restriction": {
+                "label": "Tipas"
+            },
+            "route": {
+                "label": "Tipas"
+            },
+            "route_master": {
+                "label": "Tipas"
             },
             "service": {
                 "label": "Tipas"
@@ -271,6 +400,7 @@
                 "label": "Sportas"
             },
             "structure": {
+                "placeholder": "Nežinoma",
                 "options": {
                     "bridge": "Tiltas",
                     "tunnel": "Tunelis"
@@ -282,6 +412,12 @@
             "tourism": {
                 "label": "Tipas"
             },
+            "towertype": {
+                "label": "Bokšto tipas"
+            },
+            "tracktype": {
+                "label": "Tipas"
+            },
             "water": {
                 "label": "Tipas"
             },
@@ -289,7 +425,8 @@
                 "label": "Tipas"
             },
             "website": {
-                "label": "Interneto svetainė"
+                "label": "Interneto svetainė",
+                "placeholder": "http://pavyzdys.lt/"
             },
             "wetland": {
                 "label": "Tipas"
@@ -302,11 +439,32 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Adresas"
+            },
+            "aeroway/aerodrome": {
+                "name": "Oro uostas"
+            },
+            "aeroway/gate": {
+                "name": "Oro uosto vartai"
+            },
+            "aeroway/hangar": {
+                "name": "Angaras"
+            },
+            "aeroway/runway": {
+                "name": "Pakilimo takas"
+            },
+            "amenity/arts_centre": {
+                "name": "Menų centras"
+            },
             "amenity/bank": {
                 "name": "Bankas"
             },
             "amenity/bar": {
                 "name": "Baras"
+            },
+            "amenity/bench": {
+                "name": "Suolas"
             },
             "amenity/bicycle_parking": {
                 "name": "Dviračių stovėjimo aikštelė"
@@ -314,11 +472,32 @@
             "amenity/bicycle_rental": {
                 "name": "Dviračių nuoma"
             },
+            "amenity/boat_rental": {
+                "name": "Laivų nuoma"
+            },
             "amenity/cafe": {
                 "name": "Kavinė"
             },
+            "amenity/car_rental": {
+                "name": "Automobilių nuoma"
+            },
+            "amenity/car_sharing": {
+                "name": "Automobilių dalinimasis"
+            },
+            "amenity/car_wash": {
+                "name": "Automobilių plovykla"
+            },
             "amenity/cinema": {
                 "name": "Kino teatras"
+            },
+            "amenity/college": {
+                "name": "Kolegija"
+            },
+            "amenity/courthouse": {
+                "name": "Teismo rūmai"
+            },
+            "amenity/drinking_water": {
+                "name": "Geriamas vanduo"
             },
             "amenity/embassy": {
                 "name": "Ambasada"
@@ -329,14 +508,26 @@
             "amenity/fire_station": {
                 "name": "Gaisrinė"
             },
+            "amenity/fountain": {
+                "name": "Fontanas"
+            },
+            "amenity/fuel": {
+                "name": "Degalinė"
+            },
             "amenity/grave_yard": {
                 "name": "Kapinės"
             },
             "amenity/hospital": {
                 "name": "Ligoninė"
             },
+            "amenity/kindergarten": {
+                "name": "Vaikų darželis"
+            },
             "amenity/library": {
                 "name": "Biblioteka"
+            },
+            "amenity/marketplace": {
+                "name": "Prekyvietė"
             },
             "amenity/parking": {
                 "name": "Automobilių stovėjimo aikštelė"
@@ -346,6 +537,9 @@
             },
             "amenity/place_of_worship": {
                 "name": "Maldos namai"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Budistų Šventykla"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Bažnyčia"
@@ -368,6 +562,9 @@
             "amenity/pub": {
                 "name": "Aludė"
             },
+            "amenity/ranger_station": {
+                "name": "Girininkų stotis"
+            },
             "amenity/restaurant": {
                 "name": "Restoranas"
             },
@@ -377,8 +574,14 @@
             "amenity/swimming_pool": {
                 "name": "Baseinas"
             },
+            "amenity/taxi": {
+                "name": "Taksi stendas"
+            },
             "amenity/telephone": {
                 "name": "Telefonas"
+            },
+            "amenity/theatre": {
+                "name": "Teatras"
             },
             "amenity/toilets": {
                 "name": "Tualetas"
@@ -389,11 +592,53 @@
             "amenity/university": {
                 "name": "Universitetas"
             },
+            "amenity/vending_machine": {
+                "name": "Prekių automatas"
+            },
+            "amenity/waste_basket": {
+                "name": "Šiukšliadėžė"
+            },
+            "area": {
+                "name": "Plotas"
+            },
+            "barrier": {
+                "name": "Barjeras"
+            },
+            "barrier/city_wall": {
+                "name": "Miesto siena"
+            },
             "barrier/entrance": {
                 "name": "Įėjimas"
             },
+            "barrier/fence": {
+                "name": "Tvora"
+            },
+            "barrier/gate": {
+                "name": "Vartai"
+            },
+            "barrier/lift_gate": {
+                "name": "Pakeliami vartai"
+            },
+            "barrier/wall": {
+                "name": "Siena"
+            },
             "building": {
                 "name": "Pastatas"
+            },
+            "building/apartments": {
+                "name": "Apartamentai"
+            },
+            "building/garage": {
+                "name": "Garažas"
+            },
+            "building/house": {
+                "name": "Namas"
+            },
+            "emergency/fire_hydrant": {
+                "name": "Hidrantas"
+            },
+            "emergency/phone": {
+                "name": "Pagalbos telefonas"
             },
             "entrance": {
                 "name": "Įėjimas"
@@ -413,6 +658,12 @@
             "highway/footway": {
                 "name": "Pėsčiųjų takas"
             },
+            "highway/living_street": {
+                "name": "Gyvenamoji gatvė"
+            },
+            "highway/mini_roundabout": {
+                "name": "Mini žiedas"
+            },
             "highway/motorway": {
                 "name": "Greitkelis"
             },
@@ -422,11 +673,23 @@
             "highway/primary": {
                 "name": "Pagrindinis kelias"
             },
+            "highway/road": {
+                "name": "Nežinomas kelias"
+            },
             "highway/secondary": {
                 "name": "Nepagrindinis kelias"
             },
+            "highway/service": {
+                "name": "Aptarnaujantis kelias"
+            },
+            "highway/service/emergency_access": {
+                "name": "Pagalbos priėjimas"
+            },
             "highway/steps": {
                 "name": "Žingsniai"
+            },
+            "highway/stop": {
+                "name": "Stop ženklas"
             },
             "highway/traffic_signals": {
                 "name": "Eismo signala"
@@ -434,14 +697,26 @@
             "highway/trunk": {
                 "name": "Magistralinis kelias"
             },
+            "highway/turning_circle": {
+                "name": "Apsisukimo žiedas"
+            },
             "historic": {
                 "name": "Istorinė vietovė"
+            },
+            "historic/archaeological_site": {
+                "name": "Archeologinių kasinėjimų vieta"
             },
             "historic/castle": {
                 "name": "Pilis"
             },
+            "historic/memorial": {
+                "name": "Memorialas"
+            },
             "historic/monument": {
                 "name": "Paminklas"
+            },
+            "historic/ruins": {
+                "name": "Griuvėsiai"
             },
             "landuse/allotments": {
                 "name": "Žemės sklypai"
@@ -482,8 +757,47 @@
             "landuse/quarry": {
                 "name": "Karjeras"
             },
+            "landuse/residential": {
+                "name": "Gyvenamosios vietos"
+            },
+            "landuse/vineyard": {
+                "name": "Vynuogynas"
+            },
+            "leisure": {
+                "name": "Laisvalaikis"
+            },
             "leisure/garden": {
                 "name": "Sodas"
+            },
+            "leisure/golf_course": {
+                "name": "Golfo aikštynas"
+            },
+            "leisure/park": {
+                "name": "Parkas"
+            },
+            "leisure/pitch": {
+                "name": "Sporto aikštelė"
+            },
+            "leisure/pitch/american_football": {
+                "name": "Amerikoniško futbolo aikštė"
+            },
+            "leisure/pitch/basketball": {
+                "name": "Krepšinio aikštelė"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Futbolo aikštė"
+            },
+            "leisure/pitch/tennis": {
+                "name": "Teniso aikštelė"
+            },
+            "leisure/pitch/volleyball": {
+                "name": "Tinklinio aikštelė"
+            },
+            "leisure/playground": {
+                "name": "Žaidimų aikštelė"
+            },
+            "leisure/sports_center": {
+                "name": "Sporto centras"
             },
             "leisure/stadium": {
                 "name": "Stadionas"
@@ -491,11 +805,44 @@
             "leisure/swimming_pool": {
                 "name": "Baseinas"
             },
+            "leisure/track": {
+                "name": "Lenktynių trasa"
+            },
+            "line": {
+                "name": "Linija"
+            },
+            "man_made/lighthouse": {
+                "name": "Švyturys"
+            },
+            "man_made/pier": {
+                "name": "Prieplauka"
+            },
+            "man_made/pipeline": {
+                "name": "Vamzdynas"
+            },
+            "man_made/tower": {
+                "name": "Bokštas"
+            },
             "man_made/water_tower": {
                 "name": "Vandens bokštas"
             },
+            "natural/bay": {
+                "name": "Įlanka"
+            },
+            "natural/beach": {
+                "name": "Paplūdimys"
+            },
             "natural/cliff": {
                 "name": "Uola"
+            },
+            "natural/coastline": {
+                "name": "Pakrantė"
+            },
+            "natural/grassland": {
+                "name": "Pieva"
+            },
+            "natural/peak": {
+                "name": "Viršūnė"
             },
             "natural/tree": {
                 "name": "Medis"
@@ -506,14 +853,188 @@
             "natural/water/lake": {
                 "name": "Ežeras"
             },
+            "natural/water/pond": {
+                "name": "Kūdra"
+            },
+            "natural/water/reservoir": {
+                "name": "Rezervuaras"
+            },
+            "place": {
+                "name": "Vieta"
+            },
+            "place/city": {
+                "name": "Miestas"
+            },
+            "place/hamlet": {
+                "name": "Kaimelis"
+            },
+            "place/island": {
+                "name": "Sala"
+            },
+            "place/isolated_dwelling": {
+                "name": "Izoliuota gyvenvietė"
+            },
+            "place/locality": {
+                "name": "Vietovė"
+            },
+            "place/town": {
+                "name": "Miestelis"
+            },
             "place/village": {
                 "name": "Kaimas"
+            },
+            "point": {
+                "name": "Taškas"
+            },
+            "power/generator": {
+                "name": "Jėgainė"
             },
             "railway": {
                 "name": "Geležinkelis"
             },
+            "railway/abandoned": {
+                "name": "Apleistas geležinkelis"
+            },
+            "railway/disused": {
+                "name": "Nebenaudojamas geležinkelis"
+            },
+            "railway/monorail": {
+                "name": "Vienbėgis geležinkelis"
+            },
+            "railway/station": {
+                "name": "Geležinkelio stotis"
+            },
+            "railway/subway": {
+                "name": "Metro"
+            },
+            "railway/subway_entrance": {
+                "name": "Metro įėjimas"
+            },
+            "route/ferry": {
+                "name": "Kelto maršrutas"
+            },
+            "shop": {
+                "name": "Parduotuvė"
+            },
+            "shop/alcohol": {
+                "name": "Alkoholinių gėrimų parduotuvė"
+            },
+            "shop/bakery": {
+                "name": "Kepykla"
+            },
+            "shop/beauty": {
+                "name": "Grožio salonas"
+            },
+            "shop/beverages": {
+                "name": "Gėrimų parduotuvė"
+            },
+            "shop/bicycle": {
+                "name": "Dviračių parduotuvė"
+            },
+            "shop/books": {
+                "name": "Knygynas"
+            },
+            "shop/butcher": {
+                "name": "Mėsinė"
+            },
+            "shop/car_parts": {
+                "name": "Auto dalių parduotuvė"
+            },
+            "shop/car_repair": {
+                "name": "Auto taisykla"
+            },
+            "shop/clothes": {
+                "name": "Drabužių parduotuvė"
+            },
+            "shop/computer": {
+                "name": "Kompiuterių parduotuvė"
+            },
+            "shop/confectionery": {
+                "name": "Konditerija"
+            },
+            "shop/convenience": {
+                "name": "Savitarnos parduotuvė"
+            },
+            "shop/department_store": {
+                "name": "Universalinė parduotuvė"
+            },
+            "shop/electronics": {
+                "name": "Elektronikos parduotuvė"
+            },
+            "shop/fishmonger": {
+                "name": "Žuvų pardavėjas"
+            },
+            "shop/florist": {
+                "name": "Gėlės"
+            },
+            "shop/furniture": {
+                "name": "Baldų parduotuvė"
+            },
+            "shop/gift": {
+                "name": "Dovanų parduotuvė"
+            },
+            "shop/hairdresser": {
+                "name": "Kirpykla"
+            },
+            "shop/hardware": {
+                "name": "Techninės įrangos parduotuvė"
+            },
+            "shop/jewelry": {
+                "name": "Juvelyrikos parduotuvė"
+            },
             "shop/kiosk": {
                 "name": "Kioskas "
+            },
+            "shop/laundry": {
+                "name": "Skalbykla"
+            },
+            "shop/mall": {
+                "name": "Prekybos centras"
+            },
+            "shop/mobile_phone": {
+                "name": "Mobiliųjų telefonų parduotuvė"
+            },
+            "shop/music": {
+                "name": "Muzikos parduotuvė"
+            },
+            "shop/optician": {
+                "name": "Optika"
+            },
+            "shop/pet": {
+                "name": "Augintinių parduotuvė"
+            },
+            "shop/shoes": {
+                "name": "Batų parduotuvė"
+            },
+            "shop/sports": {
+                "name": "Sporto reikmenų parduotuvė"
+            },
+            "shop/stationery": {
+                "name": "Kanceliarinių prekių parduotuvė"
+            },
+            "shop/supermarket": {
+                "name": "Prekybos centras"
+            },
+            "shop/toys": {
+                "name": "Žaislų parduotuvė"
+            },
+            "shop/travel_agency": {
+                "name": "Kelionių agentūra"
+            },
+            "shop/tyres": {
+                "name": "Padangų parduotuvė"
+            },
+            "shop/vacant": {
+                "name": "Tuščia parduotuvė"
+            },
+            "tourism": {
+                "name": "Turizmas"
+            },
+            "tourism/artwork": {
+                "name": "Meno kūrinys"
+            },
+            "tourism/attraction": {
+                "name": "Turistų traukos vieta"
             },
             "tourism/camp_site": {
                 "name": "Stovyklavietė"
@@ -536,14 +1057,62 @@
             "tourism/museum": {
                 "name": "Muziejus"
             },
+            "tourism/picnic_site": {
+                "name": "Pikniko stovyklavietė"
+            },
             "tourism/zoo": {
                 "name": "Zoologijos sodas"
+            },
+            "type/boundary": {
+                "name": "Siena"
+            },
+            "type/boundary/administrative": {
+                "name": "Administracinė siena"
+            },
+            "type/restriction": {
+                "name": "Apribojimas"
+            },
+            "type/route": {
+                "name": "Maršrutas"
+            },
+            "type/route/bicycle": {
+                "name": "Dviračių maršrutas"
+            },
+            "type/route/bus": {
+                "name": "Autobusų maršrutas"
+            },
+            "type/route/detour": {
+                "name": "Apvažiavimo maršrutas"
+            },
+            "type/route/ferry": {
+                "name": "Kelto maršrutas"
+            },
+            "type/route/foot": {
+                "name": "Pėsčiųjų maršrutas"
+            },
+            "type/route/hiking": {
+                "name": "Žygių maršrutas"
+            },
+            "type/route/pipeline": {
+                "name": "Vamzdyno maršrutas"
+            },
+            "vertex": {
+                "name": "Kita"
+            },
+            "waterway": {
+                "name": "Vandens kelias"
             },
             "waterway/canal": {
                 "name": "Kanalas"
             },
+            "waterway/dam": {
+                "name": "Užtvanka"
+            },
             "waterway/river": {
                 "name": "Upė"
+            },
+            "waterway/stream": {
+                "name": "Upelis"
             }
         }
     }

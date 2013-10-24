@@ -235,14 +235,11 @@
     },
     "cannot_zoom": "Kan nie verder uitzoom in die huidige mode nie.",
     "gpx": {
-        "local_layer": "Plaaslike GPX leer",
-        "drag_drop": "Sleep en laat val 'n .gpx leer op die bladsy"
+        "local_layer": "Plaaslike GPX leer"
     },
     "help": {
         "title": "Help",
-        "help": "# Help\n\nHierdie is 'n probram vir  [OpenStreetMap](http://www.openstreetmap.org/), die gratis en veranderbarie kaart van die wêreld. Jy kan dit gebruik om nuwe data by te voeg of op te dateer waar jy bly en die \"open-source\" en \"open-data\" kaart beter te maak vir almal wat dit gebruik.\n\nVerandering wat jy aanbring op die kaart sal sigbaar wees vir almal at OpenStreetMap gebruik. Jy het nodig om 'n [nuwe gebruikersnaam](https://www.openstreetmap.org/user/new) vir jou self te skep voor jy data kan toevoeg by die kaart. \n\nDie [iD editor](http://ideditor.com/) is 'n gemeenskapsprojek met die [kode beskikbaar op GitHub](https://github.com/systemed/iD).\n",
-        "imagery": "# Lugfotos\n\nLugfotos is 'n belangrike bron vir kaartwerk. 'n Kombinasie van vliegtuie, satelliete en ander gratis bronne is beskikbaar in die program en soos wat jy rondbeweeg en in uit zoom na ander geografiese areas, gaan ander bronne beskikbaar word. \n\nLugfotos is partykeer uit fase uit met die kaart data en is gewoonlik as gevolg van 'n probleem an die lugfotoverskaffer se kant. As jy dus 'n gedeelte van die kaart sien wat lyk of dit als geskuif is moet dit nie dadelik reg skuif nie. Jy kan die lugfotos regskuif deur op 'Verbeter ligging' te klick aan die onderkant van Agtergrond Stellings.\n",
-        "inspector": "# Gebruik van die eienskapslys\n\nDie eienskapslys verskyn op die regterkant wanneer jy 'n item kies met die muis en laat jou toe om eienskappe te verander of by te voeg.\n\n### Kies 'n eienskap tipe\nWanneer jy punt, lyn of area bygevoeg het dan kan jy die eienskap tipe kies soos byvoorbeeld 'n snelweg, residentieele pad, supermark of 'n kafee. Die eienskapslys sal knoppies wys vir al die algmene eienskap tipes en jy kan meer vind deur in die soek boks te tik vir wat jy soek. \n\nOm meer van 'n eienskap te leer klick op die 'i' in die onder regterkantse hoek van die eienskapsknoppie. Klick om 'n eienskapsknoppie om dit aan die kaart item toe te ken.\n\n### Gebruik van vorms en verandering van eienskappe\n\nNa jy 'n eienskaptipe gekies het of wanneer jy 'n item gekies het wat reeds eienskappe het, dan sal die eienskaps lys die detail wys van die item soos die naam en adres. \n\nOnder die lys van eienskappe is 'n lys van ikone met meer detail soos die [Wikipedia](http://www.wikipedia.org/) bladsy, rolstoel toegang en meer.\n\nJy kan ook op Aditioneele Eienskappe klick aan die onderkant van die eienskapslys om meer eienskappe by te voeg wat relevant is. [Taginfo](http://taginfo.openstreetmap.org/) is 'n goeie bron in Engels om meer van die gewilde eienskapkombinasies te leer.\n\nVerandering wat jy in die eienskapslys maak word automaties deel van die kaart. Jy kan dit ongedaan maak deur op die 'Ongedaan' knoppie te klick. \n\n### Toemaak van die eienskapslys\n\nJy kan die eienskapslys toemaak deur op die teomaakknoppie regs bo te klick or deur die 'Esc' sleutel te druk, of om op die kaart te klick.\n\n\n"
+        "help": "# Help\n\nHierdie is 'n probram vir  [OpenStreetMap](http://www.openstreetmap.org/), die gratis en veranderbarie kaart van die wêreld. Jy kan dit gebruik om nuwe data by te voeg of op te dateer waar jy bly en die \"open-source\" en \"open-data\" kaart beter te maak vir almal wat dit gebruik.\n\nVerandering wat jy aanbring op die kaart sal sigbaar wees vir almal at OpenStreetMap gebruik. Jy het nodig om 'n [nuwe gebruikersnaam](https://www.openstreetmap.org/user/new) vir jou self te skep voor jy data kan toevoeg by die kaart. \n\nDie [iD editor](http://ideditor.com/) is 'n gemeenskapsprojek met die [kode beskikbaar op GitHub](https://github.com/systemed/iD).\n"
     },
     "intro": {
         "navigation": {
@@ -688,10 +685,12 @@
                 "name": "Karwas"
             },
             "amenity/cinema": {
-                "name": "Fliek"
+                "name": "Fliek",
+                "terms": "Fliek, Inry, Movie, Silverdoek"
             },
             "amenity/college": {
-                "name": "Kollege"
+                "name": "Kollege",
+                "terms": "kollege, landboukollege, raad, genootskap"
             },
             "amenity/courthouse": {
                 "name": "Hof"
@@ -982,130 +981,173 @@
                 "name": "Laagte"
             },
             "landuse/cemetery": {
-                "name": "Begrafplaas"
+                "name": "Begrafplaas",
+                "terms": "begrafplaas, kerkhof, dodeakker, godsakker"
             },
             "landuse/commercial": {
-                "name": "Kommersieel"
+                "name": "Kommersieel",
+                "terms": "kommersieel, handeldrywend, "
             },
             "landuse/construction": {
-                "name": "Konstruksie"
+                "name": "Konstruksie",
+                "terms": "Konstruksie"
             },
             "landuse/farm": {
-                "name": "Plaas"
+                "name": "Plaas",
+                "terms": "Plaas"
             },
             "landuse/farmyard": {
-                "name": "Plaaswerf"
+                "name": "Plaaswerf",
+                "terms": "plaaswerf"
             },
             "landuse/forest": {
-                "name": "Woud"
+                "name": "Woud",
+                "terms": "Woud, Oerwoud, Bos"
             },
             "landuse/grass": {
-                "name": "Gras"
+                "name": "Gras",
+                "terms": "Gras, weiveld"
             },
             "landuse/industrial": {
-                "name": "Industrieel"
+                "name": "Industrieel",
+                "terms": "industrieel, nyweraar"
             },
             "landuse/meadow": {
-                "name": "Weiveld"
+                "name": "Weiveld",
+                "terms": "weiland, grasland, weiveld"
             },
             "landuse/orchard": {
-                "name": "Boord"
+                "name": "Boord",
+                "terms": "boord, vrugteboord"
             },
             "landuse/quarry": {
-                "name": "Kwarrie"
+                "name": "Kwarrie",
+                "terms": "steengroef, klipbreekgat, groef"
             },
             "landuse/residential": {
-                "name": "Residensieel"
+                "name": "Residensieel",
+                "terms": "residensieel, huisadres, woonhuis"
             },
             "landuse/retail": {
-                "name": "Kleinhandel"
+                "name": "Kleinhandel",
+                "terms": "kleinhandel, kleinhandelsaak"
             },
             "landuse/vineyard": {
-                "name": "Druiweprieel"
+                "name": "Druiweprieel",
+                "terms": "wingerd"
             },
             "leisure": {
                 "name": "Gemak"
             },
+            "leisure/dog_park": {
+                "name": "Hondepark",
+                "terms": "hondepark"
+            },
             "leisure/garden": {
-                "name": "Tuin"
+                "name": "Tuin",
+                "terms": "Tuin, gedenktuin"
             },
             "leisure/golf_course": {
-                "name": "Golfbaan"
+                "name": "Golfbaan",
+                "terms": "Golfbaan"
             },
             "leisure/marina": {
-                "name": "Vasmeerplek"
+                "name": "Vasmeerplek",
+                "terms": "marina, jaghawe, waterdorp"
             },
             "leisure/park": {
-                "name": "Park"
+                "name": "Park",
+                "terms": "Park"
             },
             "leisure/pitch": {
-                "name": "Sport Veld"
+                "name": "Sport Veld",
+                "terms": "Sportveld"
             },
             "leisure/pitch/american_football": {
-                "name": "Amerikaanse Voetbal Veld"
+                "name": "Amerikaanse Voetbal Veld",
+                "terms": "Amerikaanse voetbalveld"
             },
             "leisure/pitch/baseball": {
-                "name": "Bofpalveld"
+                "name": "Bofpalveld",
+                "terms": "bofbaldiamant"
             },
             "leisure/pitch/basketball": {
-                "name": "Basketbalbaan"
+                "name": "Basketbalbaan",
+                "terms": "Korfbalbaan"
             },
             "leisure/pitch/soccer": {
-                "name": "Sokkerveld"
+                "name": "Sokkerveld",
+                "terms": "Sokkerveld"
             },
             "leisure/pitch/tennis": {
-                "name": "Tennisbaan"
+                "name": "Tennisbaan",
+                "terms": "Tennisbaan"
             },
             "leisure/pitch/volleyball": {
-                "name": "Vlugbalbaan"
+                "name": "Vlugbalbaan",
+                "terms": "Vlugbalbaan"
             },
             "leisure/playground": {
-                "name": "Speelpark"
+                "name": "Speelpark",
+                "terms": "Speelgrond, speelplek, terein"
             },
             "leisure/slipway": {
-                "name": "Inglipbaan"
+                "name": "Inglipbaan",
+                "terms": "inglipbaan,oprit,afrit"
             },
             "leisure/stadium": {
-                "name": "Stadium"
+                "name": "Stadium",
+                "terms": "stadion"
             },
             "leisure/swimming_pool": {
-                "name": "Swembad"
+                "name": "Swembad",
+                "terms": "swembad"
             },
             "line": {
-                "name": "Lyn"
+                "name": "Lyn",
+                "terms": "Lyn"
             },
             "man_made": {
                 "name": "Mens gemaak"
             },
             "man_made/breakwater": {
-                "name": "Breekwater"
+                "name": "Breekwater",
+                "terms": "breekwater,seebreker,golfbreker"
             },
             "man_made/lighthouse": {
-                "name": "Ligtoring"
+                "name": "Ligtoring",
+                "terms": "Lugtoring"
             },
             "man_made/pier": {
-                "name": "Landingsplek"
+                "name": "Landingsplek",
+                "terms": "pier,landingshoof,wandelhoof"
             },
             "man_made/pipeline": {
-                "name": "Pyplyn"
+                "name": "Pyplyn",
+                "terms": "pyplyn"
             },
             "man_made/survey_point": {
                 "name": "Landmeterspunt"
             },
             "man_made/tower": {
-                "name": "Toring"
+                "name": "Toring",
+                "terms": "Toring,paal"
             },
             "man_made/wastewater_plant": {
-                "name": "Rioolplaas"
+                "name": "Rioolplaas",
+                "terms": "rioolplaas"
             },
             "man_made/water_tower": {
-                "name": "Watertoring"
+                "name": "Watertoring",
+                "terms": "Watertoring"
             },
             "man_made/water_well": {
-                "name": "Put"
+                "name": "Put",
+                "terms": "put"
             },
             "man_made/water_works": {
-                "name": "Waterwerke"
+                "name": "Waterwerke",
+                "terms": "waterwerke"
             },
             "natural": {
                 "name": "Natuur"
@@ -1114,16 +1156,20 @@
                 "name": "Baai"
             },
             "natural/beach": {
-                "name": "Strand"
+                "name": "Strand",
+                "terms": "strand"
             },
             "natural/cliff": {
-                "name": "Krans"
+                "name": "Krans",
+                "terms": "krans"
             },
             "natural/coastline": {
-                "name": "Kuslyn"
+                "name": "Kuslyn",
+                "terms": "kuslyn"
             },
             "natural/glacier": {
-                "name": "Gletser"
+                "name": "Gletser",
+                "terms": "gletser"
             },
             "natural/grassland": {
                 "name": "Grasvlakte"
@@ -1141,40 +1187,49 @@
                 "name": "Fontein"
             },
             "natural/tree": {
-                "name": "Boom"
+                "name": "Boom",
+                "terms": "Boom"
             },
             "natural/water": {
-                "name": "Water"
+                "name": "Water",
+                "terms": "water"
             },
             "natural/water/lake": {
-                "name": "Meer"
+                "name": "Meer",
+                "terms": "Meer"
             },
             "natural/water/pond": {
                 "name": "Dammetjie"
             },
             "natural/water/reservoir": {
-                "name": "Reservoir"
+                "name": "Reservoir",
+                "terms": "Reservoir"
             },
             "natural/wetland": {
                 "name": "Vleiland"
             },
             "natural/wood": {
-                "name": "Woud"
+                "name": "Woud",
+                "terms": "Woud"
             },
             "office": {
-                "name": "Kantoor"
+                "name": "Kantoor",
+                "terms": "Kantoor"
             },
             "place": {
-                "name": "Plek"
+                "name": "Plek",
+                "terms": "Plek"
             },
             "place/city": {
-                "name": "Stad"
+                "name": "Stad",
+                "terms": "Stad"
             },
             "place/hamlet": {
                 "name": "Dorpie"
             },
             "place/island": {
-                "name": "Eiland"
+                "name": "Eiland",
+                "terms": "Eiland"
             },
             "place/isolated_dwelling": {
                 "name": "Afgeleë blyplek"
@@ -1183,34 +1238,43 @@
                 "name": "Ligging"
             },
             "place/town": {
-                "name": "Dorp"
+                "name": "Dorp",
+                "terms": "Dorp"
             },
             "place/village": {
-                "name": "Dorpie"
+                "name": "Dorpie",
+                "terms": "Dorpie"
             },
             "point": {
                 "name": "Punt"
             },
             "power": {
-                "name": "Krag"
+                "name": "Krag",
+                "terms": "Krag"
             },
             "power/line": {
-                "name": "Kraglyn"
+                "name": "Kraglyn",
+                "terms": "Kraglyn,kragdraad"
             },
             "power/pole": {
-                "name": "Kragpaal"
+                "name": "Kragpaal",
+                "terms": "Kragpaal"
             },
             "power/sub_station": {
-                "name": "Substasie"
+                "name": "Substasie",
+                "terms": "Substasie"
             },
             "power/tower": {
-                "name": "Hoogspanningstoring"
+                "name": "Hoogspanningstoring",
+                "terms": "Hoogspanningstoring"
             },
             "power/transformer": {
-                "name": "Transformator"
+                "name": "Transformator",
+                "terms": "transformator"
             },
             "railway": {
-                "name": "Spoorlyn"
+                "name": "Spoorlyn",
+                "terms": "Spoorweg"
             },
             "railway/abandoned": {
                 "name": "Verlate spoorlyn"

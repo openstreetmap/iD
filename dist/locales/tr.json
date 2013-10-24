@@ -248,8 +248,7 @@
         "out": "Uzaklaş"
     },
     "gpx": {
-        "local_layer": "Lokal GPX dosyası",
-        "drag_drop": ".gpx dosyasını sayfa üzerine sürükleyip bırakınız"
+        "local_layer": "Lokal GPX dosyası"
     },
     "help": {
         "title": "Yardım"

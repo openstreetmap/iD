@@ -213,13 +213,11 @@
         "out": "Alloñar"
     },
     "gpx": {
-        "local_layer": "Ficheru GPX llocal",
-        "drag_drop": "Arrastrar y soltar un ficheru .gpx na páxina"
+        "local_layer": "Ficheru GPX llocal"
     },
     "help": {
         "title": "Ayuda",
-        "help": "# Ayuda\n\nEsti ye un editor pa [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa del mundu llibre y editable. Pue usalu p'amestar y anovar los\ndatos nel to área, faciendo un mapa del mundu de códigu y datos\nabiertos meyor pa tol mundu.\n\nLes ediciones que faiga nesti mapa sedrán visibles pa cualquiera qu'use\nOpenStreetMap. Pa poder editar, necesitará una\n[cuenta de baldre n'OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) ye un proyeutu collaborativu col [códigu\nfonte disponible en GitHub](https://github.com/systemed/iD).\n",
-        "imagery": "# Imaxes\n\nLes imaxes aérees son un recursu importante pa facer mapes. Ta disponible\nnel editor una combinación de vuelos d'aviones, vistes de satélite, y fontes compilaes\nde mou llibre baxo'l menú 'Preferencies del fondu' a la izquierda.\n\nDe mou predetermináu, nel editor apaez una capa de satélite de\n [Bing Maps](http://www.bing.com/maps/), pero cuando mueva y faiga zoom nel mapa a\nnueves árees xeográfiques, apaecerán fontes nueves. Dalgunos países, como los Estaos\nXuníos, Francia y Dinamarca tienen imaxes de calidá mui alta pa delles árees.\n\nLes imaxes, dacuando, tan desplazaes del mapa por aciu d'un fallu del fornidor\nde les imaxes. Si ve munches carreteres que nun casen col fondu, nun\nmueva nel intre toes elles p'axustales al fondu. Al aviesu, axuste la\nimaxe pa que case colos datos esistentes calcando 'Iguar alliniamientu' abaxo\nde la interfaz de les Preferencies del fondu.\n"
+        "help": "# Ayuda\n\nEsti ye un editor pa [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa del mundu llibre y editable. Pue usalu p'amestar y anovar los\ndatos nel to área, faciendo un mapa del mundu de códigu y datos\nabiertos meyor pa tol mundu.\n\nLes ediciones que faiga nesti mapa sedrán visibles pa cualquiera qu'use\nOpenStreetMap. Pa poder editar, necesitará una\n[cuenta de baldre n'OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) ye un proyeutu collaborativu col [códigu\nfonte disponible en GitHub](https://github.com/systemed/iD).\n"
     },
     "intro": {
         "navigation": {
