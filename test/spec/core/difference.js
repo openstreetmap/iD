@@ -265,6 +265,18 @@ describe("iD.Difference", function () {
             }]);
         });
 
+        it("does not report a vertex as modified when it is moved and has no-op tag changes", function() {
+            var vertex = base.entity('b').update({tags: {}, loc: [1, 2]}),
+                head = base.replace(vertex),
+                diff = iD.Difference(base, head);
+
+            expect(diff.summary()).to.eql([{
+                changeType: 'modified',
+                entity: head.entity('-'),
+                graph: head
+            }]);
+        });
+
         it("reports a vertex as deleted when it had tags", function() {
             var vertex = base.entity('v'),
                 head = base.remove(vertex),
