@@ -1,3 +1,34 @@
+## 1.3.0
+
+* Fix corner case that could cause getting stuck in drag mode (#1910)
+* Improved display of changed objects in save screen
+* Improved performance
+* Show attribution for overlay layers (#1909)
+* Add OpenStreetMap GPS traces layer
+* Show a list of multiple selected features in the sidebar
+* Autocomplete city and postcode values (#1753)
+* Add a button to trigger file browser for GPX (#1758)
+* Prevent 'zoom in to edit' from showing up during save success (#1792)
+* Add delete button to all forms (#1492)
+* Omit non-OSM features from search results (#1890)
+* Add additional check to prevent snapping to area fills (#1887)
+* Fix adding localized value before name (#1797)
+* Disable removing incomplete relation members (#1768)
+* Show all combobox entries when clicking the caret (#1755)
+* Improvements and fixes to the behavior of multilingual name fields
+* Don't show combobox menu with only one item
+* Don't prevent following an existing way when drawing (#1430)
+* Allow "yes" and "no" check values to be translated (#1819)
+* Treat a sole area=yes tag as "untagged" (#1867)
+* Special case 'yes' values for type fields (#1876)
+* Don't add addr:housenumber=yes when applying Address preset (#1874)
+* Ensure preset fields are consistently ordered (#1876)
+* Preserve existing Wikipedia language (#1868)
+* Don't allow dragging of the map when the click starts in a button (#1869)
+* Prefer to render highway=* styles over railway=* (#1880)
+* Workaround cosmetic issues caused by a Chrome regression (#1879)
+* New presets: man_made=observation, shop=locksmith, leisure=common and more
+
 ## 1.2.1
 
 * Split only the line of a node shared by a line and an area
