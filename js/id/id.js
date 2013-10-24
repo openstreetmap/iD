@@ -107,7 +107,7 @@ window.iD = function () {
             var result = fn.apply(history, arguments);
             debouncedSave();
             return result;
-        }
+        };
     }
 
     context.perform = withDebouncedSave(history.perform);

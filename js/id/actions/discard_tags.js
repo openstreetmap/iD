@@ -12,5 +12,5 @@ iD.actions.DiscardTags = function(difference) {
         difference.created().forEach(discardTags);
 
         return graph;
-    }
+    };
 };

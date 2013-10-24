@@ -27,7 +27,7 @@ iD.actions.Straighten = function(wayId, projection) {
 
                 var u = positionAlongWay(point, startPoint, endPoint),
                     p0 = startPoint[0] + u * (endPoint[0] - startPoint[0]),
-                    p1 = startPoint[1] + u * (endPoint[1] - startPoint[1]),
+                    p1 = startPoint[1] + u * (endPoint[1] - startPoint[1]);
 
                 graph = graph.replace(graph.entity(node.id)
                     .move(projection.invert([p0, p1])));

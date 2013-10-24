@@ -68,7 +68,7 @@ iD.svg.Restrictions = function(context) {
             to: to,
             restriction: restriction,
             angle: Math.atan2(b[1] - a[1], b[0] - a[0])
-        }
+        };
     };
 
     return drawRestrictions;

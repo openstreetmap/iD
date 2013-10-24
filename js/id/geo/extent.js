@@ -34,7 +34,7 @@ _.extend(iD.geo.Extent.prototype, {
             [this[1][0], this[1][1]],
             [this[1][0], this[0][1]],
             [this[0][0], this[0][1]]
-        ]
+        ];
     },
 
     intersects: function(obj) {

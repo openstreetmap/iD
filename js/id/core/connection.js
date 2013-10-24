@@ -315,7 +315,7 @@ iD.Connection = function() {
                     extent: iD.geo.Extent(
                         projection.invert([x, y + ts]),
                         projection.invert([x + ts, y]))
-                }
+                };
             });
 
         function bboxUrl(tile) {

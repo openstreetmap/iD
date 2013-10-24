@@ -233,14 +233,18 @@ iD.History = function(context) {
                 stack = h.stack.map(function(d) {
                     var entities = {}, entity;
 
-                    d.modified && d.modified.forEach(function(key) {
-                        entity = allEntities[key];
-                        entities[entity.id] = entity;
-                    });
+                    if (d.modified) {
+                        d.modified.forEach(function(key) {
+                            entity = allEntities[key];
+                            entities[entity.id] = entity;
+                        });
+                    }
 
-                    d.deleted && d.deleted.forEach(function(id) {
-                        entities[id] = undefined;
-                    });
+                    if (d.deleted) {
+                        d.deleted.forEach(function(id) {
+                            entities[id] = undefined;
+                        });
+                    }
 
                     return {
                         graph: iD.Graph(stack[0].graph).load(entities),

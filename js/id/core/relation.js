@@ -40,7 +40,7 @@ _.extend(iD.Relation.prototype, {
     indexedMembers: function() {
         var result = new Array(this.members.length);
         for (var i = 0; i < this.members.length; i++) {
-            result[i] = _.extend({}, this.members[i], {index: i})
+            result[i] = _.extend({}, this.members[i], {index: i});
         }
         return result;
     },

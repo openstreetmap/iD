@@ -35,7 +35,8 @@ iD.svg.Areas = function(projection) {
             var entity = entities[i];
             if (entity.geometry(graph) !== 'area') continue;
 
-            if (multipolygon = iD.geo.isSimpleMultipolygonOuterMember(entity, graph)) {
+            multipolygon = iD.geo.isSimpleMultipolygonOuterMember(entity, graph);
+            if (multipolygon) {
                 areas[multipolygon.id] = {
                     entity: multipolygon.mergeTags(entity.tags),
                     area: Math.abs(entity.area(graph))

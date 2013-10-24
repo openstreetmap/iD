@@ -28,10 +28,10 @@ iD.behavior.drag = function() {
 
     event.of = function(thiz, argumentz) {
       return function(e1) {
+        var e0 = e1.sourceEvent = d3.event;
+        e1.target = drag;
+        d3.event = e1;
         try {
-          var e0 = e1.sourceEvent = d3.event;
-          e1.target = drag;
-          d3.event = e1;
           event[e1.type].apply(thiz, argumentz);
         } finally {
           d3.event = e0;
@@ -64,7 +64,7 @@ iD.behavior.drag = function() {
             offset,
             origin_ = point(),
             started = false,
-            selectEnable = d3_event_userSelectSuppress(touchId != null ? "drag-" + touchId : "drag");
+            selectEnable = d3_event_userSelectSuppress(touchId !== null ? "drag-" + touchId : "drag");
 
         var w = d3.select(window)
             .on(touchId !== null ? "touchmove.drag-" + touchId : "mousemove.drag", dragmove)

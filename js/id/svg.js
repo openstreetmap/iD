@@ -31,7 +31,7 @@ iD.svg = {
             if (entity.id in cache) {
                 return cache[entity.id];
             } else {
-                return cache[entity.id] = path(entity.asGeoJSON(graph, polygon));
+                return cache[entity.id] = path(entity.asGeoJSON(graph, polygon)); // jshint ignore:line
             }
         };
     },

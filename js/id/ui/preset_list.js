@@ -103,7 +103,7 @@ iD.ui.PresetList = function(context) {
 
     function drawList(list, presets) {
         var collection = presets.collection.map(function(preset) {
-            return preset.members ? CategoryItem(preset) : PresetItem(preset)
+            return preset.members ? CategoryItem(preset) : PresetItem(preset);
         });
 
         var items = list.selectAll('.preset-list-item')

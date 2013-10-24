@@ -17,7 +17,7 @@ iD.util.entityOrMemberSelector = function(ids, graph) {
         var entity = graph.hasEntity(id);
         if (entity && entity.type === 'relation') {
             entity.members.forEach(function(member) {
-                s += ',.' + member.id
+                s += ',.' + member.id;
             });
         }
     });
@@ -130,6 +130,7 @@ iD.util.fastMouse = function(container) {
     };
 };
 
+/* jshint -W103 */
 iD.util.getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
 
 iD.util.asyncMap = function(inputs, func, callback) {

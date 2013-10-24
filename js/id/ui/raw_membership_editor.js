@@ -75,7 +75,7 @@ iD.ui.RawMembershipEditor = function(context) {
                 if (member.id === entity.id) {
                     memberships.push({relation: relation, member: member, index: index});
                 }
-            })
+            });
         });
 
         selection.call(iD.ui.Disclosure()

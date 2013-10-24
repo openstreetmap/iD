@@ -81,7 +81,7 @@ iD.behavior.Hover = function(context) {
         function mousedown() {
             down = true;
             d3.select(window)
-                .on('mouseup.hover', mouseup)
+                .on('mouseup.hover', mouseup);
         }
 
         function mouseup() {
@@ -114,7 +114,7 @@ iD.behavior.Hover = function(context) {
         d3.select(window)
             .on('keydown.hover', null)
             .on('keyup.hover', null)
-            .on('mouseup.hover', null)
+            .on('mouseup.hover', null);
     };
 
     hover.altDisables = function(_) {

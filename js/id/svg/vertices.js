@@ -60,9 +60,10 @@ iD.svg.Vertices = function(projection, context) {
         var icons = {};
         function icon(entity) {
             if (entity.id in icons) return icons[entity.id];
-            return icons[entity.id] = (zoom !== 0 &&
+            icons[entity.id] = zoom !== 0 &&
                 entity.hasInterestingTags() &&
-                context.presets().match(entity, graph).icon);
+                context.presets().match(entity, graph).icon;
+            return icons[entity.id];
         }
 
         function circle(klass) {
@@ -75,7 +76,7 @@ iD.svg.Vertices = function(projection, context) {
                 this.setAttribute('cx', c);
                 this.setAttribute('cy', -c);
                 this.setAttribute('r', r);
-            }
+            };
         }
 
         var enter = groups.enter().append('g')
@@ -120,7 +121,7 @@ iD.svg.Vertices = function(projection, context) {
             if (entity.id in selected ||
                 entity.hasInterestingTags() ||
                 entity.isIntersection(graph)) {
-                vertices.push(entity)
+                vertices.push(entity);
             }
         }
 
