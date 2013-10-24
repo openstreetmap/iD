@@ -28,7 +28,7 @@ iD.modes.AddPoint = function(context) {
                 .newFeature(true));
     }
 
-    function addWay(loc, edge) {
+    function addWay(loc) {
         add(loc);
     }
 

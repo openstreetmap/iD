@@ -27,7 +27,7 @@ iD.svg.Restrictions = function(context) {
     }
 
     drawRestrictions.turns = function (graph, selectedIDs) {
-        if (selectedIDs.length != 1)
+        if (selectedIDs.length !== 1)
             return [];
 
         var from = graph.entity(selectedIDs[0]);

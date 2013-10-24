@@ -36,7 +36,7 @@ iD.ui.modal = function(selection, blocking) {
         .attr('class', 'modal fillL col6');
 
         shaded.on('click.remove-modal', function() {
-            if (d3.event.target == this && !blocking) shaded.close();
+            if (d3.event.target === this && !blocking) shaded.close();
         });
 
     modal.append('button')

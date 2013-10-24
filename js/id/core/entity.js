@@ -110,10 +110,10 @@ iD.Entity.prototype = {
 
     hasInterestingTags: function() {
         return _.keys(this.tags).some(function(key) {
-            return key != 'attribution' &&
-                key != 'created_by' &&
-                key != 'source' &&
-                key != 'odbl' &&
+            return key !== 'attribution' &&
+                key !== 'created_by' &&
+                key !== 'source' &&
+                key !== 'odbl' &&
                 key.indexOf('tiger:') !== 0;
         });
     },
@@ -125,8 +125,8 @@ iD.Entity.prototype = {
         iD.data.deprecated.forEach(function(d) {
             var match = _.pairs(d.old)[0];
             tags.forEach(function(t) {
-                if (t[0] == match[0] &&
-                    (t[1] == match[1] || match[1] == '*')) {
+                if (t[0] === match[0] &&
+                    (t[1] === match[1] || match[1] === '*')) {
                     deprecated[t[0]] = t[1];
                 }
             });

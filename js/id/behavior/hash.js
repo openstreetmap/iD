@@ -4,7 +4,7 @@ iD.behavior.Hash = function(context) {
 
     var parser = function(map, s) {
         var q = iD.util.stringQs(s);
-        var args = (q.map || '').split("/").map(Number);
+        var args = (q.map || '').split('/').map(Number);
         if (args.length < 3 || args.some(isNaN)) {
             return true; // replace bogus hash
         } else if (s !== formatter(map).slice(1)) {
@@ -59,7 +59,7 @@ iD.behavior.Hash = function(context) {
         d3.select(window)
             .on('hashchange.hash', null);
 
-        location.hash = "";
+        location.hash = '';
     };
 
     return hash;

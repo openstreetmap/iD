@@ -9,7 +9,7 @@ iD.Relation = iD.Entity.relation = function iD_Relation() {
 iD.Relation.prototype = Object.create(iD.Entity.prototype);
 
 _.extend(iD.Relation.prototype, {
-    type: "relation",
+    type: 'relation',
     members: [],
 
     extent: function(resolver) {

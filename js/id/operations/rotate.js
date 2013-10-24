@@ -19,7 +19,7 @@ iD.operations.Rotate = function(selectedIDs, context) {
         return t('operations.rotate.description');
     };
 
-    operation.id = "rotate";
+    operation.id = 'rotate';
     operation.keys = [t('operations.rotate.key')];
     operation.title = t('operations.rotate.title');
 

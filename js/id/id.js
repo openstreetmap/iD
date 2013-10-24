@@ -24,7 +24,9 @@ window.iD = function () {
             else storage.setItem(k, v);
         } catch(e) {
             // localstorage quota exceeded
+            /* jshint devel:true */
             if (typeof console !== 'undefined') console.error('localStorage quota exceeded');
+            /* jshint devel:false */
         }
     };
 
@@ -314,7 +316,7 @@ iD.version = '1.3.0';
     var detected = {};
 
     var ua = navigator.userAgent,
-        msie = new RegExp("MSIE ([0-9]{1,}[\\.0-9]{0,})");
+        msie = new RegExp('MSIE ([0-9]{1,}[\\.0-9]{0,})');
 
     if (msie.exec(ua) !== null) {
         var rv = parseFloat(RegExp.$1);

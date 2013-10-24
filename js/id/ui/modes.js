@@ -43,12 +43,12 @@ iD.ui.Modes = function(context) {
         context.on('enter.editor', function(entered) {
             buttons.classed('active', function(mode) { return entered.button === mode.button; });
             context.container()
-                .classed("mode-" + entered.id, true);
+                .classed('mode-' + entered.id, true);
         });
 
         context.on('exit.editor', function(exited) {
             context.container()
-                .classed("mode-" + exited.id, false);
+                .classed('mode-' + exited.id, false);
         });
 
         var keybinding = d3.keybinding('mode-buttons');

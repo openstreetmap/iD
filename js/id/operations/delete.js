@@ -62,7 +62,7 @@ iD.operations.Delete = function(selectedIDs, context) {
             t('operations.delete.description');
     };
 
-    operation.id = "delete";
+    operation.id = 'delete';
     operation.keys = [iD.ui.cmd('⌘⌫'), iD.ui.cmd('⌘⌦')];
     operation.title = t('operations.delete.title');
 

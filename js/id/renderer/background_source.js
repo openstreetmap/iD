@@ -75,7 +75,7 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
         dispatch.change();
     });
 
-    var template = "http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z",
+    var template = 'http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z',
         subdomains = [0, 1, 2, 3];
 
     bing.url = function(coord) {
@@ -107,8 +107,8 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
         }).join(', ');
     };
 
-    bing.logo = "bing_maps.png";
-    bing.terms_url = "http://opengeodata.org/microsoft-imagery-details";
+    bing.logo = 'bing_maps.png';
+    bing.terms_url = 'http://opengeodata.org/microsoft-imagery-details';
 
     return bing;
 };

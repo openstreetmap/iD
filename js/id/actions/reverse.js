@@ -44,9 +44,9 @@ iD.actions.Reverse = function(wayId) {
     }
 
     function reverseValue(key, value) {
-        if (key === "incline" && numeric.test(value)) {
+        if (key === 'incline' && numeric.test(value)) {
             return value.replace(numeric, function(_, sign) { return sign === '-' ? '' : '-'; });
-        } else if (key === "incline" || key === "direction") {
+        } else if (key === 'incline' || key === 'direction') {
             return {up: 'down', down: 'up'}[value] || value;
         } else {
             return {left: 'right', right: 'left'}[value] || value;

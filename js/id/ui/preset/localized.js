@@ -1,4 +1,4 @@
-iD.ui.preset.localized = function(field, context) {
+iD.ui.preset.localized = function(field) {
 
     var event = d3.dispatch('change'),
         wikipedia = iD.wikipedia(),
@@ -213,7 +213,7 @@ iD.ui.preset.localized = function(field, context) {
     };
 
     i.focus = function() {
-        title.node().focus();
+        input.node().focus();
     };
 
     return d3.rebind(i, event, 'on');

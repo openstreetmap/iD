@@ -29,7 +29,7 @@ iD.operations.Disconnect = function(selectedIDs, context) {
             t('operations.disconnect.description');
     };
 
-    operation.id = "disconnect";
+    operation.id = 'disconnect';
     operation.keys = [t('operations.disconnect.key')];
     operation.title = t('operations.disconnect.title');
 

@@ -51,7 +51,7 @@ iD.actions.Orthogonalize = function(wayId, projection) {
 
             for (i = 0; i < points.length; i++) {
                 // only move the points that actually moved
-                if (originalPoints[i][0] != points[i][0] || originalPoints[i][1] != points[i][1]) {
+                if (originalPoints[i][0] !== points[i][0] || originalPoints[i][1] !== points[i][1]) {
                     graph = graph.replace(graph.entity(nodes[i].id)
                         .move(projection.invert(points[i])));
                 }
@@ -61,8 +61,8 @@ iD.actions.Orthogonalize = function(wayId, projection) {
             for (i = 0; i < points.length; i++) {
                 var node = nodes[i];
 
-                if (graph.parentWays(node).length > 1 || 
-                    graph.parentRelations(node).length || 
+                if (graph.parentWays(node).length > 1 ||
+                    graph.parentRelations(node).length ||
                     node.hasInterestingTags()) {
 
                     continue;

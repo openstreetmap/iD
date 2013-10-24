@@ -199,7 +199,7 @@ iD.modes.Select = function(context, selectedIDs) {
         context.surface()
             .call(radialMenu.close)
             .on('dblclick.select', null)
-            .selectAll(".selected")
+            .selectAll('.selected')
             .classed('selected', false);
 
         context.map().on('drawn.select', null);

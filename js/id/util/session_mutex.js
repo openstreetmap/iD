@@ -14,7 +14,7 @@ iD.util.SessionMutex = function(name) {
 
     mutex.lock = function() {
         if (intervalID) return true;
-        var cookie = document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + name + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1");
+        var cookie = document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + name + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1');
         if (cookie) return false;
         renew();
         intervalID = window.setInterval(renew, 4000);

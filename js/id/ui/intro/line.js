@@ -7,10 +7,6 @@ iD.ui.intro.line = function(context, reveal) {
         title: 'intro.lines.title'
     };
 
-    function one(target, e, f) {
-        d3.selection.prototype.one.call(target, e, f);
-    }
-
     function timeout(f, t) {
         timeouts.push(window.setTimeout(f, t));
     }
@@ -119,7 +115,7 @@ iD.ui.intro.line = function(context, reveal) {
         }
 
         // selected wrong road type
-        function retryPreset(mode) {
+        function retryPreset() {
             timeout(function() {
                 var preset = d3.select('.entity-editor-pane .preset-list-button');
                 reveal(preset.node(), t('intro.lines.wrong_preset'));

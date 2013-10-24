@@ -34,7 +34,7 @@ iD.Connection = function() {
     };
 
     connection.userURL = function(username) {
-        return url + "/user/" + username;
+        return url + '/user/' + username;
     };
 
     connection.loadFromURL = function(url, callback) {

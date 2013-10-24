@@ -9,7 +9,7 @@ iD.Way = iD.Entity.way = function iD_Way() {
 iD.Way.prototype = Object.create(iD.Entity.prototype);
 
 _.extend(iD.Way.prototype, {
-    type: "way",
+    type: 'way',
     nodes: [],
 
     extent: function(resolver) {
@@ -111,13 +111,13 @@ _.extend(iD.Way.prototype, {
 
         for (var i = 0; i < this.nodes.length; i++) {
             var node = this.nodes[i];
-            if (node != id && nodes[nodes.length - 1] != node) {
+            if (node !== id && nodes[nodes.length - 1] !== node) {
                 nodes.push(node);
             }
         }
 
         // Preserve circularity
-        if (this.nodes.length > 1 && this.first() === id && this.last() === id && nodes[nodes.length - 1] != nodes[0]) {
+        if (this.nodes.length > 1 && this.first() === id && this.last() === id && nodes[nodes.length - 1] !== nodes[0]) {
             nodes.push(nodes[0]);
         }
 

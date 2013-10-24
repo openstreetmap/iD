@@ -1,7 +1,6 @@
 iD.ui = function(context) {
     function render(container) {
-        var history = context.history(),
-            map = context.map();
+        var map = context.map();
 
         if (iD.detect().opera) container.classed('opera', true);
 
@@ -29,7 +28,7 @@ iD.ui = function(context) {
             .attr('id', 'map')
             .call(map);
 
-        var spacer = bar.append('div')
+        bar.append('div')
             .attr('class', 'spacer col4');
 
         var limiter = bar.append('div')

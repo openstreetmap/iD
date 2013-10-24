@@ -44,7 +44,7 @@ iD.operations.Merge = function(selectedIDs, context) {
         return t('operations.merge.description');
     };
 
-    operation.id = "merge";
+    operation.id = 'merge';
     operation.keys = [t('operations.merge.key')];
     operation.title = t('operations.merge.title');
 

@@ -124,7 +124,7 @@ iD.Background = function(context) {
     };
 
     background.bing = function() {
-        background.baseLayerSource(findSource("Bing"));
+        background.baseLayerSource(findSource('Bing'));
     };
 
     background.hasGpxLayer = function() {
@@ -219,7 +219,7 @@ iD.Background = function(context) {
             name: 'Custom'
         }));
     } else {
-        background.baseLayerSource(findSource(chosen) || findSource("Bing"));
+        background.baseLayerSource(findSource(chosen) || findSource('Bing'));
     }
 
     var locator = _.find(backgroundSources, function(d) {

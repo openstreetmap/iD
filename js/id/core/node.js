@@ -9,7 +9,7 @@ iD.Node = iD.Entity.node = function iD_Node() {
 iD.Node.prototype = Object.create(iD.Entity.prototype);
 
 _.extend(iD.Node.prototype, {
-    type: "node",
+    type: 'node',
 
     extent: function() {
         return new iD.geo.Extent(this.loc);

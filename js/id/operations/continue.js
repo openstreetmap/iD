@@ -41,7 +41,7 @@ iD.operations.Continue = function(selectedIDs, context) {
             t('operations.continue.description');
     };
 
-    operation.id = "continue";
+    operation.id = 'continue';
     operation.keys = [t('operations.continue.key')];
     operation.title = t('operations.continue.title');
 

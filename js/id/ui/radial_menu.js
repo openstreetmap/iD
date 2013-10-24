@@ -19,7 +19,7 @@ iD.ui.RadialMenu = function(context, operations) {
 
         menu = selection.append('g')
             .attr('class', 'radial-menu')
-            .attr('transform', "translate(" + center + ")")
+            .attr('transform', 'translate(' + center + ')')
             .attr('opacity', 0);
 
         menu.transition()

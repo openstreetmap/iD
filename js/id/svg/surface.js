@@ -21,7 +21,7 @@ iD.svg.Surface = function(context) {
                 .data(data)
                 .enter().append('use')
                 .attr('id', function(d) { return d.key; })
-                .attr('transform', function(d) { return "translate(-" + d.value[0] + ",-" + d.value[1] + ")"; })
+                .attr('transform', function(d) { return 'translate(-' + d.value[0] + ',-' + d.value[1] + ')'; })
                 .attr('xlink:href', '#' + id);
         };
     }

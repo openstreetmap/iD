@@ -180,7 +180,6 @@ iD.Graph.prototype = {
                 ways.push(entity.id);
                 parentWays[added[i]] = ways;
             }
-        } else if (type === 'node') {
 
         } else if (type === 'relation') {
 

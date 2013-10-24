@@ -58,7 +58,7 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
             return _.any(contained[i]);
         }
 
-        function filterContained(d, i) {
+        function filterContained(d) {
             return d.filter(isContained);
         }
 

@@ -4,7 +4,7 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
     var action = function(graph) {
         var way = graph.entity(wayId),
             nodes = _.uniq(graph.childNodes(way)),
-            keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length != 1; }),
+            keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; }),
             points = nodes.map(function(n) { return projection(n.loc); }),
             keyPoints = keyNodes.map(function(n) { return projection(n.loc); }),
             centroid = d3.geom.polygon(points).centroid(),
@@ -18,7 +18,7 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
             keyPoints = [points[0]];
         }
 
-        if (keyNodes.length == 1) {
+        if (keyNodes.length === 1) {
             var index = nodes.indexOf(keyNodes[0]),
                 oppositeIndex = Math.floor((index + nodes.length / 2) % nodes.length);
 

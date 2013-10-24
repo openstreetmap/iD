@@ -26,7 +26,7 @@ iD.operations.Straighten = function(selectedIDs, context) {
             t('operations.straighten.description');
     };
 
-    operation.id = "straighten";
+    operation.id = 'straighten';
     operation.keys = [t('operations.straighten.key')];
     operation.title = t('operations.straighten.title');
 

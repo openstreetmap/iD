@@ -34,11 +34,11 @@ iD.svg.Labels = function(projection, context) {
 
     var font_sizes = label_stack.map(function(d) {
         var style = iD.util.getStyle('text.' + d[0] + '.tag-' + d[1]),
-            m = style && style.cssText.match("font-size: ([0-9]{1,2})px;");
+            m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
         if (m) return parseInt(m[1], 10);
 
         style = iD.util.getStyle('text.' + d[0]);
-        m = style && style.cssText.match("font-size: ([0-9]{1,2})px;");
+        m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
         if (m) return parseInt(m[1], 10);
 
         return default_size;
@@ -91,19 +91,18 @@ iD.svg.Labels = function(projection, context) {
     }
 
     function drawLineLabels(group, entities, filter, classes, labels) {
-
         var texts = group.selectAll('text.' + classes)
             .filter(filter)
             .data(entities, iD.Entity.key);
 
-        var tp = texts.enter()
+        texts.enter()
             .append('text')
             .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; })
             .append('textPath')
             .attr('class', 'textpath');
 
 
-        var tps = texts.selectAll('.textpath')
+        texts.selectAll('.textpath')
             .filter(filter)
             .data(entities, iD.Entity.key)
             .attr({
@@ -113,11 +112,9 @@ iD.svg.Labels = function(projection, context) {
             .text(iD.util.displayName);
 
         texts.exit().remove();
-
     }
 
     function drawLinePaths(group, entities, filter, classes, labels) {
-
         var halos = group.selectAll('path')
             .filter(filter)
             .data(entities, iD.Entity.key);

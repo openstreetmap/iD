@@ -207,7 +207,7 @@ iD.ui.Background = function(context) {
                 return t('background.percent_brightness', { opacity: (d * 100) });
             })
             .on('click.set-opacity', setOpacity)
-            .html("<div class='select-box'></div>")
+            .html('<div class="select-box"></div>')
             .call(bootstrap.tooltip()
                 .placement('top'))
             .append('div')

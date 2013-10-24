@@ -1,4 +1,4 @@
-iD.ui.preset.access = function(field, context) {
+iD.ui.preset.access = function(field) {
     var event = d3.dispatch('change'),
         entity,
         items;
@@ -52,7 +52,7 @@ iD.ui.preset.access = function(field, context) {
     access.options = function(type) {
         var options = ['no', 'permissive', 'private', 'designated', 'destination'];
 
-        if (type != 'access') {
+        if (type !== 'access') {
             options.unshift('yes');
         }
 

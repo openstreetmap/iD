@@ -43,7 +43,7 @@ iD.Map = function(context) {
 
         map.surface = surface = dataLayer.append('svg')
             .on('mousedown.zoom', function() {
-                if (d3.event.button == 2) {
+                if (d3.event.button === 2) {
                     d3.event.stopPropagation();
                 }
             }, true)
@@ -380,7 +380,7 @@ iD.Map = function(context) {
         d3.timer(function() {
             if (stop) return true;
             map.center(iD.geo.interp(from, loc, (t += 1) / 10));
-            return t == 10;
+            return t === 10;
         }, 20);
         return map;
     };

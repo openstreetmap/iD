@@ -18,11 +18,11 @@ iD.actions.Straighten = function(wayId, projection) {
             i;
 
         for (i = 1; i < points.length-1; i++) {
-            var node = nodes[i], 
+            var node = nodes[i],
                 point = points[i];
 
-            if (graph.parentWays(node).length > 1 || 
-                graph.parentRelations(node).length || 
+            if (graph.parentWays(node).length > 1 ||
+                graph.parentRelations(node).length ||
                 node.hasInterestingTags()) {
 
                 var u = positionAlongWay(point, startPoint, endPoint),
@@ -33,7 +33,7 @@ iD.actions.Straighten = function(wayId, projection) {
                     .move(projection.invert([p0, p1])));
             } else {
                 // safe to delete
-                if (toDelete.indexOf(node) == -1) {
+                if (toDelete.indexOf(node) === -1) {
                     toDelete.push(node);
                 }
             }
@@ -57,7 +57,7 @@ iD.actions.Straighten = function(wayId, projection) {
             i;
 
         for (i = 1; i < points.length-1; i++) {
-            var point = points[i], 
+            var point = points[i],
                 u = positionAlongWay(point, startPoint, endPoint),
                 p0 = startPoint[0] + u * (endPoint[0] - startPoint[0]),
                 p1 = startPoint[1] + u * (endPoint[1] - startPoint[1]),

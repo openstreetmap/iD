@@ -1,0 +1,25 @@
+{
+    "eqeqeq": true,
+    "freeze": true,
+    "latedef": "nofunc",
+    "noarg": true,
+    "noempty": true,
+    "nonew": true,
+    "quotmark": "single",
+    "undef": true,
+    "globals": {
+        "d3": false,
+        "iD": false,
+        "_": false,
+        "t": false,
+        "bootstrap": false,
+        "rbush": false,
+        "JXON": false,
+        "osmAuth": false,
+        "toGeoJSON": false,
+        "marked": false
+    },
+    "browser": true,
+    "unused": true,
+    "trailing": true
+}

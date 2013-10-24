@@ -1,4 +1,4 @@
-iD.GpxLayer = function(context, dispatch) {
+iD.GpxLayer = function(context) {
     var projection,
         gj = {},
         enable = true,

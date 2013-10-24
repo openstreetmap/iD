@@ -24,7 +24,7 @@ iD.operations.Circularize = function(selectedIDs, context) {
             t('operations.circularize.description.' + geometry);
     };
 
-    operation.id = "circularize";
+    operation.id = 'circularize';
     operation.keys = [t('operations.circularize.key')];
     operation.title = t('operations.circularize.title');
 

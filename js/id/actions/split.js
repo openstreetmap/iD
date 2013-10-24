@@ -42,13 +42,13 @@ iD.actions.Split = function(nodeId, newWayIds) {
 
         // calculate lengths
         length = 0;
-        for (i = wrap(idxA+1); i != idxA; i = wrap(i+1)) {
+        for (i = wrap(idxA+1); i !== idxA; i = wrap(i+1)) {
             length += dist(nodes[i], nodes[wrap(i-1)]);
             lengths[i] = length;
         }
 
         length = 0;
-        for (i = wrap(idxA-1); i != idxA; i = wrap(i-1)) {
+        for (i = wrap(idxA-1); i !== idxA; i = wrap(i-1)) {
             length += dist(nodes[i], nodes[wrap(i+1)]);
             if (length < lengths[i])
                 lengths[i] = length;

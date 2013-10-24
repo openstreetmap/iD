@@ -65,7 +65,7 @@ iD.modes.Save = function(context) {
             context.install(behavior);
         });
 
-        context.connection().authenticate(function(err) {
+        context.connection().authenticate(function() {
             context.ui().sidebar.show(ui);
         });
     };
