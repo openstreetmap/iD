@@ -1,5 +1,13 @@
 ## Release Checklist
 
+### Prerelease (several days prior)
+
+- [ ] Notify translators of impending release
+  (https://www.transifex.com/projects/p/id-editor/announcements/)
+- [ ] Notify TomH
+
+### Make release
+
 TODO: turn this into a script.
 
 - [ ] make translations
