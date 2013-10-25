@@ -8,5 +8,6 @@
     "tags": {
         "leisure": "dog_park"
     },
-    "name": "Dog Park"
+    "name": "Dog Park",
+    "icon": "dog-park"
 }

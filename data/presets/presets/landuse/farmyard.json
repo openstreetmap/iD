@@ -7,5 +7,6 @@
         "landuse": "farmyard"
     },
     "terms": [],
-    "name": "Farmyard"
+    "name": "Farmyard",
+    "icon": "farm"
 }

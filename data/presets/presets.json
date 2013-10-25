@@ -2490,7 +2490,8 @@
             "landuse": "farmyard"
         },
         "terms": [],
-        "name": "Farmyard"
+        "name": "Farmyard",
+        "icon": "farm"
     },
     "landuse/forest": {
         "fields": [
@@ -2633,7 +2634,8 @@
         "tags": {
             "leisure": "dog_park"
         },
-        "name": "Dog Park"
+        "name": "Dog Park",
+        "icon": "dog-park"
     },
     "leisure/garden": {
         "icon": "garden",
@@ -2960,7 +2962,8 @@
         "tags": {
             "man_made": "lighthouse"
         },
-        "name": "Lighthouse"
+        "name": "Lighthouse",
+        "icon": "lighthouse"
     },
     "man_made/observation": {
         "geometry": [
@@ -3787,7 +3790,7 @@
         "name": "Liquor Store"
     },
     "shop/bakery": {
-        "icon": "shop",
+        "icon": "bakery",
         "fields": [
             "address",
             "building_area",
@@ -3979,7 +3982,7 @@
         "name": "Chemist"
     },
     "shop/clothes": {
-        "icon": "shop",
+        "icon": "clothing-store",
         "fields": [
             "address",
             "building_area",
@@ -4499,7 +4502,7 @@
         "name": "Outdoor Store"
     },
     "shop/pet": {
-        "icon": "shop",
+        "icon": "dog-park",
         "fields": [
             "address",
             "building_area",
@@ -4514,6 +4517,23 @@
             "shop": "pet"
         },
         "name": "Pet Store"
+    },
+    "shop/photo": {
+        "icon": "camera",
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "photo"
+        },
+        "name": "Photography Store"
     },
     "shop/shoes": {
         "icon": "shop",

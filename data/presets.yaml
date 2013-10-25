@@ -1120,6 +1120,9 @@ en:
       shop/pet: 
         name: Pet Store
         terms: "<translate with synonyms or related terms for 'Pet Store', separated by commas>"
+      shop/photo: 
+        name: Photography Store
+        terms: "<translate with synonyms or related terms for 'Photography Store', separated by commas>"
       shop/shoes: 
         name: Shoe Store
         terms: "<translate with synonyms or related terms for 'Shoe Store', separated by commas>"

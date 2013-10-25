@@ -1,5 +1,5 @@
 {
-    "icon": "clothing-store",
+    "icon": "camera",
     "fields": [
         "address",
         "building_area",
@@ -11,7 +11,7 @@
         "area"
     ],
     "tags": {
-        "shop": "clothes"
+        "shop": "photo"
     },
-    "name": "Clothing Store"
+    "name": "Photography Store"
 }

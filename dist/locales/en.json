@@ -1911,6 +1911,10 @@
                 "name": "Pet Store",
                 "terms": ""
             },
+            "shop/photo": {
+                "name": "Photography Store",
+                "terms": ""
+            },
             "shop/shoes": {
                 "name": "Shoe Store",
                 "terms": ""
