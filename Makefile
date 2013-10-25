@@ -96,7 +96,8 @@ dist/img/line-presets.png: svg/line-presets.svg
 dist/img/relation-presets.png: svg/relation-presets.svg
 	if [ `which inkscape` ]; then $(SPRITE) --export-png=$@ $<; else echo "Inkscape is not installed"; fi;
 
-dist/img/maki-sprite.png: $(wildcard node_modules/maki/renders/*.png)
+dist/img/maki-sprite.png: ./node_modules/maki/www/images/maki-sprite.png
+	cp $< $@
 	node data/maki_sprite
 
 D3_FILES = \
