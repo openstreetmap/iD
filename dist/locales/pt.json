@@ -472,6 +472,9 @@
             "atm": {
                 "label": "MultiBanco"
             },
+            "backrest": {
+                "label": "Encosto"
+            },
             "barrier": {
                 "label": "Tipo"
             },
@@ -599,6 +602,9 @@
                 "label": "Nível",
                 "placeholder": "2, 4, 6..."
             },
+            "lit": {
+                "label": "Iluminação"
+            },
             "location": {
                 "label": "Localização"
             },
@@ -717,6 +723,9 @@
             "surface": {
                 "label": "Superfície"
             },
+            "toilets/disposal": {
+                "label": "Eliminação de resíduos"
+            },
             "tourism": {
                 "label": "Tipo"
             },
@@ -728,6 +737,9 @@
             },
             "trail_visibility": {
                 "label": "Visibilidade do Trilho"
+            },
+            "vending": {
+                "label": "Tipo de produto"
             },
             "water": {
                 "label": "Tipo"
@@ -1031,6 +1043,9 @@
                 "name": "Edifício residencial",
                 "terms": "Prédio residencial"
             },
+            "emergency/ambulance_station": {
+                "name": "Central de ambulâncias"
+            },
             "emergency/fire_hydrant": {
                 "name": "Boca de incêndio"
             },
@@ -1226,6 +1241,9 @@
             "leisure": {
                 "name": "Lazer"
             },
+            "leisure/common": {
+                "name": "Comum"
+            },
             "leisure/dog_park": {
                 "name": "Parque de cães",
                 "terms": "Parque para cães"
@@ -1342,6 +1360,9 @@
             "natural/coastline": {
                 "name": "Linha Costeira"
             },
+            "natural/fell": {
+                "name": "Encosta"
+            },
             "natural/glacier": {
                 "name": "Glaciar"
             },
@@ -1353,6 +1374,9 @@
             },
             "natural/peak": {
                 "name": "Cume"
+            },
+            "natural/scree": {
+                "name": "Encosta de cascalho"
             },
             "natural/scrub": {
                 "name": "Matagal"
@@ -1539,6 +1563,9 @@
             },
             "shop/electronics": {
                 "name": "Loja de Eletrónica de Consumo"
+            },
+            "shop/farm": {
+                "name": "Barraca de produtos do campo"
             },
             "shop/fishmonger": {
                 "name": "Peixaria"

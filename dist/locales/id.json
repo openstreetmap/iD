@@ -246,7 +246,6 @@
         "title": "Latar",
         "description": "Pengaturan Latar",
         "percent_brightness": "{opacity}% kecerahan",
-        "fix_misalignment": "Perbaiki Kesalahan Penempatan",
         "reset": "ulang"
     },
     "restore": {

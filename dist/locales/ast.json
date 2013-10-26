@@ -161,7 +161,6 @@
         "title": "Fondu",
         "description": "Configuración del fondu",
         "percent_brightness": "{opacity}% brillu",
-        "fix_misalignment": "Iguar mal alliniamientu",
         "reset": "reaniciar"
     },
     "restore": {

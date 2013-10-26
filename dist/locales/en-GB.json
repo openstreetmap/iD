@@ -1,8 +1,52 @@
 {
+    "modes": {
+        "add_area": {
+            "title": "Area",
+            "description": "Add parks, buildings, lakes or other areas to the map.",
+            "tail": "Click on the map to start drawing an area, like a park, lake, or building."
+        },
+        "add_line": {
+            "title": "Line",
+            "description": "Add roads, streets, footpaths, canals or other lines to the map.",
+            "tail": "Click on the map to start drawing a road, path, or route."
+        },
+        "add_point": {
+            "title": "Point",
+            "description": "Add restaurants, monuments, post boxes or other points to the map.",
+            "tail": "Click on the map to add a point."
+        },
+        "browse": {
+            "title": "Browse",
+            "description": "Pan and zoom the map."
+        }
+    },
     "operations": {
+        "add": {
+            "annotation": {
+                "point": "Added a point.",
+                "vertex": "Added a node to a way."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Started a line.",
+                "area": "Started an area."
+            }
+        },
         "rotate": {
             "description": "Rotate this object around its centre point."
         }
+    },
+    "zoom_in_edit": "Zoom in to Edit",
+    "inspector": {
+        "none": "None"
+    },
+    "background": {
+        "fix_misalignment": "Fix alignment"
+    },
+    "gpx": {
+        "drag_drop": "Drag and drop a .gpx file on the page, or click the button to the right to browse",
+        "browse": "Browse for a .gpx file"
     },
     "intro": {
         "lines": {

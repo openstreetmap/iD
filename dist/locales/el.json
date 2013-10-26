@@ -227,7 +227,6 @@
         "percent_brightness": "{opacity}% φωτεινότητα",
         "none": "Κανένα",
         "custom": "Προσαρμοσμένο",
-        "fix_misalignment": "Διόρθωση ευθυγράμμισης",
         "reset": "Μηδενισμός"
     },
     "restore": {

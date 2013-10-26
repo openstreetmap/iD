@@ -226,7 +226,6 @@
         "title": "背景",
         "description": "背景圖像設定",
         "percent_brightness": "{opacity}%的光度",
-        "fix_misalignment": "校準底圖",
         "reset": "重設"
     },
     "restore": {

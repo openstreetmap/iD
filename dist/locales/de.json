@@ -261,7 +261,7 @@
         "none": "Kein Hintergrund",
         "custom": "Benutzerdefiniert",
         "custom_prompt": "Gib eine Kachel-Vorlage ein. Gültige Token sind {z}, {x}, {y} für das Z/X/Y Schema und {u} für das 'quadtile'-Schema.",
-        "fix_misalignment": "Fehlerhafte Ausrichtung korrigieren",
+        "fix_misalignment": "Ausrichtung korrigieren",
         "reset": "Zurücksetzen"
     },
     "restore": {
@@ -1904,6 +1904,10 @@
             "shop/pet": {
                 "name": "Tierhandlung",
                 "terms": "Tierhandlung, Zoohandlung"
+            },
+            "shop/photo": {
+                "name": "Fotofachgeschäft",
+                "terms": "Fotoladen, Fotograf, Fotogeschäft"
             },
             "shop/shoes": {
                 "name": "Schuhgeschäft",

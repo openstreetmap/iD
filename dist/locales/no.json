@@ -156,7 +156,6 @@
         "title": "Bakgrunn",
         "description": "Bakgrunnsinnstillinger",
         "percent_brightness": "{opacity}% lysstyrke",
-        "fix_misalignment": "Rett opp skjevstilling",
         "reset": "tilbakestill"
     },
     "restore": {

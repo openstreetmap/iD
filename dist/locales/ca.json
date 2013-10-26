@@ -261,7 +261,6 @@
         "none": "Cap",
         "custom": "Personalitza",
         "custom_prompt": "Introdueix una plantilla de casella. Els paràmetres vàlids són {z}, {x}, {y} per a l'esquema Z/X/Y i  {u} per a l'esquema quadtile.",
-        "fix_misalignment": "Corregeix la desalineació",
         "reset": "reinicia"
     },
     "restore": {

@@ -261,7 +261,7 @@
         "none": "Ingen",
         "custom": "Brugerdefineret",
         "custom_prompt": "Angiv en tile skabelon. Valide værdier er {z}, {x}, {y} for Z/X/Y skemaer og {u} for quadtile skema. ",
-        "fix_misalignment": "Ret fejljustering",
+        "fix_misalignment": "Ret justering",
         "reset": "nulstil"
     },
     "restore": {
@@ -616,7 +616,7 @@
                 "label": "Type"
             },
             "maxspeed": {
-                "label": "Hastighedsbegræsning",
+                "label": "Hastighedsbegrænsning",
                 "placeholder": "40, 50, 60..."
             },
             "name": {
@@ -636,7 +636,7 @@
                 "label": "Type"
             },
             "oneway": {
-                "label": "Ensrettet vej"
+                "label": "Ensrettet"
             },
             "oneway_yes": {
                 "label": "Ensrettet"
@@ -774,7 +774,7 @@
                 "terms": "adresse, adresser"
             },
             "aeroway": {
-                "name": "Lufthavnsveje",
+                "name": "Lufthavnsvej",
                 "terms": "Lufthavnsveje"
             },
             "aeroway/aerodrome": {
@@ -1142,7 +1142,7 @@
                 "terms": "Indgang, Indgangsparti"
             },
             "highway": {
-                "name": "Veje",
+                "name": "Vej",
                 "terms": "Veje, Gader"
             },
             "highway/bridleway": {
@@ -1904,6 +1904,10 @@
             "shop/pet": {
                 "name": "Kæledyrsbutik",
                 "terms": "Kæledyrsbutik, Dyreforhandler"
+            },
+            "shop/photo": {
+                "name": "Fotoforretning",
+                "terms": "<Oversæt med synonymer eller relaterede termer for \"Fotoforretning\", adskilt af kommaer>"
             },
             "shop/shoes": {
                 "name": "Skobutik",

@@ -261,7 +261,7 @@
         "none": "Geen",
         "custom": "Aangepast",
         "custom_prompt": "Voer een tegelschema in. Geldige waarden zijn {z}, {x}, {y} voor Z/X/Y schema en {u} voor het quadtile schema.",
-        "fix_misalignment": "Repareer de verkeerde ligging",
+        "fix_misalignment": "Repareer de ligging",
         "reset": "Standaard herstellen"
     },
     "restore": {

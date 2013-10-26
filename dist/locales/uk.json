@@ -284,7 +284,7 @@
         "facebook": "Поділитись на Facebook",
         "twitter": "Поділитись на Twitter",
         "google": "Поділитись на Google+",
-        "help_html": "Ваші зміни повинні з’явитись в «Стандартному» шарі через кілька хвилин. Зміни інших шарів, та об’єктів можуть відбуватись\nдовше (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>докладніше англійською</a>).\n"
+        "help_html": "Ваші зміни повинні з’явитись в «Стандартному» шарі за кілька хвилин. \nЗміни інших шарів та об’єктів можуть відбуватись довше (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>докладніше англійською</a>).\n"
     },
     "confirm": {
         "okay": "Готово"
@@ -666,7 +666,7 @@
                 "label": "Тип"
             },
             "ref": {
-                "label": "Посилання"
+                "label": "Номер"
             },
             "relation": {
                 "label": "Тип"
@@ -878,7 +878,7 @@
             },
             "amenity/drinking_water": {
                 "name": "Питна вода",
-                "terms": "Drinking Water, gbnyf djlf"
+                "terms": "Drinking Water, gbnyf djlf, бювет"
             },
             "amenity/embassy": {
                 "name": "Амбасада",

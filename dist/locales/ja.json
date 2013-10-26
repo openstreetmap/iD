@@ -1596,6 +1596,9 @@
             "shop/laundry": {
                 "name": "コインランドリー"
             },
+            "shop/locksmith": {
+                "name": "錠前屋"
+            },
             "shop/mall": {
                 "name": "ショッピングセンター"
             },
@@ -1619,6 +1622,9 @@
             },
             "shop/pet": {
                 "name": "ペットショップ"
+            },
+            "shop/photo": {
+                "name": "写真販売"
             },
             "shop/shoes": {
                 "name": "靴屋"

@@ -225,7 +225,6 @@
         "title": "背景",
         "description": "设置背景",
         "percent_brightness": "{opacity}% 亮度",
-        "fix_misalignment": "修复错位",
         "reset": "重置"
     },
     "restore": {

@@ -7,7 +7,7 @@
         },
         "add_line": {
             "title": "Joon",
-            "description": "Lisa teid, tänavaid, jalgteid, ojasid ja teisi jooni kaardile.",
+            "description": "Lisa kaardile teid, tänavaid, jalgteid, ojasid ja teisi jooni.",
             "tail": "Joone (tee, rada, marsruut vms) joonistamiseks kliki kaardil."
         },
         "add_point": {
@@ -240,7 +240,6 @@
         "none": "Puudub",
         "custom": "Kohandatud",
         "custom_prompt": "Sisesta kohandatud tausta URL. Kasutatavad muutujad on {z}, {x}, {y} Z/X/Y skeemi jaoks ja {u} quadtile skeemi jaoks.",
-        "fix_misalignment": "Korrigeeri nihet",
         "reset": "lähtesta"
     },
     "restore": {
@@ -416,6 +415,9 @@
                 "label": "Faks",
                 "placeholder": "+372 123 4567"
             },
+            "fee": {
+                "label": "Tasu"
+            },
             "iata": {
                 "label": "IATA"
             },
@@ -432,6 +434,9 @@
             "lanes": {
                 "label": "Sõiduread"
             },
+            "layer": {
+                "label": "Kiht"
+            },
             "levels": {
                 "label": "Korruseid"
             },
@@ -443,6 +448,9 @@
             },
             "note": {
                 "label": "Märge"
+            },
+            "office": {
+                "label": "Tüüp"
             },
             "oneway": {
                 "label": "Ühesuunaline"
@@ -467,6 +475,9 @@
             },
             "shelter": {
                 "label": "Varjualune"
+            },
+            "source": {
+                "label": "Allikas"
             },
             "sport": {
                 "label": "Sport"

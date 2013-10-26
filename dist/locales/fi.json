@@ -257,7 +257,6 @@
         "percent_brightness": "{opacity}% kirkkaus",
         "none": "Ei kohteita",
         "custom": "Mukautettu",
-        "fix_misalignment": "Korjaa ilmakuvavirhe",
         "reset": "palauta"
     },
     "restore": {

@@ -1323,25 +1323,31 @@
                 "terms": "budowa,teren,budowy"
             },
             "landuse/farm": {
-                "name": "Teren rolny (orny)"
+                "name": "Teren rolny (orny)",
+                "terms": "Farma, gospodarstwo, zagroda"
             },
             "landuse/farmyard": {
-                "name": "Zabudowa rolnicza"
+                "name": "Zabudowa rolnicza",
+                "terms": "podwórze gospodarskie"
             },
             "landuse/forest": {
-                "name": "Las"
+                "name": "Las",
+                "terms": "Las"
             },
             "landuse/grass": {
-                "name": "Trawa"
+                "name": "Trawa",
+                "terms": "trawa, trawnik, "
             },
             "landuse/industrial": {
                 "name": "Obszar przemysłowy"
             },
             "landuse/meadow": {
-                "name": "Łąka"
+                "name": "Łąka",
+                "terms": "Łąka"
             },
             "landuse/orchard": {
-                "name": "Sad"
+                "name": "Sad",
+                "terms": "Sad"
             },
             "landuse/quarry": {
                 "name": "Kamieniołom"
@@ -1354,7 +1360,8 @@
                 "name": "Obszar handlowy"
             },
             "landuse/vineyard": {
-                "name": "Winnica"
+                "name": "Winnica",
+                "terms": "winnica"
             },
             "leisure": {
                 "name": "Rozrywka i wypoczynek"
@@ -1363,13 +1370,16 @@
                 "name": "Park dla psów"
             },
             "leisure/garden": {
-                "name": "Ogród"
+                "name": "Ogród",
+                "terms": "ogród"
             },
             "leisure/golf_course": {
-                "name": "Pole golfowe"
+                "name": "Pole golfowe",
+                "terms": "pole golfowe"
             },
             "leisure/marina": {
-                "name": "Przystań"
+                "name": "Przystań",
+                "terms": "przystań"
             },
             "leisure/park": {
                 "name": "Park",
@@ -1469,19 +1479,23 @@
                 "name": "Zatoka"
             },
             "natural/beach": {
-                "name": "Plaża"
+                "name": "Plaża",
+                "terms": "plaża"
             },
             "natural/cliff": {
-                "name": "Klif"
+                "name": "Klif",
+                "terms": "urwisko, klif"
             },
             "natural/coastline": {
-                "name": "Wybrzeże"
+                "name": "Wybrzeże",
+                "terms": "Linia brzegowa"
             },
             "natural/fell": {
                 "name": "Wzgórze"
             },
             "natural/glacier": {
-                "name": "Lodowiec"
+                "name": "Lodowiec",
+                "terms": "lodowiec"
             },
             "natural/grassland": {
                 "name": "Łąka"
@@ -1537,13 +1551,16 @@
                 "name": "Miejsce"
             },
             "place/city": {
-                "name": "Miasto"
+                "name": "Miasto",
+                "terms": "miasto"
             },
             "place/hamlet": {
-                "name": "Przysiółek"
+                "name": "Przysiółek",
+                "terms": "mała wioska, przysiołek"
             },
             "place/island": {
-                "name": "Wyspa"
+                "name": "Wyspa",
+                "terms": "Wyspa"
             },
             "place/isolated_dwelling": {
                 "name": "Pojedyncze zabudowania"
@@ -1552,10 +1569,12 @@
                 "name": "Okolica"
             },
             "place/town": {
-                "name": "Miasto"
+                "name": "Miasto",
+                "terms": "Miasteczko"
             },
             "place/village": {
-                "name": "Wioska"
+                "name": "Wioska",
+                "terms": "Wieś"
             },
             "point": {
                 "name": "Punkt"
@@ -1601,7 +1620,8 @@
                 "name": "Rogatka"
             },
             "railway/monorail": {
-                "name": "Kolej jednoszynowa"
+                "name": "Kolej jednoszynowa",
+                "terms": "Kolej jednoszynowa"
             },
             "railway/platform": {
                 "name": "Peron kolejowy"
@@ -1613,13 +1633,16 @@
                 "name": "Dworzec kolejowy"
             },
             "railway/subway": {
-                "name": "Metro"
+                "name": "Metro",
+                "terms": "Metro"
             },
             "railway/subway_entrance": {
-                "name": "Wejście do metra"
+                "name": "Wejście do metra",
+                "terms": "Wejście do metra"
             },
             "railway/tram": {
-                "name": "Tramwaj"
+                "name": "Tramwaj",
+                "terms": "Tory tramwajowe"
             },
             "relation": {
                 "name": "Relacja"
@@ -1628,13 +1651,15 @@
                 "name": "Trasa morska"
             },
             "shop": {
-                "name": "Sklep"
+                "name": "Sklep",
+                "terms": "Sklep"
             },
             "shop/alcohol": {
                 "name": "Sklep monopolowy"
             },
             "shop/bakery": {
-                "name": "Piekarnia"
+                "name": "Piekarnia",
+                "terms": "Piekarnia"
             },
             "shop/beauty": {
                 "name": "Salon piękności"
@@ -1814,19 +1839,23 @@
                 "name": "Domek gościnny"
             },
             "tourism/hostel": {
-                "name": "Schronisko"
+                "name": "Schronisko",
+                "terms": "Hostel"
             },
             "tourism/hotel": {
-                "name": "Hotel"
+                "name": "Hotel",
+                "terms": "Hotel"
             },
             "tourism/information": {
                 "name": "Informacja"
             },
             "tourism/motel": {
-                "name": "Motel"
+                "name": "Motel",
+                "terms": "Motel"
             },
             "tourism/museum": {
-                "name": "Muzeum"
+                "name": "Muzeum",
+                "terms": "Muzeum"
             },
             "tourism/picnic_site": {
                 "name": "Miejsce na piknik"
@@ -1838,7 +1867,8 @@
                 "name": "Punkt widokowy"
             },
             "tourism/zoo": {
-                "name": "Zoo"
+                "name": "Zoo",
+                "terms": "Zoo, ogród zoologiczny"
             },
             "type/boundary": {
                 "name": "Granica"

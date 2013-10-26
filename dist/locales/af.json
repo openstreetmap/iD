@@ -185,7 +185,6 @@
         "title": "Agtergrond",
         "description": "Agtergrond stellings",
         "percent_brightness": "{opacity}% helderheid",
-        "fix_misalignment": "Lyn op",
         "reset": "begin van voor"
     },
     "restore": {

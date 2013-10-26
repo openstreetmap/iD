@@ -16,6 +16,9 @@
                 "point": "ఒక బిందువును చేర్చారు."
             }
         },
+        "continue": {
+            "title": "కొనసాగించు"
+        },
         "delete": {
             "title": "తొలగించు",
             "annotation": {
@@ -87,6 +90,9 @@
         "points": {
             "title": "బిందువులు"
         },
+        "areas": {
+            "title": "ప్రదేశాలు"
+        },
         "lines": {
             "title": "గీతలు"
         }
@@ -100,7 +106,14 @@
         "fields": {
             "access": {
                 "types": {
-                    "access": "సాధారణం"
+                    "access": "సాధారణం",
+                    "bicycle": "సైకిళ్ళు",
+                    "horse": "గుర్రాలు"
+                },
+                "options": {
+                    "destination": {
+                        "title": "గమ్యం"
+                    }
                 }
             },
             "address": {
@@ -115,6 +128,9 @@
                 "label": "రకం"
             },
             "amenity": {
+                "label": "రకం"
+            },
+            "artwork_type": {
                 "label": "రకం"
             },
             "barrier": {
@@ -163,6 +179,12 @@
             "entrance": {
                 "label": "రకం"
             },
+            "fire_hydrant/type": {
+                "label": "రకం"
+            },
+            "generator/type": {
+                "label": "రకం"
+            },
             "highway": {
                 "label": "రకం"
             },
@@ -191,7 +213,8 @@
                 "label": "వేగ పరిమితి"
             },
             "name": {
-                "label": "పేరు"
+                "label": "పేరు",
+                "placeholder": "మామూలు పేరు (ఉంటే)"
             },
             "note": {
                 "label": "గమనిక"
@@ -314,6 +337,9 @@
             },
             "amenity/pharmacy": {
                 "name": "మందుల షాపు"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "బౌద్ధ ఆలయం"
             },
             "amenity/place_of_worship/christian": {
                 "name": "చర్చి",
@@ -457,6 +483,9 @@
             },
             "shop/supermarket": {
                 "name": "సుపర్ మార్కెట్"
+            },
+            "shop/toys": {
+                "name": "బొమ్మల కొట్టు"
             },
             "shop/vacant": {
                 "name": "ఖాళీ దుకాణం"

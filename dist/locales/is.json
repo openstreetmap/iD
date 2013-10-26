@@ -234,7 +234,6 @@
         "title": "Bakgrunnur",
         "description": "Bakgrunnsstillingar",
         "percent_brightness": "{opacity}% birta",
-        "fix_misalignment": "Laga hliðrun",
         "reset": "endurstilla"
     },
     "restore": {

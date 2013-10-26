@@ -41,6 +41,7 @@
             }
         },
         "continue": {
+            "key": "A",
             "title": "Continuar",
             "description": "Continuar esta linha.",
             "not_eligible": "Nenhuma linha pode ser continuada aqui.",
@@ -78,6 +79,7 @@
                 "line": "Ajustar os cantos de uma linha para 90°.",
                 "area": "Ajustar os cantos de uma área para 90°."
             },
+            "key": "S",
             "annotation": {
                 "line": "Ajustou os cantos de uma linha para 90°.",
                 "area": "Ajustou os cantos de uma área para 90°."
@@ -87,6 +89,7 @@
         "straighten": {
             "title": "Endireitar",
             "description": "Endireitar esta linha.",
+            "key": "S",
             "annotation": "Endireitar uma linha.",
             "too_bendy": "Isto não pode ser alinhado porque possui muitas curvas."
         },
@@ -258,7 +261,7 @@
         "none": "Nenhum",
         "custom": "Customizado",
         "custom_prompt": "Entre com um template de tiles. Tokens válidos são {z}, {x}, {y} para esquema Z/X/Y e {u} para esquema de quadtile.",
-        "fix_misalignment": "Corrigir desalinhamento",
+        "fix_misalignment": "Corrigir alinhamento",
         "reset": "resetar"
     },
     "restore": {
@@ -1387,7 +1390,8 @@
                 "terms": "Lazer"
             },
             "leisure/common": {
-                "name": "Área Comunitária"
+                "name": "Área Comunitária",
+                "terms": "Comum, Habitual, Frequente"
             },
             "leisure/dog_park": {
                 "name": "Parque de Cães",
@@ -1486,7 +1490,8 @@
                 "terms": "Farol"
             },
             "man_made/observation": {
-                "name": "Torre de Observação"
+                "name": "Torre de Observação",
+                "terms": "Torre de observação"
             },
             "man_made/pier": {
                 "name": "Píer",
@@ -1541,7 +1546,8 @@
                 "terms": "Orla Marítima, Linha Costeira"
             },
             "natural/fell": {
-                "name": "Colina"
+                "name": "Colina",
+                "terms": "Caiu"
             },
             "natural/glacier": {
                 "name": "Geleira",
@@ -1560,7 +1566,8 @@
                 "terms": "Pico, Topo de Montanha, Serra, Montanha, Monte"
             },
             "natural/scree": {
-                "name": "Cascalho"
+                "name": "Cascalho",
+                "terms": "Seixos, Pedras"
             },
             "natural/scrub": {
                 "name": "Arbustos",

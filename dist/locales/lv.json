@@ -182,7 +182,6 @@
         "title": "Fons",
         "description": "Fona iestatījumi",
         "percent_brightness": "{opacity}% caurspīdīgums",
-        "fix_misalignment": "Labot fona nobīdi",
         "reset": "Atiestatīt"
     },
     "restore": {

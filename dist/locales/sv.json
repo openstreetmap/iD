@@ -228,7 +228,6 @@
         "title": "Bakgrund",
         "description": "Bakgrundsinställningar",
         "percent_brightness": "{opacity}% ljusstyrka",
-        "fix_misalignment": "Justera bildplacering",
         "reset": "ta bort"
     },
     "restore": {

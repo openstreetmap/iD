@@ -261,7 +261,7 @@
         "none": "Žádné",
         "custom": "Vlastní",
         "custom_prompt": "Vložte šablonu adres dlaždic. Lze použít tokeny {z}, {x}, {y} pro schéma Z/X/Y a {u} pro hierarchické schéma quadtile.",
-        "fix_misalignment": "Zarovnat pozadí",
+        "fix_misalignment": "Vyrovnat posunutí pozadí",
         "reset": "vrátit na začátek"
     },
     "restore": {
@@ -1904,6 +1904,10 @@
             "shop/pet": {
                 "name": "Chovatelské potřeby",
                 "terms": "obchod pro domácí zvířata,obchod pro domácí mazlíčky,zverimex"
+            },
+            "shop/photo": {
+                "name": "Fotografický obchod",
+                "terms": "fotografie,fotografický obchod,foto,fotoobchod,video,vyvolávání,tisk,film,filmy,fotostudio,studio,fotoaparát,digitální,digitál,střih,ateliér,objektiv"
             },
             "shop/shoes": {
                 "name": "Obuvnictví",

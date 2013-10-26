@@ -261,7 +261,6 @@
         "none": "Aucun",
         "custom": "Personnalisé",
         "custom_prompt": "Entre un modèle de tuile. Les jetons valides sont  {z}, {x}, {y} pour un système Z/X/Y  et {u} pour le quatrième système.",
-        "fix_misalignment": "Corriger le décalage",
         "reset": "réinitialiser"
     },
     "restore": {

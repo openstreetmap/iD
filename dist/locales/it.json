@@ -1905,6 +1905,10 @@
                 "name": "Negozio di animali",
                 "terms": "Negozio di animali"
             },
+            "shop/photo": {
+                "name": "Fotografo",
+                "terms": "fotografia,fotografico,fotografo,foto,diapositive,rullini,macchine fotografiche"
+            },
             "shop/shoes": {
                 "name": "Negozio di scarpe",
                 "terms": "Negozio scarpe"

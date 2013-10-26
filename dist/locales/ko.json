@@ -261,7 +261,6 @@
         "none": "없음",
         "custom": "사용자 지정",
         "custom_prompt": "타일 템플릿을 입력하세요. 올바른 토큰은 Z/X/Y scheme에 대해 {z}, {x}, {y}이고 quadtile scheme에 대해 {u}입니다.",
-        "fix_misalignment": "어긋난 것을 고치기",
         "reset": "재설정"
     },
     "restore": {

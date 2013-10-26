@@ -195,7 +195,6 @@
         "title": "Arkaplan",
         "description": "Arkaplan Ayarları",
         "percent_brightness": "{opacity}% parlaklık",
-        "fix_misalignment": "Yanlış hizalamayı düzelt",
         "reset": "Sıfırla"
     },
     "restore": {

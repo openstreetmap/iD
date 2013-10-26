@@ -226,7 +226,6 @@
         "title": "Изображения",
         "description": "Изображения настройки",
         "percent_brightness": "{opacity}% яркост",
-        "fix_misalignment": "Подравняване",
         "reset": "презареждане"
     },
     "restore": {

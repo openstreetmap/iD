@@ -173,7 +173,6 @@
         "title": "背景",
         "description": "背景设置",
         "custom": "自定义",
-        "fix_misalignment": "修正不对准",
         "reset": "重置"
     },
     "restore": {

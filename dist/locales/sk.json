@@ -1905,6 +1905,10 @@
                 "name": "Chovprodukt",
                 "terms": "domáci miláčik,domaci milacik,domace zvierata,domáce zvierata,potrava"
             },
+            "shop/photo": {
+                "name": "Obchod s fototechnikou",
+                "terms": "Fotoateliér,fotoatelier,fotostudio,fotoštúdio,fotografia"
+            },
             "shop/shoes": {
                 "name": "Obchod s obuvov",
                 "terms": "obuv,topánky,topanky"

@@ -261,7 +261,6 @@
         "none": "Nincs",
         "custom": "Egyéni",
         "custom_prompt": "Adj meg egy csempe sablont. Érvényes tokenek: {z}, {x}, {y} a Z/X/Y rendszerű URL-ekhez és {u} a kvadratikusakhoz.",
-        "fix_misalignment": "Elcsúszás korrigálása",
         "reset": "visszavonás"
     },
     "restore": {

@@ -261,7 +261,6 @@
         "none": "Ninguno",
         "custom": "Personalizado",
         "custom_prompt": "Introduzca una plantilla de teselas. Los símbolos válidos son {z}, {x}, {y} para el esquema Z\\/X\\/Y y {u} para el esquema quadtile.",
-        "fix_misalignment": "Corregir alineación",
         "reset": "reiniciar"
     },
     "restore": {
