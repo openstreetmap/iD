@@ -1,3 +1,10 @@
+## 1.3.1
+
+* Fix misalignment -> Fix alignment (#1913)
+* Update maki (#1916)
+* Prioritize boundary tag to minimize area fills (#1920)
+* Fix background defaulting to 0% brightness (#1923)
+
 ## 1.3.0
 
 * Fix corner case that could cause getting stuck in drag mode (#1910)
