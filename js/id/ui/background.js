@@ -6,7 +6,7 @@ iD.ui.Background = function(context) {
             ['top', [0, -1]],
             ['right', [-1, 0]],
             ['bottom', [0, 1]]],
-        opacityDefault = (context.storage('background-opacity') !== undefined) ?
+        opacityDefault = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 0.5;
 
     function background(selection) {
