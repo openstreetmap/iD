@@ -3,8 +3,8 @@
         "line"
     ],
     "tags": {
-        "power": "line"
+        "power": "minor_line"
     },
-    "name": "Major Power Line",
+    "name": "Minor Power Line",
     "icon": "power-line"
 }

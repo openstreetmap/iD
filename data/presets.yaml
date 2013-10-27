@@ -932,8 +932,11 @@ en:
         name: Power Generator
         terms: "<translate with synonyms or related terms for 'Power Generator', separated by commas>"
       power/line: 
-        name: Power Line
-        terms: "<translate with synonyms or related terms for 'Power Line', separated by commas>"
+        name: Major Power Line
+        terms: "<translate with synonyms or related terms for 'Major Power Line', separated by commas>"
+      power/minor_line: 
+        name: Minor Power Line
+        terms: "<translate with synonyms or related terms for 'Minor Power Line', separated by commas>"
       power/pole: 
         name: Power Pole
         terms: "<translate with synonyms or related terms for 'Power Pole', separated by commas>"

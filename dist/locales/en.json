@@ -1660,7 +1660,11 @@
                 "terms": ""
             },
             "power/line": {
-                "name": "Power Line",
+                "name": "Major Power Line",
+                "terms": ""
+            },
+            "power/minor_line": {
+                "name": "Minor Power Line",
                 "terms": ""
             },
             "power/pole": {

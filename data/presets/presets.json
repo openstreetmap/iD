@@ -3512,7 +3512,17 @@
         "tags": {
             "power": "line"
         },
-        "name": "Power Line",
+        "name": "Major Power Line",
+        "icon": "power-line"
+    },
+    "power/minor_line": {
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "power": "minor_line"
+        },
+        "name": "Minor Power Line",
         "icon": "power-line"
     },
     "power/pole": {
