@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "power": "minor_line"
+    },
+    "name": "Minor Power Line",
+    "icon": "power-line"
+}

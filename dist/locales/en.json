@@ -1663,6 +1663,10 @@
                 "name": "Power Line",
                 "terms": ""
             },
+            "power/minor_line": {
+                "name": "Minor Power Line",
+                "terms": ""
+            },
             "power/pole": {
                 "name": "Power Pole",
                 "terms": ""
