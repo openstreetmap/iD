@@ -9,6 +9,9 @@ iD.ui.Background = function(context) {
         opacityDefault = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 0.5;
 
+    // Can be 0 from <1.3.0 use or due to issue #1923.
+    if (opacityDefault === 0) opacityDefault = 0.5;
+
     function background(selection) {
 
         function setOpacity(d) {
