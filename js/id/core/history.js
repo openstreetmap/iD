@@ -42,17 +42,11 @@ iD.History = function(context) {
         },
 
         merge: function(entities, extent) {
-
-            var base = stack[0].graph.base(),
-                newentities = Object.keys(entities).filter(function(i) {
-                    return !base.entities[i];
-                });
-
             for (var i = 0; i < stack.length; i++) {
                 stack[i].graph.rebase(entities);
             }
 
-            tree.rebase(newentities);
+            tree.rebase(d3.values(entities));
 
             dispatch.change(undefined, extent);
         },

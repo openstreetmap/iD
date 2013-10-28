@@ -43,11 +43,14 @@ iD.Tree = function(graph) {
     var tree = {
 
         rebase: function(entities) {
-            for (var i = 0, inserted = []; i < entities.length; i++) {
-                if (!graph.entities.hasOwnProperty(entities[i])) {
-                    inserted.push(graph.entity(entities[i]));
+            var inserted = [];
+
+            entities.forEach(function(entity) {
+                if (!graph.entities.hasOwnProperty(entity.id) && !rectangles.hasOwnProperty(entity.id)) {
+                    inserted.push(entity);
                 }
-            }
+            });
+
             bulkInsert(inserted);
             rebased = true;
             return tree;
@@ -101,12 +104,7 @@ iD.Tree = function(graph) {
             return rtree.search(extentRectangle(extent)).map(function (rect) {
                 return graph.entities[rect.id];
             });
-        },
-
-        graph: function() {
-            return graph;
         }
-
     };
 
     return tree;

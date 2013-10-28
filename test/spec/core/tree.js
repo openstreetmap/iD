@@ -6,9 +6,24 @@ describe("iD.Tree", function() {
                 node = iD.Node({id: 'n', loc: [1, 1]});
 
             graph.rebase({n: node});
-            tree.rebase(['n']);
+            tree.rebase([node]);
 
             expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), graph)).to.eql([node]);
+        });
+
+        it("is idempotent", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            graph.rebase({n: node});
+            tree.rebase([node]);
+            expect(tree.intersects(extent, graph)).to.eql([node]);
+
+            graph.rebase({n: node});
+            tree.rebase([node]);
+            expect(tree.intersects(extent, graph)).to.eql([node]);
         });
 
         it("does not insert if entity has a modified version", function() {
@@ -21,7 +36,7 @@ describe("iD.Tree", function() {
             expect(tree.intersects(iD.geo.Extent([9, 9], [11, 11]), g)).to.eql([node_]);
 
             graph.rebase({n: node});
-            tree.rebase(['n']);
+            tree.rebase([node]);
 
             expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), g)).to.eql([]);
             expect(tree.intersects(iD.geo.Extent([0, 0], [11, 11]), g)).to.eql([node_]);
@@ -51,7 +66,7 @@ describe("iD.Tree", function() {
             expect(tree.intersects(extent, graph)).to.eql([]);
 
             base.rebase({n: node});
-            tree.rebase(['n']);
+            tree.rebase([node]);
             expect(tree.intersects(extent, graph)).to.eql([node, way]);
         });
 
@@ -65,6 +80,20 @@ describe("iD.Tree", function() {
             expect(tree.intersects(extent, graph)).to.eql([node]);
 
             graph = graph.remove(node);
+            expect(tree.intersects(extent, graph)).to.eql([]);
+        });
+
+        it("doesn't include removed entities after rebase", function() {
+            var base = iD.Graph(),
+                tree = iD.Tree(base),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            var graph = base.replace(node).remove(node);
+            expect(tree.intersects(extent, graph)).to.eql([]);
+
+            base.rebase({n: node});
+            tree.rebase([node]);
             expect(tree.intersects(extent, graph)).to.eql([]);
         });
     });
