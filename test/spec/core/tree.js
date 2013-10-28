@@ -70,6 +70,35 @@ describe("iD.Tree", function() {
             expect(tree.intersects(extent, graph)).to.eql([node, way]);
         });
 
+        it("adjusts parent ways when a member node is moved", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                way = iD.Way({nodes: ['n']}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            graph = graph.replace(node).replace(way);
+            expect(tree.intersects(extent, graph)).to.eql([node, way]);
+
+            graph = graph.replace(node.move([3, 3]));
+            expect(tree.intersects(extent, graph)).to.eql([]);
+        });
+
+        it("adjusts parent ways when a member node is removed", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                n1 = iD.Node({id: 'n1', loc: [1, 1]}),
+                n2 = iD.Node({id: 'n2', loc: [3, 3]}),
+                way = iD.Way({nodes: ['n1', 'n2']}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            graph = graph.replace(n1).replace(n2).replace(way);
+            expect(tree.intersects(extent, graph)).to.eql([n1, way]);
+
+            graph = graph.replace(way.removeNode('n1'));
+            expect(tree.intersects(extent, graph)).to.eql([n1]);
+        });
+
         it("doesn't include removed entities", function() {
             var graph = iD.Graph(),
                 tree = iD.Tree(graph),
