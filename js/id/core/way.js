@@ -15,7 +15,12 @@ _.extend(iD.Way.prototype, {
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
             return this.nodes.reduce(function(extent, id) {
-                return extent.extend(resolver.entity(id).extent(resolver));
+                var node = resolver.hasEntity(id);
+                if (node) {
+                    return extent.extend(node.extent());
+                } else {
+                    return extent;
+                }
             }, iD.geo.Extent());
         });
     },

@@ -83,14 +83,6 @@ iD.Difference = function(base, head) {
         return result;
     };
 
-    difference.addParents = function(entities) {
-        for (var i in entities) {
-            addParents(head.parentWays(entities[i]), entities);
-            addParents(head.parentRelations(entities[i]), entities);
-        }
-        return entities;
-    };
-
     difference.summary = function() {
         var relevant = {};
 

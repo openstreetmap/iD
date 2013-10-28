@@ -242,24 +242,6 @@ iD.Graph.prototype = {
         return this;
     },
 
-    hasAllChildren: function(entity) {
-        // we're only checking changed entities, since we assume fetched data
-        // must have all children present
-        var i;
-        if (this.entities.hasOwnProperty(entity.id)) {
-            if (entity.type === 'way') {
-                for (i = 0; i < entity.nodes.length; i++) {
-                    if (!this.entities[entity.nodes[i]]) return false;
-                }
-            } else if (entity.type === 'relation') {
-                for (i = 0; i < entity.members.length; i++) {
-                    if (!this.entities[entity.members[i].id]) return false;
-                }
-            }
-        }
-        return true;
-    },
-
     // Obliterates any existing entities
     load: function(entities) {
         var base = this.base();

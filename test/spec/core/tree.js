@@ -55,6 +55,24 @@ describe("iD.Tree", function() {
             expect(tree.intersects(extent, graph)).to.eql([n1]);
         });
 
+        it("includes intersecting relations after incomplete members are loaded", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                n1 = iD.Node({id: 'n1', loc: [0, 0]}),
+                n2 = iD.Node({id: 'n2', loc: [1, 1]}),
+                relation = iD.Relation({id: 'r', members: [{id: 'n1'}, {id: 'n2'}]}),
+                extent = iD.geo.Extent([0.5, 0.5], [1.5, 1.5]);
+
+            graph.rebase({r: relation, n1: n1});
+            tree.rebase([relation, n1]);
+            expect(tree.intersects(extent, graph)).to.eql([]);
+
+            graph.rebase({n2: n2});
+            tree.rebase([n2]);
+            expect(tree.intersects(extent, graph)).to.eql([n2, relation]);
+        });
+
+        // This happens when local storage includes a changed way but not its nodes.
         it("includes intersecting ways after missing nodes are loaded", function() {
             var base = iD.Graph(),
                 tree = iD.Tree(base),
@@ -66,6 +84,7 @@ describe("iD.Tree", function() {
             expect(tree.intersects(extent, graph)).to.eql([]);
 
             base.rebase({n: node});
+            graph.rebase({n: node});
             tree.rebase([node]);
             expect(tree.intersects(extent, graph)).to.eql([node, way]);
         });
@@ -124,6 +143,23 @@ describe("iD.Tree", function() {
             base.rebase({n: node});
             tree.rebase([node]);
             expect(tree.intersects(extent, graph)).to.eql([]);
+        });
+
+        it("handles recursive relations", function() {
+            var base = iD.Graph(),
+                tree = iD.Tree(base),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                r1   = iD.Relation({id: 'r1', members: [{id: 'n'}]}),
+                r2   = iD.Relation({id: 'r2', members: [{id: 'r1'}]}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            var graph = base.replace(r1).replace(r2);
+            expect(tree.intersects(extent, graph)).to.eql([]);
+
+            base.rebase({n: node});
+            graph.rebase({n: node});
+            tree.rebase([node]);
+            expect(tree.intersects(extent, graph)).to.eql([node, r1, r2]);
         });
     });
 });
