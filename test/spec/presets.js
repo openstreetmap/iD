@@ -39,4 +39,30 @@ describe("iD.presets", function() {
             expect(c.match(line, graph).id).to.eql('line');
         });
     });
+
+    describe("expected matches", function() {
+        var presets;
+
+        before(function() {
+            presets = iD.presets().load(iD.data.presets);
+        });
+
+        it("prefers building to multipolygon", function() {
+            var relation = iD.Relation({tags: {type: 'multipolygon', building: 'yes'}}),
+                graph    = iD.Graph([relation]);
+            expect(presets.match(relation, graph).id).to.eql('building');
+        });
+
+        it("prefers building to address", function() {
+            var way   = iD.Way({tags: {area: 'yes', building: 'yes', 'addr:housenumber': '1234'}}),
+                graph = iD.Graph([way]);
+            expect(presets.match(way, graph).id).to.eql('building');
+        });
+
+        it("prefers pedestrian to area", function() {
+            var way   = iD.Way({tags: {area: 'yes', highway: 'pedestrian'}}),
+                graph = iD.Graph([way]);
+            expect(presets.match(way, graph).id).to.eql('highway/pedestrian');
+        });
+    });
 });

@@ -1255,7 +1255,8 @@
         },
         "geometry": [
             "area"
-        ]
+        ],
+        "matchScore": 0.1
     },
     "barrier": {
         "geometry": [
@@ -2918,7 +2919,8 @@
         "tags": {},
         "geometry": [
             "line"
-        ]
+        ],
+        "matchScore": 0.1
     },
     "man_made": {
         "fields": [
@@ -3472,7 +3474,8 @@
         "tags": {},
         "geometry": [
             "point"
-        ]
+        ],
+        "matchScore": 0.1
     },
     "power": {
         "geometry": [
@@ -5290,7 +5293,8 @@
         "tags": {},
         "geometry": [
             "vertex"
-        ]
+        ],
+        "matchScore": 0.1
     },
     "waterway": {
         "fields": [
