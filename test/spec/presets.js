@@ -22,9 +22,7 @@ describe("iD.presets", function() {
         }
     };
 
-    var c = iD.presets().load({presets: p}),
-        w = iD.Way({tags: { highway: 'residential'}}),
-        g = iD.Graph().replace(w);
+    var c = iD.presets().load({presets: p});
 
     describe("#match", function() {
         it("returns a collection containing presets matching a geometry and tags", function() {
