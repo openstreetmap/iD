@@ -28,7 +28,7 @@ iD.Background = function(context) {
             q = iD.util.stringQs(location.hash.substring(1));
 
         var id = b.id;
-        if (!id && b.name === 'Custom') {
+        if (id === 'custom') {
             id = 'custom:' + b.template;
         }
 
@@ -46,17 +46,12 @@ iD.Background = function(context) {
 
         location.replace('#' + iD.util.qsString(q, true));
 
-        var imageryUsed = [];
-        if (b.name === 'Custom') {
-            imageryUsed.push('Custom (' + b.template + ')');
-        } else {
-            imageryUsed.push(b.id || b.name);
-        }
+        var imageryUsed = [b.imageryUsed()];
 
         overlayLayers.forEach(function (d) {
             var source = d.source();
             if (!source.isLocatorOverlay()) {
-                imageryUsed.push(source.id || source.name);
+                imageryUsed.push(source.imageryUsed());
             }
         });
 
@@ -85,7 +80,7 @@ iD.Background = function(context) {
         gpx.call(gpxLayer);
 
         var overlays = selection.selectAll('.overlay-layer')
-            .data(overlayLayers, function(d) { return d.source().name; });
+            .data(overlayLayers, function(d) { return d.source().name(); });
 
         overlays.enter().insert('div', '.layer-data')
             .attr('class', 'layer-layer overlay-layer');
@@ -166,7 +161,7 @@ iD.Background = function(context) {
 
     background.showsLayer = function(d) {
         return d === baseLayer.source() ||
-            (d.name === 'Custom' && baseLayer.source().name === 'Custom') ||
+            (d.id === 'custom' && baseLayer.source().id === 'custom') ||
             overlayLayers.some(function(l) { return l.source() === d; });
     };
 
@@ -214,10 +209,7 @@ iD.Background = function(context) {
         chosen = q.background || q.layer;
 
     if (chosen && chosen.indexOf('custom:') === 0) {
-        background.baseLayerSource(iD.BackgroundSource({
-            template: chosen.replace(/^custom:/, ''),
-            name: 'Custom'
-        }));
+        background.baseLayerSource(iD.BackgroundSource.Custom(chosen.replace(/^custom:/, '')));
     } else {
         background.baseLayerSource(findSource(chosen) || findSource('Bing'));
     }

@@ -10,7 +10,7 @@ iD.ui.Attribution = function(context) {
             .attr('class', klass);
 
         var background = div.selectAll('.attribution')
-            .data(data, function(d) { return d.name; });
+            .data(data, function(d) { return d.name(); });
 
         background.enter()
             .append('span')
@@ -22,7 +22,7 @@ iD.ui.Attribution = function(context) {
                     return;
                 }
 
-                var source = d.terms_text || d.id || d.name;
+                var source = d.terms_text || d.id || d.name();
 
                 if (d.logo) {
                     source = '<img class="source-image" src="' + context.imagePath(d.logo) + '">';

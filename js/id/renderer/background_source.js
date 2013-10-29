@@ -1,6 +1,7 @@
 iD.BackgroundSource = function(data) {
     var source = _.clone(data),
-        offset = [0, 0];
+        offset = [0, 0],
+        name = source.name;
 
     source.scaleExtent = data.scaleExtent || [0, 20];
 
@@ -14,6 +15,14 @@ iD.BackgroundSource = function(data) {
         offset[0] += _[0] / Math.pow(2, zoomlevel);
         offset[1] += _[1] / Math.pow(2, zoomlevel);
         return source;
+    };
+
+    source.name = function() {
+        return name;
+    };
+
+    source.imageryUsed = function() {
+        return source.id || name;
     };
 
     source.url = function(coord) {
@@ -42,7 +51,7 @@ iD.BackgroundSource = function(data) {
     };
 
     source.isLocatorOverlay = function() {
-        return source.name === 'Locator Overlay';
+        return name === 'Locator Overlay';
     };
 
     source.copyrightNotices = function() {};
@@ -114,5 +123,29 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
 };
 
 iD.BackgroundSource.None = function() {
-    return iD.BackgroundSource({ name: t('background.none'), id: 'None', template: '' });
+    var source = iD.BackgroundSource({id: 'none', template: ''});
+
+    source.name = function() {
+        return t('background.none');
+    };
+
+    source.imageryUsed = function() {
+        return 'None';
+    };
+
+    return source;
+};
+
+iD.BackgroundSource.Custom = function(template) {
+    var source = iD.BackgroundSource({id: 'custom', template: template});
+
+    source.name = function() {
+        return t('background.custom');
+    };
+
+    source.imageryUsed = function() {
+        return 'Custom (' + template + ')';
+    };
+
+    return source;
 };

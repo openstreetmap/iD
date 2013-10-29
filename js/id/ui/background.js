@@ -52,10 +52,7 @@ iD.ui.Background = function(context) {
                 selectLayer();
                 return;
             }
-            context.background().baseLayerSource(iD.BackgroundSource({
-                template: template,
-                name: 'Custom'
-            }));
+            context.background().baseLayerSource(iD.BackgroundSource.Custom(template));
             selectLayer();
         }
 
@@ -76,7 +73,7 @@ iD.ui.Background = function(context) {
                 .filter(filter);
 
             var layerLinks = layerList.selectAll('li.layer')
-                .data(sources, function(d) { return d.name; });
+                .data(sources, function(d) { return d.name(); });
 
             var enter = layerLinks.enter()
                 .insert('li', '.custom_layer')
@@ -96,7 +93,7 @@ iD.ui.Background = function(context) {
                 .on('change', change);
 
             label.append('span')
-                .text(function(d) { return d.name; });
+                .text(function(d) { return d.name(); });
 
             layerLinks.exit()
                 .remove();
@@ -222,7 +219,7 @@ iD.ui.Background = function(context) {
 
         var custom = backgroundList.append('li')
             .attr('class', 'custom_layer')
-            .datum({name: 'Custom'});
+            .datum(iD.BackgroundSource.Custom());
 
         var label = custom.append('label');
 
