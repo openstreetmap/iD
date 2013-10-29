@@ -1615,6 +1615,86 @@
                 "name": "Office",
                 "terms": ""
             },
+            "office/accountant": {
+                "name": "Accountant",
+                "terms": ""
+            },
+            "office/administrative": {
+                "name": "Administrative Office",
+                "terms": ""
+            },
+            "office/architect": {
+                "name": "Architect",
+                "terms": ""
+            },
+            "office/company": {
+                "name": "Company Office",
+                "terms": ""
+            },
+            "office/educational_institution": {
+                "name": "Educational Institution",
+                "terms": ""
+            },
+            "office/employment_agency": {
+                "name": "Employment Agency",
+                "terms": ""
+            },
+            "office/estate_agent": {
+                "name": "Real Estate Office",
+                "terms": ""
+            },
+            "office/financial": {
+                "name": "Financial Office",
+                "terms": ""
+            },
+            "office/government": {
+                "name": "Government Office",
+                "terms": ""
+            },
+            "office/insurance": {
+                "name": "Insurance Office",
+                "terms": ""
+            },
+            "office/it": {
+                "name": "IT Office",
+                "terms": ""
+            },
+            "office/lawyer": {
+                "name": "Law Office",
+                "terms": ""
+            },
+            "office/newspaper": {
+                "name": "Newspaper",
+                "terms": ""
+            },
+            "office/ngo": {
+                "name": "NGO Office",
+                "terms": ""
+            },
+            "office/physician": {
+                "name": "Physician",
+                "terms": ""
+            },
+            "office/political_party": {
+                "name": "Political Party",
+                "terms": ""
+            },
+            "office/research": {
+                "name": "Research Office",
+                "terms": ""
+            },
+            "office/telecommunication": {
+                "name": "Telecom Office",
+                "terms": ""
+            },
+            "office/therapist": {
+                "name": "Therapist",
+                "terms": ""
+            },
+            "office/travel_agent": {
+                "name": "Travel Agency",
+                "terms": ""
+            },
             "place": {
                 "name": "Place",
                 "terms": ""

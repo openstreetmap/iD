@@ -3370,6 +3370,346 @@
         "terms": [],
         "name": "Office"
     },
+    "office/accountant": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "accountant"
+        },
+        "terms": [],
+        "name": "Accountant"
+    },
+    "office/administrative": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "administrative"
+        },
+        "terms": [],
+        "name": "Administrative Office"
+    },
+    "office/architect": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "architect"
+        },
+        "terms": [],
+        "name": "Architect"
+    },
+    "office/company": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "company"
+        },
+        "terms": [],
+        "name": "Company Office"
+    },
+    "office/educational_institution": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "educational_institution"
+        },
+        "terms": [],
+        "name": "Educational Institution"
+    },
+    "office/employment_agency": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "employment_agency"
+        },
+        "terms": [],
+        "name": "Employment Agency"
+    },
+    "office/estate_agent": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "estate_agent"
+        },
+        "terms": [],
+        "name": "Real Estate Office"
+    },
+    "office/financial": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "financial"
+        },
+        "terms": [],
+        "name": "Financial Office"
+    },
+    "office/government": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "government"
+        },
+        "terms": [],
+        "name": "Government Office"
+    },
+    "office/insurance": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "insurance"
+        },
+        "terms": [],
+        "name": "Insurance Office"
+    },
+    "office/it": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "it"
+        },
+        "terms": [],
+        "name": "IT Office"
+    },
+    "office/lawyer": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "lawyer"
+        },
+        "terms": [],
+        "name": "Law Office"
+    },
+    "office/newspaper": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "newspaper"
+        },
+        "terms": [],
+        "name": "Newspaper"
+    },
+    "office/ngo": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "ngo"
+        },
+        "terms": [],
+        "name": "NGO Office"
+    },
+    "office/physician": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "physician"
+        },
+        "terms": [],
+        "name": "Physician"
+    },
+    "office/political_party": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "political_party"
+        },
+        "terms": [],
+        "name": "Political Party"
+    },
+    "office/research": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "research"
+        },
+        "terms": [],
+        "name": "Research Office"
+    },
+    "office/telecommunication": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "telecommunication"
+        },
+        "terms": [],
+        "name": "Telecom Office"
+    },
+    "office/therapist": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "therapist"
+        },
+        "terms": [],
+        "name": "Therapist"
+    },
+    "office/travel_agent": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "travel_agent"
+        },
+        "terms": [],
+        "name": "Travel Agency"
+    },
     "place": {
         "fields": [
             "place"

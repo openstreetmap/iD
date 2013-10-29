@@ -898,6 +898,66 @@ en:
       office: 
         name: Office
         terms: "<translate with synonyms or related terms for 'Office', separated by commas>"
+      office/accountant: 
+        name: Accountant
+        terms: "<translate with synonyms or related terms for 'Accountant', separated by commas>"
+      office/administrative: 
+        name: Administrative Office
+        terms: "<translate with synonyms or related terms for 'Administrative Office', separated by commas>"
+      office/architect: 
+        name: Architect
+        terms: "<translate with synonyms or related terms for 'Architect', separated by commas>"
+      office/company: 
+        name: Company Office
+        terms: "<translate with synonyms or related terms for 'Company Office', separated by commas>"
+      office/educational_institution: 
+        name: Educational Institution
+        terms: "<translate with synonyms or related terms for 'Educational Institution', separated by commas>"
+      office/employment_agency: 
+        name: Employment Agency
+        terms: "<translate with synonyms or related terms for 'Employment Agency', separated by commas>"
+      office/estate_agent: 
+        name: Real Estate Office
+        terms: "<translate with synonyms or related terms for 'Real Estate Office', separated by commas>"
+      office/financial: 
+        name: Financial Office
+        terms: "<translate with synonyms or related terms for 'Financial Office', separated by commas>"
+      office/government: 
+        name: Government Office
+        terms: "<translate with synonyms or related terms for 'Government Office', separated by commas>"
+      office/insurance: 
+        name: Insurance Office
+        terms: "<translate with synonyms or related terms for 'Insurance Office', separated by commas>"
+      office/it: 
+        name: IT Office
+        terms: "<translate with synonyms or related terms for 'IT Office', separated by commas>"
+      office/lawyer: 
+        name: Law Office
+        terms: "<translate with synonyms or related terms for 'Law Office', separated by commas>"
+      office/newspaper: 
+        name: Newspaper
+        terms: "<translate with synonyms or related terms for 'Newspaper', separated by commas>"
+      office/ngo: 
+        name: NGO Office
+        terms: "<translate with synonyms or related terms for 'NGO Office', separated by commas>"
+      office/physician: 
+        name: Physician
+        terms: "<translate with synonyms or related terms for 'Physician', separated by commas>"
+      office/political_party: 
+        name: Political Party
+        terms: "<translate with synonyms or related terms for 'Political Party', separated by commas>"
+      office/research: 
+        name: Research Office
+        terms: "<translate with synonyms or related terms for 'Research Office', separated by commas>"
+      office/telecommunication: 
+        name: Telecom Office
+        terms: "<translate with synonyms or related terms for 'Telecom Office', separated by commas>"
+      office/therapist: 
+        name: Therapist
+        terms: "<translate with synonyms or related terms for 'Therapist', separated by commas>"
+      office/travel_agent: 
+        name: Travel Agency
+        terms: "<translate with synonyms or related terms for 'Travel Agency', separated by commas>"
       place: 
         name: Place
         terms: "<translate with synonyms or related terms for 'Place', separated by commas>"
