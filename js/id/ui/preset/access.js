@@ -1,6 +1,5 @@
 iD.ui.preset.access = function(field) {
     var event = d3.dispatch('change'),
-        entity,
         items;
 
     function access(selection) {
@@ -64,18 +63,84 @@ iD.ui.preset.access = function(field) {
         });
     };
 
-    access.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
-        return access;
+    var placeholders = {
+        footway: {
+            foot: 'yes',
+            motor_vehicle: 'no'
+        },
+        steps: {
+            foot: 'yes',
+            motor_vehicle: 'no'
+        },
+        pedestrian: {
+            foot: 'yes',
+            motor_vehicle: 'no'
+        },
+        cycleway: {
+            bicycle: 'yes',
+            motor_vehicle: 'no'
+        },
+        bridleway: {
+            horse: 'yes'
+        },
+        path: {
+            motor_vehicle: 'no'
+        },
+        motorway: {
+            motor_vehicle: 'yes'
+        },
+        trunk: {
+            motor_vehicle: 'yes'
+        },
+        primary: {
+            motor_vehicle: 'yes'
+        },
+        secondary: {
+            motor_vehicle: 'yes'
+        },
+        tertiary: {
+            motor_vehicle: 'yes'
+        },
+        residential: {
+            motor_vehicle: 'yes'
+        },
+        unclassified: {
+            motor_vehicle: 'yes'
+        },
+        service: {
+            motor_vehicle: 'yes'
+        },
+        motorway_link: {
+            motor_vehicle: 'yes'
+        },
+        trunk_link: {
+            motor_vehicle: 'yes'
+        },
+        primary_link: {
+            motor_vehicle: 'yes'
+        },
+        secondary_link: {
+            motor_vehicle: 'yes'
+        },
+        tertiary_link: {
+            motor_vehicle: 'yes'
+        }
     };
 
     access.tags = function(tags) {
         items.selectAll('.preset-input-access')
             .value(function(d) { return tags[d] || ''; })
-            .attr('placeholder', function(d) {
-                return d !== 'access' && tags.access ? tags.access : field.placeholder();
+            .attr('placeholder', function() {
+                return tags.access ? tags.access : field.placeholder();
             });
+
+        items.selectAll('#preset-input-access-access')
+            .attr('placeholder', 'yes');
+
+        _.forEach(placeholders[tags.highway], function(value, key) {
+            items.selectAll('#preset-input-access-' + key)
+                .attr('placeholder', value);
+        });
     };
 
     access.focus = function() {
