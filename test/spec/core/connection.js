@@ -21,6 +21,12 @@ describe('iD.Connection', function () {
         });
     });
 
+    describe('#noteURL', function() {
+        it('provides a note url', function() {
+            expect(c.noteURL(10)).to.eql('http://www.openstreetmap.org/?note=10');
+        });
+    });
+
     describe('#flush', function() {
         it('flushes the connection', function() {
             expect(c.flush()).to.eql(c);
@@ -41,6 +47,15 @@ describe('iD.Connection', function () {
             });
             c.switch({
                 url: "http://example.com"
+            });
+        });
+    });
+
+    describe('#loadNotesFromURL', function () {
+        it('loads test data', function (done) {
+            c.loadFromURL('data/notes.json', function(err, notes) {
+                expect(err).to.eql(null);
+                done();
             });
         });
     });
@@ -126,6 +141,18 @@ describe('iD.Connection', function () {
         });
     });
 
+    describe('#putNoteComment', function() {
+        it('writes a note', function(done) {
+            c.putNoteComment(1, 'Hello world', function() {
+                done();
+            });
+
+            server.respondWith('POST', 'http://www.openstreetmap.org/api/0.6/notes/1',
+                [200, { 'Content-Type': 'application/json' }, '']);
+            server.respond();
+        });
+    });
+
     describe('#osmChangeJXON', function() {
         it('converts change data to JXON', function() {
             var jxon = c.osmChangeJXON('1234', {created: [], modified: [], deleted: []});
@@ -188,6 +215,6 @@ describe('iD.Connection', function () {
     describe('#changesetTags', function() {
         it('omits comment when empty', function() {
             expect(c.changesetTags('', [])).not.to.have.property('comment');
-        })
-    })
+        });
+    });
 });

@@ -10,16 +10,16 @@ iD.svg.Notes = function(projection, context) {
         return b.loc[1] - a.loc[1];
     }
 
-    function drawPoints(surface, points, filter) {
-        points.sort(sortY);
+    function drawNotes(surface, notes, filter) {
+        notes.sort(sortY);
 
-        var groups = surface.select('.layer-hit').selectAll('g.note.point')
+        var groups = surface.select('.layer-hit').selectAll('g.note')
             .filter(filter)
-            .data(points, iD.Entity.key);
+            .data(notes, iD.Entity.key);
 
         var group = groups.enter()
             .append('g')
-            .attr('class', function(d) { return 'note point ' + d.id; })
+            .attr('class', function(d) { return 'note ' + d.id;  })
             .order();
 
         group.append('path')
@@ -33,8 +33,7 @@ iD.svg.Notes = function(projection, context) {
             .attr('transform', 'translate(-6, -20)')
             .attr('clip-path', 'url(#clip-square-12)');
 
-        groups.attr('transform', iD.svg.PointTransform(projection))
-            .call(iD.svg.TagClasses());
+        groups.attr('transform', iD.svg.PointTransform(projection));
 
         // Selecting the following implicitly
         // sets the data (point entity) on the element
@@ -47,7 +46,7 @@ iD.svg.Notes = function(projection, context) {
             .remove();
     }
 
-    drawPoints.notes = function(entities, limit) {
+    drawNotes.notes = function(entities, limit) {
         var graph = context.graph(),
             notes = [];
 
@@ -55,12 +54,12 @@ iD.svg.Notes = function(projection, context) {
             var entity = entities[i];
             if (entity.geometry(graph) === 'note') {
                 notes.push(entity);
-                if (limit && points.length >= limit) break;
+                if (limit && notes.length >= limit) break;
             }
         }
 
         return notes;
     };
 
-    return drawPoints;
+    return drawNotes;
 };

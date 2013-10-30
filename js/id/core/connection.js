@@ -8,6 +8,7 @@ iD.Connection = function() {
         loadedTiles = {},
         loadedNotes = {},
         tileZoom = 16,
+        noteTileZoom = 10,
         oauth = osmAuth({
             url: 'http://www.openstreetmap.org',
             oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
@@ -310,7 +311,7 @@ iD.Connection = function() {
         return connection;
     };
 
-    function getTiles(projection, dimensions) {
+    function getTiles(projection, dimensions, tileZoom) {
         var s = projection.scale() * 2 * Math.PI,
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
             ts = 256 * Math.pow(2, z - tileZoom),
@@ -356,7 +357,7 @@ iD.Connection = function() {
 
         if (notesOff) return;
 
-        var tiles = getTiles(projection, dimensions);
+        var tiles = getTiles(projection, dimensions, noteTileZoom);
 
         _.filter(inflight, notWanted).map(abortRequest);
 
@@ -390,7 +391,7 @@ iD.Connection = function() {
 
         if (off) return;
 
-        var tiles = getTiles(projection, dimensions);
+        var tiles = getTiles(projection, dimensions, tileZoom);
 
         _.filter(inflight, notWanted).map(abortRequest);
 

@@ -54,22 +54,32 @@ g.point .stroke {
     fill: #fff;
 }
 
-g.point .shadow {
+g.note .stroke {
+    stroke: #a0c75b;
+    stroke-width: 1;
+    fill: #fff;
+}
+
+g.point .shadow,
+g.note .stroke {
     fill: none;
     stroke: #f6634f;
     stroke-width: 8;
     stroke-opacity: 0;
 }
 
-g.point.hover:not(.selected) .shadow {
+g.point.hover:not(.selected) .shadow,
+g.note.hover:not(.selected) .shadow {
     stroke-opacity: 0.5;
 }
 
-g.point.selected .shadow {
+g.point.selected .shadow,
+g.note.selected .shadow {
     stroke-opacity: 0.7;
 }
 
-g.point.active, g.point.active * {
+g.point.active, g.point.active *,
+g.note.active, g.point.active * {
     pointer-events: none;
 }
 

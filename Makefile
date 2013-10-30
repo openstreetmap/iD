@@ -80,7 +80,7 @@ node_modules/.install: package.json
 	npm install && touch node_modules/.install
 
 clean:
-	rm -f dist/iD*.js dist/iD.css
+	rm -f dist/iD*.js dist/iD.css js/lib/d3.v3.js
 
 translations:
 	node data/update_locales
@@ -113,6 +113,7 @@ D3_FILES = \
 	node_modules/d3/src/selection/index.js \
 	node_modules/d3/src/transition/index.js \
 	node_modules/d3/src/xhr/index.js \
+	node_modules/d3/src/time/index.js \
 	node_modules/d3/src/end.js
 
 js/lib/d3.v3.js: $(D3_FILES)

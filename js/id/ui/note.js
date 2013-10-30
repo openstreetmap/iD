@@ -1,5 +1,7 @@
 iD.ui.Note = function(context, data) {
 
+    var timeFormat = d3.time.format('%Y/%m/%d ');
+
     function note(selection) {
 
         var header = selection.append('div')
@@ -26,13 +28,34 @@ iD.ui.Note = function(context, data) {
 
             var commentsEnter = comments.enter()
                 .append('div')
-                .attr('class', 'note-comment fillL3');
+                .attr('class', 'note-comment .form-field fillL');
 
-            commentsEnter.append('strong')
-                .text(function(d) { return d.date; });
+            var meta = commentsEnter.append('div');
 
-            commentsEnter.append('p')
-                .text(function(d) { return d.text; });
+            meta.append('span')
+                .text(function(d) {
+                    return timeFormat(new Date(d.date));
+                });
+
+            meta.append('span')
+                .each(function(d) {
+                    if (d.uid && d.user) {
+                        d3.select(this)
+                            .append('a')
+                            .attr('target', '_blank')
+                            .attr('href', context.connection().userURL(d.user))
+                            .text(function(d) {
+                                return d.user;
+                            });
+                    } else {
+                        d3.select(this)
+                            .text('anonymous');
+                    }
+                    return d.date;
+                });
+
+            commentsEnter.append('div')
+                .html(function(d) { return d.html; });
         }
 
         drawComments();
