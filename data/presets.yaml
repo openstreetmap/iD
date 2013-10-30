@@ -383,8 +383,8 @@ en:
         name: Marketplace
         terms: "<translate with synonyms or related terms for 'Marketplace', separated by commas>"
       amenity/parking: 
-        name: Parking
-        terms: "<translate with synonyms or related terms for 'Parking', separated by commas>"
+        name: Car Parking
+        terms: "<translate with synonyms or related terms for 'Car Parking', separated by commas>"
       amenity/pharmacy: 
         name: Pharmacy
         terms: "<translate with synonyms or related terms for 'Pharmacy', separated by commas>"

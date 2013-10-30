@@ -9,7 +9,9 @@
         "vertex",
         "area"
     ],
-    "terms": [],
+    "terms": [
+        "camping"
+    ],
     "tags": {
         "tourism": "camp_site"
     },
