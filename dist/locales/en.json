@@ -928,7 +928,7 @@
                 "terms": ""
             },
             "amenity/parking": {
-                "name": "Parking",
+                "name": "Car Parking",
                 "terms": ""
             },
             "amenity/pharmacy": {
@@ -973,7 +973,7 @@
             },
             "amenity/ranger_station": {
                 "name": "Ranger Station",
-                "terms": "visitor center,visitor centre,permit center,permit centre,backcountry office"
+                "terms": "visitor center,visitor centre,permit center,permit centre,backcountry office,warden office,warden center"
             },
             "amenity/restaurant": {
                 "name": "Restaurant",
@@ -1797,7 +1797,7 @@
             },
             "railway/station": {
                 "name": "Railway Station",
-                "terms": ""
+                "terms": "train station,station"
             },
             "railway/subway": {
                 "name": "Subway",
@@ -2057,7 +2057,7 @@
             },
             "tourism/camp_site": {
                 "name": "Camp Site",
-                "terms": ""
+                "terms": "camping"
             },
             "tourism/caravan_site": {
                 "name": "RV Park",

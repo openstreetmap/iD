@@ -692,7 +692,7 @@
             "amenity": "parking"
         },
         "terms": [],
-        "name": "Parking"
+        "name": "Car Parking"
     },
     "amenity/pharmacy": {
         "icon": "pharmacy",
@@ -988,7 +988,9 @@
             "visitor centre",
             "permit center",
             "permit centre",
-            "backcountry office"
+            "backcountry office",
+            "warden office",
+            "warden center"
         ],
         "tags": {
             "amenity": "ranger_station"
@@ -4040,6 +4042,10 @@
         "tags": {
             "railway": "station"
         },
+        "terms": [
+            "train station",
+            "station"
+        ],
         "name": "Railway Station"
     },
     "railway/subway": {
@@ -5160,7 +5166,9 @@
             "vertex",
             "area"
         ],
-        "terms": [],
+        "terms": [
+            "camping"
+        ],
         "tags": {
             "tourism": "camp_site"
         },
