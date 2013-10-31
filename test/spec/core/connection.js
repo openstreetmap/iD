@@ -59,15 +59,15 @@ describe('iD.Connection', function () {
         });
 
         it('parses a node', function (done) {
-            c.loadFromURL('data/node.xml', function (err, graph) {
-                expect(graph.n356552551).to.be.instanceOf(iD.Entity);
+            c.loadFromURL('data/node.xml', function (err, entities) {
+                expect(entities[0]).to.be.instanceOf(iD.Entity);
                 done();
             });
         });
 
         it('parses a way', function (done) {
-            c.loadFromURL('data/way.xml', function (err, graph) {
-                expect(graph.w19698713).to.be.instanceOf(iD.Entity);
+            c.loadFromURL('data/way.xml', function (err, entities) {
+                expect(entities[0]).to.be.instanceOf(iD.Entity);
                 done();
             });
         });
@@ -116,7 +116,7 @@ describe('iD.Connection', function () {
         it('emits a load event', function(done) {
             c.loadEntity('n1');
             c.on('load', function(error, result) {
-                expect(result.data.n1).to.be.an.instanceOf(iD.Node);
+                expect(result.data[0]).to.be.an.instanceOf(iD.Node);
                 done();
             });
 

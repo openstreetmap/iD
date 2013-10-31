@@ -1,11 +1,5 @@
 describe('iD.Graph', function() {
     describe("constructor", function () {
-        it("accepts an entities Object", function () {
-            var entity = iD.Entity(),
-                graph = iD.Graph({'n-1': entity});
-            expect(graph.entity('n-1')).to.equal(entity);
-        });
-
         it("accepts an entities Array", function () {
             var entity = iD.Entity(),
                 graph = iD.Graph([entity]);
@@ -80,14 +74,14 @@ describe('iD.Graph', function() {
         it("preserves existing entities", function () {
             var node = iD.Node({id: 'n'}),
                 graph = iD.Graph([node]);
-            graph.rebase({});
+            graph.rebase([]);
             expect(graph.entity('n')).to.equal(node);
         });
 
         it("includes new entities", function () {
             var node = iD.Node({id: 'n'}),
                 graph = iD.Graph();
-            graph.rebase({'n': node});
+            graph.rebase([node]);
             expect(graph.entity('n')).to.equal(node);
         });
 
@@ -95,13 +89,13 @@ describe('iD.Graph', function() {
             var a = iD.Node({id: 'n'}),
                 b = iD.Node({id: 'n'}),
                 graph = iD.Graph([a]);
-            graph.rebase({'n': b});
+            graph.rebase([b]);
             expect(graph.entity('n')).to.equal(a);
         });
 
         it("inherits entities from base prototypally", function () {
             var graph = iD.Graph();
-            graph.rebase({'n': iD.Node()});
+            graph.rebase([iD.Node()]);
             expect(graph.entities).not.to.have.ownProperty('n');
         });
 
@@ -111,7 +105,7 @@ describe('iD.Graph', function() {
                 w2 = iD.Way({id: 'w2', nodes: ['n']}),
                 graph = iD.Graph([n, w1]);
 
-            graph.rebase({ 'w2': w2 });
+            graph.rebase([w2]);
             expect(graph.parentWays(n)).to.eql([w1, w2]);
             expect(graph._parentWays.hasOwnProperty('n')).to.be.false;
         });
@@ -120,7 +114,7 @@ describe('iD.Graph', function() {
             var n = iD.Node({id: 'n'}),
                 w1 = iD.Way({id: 'w1', nodes: ['n']}),
                 graph = iD.Graph([n, w1]);
-            graph.rebase({ 'w1': w1 });
+            graph.rebase([w1]);
             expect(graph.parentWays(n)).to.eql([w1]);
         });
 
@@ -132,8 +126,8 @@ describe('iD.Graph', function() {
                 graph = iD.Graph([n, w1]),
                 graph2 = graph.replace(w2);
 
-            graph.rebase({ 'w3': w3 });
-            graph2.rebase({ 'w3': w3 });
+            graph.rebase([w3]);
+            graph2.rebase([w3]);
 
             expect(graph2.parentWays(n)).to.eql([w1, w2, w3]);
         });
@@ -146,8 +140,8 @@ describe('iD.Graph', function() {
                 graph = iD.Graph([n1, n2, w1]),
                 graph2 = graph.replace(w2);
 
-            graph.rebase({ 'w1': w1 });
-            graph2.rebase({ 'w1': w1 });
+            graph.rebase([w1]);
+            graph2.rebase([w1]);
 
             expect(graph2.parentWays(n2)).to.eql([]);
         });
@@ -158,8 +152,8 @@ describe('iD.Graph', function() {
                 graph = iD.Graph([n, w1]),
                 graph2 = graph.remove(w1);
 
-            graph.rebase({ 'w1': w1 });
-            graph2.rebase({ 'w1': w1 });
+            graph.rebase([w1]);
+            graph2.rebase([w1]);
 
             expect(graph2.parentWays(n)).to.eql([]);
         });
@@ -170,7 +164,7 @@ describe('iD.Graph', function() {
                 r2 = iD.Relation({id: 'r2', members: [{id: 'n'}]}),
                 graph = iD.Graph([n, r1]);
 
-            graph.rebase({'r2': r2});
+            graph.rebase([r2]);
 
             expect(graph.parentRelations(n)).to.eql([r1, r2]);
             expect(graph._parentRels.hasOwnProperty('n')).to.be.false;
@@ -183,8 +177,8 @@ describe('iD.Graph', function() {
                 graph = iD.Graph([n, r1]),
                 graph2 = graph.replace(r2);
 
-            graph.rebase({ 'r1': r1 });
-            graph2.rebase({ 'r1': r1 });
+            graph.rebase([r1]);
+            graph2.rebase([r1]);
 
             expect(graph2.parentRelations(n)).to.eql([]);
         });
@@ -195,8 +189,8 @@ describe('iD.Graph', function() {
                 graph = iD.Graph([n, r1]),
                 graph2 = graph.remove(r1);
 
-            graph.rebase({ 'r1': r1 });
-            graph2.rebase({ 'r1': r1 });
+            graph.rebase([r1]);
+            graph2.rebase([r1]);
 
             expect(graph2.parentRelations(n)).to.eql([]);
         });
@@ -209,8 +203,8 @@ describe('iD.Graph', function() {
                 graph = iD.Graph([n, r1]),
                 graph2 = graph.replace(r2);
 
-            graph.rebase({'r3': r3});
-            graph2.rebase({'r3': r3});
+            graph.rebase([r3]);
+            graph2.rebase([r3]);
             expect(graph2.parentRelations(n)).to.eql([r1, r2, r3]);
         });
 
@@ -227,7 +221,7 @@ describe('iD.Graph', function() {
             }
 
             expect(numParents(n)).to.equal(1);
-            graph.rebase({w2: w2});
+            graph.rebase([w2]);
             expect(numParents(n)).to.equal(2);
         });
     });

@@ -52,7 +52,7 @@ iD.Connection = function() {
             url + '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
             function(err, entities) {
                 event.load(err, {data: entities});
-                if (callback) callback(err, entities && entities[id]);
+                if (callback) callback(err, entities && _.find(entities, function(e) { return e.id === id; }));
             });
     };
 
@@ -137,15 +137,13 @@ iD.Connection = function() {
 
         var root = dom.childNodes[0],
             children = root.childNodes,
-            entities = {};
+            entities = [];
 
-        var i, o, l;
-        for (i = 0, l = children.length; i < l; i++) {
+        for (var i = 0, l = children.length; i < l; i++) {
             var child = children[i],
                 parser = parsers[child.nodeName];
             if (parser) {
-                o = parser(child);
-                entities[o.id] = o;
+                entities.push(parser(child));
             }
         }
 

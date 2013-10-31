@@ -16,7 +16,7 @@ describe('iD.ui.RawTagEditor', function() {
     beforeEach(function () {
         entity = iD.Node({id: "n12345"});
         context = iD();
-        context.history().merge({n12345: entity});
+        context.history().merge([entity]);
         render({highway: 'residential'});
     });
 

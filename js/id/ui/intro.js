@@ -23,7 +23,7 @@ iD.ui.intro = function(context) {
         for (var key in introGraph) {
             introGraph[key] = iD.Entity(introGraph[key]);
         }
-        context.history().merge(iD.Graph().load(introGraph).entities);
+        context.history().merge(d3.values(iD.Graph().load(introGraph).entities));
         context.background().bing();
 
         // Block saving
@@ -59,7 +59,7 @@ iD.ui.intro = function(context) {
             navwrap.remove();
             d3.select('.background-layer').style('opacity', opacity);
             context.connection().toggle(true).flush().loadedTiles(loadedTiles);
-            context.history().reset().merge(baseEntities);
+            context.history().reset().merge(d3.values(baseEntities));
             context.background().baseLayerSource(background);
             if (history) context.history().fromJSON(history);
             window.location.replace(hash);

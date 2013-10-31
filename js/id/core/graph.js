@@ -9,17 +9,10 @@ iD.Graph = function(other, mutable) {
         this.inherited = true;
 
     } else {
-        if (Array.isArray(other)) {
-            var entities = {};
-            for (var i = 0; i < other.length; i++) {
-                entities[other[i].id] = other[i];
-            }
-            other = entities;
-        }
         this.entities = Object.create({});
         this._parentWays = Object.create({});
         this._parentRels = Object.create({});
-        this.rebase(other || {});
+        this.rebase(other || []);
     }
 
     this.transients = {};
@@ -108,11 +101,12 @@ iD.Graph.prototype = {
 
         // Merging of data only needed if graph is the base graph
         if (!this.inherited) {
-            for (i in entities) {
-                if (!base.entities[i]) {
-                    base.entities[i] = entities[i];
-                    this._updateCalculated(undefined, entities[i],
-                            base.parentWays, base.parentRels);
+            for (i = 0; i < entities.length; i++) {
+                var entity = entities[i];
+                if (!base.entities[entity.id]) {
+                    base.entities[entity.id] = entity;
+                    this._updateCalculated(undefined, entity,
+                        base.parentWays, base.parentRels);
                 }
             }
         }

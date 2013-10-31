@@ -19,14 +19,14 @@ describe("iD.History", function () {
     describe("#merge", function () {
         it("merges the entities into all graph versions", function () {
             var n = iD.Node({id: 'n'});
-            history.merge({n: n});
+            history.merge([n]);
             expect(history.graph().entity('n')).to.equal(n);
         });
 
         it("emits a change event with the specified extent", function () {
             var extent = {};
             history.on('change', spy);
-            history.merge({}, extent);
+            history.merge([], extent);
             expect(spy).to.have.been.calledWith(undefined, extent);
         });
     });
@@ -186,14 +186,14 @@ describe("iD.History", function () {
         it("includes modified entities", function () {
             var node1 = iD.Node({id: "n1"}),
                 node2 = node1.update({ tags: { yes: "no" } });
-            history.merge({ n1: node1});
+            history.merge([node1]);
             history.perform(function (graph) { return graph.replace(node2); });
             expect(history.changes().modified).to.eql([node2]);
         });
 
         it("includes deleted entities", function () {
             var node = iD.Node({id: "n1"});
-            history.merge({ n1: node });
+            history.merge([node]);
             history.perform(function (graph) { return graph.remove(node); });
             expect(history.changes().deleted).to.eql([node]);
         });
@@ -231,7 +231,7 @@ describe("iD.History", function () {
     describe("#toJSON", function() {
         it("generates v2 JSON", function() {
             var node = iD.Node({id: 'n-1'});
-            history.merge({n1: iD.Node({id: 'n1'})});
+            history.merge([iD.Node({id: 'n1'})]);
             history.perform(iD.actions.AddEntity(node));
             var json = JSON.parse(history.toJSON());
             expect(json.version).to.eql(2);
@@ -283,7 +283,7 @@ describe("iD.History", function () {
                 "index": 1
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge({n1: iD.Node({id: 'n1'})});
+            history.merge([iD.Node({id: 'n1'})]);
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql("Deleted a point.");
             expect(history.imageryUsed()).to.eql(["Bing"]);
@@ -344,7 +344,7 @@ describe("iD.History", function () {
                 "index": 1
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge({n1: iD.Node({id: 'n1'})});
+            history.merge([iD.Node({id: 'n1'})]);
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql("Deleted a point.");
             expect(history.imageryUsed()).to.eql(["Bing"]);

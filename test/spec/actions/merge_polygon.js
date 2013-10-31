@@ -1,14 +1,14 @@
 describe("iD.actions.MergePolygon", function () {
     
     function node(id, x, y) {
-        e[id] = iD.Node({ id: id, loc: [x, y] });
+        e.push(iD.Node({ id: id, loc: [x, y] }));
     }
 
     function way(id, nodes) {
-        e[id] = iD.Way({ id: id, nodes: nodes.map(function(n) { return 'n' + n; }) });
+        e.push(iD.Way({ id: id, nodes: nodes.map(function(n) { return 'n' + n; }) }));
     }
 
-    var e = {};
+    var e = [];
 
     node('n0', 0, 0);
     node('n1', 5, 0);
@@ -86,8 +86,8 @@ describe("iD.actions.MergePolygon", function () {
     });
 
     it("moves all tags to the relation", function() {
-        graph = graph.replace(e.w0.update({ tags: { 'building': 'yes' }}));
-        graph = graph.replace(e.w1.update({ tags: { 'natural': 'water' }}));
+        graph = graph.replace(graph.entity('w0').update({ tags: { 'building': 'yes' }}));
+        graph = graph.replace(graph.entity('w1').update({ tags: { 'natural': 'water' }}));
         graph = iD.actions.MergePolygon(['w0', 'w1'], 'r')(graph);
         var r = graph.entity('r');
         expect(graph.entity('w0').tags.building).to.equal(undefined);
@@ -97,7 +97,7 @@ describe("iD.actions.MergePolygon", function () {
     });
 
     it("doesn't copy area tags from ways", function() {
-        graph = graph.replace(e.w0.update({ tags: { 'area': 'yes' }}));
+        graph = graph.replace(graph.entity('w0').update({ tags: { 'area': 'yes' }}));
         graph = iD.actions.MergePolygon(['w0', 'w1'], 'r')(graph);
         var r = graph.entity('r');
         expect(r.tags.area).to.equal(undefined);

@@ -46,7 +46,7 @@ iD.History = function(context) {
                 stack[i].graph.rebase(entities);
             }
 
-            tree.rebase(d3.values(entities));
+            tree.rebase(entities);
 
             dispatch.change(undefined, extent);
         },
