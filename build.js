@@ -139,5 +139,6 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     featureIcons: r('feature-icons.json'),
     operations: r('operations-sprite.json'),
     locales: r('locales.json'),
-    en: read('dist/locales/en.json')
+    en: read('dist/locales/en.json'),
+    suggestions: r('name-suggestions.json')
 }) + ';');
