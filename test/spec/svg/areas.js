@@ -11,13 +11,13 @@ describe("iD.svg.Areas", function () {
     });
 
     it("adds way and area classes", function () {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [1, 0]}),
-                'c': iD.Node({id: 'c', loc: [1, 1]}),
-                'd': iD.Node({id: 'd', loc: [0, 1]}),
-                'w': iD.Way({id: 'w', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
-            });
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [1, 0]}),
+                iD.Node({id: 'c', loc: [1, 1]}),
+                iD.Node({id: 'd', loc: [0, 1]}),
+                iD.Way({id: 'w', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
+            ]);
 
         surface.call(iD.svg.Areas(projection), graph, [graph.entity('w')], none);
 
@@ -26,13 +26,13 @@ describe("iD.svg.Areas", function () {
     });
 
     it("adds tag classes", function () {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [1, 0]}),
-                'c': iD.Node({id: 'c', loc: [1, 1]}),
-                'd': iD.Node({id: 'd', loc: [0, 1]}),
-                'w': iD.Way({id: 'w', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
-            });
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [1, 0]}),
+                iD.Node({id: 'c', loc: [1, 1]}),
+                iD.Node({id: 'd', loc: [0, 1]}),
+                iD.Way({id: 'w', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
+            ]);
 
         surface.call(iD.svg.Areas(projection), graph, [graph.entity('w')], none);
 
@@ -54,14 +54,14 @@ describe("iD.svg.Areas", function () {
     });
 
     it("handles deletion of a way and a member vertex (#1903)", function () {
-        var graph = iD.Graph({
-            'a': iD.Node({id: 'a', loc: [0, 0]}),
-            'b': iD.Node({id: 'b', loc: [1, 0]}),
-            'c': iD.Node({id: 'c', loc: [1, 1]}),
-            'd': iD.Node({id: 'd', loc: [1, 1]}),
-            'w': iD.Way({id: 'w', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'a']}),
-            'x': iD.Way({id: 'x', tags: {area: 'yes'}, nodes: ['a', 'b', 'd', 'a']})
-        });
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [1, 0]}),
+                iD.Node({id: 'c', loc: [1, 1]}),
+                iD.Node({id: 'd', loc: [1, 1]}),
+                iD.Way({id: 'w', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'a']}),
+                iD.Way({id: 'x', tags: {area: 'yes'}, nodes: ['a', 'b', 'd', 'a']})
+            ]);
 
         surface.call(iD.svg.Areas(projection), graph, [graph.entity('x')], all);
         graph = graph.remove(graph.entity('x')).remove(graph.entity('d'));
@@ -71,18 +71,18 @@ describe("iD.svg.Areas", function () {
     });
 
     describe("z-indexing", function() {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
-                'b': iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
-                'c': iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
-                'd': iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
-                'e': iD.Node({id: 'a', loc: [-0.0004,  0.0002]}),
-                'f': iD.Node({id: 'b', loc: [ 0.0004,  0.0002]}),
-                'g': iD.Node({id: 'c', loc: [ 0.0004, -0.0002]}),
-                'h': iD.Node({id: 'd', loc: [-0.0004, -0.0002]}),
-                's': iD.Way({id: 's', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
-                'l': iD.Way({id: 'l', tags: {landuse: 'park'}, nodes: ['e', 'f', 'g', 'h', 'e']})
-            });
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
+                iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
+                iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
+                iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
+                iD.Node({id: 'e', loc: [-0.0004,  0.0002]}),
+                iD.Node({id: 'f', loc: [ 0.0004,  0.0002]}),
+                iD.Node({id: 'g', loc: [ 0.0004, -0.0002]}),
+                iD.Node({id: 'h', loc: [-0.0004, -0.0002]}),
+                iD.Way({id: 's', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
+                iD.Way({id: 'l', tags: {landuse: 'park'}, nodes: ['e', 'f', 'g', 'h', 'e']})
+            ]);
 
         it("stacks smaller areas above larger ones in a single render", function () {
             surface.call(iD.svg.Areas(projection), graph, [graph.entity('s'), graph.entity('l')], none);

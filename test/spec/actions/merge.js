@@ -1,11 +1,11 @@
 describe("iD.actions.Merge", function () {
     it("merges multiple points to a line", function () {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', tags: {a: 'a'}}),
-                'b': iD.Node({id: 'b', tags: {b: 'b'}}),
-                'w': iD.Way({id: 'w'}),
-                'r': iD.Relation({id: 'r', members: [{id: 'a', role: 'r', type: 'node'}]})
-            }),
+        var graph = iD.Graph([
+                iD.Node({id: 'a', tags: {a: 'a'}}),
+                iD.Node({id: 'b', tags: {b: 'b'}}),
+                iD.Way({id: 'w'}),
+                iD.Relation({id: 'r', members: [{id: 'a', role: 'r', type: 'node'}]})
+            ]),
             action = iD.actions.Merge(['a', 'b', 'w']);
 
         expect(action.disabled(graph)).not.to.be.ok;
@@ -19,12 +19,12 @@ describe("iD.actions.Merge", function () {
     });
 
     it("merges multiple points to an area", function () {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', tags: {a: 'a'}}),
-                'b': iD.Node({id: 'b', tags: {b: 'b'}}),
-                'w': iD.Way({id: 'w', tags: {area: 'yes'}}),
-                'r': iD.Relation({id: 'r', members: [{id: 'a', role: 'r', type: 'node'}]})
-            }),
+        var graph = iD.Graph([
+                iD.Node({id: 'a', tags: {a: 'a'}}),
+                iD.Node({id: 'b', tags: {b: 'b'}}),
+                iD.Way({id: 'w', tags: {area: 'yes'}}),
+                iD.Relation({id: 'r', members: [{id: 'a', role: 'r', type: 'node'}]})
+            ]),
             action = iD.actions.Merge(['a', 'b', 'w']);
 
         expect(action.disabled(graph)).not.to.be.ok;

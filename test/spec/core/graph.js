@@ -344,7 +344,7 @@ describe('iD.Graph', function() {
         });
 
         it("returns self if self is not frozen", function () {
-            var graph = iD.Graph({}, true);
+            var graph = iD.Graph([], true);
             expect(graph.update()).to.equal(graph);
         });
 
@@ -385,7 +385,7 @@ describe('iD.Graph', function() {
         it("returns an array of ways that contain the given node id", function () {
             var node  = iD.Node({id: "n1"}),
                 way   = iD.Way({id: "w1", nodes: ["n1"]}),
-                graph = iD.Graph({n1: node, w1: way});
+                graph = iD.Graph([node, way]);
             expect(graph.parentWays(node)).to.eql([way]);
             expect(graph.parentWays(way)).to.eql([]);
         });
@@ -394,9 +394,9 @@ describe('iD.Graph', function() {
     describe("#parentRelations", function() {
         it("returns an array of relations that contain the given entity id", function () {
             var node     = iD.Node({id: "n1"}),
-                nonnode     = iD.Node({id: "n2"}),
+                nonnode  = iD.Node({id: "n2"}),
                 relation = iD.Relation({id: "r1", members: [{ id: "n1", role: 'from' }]}),
-                graph    = iD.Graph({n1: node, r1: relation});
+                graph    = iD.Graph([node, relation]);
             expect(graph.parentRelations(node)).to.eql([relation]);
             expect(graph.parentRelations(nonnode)).to.eql([]);
         });
@@ -406,7 +406,7 @@ describe('iD.Graph', function() {
         it("returns an array of child nodes", function () {
             var node  = iD.Node({id: "n1"}),
                 way   = iD.Way({id: "w1", nodes: ["n1"]}),
-                graph = iD.Graph({n1: node, w1: way});
+                graph = iD.Graph([node, way]);
             expect(graph.childNodes(way)).to.eql([node]);
         });
     });

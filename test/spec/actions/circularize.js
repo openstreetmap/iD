@@ -2,13 +2,13 @@ describe("iD.actions.Circularize", function () {
     var projection = d3.geo.mercator();
 
     it("creates nodes if necessary", function () {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [2, 0]}),
-                'c': iD.Node({id: 'c', loc: [2, 2]}),
-                'd': iD.Node({id: 'd', loc: [0, 2]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
-            });
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [2, 0]}),
+                iD.Node({id: 'c', loc: [2, 2]}),
+                iD.Node({id: 'd', loc: [0, 2]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            ]);
 
         graph = iD.actions.Circularize('-', projection)(graph);
 
@@ -16,14 +16,14 @@ describe("iD.actions.Circularize", function () {
     });
 
     it("reuses existing nodes", function () {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [2, 0]}),
-                'c': iD.Node({id: 'c', loc: [2, 2]}),
-                'd': iD.Node({id: 'd', loc: [0, 2]}),
-                'e': iD.Node({id: 'e', loc: [0, 2]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
-            }),
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [2, 0]}),
+                iD.Node({id: 'c', loc: [2, 2]}),
+                iD.Node({id: 'd', loc: [0, 2]}),
+                iD.Node({id: 'e', loc: [0, 2]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
+            ]),
             nodes;
 
         graph = iD.actions.Circularize('-', projection)(graph);
@@ -37,14 +37,14 @@ describe("iD.actions.Circularize", function () {
     });
 
     it("limits movement of nodes that are members of other ways", function () {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [2, 2]}),
-                'b': iD.Node({id: 'b', loc: [-2, 2]}),
-                'c': iD.Node({id: 'c', loc: [-2, -2]}),
-                'd': iD.Node({id: 'd', loc: [2, -2]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']}),
-                '=': iD.Way({id: '=', nodes: ['d']})
-            });
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [2, 2]}),
+                iD.Node({id: 'b', loc: [-2, 2]}),
+                iD.Node({id: 'c', loc: [-2, -2]}),
+                iD.Node({id: 'd', loc: [2, -2]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']}),
+                iD.Way({id: '=', nodes: ['d']})
+            ]);
 
         graph = iD.actions.Circularize('-', projection)(graph);
 
@@ -66,13 +66,13 @@ describe("iD.actions.Circularize", function () {
     }
 
     it("creates circle respecting min-angle limit", function() {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [2, 0]}),
-                'c': iD.Node({id: 'c', loc: [2, 2]}),
-                'd': iD.Node({id: 'd', loc: [0, 2]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
-            }),
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [2, 0]}),
+                iD.Node({id: 'c', loc: [2, 2]}),
+                iD.Node({id: 'd', loc: [0, 2]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            ]),
             centroid, points;
 
         graph = iD.actions.Circularize('-', projection, 20)(graph);
@@ -91,13 +91,13 @@ describe("iD.actions.Circularize", function () {
     }
 
     it("leaves clockwise ways clockwise", function () {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [2, 0]}),
-                'c': iD.Node({id: 'c', loc: [2, 2]}),
-                'd': iD.Node({id: 'd', loc: [0, 2]}),
-                '+': iD.Way({id: '+', nodes: ['a', 'd', 'c', 'b', 'a']})
-            });
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [2, 0]}),
+                iD.Node({id: 'c', loc: [2, 2]}),
+                iD.Node({id: 'd', loc: [0, 2]}),
+                iD.Way({id: '+', nodes: ['a', 'd', 'c', 'b', 'a']})
+            ]);
 
         expect(area('+', graph)).to.be.gt(0);
 
@@ -107,13 +107,13 @@ describe("iD.actions.Circularize", function () {
     });
 
     it("leaves counter-clockwise ways counter-clockwise", function () {
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [2, 0]}),
-                'c': iD.Node({id: 'c', loc: [2, 2]}),
-                'd': iD.Node({id: 'd', loc: [0, 2]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
-            });
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [2, 0]}),
+                iD.Node({id: 'c', loc: [2, 2]}),
+                iD.Node({id: 'd', loc: [0, 2]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            ]);
 
         expect(area('-', graph)).to.be.lt(0);
 

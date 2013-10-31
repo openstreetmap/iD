@@ -11,12 +11,12 @@ describe("iD.actions.AddMember", function() {
         }
 
         specify("no members", function() {
-            var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [0, 0]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b']}),
-                'r': iD.Relation({id: 'r'})
-            });
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [0, 0]}),
+                iD.Way({id: '-', nodes: ['a', 'b']}),
+                iD.Relation({id: 'r'})
+            ]);
 
             graph = iD.actions.AddMember('r', {id: '-', type: 'way'})(graph);
             expect(members(graph)).to.eql(['-']);
@@ -24,15 +24,15 @@ describe("iD.actions.AddMember", function() {
 
         specify("not connecting", function() {
             // a--->b    c===>d
-            var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [0, 0]}),
-                'c': iD.Node({id: 'c', loc: [0, 0]}),
-                'd': iD.Node({id: 'd', loc: [0, 0]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b']}),
-                '=': iD.Way({id: '=', nodes: ['c', 'd']}),
-                'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way'}]})
-            });
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [0, 0]}),
+                iD.Node({id: 'c', loc: [0, 0]}),
+                iD.Node({id: 'd', loc: [0, 0]}),
+                iD.Way({id: '-', nodes: ['a', 'b']}),
+                iD.Way({id: '=', nodes: ['c', 'd']}),
+                iD.Relation({id: 'r', members: [{id: '-', type: 'way'}]})
+            ]);
 
             graph = iD.actions.AddMember('r', {id: '=', type: 'way'})(graph);
             expect(members(graph)).to.eql(['-', '=']);
@@ -40,14 +40,14 @@ describe("iD.actions.AddMember", function() {
 
         specify("connecting at end", function() {
             // a--->b===>c
-            var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [0, 0]}),
-                'c': iD.Node({id: 'c', loc: [0, 0]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b']}),
-                '=': iD.Way({id: '=', nodes: ['b', 'c']}),
-                'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way'}]})
-            });
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [0, 0]}),
+                iD.Node({id: 'c', loc: [0, 0]}),
+                iD.Way({id: '-', nodes: ['a', 'b']}),
+                iD.Way({id: '=', nodes: ['b', 'c']}),
+                iD.Relation({id: 'r', members: [{id: '-', type: 'way'}]})
+            ]);
 
             graph = iD.actions.AddMember('r', {id: '=', type: 'way'})(graph);
             expect(members(graph)).to.eql(['-', '=']);
@@ -55,16 +55,16 @@ describe("iD.actions.AddMember", function() {
 
         specify("connecting at beginning", function() {
             // a===>b--->c~~~>d
-            var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [0, 0]}),
-                'c': iD.Node({id: 'c', loc: [0, 0]}),
-                'd': iD.Node({id: 'd', loc: [0, 0]}),
-                '=': iD.Way({id: '=', nodes: ['a', 'b']}),
-                '-': iD.Way({id: '-', nodes: ['b', 'c']}),
-                '~': iD.Way({id: '~', nodes: ['c', 'd']}),
-                'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way'}, {id: '~', type: 'way'}]})
-            });
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [0, 0]}),
+                iD.Node({id: 'c', loc: [0, 0]}),
+                iD.Node({id: 'd', loc: [0, 0]}),
+                iD.Way({id: '=', nodes: ['a', 'b']}),
+                iD.Way({id: '-', nodes: ['b', 'c']}),
+                iD.Way({id: '~', nodes: ['c', 'd']}),
+                iD.Relation({id: 'r', members: [{id: '-', type: 'way'}, {id: '~', type: 'way'}]})
+            ]);
 
             graph = iD.actions.AddMember('r', {id: '=', type: 'way'})(graph);
             expect(members(graph)).to.eql(['=', '-', '~']);
@@ -72,16 +72,16 @@ describe("iD.actions.AddMember", function() {
 
         specify("connecting in middle", function() {
             // a--->b===>c~~~>d
-            var graph = iD.Graph({
-                'a': iD.Node({id: 'a', loc: [0, 0]}),
-                'b': iD.Node({id: 'b', loc: [0, 0]}),
-                'c': iD.Node({id: 'c', loc: [0, 0]}),
-                'd': iD.Node({id: 'd', loc: [0, 0]}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b']}),
-                '=': iD.Way({id: '=', nodes: ['b', 'c']}),
-                '~': iD.Way({id: '~', nodes: ['c', 'd']}),
-                'r': iD.Relation({id: 'r', members: [{id: '-', type: 'way'}, {id: '~', type: 'way'}]})
-            });
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [0, 0]}),
+                iD.Node({id: 'c', loc: [0, 0]}),
+                iD.Node({id: 'd', loc: [0, 0]}),
+                iD.Way({id: '-', nodes: ['a', 'b']}),
+                iD.Way({id: '=', nodes: ['b', 'c']}),
+                iD.Way({id: '~', nodes: ['c', 'd']}),
+                iD.Relation({id: 'r', members: [{id: '-', type: 'way'}, {id: '~', type: 'way'}]})
+            ]);
 
             graph = iD.actions.AddMember('r', {id: '=', type: 'way'})(graph);
             expect(members(graph)).to.eql(['-', '=', '~']);

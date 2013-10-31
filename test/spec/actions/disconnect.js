@@ -1,7 +1,7 @@
 describe("iD.actions.Disconnect", function () {
     describe("#disabled", function () {
         it("returns 'not_connected' for a node shared by less than two ways", function () {
-            var graph = iD.Graph({'a': iD.Node()});
+            var graph = iD.Graph([iD.Node({id: 'a'})]);
 
             expect(iD.actions.Disconnect('a').disabled(graph)).to.equal('not_connected');
         });
@@ -10,13 +10,13 @@ describe("iD.actions.Disconnect", function () {
             //    a ---- b
             //    |      |
             //    d ---- c
-            var graph = iD.Graph({
-                'a': iD.Node({id: 'a'}),
-                'b': iD.Node({id: 'b'}),
-                'c': iD.Node({id: 'c'}),
-                'd': iD.Node({id: 'd'}),
-                'w': iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'd', 'a']})
-            });
+            var graph = iD.Graph([
+                iD.Node({id: 'a'}),
+                iD.Node({id: 'b'}),
+                iD.Node({id: 'c'}),
+                iD.Node({id: 'd'}),
+                iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'd', 'a']})
+            ]);
             expect(iD.actions.Disconnect('a').disabled(graph)).not.to.be.ok;
         });
 
@@ -24,28 +24,28 @@ describe("iD.actions.Disconnect", function () {
             //    a ---- b ---- c
             //           |
             //           d
-            var graph = iD.Graph({
-                    'a': iD.Node({id: 'a'}),
-                    'b': iD.Node({id: 'b'}),
-                    'c': iD.Node({id: 'c'}),
-                    'd': iD.Node({id: 'd'}),
-                    '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
-                    '|': iD.Way({id: '|', nodes: ['d', 'b']})
-                });
+            var graph = iD.Graph([
+                    iD.Node({id: 'a'}),
+                    iD.Node({id: 'b'}),
+                    iD.Node({id: 'c'}),
+                    iD.Node({id: 'd'}),
+                    iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                    iD.Way({id: '|', nodes: ['d', 'b']})
+                ]);
 
             expect(iD.actions.Disconnect('b').disabled(graph)).not.to.be.ok;
         });
 
         it("returns falsy for an intersection of two ways with parent way specified", function () {
-            var graph = iD.Graph({
-                    'a': iD.Node({id: 'a'}),
-                    'b': iD.Node({id: 'b'}),
-                    'c': iD.Node({id: 'c'}),
-                    'd': iD.Node({id: 'c'}),
-                    '*': iD.Node({id: '*'}),
-                    '-': iD.Way({id: '-', nodes: ['a', '*', 'b']}),
-                    '|': iD.Way({id: '|', nodes: ['*', 'd']})
-            });
+            var graph = iD.Graph([
+                    iD.Node({id: 'a'}),
+                    iD.Node({id: 'b'}),
+                    iD.Node({id: 'c'}),
+                    iD.Node({id: 'c'}),
+                    iD.Node({id: '*'}),
+                    iD.Way({id: '-', nodes: ['a', '*', 'b']}),
+                    iD.Way({id: '|', nodes: ['*', 'd']})
+            ]);
 
             expect(iD.actions.Disconnect('*', ['|']).disabled(graph)).not.to.be.ok;
         });
@@ -65,14 +65,14 @@ describe("iD.actions.Disconnect", function () {
         //           |
         //           d
         //
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a'}),
-                'b': iD.Node({id: 'b'}),
-                'c': iD.Node({id: 'c'}),
-                'd': iD.Node({id: 'd'}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
-                '|': iD.Way({id: '|', nodes: ['d', 'b']})
-            });
+        var graph = iD.Graph([
+                iD.Node({id: 'a'}),
+                iD.Node({id: 'b'}),
+                iD.Node({id: 'c'}),
+                iD.Node({id: 'd'}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                iD.Way({id: '|', nodes: ['d', 'b']})
+            ]);
 
         graph = iD.actions.Disconnect('b', 'e')(graph);
 
@@ -92,15 +92,15 @@ describe("iD.actions.Disconnect", function () {
         //              |
         //              d
         //
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a'}),
-                'b': iD.Node({id: 'b'}),
-                'c': iD.Node({id: 'c'}),
-                'd': iD.Node({id: 'd'}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b']}),
-                '=': iD.Way({id: '=', nodes: ['b', 'c']}),
-                '|': iD.Way({id: '|', nodes: ['d', 'b']})
-            });
+        var graph = iD.Graph([
+                iD.Node({id: 'a'}),
+                iD.Node({id: 'b'}),
+                iD.Node({id: 'c'}),
+                iD.Node({id: 'd'}),
+                iD.Way({id: '-', nodes: ['a', 'b']}),
+                iD.Way({id: '=', nodes: ['b', 'c']}),
+                iD.Way({id: '|', nodes: ['d', 'b']})
+            ]);
 
         graph = iD.actions.Disconnect('b', 'e').limitWays(['-'])(graph);
 
@@ -118,12 +118,12 @@ describe("iD.actions.Disconnect", function () {
         //
         // Expected result:
         //  a ---- b ---- c ---- d
-        var graph = iD.Graph({
-                'a': iD.Node({id: 'a'}),
-                'b': iD.Node({id: 'b'}),
-                'c': iD.Node({id: 'c'}),
-                'w': iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'a']})
-        });
+        var graph = iD.Graph([
+                iD.Node({id: 'a'}),
+                iD.Node({id: 'b'}),
+                iD.Node({id: 'c'}),
+                iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'a']})
+            ]);
         graph = iD.actions.Disconnect('a', 'd')(graph);
         expect(graph.entity('w').nodes).to.eql(['a', 'b', 'c', 'd']);
     });
@@ -131,14 +131,14 @@ describe("iD.actions.Disconnect", function () {
     it("copies location and tags to the new nodes", function () {
         var tags  = {highway: 'traffic_signals'},
             loc   = [1, 2],
-            graph = iD.Graph({
-                'a': iD.Node({id: 'a'}),
-                'b': iD.Node({id: 'b', loc: loc, tags: tags}),
-                'c': iD.Node({id: 'c'}),
-                'd': iD.Node({id: 'd'}),
-                '-': iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
-                '|': iD.Way({id: '|', nodes: ['d', 'b']})
-            });
+            graph = iD.Graph([
+                iD.Node({id: 'a'}),
+                iD.Node({id: 'b', loc: loc, tags: tags}),
+                iD.Node({id: 'c'}),
+                iD.Node({id: 'd'}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                iD.Way({id: '|', nodes: ['d', 'b']})
+            ]);
 
         graph = iD.actions.Disconnect('b', 'e')(graph);
 

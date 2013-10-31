@@ -127,12 +127,12 @@ describe("iD.Difference", function () {
     });
 
     describe("#summary", function () {
-        var base = iD.Graph({
-            'a': iD.Node({id: 'a', tags: {crossing: 'zebra'}}),
-            'b': iD.Node({id: 'b'}),
-            'v': iD.Node({id: 'v'}),
-            '-': iD.Way({id: '-', nodes: ['a', 'b']})
-        });
+        var base = iD.Graph([
+            iD.Node({id: 'a', tags: {crossing: 'zebra'}}),
+            iD.Node({id: 'b'}),
+            iD.Node({id: 'v'}),
+            iD.Way({id: '-', nodes: ['a', 'b']})
+        ]);
 
         it("reports a created way as created", function() {
             var way = iD.Way({id: '+'}),

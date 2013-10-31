@@ -12,18 +12,18 @@ describe("iD.svg.Restrictions", function() {
             expect(restrictions.turns(graph, ['a', 'b'])).to.eql([]);
         });
 
-        var valid = iD.Graph({
-            'u': iD.Node({id: 'u'}),
-            'v': iD.Node({id: 'v'}),
-            'w': iD.Node({id: 'w'}),
-            'f': iD.Way({id: 'f', nodes: ['u', 'v']}),
-            't': iD.Way({id: 't', nodes: ['v', 'w']}),
-            'r': iD.Relation({id: 'r', tags: {type: 'restriction'}, members: [
+        var valid = iD.Graph([
+            iD.Node({id: 'u'}),
+            iD.Node({id: 'v'}),
+            iD.Node({id: 'w'}),
+            iD.Way({id: 'f', nodes: ['u', 'v']}),
+            iD.Way({id: 't', nodes: ['v', 'w']}),
+            iD.Relation({id: 'r', tags: {type: 'restriction'}, members: [
                 { role: 'via',  id: 'v', type: 'node' },
                 { role: 'from', id: 'f', type: 'way' },
                 { role: 'to',   id: 't', type: 'way' }
             ]})
-        });
+        ]);
 
         it("returns a valid restriction when the selected way has role 'from'", function() {
             expect(restrictions.turns(valid, ['f'])).to.eql([valid.entity('r')]);
@@ -106,20 +106,20 @@ describe("iD.svg.Restrictions", function() {
             // u====>v
             // From = to - via v
 
-            var graph = iD.Graph({
-                'u': iD.Node({id: 'u', loc: [0, 0]}),
-                'v': iD.Node({id: 'v', loc: [1, 0]}),
-                'w': iD.Node({id: 'w', loc: [1, 1]}),
-                'x': iD.Node({id: 'w', loc: [2, 1]}),
-                'y': iD.Node({id: 'w', loc: [3, 1]}),
-                '=': iD.Way({id: '=', nodes: ['u', 'v']}),
-                '-': iD.Way({id: '-', nodes: ['v', 'w', 'x', 'y']}),
-                'r': iD.Relation({id: 'r', tags: {type: 'restriction'}, members: [
+            var graph = iD.Graph([
+                iD.Node({id: 'u', loc: [0, 0]}),
+                iD.Node({id: 'v', loc: [1, 0]}),
+                iD.Node({id: 'w', loc: [1, 1]}),
+                iD.Node({id: 'x', loc: [2, 1]}),
+                iD.Node({id: 'y', loc: [3, 1]}),
+                iD.Way({id: '=', nodes: ['u', 'v']}),
+                iD.Way({id: '-', nodes: ['v', 'w', 'x', 'y']}),
+                iD.Relation({id: 'r', tags: {type: 'restriction'}, members: [
                     { role: 'via',  id: 'v', type: 'node' },
                     { role: 'from', id: '=', type: 'way' },
                     { role: 'to',   id: '-', type: 'way' }
                 ]})
-            });
+            ]);
 
             expect(restrictions.datum(graph, graph.entity('='), graph.entity('r'), projection).angle).to.eql(Math.PI / 2);
         });
@@ -130,20 +130,20 @@ describe("iD.svg.Restrictions", function() {
             // u====>v
             // From = to - via v
 
-            var graph = iD.Graph({
-                'u': iD.Node({id: 'u', loc: [0, 0]}),
-                'v': iD.Node({id: 'v', loc: [1, 0]}),
-                'w': iD.Node({id: 'w', loc: [1, 1]}),
-                'x': iD.Node({id: 'w', loc: [2, 1]}),
-                'y': iD.Node({id: 'w', loc: [3, 1]}),
-                '=': iD.Way({id: '=', nodes: ['u', 'v']}),
-                '-': iD.Way({id: '-', nodes: ['y', 'x', 'w', 'v']}),
-                'r': iD.Relation({id: 'r', tags: {type: 'restriction'}, members: [
+            var graph = iD.Graph([
+                iD.Node({id: 'u', loc: [0, 0]}),
+                iD.Node({id: 'v', loc: [1, 0]}),
+                iD.Node({id: 'w', loc: [1, 1]}),
+                iD.Node({id: 'x', loc: [2, 1]}),
+                iD.Node({id: 'y', loc: [3, 1]}),
+                iD.Way({id: '=', nodes: ['u', 'v']}),
+                iD.Way({id: '-', nodes: ['y', 'x', 'w', 'v']}),
+                iD.Relation({id: 'r', tags: {type: 'restriction'}, members: [
                     { role: 'via',  id: 'v', type: 'node' },
                     { role: 'from', id: '=', type: 'way' },
                     { role: 'to',   id: '-', type: 'way' }
                 ]})
-            });
+            ]);
 
             expect(restrictions.datum(graph, graph.entity('='), graph.entity('r'), projection).angle).to.eql(Math.PI / 2);
         });
