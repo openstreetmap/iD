@@ -1,0 +1,10 @@
+{
+    "key": "type",
+    "type": "combo",
+    "options": [
+        "broad_leaved",
+        "conifer",
+        "palm"
+    ],
+    "label": "Type of tree"
+}
