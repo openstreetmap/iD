@@ -3,7 +3,7 @@ describe('iD.ui.preset.localized', function() {
 
     beforeEach(function() {
         selection = d3.select(document.createElement('div'));
-        field = iD().presets().field('name');
+        field = iD.presets.Field('test', {key: 'name'});
     });
 
     it("adds a blank set of fields when the + button is clicked", function() {
