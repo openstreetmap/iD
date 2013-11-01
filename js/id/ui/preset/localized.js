@@ -93,16 +93,16 @@ iD.ui.preset.localized = function(field, context) {
 
     function suggestNames(value, callback) {
         var suggest = [],
-            s9s = iD.data.suggestions;
+            allSuggs = iD.data.suggestions;
         if (value && value.length > 2) {
-            var selected = context.selectedIDs(),
-                entity = context.entity(selected),
-                preset = context.presets().match(entity, context.graph());
+            var preset = context.presets().match(
+                    context.entity(context.selectedIDs()),
+                    context.graph());
             preset = preset.id.split('/', 2);
             var k = preset[0],
                 v = preset[1];
-            if (s9s[k] && s9s[k][v]) {
-                for (var sugg in s9s[k][v]) {
+            if (allSuggs[k] && allSuggs[k][v]) {
+                for (var sugg in allSuggs[k][v]) {
                     var dist = iD.util.editDistance(value, sugg.substring(0, value.length));
                     if (dist < 5) {
                         suggest.push({
@@ -117,6 +117,7 @@ iD.ui.preset.localized = function(field, context) {
                 return a.dist - b.dist;
             });
         }
+        suggest = suggest.slice(0,3);
         callback(suggest);
     }
 
