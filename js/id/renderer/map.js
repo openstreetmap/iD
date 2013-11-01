@@ -214,7 +214,8 @@ iD.Map = function(context) {
 
         var zoom = String(~~map.zoom());
         if (surface.attr('data-zoom') !== zoom) {
-            surface.attr('data-zoom', zoom);
+            surface.attr('data-zoom', zoom)
+                .classed('low-zoom', zoom <= 16);
         }
 
         if (!difference) {

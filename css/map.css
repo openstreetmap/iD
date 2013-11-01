@@ -409,13 +409,13 @@ path.stroke.tag-highway {
     stroke-width:8;
 }
 
-svg[data-zoom="16"] path.shadow.tag-highway {
+.low-zoom path.shadow.tag-highway {
     stroke-width:12;
 }
-svg[data-zoom="16"] path.casing.tag-highway {
+.low-zoom path.casing.tag-highway {
     stroke-width:6;
 }
-svg[data-zoom="16"] path.stroke.tag-highway {
+.low-zoom path.stroke.tag-highway {
     stroke-width:4;
 }
 
@@ -528,10 +528,10 @@ path.casing.tag-highway-service {
     stroke:#666;
     stroke-width:6;
 }
-svg[data-zoom="16"] path.stroke.tag-highway-service {
+.low-zoom path.stroke.tag-highway-service {
     stroke-width:2;
 }
-svg[data-zoom="16"] path.casing.tag-highway-service {
+.low-zoom path.casing.tag-highway-service {
     stroke-width:4;
 }
 
@@ -545,10 +545,10 @@ path.casing.tag-highway-track {
     stroke-linecap: butt;
     stroke-dasharray: 6, 6;
 }
-svg[data-zoom="16"] path.stroke.tag-highway-track {
+.low-zoom path.stroke.tag-highway-track {
     stroke-width:2;
 }
-svg[data-zoom="16"] path.casing.tag-highway-track {
+.low-zoom path.casing.tag-highway-track {
     stroke-width:4;
 }
 
@@ -577,14 +577,14 @@ path.casing.tag-highway-bridleway {
     stroke: #fff;
 }
 
-svg[data-zoom="16"] path.stroke.tag-highway-footway,
-svg[data-zoom="16"] path.stroke.tag-highway-cycleway,
-svg[data-zoom="16"] path.stroke.tag-highway-bridleway {
+.low-zoom path.stroke.tag-highway-footway,
+.low-zoom path.stroke.tag-highway-cycleway,
+.low-zoom path.stroke.tag-highway-bridleway {
     stroke-width: 2;
 }
-svg[data-zoom="16"] path.casing.tag-highway-footway,
-svg[data-zoom="16"] path.casing.tag-highway-cycleway,
-svg[data-zoom="16"] path.casing.tag-highway-bridleway {
+.low-zoom path.casing.tag-highway-footway,
+.low-zoom path.casing.tag-highway-cycleway,
+.low-zoom path.casing.tag-highway-bridleway {
     stroke-width: 4;
 }
 
@@ -699,8 +699,8 @@ path.casing.tag-highway-construction {
 
 /* construction */
 
-svg[data-zoom="16"] path.stroke.tag-highway-construction,
-svg[data-zoom="16"] path.casing.tag-highway-construction {
+.low-zoom path.stroke.tag-highway-construction,
+.low-zoom path.casing.tag-highway-construction {
     stroke-linecap: butt;
     stroke-dasharray: 5, 5;
 }
@@ -760,13 +760,6 @@ path.stroke.tag-waterway-river {
     stroke-width: 4;
 }
 path.casing.tag-waterway-river {
-    stroke-width: 6;
-}
-
-svg[data-zoom="16"] path.stroke.tag-waterway-river {
-    stroke-width: 4;
-}
-svg[data-zoom="16"] path.casing.tag-waterway-river {
     stroke-width: 6;
 }
 
