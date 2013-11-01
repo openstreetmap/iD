@@ -2,7 +2,8 @@ iD.ui.preset.localized = function(field, context) {
 
     var event = d3.dispatch('change'),
         wikipedia = iD.wikipedia(),
-        input, localizedInputs, wikiTitles;
+        input, localizedInputs, wikiTitles,
+        entity;
 
     function i(selection) {
         input = selection.selectAll('.localized-main')
@@ -18,7 +19,12 @@ iD.ui.preset.localized = function(field, context) {
             .on('blur', change)
             .on('change', change);
 
-        input.call(d3.combobox().fetcher(suggestNames));
+        if (field.id === 'name') {
+            var preset = context.presets().match(entity, context.graph());
+            input.call(d3.combobox().fetcher(
+                iD.util.SuggestNames(preset, iD.data.suggestions)
+            ));
+        }
 
         var translateButton = selection.selectAll('.localized-add')
             .data([0]);
@@ -89,36 +95,6 @@ iD.ui.preset.localized = function(field, context) {
         var t = {};
         t[key(d.lang)] = d3.select(this).value() || undefined;
         event.change(t);
-    }
-
-    function suggestNames(value, callback) {
-        var suggest = [],
-            allSuggs = iD.data.suggestions;
-        if (value && value.length > 2) {
-            var preset = context.presets().match(
-                    context.entity(context.selectedIDs()),
-                    context.graph());
-            preset = preset.id.split('/', 2);
-            var k = preset[0],
-                v = preset[1];
-            if (allSuggs[k] && allSuggs[k][v]) {
-                for (var sugg in allSuggs[k][v]) {
-                    var dist = iD.util.editDistance(value, sugg.substring(0, value.length));
-                    if (dist < 5) {
-                        suggest.push({
-                            title: sugg,
-                            value: sugg,
-                            dist: dist
-                        });
-                    }
-                }
-            }
-            suggest.sort(function(a, b) {
-                return a.dist - b.dist;
-            });
-        }
-        suggest = suggest.slice(0,3);
-        callback(suggest);
     }
 
     function fetcher(value, cb) {
@@ -246,6 +222,10 @@ iD.ui.preset.localized = function(field, context) {
 
     i.focus = function() {
         input.node().focus();
+    };
+
+    i.entity = function(_) {
+        entity = _;
     };
 
     return d3.rebind(i, event, 'on');

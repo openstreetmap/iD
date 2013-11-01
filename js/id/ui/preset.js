@@ -12,11 +12,7 @@ iD.ui.preset = function(context) {
         field.input = iD.ui.preset[field.type](field, context)
             .on('change', event.change);
 
-        if (field.type === 'address' ||
-            field.type === 'wikipedia' ||
-            field.type === 'maxspeed') {
-            field.input.entity(entity);
-        }
+        if (field.input.entity) field.input.entity(entity);
 
         field.keys = field.keys || [field.key];
 
