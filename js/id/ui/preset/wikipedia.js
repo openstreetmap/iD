@@ -84,7 +84,7 @@ iD.ui.preset.wikipedia = function(field, context) {
 
     function change() {
         var value = title.value(),
-            m = value.match(/http:\/\/([a-z]+)\.wikipedia\.org\/wiki\/(.+)/),
+            m = value.match(/https?:\/\/([a-z]+)\.wikipedia\.org\/wiki\/(.+)/),
             l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; });
 
         if (l) {
