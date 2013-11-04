@@ -577,7 +577,7 @@ button[disabled] .icon.nearby     { background-position: -340px -40px;}
 .icon.line.created   { background-position: -320px -100px;}
 .icon.area.created   { background-position: -340px -100px;}
 
-.icon.point.modified  { background-position: -24px 0; }
+.icon.point.modified  { background-position: -22px 0; }
 
 .icon.modified { opacity: .5; }
 
