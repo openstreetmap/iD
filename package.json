@@ -36,7 +36,8 @@
     "request": "~2.16.2",
     "jsonschema": "~0.3.2",
     "delve": "0.2",
-    "editor-imagery-index": "git://github.com/osmlab/editor-imagery-index.git#gh-pages"
+    "editor-imagery-index": "git://github.com/osmlab/editor-imagery-index.git#gh-pages",
+    "name-suggestion-index": "0.0.1"
   },
   "engines": {
     "node": ">=0.10.0"

@@ -1,8 +1,9 @@
-iD.ui.preset.localized = function(field) {
+iD.ui.preset.localized = function(field, context) {
 
     var event = d3.dispatch('change'),
         wikipedia = iD.wikipedia(),
-        input, localizedInputs, wikiTitles;
+        input, localizedInputs, wikiTitles,
+        entity;
 
     function i(selection) {
         input = selection.selectAll('.localized-main')
@@ -17,6 +18,13 @@ iD.ui.preset.localized = function(field) {
         input
             .on('blur', change)
             .on('change', change);
+
+        if (field.id === 'name') {
+            var preset = context.presets().match(entity, context.graph());
+            input.call(d3.combobox().fetcher(
+                iD.util.SuggestNames(preset, iD.data.suggestions)
+            ));
+        }
 
         var translateButton = selection.selectAll('.localized-add')
             .data([0]);
@@ -214,6 +222,10 @@ iD.ui.preset.localized = function(field) {
 
     i.focus = function() {
         input.node().focus();
+    };
+
+    i.entity = function(_) {
+        entity = _;
     };
 
     return d3.rebind(i, event, 'on');

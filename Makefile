@@ -88,6 +88,10 @@ translations:
 imagery:
 	npm install editor-imagery-index@git://github.com/osmlab/editor-imagery-index.git#gh-pages && node data/update_imagery
 
+suggestions:
+	npm install name-suggestion-index@git://github.com/osmlab/name-suggestion-index.git
+	cp node_modules/name-suggestion-index/name-suggestions.json data/name-suggestions.json
+
 SPRITE = inkscape --export-area-page
 
 dist/img/line-presets.png: svg/line-presets.svg
