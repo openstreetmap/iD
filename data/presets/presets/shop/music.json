@@ -13,5 +13,10 @@
     "tags": {
         "shop": "music"
     },
-    "name": "Music Store"
+    "name": "Music Store",
+    "suggestions": [
+        "HMV",
+        "Guitar Center",
+        "Free Record Shop"
+    ]
 }

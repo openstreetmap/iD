@@ -16,5 +16,31 @@
     "terms": [
         "alcohol"
     ],
-    "name": "Liquor Store"
+    "name": "Liquor Store",
+    "suggestions": [
+        "Gall & Gall",
+        "LCBO",
+        "Systembolaget",
+        "Alko",
+        "Nicolas",
+        "Botilleria",
+        "SAQ",
+        "Живое пиво",
+        "BWS",
+        "Bargain Booze",
+        "Ароматный мир",
+        "Красное & Белое",
+        "Liquorland",
+        "Норман",
+        "Красное и белое",
+        "Mitra",
+        "Getränkemarkt",
+        "Dan Murphy's",
+        "Vinmonopolet",
+        "Разливное пиво",
+        "BC Liquor Store",
+        "Красное&Белое",
+        "Majestic Wine Warehouse",
+        "Liquor City"
+    ]
 }

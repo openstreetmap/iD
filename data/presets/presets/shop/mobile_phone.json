@@ -13,5 +13,30 @@
     "tags": {
         "shop": "mobile_phone"
     },
-    "name": "Mobile Phone Store"
+    "name": "Mobile Phone Store",
+    "suggestions": [
+        "Евросеть",
+        "Связной",
+        "МТС",
+        "Vodafone",
+        "ソフトバンクショップ (SoftBank shop)",
+        "Мегафон",
+        "Orange",
+        "O2",
+        "Билайн",
+        "Carphone Warehouse",
+        "Verizon Wireless",
+        "Sprint",
+        "Bitė",
+        "SFR",
+        "au",
+        "Movistar",
+        "auショップ (au shop)",
+        "Rogers",
+        "Claro",
+        "3 Store",
+        "SoftBank",
+        "EE",
+        "Wind"
+    ]
 }

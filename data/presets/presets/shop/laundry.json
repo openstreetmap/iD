@@ -13,5 +13,16 @@
     "tags": {
         "shop": "laundry"
     },
-    "name": "Laundry"
+    "name": "Laundry",
+    "suggestions": [
+        "Coin Laundry",
+        "Прачечная",
+        "Eco-Express",
+        "Pressing",
+        "Laverap",
+        "Waschsalon",
+        "コインランドリー",
+        "SB-Waschsalon",
+        "Laverie Libre Service"
+    ]
 }

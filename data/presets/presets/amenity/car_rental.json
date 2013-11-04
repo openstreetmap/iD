@@ -9,5 +9,27 @@
     "fields": [
         "operator"
     ],
-    "name": "Car Rental"
+    "name": "Car Rental",
+    "suggestions": [
+        "Hertz",
+        "Europcar",
+        "Avis",
+        "stadtmobil CarSharing-Station",
+        "Sixt",
+        "Enterprise",
+        "Budget",
+        "ニッポンレンタカー",
+        "Autolib",
+        "U-Haul",
+        "トヨタレンタリース",
+        "Localiza",
+        "Buchbinder",
+        "ADA",
+        "トヨタレンタカー",
+        "Rent a Car",
+        "オリックスレンタカー",
+        "マツダレンタカー",
+        "National",
+        "日産レンタカー"
+    ]
 }

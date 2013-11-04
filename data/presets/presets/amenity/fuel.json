@@ -22,5 +22,32 @@
     "tags": {
         "amenity": "fuel"
     },
-    "name": "Gas Station"
+    "name": "Gas Station",
+    "suggestions": [
+        "Shell",
+        "Esso",
+        "Agip",
+        "BP",
+        "Лукойл",
+        "Aral",
+        "Q8",
+        "АЗС",
+        "Caltex",
+        "IP",
+        "Petron",
+        "Chevron",
+        "OMV",
+        "ENEOS",
+        "Erg",
+        "Роснефть",
+        "Lukoil",
+        "Mobil",
+        "Statoil",
+        "Avia",
+        "Orlen",
+        "ТНК",
+        "Copec",
+        "REPSOL",
+        "Газпромнефть"
+    ]
 }

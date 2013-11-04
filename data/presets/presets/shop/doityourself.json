@@ -13,5 +13,30 @@
     "tags": {
         "shop": "doityourself"
     },
-    "name": "DIY Store"
+    "name": "DIY Store",
+    "suggestions": [
+        "Lowes",
+        "Home Depot",
+        "OBI",
+        "Homebase",
+        "B&Q",
+        "Bricomarché",
+        "Leroy Merlin",
+        "Praktiker",
+        "Bauhaus",
+        "Стройматериалы",
+        "Castorama",
+        "Ace Hardware",
+        "Hornbach",
+        "Wickes",
+        "Hagebaumarkt",
+        "Gamma",
+        "Brico",
+        "Baumax",
+        "Mr Bricolage",
+        "Max Bahr",
+        "Bunnings Warehouse",
+        "Lagerhaus",
+        "Weldom"
+    ]
 }

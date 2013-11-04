@@ -13,5 +13,24 @@
     "tags": {
         "shop": "bicycle"
     },
-    "name": "Bicycle Shop"
+    "name": "Bicycle Shop",
+    "suggestions": [
+        "Halfords",
+        "Evans Cycles",
+        "サイクルベースあさひ",
+        "Giant",
+        "Decathlon",
+        "Radhaus",
+        "Fahrradladen",
+        "Performance Bicycle",
+        "Little John Bikes",
+        "Drahtesel",
+        "Culture Vélo",
+        "Cycle King",
+        "Stadler",
+        "Cycle Surgery",
+        "B.O.C.",
+        "Intersport",
+        "Der Fahrradladen"
+    ]
 }

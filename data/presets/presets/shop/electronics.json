@@ -13,5 +13,29 @@
     "tags": {
         "shop": "electronics"
     },
-    "name": "Electronics Store"
+    "name": "Electronics Store",
+    "suggestions": [
+        "Best Buy",
+        "Radio Shack",
+        "Эльдорадо",
+        "Media Markt",
+        "Saturn",
+        "Expert",
+        "Euronics",
+        "Currys",
+        "М.Видео",
+        "Darty",
+        "Future Shop",
+        "Maplin",
+        "Comet",
+        "ケーズデンキ",
+        "Эксперт",
+        "Boulanger",
+        "ヤマダ電機",
+        "Elgiganten",
+        "Фокстрот",
+        "Техносила",
+        "Vodafone",
+        "Fry's Electronics"
+    ]
 }

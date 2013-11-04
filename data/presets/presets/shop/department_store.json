@@ -13,5 +13,28 @@
     "tags": {
         "shop": "department_store"
     },
-    "name": "Department Store"
+    "name": "Department Store",
+    "suggestions": [
+        "Walmart",
+        "Sears",
+        "Kmart",
+        "Kohl's",
+        "Macy's",
+        "Costco",
+        "Woolworth",
+        "Debenhams",
+        "Karstadt",
+        "Marks & Spencer",
+        "Универмаг",
+        "Galeria Kaufhof",
+        "Big W",
+        "Argos",
+        "JCPenney",
+        "Sam's Club",
+        "Big Lots",
+        "Blokker",
+        "BHS",
+        "Myer",
+        "Falabella"
+    ]
 }

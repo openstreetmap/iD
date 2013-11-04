@@ -13,5 +13,31 @@
     "tags": {
         "shop": "sports"
     },
-    "name": "Sporting Goods Store"
+    "name": "Sporting Goods Store",
+    "suggestions": [
+        "Intersport",
+        "Decathlon",
+        "Sport 2000",
+        "Спортмастер",
+        "Décathlon",
+        "Sports Authority",
+        "Dick's Sporting Goods",
+        "Sports Direct",
+        "Adidas",
+        "Спорттовары",
+        "Go Sport",
+        "Hervis",
+        "JJB Sports",
+        "Big 5 Sporting Goods",
+        "Stadium",
+        "InterSport",
+        "Спортландия",
+        "Nike",
+        "Running Room",
+        "Play It Again Sports",
+        "Sports Experts",
+        "Inter Sport",
+        "JD Sports",
+        "Sports World"
+    ]
 }

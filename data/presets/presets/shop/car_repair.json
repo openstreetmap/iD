@@ -13,5 +13,30 @@
     "tags": {
         "shop": "car_repair"
     },
-    "name": "Car Repair Shop"
+    "name": "Car Repair Shop",
+    "suggestions": [
+        "Шиномонтаж",
+        "СТО",
+        "Автосервис",
+        "Jiffy Lube",
+        "Автозапчасти",
+        "Midas",
+        "Renault",
+        "Norauto",
+        "Feu Vert",
+        "Speedy",
+        "Carglass",
+        "Peugeot",
+        "Euromaster",
+        "Firestone",
+        "Kwik Fit",
+        "O'Reilly Auto Parts",
+        "Pit Stop",
+        "Garage",
+        "Roady",
+        "AutoZone",
+        "шиномонтаж",
+        "Citroën",
+        "Pit-Stop"
+    ]
 }

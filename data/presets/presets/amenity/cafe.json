@@ -19,5 +19,24 @@
     "tags": {
         "amenity": "cafe"
     },
-    "name": "Cafe"
+    "name": "Cafe",
+    "suggestions": [
+        "Starbucks",
+        "Столовая",
+        "Costa",
+        "Кафе",
+        "Dunkin' Donuts",
+        "スターバックス (Starbucks)",
+        "Second Cup",
+        "Шоколадница",
+        "Pret A Manger",
+        "Eiscafe",
+        "Eiscafe Venezia",
+        "Cafe Coffee Day",
+        "Кофе Хауз",
+        "Caribou Coffee",
+        "ドトール",
+        "Caffè Nero",
+        "Panera Bread"
+    ]
 }

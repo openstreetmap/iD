@@ -12,5 +12,30 @@
     "tags": {
         "shop": "car"
     },
-    "name": "Car Dealership"
+    "name": "Car Dealership",
+    "suggestions": [
+        "Renault",
+        "Автозапчасти",
+        "Peugeot",
+        "Ford",
+        "Шиномонтаж",
+        "Nissan",
+        "Opel",
+        "Hyundai",
+        "BMW",
+        "Volkswagen",
+        "Honda",
+        "Citroen",
+        "Audi",
+        "Mazda",
+        "Skoda",
+        "Mercedes-Benz",
+        "Fiat",
+        "Volvo",
+        "Chevrolet",
+        "Suzuki",
+        "Mitsubishi",
+        "VW",
+        "Автомагазин"
+    ]
 }

@@ -13,5 +13,29 @@
     "tags": {
         "shop": "convenience"
     },
-    "name": "Convenience Store"
+    "name": "Convenience Store",
+    "suggestions": [
+        "Продукты",
+        "7-Eleven",
+        "セブン-イレブン (Seven-Eleven)",
+        "Spar",
+        "ファミリーマート",
+        "ローソン",
+        "Магазин",
+        "Магнит",
+        "ローソン (LAWSON)",
+        "Żabka",
+        "Oxxo",
+        "ファミリーマート (FamilyMart)",
+        "サンクス",
+        "Londis",
+        "サークルK",
+        "FamilyMart",
+        "Пятёрочка",
+        "Costcutter",
+        "Circle K",
+        "Stewart's",
+        "Coop",
+        "LAWSON"
+    ]
 }

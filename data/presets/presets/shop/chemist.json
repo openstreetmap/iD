@@ -13,5 +13,29 @@
     "tags": {
         "shop": "chemist"
     },
-    "name": "Chemist"
+    "name": "Chemist",
+    "suggestions": [
+        "Rossmann",
+        "Etos",
+        "dm",
+        "Schlecker",
+        "Müller",
+        "Bipa",
+        "Kruidvat",
+        "Boots",
+        "Ihr Platz",
+        "dm-drogerie markt",
+        "Superdrug",
+        "Douglas",
+        "dm Drogeriemarkt",
+        "Farmacity",
+        "Бытовая химия",
+        "Budnikowsky",
+        "Улыбка радуги",
+        "dm drogerie markt",
+        "Впрок",
+        "Walgreens",
+        "ШиК",
+        "101 Drogerie"
+    ]
 }

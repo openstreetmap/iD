@@ -14,5 +14,27 @@
         "amenity": "pharmacy"
     },
     "terms": [],
-    "name": "Pharmacy"
+    "name": "Pharmacy",
+    "suggestions": [
+        "Аптека",
+        "Walgreens",
+        "CVS",
+        "Boots",
+        "Farmacia",
+        "Rite Aid",
+        "Mercury Drug",
+        "Shoppers Drug Mart",
+        "Apteka",
+        "Lloyds Pharmacy",
+        "Löwen-Apotheke",
+        "Apotheke",
+        "Marien-Apotheke",
+        "Adler-Apotheke",
+        "Adler Apotheke",
+        "Sonnen-Apotheke",
+        "Аптечный пункт",
+        "Farmatodo",
+        "Farmacias SalcoBrand",
+        "Stadt-Apotheke"
+    ]
 }

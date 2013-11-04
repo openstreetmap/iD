@@ -13,5 +13,30 @@
     "tags": {
         "shop": "toys"
     },
-    "name": "Toy Store"
+    "name": "Toy Store",
+    "suggestions": [
+        "Детский мир",
+        "La Grande Récré",
+        "Intertoys",
+        "Игрушки",
+        "King Jouet",
+        "Bart Smit",
+        "Dráčik",
+        "Rofu Kinderland",
+        "GameStop",
+        "JouéClub",
+        "Dreamland",
+        "Joué Club",
+        "Дети",
+        "Games Workshop",
+        "Кораблик",
+        "Jumbo",
+        "Early Learning Centre",
+        "Детский Мир",
+        "Spiele Max",
+        "Fun",
+        "Здоровый малыш",
+        "Daiso",
+        "Малыш"
+    ]
 }

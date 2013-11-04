@@ -18,6 +18,8 @@ iD.ui.preset.localized = function(field) {
             .on('blur', change)
             .on('change', change);
 
+        input.call(d3.combobox().fetcher(suggestNames));
+
         var translateButton = selection.selectAll('.localized-add')
             .data([0]);
 
@@ -87,6 +89,38 @@ iD.ui.preset.localized = function(field) {
         var t = {};
         t[key(d.lang)] = d3.select(this).value() || undefined;
         event.change(t);
+    }
+
+    function suggestNames(value, callback) {
+        var suggestions = [];
+        if (value && value.length > 2) {
+            var selected = context.selectedIDs(),
+                entity = context.entity(selected),
+                tags = entity.tags;
+            for (var tag in tags) {
+                var kv = tag + '/' + tags[tag],
+                    preset = iD.data.presets.presets[kv];
+                if (preset && preset.suggestions) {
+                    for (var i = 0; i < preset.suggestions.length; i++) {
+                        var sugg = preset.suggestions[i],
+                            dist = iD.util.editDistance(value, sugg.substring(0, value.length));
+                        if (dist < 4) {
+                            suggestions.push({
+                                title: sugg,
+                                value: sugg,
+                                dist: dist
+                            });
+                        }
+                    }
+                }
+            }
+            suggestions.sort(function(a, b) {
+                return a.dist - b.dist;
+            });
+        }
+
+        suggestions = suggestions.slice(0,3);
+        callback(suggestions);
     }
 
     function fetcher(value, cb) {

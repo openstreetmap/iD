@@ -16,5 +16,31 @@
     "tags": {
         "shop": "garden_centre"
     },
-    "name": "Garden Center"
+    "name": "Garden Center",
+    "suggestions": [
+        "Jardiland",
+        "Gamm Vert",
+        "Dehner",
+        "Botanic",
+        "Point Vert",
+        "Plantagen",
+        "Landi",
+        "Семена",
+        "Intratuin",
+        "Садовод",
+        "Raiffeisen-Markt",
+        "OBI",
+        "Aveve",
+        "Magasin Vert",
+        "Dehner Gartencenter",
+        "Raiffeisen",
+        "Gärtnerei",
+        "Mountfield",
+        "Vivero",
+        "Plantasjen",
+        "Дачник",
+        "Walmart Garden Center",
+        "Усадьба",
+        "Villaverde"
+    ]
 }

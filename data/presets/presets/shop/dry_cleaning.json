@@ -13,5 +13,20 @@
     "tags": {
         "shop": "dry_cleaning"
     },
-    "name": "Dry Cleaners"
+    "name": "Dry Cleaners",
+    "suggestions": [
+        "ホワイト急便",
+        "Химчистка",
+        "Диана",
+        "Pressing",
+        "Reinigung",
+        "Johnsons",
+        "クリーニング",
+        "白洋舎",
+        "Stichweh",
+        "Sauberland",
+        "Sketchley Cleaners",
+        "ポニークリーニング",
+        "5 à Sec"
+    ]
 }

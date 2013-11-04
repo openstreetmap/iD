@@ -13,5 +13,29 @@
     "tags": {
         "shop": "hifi"
     },
-    "name": "Hifi Store"
+    "name": "Hifi Store",
+    "suggestions": [
+        "Best Buy",
+        "Media Markt",
+        "Expert",
+        "Darty",
+        "Radio Shack",
+        "Bang & Olufsen",
+        "Saturn",
+        "Euronics",
+        "Эльдорадо",
+        "Евросеть",
+        "Boulanger",
+        "Связной",
+        "Richer Sounds",
+        "Currys",
+        "Эксперт",
+        "Позитроника",
+        "Gitem",
+        "Staples",
+        "MediMax",
+        "Elgiganten",
+        "DNS",
+        "Comet"
+    ]
 }

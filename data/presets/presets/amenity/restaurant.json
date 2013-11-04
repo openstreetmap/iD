@@ -47,5 +47,32 @@
     "tags": {
         "amenity": "restaurant"
     },
-    "name": "Restaurant"
+    "name": "Restaurant",
+    "suggestions": [
+        "Pizza Hut",
+        "Subway",
+        "Denny's",
+        "Applebee's",
+        "Pizzeria",
+        "Chili's",
+        "IHOP",
+        "Pizza Express",
+        "Olive Garden",
+        "Red Lobster",
+        "Zur Linde",
+        "Buffalo Grill",
+        "McDonald's",
+        "KFC",
+        "Waffle House",
+        "Outback Steakhouse",
+        "Panera Bread",
+        "Krone",
+        "Red Robin",
+        "Nando's",
+        "Cracker Barrel",
+        "Adler",
+        "ガスト",
+        "Buffalo Wild Wings",
+        "Ratskeller"
+    ]
 }
