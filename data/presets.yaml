@@ -251,7 +251,7 @@ en:
       trail_visibility: 
         label: Trail Visibility
       tree_type: 
-        label: Type of tree
+        label: Type
       vending: 
         label: Type of Goods
       water: 

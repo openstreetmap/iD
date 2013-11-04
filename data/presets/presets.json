@@ -3270,8 +3270,8 @@
     },
     "natural/tree": {
         "fields": [
-            "denotation",
-            "tree_type"
+            "tree_type",
+            "denotation"
         ],
         "icon": "park",
         "geometry": [

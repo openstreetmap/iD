@@ -626,7 +626,7 @@
             "conifer",
             "palm"
         ],
-        "label": "Type of tree"
+        "label": "Type"
     },
     "vending": {
         "key": "vending",
