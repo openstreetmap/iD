@@ -748,6 +748,9 @@
             "trail_visibility": {
                 "label": "Trail Visibility"
             },
+            "tree_type": {
+                "label": "Type of tree"
+            },
             "vending": {
                 "label": "Type of Goods"
             },

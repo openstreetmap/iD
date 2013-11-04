@@ -618,6 +618,16 @@
         "type": "combo",
         "label": "Trail Visibility"
     },
+    "tree_type": {
+        "key": "type",
+        "type": "combo",
+        "options": [
+            "broad_leaved",
+            "conifer",
+            "palm"
+        ],
+        "label": "Type of tree"
+    },
     "vending": {
         "key": "vending",
         "type": "combo",
