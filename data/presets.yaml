@@ -547,6 +547,9 @@ en:
       entrance: 
         name: Entrance
         terms: "<translate with synonyms or related terms for 'Entrance', separated by commas>"
+      footway/crossing: 
+        name: Crossing
+        terms: "<translate with synonyms or related terms for 'Crossing', separated by commas>"
       highway: 
         name: Highway
         terms: "<translate with synonyms or related terms for 'Highway', separated by commas>"

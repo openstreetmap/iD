@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "crossing"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "footway",
+        "footway": "crossing"
+    },
+    "terms": [
+        "crosswalk",
+        "zebra crossing"
+    ],
+    "name": "Crossing"
+}

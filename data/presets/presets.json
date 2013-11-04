@@ -1647,6 +1647,23 @@
         ],
         "name": "Entrance"
     },
+    "footway/crossing": {
+        "fields": [
+            "crossing"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "footway",
+            "footway": "crossing"
+        },
+        "terms": [
+            "crosswalk",
+            "zebra crossing"
+        ],
+        "name": "Crossing"
+    },
     "highway": {
         "fields": [
             "highway"
