@@ -209,7 +209,7 @@ iD.ui.Background = function(context) {
             .on('click.set-opacity', setOpacity)
             .html('<div class="select-box"></div>')
             .call(bootstrap.tooltip()
-                .placement('top'))
+                .placement('left'))
             .append('div')
             .attr('class', 'opacity')
             .style('opacity', String);
@@ -272,7 +272,7 @@ iD.ui.Background = function(context) {
         label = gpxLayerItem.append('label')
             .call(bootstrap.tooltip()
                 .title(t('gpx.drag_drop'))
-                .placement('left'));
+                .placement('top'));
 
         label.append('input')
             .attr('type', 'checkbox')
