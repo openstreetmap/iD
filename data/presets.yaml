@@ -552,6 +552,9 @@ en:
       footway/crossing: 
         name: Crossing
         terms: "<translate with synonyms or related terms for 'Crossing', separated by commas>"
+      footway/sidewalk: 
+        name: Sidewalk
+        terms: "<translate with synonyms or related terms for 'Sidewalk', separated by commas>"
       highway: 
         name: Highway
         terms: "<translate with synonyms or related terms for 'Highway', separated by commas>"

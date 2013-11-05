@@ -1154,6 +1154,10 @@
                 "name": "Crossing",
                 "terms": "crosswalk,zebra crossing"
             },
+            "footway/sidewalk": {
+                "name": "Sidewalk",
+                "terms": ""
+            },
             "highway": {
                 "name": "Highway",
                 "terms": ""

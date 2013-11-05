@@ -1664,6 +1664,22 @@
         ],
         "name": "Crossing"
     },
+    "footway/sidewalk": {
+        "fields": [
+            "surface",
+            "lit",
+            "access"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "footway",
+            "footway": "sidewalk"
+        },
+        "terms": [],
+        "name": "Sidewalk"
+    },
     "highway": {
         "fields": [
             "highway"
