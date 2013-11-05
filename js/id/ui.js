@@ -55,7 +55,7 @@ iD.ui = function(context) {
 
         content.append('div')
             .style('display', 'none')
-            .attr('class', 'help-wrap fillL col5 content');
+            .attr('class', 'help-wrap map-overlay fillL col5 content');
 
         var controls = bar.append('div')
             .attr('class', 'map-controls');
