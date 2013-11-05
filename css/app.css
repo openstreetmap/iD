@@ -1824,19 +1824,9 @@ img.wiki-image {
     background: rgba(0, 0, 0, .8);
 }
 
+.map-control > button.active,
 .map-control > button.active:hover {
     background: #7092ff;
-}
-
-.map-overlay {
-    z-index: -1;
-    right: 75%;
-    max-width: 260px;
-    min-width: 210px;
-    position: fixed;
-    left: 30px;
-    display: block;
-    padding: 10px 10px 0 10px;
 }
 
 /* Zoomer */
@@ -1851,22 +1841,12 @@ img.wiki-image {
     border-radius: 4px 0 0 0;
 }
 
-.background-control button.active {
-    border-radius: 0;
-}
-
 .background-control {
     position: relative;
 }
 
-.background-control .map-overlay {
-    position: absolute;
-    top: 0;
-}
-
 .nudge-container {
-    border-top: 1px solid #CCC;
-    margin: 0 -10px;
+    border: 1px solid #CCC;
 }
 
 .background-control .adjustments button:last-child {
@@ -1957,7 +1937,6 @@ img.wiki-image {
     float: left;
     display: block;
     width:20%;
-    border-radius: 0;
     border-right: 1px solid #CCC;
     position: relative;
 }
@@ -2001,8 +1980,8 @@ img.wiki-image {
     height:20px;
     width:82px;
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 50px;
+    top: 20px;
     border: 1px solid #ccc;
 }
 
@@ -2064,19 +2043,22 @@ img.wiki-image {
     border-radius: 0 0 0 4px;
 }
 
-/* Help */
-
-.help-control button {
-    border-radius: 0 0 0 4px;
-}
-
-.help-wrap {
+.map-overlay.content {
     position: fixed;
     top:60px;
     bottom: 30px;
     padding: 20px 50px 20px 20px;
     right: 0;
-    overflow-y: scroll;
+    overflow: auto;
+}
+
+.background-control .map-overlay {
+    z-index: -1;
+}
+/* Help */
+
+.help-control button {
+    border-radius: 0 0 0 4px;
 }
 
 .help-wrap p {
@@ -2700,23 +2682,28 @@ img.wiki-image {
 
 /* Exceptions for tooltip layouts */
 
-/* make tooltips in editor pane dark */
+/* make tooltips in panels dark */
+.map-overlay .tooltip.top .tooltip-arrow,
 .entity-editor-pane .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
 
+.map-overlay .tooltip.bottom .tooltip-arrow,
 .entity-editor-pane .tooltip.bottom .tooltip-arrow {
     border-bottom-color: #000;
 }
 
+.map-overlay .tooltip.left .tooltip-arrow
 .entity-editor-pane .tooltip.left .tooltip-arrow {
     border-left-color: #000;
 }
 
+.map-overlay .tooltip.right .tooltip-arrow,
 .entity-editor-pane .tooltip.right .tooltip-arrow {
     border-right-color: #000;
 }
 
+.map-overlay .tooltip-inner,
 .entity-editor-pane .tooltip-inner {
     background: #000;
     color: #ccc;

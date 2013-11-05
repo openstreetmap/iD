@@ -152,9 +152,6 @@ iD.ui.Help = function(context) {
             return d3.event.stopPropagation();
         });
 
-        selection.on('mousedown.help-inside', function() {
-            return d3.event.stopPropagation();
-        });
     }
 
     return help;
