@@ -7,5 +7,6 @@
     "tags": {
         "building": "garage"
     },
-    "name": "Garage"
+    "name": "Garage",
+    "icon": "warehouse"
 }

@@ -1533,7 +1533,8 @@
         "tags": {
             "building": "garage"
         },
-        "name": "Garage"
+        "name": "Garage",
+        "icon": "warehouse"
     },
     "building/house": {
         "icon": "building",
