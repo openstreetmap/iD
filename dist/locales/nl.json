@@ -402,9 +402,6 @@
             },
             "category-route": {
                 "name": "Route"
-            },
-            "category-water": {
-                "name": "Water"
             }
         },
         "fields": {
@@ -916,8 +913,7 @@
                 "terms": "Markt"
             },
             "amenity/parking": {
-                "name": "Parkeren",
-                "terms": "Parkeerplaats"
+                "name": "Parkeerplaats"
             },
             "amenity/pharmacy": {
                 "name": "Apotheek",
@@ -1253,7 +1249,7 @@
                 "name": "Bouwterrein"
             },
             "landuse/farm": {
-                "name": "Boerderij"
+                "name": "Landbouwgrond"
             },
             "landuse/farmyard": {
                 "name": "Boerenerf"
@@ -1277,7 +1273,7 @@
                 "name": "Mijnbouw"
             },
             "landuse/residential": {
-                "name": "Woningen"
+                "name": "Woongebied"
             },
             "landuse/retail": {
                 "name": "Detailhandel"
@@ -1446,6 +1442,18 @@
             },
             "office": {
                 "name": "Kantoor"
+            },
+            "office/newspaper": {
+                "name": "Krant"
+            },
+            "office/political_party": {
+                "name": "Politieke Partij"
+            },
+            "office/therapist": {
+                "name": "Therapeut"
+            },
+            "office/travel_agent": {
+                "name": "Reisbureau"
             },
             "place": {
                 "name": "Plaats"

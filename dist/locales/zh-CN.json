@@ -259,9 +259,6 @@
             },
             "category-road": {
                 "name": "道路"
-            },
-            "category-water": {
-                "name": "水体"
             }
         },
         "fields": {

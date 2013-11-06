@@ -388,6 +388,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Bygning"
+            },
             "category-landuse": {
                 "name": "Brug af land"
             },
@@ -403,7 +406,10 @@
             "category-route": {
                 "name": "Rute"
             },
-            "category-water": {
+            "category-water-area": {
+                "name": "Vand"
+            },
+            "category-water-line": {
                 "name": "Vand"
             }
         },
@@ -742,6 +748,9 @@
             "trail_visibility": {
                 "label": "Spor synlighed"
             },
+            "tree_type": {
+                "label": "Type"
+            },
             "vending": {
                 "label": "Gods type"
             },
@@ -922,8 +931,8 @@
                 "terms": "Markedsplads"
             },
             "amenity/parking": {
-                "name": "Parkering",
-                "terms": "Parkering, Bilparkering"
+                "name": "Bilparkering",
+                "terms": "Bilparkering"
             },
             "amenity/pharmacy": {
                 "name": "Apotek",
@@ -1140,6 +1149,14 @@
             "entrance": {
                 "name": "Indgang",
                 "terms": "Indgang, Indgangsparti"
+            },
+            "footway/crossing": {
+                "name": "Kryds",
+                "terms": "Kryds"
+            },
+            "footway/sidewalk": {
+                "name": "Fortov",
+                "terms": "Fortov"
             },
             "highway": {
                 "name": "Vej",
@@ -1609,6 +1626,86 @@
                 "name": "Kontor",
                 "terms": "Kontor"
             },
+            "office/accountant": {
+                "name": "Revisor",
+                "terms": "Revisor"
+            },
+            "office/administrative": {
+                "name": "Administrativt kontor",
+                "terms": "Administrativt kontor"
+            },
+            "office/architect": {
+                "name": "Arkitekt",
+                "terms": "Arkitekt, Arkitektfirma"
+            },
+            "office/company": {
+                "name": "Firmakontor",
+                "terms": "Firmakontor, Selskabskonto"
+            },
+            "office/educational_institution": {
+                "name": "Uddannelsesinstitution",
+                "terms": "Uddannelsesinstitution"
+            },
+            "office/employment_agency": {
+                "name": "Arbejdsformidling",
+                "terms": "Arbejdsformidling, Jobcenter"
+            },
+            "office/estate_agent": {
+                "name": "Ejendomsmælger",
+                "terms": "Ejendomsmælger"
+            },
+            "office/financial": {
+                "name": "Finanskontor",
+                "terms": "Finanskontor"
+            },
+            "office/government": {
+                "name": "Statslig kontor",
+                "terms": "Statslig kontor, Styrelse"
+            },
+            "office/insurance": {
+                "name": "Forsikringselskab",
+                "terms": "Forsikringsselskab"
+            },
+            "office/it": {
+                "name": "IT-kontor",
+                "terms": "IT-kontor, IT-firma"
+            },
+            "office/lawyer": {
+                "name": "Advokatkontor",
+                "terms": "Advokatkontor, Advokatfirma"
+            },
+            "office/newspaper": {
+                "name": "Avis",
+                "terms": "Avis"
+            },
+            "office/ngo": {
+                "name": "NGO kontor",
+                "terms": "NGO kontor, NGO"
+            },
+            "office/physician": {
+                "name": "Læge",
+                "terms": "Læge, Doktor"
+            },
+            "office/political_party": {
+                "name": "Politisk parti",
+                "terms": "Politisk parti"
+            },
+            "office/research": {
+                "name": "Forskning",
+                "terms": "Forskning"
+            },
+            "office/telecommunication": {
+                "name": "Teleselskabskontor",
+                "terms": "Teleselskabskontor"
+            },
+            "office/therapist": {
+                "name": "Terapeut",
+                "terms": "Terapeut"
+            },
+            "office/travel_agent": {
+                "name": "Rejsebureau",
+                "terms": "Rejseselskab, Rejsebureau"
+            },
             "place": {
                 "name": "Lokalitet",
                 "terms": "Lokalitet, Sted"
@@ -1654,6 +1751,10 @@
                 "terms": "Kraftværk"
             },
             "power/line": {
+                "name": "Elledning",
+                "terms": "Elledning"
+            },
+            "power/minor_line": {
                 "name": "Elledning",
                 "terms": "Elledning"
             },

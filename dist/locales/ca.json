@@ -261,6 +261,7 @@
         "none": "Cap",
         "custom": "Personalitza",
         "custom_prompt": "Introdueix una plantilla de casella. Els paràmetres vàlids són {z}, {x}, {y} per a l'esquema Z/X/Y i  {u} per a l'esquema quadtile.",
+        "fix_misalignment": "Corregir la alineació",
         "reset": "reinicia"
     },
     "restore": {
@@ -283,7 +284,7 @@
         "view_on_osm": "Mostra-ho a OSM",
         "facebook": "Comparteix a Facebook",
         "twitter": "Comparteix al Twitter",
-        "google": "Comparteix al Google+",
+        "google": "Comparteix a Google+",
         "help_html": "Els canvis haurien d'aparèxier a la capa \"Estàndard\" en pocs minuts. Altres capes i algunes característiques, poden trigar més temps.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detalls</a>).\n"
     },
     "confirm": {
@@ -401,9 +402,6 @@
             },
             "category-route": {
                 "name": "Ruta"
-            },
-            "category-water": {
-                "name": "Aigua"
             }
         },
         "fields": {
@@ -741,6 +739,9 @@
             "trail_visibility": {
                 "label": "Visibilitat del camí"
             },
+            "tree_type": {
+                "label": "Tipus"
+            },
             "vending": {
                 "label": "Tipus de mercaderies"
             },
@@ -919,8 +920,7 @@
                 "terms": "Mercat, Mercat veïnal, Mercat de carrer"
             },
             "amenity/parking": {
-                "name": "Aparcament",
-                "terms": "Aparcament, Lloc per a estacionar, Lloc d'estacionament limitat, cotxera, cotxeria, garatge, parking, pàrquing, Lloc per aparcar, Parada"
+                "name": "Aparcament"
             },
             "amenity/pharmacy": {
                 "name": "Farmàcia",
@@ -1122,6 +1122,12 @@
             },
             "entrance": {
                 "name": "Entrada"
+            },
+            "footway/crossing": {
+                "name": "Cruïlla"
+            },
+            "footway/sidewalk": {
+                "name": "Vorera"
             },
             "highway": {
                 "name": "Via"
@@ -1476,6 +1482,66 @@
             "office": {
                 "name": "Oficines"
             },
+            "office/accountant": {
+                "name": "Contable"
+            },
+            "office/administrative": {
+                "name": "Oficina de tràmits locals"
+            },
+            "office/architect": {
+                "name": "Arquitecte"
+            },
+            "office/company": {
+                "name": "Oficines de companyia"
+            },
+            "office/educational_institution": {
+                "name": "Institució Educativa"
+            },
+            "office/employment_agency": {
+                "name": "Oficina de treball"
+            },
+            "office/estate_agent": {
+                "name": "Oficina d'agència immobiliària"
+            },
+            "office/financial": {
+                "name": "Oficina financera"
+            },
+            "office/government": {
+                "name": "Oficina governamental"
+            },
+            "office/insurance": {
+                "name": "Oficina de companyia asseguradora"
+            },
+            "office/it": {
+                "name": "Oficina d'informàtic/a"
+            },
+            "office/lawyer": {
+                "name": "Bufet d'advocats"
+            },
+            "office/newspaper": {
+                "name": "Diari"
+            },
+            "office/ngo": {
+                "name": "Oficina d'ONG"
+            },
+            "office/physician": {
+                "name": "Fisioterapeuta"
+            },
+            "office/political_party": {
+                "name": "Local de partit polític"
+            },
+            "office/research": {
+                "name": "Oficines d'R+D"
+            },
+            "office/telecommunication": {
+                "name": "Oficina de telecomunicacions"
+            },
+            "office/therapist": {
+                "name": "Terapeuta"
+            },
+            "office/travel_agent": {
+                "name": "Agència de viatges"
+            },
             "place": {
                 "name": "Lloc"
             },
@@ -1511,6 +1577,9 @@
             },
             "power/line": {
                 "name": "Línia elèctrica"
+            },
+            "power/minor_line": {
+                "name": "Línia elèctrica de baixa tensió"
             },
             "power/pole": {
                 "name": "Piló de línia elèctrica"
@@ -1697,6 +1766,9 @@
             },
             "shop/pet": {
                 "name": "Botiga d'animals"
+            },
+            "shop/photo": {
+                "name": "Botiga de fotografia"
             },
             "shop/shoes": {
                 "name": "Sabateria"

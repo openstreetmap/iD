@@ -401,9 +401,6 @@
             },
             "category-route": {
                 "name": "Маршрути"
-            },
-            "category-water": {
-                "name": "Вода"
             }
         },
         "fields": {
@@ -919,10 +916,6 @@
             "amenity/marketplace": {
                 "name": "Ринок",
                 "terms": "Marketplace, hbyjr,базар,базарна площа"
-            },
-            "amenity/parking": {
-                "name": "Стоянка",
-                "terms": "Parking, cnjzyrf,парковка,паркування"
             },
             "amenity/pharmacy": {
                 "name": "Аптека",
@@ -1604,6 +1597,30 @@
                 "name": "Офіс",
                 "terms": "Office,jasc"
             },
+            "office/accountant": {
+                "name": "Бухгалтерська або аудиторська фірма",
+                "terms": "Бухгалтерська або аудиторська фірма, eufknthcmrf fj felbnjhcmrf ashvf, Accountant"
+            },
+            "office/architect": {
+                "name": "Архітектурне або дизайнерське бюро",
+                "terms": "архітектор, Архітектурне або дизайнерське бюро, fhsntrnehyt fj lbpfqythcmrt hj, Architect"
+            },
+            "office/company": {
+                "name": "Офіс компанії",
+                "terms": "фірма, підприємство, контора, бюро, юридична особа, Офіс компанії, jasc rjvgfys, Company Office"
+            },
+            "office/educational_institution": {
+                "name": "Офіс освітнього закладу",
+                "terms": "Офіс освітнього закладу, jasc jcdsnymjuj pfrkfle, Educational Institution"
+            },
+            "office/employment_agency": {
+                "name": "Кадрова агенція",
+                "terms": "працевлаштування, робота, пошук роботи, рекрутингова агенція, Кадрова агенція, rflhjdf futywsz, Employment Agency"
+            },
+            "office/estate_agent": {
+                "name": "Агенція з нерухомості",
+                "terms": "ріелтор, Агенція з нерухомості, futywsz p ythejvjcns, Real Estate Office"
+            },
             "place": {
                 "name": "Місцевість",
                 "terms": "Place,vscwtdscnm"
@@ -1649,8 +1666,12 @@
                 "terms": "Power Generator,tktrnhjcnfywsz"
             },
             "power/line": {
-                "name": "Лінія електропередач",
-                "terms": "Power Line,ksysz tktrnhjgthtlfx"
+                "name": "Лінія електропередачі високої напруги",
+                "terms": "Power Line,ksysz tktrnhjgthtlfxs dbcjrj yfgheub, Лінія електропередачі високої напруги, ЛЕП"
+            },
+            "power/minor_line": {
+                "name": "Лінія електропередачі середньої напруги",
+                "terms": "Minor Power Line, ksysz tktrnhjgthtlfxs cthtlymj yfghueb, Лінія електропередачі середньої напруги, ЛЕП"
             },
             "power/pole": {
                 "name": "Опора",
@@ -1899,6 +1920,10 @@
             "shop/pet": {
                 "name": "Товари для тварин",
                 "terms": "Pet Store,njdfhb lkz ndfhby"
+            },
+            "shop/photo": {
+                "name": "Фототовари",
+                "terms": "Photography Store, ajnjnjdfhb"
             },
             "shop/shoes": {
                 "name": "Взуття",

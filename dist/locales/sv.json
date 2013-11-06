@@ -623,9 +623,6 @@
             "amenity/marketplace": {
                 "name": "Maknadsplats"
             },
-            "amenity/parking": {
-                "name": "Parkering"
-            },
             "amenity/pharmacy": {
                 "name": "Läkemedel"
             },

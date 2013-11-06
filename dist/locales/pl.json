@@ -402,9 +402,6 @@
             },
             "category-route": {
                 "name": "Trasa"
-            },
-            "category-water": {
-                "name": "Woda"
             }
         },
         "fields": {
@@ -916,10 +913,6 @@
             "amenity/marketplace": {
                 "name": "Targowisko",
                 "terms": "targowisko,targ,rynek,giełda"
-            },
-            "amenity/parking": {
-                "name": "Parking",
-                "terms": "parking,postój"
             },
             "amenity/pharmacy": {
                 "name": "Apteka",

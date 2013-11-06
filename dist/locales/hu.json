@@ -394,9 +394,6 @@
             },
             "category-route": {
                 "name": "Útvonal"
-            },
-            "category-water": {
-                "name": "Víz"
             }
         },
         "fields": {
@@ -868,9 +865,6 @@
             },
             "amenity/marketplace": {
                 "name": "Piac"
-            },
-            "amenity/parking": {
-                "name": "Parkoló"
             },
             "amenity/pharmacy": {
                 "name": "Gyógyszertár"

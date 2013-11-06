@@ -361,9 +361,6 @@
             },
             "category-route": {
                 "name": "Leið"
-            },
-            "category-water": {
-                "name": "Vatn"
             }
         },
         "fields": {
@@ -798,9 +795,6 @@
             },
             "amenity/marketplace": {
                 "name": "Markaður"
-            },
-            "amenity/parking": {
-                "name": "Bílastæði"
             },
             "amenity/pharmacy": {
                 "name": "Lyfjaverslun"

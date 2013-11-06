@@ -401,9 +401,6 @@
             },
             "category-route": {
                 "name": "Ruta"
-            },
-            "category-water": {
-                "name": "Lámina de agua"
             }
         },
         "fields": {
@@ -917,10 +914,6 @@
             "amenity/marketplace": {
                 "name": "Mercado",
                 "terms": "mercado, mercadillo"
-            },
-            "amenity/parking": {
-                "name": "Aparcamiento",
-                "terms": "aparcamiento,estacionamiento, parking, garaje"
             },
             "amenity/pharmacy": {
                 "name": "Farmacia",
@@ -1723,8 +1716,8 @@
                 "name": "Licorería"
             },
             "shop/bakery": {
-                "name": "Panadería",
-                "terms": "panadería, horno, tahona, tienda, pastelería"
+                "name": "Panadería o pastelería",
+                "terms": "panadería, horno, tahona, tienda, pastelería, confitería, pastel, pan, bollería, bollo"
             },
             "shop/beauty": {
                 "name": "Salón de belleza"

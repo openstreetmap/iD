@@ -402,9 +402,6 @@
             },
             "category-route": {
                 "name": "Rota"
-            },
-            "category-water": {
-                "name": "Água"
             }
         },
         "fields": {
@@ -920,10 +917,6 @@
             "amenity/marketplace": {
                 "name": "Mercado",
                 "terms": "Mercado"
-            },
-            "amenity/parking": {
-                "name": "Estacionamento",
-                "terms": "Estacionamento"
             },
             "amenity/pharmacy": {
                 "name": "Farmácia",
@@ -1904,6 +1897,10 @@
             "shop/pet": {
                 "name": "Pet Shop",
                 "terms": "Pet Shop"
+            },
+            "shop/photo": {
+                "name": "Loja de Fotografia",
+                "terms": "Loja de Fotografia"
             },
             "shop/shoes": {
                 "name": "Loja de Calçados",

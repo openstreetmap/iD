@@ -516,9 +516,6 @@
             "amenity/marketplace": {
                 "name": "Mercáu"
             },
-            "amenity/parking": {
-                "name": "Aparcaderu"
-            },
             "amenity/pharmacy": {
                 "name": "Farmacia"
             },

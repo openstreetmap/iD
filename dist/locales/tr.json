@@ -596,9 +596,6 @@
             "amenity/marketplace": {
                 "name": "Pazar Yeri"
             },
-            "amenity/parking": {
-                "name": "Park Alanı"
-            },
             "amenity/pharmacy": {
                 "name": "Eczane"
             },

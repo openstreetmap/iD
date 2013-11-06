@@ -353,9 +353,6 @@
             },
             "category-route": {
                 "name": "Маршрути"
-            },
-            "category-water": {
-                "name": "Води"
             }
         },
         "fields": {
@@ -791,9 +788,6 @@
             },
             "amenity/marketplace": {
                 "name": "Пазар"
-            },
-            "amenity/parking": {
-                "name": "Паркинг"
             },
             "amenity/pharmacy": {
                 "name": "Аптека"

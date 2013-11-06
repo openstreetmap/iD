@@ -385,9 +385,6 @@
             },
             "category-route": {
                 "name": "Reitti"
-            },
-            "category-water": {
-                "name": "Vesi"
             }
         },
         "fields": {
@@ -856,10 +853,6 @@
             },
             "amenity/marketplace": {
                 "name": "Tori"
-            },
-            "amenity/parking": {
-                "name": "Pysäköintialue",
-                "terms": "pysäköinti, parkkipaikka, pysäköintipaikka, parkki, pysäköintitalo, parkkitalo, autoparkki, auto"
             },
             "amenity/pharmacy": {
                 "name": "Apteekki",

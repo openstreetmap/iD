@@ -240,6 +240,7 @@
         "none": "Puudub",
         "custom": "Kohandatud",
         "custom_prompt": "Sisesta kohandatud tausta URL. Kasutatavad muutujad on {z}, {x}, {y} Z/X/Y skeemi jaoks ja {u} quadtile skeemi jaoks.",
+        "fix_misalignment": "Korrigeeri nihet",
         "reset": "lähtesta"
     },
     "restore": {
@@ -344,9 +345,6 @@
             },
             "category-road": {
                 "name": "Tee"
-            },
-            "category-water": {
-                "name": "Vesi"
             }
         },
         "fields": {
@@ -387,7 +385,11 @@
             "capacity": {
                 "label": "Mahtutavus"
             },
+            "cardinal_direction": {
+                "label": "Suund"
+            },
             "clock_direction": {
+                "label": "Suund",
                 "options": {
                     "clockwise": "Kellasuunas",
                     "anticlockwise": "Kella vastassuunas"
@@ -467,6 +469,9 @@
             "park_ride": {
                 "label": "Pargi ja Reisi"
             },
+            "parking": {
+                "label": "Tüüp"
+            },
             "phone": {
                 "label": "Telefon"
             },
@@ -500,7 +505,7 @@
                 "placeholder": "http://näidis24.ee/"
             },
             "wikipedia": {
-                "label": "Wikipeedia"
+                "label": "Vikipeedia"
             }
         },
         "presets": {
@@ -581,9 +586,6 @@
             },
             "amenity/marketplace": {
                 "name": "Turg"
-            },
-            "amenity/parking": {
-                "name": "Parkla"
             },
             "amenity/pharmacy": {
                 "name": "Apteek"
@@ -714,6 +716,9 @@
             "highway/motorway": {
                 "name": "Kiirtee"
             },
+            "highway/motorway_junction": {
+                "name": "Kiirtee liiklussõlm"
+            },
             "highway/path": {
                 "name": "Rada"
             },
@@ -722,6 +727,9 @@
             },
             "highway/primary": {
                 "name": "Põhimaantee"
+            },
+            "highway/residential": {
+                "name": "Elamupiikonna tänav"
             },
             "highway/secondary": {
                 "name": "Tugimaantee"
@@ -784,7 +792,7 @@
                 "name": "Karjäär"
             },
             "landuse/residential": {
-                "name": "Elamurajoon"
+                "name": "Elamupiirkond"
             },
             "landuse/retail": {
                 "name": "Kaubanduslik"
@@ -911,6 +919,9 @@
             },
             "place/island": {
                 "name": "Saar"
+            },
+            "place/town": {
+                "name": "Linn"
             },
             "place/village": {
                 "name": "Küla"

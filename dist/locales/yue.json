@@ -1,0 +1,2231 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "範圍",
+            "description": "地圖度，加園、屋宇、湖或者其他範圍入去。",
+            "tail": "要畫範圍，諸如園、湖屋，撳地圖先，先至去畫。"
+        },
+        "add_line": {
+            "title": "綫",
+            "description": "地圖度，加公路、街、行人徑、水道或者其他綫。",
+            "tail": "地圖度撳一下，畫路、徑、或者路綫。"
+        },
+        "add_point": {
+            "title": "處",
+            "description": "地圖上加酒樓、紀念碑、郵筒或者其他處。",
+            "tail": "撳地圖加處"
+        },
+        "browse": {
+            "title": "周圍睇",
+            "description": "地圖放大睇"
+        },
+        "draw_area": {
+            "tail": "撳下加節入你個範圍。撳第一節去完成範圍。"
+        },
+        "draw_line": {
+            "tail": "撳一下去加多幾節落條綫。掹其他綫，駁去佢哋度，同快撳兩下，完咗條綫。"
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "處加咗",
+                "vertex": "道度加節",
+                "relation": "關聯加咗。"
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "綫起咗。",
+                "area": "範圍起咗。"
+            }
+        },
+        "continue": {
+            "key": "A",
+            "title": "繼續",
+            "description": "續條綫。",
+            "not_eligible": "爾度無綫可以可續。",
+            "multiple": "爾度幾條綫可繼續。揀一條綫，咁住Shift掣，撳住佢揀佢。",
+            "annotation": {
+                "line": "綫續咗。",
+                "area": "範圍續咗。"
+            }
+        },
+        "cancel_draw": {
+            "annotation": "唔畫。"
+        },
+        "change_role": {
+            "annotation": "改咗關聯成員嘅作用。"
+        },
+        "change_tags": {
+            "annotation": "籤改咗。"
+        },
+        "circularize": {
+            "title": "整圓",
+            "description": {
+                "line": "整圓條綫",
+                "area": "整圓範圍"
+            },
+            "key": "O",
+            "annotation": {
+                "line": "整圓條綫。",
+                "area": "整圓範圍。"
+            },
+            "not_closed": "無得整圓，根本唔係圈。"
+        },
+        "orthogonalize": {
+            "title": "四方",
+            "description": {
+                "line": "整方個綫角",
+                "area": "整方範圍角"
+            },
+            "key": "S",
+            "annotation": {
+                "line": "整方咗綫角。",
+                "area": "整方咗範圍角。"
+            },
+            "not_squarish": "佢太唔似方，整唔到方。"
+        },
+        "straighten": {
+            "title": "拉直",
+            "description": "拉直條綫",
+            "key": "S",
+            "annotation": "條綫拉直咗。",
+            "too_bendy": "條綫太彎，拉直唔到。"
+        },
+        "delete": {
+            "title": "刪",
+            "description": "地圖度拎走佢。",
+            "annotation": {
+                "point": "刪咗處。",
+                "vertex": "道度刪咗節。",
+                "line": "刪咗綫。",
+                "area": "刪咗範圍。",
+                "relation": "刪咗關聯。",
+                "multiple": "刪咗物體{n}個。"
+            },
+            "incomplete_relation": "此地貌無得刪走，皆因佢未傳晒落來。"
+        },
+        "add_member": {
+            "annotation": "加咗成員入關聯。"
+        },
+        "delete_member": {
+            "annotation": "拎走咗關聯成員。"
+        },
+        "connect": {
+            "annotation": {
+                "point": "駁咗道去嗰處。",
+                "vertex": "駁咗道去其他。",
+                "line": "駁咗道去綫。",
+                "area": "駁咗道去範圍。"
+            }
+        },
+        "disconnect": {
+            "title": "掹開",
+            "description": "此綫或者範圍等，全部掹開。",
+            "key": "D",
+            "annotation": "綫或範圍，經已掹開咗。",
+            "not_connected": "爾度唔够綫或者範圍去掹開。"
+        },
+        "merge": {
+            "title": "併",
+            "description": "併埋爾啲綫。",
+            "key": "C",
+            "annotation": "併咗綫{n}條。 ",
+            "not_eligible": "爾啲地貌，無得併埋。",
+            "not_adjacent": "爾啲綫無得掹開，根本無駁埋。",
+            "restriction": "爾啲綫併唔到，當中至少一個，屬於{relation}關聯。"
+        },
+        "move": {
+            "title": "搬",
+            "description": "搬爾個去另第度。",
+            "key": "M",
+            "annotation": {
+                "point": "搬一點",
+                "vertex": "道度搬咗節。",
+                "line": "搬咗條綫。",
+                "area": "搬咗範圍。",
+                "multiple": "搬物體幾個。"
+            },
+            "incomplete_relation": "此地貌無得搬，皆因佢未傳晒落來。"
+        },
+        "rotate": {
+            "title": "擰轉",
+            "description": "圍住中心點，擰轉爾個物體。",
+            "key": "R",
+            "annotation": {
+                "line": "條綫擰轉咗。",
+                "area": "範圍擰轉咗。"
+            }
+        },
+        "reverse": {
+            "title": "倒向。",
+            "description": "整到修綫方向相反。",
+            "key": "V",
+            "annotation": "條綫方向倒咗轉。"
+        },
+        "split": {
+            "title": "斬開",
+            "description": {
+                "line": "爾節度，斬綫爲二。",
+                "area": "斬界，一分爲二。",
+                "multiple": "爾節度，斬綫或範圍界綫，一分爲二。"
+            },
+            "key": "X",
+            "annotation": {
+                "line": "斬開條綫。",
+                "area": "斬開範圍界綫。",
+                "multiple": "斬開綫或範圍界綫{n}條。"
+            },
+            "not_eligible": "綫無得喺頭尾度斬。",
+            "multiple_ways": "爾處太多綫，無得斬開。"
+        }
+    },
+    "undo": {
+        "tooltip": "還原：{action}",
+        "nothing": "無嘢好還原"
+    },
+    "redo": {
+        "tooltip": "重做：{action}",
+        "nothing": "無嘢好重做"
+    },
+    "tooltip_keyhint": "快掣",
+    "browser_notice": "爾個編輯，只用於Firefox、Chrome、Safari、Opera以及Internet Explorer 版本九或以上。唔該換新瀏覽器，或者用Potlach2去改地圖。",
+    "translate": {
+        "translate": "繙",
+        "localized_translation_label": "各話名",
+        "localized_translation_language": "揀話",
+        "localized_translation_name": "名"
+    },
+    "zoom_in_edit": "放大去改",
+    "logout": "簽走",
+    "loading_auth": "駁上去公家街圖⋯⋯",
+    "report_a_bug": "報告有錯",
+    "status": {
+        "error": "駁唔通程式接口。",
+        "offline": "程式接口收工。遲啲再改啦。",
+        "readonly": "程式接口，只讀不寫。你要等下先記到你修改。"
+    },
+    "commit": {
+        "title": "記低修改",
+        "description_placeholder": "簡述你爾則稿件",
+        "message_label": "遞交片語",
+        "upload_explanation": "你嘅修改，傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
+        "upload_explanation_with_user": "你以{user}名義，修改傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
+        "save": "記",
+        "cancel": "唔記",
+        "warnings": "警告",
+        "modified": "改咗",
+        "deleted": "刪咗",
+        "created": "開咗"
+    },
+    "contributors": {
+        "list": "有{users}修改",
+        "truncated_list": "有{users}及其他{count}修改"
+    },
+    "geocoder": {
+        "search": "揀世界⋯⋯",
+        "no_results_visible": "圖內可見之處，搵唔到。",
+        "no_results_worldwide": "無嘢搵到"
+    },
+    "geolocate": {
+        "title": "標出我位置"
+    },
+    "inspector": {
+        "no_documentation_combination": "未有文件解爾支籤",
+        "no_documentation_key": "未有文件解依個圖例。",
+        "show_more": "睇多啲",
+        "view_on_osm": "入openstreetmap.org睇",
+        "all_tags": "所有籤",
+        "all_members": "所有成員",
+        "all_relations": "所有關聯",
+        "new_relation": "開新關聯⋯⋯",
+        "role": "作用",
+        "choose": "揀地貌",
+        "results": "{search}搵出{n}項",
+        "reference": "入公家街圖百科睇",
+        "back_tooltip": "轉地貌",
+        "remove": "移走",
+        "search": "搵",
+        "multiselect": "揀咗嘅項目",
+        "unknown": "未知",
+        "incomplete": "<無傳落來>",
+        "feature_list": "搵地貌",
+        "edit": "改地貌",
+        "none": "無"
+    },
+    "background": {
+        "title": "背景",
+        "description": "背景設定",
+        "percent_brightness": "{opacity}% 光",
+        "none": "無",
+        "custom": "自訂",
+        "custom_prompt": "入個格模。有效字符係{z}、{x}、{y}對應Z/X/Y制及{u}對應四分格制。",
+        "fix_misalignment": "校正對位誤差",
+        "reset": "重設"
+    },
+    "restore": {
+        "heading": "你有修改未記妥",
+        "description": "要唔要囘復上次未記妥之修改？",
+        "restore": "囘復",
+        "reset": "重新開始"
+    },
+    "save": {
+        "title": "記低",
+        "help": "修改放上公家街圖，等其他用者都睇到。",
+        "no_changes": "無修改可記",
+        "error": "記上去時出錯",
+        "uploading": "修改傳上公家街圖。",
+        "unsaved_changes": "你有修改未記妥"
+    },
+    "success": {
+        "edited_osm": "改公家街圖！",
+        "just_edited": "你啱啱改咗公家街圖！",
+        "view_on_osm": "入公家街圖睇",
+        "facebook": "放上Facebook",
+        "twitter": "放上Twitter",
+        "google": "放上Google+",
+        "help_html": "你所改嘅，幾分鐘後會送到普通層。其他層，或者某啲地貌，要用多啲時間。\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>詳解</a>)。\n"
+    },
+    "confirm": {
+        "okay": "得"
+    },
+    "splash": {
+        "welcome": "歡迎來到艾第公家街圖造圖。",
+        "text": "艾第爾件架生，易用之時，亦功用多多，用來投稿修改去，世界至好，任用嘅世界地圖片。現時版本係{version}。想多啲資料，睇下 {website}同埋去{github}報告出錯。",
+        "walkthrough": "開始逐步解釋",
+        "start": "卽改"
+    },
+    "source_switch": {
+        "live": "運行之中",
+        "lose_changes": "你未有修改未記妥。轉用地圖電腦，就會無咗修改。你真係要轉地圖電腦？",
+        "dev": "製作之中"
+    },
+    "tag_reference": {
+        "description": "描述",
+        "on_wiki": "喺wiki.osm.org度嘅{tag}",
+        "used_with": "同{type}一齊用"
+    },
+    "validations": {
+        "untagged_point": "未有籤嘅點",
+        "untagged_line": "冇籤嘅綫",
+        "untagged_area": "冇籤嘅範圍",
+        "many_deletions": "你要刪走物件{n}個。你真係想咁做？咁人人用開嘅openstreetmap.org地圖入便，都會刪走埋。",
+        "tag_suggests_area": "{tag}籤話條綫係範圍，實情佢唔係。",
+        "deprecated_tags": "廢籤：{tags}"
+    },
+    "zoom": {
+        "in": "放大",
+        "out": "縮細"
+    },
+    "cannot_zoom": "今下模式，無得再縮。",
+    "gpx": {
+        "local_layer": "本地 GPX 檔案",
+        "drag_drop": "拉個 .gpx擋入來爾版。或者，撳右邊粒掣揀檔。",
+        "zoom": "較到GPX路徑大細",
+        "browse": "望下有乜 .gpx 檔"
+    },
+    "help": {
+        "title": "指南",
+        "help": "# 指南\n\n爾個編器，係爲 [公家街圖](http://www.openstreetmap.org/)而做。 有世界地圖，任用亦改得。你可以用佢，喺你處加嘢改嘢。如此一來，裏面嘅料，人人可以任用。\n\n邊個用公家街圖，都見得到你整嘅地圖。要改得到，就要開定個\n[免費公家街圖戶口](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) 係合作而成， [程式碼放喺 GitHub](https://github.com/systemed/iD).\n",
+        "editing_saving": "# 改同記\n\n爾個程式，係上網用嘅，你用到佢，就係喺你上緊嘅網站上面。\n\n### 㨂地貌\n\n㨂地圖地貌，好似路，名勝，就喺地圖撳佢一下。咁佢就會顯眼，同埋有一大欄，講佢明細。亦有選單，你可以點地貌。\n\n要揀多個一種，就撳實【Shift】掣先。一係跟手撳落地貌，揀你想揀。一係拖個長方形出來，包住佢嘅點都着咗。\n\n### 記修改\n\n你修改路、屋宇及地方之時，爾啲修改只喺你部電腦上面，直至你記上地圖電腦。唔好擔心，若你出錯，你可以撳還原掣還原，重做掣重做。\n\n撳【記低】就完成一組修改。畀個例，你畫完個鎮，又會去畫另一度。咁你有機會去校閱你改過乜。同埋，若然有乜改得唔妥，程式亦會有用提議同警告。\n\n若然樣樣都妥當，咁你就打啲解釋，講下你改過乜，之後【記低】送修改上 [OpenStreetMap.org](http://www.openstreetmap.org/)。如此一來，人人都會睇到，等人再以此建立同改善。\n\n若你一次改唔晒，你都可以閂咗程式，下次返來，用同一部電腦同瀏覽器，程式會畀機會你囘復修改。\n",
+        "roads": "# 路\n\n用個程式，你開得，整得，刪得啲路。路有幾種，徑、公路、山徑、單車徑等等，乜嘢相交一段都要畫面出來。\n\n### 揀\n\n撳一下條路，就揀到。個外形會見得明顯，亦有架生仔選單，外加邊註欄有多啲路嘅資料。\n\n### 改\n\n你耐不耐見到條路，同背景相，或全球定位系統行縱，並唔一致。你要調較到佢哋啱位。\n\n首先撳一下，你想改嗰條路。咁條路就會特別顯眼，同埋有一點點畀你畀拉到啱位。若你想加多幾點，更加仔細，就喺條路上面，無節嘅地方，快撳兩下，咁就會開多一節。\n\n若然條路要駁去其他路，之但係無駁妥，咁你就拖住一點，拉到其他路，整到聯埋。地圖來講，駁通啲路係咁緊要，同埋駕車搵路亦必須。\n\n你亦可以用【搬】爾個架生，或撳快掣【M】，一次過搬成條路，再撳多下，就記好搬動。\n\n### 刪\n\n若成條路都唔啱，你亦要望下衞星相，以及最好親身確認，佢真係唔喺度，你就可以刪咗佢，卽係由地圖度搬走。小心啲刪走地貌，同其他改法一樣，有時地貌係人人都見到，但係衞星相過晒時，新路未必見。\n\n你刪條路，就撳佢一下，揀咗佢。跟住撳垃圾筒公仔，或者撳快掣【Delete】。\n\n### 開新\n\n要搵地方，緊係要有條路，係咪？去程式左上角，咁住【綫】個公仔，或者撳快掣【2】，就開始畫綫。\n\n地圖度，撳住路頭個位開始畫。若然條路由原路分出，就由原路上面路口位，撳一下開始。\n\n撳嘅點，應該人係跟實條路，跟䘙星相，或跟全球定位系統行蹤。若果你條路，會橫過另一條，你就喺路口位，撳落另一條路上，就起咗個交叉點。你要畫完，就快撳兩下。又或者咁鍵盤【Return】或【Enter】掣。\n",
+        "gps": "# 全球定位系統\n\n數據取自全球定位系統，係公家街圖至可靠來源。爾個造圖程式，用到本機行蹤，卽放你電腦嘅【.gpx】檔案。你收集全球定位系統行蹤，取自智能電話程式，或者個人全球定位系統儀。\n\n點去用全球定位系統測量，睇下[用全球定位系統測量](http://learnosm.org/en/beginner/using-gps/).\n\n用GPX途徑製圖，拖GPX檔案落造圖程式。若然讀得明，佢會加入地圖，用鮮綠綫顯現。喺右邊，撳落【背景設定】選單。咁就開得，閂得，放大縮細新嘅GPX層。\n\n爾個GPX途徑，唔會直上公家街圖，最好用法，就係用佢製圖。按此加新地貌，亦可[傳上公家街圖](http://www.openstreetmap.org/trace/create)以作其他用途。\n",
+        "imagery": "# 相\n\n航空相係地圖要源。佢哋飛機飛過，衞星望落等組合。網上有任用來源，可供使用。就喺右邊，【背景設定】之內。\n\n程式預先已有 [兵地圖](http://www.bing.com/maps/) 䘙星相層。你放大縮細去某啲地方，就有其他可用。某幾國，如美國、法國、丹麥等，國內某啲地方，有極精細嘅相。\n\n相有時同地圖資料有差距，爾個係供相者出錯。若你睇到多多路與背景移咗位，就唔好郁住。將啲相校好個位，同地圖資料吻合。要咁做，就去背景設定，撳【校正對位誤差】校好咗先。\n",
+        "addresses": "# 地埗\n\n地埗，對地圖好有用嘅資料。\n\n雖則地埗通常係街嘅一部份，不過喺公家街圖入面，會記爲沿街屋宇及地方屬性。\n\n你可以加地埗落地方，畫成屋宇界圖，亦可以畫成單處。最好來源，就係視身街一轉，或者靠個人知識。之但係，同其他地貌一樣，禁止抄其他商用來源，包括谷歌地圖。\n",
+        "inspector": "# 用明細一覽\n\n明細一覽係全版左邊嘅部份，畀你改個地貌嘅詳細資料。\n\n### 揀地貌\n\n無論你加處、綫或者範圍，你要揀係乜地貌，如公路定住宅路，超級市場定茶座。明細一覽上面有掣，揀你要嘅地貌，同埋你亦可以格中，一邊打一邊搵。\n\n個個地貌製，右邊【i】字，撳落有細解。撳落個掣度就揀到地貌。\n\n### 用表及改籤\n\n你㨂完地貌，或者你㨂嘅，早已入咗地貌，咁明細一覽，就有一欄欄，講地貌詳細資料，例如名同地埗咁。\n\n欄下面，你會見到啲細公仔，係用來加其他明細，好似 [維基百科](http://www.wikipedia.org/) 資料、行唔行到輪輢等等。\n\n明細一覽個底，撳【所有籤】，就可以隨意加其他籤落去。\n[籤料](http://taginfo.openstreetmap.org/) 係極有用嘅地方知道唔通籤嘅配搭。\n\n你喺明細一覽改嘅，都會自動送上地圖。你亦可以還原修改，只要咁下【還原】掣。\n",
+        "buildings": "# 屋宇\n\n公家街圖有屋宇資料庫，全球至大。你可以幫手添啲，亦可改善資料。\n\n### 揀\n\n你要揀屋宇，咁邊佢條邊就得。間屋宇會顯眼啲，亦會有架生仔選單，同埋邊註欄講屋宇多啲資料。\n\n### 改\n\n有陣時屋宇放唔啱，又或者放錯籤。\n\n要搬成間屋宇，揀佢先，跟手用【搬】架生。郁滑鼠就移屋宇，搬啱就咁撳一下。\n\n想改屋宇個形，邊度撳一節，拖住一節到啱位爲止。\n\n### 開新\n\n時時有人問，加新屋宇落地圖，而公家街圖又可以係點，又可以加形，咁邊個好啲呢？原則就係，_用得形就用形_，以及屋宇個形內，加公司、屋企、方便設施同其他種種，喺屋宇內有嘅嘢。\n\n畫新屋宇個形，喺左上面撳【範圍】掣，畫完就撳鍵盤【Return】掣，或者撳返去第一節，咁個形就埋口。\n\n### 刪\n\n若成間屋宇都唔啱，你亦要望下衞星相，以及最好親身確認，佢真係唔喺度，你就可以刪咗佢，卽係由地圖度搬走。小心啲刪走地貌，同其他改法一樣，有時地貌係人人都見到，但係衞星相過晒時，新屋宇未必見。\n\n你要刪咗間屋宇，就撳佢揀佢。然後撳垃圾筒公你，或者撳【Delete】掣。\n",
+        "relations": "# 關聯\n\n公家街圖入面，關聯係特別地貌，夾埋其他地貌做一組。例如，有兩種至常見。一係*途徑關聯*，佢係路段組成，路屬高速公路同公路。另一係*幾多邊形*，佢將唔同綫結合，定個複雜嘅範圍，好似範圍分開幾個，或者有洞好似沙翁。\n\n關聯之中，一組地貌就係*成員*。邊註欄度，你睇到地貌，佢做邊啲關聯成員。撳落關聯，就跳入關聯。一揀咗關聯，邊註欄列晒成員，地圖佢哋亦會特別顯眼。\n\n多數情形，你改嘢時，艾弟都會自動保持關聯。你要留意，你刪走一段，想畫得準確一啲，你要確保新段，都留喺原有關聯之中。\n\n## 改關聯\n\n你改關聯，爾度講基本嘢。\n\n加地貌落關聯，㨂地貌。邊註欄入面，【所有關係】度撳【+】掣，揀或打關聯名。\n\n開新關聯，㨂首個成員地貌，【所有關係】度撳【+】掣，揀【新關聯⋯⋯】。\n\n由關聯度拎走地貌，揀地貌，喺唔要嘅關聯側邊，撳垃圾桶公仔。\n\n你砌多幾多邊形開窿，可以用【併】架生。畫出兩個範圍，內同外，鍵盤撳實【Shift】掣，兩個各撳一下，揀晒佢哋，然後撳【併】掣。\n"
+    },
+    "intro": {
+        "navigation": {
+            "title": "周圍望",
+            "drag": "大地圖度，公家街圖資料，放喺背景之上。你想周圍望，就拖住，推上落，推左右，就好似普通網上地圖咁。**拖住地圖**",
+            "select": "圖上地貌，有三種方法表示，處、綫同範圍。所有地貌，都以一撳就揀。**撳處去揀。**",
+            "header": "頂頭指明地貌。",
+            "pane": "一揀地貌，地貌器就出。頂頭話我哋知乜嘢地貌，主要顯示地貌屬性，如名同地址。**閂地貌器，就撳右上閂埋個掣。**"
+        },
+        "points": {
+            "title": "點",
+            "add": "處，用來指示地貌，如舖、餐廳、紀念碑。佢哋畫低某個位置，用來講下當地係乜。**撳處個掣，開新一處。**",
+            "place": "地圖度，撳一下擺低一處。**擺個處去屋頂。**",
+            "search": "處可以用來指示種種地貌。你加爾處就係茶座。**搵【{name}】**",
+            "choose": "**由一覽度揀茶座。**",
+            "describe": "爾處畫成茶座。用地貌編器，我哋可以加名啲料上地貌。**加個名**",
+            "close": "想閂地貌編寫，只要一撳閂掣。**閂地貌編寫**",
+            "reselect": "有時處在。有時整錯或者未完整。我哋可改已有之處。**揀你喘啱整嗰處。**",
+            "fixname": "**改名兼閂地貌編寫**",
+            "reselect_delete": "地圖度，乜地貌都刪得。**撳你嗰開嗰處。**",
+            "delete": "個選單，會圍住嗰處。嗰處有唔同嘢做，可以改珧嗰處，當中有刪。**刪嗰處。**"
+        },
+        "areas": {
+            "title": "範圍",
+            "add": "範圍係更祥細講地貌。佢畀埋地貌界綫。處出地嘅地貌，範圍多數都用到，做到範圍就做範圍。**撳住範圍掣，開新範圍。**",
+            "corner": "要畫範圍，就用節來勾出邊界，包住範圍。**擺開始一節，喺遊樂場一角。**",
+            "place": "畫範圍，就要擺多啲節。要完成範圍，就欽返頭嗰節。**畫個範圍畀遊樂場。**",
+            "search": "**搵【{name}】。**",
+            "choose": "**由一覽度揀遊樂場。**",
+            "describe": "**加名兼閂咗地貌編寫**"
+        },
+        "lines": {
+            "title": "綫",
+            "add": "綫用來指示地貌，好似馬路、火車路、江河等。**撳綫掣，開一條綫。**",
+            "start": "**開一條綫，就撳路一端。**",
+            "intersect": "撳下去加幾節入綫。若有必要，你邊畫邊拖住地圖。路、同埋其他嘅綫，係大網入面。駁啱啲綫，通估綫程式，至爲重要。**撳住花街（Flower Street），爲兩綫駁做路口。**",
+            "finish": "畫綫到尾，只要再撳最尾一節一次。**畫完條路。**",
+            "road": "**由一覽度揀路。**",
+            "residential": "種種道路，最常見係住宅路。**揀住宅路**",
+            "describe": "**同路起名，以及閂咗地貌內容。**",
+            "restart": "條路要駁去花街（Flower Street）。",
+            "wrong_preset": "你未有指名住宅路。**撳爾度去揀多次**"
+        },
+        "startediting": {
+            "title": "開始改",
+            "help": "更多文件，連同爾個逐步解釋，就放喺度。",
+            "save": "記得定時記低修改！",
+            "start": "開始制圖"
+        }
+    },
+    "presets": {
+        "categories": {
+            "category-building": {
+                "name": "屋宇"
+            },
+            "category-landuse": {
+                "name": "用地"
+            },
+            "category-path": {
+                "name": "徑"
+            },
+            "category-rail": {
+                "name": "軌道"
+            },
+            "category-road": {
+                "name": "路"
+            },
+            "category-route": {
+                "name": "路綫"
+            },
+            "category-water-area": {
+                "name": "水"
+            },
+            "category-water-line": {
+                "name": "水"
+            }
+        },
+        "fields": {
+            "access": {
+                "label": "通",
+                "placeholder": "未知",
+                "types": {
+                    "access": "總體",
+                    "foot": "行",
+                    "motor_vehicle": "車",
+                    "bicycle": "單車",
+                    "horse": "馬"
+                },
+                "options": {
+                    "yes": {
+                        "title": "准許",
+                        "description": "按法例可通，通路之權。"
+                    },
+                    "no": {
+                        "title": "禁入",
+                        "description": "公眾不通"
+                    },
+                    "permissive": {
+                        "title": "放任",
+                        "description": "可以行，直至地主唔畀。"
+                    },
+                    "private": {
+                        "title": "私家",
+                        "description": "要地主逐個批准。"
+                    },
+                    "designated": {
+                        "title": "指名",
+                        "description": "法例或路牌指名點行"
+                    },
+                    "destination": {
+                        "title": "目的地",
+                        "description": "去目的地就無限"
+                    }
+                }
+            },
+            "access_toilets": {
+                "label": "通"
+            },
+            "address": {
+                "label": "地埗",
+                "placeholders": {
+                    "housename": "屋名",
+                    "number": "一百二十三號",
+                    "street": "街",
+                    "city": "城",
+                    "postcode": "郵政編號"
+                }
+            },
+            "admin_level": {
+                "label": "行政層次"
+            },
+            "aeroway": {
+                "label": "類"
+            },
+            "amenity": {
+                "label": "類"
+            },
+            "artist": {
+                "label": "藝人"
+            },
+            "artwork_type": {
+                "label": "類"
+            },
+            "atm": {
+                "label": "提款機"
+            },
+            "backrest": {
+                "label": "長椅"
+            },
+            "barrier": {
+                "label": "類"
+            },
+            "bicycle_parking": {
+                "label": "類"
+            },
+            "boundary": {
+                "label": "類"
+            },
+            "building": {
+                "label": "屋宇"
+            },
+            "building_area": {
+                "label": "屋宇"
+            },
+            "building_yes": {
+                "label": "屋宇"
+            },
+            "capacity": {
+                "label": "容納",
+                "placeholder": "50, 100, 200..."
+            },
+            "cardinal_direction": {
+                "label": "方向"
+            },
+            "clock_direction": {
+                "label": "方向",
+                "options": {
+                    "clockwise": "順時針",
+                    "anticlockwise": "逆時針"
+                }
+            },
+            "collection_times": {
+                "label": "收集時間"
+            },
+            "construction": {
+                "label": "類"
+            },
+            "country": {
+                "label": "國"
+            },
+            "crossing": {
+                "label": "類"
+            },
+            "cuisine": {
+                "label": "菜式"
+            },
+            "denomination": {
+                "label": "派"
+            },
+            "denotation": {
+                "label": "表示"
+            },
+            "description": {
+                "label": "描述"
+            },
+            "elevation": {
+                "label": "水平"
+            },
+            "emergency": {
+                "label": "急症室"
+            },
+            "entrance": {
+                "label": "類"
+            },
+            "fax": {
+                "label": "傳真",
+                "placeholder": "+31 42 123 4567"
+            },
+            "fee": {
+                "label": "費用"
+            },
+            "fire_hydrant/type": {
+                "label": "類"
+            },
+            "fixme": {
+                "label": "整好我"
+            },
+            "generator/method": {
+                "label": "方法"
+            },
+            "generator/source": {
+                "label": "來源"
+            },
+            "generator/type": {
+                "label": "類"
+            },
+            "highway": {
+                "label": "類"
+            },
+            "historic": {
+                "label": "類"
+            },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
+            "incline": {
+                "label": "斜路"
+            },
+            "internet_access": {
+                "label": "用到互聯網",
+                "options": {
+                    "wlan": "無綫上網",
+                    "wired": "揷綫上網",
+                    "terminal": "終端機"
+                }
+            },
+            "landuse": {
+                "label": "類"
+            },
+            "lanes": {
+                "label": "綫道",
+                "placeholder": "1, 2, 3..."
+            },
+            "layer": {
+                "label": "層"
+            },
+            "leisure": {
+                "label": "類"
+            },
+            "levels": {
+                "label": "樓",
+                "placeholder": "2, 4, 6..."
+            },
+            "lit": {
+                "label": "有燈"
+            },
+            "location": {
+                "label": "地點"
+            },
+            "man_made": {
+                "label": "類"
+            },
+            "maxspeed": {
+                "label": "限速",
+                "placeholder": "40, 50, 60..."
+            },
+            "name": {
+                "label": "名",
+                "placeholder": "常用名（若有）"
+            },
+            "natural": {
+                "label": "自然"
+            },
+            "network": {
+                "label": "網絡"
+            },
+            "note": {
+                "label": "註"
+            },
+            "office": {
+                "label": "類"
+            },
+            "oneway": {
+                "label": "單程"
+            },
+            "oneway_yes": {
+                "label": "單程"
+            },
+            "opening_hours": {
+                "label": "時間"
+            },
+            "operator": {
+                "label": "承辦商"
+            },
+            "park_ride": {
+                "label": "泊車轉乖"
+            },
+            "parking": {
+                "label": "類"
+            },
+            "phone": {
+                "label": "電話",
+                "placeholder": "+31 42 123 4567"
+            },
+            "place": {
+                "label": "類"
+            },
+            "power": {
+                "label": "類"
+            },
+            "railway": {
+                "label": "類"
+            },
+            "ref": {
+                "label": "參攷"
+            },
+            "relation": {
+                "label": "類"
+            },
+            "religion": {
+                "label": "宗敎",
+                "options": {
+                    "christian": "基督敎",
+                    "muslim": "囘敎",
+                    "buddhist": "佛敎",
+                    "jewish": "猶太敎",
+                    "hindu": "印度敎",
+                    "shinto": "神道敎",
+                    "taoist": "道敎"
+                }
+            },
+            "restriction": {
+                "label": "類"
+            },
+            "route": {
+                "label": "類"
+            },
+            "route_master": {
+                "label": "類"
+            },
+            "sac_scale": {
+                "label": "行徑難度"
+            },
+            "service": {
+                "label": "類"
+            },
+            "shelter": {
+                "label": "天遮"
+            },
+            "shop": {
+                "label": "類"
+            },
+            "source": {
+                "label": "來源"
+            },
+            "sport": {
+                "label": "運動"
+            },
+            "structure": {
+                "label": "結構",
+                "placeholder": "未知",
+                "options": {
+                    "bridge": "橋",
+                    "tunnel": "隧道",
+                    "embankment": "基堤",
+                    "cutting": "開山"
+                }
+            },
+            "supervised": {
+                "label": "有人睇"
+            },
+            "surface": {
+                "label": "表面"
+            },
+            "toilets/disposal": {
+                "label": "棄置"
+            },
+            "tourism": {
+                "label": "類"
+            },
+            "towertype": {
+                "label": "塔類"
+            },
+            "tracktype": {
+                "label": "類"
+            },
+            "trail_visibility": {
+                "label": "徑明顯度"
+            },
+            "tree_type": {
+                "label": "類"
+            },
+            "vending": {
+                "label": "貨類"
+            },
+            "water": {
+                "label": "類"
+            },
+            "waterway": {
+                "label": "類"
+            },
+            "website": {
+                "label": "網站",
+                "placeholder": "http://example.com/"
+            },
+            "wetland": {
+                "label": "類"
+            },
+            "wheelchair": {
+                "label": "通輪椅"
+            },
+            "wikipedia": {
+                "label": "維基百科全書"
+            },
+            "wood": {
+                "label": "類"
+            }
+        },
+        "presets": {
+            "address": {
+                "name": "地埗",
+                "terms": "地埗,地址,址"
+            },
+            "aeroway": {
+                "name": "航空",
+                "terms": "航空"
+            },
+            "aeroway/aerodrome": {
+                "name": "飛機場",
+                "terms": "飛機場,機場"
+            },
+            "aeroway/apron": {
+                "name": "停機坪",
+                "terms": "停機坪"
+            },
+            "aeroway/gate": {
+                "name": "機場閘口",
+                "terms": "機場閘口"
+            },
+            "aeroway/hangar": {
+                "name": "飛機庫",
+                "terms": "飛機庫"
+            },
+            "aeroway/helipad": {
+                "name": "直升機坪",
+                "terms": "直升機坪,直昇機坪,直昇機場"
+            },
+            "aeroway/runway": {
+                "name": "跑道",
+                "terms": "跑道"
+            },
+            "aeroway/taxiway": {
+                "name": "滑行道",
+                "terms": "滑行道"
+            },
+            "aeroway/terminal": {
+                "name": "飛機場大樓",
+                "terms": "飛機場大樓,機場大樓,機場客運大樓"
+            },
+            "amenity": {
+                "name": "便利設施",
+                "terms": "便利設施"
+            },
+            "amenity/arts_centre": {
+                "name": "美術館",
+                "terms": "美術館,藝術館,美術中心,藝術中心"
+            },
+            "amenity/atm": {
+                "name": "提款機",
+                "terms": "提款機,自動提款機,自動櫃員機,櫃員機"
+            },
+            "amenity/bank": {
+                "name": "銀行",
+                "terms": "銀行,銀號"
+            },
+            "amenity/bar": {
+                "name": "酒吧",
+                "terms": "酒吧"
+            },
+            "amenity/bench": {
+                "name": "長椅",
+                "terms": "長椅,長凳,長櫈"
+            },
+            "amenity/bicycle_parking": {
+                "name": "泊單車處",
+                "terms": "泊單車處,單車停泊處,泊單車"
+            },
+            "amenity/bicycle_rental": {
+                "name": "租單車舖",
+                "terms": "租單車處,單車租賃,租單車,租單車舖"
+            },
+            "amenity/boat_rental": {
+                "name": "租艇",
+                "terms": "租艇"
+            },
+            "amenity/cafe": {
+                "name": "茶座",
+                "terms": "茶座,荼座,㗎啡廳,㗎啡室"
+            },
+            "amenity/car_rental": {
+                "name": "租車舖",
+                "terms": "租車舖,租車,租車店,汽車租賃"
+            },
+            "amenity/car_sharing": {
+                "name": "共用車處",
+                "terms": "共用車處,共用車,汽車共享站"
+            },
+            "amenity/car_wash": {
+                "name": "洗車舖",
+                "terms": "洗車舖,洗車,洗車店"
+            },
+            "amenity/childcare": {
+                "name": "托兒所",
+                "terms": "托兒所"
+            },
+            "amenity/cinema": {
+                "name": "電影戲院",
+                "terms": "電影戲院,戲院,電影院"
+            },
+            "amenity/college": {
+                "name": "學院",
+                "terms": "學院,書院,專科學院,專上學院,理工"
+            },
+            "amenity/courthouse": {
+                "name": "法庭",
+                "terms": "法庭,臬署,法院,裁判署"
+            },
+            "amenity/drinking_water": {
+                "name": "飲水處",
+                "terms": "飲用水,飲水處,飲水"
+            },
+            "amenity/embassy": {
+                "name": "大使館",
+                "terms": "大使館,領事館,使館"
+            },
+            "amenity/fast_food": {
+                "name": "快餐店",
+                "terms": "快餐店"
+            },
+            "amenity/fire_station": {
+                "name": "消防局",
+                "terms": "消防局,水車館"
+            },
+            "amenity/fountain": {
+                "name": "噴水池",
+                "terms": "噴水池,噴泉,水景"
+            },
+            "amenity/fuel": {
+                "name": "油站",
+                "terms": "油站,加油站,加汽站"
+            },
+            "amenity/grave_yard": {
+                "name": "墳地",
+                "terms": "墳地,墓地"
+            },
+            "amenity/hospital": {
+                "name": "醫院",
+                "terms": "醫院,醫學中心,療養院"
+            },
+            "amenity/kindergarten": {
+                "name": "幼稚園",
+                "terms": "幼稚園,幼兒園"
+            },
+            "amenity/library": {
+                "name": "圖書館",
+                "terms": "圖書館"
+            },
+            "amenity/marketplace": {
+                "name": "街市",
+                "terms": "街市,市場,菜市場"
+            },
+            "amenity/parking": {
+                "name": "停車場",
+                "terms": "停車場"
+            },
+            "amenity/pharmacy": {
+                "name": "藥房",
+                "terms": "藥房,藥局"
+            },
+            "amenity/place_of_worship": {
+                "name": "拜神之所",
+                "terms": "拜神之所,宗教祟拜場所,崇拜處"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "佛寺",
+                "terms": "寺,佛寺,佛廟,和尚寺,尼姑庵,尼庵,庵堂,靜院,精舍,佛堂"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "敎堂",
+                "terms": "敎堂,教堂"
+            },
+            "amenity/place_of_worship/jewish": {
+                "name": "猶太廟",
+                "terms": "猶太廟,猶太寺,猶太教堂"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "囘敎寺",
+                "terms": "囘敎寺,清真寺,回敎寺,回敎寺,囘教寺"
+            },
+            "amenity/police": {
+                "name": "差館",
+                "terms": "差館,警察局,警局,派出所,警署"
+            },
+            "amenity/post_box": {
+                "name": "郵筒",
+                "terms": "郵筒,郵箱"
+            },
+            "amenity/post_office": {
+                "name": "郵政局",
+                "terms": "郵政局,郵局,書信館"
+            },
+            "amenity/pub": {
+                "name": "酒館",
+                "terms": "酒館"
+            },
+            "amenity/ranger_station": {
+                "name": "郊野訪客處",
+                "terms": "郊野訪客處"
+            },
+            "amenity/restaurant": {
+                "name": "餐廳",
+                "terms": "餐廳,飯店,飯館,酒樓,餐館,酒家,茶樓"
+            },
+            "amenity/school": {
+                "name": "學校",
+                "terms": "學校,小學,中學"
+            },
+            "amenity/swimming_pool": {
+                "name": "游水池",
+                "terms": "游水池,游泳池,泳池"
+            },
+            "amenity/taxi": {
+                "name": "的士站",
+                "terms": "的士站,計程車站"
+            },
+            "amenity/telephone": {
+                "name": "電話",
+                "terms": "電話"
+            },
+            "amenity/theatre": {
+                "name": "舞臺戲院",
+                "terms": "舞臺戲院,戲院,劇院,劇場"
+            },
+            "amenity/toilets": {
+                "name": "廁所",
+                "terms": "廁所,公廁,方便,洗手間,便所"
+            },
+            "amenity/townhall": {
+                "name": "大會堂",
+                "terms": "大會堂,市政廳"
+            },
+            "amenity/university": {
+                "name": "大學",
+                "terms": "大學"
+            },
+            "amenity/vending_machine": {
+                "name": "售賣機",
+                "terms": "售賣機"
+            },
+            "amenity/waste_basket": {
+                "name": "垃圾桶",
+                "terms": "垃圾桶,廢物箱"
+            },
+            "area": {
+                "name": "範圍",
+                "terms": "範圍"
+            },
+            "barrier": {
+                "name": "阻擋",
+                "terms": "阻擋"
+            },
+            "barrier/block": {
+                "name": "路障",
+                "terms": "路障"
+            },
+            "barrier/bollard": {
+                "name": "護柱",
+                "terms": "護柱"
+            },
+            "barrier/cattle_grid": {
+                "name": "攔畜溝柵",
+                "terms": "攔畜溝柵"
+            },
+            "barrier/city_wall": {
+                "name": "城牆",
+                "terms": "城牆"
+            },
+            "barrier/cycle_barrier": {
+                "name": "單車減速欄",
+                "terms": "單車減速欄"
+            },
+            "barrier/ditch": {
+                "name": "溝",
+                "terms": "溝"
+            },
+            "barrier/entrance": {
+                "name": "入口",
+                "terms": "入口"
+            },
+            "barrier/fence": {
+                "name": "欄",
+                "terms": "欄"
+            },
+            "barrier/gate": {
+                "name": "閘",
+                "terms": "閘"
+            },
+            "barrier/hedge": {
+                "name": "樹籬",
+                "terms": "樹籬"
+            },
+            "barrier/kissing_gate": {
+                "name": "單人轉門 ",
+                "terms": "單人轉門 "
+            },
+            "barrier/lift_gate": {
+                "name": "道閘",
+                "terms": "道閘"
+            },
+            "barrier/retaining_wall": {
+                "name": "護土牆",
+                "terms": "護土牆"
+            },
+            "barrier/stile": {
+                "name": "梯梃",
+                "terms": "梯梃"
+            },
+            "barrier/toll_booth": {
+                "name": "收費亭",
+                "terms": "收費亭"
+            },
+            "barrier/wall": {
+                "name": "牆",
+                "terms": "牆"
+            },
+            "boundary/administrative": {
+                "name": "行政界",
+                "terms": "行政界"
+            },
+            "building": {
+                "name": "屋宇",
+                "terms": "屋宇"
+            },
+            "building/apartments": {
+                "name": "公寓",
+                "terms": "公寓"
+            },
+            "building/commercial": {
+                "name": "商業樓宇",
+                "terms": "商業樓宇"
+            },
+            "building/entrance": {
+                "name": "入口",
+                "terms": "入口"
+            },
+            "building/garage": {
+                "name": "車庫",
+                "terms": "車庫"
+            },
+            "building/house": {
+                "name": "屋",
+                "terms": "屋"
+            },
+            "building/hut": {
+                "name": "屋仔",
+                "terms": "屋仔"
+            },
+            "building/industrial": {
+                "name": "工業樓宇",
+                "terms": "工業樓宇"
+            },
+            "building/residential": {
+                "name": "住宅樓宇",
+                "terms": "住宅樓宇"
+            },
+            "emergency/ambulance_station": {
+                "name": "救護站",
+                "terms": "救護站"
+            },
+            "emergency/fire_hydrant": {
+                "name": "消防水龍頭",
+                "terms": "消防水龍頭"
+            },
+            "emergency/phone": {
+                "name": "求助電話",
+                "terms": "求助電話"
+            },
+            "entrance": {
+                "name": "入口",
+                "terms": "入口"
+            },
+            "footway/crossing": {
+                "name": "路口",
+                "terms": "路口"
+            },
+            "footway/sidewalk": {
+                "name": "行人路",
+                "terms": "行人路"
+            },
+            "highway": {
+                "name": "公路",
+                "terms": "公路"
+            },
+            "highway/bridleway": {
+                "name": "馬徑",
+                "terms": "馬徑"
+            },
+            "highway/bus_stop": {
+                "name": "巴士站",
+                "terms": "巴士站"
+            },
+            "highway/crossing": {
+                "name": "路口",
+                "terms": "路口"
+            },
+            "highway/cycleway": {
+                "name": "單車徑",
+                "terms": "單車徑"
+            },
+            "highway/footway": {
+                "name": "行人徑",
+                "terms": "行人徑"
+            },
+            "highway/living_street": {
+                "name": "居住街道",
+                "terms": "居住街道"
+            },
+            "highway/mini_roundabout": {
+                "name": "細迴旋處",
+                "terms": "細迴旋處"
+            },
+            "highway/motorway": {
+                "name": "高速公路",
+                "terms": "高速公路"
+            },
+            "highway/motorway_junction": {
+                "name": "高速公路口",
+                "terms": "高速公路口"
+            },
+            "highway/motorway_link": {
+                "name": "高速公路駁路",
+                "terms": "高速公路駁路"
+            },
+            "highway/path": {
+                "name": "徑",
+                "terms": "徑"
+            },
+            "highway/pedestrian": {
+                "name": "行人大街",
+                "terms": "行人大街"
+            },
+            "highway/primary": {
+                "name": "大路",
+                "terms": "大路"
+            },
+            "highway/primary_link": {
+                "name": "大路駁路",
+                "terms": "大路駁路"
+            },
+            "highway/residential": {
+                "name": "住宅路",
+                "terms": "住宅路"
+            },
+            "highway/road": {
+                "name": "未知嘅路",
+                "terms": "未知嘅路"
+            },
+            "highway/secondary": {
+                "name": "中路",
+                "terms": "中路"
+            },
+            "highway/secondary_link": {
+                "name": "中路駁路",
+                "terms": "中路駁路"
+            },
+            "highway/service": {
+                "name": "支路",
+                "terms": "支路"
+            },
+            "highway/service/alley": {
+                "name": "巷",
+                "terms": "巷"
+            },
+            "highway/service/drive-through": {
+                "name": "車上用餐",
+                "terms": "車上用餐"
+            },
+            "highway/service/driveway": {
+                "name": "宅外車道",
+                "terms": "宅外車道"
+            },
+            "highway/service/emergency_access": {
+                "name": "緊急通道",
+                "terms": "緊急通道"
+            },
+            "highway/service/parking_aisle": {
+                "name": "泊車通道",
+                "terms": "泊車通道"
+            },
+            "highway/steps": {
+                "name": "梯",
+                "terms": "梯"
+            },
+            "highway/stop": {
+                "name": "停車標誌",
+                "terms": "停車標誌,停字標誌,停車路牌"
+            },
+            "highway/tertiary": {
+                "name": "細路",
+                "terms": "細路"
+            },
+            "highway/tertiary_link": {
+                "name": "細路駁路",
+                "terms": "細路駁路"
+            },
+            "highway/track": {
+                "name": "分徑",
+                "terms": "分徑"
+            },
+            "highway/traffic_signals": {
+                "name": "紅綠燈",
+                "terms": "紅綠燈"
+            },
+            "highway/trunk": {
+                "name": "幹路",
+                "terms": "幹路"
+            },
+            "highway/trunk_link": {
+                "name": "幹道駁路",
+                "terms": "幹道駁路"
+            },
+            "highway/turning_circle": {
+                "name": "迴施處",
+                "terms": "迴施處"
+            },
+            "highway/unclassified": {
+                "name": "未歸類之路",
+                "terms": "未歸類之路"
+            },
+            "historic": {
+                "name": "史蹟",
+                "terms": "史蹟"
+            },
+            "historic/archaeological_site": {
+                "name": "考古地",
+                "terms": "考古地"
+            },
+            "historic/boundary_stone": {
+                "name": "界石",
+                "terms": "界石"
+            },
+            "historic/castle": {
+                "name": "寨",
+                "terms": "寨"
+            },
+            "historic/memorial": {
+                "name": "紀念碑",
+                "terms": "紀念碑"
+            },
+            "historic/monument": {
+                "name": "紀念碑",
+                "terms": "紀念碑"
+            },
+            "historic/ruins": {
+                "name": "廢墟",
+                "terms": "廢墟"
+            },
+            "historic/wayside_cross": {
+                "name": "路邊十字架",
+                "terms": "路邊十字架"
+            },
+            "historic/wayside_shrine": {
+                "name": "路邊神祠",
+                "terms": "路邊神祠"
+            },
+            "landuse": {
+                "name": "用地",
+                "terms": "用地"
+            },
+            "landuse/allotments": {
+                "name": "菜地",
+                "terms": "菜地"
+            },
+            "landuse/basin": {
+                "name": "盆地",
+                "terms": "盆地"
+            },
+            "landuse/cemetery": {
+                "name": "墳場",
+                "terms": "墳場"
+            },
+            "landuse/commercial": {
+                "name": "商地",
+                "terms": "商地"
+            },
+            "landuse/construction": {
+                "name": "地盤",
+                "terms": "地盤"
+            },
+            "landuse/farm": {
+                "name": "農場",
+                "terms": "農場"
+            },
+            "landuse/farmyard": {
+                "name": "地堂",
+                "terms": "地堂"
+            },
+            "landuse/forest": {
+                "name": "森",
+                "terms": "森"
+            },
+            "landuse/grass": {
+                "name": "草地",
+                "terms": "草地"
+            },
+            "landuse/industrial": {
+                "name": "工地",
+                "terms": "工地"
+            },
+            "landuse/meadow": {
+                "name": "牧地",
+                "terms": "牧地"
+            },
+            "landuse/orchard": {
+                "name": "菓園",
+                "terms": "菓園"
+            },
+            "landuse/quarry": {
+                "name": "石塘",
+                "terms": "石塘"
+            },
+            "landuse/residential": {
+                "name": "住",
+                "terms": "住"
+            },
+            "landuse/retail": {
+                "name": "零售",
+                "terms": "零售"
+            },
+            "landuse/vineyard": {
+                "name": "葡萄園",
+                "terms": "葡萄園"
+            },
+            "leisure": {
+                "name": "消閒",
+                "terms": "消閒"
+            },
+            "leisure/common": {
+                "name": "公地",
+                "terms": "公地"
+            },
+            "leisure/dog_park": {
+                "name": "狗公園",
+                "terms": "狗公園"
+            },
+            "leisure/garden": {
+                "name": "花園",
+                "terms": "花園"
+            },
+            "leisure/golf_course": {
+                "name": "哥夫球場",
+                "terms": "哥夫球場"
+            },
+            "leisure/marina": {
+                "name": "遊艇碼頭",
+                "terms": "遊艇碼頭"
+            },
+            "leisure/park": {
+                "name": "園",
+                "terms": "園"
+            },
+            "leisure/pitch": {
+                "name": "運動場",
+                "terms": "運動場"
+            },
+            "leisure/pitch/american_football": {
+                "name": "美式足球場",
+                "terms": "美式足球場"
+            },
+            "leisure/pitch/baseball": {
+                "name": "棒球場",
+                "terms": "棒球場"
+            },
+            "leisure/pitch/basketball": {
+                "name": "籃球場",
+                "terms": "籃球場"
+            },
+            "leisure/pitch/skateboard": {
+                "name": "滑板場",
+                "terms": "滑板場"
+            },
+            "leisure/pitch/soccer": {
+                "name": "足球場",
+                "terms": "足球場"
+            },
+            "leisure/pitch/tennis": {
+                "name": "網球場",
+                "terms": "網球場"
+            },
+            "leisure/pitch/volleyball": {
+                "name": "排球場",
+                "terms": "排球場"
+            },
+            "leisure/playground": {
+                "name": "遊樂場",
+                "terms": "遊樂場"
+            },
+            "leisure/slipway": {
+                "name": "船排",
+                "terms": "船排"
+            },
+            "leisure/sports_center": {
+                "name": "體育館",
+                "terms": "體育館"
+            },
+            "leisure/stadium": {
+                "name": "大體育館",
+                "terms": "大體育館"
+            },
+            "leisure/swimming_pool": {
+                "name": "游水池",
+                "terms": "游水池"
+            },
+            "leisure/track": {
+                "name": "賽車跑道",
+                "terms": "賽車跑道"
+            },
+            "line": {
+                "name": "綫",
+                "terms": "綫"
+            },
+            "man_made": {
+                "name": "人造",
+                "terms": "人造"
+            },
+            "man_made/breakwater": {
+                "name": "防波堤",
+                "terms": "防波堤"
+            },
+            "man_made/cutline": {
+                "name": "分割綫",
+                "terms": "分割綫"
+            },
+            "man_made/lighthouse": {
+                "name": "燈塔",
+                "terms": "燈塔"
+            },
+            "man_made/observation": {
+                "name": "瞭望臺",
+                "terms": "瞭望臺"
+            },
+            "man_made/pier": {
+                "name": "埗頭",
+                "terms": "埗頭"
+            },
+            "man_made/pipeline": {
+                "name": "水管",
+                "terms": "水管"
+            },
+            "man_made/survey_point": {
+                "name": "測量點",
+                "terms": "測量點"
+            },
+            "man_made/tower": {
+                "name": "塔",
+                "terms": "塔"
+            },
+            "man_made/wastewater_plant": {
+                "name": "廢水廠",
+                "terms": "廢水廠"
+            },
+            "man_made/water_tower": {
+                "name": "水塔",
+                "terms": "水塔"
+            },
+            "man_made/water_well": {
+                "name": "井",
+                "terms": "井"
+            },
+            "man_made/water_works": {
+                "name": "供水廠",
+                "terms": "供水廠"
+            },
+            "natural": {
+                "name": "天然",
+                "terms": "天然"
+            },
+            "natural/bay": {
+                "name": "灣",
+                "terms": "灣"
+            },
+            "natural/beach": {
+                "name": "灘",
+                "terms": "灘"
+            },
+            "natural/cliff": {
+                "name": "崖",
+                "terms": "崖"
+            },
+            "natural/coastline": {
+                "name": "海岸綫",
+                "terms": "海岸綫"
+            },
+            "natural/fell": {
+                "name": "高原荒野",
+                "terms": "高原荒野"
+            },
+            "natural/glacier": {
+                "name": "冰川",
+                "terms": "冰川"
+            },
+            "natural/grassland": {
+                "name": "草原",
+                "terms": "草原"
+            },
+            "natural/heath": {
+                "name": "荒野",
+                "terms": "荒野"
+            },
+            "natural/peak": {
+                "name": "峯",
+                "terms": "峯"
+            },
+            "natural/scree": {
+                "name": "碎石坡",
+                "terms": "碎石坡"
+            },
+            "natural/scrub": {
+                "name": "灌木",
+                "terms": "灌木"
+            },
+            "natural/spring": {
+                "name": "泉",
+                "terms": "泉"
+            },
+            "natural/tree": {
+                "name": "樹",
+                "terms": "樹"
+            },
+            "natural/water": {
+                "name": "水",
+                "terms": "水"
+            },
+            "natural/water/lake": {
+                "name": "湖",
+                "terms": "湖"
+            },
+            "natural/water/pond": {
+                "name": "塘",
+                "terms": "塘"
+            },
+            "natural/water/reservoir": {
+                "name": "水塘",
+                "terms": "水塘"
+            },
+            "natural/wetland": {
+                "name": "澤",
+                "terms": "澤"
+            },
+            "natural/wood": {
+                "name": "林",
+                "terms": "林"
+            },
+            "office": {
+                "name": "寫字樓",
+                "terms": "寫字樓"
+            },
+            "office/accountant": {
+                "name": "會計師樓",
+                "terms": "會計師樓"
+            },
+            "office/administrative": {
+                "name": "行政樓",
+                "terms": "行政樓"
+            },
+            "office/architect": {
+                "name": "則樓",
+                "terms": "則樓"
+            },
+            "office/company": {
+                "name": "公司寫字樓",
+                "terms": "公司寫字樓"
+            },
+            "office/educational_institution": {
+                "name": "敎育機構",
+                "terms": "敎育機構"
+            },
+            "office/employment_agency": {
+                "name": "薦人館",
+                "terms": "薦人館"
+            },
+            "office/estate_agent": {
+                "name": "管業處",
+                "terms": "管業處"
+            },
+            "office/financial": {
+                "name": "財務部寫字樓",
+                "terms": "財務部寫字樓"
+            },
+            "office/government": {
+                "name": "衙門",
+                "terms": "衙門,署,政府合署"
+            },
+            "office/insurance": {
+                "name": "保險公司寫字樓",
+                "terms": "保險公司寫字樓"
+            },
+            "office/it": {
+                "name": "資訊技藝寫字樓",
+                "terms": "資訊技藝寫字樓"
+            },
+            "office/lawyer": {
+                "name": "律師事務所",
+                "terms": "律師事務所"
+            },
+            "office/newspaper": {
+                "name": "報社",
+                "terms": "報社,新聞社,通訊社"
+            },
+            "office/ngo": {
+                "name": "志顠機構寫字樓",
+                "terms": "志顠機構寫字樓"
+            },
+            "office/physician": {
+                "name": "醫生",
+                "terms": "醫生"
+            },
+            "office/political_party": {
+                "name": "政黨",
+                "terms": "政黨"
+            },
+            "office/research": {
+                "name": "研究所",
+                "terms": "研究所"
+            },
+            "office/telecommunication": {
+                "name": "電話公司寫字樓",
+                "terms": "電話公司寫字樓"
+            },
+            "office/therapist": {
+                "name": "治療師",
+                "terms": "治療師"
+            },
+            "office/travel_agent": {
+                "name": "旅行社",
+                "terms": "旅行社"
+            },
+            "place": {
+                "name": "地",
+                "terms": "地"
+            },
+            "place/city": {
+                "name": "城",
+                "terms": "城"
+            },
+            "place/hamlet": {
+                "name": "村仔",
+                "terms": "村仔"
+            },
+            "place/island": {
+                "name": "島",
+                "terms": "島"
+            },
+            "place/isolated_dwelling": {
+                "name": "孤離居所",
+                "terms": "孤離居所"
+            },
+            "place/locality": {
+                "name": "地方",
+                "terms": "地方"
+            },
+            "place/town": {
+                "name": "鎮",
+                "terms": "鎮"
+            },
+            "place/village": {
+                "name": "村",
+                "terms": "村"
+            },
+            "point": {
+                "name": "點",
+                "terms": "點"
+            },
+            "power": {
+                "name": "發電廠",
+                "terms": "發電廠"
+            },
+            "power/generator": {
+                "name": "發電機",
+                "terms": "發電機"
+            },
+            "power/line": {
+                "name": "供電綫",
+                "terms": "供電綫"
+            },
+            "power/minor_line": {
+                "name": "細供電綫",
+                "terms": "細供電綫"
+            },
+            "power/pole": {
+                "name": "電綫杆",
+                "terms": "電綫杆"
+            },
+            "power/sub_station": {
+                "name": "配電站",
+                "terms": "配電站"
+            },
+            "power/tower": {
+                "name": "高壓電塔",
+                "terms": "高壓電塔"
+            },
+            "power/transformer": {
+                "name": "火牛房",
+                "terms": "火牛房"
+            },
+            "railway": {
+                "name": "鐵路",
+                "terms": "鐵路"
+            },
+            "railway/abandoned": {
+                "name": "廢鐵路",
+                "terms": "廢鐵路"
+            },
+            "railway/disused": {
+                "name": "停用鐵路",
+                "terms": "停用鐵路"
+            },
+            "railway/halt": {
+                "name": "火車細站",
+                "terms": "火車細站"
+            },
+            "railway/level_crossing": {
+                "name": "平交道口",
+                "terms": "平交道口"
+            },
+            "railway/monorail": {
+                "name": "單軌",
+                "terms": "單軌"
+            },
+            "railway/platform": {
+                "name": "月臺",
+                "terms": "月臺"
+            },
+            "railway/rail": {
+                "name": "路軌",
+                "terms": "路軌"
+            },
+            "railway/station": {
+                "name": "火車站",
+                "terms": "火車站"
+            },
+            "railway/subway": {
+                "name": "地下鐵路",
+                "terms": "地下鐵路"
+            },
+            "railway/subway_entrance": {
+                "name": "地下鐵路入口",
+                "terms": "地下鐵路入口"
+            },
+            "railway/tram": {
+                "name": "電車",
+                "terms": "電車"
+            },
+            "relation": {
+                "name": "關係",
+                "terms": "關係"
+            },
+            "route/ferry": {
+                "name": "航綫",
+                "terms": "航綫"
+            },
+            "shop": {
+                "name": "舖",
+                "terms": "舖"
+            },
+            "shop/alcohol": {
+                "name": "酒莊",
+                "terms": "酒莊"
+            },
+            "shop/bakery": {
+                "name": "麪飽舖",
+                "terms": "麪飽舖"
+            },
+            "shop/beauty": {
+                "name": "美容院",
+                "terms": "美容院"
+            },
+            "shop/beverages": {
+                "name": "飲品舖",
+                "terms": "飲品舖"
+            },
+            "shop/bicycle": {
+                "name": "單車舖",
+                "terms": "單車舖"
+            },
+            "shop/books": {
+                "name": "書局",
+                "terms": "書局"
+            },
+            "shop/boutique": {
+                "name": "時裝店",
+                "terms": "時裝店"
+            },
+            "shop/butcher": {
+                "name": "肉舖",
+                "terms": "肉舖"
+            },
+            "shop/car": {
+                "name": "車行",
+                "terms": "車行"
+            },
+            "shop/car_parts": {
+                "name": "汽車零件舖",
+                "terms": "汽車零件舖"
+            },
+            "shop/car_repair": {
+                "name": "車房",
+                "terms": "車房"
+            },
+            "shop/chemist": {
+                "name": "註冊藥房",
+                "terms": "註冊藥房"
+            },
+            "shop/clothes": {
+                "name": "衫舖",
+                "terms": "衫舖"
+            },
+            "shop/computer": {
+                "name": "電腦舖",
+                "terms": "電腦舖"
+            },
+            "shop/confectionery": {
+                "name": "糖菓舖",
+                "terms": "糖菓舖"
+            },
+            "shop/convenience": {
+                "name": "便利店",
+                "terms": "便利店"
+            },
+            "shop/deli": {
+                "name": "食肆",
+                "terms": "食肆"
+            },
+            "shop/department_store": {
+                "name": "百貨公司",
+                "terms": "百貨公司"
+            },
+            "shop/doityourself": {
+                "name": "自組舖",
+                "terms": "自組舖"
+            },
+            "shop/dry_cleaning": {
+                "name": "乾洗",
+                "terms": "乾洗"
+            },
+            "shop/electronics": {
+                "name": "電子舖",
+                "terms": "電子舖"
+            },
+            "shop/farm": {
+                "name": "檔",
+                "terms": "檔"
+            },
+            "shop/fishmonger": {
+                "name": "魚檔",
+                "terms": "魚檔"
+            },
+            "shop/florist": {
+                "name": "花舖",
+                "terms": "花舖"
+            },
+            "shop/furniture": {
+                "name": "傢俬舖",
+                "terms": "傢俬舖"
+            },
+            "shop/garden_centre": {
+                "name": "園藝舖",
+                "terms": "園藝舖"
+            },
+            "shop/gift": {
+                "name": "禮品舖",
+                "terms": "禮品舖"
+            },
+            "shop/greengrocer": {
+                "name": "菜檔",
+                "terms": "菜檔"
+            },
+            "shop/hairdresser": {
+                "name": "飛髮舖",
+                "terms": "飛髮舖"
+            },
+            "shop/hardware": {
+                "name": "五金舖",
+                "terms": "五金舖"
+            },
+            "shop/hifi": {
+                "name": "音響舖",
+                "terms": "音響舖"
+            },
+            "shop/jewelry": {
+                "name": "珠寶店",
+                "terms": "珠寶店"
+            },
+            "shop/kiosk": {
+                "name": "售賣亭",
+                "terms": "售賣亭"
+            },
+            "shop/laundry": {
+                "name": "洗衣舖",
+                "terms": "洗衣舖"
+            },
+            "shop/locksmith": {
+                "name": "鎖匠",
+                "terms": "鎖匠,開鎖佬"
+            },
+            "shop/mall": {
+                "name": "大商場",
+                "terms": "大商場"
+            },
+            "shop/mobile_phone": {
+                "name": "電話舖",
+                "terms": "電話舖"
+            },
+            "shop/motorcycle": {
+                "name": "電單車行",
+                "terms": "電單車行"
+            },
+            "shop/music": {
+                "name": "唱片舖",
+                "terms": "唱片舖"
+            },
+            "shop/newsagent": {
+                "name": "報紙檔",
+                "terms": "報紙檔"
+            },
+            "shop/optician": {
+                "name": "眼鏡鋪",
+                "terms": "眼鏡鋪"
+            },
+            "shop/outdoor": {
+                "name": "行山舖",
+                "terms": "行山舖"
+            },
+            "shop/pet": {
+                "name": "寵物舖",
+                "terms": "寵物舖"
+            },
+            "shop/photo": {
+                "name": "影相舖",
+                "terms": "影相舖"
+            },
+            "shop/shoes": {
+                "name": "鞋舖",
+                "terms": "鞋舖"
+            },
+            "shop/sports": {
+                "name": "運動舖",
+                "terms": "運動舖"
+            },
+            "shop/stationery": {
+                "name": "文具舖",
+                "terms": "文具舖"
+            },
+            "shop/supermarket": {
+                "name": "超級市場",
+                "terms": "超級市場"
+            },
+            "shop/toys": {
+                "name": "玩具舖",
+                "terms": "玩具舖"
+            },
+            "shop/travel_agency": {
+                "name": "旅行社",
+                "terms": "旅行社"
+            },
+            "shop/tyres": {
+                "name": "軚舖",
+                "terms": "軚舖"
+            },
+            "shop/vacant": {
+                "name": "吉舖",
+                "terms": "吉舖"
+            },
+            "shop/variety_store": {
+                "name": "雜貨舖",
+                "terms": "雜貨舖"
+            },
+            "shop/video": {
+                "name": "影視店",
+                "terms": "影視店"
+            },
+            "tourism": {
+                "name": "旅行",
+                "terms": "旅行"
+            },
+            "tourism/alpine_hut": {
+                "name": "高山屋仔",
+                "terms": "高山屋仔"
+            },
+            "tourism/artwork": {
+                "name": "藝術品",
+                "terms": "藝術品"
+            },
+            "tourism/attraction": {
+                "name": "旅行名勝",
+                "terms": "旅行名勝"
+            },
+            "tourism/camp_site": {
+                "name": "營地",
+                "terms": "營地"
+            },
+            "tourism/caravan_site": {
+                "name": "露營車停車場",
+                "terms": "露營車停車場"
+            },
+            "tourism/chalet": {
+                "name": "木屋",
+                "terms": "木屋"
+            },
+            "tourism/guest_house": {
+                "name": "賓館",
+                "terms": "賓館"
+            },
+            "tourism/hostel": {
+                "name": "旅舍",
+                "terms": "旅舍"
+            },
+            "tourism/hotel": {
+                "name": "酒店",
+                "terms": "酒店"
+            },
+            "tourism/information": {
+                "name": "資訊處",
+                "terms": "資訊處"
+            },
+            "tourism/motel": {
+                "name": "汽車酒店",
+                "terms": "汽車酒店"
+            },
+            "tourism/museum": {
+                "name": "博物館",
+                "terms": "博物館"
+            },
+            "tourism/picnic_site": {
+                "name": "郊遊地點",
+                "terms": "郊遊地點"
+            },
+            "tourism/theme_park": {
+                "name": "主題主園",
+                "terms": "主題主園"
+            },
+            "tourism/viewpoint": {
+                "name": "觀景",
+                "terms": "觀景"
+            },
+            "tourism/zoo": {
+                "name": "動物園",
+                "terms": "動物園"
+            },
+            "type/boundary": {
+                "name": "界",
+                "terms": "界"
+            },
+            "type/boundary/administrative": {
+                "name": "行政邊界",
+                "terms": "行政邊界"
+            },
+            "type/multipolygon": {
+                "name": "幾多邊形",
+                "terms": "幾多邊形"
+            },
+            "type/restriction": {
+                "name": "限制",
+                "terms": "限制"
+            },
+            "type/route": {
+                "name": "路綫",
+                "terms": "路綫"
+            },
+            "type/route/bicycle": {
+                "name": "單車路綫",
+                "terms": "單車路綫"
+            },
+            "type/route/bus": {
+                "name": "巴士路綫",
+                "terms": "巴士路綫"
+            },
+            "type/route/detour": {
+                "name": "巡遊路綫",
+                "terms": "巡遊路綫"
+            },
+            "type/route/ferry": {
+                "name": "航綫",
+                "terms": "航綫"
+            },
+            "type/route/foot": {
+                "name": "行人路綫",
+                "terms": "行人路綫"
+            },
+            "type/route/hiking": {
+                "name": "行山路綫",
+                "terms": "行山路綫"
+            },
+            "type/route/pipeline": {
+                "name": "供水路綫",
+                "terms": "供水路綫"
+            },
+            "type/route/power": {
+                "name": "供電路綫",
+                "terms": "供電路綫"
+            },
+            "type/route/road": {
+                "name": "行車路綫",
+                "terms": "行車路綫"
+            },
+            "type/route/train": {
+                "name": "火車路綫",
+                "terms": "火車路綫"
+            },
+            "type/route/tram": {
+                "name": "電車路綫",
+                "terms": "電車路綫"
+            },
+            "type/route_master": {
+                "name": "路綫總管",
+                "terms": "路綫總管"
+            },
+            "vertex": {
+                "name": "其他",
+                "terms": "其他"
+            },
+            "waterway": {
+                "name": "水路",
+                "terms": "水路"
+            },
+            "waterway/canal": {
+                "name": "水道",
+                "terms": "水道"
+            },
+            "waterway/dam": {
+                "name": "壩",
+                "terms": "壩"
+            },
+            "waterway/ditch": {
+                "name": "溝",
+                "terms": "溝"
+            },
+            "waterway/drain": {
+                "name": "排水道",
+                "terms": "排水道"
+            },
+            "waterway/river": {
+                "name": "江",
+                "terms": "江"
+            },
+            "waterway/riverbank": {
+                "name": "江岸",
+                "terms": "江岸"
+            },
+            "waterway/stream": {
+                "name": "涌",
+                "terms": "涌"
+            },
+            "waterway/weir": {
+                "name": "堰",
+                "terms": "堰"
+            }
+        }
+    }
+}

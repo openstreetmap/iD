@@ -388,8 +388,11 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Edifici"
+            },
             "category-landuse": {
-                "name": "Utilizzo del terreno"
+                "name": "Utilizzi del terreno"
             },
             "category-path": {
                 "name": "Sentiero"
@@ -403,8 +406,11 @@
             "category-route": {
                 "name": "Percorso"
             },
-            "category-water": {
-                "name": "Acqua"
+            "category-water-area": {
+                "name": "Specchi d'acqua"
+            },
+            "category-water-line": {
+                "name": "Corsi d'acqua"
             }
         },
         "fields": {
@@ -742,6 +748,9 @@
             "trail_visibility": {
                 "label": "Visibilità del Tracciato"
             },
+            "tree_type": {
+                "label": "Tipo"
+            },
             "vending": {
                 "label": "Beni venduti"
             },
@@ -923,7 +932,7 @@
             },
             "amenity/parking": {
                 "name": "Parcheggio",
-                "terms": "Parcheggio"
+                "terms": "parcheggio auto,autorimessa"
             },
             "amenity/pharmacy": {
                 "name": "Farmacia",
@@ -1140,6 +1149,14 @@
             "entrance": {
                 "name": "Entrata",
                 "terms": "Entrata"
+            },
+            "footway/crossing": {
+                "name": "Attraversamento",
+                "terms": "attraversamento pedonale,strisce pedonali,attraversamento,dosso"
+            },
+            "footway/sidewalk": {
+                "name": "Marciapiede",
+                "terms": "marciapiedi,passeggio,salvagente,banchina"
             },
             "highway": {
                 "name": "Strada",
@@ -1609,6 +1626,58 @@
                 "name": "Uffici",
                 "terms": "Ufficio"
             },
+            "office/architect": {
+                "name": "Architetto",
+                "terms": "architetto,studio,design"
+            },
+            "office/employment_agency": {
+                "name": "Agenzia per l'impiego",
+                "terms": "interinale,impiego,lavoro,ufficio per l'impiego,ufficio interinale"
+            },
+            "office/financial": {
+                "name": "Ufficio Finanziario",
+                "terms": "finanza,finanziaria,fiduciaria,mag"
+            },
+            "office/government": {
+                "name": "Ufficio governativo",
+                "terms": "sede,dipartimento,governo,comune,provincia,regione,procura,provveditorato,pretura"
+            },
+            "office/insurance": {
+                "name": "Assicurazione",
+                "terms": "assicurativo,sinistri,polizza assicurativa"
+            },
+            "office/it": {
+                "name": "Ufficio informatico",
+                "terms": "internet,web,app,applicazioni,siti web,siti internet,rete internet,computer,informatica,programmazione"
+            },
+            "office/lawyer": {
+                "name": "Studio legale",
+                "terms": "ufficio legale,legale,avvocato,avvocatura,magistrato,difensore,azzeccagarbugli"
+            },
+            "office/newspaper": {
+                "name": "Giornale",
+                "terms": "testata,quotidiano,redazione"
+            },
+            "office/ngo": {
+                "name": "Organizzazione non governativa",
+                "terms": "ong,ngo,onu,associazione,non profit,nonprofit,no profit,onlus,non lucrativa,senza fini di lucro,cooperativa,cooperazione"
+            },
+            "office/political_party": {
+                "name": "Sede di partito",
+                "terms": "circolo,partito,politica,sezione"
+            },
+            "office/telecommunication": {
+                "name": "Ufficio di telecomunicazioni",
+                "terms": "telecomunicazioni,telefonia"
+            },
+            "office/therapist": {
+                "name": "Terapista",
+                "terms": "fisioterapista,terapeuta"
+            },
+            "office/travel_agent": {
+                "name": "Agenzia di viaggi",
+                "terms": "travel,tour operator,turismo,viaggi,escursionismo"
+            },
             "place": {
                 "name": "Luogo",
                 "terms": "Luogo"
@@ -1656,6 +1725,10 @@
             "power/line": {
                 "name": "Linea elettrica",
                 "terms": "Elettrodotto"
+            },
+            "power/minor_line": {
+                "name": "Linea elettrica minore",
+                "terms": "corrente,elettricità,elettrodotto,cavo elettrico"
             },
             "power/pole": {
                 "name": "Palo della luce",

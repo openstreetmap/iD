@@ -402,9 +402,6 @@
             },
             "category-route": {
                 "name": "Ruta"
-            },
-            "category-water": {
-                "name": "Voda"
             }
         },
         "fields": {
@@ -917,10 +914,6 @@
             "amenity/marketplace": {
                 "name": "Tržnica",
                 "terms": "tržnica,pijaca,pijac,pija,plac"
-            },
-            "amenity/parking": {
-                "name": "Parkiralište za automobile",
-                "terms": "parkiralište,garaža,parkirno mjesto,podzemna garaža,parking"
             },
             "amenity/pharmacy": {
                 "name": "Ljekarna",
@@ -1774,6 +1767,9 @@
             },
             "shop/pet": {
                 "name": "Prodavaonica kućnim ljubimcima"
+            },
+            "shop/photo": {
+                "name": "Prodavaonica fotografske opreme"
             },
             "shop/shoes": {
                 "name": "Prodavaonica obuće"

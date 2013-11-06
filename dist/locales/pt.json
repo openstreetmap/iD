@@ -398,9 +398,6 @@
             },
             "category-route": {
                 "name": "Rota"
-            },
-            "category-water": {
-                "name": "Água"
             }
         },
         "fields": {
@@ -883,9 +880,6 @@
             },
             "amenity/marketplace": {
                 "name": "Mercado / Feira"
-            },
-            "amenity/parking": {
-                "name": "Estacionamento"
             },
             "amenity/pharmacy": {
                 "name": "Farmácia"

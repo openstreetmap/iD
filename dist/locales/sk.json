@@ -402,9 +402,6 @@
             },
             "category-route": {
                 "name": "Trasa"
-            },
-            "category-water": {
-                "name": "Vodná plocha"
             }
         },
         "fields": {
@@ -742,6 +739,9 @@
             "trail_visibility": {
                 "label": "Viditeľnosť trasy"
             },
+            "tree_type": {
+                "label": "Typ"
+            },
             "vending": {
                 "label": "Typ tovaru"
             },
@@ -923,7 +923,7 @@
             },
             "amenity/parking": {
                 "name": "Parkovisko",
-                "terms": "garáže,garaze,parkovanie,odstavná plocha,odstavna plocha"
+                "terms": "parkovisko,parkovanie,garaz,garáž"
             },
             "amenity/pharmacy": {
                 "name": "Lekáreň",
@@ -1140,6 +1140,14 @@
             "entrance": {
                 "name": "Vstup",
                 "terms": "vchod,východ,vychod,únikový východ,unikovy vychod,brána,brana,dvere,vráta,vrata"
+            },
+            "footway/crossing": {
+                "name": "Prechod",
+                "terms": "Prechod pre chodcov,zebra"
+            },
+            "footway/sidewalk": {
+                "name": "Chodník",
+                "terms": "chodnik"
             },
             "highway": {
                 "name": "Cesta",
@@ -1609,6 +1617,86 @@
                 "name": "Úrad",
                 "terms": "urad"
             },
+            "office/accountant": {
+                "name": "Účtovník",
+                "terms": "uctovnik"
+            },
+            "office/administrative": {
+                "name": "Administratívny úrad",
+                "terms": "administrativny urad"
+            },
+            "office/architect": {
+                "name": "Architekt",
+                "terms": "Architekti"
+            },
+            "office/company": {
+                "name": "Firma",
+                "terms": "firmy,spoločnosť,spolocnost"
+            },
+            "office/educational_institution": {
+                "name": "Vzdelávací inštitút",
+                "terms": "vzdelavaci institut,univerzita,skola,vzdelavanie,škola,vzdelávanie"
+            },
+            "office/employment_agency": {
+                "name": "Zamestnávateľská agentúra",
+                "terms": "zamestnavatelska agentura"
+            },
+            "office/estate_agent": {
+                "name": "Realitná agentúra",
+                "terms": "realitna agentura,realitka"
+            },
+            "office/financial": {
+                "name": "Finančný úrad",
+                "terms": "financny urad"
+            },
+            "office/government": {
+                "name": "Vládny úrad",
+                "terms": "vladny urad"
+            },
+            "office/insurance": {
+                "name": "Poistenie",
+                "terms": "poistenie"
+            },
+            "office/it": {
+                "name": "IT služby",
+                "terms": "IT, it sluzby,pocitace,počítače"
+            },
+            "office/lawyer": {
+                "name": "Právna kancelária",
+                "terms": "pravna kancelaria"
+            },
+            "office/newspaper": {
+                "name": "Noviny",
+                "terms": "noviny"
+            },
+            "office/ngo": {
+                "name": "Nezisková organizácia",
+                "terms": "neziskova organizacia,neziskovka"
+            },
+            "office/physician": {
+                "name": "Doktor",
+                "terms": "doktor"
+            },
+            "office/political_party": {
+                "name": "Politická strana",
+                "terms": "politicka strana"
+            },
+            "office/research": {
+                "name": "Výskum",
+                "terms": "vyskum"
+            },
+            "office/telecommunication": {
+                "name": "Telekomunikácie",
+                "terms": "telekomunikacie,mobilny operator,mobilný operátor,operator,operátor"
+            },
+            "office/therapist": {
+                "name": "Terapeut",
+                "terms": "terapeut"
+            },
+            "office/travel_agent": {
+                "name": "Cestovná agentúra",
+                "terms": "cestova agentura,cestovka,dovolenka,cestovanie"
+            },
             "place": {
                 "name": "Obec",
                 "terms": "dedina,mesto,sýdlo,sydlo"
@@ -1656,6 +1744,10 @@
             "power/line": {
                 "name": "Elektrické vedenie",
                 "terms": "elektricke vedenie,vedenie,kable,káble"
+            },
+            "power/minor_line": {
+                "name": "Vedľajšie elektrické vedenie",
+                "terms": "vedlajsie elektricke vedenie,rozvod, elektrika"
             },
             "power/pole": {
                 "name": "Elektrický stĺp",

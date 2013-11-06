@@ -288,9 +288,6 @@
             },
             "category-route": {
                 "name": "Roete"
-            },
-            "category-water": {
-                "name": "Water"
             }
         },
         "fields": {
@@ -726,9 +723,6 @@
             },
             "amenity/marketplace": {
                 "name": "Markplein"
-            },
-            "amenity/parking": {
-                "name": "Parkering"
             },
             "amenity/pharmacy": {
                 "name": "Apteek"

@@ -61,17 +61,14 @@
             },
             "amenity/kindergarten": {
                 "name": "Nursery",
-                "terms": "Nursery, Pre-school, preschool"
-            },
-            "amenity/parking": {
-                "name": "Car Parking"
+                "terms": "Nursery, Pre-school, preschool, kingergarden"
             },
             "amenity/post_box": {
                 "name": "Post Box",
                 "terms": "Mailbox"
             },
-            "railway/station": {
-                "terms": "train station, station"
+            "amenity/ranger_station": {
+                "name": "Warden Station"
             },
             "tourism/camp_site": {
                 "terms": "camping"

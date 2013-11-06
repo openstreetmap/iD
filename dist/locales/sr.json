@@ -394,9 +394,6 @@
             },
             "category-route": {
                 "name": "Путања"
-            },
-            "category-water": {
-                "name": "Вода"
             }
         },
         "fields": {
@@ -874,9 +871,6 @@
             },
             "amenity/marketplace": {
                 "name": "Тржница"
-            },
-            "amenity/parking": {
-                "name": "Паркинг"
             },
             "amenity/pharmacy": {
                 "name": "Апотека"

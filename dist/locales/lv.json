@@ -260,11 +260,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-water": {
-                "name": "Ūdens"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Piekļuve",
@@ -573,9 +568,6 @@
             },
             "amenity/marketplace": {
                 "name": "Tirgus"
-            },
-            "amenity/parking": {
-                "name": "Stāvvieta"
             },
             "amenity/pharmacy": {
                 "name": "Aptieka"

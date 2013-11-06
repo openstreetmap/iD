@@ -223,9 +223,6 @@
             },
             "category-route": {
                 "name": "Rute"
-            },
-            "category-water": {
-                "name": "Vann"
             }
         },
         "fields": {
@@ -633,9 +630,6 @@
             },
             "amenity/marketplace": {
                 "name": "Markedsplass"
-            },
-            "amenity/parking": {
-                "name": "Parkering"
             },
             "amenity/pharmacy": {
                 "name": "Apotek"

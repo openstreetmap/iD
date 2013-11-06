@@ -401,9 +401,6 @@
             },
             "category-route": {
                 "name": "Ruta"
-            },
-            "category-water": {
-                "name": "Voda"
             }
         },
         "fields": {
@@ -919,10 +916,6 @@
             "amenity/marketplace": {
                 "name": "Tržnica",
                 "terms": "tržnica,pijaca"
-            },
-            "amenity/parking": {
-                "name": "Parking",
-                "terms": "parking,parkiralište,parking za automobile"
             },
             "amenity/pharmacy": {
                 "name": "Apoteka",

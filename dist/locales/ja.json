@@ -401,9 +401,6 @@
             },
             "category-route": {
                 "name": "ルート"
-            },
-            "category-water": {
-                "name": "水路"
             }
         },
         "fields": {
@@ -887,9 +884,6 @@
             },
             "amenity/marketplace": {
                 "name": "市場"
-            },
-            "amenity/parking": {
-                "name": "駐車場"
             },
             "amenity/pharmacy": {
                 "name": "薬局, ドラッグストア"

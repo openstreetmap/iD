@@ -402,9 +402,6 @@
             },
             "category-route": {
                 "name": "Tuyến đường"
-            },
-            "category-water": {
-                "name": "Nước"
             }
         },
         "fields": {
@@ -742,6 +739,9 @@
             "trail_visibility": {
                 "label": "Tầm nhìn trên Đường mòn"
             },
+            "tree_type": {
+                "label": "Loại"
+            },
             "vending": {
                 "label": "Loại Hàng hóa"
             },
@@ -1055,7 +1055,7 @@
             },
             "barrier/gate": {
                 "name": "Cổng",
-                "terms": "cổng,cong"
+                "terms": "cổng,cổng vào,cong,cong vao"
             },
             "barrier/hedge": {
                 "name": "Hàng rào Cây",
@@ -1140,6 +1140,14 @@
             "entrance": {
                 "name": "Cửa vào",
                 "terms": "cửa vào,lối vào,cua vao,loi vao"
+            },
+            "footway/crossing": {
+                "name": "Lối Băng qua Đường",
+                "terms": "lối băng qua đường,lối qua đường,đường ngựa vằn,loi bang qua duong,loi qua duong,duong ngua van"
+            },
+            "footway/sidewalk": {
+                "name": "Lề đường",
+                "terms": "lề đường,vỉa hè,đường đi bộ,đường dạo,le duong,vie he,duong di bo,duong dao"
             },
             "highway": {
                 "name": "Đường Giao thông",
@@ -1307,7 +1315,7 @@
             },
             "historic/ruins": {
                 "name": "Tàn tích",
-                "terms": "Di tích"
+                "terms": "tàn tích,di tích"
             },
             "historic/wayside_cross": {
                 "name": "Thánh Giá Dọc đường",
@@ -1387,7 +1395,7 @@
             },
             "leisure": {
                 "name": "Giải trí",
-                "terms": "giải trí,thể thao,thể dục,giai tri,the thao,thể dục"
+                "terms": "giải trí,thể thao,thể dục,giai tri,the thao,the duc"
             },
             "leisure/common": {
                 "name": "Đất công",
@@ -1607,7 +1615,87 @@
             },
             "office": {
                 "name": "Văn phòng",
-                "terms": "văn phòng,van phong"
+                "terms": "văn phòng,sở,van phong,so"
+            },
+            "office/accountant": {
+                "name": "Tư vấn Kế toán",
+                "terms": "tư vấn kế toán,kế toán viên,văn phòng kế toán,nhân viên kế toán,dịch vụ khai thuế,văn phòng khai thuế,tài chính,tài chánh,tu van ke toan,ke toan vien,van phong ke toan,nhan vien ke toan,dich vu khai thue,van phong khai thue,tai chinh,tai chanh"
+            },
+            "office/administrative": {
+                "name": "Cơ quan Địa phương",
+                "terms": "cơ quan địa phương,hội đồng địa phương,công sở địa phương,sở hành chính địa phương,co quan dia phuong,hoi dong dia phuong,cong so dia phuong,so hanh chinh dia phuong"
+            },
+            "office/architect": {
+                "name": "Kiến trúc sư",
+                "terms": "kiến trúc sư,kien truc su"
+            },
+            "office/company": {
+                "name": "Văn phòng Công ty",
+                "terms": "văn phòng công ty,văn phòng công ti,văn phòng cty,trụ sở công ty,trụ sở công ti,trụ sở cty,van phong cong ty,van phong cong ti,van phong cty,tru so cong ty,tru so cong ti,tru so cty"
+            },
+            "office/educational_institution": {
+                "name": "Trường học",
+                "terms": "trường học,trường cao đẳng,trường đại học,học viện,hội đồng giáo dục,học khu,khu học chánh,nha học chánh,truong hoc,trường cao đẳng,trường đại học,học viện,hoi dong giao duc,hoc khu,khu hoc chanh,nha hoc chanh"
+            },
+            "office/employment_agency": {
+                "name": "Cơ quan Giới thiệu Việc làm",
+                "terms": "cơ quan giới thiệu việc làm,cơ quan việc làm,văn phòng giới thiệu việc làm,co quan gioi thieu viec lam,co quan viec lam,van phong gioi thieu viec lam"
+            },
+            "office/estate_agent": {
+                "name": "Văn phòng Bất động sản",
+                "terms": "văn phòng bất động sản,địa ốc viên,chuyên viên địa ốc,chuyên viên bất động sản,van phong bat dong san,dia oc vien,chuyen vien dia oc,chuyen vien bat dong san"
+            },
+            "office/financial": {
+                "name": "Văn phòng Tài chính",
+                "terms": "văn phòng tài chính,văn phòng tài chánh,van phong tai chinh,van phong tai chanh"
+            },
+            "office/government": {
+                "name": "Công sở",
+                "terms": "công sở,cơ quan chính phủ,cơ quan chính quyền,cong so,co quan chinh phu,co quan chinh quyen"
+            },
+            "office/insurance": {
+                "name": "Văn phòng Bảo hiểm",
+                "terms": "văn phòng bảo hiểm,van phong bao hiem"
+            },
+            "office/it": {
+                "name": "Văn phòng Tin học",
+                "terms": "văn phòng tin học,chuyên viên tin học,văn phòng công nghệ thông tin,văn phòng CNTT,van phong tin hoc,chuyen vien tin hoc,van phong cong nghe thong tin,van phong CNTT"
+            },
+            "office/lawyer": {
+                "name": "Văn phòng Luật sư",
+                "terms": "văn phòng luật sư,van phong luat su"
+            },
+            "office/newspaper": {
+                "name": "Tờ báo",
+                "terms": "tờ báo,nhật báo,tuần báo,tạp chí,to bao,nhat bao,tuan bao,tap chi"
+            },
+            "office/ngo": {
+                "name": "Tổ chức Phi chính phủ",
+                "terms": "tổ chức phi chính phủ,văn phòng NGO,văn phòng ONG,tổ chức phi lợi nhuận,tổ chức bất vụ lợi,quỹ từ thiện,hiệp hội thương mại,to chuc phi chinh phu,van phong NGO,van phong ONG,to chuc phi loi nhuan,to chuc bat vu loi,quy tu thien,hiep hoi thuong mai"
+            },
+            "office/physician": {
+                "name": "Văn phòng Bác sĩ",
+                "terms": "văn phòng bác sĩ,văn phòng bác sỹ,văn phòng thầy thuốc,van phong bac si,van phong bac sy,van phong thay thuoc"
+            },
+            "office/political_party": {
+                "name": "Đảng Chính trị",
+                "terms": "văn phòng đảng chính trị,văn phòng đảng chánh trị,van phong dang chinh tri,van phong dang chanh tri"
+            },
+            "office/research": {
+                "name": "Văn phòng Nghiên cứu",
+                "terms": "văn phòng nghiên cứu,van phong nghien cuu"
+            },
+            "office/telecommunication": {
+                "name": "Văn phòng Viễn thông",
+                "terms": "văn phòng viễn thông,tiệm viễn thông,cửa hàng viễn thông,trụ sở công ty viễn thông,trụ sở công ti viễn thông,trụ sở cty viễn thông,van phong vien thong,tiem vien thong,cua hang vien thong,tru so cong ty vien thong,tru so cong ti vien thong,tru so cty vien thong"
+            },
+            "office/therapist": {
+                "name": "Nhà trị liệu",
+                "terms": "nhà trị liệu,bác sĩ chuyên khoa,thầy thuốc chuyên khoa,nha tri lieu,bac si chuyen khoa,thay thuoc chuyen khoa"
+            },
+            "office/travel_agent": {
+                "name": "Văn phòng Du lịch",
+                "terms": "văn phòng du lịch,công ty du lịch,công ti du lịch,cty du lịch,đại lý du lịch,đại lí du lịch,du lịch theo nhóm,tour,vé máy bay,van phong du lich,cong ty du lich,cong ti du lich,cty du lich,dai ly du lich,dai li du lich,du lich theo nhom,ve may bay"
             },
             "place": {
                 "name": "Địa phương",
@@ -1654,8 +1742,12 @@
                 "terms": "máy phát điện,động cơ,tua bin,tuabin,may phat dien,dong co"
             },
             "power/line": {
-                "name": "Đường Dây điện",
-                "terms": "đường dây điện,duong day dien"
+                "name": "Đường Dây điện Cao thế",
+                "terms": "đường dây điện cao thế,đường dây điện cao áp,đường dây truyền tải điện năng,duong day dien cao the,duong day dien cao ap,duong day truyen tai dien nang"
+            },
+            "power/minor_line": {
+                "name": "Đường Dây điện Hạ/Trung thế",
+                "terms": "đường dây điện trung thế,đường dây điện hạ thế,đường dây điện trung áp,đường dây điện hạ áp,duong day dien trung the,duong day dien ha the,duong day dien trung ap,duong day dien ha ap"
             },
             "power/pole": {
                 "name": "Cột điện",
@@ -1663,7 +1755,7 @@
             },
             "power/sub_station": {
                 "name": "Trạm Điện Phụ",
-                "terms": "trạm điện phụ"
+                "terms": "trạm điện phụ,tram dien phu"
             },
             "power/tower": {
                 "name": "Cột điện Cao thế",
@@ -1690,7 +1782,7 @@
                 "terms": "ga xép,ga nhỏ,ga xep,ga nho"
             },
             "railway/level_crossing": {
-                "name": "Giao lộ Đường sắt",
+                "name": "Điểm giao Đường sắt",
                 "terms": "giao lộ đường sắt,giao lộ đường ray,nút giao đường sắt,giao lo duong sat,giao lo duong ray,nut giao duong sat"
             },
             "railway/monorail": {

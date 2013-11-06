@@ -261,6 +261,7 @@
         "none": "Aucun",
         "custom": "Personnalisé",
         "custom_prompt": "Entre un modèle de tuile. Les jetons valides sont  {z}, {x}, {y} pour un système Z/X/Y  et {u} pour le quatrième système.",
+        "fix_misalignment": "Corriger l'alignement",
         "reset": "réinitialiser"
     },
     "restore": {
@@ -401,9 +402,6 @@
             },
             "category-route": {
                 "name": "Route"
-            },
-            "category-water": {
-                "name": "Eau"
             }
         },
         "fields": {
@@ -440,9 +438,12 @@
                     },
                     "destination": {
                         "title": "Interdit sauf riverains",
-                        "description": "Circulation interdite, sauf pour accéder aux zones désservies"
+                        "description": "Circulation interdite, sauf pour accéder aux zones desservies"
                     }
                 }
+            },
+            "access_toilets": {
+                "label": "Accès"
             },
             "address": {
                 "label": "Adresse",
@@ -578,7 +579,7 @@
                 "label": "Pente"
             },
             "internet_access": {
-                "label": "Accès Internet",
+                "label": "Accès internet",
                 "options": {
                     "wlan": "Wifi",
                     "wired": "Par câble",
@@ -601,6 +602,9 @@
             "levels": {
                 "label": "Niveaux",
                 "placeholder": "2, 4, 6..."
+            },
+            "lit": {
+                "label": "Éclairage"
             },
             "location": {
                 "label": "Lieu"
@@ -745,7 +749,7 @@
                 "label": "Type"
             },
             "website": {
-                "label": "Site Internet",
+                "label": "Site internet",
                 "placeholder": "http://example.com"
             },
             "wetland": {
@@ -791,7 +795,7 @@
                 "terms": "Hélipad"
             },
             "aeroway/runway": {
-                "name": "Piste d'atterissage",
+                "name": "Piste d’atterrissage",
                 "terms": "Piste de décollage, Piste d'atterissage, Piste"
             },
             "aeroway/taxiway": {
@@ -827,12 +831,12 @@
                 "terms": "Banc"
             },
             "amenity/bicycle_parking": {
-                "name": "Parking à vélos",
-                "terms": "Parking à Vélo, Parking à Bicyclette, stationnement à vélo"
+                "name": "Parc à vélo",
+                "terms": "Parking à vélo, Parking à bicyclette, Stationnement à vélo"
             },
             "amenity/bicycle_rental": {
                 "name": "Location de vélos",
-                "terms": "Location de Vélo, Location de Bicyclette"
+                "terms": "Location de vélo, Location de bicyclette"
             },
             "amenity/boat_rental": {
                 "name": "Location de bateau",
@@ -871,8 +875,8 @@
                 "terms": "Palais de Justice, Tribunal"
             },
             "amenity/drinking_water": {
-                "name": "Eau Potable",
-                "terms": "Eau Potable"
+                "name": "Eau potable",
+                "terms": "Eau potable"
             },
             "amenity/embassy": {
                 "name": "Embassade",
@@ -884,7 +888,7 @@
             },
             "amenity/fire_station": {
                 "name": "Caserne de pompiers",
-                "terms": "Station de Pompiers, Caserne de Pompiers"
+                "terms": "Station de pompiers, Caserne de pompiers"
             },
             "amenity/fountain": {
                 "name": "Fontaine",
@@ -892,7 +896,7 @@
             },
             "amenity/fuel": {
                 "name": "Station service",
-                "terms": "Station Essence, Station Service"
+                "terms": "Station essence, Station service"
             },
             "amenity/grave_yard": {
                 "name": "Cimetière",
@@ -915,8 +919,8 @@
                 "terms": "Marché"
             },
             "amenity/parking": {
-                "name": "Parking",
-                "terms": "Parking, Zone de Stationnement, Stationnement"
+                "name": "Parc de stationnement",
+                "terms": "Parc de stationnement, parking"
             },
             "amenity/pharmacy": {
                 "name": "Pharmacie",
@@ -924,11 +928,11 @@
             },
             "amenity/place_of_worship": {
                 "name": "Lieu de culte",
-                "terms": "Edifice Religieux"
+                "terms": "Édifice religieux"
             },
             "amenity/place_of_worship/buddhist": {
-                "name": "Temple Boudhiste",
-                "terms": "Temple Boudhiste"
+                "name": "Temple boudhiste",
+                "terms": "Temple boudhiste"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Église",
@@ -948,15 +952,19 @@
             },
             "amenity/post_box": {
                 "name": "Boîte aux lettres",
-                "terms": "Boîte aux Lettres"
+                "terms": "Boîte aux lettres"
             },
             "amenity/post_office": {
                 "name": "Bureau de poste",
-                "terms": "Bureau de Poste"
+                "terms": "Bureau de poste"
             },
             "amenity/pub": {
                 "name": "Pub",
                 "terms": "Pub"
+            },
+            "amenity/ranger_station": {
+                "name": "Poste de garde",
+                "terms": "Poste de garde, gardien"
             },
             "amenity/restaurant": {
                 "name": "Restaurant",
@@ -971,8 +979,8 @@
                 "terms": "Piscine"
             },
             "amenity/taxi": {
-                "name": "Station de Taxi",
-                "terms": "Station de Taxi"
+                "name": "Station de taxi",
+                "terms": "Station de taxi"
             },
             "amenity/telephone": {
                 "name": "Téléphone",
@@ -1020,7 +1028,7 @@
             },
             "barrier/cattle_grid": {
                 "name": "Grille à bétail",
-                "terms": "Passage Canadien"
+                "terms": "Passage canadien"
             },
             "barrier/city_wall": {
                 "name": "Mur d'enceinte",
@@ -1052,7 +1060,7 @@
             },
             "barrier/kissing_gate": {
                 "name": "Portillon à chicane mobile",
-                "terms": "Portillon à Chicanes"
+                "terms": "Portillon à chicanes"
             },
             "barrier/lift_gate": {
                 "name": "Barrière levante",
@@ -1076,7 +1084,7 @@
             },
             "boundary/administrative": {
                 "name": "Frontière administrative",
-                "terms": "Frontière Administrative"
+                "terms": "Frontière administrative"
             },
             "building": {
                 "name": "Bâtiment",
@@ -1087,8 +1095,8 @@
                 "terms": "Appartements"
             },
             "building/commercial": {
-                "name": "Bâtiment Commercial",
-                "terms": "Bâtiment Commercial"
+                "name": "Bâtiment commercial",
+                "terms": "Bâtiment commercial"
             },
             "building/entrance": {
                 "name": "Entrée",
@@ -1107,16 +1115,16 @@
                 "terms": "Hutte"
             },
             "building/industrial": {
-                "name": "Bâtiment Industriel",
-                "terms": "Bâtiment Industriel"
+                "name": "Bâtiment industriel",
+                "terms": "Bâtiment industriel"
             },
             "building/residential": {
-                "name": "Bâtiment Résidentiel",
-                "terms": "Bâtiment Résidentiel"
+                "name": "Bâtiment résidentiel",
+                "terms": "Bâtiment résidentiel"
             },
             "emergency/ambulance_station": {
                 "name": "Station d'ambulance",
-                "terms": "Station d'ambulances"
+                "terms": "Station d'ambulance"
             },
             "emergency/fire_hydrant": {
                 "name": "Borne incendie",
@@ -1124,7 +1132,7 @@
             },
             "emergency/phone": {
                 "name": "Téléphone d'urgence",
-                "terms": "Téléphone d'Urgence"
+                "terms": "Téléphone d'urgence"
             },
             "entrance": {
                 "name": "Entrée",
@@ -1136,11 +1144,11 @@
             },
             "highway/bridleway": {
                 "name": "Sentier équestre",
-                "terms": "Piste Cavalière, Sentier à Chevaux, Sentier Pour Chevaux"
+                "terms": "Piste cavalière, Sentier à chevaux, Sentier pour chevaux"
             },
             "highway/bus_stop": {
                 "name": "Arrêt de bus",
-                "terms": "Arrêt de Bus"
+                "terms": "Arrêt de bus"
             },
             "highway/crossing": {
                 "name": "Passage piéton",
@@ -1148,7 +1156,7 @@
             },
             "highway/cycleway": {
                 "name": "Voie cyclable",
-                "terms": "Piste Cyclable"
+                "terms": "Piste cyclable"
             },
             "highway/footway": {
                 "name": "Voie piétonne",
@@ -1156,11 +1164,11 @@
             },
             "highway/living_street": {
                 "name": "Zone de rencontre",
-                "terms": "Zone de Rencontre"
+                "terms": "Zone de rencontre"
             },
             "highway/mini_roundabout": {
                 "name": "Mini rond-point",
-                "terms": "Mini Rond-Point"
+                "terms": "Mini rond-point"
             },
             "highway/motorway": {
                 "name": "Autoroute",
@@ -1168,11 +1176,11 @@
             },
             "highway/motorway_junction": {
                 "name": "Bretelle d'autoroute",
-                "terms": "Echangeur Autoroutier"
+                "terms": "Échangeur autoroutier"
             },
             "highway/motorway_link": {
                 "name": "Bretelle d'autoroute",
-                "terms": "Bretelle d'Autoroute"
+                "terms": "Bretelle d'autoroute"
             },
             "highway/path": {
                 "name": "Chemin non carrossable",
@@ -1184,7 +1192,7 @@
             },
             "highway/primary": {
                 "name": "Route principale",
-                "terms": "Route Principale"
+                "terms": "Route principale"
             },
             "highway/primary_link": {
                 "name": "Voie d'accès à une route primaire",
@@ -1208,7 +1216,7 @@
             },
             "highway/service": {
                 "name": "Route d'accès",
-                "terms": "Route de Service"
+                "terms": "Route de service"
             },
             "highway/service/alley": {
                 "name": "Ruelle",
@@ -1224,7 +1232,7 @@
             },
             "highway/service/emergency_access": {
                 "name": "Accès d'urgence",
-                "terms": "Accès d'Urgence"
+                "terms": "Accès d'urgence"
             },
             "highway/service/parking_aisle": {
                 "name": "Allée de parking",
@@ -1235,7 +1243,7 @@
                 "terms": "Escalier"
             },
             "highway/stop": {
-                "name": "Paneau Stop",
+                "name": "Panneau Stop",
                 "terms": "Arrêt"
             },
             "highway/tertiary": {
@@ -1256,7 +1264,7 @@
             },
             "highway/trunk": {
                 "name": "Voie rapide",
-                "terms": "Voie rapide,voie express"
+                "terms": "Voie rapide, voie express"
             },
             "highway/trunk_link": {
                 "name": "Voie d'accès à une voie rapide",
@@ -1272,11 +1280,11 @@
             },
             "historic": {
                 "name": "Site historique",
-                "terms": "Site Historique"
+                "terms": "Site historique"
             },
             "historic/archaeological_site": {
                 "name": "Site archéologique",
-                "terms": "Site Archéologique"
+                "terms": "Site archéologique"
             },
             "historic/boundary_stone": {
                 "name": "Borne frontière",
@@ -1300,19 +1308,19 @@
             },
             "historic/wayside_cross": {
                 "name": "Croix/Calvaire",
-                "terms": "Une Croix au bord d'un chemin"
+                "terms": "Une croix au bord d'un chemin"
             },
             "historic/wayside_shrine": {
                 "name": "Bildstock",
-                "terms": "tombeau historique, oratoire, autel, calvaire"
+                "terms": "Tombeau historique, oratoire, autel, calvaire"
             },
             "landuse": {
                 "name": "Type de terrain",
-                "terms": "Utilisation du Terrain"
+                "terms": "Utilisation du terrain"
             },
             "landuse/allotments": {
                 "name": "Jardins familiaux",
-                "terms": "Jardins familiaux, Eco-Jardins, jardins communautaires, jardin communautaire"
+                "terms": "Jardins familiaux, eco-jardins, jardins communautaires, jardin communautaire"
             },
             "landuse/basin": {
                 "name": "Bassin",
@@ -1336,7 +1344,7 @@
             },
             "landuse/farmyard": {
                 "name": "Bâtiments de ferme",
-                "terms": "Cour de Ferme"
+                "terms": "Cour de ferme"
             },
             "landuse/forest": {
                 "name": "Forêt",
@@ -1380,7 +1388,7 @@
             },
             "leisure/common": {
                 "name": "Terrain communal",
-                "terms": "terrain communal, bien communal, bois communal, pré communal"
+                "terms": "Terrain communal, bien communal, bois communal, pré communal"
             },
             "leisure/dog_park": {
                 "name": "Parc canin",
@@ -1532,7 +1540,7 @@
             },
             "natural/coastline": {
                 "name": "Ligne de côte",
-                "terms": "Ligne de Côte"
+                "terms": "Ligne de côte"
             },
             "natural/fell": {
                 "name": "Tunturi (type de montagne)",
@@ -1588,7 +1596,7 @@
             },
             "natural/wetland": {
                 "name": "Zone humide",
-                "terms": "Zone Humide, Marais, Marécage"
+                "terms": "Zone humide, Marais, Marécage"
             },
             "natural/wood": {
                 "name": "Bois",
@@ -1597,6 +1605,62 @@
             "office": {
                 "name": "Bureau",
                 "terms": "Bureau"
+            },
+            "office/accountant": {
+                "name": "Comptable",
+                "terms": "Comptable"
+            },
+            "office/administrative": {
+                "name": "Bureau administratif",
+                "terms": "Bureau administratif"
+            },
+            "office/architect": {
+                "name": "Architecte",
+                "terms": "Architecte"
+            },
+            "office/company": {
+                "name": "Bureau d'entreprise",
+                "terms": "Bureau d'entreprise, Siège social"
+            },
+            "office/educational_institution": {
+                "name": "Établissement d'enseignement",
+                "terms": "Établissement d'enseignement"
+            },
+            "office/employment_agency": {
+                "name": "Agence pour l'emploi",
+                "terms": "Agence pour l'emploi"
+            },
+            "office/estate_agent": {
+                "name": "Agence immobilière",
+                "terms": "Agence immobilière"
+            },
+            "office/insurance": {
+                "name": "Agence d'assurance",
+                "terms": "Agence d'assurance"
+            },
+            "office/lawyer": {
+                "name": "Cabinet d'avocats",
+                "terms": "Cabinet d'avocats"
+            },
+            "office/physician": {
+                "name": "Médecin",
+                "terms": "Médecin, Docteur"
+            },
+            "office/political_party": {
+                "name": "Parti politique",
+                "terms": "Parti politique"
+            },
+            "office/telecommunication": {
+                "name": "Agence télécom",
+                "terms": "Agence télécom"
+            },
+            "office/therapist": {
+                "name": "Thérapeute",
+                "terms": "Thérapeute, Soigneur"
+            },
+            "office/travel_agent": {
+                "name": "Agence de voyage",
+                "terms": "Agence de voyage"
             },
             "place": {
                 "name": "Toponymie",
@@ -1616,7 +1680,7 @@
             },
             "place/isolated_dwelling": {
                 "name": "Lieu-dit habité",
-                "terms": "Habitation Isolée"
+                "terms": "Habitation isolée"
             },
             "place/locality": {
                 "name": "Lieu-dit",
@@ -1646,6 +1710,10 @@
                 "name": "Câble aérien",
                 "terms": "Ligne électrique"
             },
+            "power/minor_line": {
+                "name": "Ligne électrique mineure",
+                "terms": "Ligne électrique mineure"
+            },
             "power/pole": {
                 "name": "Poteau",
                 "terms": "Pylone électrique, Poteau éléctrique"
@@ -1656,7 +1724,7 @@
             },
             "power/tower": {
                 "name": "Pylône haute-tension ",
-                "terms": "Pylône Haute-Tension"
+                "terms": "Pylône haute-tension"
             },
             "power/transformer": {
                 "name": "Transformateur",
@@ -1664,18 +1732,18 @@
             },
             "railway": {
                 "name": "Ferroviaire",
-                "terms": "Voie Ferrée, Chemin de Fer"
+                "terms": "Voie ferrée, Chemin de fer"
             },
             "railway/abandoned": {
                 "name": "Voie ferrée désaffectée",
-                "terms": "Voie Ferrée Abandonnée"
+                "terms": "Voie ferrée abandonnée"
             },
             "railway/disused": {
                 "name": "Voie ferrée désaffectée",
                 "terms": "Voie ferrée non utilisée"
             },
             "railway/halt": {
-                "name": "Hall de Gare",
+                "name": "Hall de gare",
                 "terms": "Halte ferroviaire"
             },
             "railway/level_crossing": {
@@ -1715,7 +1783,7 @@
                 "terms": "Relation"
             },
             "route/ferry": {
-                "name": "Trajet de Ferry",
+                "name": "Trajet de ferry",
                 "terms": "Ligne de Ferry"
             },
             "shop": {
@@ -1724,7 +1792,7 @@
             },
             "shop/alcohol": {
                 "name": "Magasin de vente d'alcool",
-                "terms": "Cave, Caviste, Magasin de Vin, Vins & Spiritueux"
+                "terms": "Cave, Caviste, Magasin de vin, Vins & Spiritueux"
             },
             "shop/bakery": {
                 "name": "Boulangerie",
@@ -1732,7 +1800,7 @@
             },
             "shop/beauty": {
                 "name": "Salon de beauté",
-                "terms": "Salon de beauté, institut de beauté"
+                "terms": "Salon de beauté, Institut de beauté"
             },
             "shop/beverages": {
                 "name": "Vente de boissons alcolisées",
@@ -1772,7 +1840,7 @@
             },
             "shop/clothes": {
                 "name": "Magasin de vêtements",
-                "terms": "Magasin de Vêtements"
+                "terms": "Magasin de vêtements"
             },
             "shop/computer": {
                 "name": "Magasin d'informatique",
@@ -1788,7 +1856,7 @@
             },
             "shop/deli": {
                 "name": "Épicerie de luxe",
-                "terms": "Epicerie Fine, Traiteur"
+                "terms": "Epicerie fine, Traiteur"
             },
             "shop/department_store": {
                 "name": "Grand magasin",
@@ -1827,7 +1895,7 @@
                 "terms": "Jardinerie, centre de jardinage"
             },
             "shop/gift": {
-                "name": "Boutique de cadeaux,Boutique de souvenirs",
+                "name": "Boutique de cadeaux, Boutique de souvenirs",
                 "terms": "Boutique de souvenirs"
             },
             "shop/greengrocer": {
@@ -1864,7 +1932,7 @@
             },
             "shop/mall": {
                 "name": "Centre commercial",
-                "terms": "centre d'achat"
+                "terms": "Centre d'achat"
             },
             "shop/mobile_phone": {
                 "name": "Magasin de téléphonie mobile",
@@ -1876,7 +1944,7 @@
             },
             "shop/music": {
                 "name": "Vente d'instruments de musique",
-                "terms": "magasin de musique"
+                "terms": "Magasin de musique"
             },
             "shop/newsagent": {
                 "name": "Kiosque à journaux",
@@ -1893,6 +1961,10 @@
             "shop/pet": {
                 "name": "Animalerie",
                 "terms": "Animalerie"
+            },
+            "shop/photo": {
+                "name": "Tirage de photos",
+                "terms": "Photographe, Tirage de photos"
             },
             "shop/shoes": {
                 "name": "Magasin de chaussures",
@@ -1924,7 +1996,7 @@
             },
             "shop/vacant": {
                 "name": "Commerce désaffecté",
-                "terms": "espace vacant, lot vacant"
+                "terms": "Espace vacant, lot vacant"
             },
             "shop/variety_store": {
                 "name": "Magasin à prix unique",
@@ -1944,7 +2016,7 @@
             },
             "tourism/artwork": {
                 "name": "Œuvre d'art",
-                "terms": "Oeuvre d'art,Œuvre d'art"
+                "terms": "Œuvre d'art"
             },
             "tourism/attraction": {
                 "name": "Attraction touristique",
@@ -1955,7 +2027,8 @@
                 "terms": "Camping"
             },
             "tourism/caravan_site": {
-                "name": "Aire pour caravanes"
+                "name": "Aire pour caravanes",
+                "terms": "Aire pour caravanes"
             },
             "tourism/chalet": {
                 "name": "Chalet",
@@ -1963,19 +2036,19 @@
             },
             "tourism/guest_house": {
                 "name": "Chambre d'hôtes",
-                "terms": "Chambre d'hôtes,Gîte"
+                "terms": "Chambre d'hôtes, Gîte"
             },
             "tourism/hostel": {
                 "name": "Auberge de jeunesse",
-                "terms": "auberge de jeunesse"
+                "terms": "Auberge de jeunesse"
             },
             "tourism/hotel": {
                 "name": "Hôtel",
-                "terms": "Hôtel,Hotel"
+                "terms": "Hôtel"
             },
             "tourism/information": {
                 "name": "Office de tourisme",
-                "terms": "renseignements"
+                "terms": "Renseignements"
             },
             "tourism/motel": {
                 "name": "Motel",
@@ -2003,15 +2076,15 @@
             },
             "type/boundary": {
                 "name": "Frontière",
-                "terms": "frontière"
+                "terms": "Frontière"
             },
             "type/boundary/administrative": {
-                "name": "Frontière Administrative",
+                "name": "Frontière administrative",
                 "terms": "Frontières administratives, frontière administrative"
             },
             "type/multipolygon": {
                 "name": "Multipolygone",
-                "terms": "multipolygone, multipolygone"
+                "terms": "Multi-polygone"
             },
             "type/restriction": {
                 "name": "Restriction",
@@ -2019,7 +2092,7 @@
             },
             "type/route": {
                 "name": "Route",
-                "terms": "route, rue, chemin, sentier"
+                "terms": "Route, rue, chemin, sentier"
             },
             "type/route/bicycle": {
                 "name": "Trajet Cyclable",
@@ -2038,15 +2111,15 @@
                 "terms": "Route de traversier, Ligne de ferry"
             },
             "type/route/foot": {
-                "name": "Trajet Pédestre",
-                "terms": "sentier"
+                "name": "Trajet pédestre",
+                "terms": "Sentier"
             },
             "type/route/hiking": {
                 "name": "Sentier pédestre",
                 "terms": "Sentier pédestre"
             },
             "type/route/pipeline": {
-                "name": "Trajet de Pipeline",
+                "name": "Trajet de pipeline",
                 "terms": "Pipeline, gazoduc, oléoduc"
             },
             "type/route/power": {
@@ -2054,15 +2127,15 @@
                 "terms": "Ligne électrique"
             },
             "type/route/road": {
-                "name": "Trajet Routier",
-                "terms": "route, rue, chemin, sentier"
+                "name": "Trajet routier",
+                "terms": "Route, rue, chemin, sentier"
             },
             "type/route/train": {
-                "name": "Trajet Ferroviaire",
-                "terms": "voie ferrée, chemin de fer"
+                "name": "Trajet ferroviaire",
+                "terms": "Voie ferrée, chemin de fer"
             },
             "type/route/tram": {
-                "name": "Trajet de Tramway",
+                "name": "Trajet de tramway",
                 "terms": "Route de tramway"
             },
             "type/route_master": {
@@ -2074,8 +2147,8 @@
                 "terms": "Autres"
             },
             "waterway": {
-                "name": "Eau",
-                "terms": "Voie d'eau,Cours d'eau"
+                "name": "Voie navigable",
+                "terms": "Voie d'eau, Cours d'eau"
             },
             "waterway/canal": {
                 "name": "Canal",
@@ -2091,7 +2164,7 @@
             },
             "waterway/drain": {
                 "name": "Canal d'évacuation d'eau pluviale",
-                "terms": "drain"
+                "terms": "Drain"
             },
             "waterway/river": {
                 "name": "Rivière",
@@ -2107,7 +2180,7 @@
             },
             "waterway/weir": {
                 "name": "Seuil",
-                "terms": "seuil"
+                "terms": "Seuil"
             }
         }
     }

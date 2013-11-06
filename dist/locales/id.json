@@ -371,9 +371,6 @@
             },
             "category-route": {
                 "name": "Rute"
-            },
-            "category-water": {
-                "name": "Air"
             }
         },
         "fields": {
@@ -750,9 +747,6 @@
             },
             "amenity/marketplace": {
                 "name": "Pasar"
-            },
-            "amenity/parking": {
-                "name": "Parkir"
             },
             "amenity/pharmacy": {
                 "name": "Farmasi"

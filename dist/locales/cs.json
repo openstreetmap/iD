@@ -402,9 +402,6 @@
             },
             "category-route": {
                 "name": "Trasa"
-            },
-            "category-water": {
-                "name": "Voda"
             }
         },
         "fields": {
@@ -920,10 +917,6 @@
             "amenity/marketplace": {
                 "name": "Trhoviště",
                 "terms": "tržiště,trh"
-            },
-            "amenity/parking": {
-                "name": "Parkoviště",
-                "terms": "parkoviště,parkování,parkovací stání"
             },
             "amenity/pharmacy": {
                 "name": "Lékárna",
@@ -1654,8 +1647,12 @@
                 "terms": "generátor, elektrický generátor, elektrárna, zdroj proudu"
             },
             "power/line": {
-                "name": "Elektrické vedení",
-                "terms": "elektrické vedení"
+                "name": "Elektrické vedení vysokého napětí",
+                "terms": "elektrické vedení,vysoké napětí,přenosová soustava,energetika"
+            },
+            "power/minor_line": {
+                "name": "Elektrické vedení nízkého napětí",
+                "terms": "elektrické vedení,nízké napětí,přenosová soustava,elektrický kabel,energetika"
             },
             "power/pole": {
                 "name": "Eletrický sloup",

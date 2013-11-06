@@ -16,7 +16,8 @@
             "tail": "বিন্দু সংযোজন করার জন্য ম্যাপে ক্লিক করুন।"
         },
         "browse": {
-            "title": "ঘুরে ফিরে দেখুন"
+            "title": "ঘুরে ফিরে দেখুন",
+            "description": "মানচিত্র প্যান এবং  জুম করুন "
         },
         "draw_area": {
             "tail": "অাপনার এলাকায় নোড সংযোজন-এর জন্য ক্লিক করুন। এলাকাটি সম্পুর্ন করার জন্য প্রথম নোড-এ ক্লিক করুন।"
@@ -39,6 +40,16 @@
                 "area": "একটি এলাকা শুরু করা হয়েছে।"
             }
         },
+        "continue": {
+            "key": "এ",
+            "title": "\t\nচালিয়ে যান",
+            "description": "এই রেখাকে প্রলম্বিত করুন.",
+            "not_eligible": "কোন রেখাকে এখানে প্রলম্বিত করা যাবে না.",
+            "annotation": {
+                "line": "একটি রেখাকে প্রলম্বিত করা হয়েছে",
+                "area": "একটি ক্ষেত্রকে বড় করা হয়েছে"
+            }
+        },
         "cancel_draw": {
             "annotation": "অাঁকা বাতিল করা হয়েছে।"
         },
@@ -46,20 +57,34 @@
             "annotation": "কিছু ট্যাগ পরিবর্তন করা হয়েছে।"
         },
         "circularize": {
+            "title": "বৃত্তাকার করুন",
             "description": {
                 "line": "এই রেখাটিকে গোল করুন।",
                 "area": "এই এলাকাটিকে গোল করুন।"
             },
+            "key": "ও",
             "annotation": {
                 "line": "একটি রেখাকে গোল করা হয়েছে।",
                 "area": "একটি এলাকাকে গোল করা হয়েছে।"
             }
         },
         "orthogonalize": {
+            "title": "বর্গাকৃতি",
+            "description": {
+                "line": "এই লাইন এর কোনসমূহ বর্গাকৃতি করুন.",
+                "area": "এই ক্ষেত্রটির কোনসমূহ বর্গাকৃতি করুন."
+            },
+            "key": "এস",
             "annotation": {
                 "line": "একটি রেখার কোনাগুলিকে চৌকো করা হয়েছে।",
                 "area": "একটি এলাকার কোনাগুলিকে চৌকো করা হয়েছে।"
             }
+        },
+        "straighten": {
+            "title": "সোজা করুন",
+            "description": "এই রেখাটিকে সোজা করুন",
+            "key": "এস",
+            "annotation": "একটি রেখাকে সোজা করা হয়েছে।"
         },
         "delete": {
             "title": "মুছে ফেলুন",
@@ -90,16 +115,21 @@
         "disconnect": {
             "title": "বিচ্ছিন্ন করুন",
             "description": "এই রেখা/এলাকাগুলিকে একে অপরের থেকে বিচ্ছিন্ন করুন।",
+            "key": "ডি",
             "annotation": "এই রেখা/এলাকাগুলিকে বিচ্ছিন্ন করা হয়েছে।"
         },
         "merge": {
             "title": "এদের এক করুন",
             "description": "এই রেখাগুলিকে এক করুন।",
-            "annotation": "এই {n}টি রেখাকে এক করুন।"
+            "key": "সি",
+            "annotation": "এই {n}টি রেখাকে এক করুন।",
+            "not_eligible": "এই বৈশিষ্ট্যগুলি একত্রীকরণ করা যাবে না",
+            "not_adjacent": "এই লাইনগুলো একত্রীকরণ করা যাবে না কারণ এগুলো সংযুক্ত নয়."
         },
         "move": {
             "title": "সরান",
             "description": "এটিকে একটি অন্য অবস্থানে সরান।",
+            "key": "এম",
             "annotation": {
                 "point": "একটি বিন্দুকে সরানো হয়েছে।",
                 "vertex": "একটি গমনপথে একটি নোডকে সরানো হয়েছে।",
@@ -111,6 +141,7 @@
         "rotate": {
             "title": "ঘোরান",
             "description": "এই বস্তুটিকে এর কেন্দ্রের চারপাশে ঘোরান।",
+            "key": "আর",
             "annotation": {
                 "line": "একটি রেখাকে ঘোরানো হয়েছে।",
                 "area": "একটি এলাকাকে ঘোরানো হয়েছে।"
@@ -119,6 +150,7 @@
         "reverse": {
             "title": "উল্টো করুন",
             "description": "এই রেখাটিকে উল্টোদিকে পাঠান।",
+            "key": "ভি",
             "annotation": "একটি রেখাকে উল্টো করা হয়েছে।"
         },
         "split": {
@@ -128,6 +160,7 @@
                 "area": "এই এলাকাটির সীমানাকে দুই ভাগে ভাগ করুন।",
                 "multiple": "রেখাগুলিকে/এলাকার সীমানাকে এই নোড-এ দুইভাগে ভাগ করুন।"
             },
+            "key": "এক্স",
             "annotation": {
                 "line": "একটি রেখাকে ভাগ করুন।",
                 "area": "একটি এলাকার সীমানাকে ভাগ করুন।",
@@ -137,12 +170,23 @@
             "multiple_ways": "এখানে ভাগ করার জন্য খুব বেশী রেখা রয়েছে।"
         }
     },
+    "undo": {
+        "tooltip": "পূর্বাবস্থায় ফিরিয়ে আনুন: {action}",
+        "nothing": "পূর্বাবস্থায় ফিরিয়ে নেয়ার কিছু নেই."
+    },
+    "redo": {
+        "tooltip": "পুনরায় করুন: {action}",
+        "nothing": "পুনরায় করার কিছুই নেই."
+    },
+    "tooltip_keyhint": "শর্টকাট:",
     "browser_notice": "এই এডিটরটি ফায়ারফক্স, ক্রোম, সাফারি, অপেরা এবং ইন্টারনেট এক্সপ্লোরার ৯ এবং তার উপরে কাজ করে। দয়া করে অাপনার ব্রাউসারটিকে উন্নত করুন অথবা ম্যাপ এ পরিবর্তন করতে পটল্যাচ ২ ব্যব্হার করুন।",
     "translate": {
         "translate": "অনুবাদ করুন",
+        "localized_translation_label": "বহুভাষিক নাম",
         "localized_translation_language": "ভাষা বেছে নিন",
         "localized_translation_name": "নাম"
     },
+    "zoom_in_edit": "সম্পাদনার জন্য জুম ইন করুন",
     "logout": "বেরিয়ে যান",
     "loading_auth": "ওপেনস্ট্রীটম্যাপ-এর সাথে যোগাযোগ করা হচ্ছে ...",
     "report_a_bug": "একটি বাগ রিপোর্ট করুন",
@@ -182,16 +226,33 @@
         "all_members": "সকল সদস্যগন",
         "all_relations": "সকল সম্পর্কসমুহ",
         "new_relation": "নতুন সম্পর্ক...",
+        "role": "ভূমিকা",
+        "choose": "বৈশিষ্ট্যএর প্রকার নির্বাচন করুন",
         "results": "{search}-এর জন্য {n}-টি ফলাফল ",
         "reference": "openstreetmap.org-এর উইকি-তে দেখুন",
+        "back_tooltip": "বৈশিষ্ট্য পরিবর্তন করুন",
+        "remove": "অপসারণ",
         "search": "কিছু খুঁজুন",
-        "unknown": "অজানা"
+        "multiselect": "নির্বাচিত আইটেমসমূহ",
+        "unknown": "অজানা",
+        "incomplete": "<ডাউনলোড করা হয়নি>",
+        "feature_list": "বৈশিষ্ট্যসমূহ খুজুন",
+        "edit": "বৈশিষ্ট্য সম্পাদনা করুন",
+        "none": "কিছুনা"
     },
     "background": {
-        "percent_brightness": "{opacity}% উজ্জ্বলতা"
+        "title": "পটভূমি",
+        "description": "পটভূমি নির্ধারণ",
+        "percent_brightness": "{opacity}% উজ্জ্বলতা",
+        "none": "কিছুনা",
+        "fix_misalignment": "এলাইনমেন্ট ঠিক করুন",
+        "reset": "রিসেট"
     },
     "restore": {
-        "heading": "অাপনার কিছু পরিবর্তন সেভ করা বাকি অাছে"
+        "heading": "অাপনার কিছু পরিবর্তন সেভ করা বাকি অাছে",
+        "description": "আপনি কি আগের সম্পাদনা সময়কালের অসংরক্ষিত পরিবর্তনসমূহ পুনরূদ্ধার করতে চান?",
+        "restore": "পুনরূদ্ধার",
+        "reset": "রিসেট"
     },
     "save": {
         "title": "সেভ করুন",
@@ -214,11 +275,13 @@
     },
     "splash": {
         "welcome": "iD ওপেনস্ট্রীটম্যাপ এডিটর-এ অাপনাকে স্বাগতম",
+        "walkthrough": "ওয়াকথ্রু শুরু করুন",
         "start": "এখুনি পরিবর্তন করুন"
     },
     "source_switch": {
         "live": "সরাসরি",
-        "lose_changes": "অাপনার কিছু পরিবর্তন সেভ করা বাকি অাছে। ম্যাপ সার্ভার পরিবর্তন করলে সেই পরিবর্তনগুলি হারিয়ে যাবে। অাপনি কি ম্যাপ সার্ভার পরিবর্তন করার ব্যপারে নিঃসঙ্কোচ?"
+        "lose_changes": "অাপনার কিছু পরিবর্তন সেভ করা বাকি অাছে। ম্যাপ সার্ভার পরিবর্তন করলে সেই পরিবর্তনগুলি হারিয়ে যাবে। অাপনি কি ম্যাপ সার্ভার পরিবর্তন করার ব্যপারে নিঃসঙ্কোচ?",
+        "dev": "ডেভ"
     },
     "tag_reference": {
         "description": "বিবরন",
@@ -233,13 +296,23 @@
         "tag_suggests_area": "{tag} ট্যাগটি অনুসারে রেখাটি এলাকা হবে, কিন্তু নয়।",
         "deprecated_tags": "পুরোন ও অব্যবহৃত ট্যাগ: {tags}"
     },
+    "zoom": {
+        "in": "জুম্ ইন",
+        "out": "জুম্ আউট"
+    },
+    "cannot_zoom": "বর্তমান মোডে আরও জুম আউট করা যাবে না.",
+    "gpx": {
+        "local_layer": "স্থানীয় জিপিএক্স ফাইল",
+        "browse": ".জিপিখুজুন"
+    },
     "help": {
         "title": "সাহায্য",
         "help": "# সাহায্য⏎\n⏎\nএটি, দুনিয়ার বিনামুল্য/মুক্ত এবং পরিবর্তনযোগ্য ম্যাপ, [ওপেনস্ট্রীটম্যাপ](http://www.openstreetmap.org/)-এর⏎\nএকটি এডিটর। অাপনি অাপনার এলাকার তথ্য সংযোজন করা ও পরিবর্তন করার জন্য⏎\nএটি ব্যবহার করে, সকলের জন্য উন্নীত একটি ওপেন-সোর্স এবং ওপেন-ডাটা ম্যাপ⏎\nতৈরী করতে পারেন।\n⏎\nঅাপনি এই ম্যাপ-এ যা পরিবর্তন করবেন তা ওপেনস্ট্রীটম্যাপ-এর যারা ব্যবহার করে⏎\nতাদের সবার কাছে দৃশ্যমান হবে। পরিবর্তন করার জন্য অাপনার একটি [বিনামুল্য⏎\nওপেনস্ট্রীটম্যাপ অ্যাকাউন্ট](https://www.openstreetmap.org/user/new) লাগবে।⏎\n⏎\n[iD এডিটর](http://ideditor.com/) একটি কোল্যাবোরেটিভ প্রকল্প, [যার সোর্স কোড Github-এ লভ্য](https://github.com/systemed/iD)।\n⏎\n"
     },
     "intro": {
         "navigation": {
-            "title": "ঘুরে বেরানো"
+            "title": "ঘুরে বেরানো",
+            "header": "হেডারটি আমাদেরকে বৈশিষ্ট্য প্রকার প্রদর্শন করে."
         },
         "points": {
             "title": "বিন্দুসমুহ",
@@ -278,9 +351,6 @@
             },
             "category-road": {
                 "name": "রাস্তা"
-            },
-            "category-water": {
-                "name": "জল"
             }
         },
         "fields": {
@@ -376,6 +446,9 @@
                     "anticlockwise": "ঘড়ির কাটার উল্টো দিকে"
                 }
             },
+            "collection_times": {
+                "label": "সংগ্রহের সময়"
+            },
             "construction": {
                 "label": "টাইপ"
             },
@@ -410,6 +483,9 @@
             "fixme": {
                 "label": "অামাকে ঠিক করুন"
             },
+            "generator/method": {
+                "label": "পদ্ধতি"
+            },
             "generator/type": {
                 "label": "টাইপ"
             },
@@ -426,7 +502,8 @@
                 "label": "ইন্টারনেট সুবিধা",
                 "options": {
                     "wlan": "তারবিহীন",
-                    "wired": "তারযুক্ত"
+                    "wired": "তারযুক্ত",
+                    "terminal": "টার্মিনাল"
                 }
             },
             "landuse": {
@@ -466,6 +543,9 @@
             "network": {
                 "label": "নেটওয়ার্ক"
             },
+            "note": {
+                "label": "নোট"
+            },
             "office": {
                 "label": "টাইপ"
             },
@@ -477,6 +557,9 @@
             },
             "opening_hours": {
                 "label": "ঘন্টা"
+            },
+            "operator": {
+                "label": "অপারেটর"
             },
             "parking": {
                 "label": "টাইপ"
@@ -493,6 +576,9 @@
             },
             "railway": {
                 "label": "টাইপ"
+            },
+            "ref": {
+                "label": "রেফারেন্স"
             },
             "relation": {
                 "label": "টাইপ"
@@ -584,6 +670,9 @@
             "aeroway/helipad": {
                 "name": "হেলিপ্যাড"
             },
+            "amenity": {
+                "name": "আমেনিটি"
+            },
             "amenity/arts_centre": {
                 "name": "শিল্প কেন্দ্র"
             },
@@ -623,6 +712,12 @@
             "amenity/drinking_water": {
                 "name": "পানীয় জল"
             },
+            "amenity/embassy": {
+                "name": "দুতাবাস"
+            },
+            "amenity/fast_food": {
+                "name": "ফাস্টফুড"
+            },
             "amenity/fire_station": {
                 "name": "দমকল"
             },
@@ -645,7 +740,7 @@
                 "name": "বাজার"
             },
             "amenity/parking": {
-                "name": "গাড়ি রাখার জায়গা"
+                "name": "গাড়ি পার্কিং"
             },
             "amenity/pharmacy": {
                 "name": "দাওয়াইখানা"
@@ -671,6 +766,9 @@
             "amenity/post_office": {
                 "name": "ডাকঘর"
             },
+            "amenity/pub": {
+                "name": "সরাইখানা"
+            },
             "amenity/restaurant": {
                 "name": "রেস্তোরাঁ"
             },
@@ -688,6 +786,9 @@
             },
             "amenity/toilets": {
                 "name": "শৌচাগার"
+            },
+            "amenity/townhall": {
+                "name": "টাউন হল"
             },
             "amenity/university": {
                 "name": "বিশ্ববিদ্যালয়"
@@ -712,6 +813,9 @@
             },
             "building": {
                 "name": "দালান"
+            },
+            "building/apartments": {
+                "name": "এপার্টমেন্ট"
             },
             "building/commercial": {
                 "name": "বানিজ্যিক ভবন"
@@ -740,6 +844,9 @@
             "entrance": {
                 "name": "প্রবেশপথ"
             },
+            "footway/crossing": {
+                "name": "ক্রসিং"
+            },
             "highway": {
                 "name": "রাজপথ"
             },
@@ -754,6 +861,9 @@
             },
             "highway/footway": {
                 "name": "ফুটপাত"
+            },
+            "highway/motorway": {
+                "name": "মোটরওয়ে"
             },
             "highway/path": {
                 "name": "পথ"
@@ -770,11 +880,20 @@
             "highway/road": {
                 "name": "অজানা রাস্তা"
             },
+            "highway/secondary": {
+                "name": "সেকেন্ডারি রোড"
+            },
+            "highway/service": {
+                "name": "সার্ভিস রোড"
+            },
             "highway/service/alley": {
                 "name": "গলি"
             },
             "highway/steps": {
                 "name": "সিঁড়ি"
+            },
+            "highway/tertiary": {
+                "name": "টারশিয়ারি রোড"
             },
             "highway/traffic_signals": {
                 "name": "ট্রাফিক সিগনাল"
@@ -799,6 +918,9 @@
             },
             "historic/ruins": {
                 "name": "ধ্বংসাবশেষ"
+            },
+            "landuse": {
+                "name": "ভূমি ব্যবহার"
             },
             "landuse/allotments": {
                 "name": "আবন্টন"
@@ -862,6 +984,9 @@
             },
             "leisure/pitch/basketball": {
                 "name": "বাস্কেটবল কোর্ট"
+            },
+            "leisure/pitch/soccer": {
+                "name": "ফুটবল মাঠ"
             },
             "leisure/pitch/tennis": {
                 "name": "টেনিস কোর্ট"
@@ -953,6 +1078,24 @@
             "office": {
                 "name": "কার্যালয়"
             },
+            "office/newspaper": {
+                "name": "সংবাদপত্র"
+            },
+            "office/ngo": {
+                "name": "এনজিও অফিস"
+            },
+            "office/physician": {
+                "name": "চিকিত্সক"
+            },
+            "office/political_party": {
+                "name": "রাজনৈতিক দল"
+            },
+            "office/telecommunication": {
+                "name": "টেলিকম অফিস"
+            },
+            "office/therapist": {
+                "name": "থেরাপিস্ট"
+            },
             "place": {
                 "name": "জায়গা"
             },
@@ -986,6 +1129,9 @@
             "railway/level_crossing": {
                 "name": "রেল ক্রসি"
             },
+            "railway/monorail": {
+                "name": "মনোরেল"
+            },
             "railway/platform": {
                 "name": "রেল প্লাটফর্ম"
             },
@@ -1010,6 +1156,9 @@
             "shop": {
                 "name": "দোকান"
             },
+            "shop/bakery": {
+                "name": "বেকারি"
+            },
             "shop/bicycle": {
                 "name": "সাইকেল-এর দোকান"
             },
@@ -1031,6 +1180,9 @@
             "shop/car_repair": {
                 "name": "গাড়ি মেরামত-এর দোকান"
             },
+            "shop/chemist": {
+                "name": "কেমিস্ট"
+            },
             "shop/clothes": {
                 "name": "জামাকাপড়-এর দোকান"
             },
@@ -1039,6 +1191,12 @@
             },
             "shop/confectionery": {
                 "name": "কনফেকশনারি"
+            },
+            "shop/department_store": {
+                "name": "ডিপার্টমেন্ট স্টোর"
+            },
+            "shop/doityourself": {
+                "name": "নিজে করুন স্টোর"
             },
             "shop/electronics": {
                 "name": "ইলেকট্রনিক্স-এর দোকান"
@@ -1055,11 +1213,17 @@
             "shop/gift": {
                 "name": "উপহার-এর দোকান"
             },
+            "shop/mall": {
+                "name": "মল"
+            },
             "shop/mobile_phone": {
                 "name": "মোবাইল ফোন-এর দোকান"
             },
             "shop/music": {
                 "name": "সগীত-এর দোকান"
+            },
+            "shop/optician": {
+                "name": "চক্ষুরোগের চিকিত্সক"
             },
             "shop/shoes": {
                 "name": "জুতোর দোকান"
@@ -1100,6 +1264,9 @@
             "tourism/picnic_site": {
                 "name": "পিকনিক-এর জায়গা"
             },
+            "tourism/theme_park": {
+                "name": "থিম পার্ক"
+            },
             "tourism/zoo": {
                 "name": "চিড়িয়াখানা"
             },
@@ -1114,6 +1281,9 @@
             },
             "vertex": {
                 "name": "অন্যান্য"
+            },
+            "waterway": {
+                "name": "পানিপথ"
             },
             "waterway/canal": {
                 "name": "খাল"
