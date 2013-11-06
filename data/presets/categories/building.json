@@ -1,0 +1,13 @@
+{
+    "geometry": "area",
+    "name": "Building",
+    "icon": "building",
+    "members": [
+        "building/house",
+        "building/apartments",
+        "building/commercial",
+        "building/industrial",
+        "building/residential",
+        "building"
+    ]
+}

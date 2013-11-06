@@ -392,6 +392,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Building"
+            },
             "category-landuse": {
                 "name": "Land Use"
             },
@@ -407,7 +410,10 @@
             "category-route": {
                 "name": "Route"
             },
-            "category-water": {
+            "category-water-area": {
+                "name": "Water"
+            },
+            "category-water-line": {
                 "name": "Water"
             }
         },

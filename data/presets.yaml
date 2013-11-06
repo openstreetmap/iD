@@ -1,6 +1,8 @@
 en: 
   presets: 
     categories: 
+      "category-building": 
+        name: Building
       "category-landuse": 
         name: Land Use
       "category-path": 
@@ -11,7 +13,9 @@ en:
         name: Road
       "category-route": 
         name: Route
-      "category-water": 
+      "category-water-area": 
+        name: Water
+      "category-water-line": 
         name: Water
     fields: 
       access: 

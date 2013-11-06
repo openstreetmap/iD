@@ -1,0 +1,11 @@
+{
+    "geometry": "area",
+    "name": "Water",
+    "icon": "water",
+    "members": [
+        "natural/water/lake",
+        "natural/water/pond",
+        "natural/water/reservoir",
+        "natural/water"
+    ]
+}

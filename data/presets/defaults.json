@@ -1,9 +1,9 @@
 {
     "area": [
         "category-landuse",
-        "building",
+        "category-building",
+        "category-water-area",
         "leisure/park",
-        "natural/water",
         "amenity/hospital",
         "amenity/place_of_worship",
         "amenity/cafe",
@@ -14,7 +14,7 @@
         "category-road",
         "category-rail",
         "category-path",
-        "category-water",
+        "category-water-line",
         "power/line",
         "line"
     ],
