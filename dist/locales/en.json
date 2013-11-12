@@ -714,6 +714,9 @@
             "shelter": {
                 "label": "Shelter"
             },
+            "shelter_type": {
+                "label": "Type"
+            },
             "shop": {
                 "label": "Type"
             },
@@ -991,6 +994,10 @@
             "amenity/school": {
                 "name": "School",
                 "terms": "academy,alma mater,blackboard,college,department,discipline,establishment,faculty,hall,halls of ivy,institute,institution,jail*,schoolhouse,seminary,university"
+            },
+            "amenity/shelter": {
+                "name": "Shelter",
+                "terms": "lean-to"
             },
             "amenity/swimming_pool": {
                 "name": "Swimming Pool",

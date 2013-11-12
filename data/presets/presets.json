@@ -1083,6 +1083,23 @@
         },
         "name": "School"
     },
+    "amenity/shelter": {
+        "fields": [
+            "shelter_type"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "amenity": "shelter"
+        },
+        "terms": [
+            "lean-to"
+        ],
+        "name": "Shelter"
+    },
     "amenity/swimming_pool": {
         "geometry": [
             "point",

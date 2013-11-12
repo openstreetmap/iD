@@ -547,6 +547,20 @@
         "type": "check",
         "label": "Shelter"
     },
+    "shelter_type": {
+        "key": "shelter_type",
+        "type": "combo",
+        "options": [
+            "public_transport",
+            "picnic_shelter",
+            "weather_shelter",
+            "lean_to",
+            "basic_hut",
+            "field_shelter",
+            "rock_shelter"
+        ],
+        "label": "Type"
+    },
     "shop": {
         "key": "shop",
         "type": "typeCombo",
