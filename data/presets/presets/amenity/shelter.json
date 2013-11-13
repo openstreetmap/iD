@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "shelter_type"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "shelter"
+    },
+    "terms": [
+        "lean-to"
+    ],
+    "name": "Shelter"
+}
