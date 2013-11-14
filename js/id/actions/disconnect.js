@@ -22,7 +22,7 @@ iD.actions.Disconnect = function(nodeId, newNodeId) {
         replacements.forEach(function(replacement) {
             var newNode = iD.Node({id: newNodeId, loc: node.loc, tags: node.tags});
             graph = graph.replace(newNode);
-            graph = graph.replace(replacement.way.updateNode(newNode.id, replacement.index));
+            graph = graph.replace(graph.entity(replacement.wayID).updateNode(newNode.id, replacement.index));
         });
 
         return graph;
@@ -41,7 +41,7 @@ iD.actions.Disconnect = function(nodeId, newNodeId) {
 
             parent.nodes.forEach(function(waynode, index) {
                 if (waynode === nodeId) {
-                    candidates.push({way: parent, index: index});
+                    candidates.push({wayID: parent.id, index: index});
                 }
             });
         });

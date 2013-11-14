@@ -128,6 +128,30 @@ describe("iD.actions.Disconnect", function () {
         expect(graph.entity('w').nodes).to.eql(['a', 'b', 'c', 'd']);
     });
 
+    it("disconnects a way with multiple intersection points", function() {
+        // Situtation:
+        //  a = b - c
+        //      |   |
+        //      e - d
+        // Where b starts/ends -.
+        // Disconnect at b
+
+        var graph = iD.Graph([
+            iD.Node({id: 'a'}),
+            iD.Node({id: 'b'}),
+            iD.Node({id: 'c'}),
+            iD.Node({id: 'd'}),
+            iD.Node({id: 'e'}),
+            iD.Way({id: 'w1', nodes: ['a', 'b']}),
+            iD.Way({id: 'w2', nodes: ['b', 'c', 'd', 'e', 'b']})
+        ]);
+
+        graph = iD.actions.Disconnect('b', '*')(graph);
+
+        expect(graph.entity('w1').nodes).to.eql(['a', 'b']);
+        expect(graph.entity('w2').nodes).to.eql(['*', 'c', 'd', 'e', '*']);
+    });
+
     it("copies location and tags to the new nodes", function () {
         var tags  = {highway: 'traffic_signals'},
             loc   = [1, 2],
