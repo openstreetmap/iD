@@ -290,7 +290,7 @@ describe('iD.Way', function() {
                 json = w.asGeoJSON(graph);
 
             expect(json.type).to.equal('LineString');
-            expect(json.coordinates).to.eql([[1, 2], [3, 4]]);
+            expect(json.coordinates).to.eql([a.loc, b.loc]);
         });
 
         it("converts an area to a GeoJSON Polygon geometry", function () {
@@ -305,15 +305,52 @@ describe('iD.Way', function() {
             expect(json.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
         });
 
-        it("forces clockwise polygon winding order", function () {
+        it("converts an unclosed area to a GeoJSON LineString geometry", function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [5, 6]}),
                 c = iD.Node({loc: [3, 4]}),
-                w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, c.id, b.id, a.id]}),
+                w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id]}),
                 graph = iD.Graph([a, b, c, w]),
                 json = w.asGeoJSON(graph, true);
 
-            expect(json.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
+            expect(json.type).to.equal('LineString');
+            expect(json.coordinates).to.eql([a.loc, b.loc, c.loc]);
+        });
+    });
+
+    describe("#area", function() {
+        it("returns a relative measure of area", function () {
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
+                iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
+                iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
+                iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
+                iD.Node({id: 'e', loc: [-0.0004,  0.0002]}),
+                iD.Node({id: 'f', loc: [ 0.0004,  0.0002]}),
+                iD.Node({id: 'g', loc: [ 0.0004, -0.0002]}),
+                iD.Node({id: 'h', loc: [-0.0004, -0.0002]}),
+                iD.Way({id: 's', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
+                iD.Way({id: 'l', tags: {area: 'yes'}, nodes: ['e', 'f', 'g', 'h', 'e']})
+            ]);
+
+            var s = Math.abs(graph.entity('s').area(graph)),
+                l = Math.abs(graph.entity('l').area(graph));
+
+            expect(s).to.be.lt(l);
+        });
+
+        it("returns 0 for degenerate areas", function () {
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
+                iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
+                iD.Way({id: '0', tags: {area: 'yes'}, nodes: []}),
+                iD.Way({id: '1', tags: {area: 'yes'}, nodes: ['a']}),
+                iD.Way({id: '2', tags: {area: 'yes'}, nodes: ['a', 'b']})
+            ]);
+
+            expect(graph.entity('0').area(graph)).to.equal(0);
+            expect(graph.entity('1').area(graph)).to.equal(0);
+            expect(graph.entity('2').area(graph)).to.equal(0);
         });
     });
 });

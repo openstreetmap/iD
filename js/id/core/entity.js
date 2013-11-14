@@ -102,12 +102,6 @@ iD.Entity.prototype = {
             resolver.parentRelations(this).length > 0;
     },
 
-    area: function(resolver) {
-        return resolver.transient(this, 'area', function() {
-            return d3.geo.area(this.asGeoJSON(resolver, true));
-        });
-    },
-
     hasInterestingTags: function() {
         return _.keys(this.tags).some(function(key) {
             return key !== 'attribution' &&

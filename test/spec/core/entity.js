@@ -201,42 +201,4 @@ describe('iD.Entity', function () {
             expect(iD.Entity({tags: {'tiger:source': 'blah', 'tiger:foo': 'bar'}}).hasInterestingTags()).to.equal(false);
         });
     });
-
-    describe("#area", function() {
-        it("returns a relative measure of area", function () {
-            var graph = iD.Graph([
-                    iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
-                    iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
-                    iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
-                    iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
-                    iD.Node({id: 'e', loc: [-0.0004,  0.0002]}),
-                    iD.Node({id: 'f', loc: [ 0.0004,  0.0002]}),
-                    iD.Node({id: 'g', loc: [ 0.0004, -0.0002]}),
-                    iD.Node({id: 'h', loc: [-0.0004, -0.0002]}),
-                    iD.Way({id: 's', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
-                    iD.Way({id: 'l', tags: {area: 'yes'}, nodes: ['e', 'f', 'g', 'h', 'e']})
-                ]);
-
-            var s = Math.abs(graph.entity('s').area(graph)),
-                l = Math.abs(graph.entity('l').area(graph));
-
-            expect(s).to.be.lt(l);
-        });
-
-        it("returns 0 for degenerate areas", function () {
-            var graph = iD.Graph([
-                    iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
-                    iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
-                    iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
-                    iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
-                    iD.Way({id: '0', tags: {area: 'yes'}, nodes: []}),
-                    iD.Way({id: '1', tags: {area: 'yes'}, nodes: ['a']}),
-                    iD.Way({id: '2', tags: {area: 'yes'}, nodes: ['a', 'b']})
-                ]);
-
-            expect(graph.entity('0').area(graph)).to.equal(0);
-            expect(graph.entity('1').area(graph)).to.equal(0);
-            expect(graph.entity('2').area(graph)).to.equal(0);
-        });
-    });
 });

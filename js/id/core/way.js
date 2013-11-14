@@ -146,33 +146,46 @@ _.extend(iD.Way.prototype, {
         return r;
     },
 
-    asGeoJSON: function(resolver, polygon) {
+    asGeoJSON: function(resolver) {
         return resolver.transient(this, 'GeoJSON', function() {
-            var nodes = resolver.childNodes(this);
-
-            if (this.isArea() && polygon && nodes.length >= 4) {
-                if (!this.isClosed()) {
-                    nodes = nodes.concat([nodes[0]]);
-                }
-
-                var json = {
+            var coordinates = _.pluck(resolver.childNodes(this), 'loc');
+            if (this.isArea() && this.isClosed()) {
+                return {
                     type: 'Polygon',
-                    coordinates: [_.pluck(nodes, 'loc')]
+                    coordinates: [coordinates]
                 };
-
-                // Heuristic for detecting counterclockwise winding order. Assumes
-                // that OpenStreetMap polygons are not hemisphere-spanning.
-                if (d3.geo.area(json) > 2 * Math.PI) {
-                    json.coordinates[0] = json.coordinates[0].reverse();
-                }
-
-                return json;
             } else {
                 return {
                     type: 'LineString',
-                    coordinates: _.pluck(nodes, 'loc')
+                    coordinates: coordinates
                 };
             }
+        });
+    },
+
+    area: function(resolver) {
+        return resolver.transient(this, 'area', function() {
+            var nodes = resolver.childNodes(this);
+
+            if (!this.isClosed() && nodes.length) {
+                nodes = nodes.concat([nodes[0]]);
+            }
+
+            var json = {
+                type: 'Polygon',
+                coordinates: [_.pluck(nodes, 'loc')]
+            };
+
+            var area = d3.geo.area(json);
+
+            // Heuristic for detecting counterclockwise winding order. Assumes
+            // that OpenStreetMap polygons are not hemisphere-spanning.
+            if (d3.geo.area(json) > 2 * Math.PI) {
+                json.coordinates[0] = json.coordinates[0].reverse();
+                area = d3.geo.area(json);
+            }
+
+            return isNaN(area) ? 0 : area;
         });
     }
 });

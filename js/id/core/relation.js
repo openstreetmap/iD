@@ -156,6 +156,12 @@ _.extend(iD.Relation.prototype, {
         });
     },
 
+    area: function(resolver) {
+        return resolver.transient(this, 'area', function() {
+            return d3.geo.area(this.asGeoJSON(resolver));
+        });
+    },
+
     isMultipolygon: function() {
         return this.tags.type === 'multipolygon';
     },
