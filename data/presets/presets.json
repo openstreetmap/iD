@@ -346,6 +346,7 @@
         "name": "Cafe"
     },
     "amenity/car_rental": {
+        "icon": "car",
         "geometry": [
             "point",
             "area"
@@ -359,6 +360,7 @@
         "name": "Car Rental"
     },
     "amenity/car_sharing": {
+        "icon": "car",
         "geometry": [
             "point",
             "area"
@@ -1361,6 +1363,7 @@
         "name": "Ditch"
     },
     "barrier/entrance": {
+        "icon": "entrance",
         "geometry": [
             "vertex"
         ],
@@ -1532,6 +1535,7 @@
         "name": "Commercial Building"
     },
     "building/entrance": {
+        "icon": "entrance",
         "geometry": [
             "vertex"
         ],
@@ -1653,6 +1657,7 @@
         "name": "Emergency Phone"
     },
     "entrance": {
+        "icon": "entrance",
         "geometry": [
             "vertex"
         ],
@@ -2890,6 +2895,7 @@
         "name": "Volleyball Court"
     },
     "leisure/playground": {
+        "icon": "playground",
         "geometry": [
             "point",
             "area"
@@ -3748,7 +3754,7 @@
         "name": "Therapist"
     },
     "office/travel_agent": {
-        "icon": "commercial",
+        "icon": "suitcase",
         "fields": [
             "address",
             "opening_hours"
@@ -3762,7 +3768,8 @@
             "office": "travel_agent"
         },
         "terms": [],
-        "name": "Travel Agency"
+        "name": "Travel Agency",
+        "searchable": false
     },
     "place": {
         "fields": [
@@ -4115,7 +4122,7 @@
         "name": "Subway"
     },
     "railway/subway_entrance": {
-        "icon": "rail-underground",
+        "icon": "rail-metro",
         "geometry": [
             "point"
         ],
@@ -4326,7 +4333,7 @@
         "name": "Butcher"
     },
     "shop/car": {
-        "icon": "shop",
+        "icon": "car",
         "fields": [
             "address",
             "opening_hours"
@@ -4757,7 +4764,7 @@
         "name": "Kiosk"
     },
     "shop/laundry": {
-        "icon": "shop",
+        "icon": "laundry",
         "fields": [
             "address",
             "building_area",
@@ -5056,7 +5063,7 @@
         "name": "Toy Store"
     },
     "shop/travel_agency": {
-        "icon": "shop",
+        "icon": "suitcase",
         "fields": [
             "address",
             "building_area",
