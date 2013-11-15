@@ -388,6 +388,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "건물"
+            },
             "category-landuse": {
                 "name": "토지 이용"
             },
@@ -402,6 +405,12 @@
             },
             "category-route": {
                 "name": "노선"
+            },
+            "category-water-area": {
+                "name": "물"
+            },
+            "category-water-line": {
+                "name": "물"
             }
         },
         "fields": {

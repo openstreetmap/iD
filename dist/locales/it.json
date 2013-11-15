@@ -708,6 +708,9 @@
             "shelter": {
                 "label": "Riparo"
             },
+            "shelter_type": {
+                "label": "Tipo"
+            },
             "shop": {
                 "label": "Tipo"
             },
@@ -985,6 +988,10 @@
             "amenity/school": {
                 "name": "Scuola",
                 "terms": "accademia,alma mater,lavagna,collegio,dipartimento,disciplina,classe,facoltà,aula,istituto,istituzione,riformatorio,scuola,edificio scolastico,seminario,università"
+            },
+            "amenity/shelter": {
+                "name": "Riparo",
+                "terms": "ricovero,rifugio,tettoia,pensilina,bivacco,grotta"
             },
             "amenity/swimming_pool": {
                 "name": "Piscina",

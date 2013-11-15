@@ -380,6 +380,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Зграда"
+            },
             "category-landuse": {
                 "name": "Коришћење земљишта"
             },
@@ -691,6 +694,9 @@
             "shelter": {
                 "label": "Склониште"
             },
+            "shelter_type": {
+                "label": "Врста"
+            },
             "shop": {
                 "label": "Врста"
             },
@@ -730,6 +736,9 @@
             },
             "trail_visibility": {
                 "label": "Видљивост стазе"
+            },
+            "tree_type": {
+                "label": "Врста"
             },
             "vending": {
                 "label": "Врста добара"
@@ -1033,6 +1042,9 @@
             },
             "entrance": {
                 "name": "Улаз"
+            },
+            "footway/crossing": {
+                "name": "Прелаз"
             },
             "highway": {
                 "name": "Ауто-пут"
@@ -1378,6 +1390,9 @@
             },
             "office": {
                 "name": "Канцеларија"
+            },
+            "office/travel_agent": {
+                "name": "Туристичка агенција"
             },
             "place": {
                 "name": "Место"

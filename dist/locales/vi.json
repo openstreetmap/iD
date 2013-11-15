@@ -388,6 +388,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Tòa nhà"
+            },
             "category-landuse": {
                 "name": "Sử dụng Đất"
             },
@@ -402,6 +405,12 @@
             },
             "category-route": {
                 "name": "Tuyến đường"
+            },
+            "category-water-area": {
+                "name": "Nước"
+            },
+            "category-water-line": {
+                "name": "Nước"
             }
         },
         "fields": {
@@ -699,6 +708,9 @@
             "shelter": {
                 "label": "Chỗ che"
             },
+            "shelter_type": {
+                "label": "Kiểu"
+            },
             "shop": {
                 "label": "Kiểu"
             },
@@ -976,6 +988,10 @@
             "amenity/school": {
                 "name": "Nhà trường",
                 "terms": "trường,trường học,nhà trường,học viện,trường tư,trường tư thực,trường công,trường công lập,tiểu học,trường tiểu học,trung học,trường trung học,trung học cơ sở,trường trung học cơ sở,THCS,TTHCS,trung học phổ thông,trường trung học phổ thông,THPT,TTHPT,trung học chuyên nghiệp,trường trung học chuyên nghiệp,THCN,TTHCN,cao đẳng,trường cao đẳng,CĐ,đại học,trường đại học,ĐH,trường dòng,khoa,học,truong,truong hoc,nha truong,hoc vien,truong tu,truong tu thuc,truong cong,truong cong lap,tieu hoc,ttruong tieu hoc,trung hoc,truong trung hoc,truong hoc co so,truong trung hoc co so,trung hoc pho nghiep,cao dang,truong cao dang,CD,dai hoc,truong dai hoc,DH,truong dong,khoa,hoc"
+            },
+            "amenity/shelter": {
+                "name": "Nhà trú",
+                "terms": "nhà trú,chỗ che chở,nhà trú bão,nhà trú mưa,nhà trú ẩn,điểm trú bão,điểm trú mưa,điểm trú ẩn,túp lều,mái,nóc,cho che cho,nha tru bao,nha tru mua,nha tru an,diem tru bao,diem tru mau,diem tru an,tup leu,mai,noc"
             },
             "amenity/swimming_pool": {
                 "name": "Hồ Bơi",

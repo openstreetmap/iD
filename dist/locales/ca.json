@@ -388,6 +388,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Edifici"
+            },
             "category-landuse": {
                 "name": "Aprofitament del terreny"
             },
@@ -402,6 +405,12 @@
             },
             "category-route": {
                 "name": "Ruta"
+            },
+            "category-water-area": {
+                "name": "Aigua"
+            },
+            "category-water-line": {
+                "name": "Aigua"
             }
         },
         "fields": {
@@ -699,6 +708,9 @@
             "shelter": {
                 "label": "Coberta"
             },
+            "shelter_type": {
+                "label": "Tipus"
+            },
             "shop": {
                 "label": "Tipus"
             },
@@ -972,6 +984,9 @@
             "amenity/school": {
                 "name": "Escola",
                 "terms": "Escola, CEIP, IES, Guarderia, Institut"
+            },
+            "amenity/shelter": {
+                "name": "Refugi"
             },
             "amenity/swimming_pool": {
                 "name": "Piscina",

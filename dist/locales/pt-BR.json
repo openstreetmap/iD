@@ -388,6 +388,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Prédio"
+            },
             "category-landuse": {
                 "name": "Uso da Terra"
             },
@@ -402,6 +405,12 @@
             },
             "category-route": {
                 "name": "Rota"
+            },
+            "category-water-area": {
+                "name": "Água"
+            },
+            "category-water-line": {
+                "name": "Água"
             }
         },
         "fields": {
@@ -739,6 +748,9 @@
             "trail_visibility": {
                 "label": "Visibilidade da Trilha"
             },
+            "tree_type": {
+                "label": "Tipo"
+            },
             "vending": {
                 "label": "Tipo de Produtos"
             },
@@ -917,6 +929,10 @@
             "amenity/marketplace": {
                 "name": "Mercado",
                 "terms": "Mercado"
+            },
+            "amenity/parking": {
+                "name": "Estacionamento",
+                "terms": "estacionamento,parada"
             },
             "amenity/pharmacy": {
                 "name": "Farmácia",
@@ -1133,6 +1149,14 @@
             "entrance": {
                 "name": "Entrada",
                 "terms": "Entrada"
+            },
+            "footway/crossing": {
+                "name": "Cruzamento",
+                "terms": "cruzamento,passagem"
+            },
+            "footway/sidewalk": {
+                "name": "Calçada",
+                "terms": "calçada,passeio"
             },
             "highway": {
                 "name": "Rodovia",
@@ -1602,6 +1626,78 @@
                 "name": "Escritório",
                 "terms": "Escritório"
             },
+            "office/accountant": {
+                "name": "Contador"
+            },
+            "office/administrative": {
+                "name": "Escritório Administrativo",
+                "terms": "Sala Administrativa, Administração, Sala do Administrativo"
+            },
+            "office/architect": {
+                "name": "Arquiteto"
+            },
+            "office/company": {
+                "name": "Escritório"
+            },
+            "office/educational_institution": {
+                "name": "Instituto de Educação",
+                "terms": "escola,colégio,universidade,faculdade,curso,instituto,educação,educacional"
+            },
+            "office/employment_agency": {
+                "name": "Agência de Empregos",
+                "terms": "agência,SINE,emprego,empregos,desempregado"
+            },
+            "office/estate_agent": {
+                "name": "Imobiliária",
+                "terms": "imobiliária,aluguel,casa,apartamento,casas,apartamentos"
+            },
+            "office/financial": {
+                "name": "Escritório Financeiro"
+            },
+            "office/government": {
+                "name": "Escritório do Governo"
+            },
+            "office/insurance": {
+                "name": "Seguradora",
+                "terms": "seguro,seguradora,apólice,corretor"
+            },
+            "office/it": {
+                "name": "Escritório de TI",
+                "terms": "ti,cpd,informática,computador,rede"
+            },
+            "office/lawyer": {
+                "name": "Escritório de Advogado",
+                "terms": "advogado,advocacia,escritório"
+            },
+            "office/newspaper": {
+                "name": "Jornal",
+                "terms": "jornal,notícia"
+            },
+            "office/ngo": {
+                "name": "Sede de ONG"
+            },
+            "office/physician": {
+                "name": "Médico",
+                "terms": "médico,consultório,doutor,consulta"
+            },
+            "office/political_party": {
+                "name": "Partido Político",
+                "terms": "política,político,partido,gabinete"
+            },
+            "office/research": {
+                "name": "Escritório de Pesquisa",
+                "terms": "pesquisa,pesquisas,pesquisador,escritório"
+            },
+            "office/telecommunication": {
+                "name": "Escritório de Telecomunicações"
+            },
+            "office/therapist": {
+                "name": "Terapeuta"
+            },
+            "office/travel_agent": {
+                "name": "Agência de Viagens",
+                "terms": "viagem,viagens,agência"
+            },
             "place": {
                 "name": "Local",
                 "terms": "Local"
@@ -1649,6 +1745,9 @@
             "power/line": {
                 "name": "Linha de Transmissão de Energia Elétrica",
                 "terms": "Fio Elétrico"
+            },
+            "power/minor_line": {
+                "name": "Linha de Transmissão Pequena"
             },
             "power/pole": {
                 "name": "Poste Elétrico",

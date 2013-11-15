@@ -387,6 +387,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "建物"
+            },
             "category-landuse": {
                 "name": "土地利用"
             },
@@ -401,6 +404,12 @@
             },
             "category-route": {
                 "name": "ルート"
+            },
+            "category-water-area": {
+                "name": "水面"
+            },
+            "category-water-line": {
+                "name": "水面"
             }
         },
         "fields": {
@@ -698,6 +707,9 @@
             "shelter": {
                 "label": "避難所"
             },
+            "shelter_type": {
+                "label": "タイプ"
+            },
             "shop": {
                 "label": "店舗種別"
             },
@@ -737,6 +749,9 @@
             },
             "trail_visibility": {
                 "label": "道の可視度"
+            },
+            "tree_type": {
+                "label": "タイプ"
             },
             "vending": {
                 "label": "販売商品の種別"
@@ -885,6 +900,9 @@
             "amenity/marketplace": {
                 "name": "市場"
             },
+            "amenity/parking": {
+                "name": "駐車場"
+            },
             "amenity/pharmacy": {
                 "name": "薬局, ドラッグストア"
             },
@@ -923,6 +941,9 @@
             },
             "amenity/school": {
                 "name": "学校"
+            },
+            "amenity/shelter": {
+                "name": "避難所"
             },
             "amenity/swimming_pool": {
                 "name": "プール"
@@ -1046,6 +1067,9 @@
             },
             "entrance": {
                 "name": "エントランス"
+            },
+            "footway/crossing": {
+                "name": "横断歩道"
             },
             "highway": {
                 "name": "道路"
@@ -1394,6 +1418,33 @@
             },
             "office": {
                 "name": "オフィス"
+            },
+            "office/administrative": {
+                "name": "市町村役所"
+            },
+            "office/architect": {
+                "name": "建築家"
+            },
+            "office/company": {
+                "name": "会社事務所"
+            },
+            "office/employment_agency": {
+                "name": "人材紹介"
+            },
+            "office/it": {
+                "name": "ITオフィス"
+            },
+            "office/lawyer": {
+                "name": "法律事務所"
+            },
+            "office/ngo": {
+                "name": "NGO事務所"
+            },
+            "office/therapist": {
+                "name": "心療内科"
+            },
+            "office/travel_agent": {
+                "name": "旅行代理店"
             },
             "place": {
                 "name": "地名"

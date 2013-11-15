@@ -387,6 +387,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Edificio"
+            },
             "category-landuse": {
                 "name": "Uso del suelo"
             },
@@ -401,6 +404,12 @@
             },
             "category-route": {
                 "name": "Ruta"
+            },
+            "category-water-area": {
+                "name": "Lámina de agua"
+            },
+            "category-water-line": {
+                "name": "Curso de agua"
             }
         },
         "fields": {
@@ -737,6 +746,9 @@
             },
             "trail_visibility": {
                 "label": "Visibilidad de la senda"
+            },
+            "tree_type": {
+                "label": "Tipo"
             },
             "vending": {
                 "label": "Tipo de producto"
@@ -1127,6 +1139,13 @@
             "entrance": {
                 "name": "Entrada",
                 "terms": "puerta, portal, vestíbulo, umbral, soportal, pórtico, abertura, acceso, boca, entrada, portilla"
+            },
+            "footway/crossing": {
+                "name": "Cruce peatonal"
+            },
+            "footway/sidewalk": {
+                "name": "Acera",
+                "terms": "acera, paso, bordillo, anden, borde, peatonal, peatón"
             },
             "highway": {
                 "name": "Vía",
@@ -1590,6 +1609,54 @@
                 "name": "Oficina",
                 "terms": "Puesto, Oficina"
             },
+            "office/accountant": {
+                "name": "Contable",
+                "terms": "contable, contador, tesorero, interventor, cajero, administrador, contabilidad, gestor"
+            },
+            "office/administrative": {
+                "name": "Oficina administrativa",
+                "terms": "administrativo, gestoría, asesoría"
+            },
+            "office/architect": {
+                "name": "Arquitecto",
+                "terms": "constructor, proyectista, edificador, aparejador, urbanista"
+            },
+            "office/company": {
+                "name": "Oficina de empresa"
+            },
+            "office/employment_agency": {
+                "name": "Agencia de colocación",
+                "terms": "agencia, empleo, desempleo, colocación, trabajo, ocupación, paro, desocupación, INEM"
+            },
+            "office/estate_agent": {
+                "name": "Inmobiliaria",
+                "terms": "agencia, bienes raíces, inmobiliaria, alquiler, inmueble, venta"
+            },
+            "office/government": {
+                "name": "Oficina de gobierno"
+            },
+            "office/insurance": {
+                "name": "Aseguradora",
+                "terms": "oficina, aseguradora, seguro"
+            },
+            "office/lawyer": {
+                "name": "Despacho de abogados",
+                "terms": "despacho, bufete, abogado, procurador, letrado, jurisconsulto, jurisperito, jurista, legista"
+            },
+            "office/newspaper": {
+                "name": "Periódico"
+            },
+            "office/ngo": {
+                "name": "ONG",
+                "terms": "oficina, ONG, organización no gubernamental, "
+            },
+            "office/political_party": {
+                "name": "Partido político"
+            },
+            "office/travel_agent": {
+                "name": "Agencia de viajes",
+                "terms": "agencia, viaje, vacaciones, turismo, excursión"
+            },
             "place": {
                 "name": "Lugar",
                 "terms": "sitio, emplazamiento, parte, punto, lado, espacio, zona, área, paraje, lugar"
@@ -1637,6 +1704,9 @@
             "power/line": {
                 "name": "Línea de alta tensión",
                 "terms": "energía, potencia, electricidad, subestación, tendido, eléctrico, línea, eléctrica, torre"
+            },
+            "power/minor_line": {
+                "name": "Línea eléctrica de media tensión"
             },
             "power/pole": {
                 "name": "Poste eléctrico",
@@ -1744,22 +1814,28 @@
                 "name": "Tienda de componente de vehículos"
             },
             "shop/car_repair": {
-                "name": "Taller de reparación de vehículos"
+                "name": "Taller de reparación de vehículos",
+                "terms": "reparación, automóvil, vehículo, carro, coche, taller"
             },
             "shop/chemist": {
-                "name": "Farmacia"
+                "name": "Farmacia",
+                "terms": "farmacéutico, botica, farmacia, boticario, apoteca"
             },
             "shop/clothes": {
-                "name": "Tienda de ropa"
+                "name": "Tienda de ropa",
+                "terms": "tienda, ropa, vestido, traje, vestimenta, textil, establecimiento, ropaje, sastrería, comercio, negocio, local"
             },
             "shop/computer": {
-                "name": "Tienda de informática"
+                "name": "Tienda de informática",
+                "terms": "tienda, establecimiento, informática, ordenador, computador, comuptadora, comercio, negocio, local"
             },
             "shop/confectionery": {
-                "name": "Confitería"
+                "name": "Confitería",
+                "terms": "confitería, dulces, repostería, golosina, bombones, tienda de dulces, pastelería"
             },
             "shop/convenience": {
-                "name": "Tienda de alimentación"
+                "name": "Tienda de alimentación",
+                "terms": "tienda, almacén, colmado, abarrote, alimentación"
             },
             "shop/deli": {
                 "name": "Delicatessen"
@@ -1783,7 +1859,8 @@
                 "name": "Pescadería"
             },
             "shop/florist": {
-                "name": "Floristería"
+                "name": "Floristería",
+                "terms": "floristería, florista, flores, ramos, plantas, tienda, comercio"
             },
             "shop/furniture": {
                 "name": "Tienda de muebles"
@@ -1792,7 +1869,8 @@
                 "name": "Centro de jardinería"
             },
             "shop/gift": {
-                "name": "Tienda de regalos"
+                "name": "Tienda de regalos",
+                "terms": "tienda, comercio, local, regalo, obsequio"
             },
             "shop/greengrocer": {
                 "name": "Frutería"
@@ -1807,13 +1885,16 @@
                 "name": "Tienda de sonido"
             },
             "shop/jewelry": {
-                "name": "Joyería"
+                "name": "Joyería",
+                "terms": "joyería, joyero, relojería, argentería, orfebrería, orfebre, platero, relojero"
             },
             "shop/kiosk": {
-                "name": "Kiosko"
+                "name": "Kiosko",
+                "terms": "quiosco, kiosko, prensa, revista, estanco"
             },
             "shop/laundry": {
-                "name": "Lavandería"
+                "name": "Lavandería",
+                "terms": "lavandería, lavadero, colada, ropa, tintorería, limpieza"
             },
             "shop/locksmith": {
                 "name": "Cerrajero"
@@ -1835,13 +1916,19 @@
                 "name": "Quiosco de prensa"
             },
             "shop/optician": {
-                "name": "Óptica"
+                "name": "Óptica",
+                "terms": "óptica, gafas, lentillas, oculista, óptico, tienda"
             },
             "shop/outdoor": {
-                "name": "Tienda de actividades al aire libre"
+                "name": "Tienda de actividades al aire libre",
+                "terms": "tienda, deportes, aventura, aire, libre, excursionismo"
             },
             "shop/pet": {
                 "name": "Tienda de mascotas"
+            },
+            "shop/photo": {
+                "name": "Tienda de fotografía",
+                "terms": "fotografía, tienda , establecimiento, fotógrafo, cámara, retratista, revelado"
             },
             "shop/shoes": {
                 "name": "Zapatería"
@@ -1938,16 +2025,20 @@
                 "terms": "zoo, zoológico "
             },
             "type/boundary": {
-                "name": "Límite"
+                "name": "Límite",
+                "terms": "frontera, límite, confín, linde, divisoria, borde"
             },
             "type/boundary/administrative": {
-                "name": "Frontera administrativa"
+                "name": "Frontera administrativa",
+                "terms": "frontera, límite, confín, linde, divisoria, borde"
             },
             "type/multipolygon": {
-                "name": "Multipoligono"
+                "name": "Multipoligono",
+                "terms": "multipolígono, polígono, múltiple, multi-polígono"
             },
             "type/restriction": {
-                "name": "Restricción"
+                "name": "Restricción",
+                "terms": "restricción, limitación, prohibición"
             },
             "type/route": {
                 "name": "Ruta",
@@ -2010,7 +2101,8 @@
                 "name": "Desagüe"
             },
             "waterway/river": {
-                "name": "Río"
+                "name": "Río",
+                "terms": "río, torrente, arroyo, torrentera, riachuelo, riacho, afluente, regato"
             },
             "waterway/riverbank": {
                 "name": "Ribera de un río",
@@ -2021,7 +2113,8 @@
                 "terms": "torrente, riachuelo, arroyuelo, regato, reguero, torrentera, rivera, corriente, afluente, brazo, toma, río, arroyo"
             },
             "waterway/weir": {
-                "name": "Vertedero"
+                "name": "Vertedero",
+                "terms": "presa, azud"
             }
         }
     }

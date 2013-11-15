@@ -708,6 +708,9 @@
             "shelter": {
                 "label": "Shelter"
             },
+            "shelter_type": {
+                "label": "Type"
+            },
             "shop": {
                 "label": "Type"
             },
@@ -985,6 +988,10 @@
             "amenity/school": {
                 "name": "Skole",
                 "terms": "Skole, Folkeskole, Privatskole"
+            },
+            "amenity/shelter": {
+                "name": "Shelter",
+                "terms": "Shelter, læskur"
             },
             "amenity/swimming_pool": {
                 "name": "Svømmebassin",

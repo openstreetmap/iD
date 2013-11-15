@@ -388,6 +388,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Budova"
+            },
             "category-landuse": {
                 "name": "Využitie krajiny"
             },
@@ -402,6 +405,12 @@
             },
             "category-route": {
                 "name": "Trasa"
+            },
+            "category-water-area": {
+                "name": "Voda"
+            },
+            "category-water-line": {
+                "name": "Voda"
             }
         },
         "fields": {
@@ -699,6 +708,9 @@
             "shelter": {
                 "label": "Prístrešok"
             },
+            "shelter_type": {
+                "label": "Typ"
+            },
             "shop": {
                 "label": "Typ"
             },
@@ -976,6 +988,10 @@
             "amenity/school": {
                 "name": "Škola",
                 "terms": "akadémia,alma mater,vysoká škola,oddelenie,fakulta,katedra,prednáška,prednášková sála,skola,prednaska,vysoka skola,akademia"
+            },
+            "amenity/shelter": {
+                "name": "Prístrešok",
+                "terms": "pristresok,útulňa,utulna"
             },
             "amenity/swimming_pool": {
                 "name": "Plaváreň",
