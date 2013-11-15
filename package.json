@@ -23,7 +23,7 @@
     "d3": "3.3.8",
     "smash": "0.0",
     "uglify-js": "~2.2.5",
-    "maki": "0.3",
+    "maki": "0.4",
     "jshint": "2.3.0",
     "mocha": "~1.12",
     "mocha-phantomjs": "~3.1.0",
