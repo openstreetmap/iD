@@ -1,3 +1,17 @@
+## 1.3.2
+
+* Update maki
+* Fix Disconnect of way with multiple intersections (#1955)
+* Fix unclosed area rendering (#1958)
+* Add presets for amenity=shelter, footway=sidewalk, footway=crossing, and various office values
+* Add area categories
+* Full-height background settings pane
+* Add suggestions of common shop and amenity names
+* Handle https wikipedia URLs
+* Use assumed values for access placeholders (#1924)
+* Distinguish between power=line and power=minor_line
+* Reset invalid opacity values to default (#1923)
+
 ## 1.3.1
 
 * Fix misalignment -> Fix alignment (#1913)
