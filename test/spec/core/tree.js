@@ -118,6 +118,26 @@ describe("iD.Tree", function() {
             expect(tree.intersects(extent, graph)).to.eql([n1]);
         });
 
+        it("don't include parent way multiple times when multiple child nodes are moved", function() {
+            // checks against the following regression: https://github.com/systemed/iD/issues/1978
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                n1 = iD.Node({id: 'n1', loc: [1, 1]}),
+                n2 = iD.Node({id: 'n2', loc: [3, 3]}),
+                way = iD.Way({nodes: ['n1', 'n2']}),
+                extent = iD.geo.Extent([0, 0], [4, 4]);
+
+            graph = graph.replace(n1).replace(n2).replace(way);
+            expect(tree.intersects(extent, graph)).to.eql([n1, n2, way]);
+
+            graph = graph.replace(n1.move([1.1,1.1])).replace(n2.move([2.1,2.1]));
+            expect(
+                _.pluck(tree.intersects(extent, graph),'id').sort()
+            ).to.eql(
+                _.pluck([n1, n2, way],'id').sort()
+            );
+        });
+
         it("doesn't include removed entities", function() {
             var graph = iD.Graph(),
                 tree = iD.Tree(graph),

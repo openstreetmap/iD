@@ -22,14 +22,14 @@ iD.Tree = function(head) {
         head.parentWays(entity).forEach(function(parent) {
             if (rectangles[parent.id]) {
                 rtree.remove(rectangles[parent.id]);
-                insertions.push(entityRectangle(parent));
+                insertions.push(parent);
             }
         });
 
         head.parentRelations(entity).forEach(function(parent) {
             if (rectangles[parent.id]) {
                 rtree.remove(rectangles[parent.id]);
-                insertions.push(entityRectangle(parent));
+                insertions.push(parent);
             }
             updateParents(parent, insertions);
         });
@@ -44,10 +44,11 @@ iD.Tree = function(head) {
             if (head.entities.hasOwnProperty(entity.id) || rectangles[entity.id])
                 return;
 
-            insertions.push(entityRectangle(entity));
+            insertions.push(entity);
             updateParents(entity, insertions);
         });
 
+        insertions = _.unique(insertions).map(entityRectangle);
         rtree.load(insertions);
 
         return tree;
@@ -67,14 +68,15 @@ iD.Tree = function(head) {
 
             diff.modified().forEach(function(entity) {
                 rtree.remove(rectangles[entity.id]);
-                insertions.push(entityRectangle(entity));
+                insertions.push(entity);
                 updateParents(entity, insertions);
             });
 
             diff.created().forEach(function(entity) {
-                insertions.push(entityRectangle(entity));
+                insertions.push(entity);
             });
 
+            insertions = _.unique(insertions).map(entityRectangle);
             rtree.load(insertions);
         }
 
