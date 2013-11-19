@@ -555,7 +555,7 @@
         "fields": [
             "operator",
             "address",
-            "building_yes"
+            "building_area"
         ],
         "geometry": [
             "point",
@@ -681,6 +681,7 @@
             "parking",
             "capacity",
             "fee",
+            "access_simple",
             "supervised",
             "park_ride",
             "address"
@@ -761,7 +762,7 @@
         "icon": "place-of-worship",
         "fields": [
             "denomination",
-            "building_yes",
+            "building_area",
             "address"
         ],
         "geometry": [
@@ -788,7 +789,7 @@
         "icon": "religious-christian",
         "fields": [
             "denomination",
-            "building_yes",
+            "building_area",
             "address"
         ],
         "geometry": [
@@ -830,7 +831,7 @@
         "icon": "religious-jewish",
         "fields": [
             "denomination",
-            "building_yes",
+            "building_area",
             "address"
         ],
         "geometry": [
@@ -852,7 +853,7 @@
         "icon": "religious-muslim",
         "fields": [
             "denomination",
-            "building_yes",
+            "building_area",
             "address"
         ],
         "geometry": [
@@ -1171,7 +1172,8 @@
             "toilets/disposal",
             "operator",
             "building_area",
-            "access_toilets"
+            "fee",
+            "access_simple"
         ],
         "geometry": [
             "point",
@@ -1493,7 +1495,7 @@
     "building": {
         "icon": "building",
         "fields": [
-            "building_yes",
+            "building",
             "levels",
             "address"
         ],
@@ -1666,6 +1668,7 @@
         },
         "fields": [
             "entrance",
+            "access_simple",
             "address"
         ],
         "name": "Entrance"
@@ -2947,6 +2950,9 @@
         "name": "Stadium"
     },
     "leisure/swimming_pool": {
+        "fields": [
+            "access_simple"
+        ],
         "geometry": [
             "point",
             "vertex",

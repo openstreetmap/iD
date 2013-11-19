@@ -2,7 +2,7 @@
     "icon": "place-of-worship",
     "fields": [
         "denomination",
-        "building_yes",
+        "building_area",
         "address"
     ],
     "geometry": [

@@ -3,7 +3,7 @@
     "fields": [
         "operator",
         "address",
-        "building_yes"
+        "building_area"
     ],
     "geometry": [
         "point",

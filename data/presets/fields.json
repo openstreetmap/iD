@@ -46,7 +46,7 @@
             }
         }
     },
-    "access_toilets": {
+    "access_simple": {
         "key": "access",
         "type": "combo",
         "label": "Access",
@@ -139,12 +139,6 @@
         "type": "check",
         "default": "yes",
         "geometry": "area",
-        "label": "Building"
-    },
-    "building_yes": {
-        "key": "building",
-        "type": "combo",
-        "default": "yes",
         "label": "Building"
     },
     "capacity": {

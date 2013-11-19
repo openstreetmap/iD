@@ -455,7 +455,7 @@
                     }
                 }
             },
-            "access_toilets": {
+            "access_simple": {
                 "label": "Access"
             },
             "address": {
@@ -502,9 +502,6 @@
                 "label": "Building"
             },
             "building_area": {
-                "label": "Building"
-            },
-            "building_yes": {
                 "label": "Building"
             },
             "capacity": {

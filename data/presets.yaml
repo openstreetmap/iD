@@ -46,7 +46,7 @@ en:
           destination: 
             title: Destination
             description: Access permitted only to reach a destination
-      access_toilets: 
+      access_simple: 
         label: Access
       address: 
         label: Address
@@ -79,8 +79,6 @@ en:
       building: 
         label: Building
       building_area: 
-        label: Building
-      building_yes: 
         label: Building
       capacity: 
         label: Capacity
