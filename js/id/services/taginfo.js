@@ -104,7 +104,7 @@ iD.taginfo = function() {
         parameters = clean(shorten(setSort(setFilter(parameters))));
         request(endpoint + 'key/values?' +
             iD.util.qsString(_.extend({
-                rp: 20,
+                rp: 25,
                 sortname: 'count_all',
                 sortorder: 'desc',
                 page: 1
