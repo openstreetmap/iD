@@ -69,7 +69,7 @@ describe("iD.taginfo", function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {key: "amenity", query: "par", page: "1", rp: "20", sortname: 'count_all', sortorder: 'desc'});
+                {key: "amenity", query: "par", page: "1", rp: "25", sortname: 'count_all', sortorder: 'desc'});
             expect(callback).to.have.been.calledWith(null, [{"value":"parking","title":"A place for parking cars"}]);
         });
 
