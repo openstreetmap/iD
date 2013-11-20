@@ -1516,6 +1516,10 @@
                 "name": "Cut line",
                 "terms": ""
             },
+            "man_made/flagpole": {
+                "name": "Flagpole",
+                "terms": ""
+            },
             "man_made/lighthouse": {
                 "name": "Lighthouse",
                 "terms": ""

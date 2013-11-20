@@ -3041,6 +3041,16 @@
         },
         "name": "Cut line"
     },
+    "man_made/flagpole": {
+        "geometry": [
+            "point"
+        ],
+        "tags": {
+            "man_made": "flagpole"
+        },
+        "name": "Flagpole",
+        "icon": "embassy"
+    },
     "man_made/lighthouse": {
         "geometry": [
             "point",

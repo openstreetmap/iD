@@ -823,6 +823,9 @@ en:
       man_made/cutline: 
         name: Cut line
         terms: "<translate with synonyms or related terms for 'Cut line', separated by commas>"
+      man_made/flagpole: 
+        name: Flagpole
+        terms: "<translate with synonyms or related terms for 'Flagpole', separated by commas>"
       man_made/lighthouse: 
         name: Lighthouse
         terms: "<translate with synonyms or related terms for 'Lighthouse', separated by commas>"
