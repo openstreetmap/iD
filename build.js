@@ -5,7 +5,8 @@ var fs = require('fs'),
     _ = require('./js/lib/lodash'),
     jsonschema = require('jsonschema'),
     fieldSchema = require('./data/presets/schema/field.json'),
-    presetSchema = require('./data/presets/schema/preset.json');
+    presetSchema = require('./data/presets/schema/preset.json'),
+    suggestions = require('./data/name-suggestions.json');
 
 function readtxt(f) {
     return fs.readFileSync(f, 'utf8');
@@ -103,6 +104,32 @@ function generatePresets() {
 
         presets[id] = preset;
     });
+
+    // for each suggestion make preset with name, geometry, tags
+    for (var key in suggestions) {
+        for (var value in suggestions[key]) {
+            for (var name in suggestions[key][value]) {
+                var item = key + '/' + value + '/' + name;
+                presets[item] = {
+                    geometry: [
+                        'point',
+                        'area'
+                    ],
+                    tags: {},
+                    name: name,
+                    icon: value
+                };
+
+                presets[item].tags[key] = value;
+                presets[item].tags.name = name;
+
+                for (var tag in suggestions[key][value][name]) {
+                    if (tag !== 'count')
+                        presets[item].tags[tag] = suggestions[key][value][name][tag];
+                }
+            }
+        }
+    }
 
     fs.writeFileSync('data/presets/presets.json', stringify(presets));
 

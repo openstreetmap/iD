@@ -34,8 +34,9 @@ iD.presets.Preset = function(id, preset, fields) {
         return t('presets.presets.' + id + '.' + scope, options);
     };
 
+    var name = preset.name;
     preset.name = function() {
-        return preset.t('name', {'default': id});
+        return preset.t('name', {'default': name});
     };
 
     preset.terms = function() {
