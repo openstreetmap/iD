@@ -1005,7 +1005,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "geometry": [
             "point",
@@ -1118,7 +1119,8 @@
     },
     "amenity/taxi": {
         "fields": [
-            "operator"
+            "operator",
+            "capacity"
         ],
         "geometry": [
             "point",
@@ -1548,6 +1550,9 @@
         "searchable": false
     },
     "building/garage": {
+        "fields": [
+            "capacity"
+        ],
         "geometry": [
             "point",
             "vertex",

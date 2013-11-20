@@ -3,7 +3,8 @@
     "fields": [
         "cuisine",
         "building_area",
-        "address"
+        "address",
+        "capacity"
     ],
     "geometry": [
         "point",

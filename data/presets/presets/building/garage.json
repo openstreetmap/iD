@@ -1,4 +1,7 @@
 {
+    "fields": [
+        "capacity"
+    ],
     "geometry": [
         "point",
         "vertex",
