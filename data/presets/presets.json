@@ -2545,6 +2545,19 @@
         "name": "Farm",
         "icon": "farm"
     },
+    "landuse/farmland": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "landuse": "farmland"
+        },
+        "terms": [],
+        "name": "Farmland",
+        "icon": "farm",
+        "searchable": false
+    },
     "landuse/farmyard": {
         "geometry": [
             "point",

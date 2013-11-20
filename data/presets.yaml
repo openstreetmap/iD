@@ -715,6 +715,9 @@ en:
       landuse/farm: 
         name: Farm
         terms: "<translate with synonyms or related terms for 'Farm', separated by commas>"
+      landuse/farmland: 
+        name: Farmland
+        terms: "<translate with synonyms or related terms for 'Farmland', separated by commas>"
       landuse/farmyard: 
         name: Farmyard
         terms: "<translate with synonyms or related terms for 'Farmyard', separated by commas>"

@@ -1372,6 +1372,10 @@
                 "name": "Farm",
                 "terms": ""
             },
+            "landuse/farmland": {
+                "name": "Farmland",
+                "terms": ""
+            },
             "landuse/farmyard": {
                 "name": "Farmyard",
                 "terms": ""
