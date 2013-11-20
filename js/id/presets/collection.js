@@ -61,13 +61,14 @@ iD.presets.Collection = function(collection) {
 
             var other = presets.item(geometry);
 
-            return iD.presets.Collection(
-                _.unique(
-                    leading_name.concat(
-                        leading_terms,
-                        levenstein_name,
-                        leventstein_terms,
-                        other)));
+            var results = leading_name.concat(
+                            leading_terms,
+                            levenstein_name,
+                            leventstein_terms).slice(0, 50);
+
+            return iD.presets.Collection(_.unique(
+                    results.concat(other)
+                ));
         }
     };
 
