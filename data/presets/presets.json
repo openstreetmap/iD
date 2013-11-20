@@ -1675,7 +1675,9 @@
     },
     "footway/crossing": {
         "fields": [
-            "crossing"
+            "crossing",
+            "access",
+            "surface"
         ],
         "geometry": [
             "line"
