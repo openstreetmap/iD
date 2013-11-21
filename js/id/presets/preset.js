@@ -36,6 +36,11 @@ iD.presets.Preset = function(id, preset, fields) {
 
     var name = preset.name;
     preset.name = function() {
+        if (preset.suggestion) {
+            id = id.split('/');
+            id = id[0] + '/' + id[1];
+            return name + ' - ' + t('presets.presets.' + id + '.name');
+        }
         return preset.t('name', {'default': name});
     };
 
