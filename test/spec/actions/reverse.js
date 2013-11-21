@@ -114,4 +114,28 @@ describe("iD.actions.Reverse", function () {
         graph = iD.actions.Reverse(way.id)(graph);
         expect(graph.entity(relation.id).members[0].role).to.eql('forward');
     });
+
+    it("transforms role=north ⟺ role=south in member relations", function () {
+        var way = iD.Way({tags: {highway: 'residential'}}),
+            relation = iD.Relation({members: [{type: 'way', id: way.id, role: 'north'}]}),
+            graph = iD.Graph([way, relation]);
+
+        graph = iD.actions.Reverse(way.id)(graph);
+        expect(graph.entity(relation.id).members[0].role).to.eql('south');
+
+        graph = iD.actions.Reverse(way.id)(graph);
+        expect(graph.entity(relation.id).members[0].role).to.eql('north');
+    });
+
+    it("transforms role=east ⟺ role=west in member relations", function () {
+        var way = iD.Way({tags: {highway: 'residential'}}),
+            relation = iD.Relation({members: [{type: 'way', id: way.id, role: 'east'}]}),
+            graph = iD.Graph([way, relation]);
+
+        graph = iD.actions.Reverse(way.id)(graph);
+        expect(graph.entity(relation.id).members[0].role).to.eql('west');
+
+        graph = iD.actions.Reverse(way.id)(graph);
+        expect(graph.entity(relation.id).members[0].role).to.eql('east');
+    });
 });
