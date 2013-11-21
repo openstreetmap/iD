@@ -89,6 +89,71 @@ function generateFields() {
     fs.writeFileSync('data/presets/fields.json', stringify(fields));
 }
 
+function suggestionsToPresets(presets) {
+    var existing = {};
+
+    for (var preset in presets) {
+        existing[presets[preset].name] = {
+            category: preset,
+            count: -1
+        };
+    }
+
+    for (var key in suggestions) {
+        for (var value in suggestions[key]) {
+            for (var name in suggestions[key][value]) {
+                var item = key + '/' + value + '/' + name,
+                    tags = {},
+                    count = suggestions[key][value][name].count;
+
+                for (var tag in suggestions[key][value][name]) {
+                    if (tag !== 'count') tags[tag] = suggestions[key][value][name][tag];
+                }
+
+                tags[key] = value;
+                tags.name = name;
+
+                if (existing[name]) {
+                    if (existing[name].count !== -1 && (count > existing[name].count)) {
+                        delete preset[existing[name].category];
+                    } else {
+                        break;
+                    }
+                }
+                
+                addPreset(item, tags, name, getIcon(key + '/' + value), count);
+            }
+        }
+    }
+
+    function getIcon(tag) {
+        if (presets[tag] && presets[tag].icon) {
+            return presets[tag].icon;
+        }
+        return tag.split('/')[1];
+    }
+
+    function addPreset(category, tags, name, icon, count) {
+        presets[category] = {
+            tags: tags,
+            name: name,
+            icon: icon,
+            geometry: [
+                'point',
+                'area'
+            ],
+            suggestion: true
+        };
+
+        existing[name] = {
+            category: category,
+            count: count
+        };
+    }
+
+    return presets;
+}
+
 function generatePresets() {
     var presets = {};
     glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
@@ -105,31 +170,7 @@ function generatePresets() {
         presets[id] = preset;
     });
 
-    // for each suggestion make preset with name, geometry, tags
-    for (var key in suggestions) {
-        for (var value in suggestions[key]) {
-            for (var name in suggestions[key][value]) {
-                var item = key + '/' + value + '/' + name;
-                presets[item] = {
-                    geometry: [
-                        'point',
-                        'area'
-                    ],
-                    tags: {},
-                    name: name,
-                    icon: value
-                };
-
-                presets[item].tags[key] = value;
-                presets[item].tags.name = name;
-
-                for (var tag in suggestions[key][value][name]) {
-                    if (tag !== 'count')
-                        presets[item].tags[tag] = suggestions[key][value][name][tag];
-                }
-            }
-        }
-    }
+    presets = _.merge(presets, suggestionsToPresets(presets));
 
     fs.writeFileSync('data/presets/presets.json', stringify(presets));
 
