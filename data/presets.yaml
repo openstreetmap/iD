@@ -1048,6 +1048,12 @@ en:
       power/transformer: 
         name: Transformer
         terms: "<translate with synonyms or related terms for 'Transformer', separated by commas>"
+      public_transport/platform: 
+        name: Platform
+        terms: "<translate with synonyms or related terms for 'Platform', separated by commas>"
+      public_transport/stop_position: 
+        name: Stop Position
+        terms: "<translate with synonyms or related terms for 'Stop Position', separated by commas>"
       railway: 
         name: Railway
         terms: "<translate with synonyms or related terms for 'Railway', separated by commas>"

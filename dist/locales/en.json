@@ -1816,6 +1816,14 @@
                 "name": "Transformer",
                 "terms": ""
             },
+            "public_transport/platform": {
+                "name": "Platform",
+                "terms": ""
+            },
+            "public_transport/stop_position": {
+                "name": "Stop Position",
+                "terms": ""
+            },
             "railway": {
                 "name": "Railway",
                 "terms": ""

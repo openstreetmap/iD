@@ -4077,6 +4077,38 @@
         },
         "name": "Transformer"
     },
+    "public_transport/platform": {
+        "fields": [
+            "ref",
+            "operator",
+            "network",
+            "shelter"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "public_transport": "platform"
+        },
+        "name": "Platform"
+    },
+    "public_transport/stop_position": {
+        "fields": [
+            "ref",
+            "operator",
+            "network"
+        ],
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "public_transport": "stop_position"
+        },
+        "name": "Stop Position"
+    },
     "railway": {
         "fields": [
             "railway"

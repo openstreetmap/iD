@@ -1,0 +1,18 @@
+{
+    "fields": [
+        "ref",
+        "operator",
+        "network",
+        "shelter"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "platform"
+    },
+    "name": "Platform"
+}

@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "ref",
+        "operator",
+        "network"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "public_transport": "stop_position"
+    },
+    "name": "Stop Position"
+}
