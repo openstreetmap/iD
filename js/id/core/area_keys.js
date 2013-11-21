@@ -1,3 +1,4 @@
+/* jshint -W109 */
 iD.Way.areaKeys = {
     "aeroway": {
         "gate": true,
