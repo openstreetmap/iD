@@ -1,0 +1,12 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "military": "bunker"
+    },
+    "terms": [],
+    "name": "Bunker"
+}

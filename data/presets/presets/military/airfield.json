@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "military": "airfield"
+    },
+    "terms": [],
+    "name": "Airfield",
+    "icon": "airfield"
+}

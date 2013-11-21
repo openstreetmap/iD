@@ -1568,6 +1568,22 @@
                 "name": "Water Works",
                 "terms": ""
             },
+            "military/airfield": {
+                "name": "Airfield",
+                "terms": ""
+            },
+            "military/barracks": {
+                "name": "Barracks",
+                "terms": ""
+            },
+            "military/bunker": {
+                "name": "Bunker",
+                "terms": ""
+            },
+            "military/range": {
+                "name": "Military Range",
+                "terms": ""
+            },
             "natural": {
                 "name": "Natural",
                 "terms": ""

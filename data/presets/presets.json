@@ -3197,6 +3197,55 @@
         },
         "name": "Water Works"
     },
+    "military/airfield": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "military": "airfield"
+        },
+        "terms": [],
+        "name": "Airfield",
+        "icon": "airfield"
+    },
+    "military/barracks": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "military": "barracks"
+        },
+        "terms": [],
+        "name": "Barracks"
+    },
+    "military/bunker": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "military": "bunker"
+        },
+        "terms": [],
+        "name": "Bunker"
+    },
+    "military/range": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "military": "range"
+        },
+        "terms": [],
+        "name": "Military Range"
+    },
     "natural": {
         "fields": [
             "natural"

@@ -1,0 +1,12 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "military": "range"
+    },
+    "terms": [],
+    "name": "Military Range"
+}

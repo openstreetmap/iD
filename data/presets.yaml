@@ -862,6 +862,18 @@ en:
       man_made/water_works: 
         name: Water Works
         terms: "<translate with synonyms or related terms for 'Water Works', separated by commas>"
+      military/airfield: 
+        name: Airfield
+        terms: "<translate with synonyms or related terms for 'Airfield', separated by commas>"
+      military/barracks: 
+        name: Barracks
+        terms: "<translate with synonyms or related terms for 'Barracks', separated by commas>"
+      military/bunker: 
+        name: Bunker
+        terms: "<translate with synonyms or related terms for 'Bunker', separated by commas>"
+      military/range: 
+        name: Military Range
+        terms: "<translate with synonyms or related terms for 'Military Range', separated by commas>"
       natural: 
         name: Natural
         terms: "<translate with synonyms or related terms for 'Natural', separated by commas>"
