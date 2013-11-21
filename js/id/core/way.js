@@ -61,7 +61,7 @@ _.extend(iD.Way.prototype, {
         if (!this.isClosed() || this.tags.area === 'no')
             return false;
         for (var key in this.tags)
-            if (key in iD.Way.areaKeys && !(this.tags[key] in iD.Way.areaKeys[key]))
+            if (key in iD.areaKeys && !(this.tags[key] in iD.areaKeys[key]))
                 return true;
         return false;
     },

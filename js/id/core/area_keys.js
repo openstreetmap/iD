@@ -1,5 +1,5 @@
 /* jshint -W109 */
-iD.Way.areaKeys = {
+iD.areaKeys = {
     "aeroway": {
         "gate": true,
         "taxiway": true
