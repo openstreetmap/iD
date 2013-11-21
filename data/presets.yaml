@@ -544,6 +544,9 @@ en:
       building/residential: 
         name: Residential Building
         terms: "<translate with synonyms or related terms for 'Residential Building', separated by commas>"
+      embankment: 
+        name: Embankment
+        terms: "<translate with synonyms or related terms for 'Embankment', separated by commas>"
       emergency/ambulance_station: 
         name: Ambulance Station
         terms: "<translate with synonyms or related terms for 'Ambulance Station', separated by commas>"
@@ -823,6 +826,9 @@ en:
       man_made/cutline: 
         name: Cut line
         terms: "<translate with synonyms or related terms for 'Cut line', separated by commas>"
+      man_made/embankment: 
+        name: Embankment
+        terms: "<translate with synonyms or related terms for 'Embankment', separated by commas>"
       man_made/flagpole: 
         name: Flagpole
         terms: "<translate with synonyms or related terms for 'Flagpole', separated by commas>"

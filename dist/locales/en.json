@@ -1144,6 +1144,10 @@
                 "name": "Residential Building",
                 "terms": ""
             },
+            "embankment": {
+                "name": "Embankment",
+                "terms": ""
+            },
             "emergency/ambulance_station": {
                 "name": "Ambulance Station",
                 "terms": ""
@@ -1514,6 +1518,10 @@
             },
             "man_made/cutline": {
                 "name": "Cut line",
+                "terms": ""
+            },
+            "man_made/embankment": {
+                "name": "Embankment",
                 "terms": ""
             },
             "man_made/flagpole": {

@@ -1622,6 +1622,16 @@
         },
         "name": "Residential Building"
     },
+    "embankment": {
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "embankment": "yes"
+        },
+        "name": "Embankment",
+        "matchScore": 0.2
+    },
     "emergency/ambulance_station": {
         "fields": [
             "operator"
@@ -3040,6 +3050,16 @@
             "man_made": "cutline"
         },
         "name": "Cut line"
+    },
+    "man_made/embankment": {
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "man_made": "embankment"
+        },
+        "name": "Embankment",
+        "searchable": false
     },
     "man_made/flagpole": {
         "geometry": [
