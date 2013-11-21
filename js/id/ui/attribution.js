@@ -73,7 +73,7 @@ iD.ui.Attribution = function(context) {
             .on('change.attribution', update);
 
         context.map()
-	    .on('move.attribution', _.throttle(update, 400, {leading: false}));
+            .on('move.attribution', _.throttle(update, 400, {leading: false}));
 
         update();
     };
