@@ -28,7 +28,7 @@ iD.behavior.Hash = function(context) {
     var move = _.throttle(function() {
         var s1 = formatter(context.map());
         if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
-    }, 500);
+    }, 500, {leading: false});
 
     function hashchange() {
         if (location.hash === s0) return; // ignore spurious hashchange events
