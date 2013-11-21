@@ -14,6 +14,8 @@
 
     Relation members:
        role=forward ⟺ role=backward
+         role=north ⟺ role=south
+          role=east ⟺ role=west
 
    In addition, numeric-valued `incline` tags are negated.
 
@@ -64,7 +66,14 @@ iD.actions.Reverse = function(wayId) {
 
         graph.parentRelations(way).forEach(function(relation) {
             relation.members.forEach(function(member, index) {
-                if (member.id === way.id && (role = {forward: 'backward', backward: 'forward'}[member.role])) {
+                if (member.id === way.id && (role = {
+						forward: 'backward',
+						backward: 'forward',
+						north: 'south',
+						south: 'north',
+						east: 'west',
+						west: 'east'
+					}[member.role])) {
                     relation = relation.updateMember({role: role}, index);
                     graph = graph.replace(relation);
                 }
