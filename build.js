@@ -122,7 +122,7 @@ function generatePresets() {
     });
 
     fs.writeFileSync('data/presets/presets.json', stringify(presets));
-    fs.writeFileSync('js/id/core/area_keys.js', '/* jshint -W109 */\niD.Way.areaKeys = ' + stringify(areaKeys) + ';');
+    fs.writeFileSync('js/id/core/area_keys.js', '/* jshint -W109 */\niD.areaKeys = ' + stringify(areaKeys) + ';');
 
     var presetsYaml = _.cloneDeep(translations);
     _.forEach(presetsYaml.presets, function(preset) {
