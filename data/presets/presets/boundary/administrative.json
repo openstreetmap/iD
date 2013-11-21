@@ -1,8 +1,7 @@
 {
     "name": "Administrative Boundary",
     "geometry": [
-        "line",
-        "area"
+        "line"
     ],
     "tags": {
         "boundary": "administrative"

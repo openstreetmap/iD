@@ -189,29 +189,3 @@ _.extend(iD.Way.prototype, {
         });
     }
 });
-
-// A closed way is considered to be an area if it has a tag with one
-// of the following keys, and the value is _not_ one of the associated
-// values for the respective key.
-iD.Way.areaKeys = {
-    aeroway: { taxiway: true},
-    amenity: {},
-    area: {},
-    'area:highway': {},
-    building: {},
-    'building:part': {},
-    historic: {},
-    landuse: {},
-    leisure: {},
-    man_made: { cutline: true, embankment: true, pipeline: true},
-    military: {},
-    natural: { coastline: true },
-    office: {},
-    place: {},
-    power: {},
-    public_transport: {},
-    ruins: {},
-    shop: {},
-    tourism: {},
-    waterway: {}
-};
