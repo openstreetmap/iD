@@ -17070,13 +17070,13 @@
         ]
     },
     {
-        "name": "TIGER 2012 Roads Overlay",
+        "name": "TIGER 2013 Roads Overlay",
         "type": "tms",
         "description": "Public domain road data from the US Government.",
-        "template": "http://{switch:a,b,c}.tile.openstreetmap.us/tiger2012_roads_expanded/{zoom}/{x}/{y}.png",
+        "template": "http://{switch:a,b,c}.tiles.mapbox.com/v3/enf.ho204tap,enf.ho20a3n1,enf.game1617/{zoom}/{x}/{y}.png",
         "scaleExtent": [
-            16,
-            19
+            4,
+            20
         ],
         "polygon": [
             [
