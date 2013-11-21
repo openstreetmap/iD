@@ -1,5 +1,5 @@
 d3 = (function(){
-  var d3 = {version: "3.3.8"}; // semver
+  var d3 = {version: "3.3.10"}; // semver
 d3.ascending = function(a, b) {
   return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
 };
@@ -1118,7 +1118,7 @@ d3_selectionPrototype.filter = function(filter) {
     subgroups.push(subgroup = []);
     subgroup.parentNode = (group = this[j]).parentNode;
     for (var i = 0, n = group.length; i < n; i++) {
-      if ((node = group[i]) && filter.call(node, node.__data__, i)) {
+      if ((node = group[i]) && filter.call(node, node.__data__, i, j)) {
         subgroup.push(node);
       }
     }
@@ -1402,22 +1402,24 @@ function d3_selection_onFilter(listener, argumentz) {
   };
 }
 
-var d3_event_dragSelect = d3_vendorSymbol(d3_documentElement.style, "userSelect"),
+var d3_event_dragSelect = "onselectstart" in d3_document ? null : d3_vendorSymbol(d3_documentElement.style, "userSelect"),
     d3_event_dragId = 0;
 
 function d3_event_dragSuppress() {
   var name = ".dragsuppress-" + ++d3_event_dragId,
-      touchmove = "touchmove" + name,
-      selectstart = "selectstart" + name,
-      dragstart = "dragstart" + name,
       click = "click" + name,
-      w = d3.select(d3_window).on(touchmove, d3_eventPreventDefault).on(selectstart, d3_eventPreventDefault).on(dragstart, d3_eventPreventDefault),
-      style = d3_documentElement.style,
-      select = style[d3_event_dragSelect];
-  style[d3_event_dragSelect] = "none";
+      w = d3.select(d3_window)
+          .on("touchmove" + name, d3_eventPreventDefault)
+          .on("dragstart" + name, d3_eventPreventDefault)
+          .on("selectstart" + name, d3_eventPreventDefault);
+  if (d3_event_dragSelect) {
+    var style = d3_documentElement.style,
+        select = style[d3_event_dragSelect];
+    style[d3_event_dragSelect] = "none";
+  }
   return function(suppressClick) {
     w.on(name, null);
-    style[d3_event_dragSelect] = select;
+    if (d3_event_dragSelect) style[d3_event_dragSelect] = select;
     if (suppressClick) { // suppress the next click, but only if it’s immediate
       function off() { w.on(click, null); }
       w.on(click, function() { d3_eventCancel(); off(); }, true);
@@ -2512,7 +2514,7 @@ function d3_geo_clipAntimeridianLine(listener) {
         listener.lineEnd();
         listener.lineStart();
         listener.point(sλ1, φ0);
-        listener.point( λ1, φ0);
+        listener.point(λ1, φ0);
         clean = 0;
       } else if (sλ0 !== sλ1 && dλ >= π) { // line crosses antimeridian
         // handle degeneracies
@@ -3905,6 +3907,17 @@ function d3_geo_resample(project) {
       maxDepth = 16;
 
   function resample(stream) {
+    return (maxDepth ? resampleRecursive : resampleNone)(stream);
+  }
+
+  function resampleNone(stream) {
+    return d3_geo_transformPoint(stream, function(x, y) {
+      x = project(x, y);
+      stream.point(x[0], x[1]);
+    });
+  }
+
+  function resampleRecursive(stream) {
     var λ00, φ00, x00, y00, a00, b00, c00, // first point
         λ0, x0, y0, a0, b0, c0; // previous point
 
@@ -3968,7 +3981,7 @@ function d3_geo_resample(project) {
           c = c0 + c1,
           m = Math.sqrt(a * a + b * b + c * c),
           φ2 = Math.asin(c /= m),
-          λ2 = abs(abs(c) - 1) < ε ? (λ0 + λ1) / 2 : Math.atan2(b, a),
+          λ2 = abs(abs(c) - 1) < ε || abs(λ0 - λ1) < ε ? (λ0 + λ1) / 2 : Math.atan2(b, a),
           p = project(λ2, φ2),
           x2 = p[0],
           y2 = p[1],
@@ -3993,29 +4006,6 @@ function d3_geo_resample(project) {
 
   return resample;
 }
-
-d3.geo.transform = function(methods) {
-  return {
-    stream: function(stream) {
-      var transform = new d3_geo_transform(stream);
-      for (var k in methods) transform[k] = methods[k];
-      return transform;
-    }
-  };
-};
-
-function d3_geo_transform(stream) {
-  this.stream = stream;
-}
-
-d3_geo_transform.prototype = {
-  point: function(x, y) { this.stream.point(x, y); },
-  sphere: function() { this.stream.sphere(); },
-  lineStart: function() { this.stream.lineStart(); },
-  lineEnd: function() { this.stream.lineEnd(); },
-  polygonStart: function() { this.stream.polygonStart(); },
-  polygonEnd: function() { this.stream.polygonEnd(); }
-};
 
 d3.geo.path = function() {
   var pointRadius = 4.5,
@@ -4086,10 +4076,40 @@ d3.geo.path = function() {
 
 function d3_geo_pathProjectStream(project) {
   var resample = d3_geo_resample(function(x, y) { return project([x * d3_degrees, y * d3_degrees]); });
-  return function(stream) {
-    var transform = new d3_geo_transform(stream = resample(stream));
-    transform.point = function(x, y) { stream.point(x * d3_radians, y * d3_radians); };
-    return transform;
+  return function(stream) { return d3_geo_projectionRadians(resample(stream)); };
+}
+
+d3.geo.transform = function(methods) {
+  return {
+    stream: function(stream) {
+      var transform = new d3_geo_transform(stream);
+      for (var k in methods) transform[k] = methods[k];
+      return transform;
+    }
+  };
+};
+
+function d3_geo_transform(stream) {
+  this.stream = stream;
+}
+
+d3_geo_transform.prototype = {
+  point: function(x, y) { this.stream.point(x, y); },
+  sphere: function() { this.stream.sphere(); },
+  lineStart: function() { this.stream.lineStart(); },
+  lineEnd: function() { this.stream.lineEnd(); },
+  polygonStart: function() { this.stream.polygonStart(); },
+  polygonEnd: function() { this.stream.polygonEnd(); }
+};
+
+function d3_geo_transformPoint(stream, point) {
+  return {
+    point: point,
+    sphere: function() { stream.sphere(); },
+    lineStart: function() { stream.lineStart(); },
+    lineEnd: function() { stream.lineEnd(); },
+    polygonStart: function() { stream.polygonStart(); },
+    polygonEnd: function() { stream.polygonEnd(); },
   };
 }
 
@@ -4197,11 +4217,9 @@ function d3_geo_projectionMutator(projectAt) {
 }
 
 function d3_geo_projectionRadians(stream) {
-  var transform = new d3_geo_transform(stream);
-  transform.point = function(λ, φ) {
-    stream.point(λ * d3_radians, φ * d3_radians);
-  };
-  return transform;
+  return d3_geo_transformPoint(stream, function(x, y) {
+    stream.point(x * d3_radians, y * d3_radians);
+  });
 }
 
 function d3_geo_mercator(λ, φ) {
@@ -4551,7 +4569,7 @@ d3_transitionPrototype.filter = function(filter) {
   for (var j = 0, m = this.length; j < m; j++) {
     subgroups.push(subgroup = []);
     for (var group = this[j], i = 0, n = group.length; i < n; i++) {
-      if ((node = group[i]) && filter.call(node, node.__data__, i)) {
+      if ((node = group[i]) && filter.call(node, node.__data__, i, j)) {
         subgroup.push(node);
       }
     }
