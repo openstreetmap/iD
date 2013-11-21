@@ -56,9 +56,15 @@ describe('iD.behavior.Hash', function () {
 
         hash();
 
+        var clock = sinon.useFakeTimers();
+
         context.map().center([38.9, -77.0]);
         context.map().zoom(2.0);
 
+        clock.tick(500);
+
         expect(location.hash).to.equal('#map=2.00/38.9/-77.0');
+
+        clock.restore();
     });
 });
