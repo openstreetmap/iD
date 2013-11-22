@@ -1144,6 +1144,9 @@
         "tags": {
             "amenity": "telephone"
         },
+        "terms": [
+            "phone"
+        ],
         "name": "Telephone"
     },
     "amenity/theatre": {

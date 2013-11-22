@@ -1006,7 +1006,7 @@
             },
             "amenity/telephone": {
                 "name": "Telephone",
-                "terms": ""
+                "terms": "phone"
             },
             "amenity/theatre": {
                 "name": "Theater",
