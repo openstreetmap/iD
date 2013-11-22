@@ -115,12 +115,11 @@ function suggestionsToPresets(presets) {
                 if (existing[name]) {
                     if (existing[name].count !== -1 && (count > existing[name].count)) {
                         delete preset[existing[name].category];
-                    } else {
-                        break;
+                        addPreset(item, tags, name, count);
                     }
+                } else {
+                    addPreset(item, tags, name, count);
                 }
-                
-                addPreset(item, tags, name, count);
             }
         }
     }
