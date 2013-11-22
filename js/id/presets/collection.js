@@ -25,10 +25,18 @@ iD.presets.Collection = function(collection) {
                 return a.searchable !== false;
             });
 
+            function namePrep(name) {
+                var nameArray = name.split(' - ');
+                if (nameArray.length > 1) {
+                    name = nameArray.slice(0, nameArray.length-1).join(' - ');
+                }
+                return name.toLowerCase();
+            }
+
             var leading_name = _.filter(searchable, function(a) {
-                    return leading(a.name().toLowerCase());
+                    return leading(namePrep(a.name()));
                 }).sort(function(a, b) {
-                    var i = a.name().toLowerCase().indexOf(value) - b.name().toLowerCase().indexOf(value);
+                    var i = namePrep(a.name()).indexOf(value) - namePrep(b.name()).indexOf(value);
                     if (i === 0) return a.name().length - b.name().length;
                     else return i;
                 }),
@@ -44,7 +52,7 @@ iD.presets.Collection = function(collection) {
             var levenstein_name = searchable.map(function(a) {
                     return {
                         preset: a,
-                        dist: iD.util.editDistance(value, a.name().toLowerCase())
+                        dist: iD.util.editDistance(value, namePrep(a.name()))
                     };
                 }).filter(function(a) {
                     return a.dist + Math.min(value.length - a.preset.name().length, 0) < 3;
