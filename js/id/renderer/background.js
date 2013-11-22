@@ -228,5 +228,14 @@ iD.Background = function(context) {
         if (overlay) background.toggleOverlayLayer(overlay);
     });
 
+    var gpx = q.gpx;
+    if (gpx) {
+        d3.text(gpx, function(err, gpxTxt) {
+            gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
+            dispatch.change();
+            context.map().pan([0, 0]);
+        });
+    }
+
     return d3.rebind(background, dispatch, 'on');
 };
