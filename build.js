@@ -110,7 +110,6 @@ function suggestionsToPresets(presets) {
                     if (tag !== 'count') tags[tag] = suggestions[key][value][name][tag];
                 }
 
-                tags[key] = value;
                 tags.name = name;
 
                 if (existing[name]) {
@@ -121,27 +120,34 @@ function suggestionsToPresets(presets) {
                     }
                 }
                 
-                addPreset(item, tags, name, getIcon(key + '/' + value), count);
+                addPreset(item, tags, name, count);
             }
         }
     }
 
-    function getIcon(tag) {
-        if (presets[tag] && presets[tag].icon) {
-            return presets[tag].icon;
+    function harvestParentPreset(tag) {
+        var properties = {},
+            parent = presets[tag];
+
+        if (parent) {
+            if (parent.tags)       properties.tags = parent.tags;
+            if (parent.geometry)   properties.geometry = parent.geometry;
+            if (parent.icon)       properties.icon = parent.icon;
+            if (parent.fields)     properties.fields = parent.fields;
         }
-        return tag.split('/')[1];
+        return properties;
     }
 
-    function addPreset(category, tags, name, icon, count) {
+    function addPreset(category, tags, name, count) {
+        var tag = category.split('/'),
+            parent = harvestParentPreset(tag[0] + '/' + tag[1]);
+
         presets[category] = {
-            tags: tags,
+            tags: parent.tags ? _.merge(tags, parent.tags) : tags,
             name: name,
-            icon: icon,
-            geometry: [
-                'point',
-                'area'
-            ],
+            icon: parent.icon || tag[1],
+            geometry: parent.geometry || ['point', 'vertex', 'area'],
+            fields: parent.fields || [],
             suggestion: true
         };
 
