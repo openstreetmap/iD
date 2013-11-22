@@ -504,6 +504,9 @@
             "building_area": {
                 "label": "Building"
             },
+            "cans": {
+                "label": "Accepts Cans"
+            },
             "capacity": {
                 "label": "Capacity",
                 "placeholder": "50, 100, 200..."
@@ -517,6 +520,9 @@
                     "clockwise": "Clockwise",
                     "anticlockwise": "Counterclockwise"
                 }
+            },
+            "clothes": {
+                "label": "Accepts Clothes"
             },
             "collection_times": {
                 "label": "Collection Times"
@@ -572,6 +578,9 @@
             },
             "generator/type": {
                 "label": "Type"
+            },
+            "glass": {
+                "label": "Accepts Glass"
             },
             "highway": {
                 "label": "Type"
@@ -655,6 +664,9 @@
             },
             "operator": {
                 "label": "Operator"
+            },
+            "paper": {
+                "label": "Accepts Paper"
             },
             "park_ride": {
                 "label": "Park and Ride"
@@ -983,6 +995,10 @@
             "amenity/ranger_station": {
                 "name": "Ranger Station",
                 "terms": "visitor center,visitor centre,permit center,permit centre,backcountry office,warden office,warden center"
+            },
+            "amenity/recycling": {
+                "name": "Recycling",
+                "terms": ""
             },
             "amenity/restaurant": {
                 "name": "Restaurant",

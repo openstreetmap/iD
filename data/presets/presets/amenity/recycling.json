@@ -1,0 +1,19 @@
+{
+    "icon": "recycling",
+    "fields": [
+        "cans",
+        "glass",
+        "paper",
+        "clothes"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "amenity": "recycling"
+    },
+    "name": "Recycling"
+}
