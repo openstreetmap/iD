@@ -1,13 +1,7 @@
 iD.presets.Collection = function(collection) {
 
     var maxSearchResults = 50,
-        maxSuggestionResults = 10,
-        searchable = _.filter(collection, function(a) {
-            return a.searchable !== false && a.suggestion !== true;
-        }),
-        suggestions = _.filter(collection, function(a) {
-            return a.suggestion === true;
-        });
+        maxSuggestionResults = 10;
 
     var presets = {
 
@@ -29,6 +23,13 @@ iD.presets.Collection = function(collection) {
             if (!value) return this;
 
             value = value.toLowerCase();
+
+            var searchable = _.filter(collection, function(a) {
+                return a.searchable !== false && a.suggestion !== true;
+            }),
+            suggestions = _.filter(collection, function(a) {
+                return a.suggestion === true;
+            });
 
             // matches value to preset.name
             var leading_name = _.filter(searchable, function(a) {
