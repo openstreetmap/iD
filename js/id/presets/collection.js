@@ -1,5 +1,14 @@
 iD.presets.Collection = function(collection) {
 
+    var maxSearchResults = 50,
+        maxSuggestionResults = 10,
+        searchable = _.filter(collection, function(a) {
+            return a.searchable !== false && a.suggestion !== true;
+        }),
+        suggestions = _.filter(collection, function(a) {
+            return a.suggestion === true;
+        });
+
     var presets = {
 
         collection: collection,
@@ -21,38 +30,30 @@ iD.presets.Collection = function(collection) {
 
             value = value.toLowerCase();
 
-            var searchable = _.filter(collection, function(a) {
-                return a.searchable !== false;
-            });
-
-            function namePrep(name) {
-                var nameArray = name.split(' - ');
-                if (nameArray.length > 1) {
-                    name = nameArray.slice(0, nameArray.length-1).join(' - ');
-                }
-                return name.toLowerCase();
-            }
-
+            // matches value to preset.name
             var leading_name = _.filter(searchable, function(a) {
-                    return leading(namePrep(a.name()));
+                    return leading(a.name().toLowerCase());
                 }).sort(function(a, b) {
-                    var i = namePrep(a.name()).indexOf(value) - namePrep(b.name()).indexOf(value);
+                    var i = a.name().toLowerCase().indexOf(value) - b.name().toLowerCase().indexOf(value);
                     if (i === 0) return a.name().length - b.name().length;
                     else return i;
-                }),
-                leading_terms = _.filter(searchable, function(a) {
-                    return _.any(a.terms() || [], leading);
                 });
+
+            // matches value to preset.terms values
+            var leading_terms = _.filter(searchable, function(a) {
+                return _.any(a.terms() || [], leading);
+            });
 
             function leading(a) {
                 var index = a.indexOf(value);
                 return index === 0 || a[index - 1] === ' ';
             }
 
+            // finds close matches to value in preset.name
             var levenstein_name = searchable.map(function(a) {
                     return {
                         preset: a,
-                        dist: iD.util.editDistance(value, namePrep(a.name()))
+                        dist: iD.util.editDistance(value, a.name().toLowerCase())
                     };
                 }).filter(function(a) {
                     return a.dist + Math.min(value.length - a.preset.name().length, 0) < 3;
@@ -60,19 +61,55 @@ iD.presets.Collection = function(collection) {
                     return a.dist - b.dist;
                 }).map(function(a) {
                     return a.preset;
-                }),
-                leventstein_terms = _.filter(searchable, function(a) {
+                });
+
+            // finds close matches to value in preset.terms
+            var leventstein_terms = _.filter(searchable, function(a) {
                     return _.any(a.terms() || [], function(b) {
                         return iD.util.editDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
                     });
+                });
+
+            function suggestionName(name) {
+                var nameArray = name.split(' - ');
+                if (nameArray.length > 1) {
+                    name = nameArray.slice(0, nameArray.length-1).join(' - ');
+                }
+                return name.toLowerCase();
+            }
+
+            var leading_suggestions = _.filter(suggestions, function(a) {
+                    return leading(suggestionName(a.name()));
+                }).sort(function(a, b) {
+                    a = suggestionName(a.name());
+                    b = suggestionName(b.name());
+                    var i = a.indexOf(value) - b.indexOf(value);
+                    if (i === 0) return a.length - b.length;
+                    else return i;
+                });
+
+            var leven_suggestions = suggestions.map(function(a) {
+                    return {
+                        preset: a,
+                        dist: iD.util.editDistance(value, suggestionName(a.name()))
+                    };
+                }).filter(function(a) {
+                    return a.dist + Math.min(value.length - suggestionName(a.preset.name()).length, 0) < 1;
+                }).sort(function(a, b) {
+                    return a.dist - b.dist;
+                }).map(function(a) {
+                    return a.preset;
                 });
 
             var other = presets.item(geometry);
 
             var results = leading_name.concat(
                             leading_terms,
+                            leading_suggestions.slice(0, maxSuggestionResults+5),
                             levenstein_name,
-                            leventstein_terms).slice(0, 50);
+                            leventstein_terms,
+                            leven_suggestions.slice(0, maxSuggestionResults)
+                        ).slice(0, maxSearchResults-1);
 
             return iD.presets.Collection(_.unique(
                     results.concat(other)
