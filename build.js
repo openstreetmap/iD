@@ -112,41 +112,21 @@ function suggestionsToPresets(presets) {
 
                 tags.name = name;
 
-                if (existing[name]) {
-                    if (existing[name].count !== -1 && (count > existing[name].count)) {
-                        delete preset[existing[name].category];
-                        addPreset(item, tags, name, count);
-                    }
-                } else {
-                    addPreset(item, tags, name, count);
-                }
+                if (!existing[name]) addPreset(item, tags, name, count);
             }
         }
     }
 
-    function harvestParentPreset(tag) {
-        var properties = {},
-            parent = presets[tag];
-
-        if (parent) {
-            if (parent.tags)       properties.tags = parent.tags;
-            if (parent.geometry)   properties.geometry = parent.geometry;
-            if (parent.icon)       properties.icon = parent.icon;
-            if (parent.fields)     properties.fields = parent.fields;
-        }
-        return properties;
-    }
-
     function addPreset(category, tags, name, count) {
         var tag = category.split('/'),
-            parent = harvestParentPreset(tag[0] + '/' + tag[1]);
+            parent = presets[tag[0] + '/' + tag[1]];
 
         presets[category] = {
             tags: parent.tags ? _.merge(tags, parent.tags) : tags,
             name: name,
-            icon: parent.icon || tag[1],
-            geometry: parent.geometry || ['point', 'vertex', 'area'],
-            fields: parent.fields || [],
+            icon: parent.icon,
+            geometry: parent.geometry,
+            fields: parent.fields,
             suggestion: true
         };
 
