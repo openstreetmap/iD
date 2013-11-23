@@ -450,8 +450,8 @@
                     }
                 }
             },
-            "access_toilets": {
-                "label": "利用制限"
+            "access_simple": {
+                "label": "通行制限"
             },
             "address": {
                 "label": "住所",
@@ -497,9 +497,6 @@
                 "label": "建物種別"
             },
             "building_area": {
-                "label": "建物種別"
-            },
-            "building_yes": {
                 "label": "建物種別"
             },
             "capacity": {
@@ -1045,7 +1042,7 @@
                 "name": "ガレージ"
             },
             "building/house": {
-                "name": "番地"
+                "name": "民家"
             },
             "building/hut": {
                 "name": "山小屋"
@@ -1055,6 +1052,9 @@
             },
             "building/residential": {
                 "name": "住宅建築"
+            },
+            "embankment": {
+                "name": "土堤"
             },
             "emergency/ambulance_station": {
                 "name": "救急看護"
@@ -1070,6 +1070,9 @@
             },
             "footway/crossing": {
                 "name": "横断歩道"
+            },
+            "footway/sidewalk": {
+                "name": "歩道"
             },
             "highway": {
                 "name": "道路"
@@ -1224,6 +1227,9 @@
             "landuse/farm": {
                 "name": "田畑"
             },
+            "landuse/farmland": {
+                "name": "農園"
+            },
             "landuse/farmyard": {
                 "name": "農場"
             },
@@ -1326,6 +1332,12 @@
             "man_made/cutline": {
                 "name": "森林カットライン"
             },
+            "man_made/embankment": {
+                "name": "土堤"
+            },
+            "man_made/flagpole": {
+                "name": "掲揚柱"
+            },
             "man_made/lighthouse": {
                 "name": "灯台"
             },
@@ -1355,6 +1367,12 @@
             },
             "man_made/water_works": {
                 "name": "上下水施設"
+            },
+            "military/bunker": {
+                "name": "バンカー"
+            },
+            "military/range": {
+                "name": "軍事用地"
             },
             "natural": {
                 "name": "自然物"
@@ -1419,6 +1437,9 @@
             "office": {
                 "name": "オフィス"
             },
+            "office/accountant": {
+                "name": "会計士"
+            },
             "office/administrative": {
                 "name": "市町村役所"
             },
@@ -1428,8 +1449,23 @@
             "office/company": {
                 "name": "会社事務所"
             },
+            "office/educational_institution": {
+                "name": "教育機関"
+            },
             "office/employment_agency": {
                 "name": "人材紹介"
+            },
+            "office/estate_agent": {
+                "name": "不動産屋"
+            },
+            "office/financial": {
+                "name": "経理事務所"
+            },
+            "office/government": {
+                "name": "役所"
+            },
+            "office/insurance": {
+                "name": "保健屋"
             },
             "office/it": {
                 "name": "ITオフィス"
@@ -1437,8 +1473,23 @@
             "office/lawyer": {
                 "name": "法律事務所"
             },
+            "office/newspaper": {
+                "name": "新聞屋"
+            },
             "office/ngo": {
                 "name": "NGO事務所"
+            },
+            "office/physician": {
+                "name": "医者"
+            },
+            "office/political_party": {
+                "name": "政党事務所"
+            },
+            "office/research": {
+                "name": "研究所"
+            },
+            "office/telecommunication": {
+                "name": "通信事業者"
             },
             "office/therapist": {
                 "name": "心療内科"
@@ -1482,6 +1533,9 @@
             "power/line": {
                 "name": "送電線"
             },
+            "power/minor_line": {
+                "name": "電線"
+            },
             "power/pole": {
                 "name": "電柱"
             },
@@ -1493,6 +1547,12 @@
             },
             "power/transformer": {
                 "name": "変圧施設"
+            },
+            "public_transport/platform": {
+                "name": "プラットフォーム"
+            },
+            "public_transport/stop_position": {
+                "name": "停車位置"
             },
             "railway": {
                 "name": "線路"

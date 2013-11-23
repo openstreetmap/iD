@@ -451,7 +451,7 @@
                     }
                 }
             },
-            "access_toilets": {
+            "access_simple": {
                 "label": "Accesso"
             },
             "address": {
@@ -498,9 +498,6 @@
                 "label": "Edificio"
             },
             "building_area": {
-                "label": "Edificio"
-            },
-            "building_yes": {
                 "label": "Edificio"
             },
             "capacity": {
@@ -1141,6 +1138,10 @@
                 "name": "Edificio residenziale",
                 "terms": "Edificio residenziale"
             },
+            "embankment": {
+                "name": "Terrapieno",
+                "terms": "argine,muraglia,muro,collina,terra"
+            },
             "emergency/ambulance_station": {
                 "name": "Stazione ambulanze",
                 "terms": "Stazione ambulanze"
@@ -1369,6 +1370,10 @@
                 "name": "Agricolo",
                 "terms": "Fattoria"
             },
+            "landuse/farmland": {
+                "name": "Terreno agricolo",
+                "terms": "fattoria,campi,campo,agricoltura,agricolo,contadino"
+            },
             "landuse/farmyard": {
                 "name": "Fattoria",
                 "terms": "Aia"
@@ -1509,6 +1514,14 @@
                 "name": "Linea di demarcazione",
                 "terms": "Linea di taglio"
             },
+            "man_made/embankment": {
+                "name": "Terrapieno",
+                "terms": "argine,muraglia,muro,collina,terra"
+            },
+            "man_made/flagpole": {
+                "name": "Pennone",
+                "terms": "asta,alzabandiera,bandiera"
+            },
             "man_made/lighthouse": {
                 "name": "Faro",
                 "terms": "Faro"
@@ -1548,6 +1561,18 @@
             "man_made/water_works": {
                 "name": "Impianto Idrico",
                 "terms": " Impianto idrico "
+            },
+            "military/airfield": {
+                "name": "Campo d'aviazione",
+                "terms": "aviazione militare,militari,esercito,campovolo,aeroporto,areoporto,eliporto"
+            },
+            "military/barracks": {
+                "name": "Caserma",
+                "terms": "militari,leva,casermone,esercito,reclutamento"
+            },
+            "military/bunker": {
+                "name": "Bunker",
+                "terms": "bunker,casamatta"
             },
             "natural": {
                 "name": "Naturale",
@@ -1632,6 +1657,10 @@
             "office": {
                 "name": "Uffici",
                 "terms": "Ufficio"
+            },
+            "office/administrative": {
+                "name": "Autorità locale",
+                "terms": "Ufficio amministrativo,amministrazione,autorità locale,supervisione,comune"
             },
             "office/architect": {
                 "name": "Architetto",
@@ -1752,6 +1781,14 @@
             "power/transformer": {
                 "name": "Trasformatore",
                 "terms": "Trasformatore"
+            },
+            "public_transport/platform": {
+                "name": "Banchina",
+                "terms": "binario,fermata,stazione,pensilina,platform"
+            },
+            "public_transport/stop_position": {
+                "name": "Fermata",
+                "terms": "stop,stazione,pensilina"
             },
             "railway": {
                 "name": "Ferrovia",

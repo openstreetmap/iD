@@ -451,7 +451,7 @@
                     }
                 }
             },
-            "access_toilets": {
+            "access_simple": {
                 "label": "Zugang"
             },
             "address": {
@@ -498,9 +498,6 @@
                 "label": "Gebäude"
             },
             "building_area": {
-                "label": "Gebäude"
-            },
-            "building_yes": {
                 "label": "Gebäude"
             },
             "capacity": {
@@ -707,6 +704,9 @@
             },
             "shelter": {
                 "label": "Unterstand"
+            },
+            "shelter_type": {
+                "label": "Typ"
             },
             "shop": {
                 "label": "Typ"
@@ -986,6 +986,10 @@
                 "name": "Schule",
                 "terms": "Schule"
             },
+            "amenity/shelter": {
+                "name": "Unterstand",
+                "terms": "Unterstand, Schutzdach, Schutzraum, Schuppen"
+            },
             "amenity/swimming_pool": {
                 "name": "Schwimmbecken",
                 "terms": "Pool,Schwimmbecken"
@@ -1133,6 +1137,10 @@
             "building/residential": {
                 "name": "Wohngebäude",
                 "terms": "Wohnhaus,Einfamilienhaus,Mehrfamilienhaus"
+            },
+            "embankment": {
+                "name": "Fahrdamm",
+                "terms": "Damm"
             },
             "emergency/ambulance_station": {
                 "name": "Rettungswache",
@@ -1362,6 +1370,9 @@
                 "name": "Bauernhof",
                 "terms": "Bauernhof, Farm"
             },
+            "landuse/farmland": {
+                "name": "Acker"
+            },
             "landuse/farmyard": {
                 "name": "Bauernhof",
                 "terms": "Bauernhof"
@@ -1502,6 +1513,13 @@
                 "name": "Schneise",
                 "terms": "Schneise"
             },
+            "man_made/embankment": {
+                "name": "Fahrdamm"
+            },
+            "man_made/flagpole": {
+                "name": "Fahnenstange",
+                "terms": "Fahne"
+            },
             "man_made/lighthouse": {
                 "name": "Leuchtturm",
                 "terms": "Leuchtturm"
@@ -1541,6 +1559,21 @@
             "man_made/water_works": {
                 "name": "Wasserwerk",
                 "terms": "Wasserwerk"
+            },
+            "military/airfield": {
+                "name": "Militärflugplatz"
+            },
+            "military/barracks": {
+                "name": "Kaserne",
+                "terms": "Barracken"
+            },
+            "military/bunker": {
+                "name": "Bunker",
+                "terms": "Schutzraum, Schutzräume"
+            },
+            "military/range": {
+                "name": "Waffenübungsplatz",
+                "terms": "Schießstand, Truppenübungsplatz"
             },
             "natural": {
                 "name": "Natur",
@@ -1773,6 +1806,14 @@
             "power/transformer": {
                 "name": "Transformator",
                 "terms": "Transformator"
+            },
+            "public_transport/platform": {
+                "name": "Bahnsteig",
+                "terms": "Halte-Plattform"
+            },
+            "public_transport/stop_position": {
+                "name": "Halteplatz",
+                "terms": "Verkehrshalt, Halt"
             },
             "railway": {
                 "name": "Eisenbahn",

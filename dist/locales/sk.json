@@ -451,7 +451,7 @@
                     }
                 }
             },
-            "access_toilets": {
+            "access_simple": {
                 "label": "Prístup"
             },
             "address": {
@@ -498,9 +498,6 @@
                 "label": "Budova"
             },
             "building_area": {
-                "label": "Budova"
-            },
-            "building_yes": {
                 "label": "Budova"
             },
             "capacity": {

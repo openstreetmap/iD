@@ -451,7 +451,7 @@
                     }
                 }
             },
-            "access_toilets": {
+            "access_simple": {
                 "label": "通"
             },
             "address": {
@@ -498,9 +498,6 @@
                 "label": "屋宇"
             },
             "building_area": {
-                "label": "屋宇"
-            },
-            "building_yes": {
                 "label": "屋宇"
             },
             "capacity": {
@@ -707,6 +704,9 @@
             },
             "shelter": {
                 "label": "天遮"
+            },
+            "shelter_type": {
+                "label": "類"
             },
             "shop": {
                 "label": "類"
@@ -985,6 +985,10 @@
             "amenity/school": {
                 "name": "學校",
                 "terms": "學校,小學,中學"
+            },
+            "amenity/shelter": {
+                "name": "天遮",
+                "terms": "天遮"
             },
             "amenity/swimming_pool": {
                 "name": "游水池",
@@ -1361,6 +1365,10 @@
             "landuse/farm": {
                 "name": "農場",
                 "terms": "農場"
+            },
+            "landuse/farmland": {
+                "name": "耕地",
+                "terms": "耕地"
             },
             "landuse/farmyard": {
                 "name": "地堂",

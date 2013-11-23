@@ -432,9 +432,6 @@
             "building_area": {
                 "label": "建築物"
             },
-            "building_yes": {
-                "label": "建築物"
-            },
             "capacity": {
                 "label": "容量",
                 "placeholder": "50, 100, 200..."

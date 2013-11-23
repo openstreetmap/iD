@@ -442,9 +442,6 @@
                     }
                 }
             },
-            "access_toilets": {
-                "label": "Toegang"
-            },
             "address": {
                 "label": "Adres",
                 "placeholders": {
@@ -489,9 +486,6 @@
                 "label": "Gebouw"
             },
             "building_area": {
-                "label": "Gebouw"
-            },
-            "building_yes": {
                 "label": "Gebouw"
             },
             "capacity": {

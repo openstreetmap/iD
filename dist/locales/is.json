@@ -438,9 +438,6 @@
             "building_area": {
                 "label": "Bygging"
             },
-            "building_yes": {
-                "label": "Bygging"
-            },
             "capacity": {
                 "label": "Áhorfendafjöldi/Rýmd",
                 "placeholder": "50, 100, 200..."

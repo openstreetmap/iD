@@ -434,9 +434,6 @@
                     }
                 }
             },
-            "access_toilets": {
-                "label": "Hozzáférés"
-            },
             "address": {
                 "label": "Cím",
                 "placeholders": {
@@ -481,9 +478,6 @@
                 "label": "Épület"
             },
             "building_area": {
-                "label": "Épület"
-            },
-            "building_yes": {
                 "label": "Épület"
             },
             "capacity": {

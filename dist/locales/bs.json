@@ -261,6 +261,7 @@
         "none": "Ništa",
         "custom": "Prilagođena pozadina",
         "custom_prompt": "Unesite šablon pločica. Validni simboli su {z}, {x}, {y} za Z/X/Y šemu i {u} za \"QuadTile\" šemu.",
+        "fix_misalignment": "Popravite poravnanje",
         "reset": "ponovo postavite"
     },
     "restore": {
@@ -387,6 +388,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Građevina"
+            },
             "category-landuse": {
                 "name": "Upotreba zemljišta"
             },
@@ -401,6 +405,12 @@
             },
             "category-route": {
                 "name": "Ruta"
+            },
+            "category-water-area": {
+                "name": "Voda"
+            },
+            "category-water-line": {
+                "name": "Voda"
             }
         },
         "fields": {
@@ -441,7 +451,7 @@
                     }
                 }
             },
-            "access_toilets": {
+            "access_simple": {
                 "label": "Pristup"
             },
             "address": {
@@ -488,9 +498,6 @@
                 "label": "Građevina"
             },
             "building_area": {
-                "label": "Građevina"
-            },
-            "building_yes": {
                 "label": "Građevina"
             },
             "capacity": {
@@ -698,6 +705,9 @@
             "shelter": {
                 "label": "Sklonište"
             },
+            "shelter_type": {
+                "label": "Vrsta"
+            },
             "shop": {
                 "label": "Vrsta"
             },
@@ -737,6 +747,9 @@
             },
             "trail_visibility": {
                 "label": "Vidljivost traga"
+            },
+            "tree_type": {
+                "label": "Vrsta"
             },
             "vending": {
                 "label": "Vrsta dobara"
@@ -917,6 +930,10 @@
                 "name": "Tržnica",
                 "terms": "tržnica,pijaca"
             },
+            "amenity/parking": {
+                "name": "Parking za automobile",
+                "terms": "parking,parking za automobile,parking za auta"
+            },
             "amenity/pharmacy": {
                 "name": "Apoteka",
                 "terms": "apoteka,ljekarna"
@@ -968,6 +985,10 @@
             "amenity/school": {
                 "name": "Škola",
                 "terms": "škola,školska zgrada"
+            },
+            "amenity/shelter": {
+                "name": "Sklonište",
+                "terms": "sklonište,zaklon"
             },
             "amenity/swimming_pool": {
                 "name": "Bazen",
@@ -1117,6 +1138,10 @@
                 "name": "Stambena zgrada",
                 "terms": "stambena zgrada,zgrada za stanovanje"
             },
+            "embankment": {
+                "name": "Nasip",
+                "terms": "nasip"
+            },
             "emergency/ambulance_station": {
                 "name": "Stanica hitne pomoći",
                 "terms": "stanica hitne pomoći,hitna pomoć,hitna medicinska pomoć"
@@ -1132,6 +1157,14 @@
             "entrance": {
                 "name": "Ulaz",
                 "terms": "ulaz,vrata"
+            },
+            "footway/crossing": {
+                "name": "Prelaz",
+                "terms": "prelaz,pješački prelaz"
+            },
+            "footway/sidewalk": {
+                "name": "Trotoar",
+                "terms": "trotoar"
             },
             "highway": {
                 "name": "Put",
@@ -1337,6 +1370,10 @@
                 "name": "Farma",
                 "terms": "farma,imanje,salaš"
             },
+            "landuse/farmland": {
+                "name": "Agrarno zemljište",
+                "terms": "agrarno zemljište,obradivo zemljište,obradiva površina"
+            },
             "landuse/farmyard": {
                 "name": "Seosko dvorište",
                 "terms": "seosko dvorište,dvorište imanja"
@@ -1477,6 +1514,14 @@
                 "name": "Prosjek",
                 "terms": "šumski prosjek,prosjek kroz šumu"
             },
+            "man_made/embankment": {
+                "name": "Nasip",
+                "terms": "nasip"
+            },
+            "man_made/flagpole": {
+                "name": "Jarbol",
+                "terms": "jarbol,jarbol za zastavu"
+            },
             "man_made/lighthouse": {
                 "name": "Svjetionik",
                 "terms": "svjetionik,toranj za svjetlosnu navigaciju"
@@ -1516,6 +1561,22 @@
             "man_made/water_works": {
                 "name": "Vodosnadbjevanje",
                 "terms": "vodosnadbjevanje,snadbjevanje vodom"
+            },
+            "military/airfield": {
+                "name": "Uzletište",
+                "terms": "uzletište,uzletište za avione,aerodrom"
+            },
+            "military/barracks": {
+                "name": "Kasarna",
+                "terms": "kasarna,zgrada kasarne"
+            },
+            "military/bunker": {
+                "name": "Bunker",
+                "terms": "bunker,sklonište"
+            },
+            "military/range": {
+                "name": "Strelište",
+                "terms": "strelište,vojni poligon,poligon za vojne vježbe"
             },
             "natural": {
                 "name": "Prirodno područje",
@@ -1601,6 +1662,86 @@
                 "name": "Ured",
                 "terms": "ured,uslužni ured"
             },
+            "office/accountant": {
+                "name": "Računovođa",
+                "terms": "računovođa,ured računovođe"
+            },
+            "office/administrative": {
+                "name": "Administrativni ured",
+                "terms": "administracija,administrativni ured,ured upravljanja"
+            },
+            "office/architect": {
+                "name": "Arhitekta",
+                "terms": "arhitekta,arhitekt,inžinjer arhitekture"
+            },
+            "office/company": {
+                "name": "Ured kompanije",
+                "terms": "ured kompanije,ured firme,korporativni ured"
+            },
+            "office/educational_institution": {
+                "name": "Obrazovna institucija",
+                "terms": "obrazovna institucija,institucija obrazovanja,institucija za obrazovanje"
+            },
+            "office/employment_agency": {
+                "name": "Agencija za zapošljavanje",
+                "terms": "agencija za zapošljavanje,ured za zapošljavanje,agencija za posredovanje u zapošljavanju"
+            },
+            "office/estate_agent": {
+                "name": "Agencija za nekretnine",
+                "terms": "agencija za nekretnine,agencija za posredovanje u prodaji nekretnina"
+            },
+            "office/financial": {
+                "name": "Finansijski ured",
+                "terms": "finansijski ured,ured za finansije"
+            },
+            "office/government": {
+                "name": "Vladin ured",
+                "terms": "ured vlade,vladin ured"
+            },
+            "office/insurance": {
+                "name": "Ured za osiguranje",
+                "terms": "ured za osiguranje,kancelarija za osiguranje"
+            },
+            "office/it": {
+                "name": "IT ured",
+                "terms": "IT ured,informatički ured,IT kancelarija"
+            },
+            "office/lawyer": {
+                "name": "Pravni ured",
+                "terms": "pravni ured,pravna kancelarija"
+            },
+            "office/newspaper": {
+                "name": "Novina",
+                "terms": "novine,novina,novinska agencija"
+            },
+            "office/ngo": {
+                "name": "Ured NVO",
+                "terms": "Nevladin ured,ured NVO,NVO kancelarija"
+            },
+            "office/physician": {
+                "name": "Ljekar",
+                "terms": "ljekar,doktor"
+            },
+            "office/political_party": {
+                "name": "Politička stranka",
+                "terms": "politička stranka,politička partija,ured političke partije"
+            },
+            "office/research": {
+                "name": "Ured za istraživanje",
+                "terms": "ured za istraživanje,istraživački ured,istraživačka kancelarija"
+            },
+            "office/telecommunication": {
+                "name": "Ured telekoma",
+                "terms": "ured telekoma,ured telekom operatera,kancelarija telekom operatera"
+            },
+            "office/therapist": {
+                "name": "Terapeut",
+                "terms": "terapeut"
+            },
+            "office/travel_agent": {
+                "name": "Putnička agencija",
+                "terms": "putnička agencija,agencija za putovanja"
+            },
             "place": {
                 "name": "Mjesto",
                 "terms": "mjesto,naseljeno mjesto"
@@ -1649,6 +1790,10 @@
                 "name": "Energetski vod",
                 "terms": "energetski vod,naponski vod,elektroenergetska linija"
             },
+            "power/minor_line": {
+                "name": "Manji energetski vod",
+                "terms": "manji energetski vod,mali energetski vod"
+            },
             "power/pole": {
                 "name": "Naponski stub",
                 "terms": "naponski stub,stub el. napajanja"
@@ -1664,6 +1809,14 @@
             "power/transformer": {
                 "name": "Transformator",
                 "terms": "transformator,transformator el. energije"
+            },
+            "public_transport/platform": {
+                "name": "Platforma",
+                "terms": "platforma"
+            },
+            "public_transport/stop_position": {
+                "name": "Stop pozicija",
+                "terms": "pozicija zaustavljanja,stop,stop pozicija"
             },
             "railway": {
                 "name": "Željeznička pruga",
@@ -1896,6 +2049,10 @@
             "shop/pet": {
                 "name": "Prodavnica kućnih ljubnimaca",
                 "terms": "prodavnica kućnih ljubimaca,prodaja hrane za kućne ljubimce"
+            },
+            "shop/photo": {
+                "name": "Fotografska radnja",
+                "terms": "fotografska radnja,fotograf,izrada fotografija"
             },
             "shop/shoes": {
                 "name": "Prodavnica obuće",

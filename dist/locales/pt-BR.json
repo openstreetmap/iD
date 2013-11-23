@@ -451,7 +451,7 @@
                     }
                 }
             },
-            "access_toilets": {
+            "access_simple": {
                 "label": "Acesso"
             },
             "address": {
@@ -498,9 +498,6 @@
                 "label": "Edifício"
             },
             "building_area": {
-                "label": "Edifício"
-            },
-            "building_yes": {
                 "label": "Edifício"
             },
             "capacity": {
@@ -707,6 +704,9 @@
             },
             "shelter": {
                 "label": "Abrigo"
+            },
+            "shelter_type": {
+                "label": "Tipo"
             },
             "shop": {
                 "label": "Tipo"
@@ -986,6 +986,10 @@
                 "name": "Escola",
                 "terms": "Escola"
             },
+            "amenity/shelter": {
+                "name": "Abrigo",
+                "terms": "Abrigo"
+            },
             "amenity/swimming_pool": {
                 "name": "Piscina",
                 "terms": "Piscina"
@@ -1133,6 +1137,10 @@
             "building/residential": {
                 "name": "Edifício Residencial",
                 "terms": "Edifício Residencial"
+            },
+            "embankment": {
+                "name": "Aterro",
+                "terms": "aterro,terrapleno"
             },
             "emergency/ambulance_station": {
                 "name": "Posto de Ambulâncias",
@@ -1362,6 +1370,10 @@
                 "name": "Fazenda",
                 "terms": "Fazenda"
             },
+            "landuse/farmland": {
+                "name": "Agricultura",
+                "terms": "agricultura,terra,campo,roça"
+            },
             "landuse/farmyard": {
                 "name": "Granja",
                 "terms": "Pátio de Fazenda"
@@ -1502,6 +1514,14 @@
                 "name": "Linha de Corte em Floresta",
                 "terms": "Linha de Corte em Floresta"
             },
+            "man_made/embankment": {
+                "name": "Aterro",
+                "terms": "aterro,terrapleno"
+            },
+            "man_made/flagpole": {
+                "name": "Mastro",
+                "terms": "matro,bandeira,pau de bandeira"
+            },
             "man_made/lighthouse": {
                 "name": "Farol",
                 "terms": "Farol"
@@ -1541,6 +1561,22 @@
             "man_made/water_works": {
                 "name": "Estação de Tratamento de Água",
                 "terms": "Estação de Tratamento de Água"
+            },
+            "military/airfield": {
+                "name": "Aeródromo",
+                "terms": "aeródromo,campo de aviação"
+            },
+            "military/barracks": {
+                "name": "Quartel",
+                "terms": "quartel,caserna"
+            },
+            "military/bunker": {
+                "name": "Casamata",
+                "terms": "casamata,bunker,fortificação"
+            },
+            "military/range": {
+                "name": "Estande de Tiro Militar",
+                "terms": "tiro,estande"
             },
             "natural": {
                 "name": "Natural",
@@ -1627,17 +1663,20 @@
                 "terms": "Escritório"
             },
             "office/accountant": {
-                "name": "Contador"
+                "name": "Contador",
+                "terms": "Contador"
             },
             "office/administrative": {
                 "name": "Escritório Administrativo",
                 "terms": "Sala Administrativa, Administração, Sala do Administrativo"
             },
             "office/architect": {
-                "name": "Arquiteto"
+                "name": "Arquiteto",
+                "terms": "Arquiteto"
             },
             "office/company": {
-                "name": "Escritório"
+                "name": "Escritório",
+                "terms": "Escritório da Empresa"
             },
             "office/educational_institution": {
                 "name": "Instituto de Educação",
@@ -1652,10 +1691,12 @@
                 "terms": "imobiliária,aluguel,casa,apartamento,casas,apartamentos"
             },
             "office/financial": {
-                "name": "Escritório Financeiro"
+                "name": "Escritório Financeiro",
+                "terms": "Escritório Financeiro, Financeiro"
             },
             "office/government": {
-                "name": "Escritório do Governo"
+                "name": "Escritório do Governo",
+                "terms": "Gabinete do Governo, Escritório do Governo"
             },
             "office/insurance": {
                 "name": "Seguradora",
@@ -1674,7 +1715,8 @@
                 "terms": "jornal,notícia"
             },
             "office/ngo": {
-                "name": "Sede de ONG"
+                "name": "Sede de ONG",
+                "terms": "ONG Escritório, Departamento de ONG"
             },
             "office/physician": {
                 "name": "Médico",
@@ -1689,10 +1731,12 @@
                 "terms": "pesquisa,pesquisas,pesquisador,escritório"
             },
             "office/telecommunication": {
-                "name": "Escritório de Telecomunicações"
+                "name": "Escritório de Telecomunicações",
+                "terms": "Escritório de Telecomunicações, Departamento de Telecomunicações"
             },
             "office/therapist": {
-                "name": "Terapeuta"
+                "name": "Terapeuta",
+                "terms": "Terapista"
             },
             "office/travel_agent": {
                 "name": "Agência de Viagens",
@@ -1747,7 +1791,8 @@
                 "terms": "Fio Elétrico"
             },
             "power/minor_line": {
-                "name": "Linha de Transmissão Pequena"
+                "name": "Linha de Transmissão Pequena",
+                "terms": "Menor Linha de Energia"
             },
             "power/pole": {
                 "name": "Poste Elétrico",
@@ -1764,6 +1809,14 @@
             "power/transformer": {
                 "name": "Transformador",
                 "terms": "Transformado"
+            },
+            "public_transport/platform": {
+                "name": "Plataforma",
+                "terms": "plataforma,embarque,desembarque,espera,transporte público"
+            },
+            "public_transport/stop_position": {
+                "name": "Posição de Parada",
+                "terms": "ponto,parada,ônibus,metrô,trem"
             },
             "railway": {
                 "name": "Ferrovia",

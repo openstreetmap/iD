@@ -429,9 +429,6 @@
             "building_area": {
                 "label": "দালান"
             },
-            "building_yes": {
-                "label": "দালান"
-            },
             "capacity": {
                 "label": "বহন/সহন-ক্ষমতা",
                 "placeholder": "৫০, ১০০, ২০০..."

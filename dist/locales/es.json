@@ -261,6 +261,7 @@
         "none": "Ninguno",
         "custom": "Personalizado",
         "custom_prompt": "Introduzca una plantilla de teselas. Los símbolos válidos son {z}, {x}, {y} para el esquema Z\\/X\\/Y y {u} para el esquema quadtile.",
+        "fix_misalignment": "Corregir la alineación",
         "reset": "reiniciar"
     },
     "restore": {
@@ -450,9 +451,6 @@
                     }
                 }
             },
-            "access_toilets": {
-                "label": "Acceso"
-            },
             "address": {
                 "label": "Dirección",
                 "placeholders": {
@@ -497,9 +495,6 @@
                 "label": "Edificio"
             },
             "building_area": {
-                "label": "Edificio"
-            },
-            "building_yes": {
                 "label": "Edificio"
             },
             "capacity": {
@@ -707,6 +702,9 @@
             "shelter": {
                 "label": "Refugio"
             },
+            "shelter_type": {
+                "label": "Tipo"
+            },
             "shop": {
                 "label": "Tipo"
             },
@@ -786,8 +784,8 @@
                 "terms": "Zonas de un aeropuerto"
             },
             "aeroway/aerodrome": {
-                "name": "Aéropuerto",
-                "terms": "aeropuerto, aeródromo, base aérea, campo de aviación"
+                "name": "Aeropuerto",
+                "terms": "aeropuerto, aeródromo, base aérea, campo de aviación, terminal aérea"
             },
             "aeroway/apron": {
                 "name": "Plataforma de estacionamiento",
@@ -830,7 +828,7 @@
             },
             "amenity/bank": {
                 "name": "Banco",
-                "terms": "banco,banca,bancario,cooperativa de ahorro y crédito,cooperativa de crédito,SACCO"
+                "terms": "banco,banca,bancario,cooperativa de ahorro y crédito,cooperativa de crédito,SACCO,financiera,entidad bancaria"
             },
             "amenity/bar": {
                 "name": "Bar",
@@ -838,15 +836,15 @@
             },
             "amenity/bench": {
                 "name": "Banco",
-                "terms": "Asiento público, Banco"
+                "terms": "asiento público,banco,banquillo,banqueta"
             },
             "amenity/bicycle_parking": {
                 "name": "Aparcamiento de bibicletas",
-                "terms": "bicicleta, bici, aparcamiento, parking"
+                "terms": "bicicleta, bici, aparcamiento, parking, estacionamiento"
             },
             "amenity/bicycle_rental": {
                 "name": "Alquiler de bicicletas",
-                "terms": "bicicleta, alquilar, bici"
+                "terms": "bicicleta, bici, alquiler, rent"
             },
             "amenity/boat_rental": {
                 "name": "Alquiler de barcos"
@@ -857,11 +855,11 @@
             },
             "amenity/car_rental": {
                 "name": "Alquiler de vehículos",
-                "terms": "coche, automóvil, alquiler, vehículo, rent, car"
+                "terms": "coche, auto, automóvil, alquiler, vehículo, rent, car"
             },
             "amenity/car_sharing": {
                 "name": "Vehículo compartido",
-                "terms": "Auto compartido"
+                "terms": "Auto compartido, coche, automóvil"
             },
             "amenity/car_wash": {
                 "name": "Lavado de coches",
@@ -877,7 +875,7 @@
             },
             "amenity/college": {
                 "name": "Universidad",
-                "terms": "facultad,universidad,escuela profesional"
+                "terms": "facultad,universidad,escuela profesional, instituto"
             },
             "amenity/courthouse": {
                 "name": "Palacio de Justicia",
@@ -897,7 +895,7 @@
             },
             "amenity/fire_station": {
                 "name": "Parque de bomberos",
-                "terms": "surtidor, chorro, grifo, caño,fuente,fontana,fontanal"
+                "terms": "Estación de Bomberos, Bomberos"
             },
             "amenity/fountain": {
                 "name": "Fuente ornamental",
@@ -926,6 +924,9 @@
             "amenity/marketplace": {
                 "name": "Mercado",
                 "terms": "mercado, mercadillo"
+            },
+            "amenity/parking": {
+                "name": "Aparcamiento de automóviles"
             },
             "amenity/pharmacy": {
                 "name": "Farmacia",
@@ -977,6 +978,9 @@
             "amenity/school": {
                 "name": "Escuela",
                 "terms": "escuela,colegio, academia, instituto, liceo, conservatorio"
+            },
+            "amenity/shelter": {
+                "name": "Refugio"
             },
             "amenity/swimming_pool": {
                 "name": "Piscina",
@@ -1624,6 +1628,9 @@
             "office/company": {
                 "name": "Oficina de empresa"
             },
+            "office/educational_institution": {
+                "name": "Instiución educativa"
+            },
             "office/employment_agency": {
                 "name": "Agencia de colocación",
                 "terms": "agencia, empleo, desempleo, colocación, trabajo, ocupación, paro, desocupación, INEM"
@@ -1632,12 +1639,18 @@
                 "name": "Inmobiliaria",
                 "terms": "agencia, bienes raíces, inmobiliaria, alquiler, inmueble, venta"
             },
+            "office/financial": {
+                "name": "Oficina financiera"
+            },
             "office/government": {
                 "name": "Oficina de gobierno"
             },
             "office/insurance": {
                 "name": "Aseguradora",
                 "terms": "oficina, aseguradora, seguro"
+            },
+            "office/it": {
+                "name": "Oficina informática"
             },
             "office/lawyer": {
                 "name": "Despacho de abogados",
@@ -1650,8 +1663,20 @@
                 "name": "ONG",
                 "terms": "oficina, ONG, organización no gubernamental, "
             },
+            "office/physician": {
+                "name": "Doctor"
+            },
             "office/political_party": {
                 "name": "Partido político"
+            },
+            "office/research": {
+                "name": "Oficina de investigación"
+            },
+            "office/telecommunication": {
+                "name": "Oficina de telecomunicaciones"
+            },
+            "office/therapist": {
+                "name": "Terapeuta"
             },
             "office/travel_agent": {
                 "name": "Agencia de viajes",
@@ -1780,32 +1805,40 @@
                 "name": "Ruta de Ferry"
             },
             "shop": {
-                "name": "Tienda"
+                "name": "Tienda",
+                "terms": "negocio, tienda, bazar, bodega, comercio, local"
             },
             "shop/alcohol": {
-                "name": "Licorería"
+                "name": "Licorería",
+                "terms": "licor, trago, bebida, alcohol, tienda, licorería"
             },
             "shop/bakery": {
                 "name": "Panadería o pastelería",
                 "terms": "panadería, horno, tahona, tienda, pastelería, confitería, pastel, pan, bollería, bollo"
             },
             "shop/beauty": {
-                "name": "Salón de belleza"
+                "name": "Salón de belleza",
+                "terms": "salón de belleza, estética"
             },
             "shop/beverages": {
-                "name": "Tienda de bebidas"
+                "name": "Tienda de bebidas",
+                "terms": "tienda de bebidas"
             },
             "shop/bicycle": {
-                "name": "Tienda de bicicletas"
+                "name": "Tienda de bicicletas",
+                "terms": "tienda de bicicletas, bici"
             },
             "shop/books": {
-                "name": "Librería"
+                "name": "Librería",
+                "terms": "librería, venta de libros"
             },
             "shop/boutique": {
-                "name": "Boutique"
+                "name": "Boutique",
+                "terms": "boutique, tienda de moda"
             },
             "shop/butcher": {
-                "name": "Carnicería"
+                "name": "Carnicería",
+                "terms": "carnicería, tablajería, casquería, tocinería, fiambrería, pollería, chacinería, charcutería, alimentación, carne, vacuno, caballo, vaca, pollo, embutido, jamón"
             },
             "shop/car": {
                 "name": "Concesionario de automóviles"
@@ -1844,26 +1877,30 @@
                 "name": "Almacén"
             },
             "shop/doityourself": {
-                "name": "Tienda de bricolaje"
+                "name": "Tienda de bricolaje",
+                "terms": "bricolaje, ferretería, tienda"
             },
             "shop/dry_cleaning": {
                 "name": "Tintorería"
             },
             "shop/electronics": {
-                "name": "Tienda de electrodomésticos"
+                "name": "Tienda de electrodomésticos",
+                "terms": "electrónica, electrodoméstico, aparato, televisión, sonido, tienda, electrotécnica"
             },
             "shop/farm": {
                 "name": "Expositor de productos"
             },
             "shop/fishmonger": {
-                "name": "Pescadería"
+                "name": "Pescadería",
+                "terms": "pescado, pescadería, pez, pescadero, salazón, marisquería, marisco, pulpería, tienda, alimentación, mar"
             },
             "shop/florist": {
                 "name": "Floristería",
                 "terms": "floristería, florista, flores, ramos, plantas, tienda, comercio"
             },
             "shop/furniture": {
-                "name": "Tienda de muebles"
+                "name": "Tienda de muebles",
+                "terms": "mueble, mobiliario, utensilio, armario, mesa, silla, tienda, decoración, cocina"
             },
             "shop/garden_centre": {
                 "name": "Centro de jardinería"
@@ -1873,10 +1910,12 @@
                 "terms": "tienda, comercio, local, regalo, obsequio"
             },
             "shop/greengrocer": {
-                "name": "Frutería"
+                "name": "Frutería",
+                "terms": "hortaliza, verdura, fruta, verdulería, frutería,  legumbre, vegetal, tienda, alimentación, verdulero, frutero"
             },
             "shop/hairdresser": {
-                "name": "Peluquería"
+                "name": "Peluquería",
+                "terms": "peluquería barbería, peluquero, barbero, pelo, corte, salón, belleza, manicura, estética, esteticién, depilación"
             },
             "shop/hardware": {
                 "name": "Ferretería"
@@ -1904,13 +1943,15 @@
                 "terms": "mall,centro comercial,plaza comercial"
             },
             "shop/mobile_phone": {
-                "name": "Tienda de teléfonos móviles"
+                "name": "Tienda de teléfonos móviles",
+                "terms": "teléfono, smartphone, tienda, electrónica, comunicación, móvil, llamada"
             },
             "shop/motorcycle": {
                 "name": "Concesionario de motocicletas"
             },
             "shop/music": {
-                "name": "Tienda de música"
+                "name": "Tienda de música",
+                "terms": "música, melodía, tienda, disco, dvd, vinilo, lp, sonido, discografía, cantante, banda, grupo, rock, soul, pop, reggea, heavy, metal, rap, blues, clásica, cumbia, salsa"
             },
             "shop/newsagent": {
                 "name": "Quiosco de prensa"

@@ -451,7 +451,7 @@
                     }
                 }
             },
-            "access_toilets": {
+            "access_simple": {
                 "label": "Accés"
             },
             "address": {
@@ -498,9 +498,6 @@
                 "label": "Edifici"
             },
             "building_area": {
-                "label": "Edifici"
-            },
-            "building_yes": {
                 "label": "Edifici"
             },
             "capacity": {
@@ -1298,6 +1295,9 @@
             },
             "landuse/farm": {
                 "name": "Terrenys de granja"
+            },
+            "landuse/farmland": {
+                "name": "Terrenys de Granja"
             },
             "landuse/farmyard": {
                 "name": "Granja"

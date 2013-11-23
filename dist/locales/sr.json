@@ -437,9 +437,6 @@
                     }
                 }
             },
-            "access_toilets": {
-                "label": "Приступ"
-            },
             "address": {
                 "label": "Адреса",
                 "placeholders": {
@@ -484,9 +481,6 @@
                 "label": "Зграда"
             },
             "building_area": {
-                "label": "Зграда"
-            },
-            "building_yes": {
                 "label": "Зграда"
             },
             "capacity": {
@@ -1300,6 +1294,9 @@
             },
             "man_made/cutline": {
                 "name": "Усек"
+            },
+            "man_made/embankment": {
+                "name": "Насип"
             },
             "man_made/lighthouse": {
                 "name": "Светионик"

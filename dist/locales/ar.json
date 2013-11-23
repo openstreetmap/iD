@@ -402,7 +402,7 @@
                     }
                 }
             },
-            "access_toilets": {
+            "access_simple": {
                 "label": "الدخول"
             },
             "address": {
@@ -449,9 +449,6 @@
                 "label": "المبنى"
             },
             "building_area": {
-                "label": "المبنى"
-            },
-            "building_yes": {
                 "label": "المبنى"
             },
             "capacity": {

@@ -442,9 +442,6 @@
                     }
                 }
             },
-            "access_toilets": {
-                "label": "Dozvola pristupa"
-            },
             "address": {
                 "label": "Adresa",
                 "placeholders": {
@@ -489,9 +486,6 @@
                 "label": "Građevina"
             },
             "building_area": {
-                "label": "Građevina"
-            },
-            "building_yes": {
                 "label": "Građevina"
             },
             "capacity": {

@@ -451,7 +451,7 @@
                     }
                 }
             },
-            "access_toilets": {
+            "access_simple": {
                 "label": "Adgang"
             },
             "address": {
@@ -498,9 +498,6 @@
                 "label": "Bygning"
             },
             "building_area": {
-                "label": "Bygning"
-            },
-            "building_yes": {
                 "label": "Bygning"
             },
             "capacity": {
@@ -1141,6 +1138,10 @@
                 "name": "Beboelsesbygning",
                 "terms": "Beboelsesbygning, Parcelhus"
             },
+            "embankment": {
+                "name": "Forhøjning til tog, vej",
+                "terms": "Forhøjning"
+            },
             "emergency/ambulance_station": {
                 "name": "Udrykningsstation",
                 "terms": "Ambulancestation, Falckstation"
@@ -1369,6 +1370,10 @@
                 "name": "Landbrugsjord",
                 "terms": "Landbrugsjord"
             },
+            "landuse/farmland": {
+                "name": "Landbrugsjord",
+                "terms": "Landbrugsjord, Marker"
+            },
             "landuse/farmyard": {
                 "name": "Gårdsplads",
                 "terms": "Gård, Bondegård"
@@ -1509,6 +1514,14 @@
                 "name": "Skærelinje",
                 "terms": "Skærelinje"
             },
+            "man_made/embankment": {
+                "name": "Forhøjning til tog, vej",
+                "terms": "Forhøjning"
+            },
+            "man_made/flagpole": {
+                "name": "Flagstang",
+                "terms": "Flagstang"
+            },
             "man_made/lighthouse": {
                 "name": "Fyr (navigation)",
                 "terms": "Fyr (navigation)"
@@ -1548,6 +1561,22 @@
             "man_made/water_works": {
                 "name": "Vandforsyning",
                 "terms": "Vandforsyning, Vandværk"
+            },
+            "military/airfield": {
+                "name": "Flyveplads",
+                "terms": "Flyveplads"
+            },
+            "military/barracks": {
+                "name": "Kaserne",
+                "terms": "Kaserne, barakker"
+            },
+            "military/bunker": {
+                "name": "Bunker",
+                "terms": "Bunker, Beskyttelsesrum"
+            },
+            "military/range": {
+                "name": "Skydebane",
+                "terms": "Skydebane, Skydeplads, Militærskydebane"
             },
             "natural": {
                 "name": "Naturlig",
@@ -1780,6 +1809,14 @@
             "power/transformer": {
                 "name": "Transformer",
                 "terms": "Transformer"
+            },
+            "public_transport/platform": {
+                "name": "Platform",
+                "terms": "Platform"
+            },
+            "public_transport/stop_position": {
+                "name": "Stopposition",
+                "terms": "Stopposition"
             },
             "railway": {
                 "name": "Jernbane",

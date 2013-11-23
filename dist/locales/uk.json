@@ -441,9 +441,6 @@
                     }
                 }
             },
-            "access_toilets": {
-                "label": "Доступ"
-            },
             "address": {
                 "label": "Адреса",
                 "placeholders": {
@@ -488,9 +485,6 @@
                 "label": "Будинок"
             },
             "building_area": {
-                "label": "Будинок"
-            },
-            "building_yes": {
                 "label": "Будинок"
             },
             "capacity": {

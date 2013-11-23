@@ -163,9 +163,6 @@
                     }
                 }
             },
-            "access_toilets": {
-                "label": "Priėjimas"
-            },
             "address": {
                 "label": "Adresas",
                 "placeholders": {
@@ -198,9 +195,6 @@
                 "label": "Pastatas"
             },
             "building_area": {
-                "label": "Pastatas"
-            },
-            "building_yes": {
                 "label": "Pastatas"
             },
             "capacity": {
