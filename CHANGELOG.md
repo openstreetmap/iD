@@ -1,3 +1,14 @@
+## 1.3.3
+
+* Support for loading GPX-files via url parameter (#1965)
+* Update osm-auth (#1904)
+* Update 3rd party dependencies (Lo-Dash, D3, RBush)
+* Build iD.Way.areaKeys from presets
+* Add public_transport, military, emankment presets
+* Reverse cardinal directions for relation member roles
+* Improved warning visibility (#1973)
+* Fix undo-related bug (#1978)
+
 ## 1.3.2
 
 * Update maki
