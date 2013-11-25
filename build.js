@@ -106,8 +106,8 @@ function suggestionsToPresets(presets) {
                     tags = {},
                     count = suggestions[key][value][name].count;
 
-                for (var tag in suggestions[key][value][name]) {
-                    if (tag !== 'count') tags[tag] = suggestions[key][value][name][tag];
+                for (var tag in suggestions[key][value][name].tags) {
+                    tags[tag] = suggestions[key][value][name].tags[tag];
                 }
 
                 tags.name = name;
