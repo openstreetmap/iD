@@ -141,6 +141,11 @@
         "geometry": "area",
         "label": "Building"
     },
+    "cans": {
+        "key": "cans",
+        "type": "check",
+        "label": "Accepts Cans"
+    },
     "capacity": {
         "key": "capacity",
         "type": "number",
@@ -183,6 +188,11 @@
                 "anticlockwise": "Counterclockwise"
             }
         }
+    },
+    "clothes": {
+        "key": "clothes",
+        "type": "check",
+        "label": "Accepts Clothes"
     },
     "collection_times": {
         "key": "collection_times",
@@ -283,6 +293,11 @@
         "key": "generator:type",
         "type": "combo",
         "label": "Type"
+    },
+    "glass": {
+        "key": "glass",
+        "type": "check",
+        "label": "Accepts Glass"
     },
     "highway": {
         "key": "highway",
@@ -426,6 +441,11 @@
         "key": "operator",
         "type": "text",
         "label": "Operator"
+    },
+    "paper": {
+        "key": "paper",
+        "type": "check",
+        "label": "Accepts Paper"
     },
     "park_ride": {
         "key": "park_ride",

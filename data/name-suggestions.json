@@ -694,14 +694,20 @@
             "Уралсиб": {
                 "count": 83
             },
-            "ლიბერთი ბანკი (Liberty Bank)": {
-                "count": 55
+            "ლიბერთი ბანკი": {
+                "count": 55,
+                "tags": {
+                    "name:en": "Liberty Bank"
+                }
             },
             "みずほ銀行": {
                 "count": 68
             },
             "りそな銀行": {
-                "count": 227
+                "count": 227,
+                "tags": {
+                    "name:en": "Mizuho Bank"
+                }
             },
             "三井住友銀行": {
                 "count": 122
@@ -712,23 +718,38 @@
             "中国银行": {
                 "count": 65
             },
-            "광주은행 (Gwangju Bank)": {
-                "count": 55
+            "광주은행": {
+                "count": 55,
+                "tags": {
+                    "name:en": "Gwangju Bank"
+                }
             },
             "국민은행": {
-                "count": 167
+                "count": 167,
+                "tags": {
+                    "name:en": "Gungmin Bank"
+                }
             },
             "농협": {
                 "count": 51
             },
             "신한은행": {
-                "count": 218
+                "count": 218,
+                "tags": {
+                    "name:en": "Sinhan Bank"
+                }
             },
             "우리은행": {
-                "count": 293
+                "count": 293,
+                "tags": {
+                    "name:en": "Uri Bank"
+                }
             },
-            "중소기업은행 (Industrial Bank of Korea)": {
-                "count": 53
+            "중소기업은행": {
+                "count": 53,
+                "tags": {
+                    "name:en": "Industrial Bank of Korea"
+                }
             },
             "하나은행": {
                 "count": 78
@@ -760,7 +781,10 @@
                 "count": 548
             },
             "Dunkin Donuts": {
-                "count": 365
+                "count": 365,
+                "tags": {
+                    "cuisine": "donut"
+                }
             },
             "Eiscafe": {
                 "count": 115
@@ -770,9 +794,6 @@
             },
             "Eisdiele": {
                 "count": 64
-            },
-            "Panera Bread": {
-                "count": 72
             },
             "Pret A Manger": {
                 "count": 115
@@ -784,16 +805,13 @@
                 "count": 67
             },
             "Starbucks": {
-                "count": 3837
-            },
-            "Subway": {
-                "count": 61
+                "count": 3837,
+                "tags": {
+                    "cuisine": "coffee_shop"
+                }
             },
             "Tchibo": {
                 "count": 91
-            },
-            "Tim Hortons": {
-                "count": 940
             },
             "Traveler's Coffee": {
                 "count": 59
@@ -816,18 +834,23 @@
             "คาเฟ่ อเมซอน": {
                 "count": 63
             },
-            "カフェ・ド・クリエ (Cafe de CRIE)": {
-                "count": 68
+            "カフェ・ド・クリエ": {
+                "count": 68,
+                "tags": {
+                    "name:en": "Cafe de CRIE"
+                }
             },
             "スターバックス": {
-                "count": 54,
-                "name:en": "Starbucks"
-            },
-            "スターバックス (Starbucks)": {
-                "count": 191
+                "count": 245,
+                "tags": {
+                    "name:en": "Starbucks"
+                }
             },
             "ドトール": {
-                "count": 163
+                "count": 163,
+                "tags": {
+                    "name:en": "DOUTOR"
+                }
             }
         },
         "car_rental": {
@@ -873,16 +896,28 @@
                 "count": 57
             },
             "Burger King": {
-                "count": 3449
+                "count": 3449,
+                "tags": {
+                    "cuisine": "burger"
+                }
             },
             "Carl's Jr.": {
-                "count": 272
+                "count": 272,
+                "tags": {
+                    "cuisine": "burger"
+                }
             },
             "Chick-fil-A": {
-                "count": 214
+                "count": 214,
+                "tags": {
+                    "cuisine": "chicken"
+                }
             },
             "Chipotle": {
-                "count": 260
+                "count": 260,
+                "tags": {
+                    "cuisine": "mexican"
+                }
             },
             "Chowking": {
                 "count": 138
@@ -900,10 +935,10 @@
                 "count": 137
             },
             "Domino's Pizza": {
-                "count": 896
-            },
-            "Dunkin Donuts": {
-                "count": 411
+                "count": 896,
+                "tags": {
+                    "cuisine": "pizza"
+                }
             },
             "Döner": {
                 "count": 221
@@ -917,14 +952,14 @@
             "Five Guys": {
                 "count": 124
             },
-            "Greggs": {
-                "count": 77
-            },
             "Hallo Pizza": {
                 "count": 76
             },
             "Hardee's": {
-                "count": 242
+                "count": 242,
+                "tags": {
+                    "cuisine": "burger"
+                }
             },
             "Harvey's": {
                 "count": 83
@@ -933,7 +968,10 @@
                 "count": 97
             },
             "Hungry Jacks": {
-                "count": 163
+                "count": 163,
+                "tags": {
+                    "cuisine": "burger"
+                }
             },
             "Imbiss": {
                 "count": 181
@@ -945,7 +983,10 @@
                 "count": 52
             },
             "Jack in the Box": {
-                "count": 517
+                "count": 517,
+                "tags": {
+                    "cuisine": "burger"
+                }
             },
             "Jamba Juice": {
                 "count": 60
@@ -957,7 +998,10 @@
                 "count": 384
             },
             "KFC": {
-                "count": 2975
+                "count": 2975,
+                "tags": {
+                    "cuisine": "chicken"
+                }
             },
             "Kebab": {
                 "count": 167
@@ -974,17 +1018,14 @@
             "Long John Silver's": {
                 "count": 76
             },
-            "Mang Inasal": {
-                "count": 66
-            },
             "McDonald's": {
-                "count": 11760
+                "count": 11760,
+                "tags": {
+                    "cuisine": "burger"
+                }
             },
             "Mr. Sub": {
                 "count": 108
-            },
-            "Nando's": {
-                "count": 58
             },
             "Nordsee": {
                 "count": 159
@@ -992,17 +1033,11 @@
             "Panda Express": {
                 "count": 212
             },
-            "Panera Bread": {
-                "count": 59
-            },
             "Papa John's": {
-                "count": 274
-            },
-            "Pizza Express": {
-                "count": 65
-            },
-            "Pizza Hut": {
-                "count": 1010
+                "count": 274,
+                "tags": {
+                    "cuisine": "pizza"
+                }
             },
             "Pizza Nova": {
                 "count": 57
@@ -1014,13 +1049,19 @@
                 "count": 63
             },
             "Popeye's": {
-                "count": 147
+                "count": 147,
+                "tags": {
+                    "cuisine": "chicken"
+                }
             },
             "Quick": {
                 "count": 484
             },
             "Quiznos": {
-                "count": 262
+                "count": 262,
+                "tags": {
+                    "cuisine": "sandwich"
+                }
             },
             "Red Rooster": {
                 "count": 145
@@ -1029,13 +1070,19 @@
                 "count": 61
             },
             "Sonic": {
-                "count": 506
+                "count": 506,
+                "tags": {
+                    "cuisine": "burger"
+                }
             },
             "Steers": {
                 "count": 139
             },
             "Subway": {
-                "count": 5113
+                "count": 5113,
+                "tags": {
+                    "cuisine": "sandwich"
+                }
             },
             "Taco Bell": {
                 "count": 1257
@@ -1053,7 +1100,10 @@
                 "count": 292
             },
             "Wendy's": {
-                "count": 1487
+                "count": 1487,
+                "tags": {
+                    "cuisine": "burger"
+                }
             },
             "Whataburger": {
                 "count": 147
@@ -1066,7 +1116,9 @@
             },
             "Макдоналдс": {
                 "count": 309,
-                "name:en": "McDonald's"
+                "tags": {
+                    "name:en": "McDonald's"
+                }
             },
             "Робин Сдобин": {
                 "count": 72
@@ -1074,37 +1126,46 @@
             "Русский Аппетит": {
                 "count": 65
             },
-            "Столовая": {
-                "count": 189
-            },
             "Теремок": {
                 "count": 63
             },
             "すき家": {
-                "count": 245
+                "count": 245,
+                "tags": {
+                    "name:en": "SUKIYA"
+                }
             },
             "なか卯": {
                 "count": 52
             },
             "ケンタッキーフライドチキン": {
-                "count": 54,
-                "name:en": "KFC"
-            },
-            "ケンタッキーフライドチキン (Kentucky Fried Chicken)": {
-                "count": 104
+                "count": 158,
+                "tags": {
+                    "name:en": "KFC",
+                    "cuisine": "chicken"
+                }
             },
             "マクドナルド": {
                 "count": 632,
-                "name:en": "McDonald's"
+                "tags": {
+                    "name:en": "McDonald's",
+                    "cuisine": "burger"
+                }
             },
             "モスバーガー": {
-                "count": 237
+                "count": 237,
+                "tags": {
+                    "name:en": "MOS BURGER"
+                }
             },
             "吉野家": {
                 "count": 172
             },
             "松屋": {
-                "count": 224
+                "count": 224,
+                "tags": {
+                    "name:en": "Matsuya"
+                }
             },
             "肯德基": {
                 "count": 81
@@ -1135,8 +1196,8 @@
             "ARAL": {
                 "count": 371
             },
-            "AVIA": {
-                "count": 257
+            "Avia": {
+                "count": 871
             },
             "Afriquia": {
                 "count": 90
@@ -1158,9 +1219,6 @@
             },
             "Avanti": {
                 "count": 92
-            },
-            "Avia": {
-                "count": 614
             },
             "BFT": {
                 "count": 88
@@ -1637,15 +1695,18 @@
                 "count": 132
             },
             "出光": {
-                "count": 205
+                "count": 205,
+                "tags": {
+                    "name:en": "IDEMITSU"
+                }
             },
             "昭和シェル (Showa-shell)": {
                 "count": 93
             }
         },
         "pharmacy": {
-            "36,6": {
-                "count": 107
+            "Аптека 36,6": {
+                "count": 220
             },
             "Adler Apotheke": {
                 "count": 302
@@ -1805,9 +1866,6 @@
             },
             "Аптека": {
                 "count": 1879
-            },
-            "Аптека 36,6": {
-                "count": 113
             },
             "Аптечный пункт": {
                 "count": 136
@@ -2052,9 +2110,6 @@
             "Buffalo Wild Wings": {
                 "count": 147
             },
-            "Burger King": {
-                "count": 141
-            },
             "Bären": {
                 "count": 58
             },
@@ -2070,12 +2125,6 @@
             "China Town": {
                 "count": 70
             },
-            "Chipotle": {
-                "count": 125
-            },
-            "Chowking": {
-                "count": 53
-            },
             "Courtepaille": {
                 "count": 95
             },
@@ -2084,9 +2133,6 @@
             },
             "Da Vinci": {
                 "count": 53
-            },
-            "Dairy Queen": {
-                "count": 92
             },
             "Delphi": {
                 "count": 86
@@ -2102,9 +2148,6 @@
             },
             "Dolce Vita": {
                 "count": 74
-            },
-            "Domino's Pizza": {
-                "count": 98
             },
             "El Greco": {
                 "count": 80
@@ -2156,9 +2199,6 @@
             },
             "IHOP": {
                 "count": 286
-            },
-            "KFC": {
-                "count": 191
             },
             "Kantine": {
                 "count": 52
@@ -2217,9 +2257,6 @@
             "Mang Inasal": {
                 "count": 81
             },
-            "McDonald's": {
-                "count": 297
-            },
             "Mensa": {
                 "count": 87
             },
@@ -2243,9 +2280,6 @@
             },
             "Outback Steakhouse": {
                 "count": 189
-            },
-            "Panda Express": {
-                "count": 53
             },
             "Panera Bread": {
                 "count": 171
@@ -2325,17 +2359,11 @@
             "Sternen": {
                 "count": 78
             },
-            "Subway": {
-                "count": 470
-            },
             "Swiss Chalet": {
                 "count": 101
             },
             "TGI Friday's": {
                 "count": 138
-            },
-            "Taco Bell": {
-                "count": 82
             },
             "Taj Mahal": {
                 "count": 101
@@ -2367,9 +2395,6 @@
             "Waldschänke": {
                 "count": 55
             },
-            "Wendy's": {
-                "count": 86
-            },
             "Zizzi": {
                 "count": 62
             },
@@ -2391,14 +2416,14 @@
             "Евразия": {
                 "count": 98
             },
-            "Столовая": {
-                "count": 126
-            },
             "Якитория": {
                 "count": 74
             },
             "ガスト": {
-                "count": 204
+                "count": 204,
+                "tags": {
+                    "name:en": "Gusto"
+                }
             },
             "サイゼリヤ": {
                 "count": 81
@@ -2501,9 +2526,6 @@
             },
             "Kamps": {
                 "count": 252
-            },
-            "Müller": {
-                "count": 91
             },
             "Oebel": {
                 "count": 57
@@ -2699,9 +2721,6 @@
             "Bipa": {
                 "count": 276
             },
-            "Boots": {
-                "count": 94
-            },
             "dm": {
                 "count": 873
             },
@@ -2725,9 +2744,6 @@
             },
             "Schlecker": {
                 "count": 201
-            },
-            "Superdrug": {
-                "count": 64
             }
         },
         "clothes": {
@@ -2811,9 +2827,6 @@
             },
             "Kiabi": {
                 "count": 139
-            },
-            "Kohl's": {
-                "count": 101
             },
             "Lacoste": {
                 "count": 66
@@ -2978,9 +2991,6 @@
             "COOP Jednota": {
                 "count": 160
             },
-            "CVS": {
-                "count": 64
-            },
             "Carrefour City": {
                 "count": 54
             },
@@ -3080,9 +3090,6 @@
             "Lewiatan": {
                 "count": 111
             },
-            "Lidl": {
-                "count": 81
-            },
             "Londis": {
                 "count": 341
             },
@@ -3136,9 +3143,6 @@
             },
             "QuikTrip": {
                 "count": 59
-            },
-            "Rossmann": {
-                "count": 62
             },
             "SPAR": {
                 "count": 185
@@ -3205,9 +3209,6 @@
             },
             "Volg": {
                 "count": 110
-            },
-            "Walgreens": {
-                "count": 89
             },
             "Wawa": {
                 "count": 129
@@ -3312,11 +3313,16 @@
                 "count": 145
             },
             "サンクス": {
-                "count": 517
+                "count": 517,
+                "tags": {
+                    "name:en": "sunkus"
+                }
             },
             "サークルK": {
                 "count": 450,
-                "name:en": "Circle K"
+                "tags": {
+                    "name:en": "Circle K"
+                }
             },
             "スリーエフ": {
                 "count": 84
@@ -3325,21 +3331,31 @@
                 "count": 52
             },
             "セブンイレブン": {
-                "count": 2742
+                "count": 2742,
+                "tags": {
+                    "name:en": "7-Eleven"
+                }
             },
             "デイリーヤマザキ": {
                 "count": 124
             },
             "ファミリーマート": {
                 "count": 1352,
-                "name:en": "FamilyMart"
+                "tags": {
+                    "name:en": "FamilyMart"
+                }
             },
             "ミニストップ": {
-                "count": 282
+                "count": 282,
+                "tags": {
+                    "name:en": "MINISTOP"
+                }
             },
             "ローソン": {
                 "count": 1399,
-                "name:en": "LAWSON"
+                "tags": {
+                    "name:en": "LAWSON"
+                }
             },
             "ローソンストア100": {
                 "count": 65
@@ -3360,9 +3376,6 @@
             },
             "Canadian Tire": {
                 "count": 69
-            },
-            "Costco": {
-                "count": 79
             },
             "Debenhams": {
                 "count": 65
@@ -3608,24 +3621,11 @@
             "1000 мелочей": {
                 "count": 53
             },
-            "Ace Hardware": {
-                "count": 82
-            },
-            "Home Depot": {
-                "count": 81
-            },
             "Хозтовары": {
                 "count": 143
             }
         },
-        "hifi": {
-            "Best Buy": {
-                "count": 94
-            },
-            "Media Markt": {
-                "count": 57
-            }
-        },
+        "hifi": {},
         "jewelry": {
             "Bijou Brigitte": {
                 "count": 53
@@ -3850,11 +3850,8 @@
             "Albert Heijn": {
                 "count": 445
             },
-            "Albertson's": {
-                "count": 96
-            },
             "Albertsons": {
-                "count": 133
+                "count": 229
             },
             "Aldi Nord": {
                 "count": 194
@@ -4295,7 +4292,7 @@
                 "count": 1440
             },
             "Real": {
-                "count": 337
+                "count": 257
             },
             "Reliance Fresh": {
                 "count": 63
@@ -4308,9 +4305,6 @@
             },
             "Rimi": {
                 "count": 103
-            },
-            "Rossmann": {
-                "count": 88
             },
             "S-Market": {
                 "count": 107
@@ -4371,9 +4365,6 @@
             },
             "Tesco": {
                 "count": 1285
-            },
-            "Target": {
-                "count": 199
             },
             "tegut": {
                 "count": 220
@@ -4441,6 +4432,9 @@
             "nahkauf": {
                 "count": 79
             },
+            "real,-": {
+                "count": 80
+            },
             "sky": {
                 "count": 100
             },
@@ -4488,9 +4482,6 @@
             },
             "Полушка": {
                 "count": 133
-            },
-            "Продукты": {
-                "count": 96
             },
             "Пятёрочка": {
                 "count": 1232

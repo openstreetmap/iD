@@ -80,6 +80,8 @@ en:
         label: Building
       building_area: 
         label: Building
+      cans: 
+        label: Accepts Cans
       capacity: 
         label: Capacity
         placeholder: "50, 100, 200..."
@@ -90,6 +92,8 @@ en:
         options: 
           clockwise: Clockwise
           anticlockwise: Counterclockwise
+      clothes: 
+        label: Accepts Clothes
       collection_times: 
         label: Collection Times
       construction: 
@@ -127,6 +131,8 @@ en:
         label: Source
       generator/type: 
         label: Type
+      glass: 
+        label: Accepts Glass
       highway: 
         label: Type
       historic: 
@@ -185,6 +191,8 @@ en:
         label: Hours
       operator: 
         label: Operator
+      paper: 
+        label: Accepts Paper
       park_ride: 
         label: Park and Ride
       parking: 
@@ -424,6 +432,9 @@ en:
       amenity/ranger_station: 
         name: Ranger Station
         terms: "<translate with synonyms or related terms for 'Ranger Station', separated by commas>"
+      amenity/recycling: 
+        name: Recycling
+        terms: "<translate with synonyms or related terms for 'Recycling', separated by commas>"
       amenity/restaurant: 
         name: Restaurant
         terms: "<translate with synonyms or related terms for 'Restaurant', separated by commas>"

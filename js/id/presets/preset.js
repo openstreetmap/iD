@@ -34,8 +34,14 @@ iD.presets.Preset = function(id, preset, fields) {
         return t('presets.presets.' + id + '.' + scope, options);
     };
 
+    var name = preset.name;
     preset.name = function() {
-        return preset.t('name', {'default': id});
+        if (preset.suggestion) {
+            id = id.split('/');
+            id = id[0] + '/' + id[1];
+            return name + ' - ' + t('presets.presets.' + id + '.name');
+        }
+        return preset.t('name', {'default': name});
     };
 
     preset.terms = function() {
