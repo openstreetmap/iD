@@ -78,6 +78,12 @@ iD.ui.Commit = function(context) {
             return d.message;
         });
 
+        warningLi.filter(function(d) { return d.tooltip; })
+            .call(bootstrap.tooltip()
+                .title(function(d) { return d.tooltip; })
+                .placement('top')
+            );
+
         // Save Section
         var saveSection = body.append('div')
             .attr('class','modal-section fillL cf');
@@ -172,10 +178,6 @@ iD.ui.Commit = function(context) {
         li.style('opacity', 0)
             .transition()
             .style('opacity', 1);
-
-        li.call(bootstrap.tooltip()
-            .title('wtf')
-            .placement('right'));
 
         function mouseover(d) {
             if (d.entity) {

@@ -2439,7 +2439,6 @@ img.wiki-image {
 }
 
 .mode-save .changeset-list {
-    overflow: auto;
     border:1px solid #ccc;
     border-radius: 4px;
     background:#fff;
@@ -2684,27 +2683,32 @@ img.wiki-image {
 
 /* make tooltips in panels dark */
 .map-overlay .tooltip.top .tooltip-arrow,
-.entity-editor-pane .tooltip.top .tooltip-arrow {
+.entity-editor-pane .tooltip.top .tooltip-arrow,
+.warning-section .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
 
 .map-overlay .tooltip.bottom .tooltip-arrow,
-.entity-editor-pane .tooltip.bottom .tooltip-arrow {
+.entity-editor-pane .tooltip.bottom .tooltip-arrow,
+.warning-section .tooltip.bottom .tooltip-arrow {
     border-bottom-color: #000;
 }
 
 .map-overlay .tooltip.left .tooltip-arrow,
-.entity-editor-pane .tooltip.left .tooltip-arrow {
+.entity-editor-pane .tooltip.left .tooltip-arrow,
+.warning-section .tooltip.left .tooltip-arrow {
     border-left-color: #000;
 }
 
 .map-overlay .tooltip.right .tooltip-arrow,
-.entity-editor-pane .tooltip.right .tooltip-arrow {
+.entity-editor-pane .tooltip.right .tooltip-arrow,
+.warning-section .tooltip.right .tooltip-arrow {
     border-right-color: #000;
 }
 
 .map-overlay .tooltip-inner,
-.entity-editor-pane .tooltip-inner {
+.entity-editor-pane .tooltip-inner,
+.warning-section .tooltip-inner {
     background: #000;
     color: #ccc;
 }
