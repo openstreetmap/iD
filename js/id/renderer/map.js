@@ -176,14 +176,13 @@ iD.Map = function(context) {
             .scale(d3.event.scale / (2 * Math.PI));
 
         var scale = d3.event.scale / transformStart[0],
-            tX = Math.round(d3.event.translate[0] / scale - transformStart[1][0]),
-            tY = Math.round(d3.event.translate[1] / scale - transformStart[1][1]);
+            tX = Math.round((d3.event.translate[0] / scale - transformStart[1][0]) * scale),
+            tY = Math.round((d3.event.translate[1] / scale - transformStart[1][1]) * scale);
 
         var transform =
-            'scale(' + scale + ')' +
             (iD.detect().opera ?
                 'translate(' + tX + 'px,' + tY + 'px)' :
-                'translate3d(' + tX + 'px,' + tY + 'px, 0)');
+                'translate3d(' + tX + 'px,' + tY + 'px, 0)') + ' scale(' + scale + ')';
 
         transformed = true;
         supersurface.style(transformProp, transform);
