@@ -2712,6 +2712,10 @@ img.wiki-image {
     background: #000;
     color: #ccc;
 }
+/* commit warning tooltips need to be closer */
+.warning-section .tooltip.top {
+    margin-top: -5px;
+}
 
 /* Uncramp map-control tooltips */
 .map-control .tooltip {
