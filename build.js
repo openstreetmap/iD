@@ -90,7 +90,8 @@ function generateFields() {
 }
 
 function suggestionsToPresets(presets) {
-    var existing = {};
+    var existing = {},
+        countThreshold = 0;
 
     for (var preset in presets) {
         existing[presets[preset].name] = {
@@ -112,7 +113,7 @@ function suggestionsToPresets(presets) {
 
                 tags.name = name;
 
-                if (!existing[name]) addPreset(item, tags, name, count);
+                if (!existing[name] && count > countThreshold) addPreset(item, tags, name, count);
             }
         }
     }
