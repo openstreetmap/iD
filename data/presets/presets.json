@@ -18355,7 +18355,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18374,7 +18375,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18393,7 +18395,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18412,7 +18415,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18431,7 +18435,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18450,7 +18455,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18469,7 +18475,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18488,7 +18495,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18507,7 +18515,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18526,7 +18535,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18545,7 +18555,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18564,7 +18575,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18583,7 +18595,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18602,7 +18615,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18621,7 +18635,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18640,7 +18655,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18659,7 +18675,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18678,7 +18695,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18697,7 +18715,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18716,7 +18735,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18735,7 +18755,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18754,7 +18775,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18773,7 +18795,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18792,7 +18815,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18811,7 +18835,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18830,7 +18855,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18849,7 +18875,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18868,7 +18895,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18887,7 +18915,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18906,7 +18935,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18925,7 +18955,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18944,7 +18975,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18963,7 +18995,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -18982,7 +19015,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19001,7 +19035,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19020,7 +19055,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19039,7 +19075,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19058,7 +19095,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19077,7 +19115,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19096,7 +19135,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19115,7 +19155,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19134,7 +19175,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19153,7 +19195,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19172,7 +19215,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19191,7 +19235,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19210,7 +19255,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19229,7 +19275,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19248,7 +19295,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19267,7 +19315,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19286,7 +19335,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19305,7 +19355,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19324,7 +19375,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19343,7 +19395,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19362,7 +19415,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19381,7 +19435,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19400,7 +19455,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19419,7 +19475,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19438,7 +19495,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19457,7 +19515,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19476,7 +19535,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19495,7 +19555,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19514,7 +19575,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19533,7 +19595,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19552,7 +19615,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19571,7 +19635,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19590,7 +19655,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19609,7 +19675,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19628,7 +19695,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19647,7 +19715,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19666,7 +19735,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19685,7 +19755,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19704,7 +19775,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19723,7 +19795,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19742,7 +19815,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19761,7 +19835,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19780,7 +19855,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19799,7 +19875,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19818,7 +19895,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19837,7 +19915,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19856,7 +19935,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19875,7 +19955,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19894,7 +19975,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19913,7 +19995,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19932,7 +20015,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19951,7 +20035,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19970,7 +20055,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -19989,7 +20075,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20008,7 +20095,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20027,7 +20115,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20046,7 +20135,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20065,7 +20155,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20084,7 +20175,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20103,7 +20195,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20122,7 +20215,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20141,7 +20235,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20160,7 +20255,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20179,7 +20275,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20198,7 +20295,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20217,7 +20315,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20236,7 +20335,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20255,7 +20355,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20274,7 +20375,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20293,7 +20395,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20312,7 +20415,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20331,7 +20435,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20350,7 +20455,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20369,7 +20475,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20388,7 +20495,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20407,7 +20515,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20426,7 +20535,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20445,7 +20555,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20464,7 +20575,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20483,7 +20595,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20503,7 +20616,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20522,7 +20636,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20541,7 +20656,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20560,7 +20676,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
@@ -20579,7 +20696,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "capacity"
         ],
         "suggestion": true
     },
