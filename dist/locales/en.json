@@ -395,6 +395,9 @@
             "category-building": {
                 "name": "Building"
             },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Land Use"
             },
@@ -585,6 +588,14 @@
             "glass": {
                 "label": "Accepts Glass"
             },
+            "golf_hole": {
+                "label": "Reference",
+                "placeholder": "Hole number (1-18)"
+            },
+            "handicap": {
+                "label": "Handicap",
+                "placeholder": "1-18"
+            },
             "highway": {
                 "label": "Type"
             },
@@ -673,6 +684,10 @@
             },
             "paper": {
                 "label": "Accepts Paper"
+            },
+            "par": {
+                "label": "Par",
+                "placeholder": "3, 4, 5..."
             },
             "park_ride": {
                 "label": "Park and Ride"
@@ -1192,6 +1207,38 @@
             },
             "footway/sidewalk": {
                 "name": "Sidewalk",
+                "terms": ""
+            },
+            "golf/bunker": {
+                "name": "Sand Trap",
+                "terms": "hazard,bunker"
+            },
+            "golf/fairway": {
+                "name": "Fairway",
+                "terms": ""
+            },
+            "golf/green": {
+                "name": "Putting Green",
+                "terms": "putting green"
+            },
+            "golf/hole": {
+                "name": "Golf Hole",
+                "terms": ""
+            },
+            "golf/lateral_water_hazard": {
+                "name": "Lateral Water Hazard",
+                "terms": ""
+            },
+            "golf/rough": {
+                "name": "Rough",
+                "terms": ""
+            },
+            "golf/tee": {
+                "name": "Tee Box",
+                "terms": "teeing ground"
+            },
+            "golf/water_hazard": {
+                "name": "Water Hazard",
                 "terms": ""
             },
             "highway": {

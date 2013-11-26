@@ -1,0 +1,6 @@
+{
+    "key": "handicap",
+    "type": "number",
+    "label": "Handicap",
+    "placeholder": "1-18"
+}

@@ -1,0 +1,11 @@
+{
+    "icon": "golf",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "golf": "fairway",
+        "landuse": "grass"
+    },
+    "name": "Fairway"
+}

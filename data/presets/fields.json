@@ -304,6 +304,18 @@
         "type": "check",
         "label": "Accepts Glass"
     },
+    "golf_hole": {
+        "key": "ref",
+        "type": "text",
+        "label": "Reference",
+        "placeholder": "Hole number (1-18)"
+    },
+    "handicap": {
+        "key": "handicap",
+        "type": "number",
+        "label": "Handicap",
+        "placeholder": "1-18"
+    },
     "highway": {
         "key": "highway",
         "type": "typeCombo",
@@ -456,6 +468,12 @@
         "key": "paper",
         "type": "check",
         "label": "Accepts Paper"
+    },
+    "par": {
+        "key": "par",
+        "type": "number",
+        "label": "Par",
+        "placeholder": "3, 4, 5..."
     },
     "park_ride": {
         "key": "park_ride",
