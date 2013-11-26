@@ -28,6 +28,7 @@ iD.validate = function(changes, graph) {
         if ((geometry === 'point' || geometry === 'line' || geometry === 'area') && !change.isUsed(graph)) {
             warnings.push({
                 message: t('validations.untagged_' + geometry),
+                tooltip: t('validations.untagged_tooltip', {geometry: geometry}),
                 entity: change
             });
         }
