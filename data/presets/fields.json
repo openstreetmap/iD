@@ -209,6 +209,11 @@
         "type": "combo",
         "label": "Country"
     },
+    "covered": {
+        "key": "covered",
+        "type": "check",
+        "label": "Covered"
+    },
     "crossing": {
         "key": "crossing",
         "type": "combo",

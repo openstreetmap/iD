@@ -3,7 +3,9 @@
     "fields": [
         "bicycle_parking",
         "capacity",
-        "operator"
+        "operator",
+        "covered",
+        "access_simple"
     ],
     "geometry": [
         "point",

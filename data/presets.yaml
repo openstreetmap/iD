@@ -100,6 +100,8 @@ en:
         label: Type
       country: 
         label: Country
+      covered: 
+        label: Covered
       crossing: 
         label: Type
       cuisine: 
