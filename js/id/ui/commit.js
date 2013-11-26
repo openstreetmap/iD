@@ -173,6 +173,10 @@ iD.ui.Commit = function(context) {
             .transition()
             .style('opacity', 1);
 
+        li.call(bootstrap.tooltip()
+            .title('wtf')
+            .placement('right'));
+
         function mouseover(d) {
             if (d.entity) {
                 context.surface().selectAll(
