@@ -25,15 +25,17 @@ iD.behavior.Hash = function(context) {
             }), true);
     };
 
-    var move = _.throttle(function() {
+    function update() {
         var s1 = formatter(context.map());
         if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
-    }, 500, {leading: false});
+    }
+
+    var move = _.throttle(update, 500, {leading: false});
 
     function hashchange() {
         if (location.hash === s0) return; // ignore spurious hashchange events
         if (parser(context.map(), (s0 = location.hash).substring(1))) {
-            move(); // replace bogus hash
+            update(); // replace bogus hash
         }
     }
 
