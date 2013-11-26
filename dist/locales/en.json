@@ -1460,7 +1460,7 @@
             },
             "leisure/golf_course": {
                 "name": "Golf Course",
-                "terms": ""
+                "terms": "links"
             },
             "leisure/marina": {
                 "name": "Marina",

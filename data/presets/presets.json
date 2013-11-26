@@ -2777,7 +2777,9 @@
         "tags": {
             "leisure": "golf_course"
         },
-        "terms": [],
+        "terms": [
+            "links"
+        ],
         "name": "Golf Course"
     },
     "leisure/marina": {
