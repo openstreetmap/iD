@@ -17070,13 +17070,13 @@
         ]
     },
     {
-        "name": "TIGER 2012 Roads Overlay",
+        "name": "New & Misaligned TIGER Roads",
         "type": "tms",
-        "description": "Public domain road data from the US Government.",
-        "template": "http://{switch:a,b,c}.tile.openstreetmap.us/tiger2012_roads_expanded/{zoom}/{x}/{y}.png",
+        "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
+        "template": "http://{switch:a,b,c}.tiles.mapbox.com/v3/enf.ho204tap,enf.ho20a3n1,enf.game1617/{zoom}/{x}/{y}.png",
         "scaleExtent": [
-            16,
-            19
+            0,
+            22
         ],
         "polygon": [
             [
