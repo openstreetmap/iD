@@ -194,7 +194,7 @@ iD.Map = function(context) {
 
     function resetTransform() {
         if (!transformed) return false;
-        supersurface.style(transformProp, '');
+        supersurface.style(transformProp, iD.detect().opera ? '' : 'translate3d(0,0,0)');
         transformed = false;
         return true;
     }
