@@ -18,22 +18,18 @@ function t(s, o, loc) {
     if (rep !== undefined) {
         if (o) for (var k in o) rep = rep.replace('{' + k + '}', o[k]);
         return rep;
-    } else {
-        function missing() {
-            var missing = 'Missing ' + loc + ' translation: ' + s;
-            if (typeof console !== "undefined") console.error(missing);
-            return missing;
-        }
-
-        if (loc !== 'en') {
-            missing();
-            return t(s, o, 'en');
-        }
-
-        if (o && 'default' in o) {
-            return o['default'];
-        }
-
-        return missing();
     }
+
+    if (loc !== 'en') {
+        return t(s, o, 'en');
+    }
+
+    if (o && 'default' in o) {
+        return o['default'];
+    }
+
+    var missing = 'Missing ' + loc + ' translation: ' + s;
+    if (typeof console !== "undefined") console.error(missing);
+
+    return missing;
 }
