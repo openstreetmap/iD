@@ -186,6 +186,7 @@ iD.ui.FeatureList = function(context) {
 
         function click(d) {
             if (d.entity) {
+                context.map().zoomTo(d.entity);
                 context.enter(iD.modes.Select(context, [d.entity.id]));
             } else {
                 context.loadEntity(d.id);
