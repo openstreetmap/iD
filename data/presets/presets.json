@@ -10263,8 +10263,8 @@
     },
     "amenity/bank/ლიბერთი ბანკი": {
         "tags": {
-            "name:en": "Liberty Bank",
             "name": "ლიბერთი ბანკი",
+            "name:en": "Liberty Bank",
             "amenity": "bank"
         },
         "name": "ლიბერთი ბანკი",
@@ -10302,8 +10302,8 @@
     },
     "amenity/bank/りそな銀行": {
         "tags": {
-            "name:en": "Mizuho Bank",
             "name": "りそな銀行",
+            "name:en": "Mizuho Bank",
             "amenity": "bank"
         },
         "name": "りそな銀行",
@@ -10379,8 +10379,8 @@
     },
     "amenity/bank/광주은행": {
         "tags": {
-            "name:en": "Gwangju Bank",
             "name": "광주은행",
+            "name:en": "Gwangju Bank",
             "amenity": "bank"
         },
         "name": "광주은행",
@@ -10399,8 +10399,8 @@
     },
     "amenity/bank/국민은행": {
         "tags": {
-            "name:en": "Gungmin Bank",
             "name": "국민은행",
+            "name:en": "Gungmin Bank",
             "amenity": "bank"
         },
         "name": "국민은행",
@@ -10438,8 +10438,8 @@
     },
     "amenity/bank/신한은행": {
         "tags": {
-            "name:en": "Sinhan Bank",
             "name": "신한은행",
+            "name:en": "Sinhan Bank",
             "amenity": "bank"
         },
         "name": "신한은행",
@@ -10458,8 +10458,8 @@
     },
     "amenity/bank/우리은행": {
         "tags": {
-            "name:en": "Uri Bank",
             "name": "우리은행",
+            "name:en": "Uri Bank",
             "amenity": "bank"
         },
         "name": "우리은행",
@@ -10478,8 +10478,8 @@
     },
     "amenity/bank/중소기업은행": {
         "tags": {
-            "name:en": "Industrial Bank of Korea",
             "name": "중소기업은행",
+            "name:en": "Industrial Bank of Korea",
             "amenity": "bank"
         },
         "name": "중소기업은행",
@@ -10677,8 +10677,8 @@
     },
     "amenity/cafe/Dunkin Donuts": {
         "tags": {
-            "cuisine": "donut",
             "name": "Dunkin Donuts",
+            "cuisine": "donut",
             "amenity": "cafe"
         },
         "name": "Dunkin Donuts",
@@ -10818,8 +10818,8 @@
     },
     "amenity/cafe/Starbucks": {
         "tags": {
-            "cuisine": "coffee_shop",
             "name": "Starbucks",
+            "cuisine": "coffee_shop",
             "amenity": "cafe"
         },
         "name": "Starbucks",
@@ -10999,8 +10999,8 @@
     },
     "amenity/cafe/カフェ・ド・クリエ": {
         "tags": {
-            "name:en": "Cafe de CRIE",
             "name": "カフェ・ド・クリエ",
+            "name:en": "Cafe de CRIE",
             "amenity": "cafe"
         },
         "name": "カフェ・ド・クリエ",
@@ -11020,8 +11020,8 @@
     },
     "amenity/cafe/スターバックス": {
         "tags": {
-            "name:en": "Starbucks",
             "name": "スターバックス",
+            "name:en": "Starbucks",
             "amenity": "cafe"
         },
         "name": "スターバックス",
@@ -11041,8 +11041,8 @@
     },
     "amenity/cafe/ドトール": {
         "tags": {
-            "name:en": "DOUTOR",
             "name": "ドトール",
+            "name:en": "DOUTOR",
             "amenity": "cafe"
         },
         "name": "ドトール",
@@ -11288,8 +11288,8 @@
     },
     "amenity/fast_food/Burger King": {
         "tags": {
-            "cuisine": "burger",
             "name": "Burger King",
+            "cuisine": "burger",
             "amenity": "fast_food"
         },
         "name": "Burger King",
@@ -11308,8 +11308,8 @@
     },
     "amenity/fast_food/Carl's Jr.": {
         "tags": {
-            "cuisine": "burger",
             "name": "Carl's Jr.",
+            "cuisine": "burger",
             "amenity": "fast_food"
         },
         "name": "Carl's Jr.",
@@ -11328,8 +11328,8 @@
     },
     "amenity/fast_food/Chick-fil-A": {
         "tags": {
-            "cuisine": "chicken",
             "name": "Chick-fil-A",
+            "cuisine": "chicken",
             "amenity": "fast_food"
         },
         "name": "Chick-fil-A",
@@ -11348,8 +11348,8 @@
     },
     "amenity/fast_food/Chipotle": {
         "tags": {
-            "cuisine": "mexican",
             "name": "Chipotle",
+            "cuisine": "mexican",
             "amenity": "fast_food"
         },
         "name": "Chipotle",
@@ -11463,8 +11463,8 @@
     },
     "amenity/fast_food/Domino's Pizza": {
         "tags": {
-            "cuisine": "pizza",
             "name": "Domino's Pizza",
+            "cuisine": "pizza",
             "amenity": "fast_food"
         },
         "name": "Domino's Pizza",
@@ -11578,8 +11578,8 @@
     },
     "amenity/fast_food/Hardee's": {
         "tags": {
-            "cuisine": "burger",
             "name": "Hardee's",
+            "cuisine": "burger",
             "amenity": "fast_food"
         },
         "name": "Hardee's",
@@ -11636,8 +11636,8 @@
     },
     "amenity/fast_food/Hungry Jacks": {
         "tags": {
-            "cuisine": "burger",
             "name": "Hungry Jacks",
+            "cuisine": "burger",
             "amenity": "fast_food"
         },
         "name": "Hungry Jacks",
@@ -11713,8 +11713,8 @@
     },
     "amenity/fast_food/Jack in the Box": {
         "tags": {
-            "cuisine": "burger",
             "name": "Jack in the Box",
+            "cuisine": "burger",
             "amenity": "fast_food"
         },
         "name": "Jack in the Box",
@@ -11790,8 +11790,8 @@
     },
     "amenity/fast_food/KFC": {
         "tags": {
-            "cuisine": "chicken",
             "name": "KFC",
+            "cuisine": "chicken",
             "amenity": "fast_food"
         },
         "name": "KFC",
@@ -11905,8 +11905,8 @@
     },
     "amenity/fast_food/McDonald's": {
         "tags": {
-            "cuisine": "burger",
             "name": "McDonald's",
+            "cuisine": "burger",
             "amenity": "fast_food"
         },
         "name": "McDonald's",
@@ -11982,8 +11982,8 @@
     },
     "amenity/fast_food/Papa John's": {
         "tags": {
-            "cuisine": "pizza",
             "name": "Papa John's",
+            "cuisine": "pizza",
             "amenity": "fast_food"
         },
         "name": "Papa John's",
@@ -12059,8 +12059,8 @@
     },
     "amenity/fast_food/Popeye's": {
         "tags": {
-            "cuisine": "chicken",
             "name": "Popeye's",
+            "cuisine": "chicken",
             "amenity": "fast_food"
         },
         "name": "Popeye's",
@@ -12098,8 +12098,8 @@
     },
     "amenity/fast_food/Quiznos": {
         "tags": {
-            "cuisine": "sandwich",
             "name": "Quiznos",
+            "cuisine": "sandwich",
             "amenity": "fast_food"
         },
         "name": "Quiznos",
@@ -12156,8 +12156,8 @@
     },
     "amenity/fast_food/Sonic": {
         "tags": {
-            "cuisine": "burger",
             "name": "Sonic",
+            "cuisine": "burger",
             "amenity": "fast_food"
         },
         "name": "Sonic",
@@ -12290,8 +12290,8 @@
     },
     "amenity/fast_food/Wendy's": {
         "tags": {
-            "cuisine": "burger",
             "name": "Wendy's",
+            "cuisine": "burger",
             "amenity": "fast_food"
         },
         "name": "Wendy's",
@@ -12367,8 +12367,8 @@
     },
     "amenity/fast_food/Макдоналдс": {
         "tags": {
-            "name:en": "McDonald's",
             "name": "Макдоналдс",
+            "name:en": "McDonald's",
             "amenity": "fast_food"
         },
         "name": "Макдоналдс",
@@ -12444,8 +12444,8 @@
     },
     "amenity/fast_food/すき家": {
         "tags": {
-            "name:en": "SUKIYA",
             "name": "すき家",
+            "name:en": "SUKIYA",
             "amenity": "fast_food"
         },
         "name": "すき家",
@@ -12483,9 +12483,9 @@
     },
     "amenity/fast_food/ケンタッキーフライドチキン": {
         "tags": {
+            "name": "ケンタッキーフライドチキン",
             "name:en": "KFC",
             "cuisine": "chicken",
-            "name": "ケンタッキーフライドチキン",
             "amenity": "fast_food"
         },
         "name": "ケンタッキーフライドチキン",
@@ -12504,9 +12504,9 @@
     },
     "amenity/fast_food/マクドナルド": {
         "tags": {
+            "name": "マクドナルド",
             "name:en": "McDonald's",
             "cuisine": "burger",
-            "name": "マクドナルド",
             "amenity": "fast_food"
         },
         "name": "マクドナルド",
@@ -12525,8 +12525,8 @@
     },
     "amenity/fast_food/モスバーガー": {
         "tags": {
-            "name:en": "MOS BURGER",
             "name": "モスバーガー",
+            "name:en": "MOS BURGER",
             "amenity": "fast_food"
         },
         "name": "モスバーガー",
@@ -12564,8 +12564,8 @@
     },
     "amenity/fast_food/松屋": {
         "tags": {
-            "name:en": "Matsuya",
             "name": "松屋",
+            "name:en": "Matsuya",
             "amenity": "fast_food"
         },
         "name": "松屋",
@@ -15890,8 +15890,8 @@
     },
     "amenity/fuel/出光": {
         "tags": {
-            "name:en": "IDEMITSU",
             "name": "出光",
+            "name:en": "IDEMITSU",
             "amenity": "fuel"
         },
         "name": "出光",
@@ -20356,8 +20356,8 @@
     },
     "amenity/restaurant/ガスト": {
         "tags": {
-            "name:en": "Gusto",
             "name": "ガスト",
+            "name:en": "Gusto",
             "amenity": "restaurant"
         },
         "name": "ガスト",
@@ -25297,8 +25297,8 @@
     },
     "shop/convenience/サンクス": {
         "tags": {
-            "name:en": "sunkus",
             "name": "サンクス",
+            "name:en": "sunkus",
             "shop": "convenience"
         },
         "name": "サンクス",
@@ -25317,8 +25317,8 @@
     },
     "shop/convenience/サークルK": {
         "tags": {
-            "name:en": "Circle K",
             "name": "サークルK",
+            "name:en": "Circle K",
             "shop": "convenience"
         },
         "name": "サークルK",
@@ -25375,8 +25375,8 @@
     },
     "shop/convenience/セブンイレブン": {
         "tags": {
-            "name:en": "7-Eleven",
             "name": "セブンイレブン",
+            "name:en": "7-Eleven",
             "shop": "convenience"
         },
         "name": "セブンイレブン",
@@ -25414,8 +25414,8 @@
     },
     "shop/convenience/ファミリーマート": {
         "tags": {
-            "name:en": "FamilyMart",
             "name": "ファミリーマート",
+            "name:en": "FamilyMart",
             "shop": "convenience"
         },
         "name": "ファミリーマート",
@@ -25434,8 +25434,8 @@
     },
     "shop/convenience/ミニストップ": {
         "tags": {
-            "name:en": "MINISTOP",
             "name": "ミニストップ",
+            "name:en": "MINISTOP",
             "shop": "convenience"
         },
         "name": "ミニストップ",
@@ -25454,8 +25454,8 @@
     },
     "shop/convenience/ローソン": {
         "tags": {
-            "name:en": "LAWSON",
             "name": "ローソン",
+            "name:en": "LAWSON",
             "shop": "convenience"
         },
         "name": "ローソン",

@@ -107,11 +107,7 @@ function suggestionsToPresets(presets) {
                     tags = {},
                     count = suggestions[key][value][name].count;
 
-                for (var tag in suggestions[key][value][name].tags) {
-                    tags[tag] = suggestions[key][value][name].tags[tag];
-                }
-
-                tags.name = name;
+                tags = _.extend({name: name}, suggestions[key][value][name].tags);
 
                 if (!existing[name] && count > countThreshold) addPreset(item, tags, name, count);
             }
