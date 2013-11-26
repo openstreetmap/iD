@@ -3,6 +3,8 @@ en:
     categories: 
       "category-building": 
         name: Building
+      "category-golf": 
+        name: Golf
       "category-landuse": 
         name: Land Use
       "category-path": 
@@ -127,6 +129,12 @@ en:
         label: Source
       generator/type: 
         label: Type
+      golf_hole: 
+        label: Reference
+        placeholder: "Hole number (1-18)"
+      handicap: 
+        label: Handicap
+        placeholder: "1-18"
       highway: 
         label: Type
       historic: 
@@ -185,6 +193,9 @@ en:
         label: Hours
       operator: 
         label: Operator
+      par: 
+        label: Par
+        placeholder: "3, 4, 5..."
       park_ride: 
         label: Park and Ride
       parking: 
@@ -565,6 +576,30 @@ en:
       footway/sidewalk: 
         name: Sidewalk
         terms: "<translate with synonyms or related terms for 'Sidewalk', separated by commas>"
+      golf/bunker: 
+        name: Sand Trap
+        terms: "<translate with synonyms or related terms for 'Sand Trap', separated by commas>"
+      golf/fairway: 
+        name: Fairway
+        terms: "<translate with synonyms or related terms for 'Fairway', separated by commas>"
+      golf/green: 
+        name: Putting Green
+        terms: "<translate with synonyms or related terms for 'Putting Green', separated by commas>"
+      golf/hole: 
+        name: Golf Hole
+        terms: "<translate with synonyms or related terms for 'Golf Hole', separated by commas>"
+      golf/lateral_water_hazard: 
+        name: Lateral Water Hazard
+        terms: "<translate with synonyms or related terms for 'Lateral Water Hazard', separated by commas>"
+      golf/rough: 
+        name: Rough
+        terms: "<translate with synonyms or related terms for 'Rough', separated by commas>"
+      golf/tee: 
+        name: Tee Box
+        terms: "<translate with synonyms or related terms for 'Tee Box', separated by commas>"
+      golf/water_hazard: 
+        name: Water Hazard
+        terms: "<translate with synonyms or related terms for 'Water Hazard', separated by commas>"
       highway: 
         name: Highway
         terms: "<translate with synonyms or related terms for 'Highway', separated by commas>"

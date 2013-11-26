@@ -1725,6 +1725,112 @@
         "terms": [],
         "name": "Sidewalk"
     },
+    "golf/bunker": {
+        "icon": "golf",
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "golf": "bunker",
+            "natural": "sand"
+        },
+        "terms": [
+            "hazard",
+            "bunker"
+        ],
+        "name": "Sand Trap"
+    },
+    "golf/fairway": {
+        "icon": "golf",
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "golf": "fairway",
+            "landuse": "grass"
+        },
+        "name": "Fairway"
+    },
+    "golf/green": {
+        "icon": "golf",
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "golf": "green",
+            "landuse": "grass",
+            "leisure": "pitch",
+            "sport": "golf"
+        },
+        "terms": [
+            "putting green"
+        ],
+        "name": "Putting Green"
+    },
+    "golf/hole": {
+        "icon": "golf",
+        "fields": [
+            "golf_hole",
+            "par",
+            "handicap"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "golf": "hole"
+        },
+        "name": "Golf Hole"
+    },
+    "golf/lateral_water_hazard": {
+        "icon": "golf",
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "golf": "lateral_water_hazard",
+            "natural": "water"
+        },
+        "name": "Lateral Water Hazard"
+    },
+    "golf/rough": {
+        "icon": "golf",
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "golf": "rough",
+            "landuse": "grass"
+        },
+        "name": "Rough"
+    },
+    "golf/tee": {
+        "icon": "golf",
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "golf": "tee",
+            "landuse": "grass"
+        },
+        "terms": [
+            "teeing ground"
+        ],
+        "name": "Tee Box"
+    },
+    "golf/water_hazard": {
+        "icon": "golf",
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "golf": "water_hazard",
+            "natural": "water"
+        },
+        "name": "Water Hazard"
+    },
     "highway": {
         "fields": [
             "highway"

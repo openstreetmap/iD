@@ -33,6 +33,9 @@ iD.areaKeys = {
         "fire_hydrant": true,
         "phone": true
     },
+    "golf": {
+        "hole": true
+    },
     "historic": {
         "boundary_stone": true
     },

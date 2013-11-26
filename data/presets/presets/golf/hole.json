@@ -1,0 +1,15 @@
+{
+    "icon": "golf",
+    "fields": [
+        "golf_hole",
+        "par",
+        "handicap"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "golf": "hole"
+    },
+    "name": "Golf Hole"
+}
