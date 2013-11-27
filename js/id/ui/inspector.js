@@ -51,10 +51,8 @@ iD.ui.Inspector = function(context) {
                 .entityID(entityID));
 
         function showList(preset) {
-            var right = $wrap.style('right').indexOf('%') > 0 ? '-100%' : '-' + selection.style('width');
-
             $wrap.transition()
-                .style('right', right);
+                .styleTween('right', function() { return d3.interpolate('0%', '-100%'); });
 
             $presetPane.call(presetList
                 .preset(preset)
@@ -62,10 +60,8 @@ iD.ui.Inspector = function(context) {
         }
 
         function setPreset(preset) {
-            var right = $wrap.style('right').indexOf('%') > 0 ? '0%' : '0px';
-
             $wrap.transition()
-                .style('right', right);
+                .styleTween('right', function() { return d3.interpolate('-100%', '0%'); });
 
             $editorPane.call(entityEditor
                 .preset(preset));
