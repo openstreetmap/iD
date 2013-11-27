@@ -16,7 +16,9 @@ var censor = {
     "Skobbler": true,
 
     "Stadtplan Z\u00fcrich": true, // https://github.com/osmlab/editor-imagery-index/issues/14
-    "Public Transport (\u00d6PNV)": true // https://github.com/osmlab/editor-imagery-index/issues/15
+    "Public Transport (\u00d6PNV)": true, // https://github.com/osmlab/editor-imagery-index/issues/15
+
+    "TIGER 2012 Roads Overlay": true // https://github.com/systemed/iD/pull/2010
 };
 
 var descriptions = {
