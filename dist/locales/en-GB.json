@@ -33,6 +33,12 @@
                 "area": "Started an area."
             }
         },
+        "cancel_draw": {
+            "annotation": "Cancelled drawing."
+        },
+        "circularize": {
+            "title": "Circularise"
+        },
         "rotate": {
             "description": "Rotate this object around its centre point."
         }
@@ -55,6 +61,9 @@
     },
     "presets": {
         "presets": {
+            "amenity/arts_centre": {
+                "name": "Arts Centre"
+            },
             "amenity/fuel": {
                 "name": "Petrol Station",
                 "terms": "gas, fuel, propane, diesel, lng, cng, biodiesel"
@@ -69,6 +78,18 @@
             },
             "amenity/ranger_station": {
                 "name": "Warden Station"
+            },
+            "amenity/theatre": {
+                "name": "Theatre"
+            },
+            "leisure/sports_center": {
+                "name": "Sports Centre"
+            },
+            "shop/garden_centre": {
+                "name": "Garden Centre"
+            },
+            "shop/jewelry": {
+                "name": "Jeweller"
             },
             "tourism/camp_site": {
                 "terms": "camping"

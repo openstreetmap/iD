@@ -451,6 +451,9 @@
                     }
                 }
             },
+            "access_simple": {
+                "label": "통행 허가 여부"
+            },
             "address": {
                 "label": "주소",
                 "placeholders": {
@@ -720,7 +723,7 @@
                 "options": {
                     "bridge": "다리",
                     "tunnel": "터널",
-                    "embankment": "제방",
+                    "embankment": "둑",
                     "cutting": "절토"
                 }
             },
@@ -1053,6 +1056,10 @@
             "building/residential": {
                 "name": "주거 건물"
             },
+            "embankment": {
+                "name": "둑",
+                "terms": "제방"
+            },
             "emergency/ambulance_station": {
                 "name": "구급차 스테이션",
                 "terms": "앰뷸런스 스테이션"
@@ -1228,6 +1235,10 @@
             "landuse/farm": {
                 "name": "농장"
             },
+            "landuse/farmland": {
+                "name": "농토",
+                "terms": "농지"
+            },
             "landuse/farmyard": {
                 "name": "농지"
             },
@@ -1335,6 +1346,13 @@
             "man_made/cutline": {
                 "name": "숲 경계선"
             },
+            "man_made/embankment": {
+                "name": "둑",
+                "terms": "제방"
+            },
+            "man_made/flagpole": {
+                "name": "깃대"
+            },
             "man_made/lighthouse": {
                 "name": "등대"
             },
@@ -1367,6 +1385,19 @@
             },
             "man_made/water_works": {
                 "name": "물 시설"
+            },
+            "military/airfield": {
+                "name": "비행장"
+            },
+            "military/barracks": {
+                "name": "막사"
+            },
+            "military/bunker": {
+                "name": "벙커"
+            },
+            "military/range": {
+                "name": "군사지",
+                "terms": "군사 지역"
             },
             "natural": {
                 "name": "자연"
@@ -1553,6 +1584,13 @@
             },
             "power/transformer": {
                 "name": "변압 시설"
+            },
+            "public_transport/platform": {
+                "name": "플랫폼"
+            },
+            "public_transport/stop_position": {
+                "name": "정지 위치",
+                "terms": "정차 위치"
             },
             "railway": {
                 "name": "철도"
@@ -1895,7 +1933,7 @@
                 "name": "개울"
             },
             "waterway/weir": {
-                "name": "둑"
+                "name": "어량"
             }
         }
     }

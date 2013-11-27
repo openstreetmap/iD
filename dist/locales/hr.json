@@ -909,6 +909,10 @@
                 "name": "Tržnica",
                 "terms": "tržnica,pijaca,pijac,pija,plac"
             },
+            "amenity/parking": {
+                "name": "Parkiralište za automobile",
+                "terms": "parkiralište,garaža,parkirno mjesto,podzemna garaža,parking"
+            },
             "amenity/pharmacy": {
                 "name": "Ljekarna",
                 "terms": "ljekarna,apoteka,farmacija"

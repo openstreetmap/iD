@@ -251,7 +251,8 @@
         "unknown": "Невідомо",
         "incomplete": "<не завантажено>",
         "feature_list": "Пошук об’єктів",
-        "edit": "Властивості об’єкта"
+        "edit": "Властивості об’єкта",
+        "none": "Нічого"
     },
     "background": {
         "title": "Тло",
@@ -387,6 +388,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Будинок"
+            },
             "category-landuse": {
                 "name": "Землекористування"
             },
@@ -401,6 +405,12 @@
             },
             "category-route": {
                 "name": "Маршрути"
+            },
+            "category-water-area": {
+                "name": "Вода"
+            },
+            "category-water-line": {
+                "name": "Вода"
             }
         },
         "fields": {
@@ -440,6 +450,9 @@
                         "description": "Доступ дозволений тільки для того, щоб дістатись місця призначення"
                     }
                 }
+            },
+            "access_simple": {
+                "label": "Доступ"
             },
             "address": {
                 "label": "Адреса",
@@ -692,6 +705,9 @@
             "shelter": {
                 "label": "Навіс"
             },
+            "shelter_type": {
+                "label": "Тип"
+            },
             "shop": {
                 "label": "Тип"
             },
@@ -731,6 +747,9 @@
             },
             "trail_visibility": {
                 "label": "Видимість маршруту"
+            },
+            "tree_type": {
+                "label": "Тип"
             },
             "vending": {
                 "label": "Тип товарів"
@@ -911,6 +930,9 @@
                 "name": "Ринок",
                 "terms": "Marketplace, hbyjr,базар,базарна площа"
             },
+            "amenity/parking": {
+                "name": "Автостоянка"
+            },
             "amenity/pharmacy": {
                 "name": "Аптека",
                 "terms": "Pharmacy, fgntrf,ліки,фармація"
@@ -962,6 +984,9 @@
             "amenity/school": {
                 "name": "Школа",
                 "terms": "School, irjkf,навчання,факультет"
+            },
+            "amenity/shelter": {
+                "name": "Притулок"
             },
             "amenity/swimming_pool": {
                 "name": "Басейн",
@@ -1111,6 +1136,9 @@
                 "name": "Житлова будівля",
                 "terms": "Residential Building,bnkjdf elsdkz"
             },
+            "embankment": {
+                "name": "Насип"
+            },
             "emergency/ambulance_station": {
                 "name": "Станція швидкої медичної допомоги",
                 "terms": "Ambulance Station,cnfywsz idblrj vtlbxyj ljgjvjub, швидка допомога, перша допомога"
@@ -1126,6 +1154,12 @@
             "entrance": {
                 "name": "Вхід",
                 "terms": "Entrance,dsl,двері,ворота,вихід,фіртка"
+            },
+            "footway/crossing": {
+                "name": "Перехрестя"
+            },
+            "footway/sidewalk": {
+                "name": "Тротуар"
             },
             "highway": {
                 "name": "Дорога",
@@ -1331,6 +1365,9 @@
                 "name": "Ферма",
                 "terms": "Farm,athvf"
             },
+            "landuse/farmland": {
+                "name": "Сільгосп. угіддя"
+            },
             "landuse/farmyard": {
                 "name": "Двір ферми",
                 "terms": "Farmyard,ldsh athvb"
@@ -1467,6 +1504,12 @@
                 "name": "Просіка",
                 "terms": "Cut line,ghjcsrf"
             },
+            "man_made/embankment": {
+                "name": "Насип"
+            },
+            "man_made/flagpole": {
+                "name": "Флагшток"
+            },
             "man_made/lighthouse": {
                 "name": "Маяк",
                 "terms": "Lighthouse,vfzr,сигнал,вогонь"
@@ -1506,6 +1549,18 @@
             "man_made/water_works": {
                 "name": "Водозабір",
                 "terms": "Water Works,djljpfsh"
+            },
+            "military/airfield": {
+                "name": "Аеродром"
+            },
+            "military/barracks": {
+                "name": "Казарма"
+            },
+            "military/bunker": {
+                "name": "Бункер"
+            },
+            "military/range": {
+                "name": "Військовий полігон"
             },
             "natural": {
                 "name": "Природа",
@@ -1615,6 +1670,12 @@
                 "name": "Агенція з нерухомості",
                 "terms": "ріелтор, Агенція з нерухомості, futywsz p ythejvjcns, Real Estate Office"
             },
+            "office/therapist": {
+                "name": "Терапевт"
+            },
+            "office/travel_agent": {
+                "name": "Туристична агенція"
+            },
             "place": {
                 "name": "Місцевість",
                 "terms": "Place,vscwtdscnm"
@@ -1682,6 +1743,12 @@
             "power/transformer": {
                 "name": "Трансформатор",
                 "terms": "Transformer,nhfycajhvfnjh"
+            },
+            "public_transport/platform": {
+                "name": "Платформа"
+            },
+            "public_transport/stop_position": {
+                "name": "Місце зупинки"
             },
             "railway": {
                 "name": "Залізниця",

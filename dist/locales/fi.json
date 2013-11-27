@@ -371,11 +371,14 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Rakennus"
+            },
             "category-landuse": {
                 "name": "Maankäyttö"
             },
             "category-path": {
-                "name": "Polku"
+                "name": "Kevyenliikenteenväylä"
             },
             "category-rail": {
                 "name": "Rautatie"
@@ -385,6 +388,12 @@
             },
             "category-route": {
                 "name": "Reitti"
+            },
+            "category-water-area": {
+                "name": "Vesi"
+            },
+            "category-water-line": {
+                "name": "Vesi"
             }
         },
         "fields": {
@@ -981,7 +990,7 @@
                 "name": "Rakennus"
             },
             "building/apartments": {
-                "name": "Asunnot"
+                "name": "Kerrostalo"
             },
             "building/commercial": {
                 "name": "Kaupallinen rakennus"

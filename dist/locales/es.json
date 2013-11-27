@@ -451,6 +451,9 @@
                     }
                 }
             },
+            "access_simple": {
+                "label": "Acceso"
+            },
             "address": {
                 "label": "Dirección",
                 "placeholders": {
@@ -1129,6 +1132,9 @@
                 "name": "Edificio residencial",
                 "terms": "bloque"
             },
+            "embankment": {
+                "name": "Terraplén"
+            },
             "emergency/ambulance_station": {
                 "name": "Estación de ambulancias"
             },
@@ -1354,6 +1360,9 @@
                 "name": "Granja",
                 "terms": "Granja"
             },
+            "landuse/farmland": {
+                "name": "Tierra de labranza"
+            },
             "landuse/farmyard": {
                 "name": "Tierras de cultivo",
                 "terms": "Edificios de la granja"
@@ -1492,6 +1501,12 @@
                 "name": "Cortafuegos",
                 "terms": "Corte de línea"
             },
+            "man_made/embankment": {
+                "name": "Terraplén"
+            },
+            "man_made/flagpole": {
+                "name": "Asta de bandera"
+            },
             "man_made/lighthouse": {
                 "name": "Faro",
                 "terms": "faro"
@@ -1530,6 +1545,15 @@
             "man_made/water_works": {
                 "name": "Trabajos hídricos",
                 "terms": "Depósito de agua"
+            },
+            "military/airfield": {
+                "name": "Aeródromo"
+            },
+            "military/barracks": {
+                "name": "Cuartel"
+            },
+            "military/bunker": {
+                "name": "Búnker"
             },
             "natural": {
                 "name": "Natural",
@@ -1748,6 +1772,12 @@
             "power/transformer": {
                 "name": "Transformador",
                 "terms": "Transformador"
+            },
+            "public_transport/platform": {
+                "name": "Plataforma"
+            },
+            "public_transport/stop_position": {
+                "name": "Punto de parada"
             },
             "railway": {
                 "name": "Ferrocarril",

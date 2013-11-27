@@ -1138,6 +1138,10 @@
                 "name": "Obytná budova",
                 "terms": "obytna budova,ubytovanie,bývanie,byvanie"
             },
+            "embankment": {
+                "name": "Násyp",
+                "terms": "nasyp,hrádza,hradza,val"
+            },
             "emergency/ambulance_station": {
                 "name": "Stanovište sanitiek",
                 "terms": "stanoviste sanitiek,garaze,garáže,sanitky,sanitka,garaz,garáž"
@@ -1366,6 +1370,10 @@
                 "name": "Pestovateľská plocha",
                 "terms": "pole,farma,dobytok,polia,záhrady,zahrady,pestovatelska plocha"
             },
+            "landuse/farmland": {
+                "name": "Farma",
+                "terms": "druzstvo,družstvo,chov,výbeh,vybeh,pole,roľa,rola"
+            },
             "landuse/farmyard": {
                 "name": "Farma",
                 "terms": "pole,farma,dobytok,polia,záhrady,zahrady,pestovatelska plocha"
@@ -1506,6 +1514,14 @@
                 "name": "Lesný priesek",
                 "terms": "lesny priesek,čistina,cistina,rúbaň,ruban,rúbanisko,rubanisko,holina"
             },
+            "man_made/embankment": {
+                "name": "Násyp",
+                "terms": "nasyp,hrádza,hradza,val"
+            },
+            "man_made/flagpole": {
+                "name": "Vlajková žrď",
+                "terms": "vlajkova zrd,stožiar,stoziar,rahno"
+            },
             "man_made/lighthouse": {
                 "name": "Maják",
                 "terms": "majak,výstraha,vystraha"
@@ -1545,6 +1561,22 @@
             "man_made/water_works": {
                 "name": "Vodojem",
                 "terms": "vodáreň,vodaren,vodný zdroj,vodny zdroj,prameň,pramen"
+            },
+            "military/airfield": {
+                "name": "Vojenské letisko",
+                "terms": "vojenske letisko,pristávacia plocha,pristavacia plocha"
+            },
+            "military/barracks": {
+                "name": "Kasárne",
+                "terms": "kasarne,barak,vojenská ubytovňa,vojenska ubytovna"
+            },
+            "military/bunker": {
+                "name": "Bunker",
+                "terms": "opevnenie,vojenské opevnenie,vojenske opevnenie"
+            },
+            "military/range": {
+                "name": "Vojenská strelnica",
+                "terms": "vojenska strelnica,cvičisko,cvicisko"
             },
             "natural": {
                 "name": "Prírodné",
@@ -1777,6 +1809,14 @@
             "power/transformer": {
                 "name": "Transformátor",
                 "terms": "Rozvodna stanica,Rozvodná stanica,transformator,trasformátor"
+            },
+            "public_transport/platform": {
+                "name": "Nástupište",
+                "terms": "nastupiste,zastávka,zastavka"
+            },
+            "public_transport/stop_position": {
+                "name": "Miesto zastavenia",
+                "terms": "zastávka,zastavka"
             },
             "railway": {
                 "name": "Železnica",

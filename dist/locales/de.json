@@ -1371,7 +1371,8 @@
                 "terms": "Bauernhof, Farm"
             },
             "landuse/farmland": {
-                "name": "Acker"
+                "name": "Acker",
+                "terms": "Acker, Ackerboden, Ackerland, landwirtschaftliche Fläche"
             },
             "landuse/farmyard": {
                 "name": "Bauernhof",
@@ -1514,7 +1515,8 @@
                 "terms": "Schneise"
             },
             "man_made/embankment": {
-                "name": "Fahrdamm"
+                "name": "Fahrdamm",
+                "terms": "Böschung, Damm, Ufer, Uferböschung"
             },
             "man_made/flagpole": {
                 "name": "Fahnenstange",
@@ -1561,7 +1563,8 @@
                 "terms": "Wasserwerk"
             },
             "military/airfield": {
-                "name": "Militärflugplatz"
+                "name": "Militärflugplatz",
+                "terms": "Flugfeld, Rollfeld, Flugplatz, Luftlandeplatz"
             },
             "military/barracks": {
                 "name": "Kaserne",
