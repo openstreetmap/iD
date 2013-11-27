@@ -1,3 +1,13 @@
+## 1.3.4
+
+* Replace TIGER 2012 layer with next-generation TIGER 2013 layer (#2010)
+* Add tooltips to "untagged feature" warnings
+* Add pressets and category for golf features (#2013)
+* Information and bike parking preset refinements
+* Faster/smoother zooming and panning
+* Add "quick add" presets for common proper names
+* Fix zoom to feature when clicking search results (#2023)
+
 ## 1.3.3
 
 * Support for loading GPX-files via url parameter (#1965)

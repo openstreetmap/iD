@@ -310,7 +310,7 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '1.3.3';
+iD.version = '1.3.4';
 
 (function() {
     var detected = {};
