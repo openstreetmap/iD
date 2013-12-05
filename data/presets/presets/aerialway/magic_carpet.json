@@ -1,0 +1,14 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "fields": [
+        "aerialway/capacity",
+        "aerialway/duration",
+        "aerialway/heating"
+    ],
+    "tags": {
+        "aerialway": "magic_carpet"
+    },
+    "name": "Magic Carpet Lift"
+}

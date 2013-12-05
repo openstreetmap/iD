@@ -475,6 +475,33 @@
             "admin_level": {
                 "label": "Admin Level"
             },
+            "aerialway": {
+                "label": "Type"
+            },
+            "aerialway/access": {
+                "label": "Access"
+            },
+            "aerialway/bubble": {
+                "label": "Bubble"
+            },
+            "aerialway/capacity": {
+                "label": "Capacity (per hour)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Duration (minutes)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "Heated"
+            },
+            "aerialway/occupancy": {
+                "label": "Occupancy",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Access (summer)"
+            },
             "aeroway": {
                 "label": "Type"
             },
@@ -700,6 +727,15 @@
                 "label": "Phone",
                 "placeholder": "+31 42 123 4567"
             },
+            "piste/difficulty": {
+                "label": "Difficulty"
+            },
+            "piste/grooming": {
+                "label": "Grooming"
+            },
+            "piste/type": {
+                "label": "Type"
+            },
             "place": {
                 "label": "Type"
             },
@@ -820,6 +856,46 @@
         "presets": {
             "address": {
                 "name": "Address",
+                "terms": ""
+            },
+            "aerialway": {
+                "name": "Aerialway",
+                "terms": "ski lift,funifor,funitel"
+            },
+            "aerialway/cable_car": {
+                "name": "Cable Car",
+                "terms": "tramway,ropeway"
+            },
+            "aerialway/chair_lift": {
+                "name": "Chair Lift",
+                "terms": ""
+            },
+            "aerialway/gondola": {
+                "name": "Gondola",
+                "terms": ""
+            },
+            "aerialway/magic_carpet": {
+                "name": "Magic Carpet Lift",
+                "terms": ""
+            },
+            "aerialway/platter": {
+                "name": "Platter Lift",
+                "terms": "button lift,poma lift"
+            },
+            "aerialway/pylon": {
+                "name": "Aerialway Pylon",
+                "terms": ""
+            },
+            "aerialway/rope_tow": {
+                "name": "Rope Tow Lift",
+                "terms": "handle tow,bugel lift"
+            },
+            "aerialway/station": {
+                "name": "Aerialway Station",
+                "terms": ""
+            },
+            "aerialway/t-bar": {
+                "name": "T-bar Lift",
                 "terms": ""
             },
             "aeroway": {
@@ -1817,6 +1893,10 @@
             "office/travel_agent": {
                 "name": "Travel Agency",
                 "terms": ""
+            },
+            "piste": {
+                "name": "Piste/Ski Trail",
+                "terms": "ski,sled,sleigh,snowboard,nordic,downhill,snowmobile"
             },
             "place": {
                 "name": "Place",

@@ -13,6 +13,165 @@
         "matchScore": 0.2,
         "name": "Address"
     },
+    "aerialway": {
+        "fields": [
+            "aerialway"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "line"
+        ],
+        "tags": {
+            "aerialway": "*"
+        },
+        "terms": [
+            "ski lift",
+            "funifor",
+            "funitel"
+        ],
+        "name": "Aerialway"
+    },
+    "aerialway/cable_car": {
+        "geometry": [
+            "line"
+        ],
+        "terms": [
+            "tramway",
+            "ropeway"
+        ],
+        "fields": [
+            "aerialway/occupancy",
+            "aerialway/capacity",
+            "aerialway/duration",
+            "aerialway/heating"
+        ],
+        "tags": {
+            "aerialway": "cable_car"
+        },
+        "name": "Cable Car"
+    },
+    "aerialway/chair_lift": {
+        "geometry": [
+            "line"
+        ],
+        "fields": [
+            "aerialway/occupancy",
+            "aerialway/capacity",
+            "aerialway/duration",
+            "aerialway/bubble",
+            "aerialway/heating"
+        ],
+        "tags": {
+            "aerialway": "chair_lift"
+        },
+        "name": "Chair Lift"
+    },
+    "aerialway/gondola": {
+        "geometry": [
+            "line"
+        ],
+        "fields": [
+            "aerialway/occupancy",
+            "aerialway/capacity",
+            "aerialway/duration",
+            "aerialway/bubble",
+            "aerialway/heating"
+        ],
+        "tags": {
+            "aerialway": "gondola"
+        },
+        "name": "Gondola"
+    },
+    "aerialway/magic_carpet": {
+        "geometry": [
+            "line"
+        ],
+        "fields": [
+            "aerialway/capacity",
+            "aerialway/duration",
+            "aerialway/heating"
+        ],
+        "tags": {
+            "aerialway": "magic_carpet"
+        },
+        "name": "Magic Carpet Lift"
+    },
+    "aerialway/platter": {
+        "geometry": [
+            "line"
+        ],
+        "terms": [
+            "button lift",
+            "poma lift"
+        ],
+        "fields": [
+            "aerialway/capacity",
+            "aerialway/duration"
+        ],
+        "tags": {
+            "aerialway": "platter"
+        },
+        "name": "Platter Lift"
+    },
+    "aerialway/pylon": {
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "fields": [
+            "ref"
+        ],
+        "tags": {
+            "aerialway": "pylon"
+        },
+        "name": "Aerialway Pylon"
+    },
+    "aerialway/rope_tow": {
+        "geometry": [
+            "line"
+        ],
+        "terms": [
+            "handle tow",
+            "bugel lift"
+        ],
+        "fields": [
+            "aerialway/capacity",
+            "aerialway/duration"
+        ],
+        "tags": {
+            "aerialway": "rope_tow"
+        },
+        "name": "Rope Tow Lift"
+    },
+    "aerialway/station": {
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "fields": [
+            "aerialway/access",
+            "aerialway/summer/access",
+            "elevation"
+        ],
+        "tags": {
+            "aerialway": "station"
+        },
+        "name": "Aerialway Station"
+    },
+    "aerialway/t-bar": {
+        "geometry": [
+            "line"
+        ],
+        "fields": [
+            "aerialway/capacity",
+            "aerialway/duration"
+        ],
+        "tags": {
+            "aerialway": "t-bar"
+        },
+        "name": "T-bar Lift"
+    },
     "aeroway": {
         "icon": "airport",
         "fields": [
@@ -4006,6 +4165,34 @@
         "terms": [],
         "name": "Travel Agency",
         "searchable": false
+    },
+    "piste": {
+        "icon": "skiing",
+        "fields": [
+            "piste/type",
+            "piste/difficulty",
+            "piste/grooming",
+            "oneway",
+            "lit"
+        ],
+        "geometry": [
+            "point",
+            "line",
+            "area"
+        ],
+        "terms": [
+            "ski",
+            "sled",
+            "sleigh",
+            "snowboard",
+            "nordic",
+            "downhill",
+            "snowmobile"
+        ],
+        "tags": {
+            "piste:type": "*"
+        },
+        "name": "Piste/Ski Trail"
     },
     "place": {
         "fields": [

@@ -1,0 +1,10 @@
+{
+    "key": "aerialway:access",
+    "type": "combo",
+    "options": [
+        "entry",
+        "exit",
+        "both"
+    ],
+    "label": "Access"
+}

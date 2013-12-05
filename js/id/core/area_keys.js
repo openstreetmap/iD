@@ -58,6 +58,7 @@ iD.areaKeys = {
         "tree": true
     },
     "office": {},
+    "piste:type": {},
     "place": {},
     "power": {
         "line": true,

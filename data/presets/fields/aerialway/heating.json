@@ -1,0 +1,5 @@
+{
+    "key": "aerialway:heating",
+    "type": "check",
+    "label": "Heated"
+}
