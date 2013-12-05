@@ -1,0 +1,19 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "tramway",
+        "ropeway"
+    ],
+    "fields": [
+        "aerialway/occupancy",
+        "aerialway/capacity",
+        "aerialway/duration",
+        "aerialway/heating"
+    ],
+    "tags": {
+        "aerialway": "cable_car"
+    },
+    "name": "Cable Car"
+}

@@ -84,6 +84,59 @@
         "type": "number",
         "label": "Admin Level"
     },
+    "aerialway": {
+        "key": "aerialway",
+        "type": "typeCombo",
+        "label": "Type"
+    },
+    "aerialway/access": {
+        "key": "aerialway:access",
+        "type": "combo",
+        "options": [
+            "entry",
+            "exit",
+            "both"
+        ],
+        "label": "Access"
+    },
+    "aerialway/bubble": {
+        "key": "aerialway:bubble",
+        "type": "check",
+        "label": "Bubble"
+    },
+    "aerialway/capacity": {
+        "key": "aerialway:capacity",
+        "type": "number",
+        "label": "Capacity (per hour)",
+        "placeholder": "500, 2500, 5000..."
+    },
+    "aerialway/duration": {
+        "key": "aerialway:duration",
+        "type": "number",
+        "label": "Duration (minutes)",
+        "placeholder": "1, 2, 3..."
+    },
+    "aerialway/heating": {
+        "key": "aerialway:heating",
+        "type": "check",
+        "label": "Heated"
+    },
+    "aerialway/occupancy": {
+        "key": "aerialway:occupancy",
+        "type": "number",
+        "label": "Occupancy",
+        "placeholder": "2, 4, 8..."
+    },
+    "aerialway/summer/access": {
+        "key": "aerialway:summer:access",
+        "type": "combo",
+        "options": [
+            "entry",
+            "exit",
+            "both"
+        ],
+        "label": "Access (summer)"
+    },
     "aeroway": {
         "key": "aeroway",
         "type": "typeCombo",
@@ -501,6 +554,21 @@
         "universal": true,
         "label": "Phone",
         "placeholder": "+31 42 123 4567"
+    },
+    "piste/difficulty": {
+        "key": "piste:difficulty",
+        "type": "combo",
+        "label": "Difficulty"
+    },
+    "piste/grooming": {
+        "key": "piste:grooming",
+        "type": "combo",
+        "label": "Grooming"
+    },
+    "piste/type": {
+        "key": "piste:type",
+        "type": "typeCombo",
+        "label": "Type"
     },
     "place": {
         "key": "place",
