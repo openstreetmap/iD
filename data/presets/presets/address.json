@@ -9,6 +9,7 @@
         "addr:housenumber": "*"
     },
     "addTags": {},
+    "removeTags": {},
     "matchScore": 0.2,
     "name": "Address"
 }
