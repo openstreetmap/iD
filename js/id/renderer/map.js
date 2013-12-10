@@ -119,13 +119,6 @@ iD.Map = function(context) {
                     }
                     return true;
 
-                } else if (d.type === 'node') {
-                    // if a node was deleted, only the way will be in the diff
-                    // so we should redraw midpoints for all nodes in that way
-                    var parentWays = graph.parentWays({ id: d.id });
-                    if (parentWays.length > 0 && parentWays[0].id in complete) return true;
-
-                    return d.id in complete;
                 } else {
                     return d.id in complete;
                 }

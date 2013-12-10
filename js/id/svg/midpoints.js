@@ -17,8 +17,12 @@ iD.svg.Midpoints = function(projection, context) {
                     b = nodes[j + 1],
                     id = [a.id, b.id].sort().join('-');
 
-                // If neither of the nodes changed, no need to redraw midpoint
-                if (!midpoints[id] && (filter(a) || filter(b))) {
+                // Redraw midpoints in two cases:
+                //   1. One of the two endpoint nodes changed (e.g. was moved).
+                //   2. A node was deleted. The midpoint between the two new
+                //      endpoints needs to be redrawn. In this case only the
+                //      way will be in the diff.
+                if (!midpoints[id] && (filter(a) || filter(b) || filter(entity))) {
                     var loc = iD.geo.interp(a.loc, b.loc, 0.5);
                     if (extent.intersects(loc) && iD.geo.euclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
                         midpoints[id] = {
