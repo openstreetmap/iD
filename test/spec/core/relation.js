@@ -470,4 +470,20 @@ describe('iD.Relation', function () {
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc]]]);
         });
     });
+
+    describe(".creationOrder comparator", function () {
+        specify("orders existing relations newest-first", function () {
+            var a = iD.Relation({ id: 'r1' }),
+                b = iD.Relation({ id: 'r2' });
+            expect(iD.Relation.creationOrder(a, b)).to.be.above(0);
+            expect(iD.Relation.creationOrder(b, a)).to.be.below(0);
+        });
+
+        specify("orders new relations newest-first", function () {
+            var a = iD.Relation({ id: 'r-1' }),
+                b = iD.Relation({ id: 'r-2' });
+            expect(iD.Relation.creationOrder(a, b)).to.be.above(0);
+            expect(iD.Relation.creationOrder(b, a)).to.be.below(0);
+        });
+    });
 });

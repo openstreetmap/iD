@@ -40,10 +40,11 @@ iD.ui.RawMembershipEditor = function(context) {
     }
 
     function relations(q) {
-        var result = [{
+        var newRelation = {
                 relation: null,
                 value: t('inspector.new_relation')
-            }],
+            },
+            result = [],
             graph = context.graph();
 
         context.intersects(context.extent()).forEach(function(entity) {
@@ -62,6 +63,11 @@ iD.ui.RawMembershipEditor = function(context) {
                 value: value
             });
         });
+
+        result.sort(function(a, b) {
+            return iD.Relation.creationOrder(a.relation, b.relation);
+        });
+        result.unshift(newRelation);
 
         return result;
     }
