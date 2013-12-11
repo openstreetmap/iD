@@ -99,6 +99,8 @@ d3.combobox = function() {
                    input.on('input.typeahead', function() {
                        idx = -1;
                        render();
+                       var start = input.property('selectionStart');
+                       input.node().setSelectionRange(start, start);
                        input.on('input.typeahead', change);
                    });
                    break;
