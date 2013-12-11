@@ -40,10 +40,11 @@ iD.ui.RawMembershipEditor = function(context) {
     }
 
     function relations(q) {
-        var result = [{
+        var newRelation = {
                 relation: null,
                 value: t('inspector.new_relation')
-            }],
+            },
+            result = [],
             graph = context.graph();
 
         context.intersects(context.extent()).forEach(function(entity) {
@@ -62,6 +63,16 @@ iD.ui.RawMembershipEditor = function(context) {
                 value: value
             });
         });
+
+        result.sort(function(a, b) {
+            var aId = parseInt(iD.Entity.id.toOSM(a.relation.id), 10);
+            var bId = parseInt(iD.Entity.id.toOSM(b.relation.id), 10);
+            if (aId < 0) aId = Number.MAX_VALUE / 2 - aId;
+            if (bId < 0) bId = Number.MAX_VALUE / 2 - bId;
+
+            return d3.descending(aId, bId);
+        });
+        result.unshift(newRelation)
 
         return result;
     }
