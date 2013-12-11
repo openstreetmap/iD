@@ -4,7 +4,8 @@
         "cuisine",
         "internet_access",
         "building_area",
-        "address"
+        "address",
+        "opening_hours"
     ],
     "geometry": [
         "point",

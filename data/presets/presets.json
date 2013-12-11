@@ -369,7 +369,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "geometry": [
             "point",
@@ -408,7 +409,8 @@
         "icon": "bar",
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "geometry": [
             "point",
@@ -490,7 +492,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "geometry": [
             "point",
@@ -671,7 +674,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "geometry": [
             "point",
@@ -864,7 +868,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "geometry": [
             "point",
@@ -1124,7 +1129,8 @@
         "icon": "beer",
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "geometry": [
             "point",
@@ -1187,6 +1193,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "geometry": [
@@ -6320,7 +6327,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6339,7 +6347,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6358,7 +6367,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6377,7 +6387,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6396,7 +6407,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6415,7 +6427,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6434,7 +6447,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6453,7 +6467,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6472,7 +6487,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6491,7 +6507,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6510,7 +6527,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6529,7 +6547,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6548,7 +6567,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6567,7 +6587,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6586,7 +6607,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6605,7 +6627,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6624,7 +6647,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6643,7 +6667,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6662,7 +6687,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6681,7 +6707,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6700,7 +6727,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6719,7 +6747,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6738,7 +6767,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6757,7 +6787,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6776,7 +6807,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6795,7 +6827,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6814,7 +6847,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6833,7 +6867,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6852,7 +6887,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6871,7 +6907,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6890,7 +6927,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6909,7 +6947,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6928,7 +6967,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6947,7 +6987,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6966,7 +7007,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -6985,7 +7027,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7004,7 +7047,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7023,7 +7067,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7042,7 +7087,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7061,7 +7107,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7080,7 +7127,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7099,7 +7147,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7118,7 +7167,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7137,7 +7187,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7156,7 +7207,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7175,7 +7227,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7194,7 +7247,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7213,7 +7267,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7232,7 +7287,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7251,7 +7307,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7270,7 +7327,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7289,7 +7347,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7308,7 +7367,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7327,7 +7387,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7346,7 +7407,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7365,7 +7427,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7384,7 +7447,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7403,7 +7467,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7422,7 +7487,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7441,7 +7507,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7460,7 +7527,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7479,7 +7547,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7498,7 +7567,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7517,7 +7587,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7536,7 +7607,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7555,7 +7627,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7574,7 +7647,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7593,7 +7667,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7612,7 +7687,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7631,7 +7707,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7650,7 +7727,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7669,7 +7747,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7688,7 +7767,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7707,7 +7787,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7726,7 +7807,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7745,7 +7827,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7764,7 +7847,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7783,7 +7867,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7802,7 +7887,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7821,7 +7907,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7840,7 +7927,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7859,7 +7947,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7878,7 +7967,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7897,7 +7987,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7916,7 +8007,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7935,7 +8027,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7954,7 +8047,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7973,7 +8067,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -7992,7 +8087,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8011,7 +8107,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8030,7 +8127,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8049,7 +8147,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8068,7 +8167,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8087,7 +8187,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8106,7 +8207,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8125,7 +8227,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8144,7 +8247,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8163,7 +8267,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8182,7 +8287,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8201,7 +8307,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8220,7 +8327,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8239,7 +8347,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8258,7 +8367,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8277,7 +8387,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8296,7 +8407,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8315,7 +8427,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8334,7 +8447,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8353,7 +8467,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8372,7 +8487,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8391,7 +8507,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8410,7 +8527,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8429,7 +8547,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8448,7 +8567,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8467,7 +8587,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8486,7 +8607,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8505,7 +8627,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8524,7 +8647,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8543,7 +8667,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8562,7 +8687,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8581,7 +8707,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8600,7 +8727,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8619,7 +8747,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8638,7 +8767,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8657,7 +8787,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8676,7 +8807,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8695,7 +8827,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8714,7 +8847,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8733,7 +8867,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8752,7 +8887,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8771,7 +8907,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8790,7 +8927,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8809,7 +8947,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8828,7 +8967,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8847,7 +8987,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8866,7 +9007,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8885,7 +9027,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8904,7 +9047,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8923,7 +9067,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8942,7 +9087,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8961,7 +9107,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8980,7 +9127,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -8999,7 +9147,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9018,7 +9167,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9037,7 +9187,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9056,7 +9207,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9075,7 +9227,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9094,7 +9247,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9113,7 +9267,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9132,7 +9287,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9151,7 +9307,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9170,7 +9327,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9189,7 +9347,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9208,7 +9367,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9227,7 +9387,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9246,7 +9407,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9265,7 +9427,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9284,7 +9447,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9303,7 +9467,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9322,7 +9487,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9341,7 +9507,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9360,7 +9527,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9379,7 +9547,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9398,7 +9567,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9417,7 +9587,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9436,7 +9607,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9455,7 +9627,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9474,7 +9647,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9493,7 +9667,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9512,7 +9687,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9531,7 +9707,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9550,7 +9727,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9569,7 +9747,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9588,7 +9767,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9607,7 +9787,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9626,7 +9807,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9645,7 +9827,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9664,7 +9847,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9683,7 +9867,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9702,7 +9887,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9721,7 +9907,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9740,7 +9927,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9759,7 +9947,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9778,7 +9967,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9797,7 +9987,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9816,7 +10007,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9835,7 +10027,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9854,7 +10047,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9873,7 +10067,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9892,7 +10087,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9911,7 +10107,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9930,7 +10127,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9949,7 +10147,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9968,7 +10167,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -9987,7 +10187,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10006,7 +10207,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10025,7 +10227,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10044,7 +10247,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10063,7 +10267,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10082,7 +10287,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10101,7 +10307,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10120,7 +10327,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10139,7 +10347,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10158,7 +10367,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10177,7 +10387,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10196,7 +10407,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10215,7 +10427,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10234,7 +10447,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10253,7 +10467,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10272,7 +10487,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10291,7 +10507,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10310,7 +10527,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10329,7 +10547,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10348,7 +10567,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10367,7 +10587,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10386,7 +10607,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10405,7 +10627,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10424,7 +10647,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10443,7 +10667,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10462,7 +10687,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10481,7 +10707,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10500,7 +10727,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10519,7 +10747,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10538,7 +10767,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10557,7 +10787,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10576,7 +10807,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10595,7 +10827,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10614,7 +10847,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10633,7 +10867,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10652,7 +10887,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10671,7 +10907,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10690,7 +10927,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10710,7 +10948,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10729,7 +10968,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10749,7 +10989,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10768,7 +11009,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10787,7 +11029,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10806,7 +11049,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10826,7 +11070,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10846,7 +11091,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10865,7 +11111,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10885,7 +11132,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10905,7 +11153,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10925,7 +11174,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10944,7 +11194,8 @@
         "fields": [
             "atm",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10964,7 +11215,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -10984,7 +11236,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11004,7 +11257,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11024,7 +11278,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11044,7 +11299,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11064,7 +11320,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11084,7 +11341,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11104,7 +11362,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11125,7 +11384,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11145,7 +11405,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11165,7 +11426,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11185,7 +11447,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11205,7 +11468,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11225,7 +11489,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11245,7 +11510,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11266,7 +11532,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11286,7 +11553,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11306,7 +11574,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11326,7 +11595,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11346,7 +11616,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11366,7 +11637,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11386,7 +11658,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11406,7 +11679,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11426,7 +11700,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11447,7 +11722,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11468,7 +11744,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11489,7 +11766,8 @@
             "cuisine",
             "internet_access",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11620,7 +11898,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11639,7 +11918,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11658,7 +11938,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11677,7 +11958,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11696,7 +11978,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11715,7 +11998,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11735,7 +12019,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11755,7 +12040,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11775,7 +12061,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11795,7 +12082,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11814,7 +12102,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11833,7 +12122,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11852,7 +12142,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11871,7 +12162,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11890,7 +12182,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11910,7 +12203,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11929,7 +12223,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11948,7 +12243,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11967,7 +12263,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -11986,7 +12283,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12005,7 +12303,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12025,7 +12324,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12044,7 +12344,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12063,7 +12364,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12083,7 +12385,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12102,7 +12405,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12121,7 +12425,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12140,7 +12445,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12160,7 +12466,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12179,7 +12486,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12198,7 +12506,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12217,7 +12526,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12237,7 +12547,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12256,7 +12567,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12275,7 +12587,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12294,7 +12607,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12313,7 +12627,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12332,7 +12647,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12352,7 +12668,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12371,7 +12688,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12390,7 +12708,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12409,7 +12728,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12429,7 +12749,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12448,7 +12769,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12467,7 +12789,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12486,7 +12809,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12506,7 +12830,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12525,7 +12850,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12545,7 +12871,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12564,7 +12891,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12583,7 +12911,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12603,7 +12932,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12622,7 +12952,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12641,7 +12972,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12660,7 +12992,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12679,7 +13012,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12698,7 +13032,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12717,7 +13052,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12737,7 +13073,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12756,7 +13093,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12775,7 +13113,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12794,7 +13133,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12814,7 +13154,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12833,7 +13174,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12852,7 +13194,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12871,7 +13214,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12891,7 +13235,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12910,7 +13255,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12931,7 +13277,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12952,7 +13299,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12972,7 +13320,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -12991,7 +13340,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -13011,7 +13361,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -13030,7 +13381,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -13049,7 +13401,8 @@
         "fields": [
             "cuisine",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16375,7 +16728,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16394,7 +16748,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16413,7 +16768,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16432,7 +16788,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16451,7 +16808,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16470,7 +16828,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16489,7 +16848,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16508,7 +16868,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16527,7 +16888,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16546,7 +16908,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16565,7 +16928,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16584,7 +16948,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16603,7 +16968,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16622,7 +16988,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16641,7 +17008,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16660,7 +17028,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16679,7 +17048,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16698,7 +17068,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16717,7 +17088,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16736,7 +17108,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16755,7 +17128,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16774,7 +17148,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16793,7 +17168,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16812,7 +17188,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16831,7 +17208,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16850,7 +17228,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16869,7 +17248,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16888,7 +17268,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16907,7 +17288,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16926,7 +17308,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16945,7 +17328,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16964,7 +17348,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -16983,7 +17368,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17002,7 +17388,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17021,7 +17408,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17040,7 +17428,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17059,7 +17448,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17078,7 +17468,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17097,7 +17488,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17116,7 +17508,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17135,7 +17528,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17154,7 +17548,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17173,7 +17568,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17192,7 +17588,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17211,7 +17608,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17230,7 +17628,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17249,7 +17648,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17268,7 +17668,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17287,7 +17688,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17306,7 +17708,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17325,7 +17728,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17344,7 +17748,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17363,7 +17768,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17382,7 +17788,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17401,7 +17808,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17420,7 +17828,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17439,7 +17848,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17458,7 +17868,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17477,7 +17888,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17496,7 +17908,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17515,7 +17928,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17534,7 +17948,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17553,7 +17968,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17572,7 +17988,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17591,7 +18008,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17610,7 +18028,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17629,7 +18048,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17648,7 +18068,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17667,7 +18088,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17686,7 +18108,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17705,7 +18128,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17724,7 +18148,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17742,7 +18167,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17760,7 +18186,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17778,7 +18205,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17796,7 +18224,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17814,7 +18243,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17832,7 +18262,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17850,7 +18281,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17868,7 +18300,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17886,7 +18319,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17904,7 +18338,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17922,7 +18357,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17940,7 +18376,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17958,7 +18395,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17976,7 +18414,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -17994,7 +18433,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18012,7 +18452,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18030,7 +18471,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18048,7 +18490,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18066,7 +18509,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18084,7 +18528,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18102,7 +18547,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18120,7 +18566,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18138,7 +18585,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18156,7 +18604,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18174,7 +18623,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18192,7 +18642,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18210,7 +18661,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18228,7 +18680,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18246,7 +18699,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18264,7 +18718,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18282,7 +18737,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18300,7 +18756,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18318,7 +18775,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18336,7 +18794,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18354,7 +18813,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18372,7 +18832,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18390,7 +18851,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18408,7 +18870,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18426,7 +18889,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18444,7 +18908,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18462,7 +18927,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18480,7 +18946,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18498,7 +18965,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18516,7 +18984,8 @@
         ],
         "fields": [
             "building_area",
-            "address"
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -18656,6 +19125,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18676,6 +19146,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18696,6 +19167,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18716,6 +19188,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18736,6 +19209,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18756,6 +19230,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18776,6 +19251,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18796,6 +19272,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18816,6 +19293,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18836,6 +19314,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18856,6 +19335,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18876,6 +19356,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18896,6 +19377,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18916,6 +19398,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18936,6 +19419,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18956,6 +19440,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18976,6 +19461,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -18996,6 +19482,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19016,6 +19503,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19036,6 +19524,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19056,6 +19545,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19076,6 +19566,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19096,6 +19587,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19116,6 +19608,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19136,6 +19629,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19156,6 +19650,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19176,6 +19671,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19196,6 +19692,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19216,6 +19713,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19236,6 +19734,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19256,6 +19755,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19276,6 +19776,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19296,6 +19797,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19316,6 +19818,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19336,6 +19839,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19356,6 +19860,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19376,6 +19881,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19396,6 +19902,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19416,6 +19923,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19436,6 +19944,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19456,6 +19965,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19476,6 +19986,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19496,6 +20007,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19516,6 +20028,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19536,6 +20049,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19556,6 +20070,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19576,6 +20091,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19596,6 +20112,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19616,6 +20133,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19636,6 +20154,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19656,6 +20175,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19676,6 +20196,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19696,6 +20217,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19716,6 +20238,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19736,6 +20259,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19756,6 +20280,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19776,6 +20301,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19796,6 +20322,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19816,6 +20343,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19836,6 +20364,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19856,6 +20385,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19876,6 +20406,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19896,6 +20427,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19916,6 +20448,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19936,6 +20469,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19956,6 +20490,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19976,6 +20511,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -19996,6 +20532,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20016,6 +20553,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20036,6 +20574,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20056,6 +20595,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20076,6 +20616,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20096,6 +20637,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20116,6 +20658,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20136,6 +20679,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20156,6 +20700,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20176,6 +20721,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20196,6 +20742,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20216,6 +20763,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20236,6 +20784,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20256,6 +20805,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20276,6 +20826,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20296,6 +20847,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20316,6 +20868,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20336,6 +20889,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20356,6 +20910,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20376,6 +20931,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20396,6 +20952,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20416,6 +20973,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20436,6 +20994,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20456,6 +21015,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20476,6 +21036,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20496,6 +21057,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20516,6 +21078,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20536,6 +21099,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20556,6 +21120,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20576,6 +21141,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20596,6 +21162,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20616,6 +21183,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20636,6 +21204,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20656,6 +21225,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20676,6 +21246,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20696,6 +21267,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20716,6 +21288,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20736,6 +21309,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20756,6 +21330,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20776,6 +21351,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20796,6 +21372,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20816,6 +21393,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20836,6 +21414,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20856,6 +21435,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20876,6 +21456,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20896,6 +21477,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20917,6 +21499,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20937,6 +21520,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20957,6 +21541,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20977,6 +21562,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
@@ -20997,6 +21583,7 @@
             "cuisine",
             "building_area",
             "address",
+            "opening_hours",
             "capacity"
         ],
         "suggestion": true
