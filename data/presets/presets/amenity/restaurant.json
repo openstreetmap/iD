@@ -4,6 +4,7 @@
         "cuisine",
         "building_area",
         "address",
+        "opening_hours",
         "capacity"
     ],
     "geometry": [

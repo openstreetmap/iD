@@ -2,7 +2,8 @@
     "icon": "bar",
     "fields": [
         "building_area",
-        "address"
+        "address",
+        "opening_hours"
     ],
     "geometry": [
         "point",

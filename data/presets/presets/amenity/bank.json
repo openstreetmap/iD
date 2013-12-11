@@ -3,7 +3,8 @@
     "fields": [
         "atm",
         "building_area",
-        "address"
+        "address",
+        "opening_hours"
     ],
     "geometry": [
         "point",
