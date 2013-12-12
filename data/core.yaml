@@ -209,6 +209,10 @@ en:
       yes: Yes
       no: No
     none: None
+    node: Node
+    way: Way
+    relation: Relation
+    location: Location
   background:
     title: Background
     description: Background settings

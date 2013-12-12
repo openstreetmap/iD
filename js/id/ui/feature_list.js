@@ -56,6 +56,29 @@ iD.ui.FeatureList = function(context) {
 
             if (!q) return result;
 
+            var idMatch = q.match(/^([nwr])([0-9]+)$/);
+
+            if (idMatch) {
+                result.push({
+                    id: idMatch[0],
+                    geometry: idMatch[1] === 'n' ? 'point' : idMatch[1] === 'w' ? 'line' : 'relation',
+                    type: idMatch[1] === 'n' ? t('inspector.node') : idMatch[1] === 'w' ? t('inspector.way') : t('inspector.relation'),
+                    name: idMatch[2]
+                });
+            }
+
+            var locationMatch = q.match(/^(-?\d+\.?\d*)\s+(-?\d+\.?\d*)$/);
+
+            if (locationMatch) {
+                result.push({
+                    id: -1,
+                    geometry: 'point',
+                    type: t('inspector.location'),
+                    name: locationMatch[0],
+                    location: [parseFloat(locationMatch[1]), parseFloat(locationMatch[2])]
+                });
+            }
+
             function addEntity(entity) {
                 if (entity.id in entities || result.length > 200)
                     return;
@@ -141,6 +164,10 @@ iD.ui.FeatureList = function(context) {
             list.selectAll('.geocode-item')
                 .style('display', (value && geocodeResults === undefined) ? 'block' : 'none');
 
+            list.selectAll('.feature-list-item')
+                .data([-1])
+                .remove();
+
             var items = list.selectAll('.feature-list-item')
                 .data(results, function(d) { return d.id; });
 
@@ -186,7 +213,10 @@ iD.ui.FeatureList = function(context) {
 
         function click(d) {
             d3.event.preventDefault();
-            if (d.entity) {
+            if (d.location) {
+                context.map().centerZoom([d.location[1], d.location[0]], 20);
+            }
+            else if (d.entity) {
                 context.enter(iD.modes.Select(context, [d.entity.id]));
             } else {
                 context.loadEntity(d.id);
