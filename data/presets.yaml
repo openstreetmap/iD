@@ -429,12 +429,21 @@ en:
       amenity/cinema: 
         name: Cinema
         terms: "<translate with synonyms or related terms for 'Cinema', separated by commas>"
+      amenity/clinic: 
+        name: Clinic
+        terms: "<translate with synonyms or related terms for 'Clinic', separated by commas>"
       amenity/college: 
         name: College
         terms: "<translate with synonyms or related terms for 'College', separated by commas>"
       amenity/courthouse: 
         name: Courthouse
         terms: "<translate with synonyms or related terms for 'Courthouse', separated by commas>"
+      amenity/dentist: 
+        name: Dentist
+        terms: "<translate with synonyms or related terms for 'Dentist', separated by commas>"
+      amenity/doctor: 
+        name: Doctor
+        terms: "<translate with synonyms or related terms for 'Doctor', separated by commas>"
       amenity/drinking_water: 
         name: Drinking Water
         terms: "<translate with synonyms or related terms for 'Drinking Water', separated by commas>"

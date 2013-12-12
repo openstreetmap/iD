@@ -608,6 +608,27 @@
         },
         "name": "Cinema"
     },
+    "amenity/clinic": {
+        "name": "Clinic",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "clinic",
+            "medical clinic"
+        ],
+        "tags": {
+            "amenity": "clinic"
+        },
+        "icon": "hospital",
+        "fields": [
+            "building_area",
+            "social_facility",
+            "address",
+            "opening_hours"
+        ]
+    },
     "amenity/college": {
         "icon": "college",
         "fields": [
@@ -639,6 +660,46 @@
             "amenity": "courthouse"
         },
         "name": "Courthouse"
+    },
+    "amenity/dentist": {
+        "name": "Dentist",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "dentist",
+            "dentist's office"
+        ],
+        "tags": {
+            "amenity": "doctors"
+        },
+        "icon": "hospital",
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ]
+    },
+    "amenity/doctor": {
+        "name": "Doctor",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "doctor",
+            "doctor's office"
+        ],
+        "tags": {
+            "amenity": "doctors"
+        },
+        "icon": "hospital",
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ]
     },
     "amenity/drinking_water": {
         "icon": "water",
