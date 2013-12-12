@@ -1,0 +1,20 @@
+{
+    "name": "Doctor",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "doctor",
+        "doctor's office"
+    ],
+    "tags": {
+        "amenity": "doctors"
+    },
+    "icon": "hospital",
+    "fields": [
+        "building_area",
+        "address",
+        "opening_hours"
+    ]
+}
