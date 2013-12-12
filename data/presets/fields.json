@@ -707,6 +707,15 @@
             }
         }
     },
+    "studio_type": {
+        "key": "type",
+        "type": "combo",
+        "options": [
+            "audio",
+            "video"
+        ],
+        "label": "Type"
+    },
     "supervised": {
         "key": "supervised",
         "type": "check",
