@@ -1,0 +1,9 @@
+{
+    "key": "type",
+    "type": "combo",
+    "options": [
+        "audio",
+        "video"
+    ],
+    "label": "Type"
+}

@@ -997,6 +997,10 @@
                 "name": "Cinema",
                 "terms": "big screen,bijou,cine,drive-in,film,flicks,motion pictures,movie house,movie theater,moving pictures,nabes,photoplay,picture show,pictures,playhouse,show,silver screen"
             },
+            "amenity/clinic": {
+                "name": "Clinic",
+                "terms": "clinic,medical clinic"
+            },
             "amenity/college": {
                 "name": "College",
                 "terms": ""
@@ -1004,6 +1008,14 @@
             "amenity/courthouse": {
                 "name": "Courthouse",
                 "terms": ""
+            },
+            "amenity/dentist": {
+                "name": "Dentist",
+                "terms": "dentist,dentist's office"
+            },
+            "amenity/doctor": {
+                "name": "Doctor",
+                "terms": "doctor,doctor's office"
             },
             "amenity/drinking_water": {
                 "name": "Drinking Water",
