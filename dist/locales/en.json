@@ -803,6 +803,9 @@
                     "cutting": "Cutting"
                 }
             },
+            "studio_type": {
+                "label": "Type"
+            },
             "supervised": {
                 "label": "Supervised"
             },
@@ -1109,6 +1112,10 @@
             "amenity/shelter": {
                 "name": "Shelter",
                 "terms": "lean-to"
+            },
+            "amenity/studio": {
+                "name": "Studio",
+                "terms": "recording studio,studio,radio,radio studio,television,television studio"
             },
             "amenity/swimming_pool": {
                 "name": "Swimming Pool",

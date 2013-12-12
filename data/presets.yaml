@@ -288,6 +288,8 @@ en:
           tunnel: Tunnel
           embankment: Embankment
           cutting: Cutting
+      studio_type: 
+        label: Type
       supervised: 
         label: Supervised
       surface: 
@@ -514,6 +516,9 @@ en:
       amenity/shelter: 
         name: Shelter
         terms: "<translate with synonyms or related terms for 'Shelter', separated by commas>"
+      amenity/studio: 
+        name: Studio
+        terms: "<translate with synonyms or related terms for 'Studio', separated by commas>"
       amenity/swimming_pool: 
         name: Swimming Pool
         terms: "<translate with synonyms or related terms for 'Swimming Pool', separated by commas>"
