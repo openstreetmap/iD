@@ -12,6 +12,7 @@
         "craft": "optician"
     },
     "icon": "marker-stroked",
+    "searchable": false,
     "fields": [
         "building_area",
         "address",

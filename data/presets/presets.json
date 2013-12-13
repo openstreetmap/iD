@@ -2295,6 +2295,7 @@
             "craft": "jeweler"
         },
         "icon": "marker-stroked",
+        "searchable": false,
         "fields": [
             "building_area",
             "address",
@@ -2337,6 +2338,7 @@
             "craft": "locksmith"
         },
         "icon": "marker-stroked",
+        "searchable": false,
         "fields": [
             "building_area",
             "address",
@@ -2378,6 +2380,7 @@
             "craft": "optician"
         },
         "icon": "marker-stroked",
+        "searchable": false,
         "fields": [
             "building_area",
             "address",
