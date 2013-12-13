@@ -1,0 +1,20 @@
+{
+    "name": "Sculpter",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "sculpter"
+    ],
+    "tags": {
+        "craft": "sculpter"
+    },
+    "icon": "art-gallery",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

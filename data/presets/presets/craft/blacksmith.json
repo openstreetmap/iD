@@ -1,0 +1,20 @@
+{
+    "name": "Blacksmith",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "blacksmith"
+    ],
+    "tags": {
+        "craft": "blacksmith"
+    },
+    "icon": "farm",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

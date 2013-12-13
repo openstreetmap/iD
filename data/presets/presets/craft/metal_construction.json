@@ -1,0 +1,20 @@
+{
+    "name": "Metal Construction",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "metal construction"
+    ],
+    "tags": {
+        "craft": "metal_construction"
+    },
+    "icon": "marker-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

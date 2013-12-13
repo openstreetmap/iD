@@ -1,0 +1,21 @@
+{
+    "name": "Sawmill",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "sawmill",
+        "lumber"
+    ],
+    "tags": {
+        "craft": "sawmill"
+    },
+    "icon": "park",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

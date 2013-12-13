@@ -1,0 +1,23 @@
+{
+    "name": "Glaziery",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "glass",
+        "glass foundry",
+        "stained-glass",
+        "window"
+    ],
+    "tags": {
+        "craft": "glaziery"
+    },
+    "icon": "fire-station",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

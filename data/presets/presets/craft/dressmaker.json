@@ -1,0 +1,21 @@
+{
+    "name": "Dressmaker",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "dress",
+        "dressmaker"
+    ],
+    "tags": {
+        "craft": "dressmaker"
+    },
+    "icon": "clothing-store",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

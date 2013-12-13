@@ -1,0 +1,22 @@
+{
+    "name": "Window Construction",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "window",
+        "window maker",
+        "window construction"
+    ],
+    "tags": {
+        "craft": "window_construction"
+    },
+    "icon": "marker-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

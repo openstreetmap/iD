@@ -29,6 +29,7 @@ iD.areaKeys = {
     "building": {
         "entrance": true
     },
+    "craft": {},
     "emergency": {
         "fire_hydrant": true,
         "phone": true

@@ -1,0 +1,21 @@
+{
+    "name": "Shoemaker",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "shoe repair",
+        "shoemaker"
+    ],
+    "tags": {
+        "craft": "shoemaker"
+    },
+    "icon": "marker-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

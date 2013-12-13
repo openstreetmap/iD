@@ -1,0 +1,21 @@
+{
+    "name": "Pottery",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "pottery",
+        "potter"
+    ],
+    "tags": {
+        "craft": "pottery"
+    },
+    "icon": "art-gallery",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

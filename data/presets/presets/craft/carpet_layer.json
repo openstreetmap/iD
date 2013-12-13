@@ -1,0 +1,20 @@
+{
+    "name": "Carpet Layer",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "carpet layer"
+    ],
+    "tags": {
+        "craft": "carpet_layer"
+    },
+    "icon": "square",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

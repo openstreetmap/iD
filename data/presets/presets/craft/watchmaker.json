@@ -1,0 +1,22 @@
+{
+    "name": "Watchmaker",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "watch",
+        "watchmaker",
+        "watch repair"
+    ],
+    "tags": {
+        "craft": "watchmaker"
+    },
+    "icon": "circle-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

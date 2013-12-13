@@ -639,6 +639,141 @@ en:
       building/residential: 
         name: Residential Building
         terms: "<translate with synonyms or related terms for 'Residential Building', separated by commas>"
+      craft/basket_maker: 
+        name: Basket Maker
+        terms: "<translate with synonyms or related terms for 'Basket Maker', separated by commas>"
+      craft/beekeeper: 
+        name: Beekeeper
+        terms: "<translate with synonyms or related terms for 'Beekeeper', separated by commas>"
+      craft/blacksmith: 
+        name: Blacksmith
+        terms: "<translate with synonyms or related terms for 'Blacksmith', separated by commas>"
+      craft/boatbuilder: 
+        name: Boat Builder
+        terms: "<translate with synonyms or related terms for 'Boat Builder', separated by commas>"
+      craft/bookbinder: 
+        name: Bookbinder
+        terms: "<translate with synonyms or related terms for 'Bookbinder', separated by commas>"
+      craft/brewery: 
+        name: Brewery
+        terms: "<translate with synonyms or related terms for 'Brewery', separated by commas>"
+      craft/carpenter: 
+        name: Carpenter
+        terms: "<translate with synonyms or related terms for 'Carpenter', separated by commas>"
+      craft/carpet_layer: 
+        name: Carpet Layer
+        terms: "<translate with synonyms or related terms for 'Carpet Layer', separated by commas>"
+      craft/caterer: 
+        name: Caterer
+        terms: "<translate with synonyms or related terms for 'Caterer', separated by commas>"
+      craft/clockmaker: 
+        name: Clockmaker
+        terms: "<translate with synonyms or related terms for 'Clockmaker', separated by commas>"
+      craft/confectionary: 
+        name: Confectionary
+        terms: "<translate with synonyms or related terms for 'Confectionary', separated by commas>"
+      craft/dressmaker: 
+        name: Dressmaker
+        terms: "<translate with synonyms or related terms for 'Dressmaker', separated by commas>"
+      craft/electrician: 
+        name: Electrician
+        terms: "<translate with synonyms or related terms for 'Electrician', separated by commas>"
+      craft/gardener: 
+        name: Gardener
+        terms: "<translate with synonyms or related terms for 'Gardener', separated by commas>"
+      craft/glaziery: 
+        name: Glaziery
+        terms: "<translate with synonyms or related terms for 'Glaziery', separated by commas>"
+      craft/handicraft: 
+        name: Handicraft
+        terms: "<translate with synonyms or related terms for 'Handicraft', separated by commas>"
+      craft/hvac: 
+        name: HVAC
+        terms: "<translate with synonyms or related terms for 'HVAC', separated by commas>"
+      craft/insulator: 
+        name: Insulator
+        terms: "<translate with synonyms or related terms for 'Insulator', separated by commas>"
+      craft/jeweler: 
+        name: Jeweler
+        terms: "<translate with synonyms or related terms for 'Jeweler', separated by commas>"
+      craft/key_cutter: 
+        name: Key Cutter
+        terms: "<translate with synonyms or related terms for 'Key Cutter', separated by commas>"
+      craft/locksmith: 
+        name: Locksmith
+        terms: "<translate with synonyms or related terms for 'Locksmith', separated by commas>"
+      craft/metal_construction: 
+        name: Metal Construction
+        terms: "<translate with synonyms or related terms for 'Metal Construction', separated by commas>"
+      craft/optician: 
+        name: Optician
+        terms: "<translate with synonyms or related terms for 'Optician', separated by commas>"
+      craft/painter: 
+        name: painter
+        terms: "<translate with synonyms or related terms for 'painter', separated by commas>"
+      craft/photographer: 
+        name: Photographer
+        terms: "<translate with synonyms or related terms for 'Photographer', separated by commas>"
+      craft/photographic_labratory: 
+        name: Photographic Labratory
+        terms: "<translate with synonyms or related terms for 'Photographic Labratory', separated by commas>"
+      craft/plasterer: 
+        name: Plasterer
+        terms: "<translate with synonyms or related terms for 'Plasterer', separated by commas>"
+      craft/plumber: 
+        name: Plumber
+        terms: "<translate with synonyms or related terms for 'Plumber', separated by commas>"
+      craft/pottery: 
+        name: Pottery
+        terms: "<translate with synonyms or related terms for 'Pottery', separated by commas>"
+      craft/rigger: 
+        name: Rigger
+        terms: "<translate with synonyms or related terms for 'Rigger', separated by commas>"
+      craft/roofer: 
+        name: Roofer
+        terms: "<translate with synonyms or related terms for 'Roofer', separated by commas>"
+      craft/saddler: 
+        name: Saddler
+        terms: "<translate with synonyms or related terms for 'Saddler', separated by commas>"
+      craft/sailmaker: 
+        name: Sailmaker
+        terms: "<translate with synonyms or related terms for 'Sailmaker', separated by commas>"
+      craft/sawmill: 
+        name: Sawmill
+        terms: "<translate with synonyms or related terms for 'Sawmill', separated by commas>"
+      craft/scaffolder: 
+        name: Scaffolder
+        terms: "<translate with synonyms or related terms for 'Scaffolder', separated by commas>"
+      craft/sculpter: 
+        name: Sculpter
+        terms: "<translate with synonyms or related terms for 'Sculpter', separated by commas>"
+      craft/shoemaker: 
+        name: Shoemaker
+        terms: "<translate with synonyms or related terms for 'Shoemaker', separated by commas>"
+      craft/stonemason: 
+        name: Stonemason
+        terms: "<translate with synonyms or related terms for 'Stonemason', separated by commas>"
+      craft/sweep: 
+        name: Chimney Sweep
+        terms: "<translate with synonyms or related terms for 'Chimney Sweep', separated by commas>"
+      craft/tailor: 
+        name: Tailor
+        terms: "<translate with synonyms or related terms for 'Tailor', separated by commas>"
+      craft/tiler: 
+        name: Tiler
+        terms: "<translate with synonyms or related terms for 'Tiler', separated by commas>"
+      craft/tinsmith: 
+        name: Tinsmith
+        terms: "<translate with synonyms or related terms for 'Tinsmith', separated by commas>"
+      craft/upholsterer: 
+        name: Upholsterer
+        terms: "<translate with synonyms or related terms for 'Upholsterer', separated by commas>"
+      craft/watchmaker: 
+        name: Watchmaker
+        terms: "<translate with synonyms or related terms for 'Watchmaker', separated by commas>"
+      craft/window_construction: 
+        name: Window Construction
+        terms: "<translate with synonyms or related terms for 'Window Construction', separated by commas>"
       embankment: 
         name: Embankment
         terms: "<translate with synonyms or related terms for 'Embankment', separated by commas>"

@@ -1,0 +1,24 @@
+{
+    "name": "HVAC",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "heating",
+        "ventilating",
+        "air-conditioning",
+        "air conditioning"
+        
+    ],
+    "tags": {
+        "craft": "hvac"
+    },
+    "icon": "marker-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

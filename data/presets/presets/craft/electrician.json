@@ -1,0 +1,20 @@
+{
+    "name": "Electrician",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "electrician"
+    ],
+    "tags": {
+        "craft": "electrician"
+    },
+    "icon": "marker-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

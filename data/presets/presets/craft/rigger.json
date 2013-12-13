@@ -1,0 +1,20 @@
+{
+    "name": "Rigger",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "rigger"
+    ],
+    "tags": {
+        "craft": "rigger"
+    },
+    "icon": "marker-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

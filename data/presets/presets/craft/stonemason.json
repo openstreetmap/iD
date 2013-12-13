@@ -1,0 +1,21 @@
+{
+    "name": "Stonemason",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "stonemason",
+        "masonry"
+    ],
+    "tags": {
+        "craft": "stonemason"
+    },
+    "icon": "marker-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

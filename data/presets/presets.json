@@ -1897,6 +1897,945 @@
         },
         "name": "Residential Building"
     },
+    "craft/basket_maker": {
+        "name": "Basket Maker",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "basket",
+            "basketry",
+            "basket maker",
+            "basket weaver"
+        ],
+        "tags": {
+            "craft": "basket_maker"
+        },
+        "icon": "art-gallery",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/beekeeper": {
+        "name": "Beekeeper",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "bees",
+            "beekeeper",
+            "bee box"
+        ],
+        "tags": {
+            "craft": "beekeeper"
+        },
+        "icon": "farm",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/blacksmith": {
+        "name": "Blacksmith",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "blacksmith"
+        ],
+        "tags": {
+            "craft": "blacksmith"
+        },
+        "icon": "farm",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/boatbuilder": {
+        "name": "Boat Builder",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "boat builder"
+        ],
+        "tags": {
+            "craft": "boatbuilder"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/bookbinder": {
+        "name": "Bookbinder",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "bookbinder",
+            "book repair"
+        ],
+        "tags": {
+            "craft": "bookbinder"
+        },
+        "icon": "library",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/brewery": {
+        "name": "Brewery",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "brewery"
+        ],
+        "tags": {
+            "craft": "brewery"
+        },
+        "icon": "beer",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/carpenter": {
+        "name": "Carpenter",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "carpenter",
+            "woodworker"
+        ],
+        "tags": {
+            "craft": "carpenter"
+        },
+        "icon": "logging",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/carpet_layer": {
+        "name": "Carpet Layer",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "carpet layer"
+        ],
+        "tags": {
+            "craft": "carpet_layer"
+        },
+        "icon": "square",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/caterer": {
+        "name": "Caterer",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "Caterer",
+            "Catering"
+        ],
+        "tags": {
+            "craft": "caterer"
+        },
+        "icon": "bakery",
+        "fields": [
+            "cuisine",
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/clockmaker": {
+        "name": "Clockmaker",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "clock",
+            "clockmaker",
+            "clock repair"
+        ],
+        "tags": {
+            "craft": "clockmaker"
+        },
+        "icon": "circle-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/confectionary": {
+        "name": "Confectionary",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "confectionary",
+            "sweets",
+            "candy"
+        ],
+        "tags": {
+            "craft": "confectionary"
+        },
+        "icon": "bakery",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/dressmaker": {
+        "name": "Dressmaker",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "dress",
+            "dressmaker"
+        ],
+        "tags": {
+            "craft": "dressmaker"
+        },
+        "icon": "clothing-store",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/electrician": {
+        "name": "Electrician",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "electrician"
+        ],
+        "tags": {
+            "craft": "electrician"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/gardener": {
+        "name": "Gardener",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "gardener",
+            "landscaper",
+            "grounds keeper"
+        ],
+        "tags": {
+            "craft": "gardener"
+        },
+        "icon": "garden",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/glaziery": {
+        "name": "Glaziery",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "glass",
+            "glass foundry",
+            "stained-glass",
+            "window"
+        ],
+        "tags": {
+            "craft": "glaziery"
+        },
+        "icon": "fire-station",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/handicraft": {
+        "name": "Handicraft",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "handicraft"
+        ],
+        "tags": {
+            "craft": "handicraft"
+        },
+        "icon": "art-gallery",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/hvac": {
+        "name": "HVAC",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "heating",
+            "ventilating",
+            "air-conditioning",
+            "air conditioning"
+        ],
+        "tags": {
+            "craft": "hvac"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/insulator": {
+        "name": "Insulator",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "insulation",
+            "insulator"
+        ],
+        "tags": {
+            "craft": "insulation"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/jeweler": {
+        "name": "Jeweler",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "jeweler",
+            "gem",
+            "diamond"
+        ],
+        "tags": {
+            "craft": "jeweler"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/key_cutter": {
+        "name": "Key Cutter",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "key",
+            "key cutter"
+        ],
+        "tags": {
+            "craft": "key_cutter"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/locksmith": {
+        "name": "Locksmith",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "locksmith",
+            "lock"
+        ],
+        "tags": {
+            "craft": "locksmith"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/metal_construction": {
+        "name": "Metal Construction",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "metal construction"
+        ],
+        "tags": {
+            "craft": "metal_construction"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/optician": {
+        "name": "Optician",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "glasses",
+            "optician"
+        ],
+        "tags": {
+            "craft": "optician"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/painter": {
+        "name": "painter",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "painter"
+        ],
+        "tags": {
+            "craft": "painter"
+        },
+        "icon": "art-gallery",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/photographer": {
+        "name": "Photographer",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "photographer"
+        ],
+        "tags": {
+            "craft": "photographer"
+        },
+        "icon": "camera",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/photographic_labratory": {
+        "name": "Photographic Labratory",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "photographic labratory",
+            "film developer"
+        ],
+        "tags": {
+            "craft": "photographic_labratory"
+        },
+        "icon": "camera",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/plasterer": {
+        "name": "Plasterer",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "plasterer"
+        ],
+        "tags": {
+            "craft": "plasterer"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/plumber": {
+        "name": "Plumber",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "pumber"
+        ],
+        "tags": {
+            "craft": "plumber"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/pottery": {
+        "name": "Pottery",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "pottery",
+            "potter"
+        ],
+        "tags": {
+            "craft": "pottery"
+        },
+        "icon": "art-gallery",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/rigger": {
+        "name": "Rigger",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "rigger"
+        ],
+        "tags": {
+            "craft": "rigger"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/roofer": {
+        "name": "Roofer",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "roofer"
+        ],
+        "tags": {
+            "craft": "roofer"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/saddler": {
+        "name": "Saddler",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "saddler"
+        ],
+        "tags": {
+            "craft": "saddler"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/sailmaker": {
+        "name": "Sailmaker",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "sailmaker"
+        ],
+        "tags": {
+            "craft": "sailmaker"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/sawmill": {
+        "name": "Sawmill",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "sawmill",
+            "lumber"
+        ],
+        "tags": {
+            "craft": "sawmill"
+        },
+        "icon": "park",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/scaffolder": {
+        "name": "Scaffolder",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "scaffolder"
+        ],
+        "tags": {
+            "craft": "scaffolder"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/sculpter": {
+        "name": "Sculpter",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "sculpter"
+        ],
+        "tags": {
+            "craft": "sculpter"
+        },
+        "icon": "art-gallery",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/shoemaker": {
+        "name": "Shoemaker",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "shoe repair",
+            "shoemaker"
+        ],
+        "tags": {
+            "craft": "shoemaker"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/stonemason": {
+        "name": "Stonemason",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "stonemason",
+            "masonry"
+        ],
+        "tags": {
+            "craft": "stonemason"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/sweep": {
+        "name": "Chimney Sweep",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "sweep",
+            "chimney sweep"
+        ],
+        "tags": {
+            "craft": "sweep"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/tailor": {
+        "name": "Tailor",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "tailor",
+            "clothes"
+        ],
+        "tags": {
+            "craft": "tailor"
+        },
+        "icon": "clothing-store",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/tiler": {
+        "name": "Tiler",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "tiler"
+        ],
+        "tags": {
+            "craft": "tiler"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/tinsmith": {
+        "name": "Tinsmith",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "tinsmith"
+        ],
+        "tags": {
+            "craft": "tinsmith"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/upholsterer": {
+        "name": "Upholsterer",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "upholsterer"
+        ],
+        "tags": {
+            "craft": "upholsterer"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/watchmaker": {
+        "name": "Watchmaker",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "watch",
+            "watchmaker",
+            "watch repair"
+        ],
+        "tags": {
+            "craft": "watchmaker"
+        },
+        "icon": "circle-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
+    "craft/window_construction": {
+        "name": "Window Construction",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "window",
+            "window maker",
+            "window construction"
+        ],
+        "tags": {
+            "craft": "window_construction"
+        },
+        "icon": "marker-stroked",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
+    },
     "embankment": {
         "geometry": [
             "line"

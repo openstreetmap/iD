@@ -1,0 +1,22 @@
+{
+    "name": "Clockmaker",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "clock",
+        "clockmaker",
+        "clock repair"
+    ],
+    "tags": {
+        "craft": "clockmaker"
+    },
+    "icon": "circle-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}
