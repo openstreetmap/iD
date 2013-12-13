@@ -202,6 +202,8 @@ iD.ui.FeatureList = function(context) {
         }
 
         function mouseover(d) {
+            if (d.id === -1) return;
+
             context.surface().selectAll(iD.util.entityOrMemberSelector([d.id], context.graph()))
                 .classed('hover', true);
         }
