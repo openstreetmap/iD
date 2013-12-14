@@ -1,0 +1,23 @@
+{
+    "name": "Jeweler",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "jeweler",
+        "gem",
+        "diamond"
+    ],
+    "tags": {
+        "craft": "jeweler"
+    },
+    "icon": "marker-stroked",
+    "searchable": false,
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

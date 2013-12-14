@@ -1277,6 +1277,186 @@
                 "name": "Residential Building",
                 "terms": ""
             },
+            "craft/basket_maker": {
+                "name": "Basket Maker",
+                "terms": "basket,basketry,basket maker,basket weaver"
+            },
+            "craft/beekeeper": {
+                "name": "Beekeeper",
+                "terms": "bees,beekeeper,bee box"
+            },
+            "craft/blacksmith": {
+                "name": "Blacksmith",
+                "terms": "blacksmith"
+            },
+            "craft/boatbuilder": {
+                "name": "Boat Builder",
+                "terms": "boat builder"
+            },
+            "craft/bookbinder": {
+                "name": "Bookbinder",
+                "terms": "bookbinder,book repair"
+            },
+            "craft/brewery": {
+                "name": "Brewery",
+                "terms": "brewery"
+            },
+            "craft/carpenter": {
+                "name": "Carpenter",
+                "terms": "carpenter,woodworker"
+            },
+            "craft/carpet_layer": {
+                "name": "Carpet Layer",
+                "terms": "carpet layer"
+            },
+            "craft/caterer": {
+                "name": "Caterer",
+                "terms": "Caterer,Catering"
+            },
+            "craft/clockmaker": {
+                "name": "Clockmaker",
+                "terms": "clock,clockmaker,clock repair"
+            },
+            "craft/confectionary": {
+                "name": "Confectionary",
+                "terms": "confectionary,sweets,candy"
+            },
+            "craft/dressmaker": {
+                "name": "Dressmaker",
+                "terms": "dress,dressmaker"
+            },
+            "craft/electrician": {
+                "name": "Electrician",
+                "terms": "electrician"
+            },
+            "craft/gardener": {
+                "name": "Gardener",
+                "terms": "gardener,landscaper,grounds keeper"
+            },
+            "craft/glaziery": {
+                "name": "Glaziery",
+                "terms": "glass,glass foundry,stained-glass,window"
+            },
+            "craft/handicraft": {
+                "name": "Handicraft",
+                "terms": "handicraft"
+            },
+            "craft/hvac": {
+                "name": "HVAC",
+                "terms": "heating,ventilating,air-conditioning,air conditioning"
+            },
+            "craft/insulator": {
+                "name": "Insulator",
+                "terms": "insulation,insulator"
+            },
+            "craft/jeweler": {
+                "name": "Jeweler",
+                "terms": "jeweler,gem,diamond"
+            },
+            "craft/key_cutter": {
+                "name": "Key Cutter",
+                "terms": "key,key cutter"
+            },
+            "craft/locksmith": {
+                "name": "Locksmith",
+                "terms": "locksmith,lock"
+            },
+            "craft/metal_construction": {
+                "name": "Metal Construction",
+                "terms": "metal construction"
+            },
+            "craft/optician": {
+                "name": "Optician",
+                "terms": "glasses,optician"
+            },
+            "craft/painter": {
+                "name": "painter",
+                "terms": "painter"
+            },
+            "craft/photographer": {
+                "name": "Photographer",
+                "terms": "photographer"
+            },
+            "craft/photographic_labratory": {
+                "name": "Photographic Labratory",
+                "terms": "photographic labratory,film developer"
+            },
+            "craft/plasterer": {
+                "name": "Plasterer",
+                "terms": "plasterer"
+            },
+            "craft/plumber": {
+                "name": "Plumber",
+                "terms": "pumber"
+            },
+            "craft/pottery": {
+                "name": "Pottery",
+                "terms": "pottery,potter"
+            },
+            "craft/rigger": {
+                "name": "Rigger",
+                "terms": "rigger"
+            },
+            "craft/roofer": {
+                "name": "Roofer",
+                "terms": "roofer"
+            },
+            "craft/saddler": {
+                "name": "Saddler",
+                "terms": "saddler"
+            },
+            "craft/sailmaker": {
+                "name": "Sailmaker",
+                "terms": "sailmaker"
+            },
+            "craft/sawmill": {
+                "name": "Sawmill",
+                "terms": "sawmill,lumber"
+            },
+            "craft/scaffolder": {
+                "name": "Scaffolder",
+                "terms": "scaffolder"
+            },
+            "craft/sculpter": {
+                "name": "Sculpter",
+                "terms": "sculpter"
+            },
+            "craft/shoemaker": {
+                "name": "Shoemaker",
+                "terms": "shoe repair,shoemaker"
+            },
+            "craft/stonemason": {
+                "name": "Stonemason",
+                "terms": "stonemason,masonry"
+            },
+            "craft/sweep": {
+                "name": "Chimney Sweep",
+                "terms": "sweep,chimney sweep"
+            },
+            "craft/tailor": {
+                "name": "Tailor",
+                "terms": "tailor,clothes"
+            },
+            "craft/tiler": {
+                "name": "Tiler",
+                "terms": "tiler"
+            },
+            "craft/tinsmith": {
+                "name": "Tinsmith",
+                "terms": "tinsmith"
+            },
+            "craft/upholsterer": {
+                "name": "Upholsterer",
+                "terms": "upholsterer"
+            },
+            "craft/watchmaker": {
+                "name": "Watchmaker",
+                "terms": "watch,watchmaker,watch repair"
+            },
+            "craft/window_construction": {
+                "name": "Window Construction",
+                "terms": "window,window maker,window construction"
+            },
             "embankment": {
                 "name": "Embankment",
                 "terms": ""

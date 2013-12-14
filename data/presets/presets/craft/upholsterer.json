@@ -1,0 +1,20 @@
+{
+    "name": "Upholsterer",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "upholsterer"
+    ],
+    "tags": {
+        "craft": "upholsterer"
+    },
+    "icon": "marker-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

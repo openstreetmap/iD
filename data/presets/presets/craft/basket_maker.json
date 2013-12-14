@@ -1,0 +1,23 @@
+{
+    "name": "Basket Maker",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "basket",
+        "basketry",
+        "basket maker",
+        "basket weaver"
+    ],
+    "tags": {
+        "craft": "basket_maker"
+    },
+    "icon": "art-gallery",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

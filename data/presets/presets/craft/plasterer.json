@@ -1,0 +1,20 @@
+{
+    "name": "Plasterer",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "plasterer"
+    ],
+    "tags": {
+        "craft": "plasterer"
+    },
+    "icon": "marker-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

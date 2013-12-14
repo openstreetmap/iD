@@ -1,0 +1,20 @@
+{
+    "name": "Boat Builder",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "boat builder"
+    ],
+    "tags": {
+        "craft": "boatbuilder"
+    },
+    "icon": "marker-stroked",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}

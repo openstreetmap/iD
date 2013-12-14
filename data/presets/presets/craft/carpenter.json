@@ -1,0 +1,21 @@
+{
+    "name": "Carpenter",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "carpenter",
+        "woodworker"
+    ],
+    "tags": {
+        "craft": "carpenter"
+    },
+    "icon": "logging",
+    "fields": [
+        "building_area",
+        "address",
+        "operator",
+        "opening_hours"
+    ]
+}
