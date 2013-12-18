@@ -128,7 +128,8 @@
             "waterway/river",
             "waterway/stream",
             "waterway/canal",
-            "waterway/ditch"
+            "waterway/ditch",
+            "waterway/drain"
         ]
     }
 }

@@ -834,6 +834,9 @@
             "tree_type": {
                 "label": "Type"
             },
+            "tunnel": {
+                "label": "Tunnel"
+            },
             "vending": {
                 "label": "Type of Goods"
             },

@@ -1,5 +1,8 @@
 {
     "icon": "waterway-stream",
+    "fields": [
+        "tunnel"
+    ],
     "geometry": [
         "line"
     ],

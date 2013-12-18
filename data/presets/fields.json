@@ -761,6 +761,11 @@
         ],
         "label": "Type"
     },
+    "tunnel": {
+        "key": "tunnel",
+        "type": "combo",
+        "label": "Tunnel"
+    },
     "vending": {
         "key": "vending",
         "type": "combo",
