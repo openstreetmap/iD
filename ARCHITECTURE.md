@@ -169,7 +169,7 @@ significantly reducing the work necessary to create a robust tool.
 
 With _modes_, we shift gears from abstract data types and algorithms to the
 parts of the architecture that implement the user interface for iD. Modes are
-manifested in the interface by the four buttons at the top left:
+manifested in the interface by the three buttons at the top left:
 
 ![Mode buttons](docs/img/modes.png)
 
@@ -181,7 +181,8 @@ overwhelming.
 
 iD's user-facing modes consist of a base "Browse" mode, in which you can move
 around the map and select and edit entities, and three geometrically-oriented
-drawing modes: Point, Line, and Area. In the code, these are broken down a
+drawing modes, which are accessible through the mode buttons in the upper
+toolbar: Point, Line, and Area. In the code, these are broken down a
 little bit more. There are separate modes for when an entity is selected
 (`iD.modes.Select`) versus when nothing is selected (`iD.modes.Browse`), and
 each of the geometric modes is split into one mode for starting to draw an
