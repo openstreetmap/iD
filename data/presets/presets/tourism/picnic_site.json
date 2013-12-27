@@ -1,7 +1,7 @@
 {
+    "icon": "park",
     "fields": [
         "operator",
-        "building_area",
         "address"
     ],
     "geometry": [

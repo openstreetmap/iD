@@ -1071,7 +1071,7 @@
                 "terms": "clinic,emergency room,health service,hospice,infirmary,institution,nursing home,rest home,sanatorium,sanitarium,sick bay,surgery,ward"
             },
             "amenity/kindergarten": {
-                "name": "Kindergarten",
+                "name": "Kindergarten Grounds",
                 "terms": "nursery,preschool"
             },
             "amenity/library": {
@@ -1139,7 +1139,7 @@
                 "terms": "bar,cafeteria,café,canteen,chophouse,coffee shop,diner,dining room,dive*,doughtnut shop,drive-in,eatery,eating house,eating place,fast-food place,fish and chips,greasy spoon,grill,hamburger stand,hashery,hideaway,hotdog stand,inn,joint*,luncheonette,lunchroom,night club,outlet*,pizzeria,saloon,soda fountain,watering hole"
             },
             "amenity/school": {
-                "name": "School",
+                "name": "School Grounds",
                 "terms": "academy,alma mater,blackboard,college,department,discipline,establishment,faculty,hall,halls of ivy,institute,institution,jail*,schoolhouse,seminary,university"
             },
             "amenity/shelter": {

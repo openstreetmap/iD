@@ -480,8 +480,8 @@ en:
         name: Hospital
         terms: "<translate with synonyms or related terms for 'Hospital', separated by commas>"
       amenity/kindergarten: 
-        name: Kindergarten
-        terms: "<translate with synonyms or related terms for 'Kindergarten', separated by commas>"
+        name: Kindergarten Grounds
+        terms: "<translate with synonyms or related terms for 'Kindergarten Grounds', separated by commas>"
       amenity/library: 
         name: Library
         terms: "<translate with synonyms or related terms for 'Library', separated by commas>"
@@ -531,8 +531,8 @@ en:
         name: Restaurant
         terms: "<translate with synonyms or related terms for 'Restaurant', separated by commas>"
       amenity/school: 
-        name: School
-        terms: "<translate with synonyms or related terms for 'School', separated by commas>"
+        name: School Grounds
+        terms: "<translate with synonyms or related terms for 'School Grounds', separated by commas>"
       amenity/shelter: 
         name: Shelter
         terms: "<translate with synonyms or related terms for 'Shelter', separated by commas>"
