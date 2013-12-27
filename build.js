@@ -158,7 +158,7 @@ function generatePresets() {
         for (var key in preset.tags) break;
         var value = preset.tags[key];
 
-        if (['highway', 'footway', 'railway', 'type'].indexOf(key) === -1) {
+        if (['type'].indexOf(key) === -1) {
             if (preset.geometry.indexOf('area') >= 0) {
                 areaKeys[key] = areaKeys[key] || {};
             } else if (key in areaKeys && value !== '*') {
