@@ -133,6 +133,8 @@ en:
         label: Denotation
       description: 
         label: Description
+      electrified: 
+        label: Electrification
       elevation: 
         label: Elevation
       emergency: 
@@ -148,6 +150,8 @@ en:
         label: Type
       fixme: 
         label: Fix Me
+      gauge: 
+        label: Gauge
       generator/method: 
         label: Method
       generator/source: 
@@ -1322,6 +1326,9 @@ en:
       railway/disused: 
         name: Disused Railway
         terms: "<translate with synonyms or related terms for 'Disused Railway', separated by commas>"
+      railway/funicular: 
+        name: Funicular
+        terms: "<translate with synonyms or related terms for 'Funicular', separated by commas>"
       railway/halt: 
         name: Railway Halt
         terms: "<translate with synonyms or related terms for 'Railway Halt', separated by commas>"
@@ -1331,6 +1338,9 @@ en:
       railway/monorail: 
         name: Monorail
         terms: "<translate with synonyms or related terms for 'Monorail', separated by commas>"
+      railway/narrow_gauge: 
+        name: Narrow Gauge Rail
+        terms: "<translate with synonyms or related terms for 'Narrow Gauge Rail', separated by commas>"
       railway/platform: 
         name: Railway Platform
         terms: "<translate with synonyms or related terms for 'Railway Platform', separated by commas>"

@@ -4,13 +4,16 @@
         "line"
     ],
     "tags": {
-        "railway": "rail"
+        "railway": "narrow_gauge"
     },
     "fields": [
         "structure",
         "gauge",
         "electrified"
     ],
-    "terms": [],
-    "name": "Rail"
+    "terms": [
+        "narrow gauge railway",
+        "narrow gauge railroad"
+    ],
+    "name": "Narrow Gauge Rail"
 }
