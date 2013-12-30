@@ -293,6 +293,17 @@
         "type": "textarea",
         "label": "Description"
     },
+    "electrified": {
+        "key": "electrified",
+        "type": "combo",
+        "label": "Electrification",
+        "options": [
+            "contact_line",
+            "rail",
+            "yes",
+            "no"
+        ]
+    },
     "elevation": {
         "key": "ele",
         "type": "number",
@@ -336,6 +347,11 @@
         "key": "fixme",
         "type": "textarea",
         "label": "Fix Me"
+    },
+    "gauge": {
+        "key": "gauge",
+        "type": "combo",
+        "label": "Gauge"
     },
     "generator/method": {
         "key": "generator:method",

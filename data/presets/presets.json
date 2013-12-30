@@ -5505,6 +5505,27 @@
         "terms": [],
         "name": "Disused Railway"
     },
+    "railway/funicular": {
+        "geometry": [
+            "line"
+        ],
+        "terms": [
+            "venicular",
+            "cliff railway",
+            "cable car",
+            "cable railway",
+            "funicular railway"
+        ],
+        "fields": [
+            "structure",
+            "gauge"
+        ],
+        "tags": {
+            "railway": "funicular"
+        },
+        "icon": "railway-rail",
+        "name": "Funicular"
+    },
     "railway/halt": {
         "icon": "rail",
         "geometry": [
@@ -5550,10 +5571,30 @@
             "railway": "monorail"
         },
         "fields": [
-            "structure"
+            "structure",
+            "electrified"
         ],
         "terms": [],
         "name": "Monorail"
+    },
+    "railway/narrow_gauge": {
+        "icon": "railway-rail",
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "railway": "narrow_gauge"
+        },
+        "fields": [
+            "structure",
+            "gauge",
+            "electrified"
+        ],
+        "terms": [
+            "narrow gauge railway",
+            "narrow gauge railroad"
+        ],
+        "name": "Narrow Gauge Rail"
     },
     "railway/platform": {
         "geometry": [
@@ -5576,7 +5617,9 @@
             "railway": "rail"
         },
         "fields": [
-            "structure"
+            "structure",
+            "gauge",
+            "electrified"
         ],
         "terms": [],
         "name": "Rail"
@@ -5600,7 +5643,9 @@
     "railway/subway": {
         "icon": "railway-subway",
         "fields": [
-            "structure"
+            "structure",
+            "gauge",
+            "electrified"
         ],
         "geometry": [
             "line"
@@ -5631,7 +5676,9 @@
             "railway": "tram"
         },
         "fields": [
-            "structure"
+            "structure",
+            "gauge",
+            "electrified"
         ],
         "terms": [
             "streetcar"

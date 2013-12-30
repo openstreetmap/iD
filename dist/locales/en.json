@@ -586,6 +586,9 @@
             "description": {
                 "label": "Description"
             },
+            "electrified": {
+                "label": "Electrification"
+            },
             "elevation": {
                 "label": "Elevation"
             },
@@ -607,6 +610,9 @@
             },
             "fixme": {
                 "label": "Fix Me"
+            },
+            "gauge": {
+                "label": "Gauge"
             },
             "generator/method": {
                 "label": "Method"
@@ -2192,6 +2198,10 @@
                 "name": "Disused Railway",
                 "terms": ""
             },
+            "railway/funicular": {
+                "name": "Funicular",
+                "terms": "venicular,cliff railway,cable car,cable railway,funicular railway"
+            },
             "railway/halt": {
                 "name": "Railway Halt",
                 "terms": "break,interrupt,rest,wait,interruption"
@@ -2203,6 +2213,10 @@
             "railway/monorail": {
                 "name": "Monorail",
                 "terms": ""
+            },
+            "railway/narrow_gauge": {
+                "name": "Narrow Gauge Rail",
+                "terms": "narrow gauge railway,narrow gauge railroad"
             },
             "railway/platform": {
                 "name": "Railway Platform",

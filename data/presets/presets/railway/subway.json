@@ -1,7 +1,9 @@
 {
     "icon": "railway-subway",
     "fields": [
-        "structure"
+        "structure",
+        "gauge",
+        "electrified"
     ],
     "geometry": [
         "line"
