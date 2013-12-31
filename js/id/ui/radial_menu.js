@@ -25,27 +25,34 @@ iD.ui.RadialMenu = function(context, operations) {
         menu.transition()
             .attr('opacity', 1);
 
-        var r = 50,
-            a = Math.PI / 4,
-            a0 = -Math.PI / 4,
-            a1 = a0 + (operations.length - 1) * a;
+        // var r = 50,
+        //     a = Math.PI / 4,
+        //     a0 = -Math.PI / 4,
+        //     a1 = a0 + (operations.length - 1) * a;
+        var step = 40,
+            offset = 40,
+            x0 = 0,
+            x1 = x0 + (operations.length - 1) * step;
 
         menu.append('path')
             .attr('class', 'radial-menu-background')
-            .attr('d', 'M' + r * Math.sin(a0) + ',' +
-                             r * Math.cos(a0) +
-                      ' A' + r + ',' + r + ' 0 ' + (operations.length > 5 ? '1' : '0') + ',0 ' +
-                             (r * Math.sin(a1) + 1e-3) + ',' +
-                             (r * Math.cos(a1) + 1e-3)) // Force positive-length path (#1305)
+            // .attr('d', 'M' + r * Math.sin(a0) + ',' +
+            //                  r * Math.cos(a0) +
+            //           ' A' + r + ',' + r + ' 0 ' + (operations.length > 5 ? '1' : '0') + ',0 ' +
+            //                  (r * Math.sin(a1) + 1e-3) + ',' +
+            //                  (r * Math.cos(a1) + 1e-3)) // Force positive-length path (#1305)
+            .attr('d', 'M' + x0 + ',' + offset + ' L' + x1 + ',' + offset)
             .attr('stroke-width', 50)
             .attr('stroke-linecap', 'round');
 
         var button = menu.selectAll()
             .data(operations)
             .enter().append('g')
+            // .attr('transform', function(d, i) {
+            //     return 'translate(' + r * Math.sin(a0 + i * a) + ',' +
+            //                           r * Math.cos(a0 + i * a) + ')';
             .attr('transform', function(d, i) {
-                return 'translate(' + r * Math.sin(a0 + i * a) + ',' +
-                                      r * Math.cos(a0 + i * a) + ')';
+                return 'translate(' + (x0+(step * i)) + ',' + offset + ')';
             });
 
         button.append('circle')
@@ -72,11 +79,15 @@ iD.ui.RadialMenu = function(context, operations) {
 
         function mouseover(d, i) {
             var rect = context.surfaceRect(),
-                angle = a0 + i * a,
-                top = rect.top + (r + 25) * Math.cos(angle) + center[1] + 'px',
-                left = rect.left + (r + 25) * Math.sin(angle) + center[0] + 'px',
-                bottom = rect.height - (r + 25) * Math.cos(angle) - center[1] + 'px',
-                right = rect.width - (r + 25) * Math.sin(angle) - center[0] + 'px';
+                // angle = a0 + i * a,
+                // top = rect.top + (r + 25) * Math.cos(angle) + center[1] + 'px',
+                // left = rect.left + (r + 25) * Math.sin(angle) + center[0] + 'px',
+                // bottom = rect.height - (r + 25) * Math.cos(angle) - center[1] + 'px',
+                // right = rect.width - (r + 25) * Math.sin(angle) - center[0] + 'px';
+                top = rect.top + center[1] + (offset + 25) + 'px',
+                left = rect.left + center[0] + (i*step) - ((x1-x0)/2) + 'px',
+                bottom = rect.height - center[1] + 'px',
+                right = rect.width - center[0] + 'px';
 
             tooltip
                 .style('top', null)
@@ -86,19 +97,19 @@ iD.ui.RadialMenu = function(context, operations) {
                 .style('display', 'block')
                 .html(iD.ui.tooltipHtml(d.tooltip(), d.keys[0]));
 
-            if (i === 0) {
-                tooltip
-                    .style('right', right)
-                    .style('top', top);
-            } else if (i >= 4) {
+            // if (i === 0) {
+            //     tooltip
+            //         .style('right', right)
+            //         .style('top', top);
+            // } else if (i >= 4) {
+            //     tooltip
+            //         .style('left', left)
+            //         .style('bottom', bottom);
+            // } else {
                 tooltip
                     .style('left', left)
-                    .style('bottom', bottom);
-            } else {
-                tooltip
-                    .style('left', left)
                     .style('top', top);
-            }
+            // }
         }
 
         function mouseout() {
