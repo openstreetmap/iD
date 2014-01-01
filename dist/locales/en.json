@@ -1174,6 +1174,10 @@
                 "name": "Vending Machine",
                 "terms": ""
             },
+            "amenity/veterinary": {
+                "name": "Veterinary",
+                "terms": "pet clinic,veterinarian,animal hospital,pet doctor"
+            },
             "amenity/waste_basket": {
                 "name": "Waste Basket",
                 "terms": "rubbish bin,litter bin,trash can,garbage can"
