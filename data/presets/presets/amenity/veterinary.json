@@ -1,0 +1,17 @@
+{
+    "fields": [],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "pet clinic",
+        "veterinarian",
+        "animal hospital",
+        "pet doctor"
+    ],
+    "tags": {
+        "amenity": "veterinary"
+    },
+    "name": "Veterinary"
+}
