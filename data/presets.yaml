@@ -876,6 +876,9 @@ en:
       highway/residential: 
         name: Residential Road
         terms: "<translate with synonyms or related terms for 'Residential Road', separated by commas>"
+      highway/rest_area: 
+        name: Rest Area
+        terms: "<translate with synonyms or related terms for 'Rest Area', separated by commas>"
       highway/road: 
         name: Unknown Road
         terms: "<translate with synonyms or related terms for 'Unknown Road', separated by commas>"
@@ -903,6 +906,9 @@ en:
       highway/service/parking_aisle: 
         name: Parking Aisle
         terms: "<translate with synonyms or related terms for 'Parking Aisle', separated by commas>"
+      highway/services: 
+        name: Service Area
+        terms: "<translate with synonyms or related terms for 'Service Area', separated by commas>"
       highway/steps: 
         name: Steps
         terms: "<translate with synonyms or related terms for 'Steps', separated by commas>"

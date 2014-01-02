@@ -3373,6 +3373,22 @@
         "terms": [],
         "name": "Residential Road"
     },
+    "highway/rest_area": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "highway": "rest_area"
+        },
+        "terms": [
+            "rest stop",
+            "turnout",
+            "lay-by"
+        ],
+        "name": "Rest Area"
+    },
     "highway/road": {
         "icon": "highway-road",
         "fields": [
@@ -3532,6 +3548,22 @@
             "service": "parking_aisle"
         },
         "name": "Parking Aisle"
+    },
+    "highway/services": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "highway": "services"
+        },
+        "terms": [
+            "services",
+            "travel plaza",
+            "service station"
+        ],
+        "name": "Service Area"
     },
     "highway/steps": {
         "fields": [
