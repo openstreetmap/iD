@@ -2773,6 +2773,8 @@ img.wiki-image {
 .radial-menu-background {
     stroke: black;
     stroke-opacity: 0.5;
+    fill: black;
+    fill-opacity: 0.5;
 }
 
 .radial-menu-item {

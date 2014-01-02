@@ -25,34 +25,85 @@ iD.ui.RadialMenu = function(context, operations) {
         menu.transition()
             .attr('opacity', 1);
 
+//radial
         // var r = 50,
         //     a = Math.PI / 4,
         //     a0 = -Math.PI / 4,
         //     a1 = a0 + (operations.length - 1) * a;
-        var step = 40,
-            offset = 40,
-            x0 = 0,
-            x1 = x0 + (operations.length - 1) * step;
 
-        menu.append('path')
+//linear
+        // var spacing = 40,
+        //     offset = 40,
+        //     items = operations.length,
+        //     x0 = 0,
+        //     x1 = x0 + (items - 1) * spacing;
+
+//boxy
+        var spacing = 40,
+            xoffset = 10,
+            yoffset = 10,
+            items = operations.length,
+            cols, rows;
+
+        if (items <= 5) {
+            cols = items;
+        } else if ([7, 8, 11, 12].indexOf(items) != -1) {
+            cols = 4;
+        } else if ([6, 9].indexOf(items) != -1) {
+            cols = 3;
+        } else {
+            cols = 5;
+        }
+// to test column packing
+// cols = Math.min(items, 3);
+        rows = Math.ceil(items / cols);
+
+//radial
+        // menu.append('path')
+        //     .attr('class', 'radial-menu-background')
+        //     .attr('d', 'M' + r * Math.sin(a0) + ',' +
+        //                      r * Math.cos(a0) +
+        //               ' A' + r + ',' + r + ' 0 ' + (operations.length > 5 ? '1' : '0') + ',0 ' +
+        //                      (r * Math.sin(a1) + 1e-3) + ',' +
+        //                      (r * Math.cos(a1) + 1e-3)) // Force positive-length path (#1305)
+        //     .attr('stroke-width', 50)
+        //     .attr('stroke-linecap', 'round');
+//linear
+        // menu.append('path')
+        //     .attr('class', 'radial-menu-background')
+        //     .attr('d', 'M' + x0 + ',' + offset + ' L' + x1 + ',' + offset)
+        //     .attr('stroke-width', 50)
+        //     .attr('stroke-linecap', 'round');
+//boxy
+        menu.append('rect')
             .attr('class', 'radial-menu-background')
-            // .attr('d', 'M' + r * Math.sin(a0) + ',' +
-            //                  r * Math.cos(a0) +
-            //           ' A' + r + ',' + r + ' 0 ' + (operations.length > 5 ? '1' : '0') + ',0 ' +
-            //                  (r * Math.sin(a1) + 1e-3) + ',' +
-            //                  (r * Math.cos(a1) + 1e-3)) // Force positive-length path (#1305)
-            .attr('d', 'M' + x0 + ',' + offset + ' L' + x1 + ',' + offset)
-            .attr('stroke-width', 50)
-            .attr('stroke-linecap', 'round');
+            .attr('x', xoffset)
+            .attr('y', yoffset)
+            .attr('width', cols * spacing)
+            .attr('height', rows * spacing)
+            .attr('rx', spacing / 2)
+            .attr('ry', spacing / 2)
 
         var button = menu.selectAll()
             .data(operations)
             .enter().append('g')
+//radial
             // .attr('transform', function(d, i) {
             //     return 'translate(' + r * Math.sin(a0 + i * a) + ',' +
             //                           r * Math.cos(a0 + i * a) + ')';
+            // });
+//linear
+            // .attr('transform', function(d, i) {
+            //     return 'translate(' + (x0+(spacing * i)) + ',' + offset + ')';
+            // });
+//boxy
             .attr('transform', function(d, i) {
-                return 'translate(' + (x0+(step * i)) + ',' + offset + ')';
+                var col = (i % cols) + 1,
+                    row = Math.trunc(i / cols) + 1,
+                    x = (spacing * col) - (spacing / 2) + xoffset,
+                    y = (spacing * row) - (spacing / 2) + yoffset;
+                // console.info('i=' + i + ', row=' + row + ', col=' + col + ', x=' + x + ', y=' + y);
+                return 'translate(' + x + ',' + y + ')';
             });
 
         button.append('circle')
@@ -79,15 +130,18 @@ iD.ui.RadialMenu = function(context, operations) {
 
         function mouseover(d, i) {
             var rect = context.surfaceRect(),
+//radial
                 // angle = a0 + i * a,
                 // top = rect.top + (r + 25) * Math.cos(angle) + center[1] + 'px',
                 // left = rect.left + (r + 25) * Math.sin(angle) + center[0] + 'px',
                 // bottom = rect.height - (r + 25) * Math.cos(angle) - center[1] + 'px',
                 // right = rect.width - (r + 25) * Math.sin(angle) - center[0] + 'px';
-                top = rect.top + center[1] + (offset + 25) + 'px',
-                left = rect.left + center[0] + (i*step) - ((x1-x0)/2) + 'px',
-                bottom = rect.height - center[1] + 'px',
-                right = rect.width - center[0] + 'px';
+//linear
+                // top = rect.top + center[1] + (offset + 25) + 'px',
+                // left = rect.left + center[0] + (i*spacing) - ((x1-x0)/2) + 'px'
+//boxy
+                top = rect.top + center[1] + (rows * spacing) + yoffset + 'px',
+                left = rect.left + center[0] + xoffset + 'px';
 
             tooltip
                 .style('top', null)
@@ -97,6 +151,7 @@ iD.ui.RadialMenu = function(context, operations) {
                 .style('display', 'block')
                 .html(iD.ui.tooltipHtml(d.tooltip(), d.keys[0]));
 
+//radial tooltip positioning
             // if (i === 0) {
             //     tooltip
             //         .style('right', right)
