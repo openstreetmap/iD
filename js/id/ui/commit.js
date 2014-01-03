@@ -195,7 +195,9 @@ iD.ui.Commit = function(context) {
         function warningClick(d) {
             if (d.entity) {
                 context.map().zoomTo(d.entity);
-                context.enter(iD.modes.Select(context, [d.entity.id]));
+                context.enter(
+                    iD.modes.Select(context, [d.entity.id])
+                        .suppressMenu(true));
             }
         }
     }
