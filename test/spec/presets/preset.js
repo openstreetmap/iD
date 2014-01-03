@@ -61,7 +61,7 @@ describe('iD.presets.Preset', function() {
     describe('#applyTags', function() {
         it("adds match tags", function() {
             var preset = iD.presets.Preset('test', {tags: {highway: 'residential'}});
-            expect(preset.applyTags({}, 'area')).to.eql({highway: 'residential'});
+            expect(preset.applyTags({}, 'line')).to.eql({highway: 'residential'});
         });
 
         it("adds wildcard tags with value 'yes'", function() {
@@ -84,6 +84,18 @@ describe('iD.presets.Preset', function() {
             var field = iD.presets.Field('field', {key: 'building', geometry: 'area', default: 'yes'}),
                 preset = iD.presets.Preset('test', {fields: ['field']}, {field: field});
             expect(preset.applyTags({}, 'point')).to.eql({});
+        });
+
+        context("with an area preset whose primary tag is not in areaKeys", function() {
+            var preset = iD.presets.Preset('test', {geometry: ['line', 'area'], tags: {highway: 'pedestrian'}});
+
+            it("adds no area=yes to non-areas", function() {
+                expect(preset.applyTags({}, 'line')).to.eql({highway: 'pedestrian'});
+            });
+
+            it("adds area=yes to areas", function() {
+                expect(preset.applyTags({}, 'area')).to.eql({highway: 'pedestrian', area: 'yes'});
+            });
         });
     });
 
