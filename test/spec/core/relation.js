@@ -44,6 +44,12 @@ describe('iD.Relation', function () {
 
             expect(r.extent(graph)).to.eql([[0, 0], [0, 0]])
         });
+
+        it("does not error on self-referencing relations", function () {
+            var r = iD.Relation();
+            r = r.addMember({id: r.id});
+            expect(r.extent(iD.Graph([r]))).to.eql(iD.geo.Extent())
+        });
     });
 
     describe("#geometry", function () {

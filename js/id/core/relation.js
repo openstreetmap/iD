@@ -20,12 +20,15 @@ _.extend(iD.Relation.prototype, {
     type: 'relation',
     members: [],
 
-    extent: function(resolver) {
+    extent: function(resolver, memo) {
         return resolver.transient(this, 'extent', function() {
+            if (memo && memo[this.id]) return iD.geo.Extent();
+            memo = memo || {};
+            memo[this.id] = true;
             return this.members.reduce(function(extent, member) {
                 member = resolver.hasEntity(member.id);
                 if (member) {
-                    return extent.extend(member.extent(resolver));
+                    return extent.extend(member.extent(resolver, memo));
                 } else {
                     return extent;
                 }
