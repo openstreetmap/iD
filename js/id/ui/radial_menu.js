@@ -108,7 +108,9 @@ iD.ui.RadialMenu = function(context, operations) {
 
     radialMenu.close = function() {
         if (menu) {
-            menu.transition()
+            menu
+                .style('pointer-events', 'none')
+                .transition()
                 .attr('opacity', 0)
                 .remove();
         }
