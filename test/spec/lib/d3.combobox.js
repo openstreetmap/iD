@@ -95,6 +95,13 @@ describe("d3.combobox", function() {
         expect(body.selectAll('.combobox-option').size()).to.equal(0);
     });
 
+    it("shows menu on focus if it would contain at least minItems items", function() {
+        combobox.minItems(1);
+        input.property('value', 'f').call(combobox.data(data));
+        input.node().focus();
+        expect(body.selectAll('.combobox-option').size()).to.equal(1);
+    });
+
     it("shows all entries when clicking on the caret", function() {
         input.property('value', 'foo').call(combobox.data(data));
         happen.mousedown(body.selectAll('.combobox-caret').node());

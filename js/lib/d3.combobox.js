@@ -1,7 +1,8 @@
 d3.combobox = function() {
     var event = d3.dispatch('accept'),
         data = [],
-        suggestions = [];
+        suggestions = [],
+        minItems = 2;
 
     var fetcher = function(val, cb) {
         cb(data.filter(function(d) {
@@ -192,7 +193,7 @@ d3.combobox = function() {
         }
 
         function render() {
-            if (suggestions.length > 1 && document.activeElement === input.node()) {
+            if (suggestions.length >= minItems && document.activeElement === input.node()) {
                 show();
             } else {
                 hide();
@@ -255,6 +256,12 @@ d3.combobox = function() {
     combobox.data = function(_) {
         if (!arguments.length) return data;
         data = _;
+        return combobox;
+    };
+
+    combobox.minItems = function(_) {
+        if (!arguments.length) return minItems;
+        minItems = _;
         return combobox;
     };
 
