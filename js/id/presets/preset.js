@@ -96,7 +96,7 @@ iD.presets.Preset = function(id, preset, fields) {
         // Add area=yes if necessary
         for (k in applyTags) {
             if (geometry === 'area' && !(k in iD.areaKeys))
-                tags['area'] = 'yes';
+                tags.area = 'yes';
             break;
         }
 
