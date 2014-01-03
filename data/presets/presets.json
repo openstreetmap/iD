@@ -629,6 +629,16 @@
             "opening_hours"
         ]
     },
+    "amenity/clock": {
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "amenity": "clock"
+        },
+        "name": "Clock"
+    },
     "amenity/college": {
         "icon": "college",
         "fields": [

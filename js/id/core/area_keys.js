@@ -7,6 +7,7 @@ iD.areaKeys = {
     "amenity": {
         "atm": true,
         "bench": true,
+        "clock": true,
         "drinking_water": true,
         "post_box": true,
         "telephone": true,

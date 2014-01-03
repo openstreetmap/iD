@@ -438,6 +438,9 @@ en:
       amenity/clinic: 
         name: Clinic
         terms: "<translate with synonyms or related terms for 'Clinic', separated by commas>"
+      amenity/clock: 
+        name: Clock
+        terms: "<translate with synonyms or related terms for 'Clock', separated by commas>"
       amenity/college: 
         name: College
         terms: "<translate with synonyms or related terms for 'College', separated by commas>"

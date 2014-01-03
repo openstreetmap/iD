@@ -1014,6 +1014,10 @@
                 "name": "Clinic",
                 "terms": "clinic,medical clinic"
             },
+            "amenity/clock": {
+                "name": "Clock",
+                "terms": ""
+            },
             "amenity/college": {
                 "name": "College",
                 "terms": ""
