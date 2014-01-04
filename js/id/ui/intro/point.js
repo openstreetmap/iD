@@ -120,7 +120,7 @@ iD.ui.intro.point = function(context, reveal) {
             context.history().on('change.intro', deleted);
 
             setTimeout(function() {
-                var node = d3.select('.radial-menu-item-delete').node();
+                var node = d3.select('.edit-menu-item-delete').node();
                 var pointBox = iD.ui.intro.pad(node.getBoundingClientRect(), 50, context);
                 reveal(pointBox, t('intro.points.delete'));
             }, 300);

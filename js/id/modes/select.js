@@ -14,7 +14,7 @@ iD.modes.Select = function(context, selectedIDs) {
                 .selectedIDs(selectedIDs)
                 .behavior],
         inspector,
-        radialMenu,
+        editMenu,
         newFeature = false,
         suppressMenu = false;
 
@@ -31,16 +31,16 @@ iD.modes.Select = function(context, selectedIDs) {
         var entity = singular();
 
         if (entity && entity.type === 'node') {
-            radialMenu.center(context.projection(entity.loc));
+            editMenu.center(context.projection(entity.loc));
         } else {
-            radialMenu.center(context.mouse());
+            editMenu.center(context.mouse());
         }
     }
 
     function showMenu() {
         context.surface()
-            .call(radialMenu.close)
-            .call(radialMenu);
+            .call(editMenu.close)
+            .call(editMenu);
     }
 
     mode.selectedIDs = function() {
@@ -101,7 +101,7 @@ iD.modes.Select = function(context, selectedIDs) {
             .on('redone.select', update);
 
         function update() {
-            context.surface().call(radialMenu.close);
+            context.surface().call(editMenu.close);
 
             if (_.any(selectedIDs, function(id) { return !context.hasEntity(id); })) {
                 // Exit mode if selected entity gets undone
@@ -110,7 +110,7 @@ iD.modes.Select = function(context, selectedIDs) {
         }
 
         context.map().on('move.select', function() {
-            context.surface().call(radialMenu.close);
+            context.surface().call(editMenu.close);
         });
 
         function dblclick() {
@@ -145,7 +145,7 @@ iD.modes.Select = function(context, selectedIDs) {
         context.map().on('drawn.select', selectElements);
         selectElements();
 
-        radialMenu = iD.ui.RadialMenu(context, operations);
+        editMenu = iD.ui.EditMenu(context, operations);
         var show = d3.event && !suppressMenu;
 
         if (show) {
@@ -183,7 +183,7 @@ iD.modes.Select = function(context, selectedIDs) {
             .on('redone.select', null);
 
         context.surface()
-            .call(radialMenu.close)
+            .call(editMenu.close)
             .on('dblclick.select', null)
             .selectAll('.selected')
             .classed('selected', false);

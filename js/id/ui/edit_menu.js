@@ -1,9 +1,9 @@
-iD.ui.RadialMenu = function(context, operations) {
+iD.ui.EditMenu = function(context, operations) {
     var menu,
         center = [0, 0],
         tooltip;
 
-    var radialMenu = function(selection) {
+    var editMenu = function(selection) {
         if (!operations.length)
             return;
 
@@ -14,31 +14,17 @@ iD.ui.RadialMenu = function(context, operations) {
             if (operation.disabled())
                 return;
             operation();
-            radialMenu.close();
+            editMenu.close();
         }
 
         menu = selection.append('g')
-            .attr('class', 'radial-menu')
+            .attr('class', 'edit-menu')
             .attr('transform', 'translate(' + center + ')')
             .attr('opacity', 0);
 
         menu.transition()
             .attr('opacity', 1);
 
-//radial
-        // var r = 50,
-        //     a = Math.PI / 4,
-        //     a0 = -Math.PI / 4,
-        //     a1 = a0 + (operations.length - 1) * a;
-
-//linear
-        // var spacing = 40,
-        //     offset = 40,
-        //     items = operations.length,
-        //     x0 = 0,
-        //     x1 = x0 + (items - 1) * spacing;
-
-//boxy
         var spacing = 40,
             xoffset = 10,
             yoffset = 10,
@@ -58,25 +44,8 @@ iD.ui.RadialMenu = function(context, operations) {
 // cols = Math.min(items, 3);
         rows = Math.ceil(items / cols);
 
-//radial
-        // menu.append('path')
-        //     .attr('class', 'radial-menu-background')
-        //     .attr('d', 'M' + r * Math.sin(a0) + ',' +
-        //                      r * Math.cos(a0) +
-        //               ' A' + r + ',' + r + ' 0 ' + (operations.length > 5 ? '1' : '0') + ',0 ' +
-        //                      (r * Math.sin(a1) + 1e-3) + ',' +
-        //                      (r * Math.cos(a1) + 1e-3)) // Force positive-length path (#1305)
-        //     .attr('stroke-width', 50)
-        //     .attr('stroke-linecap', 'round');
-//linear
-        // menu.append('path')
-        //     .attr('class', 'radial-menu-background')
-        //     .attr('d', 'M' + x0 + ',' + offset + ' L' + x1 + ',' + offset)
-        //     .attr('stroke-width', 50)
-        //     .attr('stroke-linecap', 'round');
-//boxy
         menu.append('rect')
-            .attr('class', 'radial-menu-background')
+            .attr('class', 'edit-menu-background')
             .attr('x', xoffset)
             .attr('y', yoffset)
             .attr('width', cols * spacing)
@@ -87,27 +56,16 @@ iD.ui.RadialMenu = function(context, operations) {
         var button = menu.selectAll()
             .data(operations)
             .enter().append('g')
-//radial
-            // .attr('transform', function(d, i) {
-            //     return 'translate(' + r * Math.sin(a0 + i * a) + ',' +
-            //                           r * Math.cos(a0 + i * a) + ')';
-            // });
-//linear
-            // .attr('transform', function(d, i) {
-            //     return 'translate(' + (x0+(spacing * i)) + ',' + offset + ')';
-            // });
-//boxy
             .attr('transform', function(d, i) {
                 var col = (i % cols) + 1,
                     row = Math.trunc(i / cols) + 1,
                     x = (spacing * col) - (spacing / 2) + xoffset,
                     y = (spacing * row) - (spacing / 2) + yoffset;
-                // console.info('i=' + i + ', row=' + row + ', col=' + col + ', x=' + x + ', y=' + y);
                 return 'translate(' + x + ',' + y + ')';
             });
 
         button.append('circle')
-            .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
+            .attr('class', function(d) { return 'edit-menu-item edit-menu-item-' + d.id; })
             .attr('r', 15)
             .classed('disabled', function(d) { return d.disabled(); })
             .on('click', click)
@@ -122,7 +80,7 @@ iD.ui.RadialMenu = function(context, operations) {
 
         tooltip = d3.select(document.body)
             .append('div')
-            .attr('class', 'tooltip-inner radial-menu-tooltip');
+            .attr('class', 'tooltip-inner edit-menu-tooltip');
 
         function mousedown() {
             d3.event.stopPropagation(); // https://github.com/openstreetmap/iD/issues/1869
@@ -130,16 +88,6 @@ iD.ui.RadialMenu = function(context, operations) {
 
         function mouseover(d, i) {
             var rect = context.surfaceRect(),
-//radial
-                // angle = a0 + i * a,
-                // top = rect.top + (r + 25) * Math.cos(angle) + center[1] + 'px',
-                // left = rect.left + (r + 25) * Math.sin(angle) + center[0] + 'px',
-                // bottom = rect.height - (r + 25) * Math.cos(angle) - center[1] + 'px',
-                // right = rect.width - (r + 25) * Math.sin(angle) - center[0] + 'px';
-//linear
-                // top = rect.top + center[1] + (offset + 25) + 'px',
-                // left = rect.left + center[0] + (i*spacing) - ((x1-x0)/2) + 'px'
-//boxy
                 top = rect.top + center[1] + (rows * spacing) + yoffset + 'px',
                 left = rect.left + center[0] + xoffset + 'px';
 
@@ -151,7 +99,6 @@ iD.ui.RadialMenu = function(context, operations) {
                 .style('display', 'block')
                 .html(iD.ui.tooltipHtml(d.tooltip(), d.keys[0]));
 
-//radial tooltip positioning
             // if (i === 0) {
             //     tooltip
             //         .style('right', right)
@@ -172,7 +119,7 @@ iD.ui.RadialMenu = function(context, operations) {
         }
     };
 
-    radialMenu.close = function() {
+    editMenu.close = function() {
         if (menu) {
             menu
                 .style('pointer-events', 'none')
@@ -186,11 +133,11 @@ iD.ui.RadialMenu = function(context, operations) {
         }
     };
 
-    radialMenu.center = function(_) {
+    editMenu.center = function(_) {
         if (!arguments.length) return center;
         center = _;
-        return radialMenu;
+        return editMenu;
     };
 
-    return radialMenu;
+    return editMenu;
 };
