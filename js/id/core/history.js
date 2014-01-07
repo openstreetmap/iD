@@ -42,10 +42,7 @@ iD.History = function(context) {
         },
 
         merge: function(entities, extent) {
-            for (var i = 0; i < stack.length; i++) {
-                stack[i].graph.rebase(entities);
-            }
-
+            stack[0].graph.rebase(entities, _.pluck(stack, 'graph'));
             tree.rebase(entities);
 
             dispatch.change(undefined, extent);

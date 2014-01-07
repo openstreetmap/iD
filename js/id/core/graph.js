@@ -12,7 +12,7 @@ iD.Graph = function(other, mutable) {
         this.entities = Object.create({});
         this._parentWays = Object.create({});
         this._parentRels = Object.create({});
-        this.rebase(other || []);
+        this.rebase(other || [], [this]);
     }
 
     this.transients = {};
@@ -95,21 +95,43 @@ iD.Graph.prototype = {
     // is used only during the history operation that merges newly downloaded
     // data into each state. To external consumers, it should appear as if the
     // graph always contained the newly downloaded data.
-    rebase: function(entities) {
+    rebase: function(entities, stack) {
         var base = this.base(),
-            i, k, child, id, keys;
+            i, j, k, id;
 
-        // Merging of data only needed if graph is the base graph
-        if (!this.inherited) {
-            for (i = 0; i < entities.length; i++) {
-                var entity = entities[i];
-                if (!base.entities[entity.id]) {
-                    base.entities[entity.id] = entity;
-                    this._updateCalculated(undefined, entity,
-                        base.parentWays, base.parentRels);
+        for (i = 0; i < entities.length; i++) {
+            var entity = entities[i];
+
+            if (base.entities[entity.id])
+                continue;
+
+            // Merging data into the base graph
+            base.entities[entity.id] = entity;
+            this._updateCalculated(undefined, entity,
+                base.parentWays, base.parentRels);
+
+            // Restore provisionally-deleted nodes that are discovered to have an extant parent
+            if (entity.type === 'way') {
+                for (j = 0; j < entity.nodes.length; j++) {
+                    id = entity.nodes[j];
+                    for (k = 1; k < stack.length; k++) {
+                        var ents = stack[k].entities;
+                        if (ents.hasOwnProperty(id) && ents[id] === undefined) {
+                            delete ents[id];
+                        }
+                    }
                 }
             }
         }
+
+        for (i = 0; i < stack.length; i++) {
+            stack[i]._updateRebased();
+        }
+    },
+
+    _updateRebased: function() {
+        var base = this.base(),
+            i, k, child, id, keys;
 
         keys = Object.keys(this._parentWays);
         for (i = 0; i < keys.length; i++) {
@@ -229,9 +251,7 @@ iD.Graph.prototype = {
     freeze: function() {
         this.frozen = true;
 
-        if (iD.debug) {
-            Object.freeze(this.entities);
-        }
+        // No longer freezing entities here due to in-place updates needed in rebase.
 
         return this;
     },
