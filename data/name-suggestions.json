@@ -1,562 +1,14 @@
 {
     "amenity": {
-        "fuel": {
-            "76": {
-                "count": 289
-            },
-            "Neste": {
-                "count": 195
-            },
-            "BP": {
-                "count": 2411
-            },
-            "Shell": {
-                "count": 8131
-            },
-            "Agip": {
-                "count": 2652
-            },
-            "Migrol": {
-                "count": 65
-            },
-            "Avia": {
-                "count": 876
-            },
-            "Texaco": {
-                "count": 653
-            },
-            "Total": {
-                "count": 2523
-            },
-            "Statoil": {
-                "count": 591
-            },
-            "Esso": {
-                "count": 3580
-            },
-            "Jet": {
-                "count": 437
-            },
-            "Avanti": {
-                "count": 89
-            },
-            "Sainsbury's": {
-                "count": 57
-            },
-            "OMV": {
-                "count": 706
-            },
-            "Aral": {
-                "count": 1331
-            },
-            "Tesco": {
-                "count": 192
-            },
-            "JET": {
-                "count": 179
-            },
-            "Morrisons": {
-                "count": 105
-            },
-            "United": {
-                "count": 88
-            },
-            "Canadian Tire": {
-                "count": 62
-            },
-            "Mobil": {
-                "count": 581
-            },
-            "Caltex": {
-                "count": 967
-            },
-            "Sunoco": {
-                "count": 325
-            },
-            "Q8": {
-                "count": 1152
-            },
-            "ABC": {
-                "count": 80
-            },
-            "Tankstelle": {
-                "count": 115
-            },
-            "ARAL": {
-                "count": 369
-            },
-            "CEPSA": {
-                "count": 1017
-            },
-            "BFT": {
-                "count": 87
-            },
-            "Petron": {
-                "count": 860
-            },
-            "Intermarché": {
-                "count": 422
-            },
-            "Super U": {
-                "count": 123
-            },
-            "Auchan": {
-                "count": 52
-            },
-            "Elf": {
-                "count": 133
-            },
-            "Carrefour": {
-                "count": 197
-            },
-            "Station Service E. Leclerc": {
-                "count": 535
-            },
-            "Shell Express": {
-                "count": 130
-            },
-            "Hess": {
-                "count": 114
-            },
-            "Flying V": {
-                "count": 132
-            },
-            "Conoco": {
-                "count": 174
-            },
-            "bft": {
-                "count": 169
-            },
-            "Gulf": {
-                "count": 190
-            },
-            "PTT": {
-                "count": 175
-            },
-            "St1": {
-                "count": 103
-            },
-            "Teboil": {
-                "count": 118
-            },
-            "HEM": {
-                "count": 219
-            },
-            "GALP": {
-                "count": 588
-            },
-            "OK": {
-                "count": 159
-            },
-            "ÖMV": {
-                "count": 100
-            },
-            "Tinq": {
-                "count": 214
-            },
-            "OKQ8": {
-                "count": 186
-            },
-            "Freie Tankstelle": {
-                "count": 212
-            },
-            "Repsol": {
-                "count": 403
-            },
-            "Westfalen": {
-                "count": 96
-            },
-            "Esso Express": {
-                "count": 83
-            },
-            "Raiffeisenbank": {
-                "count": 116
-            },
-            "Tamoil": {
-                "count": 863
-            },
-            "Engen": {
-                "count": 230
-            },
-            "Sasol": {
-                "count": 55
-            },
-            "Topaz": {
-                "count": 78
-            },
-            "LPG": {
-                "count": 165
-            },
-            "Coop": {
-                "count": 55
-            },
-            "Orlen": {
-                "count": 573
-            },
-            "Oilibya": {
-                "count": 64
-            },
-            "Tango": {
-                "count": 119
-            },
-            "Star": {
-                "count": 315
-            },
-            "Петрол": {
-                "count": 81
-            },
-            "Cepsa": {
-                "count": 79
-            },
-            "OIL!": {
-                "count": 57
-            },
-            "Ultramar": {
-                "count": 120
-            },
-            "Irving": {
-                "count": 81
-            },
-            "Lukoil": {
-                "count": 676
-            },
-            "Petro-Canada": {
-                "count": 474
-            },
-            "7-Eleven": {
-                "count": 435
-            },
-            "Agrola": {
-                "count": 70
-            },
-            "Husky": {
-                "count": 119
-            },
-            "Slovnaft": {
-                "count": 219
-            },
-            "Sheetz": {
-                "count": 111
-            },
-            "Mol": {
-                "count": 57
-            },
-            "Petronas": {
-                "count": 147
-            },
-            "Газпромнефть": {
-                "count": 742
-            },
-            "Лукойл": {
-                "count": 1446
-            },
-            "Elan": {
-                "count": 114
-            },
-            "Роснефть": {
-                "count": 612
-            },
-            "Turmöl": {
-                "count": 57
-            },
-            "Neste A24": {
-                "count": 57
-            },
-            "Marathon": {
-                "count": 167
-            },
-            "Valero": {
-                "count": 341
-            },
-            "Eni": {
-                "count": 215
-            },
-            "Chevron": {
-                "count": 894
-            },
-            "ТНК": {
-                "count": 509
-            },
-            "REPSOL": {
-                "count": 1607
-            },
-            "MOL": {
-                "count": 223
-            },
-            "Bliska": {
-                "count": 149
-            },
-            "Api": {
-                "count": 307
-            },
-            "Arco": {
-                "count": 157
-            },
-            "Pemex": {
-                "count": 381
-            },
-            "Exxon": {
-                "count": 466
-            },
-            "Coles Express": {
-                "count": 104
-            },
-            "Petrom": {
-                "count": 255
-            },
-            "PETRONOR": {
-                "count": 208
-            },
-            "Rompetrol": {
-                "count": 164
-            },
-            "Lotos": {
-                "count": 170
-            },
-            "ОМВ": {
-                "count": 60
-            },
-            "BR": {
-                "count": 86
-            },
-            "Copec": {
-                "count": 499
-            },
-            "Petrobras": {
-                "count": 257
-            },
-            "Liberty": {
-                "count": 52
-            },
-            "IP": {
-                "count": 852
-            },
-            "YPF": {
-                "count": 150
-            },
-            "Erg": {
-                "count": 596
-            },
-            "Eneos": {
-                "count": 96
-            },
-            "Citgo": {
-                "count": 264
-            },
-            "Metano": {
-                "count": 204
-            },
-            "Сургутнефтегаз": {
-                "count": 60
-            },
-            "EKO": {
-                "count": 58
-            },
-            "Eko": {
-                "count": 58
-            },
-            "Indipend.": {
-                "count": 175
-            },
-            "IES": {
-                "count": 61
-            },
-            "TotalErg": {
-                "count": 81
-            },
-            "Cenex": {
-                "count": 112
-            },
-            "ПТК": {
-                "count": 81
-            },
-            "HP": {
-                "count": 60
-            },
-            "Phillips 66": {
-                "count": 202
-            },
-            "CARREFOUR": {
-                "count": 73
-            },
-            "ERG": {
-                "count": 74
-            },
-            "Speedway": {
-                "count": 131
-            },
-            "Benzina": {
-                "count": 68
-            },
-            "Татнефть": {
-                "count": 256
-            },
-            "Terpel": {
-                "count": 261
-            },
-            "WOG": {
-                "count": 168
-            },
-            "Славнефть": {
-                "count": 51
-            },
-            "Seaoil": {
-                "count": 52
-            },
-            "Kwik Trip": {
-                "count": 103
-            },
-            "Wawa": {
-                "count": 78
-            },
-            "Pertamina": {
-                "count": 181
-            },
-            "COSMO": {
-                "count": 66
-            },
-            "АЗС": {
-                "count": 1044
-            },
-            "Z": {
-                "count": 75
-            },
-            "Indian Oil": {
-                "count": 152
-            },
-            "АГЗС": {
-                "count": 483
-            },
-            "INA": {
-                "count": 117
-            },
-            "JOMO": {
-                "count": 64
-            },
-            "Holiday": {
-                "count": 95
-            },
-            "IDEMITSU": {
-                "count": 88
-            },
-            "ENEOS": {
-                "count": 693
-            },
-            "Stacja paliw": {
-                "count": 83
-            },
-            "CAMPSA": {
-                "count": 624
-            },
-            "Casey's General Store": {
-                "count": 173
-            },
-            "Kangaroo": {
-                "count": 57
-            },
-            "Белоруснефть": {
-                "count": 53
-            },
-            "コスモ石油 (COSMO)": {
-                "count": 132
-            },
-            "MEROIL": {
-                "count": 78
-            },
-            "1-2-3": {
-                "count": 71
-            },
-            "出光": {
-                "count": 211,
-                "tags": {
-                    "name:en": "IDEMITSU"
-                }
-            },
-            "НК Альянс": {
-                "count": 88
-            },
-            "Sinclair": {
-                "count": 84
-            },
-            "SPBU": {
-                "count": 51
-            },
-            "Макпетрол": {
-                "count": 109
-            },
-            "Circle K": {
-                "count": 154
-            },
-            "Posto Ipiranga": {
-                "count": 54
-            },
-            "Phoenix": {
-                "count": 143
-            },
-            "Ipiranga": {
-                "count": 77
-            },
-            "OKKO": {
-                "count": 83
-            },
-            "ОККО": {
-                "count": 115
-            },
-            "บางจาก": {
-                "count": 59
-            },
-            "QuikTrip": {
-                "count": 87
-            },
-            "Stewart's": {
-                "count": 62
-            },
-            "Posto BR": {
-                "count": 52
-            },
-            "ป ต ท": {
-                "count": 153
-            },
-            "ปตท": {
-                "count": 88
-            },
-            "ANP": {
-                "count": 75
-            },
-            "Kum & Go": {
-                "count": 82
-            },
-            "Sokimex": {
-                "count": 60
-            },
-            "Tela": {
-                "count": 115
-            },
-            "Укрнафта": {
-                "count": 56
-            },
-            "Татнефтепродукт": {
-                "count": 54
-            },
-            "Afriquia": {
-                "count": 89
-            },
-            "Murphy USA": {
-                "count": 62
-            },
-            "昭和シェル (Showa-shell)": {
-                "count": 94
-            },
-            "CNG": {
-                "count": 75
-            }
-        },
         "pub": {
+            "The Green Man": {
+                "count": 51
+            },
             "Kings Arms": {
                 "count": 67
             },
             "Red Lion": {
-                "count": 201
+                "count": 203
             },
             "The Ship": {
                 "count": 87
@@ -565,13 +17,13 @@
                 "count": 201
             },
             "The White Hart": {
-                "count": 227
+                "count": 228
             },
             "Royal Oak": {
-                "count": 149
+                "count": 147
             },
             "The Red Lion": {
-                "count": 232
+                "count": 231
             },
             "The Kings Arms": {
                 "count": 58
@@ -586,7 +38,7 @@
                 "count": 55
             },
             "The Wheatsheaf": {
-                "count": 118
+                "count": 117
             },
             "The Crown Inn": {
                 "count": 68
@@ -601,22 +53,22 @@
                 "count": 100
             },
             "The White Lion": {
-                "count": 116
+                "count": 118
             },
             "The Bell": {
                 "count": 121
             },
             "The Bull": {
-                "count": 66
+                "count": 67
             },
             "The Plough": {
-                "count": 176
+                "count": 177
             },
             "The George": {
-                "count": 108
+                "count": 109
             },
             "The Royal Oak": {
-                "count": 207
+                "count": 210
             },
             "The Fox": {
                 "count": 76
@@ -631,13 +83,13 @@
                 "count": 51
             },
             "The Crown": {
-                "count": 240
+                "count": 241
             },
             "The Chequers": {
-                "count": 63
+                "count": 64
             },
             "The Swan": {
-                "count": 149
+                "count": 150
             },
             "Rose and Crown": {
                 "count": 79
@@ -646,278 +98,838 @@
                 "count": 68
             },
             "New Inn": {
-                "count": 88
+                "count": 89
             },
             "Royal Hotel": {
-                "count": 53
+                "count": 55
             },
             "Cross Keys": {
-                "count": 58
+                "count": 59
             },
             "The Greyhound": {
-                "count": 97
+                "count": 96
             },
             "The Black Horse": {
-                "count": 93
+                "count": 94
             },
             "The New Inn": {
                 "count": 104
             },
             "Kings Head": {
-                "count": 56
+                "count": 57
             },
             "The Angel": {
-                "count": 54
+                "count": 53
             },
             "The Queens Head": {
                 "count": 51
             },
             "The Ship Inn": {
-                "count": 82
+                "count": 83
+            },
+            "Rose & Crown": {
+                "count": 51
+            },
+            "Queens Head": {
+                "count": 51
             },
             "Irish Pub": {
+                "count": 79
+            }
+        },
+        "fuel": {
+            "76": {
+                "count": 295
+            },
+            "Neste": {
+                "count": 192
+            },
+            "BP": {
+                "count": 2444
+            },
+            "Shell": {
+                "count": 8191
+            },
+            "Agip": {
+                "count": 2652
+            },
+            "Migrol": {
+                "count": 65
+            },
+            "Avia": {
+                "count": 883
+            },
+            "Texaco": {
+                "count": 667
+            },
+            "Total": {
+                "count": 2545
+            },
+            "Statoil": {
+                "count": 589
+            },
+            "Esso": {
+                "count": 3595
+            },
+            "Jet": {
+                "count": 438
+            },
+            "Avanti": {
+                "count": 89
+            },
+            "Sainsbury's": {
+                "count": 57
+            },
+            "OMV": {
+                "count": 706
+            },
+            "Aral": {
+                "count": 1334
+            },
+            "Tesco": {
+                "count": 193
+            },
+            "JET": {
+                "count": 178
+            },
+            "Morrisons": {
+                "count": 108
+            },
+            "United": {
+                "count": 89
+            },
+            "Canadian Tire": {
+                "count": 65
+            },
+            "Mobil": {
+                "count": 586
+            },
+            "Caltex": {
+                "count": 973
+            },
+            "Sunoco": {
+                "count": 336
+            },
+            "Q8": {
+                "count": 1160
+            },
+            "ABC": {
+                "count": 80
+            },
+            "Tankstelle": {
+                "count": 115
+            },
+            "ARAL": {
+                "count": 366
+            },
+            "CEPSA": {
+                "count": 1017
+            },
+            "BFT": {
+                "count": 88
+            },
+            "Petron": {
+                "count": 862
+            },
+            "Intermarché": {
+                "count": 428
+            },
+            "Super U": {
+                "count": 122
+            },
+            "Auchan": {
+                "count": 52
+            },
+            "Elf": {
+                "count": 131
+            },
+            "Carrefour": {
+                "count": 199
+            },
+            "Station Service E. Leclerc": {
+                "count": 534
+            },
+            "Shell Express": {
+                "count": 129
+            },
+            "Hess": {
+                "count": 114
+            },
+            "Flying V": {
+                "count": 132
+            },
+            "bft": {
+                "count": 169
+            },
+            "Gulf": {
+                "count": 192
+            },
+            "PTT": {
+                "count": 176
+            },
+            "St1": {
+                "count": 102
+            },
+            "Teboil": {
+                "count": 120
+            },
+            "HEM": {
+                "count": 218
+            },
+            "GALP": {
+                "count": 593
+            },
+            "OK": {
+                "count": 160
+            },
+            "ÖMV": {
+                "count": 100
+            },
+            "Tinq": {
+                "count": 215
+            },
+            "OKQ8": {
+                "count": 187
+            },
+            "Freie Tankstelle": {
+                "count": 217
+            },
+            "Repsol": {
+                "count": 408
+            },
+            "Westfalen": {
+                "count": 96
+            },
+            "Esso Express": {
+                "count": 87
+            },
+            "Raiffeisenbank": {
+                "count": 115
+            },
+            "Tamoil": {
+                "count": 865
+            },
+            "Engen": {
+                "count": 230
+            },
+            "Sasol": {
+                "count": 58
+            },
+            "Topaz": {
                 "count": 78
+            },
+            "LPG": {
+                "count": 170
+            },
+            "Coop": {
+                "count": 55
+            },
+            "Orlen": {
+                "count": 577
+            },
+            "Oilibya": {
+                "count": 66
+            },
+            "Tango": {
+                "count": 122
+            },
+            "Star": {
+                "count": 315
+            },
+            "Петрол": {
+                "count": 81
+            },
+            "Cepsa": {
+                "count": 82
+            },
+            "OIL!": {
+                "count": 59
+            },
+            "Ultramar": {
+                "count": 124
+            },
+            "Irving": {
+                "count": 86
+            },
+            "Lukoil": {
+                "count": 689
+            },
+            "Petro-Canada": {
+                "count": 477
+            },
+            "7-Eleven": {
+                "count": 447
+            },
+            "Agrola": {
+                "count": 70
+            },
+            "Husky": {
+                "count": 119
+            },
+            "Slovnaft": {
+                "count": 218
+            },
+            "Sheetz": {
+                "count": 113
+            },
+            "Mol": {
+                "count": 56
+            },
+            "Petronas": {
+                "count": 151
+            },
+            "Газпромнефть": {
+                "count": 742
+            },
+            "Лукойл": {
+                "count": 1451
+            },
+            "Elan": {
+                "count": 113
+            },
+            "Роснефть": {
+                "count": 621
+            },
+            "Turmöl": {
+                "count": 57
+            },
+            "Neste A24": {
+                "count": 57
+            },
+            "Marathon": {
+                "count": 170
+            },
+            "Valero": {
+                "count": 348
+            },
+            "Eni": {
+                "count": 219
+            },
+            "Chevron": {
+                "count": 918
+            },
+            "ТНК": {
+                "count": 512
+            },
+            "REPSOL": {
+                "count": 1609
+            },
+            "MOL": {
+                "count": 226
+            },
+            "Bliska": {
+                "count": 150
+            },
+            "Api": {
+                "count": 307
+            },
+            "Arco": {
+                "count": 174
+            },
+            "Pemex": {
+                "count": 385
+            },
+            "Exxon": {
+                "count": 474
+            },
+            "Coles Express": {
+                "count": 108
+            },
+            "Petrom": {
+                "count": 256
+            },
+            "PETRONOR": {
+                "count": 208
+            },
+            "Rompetrol": {
+                "count": 165
+            },
+            "Lotos": {
+                "count": 171
+            },
+            "ОМВ": {
+                "count": 60
+            },
+            "BR": {
+                "count": 102
+            },
+            "Copec": {
+                "count": 500
+            },
+            "Petrobras": {
+                "count": 260
+            },
+            "Liberty": {
+                "count": 53
+            },
+            "IP": {
+                "count": 855
+            },
+            "YPF": {
+                "count": 158
+            },
+            "Erg": {
+                "count": 594
+            },
+            "Eneos": {
+                "count": 96
+            },
+            "Citgo": {
+                "count": 268
+            },
+            "Metano": {
+                "count": 206
+            },
+            "Сургутнефтегаз": {
+                "count": 62
+            },
+            "EKO": {
+                "count": 58
+            },
+            "Eko": {
+                "count": 58
+            },
+            "Indipend.": {
+                "count": 175
+            },
+            "IES": {
+                "count": 63
+            },
+            "TotalErg": {
+                "count": 85
+            },
+            "Cenex": {
+                "count": 114
+            },
+            "ПТК": {
+                "count": 81
+            },
+            "HP": {
+                "count": 76
+            },
+            "Phillips 66": {
+                "count": 202
+            },
+            "CARREFOUR": {
+                "count": 73
+            },
+            "ERG": {
+                "count": 75
+            },
+            "Speedway": {
+                "count": 131
+            },
+            "Benzina": {
+                "count": 70
+            },
+            "Татнефть": {
+                "count": 258
+            },
+            "Terpel": {
+                "count": 258
+            },
+            "WOG": {
+                "count": 169
+            },
+            "Seaoil": {
+                "count": 53
+            },
+            "АЗС": {
+                "count": 1048
+            },
+            "Kwik Trip": {
+                "count": 104
+            },
+            "Wawa": {
+                "count": 81
+            },
+            "Pertamina": {
+                "count": 182
+            },
+            "COSMO": {
+                "count": 65
+            },
+            "Z": {
+                "count": 75
+            },
+            "Indian Oil": {
+                "count": 167
+            },
+            "АГЗС": {
+                "count": 486
+            },
+            "INA": {
+                "count": 119
+            },
+            "JOMO": {
+                "count": 63
+            },
+            "Holiday": {
+                "count": 96
+            },
+            "IDEMITSU": {
+                "count": 88
+            },
+            "ENEOS": {
+                "count": 702
+            },
+            "Stacja paliw": {
+                "count": 84
+            },
+            "Bharat Petroleum": {
+                "count": 51
+            },
+            "CAMPSA": {
+                "count": 622
+            },
+            "Casey's General Store": {
+                "count": 179
+            },
+            "Kangaroo": {
+                "count": 57
+            },
+            "Белоруснефть": {
+                "count": 51
+            },
+            "コスモ石油 (COSMO)": {
+                "count": 132
+            },
+            "MEROIL": {
+                "count": 78
+            },
+            "1-2-3": {
+                "count": 71
+            },
+            "Conoco": {
+                "count": 171
+            },
+            "出光": {
+                "count": 214,
+                "tags": {
+                    "name:en": "IDEMITSU"
+                }
+            },
+            "НК Альянс": {
+                "count": 87
+            },
+            "Sinclair": {
+                "count": 86
+            },
+            "SPBU": {
+                "count": 51
+            },
+            "Макпетрол": {
+                "count": 109
+            },
+            "Circle K": {
+                "count": 156
+            },
+            "Posto Ipiranga": {
+                "count": 57
+            },
+            "Phoenix": {
+                "count": 143
+            },
+            "Ipiranga": {
+                "count": 83
+            },
+            "OKKO": {
+                "count": 83
+            },
+            "ОККО": {
+                "count": 116
+            },
+            "บางจาก": {
+                "count": 59
+            },
+            "QuikTrip": {
+                "count": 92
+            },
+            "Stewart's": {
+                "count": 62
+            },
+            "Posto BR": {
+                "count": 58
+            },
+            "ป ต ท": {
+                "count": 153
+            },
+            "ปตท": {
+                "count": 88
+            },
+            "ANP": {
+                "count": 77
+            },
+            "Kum & Go": {
+                "count": 84
+            },
+            "Sokimex": {
+                "count": 61
+            },
+            "Tela": {
+                "count": 115
+            },
+            "Укрнафта": {
+                "count": 57
+            },
+            "Татнефтепродукт": {
+                "count": 54
+            },
+            "Afriquia": {
+                "count": 88
+            },
+            "Murphy USA": {
+                "count": 62
+            },
+            "昭和シェル (Showa-shell)": {
+                "count": 94
+            },
+            "CNG": {
+                "count": 79
             }
         },
         "fast_food": {
             "Quick": {
-                "count": 481
+                "count": 482
             },
             "McDonald's": {
-                "count": 11958,
+                "count": 12049,
                 "tags": {
                     "cuisine": "burger"
                 }
             },
             "Subway": {
-                "count": 5292,
+                "count": 5378,
                 "tags": {
                     "cuisine": "sandwich"
                 }
             },
             "Burger King": {
-                "count": 3542,
+                "count": 3594,
                 "tags": {
                     "cuisine": "burger"
                 }
             },
             "Ali Baba": {
-                "count": 58
+                "count": 59
             },
             "Hungry Jacks": {
-                "count": 164,
+                "count": 170,
                 "tags": {
                     "cuisine": "burger"
                 }
             },
             "Red Rooster": {
-                "count": 146
+                "count": 147
             },
             "KFC": {
-                "count": 3065,
+                "count": 3093,
                 "tags": {
                     "cuisine": "chicken"
                 }
             },
             "Domino's Pizza": {
-                "count": 926,
+                "count": 935,
                 "tags": {
                     "cuisine": "pizza"
                 }
             },
             "Chowking": {
-                "count": 140
+                "count": 141
             },
             "Jollibee": {
-                "count": 388
+                "count": 390
             },
             "Hesburger": {
                 "count": 99
             },
             "肯德基": {
-                "count": 83
+                "count": 84
             },
             "Wendy's": {
-                "count": 1534,
+                "count": 1554,
                 "tags": {
                     "cuisine": "burger"
                 }
             },
             "Tim Hortons": {
-                "count": 294
+                "count": 304
             },
             "Steers": {
-                "count": 139
+                "count": 143
             },
             "Hardee's": {
-                "count": 249,
+                "count": 253,
                 "tags": {
                     "cuisine": "burger"
                 }
             },
             "Arby's": {
-                "count": 741
+                "count": 747
             },
             "A&W": {
-                "count": 262
+                "count": 268
             },
             "Dairy Queen": {
-                "count": 744
+                "count": 752
             },
             "Hallo Pizza": {
-                "count": 78
+                "count": 76
             },
             "Fish & Chips": {
-                "count": 83
+                "count": 85
             },
             "Harvey's": {
-                "count": 86
+                "count": 88
             },
             "麥當勞": {
                 "count": 55
             },
             "Pizza Pizza": {
-                "count": 202
+                "count": 203
             },
             "Kotipizza": {
                 "count": 75
             },
             "Jack in the Box": {
-                "count": 526,
+                "count": 530,
                 "tags": {
                     "cuisine": "burger"
                 }
             },
             "Istanbul": {
-                "count": 54
+                "count": 56
             },
             "Kochlöffel": {
                 "count": 68
             },
             "Döner": {
-                "count": 223
+                "count": 227
             },
             "Telepizza": {
-                "count": 189
+                "count": 190
             },
             "Sibylla": {
                 "count": 60
             },
             "Carl's Jr.": {
-                "count": 279,
+                "count": 287,
                 "tags": {
                     "cuisine": "burger"
                 }
             },
             "Quiznos": {
-                "count": 258,
+                "count": 261,
                 "tags": {
                     "cuisine": "sandwich"
                 }
             },
             "Wimpy": {
-                "count": 135
+                "count": 136
             },
             "Sonic": {
-                "count": 526,
+                "count": 538,
                 "tags": {
                     "cuisine": "burger"
                 }
             },
             "Taco Bell": {
-                "count": 1350
+                "count": 1367
             },
             "Pizza Nova": {
                 "count": 58
             },
+            "Papa John's": {
+                "count": 289,
+                "tags": {
+                    "cuisine": "pizza"
+                }
+            },
             "Nordsee": {
-                "count": 157
+                "count": 158
             },
             "Mr. Sub": {
                 "count": 104
             },
             "Kebab": {
-                "count": 173
+                "count": 176
             },
             "Макдоналдс": {
-                "count": 315,
+                "count": 316,
                 "tags": {
                     "name:en": "McDonald's"
                 }
             },
             "Asia Imbiss": {
-                "count": 105
+                "count": 107
             },
             "Imbiss": {
-                "count": 177
+                "count": 183
             },
             "Chipotle": {
-                "count": 269,
+                "count": 275,
                 "tags": {
                     "cuisine": "mexican"
                 }
             },
             "マクドナルド": {
-                "count": 658,
+                "count": 668,
                 "tags": {
                     "name:en": "McDonald's",
                     "cuisine": "burger"
                 }
             },
             "In-N-Out Burger": {
-                "count": 57
+                "count": 58
+            },
+            "Jimmy John's": {
+                "count": 126
             },
             "Jamba Juice": {
-                "count": 61
+                "count": 63
             },
             "Робин Сдобин": {
-                "count": 75
+                "count": 81
             },
             "Baskin Robbins": {
                 "count": 69
             },
             "ケンタッキーフライドチキン": {
-                "count": 159,
+                "count": 162,
                 "tags": {
                     "name:en": "KFC",
                     "cuisine": "chicken"
                 }
             },
             "吉野家": {
-                "count": 178
+                "count": 183
             },
             "Taco Time": {
-                "count": 83
+                "count": 85
             },
             "松屋": {
-                "count": 249,
+                "count": 262,
                 "tags": {
                     "name:en": "Matsuya"
                 }
             },
-            "Papa John's": {
-                "count": 283,
-                "tags": {
-                    "cuisine": "pizza"
-                }
-            },
             "Little Caesars": {
-                "count": 64
+                "count": 65
             },
             "El Pollo Loco": {
-                "count": 60
+                "count": 62
             },
             "Del Taco": {
-                "count": 137
+                "count": 139
             },
             "White Castle": {
                 "count": 77
             },
             "Boston Market": {
-                "count": 62
+                "count": 63
             },
             "Chick-fil-A": {
-                "count": 224,
+                "count": 236,
                 "tags": {
                     "cuisine": "chicken"
                 }
@@ -925,38 +937,35 @@
             "Panda Express": {
                 "count": 225
             },
-            "Jimmy John's": {
-                "count": 123
-            },
             "Whataburger": {
-                "count": 149
+                "count": 152
             },
             "Taco John's": {
-                "count": 70
+                "count": 72
             },
             "Теремок": {
-                "count": 63
+                "count": 65
             },
             "Culver's": {
-                "count": 425
+                "count": 426
             },
             "Five Guys": {
-                "count": 129
+                "count": 130
             },
             "Church's Chicken": {
                 "count": 93
             },
             "Popeye's": {
-                "count": 149,
+                "count": 151,
                 "tags": {
                     "cuisine": "chicken"
                 }
             },
             "Long John Silver's": {
-                "count": 78
+                "count": 80
             },
             "Pollo Campero": {
-                "count": 62
+                "count": 61
             },
             "すき家": {
                 "count": 264,
@@ -965,111 +974,111 @@
                 }
             },
             "モスバーガー": {
-                "count": 248,
+                "count": 252,
                 "tags": {
                     "name:en": "MOS BURGER"
                 }
             },
             "Русский Аппетит": {
-                "count": 66
+                "count": 67
             },
             "なか卯": {
-                "count": 54
+                "count": 56
             }
         },
         "restaurant": {
             "Pizza Hut": {
-                "count": 1074
+                "count": 1099
             },
             "Little Chef": {
-                "count": 66
+                "count": 64
             },
             "Adler": {
-                "count": 156
+                "count": 158
             },
             "Zur Krone": {
                 "count": 91
             },
             "Deutsches Haus": {
-                "count": 89
+                "count": 91
             },
             "Krone": {
                 "count": 173
             },
             "Akropolis": {
-                "count": 148
+                "count": 150
             },
             "Schützenhaus": {
                 "count": 126
             },
-            "T.G.I. Friday's": {
-                "count": 51
+            "TGI Friday's": {
+                "count": 198
             },
             "Kreuz": {
-                "count": 74
+                "count": 73
             },
             "Waldschänke": {
-                "count": 55
+                "count": 56
             },
             "La Piazza": {
-                "count": 68
+                "count": 69
             },
             "Lamm": {
-                "count": 67
+                "count": 68
             },
             "Zur Sonne": {
-                "count": 72
+                "count": 73
             },
             "Zur Linde": {
-                "count": 201
+                "count": 204
             },
             "Poseidon": {
-                "count": 110
+                "count": 111
             },
             "Shanghai": {
                 "count": 81
             },
             "Red Lobster": {
-                "count": 217
+                "count": 224
             },
             "Zum Löwen": {
-                "count": 82
-            },
-            "Swiss Chalet": {
-                "count": 104
-            },
-            "Olympia": {
-                "count": 76
-            },
-            "Wagamama": {
-                "count": 58
-            },
-            "Frankie & Benny's": {
-                "count": 59
-            },
-            "Hooters": {
-                "count": 99
-            },
-            "Sternen": {
-                "count": 77
-            },
-            "Hirschen": {
                 "count": 81
             },
+            "Swiss Chalet": {
+                "count": 105
+            },
+            "Olympia": {
+                "count": 77
+            },
+            "Wagamama": {
+                "count": 59
+            },
+            "Frankie & Benny's": {
+                "count": 62
+            },
+            "Hooters": {
+                "count": 101
+            },
+            "Sternen": {
+                "count": 76
+            },
+            "Hirschen": {
+                "count": 82
+            },
             "Papa John's": {
-                "count": 55,
+                "count": 58,
                 "tags": {
                     "cuisine": "pizza"
                 }
             },
             "Denny's": {
-                "count": 414
+                "count": 422
             },
             "Athen": {
-                "count": 66
+                "count": 67
             },
             "Sonne": {
-                "count": 122
+                "count": 124
             },
             "Hirsch": {
                 "count": 78
@@ -1078,58 +1087,55 @@
                 "count": 149
             },
             "La Cantina": {
-                "count": 53
+                "count": 54
             },
             "Gasthaus Krone": {
-                "count": 54
+                "count": 55
             },
             "El Greco": {
                 "count": 80
             },
             "Gasthof zur Post": {
-                "count": 72
+                "count": 74
             },
             "Nando's": {
-                "count": 228
+                "count": 234
             },
             "Löwen": {
-                "count": 112
+                "count": 114
             },
             "Pizza Express": {
-                "count": 245
+                "count": 250
             },
             "Mandarin": {
-                "count": 65
+                "count": 64
             },
             "Hong Kong": {
-                "count": 81
+                "count": 83
             },
             "Zizzi": {
                 "count": 65
             },
             "Cracker Barrel": {
-                "count": 168
+                "count": 170
             },
             "Rhodos": {
                 "count": 78
             },
-            "Gasthaus Adler": {
-                "count": 51
-            },
             "Lindenhof": {
-                "count": 81
+                "count": 80
             },
             "Milano": {
                 "count": 53
             },
             "Dolce Vita": {
-                "count": 74
+                "count": 75
             },
             "Kirchenwirt": {
                 "count": 81
             },
             "Kantine": {
-                "count": 55
+                "count": 56
             },
             "Ochsen": {
                 "count": 93
@@ -1138,31 +1144,31 @@
                 "count": 59
             },
             "Mykonos": {
-                "count": 58
+                "count": 59
             },
             "Lotus": {
-                "count": 64
+                "count": 66
             },
             "Applebee's": {
-                "count": 493
+                "count": 501
             },
             "Flunch": {
-                "count": 72
+                "count": 71
             },
             "Zur Post": {
                 "count": 116
             },
             "China Town": {
-                "count": 69
+                "count": 71
             },
             "La Dolce Vita": {
-                "count": 67
+                "count": 68
             },
             "Waffle House": {
-                "count": 194
+                "count": 195
             },
             "Delphi": {
-                "count": 87
+                "count": 88
             },
             "Linde": {
                 "count": 102
@@ -1171,16 +1177,19 @@
                 "count": 69
             },
             "Outback Steakhouse": {
-                "count": 195
+                "count": 199
             },
             "Kelsey's": {
-                "count": 56
+                "count": 55
             },
             "Boston Pizza": {
-                "count": 151
+                "count": 153
             },
             "Bella Italia": {
-                "count": 128
+                "count": 129
+            },
+            "Sizzler": {
+                "count": 52
             },
             "Grüner Baum": {
                 "count": 115
@@ -1195,46 +1204,49 @@
                 "count": 64
             },
             "Red Robin": {
-                "count": 175
+                "count": 177
             },
             "Roma": {
-                "count": 60
+                "count": 61
             },
             "San Marco": {
                 "count": 66
             },
             "Hellas": {
-                "count": 53
+                "count": 54
             },
             "La Perla": {
                 "count": 66
             },
+            "Vips": {
+                "count": 52
+            },
             "Panera Bread": {
-                "count": 184
+                "count": 192
             },
             "Da Vinci": {
                 "count": 54
             },
             "Hippopotamus": {
-                "count": 90
+                "count": 92
             },
             "Prezzo": {
                 "count": 71
             },
             "Courtepaille": {
-                "count": 98
+                "count": 99
             },
             "Hard Rock Cafe": {
                 "count": 67
             },
             "Panorama": {
-                "count": 60
+                "count": 61
             },
             "デニーズ": {
                 "count": 77
             },
             "Sportheim": {
-                "count": 56
+                "count": 62
             },
             "餃子の王将": {
                 "count": 54
@@ -1243,43 +1255,40 @@
                 "count": 55
             },
             "Alte Post": {
-                "count": 60
+                "count": 61
             },
             "China Garden": {
-                "count": 62
+                "count": 64
             },
             "Vapiano": {
                 "count": 82
             },
             "Mamma Mia": {
-                "count": 61
+                "count": 60
             },
             "Schwarzer Adler": {
                 "count": 56
             },
             "IHOP": {
-                "count": 298
-            },
-            "Chili's": {
                 "count": 304
             },
-            "Olive Garden": {
-                "count": 255
+            "Chili's": {
+                "count": 308
             },
-            "TGI Friday's": {
-                "count": 145
+            "Olive Garden": {
+                "count": 264
             },
             "Friendly's": {
-                "count": 74
+                "count": 75
             },
             "Buffalo Grill": {
-                "count": 194
+                "count": 196
             },
             "Texas Roadhouse": {
-                "count": 101
+                "count": 103
             },
             "ガスト": {
-                "count": 217,
+                "count": 221,
                 "tags": {
                     "name:en": "Gusto"
                 }
@@ -1288,10 +1297,13 @@
                 "count": 70
             },
             "Mensa": {
-                "count": 91
+                "count": 92
+            },
+            "The Keg": {
+                "count": 52
             },
             "サイゼリヤ": {
-                "count": 87
+                "count": 88
             },
             "La Strada": {
                 "count": 51
@@ -1300,13 +1312,16 @@
                 "count": 89
             },
             "Buffalo Wild Wings": {
-                "count": 157
+                "count": 161
             },
             "Peking": {
                 "count": 56
             },
             "Boston Market": {
-                "count": 59
+                "count": 60
+            },
+            "Jimmy John's": {
+                "count": 53
             },
             "California Pizza Kitchen": {
                 "count": 56
@@ -1315,10 +1330,10 @@
                 "count": 77
             },
             "Golden Corral": {
-                "count": 95
+                "count": 97
             },
             "Perkins": {
-                "count": 99
+                "count": 101
             },
             "Ruby Tuesday": {
                 "count": 146
@@ -1327,13 +1342,13 @@
                 "count": 63
             },
             "Bob Evans": {
-                "count": 110
+                "count": 112
             },
             "바다횟집 (Bada Fish Restaurant)": {
                 "count": 54
             },
             "Mang Inasal": {
-                "count": 81
+                "count": 82
             },
             "Евразия": {
                 "count": 99
@@ -1342,24 +1357,24 @@
                 "count": 57
             },
             "Longhorn Steakhouse": {
-                "count": 61
+                "count": 63
             }
         },
         "bank": {
             "Chase": {
-                "count": 651
+                "count": 667
             },
             "Commonwealth Bank": {
                 "count": 224
             },
             "Citibank": {
-                "count": 259
+                "count": 261
             },
             "HSBC": {
-                "count": 1060
+                "count": 1072
             },
             "Barclays": {
-                "count": 939
+                "count": 947
             },
             "Westpac": {
                 "count": 200
@@ -1371,88 +1386,88 @@
                 "count": 207
             },
             "Lloyds Bank": {
-                "count": 544
+                "count": 543
             },
             "Landbank": {
                 "count": 80
             },
             "Sparkasse": {
-                "count": 4517
+                "count": 4526
             },
             "UCPB": {
-                "count": 88
+                "count": 90
             },
             "PNB": {
-                "count": 242
+                "count": 243
             },
             "Metrobank": {
-                "count": 262
+                "count": 264
             },
             "BDO": {
-                "count": 285
+                "count": 288
             },
             "Volksbank": {
-                "count": 2587
+                "count": 2584
             },
             "BPI": {
-                "count": 399
+                "count": 402
             },
             "Postbank": {
                 "count": 440
             },
             "NatWest": {
-                "count": 614
+                "count": 620
             },
             "Raiffeisenbank": {
-                "count": 2058
+                "count": 2072
             },
             "Yorkshire Bank": {
-                "count": 60
+                "count": 63
             },
             "ABSA": {
-                "count": 89
+                "count": 90
             },
             "Standard Bank": {
                 "count": 101
             },
             "FNB": {
-                "count": 91
+                "count": 92
             },
             "Deutsche Bank": {
-                "count": 840
+                "count": 846
             },
             "SEB": {
                 "count": 131
             },
             "Commerzbank": {
-                "count": 800
+                "count": 802
             },
             "Targobank": {
                 "count": 166
             },
             "ABN AMRO": {
-                "count": 127
+                "count": 129
             },
             "Handelsbanken": {
                 "count": 181
             },
             "Swedbank": {
-                "count": 219
+                "count": 221
             },
             "Kreissparkasse": {
-                "count": 581
+                "count": 587
             },
             "UniCredit Bank": {
-                "count": 392
+                "count": 400
             },
             "Monte dei Paschi di Siena": {
-                "count": 130
+                "count": 131
             },
             "Caja Rural": {
-                "count": 92
+                "count": 94
             },
             "Dresdner Bank": {
-                "count": 73
+                "count": 72
             },
             "Sparda-Bank": {
                 "count": 315
@@ -1464,67 +1479,67 @@
                 "count": 130
             },
             "Bank of Montreal": {
-                "count": 116
+                "count": 115
             },
             "KBC": {
-                "count": 195
+                "count": 198
             },
             "Royal Bank of Scotland": {
-                "count": 108
+                "count": 109
+            },
+            "TSB": {
+                "count": 71
             },
             "US Bank": {
-                "count": 226
+                "count": 234
             },
             "HypoVereinsbank": {
-                "count": 568
+                "count": 565
             },
             "Bank Austria": {
                 "count": 172
             },
             "ING": {
-                "count": 479
+                "count": 482
             },
             "Erste Bank": {
-                "count": 179
+                "count": 180
             },
             "CIBC": {
-                "count": 316
+                "count": 321
             },
             "Scotiabank": {
-                "count": 386
+                "count": 392
             },
             "Caisse d'Épargne": {
-                "count": 836
+                "count": 849
             },
             "Santander": {
-                "count": 1233
+                "count": 1254
             },
             "Bank of Scotland": {
                 "count": 87
             },
-            "TSB": {
-                "count": 69
-            },
             "TD Canada Trust": {
-                "count": 430
+                "count": 437
             },
             "BMO": {
-                "count": 163
+                "count": 166
             },
             "Danske Bank": {
                 "count": 130
             },
             "OTP": {
-                "count": 187
+                "count": 189
             },
             "Crédit Agricole": {
-                "count": 1187
+                "count": 1200
             },
             "LCL": {
-                "count": 519
+                "count": 528
             },
             "VR-Bank": {
-                "count": 423
+                "count": 427
             },
             "ČSOB": {
                 "count": 160
@@ -1533,25 +1548,25 @@
                 "count": 211
             },
             "BNP": {
-                "count": 108
+                "count": 109
             },
             "Royal Bank": {
                 "count": 65
             },
             "Nationwide": {
-                "count": 198
+                "count": 200
             },
             "Halifax": {
-                "count": 215
+                "count": 219
             },
             "BAWAG PSK": {
                 "count": 101
             },
             "National Bank": {
-                "count": 86
+                "count": 84
             },
             "Nedbank": {
-                "count": 75
+                "count": 78
             },
             "First National Bank": {
                 "count": 76
@@ -1560,28 +1575,28 @@
                 "count": 313
             },
             "Rabobank": {
-                "count": 614
+                "count": 613
             },
             "Sparkasse KölnBonn": {
                 "count": 53
             },
             "Tatra banka": {
-                "count": 66
+                "count": 67
             },
             "Berliner Sparkasse": {
                 "count": 61
             },
             "Berliner Volksbank": {
-                "count": 78
+                "count": 77
             },
             "Wells Fargo": {
-                "count": 803
+                "count": 822
             },
             "Credit Suisse": {
-                "count": 69
+                "count": 70
             },
             "Société Générale": {
-                "count": 607
+                "count": 615
             },
             "Osuuspankki": {
                 "count": 73
@@ -1593,40 +1608,40 @@
                 "count": 155
             },
             "Cassa di Risparmio del Veneto": {
-                "count": 61
+                "count": 66
             },
             "BNP Paribas": {
-                "count": 592
+                "count": 598
             },
             "Banque Populaire": {
-                "count": 405
+                "count": 411
             },
             "BNP Paribas Fortis": {
                 "count": 208
             },
             "Banco Popular": {
-                "count": 273
+                "count": 272
             },
             "Bancaja": {
-                "count": 58
+                "count": 55
             },
             "Banesto": {
-                "count": 206
+                "count": 207
             },
             "La Caixa": {
-                "count": 547
+                "count": 553
             },
             "Santander Consumer Bank": {
                 "count": 83
             },
             "BRD": {
-                "count": 185
+                "count": 188
             },
             "BCR": {
-                "count": 138
+                "count": 140
             },
             "Banca Transilvania": {
-                "count": 138
+                "count": 139
             },
             "BW-Bank": {
                 "count": 97
@@ -1641,13 +1656,13 @@
                 "count": 86
             },
             "Ulster Bank": {
-                "count": 86
+                "count": 88
             },
             "Sberbank": {
-                "count": 60
+                "count": 59
             },
             "CIC": {
-                "count": 405
+                "count": 411
             },
             "Bancpost": {
                 "count": 53
@@ -1656,79 +1671,82 @@
                 "count": 114
             },
             "Maybank": {
-                "count": 87
+                "count": 88
             },
             "中国银行": {
-                "count": 69
+                "count": 70
             },
             "Unicredit Banca": {
-                "count": 230
+                "count": 233
             },
             "Crédit Mutuel": {
-                "count": 664
+                "count": 666
             },
             "BBVA": {
-                "count": 605
+                "count": 614
             },
             "Intesa San Paolo": {
                 "count": 62
             },
             "TD Bank": {
-                "count": 183
+                "count": 184
             },
             "Belfius": {
-                "count": 224
+                "count": 227
             },
             "Bank of America": {
-                "count": 863
+                "count": 877
             },
             "RBC": {
-                "count": 222
+                "count": 224
             },
             "Alpha Bank": {
-                "count": 99
+                "count": 103
             },
             "Сбербанк": {
-                "count": 4680
+                "count": 4703
             },
             "Россельхозбанк": {
-                "count": 189
+                "count": 192
             },
             "Crédit du Nord": {
-                "count": 90
+                "count": 91
             },
             "BancoEstado": {
-                "count": 78
+                "count": 79
             },
             "Millennium Bank": {
                 "count": 415
             },
             "State Bank of India": {
-                "count": 139
+                "count": 141
             },
             "Беларусбанк": {
-                "count": 232
+                "count": 233
             },
             "ING Bank Śląski": {
-                "count": 64
+                "count": 65
             },
             "Caixa Geral de Depósitos": {
                 "count": 124
             },
             "Kreissparkasse Köln": {
-                "count": 66
+                "count": 67
+            },
+            "Banco BCI": {
+                "count": 51
             },
             "Banco de Chile": {
-                "count": 95
+                "count": 96
             },
             "ВТБ24": {
-                "count": 311
+                "count": 316
             },
             "UBS": {
-                "count": 130
+                "count": 131
             },
             "PKO BP": {
-                "count": 247
+                "count": 249
             },
             "Chinabank": {
                 "count": 54
@@ -1737,58 +1755,58 @@
                 "count": 57
             },
             "Union Bank": {
-                "count": 115
+                "count": 118
             },
             "China Bank": {
                 "count": 63
             },
             "RCBC": {
-                "count": 120
+                "count": 122
             },
             "Unicaja": {
-                "count": 77
+                "count": 78
             },
             "BBK": {
                 "count": 77
             },
             "Ibercaja": {
-                "count": 65
+                "count": 66
             },
             "RBS": {
-                "count": 139
+                "count": 140
             },
             "Commercial Bank of Ceylon PLC": {
                 "count": 79
             },
             "Bank of Ireland": {
-                "count": 107
+                "count": 108
             },
             "BNL": {
-                "count": 79
+                "count": 80
             },
             "Banco Santander": {
-                "count": 102
+                "count": 106
             },
             "Banco Itaú": {
-                "count": 83
+                "count": 94
             },
             "AIB": {
                 "count": 70
             },
             "BZ WBK": {
-                "count": 71
+                "count": 72
             },
             "Banco do Brasil": {
-                "count": 462
+                "count": 494
             },
             "Caixa Econômica Federal": {
-                "count": 143
+                "count": 155
             },
             "Fifth Third Bank": {
                 "count": 71
             },
             "Banca Popolare di Vicenza": {
-                "count": 75
+                "count": 77
             },
             "Wachovia": {
                 "count": 60
@@ -1797,16 +1815,16 @@
                 "count": 51
             },
             "みずほ銀行": {
-                "count": 71
+                "count": 73
             },
             "BES": {
-                "count": 68
+                "count": 69
             },
             "ICICI Bank": {
-                "count": 84
+                "count": 88
             },
             "HDFC Bank": {
-                "count": 87
+                "count": 89
             },
             "La Banque Postale": {
                 "count": 63
@@ -1818,7 +1836,7 @@
                 "count": 88
             },
             "Bradesco": {
-                "count": 255
+                "count": 272
             },
             "Oldenburgische Landesbank": {
                 "count": 55
@@ -1833,13 +1851,13 @@
                 "count": 85
             },
             "AXA": {
-                "count": 67
+                "count": 68
             },
             "Axis Bank": {
-                "count": 56
+                "count": 58
             },
             "Banco Nación": {
-                "count": 59
+                "count": 61
             },
             "GE Money Bank": {
                 "count": 71
@@ -1848,25 +1866,25 @@
                 "count": 182
             },
             "Белагропромбанк": {
-                "count": 65
+                "count": 67
             },
             "Caja Círculo": {
                 "count": 64
             },
             "Eurobank": {
-                "count": 88
+                "count": 91
             },
             "Banca Intesa": {
                 "count": 55
             },
             "Canara Bank": {
-                "count": 85
+                "count": 86
             },
             "Cajamar": {
-                "count": 64
+                "count": 68
             },
             "Banamex": {
-                "count": 134
+                "count": 138
             },
             "Crédit Mutuel de Bretagne": {
                 "count": 335
@@ -1875,7 +1893,7 @@
                 "count": 81
             },
             "Bank Spółdzielczy": {
-                "count": 146
+                "count": 148
             },
             "Credit Agricole": {
                 "count": 151
@@ -1887,7 +1905,7 @@
                 "count": 62
             },
             "Bank of the West": {
-                "count": 90
+                "count": 91
             },
             "Key Bank": {
                 "count": 144
@@ -1899,7 +1917,7 @@
                 "count": 110
             },
             "ПриватБанк": {
-                "count": 487
+                "count": 492
             },
             "Security Bank": {
                 "count": 72
@@ -1911,37 +1929,40 @@
                 "count": 61
             },
             "Bankia": {
-                "count": 120
+                "count": 127
             },
             "三菱東京UFJ銀行": {
-                "count": 155
+                "count": 159
             },
             "Caixa": {
-                "count": 102
+                "count": 109
             },
             "Banco de Costa Rica": {
-                "count": 63
+                "count": 62
             },
             "SunTrust Bank": {
                 "count": 69
             },
             "Itaú": {
-                "count": 290
+                "count": 313
+            },
+            "PBZ": {
+                "count": 52
             },
             "Bancolombia": {
                 "count": 87
             },
             "Райффайзен Банк Аваль": {
-                "count": 59
+                "count": 62
             },
             "Bancomer": {
-                "count": 98
+                "count": 102
             },
             "Banorte": {
-                "count": 71
+                "count": 74
             },
             "Alior Bank": {
-                "count": 75
+                "count": 76
             },
             "BOC": {
                 "count": 51
@@ -1953,28 +1974,28 @@
                 "count": 57
             },
             "Caja Duero": {
-                "count": 59
+                "count": 58
             },
             "Regions Bank": {
-                "count": 60
-            },
-            "Росбанк": {
-                "count": 175
-            },
-            "Banco Estado": {
-                "count": 69
-            },
-            "BCI": {
                 "count": 61
             },
+            "Росбанк": {
+                "count": 177
+            },
+            "Banco Estado": {
+                "count": 70
+            },
+            "BCI": {
+                "count": 63
+            },
             "SunTrust": {
-                "count": 62
+                "count": 64
             },
             "PNC Bank": {
-                "count": 225
+                "count": 232
             },
             "신한은행": {
-                "count": 217,
+                "count": 218,
                 "tags": {
                     "name:en": "Sinhan Bank"
                 }
@@ -2004,10 +2025,10 @@
                 }
             },
             "Газпромбанк": {
-                "count": 97
+                "count": 99
             },
             "M&T Bank": {
-                "count": 82
+                "count": 85
             },
             "Caja de Burgos": {
                 "count": 52
@@ -2016,10 +2037,10 @@
                 "count": 63
             },
             "УкрСиббанк": {
-                "count": 130
+                "count": 128
             },
             "Ощадбанк": {
-                "count": 310
+                "count": 313
             },
             "Уралсиб": {
                 "count": 84
@@ -2034,19 +2055,22 @@
                 "count": 145
             },
             "Промсвязьбанк": {
-                "count": 87
+                "count": 89
             },
             "三井住友銀行": {
-                "count": 124
+                "count": 126
             },
             "Banco Provincia": {
-                "count": 62
+                "count": 65
             },
             "BB&T": {
-                "count": 134
+                "count": 136
             },
             "Возрождение": {
                 "count": 57
+            },
+            "Capital One": {
+                "count": 52
             },
             "Bank Mandiri": {
                 "count": 59
@@ -2055,22 +2079,22 @@
                 "count": 93
             },
             "Banco G&T Continental": {
-                "count": 61
+                "count": 62
             },
             "Peoples Bank": {
                 "count": 58
             },
-            "СберБанк": {
-                "count": 51
-            },
             "Совкомбанк": {
-                "count": 51
+                "count": 52
             },
             "Provincial": {
-                "count": 52
+                "count": 53
             },
             "Banco de Desarrollo Banrural": {
                 "count": 73
+            },
+            "Banco Bradesco": {
+                "count": 56
             },
             "Bicentenario": {
                 "count": 182
@@ -2082,7 +2106,7 @@
                 }
             },
             "Banesco": {
-                "count": 102
+                "count": 106
             },
             "Mercantil": {
                 "count": 76
@@ -2094,7 +2118,7 @@
                 "count": 77
             },
             "CityCommerce Bank": {
-                "count": 52
+                "count": 53
             },
             "De Venezuela": {
                 "count": 118
@@ -2102,25 +2126,25 @@
         },
         "car_rental": {
             "Europcar": {
-                "count": 282
+                "count": 287
             },
             "Budget": {
-                "count": 84
+                "count": 85
             },
             "Sixt": {
-                "count": 152
+                "count": 151
             },
             "Avis": {
-                "count": 274
+                "count": 276
             },
             "Hertz": {
-                "count": 283
+                "count": 286
             },
             "Enterprise": {
-                "count": 181
+                "count": 184
             },
             "stadtmobil CarSharing-Station": {
-                "count": 150
+                "count": 149
             }
         },
         "pharmacy": {
@@ -2128,28 +2152,28 @@
                 "count": 69
             },
             "Boots": {
-                "count": 815
+                "count": 819
             },
             "Marien-Apotheke": {
-                "count": 313
+                "count": 314
             },
             "Mercury Drug": {
-                "count": 409
+                "count": 412
             },
             "Löwen-Apotheke": {
-                "count": 353
+                "count": 354
             },
             "Superdrug": {
-                "count": 108
+                "count": 109
             },
             "Sonnen-Apotheke": {
-                "count": 307
+                "count": 306
             },
             "Rathaus-Apotheke": {
-                "count": 130
+                "count": 131
             },
             "Engel-Apotheke": {
-                "count": 122
+                "count": 123
             },
             "Hirsch-Apotheke": {
                 "count": 82
@@ -2161,58 +2185,58 @@
                 "count": 292
             },
             "Rosen-Apotheke": {
-                "count": 208
+                "count": 207
             },
             "Stadt-Apotheke": {
-                "count": 248
+                "count": 299
             },
             "Markt-Apotheke": {
-                "count": 161
+                "count": 162
             },
             "Аптека": {
-                "count": 1915
+                "count": 1938
             },
             "Pharmasave": {
-                "count": 62
+                "count": 63
             },
             "Brunnen-Apotheke": {
-                "count": 52
+                "count": 53
             },
             "Shoppers Drug Mart": {
-                "count": 409
+                "count": 417
             },
             "Apotheke am Markt": {
                 "count": 61
             },
             "Alte Apotheke": {
-                "count": 86
+                "count": 87
             },
             "Neue Apotheke": {
                 "count": 110
             },
             "Gintarinė vaistinė": {
-                "count": 100
+                "count": 101
             },
             "Rats-Apotheke": {
                 "count": 83
             },
             "Adler Apotheke": {
-                "count": 306
+                "count": 307
             },
             "Pharmacie Centrale": {
-                "count": 61
+                "count": 63
             },
             "Walgreens": {
-                "count": 1497
+                "count": 1521
             },
             "Rite Aid": {
-                "count": 691
+                "count": 700
             },
             "Apotheke": {
-                "count": 164
+                "count": 163
             },
             "Linden-Apotheke": {
-                "count": 206
+                "count": 209
             },
             "Bahnhof-Apotheke": {
                 "count": 65
@@ -2224,13 +2248,13 @@
                 "count": 59
             },
             "Pharmaprix": {
-                "count": 57
+                "count": 58
             },
             "Farmacias Ahumada": {
                 "count": 102
             },
             "Farmacia Comunale": {
-                "count": 106
+                "count": 108
             },
             "Farmacias Cruz Verde": {
                 "count": 84
@@ -2242,7 +2266,7 @@
                 "count": 52
             },
             "CVS": {
-                "count": 1434
+                "count": 1448
             },
             "Farmacias SalcoBrand": {
                 "count": 132
@@ -2256,17 +2280,20 @@
             "Clicks": {
                 "count": 109
             },
+            "セイジョー": {
+                "count": 51
+            },
             "マツモトキヨシ": {
-                "count": 110
+                "count": 111
             },
             "Вита": {
-                "count": 106
+                "count": 107
             },
             "Радуга": {
-                "count": 69
+                "count": 70
             },
             "サンドラッグ": {
-                "count": 56
+                "count": 57
             },
             "Apteka": {
                 "count": 352
@@ -2275,7 +2302,7 @@
                 "count": 74
             },
             "Ригла": {
-                "count": 110
+                "count": 111
             },
             "Имплозия": {
                 "count": 63
@@ -2287,7 +2314,7 @@
                 "count": 66
             },
             "Ljekarna": {
-                "count": 53
+                "count": 54
             },
             "SalcoBrand": {
                 "count": 90
@@ -2296,7 +2323,7 @@
                 "count": 220
             },
             "Фармакор": {
-                "count": 73
+                "count": 74
             },
             "スギ薬局": {
                 "count": 82
@@ -2314,16 +2341,16 @@
                 "count": 62
             },
             "Farmacity": {
-                "count": 62
+                "count": 65
             },
             "аптека": {
-                "count": 98
+                "count": 100
             },
             "The Generics Pharmacy": {
-                "count": 85
+                "count": 86
             },
             "Farmatodo": {
-                "count": 127
+                "count": 124
             },
             "Фармленд": {
                 "count": 80
@@ -2340,25 +2367,25 @@
         },
         "cafe": {
             "Starbucks": {
-                "count": 3967,
+                "count": 4032,
                 "tags": {
                     "cuisine": "coffee_shop"
                 }
             },
             "Cafeteria": {
-                "count": 75
+                "count": 77
             },
             "Costa": {
-                "count": 568
+                "count": 579
             },
             "Caffè Nero": {
                 "count": 165
             },
             "Кафе": {
-                "count": 239
+                "count": 214
             },
             "Café Central": {
-                "count": 59
+                "count": 60
             },
             "Second Cup": {
                 "count": 190
@@ -2367,7 +2394,7 @@
                 "count": 65
             },
             "Dunkin Donuts": {
-                "count": 387,
+                "count": 393,
                 "tags": {
                     "cuisine": "donut"
                 }
@@ -2376,55 +2403,55 @@
                 "count": 66
             },
             "Coffee Time": {
-                "count": 94
-            },
-            "Eiscafe": {
-                "count": 118
+                "count": 95
             },
             "Cafe Coffee Day": {
                 "count": 104
             },
             "Eiscafe Venezia": {
-                "count": 174
+                "count": 173
             },
             "スターバックス": {
-                "count": 247,
+                "count": 248,
                 "tags": {
                     "name:en": "Starbucks"
                 }
             },
             "Шоколадница": {
-                "count": 135
+                "count": 138
             },
             "Pret A Manger": {
                 "count": 115
             },
             "Столовая": {
-                "count": 330
+                "count": 351
             },
             "ドトール": {
-                "count": 162,
+                "count": 163,
                 "tags": {
                     "name:en": "DOUTOR"
                 }
             },
             "Tchibo": {
-                "count": 96
+                "count": 97
             },
             "Кофе Хауз": {
                 "count": 102
             },
             "Caribou Coffee": {
-                "count": 93
+                "count": 98
+            },
+            "Уют": {
+                "count": 51
             },
             "Шашлычная": {
-                "count": 56
+                "count": 57
             },
             "คาเฟ่ อเมซอน": {
                 "count": 62
             },
             "Traveler's Coffee": {
-                "count": 59
+                "count": 60
             },
             "カフェ・ド・クリエ": {
                 "count": 67,
@@ -2433,27 +2460,7 @@
                 }
             },
             "Cafe Amazon": {
-                "count": 51
-            }
-        },
-        "recycling": {
-            "Recyclinghof": {
-                "count": 133
-            },
-            "Glascontainer": {
-                "count": 148
-            },
-            "Déchèterie": {
-                "count": 246
-            },
-            "Wertstoffhof": {
-                "count": 265
-            },
-            "Glas": {
-                "count": 104
-            },
-            "Altglas": {
-                "count": 98
+                "count": 54
             }
         }
     },
@@ -2463,10 +2470,10 @@
                 "count": 86
             },
             "Morrisons": {
-                "count": 407
+                "count": 408
             },
             "Interspar": {
-                "count": 140
+                "count": 141
             },
             "Merkur": {
                 "count": 107
@@ -2475,88 +2482,88 @@
                 "count": 540
             },
             "Lidl": {
-                "count": 6103
+                "count": 6128
             },
             "EDEKA": {
-                "count": 493
+                "count": 494
             },
             "Coles": {
-                "count": 391
+                "count": 392
             },
             "Iceland": {
-                "count": 300
+                "count": 301
             },
             "Coop": {
-                "count": 1872
+                "count": 1883
             },
             "Tesco": {
-                "count": 1287
+                "count": 1292
             },
             "Woolworths": {
-                "count": 528
+                "count": 530
             },
             "Zielpunkt": {
-                "count": 237
+                "count": 236
             },
             "Nahkauf": {
-                "count": 166
+                "count": 167
             },
             "Billa": {
-                "count": 1410
+                "count": 1415
             },
             "Kaufland": {
-                "count": 982
+                "count": 989
             },
             "Plus": {
-                "count": 126
+                "count": 125
             },
             "ALDI": {
                 "count": 5132
             },
             "Checkers": {
-                "count": 124
+                "count": 126
             },
             "Tesco Metro": {
-                "count": 122
+                "count": 124
             },
             "NP": {
-                "count": 148
+                "count": 149
             },
             "Penny": {
-                "count": 1756
+                "count": 1758
             },
             "Norma": {
-                "count": 1055
+                "count": 1062
             },
             "Asda": {
-                "count": 225
+                "count": 226
             },
             "Netto": {
-                "count": 4312
+                "count": 4331
             },
             "REWE": {
-                "count": 1454
+                "count": 1467
             },
             "Rewe": {
-                "count": 1167
+                "count": 1169
             },
             "Aldi Süd": {
-                "count": 579
+                "count": 590
             },
             "Real": {
-                "count": 251
+                "count": 248
             },
             "Tesco Express": {
-                "count": 385
+                "count": 388
             },
             "King Soopers": {
                 "count": 70
             },
             "Kiwi": {
-                "count": 163
+                "count": 164
             },
             "Edeka": {
-                "count": 1807
+                "count": 1799
             },
             "Pick n Pay": {
                 "count": 238
@@ -2568,34 +2575,34 @@
                 "count": 190
             },
             "Carrefour": {
-                "count": 1601
+                "count": 1614
             },
             "Waitrose": {
-                "count": 255
+                "count": 258
             },
             "Spar": {
-                "count": 2052
+                "count": 2063
             },
             "Hofer": {
-                "count": 438
+                "count": 439
             },
             "M-Preis": {
                 "count": 79
             },
             "LIDL": {
-                "count": 908
+                "count": 915
             },
             "tegut": {
-                "count": 210
+                "count": 209
             },
             "Sainsbury's Local": {
-                "count": 105
+                "count": 109
             },
             "E-Center": {
                 "count": 66
             },
             "Aldi Nord": {
-                "count": 196
+                "count": 197
             },
             "nahkauf": {
                 "count": 81
@@ -2604,16 +2611,16 @@
                 "count": 73
             },
             "Safeway": {
-                "count": 439
+                "count": 398
             },
             "Costco": {
-                "count": 138
+                "count": 145
             },
             "Albert": {
-                "count": 182
+                "count": 183
             },
             "Jumbo": {
-                "count": 187
+                "count": 190
             },
             "Shoprite": {
                 "count": 239
@@ -2622,37 +2629,37 @@
                 "count": 52
             },
             "Penny Market": {
-                "count": 400
+                "count": 409
             },
             "Tesco Extra": {
-                "count": 118
+                "count": 119
             },
             "Albert Heijn": {
-                "count": 455
+                "count": 464
             },
             "IGA": {
-                "count": 344
+                "count": 347
             },
             "Super U": {
-                "count": 471
+                "count": 476
             },
             "Metro": {
-                "count": 255
+                "count": 256
             },
             "Neukauf": {
                 "count": 77
             },
             "Migros": {
-                "count": 437
+                "count": 442
             },
             "Marktkauf": {
-                "count": 129
+                "count": 126
             },
             "Delikatesy Centrum": {
                 "count": 57
             },
             "C1000": {
-                "count": 319
+                "count": 314
             },
             "Hoogvliet": {
                 "count": 52
@@ -2664,64 +2671,64 @@
                 "count": 74
             },
             "Casino": {
-                "count": 258
+                "count": 259
             },
             "Penny Markt": {
-                "count": 460
+                "count": 462
             },
             "Giant": {
-                "count": 192
+                "count": 194
             },
             "COOP Jednota": {
-                "count": 67
+                "count": 69
             },
             "Rema 1000": {
-                "count": 362
+                "count": 364
             },
             "Kaufpark": {
                 "count": 96
             },
             "ALDI SÜD": {
-                "count": 115
+                "count": 114
             },
             "Simply Market": {
-                "count": 317
+                "count": 320
             },
             "Konzum": {
                 "count": 228
             },
             "Carrefour Express": {
-                "count": 322
+                "count": 330
             },
             "Eurospar": {
-                "count": 262
+                "count": 265
             },
             "Mercator": {
-                "count": 122
+                "count": 123
             },
             "Mercadona": {
-                "count": 725
+                "count": 734
             },
             "Famila": {
-                "count": 128
+                "count": 129
             },
             "Hemköp": {
                 "count": 83
             },
             "real,-": {
-                "count": 79
+                "count": 80
             },
             "Markant": {
-                "count": 86
+                "count": 87
             },
             "Volg": {
-                "count": 126
+                "count": 128
             },
             "Leader Price": {
-                "count": 252
+                "count": 257
             },
             "Treff 3000": {
-                "count": 94
+                "count": 95
             },
             "SuperBrugsen": {
                 "count": 67
@@ -2730,43 +2737,43 @@
                 "count": 253
             },
             "K+K": {
-                "count": 102
+                "count": 104
             },
             "Unimarkt": {
-                "count": 80
+                "count": 81
             },
             "Sobeys": {
-                "count": 118
+                "count": 120
             },
             "S-Market": {
                 "count": 107
             },
             "Combi": {
-                "count": 54
+                "count": 55
             },
             "Denner": {
-                "count": 264
+                "count": 267
             },
             "Konsum": {
                 "count": 134
             },
             "Franprix": {
-                "count": 307
+                "count": 308
             },
             "Monoprix": {
-                "count": 194
+                "count": 195
             },
             "Diska": {
-                "count": 67
+                "count": 68
             },
             "PENNY": {
-                "count": 78
+                "count": 79
             },
             "Dia": {
-                "count": 786
+                "count": 798
             },
             "Giant Eagle": {
-                "count": 80
+                "count": 82
             },
             "NORMA": {
                 "count": 115
@@ -2775,22 +2782,22 @@
                 "count": 62
             },
             "Auchan": {
-                "count": 144
+                "count": 147
             },
             "Consum": {
-                "count": 124
+                "count": 125
             },
             "Carrefour Market": {
-                "count": 79
+                "count": 80
             },
             "Carrefour City": {
-                "count": 113
+                "count": 117
             },
             "Pam": {
-                "count": 52
+                "count": 54
             },
             "Despar": {
-                "count": 146
+                "count": 147
             },
             "Eroski": {
                 "count": 204
@@ -2799,94 +2806,94 @@
                 "count": 61
             },
             "Maxi": {
-                "count": 102
+                "count": 103
             },
             "Colruyt": {
-                "count": 182
+                "count": 181
             },
             "The Co-operative": {
                 "count": 64
             },
             "sky": {
-                "count": 100
+                "count": 101
             },
             "Intermarché": {
-                "count": 1172
+                "count": 1183
             },
             "Delhaize": {
                 "count": 207
             },
             "CBA": {
-                "count": 163
+                "count": 165
             },
             "Shopi": {
                 "count": 57
             },
             "Walmart": {
-                "count": 608
+                "count": 611
             },
             "Kroger": {
-                "count": 294
+                "count": 298
             },
             "Albertsons": {
-                "count": 235
+                "count": 236
             },
             "Trader Joe's": {
-                "count": 187
+                "count": 190
             },
             "Feneberg": {
-                "count": 57
+                "count": 58
             },
             "dm": {
-                "count": 107
+                "count": 108
             },
             "Kvickly": {
                 "count": 54
             },
             "Makro": {
-                "count": 134
+                "count": 137
             },
             "Nah & Frisch": {
-                "count": 71
+                "count": 72
             },
             "Champion": {
                 "count": 59
             },
             "Fakta": {
-                "count": 224
+                "count": 227
             },
             "Магнит": {
-                "count": 1683
+                "count": 1697
             },
             "Caprabo": {
                 "count": 101
             },
             "Famiglia Cooperativa": {
-                "count": 63
+                "count": 64
             },
             "Народная 7Я семьЯ": {
                 "count": 150
             },
             "Esselunga": {
-                "count": 82
+                "count": 87
             },
             "Maxima": {
-                "count": 105
+                "count": 103
             },
             "Petit Casino": {
-                "count": 105
+                "count": 104
             },
             "Wasgau": {
-                "count": 61
+                "count": 60
             },
             "Pingo Doce": {
-                "count": 249
+                "count": 250
             },
             "Match": {
-                "count": 141
+                "count": 142
             },
             "Profi": {
-                "count": 51
+                "count": 58
             },
             "Lider": {
                 "count": 64
@@ -2901,7 +2908,7 @@
                 "count": 128
             },
             "Седьмой континент": {
-                "count": 80
+                "count": 79
             },
             "HIT": {
                 "count": 61
@@ -2910,13 +2917,13 @@
                 "count": 104
             },
             "Conad": {
-                "count": 297
+                "count": 302
             },
             "Фуршет": {
                 "count": 74
             },
             "Willys": {
-                "count": 53
+                "count": 55
             },
             "Farmfoods": {
                 "count": 62
@@ -2931,61 +2938,64 @@
                 "count": 119
             },
             "マルエツ": {
-                "count": 55
+                "count": 59
             },
             "Piggly Wiggly": {
                 "count": 52
             },
+            "Crai": {
+                "count": 52
+            },
             "Biedronka": {
-                "count": 1264
+                "count": 1290
             },
             "El Árbol": {
                 "count": 72
             },
             "Centre Commercial E. Leclerc": {
-                "count": 554
+                "count": 553
             },
             "Foodland": {
-                "count": 95
+                "count": 98
             },
             "Super Brugsen": {
-                "count": 63
+                "count": 64
             },
             "Дикси": {
-                "count": 591
+                "count": 610
             },
             "Пятёрочка": {
-                "count": 1271
+                "count": 1293
             },
             "Publix": {
-                "count": 318
+                "count": 321
             },
             "Whole Foods": {
-                "count": 193
+                "count": 196
             },
             "Føtex": {
-                "count": 65
+                "count": 66
             },
             "coop": {
-                "count": 75
+                "count": 74
             },
             "Fressnapf": {
                 "count": 64
             },
             "Coop Konsum": {
-                "count": 78
+                "count": 79
             },
             "Carrefour Contact": {
-                "count": 76
+                "count": 77
             },
             "SPAR": {
-                "count": 279
+                "count": 280
             },
             "No Frills": {
                 "count": 102
             },
             "The Co-operative Food": {
-                "count": 117
+                "count": 120
             },
             "Plodine": {
                 "count": 51
@@ -2994,13 +3004,13 @@
                 "count": 63
             },
             "Minipreço": {
-                "count": 102
+                "count": 103
             },
             "Eurospin": {
                 "count": 153
             },
             "Семья": {
-                "count": 61
+                "count": 62
             },
             "Евроопт": {
                 "count": 58
@@ -3009,10 +3019,10 @@
                 "count": 51
             },
             "Квартал": {
-                "count": 90
+                "count": 88
             },
             "New World": {
-                "count": 66
+                "count": 65
             },
             "Countdown": {
                 "count": 92
@@ -3021,10 +3031,10 @@
                 "count": 62
             },
             "Stokrotka": {
-                "count": 89
+                "count": 98
             },
             "Coop Jednota": {
-                "count": 72
+                "count": 73
             },
             "Fred Meyer": {
                 "count": 62
@@ -3033,97 +3043,97 @@
                 "count": 59
             },
             "Continente": {
-                "count": 71
+                "count": 73
             },
             "Price Chopper": {
-                "count": 97
+                "count": 98
             },
             "Wegmans": {
-                "count": 52
+                "count": 53
             },
             "Game": {
-                "count": 52
+                "count": 53
             },
             "Soriana": {
                 "count": 92
             },
             "Alimerka": {
-                "count": 58
+                "count": 61
             },
             "Piotr i Paweł": {
                 "count": 52
             },
             "Перекресток": {
-                "count": 311
+                "count": 309
             },
             "Maxima X": {
-                "count": 112
+                "count": 113
             },
             "Карусель": {
-                "count": 53
-            },
-            "Tesco Lotus": {
-                "count": 53
-            },
-            "Condis": {
-                "count": 65
-            },
-            "Sam's Club": {
-                "count": 126
-            },
-            "Копейка": {
-                "count": 92
-            },
-            "Géant Casino": {
-                "count": 53
-            },
-            "ASDA": {
-                "count": 175
-            },
-            "Intermarche": {
-                "count": 109
-            },
-            "Stop & Shop": {
                 "count": 55
             },
+            "Tesco Lotus": {
+                "count": 69
+            },
+            "Condis": {
+                "count": 64
+            },
+            "Sam's Club": {
+                "count": 131
+            },
+            "Копейка": {
+                "count": 91
+            },
+            "Géant Casino": {
+                "count": 54
+            },
+            "ASDA": {
+                "count": 177
+            },
+            "Intermarche": {
+                "count": 111
+            },
+            "Stop & Shop": {
+                "count": 56
+            },
             "Food Lion": {
-                "count": 185
+                "count": 192
             },
             "Harris Teeter": {
-                "count": 86
+                "count": 88
             },
             "H-E-B": {
-                "count": 119
+                "count": 122
             },
             "Foodworks": {
-                "count": 58
+                "count": 59
             },
             "Polo Market": {
                 "count": 84
             },
             "西友 (SEIYU)": {
-                "count": 57
+                "count": 58
             },
             "Полушка": {
-                "count": 133
+                "count": 135
             },
             "Extra": {
-                "count": 74
+                "count": 76
             },
             "Lewiatan": {
-                "count": 89
+                "count": 91
             },
             "АТБ": {
-                "count": 297
+                "count": 305
             },
             "Społem": {
                 "count": 55
             },
             "Bodega Aurrera": {
-                "count": 76
+                "count": 78
             },
             "Мария-Ра": {
-                "count": 94
+                "count": 95
             },
             "Магнолия": {
                 "count": 71
@@ -3132,19 +3142,19 @@
                 "count": 113
             },
             "Монетка": {
-                "count": 167
+                "count": 170
             },
             "Hy-Vee": {
-                "count": 68
+                "count": 72
             },
             "Walmart Supercenter": {
-                "count": 109
+                "count": 112
             },
             "Hannaford": {
                 "count": 55
             },
             "業務スーパー": {
-                "count": 51
+                "count": 55
             },
             "Norfa XL": {
                 "count": 53
@@ -3161,37 +3171,37 @@
                 "count": 277
             },
             "Maplin": {
-                "count": 62
+                "count": 63
             },
             "Best Buy": {
-                "count": 315
+                "count": 325
             },
             "Future Shop": {
-                "count": 68
+                "count": 69
             },
             "Saturn": {
                 "count": 130
             },
             "Currys": {
-                "count": 79
+                "count": 81
             },
             "Radio Shack": {
-                "count": 244
+                "count": 249
             },
             "Comet": {
-                "count": 54
+                "count": 52
             },
             "Euronics": {
-                "count": 111
+                "count": 112
             },
             "Expert": {
                 "count": 119
             },
             "Эльдорадо": {
-                "count": 178
+                "count": 180
             },
             "Darty": {
-                "count": 70
+                "count": 72
             },
             "М.Видео": {
                 "count": 75
@@ -3199,16 +3209,16 @@
         },
         "convenience": {
             "Shell": {
-                "count": 247
+                "count": 251
             },
             "Spar": {
-                "count": 911
+                "count": 913
             },
             "McColl's": {
                 "count": 96
             },
             "Tesco Express": {
-                "count": 420
+                "count": 417
             },
             "Sainsbury's Local": {
                 "count": 98
@@ -3217,13 +3227,13 @@
                 "count": 143
             },
             "The Co-operative Food": {
-                "count": 107
+                "count": 109
             },
             "Londis": {
-                "count": 345
+                "count": 349
             },
             "7-Eleven": {
-                "count": 4051
+                "count": 4138
             },
             "CBA": {
                 "count": 128
@@ -3232,10 +3242,10 @@
                 "count": 79
             },
             "Statoil": {
-                "count": 68
+                "count": 69
             },
             "Konzum": {
-                "count": 172
+                "count": 171
             },
             "Siwa": {
                 "count": 211
@@ -3244,10 +3254,10 @@
                 "count": 58
             },
             "Esso": {
-                "count": 65
+                "count": 66
             },
             "COOP Jednota": {
-                "count": 167
+                "count": 172
             },
             "Mac's": {
                 "count": 151
@@ -3259,61 +3269,61 @@
                 "count": 54
             },
             "K-Market": {
-                "count": 56
+                "count": 55
             },
             "Coop": {
-                "count": 515
+                "count": 520
             },
             "Costcutter": {
-                "count": 281
+                "count": 285
             },
             "Valintatalo": {
                 "count": 61
             },
             "SPAR": {
-                "count": 186
+                "count": 188
             },
             "COOP": {
-                "count": 132
+                "count": 134
             },
             "Casino": {
-                "count": 86
+                "count": 87
             },
             "Franprix": {
                 "count": 62
             },
             "Circle K": {
-                "count": 272
+                "count": 277
             },
             "セブンイレブン": {
-                "count": 2858,
+                "count": 2893,
                 "tags": {
                     "name:en": "7-Eleven"
                 }
             },
             "ローソン": {
-                "count": 1481,
+                "count": 1514,
                 "tags": {
                     "name:en": "LAWSON"
                 }
             },
             "BP": {
-                "count": 158
+                "count": 160
             },
             "Tesco": {
-                "count": 56
+                "count": 55
             },
             "Petit Casino": {
-                "count": 226
+                "count": 231
             },
             "Volg": {
-                "count": 111
+                "count": 113
             },
             "Mace": {
                 "count": 112
             },
             "Mini Market": {
-                "count": 203
+                "count": 223
             },
             "Nisa Local": {
                 "count": 74
@@ -3322,43 +3332,43 @@
                 "count": 74
             },
             "Продукты": {
-                "count": 4014
+                "count": 4085
             },
             "Mini Stop": {
-                "count": 215
+                "count": 222
             },
             "LAWSON": {
-                "count": 407
+                "count": 414
             },
             "デイリーヤマザキ": {
-                "count": 133
+                "count": 134
             },
             "Надежда": {
-                "count": 55
+                "count": 56
             },
             "Mobil": {
-                "count": 62
+                "count": 64
             },
             "Nisa": {
                 "count": 51
             },
             "Premier": {
-                "count": 127
+                "count": 126
             },
             "ABC": {
-                "count": 143
+                "count": 147
             },
             "Edeka": {
                 "count": 51
             },
             "ミニストップ": {
-                "count": 293,
+                "count": 299,
                 "tags": {
                     "name:en": "MINISTOP"
                 }
             },
             "サンクス": {
-                "count": 532,
+                "count": 537,
                 "tags": {
                     "name:en": "sunkus"
                 }
@@ -3367,58 +3377,58 @@
                 "count": 87
             },
             "8 à Huit": {
-                "count": 58
+                "count": 59
             },
             "Tchibo": {
-                "count": 54
+                "count": 55
             },
             "Żabka": {
-                "count": 512
+                "count": 520
             },
             "Almacen": {
                 "count": 211
             },
             "Vival": {
-                "count": 188
+                "count": 191
             },
             "FamilyMart": {
-                "count": 515
+                "count": 518
             },
             "ファミリーマート": {
-                "count": 1470,
+                "count": 1512,
                 "tags": {
                     "name:en": "FamilyMart"
                 }
             },
             "Carrefour City": {
-                "count": 55
+                "count": 54
             },
             "Sunkus": {
-                "count": 62
+                "count": 61
             },
             "Casey's General Store": {
-                "count": 87
+                "count": 88
             },
             "セブンイレブン(Seven-Eleven)": {
-                "count": 56
+                "count": 58
             },
             "Jednota": {
                 "count": 55
             },
             "Гастроном": {
-                "count": 142
+                "count": 148
             },
             "Sklep spożywczy": {
-                "count": 264
+                "count": 276
             },
             "Centra": {
                 "count": 110
             },
             "Магнит": {
-                "count": 671
+                "count": 684
             },
             "サークルK": {
-                "count": 485,
+                "count": 495,
                 "tags": {
                     "name:en": "Circle K"
                 }
@@ -3427,10 +3437,10 @@
                 "count": 130
             },
             "Proxi": {
-                "count": 118
+                "count": 120
             },
             "Универсам": {
-                "count": 77
+                "count": 79
             },
             "Groszek": {
                 "count": 59
@@ -3439,28 +3449,28 @@
                 "count": 58
             },
             "Potraviny": {
-                "count": 243
+                "count": 246
             },
             "Смак": {
-                "count": 71
+                "count": 72
             },
             "Эконом": {
-                "count": 52
+                "count": 53
             },
             "Магазин": {
-                "count": 845
+                "count": 875
             },
             "Березка": {
-                "count": 74
+                "count": 75
             },
             "Społem": {
                 "count": 89
             },
             "Carrefour Express": {
-                "count": 78
+                "count": 81
             },
             "Biedronka": {
-                "count": 73
+                "count": 77
             },
             "Cumberland Farms": {
                 "count": 63
@@ -3469,43 +3479,46 @@
                 "count": 56
             },
             "Coop Jednota": {
-                "count": 61
+                "count": 63
+            },
+            "Tesco Lotus Express": {
+                "count": 64
             },
             "Kiosk": {
                 "count": 55
             },
             "24 часа": {
-                "count": 57
+                "count": 58
             },
             "Минимаркет": {
-                "count": 96
+                "count": 97
             },
             "Oxxo": {
-                "count": 621
+                "count": 632
             },
             "Пятёрочка": {
-                "count": 381
+                "count": 383
             },
             "abc": {
-                "count": 63
+                "count": 64
             },
             "Stewart's": {
                 "count": 255
             },
             "Продукти": {
-                "count": 158
+                "count": 162
             },
             "ローソンストア100 (LAWSON STORE 100)": {
-                "count": 83
+                "count": 84
             },
             "Дикси": {
-                "count": 122
+                "count": 121
             },
             "Радуга": {
-                "count": 83
+                "count": 85
             },
             "ローソンストア100": {
-                "count": 68
+                "count": 71
             },
             "เซเว่นอีเลฟเว่น": {
                 "count": 191
@@ -3517,7 +3530,10 @@
                 "count": 51
             },
             "Citgo": {
-                "count": 62
+                "count": 63
+            },
+            "Фортуна": {
+                "count": 52
             },
             "Kum & Go": {
                 "count": 59
@@ -3526,7 +3542,7 @@
                 "count": 75
             },
             "Picard": {
-                "count": 52
+                "count": 55
             },
             "Four Square": {
                 "count": 51
@@ -3538,10 +3554,10 @@
                 "count": 52
             },
             "Dollar General": {
-                "count": 105
+                "count": 109
             },
             "Studenac": {
-                "count": 74
+                "count": 75
             },
             "Central Convenience Store": {
                 "count": 54
@@ -3550,10 +3566,10 @@
                 "count": 61
             },
             "продукты": {
-                "count": 116
+                "count": 118
             },
             "Теремок": {
-                "count": 53
+                "count": 54
             },
             "Kwik Trip": {
                 "count": 68
@@ -3562,34 +3578,34 @@
                 "count": 53
             },
             "全家": {
-                "count": 69
+                "count": 71
             },
             "Мечта": {
-                "count": 53
+                "count": 54
             },
             "Epicerie": {
-                "count": 65
+                "count": 70
             },
             "Кировский": {
                 "count": 67
             },
             "Food Mart": {
-                "count": 99
+                "count": 101
             },
             "Delikatesy": {
-                "count": 78
+                "count": 79
             },
             "ポプラ": {
-                "count": 51
+                "count": 52
             },
             "Lewiatan": {
-                "count": 120
+                "count": 123
             },
             "Продуктовый магазин": {
-                "count": 84
+                "count": 94
             },
             "Продуктовый": {
-                "count": 66
+                "count": 67
             },
             "セイコーマート (Seicomart)": {
                 "count": 55
@@ -3598,13 +3614,13 @@
                 "count": 67
             },
             "Весна": {
-                "count": 57
+                "count": 56
             },
             "Mini Market Non-Stop": {
                 "count": 58
             },
             "QuikTrip": {
-                "count": 66
+                "count": 70
             },
             "Копеечка": {
                 "count": 53
@@ -3613,16 +3629,16 @@
                 "count": 51
             },
             "Alfamart": {
-                "count": 77
+                "count": 76
             },
             "Indomaret": {
-                "count": 129
+                "count": 130
             },
             "магазин": {
-                "count": 110
+                "count": 118
             },
             "全家便利商店": {
-                "count": 109
+                "count": 111
             },
             "Boutique": {
                 "count": 58
@@ -3636,22 +3652,22 @@
         },
         "chemist": {
             "dm": {
-                "count": 892
+                "count": 904
             },
             "Müller": {
-                "count": 204
+                "count": 206
             },
             "Schlecker": {
-                "count": 195
+                "count": 194
             },
             "Etos": {
                 "count": 465
             },
             "Bipa": {
-                "count": 280
+                "count": 282
             },
             "Rossmann": {
-                "count": 1641
+                "count": 1652
             },
             "Ihr Platz": {
                 "count": 74
@@ -3660,69 +3676,72 @@
                 "count": 61
             },
             "Kruidvat": {
-                "count": 121
+                "count": 122
             }
         },
         "car_repair": {
+            "Peugeot": {
+                "count": 82
+            },
             "Kwik Fit": {
                 "count": 73
             },
             "ATU": {
-                "count": 257
+                "count": 259
+            },
+            "Kwik-Fit": {
+                "count": 51
             },
             "Midas": {
-                "count": 184
+                "count": 190
             },
             "Feu Vert": {
-                "count": 103
+                "count": 105
             },
             "Norauto": {
-                "count": 140
+                "count": 141
             },
             "Speedy": {
-                "count": 108
+                "count": 112
             },
             "Автозапчасти": {
-                "count": 181
+                "count": 186
             },
             "Renault": {
-                "count": 162
+                "count": 165
             },
             "Pit Stop": {
-                "count": 56
+                "count": 57
             },
             "Jiffy Lube": {
-                "count": 183
+                "count": 187
             },
             "Шиномонтаж": {
-                "count": 1077
+                "count": 1097
             },
             "СТО": {
-                "count": 354
+                "count": 366
             },
             "O'Reilly Auto Parts": {
-                "count": 65
+                "count": 69
             },
             "Carglass": {
-                "count": 102
+                "count": 103
             },
             "шиномонтаж": {
-                "count": 54
-            },
-            "Euromaster": {
-                "count": 81
-            },
-            "Peugeot": {
-                "count": 81
-            },
-            "Firestone": {
-                "count": 82
-            },
-            "AutoZone": {
                 "count": 56
             },
+            "Euromaster": {
+                "count": 84
+            },
+            "Firestone": {
+                "count": 84
+            },
+            "AutoZone": {
+                "count": 63
+            },
             "Автосервис": {
-                "count": 331
+                "count": 344
             },
             "Roady": {
                 "count": 55
@@ -3733,22 +3752,22 @@
                 "count": 165
             },
             "Jysk": {
-                "count": 96
+                "count": 98
             },
             "Roller": {
                 "count": 76
             },
             "Dänisches Bettenlager": {
-                "count": 295
+                "count": 298
             },
             "Conforama": {
-                "count": 90
+                "count": 93
             },
             "Matratzen Concord": {
                 "count": 51
             },
             "Мебель": {
-                "count": 198
+                "count": 201
             },
             "But": {
                 "count": 58
@@ -3759,22 +3778,22 @@
                 "count": 123
             },
             "B&Q": {
-                "count": 222
+                "count": 223
             },
             "Hubo": {
-                "count": 73
+                "count": 74
             },
             "Mr Bricolage": {
-                "count": 87
+                "count": 88
             },
             "Gamma": {
-                "count": 107
+                "count": 108
             },
             "OBI": {
-                "count": 411
+                "count": 409
             },
             "Lowes": {
-                "count": 1127
+                "count": 1135
             },
             "Wickes": {
                 "count": 122
@@ -3783,7 +3802,7 @@
                 "count": 59
             },
             "Max Bahr": {
-                "count": 85
+                "count": 87
             },
             "Castorama": {
                 "count": 153
@@ -3792,134 +3811,137 @@
                 "count": 58
             },
             "Home Depot": {
-                "count": 813
+                "count": 823
             },
             "Toom Baumarkt": {
                 "count": 66
             },
             "Homebase": {
-                "count": 220
+                "count": 223
             },
             "Baumax": {
                 "count": 94
             },
             "Lagerhaus": {
-                "count": 72
+                "count": 73
             },
             "Bauhaus": {
-                "count": 178
+                "count": 181
             },
             "Canadian Tire": {
-                "count": 94
+                "count": 93
             },
             "Leroy Merlin": {
-                "count": 200
+                "count": 203
             },
             "Hellweg": {
-                "count": 60
+                "count": 58
             },
             "Brico": {
                 "count": 97
             },
             "Bricomarché": {
-                "count": 214
+                "count": 217
             },
             "Toom": {
                 "count": 67
             },
             "Praktiker": {
-                "count": 157
+                "count": 143
             },
             "Hagebaumarkt": {
-                "count": 104
+                "count": 105
             },
             "Menards": {
-                "count": 64
+                "count": 66
             },
             "Weldom": {
-                "count": 69
+                "count": 70
             },
             "Bunnings Warehouse": {
-                "count": 88
+                "count": 90
             },
             "Ace Hardware": {
-                "count": 131
+                "count": 133
             },
             "Home Hardware": {
-                "count": 66
+                "count": 69
             },
             "Хозтовары": {
                 "count": 70
             },
             "Стройматериалы": {
-                "count": 175
+                "count": 180
             },
             "Bricorama": {
                 "count": 58
             },
             "Point P": {
-                "count": 51
+                "count": 56
             }
         },
         "department_store": {
             "Target": {
-                "count": 508
+                "count": 530
             },
             "Debenhams": {
                 "count": 66
             },
             "Canadian Tire": {
-                "count": 70
+                "count": 71
             },
             "Karstadt": {
-                "count": 62
+                "count": 64
             },
             "Walmart": {
-                "count": 490
+                "count": 496
             },
             "Kmart": {
                 "count": 133
             },
             "Galeria Kaufhof": {
-                "count": 57
+                "count": 58
             },
             "Marks & Spencer": {
-                "count": 59
+                "count": 62
             },
             "Big W": {
-                "count": 54
+                "count": 56
             },
             "Woolworth": {
-                "count": 75
+                "count": 76
             },
             "Универмаг": {
-                "count": 60
+                "count": 63
             },
             "Sears": {
-                "count": 214
+                "count": 218
             },
             "Walmart Supercenter": {
-                "count": 82
+                "count": 90
+            },
+            "Sam's Club": {
+                "count": 51
             },
             "Kohl's": {
-                "count": 134
+                "count": 139
             },
             "Macy's": {
-                "count": 123
+                "count": 129
             },
             "JCPenney": {
-                "count": 54
+                "count": 58
             }
         },
         "stationery": {
             "Staples": {
-                "count": 269
+                "count": 276
             },
             "McPaper": {
                 "count": 80
             },
             "Office Depot": {
-                "count": 85
+                "count": 88
             },
             "Канцтовары": {
                 "count": 56
@@ -3930,70 +3952,70 @@
                 "count": 95
             },
             "BMW": {
-                "count": 145
+                "count": 146
             },
             "Citroen": {
-                "count": 267
+                "count": 271
             },
             "Renault": {
-                "count": 363
+                "count": 365
             },
             "Mercedes-Benz": {
-                "count": 221
+                "count": 226
             },
             "Volvo": {
-                "count": 85
+                "count": 91
             },
             "Ford": {
-                "count": 224
+                "count": 230
             },
             "Volkswagen": {
                 "count": 203
             },
             "Mazda": {
-                "count": 97
+                "count": 99
             },
             "Mitsubishi": {
-                "count": 71
+                "count": 72
             },
             "Fiat": {
-                "count": 85
+                "count": 87
             },
             "Автозапчасти": {
-                "count": 279
+                "count": 278
             },
             "Opel": {
-                "count": 161
+                "count": 162
             },
             "Audi": {
-                "count": 105
+                "count": 109
             },
             "Toyota": {
-                "count": 246
+                "count": 256
             },
             "Nissan": {
-                "count": 181
+                "count": 180
             },
             "Suzuki": {
-                "count": 77
+                "count": 75
             },
             "Honda": {
-                "count": 142
+                "count": 148
             },
             "Peugeot": {
-                "count": 293
+                "count": 296
             },
             "Шиномонтаж": {
-                "count": 254
+                "count": 256
             },
             "Hyundai": {
                 "count": 155
             },
             "Subaru": {
-                "count": 52
+                "count": 53
             },
             "Chevrolet": {
-                "count": 80
+                "count": 81
             },
             "Автомагазин": {
                 "count": 62
@@ -4001,61 +4023,64 @@
         },
         "clothes": {
             "Matalan": {
-                "count": 82
+                "count": 84
             },
             "KiK": {
-                "count": 1170
+                "count": 1180
             },
             "H&M": {
-                "count": 633
+                "count": 641
             },
             "Urban Outfitters": {
                 "count": 62
             },
             "Vögele": {
-                "count": 128
+                "count": 131
             },
             "Zeeman": {
-                "count": 115
+                "count": 120
             },
             "Takko": {
-                "count": 496
+                "count": 508
             },
             "Adler": {
-                "count": 52
+                "count": 53
             },
             "C&A": {
-                "count": 497
+                "count": 498
             },
             "Zara": {
-                "count": 208
+                "count": 211
             },
             "Vero Moda": {
                 "count": 93
             },
             "NKD": {
-                "count": 465
+                "count": 476
+            },
+            "Ernsting's family": {
+                "count": 298
             },
             "Winners": {
-                "count": 61
+                "count": 62
             },
             "River Island": {
                 "count": 56
             },
             "Next": {
-                "count": 166
+                "count": 170
             },
             "Gap": {
-                "count": 74
+                "count": 77
             },
             "Adidas": {
-                "count": 85
+                "count": 86
             },
             "Woolworths": {
                 "count": 116
             },
             "Mr Price": {
-                "count": 86
+                "count": 87
             },
             "Jet": {
                 "count": 61
@@ -4073,64 +4098,61 @@
                 "count": 65
             },
             "Ross": {
-                "count": 78
+                "count": 85
             },
             "Dorothy Perkins": {
                 "count": 53
             },
             "Deichmann": {
-                "count": 59
+                "count": 58
             },
             "Lindex": {
                 "count": 72
             },
             "s.Oliver": {
-                "count": 52
+                "count": 54
             },
             "Old Navy": {
-                "count": 159
-            },
-            "Ernsting's family": {
-                "count": 293
+                "count": 163
             },
             "Jack & Jones": {
-                "count": 51
+                "count": 52
             },
             "Pimkie": {
                 "count": 72
             },
             "Esprit": {
-                "count": 217
+                "count": 221
             },
             "Primark": {
                 "count": 87
             },
             "Bonita": {
-                "count": 146
+                "count": 150
             },
             "Mexx": {
                 "count": 65
             },
             "Gerry Weber": {
-                "count": 69
+                "count": 70
             },
             "Tally Weijl": {
                 "count": 68
             },
             "Mango": {
-                "count": 124
+                "count": 128
             },
             "TK Maxx": {
-                "count": 76
+                "count": 77
             },
             "Benetton": {
-                "count": 96
+                "count": 99
             },
             "Ulla Popken": {
                 "count": 59
             },
             "AWG": {
-                "count": 63
+                "count": 66
             },
             "Tommy Hilfiger": {
                 "count": 69
@@ -4139,31 +4161,37 @@
                 "count": 176
             },
             "Orsay": {
-                "count": 71
+                "count": 72
             },
             "Charles Vögele": {
-                "count": 66
+                "count": 68
             },
             "New Look": {
-                "count": 120
+                "count": 122
             },
             "Lacoste": {
-                "count": 71
+                "count": 73
             },
             "Etam": {
-                "count": 51
+                "count": 52
             },
             "Kiabi": {
-                "count": 143
+                "count": 145
             },
             "Jack Wolfskin": {
-                "count": 59
+                "count": 60
             },
             "American Apparel": {
-                "count": 53
+                "count": 55
+            },
+            "Men's Wearhouse": {
+                "count": 51
+            },
+            "Intimissimi": {
+                "count": 51
             },
             "United Colors of Benetton": {
-                "count": 92
+                "count": 93
             },
             "Jules": {
                 "count": 61
@@ -4172,25 +4200,28 @@
                 "count": 55
             },
             "Calzedonia": {
-                "count": 61
+                "count": 66
             },
             "洋服の青山": {
-                "count": 92
+                "count": 96
             },
             "Levi's": {
                 "count": 59
             },
             "Celio": {
-                "count": 72
+                "count": 73
+            },
+            "TJ Maxx": {
+                "count": 52
             },
             "Promod": {
-                "count": 73
+                "count": 77
             },
             "Street One": {
                 "count": 72
             },
             "ユニクロ": {
-                "count": 54
+                "count": 56
             },
             "Banana Republic": {
                 "count": 51
@@ -4199,10 +4230,13 @@
                 "count": 68
             },
             "La Halle": {
-                "count": 53
+                "count": 61
             },
             "Peacocks": {
-                "count": 86
+                "count": 87
+            },
+            "しまむら": {
+                "count": 53
             }
         },
         "books": {
@@ -4213,19 +4247,19 @@
                 "count": 86
             },
             "Libro": {
-                "count": 56
+                "count": 55
             },
             "Barnes & Noble": {
-                "count": 244
+                "count": 249
             },
             "Weltbild": {
-                "count": 72
+                "count": 73
             },
             "Thalia": {
-                "count": 121
+                "count": 120
             },
             "Книги": {
-                "count": 113
+                "count": 111
             }
         },
         "alcohol": {
@@ -4233,22 +4267,22 @@
                 "count": 142
             },
             "The Beer Store": {
-                "count": 143
+                "count": 144
             },
             "Systembolaget": {
-                "count": 206
+                "count": 207
             },
             "LCBO": {
-                "count": 221
+                "count": 226
             },
             "Ароматный мир": {
-                "count": 59
+                "count": 61
             },
             "Bargain Booze": {
                 "count": 61
             },
             "Nicolas": {
-                "count": 112
+                "count": 114
             },
             "Botilleria": {
                 "count": 76
@@ -4268,10 +4302,10 @@
         },
         "bakery": {
             "Kamps": {
-                "count": 251
+                "count": 250
             },
             "Bäckerei Schmidt": {
-                "count": 55
+                "count": 56
             },
             "Anker": {
                 "count": 70
@@ -4280,13 +4314,16 @@
                 "count": 51
             },
             "Hofpfisterei": {
-                "count": 109
+                "count": 110
             },
             "Greggs": {
-                "count": 263
+                "count": 265
             },
             "Oebel": {
                 "count": 58
+            },
+            "Boulangerie": {
+                "count": 248
             },
             "Stadtbäckerei": {
                 "count": 57
@@ -4298,10 +4335,10 @@
                 "count": 75
             },
             "Goldilocks": {
-                "count": 54
+                "count": 56
             },
             "Dat Backhus": {
-                "count": 65
+                "count": 66
             },
             "K&U": {
                 "count": 55
@@ -4312,11 +4349,8 @@
             "Thürmann": {
                 "count": 54
             },
-            "Bäckerei": {
-                "count": 162
-            },
             "Backwerk": {
-                "count": 93
+                "count": 94
             },
             "Bäcker": {
                 "count": 66
@@ -4325,7 +4359,7 @@
                 "count": 51
             },
             "Panaderia": {
-                "count": 160
+                "count": 162
             },
             "Goeken backen": {
                 "count": 51
@@ -4334,22 +4368,39 @@
                 "count": 53
             },
             "Boulangerie Patisserie": {
-                "count": 77
+                "count": 93
             },
             "Paul": {
-                "count": 75
-            },
-            "Panificio": {
-                "count": 66
+                "count": 78
             },
             "Хлеб": {
-                "count": 83
+                "count": 84
             },
             "Piekarnia": {
-                "count": 56
+                "count": 55
+            }
+        },
+        "sports": {
+            "Sports Direct": {
+                "count": 53
             },
-            "Boulangerie": {
-                "count": 239
+            "Decathlon": {
+                "count": 298
+            },
+            "Intersport": {
+                "count": 272
+            },
+            "Sports Authority": {
+                "count": 68
+            },
+            "Спортмастер": {
+                "count": 81
+            },
+            "Sport 2000": {
+                "count": 83
+            },
+            "Dick's Sporting Goods": {
+                "count": 69
             }
         },
         "variety_store": {
@@ -4357,50 +4408,30 @@
                 "count": 148
             },
             "Dollarama": {
-                "count": 95
+                "count": 99
             },
             "Dollar Tree": {
-                "count": 85
+                "count": 91
             },
             "Dollar General": {
-                "count": 64
-            }
-        },
-        "sports": {
-            "Decathlon": {
-                "count": 290
-            },
-            "Intersport": {
-                "count": 269
-            },
-            "Sports Authority": {
-                "count": 63
-            },
-            "Спортмастер": {
-                "count": 80
-            },
-            "Sport 2000": {
-                "count": 84
-            },
-            "Dick's Sporting Goods": {
-                "count": 62
+                "count": 68
             }
         },
         "pet": {
             "Fressnapf": {
-                "count": 306
+                "count": 309
             },
             "PetSmart": {
-                "count": 154
+                "count": 163
             },
             "Das Futterhaus": {
-                "count": 66
+                "count": 67
             },
             "Pets at Home": {
-                "count": 54
+                "count": 56
             },
             "Petco": {
-                "count": 81
+                "count": 89
             },
             "Зоомагазин": {
                 "count": 95
@@ -4408,43 +4439,43 @@
         },
         "shoes": {
             "Deichmann": {
-                "count": 598
+                "count": 607
             },
             "Reno": {
-                "count": 172
+                "count": 178
             },
             "Ecco": {
                 "count": 54
             },
             "Clarks": {
-                "count": 98
+                "count": 100
             },
             "La Halle aux Chaussures": {
-                "count": 64
+                "count": 65
             },
             "Brantano": {
-                "count": 67
+                "count": 68
             },
             "Salamander": {
                 "count": 52
             },
             "Обувь": {
-                "count": 98
+                "count": 97
             },
             "Payless Shoe Source": {
-                "count": 56
+                "count": 57
             },
             "Famous Footwear": {
-                "count": 52
+                "count": 54
             },
             "Quick Schuh": {
-                "count": 68
+                "count": 72
             },
             "Foot Locker": {
-                "count": 76
+                "count": 79
             },
             "Bata": {
-                "count": 90
+                "count": 97
             }
         },
         "toys": {
@@ -4452,7 +4483,7 @@
                 "count": 55
             },
             "Toys R Us": {
-                "count": 133,
+                "count": 141,
                 "tags": {
                     "shop": "toys"
                 }
@@ -4464,12 +4495,12 @@
                 "count": 53
             },
             "Игрушки": {
-                "count": 54
+                "count": 57
             }
         },
         "travel_agency": {
             "Flight Centre": {
-                "count": 90
+                "count": 91
             },
             "Thomas Cook": {
                 "count": 111
@@ -4480,39 +4511,39 @@
                 "count": 54
             },
             "Christ": {
-                "count": 55
+                "count": 56
             },
             "Swarovski": {
-                "count": 72
+                "count": 73
             }
         },
         "optician": {
             "Fielmann": {
-                "count": 221
+                "count": 222
             },
             "Apollo Optik": {
-                "count": 146
+                "count": 147
             },
             "Vision Express": {
                 "count": 54
             },
             "Оптика": {
-                "count": 170
+                "count": 175
             },
             "Optic 2000": {
-                "count": 89
+                "count": 90
             },
             "Alain Afflelou": {
-                "count": 70
+                "count": 71
             },
             "Specsavers": {
-                "count": 114
+                "count": 116
             },
             "Krys": {
                 "count": 70
             },
             "Atol": {
-                "count": 51
+                "count": 52
             }
         },
         "video": {
@@ -4520,69 +4551,69 @@
                 "count": 190
             },
             "World of Video": {
-                "count": 64
+                "count": 65
             }
         },
         "mobile_phone": {
             "Билайн": {
-                "count": 117
+                "count": 120
             },
             "ソフトバンクショップ (SoftBank shop)": {
-                "count": 258
+                "count": 256
             },
             "Vodafone": {
-                "count": 323
+                "count": 335
             },
             "O2": {
-                "count": 188
+                "count": 190
             },
             "Carphone Warehouse": {
-                "count": 114
+                "count": 116
             },
             "Orange": {
-                "count": 231
-            },
-            "Verizon Wireless": {
-                "count": 100
-            },
-            "Sprint": {
-                "count": 95
-            },
-            "T-Mobile": {
-                "count": 162
-            },
-            "МТС": {
-                "count": 327
-            },
-            "Евросеть": {
-                "count": 482
-            },
-            "Bell": {
-                "count": 189
-            },
-            "The Phone House": {
-                "count": 81
-            },
-            "SFR": {
-                "count": 68
-            },
-            "Связной": {
-                "count": 415
-            },
-            "Мегафон": {
                 "count": 236
             },
+            "Verizon Wireless": {
+                "count": 104
+            },
+            "Sprint": {
+                "count": 97
+            },
+            "T-Mobile": {
+                "count": 169
+            },
+            "МТС": {
+                "count": 334
+            },
+            "Евросеть": {
+                "count": 489
+            },
+            "Bell": {
+                "count": 188
+            },
+            "The Phone House": {
+                "count": 83
+            },
+            "SFR": {
+                "count": 69
+            },
+            "Связной": {
+                "count": 419
+            },
+            "Мегафон": {
+                "count": 238
+            },
             "AT&T": {
-                "count": 109
+                "count": 111
             },
             "ドコモショップ (docomo shop)": {
-                "count": 114
+                "count": 115
             },
             "au": {
-                "count": 60
+                "count": 61
             },
             "Movistar": {
-                "count": 66
+                "count": 69
             },
             "Bitė": {
                 "count": 72
@@ -4594,50 +4625,41 @@
                 "count": 55
             },
             "DNS": {
-                "count": 123
+                "count": 124
             }
         },
         "hairdresser": {
             "Klier": {
-                "count": 110
-            },
-            "Friseur": {
-                "count": 129
+                "count": 112
             },
             "Supercuts": {
                 "count": 96
             },
             "Hairkiller": {
-                "count": 51
+                "count": 52
             },
             "Great Clips": {
-                "count": 166
+                "count": 169
             },
             "Парикмахерская": {
-                "count": 498
-            },
-            "Coiffeur": {
-                "count": 62
+                "count": 502
             },
             "Fryzjer": {
-                "count": 51
+                "count": 53
             },
             "Franck Provost": {
                 "count": 67
             },
             "Салон красоты": {
-                "count": 66
-            },
-            "Peluqueria": {
-                "count": 57
+                "count": 67
             }
         },
         "hardware": {
             "1000 мелочей": {
-                "count": 54
+                "count": 57
             },
             "Хозтовары": {
-                "count": 146
+                "count": 149
             },
             "Стройматериалы": {
                 "count": 52
@@ -4645,10 +4667,10 @@
         },
         "motorcycle": {
             "Yamaha": {
-                "count": 61
+                "count": 63
             },
             "Honda": {
-                "count": 55
+                "count": 57
             }
         }
     }
