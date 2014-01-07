@@ -6,7 +6,6 @@ iD.Graph = function(other, mutable) {
         this.entities = _.assign(Object.create(base.entities), other.entities);
         this._parentWays = _.assign(Object.create(base.parentWays), other._parentWays);
         this._parentRels = _.assign(Object.create(base.parentRels), other._parentRels);
-        this.inherited = true;
 
     } else {
         this.entities = Object.create({});

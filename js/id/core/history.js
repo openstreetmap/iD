@@ -257,7 +257,6 @@ iD.History = function(context) {
                 });
             }
 
-            stack[0].graph.inherited = false;
             dispatch.change();
 
             return history;
