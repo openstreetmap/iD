@@ -32,6 +32,8 @@ iD.ui.Sidebar = function(context) {
             }
         };
 
+        sidebar.hover = _.throttle(sidebar.hover, 200);
+
         sidebar.select = function(id, newFeature) {
             if (!current && id) {
                 featureListWrap.classed('inspector-hidden', true);
