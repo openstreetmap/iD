@@ -27,13 +27,13 @@ iD.behavior.Tail = function() {
                 ~~d3.event.clientY + 'px)');
         }
 
-        function mouseout() {
+        function mouseleave() {
             if (d3.event.relatedTarget !== container.node()) {
                 container.style('display', 'none');
             }
         }
 
-        function mouseover() {
+        function mouseenter() {
             if (d3.event.relatedTarget !== container.node()) {
                 show();
             }
@@ -49,8 +49,8 @@ iD.behavior.Tail = function() {
 
         selection
             .on('mousemove.tail', mousemove)
-            .on('mouseover.tail', mouseover)
-            .on('mouseout.tail', mouseout);
+            .on('mouseenter.tail', mouseenter)
+            .on('mouseleave.tail', mouseleave);
 
         container
             .on('mousemove.tail', mousemove);
@@ -68,8 +68,8 @@ iD.behavior.Tail = function() {
 
         selection
             .on('mousemove.tail', null)
-            .on('mouseover.tail', null)
-            .on('mouseout.tail', null);
+            .on('mouseenter.tail', null)
+            .on('mouseleave.tail', null);
 
         d3.select(window)
             .on('resize.tail', null);
