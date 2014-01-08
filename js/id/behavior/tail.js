@@ -3,8 +3,7 @@ iD.behavior.Tail = function() {
         container,
         xmargin = 25,
         tooltipSize = [0, 0],
-        selectionSize = [0, 0],
-        transformProp = iD.util.prefixCSSProperty('Transform');
+        selectionSize = [0, 0];
 
     function tail(selection) {
         if (!text) return;
@@ -22,9 +21,7 @@ iD.behavior.Tail = function() {
             var xoffset = ((d3.event.clientX + tooltipSize[0] + xmargin) > selectionSize[0]) ?
                 -tooltipSize[0] - xmargin : xmargin;
             container.classed('left', xoffset > 0);
-            container.style(transformProp, 'translate(' +
-                (~~d3.event.clientX + xoffset) + 'px,' +
-                ~~d3.event.clientY + 'px)');
+            iD.util.setTransform(container, d3.event.clientX + xoffset, d3.event.clientY);
         }
 
         function mouseout() {
