@@ -7,8 +7,7 @@ iD.ui.Background = function(context) {
             ['right', [-1, 0]],
             ['bottom', [0, 1]]],
         opacityDefault = (context.storage('background-opacity') !== null) ?
-            (+context.storage('background-opacity')) : 0.5,
-        transformProp = iD.util.prefixCSSProperty('Transform');
+            (+context.storage('background-opacity')) : 0.5;
 
     // Can be 0 from <1.3.0 use or due to issue #1923.
     if (opacityDefault === 0) opacityDefault = 0.5;
@@ -22,7 +21,7 @@ iD.ui.Background = function(context) {
                 .attr('data-opacity', d);
 
             if (!iD.detect().opera) {
-                bg.style(transformProp, 'translate3d(0,0,0)');
+                iD.util.setTransform(bg, 0, 0);
             }
 
             opacityList.selectAll('li')

@@ -82,6 +82,15 @@ iD.util.prefixCSSProperty = function(property) {
     return false;
 };
 
+
+iD.util.setTransform = function(el, x, y, scale) {
+    var prop = iD.util.transformProperty = iD.util.transformProperty || iD.util.prefixCSSProperty('Transform'),
+        translate = iD.detect().opera ?
+            'translate('   + x + 'px,' + y + 'px)' :
+            'translate3d(' + x + 'px,' + y + 'px,0)';
+    return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
+};
+
 iD.util.getStyle = function(selector) {
     for (var i = 0; i < document.styleSheets.length; i++) {
         var rules = document.styleSheets[i].rules || document.styleSheets[i].cssRules || [];
