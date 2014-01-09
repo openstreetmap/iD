@@ -22,15 +22,19 @@ iD.Connection = function() {
         off;
 
     connection.changesetURL = function(changesetId) {
-        return url + '/browse/changeset/' + changesetId;
+        return url + '/changeset/' + changesetId;
     };
 
-    connection.changesetsURL = function(extent) {
-        return url + '/browse/changesets?bbox=' + extent.toParam();
+    connection.changesetsURL = function(center, zoom) {
+        var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
+        return url + '/history#map=' +
+            Math.floor(zoom) + '/' +
+            center[1].toFixed(precision) + '/' +
+            center[0].toFixed(precision);
     };
 
     connection.entityURL = function(entity) {
-        return url + '/browse/' + entity.type + '/' + entity.osmId();
+        return url + '/' + entity.type + '/' + entity.osmId();
     };
 
     connection.userURL = function(username) {

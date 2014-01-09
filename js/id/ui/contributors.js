@@ -34,7 +34,7 @@ iD.ui.Contributors = function(context) {
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
                 .attr('href', function() {
-                    return context.connection().changesetsURL(context.map().extent());
+                    return context.connection().changesetsURL(context.map().center(), context.map().zoom());
                 })
                 .text(u.length - limit + 1);
 
