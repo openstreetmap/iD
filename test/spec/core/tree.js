@@ -118,7 +118,7 @@ describe("iD.Tree", function() {
         });
 
         it("don't include parent way multiple times when multiple child nodes are moved", function() {
-            // checks against the following regression: https://github.com/systemed/iD/issues/1978
+            // checks against the following regression: https://github.com/openstreetmap/iD/issues/1978
             var graph = iD.Graph(),
                 tree = iD.Tree(graph),
                 n1 = iD.Node({id: 'n1', loc: [1, 1]}),

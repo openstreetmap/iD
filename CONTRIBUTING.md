@@ -64,7 +64,7 @@ project** button near the bottom of the project page. You can edit your
 getting too many notifications.
 
 Translations are licensed under
-[WTFPL](https://raw.github.com/systemed/iD/master/LICENSE), the same license
+[WTFPL](https://raw.github.com/openstreetmap/iD/master/LICENSE), the same license
 as iD.
 
 **Why are there so many duplicate "Type" translations?** There are multiple
@@ -194,4 +194,4 @@ So let's say you've changed `js/ui/confirm.js`.
 1. Run `jshint js/id` to make sure your code is clean
 2. Run tests with `npm test`
 3. Commit your changes with an informative commit message
-4. [Submit a pull request](https://help.github.com/articles/using-pull-requests) to the `systemed/iD` project.
+4. [Submit a pull request](https://help.github.com/articles/using-pull-requests) to the `openstreetmap/iD` project.

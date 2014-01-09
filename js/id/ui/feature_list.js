@@ -107,7 +107,7 @@ iD.ui.FeatureList = function(context) {
             }
 
             (geocodeResults || []).forEach(function(d) {
-                // https://github.com/systemed/iD/issues/1890
+                // https://github.com/openstreetmap/iD/issues/1890
                 if (d.osm_type && d.osm_id) {
                     result.push({
                         id: iD.Entity.id.fromOSM(d.osm_type, d.osm_id),

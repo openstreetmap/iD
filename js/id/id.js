@@ -5,7 +5,7 @@ window.iD = function () {
     var context = {},
         storage;
 
-    // https://github.com/systemed/iD/issues/772
+    // https://github.com/openstreetmap/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
     try { storage = localStorage; } catch (e) {}
     storage = storage || (function() {

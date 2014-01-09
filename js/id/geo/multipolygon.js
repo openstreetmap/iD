@@ -1,5 +1,5 @@
 // For fixing up rendering of multipolygons with tags on the outer member.
-// https://github.com/systemed/iD/issues/613
+// https://github.com/openstreetmap/iD/issues/613
 iD.geo.isSimpleMultipolygonOuterMember = function(entity, graph) {
     if (entity.type !== 'way')
         return false;

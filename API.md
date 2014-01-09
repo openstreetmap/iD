@@ -13,7 +13,7 @@ in the hash portion of the URL:
    way or relation, respectively. Selects the specified entity, and, unless
    a `map` parameter is also provided, centers the map on it.
 * `background` - The value from a `sourcetag` property in iD's
-  [imagery list](https://github.com/systemed/iD/blob/master/data/imagery.json),
+  [imagery list](https://github.com/openstreetmap/iD/blob/master/data/imagery.json),
   or a custom tile URL. A custom URL is specified in the format `custom:<url>`,
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
