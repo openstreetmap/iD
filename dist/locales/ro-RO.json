@@ -1,0 +1,39 @@
+{
+    "modes": {
+        "add_line": {
+            "title": "Linie"
+        },
+        "add_point": {
+            "title": "Punct"
+        }
+    },
+    "operations": {
+        "continue": {
+            "key": "A"
+        },
+        "orthogonalize": {
+            "key": "S"
+        },
+        "straighten": {
+            "key": "S"
+        }
+    },
+    "inspector": {
+        "role": "Rol",
+        "location": "Locație"
+    },
+    "success": {
+        "facebook": "Distribuie pe Facebook"
+    },
+    "intro": {
+        "points": {
+            "title": "Puncte"
+        },
+        "lines": {
+            "title": "Linii"
+        },
+        "startediting": {
+            "start": "Începe cartografierea!"
+        }
+    }
+}

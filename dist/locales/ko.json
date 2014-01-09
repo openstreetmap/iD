@@ -252,7 +252,11 @@
         "incomplete": "<다운로드되지 않음>",
         "feature_list": "기능 검색",
         "edit": "기능 편집",
-        "none": "없음"
+        "none": "없음",
+        "node": "노드",
+        "way": "길",
+        "relation": "관계",
+        "location": "위치"
     },
     "background": {
         "title": "배경",
@@ -312,6 +316,7 @@
         "untagged_area": "태그되지 않은 지역",
         "many_deletions": "개체 {n}개를 삭제하고 있습니다. 이를 수행하겠습니까? 다른 사람이 openstreetmap.org에서 보는 지도에서 삭제됩니다.",
         "tag_suggests_area": "{tag} 태그 제안 선은 지역이여야 하지만 태그는 지역이 아닙니다",
+        "untagged_tooltip": "이 {geometry}가 무엇인지 설명하는 기능 유형을 선택하세요.",
         "deprecated_tags": "사용되지 않는 태그: {tags}"
     },
     "zoom": {
@@ -390,6 +395,9 @@
         "categories": {
             "category-building": {
                 "name": "건물"
+            },
+            "category-golf": {
+                "name": "골프"
             },
             "category-landuse": {
                 "name": "토지 이용"
@@ -569,6 +577,10 @@
             "generator/type": {
                 "label": "유형"
             },
+            "golf_hole": {
+                "label": "참고",
+                "placeholder": "홀 수 (1-18)"
+            },
             "highway": {
                 "label": "유형"
             },
@@ -583,6 +595,9 @@
             },
             "incline": {
                 "label": "경사"
+            },
+            "information": {
+                "label": "유형"
             },
             "internet_access": {
                 "label": "인터넷 액세스",
@@ -649,6 +664,9 @@
             },
             "operator": {
                 "label": "운영자"
+            },
+            "par": {
+                "placeholder": "3, 4, 5..."
             },
             "park_ride": {
                 "label": "파크 앤드 라이드"
@@ -935,6 +953,9 @@
                 "name": "관리소",
                 "terms": "레인저 스테이션"
             },
+            "amenity/recycling": {
+                "name": "재활용"
+            },
             "amenity/restaurant": {
                 "name": "음식점"
             },
@@ -1078,6 +1099,32 @@
             },
             "footway/sidewalk": {
                 "name": "보도"
+            },
+            "golf/bunker": {
+                "name": "샌드 트랩",
+                "terms": "모래 함정"
+            },
+            "golf/fairway": {
+                "name": "페어웨이"
+            },
+            "golf/green": {
+                "name": "퍼팅 그린"
+            },
+            "golf/hole": {
+                "name": "골프 홀",
+                "terms": "골프 구멍"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "래터럴 워터 해저드"
+            },
+            "golf/rough": {
+                "name": "러프"
+            },
+            "golf/tee": {
+                "name": "티 박스"
+            },
+            "golf/water_hazard": {
+                "name": "워터 해저드"
             },
             "highway": {
                 "name": "고속도로"

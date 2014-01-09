@@ -252,7 +252,11 @@
         "incomplete": "<nije preuzeto>",
         "feature_list": "Pretraži svojstva",
         "edit": "Uredi svojstvo",
-        "none": "Nijedna"
+        "none": "Nijedna",
+        "node": "Točka",
+        "way": "Put",
+        "relation": "Relacija",
+        "location": "Lokacija"
     },
     "background": {
         "title": "Pozadina",
@@ -312,6 +316,7 @@
         "untagged_area": "Neoznačeno područje",
         "many_deletions": "Brišeš {n} objekata. Jesi li siguran/na da to želiš učiniti? Ovo će ih obrisati sa karte koju svi vide na openstreetmap.org.",
         "tag_suggests_area": "Oznaka {tag} ukazuje da bi linija trebala biti područje, ali nije područje",
+        "untagged_tooltip": "Odaberi značajku koja opisuje što ova {geometrija} predstavlja.",
         "deprecated_tags": "Zastarjele oznake: {tags}"
     },
     "zoom": {
@@ -732,6 +737,9 @@
             },
             "trail_visibility": {
                 "label": "Vidljivost staze"
+            },
+            "tunnel": {
+                "label": "Tunel"
             },
             "vending": {
                 "label": "Vrsta robe"

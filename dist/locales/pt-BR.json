@@ -252,7 +252,11 @@
         "incomplete": "<não baixado>",
         "feature_list": "Buscar elementos",
         "edit": "Editar elemento",
-        "none": "Nenhum"
+        "none": "Nenhum",
+        "node": "Nó",
+        "way": "Linha",
+        "relation": "Relação",
+        "location": "Local"
     },
     "background": {
         "title": "Imagem de Fundo",
@@ -312,6 +316,7 @@
         "untagged_area": "Área sem etiquetas",
         "many_deletions": "Você está deletando {n} objetos. Você tem certeza que quer fazer isto? Isto irá deletá-los do mapa que todos veem no openstreetmap.org.",
         "tag_suggests_area": "A etiqueta {tag} sugere que seja utilizada numa área, mas essa linha não é uma área",
+        "untagged_tooltip": "Selecione um tipo de feição que descreve o que esta {geometry} é.",
         "deprecated_tags": "Etiquetas obsoletas: {tags}"
     },
     "zoom": {

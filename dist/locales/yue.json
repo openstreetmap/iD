@@ -252,7 +252,11 @@
         "incomplete": "<無傳落來>",
         "feature_list": "搵地貌",
         "edit": "改地貌",
-        "none": "無"
+        "none": "無",
+        "node": "節",
+        "way": "徑",
+        "relation": "關聯",
+        "location": "地點"
     },
     "background": {
         "title": "背景",
@@ -312,6 +316,7 @@
         "untagged_area": "冇籤嘅範圍",
         "many_deletions": "你要刪走物件{n}個。你真係想咁做？咁人人用開嘅公家街圖入便，都會刪走埋。",
         "tag_suggests_area": "{tag}籤話條綫係範圍，實情佢唔係。",
+        "untagged_tooltip": "揀個地貌，形容到爾一{geometry}。",
         "deprecated_tags": "廢籤：{tags}"
     },
     "zoom": {
@@ -391,6 +396,9 @@
             "category-building": {
                 "name": "屋宇"
             },
+            "category-golf": {
+                "name": "哥夫球"
+            },
             "category-landuse": {
                 "name": "用地"
             },
@@ -467,6 +475,33 @@
             "admin_level": {
                 "label": "行政層次"
             },
+            "aerialway": {
+                "label": "類"
+            },
+            "aerialway/access": {
+                "label": "通"
+            },
+            "aerialway/bubble": {
+                "label": "泡"
+            },
+            "aerialway/capacity": {
+                "label": "載量（一小時計）",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "行程（分鐘）",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "有暖氣"
+            },
+            "aerialway/occupancy": {
+                "label": "一車人數",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "通（夏天）"
+            },
             "aeroway": {
                 "label": "類"
             },
@@ -500,6 +535,9 @@
             "building_area": {
                 "label": "屋宇"
             },
+            "cans": {
+                "label": "收罐"
+            },
             "capacity": {
                 "label": "容納",
                 "placeholder": "50, 100, 200..."
@@ -514,6 +552,9 @@
                     "anticlockwise": "逆時針"
                 }
             },
+            "clothes": {
+                "label": "收衫"
+            },
             "collection_times": {
                 "label": "收集時間"
             },
@@ -522,6 +563,9 @@
             },
             "country": {
                 "label": "國"
+            },
+            "covered": {
+                "label": "有蓋"
             },
             "crossing": {
                 "label": "類"
@@ -537,6 +581,9 @@
             },
             "description": {
                 "label": "描述"
+            },
+            "electrified": {
+                "label": "用電"
             },
             "elevation": {
                 "label": "海拔"
@@ -569,6 +616,17 @@
             "generator/type": {
                 "label": "類"
             },
+            "glass": {
+                "label": "收玻璃"
+            },
+            "golf_hole": {
+                "label": "參攷",
+                "placeholder": "洞數（一到十八）"
+            },
+            "handicap": {
+                "label": "差點",
+                "placeholder": "1-18"
+            },
             "highway": {
                 "label": "類"
             },
@@ -583,6 +641,9 @@
             },
             "incline": {
                 "label": "斜"
+            },
+            "information": {
+                "label": "類"
             },
             "internet_access": {
                 "label": "用到互聯網",
@@ -650,6 +711,13 @@
             "operator": {
                 "label": "承辦商"
             },
+            "paper": {
+                "label": "收紙"
+            },
+            "par": {
+                "label": "標準桿",
+                "placeholder": "3, 4, 5..."
+            },
             "park_ride": {
                 "label": "泊車轉乖"
             },
@@ -659,6 +727,15 @@
             "phone": {
                 "label": "電話",
                 "placeholder": "+852 12345678"
+            },
+            "piste/difficulty": {
+                "label": "難度"
+            },
+            "piste/grooming": {
+                "label": "雪道類"
+            },
+            "piste/type": {
+                "label": "類"
             },
             "place": {
                 "label": "類"
@@ -751,6 +828,9 @@
             "tree_type": {
                 "label": "類"
             },
+            "tunnel": {
+                "label": "隧道"
+            },
             "vending": {
                 "label": "貨類"
             },
@@ -781,6 +861,22 @@
             "address": {
                 "name": "地埗",
                 "terms": "Address,地址,地埗,址"
+            },
+            "aerialway": {
+                "name": "吊道",
+                "terms": "Aerialway,吊道"
+            },
+            "aerialway/cable_car": {
+                "name": "吊車",
+                "terms": "Cable Car,吊車,䌫車"
+            },
+            "aerialway/chair_lift": {
+                "name": "吊櫈",
+                "terms": "Chair Lift,吊櫈"
+            },
+            "aerialway/gondola": {
+                "name": "吊船",
+                "terms": "Gondola,吊船"
             },
             "aeroway": {
                 "name": "航空設施",
@@ -899,8 +995,8 @@
                 "terms": "Fast Food,快餐店"
             },
             "amenity/fire_station": {
-                "name": "消防局",
-                "terms": "Fire Station,水車館,消費局,消防局,消防站"
+                "name": "滅火局",
+                "terms": "Fire Station,滅火局,水車館,消防局,消防站,救火局"
             },
             "amenity/fountain": {
                 "name": "噴水池",
@@ -977,6 +1073,10 @@
             "amenity/ranger_station": {
                 "name": "郊野訪客處",
                 "terms": "Ranger Station,郊野訪客處,野郊訪客處"
+            },
+            "amenity/recycling": {
+                "name": "囘收桶",
+                "terms": "Recycling,囘收桶,囘收箱,回收桶,回收箱"
             },
             "amenity/restaurant": {
                 "name": "餐廳",
@@ -1138,6 +1238,14 @@
                 "name": "住宅樓宇",
                 "terms": "Residential Building,住宅建築物,住宅樓宇"
             },
+            "craft/watchmaker": {
+                "name": "鐘錶匠",
+                "terms": "Watchmaker,鐘錶匠"
+            },
+            "craft/window_construction": {
+                "name": "造窗",
+                "terms": "Window Construction,造窗"
+            },
             "embankment": {
                 "name": "基堤",
                 "terms": "Embankment,基堤,堤,堤壩,堤岸"
@@ -1165,6 +1273,38 @@
             "footway/sidewalk": {
                 "name": "行人路",
                 "terms": "Sidewalk,行人路"
+            },
+            "golf/bunker": {
+                "name": "沙坑",
+                "terms": "Sand Trap,沙坑"
+            },
+            "golf/fairway": {
+                "name": "球道",
+                "terms": "Fairway,球道"
+            },
+            "golf/green": {
+                "name": "菓嶺",
+                "terms": "Putting Green,果嶺,菓嶺"
+            },
+            "golf/hole": {
+                "name": "歌夫球洞",
+                "terms": "Golf Hole,歌夫球洞"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "側面水障區",
+                "terms": "Lateral Water Hazard,側面水障區"
+            },
+            "golf/rough": {
+                "name": "深草區",
+                "terms": "Rough,深草區"
+            },
+            "golf/tee": {
+                "name": "發球區",
+                "terms": "Tee Box,發球區,開球區"
+            },
+            "golf/water_hazard": {
+                "name": "水障區",
+                "terms": "Water Hazard,水障區"
             },
             "highway": {
                 "name": "公路",
@@ -1841,6 +1981,10 @@
             "railway/monorail": {
                 "name": "單軌",
                 "terms": "Monorail,單軌,單軌鐵路,單軌電車"
+            },
+            "railway/narrow_gauge": {
+                "name": "窄軌火車",
+                "terms": "Narrow Gauge Rails,窄軌火車,窄軌,窄軌鐵路"
             },
             "railway/platform": {
                 "name": "月臺",

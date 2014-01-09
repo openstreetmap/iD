@@ -252,7 +252,11 @@
         "incomplete": "<no baixat>",
         "feature_list": "Cerca característiques",
         "edit": "Editar la característica",
-        "none": "Cap"
+        "none": "Cap",
+        "node": "Node",
+        "way": "Via",
+        "relation": "Relació",
+        "location": "Ubicació"
     },
     "background": {
         "title": "Fons",
@@ -312,6 +316,7 @@
         "untagged_area": "Àrea sense etiquetar",
         "many_deletions": "Esteu eliminant {n} objectes. Esteu segurs que voleu fer-ho? Això els eliminarà dels mapa que tothom veu a openstreetmap.org",
         "tag_suggests_area": "L'etiqueta {tag} suggereix que la línia hauria de ser una àrea, però no és una àrea",
+        "untagged_tooltip": "Seleccioneu un tipus de característica que descrigui el que és aquesta {geometry}.",
         "deprecated_tags": "Etiquetes obsoletes : {tags}"
     },
     "zoom": {
@@ -391,6 +396,9 @@
             "category-building": {
                 "name": "Edifici"
             },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Aprofitament del terreny"
             },
@@ -457,7 +465,7 @@
             "address": {
                 "label": "Adreça",
                 "placeholders": {
-                    "housename": "Número de carrer",
+                    "housename": "Nom de l'edifici",
                     "number": "123",
                     "street": "Carrer",
                     "city": "Ciutat ",
@@ -466,6 +474,33 @@
             },
             "admin_level": {
                 "label": "Nivell administratiu"
+            },
+            "aerialway": {
+                "label": "Tipus"
+            },
+            "aerialway/access": {
+                "label": "Accés"
+            },
+            "aerialway/bubble": {
+                "label": "Bombolla"
+            },
+            "aerialway/capacity": {
+                "label": "Capacitat (per hora)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Duració (minuts)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "Climatitzat"
+            },
+            "aerialway/occupancy": {
+                "label": "Ocupació",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Accés (estival)"
             },
             "aeroway": {
                 "label": "Tipus"
@@ -500,6 +535,9 @@
             "building_area": {
                 "label": "Edifici"
             },
+            "cans": {
+                "label": "Accepta llaunes"
+            },
             "capacity": {
                 "label": "Capacitat",
                 "placeholder": "50, 100, 200..."
@@ -514,6 +552,9 @@
                     "anticlockwise": "en sentit contrari al de les agulles del rellotge"
                 }
             },
+            "clothes": {
+                "label": "Accepta roba"
+            },
             "collection_times": {
                 "label": "Horari de recollida"
             },
@@ -522,6 +563,9 @@
             },
             "country": {
                 "label": "País"
+            },
+            "covered": {
+                "label": "Cobert"
             },
             "crossing": {
                 "label": "Tipus"
@@ -537,6 +581,9 @@
             },
             "description": {
                 "label": "Descripció"
+            },
+            "electrified": {
+                "label": "Electrificació"
             },
             "elevation": {
                 "label": "Elevació"
@@ -560,6 +607,9 @@
             "fixme": {
                 "label": "Arregla'm"
             },
+            "gauge": {
+                "label": "Ample"
+            },
             "generator/method": {
                 "label": "Mètode"
             },
@@ -568,6 +618,17 @@
             },
             "generator/type": {
                 "label": "Tipus"
+            },
+            "glass": {
+                "label": "Accepta vidre"
+            },
+            "golf_hole": {
+                "label": "Referència",
+                "placeholder": "Número de forat (1-18)"
+            },
+            "handicap": {
+                "label": "Handicap",
+                "placeholder": "1-18"
             },
             "highway": {
                 "label": "Tipus"
@@ -583,6 +644,9 @@
             },
             "incline": {
                 "label": "Pendent"
+            },
+            "information": {
+                "label": "Tipus"
             },
             "internet_access": {
                 "label": "Accés a Internet",
@@ -650,6 +714,13 @@
             "operator": {
                 "label": "Operador"
             },
+            "paper": {
+                "label": "Accepta paper"
+            },
+            "par": {
+                "label": "Par",
+                "placeholder": "3, 4, 5..."
+            },
             "park_ride": {
                 "label": "Aparca i viatja "
             },
@@ -659,6 +730,15 @@
             "phone": {
                 "label": "Telèfon",
                 "placeholder": "+31 42 123 4567"
+            },
+            "piste/difficulty": {
+                "label": "Dificultat"
+            },
+            "piste/grooming": {
+                "label": "Adequació"
+            },
+            "piste/type": {
+                "label": "Tipus"
             },
             "place": {
                 "label": "Tipus"
@@ -727,6 +807,9 @@
                     "cutting": "Trinxera"
                 }
             },
+            "studio_type": {
+                "label": "Tipus"
+            },
             "supervised": {
                 "label": "Supervisat"
             },
@@ -750,6 +833,9 @@
             },
             "tree_type": {
                 "label": "Tipus"
+            },
+            "tunnel": {
+                "label": "Túnel"
             },
             "vending": {
                 "label": "Tipus de mercaderies"
@@ -781,6 +867,36 @@
             "address": {
                 "name": "Adreça",
                 "terms": "Adreça, Direcció, Domicili"
+            },
+            "aerialway": {
+                "name": "Transport per cable"
+            },
+            "aerialway/cable_car": {
+                "name": "Telefèric"
+            },
+            "aerialway/chair_lift": {
+                "name": "Telecadira"
+            },
+            "aerialway/gondola": {
+                "name": "Telecabina"
+            },
+            "aerialway/magic_carpet": {
+                "name": "Cinta remuntadora"
+            },
+            "aerialway/platter": {
+                "name": "Teleesquí individual"
+            },
+            "aerialway/pylon": {
+                "name": "Piló d'estructura de transport per cable"
+            },
+            "aerialway/rope_tow": {
+                "name": "Corda remuntadora"
+            },
+            "aerialway/station": {
+                "name": "Estació de transport per cable"
+            },
+            "aerialway/t-bar": {
+                "name": "Teleesquí doble"
             },
             "aeroway": {
                 "name": "Infraestructura aeroportuària",
@@ -876,6 +992,9 @@
                 "name": "Cinema",
                 "terms": "Cinema, Cine, Local de projeccions cinematogràfiques, Local d'esbarjo"
             },
+            "amenity/clinic": {
+                "name": "Clínica"
+            },
             "amenity/college": {
                 "name": "Campus universitari",
                 "terms": "Col·legi, Campus universitàri, universitat, facultat"
@@ -883,6 +1002,12 @@
             "amenity/courthouse": {
                 "name": "Jutjat",
                 "terms": "Jutjats, Palau de justícia"
+            },
+            "amenity/dentist": {
+                "name": "Dentista"
+            },
+            "amenity/doctor": {
+                "name": "Doctor"
             },
             "amenity/drinking_water": {
                 "name": "Aigua apte per al consum",
@@ -974,6 +1099,9 @@
             "amenity/ranger_station": {
                 "name": "Base d'Agents Rurals"
             },
+            "amenity/recycling": {
+                "name": "Reciclatge"
+            },
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "Restaurant, Lloc per menjar, Bistro, Wok, Trattoria, Pizzeria"
@@ -984,6 +1112,9 @@
             },
             "amenity/shelter": {
                 "name": "Refugi"
+            },
+            "amenity/studio": {
+                "name": "Estudi"
             },
             "amenity/swimming_pool": {
                 "name": "Piscina",
@@ -1015,6 +1146,9 @@
             },
             "amenity/vending_machine": {
                 "name": "Màquina de vending"
+            },
+            "amenity/veterinary": {
+                "name": "Veterinari"
             },
             "amenity/waste_basket": {
                 "name": "Paperera",
@@ -1122,6 +1256,81 @@
             "building/residential": {
                 "name": "Edifici residencial"
             },
+            "craft/basket_maker": {
+                "name": "Cistellaire"
+            },
+            "craft/beekeeper": {
+                "name": "Apicultor"
+            },
+            "craft/blacksmith": {
+                "name": "Ferrer"
+            },
+            "craft/boatbuilder": {
+                "name": "Constructor d'embarcacions"
+            },
+            "craft/bookbinder": {
+                "name": "Enquadernador"
+            },
+            "craft/brewery": {
+                "name": "Cerveseria"
+            },
+            "craft/carpenter": {
+                "name": "Fuster"
+            },
+            "craft/carpet_layer": {
+                "name": "Moquetista"
+            },
+            "craft/caterer": {
+                "name": "Servei de càtering"
+            },
+            "craft/clockmaker": {
+                "name": "Rellotger"
+            },
+            "craft/dressmaker": {
+                "name": "Sastreria"
+            },
+            "craft/electrician": {
+                "name": "Electricista"
+            },
+            "craft/gardener": {
+                "name": "Jardiner"
+            },
+            "craft/hvac": {
+                "name": "Empresa d'instal·lacions climàtiques"
+            },
+            "craft/jeweler": {
+                "name": "Joieria"
+            },
+            "craft/metal_construction": {
+                "name": "Construccions metàliques"
+            },
+            "craft/optician": {
+                "name": "Òptica"
+            },
+            "craft/painter": {
+                "name": "pintor"
+            },
+            "craft/photographer": {
+                "name": "Fotògraf"
+            },
+            "craft/photographic_labratory": {
+                "name": "Laboratori fotogràfic"
+            },
+            "craft/plumber": {
+                "name": "Llauner"
+            },
+            "craft/sculpter": {
+                "name": "Escultor"
+            },
+            "craft/watchmaker": {
+                "name": "Fabricant de rellotges"
+            },
+            "craft/window_construction": {
+                "name": "Fabricant de finestres"
+            },
+            "embankment": {
+                "name": "Terraplè "
+            },
             "emergency/ambulance_station": {
                 "name": "Parada d'ambulàncies"
             },
@@ -1140,6 +1349,30 @@
             },
             "footway/sidewalk": {
                 "name": "Vorera"
+            },
+            "golf/bunker": {
+                "name": "Bunker"
+            },
+            "golf/fairway": {
+                "name": "Fairway"
+            },
+            "golf/green": {
+                "name": "Green"
+            },
+            "golf/hole": {
+                "name": "Forat"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "Obstacle d'aigua lateral"
+            },
+            "golf/rough": {
+                "name": "Rough"
+            },
+            "golf/tee": {
+                "name": "Àrea inicial"
+            },
+            "golf/water_hazard": {
+                "name": "Obstacle d'aigua"
             },
             "highway": {
                 "name": "Via"
@@ -1190,6 +1423,9 @@
             "highway/residential": {
                 "name": "Carrer"
             },
+            "highway/rest_area": {
+                "name": "Àrea de descans"
+            },
             "highway/road": {
                 "name": "Carretera sense classificació"
             },
@@ -1217,6 +1453,9 @@
             "highway/service/parking_aisle": {
                 "name": "Carrer d'aparcament",
                 "terms": "Passadís de pàrquing, pàrquing, parking, aparcament, carrer interior d'aparcament, carrer per aparcar, carrer de pàrqquing, carrer de parking"
+            },
+            "highway/services": {
+                "name": "Àrea de servei"
             },
             "highway/steps": {
                 "name": "Escales"
@@ -1404,6 +1643,12 @@
             "man_made/cutline": {
                 "name": "Línia de tall"
             },
+            "man_made/embankment": {
+                "name": "Terraplè "
+            },
+            "man_made/flagpole": {
+                "name": "Màstil"
+            },
             "man_made/lighthouse": {
                 "name": "Far"
             },
@@ -1433,6 +1678,18 @@
             },
             "man_made/water_works": {
                 "name": "Planta potabilitzadora"
+            },
+            "military/airfield": {
+                "name": "Aeròdrom militar"
+            },
+            "military/barracks": {
+                "name": "Caserna militar"
+            },
+            "military/bunker": {
+                "name": "Búnquer"
+            },
+            "military/range": {
+                "name": "Terreny per a usos militars"
             },
             "natural": {
                 "name": "Natural"
@@ -1557,6 +1814,9 @@
             "office/travel_agent": {
                 "name": "Agència de viatges"
             },
+            "piste": {
+                "name": "Pista d'esquí"
+            },
             "place": {
                 "name": "Lloc"
             },
@@ -1608,6 +1868,12 @@
             "power/transformer": {
                 "name": "Transformador"
             },
+            "public_transport/platform": {
+                "name": "Plataforma"
+            },
+            "public_transport/stop_position": {
+                "name": "Posició d'aturada"
+            },
             "railway": {
                 "name": "Ferrocarril"
             },
@@ -1617,6 +1883,9 @@
             "railway/disused": {
                 "name": "Vià de tren fora d'ús"
             },
+            "railway/funicular": {
+                "name": "Funicular"
+            },
             "railway/halt": {
                 "name": "Parada de Ferrocarril"
             },
@@ -1625,6 +1894,9 @@
             },
             "railway/monorail": {
                 "name": "Monocarril"
+            },
+            "railway/narrow_gauge": {
+                "name": "Ferrocarril de via estreta"
             },
             "railway/platform": {
                 "name": "Andana "

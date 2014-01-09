@@ -312,6 +312,7 @@
         "untagged_area": "冇籤嘅範圍",
         "many_deletions": "你要刪走物件{n}個。你真係想咁做？咁人人用開嘅公家街圖入便，都會刪走埋。",
         "tag_suggests_area": "{tag}籤話條綫係範圍，實情佢唔係。",
+        "untagged_tooltip": "揀個地貌，形容到爾一{geometry}。",
         "deprecated_tags": "廢籤：{tags}"
     },
     "zoom": {
@@ -390,6 +391,9 @@
         "categories": {
             "category-building": {
                 "name": "屋宇"
+            },
+            "category-golf": {
+                "name": "哥夫球"
             },
             "category-landuse": {
                 "name": "用地"
@@ -500,6 +504,9 @@
             "building_area": {
                 "label": "屋宇"
             },
+            "cans": {
+                "label": "收罐"
+            },
             "capacity": {
                 "label": "容納",
                 "placeholder": "50, 100, 200..."
@@ -514,6 +521,9 @@
                     "anticlockwise": "逆時針"
                 }
             },
+            "clothes": {
+                "label": "收衫"
+            },
             "collection_times": {
                 "label": "收集時間"
             },
@@ -522,6 +532,9 @@
             },
             "country": {
                 "label": "國"
+            },
+            "covered": {
+                "label": "有蓋"
             },
             "crossing": {
                 "label": "類"
@@ -569,6 +582,17 @@
             "generator/type": {
                 "label": "類"
             },
+            "glass": {
+                "label": "收玻璃"
+            },
+            "golf_hole": {
+                "label": "參攷",
+                "placeholder": "洞數（一到十八）"
+            },
+            "handicap": {
+                "label": "差點",
+                "placeholder": "1-18"
+            },
             "highway": {
                 "label": "類"
             },
@@ -583,6 +607,9 @@
             },
             "incline": {
                 "label": "斜"
+            },
+            "information": {
+                "label": "類"
             },
             "internet_access": {
                 "label": "用到互聯網",
@@ -649,6 +676,13 @@
             },
             "operator": {
                 "label": "承辦商"
+            },
+            "paper": {
+                "label": "收紙"
+            },
+            "par": {
+                "label": "標準桿",
+                "placeholder": "3, 4, 5..."
             },
             "park_ride": {
                 "label": "泊車轉乖"
@@ -978,6 +1012,10 @@
                 "name": "郊野訪客處",
                 "terms": "Ranger Station,郊野訪客處,野郊訪客處"
             },
+            "amenity/recycling": {
+                "name": "囘收桶",
+                "terms": "Recycling,囘收桶,囘收箱,回收桶,回收箱"
+            },
             "amenity/restaurant": {
                 "name": "餐廳",
                 "terms": "Restaurant,茶樓,酒家,酒樓,飯店,飯館,餐廳,餐館"
@@ -1165,6 +1203,38 @@
             "footway/sidewalk": {
                 "name": "行人路",
                 "terms": "Sidewalk,行人路"
+            },
+            "golf/bunker": {
+                "name": "沙坑",
+                "terms": "Sand Trap,沙坑"
+            },
+            "golf/fairway": {
+                "name": "球道",
+                "terms": "Fairway,球道"
+            },
+            "golf/green": {
+                "name": "菓嶺",
+                "terms": "Putting Green,果嶺,菓嶺"
+            },
+            "golf/hole": {
+                "name": "歌夫球洞",
+                "terms": "Golf Hole,歌夫球洞"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "側面水障區",
+                "terms": "Lateral Water Hazard,側面水障區"
+            },
+            "golf/rough": {
+                "name": "深草區",
+                "terms": "Rough,深草區"
+            },
+            "golf/tee": {
+                "name": "發球區",
+                "terms": "Tee Box,發球區,開球區"
+            },
+            "golf/water_hazard": {
+                "name": "水障區",
+                "terms": "Water Hazard,水障區"
             },
             "highway": {
                 "name": "公路",

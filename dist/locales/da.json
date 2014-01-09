@@ -252,7 +252,11 @@
         "incomplete": "<ikke downloadet>",
         "feature_list": "Søgefunktioner",
         "edit": "Ret objekt",
-        "none": "Ingen"
+        "none": "Ingen",
+        "node": "Punkt",
+        "way": "Vej",
+        "relation": "Relation",
+        "location": "Lokalitet"
     },
     "background": {
         "title": "Baggrund",
@@ -312,6 +316,7 @@
         "untagged_area": "Område uden tags",
         "many_deletions": "Du er ved at slette {n} objekter. Er du sikker på du ønsker at gøre dette? Det vil slette dem fra det kort som alle andre ser på openstreetmap.org.",
         "tag_suggests_area": "Tagget {tag} antyder at linjen er et område,  selvom det ikke er et område",
+        "untagged_tooltip": "Vælg en objekttype der beskriver hvad det {geometritype} er.",
         "deprecated_tags": "Forældede tags: {tags}"
     },
     "zoom": {
@@ -391,6 +396,9 @@
             "category-building": {
                 "name": "Bygning"
             },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Brug af land"
             },
@@ -467,6 +475,33 @@
             "admin_level": {
                 "label": "Administrativt niveau"
             },
+            "aerialway": {
+                "label": "Type"
+            },
+            "aerialway/access": {
+                "label": "Adgang"
+            },
+            "aerialway/bubble": {
+                "label": "Skikabine"
+            },
+            "aerialway/capacity": {
+                "label": "Kapacitet (per time)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Varighed (minutter)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "Opvarmet"
+            },
+            "aerialway/occupancy": {
+                "label": "Belægning",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Adgang (sommer)"
+            },
             "aeroway": {
                 "label": "Type"
             },
@@ -500,6 +535,9 @@
             "building_area": {
                 "label": "Bygning"
             },
+            "cans": {
+                "label": "Accepterer dåser"
+            },
             "capacity": {
                 "label": "Kapacitet",
                 "placeholder": "50, 100, 200..."
@@ -514,6 +552,9 @@
                     "anticlockwise": "Mod uret"
                 }
             },
+            "clothes": {
+                "label": "Acceptere tøj"
+            },
             "collection_times": {
                 "label": "Indsamlingstidspunkt"
             },
@@ -522,6 +563,9 @@
             },
             "country": {
                 "label": "Land"
+            },
+            "covered": {
+                "label": "Overdækket"
             },
             "crossing": {
                 "label": "Type"
@@ -537,6 +581,9 @@
             },
             "description": {
                 "label": "Beskrivelse"
+            },
+            "electrified": {
+                "label": "Elektrificering"
             },
             "elevation": {
                 "label": "Højde over havet"
@@ -560,6 +607,9 @@
             "fixme": {
                 "label": "Ret mig"
             },
+            "gauge": {
+                "label": "Sporvidde"
+            },
             "generator/method": {
                 "label": "Metode"
             },
@@ -568,6 +618,17 @@
             },
             "generator/type": {
                 "label": "Type"
+            },
+            "glass": {
+                "label": "Acceptere glas"
+            },
+            "golf_hole": {
+                "label": "Reference",
+                "placeholder": "Hul nummer (1-18)"
+            },
+            "handicap": {
+                "label": "Handikap",
+                "placeholder": "1-18"
             },
             "highway": {
                 "label": "Type"
@@ -583,6 +644,9 @@
             },
             "incline": {
                 "label": "Stigning"
+            },
+            "information": {
+                "label": "Type"
             },
             "internet_access": {
                 "label": "Internetadgang",
@@ -650,6 +714,13 @@
             "operator": {
                 "label": "Operatør"
             },
+            "paper": {
+                "label": "Accepterer papir"
+            },
+            "par": {
+                "label": "Par",
+                "placeholder": "3, 4, 5..."
+            },
             "park_ride": {
                 "label": "Park and ride-anlæg"
             },
@@ -659,6 +730,15 @@
             "phone": {
                 "label": "Telefon",
                 "placeholder": "+31 42 123 4567"
+            },
+            "piste/difficulty": {
+                "label": "Vanskelighedsniveau"
+            },
+            "piste/grooming": {
+                "label": "Sikkerhed"
+            },
+            "piste/type": {
+                "label": "Type"
             },
             "place": {
                 "label": "Type"
@@ -727,6 +807,9 @@
                     "cutting": "Forsænkning"
                 }
             },
+            "studio_type": {
+                "label": "Type"
+            },
             "supervised": {
                 "label": "Supervision"
             },
@@ -750,6 +833,9 @@
             },
             "tree_type": {
                 "label": "Type"
+            },
+            "tunnel": {
+                "label": "Tunnel"
             },
             "vending": {
                 "label": "Gods type"
@@ -781,6 +867,46 @@
             "address": {
                 "name": "Adresse",
                 "terms": "adresse, adresser"
+            },
+            "aerialway": {
+                "name": "Skiliftbane",
+                "terms": "Skiliftbane, Skilift"
+            },
+            "aerialway/cable_car": {
+                "name": "Svævebane",
+                "terms": "Svævebane, Gongolbane"
+            },
+            "aerialway/chair_lift": {
+                "name": "Skilift",
+                "terms": "Skilift, Stolelift"
+            },
+            "aerialway/gondola": {
+                "name": "Gondol",
+                "terms": "Gondol"
+            },
+            "aerialway/magic_carpet": {
+                "name": "Rullebane",
+                "terms": "Rullebane, Skirullebane"
+            },
+            "aerialway/platter": {
+                "name": "Knaplift",
+                "terms": "Knaplift"
+            },
+            "aerialway/pylon": {
+                "name": "Skilifttårn",
+                "terms": "Skilifttårn"
+            },
+            "aerialway/rope_tow": {
+                "name": "Tovlift",
+                "terms": "Tovlift"
+            },
+            "aerialway/station": {
+                "name": "Skiliftstation",
+                "terms": "Skiliftstation"
+            },
+            "aerialway/t-bar": {
+                "name": "Træklift",
+                "terms": "Træklift"
             },
             "aeroway": {
                 "name": "Lufthavnsvej",
@@ -878,6 +1004,14 @@
                 "name": "Biograf",
                 "terms": "Biograf, Bio"
             },
+            "amenity/clinic": {
+                "name": "Klinik",
+                "terms": "Klinik"
+            },
+            "amenity/clock": {
+                "name": "Ur",
+                "terms": "Ur"
+            },
             "amenity/college": {
                 "name": "Gymnasie",
                 "terms": "Gymnasie, Handelsgymnasie"
@@ -885,6 +1019,14 @@
             "amenity/courthouse": {
                 "name": "Domstolsbygning",
                 "terms": "Domstolsbygning, Domstol"
+            },
+            "amenity/dentist": {
+                "name": "Tandlæge",
+                "terms": "Tandlæge"
+            },
+            "amenity/doctor": {
+                "name": "Læge",
+                "terms": "Læge, Doktor"
             },
             "amenity/drinking_water": {
                 "name": "Drikkevand",
@@ -978,6 +1120,10 @@
                 "name": "Rangerstation",
                 "terms": "Rangerstation"
             },
+            "amenity/recycling": {
+                "name": "Genbrug",
+                "terms": "Genbrug"
+            },
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "Restaurant, Spisested, Spisehus"
@@ -989,6 +1135,10 @@
             "amenity/shelter": {
                 "name": "Shelter",
                 "terms": "Shelter, læskur"
+            },
+            "amenity/studio": {
+                "name": "Studie",
+                "terms": "Studie"
             },
             "amenity/swimming_pool": {
                 "name": "Svømmebassin",
@@ -1021,6 +1171,10 @@
             "amenity/vending_machine": {
                 "name": "Automat",
                 "terms": "Automat"
+            },
+            "amenity/veterinary": {
+                "name": "Dyrelæge",
+                "terms": "Dyrelæge, Veterinærdyrelæge"
             },
             "amenity/waste_basket": {
                 "name": "Skraldespand",
@@ -1138,6 +1292,186 @@
                 "name": "Beboelsesbygning",
                 "terms": "Beboelsesbygning, Parcelhus"
             },
+            "craft/basket_maker": {
+                "name": "Kurvemager",
+                "terms": "Kurvemager"
+            },
+            "craft/beekeeper": {
+                "name": "Biavler",
+                "terms": "Biavler"
+            },
+            "craft/blacksmith": {
+                "name": "Smed",
+                "terms": "Smed, Grovsmed"
+            },
+            "craft/boatbuilder": {
+                "name": "Bådbygger",
+                "terms": "Bådbygger, Skibsbygger"
+            },
+            "craft/bookbinder": {
+                "name": "Bogbinder",
+                "terms": "Bogbinder"
+            },
+            "craft/brewery": {
+                "name": "Bryggeri",
+                "terms": "Bryggeri,  Minibryggeri"
+            },
+            "craft/carpenter": {
+                "name": "Tæppelægger",
+                "terms": "Tæppelægger"
+            },
+            "craft/carpet_layer": {
+                "name": "Tæppelægger",
+                "terms": "Tæppelægger"
+            },
+            "craft/caterer": {
+                "name": "Catering",
+                "terms": "Catering"
+            },
+            "craft/clockmaker": {
+                "name": "Urmager",
+                "terms": "Urmager"
+            },
+            "craft/confectionary": {
+                "name": "Slikbutik",
+                "terms": "Slikbutik, Konfekturebutik"
+            },
+            "craft/dressmaker": {
+                "name": "Skrædder",
+                "terms": "Skrædder"
+            },
+            "craft/electrician": {
+                "name": "Elektriker",
+                "terms": "Elektriker, Elektrikerfirma"
+            },
+            "craft/gardener": {
+                "name": "Gartner",
+                "terms": "Gartner"
+            },
+            "craft/glaziery": {
+                "name": "Vinduemager",
+                "terms": "Vinduemager"
+            },
+            "craft/handicraft": {
+                "name": "Håndværker",
+                "terms": "Håndværker"
+            },
+            "craft/hvac": {
+                "name": "Ventilationsfirma",
+                "terms": "Ventilationsfirma"
+            },
+            "craft/insulator": {
+                "name": "Isolationsfirma",
+                "terms": "Isolationsfirma, isolatør"
+            },
+            "craft/jeweler": {
+                "name": "Juvelér",
+                "terms": "Juvelér, Guldsmed"
+            },
+            "craft/key_cutter": {
+                "name": "Hælebar",
+                "terms": "Hælebar"
+            },
+            "craft/locksmith": {
+                "name": "Låsesmed",
+                "terms": "Låsesmed"
+            },
+            "craft/metal_construction": {
+                "name": "Metalskærer",
+                "terms": "Metalskærer"
+            },
+            "craft/optician": {
+                "name": "Optiker",
+                "terms": "Optiker, Brillebutik"
+            },
+            "craft/painter": {
+                "name": "maler",
+                "terms": "Maler"
+            },
+            "craft/photographer": {
+                "name": "Fotograf",
+                "terms": "Fotograf"
+            },
+            "craft/photographic_labratory": {
+                "name": "Fotolaboratorie",
+                "terms": "Fotolaboratorie"
+            },
+            "craft/plasterer": {
+                "name": "Oppudser",
+                "terms": "Oppudser"
+            },
+            "craft/plumber": {
+                "name": "Blikkenslager",
+                "terms": "Blikkenslager"
+            },
+            "craft/pottery": {
+                "name": "Pottemager",
+                "terms": "Pottemager"
+            },
+            "craft/rigger": {
+                "name": "Rebslager",
+                "terms": "Rebslager"
+            },
+            "craft/roofer": {
+                "name": "Tagdækker",
+                "terms": "Tagdækker, Tagdækningsfirma"
+            },
+            "craft/saddler": {
+                "name": "Sadelmager",
+                "terms": "Sadelmager"
+            },
+            "craft/sailmaker": {
+                "name": "sejlmager",
+                "terms": "Sejlmager"
+            },
+            "craft/sawmill": {
+                "name": "Savmølle",
+                "terms": "Savmølle, Savværk"
+            },
+            "craft/scaffolder": {
+                "name": "Stilladsfirma",
+                "terms": "Stilladsfirma"
+            },
+            "craft/sculpter": {
+                "name": "Skulpturmager",
+                "terms": "Skulpturmager"
+            },
+            "craft/shoemaker": {
+                "name": "Skomager",
+                "terms": "Skomager"
+            },
+            "craft/stonemason": {
+                "name": "Stenhugger",
+                "terms": "Stenhugger"
+            },
+            "craft/sweep": {
+                "name": "Skorstensfejer",
+                "terms": "Skorstensfejer"
+            },
+            "craft/tailor": {
+                "name": "Skrædder",
+                "terms": "Skrædder"
+            },
+            "craft/tiler": {
+                "name": "Brolægger",
+                "terms": "Brolægger"
+            },
+            "craft/tinsmith": {
+                "name": "Sølvsmed",
+                "terms": "Sølvsmed"
+            },
+            "craft/upholsterer": {
+                "name": "Møbelpolstrer",
+                "terms": "Møbelpolstrer"
+            },
+            "craft/watchmaker": {
+                "name": "Urmager",
+                "terms": "Urmager"
+            },
+            "craft/window_construction": {
+                "name": "Vinduebygger",
+                "terms": "Vinduebygger"
+            },
             "embankment": {
                 "name": "Forhøjning til tog, vej",
                 "terms": "Forhøjning"
@@ -1165,6 +1499,38 @@
             "footway/sidewalk": {
                 "name": "Fortov",
                 "terms": "Fortov"
+            },
+            "golf/bunker": {
+                "name": "Sandbunker",
+                "terms": "Sandbunker"
+            },
+            "golf/fairway": {
+                "name": "Fairway",
+                "terms": "Fairway"
+            },
+            "golf/green": {
+                "name": "Putting Green",
+                "terms": "Putting Green"
+            },
+            "golf/hole": {
+                "name": "Golfhul",
+                "terms": "Golfhul"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "Vandgrav",
+                "terms": "Vandgrav"
+            },
+            "golf/rough": {
+                "name": "Rough",
+                "terms": "Rough, Højt gras"
+            },
+            "golf/tee": {
+                "name": "Tee Box",
+                "terms": "Tee Box"
+            },
+            "golf/water_hazard": {
+                "name": "Vandgrav",
+                "terms": "Vandgrav"
             },
             "highway": {
                 "name": "Vej",
@@ -1230,6 +1596,10 @@
                 "name": "Villavej",
                 "terms": "Villavej"
             },
+            "highway/rest_area": {
+                "name": "Rasteplads",
+                "terms": "Rasteplads"
+            },
             "highway/road": {
                 "name": "Ukendt vejtype",
                 "terms": "Ukendt vejtype"
@@ -1265,6 +1635,10 @@
             "highway/service/parking_aisle": {
                 "name": "Vej mellem parkeringspladser",
                 "terms": "Parkeringsvej"
+            },
+            "highway/services": {
+                "name": "Serviceområde",
+                "terms": "Serviceområde"
             },
             "highway/steps": {
                 "name": "Trappe",
@@ -1742,6 +2116,10 @@
                 "name": "Rejsebureau",
                 "terms": "Rejseselskab, Rejsebureau"
             },
+            "piste": {
+                "name": "Skiløjper/Skispor",
+                "terms": "Skiløjper/Skispor"
+            },
             "place": {
                 "name": "Lokalitet",
                 "terms": "Lokalitet, Sted"
@@ -1830,6 +2208,10 @@
                 "name": "Ej brugt jernbanespor",
                 "terms": "Ej brugt jernbanespor"
             },
+            "railway/funicular": {
+                "name": "Kabelsporvej",
+                "terms": "Kabelsporvej"
+            },
             "railway/halt": {
                 "name": "Togstation lille ubemandet",
                 "terms": "Togstation lille ubemandet"
@@ -1841,6 +2223,10 @@
             "railway/monorail": {
                 "name": "Monorail",
                 "terms": "Monorail"
+            },
+            "railway/narrow_gauge": {
+                "name": "Smalspor",
+                "terms": "Smalspor, Smalsporbane, Smalsportogbane"
             },
             "railway/platform": {
                 "name": "Jernbaneperron",

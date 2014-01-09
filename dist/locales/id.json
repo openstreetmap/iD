@@ -16,7 +16,7 @@
             "tail": "Klik pada peta untuk menambah sebuah titik."
         },
         "browse": {
-            "title": "Lihat",
+            "title": "Arahkan",
             "description": "Geser dan perbesar tampilan peta."
         },
         "draw_area": {
@@ -146,9 +146,10 @@
         },
         "rotate": {
             "title": "Putar",
+            "description": "Putar obyek ini berdasar titik pusatnya.",
             "key": "R",
             "annotation": {
-                "line": "Memutas sebua garis.",
+                "line": "Memutar sebuah garis.",
                 "area": "Memutar sebuah area."
             }
         },
@@ -176,13 +177,14 @@
         }
     },
     "undo": {
+        "tooltip": "Batalkan: {action}",
         "nothing": "Tak ada yang bisa di ulang."
     },
     "redo": {
         "nothing": "Tak ada yang bisa di redo."
     },
     "tooltip_keyhint": "Pintasan:",
-    "browser_notice": "Penyuting ini mendukung di Firefox, Chrome, Safari, Opera, dan Internet Explorer 9 dan di atasnya. Sila tingkatnya peramban anda atau gunakan Potlatc 2 untuk menyuting peta.",
+    "browser_notice": "Penyunting ini bisa digunakan di Firefox, Chrome, Safari, Opera, dan Internet Explorer 9 dan versi yang lebih tinggi. Silahkan perbarui peramban Anda atau gunakan Potlatc 2 untuk menyuting peta.",
     "translate": {
         "translate": "Terjemahkan",
         "localized_translation_label": "Nama banyak-bahasa",
@@ -200,14 +202,16 @@
     },
     "commit": {
         "title": "Simpan Perubahan",
-        "description_placeholder": "Deskripsi singkat kontribusi anda",
+        "description_placeholder": "Deskripsi singkat kontribusi Anda",
         "message_label": "Sampaikan pesan",
+        "upload_explanation": "Perubahan yang anda unggah akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
+        "upload_explanation_with_user": "Perubahan yang anda unggah sebagai {user} akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
         "save": "Simpan",
         "cancel": "Batal",
         "warnings": "Peringatan",
-        "modified": "Berubah",
+        "modified": "Diubah",
         "deleted": "Terhapus",
-        "created": "Tercipta"
+        "created": "Dibuat"
     },
     "contributors": {
         "list": "Disunting oleh {users}",
@@ -237,15 +241,20 @@
         "back_tooltip": "Ubah Fitur",
         "remove": "Buang",
         "search": "Cari",
+        "multiselect": "Item terpilih",
         "unknown": "Tidak diketahui",
         "incomplete": "<tak terunduh>",
         "feature_list": "Cari fitur",
-        "edit": "Ubah Fitur"
+        "edit": "Ubah Fitur",
+        "none": "Tidak ada",
+        "relation": "Relasi",
+        "location": "Lokasi"
     },
     "background": {
         "title": "Latar",
         "description": "Pengaturan Latar",
         "percent_brightness": "{opacity}% kecerahan",
+        "fix_misalignment": "Perbaiki perataan",
         "reset": "ulang"
     },
     "restore": {
@@ -302,7 +311,9 @@
     },
     "cannot_zoom": "Tidak bisa memperbesar tampilan lebih jauh dengan mode ini.",
     "gpx": {
-        "local_layer": "File GPX lokal"
+        "local_layer": "File GPX lokal",
+        "drag_drop": "Geser dan letakan sebuah berkas .gpx di halaman, atau klik tombol ke kanan untuk menjelajah",
+        "zoom": "Perbesar ke jejak GPX"
     },
     "help": {
         "title": "Bantuan",
@@ -340,13 +351,15 @@
         },
         "lines": {
             "title": "Garis",
+            "add": "Garis biasa digunakan untuk mewakili fitur seperti jalan, rel dan sungai. **Klik tombol Garis untuk menambahkan sebuah garis baru.**",
             "start": "**Mulai garis dengan mengklik pada ujung sebuah jalan.**",
             "intersect": "Klik untuk menambahkan lagi simpul pada garis. Anda dapat menggeser peta ketika menggambar jika diperlukan. Jalan, dan banyak tipe lain dari garis, adalah bagian dari jaringan yang lebih besar. Ini penting untuk garis-garis ini untuk terhubung dengan baik agar alat penelusuran rute bisa berjalan. **Klik di Jalan Flower, untuk membuat percabangan yang menghubungkan dua garis.**",
             "finish": "Garis bisa diselesaikan dengan mengklik ulang pada simpul terakhir. **Selesaikan menggambar jalan.**",
             "road": "**Pilih Jalan dari daftar**",
             "residential": "Ada beberapa tipe jalan berbeda, yang paling umum adalah Jalan Perumahan. **Pilih tipe jalan Perumahan**",
             "describe": "**Namakan jalan dan tutup fitur penyunting.**",
-            "restart": "Jalan perlu memotong Jalan Flower."
+            "restart": "Jalan perlu memotong Jalan Flower.",
+            "wrong_preset": "Anda belum memilih tipe Jalan Perumahan. **Klik di sini untuk memilih lagi**"
         },
         "startediting": {
             "title": "Mulai Menyunting",
@@ -659,13 +672,15 @@
         },
         "presets": {
             "address": {
-                "name": "Alamat"
+                "name": "Alamat",
+                "terms": "Alamat"
             },
             "aeroway": {
                 "name": "Landas pacu"
             },
             "aeroway/aerodrome": {
-                "name": "Bandar udara"
+                "name": "Bandar udara",
+                "terms": "Bandara,Lapangan Terbang,"
             },
             "aeroway/gate": {
                 "name": "Gerbang Bandar Udara"
@@ -683,7 +698,7 @@
                 "name": "Jalur taksi"
             },
             "aeroway/terminal": {
-                "name": "Terminal Bandarudara"
+                "name": "Terminal Bandara"
             },
             "amenity": {
                 "name": "Keramahan"
@@ -698,49 +713,71 @@
                 "name": "Bar"
             },
             "amenity/bicycle_parking": {
-                "name": "Parkir Sepeda"
+                "name": "Parkir Sepeda",
+                "terms": "Parkir Sepeda"
             },
             "amenity/bicycle_rental": {
-                "name": "Penyewaan Sepeda"
+                "name": "Penyewaan Sepeda",
+                "terms": "Penyewaan Sepeda"
             },
             "amenity/cafe": {
-                "name": "Cafe"
+                "name": "Cafe",
+                "terms": "Warung Kopi"
+            },
+            "amenity/car_rental": {
+                "name": "Penyewaan Mobil",
+                "terms": "Penyewaan Mobil"
             },
             "amenity/car_wash": {
-                "name": "Pencucian Mobil"
+                "name": "Pencucian Mobil",
+                "terms": "Cuci Mobil"
             },
             "amenity/cinema": {
-                "name": "Bioskop"
+                "name": "Bioskop",
+                "terms": "Bioskop"
             },
             "amenity/college": {
-                "name": "Kampus"
+                "name": "Kampus",
+                "terms": "Kampus"
             },
             "amenity/courthouse": {
-                "name": "Pengadilan"
+                "name": "Pengadilan",
+                "terms": "Pengadilan"
+            },
+            "amenity/drinking_water": {
+                "name": "Air Minum"
             },
             "amenity/embassy": {
-                "name": "Kedutaan besar"
+                "name": "Kedutaan besar",
+                "terms": "Kedutaan"
             },
             "amenity/fast_food": {
-                "name": "Makanan Cepat Saji"
+                "name": "Makanan Cepat Saji",
+                "terms": "Makanan Cepatsaji"
             },
             "amenity/fire_station": {
-                "name": "Kantor Pemadam Kebakaran"
+                "name": "Kantor Pemadam Kebakaran",
+                "terms": "Kantor Pemadam Kebakaran"
             },
             "amenity/fuel": {
-                "name": "Pom Bensin"
+                "name": "Pom Bensin",
+                "terms": "SPBU, Pom Bensin,"
             },
             "amenity/grave_yard": {
-                "name": "Kuburan"
+                "name": "Kuburan",
+                "terms": "Kuburan"
             },
             "amenity/hospital": {
-                "name": "Rumah Sakit"
+                "name": "Rumah Sakit",
+                "terms": "Rumah Sakit, Puskesmas, Klinik"
             },
             "amenity/kindergarten": {
-                "name": "Taman Kanak-kanak"
+                "name": "Taman Kanak-kanak",
+                "terms": "Taman Kanak kanak,"
             },
             "amenity/library": {
-                "name": "Perpustakaan"
+                "name": "Perpustakaan",
+                "terms": "Perpustakaan"
             },
             "amenity/marketplace": {
                 "name": "Pasar"
@@ -749,61 +786,77 @@
                 "name": "Farmasi"
             },
             "amenity/place_of_worship": {
-                "name": "Tempat Beribadah"
+                "name": "Tempat Beribadah",
+                "terms": "Rumah Ibadah"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Candi Budha"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Gereja"
+                "name": "Gereja",
+                "terms": "Gereja"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Sinagoga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Mesjid"
+                "name": "Masjid",
+                "terms": "Mesjid,Mushola,Langgar"
             },
             "amenity/police": {
-                "name": "Polisi"
+                "name": "Polisi",
+                "terms": "Polisi"
             },
             "amenity/post_box": {
                 "name": "Kotak surat"
             },
             "amenity/post_office": {
-                "name": "Kantor Pos"
+                "name": "Kantor Pos",
+                "terms": "Kantor Pos"
             },
             "amenity/pub": {
                 "name": "Pub"
             },
             "amenity/restaurant": {
-                "name": "Restoran"
+                "name": "Restoran",
+                "terms": "Restoran"
             },
             "amenity/school": {
-                "name": "Sekolah"
+                "name": "Sekolah",
+                "terms": "Sekolah"
             },
             "amenity/swimming_pool": {
-                "name": "Kolam Renang"
+                "name": "Kolam Renang",
+                "terms": "Kolam Renang"
             },
             "amenity/telephone": {
-                "name": "Telepon"
+                "name": "Telepon",
+                "terms": "Telepon"
             },
             "amenity/theatre": {
-                "name": "Teater"
+                "name": "Teater",
+                "terms": "Teater"
             },
             "amenity/toilets": {
-                "name": "Toilet"
+                "name": "Toilet",
+                "terms": "Toilet, WC,"
             },
             "amenity/townhall": {
-                "name": "Balai Kota"
+                "name": "Balai Kota",
+                "terms": "Balai Kota,"
             },
             "amenity/university": {
-                "name": "Universitas"
+                "name": "Universitas",
+                "terms": "Universitas, Kampus,"
             },
             "amenity/waste_basket": {
                 "name": "Tong Sampah"
             },
             "area": {
                 "name": "Area"
+            },
+            "barrier/ditch": {
+                "name": "Parit"
             },
             "barrier/entrance": {
                 "name": "Pintu Masuk"
@@ -828,6 +881,9 @@
             },
             "building/entrance": {
                 "name": "Masuk"
+            },
+            "building/garage": {
+                "name": "Garasi"
             },
             "building/house": {
                 "name": "Rumah"
@@ -854,7 +910,7 @@
                 "name": "Jalur Pejalan Kaki"
             },
             "highway/living_street": {
-                "name": "Jalan TInggal"
+                "name": "Jalan Tinggal"
             },
             "highway/motorway": {
                 "name": "Jalur Motor"
@@ -1318,8 +1374,17 @@
             "waterway/dam": {
                 "name": "Bendungan"
             },
+            "waterway/ditch": {
+                "name": "Selokan"
+            },
+            "waterway/drain": {
+                "name": "Saluran"
+            },
             "waterway/river": {
                 "name": "Sungai"
+            },
+            "waterway/stream": {
+                "name": "Aliran"
             }
         }
     }

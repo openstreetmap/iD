@@ -138,7 +138,7 @@
         },
         "move": {
             "title": "Verschieben",
-            "description": "Verschiebe dieses Objekt an einen anderen Ort.",
+            "description": "Verschiebe dieses Objekt an einen anderen Standort.",
             "key": "M",
             "annotation": {
                 "point": "Punkt verschoben.",
@@ -229,7 +229,7 @@
         "no_results_worldwide": "Keine Ergebnisse gefunden"
     },
     "geolocate": {
-        "title": "Zeige meine Position"
+        "title": "Zeige meinen Standort"
     },
     "inspector": {
         "no_documentation_combination": "Für dieses Attribut-Kombination ist keine Dokumentation verfügbar.",
@@ -252,7 +252,11 @@
         "incomplete": "<nicht heruntergeladen>",
         "feature_list": "Objekte suchen",
         "edit": "Eigenschaft bearbeiten",
-        "none": "Nichts"
+        "none": "Nichts",
+        "node": "Punkt",
+        "way": "Weg",
+        "relation": "Relation",
+        "location": "Standort"
     },
     "background": {
         "title": "Hintergrund",
@@ -312,6 +316,7 @@
         "untagged_area": "Fläche ohne Attribute",
         "many_deletions": "Du löscht gerade {n} Elemente. Willst Du das wirklich? Damit werden diese Elemente von der Karte gelöscht die alle auf openstreetmap.org sehen können.",
         "tag_suggests_area": "Das Attribut {tag} legt nahe, dass die Linie eine Fläche sein sollte, es ist aber keine Fläche",
+        "untagged_tooltip": "Wähle einen Eigenschaftentyp der das {geometry} beschreibt.",
         "deprecated_tags": "Veraltete Attribute: {tags}"
     },
     "zoom": {
@@ -347,7 +352,7 @@
         },
         "points": {
             "title": "Punkte",
-            "add": "Punkte können verwendet werden, um Objekte wie Läden, Restaurants oder Denkmäler darzustellen. Sie markieren eine bestimmte Stelle und beschreiben, was sich dort befindet. **Klicke den Punkt-Knopf an, um einen neuen Punkt hinzuzufügen**",
+            "add": "Punkte können verwendet werden, um Objekte wie Läden, Restaurants oder Denkmäler darzustellen. Sie markieren einen bestimmten Standort und beschreiben, was sich dort befindet. **Klicke den Punkt-Knopf an, um einen neuen Punkt hinzuzufügen**",
             "place": "Punkte können durch Klicken auf die Karte platziert werden. **Platziere einen Punkt auf dem Gebäude**",
             "search": "Es gibt viele verschiedene Objekte, die ein Punkt repräsentieren kann. Der Punkt, den du gerade hinzugefügt hast, ist ein Café. **Suche nach '{name}'**",
             "choose": "**Wähle \"Café\" aus der Liste aus.**",
@@ -390,6 +395,9 @@
         "categories": {
             "category-building": {
                 "name": "Gebäude"
+            },
+            "category-golf": {
+                "name": "Golf"
             },
             "category-landuse": {
                 "name": "Landnutzung"
@@ -467,6 +475,33 @@
             "admin_level": {
                 "label": "Verwaltungsebene"
             },
+            "aerialway": {
+                "label": "Typ"
+            },
+            "aerialway/access": {
+                "label": "Zugang"
+            },
+            "aerialway/bubble": {
+                "label": "Blase"
+            },
+            "aerialway/capacity": {
+                "label": "Kapazität (pro Stunde)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Dauer (Minuten)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "beheizt"
+            },
+            "aerialway/occupancy": {
+                "label": "Belegung",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Zugang (Sommer)"
+            },
             "aeroway": {
                 "label": "Typ"
             },
@@ -500,6 +535,9 @@
             "building_area": {
                 "label": "Gebäude"
             },
+            "cans": {
+                "label": "Dosen"
+            },
             "capacity": {
                 "label": "Kapazität",
                 "placeholder": "50, 100, 200..."
@@ -514,6 +552,9 @@
                     "anticlockwise": "gegen den Uhrzeigersinn"
                 }
             },
+            "clothes": {
+                "label": "Kleidung"
+            },
             "collection_times": {
                 "label": "Leerungszeiten"
             },
@@ -522,6 +563,9 @@
             },
             "country": {
                 "label": "Land"
+            },
+            "covered": {
+                "label": "Überdacht / Verdeckt"
             },
             "crossing": {
                 "label": "Typ"
@@ -537,6 +581,9 @@
             },
             "description": {
                 "label": "Beschreibung"
+            },
+            "electrified": {
+                "label": "Elektrifizierung"
             },
             "elevation": {
                 "label": "Höhe ü. d. Meeresspiegel"
@@ -560,6 +607,9 @@
             "fixme": {
                 "label": "Korrigiere mich"
             },
+            "gauge": {
+                "label": "Spurbreite"
+            },
             "generator/method": {
                 "label": "Methode"
             },
@@ -568,6 +618,17 @@
             },
             "generator/type": {
                 "label": "Typ"
+            },
+            "glass": {
+                "label": "Glas"
+            },
+            "golf_hole": {
+                "label": "Loch-Nummer",
+                "placeholder": "1-18"
+            },
+            "handicap": {
+                "label": "Handicap",
+                "placeholder": "1-18"
             },
             "highway": {
                 "label": "Art"
@@ -583,6 +644,9 @@
             },
             "incline": {
                 "label": "Steigung"
+            },
+            "information": {
+                "label": "Typ"
             },
             "internet_access": {
                 "label": "Internetzugang",
@@ -650,6 +714,13 @@
             "operator": {
                 "label": "Betreiber"
             },
+            "paper": {
+                "label": "Papier"
+            },
+            "par": {
+                "label": "Par",
+                "placeholder": "3, 4, 5…"
+            },
             "park_ride": {
                 "label": "Park and Ride"
             },
@@ -659,6 +730,15 @@
             "phone": {
                 "label": "Telefon",
                 "placeholder": "+31 42 123 4567"
+            },
+            "piste/difficulty": {
+                "label": "Schwierigkeit"
+            },
+            "piste/grooming": {
+                "label": "Grooming"
+            },
+            "piste/type": {
+                "label": "Typ"
             },
             "place": {
                 "label": "Art"
@@ -727,6 +807,9 @@
                     "cutting": "Senke"
                 }
             },
+            "studio_type": {
+                "label": "Typ"
+            },
             "supervised": {
                 "label": "überwacht"
             },
@@ -750,6 +833,9 @@
             },
             "tree_type": {
                 "label": "Typ"
+            },
+            "tunnel": {
+                "label": "Tunnel"
             },
             "vending": {
                 "label": "Dienstleistung"
@@ -781,6 +867,46 @@
             "address": {
                 "name": "Adresse",
                 "terms": "Adresse"
+            },
+            "aerialway": {
+                "name": "Seilbahn",
+                "terms": "Seilbahn, Gondelbahn, Sessellift, Schlepplift, Materialseilbahn"
+            },
+            "aerialway/cable_car": {
+                "name": "Seilbahn",
+                "terms": "Seilbahn, Gondelbahn, Straßenbahn, Kabelbahn, Drahtseilbahn"
+            },
+            "aerialway/chair_lift": {
+                "name": "Sessellift",
+                "terms": "Sessellift, Sesselbahn"
+            },
+            "aerialway/gondola": {
+                "name": "Gondel",
+                "terms": "Gondel, Seilbahngondel"
+            },
+            "aerialway/magic_carpet": {
+                "name": "KInderskilift",
+                "terms": "Kinderschilift, Zauberteppichlift, Babylift"
+            },
+            "aerialway/platter": {
+                "name": "Tellerlift",
+                "terms": "Tellerlift, Teller-Skilift"
+            },
+            "aerialway/pylon": {
+                "name": "Seilbahnmast",
+                "terms": "Seilbahnmast, Liftmast, Liftstütze"
+            },
+            "aerialway/rope_tow": {
+                "name": "Schlepplift",
+                "terms": "Schlepplift, Seilschlepplift, Übungslift"
+            },
+            "aerialway/station": {
+                "name": "Seilbahnstation",
+                "terms": "Seilbahnstation, Liftstation"
+            },
+            "aerialway/t-bar": {
+                "name": "Bügelschlepplift",
+                "terms": "Schlepplift, Seilschlepplift, Bügellift, Bügelschlepplift"
             },
             "aeroway": {
                 "name": "Luftfahrt",
@@ -878,6 +1004,14 @@
                 "name": "Kino",
                 "terms": "Großbildleinwand,Kino,Autokino,Filmtheater,Filmpalast"
             },
+            "amenity/clinic": {
+                "name": "Klinik",
+                "terms": "Klinik, Krankenhaus"
+            },
+            "amenity/clock": {
+                "name": "Uhr",
+                "terms": "Uhr, Turmuhr, Kirchenuhr"
+            },
             "amenity/college": {
                 "name": "Hochschule",
                 "terms": "Hochschule, Kolleg"
@@ -886,9 +1020,17 @@
                 "name": "Gericht",
                 "terms": "Gericht, Amtsgericht"
             },
+            "amenity/dentist": {
+                "name": "Zahnarzt",
+                "terms": "Zahnarzt, Dentist"
+            },
+            "amenity/doctor": {
+                "name": "Arzt",
+                "terms": "Arzt, Mediziner"
+            },
             "amenity/drinking_water": {
                 "name": "Trinkwasserstelle",
-                "terms": "Brunnen,Trinkwasser,Trinkwasserbrunnen,Wasserhahn"
+                "terms": "Brunnen,Trinkwasser,Trinkwasserbrunnen,Wasserhahn,Trinkbrunnen"
             },
             "amenity/embassy": {
                 "name": "Botschaft",
@@ -916,7 +1058,7 @@
             },
             "amenity/hospital": {
                 "name": "Krankenhaus",
-                "terms": "Klinik,Notaufnahme,Gesundheitswesen,Hospiz,Krankenhaus,Pflegeheim,Altersheim,Nervenheilanstalt,Sanatorium,Lazarett,Chirurgie,Krankenstation"
+                "terms": "Klinik,Notaufnahme,Gesundheitswesen,Hospiz,Krankenhaus,Pflegeheim,Altersheim,Nervenheilanstalt,Sanatorium,Lazarett,Chirurgie,Krankenstation,Spital"
             },
             "amenity/kindergarten": {
                 "name": "Kindergarten",
@@ -978,6 +1120,10 @@
                 "name": "Ranger-Station",
                 "terms": "Ranger-Station"
             },
+            "amenity/recycling": {
+                "name": "Recycling",
+                "terms": "Recyclingcontainer, Abfallwiederverwertung, Container, Abfall, Müll"
+            },
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "Bar,Cafeteria,Café,Kantine,Speisehaus,Coffee-Shop,Kaffeehaus,Imbiss,Speisesaal,Kneipe,Donut Shop,Drive-In,Restaurant,Speiserestaurant,Wirtschaft,Fast-Food-Restaurant,Grill,Hamburgerstand,Hotdogstand,Gasthaus,Gasthof,Wirtshaus,Imbissstube,Imbiss,Pizzeria,Lokal"
@@ -989,6 +1135,10 @@
             "amenity/shelter": {
                 "name": "Unterstand",
                 "terms": "Unterstand, Schutzdach, Schutzraum, Schuppen"
+            },
+            "amenity/studio": {
+                "name": "Atelier",
+                "terms": "Atelier, Werkstatt, Studio"
             },
             "amenity/swimming_pool": {
                 "name": "Schwimmbecken",
@@ -1021,6 +1171,10 @@
             "amenity/vending_machine": {
                 "name": "Automat",
                 "terms": "Warenautomat,Münzautomat,Verkaufsautomat, Selbstbedienungsautomat,Getränkeautomat,Süßigkeitenautomat,Fahrkartenautomat,Parkscheinautomat,"
+            },
+            "amenity/veterinary": {
+                "name": "Tierarzt",
+                "terms": "Tierarzt, Tierärztin, Verterinär"
             },
             "amenity/waste_basket": {
                 "name": "Abfalleimer",
@@ -1138,6 +1292,186 @@
                 "name": "Wohngebäude",
                 "terms": "Wohnhaus,Einfamilienhaus,Mehrfamilienhaus"
             },
+            "craft/basket_maker": {
+                "name": "Korbflechter",
+                "terms": "Korbflecher, Korbmacher, Korbhersteller"
+            },
+            "craft/beekeeper": {
+                "name": "Imker",
+                "terms": "Imker, Bienenzüchter"
+            },
+            "craft/blacksmith": {
+                "name": "Schmied",
+                "terms": "Schmied, Hufschmied, Schmiedewerkstatt"
+            },
+            "craft/boatbuilder": {
+                "name": "Schiffsbauer",
+                "terms": "Schiffsbauer"
+            },
+            "craft/bookbinder": {
+                "name": "Buchbinder",
+                "terms": "Buchbinder"
+            },
+            "craft/brewery": {
+                "name": "Brauerei",
+                "terms": "Brauerei, Bierbrauerei, Bierhersteller"
+            },
+            "craft/carpenter": {
+                "name": "Tischler",
+                "terms": "Tischler, Schreiner, Zimmerer"
+            },
+            "craft/carpet_layer": {
+                "name": "Teppichleger",
+                "terms": "Teppichleger, Teppichbodenleger"
+            },
+            "craft/caterer": {
+                "name": "Partyservice",
+                "terms": "Partyservice, Speiselieferant, Lebensmittellieferant, Brötchenservice, Gastronom"
+            },
+            "craft/clockmaker": {
+                "name": "Uhrmacher",
+                "terms": "Uhrmacher"
+            },
+            "craft/confectionary": {
+                "name": "Süßwarengeschäft",
+                "terms": "Süßwarengeschäfts, Konditorei, Konfektladen"
+            },
+            "craft/dressmaker": {
+                "name": "Schneiderei",
+                "terms": "Schneiderei, Damenschneiderei"
+            },
+            "craft/electrician": {
+                "name": "Elektriker",
+                "terms": "Elektriker"
+            },
+            "craft/gardener": {
+                "name": "Gärtner",
+                "terms": "Gärtner, Landschaftsgärtner"
+            },
+            "craft/glaziery": {
+                "name": "Glaserei",
+                "terms": "Glaserei, Fensterglaserei, Autoglaserei"
+            },
+            "craft/handicraft": {
+                "name": "Kunsthandwerk",
+                "terms": "Kunsthandwerk, Handwerkskunst, Handwerk, Handarbeit, Bastelarbeit"
+            },
+            "craft/hvac": {
+                "name": "Heizung-Lüftung-Klimatechnik",
+                "terms": "Heizung, Lüftung, Klimatechnik"
+            },
+            "craft/insulator": {
+                "name": "Dämmstoff",
+                "terms": "Dämmstoff, Isolierung, Isolierstoff"
+            },
+            "craft/jeweler": {
+                "name": "Juwelier",
+                "terms": "Juwelier, Schmuckladen, Schmuckgeschäft, Edelsteinverkäufer"
+            },
+            "craft/key_cutter": {
+                "name": "Schlüsselschneider",
+                "terms": "Schlüsselschneider, Schlüsselgeschäft"
+            },
+            "craft/locksmith": {
+                "name": "Schlüsseldienst",
+                "terms": "Schlüsseldienst, Schlossermeister, Schlosser"
+            },
+            "craft/metal_construction": {
+                "name": "Metallbau",
+                "terms": "Metallbau, Anlagenbau"
+            },
+            "craft/optician": {
+                "name": "Optiker",
+                "terms": "Optiker, Brillengeschäft, Kontaktlinsengeschäft"
+            },
+            "craft/painter": {
+                "name": "Maler",
+                "terms": "Maler, Anstreicher, Lackierer"
+            },
+            "craft/photographer": {
+                "name": "Fotograf",
+                "terms": "Fotograf, Fotostudio, Fotoatelier"
+            },
+            "craft/photographic_labratory": {
+                "name": "Fotolabor",
+                "terms": "Fotolabor"
+            },
+            "craft/plasterer": {
+                "name": "Stuckateur",
+                "terms": "Stuckateur, Kaschierer, Gipser, Verputzer"
+            },
+            "craft/plumber": {
+                "name": "Installateur",
+                "terms": "Installateur"
+            },
+            "craft/pottery": {
+                "name": "Töpferei",
+                "terms": "Töpferei"
+            },
+            "craft/rigger": {
+                "name": "Bühnenarbeiter",
+                "terms": "Bühnenarbeiter, Höhenarbeiter"
+            },
+            "craft/roofer": {
+                "name": "Dachdecker",
+                "terms": "Dachdecker"
+            },
+            "craft/saddler": {
+                "name": "Sattler",
+                "terms": "Sattler"
+            },
+            "craft/sailmaker": {
+                "name": "Segelmacher",
+                "terms": "Segelmacher"
+            },
+            "craft/sawmill": {
+                "name": "Sägewerk",
+                "terms": "Sägewerk, Sägerei, Sägemühle"
+            },
+            "craft/scaffolder": {
+                "name": "Gerüstbauer",
+                "terms": "Gerüstbauer"
+            },
+            "craft/sculpter": {
+                "name": "Bildhauer",
+                "terms": "Bildhauer"
+            },
+            "craft/shoemaker": {
+                "name": "Schuster",
+                "terms": "Schuster, Schuhmacher"
+            },
+            "craft/stonemason": {
+                "name": "Steinmetz",
+                "terms": "Steinmetz"
+            },
+            "craft/sweep": {
+                "name": "Kaminkehrer",
+                "terms": "Kaminkehrer, Schornsteinfeger"
+            },
+            "craft/tailor": {
+                "name": "Herrenschneider",
+                "terms": "Herrenschneider, Schneider"
+            },
+            "craft/tiler": {
+                "name": "Fliesenleger",
+                "terms": "Fliesenleger, Dachdecker"
+            },
+            "craft/tinsmith": {
+                "name": "Klempner",
+                "terms": "Klempner, Spengler, Blechschmied"
+            },
+            "craft/upholsterer": {
+                "name": "Polsterer",
+                "terms": "Polsterer, Möbeltapezierer"
+            },
+            "craft/watchmaker": {
+                "name": "Uhrmacher",
+                "terms": "Uhrmacher"
+            },
+            "craft/window_construction": {
+                "name": "Fensterbauer",
+                "terms": "Fensterbauer, Fensterhersteller, Fenstererzeuger"
+            },
             "embankment": {
                 "name": "Fahrdamm",
                 "terms": "Damm"
@@ -1165,6 +1499,38 @@
             "footway/sidewalk": {
                 "name": "Bürgersteig",
                 "terms": "Gehsteig, Fußgängerweg, Gehweg, Fußweg, Gangsteig, Trottoir"
+            },
+            "golf/bunker": {
+                "name": "Bunker (Golf)",
+                "terms": "Bunker, Sandbunker, Sand-Hindernis, Golfbunker"
+            },
+            "golf/fairway": {
+                "name": "Fairway",
+                "terms": "Golf-Fairway"
+            },
+            "golf/green": {
+                "name": "Grün",
+                "terms": "Grün, Green, Putting-Grün, Putting-Green"
+            },
+            "golf/hole": {
+                "name": "Loch",
+                "terms": "Loch"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "Seitliches Wasserhindernis",
+                "terms": "Seitliches Wasserhindernis, Wasserhindernis"
+            },
+            "golf/rough": {
+                "name": "Rough",
+                "terms": "Rough"
+            },
+            "golf/tee": {
+                "name": "Abschlag",
+                "terms": "Abschlag"
+            },
+            "golf/water_hazard": {
+                "name": "Wasserhindernis",
+                "terms": "Wasserhindernis"
             },
             "highway": {
                 "name": "Straße/Weg",
@@ -1230,6 +1596,10 @@
                 "name": "Wohngebietsstraße",
                 "terms": "Siedlungsstraße"
             },
+            "highway/rest_area": {
+                "name": "Rastplatz",
+                "terms": "Rastplatz, Autobahnrastplatz, Pausenplatz, Autobahnpauseplatz, Raststelle, Autobahnraststelle, Rastanlage, Autobahnrastanlage"
+            },
             "highway/road": {
                 "name": "Unbekannter Straßentyp",
                 "terms": "Unbekannte Straße"
@@ -1265,6 +1635,10 @@
             "highway/service/parking_aisle": {
                 "name": "Parkplatzweg",
                 "terms": "Fahrweg auf Parkplatz"
+            },
+            "highway/services": {
+                "name": "Raststätte",
+                "terms": "Raststätte, Autobahnraststätte, Rasthof, Autobahnrasthof, Raststation, Autobahnraststation"
             },
             "highway/steps": {
                 "name": "Treppen",
@@ -1432,7 +1806,7 @@
             },
             "leisure/golf_course": {
                 "name": "Golfplatz",
-                "terms": "Golfplatz"
+                "terms": "Golfplatz, Golfkurs, Golfclub"
             },
             "leisure/marina": {
                 "name": "Yachthafen",
@@ -1742,6 +2116,10 @@
                 "name": "Reisebüro",
                 "terms": "Reiseagentur"
             },
+            "piste": {
+                "name": "Piste/Skipiste",
+                "terms": "Piste, Skipiste, Skiwanderweg"
+            },
             "place": {
                 "name": "Ort",
                 "terms": "Platz, Ort, Stelle, Gegend"
@@ -1830,6 +2208,10 @@
                 "name": "Ungenutzte Eisenbahnstrecke",
                 "terms": "Ungenutzte Eisenbahn, Eingestellte Eisenbahnstrecke"
             },
+            "railway/funicular": {
+                "name": "Standseilbahn",
+                "terms": "Standseilbahn, Seilbahn, Drahtseilbahn, Kettenbahn"
+            },
             "railway/halt": {
                 "name": "Bahn-Haltestelle",
                 "terms": "Bahn-Haltestelle, Zug-Haltestelle, Haltestelle"
@@ -1841,6 +2223,10 @@
             "railway/monorail": {
                 "name": "Einschienenbahn",
                 "terms": "Einschienenbahn"
+            },
+            "railway/narrow_gauge": {
+                "name": "Schmalspureisenbahn",
+                "terms": "Schmalspureisenbahn, Schmalspurbahn, schmalspurige Eisenbahn"
             },
             "railway/platform": {
                 "name": "Bahnsteig",
@@ -2100,7 +2486,7 @@
             },
             "tourism/alpine_hut": {
                 "name": "Berghütte",
-                "terms": "Berghütte, Almhütte"
+                "terms": "Berghütte,Almhütte,Alm,Schutzhütte,Schutzhaus,Hospiz,Winterraum"
             },
             "tourism/artwork": {
                 "name": "Kunst",

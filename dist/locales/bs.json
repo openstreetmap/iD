@@ -391,6 +391,9 @@
             "category-building": {
                 "name": "Građevina"
             },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Upotreba zemljišta"
             },
@@ -467,6 +470,33 @@
             "admin_level": {
                 "label": "Administrativni nivo"
             },
+            "aerialway": {
+                "label": "Vrsta"
+            },
+            "aerialway/access": {
+                "label": "Pristup"
+            },
+            "aerialway/bubble": {
+                "label": "Balon"
+            },
+            "aerialway/capacity": {
+                "label": "Kapacitet (po satu)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Trajanje (u minutama)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "Zagrijano"
+            },
+            "aerialway/occupancy": {
+                "label": "Zauzeće",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Pristup (ljeto)"
+            },
             "aeroway": {
                 "label": "Vrsta"
             },
@@ -500,6 +530,9 @@
             "building_area": {
                 "label": "Građevina"
             },
+            "cans": {
+                "label": "Prihvata konzerve"
+            },
             "capacity": {
                 "label": "Kapacitet",
                 "placeholder": "50, 100, 200..."
@@ -514,6 +547,9 @@
                     "anticlockwise": "U smjeru suprotnom od kazaljke na satu"
                 }
             },
+            "clothes": {
+                "label": "Prihvata odjeću"
+            },
             "collection_times": {
                 "label": "Vremena skupljanja"
             },
@@ -522,6 +558,9 @@
             },
             "country": {
                 "label": "Zemlja"
+            },
+            "covered": {
+                "label": "Pokriveno"
             },
             "crossing": {
                 "label": "Vrsta"
@@ -569,6 +608,17 @@
             "generator/type": {
                 "label": "Vrsta"
             },
+            "glass": {
+                "label": "Prihvata staklo"
+            },
+            "golf_hole": {
+                "label": "Referenca",
+                "placeholder": "Rupa broj (1-18)"
+            },
+            "handicap": {
+                "label": "Hendikep",
+                "placeholder": "1-18"
+            },
             "highway": {
                 "label": "Vrsta"
             },
@@ -583,6 +633,9 @@
             },
             "incline": {
                 "label": "Nagib"
+            },
+            "information": {
+                "label": "Vrsta"
             },
             "internet_access": {
                 "label": "Internet pristup",
@@ -650,6 +703,13 @@
             "operator": {
                 "label": "Operator"
             },
+            "paper": {
+                "label": "Prihvata papir"
+            },
+            "par": {
+                "label": "Par",
+                "placeholder": "3, 4, 5..."
+            },
             "park_ride": {
                 "label": "Podsticaj parkiranja"
             },
@@ -659,6 +719,15 @@
             "phone": {
                 "label": "Telefon",
                 "placeholder": "+31 42 123 4567"
+            },
+            "piste/difficulty": {
+                "label": "Težina"
+            },
+            "piste/grooming": {
+                "label": "Održavanje"
+            },
+            "piste/type": {
+                "label": "Vrsta"
             },
             "place": {
                 "label": "Vrsta"
@@ -727,6 +796,9 @@
                     "cutting": "Usjek"
                 }
             },
+            "studio_type": {
+                "label": "Vrsta"
+            },
             "supervised": {
                 "label": "Pod nadzorom"
             },
@@ -750,6 +822,9 @@
             },
             "tree_type": {
                 "label": "Vrsta"
+            },
+            "tunnel": {
+                "label": "Tunel"
             },
             "vending": {
                 "label": "Vrsta dobara"
@@ -781,6 +856,9 @@
             "address": {
                 "name": "Adresa",
                 "terms": "adresa,prebivalište"
+            },
+            "aerialway/gondola": {
+                "name": "Gondola"
             },
             "aeroway": {
                 "name": "Avio-put",
@@ -878,6 +956,9 @@
                 "name": "Kino",
                 "terms": "kino,kino dvorana,multipleks"
             },
+            "amenity/clinic": {
+                "name": "Klinika"
+            },
             "amenity/college": {
                 "name": "Koledž",
                 "terms": "koledž,fakultet,faks"
@@ -885,6 +966,14 @@
             "amenity/courthouse": {
                 "name": "Sudnica",
                 "terms": "sudnica,zgrada suda"
+            },
+            "amenity/dentist": {
+                "name": "Zubar",
+                "terms": "zubar,stomatolog"
+            },
+            "amenity/doctor": {
+                "name": "Doktor",
+                "terms": "doktor,ljekar"
             },
             "amenity/drinking_water": {
                 "name": "Voda za piće",
@@ -978,6 +1067,10 @@
                 "name": "Stanica rendžerske službe",
                 "terms": "rendžerska služba,stanica rendžerske službe,rendžerska stanica"
             },
+            "amenity/recycling": {
+                "name": "Recikliranje",
+                "terms": "recikliranje,ponovna obrada,reciklaža"
+            },
             "amenity/restaurant": {
                 "name": "Restoran",
                 "terms": "restoran,gostionica"
@@ -989,6 +1082,9 @@
             "amenity/shelter": {
                 "name": "Sklonište",
                 "terms": "sklonište,zaklon"
+            },
+            "amenity/studio": {
+                "name": "Studio"
             },
             "amenity/swimming_pool": {
                 "name": "Bazen",
@@ -1138,6 +1234,97 @@
                 "name": "Stambena zgrada",
                 "terms": "stambena zgrada,zgrada za stanovanje"
             },
+            "craft/beekeeper": {
+                "name": "Pčelar"
+            },
+            "craft/blacksmith": {
+                "name": "Kovač"
+            },
+            "craft/boatbuilder": {
+                "name": "Brodograditelj"
+            },
+            "craft/bookbinder": {
+                "name": "Knjigovezac"
+            },
+            "craft/brewery": {
+                "name": "Pivara"
+            },
+            "craft/carpenter": {
+                "name": "Stolar"
+            },
+            "craft/caterer": {
+                "name": "Ugostitelj"
+            },
+            "craft/clockmaker": {
+                "name": "Proizvođač satova"
+            },
+            "craft/dressmaker": {
+                "name": "Izrada haljina"
+            },
+            "craft/electrician": {
+                "name": "Električar"
+            },
+            "craft/gardener": {
+                "name": "Vrtlar"
+            },
+            "craft/hvac": {
+                "name": "HVAC"
+            },
+            "craft/insulator": {
+                "name": "Izolator"
+            },
+            "craft/jeweler": {
+                "name": "Zlatar",
+                "terms": "zlatar,draguljar"
+            },
+            "craft/key_cutter": {
+                "name": "Izrada ključeva"
+            },
+            "craft/locksmith": {
+                "name": "Bravar"
+            },
+            "craft/metal_construction": {
+                "name": "Metalne konstrukcije"
+            },
+            "craft/optician": {
+                "name": "Optičar"
+            },
+            "craft/painter": {
+                "name": "Slikar"
+            },
+            "craft/photographer": {
+                "name": "Fotograf"
+            },
+            "craft/photographic_labratory": {
+                "name": "Fotografska laboratorija"
+            },
+            "craft/plumber": {
+                "name": "Vodoinstalater"
+            },
+            "craft/pottery": {
+                "name": "Grnčarija"
+            },
+            "craft/roofer": {
+                "name": "Krovopokrivač"
+            },
+            "craft/saddler": {
+                "name": "Sedlar"
+            },
+            "craft/sculpter": {
+                "name": "Skulptor"
+            },
+            "craft/stonemason": {
+                "name": "Klesar"
+            },
+            "craft/sweep": {
+                "name": "Čišćenje dimnjaka"
+            },
+            "craft/tailor": {
+                "name": "Krojač"
+            },
+            "craft/window_construction": {
+                "name": "Izrada prozora"
+            },
             "embankment": {
                 "name": "Nasip",
                 "terms": "nasip"
@@ -1165,6 +1352,38 @@
             "footway/sidewalk": {
                 "name": "Trotoar",
                 "terms": "trotoar"
+            },
+            "golf/bunker": {
+                "name": "Pješčana zamka",
+                "terms": "pješčana zamka,pješčana klopka,bunker"
+            },
+            "golf/fairway": {
+                "name": "Fairway",
+                "terms": "osnovni dio golf terena, glavni teren za golf"
+            },
+            "golf/green": {
+                "name": "Putting Green",
+                "terms": "područje golf terena najbliže rupi"
+            },
+            "golf/hole": {
+                "name": "Rupa za golf",
+                "terms": "golf rupa,rupa za golf loptice"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "Vodena opasnost sa strane",
+                "terms": "opasnost of vode sa strane,voda sa strane"
+            },
+            "golf/rough": {
+                "name": "Rough",
+                "terms": "područje \"divlje\" trave van igre,trava van golf terena"
+            },
+            "golf/tee": {
+                "name": "Tee Box",
+                "terms": "\"Tee\" kutija,kutija područja na početku rupe"
+            },
+            "golf/water_hazard": {
+                "name": "Vodena opasnost",
+                "terms": "opasnost od vode,vodena opasnost"
             },
             "highway": {
                 "name": "Put",

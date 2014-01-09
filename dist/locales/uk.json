@@ -193,7 +193,7 @@
     "browser_notice": "Цей редактор працює в оглядачах Firefox, Chrome, Safari, Opera і Internet Explorer версії 9 і вище.  Будь ласка, оновіть свій оглядач або скористайтеся редактором Potlatch 2.",
     "translate": {
         "translate": "Перекласти",
-        "localized_translation_label": "Багатомовна назва",
+        "localized_translation_label": "Назва іншою мовою",
         "localized_translation_language": "Обрати мову",
         "localized_translation_name": "Назва"
     },
@@ -252,7 +252,11 @@
         "incomplete": "<не завантажено>",
         "feature_list": "Пошук об’єктів",
         "edit": "Властивості об’єкта",
-        "none": "Нічого"
+        "none": "Нічого",
+        "node": "Точка",
+        "way": "Лінія",
+        "relation": "Зв’язок",
+        "location": "Місцезнаходження"
     },
     "background": {
         "title": "Тло",
@@ -312,6 +316,7 @@
         "untagged_area": "Полігон без  теґів",
         "many_deletions": "Ви збираєтесь вилучити {n} об’єктів. Ви дійсно бажаєте це зробити? Таке вилучення призведе до їх зникнення з мапи openstreetmap.org.",
         "tag_suggests_area": "Теґ {tag} зазвичай ставиться на полігони, але об’єкт не є полігоном",
+        "untagged_tooltip": "Оберіть тип об’єкту, що описує чим є {geometry}.",
         "deprecated_tags": "Застарілі теґи: {tags}"
     },
     "zoom": {
@@ -391,6 +396,9 @@
             "category-building": {
                 "name": "Будинок"
             },
+            "category-golf": {
+                "name": "Гольф"
+            },
             "category-landuse": {
                 "name": "Землекористування"
             },
@@ -467,6 +475,12 @@
             "admin_level": {
                 "label": "Адміністративний рівень"
             },
+            "aerialway": {
+                "label": "Тип"
+            },
+            "aerialway/access": {
+                "label": "Доступ"
+            },
             "aeroway": {
                 "label": "Тип"
             },
@@ -500,6 +514,9 @@
             "building_area": {
                 "label": "Будинок"
             },
+            "cans": {
+                "label": "Бляшанки"
+            },
             "capacity": {
                 "label": "Міськість",
                 "placeholder": "50, 100, 200…"
@@ -513,6 +530,9 @@
                     "clockwise": "За годинниковою стрілкою",
                     "anticlockwise": "Проти годинникової стрілки"
                 }
+            },
+            "clothes": {
+                "label": "Одяг"
             },
             "collection_times": {
                 "label": "Час виїмки пошти"
@@ -569,6 +589,17 @@
             "generator/type": {
                 "label": "Тип"
             },
+            "glass": {
+                "label": "Скло"
+            },
+            "golf_hole": {
+                "label": "Лунка",
+                "placeholder": "Номер лунки (1-18)"
+            },
+            "handicap": {
+                "label": "Перешкода",
+                "placeholder": "1-18"
+            },
             "highway": {
                 "label": "Тип"
             },
@@ -583,6 +614,9 @@
             },
             "incline": {
                 "label": "Нахил"
+            },
+            "information": {
+                "label": "Тип"
             },
             "internet_access": {
                 "label": "Доступ до Інтеренету",
@@ -650,6 +684,12 @@
             "operator": {
                 "label": "Оператор"
             },
+            "paper": {
+                "label": "Макулатура"
+            },
+            "par": {
+                "placeholder": "3, 4, 5…"
+            },
             "park_ride": {
                 "label": "Перехоплююча стоянка"
             },
@@ -659,6 +699,12 @@
             "phone": {
                 "label": "Телефон",
                 "placeholder": "+31 42 123 4567"
+            },
+            "piste/difficulty": {
+                "label": "Складність"
+            },
+            "piste/type": {
+                "label": "Тип"
             },
             "place": {
                 "label": "Тип"
@@ -727,6 +773,9 @@
                     "cutting": "Виїмка"
                 }
             },
+            "studio_type": {
+                "label": "Тип"
+            },
             "supervised": {
                 "label": "Під наглядом"
             },
@@ -750,6 +799,9 @@
             },
             "tree_type": {
                 "label": "Тип"
+            },
+            "tunnel": {
+                "label": "Тунель"
             },
             "vending": {
                 "label": "Тип товарів"
@@ -977,6 +1029,9 @@
                 "name": "Контора лісництва",
                 "terms": "Ranger Station,rjynjhf kscybwndf, лісник, лісництво"
             },
+            "amenity/recycling": {
+                "name": "Переробка"
+            },
             "amenity/restaurant": {
                 "name": "Ресторан",
                 "terms": "Restaurant, htcnjhfy"
@@ -1136,6 +1191,12 @@
                 "name": "Житлова будівля",
                 "terms": "Residential Building,bnkjdf elsdkz"
             },
+            "craft/photographer": {
+                "name": "Фотограф"
+            },
+            "craft/photographic_labratory": {
+                "name": "Фотолабораторія"
+            },
             "embankment": {
                 "name": "Насип"
             },
@@ -1160,6 +1221,9 @@
             },
             "footway/sidewalk": {
                 "name": "Тротуар"
+            },
+            "golf/bunker": {
+                "name": "Піщана пастка"
             },
             "highway": {
                 "name": "Дорога",
@@ -1669,6 +1733,12 @@
             "office/estate_agent": {
                 "name": "Агенція з нерухомості",
                 "terms": "ріелтор, Агенція з нерухомості, futywsz p ythejvjcns, Real Estate Office"
+            },
+            "office/ngo": {
+                "name": "Недержавна громадська організація"
+            },
+            "office/political_party": {
+                "name": "Політична партія"
             },
             "office/therapist": {
                 "name": "Терапевт"

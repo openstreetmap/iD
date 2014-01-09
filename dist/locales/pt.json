@@ -311,7 +311,8 @@
         "untagged_line": "Linha sem etiquetas",
         "untagged_area": "Área sem etiquetas",
         "many_deletions": "Está a eliminar {n} objetos. Tem a certeza que deseja continuar? Esta operação eliminará os objetos do mapa que outras pessoas visualizam no openstreetmap.org.",
-        "tag_suggests_area": "A etiqueta {tag} é utilizada normalmente em áreas, mas está a ser aplicada a uma linha.",
+        "tag_suggests_area": "A etiqueta {tag} sugere que a linha deveria ser uma área, mas não o é.",
+        "untagged_tooltip": "Selecione um tipo de funcionalidade que descreva o que esta {geometria} é .",
         "deprecated_tags": "Etiquetas obsoletas: {tags}"
     },
     "zoom": {
@@ -377,7 +378,7 @@
         },
         "startediting": {
             "title": "Começar a editar",
-            "help": "Este guia passo-a-passo e outras informações estão disponíveis neste botão sempre que precisar.",
+            "help": "Este guia passo-a-passo e outras informações estão disponíveis aqui sempre que precisar.",
             "save": "Não se esqueça de gravar as suas alterações regularmente clicando neste botão!",
             "start": "Começar a editar o mapa!"
         }

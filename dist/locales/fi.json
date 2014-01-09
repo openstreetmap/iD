@@ -45,6 +45,7 @@
             "title": "Pidennä",
             "description": "Jatka ja pidennä tätä viivaa.",
             "not_eligible": "Viivaa ei voi jatkaa tästä.",
+            "multiple": "Useita viivoja voidaan jatkaa tässä. Viivan valitsemiseksi paina Shift-painiketta ja napsauta sitä.",
             "annotation": {
                 "line": "Viivan muokkaaminen aloitettu.",
                 "area": "Alueen muokkaaminen aloitettu."
@@ -82,13 +83,15 @@
             "annotation": {
                 "line": "Viiva muutettu suorakulmaiseksi.",
                 "area": "Alue muutettu suorakulmaiseksi."
-            }
+            },
+            "not_squarish": "Nelikulmion tekeminen epäonnistui, koska se ei ole neliömäinen."
         },
         "straighten": {
             "title": "Suorista",
             "description": "Suorista tämä viiva.",
             "key": "S",
-            "annotation": "Viiva suoristettiin."
+            "annotation": "Viiva suoristettiin.",
+            "too_bendy": "Oikaiseminen epäonnistui, koska se taipuu liian paljon."
         },
         "delete": {
             "title": "Poista",
@@ -249,7 +252,11 @@
         "incomplete": "<ei ladattu>",
         "feature_list": "Etsi ominaisuuksia",
         "edit": "Muokkaa ominaisuutta",
-        "none": "Ei kohteita"
+        "none": "Ei kohteita",
+        "node": "Noodi",
+        "way": "Tie",
+        "relation": "Relaatio",
+        "location": "Sijainti"
     },
     "background": {
         "title": "Tausta",
@@ -354,6 +361,7 @@
         },
         "lines": {
             "title": "Viivat",
+            "add": "Viivoja käytetään esittämään sellaisia ominaisuuksia kuin tiet, rautatiet ja joet. **Napsauta Line-painiketta uuden viivan lisäämiseksi.**",
             "start": "**Aloita viiva napsauttamalla tien loppupistettä.**",
             "intersect": "Lisää pisteitä viivaan napsauttamalla karttaa. Karttaa voi liikuttaa vetämällä viivan piirtämisen aikana. Tiet ja monet muutkin viivat ovat osa isompaa kokonaisuutta. Reitityksen takia on tärkeää, että tiet on yhdistetty toisiinsa oikein. **Luo kahden kadun risteys napsauttamalla Flower Streetiä.**",
             "finish": "Viimeistele viiva kaksoisnapsauttamalla viimeisen viivapisteen kohdalla. **Lopeta viivan piirtäminen.**",
@@ -444,6 +452,27 @@
                     "postcode": "Postinumero"
                 }
             },
+            "aerialway": {
+                "label": "Tyyppi"
+            },
+            "aerialway/access": {
+                "label": "Käyttöoikeus"
+            },
+            "aerialway/bubble": {
+                "label": "kupla"
+            },
+            "aerialway/capacity": {
+                "label": "Kapasiteetti (per tunti)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Kesto (minuuttia)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/occupancy": {
+                "label": "asuminen",
+                "placeholder": "2, 4, 8..."
+            },
             "aeroway": {
                 "label": "Tyyppi"
             },
@@ -527,6 +556,9 @@
             },
             "fixme": {
                 "label": "Korjaa minut"
+            },
+            "gauge": {
+                "label": "Raideväli"
             },
             "highway": {
                 "label": "Tyyppi"
@@ -613,6 +645,15 @@
                 "label": "Puhelinnumero",
                 "placeholder": "+358 40 123 4567"
             },
+            "piste/difficulty": {
+                "label": "haastavuus"
+            },
+            "piste/grooming": {
+                "label": "siistiytyminen"
+            },
+            "piste/type": {
+                "label": "Tyyppi"
+            },
             "place": {
                 "label": "Tyyppi"
             },
@@ -677,6 +718,9 @@
                     "cutting": "Kallioleikkaus"
                 }
             },
+            "studio_type": {
+                "label": "Tyyppi"
+            },
             "supervised": {
                 "label": "Valvonta"
             },
@@ -694,6 +738,9 @@
             },
             "trail_visibility": {
                 "label": "Polun näkyvyys"
+            },
+            "tunnel": {
+                "label": "Tunneli"
             },
             "water": {
                 "label": "Tyyppi"
@@ -721,6 +768,36 @@
         "presets": {
             "address": {
                 "name": "Osoite"
+            },
+            "aerialway": {
+                "name": "ilmarata"
+            },
+            "aerialway/cable_car": {
+                "name": "köysirata"
+            },
+            "aerialway/chair_lift": {
+                "name": "tuolihissi"
+            },
+            "aerialway/gondola": {
+                "name": "gondolivaunu"
+            },
+            "aerialway/magic_carpet": {
+                "name": "taikamattohissi"
+            },
+            "aerialway/platter": {
+                "name": "Köysihinaushissi"
+            },
+            "aerialway/pylon": {
+                "name": "ilmaradan pylväs"
+            },
+            "aerialway/rope_tow": {
+                "name": "hinaushiihtohissi"
+            },
+            "aerialway/station": {
+                "name": "Ilmarata-asema"
+            },
+            "aerialway/t-bar": {
+                "name": "hiihtohissi"
             },
             "aeroway": {
                 "name": "Kiitorata",
@@ -813,6 +890,12 @@
                 "name": "Elokuvateatteri",
                 "terms": "leffa, leffateatteri, elokuva, elokuvateatteri"
             },
+            "amenity/clinic": {
+                "name": "klinikka"
+            },
+            "amenity/clock": {
+                "name": "Kello"
+            },
             "amenity/college": {
                 "name": "Ammattiopisto",
                 "terms": "ammattiopisto, amis, ammattikoulu, koulu, koulutus, oppilaitos, toinen aste"
@@ -820,6 +903,12 @@
             "amenity/courthouse": {
                 "name": "Käräjäoikeus",
                 "terms": "oikeustalo, käräjätalo, alioikeus, kihlakunnanoikeus, syyttäjäntalo, raastupa, käräjätuomari, syyttäjä, lautamies, käräjäoikeus"
+            },
+            "amenity/dentist": {
+                "name": "hammaslääkäri"
+            },
+            "amenity/doctor": {
+                "name": "lääkäri"
             },
             "amenity/drinking_water": {
                 "name": "Juomavesi"
@@ -900,6 +989,9 @@
                 "name": "Koulu",
                 "terms": "koulu, alakoulu, ala-aste, yläaste, yläkoulu, lukio, yhteislukio, keskikoulu, koulutus, opiskelu, oppilaitos"
             },
+            "amenity/studio": {
+                "name": "Studio"
+            },
             "amenity/swimming_pool": {
                 "name": "Uima-allas"
             },
@@ -924,6 +1016,9 @@
             "amenity/university": {
                 "name": "Korkeakoulu",
                 "terms": "yliopisto, korkeakoulu, college, ammattikorkeakoulu, amk"
+            },
+            "amenity/veterinary": {
+                "name": "eläinlääkäri"
             },
             "amenity/waste_basket": {
                 "name": "Roskakori",
@@ -1016,6 +1111,138 @@
             "building/residential": {
                 "name": "Asuinrakennus"
             },
+            "craft/basket_maker": {
+                "name": "korintekijä"
+            },
+            "craft/beekeeper": {
+                "name": "mehiläistarhuri"
+            },
+            "craft/blacksmith": {
+                "name": "seppä"
+            },
+            "craft/boatbuilder": {
+                "name": "veneentekijä"
+            },
+            "craft/bookbinder": {
+                "name": "kirjansitoja"
+            },
+            "craft/brewery": {
+                "name": "panimo"
+            },
+            "craft/carpenter": {
+                "name": "kirvesmies"
+            },
+            "craft/carpet_layer": {
+                "name": "matontekijä"
+            },
+            "craft/caterer": {
+                "name": "pitopalvelu"
+            },
+            "craft/clockmaker": {
+                "name": "kelloseppä"
+            },
+            "craft/confectionary": {
+                "name": "konditori"
+            },
+            "craft/dressmaker": {
+                "name": "ompelija"
+            },
+            "craft/electrician": {
+                "name": "sähköasentaja"
+            },
+            "craft/gardener": {
+                "name": "puutarhuri"
+            },
+            "craft/glaziery": {
+                "name": "lasittaja"
+            },
+            "craft/handicraft": {
+                "name": "käsityö"
+            },
+            "craft/hvac": {
+                "name": "LVI"
+            },
+            "craft/insulator": {
+                "name": "eriste"
+            },
+            "craft/jeweler": {
+                "name": "kultaseppä"
+            },
+            "craft/key_cutter": {
+                "name": "avaimentekijä"
+            },
+            "craft/locksmith": {
+                "name": "lukkoseppä"
+            },
+            "craft/metal_construction": {
+                "name": "metallirakennelma"
+            },
+            "craft/optician": {
+                "name": "optikko"
+            },
+            "craft/painter": {
+                "name": "maalari"
+            },
+            "craft/photographer": {
+                "name": "valokuvaaja"
+            },
+            "craft/photographic_labratory": {
+                "name": "valokuvauslaboratorio"
+            },
+            "craft/plasterer": {
+                "name": "rappaaja"
+            },
+            "craft/plumber": {
+                "name": "putkiasentaja"
+            },
+            "craft/pottery": {
+                "name": "savenvalimo"
+            },
+            "craft/rigger": {
+                "name": "nosturi"
+            },
+            "craft/roofer": {
+                "name": "katontekijä"
+            },
+            "craft/saddler": {
+                "name": "satulaseppä"
+            },
+            "craft/sailmaker": {
+                "name": "purjeentekijä"
+            },
+            "craft/sawmill": {
+                "name": "saha"
+            },
+            "craft/scaffolder": {
+                "name": "rakennustelineasentaja"
+            },
+            "craft/sculpter": {
+                "name": "kuvanveistäjä"
+            },
+            "craft/shoemaker": {
+                "name": "suutari"
+            },
+            "craft/stonemason": {
+                "name": "kivenhakkaaja"
+            },
+            "craft/sweep": {
+                "name": "nuohooja"
+            },
+            "craft/tailor": {
+                "name": "räätäli"
+            },
+            "craft/tiler": {
+                "name": "laatoittaja"
+            },
+            "craft/tinsmith": {
+                "name": "tinaseppä"
+            },
+            "craft/upholsterer": {
+                "name": "verhoilija"
+            },
+            "craft/watchmaker": {
+                "name": "kelloseppä"
+            },
             "emergency/ambulance_station": {
                 "name": "Ambulanssiasema",
                 "terms": "ambulanssi, ambulanssit, hälytysajoneuvo, ambulanssihalli, ambulanssivarasto, ambulanssitalli, hälytysajoneuvohalli, hälytysajoneuvotalli, hälytysajoneuvovarasto"
@@ -1030,6 +1257,21 @@
             },
             "entrance": {
                 "name": "Sisäänkäynti"
+            },
+            "golf/hole": {
+                "name": "golf-reikä"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "sivusuuntainen vesieste"
+            },
+            "golf/rough": {
+                "name": "karheikko"
+            },
+            "golf/tee": {
+                "name": "tiiauspaikka"
+            },
+            "golf/water_hazard": {
+                "name": "vesieste"
             },
             "highway": {
                 "name": "Tie"
@@ -1081,6 +1323,9 @@
             "highway/residential": {
                 "name": "Asuinaluetie"
             },
+            "highway/rest_area": {
+                "name": "Lepoalue"
+            },
             "highway/road": {
                 "name": "Tuntematon tie"
             },
@@ -1107,6 +1352,9 @@
             },
             "highway/service/parking_aisle": {
                 "name": "Pysäköintiväylä"
+            },
+            "highway/services": {
+                "name": "Huoltoalue"
             },
             "highway/steps": {
                 "name": "Portaat"
@@ -1367,6 +1615,9 @@
             "office": {
                 "name": "Toimisto"
             },
+            "piste": {
+                "name": "rinne/hiihtoreitti"
+            },
             "place": {
                 "name": "Paikka"
             },
@@ -1420,11 +1671,17 @@
             "railway/disused": {
                 "name": "Käytöstä poistettu rautatie"
             },
+            "railway/funicular": {
+                "name": "funikulaari"
+            },
             "railway/level_crossing": {
                 "name": "Tasoristeys"
             },
             "railway/monorail": {
                 "name": "Monorail"
+            },
+            "railway/narrow_gauge": {
+                "name": "Kapearaiteinen rautatie"
             },
             "railway/platform": {
                 "name": "Rautatielaituri"

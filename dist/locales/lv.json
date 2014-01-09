@@ -59,6 +59,7 @@
             "not_closed": "Šo objektu nevar pārveidot par apļveida, jo tas nav pabeigts."
         },
         "orthogonalize": {
+            "title": "Kvadrāts",
             "annotation": {
                 "line": "Līnijas leņķi pārvedoti par taisnleņķiem.",
                 "area": "Apgabala leņķi pārvedoti par taisnleņķiem."
@@ -140,16 +141,25 @@
         }
     },
     "undo": {
+        "tooltip": "Atcelt: {action}",
         "nothing": "Nav nekā, ko atcelt"
     },
     "redo": {
+        "tooltip": "Atgriezt: {action}",
         "nothing": "Nav nekā, ko atsaukt"
     },
     "browser_notice": "Šis redaktors tiek atbalstīts ar Firefox, Chrome, Safari, Opera, un Internet Explorer 9 un jaunāku. Lūdzu, atjauniniet savu pārlūkprogrammu vai izmantojiet Potlatch 2 kartes rediģēšanai",
+    "translate": {
+        "translate": "Tulkot",
+        "localized_translation_language": "Izvelties valodu"
+    },
     "zoom_in_edit": "Pietuvināt, lai labotu",
     "logout": "atslēgties",
     "loading_auth": "Savienojas ar OpenStreetMap...",
     "report_a_bug": "ziņot par kļūdu",
+    "status": {
+        "error": "Nevarēja savienoties ar API."
+    },
     "commit": {
         "title": "Saglabāt izmaiņas",
         "description_placeholder": "Īss apraksts par jūsu ieguldījumu",
@@ -174,6 +184,7 @@
         "choose": "Izvēlieties objekta tipu",
         "results": "Atrasti {n} rezultāti meklējot {search}",
         "reference": "Skatīt OpenStreetMap wiki →",
+        "remove": "Noņemt ",
         "search": "Meklēt",
         "unknown": "Nezināms",
         "incomplete": "<nav lejuplādēts>"
@@ -199,9 +210,12 @@
         "unsaved_changes": "Jums ir nesaglabātas izmaiņas"
     },
     "success": {
+        "edited_osm": "Jūs izmainījāt OSM!",
         "just_edited": "Jūs nupat rediģējāt OpenStreetMap",
         "view_on_osm": "Apskatīt OSM",
-        "facebook": "Dalīties Facebook"
+        "facebook": "Dalīties Facebook",
+        "twitter": "Dalīties uz Facebook",
+        "google": "Dalīties uz Google+"
     },
     "confirm": {
         "okay": "Labi"

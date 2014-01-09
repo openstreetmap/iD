@@ -252,7 +252,11 @@
         "incomplete": "<no descargado>",
         "feature_list": "Buscar elementos",
         "edit": "Editar elemento",
-        "none": "Ninguno"
+        "none": "Ninguno",
+        "node": "Nodo",
+        "way": "Vía",
+        "relation": "Relación",
+        "location": "Localización"
     },
     "background": {
         "title": "Fondo",
@@ -312,6 +316,7 @@
         "untagged_area": "Área sin etiquetar",
         "many_deletions": "Está eliminando {n} objetos ¿Está seguro de que quieres hacer esto? Esta acción los eliminará del mapa que todos ven en openstreetmap.org.",
         "tag_suggests_area": "La etiqueta {tag} sugiere que esta línea debería ser una área, pero no lo es.",
+        "untagged_tooltip": "Seleccione un tipo de característica que describa lo que es esta {geometry}.",
         "deprecated_tags": "Etiquetas obsoletas: {tags}"
     },
     "zoom": {
@@ -391,6 +396,9 @@
             "category-building": {
                 "name": "Edificio"
             },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Uso del suelo"
             },
@@ -467,6 +475,17 @@
             "admin_level": {
                 "label": "Nivel administrativo"
             },
+            "aerialway/access": {
+                "label": "Acceso"
+            },
+            "aerialway/capacity": {
+                "label": "Capacidad (por hora)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Duración (minutos)",
+                "placeholder": "1, 2, 3..."
+            },
             "aeroway": {
                 "label": "Tipo"
             },
@@ -523,6 +542,9 @@
             "country": {
                 "label": "País"
             },
+            "covered": {
+                "label": "Cubierto"
+            },
             "crossing": {
                 "label": "Tipo"
             },
@@ -569,6 +591,14 @@
             "generator/type": {
                 "label": "Tipo"
             },
+            "golf_hole": {
+                "label": "Referencia",
+                "placeholder": "Número de hoyo (1-18)"
+            },
+            "handicap": {
+                "label": "Handicap",
+                "placeholder": "1-18"
+            },
             "highway": {
                 "label": "Tipo"
             },
@@ -583,6 +613,9 @@
             },
             "incline": {
                 "label": "Pendiente"
+            },
+            "information": {
+                "label": "Tipo"
             },
             "internet_access": {
                 "label": "Acceso a Internet",
@@ -649,6 +682,10 @@
             },
             "operator": {
                 "label": "Operador"
+            },
+            "par": {
+                "label": "Par",
+                "placeholder": "3, 4, 5..."
             },
             "park_ride": {
                 "label": "Aparcamiento disuasorio"
@@ -750,6 +787,9 @@
             },
             "tree_type": {
                 "label": "Tipo"
+            },
+            "tunnel": {
+                "label": "Túnel"
             },
             "vending": {
                 "label": "Tipo de producto"
@@ -974,6 +1014,9 @@
             "amenity/ranger_station": {
                 "name": "Puesto de guardaparques"
             },
+            "amenity/recycling": {
+                "name": "Reciclaje"
+            },
             "amenity/restaurant": {
                 "name": "Restaurante",
                 "terms": "restaurante,restorán, comedor, ambigú, bufé, mesón, taberna"
@@ -1132,6 +1175,9 @@
                 "name": "Edificio residencial",
                 "terms": "bloque"
             },
+            "craft/upholsterer": {
+                "name": "Tapicero"
+            },
             "embankment": {
                 "name": "Terraplén"
             },
@@ -1207,7 +1253,7 @@
             },
             "highway/pedestrian": {
                 "name": "Vía peatonal",
-                "terms": "Peatonal"
+                "terms": "Peatonal, plaza, calle"
             },
             "highway/primary": {
                 "name": "Carretera primaria",
@@ -1547,7 +1593,8 @@
                 "terms": "Depósito de agua"
             },
             "military/airfield": {
-                "name": "Aeródromo"
+                "name": "Aeródromo",
+                "terms": "Aerodromo, Aeropuerto, Pista"
             },
             "military/barracks": {
                 "name": "Cuartel"
@@ -1832,7 +1879,8 @@
                 "terms": "Relación, Vínculo, Asociación"
             },
             "route/ferry": {
-                "name": "Ruta de Ferry"
+                "name": "Ruta de Ferry",
+                "terms": "ruta, ferry, transbordador, lancha, embarcación"
             },
             "shop": {
                 "name": "Tienda",
@@ -1871,10 +1919,12 @@
                 "terms": "carnicería, tablajería, casquería, tocinería, fiambrería, pollería, chacinería, charcutería, alimentación, carne, vacuno, caballo, vaca, pollo, embutido, jamón"
             },
             "shop/car": {
-                "name": "Concesionario de automóviles"
+                "name": "Concesionario de automóviles",
+                "terms": "concesionario, coches, automóviles, carros, vehículos, venta"
             },
             "shop/car_parts": {
-                "name": "Tienda de componente de vehículos"
+                "name": "Tienda de componente de vehículos",
+                "terms": "repuestos, tienda, automóvil, vehículo, carro, coche, piezas, almacén"
             },
             "shop/car_repair": {
                 "name": "Taller de reparación de vehículos",
@@ -1901,17 +1951,20 @@
                 "terms": "tienda, almacén, colmado, abarrote, alimentación"
             },
             "shop/deli": {
-                "name": "Delicatessen"
+                "name": "Delicatessen",
+                "terms": "delicatessen, tienda, comestibles, gourmet, exquisiteces, comida"
             },
             "shop/department_store": {
-                "name": "Almacén"
+                "name": "Almacén",
+                "terms": "grandes almacenes, comercio, negocio, tienda, gran superficie"
             },
             "shop/doityourself": {
                 "name": "Tienda de bricolaje",
                 "terms": "bricolaje, ferretería, tienda"
             },
             "shop/dry_cleaning": {
-                "name": "Tintorería"
+                "name": "Tintorería",
+                "terms": "tintorería"
             },
             "shop/electronics": {
                 "name": "Tienda de electrodomésticos",
@@ -1948,7 +2001,8 @@
                 "terms": "peluquería barbería, peluquero, barbero, pelo, corte, salón, belleza, manicura, estética, esteticién, depilación"
             },
             "shop/hardware": {
-                "name": "Ferretería"
+                "name": "Ferretería",
+                "terms": "Ferreteria"
             },
             "shop/hifi": {
                 "name": "Tienda de sonido"
@@ -1984,7 +2038,8 @@
                 "terms": "música, melodía, tienda, disco, dvd, vinilo, lp, sonido, discografía, cantante, banda, grupo, rock, soul, pop, reggea, heavy, metal, rap, blues, clásica, cumbia, salsa"
             },
             "shop/newsagent": {
-                "name": "Quiosco de prensa"
+                "name": "Quiosco de prensa",
+                "terms": "vendedor, periódicos, revistas, kiosco, quiosco, puesto, prensa, publicación, diario"
             },
             "shop/optician": {
                 "name": "Óptica",
@@ -1995,14 +2050,16 @@
                 "terms": "tienda, deportes, aventura, aire, libre, excursionismo"
             },
             "shop/pet": {
-                "name": "Tienda de mascotas"
+                "name": "Tienda de mascotas",
+                "terms": "tienda, mascotas, perros, canina, felina, perruquería, gatos"
             },
             "shop/photo": {
                 "name": "Tienda de fotografía",
                 "terms": "fotografía, tienda , establecimiento, fotógrafo, cámara, retratista, revelado"
             },
             "shop/shoes": {
-                "name": "Zapatería"
+                "name": "Zapatería",
+                "terms": "zapatería, calzado, tienda, zapato, zapatilla, escarpín, bota, sandalia, alpargata, pantufla, babucha, borceguí, almadreña, zueco, chancla, chanclo, madreña, chinela, coturno, alborga"
             },
             "shop/sports": {
                 "name": "Tienda de artículos deportivos"
@@ -2019,7 +2076,8 @@
                 "terms": "juguetería,juguetes"
             },
             "shop/travel_agency": {
-                "name": "Agencia de viajes"
+                "name": "Agencia de viajes",
+                "terms": "agencia de viajes, agencia de turismo"
             },
             "shop/tyres": {
                 "name": "Tienda de neumáticos"
@@ -2028,13 +2086,16 @@
                 "name": "Local vacío"
             },
             "shop/variety_store": {
-                "name": "Tienda de variedades"
+                "name": "Tienda de variedades",
+                "terms": "tienda, variedades, bazar, cadena 100, conveniencia"
             },
             "shop/video": {
-                "name": "Videoclub"
+                "name": "Videoclub",
+                "terms": "tienda, alquiler, renta, tienda de vídeos, videoclub, alquiler de vídeos, renta de vídeos"
             },
             "tourism": {
-                "name": "Turismo"
+                "name": "Turismo",
+                "terms": "turismo"
             },
             "tourism/alpine_hut": {
                 "name": "Cabaña alpina"
