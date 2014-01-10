@@ -18,7 +18,11 @@ iD.Tree = function(head) {
         return rect;
     }
 
-    function updateParents(entity, insertions) {
+    function updateParents(entity, insertions, memo) {
+        if (memo && memo[entity.id]) return;
+        memo = memo || {};
+        memo[entity.id] = true;
+
         head.parentWays(entity).forEach(function(parent) {
             if (rectangles[parent.id]) {
                 rtree.remove(rectangles[parent.id]);
@@ -31,7 +35,7 @@ iD.Tree = function(head) {
                 rtree.remove(rectangles[parent.id]);
                 insertions.push(parent);
             }
-            updateParents(parent, insertions);
+            updateParents(parent, insertions, memo);
         });
     }
 
