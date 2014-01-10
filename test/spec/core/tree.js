@@ -41,6 +41,21 @@ describe("iD.Tree", function() {
             expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), g)).to.eql([]);
             expect(tree.intersects(iD.geo.Extent([0, 0], [11, 11]), g)).to.eql([node_]);
         });
+
+        it("does not error on self-referencing relations", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                relation = iD.Relation();
+
+            relation = relation.addMember({id: node.id});
+            relation = relation.addMember({id: relation.id});
+
+            graph.rebase([node, relation], [graph]);
+            tree.rebase([relation]);
+
+            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), graph)).to.eql([relation]);
+        });
     });
 
     describe("#intersects", function() {
