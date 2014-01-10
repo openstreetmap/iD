@@ -6,9 +6,18 @@ iD.operations.Rotate = function(selectedIDs, context) {
     };
 
     operation.available = function() {
-        return selectedIDs.length === 1 &&
-            context.entity(entityId).type === 'way' &&
-            context.geometry(entityId) === 'area';
+        var graph = context.graph(),
+            entity = graph.entity(entityId);
+
+        if (selectedIDs.length !== 1 ||
+            entity.type !== 'way')
+            return false;
+        if (context.geometry(entityId) === 'area')
+            return true;
+        if (entity.isClosed() &&
+            graph.parentRelations(entity).some(function(r) { return r.isMultipolygon(); }))
+            return true;
+        return false;
     };
 
     operation.disabled = function() {
