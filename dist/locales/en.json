@@ -1391,7 +1391,7 @@
                 "terms": "glasses,optician"
             },
             "craft/painter": {
-                "name": "painter",
+                "name": "Painter",
                 "terms": "painter"
             },
             "craft/photographer": {

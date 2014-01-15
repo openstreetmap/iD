@@ -2415,7 +2415,7 @@
         ]
     },
     "craft/painter": {
-        "name": "painter",
+        "name": "Painter",
         "geometry": [
             "point",
             "area"

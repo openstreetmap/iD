@@ -721,8 +721,8 @@ en:
         name: Optician
         terms: "<translate with synonyms or related terms for 'Optician', separated by commas>"
       craft/painter: 
-        name: painter
-        terms: "<translate with synonyms or related terms for 'painter', separated by commas>"
+        name: Painter
+        terms: "<translate with synonyms or related terms for 'Painter', separated by commas>"
       craft/photographer: 
         name: Photographer
         terms: "<translate with synonyms or related terms for 'Photographer', separated by commas>"
