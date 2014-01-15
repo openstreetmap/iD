@@ -182,9 +182,43 @@ function generatePresets() {
     fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: presetsYaml}}));
 }
 
+function validateCategoryPresets() {
+    var categories = rp('categories.json'),
+        presets = rp('presets.json');
+    _.forEach(categories, function(category) {
+        if (category.members) {
+            category.members.forEach(function(preset) {
+                if (presets[preset] === undefined) {
+                    console.error('Unknown preset: ' + preset + ' in category ' + category.name);
+                    process.exit(1);
+                }
+            });
+        }
+    });
+}
+
+function validatePresetFields() {
+    var presets = rp('presets.json'),
+        fields = rp('fields.json');
+    _.forEach(presets, function(preset) {
+        if (preset.fields) {
+            preset.fields.forEach(function(field) {
+                if (fields[field] === undefined) {
+                    console.error('Unknown preset field: ' + field + ' in preset ' + preset.name);
+                    process.exit(1);
+                }
+            });
+        }
+    });
+}
+
 generateCategories();
 generateFields();
 generatePresets();
+
+// additional consistency checks
+validateCategoryPresets();
+validatePresetFields();
 
 // Push changes from data/core.yaml into en.json
 var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
