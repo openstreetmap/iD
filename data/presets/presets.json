@@ -624,7 +624,6 @@
         "icon": "hospital",
         "fields": [
             "building_area",
-            "social_facility",
             "address",
             "opening_hours"
         ]
