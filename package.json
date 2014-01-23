@@ -26,7 +26,7 @@
     "maki": "0.4",
     "jshint": "2.3.0",
     "mocha": "~1.12",
-    "mocha-phantomjs": "~3.1.0",
+    "mocha-phantomjs": "~3.3.0",
     "chai": "~1.4",
     "sinon": "~1.6",
     "sinon-chai": "~2.3.1",
