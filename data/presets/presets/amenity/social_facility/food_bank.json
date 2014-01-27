@@ -11,6 +11,7 @@
         "social_facility": "food_bank"
     },
     "fields": [
+        "social_facility_for",
         "address",
         "phone",
         "opening_hours",

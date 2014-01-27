@@ -15,6 +15,7 @@
         "social_facility:for": "homeless"
     },
     "fields": [
+        "social_facility_for",
         "address",
         "phone",
         "opening_hours",

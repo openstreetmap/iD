@@ -10,6 +10,7 @@
         "amenity": "social_facility",
     },
     "fields": [
+        "social_facility_for",
         "address",
         "phone",
         "opening_hours",
