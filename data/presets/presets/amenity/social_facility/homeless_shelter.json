@@ -1,0 +1,24 @@
+{
+    "name": "Homeless Shelter",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "houseless",
+        "unhoused",
+        "displaced"
+    ],
+    "tags": {
+        "amenity": "social_facility",
+        "social_facility": "shelter",
+        "social_facility:for": "homeless"
+    },
+    "fields": [
+        "address",
+        "phone",
+        "opening_hours",
+        "wheelchair",
+        "operator"
+    ]
+}
