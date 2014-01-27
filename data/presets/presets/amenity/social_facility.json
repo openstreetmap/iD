@@ -1,0 +1,19 @@
+{
+    "name": "Social Facility",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+    ],
+    "tags": {
+        "amenity": "social_facility",
+    },
+    "fields": [
+        "address",
+        "phone",
+        "opening_hours",
+        "wheelchair",
+        "operator"
+    ]
+}
