@@ -59,7 +59,7 @@ function generateCategories() {
 
         categories[id] = field;
     });
-    fs.writeFileSync('data/presets/categories.json', stringify(categories));
+    return categories;
 }
 
 function generateFields() {
@@ -86,7 +86,7 @@ function generateFields() {
 
         fields[id] = field;
     });
-    fs.writeFileSync('data/presets/fields.json', stringify(fields));
+    return fields;
 }
 
 function suggestionsToPresets(presets) {
@@ -171,20 +171,60 @@ function generatePresets() {
 
     presets = _.merge(presets, suggestionsToPresets(presets));
 
-    fs.writeFileSync('data/presets/presets.json', stringify(presets));
-    fs.writeFileSync('js/id/core/area_keys.js', '/* jshint -W109 */\niD.areaKeys = ' + stringify(areaKeys) + ';');
-
     var presetsYaml = _.cloneDeep(translations);
     _.forEach(presetsYaml.presets, function(preset) {
         preset.terms = "<translate with synonyms or related terms for '" + preset.name + "', separated by commas>"
     });
 
-    fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: presetsYaml}}));
+    return {
+        presets: presets,
+        areaKeys: areaKeys,
+        presetsYaml: presetsYaml
+    };
 }
 
-generateCategories();
-generateFields();
-generatePresets();
+function validateCategoryPresets(categories, presets) {
+    _.forEach(categories, function(category) {
+        if (category.members) {
+            category.members.forEach(function(preset) {
+                if (presets[preset] === undefined) {
+                    console.error('Unknown preset: ' + preset + ' in category ' + category.name);
+                    process.exit(1);
+                }
+            });
+        }
+    });
+}
+
+function validatePresetFields(presets, fields) {
+    var presets = rp('presets.json'),
+        fields = rp('fields.json');
+    _.forEach(presets, function(preset) {
+        if (preset.fields) {
+            preset.fields.forEach(function(field) {
+                if (fields[field] === undefined) {
+                    console.error('Unknown preset field: ' + field + ' in preset ' + preset.name);
+                    process.exit(1);
+                }
+            });
+        }
+    });
+}
+
+var categories = generateCategories(),
+    fields = generateFields(),
+    presets = generatePresets();
+
+// additional consistency checks
+validateCategoryPresets(categories, presets.presets);
+validatePresetFields(presets.presets, fields);
+
+// Save individual data files
+fs.writeFileSync('data/presets/categories.json', stringify(categories));
+fs.writeFileSync('data/presets/fields.json', stringify(fields));
+fs.writeFileSync('data/presets/presets.json', stringify(presets.presets));
+fs.writeFileSync('js/id/core/area_keys.js', '/* jshint -W109 */\niD.areaKeys = ' + stringify(presets.areaKeys) + ';');
+fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: presets.presetsYaml}}));
 
 // Push changes from data/core.yaml into en.json
 var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
