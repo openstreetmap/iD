@@ -7,7 +7,7 @@
     "terms": [
     ],
     "tags": {
-        "amenity": "social_facility",
+        "amenity": "social_facility"
     },
     "fields": [
         "social_facility_for",
