@@ -1362,6 +1362,95 @@
         ],
         "name": "Shelter"
     },
+    "amenity/social_facility": {
+        "name": "Social Facility",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "amenity": "social_facility"
+        },
+        "fields": [
+            "social_facility_for",
+            "address",
+            "phone",
+            "opening_hours",
+            "wheelchair",
+            "operator"
+        ]
+    },
+    "amenity/social_facility/food_bank": {
+        "name": "Food Bank",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "amenity": "social_facility",
+            "social_facility": "food_bank"
+        },
+        "fields": [
+            "social_facility_for",
+            "address",
+            "phone",
+            "opening_hours",
+            "wheelchair",
+            "operator"
+        ]
+    },
+    "amenity/social_facility/group_home": {
+        "name": "Group Home",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "elderly",
+            "old",
+            "senior living"
+        ],
+        "tags": {
+            "amenity": "social_facility",
+            "social_facility": "group_home",
+            "social_facility_for": "senior"
+        },
+        "fields": [
+            "social_facility_for",
+            "address",
+            "phone",
+            "opening_hours",
+            "wheelchair",
+            "operator"
+        ]
+    },
+    "amenity/social_facility/homeless_shelter": {
+        "name": "Homeless Shelter",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "houseless",
+            "unhoused",
+            "displaced"
+        ],
+        "tags": {
+            "amenity": "social_facility",
+            "social_facility": "shelter",
+            "social_facility:for": "homeless"
+        },
+        "fields": [
+            "social_facility_for",
+            "address",
+            "phone",
+            "opening_hours",
+            "wheelchair",
+            "operator"
+        ]
+    },
     "amenity/studio": {
         "name": "Studio",
         "geometry": [

@@ -797,6 +797,10 @@
             "shop": {
                 "label": "Type"
             },
+            "social_facility_for": {
+                "label": "People served",
+                "placeholder": "Homeless, Disabled, Child, etc"
+            },
             "source": {
                 "label": "Source"
             },
@@ -1141,6 +1145,22 @@
             "amenity/shelter": {
                 "name": "Shelter",
                 "terms": "lean-to"
+            },
+            "amenity/social_facility": {
+                "name": "Social Facility",
+                "terms": ""
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "Food Bank",
+                "terms": ""
+            },
+            "amenity/social_facility/group_home": {
+                "name": "Group Home",
+                "terms": "elderly,old,senior living"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Homeless Shelter",
+                "terms": "houseless,unhoused,displaced"
             },
             "amenity/studio": {
                 "name": "Studio",

@@ -280,6 +280,9 @@ en:
         label: Type
       shop: 
         label: Type
+      social_facility_for: 
+        label: People served
+        placeholder: "Homeless, Disabled, Child, etc"
       source: 
         label: Source
       sport: 
@@ -534,6 +537,18 @@ en:
       amenity/shelter: 
         name: Shelter
         terms: "<translate with synonyms or related terms for 'Shelter', separated by commas>"
+      amenity/social_facility: 
+        name: Social Facility
+        terms: "<translate with synonyms or related terms for 'Social Facility', separated by commas>"
+      amenity/social_facility/food_bank: 
+        name: Food Bank
+        terms: "<translate with synonyms or related terms for 'Food Bank', separated by commas>"
+      amenity/social_facility/group_home: 
+        name: Group Home
+        terms: "<translate with synonyms or related terms for 'Group Home', separated by commas>"
+      amenity/social_facility/homeless_shelter: 
+        name: Homeless Shelter
+        terms: "<translate with synonyms or related terms for 'Homeless Shelter', separated by commas>"
       amenity/studio: 
         name: Studio
         terms: "<translate with synonyms or related terms for 'Studio', separated by commas>"

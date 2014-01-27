@@ -692,6 +692,28 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "social_facility_for": {
+        "key": "social_facility:for",
+        "type": "radio",
+        "label": "People served",
+        "placeholder": "Homeless, Disabled, Child, etc",
+        "options": [
+            "abused",
+            "child",
+            "disabled",
+            "diseased",
+            "drug_addicted",
+            "homeless",
+            "juvenile",
+            "mental_health",
+            "migrant",
+            "orphan",
+            "senior",
+            "underprivileged",
+            "unemployed",
+            "victim"
+        ]
+    },
     "source": {
         "key": "source",
         "type": "text",
