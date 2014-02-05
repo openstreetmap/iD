@@ -1290,16 +1290,76 @@
                 "name": "Apartments",
                 "terms": ""
             },
+            "building/barn": {
+                "name": "Barn",
+                "terms": ""
+            },
+            "building/bunker": {
+                "name": "Bunker",
+                "terms": ""
+            },
+            "building/cabin": {
+                "name": "Cabin",
+                "terms": ""
+            },
+            "building/cathedral": {
+                "name": "Cathedral",
+                "terms": ""
+            },
+            "building/chapel": {
+                "name": "Chapel",
+                "terms": ""
+            },
+            "building/church": {
+                "name": "Church",
+                "terms": ""
+            },
             "building/commercial": {
                 "name": "Commercial Building",
+                "terms": ""
+            },
+            "building/construction": {
+                "name": "Building Under Construction",
+                "terms": ""
+            },
+            "building/detached": {
+                "name": "Detached Home",
+                "terms": ""
+            },
+            "building/dormitory": {
+                "name": "Dormitory",
                 "terms": ""
             },
             "building/entrance": {
                 "name": "Entrance",
                 "terms": ""
             },
+            "building/farm_auxilary": {
+                "name": "Farm Building",
+                "terms": ""
+            },
             "building/garage": {
                 "name": "Garage",
+                "terms": ""
+            },
+            "building/garages": {
+                "name": "Garages",
+                "terms": ""
+            },
+            "building/greenhouse": {
+                "name": "Greenhouse",
+                "terms": ""
+            },
+            "building/hanger": {
+                "name": "Hanger",
+                "terms": ""
+            },
+            "building/hospital": {
+                "name": "Hospital Building",
+                "terms": ""
+            },
+            "building/hotel": {
+                "name": "Hotel Building",
                 "terms": ""
             },
             "building/house": {
@@ -1314,8 +1374,52 @@
                 "name": "Industrial Building",
                 "terms": ""
             },
+            "building/public": {
+                "name": "Public Building",
+                "terms": ""
+            },
             "building/residential": {
                 "name": "Residential Building",
+                "terms": ""
+            },
+            "building/retail": {
+                "name": "Retail Building",
+                "terms": ""
+            },
+            "building/roof": {
+                "name": "Roof",
+                "terms": ""
+            },
+            "building/school": {
+                "name": "School Building",
+                "terms": ""
+            },
+            "building/shed": {
+                "name": "Shed",
+                "terms": ""
+            },
+            "building/stable": {
+                "name": "Stable",
+                "terms": ""
+            },
+            "building/static_caravan": {
+                "name": "Static Caravan",
+                "terms": ""
+            },
+            "building/terrace": {
+                "name": "Terraced Houses",
+                "terms": ""
+            },
+            "building/train_station": {
+                "name": "Train Station",
+                "terms": ""
+            },
+            "building/university": {
+                "name": "University Building",
+                "terms": ""
+            },
+            "building/warehouse": {
+                "name": "Warehouse",
                 "terms": ""
             },
             "craft/basket_maker": {

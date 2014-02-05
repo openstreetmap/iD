@@ -645,15 +645,60 @@ en:
       building/apartments: 
         name: Apartments
         terms: "<translate with synonyms or related terms for 'Apartments', separated by commas>"
+      building/barn: 
+        name: Barn
+        terms: "<translate with synonyms or related terms for 'Barn', separated by commas>"
+      building/bunker: 
+        name: Bunker
+        terms: "<translate with synonyms or related terms for 'Bunker', separated by commas>"
+      building/cabin: 
+        name: Cabin
+        terms: "<translate with synonyms or related terms for 'Cabin', separated by commas>"
+      building/cathedral: 
+        name: Cathedral
+        terms: "<translate with synonyms or related terms for 'Cathedral', separated by commas>"
+      building/chapel: 
+        name: Chapel
+        terms: "<translate with synonyms or related terms for 'Chapel', separated by commas>"
+      building/church: 
+        name: Church
+        terms: "<translate with synonyms or related terms for 'Church', separated by commas>"
       building/commercial: 
         name: Commercial Building
         terms: "<translate with synonyms or related terms for 'Commercial Building', separated by commas>"
+      building/construction: 
+        name: Building Under Construction
+        terms: "<translate with synonyms or related terms for 'Building Under Construction', separated by commas>"
+      building/detached: 
+        name: Detached Home
+        terms: "<translate with synonyms or related terms for 'Detached Home', separated by commas>"
+      building/dormitory: 
+        name: Dormitory
+        terms: "<translate with synonyms or related terms for 'Dormitory', separated by commas>"
       building/entrance: 
         name: Entrance
         terms: "<translate with synonyms or related terms for 'Entrance', separated by commas>"
+      building/farm_auxilary: 
+        name: Farm Building
+        terms: "<translate with synonyms or related terms for 'Farm Building', separated by commas>"
       building/garage: 
         name: Garage
         terms: "<translate with synonyms or related terms for 'Garage', separated by commas>"
+      building/garages: 
+        name: Garages
+        terms: "<translate with synonyms or related terms for 'Garages', separated by commas>"
+      building/greenhouse: 
+        name: Greenhouse
+        terms: "<translate with synonyms or related terms for 'Greenhouse', separated by commas>"
+      building/hanger: 
+        name: Hanger
+        terms: "<translate with synonyms or related terms for 'Hanger', separated by commas>"
+      building/hospital: 
+        name: Hospital Building
+        terms: "<translate with synonyms or related terms for 'Hospital Building', separated by commas>"
+      building/hotel: 
+        name: Hotel Building
+        terms: "<translate with synonyms or related terms for 'Hotel Building', separated by commas>"
       building/house: 
         name: House
         terms: "<translate with synonyms or related terms for 'House', separated by commas>"
@@ -663,9 +708,42 @@ en:
       building/industrial: 
         name: Industrial Building
         terms: "<translate with synonyms or related terms for 'Industrial Building', separated by commas>"
+      building/public: 
+        name: Public Building
+        terms: "<translate with synonyms or related terms for 'Public Building', separated by commas>"
       building/residential: 
         name: Residential Building
         terms: "<translate with synonyms or related terms for 'Residential Building', separated by commas>"
+      building/retail: 
+        name: Retail Building
+        terms: "<translate with synonyms or related terms for 'Retail Building', separated by commas>"
+      building/roof: 
+        name: Roof
+        terms: "<translate with synonyms or related terms for 'Roof', separated by commas>"
+      building/school: 
+        name: School Building
+        terms: "<translate with synonyms or related terms for 'School Building', separated by commas>"
+      building/shed: 
+        name: Shed
+        terms: "<translate with synonyms or related terms for 'Shed', separated by commas>"
+      building/stable: 
+        name: Stable
+        terms: "<translate with synonyms or related terms for 'Stable', separated by commas>"
+      building/static_caravan: 
+        name: Static Caravan
+        terms: "<translate with synonyms or related terms for 'Static Caravan', separated by commas>"
+      building/terrace: 
+        name: Terraced Houses
+        terms: "<translate with synonyms or related terms for 'Terraced Houses', separated by commas>"
+      building/train_station: 
+        name: Train Station
+        terms: "<translate with synonyms or related terms for 'Train Station', separated by commas>"
+      building/university: 
+        name: University Building
+        terms: "<translate with synonyms or related terms for 'University Building', separated by commas>"
+      building/warehouse: 
+        name: Warehouse
+        terms: "<translate with synonyms or related terms for 'Warehouse', separated by commas>"
       craft/basket_maker: 
         name: Basket Maker
         terms: "<translate with synonyms or related terms for 'Basket Maker', separated by commas>"

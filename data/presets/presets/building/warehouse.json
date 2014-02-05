@@ -1,0 +1,16 @@
+{
+    "icon": "building",
+    "fields": [
+        "address",
+        "levels"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "building": "warehouse"
+    },
+    "name": "Warehouse"
+}
