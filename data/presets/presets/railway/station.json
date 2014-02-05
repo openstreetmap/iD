@@ -1,5 +1,8 @@
 {
     "icon": "rail",
+    "fields": [
+        "building_area"
+    ],
     "geometry": [
         "point",
         "vertex",
