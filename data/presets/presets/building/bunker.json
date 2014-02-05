@@ -1,5 +1,4 @@
 {
-    "icon": "building",
     "fields": [
         "address",
         "levels"
@@ -12,5 +11,6 @@
     "tags": {
         "building": "bunker"
     },
-    "name": "Bunker"
+    "name": "Bunker",
+    "searchable": false
 }
