@@ -1,3 +1,11 @@
+## 1.3.6
+
+* More protection against relation loops (#2096)
+* Fix freeze when using Clinic preset (#2102)
+* Allow rotating closed multipolygon members (#1718)
+* Bump threshold for Orthogonalize to 12 degrees
+* Added social_facility presets (#2109)
+
 ## 1.3.5
 
 * Smoother and faster panning, zooming, and tooltips
