@@ -12,5 +12,6 @@
     "tags": {
         "building": "train_station"
     },
-    "name": "Train Station"
+    "name": "Train Station",
+    "searchable":false;
 }
