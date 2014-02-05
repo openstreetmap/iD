@@ -14104,7 +14104,7 @@
         "name": "New & Misaligned TIGER Roads",
         "type": "tms",
         "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
-        "template": "http://{switch:a,b,c}.tiles.mapbox.com/v3/enf.ho204tap,enf.ho20a3n1,enf.game1617/{zoom}/{x}/{y}.png",
+        "template": "http://{switch:a,b,c}.tiles.mapbox.com/v3/enf.y5c4ygb9,enf.ho20a3n1,enf.game1617/{zoom}/{x}/{y}.png",
         "scaleExtent": [
             0,
             22
