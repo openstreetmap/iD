@@ -316,8 +316,7 @@
         "zoom": "Perbesar ke jejak GPX"
     },
     "help": {
-        "title": "Bantuan",
-        "help": "#Bantuan\n\nIni adalah penyunting untuk [OpenStreetMap] (http://www.openstreetmap.org/), peta dunia gratis dan bisa disunting. Anda dapat menggunakannya dengan menambahkan dan memperbarui data di area anda, membangun sebuah peta sumber-terbuka dan data-terbuka yang lebih baik untuk semua orang.\n\nPerubahan yang anda buat akan terlihat ke semua orang yang menggunakan OpenStreetMap. Untuk melakukan penyutingan, anda membutuhkan [free OpenStreetMap account] (https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) adalah proyek kolaborasi dengan [kode sumber tersedia di GitHub](http://github.com/systemed/iD).\n"
+        "title": "Bantuan"
     },
     "intro": {
         "navigation": {
@@ -392,6 +391,7 @@
                 "placeholder": "Tidak diketahui",
                 "types": {
                     "access": "Umum",
+                    "foot": "Kaki",
                     "motor_vehicle": "Sepeda Motor",
                     "bicycle": "Sepeda",
                     "horse": "Kuda"

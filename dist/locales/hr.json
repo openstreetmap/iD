@@ -332,7 +332,7 @@
     },
     "help": {
         "title": "Pomoć",
-        "help": "# Pomoć\n\niD je program za uređivanje [OpenStreetMap](http://www.openstreetmap.org/), besplatne karte svijeta. \nMožeš ga koristiti za dodavanje i obnavljanje podataka u svom području,\nčime stvaraš bolju kartu svijeta otvorenog koda i podataka dostupnu\nsvima.\n\nKorekcije koje napraviš na karti će biti vidljive svakome tko koristi\nOpenStreetMap. Da bi mogao/la uređivati kartu, trebaš [besplatni\nOpenStreetMap korisnički račun](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je suradnički projekt sa [izvornim kôdom dostupnim na GitHub-u](https://github.com/systemed/iD).\n",
+        "help": "# Pomoć\n\niD je program za uređivanje [OpenStreetMap](http://www.openstreetmap.org/), \nbesplatne karte svijeta. Možeš ga koristiti za dodavanje i obnavljanje podataka u \nsvom području, čime stvaraš bolju kartu svijeta slobodnih izvornika i podataka \ndostupnu svima.\n\nKorekcije koje napraviš na karti će biti vidljive svakome tko koristi\nOpenStreetMap. Da bi mogao/la uređivati kartu, trebaš [besplatni\nOpenStreetMap korisnički račun](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je suradnički projekt sa [izvornim kôdom dostupnim \nna GitHub-u](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Uređivanje i spremanje promjena\n\nOvaj uređivač je primarno dizajniran za uređivanje na mreži i trenutačno ga\nkoristiš kroz internet preglednik kao web stranicu.\n\n### Odabir značajki\n\nZa odabir značajke karte, npr. ceste ili točke od interesa, klikni na nju na karti.\nPojaviti će se obrub oko značajke, otvoriti će se bočno okno koje prikazuje više\ndetalja o značajki i prikazati će se alatni izbornik sa mogućnostima koje možeš\nnapraviti na značajki.\n\nZa odabir nekoliko značajki istovremeno, drži tipku \"Shift\". Zatim ili klikni na\nznačajke koje želiš odabrati ili klikni i povuci za crtanje četverokuta. Time ćeš\nodabrati sve točke unutar četverokuta.\n\n### Spremanje uređivanja\n\nKada napraviš promjene na karti, npr. urediš ulice, zgrade i mjesta, one su\nspremljene lokalno sve dok ih ne spremiš na server. Nemoraš se briniti ukoliko\nnapraviš pogrešku - možeš poništiti promjene klikom na tipku \"Opovrgni\" i\nponoviti promjene klikom na tipku \"Ponovi\".\n\nKlikni na tipku \"Spremi\" da završiš grupu promjena - na primjer ako si završio/la\npodručje grada i želiš početi uređivati novo područje. Nakon što stisneš \"Spremi\"\nmoći ćeš pregledati sve promjene koje si napravio/la i uređivač će ti dati korisne\nprijedloge i upozorenja ako je nešto neuobičajeno među promjenama.\n\nAko je sve u redu, možeš ostaviti kratak komentar u kojem ćeš opisati napravljenu\npromjenu na karti. Ponovno klikni \"Spremi\" za postavljanje promjena na\n[OpenStreetMap.org](http://www.openstreetmap.org/), gdje će biti vidljive svim\ndrugim korisnicima i dostupne drugima za dopunu i nadogradnju.\n\nAko ne možeš završiti sve planirane promjene odjednom, možeš ugasiti prozor\nuređivača i kasnije se vratiti (na isti internet preglednik i isto računalo) i uređivač\nće ti ponuditi da nastaviš gdje si stao/la. \n",
         "roads": "# Ceste\n\nMožeš stvarati, popraviti/urediti i obrisati ceste pomoću ovog uređivača. Ceste\nmogu biti svih vrsta: puteljci, ceste, poljski putovi, biciklističke staze i drugo -\nsve staze preko kojih se često prolazi bi se trebale kartirati.\n\n### Odabir\n\nKlikni na cestu da ju odabereš. Pojaviti će se obrub oko ceste, zajedno s\nmalim alatnim izbornikom na karti i bočnim oknom koji prikazuje dodatne\ninformacije o selektiranoj cesti.\n\n### Uređivanje\n\nČesto ćeš vidjeti ceste koje se ne podudaraju s pozadinskim snimcima ili s\nGNSS tragom. Možeš urediti te ceste tako da se nalaze na ispravnom mjestu.\n\nPrvo klikni na cestu koju želiš urediti. To će ju označiti i prikazati kontrolne\ntočke unutar nje koje možeš premjestiti na točnije lokacije. Ako želiš dodati\nnove kontrolne točke za precizniju putanju, klikni dvoklikom na dio ceste gdje\nnema točke kako bi dodao/la novu.\n\nAko se cesta spaja s drugom cestom, ali nije ispravno spojena na karti, možeš\npovući kontrolnu točku na drugu cestu kako bi ih spojio/la. Spojene ceste su\nvrlo važne za kartu i osnova za omogućavanje uputa za navigaciju.\n\nTakođer možeš kliknuti alat \"Premjesti\" ili pritisnuti kraticu - tipku `M` za\npomak cijele ceste odjednom i zatim kliknuti ponovno za spremanje tog\npomaka.\n\n### Brisanje\n\nAko je cesta potpuno krivo ucrtana - ne vidi se na satelitskim snimkama i ako\nsi utvrdio/la da zbilja ne postoji uvidom na terenu možeš ju obrisati, što će ju\nobrisati s karte. Budi oprezan/na kada brišeš značajke - kao i kod svakog\ndrugog uređivanja rezultati su vidljivi svima, a satelitske snimke su često\nzastarjele, pa je moguće da je cesta nedavno sagrađena.\n\nZa brisanje ceste najprije ju označi, a zatim klikni na ikonicu kante za smeće ili\npritisni tipku \"Delete\".\n\n### Stvaranje\n\nAko si pronašao/la cestu koja bi trebala biti ucrtana ali nije, klikni ikonicu\n\"Linija\" na gornjem lijevom dijelu uređivača ili pritisni kraticu - tipku `2` da\nzapočneš crtanje linije.\n\nKlikni na početak ceste na karti da započneš crtanje. Ako se cesta odvaja od\npostojeće ceste, klikni na mjesto gdje se spajaju.\n\nZatim klikni na točke duž ceste tako da prate ispravnu putanju ceste, prema\npodacima satelitske snimke ili GNSS traga. Ako se cesta koju crtaš križa s\ndrugom cestom, spoji ih klikom na mjestu raskrižja. Kada si završio/la s\ncrtanjem, klikni dvoklikom sastrane ili pritisni tipku \"Return\" ili \"Enter\" na\ntipkovnici.\n",
         "gps": "# GNSS\n\nGNSS podaci su najpouzdaniji izvor podataka za OpenStreetMap. Ovaj\nuređivač podržava lokalne tragove - `.gpx` datoteteke sa tvog računala.\nTakav oblik GNSS traga možeš prikupiti s raznim aplikacijama za pametne\ntelefone kao i sa drugim GNSS/GPS uređajima.\n\nZa više informacija o postupku izmjere pomoću GNSS satelita, pročitaj članak\n[\"Mjerenje sa GPS-om\"](http://learnosm.org/en/beginner/using-gps/).\n\nKako bi koristio GPX tragove za kartiranje, povuci i ispusti GPX datoteku\nna uređivač karte. Ako se datoteka ispravno učita, biti će dodana na kartu\nkao linija svjetlo zelene boje. Klikni na izbornik \"Postavke pozadine\" s\ndesne strane za uključivanje, isključivanje ili povećanje na taj novi GPX sloj.\n\nGPX trag nije direktno postavljen na OpenStreetMap, samo je prikazan na\nkarti. Da bi ga iskoristio/la na najbolji način, preko njega crtaj na\nkarti koristeći ga kao vodilju za dodavanje novih značajki. Trag možeš također\n[postaviti na OpenStreetMap](http://www.openstreetmap.org/trace/create)\nkako bi ga i drugi korisnici mogli koristiti.\n",
@@ -366,7 +366,7 @@
         "areas": {
             "title": "Područja",
             "add": "Područja su detaljniji način za prikaz značajki. Omogućavaju informacije na granicama značajke. Područja se mogu koristiti za većinu značajki i često su preferirana. **Klikni na gumb Područje za dodavanje novog područja.**",
-            "corner": "Područja se crtaju postavljanjem točaka koje označavaju granicu područja. **Postavi početnu točku na jedan od ćoškova igrališta.**",
+            "corner": "Područja se crtaju postavljanjem točaka koje označavaju granicu područja. **Postavi početnu točku na jedan rub igrališta.**",
             "place": "Nacrtaj područje dodavanjem više točaka. Završi područje tako da klikneš na početnu točku. **Nacrtaj područje igrališta.**",
             "search": "**Pretraži za '{name}'.**",
             "choose": "**Odaberi igralište sa liste.**",
@@ -378,8 +378,8 @@
             "start": "**Započni liniju tako da klikneš na kraj ceste.**",
             "intersect": "Klikni za dodavanje više točaka na liniju. Možeš pomicati pogled na kartu dok crtaš ako je potrebno. Ceste i mnoge druge vrste linija su dio veće mreže. Važno je da su sve linije pravilno spojene kako bi softveri za određivanje rute ispravno funkcionirali. **Klikni na Flower Street za stvaranje raskrižja povezujući dvije linije.**",
             "finish": "Linije se mogu završiti tako da ponovno kliknete na posljednju točku. **Završi crtanje ceste.**",
-            "road": "**Odaberi cestu sa liste.**",
-            "residential": "Postoje različite vrste cesta, najčešća je Gradska cesta. **Odaberi tip Gradska cesta**",
+            "road": "**Odaberi Prometnica sa liste.**",
+            "residential": "Postoje različite vrste cesta, najčešća je Ulica. **Odaberi tip Ulica**",
             "describe": "**Dodaj naziv ceste i zatvori uređivač svojstava.**",
             "restart": "Cesta treba presijecati Flower Street.",
             "wrong_preset": "Nisi označio/la cestu koja predstavlja ulicu. **Klikni ovdje za ponovni odabir**"
@@ -393,6 +393,12 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Građevina"
+            },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Uporaba zemlje"
             },
@@ -407,6 +413,12 @@
             },
             "category-route": {
                 "name": "Ruta"
+            },
+            "category-water-area": {
+                "name": "Voda"
+            },
+            "category-water-line": {
+                "name": "Voda"
             }
         },
         "fields": {
@@ -447,6 +459,9 @@
                     }
                 }
             },
+            "access_simple": {
+                "label": "Pristup"
+            },
             "address": {
                 "label": "Adresa",
                 "placeholders": {
@@ -459,6 +474,21 @@
             },
             "admin_level": {
                 "label": "Administratorsko područje"
+            },
+            "aerialway/access": {
+                "label": "Pristup"
+            },
+            "aerialway/capacity": {
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "Grijano"
+            },
+            "aerialway/occupancy": {
+                "placeholder": "2, 4, 8..."
             },
             "aeroway": {
                 "label": "Vrsta"
@@ -562,6 +592,9 @@
             "generator/type": {
                 "label": "Vrsta"
             },
+            "handicap": {
+                "placeholder": "1-18"
+            },
             "highway": {
                 "label": "Vrsta"
             },
@@ -643,6 +676,9 @@
             "operator": {
                 "label": "Operator"
             },
+            "par": {
+                "placeholder": "3, 4, 5..."
+            },
             "park_ride": {
                 "label": "Parkiraj i idi javnim prijevozom"
             },
@@ -652,6 +688,12 @@
             "phone": {
                 "label": "Telefon",
                 "placeholder": "+385 01 123 4567"
+            },
+            "piste/difficulty": {
+                "label": "Težina"
+            },
+            "piste/type": {
+                "label": "Vrsta"
             },
             "place": {
                 "label": "Vrsta"
@@ -865,6 +907,12 @@
                 "name": "Kino",
                 "terms": "dvorana za gledanje filmova,kinematograf,kino dvorana"
             },
+            "amenity/clinic": {
+                "name": "Klinika"
+            },
+            "amenity/clock": {
+                "name": "Sat"
+            },
             "amenity/college": {
                 "name": "Fakultet",
                 "terms": "koledž,fakultet,veleučilište,visoko učilište"
@@ -872,6 +920,12 @@
             "amenity/courthouse": {
                 "name": "Zgrada suda",
                 "terms": "sudnica"
+            },
+            "amenity/dentist": {
+                "name": "Zubar"
+            },
+            "amenity/doctor": {
+                "name": "Doktor"
             },
             "amenity/drinking_water": {
                 "name": "Pitka voda",
@@ -973,6 +1027,9 @@
                 "name": "Škola",
                 "terms": "škola,gimnazija"
             },
+            "amenity/shelter": {
+                "name": "Sklonište"
+            },
             "amenity/swimming_pool": {
                 "name": "Sportski bazen",
                 "terms": "bazen"
@@ -1004,6 +1061,9 @@
             "amenity/vending_machine": {
                 "name": "Automat za prodaju",
                 "terms": "aparat za prodaju sokova,aparat za prodaju slatkiša,aparat za prodaju,aparat za kupovinu,prodajni aparat,automat za prodaju,automat za kupovinu,prodajni automat,automat za kavu"
+            },
+            "amenity/veterinary": {
+                "name": "Veterinar"
             },
             "amenity/waste_basket": {
                 "name": "Kanta za smeće",
@@ -1037,7 +1097,8 @@
                 "terms": "jarak,rov,prokop,šanac,jama,kanal"
             },
             "barrier/entrance": {
-                "name": "Ulaz"
+                "name": "Ulaz",
+                "terms": "ulaz "
             },
             "barrier/fence": {
                 "name": "Ograda",
@@ -1099,6 +1160,48 @@
             "building/residential": {
                 "name": "Stambena zgrada"
             },
+            "craft/beekeeper": {
+                "name": "Pčelar"
+            },
+            "craft/blacksmith": {
+                "name": "Kovač"
+            },
+            "craft/boatbuilder": {
+                "name": "Brodograditelj"
+            },
+            "craft/carpenter": {
+                "name": "Stolar"
+            },
+            "craft/electrician": {
+                "name": "Električar"
+            },
+            "craft/gardener": {
+                "name": "Vrtlar"
+            },
+            "craft/locksmith": {
+                "name": "Bravar"
+            },
+            "craft/optician": {
+                "name": "Optičar"
+            },
+            "craft/photographer": {
+                "name": "Fotograf"
+            },
+            "craft/plumber": {
+                "name": "Vodoinstalater"
+            },
+            "craft/roofer": {
+                "name": "Krovopokrivač"
+            },
+            "craft/sawmill": {
+                "name": "Pilana"
+            },
+            "craft/shoemaker": {
+                "name": "Obućar"
+            },
+            "craft/tailor": {
+                "name": "Krojač"
+            },
             "emergency/ambulance_station": {
                 "name": "Garaža hitne pomoći",
                 "terms": "garaža hitne pomoći,stanica hitne pomoći,stanica za hitnu pomoć,hitna pomoć"
@@ -1112,6 +1215,9 @@
             },
             "entrance": {
                 "name": "Ulaz"
+            },
+            "golf/rough": {
+                "name": "Grubo"
             },
             "highway": {
                 "name": "Prometnica"
@@ -1163,6 +1269,9 @@
             },
             "highway/residential": {
                 "name": "Ulica"
+            },
+            "highway/rest_area": {
+                "name": "Odmorište"
             },
             "highway/road": {
                 "name": "Nepoznata cesta"
@@ -1430,6 +1539,12 @@
                 "name": "Vodocrpilište",
                 "terms": "vodocrpilište,vodovod,vodovodna instalacija,vađenje pitke vode"
             },
+            "military/barracks": {
+                "name": "Vojarna"
+            },
+            "military/bunker": {
+                "name": "Bunker"
+            },
             "natural": {
                 "name": "Prirodne značajke",
                 "terms": "prirodno,prirodne značajke,prirodan,prirodni,prirodno,šuma,močvara,drvored,drvo,krš,blato,pijesak,livada,pašnjak"
@@ -1512,6 +1627,18 @@
             },
             "office": {
                 "name": "Ured"
+            },
+            "office/accountant": {
+                "name": "Računovođa"
+            },
+            "office/architect": {
+                "name": "Arhitekt"
+            },
+            "office/ngo": {
+                "name": "Nevladina organizacija"
+            },
+            "office/travel_agent": {
+                "name": "Putnička agencija"
             },
             "place": {
                 "name": "Mjesto",
@@ -1600,6 +1727,9 @@
             "railway/monorail": {
                 "name": "Jednotračna željeznička pruga",
                 "terms": "monorail željeznička pruga,pruga sa jednim kolosjekom"
+            },
+            "railway/narrow_gauge": {
+                "name": "Uskotračna željeznica"
             },
             "railway/platform": {
                 "name": "Željeznički peron",

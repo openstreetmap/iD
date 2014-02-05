@@ -29,8 +29,8 @@
     "operations": {
         "add": {
             "annotation": {
-                "point": "Uzel přidán.",
-                "vertex": "Uzel byl přidán k cestě.",
+                "point": "Přidán uzel.",
+                "vertex": "Přidán uzel k cestě.",
                 "relation": "Přidána relace."
             }
         },
@@ -55,7 +55,7 @@
             "annotation": "Kreslení přerušeno."
         },
         "change_role": {
-            "annotation": "Role prvku relace byla změněna."
+            "annotation": "Změněna role prvku relace."
         },
         "change_tags": {
             "annotation": "Upraveny vlastnosti."
@@ -97,11 +97,11 @@
             "title": "Smazat",
             "description": "Odstranit objekt z mapy.",
             "annotation": {
-                "point": "Uzel byl smazán.",
-                "vertex": "Uzel z cesty byl smazán.",
-                "line": "Cesta byla smazána.",
-                "area": "Plocha byla smazána.",
-                "relation": "Relace byla smazána.",
+                "point": "Smazán uzel.",
+                "vertex": "Smazán uzel z cesty.",
+                "line": "Smazána cesta.",
+                "area": "Smazána plocha.",
+                "relation": "Smazána relace.",
                 "multiple": "Bylo smazáno {n} objektů."
             },
             "incomplete_relation": "Tento objekt nelze smazat, protože je stažený jen částečně."
@@ -125,7 +125,7 @@
             "description": "Rozpojit tyto cesty/plochy.",
             "key": "D",
             "annotation": "Cesty/plochy byly rozpojeny.",
-            "not_connected": "Není tu žádná cesta/plocha, kterou by bylo možné rozdělit."
+            "not_connected": "Není tu žádná cesta/plocha, kterou by bylo možné rozpojit."
         },
         "merge": {
             "title": "Spojit",
@@ -141,11 +141,11 @@
             "description": "Posunout objekt na jiné místo.",
             "key": "M",
             "annotation": {
-                "point": "Uzel posunut.",
-                "vertex": "Uzel v cestě byl posunut.",
-                "line": "Cesta byla posunuta.",
-                "area": "Plocha byla posunuta.",
-                "multiple": "Objekty byly posunuty."
+                "point": "Posunut uzel.",
+                "vertex": "Posunut uzel v cestě.",
+                "line": "Posunuta cesta.",
+                "area": "Posunuta plocha.",
+                "multiple": "Posunuty objekty."
             },
             "incomplete_relation": "Tento objekt nelze posunout, protože je stažený jen částečně."
         },
@@ -284,7 +284,7 @@
     },
     "success": {
         "edited_osm": "OSM upraveno!",
-        "just_edited": "Právě jste upravil OpenStreetMap!",
+        "just_edited": "Právě jste upravil/a OpenStreetMap!",
         "view_on_osm": "Zobrazit na OSM",
         "facebook": "Sdílet na Facebooku",
         "twitter": "Sdílet na Twitteru",
@@ -332,11 +332,11 @@
     },
     "help": {
         "title": "Pomoc",
-        "help": "# Pomoc\n\nToto je editor [OpenStreetMap](http://www.openstreetmap.org/), svobodné a otevřené mapy světa, vytvářené jako open-source a open-data. S pomocí editoru můžete přidávat a upravovat data v mapě třeba ve svém okolí, a zlepšovat tak celou mapu pro každého.\n\nVaše úpravy mapy budou viditelné každým, kdo používá OpenStreetMap. Je ovšem třeba mít uživatelský účet na OpenStreetMap, který si můžete [snadno a zdarma zřídit](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je projekt vytvářený spoluprácí více lidí, se [zdrojovým kódem na GitHubu](https://github.com/systemed/iD).\n",
+        "help": "# Pomoc\n\nToto je editor [OpenStreetMap](http://www.openstreetmap.org/), svobodné a otevřené mapy světa, vytvářené jako open-source a open-data. S pomocí editoru můžete přidávat a upravovat data v mapě třeba ve svém okolí, a zlepšovat tak celou mapu pro každého.\n\nVaše úpravy mapy budou viditelné každým, kdo používá OpenStreetMap. Je ovšem třeba mít uživatelský účet na OpenStreetMap, který si můžete [snadno a zdarma zřídit](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je projekt vytvářený spoluprácí více lidí, se [zdrojovým kódem na GitHubu](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Editace a publikace\n\nTento editor pracuje primárně online - právě teď k němu přistupujete prostřednictvím webové stránky.\n\n### Výběr objektů\n\nChcete-li vybrat objekt, jako třeba silnici nebo obchod, klikněte na něj v mapě. Objekt se tím označí, otevře se boční panel s vlastnostmi objektu a zobrazí se nabídka akcemi, které lze s objektem provést.\n\nMůžete označit a pracovat s několika objekty najednou: podržte klávesu 'Shift', a pak buď postupně označte dotyčné objekty, anebo klikněte na mapu a táhněte myší či prstem - editor označí všechny objekty uvnitř příslušného obdélníku.\n\n### Publikace změn\n\nKdyž provedete nějaké úpravy objektů v mapě, úpravy jsou uloženy lokálně ve vašem prohlížeči. Nelekejte se, když uděláte chybu - úpravy lze vrátit zpět tlačítkem Zpět, a naopak je znovu provést tlačítkem Znovu.\n\nPo dokončení bloku úprav klikněte na 'Uložit' - například když jste upravili jednu část města, a chcete začít úpravy někde jinde. Zobrazí se přehled úprav, které jste provedli, editor tyto úpravy zkontroluje, a když se mu něco nebude zdát, zobrazí varování a návrhy.\n\nKdyž bude všechno v pořádku, můžete přidat krátký komentář s vysvětlením vašich úprav a kliknout znovu 'Uložit'. Úpravy se tímto publikují na [OpenStreetMap.org](http://www.openstreetmap.org/), kde za chvíli budou viditelné pro všechny uživatele a bude na nich možné provádět další úpravy.\n\nPokud nechcete nebo nemůžete pravy dokončit teď, stačí prostě odejít ze stránky pryč. Až příště navštívíte stránku (na stejném počítači, ve stejném prohlížeči), editor vám nabídne možnost znovu načíst neuložené úpravy.\n",
         "roads": "# Cesty\n\nEditor umožňuje vytvářet, opravovat a mazat silnice, pěšiny, cyklostezky, železnice atd. Zmapovat by mělo jít jakýkoli druh komunikace.\n\n### Výběr\n\nKdyž na cestu kliknete, zbarví se její obrys, otevře se u ní malá nabídka s nástroji a dále boční panel s informacemi o cestě.\n\n### Úpravy\n\nČasto narazíte na cesty, které jen nepřesně sledují pozadí či trasu GPS. Takové cesty můžete zarovnat na správné místo.\n\nNapřed klikněte na cestu, kterou chcete upravit. Cesta se rozsvítí a podél ní se objeví kontrolní uzly, které můžete posunout na správné místo. Pokud chcete přidat další kontrolní body a zpřesnit tak průběh cesty, stačí dvakrát kliknout na kus cesty mezi dvěma uzly - na zvolené místo přibude nový uzel.\n\nKdyž je reálná cesta napojena na jinou, ale v mapě spojeny nejsou, posuňte myší kontrolní uzel jedné cesty nad druhou - cesty se pak spojí. Propojení cest je velmi důležité pro správnou funkci navigací.\n\nTaké můžete posunout najednou celou cestu: buď klikněte na ikonu posunu v menu zobrazeném u cesty nebo stiskněte klávesu `M` a potom klikněte myší pro ukončení posunu. Jen pozor - pokud jsou vůči pozadí či GPS stopě všechny objekty v okolí, pravděpodobně to bude chybným pozadím a ne chybnou polohou objektů.\n\n### Mazání\n\nPokud je cesta úplně špatně, můžete ji zcela odstranit z mapy. Neměli byste se spoléhat pouze na satelitní snímky - mohou být zastaralé nebo zavádějící -, ideální je se přesvědčit na místě, že cesta opravdu neexistuje. Zvlášť při mazání objektů buďte opatrní - výsledek vaší úpravy se projeví v mapě pro všechny její uživatele.\n\nCestu smažete tak, že na ni kliknete a zvolíte ikonu odpadkového koše nebo stisknete klávesu Delete.\n\n### Vytváření\n\nNarazili jste na cestu, která by v mapě měla být, ale není? Klikněte na tlačítko 'Cesta' vlevo nahoře nebo stiskněte klávesu `2` - to vám umožní nakreslit novou cestu.\n\nKlikněte na místo, kde cesta začíná. Pokud cesta vychází z jiné, existující cesty, klikněte na místo, kde se cesty oddělují.\n\nPotom postupně klikejte na body, kudy cesta vede, podle satelitních snímků nebo trasy z GPS. Pokud vaše cesta protíná jinou, je třeba je propojit tak, že kliknete na bod křížení. Nakonec dvakrát klikněte na stejné místo nebo stiskněte klávesu 'Return' nebo 'Enter', cesta se tak ukončí.\n",
         "gps": "# GPS\n\nData z GPS jsou nejdůvěryhodnějším zdrojem informací pro OpenStreetMap. Tento editor podporuje zobrazení tras ve formátu `.gpx` nahraných z vašeho počítače. Takovou trasu můžete nasbírat s pomocí nejrůznějších aplikací pro mobily nebo s pomocí specializované navigace.\n\nPro více informací, jak provést takový sběr dat z GPS, viz např. návod anglicky:\n[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPokud už máte záznam ve formátu GPX, přetáhněte soubor myší či prstem nad editor. Rozpozná-li editor formát souboru, zobrazí se trasa v mapě jako světle zelená čára. Pokud chcete tuto novou vrstvu zapnout, vypnout nebo zvětšit na velikost pracovní plochy, klikněte na menu 'Nastavení pozadí' na pravé straně.\n\nTrasa GPX nebude přímo nahrána na OpenStreetMap - pouze slouží jako vodítko, podle kterého se můžete orientovat, a podle kterého můžete kreslit nové objekty do mapy. Pokud chcete přímo trasu GPX poskytnout i ostatním, můžete ji [nahrát do samostatné databáze OpenStreetMap](http://www.openstreetmap.org/trace/create).⏎\n",
-        "imagery": "# Podkladové snímky\n\nSatelitní a letecké snímky jsou důležitým zdrojem mapových dat. V menu 'Nastavení pozadí' na levé straně editoru je k dispozici kombinace leteckých snímků, satelitních snímků a dalších volně dostupných podkladů.\n\nImplicitní vrstvou jsou satelitní snímky [Bing](http://www.bing.com/maps/), ale jakmile se přesunete do konkrétní geografické oblasti a nastavíte dostatečné zvětšení, nabídnou se vám další mapové podklady. V některých státech, jako jsou Spojené státy, Francie či Dánskou, jsou k dispozici snímky ve vysoké kvalitě. Pro velkou část České republiky jsou také dostupné velmi detailní satelitní snímky a navíc data z katastru nemovitostí.\n\nPodklady jsou někdy posunuté vůči mapě, kvůli chybám na straně poskytovatele snímů. Pokud uvidíte, že je mnoho cest v mapě posunuto vůči pozadí, nesnažte se je hned přesunout - posun obvykle znamená chybu v podkladu a ne chybu v mapě. V menu 'Nastavení pozadí' klikněte na 'Zarovnat pozadí' - to vám dovolí posunout podklad, aby lícoval s mapou.\n",
+        "imagery": "# Podkladové snímky\n\nSatelitní a letecké snímky jsou důležitým zdrojem mapových dat. V menu 'Nastavení pozadí' na levé straně editoru je k dispozici kombinace leteckých snímků, satelitních snímků a dalších volně dostupných podkladů.\n\nImplicitní vrstvou jsou satelitní snímky [Bing](http://www.bing.com/maps/), ale jakmile se přesunete do konkrétní geografické oblasti a nastavíte dostatečné zvětšení, nabídnou se vám další mapové podklady. V některých státech, jako jsou Spojené státy, Francie či Dánskou, jsou k dispozici snímky ve vysoké kvalitě. Pro velkou část České republiky jsou také dostupné velmi detailní satelitní snímky (data z katastru nemovitostí bohužel zatím nejsou v iD jednoduše dostupná).\n\nPodklady jsou někdy posunuté vůči mapě, kvůli chybám na straně poskytovatele snímků. Pokud uvidíte, že je mnoho cest v mapě posunuto vůči pozadí, nesnažte se je hned přesunout - posun obvykle znamená chybu v podkladu a ne chybu v mapě. V menu 'Nastavení pozadí' klikněte na 'Zarovnat pozadí' - to vám dovolí posunout podklad, aby lícoval s mapou.\n",
         "addresses": "# Adresy\n\nJednou z nejužitečnějších součástí mapy jsou adresy.\n\nAdresy jsou sice někdy chápány jako označení kousku ulice, ale v OpenStreetMap jsou uloženy v budovách či objektech podél ulice. V České republice jsou adresy většinou samostatným uzlem uvnitř budovy.\n\nMůžete tedy data o adrese vkládat jak k samostatnému bodu, tak k ploše označující budovu.\nNejlepším zdrojem informací o adresách je průzkum přímo v terénu či jeho dobrá znalost - stejně jako u celého projektu OpenStreetMap je přebírání dat z komerčních zdrojů typu Google Maps přísně zakázáno.\n",
         "inspector": "# Používání Inspektoru\n\nInspektor je prvek uživatelského rozhraní na levé straně, který umožňuje editovat vlastnosti zvoleného objektu.\n\n### Výběr typu objektu\n\nJakmile vytvoříte uzel, cestu nebo plochu, můžete zvolit typ vytvořeného objektu. Např. jestli jde o silnici nebo pěšinu, obchod nebo hospodu. Inspektor zobrazí tlačítka pro nejčastější typy objektů; další můžete najít prostřednictvím pole pro vyhledávání.\n\nKdyž u tlačítka typu objektu kliknete na 'i' vpravo dole, zobrazí se vám o něm více informací. Když kliknete na samotné tlačítko, vyberete příslušný typ.\n\n### Formuláře a editace vlastností\n\nPoté, co vyberete typ objektu nebo když vyberete objekt s už přiřazeným typem, v inspektoru se zobrazí pole s bližšími informacemi o objektu - jako třeba název nebo adresa.\n\nPod těmito poli jsou další ikony. Když na ně kliknete, tak můžete přidávat další detaily, jako vazbu na [Wikipedii](http://www.wikipedia.org/), přístup pro vozíčkáře atd.\n\nPokud chcete přidat k objektu ještě nějaké jiné vlastnosti, klikněte na 'Další vlastnosti' úplně dole. Jedním z informačních zdrojů pak může být [Taginfo](http://taginfo.openstreetmap.org/), kde se dozvíte o nejčastějších kombinacích tagů.\n\nZměny provedené v inspektoru jsou ihned vidět na mapě zobrazené ve vašem prohlížeči. Můžete je vrátit zpět kliknutím na tlačítko 'Undo'.\n",
         "buildings": "# Budovy\n\nOpenStreetMap je největší databází budov na světě. Můžete tuto databázi rozšiřovat a vylepšovat.\n\n### Výběr\n\nBudovu označíte kliknutím na její hranici. Budova se v editoru rozsvítí, otevře se malá nabídka nástrojů a boční panel s informacemi o budově.\n\n### Úpravy\n\nBudovy někdy mohou mít špatnou polohu, tvar nebo nesprávné vlastnosti.\n\nPokud chcete posunout celou budovu, označte ji a kliněte na ikonu posunu - pak můžete pohnout budovou myší. Posun ukončíte kliknutím.\n\nKdyž má budova špatný tvar, klikněte na uzel na hranici budovy a posuňte ho na správné místo.\n\n### Vytváření\n\nMohou být budovy v mapě zaznamenané jako plochy, nebo jako samostatné uzly? Pravidlo je takové, že _pokud je to možné, budovy by se měly mapovat jako plochy_, a firmy, podniky, zařízení a další subjekty působící v budově by se měly mapovat jako uzly uvnitř budovy. V České republice se jako uzly uvnitř budovy obvykle mapují i adresy.\n\nChcete-li nakreslit novou budovu, klikněte na tlačítko 'Plocha' vlevo nahoře a klikáním nakreslete obrys budovy. Kreslení ukončíte buď kliknutím na první nakreslený uzel nebo stisknutím klávesy 'Enter' nebo 'Return'.\n\n### Smazání\n\nBudovy lze také mazat - ale dělejte to pouze v případě, že jste si opravdu jistí, že budova ve skutečnosti neexistuje. Satelitní snímky nejsou dostatečným důkazem, protože mohou být zastaralé nebo zavádějící. Buďte opatrní - když budovu smažete, budova zmizí z mapy pro všechny její uživatele.\n\nBudovu smažete tak, že ji označíte kliknutím a potom buď kliknete na ikonu odpadkového koše, nebo stisknete klávesu 'Delete'.\n",
@@ -403,22 +403,22 @@
                 "name": "Využití krajiny"
             },
             "category-path": {
-                "name": "Pěšina"
+                "name": "Síť cest"
             },
             "category-rail": {
-                "name": "Železnice"
+                "name": "Železniční síť"
             },
             "category-road": {
-                "name": "Silnice"
+                "name": "Silniční síť"
             },
             "category-route": {
                 "name": "Trasa"
             },
             "category-water-area": {
-                "name": "Voda"
+                "name": "Vodstvo"
             },
             "category-water-line": {
-                "name": "Voda"
+                "name": "Vodstvo"
             }
         },
         "fields": {
@@ -885,8 +885,8 @@
                 "terms": "gondola,gondolová lanovka,kabinková lanovka,kabinová lanovka,kabinová lanová dráha,kabinková lanová dráha"
             },
             "aerialway/magic_carpet": {
-                "name": "Pásový dopravník",
-                "terms": "pásový dopravník,lyžařský vlek,vlek,lanovka na pásu,pohybivý pás,eskalátor"
+                "name": "Pojízdný koberec",
+                "terms": "pojízdný koberec,pásový dopravník,lyžařský vlek,vlek,lanovka na pásu,pohybivý pás,eskalátor"
             },
             "aerialway/platter": {
                 "name": "Vlek - talíř (poma)",
@@ -918,7 +918,7 @@
             },
             "aeroway/apron": {
                 "name": "Odbavovací plocha",
-                "terms": "apron"
+                "terms": "apron,stojánka,odbavovací plocha"
             },
             "aeroway/gate": {
                 "name": "Letištní gate",
@@ -1261,12 +1261,12 @@
                 "terms": "budova"
             },
             "building/apartments": {
-                "name": "Byty",
-                "terms": "bytovka,obytná budova,panelák,věžák,barák,činžák"
+                "name": "Bytový dům",
+                "terms": "bytovka,bytový dům,obytná budova,panelák,věžák,barák,činžák,činžovní dům"
             },
             "building/commercial": {
                 "name": "Obchodní budova",
-                "terms": "Obchody,firmy,firma,prodej,podnik,podniky,kanceláře"
+                "terms": "obchody,firmy,firma,prodej,podnik,podniky,kanceláře"
             },
             "building/entrance": {
                 "name": "Vchod",
@@ -1277,8 +1277,8 @@
                 "terms": "garáž,garáže,parkování,kryté parkování"
             },
             "building/house": {
-                "name": "Dům",
-                "terms": "dům"
+                "name": "Rodinný dům",
+                "terms": "dům,rodinný dům,řadový dům,domek"
             },
             "building/hut": {
                 "name": "Chatička",
@@ -1598,7 +1598,7 @@
             },
             "highway/rest_area": {
                 "name": "Odpočívadlo",
-                "terms": "odpočívadlo,místo k zastavení,dálniční odpočívadlo"
+                "terms": "odpočívadlo,místo k zastavení,odpočívka,dálniční odpočívadlo"
             },
             "highway/road": {
                 "name": "Silnice neznámého typu",
@@ -1638,7 +1638,7 @@
             },
             "highway/services": {
                 "name": "Odpočívadlo se službami",
-                "terms": "odpočívadlo,odpočívadlo se službami,čerpací stanice,dálniční odpočívadlo"
+                "terms": "odpočívadlo,odpočívadlo se službami,odpočívka,čerpací stanice,dálniční odpočívadlo"
             },
             "highway/steps": {
                 "name": "Schody",
@@ -1733,7 +1733,7 @@
                 "terms": "hřbitov,pohřebiště"
             },
             "landuse/commercial": {
-                "name": "Obchody",
+                "name": "Podniky, kanceláře",
                 "terms": "obchodní,komerční"
             },
             "landuse/construction": {
@@ -2165,12 +2165,12 @@
                 "terms": "generátor, elektrický generátor, elektrárna, zdroj proudu"
             },
             "power/line": {
-                "name": "Elektrické vedení vysokého napětí",
-                "terms": "elektrické vedení,vysoké napětí,přenosová soustava,energetika"
+                "name": "Elektrické vedení vyššího napětí (nad 50 kV)",
+                "terms": "elektrické vedení,velmi vysoké napětí,zvláště vysoké napětí,přenosová soustava,energetika"
             },
             "power/minor_line": {
-                "name": "Elektrické vedení nízkého napětí",
-                "terms": "elektrické vedení,nízké napětí,přenosová soustava,elektrický kabel,energetika"
+                "name": "Elektrické vedení nížšího napětí (pod 50 kV)",
+                "terms": "elektrické vedení,nízké napětí,vysoké napětí,přenosová soustava,elektrický kabel,energetika"
             },
             "power/pole": {
                 "name": "Eletrický sloup",

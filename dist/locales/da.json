@@ -332,7 +332,7 @@
     },
     "help": {
         "title": "Hjælp",
-        "help": "# Hjælp\n\nDette er et redigeringsværktøj for [OpenStreetMap](http://www.openstreetmap.org/), det\nåbne og redigerbare verdenskort. Du kan bruge det til at tilføje og opdatere\ngeodata i dit område og derved bidrage til et verdenskort med opensource og frie geodata\ntil gavn for alle.\n\nÆndringer du laver på dette kort vil blive synlige for alle der benytter\nOpenStreetMap. For at lave en rettelse skal du oprette en\n[gratis OpenStreetMap konto](https://www.openstreetmap.org/user/new).\n\n[iD redigeringsværktøjet](http://ideditor.com/) er et kollaborativt projekt med [kildekode\n tilgængelig på GitHub](https://github.com/systemed/iD). \n",
+        "help": "# Hjælp\n\nDette er et redigeringsværktøj for [OpenStreetMap](http://www.openstreetmap.org/), det\nåbne og redigeringsbare verdenskort. Du kan bruge dette værktøj til at opdatere\ngeodata i dit lokalområde. Derved skaber du et bedre verdenskort med open source og frie geodata\ntil gavn for alle.\n\nDine ændringer på kortet vil blive synligt for alle og enhver der benytter\nOpenStreetMap. For at lave redigeringer skal du oprette\n[en gratis OpenStreetMap konto](https://www.openstreetmap.org/user/new).\n\nDette [iD redigeringsværktøj](http://ideditor.com/) er et kollaborativ projekt og [kildekoden\ner tilgængelig på GitHub](https://github.com/systemed/iD). \n",
         "editing_saving": "# Redigering & Gem\n\nDette redigeringsværktøj er lavet primært til at arbejde online, og du\narbejder gennem et website lige nu.\n\n### Vælg Objekter\n\nFor at vælge et kortobjekt, som fx en vej eller et interessepunkt, klik\npå dette på kortet. Dette vil highlighte det valgte objekt, åbne et panel med\nyderligere detajler om det og samtidigt vise en menu med forskellige ting du kan gøre\nmed dette objekt.\n\nFlere objekter på en gang kan vælges ved at holde \"Shift\" knappen ned, klik og udvælg\npå kortet. Dette vil vælge alle indtegnede objekter indenfor en firkant. Dette tillader\ndig at gøre flere ting med flere objekter på en gang.\n\n### Gem Redigeringer\n\nNår du laver ændringer fx tilføjer veje, bygninger og steder, så er disse\ngemt lokalt på din computer lige ind til du har gemt dem på OpenStreetMaps server.\nDu skal ikke bekymre dig om, hvis du laver en fejl - du kan fortryde ændringer ved at klikke på \"Fortryd\" knappen.\n\nKlik på \"Gem\" for at afslutte dine ændringer - fx du har lavet et komplet område af en by og du ønsker at gå i gang med et nyt område. Du har mulighed for at gennemse hvad du har lavet og redigeringsværktøjet giver nogle hjælpsomme forslag og advarsler, hvis der er noget som ikke ser helt korrekt ud.\n\nHvis alting ser fint nok ud, så kan du skrive en lille kort kommentar om de ændringer du lige har lavet og klik så \"Gem\" igen for at sende ændringerne til [OpenStreetMap.org](http://www.openstreetmap.org/). Dine ændringer vil nu være synlige og tilgængelige for alle. Der igen kan bygge videre og forbedre data.\n\nHvis du ikke kan afslutte dine ændringer lige med det samme, så kan du forlade redigeringsværktøjet og komme igen senere (NB kræver du bruger samme browser og computer igen). Redigeringsværktøjet vil nu gendanne alt dit arbejde igen.\n",
         "roads": "# Veje\n\nDu kan oprette, tilrette og slette veje med dette tegneværktøj. Veje kan være af mange forskellige typer: stier, landeveje, spor, cykelstier mv. Enhver ofte benyttet rute kan kortlægges.\n\n### Vælg\n\nKlik på en vej for at vælge den. Et omrids dukker op sammen med en lille værktøjsmenu og et sidepanel der viser flere oplysninger om vejen.\n\n### Ændring\n\nOfte ses veje der ikke er justeret i forhold til luftfotoet bag dem eller i forhold til et GPS-spor. Du kan justere disse veje så de er placeret rigtigt.\n\nKlik først på vejen du vil ændre. Dette fremhæver den og viser kontrolpunkter langs med den som kan trækkes det rigtige sted hen. Hvis du har brug for flere kontrolpunkter for at gøre vejen mere detaljeret, kan du dobbeltklikke på en del af vejen, så dukker et punkt op.\n\nHvis vejen er forbundet til andre veje, men ikke er korrekt forbundet på kortet, så træk et af kontrolpunkterne hen på den anden vej for at koble dem sammen. Det er vigtigt for kortet, faktisk vitalt for rutevejledninger, at veje er forbundet.\n\nDu kan også klikke på flytteværktøjet eller trykke på tastegenvejen \"M\" for at flytte hele vejen på en gang, og så klikke igen for at gemme flytningen.\n\n### Sletning\n\nHvis en vej er helt forkert - du kan ikke se den på et luftfoto og du har ideelt set fået bekræftet at vejen ikke findes lokalt - så kan du slette vejen. Men pas på med at slette hvad andre har lavet - som med andre ændringer er resultatet synligt for alle og luftfoto kan være forældede så vejen kunne være bygget i mellemtiden.\n\nDu kan slette en bygning ved at vælge den og klikke på skraldespands-ikonet - alternativt kan du bruge slet-tasten på dit tastatur.\n\n### Oprettelse\n\nHar du fundet et sted hvor der skulle være en vej, men den er ikke på kortet? Klik på linje-ikonet i øverste venstre del af tegneværktøjet eller klik på tastegenvejen \"2\" for at tegne en linje.\n\nKlik på begyndelsen af vejen for at påbegynde den. Hvis vejen forgrener sig fra en eksisterende vej, så begynd vejen der hvor de er forbundet.\n\nKlik derefter på punkter på vejens forløb så det passer med luftfoto eller GPS-spor. Hvis vejen du tegner krydser en anden vej, så kobl dem sammen ved at klikke på punktet hvor de skærer hinanden. Når du er færdig med at tegne, så dobbeltklik eller tryk på enter-tasten på tastaturet.\n",
         "gps": "## GPS\n\nGPS data er de mest troværdige data for OpenStreetMap. Dette redigeringsværktøj\nunderstøtter lokalt lagrede - `.gpx` filer på din computer. Du kan indsamle\nGPX spor med mange forskellige smartphone applikationer og med dedikeret\nGPS hardware.\n\nDu kan finde mere information om hvordan du laver en GPS undersøgelse - læs\n[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nFor at bruge et GPX spor til kortlægning - træk og slip GPX filen indover kortet i \nredigeringsværktøjet. Hvis den bliver genkendt som gyldigt format, så vil den blive tilføjet kortet som en\nlyse grøn linje. Klik på \"Baggrundsindstillinger\" menuen på den højre side for tilkoble\neller frakoble. Eller også zoom til det nye GPX understøttet lag.\n\nGPX sporet er ikke direkte oploadet til OpenStreetMap - Den bedste måde\nat bruge dette spor at indtegne efter det og bruge det som en rettesnor for de\nnye objekter du tilføjer. Du kan også [opload GPX sporet til OpenStreetMap](http://www.openstreetmap.org/trace/create)\nderved kan andre brugere også bruge dette.\n",
@@ -791,6 +791,10 @@
             "shop": {
                 "label": "Type"
             },
+            "social_facility_for": {
+                "label": "Serviceret folk",
+                "placeholder": "Hjemmeløse, Handicappede, Børn osv"
+            },
             "source": {
                 "label": "Kilde"
             },
@@ -1135,6 +1139,22 @@
             "amenity/shelter": {
                 "name": "Shelter",
                 "terms": "Shelter, læskur"
+            },
+            "amenity/social_facility": {
+                "name": "Sociale faciliteter",
+                "terms": "Sociale faciliteter"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "Fødevarebank",
+                "terms": "Fødevarebank, folkekøkken"
+            },
+            "amenity/social_facility/group_home": {
+                "name": "Gruppehjem",
+                "terms": "Gruppehjem"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Hjemmeløsskur",
+                "terms": "Hjemmeløsskur"
             },
             "amenity/studio": {
                 "name": "Studie",

@@ -249,8 +249,7 @@
         "local_layer": "Vietējais GPX fails"
     },
     "help": {
-        "title": "Palīdzība",
-        "help": "# Palīdzība\n\nŠis ir redaktors, kas domāts [OpenStreetMap](http://www.openstreetmap.org/)  -\n tā ir visiem pieejama un brīvi labojama pasaules karte. Tu vari lietot šo redaktoru, lai labotu un papildinātu datus tev labi zināmā apgabalā, tādejādi radot atvērtās piekļuvess pasaules karti labāku priekš ikviena, kas to lieto.\n\nLabojumi, ko tu veiksi kartē, būs redzami ikvienam, kas lieto OpenStreeMap.\nLai veiktu labojumus, tev vajag atvērt \n[brīvu OpenStreetMap kontu](https://www.openstreetmap.org/user/new).\n[iD editor](http://ideditor.com/) ir uz sadarbību orientēts projekts ar pilnu pieeju  [izejas kodam, kas pieejams GitHub](https://github.com/systemed/iD).\n"
+        "title": "Palīdzība"
     },
     "intro": {
         "navigation": {

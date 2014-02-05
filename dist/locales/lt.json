@@ -2,11 +2,13 @@
     "modes": {
         "add_area": {
             "title": "Plotas",
-            "description": "Pridėkite parkus, pastatus, ežerus ar kitas vietas į žemėlapį."
+            "description": "Pridėkite parkus, pastatus, ežerus ar kitas vietas į žemėlapį.",
+            "tail": "Spauskite ant žemėlapio, kad pradėtumėte braižyti plotą: parką, ežerą, pastatą ar pan."
         },
         "add_line": {
             "title": "Linija",
-            "description": "Pridėti greitkelius, gatves, pėsčiųjų takus, kanalus ar kitas linijas į žemėlapį."
+            "description": "Pridėti greitkelius, gatves, pėsčiųjų takus, kanalus ar kitas linijas į žemėlapį.",
+            "tail": "Spauskite ant žemėlapio, kad pradėtumėte braižyti kelią, taką ar maršrutą."
         },
         "add_point": {
             "title": "Taškas",
@@ -16,65 +18,200 @@
         "browse": {
             "title": "Naršyti",
             "description": "Perkelti ir padidinti žemėlapį."
+        },
+        "draw_area": {
+            "tail": "Spauskite, kad pridėtumėte taškus jūsų plote. Spauskite ant pirmo taško, kad baigtumėte plotą."
+        },
+        "draw_line": {
+            "tail": "Spauskite, kad pridėtumėte daugiau taškų linijoje. Spauskite ant kitų linijų, kad jas sujungtumėte. Spauskite du kartus, kad baigtumėte linijos piešimą."
         }
     },
     "operations": {
         "add": {
             "annotation": {
-                "point": "Taškas pridėtas."
+                "point": "Taškas pridėtas.",
+                "vertex": "Viršūnė pridėta prie kelio.",
+                "relation": "Ryšys pridėtas."
             }
         },
+        "start": {
+            "annotation": {
+                "line": "Pradėta linija.",
+                "area": "Pradėtas plotas."
+            }
+        },
+        "continue": {
+            "key": "A",
+            "title": "Tęsti",
+            "description": "Tęsti šią liniją.",
+            "not_eligible": "Čia negalima tęsti jokios linijos.",
+            "multiple": "Čia galima tęsti daugiau nei vieną liniją. Norėdami parinkti liniją, spauskite Shift ir parinkite liniją.",
+            "annotation": {
+                "line": "Pratęsta linija.",
+                "area": "Pratęstas plotas."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Nutrauktas braižymas."
+        },
+        "change_role": {
+            "annotation": "Pakeista ryšio nario rolė."
+        },
+        "change_tags": {
+            "annotation": "Pakeistos žymos."
+        },
         "circularize": {
-            "key": "O"
+            "title": "Apvalinti",
+            "description": {
+                "line": "Suapvalinti šią liniją.",
+                "area": "Suapvalinti šį plotą."
+            },
+            "key": "O",
+            "annotation": {
+                "line": "Suapvalinta linija.",
+                "area": "Suapvalintas plotas."
+            },
+            "not_closed": "Negalima suapvalinti, nes linija nėra uždara."
+        },
+        "orthogonalize": {
+            "title": "Statūs kampai",
+            "description": {
+                "line": "Keisti šios linijos kampus stačiais.",
+                "area": "Keisti šio ploto kampus stačiais."
+            },
+            "key": "S",
+            "annotation": {
+                "line": "Keisti linijos kampus stačiais.",
+                "area": "Keisti ploto kampus stačiais."
+            },
+            "not_squarish": "Negalima pakeisti kampų stačiais, nes jie labai nestatūs."
+        },
+        "straighten": {
+            "title": "Tiesinti",
+            "description": "Tiesinti šią liniją.",
+            "key": "S",
+            "annotation": "Linija ištiesinta.",
+            "too_bendy": "Ši negali būti ištiesinta, nes ji per daug išlenkta."
         },
         "delete": {
             "title": "Ištrinti",
             "description": "Pašalinti tai iš žemėlapio.",
             "annotation": {
                 "point": "Taškas ištrintas.",
+                "vertex": "Viršūnė pašalinta iš kelio.",
                 "line": "Linija ištrinta.",
-                "area": "Teritorija ištrinta."
+                "area": "Teritorija ištrinta.",
+                "relation": "Pašalintas ryšys.",
+                "multiple": "Pašalinta {n} objektų."
+            },
+            "incomplete_relation": "Šio objekto negalima panaikinti, nes jis nebuvo pilnai atsiųstas."
+        },
+        "add_member": {
+            "annotation": "Narys pridėtas prie ryšio."
+        },
+        "delete_member": {
+            "annotation": "Narys pašalintas iš ryšio."
+        },
+        "connect": {
+            "annotation": {
+                "point": "Kelias prijungtas prie taško.",
+                "vertex": "Kelias prijungtas prie kito.",
+                "line": "Kelias prijungtas prie linijos.",
+                "area": "Kelias prijungtas prie ploto."
             }
         },
         "disconnect": {
             "title": "Atskirti",
-            "key": "D"
+            "description": "Atjungti šias linijas/plotus vieną nuo kito.",
+            "key": "D",
+            "annotation": "Atjungtos linijos/plotai.",
+            "not_connected": "Nepakankamai linijų/plotų, kad būtų galima atjungti."
         },
         "merge": {
             "title": "Sujungti",
             "description": "Sujungti šias linijas.",
-            "key": "C"
+            "key": "C",
+            "annotation": "Sujungtos {n} linijos.",
+            "not_eligible": "Šie geoobjektai negali būti sulieti.",
+            "not_adjacent": "Šios linijos negali būti sulietos, nes jos nesusijungia.",
+            "restriction": "Šių linijų negalima sulieti, nes bent viena iš jų yra ryšio „{relation}“ narė."
         },
         "move": {
+            "title": "Perkelti",
+            "description": "Perkelti tai į kitą vietą.",
             "key": "M",
             "annotation": {
                 "point": "Taškas perkeltas.",
-                "line": "Linija perkelta."
-            }
+                "vertex": "Perkeltas taškas kelyje.",
+                "line": "Linija perkelta.",
+                "area": "Perkeltas plotas.",
+                "multiple": "Perkelti keli objektai."
+            },
+            "incomplete_relation": "Šio geoobjekto negalima perkelti, nes jis nėra pilnai atsiųstas."
         },
         "rotate": {
             "title": "Pasukti",
+            "description": "Pasukti šį objektą ties centro tašku.",
             "key": "R",
             "annotation": {
-                "line": "Linija pasukta."
+                "line": "Linija pasukta.",
+                "area": "Pasuktas plotas."
             }
         },
         "reverse": {
-            "key": "V"
+            "title": "Atstatyti",
+            "description": "Pakeisti linijos kryptį.",
+            "key": "V",
+            "annotation": "Pakeista linijos kryptis."
         },
         "split": {
-            "key": "X"
+            "title": "Padalinti",
+            "description": {
+                "line": "Dalinti šią liniją į dvi ties šiuo tašku.",
+                "area": "Dalinti šio ploto kontūrą į du.",
+                "multiple": "Dalinti linijų/plotų kontūrus į du ties šiuo tašku."
+            },
+            "key": "X",
+            "annotation": {
+                "line": "Dalinti liniją.",
+                "area": "Dalinti ploto kontūrą.",
+                "multiple": "Dalinti {n} linijų/plotų kontūrus."
+            },
+            "not_eligible": "Linijos negali būti dalinamos ties jų pradžia ar pabaiga.",
+            "multiple_ways": "Čia yra per daug linijų, kurias galima dalinti."
         }
     },
+    "undo": {
+        "tooltip": "Atstatyti: {action}",
+        "nothing": "Nėra ką atstatyti."
+    },
+    "redo": {
+        "tooltip": "Pakartoti: {action}",
+        "nothing": "Nėra ką pakartoti."
+    },
+    "tooltip_keyhint": "Kombinacija:",
+    "browser_notice": "Šis redaktorius palaikomas Firefox, Chrome, Safari, Opera ir Internet Explorer 9 ir naujesnėse naršyklėse. Prašome atnaujinti jūsų naršyklę arba žemėlapio redagavimui naudoti Potlatch 2.",
     "translate": {
         "translate": "Versti",
+        "localized_translation_label": "Daugiakalbis pavadinimas",
         "localized_translation_language": "Pasirinkti kalbą",
         "localized_translation_name": "Pavadinimas"
     },
+    "zoom_in_edit": "Padidinkite prieš redaguodami",
     "logout": "atsijungti",
+    "loading_auth": "Jungiamasi prie OpenStreetMap...",
     "report_a_bug": "pranešti apie klaidą",
+    "status": {
+        "error": "Nepavyksta prisijungti prie API.",
+        "offline": "API išjungtas. Bandykite redaguoti vėliau.",
+        "readonly": "API yra tik skaitymo režime. Prieš įrašydami savo pakeitimus turėsite palaukti."
+    },
     "commit": {
         "title": "Išsaugoti pakeitimus",
+        "description_placeholder": "Trumpas jūsų indėlio aprašymas",
+        "message_label": "Pakeitimo aprašymas",
+        "upload_explanation": "Jūsų įkeliami pakeitimai bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
+        "upload_explanation_with_user": "Pakeitimai, kuriuos jūs įkeliate kaip naudotojas {user} bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
         "save": "Išsaugoti",
         "cancel": "Atšaukti",
         "warnings": "Įspėjimai",
@@ -82,48 +219,201 @@
         "deleted": "Ištrinta",
         "created": "Sukurta"
     },
+    "contributors": {
+        "list": "Keitėjai {users}",
+        "truncated_list": "Keitėjai {users} ir {count} kitų"
+    },
     "geocoder": {
-        "search": "Ieškoti visam pasaulyje..."
+        "search": "Ieškoti visam pasaulyje...",
+        "no_results_visible": "Nėra rezultatų matomame žemėlapio plote",
+        "no_results_worldwide": "Nėra rezultatų"
     },
     "geolocate": {
         "title": "Rodyti mano vietą"
     },
     "inspector": {
+        "no_documentation_combination": "Nėra šios žymos ar žymų kombinacijos aprašymo",
+        "no_documentation_key": "Šis raktas neturi dokumentacijos",
+        "show_more": "Rodyti daugiau",
+        "view_on_osm": "Žiūrėti svetainėje openstreetmap.org",
+        "all_tags": "Visos žymos",
         "all_members": "Visi nariai",
         "all_relations": "Visi ryšiai",
+        "new_relation": "Naujas ryšys...",
+        "role": "Rolė",
+        "choose": "Parinkite geoobjekto tipą",
         "results": "{n} paieškos {search} rezultatai",
+        "reference": "Žiūrėti OpenStreetMap Wikyje",
+        "back_tooltip": "Keisti objektą",
         "remove": "Pašalinti",
         "search": "Ieškoti",
-        "unknown": "Nežinoma"
+        "multiselect": "Pažymėti elementai",
+        "unknown": "Nežinoma",
+        "incomplete": "<neatsiųsta>",
+        "feature_list": "Ieškoti objektų",
+        "edit": "Keisti objektą",
+        "none": "Jokio",
+        "node": "Taškas",
+        "way": "Kelias",
+        "relation": "Ryšys",
+        "location": "Vieta"
+    },
+    "background": {
+        "title": "Fonas",
+        "description": "Fono nustatymai",
+        "percent_brightness": "{opacity}% ryškumas",
+        "none": "Jokio",
+        "custom": "Savas",
+        "custom_prompt": "Įveskite kaladėlių šabloną. Galimi raktažodžiai yra {z}, {x}, {y} Z/X/Y schemai arba {u} quadtile schemai.",
+        "fix_misalignment": "Taisyti poziciją",
+        "reset": "iš naujo"
+    },
+    "restore": {
+        "heading": "Turite neįrašytų pakeitimų",
+        "description": "Ar norite atstatyti neįrašytus ankstesnės redagavimo sesijos pakeitimus?",
+        "restore": "Atstatyti",
+        "reset": "Iš naujo"
     },
     "save": {
-        "title": "Išsaugoti"
+        "title": "Išsaugoti",
+        "help": "Įrašyti pakeitimus į OpenStreetMap, kad jie būtų matomi kitiems naudotojams.",
+        "no_changes": "Nėra pakeitimų.",
+        "error": "Bandant įrašyti įvyko klaida.",
+        "uploading": "Pakeitimai įkeliami į OpenStreetMap.",
+        "unsaved_changes": "Turite neįrašytų pakeitimų"
+    },
+    "success": {
+        "edited_osm": "Pakeitėte OSM!",
+        "just_edited": "Jūs ką tik pakeitėte OpenStreetMap!",
+        "view_on_osm": "Žiūrėti OSM žemėlapyje",
+        "facebook": "Pasidalinti Facebook'e",
+        "twitter": "Pasidalinti Twitter'yje",
+        "google": "Pasidalinti Google+",
+        "help_html": "Jūsų pakeitimai turėtų pasirodyti „Standartiniame“ sluoksnyje po kelių minučių. Kiti sluoksniai ar konkretūs objektai gali pasirodyti vėliau\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>daugiau informacijos</a>).\n"
     },
     "confirm": {
         "okay": "Gerai"
     },
+    "splash": {
+        "welcome": "Jus sveikina iD OpenStreetMap redaktorius",
+        "text": "iD yra draugiškas, bet galingas įrankis pildant didžiausią, atviriausią ir nemokamą/laisvą pasaulio žemėlapį. Šiuo metu naudojate versiją {version}. Daugiau informacijos rasite svetainėje {website}, o apie klaidas galite pranešti {github}.",
+        "walkthrough": "Pradėti pažingsninę demonstraciją",
+        "start": "Keisti dabar"
+    },
+    "source_switch": {
+        "live": "gyva",
+        "lose_changes": "Turite neįrašytų pakeitimų. Perjungiant žemėlapio stotį jie bus panaikinti. Ar tikrai norite pakeisti žemėlapių stotį?",
+        "dev": "dev"
+    },
     "tag_reference": {
-        "description": "Aprašymas"
+        "description": "Aprašymas",
+        "on_wiki": "{tag} svetainėje wiki.osm.org",
+        "used_with": "naudojama su {type}"
+    },
+    "validations": {
+        "untagged_point": "Taškas be žymų",
+        "untagged_line": "Linija be žymų",
+        "untagged_area": "Plotas be žymų",
+        "many_deletions": "Jūs naikinate {n} objektų. Ar tikrai norite tai padaryti? Tai panaikins objektus iš žemėlapio, kurį visi mato svetainėje openstreetmap.org.",
+        "tag_suggests_area": "Žyma {tag} rodo, kad linija turėtų būti plotas, bet ji nėra plotas",
+        "untagged_tooltip": "Parinkite objekto tipą, kuris aprašo, kas yra šis {geometry}.",
+        "deprecated_tags": "Pasenusios žymos: {tags}"
     },
     "zoom": {
         "in": "Sumažinti",
         "out": "Padidinti"
     },
+    "cannot_zoom": "Negalima atitolinti šiame režime.",
+    "gpx": {
+        "local_layer": "Vietinis GPX failas",
+        "drag_drop": "Atitempkite ir numeskite .gpx failą ant puslapio arba spauskite naršymo mygtuką dešinėje",
+        "zoom": "Rodyti GPX pėdsako plotą",
+        "browse": "Naršyti .gpx failo"
+    },
     "help": {
-        "title": "Pagalba"
+        "title": "Pagalba",
+        "help": "# Pagalba\n\nTai yra [OpenStreetMap](http://www.openstreetmap.org/) redaktorius.\nOpenStreetMap - atviras, redaguojamas pasaulio žemėlapis. Galite jį naudoti\nbei keisti duomenis, taip tobulindami atviro kodo ir atvirų duomenų pasaulio\nžemėlapį ir padėdami visiems.\n\nJūsų pakeitimai bus matomi visiems, kas naudoja OpenStreetMap. Norėdami\ndaryti pakeitimus, turėsite susikurti [nemokamą OpenStreetMap paskyrą](https://www.openstreetmap.org/user/new).\n\n[iD redaktorius](http://ideditor.com/) - tai bendruomenės projektas. Programos\nkodas yra atviras, jį galite rasti [GitHub](https://github.com/openstreetmap/iD).\n",
+        "roads": "# Keliai\n\nJūs galite kurti, taisyti ir naikinti kelius redaktoriaus pagalba. Keliai gali būti įvairių\ntipų: takai, vieškeliai, maršrutai, dviračių takai ir daug kitų, dažnai susikertančių,\njuos visus galima pažymėti.\n\n### Parinkimas\n\nNorėdami parinkti kelią - spauskite ant jo. Kelio kontūras bus paryškintas, taipogi\nbus rodomas mažas įrankių meniu ir šonine skiltimi, rodančia daugiau informacijos\napie kelią.\n\n### Keitimas\n\nDažnai pastebėsite kelius, kurių pozicija neatitinka fone esančios ortofotonuotraukos arba\njūsų GPS pėdsako. Galie pataisyti kelio poziciją, kad kelias būtų teisingoje vietoje.\n\nVisų pirma spauskite ant kelio, kurį norite keisti. Kelias bus paryškintas ir bus matomi\nkontroliniai taškai, kuriuos jūs galite pertempti į teisingesnes pozicijas. Jei norite pridėti\npapildomų kontrolinių taškų - du kartus spauskite ant kelio segmento, kuriame\ndar nėra taško - bus pridėtas naujas taškas.\n\nJei kelias jungiasi su kitu keliu, bet nėra teisingai sujungtas žemėlapyje, jūs galite\ntempti vieną iš kelio kontrolinių taškų ant kito kelio, kad juos sujungtumėte. Labai\nsvarbu teisingai sujungti kelius, nes tai naudojama maršrutizavimui.\n\nTaipogi galite naudoti įrankį „Perkelti“ arba spausti mygtuką „M“, jei norite perkelti\nvisą kelią iš karto, tada vėl spauskite „M“, kad patvirtintumėte perkėlimą.\n\n### Naikinimas\n\nJei kelias yra visiškai neteisingas - jūs matote, kad tokio kelio apskritai nėra ortofoto\nir jūs žinote, kad jo ir realybėje nėra - galite kelią ištrinti, kad jo nebeliktų žemėlapyje.\nNaikindami objektus būkite atidūs, kaip ir bet kuris kitas keitimas, naikinimas matomas\nvisiems naudotojams, o ortofotografijos dažnai būna pasenusios, tagi naujai\nnutiestas kelias gali būti tiesiog nematomas.\n\nKelią galite panaikinti pažymėję jį ir paspaudę šiukšlių dėžės piktogramą arba\npaspaudę mygtuką „Trinti“.\n\n### Kūrimas\n\nRadote vietą, kur turėtų būti kelias, bet jo nėra? Spauskite mygtuką „Linija“\narba klavišą „2“, kad pradėtumėte linijos piešimą.\n\nSpauskite žemėlapyje ant vietos, kur turi prasidėti jūsų kelias. Jeigu kelias atsišakoja\nnuo jau esamo kelio - pradėkite naujo kelio piešimą paspaudę ant atsišakojimo vietos.\n\nTada dėliokite kelio taškus taip, kad jo kontūras maksimaliai atitiktų realų kelią pagal\npalydovinę nuotrauką ar GPS pėdsakus. Jei jūsų piešiamas kelias kerta kitą kelią,\nsujunkite juos spaudžiant ties susikirtimo tašku. Kai baigsite braižyti, du kartus\nspauskite pele arba spauskite klaviatūros mygtuką „Enter“.\n",
+        "imagery": "# Nuotraukos\n\nIš oro ar palydovo darytos nuotraukos - svarbus žemėlapio paišymo pagalbininkas.\nDešinėje esančiame meniu rasite įvairių nuotraukų, darytų iš lėktuvų, palydovų ar\nkombinuotų šaltinių.\n\nTik įjungus redaktorių bus automatiškai įjungtas [Bing Maps](http://www.bing.com/maps/)\npalydovinis sluoksnis, bet priklausomai nuo to, kurioje geografinėje vietoje\nredaguojate - bus rodomi ir kiti nuotraukų šaltiniai. Kai kurios šalys, tokios kaip\nJAV, Prancūzija, Danija ir Lietuva turi labai aukštos kokybės ir tikslumo\nortofotonuotraukas. Pavyzdžiui Lietuvoje reikėtų naudoti NŽT ORT10LT.\n\nNuotraukos kartais būna pasislinkusios nuo realios pozicijos dėl nuotraukų\ntiekėjo klaidų. Jei matote, kad daug kelių ar kitų objektų yra pasislinkę nuo\nnuotraukos, nepulkite jų tempti į „teisingas“ vietas. Vietoje to geriau pataisykite\nnuotraukos poziciją pagal esamus duomenis, paspaudę fono parinkčių apačioje\n„Taisyti lygiavimą“. NŽT ORT10LT lygiavimas yra teisingas visoje Lietuvos\nteritorijoje, taigi jo taisyti nereikia.\n",
+        "addresses": "# Adresai\n\nAdresų informacija - viena naudingiausių žemėlapyje.\n\nOpenStreetMap adresai dažniausiai įrašomi kaip pastatų arba lankytinų vietų\natributai.\n\nJūs galite pridėti adreso informaciją vietoms, pažymėtoms kaip pastatų\nkontūrai bei pavieniams taškams. Geriausias adreso informacijos šaltinis\nyra vietinė apžiūra arba asmeninės žinios - kaip ir su bet kuriais kitais\nobjektais, naudoti šaltinius, tokius kaip Google Maps, maps.lt, Registrų Centras\nir pan. yra griežtai draudžiama.\n",
+        "buildings": "# Pastatai\n\nOpenStreetMap - tai didžiausia pasaulyje pastatų duomenų bazė. Jūs galite\nkurti ir tobulinti šią duomenų bazę.\n\n### Parinkimas\n\nPastatą parinkti galit paspaudę ant jo kontūro. Tai paryškins pastatą ir atvers\nmažą įrankių meniu bei šoninę skiltį su papildoma informacija apie pastatą.\n\n### Keitimas\n\nKartais pastatai būna nupiešti neteisingoje vietoje arba turi neteisingas žymas.\n\nNorėdami perkelti visą pastatą, pažymėkite jį, parinkite įrankį „Perkelti“.\nPerkelkite pastatą pelės pagalba ir spauskite, kai vieta yra teisinga.\n\nNorėdami patvarkyti pastato formą, spauskite ir tempkite pastato kontūro\ntaškus į teisingas vietas.\n\n### Kūrimas\n\nVienas pagrindinių klausimų apie pastatų registravimą žemėlapyje yra tai,\nkad OpenStreetMap pastatai registruojami ir kaip plotai, ir kaip taškai.\nBendra taisyklė yra žymėti pastatus plotais, jei tik tai įmanoma. Įmones ar\nlankytinas vietas, kurios veikia pastatuose, žymėti kaip taškus, esančius\npastato ploto viduje.\n\nPradėkite pastato braižyma parinkdami mygtuką „Plotas“ viršutinėje\nsąsajos dalyje. Pastato braižymą baikite spausdami „Enter“ arba paspaudę\nant pirmo pastato formos taško.\n\n### Naikinimas\n\nJei pastatas yra visiškai neteisingas - jūs aiškiai matote, kad pastato nėra\npalydovinėje nuotraukoje ar gal net patikrinote jo nebuvimą realiu apsilankymu\nvietoje - galite panaikinti pastatą iš žemėlapio. Naikindami objektus būkite\natidūs, kaip ir bet kuris kitas pakeitimas, šis bus matomas visiems naudotojams,\no palydovinės nuotraukos dažnai būna pasenusios, taigi gali būti, kad pastatas\ntiesiog yra naujai pastatytas, todėl ir nesimato nuotraukoje.\n\nPastatą panaikinti galite jį pažymėję ir paspaudę šiukšlinės piktogramą arba\nmygtuką „Trinti/Delete“.\n"
     },
     "intro": {
+        "navigation": {
+            "title": "Navigacija",
+            "drag": "Pagrindinė žemėlapio sritis rodo OpenStreetMap duomenis virš fono. Galite keisti poziciją tempiant pele arba naudojant pelės ratuką - kaip ir bet kuriame kitame tinklo žemėlapyje. **Pastumkite žemėlapį!**",
+            "select": "Žemėlapio geoobjektai būna trijų tipų: taškai, linijos ir plotai. Visi geoobjektai gali būti pažymėti juos paspaudus. **Spauskite tašką, kad jį pažymėtumėte.**",
+            "header": "Antraštė rodo geoobjekto tipą.",
+            "pane": "Parinkus geoobjektą rodomas redaktorius. Antraštėje rodomas geoobjekto tipas, o pagrindinėje skiltyje matomi geoobjekto atributai, tokie kaip pavadinimas ir adresas. **Uždarykite geoobjekto redaktorių mygtuku „uždaryti“, esančiu viršutiniame dešiniame kampe.**"
+        },
+        "points": {
+            "title": "Taškai",
+            "add": "Taškai gali būti naudojami vaizduoti tokius objektus kaip parduotuvės, restoranai ar paminklai. Jie žymi konkrečią vietą ir aprašo, kas ten yra. **Spauskite mygtuką „Taškas“, kad pridėtumėte tašką.**",
+            "place": "Taškas gali būti pažymėtas paspaudus ant žemėlapio. **Padėkite tašką ant pastato.**",
+            "search": "Yra daug skirtingų objektų, kurie gali būti vaizduojami taškais. Jūsų ką tik pridėtas taškas yra kavinė. **Ieškokite '{name}'**",
+            "choose": "**Sąraše parinkite Kavinę.**",
+            "describe": "Taškas dabar pažymėtas kaip kavinė. Naudodami geoobjektų redaktorių mes galima pridėti daugiau informacijos. **Pridėkite pavadinimą**",
+            "close": "Objektų redaktorių galima uždaryti mygtuku „X“. **Uždarykite objektų redaktorių**",
+            "reselect": "Dažnai taškai jau bus nupiešti, bet informacija bus nepilna arba joje bus klaidų. Mes galima keisti ir jau esamus taškus. **Pažymėkite jūsų ką tik sukurtą tašką.**",
+            "fixname": "**Pakeiskite pavadinimą ir uždarykite objektų redaktorių.**",
+            "reselect_delete": "Visi žemėlapio objektai gali būti panaikinti. **Spauskite ant jūsų sukurto taško.**",
+            "delete": "Meniu aplink tašką rasite veiksmus, kuriuos galite atlikti su pažymėtu objektu, įskaitant ir panaikinimą. **Panaikinkite tašką.**"
+        },
+        "areas": {
+            "title": "Plotai",
+            "add": "Plotai - tai detalesnis objektų vaizdavimo būdas. Jie nurodo objekto išorės kontūrus. Plotus galima naudoti beveik visiems objektams, kuriuos galima žymėti taškais ir jei tik galima, ploto žymėjimas yra pageidaujamas. **Spauskite ploto mygtuką ir pridėkite naują plotą.**",
+            "corner": "Plotai paišomi dėliojant taškus, nurodančius ploto kontūrą. **Sukurkite pradinį tašką viename iš žaidimų aikštelės kampų.**",
+            "place": "Nupieškite plotą pridėdami daugiau taškų. Baikite ploto braižymą pažymėję pradinį tašką. **Nubraižykite žaidimų aikštelės plotą.**",
+            "search": "**Ieškoti '{name}'.**",
+            "choose": "**Sąraše parinkite žaidimų aikštelę.**",
+            "describe": "**Pridėkite pavadinimą ir uždarykite objektų redaktorių**"
+        },
         "lines": {
-            "title": "Linijos"
+            "title": "Linijos",
+            "start": "**Pradėkite linijos braižymą spausdami ant kelio pabaigos.**",
+            "intersect": "Spauskite, kad pridėtumėte prie linijos daugiau taškų. Braižymo metu, jei reikia, galite pastumti žemėlapi. Keliai bei daug kitų linijų tipų paprastai yra dalis didelio tinklo. Labai svarbu, kad šios linijos būtų teisingai sujungtos, kad veiktų maršrutizavimas. **Spauskite ant Flower Street, kad sukurtumėte susikirtimą tarp dviejų linijų.**",
+            "finish": "Linijos braižymas gali būti baigiamas antrą kartą paspaudus ant paskutiniojo taško. **Baikite kelio braižymą.**",
+            "road": "**Sąraše parinkite kelią**",
+            "residential": "Yra įvairių kelių tipų, dažniausiai pasitaikantis - „Residential“. **Parinkite kelio tipą „Residential“**",
+            "describe": "**Įveskite kelio pavadinimą ir užverkite objektų redaktorių.**",
+            "restart": "Kelias turi susikirsti su Flower Street.",
+            "wrong_preset": "Neparinkote gyvenamosios gatvės tipo. **Spauskite čia ir parinkite iš naujo**"
+        },
+        "startediting": {
+            "title": "Pradėti redagavimą",
+            "help": "Išsamesnę dokumentaciją ir šią pažingsninę demonstraciją rasite čia.",
+            "save": "Nepamirškite periodiškai įrašyti savo pakeitimų!",
+            "start": "Pradėkite žymėjimą!"
         }
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Pastatas"
+            },
+            "category-golf": {
+                "name": "Golfas"
+            },
+            "category-landuse": {
+                "name": "Žemėnauda"
+            },
+            "category-path": {
+                "name": "Takas"
+            },
+            "category-rail": {
+                "name": "Gelžkelis"
+            },
             "category-road": {
                 "name": "Kelias"
             },
             "category-route": {
                 "name": "Maršrutas"
+            },
+            "category-water-area": {
+                "name": "Vanduo"
+            },
+            "category-water-line": {
+                "name": "Vanduo"
             }
         },
         "fields": {
@@ -162,6 +452,9 @@
                         "description": "Priėjimas leistinas tik atvykti į tikslą"
                     }
                 }
+            },
+            "access_simple": {
+                "label": "Prieiga"
             },
             "address": {
                 "label": "Adresas",
@@ -231,6 +524,9 @@
             },
             "description": {
                 "label": "Aprašymas"
+            },
+            "elevation": {
+                "label": "Aukštis"
             },
             "entrance": {
                 "label": "Tipas"
@@ -375,11 +671,17 @@
             "route_master": {
                 "label": "Tipas"
             },
+            "sac_scale": {
+                "label": "Tako sudėtingumas"
+            },
             "service": {
                 "label": "Tipas"
             },
             "shelter": {
                 "label": "Prieglobstis"
+            },
+            "shelter_type": {
+                "label": "Tipas"
             },
             "shop": {
                 "label": "Tipas"
@@ -409,6 +711,9 @@
             "tracktype": {
                 "label": "Tipas"
             },
+            "trail_visibility": {
+                "label": "Maršruto matomumas"
+            },
             "water": {
                 "label": "Tipas"
             },
@@ -431,7 +736,8 @@
         },
         "presets": {
             "address": {
-                "name": "Adresas"
+                "name": "Adresas",
+                "terms": "adresas"
             },
             "aeroway/aerodrome": {
                 "name": "Oro uostas"
@@ -442,11 +748,20 @@
             "aeroway/hangar": {
                 "name": "Angaras"
             },
+            "aeroway/helipad": {
+                "name": "Sraigtasparnių aikštelė"
+            },
             "aeroway/runway": {
                 "name": "Pakilimo takas"
             },
+            "amenity": {
+                "name": "Paslaugos"
+            },
             "amenity/arts_centre": {
                 "name": "Menų centras"
+            },
+            "amenity/atm": {
+                "name": "Bankomatas"
             },
             "amenity/bank": {
                 "name": "Bankas"
@@ -487,6 +802,9 @@
             "amenity/courthouse": {
                 "name": "Teismo rūmai"
             },
+            "amenity/dentist": {
+                "terms": "odontologas,dantistas,stomatologas"
+            },
             "amenity/drinking_water": {
                 "name": "Geriamas vanduo"
             },
@@ -518,7 +836,8 @@
                 "name": "Biblioteka"
             },
             "amenity/marketplace": {
-                "name": "Prekyvietė"
+                "name": "Prekyvietė",
+                "terms": "prekyvietė,turgus,turgelis"
             },
             "amenity/pharmacy": {
                 "name": "Vaistinė"
@@ -557,7 +876,11 @@
                 "name": "Restoranas"
             },
             "amenity/school": {
-                "name": "Mokykla"
+                "name": "Mokykla",
+                "terms": "mokykla,mokymo įstaiga"
+            },
+            "amenity/shelter": {
+                "name": "Pastogė"
             },
             "amenity/swimming_pool": {
                 "name": "Baseinas"
@@ -595,6 +918,9 @@
             "barrier/city_wall": {
                 "name": "Miesto siena"
             },
+            "barrier/ditch": {
+                "name": "Griovys"
+            },
             "barrier/entrance": {
                 "name": "Įėjimas"
             },
@@ -607,20 +933,42 @@
             "barrier/lift_gate": {
                 "name": "Pakeliami vartai"
             },
+            "barrier/toll_booth": {
+                "name": "Mokėjimo punktas"
+            },
             "barrier/wall": {
                 "name": "Siena"
             },
+            "boundary/administrative": {
+                "name": "Administracinė riba"
+            },
             "building": {
-                "name": "Pastatas"
+                "name": "Pastatas",
+                "terms": "pastatas,namas,statinys"
             },
             "building/apartments": {
                 "name": "Apartamentai"
+            },
+            "building/commercial": {
+                "name": "Komercinis pastatas",
+                "terms": "komercinis,pastatas,statinys"
+            },
+            "building/entrance": {
+                "name": "Įėjimas"
             },
             "building/garage": {
                 "name": "Garažas"
             },
             "building/house": {
                 "name": "Namas"
+            },
+            "building/industrial": {
+                "name": "Pramoninis pastatas",
+                "terms": "pramoninis,pastatas,statinys,gamykla,įmonė"
+            },
+            "building/residential": {
+                "name": "Gyvenamasis pastatas",
+                "terms": "gyvenamasis,pastatas,namas,statinys"
             },
             "emergency/fire_hydrant": {
                 "name": "Hidrantas"
@@ -631,8 +979,14 @@
             "entrance": {
                 "name": "Įėjimas"
             },
+            "footway/sidewalk": {
+                "name": "Šaligatvis"
+            },
             "highway": {
                 "name": "Greitkelis"
+            },
+            "highway/bridleway": {
+                "name": "Žirgų kelias"
             },
             "highway/bus_stop": {
                 "name": "Autobuso stotelė"
@@ -661,6 +1015,9 @@
             "highway/primary": {
                 "name": "Pagrindinis kelias"
             },
+            "highway/residential": {
+                "name": "Gyvenamasis kelias"
+            },
             "highway/road": {
                 "name": "Nežinomas kelias"
             },
@@ -669,6 +1026,9 @@
             },
             "highway/service": {
                 "name": "Aptarnaujantis kelias"
+            },
+            "highway/service/alley": {
+                "name": "Alėja"
             },
             "highway/service/emergency_access": {
                 "name": "Pagalbos priėjimas"
@@ -679,6 +1039,9 @@
             "highway/stop": {
                 "name": "Stop ženklas"
             },
+            "highway/track": {
+                "name": "Kelias"
+            },
             "highway/traffic_signals": {
                 "name": "Eismo signala"
             },
@@ -687,6 +1050,9 @@
             },
             "highway/turning_circle": {
                 "name": "Apsisukimo žiedas"
+            },
+            "highway/unclassified": {
+                "name": "Neklasifikuotas kelias"
             },
             "historic": {
                 "name": "Istorinė vietovė"
@@ -705,6 +1071,15 @@
             },
             "historic/ruins": {
                 "name": "Griuvėsiai"
+            },
+            "historic/wayside_cross": {
+                "name": "Kryžius prie kelio"
+            },
+            "historic/wayside_shrine": {
+                "name": "Pakelės šventovė"
+            },
+            "landuse": {
+                "name": "Žemėnauda"
             },
             "landuse/allotments": {
                 "name": "Žemės sklypai"
@@ -748,11 +1123,17 @@
             "landuse/residential": {
                 "name": "Gyvenamosios vietos"
             },
+            "landuse/retail": {
+                "name": "Prekyba"
+            },
             "landuse/vineyard": {
                 "name": "Vynuogynas"
             },
             "leisure": {
                 "name": "Laisvalaikis"
+            },
+            "leisure/dog_park": {
+                "name": "Šunų parkas"
             },
             "leisure/garden": {
                 "name": "Sodas"
@@ -799,8 +1180,14 @@
             "line": {
                 "name": "Linija"
             },
+            "man_made": {
+                "name": "Žmogaus sukurtas"
+            },
             "man_made/lighthouse": {
                 "name": "Švyturys"
+            },
+            "man_made/observation": {
+                "name": "Stebėjimo bokštas"
             },
             "man_made/pier": {
                 "name": "Prieplauka"
@@ -814,6 +1201,18 @@
             "man_made/water_tower": {
                 "name": "Vandens bokštas"
             },
+            "man_made/water_well": {
+                "name": "Vandens šulinys"
+            },
+            "military/bunker": {
+                "name": "Bunkeris"
+            },
+            "military/range": {
+                "name": "Karinis poligonas"
+            },
+            "natural": {
+                "name": "Natūralus"
+            },
             "natural/bay": {
                 "name": "Įlanka"
             },
@@ -826,11 +1225,20 @@
             "natural/coastline": {
                 "name": "Pakrantė"
             },
+            "natural/glacier": {
+                "name": "Ledynas"
+            },
             "natural/grassland": {
                 "name": "Pieva"
             },
             "natural/peak": {
                 "name": "Viršūnė"
+            },
+            "natural/scrub": {
+                "name": "Krūmai"
+            },
+            "natural/spring": {
+                "name": "Šaltinis"
             },
             "natural/tree": {
                 "name": "Medis"
@@ -846,6 +1254,21 @@
             },
             "natural/water/reservoir": {
                 "name": "Rezervuaras"
+            },
+            "natural/wetland": {
+                "name": "Drėgna žemė"
+            },
+            "natural/wood": {
+                "name": "Medis"
+            },
+            "office": {
+                "name": "Biuras"
+            },
+            "office/company": {
+                "name": "Kompanijos kontora"
+            },
+            "office/it": {
+                "name": "IT kontora"
             },
             "place": {
                 "name": "Vieta"
@@ -877,6 +1300,24 @@
             "power/generator": {
                 "name": "Jėgainė"
             },
+            "power/line": {
+                "name": "Elektros linija"
+            },
+            "power/pole": {
+                "name": "Elektros stulpas"
+            },
+            "power/sub_station": {
+                "name": "Pastotė"
+            },
+            "power/tower": {
+                "name": "Aukštos įtampos bokštas"
+            },
+            "power/transformer": {
+                "name": "Transformatorius"
+            },
+            "public_transport/platform": {
+                "name": "Platforma"
+            },
             "railway": {
                 "name": "Geležinkelis"
             },
@@ -886,8 +1327,14 @@
             "railway/disused": {
                 "name": "Nebenaudojamas geležinkelis"
             },
+            "railway/level_crossing": {
+                "name": "Vieno lygio susikirtimas"
+            },
             "railway/monorail": {
                 "name": "Vienbėgis geležinkelis"
+            },
+            "railway/rail": {
+                "name": "Gelžkelis"
             },
             "railway/station": {
                 "name": "Geležinkelio stotis"
@@ -897,6 +1344,12 @@
             },
             "railway/subway_entrance": {
                 "name": "Metro įėjimas"
+            },
+            "railway/tram": {
+                "name": "Tramvajus"
+            },
+            "relation": {
+                "name": "Ryšys"
             },
             "route/ferry": {
                 "name": "Kelto maršrutas"
@@ -946,6 +1399,9 @@
             "shop/department_store": {
                 "name": "Universalinė parduotuvė"
             },
+            "shop/doityourself": {
+                "name": "Pasidaryk pats parduotuvė"
+            },
             "shop/electronics": {
                 "name": "Elektronikos parduotuvė"
             },
@@ -962,7 +1418,8 @@
                 "name": "Dovanų parduotuvė"
             },
             "shop/hairdresser": {
-                "name": "Kirpykla"
+                "name": "Kirpykla",
+                "terms": "kirpykla"
             },
             "shop/hardware": {
                 "name": "Techninės įrangos parduotuvė"
@@ -975,6 +1432,9 @@
             },
             "shop/laundry": {
                 "name": "Skalbykla"
+            },
+            "shop/locksmith": {
+                "name": "Raktininkas"
             },
             "shop/mall": {
                 "name": "Prekybos centras"
@@ -1015,6 +1475,9 @@
             "shop/vacant": {
                 "name": "Tuščia parduotuvė"
             },
+            "shop/video": {
+                "name": "Vaizdo prekių parduotuvė"
+            },
             "tourism": {
                 "name": "Turizmas"
             },
@@ -1026,6 +1489,10 @@
             },
             "tourism/camp_site": {
                 "name": "Stovyklavietė"
+            },
+            "tourism/chalet": {
+                "name": "Sodyba",
+                "terms": "sodyba,kaimo sodyba"
             },
             "tourism/guest_house": {
                 "name": "Svečių namai"
@@ -1048,6 +1515,9 @@
             "tourism/picnic_site": {
                 "name": "Pikniko stovyklavietė"
             },
+            "tourism/viewpoint": {
+                "name": "Apžvalgos taškas"
+            },
             "tourism/zoo": {
                 "name": "Zoologijos sodas"
             },
@@ -1056,6 +1526,9 @@
             },
             "type/boundary/administrative": {
                 "name": "Administracinė siena"
+            },
+            "type/multipolygon": {
+                "name": "Multipoligonas"
             },
             "type/restriction": {
                 "name": "Apribojimas"
@@ -1096,11 +1569,23 @@
             "waterway/dam": {
                 "name": "Užtvanka"
             },
+            "waterway/ditch": {
+                "name": "Griovys"
+            },
+            "waterway/drain": {
+                "name": "Vandens nuoteka"
+            },
             "waterway/river": {
                 "name": "Upė"
             },
+            "waterway/riverbank": {
+                "name": "Upės kraštas"
+            },
             "waterway/stream": {
                 "name": "Upelis"
+            },
+            "waterway/weir": {
+                "name": "Užtvanka"
             }
         }
     }

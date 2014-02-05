@@ -332,7 +332,7 @@
     },
     "help": {
         "title": "Trợ giúp",
-        "help": "# Trợ giúp\n\nĐây là trình vẽ của [OpenStreetMap](http://www.openstreetmap.org/), bản đồ có mã nguồn mở và dữ liệu mở cho phép mọi người cùng sửa đổi. Bạn có thể sử dụng chương trình này để bổ sung và cập nhật dữ liệu bản đồ tại khu vực của bạn. Bạn có thể cải tiến bản đồ thế giới mở để cho mọi người sử dụng.\n\nCác sửa đổi của bạn trên bản đồ này sẽ xuất hiện cho mọi người dùng OpenStreetMap. Để sửa bản đồ, bạn cần có một [tài khoản OpenStreetMap miễn phí](https://www.openstreetmap.org/user/new).\n\n[Trình vẽ iD](http://ideditor.com/) là một dự án cộng tác. [Tất cả mã nguồn](https://github.com/systemed/iD) được xuất bản tại GitHub.\n",
+        "help": "# Trợ giúp\n\nĐây là trình vẽ của [OpenStreetMap](http://www.openstreetmap.org/), bản đồ có mã nguồn mở và dữ liệu mở cho phép mọi người cùng sửa đổi. Bạn có thể sử dụng chương trình này để bổ sung và cập nhật dữ liệu bản đồ tại khu vực của bạn. Bạn có thể cải tiến bản đồ thế giới mở để cho mọi người sử dụng.\n\nCác sửa đổi của bạn trên bản đồ này sẽ xuất hiện cho mọi người dùng OpenStreetMap. Để sửa bản đồ, bạn cần có một [tài khoản OpenStreetMap miễn phí](https://www.openstreetmap.org/user/new).\n\n[Tình vẽ iD](http://ideditor.com/) là một dự án cộng tác và xuất bản [tất cả mã nguồn tại GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Sửa đổi & Lưu giữ\n\nĐây là một chương trình vẽ trực tuyến, hiện tại bạn đang truy cập nó qua một trang Web.\n\n### Lựa chọn Đối tượng\n\nĐể lựa chọn một đối tượng, thí dụ con đường hay một điểm, nhấn chuột vào nó trên bản đồ. Khi đối tượng được chọn, bạn sẽ thấy một biểu mẫu ở bên phải chứa các chi tiết về đối tượng, cũng như một trình đơn giống bảng màu của họa sĩ chứa các tác vụ để thực hiện với đối tượng.\n\nĐể lựa chọn nhiều đối tượng cùng lúc, nhấn giữ phím Shift và nhấn chuột vào từng đối tượng một. Thay thế, nhấn giữ Shift và kéo chuột trên bản đồ để vẽ hộp bao. Các đối tượng nằm vào hộp này sẽ được chọn.\n\n### Lưu giữ Sửa đổi\n\nKhi bạn sửa đổi các tuyến đường, tòa nhà, và địa điểm, các thay đổi này được lưu giữ trên máy cho đến khi bạn đăng nó lên máy chủ. Đừng lo nhầm lẫn: chỉ việc nhấn vào các nút Hoàn tác và Làm lại.\n\nNhấn “Lưu” để hoàn thành các sửa đổi, thí dụ bạn vừa vẽ xong một khu và muốn bắt đầu vẽ khu mới. Trình vẽ sẽ trình bày các thay đổi để bạn xem lại, cũng như các gợi ý và cảnh báo nếu bạn đã sửa nhầm lẫn.\n\nSau khi vẽ xong, bạn sẽ nhập lời tóm lược các thay đổi và nhấn “Lưu” lần nữa để đăng các thay đổi lên [OpenStreetMap.org](http://www.openstreetmap.org/). Các thay đổi sẽ xuất hiện tại trang web này để mọi người xem và cập nhật nếu có sai sót.\n\nNếu bạn chưa xong mà cần rời khỏi máy tính, bạn có thể đóng trình vẽ này. Lần sau trở lại, trình vẽ này sẽ cho phép khôi phục các thay đổi chưa lưu của bạn (miễn là bạn sử dụng cùng máy tính và trình duyệt).\n",
         "roads": "# Đường sá\n\nTrình vẽ này cho phép tạo, sửa, và xóa các con đường. Con đường không nhất thiết phải là đường phố: có thể vẽ đường cao tốc, đường mòn, đường đi bộ, đường xe đạp…\n\n### Lựa chọn\n\nNhấn vào con đường để lựa chọn nó. Con đường sẽ được tô sáng, một trình đơn công cụ sẽ xuất hiện bên cạnh đường, và thanh bên sẽ trình bày các chi tiết của con đường.\n\n### Sửa đổi\n\nNhiều khi bạn sẽ gặp những con đường bị chệch đối với hình nền hoặc tuyến đường GPS. Bạn có thể chỉnh lại các con đường này để chính xác hơn.\n\nTrước tiên, nhấn vào con đường cần chỉnh lại. Đường sẽ được tô sáng và các nốt sẽ xuất hiện để bạn kéo sang vị trí đúng hơn. Để thêm chi tiết, nhấn đúp vào một khúc đường chưa có nốt, và một nốt mới sẽ xuất hiện để bạn kéo.\n\nNếu con đường nối với đường khác trên thực tiếp, nhưng trên bản đồ thì chưa nối liền, hãy kéo một nốt của một con đường sang đường kia để nối liền hai con đường. Nối liền các đường tại giao lộ là một điều rất quan trọng tăng khả năng chỉ đường.\n\nĐể di chuyển toàn bộ con đường cùng lúc, nhấn vào công cụ “Di chuyển” hoặc nhấn phím tắt `M`, chuyển chuột sang vị trí mới, rồi nhấn chuột để hoàn thành việc di chuyển.\n\n### Xóa\n\nHãy tưởng tượng bạn gặp một con đường hoàn toàn sai: bạn không thấy được con đường trong hình ảnh trên không và, theo lý tưởng, cũng đã ghé vào chỗ đó để xác nhận rằng nó không tồn tại. Nếu trường hợp này, bạn có thể xóa con đường hoàn toàn khỏi bản đồ. Xin cẩn thận khi xóa đối tượng: giống như mọi sửa đổi khác, mọi người sẽ thấy được kết quả. Ngoài ra, hình ảnh trên không nhiều khi lỗi thời – con đường có thể mới xây – thành thử tốt nhất là ghé vào chỗ đó để quan sát chắc chắn, nếu có thể.\n\nĐể xóa một con đường, lựa chọn nó bằng cách nhấn vào nó, rồi nhấn vào hình thùng rác hoặc nhấn phím Delete.\n\n### Tạo mới\n\nBạn có tìm ra một con đường chưa được vẽ trên bản đồ? Hãy bắt đầu vẽ đường kẻ mới bằng cách nhấn vào nút “Đường” ở phía trên bên trái của trình vẽ, hoặc nhấn phím tắt `2`.\n\nNhấn vào bản đồ tại điểm bắt đầu của con đường. Hoặc nếu con đường chia ra từ đường khác đã tồn tại, trước tiên nhấn chuột tại giao lộ giữa hai con đường này.\n\nSau đó, nhấn chuột lần lượt theo lối đường dùng hình ảnh trên không hoặc tuyến đường GPS. Khi nào con đường giao với đường khác, nhấn chuột tại giao lộ để nối liền hai con đường này. Sau khi vẽ xong, nhấn đúp vào nốt cuối dùng hoặc nhấn phím Return hay Enter.\n",
         "gps": "# GPS\n\nHệ thống định vị toàn cầu, còn gọi GPS, là nguồn dữ liệu tin tưởng nhất trong dự án OpenStreetMap. Trình vẽ này hỗ trợ các tuyến đường thu thập được từ máy GPS, tức tập tin `.gpx` trên máy tính của bạn. Bạn có thể thu loại tuyến đường GPS này bằng một ứng dụng cài đặt trên điện thoại thông minh hoặc máy thu GPS, chẳng hạn máy Garmin.\n\nĐọc thêm về cách thu thập dữ liệu bằng GPS tại “[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/)”.\n\nĐể sử dụng một tuyến đường GPX trong việc vẽ bản đồ, kéo thả tập tin GPX vào trình vẽ bản đồ này. Nếu trình vẽ nhận ra tuyến đường, tuyến đường sẽ được tô màu xanh nõn chuối trên bản đồ. Mở hộp “Tùy chọn Hình nền” ở thanh công cụ bên phải để bật tắt hoặc thu phóng lớp GPX này.\n\nTuyến đường GPX không được tải lên OpenStreetMap trực tiếp. Cách tốt nhất để sử dụng nó là vạch đường theo nó trên bản đồ, cũng như [tải nó lên OpenStreetMap](http://www.openstreetmap.org/trace/create) để cho người khác sử dụng.\n",
@@ -791,6 +791,10 @@
             "shop": {
                 "label": "Kiểu"
             },
+            "social_facility_for": {
+                "label": "Dân được phục vụ",
+                "placeholder": "Vô gia cư, Khuyết tật, Trẻ em, v.v."
+            },
             "source": {
                 "label": "Nguồn"
             },
@@ -1135,6 +1139,22 @@
             "amenity/shelter": {
                 "name": "Nhà trú",
                 "terms": "nhà trú, chỗ che chở, nhà trú bão, nhà trú mưa, nhà trú ẩn, điểm trú bão, điểm trú mưa, điểm trú ẩn, túp lều, mái, nóc, cho che cho, nha tru bao, nha tru mua, nha tru an, diem tru bao, diem tru mau, diem tru an, tup leu, mai, noc"
+            },
+            "amenity/social_facility": {
+                "name": "Dịch vụ Xã hội",
+                "terms": "dịch vụ xã hội, người vô gia cư, người khuyết tật, trẻ em, trung tâm điều trị nghiện ma túy, trung tâm điều trị nghiện rượu, dich vu xa hoi, nguoi vo gia cu, nguoi khuyet tat, tre em, trung tam dieu tri nghien ma tuy, trung tam dieu tri nghien ruou"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "Phân phát Thực phẩm",
+                "terms": "nhà phân phát thực phẩm, dịch vụ phân phối thực phẩm, cơ quan cung cấp thực phẩm, cơ quan cung cấp thức ăn, cơ quan cung cấp đồ ăn, giao thức ăn cho người đói, food bank, nha phan phat thuc pham, dich vu phan phoi thuc pham, co quan cung cap thuc pham, co quan cung cap thuc an, co quan cung cap do an, giao thuc an cho nguoi doi"
+            },
+            "amenity/social_facility/group_home": {
+                "name": "Nhà trọ Cộng đồng",
+                "terms": "nhà trọ cộng đồng, nhà tập thể, group home, nha tro cong dong, nha tap the"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Cứu trợ Người Vô gia cư",
+                "terms": "trung tâm cứu trợ người vô gia cư, trung tâm cho người vô gia cư, nhà tạm trú cho người vô gia cư, trung tam cuu tro nguoi vo gia cu, trung tam cho nguoi vo gia cu, nha tam tru cho nguoi vo gia cu"
             },
             "amenity/studio": {
                 "name": "Studio",

@@ -230,7 +230,11 @@
         "unknown": "Άγνωστο",
         "feature_list": "Αναζήτηση χαρακτηριστικών",
         "edit": "Επεξεργασία χαρακτηριστικού",
-        "none": "Κανένα"
+        "none": "Κανένα",
+        "node": "Κόμβος",
+        "way": "Διαδρομή",
+        "relation": "Σχέση",
+        "location": "Τοποθεσία"
     },
     "background": {
         "title": "Παρασκήνιο",
@@ -298,8 +302,7 @@
         "browse": "Εξερεύνηση για αρχείο .gpx"
     },
     "help": {
-        "title": "Βοήθεια",
-        "help": "# Βοήθεια\n\nΑυτός είναι ένας επεξεργαστής για το [OpenStreetMap](http://www.openstreetmap.org/),\n τον ελεύθερο και επεξεργάσιμο παγκόσμιο χάρτη. Μπορείτε να τον χρησιμοποιήσετε για\n προσθήκη ή ενημέρωση δεδομένων στην περιοχή σας, φτιάχνοντας έναν ανοικτού-κώδικα\n και ανοικτών-δεδομένων παγκόσμιο χάρτη καλύτερο για όλους.\n\nΟι διορθώσεις που κάνετε σε αυτό το χάρτη θα είναι ορατές σε όλους όσους \nχρησιμοποιούν το OpenStreetMap. Για να είναι δυνατόν να κάνετε κάποια \nδιόρθωση, χρειάζεστε ένα \n[δωρεάν λογαριασμό OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nΟ [iD editor](http://ideditor.com/) είναι ένα συνεργατικό έργο με τον [πηγαίο κώδικα\nδιαθέσιμο στο GitHub](https://github.com/systemed/iD).\n"
+        "title": "Βοήθεια"
     },
     "intro": {
         "navigation": {
@@ -323,6 +326,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Κτίριο"
+            },
             "category-landuse": {
                 "name": "Χρήση Γης"
             },
@@ -389,6 +395,26 @@
             },
             "admin_level": {
                 "label": "Δοιηκητική Βαθμίδα"
+            },
+            "aerialway": {
+                "label": "Τύπος"
+            },
+            "aerialway/access": {
+                "label": "Πρόσβαση"
+            },
+            "aerialway/capacity": {
+                "label": "Χωρητικότητα (ανά ώρα)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Διάρκεια (σε λεπτά)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/occupancy": {
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Πρόσβαση (καλοκαίρι)"
             },
             "aeroway": {
                 "label": "Είδος"
@@ -574,6 +600,12 @@
                 "label": "Τηλέφωνο",
                 "placeholder": "+31 42 123 4567"
             },
+            "piste/difficulty": {
+                "label": "Δυσκολία"
+            },
+            "piste/type": {
+                "label": "Τύπος"
+            },
             "place": {
                 "label": "Είδος"
             },
@@ -619,6 +651,9 @@
             "shelter": {
                 "label": "Καταφύγιο"
             },
+            "shelter_type": {
+                "label": "Τύπος"
+            },
             "shop": {
                 "label": "Είδος"
             },
@@ -638,6 +673,9 @@
                     "cutting": "Ανασκαφή"
                 }
             },
+            "studio_type": {
+                "label": "Τύπος"
+            },
             "supervised": {
                 "label": "Επιτηρείται"
             },
@@ -655,6 +693,12 @@
             },
             "trail_visibility": {
                 "label": "Ορατότητα Μονοπατιού"
+            },
+            "tree_type": {
+                "label": "Τύπος"
+            },
+            "tunnel": {
+                "label": "Σήραγγα"
             },
             "water": {
                 "label": "Είδος"
@@ -771,6 +815,10 @@
                 "name": "Κινηματογράφος",
                 "terms": "Κινηματογράφος"
             },
+            "amenity/clock": {
+                "name": "Ρολόι",
+                "terms": "ωρολόγιο"
+            },
             "amenity/college": {
                 "name": "Κολλέγιο",
                 "terms": "Κολέγιο"
@@ -778,6 +826,14 @@
             "amenity/courthouse": {
                 "name": "Δικαστήριο",
                 "terms": "Δικαστικό Μέγαρο, Δικαστήριο"
+            },
+            "amenity/dentist": {
+                "name": "Οδοντιατρείο",
+                "terms": "οδοντίατρος, οδοντογιατρός"
+            },
+            "amenity/doctor": {
+                "name": "Ιατρείο",
+                "terms": "γιατρός, ιατρός"
             },
             "amenity/drinking_water": {
                 "name": "Πόσιμο Νερό",
@@ -899,6 +955,10 @@
                 "name": "Πανεπιστήμιο",
                 "terms": "Πανεπιστήμιο"
             },
+            "amenity/vending_machine": {
+                "name": "Μηχάνημα Αυτόματης Πώλησης",
+                "terms": "αυτόματος πωλητής"
+            },
             "amenity/waste_basket": {
                 "name": "Κάδος Απορριμάτων",
                 "terms": "Κάλαθος αχρήστων, Καλάθι σκουπιδιών"
@@ -1003,6 +1063,41 @@
             "building/residential": {
                 "name": "Κτίριο Κατοικιών",
                 "terms": "Κτήριο κατοικιών, Αστικό κτήριο"
+            },
+            "craft/brewery": {
+                "name": "Ζυθοποιείο",
+                "terms": "ζυθοποιός, ζυθοποιία"
+            },
+            "craft/carpenter": {
+                "name": "Ξυλουργείο",
+                "terms": "μαραγκός, ξυλουργός"
+            },
+            "craft/clockmaker": {
+                "name": "Ωρολογοποιός",
+                "terms": "ρολογάς"
+            },
+            "craft/confectionary": {
+                "name": "Ζαχαροπλαστείο",
+                "terms": "ζαχαροπλάστης, ζαχαροπλαστική"
+            },
+            "craft/electrician": {
+                "name": "Ηλεκτρολόγος",
+                "terms": "ηλεκτροτεχνίτης"
+            },
+            "craft/optician": {
+                "name": "Οπτικός",
+                "terms": "οφθαλμίατρος,οφθαλμολόγος"
+            },
+            "craft/sawmill": {
+                "name": "Πριονιστήριο"
+            },
+            "craft/shoemaker": {
+                "name": "Τσαγκάρης",
+                "terms": "παπουτσής,υποδηματοποιός"
+            },
+            "craft/tailor": {
+                "name": "Ραφτική",
+                "terms": "ράφτης"
             },
             "emergency/ambulance_station": {
                 "name": "Σταθμός Ασθενοφόρων",
@@ -1420,6 +1515,24 @@
                 "name": "Γραφείο",
                 "terms": "Γραφείο"
             },
+            "office/accountant": {
+                "name": "Λογιστής",
+                "terms": "Λογιστική"
+            },
+            "office/architect": {
+                "name": "Αρχιτέκτονας",
+                "terms": "Πολιτικός μηχανικός"
+            },
+            "office/estate_agent": {
+                "name": "Κτηματομεσιτικό Γραφείο",
+                "terms": "μεσιτικό γραφείο, μεσίτης"
+            },
+            "office/newspaper": {
+                "name": "Εφημερίδα"
+            },
+            "office/political_party": {
+                "name": "Πολιτικό Κόμμα"
+            },
             "place": {
                 "name": "Τόπος",
                 "terms": "Τόπος"
@@ -1593,6 +1706,7 @@
                 "terms": "Ψιλικατζίδικο, Παντοπολείο"
             },
             "shop/deli": {
+                "name": "Ντελικατέσεν",
                 "terms": "Εκλεκτά τρόφιμα, Μεζεδοπωλείο, Ντελικατέσεν"
             },
             "shop/department_store": {
@@ -1687,6 +1801,10 @@
             "shop/pet": {
                 "name": "Κατάστημα Κατοικίδιων",
                 "terms": "Κατάστημα κατοικιδίων"
+            },
+            "shop/photo": {
+                "name": "Φωτογραφείο",
+                "terms": "φωτογράφος"
             },
             "shop/shoes": {
                 "name": "Κατάστημα Υπόδησης",

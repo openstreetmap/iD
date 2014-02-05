@@ -332,7 +332,7 @@
     },
     "help": {
         "title": "Aiuto",
-        "help": "# Aiuto\n\nQuesto è un editor per [OpenStreetMap](http://www.openstreetmap.org/), la\nmappa del mondo gratuita e modificabile. Puoi usarlo per aggiungere ed aggiornare\ndati nella tua area, rendendo una mappa del mondo open-source e open-data\nmeglio per tutti.\n\nLe modifiche che fai a questa mappa saranno visibili a chiunque usa\nOpenStreetMap. Per fare una modifica, avrai bisogno di un\n[account gratuito OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) è un progetto collaborativo il cui [codice\nsorgente è disponibile su GitHub](https://github.com/systemed/iD).\n",
+        "help": "# Aiuto\n\nQuesto è un editor per [OpenStreetMap](http://www.openstreetmap.org/), la\nmappa del mondo gratuita e modificabile. Puoi usarlo per aggiungere ed aggiornare\ndati nella tua area, creando una mappa del mondo open-source e open-data\nmigliore per tutti.\n\nLe modifiche che fai a questa mappa saranno visibili a chiunque usa\nOpenStreetMap. Per fare una modifica, avrai bisogno di un\n[account gratuito OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) è un progetto collaborativo il cui [codice\nsorgente è disponibile su GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Modifica & salvataggio\n\nQuesto editor è stato pensato per funzionare principalmente online\ned anche in questo momento lo stai utilizzando tramite browser web.\n\n### Selezione degli Elementi\n\nPer selezionare un elemento della mappa, come ad esempio una strada o\nun punto di interesse, clicca su di esso sulla mappa. Questo farà in modo\nche l'elemento selezionato venga evidenziato, che si apra un pannello con\ni dettagli e che si apra un menu di azioni che è possibile fare con l'elemento\nstesso.\n\nPer selezionare più elementi tenendo premuto il tasto 'Maiusc' clicca su ogni\nelemento o trascina il mouse disegnando un riquadro sulla mappa. Questo\nfarà sì che tutti gli elementi all'interno del riquadro vengano selezionati\nconsentendo di compiere azioni su più elementi in una volta sola.\n\n### Salvataggio delle modifiche\n\nQuando si fanno dei cambiamenti, come modifiche alle strade, agli edifici e\nai luoghi, queste vengono memorizzate localmente fino a che non si effettua\nil salvataggio sul server. Non preoccuparti se fai un errore, puoi annullare\nla modifica premento il tasto 'Annulla' e rieffettuare la modifica cliccando\nsul tasto 'Ripeti'.\n\nSe ad esempio hai completato un'area della città e vuoi iniziare un'altra\narea clicca su 'Salva' e porre fine ad un gruppo di modifiche. Avrai comunque\nla possibilità di revisionare ciò che hai modificato inoltre l'editor fornirà\nsuggerimenti e avvertimenti se qualcosa nelle tue modifiche non sembra\nandare bene.\n\nSe tutto è a posto puoi aggiungere un piccolo commento per spiegare la\nmodifica effettuata e cliccare su 'Salva' di nuovo per caricare le modifiche su\n[OpenStreetMap.org](http://www.openstreetmap.org/), dove saranno visibili\na tutti gli utenti e disponibili agli altri per consentire di costruirci sopra o\nmigliorarle ulteriormente.\n\nSe non riesci a finire le modifiche in una seduta, puoi abbandonare la\nfinestra dell'editor e tornarci più tardi (utilizzando lo stesso browser e lo\nstesso computer): l'editor ti offrirà infatti la possibiltà di recuperare il tuo lavoro.\n",
         "roads": "# Strade\n\nE' possibile creare, aggiustare ed eliminare le strade con questo editor. Le strade possono essere di tutti i tipi: percorsi, autostrade, cammini, piste ciclabili o altro. E' possibile mappare ogni segmento calpestabile.\n\n### Selezione\n\nCliccare su una strada per selezionarla. Verranno visualizzati un contorno e un piccolo menu strumenti sulla mappa oltre ad una barra laterale che mostra informazioni dettagliate sulla strada.\n\n### Modifica\n\nVi capiterà spesso di vedere strade non combacianti con le immagini sullo sfondo o con il tracciato GPS. E' possibile allineare queste strada in modo che si trovino nella giusta posizione.\n\nPer prima cosa cliccare sulla strada che si vuole modificare. Questo farà in modo che la strada venga evidenziata e che vengano visualizzati i punti di controllo lungo di essa che possono essere spostati in luoghi più consoni. Se si vuole aggiungere nuovi punti di controllo per aggiungere maggiori dettagli, basta fare doppio clic su parte della strada senza nodi.\n\nSe la strada è connessa ad un'altra strada ma non è ben connessa sulla mappa, è possibile spostare uno di questi punti di controllo sull'altra strada in modo da unirli. E' importante per la mappa che le strade siano correttamente connesse  anche per garantire giuste indicazioni di guida.\n\nE' possibile cliccare sullo strumento 'Sposta' o premere il tasto rapido `M` per muovere l'intera strada in una volta sola. Cliccare nuovamente per memorizzare lo spostamento.\n\n### Eliminizione\n\nSe la strada è completamente sbagliata, ovvero non compare sulle immagini satellitari e non viene rilevata nella realtà, è possibile eliminarla eliminandola dalla mappa. Attenzione ad effettuare questa operazione di eliminazione poiché, come per ogni altra modifica, i risultati vengono visti da tutti. Considera che le immagini satellitari sono spesso vecchie quindi è possibile che la strada sia stata costruita solo di recente.\n\nE' possibile eliminare una strada cliccando prima su di essa per selezionarla e poi sull'icona cestino o premendo il tasto 'Canc' della tastiera.\n\n### Creazione\n\nHai notato che in un punto della mappa dovrebbe esserci una strada ma non c'è ? Clicca sull'incona 'Linea' in alto a sinistra nell'editor o premi il tasto `2` per iniziare a disegnare una linea.\n\nCliccare sull'inizio della strada sulla mappa per iniziare a disegnarla. Se la strada  è unita ad una strada già esistente, iniziare cliccando nel punto dove sono connesse.\n\nQuindi cliccare i nuovi punti lungo la strada in modo che segua il percorso giusto dettato dall'immagine satellitare o dai dati del GPS. Se la strada che stai disegnando attraversa un'altra strada, collegala cliccando sul punto di intersezione. Quando hai finito di disegnare fai doppio clic o premi 'Invio' o 'Enter' sulla tua tastiera.\n",
         "gps": "# GPS\n\nI dati provenienti dal GPS sono la sorgente dati più fidata per OpenStreetMap.\nQuesto editor supporta i tracciati locali - i file `.gpx` che si trovano sul tuo\ncomputer.  È possibile raccogliere questo tipo di tracciati GPS con un gran\nnumero di applicazioni per smartphone o tramite dispositivi GPS personali.\n\nPer informazioni su come effettuare un rilevamento GPS è possibile leggere\n[Rilevamenti con un GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPer utilizzare un tracciato GPX al fine di effettuare una mappatura, trascina il\nfile GPX sull'editor di mappe. Se viene riconosciuto verrà aggiunto alla mappa\ned evidenziato tramite una linea verde chiaro. Cliccare sul menu 'Impostazioni\nsfondo' che si trova sulla sinitra per abilitare, disabilitare o zoomare il livello creato dal file GPX.\n\nIl tracciato GPX non viene caricato direttamente su OpenStreetMap - il modo\nmigliore di utilizzarlo è quello di disegnare sulla mappa usando il tracciato\ncome guida per i nuovi elementi che vuoi aggiungere e [caricarlo comunque\nsu OpenStreetMap](http://www.openstreetmap.org/trace/create) per renderlo\npoi disponibile agli altri utenti.\n",
@@ -791,6 +791,10 @@
             "shop": {
                 "label": "Tipo"
             },
+            "social_facility_for": {
+                "label": "Tipo di utenza",
+                "placeholder": "Senza dimora, disabili, minori, ..."
+            },
             "source": {
                 "label": "Fonte"
             },
@@ -1135,6 +1139,22 @@
             "amenity/shelter": {
                 "name": "Riparo",
                 "terms": "ricovero,rifugio,tettoia,pensilina,bivacco,grotta"
+            },
+            "amenity/social_facility": {
+                "name": "Centro socio-assistenziale",
+                "terms": "centro sociale,comunità,cooperativa sociale,centro assistenziale,rsa,casa di riposo,ospizio,servizi sociali,casa famiglia,comunità di recupero"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "Banco alimentare",
+                "terms": "mensa del povero,mensa caritas"
+            },
+            "amenity/social_facility/group_home": {
+                "name": "Comunità",
+                "terms": "casa comunitaria,terapia di gruppo,comunità"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Dormitorio",
+                "terms": "ricovero,senzadimora,barboni,senza fissa dimora,senza dimora,senza casa"
             },
             "amenity/studio": {
                 "name": "Studio radiotelevisivo",
@@ -1891,6 +1911,10 @@
             "office": {
                 "name": "Uffici",
                 "terms": "Ufficio"
+            },
+            "office/accountant": {
+                "name": "Contabile",
+                "terms": "Commercialista, amministrativo, ragioniere"
             },
             "office/administrative": {
                 "name": "Autorità locale",
