@@ -1334,10 +1334,6 @@
                 "name": "Entrance",
                 "terms": ""
             },
-            "building/farm_auxilary": {
-                "name": "Farm Building",
-                "terms": ""
-            },
             "building/garage": {
                 "name": "Garage",
                 "terms": ""
@@ -1348,10 +1344,6 @@
             },
             "building/greenhouse": {
                 "name": "Greenhouse",
-                "terms": ""
-            },
-            "building/hanger": {
-                "name": "Hanger",
                 "terms": ""
             },
             "building/hospital": {
@@ -1403,11 +1395,11 @@
                 "terms": ""
             },
             "building/static_caravan": {
-                "name": "Static Caravan",
+                "name": "Static Mobile Home",
                 "terms": ""
             },
             "building/terrace": {
-                "name": "Terraced Houses",
+                "name": "Row Houses",
                 "terms": ""
             },
             "building/train_station": {

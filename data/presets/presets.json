@@ -1933,7 +1933,6 @@
         "name": "Barn"
     },
     "building/bunker": {
-        "icon": "building",
         "fields": [
             "address",
             "levels"
@@ -1946,7 +1945,8 @@
         "tags": {
             "building": "bunker"
         },
-        "name": "Bunker"
+        "name": "Bunker",
+        "searchable": false
     },
     "building/cabin": {
         "icon": "building",
@@ -1965,7 +1965,7 @@
         "name": "Cabin"
     },
     "building/cathedral": {
-        "icon": "building",
+        "icon": "place-of-worship",
         "fields": [
             "address",
             "levels"
@@ -1981,7 +1981,7 @@
         "name": "Cathedral"
     },
     "building/chapel": {
-        "icon": "building",
+        "icon": "place-of-worship",
         "fields": [
             "address",
             "levels"
@@ -1997,7 +1997,7 @@
         "name": "Chapel"
     },
     "building/church": {
-        "icon": "building",
+        "icon": "place-of-worship",
         "fields": [
             "address",
             "levels"
@@ -2083,22 +2083,6 @@
         "name": "Entrance",
         "searchable": false
     },
-    "building/farm_auxilary": {
-        "icon": "building",
-        "fields": [
-            "address",
-            "levels"
-        ],
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "tags": {
-            "building": "farm_auxilary"
-        },
-        "name": "Farm Building"
-    },
     "building/garage": {
         "fields": [
             "capacity"
@@ -2144,22 +2128,6 @@
             "building": "greenhouse"
         },
         "name": "Greenhouse"
-    },
-    "building/hanger": {
-        "icon": "building",
-        "fields": [
-            "address",
-            "levels"
-        ],
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "tags": {
-            "building": "hanger"
-        },
-        "name": "Hanger"
     },
     "building/hospital": {
         "icon": "building",
@@ -2361,7 +2329,7 @@
         "tags": {
             "building": "static_caravan"
         },
-        "name": "Static Caravan"
+        "name": "Static Mobile Home"
     },
     "building/terrace": {
         "icon": "building",
@@ -2377,7 +2345,7 @@
         "tags": {
             "building": "terrace"
         },
-        "name": "Terraced Houses"
+        "name": "Row Houses"
     },
     "building/train_station": {
         "icon": "building",
@@ -2393,7 +2361,8 @@
         "tags": {
             "building": "train_station"
         },
-        "name": "Train Station"
+        "name": "Train Station",
+        "searchable": false
     },
     "building/university": {
         "icon": "building",
@@ -6188,6 +6157,9 @@
     },
     "railway/station": {
         "icon": "rail",
+        "fields": [
+            "building_area"
+        ],
         "geometry": [
             "point",
             "vertex",

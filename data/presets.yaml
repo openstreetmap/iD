@@ -678,9 +678,6 @@ en:
       building/entrance: 
         name: Entrance
         terms: "<translate with synonyms or related terms for 'Entrance', separated by commas>"
-      building/farm_auxilary: 
-        name: Farm Building
-        terms: "<translate with synonyms or related terms for 'Farm Building', separated by commas>"
       building/garage: 
         name: Garage
         terms: "<translate with synonyms or related terms for 'Garage', separated by commas>"
@@ -690,9 +687,6 @@ en:
       building/greenhouse: 
         name: Greenhouse
         terms: "<translate with synonyms or related terms for 'Greenhouse', separated by commas>"
-      building/hanger: 
-        name: Hanger
-        terms: "<translate with synonyms or related terms for 'Hanger', separated by commas>"
       building/hospital: 
         name: Hospital Building
         terms: "<translate with synonyms or related terms for 'Hospital Building', separated by commas>"
@@ -730,11 +724,11 @@ en:
         name: Stable
         terms: "<translate with synonyms or related terms for 'Stable', separated by commas>"
       building/static_caravan: 
-        name: Static Caravan
-        terms: "<translate with synonyms or related terms for 'Static Caravan', separated by commas>"
+        name: Static Mobile Home
+        terms: "<translate with synonyms or related terms for 'Static Mobile Home', separated by commas>"
       building/terrace: 
-        name: Terraced Houses
-        terms: "<translate with synonyms or related terms for 'Terraced Houses', separated by commas>"
+        name: Row Houses
+        terms: "<translate with synonyms or related terms for 'Row Houses', separated by commas>"
       building/train_station: 
         name: Train Station
         terms: "<translate with synonyms or related terms for 'Train Station', separated by commas>"
