@@ -681,7 +681,7 @@
             "dentist's office"
         ],
         "tags": {
-            "amenity": "doctors"
+            "amenity": "dentist"
         },
         "icon": "hospital",
         "fields": [
