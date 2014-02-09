@@ -38,6 +38,9 @@ iD.operations.Merge = function(selectedIDs, context) {
         if (j === 'restriction' && m && p)
             return t('operations.merge.restriction', {relation: context.presets().item('type/restriction').name()});
 
+        if (p === 'incomplete_relation' && j && m)
+            return t('operations.merge.incomplete_relation');
+
         if (j && m && p)
             return t('operations.merge.' + j);
 

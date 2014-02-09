@@ -106,6 +106,7 @@ en:
       not_eligible: These features can't be merged.
       not_adjacent: These lines can't be merged because they aren't connected.
       restriction: These lines can't be merged because at least one is a member of a "{relation}" relation.
+      incomplete_relation: These features can't be merged because at least one hasn't been fully downloaded.
     move:
       title: Move
       description: Move this to a different location.
