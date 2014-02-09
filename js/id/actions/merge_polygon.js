@@ -86,10 +86,15 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
             graph = graph.remove(m);
         });
 
-        members.forEach(function(m) {
-            var entity = graph.entity(m.id);
-            relation = relation.mergeTags(entity.tags);
-            graph = graph.replace(entity.update({ tags: {} }));
+        entities.closedWay.forEach(function(cw) {
+            function isThisOuter(m) {
+                return m.id === cw.id && m.role !== "inner";
+            }
+            if (members.some(isThisOuter)) {
+                var entity = graph.entity(cw.id);
+                relation = relation.mergeTags(entity.tags);
+                graph = graph.replace(entity.update({ tags: {} }));
+            }
         });
 
         return graph.replace(relation.update({

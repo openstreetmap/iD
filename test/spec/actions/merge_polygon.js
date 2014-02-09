@@ -85,15 +85,20 @@ describe("iD.actions.MergePolygon", function () {
         expect(find(r, 'w5').role).to.equal('outer');
     });
 
-    it("moves all tags to the relation", function() {
+    it("moves tags to the relation", function() {
         graph = graph.replace(graph.entity('w0').update({ tags: { 'building': 'yes' }}));
+        // this is a new inner member whose tags should not be moved to the relation
         graph = graph.replace(graph.entity('w1').update({ tags: { 'natural': 'water' }}));
-        graph = iD.actions.MergePolygon(['w0', 'w1'], 'r')(graph);
+        // this is a new outer member whose tags should be moved to the relation
+        graph = graph.replace(graph.entity('w5').update({ tags: { 'amenity': 'school' }}));
+        graph = iD.actions.MergePolygon(['w0', 'w1','w5'], 'r')(graph);
         var r = graph.entity('r');
         expect(graph.entity('w0').tags.building).to.equal(undefined);
-        expect(graph.entity('w1').tags.natural).to.equal(undefined);
-        expect(r.tags.natural).to.equal('water');
+        expect(graph.entity('w1').tags.natural).to.equal('water');
+        expect(graph.entity('w5').tags.amenity).to.equal(undefined);
         expect(r.tags.building).to.equal('yes');
+        expect(r.tags.natural).to.equal(undefined);
+        expect(r.tags.amenity).to.equal('school');
     });
 
     it("doesn't copy area tags from ways", function() {
