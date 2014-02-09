@@ -108,6 +108,10 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
         if (entities.other.length > 0 ||
             entities.closedWay.length + entities.multipolygon.length < 2)
             return 'not_eligible';
+        if (!entities.multipolygon.every(function(r) {
+            return r.isComplete(graph);
+        }))
+            return 'incomplete_relation';
     };
 
     return action;
