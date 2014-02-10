@@ -88,7 +88,7 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
 
         entities.closedWay.forEach(function(way) {
             function isThisOuter(m) {
-                return m.id === way.id && m.role !== "inner";
+                return m.id === way.id && m.role !== 'inner';
             }
             if (members.some(isThisOuter)) {
                 relation = relation.mergeTags(way.tags);
