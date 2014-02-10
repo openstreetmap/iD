@@ -86,14 +86,13 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
             graph = graph.remove(m);
         });
 
-        entities.closedWay.forEach(function(cw) {
+        entities.closedWay.forEach(function(way) {
             function isThisOuter(m) {
-                return m.id === cw.id && m.role !== "inner";
+                return m.id === way.id && m.role !== "inner";
             }
             if (members.some(isThisOuter)) {
-                var entity = graph.entity(cw.id);
-                relation = relation.mergeTags(entity.tags);
-                graph = graph.replace(entity.update({ tags: {} }));
+                relation = relation.mergeTags(way.tags);
+                graph = graph.replace(way.update({ tags: {} }));
             }
         });
 
@@ -108,9 +107,7 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
         if (entities.other.length > 0 ||
             entities.closedWay.length + entities.multipolygon.length < 2)
             return 'not_eligible';
-        if (!entities.multipolygon.every(function(r) {
-            return r.isComplete(graph);
-        }))
+        if (!entities.multipolygon.every(function(r) { return r.isComplete(graph); }))
             return 'incomplete_relation';
     };
 
