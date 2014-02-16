@@ -2407,6 +2407,10 @@
                 "name": "Bicycle Shop",
                 "terms": ""
             },
+            "shop/bookmaker": {
+                "name": "Bookmaker",
+                "terms": ""
+            },
             "shop/books": {
                 "name": "Bookstore",
                 "terms": ""
@@ -2526,6 +2530,10 @@
             "shop/locksmith": {
                 "name": "Locksmith",
                 "terms": "keys"
+            },
+            "shop/lottery": {
+                "name": "Lottery Shop",
+                "terms": ""
             },
             "shop/mall": {
                 "name": "Mall",

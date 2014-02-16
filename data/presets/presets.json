@@ -6352,6 +6352,23 @@
         },
         "name": "Bicycle Shop"
     },
+    "shop/bookmaker": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "bookmaker"
+        },
+        "name": "Bookmaker"
+    },
     "shop/books": {
         "icon": "shop",
         "fields": [
@@ -6870,6 +6887,23 @@
             "shop": "locksmith"
         },
         "name": "Locksmith"
+    },
+    "shop/lottery": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "lottery"
+        },
+        "name": "Lottery Shop"
     },
     "shop/mall": {
         "icon": "shop",

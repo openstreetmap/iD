@@ -1482,6 +1482,9 @@ en:
       shop/bicycle: 
         name: Bicycle Shop
         terms: "<translate with synonyms or related terms for 'Bicycle Shop', separated by commas>"
+      shop/bookmaker: 
+        name: Bookmaker
+        terms: "<translate with synonyms or related terms for 'Bookmaker', separated by commas>"
       shop/books: 
         name: Bookstore
         terms: "<translate with synonyms or related terms for 'Bookstore', separated by commas>"
@@ -1572,6 +1575,9 @@ en:
       shop/locksmith: 
         name: Locksmith
         terms: "<translate with synonyms or related terms for 'Locksmith', separated by commas>"
+      shop/lottery: 
+        name: Lottery Shop
+        terms: "<translate with synonyms or related terms for 'Lottery Shop', separated by commas>"
       shop/mall: 
         name: Mall
         terms: "<translate with synonyms or related terms for 'Mall', separated by commas>"
