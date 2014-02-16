@@ -1,6 +1,7 @@
 iD.wikipedia  = function() {
     var wiki = {},
-        endpoint = 'http://en.wikipedia.org/w/api.php?';
+        protocol = window.location.protocol === 'https:' ? 'https' : 'http',
+        endpoint = protocol + '://en.wikipedia.org/w/api.php?';
 
     wiki.search = function(lang, query, callback) {
         lang = lang || 'en';
