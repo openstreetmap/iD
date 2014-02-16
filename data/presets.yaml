@@ -1470,6 +1470,9 @@ en:
       shop/alcohol: 
         name: Liquor Store
         terms: "<translate with synonyms or related terms for 'Liquor Store', separated by commas>"
+      shop/art: 
+        name: Art Shop
+        terms: "<translate with synonyms or related terms for 'Art Shop', separated by commas>"
       shop/bakery: 
         name: Bakery
         terms: "<translate with synonyms or related terms for 'Bakery', separated by commas>"

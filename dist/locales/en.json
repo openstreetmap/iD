@@ -2391,6 +2391,10 @@
                 "name": "Liquor Store",
                 "terms": "alcohol"
             },
+            "shop/art": {
+                "name": "Art Shop",
+                "terms": "art store,art gallery"
+            },
             "shop/bakery": {
                 "name": "Bakery",
                 "terms": ""
