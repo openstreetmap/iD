@@ -1,6 +1,5 @@
 iD.ui.preset.address = function(field, context) {
     var event = d3.dispatch('change'),
-        housename,
         housenumber,
         street,
         city,
@@ -100,12 +99,6 @@ iD.ui.preset.address = function(field, context) {
 
         enter.append('input')
             .property('type', 'text')
-            .attr('placeholder', field.t('placeholders.housename'))
-            .attr('class', 'addr-housename')
-            .attr('id', 'preset-input-' + field.id);
-
-        enter.append('input')
-            .property('type', 'text')
             .attr('placeholder', field.t('placeholders.number'))
             .attr('class', 'addr-number');
 
@@ -126,7 +119,6 @@ iD.ui.preset.address = function(field, context) {
 
         // Update
 
-        housename = wrap.select('.addr-housename');
         housenumber = wrap.select('.addr-number');
         street = wrap.select('.addr-street');
         city = wrap.select('.addr-city');
@@ -157,7 +149,6 @@ iD.ui.preset.address = function(field, context) {
 
     function change() {
         event.change({
-            'addr:housename': housename.value() || undefined,
             'addr:housenumber': housenumber.value() || undefined,
             'addr:street': street.value() || undefined,
             'addr:city': city.value() || undefined,
@@ -172,7 +163,6 @@ iD.ui.preset.address = function(field, context) {
     };
 
     address.tags = function(tags) {
-        housename.value(tags['addr:housename'] || '');
         housenumber.value(tags['addr:housenumber'] || '');
         street.value(tags['addr:street'] || '');
         city.value(tags['addr:city'] || '');
@@ -180,7 +170,7 @@ iD.ui.preset.address = function(field, context) {
     };
 
     address.focus = function() {
-        housename.node().focus();
+        housenumber.node().focus();
     };
 
     return d3.rebind(address, event, 'on');
