@@ -65,7 +65,8 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
 
     var bing = iD.BackgroundSource(data),
         key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU', // Same as P2 and JOSM
-        url = 'http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
+        protocol = window.location.protocol === 'https:' ? 'https' : 'http',
+        url = protocol + '://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
             key + '&jsonp={callback}',
         providers = [];
 
@@ -84,7 +85,7 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
         dispatch.change();
     });
 
-    var template = 'http://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z',
+    var template = protocol + '://ecn.t{t}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z',
         subdomains = [0, 1, 2, 3];
 
     bing.url = function(coord) {
