@@ -229,12 +229,12 @@ describe("iD.History", function () {
     });
 
     describe("#toJSON", function() {
-        it("generates v2 JSON", function() {
+        it("generates v3 JSON", function() {
             var node = iD.Node({id: 'n-1'});
             history.merge([iD.Node({id: 'n1'})]);
             history.perform(iD.actions.AddEntity(node));
             var json = JSON.parse(history.toJSON());
-            expect(json.version).to.eql(2);
+            expect(json.version).to.eql(3);
             expect(json.entities).to.eql([node]);
         });
     });

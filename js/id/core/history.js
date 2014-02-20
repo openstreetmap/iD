@@ -199,9 +199,19 @@ iD.History = function(context) {
                 return x;
             });
 
+            // make sure that the originals of changed entities get merged into
+            // the base of the stack after restoring the data from JSON.
+            var base = stack[0],
+                baseEntities = {};
+            _.forEach(allEntities, function(entity) {
+                if (entity.id in base.graph.entities && !base.graph.entities.hasOwnProperty(entity.id))
+                    baseEntities[entity.id] = base.graph.entities[entity.id];
+            });
+
             return JSON.stringify({
-                version: 2,
+                version: 3,
                 entities: _.values(allEntities),
+                baseEntities: _.values(baseEntities),
                 stack: s,
                 nextIDs: iD.Entity.id.next,
                 index: index
@@ -214,12 +224,19 @@ iD.History = function(context) {
             iD.Entity.id.next = h.nextIDs;
             index = h.index;
 
-            if (h.version === 2) {
+            if (h.version === 2 || h.version === 3) {
                 var allEntities = {};
 
                 h.entities.forEach(function(entity) {
                     allEntities[iD.Entity.key(entity)] = iD.Entity(entity);
                 });
+
+                if (h.version === 3) {
+                    // this merges originals for changed entities into the base of
+                    // the stack even if the current stack doesn't have them (for
+                    // example when iD has been restarted in a different region)
+                    stack[0].graph.rebase(h.baseEntities, _.pluck(stack, 'graph'));
+                }
 
                 stack = h.stack.map(function(d) {
                     var entities = {}, entity;
@@ -292,8 +309,6 @@ iD.History = function(context) {
 
             var json = context.storage(getKey('saved_history'));
             if (json) history.fromJSON(json);
-
-            context.storage(getKey('saved_history', null));
         },
 
         _getKey: getKey
