@@ -174,7 +174,9 @@ iD.History = function(context) {
         toJSON: function() {
             if (stack.length <= 1) return;
 
-            var allEntities = {};
+            var allEntities = {},
+                baseEntities = {},
+                base = stack[0];
 
             var s = stack.map(function(i) {
                 var modified = [], deleted = [];
@@ -187,6 +189,10 @@ iD.History = function(context) {
                     } else {
                         deleted.push(id);
                     }
+                    // make sure that the originals of changed or deleted entities get merged
+                    // into the base of the stack after restoring the data from JSON.
+                    if (id in base.graph.entities && !base.graph.entities.hasOwnProperty(id))
+                        baseEntities[id] = base.graph.entities[id];
                 });
 
                 var x = {};
@@ -197,15 +203,6 @@ iD.History = function(context) {
                 if (i.annotation) x.annotation = i.annotation;
 
                 return x;
-            });
-
-            // make sure that the originals of changed entities get merged into
-            // the base of the stack after restoring the data from JSON.
-            var base = stack[0],
-                baseEntities = {};
-            _.forEach(allEntities, function(entity) {
-                if (entity.id in base.graph.entities && !base.graph.entities.hasOwnProperty(entity.id))
-                    baseEntities[entity.id] = base.graph.entities[entity.id];
             });
 
             return JSON.stringify({
@@ -235,7 +232,9 @@ iD.History = function(context) {
                     // this merges originals for changed entities into the base of
                     // the stack even if the current stack doesn't have them (for
                     // example when iD has been restarted in a different region)
-                    stack[0].graph.rebase(h.baseEntities, _.pluck(stack, 'graph'));
+                    var baseEntities = h.baseEntities.map(iD.Entity);
+                    stack[0].graph.rebase(baseEntities, _.pluck(stack, 'graph'));
+                    tree.rebase(baseEntities);
                 }
 
                 stack = h.stack.map(function(d) {

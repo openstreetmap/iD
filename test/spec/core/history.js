@@ -230,12 +230,18 @@ describe("iD.History", function () {
 
     describe("#toJSON", function() {
         it("generates v3 JSON", function() {
-            var node = iD.Node({id: 'n-1'});
-            history.merge([iD.Node({id: 'n1'})]);
-            history.perform(iD.actions.AddEntity(node));
+            var node_1 = iD.Node({id: 'n-1'}),
+                node1 = iD.Node({id: 'n1'}),
+                node2 = iD.Node({id: 'n2'}),
+                node3 = iD.Node({id: 'n3'});
+            history.merge([node1, node2, node3]);
+            history.perform(iD.actions.AddEntity(node_1)); // addition
+            history.perform(iD.actions.ChangeTags('n2', {k: 'v'})); // modification
+            history.perform(iD.actions.DeleteNode('n3')); // deletion
             var json = JSON.parse(history.toJSON());
             expect(json.version).to.eql(3);
-            expect(json.entities).to.eql([node]);
+            expect(json.entities).to.eql([node_1, node2.update({tags: {k: 'v'}})]);
+            expect(json.baseEntities).to.eql([node2, node3]);
         });
     });
 
@@ -401,7 +407,7 @@ describe("iD.History", function () {
             var json = {
                 "version": 3,
                 "entities": [],
-                "baseEntities": [],
+                "baseEntities": [{"loc": [1, 2], "id": "n1"}],
                 "stack": [
                     {},
                     {"deleted": ["n1"], "imageryUsed": ["Bing"], "annotation": "Deleted a point."}
@@ -410,7 +416,6 @@ describe("iD.History", function () {
                 "index": 1
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge([iD.Node({id: 'n1'})]);
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql("Deleted a point.");
             expect(history.imageryUsed()).to.eql(["Bing"]);
