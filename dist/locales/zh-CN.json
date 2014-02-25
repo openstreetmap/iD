@@ -297,7 +297,7 @@
     "splash": {
         "welcome": "欢迎使用OpenStreetMap iD编辑器",
         "text": "ID编辑器是一个既易用而又功能强大的工具，以助您编辑世界上最好的自由世界地图。这是{version}版本。欲知详情，请浏览{website}及在{github}报告程序错误。“",
-        "walkthrough": "开始导览",
+        "walkthrough": "开始演练",
         "start": "现在编辑"
     },
     "source_switch": {
@@ -835,6 +835,9 @@
             "aerialway": {
                 "name": "缆车线路",
                 "terms": "缆车线路"
+            },
+            "aerialway/cable_car": {
+                "name": "缆车"
             },
             "aerialway/pylon": {
                 "name": "缆车塔",

@@ -134,7 +134,8 @@
             "annotation": "gộp {n} đường kẻ",
             "not_eligible": "Không thể gộp các đối tượng này.",
             "not_adjacent": "Không thể gộp các đường kẻ không nối liền với nhau.",
-            "restriction": "Không thể gộp các đường kẻ này vì ít nhất một trong những đường kẻ trực thuộc quan hệ “{relation}”."
+            "restriction": "Không thể gộp các đường kẻ này vì ít nhất một trong những đường kẻ trực thuộc quan hệ “{relation}”.",
+            "incomplete_relation": "Không thể gộp vì một trong số đối tượng này chưa được tải về hoàn toàn."
         },
         "move": {
             "title": "Di chuyển",
@@ -1284,9 +1285,45 @@
                 "name": "Khu chung cư",
                 "terms": "khu chung cư, khu chung cu"
             },
+            "building/barn": {
+                "name": "Chuồng",
+                "terms": "chuồng, chuồng trâu bò, chuồng ngựa, kho thóc, chuong, chuong trau bo, chuong ngua, kho thoc"
+            },
+            "building/bunker": {
+                "name": "Boong ke",
+                "terms": "boong ke, boong-ke, boongke"
+            },
+            "building/cabin": {
+                "name": "Nhà tranh",
+                "terms": "nhà tranh, túp lều, nhà gỗ, nha tranh, tup leu, nha go"
+            },
+            "building/cathedral": {
+                "name": "Nhà thờ Chánh tòa",
+                "terms": "nhà thờ chánh tòa, nhà thờ chánh toà, nhà thờ chính tòa, nhà thờ chính toà, vương cung thánh đường, đại vương cung thánh đường, tiểu vương cung thánh đường, nha tho chanh toa, nha tho chinh toa, vuong cung thanh duong, dai vuong cung thanh duong, tieu vuong cung thanh duong"
+            },
+            "building/chapel": {
+                "name": "Nhà nguyện",
+                "terms": "nhà nguyện, nhà thờ nhỏ, nha nguyen, nha tho nho"
+            },
+            "building/church": {
+                "name": "Nhà thờ",
+                "terms": "nhà thờ, Ki-tô giáo, Kitô giáo, Thiên Chúa giáo, đạo Thiên Chúa, Công giáo, Tin Lành, giáo xứ, thánh đường, nha tho, Ki-to giao, Kito giao, Thien Chua giao, dao Thien Chua, Cong giao, Tin Lanh, giao xu, thanh duong"
+            },
             "building/commercial": {
                 "name": "Tòa nhà Thương mại",
                 "terms": "tòa nhà thương mại, toà nhà thương mại, toa nha thuong mai"
+            },
+            "building/construction": {
+                "name": "Tòa nhà đang Xây dựng",
+                "terms": "tòa nhà đang xây dựng, toà nhà đang xây dựng, nhà đang xây, toa nha dang xay dung, nha dang xay"
+            },
+            "building/detached": {
+                "name": "Nhà Tách biệt",
+                "terms": "nhà tách biệt, nhà biệt lập, nha tach biet, nha biet lap"
+            },
+            "building/dormitory": {
+                "name": "Ký túc xá",
+                "terms": "ký túc xá, kí túc xá, ký túc sá, kí túc sá, cư xá, ky tuc xa, ki tuc xa, ky tuc sa, ki tuc sa, cu xa"
             },
             "building/entrance": {
                 "name": "Cửa vào",
@@ -1295,6 +1332,22 @@
             "building/garage": {
                 "name": "Ga ra",
                 "terms": "ga ra, ga-ra"
+            },
+            "building/garages": {
+                "name": "Dãy Ga ra",
+                "terms": "dãy ga ra, dãy ga-ra, dãy nhà để xe, day ga ra, day ga-ra, day nha de xe"
+            },
+            "building/greenhouse": {
+                "name": "Nhà kính",
+                "terms": "nhà kính, nhà kiếng, nhà trồng rau, nhà trồng hoa, nha kinh, nha kieng, nha trong rau, nha trong hoa"
+            },
+            "building/hospital": {
+                "name": "Tòa nhà Bệnh viện",
+                "terms": "tòa nhà bệnh viện, toà nhà bệnh viện, tòa nhà nhà thường, toà nhà nhà thường"
+            },
+            "building/hotel": {
+                "name": "Tòa nhà Khách sạn",
+                "terms": "tòa nhà khách sạn, toà nhà khách sạn"
             },
             "building/house": {
                 "name": "Nhà ở",
@@ -1308,9 +1361,53 @@
                 "name": "Tòa nhà Công nghiệp",
                 "terms": "tòa nhà công nghiệp, toà nhà công nghiệp, toa nha cong nghiep"
             },
+            "building/public": {
+                "name": "Tòa nhà Công cộng",
+                "terms": "tòa nhà công cộng, toà nhà công cộng"
+            },
             "building/residential": {
                 "name": "Tòa nhà Dân cư",
                 "terms": "tòa nhà dân cư, toà nhà dân cư, nhà ở, căn nhà, toa nha dan cu, nha o, can nha"
+            },
+            "building/retail": {
+                "name": "Tòa nhà Bán lẻ",
+                "terms": "tòa nhà bán lẻ, toà nhà bán lẻ, toa nha ban le"
+            },
+            "building/roof": {
+                "name": "Mái Che",
+                "terms": "mái che, mái, mái nhà, nóc, mai che, mai, mai nha, noc"
+            },
+            "building/school": {
+                "name": "Nhà Trường",
+                "terms": "nhà trường, trường học, học viện, nha truong, truong học, hoc vien"
+            },
+            "building/shed": {
+                "name": "Lán",
+                "terms": "lán, lán trại, lều lán, túp lều, chuồng, lan, lan trai, leu lan, tup leu, chuong"
+            },
+            "building/stable": {
+                "name": "Chuồng Ngựa",
+                "terms": "chuồng ngựa, chuong ngua"
+            },
+            "building/static_caravan": {
+                "name": "Nhà Lưu động để Một Chỗ",
+                "terms": "nhà lưu động để một chỗ, nhà di động để một chỗ, nha luu dong de mot cho, nha di dong de mot cho"
+            },
+            "building/terrace": {
+                "name": "Dãy Nhà",
+                "terms": "dãy nhà, day nha"
+            },
+            "building/train_station": {
+                "name": "Nhà ga",
+                "terms": "nhà ga,nha ga"
+            },
+            "building/university": {
+                "name": "Tòa nhà Đại học",
+                "terms": "tòa nhà đại học, toà nhà đại học, tòa nhà trường đại học, toà nhà trường đại học, toa nha dai hoc, toa nha truong dai hoc"
+            },
+            "building/warehouse": {
+                "name": "Nhà kho",
+                "terms": "nhà kho, kho, kho tàng, kho bãi, nha kho, kho tang, kho bai"
             },
             "craft/basket_maker": {
                 "name": "Đan Rổ rá",
@@ -2288,6 +2385,10 @@
                 "name": "Tiệm Rượu",
                 "terms": "tiệm rượu, nơi bán rượu, chỗ bán rượu, quầy bán rượu, cửa hàng rượu, cửa hàng bán rượu, tiệm bán rượu, tiem ruou, noi ban ruou, cho ban ruou, quay ban ruou, cua hang ruou, cua hang ban ruou, tiem ban ruou"
             },
+            "shop/art": {
+                "name": "Tiệm Nghệ phẩm",
+                "terms": "tiệm nghệ phẩm, tiệm bức tranh, tiệm bức vẽ, cửa hàng nghệ phẩm, cửa hàng bức tranh, cửa hàng bức vẽ, quán nghệ phẩm, quán bức tranh, quán bức vẽ, nơi bán nghệ phẩm, nơi bán bức tranh, nơi bán bức vẽ, tiem nghe pham, tiem buc tranh, tiem buc ve, cua hang nghe pham, cua hang buc tranh, cua hang buc ve, quan nghe pham, quan buc tranh, quan buc ve, noi ban nghe pham, noi ban buc tranh, noi ban buc ve"
+            },
             "shop/bakery": {
                 "name": "Tiệm Bánh",
                 "terms": "tiệm bánh, tiệm bánh mì, tiệm bán bánh, nơi bán bánh, chỗ bán bánh, quầy bán bánh, nhà bán bánh, tiem banh, tiem banh mi, tiem ban banh, noi ban banh, cho ban banh, quay ban banh, nha ban banh"
@@ -2303,6 +2404,10 @@
             "shop/bicycle": {
                 "name": "Tiệm Xe đạp",
                 "terms": "tiệm xe đạp, cửa hàng xe đạp, chỗ bán xe đạp, tiem xe dap, cua hang xe dap, cho ban xe dap"
+            },
+            "shop/bookmaker": {
+                "name": "Phòng Đánh cá Ngựa",
+                "terms": "phòng đánh cá ngựa, văn phòng đánh cá ngựa, cửa sổ đánh cá ngựa, tiệm đánh cá ngựa, cửa hàng đánh cá ngựa, nơi đánh cá ngựa, phong danh ca ngua, van phong danh ca ngua, cua so danh ca ngua, tiem danh ca ngua, cua hang danh ca ngua, noi danh ca ngua"
             },
             "shop/books": {
                 "name": "Hiệu Sách",
@@ -2423,6 +2528,10 @@
             "shop/locksmith": {
                 "name": "Thợ khóa",
                 "terms": "thợ khóa, thợ sửa khóa, thợ khoá, trợ sửa khoá, thợ kim khí, tho khoa, tho sua khoa, tho kim khi"
+            },
+            "shop/lottery": {
+                "name": "Tiệm Xổ số",
+                "terms": "quầy xổ số, quầy vé xổ số, tiệm xổ số, tiệm vé xổ số, cửa hàng xổ số, cửa hàng vé xổ số, quán xổ số, quán vé xổ số, nơi bán vé xổ số, nơi mua vé xổ số, quay xo so, quay ve xo so, tiem xo so, tiem ve xo so, cua hang xo so, cua hang ve xo so, quan xo so, quan ve xo so, noi ban ve xo so, noi mua ve xo so"
             },
             "shop/mall": {
                 "name": "Trung tâm Thương mại",

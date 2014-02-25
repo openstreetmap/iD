@@ -134,7 +134,8 @@
             "annotation": "Heu fusionat {n} línies.",
             "not_eligible": "Aquestes característiques no poden ser fusionades.",
             "not_adjacent": "Aquestes línies no poden ser com fusionades ja que no estàn connectades.",
-            "restriction": "Aquestes línies no poden ser fusionades perquè com a mínim una d'elles és membre de la relació \"{relation}\""
+            "restriction": "Aquestes línies no poden ser fusionades perquè com a mínim una d'elles és membre de la relació \"{relation}\"",
+            "incomplete_relation": "Aquestes característiques no poden ser fusionades perquè com a mínim una no s'ha descarregat del tot."
         },
         "move": {
             "title": "Mou",
@@ -1254,14 +1255,54 @@
             "building/apartments": {
                 "name": "Apartaments"
             },
+            "building/barn": {
+                "name": "Graner"
+            },
+            "building/bunker": {
+                "name": "Búnquer"
+            },
+            "building/cabin": {
+                "name": "Cabina"
+            },
+            "building/cathedral": {
+                "name": "Catedral"
+            },
+            "building/chapel": {
+                "name": "Capella"
+            },
+            "building/church": {
+                "name": "Església"
+            },
             "building/commercial": {
                 "name": "Edifici comercial"
+            },
+            "building/construction": {
+                "name": "Edifici en construcció"
+            },
+            "building/detached": {
+                "name": "Xalet unifamiliar",
+                "terms": "casa aïllada, casa d'urbanització, xalet, chalet, xalets, chalets, casa i jardí, casa amb jardí"
+            },
+            "building/dormitory": {
+                "name": "Edifici d'habitacions"
             },
             "building/entrance": {
                 "name": "Entrada"
             },
             "building/garage": {
                 "name": "garatge "
+            },
+            "building/garages": {
+                "name": "Garatges"
+            },
+            "building/greenhouse": {
+                "name": "Hivernacle"
+            },
+            "building/hospital": {
+                "name": "Edifici hospitalari"
+            },
+            "building/hotel": {
+                "name": "Edifici hoteler"
             },
             "building/house": {
                 "name": "Casa"
@@ -1272,8 +1313,41 @@
             "building/industrial": {
                 "name": "Edifici industrial"
             },
+            "building/public": {
+                "name": "Edifici públic"
+            },
             "building/residential": {
                 "name": "Edifici residencial"
+            },
+            "building/retail": {
+                "name": "Edifici de grans magatzems"
+            },
+            "building/roof": {
+                "name": "Teulada"
+            },
+            "building/school": {
+                "name": "Edifici escolar"
+            },
+            "building/shed": {
+                "name": "Traster"
+            },
+            "building/stable": {
+                "name": "Estable"
+            },
+            "building/static_caravan": {
+                "name": "Caravana fixa"
+            },
+            "building/terrace": {
+                "name": "Cases unifamiliars"
+            },
+            "building/train_station": {
+                "name": "Estació de ferrocarril"
+            },
+            "building/university": {
+                "name": "Edifici universitari"
+            },
+            "building/warehouse": {
+                "name": "Magatzem"
             },
             "craft/basket_maker": {
                 "name": "Cistellaire"
@@ -2011,6 +2085,9 @@
             "shop/alcohol": {
                 "name": "Botiga de licors"
             },
+            "shop/art": {
+                "name": "Botiga d'art"
+            },
             "shop/bakery": {
                 "name": "Fleca"
             },
@@ -2022,6 +2099,9 @@
             },
             "shop/bicycle": {
                 "name": "Botiga de bicicletes"
+            },
+            "shop/bookmaker": {
+                "name": "Cusidor de llibres"
             },
             "shop/books": {
                 "name": "Llibreria"
@@ -2112,6 +2192,9 @@
             },
             "shop/locksmith": {
                 "name": "Copisteria de claus"
+            },
+            "shop/lottery": {
+                "name": "Administració de loteria"
             },
             "shop/mall": {
                 "name": "Centre comercial"

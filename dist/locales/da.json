@@ -134,7 +134,8 @@
             "annotation": "Fusionerede {n} linjer.",
             "not_eligible": "Disse elementer kan ikke fusioneres.",
             "not_adjacent": "Disse linjer kan ikke fusioneres fordi de ikke er knyttet sammen",
-            "restriction": "Disse linjer kan ikke flettes sammen, da mindst en af disse er medlem af  \"{relation}\" relation."
+            "restriction": "Disse linjer kan ikke flettes sammen, da mindst en af disse er medlem af  \"{relation}\" relation.",
+            "incomplete_relation": "Disse kortegenskaber kan ikke fusioneres, da de ikke er blevet downloadet fuldstændigt."
         },
         "move": {
             "title": "Flyt",
@@ -1284,9 +1285,45 @@
                 "name": "Lejligheder",
                 "terms": "Lejligheder, Ejerlejligheder"
             },
+            "building/barn": {
+                "name": "Lade",
+                "terms": "Lade, Stald"
+            },
+            "building/bunker": {
+                "name": "Bunker",
+                "terms": "Bunker"
+            },
+            "building/cabin": {
+                "name": "Hytte",
+                "terms": "Hytte"
+            },
+            "building/cathedral": {
+                "name": "Katedral",
+                "terms": "Katedral, Domkirke"
+            },
+            "building/chapel": {
+                "name": "Kapel",
+                "terms": "Kapel"
+            },
+            "building/church": {
+                "name": "Kirke",
+                "terms": "Kirke"
+            },
             "building/commercial": {
                 "name": "Indkøbscenter",
                 "terms": "Indkøbscenter, Storcenter"
+            },
+            "building/construction": {
+                "name": "Bygning under konstruktion",
+                "terms": "Bygning under konstruktion, Byggeplads"
+            },
+            "building/detached": {
+                "name": "Parcelhus",
+                "terms": "Parcelhus"
+            },
+            "building/dormitory": {
+                "name": " Kollegie",
+                "terms": " Kollegie, Klubværelse, Kollegium"
             },
             "building/entrance": {
                 "name": "Indgang",
@@ -1295,6 +1332,22 @@
             "building/garage": {
                 "name": "Garage",
                 "terms": "Garage, Carport"
+            },
+            "building/garages": {
+                "name": "Garager",
+                "terms": "Garager"
+            },
+            "building/greenhouse": {
+                "name": "Drivhus",
+                "terms": "Drivhus"
+            },
+            "building/hospital": {
+                "name": "Hospitalsbygning",
+                "terms": "Hospitalsbygning, Sygehusbygning"
+            },
+            "building/hotel": {
+                "name": "Hotelbygning",
+                "terms": "Hotelbygning"
             },
             "building/house": {
                 "name": "Hus",
@@ -1308,9 +1361,53 @@
                 "name": "Industribygning",
                 "terms": "Industribygning"
             },
+            "building/public": {
+                "name": "Offentlig bygning",
+                "terms": "Offentlig bygning"
+            },
             "building/residential": {
                 "name": "Beboelsesbygning",
                 "terms": "Beboelsesbygning, Parcelhus"
+            },
+            "building/retail": {
+                "name": "Butiksbygning",
+                "terms": "Butiksbygning, Forretningsbygning"
+            },
+            "building/roof": {
+                "name": "Tag",
+                "terms": "Tag"
+            },
+            "building/school": {
+                "name": "Skolebygning",
+                "terms": "Skolebygning"
+            },
+            "building/shed": {
+                "name": "Skur",
+                "terms": "Skur"
+            },
+            "building/stable": {
+                "name": "Stald",
+                "terms": "Stald, Hestestald, Kostald, Grisestald"
+            },
+            "building/static_caravan": {
+                "name": "Fast mobilt hus",
+                "terms": "Fast mobilt hus"
+            },
+            "building/terrace": {
+                "name": "Rækkehuse",
+                "terms": "Rækkehuse"
+            },
+            "building/train_station": {
+                "name": "Togstation",
+                "terms": "Togstation, Station"
+            },
+            "building/university": {
+                "name": "Universitetsbygning",
+                "terms": "Universitetsbygning"
+            },
+            "building/warehouse": {
+                "name": "Lager",
+                "terms": "Lager, Lagerhotel, Varelager"
             },
             "craft/basket_maker": {
                 "name": "Kurvemager",
@@ -2288,6 +2385,10 @@
                 "name": "Vinforhandler",
                 "terms": "Vinforhandler, Vinbutik, Vinforretning"
             },
+            "shop/art": {
+                "name": "Kunstbutik",
+                "terms": "Kunstbutik, Kunstforretning"
+            },
             "shop/bakery": {
                 "name": "Bager",
                 "terms": "Bager, Bageri"
@@ -2303,6 +2404,10 @@
             "shop/bicycle": {
                 "name": "Cykelbutik",
                 "terms": "Cykelforretning, Cykelbutik"
+            },
+            "shop/bookmaker": {
+                "name": "Bookmaker",
+                "terms": "Bookmaker"
             },
             "shop/books": {
                 "name": "Boghandler",
@@ -2423,6 +2528,10 @@
             "shop/locksmith": {
                 "name": "Låsesmed",
                 "terms": "Låsesmed"
+            },
+            "shop/lottery": {
+                "name": "Lotteributik",
+                "terms": "Lotteributik, Lotteriforretning"
             },
             "shop/mall": {
                 "name": "Indkøbscenter",

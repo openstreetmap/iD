@@ -82,6 +82,12 @@
             "amenity/theatre": {
                 "name": "Theatre"
             },
+            "building/static_caravan": {
+                "name": "Static Caravan"
+            },
+            "building/terrace": {
+                "name": "Terraced houses"
+            },
             "leisure/sports_center": {
                 "name": "Sports Centre"
             },

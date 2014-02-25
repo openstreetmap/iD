@@ -134,7 +134,8 @@
             "annotation": "{n} Linien vereinigt.",
             "not_eligible": "Diese Objekte können nicht vereinigt werden.",
             "not_adjacent": "Diese Linien können nicht vereinigt werden, da sie nicht verbunden sind.",
-            "restriction": "Diese Linien können nicht vereinigt werden, da mindestens eine Linie ein Mitglied einer \"{relation}\" Relation ist."
+            "restriction": "Diese Linien können nicht vereinigt werden, da mindestens eine Linie ein Mitglied einer \"{relation}\" Relation ist.",
+            "incomplete_relation": "Diese Objekte können nicht zusammengefügt werden, da mindestens eines noch nicht vollständig heruntergeladen wurde."
         },
         "move": {
             "title": "Verschieben",
@@ -332,7 +333,7 @@
     },
     "help": {
         "title": "Hilfe",
-        "help": "#Hilfe\n\nDies ist ein Editor für [OpenStreetMap](http://www.openstreetmap.org/), der freien und editierbaren Weltkarte. Du kannst ihn verwenden, um Daten in deiner Umgebung hinzuzufügen oder zu verändern und so diese Karte mit freien Quellen und freien Daten für jeden verbessern.\n\nVeränderungen werden für alle Nutzer von OpenStreetMap sichtbar. Um Veränderungen vornehmen zu können, musst du ein [kostenloses OpenStreetMap Profil](https://www.openstreetmap.org/user/new) anlegen.\n\nDer [iD editor](http://ideditor.com/) ist ein Gemeinschaftsprojektn dessen [Quellcode\nauf GitHub verfügbar ist](https://github.com/openstreetmap/iD).\n",
+        "help": "#Hilfe\n\nDies ist ein Editor für [OpenStreetMap](http://www.openstreetmap.org/), der freien und editierbaren Weltkarte. Du kannst ihn verwenden, um Daten in deiner Umgebung hinzuzufügen oder zu verändern und so diese Karte mit freien Quellen und freien Daten für jeden verbessern.\n\nVeränderungen werden für alle Nutzer von OpenStreetMap sichtbar. Um Veränderungen vornehmen zu können, musst du ein [kostenloses OpenStreetMap Profil](https://www.openstreetmap.org/user/new) anlegen.\n\nDer [iD editor](http://ideditor.com/) ist ein Gemeinschaftsprojekt dessen [Quellcode\nauf GitHub verfügbar ist](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Editieren & Speichern\n\nDieser Editor wurde entworfen, um online zu arbeiten und du erreichst ihn über diese Webseite.\n\n### Objekte auswählen\n\nUm ein Kartenobjekt wie eine Straße oder ein Sonderziel (POI) auszuwählen, klicke auf der Karte darauf. Dadurch wird das Objekt hervorgehoben und ein Bedienfeld mit Details und Möglichkeiten zur Veränderung aufgerufen.\n\nMehrere Objekte kannst du auswählen indem du die Shift-Taste (Umschalttaste) drückst und die Objekte einzeln anklickst oder klickst und einen Rahmen darum ziehst.\nSo können mehrere Objekte gleichzeitig geändert werden.\n\n### Speichern der Änderungen\n\nWenn du Änderungen an einer Straße, einem Gebäude oder einem Platz vorgenommen hast, sind diese lokal gespeichert, bis du sie auf dem Server speicherst. Keine Sorge falls du einen Fehler machen solltest: Du kannst Änderungen jederzeit über den Rückgängig-Knopf rückgängig machen oder über den Wiederherstellen-Knopf noch einmal ausführen.\n\nKlicke auf \"Speichern\", um eine Gruppe von Änderungen zu speichern. Zum Beispiel, wenn du in einem Stadtteil fertig bist und in einer neuen Gegend editieren willst.\nDu bekommst dann die Möglichkeit noch einmal zu überprüfen, was du gerade getan hast und der Editor zeigt dir nützliche Hinweise oder mögliche Fehler, wenn etwas nicht in Ordnung zu sein scheint.\n\nWenn alles gut aussieht kannst du einen kurzen Kommentar schreiben, der erklärt, was du gemacht hast. Drücke nun \"Speichern\", um die Änderungen auf dem Server zu speichern.\nNun können es alle auf [OpenStreetMap.org](http://www.openstreetmap.org/) sehen und darauf aufbauen.\n\nWenn du es zeitlich nicht schaffst, kannst du das Editor-Fenster einfach schließen. Wenn du die Seite wieder aufrufst (mit dem gleichen Browser und Computer) wird dir angeboten, die letzte Sitzung wiederherzustellen.\n",
         "roads": "# Straßen\n\nMit dem Editor kannst du Wege erstellen, verändern und löschen. Wege können alles mögliche sein, zum Beispiel Pfade, Straßen, Schienen, Fahrradwege und anderes.\n\n### Auswählen\n\nKlicke auf einen Weg, um ihn auszuwählen. Er sollte nun hervorgehoben werden. Außerdem erscheint ein kleines Werkzeugmenü und eine Seitenleiste mit den Eigenschaften des Weges.\n\n### Modifizieren\n\nOft sieht man, dass Wege nicht mit dem Luftbild oder einer GPS-Spur übereinstimmen. Du kannst den Weg aber so anpassen, dass er an der richtigen Stelle ist. Beachte jedoch, dass Luftbilder einen Versatz aufweisen können.\n\nAls Erstes wählst du einen Weg aus. Dieser wird nun hervorgehoben und es werden die Knoten des Weges angezeigt. Diese kannst du verschieben, bis sie an der richtigen Stelle sind. Wenn du neue Knoten hinzufügen möchtest, klicke doppelt zwischen den Knoten auf die Linie und es wird ein neuer Punkt erzeugt.\n\nWenn zwei Wege in Wirklichkeit mit einander verbunden sind, aber auf der Karte nicht, kannst du sie verbinden, indem du einen Knoten des einen Weges auf den anderen Weg ziehst. Dass Wege verbunden sind, ist wichtig für die Karte und essentiell für die Nutzung von Routenführung.\n\nDu kannst auch das \"Bewegen\"-Werkzeug nutzen oder \"M\" drücken, um den kompletten Weg zu verschieben. Beende die Aktion mit einem Klick.\n\n### Löschen\n\nWenn du weißt, dass ein Weg nicht existiert, kannst du ihn löschen, um ihn von der Karte zu entfernen. Sei beim Löschen von Objekten besonders vorsichtig, da diese Änderungen von jedem gesehen werden können und Luftbilder oft veraltet sind. Das heißt, dass ein Weg, der im Luftbild nicht zu sehen ist, vielleicht einfach neu gebaut wurde.\n\nDu kannst Wege löschen, indem du sie anklickst und das Mülltonnensymbol auswählst oder die \"Entfernen\"-Taste drückst.\n\n### Erstellen\n\nDu kennst einen Weg der nicht eingezeichnet ist? Dann klicke auf das \"Linien\"-Symbol oben links im Editor oder drücke die Taste \"2\" und beginne mit dem Zeichnen einer Linie.\n\nKlicke dort hin, wo die Straße anfängt. Sollte sie von einer bereits existierenden Straße abzweigen, klicke an der entsprechenden Stelle auf diese Straße.\n\nZeichne nun den Weg, indem du Punkte anhand der Luftaufnahme oder der GPS-Spur entlang des Weges setzt. Sollte der Weg einen anderen kreuzen, klicke auf den  Kreuzungspunkt, um beide Wege zu verbinden. Wenn du mit dem Zeichnen fertig bist, klicke doppelt oder drücke \"Enter\" auf der Tastatur, um den Weg abzuschließen.\n",
         "gps": "# GPS\n\nGPS-Daten sind die vertrauenswürdigste Quelle für OpenStreetMap.\nDieser Editor unterstützt lokale GPS-Spuren — \".gpx\"-Dateien auf \ndeinem Computer. Du kannst diese GPS-Spuren mit Hilfe diverser\nSmartphone-Apps oder anderen GPS-Geräten aufnehmen.\n\nFür Informationen über das Sammeln von GPS-Daten kannst du dir\nfolgende Anleitung durchlesen: [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/) (zur Zeit nur auf Englisch)\n\nUm einen GPX-Track zu verwenden, ziehe ihn einfach in den Karteneditor.\nWenn er erkannt wurde, wird dieser Track als leuchtend grüne Linie auf\nder Karte dargestellt. Klicke auf \"Hintergrundeinstellungen\", um sie zu\n(de-)aktivieren, oder um zum Gebiet des Tracks zu gelangen (Lupe).\n\nDer GPX-Track wird nicht automatisch direkt zu OpenStreetMap hochgeladen.\nAm besten verwendest du ihn, um neue Wege hinzuzufügen. Möchtest du den \nGPX-Track jedem zugänglich machen, kannst du ihn über die [Track-Upload-Seite](http://www.openstreetmap.org/trace/create) hochladen.\n",
@@ -465,7 +466,7 @@
             "address": {
                 "label": "Adresse",
                 "placeholders": {
-                    "housename": "Hausname",
+                    "housename": "postalischer Hausname",
                     "number": "123",
                     "street": "Straße",
                     "city": "Stadt",
@@ -961,7 +962,7 @@
                 "terms": "Geldautomat"
             },
             "amenity/bank": {
-                "name": "Bank",
+                "name": "Bank (Geldinstitut)",
                 "terms": "Kasse,Kontor,Kreditgenossenschaft,Lagerstelle,Fiskus,Fonds,Vermögen,Investmentfirma,Register,Rücklage,Vorrat,Tresor,Rücklagen,Grundkapital,Vorrat,Lager,Lagerhaus,Sparkasse,Schatz,Treuhandgesellschaft,Tresorraum"
             },
             "amenity/bar": {
@@ -969,7 +970,7 @@
                 "terms": "Bar"
             },
             "amenity/bench": {
-                "name": "Bank",
+                "name": "Sitzbank",
                 "terms": "Bank, Sitzbank"
             },
             "amenity/bicycle_parking": {
@@ -1284,9 +1285,45 @@
                 "name": "Wohnungen",
                 "terms": "Wohnung"
             },
+            "building/barn": {
+                "name": "Scheune",
+                "terms": "Scheune, Stall"
+            },
+            "building/bunker": {
+                "name": "Bunker",
+                "terms": "Bunker, Schutzraum"
+            },
+            "building/cabin": {
+                "name": "Hütte",
+                "terms": "Hütte, Wochenendhaus"
+            },
+            "building/cathedral": {
+                "name": "Kathedrale",
+                "terms": "Kathedrale, Dom"
+            },
+            "building/chapel": {
+                "name": "Kapelle (Sakralbau)",
+                "terms": "Kapelle"
+            },
+            "building/church": {
+                "name": "Kirche",
+                "terms": "Kirche"
+            },
             "building/commercial": {
                 "name": "Geschäftshaus",
                 "terms": "Gewerbehaus,gewerblich genutztes Gebäude,"
+            },
+            "building/construction": {
+                "name": "im Bau befindliches Gebäude",
+                "terms": "Gebäude im Bau"
+            },
+            "building/detached": {
+                "name": "Doppelhaus",
+                "terms": "Haushälfte, Doppelhaus"
+            },
+            "building/dormitory": {
+                "name": "Schlafsaal",
+                "terms": "Schlafsaal, Dormitorium"
             },
             "building/entrance": {
                 "name": "Eingang",
@@ -1295,6 +1332,22 @@
             "building/garage": {
                 "name": "Garage",
                 "terms": "Garage"
+            },
+            "building/garages": {
+                "name": "Garagen",
+                "terms": "Garagen"
+            },
+            "building/greenhouse": {
+                "name": "Gewächshaus",
+                "terms": "Glashaus, Gewächshaus, Treibhaus"
+            },
+            "building/hospital": {
+                "name": "Krankenhausgebäude",
+                "terms": "Krankenhausgebäude, Klinikgebäude"
+            },
+            "building/hotel": {
+                "name": "Hotelgebäude",
+                "terms": "Hotelgebäude"
             },
             "building/house": {
                 "name": "Haus",
@@ -1308,9 +1361,53 @@
                 "name": "Industriegebäude",
                 "terms": "Industriegebäude"
             },
+            "building/public": {
+                "name": "Öffentliches Gebäude",
+                "terms": "Öffentliches Gebäude"
+            },
             "building/residential": {
                 "name": "Wohngebäude",
                 "terms": "Wohnhaus,Einfamilienhaus,Mehrfamilienhaus"
+            },
+            "building/retail": {
+                "name": "Geschäftsgebäude",
+                "terms": "Geschäftsgebäude, Gebäude mit Läden"
+            },
+            "building/roof": {
+                "name": "Dach",
+                "terms": "Dach"
+            },
+            "building/school": {
+                "name": "Schulgebäude",
+                "terms": "Schulgebäude, Schulhaus"
+            },
+            "building/shed": {
+                "name": "Schuppen",
+                "terms": "Hütte, Baracke"
+            },
+            "building/stable": {
+                "name": "Stall",
+                "terms": "Stall, Stallgebäude"
+            },
+            "building/static_caravan": {
+                "name": "Feststehender Wohnwagen",
+                "terms": "Abgestellter Wohnwagen"
+            },
+            "building/terrace": {
+                "name": "Reihenhäuser",
+                "terms": "Reihenhäuser"
+            },
+            "building/train_station": {
+                "name": "Bahnhof",
+                "terms": "Bahnhof, Haltestelle, Haltepunkt"
+            },
+            "building/university": {
+                "name": "Universitätsgebäude",
+                "terms": "Universitätsgebäude, Campusgebäude"
+            },
+            "building/warehouse": {
+                "name": "Lagerhalle",
+                "terms": "Lagerhaus, Lagergebäude"
             },
             "craft/basket_maker": {
                 "name": "Korbflechter",
@@ -1754,7 +1851,7 @@
             },
             "landuse/commercial": {
                 "name": "Gewerbegebiet",
-                "terms": "Gewerbezone,Gewerbegebiet,gewerblich genutzte Gebäude,Buissenes Park,Büros"
+                "terms": "Gewerbezone,Gewerbegebiet,gewerblich genutzte Gebäude,Business Park,Büros"
             },
             "landuse/construction": {
                 "name": "Baustelle",
@@ -2288,6 +2385,10 @@
                 "name": "Spirituosenladen",
                 "terms": "Alkohol"
             },
+            "shop/art": {
+                "name": "Kunsthandlung",
+                "terms": "Kunsthandlung, Kunstladen"
+            },
             "shop/bakery": {
                 "name": "Bäckerei",
                 "terms": "Bäckerei"
@@ -2303,6 +2404,10 @@
             "shop/bicycle": {
                 "name": "Fahrradladen",
                 "terms": "Fahrradladen, Fahrradgeschäft, Fahrrad-Geschäft, Fahrrad-Handlung"
+            },
+            "shop/bookmaker": {
+                "name": "Buchmacher",
+                "terms": "Buchmacher"
             },
             "shop/books": {
                 "name": "Buchhandlung",
@@ -2423,6 +2528,10 @@
             "shop/locksmith": {
                 "name": "Schlosser",
                 "terms": "Schlosser, Schlüsseldienst"
+            },
+            "shop/lottery": {
+                "name": "Lottoannahmestelle",
+                "terms": "Lottoannahmestelle"
             },
             "shop/mall": {
                 "name": "Einkaufzentrum",

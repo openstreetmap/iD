@@ -134,7 +134,8 @@
             "annotation": "{n} 本のラインを結合",
             "not_eligible": "地物情報がマージできません",
             "not_adjacent": "ラインをマージするには、ラインが結合している必要があります。",
-            "restriction": "\"{relation}\" リレーションに所属しているラインが含まれているため、マージすることができません。"
+            "restriction": "\"{relation}\" リレーションに所属しているラインが含まれているため、マージすることができません。",
+            "incomplete_relation": "地物全体がダウンロードされていないため、マージさせることができません。"
         },
         "move": {
             "title": "移動",
@@ -1284,9 +1285,45 @@
                 "name": "アパート",
                 "terms": "アパート"
             },
+            "building/barn": {
+                "name": "納屋",
+                "terms": "納屋"
+            },
+            "building/bunker": {
+                "name": "掩体壕",
+                "terms": "掩体壕, 掩蔽壕"
+            },
+            "building/cabin": {
+                "name": "ログハウス",
+                "terms": "ログハウス"
+            },
+            "building/cathedral": {
+                "name": "大聖堂",
+                "terms": "大聖堂"
+            },
+            "building/chapel": {
+                "name": "礼拝堂",
+                "terms": "礼拝堂"
+            },
+            "building/church": {
+                "name": "教会",
+                "terms": "教会"
+            },
             "building/commercial": {
                 "name": "オフィスビル",
                 "terms": "オフィスビル"
+            },
+            "building/construction": {
+                "name": "建設中の建物",
+                "terms": "建設中の建物"
+            },
+            "building/detached": {
+                "name": "一戸建て住宅",
+                "terms": "一戸建て住宅"
+            },
+            "building/dormitory": {
+                "name": "寮",
+                "terms": "寮"
             },
             "building/entrance": {
                 "name": "出入口",
@@ -1294,11 +1331,27 @@
             },
             "building/garage": {
                 "name": "車庫",
-                "terms": "車庫,ガレージ"
+                "terms": "車庫, ガレージ"
+            },
+            "building/garages": {
+                "name": "集合車庫",
+                "terms": "集合車庫"
+            },
+            "building/greenhouse": {
+                "name": "温室",
+                "terms": "温室"
+            },
+            "building/hospital": {
+                "name": "病院の建物",
+                "terms": "病院の建物, 病棟"
+            },
+            "building/hotel": {
+                "name": "ホテルの建物",
+                "terms": "ホテルの建物, 宿泊棟"
             },
             "building/house": {
-                "name": "住宅",
-                "terms": "住宅"
+                "name": "連結住宅",
+                "terms": "連結住宅"
             },
             "building/hut": {
                 "name": "小屋",
@@ -1308,9 +1361,53 @@
                 "name": "工場",
                 "terms": "工場"
             },
+            "building/public": {
+                "name": "公共施設",
+                "terms": "公共施設"
+            },
             "building/residential": {
                 "name": "住宅",
                 "terms": "住宅, アパート, マンション"
+            },
+            "building/retail": {
+                "name": "商業施設",
+                "terms": "商業施設, 店舗"
+            },
+            "building/roof": {
+                "name": "屋根",
+                "terms": "屋根, 屋根付きテラス"
+            },
+            "building/school": {
+                "name": "校舎",
+                "terms": "校舎, 学校の建物"
+            },
+            "building/shed": {
+                "name": "格納庫",
+                "terms": "格納庫, 離れ"
+            },
+            "building/stable": {
+                "name": "厩",
+                "terms": "厩, 馬小屋"
+            },
+            "building/static_caravan": {
+                "name": "トレーラーハウス",
+                "terms": "トレーラーハウス"
+            },
+            "building/terrace": {
+                "name": "テラスハウス",
+                "terms": "テラスハウス, 長屋"
+            },
+            "building/train_station": {
+                "name": "駅舎",
+                "terms": "駅舎"
+            },
+            "building/university": {
+                "name": "大学",
+                "terms": "大学, 大学の建物"
+            },
+            "building/warehouse": {
+                "name": "倉庫",
+                "terms": "倉庫, 蔵"
             },
             "craft/basket_maker": {
                 "name": "かご製造所",
@@ -2288,6 +2385,10 @@
                 "name": "酒店",
                 "terms": "酒店, 酒屋"
             },
+            "shop/art": {
+                "name": "美術工芸品店",
+                "terms": "美術工芸品店, 美術品店, アートショップ,工芸品店"
+            },
             "shop/bakery": {
                 "name": "パン屋",
                 "terms": "パン屋, ベーカリー"
@@ -2303,6 +2404,10 @@
             "shop/bicycle": {
                 "name": "自転車店",
                 "terms": "自転車店"
+            },
+            "shop/bookmaker": {
+                "name": "公営競技投票券売り場",
+                "terms": "公営競技投票券売り場, 馬券売り場, 車券売り場, 舟券売り場"
             },
             "shop/books": {
                 "name": "書店",
@@ -2423,6 +2528,10 @@
             "shop/locksmith": {
                 "name": "錠前屋",
                 "terms": "錠前屋"
+            },
+            "shop/lottery": {
+                "name": "宝くじ売り場",
+                "terms": "宝くじ売り場"
             },
             "shop/mall": {
                 "name": "ショッピングセンター",

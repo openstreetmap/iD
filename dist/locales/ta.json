@@ -112,6 +112,7 @@
             "address": {
                 "label": "முகவரி",
                 "placeholders": {
+                    "housename": "வீட்டின் பெயர்",
                     "number": "123",
                     "street": "தெரு",
                     "city": "மாநகரம்"
@@ -137,6 +138,9 @@
             },
             "artwork_type": {
                 "label": "வகை"
+            },
+            "atm": {
+                "label": "ஏ.டி.எம்"
             },
             "barrier": {
                 "label": "வகை"
@@ -206,6 +210,7 @@
                 "label": "வகை"
             },
             "lanes": {
+                "label": "சந்துகள்",
                 "placeholder": "1, 2, 3..."
             },
             "leisure": {
@@ -221,10 +226,14 @@
                 "label": "வகை"
             },
             "maxspeed": {
+                "label": "வேக எல்லை",
                 "placeholder": "40, 50, 60..."
             },
             "name": {
                 "label": "பெயர்"
+            },
+            "natural": {
+                "label": "இயற்கையான"
             },
             "note": {
                 "label": "குறிப்பு"
@@ -346,6 +355,9 @@
             "amenity/bank": {
                 "name": "வங்கி"
             },
+            "amenity/bicycle_parking": {
+                "name": "ஈருருளை நிறுத்தகம்"
+            },
             "amenity/cafe": {
                 "name": "டீக்கடை"
             },
@@ -357,6 +369,12 @@
             },
             "amenity/college": {
                 "name": "கல்லூரி"
+            },
+            "amenity/fire_station": {
+                "name": "தீயணைப்பு நிலையம்"
+            },
+            "amenity/grave_yard": {
+                "name": "இடுகாடு"
             },
             "amenity/hospital": {
                 "name": "மருத்துவமனை"
@@ -378,6 +396,9 @@
             },
             "amenity/police": {
                 "name": "காவல்"
+            },
+            "amenity/post_box": {
+                "name": "அஞ்சல்பெட்டி"
             },
             "amenity/post_office": {
                 "name": "அஞ்சலகம்"
@@ -439,6 +460,9 @@
             "highway/bus_stop": {
                 "name": "பேருந்து நிலையம்"
             },
+            "highway/footway": {
+                "name": "நடைபாதை"
+            },
             "highway/path": {
                 "name": "வழி"
             },
@@ -451,7 +475,13 @@
             "historic/castle": {
                 "name": "கோட்டை"
             },
+            "landuse/construction": {
+                "name": "கட்டுமானம்"
+            },
             "landuse/farm": {
+                "name": "பண்ணை"
+            },
+            "landuse/farmyard": {
                 "name": "பண்ணை"
             },
             "landuse/forest": {
@@ -496,7 +526,13 @@
             "man_made/water_tower": {
                 "name": "தண்ணீர்த் தொட்டி"
             },
+            "natural": {
+                "name": "இயற்கையான"
+            },
             "natural/beach": {
+                "name": "கடற்கரை"
+            },
+            "natural/coastline": {
                 "name": "கடற்கரை"
             },
             "natural/glacier": {
@@ -535,6 +571,9 @@
             "place/city": {
                 "name": "மாநகரம்"
             },
+            "place/island": {
+                "name": "தீவு"
+            },
             "place/town": {
                 "name": "நகரம்"
             },
@@ -564,6 +603,12 @@
             },
             "railway/station": {
                 "name": "இரயில் நிலையம்"
+            },
+            "railway/subway": {
+                "name": "சுரங்கப்பாதை"
+            },
+            "railway/subway_entrance": {
+                "name": "சுரங்கப்பாதை நுழைவுவாயில்"
             },
             "relation": {
                 "name": "தொடர்பு"
@@ -597,6 +642,9 @@
             },
             "shop/shoes": {
                 "name": "காலணியகம்"
+            },
+            "tourism": {
+                "name": "சுற்றுலா"
             },
             "tourism/artwork": {
                 "name": "ஓவியம்"

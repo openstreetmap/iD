@@ -134,7 +134,8 @@
             "annotation": "Spojeno {n} linija.",
             "not_eligible": "Ova svojstva se ne mogu spojiti.",
             "not_adjacent": "Ove se linije ne mogu stopiti u jednu jer nisu spojene.",
-            "restriction": "Ove se linije ne mogu spojiti jer je barem jedna član \"{relation}\" relacije."
+            "restriction": "Ove se linije ne mogu spojiti jer je barem jedna član \"{relation}\" relacije.",
+            "incomplete_relation": "Ove se značajke ne mogu spojiti jer bar jedna od njih nije potpuno preuzeta s Interneta."
         },
         "move": {
             "title": "Premjesti",

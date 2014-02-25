@@ -488,6 +488,9 @@
                 "label": "Vaunun matkustajamäärä",
                 "placeholder": "2, 4, 8..."
             },
+            "aerialway/summer/access": {
+                "label": "Käyttöoikeus kesällä"
+            },
             "aeroway": {
                 "label": "Tyyppi"
             },
@@ -521,6 +524,9 @@
             "building_area": {
                 "label": "Rakennus"
             },
+            "cans": {
+                "label": "Tölkinkeräys"
+            },
             "capacity": {
                 "label": "Paikkamäärä",
                 "placeholder": "50, 100, 200..."
@@ -535,6 +541,9 @@
                     "anticlockwise": "Vastapäivään"
                 }
             },
+            "clothes": {
+                "label": "Vaatekeräys"
+            },
             "collection_times": {
                 "label": "Tyhjennysaika"
             },
@@ -543,6 +552,9 @@
             },
             "country": {
                 "label": "Maa"
+            },
+            "covered": {
+                "label": "Katos"
             },
             "crossing": {
                 "label": "Tyyppi"
@@ -593,6 +605,9 @@
             "generator/type": {
                 "label": "Tyyppi"
             },
+            "glass": {
+                "label": "Lasinkeräys"
+            },
             "highway": {
                 "label": "Tyyppi"
             },
@@ -606,7 +621,7 @@
                 "label": "ICAO"
             },
             "incline": {
-                "label": "Kallista"
+                "label": "Kaltevuus"
             },
             "internet_access": {
                 "label": "Internet-yhteys",
@@ -674,6 +689,9 @@
             "operator": {
                 "label": "Toimija"
             },
+            "paper": {
+                "label": "Paperinkeräys"
+            },
             "park_ride": {
                 "label": "Autoparkki"
             },
@@ -730,7 +748,7 @@
                 "label": "Tyyppi"
             },
             "sac_scale": {
-                "label": "Polun haastavuus"
+                "label": "Haastavuus"
             },
             "service": {
                 "label": "Tyyppi"
@@ -776,7 +794,7 @@
                 "label": "Tyyppi"
             },
             "trail_visibility": {
-                "label": "Polun näkyvyys"
+                "label": "Näkyvyys"
             },
             "tunnel": {
                 "label": "Tunneli"
@@ -1027,6 +1045,10 @@
             },
             "amenity/pub": {
                 "name": "Pubi"
+            },
+            "amenity/recycling": {
+                "name": "Kierrätyspiste",
+                "terms": "kierrättäminen, kierrätys, lajittelu, uudelleenkäyttö, uudelleenkäyttäminen, ympäristö, lajittelupiste, lajitteluasema, jäte, jätteet, roskat, roska, roskikset, roskis, säiliö, roskasäiliö"
             },
             "amenity/restaurant": {
                 "name": "Ravintola"
@@ -1895,7 +1917,7 @@
             },
             "shop/hairdresser": {
                 "name": "Parturi-kampaamo",
-                "terms": "parturi, kampaaja, parturi-kampaamo, hiustenleikkuu, hiukset, hiusliike, hiusmyymälä, hiustenvärjäys, parranajo, parta"
+                "terms": "parturi, kampaaja, kampaamo, parturi-kampaamo, hiustenleikkuu, hiukset, hiusliike, hiusmyymälä, hiustenvärjäys, parranajo, parta"
             },
             "shop/hardware": {
                 "name": "Rautakauppa"

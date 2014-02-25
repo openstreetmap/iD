@@ -332,6 +332,7 @@
     },
     "help": {
         "title": "Aide",
+        "help": "#Aide\n\n Ceci est un éditeur pour [OpenStreetMap](http://www.openstreetmap.org/), la carte du\n monde gratuite et éditable. Vous pouvez l'utiliser pour ajouter ou corriger les données\n dans votre zone, et participer ainsi à la réalisation d'une carte du monde libre de droits.\n\n Les modifications que vous réaliserez seront visibles de tout le monde. Pour commencer\n à éditer, vous devez créer un [compte gratuit sur OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n [iD editor](http://ideditor.com/) est un projet collaboratif dont le [code source est\n disponible sur GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Éditer et sauvegarder⏎\n⏎\nCet éditeur est conçu principalement pour travailler en mode connecté, et vous l'accéder depuis un site Web en ce moment.⏎\n⏎\n### Sélectionner un élément de la carte⏎\n⏎\nPour sélection un élément de la carte, tel qu'une rue ou un point d'intérêt, cliquez sur ce dernier⏎\nsur la carte. Cette action mettra l'élément en surbrillance, et ouvrira le panneau latéral⏎\nqui affiche les propriétés de l'élément. Un menu apparaîtra également sur la carte,⏎\npermettant de poser des actions sur l'élément (telles que le déplacer, repositionner⏎\nses points constituants, etc).\n⏎\nPour sélectionner plusieurs éléments, appuyez sur la touche 'Majuscule'. Puis, cliquez⏎\nun à un sur les éléments à sélectionner. Alternativement, il est possible de dessinez un rectangle⏎\nsur la carte (toujours en appuyant sur 'Majuscule) pour effectuer la sélection multiple.⏎\nles points à sélectionner.⏎\n⏎\n### Enregistrer les modifications⏎\n⏎\nL'éditeur enregistre localement (sur votre ordinateur) toutes les modifications⏎\nque vous effectuez sur les éléments de la carte (les rues, les bâtiments, etc.).⏎\nCes modifications seront envoyées au serveur OpenStreetMap uniquement⏎\nlorsque vous appuierez sur \"Sauvegarder\".⏎\n⏎\nNe vous faites donc pas de souci si vous faites une erreur. Vous pouvez annuler⏎\ntout changement effectué en appuyant sur le bouton d'annulation (la flèche de demi-tour⏎\npointant vers la gauche).⏎\n⏎\nLorsque vous avez terminé un groupe de modifications - par exemple, vous avez⏎\ncomplété une partie de la ville et vous voulez en débuter une nouvelle,⏎\nil suffit d'appuyer sur le bouton \"Sauvegarder\". Vos changements ne seront pas⏎\nenvoyés immédiatement - vous avez l'occasion de réviser le travail effectué⏎\navant de confirmer les changements. ⏎\n⏎\nSi tout semble bon, entrez un commentaire décrivant vos changements⏎\n(par exemple: \"Ajout d'une boulangerie\" ou \"Ajout de commerces du quartier\"),⏎\npuis appuyez à nouveau sur le bouton 'Sauvegarder' (qui, cette fois-ci, apparaîtra\nen bleu dans le panneau latéral). Vos changements seront alors envoyés à⏎\n[OpenStreetMap.org](http://www.openstreetmap.org/), où il seront partagés et rendus⏎\nvisibles à tous les autres utilisateurs.\n⏎\nSi vous ne pouvez pas terminer vos changements en une seule séance, vous pouvez⏎\nfermer la fenêtre de l'éditeur. Vos changements seront enregistrés localement.⏎\nLorsque vous ouvrirez à nouveau l'éditeur, sur le même ordinateur et avec le même⏎\nnavigateur Web, l'éditeur vous proposera de récupérer le travail de la séance précédente.⏎\n",
         "roads": "# Routes\n\nVous pouvez créer, mettre à jour et supprimer des routes à l'aide de l'éditeur. Il peut s'agir de tous types de routes : chemins, autoroutes, pistes cyclables, et plus encore : toute voie régulièrement fréquentée peut être cartographiée.\n\n### Sélection\n\nCliquez sur une route pour la sélectionner. Elle sera alors surlignée et un menu 'outils' apparaîtra sur la carte, ainsi qu'une barre d'état affichant des informations supplémentaires.\n\n### Modification\n\nIl est fréquent que les routes ne soient pas bien alignées avec l'imagerie satellite ou avec les traces GPS. Vous pouvez ajuster et corriger la position des routes.\n\nCliquez d'abord sur la route à modifier. Elle est alors surlignée et des points de contrôle apparaissent qui permettent de corriger sa position. Pour ajouter des points de contrôle, double-cliquez sur un segment de la route sans nœuds.\n\nSi la route est connectée à une autre, mais que la connexion est incorrecte, vous pouvez déplacer un de ses points de contrôle sur la seconde route pour corriger la connexion. Des routes bien connectées sont essentielles pour la carte et pour fournir de bonnes informations d'itinéraire.\n\nVous pouvez également cliquer sur l'outil 'Déplacer' ou appuyer sur le raccourci `M` pour déplacer l'ensemble de la route en une fois, puis cliquer de nouveau une fois pour sauvegarder le déplacement.\n\n### Suppression\n\nSi une route est complètement fausse - c'est-à-dire qu'elle n'apparaît pas sur l'image satellite, et que dans l'idéal, vous avez confirmé qu'elle n'existe pas sur le terrain - vous pouvez la supprimer, ce qui l'enlèvera de la carte. Faites attention lorsque vous supprimez des éléments : comme n'importe quelle autre modification, le résultat sera visible par tout le monde sur la carte. Les photos aériennes sont souvent dépassées et la route est peut-être tout simplement récente.\n\nPour supprimer une route, sélectionnez-la en cliquant dessus, puis cliquez sur l'icône 'Poubelle' ou appuyez sur la touche 'Suppr'.\n\n### Création\n\nVous avez constaté qu'une route de votre connaissance manque à la carte ? Cliquez sur l'icône 'Ligne' en haut à gauche de l'éditeur ou appuyez sur le raccourci `2` pour dessiner une route. \n\nPour commencer le dessin, cliquez sur l'endroit où commence la route. Si elle commence à l'embranchement d'une autre route, commencez le dessin en cliquant à l'endroit de la connexion.\n\nCliquez ensuite régulièrement le long de la route pour ajouter des points, en utilisant l'imagerie satellite comme référence. Si la route que vous dessinez croise une autre route, connectez les deux en cliquant à l'endroit de l'intersection. Lorsque vous avez terminé le dessin, double-cliquez ou appuyez sur 'Entrée'.\n",
         "gps": "# GPS⏎\n⏎\nLes traces GPS sont les données les plus fiables pour OpenStreetMap. ⏎\nCet éditeur connaît les traces au format  -`.gpx`. Vous pouvez enregistrer ce\ntype de traces avec un grand nombre d'applications pour smartphones\nainsi qu'avec certains GPS de randonnées.⏎\n⏎\nPour plus d'informations sur la manière de relever des traces GPS, vous\npouvez consulter le guide [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).⏎\n⏎\nPour utiliser un relevé GPX, il vous suffit de glisser-déposer le fichier GPX\ndirectement sur la carte. S'il est reconnu, il sera ajouté sur la carte sous\nla forme d'une ligne vert clair. Cliquez sur le menu \"Configuration du fond\nde carte\" à gauche pour activer et désactiver l'affichage de la trace, ou\nencore pour centrer le zoom sur la trace.⏎\n⏎\nLes traces GPX ne sont pas directement enregistrée dans OpenStreetMap.⏎\nLe meilleur moyen de les utiliser est de les prendre comme guide pour ajouter⏎\nvous même des informations sur la carte ou bien en les [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create)⏎\npour les fournir aux autres contributeurs⏎\n",
@@ -481,7 +482,8 @@
                 "label": "Accès"
             },
             "aerialway/capacity": {
-                "label": "Capacité (par heure)"
+                "label": "Capacité (par heure)",
+                "placeholder": "500, 2500, 5000..."
             },
             "aerialway/duration": {
                 "label": "Durée (minutes)",
@@ -489,6 +491,10 @@
             },
             "aerialway/heating": {
                 "label": "Chauffé"
+            },
+            "aerialway/occupancy": {
+                "label": "Nombre de places",
+                "placeholder": "2, 4, 8..."
             },
             "aerialway/summer/access": {
                 "label": "Accès (été)"
@@ -716,6 +722,9 @@
             "piste/difficulty": {
                 "label": "Difficulté"
             },
+            "piste/grooming": {
+                "label": "Damage"
+            },
             "piste/type": {
                 "label": "Type"
             },
@@ -786,6 +795,9 @@
                     "cutting": "Tranchée"
                 }
             },
+            "studio_type": {
+                "label": "Type"
+            },
             "supervised": {
                 "label": "Supervisé"
             },
@@ -844,11 +856,36 @@
                 "name": "Adresse",
                 "terms": "Adresse"
             },
+            "aerialway": {
+                "name": "Remontée mécanique"
+            },
             "aerialway/cable_car": {
                 "name": "Téléphérique"
             },
             "aerialway/chair_lift": {
                 "name": "Télésiège"
+            },
+            "aerialway/gondola": {
+                "name": "Gondole"
+            },
+            "aerialway/magic_carpet": {
+                "name": "Bande transporteuse de personnes"
+            },
+            "aerialway/platter": {
+                "name": "Téléski",
+                "terms": "Remonte-pente, tire-fesses, téléski à enrouleurs, téléski à perches débrayables"
+            },
+            "aerialway/pylon": {
+                "name": "Pylône de remontée mécanique"
+            },
+            "aerialway/rope_tow": {
+                "name": "Télécorde"
+            },
+            "aerialway/station": {
+                "name": "Gare de remontée mécanique"
+            },
+            "aerialway/t-bar": {
+                "name": "Téléski bi-place"
             },
             "aeroway": {
                 "name": "Aviation",
@@ -1078,6 +1115,9 @@
                 "name": "Abri",
                 "terms": "Abri"
             },
+            "amenity/studio": {
+                "name": "Studio"
+            },
             "amenity/swimming_pool": {
                 "name": "Piscine",
                 "terms": "Piscine"
@@ -1111,6 +1151,7 @@
                 "terms": "Machine distributrice"
             },
             "amenity/veterinary": {
+                "name": "Vétérinaire",
                 "terms": "Vétérinaire"
             },
             "amenity/waste_basket": {
@@ -1201,6 +1242,15 @@
                 "name": "Résidence",
                 "terms": "Appartements"
             },
+            "building/cathedral": {
+                "name": "Cathédrale"
+            },
+            "building/chapel": {
+                "name": "Chapelle"
+            },
+            "building/church": {
+                "name": "Église"
+            },
             "building/commercial": {
                 "name": "Bâtiment commercial",
                 "terms": "Bâtiment commercial"
@@ -1212,6 +1262,12 @@
             "building/garage": {
                 "name": "Garage",
                 "terms": "Garage"
+            },
+            "building/greenhouse": {
+                "name": "Serre"
+            },
+            "building/hotel": {
+                "name": "Hôtel"
             },
             "building/house": {
                 "name": "Maison",
@@ -1225,9 +1281,24 @@
                 "name": "Bâtiment industriel",
                 "terms": "Bâtiment industriel"
             },
+            "building/public": {
+                "name": "Établissement public"
+            },
             "building/residential": {
                 "name": "Bâtiment résidentiel",
                 "terms": "Bâtiment résidentiel"
+            },
+            "building/school": {
+                "name": "Bâtiment d'enseignement"
+            },
+            "building/stable": {
+                "name": "Étable"
+            },
+            "building/train_station": {
+                "name": "Gare ferroviaire"
+            },
+            "building/university": {
+                "name": "Université"
             },
             "craft/blacksmith": {
                 "name": "Forgeron"
@@ -1448,6 +1519,9 @@
             "highway/residential": {
                 "name": "Route résidentielle",
                 "terms": "Route résidentielle"
+            },
+            "highway/rest_area": {
+                "name": "Aire de repos"
             },
             "highway/road": {
                 "name": "Voie de type inconnu",
@@ -1962,6 +2036,9 @@
                 "name": "Agence de voyage",
                 "terms": "Agence de voyage"
             },
+            "piste": {
+                "name": "Piste de ski"
+            },
             "place": {
                 "name": "Toponymie",
                 "terms": "Lieu"
@@ -2047,6 +2124,9 @@
             "railway/disused": {
                 "name": "Voie ferrée désaffectée",
                 "terms": "Voie ferrée non utilisée"
+            },
+            "railway/funicular": {
+                "name": "Funiculaire"
             },
             "railway/halt": {
                 "name": "Hall de gare",

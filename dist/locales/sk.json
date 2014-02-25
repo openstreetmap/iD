@@ -1284,6 +1284,9 @@
                 "name": "Bytovka",
                 "terms": "Bytovka,obytna budova,panelak,panelák,vežiak,veziak,barak,barák,činžiak,cinziak,apartmany,apartmány"
             },
+            "building/barn": {
+                "name": "Stodola"
+            },
             "building/commercial": {
                 "name": "Komerčná budova",
                 "terms": "Obchody,firmy,firma,predaj,podnik,podniky,kancelarie,kancelárie"

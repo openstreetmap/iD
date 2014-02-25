@@ -41,9 +41,11 @@
             }
         },
         "continue": {
+            "key": "A",
             "title": "Fortsätt",
             "description": "Fortsätt denna linje.",
             "not_eligible": "Ingen linje kan fortsätta här.",
+            "multiple": "Flera linjer kan fortsätta härifrån. För att välja en linje, tryck på tangenten Skift och klicka på den för att välja.",
             "annotation": {
                 "line": "Fortsatte en linje.",
                 "area": "Fortsatt ett område."
@@ -72,15 +74,24 @@
             "not_closed": "Denna kan inte göras rund då den inte är en loop."
         },
         "orthogonalize": {
+            "title": "Räta upp",
+            "description": {
+                "line": "Räta upp hörnen på denna linje.",
+                "area": "Räta upp hörnen på denna ytan."
+            },
+            "key": "S",
             "annotation": {
                 "line": "Gjort hörnen på en linje fyrkantiga.",
                 "area": "Gjort hörnen på ett område fyrkantiga."
-            }
+            },
+            "not_squarish": "Denna kan inte rätas upp då den inte är fyrkantig."
         },
         "straighten": {
             "title": "Räta ut",
             "description": "Räta ut denna linje.",
-            "annotation": "Rätade ut en linje."
+            "key": "S",
+            "annotation": "Rätade ut en linje.",
+            "too_bendy": "Den kan inte rätas upp då den är för böjd."
         },
         "delete": {
             "title": "Ta bort",
@@ -123,7 +134,8 @@
             "annotation": "Sammanfogade {n} linjer.",
             "not_eligible": "Dessa objekt kan inte slås samman.",
             "not_adjacent": "Dessa linjer kan inte slås ihop då dem inte är ihopsatta.",
-            "restriction": "Dessa linjer kan inte slås samman då minst en av dem tillhör relationen \"{relation}\"."
+            "restriction": "Dessa linjer kan inte slås samman då minst en av dem tillhör relationen \"{relation}\".",
+            "incomplete_relation": "Dessa objekt kan inte sammanfogas då åtminstone ett inte hämtats fullständigt."
         },
         "move": {
             "title": "Flytta",
@@ -236,18 +248,24 @@
         "back_tooltip": "Ändra objekt",
         "remove": "Ta bort",
         "search": "Sök",
+        "multiselect": "Välj objekt",
         "unknown": "Okänd",
         "incomplete": "<inte hämtad>",
         "feature_list": "Sök efter egenskaper",
         "edit": "Ändra objekt",
+        "none": "Ingen",
+        "node": "Nod",
         "way": "Väg",
-        "relation": "Relation"
+        "relation": "Relation",
+        "location": "Plats"
     },
     "background": {
         "title": "Bakgrund",
         "description": "Bakgrundsinställningar",
         "percent_brightness": "{opacity}% ljusstyrka",
+        "none": "Ingen",
         "custom": "Anpassa",
+        "fix_misalignment": "Justera bildplacering",
         "reset": "ta bort"
     },
     "restore": {
@@ -297,6 +315,7 @@
         "untagged_area": "Otaggat område",
         "many_deletions": "Du håller på att ta bort {n} objekt. Är du helt säker? Detta tar bort dem för alla som använder openstreetmap.org.",
         "tag_suggests_area": "Taggen {tag} indikerar att detta borde vara ett område istället för en linje",
+        "untagged_tooltip": "Välj en typ som beskriver vad denna {geometry} är.",
         "deprecated_tags": "Borttagna taggar: {tags}"
     },
     "zoom": {
@@ -306,11 +325,15 @@
     "cannot_zoom": "Går ej att zooma ut ytterligare med nuvarande sätt.",
     "gpx": {
         "local_layer": "Lokal gpx-fil",
+        "drag_drop": "Dra och släpp en .gpx-fil på sidan, eller klicka på knappen till höger för att bläddra",
         "zoom": "Zooma till GPX-spår",
         "browse": "Bläddra efter en .gpx-fil"
     },
     "help": {
-        "title": "Hjälp"
+        "title": "Hjälp",
+        "help": "# Hjälp\n\nDetta är en redigerare för [OpenStreetMap](http://www.openstreetmap.org/), den\nfri och redigerbara världskartan. Du kan använda den för att lägga till och uppdatera\ndata i ditt närområde, allt för att ytterligare förbättra en världskarta för alla baserad på öppen källkod och data.\n\nÄndringar du gör i den här kartan kommer att visas för alla som använder\nOpenStreetMap. För att göra en ändring behöver du ett\n[gratis OpenStreetMap-konto](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) är ett samarbetsprojekt med [källkodkod \ntillgänglig på GitHub](https://github.com/openstreetmap/iD).\n",
+        "gps": "# GPS \n\nGPS-data är den mest pålitliga källan för uppgifter till OpenStreetMap. Denna redigerare \nstödjer lokala spår – ”.GPX”-filer på din lokala dator. Du kan skapa \ndenna typ av GPS-spår med ett flertal smartphone-appar samt med\npersonlig GPS-hårdvara. \n\nFör information om hur man skapar en GPS-spårning, läs \n[Kartläggning med en GPS](http://learnosm.org/en/beginner/using-gps/). \n\nFör att använda ett GPX-spår för kartläggning, dra och släpp GPX-filen på \nkartredigeraren. Om den känns igen kommer den att läggas till på kartan som en klargrön \nlinje. Klicka på menyn \"Bakgrundsinställningar\" på höger sida för att aktivera, \navaktivera eller zooma till detta nya GPX-drivna lager. \n\nGPX spår överförs inte direkt till OpenStreetMap - det bästa sättet att \nanvända dem är att rita på kartan, använda den som en guide för de nya objekt som \ndu lägger till, och också [ladda upp dem till OpenStreetMap](http://www.openstreetmap.org/trace/create) \nför att användas av andra.\n",
+        "buildings": "# Byggnader\n\nOpenStreetMap är världens största databas över byggnader. Du kan skapa\noch förbättra denna databas.\n\n### Markering\n\nDu kan markera en byggnad genom att klicka på dess kant. Detta kommer att markera \nbyggnaden och öppna en litet verktygsmeny och ett sidofält som visar mer information\nom byggnaden.\n\n### Modifiering\n\nIbland är byggnader felaktigt placerade eller har felaktiga taggar.\n\nFör att flytta en hel byggnad, markera den och klicka sedan på \"Flytta\"-verktyget. flytta\nmus för att flytta byggnaden, och klicka när den är korrekt placerad.\n\nFör att fixa den specifika formen av en byggnad, klicka och dra noderna som bildar\nramen till bättre platser.\n\n### Skapa\n\nEn av de viktigaste frågorna att tänka på vid tilläggning av byggnader till kartan är att\nOpenStreetMap registrerar byggnader både som form och punkt. Tumregeln\när att _kartlägga en byggnad som en form när möjligt_ och kartlägg företag, bostäder,\nfacilitet, och andra saker finns i byggandena som punkter placerade\ninuti byggnadernas ram.\n\nBörja rita en byggnad som en ram genom att klicka på knappen \"område\" högst upp till vänster\ngränssnittet, och avsluta det antingen genom att trycka på \"Retur\" på tangentbordet\neller genom att klicka på den första ritade noden för att stänga formen.\n\n### Radering\n\nOm en byggnad är helt fel – du kan se att den inte finns med i någon satellitbild\noch helst har bekräftat lokalt att det inte finns – kan du ta bort\nden, vilket tar bort det från kartan. Var försiktig när du tar bort objekt –\nlikt alla ändringar kommer resultatet ses av alla och satellitbilder\när ofta föråldrad, så byggnaden kan helt enkelt vara nybyggd.\n\nDu kan ta bort en byggnad genom att klicka på den för att markera den och sedan klicka på\nikonen papperskorg eller trycka på \"Delete\"-tangenten.\n"
     },
     "intro": {
         "navigation": {
@@ -344,6 +367,7 @@
         },
         "lines": {
             "title": "Linjer",
+            "add": "Linjer används för att representera objekt så som vägar, järnvägar och floder. **Klicka på knappen Linje för att lägga till en ny linje.***",
             "start": "**Påbörja linjen genom att klicka på slutet av vägen.**",
             "intersect": "Klicka för att lägga till fler punkter på linjen (vägen). Du kan flytta kartan under tiden du ritar. Vägar och många andra typer av linjer är en del av ett större nät med linjer. Det är därför viktigt att linjer blir korrekt anslutna till varandra för att exempelvis körinstruktioner ska fungera.**Klicka på Flower Street för att skapa en anslutning mellan de två linjerna (vägarna).**",
             "finish": "Linjer avslutas genom att klicka på slutpunkten en gång till.**Avsluta linjen.**",
@@ -372,11 +396,15 @@
             },
             "category-road": {
                 "name": "Väg"
+            },
+            "category-route": {
+                "name": "Rutt"
             }
         },
         "fields": {
             "access": {
                 "label": "Tillgång",
+                "placeholder": "Okänt",
                 "types": {
                     "access": "Generell",
                     "foot": "Fotgängare",
@@ -437,6 +465,9 @@
                 "label": "Typ"
             },
             "bicycle_parking": {
+                "label": "Typ"
+            },
+            "boundary": {
                 "label": "Typ"
             },
             "building": {
@@ -552,7 +583,8 @@
                 "placeholder": "50, 70, 90..."
             },
             "name": {
-                "label": "Namn"
+                "label": "Namn",
+                "placeholder": "Vanligt namn (om något)"
             },
             "natural": {
                 "label": "Natur"
@@ -600,6 +632,9 @@
             "ref": {
                 "label": "Referens"
             },
+            "relation": {
+                "label": "Typ"
+            },
             "religion": {
                 "label": "Religion",
                 "options": {
@@ -611,6 +646,15 @@
                     "shinto": "Shintoism",
                     "taoist": "Taoism"
                 }
+            },
+            "restriction": {
+                "label": "Typ"
+            },
+            "route": {
+                "label": "Typ"
+            },
+            "route_master": {
+                "label": "Typ"
             },
             "sac_scale": {
                 "label": "Svårighetsgrad"
@@ -632,6 +676,7 @@
             },
             "structure": {
                 "label": "Struktur",
+                "placeholder": "Okänt",
                 "options": {
                     "bridge": "Bro",
                     "tunnel": "Tunnel",
@@ -681,11 +726,16 @@
             }
         },
         "presets": {
+            "address": {
+                "name": "Adress",
+                "terms": "Adress, husnummer, destination, gatuadress, postnummer, postort"
+            },
             "aeroway": {
                 "name": "Flygbana"
             },
             "aeroway/aerodrome": {
-                "name": "Flygplats"
+                "name": "Flygplats",
+                "terms": "flygplats, flygfält, flyghamn, aerodrom, landningsplats, lufthamn"
             },
             "aeroway/apron": {
                 "name": "Parkering av flygplan (Apron)"
@@ -719,7 +769,8 @@
                 "name": "Bank"
             },
             "amenity/bar": {
-                "name": "Bar"
+                "name": "Bar",
+                "terms": "Bar, krog, servering, matställe, pub, cocktailsalong, saloon"
             },
             "amenity/bench": {
                 "name": "Bänk"
@@ -735,6 +786,9 @@
             },
             "amenity/car_rental": {
                 "name": "Biluthyrning"
+            },
+            "amenity/car_sharing": {
+                "name": "Bilpool"
             },
             "amenity/car_wash": {
                 "name": "Biltvätt"
@@ -774,6 +828,9 @@
             "amenity/hospital": {
                 "name": "Sjukhus"
             },
+            "amenity/kindergarten": {
+                "name": "Förskola"
+            },
             "amenity/library": {
                 "name": "Bibliotek"
             },
@@ -785,6 +842,9 @@
             },
             "amenity/place_of_worship": {
                 "name": "Plats för tillbedjan"
+            },
+            "amenity/place_of_worship/buddhist": {
+                "name": "Buddhisttempel"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Kyrka"
@@ -815,6 +875,9 @@
             },
             "amenity/swimming_pool": {
                 "name": "Simbassäng"
+            },
+            "amenity/taxi": {
+                "name": "Taxihållplats"
             },
             "amenity/telephone": {
                 "name": "Telefon"
@@ -900,8 +963,14 @@
             "building/entrance": {
                 "name": "Entré"
             },
+            "building/garage": {
+                "name": "Garage"
+            },
             "building/house": {
                 "name": "Hus"
+            },
+            "building/industrial": {
+                "name": "Industribyggnad"
             },
             "building/residential": {
                 "name": "Bostadshus",
@@ -1112,6 +1181,9 @@
             "leisure": {
                 "name": "Nöje"
             },
+            "leisure/dog_park": {
+                "name": "Hundpark"
+            },
             "leisure/garden": {
                 "name": "Trädgård"
             },
@@ -1163,20 +1235,35 @@
             "man_made": {
                 "name": "Människoskapad"
             },
+            "man_made/breakwater": {
+                "name": "Vågbrytare"
+            },
+            "man_made/cutline": {
+                "name": "Snittlinje"
+            },
             "man_made/lighthouse": {
                 "name": "Fyr"
             },
             "man_made/pier": {
                 "name": "Pir"
             },
+            "man_made/pipeline": {
+                "name": "Pipeline"
+            },
             "man_made/survey_point": {
                 "name": "Trianguleringspunkt"
+            },
+            "man_made/tower": {
+                "name": "Torn"
             },
             "man_made/wastewater_plant": {
                 "name": "Avloppsreningsverk"
             },
             "man_made/water_tower": {
                 "name": "Vattentorn"
+            },
+            "man_made/water_well": {
+                "name": "Brunn"
             },
             "man_made/water_works": {
                 "name": "Vattenverk"
@@ -1322,6 +1409,9 @@
             "relation": {
                 "name": "Relation"
             },
+            "route/ferry": {
+                "name": "Färjerutt"
+            },
             "shop": {
                 "name": "Affär"
             },
@@ -1387,6 +1477,9 @@
             },
             "shop/electronics": {
                 "name": "Elektronikbutik"
+            },
+            "shop/farm": {
+                "name": "Gårdsbutik"
             },
             "shop/fishmonger": {
                 "name": "Fiskhandlare"
@@ -1528,6 +1621,57 @@
             },
             "tourism/zoo": {
                 "name": "Zoo"
+            },
+            "type/boundary": {
+                "name": "Gräns"
+            },
+            "type/boundary/administrative": {
+                "name": "Administrativ gräns"
+            },
+            "type/multipolygon": {
+                "name": "Multipolygon"
+            },
+            "type/restriction": {
+                "name": "Restriktion"
+            },
+            "type/route": {
+                "name": "Rutt"
+            },
+            "type/route/bicycle": {
+                "name": "cykelrutt"
+            },
+            "type/route/bus": {
+                "name": "Bussrutt"
+            },
+            "type/route/detour": {
+                "name": "Alternativ rutt"
+            },
+            "type/route/ferry": {
+                "name": "Färjerutt"
+            },
+            "type/route/foot": {
+                "name": "Vandringsrutt"
+            },
+            "type/route/pipeline": {
+                "name": "Rörledningsrutt"
+            },
+            "type/route/power": {
+                "name": "Kraftledningsrutt"
+            },
+            "type/route/road": {
+                "name": "Vägrutt"
+            },
+            "type/route/train": {
+                "name": "Tågrutt"
+            },
+            "type/route/tram": {
+                "name": "Spårvagnsrutt"
+            },
+            "type/route_master": {
+                "name": "Huvudrutt"
+            },
+            "vertex": {
+                "name": "Annat"
             },
             "waterway": {
                 "name": "Vattenväg"
