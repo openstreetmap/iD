@@ -314,28 +314,29 @@ describe("iD.History", function () {
             expect(history.undoAnnotation()).to.eql("Added a point.");
             expect(history.imageryUsed()).to.eql(["Bing"]);
             expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(history.difference().created().length).to.eql(1);
         });
 
         it("restores from v2 JSON (modification)", function() {
             var json = {
                 "version": 2,
                 "entities": [
-                    {"loc": [1, 2], "id": "n-1"},
-                    {"loc": [2, 3], "id": "n-1", "v": 1}
+                    {"loc": [2, 3], "id": "n1", "v": 1}
                 ],
                 "stack": [
                     {},
-                    {"modified": ["n-1v0"], "imageryUsed": ["Bing"], "annotation": "Added a point."},
-                    {"modified": ["n-1v1"], "imageryUsed": ["Bing"], "annotation": "Moved a point."}
+                    {"modified": ["n1v1"], "imageryUsed": ["Bing"], "annotation": "Moved a point."}
                 ],
                 "nextIDs": {"node": -2, "way": -1, "relation": -1},
-                "index": 2
+                "index": 1
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [2, 3], v: 1}));
+            history.merge([iD.Node({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
+            expect(history.graph().entity('n1')).to.eql(iD.Node({id: 'n1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql("Moved a point.");
             expect(history.imageryUsed()).to.eql(["Bing"]);
             expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(history.difference().modified().length).to.eql(1);
         });
 
         it("restores from v2 JSON (deletion)", function() {
@@ -350,11 +351,12 @@ describe("iD.History", function () {
                 "index": 1
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge([iD.Node({id: 'n1'})]);
+            history.merge([iD.Node({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql("Deleted a point.");
             expect(history.imageryUsed()).to.eql(["Bing"]);
             expect(iD.Entity.id.next).to.eql({node: -1, way: -2, relation: -3});
+            expect(history.difference().deleted().length).to.eql(1);
         });
 
         it("restores from v3 JSON (creation)", function() {
@@ -383,20 +385,18 @@ describe("iD.History", function () {
             var json = {
                 "version": 3,
                 "entities": [
-                    {"loc": [1, 2], "id": "n-1"},
-                    {"loc": [2, 3], "id": "n-1", "v": 1}
+                    {"loc": [2, 3], "id": "n1", "v": 1}
                 ],
-                "baseEntities": [{"loc": [1, 2], "id": "n-1"}],
+                "baseEntities": [{"loc": [1, 2], "id": "n1"}],
                 "stack": [
                     {},
-                    {"modified": ["n-1v0"], "imageryUsed": ["Bing"], "annotation": "Added a point."},
-                    {"modified": ["n-1v1"], "imageryUsed": ["Bing"], "annotation": "Moved a point."}
+                    {"modified": ["n1v1"], "imageryUsed": ["Bing"], "annotation": "Moved a point."}
                 ],
                 "nextIDs": {"node": -2, "way": -1, "relation": -1},
-                "index": 2
+                "index": 1
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [2, 3], v: 1}));
+            expect(history.graph().entity('n1')).to.eql(iD.Node({id: 'n1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql("Moved a point.");
             expect(history.imageryUsed()).to.eql(["Bing"]);
             expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
