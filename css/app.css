@@ -1512,14 +1512,13 @@ input[type=number] {
 
 .form-field .addr-number {
     width: 33.3333%;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
+    border: 0;
     border-radius: 0;
 }
 
 .form-field .addr-street {
     width: 66.6666%;
+    border-top: 0;
     border-right: 0;
     border-bottom: 0;
     border-radius: 0;
