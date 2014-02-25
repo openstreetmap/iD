@@ -189,10 +189,12 @@ iD.History = function(context) {
                     } else {
                         deleted.push(id);
                     }
+
                     // make sure that the originals of changed or deleted entities get merged
                     // into the base of the stack after restoring the data from JSON.
-                    if (id in base.graph.entities && !base.graph.entities.hasOwnProperty(id))
+                    if (id in base.graph.entities) {
                         baseEntities[id] = base.graph.entities[id];
+                    }
                 });
 
                 var x = {};
