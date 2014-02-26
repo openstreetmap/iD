@@ -1,6 +1,6 @@
 {
   "name": "iD",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "description": "a new editor for openstreetmap",
   "main": "iD.js",
   "directories": {

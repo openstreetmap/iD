@@ -1,3 +1,13 @@
+## 1.3.7
+
+* Added building presets
+* Improve how tags are merged when merging to a multipolygon
+* Disable merge operation if at least one relation is incomplete
+* Add shop=bookmaker, shop=lottery, and shop=art presets
+* Use https URLs where supported
+* Fix duplicate/missing objects after restoring data from localStorage
+* Remove addr:housename field from address preset
+
 ## 1.3.6
 
 * More protection against relation loops (#2096)
