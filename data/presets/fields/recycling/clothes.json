@@ -1,5 +1,5 @@
 {
-    "key": "clothes",
+    "key": "recycling:clothes",
     "type": "check",
     "label": "Accepts Clothes"
 }

@@ -1,10 +1,10 @@
 {
     "icon": "recycling",
     "fields": [
-        "cans",
-        "glass",
-        "paper",
-        "clothes"
+        "recycling/cans",
+        "recycling/glass",
+        "recycling/paper",
+        "recycling/clothes"
     ],
     "geometry": [
         "point",

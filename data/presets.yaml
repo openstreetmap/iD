@@ -53,7 +53,6 @@ en:
       address: 
         label: Address
         placeholders: 
-          housename: Housename
           number: "123"
           street: Street
           city: City
@@ -101,8 +100,6 @@ en:
         label: Building
       building_area: 
         label: Building
-      cans: 
-        label: Accepts Cans
       capacity: 
         label: Capacity
         placeholder: "50, 100, 200..."
@@ -113,8 +110,6 @@ en:
         options: 
           clockwise: Clockwise
           anticlockwise: Counterclockwise
-      clothes: 
-        label: Accepts Clothes
       collection_times: 
         label: Collection Times
       construction: 
@@ -158,8 +153,6 @@ en:
         label: Source
       generator/type: 
         label: Type
-      glass: 
-        label: Accepts Glass
       golf_hole: 
         label: Reference
         placeholder: "Hole number (1-18)"
@@ -226,8 +219,6 @@ en:
         label: Hours
       operator: 
         label: Operator
-      paper: 
-        label: Accepts Paper
       par: 
         label: Par
         placeholder: "3, 4, 5..."
@@ -250,6 +241,14 @@ en:
         label: Type
       railway: 
         label: Type
+      recycling/cans: 
+        label: Accepts Cans
+      recycling/clothes: 
+        label: Accepts Clothes
+      recycling/glass: 
+        label: Accepts Glass
+      recycling/paper: 
+        label: Accepts Paper
       ref: 
         label: Reference
       relation: 

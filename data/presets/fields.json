@@ -60,7 +60,6 @@
     "address": {
         "type": "address",
         "keys": [
-            "addr:housename",
             "addr:housenumber",
             "addr:street",
             "addr:city",
@@ -71,7 +70,6 @@
         "label": "Address",
         "strings": {
             "placeholders": {
-                "housename": "Housename",
                 "number": "123",
                 "street": "Street",
                 "city": "City",
@@ -194,11 +192,6 @@
         "geometry": "area",
         "label": "Building"
     },
-    "cans": {
-        "key": "cans",
-        "type": "check",
-        "label": "Accepts Cans"
-    },
     "capacity": {
         "key": "capacity",
         "type": "number",
@@ -241,11 +234,6 @@
                 "anticlockwise": "Counterclockwise"
             }
         }
-    },
-    "clothes": {
-        "key": "clothes",
-        "type": "check",
-        "label": "Accepts Clothes"
     },
     "collection_times": {
         "key": "collection_times",
@@ -367,11 +355,6 @@
         "key": "generator:type",
         "type": "combo",
         "label": "Type"
-    },
-    "glass": {
-        "key": "glass",
-        "type": "check",
-        "label": "Accepts Glass"
     },
     "golf_hole": {
         "key": "ref",
@@ -533,11 +516,6 @@
         "type": "text",
         "label": "Operator"
     },
-    "paper": {
-        "key": "paper",
-        "type": "check",
-        "label": "Accepts Paper"
-    },
     "par": {
         "key": "par",
         "type": "number",
@@ -600,6 +578,26 @@
         "key": "railway",
         "type": "typeCombo",
         "label": "Type"
+    },
+    "recycling/cans": {
+        "key": "recycling:cans",
+        "type": "check",
+        "label": "Accepts Cans"
+    },
+    "recycling/clothes": {
+        "key": "recycling:clothes",
+        "type": "check",
+        "label": "Accepts Clothes"
+    },
+    "recycling/glass": {
+        "key": "recycling:glass",
+        "type": "check",
+        "label": "Accepts Glass"
+    },
+    "recycling/paper": {
+        "key": "recycling:paper",
+        "type": "check",
+        "label": "Accepts Paper"
     },
     "ref": {
         "key": "ref",

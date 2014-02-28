@@ -1,5 +1,5 @@
 {
-    "key": "paper",
+    "key": "recycling:paper",
     "type": "check",
     "label": "Accepts Paper"
 }
