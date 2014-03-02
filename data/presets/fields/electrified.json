@@ -1,0 +1,11 @@
+{
+    "key": "electrified",
+    "type": "combo",
+    "label": "Electrification",
+    "options": [
+      "contact_line",
+      "rail",
+      "yes",
+      "no"
+    ]
+}

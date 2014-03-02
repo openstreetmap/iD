@@ -1,3 +1,40 @@
+## 1.3.7
+
+* Added building presets
+* Improve how tags are merged when merging to a multipolygon
+* Disable merge operation if at least one relation is incomplete
+* Add shop=bookmaker, shop=lottery, and shop=art presets
+* Use https URLs where supported
+* Fix duplicate/missing objects after restoring data from localStorage
+* Remove addr:housename field from address preset
+
+## 1.3.6
+
+* More protection against relation loops (#2096)
+* Fix freeze when using Clinic preset (#2102)
+* Allow rotating closed multipolygon members (#1718)
+* Bump threshold for Orthogonalize to 12 degrees
+* Added social_facility presets (#2109)
+
+## 1.3.5
+
+* Smoother and faster panning, zooming, and tooltips
+* Fix bug relating to deleted nodes outside the viewport (#2085)
+* Ensure "New Relation..." is always available (#2066)
+* Add area=yes when necessary (#2069)
+* Suppress radial menu when clicking warning (#2035)
+* Protect against relation loops (#2072)
+* Correct arrow direction on drawn segment (#2078)
+* Don't upload tags with empty values (#1894)
+* Add support for ids and locations as search input (#2056)
+* Sort relation suggestions most recent first (#2052)
+* Fix for Safari selection bug in combo box (#2051)
+* Fix midpoint missing after undoing split (#2040)
+* Don't remove addr:housenumber when changing address preset (#2047)
+* Many preset additions: clock, rest area, service area, veterinary, funiculars, narrow gauge railways,
+  gauge field, electrified field, tunnel field, crafts, doctor, dentist, clinic, studio, aerialways,
+  and pistes.
+
 ## 1.3.4
 
 * Replace TIGER 2012 layer with next-generation TIGER 2013 layer (#2010)

@@ -42,10 +42,7 @@ iD.History = function(context) {
         },
 
         merge: function(entities, extent) {
-            for (var i = 0; i < stack.length; i++) {
-                stack[i].graph.rebase(entities);
-            }
-
+            stack[0].graph.rebase(entities, _.pluck(stack, 'graph'));
             tree.rebase(entities);
 
             dispatch.change(undefined, extent);
@@ -177,7 +174,9 @@ iD.History = function(context) {
         toJSON: function() {
             if (stack.length <= 1) return;
 
-            var allEntities = {};
+            var allEntities = {},
+                baseEntities = {},
+                base = stack[0];
 
             var s = stack.map(function(i) {
                 var modified = [], deleted = [];
@@ -189,6 +188,12 @@ iD.History = function(context) {
                         modified.push(key);
                     } else {
                         deleted.push(id);
+                    }
+
+                    // make sure that the originals of changed or deleted entities get merged
+                    // into the base of the stack after restoring the data from JSON.
+                    if (id in base.graph.entities) {
+                        baseEntities[id] = base.graph.entities[id];
                     }
                 });
 
@@ -203,8 +208,9 @@ iD.History = function(context) {
             });
 
             return JSON.stringify({
-                version: 2,
+                version: 3,
                 entities: _.values(allEntities),
+                baseEntities: _.values(baseEntities),
                 stack: s,
                 nextIDs: iD.Entity.id.next,
                 index: index
@@ -217,12 +223,21 @@ iD.History = function(context) {
             iD.Entity.id.next = h.nextIDs;
             index = h.index;
 
-            if (h.version === 2) {
+            if (h.version === 2 || h.version === 3) {
                 var allEntities = {};
 
                 h.entities.forEach(function(entity) {
                     allEntities[iD.Entity.key(entity)] = iD.Entity(entity);
                 });
+
+                if (h.version === 3) {
+                    // this merges originals for changed entities into the base of
+                    // the stack even if the current stack doesn't have them (for
+                    // example when iD has been restarted in a different region)
+                    var baseEntities = h.baseEntities.map(iD.Entity);
+                    stack[0].graph.rebase(baseEntities, _.pluck(stack, 'graph'));
+                    tree.rebase(baseEntities);
+                }
 
                 stack = h.stack.map(function(d) {
                     var entities = {}, entity;
@@ -260,7 +275,6 @@ iD.History = function(context) {
                 });
             }
 
-            stack[0].graph.inherited = false;
             dispatch.change();
 
             return history;
@@ -296,8 +310,6 @@ iD.History = function(context) {
 
             var json = context.storage(getKey('saved_history'));
             if (json) history.fromJSON(json);
-
-            context.storage(getKey('saved_history', null));
         },
 
         _getKey: getKey

@@ -1,0 +1,16 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "highway": "services"
+    },
+    "terms": [
+        "services",
+        "travel plaza",
+        "service station"
+    ],
+    "name": "Service Area"
+}

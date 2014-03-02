@@ -81,14 +81,23 @@ iD.presets.Preset = function(id, preset, fields) {
 
     var applyTags = preset.addTags || preset.tags;
     preset.applyTags = function(tags, geometry) {
+        var k;
+
         tags = _.clone(tags);
 
-        for (var k in applyTags) {
+        for (k in applyTags) {
             if (applyTags[k] === '*') {
                 tags[k] = 'yes';
             } else {
                 tags[k] = applyTags[k];
             }
+        }
+
+        // Add area=yes if necessary
+        for (k in applyTags) {
+            if (geometry === 'area' && !(k in iD.areaKeys))
+                tags.area = 'yes';
+            break;
         }
 
         for (var f in preset.fields) {

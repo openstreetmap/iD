@@ -1,6 +1,6 @@
 # iD - friendly JavaScript editor for [OpenStreetMap](http://www.openstreetmap.org/)
 
-[![Build Status](https://secure.travis-ci.org/systemed/iD.png)](https://travis-ci.org/systemed/iD)
+[![Build Status](https://secure.travis-ci.org/openstreetmap/iD.png)](https://travis-ci.org/openstreetmap/iD)
 
 ## Basics
 
@@ -13,10 +13,10 @@
 
 * [Try out the latest stable release](http://openstreetmap.us/iD/release)
 * [Read up on Contributing and the code style of iD](CONTRIBUTING.md)
-* See [open issues in the issue tracker](https://github.com/systemed/iD/issues?state=open) if you're looking for something to do
-* [Translate!](https://github.com/systemed/iD/blob/master/CONTRIBUTING.md#translating)
+* See [open issues in the issue tracker](https://github.com/openstreetmap/iD/issues?state=open) if you're looking for something to do
+* [Translate!](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
 
-[![translation chart](https://www.transifex.com/projects/p/id-editor/chart/image_png)](https://github.com/systemed/iD/blob/master/CONTRIBUTING.md#translating)
+[![translation chart](https://www.transifex.com/projects/p/id-editor/chart/image_png)](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
 ## Installation
 
 To run the current development version, fork this project and serve it locally.

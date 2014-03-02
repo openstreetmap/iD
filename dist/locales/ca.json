@@ -134,7 +134,8 @@
             "annotation": "Heu fusionat {n} línies.",
             "not_eligible": "Aquestes característiques no poden ser fusionades.",
             "not_adjacent": "Aquestes línies no poden ser com fusionades ja que no estàn connectades.",
-            "restriction": "Aquestes línies no poden ser fusionades perquè com a mínim una d'elles és membre de la relació \"{relation}\""
+            "restriction": "Aquestes línies no poden ser fusionades perquè com a mínim una d'elles és membre de la relació \"{relation}\"",
+            "incomplete_relation": "Aquestes característiques no poden ser fusionades perquè com a mínim una no s'ha descarregat del tot."
         },
         "move": {
             "title": "Mou",
@@ -252,7 +253,11 @@
         "incomplete": "<no baixat>",
         "feature_list": "Cerca característiques",
         "edit": "Editar la característica",
-        "none": "Cap"
+        "none": "Cap",
+        "node": "Node",
+        "way": "Via",
+        "relation": "Relació",
+        "location": "Ubicació"
     },
     "background": {
         "title": "Fons",
@@ -312,6 +317,7 @@
         "untagged_area": "Àrea sense etiquetar",
         "many_deletions": "Esteu eliminant {n} objectes. Esteu segurs que voleu fer-ho? Això els eliminarà dels mapa que tothom veu a openstreetmap.org",
         "tag_suggests_area": "L'etiqueta {tag} suggereix que la línia hauria de ser una àrea, però no és una àrea",
+        "untagged_tooltip": "Seleccioneu un tipus de característica que descrigui el que és aquesta {geometry}.",
         "deprecated_tags": "Etiquetes obsoletes : {tags}"
     },
     "zoom": {
@@ -327,7 +333,7 @@
     },
     "help": {
         "title": "Ajuda",
-        "help": "# Ajuda\n\nAixò és un editor per al [OpenStreetMap](http://www.openstreetmap.org/), el mapa lliure i editable del món. Podeu utilitzar-lo per afegir i actualitzar\nles dades a la vostra àrea, contribuint així a fer un mapa de codi obert,  amb dades lliures del món i\nmillor per a tothom.\n\nLes edicions que feu en aquest mapa seran visibles per tothom que faci servir OpenStreetMap. per tal de començar a editar, necessitareu un\n[compte gratuït d'OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n L'[Editor iD](http://ideditor.com/) és un projecte cooperatiu que té el [codi font\ndisponible a GitHub](https://github.com/systemed/iD).\n",
+        "help": "# Ajuda\n\nAixò és un editor per al [OpenStreetMap](http://www.openstreetmap.org/), el mapa lliure i editable del món. Podeu utilitzar-lo per afegir i actualitzar\nles dades a la vostra àrea, contibuint així a fer un mapa de codi obert i amb dades lliures del món\nmillor per a tothom.\n\nLes edicions que feu en aquest mapa seran visibles per tothom que faci servir OpenStreetMap. per tal de començar a editar, necessitareu un\n[compte gratuït d'OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n L'[Editor iD](http://ideditor.com/) iés un projecte cooperatiu que té el [codi font\ndisponible a GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Edició i desat\n\nAquest editor està dissenyat per treballar principalment en línia, i hi has accedit mitjançant una pàgina web.\n\n### Selecció de característiques\n\nPer selecionar una característica del mapa, com ara una carretera o un punt d'interès, clica-hi a sobre. Això ressaltarà la característica, obrirà un panell amb els detalls sobre aquesta, i un menú amb les coses que hi pots fer .\n\nPots seleccionar múltiples característiques, prement la tecla 'Shift' i clicant-les per separat, o bé clicant i arrossegant el cursor. Això seleccionarà totes les característiques que englobi el requadre que es dibuixarà i permetrà modificar totes les característiques seleccionades en un sol cop.\n\n### Desant les edicions\n\nQuan facis canvis com ara editar carreteres, edificis, o llocs, aquests canvis es guarden localment fins que els desis al servidor. No et preocupis si comets algun error- pots desfer els canvis clicant el botó de desfer, i pots refer els canvis clicant el botó de refer.\n\nClica 'Desa' per acabar un grup d'edicions - per exemple, si has acabat de delimitar l'àrea d'una ciutat i vols començar a fer-ne una altra. Tindràs la oportunitat de revisar la feina feta,\ni l'editor proporcionarà suggeriments que et podràn ajudar\ni també mostrarà alertes si alguna cosa no està del tot bé als teus canvis.\n\nSi tot sembla correcte, pots escriure un breu comentari explicant el canvis\nque has fet, i clicar desa un altre cop per publicar els canvis\na [OpenStreetMap.org](http://www.openstreetmap.org/), on seràn visibles\nper a tots els altres usuaris i disponibles per a altres editors per refer-los o bé millorar-los.\n\nSi no pots acabar les teves edicions en una sessió, pots sortir de la finestra d'edició i tornar més tard (al mateix navegador i ordinador), i l'aplicació d'edició\npreguntarà si vols restaurar els canvis anteriors.\n",
         "roads": "# Carreteres\n\nPots crear, ajustar i eliminar carreteres amb aquest editor. Les carreteres poden ser\nde molts tipus: pistes, autovies, camins, carrils bici, i molts més - tots els segments\nmés comuns han de ser cartografiables.\n\n### Selecció\n\nClica a la carretera per seleccionar-la. Al fer això els seus contorns es faran visibles, \ncom també un petit menú d'eines i una barra lateral que mostrarà més informació\nsobre la carretera.\n\n### Modificació\n\nDe vegades veuràs carreteres que no estan alineades amb la imatge del darrere \no amb una traça de GPS. Podeu ajustar aquestes carreteres per tal que estiguin al lloc\ncorrecte.\n\nPrimer clica a la carretera que vols canviar. Això la ressaltarà i mostrarà els punts de control\nque pots arrossegar a les ubicacions desitjades. Si el que\nvols és afegir nous punts per obtenir un grau de detall més alt, fes doble clic en una part de la carretera sense cap punt, i se'n afegirà un.\n\nSi la carretera es connecta amb una altra, però no ho reflecteix al mapa, \npots arrossegar un dels punts de control cap a l'altre carretera \nper tal d'unir-les. Fer que les carreteres es connectin és molt important \nper al mapa i essencial per proveir direccions per a la conducció.\n\nTambé pots clicar l'eina «Moure» o prémer la tecla «M» per moure la carretera sencera, tota de cop, i llavors clicar altra vegada per guardar aquest moviment.\n\n### Eliminació\n\nSi una carretera està totalment malament -pots apreciar que no existeix a la imatge per satèl·lit\ni a més a més, els veïns ens han confirmat que no existeix - la pots eliminar, cosa que la treurà del mapa. Vés amb molt de compte a l'hora d'eliminar característiques -\ncom ara altres edicions; els resultats podran ser vistos per tothom i moltes vegades la imatgeria per satèl·lit no està actualitzada, per tant la carretera es pot haver estat construida recentment.\n\nPots eliminar una carretera clicant-la, i llavors clicant la icona de la paperera o bé prement la tecla «Suprimir».\n\n### Creació\n\nHas trobat que en algun lloc hi hauria d'haver una carretera però no hi és? Clica la icona «Línia»\nal marge superior esquerre de la zona del mapa o bé prem la tecla «2» per començar a dibuixar\nuna línia.\n\nClica a l'inici de la carretera al mapa per començar a dibuixar. Si la carretera comença amb una bifurcació en una carretera existent, cliqueu al lloc a on connecten.\n\nA continuació clica a diferents punts al llarg de la carretera per tal que segueixi el traçat correcte, d'acord  amb la imatge del satèl·lit o la traça del GPS. Si la carretera que estàs dibuixant s'encreua amb una altra carretera, connecta-les clicant al punt d'intersecció. Quan acabis el dibuix, fes doble clic o prem «Retorn» del teclat.\n",
         "gps": "# GPS\n\nLes dades de GPS són la font més fiable de dades per a l'OpenStreetMap. Aquest editor és compatible amb les taces locals - fitxers`.gpx`al teu ordinador local. Pots recollir \naquest tipus de traça GPS amb algunes aplicacions per a smartphones com també \ndispositius personals de GPS.\n\nPer a més informació sobre com recollir dades amb GPS, llegeix\n[Recollir dades amb GPS](http://learnosm.org/en/beginner/using-gps/).\n\nper fer servir una traça GPX per editar el mapa, arrossega i deixa el fitxer GPX a l'editor. \nSi es detecta, s'afegirà el mapa com una línia verda llampant. \nClica a 'Paràmetres de configuració del fons'  al cantó esquerre per activar,\ndesactivar, o per ajustar la vista a aquesta capa GPX.\n\nLa traça GPX no és pujada directament a OpenStreetMap - la millor manera de \nfer-la servir és dibuixar tu el mapa, fent-la servir com a guia per a les noves característiques que afegiràs. també les pots [pujar a l'OpenStreetMap] \n(http://www.openstreetmap.org/trace/create)\nperquè d'altres persones les utilitzin.\n",
@@ -390,6 +396,9 @@
         "categories": {
             "category-building": {
                 "name": "Edifici"
+            },
+            "category-golf": {
+                "name": "Golf"
             },
             "category-landuse": {
                 "name": "Aprofitament del terreny"
@@ -457,7 +466,7 @@
             "address": {
                 "label": "Adreça",
                 "placeholders": {
-                    "housename": "Número de carrer",
+                    "housename": "Nom de l'edifici",
                     "number": "123",
                     "street": "Carrer",
                     "city": "Ciutat ",
@@ -466,6 +475,33 @@
             },
             "admin_level": {
                 "label": "Nivell administratiu"
+            },
+            "aerialway": {
+                "label": "Tipus"
+            },
+            "aerialway/access": {
+                "label": "Accés"
+            },
+            "aerialway/bubble": {
+                "label": "Bombolla"
+            },
+            "aerialway/capacity": {
+                "label": "Capacitat (per hora)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Duració (minuts)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "Climatitzat"
+            },
+            "aerialway/occupancy": {
+                "label": "Ocupació",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Accés (estival)"
             },
             "aeroway": {
                 "label": "Tipus"
@@ -500,6 +536,9 @@
             "building_area": {
                 "label": "Edifici"
             },
+            "cans": {
+                "label": "Accepta llaunes"
+            },
             "capacity": {
                 "label": "Capacitat",
                 "placeholder": "50, 100, 200..."
@@ -514,6 +553,9 @@
                     "anticlockwise": "en sentit contrari al de les agulles del rellotge"
                 }
             },
+            "clothes": {
+                "label": "Accepta roba"
+            },
             "collection_times": {
                 "label": "Horari de recollida"
             },
@@ -522,6 +564,9 @@
             },
             "country": {
                 "label": "País"
+            },
+            "covered": {
+                "label": "Cobert"
             },
             "crossing": {
                 "label": "Tipus"
@@ -537,6 +582,9 @@
             },
             "description": {
                 "label": "Descripció"
+            },
+            "electrified": {
+                "label": "Electrificació"
             },
             "elevation": {
                 "label": "Elevació"
@@ -560,6 +608,9 @@
             "fixme": {
                 "label": "Arregla'm"
             },
+            "gauge": {
+                "label": "Ample"
+            },
             "generator/method": {
                 "label": "Mètode"
             },
@@ -568,6 +619,17 @@
             },
             "generator/type": {
                 "label": "Tipus"
+            },
+            "glass": {
+                "label": "Accepta vidre"
+            },
+            "golf_hole": {
+                "label": "Referència",
+                "placeholder": "Número de forat (1-18)"
+            },
+            "handicap": {
+                "label": "Handicap",
+                "placeholder": "1-18"
             },
             "highway": {
                 "label": "Tipus"
@@ -583,6 +645,9 @@
             },
             "incline": {
                 "label": "Pendent"
+            },
+            "information": {
+                "label": "Tipus"
             },
             "internet_access": {
                 "label": "Accés a Internet",
@@ -650,6 +715,13 @@
             "operator": {
                 "label": "Operador"
             },
+            "paper": {
+                "label": "Accepta paper"
+            },
+            "par": {
+                "label": "Par",
+                "placeholder": "3, 4, 5..."
+            },
             "park_ride": {
                 "label": "Aparca i viatja "
             },
@@ -659,6 +731,15 @@
             "phone": {
                 "label": "Telèfon",
                 "placeholder": "+31 42 123 4567"
+            },
+            "piste/difficulty": {
+                "label": "Dificultat"
+            },
+            "piste/grooming": {
+                "label": "Adequació"
+            },
+            "piste/type": {
+                "label": "Tipus"
             },
             "place": {
                 "label": "Tipus"
@@ -711,6 +792,10 @@
             "shop": {
                 "label": "Tipus"
             },
+            "social_facility_for": {
+                "label": "Persones ateses",
+                "placeholder": "Indigents, Invàlids, Infants, etc"
+            },
             "source": {
                 "label": "Font"
             },
@@ -726,6 +811,9 @@
                     "embankment": "Terraplè ",
                     "cutting": "Trinxera"
                 }
+            },
+            "studio_type": {
+                "label": "Tipus"
             },
             "supervised": {
                 "label": "Supervisat"
@@ -750,6 +838,9 @@
             },
             "tree_type": {
                 "label": "Tipus"
+            },
+            "tunnel": {
+                "label": "Túnel"
             },
             "vending": {
                 "label": "Tipus de mercaderies"
@@ -781,6 +872,36 @@
             "address": {
                 "name": "Adreça",
                 "terms": "Adreça, Direcció, Domicili"
+            },
+            "aerialway": {
+                "name": "Transport per cable"
+            },
+            "aerialway/cable_car": {
+                "name": "Telefèric"
+            },
+            "aerialway/chair_lift": {
+                "name": "Telecadira"
+            },
+            "aerialway/gondola": {
+                "name": "Telecabina"
+            },
+            "aerialway/magic_carpet": {
+                "name": "Cinta remuntadora"
+            },
+            "aerialway/platter": {
+                "name": "Teleesquí individual"
+            },
+            "aerialway/pylon": {
+                "name": "Piló d'estructura de transport per cable"
+            },
+            "aerialway/rope_tow": {
+                "name": "Corda remuntadora"
+            },
+            "aerialway/station": {
+                "name": "Estació de transport per cable"
+            },
+            "aerialway/t-bar": {
+                "name": "Teleesquí doble"
             },
             "aeroway": {
                 "name": "Infraestructura aeroportuària",
@@ -876,6 +997,12 @@
                 "name": "Cinema",
                 "terms": "Cinema, Cine, Local de projeccions cinematogràfiques, Local d'esbarjo"
             },
+            "amenity/clinic": {
+                "name": "Clínica"
+            },
+            "amenity/clock": {
+                "name": "Rellotge"
+            },
             "amenity/college": {
                 "name": "Campus universitari",
                 "terms": "Col·legi, Campus universitàri, universitat, facultat"
@@ -883,6 +1010,12 @@
             "amenity/courthouse": {
                 "name": "Jutjat",
                 "terms": "Jutjats, Palau de justícia"
+            },
+            "amenity/dentist": {
+                "name": "Dentista"
+            },
+            "amenity/doctor": {
+                "name": "Doctor"
             },
             "amenity/drinking_water": {
                 "name": "Aigua apte per al consum",
@@ -974,6 +1107,9 @@
             "amenity/ranger_station": {
                 "name": "Base d'Agents Rurals"
             },
+            "amenity/recycling": {
+                "name": "Reciclatge"
+            },
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "Restaurant, Lloc per menjar, Bistro, Wok, Trattoria, Pizzeria"
@@ -984,6 +1120,21 @@
             },
             "amenity/shelter": {
                 "name": "Refugi"
+            },
+            "amenity/social_facility": {
+                "name": "Equipament social"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "Banc d'aliments"
+            },
+            "amenity/social_facility/group_home": {
+                "name": "Residència social"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Refugi per a indigents"
+            },
+            "amenity/studio": {
+                "name": "Estudi"
             },
             "amenity/swimming_pool": {
                 "name": "Piscina",
@@ -1015,6 +1166,9 @@
             },
             "amenity/vending_machine": {
                 "name": "Màquina de vending"
+            },
+            "amenity/veterinary": {
+                "name": "Veterinari"
             },
             "amenity/waste_basket": {
                 "name": "Paperera",
@@ -1101,14 +1255,54 @@
             "building/apartments": {
                 "name": "Apartaments"
             },
+            "building/barn": {
+                "name": "Graner"
+            },
+            "building/bunker": {
+                "name": "Búnquer"
+            },
+            "building/cabin": {
+                "name": "Cabina"
+            },
+            "building/cathedral": {
+                "name": "Catedral"
+            },
+            "building/chapel": {
+                "name": "Capella"
+            },
+            "building/church": {
+                "name": "Església"
+            },
             "building/commercial": {
                 "name": "Edifici comercial"
+            },
+            "building/construction": {
+                "name": "Edifici en construcció"
+            },
+            "building/detached": {
+                "name": "Xalet unifamiliar",
+                "terms": "casa aïllada, casa d'urbanització, xalet, chalet, xalets, chalets, casa i jardí, casa amb jardí"
+            },
+            "building/dormitory": {
+                "name": "Edifici d'habitacions"
             },
             "building/entrance": {
                 "name": "Entrada"
             },
             "building/garage": {
                 "name": "garatge "
+            },
+            "building/garages": {
+                "name": "Garatges"
+            },
+            "building/greenhouse": {
+                "name": "Hivernacle"
+            },
+            "building/hospital": {
+                "name": "Edifici hospitalari"
+            },
+            "building/hotel": {
+                "name": "Edifici hoteler"
             },
             "building/house": {
                 "name": "Casa"
@@ -1119,8 +1313,179 @@
             "building/industrial": {
                 "name": "Edifici industrial"
             },
+            "building/public": {
+                "name": "Edifici públic"
+            },
             "building/residential": {
                 "name": "Edifici residencial"
+            },
+            "building/retail": {
+                "name": "Edifici de grans magatzems"
+            },
+            "building/roof": {
+                "name": "Teulada"
+            },
+            "building/school": {
+                "name": "Edifici escolar"
+            },
+            "building/shed": {
+                "name": "Traster"
+            },
+            "building/stable": {
+                "name": "Estable"
+            },
+            "building/static_caravan": {
+                "name": "Caravana fixa"
+            },
+            "building/terrace": {
+                "name": "Cases unifamiliars"
+            },
+            "building/train_station": {
+                "name": "Estació de ferrocarril"
+            },
+            "building/university": {
+                "name": "Edifici universitari"
+            },
+            "building/warehouse": {
+                "name": "Magatzem"
+            },
+            "craft/basket_maker": {
+                "name": "Cistellaire"
+            },
+            "craft/beekeeper": {
+                "name": "Apicultor"
+            },
+            "craft/blacksmith": {
+                "name": "Ferrer"
+            },
+            "craft/boatbuilder": {
+                "name": "Constructor d'embarcacions"
+            },
+            "craft/bookbinder": {
+                "name": "Enquadernador"
+            },
+            "craft/brewery": {
+                "name": "Cerveseria"
+            },
+            "craft/carpenter": {
+                "name": "Fuster"
+            },
+            "craft/carpet_layer": {
+                "name": "Moquetista"
+            },
+            "craft/caterer": {
+                "name": "Servei de càtering"
+            },
+            "craft/clockmaker": {
+                "name": "Rellotger"
+            },
+            "craft/confectionary": {
+                "name": "Confiteria"
+            },
+            "craft/dressmaker": {
+                "name": "Sastreria"
+            },
+            "craft/electrician": {
+                "name": "Electricista"
+            },
+            "craft/gardener": {
+                "name": "Jardiner"
+            },
+            "craft/glaziery": {
+                "name": "Vidrieria"
+            },
+            "craft/handicraft": {
+                "name": "Botiga d'artesà"
+            },
+            "craft/hvac": {
+                "name": "Empresa d'instal·lacions climàtiques"
+            },
+            "craft/insulator": {
+                "name": "Aïllador"
+            },
+            "craft/jeweler": {
+                "name": "Joieria"
+            },
+            "craft/key_cutter": {
+                "name": "Fabricant de claus"
+            },
+            "craft/locksmith": {
+                "name": "Copisteria de claus"
+            },
+            "craft/metal_construction": {
+                "name": "Construccions metàliques"
+            },
+            "craft/optician": {
+                "name": "Òptica"
+            },
+            "craft/painter": {
+                "name": "Pintor"
+            },
+            "craft/photographer": {
+                "name": "Fotògraf"
+            },
+            "craft/photographic_labratory": {
+                "name": "Laboratori fotogràfic"
+            },
+            "craft/plasterer": {
+                "name": "Guixaire"
+            },
+            "craft/plumber": {
+                "name": "Llauner"
+            },
+            "craft/pottery": {
+                "name": "Terrisseria"
+            },
+            "craft/rigger": {
+                "name": "Aparellador"
+            },
+            "craft/roofer": {
+                "name": "Constructor de teulades"
+            },
+            "craft/saddler": {
+                "name": "Cuirasser"
+            },
+            "craft/sailmaker": {
+                "name": "Fabricant de veles"
+            },
+            "craft/sawmill": {
+                "name": "Serradora"
+            },
+            "craft/scaffolder": {
+                "name": "Muntador de bastides"
+            },
+            "craft/sculpter": {
+                "name": "Escultor"
+            },
+            "craft/shoemaker": {
+                "name": "Sabater"
+            },
+            "craft/stonemason": {
+                "name": "Manobra"
+            },
+            "craft/sweep": {
+                "name": "Netejador de xemeneies"
+            },
+            "craft/tailor": {
+                "name": "Sastreria"
+            },
+            "craft/tiler": {
+                "name": "Enrajolador"
+            },
+            "craft/tinsmith": {
+                "name": "Llauner"
+            },
+            "craft/upholsterer": {
+                "name": "Creador de mobles"
+            },
+            "craft/watchmaker": {
+                "name": "Fabricant de rellotges"
+            },
+            "craft/window_construction": {
+                "name": "Fabricant de finestres"
+            },
+            "embankment": {
+                "name": "Terraplè "
             },
             "emergency/ambulance_station": {
                 "name": "Parada d'ambulàncies"
@@ -1140,6 +1505,30 @@
             },
             "footway/sidewalk": {
                 "name": "Vorera"
+            },
+            "golf/bunker": {
+                "name": "Bunker"
+            },
+            "golf/fairway": {
+                "name": "Fairway"
+            },
+            "golf/green": {
+                "name": "Green"
+            },
+            "golf/hole": {
+                "name": "Forat"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "Obstacle d'aigua lateral"
+            },
+            "golf/rough": {
+                "name": "Rough"
+            },
+            "golf/tee": {
+                "name": "Àrea inicial"
+            },
+            "golf/water_hazard": {
+                "name": "Obstacle d'aigua"
             },
             "highway": {
                 "name": "Via"
@@ -1190,6 +1579,9 @@
             "highway/residential": {
                 "name": "Carrer"
             },
+            "highway/rest_area": {
+                "name": "Àrea de descans"
+            },
             "highway/road": {
                 "name": "Carretera sense classificació"
             },
@@ -1217,6 +1609,9 @@
             "highway/service/parking_aisle": {
                 "name": "Carrer d'aparcament",
                 "terms": "Passadís de pàrquing, pàrquing, parking, aparcament, carrer interior d'aparcament, carrer per aparcar, carrer de pàrqquing, carrer de parking"
+            },
+            "highway/services": {
+                "name": "Àrea de servei"
             },
             "highway/steps": {
                 "name": "Escales"
@@ -1375,7 +1770,8 @@
                 "name": "Camp de vòleibol"
             },
             "leisure/playground": {
-                "name": "Zona de jocs infantils"
+                "name": "Zona de jocs infantils",
+                "terms": "Parc Infantil"
             },
             "leisure/slipway": {
                 "name": "Pendent per a embarcacions"
@@ -1403,6 +1799,12 @@
             },
             "man_made/cutline": {
                 "name": "Línia de tall"
+            },
+            "man_made/embankment": {
+                "name": "Terraplè "
+            },
+            "man_made/flagpole": {
+                "name": "Màstil"
             },
             "man_made/lighthouse": {
                 "name": "Far"
@@ -1433,6 +1835,18 @@
             },
             "man_made/water_works": {
                 "name": "Planta potabilitzadora"
+            },
+            "military/airfield": {
+                "name": "Aeròdrom militar"
+            },
+            "military/barracks": {
+                "name": "Caserna militar"
+            },
+            "military/bunker": {
+                "name": "Búnquer"
+            },
+            "military/range": {
+                "name": "Terreny per a usos militars"
             },
             "natural": {
                 "name": "Natural"
@@ -1557,6 +1971,9 @@
             "office/travel_agent": {
                 "name": "Agència de viatges"
             },
+            "piste": {
+                "name": "Pista d'esquí"
+            },
             "place": {
                 "name": "Lloc"
             },
@@ -1608,6 +2025,12 @@
             "power/transformer": {
                 "name": "Transformador"
             },
+            "public_transport/platform": {
+                "name": "Plataforma"
+            },
+            "public_transport/stop_position": {
+                "name": "Posició d'aturada"
+            },
             "railway": {
                 "name": "Ferrocarril"
             },
@@ -1617,6 +2040,9 @@
             "railway/disused": {
                 "name": "Vià de tren fora d'ús"
             },
+            "railway/funicular": {
+                "name": "Funicular"
+            },
             "railway/halt": {
                 "name": "Parada de Ferrocarril"
             },
@@ -1625,6 +2051,9 @@
             },
             "railway/monorail": {
                 "name": "Monocarril"
+            },
+            "railway/narrow_gauge": {
+                "name": "Ferrocarril de via estreta"
             },
             "railway/platform": {
                 "name": "Andana "
@@ -1656,6 +2085,9 @@
             "shop/alcohol": {
                 "name": "Botiga de licors"
             },
+            "shop/art": {
+                "name": "Botiga d'art"
+            },
             "shop/bakery": {
                 "name": "Fleca"
             },
@@ -1667,6 +2099,9 @@
             },
             "shop/bicycle": {
                 "name": "Botiga de bicicletes"
+            },
+            "shop/bookmaker": {
+                "name": "Cusidor de llibres"
             },
             "shop/books": {
                 "name": "Llibreria"
@@ -1757,6 +2192,9 @@
             },
             "shop/locksmith": {
                 "name": "Copisteria de claus"
+            },
+            "shop/lottery": {
+                "name": "Administració de loteria"
             },
             "shop/mall": {
                 "name": "Centre comercial"

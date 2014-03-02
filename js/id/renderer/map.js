@@ -12,7 +12,6 @@ iD.Map = function(context) {
         transformStart,
         transformed = false,
         minzoom = 0,
-        transformProp = iD.util.prefixCSSProperty('Transform'),
         points = iD.svg.Points(roundedProjection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
         lines = iD.svg.Lines(projection),
@@ -179,13 +178,8 @@ iD.Map = function(context) {
             tX = Math.round((d3.event.translate[0] / scale - transformStart[1][0]) * scale),
             tY = Math.round((d3.event.translate[1] / scale - transformStart[1][1]) * scale);
 
-        var transform =
-            (iD.detect().opera ?
-                'translate(' + tX + 'px,' + tY + 'px)' :
-                'translate3d(' + tX + 'px,' + tY + 'px, 0)') + ' scale(' + scale + ')';
-
         transformed = true;
-        supersurface.style(transformProp, transform);
+        iD.util.setTransform(supersurface, tX, tY, scale);
         queueRedraw();
 
         dispatch.move(map);
@@ -193,7 +187,7 @@ iD.Map = function(context) {
 
     function resetTransform() {
         if (!transformed) return false;
-        supersurface.style(transformProp, iD.detect().opera ? '' : 'translate3d(0,0,0)');
+        iD.util.setTransform(supersurface, 0, 0);
         transformed = false;
         return true;
     }

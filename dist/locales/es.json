@@ -134,7 +134,8 @@
             "annotation": "{n} líneas combinadas.",
             "not_eligible": "Estos elementos no pueden ser fusionados.",
             "not_adjacent": "Estas líneas no pueden ser fusionadas porque no están conectadas",
-            "restriction": "Estas líneas no se pueden combinar porque al menos una es miembro de una relación de \"{relation}\"."
+            "restriction": "Estas líneas no se pueden combinar porque al menos una es miembro de una relación de \"{relation}\".",
+            "incomplete_relation": "Estos elementos no se pueden combinar porque al menos uno de ellos no se ha descargado por completo."
         },
         "move": {
             "title": "Mover",
@@ -252,7 +253,11 @@
         "incomplete": "<no descargado>",
         "feature_list": "Buscar elementos",
         "edit": "Editar elemento",
-        "none": "Ninguno"
+        "none": "Ninguno",
+        "node": "Nodo",
+        "way": "Vía",
+        "relation": "Relación",
+        "location": "Localización"
     },
     "background": {
         "title": "Fondo",
@@ -310,8 +315,9 @@
         "untagged_point": "Punto sin etiquetar",
         "untagged_line": "Línea sin etiquetar",
         "untagged_area": "Área sin etiquetar",
-        "many_deletions": "Está eliminando {n} objetos ¿Está seguro de que quieres hacer esto? Esta acción los eliminará del mapa que todos ven en openstreetmap.org.",
+        "many_deletions": "Está eliminando {n} objetos ¿Está seguro que quiere hacer esto? Esta acción los eliminará del mapa que todos ven en openstreetmap.org.",
         "tag_suggests_area": "La etiqueta {tag} sugiere que esta línea debería ser una área, pero no lo es.",
+        "untagged_tooltip": "Seleccione un tipo de característica que describa lo que es esta {geometry}.",
         "deprecated_tags": "Etiquetas obsoletas: {tags}"
     },
     "zoom": {
@@ -327,7 +333,7 @@
     },
     "help": {
         "title": "Ayuda",
-        "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el mapa libre y editable del mundo. Puede utilizarlo para agregar y actualizar datos de su área, haciendo este mapa, de fuente y datos abiertos, mejor para todos.\n\nLos cambios que haga en este mapa serán visibles para todo el que use OpenStreetMap. Para poder hacer una edición, necesitara una [cuenta gratuita en OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con el [código fuente disponible en GitHub](https://github.com/systemed/iD).\n",
+        "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa del mundo libre y editable. Puedes usarlo para agregar y actualizar\ndatos en tu región, haciendo un mapa del mundo de código y datos abiertos\nmejor para todos.\n\nLas ediciones que haces en este mapa serán visibles para todos quienes usen\nOpenStreetMap. Para hacer una edición, necesitarás una\n[cuenta gratuita de OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con [código\nfuente disponible en GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Editar & Guardar\n\nEste editor está diseñado para trabajar en línea principalmente, ya que en estos momentos esta accediendo a través de un sitio web.\n\n### Seleccionar elementos gráficos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de interés, simplemente haz clic sobre él. Esto resaltará el elemento seleccionado, abriendo un panel con sus características, y  mostrará un menú de cosas que puedes hacer con ese elemento.\n\nSe pueden seleccionar múltiples elementos de una vez manteniendo pulsada la tecla 'Mayús' y haciendo clic y arrastrando el ratón sobre el mapa. Esto seleccionará todas los elementos que están dentro del recuadro que se dibuja, lo que le permite realizar acciones con todos ellos al mismo tiempo.\n\n### Guardar ediciones\n\nCuando haga cambios -como editar carreteras, edificios o lugares- estos se  almacenan localmente en tu ordenador hasta que decidas guardarlos en el servidor. No se preocupe si cometes un error - puede deshacer los cambios haciendo clic en el botón 'Deshacer', y rehacerlos de nuevo haciendo clic en el botón 'Rehacer'.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones (por ejemplo, si ha completado una zona de la ciudad y quisiera empezar en una nueva área).  Antes de subir los cambios al servidor tendrás oportunidad de revisar lo que has hecho, y el editor proporciona avisos y sugerencias útiles si algo parece que no es correcto en los cambios.\n\nSi ve que todo es correcto escriba un breve comentario explicando el cambio que ha hecho y haga clic en 'Guardar' de nuevo para registrar los cambios en [OpenStreetMap.org](http:\\/\\/www.openstreetmap.org\\/), donde serán visibles para todos los demás usuarios y estarán disponible para que otros colaboradores del proyecto puedan seguir construyendo y mejorando el mapa.\n\nSi aún no ha terminado sus ediciones en una sesión, puede dejar la ventana del editor abierta y volver más tarde (en el mismo navegador y ordenador), y el editor le permitirá retomar tu trabajo.\n",
         "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formada por nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía. \n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar uno de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para los navegadores GPS.\n\n### Eliminar\n\nSi un camino es totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa. Como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido. \n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado que es el acceso rápido para comenzar a dibujar una línea. \n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
         "gps": "# GPS\n\nLos datos procedentes de un GPS son la fuente más fiable para OpenStreetMap. Este editor soporta archivos `.gpx` con trazas guardadas en su equipo local.  Este tipo de trazas GPS se pueden obtener con un gran número de aplicaciones para teléfonos inteligentes, así como con receptores GPS normales.\n\nPara más información acerca de como obtener datos en campo mediante GPS lea [Capturando información mediante GPS] (http://learnosm.org/en/beginner/using-gps/).\n\nPara utilizar una traza GPX para cartografiar simplemente arrastre y suelte el archivo GPX sobre el editor de mapas. Si es reconocido, se añadirá al mapa como una línea verde brillante. Haga clic en el menú 'Configuración de fondo' de la izquierda para activar, desactivar o hacer zoom sobre esta nueva capa de con la traza GPX.\n\nTenga en cuenta que la traza GPX no es subida directamente a OpenStreetMap, sino que se utiliza para dibujar sobre ella en el mapa, ayudándole como guía para los nuevos elementos que desea añadir.\n",
@@ -390,6 +396,9 @@
         "categories": {
             "category-building": {
                 "name": "Edificio"
+            },
+            "category-golf": {
+                "name": "Golf"
             },
             "category-landuse": {
                 "name": "Uso del suelo"
@@ -467,6 +476,24 @@
             "admin_level": {
                 "label": "Nivel administrativo"
             },
+            "aerialway": {
+                "label": "Tipo"
+            },
+            "aerialway/access": {
+                "label": "Acceso"
+            },
+            "aerialway/capacity": {
+                "label": "Capacidad (por hora)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Duración (minutos)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/occupancy": {
+                "label": "Ocupación",
+                "placeholder": "2, 4, 8..."
+            },
             "aeroway": {
                 "label": "Tipo"
             },
@@ -500,6 +527,9 @@
             "building_area": {
                 "label": "Edificio"
             },
+            "cans": {
+                "label": "Acepta envases"
+            },
             "capacity": {
                 "label": "Capacidad",
                 "placeholder": "50, 100, 200..."
@@ -514,6 +544,9 @@
                     "anticlockwise": "En sentido antihorario"
                 }
             },
+            "clothes": {
+                "label": "Acepta ropas"
+            },
             "collection_times": {
                 "label": "Horario de recogida"
             },
@@ -522,6 +555,9 @@
             },
             "country": {
                 "label": "País"
+            },
+            "covered": {
+                "label": "Cubierto"
             },
             "crossing": {
                 "label": "Tipo"
@@ -538,6 +574,9 @@
             "description": {
                 "label": "Descripción"
             },
+            "electrified": {
+                "label": "Electrificación"
+            },
             "elevation": {
                 "label": "Altura"
             },
@@ -552,13 +591,16 @@
                 "placeholder": "+31 42 123 4567"
             },
             "fee": {
-                "label": "Tarifa"
+                "label": "Couta"
             },
             "fire_hydrant/type": {
                 "label": "Tipo"
             },
             "fixme": {
                 "label": "Arreglame"
+            },
+            "gauge": {
+                "label": "Gálibo"
             },
             "generator/method": {
                 "label": "Método"
@@ -568,6 +610,17 @@
             },
             "generator/type": {
                 "label": "Tipo"
+            },
+            "glass": {
+                "label": "Acepta vidrio"
+            },
+            "golf_hole": {
+                "label": "Referencia",
+                "placeholder": "Número de hoyo (1-18)"
+            },
+            "handicap": {
+                "label": "Handicap",
+                "placeholder": "1-18"
             },
             "highway": {
                 "label": "Tipo"
@@ -583,6 +636,9 @@
             },
             "incline": {
                 "label": "Pendiente"
+            },
+            "information": {
+                "label": "Tipo"
             },
             "internet_access": {
                 "label": "Acceso a Internet",
@@ -650,6 +706,13 @@
             "operator": {
                 "label": "Operador"
             },
+            "paper": {
+                "label": "Acepta papel"
+            },
+            "par": {
+                "label": "Par",
+                "placeholder": "3, 4, 5..."
+            },
             "park_ride": {
                 "label": "Aparcamiento disuasorio"
             },
@@ -659,6 +722,12 @@
             "phone": {
                 "label": "Teléfono",
                 "placeholder": "+31 42 123 4567"
+            },
+            "piste/difficulty": {
+                "label": "Dificultad"
+            },
+            "piste/type": {
+                "label": "Tipo"
             },
             "place": {
                 "label": "Tipo"
@@ -711,6 +780,9 @@
             "shop": {
                 "label": "Tipo"
             },
+            "social_facility_for": {
+                "placeholder": "Personas sin hogar, discapacitados, niños, etc"
+            },
             "source": {
                 "label": "Fuente"
             },
@@ -726,6 +798,9 @@
                     "embankment": "Dique",
                     "cutting": "Desmonte"
                 }
+            },
+            "studio_type": {
+                "label": "Tipo"
             },
             "supervised": {
                 "label": "Vigilado"
@@ -750,6 +825,9 @@
             },
             "tree_type": {
                 "label": "Tipo"
+            },
+            "tunnel": {
+                "label": "Túnel"
             },
             "vending": {
                 "label": "Tipo de producto"
@@ -781,6 +859,27 @@
             "address": {
                 "name": "Dirección",
                 "terms": "dirección, domicilio, señas, residencia"
+            },
+            "aerialway": {
+                "name": "Pista aérea"
+            },
+            "aerialway/cable_car": {
+                "name": "Teleférico",
+                "terms": "transbordador, funicular, telecabina, telesilla, telesquí"
+            },
+            "aerialway/chair_lift": {
+                "name": "Telesilla",
+                "terms": "telesquí, teleférico, funicular"
+            },
+            "aerialway/gondola": {
+                "name": "Góndola",
+                "terms": "Telecabina"
+            },
+            "aerialway/magic_carpet": {
+                "name": "Alfombra mágica"
+            },
+            "aerialway/pylon": {
+                "name": "Pilona"
             },
             "aeroway": {
                 "name": "Aerovía",
@@ -876,6 +975,13 @@
                 "name": "Cine",
                 "terms": "cinematógrafo,cine"
             },
+            "amenity/clinic": {
+                "name": "Clínica",
+                "terms": "clínica, centro médico, hospital"
+            },
+            "amenity/clock": {
+                "name": "Reloj"
+            },
             "amenity/college": {
                 "name": "Universidad",
                 "terms": "facultad,universidad,escuela profesional, instituto"
@@ -883,6 +989,14 @@
             "amenity/courthouse": {
                 "name": "Palacio de Justicia",
                 "terms": "tribunal, magistratura, judicatura, audiencia,justicia"
+            },
+            "amenity/dentist": {
+                "name": "Dentista",
+                "terms": "dentista, odontólogo"
+            },
+            "amenity/doctor": {
+                "name": "Médico",
+                "terms": "médico, doctor, facultativo, medicina, curador"
             },
             "amenity/drinking_water": {
                 "name": "Agua potable",
@@ -909,7 +1023,7 @@
                 "terms": "gasolinera,surtidor, estación de servicio"
             },
             "amenity/grave_yard": {
-                "name": "Camposanto",
+                "name": "Cementerio",
                 "terms": "cementerio,camposanto, necrópolis, sacramental"
             },
             "amenity/hospital": {
@@ -974,6 +1088,9 @@
             "amenity/ranger_station": {
                 "name": "Puesto de guardaparques"
             },
+            "amenity/recycling": {
+                "name": "Reciclaje"
+            },
             "amenity/restaurant": {
                 "name": "Restaurante",
                 "terms": "restaurante,restorán, comedor, ambigú, bufé, mesón, taberna"
@@ -983,7 +1100,18 @@
                 "terms": "escuela,colegio, academia, instituto, liceo, conservatorio"
             },
             "amenity/shelter": {
-                "name": "Refugio"
+                "name": "Refugio",
+                "terms": "albergue, abrigo, amparo, asilo, cobertizo, garita, refugio"
+            },
+            "amenity/social_facility": {
+                "name": "Instalación social"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "Banco de alimentos"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Refugio de vagabundos",
+                "terms": "Refugio social"
             },
             "amenity/swimming_pool": {
                 "name": "Piscina",
@@ -1002,7 +1130,7 @@
                 "terms": "Teatro"
             },
             "amenity/toilets": {
-                "name": "Baños",
+                "name": "Aseos",
                 "terms": "baños, baño, aseo, letrina, lavabo, servicio, tocador, ducha"
             },
             "amenity/townhall": {
@@ -1015,6 +1143,10 @@
             },
             "amenity/vending_machine": {
                 "name": "Máquina expendedora"
+            },
+            "amenity/veterinary": {
+                "name": "Veterinario",
+                "terms": "veterinario, albéitar, mascotas, animales"
             },
             "amenity/waste_basket": {
                 "name": "Papelera",
@@ -1104,9 +1236,38 @@
                 "name": "Apartamentos",
                 "terms": "apartamento, piso, vivienda, alojamiento, buhardilla, estudio, edificio"
             },
+            "building/barn": {
+                "name": "Granero"
+            },
+            "building/bunker": {
+                "name": "Búnker",
+                "terms": "Fortaleza"
+            },
+            "building/cabin": {
+                "name": "Cabina"
+            },
+            "building/cathedral": {
+                "name": "Catedral",
+                "terms": "Iglesia, Lugar de culto, templo, basílica, parroquia, santuario, oratorio, iglesia, basílica"
+            },
+            "building/chapel": {
+                "name": "Capilla"
+            },
+            "building/church": {
+                "name": "Iglesia",
+                "terms": "templo, basílica, capilla, colegiata, parroquia, santuario, ermita, oratorio,iglesia, basílica, catedral"
+            },
             "building/commercial": {
                 "name": "Edificio comercial",
                 "terms": "centro comercial, edificio comercial"
+            },
+            "building/construction": {
+                "name": "Edificio bajo construcción",
+                "terms": "Edificio en construcción"
+            },
+            "building/detached": {
+                "name": "Casa unifamiliar",
+                "terms": "Chalet, unifamiliar"
             },
             "building/entrance": {
                 "name": "Entrada",
@@ -1115,6 +1276,20 @@
             "building/garage": {
                 "name": "Garaje",
                 "terms": "garaje,cochera"
+            },
+            "building/garages": {
+                "name": "Garajes",
+                "terms": "garajes, cocheras"
+            },
+            "building/greenhouse": {
+                "name": "Invernadero"
+            },
+            "building/hospital": {
+                "name": "Edificio hospital",
+                "terms": "Hospital, sanatorio, Centro de primeros auxilios"
+            },
+            "building/hotel": {
+                "name": "Edificio Hotel"
             },
             "building/house": {
                 "name": "Casa",
@@ -1128,9 +1303,163 @@
                 "name": "Edificio industrial",
                 "terms": "fábrica,factoría, industria, manufactura, taller, empresa, explotación"
             },
+            "building/public": {
+                "name": "Edificio Público"
+            },
             "building/residential": {
                 "name": "Edificio residencial",
                 "terms": "bloque"
+            },
+            "building/roof": {
+                "name": "Tejado"
+            },
+            "building/school": {
+                "name": "Edificio Escuela",
+                "terms": "Edificio colegio"
+            },
+            "building/shed": {
+                "name": "Cobertizo"
+            },
+            "building/stable": {
+                "name": "Establo",
+                "terms": "Cuadra, caballeriza"
+            },
+            "building/static_caravan": {
+                "name": "Caravana estática"
+            },
+            "building/terrace": {
+                "name": "Bloque"
+            },
+            "building/train_station": {
+                "name": "Estación de ferrocarril",
+                "terms": "parada, alto, detención, apeadero, terminal, tren, ferrocarril"
+            },
+            "building/university": {
+                "name": "Edificio universidad"
+            },
+            "building/warehouse": {
+                "name": "Almacén",
+                "terms": "almacén, depósito, bodega, lonja, nave"
+            },
+            "craft/beekeeper": {
+                "name": "Apicultor"
+            },
+            "craft/blacksmith": {
+                "name": "Herrero"
+            },
+            "craft/boatbuilder": {
+                "name": "Constructor de barco"
+            },
+            "craft/bookbinder": {
+                "name": "Capa"
+            },
+            "craft/brewery": {
+                "name": "Cervecería"
+            },
+            "craft/carpenter": {
+                "name": "Carpintería",
+                "terms": "carpintero, ebanistería, ebanista, madera, madedero"
+            },
+            "craft/caterer": {
+                "name": "Abastecedor, Proveedor"
+            },
+            "craft/clockmaker": {
+                "name": "Relojero"
+            },
+            "craft/confectionary": {
+                "name": "Golosinas",
+                "terms": "golosinas, chucherías, caramelos"
+            },
+            "craft/dressmaker": {
+                "name": "Modista"
+            },
+            "craft/electrician": {
+                "name": "Electricista",
+                "terms": "electricista, iluminista, trabajo de electricista"
+            },
+            "craft/gardener": {
+                "name": "Jardinero, Jardinería"
+            },
+            "craft/glaziery": {
+                "name": "Vidriería"
+            },
+            "craft/handicraft": {
+                "name": "Artesanía"
+            },
+            "craft/hvac": {
+                "name": "Aire acondicionado"
+            },
+            "craft/insulator": {
+                "name": "Aislante"
+            },
+            "craft/jeweler": {
+                "name": "Joyería",
+                "terms": "joyero, relojería, relojero, platería, orfebrería, orfebre"
+            },
+            "craft/locksmith": {
+                "name": "Cerrajero",
+                "terms": "Cerrajero, cerraduras"
+            },
+            "craft/metal_construction": {
+                "name": "Construcción metálica"
+            },
+            "craft/optician": {
+                "name": "Óptico",
+                "terms": "óptico, óptica, gafas"
+            },
+            "craft/painter": {
+                "name": "Pintor, albañil"
+            },
+            "craft/photographer": {
+                "name": "Fotógrafo",
+                "terms": "fotógrafo, retratista"
+            },
+            "craft/photographic_labratory": {
+                "name": "Laboratorio fotográfico"
+            },
+            "craft/plasterer": {
+                "name": "Yesero",
+                "terms": "yeso, albañil, obra"
+            },
+            "craft/plumber": {
+                "name": "Fontanero"
+            },
+            "craft/pottery": {
+                "name": "Cerámica",
+                "terms": "cerámica, cerasmista, alfarería, cantarería, alcaller, alfar"
+            },
+            "craft/saddler": {
+                "terms": "guarnicionero, talabartero, guarnicería"
+            },
+            "craft/sailmaker": {
+                "name": "Velero",
+                "terms": "Fabricante de velas"
+            },
+            "craft/sawmill": {
+                "name": "Aserradero"
+            },
+            "craft/scaffolder": {
+                "name": "Andamiaje"
+            },
+            "craft/sculpter": {
+                "name": "Escultor",
+                "terms": "escultor, artista, cincelador, imaginero, tallista, modelista"
+            },
+            "craft/shoemaker": {
+                "name": "zapatero, remendón, zapatería, arreglo de zapatos",
+                "terms": "zapatero, remendón"
+            },
+            "craft/tailor": {
+                "name": "Sastre"
+            },
+            "craft/upholsterer": {
+                "name": "Tapicero"
+            },
+            "craft/watchmaker": {
+                "name": "Relojero"
+            },
+            "craft/window_construction": {
+                "name": "Construcción de ventanas"
             },
             "embankment": {
                 "name": "Terraplén"
@@ -1151,11 +1480,18 @@
                 "terms": "puerta, portal, vestíbulo, umbral, soportal, pórtico, abertura, acceso, boca, entrada, portilla"
             },
             "footway/crossing": {
-                "name": "Cruce peatonal"
+                "name": "Cruce peatonal",
+                "terms": "cruce, travesía, paso, cruzamiento, pasaje, vado, paseo, traviesa, paso de peatones"
             },
             "footway/sidewalk": {
                 "name": "Acera",
                 "terms": "acera, paso, bordillo, anden, borde, peatonal, peatón"
+            },
+            "golf/fairway": {
+                "name": "Calle"
+            },
+            "golf/hole": {
+                "name": "Hoyo de golf"
             },
             "highway": {
                 "name": "Vía",
@@ -1207,7 +1543,7 @@
             },
             "highway/pedestrian": {
                 "name": "Vía peatonal",
-                "terms": "Peatonal"
+                "terms": "Peatonal, plaza, calle"
             },
             "highway/primary": {
                 "name": "Carretera primaria",
@@ -1220,6 +1556,10 @@
             "highway/residential": {
                 "name": "Calle urbana",
                 "terms": "calle, vía, paseo, avenida, bulevar, rambla, ronda, carrera, arteria, corredera, callejón, travesía, pasadizo, pasaje, rúa, vial, costanilla, callejuela"
+            },
+            "highway/rest_area": {
+                "name": "Área de Descanso",
+                "terms": "Área de descanso"
             },
             "highway/road": {
                 "name": "Carretera sin categoría conocida",
@@ -1257,12 +1597,17 @@
                 "name": "Pasillo de aparcamiento",
                 "terms": "aparcamiento, parking"
             },
+            "highway/services": {
+                "name": "Área de Servicio",
+                "terms": "área de servicios, área de descanso"
+            },
             "highway/steps": {
                 "name": "Escaleras",
                 "terms": "escalera, escalinata, grada, gradería, escala, escalerilla, peldaños, escalones"
             },
             "highway/stop": {
-                "name": "Señal de Stop"
+                "name": "Señal de Stop",
+                "terms": "señal de detención, señal de parada, señal, stop, detención, parada"
             },
             "highway/tertiary": {
                 "name": "Carretera local",
@@ -1361,7 +1706,8 @@
                 "terms": "Granja"
             },
             "landuse/farmland": {
-                "name": "Tierra de labranza"
+                "name": "Tierra de labranza",
+                "terms": "granja, tierra de cultivo"
             },
             "landuse/farmyard": {
                 "name": "Tierras de cultivo",
@@ -1547,13 +1893,19 @@
                 "terms": "Depósito de agua"
             },
             "military/airfield": {
-                "name": "Aeródromo"
+                "name": "Aeródromo",
+                "terms": "Aerodromo, Aeropuerto, Pista"
             },
             "military/barracks": {
-                "name": "Cuartel"
+                "name": "Cuartel",
+                "terms": "cuartel, barracones, acantonamiento, acuartelamiento, campamento"
             },
             "military/bunker": {
-                "name": "Búnker"
+                "name": "Búnker",
+                "terms": "búnker, refugio subterráneo"
+            },
+            "military/range": {
+                "name": "Rango militar"
             },
             "natural": {
                 "name": "Natural",
@@ -1715,8 +2067,8 @@
                 "terms": "urbe, capital, metrópoli, ciudad, núcleo urbano, localidad, villa"
             },
             "place/hamlet": {
-                "name": "Aldea",
-                "terms": "aldea, caserío, poblado, pueblo, aldehuela, aldeorrio, villorrio, pueblecito"
+                "name": "Aldea o barrio",
+                "terms": "aldea, caserío, poblado, pueblo, aldehuela, aldeorrio, villorrio, localidad, barrio, vecindario"
             },
             "place/island": {
                 "name": "Isla",
@@ -1777,7 +2129,8 @@
                 "name": "Plataforma"
             },
             "public_transport/stop_position": {
-                "name": "Punto de parada"
+                "name": "Punto de parada",
+                "terms": "punto de detención, stop, parada"
             },
             "railway": {
                 "name": "Ferrocarril",
@@ -1791,6 +2144,9 @@
                 "name": "Ferrocarril en desuso",
                 "terms": "Ferrocarril en deshuso"
             },
+            "railway/funicular": {
+                "name": "Funicular"
+            },
             "railway/halt": {
                 "name": "Apeadero",
                 "terms": "apeadero,estación,ferrocarril,tren,andén"
@@ -1802,6 +2158,9 @@
             "railway/monorail": {
                 "name": "Monorraíl ",
                 "terms": "Monorail"
+            },
+            "railway/narrow_gauge": {
+                "name": "Carril de vía estrecha"
             },
             "railway/platform": {
                 "name": "Andén",
@@ -1832,7 +2191,8 @@
                 "terms": "Relación, Vínculo, Asociación"
             },
             "route/ferry": {
-                "name": "Ruta de Ferry"
+                "name": "Ruta de Ferry",
+                "terms": "ruta, ferry, transbordador, lancha, embarcación"
             },
             "shop": {
                 "name": "Tienda",
@@ -1841,6 +2201,10 @@
             "shop/alcohol": {
                 "name": "Licorería",
                 "terms": "licor, trago, bebida, alcohol, tienda, licorería"
+            },
+            "shop/art": {
+                "name": "Tienda de arte",
+                "terms": "Galería de arte"
             },
             "shop/bakery": {
                 "name": "Panadería o pastelería",
@@ -1858,6 +2222,9 @@
                 "name": "Tienda de bicicletas",
                 "terms": "tienda de bicicletas, bici"
             },
+            "shop/bookmaker": {
+                "name": "Librero"
+            },
             "shop/books": {
                 "name": "Librería",
                 "terms": "librería, venta de libros"
@@ -1871,10 +2238,12 @@
                 "terms": "carnicería, tablajería, casquería, tocinería, fiambrería, pollería, chacinería, charcutería, alimentación, carne, vacuno, caballo, vaca, pollo, embutido, jamón"
             },
             "shop/car": {
-                "name": "Concesionario de automóviles"
+                "name": "Concesionario de automóviles",
+                "terms": "concesionario, coches, automóviles, carros, vehículos, venta"
             },
             "shop/car_parts": {
-                "name": "Tienda de componente de vehículos"
+                "name": "Tienda de componente de vehículos",
+                "terms": "repuestos, tienda, automóvil, vehículo, carro, coche, piezas, almacén"
             },
             "shop/car_repair": {
                 "name": "Taller de reparación de vehículos",
@@ -1901,17 +2270,20 @@
                 "terms": "tienda, almacén, colmado, abarrote, alimentación"
             },
             "shop/deli": {
-                "name": "Delicatessen"
+                "name": "Delicatessen",
+                "terms": "delicatessen, tienda, comestibles, gourmet, exquisiteces, comida"
             },
             "shop/department_store": {
-                "name": "Almacén"
+                "name": "Almacén",
+                "terms": "grandes almacenes, comercio, negocio, tienda, gran superficie"
             },
             "shop/doityourself": {
                 "name": "Tienda de bricolaje",
                 "terms": "bricolaje, ferretería, tienda"
             },
             "shop/dry_cleaning": {
-                "name": "Tintorería"
+                "name": "Tintorería",
+                "terms": "tintorería"
             },
             "shop/electronics": {
                 "name": "Tienda de electrodomésticos",
@@ -1948,7 +2320,8 @@
                 "terms": "peluquería barbería, peluquero, barbero, pelo, corte, salón, belleza, manicura, estética, esteticién, depilación"
             },
             "shop/hardware": {
-                "name": "Ferretería"
+                "name": "Ferretería",
+                "terms": "Ferreteria"
             },
             "shop/hifi": {
                 "name": "Tienda de sonido"
@@ -1968,6 +2341,9 @@
             "shop/locksmith": {
                 "name": "Cerrajero"
             },
+            "shop/lottery": {
+                "name": "Administración de loterías"
+            },
             "shop/mall": {
                 "name": "Centro comercial",
                 "terms": "mall,centro comercial,plaza comercial"
@@ -1984,7 +2360,8 @@
                 "terms": "música, melodía, tienda, disco, dvd, vinilo, lp, sonido, discografía, cantante, banda, grupo, rock, soul, pop, reggea, heavy, metal, rap, blues, clásica, cumbia, salsa"
             },
             "shop/newsagent": {
-                "name": "Quiosco de prensa"
+                "name": "Quiosco de prensa",
+                "terms": "vendedor, periódicos, revistas, kiosco, quiosco, puesto, prensa, publicación, diario"
             },
             "shop/optician": {
                 "name": "Óptica",
@@ -1995,14 +2372,16 @@
                 "terms": "tienda, deportes, aventura, aire, libre, excursionismo"
             },
             "shop/pet": {
-                "name": "Tienda de mascotas"
+                "name": "Tienda de mascotas",
+                "terms": "tienda, mascotas, perros, canina, felina, perruquería, gatos"
             },
             "shop/photo": {
                 "name": "Tienda de fotografía",
                 "terms": "fotografía, tienda , establecimiento, fotógrafo, cámara, retratista, revelado"
             },
             "shop/shoes": {
-                "name": "Zapatería"
+                "name": "Zapatería",
+                "terms": "zapatería, calzado, tienda, zapato, zapatilla, escarpín, bota, sandalia, alpargata, pantufla, babucha, borceguí, almadreña, zueco, chancla, chanclo, madreña, chinela, coturno, alborga"
             },
             "shop/sports": {
                 "name": "Tienda de artículos deportivos"
@@ -2019,7 +2398,8 @@
                 "terms": "juguetería,juguetes"
             },
             "shop/travel_agency": {
-                "name": "Agencia de viajes"
+                "name": "Agencia de viajes",
+                "terms": "agencia de viajes, agencia de turismo"
             },
             "shop/tyres": {
                 "name": "Tienda de neumáticos"
@@ -2028,13 +2408,16 @@
                 "name": "Local vacío"
             },
             "shop/variety_store": {
-                "name": "Tienda de variedades"
+                "name": "Tienda de variedades",
+                "terms": "tienda, variedades, bazar, cadena 100, conveniencia"
             },
             "shop/video": {
-                "name": "Videoclub"
+                "name": "Videoclub",
+                "terms": "tienda, alquiler, renta, tienda de vídeos, videoclub, alquiler de vídeos, renta de vídeos"
             },
             "tourism": {
-                "name": "Turismo"
+                "name": "Turismo",
+                "terms": "turismo"
             },
             "tourism/alpine_hut": {
                 "name": "Cabaña alpina"
@@ -2058,16 +2441,16 @@
                 "terms": "casa"
             },
             "tourism/guest_house": {
-                "name": "Pensión",
-                "terms": "hostal,hotel,pensión"
+                "name": "Hospedaje",
+                "terms": "hostal, hotel, pensión, B&B, Bed & Breakfast, casa rural, bed and breakfast, posada, cama y desayuno, alojamiento, alojamiento rural, agroturismo, casa de aldea, casa de labranza, hostería"
             },
             "tourism/hostel": {
                 "name": "Albergue",
-                "terms": "hostal,hotel,pensión"
+                "terms": "hostal, hotel, pensión, alojamiento, albergue, hostería"
             },
             "tourism/hotel": {
                 "name": "Hotel",
-                "terms": "hotel,hostal,pensión"
+                "terms": "hotel, hostal, pensión, alojamiento"
             },
             "tourism/information": {
                 "name": "Información",
@@ -2075,7 +2458,7 @@
             },
             "tourism/motel": {
                 "name": "Motel",
-                "terms": "hostal,hotel.motel,pensión"
+                "terms": "hostal, hotel, motel, pensión, alojamiento"
             },
             "tourism/museum": {
                 "name": "Museo",
@@ -2086,10 +2469,12 @@
                 "terms": "picnic,barbacoa,espercimiento"
             },
             "tourism/theme_park": {
-                "name": "Parque temático"
+                "name": "Parque temático",
+                "terms": "parque temático, parque de atracciones, atracciones"
             },
             "tourism/viewpoint": {
-                "name": "Vista panorámica"
+                "name": "Vista panorámica",
+                "terms": "oteadero, punto de vista, mirador, vistas"
             },
             "tourism/zoo": {
                 "name": "Zoo",
@@ -2119,22 +2504,27 @@
                 "name": "Ruta en bicicleta"
             },
             "type/route/bus": {
-                "name": "Ruta del colectivo"
+                "name": "Ruta del colectivo",
+                "terms": "ruta de autobús, ruta de bus, línea de autobús, recorrido, trayecto, itinerario, bus, autobús"
             },
             "type/route/detour": {
-                "name": "Ruta de desvío"
+                "name": "Ruta de desvío",
+                "terms": "ruta de desvío, dirección alternativa, alternativa, ruta, itinerario alternativo,"
             },
             "type/route/ferry": {
-                "name": "Ruta de Ferry"
+                "name": "Ruta de Ferry",
+                "terms": "ruta, itinerario, rumbo, dirección, trayecto, ferry, transbordador"
             },
             "type/route/foot": {
-                "name": "Ruta a pie"
+                "name": "Ruta a pie",
+                "terms": "ruta, itinerario, rumbo, dirección, trayecto, peatonal, pie, senderismo , camino, derrotero, vía"
             },
             "type/route/hiking": {
                 "name": "Ruta de senderismo"
             },
             "type/route/pipeline": {
-                "name": "Ruta de tubería"
+                "name": "Ruta de tubería",
+                "terms": "ruta, itinerario, rumbo, dirección, trayecto, ferry, trasbordador, tubería, gasoducto, oleoducto, conducto, cañería"
             },
             "type/route/power": {
                 "name": "Ruta de red elécrica"
@@ -2152,7 +2542,8 @@
                 "name": "Ruta maestra"
             },
             "vertex": {
-                "name": "Otro"
+                "name": "Otro",
+                "terms": "diferente, distinto, ajeno, otro"
             },
             "waterway": {
                 "name": "Vía fluvial",

@@ -40,6 +40,9 @@
             }
         },
         "continue": {
+            "key": "A",
+            "title": "Devam et",
+            "description": "Çizgiye devam et.",
             "annotation": {
                 "line": "Çizgiye devam edildi.",
                 "area": "Alana devam edildi."
@@ -65,10 +68,15 @@
             "not_closed": "Bu daireleştirilemez çünkü döngü içerisinde değil."
         },
         "orthogonalize": {
+            "title": "Kare",
             "annotation": {
                 "line": "Çizginin köşeleri doğrultuldu.",
                 "area": "Alanın köşeleri doğrultuldu."
             }
+        },
+        "straighten": {
+            "title": "Düzleştir",
+            "description": "Bu çizgiyi düzleştir."
         },
         "delete": {
             "title": "Sil",
@@ -157,6 +165,7 @@
     },
     "browser_notice": "Bu editör sadece Firefox, Chrome, Safari, Opera ile Internet Explorer 9 ve üstü tarayıcılarda çalışmaktadır. Lütfen tarayınıcı güncelleyin ya da Potlatch 2'yi kullanarak haritada güncelleme yapınız.",
     "translate": {
+        "translate": "Çevir",
         "localized_translation_name": "İsim"
     },
     "logout": "Çıkış",
@@ -176,6 +185,11 @@
     "contributors": {
         "list": "{users} tarafından yapılan katkılar"
     },
+    "geocoder": {
+        "search": "Dünya haritasında ara...",
+        "no_results_visible": "Harita alanının görünüşünde sonuçbulunamadı",
+        "no_results_worldwide": "Sonuç bulunamadı"
+    },
     "geolocate": {
         "title": "Konumumu göster"
     },
@@ -185,11 +199,17 @@
         "show_more": "Daha fazla göster",
         "view_on_osm": "OpenStreetMap.org üzerinde gör",
         "all_tags": "Tüm etiketler",
+        "all_members": "Tüm üyeler",
         "choose": "Kısım tipini seçiniz",
         "results": "{search} kelimesi için {n} adet sonuç ",
         "reference": "OpenStreetMap Wiki'de gör",
         "remove": "Kaldır",
-        "unknown": "Bilinmeyen"
+        "multiselect": "Nesneler seçildi",
+        "unknown": "Bilinmeyen",
+        "node": "Düğüm",
+        "way": "Yön",
+        "relation": "İlişki",
+        "location": "Konum"
     },
     "background": {
         "title": "Arkaplan",
@@ -214,7 +234,9 @@
     "success": {
         "just_edited": "Şu an OpenStreetMap'de bir değişiklik yaptınız!",
         "view_on_osm": "OSM üzerinde gör",
-        "facebook": "Facebook'da Paylaş"
+        "facebook": "Facebook'da Paylaş",
+        "twitter": "Twitter'da Paylaş",
+        "google": "Google+'da Paylaş"
     },
     "confirm": {
         "okay": "Tamam"
@@ -254,6 +276,7 @@
     },
     "intro": {
         "navigation": {
+            "title": "Navigasyon",
             "drag": "Ana harita alanı OpenStreetMap verisini arka plan olarak size sunmaktadır. Diğer harita uygulamalarında olduğu gibi sürekleyip yaklaş/uzaklaş ile haritada dolaşabilirsiniz. **Haritayı sürükleyin!** ",
             "select": "Harita nesneleri üç farklı şekilde gösterilir : noktalar, çizgiler ve alanlar. Tüm nesneler üzerine tıklanarak seçilebilir. **Bir nokta üzerine tıklayarak seçiniz.**",
             "header": "Başlık bize nesne tipini göstermektedir.",
@@ -283,6 +306,7 @@
             "restart": "Bu yolun \"Flower Street\" -sokağı- ile kesişmesi gerekiyor."
         },
         "startediting": {
+            "title": "Düzenlemeye Başla",
             "help": "Daha fazla dökümantasyon ve örnek burada mevcut.",
             "save": "Belli aralıklarla değişikliklerinizi kaydetmeyi unutmayınız!",
             "start": "Haritalamaya başla!"
@@ -418,6 +442,9 @@
             "maxspeed": {
                 "label": "Hız Limiti"
             },
+            "name": {
+                "label": "İsim"
+            },
             "natural": {
                 "label": "Doğal"
             },
@@ -508,6 +535,9 @@
             },
             "tracktype": {
                 "label": "Tip"
+            },
+            "tunnel": {
+                "label": "Tünel"
             },
             "water": {
                 "label": "Tip"
@@ -652,6 +682,9 @@
             },
             "barrier/city_wall": {
                 "name": "Şehir Duvarı"
+            },
+            "barrier/cycle_barrier": {
+                "name": "Bisiklet Bariyeri"
             },
             "barrier/ditch": {
                 "name": "Sulama kanalı"
@@ -1001,6 +1034,9 @@
             "shop/chemist": {
                 "name": "Eczacı"
             },
+            "shop/computer": {
+                "name": "Bilgisayar Mağazası"
+            },
             "shop/convenience": {
                 "name": "Bakkal"
             },
@@ -1036,6 +1072,9 @@
             },
             "shop/mall": {
                 "name": "Alışveriş Merkezi"
+            },
+            "shop/mobile_phone": {
+                "name": "Cep Telefonu Mağazası"
             },
             "shop/optician": {
                 "name": "Optik"

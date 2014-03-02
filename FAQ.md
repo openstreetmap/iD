@@ -28,6 +28,6 @@ main things iD uses the network for:
 * Downloading tiles -- ditto
 * Uploading changes
 
-We've though a little about [caching tiles](https://github.com/systemed/iD/issues/127)
+We've though a little about [caching tiles](https://github.com/openstreetmap/iD/issues/127)
 and downloaded data, but haven't actively worked on it, nor on the data download/upload
 question.

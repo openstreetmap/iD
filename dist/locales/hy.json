@@ -1,0 +1,128 @@
+{
+    "modes": {
+        "add_line": {
+            "title": "Գիծ"
+        },
+        "add_point": {
+            "title": "Կետ",
+            "tail": "Կետ ավելացնելու համար կտացրեք քարտեզի վրա։"
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Կետ է ավլեացրել։"
+            }
+        },
+        "disconnect": {
+            "title": "Անջատել",
+            "description": "Անջատել գծերը/տարածքները իրարից։"
+        },
+        "merge": {
+            "title": "Միացնել",
+            "description": "Միացնել այս գծերը։"
+        }
+    },
+    "translate": {
+        "translate": "Թարգմանել",
+        "localized_translation_language": "Ընտրեք լեզուն",
+        "localized_translation_name": "Անուն"
+    },
+    "intro": {
+        "lines": {
+            "title": "Գծեր"
+        }
+    },
+    "presets": {
+        "categories": {
+            "category-golf": {
+                "name": "Գոլֆ"
+            }
+        },
+        "fields": {
+            "access": {
+                "label": "Մատչելիություն"
+            },
+            "address": {
+                "label": "Հասցե",
+                "placeholders": {
+                    "housename": "Շենքի անվանում",
+                    "number": "123",
+                    "street": "Փողոց",
+                    "city": "Քաղաք"
+                }
+            },
+            "atm": {
+                "label": "Բանկոմատ"
+            },
+            "building": {
+                "label": "Շինություն"
+            },
+            "building_area": {
+                "label": "Շինություն"
+            },
+            "covered": {
+                "label": "Ծածկված"
+            },
+            "cuisine": {
+                "label": "Խոհանոց"
+            },
+            "maxspeed": {
+                "label": "Արագության սահմանափակում"
+            },
+            "opening_hours": {
+                "label": "Աշխատանքային ժամեր"
+            },
+            "phone": {
+                "label": "Հեռախոս"
+            },
+            "website": {
+                "label": "Կայք"
+            }
+        },
+        "presets": {
+            "aeroway/aerodrome": {
+                "name": "Օդանավակայան"
+            },
+            "aeroway/helipad": {
+                "name": "Ուղաթիռային հրապարակ"
+            },
+            "amenity/bank": {
+                "name": "Բանկ"
+            },
+            "amenity/bar": {
+                "name": "Բար"
+            },
+            "amenity/bicycle_parking": {
+                "name": "Հեծանվային կայանատեղի"
+            },
+            "amenity/bicycle_rental": {
+                "name": "Հեծանիվի վարձակալություն"
+            },
+            "amenity/cafe": {
+                "name": "Սրճարան"
+            },
+            "amenity/cinema": {
+                "name": "Կինոթատրոն"
+            },
+            "amenity/fast_food": {
+                "name": "Արագ սնունդ"
+            },
+            "barrier/gate": {
+                "name": "Դարպաս"
+            },
+            "barrier/wall": {
+                "name": "Պատ"
+            },
+            "highway/bus_stop": {
+                "name": "Ավտոբուսի կանգառ"
+            },
+            "highway/crossing": {
+                "name": "Անցում (հետիոտնի)"
+            },
+            "highway/steps": {
+                "name": "Աստիճաններ"
+            }
+        }
+    }
+}

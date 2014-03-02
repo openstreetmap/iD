@@ -1,0 +1,316 @@
+{
+    "presets": {
+        "fields": {
+            "address": {
+                "label": "주소",
+                "placeholders": {
+                    "housename": "건물명칭",
+                    "number": "123",
+                    "street": "길",
+                    "city": "도시"
+                }
+            },
+            "aeroway": {
+                "label": "종류"
+            },
+            "amenity": {
+                "label": "종류"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "bicycle_parking": {
+                "label": "종류"
+            },
+            "building": {
+                "label": "건물"
+            },
+            "building_area": {
+                "label": "건물"
+            },
+            "construction": {
+                "label": "종류"
+            },
+            "crossing": {
+                "label": "종류"
+            },
+            "entrance": {
+                "label": "종류"
+            },
+            "fax": {
+                "label": "Fax"
+            },
+            "highway": {
+                "label": "종류"
+            },
+            "historic": {
+                "label": "종류"
+            },
+            "internet_access": {
+                "label": "인터넷 이용 가능 여부",
+                "options": {
+                    "wlan": "Wifi",
+                    "terminal": "터미널"
+                }
+            },
+            "landuse": {
+                "label": "종류"
+            },
+            "leisure": {
+                "label": "종류"
+            },
+            "maxspeed": {
+                "label": "속도 제한"
+            },
+            "office": {
+                "label": "종류"
+            },
+            "oneway": {
+                "label": "일방통행"
+            },
+            "opening_hours": {
+                "label": "말"
+            },
+            "place": {
+                "label": "종류"
+            },
+            "railway": {
+                "label": "종류"
+            },
+            "religion": {
+                "label": "종교",
+                "options": {
+                    "christian": "기독교",
+                    "muslim": "이슬람교",
+                    "buddhist": "불교",
+                    "jewish": "유대교",
+                    "hindu": "힌두교"
+                }
+            },
+            "service": {
+                "label": "종류"
+            },
+            "shop": {
+                "label": "종류"
+            },
+            "sport": {
+                "label": "운동"
+            },
+            "tourism": {
+                "label": "종류"
+            },
+            "water": {
+                "label": "종류"
+            },
+            "waterway": {
+                "label": "종류"
+            },
+            "website": {
+                "label": "웹사이트"
+            },
+            "wetland": {
+                "label": "종류"
+            },
+            "wikipedia": {
+                "label": "위키페디아"
+            },
+            "wood": {
+                "label": "종류"
+            }
+        },
+        "presets": {
+            "aeroway/helipad": {
+                "name": "헬기 이착륙장"
+            },
+            "amenity/bank": {
+                "name": "은행"
+            },
+            "amenity/bar": {
+                "name": "바"
+            },
+            "amenity/bicycle_parking": {
+                "name": "자전거 보관소"
+            },
+            "amenity/bicycle_rental": {
+                "name": "자전거 대여소"
+            },
+            "amenity/cafe": {
+                "name": "카페"
+            },
+            "amenity/cinema": {
+                "name": "극장"
+            },
+            "amenity/fast_food": {
+                "name": "패스트 푸드"
+            },
+            "amenity/fire_station": {
+                "name": "소방소"
+            },
+            "amenity/hospital": {
+                "name": "병원"
+            },
+            "amenity/library": {
+                "name": "도서관"
+            },
+            "amenity/pharmacy": {
+                "name": "약국"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "성당"
+            },
+            "amenity/police": {
+                "name": "경찰서"
+            },
+            "amenity/post_box": {
+                "name": "사서함"
+            },
+            "amenity/post_office": {
+                "name": "우체국"
+            },
+            "amenity/pub": {
+                "name": "술집"
+            },
+            "amenity/restaurant": {
+                "name": "식당"
+            },
+            "amenity/school": {
+                "name": "학교"
+            },
+            "amenity/toilets": {
+                "name": "화장실"
+            },
+            "amenity/university": {
+                "name": "대학교"
+            },
+            "building": {
+                "name": "건물"
+            },
+            "highway/bus_stop": {
+                "name": "버스정류장"
+            },
+            "highway/cycleway": {
+                "name": "자전거 도로"
+            },
+            "highway/footway": {
+                "name": "산책로"
+            },
+            "highway/motorway": {
+                "name": "고속도로"
+            },
+            "highway/path": {
+                "name": "경로"
+            },
+            "highway/primary": {
+                "name": "큰도시를 연결하는 국도"
+            },
+            "highway/residential": {
+                "name": "주택가 도로.골목길"
+            },
+            "highway/secondary": {
+                "name": "작은 도시와 마을을 연결하는 도로"
+            },
+            "highway/service": {
+                "name": "주요 서비스-주차장,공원 등과 연계된 도로"
+            },
+            "highway/steps": {
+                "name": "계단"
+            },
+            "highway/tertiary": {
+                "name": "폭 4미터 이상의 넓은 도로.영국의 \"C\"도로."
+            },
+            "highway/track": {
+                "name": "농업/임업용 도로"
+            },
+            "highway/traffic_signals": {
+                "name": "신호등"
+            },
+            "highway/trunk": {
+                "name": "고속도로가 아닌 도로"
+            },
+            "highway/unclassified": {
+                "name": "미분류 도로"
+            },
+            "historic/monument": {
+                "name": "산"
+            },
+            "landuse": {
+                "name": "토지용도"
+            },
+            "landuse/allotments": {
+                "name": "텃밭"
+            },
+            "landuse/basin": {
+                "name": "온천"
+            },
+            "landuse/commercial": {
+                "name": "상업"
+            },
+            "landuse/construction": {
+                "name": "개발중"
+            },
+            "landuse/farm": {
+                "name": "경작 및 재배에 사용되는 농지"
+            },
+            "landuse/forest": {
+                "name": "숲"
+            },
+            "landuse/grass": {
+                "name": "목초지"
+            },
+            "landuse/industrial": {
+                "name": "공업"
+            },
+            "landuse/quarry": {
+                "name": "채석장"
+            },
+            "landuse/vineyard": {
+                "name": "포도농장"
+            },
+            "leisure": {
+                "name": "레저"
+            },
+            "leisure/golf_course": {
+                "name": "골프장"
+            },
+            "leisure/park": {
+                "name": "공원"
+            },
+            "leisure/pitch": {
+                "name": "축구,야구,스케이트 등 경기장"
+            },
+            "leisure/pitch/american_football": {
+                "name": "미식 축구장"
+            },
+            "leisure/pitch/baseball": {
+                "name": "야구장"
+            },
+            "leisure/pitch/basketball": {
+                "name": "농구장"
+            },
+            "leisure/pitch/soccer": {
+                "name": "축구장"
+            },
+            "leisure/pitch/tennis": {
+                "name": "테니스장"
+            },
+            "man_made/lighthouse": {
+                "name": "Q"
+            },
+            "man_made/pier": {
+                "name": "방파제"
+            },
+            "natural/bay": {
+                "name": "만"
+            },
+            "natural/beach": {
+                "name": "해변"
+            },
+            "natural/cliff": {
+                "name": "절벽"
+            },
+            "natural/glacier": {
+                "name": "빙하"
+            }
+        }
+    }
+}

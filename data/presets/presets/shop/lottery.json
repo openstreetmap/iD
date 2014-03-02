@@ -1,0 +1,17 @@
+{
+    "icon": "shop",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "shop": "lottery"
+    },
+    "name": "Lottery Shop"
+}

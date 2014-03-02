@@ -97,14 +97,14 @@ iD.ui = function(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .attr('href', 'http://github.com/systemed/iD')
+            .attr('href', 'http://github.com/openstreetmap/iD')
             .text(iD.version);
 
         var bugReport = linkList.append('li')
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .attr('href', 'https://github.com/systemed/iD/issues');
+            .attr('href', 'https://github.com/openstreetmap/iD/issues');
 
         bugReport.append('span')
             .attr('class','icon bug light');

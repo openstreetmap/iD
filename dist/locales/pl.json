@@ -252,7 +252,11 @@
         "incomplete": "<nie pobrane>",
         "feature_list": "Wyszukiwanie rodzaju obiektu",
         "edit": "Edytuj obiekt",
-        "none": "Brak"
+        "none": "Brak",
+        "node": "Węzeł",
+        "way": "Droga",
+        "relation": "Ralacja",
+        "location": "Lokalizacja"
     },
     "background": {
         "title": "Tło",
@@ -312,6 +316,7 @@
         "untagged_area": "Nieoznaczony obszar",
         "many_deletions": "Usuwasz {n} obiektów. Czy na pewno chcesz to zrobić? Ta operacja usunie je z mapy, którą widzą wszyscy na openstreetmap.org.",
         "tag_suggests_area": "Tag {tag} sugeruje, że linia powinna być obszarem, ale nim nie jest.",
+        "untagged_tooltip": "Wybierz typ obiektu, króry opisuje czym to (geometria) jest.",
         "deprecated_tags": "Przestarzałe tagi: {tags}"
     },
     "zoom": {
@@ -327,7 +332,6 @@
     },
     "help": {
         "title": "Pomoc",
-        "help": "# Pomoc\n\nTo jest edytor [OpenStreetMap](http://www.openstreetmap.org/),\nwolnej i edytowalnej mapy świata. Możesz  go używać do dodawania i\naktualizacji danych w twoim rejonie, czyniąc otwartą mapę świata lepszą\ndla każdego.\n\nModyfikacje wprowadzone na tej mapie będą widoczne dla wszystkich\nużywających OpenStreetMap. Aby wprowadzić modyfikacje, potrzebujesz\n[darmowego konta OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[Edytor iD](http://ideditor.com/) jest projektem społecznościowym z\n[kodem dostępnym na GitHub](https://github.com/systemed/iD).\n",
         "editing_saving": "# Edycja i zapis\n\nTen edytor został zaprojektowany do pracy w trybie online i już go używasz poprzez stronę\ninternetową.\n\n### Wybieranie obiektów\n\nAby wybrać obiekt na mapie, na przykład droga, czy POI, kliknij go na mapie.\nSpowoduje to podświetlenie wybranego obiektu, otworzenie panelu zawierającego szczegóły\no nim i wyświetlenie menu z poleceniami, które możesz wykonać na obiekcie.\n\nWiele obiektów może zostać wybranych przez przytrzymanie wciśniętego klawisza 'Shift' i lewego klawisza myszy, z jednoczesnym przeciągnięciem zaznaczając interesujący nas obszar mapy. Spowoduje to wybór wszystkich obiektów zawartych w narysowanym prostokącie, umożliwiając Tobie wykonywanie działań na kilku obiektach naraz.\n\n### Zapisywanie modyfikacji\n\nGdy wprowadzisz zmiany, na przykład przez modyfikacje dróg, budynków i miejsc, są one\nprzechowywane lokalnie aż zapiszesz je na serwerze. Nie martw się, gdy popełnisz błąd - możesz\ncofnąć zmiany przez kliknięcie na przycisk cofnij i powtórzyć je poprzez kliknięcie na przycisk powtórz.\n\nKliknij 'Zapisz' aby skończyć grupę modyfikacji - na przykład, gdy skończyłeś pewien obszar miasta i\nchcesz zacząć następny. Będziesz miał wtedy szansę przejrzeć, co zrobiłeś, a edytor dostarczy pomocne\nsugestie i ostrzeżenia w razie, gdyby coś było nie tak z twoimi zmianami.\n\nJeśli wszystko dobrze wygląda, możesz podać krótki komentarz opisujący zmianę, którą wprowadziłeś\ni kliknąć 'Zapisz' ponownie, aby wysłać zmiany do [OpenStreetMap.org](http://www.openstreetmap.org/),\ngdzie będą one widoczne dla wszystkich użytkowników i dostępne dla innych do bazowania na nich i\ndalszego ulepszania.\n\nJeżeli nie możesz skończyć swoich modyfikacji w czasie jednej sesji, możesz opuścić okno edytora i\nwrócić później (na tym samym komputerze i w tej samej przeglądarce), a edytor zaoferuje ci przywrócenie\ntwojej pracy.\n",
         "roads": "# Drogi\n\nMożesz tworzyć, poprawiać i usuwać drogi używając tego edytora. Drogi mogą być wszelkiego rodzaju:\nścieżki, ulice, szlaki, ścieżki rowerowe i tak dalej - każdy często uczęszczany odcinek powinien dać się\nprzedstawić.\n\n### Zaznaczanie\n\nKliknij drogę, aby ją zaznaczyć. Obwiednia powinna stać się widoczna, wraz z małym menu\nnarzędziowym na mapie oraz panelem bocznym pokazującym więcej informacji na temat drogi.\n\n### Modyfikowanie\n\nCzęsto będziesz widział drogi, które nie są wyrównane ze zdjęciami satelitarnymi lub śladami GPS.\nMożesz dopasować te drogi tak, aby były we właściwym miejscu.\n\nNajpierw kliknij drogę, którą chcesz zmienić. Podświetli ją to oraz pokaże punkty kontrolne, które\nmożesz przesunąć w lepsze miejsce. Jeżeli chcesz dodać nowe punkty kontrolne, aby droga\nbyła bardziej szczegółowa, dwukrotnie kliknij część drogi bez punktu, a w tym miejscu nowy się\npojawi.\n\nJeżeli droga łączy się z inną drogą, ale nie jest prawidłowo połączona z nią na mapie, możesz\nprzeciągnąć jeden z puntów kontrolnych na drugą drogę w celu ich połączenia. Prawidłowe połączenia\ndróg są ważne dla mapy i kluczowe dla wyznaczania tras.\n\nMożesz też kliknąć narzędzie 'Przesuń' lub nacisnąć klawisz `M` aby przesunąć jednocześnie całą\ndrogę, a następnie kliknąć ponownie, aby zachować to przesunięcie.\n\n### Usuwanie\n\nGdy droga jest całkiem błędna - widzisz, że nie istnieje na zdjęciach satelitarnych (a najlepiej sam\nsprawdziłeś w terenie, że jej nie ma) - możesz usunąć ją. Uważaj, gdy usuwasz obiekty - wyniki usunięcia,\ntak jak każdej modyfikacji, są widoczne dla wszystkich, a zdjęcie satelitarne często nie są aktualne,\nwięc droga może być po prostu nowo wybudowana.\n\nMożesz usunąć drogę przez zaznaczenie jej, a następnie kliknięcie ikony kosza lub wciśnięcie\nklawisza 'Delete'.\n\n### Tworzenie\n\nGdzieś tam powinna być droga, ale jej nie ma? Kliknij przycisk 'Linia' w górnym lewym rogu edytora\nlub naciśnij klawisz '2' na klawiaturze, aby zacząć rysować linię.\n\nKliknij początek drogi na mapie, aby zacząć rysować. Jeżeli droga odchodzi od już istniejącej, zacznij\nprzez kliknięcie w miejscu, w którym się łączą.\n\nNastępnie klikaj na punktach wzdłuż drogi tak, aby biegła ona odpowiednio według zdjęć satelitarnych\nlub GPS. Jeżeli droga, którą rysujesz, krzyżuje się z inną, połącz je, klikając na punkcie przecięcia. Gdy\nskończysz rysować, dwukrotnie kliknij ostatni punkt lub naciśnij klawisz 'Enter' na klawiaturze.\n",
         "gps": "# GPS\n\nDane GPS są najbardziej zaufanym źródłem dla OpenStreetMap. Ten edytor obsługuje lokalne ślady -\npliki `.gpx` na twoim komputerze. Możesz zbierać tego rodzaju ślady GPS używając aplikacji na\nsmartfony lub sprzętu GPS.\n\nInformacje jak używać GPS-u do zbierania informacji o okolicy możesz znaleźć pod\n[Zbieranie informacji z GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby użyć śladu GPX do rysowania mapy, przeciągnij i upuść plik GPX na edytor. Jeżeli zostanie\nrozpoznany, zostanie dodany na mapę w postaci jaskrawej linii. Kliknij menu 'Ustawienia tła'\npo prawej stronie, aby włączyć, wyłączyć lub powiększyć do nowej warstwy GPX.\n\nŚlad GPX nie jest bezpośrednio wysyłany do OpenStreetMap - najlepiej użyć go do rysowania mapy,\nużywając go jako wzoru dla nowych obiektów, które dodasz. Aby wysłać ślad na serwer odwiedź stronę \n [Publiczne ślady GPS](http://www.openstreetmap.org/trace/create), będziesz mógł go udostępnić\ninnym użytkownikom.\n",
@@ -390,6 +394,9 @@
         "categories": {
             "category-building": {
                 "name": "Budynek"
+            },
+            "category-golf": {
+                "name": "Golf"
             },
             "category-landuse": {
                 "name": "Zagospodarowanie terenu"
@@ -500,6 +507,9 @@
             "building_area": {
                 "label": "Budynek"
             },
+            "cans": {
+                "label": "Przyjmowanie puszek"
+            },
             "capacity": {
                 "label": "Pojemność",
                 "placeholder": "50, 100, 200..."
@@ -513,6 +523,9 @@
                     "clockwise": "Zgodnie ze wskazówkami zegara",
                     "anticlockwise": "Przeciwnie do wskazówek zegara"
                 }
+            },
+            "clothes": {
+                "label": "Przyjmowanie ciuchów"
             },
             "collection_times": {
                 "label": "Czas zbierania"
@@ -568,6 +581,9 @@
             },
             "generator/type": {
                 "label": "Typ"
+            },
+            "glass": {
+                "label": "Przyjmowanie szkła"
             },
             "highway": {
                 "label": "Typ"
@@ -705,6 +721,9 @@
             "shelter": {
                 "label": "Schronienie"
             },
+            "shelter_type": {
+                "label": "Typ"
+            },
             "shop": {
                 "label": "Typ"
             },
@@ -747,6 +766,9 @@
             },
             "tree_type": {
                 "label": "Typ"
+            },
+            "tunnel": {
+                "label": "Tunel"
             },
             "vending": {
                 "label": "Rodzaje towarów"
@@ -872,6 +894,9 @@
                 "name": "Kino",
                 "terms": "duży ekran,drive-in,film,ruchomy obraz,pokaz zdjęć,zdjęcia,pokaz,silver screen"
             },
+            "amenity/clock": {
+                "name": "Zegar"
+            },
             "amenity/college": {
                 "name": "Uczelnia",
                 "terms": "uczelnia"
@@ -967,6 +992,9 @@
                 "name": "Pub",
                 "terms": "pub,piwo,wino"
             },
+            "amenity/recycling": {
+                "name": "Recykling"
+            },
             "amenity/restaurant": {
                 "name": "Restauracja",
                 "terms": "bar,kawiarnia,stołówka,jadalnia,drive-in,knajpa,jadłodajnia,fast food,grill,gospoda,klub nocny,pizzeria"
@@ -977,6 +1005,15 @@
             },
             "amenity/shelter": {
                 "name": "Schronienie"
+            },
+            "amenity/social_facility": {
+                "name": "Placówka pomocy społecznej"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "Bank żywności"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Schronisko dla bezdomnych"
             },
             "amenity/swimming_pool": {
                 "name": "Basen",
@@ -1009,6 +1046,9 @@
             "amenity/vending_machine": {
                 "name": "Automat sprzedający",
                 "terms": "automat do sprzedaży"
+            },
+            "amenity/veterinary": {
+                "name": "Weterynarz"
             },
             "amenity/waste_basket": {
                 "name": "Kosz na śmieci",
@@ -1096,6 +1136,9 @@
                 "name": "Apartamenty",
                 "terms": "blok,kamienica"
             },
+            "building/church": {
+                "name": "Kościół"
+            },
             "building/commercial": {
                 "name": "Nieruchomość komercyjna",
                 "terms": "sklep,komercyjny,sprzedaż,handlowy"
@@ -1123,6 +1166,51 @@
             "building/residential": {
                 "name": "Budynek mieszkalny",
                 "terms": "blok, kamienica, dom, czynszówka"
+            },
+            "building/warehouse": {
+                "name": "Magazyn"
+            },
+            "craft/clockmaker": {
+                "name": "Zegarmistrz"
+            },
+            "craft/confectionary": {
+                "name": "Cukiernik"
+            },
+            "craft/dressmaker": {
+                "name": "Krawiec"
+            },
+            "craft/electrician": {
+                "name": "Elektryk"
+            },
+            "craft/gardener": {
+                "name": "Ogrodnik"
+            },
+            "craft/glaziery": {
+                "name": "Szklarz"
+            },
+            "craft/jeweler": {
+                "name": "Jubiler"
+            },
+            "craft/locksmith": {
+                "name": "Ślusarz"
+            },
+            "craft/optician": {
+                "name": "Optyk"
+            },
+            "craft/painter": {
+                "name": "Malarz"
+            },
+            "craft/photographer": {
+                "name": "Fotograf"
+            },
+            "craft/photographic_labratory": {
+                "name": "Laboratorium fotograficzne"
+            },
+            "craft/plumber": {
+                "name": "Hydraulik"
+            },
+            "craft/roofer": {
+                "name": "Dekarz"
             },
             "emergency/ambulance_station": {
                 "name": "Stacja pogotowia ratunkowego",
@@ -1211,6 +1299,9 @@
                 "name": "Droga lokalna",
                 "terms": "lokalna, osiedlowa, zamieszkała"
             },
+            "highway/rest_area": {
+                "name": "Obszar wypoczynkowy"
+            },
             "highway/road": {
                 "name": "Nieokreślona droga",
                 "terms": "droga,nieznana,niewiadoma"
@@ -1242,6 +1333,9 @@
             },
             "highway/service/parking_aisle": {
                 "name": "Uliczka parkingowa"
+            },
+            "highway/services": {
+                "name": "Obszar usługowy"
             },
             "highway/steps": {
                 "name": "Schody",
@@ -1588,8 +1682,24 @@
             "office/architect": {
                 "terms": "architekt"
             },
+            "office/educational_institution": {
+                "name": "Instytucja edukacyjna"
+            },
+            "office/employment_agency": {
+                "name": "Agencja zatrudnienia"
+            },
+            "office/estate_agent": {
+                "name": "Biuro nieruchomości"
+            },
+            "office/insurance": {
+                "name": "Biuro ubezpieczeń"
+            },
             "office/political_party": {
+                "name": "Partia polityczna",
                 "terms": "partia polityczna"
+            },
+            "office/therapist": {
+                "name": "Terapeuta"
             },
             "office/travel_agent": {
                 "name": "Biuro podróży"
@@ -1647,6 +1757,9 @@
             },
             "power/transformer": {
                 "name": "Transformator"
+            },
+            "public_transport/stop_position": {
+                "name": "Miejsce zatrzymania"
             },
             "railway": {
                 "name": "Kolej",
@@ -1719,6 +1832,9 @@
             "shop/bicycle": {
                 "name": "Sklep rowerowy",
                 "terms": "sklep rowerowy"
+            },
+            "shop/bookmaker": {
+                "name": "Bukmacher"
             },
             "shop/books": {
                 "name": "Księgarnia",
@@ -1822,6 +1938,9 @@
             },
             "shop/locksmith": {
                 "name": "Ślusarz"
+            },
+            "shop/lottery": {
+                "name": "Kolektura"
             },
             "shop/mall": {
                 "name": "Centrum handlowe"

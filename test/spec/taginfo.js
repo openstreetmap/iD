@@ -19,7 +19,7 @@ describe("iD.taginfo", function() {
             var callback = sinon.spy();
             taginfo.keys({query: "amen"}, callback);
 
-            server.respondWith("GET", new RegExp("http://taginfo.openstreetmap.org/api/4/keys/all"),
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/keys/all"),
                 [200, { "Content-Type": "application/json" },
                     '{"data":[{"count_all":5190337,"key":"amenity","count_all_fraction":1.0}]}']);
             server.respond();
@@ -33,7 +33,7 @@ describe("iD.taginfo", function() {
             var callback = sinon.spy();
             taginfo.keys({query: "amen"}, callback);
 
-            server.respondWith("GET", new RegExp("http://taginfo.openstreetmap.org/api/4/keys/all"),
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/keys/all"),
                 [200, { "Content-Type": "application/json" },
                     '{"data":[{"count_all":5190337,"key":"amenity","count_all_fraction":1.0, "count_nodes_fraction":1.0},\
                               {"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes_fraction":0.0}]}']);
@@ -47,7 +47,7 @@ describe("iD.taginfo", function() {
 
             taginfo.keys({query: "amen", filter: "nodes"}, callback);
 
-            server.respondWith("GET", new RegExp("http://taginfo.openstreetmap.org/api/4/keys/all"),
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/keys/all"),
                 [200, { "Content-Type": "application/json" },
                     '{"data":[{"count_all":5190337,"count_nodes":500000,"key":"amenity","count_all_fraction":1.0, "count_nodes_fraction":1.0},\
                               {"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes":100}]}']);
@@ -63,7 +63,7 @@ describe("iD.taginfo", function() {
 
             taginfo.values({key: "amenity", query: "par"}, callback);
 
-            server.respondWith("GET", new RegExp("http://taginfo.openstreetmap.org/api/4/key/values"),
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/key/values"),
                 [200, { "Content-Type": "application/json" },
                     '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":0.1}]}']);
             server.respond();
@@ -78,7 +78,7 @@ describe("iD.taginfo", function() {
 
             taginfo.values({key: "amenity", query: "par"}, callback);
 
-            server.respondWith("GET", new RegExp("http://taginfo.openstreetmap.org/api/4/key/values"),
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/key/values"),
                 [200, { "Content-Type": "application/json" },
                     '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":1.0},\
                      {"value":"party","description":"A place for partying", "fraction":0.0}]}']);
@@ -94,7 +94,7 @@ describe("iD.taginfo", function() {
 
             taginfo.docs({key: "amenity", value: "parking"}, callback);
 
-            server.respondWith("GET", new RegExp("http://taginfo.openstreetmap.org/api/4/tag/wiki_page"),
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/tag/wiki_page"),
                 [200, { "Content-Type": "application/json" },
                     '[{"on_way":false,"lang":"en","on_area":true,"image":"File:Car park2.jpg"}]']);
             server.respond();

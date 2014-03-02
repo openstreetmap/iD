@@ -5,7 +5,7 @@ window.iD = function () {
     var context = {},
         storage;
 
-    // https://github.com/systemed/iD/issues/772
+    // https://github.com/openstreetmap/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
     try { storage = localStorage; } catch (e) {}
     storage = storage || (function() {
@@ -310,7 +310,7 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '1.3.4';
+iD.version = '1.3.7';
 
 (function() {
     var detected = {};

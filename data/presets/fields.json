@@ -60,7 +60,6 @@
     "address": {
         "type": "address",
         "keys": [
-            "addr:housename",
             "addr:housenumber",
             "addr:street",
             "addr:city",
@@ -71,7 +70,6 @@
         "label": "Address",
         "strings": {
             "placeholders": {
-                "housename": "Housename",
                 "number": "123",
                 "street": "Street",
                 "city": "City",
@@ -194,11 +192,6 @@
         "geometry": "area",
         "label": "Building"
     },
-    "cans": {
-        "key": "cans",
-        "type": "check",
-        "label": "Accepts Cans"
-    },
     "capacity": {
         "key": "capacity",
         "type": "number",
@@ -241,11 +234,6 @@
                 "anticlockwise": "Counterclockwise"
             }
         }
-    },
-    "clothes": {
-        "key": "clothes",
-        "type": "check",
-        "label": "Accepts Clothes"
     },
     "collection_times": {
         "key": "collection_times",
@@ -293,6 +281,17 @@
         "type": "textarea",
         "label": "Description"
     },
+    "electrified": {
+        "key": "electrified",
+        "type": "combo",
+        "label": "Electrification",
+        "options": [
+            "contact_line",
+            "rail",
+            "yes",
+            "no"
+        ]
+    },
     "elevation": {
         "key": "ele",
         "type": "number",
@@ -337,6 +336,11 @@
         "type": "textarea",
         "label": "Fix Me"
     },
+    "gauge": {
+        "key": "gauge",
+        "type": "combo",
+        "label": "Gauge"
+    },
     "generator/method": {
         "key": "generator:method",
         "type": "combo",
@@ -351,11 +355,6 @@
         "key": "generator:type",
         "type": "combo",
         "label": "Type"
-    },
-    "glass": {
-        "key": "glass",
-        "type": "check",
-        "label": "Accepts Glass"
     },
     "golf_hole": {
         "key": "ref",
@@ -517,11 +516,6 @@
         "type": "text",
         "label": "Operator"
     },
-    "paper": {
-        "key": "paper",
-        "type": "check",
-        "label": "Accepts Paper"
-    },
     "par": {
         "key": "par",
         "type": "number",
@@ -584,6 +578,26 @@
         "key": "railway",
         "type": "typeCombo",
         "label": "Type"
+    },
+    "recycling/cans": {
+        "key": "recycling:cans",
+        "type": "check",
+        "label": "Accepts Cans"
+    },
+    "recycling/clothes": {
+        "key": "recycling:clothes",
+        "type": "check",
+        "label": "Accepts Clothes"
+    },
+    "recycling/glass": {
+        "key": "recycling:glass",
+        "type": "check",
+        "label": "Accepts Glass"
+    },
+    "recycling/paper": {
+        "key": "recycling:paper",
+        "type": "check",
+        "label": "Accepts Paper"
     },
     "ref": {
         "key": "ref",
@@ -675,6 +689,28 @@
         "key": "shop",
         "type": "typeCombo",
         "label": "Type"
+    },
+    "social_facility_for": {
+        "key": "social_facility:for",
+        "type": "radio",
+        "label": "People served",
+        "placeholder": "Homeless, Disabled, Child, etc",
+        "options": [
+            "abused",
+            "child",
+            "disabled",
+            "diseased",
+            "drug_addicted",
+            "homeless",
+            "juvenile",
+            "mental_health",
+            "migrant",
+            "orphan",
+            "senior",
+            "underprivileged",
+            "unemployed",
+            "victim"
+        ]
     },
     "source": {
         "key": "source",

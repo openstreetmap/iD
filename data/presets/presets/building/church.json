@@ -1,0 +1,16 @@
+{
+    "icon": "place-of-worship",
+    "fields": [
+        "address",
+        "levels"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "building": "church"
+    },
+    "name": "Church"
+}

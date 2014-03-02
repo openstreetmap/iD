@@ -152,6 +152,7 @@ iD.ui.RawMembershipEditor = function(context) {
                     .attr('type', 'text')
                     .attr('class', 'member-entity-input')
                     .call(d3.combobox()
+                        .minItems(1)
                         .fetcher(function(value, callback) {
                             callback(relations(value));
                         })

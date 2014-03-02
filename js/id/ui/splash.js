@@ -24,7 +24,7 @@ iD.ui.Splash = function(context) {
             .html(t('splash.text', {
                 version: iD.version,
                 website: '<a href="http://ideditor.com/">ideditor.com</a>',
-                github: '<a href="https://github.com/systemed/iD">github.com</a>'
+                github: '<a href="https://github.com/openstreetmap/iD">github.com</a>'
             }));
 
         var buttons = introModal.append('div').attr('class', 'modal-actions cf');

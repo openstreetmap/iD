@@ -69,7 +69,7 @@ iD.svg.Areas = function(projection) {
             .data(function(layer) { return data[layer]; }, iD.Entity.key);
 
         // Remove exiting areas first, so they aren't included in the `fills`
-        // array used for sorting below (https://github.com/systemed/iD/issues/1903).
+        // array used for sorting below (https://github.com/openstreetmap/iD/issues/1903).
         paths.exit()
             .remove();
 

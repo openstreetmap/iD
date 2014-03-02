@@ -11,7 +11,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         start = iD.Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
         end = iD.Node({loc: context.map().mouseCoordinates()}),
         segment = iD.Way({
-            nodes: [start.id, end.id],
+            nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
             tags: _.clone(way.tags)
         });
 

@@ -1,6 +1,6 @@
 iD.taginfo = function() {
     var taginfo = {},
-        endpoint = 'http://taginfo.openstreetmap.org/api/4/',
+        endpoint = 'https://taginfo.openstreetmap.org/api/4/',
         tag_sorts = {
             point: 'count_nodes',
             vertex: 'count_nodes',

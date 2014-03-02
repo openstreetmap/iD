@@ -134,7 +134,8 @@
             "annotation": "Fusionerede {n} linjer.",
             "not_eligible": "Disse elementer kan ikke fusioneres.",
             "not_adjacent": "Disse linjer kan ikke fusioneres fordi de ikke er knyttet sammen",
-            "restriction": "Disse linjer kan ikke flettes sammen, da mindst en af disse er medlem af  \"{relation}\" relation."
+            "restriction": "Disse linjer kan ikke flettes sammen, da mindst en af disse er medlem af  \"{relation}\" relation.",
+            "incomplete_relation": "Disse kortegenskaber kan ikke fusioneres, da de ikke er blevet downloadet fuldstændigt."
         },
         "move": {
             "title": "Flyt",
@@ -252,7 +253,11 @@
         "incomplete": "<ikke downloadet>",
         "feature_list": "Søgefunktioner",
         "edit": "Ret objekt",
-        "none": "Ingen"
+        "none": "Ingen",
+        "node": "Punkt",
+        "way": "Vej",
+        "relation": "Relation",
+        "location": "Lokalitet"
     },
     "background": {
         "title": "Baggrund",
@@ -312,6 +317,7 @@
         "untagged_area": "Område uden tags",
         "many_deletions": "Du er ved at slette {n} objekter. Er du sikker på du ønsker at gøre dette? Det vil slette dem fra det kort som alle andre ser på openstreetmap.org.",
         "tag_suggests_area": "Tagget {tag} antyder at linjen er et område,  selvom det ikke er et område",
+        "untagged_tooltip": "Vælg en objekttype der beskriver hvad det {geometritype} er.",
         "deprecated_tags": "Forældede tags: {tags}"
     },
     "zoom": {
@@ -327,7 +333,7 @@
     },
     "help": {
         "title": "Hjælp",
-        "help": "# Hjælp\n\nDette er et redigeringsværktøj for [OpenStreetMap](http://www.openstreetmap.org/), det\nåbne og redigerbare verdenskort. Du kan bruge det til at tilføje og opdatere\ngeodata i dit område og derved bidrage til et verdenskort med opensource og frie geodata\ntil gavn for alle.\n\nÆndringer du laver på dette kort vil blive synlige for alle der benytter\nOpenStreetMap. For at lave en rettelse skal du oprette en\n[gratis OpenStreetMap konto](https://www.openstreetmap.org/user/new).\n\n[iD redigeringsværktøjet](http://ideditor.com/) er et kollaborativt projekt med [kildekode\n tilgængelig på GitHub](https://github.com/systemed/iD). \n",
+        "help": "# Hjælp\n\nDette er et redigeringsværktøj for [OpenStreetMap](http://www.openstreetmap.org/), det\nåbne og redigeringsbare verdenskort. Du kan bruge dette værktøj til at opdatere\ngeodata i dit lokalområde. Derved skaber du et bedre verdenskort med open source og frie geodata\ntil gavn for alle.\n\nDine ændringer på kortet vil blive synligt for alle og enhver der benytter\nOpenStreetMap. For at lave redigeringer skal du oprette\n[en gratis OpenStreetMap konto](https://www.openstreetmap.org/user/new).\n\nDette [iD redigeringsværktøj](http://ideditor.com/) er et kollaborativ projekt og [kildekoden\ner tilgængelig på GitHub](https://github.com/systemed/iD). \n",
         "editing_saving": "# Redigering & Gem\n\nDette redigeringsværktøj er lavet primært til at arbejde online, og du\narbejder gennem et website lige nu.\n\n### Vælg Objekter\n\nFor at vælge et kortobjekt, som fx en vej eller et interessepunkt, klik\npå dette på kortet. Dette vil highlighte det valgte objekt, åbne et panel med\nyderligere detajler om det og samtidigt vise en menu med forskellige ting du kan gøre\nmed dette objekt.\n\nFlere objekter på en gang kan vælges ved at holde \"Shift\" knappen ned, klik og udvælg\npå kortet. Dette vil vælge alle indtegnede objekter indenfor en firkant. Dette tillader\ndig at gøre flere ting med flere objekter på en gang.\n\n### Gem Redigeringer\n\nNår du laver ændringer fx tilføjer veje, bygninger og steder, så er disse\ngemt lokalt på din computer lige ind til du har gemt dem på OpenStreetMaps server.\nDu skal ikke bekymre dig om, hvis du laver en fejl - du kan fortryde ændringer ved at klikke på \"Fortryd\" knappen.\n\nKlik på \"Gem\" for at afslutte dine ændringer - fx du har lavet et komplet område af en by og du ønsker at gå i gang med et nyt område. Du har mulighed for at gennemse hvad du har lavet og redigeringsværktøjet giver nogle hjælpsomme forslag og advarsler, hvis der er noget som ikke ser helt korrekt ud.\n\nHvis alting ser fint nok ud, så kan du skrive en lille kort kommentar om de ændringer du lige har lavet og klik så \"Gem\" igen for at sende ændringerne til [OpenStreetMap.org](http://www.openstreetmap.org/). Dine ændringer vil nu være synlige og tilgængelige for alle. Der igen kan bygge videre og forbedre data.\n\nHvis du ikke kan afslutte dine ændringer lige med det samme, så kan du forlade redigeringsværktøjet og komme igen senere (NB kræver du bruger samme browser og computer igen). Redigeringsværktøjet vil nu gendanne alt dit arbejde igen.\n",
         "roads": "# Veje\n\nDu kan oprette, tilrette og slette veje med dette tegneværktøj. Veje kan være af mange forskellige typer: stier, landeveje, spor, cykelstier mv. Enhver ofte benyttet rute kan kortlægges.\n\n### Vælg\n\nKlik på en vej for at vælge den. Et omrids dukker op sammen med en lille værktøjsmenu og et sidepanel der viser flere oplysninger om vejen.\n\n### Ændring\n\nOfte ses veje der ikke er justeret i forhold til luftfotoet bag dem eller i forhold til et GPS-spor. Du kan justere disse veje så de er placeret rigtigt.\n\nKlik først på vejen du vil ændre. Dette fremhæver den og viser kontrolpunkter langs med den som kan trækkes det rigtige sted hen. Hvis du har brug for flere kontrolpunkter for at gøre vejen mere detaljeret, kan du dobbeltklikke på en del af vejen, så dukker et punkt op.\n\nHvis vejen er forbundet til andre veje, men ikke er korrekt forbundet på kortet, så træk et af kontrolpunkterne hen på den anden vej for at koble dem sammen. Det er vigtigt for kortet, faktisk vitalt for rutevejledninger, at veje er forbundet.\n\nDu kan også klikke på flytteværktøjet eller trykke på tastegenvejen \"M\" for at flytte hele vejen på en gang, og så klikke igen for at gemme flytningen.\n\n### Sletning\n\nHvis en vej er helt forkert - du kan ikke se den på et luftfoto og du har ideelt set fået bekræftet at vejen ikke findes lokalt - så kan du slette vejen. Men pas på med at slette hvad andre har lavet - som med andre ændringer er resultatet synligt for alle og luftfoto kan være forældede så vejen kunne være bygget i mellemtiden.\n\nDu kan slette en bygning ved at vælge den og klikke på skraldespands-ikonet - alternativt kan du bruge slet-tasten på dit tastatur.\n\n### Oprettelse\n\nHar du fundet et sted hvor der skulle være en vej, men den er ikke på kortet? Klik på linje-ikonet i øverste venstre del af tegneværktøjet eller klik på tastegenvejen \"2\" for at tegne en linje.\n\nKlik på begyndelsen af vejen for at påbegynde den. Hvis vejen forgrener sig fra en eksisterende vej, så begynd vejen der hvor de er forbundet.\n\nKlik derefter på punkter på vejens forløb så det passer med luftfoto eller GPS-spor. Hvis vejen du tegner krydser en anden vej, så kobl dem sammen ved at klikke på punktet hvor de skærer hinanden. Når du er færdig med at tegne, så dobbeltklik eller tryk på enter-tasten på tastaturet.\n",
         "gps": "## GPS\n\nGPS data er de mest troværdige data for OpenStreetMap. Dette redigeringsværktøj\nunderstøtter lokalt lagrede - `.gpx` filer på din computer. Du kan indsamle\nGPX spor med mange forskellige smartphone applikationer og med dedikeret\nGPS hardware.\n\nDu kan finde mere information om hvordan du laver en GPS undersøgelse - læs\n[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nFor at bruge et GPX spor til kortlægning - træk og slip GPX filen indover kortet i \nredigeringsværktøjet. Hvis den bliver genkendt som gyldigt format, så vil den blive tilføjet kortet som en\nlyse grøn linje. Klik på \"Baggrundsindstillinger\" menuen på den højre side for tilkoble\neller frakoble. Eller også zoom til det nye GPX understøttet lag.\n\nGPX sporet er ikke direkte oploadet til OpenStreetMap - Den bedste måde\nat bruge dette spor at indtegne efter det og bruge det som en rettesnor for de\nnye objekter du tilføjer. Du kan også [opload GPX sporet til OpenStreetMap](http://www.openstreetmap.org/trace/create)\nderved kan andre brugere også bruge dette.\n",
@@ -390,6 +396,9 @@
         "categories": {
             "category-building": {
                 "name": "Bygning"
+            },
+            "category-golf": {
+                "name": "Golf"
             },
             "category-landuse": {
                 "name": "Brug af land"
@@ -467,6 +476,33 @@
             "admin_level": {
                 "label": "Administrativt niveau"
             },
+            "aerialway": {
+                "label": "Type"
+            },
+            "aerialway/access": {
+                "label": "Adgang"
+            },
+            "aerialway/bubble": {
+                "label": "Skikabine"
+            },
+            "aerialway/capacity": {
+                "label": "Kapacitet (per time)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Varighed (minutter)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "Opvarmet"
+            },
+            "aerialway/occupancy": {
+                "label": "Belægning",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Adgang (sommer)"
+            },
             "aeroway": {
                 "label": "Type"
             },
@@ -500,6 +536,9 @@
             "building_area": {
                 "label": "Bygning"
             },
+            "cans": {
+                "label": "Accepterer dåser"
+            },
             "capacity": {
                 "label": "Kapacitet",
                 "placeholder": "50, 100, 200..."
@@ -514,6 +553,9 @@
                     "anticlockwise": "Mod uret"
                 }
             },
+            "clothes": {
+                "label": "Acceptere tøj"
+            },
             "collection_times": {
                 "label": "Indsamlingstidspunkt"
             },
@@ -522,6 +564,9 @@
             },
             "country": {
                 "label": "Land"
+            },
+            "covered": {
+                "label": "Overdækket"
             },
             "crossing": {
                 "label": "Type"
@@ -537,6 +582,9 @@
             },
             "description": {
                 "label": "Beskrivelse"
+            },
+            "electrified": {
+                "label": "Elektrificering"
             },
             "elevation": {
                 "label": "Højde over havet"
@@ -560,6 +608,9 @@
             "fixme": {
                 "label": "Ret mig"
             },
+            "gauge": {
+                "label": "Sporvidde"
+            },
             "generator/method": {
                 "label": "Metode"
             },
@@ -568,6 +619,17 @@
             },
             "generator/type": {
                 "label": "Type"
+            },
+            "glass": {
+                "label": "Acceptere glas"
+            },
+            "golf_hole": {
+                "label": "Reference",
+                "placeholder": "Hul nummer (1-18)"
+            },
+            "handicap": {
+                "label": "Handikap",
+                "placeholder": "1-18"
             },
             "highway": {
                 "label": "Type"
@@ -583,6 +645,9 @@
             },
             "incline": {
                 "label": "Stigning"
+            },
+            "information": {
+                "label": "Type"
             },
             "internet_access": {
                 "label": "Internetadgang",
@@ -650,6 +715,13 @@
             "operator": {
                 "label": "Operatør"
             },
+            "paper": {
+                "label": "Accepterer papir"
+            },
+            "par": {
+                "label": "Par",
+                "placeholder": "3, 4, 5..."
+            },
             "park_ride": {
                 "label": "Park and ride-anlæg"
             },
@@ -659,6 +731,15 @@
             "phone": {
                 "label": "Telefon",
                 "placeholder": "+31 42 123 4567"
+            },
+            "piste/difficulty": {
+                "label": "Vanskelighedsniveau"
+            },
+            "piste/grooming": {
+                "label": "Sikkerhed"
+            },
+            "piste/type": {
+                "label": "Type"
             },
             "place": {
                 "label": "Type"
@@ -711,6 +792,10 @@
             "shop": {
                 "label": "Type"
             },
+            "social_facility_for": {
+                "label": "Serviceret folk",
+                "placeholder": "Hjemmeløse, Handicappede, Børn osv"
+            },
             "source": {
                 "label": "Kilde"
             },
@@ -726,6 +811,9 @@
                     "embankment": "Forhøjning til tog, vej",
                     "cutting": "Forsænkning"
                 }
+            },
+            "studio_type": {
+                "label": "Type"
             },
             "supervised": {
                 "label": "Supervision"
@@ -750,6 +838,9 @@
             },
             "tree_type": {
                 "label": "Type"
+            },
+            "tunnel": {
+                "label": "Tunnel"
             },
             "vending": {
                 "label": "Gods type"
@@ -781,6 +872,46 @@
             "address": {
                 "name": "Adresse",
                 "terms": "adresse, adresser"
+            },
+            "aerialway": {
+                "name": "Skiliftbane",
+                "terms": "Skiliftbane, Skilift"
+            },
+            "aerialway/cable_car": {
+                "name": "Svævebane",
+                "terms": "Svævebane, Gongolbane"
+            },
+            "aerialway/chair_lift": {
+                "name": "Skilift",
+                "terms": "Skilift, Stolelift"
+            },
+            "aerialway/gondola": {
+                "name": "Gondol",
+                "terms": "Gondol"
+            },
+            "aerialway/magic_carpet": {
+                "name": "Rullebane",
+                "terms": "Rullebane, Skirullebane"
+            },
+            "aerialway/platter": {
+                "name": "Knaplift",
+                "terms": "Knaplift"
+            },
+            "aerialway/pylon": {
+                "name": "Skilifttårn",
+                "terms": "Skilifttårn"
+            },
+            "aerialway/rope_tow": {
+                "name": "Tovlift",
+                "terms": "Tovlift"
+            },
+            "aerialway/station": {
+                "name": "Skiliftstation",
+                "terms": "Skiliftstation"
+            },
+            "aerialway/t-bar": {
+                "name": "Træklift",
+                "terms": "Træklift"
             },
             "aeroway": {
                 "name": "Lufthavnsvej",
@@ -878,6 +1009,14 @@
                 "name": "Biograf",
                 "terms": "Biograf, Bio"
             },
+            "amenity/clinic": {
+                "name": "Klinik",
+                "terms": "Klinik"
+            },
+            "amenity/clock": {
+                "name": "Ur",
+                "terms": "Ur"
+            },
             "amenity/college": {
                 "name": "Gymnasie",
                 "terms": "Gymnasie, Handelsgymnasie"
@@ -885,6 +1024,14 @@
             "amenity/courthouse": {
                 "name": "Domstolsbygning",
                 "terms": "Domstolsbygning, Domstol"
+            },
+            "amenity/dentist": {
+                "name": "Tandlæge",
+                "terms": "Tandlæge"
+            },
+            "amenity/doctor": {
+                "name": "Læge",
+                "terms": "Læge, Doktor"
             },
             "amenity/drinking_water": {
                 "name": "Drikkevand",
@@ -978,6 +1125,10 @@
                 "name": "Rangerstation",
                 "terms": "Rangerstation"
             },
+            "amenity/recycling": {
+                "name": "Genbrug",
+                "terms": "Genbrug"
+            },
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "Restaurant, Spisested, Spisehus"
@@ -989,6 +1140,26 @@
             "amenity/shelter": {
                 "name": "Shelter",
                 "terms": "Shelter, læskur"
+            },
+            "amenity/social_facility": {
+                "name": "Sociale faciliteter",
+                "terms": "Sociale faciliteter"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "Fødevarebank",
+                "terms": "Fødevarebank, folkekøkken"
+            },
+            "amenity/social_facility/group_home": {
+                "name": "Gruppehjem",
+                "terms": "Gruppehjem"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Hjemmeløsskur",
+                "terms": "Hjemmeløsskur"
+            },
+            "amenity/studio": {
+                "name": "Studie",
+                "terms": "Studie"
             },
             "amenity/swimming_pool": {
                 "name": "Svømmebassin",
@@ -1021,6 +1192,10 @@
             "amenity/vending_machine": {
                 "name": "Automat",
                 "terms": "Automat"
+            },
+            "amenity/veterinary": {
+                "name": "Dyrelæge",
+                "terms": "Dyrelæge, Veterinærdyrelæge"
             },
             "amenity/waste_basket": {
                 "name": "Skraldespand",
@@ -1110,9 +1285,45 @@
                 "name": "Lejligheder",
                 "terms": "Lejligheder, Ejerlejligheder"
             },
+            "building/barn": {
+                "name": "Lade",
+                "terms": "Lade, Stald"
+            },
+            "building/bunker": {
+                "name": "Bunker",
+                "terms": "Bunker"
+            },
+            "building/cabin": {
+                "name": "Hytte",
+                "terms": "Hytte"
+            },
+            "building/cathedral": {
+                "name": "Katedral",
+                "terms": "Katedral, Domkirke"
+            },
+            "building/chapel": {
+                "name": "Kapel",
+                "terms": "Kapel"
+            },
+            "building/church": {
+                "name": "Kirke",
+                "terms": "Kirke"
+            },
             "building/commercial": {
                 "name": "Indkøbscenter",
                 "terms": "Indkøbscenter, Storcenter"
+            },
+            "building/construction": {
+                "name": "Bygning under konstruktion",
+                "terms": "Bygning under konstruktion, Byggeplads"
+            },
+            "building/detached": {
+                "name": "Parcelhus",
+                "terms": "Parcelhus"
+            },
+            "building/dormitory": {
+                "name": " Kollegie",
+                "terms": " Kollegie, Klubværelse, Kollegium"
             },
             "building/entrance": {
                 "name": "Indgang",
@@ -1121,6 +1332,22 @@
             "building/garage": {
                 "name": "Garage",
                 "terms": "Garage, Carport"
+            },
+            "building/garages": {
+                "name": "Garager",
+                "terms": "Garager"
+            },
+            "building/greenhouse": {
+                "name": "Drivhus",
+                "terms": "Drivhus"
+            },
+            "building/hospital": {
+                "name": "Hospitalsbygning",
+                "terms": "Hospitalsbygning, Sygehusbygning"
+            },
+            "building/hotel": {
+                "name": "Hotelbygning",
+                "terms": "Hotelbygning"
             },
             "building/house": {
                 "name": "Hus",
@@ -1134,9 +1361,233 @@
                 "name": "Industribygning",
                 "terms": "Industribygning"
             },
+            "building/public": {
+                "name": "Offentlig bygning",
+                "terms": "Offentlig bygning"
+            },
             "building/residential": {
                 "name": "Beboelsesbygning",
                 "terms": "Beboelsesbygning, Parcelhus"
+            },
+            "building/retail": {
+                "name": "Butiksbygning",
+                "terms": "Butiksbygning, Forretningsbygning"
+            },
+            "building/roof": {
+                "name": "Tag",
+                "terms": "Tag"
+            },
+            "building/school": {
+                "name": "Skolebygning",
+                "terms": "Skolebygning"
+            },
+            "building/shed": {
+                "name": "Skur",
+                "terms": "Skur"
+            },
+            "building/stable": {
+                "name": "Stald",
+                "terms": "Stald, Hestestald, Kostald, Grisestald"
+            },
+            "building/static_caravan": {
+                "name": "Fast mobilt hus",
+                "terms": "Fast mobilt hus"
+            },
+            "building/terrace": {
+                "name": "Rækkehuse",
+                "terms": "Rækkehuse"
+            },
+            "building/train_station": {
+                "name": "Togstation",
+                "terms": "Togstation, Station"
+            },
+            "building/university": {
+                "name": "Universitetsbygning",
+                "terms": "Universitetsbygning"
+            },
+            "building/warehouse": {
+                "name": "Lager",
+                "terms": "Lager, Lagerhotel, Varelager"
+            },
+            "craft/basket_maker": {
+                "name": "Kurvemager",
+                "terms": "Kurvemager"
+            },
+            "craft/beekeeper": {
+                "name": "Biavler",
+                "terms": "Biavler"
+            },
+            "craft/blacksmith": {
+                "name": "Smed",
+                "terms": "Smed, Grovsmed"
+            },
+            "craft/boatbuilder": {
+                "name": "Bådbygger",
+                "terms": "Bådbygger, Skibsbygger"
+            },
+            "craft/bookbinder": {
+                "name": "Bogbinder",
+                "terms": "Bogbinder"
+            },
+            "craft/brewery": {
+                "name": "Bryggeri",
+                "terms": "Bryggeri,  Minibryggeri"
+            },
+            "craft/carpenter": {
+                "name": "Tæppelægger",
+                "terms": "Tæppelægger"
+            },
+            "craft/carpet_layer": {
+                "name": "Tæppelægger",
+                "terms": "Tæppelægger"
+            },
+            "craft/caterer": {
+                "name": "Catering",
+                "terms": "Catering"
+            },
+            "craft/clockmaker": {
+                "name": "Urmager",
+                "terms": "Urmager"
+            },
+            "craft/confectionary": {
+                "name": "Slikbutik",
+                "terms": "Slikbutik, Konfekturebutik"
+            },
+            "craft/dressmaker": {
+                "name": "Skrædder",
+                "terms": "Skrædder"
+            },
+            "craft/electrician": {
+                "name": "Elektriker",
+                "terms": "Elektriker, Elektrikerfirma"
+            },
+            "craft/gardener": {
+                "name": "Gartner",
+                "terms": "Gartner"
+            },
+            "craft/glaziery": {
+                "name": "Vinduemager",
+                "terms": "Vinduemager"
+            },
+            "craft/handicraft": {
+                "name": "Håndværker",
+                "terms": "Håndværker"
+            },
+            "craft/hvac": {
+                "name": "Ventilationsfirma",
+                "terms": "Ventilationsfirma"
+            },
+            "craft/insulator": {
+                "name": "Isolationsfirma",
+                "terms": "Isolationsfirma, isolatør"
+            },
+            "craft/jeweler": {
+                "name": "Juvelér",
+                "terms": "Juvelér, Guldsmed"
+            },
+            "craft/key_cutter": {
+                "name": "Hælebar",
+                "terms": "Hælebar"
+            },
+            "craft/locksmith": {
+                "name": "Låsesmed",
+                "terms": "Låsesmed"
+            },
+            "craft/metal_construction": {
+                "name": "Metalskærer",
+                "terms": "Metalskærer"
+            },
+            "craft/optician": {
+                "name": "Optiker",
+                "terms": "Optiker, Brillebutik"
+            },
+            "craft/painter": {
+                "name": "maler",
+                "terms": "Maler"
+            },
+            "craft/photographer": {
+                "name": "Fotograf",
+                "terms": "Fotograf"
+            },
+            "craft/photographic_labratory": {
+                "name": "Fotolaboratorie",
+                "terms": "Fotolaboratorie"
+            },
+            "craft/plasterer": {
+                "name": "Oppudser",
+                "terms": "Oppudser"
+            },
+            "craft/plumber": {
+                "name": "Blikkenslager",
+                "terms": "Blikkenslager"
+            },
+            "craft/pottery": {
+                "name": "Pottemager",
+                "terms": "Pottemager"
+            },
+            "craft/rigger": {
+                "name": "Rebslager",
+                "terms": "Rebslager"
+            },
+            "craft/roofer": {
+                "name": "Tagdækker",
+                "terms": "Tagdækker, Tagdækningsfirma"
+            },
+            "craft/saddler": {
+                "name": "Sadelmager",
+                "terms": "Sadelmager"
+            },
+            "craft/sailmaker": {
+                "name": "sejlmager",
+                "terms": "Sejlmager"
+            },
+            "craft/sawmill": {
+                "name": "Savmølle",
+                "terms": "Savmølle, Savværk"
+            },
+            "craft/scaffolder": {
+                "name": "Stilladsfirma",
+                "terms": "Stilladsfirma"
+            },
+            "craft/sculpter": {
+                "name": "Skulpturmager",
+                "terms": "Skulpturmager"
+            },
+            "craft/shoemaker": {
+                "name": "Skomager",
+                "terms": "Skomager"
+            },
+            "craft/stonemason": {
+                "name": "Stenhugger",
+                "terms": "Stenhugger"
+            },
+            "craft/sweep": {
+                "name": "Skorstensfejer",
+                "terms": "Skorstensfejer"
+            },
+            "craft/tailor": {
+                "name": "Skrædder",
+                "terms": "Skrædder"
+            },
+            "craft/tiler": {
+                "name": "Brolægger",
+                "terms": "Brolægger"
+            },
+            "craft/tinsmith": {
+                "name": "Sølvsmed",
+                "terms": "Sølvsmed"
+            },
+            "craft/upholsterer": {
+                "name": "Møbelpolstrer",
+                "terms": "Møbelpolstrer"
+            },
+            "craft/watchmaker": {
+                "name": "Urmager",
+                "terms": "Urmager"
+            },
+            "craft/window_construction": {
+                "name": "Vinduebygger",
+                "terms": "Vinduebygger"
             },
             "embankment": {
                 "name": "Forhøjning til tog, vej",
@@ -1165,6 +1616,38 @@
             "footway/sidewalk": {
                 "name": "Fortov",
                 "terms": "Fortov"
+            },
+            "golf/bunker": {
+                "name": "Sandbunker",
+                "terms": "Sandbunker"
+            },
+            "golf/fairway": {
+                "name": "Fairway",
+                "terms": "Fairway"
+            },
+            "golf/green": {
+                "name": "Putting Green",
+                "terms": "Putting Green"
+            },
+            "golf/hole": {
+                "name": "Golfhul",
+                "terms": "Golfhul"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "Vandgrav",
+                "terms": "Vandgrav"
+            },
+            "golf/rough": {
+                "name": "Rough",
+                "terms": "Rough, Højt gras"
+            },
+            "golf/tee": {
+                "name": "Tee Box",
+                "terms": "Tee Box"
+            },
+            "golf/water_hazard": {
+                "name": "Vandgrav",
+                "terms": "Vandgrav"
             },
             "highway": {
                 "name": "Vej",
@@ -1230,6 +1713,10 @@
                 "name": "Villavej",
                 "terms": "Villavej"
             },
+            "highway/rest_area": {
+                "name": "Rasteplads",
+                "terms": "Rasteplads"
+            },
             "highway/road": {
                 "name": "Ukendt vejtype",
                 "terms": "Ukendt vejtype"
@@ -1265,6 +1752,10 @@
             "highway/service/parking_aisle": {
                 "name": "Vej mellem parkeringspladser",
                 "terms": "Parkeringsvej"
+            },
+            "highway/services": {
+                "name": "Serviceområde",
+                "terms": "Serviceområde"
             },
             "highway/steps": {
                 "name": "Trappe",
@@ -1742,6 +2233,10 @@
                 "name": "Rejsebureau",
                 "terms": "Rejseselskab, Rejsebureau"
             },
+            "piste": {
+                "name": "Skiløjper/Skispor",
+                "terms": "Skiløjper/Skispor"
+            },
             "place": {
                 "name": "Lokalitet",
                 "terms": "Lokalitet, Sted"
@@ -1830,6 +2325,10 @@
                 "name": "Ej brugt jernbanespor",
                 "terms": "Ej brugt jernbanespor"
             },
+            "railway/funicular": {
+                "name": "Kabelsporvej",
+                "terms": "Kabelsporvej"
+            },
             "railway/halt": {
                 "name": "Togstation lille ubemandet",
                 "terms": "Togstation lille ubemandet"
@@ -1841,6 +2340,10 @@
             "railway/monorail": {
                 "name": "Monorail",
                 "terms": "Monorail"
+            },
+            "railway/narrow_gauge": {
+                "name": "Smalspor",
+                "terms": "Smalspor, Smalsporbane, Smalsportogbane"
             },
             "railway/platform": {
                 "name": "Jernbaneperron",
@@ -1882,6 +2385,10 @@
                 "name": "Vinforhandler",
                 "terms": "Vinforhandler, Vinbutik, Vinforretning"
             },
+            "shop/art": {
+                "name": "Kunstbutik",
+                "terms": "Kunstbutik, Kunstforretning"
+            },
             "shop/bakery": {
                 "name": "Bager",
                 "terms": "Bager, Bageri"
@@ -1897,6 +2404,10 @@
             "shop/bicycle": {
                 "name": "Cykelbutik",
                 "terms": "Cykelforretning, Cykelbutik"
+            },
+            "shop/bookmaker": {
+                "name": "Bookmaker",
+                "terms": "Bookmaker"
             },
             "shop/books": {
                 "name": "Boghandler",
@@ -2017,6 +2528,10 @@
             "shop/locksmith": {
                 "name": "Låsesmed",
                 "terms": "Låsesmed"
+            },
+            "shop/lottery": {
+                "name": "Lotteributik",
+                "terms": "Lotteributik, Lotteriforretning"
             },
             "shop/mall": {
                 "name": "Indkøbscenter",

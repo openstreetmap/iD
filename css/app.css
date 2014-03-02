@@ -365,7 +365,7 @@ button {
     display: inline-block;
     height:40px;
     border-radius:4px;
-    /* Crashes Safari: https://github.com/systemed/iD/issues/1188 */
+    /* Crashes Safari: https://github.com/openstreetmap/iD/issues/1188 */
     /*-webkit-transition: all 100ms;*/
        -moz-transition: all 100ms;
          -o-transition: all 100ms;
@@ -1512,14 +1512,13 @@ input[type=number] {
 
 .form-field .addr-number {
     width: 33.3333%;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
+    border: 0;
     border-radius: 0;
 }
 
 .form-field .addr-street {
     width: 66.6666%;
+    border-top: 0;
     border-right: 0;
     border-bottom: 0;
     border-radius: 0;

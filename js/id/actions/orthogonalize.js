@@ -3,7 +3,7 @@
  */
 
 iD.actions.Orthogonalize = function(wayId, projection) {
-    var threshold = 7, // degrees within right or straight to alter
+    var threshold = 12, // degrees within right or straight to alter
         lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180),
         upperThreshold = Math.cos(threshold * Math.PI / 180);
 

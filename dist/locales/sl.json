@@ -163,7 +163,7 @@
     "restore": {
         "description": "Ali želite ponastaviti še ne shranjene spremembe iz predhodnega urejanja?",
         "restore": "Ponastavi",
-        "reset": "Ponastavi"
+        "reset": "Pozabi"
     },
     "save": {
         "title": "Shrani",
@@ -227,6 +227,9 @@
             "category-building": {
                 "name": "Zgradba"
             },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Raba tal"
             },
@@ -276,6 +279,9 @@
                     }
                 }
             },
+            "access_simple": {
+                "label": "Dostop"
+            },
             "address": {
                 "label": "Naslov",
                 "placeholders": {
@@ -285,6 +291,33 @@
                     "city": "Mesto",
                     "postcode": "Poštna številka"
                 }
+            },
+            "aerialway": {
+                "label": "Vrsta"
+            },
+            "aerialway/access": {
+                "label": "Dostop"
+            },
+            "aerialway/bubble": {
+                "label": "Pokrov za veter"
+            },
+            "aerialway/capacity": {
+                "label": "Zmogljivost (oseb na uro)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Čas vožnje (minut)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "Ogrevanje"
+            },
+            "aerialway/occupancy": {
+                "label": "Število oseb",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Dostop (poleti)"
             },
             "aeroway": {
                 "label": "Vrsta"
@@ -301,6 +334,9 @@
             "atm": {
                 "label": "Bankomat"
             },
+            "backrest": {
+                "label": "Naslonjalo"
+            },
             "barrier": {
                 "label": "Vrsta"
             },
@@ -316,6 +352,9 @@
             "building_area": {
                 "label": "Zgradba"
             },
+            "cans": {
+                "label": "Sprejem pločevink"
+            },
             "capacity": {
                 "label": "Kapaciteta",
                 "placeholder": "50, 100, 200..."
@@ -330,6 +369,9 @@
                     "anticlockwise": "Proti smeri urinega kazalca"
                 }
             },
+            "clothes": {
+                "label": "Sprejem oblačil"
+            },
             "collection_times": {
                 "label": "Ure zbiranja"
             },
@@ -338,6 +380,9 @@
             },
             "country": {
                 "label": "Država"
+            },
+            "covered": {
+                "label": "Pokrito"
             },
             "crossing": {
                 "label": "Vrsta"
@@ -385,6 +430,17 @@
             "generator/type": {
                 "label": "Vrsta"
             },
+            "glass": {
+                "label": "Sprejem steklovine"
+            },
+            "golf_hole": {
+                "label": "Referenca",
+                "placeholder": "Številka luknje (1-18)"
+            },
+            "handicap": {
+                "label": "Hendikep",
+                "placeholder": "1-18"
+            },
             "highway": {
                 "label": "Vrsta"
             },
@@ -399,6 +455,9 @@
             },
             "incline": {
                 "label": "Naklon"
+            },
+            "information": {
+                "label": "Vrsta"
             },
             "internet_access": {
                 "label": "Dostop do interneta",
@@ -462,6 +521,12 @@
             "operator": {
                 "label": "Operater"
             },
+            "paper": {
+                "label": "Sprejem papirja"
+            },
+            "par": {
+                "placeholder": "3, 4, 5..."
+            },
             "park_ride": {
                 "label": "Parkiraj in odpelji"
             },
@@ -471,6 +536,9 @@
             "phone": {
                 "label": "Telefon",
                 "placeholder": "+386 31 123 4567"
+            },
+            "piste/type": {
+                "label": "Vrsta"
             },
             "place": {
                 "label": "Vrsta"
@@ -533,10 +601,13 @@
                 "placeholder": "Neznano",
                 "options": {
                     "bridge": "Most",
-                    "tunnel": "Tunel",
+                    "tunnel": "Predor",
                     "embankment": "Nasip",
                     "cutting": "Usek"
                 }
+            },
+            "studio_type": {
+                "label": "Vrsta"
             },
             "supervised": {
                 "label": "Nadzorovano"
@@ -561,6 +632,9 @@
             },
             "tree_type": {
                 "label": "Vrsta"
+            },
+            "tunnel": {
+                "label": "Predor"
             },
             "vending": {
                 "label": "Vrsta dobrin"
@@ -592,6 +666,44 @@
             "address": {
                 "name": "Naslov"
             },
+            "aerialway": {
+                "name": "Žičnica"
+            },
+            "aerialway/cable_car": {
+                "name": "Nihalka",
+                "terms": "Gondola, Kabinska žičnica"
+            },
+            "aerialway/chair_lift": {
+                "name": "Sedežnica",
+                "terms": "Dvosedežnica, Trisedežnica, Štirisedežnica, Šestsedežnica"
+            },
+            "aerialway/gondola": {
+                "name": "Kabinska žičnica",
+                "terms": "Gondola"
+            },
+            "aerialway/magic_carpet": {
+                "name": "Preproga",
+                "terms": "Vlečnica, Čarobna preproga"
+            },
+            "aerialway/platter": {
+                "name": "Krožniki",
+                "terms": "Vlečnica, Krožnički"
+            },
+            "aerialway/pylon": {
+                "name": "Steber žičnice",
+                "terms": "Žičniški steber, Steber vlečnice, Steber sedežnice, Steber gondole, Steber kabinske žičnice"
+            },
+            "aerialway/rope_tow": {
+                "name": "Vlečna vrv",
+                "terms": "Vlečnica"
+            },
+            "aerialway/station": {
+                "name": "Postaja žičnice"
+            },
+            "aerialway/t-bar": {
+                "name": "Sidra",
+                "terms": "Vlečnica, Sidro"
+            },
             "aeroway": {
                 "name": "Letalstvo"
             },
@@ -618,6 +730,9 @@
             "aeroway/terminal": {
                 "name": "Letališki terminal"
             },
+            "amenity": {
+                "name": "Storitev"
+            },
             "amenity/atm": {
                 "name": "Bankomat"
             },
@@ -636,14 +751,20 @@
                 "name": "Parkirišče za kolesa"
             },
             "amenity/bicycle_rental": {
-                "name": "Izposoja koles"
+                "name": "Izposoja koles",
+                "terms": "Najem koles, Rent-a-bike"
+            },
+            "amenity/boat_rental": {
+                "name": "Izposoja plovil",
+                "terms": "Najem čolnov, Rent-a-boat, Izposoja čolnov"
             },
             "amenity/cafe": {
                 "name": "Kavarna",
                 "terms": "bife,kava,bar"
             },
             "amenity/car_rental": {
-                "terms": "rent-a-car"
+                "name": "Izposoja avtomobilov",
+                "terms": "Najem avtomobilov, Rent-a-car"
             },
             "amenity/car_wash": {
                 "name": "Avtopralnica",
@@ -652,12 +773,22 @@
             "amenity/cinema": {
                 "name": "Kino"
             },
+            "amenity/clinic": {
+                "name": "Klinika"
+            },
             "amenity/college": {
                 "name": "Srednja šola",
                 "terms": "Šola, SŠ"
             },
             "amenity/courthouse": {
                 "name": "Sodišče"
+            },
+            "amenity/dentist": {
+                "name": "Zobozdravnik"
+            },
+            "amenity/doctor": {
+                "name": "Zdravnik",
+                "terms": "Doktor, Ambulanta"
             },
             "amenity/drinking_water": {
                 "name": "Pitna voda"
@@ -685,7 +816,7 @@
             },
             "amenity/hospital": {
                 "name": "Bolnišnica",
-                "terms": "bolnica,klinika"
+                "terms": "Bolnica, Klinika, Klinični center, Zdravstveni dom"
             },
             "amenity/kindergarten": {
                 "name": "Vrtec",
@@ -695,10 +826,12 @@
                 "name": "Knjižnica"
             },
             "amenity/marketplace": {
-                "name": "Tržnica"
+                "name": "Tržnica",
+                "terms": "Trg"
             },
             "amenity/parking": {
-                "name": "Parkirišče"
+                "name": "Parkirišče",
+                "terms": "Garaža, Parkirna hiša, Garažna hiša"
             },
             "amenity/pharmacy": {
                 "name": "Lekarna"
@@ -736,6 +869,10 @@
             "amenity/pub": {
                 "name": "Pivnica",
                 "terms": "pivo,pijača"
+            },
+            "amenity/recycling": {
+                "name": "Reciklaža",
+                "terms": "Recikliranje, Ekološki otok"
             },
             "amenity/restaurant": {
                 "name": "Restavracija"
@@ -874,8 +1011,90 @@
                 "name": "Stanovanjska stavba",
                 "terms": "Hiša, Blok, Stanovanjski blok"
             },
+            "craft/beekeeper": {
+                "name": "Čebelarstvo",
+                "terms": "Čebelar, Čebelarka"
+            },
+            "craft/blacksmith": {
+                "name": "Kovač",
+                "terms": "Kovačija, Kovaštvo"
+            },
+            "craft/bookbinder": {
+                "name": "Knjigovez",
+                "terms": "Knjigoveznica, Knjigovezništvo"
+            },
+            "craft/brewery": {
+                "name": "Pivovarna",
+                "terms": "Pivovar, Pivovarstvo"
+            },
+            "craft/dressmaker": {
+                "name": "Šiviljstvo",
+                "terms": "Šivilja, Krojač"
+            },
+            "craft/electrician": {
+                "name": "Električarstvo",
+                "terms": "Električar"
+            },
+            "craft/gardener": {
+                "name": "Vrtnarstvo",
+                "terms": "Vrtnar"
+            },
+            "craft/optician": {
+                "name": "Optika",
+                "terms": "Optik"
+            },
+            "craft/photographer": {
+                "name": "Fotograf"
+            },
+            "craft/plumber": {
+                "name": "Vodovodarstvo",
+                "terms": "Vodovodar, Vodovodni inštalater"
+            },
+            "craft/pottery": {
+                "name": "Lončarstvo",
+                "terms": "Lončar"
+            },
+            "craft/roofer": {
+                "name": "Krovstvo",
+                "terms": "Krovec"
+            },
+            "craft/saddler": {
+                "name": "Sedlarstvo",
+                "terms": "Sedlar"
+            },
+            "craft/sailmaker": {
+                "name": "Jadrarstvo",
+                "terms": "Jadrar"
+            },
+            "craft/shoemaker": {
+                "name": "Čevljarstvo",
+                "terms": "Čevljar"
+            },
+            "craft/stonemason": {
+                "name": "Klesarstvo",
+                "terms": "Klesar"
+            },
+            "craft/sweep": {
+                "name": "Dimnikarstvo",
+                "terms": "Dimnikar"
+            },
+            "craft/tailor": {
+                "name": "Krojaštvo",
+                "terms": "Krojač, Šiviljstvo, Šivilja"
+            },
+            "craft/tiler": {
+                "name": "Keramičar",
+                "terms": "Ploščičar, Keramičarstvo, Ploščičarstvo"
+            },
+            "embankment": {
+                "name": "Nasip"
+            },
             "emergency/ambulance_station": {
                 "name": "Postaja nujne medicinske pomoči"
+            },
+            "emergency/fire_hydrant": {
+                "name": "Požarni hidrant",
+                "terms": "hidrant, vodni hidrant"
             },
             "entrance": {
                 "name": "Vhod"
@@ -886,6 +1105,9 @@
             },
             "footway/sidewalk": {
                 "name": "Pločnik"
+            },
+            "golf/water_hazard": {
+                "name": "Vodna ovira"
             },
             "highway": {
                 "name": "Cesta"
@@ -959,6 +1181,9 @@
             "highway/steps": {
                 "name": "Stopnice",
                 "terms": "stopnišče"
+            },
+            "highway/stop": {
+                "name": "Stop znak"
             },
             "highway/tertiary": {
                 "name": "Lokalna cesta"
@@ -1123,8 +1348,19 @@
                 "name": "Valobran",
                 "terms": "Lukobran, Pomol, Nasip, Zid"
             },
+            "man_made/embankment": {
+                "name": "Nasip"
+            },
+            "man_made/flagpole": {
+                "name": "Zastavni drog",
+                "terms": "Zastava, Drog za zastavo"
+            },
             "man_made/lighthouse": {
                 "name": "Svetilnik"
+            },
+            "man_made/observation": {
+                "name": "Razgledni stolp",
+                "terms": "Opazovalnica, Opazovalni stolp"
             },
             "man_made/pier": {
                 "name": "Pomol"
@@ -1149,6 +1385,18 @@
             "man_made/water_works": {
                 "name": "Vodovod",
                 "terms": "Vodno črpališče, Vodno zajetje"
+            },
+            "military/airfield": {
+                "name": "Vojaško letališče",
+                "terms": "Letališče"
+            },
+            "military/bunker": {
+                "name": "Bunker",
+                "terms": "Zaklonišče"
+            },
+            "military/range": {
+                "name": "Vojaško strelišče",
+                "terms": "Strelišče, Vadbišče"
             },
             "natural": {
                 "name": "Naravno"
@@ -1218,23 +1466,65 @@
                 "name": "Arhitekt",
                 "terms": "Arhitekturni biro"
             },
+            "office/company": {
+                "name": "Podjetje",
+                "terms": "Firma"
+            },
+            "office/educational_institution": {
+                "name": "Izobraževalna ustanova"
+            },
+            "office/employment_agency": {
+                "name": "Agencija za zaposlovanje",
+                "terms": "Zavod za zaposlovanje, Posredovanje dela"
+            },
+            "office/insurance": {
+                "name": "Zavarovalnica",
+                "terms": "Zavarovalniški agent, Zavarovalni agent, Zavarovalni posrednik"
+            },
             "office/lawyer": {
                 "name": "Pravna pisarna"
             },
+            "office/physician": {
+                "name": "Ambulanta",
+                "terms": "Zdravnik, Zdravnica"
+            },
             "office/political_party": {
                 "name": "Politična stranka"
+            },
+            "office/research": {
+                "name": "Raziskave"
+            },
+            "office/telecommunication": {
+                "name": "Telekomunikacijska pisarna",
+                "terms": "Telekomunikacije, Telekom"
+            },
+            "office/therapist": {
+                "name": "Terapevt",
+                "terms": "terapevtka, psihoterapevt, psihoterapevtka, psihiater, psihiatrinja"
+            },
+            "office/travel_agent": {
+                "name": "Potovalna agencija"
+            },
+            "piste": {
+                "name": "Smučišče"
             },
             "place": {
                 "name": "Kraj"
             },
             "place/city": {
-                "name": "Velemesto"
+                "name": "Velemesto",
+                "terms": "Mesto"
             },
             "place/hamlet": {
                 "name": "Zaselek"
             },
             "place/island": {
-                "name": "Otok"
+                "name": "Otok",
+                "terms": "Otoček"
+            },
+            "place/isolated_dwelling": {
+                "name": "Osamljeno bivališče",
+                "terms": "Domačija, Kmetija"
             },
             "place/locality": {
                 "name": "Krajevno ime"
@@ -1273,6 +1563,9 @@
             "power/transformer": {
                 "name": "Transformator"
             },
+            "public_transport/platform": {
+                "name": "Peron"
+            },
             "railway": {
                 "name": "Železnica"
             },
@@ -1295,7 +1588,8 @@
                 "name": "Monorail"
             },
             "railway/platform": {
-                "name": "Železniški peron"
+                "name": "Železniški peron",
+                "terms": "Peron"
             },
             "railway/rail": {
                 "name": "Železniški tir",
@@ -1453,6 +1747,10 @@
             },
             "shop/pet": {
                 "name": "Trgovina za male živali"
+            },
+            "shop/photo": {
+                "name": "Foto trgovina",
+                "terms": "Foto delavnica, Prodajalna fotografske opreme"
             },
             "shop/shoes": {
                 "name": "Trgovina s čevlji"

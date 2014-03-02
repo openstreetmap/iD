@@ -15,10 +15,14 @@ iD.ui.Background = function(context) {
     function background(selection) {
 
         function setOpacity(d) {
-            context.container().selectAll('.background-layer')
+            var bg = context.container().selectAll('.background-layer')
                 .transition()
                 .style('opacity', d)
                 .attr('data-opacity', d);
+
+            if (!iD.detect().opera) {
+                iD.util.setTransform(bg, 0, 0);
+            }
 
             opacityList.selectAll('li')
                 .classed('active', function(_) { return _ === d; });

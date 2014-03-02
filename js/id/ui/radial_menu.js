@@ -67,7 +67,7 @@ iD.ui.RadialMenu = function(context, operations) {
             .attr('class', 'tooltip-inner radial-menu-tooltip');
 
         function mousedown() {
-            d3.event.stopPropagation(); // https://github.com/systemed/iD/issues/1869
+            d3.event.stopPropagation(); // https://github.com/openstreetmap/iD/issues/1869
         }
 
         function mouseover(d, i) {
@@ -108,7 +108,9 @@ iD.ui.RadialMenu = function(context, operations) {
 
     radialMenu.close = function() {
         if (menu) {
-            menu.transition()
+            menu
+                .style('pointer-events', 'none')
+                .transition()
                 .attr('opacity', 0)
                 .remove();
         }
