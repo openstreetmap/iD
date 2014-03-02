@@ -862,7 +862,6 @@
     "amenity/kindergarten": {
         "icon": "school",
         "fields": [
-            "building_area",
             "address"
         ],
         "geometry": [
@@ -877,7 +876,7 @@
         "tags": {
             "amenity": "kindergarten"
         },
-        "name": "Kindergarten"
+        "name": "Kindergarten Grounds"
     },
     "amenity/library": {
         "icon": "library",
@@ -1314,7 +1313,6 @@
         "icon": "school",
         "fields": [
             "operator",
-            "building_area",
             "address"
         ],
         "geometry": [
@@ -1343,7 +1341,7 @@
         "tags": {
             "amenity": "school"
         },
-        "name": "School"
+        "name": "School Grounds"
     },
     "amenity/shelter": {
         "fields": [
@@ -7514,9 +7512,9 @@
         "name": "Museum"
     },
     "tourism/picnic_site": {
+        "icon": "park",
         "fields": [
             "operator",
-            "building_area",
             "address"
         ],
         "geometry": [
@@ -7533,7 +7531,6 @@
     "tourism/theme_park": {
         "fields": [
             "operator",
-            "building_area",
             "address"
         ],
         "geometry": [

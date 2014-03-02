@@ -2,7 +2,6 @@
     "icon": "school",
     "fields": [
         "operator",
-        "building_area",
         "address"
     ],
     "geometry": [
@@ -31,5 +30,5 @@
     "tags": {
         "amenity": "school"
     },
-    "name": "School"
+    "name": "School Grounds"
 }

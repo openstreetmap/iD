@@ -1,7 +1,6 @@
 {
     "icon": "school",
     "fields": [
-        "building_area",
         "address"
     ],
     "geometry": [
@@ -16,5 +15,5 @@
     "tags": {
         "amenity": "kindergarten"
     },
-    "name": "Kindergarten"
+    "name": "Kindergarten Grounds"
 }
