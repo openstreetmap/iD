@@ -831,7 +831,6 @@
         "icon": "hospital",
         "fields": [
             "emergency",
-            "building_area",
             "address"
         ],
         "geometry": [
@@ -857,7 +856,7 @@
         "tags": {
             "amenity": "hospital"
         },
-        "name": "Hospital"
+        "name": "Hospital Grounds"
     },
     "amenity/kindergarten": {
         "icon": "school",
