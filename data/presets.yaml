@@ -477,8 +477,8 @@ en:
         name: Graveyard
         terms: "<translate with synonyms or related terms for 'Graveyard', separated by commas>"
       amenity/hospital: 
-        name: Hospital
-        terms: "<translate with synonyms or related terms for 'Hospital', separated by commas>"
+        name: Hospital Grounds
+        terms: "<translate with synonyms or related terms for 'Hospital Grounds', separated by commas>"
       amenity/kindergarten: 
         name: Kindergarten Grounds
         terms: "<translate with synonyms or related terms for 'Kindergarten Grounds', separated by commas>"
