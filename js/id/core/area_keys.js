@@ -103,9 +103,11 @@ iD.areaKeys = {
     "railway": {
         "abandoned": true,
         "disused": true,
+        "funicular": true,
         "halt": true,
         "level_crossing": true,
         "monorail": true,
+        "narrow_gauge": true,
         "rail": true,
         "subway": true,
         "subway_entrance": true,
