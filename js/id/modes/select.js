@@ -28,12 +28,25 @@ iD.modes.Select = function(context, selectedIDs) {
     }
 
     function positionMenu() {
-        var entity = singular();
+        var entity = singular(),
+            direction = [1, 1];   // TODO: can be used to avoid nearbyPoints..
+
+        nearbyPoints = selectedIDs.map(function(ent) {
+            return context.projection(context.entity(ent).loc);
+        });
+
+console.info('selectedIDs=[' + selectedIDs + ']');
+console.info('entity=' + entity);
+console.info('nearbyPoints=[' + nearbyPoints + ']');
 
         if (entity && entity.type === 'node') {
-            editMenu.center(context.projection(entity.loc));
+            editMenu
+                .position(context.projection(entity.loc))
+                .direction(direction);
         } else {
-            editMenu.center(context.mouse());
+            editMenu
+                .position(context.mouse())
+                .direction(direction);
         }
     }
 
@@ -78,6 +91,15 @@ iD.modes.Select = function(context, selectedIDs) {
             .map(function(o) { return o(selectedIDs, context); })
             .filter(function(o) { return o.available(); });
         operations.unshift(iD.operations.Delete(selectedIDs, context));
+
+// bhousel testing big menu..
+operations.push(iD.operations.Delete(selectedIDs, context));
+operations.push(iD.operations.Delete(selectedIDs, context));
+operations.push(iD.operations.Delete(selectedIDs, context));
+operations.push(iD.operations.Delete(selectedIDs, context));
+operations.push(iD.operations.Delete(selectedIDs, context));
+operations.push(iD.operations.Delete(selectedIDs, context));
+// end testing
 
         keybinding.on('⎋', function() {
             context.enter(iD.modes.Browse(context));

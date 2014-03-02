@@ -1,6 +1,7 @@
 iD.ui.EditMenu = function(context, operations) {
     var menu,
-        center = [0, 0],
+        position = [0, 0],
+        direction = [1, 1],
         tooltip;
 
     var editMenu = function(selection) {
@@ -17,19 +18,12 @@ iD.ui.EditMenu = function(context, operations) {
             editMenu.close();
         }
 
-        menu = selection.append('g')
-            .attr('class', 'edit-menu')
-            .attr('transform', 'translate(' + center + ')')
-            .attr('opacity', 0);
-
-        menu.transition()
-            .attr('opacity', 1);
-
         var spacing = 40,
             xoffset = 10,
             yoffset = 10,
             items = operations.length,
-            cols, rows;
+            cols,
+            rows;
 
         if (items <= 5) {
             cols = items;
@@ -40,9 +34,17 @@ iD.ui.EditMenu = function(context, operations) {
         } else {
             cols = 5;
         }
-// to test column packing
-// cols = Math.min(items, 3);
         rows = Math.ceil(items / cols);
+
+console.info('position=[' + position + '] direction=[' + direction + ']');
+
+        menu = selection.append('g')
+            .attr('class', 'edit-menu')
+            .attr('transform', 'translate(' + position + ')')
+            .attr('opacity', 0);
+
+        menu.transition()
+            .attr('opacity', 1);
 
         menu.append('rect')
             .attr('class', 'edit-menu-background')
@@ -59,8 +61,8 @@ iD.ui.EditMenu = function(context, operations) {
             .attr('transform', function(d, i) {
                 var col = (i % cols) + 1,
                     row = Math.trunc(i / cols) + 1,
-                    x = (spacing * col) - (spacing / 2) + xoffset,
-                    y = (spacing * row) - (spacing / 2) + yoffset;
+                    x = ((spacing * col) - (spacing / 2) + xoffset),
+                    y = ((spacing * row) - (spacing / 2) + yoffset);
                 return 'translate(' + x + ',' + y + ')';
             });
 
@@ -88,8 +90,8 @@ iD.ui.EditMenu = function(context, operations) {
 
         function mouseover(d, i) {
             var rect = context.surfaceRect(),
-                top = rect.top + center[1] + (rows * spacing) + yoffset + 'px',
-                left = rect.left + center[0] + xoffset + 'px';
+                top = rect.top + position[1] + (rows * spacing) + yoffset + 'px',
+                left = rect.left + position[0] + xoffset + 'px';
 
             tooltip
                 .style('top', null)
@@ -133,9 +135,15 @@ iD.ui.EditMenu = function(context, operations) {
         }
     };
 
-    editMenu.center = function(_) {
-        if (!arguments.length) return center;
-        center = _;
+    editMenu.position = function(_) {
+        if (!arguments.length) return position;
+        position = _;
+        return editMenu;
+    };
+
+    editMenu.direction = function(_) {
+        if (!arguments.length) return direction;
+        direction = _;
         return editMenu;
     };
 
