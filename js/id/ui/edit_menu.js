@@ -19,12 +19,16 @@ iD.ui.EditMenu = function(context, operations) {
         }
 
         var spacing = 40,
-            xoffset = 10,
-            yoffset = 10,
+            offset  = 10,
             items = operations.length,
             cols,
-            rows;
+            rows,
+            xstart,
+            ystart,
+            xwidth,
+            yheight;
 
+        // pack menu items into columns..
         if (items <= 5) {
             cols = items;
         } else if ([7, 8, 11, 12].indexOf(items) != -1) {
@@ -36,7 +40,30 @@ iD.ui.EditMenu = function(context, operations) {
         }
         rows = Math.ceil(items / cols);
 
-console.info('position=[' + position + '] direction=[' + direction + ']');
+        xwidth = cols * spacing;
+        yheight = rows * spacing;
+
+        if(direction[0] < 0) {
+            xstart = (-1 * (xwidth + offset));
+        }
+        else if (direction[0] === 0) {
+            xstart = (-1 * (xwidth + offset)) / 2;
+        }
+        else {
+            xstart = offset;
+        }
+
+        if(direction[1] < 0) {
+            ystart = (-1 * (yheight + offset));
+        }
+        else if (direction[0] === 0) {
+            ystart = (-1 * (yheight + offset)) / 2;
+        }
+        else {
+            ystart = offset;
+        }
+
+console.info('position=[' + position + '] direction=[' + direction + '] xwidth=' + xwidth + ' yheight=' + yheight + ' xstart=' + xstart + ' ystart=' + ystart );
 
         menu = selection.append('g')
             .attr('class', 'edit-menu')
@@ -48,10 +75,10 @@ console.info('position=[' + position + '] direction=[' + direction + ']');
 
         menu.append('rect')
             .attr('class', 'edit-menu-background')
-            .attr('x', xoffset)
-            .attr('y', yoffset)
-            .attr('width', cols * spacing)
-            .attr('height', rows * spacing)
+            .attr('x', xstart)
+            .attr('y', ystart)
+            .attr('width', xwidth)
+            .attr('height', yheight)
             .attr('rx', spacing / 2)
             .attr('ry', spacing / 2)
 
@@ -61,8 +88,8 @@ console.info('position=[' + position + '] direction=[' + direction + ']');
             .attr('transform', function(d, i) {
                 var col = (i % cols) + 1,
                     row = Math.trunc(i / cols) + 1,
-                    x = ((spacing * col) - (spacing / 2) + xoffset),
-                    y = ((spacing * row) - (spacing / 2) + yoffset);
+                    x = (xstart + (spacing * col) - (spacing / 2)),
+                    y = (ystart + (spacing * row) - (spacing / 2));
                 return 'translate(' + x + ',' + y + ')';
             });
 
@@ -89,31 +116,16 @@ console.info('position=[' + position + '] direction=[' + direction + ']');
         }
 
         function mouseover(d, i) {
+            // pin tooltip to bottom of editmenu..
             var rect = context.surfaceRect(),
-                top = rect.top + position[1] + (rows * spacing) + yoffset + 'px',
-                left = rect.left + position[0] + xoffset + 'px';
+                top = rect.top + position[1] + ystart + yheight + 'px',
+                left = rect.left + position[0] + xstart + 'px';
 
             tooltip
-                .style('top', null)
-                .style('left', null)
-                .style('bottom', null)
-                .style('right', null)
+                .style('left', left)
+                .style('top', top)
                 .style('display', 'block')
                 .html(iD.ui.tooltipHtml(d.tooltip(), d.keys[0]));
-
-            // if (i === 0) {
-            //     tooltip
-            //         .style('right', right)
-            //         .style('top', top);
-            // } else if (i >= 4) {
-            //     tooltip
-            //         .style('left', left)
-            //         .style('bottom', bottom);
-            // } else {
-                tooltip
-                    .style('left', left)
-                    .style('top', top);
-            // }
         }
 
         function mouseout() {
@@ -135,12 +147,17 @@ console.info('position=[' + position + '] direction=[' + direction + ']');
         }
     };
 
+    // position where the menu should start, specified like [x,y]
     editMenu.position = function(_) {
         if (!arguments.length) return position;
         position = _;
         return editMenu;
     };
 
+    // direction to grow the menu, specified like [x,y]
+    //      -1
+    //   -1  0  1
+    //       1
     editMenu.direction = function(_) {
         if (!arguments.length) return direction;
         direction = _;

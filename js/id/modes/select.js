@@ -28,25 +28,23 @@ iD.modes.Select = function(context, selectedIDs) {
     }
 
     function positionMenu() {
-        var entity = singular(),
-            direction = [1, 1];   // TODO: can be used to avoid nearbyPoints..
+        var entity = singular();
 
-        nearbyPoints = selectedIDs.map(function(ent) {
-            return context.projection(context.entity(ent).loc);
-        });
-
-console.info('selectedIDs=[' + selectedIDs + ']');
-console.info('entity=' + entity);
-console.info('nearbyPoints=[' + nearbyPoints + ']');
+// for testing .. send editmenu in random direction -1, 0, 1
+// var direction = [
+//     Math.floor(Math.random()*3) - 1,
+//     Math.floor(Math.random()*3) - 1
+//   ]
+// editMenu
+//     .position(context.mouse())
+//     .direction(direction);
 
         if (entity && entity.type === 'node') {
             editMenu
-                .position(context.projection(entity.loc))
-                .direction(direction);
+                .position(context.projection(entity.loc));
         } else {
             editMenu
-                .position(context.mouse())
-                .direction(direction);
+                .position(context.mouse());
         }
     }
 
@@ -93,9 +91,9 @@ console.info('nearbyPoints=[' + nearbyPoints + ']');
         operations.unshift(iD.operations.Delete(selectedIDs, context));
 
 // bhousel testing big menu..
-operations.push(iD.operations.Delete(selectedIDs, context));
-operations.push(iD.operations.Delete(selectedIDs, context));
-operations.push(iD.operations.Delete(selectedIDs, context));
+//operations.push(iD.operations.Delete(selectedIDs, context));
+//operations.push(iD.operations.Delete(selectedIDs, context));
+//operations.push(iD.operations.Delete(selectedIDs, context));
 operations.push(iD.operations.Delete(selectedIDs, context));
 operations.push(iD.operations.Delete(selectedIDs, context));
 operations.push(iD.operations.Delete(selectedIDs, context));
