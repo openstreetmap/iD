@@ -87,7 +87,7 @@ console.info('position=[' + position + '] direction=[' + direction + '] xwidth='
             .enter().append('g')
             .attr('transform', function(d, i) {
                 var col = (i % cols) + 1,
-                    row = Math.trunc(i / cols) + 1,
+                    row = Math.floor(i / cols) + 1,
                     x = (xstart + (spacing * col) - (spacing / 2)),
                     y = (ystart + (spacing * row) - (spacing / 2));
                 return 'translate(' + x + ',' + y + ')';
