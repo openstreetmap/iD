@@ -7981,861 +7981,6 @@
         },
         "name": "Weir"
     },
-    "amenity/pub/The Green Man": {
-        "tags": {
-            "name": "The Green Man",
-            "amenity": "pub"
-        },
-        "name": "The Green Man",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/Kings Arms": {
-        "tags": {
-            "name": "Kings Arms",
-            "amenity": "pub"
-        },
-        "name": "Kings Arms",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/Red Lion": {
-        "tags": {
-            "name": "Red Lion",
-            "amenity": "pub"
-        },
-        "name": "Red Lion",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Ship": {
-        "tags": {
-            "name": "The Ship",
-            "amenity": "pub"
-        },
-        "name": "The Ship",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The White Horse": {
-        "tags": {
-            "name": "The White Horse",
-            "amenity": "pub"
-        },
-        "name": "The White Horse",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The White Hart": {
-        "tags": {
-            "name": "The White Hart",
-            "amenity": "pub"
-        },
-        "name": "The White Hart",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/Royal Oak": {
-        "tags": {
-            "name": "Royal Oak",
-            "amenity": "pub"
-        },
-        "name": "Royal Oak",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Red Lion": {
-        "tags": {
-            "name": "The Red Lion",
-            "amenity": "pub"
-        },
-        "name": "The Red Lion",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Kings Arms": {
-        "tags": {
-            "name": "The Kings Arms",
-            "amenity": "pub"
-        },
-        "name": "The Kings Arms",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Star": {
-        "tags": {
-            "name": "The Star",
-            "amenity": "pub"
-        },
-        "name": "The Star",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Anchor": {
-        "tags": {
-            "name": "The Anchor",
-            "amenity": "pub"
-        },
-        "name": "The Anchor",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Cross Keys": {
-        "tags": {
-            "name": "The Cross Keys",
-            "amenity": "pub"
-        },
-        "name": "The Cross Keys",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Wheatsheaf": {
-        "tags": {
-            "name": "The Wheatsheaf",
-            "amenity": "pub"
-        },
-        "name": "The Wheatsheaf",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Crown Inn": {
-        "tags": {
-            "name": "The Crown Inn",
-            "amenity": "pub"
-        },
-        "name": "The Crown Inn",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Kings Head": {
-        "tags": {
-            "name": "The Kings Head",
-            "amenity": "pub"
-        },
-        "name": "The Kings Head",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Castle": {
-        "tags": {
-            "name": "The Castle",
-            "amenity": "pub"
-        },
-        "name": "The Castle",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Railway": {
-        "tags": {
-            "name": "The Railway",
-            "amenity": "pub"
-        },
-        "name": "The Railway",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The White Lion": {
-        "tags": {
-            "name": "The White Lion",
-            "amenity": "pub"
-        },
-        "name": "The White Lion",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Bell": {
-        "tags": {
-            "name": "The Bell",
-            "amenity": "pub"
-        },
-        "name": "The Bell",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Bull": {
-        "tags": {
-            "name": "The Bull",
-            "amenity": "pub"
-        },
-        "name": "The Bull",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Plough": {
-        "tags": {
-            "name": "The Plough",
-            "amenity": "pub"
-        },
-        "name": "The Plough",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The George": {
-        "tags": {
-            "name": "The George",
-            "amenity": "pub"
-        },
-        "name": "The George",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Royal Oak": {
-        "tags": {
-            "name": "The Royal Oak",
-            "amenity": "pub"
-        },
-        "name": "The Royal Oak",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Fox": {
-        "tags": {
-            "name": "The Fox",
-            "amenity": "pub"
-        },
-        "name": "The Fox",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/Prince of Wales": {
-        "tags": {
-            "name": "Prince of Wales",
-            "amenity": "pub"
-        },
-        "name": "Prince of Wales",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Rising Sun": {
-        "tags": {
-            "name": "The Rising Sun",
-            "amenity": "pub"
-        },
-        "name": "The Rising Sun",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Prince of Wales": {
-        "tags": {
-            "name": "The Prince of Wales",
-            "amenity": "pub"
-        },
-        "name": "The Prince of Wales",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Crown": {
-        "tags": {
-            "name": "The Crown",
-            "amenity": "pub"
-        },
-        "name": "The Crown",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Chequers": {
-        "tags": {
-            "name": "The Chequers",
-            "amenity": "pub"
-        },
-        "name": "The Chequers",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Swan": {
-        "tags": {
-            "name": "The Swan",
-            "amenity": "pub"
-        },
-        "name": "The Swan",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/Rose and Crown": {
-        "tags": {
-            "name": "Rose and Crown",
-            "amenity": "pub"
-        },
-        "name": "Rose and Crown",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Victoria": {
-        "tags": {
-            "name": "The Victoria",
-            "amenity": "pub"
-        },
-        "name": "The Victoria",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/New Inn": {
-        "tags": {
-            "name": "New Inn",
-            "amenity": "pub"
-        },
-        "name": "New Inn",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/Royal Hotel": {
-        "tags": {
-            "name": "Royal Hotel",
-            "amenity": "pub"
-        },
-        "name": "Royal Hotel",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/Cross Keys": {
-        "tags": {
-            "name": "Cross Keys",
-            "amenity": "pub"
-        },
-        "name": "Cross Keys",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Greyhound": {
-        "tags": {
-            "name": "The Greyhound",
-            "amenity": "pub"
-        },
-        "name": "The Greyhound",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Black Horse": {
-        "tags": {
-            "name": "The Black Horse",
-            "amenity": "pub"
-        },
-        "name": "The Black Horse",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The New Inn": {
-        "tags": {
-            "name": "The New Inn",
-            "amenity": "pub"
-        },
-        "name": "The New Inn",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/Kings Head": {
-        "tags": {
-            "name": "Kings Head",
-            "amenity": "pub"
-        },
-        "name": "Kings Head",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Angel": {
-        "tags": {
-            "name": "The Angel",
-            "amenity": "pub"
-        },
-        "name": "The Angel",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Queens Head": {
-        "tags": {
-            "name": "The Queens Head",
-            "amenity": "pub"
-        },
-        "name": "The Queens Head",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/The Ship Inn": {
-        "tags": {
-            "name": "The Ship Inn",
-            "amenity": "pub"
-        },
-        "name": "The Ship Inn",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/Rose & Crown": {
-        "tags": {
-            "name": "Rose & Crown",
-            "amenity": "pub"
-        },
-        "name": "Rose & Crown",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/Queens Head": {
-        "tags": {
-            "name": "Queens Head",
-            "amenity": "pub"
-        },
-        "name": "Queens Head",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "amenity/pub/Irish Pub": {
-        "tags": {
-            "name": "Irish Pub",
-            "amenity": "pub"
-        },
-        "name": "Irish Pub",
-        "icon": "beer",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/76": {
         "tags": {
             "name": "76",
@@ -9330,25 +8475,6 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Tankstelle": {
-        "tags": {
-            "name": "Tankstelle",
-            "amenity": "fuel"
-        },
-        "name": "Tankstelle",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/ARAL": {
         "tags": {
             "name": "ARAL",
@@ -9431,6 +8557,25 @@
             "amenity": "fuel"
         },
         "name": "Intermarché",
+        "icon": "fuel",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area"
+        ],
+        "suggestion": true
+    },
+    "amenity/fuel/Total Access": {
+        "tags": {
+            "name": "Total Access",
+            "amenity": "fuel"
+        },
+        "name": "Total Access",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -9792,25 +8937,6 @@
             "amenity": "fuel"
         },
         "name": "OKQ8",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
-    "amenity/fuel/Freie Tankstelle": {
-        "tags": {
-            "name": "Freie Tankstelle",
-            "amenity": "fuel"
-        },
-        "name": "Freie Tankstelle",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -10907,25 +10033,6 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/YPF": {
-        "tags": {
-            "name": "YPF",
-            "amenity": "fuel"
-        },
-        "name": "YPF",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/Erg": {
         "tags": {
             "name": "Erg",
@@ -11553,6 +10660,25 @@
         ],
         "suggestion": true
     },
+    "amenity/fuel/YPF": {
+        "tags": {
+            "name": "YPF",
+            "amenity": "fuel"
+        },
+        "name": "YPF",
+        "icon": "fuel",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area"
+        ],
+        "suggestion": true
+    },
     "amenity/fuel/IDEMITSU": {
         "tags": {
             "name": "IDEMITSU",
@@ -11667,12 +10793,12 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Kangaroo": {
+    "amenity/fuel/Башнефть": {
         "tags": {
-            "name": "Kangaroo",
+            "name": "Башнефть",
             "amenity": "fuel"
         },
-        "name": "Kangaroo",
+        "name": "Башнефть",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -11686,12 +10812,12 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Белоруснефть": {
+    "amenity/fuel/Kangaroo": {
         "tags": {
-            "name": "Белоруснефть",
+            "name": "Kangaroo",
             "amenity": "fuel"
         },
-        "name": "Белоруснефть",
+        "name": "Kangaroo",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -11762,25 +10888,6 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Conoco": {
-        "tags": {
-            "name": "Conoco",
-            "amenity": "fuel"
-        },
-        "name": "Conoco",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/出光": {
         "tags": {
             "name": "出光",
@@ -11826,6 +10933,25 @@
             "amenity": "fuel"
         },
         "name": "Sinclair",
+        "icon": "fuel",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area"
+        ],
+        "suggestion": true
+    },
+    "amenity/fuel/Conoco": {
+        "tags": {
+            "name": "Conoco",
+            "amenity": "fuel"
+        },
+        "name": "Conoco",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -11902,6 +11028,25 @@
             "amenity": "fuel"
         },
         "name": "Posto Ipiranga",
+        "icon": "fuel",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area"
+        ],
+        "suggestion": true
+    },
+    "amenity/fuel/Posto Shell": {
+        "tags": {
+            "name": "Posto Shell",
+            "amenity": "fuel"
+        },
+        "name": "Posto Shell",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -12143,6 +11288,25 @@
         ],
         "suggestion": true
     },
+    "amenity/fuel/Petrolimex": {
+        "tags": {
+            "name": "Petrolimex",
+            "amenity": "fuel"
+        },
+        "name": "Petrolimex",
+        "icon": "fuel",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area"
+        ],
+        "suggestion": true
+    },
     "amenity/fuel/Sokimex": {
         "tags": {
             "name": "Sokimex",
@@ -12168,6 +11332,44 @@
             "amenity": "fuel"
         },
         "name": "Tela",
+        "icon": "fuel",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area"
+        ],
+        "suggestion": true
+    },
+    "amenity/fuel/Posto": {
+        "tags": {
+            "name": "Posto",
+            "amenity": "fuel"
+        },
+        "name": "Posto",
+        "icon": "fuel",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area"
+        ],
+        "suggestion": true
+    },
+    "amenity/fuel/H-E-B": {
+        "tags": {
+            "name": "H-E-B",
+            "amenity": "fuel"
+        },
+        "name": "H-E-B",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -12276,6 +11478,25 @@
         ],
         "suggestion": true
     },
+    "amenity/fuel/エネオス": {
+        "tags": {
+            "name": "エネオス",
+            "amenity": "fuel"
+        },
+        "name": "エネオス",
+        "icon": "fuel",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area"
+        ],
+        "suggestion": true
+    },
     "amenity/fuel/CNG": {
         "tags": {
             "name": "CNG",
@@ -12292,6 +11513,861 @@
             "operator",
             "address",
             "building_area"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/Kings Arms": {
+        "tags": {
+            "name": "Kings Arms",
+            "amenity": "pub"
+        },
+        "name": "Kings Arms",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Ship": {
+        "tags": {
+            "name": "The Ship",
+            "amenity": "pub"
+        },
+        "name": "The Ship",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The White Horse": {
+        "tags": {
+            "name": "The White Horse",
+            "amenity": "pub"
+        },
+        "name": "The White Horse",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The White Hart": {
+        "tags": {
+            "name": "The White Hart",
+            "amenity": "pub"
+        },
+        "name": "The White Hart",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/Royal Oak": {
+        "tags": {
+            "name": "Royal Oak",
+            "amenity": "pub"
+        },
+        "name": "Royal Oak",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Red Lion": {
+        "tags": {
+            "name": "The Red Lion",
+            "amenity": "pub"
+        },
+        "name": "The Red Lion",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Kings Arms": {
+        "tags": {
+            "name": "The Kings Arms",
+            "amenity": "pub"
+        },
+        "name": "The Kings Arms",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Star": {
+        "tags": {
+            "name": "The Star",
+            "amenity": "pub"
+        },
+        "name": "The Star",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Anchor": {
+        "tags": {
+            "name": "The Anchor",
+            "amenity": "pub"
+        },
+        "name": "The Anchor",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Cross Keys": {
+        "tags": {
+            "name": "The Cross Keys",
+            "amenity": "pub"
+        },
+        "name": "The Cross Keys",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Wheatsheaf": {
+        "tags": {
+            "name": "The Wheatsheaf",
+            "amenity": "pub"
+        },
+        "name": "The Wheatsheaf",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Crown Inn": {
+        "tags": {
+            "name": "The Crown Inn",
+            "amenity": "pub"
+        },
+        "name": "The Crown Inn",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Kings Head": {
+        "tags": {
+            "name": "The Kings Head",
+            "amenity": "pub"
+        },
+        "name": "The Kings Head",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Castle": {
+        "tags": {
+            "name": "The Castle",
+            "amenity": "pub"
+        },
+        "name": "The Castle",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Railway": {
+        "tags": {
+            "name": "The Railway",
+            "amenity": "pub"
+        },
+        "name": "The Railway",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The White Lion": {
+        "tags": {
+            "name": "The White Lion",
+            "amenity": "pub"
+        },
+        "name": "The White Lion",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Bell": {
+        "tags": {
+            "name": "The Bell",
+            "amenity": "pub"
+        },
+        "name": "The Bell",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Bull": {
+        "tags": {
+            "name": "The Bull",
+            "amenity": "pub"
+        },
+        "name": "The Bull",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Plough": {
+        "tags": {
+            "name": "The Plough",
+            "amenity": "pub"
+        },
+        "name": "The Plough",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The George": {
+        "tags": {
+            "name": "The George",
+            "amenity": "pub"
+        },
+        "name": "The George",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Royal Oak": {
+        "tags": {
+            "name": "The Royal Oak",
+            "amenity": "pub"
+        },
+        "name": "The Royal Oak",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Fox": {
+        "tags": {
+            "name": "The Fox",
+            "amenity": "pub"
+        },
+        "name": "The Fox",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/Prince of Wales": {
+        "tags": {
+            "name": "Prince of Wales",
+            "amenity": "pub"
+        },
+        "name": "Prince of Wales",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Rising Sun": {
+        "tags": {
+            "name": "The Rising Sun",
+            "amenity": "pub"
+        },
+        "name": "The Rising Sun",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Prince of Wales": {
+        "tags": {
+            "name": "The Prince of Wales",
+            "amenity": "pub"
+        },
+        "name": "The Prince of Wales",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Crown": {
+        "tags": {
+            "name": "The Crown",
+            "amenity": "pub"
+        },
+        "name": "The Crown",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Chequers": {
+        "tags": {
+            "name": "The Chequers",
+            "amenity": "pub"
+        },
+        "name": "The Chequers",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Swan": {
+        "tags": {
+            "name": "The Swan",
+            "amenity": "pub"
+        },
+        "name": "The Swan",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/Rose and Crown": {
+        "tags": {
+            "name": "Rose and Crown",
+            "amenity": "pub"
+        },
+        "name": "Rose and Crown",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Victoria": {
+        "tags": {
+            "name": "The Victoria",
+            "amenity": "pub"
+        },
+        "name": "The Victoria",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/New Inn": {
+        "tags": {
+            "name": "New Inn",
+            "amenity": "pub"
+        },
+        "name": "New Inn",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/Royal Hotel": {
+        "tags": {
+            "name": "Royal Hotel",
+            "amenity": "pub"
+        },
+        "name": "Royal Hotel",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/Red Lion": {
+        "tags": {
+            "name": "Red Lion",
+            "amenity": "pub"
+        },
+        "name": "Red Lion",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/Cross Keys": {
+        "tags": {
+            "name": "Cross Keys",
+            "amenity": "pub"
+        },
+        "name": "Cross Keys",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Greyhound": {
+        "tags": {
+            "name": "The Greyhound",
+            "amenity": "pub"
+        },
+        "name": "The Greyhound",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Black Horse": {
+        "tags": {
+            "name": "The Black Horse",
+            "amenity": "pub"
+        },
+        "name": "The Black Horse",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The New Inn": {
+        "tags": {
+            "name": "The New Inn",
+            "amenity": "pub"
+        },
+        "name": "The New Inn",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/Kings Head": {
+        "tags": {
+            "name": "Kings Head",
+            "amenity": "pub"
+        },
+        "name": "Kings Head",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Albion": {
+        "tags": {
+            "name": "The Albion",
+            "amenity": "pub"
+        },
+        "name": "The Albion",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Angel": {
+        "tags": {
+            "name": "The Angel",
+            "amenity": "pub"
+        },
+        "name": "The Angel",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Queens Head": {
+        "tags": {
+            "name": "The Queens Head",
+            "amenity": "pub"
+        },
+        "name": "The Queens Head",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/The Ship Inn": {
+        "tags": {
+            "name": "The Ship Inn",
+            "amenity": "pub"
+        },
+        "name": "The Ship Inn",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/Rose & Crown": {
+        "tags": {
+            "name": "Rose & Crown",
+            "amenity": "pub"
+        },
+        "name": "Rose & Crown",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/Queens Head": {
+        "tags": {
+            "name": "Queens Head",
+            "amenity": "pub"
+        },
+        "name": "Queens Head",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pub/Irish Pub": {
+        "tags": {
+            "name": "Irish Pub",
+            "amenity": "pub"
+        },
+        "name": "Irish Pub",
+        "icon": "beer",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours"
         ],
         "suggestion": true
     },
@@ -13736,6 +13812,26 @@
         ],
         "suggestion": true
     },
+    "amenity/fast_food/Zaxby's": {
+        "tags": {
+            "name": "Zaxby's",
+            "amenity": "fast_food"
+        },
+        "name": "Zaxby's",
+        "icon": "fast-food",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "cuisine",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "amenity/fast_food/すき家": {
         "tags": {
             "name": "すき家",
@@ -13971,27 +14067,6 @@
             "amenity": "restaurant"
         },
         "name": "Schützenhaus",
-        "icon": "restaurant",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "cuisine",
-            "building_area",
-            "address",
-            "opening_hours",
-            "capacity"
-        ],
-        "suggestion": true
-    },
-    "amenity/restaurant/TGI Friday's": {
-        "tags": {
-            "name": "TGI Friday's",
-            "amenity": "restaurant"
-        },
-        "name": "TGI Friday's",
         "icon": "restaurant",
         "geometry": [
             "point",
@@ -14595,6 +14670,48 @@
         ],
         "suggestion": true
     },
+    "amenity/restaurant/La Pataterie": {
+        "tags": {
+            "name": "La Pataterie",
+            "amenity": "restaurant"
+        },
+        "name": "La Pataterie",
+        "icon": "restaurant",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "cuisine",
+            "building_area",
+            "address",
+            "opening_hours",
+            "capacity"
+        ],
+        "suggestion": true
+    },
+    "amenity/restaurant/Bella Napoli": {
+        "tags": {
+            "name": "Bella Napoli",
+            "amenity": "restaurant"
+        },
+        "name": "Bella Napoli",
+        "icon": "restaurant",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "cuisine",
+            "building_area",
+            "address",
+            "opening_hours",
+            "capacity"
+        ],
+        "suggestion": true
+    },
     "amenity/restaurant/Pizza Express": {
         "tags": {
             "name": "Pizza Express",
@@ -15078,12 +15195,12 @@
         ],
         "suggestion": true
     },
-    "amenity/restaurant/Dionysos": {
+    "amenity/restaurant/Outback Steakhouse": {
         "tags": {
-            "name": "Dionysos",
+            "name": "Outback Steakhouse",
             "amenity": "restaurant"
         },
-        "name": "Dionysos",
+        "name": "Outback Steakhouse",
         "icon": "restaurant",
         "geometry": [
             "point",
@@ -15099,12 +15216,12 @@
         ],
         "suggestion": true
     },
-    "amenity/restaurant/Outback Steakhouse": {
+    "amenity/restaurant/Dionysos": {
         "tags": {
-            "name": "Outback Steakhouse",
+            "name": "Dionysos",
             "amenity": "restaurant"
         },
-        "name": "Outback Steakhouse",
+        "name": "Dionysos",
         "icon": "restaurant",
         "geometry": [
             "point",
@@ -15273,6 +15390,27 @@
             "amenity": "restaurant"
         },
         "name": "Traube",
+        "icon": "restaurant",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "cuisine",
+            "building_area",
+            "address",
+            "opening_hours",
+            "capacity"
+        ],
+        "suggestion": true
+    },
+    "amenity/restaurant/Adria": {
+        "tags": {
+            "name": "Adria",
+            "amenity": "restaurant"
+        },
+        "name": "Adria",
         "icon": "restaurant",
         "geometry": [
             "point",
@@ -15666,6 +15804,27 @@
         ],
         "suggestion": true
     },
+    "amenity/restaurant/Pizzeria Roma": {
+        "tags": {
+            "name": "Pizzeria Roma",
+            "amenity": "restaurant"
+        },
+        "name": "Pizzeria Roma",
+        "icon": "restaurant",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "cuisine",
+            "building_area",
+            "address",
+            "opening_hours",
+            "capacity"
+        ],
+        "suggestion": true
+    },
     "amenity/restaurant/China Garden": {
         "tags": {
             "name": "China Garden",
@@ -15792,12 +15951,54 @@
         ],
         "suggestion": true
     },
+    "amenity/restaurant/Asia": {
+        "tags": {
+            "name": "Asia",
+            "amenity": "restaurant"
+        },
+        "name": "Asia",
+        "icon": "restaurant",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "cuisine",
+            "building_area",
+            "address",
+            "opening_hours",
+            "capacity"
+        ],
+        "suggestion": true
+    },
     "amenity/restaurant/Olive Garden": {
         "tags": {
             "name": "Olive Garden",
             "amenity": "restaurant"
         },
         "name": "Olive Garden",
+        "icon": "restaurant",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "cuisine",
+            "building_area",
+            "address",
+            "opening_hours",
+            "capacity"
+        ],
+        "suggestion": true
+    },
+    "amenity/restaurant/TGI Friday's": {
+        "tags": {
+            "name": "TGI Friday's",
+            "amenity": "restaurant"
+        },
+        "name": "TGI Friday's",
         "icon": "restaurant",
         "geometry": [
             "point",
@@ -16051,6 +16252,27 @@
             "amenity": "restaurant"
         },
         "name": "Peking",
+        "icon": "restaurant",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "cuisine",
+            "building_area",
+            "address",
+            "opening_hours",
+            "capacity"
+        ],
+        "suggestion": true
+    },
+    "amenity/restaurant/Round Table Pizza": {
+        "tags": {
+            "name": "Round Table Pizza",
+            "amenity": "restaurant"
+        },
+        "name": "Round Table Pizza",
         "icon": "restaurant",
         "geometry": [
             "point",
@@ -19498,26 +19720,6 @@
         ],
         "suggestion": true
     },
-    "amenity/bank/Scotia Bank": {
-        "tags": {
-            "name": "Scotia Bank",
-            "amenity": "bank"
-        },
-        "name": "Scotia Bank",
-        "icon": "bank",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "atm",
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
     "amenity/bank/Bendigo Bank": {
         "tags": {
             "name": "Bendigo Bank",
@@ -19684,6 +19886,26 @@
             "amenity": "bank"
         },
         "name": "Caja Círculo",
+        "icon": "bank",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "atm",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/bank/Banco Galicia": {
+        "tags": {
+            "name": "Banco Galicia",
+            "amenity": "bank"
+        },
+        "name": "Banco Galicia",
         "icon": "bank",
         "geometry": [
             "point",
@@ -20038,26 +20260,6 @@
         ],
         "suggestion": true
     },
-    "amenity/bank/Ecobank": {
-        "tags": {
-            "name": "Ecobank",
-            "amenity": "bank"
-        },
-        "name": "Ecobank",
-        "icon": "bank",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "atm",
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
     "amenity/bank/Millenium Bank": {
         "tags": {
             "name": "Millenium Bank",
@@ -20218,6 +20420,26 @@
         ],
         "suggestion": true
     },
+    "amenity/bank/中国工商银行": {
+        "tags": {
+            "name": "中国工商银行",
+            "amenity": "bank"
+        },
+        "name": "中国工商银行",
+        "icon": "bank",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "atm",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "amenity/bank/Bancolombia": {
         "tags": {
             "name": "Bancolombia",
@@ -20364,6 +20586,26 @@
             "amenity": "bank"
         },
         "name": "ВТБ",
+        "icon": "bank",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "atm",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/bank/Getin Bank": {
+        "tags": {
+            "name": "Getin Bank",
+            "amenity": "bank"
+        },
+        "name": "Getin Bank",
         "icon": "bank",
         "geometry": [
             "point",
@@ -20784,6 +21026,26 @@
         ],
         "suggestion": true
     },
+    "amenity/bank/Ecobank": {
+        "tags": {
+            "name": "Ecobank",
+            "amenity": "bank"
+        },
+        "name": "Ecobank",
+        "icon": "bank",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "atm",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "amenity/bank/Cajero Automatico Bancared": {
         "tags": {
             "name": "Cajero Automatico Bancared",
@@ -20924,6 +21186,26 @@
         ],
         "suggestion": true
     },
+    "amenity/bank/横浜銀行": {
+        "tags": {
+            "name": "横浜銀行",
+            "amenity": "bank"
+        },
+        "name": "横浜銀行",
+        "icon": "bank",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "atm",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "amenity/bank/Bank Mandiri": {
         "tags": {
             "name": "Bank Mandiri",
@@ -20990,6 +21272,26 @@
             "amenity": "bank"
         },
         "name": "Peoples Bank",
+        "icon": "bank",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "atm",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/bank/工商银行": {
+        "tags": {
+            "name": "工商银行",
+            "amenity": "bank"
+        },
+        "name": "工商银行",
         "icon": "bank",
         "geometry": [
             "point",
@@ -21151,6 +21453,26 @@
             "amenity": "bank"
         },
         "name": "Mercantil",
+        "icon": "bank",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "atm",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/bank/Bank BRI": {
+        "tags": {
+            "name": "Bank BRI",
+            "amenity": "bank"
+        },
+        "name": "Bank BRI",
         "icon": "bank",
         "geometry": [
             "point",
@@ -22277,6 +22599,26 @@
         ],
         "suggestion": true
     },
+    "amenity/pharmacy/Dr. Max": {
+        "tags": {
+            "name": "Dr. Max",
+            "amenity": "pharmacy"
+        },
+        "name": "Dr. Max",
+        "icon": "pharmacy",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "amenity/pharmacy/Вита": {
         "tags": {
             "name": "Вита",
@@ -22717,6 +23059,26 @@
         ],
         "suggestion": true
     },
+    "amenity/pharmacy/Duane Reade": {
+        "tags": {
+            "name": "Duane Reade",
+            "amenity": "pharmacy"
+        },
+        "name": "Duane Reade",
+        "icon": "pharmacy",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "amenity/pharmacy/Фармленд": {
         "tags": {
             "name": "Фармленд",
@@ -22743,6 +23105,26 @@
             "amenity": "pharmacy"
         },
         "name": "ドラッグてらしま (Drug Terashima)",
+        "icon": "pharmacy",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/pharmacy/Арніка": {
+        "tags": {
+            "name": "Арніка",
+            "amenity": "pharmacy"
+        },
+        "name": "Арніка",
         "icon": "pharmacy",
         "geometry": [
             "point",
@@ -22973,6 +23355,27 @@
             "amenity": "cafe"
         },
         "name": "Dunkin Donuts",
+        "icon": "cafe",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "cuisine",
+            "internet_access",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/cafe/Espresso House": {
+        "tags": {
+            "name": "Espresso House",
+            "amenity": "cafe"
+        },
+        "name": "Espresso House",
         "icon": "cafe",
         "geometry": [
             "point",
@@ -24775,25 +25178,6 @@
         ],
         "suggestion": true
     },
-    "shop/supermarket/Mercadona": {
-        "tags": {
-            "name": "Mercadona",
-            "shop": "supermarket"
-        },
-        "name": "Mercadona",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
     "shop/supermarket/Famila": {
         "tags": {
             "name": "Famila",
@@ -24990,6 +25374,25 @@
             "shop": "supermarket"
         },
         "name": "Unimarkt",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/Carrefour City": {
+        "tags": {
+            "name": "Carrefour City",
+            "shop": "supermarket"
+        },
+        "name": "Carrefour City",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -25250,6 +25653,25 @@
         ],
         "suggestion": true
     },
+    "shop/supermarket/Mercadona": {
+        "tags": {
+            "name": "Mercadona",
+            "shop": "supermarket"
+        },
+        "name": "Mercadona",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
     "shop/supermarket/Consum": {
         "tags": {
             "name": "Consum",
@@ -25288,12 +25710,12 @@
         ],
         "suggestion": true
     },
-    "shop/supermarket/Carrefour City": {
+    "shop/supermarket/Whole Foods": {
         "tags": {
-            "name": "Carrefour City",
+            "name": "Whole Foods",
             "shop": "supermarket"
         },
-        "name": "Carrefour City",
+        "name": "Whole Foods",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -25313,6 +25735,25 @@
             "shop": "supermarket"
         },
         "name": "Pam",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/sky": {
+        "tags": {
+            "name": "sky",
+            "shop": "supermarket"
+        },
+        "name": "sky",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -25427,25 +25868,6 @@
             "shop": "supermarket"
         },
         "name": "The Co-operative",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
-    "shop/supermarket/sky": {
-        "tags": {
-            "name": "sky",
-            "shop": "supermarket"
-        },
-        "name": "sky",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -25611,6 +26033,25 @@
         ],
         "suggestion": true
     },
+    "shop/supermarket/denn's Biomarkt": {
+        "tags": {
+            "name": "denn's Biomarkt",
+            "shop": "supermarket"
+        },
+        "name": "denn's Biomarkt",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
     "shop/supermarket/dm": {
         "tags": {
             "name": "dm",
@@ -25668,6 +26109,25 @@
         ],
         "suggestion": true
     },
+    "shop/supermarket/Dico": {
+        "tags": {
+            "name": "Dico",
+            "shop": "supermarket"
+        },
+        "name": "Dico",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
     "shop/supermarket/Nah & Frisch": {
         "tags": {
             "name": "Nah & Frisch",
@@ -25693,6 +26153,25 @@
             "shop": "supermarket"
         },
         "name": "Champion",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/ICA Supermarket": {
+        "tags": {
+            "name": "ICA Supermarket",
+            "shop": "supermarket"
+        },
+        "name": "ICA Supermarket",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -26143,6 +26622,25 @@
         ],
         "suggestion": true
     },
+    "shop/supermarket/U Express": {
+        "tags": {
+            "name": "U Express",
+            "shop": "supermarket"
+        },
+        "name": "U Express",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
     "shop/supermarket/Фора": {
         "tags": {
             "name": "Фора",
@@ -26244,25 +26742,6 @@
             "shop": "supermarket"
         },
         "name": "Crai",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
-    "shop/supermarket/Biedronka": {
-        "tags": {
-            "name": "Biedronka",
-            "shop": "supermarket"
-        },
-        "name": "Biedronka",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -26409,25 +26888,6 @@
         ],
         "suggestion": true
     },
-    "shop/supermarket/Whole Foods": {
-        "tags": {
-            "name": "Whole Foods",
-            "shop": "supermarket"
-        },
-        "name": "Whole Foods",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
     "shop/supermarket/Føtex": {
         "tags": {
             "name": "Føtex",
@@ -26561,25 +27021,6 @@
         ],
         "suggestion": true
     },
-    "shop/supermarket/The Co-operative Food": {
-        "tags": {
-            "name": "The Co-operative Food",
-            "shop": "supermarket"
-        },
-        "name": "The Co-operative Food",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
     "shop/supermarket/Plodine": {
         "tags": {
             "name": "Plodine",
@@ -26637,6 +27078,44 @@
         ],
         "suggestion": true
     },
+    "shop/supermarket/Biedronka": {
+        "tags": {
+            "name": "Biedronka",
+            "shop": "supermarket"
+        },
+        "name": "Biedronka",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/The Co-operative Food": {
+        "tags": {
+            "name": "The Co-operative Food",
+            "shop": "supermarket"
+        },
+        "name": "The Co-operative Food",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
     "shop/supermarket/Eurospin": {
         "tags": {
             "name": "Eurospin",
@@ -26662,6 +27141,25 @@
             "shop": "supermarket"
         },
         "name": "Семья",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/Gadis": {
+        "tags": {
+            "name": "Gadis",
+            "shop": "supermarket"
+        },
+        "name": "Gadis",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -26903,25 +27401,6 @@
         ],
         "suggestion": true
     },
-    "shop/supermarket/Wegmans": {
-        "tags": {
-            "name": "Wegmans",
-            "shop": "supermarket"
-        },
-        "name": "Wegmans",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
     "shop/supermarket/Game": {
         "tags": {
             "name": "Game",
@@ -27055,12 +27534,12 @@
         ],
         "suggestion": true
     },
-    "shop/supermarket/Tesco Lotus": {
+    "shop/supermarket/ALDI Nord": {
         "tags": {
-            "name": "Tesco Lotus",
+            "name": "ALDI Nord",
             "shop": "supermarket"
         },
-        "name": "Tesco Lotus",
+        "name": "ALDI Nord",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -27245,25 +27724,6 @@
         ],
         "suggestion": true
     },
-    "shop/supermarket/H-E-B": {
-        "tags": {
-            "name": "H-E-B",
-            "shop": "supermarket"
-        },
-        "name": "H-E-B",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
     "shop/supermarket/Foodworks": {
         "tags": {
             "name": "Foodworks",
@@ -27302,12 +27762,50 @@
         ],
         "suggestion": true
     },
+    "shop/supermarket/Лента": {
+        "tags": {
+            "name": "Лента",
+            "shop": "supermarket"
+        },
+        "name": "Лента",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
     "shop/supermarket/西友 (SEIYU)": {
         "tags": {
             "name": "西友 (SEIYU)",
             "shop": "supermarket"
         },
         "name": "西友 (SEIYU)",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/Атак": {
+        "tags": {
+            "name": "Атак",
+            "shop": "supermarket"
+        },
+        "name": "Атак",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -27378,6 +27876,25 @@
         ],
         "suggestion": true
     },
+    "shop/supermarket/Sigma": {
+        "tags": {
+            "name": "Sigma",
+            "shop": "supermarket"
+        },
+        "name": "Sigma",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
     "shop/supermarket/АТБ": {
         "tags": {
             "name": "АТБ",
@@ -27422,6 +27939,25 @@
             "shop": "supermarket"
         },
         "name": "Bodega Aurrera",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/Tesco Lotus": {
+        "tags": {
+            "name": "Tesco Lotus",
+            "shop": "supermarket"
+        },
+        "name": "Tesco Lotus",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -27555,6 +28091,25 @@
             "shop": "supermarket"
         },
         "name": "Hannaford",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/Wegmans": {
+        "tags": {
+            "name": "Wegmans",
+            "shop": "supermarket"
+        },
+        "name": "Wegmans",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -27777,25 +28332,6 @@
         ],
         "suggestion": true
     },
-    "shop/electronics/Comet": {
-        "tags": {
-            "name": "Comet",
-            "shop": "electronics"
-        },
-        "name": "Comet",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
     "shop/electronics/Euronics": {
         "tags": {
             "name": "Euronics",
@@ -27878,6 +28414,25 @@
             "shop": "electronics"
         },
         "name": "М.Видео",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/electronics/ヤマダ電機": {
+        "tags": {
+            "name": "ヤマダ電機",
+            "shop": "electronics"
+        },
+        "name": "ヤマダ電機",
         "icon": "shop",
         "geometry": [
             "point",
@@ -28695,6 +29250,25 @@
         ],
         "suggestion": true
     },
+    "shop/convenience/Večerka": {
+        "tags": {
+            "name": "Večerka",
+            "shop": "convenience"
+        },
+        "name": "Večerka",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/convenience/Potraviny": {
         "tags": {
             "name": "Potraviny",
@@ -28872,6 +29446,25 @@
             "shop": "convenience"
         },
         "name": "abc",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/convenience/7/11": {
+        "tags": {
+            "name": "7/11",
+            "shop": "convenience"
+        },
+        "name": "7/11",
         "icon": "shop",
         "geometry": [
             "point",
@@ -29664,6 +30257,25 @@
         ],
         "suggestion": true
     },
+    "shop/chemist/DM Drogeriemarkt": {
+        "tags": {
+            "name": "DM Drogeriemarkt",
+            "shop": "chemist"
+        },
+        "name": "DM Drogeriemarkt",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/chemist/Ihr Platz": {
         "tags": {
             "name": "Ihr Platz",
@@ -30044,6 +30656,25 @@
         ],
         "suggestion": true
     },
+    "shop/car_repair/Citroen": {
+        "tags": {
+            "name": "Citroen",
+            "shop": "car_repair"
+        },
+        "name": "Citroen",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/car_repair/Euromaster": {
         "tags": {
             "name": "Euromaster",
@@ -30107,6 +30738,25 @@
             "shop": "car_repair"
         },
         "name": "Автосервис",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/car_repair/Advance Auto Parts": {
+        "tags": {
+            "name": "Advance Auto Parts",
+            "shop": "car_repair"
+        },
+        "name": "Advance Auto Parts",
         "icon": "shop",
         "geometry": [
             "point",
@@ -30728,12 +31378,12 @@
         ],
         "suggestion": true
     },
-    "shop/doityourself/Praktiker": {
+    "shop/doityourself/Hagebaumarkt": {
         "tags": {
-            "name": "Praktiker",
+            "name": "Hagebaumarkt",
             "shop": "doityourself"
         },
-        "name": "Praktiker",
+        "name": "Hagebaumarkt",
         "icon": "shop",
         "geometry": [
             "point",
@@ -30747,12 +31397,12 @@
         ],
         "suggestion": true
     },
-    "shop/doityourself/Hagebaumarkt": {
+    "shop/doityourself/Praktiker": {
         "tags": {
-            "name": "Hagebaumarkt",
+            "name": "Praktiker",
             "shop": "doityourself"
         },
-        "name": "Hagebaumarkt",
+        "name": "Praktiker",
         "icon": "shop",
         "geometry": [
             "point",
@@ -30937,253 +31587,6 @@
         ],
         "suggestion": true
     },
-    "shop/department_store/Target": {
-        "tags": {
-            "name": "Target",
-            "shop": "department_store"
-        },
-        "name": "Target",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/Debenhams": {
-        "tags": {
-            "name": "Debenhams",
-            "shop": "department_store"
-        },
-        "name": "Debenhams",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/Karstadt": {
-        "tags": {
-            "name": "Karstadt",
-            "shop": "department_store"
-        },
-        "name": "Karstadt",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/Kmart": {
-        "tags": {
-            "name": "Kmart",
-            "shop": "department_store"
-        },
-        "name": "Kmart",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/Galeria Kaufhof": {
-        "tags": {
-            "name": "Galeria Kaufhof",
-            "shop": "department_store"
-        },
-        "name": "Galeria Kaufhof",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/Marks & Spencer": {
-        "tags": {
-            "name": "Marks & Spencer",
-            "shop": "department_store"
-        },
-        "name": "Marks & Spencer",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/Big W": {
-        "tags": {
-            "name": "Big W",
-            "shop": "department_store"
-        },
-        "name": "Big W",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/Woolworth": {
-        "tags": {
-            "name": "Woolworth",
-            "shop": "department_store"
-        },
-        "name": "Woolworth",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/Универмаг": {
-        "tags": {
-            "name": "Универмаг",
-            "shop": "department_store"
-        },
-        "name": "Универмаг",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/Sears": {
-        "tags": {
-            "name": "Sears",
-            "shop": "department_store"
-        },
-        "name": "Sears",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/Kohl's": {
-        "tags": {
-            "name": "Kohl's",
-            "shop": "department_store"
-        },
-        "name": "Kohl's",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/Macy's": {
-        "tags": {
-            "name": "Macy's",
-            "shop": "department_store"
-        },
-        "name": "Macy's",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/department_store/JCPenney": {
-        "tags": {
-            "name": "JCPenney",
-            "shop": "department_store"
-        },
-        "name": "JCPenney",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
     "shop/stationery/Staples": {
         "tags": {
             "name": "Staples",
@@ -31284,24 +31687,6 @@
             "shop": "car"
         },
         "name": "BMW",
-        "icon": "car",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/car/Citroen": {
-        "tags": {
-            "name": "Citroen",
-            "shop": "car"
-        },
-        "name": "Citroen",
         "icon": "car",
         "geometry": [
             "point",
@@ -32057,6 +32442,25 @@
         ],
         "suggestion": true
     },
+    "shop/clothes/Burton": {
+        "tags": {
+            "name": "Burton",
+            "shop": "clothes"
+        },
+        "name": "Burton",
+        "icon": "clothing-store",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/clothes/Dorothy Perkins": {
         "tags": {
             "name": "Dorothy Perkins",
@@ -32120,6 +32524,44 @@
             "shop": "clothes"
         },
         "name": "s.Oliver",
+        "icon": "clothing-store",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/clothes/Cecil": {
+        "tags": {
+            "name": "Cecil",
+            "shop": "clothes"
+        },
+        "name": "Cecil",
+        "icon": "clothing-store",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/clothes/Dress Barn": {
+        "tags": {
+            "name": "Dress Barn",
+            "shop": "clothes"
+        },
+        "name": "Dress Barn",
         "icon": "clothing-store",
         "geometry": [
             "point",
@@ -32456,6 +32898,25 @@
         ],
         "suggestion": true
     },
+    "shop/clothes/Jeans Fritz": {
+        "tags": {
+            "name": "Jeans Fritz",
+            "shop": "clothes"
+        },
+        "name": "Jeans Fritz",
+        "icon": "clothing-store",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/clothes/Charles Vögele": {
         "tags": {
             "name": "Charles Vögele",
@@ -32652,6 +33113,25 @@
             "shop": "clothes"
         },
         "name": "Jules",
+        "icon": "clothing-store",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/clothes/Second Hand": {
+        "tags": {
+            "name": "Second Hand",
+            "shop": "clothes"
+        },
+        "name": "Second Hand",
         "icon": "clothing-store",
         "geometry": [
             "point",
@@ -32874,6 +33354,25 @@
         ],
         "suggestion": true
     },
+    "shop/clothes/Marshalls": {
+        "tags": {
+            "name": "Marshalls",
+            "shop": "clothes"
+        },
+        "name": "Marshalls",
+        "icon": "clothing-store",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/clothes/La Halle": {
         "tags": {
             "name": "La Halle",
@@ -33064,6 +33563,253 @@
         ],
         "suggestion": true
     },
+    "shop/department_store/Debenhams": {
+        "tags": {
+            "name": "Debenhams",
+            "shop": "department_store"
+        },
+        "name": "Debenhams",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/Karstadt": {
+        "tags": {
+            "name": "Karstadt",
+            "shop": "department_store"
+        },
+        "name": "Karstadt",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/Kmart": {
+        "tags": {
+            "name": "Kmart",
+            "shop": "department_store"
+        },
+        "name": "Kmart",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/Target": {
+        "tags": {
+            "name": "Target",
+            "shop": "department_store"
+        },
+        "name": "Target",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/Galeria Kaufhof": {
+        "tags": {
+            "name": "Galeria Kaufhof",
+            "shop": "department_store"
+        },
+        "name": "Galeria Kaufhof",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/Marks & Spencer": {
+        "tags": {
+            "name": "Marks & Spencer",
+            "shop": "department_store"
+        },
+        "name": "Marks & Spencer",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/Big W": {
+        "tags": {
+            "name": "Big W",
+            "shop": "department_store"
+        },
+        "name": "Big W",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/Woolworth": {
+        "tags": {
+            "name": "Woolworth",
+            "shop": "department_store"
+        },
+        "name": "Woolworth",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/Универмаг": {
+        "tags": {
+            "name": "Универмаг",
+            "shop": "department_store"
+        },
+        "name": "Универмаг",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/Sears": {
+        "tags": {
+            "name": "Sears",
+            "shop": "department_store"
+        },
+        "name": "Sears",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/Kohl's": {
+        "tags": {
+            "name": "Kohl's",
+            "shop": "department_store"
+        },
+        "name": "Kohl's",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/Macy's": {
+        "tags": {
+            "name": "Macy's",
+            "shop": "department_store"
+        },
+        "name": "Macy's",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/department_store/JCPenney": {
+        "tags": {
+            "name": "JCPenney",
+            "shop": "department_store"
+        },
+        "name": "JCPenney",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/alcohol/Alko": {
         "tags": {
             "name": "Alko",
@@ -33197,6 +33943,25 @@
         ],
         "suggestion": true
     },
+    "shop/alcohol/BWS": {
+        "tags": {
+            "name": "BWS",
+            "shop": "alcohol"
+        },
+        "name": "BWS",
+        "icon": "alcohol-shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/alcohol/Botilleria": {
         "tags": {
             "name": "Botilleria",
@@ -33254,25 +34019,6 @@
         ],
         "suggestion": true
     },
-    "shop/alcohol/BWS": {
-        "tags": {
-            "name": "BWS",
-            "shop": "alcohol"
-        },
-        "name": "BWS",
-        "icon": "alcohol-shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
     "shop/alcohol/Живое пиво": {
         "tags": {
             "name": "Живое пиво",
@@ -33311,6 +34057,25 @@
         ],
         "suggestion": true
     },
+    "shop/bakery/Banette": {
+        "tags": {
+            "name": "Banette",
+            "shop": "bakery"
+        },
+        "name": "Banette",
+        "icon": "bakery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/bakery/Bäckerei Schmidt": {
         "tags": {
             "name": "Bäckerei Schmidt",
@@ -33336,25 +34101,6 @@
             "shop": "bakery"
         },
         "name": "Anker",
-        "icon": "bakery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/bakery/Schäfer": {
-        "tags": {
-            "name": "Schäfer",
-            "shop": "bakery"
-        },
-        "name": "Schäfer",
         "icon": "bakery",
         "geometry": [
             "point",
@@ -33786,6 +34532,44 @@
         ],
         "suggestion": true
     },
+    "shop/bakery/Пекарня": {
+        "tags": {
+            "name": "Пекарня",
+            "shop": "bakery"
+        },
+        "name": "Пекарня",
+        "icon": "bakery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/bakery/Кулиничи": {
+        "tags": {
+            "name": "Кулиничи",
+            "shop": "bakery"
+        },
+        "name": "Кулиничи",
+        "icon": "bakery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/sports/Sports Direct": {
         "tags": {
             "name": "Sports Direct",
@@ -33944,6 +34728,25 @@
             "shop": "variety_store"
         },
         "name": "Dollarama",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/variety_store/Family Dollar": {
+        "tags": {
+            "name": "Family Dollar",
+            "shop": "variety_store"
+        },
+        "name": "Family Dollar",
         "icon": "shop",
         "geometry": [
             "point",
@@ -34166,6 +34969,25 @@
         ],
         "suggestion": true
     },
+    "shop/shoes/Geox": {
+        "tags": {
+            "name": "Geox",
+            "shop": "shoes"
+        },
+        "name": "Geox",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/shoes/Salamander": {
         "tags": {
             "name": "Salamander",
@@ -34261,6 +35083,25 @@
         ],
         "suggestion": true
     },
+    "shop/shoes/Shoe Zone": {
+        "tags": {
+            "name": "Shoe Zone",
+            "shop": "shoes"
+        },
+        "name": "Shoe Zone",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/shoes/Foot Locker": {
         "tags": {
             "name": "Foot Locker",
@@ -34286,6 +35127,25 @@
             "shop": "shoes"
         },
         "name": "Bata",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/shoes/ЦентрОбувь": {
+        "tags": {
+            "name": "ЦентрОбувь",
+            "shop": "shoes"
+        },
+        "name": "ЦентрОбувь",
         "icon": "shop",
         "geometry": [
             "point",
@@ -34337,12 +35197,12 @@
         ],
         "suggestion": true
     },
-    "shop/toys/Детский мир": {
+    "shop/toys/Intertoys": {
         "tags": {
-            "name": "Детский мир",
+            "name": "Intertoys",
             "shop": "toys"
         },
-        "name": "Детский мир",
+        "name": "Intertoys",
         "icon": "shop",
         "geometry": [
             "point",
@@ -34356,12 +35216,12 @@
         ],
         "suggestion": true
     },
-    "shop/toys/Intertoys": {
+    "shop/toys/Детский мир": {
         "tags": {
-            "name": "Intertoys",
+            "name": "Детский мир",
             "shop": "toys"
         },
-        "name": "Intertoys",
+        "name": "Детский мир",
         "icon": "shop",
         "geometry": [
             "point",
@@ -35217,6 +36077,25 @@
             "shop": "hairdresser"
         },
         "name": "Парикмахерская",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/hairdresser/Стиль": {
+        "tags": {
+            "name": "Стиль",
+            "shop": "hairdresser"
+        },
+        "name": "Стиль",
         "icon": "shop",
         "geometry": [
             "point",
