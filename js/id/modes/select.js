@@ -30,21 +30,10 @@ iD.modes.Select = function(context, selectedIDs) {
     function positionMenu() {
         var entity = singular();
 
-// for testing .. send editmenu in random direction -1, 0, 1
-// var direction = [
-//     Math.floor(Math.random()*3) - 1,
-//     Math.floor(Math.random()*3) - 1
-//   ]
-// editMenu
-//     .position(context.mouse())
-//     .direction(direction);
-
         if (entity && entity.type === 'node') {
-            editMenu
-                .position(context.projection(entity.loc));
+            editMenu.position(iD.geo.roundCoords(context.projection(entity.loc)));
         } else {
-            editMenu
-                .position(context.mouse());
+            editMenu.position(context.mouse());
         }
     }
 
@@ -94,9 +83,6 @@ iD.modes.Select = function(context, selectedIDs) {
 //operations.push(iD.operations.Delete(selectedIDs, context));
 //operations.push(iD.operations.Delete(selectedIDs, context));
 //operations.push(iD.operations.Delete(selectedIDs, context));
-operations.push(iD.operations.Delete(selectedIDs, context));
-operations.push(iD.operations.Delete(selectedIDs, context));
-operations.push(iD.operations.Delete(selectedIDs, context));
 // end testing
 
         keybinding.on('⎋', function() {

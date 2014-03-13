@@ -1,8 +1,18 @@
 iD.ui.EditMenu = function(context, operations) {
     var menu,
         position = [0, 0],
-        direction = [1, 1],
         tooltip;
+
+    var directions = {
+        'nw': [-1, -1],
+        //'n':  [ 0, -1],
+        'ne': [ 1, -1],
+        //'w':  [ 0, -1],
+        //'e':  [ 0,  1],
+        'sw': [-1,  1],
+        //'s':  [ 0,  1],
+        'se': [ 1,  1]
+    };
 
     var editMenu = function(selection) {
         if (!operations.length)
@@ -19,16 +29,12 @@ iD.ui.EditMenu = function(context, operations) {
         }
 
         var spacing = 40,
-            offset  = 10,
+            offset = 8,  // to move around mouse cursor..
             items = operations.length,
             cols,
-            rows,
-            xstart,
-            ystart,
-            xwidth,
-            yheight;
+            rows;
 
-        // pack menu items into columns..
+        // pack menu items into columns and rows..
         if (items <= 5) {
             cols = items;
         } else if ([7, 8, 11, 12].indexOf(items) != -1) {
@@ -40,34 +46,61 @@ iD.ui.EditMenu = function(context, operations) {
         }
         rows = Math.ceil(items / cols);
 
-        xwidth = cols * spacing;
-        yheight = rows * spacing;
+        // determine menu size..
+        var width = (cols * spacing),
+            height = (rows * spacing),
+            start = [0,0];
 
-        if(direction[0] < 0) {
-            xstart = (-1 * (xwidth + offset));
-        }
-        else if (direction[0] === 0) {
-            xstart = (-1 * (xwidth + offset)) / 2;
-        }
-        else {
-            xstart = offset;
-        }
+        // visible points to avoid..
+        var points = _.map(d3.select('.layer-hit').selectAll('circle.shadow')[0], function(el) {
+            return [el.getCTM().e, el.getCTM().f];
+        });
 
-        if(direction[1] < 0) {
-            ystart = (-1 * (yheight + offset));
-        }
-        else if (direction[0] === 0) {
-            ystart = (-1 * (yheight + offset)) / 2;
-        }
-        else {
-            ystart = offset;
-        }
+        // pick the menu direction that obscures the fewest points..
+        var best = Infinity,
+            dim = id.map().dimensions();
 
-console.info('position=[' + position + '] direction=[' + direction + '] xwidth=' + xwidth + ' yheight=' + yheight + ' xstart=' + xstart + ' ystart=' + ystart );
+        _.each(_.values(directions), function(dir) {
+            var min = [0,0],
+                max = [0,0],
+                pad = 3;
+
+            switch(dir[0]) {
+                case -1:  min[0] = position[0] - width; break;
+                //case  0:  min[0] = position[0] - (width / 2); break;
+                case  1:  min[0] = position[0] + offset; break;
+            }
+            switch(dir[1]) {
+                case -1:  min[1] = position[1] - height; break;
+                //case  0:  min[1] = position[1] - (height / 2); break;
+                case  1:  min[1] = position[1] + offset; break;
+            }
+            max = [(min[0] + width), (min[1] + height)];
+
+// console.info('test dir=' + dir + ' dim=' + dim + ' min=' + min + ' max=' + max + ' best=' + best);
+            // only consider directions that fit the menu within map surface..
+            if ((min[0] > 0) && (min[1] > 60) && (max[0] < dim[0]) && (max[1] < dim[1])) {
+                var hits = _.filter(points, function(point) {
+                    return (
+                        (point[0] >= min[0] - pad) &&
+                        (point[0] <= max[0] + pad) &&
+                        (point[1] >= min[1] - pad) &&
+                        (point[1] <= max[1] + pad)
+                    );
+                });
+
+                if (hits.length <= best) {
+                    best = hits.length;
+                    start = min;
+                }
+            }
+        });
+
+
+// console.info('position=' + position + ' width=' + width + ' height=' + height + ' start=' + start);
 
         menu = selection.append('g')
             .attr('class', 'edit-menu')
-            .attr('transform', 'translate(' + position + ')')
             .attr('opacity', 0);
 
         menu.transition()
@@ -75,10 +108,10 @@ console.info('position=[' + position + '] direction=[' + direction + '] xwidth='
 
         menu.append('rect')
             .attr('class', 'edit-menu-background')
-            .attr('x', xstart)
-            .attr('y', ystart)
-            .attr('width', xwidth)
-            .attr('height', yheight)
+            .attr('x', start[0])
+            .attr('y', start[1])
+            .attr('width', width)
+            .attr('height', height)
             .attr('rx', spacing / 2)
             .attr('ry', spacing / 2)
 
@@ -88,8 +121,8 @@ console.info('position=[' + position + '] direction=[' + direction + '] xwidth='
             .attr('transform', function(d, i) {
                 var col = (i % cols) + 1,
                     row = Math.floor(i / cols) + 1,
-                    x = (xstart + (spacing * col) - (spacing / 2)),
-                    y = (ystart + (spacing * row) - (spacing / 2));
+                    x = (start[0] + (spacing * col) - (spacing / 2)),
+                    y = (start[1] + (spacing * row) - (spacing / 2));
                 return 'translate(' + x + ',' + y + ')';
             });
 
@@ -118,8 +151,8 @@ console.info('position=[' + position + '] direction=[' + direction + '] xwidth='
         function mouseover(d, i) {
             // pin tooltip to bottom of editmenu..
             var rect = context.surfaceRect(),
-                top = rect.top + position[1] + ystart + yheight + 'px',
-                left = rect.left + position[0] + xstart + 'px';
+                top = rect.top + start[1] + height + 'px',
+                left = rect.left + start[0] + 'px';
 
             tooltip
                 .style('left', left)
@@ -141,26 +174,14 @@ console.info('position=[' + position + '] direction=[' + direction + '] xwidth='
                 .attr('opacity', 0)
                 .remove();
         }
-
         if (tooltip) {
             tooltip.remove();
         }
     };
 
-    // position where the menu should start, specified like [x,y]
     editMenu.position = function(_) {
         if (!arguments.length) return position;
         position = _;
-        return editMenu;
-    };
-
-    // direction to grow the menu, specified like [x,y]
-    //      -1
-    //   -1  0  1
-    //       1
-    editMenu.direction = function(_) {
-        if (!arguments.length) return direction;
-        direction = _;
         return editMenu;
     };
 
