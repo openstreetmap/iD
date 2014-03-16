@@ -241,6 +241,10 @@ path.stroke.tag-landuse-quarry {
     stroke: #a6957b;
 }
 
+path.stroke.tag-landuse-landfill {
+    stroke: #ff9933;
+}
+
 path.stroke.tag-landuse-residential,
 path.stroke.tag-landuse-construction {
     stroke: #e06e5f;
@@ -309,6 +313,12 @@ path.fill.tag-landuse-reservoir {
 
 path.fill.tag-landuse-quarry {
     fill: #a6957b;
+    fill-opacity: 0.2;
+}
+
+path.fill.tag-landuse-landfill {
+    fill: #ff8800;
+    fill-opacity: 0.2;
 }
 
 path.fill.tag-landuse-residential {

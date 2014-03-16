@@ -1095,6 +1095,9 @@ en:
       landuse/industrial: 
         name: Industrial
         terms: "<translate with synonyms or related terms for 'Industrial', separated by commas>"
+      landuse/landfill: 
+        name: Landfill
+        terms: "<translate with synonyms or related terms for 'Landfill', separated by commas>"
       landuse/meadow: 
         name: Meadow
         terms: "<translate with synonyms or related terms for 'Meadow', separated by commas>"

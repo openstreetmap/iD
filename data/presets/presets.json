@@ -4483,6 +4483,18 @@
         "terms": [],
         "name": "Industrial"
     },
+    "landuse/landfill": {
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "landfill"
+        },
+        "terms": [
+            "dump"
+        ],
+        "name": "Landfill"
+    },
     "landuse/meadow": {
         "geometry": [
             "point",
