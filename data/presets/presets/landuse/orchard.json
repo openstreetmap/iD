@@ -1,5 +1,7 @@
 {
-    "icon": "park2",
+    "fields": [
+        "trees"
+    ],
     "geometry": [
         "point",
         "area"
@@ -8,5 +10,6 @@
         "landuse": "orchard"
     },
     "terms": [],
-    "name": "Orchard"
+    "name": "Orchard",
+    "icon": "park2"
 }
