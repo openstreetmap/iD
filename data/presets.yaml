@@ -284,6 +284,8 @@ en:
         label: Type
       shop: 
         label: Type
+      smoking: 
+        label: Smoking
       social_facility_for: 
         label: People served
         placeholder: "Homeless, Disabled, Child, etc"
@@ -495,6 +497,9 @@ en:
       amenity/marketplace: 
         name: Marketplace
         terms: "<translate with synonyms or related terms for 'Marketplace', separated by commas>"
+      amenity/nightclub: 
+        name: Nightclub
+        terms: "<translate with synonyms or related terms for 'Nightclub', separated by commas>"
       amenity/parking: 
         name: Car Parking
         terms: "<translate with synonyms or related terms for 'Car Parking', separated by commas>"

@@ -2,7 +2,8 @@
     "icon": "park",
     "fields": [
         "operator",
-        "address"
+        "address",
+        "smoking"
     ],
     "geometry": [
         "point",

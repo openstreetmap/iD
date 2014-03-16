@@ -2,7 +2,8 @@
     "icon": "commercial",
     "fields": [
         "address",
-        "opening_hours"
+        "opening_hours",
+        "smoking"
     ],
     "geometry": [
         "point",

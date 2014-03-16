@@ -3,7 +3,8 @@
     "fields": [
         "building",
         "levels",
-        "address"
+        "address",
+        "smoking"
     ],
     "geometry": [
         "area"

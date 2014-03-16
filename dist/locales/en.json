@@ -804,6 +804,9 @@
             "shop": {
                 "label": "Type"
             },
+            "smoking": {
+                "label": "Smoking"
+            },
             "social_facility_for": {
                 "label": "People served",
                 "placeholder": "Homeless, Disabled, Child, etc"
@@ -1091,6 +1094,10 @@
             "amenity/marketplace": {
                 "name": "Marketplace",
                 "terms": ""
+            },
+            "amenity/nightclub": {
+                "name": "Nightclub",
+                "terms": "disco*,night club,dancing,dance club"
             },
             "amenity/parking": {
                 "name": "Car Parking",

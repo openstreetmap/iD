@@ -410,7 +410,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -493,7 +494,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -745,7 +747,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -908,6 +911,30 @@
             "building_area"
         ],
         "name": "Marketplace"
+    },
+    "amenity/nightclub": {
+        "icon": "bar",
+        "fields": [
+            "building_area",
+            "address",
+            "opening_hours",
+            "smoking"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "amenity": "nightclub"
+        },
+        "terms": [
+            "disco*",
+            "night club",
+            "dancing",
+            "dance club"
+        ],
+        "name": "Nightclub"
     },
     "amenity/parking": {
         "icon": "parking",
@@ -1198,7 +1225,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -1262,7 +1290,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -1886,7 +1915,8 @@
         "fields": [
             "building",
             "levels",
-            "address"
+            "address",
+            "smoking"
         ],
         "geometry": [
             "area"
@@ -2011,6 +2041,10 @@
     },
     "building/commercial": {
         "icon": "commercial",
+        "fields": [
+            "address",
+            "smoking"
+        ],
         "geometry": [
             "point",
             "vertex",
@@ -2057,7 +2091,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -2146,7 +2181,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -2204,7 +2240,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -2236,7 +2273,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -5400,7 +5438,8 @@
         "fields": [
             "office",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -5468,7 +5507,8 @@
         "icon": "commercial",
         "fields": [
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -5638,7 +5678,8 @@
         "icon": "commercial",
         "fields": [
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -7366,7 +7407,8 @@
         "icon": "campsite",
         "fields": [
             "operator",
-            "address"
+            "address",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -7384,7 +7426,8 @@
     "tourism/caravan_site": {
         "fields": [
             "operator",
-            "address"
+            "address",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -7401,7 +7444,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -7417,7 +7461,8 @@
         "icon": "lodging",
         "fields": [
             "operator",
-            "address"
+            "address",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -7439,7 +7484,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -7456,7 +7502,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -7491,7 +7538,8 @@
         "fields": [
             "operator",
             "building_area",
-            "address"
+            "address",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -7539,7 +7587,8 @@
         "icon": "park",
         "fields": [
             "operator",
-            "address"
+            "address",
+            "smoking"
         ],
         "geometry": [
             "point",
@@ -8021,7 +8070,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8040,7 +8090,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8059,7 +8110,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8078,7 +8130,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8097,7 +8150,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8116,7 +8170,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8135,7 +8190,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8154,7 +8210,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8173,7 +8230,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8192,7 +8250,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8211,7 +8270,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8230,7 +8290,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8249,7 +8310,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8268,7 +8330,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8287,7 +8350,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8306,7 +8370,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8325,7 +8390,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8344,7 +8410,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8363,7 +8430,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8382,7 +8450,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8401,7 +8470,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8420,7 +8490,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8439,7 +8510,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8458,7 +8530,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8477,7 +8550,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8496,7 +8570,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8515,7 +8590,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8534,7 +8610,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8553,7 +8630,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8572,7 +8650,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8591,7 +8670,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8610,7 +8690,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8629,7 +8710,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8648,7 +8730,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8667,7 +8750,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8686,7 +8770,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8705,7 +8790,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8724,7 +8810,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8743,7 +8830,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8762,7 +8850,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8781,7 +8870,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8800,7 +8890,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8819,7 +8910,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8838,7 +8930,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -8857,7 +8950,8 @@
         "fields": [
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12336,7 +12430,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12357,7 +12452,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12378,7 +12474,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12398,7 +12495,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12419,7 +12517,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12439,7 +12538,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12460,7 +12560,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12481,7 +12582,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12501,7 +12603,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12521,7 +12624,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12541,7 +12645,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12561,7 +12666,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12582,7 +12688,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12602,7 +12709,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12622,7 +12730,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12643,7 +12752,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12663,7 +12773,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12683,7 +12794,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12703,7 +12815,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12723,7 +12836,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12743,7 +12857,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12763,7 +12878,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12783,7 +12899,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12803,7 +12920,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12823,7 +12941,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12844,7 +12963,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12864,7 +12984,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12884,7 +13005,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12904,7 +13026,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12924,7 +13047,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12944,7 +13068,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12965,7 +13090,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -12986,7 +13112,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13006,7 +13133,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13027,7 +13155,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13047,7 +13176,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13067,7 +13197,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13088,7 +13219,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13108,7 +13240,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13128,7 +13261,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13148,7 +13282,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13169,7 +13304,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13189,7 +13325,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13209,7 +13346,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13230,7 +13368,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13252,7 +13391,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13272,7 +13412,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13292,7 +13433,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13312,7 +13454,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13332,7 +13475,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13352,7 +13496,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13374,7 +13519,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13394,7 +13540,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13414,7 +13561,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13435,7 +13583,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13455,7 +13604,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13475,7 +13625,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13495,7 +13646,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13515,7 +13667,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13535,7 +13688,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13556,7 +13710,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13576,7 +13731,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13596,7 +13752,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13616,7 +13773,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13636,7 +13794,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13656,7 +13815,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13676,7 +13836,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13696,7 +13857,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13717,7 +13879,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13737,7 +13900,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13757,7 +13921,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13778,7 +13943,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13799,7 +13965,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13819,7 +13986,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13839,7 +14007,8 @@
             "cuisine",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13860,7 +14029,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13881,7 +14051,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13902,7 +14073,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13923,7 +14095,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13944,7 +14117,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13965,7 +14139,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -13986,7 +14161,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14007,7 +14183,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14028,7 +14205,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14049,7 +14227,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14070,7 +14249,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14091,7 +14271,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14112,7 +14293,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14133,7 +14315,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14154,7 +14337,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14175,7 +14359,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14196,7 +14381,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14217,7 +14403,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14238,7 +14425,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14259,7 +14447,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14280,7 +14469,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14301,7 +14491,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14322,7 +14513,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14343,7 +14535,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14364,7 +14557,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14385,7 +14579,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14406,7 +14601,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14427,7 +14623,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14448,7 +14645,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14469,7 +14667,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14490,7 +14689,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14511,7 +14711,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14532,7 +14733,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14553,7 +14755,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14574,7 +14777,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14595,7 +14799,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14616,7 +14821,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14637,7 +14843,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14658,7 +14865,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14679,7 +14887,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14700,7 +14909,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14721,7 +14931,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14742,7 +14953,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14763,7 +14975,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14784,7 +14997,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14805,7 +15019,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14826,7 +15041,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14847,7 +15063,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14868,7 +15085,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14889,7 +15107,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14910,7 +15129,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14931,7 +15151,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14952,7 +15173,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14973,7 +15195,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -14994,7 +15217,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15015,7 +15239,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15036,7 +15261,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15057,7 +15283,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15078,7 +15305,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15099,7 +15327,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15120,7 +15349,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15141,7 +15371,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15162,7 +15393,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15183,7 +15415,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15204,7 +15437,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15225,7 +15459,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15246,7 +15481,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15267,7 +15503,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15288,7 +15525,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15309,7 +15547,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15330,7 +15569,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15351,7 +15591,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15372,7 +15613,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15393,7 +15635,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15414,7 +15657,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15435,7 +15679,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15456,7 +15701,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15477,7 +15723,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15498,7 +15745,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15519,7 +15767,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15540,7 +15789,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15561,7 +15811,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15582,7 +15833,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15603,7 +15855,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15624,7 +15877,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15645,7 +15899,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15666,7 +15921,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15687,7 +15943,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15708,7 +15965,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15729,7 +15987,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15750,7 +16009,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15771,7 +16031,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15792,7 +16053,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15813,7 +16075,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15834,7 +16097,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15855,7 +16119,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15876,7 +16141,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15897,7 +16163,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15919,7 +16186,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15940,7 +16208,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15961,7 +16230,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -15982,7 +16252,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16003,7 +16274,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16024,7 +16296,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16045,7 +16318,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16066,7 +16340,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16087,7 +16362,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16108,7 +16384,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16129,7 +16406,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16150,7 +16428,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16171,7 +16450,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16192,7 +16472,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16213,7 +16494,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16234,7 +16516,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16255,7 +16538,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16276,7 +16560,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16297,7 +16582,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16318,7 +16604,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -16339,7 +16626,8 @@
             "building_area",
             "address",
             "opening_hours",
-            "capacity"
+            "capacity",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -22840,7 +23128,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -22861,7 +23150,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -22882,7 +23172,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -22903,7 +23194,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -22924,7 +23216,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -22945,7 +23238,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -22966,7 +23260,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -22987,7 +23282,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23009,7 +23305,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23030,7 +23327,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23051,7 +23349,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23072,7 +23371,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23093,7 +23393,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23115,7 +23416,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23136,7 +23438,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23157,7 +23460,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23178,7 +23482,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23200,7 +23505,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23221,7 +23527,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23242,7 +23549,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23263,7 +23571,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23284,7 +23593,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23305,7 +23615,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23326,7 +23637,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23347,7 +23659,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23369,7 +23682,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
@@ -23390,7 +23704,8 @@
             "internet_access",
             "building_area",
             "address",
-            "opening_hours"
+            "opening_hours",
+            "smoking"
         ],
         "suggestion": true
     },
