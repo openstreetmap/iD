@@ -565,6 +565,9 @@
             "covered": {
                 "label": "Covered"
             },
+            "crop": {
+                "label": "Crop"
+            },
             "crossing": {
                 "label": "Type"
             },
@@ -843,6 +846,9 @@
             },
             "tree_type": {
                 "label": "Type"
+            },
+            "trees": {
+                "label": "Trees"
             },
             "tunnel": {
                 "label": "Tunnel"

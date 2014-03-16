@@ -4400,6 +4400,9 @@
         "name": "Construction"
     },
     "landuse/farm": {
+        "fields": [
+            "crop"
+        ],
         "geometry": [
             "point",
             "area"
@@ -4412,6 +4415,9 @@
         "icon": "farm"
     },
     "landuse/farmland": {
+        "fields": [
+            "crop"
+        ],
         "geometry": [
             "point",
             "area"
@@ -4425,6 +4431,9 @@
         "searchable": false
     },
     "landuse/farmyard": {
+        "fields": [
+            "crop"
+        ],
         "geometry": [
             "point",
             "area"
@@ -4486,7 +4495,9 @@
         "name": "Meadow"
     },
     "landuse/orchard": {
-        "icon": "park2",
+        "fields": [
+            "trees"
+        ],
         "geometry": [
             "point",
             "area"
@@ -4495,7 +4506,8 @@
             "landuse": "orchard"
         },
         "terms": [],
-        "name": "Orchard"
+        "name": "Orchard",
+        "icon": "park2"
     },
     "landuse/quarry": {
         "geometry": [

@@ -118,6 +118,8 @@ en:
         label: Country
       covered: 
         label: Covered
+      crop: 
+        label: Crop
       crossing: 
         label: Type
       cuisine: 
@@ -312,6 +314,8 @@ en:
         label: Trail Visibility
       tree_type: 
         label: Type
+      trees: 
+        label: Trees
       tunnel: 
         label: Tunnel
       vending: 

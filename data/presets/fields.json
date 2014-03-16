@@ -255,6 +255,11 @@
         "type": "check",
         "label": "Covered"
     },
+    "crop": {
+        "key": "crop",
+        "type": "combo",
+        "label": "Crop"
+    },
     "crossing": {
         "key": "crossing",
         "type": "combo",
@@ -796,6 +801,11 @@
             "palm"
         ],
         "label": "Type"
+    },
+    "trees": {
+        "key": "trees",
+        "type": "combo",
+        "label": "Trees"
     },
     "tunnel": {
         "key": "tunnel",
