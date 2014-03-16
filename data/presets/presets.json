@@ -4400,6 +4400,9 @@
         "name": "Construction"
     },
     "landuse/farm": {
+        "fields": [
+            "crop"
+        ],
         "geometry": [
             "point",
             "area"
@@ -4412,6 +4415,9 @@
         "icon": "farm"
     },
     "landuse/farmland": {
+        "fields": [
+            "crop"
+        ],
         "geometry": [
             "point",
             "area"
@@ -4425,6 +4431,9 @@
         "searchable": false
     },
     "landuse/farmyard": {
+        "fields": [
+            "crop"
+        ],
         "geometry": [
             "point",
             "area"
@@ -4474,6 +4483,18 @@
         "terms": [],
         "name": "Industrial"
     },
+    "landuse/landfill": {
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "landfill"
+        },
+        "terms": [
+            "dump"
+        ],
+        "name": "Landfill"
+    },
     "landuse/meadow": {
         "geometry": [
             "point",
@@ -4486,7 +4507,9 @@
         "name": "Meadow"
     },
     "landuse/orchard": {
-        "icon": "park2",
+        "fields": [
+            "trees"
+        ],
         "geometry": [
             "point",
             "area"
@@ -4495,7 +4518,8 @@
             "landuse": "orchard"
         },
         "terms": [],
-        "name": "Orchard"
+        "name": "Orchard",
+        "icon": "park2"
     },
     "landuse/quarry": {
         "geometry": [
@@ -4703,7 +4727,8 @@
     "leisure/pitch/basketball": {
         "icon": "basketball",
         "fields": [
-            "surface"
+            "surface",
+            "hoops"
         ],
         "geometry": [
             "point",

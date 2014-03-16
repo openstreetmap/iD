@@ -1,0 +1,12 @@
+{
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "landuse": "landfill"
+    },
+    "terms": [
+        "dump"
+    ],
+    "name": "Landfill"
+}

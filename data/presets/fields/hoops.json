@@ -1,0 +1,6 @@
+{
+    "key": "hoops",
+    "type": "number",
+    "label": "Hoops",
+    "placeholder": "1, 2, 4..."
+}

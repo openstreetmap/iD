@@ -1,4 +1,7 @@
 {
+    "fields": [
+        "crop"
+    ],
     "geometry": [
         "point",
         "area"

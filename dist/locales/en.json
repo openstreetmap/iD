@@ -565,6 +565,9 @@
             "covered": {
                 "label": "Covered"
             },
+            "crop": {
+                "label": "Crop"
+            },
             "crossing": {
                 "label": "Type"
             },
@@ -630,6 +633,10 @@
             },
             "historic": {
                 "label": "Type"
+            },
+            "hoops": {
+                "label": "Hoops",
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -843,6 +850,9 @@
             },
             "tree_type": {
                 "label": "Type"
+            },
+            "trees": {
+                "label": "Trees"
             },
             "tunnel": {
                 "label": "Tunnel"
@@ -1885,6 +1895,10 @@
             "landuse/industrial": {
                 "name": "Industrial",
                 "terms": ""
+            },
+            "landuse/landfill": {
+                "name": "Landfill",
+                "terms": "dump"
             },
             "landuse/meadow": {
                 "name": "Meadow",

@@ -118,6 +118,8 @@ en:
         label: Country
       covered: 
         label: Covered
+      crop: 
+        label: Crop
       crossing: 
         label: Type
       cuisine: 
@@ -163,6 +165,9 @@ en:
         label: Type
       historic: 
         label: Type
+      hoops: 
+        label: Hoops
+        placeholder: "1, 2, 4..."
       iata: 
         label: IATA
       icao: 
@@ -312,6 +317,8 @@ en:
         label: Trail Visibility
       tree_type: 
         label: Type
+      trees: 
+        label: Trees
       tunnel: 
         label: Tunnel
       vending: 
@@ -1091,6 +1098,9 @@ en:
       landuse/industrial: 
         name: Industrial
         terms: "<translate with synonyms or related terms for 'Industrial', separated by commas>"
+      landuse/landfill: 
+        name: Landfill
+        terms: "<translate with synonyms or related terms for 'Landfill', separated by commas>"
       landuse/meadow: 
         name: Meadow
         terms: "<translate with synonyms or related terms for 'Meadow', separated by commas>"
