@@ -165,6 +165,9 @@ en:
         label: Type
       historic: 
         label: Type
+      hoops: 
+        label: Hoops
+        placeholder: "1, 2, 4..."
       iata: 
         label: IATA
       icao: 

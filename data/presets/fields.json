@@ -383,6 +383,12 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "hoops": {
+        "key": "hoops",
+        "type": "number",
+        "label": "Hoops",
+        "placeholder": "1, 2, 4..."
+    },
     "iata": {
         "key": "iata",
         "type": "text",
