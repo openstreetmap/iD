@@ -1,5 +1,9 @@
 {
     "icon": "commercial",
+    "fields": [
+        "address",
+        "smoking"
+    ],
     "geometry": [
         "point",
         "vertex",

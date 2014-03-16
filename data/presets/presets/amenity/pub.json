@@ -3,7 +3,8 @@
     "fields": [
         "building_area",
         "address",
-        "opening_hours"
+        "opening_hours",
+        "smoking"
     ],
     "geometry": [
         "point",

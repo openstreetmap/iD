@@ -701,6 +701,17 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "smoking": {
+        "key": "smoking",
+        "type": "combo",
+        "options": [
+            "no",
+            "outside",
+            "separated",
+            "yes"
+        ],
+        "label": "Smoking"
+    },
     "social_facility_for": {
         "key": "social_facility:for",
         "type": "radio",
