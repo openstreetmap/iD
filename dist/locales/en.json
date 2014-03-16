@@ -634,6 +634,10 @@
             "historic": {
                 "label": "Type"
             },
+            "hoops": {
+                "label": "Hoops",
+                "placeholder": "1, 2, 4..."
+            },
             "iata": {
                 "label": "IATA"
             },

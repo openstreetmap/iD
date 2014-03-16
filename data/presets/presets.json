@@ -4727,7 +4727,8 @@
     "leisure/pitch/basketball": {
         "icon": "basketball",
         "fields": [
-            "surface"
+            "surface",
+            "hoops"
         ],
         "geometry": [
             "point",
