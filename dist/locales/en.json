@@ -1892,6 +1892,10 @@
                 "name": "Industrial",
                 "terms": ""
             },
+            "landuse/landfill": {
+                "name": "Landfill",
+                "terms": "dump"
+            },
             "landuse/meadow": {
                 "name": "Meadow",
                 "terms": ""
