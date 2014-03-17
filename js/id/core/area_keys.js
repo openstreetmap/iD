@@ -21,6 +21,7 @@ iD.areaKeys = {
         "cattle_grid": true,
         "cycle_barrier": true,
         "entrance": true,
+        "fence": true,
         "gate": true,
         "kissing_gate": true,
         "lift_gate": true,
