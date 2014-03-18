@@ -255,6 +255,11 @@
         "type": "check",
         "label": "Covered"
     },
+    "crop": {
+        "key": "crop",
+        "type": "combo",
+        "label": "Crop"
+    },
     "crossing": {
         "key": "crossing",
         "type": "combo",
@@ -377,6 +382,12 @@
         "key": "historic",
         "type": "typeCombo",
         "label": "Type"
+    },
+    "hoops": {
+        "key": "hoops",
+        "type": "number",
+        "label": "Hoops",
+        "placeholder": "1, 2, 4..."
     },
     "iata": {
         "key": "iata",
@@ -690,6 +701,17 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "smoking": {
+        "key": "smoking",
+        "type": "combo",
+        "options": [
+            "no",
+            "outside",
+            "separated",
+            "yes"
+        ],
+        "label": "Smoking"
+    },
     "social_facility_for": {
         "key": "social_facility:for",
         "type": "radio",
@@ -796,6 +818,11 @@
             "palm"
         ],
         "label": "Type"
+    },
+    "trees": {
+        "key": "trees",
+        "type": "combo",
+        "label": "Trees"
     },
     "tunnel": {
         "key": "tunnel",

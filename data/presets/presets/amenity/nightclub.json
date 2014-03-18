@@ -1,8 +1,6 @@
 {
-    "icon": "cafe",
+    "icon": "bar",
     "fields": [
-        "cuisine",
-        "internet_access",
         "building_area",
         "address",
         "opening_hours",
@@ -13,13 +11,14 @@
         "vertex",
         "area"
     ],
-    "terms": [
-        "coffee",
-        "tea",
-        "coffee shop"
-    ],
     "tags": {
-        "amenity": "cafe"
+        "amenity": "nightclub"
     },
-    "name": "Cafe"
+    "terms": [
+       "disco*",
+       "night club",
+       "dancing",
+       "dance club"
+    ],
+    "name": "Nightclub"
 }

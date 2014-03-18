@@ -1,0 +1,11 @@
+{
+    "key": "smoking",
+    "type": "combo",
+    "options": [
+        "no",
+        "outside",
+        "separated",
+        "yes"
+    ],
+    "label": "Smoking"
+}

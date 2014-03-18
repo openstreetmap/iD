@@ -565,6 +565,9 @@
             "covered": {
                 "label": "Covered"
             },
+            "crop": {
+                "label": "Crop"
+            },
             "crossing": {
                 "label": "Type"
             },
@@ -630,6 +633,10 @@
             },
             "historic": {
                 "label": "Type"
+            },
+            "hoops": {
+                "label": "Hoops",
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -797,6 +804,9 @@
             "shop": {
                 "label": "Type"
             },
+            "smoking": {
+                "label": "Smoking"
+            },
             "social_facility_for": {
                 "label": "People served",
                 "placeholder": "Homeless, Disabled, Child, etc"
@@ -843,6 +853,9 @@
             },
             "tree_type": {
                 "label": "Type"
+            },
+            "trees": {
+                "label": "Trees"
             },
             "tunnel": {
                 "label": "Tunnel"
@@ -1081,6 +1094,10 @@
             "amenity/marketplace": {
                 "name": "Marketplace",
                 "terms": ""
+            },
+            "amenity/nightclub": {
+                "name": "Nightclub",
+                "terms": "disco*,night club,dancing,dance club"
             },
             "amenity/parking": {
                 "name": "Car Parking",
@@ -1885,6 +1902,10 @@
             "landuse/industrial": {
                 "name": "Industrial",
                 "terms": ""
+            },
+            "landuse/landfill": {
+                "name": "Landfill",
+                "terms": "dump"
             },
             "landuse/meadow": {
                 "name": "Meadow",
