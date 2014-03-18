@@ -1708,6 +1708,7 @@ button.minor.tag-reference-loading {
 
 .tag-reference-body {
     overflow: hidden;
+    clear: both;
 }
 
 .tag-reference-body p,
