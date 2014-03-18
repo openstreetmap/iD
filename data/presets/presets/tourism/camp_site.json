@@ -2,7 +2,8 @@
     "icon": "campsite",
     "fields": [
         "operator",
-        "address"
+        "address",
+        "smoking"
     ],
     "geometry": [
         "point",
