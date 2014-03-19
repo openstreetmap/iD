@@ -147,6 +147,8 @@ en:
         label: Type
       fixme: 
         label: Fix Me
+      fuel: 
+        label: Fuel
       gauge: 
         label: Gauge
       generator/method: 
@@ -416,6 +418,9 @@ en:
       amenity/bar: 
         name: Bar
         terms: "<translate with synonyms or related terms for 'Bar', separated by commas>"
+      amenity/bbq: 
+        name: Barbecue/Grill
+        terms: "<translate with synonyms or related terms for 'Barbecue/Grill', separated by commas>"
       amenity/bench: 
         name: Bench
         terms: "<translate with synonyms or related terms for 'Bench', separated by commas>"
@@ -1133,6 +1138,9 @@ en:
       leisure/dog_park: 
         name: Dog Park
         terms: "<translate with synonyms or related terms for 'Dog Park', separated by commas>"
+      leisure/firepit: 
+        name: Firepit
+        terms: "<translate with synonyms or related terms for 'Firepit', separated by commas>"
       leisure/garden: 
         name: Garden
         terms: "<translate with synonyms or related terms for 'Garden', separated by commas>"
@@ -1145,6 +1153,9 @@ en:
       leisure/park: 
         name: Park
         terms: "<translate with synonyms or related terms for 'Park', separated by commas>"
+      leisure/picnic_table: 
+        name: Picnic Table
+        terms: "<translate with synonyms or related terms for 'Picnic Table', separated by commas>"
       leisure/pitch: 
         name: Sport Pitch
         terms: "<translate with synonyms or related terms for 'Sport Pitch', separated by commas>"

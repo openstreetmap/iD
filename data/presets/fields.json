@@ -341,6 +341,11 @@
         "type": "textarea",
         "label": "Fix Me"
     },
+    "fuel": {
+        "key": "fuel",
+        "type": "combo",
+        "label": "Fuel"
+    },
     "gauge": {
         "key": "gauge",
         "type": "combo",
