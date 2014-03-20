@@ -278,6 +278,8 @@ en:
         label: Type
       sac_scale: 
         label: Path Difficulty
+      seasonal: 
+        label: Seasonal
       service: 
         label: Type
       shelter: 
@@ -294,6 +296,8 @@ en:
       source: 
         label: Source
       sport: 
+        label: Sport
+      sport_ice: 
         label: Sport
       structure: 
         label: Structure
@@ -1147,6 +1151,9 @@ en:
       leisure/golf_course: 
         name: Golf Course
         terms: "<translate with synonyms or related terms for 'Golf Course', separated by commas>"
+      leisure/ice_rink: 
+        name: Ice Rink
+        terms: "<translate with synonyms or related terms for 'Ice Rink', separated by commas>"
       leisure/marina: 
         name: Marina
         terms: "<translate with synonyms or related terms for 'Marina', separated by commas>"

@@ -795,6 +795,9 @@
             "sac_scale": {
                 "label": "Path Difficulty"
             },
+            "seasonal": {
+                "label": "Seasonal"
+            },
             "service": {
                 "label": "Type"
             },
@@ -818,6 +821,9 @@
                 "label": "Source"
             },
             "sport": {
+                "label": "Sport"
+            },
+            "sport_ice": {
                 "label": "Sport"
             },
             "structure": {
@@ -1961,6 +1967,10 @@
             "leisure/golf_course": {
                 "name": "Golf Course",
                 "terms": "links"
+            },
+            "leisure/ice_rink": {
+                "name": "Ice Rink",
+                "terms": "hockey,skating,curling"
             },
             "leisure/marina": {
                 "name": "Marina",

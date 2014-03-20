@@ -1,0 +1,12 @@
+{
+    "key": "sport",
+    "type": "combo",
+    "options": [
+        "skating",
+        "hockey",
+        "multi",
+        "curling",
+        "ice_stock"
+    ],
+    "label": "Sport"
+}

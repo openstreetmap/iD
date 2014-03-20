@@ -670,6 +670,11 @@
         "type": "combo",
         "label": "Path Difficulty"
     },
+    "seasonal": {
+        "key": "seasonal",
+        "type": "check",
+        "label": "Seasonal"
+    },
     "service": {
         "key": "service",
         "type": "combo",
@@ -749,6 +754,18 @@
     "sport": {
         "key": "sport",
         "type": "combo",
+        "label": "Sport"
+    },
+    "sport_ice": {
+        "key": "sport",
+        "type": "combo",
+        "options": [
+            "skating",
+            "hockey",
+            "multi",
+            "curling",
+            "ice_stock"
+        ],
         "label": "Sport"
     },
     "structure": {
