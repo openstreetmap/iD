@@ -608,6 +608,9 @@
             "fixme": {
                 "label": "Fix Me"
             },
+            "fuel": {
+                "label": "Fuel"
+            },
             "gauge": {
                 "label": "Gauge"
             },
@@ -792,6 +795,9 @@
             "sac_scale": {
                 "label": "Path Difficulty"
             },
+            "seasonal": {
+                "label": "Seasonal"
+            },
             "service": {
                 "label": "Type"
             },
@@ -815,6 +821,9 @@
                 "label": "Source"
             },
             "sport": {
+                "label": "Sport"
+            },
+            "sport_ice": {
                 "label": "Sport"
             },
             "structure": {
@@ -986,6 +995,10 @@
             "amenity/bar": {
                 "name": "Bar",
                 "terms": ""
+            },
+            "amenity/bbq": {
+                "name": "Barbecue/Grill",
+                "terms": "barbecue,bbq,grill"
             },
             "amenity/bench": {
                 "name": "Bench",
@@ -1943,6 +1956,10 @@
                 "name": "Dog Park",
                 "terms": ""
             },
+            "leisure/firepit": {
+                "name": "Firepit",
+                "terms": "fireplace,campfire"
+            },
             "leisure/garden": {
                 "name": "Garden",
                 "terms": ""
@@ -1951,6 +1968,10 @@
                 "name": "Golf Course",
                 "terms": "links"
             },
+            "leisure/ice_rink": {
+                "name": "Ice Rink",
+                "terms": "hockey,skating,curling"
+            },
             "leisure/marina": {
                 "name": "Marina",
                 "terms": ""
@@ -1958,6 +1979,10 @@
             "leisure/park": {
                 "name": "Park",
                 "terms": "esplanade,estate,forest,garden,grass,green,grounds,lawn,lot,meadow,parkland,place,playground,plaza,pleasure garden,recreation area,square,tract,village green,woodland"
+            },
+            "leisure/picnic_table": {
+                "name": "Picnic Table",
+                "terms": "bench,table"
             },
             "leisure/pitch": {
                 "name": "Sport Pitch",

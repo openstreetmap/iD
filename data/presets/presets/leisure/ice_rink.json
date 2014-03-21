@@ -1,0 +1,21 @@
+{
+    "icon": "pitch",
+    "fields": [
+        "building_area",
+        "seasonal",
+        "sport_ice"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "hockey",
+        "skating",
+        "curling"
+    ],
+    "tags": {
+        "leisure": "ice_rink"
+    },
+    "name": "Ice Rink"
+}

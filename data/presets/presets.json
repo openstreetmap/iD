@@ -424,6 +424,24 @@
         "terms": [],
         "name": "Bar"
     },
+    "amenity/bbq": {
+        "geometry": [
+            "point"
+        ],
+        "tags": {
+            "amenity": "bbq"
+        },
+        "fields": [
+            "covered",
+            "fuel"
+        ],
+        "terms": [
+            "barbecue",
+            "bbq",
+            "grill"
+        ],
+        "name": "Barbecue/Grill"
+    },
     "amenity/bench": {
         "geometry": [
             "point",
@@ -4645,6 +4663,20 @@
         "name": "Dog Park",
         "icon": "dog-park"
     },
+    "leisure/firepit": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "firepit"
+        },
+        "terms": [
+            "fireplace",
+            "campfire"
+        ],
+        "name": "Firepit"
+    },
     "leisure/garden": {
         "icon": "garden",
         "geometry": [
@@ -4674,6 +4706,27 @@
             "links"
         ],
         "name": "Golf Course"
+    },
+    "leisure/ice_rink": {
+        "icon": "pitch",
+        "fields": [
+            "building_area",
+            "seasonal",
+            "sport_ice"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "hockey",
+            "skating",
+            "curling"
+        ],
+        "tags": {
+            "leisure": "ice_rink"
+        },
+        "name": "Ice Rink"
     },
     "leisure/marina": {
         "icon": "harbor",
@@ -4719,6 +4772,19 @@
             "leisure": "park"
         },
         "name": "Park"
+    },
+    "leisure/picnic_table": {
+        "geometry": [
+            "point"
+        ],
+        "tags": {
+            "leisure": "picnic_table"
+        },
+        "terms": [
+            "bench",
+            "table"
+        ],
+        "name": "Picnic Table"
     },
     "leisure/pitch": {
         "icon": "pitch",

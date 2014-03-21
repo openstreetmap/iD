@@ -6,6 +6,7 @@ iD.areaKeys = {
     },
     "amenity": {
         "atm": true,
+        "bbq": true,
         "bench": true,
         "clock": true,
         "drinking_water": true,
@@ -44,6 +45,7 @@ iD.areaKeys = {
     },
     "landuse": {},
     "leisure": {
+        "picnic_table": true,
         "slipway": true
     },
     "man_made": {
