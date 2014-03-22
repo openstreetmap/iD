@@ -140,6 +140,7 @@ iD.Background = function(context) {
 
         reader.onload = function(e) {
             gpxLayer.geojson(toGeoJSON.gpx(toDom(e.target.result)));
+            background.zoomToGpxLayer();
             dispatch.change();
         };
 
