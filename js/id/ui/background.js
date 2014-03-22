@@ -323,6 +323,10 @@ iD.ui.Background = function(context) {
 
         context.map()
             .on('move.background-update', _.debounce(update, 1000));
+
+        context.background()
+            .on('change.background-update', update);
+
         update();
         setOpacity(opacityDefault);
 
