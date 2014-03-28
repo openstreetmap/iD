@@ -836,7 +836,8 @@
     "amenity/grave_yard": {
         "icon": "cemetery",
         "fields": [
-            "religion"
+            "religion",
+            "denomination"
         ],
         "geometry": [
             "point",
@@ -4419,7 +4420,8 @@
     "landuse/cemetery": {
         "icon": "cemetery",
         "fields": [
-            "religion"
+            "religion",
+            "denomination"
         ],
         "geometry": [
             "point",
@@ -6854,7 +6856,8 @@
         "fields": [
             "address",
             "building_area",
-            "religion"
+            "religion",
+            "denomination"
         ],
         "geometry": [
             "point",

@@ -3,7 +3,8 @@
     "fields": [
         "address",
         "building_area",
-        "religion"
+        "religion",
+        "denomination"
     ],
     "geometry": [
         "point",
