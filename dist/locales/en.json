@@ -2312,6 +2312,10 @@
                 "name": "Locality",
                 "terms": ""
             },
+            "place/neighbourhood": {
+                "name": "Neighborhood",
+                "terms": "neighbourhood"
+            },
             "place/town": {
                 "name": "Town",
                 "terms": ""

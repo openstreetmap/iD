@@ -1409,6 +1409,9 @@ en:
       place/locality: 
         name: Locality
         terms: "<translate with synonyms or related terms for 'Locality', separated by commas>"
+      place/neighbourhood: 
+        name: Neighborhood
+        terms: "<translate with synonyms or related terms for 'Neighborhood', separated by commas>"
       place/town: 
         name: Town
         terms: "<translate with synonyms or related terms for 'Town', separated by commas>"
