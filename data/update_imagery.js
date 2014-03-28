@@ -18,7 +18,24 @@ var censor = {
     "Stadtplan Z\u00fcrich": true, // https://github.com/osmlab/editor-imagery-index/issues/14
     "Public Transport (\u00d6PNV)": true, // https://github.com/osmlab/editor-imagery-index/issues/15
 
-    "TIGER 2012 Roads Overlay": true // https://github.com/openstreetmap/iD/pull/2010
+    "TIGER 2012 Roads Overlay": true, // https://github.com/openstreetmap/iD/pull/2010,
+
+    "Waymarked Trails: Cycling": true,
+    "Waymarked Trails: Hiking": true,
+    "Waymarked Trails: MTB": true,
+    "Waymarked Trails: Skating": true,
+    "Waymarked Trails: Winter Sports": true,
+
+    "OSM Inspector: Geometry": true,
+    "OSM Inspector: Highways": true,
+    "OSM Inspector: Multipolygon": true,
+    "OSM Inspector: Places": true,
+    "OSM Inspector: Tagging": true,
+    "OSM Inspector: Addresses (EU)": true,
+    "OSM Inspector: Boundaries (EU)": true,
+    "OSM Inspector: Routing (EU)": true,
+
+    "QA No Address": true
 };
 
 var descriptions = {
