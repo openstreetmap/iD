@@ -1,3 +1,28 @@
+## 1.3.8
+
+* Disable circularize and orthogonalize operations when way is <80% contained in the viewport
+* Add place=neighbourhood preset
+* Add denomination=* field for cemetary, graveyard, funeral home
+* Add preset for shop=funeral_directors
+* Add icon for public_transport=stop_position
+* Support quartile scheme for any imagery source (#2112)
+* Zoom to GPX after adding (#2144)
+* Correctly update UI after choosing GPX file (#2144)
+* Add preset for leisure=ice_rink
+* Add picnic area stuff: firepit, picnic_table, bbq
+* Add 35 as an option in the maxspeed dropdown
+* Add religion to cemetery preset (#2164)
+* Fix tag reference layout on FF (#2159)
+* Add "crop" field for landuse=farm/farmland/farmyard (#2149)
+* Add "trees" field for landuse=orchard
+* Add landuse=landfill
+* Add the hoops=* field to the basketball preset (#1984)
+* Add amenity=nightclub
+* Add smoking field for many presets under amenity, building, office, tourism (#1990)
+* barrier=fence shouldn't be an area (fixes #2158)
+* Remove building_area from hospital, school, kindergarden
+* Fix recycling field keys (#2140)
+
 ## 1.3.7
 
 * Added building presets
