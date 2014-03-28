@@ -14,7 +14,17 @@ iD.operations.Circularize = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        return action.disabled(context.graph());
+        var way = context.entity(entityId),
+            wayExtent = way.extent(context.graph()),
+            mapExtent = context.extent(),
+            intersection = mapExtent.intersection(wayExtent),
+            pctVisible = intersection.area() / wayExtent.area();
+
+        if (pctVisible < 0.8) {
+            return 'too_large';
+        } else {
+            return action.disabled(context.graph());
+        }
     };
 
     operation.tooltip = function() {
