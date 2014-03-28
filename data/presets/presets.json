@@ -836,7 +836,8 @@
     "amenity/grave_yard": {
         "icon": "cemetery",
         "fields": [
-            "religion"
+            "religion",
+            "denomination"
         ],
         "geometry": [
             "point",
@@ -4419,7 +4420,8 @@
     "landuse/cemetery": {
         "icon": "cemetery",
         "fields": [
-            "religion"
+            "religion",
+            "denomination"
         ],
         "geometry": [
             "point",
@@ -6848,6 +6850,30 @@
             "shop": "florist"
         },
         "name": "Florist"
+    },
+    "shop/funeral_directors": {
+        "icon": "cemetery",
+        "fields": [
+            "address",
+            "building_area",
+            "religion",
+            "denomination"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "funeral_directors"
+        },
+        "terms": [
+            "undertaker",
+            "funeral parlour",
+            "funeral parlor",
+            "memorial home"
+        ],
+        "name": "Funeral Home"
     },
     "shop/furniture": {
         "icon": "shop",
