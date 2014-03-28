@@ -466,7 +466,6 @@
             "address": {
                 "label": "Adresa",
                 "placeholders": {
-                    "housename": "Naziv građevine",
                     "number": "123",
                     "street": "Ulica",
                     "city": "Grad",
@@ -476,20 +475,32 @@
             "admin_level": {
                 "label": "Administratorsko područje"
             },
+            "aerialway": {
+                "label": "Tip"
+            },
             "aerialway/access": {
                 "label": "Pristup"
             },
+            "aerialway/bubble": {
+                "label": "Balon"
+            },
             "aerialway/capacity": {
+                "label": "Kapacitet (po satu)",
                 "placeholder": "500, 2500, 5000..."
             },
             "aerialway/duration": {
+                "label": "Trajanje (u minutama)",
                 "placeholder": "1, 2, 3..."
             },
             "aerialway/heating": {
                 "label": "Grijano"
             },
             "aerialway/occupancy": {
+                "label": "Broj ljudi",
                 "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Pristup (ljeto)"
             },
             "aeroway": {
                 "label": "Vrsta"
@@ -562,6 +573,9 @@
             "description": {
                 "label": "Opis"
             },
+            "electrified": {
+                "label": "Elektrifikacija"
+            },
             "elevation": {
                 "label": "Nadmorska visina"
             },
@@ -584,6 +598,9 @@
             "fixme": {
                 "label": "Popravi me"
             },
+            "gauge": {
+                "label": "Širina kolosijeka"
+            },
             "generator/method": {
                 "label": "Metoda"
             },
@@ -592,6 +609,9 @@
             },
             "generator/type": {
                 "label": "Vrsta"
+            },
+            "golf_hole": {
+                "placeholder": "Broj rupe (1-18)"
             },
             "handicap": {
                 "placeholder": "1-18"
@@ -705,6 +725,18 @@
             "railway": {
                 "label": "Vrsta"
             },
+            "recycling/cans": {
+                "label": "Prima limenke"
+            },
+            "recycling/clothes": {
+                "label": "Prima odjeću"
+            },
+            "recycling/glass": {
+                "label": "Prima staklo"
+            },
+            "recycling/paper": {
+                "label": "Prima papir"
+            },
             "ref": {
                 "label": "Broj ceste"
             },
@@ -814,6 +846,40 @@
             "address": {
                 "name": "Adresa",
                 "terms": "kućna adresa,adresa,kućni broj"
+            },
+            "aerialway": {
+                "name": "Žičara",
+                "terms": "vučnica"
+            },
+            "aerialway/cable_car": {
+                "name": "Skijaški vlak",
+                "terms": "uspinjača"
+            },
+            "aerialway/chair_lift": {
+                "name": "Sjedežnica",
+                "terms": "sedežnica"
+            },
+            "aerialway/gondola": {
+                "name": "Kabinska žičara",
+                "terms": "Gondola"
+            },
+            "aerialway/magic_carpet": {
+                "name": "Skijaški tepih"
+            },
+            "aerialway/platter": {
+                "name": "Tanjurić"
+            },
+            "aerialway/pylon": {
+                "name": "Stup žičare"
+            },
+            "aerialway/rope_tow": {
+                "name": "Konop za vuču skijaša"
+            },
+            "aerialway/station": {
+                "name": "Stanica žičare"
+            },
+            "aerialway/t-bar": {
+                "name": "Sidro"
             },
             "aeroway": {
                 "name": "Zračni promet",
@@ -957,12 +1023,7 @@
                 "terms": "groblje"
             },
             "amenity/hospital": {
-                "name": "Bolnica",
-                "terms": "ambulanta,hitna pomoć,medicinska bolnica,lječilište"
-            },
-            "amenity/kindergarten": {
-                "name": "Dječji vrtić",
-                "terms": "dječji vrtić,jaslice,vrtić"
+                "name": "Bolničko zemljište"
             },
             "amenity/library": {
                 "name": "Knjižnica",
@@ -1020,13 +1081,12 @@
                 "name": "Rendžerska postaja",
                 "terms": "rendžerska postaja,rendžerska služba,stanica rendžerske službe,rendžerska stanica,rendžer"
             },
+            "amenity/recycling": {
+                "name": "Recikliranje"
+            },
             "amenity/restaurant": {
                 "name": "Restoran",
                 "terms": "restoran,buffet,zdravljak,zalogajnica"
-            },
-            "amenity/school": {
-                "name": "Škola",
-                "terms": "škola,gimnazija"
             },
             "amenity/shelter": {
                 "name": "Sklonište"
@@ -1139,14 +1199,46 @@
             "building/apartments": {
                 "name": "Apartmani"
             },
+            "building/barn": {
+                "name": "Ambar",
+                "terms": "žitnica, štagalj"
+            },
+            "building/bunker": {
+                "name": "Bunker"
+            },
+            "building/cathedral": {
+                "name": "Katedrala"
+            },
+            "building/chapel": {
+                "name": "Kapelica"
+            },
+            "building/church": {
+                "name": "Crkva"
+            },
             "building/commercial": {
                 "name": "Poslovna zgrada"
+            },
+            "building/detached": {
+                "name": "Samostojni dom"
             },
             "building/entrance": {
                 "name": "Ulaz"
             },
             "building/garage": {
                 "name": "Garaža"
+            },
+            "building/garages": {
+                "name": "Garaže"
+            },
+            "building/greenhouse": {
+                "name": "Staklenik",
+                "terms": "Plastenik"
+            },
+            "building/hospital": {
+                "name": "Zgrada bolnice"
+            },
+            "building/hotel": {
+                "name": "Zgrada hotela"
             },
             "building/house": {
                 "name": "Kuća"
@@ -1161,6 +1253,30 @@
             "building/residential": {
                 "name": "Stambena zgrada"
             },
+            "building/retail": {
+                "name": "Trgovinska zgrada"
+            },
+            "building/roof": {
+                "name": "Krov"
+            },
+            "building/school": {
+                "name": "Školska zgrada"
+            },
+            "building/shed": {
+                "name": "Šupa"
+            },
+            "building/stable": {
+                "name": "Staja"
+            },
+            "building/train_station": {
+                "name": "Željeznička stanica"
+            },
+            "building/university": {
+                "name": "Zgrada fakulteta"
+            },
+            "building/warehouse": {
+                "name": "Skladište"
+            },
             "craft/beekeeper": {
                 "name": "Pčelar"
             },
@@ -1170,8 +1286,20 @@
             "craft/boatbuilder": {
                 "name": "Brodograditelj"
             },
+            "craft/brewery": {
+                "name": "Pivara"
+            },
             "craft/carpenter": {
                 "name": "Stolar"
+            },
+            "craft/clockmaker": {
+                "name": "Urar (ručni satovi)"
+            },
+            "craft/confectionary": {
+                "name": "Trgovina slatkišima"
+            },
+            "craft/dressmaker": {
+                "name": "Krojač"
             },
             "craft/electrician": {
                 "name": "Električar"
@@ -1179,11 +1307,23 @@
             "craft/gardener": {
                 "name": "Vrtlar"
             },
+            "craft/glaziery": {
+                "name": "Staklarna"
+            },
+            "craft/jeweler": {
+                "name": "Draguljar"
+            },
+            "craft/key_cutter": {
+                "name": "Ključar"
+            },
             "craft/locksmith": {
                 "name": "Bravar"
             },
             "craft/optician": {
                 "name": "Optičar"
+            },
+            "craft/painter": {
+                "name": "Slikar"
             },
             "craft/photographer": {
                 "name": "Fotograf"
@@ -1191,17 +1331,32 @@
             "craft/plumber": {
                 "name": "Vodoinstalater"
             },
+            "craft/pottery": {
+                "name": "Lončarstvo"
+            },
             "craft/roofer": {
                 "name": "Krovopokrivač"
             },
             "craft/sawmill": {
                 "name": "Pilana"
             },
+            "craft/sculpter": {
+                "name": "Kipar"
+            },
             "craft/shoemaker": {
                 "name": "Obućar"
             },
+            "craft/stonemason": {
+                "name": "Zidar"
+            },
+            "craft/sweep": {
+                "name": "Dimnjačar"
+            },
             "craft/tailor": {
                 "name": "Krojač"
+            },
+            "craft/watchmaker": {
+                "name": "Urar"
             },
             "emergency/ambulance_station": {
                 "name": "Garaža hitne pomoći",
@@ -1300,6 +1455,9 @@
             },
             "highway/service/parking_aisle": {
                 "name": "Parkirališni prolaz"
+            },
+            "highway/services": {
+                "name": "Odmorište"
             },
             "highway/steps": {
                 "name": "Stepenice"
@@ -1411,7 +1569,7 @@
                 "name": "Stambeno"
             },
             "landuse/retail": {
-                "name": "Maloprodajna trgovina"
+                "name": "Maloprodaja"
             },
             "landuse/vineyard": {
                 "name": "Vinograd"
@@ -1641,6 +1799,9 @@
             "office/travel_agent": {
                 "name": "Putnička agencija"
             },
+            "piste": {
+                "name": "Skijaška staza"
+            },
             "place": {
                 "name": "Mjesto",
                 "terms": "mjesto,naseljeno mjesto"
@@ -1689,6 +1850,9 @@
                 "name": "Dalekovod",
                 "terms": "dalekovod,električni vod,strujni vod"
             },
+            "power/minor_line": {
+                "name": "Mali dalekovod"
+            },
             "power/pole": {
                 "name": "Električni stup",
                 "terms": "stup dalekovoda"
@@ -1705,6 +1869,13 @@
                 "name": "Transformator",
                 "terms": "transformator, transformator el. energije,transformator struje"
             },
+            "public_transport/platform": {
+                "name": "Stajalište",
+                "terms": "platforma"
+            },
+            "public_transport/stop_position": {
+                "name": "Stop pozicija"
+            },
             "railway": {
                 "name": "Željeznica",
                 "terms": "željeznica"
@@ -1716,6 +1887,9 @@
             "railway/disused": {
                 "name": "Željeznička pruga izvan uporabe",
                 "terms": "željeznička pruga izvan uporabe,pruga koja se ne koristi,nekorištena željeznička pruga,nekorištena željeznica,pruga izvan uporabe"
+            },
+            "railway/funicular": {
+                "name": "Uspinjača"
             },
             "railway/halt": {
                 "name": "Željeznička stanica",
@@ -1879,6 +2053,10 @@
             },
             "shop/locksmith": {
                 "name": "Bravar"
+            },
+            "shop/lottery": {
+                "name": "Dućan igara na sreću",
+                "terms": "lutrija"
             },
             "shop/mall": {
                 "name": "Trgovački centar",

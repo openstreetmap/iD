@@ -466,7 +466,6 @@
             "address": {
                 "label": "Adresse",
                 "placeholders": {
-                    "housename": "Husnavn",
                     "number": "123",
                     "street": "Gade",
                     "city": "By",
@@ -536,9 +535,6 @@
             "building_area": {
                 "label": "Bygning"
             },
-            "cans": {
-                "label": "Accepterer dåser"
-            },
             "capacity": {
                 "label": "Kapacitet",
                 "placeholder": "50, 100, 200..."
@@ -553,9 +549,6 @@
                     "anticlockwise": "Mod uret"
                 }
             },
-            "clothes": {
-                "label": "Acceptere tøj"
-            },
             "collection_times": {
                 "label": "Indsamlingstidspunkt"
             },
@@ -567,6 +560,9 @@
             },
             "covered": {
                 "label": "Overdækket"
+            },
+            "crop": {
+                "label": "Afgrøde"
             },
             "crossing": {
                 "label": "Type"
@@ -608,6 +604,9 @@
             "fixme": {
                 "label": "Ret mig"
             },
+            "fuel": {
+                "label": "Brændstof"
+            },
             "gauge": {
                 "label": "Sporvidde"
             },
@@ -619,9 +618,6 @@
             },
             "generator/type": {
                 "label": "Type"
-            },
-            "glass": {
-                "label": "Acceptere glas"
             },
             "golf_hole": {
                 "label": "Reference",
@@ -636,6 +632,10 @@
             },
             "historic": {
                 "label": "Type"
+            },
+            "hoops": {
+                "label": "Kurve",
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -715,9 +715,6 @@
             "operator": {
                 "label": "Operatør"
             },
-            "paper": {
-                "label": "Accepterer papir"
-            },
             "par": {
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
@@ -750,6 +747,18 @@
             "railway": {
                 "label": "Type"
             },
+            "recycling/cans": {
+                "label": "Accepterer dåser"
+            },
+            "recycling/clothes": {
+                "label": "Acceptere tøj"
+            },
+            "recycling/glass": {
+                "label": "Acceptere glas"
+            },
+            "recycling/paper": {
+                "label": "Accepterer papir"
+            },
             "ref": {
                 "label": "Reference"
             },
@@ -780,6 +789,9 @@
             "sac_scale": {
                 "label": "Sti sværhedsgrad"
             },
+            "seasonal": {
+                "label": " Sæsonpræget"
+            },
             "service": {
                 "label": "Type"
             },
@@ -792,6 +804,9 @@
             "shop": {
                 "label": "Type"
             },
+            "smoking": {
+                "label": "Rygning"
+            },
             "social_facility_for": {
                 "label": "Serviceret folk",
                 "placeholder": "Hjemmeløse, Handicappede, Børn osv"
@@ -800,6 +815,9 @@
                 "label": "Kilde"
             },
             "sport": {
+                "label": "Sport"
+            },
+            "sport_ice": {
                 "label": "Sport"
             },
             "structure": {
@@ -838,6 +856,9 @@
             },
             "tree_type": {
                 "label": "Type"
+            },
+            "trees": {
+                "label": "Træer"
             },
             "tunnel": {
                 "label": "Tunnel"
@@ -969,6 +990,10 @@
                 "name": "Bar",
                 "terms": "Bar"
             },
+            "amenity/bbq": {
+                "name": "Barbecue/Grill",
+                "terms": "Barbecue/Grill"
+            },
             "amenity/bench": {
                 "name": "Bænk",
                 "terms": "Bænk, Havebænk, Parkbænk"
@@ -1062,12 +1087,12 @@
                 "terms": "Kirkegård, Gravsted"
             },
             "amenity/hospital": {
-                "name": "Hospital",
-                "terms": "Hospital, Sygehus"
+                "name": "Hospitalsområde",
+                "terms": "Hospitalsområde"
             },
             "amenity/kindergarten": {
-                "name": "Børnehave",
-                "terms": "Børnehave, Vuggestue, Dagpleje, Fritidshjem"
+                "name": "Børnehaveområde",
+                "terms": "Børnehaveområde"
             },
             "amenity/library": {
                 "name": "Bibliotek",
@@ -1076,6 +1101,10 @@
             "amenity/marketplace": {
                 "name": "Markedsplads",
                 "terms": "Markedsplads"
+            },
+            "amenity/nightclub": {
+                "name": "Natklub",
+                "terms": "Natklub, Natclub"
             },
             "amenity/parking": {
                 "name": "Bilparkering",
@@ -1134,8 +1163,8 @@
                 "terms": "Restaurant, Spisested, Spisehus"
             },
             "amenity/school": {
-                "name": "Skole",
-                "terms": "Skole, Folkeskole, Privatskole"
+                "name": "Skolegrund",
+                "terms": "Skoleområde, Skolegrund"
             },
             "amenity/shelter": {
                 "name": "Shelter",
@@ -1881,6 +1910,10 @@
                 "name": "Industriområde",
                 "terms": "Industriområde, Fabriksområde"
             },
+            "landuse/landfill": {
+                "name": "Losseplads",
+                "terms": "Losseplads, Affaldsplads"
+            },
             "landuse/meadow": {
                 "name": "Eng",
                 "terms": "Eng"
@@ -1917,6 +1950,10 @@
                 "name": "Hundepark",
                 "terms": "Hundepark"
             },
+            "leisure/firepit": {
+                "name": "Lejrbålsplads",
+                "terms": "Lejrbålsplads, Bålplads"
+            },
             "leisure/garden": {
                 "name": "Have",
                 "terms": "Have"
@@ -1925,6 +1962,10 @@
                 "name": "Golfbane",
                 "terms": "Golfbane, Golfkurser"
             },
+            "leisure/ice_rink": {
+                "name": "Skøjtebane",
+                "terms": "Skøjtebane"
+            },
             "leisure/marina": {
                 "name": "Lystbådehavn",
                 "terms": "Lystbådehavn, Marina"
@@ -1932,6 +1973,10 @@
             "leisure/park": {
                 "name": "Park",
                 "terms": "Park, Parkområde"
+            },
+            "leisure/picnic_table": {
+                "name": "Picnicborg",
+                "terms": "Picnicbord, Frokostbord"
             },
             "leisure/pitch": {
                 "name": "Sportsbane",

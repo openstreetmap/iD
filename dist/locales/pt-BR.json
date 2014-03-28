@@ -466,7 +466,6 @@
             "address": {
                 "label": "Endereço",
                 "placeholders": {
-                    "housename": "Complemento",
                     "number": "123",
                     "street": "Rua",
                     "city": "Município",
@@ -536,9 +535,6 @@
             "building_area": {
                 "label": "Edifício"
             },
-            "cans": {
-                "label": "Aceita Cans"
-            },
             "capacity": {
                 "label": "Capacidade",
                 "placeholder": "50, 100, 200..."
@@ -552,9 +548,6 @@
                     "clockwise": "Sentido Horário",
                     "anticlockwise": "Sentido Anti-horário"
                 }
-            },
-            "clothes": {
-                "label": "Aceita Clothes"
             },
             "collection_times": {
                 "label": "Horários de Coleta"
@@ -614,11 +607,8 @@
             "generator/type": {
                 "label": "Tipo"
             },
-            "glass": {
-                "label": "Aceita Vidro"
-            },
             "golf_hole": {
-                "label": "Referência",
+                "label": "Código de referência",
                 "placeholder": "Buraco numero (1-18)"
             },
             "handicap": {
@@ -709,9 +699,6 @@
             "operator": {
                 "label": "Operador"
             },
-            "paper": {
-                "label": "Aceita Papel"
-            },
             "par": {
                 "label": "par",
                 "placeholder": "3, 4, 5..."
@@ -742,7 +729,7 @@
                 "label": "Tipo"
             },
             "ref": {
-                "label": "Referência"
+                "label": "Código de referência"
             },
             "relation": {
                 "label": "Tipo"
@@ -989,14 +976,6 @@
                 "name": "Cemitério Paroquial",
                 "terms": "Cemitério"
             },
-            "amenity/hospital": {
-                "name": "Hospital",
-                "terms": "Hospital"
-            },
-            "amenity/kindergarten": {
-                "name": "jardim de Infância",
-                "terms": "Jardim de infância, Creche"
-            },
             "amenity/library": {
                 "name": "Biblioteca",
                 "terms": "Biblioteca"
@@ -1059,10 +1038,6 @@
             "amenity/restaurant": {
                 "name": "Restaurante",
                 "terms": "Restaurante"
-            },
-            "amenity/school": {
-                "name": "Escola",
-                "terms": "Escola"
             },
             "amenity/shelter": {
                 "name": "Abrigo",

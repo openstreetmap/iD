@@ -466,7 +466,6 @@
             "address": {
                 "label": "Indirizzo",
                 "placeholders": {
-                    "housename": "Nome della casa",
                     "number": "123",
                     "street": "Strada",
                     "city": "Città",
@@ -536,9 +535,6 @@
             "building_area": {
                 "label": "Edificio"
             },
-            "cans": {
-                "label": "Lattine"
-            },
             "capacity": {
                 "label": "Capienza",
                 "placeholder": "50, 100, 200..."
@@ -553,9 +549,6 @@
                     "anticlockwise": "Senso antiorario"
                 }
             },
-            "clothes": {
-                "label": "Vestiti"
-            },
             "collection_times": {
                 "label": "Orari di raccolta"
             },
@@ -567,6 +560,9 @@
             },
             "covered": {
                 "label": "Coperto"
+            },
+            "crop": {
+                "label": "Coltura"
             },
             "crossing": {
                 "label": "Tipo"
@@ -620,9 +616,6 @@
             "generator/type": {
                 "label": "Tipo"
             },
-            "glass": {
-                "label": "Vetro"
-            },
             "golf_hole": {
                 "label": "Codice",
                 "placeholder": "Numero buca (1-18)"
@@ -636,6 +629,9 @@
             },
             "historic": {
                 "label": "Tipo"
+            },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -715,9 +711,6 @@
             "operator": {
                 "label": "Operatore"
             },
-            "paper": {
-                "label": "Carta"
-            },
             "par": {
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
@@ -749,6 +742,18 @@
             },
             "railway": {
                 "label": "Tipo"
+            },
+            "recycling/cans": {
+                "label": "Accetta Lattine"
+            },
+            "recycling/clothes": {
+                "label": "Accetta Vestiti"
+            },
+            "recycling/glass": {
+                "label": "Accetta Vetro"
+            },
+            "recycling/paper": {
+                "label": "Accetta Carta"
             },
             "ref": {
                 "label": "Riferimento"
@@ -838,6 +843,9 @@
             },
             "tree_type": {
                 "label": "Tipo"
+            },
+            "trees": {
+                "label": "Alberi"
             },
             "tunnel": {
                 "label": "Tunnel"
@@ -1062,12 +1070,12 @@
                 "terms": "Cimitero"
             },
             "amenity/hospital": {
-                "name": "Ospedale",
-                "terms": "clinica,pronto soccorso,servizio sanitario,salute,hospice,ospizio,infermeria,istituzione,casa di cura,casa di riposo,sanatorio,ambulatorio,chirurgia,reparto"
+                "name": "Area Ospedaliera",
+                "terms": "ospedale,clinica,pronto soccorso,servizio sanitario,salute,hospice,ospizio,infermeria,istituzione,casa di cura,casa di riposo,sanatorio,ambulatorio,chirurgia,reparto"
             },
             "amenity/kindergarten": {
-                "name": "Scuola d'infanzia",
-                "terms": "scuola di infanzia,asilo,assistenza all'infanzia,asilo d'infanzia"
+                "name": "Area della Scuola dell'infanzia",
+                "terms": "scuola d'infanzia,scuola di infanzia,asilo,assistenza all'infanzia,asilo d'infanzia,scuola materna,scuola dell'infanzia,asilo nido"
             },
             "amenity/library": {
                 "name": "Biblioteca",
@@ -1076,6 +1084,10 @@
             "amenity/marketplace": {
                 "name": "Mercato",
                 "terms": "Mercato"
+            },
+            "amenity/nightclub": {
+                "name": "Discoteca",
+                "terms": "discoteca,night,locale notturno,balera"
             },
             "amenity/parking": {
                 "name": "Parcheggio",
@@ -1134,8 +1146,8 @@
                 "terms": "bar,caffetteria,caffè,ristorante self-service,braceria,trattoria,negozio di ciambelle,bettola,griglieria,venditore di hamburger,venditore di hotdog,pizzeria"
             },
             "amenity/school": {
-                "name": "Scuola",
-                "terms": "accademia,alma mater,lavagna,collegio,dipartimento,disciplina,classe,facoltà,aula,istituto,istituzione,riformatorio,scuola,edificio scolastico,seminario,università"
+                "name": "Area Scolastica",
+                "terms": "scuola,accademia,alma mater,lavagna,collegio,dipartimento,disciplina,classe,facoltà,aula,istituto,istituzione,riformatorio,scuola,edificio scolastico,seminario,università"
             },
             "amenity/shelter": {
                 "name": "Riparo",
@@ -1381,6 +1393,9 @@
                 "name": "Maniscalco",
                 "terms": "ferri di cavallo"
             },
+            "craft/bookbinder": {
+                "name": "Legatoria"
+            },
             "craft/brewery": {
                 "name": "Birrificio",
                 "terms": "birreria,birra"
@@ -1393,6 +1408,10 @@
                 "name": "Costruttore di orologi",
                 "terms": "orologi"
             },
+            "craft/dressmaker": {
+                "name": "Sartoria",
+                "terms": "sarto,merceria,vestiti su misura"
+            },
             "craft/electrician": {
                 "name": "Elettricista",
                 "terms": "elettronica,elettricità"
@@ -1400,6 +1419,9 @@
             "craft/gardener": {
                 "name": "Giardiniere",
                 "terms": "giardinaggio,giardino"
+            },
+            "craft/handicraft": {
+                "name": "Artigiano"
             },
             "craft/jeweler": {
                 "name": "Gioielliere",
@@ -1416,6 +1438,18 @@
             "craft/photographer": {
                 "name": "Fotografo",
                 "terms": "fotografia,stampe"
+            },
+            "craft/photographic_labratory": {
+                "name": "Laboratorio Fotografico"
+            },
+            "craft/plumber": {
+                "name": "Idraulico"
+            },
+            "craft/sailmaker": {
+                "name": "Velaio"
+            },
+            "craft/sculpter": {
+                "name": "Scultore"
             },
             "craft/shoemaker": {
                 "name": "Calzolaio",
@@ -1709,6 +1743,10 @@
                 "name": "Industriale",
                 "terms": "Industriale"
             },
+            "landuse/landfill": {
+                "name": "Discarica",
+                "terms": "pattume,isola ecologica"
+            },
             "landuse/meadow": {
                 "name": "Coltivazione erbacea",
                 "terms": "Prato"
@@ -1760,6 +1798,10 @@
             "leisure/park": {
                 "name": "Parco",
                 "terms": "lungomare,tenuta,foresta,giardino,prato,verde,terreni,lotto,pascolo,parco,parco giochi,area ricreativa,piazza,giardino pubblico,bosco"
+            },
+            "leisure/picnic_table": {
+                "name": "Tavolo da picnic",
+                "terms": "tavolo,picnic,pic nic,ristoro,punto ristoro"
             },
             "leisure/pitch": {
                 "name": "Campo da gioco",
@@ -1993,6 +2035,10 @@
                 "name": "Agenzia per l'impiego",
                 "terms": "interinale,impiego,lavoro,ufficio per l'impiego,ufficio interinale"
             },
+            "office/estate_agent": {
+                "name": "Agente Immobiliare",
+                "terms": "agenzia immobiliare,immobiliare"
+            },
             "office/financial": {
                 "name": "Ufficio Finanziario",
                 "terms": "finanza,finanziaria,fiduciaria,mag"
@@ -2020,6 +2066,10 @@
             "office/ngo": {
                 "name": "Organizzazione non governativa",
                 "terms": "ong,ngo,onu,associazione,non profit,nonprofit,no profit,onlus,non lucrativa,senza fini di lucro,cooperativa,cooperazione"
+            },
+            "office/physician": {
+                "name": "Medico",
+                "terms": "medico,chirurgo,ambulatorio"
             },
             "office/political_party": {
                 "name": "Sede di partito",

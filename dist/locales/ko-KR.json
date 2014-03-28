@@ -4,7 +4,6 @@
             "address": {
                 "label": "주소",
                 "placeholders": {
-                    "housename": "건물명칭",
                     "number": "123",
                     "street": "길",
                     "city": "도시"
@@ -146,9 +145,6 @@
             "amenity/fire_station": {
                 "name": "소방소"
             },
-            "amenity/hospital": {
-                "name": "병원"
-            },
             "amenity/library": {
                 "name": "도서관"
             },
@@ -172,9 +168,6 @@
             },
             "amenity/restaurant": {
                 "name": "식당"
-            },
-            "amenity/school": {
-                "name": "학교"
             },
             "amenity/toilets": {
                 "name": "화장실"

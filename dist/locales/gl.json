@@ -1,0 +1,188 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "Área",
+            "description": "Engadir parques, edificios, lagos ou outras áreas ao mapa.",
+            "tail": "Fai clic no mapa para comezar a debuxar unha área, como un parque, lago ou edificio."
+        },
+        "add_line": {
+            "title": "Liña",
+            "description": "Engadir estradas, rúas, camiños, canais ou outras liñas ao mapa.",
+            "tail": "Fai clic no mapa para comezar a debuxar unha estrada, camiño ou ruta."
+        },
+        "add_point": {
+            "title": "Punto",
+            "description": "Engadir restaurantes, monumentos, caixas do correo ou outros puntos ao mapa.",
+            "tail": "Fai clic no mapa para engadir un punto."
+        },
+        "browse": {
+            "title": "Buscar",
+            "description": "Desprazar e facer zoom no mapa."
+        },
+        "draw_area": {
+            "tail": "Fai clic para engadir vértices á túa área. Fai clic no primeiro vértice para finalizar a área."
+        },
+        "draw_line": {
+            "tail": "Fai clic para engadir máis vértices á liña. Fai clic noutras liñas para conectalas, e fai dobre clic para rematar a liña."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Punto engadido.",
+                "vertex": "Vértice engadido a unha vía."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Liña comezada.",
+                "area": "Área comezada."
+            }
+        },
+        "continue": {
+            "annotation": {
+                "line": "Liña continuada.",
+                "area": "Área continuada."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Debuxo cancelado."
+        },
+        "change_tags": {
+            "annotation": "Etiquetas modificadas."
+        },
+        "circularize": {
+            "title": "Redondear",
+            "key": "O",
+            "annotation": {
+                "line": "Liña redondeada.",
+                "area": "Área redondeada."
+            }
+        },
+        "orthogonalize": {
+            "title": "Escuadrar",
+            "key": "S",
+            "annotation": {
+                "line": "Escuadradas as esquinas dunha liña.",
+                "area": "Escuadradas as esquinas dunha área."
+            }
+        },
+        "delete": {
+            "title": "Borrar",
+            "description": "Borrar isto do mapa.",
+            "annotation": {
+                "point": "Punto borrado.",
+                "vertex": "Eliminado un nodo dunha vía.",
+                "line": "Liña borrada",
+                "area": "Área borrada.",
+                "relation": "Relación borrada.",
+                "multiple": "{n} obxectos borrados."
+            }
+        },
+        "connect": {
+            "annotation": {
+                "point": "Conectada unha vía a un punto.",
+                "vertex": "Conectada unha vía a outra.",
+                "line": "Conectada unha vía a unha liña.",
+                "area": "Conectada unha vía a unha área."
+            }
+        },
+        "disconnect": {
+            "title": "Desconectar.",
+            "description": "Desconectar estas liñas/áreas entre si.",
+            "key": "D",
+            "annotation": "Liñas/áreas desconectadas."
+        },
+        "merge": {
+            "title": "Unir.",
+            "description": "Unir estas liñas.",
+            "key": "C",
+            "annotation": "{n} liñas unidas."
+        },
+        "move": {
+            "title": "Mover",
+            "description": "Mover isto a outro lugar.",
+            "key": "M",
+            "annotation": {
+                "point": "Punto movido.",
+                "vertex": "Movido un vértice a unha vía.",
+                "line": "Liña movida.",
+                "area": "Área movida.",
+                "multiple": "Varios obxectos movidos."
+            }
+        },
+        "rotate": {
+            "title": "Rotar.",
+            "description": "Rotar este obxecto arredor do seu punto central.",
+            "key": "R",
+            "annotation": {
+                "line": "Liña rotada.",
+                "area": "Área rotada."
+            }
+        },
+        "reverse": {
+            "title": "Inverter",
+            "description": "Facer que esta liña vaia no sentido contrario.",
+            "key": "V",
+            "annotation": "Liña invertida."
+        },
+        "split": {
+            "title": "Dividir",
+            "key": "X"
+        }
+    },
+    "browser_notice": "Este editor está soportado en Firefox, Chrome, Safari, Opera e Internet Explorer 9 e superiores. Por favor, actualiza o teu navegador ou utiliza Potlatch 2 para editar o mapa.",
+    "zoom_in_edit": "Fai zoom para editar.",
+    "logout": "cerrar sesión",
+    "report_a_bug": "informar dun erro",
+    "commit": {
+        "title": "Gardar Cambios",
+        "description_placeholder": "Breve descrición das túas contribucións",
+        "upload_explanation": "Os cambios que subas serán visibles en tódolos mapas que usen os datos de OpenStreetMap.",
+        "save": "Gardar",
+        "cancel": "Cancelar",
+        "warnings": "Avisos",
+        "modified": "Modificado",
+        "deleted": "Borrado",
+        "created": "Creado"
+    },
+    "contributors": {
+        "list": "Edicións de {users}",
+        "truncated_list": "Edicións de {users} e {count} máis"
+    },
+    "geolocate": {
+        "title": "Mostrar a miña localización"
+    },
+    "inspector": {
+        "no_documentation_combination": "Non hai ningunha documentación dispoñible para esta combinación de etiquetas",
+        "no_documentation_key": "Non hai ningunha documentación dispoñible para esta clave",
+        "view_on_osm": "Ver en openstreetmap.org",
+        "choose": "Escolle o tipo de elemento",
+        "results": "{n} resultados para {search}",
+        "reference": "Ver na Wiki de OpenStreetMap"
+    },
+    "background": {
+        "title": "Fondo",
+        "description": "Axustes do fondo",
+        "percent_brightness": "{opacity}% brillo",
+        "fix_misalignment": "Corrixir a aliñación",
+        "reset": "reiniciar"
+    },
+    "restore": {
+        "description": "Queres recuperar os cambios non gardados da sesión de edición anterior?",
+        "restore": "Recuperar",
+        "reset": "Descartar"
+    },
+    "save": {
+        "title": "Gardar",
+        "help": "Gardar os cambios en OpenStreetMap, facéndoos visibles aos demáis usuarios.",
+        "no_changes": "Non hai cambios para gardar.",
+        "error": "Ocorreu un erro mentras se intentaba gardar",
+        "uploading": "Subindo cambios a OpenStreetMap.",
+        "unsaved_changes": "Tes cambios sen gardar"
+    },
+    "splash": {
+        "welcome": "Benvido ao editor de OpenStreetMap iD",
+        "text": "iD é unha amigable pero potente ferramenta para contribuir ao mellor mapa libre do mundo. Esta é a versión {version}. Para obter máis información visita {website} e informa de erros en {github}."
+    }
+}

@@ -391,7 +391,6 @@
             "address": {
                 "label": "ঠিকানা",
                 "placeholders": {
-                    "housename": "বাড়ির নাম",
                     "number": "১২৩",
                     "street": "স্ট্রীট",
                     "city": "শহর",
@@ -726,9 +725,6 @@
             "amenity/grave_yard": {
                 "name": "কবরখানা"
             },
-            "amenity/hospital": {
-                "name": "হাসপাতাল"
-            },
             "amenity/library": {
                 "name": "পাঠাগার"
             },
@@ -767,9 +763,6 @@
             },
             "amenity/restaurant": {
                 "name": "রেস্তোরাঁ"
-            },
-            "amenity/school": {
-                "name": "বিদ্যালয়"
             },
             "amenity/swimming_pool": {
                 "name": "সাঁতার কাটার পুকুর"

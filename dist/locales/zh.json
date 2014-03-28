@@ -393,7 +393,6 @@
             "address": {
                 "label": "地址",
                 "placeholders": {
-                    "housename": "房屋名称",
                     "number": "123",
                     "street": "街道",
                     "city": "城市",
@@ -753,12 +752,6 @@
             "amenity/grave_yard": {
                 "name": "墓地"
             },
-            "amenity/hospital": {
-                "name": "医院"
-            },
-            "amenity/kindergarten": {
-                "name": "幼儿园"
-            },
             "amenity/library": {
                 "name": "图书馆"
             },
@@ -794,9 +787,6 @@
             },
             "amenity/restaurant": {
                 "name": "餐馆"
-            },
-            "amenity/school": {
-                "name": "学校"
             },
             "amenity/swimming_pool": {
                 "name": "游泳池"

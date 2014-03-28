@@ -37,14 +37,8 @@
             "amenity/cinema": {
                 "name": "ಸಿನಿಮಾ"
             },
-            "amenity/hospital": {
-                "name": "ಆಸ್ಪತ್ರೆ"
-            },
             "amenity/library": {
                 "name": "ಗ್ರಂಥಾಲಯ"
-            },
-            "amenity/school": {
-                "name": "ಶಾಲೆ"
             },
             "highway/bus_stop": {
                 "name": "ಬಸ್ ನಿಲ್ದಾಣ"

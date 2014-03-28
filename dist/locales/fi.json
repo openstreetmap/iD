@@ -17,7 +17,7 @@
         },
         "browse": {
             "title": "Selaa",
-            "description": "Loitonna ja lähennä karttaa."
+            "description": "Loitonna, lähennä ja panoroi karttaa."
         },
         "draw_area": {
             "tail": "Klikkaa pisteen lisäämiseksi alueeseen. Klikkaa ensimmäistä pistettä alueen täydentämiseksi."
@@ -134,7 +134,8 @@
             "annotation": "{n} viivaa sulautettiin yhteen.",
             "not_eligible": "Näitä ominaisuuksia ei voi sulauttaa yhteen.",
             "not_adjacent": "Näitä viivoja ei voi sulauttaa yhteen koska ne eivät ole yhteydessä toisiinsa.",
-            "restriction": "Näitä viivoja ei voi sulauttaa yhteen koska ainakin yksi on osapuolena \"{relation}\" relaatiossa."
+            "restriction": "Näitä viivoja ei voi sulauttaa yhteen koska ainakin yksi on osapuolena \"{relation}\" relaatiossa.",
+            "incomplete_relation": "Näitä karttakohteita ei voi yhdistää, koska ainakin yhden lataus on kesken."
         },
         "move": {
             "title": "Siirrä",
@@ -314,6 +315,7 @@
         "untagged_area": "Alue, jolla ei ole tageja",
         "many_deletions": "Haluatko varmasti poistaa {n} kohdetta? Kohteet poistetaan kaikkien näkyviltä OpenStreetMap-palvelussa.",
         "tag_suggests_area": "Tagin {tag} mukaan viiva on alue, vaikka se ei sitä ole.",
+        "untagged_tooltip": "Valitse karttakohteen tyyppi, joka parhaiten edustaa sitä mikä tämä {geometry} on.",
         "deprecated_tags": "Vanhentuneet tagit: {tags}"
     },
     "zoom": {
@@ -324,6 +326,7 @@
     "gpx": {
         "local_layer": "Oma GPX-tiedosto",
         "drag_drop": "Vedä ja pudota GPX-tiedosto tähän tai selaa tiedostoja napsauttamalla oikean yläreunan painiketta",
+        "zoom": "Lähennä GPX-reittiin",
         "browse": "Selaa GPX-tiedostoja"
     },
     "help": {
@@ -391,6 +394,9 @@
             "category-building": {
                 "name": "Rakennus"
             },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Maankäyttö"
             },
@@ -454,7 +460,6 @@
             "address": {
                 "label": "Osoite",
                 "placeholders": {
-                    "housename": "Talonnimi",
                     "number": "123",
                     "street": "Kadunnimi",
                     "city": "Paikkakunta",
@@ -524,9 +529,6 @@
             "building_area": {
                 "label": "Rakennus"
             },
-            "cans": {
-                "label": "Tölkinkeräys"
-            },
             "capacity": {
                 "label": "Paikkamäärä",
                 "placeholder": "50, 100, 200..."
@@ -540,9 +542,6 @@
                     "clockwise": "Myötäpäivään",
                     "anticlockwise": "Vastapäivään"
                 }
-            },
-            "clothes": {
-                "label": "Vaatekeräys"
             },
             "collection_times": {
                 "label": "Tyhjennysaika"
@@ -604,9 +603,6 @@
             },
             "generator/type": {
                 "label": "Tyyppi"
-            },
-            "glass": {
-                "label": "Lasinkeräys"
             },
             "highway": {
                 "label": "Tyyppi"
@@ -688,9 +684,6 @@
             },
             "operator": {
                 "label": "Toimija"
-            },
-            "paper": {
-                "label": "Paperinkeräys"
             },
             "park_ride": {
                 "label": "Autoparkki"
@@ -995,12 +988,7 @@
                 "terms": "hautausmaa, kalmisto, luutarha"
             },
             "amenity/hospital": {
-                "name": "Sairaala",
-                "terms": "sairaala, terveyskeskus, hoitokoti, hoitolaitos, klinikka, parantola, sanatorio, lasaretti, hospitaali"
-            },
-            "amenity/kindergarten": {
-                "name": "Päiväkoti",
-                "terms": "päiväkoti, päivähoito, lastenhoito, lastenvahti"
+                "name": "Sairaala-alue"
             },
             "amenity/library": {
                 "name": "Kirjasto",
@@ -1053,9 +1041,8 @@
             "amenity/restaurant": {
                 "name": "Ravintola"
             },
-            "amenity/school": {
-                "name": "Koulu",
-                "terms": "koulu, alakoulu, ala-aste, yläaste, yläkoulu, lukio, yhteislukio, keskikoulu, koulutus, opiskelu, oppilaitos"
+            "amenity/shelter": {
+                "name": "Katos"
             },
             "amenity/studio": {
                 "name": "Studio"
@@ -1178,6 +1165,9 @@
             },
             "building/residential": {
                 "name": "Asuinrakennus"
+            },
+            "building/terrace": {
+                "name": "Rivitalo"
             },
             "craft/basket_maker": {
                 "name": "Koripaja",
@@ -1333,7 +1323,8 @@
                 "name": "Suojatieväylä"
             },
             "footway/sidewalk": {
-                "name": "Jalkakäytävä"
+                "name": "Jalkakäytävä",
+                "terms": "jalkakäytävä, jalankulku"
             },
             "golf/bunker": {
                 "name": "Hiekkaeste",
@@ -1656,6 +1647,12 @@
             "man_made/water_works": {
                 "name": "Vesilaitos"
             },
+            "military/barracks": {
+                "name": "Parakit"
+            },
+            "military/bunker": {
+                "name": "Bunkkeri"
+            },
             "natural": {
                 "name": "Luonto"
             },
@@ -1713,6 +1710,10 @@
             "office": {
                 "name": "Toimisto"
             },
+            "office/educational_institution": {
+                "name": "Oppilatos",
+                "terms": "koulu, alakoulu, ala-aste, yläaste, yläkoulu, lukio, yhteislukio, keskikoulu, koulutus, opiskelu, oppilaitos, yliopisto"
+            },
             "office/it": {
                 "name": "Tietotekniikkatoimisto",
                 "terms": "tietotalo, tietotekniikka, teknologia, tietoteknologia, IT-talo, IT-teknologia, IT-tekniikka, teknologiatalo"
@@ -1725,9 +1726,15 @@
                 "name": "Kansalaisjärjestö",
                 "terms": "kansalaisjärjestö, järjestö, kansanliike, kansanjärjestö, kansalaisjärjestötoimisto, toimisto"
             },
+            "office/physician": {
+                "name": "Lääkäri"
+            },
             "office/political_party": {
                 "name": "Puoluetoimisto",
                 "terms": "politiikka, politiikko, poliittinen, puolue, hallinto, toimisto"
+            },
+            "office/travel_agent": {
+                "name": "Matkatoimisto"
             },
             "piste": {
                 "name": "Laskettelurinne/hiihtolatu"
@@ -1766,6 +1773,10 @@
             },
             "power/line": {
                 "name": "Voimalinja"
+            },
+            "power/minor_line": {
+                "name": "Matalajännitelinja",
+                "terms": "sähköjohto, sähkölinja, sähkö, ilmajohto, jännite, hengenvaara, matalajännite"
             },
             "power/pole": {
                 "name": "Voimalinjapylväs"
@@ -1959,6 +1970,9 @@
             },
             "shop/pet": {
                 "name": "Lemmikkiliike"
+            },
+            "shop/photo": {
+                "name": "Valokuvausliike"
             },
             "shop/shoes": {
                 "name": "Kenkäkauppa"

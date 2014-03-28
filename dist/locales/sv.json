@@ -442,7 +442,6 @@
             "address": {
                 "label": "Adress",
                 "placeholders": {
-                    "housename": "Husnamn",
                     "number": "123",
                     "street": "Gata",
                     "city": "Stad",
@@ -747,7 +746,8 @@
                 "name": "Hangar"
             },
             "aeroway/helipad": {
-                "name": "Helikopterplatta"
+                "name": "Helikopterplatta",
+                "terms": "Helipad, Helikopterplatta"
             },
             "aeroway/runway": {
                 "name": "Start- och landningsbana"
@@ -766,7 +766,8 @@
                 "terms": "uttagsautomat, bankomat, minuten, atm, otto"
             },
             "amenity/bank": {
-                "name": "Bank"
+                "name": "Bank",
+                "terms": "Bank, kreditinrättning, penninginrättning, penninganstalt, kassa, bankkontor, banklokal, låneinstitut"
             },
             "amenity/bar": {
                 "name": "Bar",
@@ -782,7 +783,8 @@
                 "name": "Cykeluthyrning"
             },
             "amenity/cafe": {
-                "name": "Café"
+                "name": "Café",
+                "terms": "kaffeservering, kaffestuga, kafeteria, cafeteria, servering, konditori, kondis, fik"
             },
             "amenity/car_rental": {
                 "name": "Biluthyrning"
@@ -826,10 +828,7 @@
                 "name": "Gravplats"
             },
             "amenity/hospital": {
-                "name": "Sjukhus"
-            },
-            "amenity/kindergarten": {
-                "name": "Förskola"
+                "terms": "Sjukhusområde, lasarett, sjukhus"
             },
             "amenity/library": {
                 "name": "Bibliotek"
@@ -837,29 +836,38 @@
             "amenity/marketplace": {
                 "name": "Maknadsplats"
             },
+            "amenity/parking": {
+                "name": "Bilparkering"
+            },
             "amenity/pharmacy": {
                 "name": "Läkemedel"
             },
             "amenity/place_of_worship": {
-                "name": "Plats för tillbedjan"
+                "name": "Plats för tillbedjan",
+                "terms": "Kyrka, tempel, moské, synagoga, gudshus, kyrkobyggnad, kapell, bönehus, böneplats, missionshus, dom, katedral, tabernakel, helgedom, gudstjänstlokal,tro, religion, helgedom, tillbedjan, predikan"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Buddhisttempel"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Kyrka"
+                "name": "Kyrka",
+                "terms": "Kyrka, tempel, gudshus, kyrkobyggnad, kapell, bönehus, böneplats, missionshus, dom, katedral, helgedom, gudstjänstlokal,tro, religion, helgedom, kristen, kristendom, församling, tillbedjan, predikan"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Synagoga"
+                "name": "Synagoga",
+                "terms": "Synagoga, tempel, gudshus, bönehus, böneplats, missionshus, dom, katedral, helgedom, gudstjänstlokal,tro, religion, helgedom, Jude, Judendom, tillbedjan, predikan"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Moské"
+                "name": "Moské",
+                "terms": "moské, gudshus, kyrkobyggnad, bönehus, böneplats, helgedom, gudstjänstlokal,tro, religion, helgedom, tillbedjan, muslim, predikan, minaret"
             },
             "amenity/police": {
-                "name": "Polis"
+                "name": "Polis",
+                "terms": "Polis, ordningsmakt, polisväsende, polismyndighet, polismakt; polisstation, snut, konstapel, poliskonstapel, polisman, pass, "
             },
             "amenity/post_box": {
-                "name": "Postlåda"
+                "name": "Postlåda",
+                "terms": "Brevlåda, postlåda, brevinkast"
             },
             "amenity/post_office": {
                 "name": "Postkontor"
@@ -868,10 +876,12 @@
                 "name": "Pub"
             },
             "amenity/restaurant": {
-                "name": "Restaurang"
+                "name": "Restaurang",
+                "terms": "Restaurang, matservering, matställe, servering, restauration, näringsställe, grillbar, bar, krog, värdshus, pub, bodega, brasserie, rotisseri, pizzeria, kafé, cafeteria, sylta"
             },
             "amenity/school": {
-                "name": "Skola"
+                "name": "Skolområde",
+                "terms": "Skolgård, skolområde, Campus, universitetsområde, högskoleområde, universitet, högskola"
             },
             "amenity/swimming_pool": {
                 "name": "Simbassäng"

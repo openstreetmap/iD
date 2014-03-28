@@ -459,7 +459,6 @@
             "address": {
                 "label": "Adresas",
                 "placeholders": {
-                    "housename": "Namo pavadinimas",
                     "number": "123",
                     "street": "Gatvė",
                     "city": "Miestas",
@@ -826,12 +825,6 @@
             "amenity/grave_yard": {
                 "name": "Kapinės"
             },
-            "amenity/hospital": {
-                "name": "Ligoninė"
-            },
-            "amenity/kindergarten": {
-                "name": "Vaikų darželis"
-            },
             "amenity/library": {
                 "name": "Biblioteka"
             },
@@ -874,10 +867,6 @@
             },
             "amenity/restaurant": {
                 "name": "Restoranas"
-            },
-            "amenity/school": {
-                "name": "Mokykla",
-                "terms": "mokykla,mokymo įstaiga"
             },
             "amenity/shelter": {
                 "name": "Pastogė"
@@ -1029,6 +1018,9 @@
             },
             "highway/service/alley": {
                 "name": "Alėja"
+            },
+            "highway/service/driveway": {
+                "name": "Įvažiavimas"
             },
             "highway/service/emergency_access": {
                 "name": "Pagalbos priėjimas"

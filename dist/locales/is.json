@@ -7,7 +7,7 @@
         },
         "add_line": {
             "title": "Lína",
-            "description": "Bætu þjóðvegum, götum, göngustígum, síkjum eða öðrum línum við kortið.",
+            "description": "Bættu þjóðvegum, götum, göngustígum, síkjum eða öðrum línum við kortið.",
             "tail": "Smelltu á kortið til að byrja á að teikna línu, svo sem veg, slóða eða leið."
         },
         "add_point": {
@@ -69,10 +69,17 @@
             "not_closed": "Það er ekki hægt að gera þetta hringlaga því að það er ekki samfelld röð hnúta."
         },
         "orthogonalize": {
+            "title": "Ferhyrningur",
+            "key": "S",
             "annotation": {
                 "line": "Réttaði horn á línu.",
                 "area": "Réttaði horn svæðis."
-            }
+            },
+            "not_squarish": "Það er ekki hægt að hornrétta þetta því að það er ekki kassalaga"
+        },
+        "straighten": {
+            "annotation": "Slétti úr línu",
+            "too_bendy": "Það er ekki hægt að slétta úr þessu því að það beygir of skarplega"
         },
         "delete": {
             "title": "Eyða",
@@ -162,9 +169,11 @@
         }
     },
     "undo": {
+        "tooltip": "Afturkalla: {action}",
         "nothing": "Ekkert til að hætta við."
     },
     "redo": {
+        "tooltip": "Endurtaka: {action}",
         "nothing": "Ekkert til að endurtaka."
     },
     "tooltip_keyhint": "Flýtival:",
@@ -225,15 +234,21 @@
         "back_tooltip": "Breyta eigindi",
         "remove": "Fjarlægja",
         "search": "Leita",
+        "multiselect": "Valdir hlutir",
         "unknown": "Óþekkt",
         "incomplete": "<ekki hlaðið niður>",
         "feature_list": "Leitareigindi",
-        "edit": "Breyta eigindi"
+        "edit": "Breyta eigindi",
+        "none": "Ekkert",
+        "node": "Hnútur",
+        "location": "Staðsetning"
     },
     "background": {
         "title": "Bakgrunnur",
         "description": "Bakgrunnsstillingar",
         "percent_brightness": "{opacity}% birta",
+        "none": "Ekkert",
+        "custom_prompt": "Sláðu inn stílsnið. Rétt gildi eru {z}, {x}, {y} fyror Z/X/Y hnit og {u} fyrir útlitssnið.",
         "reset": "endurstilla"
     },
     "restore": {
@@ -254,7 +269,9 @@
         "edited_osm": "Þú breyttir OSM!",
         "just_edited": "Þú hefur breytt OpenStreetMap!",
         "view_on_osm": "Skoða á OSM",
-        "facebook": "Deila á Facebook"
+        "facebook": "Deila á Facebook",
+        "twitter": "Deila á Twitter",
+        "google": "Deila á Google+"
     },
     "confirm": {
         "okay": "Í lagi"
@@ -289,7 +306,8 @@
     },
     "cannot_zoom": "Get ekki þysjað lengra út í núverandi ham.",
     "gpx": {
-        "local_layer": "Staðvær GPX-skrá"
+        "local_layer": "Staðvær GPX-skrá",
+        "drag_drop": "Dragðu og slepptu .gpx skrá á síðuna eða smelltu á takkann til hægri til að fletta"
     },
     "help": {
         "title": "Hjálp",
@@ -403,7 +421,6 @@
             "address": {
                 "label": "Heimilisfang",
                 "placeholders": {
-                    "housename": "Nafn byggingar",
                     "number": "123",
                     "street": "Gata",
                     "city": "Sveitarfélag",
@@ -780,12 +797,6 @@
             "amenity/grave_yard": {
                 "name": "Grafreitur"
             },
-            "amenity/hospital": {
-                "name": "Sjúkrahús"
-            },
-            "amenity/kindergarten": {
-                "name": "Leikskóli"
-            },
             "amenity/library": {
                 "name": "Bókasafn"
             },
@@ -824,9 +835,6 @@
             },
             "amenity/restaurant": {
                 "name": "Veitingahús"
-            },
-            "amenity/school": {
-                "name": "Skóli"
             },
             "amenity/swimming_pool": {
                 "name": "Sundlaug"
@@ -919,7 +927,13 @@
                 "name": "Inngangur"
             },
             "building/house": {
-                "name": "Hús"
+                "name": "Íbúðarhús"
+            },
+            "craft/photographer": {
+                "name": "Ljósmyndari"
+            },
+            "emergency/ambulance_station": {
+                "name": "Sjúkrabílastöð"
             },
             "emergency/phone": {
                 "name": "Neyðarsími"
@@ -946,7 +960,7 @@
                 "name": "Göngustígur"
             },
             "highway/living_street": {
-                "name": "Íbúagata"
+                "name": "Vistgata"
             },
             "highway/mini_roundabout": {
                 "name": "Lítið hringtorg"
@@ -1110,6 +1124,9 @@
             "leisure": {
                 "name": "Skemmtun"
             },
+            "leisure/dog_park": {
+                "name": "Hundagarður"
+            },
             "leisure/garden": {
                 "name": "Garður"
             },
@@ -1250,6 +1267,9 @@
             },
             "office": {
                 "name": "Skrifstofa"
+            },
+            "office/political_party": {
+                "name": "Stjórnmálaflokkur"
             },
             "place": {
                 "name": "Staður"

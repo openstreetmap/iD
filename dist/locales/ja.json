@@ -466,7 +466,6 @@
             "address": {
                 "label": "住所",
                 "placeholders": {
-                    "housename": "建物名",
                     "number": "123",
                     "street": "所属する街路名",
                     "city": "市町村名",
@@ -536,9 +535,6 @@
             "building_area": {
                 "label": "建物"
             },
-            "cans": {
-                "label": "空き缶回収"
-            },
             "capacity": {
                 "label": "収容数",
                 "placeholder": "50, 100, 200..."
@@ -553,9 +549,6 @@
                     "anticlockwise": "左回り"
                 }
             },
-            "clothes": {
-                "label": "古着回収"
-            },
             "collection_times": {
                 "label": "収集時刻"
             },
@@ -567,6 +560,9 @@
             },
             "covered": {
                 "label": "屋根"
+            },
+            "crop": {
+                "label": "収穫物"
             },
             "crossing": {
                 "label": "種類"
@@ -608,6 +604,9 @@
             "fixme": {
                 "label": "要修正"
             },
+            "fuel": {
+                "label": "ガソリンスタンド"
+            },
             "gauge": {
                 "label": "軌間"
             },
@@ -619,9 +618,6 @@
             },
             "generator/type": {
                 "label": "タイプ"
-            },
-            "glass": {
-                "label": "草回収"
             },
             "golf_hole": {
                 "label": "参照",
@@ -636,6 +632,10 @@
             },
             "historic": {
                 "label": "タイプ"
+            },
+            "hoops": {
+                "label": "輪の数",
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -715,9 +715,6 @@
             "operator": {
                 "label": "管理主体"
             },
-            "paper": {
-                "label": "古紙回収"
-            },
             "par": {
                 "label": "パー",
                 "placeholder": "3, 4, 5..."
@@ -750,6 +747,18 @@
             "railway": {
                 "label": "路線種別"
             },
+            "recycling/cans": {
+                "label": "空き缶回収"
+            },
+            "recycling/clothes": {
+                "label": "古布回収"
+            },
+            "recycling/glass": {
+                "label": "落ち葉・草回収"
+            },
+            "recycling/paper": {
+                "label": "古紙回収"
+            },
             "ref": {
                 "label": "管理番号"
             },
@@ -780,6 +789,9 @@
             "sac_scale": {
                 "label": "通行の困難さ"
             },
+            "seasonal": {
+                "label": "季節限定"
+            },
             "service": {
                 "label": "種類"
             },
@@ -792,6 +804,9 @@
             "shop": {
                 "label": "店舗種別"
             },
+            "smoking": {
+                "label": "喫煙"
+            },
             "social_facility_for": {
                 "label": "施設の対象者",
                 "placeholder": "ホームレス, 障碍者, 孤児など"
@@ -800,6 +815,9 @@
                 "label": "情報源"
             },
             "sport": {
+                "label": "スポーツ"
+            },
+            "sport_ice": {
                 "label": "スポーツ"
             },
             "structure": {
@@ -838,6 +856,9 @@
             },
             "tree_type": {
                 "label": "タイプ"
+            },
+            "trees": {
+                "label": "木の数"
             },
             "tunnel": {
                 "label": "トンネル"
@@ -969,6 +990,10 @@
                 "name": "バー",
                 "terms": "バー,飲み屋,呑み屋,ばー"
             },
+            "amenity/bbq": {
+                "name": "バーベキュー/グリル",
+                "terms": "バーベキュー,グリル,BBQ,飯盒炊爨"
+            },
             "amenity/bench": {
                 "name": "ベンチ",
                 "terms": "ベンチ"
@@ -1062,12 +1087,12 @@
                 "terms": "墓地,霊園,墓場,お墓,墓苑"
             },
             "amenity/hospital": {
-                "name": "病院",
-                "terms": "病院, 医院,総合病院"
+                "name": "病院の敷地",
+                "terms": "病院の敷地"
             },
             "amenity/kindergarten": {
-                "name": "幼稚園",
-                "terms": "保育園,幼稚園"
+                "name": "幼稚園の敷地",
+                "terms": "幼稚園の敷地, 保育園の敷地"
             },
             "amenity/library": {
                 "name": "図書館",
@@ -1076,6 +1101,10 @@
             "amenity/marketplace": {
                 "name": "市場",
                 "terms": "市場,マーケット,朝市,マルシェ"
+            },
+            "amenity/nightclub": {
+                "name": "ナイトクラブ",
+                "terms": "ナイトクラブ"
             },
             "amenity/parking": {
                 "name": "駐車場",
@@ -1134,8 +1163,8 @@
                 "terms": "レストラン,食堂"
             },
             "amenity/school": {
-                "name": "学校",
-                "terms": "学校,スクール"
+                "name": "学校の敷地",
+                "terms": "学校の敷地, 校庭"
             },
             "amenity/shelter": {
                 "name": "避難所",
@@ -1881,6 +1910,10 @@
                 "name": "工業用地",
                 "terms": "工業用地"
             },
+            "landuse/landfill": {
+                "name": "最終処分場",
+                "terms": "最終処分場"
+            },
             "landuse/meadow": {
                 "name": "牧草地",
                 "terms": "牧草地"
@@ -1917,6 +1950,10 @@
                 "name": "ドッグパーク",
                 "terms": "ドッグパーク, ドッグラン"
             },
+            "leisure/firepit": {
+                "name": "焚火",
+                "terms": "焚火,キャンプファイヤー"
+            },
             "leisure/garden": {
                 "name": "庭園",
                 "terms": "庭園"
@@ -1925,6 +1962,10 @@
                 "name": "ゴルフコース",
                 "terms": "ゴルフコース"
             },
+            "leisure/ice_rink": {
+                "name": "アイススケート場",
+                "terms": "アイススケート,アイススケート場,アイススケートリンク"
+            },
             "leisure/marina": {
                 "name": "マリーナ",
                 "terms": "マリーナ, ヨットハーバー"
@@ -1932,6 +1973,10 @@
             "leisure/park": {
                 "name": "公園",
                 "terms": "公園"
+            },
+            "leisure/picnic_table": {
+                "name": "ピクニックテーブル",
+                "terms": "ピクニックテーブル"
             },
             "leisure/pitch": {
                 "name": "スポーツ競技場",

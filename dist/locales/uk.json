@@ -465,7 +465,6 @@
             "address": {
                 "label": "Адреса",
                 "placeholders": {
-                    "housename": "Назва будинку",
                     "number": "Номер",
                     "street": "Вулиця",
                     "city": "Місто",
@@ -514,9 +513,6 @@
             "building_area": {
                 "label": "Будинок"
             },
-            "cans": {
-                "label": "Бляшанки"
-            },
             "capacity": {
                 "label": "Міськість",
                 "placeholder": "50, 100, 200…"
@@ -530,9 +526,6 @@
                     "clockwise": "За годинниковою стрілкою",
                     "anticlockwise": "Проти годинникової стрілки"
                 }
-            },
-            "clothes": {
-                "label": "Одяг"
             },
             "collection_times": {
                 "label": "Час виїмки пошти"
@@ -588,9 +581,6 @@
             },
             "generator/type": {
                 "label": "Тип"
-            },
-            "glass": {
-                "label": "Скло"
             },
             "golf_hole": {
                 "label": "Лунка",
@@ -683,9 +673,6 @@
             },
             "operator": {
                 "label": "Оператор"
-            },
-            "paper": {
-                "label": "Макулатура"
             },
             "par": {
                 "placeholder": "3, 4, 5…"
@@ -966,14 +953,6 @@
                 "name": "Цвинтар",
                 "terms": "Graveyard, wdbynfh,кладовище"
             },
-            "amenity/hospital": {
-                "name": "Лікарня",
-                "terms": "Hospital, ksrfhyz,шпиталь,госпіталь,стаціонар,лазарет"
-            },
-            "amenity/kindergarten": {
-                "name": "Дитячий садок",
-                "terms": "Kindergarten, lbnzxbq cfljr,ясла"
-            },
             "amenity/library": {
                 "name": "Бібліотека",
                 "terms": "Library, sksjntrf"
@@ -1035,10 +1014,6 @@
             "amenity/restaurant": {
                 "name": "Ресторан",
                 "terms": "Restaurant, htcnjhfy"
-            },
-            "amenity/school": {
-                "name": "Школа",
-                "terms": "School, irjkf,навчання,факультет"
             },
             "amenity/shelter": {
                 "name": "Притулок"

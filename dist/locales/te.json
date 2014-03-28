@@ -13,6 +13,9 @@
             "title": "బిందువు",
             "description": "హోటెల్, పోస్ట్ బాక్స్ ఇతరత్రా ప్రదేశాలను మ్యాప్ కి జతపరచండి",
             "tail": "కొత్త పాయంట్ గీయుటకు మ్యాప్ మీద క్లిక్ చేయండి"
+        },
+        "browse": {
+            "title": "బ్రౌస్"
         }
     },
     "operations": {
@@ -53,12 +56,18 @@
         },
         "orthogonalize": {
             "title": "చతురస్రం",
-            "key": "ఎస్"
+            "description": {
+                "area": "ఈ ప్రదేశపు మూలలను చదరంగా చేయండి."
+            },
+            "key": "ఎస్",
+            "not_squarish": "ఇది పలకలుగా లేదు కనుక దీన్ని చదరంగా చెయ్యడం కుదరదు."
         },
         "straighten": {
             "title": "తిన్నగాచేయి",
             "description": "ఈ గీతను తిన్నగా చేయి.",
-            "key": "ఎస్"
+            "key": "ఎస్",
+            "annotation": "గీతను తిన్నగా చేసారు.",
+            "too_bendy": "ఇది బాగా వంగి ఉన్నందున దీన్ని తిన్నగా చెయ్యడం కుదరదు."
         },
         "delete": {
             "title": "తొలగించు",
@@ -470,9 +479,6 @@
             "amenity/grave_yard": {
                 "name": "స్మశానం"
             },
-            "amenity/hospital": {
-                "name": "ఆసుపత్రి"
-            },
             "amenity/library": {
                 "name": "గ్రంథాలయం"
             },
@@ -501,9 +507,6 @@
             },
             "amenity/restaurant": {
                 "name": "రెస్టారెంట్"
-            },
-            "amenity/school": {
-                "name": "బడి"
             },
             "amenity/swimming_pool": {
                 "name": "ఈత కొలను"

@@ -328,7 +328,6 @@
             "address": {
                 "label": "Adres",
                 "placeholders": {
-                    "housename": "Huisnaam",
                     "number": "123",
                     "street": "Straat",
                     "city": "Tipe",
@@ -708,12 +707,6 @@
             "amenity/grave_yard": {
                 "name": "Begrafplaas"
             },
-            "amenity/hospital": {
-                "name": "Hospitaal"
-            },
-            "amenity/kindergarten": {
-                "name": "Kleuterskool"
-            },
             "amenity/library": {
                 "name": "Biblioteek"
             },
@@ -752,9 +745,6 @@
             },
             "amenity/restaurant": {
                 "name": "Restaurant"
-            },
-            "amenity/school": {
-                "name": "Skool"
             },
             "amenity/swimming_pool": {
                 "name": "Swembad"

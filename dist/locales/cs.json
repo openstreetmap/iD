@@ -465,7 +465,6 @@
             "address": {
                 "label": "Adresa",
                 "placeholders": {
-                    "housename": "Název budovy",
                     "number": "123",
                     "street": "Ulice",
                     "city": "Město",
@@ -535,9 +534,6 @@
             "building_area": {
                 "label": "Budova"
             },
-            "cans": {
-                "label": "Pro plechovky"
-            },
             "capacity": {
                 "label": "Kapacita",
                 "placeholder": "50, 100, 200..."
@@ -551,9 +547,6 @@
                     "clockwise": "Po směru hod. ručiček",
                     "anticlockwise": "Proti směru hod. ručiček"
                 }
-            },
-            "clothes": {
-                "label": "Pro textil"
             },
             "collection_times": {
                 "label": "Čas výběru"
@@ -618,9 +611,6 @@
             },
             "generator/type": {
                 "label": "Typ"
-            },
-            "glass": {
-                "label": "Pro sklo"
             },
             "golf_hole": {
                 "label": "Číslo",
@@ -713,9 +703,6 @@
             },
             "operator": {
                 "label": "Provozovatel"
-            },
-            "paper": {
-                "label": "Pro papír"
             },
             "par": {
                 "label": "Par",
@@ -1056,14 +1043,6 @@
                 "name": "Pohřebiště",
                 "terms": "hřbitov,pohřebiště"
             },
-            "amenity/hospital": {
-                "name": "Nemocnice",
-                "terms": "nemocnice,klinika,špitál,středisko,hospic,LDN,sanatorium,nemocniční,lazaret,ambulance,poliklinika,pohotovost"
-            },
-            "amenity/kindergarten": {
-                "name": "Mateřská školka",
-                "terms": "jesle,školka,kindergarten,předškolní"
-            },
             "amenity/library": {
                 "name": "Knihovna",
                 "terms": "knihovna"
@@ -1127,10 +1106,6 @@
             "amenity/restaurant": {
                 "name": "Restaurace",
                 "terms": "bar,jídelna,kantýna,bistro,bufet,rychlé občerstvení,fast food,hamburger,restaurace,restaurant,hostinec,pohostinství,krčma,gastronomie,občerstvení,stánek,jídlo,obědy,gril,pizzeria,čína,kebab"
-            },
-            "amenity/school": {
-                "name": "Škola",
-                "terms": "univerzita,universita,fakulta,vysoká škola,univerzitní,universitní,katedra,ústav,college"
             },
             "amenity/shelter": {
                 "name": "Přístřešek",

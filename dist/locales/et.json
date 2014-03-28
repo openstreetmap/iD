@@ -354,7 +354,6 @@
             "address": {
                 "label": "Aadress",
                 "placeholders": {
-                    "housename": "Majanimi",
                     "number": "123",
                     "street": "Tänav",
                     "city": "Linn",
@@ -572,12 +571,6 @@
             "amenity/grave_yard": {
                 "name": "Surnuaed"
             },
-            "amenity/hospital": {
-                "name": "Haigla"
-            },
-            "amenity/kindergarten": {
-                "name": "Lasteaed"
-            },
             "amenity/library": {
                 "name": "Raamatukogu"
             },
@@ -610,9 +603,6 @@
             },
             "amenity/restaurant": {
                 "name": "Restoraan"
-            },
-            "amenity/school": {
-                "name": "Kool"
             },
             "amenity/swimming_pool": {
                 "name": "Ujumisbassein"

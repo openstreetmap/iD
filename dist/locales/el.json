@@ -68,6 +68,7 @@
             "not_closed": "Αυτό δεν μπορεί να γίνει κυκλικό επειδή δεν είναι βρόγχος."
         },
         "orthogonalize": {
+            "title": "Τετράγωνο",
             "annotation": {
                 "line": "Τετραγωνισμός των γωνιών μιας γραμμής.",
                 "area": "Τετραγωνίστηκαν οι γωνίες μιας περιοχής"
@@ -189,8 +190,8 @@
         "title": "Αποθήκευση Αλλαγών",
         "description_placeholder": "Σύντομη περιγραφή των συνεισφορών σας",
         "message_label": "Υποβολή μηνύματος",
-        "upload_explanation": "ΟΙ αλλαγές που ανεβάσατε θα είναι ορατές σε όλους τους χάρτες που χρησιμοποιούν δεδομένα OpenStreetMap.",
-        "upload_explanation_with_user": "ΟΙ αλλαγές που ανεβάσατε ως {user} θα είναι ορατές σε όλους τους χάρτες που χρησιμοποιούν δεδομένα OpenStreetMap.",
+        "upload_explanation": "ΟΙ αλλαγές που θα ανεβάσετε θα είναι ορατές σε όλους τους χάρτες που χρησιμοποιούν δεδομένα OpenStreetMap.",
+        "upload_explanation_with_user": "ΟΙ αλλαγές που θα ανεβάσετε ως {user} θα είναι ορατές σε όλους τους χάρτες που χρησιμοποιούν δεδομένα OpenStreetMap.",
         "save": "Αποθήκευση",
         "cancel": "Ακύρωση",
         "warnings": "Προειδοποιήσεις",
@@ -386,7 +387,6 @@
             "address": {
                 "label": "Διεύθυνση",
                 "placeholders": {
-                    "housename": "Όνομα Σπιτιού",
                     "number": "123",
                     "street": "Οδός",
                     "city": "Πόλη",
@@ -863,14 +863,6 @@
                 "name": "Κοιμητήριο",
                 "terms": "Νεκροταφείο"
             },
-            "amenity/hospital": {
-                "name": "Νοσοκομείο",
-                "terms": "Νοσοκομείο"
-            },
-            "amenity/kindergarten": {
-                "name": "Νηπιαγωγείο",
-                "terms": "Νηπιαγωγείο"
-            },
             "amenity/library": {
                 "name": "Βιβλιοθήκη",
                 "terms": "Βιβλιοθήκη"
@@ -922,10 +914,6 @@
             "amenity/restaurant": {
                 "name": "Εστιατόριο",
                 "terms": "Εστιατόριο"
-            },
-            "amenity/school": {
-                "name": "Σχολείο",
-                "terms": "Σχολείο"
             },
             "amenity/swimming_pool": {
                 "name": "Πισίνα",

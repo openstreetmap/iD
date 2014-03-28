@@ -466,7 +466,6 @@
             "address": {
                 "label": "地址",
                 "placeholders": {
-                    "housename": "建物名稱",
                     "number": "123",
                     "street": "街道",
                     "city": "城市",
@@ -536,9 +535,6 @@
             "building_area": {
                 "label": "建築物"
             },
-            "cans": {
-                "label": "接受金屬罐"
-            },
             "capacity": {
                 "label": "容量",
                 "placeholder": "50, 100, 200..."
@@ -552,9 +548,6 @@
                     "clockwise": "順時針",
                     "anticlockwise": "反時針"
                 }
-            },
-            "clothes": {
-                "label": "接受衣物"
             },
             "collection_times": {
                 "label": "收集時間"
@@ -619,9 +612,6 @@
             },
             "generator/type": {
                 "label": "種類"
-            },
-            "glass": {
-                "label": "接受玻璃"
             },
             "golf_hole": {
                 "label": "參考編號",
@@ -715,9 +705,6 @@
             "operator": {
                 "label": "營運商"
             },
-            "paper": {
-                "label": "接受廢紙"
-            },
             "par": {
                 "label": "標準桿數",
                 "placeholder": "3,4,5..."
@@ -749,6 +736,18 @@
             },
             "railway": {
                 "label": "種類"
+            },
+            "recycling/cans": {
+                "label": "接受金屬罐"
+            },
+            "recycling/clothes": {
+                "label": "接受衣物"
+            },
+            "recycling/glass": {
+                "label": "接受玻璃"
+            },
+            "recycling/paper": {
+                "label": "接受廢紙"
             },
             "ref": {
                 "label": "參考"
@@ -838,6 +837,9 @@
             },
             "tree_type": {
                 "label": "種類"
+            },
+            "trees": {
+                "label": "樹"
             },
             "tunnel": {
                 "label": "隧道"
@@ -1023,12 +1025,10 @@
                 "terms": "墳場,墓地"
             },
             "amenity/hospital": {
-                "name": "醫院",
-                "terms": "醫院,醫學中心"
+                "name": "醫院用地"
             },
             "amenity/kindergarten": {
-                "name": "幼兒園",
-                "terms": "幼稚園,幼兒園"
+                "name": "幼稚園用地"
             },
             "amenity/library": {
                 "name": "圖書館"
@@ -1083,8 +1083,7 @@
                 "terms": "飯店,飯館,酒樓,餐館"
             },
             "amenity/school": {
-                "name": "學校",
-                "terms": "學校,小學,中學,國小,國中,高中,校園,校區"
+                "name": "學校用地"
             },
             "amenity/shelter": {
                 "name": "亭"
@@ -1267,8 +1266,20 @@
             "building/warehouse": {
                 "name": "倉庫"
             },
+            "craft/basket_maker": {
+                "name": "编筐"
+            },
+            "craft/beekeeper": {
+                "name": "養蜂"
+            },
+            "craft/blacksmith": {
+                "name": "鐵匠"
+            },
             "craft/boatbuilder": {
                 "name": "造船廠"
+            },
+            "craft/bookbinder": {
+                "name": "書籍釘裝"
             },
             "craft/brewery": {
                 "name": "釀酒廠"

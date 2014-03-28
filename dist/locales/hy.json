@@ -46,7 +46,6 @@
             "address": {
                 "label": "Հասցե",
                 "placeholders": {
-                    "housename": "Շենքի անվանում",
                     "number": "123",
                     "street": "Փողոց",
                     "city": "Քաղաք"

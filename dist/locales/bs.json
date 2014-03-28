@@ -459,7 +459,6 @@
             "address": {
                 "label": "Adresa",
                 "placeholders": {
-                    "housename": "Naziv",
                     "number": "123",
                     "street": "Ulica",
                     "city": "Grad",
@@ -529,9 +528,6 @@
             "building_area": {
                 "label": "Građevina"
             },
-            "cans": {
-                "label": "Prihvata konzerve"
-            },
             "capacity": {
                 "label": "Kapacitet",
                 "placeholder": "50, 100, 200..."
@@ -545,9 +541,6 @@
                     "clockwise": "U smjeru kazaljke na satu",
                     "anticlockwise": "U smjeru suprotnom od kazaljke na satu"
                 }
-            },
-            "clothes": {
-                "label": "Prihvata odjeću"
             },
             "collection_times": {
                 "label": "Vremena skupljanja"
@@ -606,9 +599,6 @@
             },
             "generator/type": {
                 "label": "Vrsta"
-            },
-            "glass": {
-                "label": "Prihvata staklo"
             },
             "golf_hole": {
                 "label": "Referenca",
@@ -701,9 +691,6 @@
             },
             "operator": {
                 "label": "Operator"
-            },
-            "paper": {
-                "label": "Prihvata papir"
             },
             "par": {
                 "label": "Par",
@@ -1002,14 +989,6 @@
                 "name": "Groblje",
                 "terms": "groblje,greblje,mezarje"
             },
-            "amenity/hospital": {
-                "name": "Bolnica",
-                "terms": "bolnica,centar za liječenje"
-            },
-            "amenity/kindergarten": {
-                "name": "Vrtić",
-                "terms": "vrtić,dječji vrtić,zabavište"
-            },
             "amenity/library": {
                 "name": "Biblioteka",
                 "terms": "biblioteka,knjižnica"
@@ -1073,10 +1052,6 @@
             "amenity/restaurant": {
                 "name": "Restoran",
                 "terms": "restoran,gostionica"
-            },
-            "amenity/school": {
-                "name": "Škola",
-                "terms": "škola,školska zgrada"
             },
             "amenity/shelter": {
                 "name": "Sklonište",

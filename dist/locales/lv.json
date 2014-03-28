@@ -34,6 +34,8 @@
             }
         },
         "continue": {
+            "title": "Turpināt ",
+            "description": "Turpināt šo līniju.",
             "annotation": {
                 "line": "Līnija turpināta.",
                 "area": "Apgabals turpināts."
@@ -170,6 +172,11 @@
         "modified": "Mainīts",
         "deleted": "Dzēsts",
         "created": "Izveidots"
+    },
+    "geocoder": {
+        "search": "Meklēt pasaulē...",
+        "no_results_visible": "Nav rezultātu redzamajā kartes apgabalā",
+        "no_results_worldwide": "Nav rezultātu"
     },
     "geolocate": {
         "title": "Parādīt manu atrašanās vietu"
@@ -570,9 +577,6 @@
             "amenity/grave_yard": {
                 "name": "Kapi"
             },
-            "amenity/hospital": {
-                "name": "Slimnīca"
-            },
             "amenity/library": {
                 "name": "Bibliotēka"
             },
@@ -608,9 +612,6 @@
             },
             "amenity/restaurant": {
                 "name": "Restorāns"
-            },
-            "amenity/school": {
-                "name": "Skola"
             },
             "amenity/swimming_pool": {
                 "name": "Peldbaseins"

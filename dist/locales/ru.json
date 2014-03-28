@@ -250,7 +250,7 @@
         "search": "Поиск",
         "multiselect": "Выделенные элементы",
         "unknown": "Неизвестно",
-        "incomplete": "<не скачено>",
+        "incomplete": "<не скачано>",
         "feature_list": "Поиск объектов",
         "edit": "Редактировать объект",
         "none": "Нет",
@@ -466,7 +466,6 @@
             "address": {
                 "label": "Адрес",
                 "placeholders": {
-                    "housename": "Housename",
                     "number": "Номер",
                     "street": "Улица",
                     "city": "Город",
@@ -515,6 +514,9 @@
             "atm": {
                 "label": "Банкомат"
             },
+            "backrest": {
+                "label": "Спинка"
+            },
             "barrier": {
                 "label": "Тип"
             },
@@ -530,9 +532,6 @@
             "building_area": {
                 "label": "Здание"
             },
-            "cans": {
-                "label": "Принимают жесть"
-            },
             "capacity": {
                 "label": "Вместимость",
                 "placeholder": "50, 100, 200..."
@@ -546,9 +545,6 @@
                     "clockwise": "По часовой стрелке",
                     "anticlockwise": "Против часовой стрелки"
                 }
-            },
-            "clothes": {
-                "label": "Принимают одежду"
             },
             "collection_times": {
                 "label": "Расписание проверки"
@@ -599,6 +595,9 @@
             "fixme": {
                 "label": "Исправь меня"
             },
+            "fuel": {
+                "label": "Топливо"
+            },
             "gauge": {
                 "label": "Колея"
             },
@@ -610,9 +609,6 @@
             },
             "generator/type": {
                 "label": "Тип"
-            },
-            "glass": {
-                "label": "Принимают стекло"
             },
             "golf_hole": {
                 "label": "Номер лунки",
@@ -627,6 +623,9 @@
             },
             "historic": {
                 "label": "Тип"
+            },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -706,9 +705,6 @@
             "operator": {
                 "label": "Владелец"
             },
-            "paper": {
-                "label": "Принимают бумагу"
-            },
             "par": {
                 "placeholder": "3, 4, 5..."
             },
@@ -740,6 +736,18 @@
             "railway": {
                 "label": "Тип"
             },
+            "recycling/cans": {
+                "label": "Принимают жесть"
+            },
+            "recycling/clothes": {
+                "label": "Принимают одежду"
+            },
+            "recycling/glass": {
+                "label": "Принимают стекло"
+            },
+            "recycling/paper": {
+                "label": "Принимают бумагу"
+            },
             "ref": {
                 "label": "Номер"
             },
@@ -770,6 +778,9 @@
             "sac_scale": {
                 "label": "Категория сложности"
             },
+            "seasonal": {
+                "label": "Сезонное"
+            },
             "service": {
                 "label": "Тип"
             },
@@ -786,6 +797,9 @@
                 "label": "Источник"
             },
             "sport": {
+                "label": "Спорт"
+            },
+            "sport_ice": {
                 "label": "Спорт"
             },
             "structure": {
@@ -824,6 +838,9 @@
             },
             "tree_type": {
                 "label": "Тип"
+            },
+            "trees": {
+                "label": "Деревья"
             },
             "tunnel": {
                 "label": "Тоннель"
@@ -891,6 +908,10 @@
             "aerialway/station": {
                 "name": "Терминал канатной дороги"
             },
+            "aerialway/t-bar": {
+                "name": "Анкерный подъёмник",
+                "terms": "Якорный подъёмник,Бугель"
+            },
             "aeroway": {
                 "name": "Взлётная полоса",
                 "terms": "Взлётная полоса"
@@ -946,6 +967,9 @@
             "amenity/bar": {
                 "name": "Бар",
                 "terms": "Бар"
+            },
+            "amenity/bbq": {
+                "name": "Барбекю/Гриль"
             },
             "amenity/bench": {
                 "name": "Скамейка",
@@ -1040,12 +1064,11 @@
                 "terms": "кладбище"
             },
             "amenity/hospital": {
-                "name": "Больница",
-                "terms": "Больница, Госпиталь, Стационар"
+                "name": "Территория больницы"
             },
             "amenity/kindergarten": {
-                "name": "Детский сад",
-                "terms": "детский сад, детский садик, садик"
+                "name": "Территория детского сада",
+                "terms": "Детский сад,Детская площадка,Ясли"
             },
             "amenity/library": {
                 "name": "Библиотека",
@@ -1054,6 +1077,9 @@
             "amenity/marketplace": {
                 "name": "Рынок",
                 "terms": "Рынок"
+            },
+            "amenity/nightclub": {
+                "name": "Ночной клуб"
             },
             "amenity/parking": {
                 "name": "Автомобильная стоянка",
@@ -1108,8 +1134,8 @@
                 "terms": "Ресторан, Столовая"
             },
             "amenity/school": {
-                "name": "Школа",
-                "terms": "Школа, лицей, гимназия"
+                "name": "Территория школы",
+                "terms": "Школьная площадка"
             },
             "amenity/shelter": {
                 "name": "Укрытие",
@@ -1247,6 +1273,9 @@
             "building/apartments": {
                 "name": "Многоквартирный дом",
                 "terms": "многоэтажка, высотка"
+            },
+            "building/barn": {
+                "name": "Амбар"
             },
             "building/bunker": {
                 "name": "Бункер"
@@ -1393,6 +1422,9 @@
             "craft/hvac": {
                 "name": "Установка кондиционеров"
             },
+            "craft/insulator": {
+                "name": "Изолятор"
+            },
             "craft/jeweler": {
                 "name": "Ювелир",
                 "terms": "ювелир"
@@ -1408,6 +1440,9 @@
             },
             "craft/optician": {
                 "name": "Оптика"
+            },
+            "craft/painter": {
+                "name": "Маляр"
             },
             "craft/photographer": {
                 "name": "фотограф",
@@ -1454,6 +1489,9 @@
             },
             "craft/stonemason": {
                 "name": "Каменщик"
+            },
+            "craft/sweep": {
+                "name": "Трубочист"
             },
             "craft/tailor": {
                 "name": "Портной"
@@ -1623,7 +1661,8 @@
                 "terms": "Подъездная дорога, Подъезд к чему-либо"
             },
             "highway/service/emergency_access": {
-                "name": "Неотложная помощь"
+                "name": "Неотложная помощь",
+                "terms": "Эвакуационный выход, Аварийный выход"
             },
             "highway/service/parking_aisle": {
                 "name": "Парковочный проезд",
@@ -1746,6 +1785,9 @@
                 "name": "Промышленная застройка",
                 "terms": "Промышленная территория, Производственная территория, Промышленное землепользование"
             },
+            "landuse/landfill": {
+                "name": "Свалка"
+            },
             "landuse/meadow": {
                 "name": "Луг",
                 "terms": "луг"
@@ -1785,6 +1827,9 @@
                 "name": "Площадка для гольфа",
                 "terms": "Поле для гольфа, Гольфполе"
             },
+            "leisure/ice_rink": {
+                "name": "Каток"
+            },
             "leisure/marina": {
                 "name": "Яхтклуб",
                 "terms": "Марина, Стоянка для яхт"
@@ -1792,6 +1837,9 @@
             "leisure/park": {
                 "name": "Парк",
                 "terms": "парк"
+            },
+            "leisure/picnic_table": {
+                "name": "Стол для пикника"
             },
             "leisure/pitch": {
                 "name": "Спортплощадка",
@@ -2244,6 +2292,9 @@
                 "name": "Веломагазин",
                 "terms": "Веломагазин"
             },
+            "shop/bookmaker": {
+                "name": "Букмекер"
+            },
             "shop/books": {
                 "name": "Книжный",
                 "terms": "книги, книжный"
@@ -2460,7 +2511,8 @@
                 "name": "Стоянка автодомов"
             },
             "tourism/chalet": {
-                "name": "Сельский домик, шале"
+                "name": "Сельский домик, шале",
+                "terms": "Шале,Коттедж"
             },
             "tourism/guest_house": {
                 "name": "Гостевой дом",

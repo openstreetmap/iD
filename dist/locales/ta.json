@@ -112,7 +112,6 @@
             "address": {
                 "label": "முகவரி",
                 "placeholders": {
-                    "housename": "வீட்டின் பெயர்",
                     "number": "123",
                     "street": "தெரு",
                     "city": "மாநகரம்"
@@ -376,9 +375,6 @@
             "amenity/grave_yard": {
                 "name": "இடுகாடு"
             },
-            "amenity/hospital": {
-                "name": "மருத்துவமனை"
-            },
             "amenity/library": {
                 "name": "புத்தகச்சாலை"
             },
@@ -405,9 +401,6 @@
             },
             "amenity/restaurant": {
                 "name": "உணவகம்"
-            },
-            "amenity/school": {
-                "name": "பள்ளி"
             },
             "amenity/swimming_pool": {
                 "name": "நீச்சல் குளம்"

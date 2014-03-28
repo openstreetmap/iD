@@ -34,6 +34,8 @@
             }
         },
         "continue": {
+            "key": "A",
+            "title": "Fortsett",
             "annotation": {
                 "line": "Videreførte en linje.",
                 "area": "Videreførte et areal."
@@ -54,10 +56,14 @@
             }
         },
         "orthogonalize": {
+            "key": "S",
             "annotation": {
                 "line": "Laget hjørnene på linjen vinkelrette.",
                 "area": "Laget hjørnene på arealet vinkelrette."
             }
+        },
+        "straighten": {
+            "key": "S"
         },
         "delete": {
             "title": "Fjern",
@@ -127,6 +133,10 @@
         "nothing": "Ingen ting å gjøre tilbake."
     },
     "browser_notice": "Denne editor er støttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og høyere. Vennligst oppgrader din nettleser eller bruk Potlatch 2 for å redigere kartet.",
+    "translate": {
+        "localized_translation_language": "Velg språk",
+        "localized_translation_name": "Navn"
+    },
     "logout": "logg ut",
     "loading_auth": "Kobler til OpenStreetMap...",
     "report_a_bug": "meld en programvarefeil",
@@ -148,9 +158,14 @@
         "no_documentation_combination": "Det finnes ingen dokumentasjon for denne tag-kombinasjonen",
         "no_documentation_key": "Det finnes ingen dokumentasjon tilgjengelig for denne nøkkelen",
         "show_more": "Vis mer",
+        "role": "Rolle",
         "choose": "Velg egenskapstype",
         "results": "{n} resultater for {search}",
-        "remove": "Fjern"
+        "remove": "Fjern",
+        "search": "Søk",
+        "unknown": "Ukjent",
+        "way": "Vei",
+        "location": "Sted"
     },
     "background": {
         "title": "Bakgrunn",
@@ -170,7 +185,10 @@
         "unsaved_changes": "Du har ulagrede endringer"
     },
     "success": {
-        "just_edited": "Du har akkurat endret OpenStreetMap!"
+        "just_edited": "Du har akkurat endret OpenStreetMap!",
+        "view_on_osm": "Vis på OSM",
+        "twitter": "Del på Twitter",
+        "google": "Del på Google+"
     },
     "splash": {
         "welcome": "Velkommen til iD OpenStreetMap editor",
@@ -204,11 +222,18 @@
     },
     "intro": {
         "navigation": {
+            "title": "Navigasjon",
             "drag": "Hovedkartet viser data fra OpenstreetMap lagt over en bakgrunn. Du kan navigere ved å dra eller scrolle, slik som et vanlig nettkart. **Dra kartet!**"
         }
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Bygning"
+            },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Arealbruk"
             },
@@ -223,6 +248,12 @@
             },
             "category-route": {
                 "name": "Rute"
+            },
+            "category-water-area": {
+                "name": "Vann"
+            },
+            "category-water-line": {
+                "name": "Vann"
             }
         },
         "fields": {
@@ -264,7 +295,6 @@
             "address": {
                 "label": "Adresse",
                 "placeholders": {
-                    "housename": "Husnavn",
                     "number": "123",
                     "street": "Gate",
                     "city": "By",
@@ -273,6 +303,15 @@
             },
             "admin_level": {
                 "label": "Administrasjonsnivå"
+            },
+            "aerialway/capacity": {
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/occupancy": {
+                "placeholder": "2, 4, 8..."
             },
             "aeroway": {
                 "label": "Type"
@@ -346,8 +385,20 @@
             "fee": {
                 "label": "Avgift"
             },
+            "fire_hydrant/type": {
+                "label": "Type"
+            },
             "fixme": {
                 "label": "Fiks meg"
+            },
+            "generator/method": {
+                "label": "Metode"
+            },
+            "generator/source": {
+                "label": "Kilde"
+            },
+            "generator/type": {
+                "label": "Type"
             },
             "highway": {
                 "label": "Type"
@@ -363,6 +414,9 @@
             },
             "incline": {
                 "label": "Stigning"
+            },
+            "information": {
+                "label": "Type"
             },
             "internet_access": {
                 "label": "Internettilgang",
@@ -479,6 +533,9 @@
             "service": {
                 "label": "Type"
             },
+            "shelter_type": {
+                "label": "Type"
+            },
             "shop": {
                 "label": "Type"
             },
@@ -507,6 +564,12 @@
             },
             "tracktype": {
                 "label": "Type"
+            },
+            "tree_type": {
+                "label": "Type"
+            },
+            "tunnel": {
+                "label": "Tunnel"
             },
             "water": {
                 "label": "Type"
@@ -595,6 +658,9 @@
             "amenity/cinema": {
                 "name": "Kino"
             },
+            "amenity/clock": {
+                "name": "Klokke"
+            },
             "amenity/college": {
                 "name": "Videregående skole"
             },
@@ -615,12 +681,6 @@
             },
             "amenity/grave_yard": {
                 "name": "Kirkegård"
-            },
-            "amenity/hospital": {
-                "name": "Sykehus"
-            },
-            "amenity/kindergarten": {
-                "name": "Barnehage"
             },
             "amenity/library": {
                 "name": "Bibliotek"
@@ -660,9 +720,6 @@
             },
             "amenity/restaurant": {
                 "name": "Restaurant"
-            },
-            "amenity/school": {
-                "name": "Skole"
             },
             "amenity/swimming_pool": {
                 "name": "Svømmebasseng"

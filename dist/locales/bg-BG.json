@@ -395,7 +395,6 @@
             "address": {
                 "label": "Адрес",
                 "placeholders": {
-                    "housename": "Име на жилищна сграда",
                     "number": "123",
                     "street": "Улица",
                     "city": "Град",
@@ -773,12 +772,6 @@
             "amenity/grave_yard": {
                 "name": "Гробище"
             },
-            "amenity/hospital": {
-                "name": "Болница"
-            },
-            "amenity/kindergarten": {
-                "name": "Детска градина"
-            },
             "amenity/library": {
                 "name": "Библиотека"
             },
@@ -817,9 +810,6 @@
             },
             "amenity/restaurant": {
                 "name": "Ресторант"
-            },
-            "amenity/school": {
-                "name": "Училище"
             },
             "amenity/swimming_pool": {
                 "name": "Плувен басейн"

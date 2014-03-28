@@ -466,7 +466,6 @@
             "address": {
                 "label": "Adresse",
                 "placeholders": {
-                    "housename": "postalischer Hausname",
                     "number": "123",
                     "street": "Straße",
                     "city": "Stadt",
@@ -536,9 +535,6 @@
             "building_area": {
                 "label": "Gebäude"
             },
-            "cans": {
-                "label": "Dosen"
-            },
             "capacity": {
                 "label": "Kapazität",
                 "placeholder": "50, 100, 200..."
@@ -553,9 +549,6 @@
                     "anticlockwise": "gegen den Uhrzeigersinn"
                 }
             },
-            "clothes": {
-                "label": "Kleidung"
-            },
             "collection_times": {
                 "label": "Leerungszeiten"
             },
@@ -567,6 +560,9 @@
             },
             "covered": {
                 "label": "Überdacht / Verdeckt"
+            },
+            "crop": {
+                "label": "Ernte"
             },
             "crossing": {
                 "label": "Typ"
@@ -608,6 +604,9 @@
             "fixme": {
                 "label": "Korrigiere mich"
             },
+            "fuel": {
+                "label": "Treibstogg"
+            },
             "gauge": {
                 "label": "Spurbreite"
             },
@@ -619,9 +618,6 @@
             },
             "generator/type": {
                 "label": "Typ"
-            },
-            "glass": {
-                "label": "Glas"
             },
             "golf_hole": {
                 "label": "Loch-Nummer",
@@ -636,6 +632,10 @@
             },
             "historic": {
                 "label": "Art"
+            },
+            "hoops": {
+                "label": "Basketball",
+                "placeholder": "1, 2, 4 ..."
             },
             "iata": {
                 "label": "IATA"
@@ -715,9 +715,6 @@
             "operator": {
                 "label": "Betreiber"
             },
-            "paper": {
-                "label": "Papier"
-            },
             "par": {
                 "label": "Par",
                 "placeholder": "3, 4, 5…"
@@ -750,6 +747,18 @@
             "railway": {
                 "label": "Art"
             },
+            "recycling/cans": {
+                "label": "Dosen"
+            },
+            "recycling/clothes": {
+                "label": "Kleidung"
+            },
+            "recycling/glass": {
+                "label": "Glas"
+            },
+            "recycling/paper": {
+                "label": "Papier"
+            },
             "ref": {
                 "label": "Referenz"
             },
@@ -780,6 +789,9 @@
             "sac_scale": {
                 "label": "SAC-Wanderskala"
             },
+            "seasonal": {
+                "label": "Saisonal"
+            },
             "service": {
                 "label": "Typ"
             },
@@ -792,6 +804,9 @@
             "shop": {
                 "label": "Typ"
             },
+            "smoking": {
+                "label": "Rauchen"
+            },
             "social_facility_for": {
                 "label": "Sozialküche",
                 "placeholder": "Obdachlose, Behinderte, Kinder, etc."
@@ -800,6 +815,9 @@
                 "label": "Quelle"
             },
             "sport": {
+                "label": "Sport"
+            },
+            "sport_ice": {
                 "label": "Sport"
             },
             "structure": {
@@ -838,6 +856,9 @@
             },
             "tree_type": {
                 "label": "Typ"
+            },
+            "trees": {
+                "label": "Bäume"
             },
             "tunnel": {
                 "label": "Tunnel"
@@ -969,6 +990,10 @@
                 "name": "Bar",
                 "terms": "Bar"
             },
+            "amenity/bbq": {
+                "name": "Grillgerät",
+                "terms": "Grillgerät, Grill, Barbecue, Grillparty"
+            },
             "amenity/bench": {
                 "name": "Sitzbank",
                 "terms": "Bank, Sitzbank"
@@ -1062,12 +1087,12 @@
                 "terms": "Friedhof"
             },
             "amenity/hospital": {
-                "name": "Krankenhaus",
-                "terms": "Klinik,Notaufnahme,Gesundheitswesen,Hospiz,Krankenhaus,Pflegeheim,Altersheim,Nervenheilanstalt,Sanatorium,Lazarett,Chirurgie,Krankenstation,Spital"
+                "name": "Krankenhausgelände",
+                "terms": "Krankenhaus, Klinik, Klinikgelände, Hospital"
             },
             "amenity/kindergarten": {
-                "name": "Kindergarten",
-                "terms": "Kindergarten,Kindertagesstätte,Hort"
+                "name": "Kindergartengelände",
+                "terms": "Kindergarten, Spielplatz, Sandkasten"
             },
             "amenity/library": {
                 "name": "Bibliothek",
@@ -1076,6 +1101,10 @@
             "amenity/marketplace": {
                 "name": "Marktplatz",
                 "terms": "Marktplatz"
+            },
+            "amenity/nightclub": {
+                "name": "Nachtklub",
+                "terms": "Nachtklub, Etablissement, Nachtlokal"
             },
             "amenity/parking": {
                 "name": "Autoparkplatz",
@@ -1134,8 +1163,8 @@
                 "terms": "Bar,Cafeteria,Café,Kantine,Speisehaus,Coffee-Shop,Kaffeehaus,Imbiss,Speisesaal,Kneipe,Donut Shop,Drive-In,Restaurant,Speiserestaurant,Wirtschaft,Fast-Food-Restaurant,Grill,Hamburgerstand,Hotdogstand,Gasthaus,Gasthof,Wirtshaus,Imbissstube,Imbiss,Pizzeria,Lokal"
             },
             "amenity/school": {
-                "name": "Schule",
-                "terms": "Schule"
+                "name": "Schulgelände",
+                "terms": "Schulhof, Schule, Realschule, Mittelschule, Grundschule, Gymnasium, Ganztagsschule, Förderschule"
             },
             "amenity/shelter": {
                 "name": "Unterstand",
@@ -1881,6 +1910,10 @@
                 "name": "Industrie",
                 "terms": "Industriegebiet, Gewerbegebiet"
             },
+            "landuse/landfill": {
+                "name": "Deponie",
+                "terms": "Demonise, Mülldeponie, Geländeauffüllung"
+            },
             "landuse/meadow": {
                 "name": "Weide",
                 "terms": "Wiese, Weide"
@@ -1917,6 +1950,10 @@
                 "name": "Hundepark",
                 "terms": "Hundefreilaufzone,Hundeauslaufzone,Hundezone,Hundeauslaufplatz"
             },
+            "leisure/firepit": {
+                "name": "Feuerstelle",
+                "terms": "Feuerstelle, Lavaseekrater"
+            },
             "leisure/garden": {
                 "name": "Garten",
                 "terms": "Garten"
@@ -1925,6 +1962,10 @@
                 "name": "Golfplatz",
                 "terms": "Golfplatz, Golfkurs, Golfclub"
             },
+            "leisure/ice_rink": {
+                "name": "Eislaufbahn",
+                "terms": "Eislaufbahn, Eislaufhalle, Eissporthalle, Schlittschuhbahn"
+            },
             "leisure/marina": {
                 "name": "Yachthafen",
                 "terms": "Yachthafen, Marina"
@@ -1932,6 +1973,10 @@
             "leisure/park": {
                 "name": "Park",
                 "terms": "Esplanade,Lustgarten,Erholungsgebiet,Dorfanger,Dorfwiese"
+            },
+            "leisure/picnic_table": {
+                "name": "Jausentisch",
+                "terms": "Jausentisch, Picknicktisch"
             },
             "leisure/pitch": {
                 "name": "Sportplatz",

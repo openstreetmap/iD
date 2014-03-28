@@ -465,7 +465,6 @@
             "address": {
                 "label": "주소",
                 "placeholders": {
-                    "housename": "건물 이름",
                     "number": "123",
                     "street": "거리",
                     "city": "도시",
@@ -903,12 +902,6 @@
             "amenity/grave_yard": {
                 "name": "묘지"
             },
-            "amenity/hospital": {
-                "name": "병원"
-            },
-            "amenity/kindergarten": {
-                "name": "유치원"
-            },
             "amenity/library": {
                 "name": "도서관"
             },
@@ -958,9 +951,6 @@
             },
             "amenity/restaurant": {
                 "name": "음식점"
-            },
-            "amenity/school": {
-                "name": "학교"
             },
             "amenity/shelter": {
                 "name": "피난처"

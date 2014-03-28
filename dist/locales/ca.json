@@ -466,7 +466,6 @@
             "address": {
                 "label": "Adreça",
                 "placeholders": {
-                    "housename": "Nom de l'edifici",
                     "number": "123",
                     "street": "Carrer",
                     "city": "Ciutat ",
@@ -536,9 +535,6 @@
             "building_area": {
                 "label": "Edifici"
             },
-            "cans": {
-                "label": "Accepta llaunes"
-            },
             "capacity": {
                 "label": "Capacitat",
                 "placeholder": "50, 100, 200..."
@@ -553,9 +549,6 @@
                     "anticlockwise": "en sentit contrari al de les agulles del rellotge"
                 }
             },
-            "clothes": {
-                "label": "Accepta roba"
-            },
             "collection_times": {
                 "label": "Horari de recollida"
             },
@@ -567,6 +560,9 @@
             },
             "covered": {
                 "label": "Cobert"
+            },
+            "crop": {
+                "label": "Plantació"
             },
             "crossing": {
                 "label": "Tipus"
@@ -620,9 +616,6 @@
             "generator/type": {
                 "label": "Tipus"
             },
-            "glass": {
-                "label": "Accepta vidre"
-            },
             "golf_hole": {
                 "label": "Referència",
                 "placeholder": "Número de forat (1-18)"
@@ -636,6 +629,10 @@
             },
             "historic": {
                 "label": "Tipus"
+            },
+            "hoops": {
+                "label": "Cistella de basquetbol",
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -715,9 +712,6 @@
             "operator": {
                 "label": "Operador"
             },
-            "paper": {
-                "label": "Accepta paper"
-            },
             "par": {
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
@@ -749,6 +743,18 @@
             },
             "railway": {
                 "label": "Tipus"
+            },
+            "recycling/cans": {
+                "label": "Accepta llaunes"
+            },
+            "recycling/clothes": {
+                "label": "Accepta roba"
+            },
+            "recycling/glass": {
+                "label": "Accepta vidre"
+            },
+            "recycling/paper": {
+                "label": "Accepta paper"
             },
             "ref": {
                 "label": "Referència"
@@ -791,6 +797,9 @@
             },
             "shop": {
                 "label": "Tipus"
+            },
+            "smoking": {
+                "label": "Apte per a fumadors"
             },
             "social_facility_for": {
                 "label": "Persones ateses",
@@ -838,6 +847,9 @@
             },
             "tree_type": {
                 "label": "Tipus"
+            },
+            "trees": {
+                "label": "Arbres"
             },
             "tunnel": {
                 "label": "Túnel"
@@ -1046,12 +1058,10 @@
                 "terms": "Cementiri, Camp de tombes, necròpoli, ciutat dels difunts"
             },
             "amenity/hospital": {
-                "name": "Hospital",
-                "terms": "Hospital, Centre de salut, Edifici sanitari, Complex hospitalari, Hospital universitàri"
+                "name": "Terrenys hospitalaris"
             },
             "amenity/kindergarten": {
-                "name": "Jardí d'infància",
-                "terms": "Preescolar, jardí d'infància, guarderia,"
+                "name": "Terrenys de Jardí d'infància"
             },
             "amenity/library": {
                 "name": "Biblioteca",
@@ -1061,8 +1071,12 @@
                 "name": "Mercat",
                 "terms": "Mercat, Mercat veïnal, Mercat de carrer"
             },
+            "amenity/nightclub": {
+                "name": "Club nocturn"
+            },
             "amenity/parking": {
-                "name": "Aparcament"
+                "name": "Aparcament",
+                "terms": "Aparcament, Pàrquing, Garatge"
             },
             "amenity/pharmacy": {
                 "name": "Farmàcia",
@@ -1115,8 +1129,7 @@
                 "terms": "Restaurant, Lloc per menjar, Bistro, Wok, Trattoria, Pizzeria"
             },
             "amenity/school": {
-                "name": "Escola",
-                "terms": "Escola, CEIP, IES, Guarderia, Institut"
+                "name": "Terrenys d'escola"
             },
             "amenity/shelter": {
                 "name": "Refugi"
@@ -1253,7 +1266,8 @@
                 "terms": "Edifici, Bloc de pisos, Nau industrial, Centre comercial, Oficines, Bloc, Casa, Barraca"
             },
             "building/apartments": {
-                "name": "Apartaments"
+                "name": "Apartaments",
+                "terms": "Apartaments"
             },
             "building/barn": {
                 "name": "Graner"
@@ -1287,7 +1301,8 @@
                 "name": "Edifici d'habitacions"
             },
             "building/entrance": {
-                "name": "Entrada"
+                "name": "Entrada",
+                "terms": "Entrada, Porta, Portes, Portalada, Accés"
             },
             "building/garage": {
                 "name": "garatge "
@@ -1344,7 +1359,8 @@
                 "name": "Estació de ferrocarril"
             },
             "building/university": {
-                "name": "Edifici universitari"
+                "name": "Edifici universitari",
+                "terms": "Edifici universitari"
             },
             "building/warehouse": {
                 "name": "Magatzem"
@@ -1495,10 +1511,12 @@
                 "terms": "Boca d'incendis, presa d'aigua per a bombers, incendi, bombers, sortida d'aigua, aigua"
             },
             "emergency/phone": {
-                "name": "Telèfon per a emergències"
+                "name": "Telèfon per a emergències",
+                "terms": "Telèfon d'emergències, SOS, S.O.S"
             },
             "entrance": {
-                "name": "Entrada"
+                "name": "Entrada",
+                "terms": "Entrada, Porta, Portes, Portalada, Accés"
             },
             "footway/crossing": {
                 "name": "Cruïlla"
@@ -1537,7 +1555,8 @@
                 "name": "Camí de ferradura"
             },
             "highway/bus_stop": {
-                "name": "Parada d'autobús"
+                "name": "Parada d'autobús",
+                "terms": "Parada de bus, Parada"
             },
             "highway/crossing": {
                 "name": "Cruïlla"
@@ -1552,7 +1571,8 @@
                 "name": "Carrer residencial"
             },
             "highway/mini_roundabout": {
-                "name": "Mini-Rotonda"
+                "name": "Mini-Rotonda",
+                "terms": "Minirotonda, Mini-rotonda, Rotonda petita"
             },
             "highway/motorway": {
                 "name": "Autopista"
@@ -1604,7 +1624,8 @@
                 "name": "Via d'accés a una propietat"
             },
             "highway/service/emergency_access": {
-                "name": "Accés per a emergències"
+                "name": "Accés per a emergències",
+                "terms": "Accés d'emergència"
             },
             "highway/service/parking_aisle": {
                 "name": "Carrer d'aparcament",
@@ -1626,10 +1647,12 @@
                 "name": "Enllaç de carretera terciària"
             },
             "highway/track": {
-                "name": "Pista"
+                "name": "Pista",
+                "terms": "Pista, Traça"
             },
             "highway/traffic_signals": {
-                "name": "Semàfors"
+                "name": "Semàfors",
+                "terms": "Senyals de trànsit, Senyals de tràfic"
             },
             "highway/trunk": {
                 "name": "Carretera principal"
@@ -1644,25 +1667,31 @@
                 "name": "Altres carreteres"
             },
             "historic": {
-                "name": "Lloc històric"
+                "name": "Lloc històric",
+                "terms": "Lloc històric"
             },
             "historic/archaeological_site": {
-                "name": "Jaciment arqueològic"
+                "name": "Jaciment arqueològic",
+                "terms": "Lloc arqueològic"
             },
             "historic/boundary_stone": {
                 "name": "Fita de terme"
             },
             "historic/castle": {
-                "name": "Castell"
+                "name": "Castell",
+                "terms": "Castell"
             },
             "historic/memorial": {
-                "name": "Memorial"
+                "name": "Memorial",
+                "terms": "Memorial"
             },
             "historic/monument": {
-                "name": "Monument"
+                "name": "Monument",
+                "terms": "Monument"
             },
             "historic/ruins": {
-                "name": "Ruïnes"
+                "name": "Ruïnes",
+                "terms": "Ruines"
             },
             "historic/wayside_cross": {
                 "name": "Creu Cristiana"
@@ -1680,7 +1709,8 @@
                 "name": "Bassa"
             },
             "landuse/cemetery": {
-                "name": "Cementiri"
+                "name": "Cementiri",
+                "terms": "Cementiri, Camp Sant"
             },
             "landuse/commercial": {
                 "name": "Zona comercial"
@@ -1689,7 +1719,8 @@
                 "name": "Zona en construcció"
             },
             "landuse/farm": {
-                "name": "Terrenys de granja"
+                "name": "Terrenys de granja",
+                "terms": "Granja"
             },
             "landuse/farmland": {
                 "name": "Terrenys de Granja"
@@ -1705,6 +1736,9 @@
             },
             "landuse/industrial": {
                 "name": "Zona Industrial"
+            },
+            "landuse/landfill": {
+                "name": "Abocador"
             },
             "landuse/meadow": {
                 "name": "Prat"
@@ -1722,7 +1756,8 @@
                 "name": "Comerç minorista"
             },
             "landuse/vineyard": {
-                "name": "Vinya"
+                "name": "Vinya",
+                "terms": "Vinyar, Vinyal, Vinyet, Vinya"
             },
             "leisure": {
                 "name": "Esbarjo"
@@ -1740,7 +1775,8 @@
                 "name": "Camp de golf"
             },
             "leisure/marina": {
-                "name": "Port esportiu"
+                "name": "Port esportiu",
+                "terms": "Port esportiu, Marina"
             },
             "leisure/park": {
                 "name": "Parc"
@@ -1822,13 +1858,15 @@
                 "name": "Punt referencial"
             },
             "man_made/tower": {
-                "name": "Torre"
+                "name": "Torre",
+                "terms": "Torre, Torres"
             },
             "man_made/wastewater_plant": {
                 "name": "Depuradora d'aigües residuals"
             },
             "man_made/water_tower": {
-                "name": "Torre d'aigua"
+                "name": "Torre d'aigua",
+                "terms": "Torre d'aigua, Dipòsit d'aigua, Dipòsit"
             },
             "man_made/water_well": {
                 "name": "Pou"
@@ -1855,7 +1893,8 @@
                 "name": "Badia"
             },
             "natural/beach": {
-                "name": "Platja"
+                "name": "Platja",
+                "terms": "Platja"
             },
             "natural/cliff": {
                 "name": "Penya-segat"
@@ -1888,13 +1927,16 @@
                 "name": "Font"
             },
             "natural/tree": {
-                "name": "Arbre"
+                "name": "Arbre",
+                "terms": "Arbre"
             },
             "natural/water": {
-                "name": "Aigua"
+                "name": "Aigua",
+                "terms": "Aigua"
             },
             "natural/water/lake": {
-                "name": "Llac"
+                "name": "Llac",
+                "terms": "Llac, Estany"
             },
             "natural/water/pond": {
                 "name": "Estany"
@@ -1909,16 +1951,19 @@
                 "name": "Bosc"
             },
             "office": {
-                "name": "Oficines"
+                "name": "Oficines",
+                "terms": "Oficina, Oficines"
             },
             "office/accountant": {
                 "name": "Contable"
             },
             "office/administrative": {
-                "name": "Oficina de tràmits locals"
+                "name": "Oficina de tràmits locals",
+                "terms": "Oficina administrativa"
             },
             "office/architect": {
-                "name": "Arquitecte"
+                "name": "Arquitecte",
+                "terms": "Arquitecte"
             },
             "office/company": {
                 "name": "Oficines de companyia"
@@ -1957,7 +2002,8 @@
                 "name": "Fisioterapeuta"
             },
             "office/political_party": {
-                "name": "Local de partit polític"
+                "name": "Local de partit polític",
+                "terms": "Partit polític"
             },
             "office/research": {
                 "name": "Oficines d'R+D"
@@ -1969,7 +2015,8 @@
                 "name": "Terapeuta"
             },
             "office/travel_agent": {
-                "name": "Agència de viatges"
+                "name": "Agència de viatges",
+                "terms": "Agència de viatges"
             },
             "piste": {
                 "name": "Pista d'esquí"
@@ -1978,13 +2025,15 @@
                 "name": "Lloc"
             },
             "place/city": {
-                "name": "Ciutat "
+                "name": "Ciutat ",
+                "terms": "Ciutat, Municipi"
             },
             "place/hamlet": {
                 "name": "Llogaret"
             },
             "place/island": {
-                "name": "Illa"
+                "name": "Illa",
+                "terms": "Illa, Illot, Illes, Illots"
             },
             "place/isolated_dwelling": {
                 "name": "Vivenda aïllada"
@@ -1999,7 +2048,8 @@
                 "name": "Poble"
             },
             "point": {
-                "name": "Punt"
+                "name": "Punt",
+                "terms": "Punt"
             },
             "power": {
                 "name": "Electricitat"
@@ -2017,13 +2067,16 @@
                 "name": "Piló de línia elèctrica"
             },
             "power/sub_station": {
-                "name": "Subestació"
+                "name": "Subestació",
+                "terms": "Subestació"
             },
             "power/tower": {
-                "name": "Torre de línia d'alta tensió"
+                "name": "Torre de línia d'alta tensió",
+                "terms": "Torre d'alta tensió, Torre d'alt voltatge"
             },
             "power/transformer": {
-                "name": "Transformador"
+                "name": "Transformador",
+                "terms": "Transformador"
             },
             "public_transport/platform": {
                 "name": "Plataforma"
@@ -2050,7 +2103,8 @@
                 "name": "Pas a nivell"
             },
             "railway/monorail": {
-                "name": "Monocarril"
+                "name": "Monocarril",
+                "terms": "Monoraíl"
             },
             "railway/narrow_gauge": {
                 "name": "Ferrocarril de via estreta"
@@ -2065,31 +2119,37 @@
                 "name": "Estació de tren"
             },
             "railway/subway": {
-                "name": "Metro"
+                "name": "Metro",
+                "terms": "Metro, Transport metropolità"
             },
             "railway/subway_entrance": {
-                "name": "Boca de Metro"
+                "name": "Boca de Metro",
+                "terms": "Boca de metro, Entrada de metro"
             },
             "railway/tram": {
                 "name": "Tramvia "
             },
             "relation": {
-                "name": "Relació"
+                "name": "Relació",
+                "terms": "Relació"
             },
             "route/ferry": {
                 "name": "Ruta de ferri"
             },
             "shop": {
-                "name": "Botiga"
+                "name": "Botiga",
+                "terms": "Botiga, Comerç"
             },
             "shop/alcohol": {
-                "name": "Botiga de licors"
+                "name": "Botiga de licors",
+                "terms": "Licoreria, Botiga de licors"
             },
             "shop/art": {
                 "name": "Botiga d'art"
             },
             "shop/bakery": {
-                "name": "Fleca"
+                "name": "Fleca",
+                "terms": "Forn de pa, Panaderia"
             },
             "shop/beauty": {
                 "name": "Botiga de cosmètics"
@@ -2098,13 +2158,15 @@
                 "name": "botiga de begudes"
             },
             "shop/bicycle": {
-                "name": "Botiga de bicicletes"
+                "name": "Botiga de bicicletes",
+                "terms": "Botiga de bicicletes"
             },
             "shop/bookmaker": {
                 "name": "Cusidor de llibres"
             },
             "shop/books": {
-                "name": "Llibreria"
+                "name": "Llibreria",
+                "terms": "Botiga de llibres, Llibreria"
             },
             "shop/boutique": {
                 "name": "Boutique"
@@ -2122,13 +2184,16 @@
                 "name": "Taller d'automòbils"
             },
             "shop/chemist": {
-                "name": "Farmàcia"
+                "name": "Farmàcia",
+                "terms": "Farmàcia"
             },
             "shop/clothes": {
-                "name": "Botiga de roba"
+                "name": "Botiga de roba",
+                "terms": "Botiga de roba"
             },
             "shop/computer": {
-                "name": "Botiga d'informàtica"
+                "name": "Botiga d'informàtica",
+                "terms": "Botiga d'informàtica, Botiga d'ordinadors"
             },
             "shop/confectionery": {
                 "name": "Confiteria"
@@ -2143,13 +2208,15 @@
                 "name": "Grans magatzems"
             },
             "shop/doityourself": {
-                "name": "Botiga de bricolatge"
+                "name": "Botiga de bricolatge",
+                "terms": "Botiga de bricolatge"
             },
             "shop/dry_cleaning": {
                 "name": "Centre de neteja en sec"
             },
             "shop/electronics": {
-                "name": "Botiga d'electrònica"
+                "name": "Botiga d'electrònica",
+                "terms": "Botiga d'electrònica, Botiga de components electrònics"
             },
             "shop/farm": {
                 "name": "Estand productiu"
@@ -2158,16 +2225,19 @@
                 "name": "Peixateria"
             },
             "shop/florist": {
-                "name": "Floristeria"
+                "name": "Floristeria",
+                "terms": "Floristeria, Botiga de plantes, Botiga de jardineria"
             },
             "shop/furniture": {
-                "name": "Botiga de mobles"
+                "name": "Botiga de mobles",
+                "terms": "Botiga de mobles"
             },
             "shop/garden_centre": {
                 "name": "Centre de jardineria"
             },
             "shop/gift": {
-                "name": "Botiga de regals"
+                "name": "Botiga de regals",
+                "terms": "Botiga de regals, Botiga d'objectes de regal"
             },
             "shop/greengrocer": {
                 "name": "Fruiteria"
@@ -2185,7 +2255,8 @@
                 "name": "Joieria"
             },
             "shop/kiosk": {
-                "name": "Quiosc"
+                "name": "Quiosc",
+                "terms": "Quiosc, Quiosquet, Paradeta"
             },
             "shop/laundry": {
                 "name": "Bugaderia"
@@ -2224,7 +2295,8 @@
                 "name": "Botiga de fotografia"
             },
             "shop/shoes": {
-                "name": "Sabateria"
+                "name": "Sabateria",
+                "terms": "Sabateria, Botiga de sabates, Sabater"
             },
             "shop/sports": {
                 "name": "Botiga d'esports"
@@ -2233,13 +2305,16 @@
                 "name": "Papereria"
             },
             "shop/supermarket": {
-                "name": "Supermercat"
+                "name": "Supermercat",
+                "terms": "Supermercat, Súper, Hipermercat, Híper"
             },
             "shop/toys": {
-                "name": "Botiga de joguines"
+                "name": "Botiga de joguines",
+                "terms": "Botiga de joguines, Botiga de jocs, Joguineria"
             },
             "shop/travel_agency": {
-                "name": "Agència de viatges"
+                "name": "Agència de viatges",
+                "terms": "Agència de viatges"
             },
             "shop/tyres": {
                 "name": "Botiga de pneumàtics"
@@ -2290,7 +2365,8 @@
                 "terms": "Informació, Oficina d'informació, Punt d'Informació"
             },
             "tourism/motel": {
-                "name": "Motel"
+                "name": "Motel",
+                "terms": "Motel"
             },
             "tourism/museum": {
                 "name": "Museu",
@@ -2310,25 +2386,31 @@
                 "terms": "Zoo, Zoològic"
             },
             "type/boundary": {
-                "name": "Límit"
+                "name": "Límit",
+                "terms": "Límit administratiu, Frontera, Vora"
             },
             "type/boundary/administrative": {
-                "name": "Límit administratiu"
+                "name": "Límit administratiu",
+                "terms": "Límit administratiu, Frontera"
             },
             "type/multipolygon": {
-                "name": "Multipolígon"
+                "name": "Multipolígon",
+                "terms": "Multipolígon"
             },
             "type/restriction": {
-                "name": "Restricció"
+                "name": "Restricció",
+                "terms": "Restricció"
             },
             "type/route": {
-                "name": "Ruta"
+                "name": "Ruta",
+                "terms": "Ruta"
             },
             "type/route/bicycle": {
                 "name": "Ruta ciclista"
             },
             "type/route/bus": {
-                "name": "Ruta d'autobús"
+                "name": "Ruta d'autobús",
+                "terms": "Ruta de bus, Línia de bus"
             },
             "type/route/detour": {
                 "name": "Desviació"
@@ -2368,7 +2450,8 @@
                 "name": "Via aqüífera"
             },
             "waterway/canal": {
-                "name": "Canal "
+                "name": "Canal ",
+                "terms": "Canal, Sèquia, Séquia"
             },
             "waterway/dam": {
                 "name": "Presa"
@@ -2380,7 +2463,8 @@
                 "name": "Torrent"
             },
             "waterway/river": {
-                "name": "Riu"
+                "name": "Riu",
+                "terms": "Riu"
             },
             "waterway/riverbank": {
                 "name": "Banc fluvial"

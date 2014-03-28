@@ -134,7 +134,8 @@
             "annotation": "Scalono {n} linii.",
             "not_eligible": "Te obiekty nie mogą zostać scalone.",
             "not_adjacent": "Tych linii nie da się scalić, gdyż nie są połączone.",
-            "restriction": "Te linie nie mogą zostać połączone, ponieważ przynajmniej jedna z nich jest członkiem relacji \"{relation}\"."
+            "restriction": "Te linie nie mogą zostać połączone, ponieważ przynajmniej jedna z nich jest członkiem relacji \"{relation}\".",
+            "incomplete_relation": "Tego obiektu nie można scalić, ponieważ przynajmniej jeden z nich nie został w pełni pobrany."
         },
         "move": {
             "title": "Przesuń",
@@ -332,6 +333,7 @@
     },
     "help": {
         "title": "Pomoc",
+        "help": "# Pomoc\n\nTo jest edytor [OpenStreetMap](http://www.openstreetmap.org/),\nwolnej i edytowalnej mapy świata. Możesz  go używać do dodawania i\naktualizacji danych w twoim rejonie, czyniąc otwartą mapę świata lepszą\ndla każdego.\n\nModyfikacje wprowadzone na tej mapie będą widoczne dla wszystkich\nużywających OpenStreetMap. Aby wprowadzić modyfikacje, potrzebujesz\n[darmowego konta OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[Edytor iD](http://ideditor.com/) jest projektem społecznościowym z\n[kodem dostępnym na GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Edycja i zapis\n\nTen edytor został zaprojektowany do pracy w trybie online i już go używasz poprzez stronę\ninternetową.\n\n### Wybieranie obiektów\n\nAby wybrać obiekt na mapie, na przykład droga, czy POI, kliknij go na mapie.\nSpowoduje to podświetlenie wybranego obiektu, otworzenie panelu zawierającego szczegóły\no nim i wyświetlenie menu z poleceniami, które możesz wykonać na obiekcie.\n\nWiele obiektów może zostać wybranych przez przytrzymanie wciśniętego klawisza 'Shift' i lewego klawisza myszy, z jednoczesnym przeciągnięciem zaznaczając interesujący nas obszar mapy. Spowoduje to wybór wszystkich obiektów zawartych w narysowanym prostokącie, umożliwiając Tobie wykonywanie działań na kilku obiektach naraz.\n\n### Zapisywanie modyfikacji\n\nGdy wprowadzisz zmiany, na przykład przez modyfikacje dróg, budynków i miejsc, są one\nprzechowywane lokalnie aż zapiszesz je na serwerze. Nie martw się, gdy popełnisz błąd - możesz\ncofnąć zmiany przez kliknięcie na przycisk cofnij i powtórzyć je poprzez kliknięcie na przycisk powtórz.\n\nKliknij 'Zapisz' aby skończyć grupę modyfikacji - na przykład, gdy skończyłeś pewien obszar miasta i\nchcesz zacząć następny. Będziesz miał wtedy szansę przejrzeć, co zrobiłeś, a edytor dostarczy pomocne\nsugestie i ostrzeżenia w razie, gdyby coś było nie tak z twoimi zmianami.\n\nJeśli wszystko dobrze wygląda, możesz podać krótki komentarz opisujący zmianę, którą wprowadziłeś\ni kliknąć 'Zapisz' ponownie, aby wysłać zmiany do [OpenStreetMap.org](http://www.openstreetmap.org/),\ngdzie będą one widoczne dla wszystkich użytkowników i dostępne dla innych do bazowania na nich i\ndalszego ulepszania.\n\nJeżeli nie możesz skończyć swoich modyfikacji w czasie jednej sesji, możesz opuścić okno edytora i\nwrócić później (na tym samym komputerze i w tej samej przeglądarce), a edytor zaoferuje ci przywrócenie\ntwojej pracy.\n",
         "roads": "# Drogi\n\nMożesz tworzyć, poprawiać i usuwać drogi używając tego edytora. Drogi mogą być wszelkiego rodzaju:\nścieżki, ulice, szlaki, ścieżki rowerowe i tak dalej - każdy często uczęszczany odcinek powinien dać się\nprzedstawić.\n\n### Zaznaczanie\n\nKliknij drogę, aby ją zaznaczyć. Obwiednia powinna stać się widoczna, wraz z małym menu\nnarzędziowym na mapie oraz panelem bocznym pokazującym więcej informacji na temat drogi.\n\n### Modyfikowanie\n\nCzęsto będziesz widział drogi, które nie są wyrównane ze zdjęciami satelitarnymi lub śladami GPS.\nMożesz dopasować te drogi tak, aby były we właściwym miejscu.\n\nNajpierw kliknij drogę, którą chcesz zmienić. Podświetli ją to oraz pokaże punkty kontrolne, które\nmożesz przesunąć w lepsze miejsce. Jeżeli chcesz dodać nowe punkty kontrolne, aby droga\nbyła bardziej szczegółowa, dwukrotnie kliknij część drogi bez punktu, a w tym miejscu nowy się\npojawi.\n\nJeżeli droga łączy się z inną drogą, ale nie jest prawidłowo połączona z nią na mapie, możesz\nprzeciągnąć jeden z puntów kontrolnych na drugą drogę w celu ich połączenia. Prawidłowe połączenia\ndróg są ważne dla mapy i kluczowe dla wyznaczania tras.\n\nMożesz też kliknąć narzędzie 'Przesuń' lub nacisnąć klawisz `M` aby przesunąć jednocześnie całą\ndrogę, a następnie kliknąć ponownie, aby zachować to przesunięcie.\n\n### Usuwanie\n\nGdy droga jest całkiem błędna - widzisz, że nie istnieje na zdjęciach satelitarnych (a najlepiej sam\nsprawdziłeś w terenie, że jej nie ma) - możesz usunąć ją. Uważaj, gdy usuwasz obiekty - wyniki usunięcia,\ntak jak każdej modyfikacji, są widoczne dla wszystkich, a zdjęcie satelitarne często nie są aktualne,\nwięc droga może być po prostu nowo wybudowana.\n\nMożesz usunąć drogę przez zaznaczenie jej, a następnie kliknięcie ikony kosza lub wciśnięcie\nklawisza 'Delete'.\n\n### Tworzenie\n\nGdzieś tam powinna być droga, ale jej nie ma? Kliknij przycisk 'Linia' w górnym lewym rogu edytora\nlub naciśnij klawisz '2' na klawiaturze, aby zacząć rysować linię.\n\nKliknij początek drogi na mapie, aby zacząć rysować. Jeżeli droga odchodzi od już istniejącej, zacznij\nprzez kliknięcie w miejscu, w którym się łączą.\n\nNastępnie klikaj na punktach wzdłuż drogi tak, aby biegła ona odpowiednio według zdjęć satelitarnych\nlub GPS. Jeżeli droga, którą rysujesz, krzyżuje się z inną, połącz je, klikając na punkcie przecięcia. Gdy\nskończysz rysować, dwukrotnie kliknij ostatni punkt lub naciśnij klawisz 'Enter' na klawiaturze.\n",
         "gps": "# GPS\n\nDane GPS są najbardziej zaufanym źródłem dla OpenStreetMap. Ten edytor obsługuje lokalne ślady -\npliki `.gpx` na twoim komputerze. Możesz zbierać tego rodzaju ślady GPS używając aplikacji na\nsmartfony lub sprzętu GPS.\n\nInformacje jak używać GPS-u do zbierania informacji o okolicy możesz znaleźć pod\n[Zbieranie informacji z GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby użyć śladu GPX do rysowania mapy, przeciągnij i upuść plik GPX na edytor. Jeżeli zostanie\nrozpoznany, zostanie dodany na mapę w postaci jaskrawej linii. Kliknij menu 'Ustawienia tła'\npo prawej stronie, aby włączyć, wyłączyć lub powiększyć do nowej warstwy GPX.\n\nŚlad GPX nie jest bezpośrednio wysyłany do OpenStreetMap - najlepiej użyć go do rysowania mapy,\nużywając go jako wzoru dla nowych obiektów, które dodasz. Aby wysłać ślad na serwer odwiedź stronę \n [Publiczne ślady GPS](http://www.openstreetmap.org/trace/create), będziesz mógł go udostępnić\ninnym użytkownikom.\n",
@@ -464,7 +466,6 @@
             "address": {
                 "label": "Adres",
                 "placeholders": {
-                    "housename": "Nazwa budynku",
                     "number": "123",
                     "street": "Ulica",
                     "city": "Miasto",
@@ -473,6 +474,33 @@
             },
             "admin_level": {
                 "label": "Poziom administracyjny"
+            },
+            "aerialway": {
+                "label": "Typ"
+            },
+            "aerialway/access": {
+                "label": "Dostęp"
+            },
+            "aerialway/bubble": {
+                "label": "osłona przeciwwiatrowa"
+            },
+            "aerialway/capacity": {
+                "label": "Przepustowość (na godzinę)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Czas trwania ( w minutach)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "Ogrzewany"
+            },
+            "aerialway/occupancy": {
+                "label": "ilość miejsc ",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Dostępność w sezonie letnim"
             },
             "aeroway": {
                 "label": "Typ"
@@ -507,9 +535,6 @@
             "building_area": {
                 "label": "Budynek"
             },
-            "cans": {
-                "label": "Przyjmowanie puszek"
-            },
             "capacity": {
                 "label": "Pojemność",
                 "placeholder": "50, 100, 200..."
@@ -523,9 +548,6 @@
                     "clockwise": "Zgodnie ze wskazówkami zegara",
                     "anticlockwise": "Przeciwnie do wskazówek zegara"
                 }
-            },
-            "clothes": {
-                "label": "Przyjmowanie ciuchów"
             },
             "collection_times": {
                 "label": "Czas zbierania"
@@ -551,6 +573,9 @@
             "description": {
                 "label": "Opis"
             },
+            "electrified": {
+                "label": "Elektryfikacja"
+            },
             "elevation": {
                 "label": "Wysokość"
             },
@@ -573,6 +598,9 @@
             "fixme": {
                 "label": "Napraw mnie"
             },
+            "gauge": {
+                "label": "Wskaźnik"
+            },
             "generator/method": {
                 "label": "Metoda"
             },
@@ -581,9 +609,6 @@
             },
             "generator/type": {
                 "label": "Typ"
-            },
-            "glass": {
-                "label": "Przyjmowanie szkła"
             },
             "highway": {
                 "label": "Typ"
@@ -676,6 +701,15 @@
                 "label": "Telefon",
                 "placeholder": "+31 42 123 4567"
             },
+            "piste/difficulty": {
+                "label": "Stopień trudności"
+            },
+            "piste/grooming": {
+                "label": "Ratrakowanie"
+            },
+            "piste/type": {
+                "label": "Typ"
+            },
             "place": {
                 "label": "Typ"
             },
@@ -743,6 +777,9 @@
                     "cutting": "Wykop"
                 }
             },
+            "studio_type": {
+                "label": "Typ"
+            },
             "supervised": {
                 "label": "Strzeżone"
             },
@@ -800,6 +837,36 @@
             "address": {
                 "name": "Adres",
                 "terms": "namiar, numer"
+            },
+            "aerialway": {
+                "name": "Wyciąg narciarski"
+            },
+            "aerialway/cable_car": {
+                "name": "Kolejka górska"
+            },
+            "aerialway/chair_lift": {
+                "name": "Wyciag krzesełkowy"
+            },
+            "aerialway/gondola": {
+                "name": "Gondola"
+            },
+            "aerialway/magic_carpet": {
+                "name": "wyciąg narciarski dywanowy"
+            },
+            "aerialway/platter": {
+                "name": "Wyciag talerzykowy"
+            },
+            "aerialway/pylon": {
+                "name": "Podpora wyciagu narciarskiego"
+            },
+            "aerialway/rope_tow": {
+                "name": "Wyrwirączka"
+            },
+            "aerialway/station": {
+                "name": "Stacja wyciagu narciarskiego"
+            },
+            "aerialway/t-bar": {
+                "name": "Wyciag orczykowy podwójny"
             },
             "aeroway": {
                 "name": "Szlak powietrzny"
@@ -894,6 +961,9 @@
                 "name": "Kino",
                 "terms": "duży ekran,drive-in,film,ruchomy obraz,pokaz zdjęć,zdjęcia,pokaz,silver screen"
             },
+            "amenity/clinic": {
+                "name": "Klinika"
+            },
             "amenity/clock": {
                 "name": "Zegar"
             },
@@ -904,6 +974,12 @@
             "amenity/courthouse": {
                 "name": "Sąd",
                 "terms": "sąd,sprawiedliwość,trybunał"
+            },
+            "amenity/dentist": {
+                "name": "Dentysta"
+            },
+            "amenity/doctor": {
+                "name": "Doktor"
             },
             "amenity/drinking_water": {
                 "name": "Woda pitna",
@@ -932,14 +1008,6 @@
             "amenity/grave_yard": {
                 "name": "Cmentarz",
                 "terms": "cmentarz,pochówek"
-            },
-            "amenity/hospital": {
-                "name": "Szpital",
-                "terms": "przychodnia,klinika,pomoc,służba zdrowia,hospicjum,ambulatorium,instytucja,dom opieki,sanatorium,chirurgia,oddział"
-            },
-            "amenity/kindergarten": {
-                "name": "Przedszkole",
-                "terms": "zerówka,żłobek,opieka nad dzieckiem"
             },
             "amenity/library": {
                 "name": "Biblioteka",
@@ -999,10 +1067,6 @@
                 "name": "Restauracja",
                 "terms": "bar,kawiarnia,stołówka,jadalnia,drive-in,knajpa,jadłodajnia,fast food,grill,gospoda,klub nocny,pizzeria"
             },
-            "amenity/school": {
-                "name": "Szkoła",
-                "terms": "szkoła"
-            },
             "amenity/shelter": {
                 "name": "Schronienie"
             },
@@ -1014,6 +1078,9 @@
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Schronisko dla bezdomnych"
+            },
+            "amenity/studio": {
+                "name": "Studio"
             },
             "amenity/swimming_pool": {
                 "name": "Basen",
@@ -1136,12 +1203,27 @@
                 "name": "Apartamenty",
                 "terms": "blok,kamienica"
             },
+            "building/barn": {
+                "name": "Stodoła"
+            },
+            "building/bunker": {
+                "name": "Bunkier"
+            },
+            "building/cathedral": {
+                "name": "Katedra"
+            },
+            "building/chapel": {
+                "name": "Kaplica"
+            },
             "building/church": {
                 "name": "Kościół"
             },
             "building/commercial": {
                 "name": "Nieruchomość komercyjna",
                 "terms": "sklep,komercyjny,sprzedaż,handlowy"
+            },
+            "building/dormitory": {
+                "name": "Akademik"
             },
             "building/entrance": {
                 "name": "Wejście",
@@ -1150,6 +1232,12 @@
             "building/garage": {
                 "name": "Garaż",
                 "terms": "garaż"
+            },
+            "building/garages": {
+                "name": "Garaże"
+            },
+            "building/greenhouse": {
+                "name": "Szklarnia"
             },
             "building/house": {
                 "name": "Dom",
@@ -1163,12 +1251,45 @@
                 "name": "Budynek przymysłowy",
                 "terms": "przemysłowy,produkcyjny,fabryczny,industrialny"
             },
+            "building/public": {
+                "name": "Budynek publiczny"
+            },
             "building/residential": {
                 "name": "Budynek mieszkalny",
                 "terms": "blok, kamienica, dom, czynszówka"
             },
+            "building/roof": {
+                "name": "Zadaszenie"
+            },
+            "building/shed": {
+                "name": "Szopa"
+            },
+            "building/stable": {
+                "name": "Stajnia"
+            },
+            "building/train_station": {
+                "name": "Stacja kolejowa"
+            },
             "building/warehouse": {
                 "name": "Magazyn"
+            },
+            "craft/basket_maker": {
+                "name": "Wikliniarz"
+            },
+            "craft/beekeeper": {
+                "name": "Pszczelarz"
+            },
+            "craft/blacksmith": {
+                "name": "Kowal"
+            },
+            "craft/bookbinder": {
+                "name": "Introligator"
+            },
+            "craft/brewery": {
+                "name": "Gorzelnia"
+            },
+            "craft/caterer": {
+                "name": "Żywieniowiec"
             },
             "craft/clockmaker": {
                 "name": "Zegarmistrz"
@@ -1188,6 +1309,9 @@
             "craft/glaziery": {
                 "name": "Szklarz"
             },
+            "craft/handicraft": {
+                "name": "Rzemiosło"
+            },
             "craft/jeweler": {
                 "name": "Jubiler"
             },
@@ -1206,11 +1330,59 @@
             "craft/photographic_labratory": {
                 "name": "Laboratorium fotograficzne"
             },
+            "craft/plasterer": {
+                "name": "Tynkarz"
+            },
             "craft/plumber": {
                 "name": "Hydraulik"
             },
+            "craft/pottery": {
+                "name": "Garncarstwo"
+            },
+            "craft/rigger": {
+                "name": "Takielarz"
+            },
             "craft/roofer": {
                 "name": "Dekarz"
+            },
+            "craft/saddler": {
+                "name": "Rymarz"
+            },
+            "craft/sailmaker": {
+                "name": "Żaglomistrz"
+            },
+            "craft/sawmill": {
+                "name": "Tartak"
+            },
+            "craft/sculpter": {
+                "name": "Rzeźbiarz"
+            },
+            "craft/shoemaker": {
+                "name": "Szewc"
+            },
+            "craft/stonemason": {
+                "name": "Zakład kamieniarski"
+            },
+            "craft/sweep": {
+                "name": "Kominiarz"
+            },
+            "craft/tailor": {
+                "name": "Krawiec"
+            },
+            "craft/tiler": {
+                "name": "Dekarz"
+            },
+            "craft/tinsmith": {
+                "name": "Blacharz"
+            },
+            "craft/upholsterer": {
+                "name": "Tapicer"
+            },
+            "craft/watchmaker": {
+                "name": "Zegarmistrz"
+            },
+            "embankment": {
+                "name": "Nasyp"
             },
             "emergency/ambulance_station": {
                 "name": "Stacja pogotowia ratunkowego",
@@ -1440,6 +1612,9 @@
                 "name": "Teren rolny (orny)",
                 "terms": "Farma, gospodarstwo, zagroda"
             },
+            "landuse/farmland": {
+                "name": "Pole uprawne"
+            },
             "landuse/farmyard": {
                 "name": "Zabudowa rolnicza",
                 "terms": "podwórze gospodarskie"
@@ -1565,6 +1740,9 @@
             "man_made/cutline": {
                 "name": "Wycinka"
             },
+            "man_made/embankment": {
+                "name": "Nasyp"
+            },
             "man_made/lighthouse": {
                 "name": "Latarnia morska",
                 "terms": "latarnia"
@@ -1599,6 +1777,18 @@
             },
             "man_made/water_works": {
                 "name": "Filtracja wody"
+            },
+            "military/airfield": {
+                "name": "Lotnisko"
+            },
+            "military/barracks": {
+                "name": "Koszary"
+            },
+            "military/bunker": {
+                "name": "Bunkier"
+            },
+            "military/range": {
+                "name": "Poligon wojskowy"
             },
             "natural": {
                 "name": "Natura"
@@ -1641,7 +1831,8 @@
                 "terms": "rumowisko"
             },
             "natural/scrub": {
-                "name": "Zarośla"
+                "name": "Zarośla",
+                "terms": "Krzaki, zarośla"
             },
             "natural/spring": {
                 "name": "Źródło"
@@ -1677,9 +1868,11 @@
                 "name": "Biuro"
             },
             "office/accountant": {
+                "name": "Księgowy",
                 "terms": "księgowy"
             },
             "office/architect": {
+                "name": "Architekt",
                 "terms": "architekt"
             },
             "office/educational_institution": {
@@ -1694,15 +1887,30 @@
             "office/insurance": {
                 "name": "Biuro ubezpieczeń"
             },
+            "office/newspaper": {
+                "name": "Gazeta"
+            },
+            "office/ngo": {
+                "name": "Biuro organizacji pożytku publicznego"
+            },
+            "office/physician": {
+                "name": "Lekarz"
+            },
             "office/political_party": {
                 "name": "Partia polityczna",
                 "terms": "partia polityczna"
+            },
+            "office/telecommunication": {
+                "name": "Biuro firmy telekomunikacyjnej"
             },
             "office/therapist": {
                 "name": "Terapeuta"
             },
             "office/travel_agent": {
                 "name": "Biuro podróży"
+            },
+            "piste": {
+                "name": "Trasa narciarska"
             },
             "place": {
                 "name": "Miejsce"
@@ -1746,6 +1954,9 @@
                 "name": "Linia elektryczna",
                 "terms": "lina wysokiego napięcia, lina energetyczna"
             },
+            "power/minor_line": {
+                "name": "Linia energetyczna o niskim stopniu ważności"
+            },
             "power/pole": {
                 "name": "Słup elektryczny"
             },
@@ -1771,6 +1982,9 @@
             },
             "railway/disused": {
                 "name": "Nieużywany tor"
+            },
+            "railway/funicular": {
+                "name": "Kolejka"
             },
             "railway/halt": {
                 "name": "Stacja kolejowa",

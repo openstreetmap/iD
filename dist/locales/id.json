@@ -418,7 +418,6 @@
             "address": {
                 "label": "Alamat",
                 "placeholders": {
-                    "housename": "Nama rumah",
                     "number": "123",
                     "street": "Jalan",
                     "city": "Kota",
@@ -767,14 +766,6 @@
                 "name": "Kuburan",
                 "terms": "Kuburan"
             },
-            "amenity/hospital": {
-                "name": "Rumah Sakit",
-                "terms": "Rumah Sakit, Puskesmas, Klinik"
-            },
-            "amenity/kindergarten": {
-                "name": "Taman Kanak-kanak",
-                "terms": "Taman Kanak kanak,"
-            },
             "amenity/library": {
                 "name": "Perpustakaan",
                 "terms": "Perpustakaan"
@@ -820,10 +811,6 @@
             "amenity/restaurant": {
                 "name": "Restoran",
                 "terms": "Restoran"
-            },
-            "amenity/school": {
-                "name": "Sekolah",
-                "terms": "Sekolah"
             },
             "amenity/swimming_pool": {
                 "name": "Kolam Renang",

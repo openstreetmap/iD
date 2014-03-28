@@ -68,10 +68,6 @@
                 "name": "Petrol Station",
                 "terms": "gas, fuel, propane, diesel, lng, cng, biodiesel"
             },
-            "amenity/kindergarten": {
-                "name": "Nursery",
-                "terms": "Nursery, Pre-school, preschool, kingergarden"
-            },
             "amenity/post_box": {
                 "name": "Post Box",
                 "terms": "Mailbox"

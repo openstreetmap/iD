@@ -464,7 +464,6 @@
             "address": {
                 "label": "地埗",
                 "placeholders": {
-                    "housename": "屋名",
                     "number": "一百二十三號",
                     "street": "街",
                     "city": "城",
@@ -534,9 +533,6 @@
             "building_area": {
                 "label": "屋宇"
             },
-            "cans": {
-                "label": "收罐"
-            },
             "capacity": {
                 "label": "容納",
                 "placeholder": "50, 100, 200..."
@@ -550,9 +546,6 @@
                     "clockwise": "順時針",
                     "anticlockwise": "逆時針"
                 }
-            },
-            "clothes": {
-                "label": "收衫"
             },
             "collection_times": {
                 "label": "收集時間"
@@ -614,9 +607,6 @@
             },
             "generator/type": {
                 "label": "類"
-            },
-            "glass": {
-                "label": "收玻璃"
             },
             "golf_hole": {
                 "label": "參攷",
@@ -709,9 +699,6 @@
             },
             "operator": {
                 "label": "承辦商"
-            },
-            "paper": {
-                "label": "收紙"
             },
             "par": {
                 "label": "標準桿",
@@ -1009,14 +996,6 @@
                 "name": "墳地",
                 "terms": "Graveyard,墓地,墳地,墳場"
             },
-            "amenity/hospital": {
-                "name": "醫院",
-                "terms": "Hospital,療養院,醫學中心,醫療院,醫院"
-            },
-            "amenity/kindergarten": {
-                "name": "幼稚園",
-                "terms": "Kindergarten,幼兒園,幼稚園,托兒所"
-            },
             "amenity/library": {
                 "name": "圖書館",
                 "terms": "Library,圖書館,拉記"
@@ -1080,10 +1059,6 @@
             "amenity/restaurant": {
                 "name": "餐廳",
                 "terms": "Restaurant,茶樓,酒家,酒樓,飯店,飯館,餐廳,餐館"
-            },
-            "amenity/school": {
-                "name": "學校",
-                "terms": "School,中學,國中,國小,學校,小學,校區,校園,高中"
             },
             "amenity/shelter": {
                 "name": "天遮或亭",
