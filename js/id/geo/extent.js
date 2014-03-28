@@ -22,6 +22,10 @@ _.extend(iD.geo.Extent.prototype, {
                               Math.max(obj[1][1], this[1][1])]);
     },
 
+    area: function() {
+        return Math.abs((this[1][0] - this[0][0]) * (this[1][1] - this[0][1]));
+    },
+
     center: function() {
         return [(this[0][0] + this[1][0]) / 2,
                 (this[0][1] + this[1][1]) / 2];
