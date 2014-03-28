@@ -55,6 +55,7 @@ en:
         line: Made a line circular.
         area: Made an area circular.
       not_closed: This can't be made circular because it's not a loop.
+      too_large: This can't be made circular because it extends too far beyond the viewable map.
     orthogonalize:
       title: Square
       description:
@@ -65,6 +66,7 @@ en:
         line: Squared the corners of a line.
         area: Squared the corners of an area.
       not_squarish: This can't be made square because it is not squarish.
+      too_large: This can't be made square because it extends too far beyond the viewable map.
     straighten:
       title: Straighten
       description: Straighten this line.

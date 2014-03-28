@@ -51,6 +51,12 @@ describe("iD.geo.Extent", function () {
         });
     });
 
+    describe("#area", function () {
+        it("returns the area", function () {
+           expect(iD.geo.Extent([0, 0], [5, 10]).area()).to.eql(50);
+        });
+    });
+
     describe("#padByMeters", function () {
         it("does not change centerpoint of an extent", function () {
            var min = [0, 0], max = [5, 10];
