@@ -6849,6 +6849,29 @@
         },
         "name": "Florist"
     },
+    "shop/funeral_directors": {
+        "icon": "cemetery",
+        "fields": [
+            "address",
+            "building_area",
+            "religion"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "funeral_directors"
+        },
+        "terms": [
+            "undertaker",
+            "funeral parlour",
+            "funeral parlor",
+            "memorial home"
+        ],
+        "name": "Funeral Home"
+    },
     "shop/furniture": {
         "icon": "shop",
         "fields": [
