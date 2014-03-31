@@ -6,7 +6,7 @@ describe("iD.actions.Disconnect", function () {
             expect(iD.actions.Disconnect('a').disabled(graph)).to.equal('not_connected');
         });
 
-        it("returns falsy for a node appearing twice in the same way", function () {
+        it("returns 'not_connected' for a node appearing twice in the same way", function () {
             //    a ---- b
             //    |      |
             //    d ---- c
@@ -17,7 +17,7 @@ describe("iD.actions.Disconnect", function () {
                 iD.Node({id: 'd'}),
                 iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
-            expect(iD.actions.Disconnect('a').disabled(graph)).not.to.be.ok;
+            expect(iD.actions.Disconnect('a').disabled(graph)).to.equal('not_connected');
         });
 
         it("returns falsy for a node shared by two or more ways", function () {
@@ -41,7 +41,7 @@ describe("iD.actions.Disconnect", function () {
                     iD.Node({id: 'a'}),
                     iD.Node({id: 'b'}),
                     iD.Node({id: 'c'}),
-                    iD.Node({id: 'c'}),
+                    iD.Node({id: 'd'}),
                     iD.Node({id: '*'}),
                     iD.Way({id: '-', nodes: ['a', '*', 'b']}),
                     iD.Way({id: '|', nodes: ['*', 'd']})
@@ -107,25 +107,6 @@ describe("iD.actions.Disconnect", function () {
         expect(graph.entity('-').nodes).to.eql(['a', 'e']);
         expect(graph.entity('=').nodes).to.eql(['b', 'c']);
         expect(graph.entity('|').nodes).to.eql(['d', 'b']);
-    });
-
-    it("replaces later occurrences in a self-intersecting way", function() {
-        // Situtation:
-        //  a ---- b
-        //   \_    |
-        //     \__ c
-        //  Disconnect at a
-        //
-        // Expected result:
-        //  a ---- b ---- c ---- d
-        var graph = iD.Graph([
-                iD.Node({id: 'a'}),
-                iD.Node({id: 'b'}),
-                iD.Node({id: 'c'}),
-                iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'a']})
-            ]);
-        graph = iD.actions.Disconnect('a', 'd')(graph);
-        expect(graph.entity('w').nodes).to.eql(['a', 'b', 'c', 'd']);
     });
 
     it("disconnects a way with multiple intersection points", function() {
