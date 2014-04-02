@@ -1412,6 +1412,9 @@ en:
       place/neighbourhood: 
         name: Neighborhood
         terms: "<translate with synonyms or related terms for 'Neighborhood', separated by commas>"
+      place/suburb: 
+        name: Borough
+        terms: "<translate with synonyms or related terms for 'Borough', separated by commas>"
       place/town: 
         name: Town
         terms: "<translate with synonyms or related terms for 'Town', separated by commas>"

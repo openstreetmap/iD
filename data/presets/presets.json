@@ -5985,6 +5985,21 @@
         ],
         "name": "Neighborhood"
     },
+    "place/suburb": {
+        "icon": "triangle-stroked",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "place": "suburb"
+        },
+        "terms": [
+            "Boro",
+            "Quarter"
+        ],
+        "name": "Borough"
+    },
     "place/town": {
         "icon": "town",
         "geometry": [
@@ -8116,7 +8131,6 @@
     "waterway/stream": {
         "icon": "waterway-stream",
         "fields": [
-            "layer",
             "tunnel"
         ],
         "geometry": [

@@ -1,0 +1,15 @@
+{
+    "icon": "triangle-stroked",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "place": "suburb"
+    },
+    "terms": [
+        "Boro",
+        "Quarter"
+    ],
+    "name": "Borough"
+}
