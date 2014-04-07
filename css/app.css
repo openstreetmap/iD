@@ -2017,7 +2017,7 @@ img.wiki-image {
     height:18px;
 }
 
-.background-control .layer-toggle-gpx button {
+.background-control .layer-list button {
     float: right;
     height: 100%;
     width: 10%;
@@ -2025,11 +2025,11 @@ img.wiki-image {
     border-radius: 0;
 }
 
-.background-control .layer-toggle-gpx button .icon {
+.background-control .layer-list button .icon {
     opacity: 0.5;
 }
 
-.background-control .layer-toggle-gpx button.layer-extent {
+.background-control .layer-list button:first-of-type {
     border-radius: 0 3px 3px 0;
 }
 

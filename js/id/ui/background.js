@@ -7,7 +7,8 @@ iD.ui.Background = function(context) {
             ['right', [-1, 0]],
             ['bottom', [0, 1]]],
         opacityDefault = (context.storage('background-opacity') !== null) ?
-            (+context.storage('background-opacity')) : 0.5;
+            (+context.storage('background-opacity')) : 0.5,
+        customTemplate;
 
     // Can be 0 from <1.3.0 use or due to issue #1923.
     if (opacityDefault === 0) opacityDefault = 0.5;
@@ -47,15 +48,20 @@ iD.ui.Background = function(context) {
             selectLayer();
         }
 
-        function clickCustom() {
+        function editCustom() {
             d3.event.preventDefault();
-            var template = window.prompt(t('background.custom_prompt'));
-            if (!template || template.indexOf('google.com') !== -1 ||
-               template.indexOf('googleapis.com') !== -1 ||
-               template.indexOf('google.ru') !== -1) {
+            var template = window.prompt(t('background.custom_prompt'), customTemplate);
+            if (!template ||
+                template.indexOf('google.com') !== -1 ||
+                template.indexOf('googleapis.com') !== -1 ||
+                template.indexOf('google.ru') !== -1) {
                 selectLayer();
                 return;
             }
+            setCustom(template);
+        }
+
+        function setCustom(template) {
             context.background().baseLayerSource(iD.BackgroundSource.Custom(template));
             selectLayer();
         }
@@ -119,6 +125,11 @@ iD.ui.Background = function(context) {
                 .property('checked', showsGpx);
 
             selectLayer();
+
+            var source = context.background().baseLayerSource();
+            if (source.id === 'custom') {
+                customTemplate = source.template;
+            }
         }
 
         function clickNudge(d) {
@@ -225,12 +236,27 @@ iD.ui.Background = function(context) {
             .attr('class', 'custom_layer')
             .datum(iD.BackgroundSource.Custom());
 
+        custom.append('button')
+            .attr('class', 'layer-browse')
+            .call(bootstrap.tooltip()
+                .title(t('background.custom_button'))
+                .placement('left'))
+            .on('click', editCustom)
+            .append('span')
+            .attr('class', 'icon geocode');
+
         var label = custom.append('label');
 
         label.append('input')
             .attr('type', 'radio')
             .attr('name', 'layers')
-            .on('change', clickCustom);
+            .on('change', function () {
+                if (customTemplate) {
+                    setCustom(customTemplate);
+                } else {
+                    editCustom();
+                }
+            });
 
         label.append('span')
             .text(t('background.custom'));
