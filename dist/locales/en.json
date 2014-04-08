@@ -1547,9 +1547,9 @@
                 "name": "Photographer",
                 "terms": "photographer"
             },
-            "craft/photographic_labratory": {
-                "name": "Photographic Labratory",
-                "terms": "photographic labratory,film developer"
+            "craft/photographic_laboratory": {
+                "name": "Photographic Laboratory",
+                "terms": "photographic laboratory,film developer"
             },
             "craft/plasterer": {
                 "name": "Plasterer",

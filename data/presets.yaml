@@ -833,9 +833,9 @@ en:
       craft/photographer: 
         name: Photographer
         terms: "<translate with synonyms or related terms for 'Photographer', separated by commas>"
-      craft/photographic_labratory: 
-        name: Photographic Labratory
-        terms: "<translate with synonyms or related terms for 'Photographic Labratory', separated by commas>"
+      craft/photographic_laboratory: 
+        name: Photographic Laboratory
+        terms: "<translate with synonyms or related terms for 'Photographic Laboratory', separated by commas>"
       craft/plasterer: 
         name: Plasterer
         terms: "<translate with synonyms or related terms for 'Plasterer', separated by commas>"
