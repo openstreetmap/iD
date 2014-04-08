@@ -1,15 +1,15 @@
 {
-    "name": "Photographic Labratory",
+    "name": "Photographic Laboratory",
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "photographic labratory",
+        "photographic laboratory",
         "film developer"
     ],
     "tags": {
-        "craft": "photographic_labratory"
+        "craft": "photographic_laboratory"
     },
     "icon": "camera",
     "fields": [
