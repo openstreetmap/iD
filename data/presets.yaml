@@ -1649,6 +1649,9 @@ en:
       shop/photo: 
         name: Photography Store
         terms: "<translate with synonyms or related terms for 'Photography Store', separated by commas>"
+      shop/seafood: 
+        name: Seafood Shop
+        terms: "<translate with synonyms or related terms for 'Seafood Shop', separated by commas>"
       shop/shoes: 
         name: Shoe Store
         terms: "<translate with synonyms or related terms for 'Shoe Store', separated by commas>"

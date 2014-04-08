@@ -2635,6 +2635,10 @@
                 "name": "Photography Store",
                 "terms": ""
             },
+            "shop/seafood": {
+                "name": "Seafood Shop",
+                "terms": "fishmonger"
+            },
             "shop/shoes": {
                 "name": "Shoe Store",
                 "terms": ""

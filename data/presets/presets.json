@@ -6861,7 +6861,8 @@
         "tags": {
             "shop": "fishmonger"
         },
-        "name": "Fishmonger"
+        "name": "Fishmonger",
+        "searchable": false
     },
     "shop/florist": {
         "icon": "shop",
@@ -7266,6 +7267,26 @@
             "shop": "photo"
         },
         "name": "Photography Store"
+    },
+    "shop/seafood": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "seafood"
+        },
+        "terms": [
+            "fishmonger"
+        ],
+        "name": "Seafood Shop"
     },
     "shop/shoes": {
         "icon": "shop",

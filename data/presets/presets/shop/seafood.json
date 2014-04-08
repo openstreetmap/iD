@@ -11,8 +11,10 @@
         "area"
     ],
     "tags": {
-        "shop": "fishmonger"
+        "shop": "seafood"
     },
-    "name": "Fishmonger",
-    "searchable": false
+    "terms": [
+        "fishmonger"
+    ],
+    "name": "Seafood Shop"
 }
