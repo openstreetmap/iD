@@ -32,12 +32,15 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
         // added if necessary.
         for (var i = 0; i < keyPoints.length; i++) {
             var nextKeyNodeIndex = (i + 1) % keyNodes.length,
-                startNodeIndex = nodes.indexOf(keyNodes[i]),
-                endNodeIndex = nodes.indexOf(keyNodes[nextKeyNodeIndex]),
+                startNode = keyNodes[i],
+                endNode = keyNodes[nextKeyNodeIndex],
+                startNodeIndex = nodes.indexOf(startNode),
+                endNodeIndex = nodes.indexOf(endNode),
                 numberNewPoints = -1,
                 indexRange = endNodeIndex - startNodeIndex,
                 distance, totalAngle, eachAngle, startAngle, endAngle,
-                angle, loc, node, j;
+                angle, loc, node, j,
+                inBetweenNodes = [];
 
             if (indexRange < 0) {
                 indexRange += nodes.length;
@@ -87,7 +90,38 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
                 graph = graph.replace(node);
 
                 nodes.splice(endNodeIndex + j, 0, node);
+                inBetweenNodes.push(node.id);
             }
+
+            // Check for other ways that share these keyNodes..
+            // If keyNodes are adjacent in both ways,
+            // we can add inBetween nodes to that shared way too..
+            if (indexRange === 1 && inBetweenNodes.length) {
+                var startIndex1 = way.nodes.lastIndexOf(startNode.id),
+                    endIndex1 = way.nodes.lastIndexOf(endNode.id),
+                    wayDirection1 = (endIndex1 - startIndex1);
+                if (wayDirection1 < -1) { wayDirection1 = 1;}
+
+                _.each(_.without(graph.parentWays(keyNodes[i]), way), function(sharedWay) {
+                    if (sharedWay.areAdjacent(startNode.id, endNode.id)) {
+                        var startIndex2 = sharedWay.nodes.lastIndexOf(startNode.id),
+                            endIndex2 = sharedWay.nodes.lastIndexOf(endNode.id),
+                            wayDirection2 = (endIndex2 - startIndex2)
+                            insertAt = endIndex2;
+                        if (wayDirection2 < -1) { wayDirection2 = 1;}
+
+                        if (wayDirection1 !== wayDirection2) {
+                            inBetweenNodes.reverse();
+                            insertAt = startIndex2;
+                        }
+                        for (j = 0; j < inBetweenNodes.length; j++) {
+                            sharedWay = sharedWay.addNode(inBetweenNodes[j], insertAt + j);
+                        }
+                        graph = graph.replace(sharedWay);
+                    }
+                });
+            }
+
         }
 
         // update the way to have all the new nodes
