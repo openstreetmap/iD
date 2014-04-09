@@ -1,3 +1,11 @@
+## 1.3.9
+
+* Prevent closed areas from invalid disconnection (#2178)
+* Remove layer field from waterway=stream
+* Add preset for place=suburb and shop=seafood
+* Remember last custom tile layer (#2094)
+* Mapbox Satellite now supports z17-z19
+
 ## 1.3.8
 
 * Disable circularize and orthogonalize operations when way is <80% contained in the viewport
