@@ -264,7 +264,6 @@
         "percent_brightness": "{opacity}% viditelnost",
         "none": "Žádné",
         "custom": "Vlastní",
-        "custom_prompt": "Vložte šablonu adres dlaždic. Lze použít tokeny {z}, {x}, {y} pro schéma Z/X/Y a {u} pro hierarchické schéma quadtile.",
         "fix_misalignment": "Vyrovnat posunutí pozadí",
         "reset": "vrátit na začátek"
     },
@@ -1366,10 +1365,6 @@
             "craft/photographer": {
                 "name": "Fotograf",
                 "terms": "fotograf,fotografie,ateliér"
-            },
-            "craft/photographic_labratory": {
-                "name": "Fotolaboratoř",
-                "terms": "fotolaboratoř,fotografická laboratoř,vyvolání,film"
             },
             "craft/plasterer": {
                 "name": "Štukatér",

@@ -264,7 +264,6 @@
         "percent_brightness": "{opacity}% ryškumas",
         "none": "Jokio",
         "custom": "Savas",
-        "custom_prompt": "Įveskite kaladėlių šabloną. Galimi raktažodžiai yra {z}, {x}, {y} Z/X/Y schemai arba {u} quadtile schemai.",
         "fix_misalignment": "Taisyti poziciją",
         "reset": "iš naujo"
     },

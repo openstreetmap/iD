@@ -264,7 +264,6 @@
         "percent_brightness": "{opacity}% 光",
         "none": "無",
         "custom": "自訂",
-        "custom_prompt": "入個格模。有效字符係{z}、{x}、{y}對應Z/X/Y制及{u}對應四分格制。",
         "fix_misalignment": "校正對位誤差",
         "reset": "重設"
     },

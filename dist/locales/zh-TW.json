@@ -71,7 +71,8 @@
                 "line": " 將線段變成環形。",
                 "area": "將一區域製成環形。"
             },
-            "not_closed": "非圈狀物件，不能環形化。"
+            "not_closed": "非圈狀物件，不能環形化。",
+            "too_large": "因物件尚未有足夠部份正在顯示，不能環形化。"
         },
         "orthogonalize": {
             "title": "方角化",
@@ -84,7 +85,8 @@
                 "line": "已將線段上的彎角換成直角。",
                 "area": "已將區域的彎角換成直角。"
             },
-            "not_squarish": "物件無法被方角化，因為它並非近似方形。"
+            "not_squarish": "物件無法被方角化，因為它並非近似方形。",
+            "too_large": "因物件尚未有足夠部份正在顯示，不能被方角化。"
         },
         "straighten": {
             "title": "拉直",
@@ -265,7 +267,6 @@
         "percent_brightness": "{opacity}%的光度",
         "none": "無",
         "custom": "客製化",
-        "custom_prompt": "輸入地圖影像區塊的模版。以 Z/X/Y 方式存取區塊的伺服器，可在模版中使用{z}, {x}, {y}作參數，而以quadtile存取區塊的伺服器，則可使用{u}作參數。",
         "fix_misalignment": "校準",
         "reset": "重設"
     },
@@ -626,6 +627,9 @@
             },
             "historic": {
                 "label": "種類"
+            },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -1340,9 +1344,6 @@
             },
             "craft/photographer": {
                 "name": "攝影店"
-            },
-            "craft/photographic_labratory": {
-                "name": "沖印店"
             },
             "craft/plasterer": {
                 "name": "批盪工程"
@@ -2084,6 +2085,9 @@
             },
             "shop/florist": {
                 "name": "花店"
+            },
+            "shop/funeral_directors": {
+                "name": "殯儀館"
             },
             "shop/furniture": {
                 "name": "傢具店"

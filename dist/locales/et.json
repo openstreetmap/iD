@@ -239,7 +239,6 @@
         "percent_brightness": "{opacity}% heledus",
         "none": "Puudub",
         "custom": "Kohandatud",
-        "custom_prompt": "Sisesta kohandatud tausta URL. Kasutatavad muutujad on {z}, {x}, {y} Z/X/Y skeemi jaoks ja {u} quadtile skeemi jaoks.",
         "fix_misalignment": "Korrigeeri nihet",
         "reset": "lähtesta"
     },

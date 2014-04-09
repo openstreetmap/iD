@@ -264,7 +264,6 @@
         "percent_brightness": "прозорість {opacity}%",
         "none": "Пусте",
         "custom": "Власний фон",
-        "custom_prompt": "Введіть шаблон для квадратів мапи. Використовуй те  {z}, {x}, {y} для схеми Z/X/Y та {u} схеми QuadTiles.",
         "fix_misalignment": "Виправити зсув",
         "reset": "скинути"
     },
@@ -1168,9 +1167,6 @@
             },
             "craft/photographer": {
                 "name": "Фотограф"
-            },
-            "craft/photographic_labratory": {
-                "name": "Фотолабораторія"
             },
             "embankment": {
                 "name": "Насип"

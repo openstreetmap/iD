@@ -265,7 +265,6 @@
         "percent_brightness": "{opacity}%不透明度",
         "none": "空",
         "custom": "自定义",
-        "custom_prompt": "输入瓦片模板。Z/X/Y方案的有效标记是{z}，{x}，{y}，quadtile方案的有效标记是{u}。",
         "fix_misalignment": "修复对齐",
         "reset": "重置"
     },
@@ -1010,6 +1009,12 @@
                 "name": "墓地",
                 "terms": "墓地,坟地"
             },
+            "amenity/hospital": {
+                "name": "医院"
+            },
+            "amenity/kindergarten": {
+                "name": "幼儿园"
+            },
             "amenity/library": {
                 "name": "图书馆",
                 "terms": "图书馆"
@@ -1076,6 +1081,9 @@
             "amenity/restaurant": {
                 "name": "餐馆",
                 "terms": "餐馆,餐厅,饭店,酒楼,酒家,茶楼"
+            },
+            "amenity/school": {
+                "name": "学校"
             },
             "amenity/shelter": {
                 "name": "亭",

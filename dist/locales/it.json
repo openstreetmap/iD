@@ -71,7 +71,8 @@
                 "line": "Crea una linea circolare",
                 "area": "Crea un'area circolare"
             },
-            "not_closed": "Questo non può essere reso circolare perché non è un anello."
+            "not_closed": "Questo non può essere reso circolare perché non è un anello.",
+            "too_large": "Questo elemento non può essere reso circolare perché non è del tutto visibile."
         },
         "orthogonalize": {
             "title": "Ortogonalizza",
@@ -84,7 +85,8 @@
                 "line": "Gli angoli della linea sono stati resi ortogonali.",
                 "area": "Gli angoli dell'area sono stati resi ortogonali."
             },
-            "not_squarish": "Questo non può essere reso squadrato perché non è squadrabile."
+            "not_squarish": "Questo non può essere reso squadrato perché non è squadrabile.",
+            "too_large": "Questo elemento non può essere reso squadrato perché non è del tutto visibile."
         },
         "straighten": {
             "title": "Raddrizzare",
@@ -265,7 +267,8 @@
         "percent_brightness": "{opacity}% luminosità",
         "none": "Nessuno",
         "custom": "Personalizzato",
-        "custom_prompt": "Inserisci lo schema dei tasselli. I valori validi sono {z}, {x}, {y} per lo schema Z/X/Y e {u} per lo schema QuadTile.",
+        "custom_button": "Modifica sfondo personalizzato",
+        "custom_prompt": "Inserisci l'URL dello schema dei tasselli. Valori validi sono {z}, {x}, {y} per lo schema Z/X/Y e {u} per lo schema QuadTile.",
         "fix_misalignment": "Allinea",
         "reset": "reset"
     },
@@ -1389,9 +1392,15 @@
                 "name": "Magazzino",
                 "terms": "magazzino,ripostiglio,rimessa"
             },
+            "craft/beekeeper": {
+                "name": "Apicoltore"
+            },
             "craft/blacksmith": {
                 "name": "Maniscalco",
                 "terms": "ferri di cavallo"
+            },
+            "craft/boatbuilder": {
+                "name": "Costruttore navale"
             },
             "craft/bookbinder": {
                 "name": "Legatoria"
@@ -1420,6 +1429,9 @@
                 "name": "Giardiniere",
                 "terms": "giardinaggio,giardino"
             },
+            "craft/glaziery": {
+                "name": "Vetreria"
+            },
             "craft/handicraft": {
                 "name": "Artigiano"
             },
@@ -1435,12 +1447,12 @@
                 "name": "Ottico",
                 "terms": "ottica,occhiali"
             },
+            "craft/painter": {
+                "name": "Pittore"
+            },
             "craft/photographer": {
                 "name": "Fotografo",
                 "terms": "fotografia,stampe"
-            },
-            "craft/photographic_labratory": {
-                "name": "Laboratorio Fotografico"
             },
             "craft/plumber": {
                 "name": "Idraulico"
@@ -1935,6 +1947,9 @@
                 "name": "Bunker",
                 "terms": "bunker,casamatta"
             },
+            "military/range": {
+                "name": "Poligono di tiro militare"
+            },
             "natural": {
                 "name": "Naturale",
                 "terms": "Elemento naturale"
@@ -2114,6 +2129,10 @@
             "place/locality": {
                 "name": "Località",
                 "terms": "Località (luogo con nome, non popolato)"
+            },
+            "place/suburb": {
+                "name": "Sobborgo",
+                "terms": "sobborgo,quartiere,circoscrizione"
             },
             "place/town": {
                 "name": "Centro abitato tra 10000 e 100000 abitanti",
@@ -2422,6 +2441,10 @@
             "shop/photo": {
                 "name": "Fotografo",
                 "terms": "fotografia,fotografico,fotografo,foto,diapositive,rullini,macchine fotografiche"
+            },
+            "shop/seafood": {
+                "name": "Pescheria",
+                "terms": "pesce fresco,ittica"
             },
             "shop/shoes": {
                 "name": "Negozio di scarpe",

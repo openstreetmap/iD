@@ -265,7 +265,6 @@
         "percent_brightness": "{opacity}% brillo",
         "none": "Ninguno",
         "custom": "Personalizado",
-        "custom_prompt": "Introduzca una plantilla de teselas. Los símbolos válidos son {z}, {x}, {y} para el esquema Z\\/X\\/Y y {u} para el esquema quadtile.",
         "fix_misalignment": "Corregir la alineación",
         "reset": "reiniciar"
     },
@@ -604,6 +603,9 @@
             "fixme": {
                 "label": "Arréglame"
             },
+            "fuel": {
+                "label": "Combustible"
+            },
             "gauge": {
                 "label": "Gálibo"
             },
@@ -785,6 +787,9 @@
             "sac_scale": {
                 "label": "Dificultad del sendero"
             },
+            "seasonal": {
+                "label": "Estacional"
+            },
             "service": {
                 "label": "Tipo"
             },
@@ -805,6 +810,9 @@
                 "label": "Fuente"
             },
             "sport": {
+                "label": "Deporte"
+            },
+            "sport_ice": {
                 "label": "Deporte"
             },
             "structure": {
@@ -882,7 +890,8 @@
                 "terms": "dirección, domicilio, señas, residencia"
             },
             "aerialway": {
-                "name": "Pista aérea"
+                "name": "Teleférico",
+                "terms": "aerovía, teleférico, telecabina, funicular, transbordador, telesilla, telesquí"
             },
             "aerialway/cable_car": {
                 "name": "Teleférico",
@@ -903,13 +912,15 @@
                 "name": "Ascensor de plato"
             },
             "aerialway/pylon": {
-                "name": "Pilón aéreo"
+                "name": "Pilón aéreo",
+                "terms": "pilona, columna, poste, soporte"
             },
             "aerialway/rope_tow": {
                 "name": "Ascensor de remolque de cuerda"
             },
             "aerialway/station": {
-                "name": "Estación aérea"
+                "name": "Estación de teleférico",
+                "terms": "estación, parada, funicular, telesilla, telesquí, teleférico"
             },
             "aerialway/t-bar": {
                 "name": "Ascensor T-bar"
@@ -968,6 +979,10 @@
             "amenity/bar": {
                 "name": "Bar",
                 "terms": "bar, pub, tasca, cantina, café, taberna"
+            },
+            "amenity/bbq": {
+                "name": "Asador",
+                "terms": "barbacoa, asador, parrilla"
             },
             "amenity/bench": {
                 "name": "Banco",
@@ -1063,7 +1078,8 @@
                 "name": "Terrenos de hospital"
             },
             "amenity/kindergarten": {
-                "name": "Terrenos del jardín de niños"
+                "name": "Jardín de infancia",
+                "terms": "preescolar, parvulario, guardería, kinder, educación infantil, educación inicial"
             },
             "amenity/library": {
                 "name": "Biblioteca",
@@ -1073,8 +1089,13 @@
                 "name": "Mercado",
                 "terms": "mercado, mercadillo"
             },
+            "amenity/nightclub": {
+                "name": "Discoteca",
+                "terms": "discoteca, club nocturno, pub"
+            },
             "amenity/parking": {
-                "name": "Aparcamiento de automóviles"
+                "name": "Aparcamiento de automóviles",
+                "terms": "aparcamiento, parking, aparcadero, estacionamiento, garaje"
             },
             "amenity/pharmacy": {
                 "name": "Farmacia",
@@ -1102,7 +1123,7 @@
             },
             "amenity/police": {
                 "name": "Policía",
-                "terms": "policía,comisaría,gendarmería,cuartel,guardia cicvil"
+                "terms": "policía,comisaría,gendarmería,cuartel,guardia civil"
             },
             "amenity/post_box": {
                 "name": "Buzón de correos",
@@ -1159,7 +1180,7 @@
             },
             "amenity/telephone": {
                 "name": "Teléfono",
-                "terms": "teatro,sala, salón, anfiteatro, coliseo, escenario"
+                "terms": "teléfono, llamar, cabina telefónica"
             },
             "amenity/theatre": {
                 "name": "Teatro",
@@ -1466,9 +1487,6 @@
                 "name": "Fotógrafo",
                 "terms": "fotógrafo, retratista"
             },
-            "craft/photographic_labratory": {
-                "name": "Laboratorio fotográfico"
-            },
             "craft/plasterer": {
                 "name": "Yesero",
                 "terms": "yeso, albañil, obra"
@@ -1588,7 +1606,7 @@
             },
             "highway/bridleway": {
                 "name": "Camino de herradura",
-                "terms": "Camino de herradura"
+                "terms": "camino de herradura, senda ecuestre, camino para caballos"
             },
             "highway/bus_stop": {
                 "name": "Parada de autobús",
@@ -1707,8 +1725,8 @@
                 "terms": "enlace, unión, cruce, calle, ronda, carril, ruta, arteria, rúa, trayecto, avenida, carretera, paseo, camino, vía, local, terciaria"
             },
             "highway/track": {
-                "name": "Camino",
-                "terms": "Vía"
+                "name": "Pista",
+                "terms": "pista, camino, vía"
             },
             "highway/traffic_signals": {
                 "name": "Semáforos",
@@ -1727,8 +1745,8 @@
                 "terms": "círculo, giro, retorno, cul de sac"
             },
             "highway/unclassified": {
-                "name": "Carretera no clasificada",
-                "terms": "Carretera sin clasificación"
+                "name": "Carretera sin clasificación",
+                "terms": "carretera, camino, vía, camino rural"
             },
             "historic": {
                 "name": "Lugar histórico",
@@ -1759,11 +1777,11 @@
                 "terms": "restos, escombros, cascotes, vestigios, reliquias, despojos"
             },
             "historic/wayside_cross": {
-                "name": "Cruz al borde del camino",
+                "name": "Crucero",
                 "terms": "crucero, cruz, humilladero"
             },
             "historic/wayside_shrine": {
-                "name": "Santuario al borde del camino",
+                "name": "Humilladero",
                 "terms": "santuario, humilladero, crucero, cruz, sagrario"
             },
             "landuse": {
@@ -1803,8 +1821,8 @@
                 "terms": "Edificios de la granja"
             },
             "landuse/forest": {
-                "name": "Bosque forestal",
-                "terms": "Bosque"
+                "name": "Plantación forestal",
+                "terms": "bosque, plantación, pinar, cultivo, plantío, sembrado, eucaliptal, explotación"
             },
             "landuse/grass": {
                 "name": "Hierba",
@@ -1864,6 +1882,9 @@
             "leisure/park": {
                 "name": "Parque",
                 "terms": "parque, jardín"
+            },
+            "leisure/picnic_table": {
+                "name": "Mesa de picnic"
             },
             "leisure/pitch": {
                 "name": "Cancha deportiva",
@@ -1978,7 +1999,7 @@
                 "terms": "Pozo de agua"
             },
             "man_made/water_works": {
-                "name": "Trabajos hídricos",
+                "name": "Abastecimiento de agua potable",
                 "terms": "Depósito de agua"
             },
             "military/airfield": {
@@ -1994,7 +2015,8 @@
                 "terms": "búnker, refugio subterráneo"
             },
             "military/range": {
-                "name": "Rango militar"
+                "name": "Campo militar de tiro",
+                "terms": "campo, entrenamiento, militar, tiro, prácticas"
             },
             "natural": {
                 "name": "Natural",
@@ -2173,6 +2195,9 @@
             "place/locality": {
                 "name": "Paraje",
                 "terms": "paraje, lugar, sitio, rincón"
+            },
+            "place/neighbourhood": {
+                "name": "Barrio"
             },
             "place/town": {
                 "name": "Ciudad",

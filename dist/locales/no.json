@@ -134,6 +134,7 @@
     },
     "browser_notice": "Denne editor er støttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og høyere. Vennligst oppgrader din nettleser eller bruk Potlatch 2 for å redigere kartet.",
     "translate": {
+        "translate": "Oversett",
         "localized_translation_language": "Velg språk",
         "localized_translation_name": "Navn"
     },
@@ -158,6 +159,7 @@
         "no_documentation_combination": "Det finnes ingen dokumentasjon for denne tag-kombinasjonen",
         "no_documentation_key": "Det finnes ingen dokumentasjon tilgjengelig for denne nøkkelen",
         "show_more": "Vis mer",
+        "all_members": "Alle medlemmer",
         "role": "Rolle",
         "choose": "Velg egenskapstype",
         "results": "{n} resultater for {search}",
@@ -187,6 +189,7 @@
     "success": {
         "just_edited": "Du har akkurat endret OpenStreetMap!",
         "view_on_osm": "Vis på OSM",
+        "facebook": "Del på Facebook",
         "twitter": "Del på Twitter",
         "google": "Del på Google+"
     },
@@ -224,6 +227,9 @@
         "navigation": {
             "title": "Navigasjon",
             "drag": "Hovedkartet viser data fra OpenstreetMap lagt over en bakgrunn. Du kan navigere ved å dra eller scrolle, slik som et vanlig nettkart. **Dra kartet!**"
+        },
+        "lines": {
+            "title": "Linjer"
         }
     },
     "presets": {
@@ -304,7 +310,11 @@
             "admin_level": {
                 "label": "Administrasjonsnivå"
             },
+            "aerialway": {
+                "label": "Type"
+            },
             "aerialway/capacity": {
+                "label": "Kapasitet (per time)",
                 "placeholder": "500, 2500, 5000..."
             },
             "aerialway/duration": {
@@ -545,6 +555,9 @@
             "sport": {
                 "label": "Sport"
             },
+            "sport_ice": {
+                "label": "Sport"
+            },
             "structure": {
                 "label": "Struktur",
                 "placeholder": "Ukjent",
@@ -552,6 +565,9 @@
                     "bridge": "Bru",
                     "tunnel": "Tunnel"
                 }
+            },
+            "studio_type": {
+                "label": "Type"
             },
             "surface": {
                 "label": "Overflate"
@@ -664,6 +680,9 @@
             "amenity/college": {
                 "name": "Videregående skole"
             },
+            "amenity/doctor": {
+                "name": "Doktor"
+            },
             "amenity/drinking_water": {
                 "name": "Drikkevann"
             },
@@ -687,6 +706,9 @@
             },
             "amenity/marketplace": {
                 "name": "Markedsplass"
+            },
+            "amenity/nightclub": {
+                "name": "Nattklubb"
             },
             "amenity/pharmacy": {
                 "name": "Apotek"
@@ -783,6 +805,9 @@
             },
             "building/house": {
                 "name": "Hus"
+            },
+            "craft/optician": {
+                "name": "Optiker"
             },
             "emergency/phone": {
                 "name": "Nødtelefon"
@@ -934,6 +959,9 @@
             "leisure": {
                 "name": "Fritid"
             },
+            "leisure/dog_park": {
+                "name": "Hundepark"
+            },
             "leisure/garden": {
                 "name": "Hage"
             },
@@ -1056,6 +1084,9 @@
             },
             "office": {
                 "name": "Kontor"
+            },
+            "office/architect": {
+                "name": "Arkitekt"
             },
             "place": {
                 "name": "Sted"

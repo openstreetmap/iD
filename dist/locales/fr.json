@@ -264,7 +264,6 @@
         "percent_brightness": "{opacity}% luminosité",
         "none": "Aucun",
         "custom": "Personnalisé",
-        "custom_prompt": "Entre un modèle de tuile. Les jetons valides sont  {z}, {x}, {y} pour un système Z/X/Y  et {u} pour le quatrième système.",
         "fix_misalignment": "Corriger l'alignement",
         "reset": "réinitialiser"
     },
@@ -1343,9 +1342,6 @@
             "craft/photographer": {
                 "name": "Photographe",
                 "terms": "Photographe"
-            },
-            "craft/photographic_labratory": {
-                "name": "Laboratoire Photographique"
             },
             "craft/plasterer": {
                 "name": "Plâtrier"

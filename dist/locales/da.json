@@ -71,7 +71,8 @@
                 "line": "Gjorde en linje cirkulær.",
                 "area": "Gjorde et område cirkulært."
             },
-            "not_closed": "Dette kan ikke gøres cirkulært fordi det ikke er en løkke."
+            "not_closed": "Dette kan ikke gøres cirkulært fordi det ikke er en løkke.",
+            "too_large": "Dette kan ikke laves rundt da  der ikke er nok vist kortudsnit."
         },
         "orthogonalize": {
             "title": "Firkantet",
@@ -84,7 +85,8 @@
                 "line": "Gjorde hjørner på en linje retvinklede.",
                 "area": "Gjorde hjørner på et område retvinklede."
             },
-            "not_squarish": "Dette kan ikke laves firkantet da det ikke er firkantet."
+            "not_squarish": "Dette kan ikke laves firkantet da det ikke er firkantet.",
+            "too_large": "Dette kan ikke laves firkantet da det ikke er nok vist kortudsnit."
         },
         "straighten": {
             "title": "Ret lige",
@@ -265,7 +267,8 @@
         "percent_brightness": "{opacity}% lysstyrke",
         "none": "Ingen",
         "custom": "Brugerdefineret",
-        "custom_prompt": "Angiv en tile skabelon. Valide værdier er {z}, {x}, {y} for Z/X/Y skemaer og {u} for quadtile skema. ",
+        "custom_button": "Ret brugerdefineret baggrund",
+        "custom_prompt": "Angiv en URL tile skabelon. Valide værdier er {z}, {x}, {y} for Z/X/Y skemaer og {u} for quadtile skema. ",
         "fix_misalignment": "Ret justering",
         "reset": "nulstil"
     },
@@ -1538,10 +1541,6 @@
                 "name": "Fotograf",
                 "terms": "Fotograf"
             },
-            "craft/photographic_labratory": {
-                "name": "Fotolaboratorie",
-                "terms": "Fotolaboratorie"
-            },
             "craft/plasterer": {
                 "name": "Oppudser",
                 "terms": "Oppudser"
@@ -2306,6 +2305,14 @@
                 "name": "Lokalitet",
                 "terms": "Lokalitet"
             },
+            "place/neighbourhood": {
+                "name": "Nabolag",
+                "terms": "Nabolag"
+            },
+            "place/suburb": {
+                "name": "Bydel",
+                "terms": "Bydel"
+            },
             "place/town": {
                 "name": "By",
                 "terms": "By"
@@ -2529,6 +2536,10 @@
             "shop/florist": {
                 "name": "Blomsterbutik",
                 "terms": "Blomsterbutik, Blomsterforretning"
+            },
+            "shop/funeral_directors": {
+                "name": "Bedemandsforretning",
+                "terms": "Bedemandsforretning, Begravelsesbutik"
             },
             "shop/furniture": {
                 "name": "Møbelforhandler",

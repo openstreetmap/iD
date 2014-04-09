@@ -264,7 +264,6 @@
         "percent_brightness": "{opacity}% прозирност",
         "none": "Ниједна",
         "custom": "Прилагођена",
-        "custom_prompt": "Унесите образац плочица. Важеће вредности су {z}, {x}, {y} за Z/X/Y шему и {u} за квадратну шему.",
         "fix_misalignment": "Поправи поравнање",
         "reset": "ресетовање"
     },
@@ -771,6 +770,9 @@
             "sac_scale": {
                 "label": "Тежина стазе"
             },
+            "seasonal": {
+                "label": "Сезонско"
+            },
             "service": {
                 "label": "Врста"
             },
@@ -794,6 +796,9 @@
                 "label": "Извор"
             },
             "sport": {
+                "label": "Спорт"
+            },
+            "sport_ice": {
                 "label": "Спорт"
             },
             "structure": {
@@ -916,6 +921,9 @@
             },
             "amenity/bar": {
                 "name": "Бар"
+            },
+            "amenity/bbq": {
+                "name": "Роштиљ/печењара"
             },
             "amenity/bench": {
                 "name": "Клупа"
@@ -1533,6 +1541,9 @@
             "leisure/dog_park": {
                 "name": "Парк за псе"
             },
+            "leisure/firepit": {
+                "name": "Огњиште"
+            },
             "leisure/garden": {
                 "name": "Башта"
             },
@@ -1740,6 +1751,9 @@
             "place/locality": {
                 "name": "Локалитет"
             },
+            "place/suburb": {
+                "name": "Варош"
+            },
             "place/town": {
                 "name": "Варош"
             },
@@ -1925,6 +1939,9 @@
             },
             "shop/locksmith": {
                 "name": "Бравар"
+            },
+            "shop/lottery": {
+                "name": "Лутрија"
             },
             "shop/mall": {
                 "name": "Тржни центар"

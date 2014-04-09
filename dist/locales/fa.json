@@ -246,7 +246,7 @@
         "reference": "نمایش در ویکی  OpenStreetMap",
         "back_tooltip": "تغییر ویژگی",
         "remove": "پاک کردن",
-        "search": "جسنجو",
+        "search": "جستجو",
         "multiselect": "موارد انتخاب شدند",
         "unknown": "ناشناخته",
         "incomplete": "<دانلود نشده>",
@@ -264,7 +264,6 @@
         "percent_brightness": "{opacity}% روشنایی",
         "none": "هیچ",
         "custom": "سفارشی",
-        "custom_prompt": "قالب کاشی را وارد کنید. نشانه های مشخص  {z}, {x}, {y} هستند برای طرح  Z/X/Y و {u} برای طرح چهار کاشی.",
         "fix_misalignment": "تعمیر تراز",
         "reset": "باز نشاندن"
     },
@@ -1309,9 +1308,6 @@
             },
             "craft/photographer": {
                 "name": "عکاس"
-            },
-            "craft/photographic_labratory": {
-                "name": "آزمایشگاه عکس برداری"
             },
             "craft/plasterer": {
                 "name": "گچ کار"

@@ -71,7 +71,8 @@
                 "line": "làm tròn một đường kẻ",
                 "area": "làm tròn một vùng"
             },
-            "not_closed": "Không thể làm tròn một đối tượng không phải là đa giác kín."
+            "not_closed": "Không thể làm tròn một đối tượng không phải là đa giác kín.",
+            "too_large": "Không thể làm tròn đối tượng này vì chỉ có thấy được một phần rất nhỏ."
         },
         "orthogonalize": {
             "title": "Làm Vuông góc",
@@ -84,7 +85,8 @@
                 "line": "làm vuông góc một đường kẻ",
                 "area": "làm vuông góc một vùng"
             },
-            "not_squarish": "Không thể làm vuông một đối tượng không phải vuông vuông."
+            "not_squarish": "Không thể làm vuông một đối tượng không phải vuông vuông.",
+            "too_large": "Không thể làm vuông đối tượng này vì chỉ có thấy được một phần rất nhỏ."
         },
         "straighten": {
             "title": "Làm thẳng",
@@ -265,7 +267,8 @@
         "percent_brightness": "Độ sáng {opacity}%",
         "none": "Không có",
         "custom": "Tùy biến",
-        "custom_prompt": "Đưa vào định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu {z}, {x}, {y} cho định dạng Z/X/Y hoặc {u} cho định dạng quadtile.",
+        "custom_button": "Sửa hình nền tùy biến",
+        "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu {z}, {x}, {y} cho định dạng Z/X/Y hoặc {u} cho định dạng quadtile.",
         "fix_misalignment": "Điều chỉnh lại",
         "reset": "đặt lại"
     },
@@ -1083,8 +1086,8 @@
                 "terms": "cây xăng, cột xăng, xăng, ét xăng, ét-xăng, nhiên liệu, cay xang, cot xang, xang, et xang, et-xang, nhien lieu"
             },
             "amenity/grave_yard": {
-                "name": "Nghĩa địa",
-                "terms": "nghĩa địa, nghĩa trang, mộ, nghia dia, nghia trang, mo"
+                "name": "Nghĩa địa tại Nhà thờ",
+                "terms": "nghĩa địa tại nhà thờ, nghĩa trang, bãi tha ma, mộ, nghia dia tai nha tho, nghia trang, bai tha ma, mo"
             },
             "amenity/hospital": {
                 "name": "Sân Bệnh viện",
@@ -1538,7 +1541,7 @@
                 "name": "Chụp hình",
                 "terms": "nhà chụp hình, nhà nhiếp ảnh, phòng chụp hình, phòng nhiếp ảnh, cửa hàng chụp hình, tiệm chụp hình, tiệm nhiếp ảnh, cửa hàng nhiếp ảnh, chân dung, bức tranh, hình ảnh, máy ảnh, nha chup hinh, nha nhiep anh, phong chup hinh, phong nhiep anh, cua hang chup hinh, tiem chup hinh, tiem nhiep anh, cua hang nhiep anh, chan dung, buc tranh, hinh anh, may anh"
             },
-            "craft/photographic_labratory": {
+            "craft/photographic_laboratory": {
                 "name": "Rửa Hình",
                 "terms": "buồng tối, tiệm rửa ảnh, tiệm rửa hình, cửa hàng rửa ảnh, cửa hàng rửa hình, buong toi, tiem rua anh, tiem rua hinh, cua hang rua anh, cua hang rua hinh"
             },
@@ -1876,7 +1879,7 @@
             },
             "landuse/cemetery": {
                 "name": "Nghĩa địa",
-                "terms": "nghĩa địa, nghĩa trang, nghia dia, nghia trang"
+                "terms": "nghĩa địa, nghĩa trang, bãi tha ma, mộ, nghia dia, nghia trang, bai tha ma, mo"
             },
             "landuse/commercial": {
                 "name": "Thương mại",
@@ -2306,6 +2309,14 @@
                 "name": "Địa phương",
                 "terms": "địa phương, dia phuong"
             },
+            "place/neighbourhood": {
+                "name": "Hàng xóm",
+                "terms": "hàng xóm, khu phố, hang xom, khu pho"
+            },
+            "place/suburb": {
+                "name": "Quận",
+                "terms": "quận, ngoại ô, phố, quan, ngoai o, pho"
+            },
             "place/town": {
                 "name": "Thị xã",
                 "terms": "thị xã, TX, thi xa"
@@ -2530,6 +2541,10 @@
                 "name": "Tiệm Hoa",
                 "terms": "quầy bán hoa, tiệm bán hoa, chỗ bán hoa, nơi bán hoa, cửa hàng hoa, cửa hàng bán hoa, nơi bán hoa, bông hoa, quay ban hoa, tiem ban hoa, cho ban hoa, noi ban hoa, cua hang hoa, cua hang ban hoa, noi ban hoa, bong hoa"
             },
+            "shop/funeral_directors": {
+                "name": "Nhà quàn",
+                "terms": "nhà quàn, nhà tang lễ, nha quan, nha tang le"
+            },
             "shop/furniture": {
                 "name": "Cửa hàng Nội thất",
                 "terms": "cửa hàng đồ đạc, chỗ đồ đạc, cửa hàng bán đồ đạc, tiệm bán đồ đạc, quầy bán đồ đạc, nơi bán đồ đạc, đồ gỗ, giường, bàn, ghế, đèn, cua hang do dac, cho do dac, cua hang ban do dac, tiem ban do dac, quay ban do dac, noi ban do dac, do go, giuong, ban, ghe, den"
@@ -2613,6 +2628,10 @@
             "shop/photo": {
                 "name": "Tiệm Chụp Hình",
                 "terms": "tiệm chụp hình, tiệm lấy hình, tiệm lấy ảnh, tiệm nhiếp ảnh, cửa hàng chụp hình, cửa hàng lấy hình, cửa hàng lấy ảnh, cửa hàng nhiếp ảnh, tiem chup hinh, tiem lay hinh, tiem lay anh, tiem nhiep anh, cua hang chup hinh, cua hang lay hinh, cua hang lay anh, cua hang nhiep anh"
+            },
+            "shop/seafood": {
+                "name": "Tiệm Hải sản",
+                "terms": "tiệm hải sản, tiệm cá, tiem hai san, tiem ca"
             },
             "shop/shoes": {
                 "name": "Tiệm Giày",

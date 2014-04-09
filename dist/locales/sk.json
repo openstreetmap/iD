@@ -71,7 +71,8 @@
                 "line": "Usporiadanie čiary do kruhu.",
                 "area": "Usporiadanie plochy do kruhu."
             },
-            "not_closed": "Tento objekt nemožno usporiadať do kruhu, pretože nie je uzavretý do slučky."
+            "not_closed": "Tento objekt nemožno usporiadať do kruhu, pretože nie je uzavretý do slučky.",
+            "too_large": "Tento objekt nemožno usporiadať do kruhu, pretože niektoré jeho časti nie sú viditeľné."
         },
         "orthogonalize": {
             "title": "Usporiadaj do pravého uhla.",
@@ -84,7 +85,8 @@
                 "line": "Usporiadanie rohov čiary do pravého uhla.",
                 "area": "Usporiadanie rohov plochy do pravého uhla."
             },
-            "not_squarish": "Tento objekt nemožno usporiadať do pravého uhla, pretože nie je štvorcový."
+            "not_squarish": "Tento objekt nemožno usporiadať do pravého uhla, pretože nie je štvorcový.",
+            "too_large": "Tento objekt nemožno usporiadať do pravého uhla, pretože niektoré jeho časti nie sú viditeľné."
         },
         "straighten": {
             "title": "Vyrovnaj",
@@ -265,7 +267,6 @@
         "percent_brightness": "{opacity}% jas",
         "none": "Žiadne",
         "custom": "Voliteľné",
-        "custom_prompt": "Zadajte vzor pre mapový podklad. Platné znaky sú {z}, {x}, {y} pre Z/X/Y schému a {u} pre quadtile schému.",
         "fix_misalignment": "Oprav zarovnanie",
         "reset": "vynulovať"
     },
@@ -1538,10 +1539,6 @@
                 "name": "Fotograf",
                 "terms": "fotografia,fotografovanie,fotka,fotky"
             },
-            "craft/photographic_labratory": {
-                "name": "Fotografické laboratórium",
-                "terms": "fotograficke laboratorium,fotolab"
-            },
             "craft/plasterer": {
                 "name": "Fasádnik",
                 "terms": "fasadnik,štukatér,stukater,omietkár,omietkar"
@@ -2306,6 +2303,10 @@
                 "name": "Lokalita",
                 "terms": "oblast,oblasť,miestny názov,miestny nazov"
             },
+            "place/neighbourhood": {
+                "name": "Susedstvo",
+                "terms": "okrsok,oblast,oblasť,štvrť,stvrt"
+            },
             "place/town": {
                 "name": "Mesto",
                 "terms": "mestecko,mestečko"
@@ -2529,6 +2530,10 @@
             "shop/florist": {
                 "name": "Kvetinárstvo",
                 "terms": "kvetinarstvo,kvety,kytice"
+            },
+            "shop/funeral_directors": {
+                "name": "Pohrebný ústav",
+                "terms": "pohrebny ustav,pohreb,pohreb,pohrebníctvo,pohrebnictvo"
             },
             "shop/furniture": {
                 "name": "Obchod s nábytkom",

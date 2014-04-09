@@ -71,7 +71,8 @@
                 "line": "Heu fet una línia circular.",
                 "area": "Heu fet una àrea circular."
             },
-            "not_closed": "Això no es pot fer circular perquè no té els extrems units."
+            "not_closed": "Això no es pot fer circular perquè no té els extrems units.",
+            "too_large": "Això no es pot fer circular perquè no hi ha suficient superfície visble."
         },
         "orthogonalize": {
             "title": "Quadrar",
@@ -84,7 +85,8 @@
                 "line": "Heu quadrat les cantonades d'una línia.",
                 "area": "Heu quadrat les cantonades d'una àrea."
             },
-            "not_squarish": "Això no es pot quadrar perquè no té forma quadrada"
+            "not_squarish": "Això no es pot quadrar perquè no té forma quadrada",
+            "too_large": "Això no es pot quadrar perquè no hi ha suficient superfície visible."
         },
         "straighten": {
             "title": "Fer recta",
@@ -265,7 +267,8 @@
         "percent_brightness": "{opacity}% brillantor",
         "none": "Cap",
         "custom": "Personalitza",
-        "custom_prompt": "Introdueix una plantilla de casella. Els paràmetres vàlids són {z}, {x}, {y} per a l'esquema Z/X/Y i  {u} per a l'esquema quadtile.",
+        "custom_button": "Editar el fons personalitzat",
+        "custom_prompt": "Introduïu una plantilla d'URL de casella. Els paràmetres vàlids són {z}, {x}, {y} per a l'esquema Z/X/Y i  {u} per a l'esquema quadtile.",
         "fix_misalignment": "Corregir la alineació",
         "reset": "reinicia"
     },
@@ -604,6 +607,9 @@
             "fixme": {
                 "label": "Arregla'm"
             },
+            "fuel": {
+                "label": "Carburant"
+            },
             "gauge": {
                 "label": "Ample"
             },
@@ -786,6 +792,9 @@
             "sac_scale": {
                 "label": "Dificultat del camí"
             },
+            "seasonal": {
+                "label": "Estacional"
+            },
             "service": {
                 "label": "Tipus"
             },
@@ -809,6 +818,9 @@
                 "label": "Font"
             },
             "sport": {
+                "label": "Esport"
+            },
+            "sport_ice": {
                 "label": "Esport"
             },
             "structure": {
@@ -969,6 +981,9 @@
             "amenity/bar": {
                 "name": "Bar",
                 "terms": "Bar, Local d'oci nocturn, Bar Musical, Local d'oci "
+            },
+            "amenity/bbq": {
+                "name": "Barbacoa/graella"
             },
             "amenity/bench": {
                 "name": "Banc",
@@ -1440,7 +1455,7 @@
             "craft/photographer": {
                 "name": "Fotògraf"
             },
-            "craft/photographic_labratory": {
+            "craft/photographic_laboratory": {
                 "name": "Laboratori fotogràfic"
             },
             "craft/plasterer": {
@@ -1768,11 +1783,17 @@
             "leisure/dog_park": {
                 "name": "Parc Caní"
             },
+            "leisure/firepit": {
+                "name": "Lloc per a fogueres"
+            },
             "leisure/garden": {
                 "name": "Jardí"
             },
             "leisure/golf_course": {
                 "name": "Camp de golf"
+            },
+            "leisure/ice_rink": {
+                "name": "Pista de gel"
             },
             "leisure/marina": {
                 "name": "Port esportiu",
@@ -1780,6 +1801,9 @@
             },
             "leisure/park": {
                 "name": "Parc"
+            },
+            "leisure/picnic_table": {
+                "name": "Taula de picnic"
             },
             "leisure/pitch": {
                 "name": "Camp d'esports"
@@ -2041,6 +2065,12 @@
             "place/locality": {
                 "name": "Indret"
             },
+            "place/neighbourhood": {
+                "name": "Barri"
+            },
+            "place/suburb": {
+                "name": "Districte"
+            },
             "place/town": {
                 "name": "Ciutat"
             },
@@ -2228,6 +2258,9 @@
                 "name": "Floristeria",
                 "terms": "Floristeria, Botiga de plantes, Botiga de jardineria"
             },
+            "shop/funeral_directors": {
+                "name": "Tanatori"
+            },
             "shop/furniture": {
                 "name": "Botiga de mobles",
                 "terms": "Botiga de mobles"
@@ -2293,6 +2326,9 @@
             },
             "shop/photo": {
                 "name": "Botiga de fotografia"
+            },
+            "shop/seafood": {
+                "name": "Marisqueria"
             },
             "shop/shoes": {
                 "name": "Sabateria",

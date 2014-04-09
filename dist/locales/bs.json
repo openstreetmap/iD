@@ -260,7 +260,6 @@
         "percent_brightness": "prozirnost {opacity}% ",
         "none": "Ništa",
         "custom": "Prilagođena pozadina",
-        "custom_prompt": "Unesite šablon pločica. Validni simboli su {z}, {x}, {y} za Z/X/Y šemu i {u} za \"QuadTile\" šemu.",
         "fix_misalignment": "Popravite poravnanje",
         "reset": "ponovo postavite"
     },
@@ -1265,9 +1264,6 @@
             },
             "craft/photographer": {
                 "name": "Fotograf"
-            },
-            "craft/photographic_labratory": {
-                "name": "Fotografska laboratorija"
             },
             "craft/plumber": {
                 "name": "Vodoinstalater"

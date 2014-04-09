@@ -134,7 +134,8 @@
             "annotation": "선 {n}개를 병합했습니다.",
             "not_eligible": "이 기능은 병합할 수 없습니다.",
             "not_adjacent": "이 선은 연결되어 있지 않기 때문에 병합할 수 없습니다.",
-            "restriction": "이 선은 적어도 하나가 \"{relation}\" 관계의 구성원이기 때문에 병합할 수 없습니다."
+            "restriction": "이 선은 적어도 하나가 \"{relation}\" 관계의 구성원이기 때문에 병합할 수 없습니다.",
+            "incomplete_relation": "이 기능은 완전히 다운로드되어 있지 않기 때문에 병합할 수 없습니다."
         },
         "move": {
             "title": "이동",
@@ -264,7 +265,6 @@
         "percent_brightness": "명도 {opacity}%",
         "none": "없음",
         "custom": "사용자 지정",
-        "custom_prompt": "타일 템플릿을 입력하세요. 올바른 토큰은 Z/X/Y scheme에 대해 {z}, {x}, {y}이고 quadtile scheme에 대해 {u}입니다.",
         "fix_misalignment": "정렬 고치기",
         "reset": "재설정"
     },

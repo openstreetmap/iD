@@ -254,7 +254,7 @@
         "feature_list": "Buscar elementos",
         "edit": "Editar elemento",
         "none": "Nenhum",
-        "node": "Nó",
+        "node": "Ponto",
         "way": "Linha",
         "relation": "Relação",
         "location": "Local"
@@ -265,7 +265,7 @@
         "percent_brightness": "Brilho de {opacity}%",
         "none": "Nenhum",
         "custom": "Customizado",
-        "custom_prompt": "Entre com um template de tiles. Tokens válidos são {z}, {x}, {y} para esquema Z/X/Y e {u} para esquema de quadtile.",
+        "custom_button": "Editar fundo de tela personalizado",
         "fix_misalignment": "Corrigir alinhamento",
         "reset": "resetar"
     },
@@ -598,6 +598,9 @@
             "fixme": {
                 "label": "Corrija-me"
             },
+            "fuel": {
+                "label": "Combustível"
+            },
             "generator/method": {
                 "label": "Método"
             },
@@ -608,7 +611,7 @@
                 "label": "Tipo"
             },
             "golf_hole": {
-                "label": "Código de referência",
+                "label": "Nº do buraco",
                 "placeholder": "Buraco numero (1-18)"
             },
             "handicap": {
@@ -770,10 +773,16 @@
             "shop": {
                 "label": "Tipo"
             },
+            "smoking": {
+                "label": "Fumantes"
+            },
             "source": {
                 "label": "Fonte"
             },
             "sport": {
+                "label": "Esporte"
+            },
+            "sport_ice": {
                 "label": "Esporte"
             },
             "structure": {
@@ -809,6 +818,12 @@
             },
             "tree_type": {
                 "label": "Tipo"
+            },
+            "trees": {
+                "label": "Árvores"
+            },
+            "tunnel": {
+                "label": "Túnel"
             },
             "vending": {
                 "label": "Tipo de Produtos"
@@ -897,6 +912,10 @@
                 "name": "Bar",
                 "terms": "Bar, Boteco"
             },
+            "amenity/bbq": {
+                "name": "Churrasqueira",
+                "terms": "Forno, Churrasco, Grill, Barbecue"
+            },
             "amenity/bench": {
                 "name": "Assento",
                 "terms": "Assento, Banco de praça"
@@ -937,6 +956,9 @@
                 "name": "Cinema",
                 "terms": "Cinema, Sala de Cinema"
             },
+            "amenity/clock": {
+                "name": "Relógio"
+            },
             "amenity/college": {
                 "name": "Faculdade",
                 "terms": "faculdade, educação superior, curso superior"
@@ -976,13 +998,21 @@
                 "name": "Cemitério Paroquial",
                 "terms": "Cemitério"
             },
+            "amenity/hospital": {
+                "name": "Hospital",
+                "terms": "clínica,sala de emergência,serviço de saúde,hospício,enfermaria,instituição,asilo,sanatório,cirurgia"
+            },
+            "amenity/kindergarten": {
+                "name": "Jardim de infância",
+                "terms": "Creche, Pré-escola, Cuidados infantis, Bebês, Centro de Educação Infantil, CEI"
+            },
             "amenity/library": {
                 "name": "Biblioteca",
                 "terms": "Biblioteca"
             },
             "amenity/marketplace": {
-                "name": "Mercado",
-                "terms": "Mercado"
+                "name": "Mercado municipal",
+                "terms": "Feira"
             },
             "amenity/parking": {
                 "name": "Estacionamento",
@@ -1039,6 +1069,9 @@
                 "name": "Restaurante",
                 "terms": "Restaurante"
             },
+            "amenity/school": {
+                "name": "Escola"
+            },
             "amenity/shelter": {
                 "name": "Abrigo",
                 "terms": "Abrigo"
@@ -1074,6 +1107,9 @@
             "amenity/vending_machine": {
                 "name": "Máquina de Venda",
                 "terms": "Totem de vendas, Máquina de Venda Automática"
+            },
+            "amenity/veterinary": {
+                "name": "Veterinário"
             },
             "amenity/waste_basket": {
                 "name": "Lixeira",
@@ -1163,6 +1199,9 @@
                 "name": "Apartamentos",
                 "terms": "Apartamentos, Kit net"
             },
+            "building/cathedral": {
+                "name": "Catedral"
+            },
             "building/chapel": {
                 "name": "Capela"
             },
@@ -1172,6 +1211,12 @@
             "building/commercial": {
                 "name": "Edifício Comercial",
                 "terms": "Edifício Comercial, Prédio Comercial"
+            },
+            "building/construction": {
+                "name": "Edifício em construção"
+            },
+            "building/dormitory": {
+                "name": "Dormitório"
             },
             "building/entrance": {
                 "name": "Entrada",
@@ -1184,6 +1229,10 @@
             "building/garages": {
                 "name": "Garagens",
                 "terms": "Garagens"
+            },
+            "building/hospital": {
+                "name": "Edifício do Hospital",
+                "terms": "Edifício hospitalar"
             },
             "building/house": {
                 "name": "Casa",
@@ -1204,6 +1253,9 @@
             "building/roof": {
                 "name": "Teto"
             },
+            "building/school": {
+                "name": "Edifício da Escola"
+            },
             "craft/beekeeper": {
                 "name": "Apicultor"
             },
@@ -1216,8 +1268,20 @@
             "craft/carpenter": {
                 "name": "Carpinteiro"
             },
+            "craft/confectionary": {
+                "name": "Doçaria"
+            },
+            "craft/electrician": {
+                "name": "Eletricista"
+            },
+            "craft/gardener": {
+                "name": "Jardineiro"
+            },
             "craft/locksmith": {
                 "name": "Chaveiro"
+            },
+            "craft/painter": {
+                "name": "Pintor"
             },
             "craft/photographer": {
                 "name": "Fotógrafo"
@@ -1526,6 +1590,9 @@
                 "name": "Parque/Praça",
                 "terms": "Parque, praça"
             },
+            "leisure/picnic_table": {
+                "name": "Mesa de piquenique"
+            },
             "leisure/pitch": {
                 "name": "Quadra Esportiva",
                 "terms": "Campo de Esportes, Campo Esportivo, Quadra Esportiva"
@@ -1683,7 +1750,8 @@
                 "terms": "Orla Marítima, Linha Costeira"
             },
             "natural/fell": {
-                "name": "Fell"
+                "name": "Fell",
+                "terms": "Colina, Morro, Cerro,\nCoxilha, Montanha, Outeiro"
             },
             "natural/glacier": {
                 "name": "Geleira",
@@ -1762,7 +1830,7 @@
                 "terms": "Escritório da Empresa"
             },
             "office/educational_institution": {
-                "name": "Instituto de Educação",
+                "name": "Escritório de Instituto de Educação",
                 "terms": "escola,colégio,universidade,faculdade,curso,instituto,educação,educacional"
             },
             "office/employment_agency": {
@@ -2017,7 +2085,7 @@
                 "terms": "Loja de Informática"
             },
             "shop/confectionery": {
-                "name": "Confeitaria",
+                "name": "Doçaria",
                 "terms": "Confeitaria"
             },
             "shop/convenience": {
@@ -2100,6 +2168,10 @@
                 "name": "Chaveiro",
                 "terms": "Técnico de Chaves e Cadeados, Cópia de Chaves, Conserto de Cadeados"
             },
+            "shop/lottery": {
+                "name": "Lotérica",
+                "terms": "Loteria, Mega Sena, Trimania, Quina"
+            },
             "shop/mall": {
                 "name": "Centro Comercial",
                 "terms": "Shopping Center, Galeria"
@@ -2135,6 +2207,10 @@
             "shop/photo": {
                 "name": "Loja de Fotografia",
                 "terms": "Loja de Fotografia"
+            },
+            "shop/seafood": {
+                "name": "Loja de frutos do mar",
+                "terms": "Peixaria, Petiscaria, Pescado, Petisqueira"
             },
             "shop/shoes": {
                 "name": "Loja de Calçados",

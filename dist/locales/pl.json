@@ -265,7 +265,6 @@
         "percent_brightness": "jasność {opacity}%",
         "none": "Brak",
         "custom": "Własne",
-        "custom_prompt": "Wpisz adres kafelków w formacie  {z}, {x}, {y} dla schematu Z/X/Y lub {u} dla schematu QuadTile.",
         "fix_misalignment": "Wyrównaj podkład",
         "reset": "resetuj"
     },
@@ -1326,9 +1325,6 @@
             },
             "craft/photographer": {
                 "name": "Fotograf"
-            },
-            "craft/photographic_labratory": {
-                "name": "Laboratorium fotograficzne"
             },
             "craft/plasterer": {
                 "name": "Tynkarz"

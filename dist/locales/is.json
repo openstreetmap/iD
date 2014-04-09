@@ -41,6 +41,7 @@
             }
         },
         "continue": {
+            "title": "Halda áfram",
             "annotation": {
                 "line": "Hélt áfram með línu.",
                 "area": "Hélt áfram með svæði."
@@ -248,7 +249,6 @@
         "description": "Bakgrunnsstillingar",
         "percent_brightness": "{opacity}% birta",
         "none": "Ekkert",
-        "custom_prompt": "Sláðu inn stílsnið. Rétt gildi eru {z}, {x}, {y} fyror Z/X/Y hnit og {u} fyrir útlitssnið.",
         "reset": "endurstilla"
     },
     "restore": {
@@ -364,6 +364,9 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Bygging"
+            },
             "category-landuse": {
                 "name": "Landnotkun"
             },
@@ -923,11 +926,41 @@
             "building/apartments": {
                 "name": "Íbúðir"
             },
+            "building/commercial": {
+                "name": "Atvinnuhúsnæði"
+            },
+            "building/construction": {
+                "name": "Á byggingarstigi"
+            },
             "building/entrance": {
                 "name": "Inngangur"
             },
+            "building/hospital": {
+                "name": "Sjúkrahúsbygging"
+            },
+            "building/hotel": {
+                "name": "Hótelbygging"
+            },
             "building/house": {
-                "name": "Íbúðarhús"
+                "name": "Einbýlishús"
+            },
+            "building/industrial": {
+                "name": "Iðnaðarhúsnæði"
+            },
+            "building/public": {
+                "name": "Opinber bygging"
+            },
+            "building/residential": {
+                "name": "Íbúahúsnæði"
+            },
+            "building/retail": {
+                "name": "Verslunarhúsnæði"
+            },
+            "building/school": {
+                "name": "Skólabygging"
+            },
+            "building/university": {
+                "name": "Háskólabygging"
             },
             "craft/photographer": {
                 "name": "Ljósmyndari"

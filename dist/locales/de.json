@@ -71,7 +71,8 @@
                 "line": "Eine Fläche abgerundet",
                 "area": "Eine Fläche kreisförmig gemacht"
             },
-            "not_closed": "Dieses Objekt kann nicht kreisförmig gemacht werden, da es keine geschlossene Linie ist."
+            "not_closed": "Dieses Objekt kann nicht kreisförmig gemacht werden, da es keine geschlossene Linie ist.",
+            "too_large": "Die Elemente können nicht kreisförmig gemacht werden, weil zuwenig sichtbar ist."
         },
         "orthogonalize": {
             "title": "Rechteck",
@@ -84,7 +85,8 @@
                 "line": "Die Ecken einer Linie rechtwinklig ausgerichtet.",
                 "area": "Die Ecken einer Fläche rechtwinklig ausgerichtet."
             },
-            "not_squarish": "Dieses Objekt kann nicht rechtwinklig gemacht werden, da es nicht annähernd rechtwinklig ist."
+            "not_squarish": "Dieses Objekt kann nicht rechtwinklig gemacht werden, da es nicht annähernd rechtwinklig ist.",
+            "too_large": "Die Elemente können nicht quadratisch gemacht werden, weil zuwenig sichtbar ist."
         },
         "straighten": {
             "title": "Begradigen",
@@ -265,7 +267,6 @@
         "percent_brightness": "{opacity}% Helligkeit",
         "none": "Kein Hintergrund",
         "custom": "Benutzerdefiniert",
-        "custom_prompt": "Gib eine Kachel-Vorlage ein. Gültige Token sind {z}, {x}, {y} für das Z/X/Y Schema und {u} für das 'quadtile'-Schema.",
         "fix_misalignment": "Ausrichtung korrigieren",
         "reset": "Zurücksetzen"
     },
@@ -1538,10 +1539,6 @@
                 "name": "Fotograf",
                 "terms": "Fotograf, Fotostudio, Fotoatelier"
             },
-            "craft/photographic_labratory": {
-                "name": "Fotolabor",
-                "terms": "Fotolabor"
-            },
             "craft/plasterer": {
                 "name": "Stuckateur",
                 "terms": "Stuckateur, Kaschierer, Gipser, Verputzer"
@@ -2306,6 +2303,14 @@
                 "name": "Ortschaft",
                 "terms": "Ort, Gegend"
             },
+            "place/neighbourhood": {
+                "name": "Wohngegend",
+                "terms": "Wohngegend, Nachbarschaft, Umgebung, Viertel, Grätzel, Kiez"
+            },
+            "place/suburb": {
+                "name": "Bezirk",
+                "terms": "Bezirk, Gemeinde, Stadtbezirk"
+            },
             "place/town": {
                 "name": "Kleinstadt",
                 "terms": "Stadt, Ortschaft"
@@ -2529,6 +2534,10 @@
             "shop/florist": {
                 "name": "Blumenhändler",
                 "terms": "Florist, Blumenladen, Blumengeschäft"
+            },
+            "shop/funeral_directors": {
+                "name": "Beerdigungsinstitut",
+                "terms": "Beerdigungsinstitut, Bestattungsinstitut, Bestattungsunternehmen"
             },
             "shop/furniture": {
                 "name": "Möbelhaus",

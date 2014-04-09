@@ -252,7 +252,8 @@
         "incomplete": "<niet gedownload>",
         "feature_list": "Zoek objecttype",
         "edit": "Wijzig het object",
-        "none": "Geen"
+        "none": "Geen",
+        "node": "Punt"
     },
     "background": {
         "title": "Achtergrond",
@@ -260,7 +261,6 @@
         "percent_brightness": "{opacity}% doorzichtigheid",
         "none": "Geen",
         "custom": "Aangepast",
-        "custom_prompt": "Voer een tegelschema in. Geldige waarden zijn {z}, {x}, {y} voor Z/X/Y schema en {u} voor het quadtile schema.",
         "fix_misalignment": "Repareer de ligging",
         "reset": "Standaard herstellen"
     },
@@ -466,6 +466,7 @@
                 "placeholder": "500, 2500, 5000..."
             },
             "aerialway/duration": {
+                "label": "Duur (minuten)",
                 "placeholder": "1, 2, 3..."
             },
             "aerialway/heating": {
@@ -623,6 +624,9 @@
             "levels": {
                 "label": "Niveaus",
                 "placeholder": "2, 4, 6..."
+            },
+            "lit": {
+                "label": "Verlicht"
             },
             "location": {
                 "label": "Locatie"
@@ -797,6 +801,10 @@
                 "name": "Adres",
                 "terms": "Adres"
             },
+            "aerialway/chair_lift": {
+                "name": "Stoeltjeslift",
+                "terms": "stoeltjeslift"
+            },
             "aeroway": {
                 "name": "Vliegveld",
                 "terms": "Startbaan, landingsbaan"
@@ -900,10 +908,12 @@
                 "terms": "Rechtzaal"
             },
             "amenity/dentist": {
-                "name": "Tandarts"
+                "name": "Tandarts",
+                "terms": "tandarts, tandheelkundige"
             },
             "amenity/doctor": {
-                "name": "Dokter"
+                "name": "Dokter",
+                "terms": "dokter, arts, geneesheer"
             },
             "amenity/drinking_water": {
                 "name": "Drinkwater",
@@ -993,7 +1003,8 @@
                 "terms": "Restaurant"
             },
             "amenity/social_facility/food_bank": {
-                "name": "Voedselbank"
+                "name": "Voedselbank",
+                "terms": "voedselbank"
             },
             "amenity/studio": {
                 "name": "Studio"
@@ -1027,10 +1038,12 @@
                 "terms": "Universtiteit, academie"
             },
             "amenity/vending_machine": {
-                "name": "Automaat"
+                "name": "Automaat",
+                "terms": "automaat"
             },
             "amenity/veterinary": {
-                "name": "Dierenarts"
+                "name": "Dierenarts",
+                "terms": "veearts, dierenarts"
             },
             "amenity/waste_basket": {
                 "name": "Prullenbak",
@@ -1071,7 +1084,8 @@
                 "name": "Hek"
             },
             "barrier/hedge": {
-                "name": "Haag of heg"
+                "name": "Haag of heg",
+                "terms": "heg, haag"
             },
             "barrier/kissing_gate": {
                 "name": "Voetgangershek"
@@ -1122,13 +1136,15 @@
                 "name": "Ingang"
             },
             "building/garage": {
-                "name": "Garage"
+                "name": "Garage",
+                "terms": "garage"
             },
             "building/greenhouse": {
                 "name": "Serre"
             },
             "building/house": {
-                "name": "Huis"
+                "name": "Huis",
+                "terms": "huis, woning"
             },
             "building/hut": {
                 "name": "Hut"
@@ -1158,10 +1174,12 @@
                 "name": "Opslagplaats"
             },
             "craft/beekeeper": {
-                "name": "Imker"
+                "name": "Imker",
+                "terms": "imker, bijenhouder"
             },
             "craft/blacksmith": {
-                "name": "Smid"
+                "name": "Smid",
+                "terms": "smid, hoefsmid"
             },
             "craft/boatbuilder": {
                 "name": "Scheepsbouwer"
@@ -1170,10 +1188,12 @@
                 "name": "Boekbinder"
             },
             "craft/brewery": {
-                "name": "Brouwerij"
+                "name": "Brouwerij",
+                "terms": "brouwerij"
             },
             "craft/carpenter": {
-                "name": "Timmerman"
+                "name": "Timmerman",
+                "terms": "timmerman"
             },
             "craft/gardener": {
                 "name": "Tuinman"
@@ -1191,16 +1211,34 @@
                 "name": "Fotograaf"
             },
             "craft/plumber": {
-                "name": "Loodgieter"
+                "name": "Loodgieter",
+                "terms": "loodgieter"
             },
             "craft/pottery": {
                 "name": "Pottenbakkerij"
             },
+            "craft/roofer": {
+                "name": "Dakwerker",
+                "terms": "dakwerker"
+            },
+            "craft/saddler": {
+                "name": "Zadelmaker",
+                "terms": "Zadelmaker"
+            },
             "craft/sawmill": {
-                "name": "Zagerij"
+                "name": "Zagerij",
+                "terms": "zagerij"
+            },
+            "craft/sculpter": {
+                "name": "Beeldhouwer",
+                "terms": "beeldhouwer"
             },
             "craft/shoemaker": {
                 "name": "Schoenmaker"
+            },
+            "craft/stonemason": {
+                "name": "Metselaar",
+                "terms": "metselaar"
             },
             "craft/sweep": {
                 "name": "Schoorsteenveger"
@@ -1213,6 +1251,10 @@
             },
             "craft/watchmaker": {
                 "name": "Horlogemaker"
+            },
+            "embankment": {
+                "name": "Dijk",
+                "terms": "dijk"
             },
             "emergency/ambulance_station": {
                 "name": "Ambulancestandplaats"
@@ -1230,7 +1272,8 @@
                 "name": "Autosnelweg"
             },
             "highway/bridleway": {
-                "name": "Ruiterpad"
+                "name": "Ruiterpad",
+                "terms": "jaagpad"
             },
             "highway/bus_stop": {
                 "name": "Bushalte",
@@ -1289,7 +1332,8 @@
                 "name": "Toegangsweg"
             },
             "highway/service/alley": {
-                "name": "Steeg"
+                "name": "Steeg",
+                "terms": "steeg, steegje"
             },
             "highway/service/drive-through": {
                 "name": "Drive-in"
@@ -1308,7 +1352,8 @@
                 "terms": "trap, trappen"
             },
             "highway/stop": {
-                "name": "Stopbord"
+                "name": "Stopbord",
+                "terms": "stopbord"
             },
             "highway/tertiary": {
                 "name": "Tertiare weg"
@@ -1400,10 +1445,12 @@
                 "name": "Industriegebied"
             },
             "landuse/meadow": {
-                "name": "Hooiland"
+                "name": "Hooiland",
+                "terms": "wei, weide"
             },
             "landuse/orchard": {
-                "name": "Boomgaard"
+                "name": "Boomgaard",
+                "terms": "boomgaard"
             },
             "landuse/quarry": {
                 "name": "Mijnbouw"
@@ -1431,7 +1478,8 @@
                 "name": "Tuin"
             },
             "leisure/golf_course": {
-                "name": "Golfbaan"
+                "name": "Golfbaan",
+                "terms": "golfterrein"
             },
             "leisure/marina": {
                 "name": "Jachthaven"
@@ -1456,10 +1504,12 @@
                 "name": "Skatepark"
             },
             "leisure/pitch/soccer": {
-                "name": "Voetbalveld"
+                "name": "Voetbalveld",
+                "terms": "voetbalveld, voetbalterrein"
             },
             "leisure/pitch/tennis": {
-                "name": "Tennisbaan"
+                "name": "Tennisbaan",
+                "terms": "tennisveld, tennisterrein"
             },
             "leisure/pitch/volleyball": {
                 "name": "Volleybalveld"
@@ -1495,20 +1545,27 @@
             "man_made/cutline": {
                 "name": "Scheidingslijn"
             },
+            "man_made/embankment": {
+                "name": "Dijk",
+                "terms": "dijk"
+            },
             "man_made/flagpole": {
-                "name": "Vlaggemast"
+                "name": "Vlaggemast",
+                "terms": "vlaggemast"
             },
             "man_made/lighthouse": {
                 "name": "Vuurtoren"
             },
             "man_made/observation": {
-                "name": "Uitkijktoren"
+                "name": "Uitkijktoren",
+                "terms": "uitkijktoren"
             },
             "man_made/pier": {
                 "name": "Pier"
             },
             "man_made/pipeline": {
-                "name": "Pijpleiding"
+                "name": "Pijpleiding",
+                "terms": "pijplijn, pijpleiding"
             },
             "man_made/survey_point": {
                 "name": "Landmeetkundig referentiepunt"
@@ -1530,13 +1587,20 @@
                 "name": "Waterwinstation"
             },
             "military/airfield": {
-                "name": "Vliegveld"
+                "name": "Vliegveld",
+                "terms": "vliegveld"
             },
             "military/barracks": {
-                "name": "Kazerne"
+                "name": "Kazerne",
+                "terms": "kazerne"
             },
             "military/bunker": {
-                "name": "Bunker"
+                "name": "Bunker",
+                "terms": "bunker"
+            },
+            "military/range": {
+                "name": "Legerterrein",
+                "terms": "legerterrein"
             },
             "natural": {
                 "name": "Natuurlijk"
@@ -1627,6 +1691,10 @@
             "office/travel_agent": {
                 "name": "Reisbureau"
             },
+            "piste": {
+                "name": "Skipiste",
+                "terms": "skipiste"
+            },
             "place": {
                 "name": "Plaats"
             },
@@ -1676,8 +1744,13 @@
             "power/transformer": {
                 "name": "Transformator"
             },
+            "public_transport/platform": {
+                "name": "Perron",
+                "terms": "perron"
+            },
             "railway": {
-                "name": "Spoorwegemplacement"
+                "name": "Spoorwegemplacement",
+                "terms": "spoorweg"
             },
             "railway/abandoned": {
                 "name": "In onbruik geraakte spoorbaan"
@@ -1692,10 +1765,12 @@
                 "name": "Gelijkvloerse spoorwegovergang"
             },
             "railway/monorail": {
-                "name": "Monorail, magneetzweefbaan"
+                "name": "Monorail, magneetzweefbaan",
+                "terms": "monorail"
             },
             "railway/narrow_gauge": {
-                "name": "Smalspoor"
+                "name": "Smalspoor",
+                "terms": "smalspoor"
             },
             "railway/platform": {
                 "name": "Perron"
@@ -1723,13 +1798,15 @@
                 "name": "Veerboottraject"
             },
             "shop": {
-                "name": "Winkel"
+                "name": "Winkel",
+                "terms": "winkel, handelszaak"
             },
             "shop/alcohol": {
                 "name": "Slijterij"
             },
             "shop/bakery": {
-                "name": "Bakkerij"
+                "name": "Bakkerij",
+                "terms": "bakkerij"
             },
             "shop/beauty": {
                 "name": "Schoonheidssalon"
@@ -1738,16 +1815,19 @@
                 "name": "Drankenwinkel"
             },
             "shop/bicycle": {
-                "name": "Fietswinkel"
+                "name": "Fietswinkel",
+                "terms": "fietsenwinkel"
             },
             "shop/books": {
-                "name": "Boekwinkel"
+                "name": "Boekwinkel",
+                "terms": "boekenwinkel"
             },
             "shop/boutique": {
                 "name": "Boutique"
             },
             "shop/butcher": {
-                "name": "Slagerij"
+                "name": "Slagerij",
+                "terms": "slagerij, beenhouwerij"
             },
             "shop/car": {
                 "name": "Autoshowroom"
@@ -1759,7 +1839,8 @@
                 "name": "Autogarage"
             },
             "shop/chemist": {
-                "name": "Drogist"
+                "name": "Drogist",
+                "terms": "apotheek, apotheker, apothekerij"
             },
             "shop/clothes": {
                 "name": "Kledingwinkel"
@@ -1789,10 +1870,12 @@
                 "name": "Bruingoedwinkel"
             },
             "shop/farm": {
-                "name": "Groente- en fruitkraam"
+                "name": "Groente- en fruitkraam",
+                "terms": "groentenkraam"
             },
             "shop/fishmonger": {
-                "name": "Visboer"
+                "name": "Visboer",
+                "terms": "viswinkel"
             },
             "shop/florist": {
                 "name": "Bloemenwinkel"
@@ -1810,7 +1893,8 @@
                 "name": "Groenteboer"
             },
             "shop/hairdresser": {
-                "name": "Kapper"
+                "name": "Kapper",
+                "terms": "kapper"
             },
             "shop/hardware": {
                 "name": "Bouwmarkt"
@@ -1819,7 +1903,8 @@
                 "name": "Bruingoedwinkel"
             },
             "shop/jewelry": {
-                "name": "Juwelier"
+                "name": "Juwelier",
+                "terms": "juwelier"
             },
             "shop/kiosk": {
                 "name": "Kiosk"
@@ -1871,10 +1956,12 @@
                 "terms": "supermarkt, grootwarenhuis"
             },
             "shop/toys": {
-                "name": "Speelgoedwinkel"
+                "name": "Speelgoedwinkel",
+                "terms": "speelgoedwinkel"
             },
             "shop/travel_agency": {
-                "name": "Reisbureau"
+                "name": "Reisbureau",
+                "terms": "reisbureau"
             },
             "shop/tyres": {
                 "name": "Bandenwinkel"
@@ -1901,7 +1988,8 @@
                 "name": "Toeristische attractie"
             },
             "tourism/camp_site": {
-                "name": "Camping"
+                "name": "Camping",
+                "terms": "camping, kampeerterrein, kampeerplaats"
             },
             "tourism/caravan_site": {
                 "name": "Terrein voor kampeerwagens"
@@ -1916,7 +2004,8 @@
                 "name": "Jeugdherberg"
             },
             "tourism/hotel": {
-                "name": "Hotel"
+                "name": "Hotel",
+                "terms": "hotel"
             },
             "tourism/information": {
                 "name": "Informatie"
@@ -2001,7 +2090,8 @@
                 "name": "Kanaal"
             },
             "waterway/dam": {
-                "name": "Dam"
+                "name": "Dam",
+                "terms": "dam"
             },
             "waterway/ditch": {
                 "name": "Sloot, greppel of gracht"
@@ -2017,7 +2107,8 @@
                 "name": "Rivieroever"
             },
             "waterway/stream": {
-                "name": "Beek"
+                "name": "Beek",
+                "terms": "stroom, rivier"
             },
             "waterway/weir": {
                 "name": "Stuw"
