@@ -10087,22 +10087,23 @@
         "overlay": true
     },
     {
-        "name": "MapBox Satellite",
+        "name": "MapQuest Open Aerial",
+        "type": "tms",
+        "template": "http://oatile{switch:1,2,3,4}.mqcdn.com/tiles/1.0.0/sat/{zoom}/{x}/{y}.png",
+        "default": true
+    },
+    {
+        "name": "Mapbox Satellite",
         "type": "tms",
         "description": "Satellite and aerial imagery.",
         "template": "http://{switch:a,b,c}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{zoom}/{x}/{y}.png",
         "scaleExtent": [
             0,
-            16
+            19
         ],
         "terms_url": "http://www.mapbox.com/about/maps/",
         "terms_text": "Terms & Feedback",
-        "default": true
-    },
-    {
-        "name": "MapQuest Open Aerial",
-        "type": "tms",
-        "template": "http://oatile{switch:1,2,3,4}.mqcdn.com/tiles/1.0.0/sat/{zoom}/{x}/{y}.png",
+        "id": "Mapbox",
         "default": true
     },
     {

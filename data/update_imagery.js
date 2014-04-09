@@ -39,7 +39,7 @@ var censor = {
 };
 
 var descriptions = {
-    'MapBox Satellite': 'Satellite and aerial imagery.',
+    'Mapbox Satellite': 'Satellite and aerial imagery.',
     'OpenStreetMap (Mapnik)': 'The default OpenStreetMap layer.',
     'TIGER 2012 Roads Overlay': 'Public domain road data from the US Government.',
     'Bing aerial imagery': 'Satellite and aerial imagery.',
