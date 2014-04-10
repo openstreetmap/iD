@@ -9,6 +9,13 @@ iD.geo.interp = function(p1, p2, t) {
             p1[1] + (p2[1] - p1[1]) * t];
 };
 
+// 2D cross product of OA and OB vectors, i.e. z-component of their 3D cross product.
+// Returns a positive value, if OAB makes a counter-clockwise turn,
+// negative for clockwise turn, and zero if the points are collinear.
+iD.geo.cross = function(o, a, b) {
+    return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+};
+
 // http://jsperf.com/id-dist-optimization
 iD.geo.euclideanDistance = function(a, b) {
     var x = a[0] - b[0], y = a[1] - b[1];
