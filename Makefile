@@ -115,6 +115,7 @@ D3_FILES = \
 	node_modules/d3/src/geo/path.js \
 	node_modules/d3/src/geo/stream.js \
 	node_modules/d3/src/geom/polygon.js \
+	node_modules/d3/src/geom/hull.js \
 	node_modules/d3/src/selection/index.js \
 	node_modules/d3/src/transition/index.js \
 	node_modules/d3/src/xhr/index.js \
