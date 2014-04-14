@@ -2,47 +2,20 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
     maxAngle = (maxAngle || 20) * Math.PI / 180;
 
     var action = function(graph) {
-        var way = graph.entity(wayId),
-            nodes, keyNodes, points, keyPoints, centroid, radius, sign, ids;
+        var way = graph.entity(wayId);
 
-        // coax this way into being convex before trying to circularize it..
         if (!way.isConvex(graph)) {
-            var nodes = _.uniq(graph.childNodes(way)),
-                points = nodes.map(function(n) { return projection(n.loc); }),
-                sign = d3.geom.polygon(points).area() > 0 ? 1 : -1,
-                hull = d3.geom.hull(points);
-
-            // D3 convex hulls go counterclockwise..
-            if (sign === -1) {
-                nodes.reverse();
-                points.reverse();
-            }
-
-            for (var i = 0; i < hull.length - 1; i++) {
-                var startIndex = points.indexOf(hull[i]),
-                    endIndex = points.indexOf(hull[i+1]),
-                    indexRange = (endIndex - startIndex);
-
-                if (indexRange < 0) {
-                    indexRange += nodes.length;
-                }
-
-                // move interior nodes to the surface of the convex hull..
-                for (var j = 1; j < indexRange; j++) {
-                    var point = iD.geo.interp(hull[i], hull[i+1], j / indexRange),
-                        node = nodes[(j + startIndex) % nodes.length].move(projection.invert(point));
-                    graph = graph.replace(node);
-                }
-            }
+            graph = action.makeConvex(graph);
         }
 
-        nodes = _.uniq(graph.childNodes(way));
-        keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; });
-        points = nodes.map(function(n) { return projection(n.loc); });
-        keyPoints = keyNodes.map(function(n) { return projection(n.loc); });
-        centroid = d3.geom.polygon(points).centroid();
-        radius = d3.median(points, function(p) { return iD.geo.euclideanDistance(centroid, p); });
-        sign = d3.geom.polygon(points).area() > 0 ? 1 : -1;
+        var nodes = _.uniq(graph.childNodes(way)),
+            keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; }),
+            points = nodes.map(function(n) { return projection(n.loc); }),
+            keyPoints = keyNodes.map(function(n) { return projection(n.loc); }),
+            centroid = d3.geom.polygon(points).centroid(),
+            radius = d3.median(points, function(p) { return iD.geo.euclideanDistance(centroid, p); }),
+            sign = d3.geom.polygon(points).area() > 0 ? 1 : -1,
+            ids;
 
         // we need atleast two key nodes for the algorithm to work
         if (!keyNodes.length) {
@@ -135,11 +108,12 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
                     wayDirection1 = (endIndex1 - startIndex1);
                 if (wayDirection1 < -1) { wayDirection1 = 1;}
 
+                /*jshint -W083 */
                 _.each(_.without(graph.parentWays(keyNodes[i]), way), function(sharedWay) {
                     if (sharedWay.areAdjacent(startNode.id, endNode.id)) {
                         var startIndex2 = sharedWay.nodes.lastIndexOf(startNode.id),
                             endIndex2 = sharedWay.nodes.lastIndexOf(endNode.id),
-                            wayDirection2 = (endIndex2 - startIndex2)
+                            wayDirection2 = (endIndex2 - startIndex2),
                             insertAt = endIndex2;
                         if (wayDirection2 < -1) { wayDirection2 = 1;}
 
@@ -153,6 +127,7 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
                         graph = graph.replace(sharedWay);
                     }
                 });
+                /*jshint +W083 */
             }
 
         }
@@ -164,6 +139,38 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
         way = way.update({nodes: ids});
         graph = graph.replace(way);
 
+        return graph;
+    };
+
+    action.makeConvex = function(graph) {
+        var way = graph.entity(wayId),
+            nodes = _.uniq(graph.childNodes(way)),
+            points = nodes.map(function(n) { return projection(n.loc); }),
+            sign = d3.geom.polygon(points).area() > 0 ? 1 : -1,
+            hull = d3.geom.hull(points);
+
+        // D3 convex hulls go counterclockwise..
+        if (sign === -1) {
+            nodes.reverse();
+            points.reverse();
+        }
+
+        for (var i = 0; i < hull.length - 1; i++) {
+            var startIndex = points.indexOf(hull[i]),
+                endIndex = points.indexOf(hull[i+1]),
+                indexRange = (endIndex - startIndex);
+
+            if (indexRange < 0) {
+                indexRange += nodes.length;
+            }
+
+            // move interior nodes to the surface of the convex hull..
+            for (var j = 1; j < indexRange; j++) {
+                var point = iD.geo.interp(hull[i], hull[i+1], j / indexRange),
+                    node = nodes[(j + startIndex) % nodes.length].move(projection.invert(point));
+                graph = graph.replace(node);
+            }
+        }
         return graph;
     };
 

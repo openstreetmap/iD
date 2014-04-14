@@ -66,7 +66,7 @@ _.extend(iD.Way.prototype, {
             curr = (curr > 0) ? 1 : (curr < 0) ? -1 : 0;
             if (curr === 0) {
                 continue;
-            } else if ((prev) && (curr !== prev)) {
+            } else if (prev && curr !== prev) {
                 return false;
             }
             prev = curr;
