@@ -1927,6 +1927,10 @@
                 "name": "Meadow",
                 "terms": ""
             },
+            "landuse/military": {
+                "name": "Military",
+                "terms": ""
+            },
             "landuse/orchard": {
                 "name": "Orchard",
                 "terms": ""

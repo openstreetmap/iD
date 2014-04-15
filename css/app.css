@@ -939,7 +939,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .preset-icon-fill.tag-shop,
-.preset-icon-fill.tag-building {
+.preset-icon-fill.tag-building,
+.preset-icon-fill.tag-landuse.tag-landuse-residential,
+.preset-icon-fill.tag-landuse.tag-landuse-construction,
+.preset-icon-fill.tag-landuse.tag-landuse-military {
     background:transparent url(img/sprite.svg) no-repeat 0 -80px;
 }
 
