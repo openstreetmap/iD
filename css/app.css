@@ -930,36 +930,59 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .preset-icon-fill.icon-area {
     cursor: inherit;
-    height: 45px;
-    width: 45px;
+    height: 41px;
+    width: 41px;
     margin: auto;
     position: absolute;
-    left: 7px; top: 7px;
-    background:transparent url(img/sprite.svg) no-repeat -240px -80px;
+    left: 9px; top: 9px;
+    background-color: rgba(0,0,0,.1);
 }
 
-.preset-icon-fill.tag-shop,
-.preset-icon-fill.tag-building,
-.preset-icon-fill.tag-landuse.tag-landuse-residential,
-.preset-icon-fill.tag-landuse.tag-landuse-construction,
-.preset-icon-fill.tag-landuse.tag-landuse-military {
+.preset-icon-fill.icon-area:after {
+    content: '';
+    left: -2px;
+    top: -2px;
+    height: 45px;
+    width: 45px;
+    position: absolute;
     background:transparent url(img/sprite.svg) no-repeat 0 -80px;
 }
 
+.preset-icon-fill.tag-landuse-retail,
+.preset-icon-fill.tag-landuse-commercial {
+    background-color: #eab056;
+}
+
+.preset-icon-fill.tag-landuse-industrial {
+    background-color: #e4a4f5;
+}
+
+.preset-icon-fill.tag-landuse-construction,
+.preset-icon-fill.tag-shop,
+.preset-icon-fill.tag-building {
+    background-color: #e06e5f;
+}
+
 .preset-icon-fill.tag-natural-water {
-    background:transparent url(img/sprite.svg) no-repeat -60px -80px;
+    background-color: #77d3de;
 }
 
 .preset-icon-fill.tag-landuse,
 .preset-icon-fill.tag-natural-wood,
 .preset-icon-fill.tag-natural-tree,
 .preset-icon-fill.tag-natural-grassland,
+.preset-icon-fill.tag-natural-grass,
+.preset-icon-fill.tag-leisure-pitch,
 .preset-icon-fill.tag-leisure-park {
-    background:transparent url(img/sprite.svg) no-repeat -120px -80px;
+    background-color:#8cd05f;
 }
 
 .preset-icon-fill.tag-amenity-parking {
-    background:transparent url(img/sprite.svg) no-repeat -180px -80px;
+    background-color:#aaa;
+}
+
+.preset-icon-fill.tag-natural-beach {
+    background-color: #ffff7e;
 }
 
 /* preset form basics */
