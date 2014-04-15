@@ -1118,6 +1118,9 @@ en:
       landuse/meadow: 
         name: Meadow
         terms: "<translate with synonyms or related terms for 'Meadow', separated by commas>"
+      landuse/military: 
+        name: Military
+        terms: "<translate with synonyms or related terms for 'Military', separated by commas>"
       landuse/orchard: 
         name: Orchard
         terms: "<translate with synonyms or related terms for 'Orchard', separated by commas>"

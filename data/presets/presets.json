@@ -4567,6 +4567,16 @@
         "terms": [],
         "name": "Meadow"
     },
+    "landuse/military": {
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "military"
+        },
+        "terms": [],
+        "name": "Military"
+    },
     "landuse/orchard": {
         "fields": [
             "trees"
