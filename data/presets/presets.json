@@ -4435,6 +4435,7 @@
         "name": "Cemetery"
     },
     "landuse/commercial": {
+        "icon": "commercial",
         "geometry": [
             "point",
             "area"
@@ -4604,6 +4605,7 @@
         "name": "Quarry"
     },
     "landuse/residential": {
+        "icon": "building",
         "geometry": [
             "point",
             "area"

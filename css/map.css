@@ -245,10 +245,7 @@ path.stroke.tag-landuse-landfill {
     stroke: #ff9933;
 }
 
-path.stroke.tag-landuse-military {
-    stroke: #e06e5f;
-}
-
+path.stroke.tag-landuse-military,
 path.stroke.tag-landuse-residential,
 path.stroke.tag-landuse-construction {
     stroke: #e06e5f;
