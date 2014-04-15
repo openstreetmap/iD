@@ -8,7 +8,7 @@ iD.ui.Background = function(context) {
             ['bottom', [0, 1]]],
         opacityDefault = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 0.5,
-        customTemplate;
+        customTemplate = '';
 
     // Can be 0 from <1.3.0 use or due to issue #1923.
     if (opacityDefault === 0) opacityDefault = 0.5;
