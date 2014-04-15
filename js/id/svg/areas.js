@@ -6,6 +6,7 @@ iD.svg.Areas = function(projection) {
         beach: 'beach',
         scrub: 'scrub',
         construction: 'construction',
+        military: 'construction',
         cemetery: 'cemetery',
         grave_yard: 'cemetery',
         meadow: 'meadow',
