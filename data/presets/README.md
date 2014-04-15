@@ -63,9 +63,10 @@ In which `type` is the fields's type. Valid field types are
 * textarea
 * radio
 * combo
-* check
 * address
-* defaultcheck - a checkbox that can be yes, no, or null - not filled
+* check - a tri-state checkbox: yes, no, or unknown (no tag)
+* defaultcheck - a boolean checkbox where checked produces a `*=yes` tag and
+  unchecked produces no tag
 
 The `key` property names the OSM key that the field will edit. Alternatively, for
 compound fields like `address`, you can specify an array of keys in the `keys`
