@@ -928,64 +928,24 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* Preset icon colors */
 
-.preset-icon-fill.icon-area {
+.preset-icon-fill-area {
     cursor: inherit;
-    height: 41px;
-    width: 41px;
+    height: 39px;
+    width: 39px;
     margin: auto;
     position: absolute;
-    left: 9px; top: 9px;
-    background-color: rgba(0,0,0,.1);
+    left: 10px;
+    top: 10px;
 }
 
-.preset-icon-fill.icon-area:after {
+.preset-icon-fill-area:after {
     content: '';
-    left: -2px;
-    top: -2px;
+    left: -4px;
+    top: -4px;
     height: 45px;
     width: 45px;
     position: absolute;
     background:transparent url(img/sprite.svg) no-repeat 0 -80px;
-}
-
-.preset-icon-fill.tag-landuse-retail,
-.preset-icon-fill.tag-landuse-commercial {
-    background-color: #eab056;
-}
-
-.preset-icon-fill.tag-landuse-industrial {
-    background-color: #e4a4f5;
-}
-
-.preset-icon-fill.tag-landuse-construction,
-.preset-icon-fill.tag-shop,
-.preset-icon-fill.tag-building,
-.preset-icon-fill.tag-landuse.tag-landuse-residential,
-.preset-icon-fill.tag-landuse.tag-landuse-construction,
-.preset-icon-fill.tag-landuse.tag-landuse-military {
-    background-color: #e06e5f;
-}
-
-.preset-icon-fill.tag-natural-water {
-    background-color: #77d3de;
-}
-
-.preset-icon-fill.tag-landuse,
-.preset-icon-fill.tag-natural-wood,
-.preset-icon-fill.tag-natural-tree,
-.preset-icon-fill.tag-natural-grassland,
-.preset-icon-fill.tag-natural-grass,
-.preset-icon-fill.tag-leisure-pitch,
-.preset-icon-fill.tag-leisure-park {
-    background-color:#8cd05f;
-}
-
-.preset-icon-fill.tag-amenity-parking {
-    background-color:#aaa;
-}
-
-.preset-icon-fill.tag-natural-beach {
-    background-color: #ffff7e;
 }
 
 /* preset form basics */

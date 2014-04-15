@@ -158,112 +158,88 @@ path.shadow.selected {
     stroke-opacity: 0.7;
 }
 
-path.area.stroke {
-    stroke: white;
-    stroke-width: 1;
-}
-
-path.area.fill {
-    fill:#fff;
-    fill-opacity:0.3;
-    fill-rule: evenodd;
-}
-
 path.line.stroke {
     stroke: white;
     stroke-width: 2;
 }
 
+path.area.stroke {
+    stroke: white;
+    stroke-width: 1;
+}
+path.area.fill {
+    fill: rgba(255, 255, 255, 0.3);
+    fill-rule: evenodd;
+}
+.preset-icon-fill-area {
+    border: 1px solid rgb(170, 170, 170);
+    background-color: rgba(170, 170, 170, 0.3);
+}
+
 path.stroke.tag-natural {
-    stroke: #b6e199;
+    stroke: rgb(182, 225, 153);
 }
 path.fill.tag-natural {
-    fill: #b6e199;
+    fill: rgba(182, 225, 153, 0.3);
+}
+.preset-icon-fill-area.tag-natural {
+    border-color: rgb(182, 225, 153);
+    background-color: rgba(182, 225, 153, 0.3);
 }
 
 path.stroke.tag-natural-water {
-    stroke: #77d3de;
+    stroke: rgb(119, 211, 222);
 }
 path.fill.tag-natural-water {
-    fill: #77d3de;
+    fill: rgba(119, 211, 222, 0.3);
+}
+.preset-icon-fill-area.tag-natural-water {
+    border-color: rgb(119, 211, 222);
+    background-color: rgba(119, 211, 222, 0.3);
 }
 
 path.stroke.tag-amenity-school {
-    stroke: #ffff94;
+    stroke: rgb(255, 255, 148);
 }
 path.fill.tag-amenity-school {
-    fill: #ffff94;
-    fill-opacity: 0.2;
+    fill: rgba(255, 255, 148, 0.2);
+}
+.preset-icon-fill-area.tag-amenity-school {
+    border-color: rgb(255, 255, 148);
+    background-color: rgba(255, 255, 148, 0.2);
 }
 
 path.stroke.tag-amenity-university {
-    stroke: #ffff94;
+    stroke: rgb(255, 255, 148);
 }
 path.fill.tag-amenity-university {
-    fill: #ffff94;
-    fill-opacity: 0.1;
+    fill: rgba(255, 255, 148, 0.1);
+}
+.preset-icon-fill-area.tag-amenity-university {
+    border-color: rgb(255, 255, 148);
+    background-color: rgba(255, 255, 148, 0.1);
 }
 
 path.stroke.tag-building {
-    stroke: #e06e5f;
+    stroke: rgb(224, 110, 95);
 }
 path.fill.tag-building {
-    fill: #e06e5f;
+    fill: rgba(224, 110, 95, 0.3);
 }
-
-/* Landuse */
-
+.preset-icon-fill-area.tag-building {
+    border-color: rgb(224, 110, 95);
+    background-color: rgba(224, 110, 95, 0.3);
+}
 
 path.stroke.tag-landuse,
 path.stroke.tag-natural-wood,
 path.stroke.tag-natural-tree,
 path.stroke.tag-natural-grassland,
+path.stroke.tag-natural-grass,
 path.stroke.tag-leisure-pitch,
 path.stroke.tag-leisure-park {
-    stroke: #8cd05f;
+    stroke: rgb(140, 208, 95);
 }
-
-path.stroke.tag-landuse-retail,
-path.stroke.tag-landuse-commercial {
-    stroke: #eab056;
-}
-
-path.stroke.tag-landuse-industrial {
-    stroke: #e4a4f5;
-}
-
-path.stroke.tag-landuse-basin,
-path.stroke.tag-landuse-reservoir {
-    stroke: #77d3de;
-}
-
-path.stroke.tag-landuse-quarry {
-    stroke: #a6957b;
-}
-
-path.stroke.tag-landuse-landfill {
-    stroke: #ff9933;
-}
-
-path.stroke.tag-landuse-military,
-path.stroke.tag-landuse-residential,
-path.stroke.tag-landuse-construction {
-    stroke: #e06e5f;
-}
-
-path.stroke.tag-landuse-meadow,
-path.stroke.tag-natural-wetland {
-    stroke: #b6e199;
-}
-
-path.stroke.tag-natural-beach {
-    stroke: #ffff7e;
-}
-
-path.stroke.tag-natural-scrub {
-    stroke: #dbf08b;
-}
-
 path.fill.tag-landuse,
 path.fill.tag-natural-wood,
 path.fill.tag-natural-tree,
@@ -271,140 +247,193 @@ path.fill.tag-natural-grassland,
 path.fill.tag-natural-grass,
 path.fill.tag-leisure-pitch,
 path.fill.tag-leisure-park {
-    fill: #8cd05f;
-    fill-opacity: 0.2;
+    fill: rgba(140, 208, 95, 0.2);
+}
+.preset-icon-fill-area.tag-landuse,
+.preset-icon-fill-area.tag-natural-wood,
+.preset-icon-fill-area.tag-natural-tree,
+.preset-icon-fill-area.tag-natural-grassland,
+.preset-icon-fill-area.tag-natural-grass,
+.preset-icon-fill-area.tag-leisure-pitch,
+.preset-icon-fill-area.tag-leisure-park {
+    border-color: rgb(140, 208, 95);
+    background-color: rgba(140, 208, 95, 0.2);
 }
 
+path.stroke.tag-landuse-residential {
+    stroke: rgb(224, 110, 95);
+}
+path.fill.tag-landuse-residential {
+    fill: rgba(224, 110, 95, 0.1);
+}
+.preset-icon-fill-area.tag-landuse-residential {
+    border-color: rgb(224, 110, 95);
+    background-color: rgba(224, 110, 95, 0.1);
+}
+
+
+path.stroke.tag-landuse-retail,
+path.stroke.tag-landuse-commercial,
+path.stroke.tag-building-commerial {
+    stroke: rgb(234, 176, 86);
+}
 path.fill.tag-landuse-retail,
-path.fill.tag-landuse-residential,
 path.fill.tag-landuse-commercial,
-path.fill.tag-landuse-industrial {
-    fill-opacity: 0.1;
+path.fill.tag-building-commerial {
+    fill: rgba(234, 176, 86, 0.1);
+}
+.preset-icon-fill-area.tag-landuse-retail,
+.preset-icon-fill-area.tag-landuse-commercial,
+.preset-icon-fill-area.tag-building-commercial {
+    border-color: rgb(234, 176, 86);
+    background-color: rgba(234, 176, 86, 0.1);
 }
 
-path.fill.tag-natural-wetland,
-path.fill.tag-natural-beach,
-path.fill.tag-natural-scrub,
-path.fill.tag-landuse-cemetery,
-path.fill.tag-landuse-meadow,
-path.fill.tag-landuse-farm,
-path.fill.tag-landuse-farmland,
-path.fill.tag-landuse-construction,
-path.fill.tag-landuse-orchard {
-    /* background color is applied a further opacity later */
-    fill-opacity: 0.8;
+path.stroke.tag-landuse-industrial,
+path.stroke.tag-building-industrial {
+    stroke: rgb(228, 164, 245);
+}
+path.fill.tag-landuse-industrial,
+path.fill.tag-building-industrial {
+    fill: rgba(228, 164, 245, 0.1);
+}
+.preset-icon-fill-area.tag-landuse-industrial,
+.preset-icon-fill-area.tag-building-industrial {
+    border-color: rgb(228, 164, 245);
+    background-color: rgba(228, 164, 245, 0.1);
 }
 
-.pattern-color-beach,
-.pattern-color-scrub,
-.pattern-color-meadow,
-.pattern-color-wetland,
-.pattern-color-cemetery,
-.pattern-color-farm,
-.pattern-color-farmland,
-.pattern-color-construction,
-.pattern-color-orchard {
-    fill-opacity: 0.2;
+path.stroke.tag-landuse-basin,
+path.stroke.tag-landuse-reservoir {
+    stroke: rgb(119, 211, 222);
 }
-
 path.fill.tag-landuse-basin,
 path.fill.tag-landuse-reservoir {
-    fill: #77d3de;
+    fill: rgba(119, 211, 222, 0.3);
+}
+.preset-icon-fill-area.tag-landuse-basin,
+.preset-icon-fill-area.tag-landuse-reservoir {
+    border-color: rgb(119, 211, 222);
+    background-color: rgba(119, 211, 222, 0.3);
 }
 
+path.stroke.tag-landuse-quarry {
+    stroke: rgb(166, 149, 123);
+}
 path.fill.tag-landuse-quarry {
-    fill: #a6957b;
-    fill-opacity: 0.2;
+    fill: rgba(166, 149, 123, 0.2);
+}
+.preset-icon-fill-area.tag-landuse-quarry {
+    border-color: rgb(166, 149, 123);
+    background-color: rgba(166, 149, 123, 0.2);
 }
 
+path.stroke.tag-landuse-landfill {
+    stroke: rgb(255, 153, 51);
+}
 path.fill.tag-landuse-landfill {
-    fill: #ff8800;
-    fill-opacity: 0.2;
+    fill: rgba(255, 153, 51, 0.2);
+}
+.preset-icon-fill-area.tag-landuse-landfill {
+    border-color: rgb(255, 153, 51);
+    background-color: rgba(255, 153, 51, 0.2);
 }
 
-path.fill.tag-landuse-residential {
-    fill: #e06e5f;
+path.stroke.tag-landuse-construction {
+    stroke: rgb(224, 110, 95);
+}
+.pattern-color-construction {
+    fill: rgba(224, 110, 95, 0.2);
+}
+.preset-icon-fill-area.tag-landuse-construction {
+    border-color: rgb(224, 110, 95);
+    background-color: rgba(224, 110, 95, 0.2);
 }
 
-path.fill.tag-landuse-farm,
-path.fill.tag-landuse-farmland {
-    fill: url(#pattern-farmland) #8cd05f;
+path.stroke.tag-landuse-military {
+    stroke: rgb(224, 110, 95);
+}
+.preset-icon-fill-area.tag-landuse-military {
+    border-color: rgb(224, 110, 95);
+    background-color: rgba(224, 110, 95, 0.2);
+}
+
+path.stroke.tag-natural-wetland {
+    stroke: rgb(182, 225, 153);
+}
+.pattern-color-wetland {
+    fill: rgba(182, 225, 153, 0.2);
+}
+.preset-icon-fill-area.tag-natural-wetland {
+    border-color: rgb(182, 225, 153);
+    background-color: rgba(182, 225, 153, 0.2);
+}
+
+path.stroke.tag-landuse-meadow {
+    stroke: rgb(182, 225, 153);
+}
+.pattern-color-meadow {
+    fill: rgba(182, 225, 153, 0.2);
+}
+.preset-icon-fill-area.tag-landuse-meadow {
+    border-color: rgb(182, 225, 153);
+    background-color: rgba(182, 225, 153, 0.2);
+}
+
+path.stroke.tag-natural-beach {
+    stroke: rgb(255, 255, 126);
+}
+.pattern-color-beach {
+    fill: rgba(255, 255, 126, 0.2);
+}
+.preset-icon-fill-area.tag-natural-beach {
+    border-color: rgb(255, 255, 126);
+    background-color: rgba(255, 255, 126, 0.2);
+}
+
+path.stroke.tag-natural-scrub {
+    stroke: rgb(219, 240, 139);
+}
+.pattern-color-scrub {
+    fill: rgba(219, 240, 139, 0.2);
+}
+.preset-icon-fill-area.tag-natural-scrub {
+    border-color: rgb(219, 240, 139);
+    background-color: rgba(219, 240, 139, 0.2);
 }
 
 .pattern-color-farm,
 .pattern-color-farmland {
-    fill: url(#pattern-farmland) #8cd05f;
+    fill: rgba(140, 208, 95, 0.2);
+}
+.preset-icon-fill-area.tag-landuse-farm,
+.preset-icon-fill-area.tag-landuse-farmland {
+    background-color: rgba(140, 208, 95, 0.2);
 }
 
-path.fill.tag-landuse-meadow {
-    fill: url(#pattern-meadow) #b6e199;
-}
-.pattern-color-meadow {
-    fill: #b6e199;
-}
-
-path.fill.tag-natural-wetland {
-    fill: url(#pattern-wetland) #b6e199;
-}
-.pattern-color-wetland {
-    fill: #B6E199;
-}
-
-path.fill.tag-natural-beach {
-    fill: url(#pattern-beach) #ffff7e;
-}
-.pattern-color-beach {
-    fill: #ffff7e;
-}
-
-path.fill.tag-natural-scrub {
-    fill: url(#pattern-scrub) #dbf08b;
-}
-.pattern-color-scrub {
-    fill: #dbf08b;
-}
-
-path.fill.tag-landuse-cemetery {
-    fill: url(#pattern-cemetery) #8cd05f;
-}
 .pattern-color-cemetery {
-    fill: #8cd05f
+    fill: rgba(140, 208, 95, 0.2)
+}
+.preset-icon-fill-area.tag-landuse-cemetery {
+    background-color: rgba(140, 208, 95, 0.2);
 }
 
-path.fill.tag-landuse-orchard {
-    fill: url(#pattern-orchard) #8cd05f;
-}
 .pattern-color-orchard {
-    fill: #8cd05f
+    fill: rgba(140, 208, 95, 0.2)
 }
-
-path.fill.tag-landuse-construction {
-    fill: url(#pattern-construction) #e06e5f;
-}
-.pattern-color-construction {
-    fill: #e06e5f;
-}
-
-path.fill.tag-landuse-retail,
-path.fill.tag-landuse-commercial {
-    fill: #eab056;
-}
-
-path.fill.tag-landuse-industrial {
-    fill: #e4a4f5;
-}
-
-path.fill.tag-landuse-military {
-    fill: url(#pattern-construction);
-    opacity: 1;
+.preset-icon-fill-area.tag-landuse-orchard {
+    background-color: rgba(140, 208, 95, 0.8);
 }
 
 path.stroke.tag-amenity-parking {
-    stroke: #aaa;
+    stroke: rgb(170, 170, 170);
 }
-
 path.fill.tag-amenity-parking {
-    fill: #aaa;
+    fill: rgba(170, 170, 170, 0.3);
+}
+.preset-icon-fill-area.tag-amenity-parking {
+    border-color: rgb(170, 170, 170);
+    background-color: rgba(170, 170, 170, 0.3);
 }
 
 path.fill.tag-place,
