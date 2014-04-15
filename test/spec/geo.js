@@ -18,6 +18,27 @@ describe('iD.geo', function() {
         });
     });
 
+    describe('.cross', function() {
+        it('cross product of right hand turn is positive', function() {
+            var o = [0, 0],
+                a = [2, 0],
+                b = [0, 2];
+            expect(iD.geo.cross(o, a, b)).to.eql(4);
+        });
+        it('cross product of left hand turn is negative', function() {
+            var o = [0, 0],
+                a = [2, 0],
+                b = [0, -2];
+            expect(iD.geo.cross(o, a, b)).to.eql(-4);
+        });
+        it('cross product of colinear points is zero', function() {
+            var o = [0, 0],
+                a = [-2, 0],
+                b = [2, 0];
+            expect(iD.geo.cross(o, a, b)).to.eql(0);
+        });
+    });
+
     describe('.euclideanDistance', function() {
         it('distance between two same points is zero', function() {
             var a = [0, 0],
