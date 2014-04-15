@@ -39,7 +39,8 @@
             "landuse/farmyard",
             "landuse/forest",
             "landuse/meadow",
-            "landuse/cemetery"
+            "landuse/cemetery",
+            "landuse/military"
         ]
     },
     "category-path": {

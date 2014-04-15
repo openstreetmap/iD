@@ -245,6 +245,7 @@ path.stroke.tag-landuse-landfill {
     stroke: #ff9933;
 }
 
+path.stroke.tag-landuse-military,
 path.stroke.tag-landuse-residential,
 path.stroke.tag-landuse-construction {
     stroke: #e06e5f;
@@ -393,9 +394,15 @@ path.fill.tag-landuse-industrial {
     fill: #e4a4f5;
 }
 
+path.fill.tag-landuse-military {
+    fill: url(#pattern-construction);
+    opacity: 1;
+}
+
 path.stroke.tag-amenity-parking {
     stroke: #aaa;
 }
+
 path.fill.tag-amenity-parking {
     fill: #aaa;
 }
