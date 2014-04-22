@@ -12,7 +12,7 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
             keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; }),
             points = nodes.map(function(n) { return projection(n.loc); }),
             keyPoints = keyNodes.map(function(n) { return projection(n.loc); }),
-            centroid = d3.geom.polygon(points).centroid(),
+            centroid = (points.length === 2) ? iD.geo.interp(points[0], points[1], 0.5) : d3.geom.polygon(points).centroid(),
             radius = d3.median(points, function(p) { return iD.geo.euclideanDistance(centroid, p); }),
             sign = d3.geom.polygon(points).area() > 0 ? 1 : -1,
             ids;
