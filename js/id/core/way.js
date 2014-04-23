@@ -58,12 +58,17 @@ _.extend(iD.Way.prototype, {
     isConvex: function(resolver) {
         if (!this.isClosed() || this.isDegenerate()) return null;
 
-        var coords = _.pluck(resolver.childNodes(this), 'loc'),
+        var nodes = _.uniq(resolver.childNodes(this)),
+            coords = _.pluck(nodes, 'loc'),
             curr = 0, prev = 0;
 
-        for (var i = 1; i < coords.length - 1; i++) {
-            curr = iD.geo.cross(coords[i-1], coords[i], coords[i+1]);
-            curr = (curr > 0) ? 1 : (curr < 0) ? -1 : 0;
+        for (var i = 0; i < coords.length; i++) {
+            var o = coords[(i+1) % coords.length],
+                a = coords[i],
+                b = coords[(i+2) % coords.length],
+                res = iD.geo.cross(o, a, b);
+
+            curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
             if (curr === 0) {
                 continue;
             } else if (prev && curr !== prev) {
