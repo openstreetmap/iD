@@ -562,9 +562,6 @@ path.stroke.area.tag-highway-pedestrian {
     stroke:#fff;
     stroke-width: 2;
 }
-path.fill.area.tag-highway-pedestrian {
-    fill:#ccc;
-}
 
 path.stroke.tag-highway-service {
     stroke:#fff;
