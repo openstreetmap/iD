@@ -87,6 +87,67 @@ describe('iD.Way', function() {
         });
     });
 
+    describe('#isConvex', function() {
+        it('returns true for convex ways', function() {
+            //    d -- e
+            //    |     \
+            //    |      a
+            //    |     /
+            //    c -- b
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [ 0.0003,  0.0000]}),
+                iD.Node({id: 'b', loc: [ 0.0002, -0.0002]}),
+                iD.Node({id: 'c', loc: [-0.0002, -0.0002]}),
+                iD.Node({id: 'd', loc: [-0.0002,  0.0002]}),
+                iD.Node({id: 'e', loc: [ 0.0002,  0.0002]}),
+                iD.Way({id: 'w', nodes: ['a','b','c','d','e','a']})
+            ]);
+            expect(graph.entity('w').isConvex(graph)).to.be.true;
+        });
+
+        it('returns false for concave ways', function() {
+            //    d -- e
+            //    |   /
+            //    |  a
+            //    |   \
+            //    c -- b
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [ 0.0000,  0.0000]}),
+                iD.Node({id: 'b', loc: [ 0.0002, -0.0002]}),
+                iD.Node({id: 'c', loc: [-0.0002, -0.0002]}),
+                iD.Node({id: 'd', loc: [-0.0002,  0.0002]}),
+                iD.Node({id: 'e', loc: [ 0.0002,  0.0002]}),
+                iD.Way({id: 'w', nodes: ['a','b','c','d','e','a']})
+            ]);
+            expect(graph.entity('w').isConvex(graph)).to.be.false;
+        });
+
+        it('returns null for non-closed ways', function() {
+            //    d -- e
+            //    |
+            //    |  a
+            //    |   \
+            //    c -- b
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [ 0.0000,  0.0000]}),
+                iD.Node({id: 'b', loc: [ 0.0002, -0.0002]}),
+                iD.Node({id: 'c', loc: [-0.0002, -0.0002]}),
+                iD.Node({id: 'd', loc: [-0.0002,  0.0002]}),
+                iD.Node({id: 'e', loc: [ 0.0002,  0.0002]}),
+                iD.Way({id: 'w', nodes: ['a','b','c','d','e']})
+            ]);
+            expect(graph.entity('w').isConvex(graph)).to.be.null;
+        });
+
+        it('returns null for degenerate ways', function() {
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0.0000,  0.0000]}),
+                iD.Way({id: 'w', nodes: ['a','a']})
+            ]);
+            expect(graph.entity('w').isConvex(graph)).to.be.null;
+        });
+    });
+
     describe('#isOneWay', function() {
         it('returns false when the way has no tags', function() {
             expect(iD.Way().isOneWay()).to.eql(false);

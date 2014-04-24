@@ -55,6 +55,30 @@ _.extend(iD.Way.prototype, {
         return this.nodes.length > 0 && this.first() === this.last();
     },
 
+    isConvex: function(resolver) {
+        if (!this.isClosed() || this.isDegenerate()) return null;
+
+        var nodes = _.uniq(resolver.childNodes(this)),
+            coords = _.pluck(nodes, 'loc'),
+            curr = 0, prev = 0;
+
+        for (var i = 0; i < coords.length; i++) {
+            var o = coords[(i+1) % coords.length],
+                a = coords[i],
+                b = coords[(i+2) % coords.length],
+                res = iD.geo.cross(o, a, b);
+
+            curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
+            if (curr === 0) {
+                continue;
+            } else if (prev && curr !== prev) {
+                return false;
+            }
+            prev = curr;
+        }
+        return true;
+    },
+
     isArea: function() {
         if (this.tags.area === 'yes')
             return true;

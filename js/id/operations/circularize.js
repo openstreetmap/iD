@@ -9,8 +9,10 @@ iD.operations.Circularize = function(selectedIDs, context) {
     };
 
     operation.available = function() {
+        var entity = context.entity(entityId);
         return selectedIDs.length === 1 &&
-            context.entity(entityId).type === 'way';
+            entity.type === 'way' &&
+            _.uniq(entity.nodes).length > 1;
     };
 
     operation.disabled = function() {
