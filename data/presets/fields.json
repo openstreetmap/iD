@@ -711,6 +711,11 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "sloped_curb": {
+        "key": "sloped_curb",
+        "type": "combo",
+        "label": "Sloped Curb"
+    },
     "smoking": {
         "key": "smoking",
         "type": "combo",
@@ -805,6 +810,11 @@
         "key": "surface",
         "type": "combo",
         "label": "Surface"
+    },
+    "tactile_paving": {
+        "key": "tactile_paving",
+        "type": "check",
+        "label": "Tactile Paving"
     },
     "toilets/disposal": {
         "key": "toilets:disposal",

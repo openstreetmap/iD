@@ -3652,7 +3652,9 @@
     },
     "highway/crossing": {
         "fields": [
-            "crossing"
+            "crossing",
+            "sloped_curb",
+            "tactile_paving"
         ],
         "geometry": [
             "vertex"

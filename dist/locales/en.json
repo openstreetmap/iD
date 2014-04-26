@@ -813,6 +813,9 @@
             "shop": {
                 "label": "Type"
             },
+            "sloped_curb": {
+                "label": "Sloped Curb"
+            },
             "smoking": {
                 "label": "Smoking"
             },
@@ -847,6 +850,9 @@
             },
             "surface": {
                 "label": "Surface"
+            },
+            "tactile_paving": {
+                "label": "Tactile Paving"
             },
             "toilets/disposal": {
                 "label": "Disposal"

@@ -288,6 +288,8 @@ en:
         label: Type
       shop: 
         label: Type
+      sloped_curb: 
+        label: Sloped Curb
       smoking: 
         label: Smoking
       social_facility_for: 
@@ -313,6 +315,8 @@ en:
         label: Supervised
       surface: 
         label: Surface
+      tactile_paving: 
+        label: Tactile Paving
       toilets/disposal: 
         label: Disposal
       tourism: 
