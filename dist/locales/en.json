@@ -2683,6 +2683,10 @@
                 "name": "Video Store",
                 "terms": ""
             },
+            "shop/wine": {
+                "name": "Wine Shop",
+                "terms": "winery"
+            },
             "tourism": {
                 "name": "Tourism",
                 "terms": ""

@@ -1685,6 +1685,9 @@ en:
       shop/video: 
         name: Video Store
         terms: "<translate with synonyms or related terms for 'Video Store', separated by commas>"
+      shop/wine: 
+        name: Wine Shop
+        terms: "<translate with synonyms or related terms for 'Wine Shop', separated by commas>"
       tourism: 
         name: Tourism
         terms: "<translate with synonyms or related terms for 'Tourism', separated by commas>"

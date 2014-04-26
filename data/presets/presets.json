@@ -7493,6 +7493,26 @@
         },
         "name": "Video Store"
     },
+    "shop/wine": {
+        "icon": "alcohol-shop",
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "shop": "wine"
+        },
+        "terms": [
+            "winery"
+        ],
+        "name": "Wine Shop"
+    },
     "tourism": {
         "fields": [
             "tourism"
