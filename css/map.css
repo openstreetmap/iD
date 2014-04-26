@@ -274,12 +274,12 @@ path.fill.tag-landuse-residential {
 
 path.stroke.tag-landuse-retail,
 path.stroke.tag-landuse-commercial,
-path.stroke.tag-building-commerial {
+path.stroke.tag-building-commercial {
     stroke: rgb(234, 176, 86);
 }
 path.fill.tag-landuse-retail,
 path.fill.tag-landuse-commercial,
-path.fill.tag-building-commerial {
+path.fill.tag-building-commercial {
     fill: rgba(234, 176, 86, 0.1);
 }
 .preset-icon-fill-area.tag-landuse-retail,
