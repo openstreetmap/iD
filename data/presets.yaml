@@ -1092,6 +1092,9 @@ en:
       landuse/cemetery: 
         name: Cemetery
         terms: "<translate with synonyms or related terms for 'Cemetery', separated by commas>"
+      landuse/churchyard: 
+        name: Churchyard
+        terms: "<translate with synonyms or related terms for 'Churchyard', separated by commas>"
       landuse/commercial: 
         name: Commercial
         terms: "<translate with synonyms or related terms for 'Commercial', separated by commas>"

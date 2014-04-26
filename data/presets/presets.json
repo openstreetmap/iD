@@ -4435,6 +4435,20 @@
         "terms": [],
         "name": "Cemetery"
     },
+    "landuse/churchyard": {
+        "fields": [
+            "religion",
+            "denomination"
+        ],
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "churchyard"
+        },
+        "terms": [],
+        "name": "Churchyard"
+    },
     "landuse/commercial": {
         "icon": "commercial",
         "geometry": [
