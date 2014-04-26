@@ -673,15 +673,13 @@ path.casing.tag-aeroway-runway {
     stroke-linecap: square;
 }
 path.fill.tag-aeroway-runway {
-    fill: #000;
-    fill-opacity: 0.6;
+    fill: rgba(0, 0, 0, 0.6);
 }
 path.stroke.tag-aeroway-apron {
     stroke: #805C80;
 }
 path.fill.tag-aeroway-apron {
-    fill: #805C80;
-    fill-opacity: 0.2;
+    fill: rgba(128, 92, 128, 0.2);
 }
 
 
@@ -787,7 +785,7 @@ path.casing.tag-highway-construction {
 /* waterways */
 
 path.fill.tag-waterway {
-    fill: #77d3de;
+    fill: rgba(119, 211, 222, 0.3);
 }
 
 path.stroke.tag-waterway {
