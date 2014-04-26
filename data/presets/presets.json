@@ -1933,8 +1933,7 @@
         "fields": [
             "building",
             "levels",
-            "address",
-            "smoking"
+            "address"
         ],
         "geometry": [
             "area"
