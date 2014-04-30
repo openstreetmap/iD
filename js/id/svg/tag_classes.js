@@ -5,7 +5,7 @@ iD.svg.TagClasses = function() {
             'leisure', 'place'
         ],
         secondary = [
-            'oneway', 'bridge', 'tunnel', 'construction'
+            'oneway', 'bridge', 'tunnel', 'construction', 'embankment', 'cutting'
         ],
         tagClassRe = /^tag-/,
         tags = function(entity) { return entity.tags; };
