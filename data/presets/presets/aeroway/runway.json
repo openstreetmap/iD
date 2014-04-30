@@ -8,7 +8,9 @@
     ],
     "fields": [
         "ref",
-        "surface"
+        "surface",
+        "length",
+        "width"
     ],
     "tags": {
         "aeroway": "runway"

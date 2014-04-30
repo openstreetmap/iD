@@ -279,7 +279,9 @@
         ],
         "fields": [
             "ref",
-            "surface"
+            "surface",
+            "length",
+            "width"
         ],
         "tags": {
             "aeroway": "runway"
@@ -3479,6 +3481,8 @@
         "fields": [
             "surface",
             "lit",
+            "width",
+            "structure",
             "access"
         ],
         "geometry": [
@@ -3614,9 +3618,10 @@
     },
     "highway/bridleway": {
         "fields": [
-            "access",
             "surface",
-            "structure"
+            "width",
+            "structure",
+            "access"
         ],
         "icon": "highway-bridleway",
         "geometry": [
@@ -3673,9 +3678,10 @@
         "fields": [
             "surface",
             "lit",
+            "width",
+            "oneway",
             "structure",
-            "access",
-            "oneway"
+            "access"
         ],
         "geometry": [
             "line"
@@ -3689,9 +3695,11 @@
     "highway/footway": {
         "icon": "highway-footway",
         "fields": [
+            "surface",
+            "lit",
+            "width",
             "structure",
-            "access",
-            "surface"
+            "access"
         ],
         "geometry": [
             "line",
@@ -3815,10 +3823,11 @@
     "highway/path": {
         "icon": "highway-path",
         "fields": [
+            "surface",
+            "width",
             "structure",
             "access",
             "sac_scale",
-            "surface",
             "incline",
             "trail_visibility",
             "ref"
@@ -3834,9 +3843,12 @@
     },
     "highway/pedestrian": {
         "fields": [
-            "access",
+            "surface",
+            "lit",
+            "width",
             "oneway",
-            "surface"
+            "structure",
+            "access"
         ],
         "geometry": [
             "line",
@@ -4103,8 +4115,10 @@
     },
     "highway/steps": {
         "fields": [
-            "access",
-            "surface"
+            "surface",
+            "lit",
+            "width",
+            "access"
         ],
         "icon": "highway-steps",
         "geometry": [
@@ -4819,7 +4833,8 @@
         "icon": "pitch",
         "fields": [
             "sport",
-            "surface"
+            "surface",
+            "lit"
         ],
         "geometry": [
             "point",
@@ -4834,7 +4849,8 @@
     "leisure/pitch/american_football": {
         "icon": "america-football",
         "fields": [
-            "surface"
+            "surface",
+            "lit"
         ],
         "geometry": [
             "point",
@@ -4849,6 +4865,9 @@
     },
     "leisure/pitch/baseball": {
         "icon": "baseball",
+        "fields": [
+            "lit"
+        ],
         "geometry": [
             "point",
             "area"
@@ -4864,7 +4883,8 @@
         "icon": "basketball",
         "fields": [
             "surface",
-            "hoops"
+            "hoops",
+            "lit"
         ],
         "geometry": [
             "point",
@@ -4880,7 +4900,8 @@
     "leisure/pitch/skateboard": {
         "icon": "pitch",
         "fields": [
-            "surface"
+            "surface",
+            "lit"
         ],
         "geometry": [
             "point",
@@ -4896,7 +4917,8 @@
     "leisure/pitch/soccer": {
         "icon": "soccer",
         "fields": [
-            "surface"
+            "surface",
+            "lit"
         ],
         "geometry": [
             "point",
@@ -4912,7 +4934,8 @@
     "leisure/pitch/tennis": {
         "icon": "tennis",
         "fields": [
-            "surface"
+            "surface",
+            "lit"
         ],
         "geometry": [
             "point",
@@ -4928,7 +4951,8 @@
     "leisure/pitch/volleyball": {
         "icon": "pitch",
         "fields": [
-            "surface"
+            "surface",
+            "lit"
         ],
         "geometry": [
             "point",
@@ -5011,7 +5035,9 @@
     "leisure/track": {
         "icon": "pitch",
         "fields": [
-            "surface"
+            "surface",
+            "lit",
+            "width"
         ],
         "geometry": [
             "point",
@@ -8132,6 +8158,9 @@
     },
     "waterway/canal": {
         "icon": "waterway-canal",
+        "fields": [
+            "width"
+        ],
         "geometry": [
             "line"
         ],
@@ -8182,7 +8211,8 @@
     "waterway/river": {
         "icon": "waterway-river",
         "fields": [
-            "tunnel"
+            "tunnel",
+            "width"
         ],
         "geometry": [
             "line"
@@ -8220,7 +8250,8 @@
     "waterway/stream": {
         "icon": "waterway-stream",
         "fields": [
-            "tunnel"
+            "tunnel",
+            "width"
         ],
         "geometry": [
             "line"

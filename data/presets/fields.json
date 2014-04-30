@@ -456,6 +456,11 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "length": {
+        "key": "length",
+        "type": "number",
+        "label": "Length (Meters)"
+    },
     "levels": {
         "key": "building:levels",
         "type": "number",
@@ -905,6 +910,11 @@
         "icon": "wheelchair",
         "universal": true,
         "label": "Wheelchair Access"
+    },
+    "width": {
+        "key": "width",
+        "type": "number",
+        "label": "Width (Meters)"
     },
     "wikipedia": {
         "key": "wikipedia",

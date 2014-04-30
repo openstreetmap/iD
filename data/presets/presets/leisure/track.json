@@ -1,7 +1,9 @@
 {
     "icon": "pitch",
     "fields": [
-        "surface"
+        "surface",
+        "lit",
+        "width"
     ],
     "geometry": [
         "point",

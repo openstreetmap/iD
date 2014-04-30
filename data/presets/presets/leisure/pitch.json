@@ -2,7 +2,8 @@
     "icon": "pitch",
     "fields": [
         "sport",
-        "surface"
+        "surface",
+        "lit"
     ],
     "geometry": [
         "point",

@@ -1,10 +1,11 @@
 {
     "icon": "highway-path",
     "fields": [
+        "surface",
+        "width",
         "structure",
         "access",
         "sac_scale",
-        "surface",
         "incline",
         "trail_visibility",
         "ref"

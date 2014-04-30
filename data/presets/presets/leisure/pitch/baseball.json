@@ -1,5 +1,8 @@
 {
     "icon": "baseball",
+    "fields": [
+        "lit"
+    ],
     "geometry": [
         "point",
         "area"

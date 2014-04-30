@@ -1,8 +1,11 @@
 {
     "fields": [
-        "access",
+        "surface",
+        "lit",
+        "width",
         "oneway",
-        "surface"
+        "structure",
+        "access"
     ],
     "geometry": [
         "line", "area"

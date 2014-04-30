@@ -195,6 +195,8 @@ en:
         label: Layer
       leisure: 
         label: Type
+      length: 
+        label: Length (Meters)
       levels: 
         label: Levels
         placeholder: "2, 4, 6..."
@@ -348,6 +350,8 @@ en:
         label: Type
       wheelchair: 
         label: Wheelchair Access
+      width: 
+        label: Width (Meters)
       wikipedia: 
         label: Wikipedia
       wood: 

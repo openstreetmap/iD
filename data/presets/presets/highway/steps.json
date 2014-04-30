@@ -1,7 +1,9 @@
 {
     "fields": [
-        "access",
-        "surface"
+        "surface",
+        "lit",
+        "width",
+        "access"
     ],
     "icon": "highway-steps",
     "geometry": [
