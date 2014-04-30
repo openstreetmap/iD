@@ -724,11 +724,11 @@ path.shadow.tag-highway-bridleway.tag-bridge {
 
 /* tunnels */
 
-path.stroke.tag-highway.tag-tunnel {
+path.stroke.tag-tunnel {
     stroke-opacity: 0.3;
 }
 
-path.casing.tag-highway.tag-tunnel {
+path.casing.tag-tunnel {
     stroke-opacity: 0.5;
 }
 
