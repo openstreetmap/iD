@@ -585,6 +585,11 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "population": {
+        "key": "population",
+        "type": "text",
+        "label": "Population"
+    },
     "power": {
         "key": "power",
         "type": "typeCombo",

@@ -244,6 +244,8 @@ en:
         label: Type
       place: 
         label: Type
+      population: 
+        label: Population
       power: 
         label: Type
       railway: 

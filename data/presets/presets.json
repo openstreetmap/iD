@@ -5937,6 +5937,9 @@
     },
     "place/city": {
         "icon": "city",
+        "fields": [
+            "population"
+        ],
         "geometry": [
             "point",
             "area"
@@ -5948,6 +5951,9 @@
     },
     "place/hamlet": {
         "icon": "triangle-stroked",
+        "fields": [
+            "population"
+        ],
         "geometry": [
             "point",
             "area"
@@ -5989,6 +5995,9 @@
     },
     "place/locality": {
         "icon": "marker",
+        "fields": [
+            "population"
+        ],
         "geometry": [
             "point",
             "area"
@@ -6000,6 +6009,9 @@
     },
     "place/neighbourhood": {
         "icon": "triangle-stroked",
+        "fields": [
+            "population"
+        ],
         "geometry": [
             "point",
             "area"
@@ -6014,6 +6026,9 @@
     },
     "place/suburb": {
         "icon": "triangle-stroked",
+        "fields": [
+            "population"
+        ],
         "geometry": [
             "point",
             "area"
@@ -6029,6 +6044,9 @@
     },
     "place/town": {
         "icon": "town",
+        "fields": [
+            "population"
+        ],
         "geometry": [
             "point",
             "area"
@@ -6040,6 +6058,9 @@
     },
     "place/village": {
         "icon": "village",
+        "fields": [
+            "population"
+        ],
         "geometry": [
             "point",
             "area"

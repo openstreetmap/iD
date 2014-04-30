@@ -750,6 +750,9 @@
             "place": {
                 "label": "Type"
             },
+            "population": {
+                "label": "Population"
+            },
             "power": {
                 "label": "Type"
             },
