@@ -720,6 +720,15 @@ path.casing.tag-railway-platform {
     stroke: none;
 }
 
+.area.stroke.tag-railway {
+    stroke: white;
+    stroke-width: 1;
+    stroke-dasharray: none;
+}
+.area.casing.tag-railway {
+    stroke: none;
+}
+
 /* waterways */
 
 path.fill.tag-waterway {
