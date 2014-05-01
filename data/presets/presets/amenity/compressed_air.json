@@ -5,10 +5,7 @@
         "area"
     ],
     "tags": {
-        "amenity": "car_wash"
+        "amenity": "compressed_air"
     },
-    "fields": [
-        "building_area"
-    ],
-    "name": "Car Wash"
+    "name": "Compressed Air"
 }

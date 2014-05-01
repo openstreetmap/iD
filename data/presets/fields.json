@@ -346,6 +346,51 @@
         "type": "combo",
         "label": "Fuel"
     },
+    "fuel/biodiesel": {
+        "key": "fuel:biodiesel",
+        "type": "check",
+        "label": "Sells Biodiesel"
+    },
+    "fuel/diesel": {
+        "key": "fuel:diesel",
+        "type": "check",
+        "label": "Sells Diesel"
+    },
+    "fuel/e10": {
+        "key": "fuel:e10",
+        "type": "check",
+        "label": "Sells E10"
+    },
+    "fuel/e85": {
+        "key": "fuel:e85",
+        "type": "check",
+        "label": "Sells E85"
+    },
+    "fuel/lpg": {
+        "key": "fuel:lpg",
+        "type": "check",
+        "label": "Sells Propane"
+    },
+    "fuel/octane_100": {
+        "key": "fuel:octane_100",
+        "type": "check",
+        "label": "Sells Racing Gasoline"
+    },
+    "fuel/octane_91": {
+        "key": "fuel:octane_91",
+        "type": "check",
+        "label": "Sells Regular Gasoline"
+    },
+    "fuel/octane_95": {
+        "key": "fuel:octane_95",
+        "type": "check",
+        "label": "Sells Midgrade Gasoline"
+    },
+    "fuel/octane_98": {
+        "key": "fuel:octane_98",
+        "type": "check",
+        "label": "Sells Premium Gasoline"
+    },
     "gauge": {
         "key": "gauge",
         "type": "combo",

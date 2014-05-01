@@ -614,6 +614,33 @@
             "fuel": {
                 "label": "Fuel"
             },
+            "fuel/biodiesel": {
+                "label": "Sells Biodiesel"
+            },
+            "fuel/diesel": {
+                "label": "Sells Diesel"
+            },
+            "fuel/e10": {
+                "label": "Sells E10"
+            },
+            "fuel/e85": {
+                "label": "Sells E85"
+            },
+            "fuel/lpg": {
+                "label": "Sells Propane"
+            },
+            "fuel/octane_100": {
+                "label": "Sells Racing Gasoline"
+            },
+            "fuel/octane_91": {
+                "label": "Sells Regular Gasoline"
+            },
+            "fuel/octane_95": {
+                "label": "Sells Midgrade Gasoline"
+            },
+            "fuel/octane_98": {
+                "label": "Sells Premium Gasoline"
+            },
             "gauge": {
                 "label": "Gauge"
             },
@@ -1050,6 +1077,10 @@
                 "name": "Car Wash",
                 "terms": ""
             },
+            "amenity/charging_station": {
+                "name": "Charging Station",
+                "terms": "EV,Electric Vehicle,Supercharger"
+            },
             "amenity/childcare": {
                 "name": "Childcare",
                 "terms": "nursery,orphanage,playgroup"
@@ -1068,6 +1099,10 @@
             },
             "amenity/college": {
                 "name": "College",
+                "terms": ""
+            },
+            "amenity/compressed_air": {
+                "name": "Compressed Air",
                 "terms": ""
             },
             "amenity/courthouse": {

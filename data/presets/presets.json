@@ -562,6 +562,7 @@
         "name": "Car Sharing"
     },
     "amenity/car_wash": {
+        "icon": "car",
         "geometry": [
             "point",
             "area"
@@ -573,6 +574,25 @@
             "building_area"
         ],
         "name": "Car Wash"
+    },
+    "amenity/charging_station": {
+        "icon": "car",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "charging_station"
+        },
+        "fields": [
+            "operator"
+        ],
+        "terms": [
+            "EV",
+            "Electric Vehicle",
+            "Supercharger"
+        ],
+        "name": "Charging Station"
     },
     "amenity/childcare": {
         "icon": "school",
@@ -675,6 +695,17 @@
         },
         "terms": [],
         "name": "College"
+    },
+    "amenity/compressed_air": {
+        "icon": "car",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "compressed_air"
+        },
+        "name": "Compressed Air"
     },
     "amenity/courthouse": {
         "fields": [
@@ -814,7 +845,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "geometry": [
             "point",
@@ -6696,7 +6736,7 @@
         "name": "Car Dealership"
     },
     "shop/car_parts": {
-        "icon": "shop",
+        "icon": "car",
         "fields": [
             "address",
             "building_area",
@@ -6713,7 +6753,7 @@
         "name": "Car Parts Store"
     },
     "shop/car_repair": {
-        "icon": "shop",
+        "icon": "car",
         "fields": [
             "address",
             "building_area",
@@ -8314,7 +8354,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8333,7 +8382,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8352,7 +8410,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8371,7 +8438,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8390,7 +8466,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8409,7 +8494,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8428,7 +8522,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8447,7 +8550,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8466,7 +8578,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8485,7 +8606,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8504,7 +8634,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8523,7 +8662,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8542,7 +8690,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8561,7 +8718,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8580,7 +8746,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8599,7 +8774,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8618,7 +8802,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8637,7 +8830,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8656,7 +8858,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8675,7 +8886,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8694,7 +8914,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8713,7 +8942,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8732,7 +8970,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8751,7 +8998,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8770,7 +9026,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8789,7 +9054,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8808,7 +9082,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8827,7 +9110,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8846,7 +9138,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8865,7 +9166,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8884,7 +9194,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8903,7 +9222,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8922,7 +9250,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8941,7 +9278,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8960,7 +9306,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8979,7 +9334,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -8998,7 +9362,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9017,7 +9390,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9036,7 +9418,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9055,7 +9446,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9074,7 +9474,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9093,7 +9502,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9112,7 +9530,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9131,7 +9558,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9150,7 +9586,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9169,7 +9614,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9188,7 +9642,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9207,7 +9670,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9226,7 +9698,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9245,7 +9726,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9264,7 +9754,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9283,7 +9782,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9302,7 +9810,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9321,7 +9838,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9340,7 +9866,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9359,7 +9894,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9378,7 +9922,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9397,7 +9950,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9416,7 +9978,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9435,7 +10006,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9454,7 +10034,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9473,7 +10062,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9492,7 +10090,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9511,7 +10118,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9530,7 +10146,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9549,7 +10174,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9568,7 +10202,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9587,7 +10230,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9606,7 +10258,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9625,7 +10286,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9644,7 +10314,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9663,7 +10342,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9682,7 +10370,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9701,7 +10398,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9720,7 +10426,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9739,7 +10454,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9758,7 +10482,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9777,7 +10510,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9796,7 +10538,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9815,7 +10566,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9834,7 +10594,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9853,7 +10622,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9872,7 +10650,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9891,7 +10678,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9910,7 +10706,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9929,7 +10734,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9948,7 +10762,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9967,7 +10790,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -9986,7 +10818,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10005,7 +10846,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10024,7 +10874,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10043,7 +10902,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10062,7 +10930,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10081,7 +10958,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10100,7 +10986,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10119,7 +11014,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10138,7 +11042,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10157,7 +11070,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10176,7 +11098,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10195,7 +11126,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10214,7 +11154,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10233,7 +11182,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10252,7 +11210,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10271,7 +11238,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10290,7 +11266,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10309,7 +11294,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10328,7 +11322,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10347,7 +11350,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10366,7 +11378,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10385,7 +11406,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10404,7 +11434,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10423,7 +11462,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10442,7 +11490,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10461,7 +11518,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10480,7 +11546,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10499,7 +11574,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10518,7 +11602,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10537,7 +11630,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10556,7 +11658,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10575,7 +11686,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10594,7 +11714,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10613,7 +11742,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10632,7 +11770,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10651,7 +11798,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10670,7 +11826,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10689,7 +11854,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10708,7 +11882,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10727,7 +11910,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10746,7 +11938,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10765,7 +11966,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10784,7 +11994,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10803,7 +12022,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10822,7 +12050,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10841,7 +12078,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10860,7 +12106,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10879,7 +12134,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10898,7 +12162,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10917,7 +12190,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10936,7 +12218,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10955,7 +12246,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10974,7 +12274,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -10993,7 +12302,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11012,7 +12330,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11031,7 +12358,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11050,7 +12386,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11069,7 +12414,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11088,7 +12442,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11107,7 +12470,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11126,7 +12498,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11145,7 +12526,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11164,7 +12554,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11183,7 +12582,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11202,7 +12610,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11222,7 +12639,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11241,7 +12667,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11260,7 +12695,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11279,7 +12723,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11298,7 +12751,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11317,7 +12779,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11336,7 +12807,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11355,7 +12835,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11374,7 +12863,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11393,7 +12891,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11412,7 +12919,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11431,7 +12947,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11450,7 +12975,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11469,7 +13003,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11488,7 +13031,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11507,7 +13059,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11526,7 +13087,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11545,7 +13115,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11564,7 +13143,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11583,7 +13171,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11602,7 +13199,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11621,7 +13227,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11640,7 +13255,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11659,7 +13283,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11678,7 +13311,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11697,7 +13339,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11716,7 +13367,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11735,7 +13395,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11754,7 +13423,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11773,7 +13451,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11792,7 +13479,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11811,7 +13507,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -11830,7 +13535,16 @@
         "fields": [
             "operator",
             "address",
-            "building_area"
+            "building_area",
+            "fuel/octane_91",
+            "fuel/octane_95",
+            "fuel/octane_98",
+            "fuel/e85",
+            "fuel/e10",
+            "fuel/diesel",
+            "fuel/biodiesel",
+            "fuel/lpg",
+            "fuel/octane_100"
         ],
         "suggestion": true
     },
@@ -30931,7 +32645,7 @@
             "shop": "car_repair"
         },
         "name": "Peugeot",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -30950,7 +32664,7 @@
             "shop": "car_repair"
         },
         "name": "Kwik Fit",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -30969,7 +32683,7 @@
             "shop": "car_repair"
         },
         "name": "ATU",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -30988,7 +32702,7 @@
             "shop": "car_repair"
         },
         "name": "Kwik-Fit",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31007,7 +32721,7 @@
             "shop": "car_repair"
         },
         "name": "Midas",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31026,7 +32740,7 @@
             "shop": "car_repair"
         },
         "name": "Feu Vert",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31045,7 +32759,7 @@
             "shop": "car_repair"
         },
         "name": "Norauto",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31064,7 +32778,7 @@
             "shop": "car_repair"
         },
         "name": "Speedy",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31083,7 +32797,7 @@
             "shop": "car_repair"
         },
         "name": "Автозапчасти",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31102,7 +32816,7 @@
             "shop": "car_repair"
         },
         "name": "Renault",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31121,7 +32835,7 @@
             "shop": "car_repair"
         },
         "name": "Pit Stop",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31140,7 +32854,7 @@
             "shop": "car_repair"
         },
         "name": "Jiffy Lube",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31159,7 +32873,7 @@
             "shop": "car_repair"
         },
         "name": "Шиномонтаж",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31178,7 +32892,7 @@
             "shop": "car_repair"
         },
         "name": "СТО",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31197,7 +32911,7 @@
             "shop": "car_repair"
         },
         "name": "O'Reilly Auto Parts",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31216,7 +32930,7 @@
             "shop": "car_repair"
         },
         "name": "Carglass",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31235,7 +32949,7 @@
             "shop": "car_repair"
         },
         "name": "шиномонтаж",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31254,7 +32968,7 @@
             "shop": "car_repair"
         },
         "name": "Citroen",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31273,7 +32987,7 @@
             "shop": "car_repair"
         },
         "name": "Euromaster",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31292,7 +33006,7 @@
             "shop": "car_repair"
         },
         "name": "Firestone",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31311,7 +33025,7 @@
             "shop": "car_repair"
         },
         "name": "AutoZone",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31330,7 +33044,7 @@
             "shop": "car_repair"
         },
         "name": "Автосервис",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31349,7 +33063,7 @@
             "shop": "car_repair"
         },
         "name": "Advance Auto Parts",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",
@@ -31368,7 +33082,7 @@
             "shop": "car_repair"
         },
         "name": "Roady",
-        "icon": "shop",
+        "icon": "car",
         "geometry": [
             "point",
             "vertex",

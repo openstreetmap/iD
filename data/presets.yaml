@@ -149,6 +149,24 @@ en:
         label: Fix Me
       fuel: 
         label: Fuel
+      fuel/biodiesel: 
+        label: Sells Biodiesel
+      fuel/diesel: 
+        label: Sells Diesel
+      fuel/e10: 
+        label: Sells E10
+      fuel/e85: 
+        label: Sells E85
+      fuel/lpg: 
+        label: Sells Propane
+      fuel/octane_100: 
+        label: Sells Racing Gasoline
+      fuel/octane_91: 
+        label: Sells Regular Gasoline
+      fuel/octane_95: 
+        label: Sells Midgrade Gasoline
+      fuel/octane_98: 
+        label: Sells Premium Gasoline
       gauge: 
         label: Gauge
       generator/method: 
@@ -459,6 +477,9 @@ en:
       amenity/car_wash: 
         name: Car Wash
         terms: "<translate with synonyms or related terms for 'Car Wash', separated by commas>"
+      amenity/charging_station: 
+        name: Charging Station
+        terms: "<translate with synonyms or related terms for 'Charging Station', separated by commas>"
       amenity/childcare: 
         name: Childcare
         terms: "<translate with synonyms or related terms for 'Childcare', separated by commas>"
@@ -474,6 +495,9 @@ en:
       amenity/college: 
         name: College
         terms: "<translate with synonyms or related terms for 'College', separated by commas>"
+      amenity/compressed_air: 
+        name: Compressed Air
+        terms: "<translate with synonyms or related terms for 'Compressed Air', separated by commas>"
       amenity/courthouse: 
         name: Courthouse
         terms: "<translate with synonyms or related terms for 'Courthouse', separated by commas>"
