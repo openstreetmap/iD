@@ -1,7 +1,7 @@
 iD.svg.TagClasses = function() {
     var primary = [
-            'highway', 'railway', 'waterway', 'aeroway', 'motorway',
-            'boundary', 'power', 'building', 'amenity', 'natural', 'landuse',
+            'building', 'highway', 'railway', 'waterway', 'aeroway',
+            'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
             'leisure', 'place'
         ],
         secondary = [
