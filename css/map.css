@@ -220,17 +220,6 @@ path.fill.tag-amenity-university {
     background-color: rgba(255, 255, 148, 0.1);
 }
 
-path.stroke.tag-building {
-    stroke: rgb(224, 110, 95);
-}
-path.fill.tag-building {
-    fill: rgba(224, 110, 95, 0.3);
-}
-.preset-icon-fill-area.tag-building {
-    border-color: rgb(224, 110, 95);
-    background-color: rgba(224, 110, 95, 0.3);
-}
-
 path.stroke.tag-landuse,
 path.stroke.tag-natural-wood,
 path.stroke.tag-natural-tree,
@@ -271,34 +260,27 @@ path.fill.tag-landuse-residential {
     background-color: rgba(224, 110, 95, 0.1);
 }
 
-
 path.stroke.tag-landuse-retail,
-path.stroke.tag-landuse-commercial,
-path.stroke.tag-building-commercial {
+path.stroke.tag-landuse-commercial {
     stroke: rgb(234, 176, 86);
 }
 path.fill.tag-landuse-retail,
-path.fill.tag-landuse-commercial,
-path.fill.tag-building-commercial {
+path.fill.tag-landuse-commercial {
     fill: rgba(234, 176, 86, 0.1);
 }
 .preset-icon-fill-area.tag-landuse-retail,
-.preset-icon-fill-area.tag-landuse-commercial,
-.preset-icon-fill-area.tag-building-commercial {
+.preset-icon-fill-area.tag-landuse-commercial {
     border-color: rgb(234, 176, 86);
     background-color: rgba(234, 176, 86, 0.1);
 }
 
-path.stroke.tag-landuse-industrial,
-path.stroke.tag-building-industrial {
+path.stroke.tag-landuse-industrial {
     stroke: rgb(228, 164, 245);
 }
-path.fill.tag-landuse-industrial,
-path.fill.tag-building-industrial {
+path.fill.tag-landuse-industrial {
     fill: rgba(228, 164, 245, 0.1);
 }
-.preset-icon-fill-area.tag-landuse-industrial,
-.preset-icon-fill-area.tag-building-industrial {
+.preset-icon-fill-area.tag-landuse-industrial {
     border-color: rgb(228, 164, 245);
     background-color: rgba(228, 164, 245, 0.1);
 }
@@ -898,6 +880,23 @@ marker#oneway-marker path {
 path.oneway {
     stroke-width: 6px;
 }
+
+/* Buildings */
+
+path.stroke.tag-building,
+path.stroke.tag-amenity-shelter {
+    stroke: rgb(224, 110, 95);
+}
+path.fill.tag-building,
+path.fill.tag-amenity-shelter {
+    fill: rgba(224, 110, 95, 0.3);
+}
+.preset-icon-fill-area.tag-building,
+.preset-icon-fill-area.tag-amenity-shelter {
+    border-color: rgb(224, 110, 95);
+    background-color: rgba(224, 110, 95, 0.3);
+}
+
 
 /*
  * Labels
