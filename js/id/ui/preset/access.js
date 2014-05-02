@@ -49,10 +49,11 @@ iD.ui.preset.access = function(field) {
     }
 
     access.options = function(type) {
-        var options = ['no', 'permissive', 'private', 'designated', 'destination'];
+        var options = ['no', 'permissive', 'private', 'destination'];
 
         if (type !== 'access') {
             options.unshift('yes');
+            options.push('designated');
         }
 
         return options.map(function(option) {

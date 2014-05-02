@@ -21,6 +21,11 @@ describe('iD.ui.preset.access', function() {
         expect(_.pluck(access.options('access'), 'value')).not.to.include('yes');
     });
 
+    it('does not include a "designated" option for general access (#2213)', function() {
+        var access = iD.ui.preset.access(field);
+        expect(_.pluck(access.options('access'), 'value')).not.to.include('designated');
+    });
+
     it('sets foot placeholder to "yes" for footways, steps, and pedestrian', function() {
         var access = iD.ui.preset.access(field);
         selection.call(access);
