@@ -140,7 +140,13 @@ iD.ui.preset.access = function(field) {
 
         _.forEach(placeholders[tags.highway], function(value, key) {
             items.selectAll('#preset-input-access-' + key)
-                .attr('placeholder', value);
+                .attr('placeholder', function() {
+                    if (value === 'yes') {
+                        return tags.access ? tags.access : value;
+                    } else {
+                        return value;
+                    }
+                });
         });
     };
 

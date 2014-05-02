@@ -74,4 +74,21 @@ describe('iD.ui.preset.access', function() {
             expect(selection.selectAll('#preset-input-access-motor_vehicle').attr('placeholder')).to.equal('yes');
         });
     });
+
+    it('overrides a "yes" placeholder with more specific access tag (#2213)', function() {
+        var access = iD.ui.preset.access(field);
+        selection.call(access);
+
+        access.tags({highway: 'service', access: 'emergency'});
+        expect(selection.selectAll('#preset-input-access-motor_vehicle').attr('placeholder')).to.equal('emergency');
+    });
+
+    it('does not override a "no" placeholder with more specific access tag (#2213)', function() {
+        var access = iD.ui.preset.access(field);
+        selection.call(access);
+
+        access.tags({highway: 'cycleway', access: 'destination'});
+        expect(selection.selectAll('#preset-input-access-motor_vehicle').attr('placeholder')).to.equal('no');
+    });
+
 });
