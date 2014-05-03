@@ -141,11 +141,7 @@ iD.ui.preset.access = function(field) {
         _.forEach(placeholders[tags.highway], function(value, key) {
             items.selectAll('#preset-input-access-' + key)
                 .attr('placeholder', function() {
-                    if (value === 'yes') {
-                        return tags.access ? tags.access : value;
-                    } else {
-                        return value;
-                    }
+                    return (tags.access && value === 'yes') ? tags.access : value;
                 });
         });
     };
