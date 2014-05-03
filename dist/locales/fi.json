@@ -71,7 +71,8 @@
                 "line": "Viiva pyöristettiin.",
                 "area": "Alue pyöristettiin."
             },
-            "not_closed": "Tätä ei voi tehdä ympyränmuotoiseksi, sillä sitä ei ole suljettu."
+            "not_closed": "Tätä ei voi tehdä ympyränmuotoiseksi, sillä sitä ei ole suljettu.",
+            "too_large": "Tätä ei voi pyöristää koska se ei ole tarpeeksi näkyvissä."
         },
         "orthogonalize": {
             "title": "Muuta suorakulmaiseksi",
@@ -84,7 +85,8 @@
                 "line": "Viiva muutettu suorakulmaiseksi.",
                 "area": "Alue muutettu suorakulmaiseksi."
             },
-            "not_squarish": "Nelikulmion tekeminen epäonnistui, koska se ei ole neliömäinen."
+            "not_squarish": "Nelikulmion tekeminen epäonnistui, koska se ei ole neliömäinen.",
+            "too_large": "Tätä ei voi tehdä suorakulmaiseksi, koska se ei ole tarpeeksi näkyvissä."
         },
         "straighten": {
             "title": "Suorista",
@@ -665,7 +667,7 @@
                 "label": "Luonto"
             },
             "network": {
-                "label": "Verkko"
+                "label": "Verkosto"
             },
             "note": {
                 "label": "Huomautus"
@@ -751,6 +753,9 @@
             },
             "shop": {
                 "label": "Tyyppi"
+            },
+            "smoking": {
+                "label": "Tupakointi"
             },
             "source": {
                 "label": "Lähde"
@@ -921,7 +926,8 @@
                 "terms": "vene, laiva, paatti, jolla, veneenvuokraus, venevuokra, vuokra, venevuokraus, venevuokraamo, veneenvuokraamo"
             },
             "amenity/cafe": {
-                "name": "Kahvila"
+                "name": "Kahvila",
+                "terms": "Kahvila, Kahvitupa, Teehuone"
             },
             "amenity/car_rental": {
                 "name": "Auton vuokraus",
@@ -988,7 +994,8 @@
                 "terms": "hautausmaa, kalmisto, luutarha"
             },
             "amenity/hospital": {
-                "name": "Sairaala-alue"
+                "name": "Sairaala-alue",
+                "terms": "Sairaala-alue"
             },
             "amenity/library": {
                 "name": "Kirjasto",
@@ -1006,22 +1013,27 @@
                 "terms": "apteekki, lääke, lääkkeet, lääkemyymälä, lääkkeenmyynti, farmasia, farmaseutti"
             },
             "amenity/place_of_worship": {
-                "name": "Rukoilupaikka"
+                "name": "Rukoilupaikka",
+                "terms": "Uskonnollinen rakennus, Kirkkorakennus"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Buddhalaistemppeli"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Kirkko"
+                "name": "Kirkko",
+                "terms": "Kirkko, Pyhäkkö, Rukoushuone, Stupa, Tsasouna, Moskeija, Temppeli"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Synagoga"
+                "name": "Synagoga",
+                "terms": "Synagooga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Moskeija"
+                "name": "Moskeija",
+                "terms": "Moskeija"
             },
             "amenity/police": {
-                "name": "Poliisiasema"
+                "name": "Poliisiasema",
+                "terms": "Poliisi, Poliisiasema"
             },
             "amenity/post_box": {
                 "name": "Postilaatikko",
@@ -1039,7 +1051,12 @@
                 "terms": "kierrättäminen, kierrätys, lajittelu, uudelleenkäyttö, uudelleenkäyttäminen, ympäristö, lajittelupiste, lajitteluasema, jäte, jätteet, roskat, roska, roskikset, roskis, säiliö, roskasäiliö"
             },
             "amenity/restaurant": {
-                "name": "Ravintola"
+                "name": "Ravintola",
+                "terms": "Ravintola, Ruokaravintola, Bistro, Krouvi, Pizzeria, Ruokala"
+            },
+            "amenity/school": {
+                "name": "Koulun piha",
+                "terms": "Koulun piha, Koulualue"
             },
             "amenity/shelter": {
                 "name": "Katos"
@@ -1059,7 +1076,8 @@
                 "terms": "puhelinkoppi, puhelin, puhelinkioski, yleinen puhelin, julkinen puhelin"
             },
             "amenity/theatre": {
-                "name": "Teatteri"
+                "name": "Teatteri",
+                "terms": "Teatteri, Kaupunginteatteri, Kansallisteatteri"
             },
             "amenity/toilets": {
                 "name": "WC"
@@ -1165,6 +1183,10 @@
             },
             "building/residential": {
                 "name": "Asuinrakennus"
+            },
+            "building/shed": {
+                "name": "Vaja",
+                "terms": "vaja, mökki, liiteri"
             },
             "building/terrace": {
                 "name": "Rivitalo"
@@ -1369,7 +1391,8 @@
                 "name": "Pyörätie"
             },
             "highway/footway": {
-                "name": "Jalkakäytävä"
+                "name": "Jalkakäytävä",
+                "terms": "Polku"
             },
             "highway/living_street": {
                 "name": "Pihakatu"
@@ -1436,7 +1459,8 @@
                 "name": "Huoltoalue"
             },
             "highway/steps": {
-                "name": "Portaat"
+                "name": "Portaat",
+                "terms": "Portaat, Rappuset, Portaikko, Kierreportaat, Tikapuut"
             },
             "highway/tertiary": {
                 "name": "Yhdystie"
@@ -1558,7 +1582,8 @@
                 "name": "Venesatama"
             },
             "leisure/park": {
-                "name": "Puisto"
+                "name": "Puisto",
+                "terms": "Puisto, Viheralue, Puistikko"
             },
             "leisure/pitch": {
                 "name": "Urheilukenttä"
@@ -1663,7 +1688,8 @@
                 "name": "Kallionjyrkänne"
             },
             "natural/coastline": {
-                "name": "Rannikko"
+                "name": "Rannikko",
+                "terms": "Rantaviiva"
             },
             "natural/glacier": {
                 "name": "Jäätikkö"
@@ -1675,7 +1701,8 @@
                 "name": "Nummi"
             },
             "natural/peak": {
-                "name": "Vuorenhuippu"
+                "name": "Vuorenhuippu",
+                "terms": "Huippu, Vuorenhuippu, Korkein kohta, Vuoren huippu"
             },
             "natural/scrub": {
                 "name": "Pensaikko"
@@ -1690,10 +1717,12 @@
                 "name": "Vesi"
             },
             "natural/water/lake": {
-                "name": "Järvi"
+                "name": "Järvi",
+                "terms": "Järvi, Vesistö"
             },
             "natural/water/pond": {
-                "name": "Lampi"
+                "name": "Lampi",
+                "terms": "Lampi, Lammikko, Lampare, Luoma"
             },
             "natural/water/reservoir": {
                 "name": "Tekojärvi"
@@ -1707,9 +1736,17 @@
             "office": {
                 "name": "Toimisto"
             },
+            "office/accountant": {
+                "name": "Tilintarkastustoimisto",
+                "terms": "tilintarkastus, tilintarkastaja, kirjanpito, kirjanpitäjä, kirjanpitotoimisto"
+            },
             "office/educational_institution": {
                 "name": "Oppilatos",
                 "terms": "koulu, alakoulu, ala-aste, yläaste, yläkoulu, lukio, yhteislukio, keskikoulu, koulutus, opiskelu, oppilaitos, yliopisto"
+            },
+            "office/employment_agency": {
+                "name": "Työnvälitystoimisto",
+                "terms": "työ, työvoimatoimisto, työnvälitys, työnvälittäjä, työpaikka, työpaikat"
             },
             "office/it": {
                 "name": "Tietotekniikkatoimisto",
@@ -1747,7 +1784,8 @@
                 "name": "Pikkukylä"
             },
             "place/island": {
-                "name": "Saari"
+                "name": "Saari",
+                "terms": "Saari, Saareke, Luoto"
             },
             "place/isolated_dwelling": {
                 "name": "Yksittäinen asunto"

@@ -607,6 +607,9 @@
             "fixme": {
                 "label": "Sistemare"
             },
+            "fuel": {
+                "label": "Carburante"
+            },
             "gauge": {
                 "label": "Scartamento"
             },
@@ -634,6 +637,7 @@
                 "label": "Tipo"
             },
             "hoops": {
+                "label": "Canestri",
                 "placeholder": "1, 2, 4..."
             },
             "iata": {
@@ -740,6 +744,9 @@
             "place": {
                 "label": "Tipo"
             },
+            "population": {
+                "label": "Popolazione"
+            },
             "power": {
                 "label": "Tipo"
             },
@@ -788,6 +795,9 @@
             "sac_scale": {
                 "label": "Difficoltà del sentiero"
             },
+            "seasonal": {
+                "label": "Stagionale"
+            },
             "service": {
                 "label": "Tipo"
             },
@@ -800,6 +810,12 @@
             "shop": {
                 "label": "Tipo"
             },
+            "sloped_curb": {
+                "label": "Cordolo inclinato"
+            },
+            "smoking": {
+                "label": "Zona fumatori"
+            },
             "social_facility_for": {
                 "label": "Tipo di utenza",
                 "placeholder": "Senza dimora, disabili, minori, ..."
@@ -808,6 +824,9 @@
                 "label": "Fonte"
             },
             "sport": {
+                "label": "Sport"
+            },
+            "sport_ice": {
                 "label": "Sport"
             },
             "structure": {
@@ -828,6 +847,9 @@
             },
             "surface": {
                 "label": "Superficie"
+            },
+            "tactile_paving": {
+                "label": "Pavimento tattile"
             },
             "toilets/disposal": {
                 "label": "Smaltimento"
@@ -979,6 +1001,10 @@
             "amenity/bar": {
                 "name": "Bar",
                 "terms": "caffè,caffé,snack,caffetteria"
+            },
+            "amenity/bbq": {
+                "name": "Barbecue/Griglia",
+                "terms": "grigliata,barbeque"
             },
             "amenity/bench": {
                 "name": "Panchina",
@@ -1300,13 +1326,25 @@
                 "name": "Appartamenti",
                 "terms": "appartamenti,condominio,palazzo,palazzone,casermone,case popolari,abitazioni,case,edilizia popolare,peep,iacp"
             },
+            "building/barn": {
+                "name": "Fienile",
+                "terms": "granaio,basso servizio,tesa"
+            },
             "building/bunker": {
                 "name": "Bunker",
                 "terms": "bunker,casamatta"
             },
+            "building/cabin": {
+                "name": "Capanna",
+                "terms": "capanna,attrezzi,rimessa,ripostiglio,basso servizio"
+            },
             "building/cathedral": {
                 "name": "Cattedrale",
                 "terms": "cattedrale,chiesa,monumento,religioso"
+            },
+            "building/chapel": {
+                "name": "Cappella",
+                "terms": "chiesetta,capellina"
             },
             "building/church": {
                 "name": "Chiesa",
@@ -1319,6 +1357,10 @@
             "building/construction": {
                 "name": "Edificio in costruzione",
                 "terms": "cantiere,struttura,in costruzione"
+            },
+            "building/detached": {
+                "name": "Casa autonoma",
+                "terms": "casa autonoma"
             },
             "building/dormitory": {
                 "name": "Dormitorio",
@@ -1368,6 +1410,10 @@
                 "name": "Edificio residenziale",
                 "terms": "Edificio residenziale"
             },
+            "building/retail": {
+                "name": "Negozio",
+                "terms": "edificio commerciale,commerciale,negozi"
+            },
             "building/roof": {
                 "name": "Tettoia",
                 "terms": "tetto,pensilina"
@@ -1376,9 +1422,17 @@
                 "name": "Edificio scolastico",
                 "terms": "accademia,alma mater,lavagna,collegio,dipartimento,disciplina,classe,facoltà,aula,istituto,istituzione,riformatorio,scuola,edificio scolastico,seminario,università"
             },
+            "building/shed": {
+                "name": "Capanno",
+                "terms": "capanno degli attrezzi,capanna,rimessa,capannone"
+            },
             "building/stable": {
                 "name": "Stalla",
                 "terms": "stalla,ricovero,scuderia"
+            },
+            "building/terrace": {
+                "name": "Villette a schiera",
+                "terms": "villette,fila di case"
             },
             "building/train_station": {
                 "name": "Stazione ferroviaria",
@@ -1454,11 +1508,19 @@
                 "name": "Fotografo",
                 "terms": "fotografia,stampe"
             },
+            "craft/photographic_laboratory": {
+                "name": "Laboratorio Fotografico",
+                "terms": "laboratorio,foto,fotografia,stampe"
+            },
             "craft/plumber": {
                 "name": "Idraulico"
             },
             "craft/sailmaker": {
                 "name": "Velaio"
+            },
+            "craft/sawmill": {
+                "name": "Segheria",
+                "terms": "legno,segheria"
             },
             "craft/sculpter": {
                 "name": "Scultore"
@@ -1723,6 +1785,10 @@
                 "name": "Cimitero",
                 "terms": "Cimitero"
             },
+            "landuse/churchyard": {
+                "name": "Area parrocchiale",
+                "terms": "sagrato,parrocchia"
+            },
             "landuse/commercial": {
                 "name": "Commerciale",
                 "terms": "Commerciale"
@@ -1762,6 +1828,10 @@
             "landuse/meadow": {
                 "name": "Coltivazione erbacea",
                 "terms": "Prato"
+            },
+            "landuse/military": {
+                "name": "Militare",
+                "terms": "base,militare,forze dell'ordine,soldati,caserma,fanteria,artiglieria"
             },
             "landuse/orchard": {
                 "name": "Frutteto",
@@ -2358,6 +2428,10 @@
                 "name": "Fioraio",
                 "terms": "Fioraio"
             },
+            "shop/funeral_directors": {
+                "name": "Casa funeraria",
+                "terms": "funerale,cimitero"
+            },
             "shop/furniture": {
                 "name": "Negozio di mobili",
                 "terms": "Negozio di mobili"
@@ -2485,6 +2559,10 @@
             "shop/video": {
                 "name": "Videoteca",
                 "terms": "Videoteca"
+            },
+            "shop/wine": {
+                "name": "Enoteca",
+                "terms": "vino,negozio di vini"
             },
             "tourism": {
                 "name": "Turismo",

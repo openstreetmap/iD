@@ -480,6 +480,9 @@
             "country": {
                 "label": "Land"
             },
+            "crop": {
+                "label": "Uppskera"
+            },
             "crossing": {
                 "label": "Tegund"
             },
@@ -514,11 +517,17 @@
             "fixme": {
                 "label": "Lagaðu mig"
             },
+            "fuel": {
+                "label": "Eldsneyti"
+            },
             "highway": {
                 "label": "Tegund"
             },
             "historic": {
                 "label": "Tegund"
+            },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -611,6 +620,18 @@
             "railway": {
                 "label": "Tegund"
             },
+            "recycling/cans": {
+                "label": "Tekur við dósum"
+            },
+            "recycling/clothes": {
+                "label": "Tekur við fötum"
+            },
+            "recycling/glass": {
+                "label": "Tekur við gleri"
+            },
+            "recycling/paper": {
+                "label": "Tekur við pappír"
+            },
             "ref": {
                 "label": "Heimildir"
             },
@@ -641,6 +662,9 @@
             "sac_scale": {
                 "label": "Erfiðleikastig"
             },
+            "seasonal": {
+                "label": "Árstíðabundið"
+            },
             "service": {
                 "label": "Tegund"
             },
@@ -650,10 +674,16 @@
             "shop": {
                 "label": "Tegund"
             },
+            "smoking": {
+                "label": "Reykingar"
+            },
             "source": {
                 "label": "Uppruni"
             },
             "sport": {
+                "label": "Íþrótt"
+            },
+            "sport_ice": {
                 "label": "Íþrótt"
             },
             "structure": {
@@ -683,6 +713,12 @@
             },
             "trail_visibility": {
                 "label": "Sýnileiki"
+            },
+            "trees": {
+                "label": "Tré"
+            },
+            "tunnel": {
+                "label": "Göng"
             },
             "water": {
                 "label": "Tegund"
@@ -729,7 +765,8 @@
                 "name": "Flugskýli"
             },
             "aeroway/helipad": {
-                "name": "Þyrlupallur"
+                "name": "Þyrlupallur",
+                "terms": "lendingarpallur"
             },
             "aeroway/runway": {
                 "name": "Flugbraut"
@@ -747,10 +784,14 @@
                 "name": "Hraðbanki"
             },
             "amenity/bank": {
-                "name": "Banki"
+                "name": "Banki",
+                "terms": "fjármálastofnun"
             },
             "amenity/bar": {
                 "name": "Knæpa"
+            },
+            "amenity/bbq": {
+                "name": "Grill"
             },
             "amenity/bench": {
                 "name": "Bekkur"
@@ -762,7 +803,8 @@
                 "name": "Hjólaleiga"
             },
             "amenity/cafe": {
-                "name": "Kaffihús"
+                "name": "Kaffihús",
+                "terms": "tehús"
             },
             "amenity/car_rental": {
                 "name": "Bílaleiga"
@@ -770,8 +812,15 @@
             "amenity/car_wash": {
                 "name": "Bílaþvottur"
             },
+            "amenity/childcare": {
+                "name": "Barnagæsla"
+            },
             "amenity/cinema": {
-                "name": "Kvikmyndahús"
+                "name": "Kvikmyndahús",
+                "terms": "bíó"
+            },
+            "amenity/clock": {
+                "name": "Klukka"
             },
             "amenity/college": {
                 "name": "Háskóli"
@@ -800,17 +849,30 @@
             "amenity/grave_yard": {
                 "name": "Grafreitur"
             },
+            "amenity/hospital": {
+                "name": "Spítalalóð"
+            },
+            "amenity/kindergarten": {
+                "name": "Leikskólalóð"
+            },
             "amenity/library": {
                 "name": "Bókasafn"
             },
             "amenity/marketplace": {
                 "name": "Markaður"
             },
+            "amenity/nightclub": {
+                "name": "Næturklúbbur"
+            },
+            "amenity/parking": {
+                "name": "Bílastæði"
+            },
             "amenity/pharmacy": {
                 "name": "Lyfjaverslun"
             },
             "amenity/place_of_worship": {
-                "name": "Tilbeiðsluhús"
+                "name": "Tilbeiðsluhús",
+                "terms": "musteri, kirkja, kapella, bænahús"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Búddistamusteri"
@@ -822,10 +884,12 @@
                 "name": "Bænahús gyðinga"
             },
             "amenity/place_of_worship/muslim": {
-                "name": "Moska"
+                "name": "Moska",
+                "terms": "bænahús múslima"
             },
             "amenity/police": {
-                "name": "Lögregla"
+                "name": "Lögregla",
+                "terms": "löggan"
             },
             "amenity/post_box": {
                 "name": "Póstkassi"
@@ -838,6 +902,15 @@
             },
             "amenity/restaurant": {
                 "name": "Veitingahús"
+            },
+            "amenity/school": {
+                "name": "Skólalóð"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "Mataraðstoð"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Athvarf heimilislausra"
             },
             "amenity/swimming_pool": {
                 "name": "Sundlaug"
@@ -859,6 +932,9 @@
             },
             "amenity/university": {
                 "name": "Háskóli"
+            },
+            "amenity/veterinary": {
+                "name": "Dýralæknir"
             },
             "amenity/waste_basket": {
                 "name": "Ruslafata"
@@ -926,14 +1002,42 @@
             "building/apartments": {
                 "name": "Íbúðir"
             },
+            "building/barn": {
+                "name": "Hlaða"
+            },
+            "building/bunker": {
+                "name": "Byrgi"
+            },
+            "building/cabin": {
+                "name": "Sumarhús",
+                "terms": "Sumarbústaður, kofi"
+            },
+            "building/cathedral": {
+                "name": "Dómkirkja"
+            },
+            "building/chapel": {
+                "name": "Kapella"
+            },
+            "building/church": {
+                "name": "Kirkja"
+            },
             "building/commercial": {
                 "name": "Atvinnuhúsnæði"
             },
             "building/construction": {
                 "name": "Á byggingarstigi"
             },
+            "building/dormitory": {
+                "name": "Heimavist"
+            },
             "building/entrance": {
                 "name": "Inngangur"
+            },
+            "building/garage": {
+                "name": "Bílskúr"
+            },
+            "building/garages": {
+                "name": "Bílskúrar"
             },
             "building/hospital": {
                 "name": "Sjúkrahúsbygging"
@@ -943,6 +1047,9 @@
             },
             "building/house": {
                 "name": "Einbýlishús"
+            },
+            "building/hut": {
+                "name": "Kofi"
             },
             "building/industrial": {
                 "name": "Iðnaðarhúsnæði"
@@ -956,14 +1063,72 @@
             "building/retail": {
                 "name": "Verslunarhúsnæði"
             },
+            "building/roof": {
+                "name": "Þak"
+            },
             "building/school": {
                 "name": "Skólabygging"
+            },
+            "building/shed": {
+                "name": "Skúr",
+                "terms": "garðskáli"
+            },
+            "building/static_caravan": {
+                "name": "Staðfast hjólhýsi"
+            },
+            "building/terrace": {
+                "name": "Raðhús"
+            },
+            "building/train_station": {
+                "name": "Lestarstöð"
             },
             "building/university": {
                 "name": "Háskólabygging"
             },
+            "building/warehouse": {
+                "name": "Vöruhús"
+            },
+            "craft/dressmaker": {
+                "name": "Kjólasaumari"
+            },
+            "craft/electrician": {
+                "name": "Rafvirki"
+            },
+            "craft/gardener": {
+                "name": "Garðyrkjumaður"
+            },
+            "craft/jeweler": {
+                "name": "Skartgripasali"
+            },
+            "craft/key_cutter": {
+                "name": "Lyklaþjónusta"
+            },
+            "craft/locksmith": {
+                "name": "Lyklasmiður"
+            },
+            "craft/optician": {
+                "name": "Gleraugnasali"
+            },
+            "craft/painter": {
+                "name": "Málari"
+            },
             "craft/photographer": {
                 "name": "Ljósmyndari"
+            },
+            "craft/plumber": {
+                "name": "Pípari"
+            },
+            "craft/shoemaker": {
+                "name": "Skósmiður"
+            },
+            "craft/tailor": {
+                "name": "Skraddari"
+            },
+            "craft/upholsterer": {
+                "name": "Bólstrari"
+            },
+            "craft/watchmaker": {
+                "name": "Úrsmiður"
             },
             "emergency/ambulance_station": {
                 "name": "Sjúkrabílastöð"
@@ -1022,6 +1187,9 @@
             "highway/residential": {
                 "name": "Íbúagata"
             },
+            "highway/rest_area": {
+                "name": "Hvíldarsvæði"
+            },
             "highway/road": {
                 "name": "Óþekktur vegur"
             },
@@ -1041,13 +1209,17 @@
                 "name": "Afgreiðslulúga"
             },
             "highway/service/driveway": {
-                "name": "Innkeyrsla"
+                "name": "Innkeyrsla",
+                "terms": "Heimreið"
             },
             "highway/service/emergency_access": {
                 "name": "Neyðaraðgangur"
             },
             "highway/service/parking_aisle": {
                 "name": "Bílastæðagangur"
+            },
+            "highway/services": {
+                "name": "Þjónustusvæði"
             },
             "highway/steps": {
                 "name": "Tröppur"
@@ -1136,8 +1308,15 @@
             "landuse/industrial": {
                 "name": "Iðnaðarsvæði"
             },
+            "landuse/landfill": {
+                "name": "Landfylling"
+            },
             "landuse/meadow": {
                 "name": "Engi"
+            },
+            "landuse/military": {
+                "name": "Hersvæði",
+                "terms": "herstöð, æfingasvæði"
             },
             "landuse/orchard": {
                 "name": "Aldingarður"
@@ -1160,11 +1339,17 @@
             "leisure/dog_park": {
                 "name": "Hundagarður"
             },
+            "leisure/firepit": {
+                "name": "Eldstæði"
+            },
             "leisure/garden": {
                 "name": "Garður"
             },
             "leisure/golf_course": {
                 "name": "Golfvöllur"
+            },
+            "leisure/ice_rink": {
+                "name": "Skautasvell"
             },
             "leisure/marina": {
                 "name": "Bátahöfn"
@@ -1322,6 +1507,9 @@
             "place/locality": {
                 "name": "Staðfesti"
             },
+            "place/neighbourhood": {
+                "name": "Hverfi"
+            },
             "place/town": {
                 "name": "Bær"
             },
@@ -1333,6 +1521,9 @@
             },
             "power": {
                 "name": "Orka"
+            },
+            "power/generator": {
+                "name": "Aflstöð"
             },
             "power/line": {
                 "name": "Orkulína"
@@ -1357,6 +1548,9 @@
             },
             "railway/disused": {
                 "name": "Ónotaðir lestarteinar"
+            },
+            "railway/funicular": {
+                "name": "Toglest"
             },
             "railway/level_crossing": {
                 "name": "Jöfn vegamót"
@@ -1394,6 +1588,9 @@
             "shop/alcohol": {
                 "name": "Vínbúð"
             },
+            "shop/art": {
+                "name": "Listverslun"
+            },
             "shop/bakery": {
                 "name": "Bakarí"
             },
@@ -1405,6 +1602,9 @@
             },
             "shop/bicycle": {
                 "name": "Hjólabúð"
+            },
+            "shop/bookmaker": {
+                "name": "Veðmangari"
             },
             "shop/books": {
                 "name": "Bóksala"
@@ -1463,6 +1663,9 @@
             "shop/florist": {
                 "name": "Blómabúð"
             },
+            "shop/funeral_directors": {
+                "name": "Útfararheimili"
+            },
             "shop/furniture": {
                 "name": "Húsgagnaverslun"
             },
@@ -1516,6 +1719,10 @@
             },
             "shop/pet": {
                 "name": "Dýrabúð"
+            },
+            "shop/seafood": {
+                "name": "Fiskverslu",
+                "terms": "verslun með sjávarfang"
             },
             "shop/shoes": {
                 "name": "Skóbúð"

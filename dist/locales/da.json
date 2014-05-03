@@ -744,6 +744,9 @@
             "place": {
                 "label": "Type"
             },
+            "population": {
+                "label": "Befolkning"
+            },
             "power": {
                 "label": "Type"
             },
@@ -807,6 +810,9 @@
             "shop": {
                 "label": "Type"
             },
+            "sloped_curb": {
+                "label": "Sløfekurve"
+            },
             "smoking": {
                 "label": "Rygning"
             },
@@ -841,6 +847,9 @@
             },
             "surface": {
                 "label": "Overflade"
+            },
+            "tactile_paving": {
+                "label": "Tactile Paving"
             },
             "toilets/disposal": {
                 "label": "Bortskaffelse affald"
@@ -1541,6 +1550,10 @@
                 "name": "Fotograf",
                 "terms": "Fotograf"
             },
+            "craft/photographic_laboratory": {
+                "name": "Fotolaboratorium",
+                "terms": "Fotolaboratorium, Fotoforhandler"
+            },
             "craft/plasterer": {
                 "name": "Oppudser",
                 "terms": "Oppudser"
@@ -1877,6 +1890,10 @@
                 "name": "Gravplads ",
                 "terms": "Gravplads "
             },
+            "landuse/churchyard": {
+                "name": "Kirkegård",
+                "terms": "Kirkegårde"
+            },
             "landuse/commercial": {
                 "name": "Kommercielt område",
                 "terms": "Kommercielt område"
@@ -1916,6 +1933,10 @@
             "landuse/meadow": {
                 "name": "Eng",
                 "terms": "Eng"
+            },
+            "landuse/military": {
+                "name": "Militær",
+                "terms": "Militær"
             },
             "landuse/orchard": {
                 "name": "Frugtplantage",
@@ -2625,6 +2646,10 @@
                 "name": "Fotoforretning",
                 "terms": "<Oversæt med synonymer eller relaterede termer for \"Fotoforretning\", adskilt af kommaer>"
             },
+            "shop/seafood": {
+                "name": "Fiskehandler",
+                "terms": "Fiskehandler, Fiskebutik"
+            },
             "shop/shoes": {
                 "name": "Skobutik",
                 "terms": "Skobutik, Skoforretning"
@@ -2664,6 +2689,10 @@
             "shop/video": {
                 "name": "Videobutik",
                 "terms": "Videobutik, Videoforretning, Videoudlejning"
+            },
+            "shop/wine": {
+                "name": "Vinforretning",
+                "terms": "Vinforretning, Vinbutik"
             },
             "tourism": {
                 "name": "Turisme",

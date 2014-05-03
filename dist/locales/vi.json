@@ -744,6 +744,9 @@
             "place": {
                 "label": "Kiểu"
             },
+            "population": {
+                "label": "Dân số"
+            },
             "power": {
                 "label": "Kiểu"
             },
@@ -807,6 +810,9 @@
             "shop": {
                 "label": "Kiểu"
             },
+            "sloped_curb": {
+                "label": "Lề đường Dốc"
+            },
             "smoking": {
                 "label": "Hút thuốc"
             },
@@ -841,6 +847,9 @@
             },
             "surface": {
                 "label": "Mặt"
+            },
+            "tactile_paving": {
+                "label": "Gạch dành cho Người Khiếm thị"
             },
             "toilets/disposal": {
                 "label": "Phương pháp thải"
@@ -1881,6 +1890,10 @@
                 "name": "Nghĩa địa",
                 "terms": "nghĩa địa, nghĩa trang, bãi tha ma, mộ, nghia dia, nghia trang, bai tha ma, mo"
             },
+            "landuse/churchyard": {
+                "name": "Sân Nhà thờ",
+                "terms": "sân nhà thờ, khu đất nhà thờ, sân nhà thờ chính tòa, khu đất nhà thờ chính tòa, sân nhà thờ chính toà, khu đất nhà thờ chính toà, sân nhà thờ chánh tòa, khu đất nhà thờ chánh tòa, sân nhà thờ chánh toà, khu đất nhà thờ chánh tòa, san nha tho, khu dat nha tho, san nha tho chinh toa, khu dat nha tho chinh toa, san nha tho chanh toa, khu dat nha tho chanh toa"
+            },
             "landuse/commercial": {
                 "name": "Thương mại",
                 "terms": "thương mại, văn phòng, công ty, công ti, buôn bán, thuong mai, van phong, cong ty, cong ti, buon ban"
@@ -1920,6 +1933,10 @@
             "landuse/meadow": {
                 "name": "Đồng cỏ",
                 "terms": "đồng cỏ, bãi cỏ, dong co, bai co"
+            },
+            "landuse/military": {
+                "name": "Quân đội",
+                "terms": "quân đội, căn cứ quân đội, không quân, căn cứ không quân, hải quân, căn cứ hải quân, quân sự, lính, bộ đội, quan doi, can cu quan doi, khong quan, can cu khong quan, hai quan, can cu hai quan, quan su, linh, bo doi"
             },
             "landuse/orchard": {
                 "name": "Vườn Cây",
@@ -2672,6 +2689,10 @@
             "shop/video": {
                 "name": "Tiệm Phim",
                 "terms": "tiệm bán phim, tiệm bán video, tiệm mướn phim, tiệm mướn video, chỗ bán phim, chỗ mướn phim, cửa hàng phim, cửa hiệu phim, quầy bán phim, tiem ban phim, tiem ban video, tiem muon phim, tiem muon video, cho ban phim, cho muon phim, cua hang phim, cua hieu phim, quay ban phim"
+            },
+            "shop/wine": {
+                "name": "Tiệm Rượu vang",
+                "terms": "tiệm rượu vang, nơi bán rượu vang, chỗ bán rượu vang, quầy bán rượu vang, cửa hàng rượu vang, cửa hàng bán rượu vang, tiệm bán rượu vang, tiem ruou vang, noi ban ruou vang, cho ban ruou vang, quay ban ruou vang, cua hang ruou vang, cua hang ban ruou vang, tiem ban ruou vang"
             },
             "tourism": {
                 "name": "Du lịch",

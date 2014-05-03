@@ -267,6 +267,8 @@
         "percent_brightness": "{opacity}% Helligkeit",
         "none": "Kein Hintergrund",
         "custom": "Benutzerdefiniert",
+        "custom_button": "Benutzerdefinierten Hintergrund editieren",
+        "custom_prompt": "Gib ein tile URL template ein. Gültige Platzhalter sind {z}, {x}, {y} für das Z/X/Y Schema und {u} für das quadtile Schema.",
         "fix_misalignment": "Ausrichtung korrigieren",
         "reset": "Zurücksetzen"
     },
@@ -608,6 +610,33 @@
             "fuel": {
                 "label": "Treibstogg"
             },
+            "fuel/biodiesel": {
+                "label": "Verkauft Biodiesel"
+            },
+            "fuel/diesel": {
+                "label": "Verkauft Diesel"
+            },
+            "fuel/e10": {
+                "label": "Verkauft E10"
+            },
+            "fuel/e85": {
+                "label": "Verkauft E85"
+            },
+            "fuel/lpg": {
+                "label": "Verkauft Propan"
+            },
+            "fuel/octane_100": {
+                "label": "Verkauft Rennkraftstoffe"
+            },
+            "fuel/octane_91": {
+                "label": "Verkauft Kraftstoffe"
+            },
+            "fuel/octane_95": {
+                "label": "Verkauft Mittelklassekraftstoffe"
+            },
+            "fuel/octane_98": {
+                "label": "Verkauft Premiumkraftstoffe"
+            },
             "gauge": {
                 "label": "Spurbreite"
             },
@@ -670,6 +699,9 @@
             },
             "leisure": {
                 "label": "Art"
+            },
+            "length": {
+                "label": "Länge (Meter)"
             },
             "levels": {
                 "label": "Etagen",
@@ -742,6 +774,9 @@
             "place": {
                 "label": "Art"
             },
+            "population": {
+                "label": "Bevölkerung"
+            },
             "power": {
                 "label": "Typ"
             },
@@ -805,6 +840,9 @@
             "shop": {
                 "label": "Typ"
             },
+            "sloped_curb": {
+                "label": "abgeschrägter Bordstein"
+            },
             "smoking": {
                 "label": "Rauchen"
             },
@@ -839,6 +877,9 @@
             },
             "surface": {
                 "label": "Oberfläche"
+            },
+            "tactile_paving": {
+                "label": "taktile Oberfläche"
             },
             "toilets/disposal": {
                 "label": "Abfallkübel, Mistkübel"
@@ -882,6 +923,9 @@
             },
             "wheelchair": {
                 "label": "Rollstuhlzugang"
+            },
+            "width": {
+                "label": "Breite (Meter)"
             },
             "wikipedia": {
                 "label": "Wikipedia"
@@ -1027,6 +1071,10 @@
                 "name": "Autowäsche",
                 "terms": "Auto-Waschanlage, Waschanlage"
             },
+            "amenity/charging_station": {
+                "name": "Ladestation",
+                "terms": "Ladestation"
+            },
             "amenity/childcare": {
                 "name": "Kindertagesbetreuung",
                 "terms": "Hort"
@@ -1046,6 +1094,10 @@
             "amenity/college": {
                 "name": "Hochschule",
                 "terms": "Hochschule, Kolleg"
+            },
+            "amenity/compressed_air": {
+                "name": "Druckluft",
+                "terms": "Druckluft, Pressluft"
             },
             "amenity/courthouse": {
                 "name": "Gericht",
@@ -1539,6 +1591,10 @@
                 "name": "Fotograf",
                 "terms": "Fotograf, Fotostudio, Fotoatelier"
             },
+            "craft/photographic_laboratory": {
+                "name": "Fotolabor",
+                "terms": "Fotolabor, fotografisches Labor"
+            },
             "craft/plasterer": {
                 "name": "Stuckateur",
                 "terms": "Stuckateur, Kaschierer, Gipser, Verputzer"
@@ -1875,6 +1931,10 @@
                 "name": "Friedhof",
                 "terms": "Friedhof, Friedwald"
             },
+            "landuse/churchyard": {
+                "name": "Kirchhof",
+                "terms": "Kirchhof, Friedhof, Gottesacker, Leichenhof"
+            },
             "landuse/commercial": {
                 "name": "Gewerbegebiet",
                 "terms": "Gewerbezone,Gewerbegebiet,gewerblich genutzte Gebäude,Business Park,Büros"
@@ -1914,6 +1974,10 @@
             "landuse/meadow": {
                 "name": "Weide",
                 "terms": "Wiese, Weide"
+            },
+            "landuse/military": {
+                "name": "Militär",
+                "terms": "Militär, Armee, Landesverteidigung"
             },
             "landuse/orchard": {
                 "name": "Obstplantage",
@@ -2623,6 +2687,10 @@
                 "name": "Fotofachgeschäft",
                 "terms": "Fotoladen, Fotograf, Fotogeschäft"
             },
+            "shop/seafood": {
+                "name": "Fischgeschäft",
+                "terms": "Fischgeschäft, Meeresfrüchtegeschäft"
+            },
             "shop/shoes": {
                 "name": "Schuhgeschäft",
                 "terms": "Schuhgeschäft"
@@ -2662,6 +2730,10 @@
             "shop/video": {
                 "name": "Videothek",
                 "terms": "Video-Geschäft, DVD-Geschäft"
+            },
+            "shop/wine": {
+                "name": "Vinothek",
+                "terms": "Weinladen, Weinhandlung, Weinhaus, Enothek"
             },
             "tourism": {
                 "name": "Tourismus",

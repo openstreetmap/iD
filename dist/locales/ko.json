@@ -61,17 +61,18 @@
             "annotation": "태그를 바꿨습니다."
         },
         "circularize": {
-            "title": "순환하기",
+            "title": "둥글게하기",
             "description": {
-                "line": "이 선 순환을 만듭니다.",
-                "area": "이 지역 순환을 만듭니다."
+                "line": "이 선을 둥글게 만듭니다.",
+                "area": "이 지역을 둥글게 만듭니다."
             },
             "key": "O",
             "annotation": {
-                "line": "선 순환을 만들었습니다.",
-                "area": "지역 순환을 만들었습니다."
+                "line": "선을 둥글게 만들었습니다.",
+                "area": "지역을 둥글게 만들었습니다."
             },
-            "not_closed": "지역이 닫혀있지 않기 때문에 순환을 만들 수 없습니다."
+            "not_closed": "지역이 닫혀있지 않기 때문에 둥글게 만들 수 없습니다.",
+            "too_large": "지역이 현재 충분히 보이지 않기 때문에 둥글게 만들 수 없습니다."
         },
         "orthogonalize": {
             "title": "사각지기",
@@ -84,7 +85,8 @@
                 "line": "선의 모서리를 사각지게 했습니다.",
                 "area": "지역의 모서리를 사각지게 했습니다."
             },
-            "not_squarish": "사각 형태가 아니기 때문에 사각지게 할 수 없습니다."
+            "not_squarish": "사각 형태가 아니기 때문에 사각지게 만들 수 없습니다.",
+            "too_large": "지역이 현재 충분히 보이지 않기 때문에 사각지게 만들 수 없습니다."
         },
         "straighten": {
             "title": "곧게 하기",
@@ -265,6 +267,8 @@
         "percent_brightness": "명도 {opacity}%",
         "none": "없음",
         "custom": "사용자 지정",
+        "custom_button": "사용자 지정 배경 편집",
+        "custom_prompt": "타일 URL 템플릿을 입력하세요. 올바른 토큰은 Z/X/Y scheme에 대해 {z}, {x}, {y}이고 quadtile scheme에 대해 {u}입니다.",
         "fix_misalignment": "정렬 고치기",
         "reset": "재설정"
     },
@@ -474,6 +478,21 @@
             "admin_level": {
                 "label": "관리 수준"
             },
+            "aerialway": {
+                "label": "유형"
+            },
+            "aerialway/capacity": {
+                "label": "수용자 수 (시간당)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "소요 시간 (분)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/occupancy": {
+                "label": "무게",
+                "placeholder": "2, 4, 8..."
+            },
             "aeroway": {
                 "label": "유형"
             },
@@ -508,7 +527,7 @@
                 "label": "건물"
             },
             "capacity": {
-                "label": "수용 가능한 수",
+                "label": "수용자 수",
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
@@ -580,11 +599,17 @@
                 "label": "참고",
                 "placeholder": "홀 수 (1-18)"
             },
+            "handicap": {
+                "placeholder": "1-18"
+            },
             "highway": {
                 "label": "유형"
             },
             "historic": {
                 "label": "유형"
+            },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -677,6 +702,9 @@
                 "label": "전화",
                 "placeholder": "+31 42 123 4567"
             },
+            "piste/type": {
+                "label": "유형"
+            },
             "place": {
                 "label": "유형"
             },
@@ -743,6 +771,9 @@
                     "embankment": "둑",
                     "cutting": "절토"
                 }
+            },
+            "studio_type": {
+                "label": "유형"
             },
             "supervised": {
                 "label": "감독 장소"
@@ -952,6 +983,9 @@
             "amenity/restaurant": {
                 "name": "음식점"
             },
+            "amenity/school": {
+                "name": "학교 운동장"
+            },
             "amenity/shelter": {
                 "name": "피난처"
             },
@@ -1066,6 +1100,9 @@
             },
             "building/residential": {
                 "name": "주거 건물"
+            },
+            "building/school": {
+                "name": "학교 건물"
             },
             "embankment": {
                 "name": "둑",
@@ -1322,12 +1359,18 @@
             "leisure/golf_course": {
                 "name": "골프장"
             },
+            "leisure/ice_rink": {
+                "name": "아이스 링크"
+            },
             "leisure/marina": {
                 "name": "마리나",
                 "terms": "항구,선착장"
             },
             "leisure/park": {
                 "name": "공원"
+            },
+            "leisure/picnic_table": {
+                "name": "피크닉 테이블"
             },
             "leisure/pitch": {
                 "name": "운동장"

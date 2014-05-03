@@ -71,7 +71,8 @@
                 "line": "Fazer uma linha circular.",
                 "area": "Área tornada circular."
             },
-            "not_closed": "Isto não pode ser tornado circular porque não é uma linha fechada."
+            "not_closed": "Isto não pode ser tornado circular porque não é uma linha fechada.",
+            "too_large": "Não é possível fazer um circulo porque o objecto não está completamente visível no mapa."
         },
         "orthogonalize": {
             "title": "Esquadrar",
@@ -84,7 +85,8 @@
                 "line": "Cantos da linha ortogonalizados.",
                 "area": "Cantos da área ortogonalizados."
             },
-            "not_squarish": "Isto não pode ser tornado quadrado porque não tem um formato quadrangular."
+            "not_squarish": "Isto não pode ser tornado quadrado porque não tem um formato quadrangular.",
+            "too_large": "Não é possível esquadrar porque o objecto não está completamente visível no mapa."
         },
         "straighten": {
             "title": "Endireitar",
@@ -134,7 +136,8 @@
             "annotation": "{n} linhas combinadas.",
             "not_eligible": "Estes elementos não podem ser unidos.",
             "not_adjacent": "Estas linhas não podem ser unidas porque não estão ligadas num ponto comum a ambas.",
-            "restriction": "Estas linhas não podem ser unidas porque pelo menos uma delas faz parte de uma relação \"{relation}\"."
+            "restriction": "Estas linhas não podem ser unidas porque pelo menos uma delas faz parte de uma relação \"{relation}\".",
+            "incomplete_relation": "Estes elementos não podem ser unidos porque pelo menos um deles não está completamente descarregado no mapa."
         },
         "move": {
             "title": "Mover",
@@ -253,6 +256,8 @@
         "feature_list": "Pesquisar elementos",
         "edit": "Editar elemento",
         "none": "Nenhum",
+        "node": "Nó",
+        "way": "Linha",
         "relation": "Relação",
         "location": "Localização"
     },
@@ -262,6 +267,8 @@
         "percent_brightness": "{opacity}% transparente",
         "none": "Nenhum",
         "custom": "Personalizado",
+        "custom_button": "Editar fundo personalizando",
+        "custom_prompt": "Introduz um endereço URL válido. Pontos validos são {z}, {x}, {y} para esquemas Z/X/Y e {u} para esquemas QuadTile.",
         "fix_misalignment": "Corrigir alinhamento",
         "reset": "reiniciar"
     },
@@ -402,7 +409,7 @@
                 "name": "Ferrovia"
             },
             "category-road": {
-                "name": "Estrada"
+                "name": "Rodovia"
             },
             "category-route": {
                 "name": "Rota"
@@ -420,10 +427,10 @@
                 "placeholder": "Desconhecido",
                 "types": {
                     "access": "Geral",
-                    "foot": "A pé",
-                    "motor_vehicle": "Veículos motorizados",
+                    "foot": "Peões",
+                    "motor_vehicle": "Veículos Motorizados",
                     "bicycle": "Bicicletas",
-                    "horse": "Cavalos"
+                    "horse": "Animais"
                 },
                 "options": {
                     "yes": {
@@ -444,11 +451,11 @@
                     },
                     "designated": {
                         "title": "Designado",
-                        "description": "Acesso permitido de acordo com sinalética ou leis locais específicas"
+                        "description": "Acesso permitido de acordo com a sinalética e/ou com leis locais específicas; como p. ex. o Código da Estrada"
                     },
                     "destination": {
                         "title": "Destino",
-                        "description": "Acesso permitido apenas para chegar a determinado destino"
+                        "description": "Acesso permitido apenas para chegar a determinado destino; como p. ex. parques de estacionamento ou centros comerciais"
                     }
                 }
             },
@@ -500,7 +507,7 @@
                 "label": "Tipo"
             },
             "atm": {
-                "label": "MultiBanco, MB"
+                "label": "Multibanco"
             },
             "backrest": {
                 "label": "Encosto"
@@ -528,10 +535,10 @@
                 "label": "Direção"
             },
             "clock_direction": {
-                "label": "DIreção",
+                "label": "Direção",
                 "options": {
                     "clockwise": "Sentido dos Ponteiros do Relógio",
-                    "anticlockwise": "Sentido Inverso dos Ponteiros do Relógio"
+                    "anticlockwise": "Sentido Contrário aos Ponteiros do Relógio."
                 }
             },
             "collection_times": {
@@ -547,7 +554,7 @@
                 "label": "Tipo"
             },
             "cuisine": {
-                "label": "Cozinha"
+                "label": "Culinária"
             },
             "denomination": {
                 "label": "Denominação"
@@ -562,7 +569,7 @@
                 "label": "Eletrificação"
             },
             "elevation": {
-                "label": "Altura acima do nível médio do mar"
+                "label": "Elevação"
             },
             "emergency": {
                 "label": "Emergência"
@@ -572,10 +579,10 @@
             },
             "fax": {
                 "label": "Fax",
-                "placeholder": "+351 99 123 4567"
+                "placeholder": "+351 252 471441"
             },
             "fee": {
-                "label": "Tarifa"
+                "label": "Taxa"
             },
             "fire_hydrant/type": {
                 "label": "Tipo"
@@ -625,7 +632,7 @@
             "internet_access": {
                 "label": "Acesso à Internet",
                 "options": {
-                    "wlan": "Wifi",
+                    "wlan": "Wi-Fi",
                     "wired": "Com fio",
                     "terminal": "Terminal de acesso"
                 }
@@ -638,7 +645,7 @@
                 "placeholder": "1, 2, 3..."
             },
             "layer": {
-                "label": "Nível"
+                "label": "Camada"
             },
             "leisure": {
                 "label": "Tipo"
@@ -658,11 +665,11 @@
             },
             "maxspeed": {
                 "label": "Limite de Velocidade",
-                "placeholder": "50, 90, 120..."
+                "placeholder": "50, 90, 100, 120..."
             },
             "name": {
                 "label": "Nome",
-                "placeholder": "Nome comum (caso se aplique)"
+                "placeholder": "Nome Comum (caso se aplique)"
             },
             "natural": {
                 "label": "Natural"
@@ -671,7 +678,7 @@
                 "label": "Rede"
             },
             "note": {
-                "label": "Nota"
+                "label": "Notas"
             },
             "office": {
                 "label": "Tipo"
@@ -698,8 +705,8 @@
                 "label": "Tipo"
             },
             "phone": {
-                "label": "Telefone",
-                "placeholder": "+351 99 123 4567"
+                "label": "Telefone / Telemóvel",
+                "placeholder": "+351 245 125961"
             },
             "piste/difficulty": {
                 "label": "Dificuldade"
@@ -709,6 +716,9 @@
             },
             "place": {
                 "label": "Tipo"
+            },
+            "population": {
+                "label": "População"
             },
             "power": {
                 "label": "Tipo"
@@ -744,7 +754,7 @@
                 "label": "Tipo"
             },
             "sac_scale": {
-                "label": "Dificuldade"
+                "label": "Dificuldade do Terreno"
             },
             "seasonal": {
                 "label": "Sazonal"
@@ -823,8 +833,8 @@
                 "label": "Tipo"
             },
             "website": {
-                "label": "Website",
-                "placeholder": "http://exemplo.org/"
+                "label": "Sítio Eletrónico",
+                "placeholder": "http://www.exemplo.org/"
             },
             "wetland": {
                 "label": "Tipo"
@@ -842,73 +852,79 @@
         "presets": {
             "address": {
                 "name": "Morada",
-                "terms": "Endereço,Morada"
+                "terms": "Endereço, Morada"
             },
             "aerialway/gondola": {
                 "name": "Gôndola",
                 "terms": "Gôndola"
             },
             "aeroway": {
-                "name": "Via área"
+                "name": "Via área",
+                "terms": "Aerodromo, Aviões, Avião, Helicóptero"
             },
             "aeroway/aerodrome": {
                 "name": "Aeroporto",
-                "terms": "Aeroporto"
+                "terms": "Avião, aeródromo"
             },
             "aeroway/apron": {
-                "name": "Plataforma de Estacionamento"
+                "name": "Plataforma de Estacionamento",
+                "terms": "Rampa"
             },
             "aeroway/gate": {
-                "name": "Porta de Embarque / Desembarque"
+                "name": "Porta de Embarque / Desembarque",
+                "terms": "Porão, Porta de Embarque, Porta de Desembarque, Manga"
             },
             "aeroway/hangar": {
                 "name": "Hangar",
-                "terms": "Hangar"
+                "terms": "Hangar, Abrigo de Aviões"
             },
             "aeroway/helipad": {
-                "name": "Heliponto, Heliporto",
-                "terms": "Heliporto"
+                "name": "Heliporto / Heliponto",
+                "terms": "Helicóptero"
             },
             "aeroway/runway": {
-                "name": "Pista de Aterragem e Descolagem"
+                "name": "Pista de Aterragem e Descolagem",
+                "terms": "Faixa de Aterragem"
             },
             "aeroway/taxiway": {
-                "name": "Via de Circulação"
+                "name": "Faixa de Rolagem / Táxi",
+                "terms": "Rolar, Faixa de Rolagem"
             },
             "aeroway/terminal": {
                 "name": "Terminal de Aeroporto",
-                "terms": "Terminal de Aeroporto"
+                "terms": "Aeroporto, Aeródromo"
             },
             "amenity": {
-                "name": "Infraestrutura"
+                "name": "Infraestrutura",
+                "terms": "característica, qualidade, aspecto"
             },
             "amenity/arts_centre": {
                 "name": "Centro artístico",
                 "terms": "Centro de Artes"
             },
             "amenity/atm": {
-                "name": "Caixa MultiBanco",
-                "terms": "Multibanco, MB"
+                "name": "Multibanco",
+                "terms": "Caixa Multibanco, Caixa de Multibanco, MB, Caixa de MB"
             },
             "amenity/bank": {
                 "name": "Banco",
-                "terms": "Banco"
+                "terms": "Agência bancária, Agência financeira, Agência de Investimentos, Cofre, Depósito, Levantamentos, Firma de Investimentos"
             },
             "amenity/bar": {
                 "name": "Bar",
-                "terms": "Bar"
+                "terms": "Bar, Bares, Bebidas, Alcool"
             },
             "amenity/bench": {
-                "name": "Banco (mobiliário)",
-                "terms": "Banco, Assento"
+                "name": "Assento",
+                "terms": "Banco, Assento, Banco de Sentar, Sentar"
             },
             "amenity/bicycle_parking": {
                 "name": "Parque de Bicicletas",
-                "terms": "Parque de Bicicletas"
+                "terms": "Parque de Bicicletas, Área de Bicicletas, Zona de Bicicletas"
             },
             "amenity/bicycle_rental": {
                 "name": "Aluguer de Bicicletas",
-                "terms": "Aluguer de Bicicletas"
+                "terms": "Aluguer de Bicicletas, Área de Aluguer de Bicicletas, Zona de Aluguer de Bicicletas"
             },
             "amenity/boat_rental": {
                 "name": "Aluguer de barcos",
@@ -916,25 +932,27 @@
             },
             "amenity/cafe": {
                 "name": "Café",
-                "terms": "Café"
+                "terms": "Chá, Loja de Café, Cafetaria"
             },
             "amenity/car_rental": {
                 "name": "Aluguer de Automóveis",
-                "terms": "Aluguer de Automóveis"
+                "terms": "Aluguer de Automóveis, Área de Aluguer de Automóveis, Zona de Aluguer de Automoveis"
             },
             "amenity/car_sharing": {
-                "name": "Partilha de Automóveis"
+                "name": "Partilha de Automóveis",
+                "terms": "Partilha de Carros, Partilha de Veículos "
             },
             "amenity/car_wash": {
-                "name": "Lavagem de Veículos"
+                "name": "Lavagem de Veículos",
+                "terms": "Lavagem, Lavagem Automática, Mangueira, Limpeza"
             },
             "amenity/childcare": {
                 "name": "Creche",
-                "terms": "Área de cuidados infantis"
+                "terms": "Área de Cuidados Infantis"
             },
             "amenity/cinema": {
                 "name": "Cinema",
-                "terms": "cinema"
+                "terms": "Filme, filmes"
             },
             "amenity/clinic": {
                 "name": "Clínica",
@@ -946,10 +964,11 @@
             },
             "amenity/college": {
                 "name": "Colégio",
-                "terms": "Colégio"
+                "terms": "Colégio, Colégio Interno, Escola Privada, Privada, Externatos, Semiprivado"
             },
             "amenity/courthouse": {
-                "name": "Tribunal"
+                "name": "Tribunal",
+                "terms": "Casa da Justiça"
             },
             "amenity/dentist": {
                 "name": "Dentista",
@@ -961,85 +980,94 @@
             },
             "amenity/drinking_water": {
                 "name": "Água Potável",
-                "terms": "Água Potável"
+                "terms": "Fonte de Água, Água Potável, Bebedouro"
             },
             "amenity/embassy": {
                 "name": "Embaixada",
-                "terms": "Embaixada"
+                "terms": "Consulado"
             },
             "amenity/fast_food": {
-                "name": "Comida Rápida"
+                "name": "Comida Rápida",
+                "terms": "Comida Instantânea, Comida de plástico, Fast Food"
             },
             "amenity/fire_station": {
                 "name": "Quartel de Bombeiros",
-                "terms": "bombeiros,quartel,quartel dos bombeiros,quartel de bombeiros"
+                "terms": "Bombeiros, Quartel, Quartel dos Bombeiros, Quartel de Bombeiros"
             },
             "amenity/fountain": {
                 "name": "Fonte Decorativa",
-                "terms": "Fonte"
+                "terms": "Fonte, Fonte de Água, Jacto de Água"
             },
             "amenity/fuel": {
-                "name": "Posto de Combustível",
+                "name": "Gasolineira / Posto de Combustível",
                 "terms": "Bombas de Abastecimento, Bombas de Gasolina"
             },
             "amenity/grave_yard": {
                 "name": "Sepultura",
-                "terms": "Cemitério"
+                "terms": "Cemitério, Mortos, Funerário, Solene"
+            },
+            "amenity/hospital": {
+                "name": "Hospital",
+                "terms": "Sala de emergência, Operação, Serviço de Saúde, Hospício, Enfermaria, Sanatório, Cirurgia, Médico, Ambulância"
             },
             "amenity/kindergarten": {
                 "name": "Jardim Infantil / Infantário",
-                "terms": "jardim infantil,infantário,pré-escola,pré escola"
+                "terms": "Pré-Escola, Pré Escola"
             },
             "amenity/library": {
                 "name": "Biblioteca",
-                "terms": "Biblioteca"
+                "terms": "Biblioteca, Livros, Consulta, Publica"
             },
             "amenity/marketplace": {
-                "name": "Mercado / Feira"
+                "name": "Mercado / Feira",
+                "terms": "Bazar, Minimercado"
             },
             "amenity/nightclub": {
                 "name": "Clube Nocturno",
                 "terms": "Clube Noturno, Discoteca"
             },
             "amenity/parking": {
-                "name": "Estacionamento",
-                "terms": "Estacionamento"
+                "name": "Parque de Estacionamento",
+                "terms": "Estacionamento, Lugar de Estacionamento"
             },
             "amenity/pharmacy": {
                 "name": "Farmácia",
-                "terms": "Farmácia"
+                "terms": "Farmácia, Parafarmácia"
             },
             "amenity/place_of_worship": {
-                "name": "Local de Oração"
+                "name": "Local de Oração",
+                "terms": "Abadia, Basílica, Casa de Adoração, Casa de Deus, Catedral, Capela, Capelinha, Centro Espiritual, Santuário, Templo"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Templo Budista",
-                "terms": "Templo Budista"
+                "terms": "Estupa, Vihara, Mosteiro, Templo, Pagode, Zendo, Dojo"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Igreja",
-                "terms": "Igreja"
+                "terms": "Cristão, Abadia, Alminha, Alminhas, Basílica, Betel, Casa de Adoração, Casa de Deus, Carmelo, Catedral, Capela, Capelinha, Colegiada, Congregação, Convento, Cruzeiro, Ermida, Mosteiro, Oratório, Paróquia, Salão do Reino  Sé"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Sinagoga",
-                "terms": "Sinagoga"
+                "terms": "Judaico, Sinagoga"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Mesquita",
-                "terms": "Mesquita"
+                "terms": "Muçulmano, Mesquita"
             },
             "amenity/police": {
                 "name": "Polícia",
-                "terms": "polícia,gnr,psp,g.n.r.,p.s.p.,polícia de segurança pública,guarda nacional republicana"
+                "terms": "Polícia, GNR, G.N.R., PSP, P.S.P., Polícia de Segurança Pública, Guarda Nacional Republicana"
             },
             "amenity/post_box": {
-                "name": "Caixa de Correio"
+                "name": "Caixa de Correio",
+                "terms": "Marco de Correio, Caixa Postal, Posto de Correio"
             },
             "amenity/post_office": {
-                "name": "Estação de Correios"
+                "name": "Estação de Correios",
+                "terms": "Central de Correio, CTT, C.T.T., CTTs, Correio de Portugal"
             },
             "amenity/pub": {
-                "name": "Bar",
+                "name": "Taberna",
                 "terms": "Pub"
             },
             "amenity/ranger_station": {
@@ -1051,7 +1079,11 @@
             },
             "amenity/restaurant": {
                 "name": "Restaurante",
-                "terms": "Restaurante"
+                "terms": "Bar, Cafetaria, Café, Cantina, Almoço, Jantar, Cozinha, Restaurante, Pizzaria, Culinária, Gastronomia, Restauração"
+            },
+            "amenity/school": {
+                "name": "Escola",
+                "terms": "Academia, Creche, Colégio, Departamento, Externato, Liceu, Seminário"
             },
             "amenity/shelter": {
                 "name": "Abrigo",
@@ -1063,30 +1095,31 @@
             },
             "amenity/swimming_pool": {
                 "name": "Piscina",
-                "terms": "Piscina"
+                "terms": "Piscina, Parque Aquático "
             },
             "amenity/taxi": {
-                "name": "Praça de táxis",
-                "terms": "Paragem de táxis"
+                "name": "Praça de Táxis",
+                "terms": "Paragem de Táxis"
             },
             "amenity/telephone": {
                 "name": "Telefone",
-                "terms": "Telefone"
+                "terms": "Telefone, Telemóvel"
             },
             "amenity/theatre": {
                 "name": "Teatro",
-                "terms": "Teatro"
+                "terms": "Teatro, Performance, Peça, Peça de Teatro, Musical"
             },
             "amenity/toilets": {
                 "name": "Casas de Banho",
-                "terms": "Casas de Banho"
+                "terms": "Casas de Banho, Instalações Sanitárias, Sanitário, Gabinete Sanitário, Toilette, lavabo, WC"
             },
             "amenity/townhall": {
-                "name": "Câmara Municipal / Junta de Freguesia"
+                "name": "Câmara Municipal / Junta de Freguesia",
+                "terms": "Junta, Câmara, Paços, Centro Administrativo, Capital de Concelho, Capital de Freguesia, Capital de Distrito, Capital de Região"
             },
             "amenity/university": {
                 "name": "Universidade",
-                "terms": "universidade,faculdade,instituto"
+                "terms": "Universidade, Faculdade, Instituto, Politécnico"
             },
             "amenity/vending_machine": {
                 "name": "Máquina automática de vendas"
@@ -1095,77 +1128,92 @@
                 "name": "Veterinária"
             },
             "amenity/waste_basket": {
-                "name": "Caixote do Lixo"
+                "name": "Caixote do Lixo",
+                "terms": "Papeleira, Lixo, Reciclagem"
             },
             "area": {
                 "name": "Área",
-                "terms": "Área"
+                "terms": "Espaço, Extensão, Zona"
             },
             "barrier": {
                 "name": "Barreira",
-                "terms": "Barreira"
+                "terms": "Barreira, Muro"
             },
             "barrier/block": {
-                "name": "Bloco de Cimento / Pedra"
+                "name": "Bloco de Cimento / Pedra",
+                "terms": "Bloqueio, Obstáculo"
             },
             "barrier/bollard": {
-                "name": "Pilar"
+                "name": "Pilar",
+                "terms": "Bolardo, Poste de Amarração"
             },
             "barrier/cattle_grid": {
-                "name": "Grelha Anti-Gado"
+                "name": "Grelha Anti-Gado",
+                "terms": "Gado, Vaca, Porco, Boi, Cabra, Ovelha, Cavalo"
             },
             "barrier/city_wall": {
                 "name": "Muralha de Cidade",
-                "terms": "Camâra Municipal"
+                "terms": "Muro defensivo, Parede Defensiva, Muro Histórico, Fortificações"
             },
             "barrier/cycle_barrier": {
-                "name": "Barreira de Bicicletas"
+                "name": "Barreira de Bicicletas",
+                "terms": "Bicicleta"
             },
             "barrier/ditch": {
-                "name": "Fosso / Vala / Trincheira"
+                "name": "Fosso sem Água",
+                "terms": "Sem Água, Seca, Vala sem Água, Vala Seca, Trincheira sem Água, Trincheira  Seca"
             },
             "barrier/entrance": {
                 "name": "Entrada",
-                "terms": "Entrada"
+                "terms": "Entrada, Acesso, Abertura, Porta, Pórtico, Portão"
             },
             "barrier/fence": {
-                "name": "Vedação"
+                "name": "Vedação",
+                "terms": "Cerca, Proteção"
             },
             "barrier/gate": {
-                "name": "Cancela / Portão"
+                "name": "Cancela / Portão",
+                "terms": "Grade"
             },
             "barrier/hedge": {
-                "name": "Sebe"
+                "name": "Sebe",
+                "terms": "Arbusto, Muro de Flores, Muro de Plantas"
             },
             "barrier/kissing_gate": {
-                "name": "Cancela de Encosto Anti-Gado"
+                "name": "Cancela de Encosto Anti-Gado",
+                "terms": "Grade de Gado"
             },
             "barrier/lift_gate": {
-                "name": "Cancela Elevatória"
+                "name": "Barreira Automática",
+                "terms": "Cancela Elevatória, Barreira de Estacionamento"
             },
             "barrier/retaining_wall": {
-                "name": "Muro de Contenção"
+                "name": "Muro de Contenção",
+                "terms": "Arrimo, Amparo"
             },
             "barrier/stile": {
-                "name": "Escadas de Passagem Anti-Gado"
+                "name": "Passagem Anti-Gado",
+                "terms": "Escada"
             },
             "barrier/toll_booth": {
-                "name": "Portagem"
+                "name": "Portagem",
+                "terms": "Pedágio, Tarifa, Pórtico"
             },
             "barrier/wall": {
-                "name": "Muro"
+                "name": "Muro",
+                "terms": "Parede, Muro"
             },
             "boundary/administrative": {
-                "name": "Fronteira Administrativa (Concelho, freguesia...)",
-                "terms": "Fronteira Admistrativa"
+                "name": "Fronteira Administrativa",
+                "terms": "Fronteira Administrativa, Concelho, Freguesia, Distrito, Região, Limite Adminsitrativo"
             },
             "building": {
                 "name": "Edifício",
-                "terms": "Edifício"
+                "terms": "Edifício, Prédio"
             },
             "building/apartments": {
                 "name": "Apartamentos",
-                "terms": "Apartamentos"
+                "terms": "Apartamentos, Habitáculos"
             },
             "building/bunker": {
                 "name": "Bunker",
@@ -1184,8 +1232,8 @@
                 "terms": "Igreja"
             },
             "building/commercial": {
-                "name": "Edifício comercial",
-                "terms": "Prédio comercial"
+                "name": "Escritórios",
+                "terms": "Prédio Comercial, Edifício Comercial"
             },
             "building/construction": {
                 "name": "Edifício em Construção",
@@ -1196,11 +1244,12 @@
                 "terms": "Dormitório"
             },
             "building/entrance": {
-                "name": "Entrada"
+                "name": "Entrada",
+                "terms": "Entrada, Acesso, Abertura, Porta, Pórtico, Portão"
             },
             "building/garage": {
                 "name": "Garagem",
-                "terms": "Garagem"
+                "terms": "Garagem, Abrigo de Automoveis"
             },
             "building/garages": {
                 "name": "Garagens",
@@ -1212,23 +1261,27 @@
             },
             "building/house": {
                 "name": "Casa",
-                "terms": "Casa"
+                "terms": "Casa, Domicílio, Moradia, Mansão, Solar, Vivenda"
             },
             "building/hut": {
                 "name": "Cabana",
                 "terms": "Barraca"
             },
             "building/industrial": {
-                "name": "Edifício industrial",
-                "terms": "Edifício Industrial, Fábrica"
+                "name": "Industria",
+                "terms": "Edifício Industrial, Manufactura, Fábrica"
             },
             "building/public": {
                 "name": "Edifício Público",
                 "terms": "Edifício Público"
             },
             "building/residential": {
-                "name": "Edifício residencial",
-                "terms": "Prédio residencial"
+                "name": "Edifício Residencial",
+                "terms": "Prédio Residencial, Habitação"
+            },
+            "building/retail": {
+                "name": "Retalho",
+                "terms": "Varejo"
             },
             "building/roof": {
                 "name": "Telhado, Cobertura",
@@ -1274,6 +1327,10 @@
                 "name": "Fotógrafo",
                 "terms": "Fotográfo"
             },
+            "craft/photographic_laboratory": {
+                "name": "Laboratório Fotográfico",
+                "terms": "Loja Fotográfica, Fotógrafo"
+            },
             "craft/plumber": {
                 "name": "Canalizador",
                 "terms": "Canalizador"
@@ -1302,100 +1359,119 @@
             },
             "emergency/phone": {
                 "name": "Telefone de Emergência",
-                "terms": "Telefone de Emergência"
+                "terms": "Telefone de Emergência, 112"
             },
             "entrance": {
-                "name": "Entrada"
+                "name": "Entrada",
+                "terms": "Entrada, Acesso, Abertura, Porta, Pórtico, Portão"
             },
             "footway/sidewalk": {
                 "name": "Passeio",
                 "terms": "Passeio"
             },
             "highway": {
-                "name": "Auto-Estrada",
-                "terms": "Auto-Estrada"
+                "name": "Rodovia",
+                "terms": "Estrada, Via, Trânsito, Carro, Veiculo"
             },
             "highway/bridleway": {
-                "name": "Caminhos Exclusivo para Cavalos"
+                "name": "Caminhos Exclusivo para Cavalos",
+                "terms": "Trilho para Cavalos, Trilho para Cavaleiros, Trilho Equestre, Caminho Equestre, Caminho para Cavalos, Caminho para Cavaleiros"
             },
             "highway/bus_stop": {
                 "name": "Paragem de Autocarro",
-                "terms": "Paragem de Autocarro"
+                "terms": "Paragem de Autocarro, Terminal de Autocarros"
             },
             "highway/crossing": {
-                "name": "Passadeira"
+                "name": "Passadeira",
+                "terms": "Zebra, Faixa de segurança, Passagem, Passagem de Peões, Riscas"
             },
             "highway/cycleway": {
-                "name": "Ciclovia"
+                "name": "Ciclovia",
+                "terms": "Bicicleta"
             },
             "highway/footway": {
-                "name": "Via Pedonal"
+                "name": "Via Pedonal",
+                "terms": "Andar, Caminho, Estrada, Pé, Pedestre, Percurso, Rua, Ruela, Trajectória, Trilha, Trilho, Via, Viela, Caminho Pedonal"
             },
             "highway/living_street": {
-                "name": "Living Street (não existem em países lusófonos)"
+                "name": "Zonas de coexistência",
+                "terms": "Zona de Peões"
             },
             "highway/mini_roundabout": {
                 "name": "Mini-Rotunda",
-                "terms": "Mini-Rotunda"
+                "terms": "Mini-Rotunda, Minirotunda, Rotunda Pintada"
             },
             "highway/motorway": {
-                "name": "Autoestrada"
+                "name": "Autoestrada",
+                "terms": "Auto-Estrada, Auto Estrada"
             },
             "highway/motorway_junction": {
-                "name": "Interseção de Autoestradas"
+                "name": "Interseção / Saída de Autoestradas",
+                "terms": "Junção, Saída de Autoestradas"
             },
             "highway/motorway_link": {
-                "name": "Ligação a Autoestrada"
+                "name": "Nó de ligação a uma Autoestrada",
+                "terms": "Ligação Autoestrada, Entrada Autoestrada, Saída Autoestrada"
             },
             "highway/path": {
-                "name": "Caminho"
+                "name": "Trilho",
+                "terms": "Trilha, Caminho"
             },
             "highway/pedestrian": {
-                "name": "Rua Pedonal"
+                "name": "Praça / Rua Pedonal",
+                "terms": "Pedonal, Pedestre"
             },
             "highway/primary": {
-                "name": "Estrada Primária / Nacional"
+                "name": "Estrada Nacional",
+                "terms": "Estrada Principal, Rodovia Principal, Estrada Primária, Rodovia Primária, Primário"
             },
             "highway/primary_link": {
-                "name": "Ligação a Estrada Primária / Nacional"
+                "name": "Nó de Ligação a uma Estrada Nacional",
+                "terms": "Ligação Estrada Nacional, Ligação Rodovia Nacional, Ligação Nacional,  Ligação Estrada Principal, Entrada Estrada Nacional, Entrada Rodovia Nacional, Entrada Nacional, Entrada Estrada Nacional, Saída Nacional, Saída Rodovia Nacional, Saída Nacional, Saída Estrada Nacional,"
             },
             "highway/residential": {
                 "name": "Estrada Residencial",
-                "terms": "Estrada Residencial"
+                "terms": "Estrada Residencial, Rodovia Residencial, Estrada Urbana, Rodovia Urbana, Estrada Suburbana, Rodovia Suburbana, Estrada dentro de localidades, Rodovia dentro de localidades"
             },
             "highway/rest_area": {
                 "name": "Área de Descanso",
                 "terms": "Área de Descanso"
             },
             "highway/road": {
-                "name": "Estrada Genérica",
-                "terms": "Estrada Desconhecida"
+                "name": "Estrada Incógnita",
+                "terms": "Estrada Genérica, Rodovia Genérica, Estrada Desconhecida, Rodovia Desconhecida"
             },
             "highway/secondary": {
-                "name": "Estrada Secundária / Regional"
+                "name": "Estrada Regional",
+                "terms": "Estrada Secundária, Rodovia Secundária, Secundário"
             },
             "highway/secondary_link": {
-                "name": "Ligação a Estrada Secundária / Regional"
+                "name": "Nó de ligação a uma Estrada Regional",
+                "terms": "Ligação Estrada Regional, Ligação Rodovia Regional, Ligação Regional,  Ligação Estrada Secundária, Entrada Estrada Regional, Entrada Rodovia Regional, Entrada Regional, Entrada Estrada Secundária, Saída Regional, Saída Rodovia Regional, Saída Regional, Saída Estrada Secundária"
             },
             "highway/service": {
                 "name": "Estrada de Serviço",
-                "terms": "Estrada de Serviço"
+                "terms": "Rodovia de Serviço"
             },
             "highway/service/alley": {
-                "name": "Rua de Traseiras"
+                "name": "Traseiras",
+                "terms": "Beco"
             },
             "highway/service/drive-through": {
-                "name": "Serviço ao volante"
+                "name": "Drive-Through",
+                "terms": "Drive-in, Serviço ao Volante"
             },
             "highway/service/driveway": {
-                "name": "Acesso a residência / serviço"
+                "name": "Acesso a residência / garagem",
+                "terms": "Rampa de Acesso, Corredor"
             },
             "highway/service/emergency_access": {
                 "name": "Acesso de Emergência",
-                "terms": "Acesso de Emergência"
+                "terms": "Acesso de Emergência, Entrada de Emergência, Corredor de Emergência"
             },
             "highway/service/parking_aisle": {
-                "name": "Estrada de Parque de Estacionamento"
+                "name": "Corredor de Estacionamento",
+                "terms": "Pista de Estacionamento, Estacionar"
             },
             "highway/services": {
                 "name": "Área de Serviço",
@@ -1403,36 +1479,42 @@
             },
             "highway/steps": {
                 "name": "Escadas",
-                "terms": "Escadas"
+                "terms": "Escadaria, degraus"
             },
             "highway/stop": {
                 "name": "Sinal de stop",
                 "terms": "Sinal de Stop, Sinal de Paragem, Paragem Obrigatória"
             },
             "highway/tertiary": {
-                "name": "Estrada Terciária / Municipal"
+                "name": "Estrada Municipal",
+                "terms": "Estrada Terciária, Rodovia Terciária, Terciário, Caminho Municipal"
             },
             "highway/tertiary_link": {
-                "name": "Ligação a Estrada Terciária / Municipal"
+                "name": "Nó de ligação a uma Estrada Municipal",
+                "terms": "Ligação Estrada Municipal, Ligação Rodovia Municipal, Ligação Municipal,  Ligação Estrada Terciária, Entrada Estrada Municipal, Entrada Rodovia Municipal, Entrada Municipal, Entrada Estrada Terciária, Saída Municipal, Saída Rodovia Municipal, Saída Municipal, Saída Estrada Municipal"
             },
             "highway/track": {
-                "name": "Carreiro Florestal / Agrícola"
+                "name": "Estrada Florestal / Agrícola",
+                "terms": "Estrada Rural"
             },
             "highway/traffic_signals": {
-                "name": "Semáforo",
-                "terms": "Sinais de Trânsito"
+                "name": "Semáforos",
+                "terms": "Semáforo, Vermelho, Verde, Amarelo, Sinal, Sinal de Trânsito"
             },
             "highway/trunk": {
-                "name": "Via Rápida /Variante / IP / IC"
+                "name": "Via Rápida",
+                "terms": "Via Reservada a Automóveis e Motociclos, Estrada Reservada a Automóveis e Motociclos, Via Expressa, Via Reservada"
             },
             "highway/trunk_link": {
-                "name": "Ligação a Via Rápida / IP / IC"
+                "name": "Nó de ligação a uma Via Rápida",
+                "terms": "Ligação Via Rápida, Entrada Via Rápida, Saída Via Rápida, Ligação Via Reservada a Automóveis e Motociclos, Entrada Via Reservada a Automóveis e Motociclos, Saída Via Reservada a Automóveis e Motociclos, Ligação Via Expressa, Entrada Expressa, Saída Via Expressa, Ligação Via Reservada, Entrada Via Reservada, Saída Via Reservada"
             },
             "highway/turning_circle": {
-                "name": "Circulo de Viragem"
+                "name": "Circulo de Viragem",
+                "terms": "Inversão de Marcha"
             },
             "highway/unclassified": {
-                "name": "Estrada Não-Classificada",
+                "name": "Estrada Normal",
                 "terms": "Estrada Não-Classificada"
             },
             "historic": {
@@ -1444,112 +1526,135 @@
                 "terms": "Local Arqueológico"
             },
             "historic/boundary_stone": {
-                "name": "Marco de Fronteira"
+                "name": "Marco de Fronteira",
+                "terms": "Pilar de Fronteira"
             },
             "historic/castle": {
                 "name": "Castelo",
-                "terms": "Castelo"
+                "terms": "Castelo, Fortaleza, Edificação, Medieval"
             },
             "historic/memorial": {
                 "name": "Memorial",
-                "terms": "Memorial"
+                "terms": "Memorial, Homenagem"
             },
             "historic/monument": {
                 "name": "Monumento",
-                "terms": "Monumento"
+                "terms": "Monumento, Marco"
             },
             "historic/ruins": {
                 "name": "Ruínas",
-                "terms": "Ruínas"
+                "terms": "Ruínas, Abandonado"
             },
             "historic/wayside_cross": {
-                "name": "Cruzeiro / Cruz ao Ar Livre"
+                "name": "Cruzeiro",
+                "terms": " Cruz ao Ar Livre"
             },
             "historic/wayside_shrine": {
-                "name": "Alminhas / Nicho / Capelinha"
+                "name": "Alminhas / Nicho / Capelinha",
+                "terms": "Alminhas / Nicho / Capelinha"
             },
             "landuse": {
-                "name": "Uso do Solo"
+                "name": "Uso do Solo",
+                "terms": "Uso de Terra, Uso de Solo"
             },
             "landuse/allotments": {
-                "name": "Horta Urbana / Comunitária"
+                "name": "Hortas",
+                "terms": "Horta Comunitária, Horta Urbana"
             },
             "landuse/basin": {
-                "name": "Bacia Hidrográfica"
+                "name": "Bacia Hidrográfica",
+                "terms": "Bacia de Drenagem"
             },
             "landuse/cemetery": {
                 "name": "Cemitério",
-                "terms": "Cemitério"
+                "terms": "Cemitério, Vala"
             },
             "landuse/commercial": {
-                "name": "Comercial"
+                "name": "Zona de Escritórios",
+                "terms": "Área comercial, Baixa Comercial"
             },
             "landuse/construction": {
                 "name": "Construção",
-                "terms": "Construção, Obras"
+                "terms": "Construção, Obras, Em Curso"
             },
             "landuse/farm": {
                 "name": "Quinta",
-                "terms": "Quinta"
+                "terms": "Quinta, Campo Agricula"
             },
             "landuse/farmland": {
                 "name": "Quinta",
                 "terms": "Quinta"
             },
             "landuse/farmyard": {
-                "name": "Quinta",
-                "terms": "Quinta"
+                "name": "Edifícios Agrícolas",
+                "terms": "Fazenda, Casa de Campo, Celeiro"
             },
             "landuse/forest": {
                 "name": "Floresta",
-                "terms": "Floresta"
+                "terms": "Floresta, Área Verde"
             },
             "landuse/grass": {
                 "name": "Relva",
-                "terms": "Relva"
+                "terms": "Relva, Grama"
             },
             "landuse/industrial": {
-                "name": "Industrial",
+                "name": "Zona de Industrias",
                 "terms": "Industrial"
             },
             "landuse/meadow": {
-                "name": "Prado"
+                "name": "Prado",
+                "terms": "Meadow"
+            },
+            "landuse/military": {
+                "name": "Militar",
+                "terms": "Exército, Marinha, Forças Especiais, Força Aérea"
             },
             "landuse/orchard": {
-                "name": "Pomar"
+                "name": "Pomar",
+                "terms": "Plantação, Orchard"
             },
             "landuse/quarry": {
-                "name": "Pedreira"
+                "name": "Pedreira",
+                "terms": "Canteira, Quarry"
             },
             "landuse/residential": {
                 "name": "Residencial",
-                "terms": "Residencial"
+                "terms": "Residencial, Urbano, Antrópico, Residential"
             },
             "landuse/retail": {
-                "name": "Área de Retalho",
-                "terms": "Retalho"
+                "name": "Zona de Retalhos",
+                "terms": "Retalho, Varejo, Compras, Vendas, Retail"
             },
             "landuse/vineyard": {
                 "name": "Vinha",
-                "terms": "Vinhas"
+                "terms": "Vinhas, Vinhedo, Vinhão, Vineyard"
             },
             "leisure": {
                 "name": "Lazer",
-                "terms": "Lazer"
+                "terms": "Lazer, Diversão, Leisure"
             },
             "leisure/common": {
                 "name": "Comum"
             },
             "leisure/dog_park": {
-                "name": "Parque de cães",
-                "terms": "Parque para cães"
+                "name": "Parque de Cães",
+                "terms": "Parque para Cães, Dog Park"
+            },
+            "leisure/firepit": {
+                "name": "Fogueira",
+                "terms": "Fogo controlado, chama, brasa"
             },
             "leisure/garden": {
                 "name": "Jardim",
-                "terms": "Jardim"
+                "terms": "Jardim, Garden"
             },
             "leisure/golf_course": {
-                "name": "Campo de Golfe"
+                "name": "Campo de Golfe",
+                "terms": "Campo de Golf, Golf, Golf Course"
+            },
+            "leisure/ice_rink": {
+                "name": "Ringue de Patinagem",
+                "terms": "Ringue de Gelo, Gelo, Pista de Gelo, Pista de Patinagem"
             },
             "leisure/marina": {
                 "name": "Marina",
@@ -1557,26 +1662,27 @@
             },
             "leisure/park": {
                 "name": "Parque",
-                "terms": "Parque"
+                "terms": "Bosque, Floresta, Jardim, Relva, Relvado"
             },
             "leisure/picnic_table": {
-                "name": "Mesa de Merenda",
+                "name": "Mesa de Picnic",
                 "terms": "Mesa de Merenda"
             },
             "leisure/pitch": {
                 "name": "Campo de Desporto",
-                "terms": "Campo de Desportos, Quadra Desportiva"
+                "terms": "Campo de Desportos, Quadra Desportiva, Sport Pitch"
             },
             "leisure/pitch/american_football": {
                 "name": "Campo de Futebol Americano",
-                "terms": "Campo de Futebol Americano"
+                "terms": "Campo de Futebol Americano, Rugby, Râguebi, American Football"
             },
             "leisure/pitch/baseball": {
-                "name": "Campo de Basebol"
+                "name": "Campo de Basebol",
+                "terms": "Campo de Baisebol, Baseball Diamond"
             },
             "leisure/pitch/basketball": {
                 "name": "Campo de Basquetebol",
-                "terms": "Campo de Basquetebol, Quadra de Basquetebol"
+                "terms": "Campo de Basquetebol, Quadra de Basquetebol, Basketball Court"
             },
             "leisure/pitch/skateboard": {
                 "name": "Parque de skate",
@@ -1584,32 +1690,34 @@
             },
             "leisure/pitch/soccer": {
                 "name": "Campo de Futebol",
-                "terms": "Campo de Futebol"
+                "terms": "Campo de Futebol, Soccer Field"
             },
             "leisure/pitch/tennis": {
                 "name": "Campo de Ténis",
-                "terms": "Campo de Ténis, Quadra de Ténis"
+                "terms": "Campo de Ténis, Quadra de Ténis, Tennis Court"
             },
             "leisure/pitch/volleyball": {
                 "name": "Campo de Voleibol",
-                "terms": "Campo de Voleibol, Quadra de Voleibol"
+                "terms": "Campo de Voleibol, Quadra de Voleibol, Volleyball Court"
             },
             "leisure/playground": {
-                "name": "Parque infantil"
+                "name": "Parque Infantil",
+                "terms": "Parque Infantil, Escorrega, Baloiço, Escorregas, Baloiços"
             },
             "leisure/slipway": {
-                "name": "Rampa para Barcos"
+                "name": "Rampa para Barcos",
+                "terms": "Slipway"
             },
             "leisure/sports_center": {
                 "name": "Centro desportivo"
             },
             "leisure/stadium": {
                 "name": "Estádio",
-                "terms": "Estádio"
+                "terms": "Estádio, Stadium"
             },
             "leisure/swimming_pool": {
                 "name": "Piscina",
-                "terms": "Piscina"
+                "terms": "Piscina, Swimming Pool"
             },
             "leisure/track": {
                 "name": "Pista de corridas",
@@ -1617,17 +1725,19 @@
             },
             "line": {
                 "name": "Linha",
-                "terms": "Linha"
+                "terms": "Linha, Line"
             },
             "man_made": {
-                "name": "Construção",
-                "terms": "Construção Humana"
+                "name": "Estrutura Artificial",
+                "terms": "Construção Humana, Obra Humana, Man Made"
             },
             "man_made/breakwater": {
-                "name": "Quebra-mar / Molhe"
+                "name": "Quebra-mar / Molhe",
+                "terms": "Breakwater"
             },
             "man_made/cutline": {
-                "name": "Linha corta-fogo"
+                "name": "Linha corta-fogo",
+                "terms": "Cut line"
             },
             "man_made/flagpole": {
                 "name": "Estandarte",
@@ -1635,30 +1745,35 @@
             },
             "man_made/lighthouse": {
                 "name": "Farol",
-                "terms": "Faról"
+                "terms": "Faról, Lighthouse"
             },
             "man_made/observation": {
                 "name": "Torre de observação",
                 "terms": "Torre de Observação"
             },
             "man_made/pier": {
-                "name": "Pontão / Atracadouro"
+                "name": "Pontão / Atracadouro",
+                "terms": "Pier, Porto, Doca"
             },
             "man_made/pipeline": {
-                "name": "Pipeline"
+                "name": "Gasoduto / Oleoduto",
+                "terms": "Tubo, Pipeline"
             },
             "man_made/survey_point": {
-                "name": "Vértice Geodésico"
+                "name": "Vértice Geodésico / Talefe",
+                "terms": "Survey Point"
             },
             "man_made/tower": {
                 "name": "Torre",
-                "terms": "Torre"
+                "terms": "Torre, Alto, Tower"
             },
             "man_made/wastewater_plant": {
-                "name": "ETAR"
+                "name": "ETAR",
+                "terms": "ETAR, E.T.A.R., Estação de Tratamento de Resíduos, Estação de Tratamento de Águas Residuais"
             },
             "man_made/water_tower": {
-                "name": "Depósito de Água"
+                "name": "Reservatório Elevado",
+                "terms": "Depósito de Água, Torre de Água, Water Tower"
             },
             "man_made/water_well": {
                 "name": "Poço de Água"
@@ -1688,7 +1803,7 @@
             },
             "natural/coastline": {
                 "name": "Linha Costeira",
-                "terms": "Costa"
+                "terms": "Costa, Orla"
             },
             "natural/fell": {
                 "name": "Encosta"
@@ -1704,7 +1819,8 @@
                 "name": "Charneca"
             },
             "natural/peak": {
-                "name": "Cume"
+                "name": "Cume",
+                "terms": "Cume, Montanha, Pináculo"
             },
             "natural/scree": {
                 "name": "Encosta de cascalho"
@@ -1726,17 +1842,18 @@
             },
             "natural/water/lake": {
                 "name": "Lago",
-                "terms": "Lago"
+                "terms": "Jardim de Água, Jardim d'Água, Lagoa, Lagoinha, Pateira"
             },
             "natural/water/pond": {
-                "name": "Lagoa"
+                "name": "Lagoa",
+                "terms": "Jardim de Água, Jardim d'Água, Lagoinha, Pateira"
             },
             "natural/water/reservoir": {
                 "name": "Reservatório Artificial",
                 "terms": "Reservatório, Reservatório de Água"
             },
             "natural/wetland": {
-                "name": "Zonas Encharcadas",
+                "name": " Zona húmida",
                 "terms": "Pântano"
             },
             "natural/wood": {
@@ -1781,11 +1898,11 @@
                 "terms": "Cidade"
             },
             "place/hamlet": {
-                "name": "Aldeia / Lugar"
+                "name": "Aldeia"
             },
             "place/island": {
                 "name": "Ilha",
-                "terms": "Ilha"
+                "terms": "Arquipélago, Atol, Ilha, Ilhéu, Recife, Restinga"
             },
             "place/isolated_dwelling": {
                 "name": "Habitação Isolada"
@@ -1795,14 +1912,18 @@
                 "terms": "Localidade"
             },
             "place/neighbourhood": {
-                "name": "Bairro",
+                "name": "Vizinhança",
                 "terms": "Bairro"
             },
+            "place/suburb": {
+                "name": "Borough",
+                "terms": "Borough"
+            },
             "place/town": {
-                "name": "Sede de Concelho (cidade, vila)"
+                "name": "Cidade"
             },
             "place/village": {
-                "name": "Sede de freguesia",
+                "name": "Vila",
                 "terms": "Vila"
             },
             "point": {
@@ -1826,7 +1947,7 @@
                 "terms": "Poste de Eletricidade"
             },
             "power/sub_station": {
-                "name": "Sub-estação"
+                "name": "Subestação"
             },
             "power/tower": {
                 "name": "Torre de Alta Tensão",
@@ -1841,7 +1962,7 @@
                 "terms": "Carris, Linha de Carris"
             },
             "railway/abandoned": {
-                "name": "Ferrovia Abandonada (carris removidos)",
+                "name": "Ferrovia Abandonada",
                 "terms": "Carris Abandonados, Linha de Carris Abandonados"
             },
             "railway/disused": {
@@ -1855,7 +1976,8 @@
                 "name": "Apeadeiro"
             },
             "railway/level_crossing": {
-                "name": "Passagem de Nível Ferroviária"
+                "name": "Passagem de Nível",
+                "terms": "Passagem em Nível, Passagem de Comboios"
             },
             "railway/monorail": {
                 "name": "Monocarril"
@@ -1875,7 +1997,7 @@
             },
             "railway/subway_entrance": {
                 "name": "Entrada de Metro",
-                "terms": "Entrada do Metro"
+                "terms": "Entrada do Metro, Metro, Metropolitano, Subterrâneo "
             },
             "railway/tram": {
                 "name": "Elétrico",
@@ -1886,7 +2008,7 @@
                 "terms": "Relação"
             },
             "route/ferry": {
-                "name": "Rota de Ferry",
+                "name": "Rota de Barca / Ferry",
                 "terms": "Rota do Ferry"
             },
             "shop": {
@@ -1894,7 +2016,8 @@
                 "terms": "Loja"
             },
             "shop/alcohol": {
-                "name": "Loja de Bebidas Alcoólicas"
+                "name": "Loja de Bebidas Alcoólicas",
+                "terms": "Alcool"
             },
             "shop/art": {
                 "name": "Loja de Arte",
@@ -1958,7 +2081,7 @@
                 "terms": "Loja de Conviniência"
             },
             "shop/deli": {
-                "name": "Loja de Gourmet"
+                "name": "Loja de Gourmet / Delicacias"
             },
             "shop/department_store": {
                 "name": "Grande Armazém"
@@ -1974,7 +2097,8 @@
                 "terms": "Loja de Eletrodomésticos"
             },
             "shop/farm": {
-                "name": "Barraca de produtos do campo"
+                "name": "Barraca de Produtos do Campo",
+                "terms": "Barraca de Fruta, Barraca de Legumes, Barraca de Hortaliças, Barraca de Batatas"
             },
             "shop/fishmonger": {
                 "name": "Peixaria"
@@ -1984,8 +2108,8 @@
                 "terms": "Florista"
             },
             "shop/funeral_directors": {
-                "name": "Funerária",
-                "terms": "Funerária"
+                "name": "Agência Funerária",
+                "terms": "Casa Funerária, Agência Mortuária, Casa Mortuária"
             },
             "shop/furniture": {
                 "name": "Loja de Mobiliário",
@@ -2043,7 +2167,7 @@
                 "name": "Loja de Jornais e Revistas"
             },
             "shop/optician": {
-                "name": "Ótica"
+                "name": "Loja de Ótica / Oculos"
             },
             "shop/outdoor": {
                 "name": "Loja de Artigos p/Atividades ao Ar Livre"
@@ -2055,6 +2179,10 @@
             "shop/photo": {
                 "name": "Loja de Fotografia, Fotógrafo",
                 "terms": "Loja de Fotografia, Fotográfo"
+            },
+            "shop/seafood": {
+                "name": "Loja de Frutos do Mar",
+                "terms": "Camarão, Lagosta, Caranguejo, Ameijoas, Mexilhões"
             },
             "shop/shoes": {
                 "name": "Sapataria",
@@ -2069,7 +2197,7 @@
             },
             "shop/supermarket": {
                 "name": "Supermercado",
-                "terms": "Supermercado"
+                "terms": "Bazar, Centro Comercial, Compras, Feira, Hipermercado, Minimercado, Stand, Outlet"
             },
             "shop/toys": {
                 "name": "Loja de Brinquedos",
@@ -2087,7 +2215,7 @@
                 "name": "Loja Vazia"
             },
             "shop/variety_store": {
-                "name": "Loja de Descontos (1,99€...)"
+                "name": "Loja dos Chineses"
             },
             "shop/video": {
                 "name": "Videoclube"
@@ -2115,10 +2243,11 @@
                 "name": "Parque de Caravanas"
             },
             "tourism/chalet": {
-                "name": "Chalé"
+                "name": "Chalé / Casa de Férias"
             },
             "tourism/guest_house": {
-                "name": "Casa de Hóspedes"
+                "name": "Casa de Hóspedes",
+                "terms": "Cama e Pequeno Almoço, Cama e Peq. Almoço, Cama e Almoço"
             },
             "tourism/hostel": {
                 "name": "Pousada / Hostel",
@@ -2138,7 +2267,7 @@
             },
             "tourism/museum": {
                 "name": "Museu",
-                "terms": "Museu"
+                "terms": "Exposição, Fundação, Galeria, Galeria de Arte, Instituição, Livraria, Salão"
             },
             "tourism/picnic_site": {
                 "name": "Parque de Merendas / Piqueniques",
@@ -2159,11 +2288,11 @@
                 "terms": "Fronteira"
             },
             "type/boundary/administrative": {
-                "name": "Fronteira Administrativa (Concelho, Freguesia...)",
+                "name": "Fronteira Administrativa",
                 "terms": "Fronteira Admistrativa"
             },
             "type/multipolygon": {
-                "name": "Multi-polígono",
+                "name": "Multipolígono",
                 "terms": "Multipolígono"
             },
             "type/restriction": {
@@ -2186,7 +2315,7 @@
                 "name": "Rota de Desvio"
             },
             "type/route/ferry": {
-                "name": "Rota de Ferry",
+                "name": "Rota de Barca / Ferry",
                 "terms": "Rota do Ferry"
             },
             "type/route/foot": {
@@ -2196,14 +2325,15 @@
                 "name": "Rota de caminhada"
             },
             "type/route/pipeline": {
-                "name": "Rota de Pipeline"
+                "name": "Rota de Gasoduto / Oleoduto"
             },
             "type/route/power": {
                 "name": "Rota de Transmissão de Energia",
                 "terms": "Linha de Eletricidade, Linha de Energia"
             },
             "type/route/road": {
-                "name": "Rota Rodoviária"
+                "name": "Rota Rodoviária",
+                "terms": "Percurso Rodoviário, Trajecto Rodoviário"
             },
             "type/route/train": {
                 "name": "Rota Ferroviária"
@@ -2230,21 +2360,22 @@
                 "terms": "Barragem"
             },
             "waterway/ditch": {
-                "name": "Fosso / Vala / Trincheira",
-                "terms": "Represa"
+                "name": "Fosso",
+                "terms": "Vala, Trincheira, Represa"
             },
             "waterway/drain": {
                 "name": "Vala de Drenagem"
             },
             "waterway/river": {
                 "name": "Rio",
-                "terms": "Rio"
+                "terms": "Afluente, Barra, Barroca, Canal, Corga, Curso de Água, Delta, Estuário, Grota, Ria"
             },
             "waterway/riverbank": {
                 "name": "Margem de Rio"
             },
             "waterway/stream": {
-                "name": "Ribeiro"
+                "name": "Ribeiro",
+                "terms": "Afluente, Barra, Barroca, Canal, Corga, Curso de Água, Delta, Estuário, Fio de Água, Grota, Regato, Rego, Riacho, Ribeira, Ribeiro, Ria, Vala, Valeiro"
             },
             "waterway/weir": {
                 "name": "Represa"

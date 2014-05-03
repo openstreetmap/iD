@@ -267,6 +267,8 @@
         "percent_brightness": "{opacity}% jas",
         "none": "Žiadne",
         "custom": "Voliteľné",
+        "custom_button": "Upraviť volitelné pozadie",
+        "custom_prompt": "Zadajte URL pre vzor mapového podkladu. Platné znaky sú {z}, {x}, {y} pre Z/X/Y schému a {u} pre quadtile schému.",
         "fix_misalignment": "Oprav zarovnanie",
         "reset": "vynulovať"
     },
@@ -805,6 +807,9 @@
             "shop": {
                 "label": "Typ"
             },
+            "sloped_curb": {
+                "label": "Znížený obrubník"
+            },
             "smoking": {
                 "label": "Fajčenie"
             },
@@ -839,6 +844,9 @@
             },
             "surface": {
                 "label": "Povrch"
+            },
+            "tactile_paving": {
+                "label": "Taktilné značenie"
             },
             "toilets/disposal": {
                 "label": "Odstraňovanie"
@@ -1539,6 +1547,10 @@
                 "name": "Fotograf",
                 "terms": "fotografia,fotografovanie,fotka,fotky"
             },
+            "craft/photographic_laboratory": {
+                "name": "Fotografické laboratórium",
+                "terms": "fotograficke laboratorium,fotolab"
+            },
             "craft/plasterer": {
                 "name": "Fasádnik",
                 "terms": "fasadnik,štukatér,stukater,omietkár,omietkar"
@@ -1875,6 +1887,10 @@
                 "name": "Cintorín",
                 "terms": "cintorin,hroby,pohrebisko,hrobky,cmiter"
             },
+            "landuse/churchyard": {
+                "name": "Kostolný pozemok",
+                "terms": "kostolny pozemok,kostol"
+            },
             "landuse/commercial": {
                 "name": "Obchodné",
                 "terms": "obchodne,komercia,komercne,komerčné"
@@ -1914,6 +1930,10 @@
             "landuse/meadow": {
                 "name": "Lúka",
                 "terms": "luka,pastviny,trava,tráva,paša,pasa"
+            },
+            "landuse/military": {
+                "name": "Armádne",
+                "terms": "armadne, armada"
             },
             "landuse/orchard": {
                 "name": "Sad",
@@ -2307,6 +2327,10 @@
                 "name": "Susedstvo",
                 "terms": "okrsok,oblast,oblasť,štvrť,stvrt"
             },
+            "place/suburb": {
+                "name": "Mestská časť",
+                "terms": "mestska cast"
+            },
             "place/town": {
                 "name": "Mesto",
                 "terms": "mestecko,mestečko"
@@ -2619,6 +2643,10 @@
                 "name": "Obchod s fototechnikou",
                 "terms": "Fotoateliér,fotoatelier,fotostudio,fotoštúdio,fotografia"
             },
+            "shop/seafood": {
+                "name": "Obchod s morskými špecialitami",
+                "terms": "obchod s morskymi specialitami,plody mora,ryby,morské ryby,morske ryby,kreverty,treska,tuniak"
+            },
             "shop/shoes": {
                 "name": "Obchod s obuvov",
                 "terms": "obuv,topánky,topanky"
@@ -2658,6 +2686,10 @@
             "shop/video": {
                 "name": "Videopožičovňa",
                 "terms": "videopozicovna,DVD,CD,VHS,blue-ray,blueray,blue ray,video"
+            },
+            "shop/wine": {
+                "name": "Vináreň",
+                "terms": "vinaren,vinoteka,vínotéka,vino,víno"
             },
             "tourism": {
                 "name": "Turizmus",

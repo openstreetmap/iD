@@ -594,6 +594,24 @@
             "fixme": {
                 "label": "Поправи ме"
             },
+            "fuel/biodiesel": {
+                "label": "Продаје биодизел"
+            },
+            "fuel/diesel": {
+                "label": "Продаје дизел"
+            },
+            "fuel/e10": {
+                "label": "Продаје Е10"
+            },
+            "fuel/e85": {
+                "label": "Продаје Е85"
+            },
+            "fuel/lpg": {
+                "label": "Продаје пропан"
+            },
+            "fuel/octane_98": {
+                "label": "Продаје премијум бензин"
+            },
             "gauge": {
                 "label": "Колосек"
             },
@@ -654,6 +672,9 @@
             },
             "leisure": {
                 "label": "Врста"
+            },
+            "length": {
+                "label": "Дужина (метара)"
             },
             "levels": {
                 "label": "Нивои",
@@ -721,6 +742,9 @@
             },
             "place": {
                 "label": "Врста"
+            },
+            "population": {
+                "label": "Насељеност"
             },
             "power": {
                 "label": "Врста"
@@ -863,6 +887,9 @@
             "wheelchair": {
                 "label": "Прилаз за инвалидска колица"
             },
+            "width": {
+                "label": "Ширина (метара)"
+            },
             "wikipedia": {
                 "label": "Википедија"
             },
@@ -963,6 +990,9 @@
             },
             "amenity/college": {
                 "name": "Факултет"
+            },
+            "amenity/compressed_air": {
+                "name": "Компримовани ваздух"
             },
             "amenity/courthouse": {
                 "name": "Судница"
@@ -1493,6 +1523,9 @@
             "landuse/cemetery": {
                 "name": "Гробље"
             },
+            "landuse/churchyard": {
+                "name": "Црквено двориште"
+            },
             "landuse/commercial": {
                 "name": "Пословна област"
             },
@@ -1519,6 +1552,9 @@
             },
             "landuse/meadow": {
                 "name": "Ливада"
+            },
+            "landuse/military": {
+                "name": "Војска "
             },
             "landuse/orchard": {
                 "name": "Воћњак"
@@ -1967,6 +2003,9 @@
             "shop/pet": {
                 "name": "Продавница кућних љубимаца"
             },
+            "shop/seafood": {
+                "name": "Продавница морске хране "
+            },
             "shop/shoes": {
                 "name": "Продавница обуће"
             },
@@ -1996,6 +2035,9 @@
             },
             "shop/video": {
                 "name": "Видео клуб"
+            },
+            "shop/wine": {
+                "name": "Продавница вина"
             },
             "tourism": {
                 "name": "Туризам"

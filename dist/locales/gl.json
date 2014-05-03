@@ -863,11 +863,35 @@
             "building": {
                 "name": "Edificio"
             },
+            "building/cathedral": {
+                "name": "Catedral"
+            },
+            "building/chapel": {
+                "name": "Capela"
+            },
+            "building/church": {
+                "name": "Igrexa"
+            },
+            "building/construction": {
+                "name": "Edificio en construcción"
+            },
             "building/entrance": {
                 "name": "Entrada"
             },
+            "building/garage": {
+                "name": "Garaxe"
+            },
+            "building/house": {
+                "name": "Casa"
+            },
+            "building/hut": {
+                "name": "Refuxio"
+            },
             "entrance": {
                 "name": "Entrada"
+            },
+            "footway/sidewalk": {
+                "name": "Beirarrúa"
             },
             "highway": {
                 "name": "Estrada"
@@ -1075,6 +1099,9 @@
             },
             "man_made/pier": {
                 "name": "Embarcadoiro"
+            },
+            "man_made/pipeline": {
+                "name": "Tubería"
             },
             "man_made/survey_point": {
                 "name": "Vértice Xeodésico"

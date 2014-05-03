@@ -139,6 +139,7 @@
         },
         "rotate": {
             "title": "Pööra",
+            "description": "Pööra objekti ümber tema keskpunkti.",
             "key": "R",
             "annotation": {
                 "line": "Pööratud joont.",
