@@ -945,6 +945,18 @@ text.point {
   font-size: 10px;
 }
 
+/* Turns */
+
+g.turn path {
+    stroke: green;
+    stroke-width: 10px;
+    stroke-linecap: round;
+}
+
+g.turn.restricted path {
+    stroke: red;
+}
+
 /* Cursors */
 
 #map {

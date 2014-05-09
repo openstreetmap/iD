@@ -1,3 +1,23 @@
+iD.geo.Turn = function(turn) {
+    turn = _.clone(turn);
+
+    turn.key = function() {
+        var components = [turn.from, turn.to, turn.via, turn.toward];
+        if (turn.restriction)
+            components.push(turn.restriction);
+        return components.map(iD.Entity.key).join('-');
+    };
+
+    turn.angle = function(projection) {
+        var v = projection(turn.via.loc),
+            t = projection(turn.toward.loc);
+
+        return Math.atan2(t[1] - v[1], t[0] - v[0]);
+    };
+
+    return turn;
+};
+
 iD.geo.turns = function(graph, entityID) {
     var way = graph.entity(entityID);
     if (way.type !== 'way' || !way.tags.highway || way.isArea())
@@ -19,7 +39,7 @@ iD.geo.turns = function(graph, entityID) {
             }
         });
 
-        return turn;
+        return iD.geo.Turn(turn);
     }
 
     var turns = [];

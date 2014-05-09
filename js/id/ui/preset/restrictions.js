@@ -1,6 +1,7 @@
 iD.ui.preset.restrictions = function(field, context) {
     var event = d3.dispatch('change'),
-        entity;
+        entity,
+        selectedID;
 
     function restrictions(selection) {
         var wrap = selection.selectAll('.preset-input-wrap')
@@ -34,7 +35,8 @@ iD.ui.preset.restrictions = function(field, context) {
             entities = [],
             graph = context.graph(),
             lines = iD.svg.Lines(projection, context),
-            vertices = iD.svg.Vertices(projection, context);
+            vertices = iD.svg.Vertices(projection, context),
+            turns = iD.svg.Turns(projection, context);
 
         if (entity) {
             entities = graph.parentWays(entity).filter(function (parent) {
@@ -44,9 +46,32 @@ iD.ui.preset.restrictions = function(field, context) {
             entities.push(entity);
         }
 
+        if (!selectedID && entities.length) {
+            selectedID = entities[0].id;
+        }
+
         surface
             .call(vertices, graph, entities, filter, extent, z)
-            .call(lines, graph, entities, filter);
+            .call(lines, graph, entities, filter)
+            .call(turns, graph, selectedID);
+
+        surface.on('click.select', function() {
+            var datum = d3.event.target.__data__;
+            if (datum instanceof iD.Entity) {
+                selectedID = datum.id;
+                render();
+            }
+        });
+
+        surface
+            .selectAll('.selected')
+            .classed('selected', false);
+
+        if (selectedID) {
+            surface
+                .selectAll('.' + selectedID)
+                .classed('selected', true);
+        }
 
         context.history()
             .on('change.restrictions', render);
@@ -59,12 +84,14 @@ iD.ui.preset.restrictions = function(field, context) {
         }
     }
 
-    restrictions.tags = function() {};
-
     restrictions.entity = function(_) {
-        entity = _;
+        if (!entity || entity.id !== _.id) {
+            selectedID = null;
+            entity = _;
+        }
     };
 
+    restrictions.tags = function() {};
     restrictions.focus = function() {};
 
     return d3.rebind(restrictions, event, 'on');
