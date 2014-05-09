@@ -138,6 +138,8 @@ en:
         label: Emergency
       entrance: 
         label: Type
+      except: 
+        label: Exceptions
       fax: 
         label: Fax
         placeholder: +31 42 123 4567
@@ -1788,6 +1790,18 @@ en:
       type/restriction: 
         name: Restriction
         terms: "<translate with synonyms or related terms for 'Restriction', separated by commas>"
+      type/restriction/no_left_turn: 
+        name: No Left Turn
+        terms: "<translate with synonyms or related terms for 'No Left Turn', separated by commas>"
+      type/restriction/no_right_turn: 
+        name: No Right Turn
+        terms: "<translate with synonyms or related terms for 'No Right Turn', separated by commas>"
+      type/restriction/no_straight_on: 
+        name: No Straight On
+        terms: "<translate with synonyms or related terms for 'No Straight On', separated by commas>"
+      type/restriction/no_u_turn: 
+        name: No U Turn
+        terms: "<translate with synonyms or related terms for 'No U Turn', separated by commas>"
       type/route: 
         name: Route
         terms: "<translate with synonyms or related terms for 'Route', separated by commas>"

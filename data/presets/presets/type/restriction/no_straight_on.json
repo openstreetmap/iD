@@ -1,0 +1,14 @@
+{
+    "name": "No Straight On",
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "restriction",
+        "restriction": "no_straight_on"
+    },
+    "fields": [
+        "except"
+    ],
+    "icon": "restriction"
+}

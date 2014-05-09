@@ -7964,8 +7964,65 @@
         "name": "Restriction",
         "icon": "restriction",
         "fields": [
-            "restriction"
+            "restriction",
+            "except"
         ]
+    },
+    "type/restriction/no_left_turn": {
+        "name": "No Left Turn",
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "restriction",
+            "restriction": "no_left_turn"
+        },
+        "fields": [
+            "except"
+        ],
+        "icon": "restriction"
+    },
+    "type/restriction/no_right_turn": {
+        "name": "No Right Turn",
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "restriction",
+            "restriction": "no_right_turn"
+        },
+        "fields": [
+            "except"
+        ],
+        "icon": "restriction"
+    },
+    "type/restriction/no_straight_on": {
+        "name": "No Straight On",
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "restriction",
+            "restriction": "no_straight_on"
+        },
+        "fields": [
+            "except"
+        ],
+        "icon": "restriction"
+    },
+    "type/restriction/no_u_turn": {
+        "name": "No U Turn",
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "restriction",
+            "restriction": "no_u_turn"
+        },
+        "fields": [
+            "except"
+        ],
+        "icon": "restriction"
     },
     "type/route": {
         "geometry": [

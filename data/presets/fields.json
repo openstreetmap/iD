@@ -320,6 +320,11 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "except": {
+        "key": "except",
+        "type": "combo",
+        "label": "Exceptions"
+    },
     "fax": {
         "key": "fax",
         "type": "tel",

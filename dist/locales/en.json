@@ -598,6 +598,9 @@
             "entrance": {
                 "label": "Type"
             },
+            "except": {
+                "label": "Exceptions"
+            },
             "fax": {
                 "label": "Fax",
                 "placeholder": "+31 42 123 4567"
@@ -2823,6 +2826,22 @@
             },
             "type/restriction": {
                 "name": "Restriction",
+                "terms": ""
+            },
+            "type/restriction/no_left_turn": {
+                "name": "No Left Turn",
+                "terms": ""
+            },
+            "type/restriction/no_right_turn": {
+                "name": "No Right Turn",
+                "terms": ""
+            },
+            "type/restriction/no_straight_on": {
+                "name": "No Straight On",
+                "terms": ""
+            },
+            "type/restriction/no_u_turn": {
+                "name": "No U Turn",
                 "terms": ""
             },
             "type/route": {
