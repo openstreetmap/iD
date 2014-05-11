@@ -1,5 +1,6 @@
 {
     "keys": ["access", "foot", "motor_vehicle", "bicycle", "horse"],
+    "referenceKey": "access",
     "type": "access",
     "label": "Access",
     "placeholder": "Unknown",

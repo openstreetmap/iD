@@ -6,6 +6,7 @@
         "addr:city",
         "addr:postcode"
     ],
+    "referenceKey": "addr",
     "icon": "address",
     "universal": true,
     "label": "Address",

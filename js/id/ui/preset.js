@@ -134,7 +134,8 @@ iD.ui.preset = function(context) {
                 return field.present();
             })
             .each(function(field) {
-                var reference = iD.ui.TagReference({key: field.key});
+                var key = field.referenceKey || field.key,
+                    reference = iD.ui.TagReference({key: key});
 
                 if (state === 'hover') {
                     reference.showing(false);
