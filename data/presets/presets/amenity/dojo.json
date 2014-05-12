@@ -1,0 +1,19 @@
+{
+    "name": "Martial Arts Training Hall",
+    "geometry" : [
+        "point", "area"
+    ],
+    "terms": [
+        "martial arts",
+        "dojo",
+        "dojang"
+    ],
+    "tags": {
+        "amenity": "dojo"
+    },
+    "icon": "pitch",
+    "fields": [
+        "address",
+        "sport"
+    ]
+}
