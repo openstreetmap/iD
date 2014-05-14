@@ -39,6 +39,13 @@ body {
     height: 100%;
 }
 
+#defs {
+    /* Can't be display: none or the clippaths are ignored. */
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
 .spacer {
     height: 40px;
     margin-right: 10px;
