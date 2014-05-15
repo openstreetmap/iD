@@ -1534,6 +1534,13 @@ input[type=number] {
     border-bottom: 0;
     border-radius: 0 0 4px 0;
 }
+
+/* Restrictions editor */
+
+.form-field-restrictions .preset-input-wrap {
+    height: 300px;
+}
+
 /* combobox dropdown */
 
 div.combobox {

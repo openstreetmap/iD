@@ -63,7 +63,8 @@
                 "textarea",
                 "localized",
                 "wikipedia",
-                "typeCombo"
+                "typeCombo",
+                "restrictions"
             ],
             "required": true
         },

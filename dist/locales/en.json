@@ -825,6 +825,9 @@
             "restriction": {
                 "label": "Type"
             },
+            "restrictions": {
+                "label": "Turn Restrictions"
+            },
             "route": {
                 "label": "Type"
             },
