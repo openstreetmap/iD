@@ -1,7 +1,5 @@
 iD.svg.Turns = function(projection) {
-    return function(surface, graph, wayID) {
-        var turns = wayID ? iD.geo.turns(graph, wayID) : [];
-
+    return function(surface, graph, turns) {
         var groups = surface.select('.layer-hit').selectAll('g.turn')
             .data(turns, function(turn) { return turn.key(); });
 

@@ -1,6 +1,6 @@
 iD.ui.preset.restrictions = function(field, context) {
     var event = d3.dispatch('change'),
-        entity,
+        vertex,
         selectedID;
 
     function restrictions(selection) {
@@ -23,7 +23,7 @@ iD.ui.preset.restrictions = function(field, context) {
         var projection = iD.geo.RawMercator()
             .scale(256 * Math.pow(2, z) / (2 * Math.PI));
 
-        var s = projection(entity ? entity.loc : [0, 0]);
+        var s = projection(vertex.loc);
 
         projection
             .translate([c[0] - s[0], c[1] - s[1]])
@@ -32,28 +32,16 @@ iD.ui.preset.restrictions = function(field, context) {
         var surface = wrap.selectAll('svg'),
             filter = function () { return true; },
             extent = iD.geo.Extent(),
-            entities = [],
-            graph = context.graph(),
+            intersection = iD.geo.Intersection(context.graph(), vertex.id),
+            graph = intersection.graph,
             lines = iD.svg.Lines(projection, context),
             vertices = iD.svg.Vertices(projection, context),
             turns = iD.svg.Turns(projection, context);
 
-        if (entity) {
-            entities = graph.parentWays(entity).filter(function (parent) {
-                return parent.type === 'way' && parent.tags.highway && !parent.isArea();
-            });
-
-            entities.push(entity);
-        }
-
-        if (!selectedID && entities.length) {
-            selectedID = entities[0].id;
-        }
-
         surface
-            .call(vertices, graph, entities, filter, extent, z)
-            .call(lines, graph, entities, filter)
-            .call(turns, graph, selectedID);
+            .call(vertices, graph, [vertex], filter, extent, z)
+            .call(lines, graph, intersection.highways, filter)
+            .call(turns, graph, intersection.turns(selectedID));
 
         surface.on('click.select', function() {
             var datum = d3.event.target.__data__;
@@ -85,9 +73,9 @@ iD.ui.preset.restrictions = function(field, context) {
     }
 
     restrictions.entity = function(_) {
-        if (!entity || entity.id !== _.id) {
+        if (!vertex || vertex.id !== _.id) {
             selectedID = null;
-            entity = _;
+            vertex = _;
         }
     };
 
