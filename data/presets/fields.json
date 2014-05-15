@@ -7,7 +7,9 @@
             "bicycle",
             "horse"
         ],
-        "referenceKey": "access",
+        "reference": {
+            "key": "access"
+        },
         "type": "access",
         "label": "Access",
         "placeholder": "Unknown",
@@ -66,7 +68,9 @@
             "addr:city",
             "addr:postcode"
         ],
-        "referenceKey": "addr",
+        "reference": {
+            "key": "addr"
+        },
         "icon": "address",
         "universal": true,
         "label": "Address",
