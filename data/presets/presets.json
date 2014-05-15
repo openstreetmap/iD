@@ -4245,9 +4245,6 @@
         "tags": {
             "highway": "traffic_signals"
         },
-        "fields": [
-            "restrictions"
-        ],
         "terms": [
             "light",
             "stoplight",
