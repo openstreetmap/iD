@@ -1,14 +1,14 @@
 {
-    "name": "No Right Turn",
+    "name": "No Turns",
     "geometry": [
         "relation"
     ],
     "tags": {
         "type": "restriction",
-        "restriction": "no_right_turn"
+        "restriction": "only_straight_ahead"
     },
     "fields": [
         "except"
     ],
-    "icon": "restriction-no-right-turn"
+    "icon": "restriction-only-straight-ahead"
 }

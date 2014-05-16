@@ -7980,7 +7980,7 @@
         "fields": [
             "except"
         ],
-        "icon": "restriction"
+        "icon": "restriction-no-left-turn"
     },
     "type/restriction/no_right_turn": {
         "name": "No Right Turn",
@@ -7994,7 +7994,7 @@
         "fields": [
             "except"
         ],
-        "icon": "restriction"
+        "icon": "restriction-no-right-turn"
     },
     "type/restriction/no_straight_on": {
         "name": "No Straight On",
@@ -8008,10 +8008,10 @@
         "fields": [
             "except"
         ],
-        "icon": "restriction"
+        "icon": "restriction-no-straight-on"
     },
     "type/restriction/no_u_turn": {
-        "name": "No U Turn",
+        "name": "No U-turn",
         "geometry": [
             "relation"
         ],
@@ -8022,7 +8022,49 @@
         "fields": [
             "except"
         ],
-        "icon": "restriction"
+        "icon": "restriction-no-u-turn"
+    },
+    "type/restriction/only_left_turn": {
+        "name": "Left Turn Only",
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "restriction",
+            "restriction": "only_left_turn"
+        },
+        "fields": [
+            "except"
+        ],
+        "icon": "restriction-only-left-turn"
+    },
+    "type/restriction/only_right_turn": {
+        "name": "Right Turn Only",
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "restriction",
+            "restriction": "only_right_turn"
+        },
+        "fields": [
+            "except"
+        ],
+        "icon": "restriction-only-right-turn"
+    },
+    "type/restriction/only_straight_ahead": {
+        "name": "No Turns",
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "restriction",
+            "restriction": "only_straight_ahead"
+        },
+        "fields": [
+            "except"
+        ],
+        "icon": "restriction-only-straight-ahead"
     },
     "type/route": {
         "geometry": [

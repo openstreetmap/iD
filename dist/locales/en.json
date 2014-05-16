@@ -416,6 +416,9 @@
             "category-rail": {
                 "name": "Rail"
             },
+            "category-restriction": {
+                "name": "Restriction"
+            },
             "category-road": {
                 "name": "Road"
             },
@@ -2844,7 +2847,19 @@
                 "terms": ""
             },
             "type/restriction/no_u_turn": {
-                "name": "No U Turn",
+                "name": "No U-turn",
+                "terms": ""
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Left Turn Only",
+                "terms": ""
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Right Turn Only",
+                "terms": ""
+            },
+            "type/restriction/only_straight_ahead": {
+                "name": "No Turns",
                 "terms": ""
             },
             "type/route": {

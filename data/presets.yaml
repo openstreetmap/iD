@@ -11,6 +11,8 @@ en:
         name: Path
       "category-rail": 
         name: Rail
+      "category-restriction": 
+        name: Restriction
       "category-road": 
         name: Road
       "category-route": 
@@ -1802,8 +1804,17 @@ en:
         name: No Straight On
         terms: "<translate with synonyms or related terms for 'No Straight On', separated by commas>"
       type/restriction/no_u_turn: 
-        name: No U Turn
-        terms: "<translate with synonyms or related terms for 'No U Turn', separated by commas>"
+        name: "No U-turn"
+        terms: "<translate with synonyms or related terms for 'No U-turn', separated by commas>"
+      type/restriction/only_left_turn: 
+        name: Left Turn Only
+        terms: "<translate with synonyms or related terms for 'Left Turn Only', separated by commas>"
+      type/restriction/only_right_turn: 
+        name: Right Turn Only
+        terms: "<translate with synonyms or related terms for 'Right Turn Only', separated by commas>"
+      type/restriction/only_straight_ahead: 
+        name: No Turns
+        terms: "<translate with synonyms or related terms for 'No Turns', separated by commas>"
       type/route: 
         name: Route
         terms: "<translate with synonyms or related terms for 'Route', separated by commas>"
