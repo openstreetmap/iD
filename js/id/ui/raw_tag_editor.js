@@ -162,10 +162,22 @@ iD.ui.RawTagEditor = function(context) {
         }
 
         function keyChange(d) {
-            var tag = {};
-            tag[d.key] = undefined;
-            tag[this.value] = d.value;
-            d.key = this.value; // Maintain DOM identity through the subsequent update.
+            var kOld = d.key,
+                kNew = this.value.trim(),
+                tag = {};
+
+            if (kNew && kNew !== kOld) {
+                var a = _.compact(kNew.split(/^(.*)_(\d+)$/)),
+                    base = a[0],
+                    suffix = (a.length > 1) ? parseInt(a[1]): 1;
+                while (tags[kNew]) {  // rename key if already in use
+                    kNew = base + '_' + suffix++;
+                }
+            }
+            tag[kOld] = undefined;
+            tag[kNew] = d.value;
+            d.key = kNew; // Maintain DOM identity through the subsequent update.
+            this.value = kNew;
             event.change(tag);
         }
 
