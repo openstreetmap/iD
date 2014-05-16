@@ -200,6 +200,7 @@ iD.ui.preset = function(context) {
 
     presets.preset = function(_) {
         if (!arguments.length) return preset;
+        if (preset && preset.id === _.id) return presets;
         preset = _;
         fields = null;
         return presets;
@@ -220,6 +221,7 @@ iD.ui.preset = function(context) {
 
     presets.entityID = function(_) {
         if (!arguments.length) return id;
+        if (id === _) return presets;
         id = _;
         fields = null;
         return presets;
