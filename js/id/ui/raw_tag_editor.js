@@ -162,12 +162,12 @@ iD.ui.RawTagEditor = function(context) {
         }
 
         function keyChange(d) {
-            var kOld = d.key.trim(),
+            var kOld = d.key,
                 kNew = this.value.trim(),
                 tag = {};
 
             if (kNew && kNew !== kOld) {
-                var a = kNew.split(/_(\d+)$/),
+                var a = _.compact(kNew.split(/^(.*)_(\d+)$/)),
                     base = a[0],
                     suffix = (a.length > 1) ? parseInt(a[1]): 1;
                 while (tags[kNew]) {  // rename key if already in use
