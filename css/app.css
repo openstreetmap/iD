@@ -1538,7 +1538,20 @@ input[type=number] {
 /* Restrictions editor */
 
 .form-field-restrictions .preset-input-wrap {
+    position: relative;
     height: 300px;
+}
+
+.form-field-restrictions .restriction-help {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 2px 6px;
+    background-color: rgba(255, 255, 255, .8);
+    color: #999;
+    text-align: center;
 }
 
 /* combobox dropdown */

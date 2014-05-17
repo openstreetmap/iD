@@ -146,6 +146,11 @@ en:
       not_eligible: Lines can't be split at their beginning or end.
       multiple_ways: There are too many lines here to split.
     restriction:
+      help:
+        select: Click to select a road segment.
+        toggle: Click to toggle turn restrictions.
+        toggle_on: 'Click to add a "{restriction}" restriction.'
+        toggle_off: 'Click to remove the "{restriction}" restriction.'
       annotation:
         create: Added a turn restriction
         delete: Deleted a turn restriction

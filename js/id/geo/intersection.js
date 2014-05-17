@@ -108,3 +108,19 @@ iD.geo.Intersection = function(graph, vertexId) {
 
     return intersection;
 };
+
+iD.geo.inferRestriction = function(from, via, to, projection) {
+    var angle = iD.geo.angle(via, from, projection) -
+                iD.geo.angle(via, to, projection);
+
+    angle = angle * 180 / Math.PI;
+
+    if (angle > 158 || angle < -158)
+        return 'no_straight_on';
+    if (angle >  23)
+        return 'no_right_turn';
+    if (angle < -22)
+        return 'no_left_turn';
+
+    return 'no_u_turn';
+};

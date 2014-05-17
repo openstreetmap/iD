@@ -10,6 +10,9 @@ iD.ui.preset.restrictions = function(field, context) {
         var enter = wrap.enter().append('div')
             .attr('class', 'preset-input-wrap');
 
+        enter.append('div')
+            .attr('class', 'restriction-help');
+
         enter.append('svg')
             .call(iD.svg.Surface(context))
             .call(iD.behavior.Hover(context));
@@ -43,7 +46,30 @@ iD.ui.preset.restrictions = function(field, context) {
             .call(lines, graph, intersection.highways, filter)
             .call(turns, graph, intersection.turns(selectedID));
 
-        surface.on('click.select', function() {
+        surface
+            .on('click.restrictions', click)
+            .on('mouseover.restrictions', mouseover)
+            .on('mouseout.restrictions', mouseout);
+
+        surface
+            .selectAll('.selected')
+            .classed('selected', false);
+
+        if (selectedID) {
+            surface
+                .selectAll('.' + selectedID)
+                .classed('selected', true);
+        }
+
+        mouseout();
+
+        context.history()
+            .on('change.restrictions', render);
+
+        d3.select(window)
+            .on('resize.restrictions', render);
+
+        function click() {
             var datum = d3.event.target.__data__;
             if (datum instanceof iD.Entity) {
                 selectedID = datum.id;
@@ -59,23 +85,38 @@ iD.ui.preset.restrictions = function(field, context) {
                         t('operations.restriction.annotation.create'));
                 }
             }
-        });
-
-        surface
-            .selectAll('.selected')
-            .classed('selected', false);
-
-        if (selectedID) {
-            surface
-                .selectAll('.' + selectedID)
-                .classed('selected', true);
         }
 
-        context.history()
-            .on('change.restrictions', render);
+        function mouseover() {
+            var datum = d3.event.target.__data__;
+            if (datum instanceof iD.geo.Turn) {
+                var graph = context.graph(),
+                    presets = context.presets(),
+                    preset;
 
-        d3.select(window)
-            .on('resize.restrictions', render);
+                if (datum.restriction) {
+                    preset = presets.match(graph.entity(datum.restriction), graph);
+                } else {
+                    preset = presets.item('type/restriction/' +
+                        iD.geo.inferRestriction(
+                            graph.entity(datum.from.node),
+                            graph.entity(datum.via.node),
+                            graph.entity(datum.to.node),
+                            projection));
+                }
+
+                wrap.selectAll('.restriction-help')
+                    .text(t('operations.restriction.help.' +
+                        (datum.restriction ? 'toggle_off' : 'toggle_on'),
+                        {restriction: preset.name()}));
+            }
+        }
+
+        function mouseout() {
+            wrap.selectAll('.restriction-help')
+                .text(t('operations.restriction.help.' +
+                    (selectedID ? 'toggle' : 'select')));
+        }
 
         function render() {
             restrictions(selection);
