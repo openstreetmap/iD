@@ -2763,10 +2763,6 @@ img.wiki-image {
     fill: rgba(255,255,255,.5);
 }
 
-.radial-menu .icon {
-    pointer-events: none;
-}
-
 .lasso-box {
     fill-opacity:0.1;
     stroke: #fff;

@@ -75,6 +75,8 @@ iD.actions.RestrictTurn = function(turn, projection, restrictionId) {
             var angle = iD.geo.angle(via, graph.entity(turn.from.node), projection) -
                         iD.geo.angle(via, graph.entity(turn.to.node), projection);
 
+            angle = angle * 180 / Math.PI;
+
             if (angle > 158 || angle < -158)
                 return 'no_straight_on';
             if (angle >  23)

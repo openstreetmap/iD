@@ -957,6 +957,11 @@ g.turn.restricted path {
     stroke: red;
 }
 
+g.turn rect {
+    fill: none;
+    pointer-events: all;
+}
+
 /* Cursors */
 
 #map {
@@ -1102,6 +1107,15 @@ g.turn.restricted path {
         url(img/cursor-draw.png) 1x,
         url(img/cursor-draw2x.png) 2x
         ) 9 9, crosshair;
+}
+
+.turn rect {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-pointer.png) 1x,
+        url(img/cursor-pointer2x.png) 2x
+    ) 6 1, pointer;
 }
 
 .lasso #map {

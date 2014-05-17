@@ -23,5 +23,10 @@
     "icon-operation-disabled-orthogonalize": [160, 160],
     "icon-operation-disabled-rotate": [180, 160],
     "icon-operation-disabled-simplify": [200, 160],
-    "icon-operation-disabled-continue": [220, 160]
+    "icon-operation-disabled-continue": [220, 160],
+
+    "icon-restriction-yes": [50, 80],
+    "icon-restriction-no": [95, 80],
+    "icon-restriction-yes-u": [140, 80],
+    "icon-restriction-no-u": [185, 80]
 }

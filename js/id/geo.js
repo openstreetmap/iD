@@ -33,12 +33,12 @@ iD.geo.edgeEqual = function(a, b) {
         (a[0] === b[1] && a[1] === b[0]);
 };
 
-// Return the counterclockwise angle in the range (-180, 180) degrees
+// Return the counterclockwise angle in the range (-pi, pi)
 // between the positive X axis and the line intersecting a and b.
 iD.geo.angle = function(a, b, projection) {
     a = projection(a.loc);
     b = projection(b.loc);
-    return Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI;
+    return Math.atan2(b[1] - a[1], b[0] - a[0]);
 };
 
 // Choose the edge with the minimal distance from `point` to its orthogonal

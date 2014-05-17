@@ -92,7 +92,7 @@ iD.svg.Defs = function(context) {
             });
 
         defs.selectAll()
-            .data([12, 18, 20])
+            .data([12, 18, 20, 45])
             .enter().append('clipPath')
             .attr('id', function (d) {
                 return 'clip-square-' + d;
