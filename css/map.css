@@ -953,6 +953,11 @@ g.turn circle {
     pointer-events: all;
 }
 
+.form-field-restrictions .vertex {
+    pointer-events: none;
+    cursor: auto !important;
+}
+
 /* Cursors */
 
 #map {
