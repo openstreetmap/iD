@@ -1,6 +1,6 @@
 iD.ui.preset.restrictions = function(field, context) {
     var event = d3.dispatch('change'),
-        vertex,
+        vertexID,
         selectedID;
 
     function restrictions(selection) {
@@ -14,11 +14,22 @@ iD.ui.preset.restrictions = function(field, context) {
             .call(iD.svg.Surface(context))
             .call(iD.behavior.Hover(context));
 
+        var intersection = iD.geo.Intersection(context.graph(), vertexID),
+            graph = intersection.graph,
+            vertex = graph.entity(vertexID),
+            surface = wrap.selectAll('svg'),
+            filter = function () { return true; },
+            extent = iD.geo.Extent(),
+            projection = iD.geo.RawMercator(),
+            lines = iD.svg.Lines(projection, context),
+            vertices = iD.svg.Vertices(projection, context),
+            turns = iD.svg.Turns(projection, context);
+
         var d = wrap.dimensions(),
             c = [d[0] / 2, d[1] / 2],
             z = 21;
 
-        var projection = iD.geo.RawMercator()
+        projection
             .scale(256 * Math.pow(2, z) / (2 * Math.PI));
 
         var s = projection(vertex.loc);
@@ -26,15 +37,6 @@ iD.ui.preset.restrictions = function(field, context) {
         projection
             .translate([c[0] - s[0], c[1] - s[1]])
             .clipExtent([[0, 0], d]);
-
-        var surface = wrap.selectAll('svg'),
-            filter = function () { return true; },
-            extent = iD.geo.Extent(),
-            intersection = iD.geo.Intersection(context.graph(), vertex.id),
-            graph = intersection.graph,
-            lines = iD.svg.Lines(projection, context),
-            vertices = iD.svg.Vertices(projection, context),
-            turns = iD.svg.Turns(projection, context);
 
         surface
             .call(vertices, graph, [vertex], filter, extent, z)
@@ -81,9 +83,9 @@ iD.ui.preset.restrictions = function(field, context) {
     }
 
     restrictions.entity = function(_) {
-        if (!vertex || vertex.id !== _.id) {
+        if (!vertexID || vertexID !== _.id) {
             selectedID = null;
-            vertex = _;
+            vertexID = _.id;
         }
     };
 
