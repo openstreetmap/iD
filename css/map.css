@@ -947,17 +947,8 @@ text.point {
 
 /* Turns */
 
-g.turn path {
-    stroke: green;
-    stroke-width: 10px;
-    stroke-linecap: round;
-}
-
-g.turn.restricted path {
-    stroke: red;
-}
-
-g.turn rect {
+g.turn rect,
+g.turn circle {
     fill: none;
     pointer-events: all;
 }
@@ -1109,7 +1100,8 @@ g.turn rect {
         ) 9 9, crosshair;
 }
 
-.turn rect {
+.turn rect,
+.turn circle {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
     cursor: -webkit-image-set(

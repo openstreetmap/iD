@@ -93,6 +93,16 @@ iD.geo.Intersection = function(graph, vertexId) {
             }
         });
 
+        // U-turn
+        if (way.tags.oneway !== 'yes' && way.tags.oneway !== '-1') {
+            turns.push(withRestriction({
+                from: from,
+                via: via,
+                to: from,
+                u: true
+            }));
+        }
+
         return turns;
     };
 
