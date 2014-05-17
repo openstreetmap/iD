@@ -1,7 +1,7 @@
 iD.svg.Turns = function(projection) {
     return function(surface, graph, turns) {
         var groups = surface.select('.layer-hit').selectAll('g.turn')
-            .data(turns, function(turn) { return turn.key(); });
+            .data(turns);
 
         var enter = groups.enter().append('g')
             .attr('class', 'turn');
@@ -17,9 +17,13 @@ iD.svg.Turns = function(projection) {
                 return turn.restriction;
             })
             .attr('transform', function(turn) {
-                return iD.svg.PointTransform(projection)(turn.via) +
-                    'rotate(' + turn.angle(projection) * 180 / Math.PI + ')';
+                var v = graph.entity(turn.via.node),
+                    t = graph.entity(turn.to.node);
+                return iD.svg.PointTransform(projection)(v) +
+                    'rotate(' + iD.geo.angle(v, t, projection) + ')';
             });
+
+        groups.select('path'); // Propagate updated data.
 
         groups.exit()
             .remove();

@@ -7,8 +7,6 @@ iD.ui.preset.restrictions = function(field, context) {
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        // Enter
-
         var enter = wrap.enter().append('div')
             .attr('class', 'preset-input-wrap');
 
@@ -48,6 +46,16 @@ iD.ui.preset.restrictions = function(field, context) {
             if (datum instanceof iD.Entity) {
                 selectedID = datum.id;
                 render();
+            } else if (datum instanceof iD.geo.Turn) {
+                if (datum.restriction) {
+                    context.perform(
+                        iD.actions.UnrestrictTurn(datum, projection),
+                        t('operations.restriction.annotation.delete'));
+                } else {
+                    context.perform(
+                        iD.actions.RestrictTurn(datum, projection),
+                        t('operations.restriction.annotation.create'));
+                }
             }
         });
 

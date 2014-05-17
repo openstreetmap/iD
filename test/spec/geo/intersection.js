@@ -1,18 +1,3 @@
-describe('iD.geo.Turn', function() {
-    describe('#angle', function() {
-        it("calculates the angle of via to toward", function() {
-            function projection(x) { return x; }
-
-            var turn = iD.geo.Turn({
-                via: iD.Node({id: 'v', loc: [1, 0]}),
-                toward: iD.Node({id: 'w', loc: [1, 1]})
-            });
-
-            expect(turn.angle(projection)).to.eql(Math.PI / 2);
-        });
-    });
-});
-
 describe("iD.geo.Intersection", function() {
     describe('highways', function() {
         it('excludes non-highways', function() {
@@ -64,27 +49,11 @@ describe("iD.geo.Intersection", function() {
                 iD.Node({id: 'w'}),
                 iD.Way({id: '=', nodes: ['u', '*', 'w'], tags: {highway: 'residential'}})
             ]);
-            expect(_.pluck(iD.geo.Intersection(graph, '*').highways, 'id')).to.eql(['=-a', '=-b']);
+            expect(_.pluck(iD.geo.Intersection(graph, '*').highways, 'id')).to.eql(['=.a', '=.b']);
         });
     });
 
     describe('#turns', function() {
-        function ids(turns) {
-            return turns.map(function (turn) {
-                var result = {
-                    from: turn.from.id,
-                    to: turn.to.id,
-                    via: turn.via.id,
-                    toward: turn.toward.id
-                };
-
-                if (turn.restriction)
-                    result.restriction = turn.restriction.id;
-
-                return result;
-            });
-        }
-
         it("permits turns onto a way forward", function() {
             // u====*--->w
             var graph = iD.Graph([
@@ -96,11 +65,10 @@ describe("iD.geo.Intersection", function() {
                 ]),
                 turns = iD.geo.Intersection(graph, '*').turns('=');
 
-            expect(ids(turns)).to.eql([{
-                from: '=',
-                to: '-',
-                via: '*',
-                toward: 'w'
+            expect(turns).to.eql([{
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '-'}
             }]);
         });
 
@@ -115,7 +83,11 @@ describe("iD.geo.Intersection", function() {
                 ]),
                 turns = iD.geo.Intersection(graph, '*').turns('=');
 
-            expect(ids(turns)).to.eql([{from: '=', to: '-', via: '*', toward: 'w'}]);
+            expect(turns).to.eql([{
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '-'}
+            }]);
         });
 
         it("permits turns onto a way in both directions", function() {
@@ -134,10 +106,15 @@ describe("iD.geo.Intersection", function() {
                 ]),
                 turns = iD.geo.Intersection(graph, '*').turns('=');
 
-            expect(ids(turns)).to.eql([
-                {from: '=', to: '--a', via: '*', toward: 'w'},
-                {from: '=', to: '--b', via: '*', toward: 'x'}
-            ]);
+            expect(turns).to.eql([{
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '-'}
+            }, {
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'x', way: '-'}
+            }]);
         });
 
         it("permits turns from a oneway forward", function() {
@@ -151,7 +128,11 @@ describe("iD.geo.Intersection", function() {
                 ]),
                 turns = iD.geo.Intersection(graph, '*').turns('=');
 
-            expect(ids(turns)).to.eql([{from: '=', to: '-', via: '*', toward: 'w'}]);
+            expect(turns).to.eql([{
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '-'}
+            }]);
         });
 
         it("permits turns from a reverse oneway backward", function() {
@@ -165,7 +146,11 @@ describe("iD.geo.Intersection", function() {
                 ]),
                 turns = iD.geo.Intersection(graph, '*').turns('=');
 
-            expect(ids(turns)).to.eql([{from: '=', to: '-', via: '*', toward: 'w'}]);
+            expect(turns).to.eql([{
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '-'}
+            }]);
         });
 
         it("omits turns from a oneway backward", function() {
@@ -203,7 +188,11 @@ describe("iD.geo.Intersection", function() {
                 ]),
                 turns = iD.geo.Intersection(graph, '*').turns('=');
 
-            expect(ids(turns)).to.eql([{from: '=', to: '-', via: '*', toward: 'w'}]);
+            expect(turns).to.eql([{
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '-'}
+            }]);
         });
 
         it("permits turns onto a reverse oneway backward", function() {
@@ -217,7 +206,11 @@ describe("iD.geo.Intersection", function() {
                 ]),
                 turns = iD.geo.Intersection(graph, '*').turns('=');
 
-            expect(ids(turns)).to.eql([{from: '=', to: '-', via: '*', toward: 'w'}]);
+            expect(turns).to.eql([{
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '-'}
+            }]);
         });
 
         it("omits turns onto a oneway backward", function() {
@@ -260,11 +253,10 @@ describe("iD.geo.Intersection", function() {
                 ]),
                 turns = iD.geo.Intersection(graph, '*').turns('=');
 
-            expect(ids(turns)).to.eql([{
-                from: '=',
-                to: '-',
-                via: '*',
-                toward: 'w',
+            expect(turns).to.eql([{
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '-'},
                 restriction: 'r'
             }]);
         });
@@ -273,4 +265,5 @@ describe("iD.geo.Intersection", function() {
     // 'no' vs 'only'
     // U-turns
     // Self-intersections
+    // Incomplete relations
 });

@@ -182,6 +182,12 @@
             },
             "not_eligible": "Lines can't be split at their beginning or end.",
             "multiple_ways": "There are too many lines here to split."
+        },
+        "restriction": {
+            "annotation": {
+                "create": "Added a turn restriction",
+                "delete": "Deleted a turn restriction"
+            }
         }
     },
     "undo": {
