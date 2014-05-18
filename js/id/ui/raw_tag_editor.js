@@ -167,9 +167,9 @@ iD.ui.RawTagEditor = function(context) {
                 tag = {};
 
             if (kNew && kNew !== kOld) {
-                var a = _.compact(kNew.split(/^(.*)_(\d+)$/)),
-                    base = a[0],
-                    suffix = (a.length > 1) ? parseInt(a[1]): 1;
+                var match = kNew.match(/^(.*?)(?:_(\d+))?$/),
+                    base = match[1],
+                    suffix = +(match[2] || 1);
                 while (tags[kNew]) {  // rename key if already in use
                     kNew = base + '_' + suffix++;
                 }
