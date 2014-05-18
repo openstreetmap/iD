@@ -29,9 +29,7 @@
 // be assigned a new ID.
 //
 iD.actions.RestrictTurn = function(turn, projection, restrictionId) {
-    var dispatch = d3.dispatch('split');
-
-    function action(graph) {
+    return function(graph) {
         var from = graph.entity(turn.from.way),
             via  = graph.entity(turn.via.node),
             to   = graph.entity(turn.to.way);
@@ -41,8 +39,6 @@ iD.actions.RestrictTurn = function(turn, projection, restrictionId) {
 
             graph = iD.actions.Split(via.id, [newFromId])
                 .limitWays([from.id])(graph);
-
-            dispatch.split(from.id, newFromId, graph);
 
             var newFrom = graph.entity(newFromId);
             if (newFrom.nodes.indexOf(turn.from.node) !== -1)
@@ -56,8 +52,6 @@ iD.actions.RestrictTurn = function(turn, projection, restrictionId) {
 
             graph = iD.actions.Split(via.id, [newToId])
                 .limitWays([to.id])(graph);
-
-            dispatch.split(to.id, newToId, graph);
 
             var newTo = graph.entity(newToId);
             if (newTo.nodes.indexOf(turn.to.node) !== -1)
@@ -81,7 +75,5 @@ iD.actions.RestrictTurn = function(turn, projection, restrictionId) {
                 {id: to.id,   type: 'way',  role: 'to'}
             ]
         }));
-    }
-
-    return d3.rebind(action, dispatch, 'on');
+    };
 };

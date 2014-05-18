@@ -236,38 +236,4 @@ describe("iD.actions.RestrictTurn", function() {
         }, projection, 'r')(graph);
         expect(u.entity('r').tags.restriction).to.equal('no_u_turn');
     });
-
-    it('emits split events', function() {
-        //      x
-        //      |
-        // u====*====w
-        //      |
-        //      y
-        var graph = iD.Graph([
-                iD.Node({id: '*'}),
-                iD.Node({id: 'u'}),
-                iD.Node({id: 'w'}),
-                iD.Node({id: 'x'}),
-                iD.Node({id: 'y'}),
-                iD.Way({id: '=', nodes: ['u', '*', 'w']}),
-                iD.Way({id: '-', nodes: ['x', '*', 'y']})
-            ]),
-            action = iD.actions.RestrictTurn({
-                from: {node: 'u', way: '=', newID: '=='},
-                via:  {node: '*'},
-                to:   {node: 'x', way: '-', newID: '--'},
-                restriction: 'no_left_turn'
-            });
-
-        var splits = [];
-
-        action.on('split', function(a, b, graph) {
-            expect(graph).to.be.instanceOf(iD.Graph);
-            splits.push([a, b]);
-        });
-
-        action(graph);
-
-        expect(splits).to.eql([['=', '=='], ['-', '--']]);
-    });
 });

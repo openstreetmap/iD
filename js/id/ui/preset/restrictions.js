@@ -1,7 +1,7 @@
 iD.ui.preset.restrictions = function(field, context) {
     var event = d3.dispatch('change'),
         vertexID,
-        selectedID;
+        fromNodeID;
 
     function restrictions(selection) {
         var wrap = selection.selectAll('.preset-input-wrap')
@@ -44,7 +44,7 @@ iD.ui.preset.restrictions = function(field, context) {
         surface
             .call(vertices, graph, [vertex], filter, extent, z)
             .call(lines, graph, intersection.highways, filter)
-            .call(turns, graph, intersection.turns(selectedID));
+            .call(turns, graph, intersection.turns(fromNodeID));
 
         surface
             .on('click.restrictions', click)
@@ -55,9 +55,9 @@ iD.ui.preset.restrictions = function(field, context) {
             .selectAll('.selected')
             .classed('selected', false);
 
-        if (selectedID) {
+        if (fromNodeID) {
             surface
-                .selectAll('.' + selectedID)
+                .selectAll('.' + _.find(intersection.highways, function(way) { return way.contains(fromNodeID); }).id)
                 .classed('selected', true);
         }
 
@@ -72,7 +72,7 @@ iD.ui.preset.restrictions = function(field, context) {
         function click() {
             var datum = d3.event.target.__data__;
             if (datum instanceof iD.Entity) {
-                selectedID = datum.id;
+                fromNodeID = datum.nodes[(datum.first() === vertexID) ? 1 : datum.nodes.length - 2];
                 render();
             } else if (datum instanceof iD.geo.Turn) {
                 if (datum.restriction) {
@@ -81,17 +81,8 @@ iD.ui.preset.restrictions = function(field, context) {
                         t('operations.restriction.annotation.delete'));
                 } else {
                     context.perform(
-                        iD.actions.RestrictTurn(datum, projection)
-                            .on('split', split),
+                        iD.actions.RestrictTurn(datum, projection),
                         t('operations.restriction.annotation.create'));
-
-                    function split(oldID, newID, graph) {
-                        if (graph.entity(newID).contains(datum.from.node)) {
-                            selectedID = newID;
-                        } else if (graph.entity(oldID).contains(datum.from.node)) {
-                            selectedID = oldID;
-                        }
-                    }
                 }
             }
         }
@@ -124,7 +115,7 @@ iD.ui.preset.restrictions = function(field, context) {
         function mouseout() {
             wrap.selectAll('.restriction-help')
                 .text(t('operations.restriction.help.' +
-                    (selectedID ? 'toggle' : 'select')));
+                    (fromNodeID ? 'toggle' : 'select')));
         }
 
         function render() {
@@ -134,7 +125,7 @@ iD.ui.preset.restrictions = function(field, context) {
 
     restrictions.entity = function(_) {
         if (!vertexID || vertexID !== _.id) {
-            selectedID = null;
+            fromNodeID = null;
             vertexID = _.id;
         }
     };
