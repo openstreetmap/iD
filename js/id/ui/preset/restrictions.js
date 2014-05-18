@@ -81,8 +81,17 @@ iD.ui.preset.restrictions = function(field, context) {
                         t('operations.restriction.annotation.delete'));
                 } else {
                     context.perform(
-                        iD.actions.RestrictTurn(datum, projection),
+                        iD.actions.RestrictTurn(datum, projection)
+                            .on('split', split),
                         t('operations.restriction.annotation.create'));
+
+                    function split(oldID, newID, graph) {
+                        if (graph.entity(newID).contains(datum.from.node)) {
+                            selectedID = newID;
+                        } else if (graph.entity(oldID).contains(datum.from.node)) {
+                            selectedID = oldID;
+                        }
+                    }
                 }
             }
         }
