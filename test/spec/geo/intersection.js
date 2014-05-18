@@ -49,7 +49,7 @@ describe("iD.geo.Intersection", function() {
                 iD.Node({id: 'w'}),
                 iD.Way({id: '=', nodes: ['u', '*', 'w'], tags: {highway: 'residential'}})
             ]);
-            expect(_.pluck(iD.geo.Intersection(graph, '*').highways, 'id')).to.eql(['=.a', '=.b']);
+            expect(_.pluck(iD.geo.Intersection(graph, '*').highways, 'id')).to.eql(['=-a', '=-b']);
         });
     });
 
@@ -92,7 +92,58 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns onto a way in both directions", function() {
+        it("permits turns fom a way in both directions", function() {
+            //     w
+            //     |
+            // u===*
+            //     |
+            //     x
+            var graph = iD.Graph([
+                    iD.Node({id: 'u'}),
+                    iD.Node({id: '*'}),
+                    iD.Node({id: 'w'}),
+                    iD.Node({id: 'x'}),
+                    iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
+                    iD.Way({id: '-', nodes: ['w', '*', 'x'], tags: {highway: 'residential'}})
+                ]),
+                turns = iD.geo.Intersection(graph, '*').turns('-');
+
+            expect(turns.length).to.eql(6);
+            expect(turns[0]).to.eql({
+                from: {node: 'w', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'u', way: '='}
+            });
+            expect(turns[1]).to.eql({
+                from: {node: 'w', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'x', way: '-'}
+            });
+            expect(turns[2]).to.eql({
+                from: {node: 'w', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '-'},
+                u: true
+            });
+            expect(turns[3]).to.eql({
+                from: {node: 'x', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'u', way: '='}
+            });
+            expect(turns[4]).to.eql({
+                from: {node: 'x', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '-'}
+            });
+            expect(turns[5]).to.eql({
+                from: {node: 'x', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'x', way: '-'},
+                u: true
+            });
+        });
+
+        it("permits turns to a way in both directions", function() {
             //     w
             //     |
             // u===*

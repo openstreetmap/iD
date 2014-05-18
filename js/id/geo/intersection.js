@@ -19,8 +19,8 @@ iD.geo.Intersection = function(graph, vertexId) {
             highways.push(way);
         } else {
             var idx = _.indexOf(way.nodes, vertex.id, 1),
-                wayA = iD.Way({id: way.id + '.a', tags: way.tags, nodes: way.nodes.slice(0, idx + 1)}),
-                wayB = iD.Way({id: way.id + '.b', tags: way.tags, nodes: way.nodes.slice(idx)});
+                wayA = iD.Way({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, idx + 1)}),
+                wayB = iD.Way({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(idx)});
 
             graph = graph.replace(wayA);
             graph = graph.replace(wayB);
@@ -64,44 +64,57 @@ iD.geo.Intersection = function(graph, vertexId) {
             return iD.geo.Turn(turn);
         }
 
-        var from = {node: way.nodes[way.first() === vertex.id ? 1 : way.nodes.length - 2], way: way.id},
-            via = {node: vertex.id},
+        var via = {node: vertex.id},
+            ways = [],
             turns = [];
 
-        highways.forEach(function(parent) {
-            if (parent === way)
-                return;
+        if (way.affix(vertexId)) {
+            ways = [way];
+        } else {
+            ways = [graph.entity(way.id + '-a'), graph.entity(way.id + '-b')];
+        }
 
-            var index = parent.nodes.indexOf(vertex.id);
+        ways.forEach(function(way) {
+            var from = {
+                    node: way.nodes[way.first() === vertex.id ? 1 : way.nodes.length - 2],
+                    way: way.id.split(/-(a|b)/)[0]
+                };
 
-            // backward
-            if (parent.first() !== vertex.id && parent.tags.oneway !== 'yes') {
+            highways.forEach(function(parent) {
+                if (parent === way)
+                    return;
+
+                var index = parent.nodes.indexOf(vertex.id);
+
+                // backward
+                if (parent.first() !== vertex.id && parent.tags.oneway !== 'yes') {
+                    turns.push(withRestriction({
+                        from: from,
+                        via: via,
+                        to: {node: parent.nodes[index - 1], way: parent.id.split(/-(a|b)/)[0]}
+                    }));
+                }
+
+                // forward
+                if (parent.last() !== vertex.id && parent.tags.oneway !== '-1') {
+                    turns.push(withRestriction({
+                        from: from,
+                        via: via,
+                        to: {node: parent.nodes[index + 1], way: parent.id.split(/-(a|b)/)[0]}
+                    }));
+                }
+            });
+
+            // U-turn
+            if (way.tags.oneway !== 'yes' && way.tags.oneway !== '-1') {
                 turns.push(withRestriction({
                     from: from,
                     via: via,
-                    to: {node: parent.nodes[index - 1], way: parent.id.split('.')[0]}
-                }));
-            }
-
-            // forward
-            if (parent.last() !== vertex.id && parent.tags.oneway !== '-1') {
-                turns.push(withRestriction({
-                    from: from,
-                    via: via,
-                    to: {node: parent.nodes[index + 1], way: parent.id.split('.')[0]}
+                    to: from,
+                    u: true
                 }));
             }
         });
-
-        // U-turn
-        if (way.tags.oneway !== 'yes' && way.tags.oneway !== '-1') {
-            turns.push(withRestriction({
-                from: from,
-                via: via,
-                to: from,
-                u: true
-            }));
-        }
 
         return turns;
     };
