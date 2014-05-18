@@ -34,28 +34,38 @@ iD.actions.RestrictTurn = function(turn, projection, restrictionId) {
             via  = graph.entity(turn.via.node),
             to   = graph.entity(turn.to.way);
 
-        if (!from.affix(via.id)) {
-            var newFromId = turn.from.newID || iD.Way().id;
+        function split(toOrFrom) {
+            var newID = toOrFrom.newID || iD.Way().id;
+            graph = iD.actions.Split(via.id, [newID])
+                .limitWays([toOrFrom.way])(graph);
 
-            graph = iD.actions.Split(via.id, [newFromId])
-                .limitWays([from.id])(graph);
+            var a = graph.entity(newID),
+                b = graph.entity(toOrFrom.way);
 
-            var newFrom = graph.entity(newFromId);
-            if (newFrom.nodes.indexOf(turn.from.node) !== -1)
-                from = newFrom;
+            if (a.nodes.indexOf(toOrFrom.node) !== -1) {
+                return [a, b];
+            } else {
+                return [b, a];
+            }
         }
 
-        if (turn.from.way === turn.to.way) {
-            to = from;
-        } else if (!to.affix(via.id)) {
-            var newToId = turn.to.newID || iD.Way().id;
+        if (!from.affix(via.id)) {
+            if (turn.from.node === turn.to.node) {
+                // U-turn
+                from = to = split(turn.from)[0];
+            } else if (turn.from.way === turn.to.way) {
+                // Straight-on
+                var s = split(turn.from);
+                from = s[0];
+                to   = s[1];
+            } else {
+                // Other
+                from = split(turn.from)[0];
+            }
+        }
 
-            graph = iD.actions.Split(via.id, [newToId])
-                .limitWays([to.id])(graph);
-
-            var newTo = graph.entity(newToId);
-            if (newTo.nodes.indexOf(turn.to.node) !== -1)
-                to = newTo;
+        if (!to.affix(via.id)) {
+            to = split(turn.to)[0];
         }
 
         return graph.replace(iD.Relation({

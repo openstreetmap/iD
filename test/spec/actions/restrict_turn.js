@@ -82,6 +82,62 @@ describe("iD.actions.RestrictTurn", function() {
         expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '-', type: 'way'});
     });
 
+    it('splits the from way when necessary (straight on forward)', function() {
+        // u====*===>w
+        //      |
+        //      x
+        var graph = iD.Graph([
+                iD.Node({id: 'u'}),
+                iD.Node({id: '*'}),
+                iD.Node({id: 'w'}),
+                iD.Node({id: 'x'}),
+                iD.Way({id: '=', nodes: ['u', '*', 'w']}),
+                iD.Way({id: '-', nodes: ['*', 'x']})
+            ]),
+            action = iD.actions.RestrictTurn({
+                from: {node: 'u', way: '=', newID: '=='},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '='},
+                restriction: 'no_straight_on'
+            }, projection, 'r');
+
+        graph = action(graph);
+
+        var r = graph.entity('r');
+        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_straight_on'});
+        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '=', type: 'way'});
+        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
+        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '==', type: 'way'});
+    });
+
+    it('splits the from way when necessary (straight on backward)', function() {
+        // u<===*====w
+        //      |
+        //      x
+        var graph = iD.Graph([
+                iD.Node({id: 'u'}),
+                iD.Node({id: '*'}),
+                iD.Node({id: 'w'}),
+                iD.Node({id: 'x'}),
+                iD.Way({id: '=', nodes: ['w', '*', 'u']}),
+                iD.Way({id: '-', nodes: ['*', 'x']})
+            ]),
+            action = iD.actions.RestrictTurn({
+                from: {node: 'u', way: '=', newID: '=='},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '='},
+                restriction: 'no_straight_on'
+            }, projection, 'r');
+
+        graph = action(graph);
+
+        var r = graph.entity('r');
+        expect(r.tags).to.eql({type: 'restriction', restriction: 'no_straight_on'});
+        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '==', type: 'way'});
+        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
+        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '=', type: 'way'});
+    });
+
     it('splits the to way when necessary (forward)', function() {
         // u====*===>w
         //      |
