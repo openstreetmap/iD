@@ -872,7 +872,8 @@
                     "bridge": "Bridge",
                     "tunnel": "Tunnel",
                     "embankment": "Embankment",
-                    "cutting": "Cutting"
+                    "cutting": "Cutting",
+                    "ford": "Ford"
                 }
             },
             "studio_type": {
