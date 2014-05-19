@@ -16,22 +16,15 @@ describe('iD.ui.preset.access', function() {
         expect(selection.selectAll('.preset-access-horse')[0].length).to.equal(1);
     });
 
-    it('does not include a "yes" option for general access (#934)', function() {
+    it('does not include a "yes" or "designated" option for general access (#934), (#2213)', function() {
         var access = iD.ui.preset.access(field);
         expect(_.pluck(access.options('access'), 'value')).not.to.include('yes');
-    });
-
-    it('does not include a "designated" option for general access (#2213)', function() {
-        var access = iD.ui.preset.access(field);
         expect(_.pluck(access.options('access'), 'value')).not.to.include('designated');
     });
 
-    it('sets foot placeholder to "yes" for footways, steps, and pedestrian', function() {
+    it('sets foot placeholder to "yes" for steps and pedestrian', function() {
         var access = iD.ui.preset.access(field);
         selection.call(access);
-
-        access.tags({highway: 'footway'});
-        expect(selection.selectAll('#preset-input-access-foot').attr('placeholder')).to.equal('yes');
 
         access.tags({highway: 'steps'});
         expect(selection.selectAll('#preset-input-access-foot').attr('placeholder')).to.equal('yes');
@@ -40,26 +33,34 @@ describe('iD.ui.preset.access', function() {
         expect(selection.selectAll('#preset-input-access-foot').attr('placeholder')).to.equal('yes');
     });
 
-    it('sets bicycle placeholder to "yes" for cycleways', function() {
+    it('sets foot placeholder to "designated" for footways', function() {
+        var access = iD.ui.preset.access(field);
+        selection.call(access);
+
+        access.tags({highway: 'footway'});
+        expect(selection.selectAll('#preset-input-access-foot').attr('placeholder')).to.equal('designated');
+    });
+
+    it('sets bicycle placeholder to "designated" for cycleways', function() {
         var access = iD.ui.preset.access(field);
         selection.call(access);
 
         access.tags({highway: 'cycleway'});
-        expect(selection.selectAll('#preset-input-access-bicycle').attr('placeholder')).to.equal('yes');
+        expect(selection.selectAll('#preset-input-access-bicycle').attr('placeholder')).to.equal('designated');
     });
 
-    it('sets horse placeholder to "yes" for bridleways', function() {
+    it('sets horse placeholder to "designated" for bridleways', function() {
         var access = iD.ui.preset.access(field);
         selection.call(access);
 
         access.tags({highway: 'bridleway'});
-        expect(selection.selectAll('#preset-input-access-horse').attr('placeholder')).to.equal('yes');
+        expect(selection.selectAll('#preset-input-access-horse').attr('placeholder')).to.equal('designated');
     });
 
-    it('sets motor_vehicle placeholder to "no" for footways, steps, pedestrian, cycleway, and path', function() {
+    it('sets motor_vehicle placeholder to "no" for footways, steps, pedestrian, cycleway, bridleway, and path', function() {
         var access = iD.ui.preset.access(field);
         selection.call(access);
-        ['footway', 'steps', 'pedestrian', 'cycleway', 'path'].forEach(function(value) {
+        ['footway', 'steps', 'pedestrian', 'cycleway', 'bridleway', 'path'].forEach(function(value) {
             access.tags({highway: value});
             expect(selection.selectAll('#preset-input-access-motor_vehicle').attr('placeholder')).to.equal('no');
         });
@@ -75,12 +76,15 @@ describe('iD.ui.preset.access', function() {
         });
     });
 
-    it('overrides a "yes" placeholder with more specific access tag (#2213)', function() {
+    it('overrides a "yes" or "designated" placeholder with more specific access tag (#2213)', function() {
         var access = iD.ui.preset.access(field);
         selection.call(access);
 
         access.tags({highway: 'service', access: 'emergency'});
         expect(selection.selectAll('#preset-input-access-motor_vehicle').attr('placeholder')).to.equal('emergency');
+
+        access.tags({highway: 'cycleway', access: 'permissive'});
+        expect(selection.selectAll('#preset-input-access-bicycle').attr('placeholder')).to.equal('permissive');
     });
 
     it('does not override a "no" placeholder with more specific access tag (#2213)', function() {

@@ -66,65 +66,106 @@ iD.ui.preset.access = function(field) {
 
     var placeholders = {
         footway: {
-            foot: 'yes',
+            foot: 'designated',
             motor_vehicle: 'no'
         },
         steps: {
             foot: 'yes',
-            motor_vehicle: 'no'
+            motor_vehicle: 'no',
+            bicycle: 'no',
+            horse: 'no'
         },
         pedestrian: {
             foot: 'yes',
             motor_vehicle: 'no'
         },
         cycleway: {
-            bicycle: 'yes',
-            motor_vehicle: 'no'
+            foot: 'yes',
+            motor_vehicle: 'no',
+            bicycle: 'designated'
         },
         bridleway: {
-            horse: 'yes'
+            foot: 'yes',
+            motor_vehicle: 'no',
+            horse: 'designated'
         },
         path: {
-            motor_vehicle: 'no'
+            foot: 'yes',
+            motor_vehicle: 'no',
+            bicycle: 'yes',
+            horse: 'yes'
         },
         motorway: {
-            motor_vehicle: 'yes'
+            foot: 'no',
+            motor_vehicle: 'yes',
+            bicycle: 'no',
+            horse: 'no'
         },
         trunk: {
             motor_vehicle: 'yes'
         },
         primary: {
-            motor_vehicle: 'yes'
+            foot: 'yes',
+            motor_vehicle: 'yes',
+            bicycle: 'yes',
+            horse: 'yes'
         },
         secondary: {
-            motor_vehicle: 'yes'
+            foot: 'yes',
+            motor_vehicle: 'yes',
+            bicycle: 'yes',
+            horse: 'yes'
         },
         tertiary: {
-            motor_vehicle: 'yes'
+            foot: 'yes',
+            motor_vehicle: 'yes',
+            bicycle: 'yes',
+            horse: 'yes'
         },
         residential: {
-            motor_vehicle: 'yes'
+            foot: 'yes',
+            motor_vehicle: 'yes',
+            bicycle: 'yes',
+            horse: 'yes'
         },
         unclassified: {
-            motor_vehicle: 'yes'
+            foot: 'yes',
+            motor_vehicle: 'yes',
+            bicycle: 'yes',
+            horse: 'yes'
         },
         service: {
-            motor_vehicle: 'yes'
+            foot: 'yes',
+            motor_vehicle: 'yes',
+            bicycle: 'yes',
+            horse: 'yes'
         },
         motorway_link: {
-            motor_vehicle: 'yes'
+            foot: 'no',
+            motor_vehicle: 'yes',
+            bicycle: 'no',
+            horse: 'no'
         },
         trunk_link: {
             motor_vehicle: 'yes'
         },
         primary_link: {
-            motor_vehicle: 'yes'
+            foot: 'yes',
+            motor_vehicle: 'yes',
+            bicycle: 'yes',
+            horse: 'yes'
         },
         secondary_link: {
-            motor_vehicle: 'yes'
+            foot: 'yes',
+            motor_vehicle: 'yes',
+            bicycle: 'yes',
+            horse: 'yes'
         },
         tertiary_link: {
-            motor_vehicle: 'yes'
+            foot: 'yes',
+            motor_vehicle: 'yes',
+            bicycle: 'yes',
+            horse: 'yes'
         }
     };
 
@@ -141,7 +182,7 @@ iD.ui.preset.access = function(field) {
         _.forEach(placeholders[tags.highway], function(value, key) {
             items.selectAll('#preset-input-access-' + key)
                 .attr('placeholder', function() {
-                    return (tags.access && value === 'yes') ? tags.access : value;
+                    return (tags.access && (value === 'yes' || value === 'designated')) ? tags.access : value;
                 });
         });
     };
