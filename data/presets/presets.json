@@ -6761,7 +6761,7 @@
         "name": "Car Repair Shop"
     },
     "shop/chemist": {
-        "icon": "shop",
+        "icon": "chemist",
         "fields": [
             "address",
             "building_area",
@@ -7082,7 +7082,7 @@
         "name": "Greengrocer"
     },
     "shop/hairdresser": {
-        "icon": "shop",
+        "icon": "hairdresser",
         "fields": [
             "address",
             "building_area",
@@ -7238,7 +7238,7 @@
         "name": "Mall"
     },
     "shop/mobile_phone": {
-        "icon": "shop",
+        "icon": "mobilephone",
         "fields": [
             "address",
             "building_area",
@@ -7255,7 +7255,7 @@
         "name": "Mobile Phone Store"
     },
     "shop/motorcycle": {
-        "icon": "shop",
+        "icon": "scooter",
         "fields": [
             "address",
             "building_area",
@@ -30791,7 +30791,7 @@
             "shop": "chemist"
         },
         "name": "Müller",
-        "icon": "shop",
+        "icon": "chemist",
         "geometry": [
             "point",
             "vertex",
@@ -30810,7 +30810,7 @@
             "shop": "chemist"
         },
         "name": "Schlecker",
-        "icon": "shop",
+        "icon": "chemist",
         "geometry": [
             "point",
             "vertex",
@@ -30829,7 +30829,7 @@
             "shop": "chemist"
         },
         "name": "Etos",
-        "icon": "shop",
+        "icon": "chemist",
         "geometry": [
             "point",
             "vertex",
@@ -30848,7 +30848,7 @@
             "shop": "chemist"
         },
         "name": "Bipa",
-        "icon": "shop",
+        "icon": "chemist",
         "geometry": [
             "point",
             "vertex",
@@ -30867,7 +30867,7 @@
             "shop": "chemist"
         },
         "name": "Rossmann",
-        "icon": "shop",
+        "icon": "chemist",
         "geometry": [
             "point",
             "vertex",
@@ -30886,7 +30886,7 @@
             "shop": "chemist"
         },
         "name": "DM Drogeriemarkt",
-        "icon": "shop",
+        "icon": "chemist",
         "geometry": [
             "point",
             "vertex",
@@ -30905,7 +30905,7 @@
             "shop": "chemist"
         },
         "name": "Ihr Platz",
-        "icon": "shop",
+        "icon": "chemist",
         "geometry": [
             "point",
             "vertex",
@@ -30924,7 +30924,7 @@
             "shop": "chemist"
         },
         "name": "Douglas",
-        "icon": "shop",
+        "icon": "chemist",
         "geometry": [
             "point",
             "vertex",
@@ -30943,7 +30943,7 @@
             "shop": "chemist"
         },
         "name": "Kruidvat",
-        "icon": "shop",
+        "icon": "chemist",
         "geometry": [
             "point",
             "vertex",
@@ -36187,7 +36187,7 @@
             "shop": "mobile_phone"
         },
         "name": "Билайн",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36206,7 +36206,7 @@
             "shop": "mobile_phone"
         },
         "name": "ソフトバンクショップ (SoftBank shop)",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36225,7 +36225,7 @@
             "shop": "mobile_phone"
         },
         "name": "Vodafone",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36244,7 +36244,7 @@
             "shop": "mobile_phone"
         },
         "name": "O2",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36263,7 +36263,7 @@
             "shop": "mobile_phone"
         },
         "name": "Carphone Warehouse",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36282,7 +36282,7 @@
             "shop": "mobile_phone"
         },
         "name": "Orange",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36301,7 +36301,7 @@
             "shop": "mobile_phone"
         },
         "name": "Verizon Wireless",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36320,7 +36320,7 @@
             "shop": "mobile_phone"
         },
         "name": "Sprint",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36339,7 +36339,7 @@
             "shop": "mobile_phone"
         },
         "name": "T-Mobile",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36358,7 +36358,7 @@
             "shop": "mobile_phone"
         },
         "name": "МТС",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36377,7 +36377,7 @@
             "shop": "mobile_phone"
         },
         "name": "Евросеть",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36396,7 +36396,7 @@
             "shop": "mobile_phone"
         },
         "name": "Bell",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36415,7 +36415,7 @@
             "shop": "mobile_phone"
         },
         "name": "The Phone House",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36434,7 +36434,7 @@
             "shop": "mobile_phone"
         },
         "name": "SFR",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36453,7 +36453,7 @@
             "shop": "mobile_phone"
         },
         "name": "Связной",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36472,7 +36472,7 @@
             "shop": "mobile_phone"
         },
         "name": "Мегафон",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36491,7 +36491,7 @@
             "shop": "mobile_phone"
         },
         "name": "AT&T",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36510,7 +36510,7 @@
             "shop": "mobile_phone"
         },
         "name": "ドコモショップ (docomo shop)",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36529,7 +36529,7 @@
             "shop": "mobile_phone"
         },
         "name": "au",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36548,7 +36548,7 @@
             "shop": "mobile_phone"
         },
         "name": "Movistar",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36567,7 +36567,7 @@
             "shop": "mobile_phone"
         },
         "name": "Bitė",
-        "icon": "shop",
+        "icon": "mobilephone",
         "geometry": [
             "point",
             "vertex",
@@ -36624,7 +36624,7 @@
             "shop": "hairdresser"
         },
         "name": "Klier",
-        "icon": "shop",
+        "icon": "hairdresser",
         "geometry": [
             "point",
             "vertex",
@@ -36643,7 +36643,7 @@
             "shop": "hairdresser"
         },
         "name": "Supercuts",
-        "icon": "shop",
+        "icon": "hairdresser",
         "geometry": [
             "point",
             "vertex",
@@ -36662,7 +36662,7 @@
             "shop": "hairdresser"
         },
         "name": "Hairkiller",
-        "icon": "shop",
+        "icon": "hairdresser",
         "geometry": [
             "point",
             "vertex",
@@ -36681,7 +36681,7 @@
             "shop": "hairdresser"
         },
         "name": "Great Clips",
-        "icon": "shop",
+        "icon": "hairdresser",
         "geometry": [
             "point",
             "vertex",
@@ -36700,7 +36700,7 @@
             "shop": "hairdresser"
         },
         "name": "Парикмахерская",
-        "icon": "shop",
+        "icon": "hairdresser",
         "geometry": [
             "point",
             "vertex",
@@ -36719,7 +36719,7 @@
             "shop": "hairdresser"
         },
         "name": "Стиль",
-        "icon": "shop",
+        "icon": "hairdresser",
         "geometry": [
             "point",
             "vertex",
@@ -36738,7 +36738,7 @@
             "shop": "hairdresser"
         },
         "name": "Fryzjer",
-        "icon": "shop",
+        "icon": "hairdresser",
         "geometry": [
             "point",
             "vertex",
@@ -36757,7 +36757,7 @@
             "shop": "hairdresser"
         },
         "name": "Franck Provost",
-        "icon": "shop",
+        "icon": "hairdresser",
         "geometry": [
             "point",
             "vertex",
@@ -36776,7 +36776,7 @@
             "shop": "hairdresser"
         },
         "name": "Салон красоты",
-        "icon": "shop",
+        "icon": "hairdresser",
         "geometry": [
             "point",
             "vertex",
@@ -36814,7 +36814,7 @@
             "shop": "motorcycle"
         },
         "name": "Yamaha",
-        "icon": "shop",
+        "icon": "scooter",
         "geometry": [
             "point",
             "vertex",
