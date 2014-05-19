@@ -1,5 +1,5 @@
 {
     "key": "oneway",
-    "type": "defaultcheck",
+    "type": "check",
     "label": "One Way"
 }

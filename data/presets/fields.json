@@ -569,12 +569,12 @@
     },
     "oneway": {
         "key": "oneway",
-        "type": "defaultcheck",
+        "type": "check",
         "label": "One Way"
     },
     "oneway_yes": {
         "key": "oneway",
-        "type": "defaultcheck",
+        "type": "check",
         "default": "yes",
         "label": "One Way"
     },
