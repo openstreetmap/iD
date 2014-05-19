@@ -10,6 +10,7 @@ iD.areaKeys = {
         "bench": true,
         "clock": true,
         "drinking_water": true,
+        "parking_entrance": true,
         "post_box": true,
         "telephone": true,
         "vending_machine": true,

@@ -4,12 +4,11 @@
         "vertex"
     ],
     "tags": {
-        "entrance": "*"
+        "amenity": "parking_entrance"
     },
     "fields": [
-        "entrance",
         "access_simple",
-        "address"
+        "ref"
     ],
-    "name": "Entrance/Exit"
+    "name": "Parking Garage Entrance/Exit"
 }

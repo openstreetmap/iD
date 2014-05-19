@@ -547,6 +547,9 @@ en:
       amenity/parking: 
         name: Car Parking
         terms: "<translate with synonyms or related terms for 'Car Parking', separated by commas>"
+      amenity/parking_entrance: 
+        name: Parking Garage Entrance/Exit
+        terms: "<translate with synonyms or related terms for 'Parking Garage Entrance/Exit', separated by commas>"
       amenity/pharmacy: 
         name: Pharmacy
         terms: "<translate with synonyms or related terms for 'Pharmacy', separated by commas>"
@@ -731,8 +734,8 @@ en:
         name: Dormitory
         terms: "<translate with synonyms or related terms for 'Dormitory', separated by commas>"
       building/entrance: 
-        name: Entrance
-        terms: "<translate with synonyms or related terms for 'Entrance', separated by commas>"
+        name: Entrance/Exit
+        terms: "<translate with synonyms or related terms for 'Entrance/Exit', separated by commas>"
       building/garage: 
         name: Garage
         terms: "<translate with synonyms or related terms for 'Garage', separated by commas>"
@@ -941,8 +944,8 @@ en:
         name: Emergency Phone
         terms: "<translate with synonyms or related terms for 'Emergency Phone', separated by commas>"
       entrance: 
-        name: Entrance
-        terms: "<translate with synonyms or related terms for 'Entrance', separated by commas>"
+        name: Entrance/Exit
+        terms: "<translate with synonyms or related terms for 'Entrance/Exit', separated by commas>"
       footway/crossing: 
         name: Crossing
         terms: "<translate with synonyms or related terms for 'Crossing', separated by commas>"

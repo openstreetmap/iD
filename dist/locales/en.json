@@ -1170,6 +1170,10 @@
                 "name": "Car Parking",
                 "terms": ""
             },
+            "amenity/parking_entrance": {
+                "name": "Parking Garage Entrance/Exit",
+                "terms": ""
+            },
             "amenity/pharmacy": {
                 "name": "Pharmacy",
                 "terms": ""
@@ -1415,7 +1419,7 @@
                 "terms": ""
             },
             "building/entrance": {
-                "name": "Entrance",
+                "name": "Entrance/Exit",
                 "terms": ""
             },
             "building/garage": {
@@ -1695,7 +1699,7 @@
                 "terms": ""
             },
             "entrance": {
-                "name": "Entrance",
+                "name": "Entrance/Exit",
                 "terms": ""
             },
             "footway/crossing": {
