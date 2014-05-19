@@ -952,6 +952,9 @@ en:
       footway/sidewalk: 
         name: Sidewalk
         terms: "<translate with synonyms or related terms for 'Sidewalk', separated by commas>"
+      ford: 
+        name: Ford
+        terms: "<translate with synonyms or related terms for 'Ford', separated by commas>"
       golf/bunker: 
         name: Sand Trap
         terms: "<translate with synonyms or related terms for 'Sand Trap', separated by commas>"

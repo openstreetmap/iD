@@ -1710,6 +1710,10 @@
                 "name": "Sidewalk",
                 "terms": ""
             },
+            "ford": {
+                "name": "Ford",
+                "terms": ""
+            },
             "golf/bunker": {
                 "name": "Sand Trap",
                 "terms": "hazard,bunker"

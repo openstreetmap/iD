@@ -3540,6 +3540,15 @@
         "terms": [],
         "name": "Sidewalk"
     },
+    "ford": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "ford": "yes"
+        },
+        "name": "Ford"
+    },
     "golf/bunker": {
         "icon": "golf",
         "geometry": [
@@ -32360,24 +32369,6 @@
             "shop": "car"
         },
         "name": "Volvo",
-        "icon": "car",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/car/Ford": {
-        "tags": {
-            "name": "Ford",
-            "shop": "car"
-        },
-        "name": "Ford",
         "icon": "car",
         "geometry": [
             "point",
