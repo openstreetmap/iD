@@ -27,6 +27,8 @@
 
     "icon-restriction-yes": [50, 80],
     "icon-restriction-no": [95, 80],
-    "icon-restriction-yes-u": [140, 80],
-    "icon-restriction-no-u": [185, 80]
+    "icon-restriction-only": [140, 80],
+    "icon-restriction-yes-u": [185, 80],
+    "icon-restriction-no-u": [230, 80],
+    "icon-restriction-only-u": [275, 80]
 }

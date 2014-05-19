@@ -58,6 +58,12 @@ iD.geo.Intersection = function(graph, vertexId) {
                     v && v.id === turn.via.node &&
                     t && t.id === turn.to.way) {
                     turn.restriction = relation.id;
+                } else if (/^only_/.test(relation.tags.restriction) &&
+                    f && f.id === turn.from.way &&
+                    v && v.id === turn.via.node &&
+                    t && t.id !== turn.to.way) {
+                    turn.restriction = relation.id;
+                    turn.indirect_restriction = true;
                 }
             });
 

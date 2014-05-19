@@ -328,9 +328,49 @@ describe("iD.geo.Intersection", function() {
                 restriction: 'r'
             });
         });
-    });
 
-    // 'no' vs 'only'
-    // Self-intersections
-    // Incomplete relations
+        it("restricts turns affected by an only_* restriction relation", function() {
+            // u====*~~~~v
+            //      |
+            //      w
+            var graph = iD.Graph([
+                    iD.Node({id: 'u'}),
+                    iD.Node({id: 'v'}),
+                    iD.Node({id: 'w'}),
+                    iD.Node({id: '*'}),
+                    iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
+                    iD.Way({id: '~', nodes: ['v', '*'], tags: {highway: 'residential'}}),
+                    iD.Way({id: '-', nodes: ['w', '*'], tags: {highway: 'residential'}}),
+                    iD.Relation({id: 'r', tags: {type: 'restriction', restriction: 'only_right_turn'}, members: [
+                        {id: '=', role: 'from', type: 'way'},
+                        {id: '-', role: 'to', type: 'way'},
+                        {id: '*', role: 'via', type: 'node'}
+                    ]})
+                ]),
+                turns = iD.geo.Intersection(graph, '*').turns('u');
+
+            expect(turns.length).to.eql(3);
+            expect(turns[0]).to.eql({
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'v', way: '~'},
+                restriction: 'r',
+                indirect_restriction: true
+            });
+            expect(turns[1]).to.eql({
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'w', way: '-'},
+                restriction: 'r'
+            });
+            expect(turns[2]).to.eql({
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'u', way: '='},
+                restriction: 'r',
+                indirect_restriction: true,
+                u: true
+            });
+        });
+    });
 });
