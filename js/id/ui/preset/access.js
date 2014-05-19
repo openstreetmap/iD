@@ -80,12 +80,10 @@ iD.ui.preset.access = function(field) {
             motor_vehicle: 'no'
         },
         cycleway: {
-            foot: 'yes',
             motor_vehicle: 'no',
             bicycle: 'designated'
         },
         bridleway: {
-            foot: 'yes',
             motor_vehicle: 'no',
             horse: 'designated'
         },
