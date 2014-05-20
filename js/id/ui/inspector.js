@@ -31,7 +31,12 @@ iD.ui.Inspector = function(context) {
         var $presetPane = $wrap.select('.preset-list-pane');
         var $editorPane = $wrap.select('.entity-editor-pane');
 
-        var showEditor = state === 'hover' || context.entity(entityID).isUsed(context.graph());
+        var graph = context.graph(),
+            entity = context.entity(entityID),
+            showEditor = state === 'hover' ||
+                entity.isUsed(graph) ||
+                entity.isIntersection(graph);
+
         if (showEditor) {
             $wrap.style('right', '0%');
             $editorPane.call(entityEditor);

@@ -22,6 +22,7 @@
   "devDependencies": {
     "d3": "3.4.6",
     "smash": "0.0",
+    "lodash-cli": "2.3.0",
     "uglify-js": "~2.2.5",
     "maki": "0.4",
     "jshint": "2.3.0",

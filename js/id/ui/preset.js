@@ -72,6 +72,10 @@ iD.ui.preset = function(context) {
                 }
             });
 
+            if (geometry === 'vertex' && entity.isIntersection(context.graph())) {
+                fields.push(UIField(context.presets().field('restrictions'), entity, true));
+            }
+
             context.presets().universal().forEach(function(field) {
                 if (preset.fields.indexOf(field) < 0) {
                     fields.push(UIField(field, entity));
@@ -177,7 +181,7 @@ iD.ui.preset = function(context) {
 
         function show(field) {
             field.show = true;
-            presets(selection);
+            context.presets()(selection);
             field.input.focus();
         }
 
@@ -196,6 +200,7 @@ iD.ui.preset = function(context) {
 
     presets.preset = function(_) {
         if (!arguments.length) return preset;
+        if (preset && preset.id === _.id) return presets;
         preset = _;
         fields = null;
         return presets;
@@ -216,6 +221,7 @@ iD.ui.preset = function(context) {
 
     presets.entityID = function(_) {
         if (!arguments.length) return id;
+        if (id === _) return presets;
         id = _;
         fields = null;
         return presets;

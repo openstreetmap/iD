@@ -1,0 +1,14 @@
+{
+    "name": "Left Turn Only",
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "restriction",
+        "restriction": "only_left_turn"
+    },
+    "fields": [
+        "except"
+    ],
+    "icon": "restriction-only-left-turn"
+}

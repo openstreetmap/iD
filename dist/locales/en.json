@@ -182,6 +182,18 @@
             },
             "not_eligible": "Lines can't be split at their beginning or end.",
             "multiple_ways": "There are too many lines here to split."
+        },
+        "restriction": {
+            "help": {
+                "select": "Click to select a road segment.",
+                "toggle": "Click to toggle turn restrictions.",
+                "toggle_on": "Click to add a \"{restriction}\" restriction.",
+                "toggle_off": "Click to remove the \"{restriction}\" restriction."
+            },
+            "annotation": {
+                "create": "Added a turn restriction",
+                "delete": "Deleted a turn restriction"
+            }
         }
     },
     "undo": {
@@ -416,6 +428,9 @@
             "category-rail": {
                 "name": "Rail"
             },
+            "category-restriction": {
+                "name": "Restriction"
+            },
             "category-road": {
                 "name": "Road"
             },
@@ -597,6 +612,9 @@
             },
             "entrance": {
                 "label": "Type"
+            },
+            "except": {
+                "label": "Exceptions"
             },
             "fax": {
                 "label": "Fax",
@@ -821,6 +839,9 @@
             },
             "restriction": {
                 "label": "Type"
+            },
+            "restrictions": {
+                "label": "Turn Restrictions"
             },
             "route": {
                 "label": "Type"
@@ -2832,6 +2853,34 @@
             },
             "type/restriction": {
                 "name": "Restriction",
+                "terms": ""
+            },
+            "type/restriction/no_left_turn": {
+                "name": "No Left Turn",
+                "terms": ""
+            },
+            "type/restriction/no_right_turn": {
+                "name": "No Right Turn",
+                "terms": ""
+            },
+            "type/restriction/no_straight_on": {
+                "name": "No Straight On",
+                "terms": ""
+            },
+            "type/restriction/no_u_turn": {
+                "name": "No U-turn",
+                "terms": ""
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Left Turn Only",
+                "terms": ""
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Right Turn Only",
+                "terms": ""
+            },
+            "type/restriction/only_straight_ahead": {
+                "name": "No Turns",
                 "terms": ""
             },
             "type/route": {
