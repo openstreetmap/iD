@@ -150,24 +150,31 @@ describe('iD.Way', function() {
 
     describe('#isOneWay', function() {
         it('returns false when the way has no tags', function() {
-            expect(iD.Way().isOneWay()).to.eql(false);
+            expect(iD.Way().isOneWay()).to.be.false;
         });
 
         it('returns false when the way has tag oneway=no', function() {
-            expect(iD.Way({tags: { oneway: 'no' }}).isOneWay()).to.equal(false);
+            expect(iD.Way({tags: { oneway: 'no' }}).isOneWay()).to.be.false;
+            expect(iD.Way({tags: { oneway: '0' }}).isOneWay()).to.be.false;
         });
 
         it('returns true when the way has tag oneway=yes', function() {
-            expect(iD.Way({tags: { oneway: 'yes' }}).isOneWay()).to.equal(true);
+            expect(iD.Way({tags: { oneway: 'yes' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { oneway: '1' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { oneway: '-1' }}).isOneWay()).to.be.true;
         });
 
-        it('returns true when the way has tag waterway=river or waterway=stream', function() {
-            expect(iD.Way({tags: { waterway: 'river' }}).isOneWay()).to.equal(true);
-            expect(iD.Way({tags: { waterway: 'stream' }}).isOneWay()).to.equal(true);
+        it('returns true when the way has implied oneway tag (waterway=river, waterway=stream, etc)', function() {
+            expect(iD.Way({tags: { waterway: 'river' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { waterway: 'stream' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { highway: 'motorway' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { highway: 'motorway_link' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { junction: 'roundabout' }}).isOneWay()).to.be.true;
         });
 
-        it('returns true when the way has tag junction=roundabout', function() {
-            expect(iD.Way({tags: { junction: 'roundabout' }}).isOneWay()).to.equal(true);
+        it('returns false when oneway=no overrides implied oneway tag', function() {
+            expect(iD.Way({tags: { junction: 'roundabout', oneway: 'no' }}).isOneWay()).to.be.false;
+            expect(iD.Way({tags: { highway: 'motorway', oneway: 'no' }}).isOneWay()).to.be.false;
         });
     });
 

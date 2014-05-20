@@ -43,11 +43,15 @@ _.extend(iD.Way.prototype, {
     },
 
     isOneWay: function() {
-        return this.tags.oneway === 'yes' ||
-            this.tags.oneway === '1' ||
-            this.tags.oneway === '-1' ||
-            this.tags.waterway === 'river' ||
+        // explicit oneway tag..
+        if (['yes', '1', '-1'].indexOf(this.tags.oneway) !== -1) { return true; }
+        if (['no', '0'].indexOf(this.tags.oneway) !== -1) { return false; }
+
+        // implied oneway tag..
+        return this.tags.waterway === 'river' ||
             this.tags.waterway === 'stream' ||
+            this.tags.highway === 'motorway' ||
+            this.tags.highway === 'motorway_link' ||
             this.tags.junction === 'roundabout';
     },
 
