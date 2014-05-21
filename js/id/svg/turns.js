@@ -1,5 +1,9 @@
 iD.svg.Turns = function(projection) {
     return function(surface, graph, turns) {
+        function key(turn) {
+            return [turn.from.node + turn.via.node + turn.to.node].join('-');
+        }
+
         function icon(turn) {
             var u = turn.u ? '-u' : '';
             if (!turn.restriction)
@@ -10,7 +14,7 @@ iD.svg.Turns = function(projection) {
         }
 
         var groups = surface.select('.layer-hit').selectAll('g.turn')
-            .data(turns);
+            .data(turns, key);
 
         // Enter
 
