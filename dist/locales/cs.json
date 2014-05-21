@@ -1242,10 +1242,6 @@
                 "name": "Obchodní budova",
                 "terms": "obchody,firmy,firma,prodej,podnik,podniky,kanceláře"
             },
-            "building/entrance": {
-                "name": "Vchod",
-                "terms": "vchod"
-            },
             "building/garage": {
                 "name": "Garáž",
                 "terms": "garáž,garáže,parkování,kryté parkování"
@@ -1457,10 +1453,6 @@
             "emergency/phone": {
                 "name": "Tísňový telefon",
                 "terms": "nouzový telefon,SOS,tísňová linka"
-            },
-            "entrance": {
-                "name": "Vchod",
-                "terms": "vchod,východ,únikový východ,brána,dveře,vrata"
             },
             "footway/crossing": {
                 "name": "Přechod pro chodce",

@@ -676,14 +676,8 @@
             "building/apartments": {
                 "name": "Dzīvokļi"
             },
-            "building/entrance": {
-                "name": "Ieeja"
-            },
             "building/house": {
                 "name": "Māja"
-            },
-            "entrance": {
-                "name": "Ieeja"
             },
             "highway": {
                 "name": "Šoseja"

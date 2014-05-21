@@ -212,7 +212,7 @@
     "commit": {
         "title": "Salva le modifiche",
         "description_placeholder": "Una breve descrizione delle tue modifiche",
-        "message_label": "Messaggio di invio",
+        "message_label": "Commento",
         "upload_explanation": "Le modifiche che carichi saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
         "upload_explanation_with_user": "Le modifiche che carichi come {user} saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
         "save": "Salva",
@@ -836,7 +836,8 @@
                     "bridge": "Ponte",
                     "tunnel": "Tunnel",
                     "embankment": "Argine",
-                    "cutting": "Infossato"
+                    "cutting": "Infossato",
+                    "ford": "Guado"
                 }
             },
             "studio_type": {
@@ -1122,6 +1123,10 @@
                 "name": "Parcheggio",
                 "terms": "parcheggio auto,autorimessa"
             },
+            "amenity/parking_entrance": {
+                "name": "Entrata/Uscita Garage",
+                "terms": "garage,posto auto,posteggio,parcheggio"
+            },
             "amenity/pharmacy": {
                 "name": "Farmacia",
                 "terms": "Farmacia"
@@ -1367,8 +1372,8 @@
                 "terms": "dormitorio,struttura sociale"
             },
             "building/entrance": {
-                "name": "Entrata",
-                "terms": "Entrata"
+                "name": "Entrata/Uscita",
+                "terms": "entrata,uscita,emergenza,accesso,porta,portone,ingresso"
             },
             "building/garage": {
                 "name": "Garage",
@@ -1550,8 +1555,8 @@
                 "terms": "Telefono di emergenza"
             },
             "entrance": {
-                "name": "Entrata",
-                "terms": "Entrata"
+                "name": "Entrata/Uscita",
+                "terms": "entrata,uscita,emergenza,accesso,porta,portone,ingresso"
             },
             "footway/crossing": {
                 "name": "Attraversamento",
@@ -1560,6 +1565,10 @@
             "footway/sidewalk": {
                 "name": "Marciapiede",
                 "terms": "marciapiedi,passeggio,salvagente,banchina"
+            },
+            "ford": {
+                "name": "Guado",
+                "terms": "guado"
             },
             "golf/bunker": {
                 "name": "Bunker",

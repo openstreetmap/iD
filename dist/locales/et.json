@@ -658,9 +658,6 @@
             "building/commercial": {
                 "name": "Ärihoone"
             },
-            "building/entrance": {
-                "name": "Sissepääs"
-            },
             "building/house": {
                 "name": "Maja"
             },
@@ -672,9 +669,6 @@
             },
             "emergency/phone": {
                 "name": "Hädaabi telefon"
-            },
-            "entrance": {
-                "name": "Sissepääs"
             },
             "highway": {
                 "name": "Tee"

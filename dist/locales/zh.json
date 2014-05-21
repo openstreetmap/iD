@@ -872,17 +872,11 @@
             "building/apartments": {
                 "name": "酒店公寓"
             },
-            "building/entrance": {
-                "name": "入口"
-            },
             "building/house": {
                 "name": "房屋"
             },
             "emergency/phone": {
                 "name": "紧急电话"
-            },
-            "entrance": {
-                "name": "入口"
             },
             "highway": {
                 "name": "公路"

@@ -427,7 +427,7 @@
         },
         "fields": {
             "access": {
-                "label": "Zugangsbeschränkung",
+                "label": "Zugangsberechtigung",
                 "placeholder": "Unbekannt",
                 "types": {
                     "access": "Allgemein",
@@ -866,7 +866,8 @@
                     "bridge": "Brücke",
                     "tunnel": "Tunnel",
                     "embankment": "Fahrdamm",
-                    "cutting": "Senke"
+                    "cutting": "Senke",
+                    "ford": "Furt"
                 }
             },
             "studio_type": {
@@ -882,7 +883,7 @@
                 "label": "taktile Oberfläche"
             },
             "toilets/disposal": {
-                "label": "Abfallkübel, Mistkübel"
+                "label": "Toiletten-Bauart"
             },
             "tourism": {
                 "label": "Typ"
@@ -1163,6 +1164,10 @@
                 "name": "Autoparkplatz",
                 "terms": "Autoparkplatz, Parkplatz, Parkhaus, Garage, Parkgarage"
             },
+            "amenity/parking_entrance": {
+                "name": "Garageneinfahrt/-ausfahrt",
+                "terms": "Parkgaragen-Einfahrt/Ausfahrt, Garageneinfahrt/-ausfahrt, Garagenzufahrt/-abfahrt"
+            },
             "amenity/pharmacy": {
                 "name": "Apotheke",
                 "terms": "Apotheke"
@@ -1408,8 +1413,8 @@
                 "terms": "Schlafsaal, Dormitorium"
             },
             "building/entrance": {
-                "name": "Eingang",
-                "terms": "Eingang"
+                "name": "Eingang/Ausgang",
+                "terms": "Eingang/Ausgang, Zugang/Abgang, Einfahrt/Ausfahrt, Eintritt/Austritt"
             },
             "building/garage": {
                 "name": "Garage",
@@ -1688,8 +1693,8 @@
                 "terms": "Notruf-Telefon, Notrufsäule, Notfallsäule"
             },
             "entrance": {
-                "name": "Eingang",
-                "terms": "Eingang"
+                "name": "Eingang/Ausgang",
+                "terms": "Eingang/Ausgang, Zugang/Abgang, Einfahrt/Ausfahrt, Eintritt/Austritt"
             },
             "footway/crossing": {
                 "name": "Fussgängerüberweg",
@@ -1698,6 +1703,10 @@
             "footway/sidewalk": {
                 "name": "Bürgersteig",
                 "terms": "Gehsteig, Fußgängerweg, Gehweg, Fußweg, Gangsteig, Trottoir"
+            },
+            "ford": {
+                "name": "Furt",
+                "terms": "Furt"
             },
             "golf/bunker": {
                 "name": "Bunker (Golf)",
@@ -1857,7 +1866,7 @@
             },
             "highway/track": {
                 "name": "Feld-/Waldweg",
-                "terms": "Spur, Fährte, Strecke, Weg"
+                "terms": "Forstweg,Wirtschaftsweg,Wiesenweg,Feldweg,Waldweg"
             },
             "highway/traffic_signals": {
                 "name": "Ampeln",
@@ -1909,7 +1918,7 @@
             },
             "historic/wayside_cross": {
                 "name": "Wegkreuz",
-                "terms": "Wegkreuz"
+                "terms": "Wegkreuz,Wegekreuz,Flurkreuz"
             },
             "historic/wayside_shrine": {
                 "name": "Bildstock",

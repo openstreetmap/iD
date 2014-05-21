@@ -866,9 +866,6 @@
             "building/apartments": {
                 "name": "Apartemen"
             },
-            "building/entrance": {
-                "name": "Masuk"
-            },
             "building/garage": {
                 "name": "Garasi"
             },
@@ -877,9 +874,6 @@
             },
             "emergency/phone": {
                 "name": "Telepon Darurat"
-            },
-            "entrance": {
-                "name": "Pintu Masuk"
             },
             "highway": {
                 "name": "Jalan Raya"

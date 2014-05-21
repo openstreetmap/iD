@@ -1363,10 +1363,6 @@
                 "name": "Internát",
                 "terms": "internat,intrak,intrák"
             },
-            "building/entrance": {
-                "name": "Vstup",
-                "terms": "vchod,východ,vychod,únikový východ,unikovy vychod,brána,brana,dvere,vráta,vrata"
-            },
             "building/garage": {
                 "name": "Garáž",
                 "terms": "garaz,garáže,garaze,parkovanie,kryté parkovanie,kryte parkovanie"
@@ -1642,10 +1638,6 @@
             "emergency/phone": {
                 "name": "Núdzový telefón",
                 "terms": "nudzovy telefon,SOS,tiesňová linka,tiesnova linka,núdzový telefón.nudzovy telefon"
-            },
-            "entrance": {
-                "name": "Vstup",
-                "terms": "vchod,východ,vychod,únikový východ,unikovy vychod,brána,brana,dvere,vráta,vrata"
             },
             "footway/crossing": {
                 "name": "Prechod",

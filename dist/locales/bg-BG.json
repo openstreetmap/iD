@@ -898,17 +898,11 @@
             "building/apartments": {
                 "name": "Жилищен блок"
             },
-            "building/entrance": {
-                "name": "Вход"
-            },
             "building/house": {
                 "name": "Къща"
             },
             "emergency/phone": {
                 "name": "Телефон за спешна помощ"
-            },
-            "entrance": {
-                "name": "Вход"
             },
             "highway": {
                 "name": "Път"

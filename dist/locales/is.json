@@ -1030,9 +1030,6 @@
             "building/dormitory": {
                 "name": "Heimavist"
             },
-            "building/entrance": {
-                "name": "Inngangur"
-            },
             "building/garage": {
                 "name": "Bílskúr"
             },
@@ -1135,9 +1132,6 @@
             },
             "emergency/phone": {
                 "name": "Neyðarsími"
-            },
-            "entrance": {
-                "name": "Inngangur"
             },
             "highway": {
                 "name": "Þjóðvegur"

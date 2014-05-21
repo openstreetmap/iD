@@ -1147,10 +1147,6 @@
                 "name": "Комерційна нерухомість",
                 "terms": "Commercial Building,rjvthwsqyf ythejvscnm"
             },
-            "building/entrance": {
-                "name": "Вхід",
-                "terms": "Entrance,dsl,двері,ворота,вихід,фіртка"
-            },
             "building/garage": {
                 "name": "Гараж",
                 "terms": "Garage,ufhf"
@@ -1188,10 +1184,6 @@
             "emergency/phone": {
                 "name": "Телефон виклику екстрених служб",
                 "terms": "Emergency Phone,tekeajy dbrkbre trchtyb cke"
-            },
-            "entrance": {
-                "name": "Вхід",
-                "terms": "Entrance,dsl,двері,ворота,вихід,фіртка"
             },
             "footway/crossing": {
                 "name": "Перехрестя"

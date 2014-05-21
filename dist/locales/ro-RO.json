@@ -478,9 +478,6 @@
             "building": {
                 "name": "Clădire"
             },
-            "entrance": {
-                "name": "Intrare"
-            },
             "highway": {
                 "name": "Autostradă"
             },

@@ -438,17 +438,11 @@
             "building/apartments": {
                 "name": "அபார்ட்மண்டுகள்"
             },
-            "building/entrance": {
-                "name": "நுழைவுவாயில்"
-            },
             "building/house": {
                 "name": "வீடு"
             },
             "craft/painter": {
                 "name": "ஓவியர்"
-            },
-            "entrance": {
-                "name": "நுழைவுவாயில்"
             },
             "highway/bus_stop": {
                 "name": "பேருந்து நிலையம்"

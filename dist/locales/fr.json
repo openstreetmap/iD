@@ -561,6 +561,9 @@
             "covered": {
                 "label": "Couvert"
             },
+            "crop": {
+                "label": "Culture"
+            },
             "crossing": {
                 "label": "Type"
             },
@@ -607,6 +610,12 @@
             "fuel/diesel": {
                 "label": "Vente de diesel"
             },
+            "fuel/e10": {
+                "label": "Vend du E10"
+            },
+            "fuel/e85": {
+                "label": "Vends du E85"
+            },
             "fuel/lpg": {
                 "label": "Vente de gaz propane"
             },
@@ -632,6 +641,9 @@
             },
             "historic": {
                 "label": "Type"
+            },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -825,7 +837,8 @@
                     "bridge": "Pont",
                     "tunnel": "Tunnel",
                     "embankment": "Remblai",
-                    "cutting": "Tranchée"
+                    "cutting": "Tranchée",
+                    "ford": "Ford"
                 }
             },
             "studio_type": {
@@ -1082,6 +1095,9 @@
                 "name": "Cimetière",
                 "terms": "Cimetière"
             },
+            "amenity/hospital": {
+                "name": "Terrain d'hôpital"
+            },
             "amenity/library": {
                 "name": "Bibliothèque",
                 "terms": "Bibliothèque, Librairie"
@@ -1149,6 +1165,9 @@
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "Restaurant"
+            },
+            "amenity/school": {
+                "name": "Terrain d'école"
             },
             "amenity/shelter": {
                 "name": "Abri",
@@ -1315,10 +1334,6 @@
             },
             "building/dormitory": {
                 "name": "Dortoir"
-            },
-            "building/entrance": {
-                "name": "Entrée",
-                "terms": "Entrée"
             },
             "building/garage": {
                 "name": "Garage",
@@ -1535,8 +1550,7 @@
                 "terms": "Téléphone d'urgence"
             },
             "entrance": {
-                "name": "Entrée",
-                "terms": "Entrée"
+                "name": "Entrée/Sortie"
             },
             "footway/crossing": {
                 "name": "Passage pieton ",
@@ -1545,6 +1559,9 @@
             "footway/sidewalk": {
                 "name": "Trottoir",
                 "terms": "Trottoir"
+            },
+            "ford": {
+                "name": "Ford"
             },
             "golf/bunker": {
                 "name": "Bunker",
@@ -2179,6 +2196,9 @@
             "place/locality": {
                 "name": "Lieu-dit",
                 "terms": "Localité"
+            },
+            "place/neighbourhood": {
+                "name": "Voisinage"
             },
             "place/town": {
                 "name": "Ville (10.000-100.000 habitants)",

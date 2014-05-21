@@ -628,6 +628,7 @@
                 "placeholder": "Број рупе (1-18)"
             },
             "handicap": {
+                "label": "Хендикеп",
                 "placeholder": "1-18"
             },
             "highway": {
@@ -1039,6 +1040,9 @@
             "amenity/nightclub": {
                 "name": "Ноћни клуб"
             },
+            "amenity/parking": {
+                "name": "Ауто паркинг"
+            },
             "amenity/pharmacy": {
                 "name": "Апотека"
             },
@@ -1214,7 +1218,7 @@
                 "name": "Студентски дом"
             },
             "building/entrance": {
-                "name": "Улаз"
+                "name": "Улаз/излаз"
             },
             "building/garage": {
                 "name": "Гаража"
@@ -1276,8 +1280,14 @@
             "craft/bookbinder": {
                 "name": "Књиговезац"
             },
+            "craft/brewery": {
+                "name": "Пивара"
+            },
             "craft/carpenter": {
                 "name": "Столар"
+            },
+            "craft/carpet_layer": {
+                "name": "Паркетар"
             },
             "craft/clockmaker": {
                 "name": "Сајџија"
@@ -1339,6 +1349,9 @@
             "craft/tailor": {
                 "name": "Kројач"
             },
+            "craft/tiler": {
+                "name": "Керамичар"
+            },
             "craft/tinsmith": {
                 "name": "Калајџија"
             },
@@ -1361,7 +1374,7 @@
                 "name": "Телефон за хитне случајеве"
             },
             "entrance": {
-                "name": "Улаз"
+                "name": "Улаз/излаз"
             },
             "footway/crossing": {
                 "name": "Прелаз"
@@ -1535,6 +1548,9 @@
             "landuse/farm": {
                 "name": "Фарма"
             },
+            "landuse/farmland": {
+                "name": "Обрадиво земљиште"
+            },
             "landuse/farmyard": {
                 "name": "Сеоско двориште"
             },
@@ -1655,6 +1671,9 @@
             "man_made/embankment": {
                 "name": "Насип"
             },
+            "man_made/flagpole": {
+                "name": "Јарбол за заставу"
+            },
             "man_made/lighthouse": {
                 "name": "Светионик"
             },
@@ -1684,6 +1703,9 @@
             },
             "man_made/water_works": {
                 "name": "Водовод"
+            },
+            "military/airfield": {
+                "name": "Узлетиште"
             },
             "military/barracks": {
                 "name": "Касарна"
@@ -1754,8 +1776,17 @@
             "office": {
                 "name": "Канцеларија"
             },
+            "office/accountant": {
+                "name": "Рачуновођа"
+            },
+            "office/architect": {
+                "name": "Архитекта"
+            },
             "office/educational_institution": {
                 "name": "Образовна институција"
+            },
+            "office/employment_agency": {
+                "name": "Служба за запошљавање"
             },
             "office/lawyer": {
                 "name": "Адвокатска канцеларија"

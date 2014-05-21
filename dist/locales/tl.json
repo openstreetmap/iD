@@ -252,6 +252,7 @@
         "search": "Mag-search",
         "multiselect": "Napiling mga item",
         "unknown": "Unknown",
+        "incomplete": "<not downloaded>",
         "feature_list": "Mag-hanap ng \"feature\"",
         "edit": "I-edit ang \"feature\"",
         "none": "Wala",

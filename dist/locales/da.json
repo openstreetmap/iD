@@ -610,6 +610,33 @@
             "fuel": {
                 "label": "Brændstof"
             },
+            "fuel/biodiesel": {
+                "label": "Sælger biodiesel"
+            },
+            "fuel/diesel": {
+                "label": "Sælger diesel"
+            },
+            "fuel/e10": {
+                "label": "Sælger E10"
+            },
+            "fuel/e85": {
+                "label": "Sælger E85"
+            },
+            "fuel/lpg": {
+                "label": "Sælger gas"
+            },
+            "fuel/octane_100": {
+                "label": "Sælger høj oktan benzin"
+            },
+            "fuel/octane_91": {
+                "label": "Sælger almindelig benzin"
+            },
+            "fuel/octane_95": {
+                "label": "Sælger medium benzin"
+            },
+            "fuel/octane_98": {
+                "label": "Sælger premium benzin"
+            },
             "gauge": {
                 "label": "Sporvidde"
             },
@@ -672,6 +699,9 @@
             },
             "leisure": {
                 "label": "Type"
+            },
+            "length": {
+                "label": "Længde(Meter)"
             },
             "levels": {
                 "label": "Etager",
@@ -836,7 +866,8 @@
                     "bridge": "Bro",
                     "tunnel": "Tunnel",
                     "embankment": "Forhøjning til tog, vej",
-                    "cutting": "Forsænkning"
+                    "cutting": "Forsænkning",
+                    "ford": "Vadested"
                 }
             },
             "studio_type": {
@@ -893,6 +924,9 @@
             },
             "wheelchair": {
                 "label": "Kørestolsadgang"
+            },
+            "width": {
+                "label": "Bredde(Meter)"
             },
             "wikipedia": {
                 "label": "Wikipedia"
@@ -1038,6 +1072,10 @@
                 "name": "Bilvask",
                 "terms": "Bilvask, Automobilvask"
             },
+            "amenity/charging_station": {
+                "name": "Opladerstation",
+                "terms": "Opladerstation, elbilopladerstation"
+            },
             "amenity/childcare": {
                 "name": "Børnepasning",
                 "terms": "Børnehave, Børnepasning, Vuggestue, Dagpleje, Fritidshjem"
@@ -1057,6 +1095,10 @@
             "amenity/college": {
                 "name": "Gymnasie",
                 "terms": "Gymnasie, Handelsgymnasie"
+            },
+            "amenity/compressed_air": {
+                "name": "Luftpumpe",
+                "terms": "Luftpumpe, Billuftpumpe"
             },
             "amenity/courthouse": {
                 "name": "Domstolsbygning",
@@ -1121,6 +1163,10 @@
             "amenity/parking": {
                 "name": "Bilparkering",
                 "terms": "Bilparkering"
+            },
+            "amenity/parking_entrance": {
+                "name": "Parkeringsgarage Indgang/Udgang",
+                "terms": "Parkeringsgarage Indgang/Udgang, Parkeringskælder Indgang/Udgang"
             },
             "amenity/pharmacy": {
                 "name": "Apotek",
@@ -1367,8 +1413,8 @@
                 "terms": " Kollegie, Klubværelse, Kollegium"
             },
             "building/entrance": {
-                "name": "Indgang",
-                "terms": "Indgang"
+                "name": "Indgang/Udgang",
+                "terms": "Indgang/Udgang"
             },
             "building/garage": {
                 "name": "Garage",
@@ -1647,8 +1693,8 @@
                 "terms": "Nødtelefon, Nødopkaldstelefon"
             },
             "entrance": {
-                "name": "Indgang",
-                "terms": "Indgang, Indgangsparti"
+                "name": "Indgang/Udgang",
+                "terms": "Indgang/Udgang"
             },
             "footway/crossing": {
                 "name": "Kryds",
@@ -1657,6 +1703,10 @@
             "footway/sidewalk": {
                 "name": "Fortov",
                 "terms": "Fortov"
+            },
+            "ford": {
+                "name": "Vadested",
+                "terms": "Vadested"
             },
             "golf/bunker": {
                 "name": "Sandbunker",

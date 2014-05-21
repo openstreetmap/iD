@@ -610,6 +610,33 @@
             "fuel": {
                 "label": "Nhiên liệu"
             },
+            "fuel/biodiesel": {
+                "label": "Bán Diesel Sinh học"
+            },
+            "fuel/diesel": {
+                "label": "Bán Diesel"
+            },
+            "fuel/e10": {
+                "label": "Bán E10"
+            },
+            "fuel/e85": {
+                "label": "Bán E85"
+            },
+            "fuel/lpg": {
+                "label": "Bán Prôpan"
+            },
+            "fuel/octane_100": {
+                "label": "Bán Xăng Xe đua"
+            },
+            "fuel/octane_91": {
+                "label": "Bán Xăng Bình thường"
+            },
+            "fuel/octane_95": {
+                "label": "Bán Xăng Trung hạng"
+            },
+            "fuel/octane_98": {
+                "label": "Bán Xăng Thượng hạng"
+            },
             "gauge": {
                 "label": "Khổ"
             },
@@ -672,6 +699,9 @@
             },
             "leisure": {
                 "label": "Loại"
+            },
+            "length": {
+                "label": "Chiều dài (Mét)"
             },
             "levels": {
                 "label": "Số Tầng",
@@ -836,7 +866,8 @@
                     "bridge": "Cầu",
                     "tunnel": "Đường hầm",
                     "embankment": "Đường đắp cao",
-                    "cutting": "Đường xẻ"
+                    "cutting": "Đường xẻ",
+                    "ford": "Nơi Lội qua Sông"
                 }
             },
             "studio_type": {
@@ -893,6 +924,9 @@
             },
             "wheelchair": {
                 "label": "Đi Xe lăn Được"
+            },
+            "width": {
+                "label": "Chiều ngang (Mét)"
             },
             "wikipedia": {
                 "label": "Wikipedia"
@@ -1038,6 +1072,10 @@
                 "name": "Rửa xe",
                 "terms": "tiệm rửa xe, rửa xe, tiem rua xe, rua xe"
             },
+            "amenity/charging_station": {
+                "name": "Trạm Sạc Pin",
+                "terms": "trạm sạc pin, trạm sạc xe hơi điện, tram sac pin, tram sac xe hoi dien"
+            },
             "amenity/childcare": {
                 "name": "Giữ trẻ",
                 "terms": "giữ trẻ, giữ con nít, giữ đứa bé, giu tre, giu con nit, giu dua be"
@@ -1057,6 +1095,10 @@
             "amenity/college": {
                 "name": "Trường Cao đẳng",
                 "terms": "trường cao đẳng, cao đẳng, CĐ, truong cao dang, cao dang, CD"
+            },
+            "amenity/compressed_air": {
+                "name": "Khí Nén",
+                "terms": "khí nén, không khí nén, khi nen, khong khi nen"
             },
             "amenity/courthouse": {
                 "name": "Tòa",
@@ -1121,6 +1163,10 @@
             "amenity/parking": {
                 "name": "Bãi Đậu xe",
                 "terms": "bãi đậu xe, sân đậu xe, đậu xe, bãi đỗ xe, sân đỗ xe, đỗ xe, bai dau xe, san dau xe, dau xe, bai do xe, san do xe, do xe"
+            },
+            "amenity/parking_entrance": {
+                "name": "Lối Ra vào Ga ra",
+                "terms": "lối ra vào ga ra, lối ra vào ga-ra, lối ra ga ra, lối vào ga ra, lối ra ga-ra, lối ra ga-ra, loi ra vao ga ra, loi ra vao ga-ra, loi ra ga ra, loi vao ga ra, loi ra ga-ra, loi ra ga-ra"
             },
             "amenity/pharmacy": {
                 "name": "Nhà thuốc",
@@ -1367,8 +1413,8 @@
                 "terms": "ký túc xá, kí túc xá, ký túc sá, kí túc sá, cư xá, ky tuc xa, ki tuc xa, ky tuc sa, ki tuc sa, cu xa"
             },
             "building/entrance": {
-                "name": "Cửa vào",
-                "terms": "cửa vào, lối vào, cua vao, loi vao"
+                "name": "Cửa Ra vào",
+                "terms": "cửa ra vào, cửa ra, cửa vào, cổng vào, lối vào, cua ra vao, cua ra, cua vao, cong vao, loi vao"
             },
             "building/garage": {
                 "name": "Ga ra",
@@ -1647,8 +1693,8 @@
                 "terms": "điện thoại khẩn cấp, dien thoai khan cap"
             },
             "entrance": {
-                "name": "Cửa vào",
-                "terms": "cửa vào, lối vào, cua vao, loi vao"
+                "name": "Lối Ra vào",
+                "terms": "lối vào, cửa ra vào, cửa ra, cửa vào, cổng vào, loi vao, cua ra vao, cua ra, cua vao, cong vao"
             },
             "footway/crossing": {
                 "name": "Lối Băng qua Đường",
@@ -1657,6 +1703,10 @@
             "footway/sidewalk": {
                 "name": "Lề đường",
                 "terms": "lề đường, vỉa hè, đường đi bộ, đường dạo, le duong, vie he, duong di bo, duong dao"
+            },
+            "ford": {
+                "name": "Nơi Lội qua Sông",
+                "terms": "nơi lội qua sông, chỗ lội qua sông, nơi lội qua suối, chỗ lội qua suối, nơi cạn, chỗ cạn, noi loi qua song, cho loi qua song, noi lo qua suoi, cho loi qua suoi, noi can, cho can"
             },
             "golf/bunker": {
                 "name": "Bẫy Cát",

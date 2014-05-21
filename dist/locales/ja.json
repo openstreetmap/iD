@@ -866,7 +866,8 @@
                     "bridge": "橋",
                     "tunnel": "トンネル",
                     "embankment": "土手",
-                    "cutting": "切り通し"
+                    "cutting": "切り通し",
+                    "ford": "洗い越し"
                 }
             },
             "studio_type": {
@@ -1163,6 +1164,10 @@
                 "name": "駐車場",
                 "terms": "駐車場"
             },
+            "amenity/parking_entrance": {
+                "name": "駐車場の出入口",
+                "terms": "駐車場の出入口"
+            },
             "amenity/pharmacy": {
                 "name": "薬局",
                 "terms": "調剤,調剤薬局,薬局"
@@ -1409,7 +1414,7 @@
             },
             "building/entrance": {
                 "name": "出入口",
-                "terms": "出入口, エントランス"
+                "terms": "出入口, 入口, 出口"
             },
             "building/garage": {
                 "name": "車庫",
@@ -1689,7 +1694,7 @@
             },
             "entrance": {
                 "name": "出入口",
-                "terms": "出入口"
+                "terms": "出入口, 入口, 出口"
             },
             "footway/crossing": {
                 "name": "横断歩道",
@@ -1698,6 +1703,10 @@
             "footway/sidewalk": {
                 "name": "歩道",
                 "terms": "歩道"
+            },
+            "ford": {
+                "name": "洗い越し",
+                "terms": "洗い越し, 浅瀬"
             },
             "golf/bunker": {
                 "name": "サンドトラップ",

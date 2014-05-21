@@ -1125,10 +1125,6 @@
                 "name": "商業樓宇",
                 "terms": "Commercial Building,商業建築物,商業樓宇"
             },
-            "building/entrance": {
-                "name": "入口",
-                "terms": "Entrance,入口"
-            },
             "building/garage": {
                 "name": "車庫",
                 "terms": "Garage,車庫"
@@ -1164,10 +1160,6 @@
             "emergency/phone": {
                 "name": "求助電話",
                 "terms": "Emergency Phone,求助電話,緊急電話"
-            },
-            "entrance": {
-                "name": "入口",
-                "terms": "Entrance,入口"
             },
             "footway/crossing": {
                 "name": "路口",

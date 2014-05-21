@@ -800,9 +800,6 @@
             "building/apartments": {
                 "name": "Leiligheter"
             },
-            "building/entrance": {
-                "name": "Inngang"
-            },
             "building/house": {
                 "name": "Hus"
             },
@@ -811,9 +808,6 @@
             },
             "emergency/phone": {
                 "name": "Nødtelefon"
-            },
-            "entrance": {
-                "name": "Inngang"
             },
             "highway": {
                 "name": "Vei"

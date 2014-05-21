@@ -941,9 +941,6 @@
                 "name": "Komercinis pastatas",
                 "terms": "komercinis,pastatas,statinys"
             },
-            "building/entrance": {
-                "name": "Įėjimas"
-            },
             "building/garage": {
                 "name": "Garažas"
             },
@@ -963,9 +960,6 @@
             },
             "emergency/phone": {
                 "name": "Pagalbos telefonas"
-            },
-            "entrance": {
-                "name": "Įėjimas"
             },
             "footway/sidewalk": {
                 "name": "Šaligatvis"

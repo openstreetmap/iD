@@ -1236,10 +1236,6 @@
             "building/construction": {
                 "name": "在建建筑"
             },
-            "building/entrance": {
-                "name": "入口",
-                "terms": "入口"
-            },
             "building/garage": {
                 "name": "车库",
                 "terms": "车库"
@@ -1335,10 +1331,6 @@
             "emergency/phone": {
                 "name": "紧急电话",
                 "terms": "紧急电话"
-            },
-            "entrance": {
-                "name": "入口",
-                "terms": "入口"
             },
             "footway/crossing": {
                 "name": "路口",

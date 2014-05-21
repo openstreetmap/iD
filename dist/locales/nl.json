@@ -1132,9 +1132,6 @@
             "building/dormitory": {
                 "name": "Slaapzaal"
             },
-            "building/entrance": {
-                "name": "Ingang"
-            },
             "building/garage": {
                 "name": "Garage",
                 "terms": "garage"
@@ -1264,9 +1261,6 @@
             },
             "emergency/phone": {
                 "name": "Praatpaal"
-            },
-            "entrance": {
-                "name": "Ingang"
             },
             "highway": {
                 "name": "Autosnelweg"

@@ -1052,10 +1052,6 @@
                 "name": "مبني تجاري",
                 "terms": "مبنى تجاري"
             },
-            "building/entrance": {
-                "name": "مدخل",
-                "terms": "مدخل"
-            },
             "building/garage": {
                 "name": "جراج",
                 "terms": "مَرْأب , كراج, تصليح سيارات"
@@ -1087,10 +1083,6 @@
             "emergency/phone": {
                 "name": "هاتف طوارئ",
                 "terms": "هاتف طوارئ"
-            },
-            "entrance": {
-                "name": "مدخل",
-                "terms": "مدخل"
             },
             "footway/crossing": {
                 "name": "تقاطع",

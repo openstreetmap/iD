@@ -830,17 +830,11 @@
             "building/apartments": {
                 "name": "Woonstelle"
             },
-            "building/entrance": {
-                "name": "Ingang"
-            },
             "building/house": {
                 "name": "Huis"
             },
             "emergency/phone": {
                 "name": "Noodtelefoon"
-            },
-            "entrance": {
-                "name": "Ingang"
             },
             "highway": {
                 "name": "Snelweg"

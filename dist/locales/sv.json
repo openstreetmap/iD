@@ -970,9 +970,6 @@
             "building/apartments": {
                 "name": "Lägenheter"
             },
-            "building/entrance": {
-                "name": "Entré"
-            },
             "building/garage": {
                 "name": "Garage"
             },
@@ -988,9 +985,6 @@
             },
             "emergency/phone": {
                 "name": "Nödtelefon"
-            },
-            "entrance": {
-                "name": "Entré"
             },
             "highway": {
                 "name": "Väg",

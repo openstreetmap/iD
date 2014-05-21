@@ -610,6 +610,33 @@
             "fuel": {
                 "label": "Carburant"
             },
+            "fuel/biodiesel": {
+                "label": "Ven Biodièsel"
+            },
+            "fuel/diesel": {
+                "label": "Ven dièsel"
+            },
+            "fuel/e10": {
+                "label": "Ven E10"
+            },
+            "fuel/e85": {
+                "label": "Ven E85"
+            },
+            "fuel/lpg": {
+                "label": "Ven propà"
+            },
+            "fuel/octane_100": {
+                "label": "Ven benzina de competició"
+            },
+            "fuel/octane_91": {
+                "label": "Ven benzina regular"
+            },
+            "fuel/octane_95": {
+                "label": "Ven benzina de mig grau"
+            },
+            "fuel/octane_98": {
+                "label": "Ven benzina premium"
+            },
             "gauge": {
                 "label": "Ample"
             },
@@ -672,6 +699,9 @@
             },
             "leisure": {
                 "label": "Tipus"
+            },
+            "length": {
+                "label": "Llargada (metres)"
             },
             "levels": {
                 "label": "Nivells",
@@ -743,6 +773,9 @@
             },
             "place": {
                 "label": "Tipus"
+            },
+            "population": {
+                "label": "Població"
             },
             "power": {
                 "label": "Tipus"
@@ -833,7 +866,8 @@
                     "bridge": "Pont",
                     "tunnel": "Túnel",
                     "embankment": "Terraplè ",
-                    "cutting": "Trinxera"
+                    "cutting": "Trinxera",
+                    "ford": "Ford"
                 }
             },
             "studio_type": {
@@ -890,6 +924,9 @@
             },
             "wheelchair": {
                 "label": "Accés per a cadires de rodes"
+            },
+            "width": {
+                "label": "Amplada (metres)"
             },
             "wikipedia": {
                 "label": "Viquipèdia"
@@ -1022,6 +1059,9 @@
                 "name": "Rentat de cotxes",
                 "terms": "Servei de neteja de cotxes, Tren de rentat de cotxes, Estació d'autorentat de cotxes"
             },
+            "amenity/charging_station": {
+                "name": "Estació de càrrega"
+            },
             "amenity/childcare": {
                 "name": "Servei de guarderia",
                 "terms": "Servei de guarderia, Servei de cangur, Servei de cura de la infància"
@@ -1039,6 +1079,9 @@
             "amenity/college": {
                 "name": "Campus universitari",
                 "terms": "Col·legi, Campus universitàri, universitat, facultat"
+            },
+            "amenity/compressed_air": {
+                "name": "Aire comprimit"
             },
             "amenity/courthouse": {
                 "name": "Jutjat",
@@ -1079,7 +1122,8 @@
                 "terms": "Cementiri, Camp de tombes, necròpoli, ciutat dels difunts"
             },
             "amenity/hospital": {
-                "name": "Terrenys hospitalaris"
+                "name": "Terrenys hospitalaris",
+                "terms": "Hospital, centre hospitalari, policlínica, clínica. "
             },
             "amenity/kindergarten": {
                 "name": "Terrenys de Jardí d'infància"
@@ -1098,6 +1142,9 @@
             "amenity/parking": {
                 "name": "Aparcament",
                 "terms": "Aparcament, Pàrquing, Garatge"
+            },
+            "amenity/parking_entrance": {
+                "name": "Entrada de Garatge/Sortida"
             },
             "amenity/pharmacy": {
                 "name": "Farmàcia",
@@ -1150,7 +1197,8 @@
                 "terms": "Restaurant, Lloc per menjar, Bistro, Wok, Trattoria, Pizzeria"
             },
             "amenity/school": {
-                "name": "Terrenys d'escola"
+                "name": "Terrenys d'escola",
+                "terms": "Escola, CEIP, IES, Col·legi, Institut, Centre educatiu, Guarderia"
             },
             "amenity/shelter": {
                 "name": "Refugi"
@@ -1322,8 +1370,7 @@
                 "name": "Edifici d'habitacions"
             },
             "building/entrance": {
-                "name": "Entrada",
-                "terms": "Entrada, Porta, Portes, Portalada, Accés"
+                "name": "Entrada/Sortida"
             },
             "building/garage": {
                 "name": "garatge "
@@ -1536,14 +1583,17 @@
                 "terms": "Telèfon d'emergències, SOS, S.O.S"
             },
             "entrance": {
-                "name": "Entrada",
-                "terms": "Entrada, Porta, Portes, Portalada, Accés"
+                "name": "Entrada/Sortida"
             },
             "footway/crossing": {
-                "name": "Cruïlla"
+                "name": "Pas de vianants",
+                "terms": "Travessera, Cruïlla, Pas de Vianants, Pas Zebra, Pas de peatons, pas de transeünts"
             },
             "footway/sidewalk": {
                 "name": "Vorera"
+            },
+            "ford": {
+                "name": "Ford"
             },
             "golf/bunker": {
                 "name": "Bunker"
@@ -1573,20 +1623,23 @@
                 "name": "Via"
             },
             "highway/bridleway": {
-                "name": "Camí de ferradura"
+                "name": "Camí de ferradura",
+                "terms": "Camí de ferradura, cavall, camí eqüestre, via eqüestre, ferradura, via de ferradura"
             },
             "highway/bus_stop": {
                 "name": "Parada d'autobús",
                 "terms": "Parada de bus, Parada"
             },
             "highway/crossing": {
-                "name": "Cruïlla"
+                "name": "Pas de vianants",
+                "terms": "Travessera, Cruïlla, Pas de Vianants, Pas Zebra, Pas de peatons, pas de transeünts"
             },
             "highway/cycleway": {
                 "name": "Carril bici"
             },
             "highway/footway": {
-                "name": "Camí per a vianants"
+                "name": "Camí per a vianants",
+                "terms": "Camí per a vianants, carrer peatonal, camí per a peatons, a peu, camí per caminar, vianant, vianants, peató, peatons, transeünt, transeünts, peatonal"
             },
             "highway/living_street": {
                 "name": "Carrer residencial"
@@ -1602,7 +1655,8 @@
                 "name": "sortida d'autopista"
             },
             "highway/motorway_link": {
-                "name": "Enllaç d'autopista"
+                "name": "Enllaç d'autopista",
+                "terms": "Rampa, entrada, incorporació, baixada, addició, autopista, autovia, eix"
             },
             "highway/path": {
                 "name": "Camí"
@@ -1656,7 +1710,8 @@
                 "name": "Àrea de servei"
             },
             "highway/steps": {
-                "name": "Escales"
+                "name": "Escales",
+                "terms": "esgraons, graons, escalinata, escala, escalons"
             },
             "highway/stop": {
                 "name": "Senyal de stop"
@@ -1812,7 +1867,8 @@
                 "terms": "Port esportiu, Marina"
             },
             "leisure/park": {
-                "name": "Parc"
+                "name": "Parc",
+                "terms": "parc, àrea verda, àrea enjardinada, jardí, verger, gespa, arbres, flors"
             },
             "leisure/picnic_table": {
                 "name": "Taula de picnic"
@@ -1936,7 +1992,8 @@
                 "name": "Penya-segat"
             },
             "natural/coastline": {
-                "name": "Línia costanera"
+                "name": "Línia costanera",
+                "terms": "Línia costera, costa, litoral, línia de platja, costa, platja, mar"
             },
             "natural/fell": {
                 "name": "Prat d'alta muntanya"
@@ -1951,7 +2008,8 @@
                 "name": "Landa"
             },
             "natural/peak": {
-                "name": "Pic"
+                "name": "Pic",
+                "terms": "Pic, cim, cimadal, pollegó, agulla."
             },
             "natural/scree": {
                 "name": "Tartera"
@@ -1975,7 +2033,8 @@
                 "terms": "Llac, Estany"
             },
             "natural/water/pond": {
-                "name": "Estany"
+                "name": "Estany",
+                "terms": "estany, bassa, bassal, llac, reserva"
             },
             "natural/water/reservoir": {
                 "name": "Embassament"
@@ -2142,7 +2201,8 @@
                 "name": "Parada de Ferrocarril"
             },
             "railway/level_crossing": {
-                "name": "Pas a nivell"
+                "name": "Pas a nivell",
+                "terms": "Pas a nivell, Pas de ferrocarril, guardaagulles, pas de ferrocarril, barreres, semàfors, tren, cotxe"
             },
             "railway/monorail": {
                 "name": "Monocarril",
@@ -2169,7 +2229,8 @@
                 "terms": "Boca de metro, Entrada de metro"
             },
             "railway/tram": {
-                "name": "Tramvia "
+                "name": "Tramvia ",
+                "terms": "Tranvia, Tram"
             },
             "relation": {
                 "name": "Relació",
@@ -2401,7 +2462,8 @@
                 "name": "Xalet"
             },
             "tourism/guest_house": {
-                "name": "Habitacions de lloguer"
+                "name": "Habitacions de lloguer",
+                "terms": "Casa de convidats, convidats, hostes, invitats"
             },
             "tourism/hostel": {
                 "name": "Alberg",
@@ -2521,7 +2583,8 @@
                 "name": "Banc fluvial"
             },
             "waterway/stream": {
-                "name": "Rierol"
+                "name": "Rierol",
+                "terms": "Sèquia, rierol, fil d'aigua, rajolí, riuet, riachuelu, ramal, reguer, segla, canal, rec, regueró, sequiola, sequió, cavim."
             },
             "waterway/weir": {
                 "name": "Assut"

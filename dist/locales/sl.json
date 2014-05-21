@@ -1002,10 +1002,6 @@
                 "name": "Poslovna stavba",
                 "terms": "Pisarne"
             },
-            "building/entrance": {
-                "name": "Vhod",
-                "terms": "Vrata, Izhod, Portal"
-            },
             "building/garage": {
                 "name": "Garaža",
                 "terms": "Garažna hiša"
@@ -1144,9 +1140,6 @@
             "emergency/fire_hydrant": {
                 "name": "Požarni hidrant",
                 "terms": "hidrant, vodni hidrant"
-            },
-            "entrance": {
-                "name": "Vhod"
             },
             "footway/crossing": {
                 "name": "Prehod za pešce",

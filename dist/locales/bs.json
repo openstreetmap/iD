@@ -1183,10 +1183,6 @@
                 "name": "Poslovna zgrada",
                 "terms": "poslovna zgrada,zgrada firme"
             },
-            "building/entrance": {
-                "name": "Ulaz",
-                "terms": "ulaz,vrata"
-            },
             "building/garage": {
                 "name": "Garaža",
                 "terms": "garaža"
@@ -1307,10 +1303,6 @@
             "emergency/phone": {
                 "name": "Telefon za hitne slučajeve",
                 "terms": "telefon za hitne slučajeve,hitna telefonska linija"
-            },
-            "entrance": {
-                "name": "Ulaz",
-                "terms": "ulaz,vrata"
             },
             "footway/crossing": {
                 "name": "Prelaz",

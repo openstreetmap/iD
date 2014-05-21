@@ -1207,9 +1207,6 @@
             "building/commercial": {
                 "name": "商用樓宇"
             },
-            "building/entrance": {
-                "name": "入口"
-            },
             "building/garage": {
                 "name": "車庫"
             },
@@ -1413,9 +1410,6 @@
             },
             "emergency/phone": {
                 "name": "緊急電話"
-            },
-            "entrance": {
-                "name": "入口"
             },
             "footway/crossing": {
                 "name": "行人過路線"
