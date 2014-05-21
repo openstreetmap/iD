@@ -1,3 +1,19 @@
+## 1.3.10
+
+* `oneway=no` overrides implicit oneways on junction=roundabout, etc. (#2220)
+* Add presets for fords, parking_entrance, charging_station, compressed_air, churchyard, shop=wine
+* Improve access placeholders (#2221)
+* Trim tag keys, and prevent duplicate tag keys (#2043)
+* Fix inline tag help for fields that handle multiple tags
+* Add 'width', 'length', 'lit' for appropriate presets (cycleways, sidewalks, sports pitch, etc)
+* Render embarkment/cutting with dashed casing
+* Rendering fixes for buildings, tunnels
+* Add population field for various place presets
+* Improvements to circularize action (#2194)
+* Building field is yes/no (fixes #2111)
+* Area fill colors in preset icons match map fill colors
+* Add fill style for landuse=military
+
 ## 1.3.9
 
 * Prevent closed areas from invalid disconnection (#2178)
