@@ -257,26 +257,40 @@ describe("iD.actions.RestrictTurn", function() {
         var graph = iD.Graph([
                 iD.Node({id: 'u', loc: [-1,  0]}),
                 iD.Node({id: '*', loc: [ 0,  0]}),
-                iD.Node({id: 'w', loc: [ 0,  1]}),
+                iD.Node({id: 'w', loc: [ 1,  0]}),
                 iD.Node({id: 'x', loc: [ 0, -1]}),
                 iD.Way({id: '=', nodes: ['u', '*']}),
                 iD.Way({id: '-', nodes: ['*', 'x']}),
                 iD.Way({id: '~', nodes: ['*', 'w']})
             ]);
 
-        var r = iD.actions.RestrictTurn({
+        var r1 = iD.actions.RestrictTurn({
             from: {node: 'u', way: '='},
             via:  {node: '*'},
             to:   {node: 'x', way: '-'}
         }, projection, 'r')(graph);
-        expect(r.entity('r').tags.restriction).to.equal('no_right_turn');
+        expect(r1.entity('r').tags.restriction).to.equal('no_right_turn');
 
-        var l = iD.actions.RestrictTurn({
+        var r2 = iD.actions.RestrictTurn({
+            from: {node: 'x', way: '-'},
+            via:  {node: '*'},
+            to:   {node: 'w', way: '~'}
+        }, projection, 'r')(graph);
+        expect(r2.entity('r').tags.restriction).to.equal('no_right_turn');
+
+        var l1 = iD.actions.RestrictTurn({
             from: {node: 'x', way: '-'},
             via:  {node: '*'},
             to:   {node: 'u', way: '='}
         }, projection, 'r')(graph);
-        expect(l.entity('r').tags.restriction).to.equal('no_left_turn');
+        expect(l1.entity('r').tags.restriction).to.equal('no_left_turn');
+
+        var l2 = iD.actions.RestrictTurn({
+            from: {node: 'w', way: '~'},
+            via:  {node: '*'},
+            to:   {node: 'x', way: '-'}
+        }, projection, 'r')(graph);
+        expect(l2.entity('r').tags.restriction).to.equal('no_left_turn');
 
         var s = iD.actions.RestrictTurn({
             from: {node: 'u', way: '='},

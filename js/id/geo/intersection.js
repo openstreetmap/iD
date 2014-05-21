@@ -124,11 +124,16 @@ iD.geo.inferRestriction = function(from, via, to, projection) {
 
     angle = angle * 180 / Math.PI;
 
-    if (angle > 158 || angle < -158)
-        return 'no_straight_on';
-    if (angle >  23)
+    while (angle < 0)
+        angle += 360;
+
+    if (angle < 23)
+        return 'no_u_turn';
+    if (angle < 158)
         return 'no_right_turn';
-    if (angle < -22)
+    if (angle < 202)
+        return 'no_straight_on';
+    if (angle < 336)
         return 'no_left_turn';
 
     return 'no_u_turn';
