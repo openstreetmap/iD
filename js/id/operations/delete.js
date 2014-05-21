@@ -36,15 +36,15 @@ iD.operations.Delete = function(selectedIDs, context) {
             }
         }
 
-        context.perform(
-            action,
-            annotation);
-
         if (nextSelectedID && context.hasEntity(nextSelectedID)) {
             context.enter(iD.modes.Select(context, [nextSelectedID]));
         } else {
             context.enter(iD.modes.Browse(context));
         }
+
+        context.perform(
+            action,
+            annotation);
     };
 
     operation.available = function() {

@@ -40,8 +40,8 @@
     ],
     "relation": [
         "category-route",
+        "category-restriction",
         "type/boundary",
-        "type/restriction",
         "type/multipolygon",
         "relation"
     ]

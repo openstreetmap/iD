@@ -12,6 +12,10 @@ iD.ui = function(context) {
             map.centerZoom([-77.02271, 38.90085], 20);
         }
 
+        container.append('svg')
+            .attr('id', 'defs')
+            .call(iD.svg.Defs(context));
+
         container.append('div')
             .attr('id', 'sidebar')
             .attr('class', 'col4')

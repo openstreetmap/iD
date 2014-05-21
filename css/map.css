@@ -945,6 +945,19 @@ text.point {
   font-size: 10px;
 }
 
+/* Turns */
+
+g.turn rect,
+g.turn circle {
+    fill: none;
+    pointer-events: all;
+}
+
+.form-field-restrictions .vertex {
+    pointer-events: none;
+    cursor: auto !important;
+}
+
 /* Cursors */
 
 #map {
@@ -1090,6 +1103,16 @@ text.point {
         url(img/cursor-draw.png) 1x,
         url(img/cursor-draw2x.png) 2x
         ) 9 9, crosshair;
+}
+
+.turn rect,
+.turn circle {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
+    cursor: -webkit-image-set(
+        url(img/cursor-pointer.png) 1x,
+        url(img/cursor-pointer2x.png) 2x
+    ) 6 1, pointer;
 }
 
 .lasso #map {

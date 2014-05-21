@@ -1,0 +1,9 @@
+{
+    "type": "restrictions",
+    "geometry": "vertex",
+    "icon": "restrictions",
+    "reference": {
+        "rtype": "restriction"
+    },
+    "label": "Turn Restrictions"
+}
