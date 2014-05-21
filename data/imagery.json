@@ -6680,6 +6680,42 @@
         "terms_text": "National Library of Scotland Historic Maps"
     },
     {
+        "name": "Ireland British War Office 1:25k GSGS 3906",
+        "type": "tms",
+        "template": "http://mapwarper.net/layers/tile/101/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            18
+        ],
+        "polygon": [
+            [
+                [
+                    -10.71,
+                    51.32
+                ],
+                [
+                    -10.71,
+                    55.46
+                ],
+                [
+                    -5.37,
+                    55.46
+                ],
+                [
+                    -5.37,
+                    51.32
+                ],
+                [
+                    -10.71,
+                    51.32
+                ]
+            ]
+        ],
+        "terms_url": "http://wiki.openstreetmap.org/wiki/WikiProject_Ireland#Trinity_College_Dublin",
+        "terms_text": "Glucksman Map Library, Trinity College Dublin",
+        "id": "GSGS3906"
+    },
+    {
         "name": "Ireland British War Office One-Inch 1941-43 GSGS 4136",
         "type": "tms",
         "template": "http://geo.nls.uk/maps/ireland/gsgs4136/{zoom}/{x}/{-y}.png",
@@ -6908,7 +6944,8 @@
             ]
         ],
         "terms_url": "http://geo.nls.uk/maps/",
-        "terms_text": "National Library of Scotland Historic Maps"
+        "terms_text": "National Library of Scotland Historic Maps",
+        "id": "GSGS4136"
     },
     {
         "name": "Ireland EEA CORINE 2006",
