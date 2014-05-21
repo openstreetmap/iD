@@ -1,12 +1,12 @@
 iD.svg.Turns = function(projection) {
     return function(surface, graph, turns) {
         function icon(turn) {
+            var u = turn.u ? '-u' : '';
             if (!turn.restriction)
-                return '#icon-restriction-yes';
+                return '#icon-restriction-yes' + u;
             var restriction = graph.entity(turn.restriction).tags.restriction;
             return '#icon-restriction-' +
-                (!turn.indirect_restriction && /^only_/.test(restriction) ? 'only' : 'no') +
-                (turn.u ? '-u' : '');
+                (!turn.indirect_restriction && /^only_/.test(restriction) ? 'only' : 'no') + u;
         }
 
         var groups = surface.select('.layer-hit').selectAll('g.turn')
