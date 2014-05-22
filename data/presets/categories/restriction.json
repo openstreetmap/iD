@@ -9,7 +9,7 @@
         "type/restriction/no_u_turn",
         "type/restriction/only_left_turn",
         "type/restriction/only_right_turn",
-        "type/restriction/only_straight_ahead",
+        "type/restriction/only_straight_on",
         "type/restriction"
     ]
 }

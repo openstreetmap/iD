@@ -1819,7 +1819,7 @@ en:
       type/restriction/only_right_turn: 
         name: Right Turn Only
         terms: "<translate with synonyms or related terms for 'Right Turn Only', separated by commas>"
-      type/restriction/only_straight_ahead: 
+      type/restriction/only_straight_on: 
         name: No Turns
         terms: "<translate with synonyms or related terms for 'No Turns', separated by commas>"
       type/route: 

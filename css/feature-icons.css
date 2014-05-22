@@ -113,6 +113,10 @@
 .feature-laundry{background-position:-108px -504px;}
 .feature-car{background-position:-162px -504px;}
 .feature-suitcase{background-position:-216px -504px;}
+.feature-hairdresser{background-position:-0px -528px;}
+.feature-chemist{background-position:-54px -528px;}
+.feature-mobilephone{background-position:-108px -528px;}
+.feature-scooter{background-position:-162px -528px;}
 .preset-icon-line.feature-highway-motorway{background-position:-20px -25px;}
 .preset-icon-line.feature-highway-trunk{background-position:-80px -25px;}
 .preset-icon-line.feature-highway-primary{background-position:-140px -25px;}
@@ -172,6 +176,6 @@
 .preset-icon-relation.feature-restriction-no-u-turn{background-position:-1040px -25px;}
 .preset-icon-relation.feature-restriction-no-left-turn{background-position:-1100px -25px;}
 .preset-icon-relation.feature-restriction-no-right-turn{background-position:-1160px -25px;}
-.preset-icon-relation.feature-restriction-only-straight-ahead{background-position:-1220px -25px;}
+.preset-icon-relation.feature-restriction-only-straight-on{background-position:-1220px -25px;}
 .preset-icon-relation.feature-restriction-only-left-turn{background-position:-1280px -25px;}
 .preset-icon-relation.feature-restriction-only-right-turn{background-position:-1340px -25px;}

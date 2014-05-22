@@ -8075,19 +8075,19 @@
         ],
         "icon": "restriction-only-right-turn"
     },
-    "type/restriction/only_straight_ahead": {
+    "type/restriction/only_straight_on": {
         "name": "No Turns",
         "geometry": [
             "relation"
         ],
         "tags": {
             "type": "restriction",
-            "restriction": "only_straight_ahead"
+            "restriction": "only_straight_on"
         },
         "fields": [
             "except"
         ],
-        "icon": "restriction-only-straight-ahead"
+        "icon": "restriction-only-straight-on"
     },
     "type/route": {
         "geometry": [

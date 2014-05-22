@@ -2879,7 +2879,7 @@
                 "name": "Right Turn Only",
                 "terms": ""
             },
-            "type/restriction/only_straight_ahead": {
+            "type/restriction/only_straight_on": {
                 "name": "No Turns",
                 "terms": ""
             },

@@ -19,7 +19,7 @@
     "restriction-no-u-turn": [1040, 25],
     "restriction-no-left-turn": [1100, 25],
     "restriction-no-right-turn": [1160, 25],
-    "restriction-only-straight-ahead": [1220, 25],
+    "restriction-only-straight-on": [1220, 25],
     "restriction-only-left-turn": [1280, 25],
     "restriction-only-right-turn": [1340, 25]
 }

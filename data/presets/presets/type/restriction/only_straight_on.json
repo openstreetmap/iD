@@ -5,10 +5,10 @@
     ],
     "tags": {
         "type": "restriction",
-        "restriction": "only_straight_ahead"
+        "restriction": "only_straight_on"
     },
     "fields": [
         "except"
     ],
-    "icon": "restriction-only-straight-ahead"
+    "icon": "restriction-only-straight-on"
 }
