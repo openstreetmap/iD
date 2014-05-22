@@ -1,13 +1,24 @@
 iD.ui.preset.check =
 iD.ui.preset.defaultcheck = function(field) {
     var event = d3.dispatch('change'),
-        values = field.type === 'check' ?
-            [undefined, 'yes', 'no'] :
-            [undefined, 'yes'],
-        value,
-        box,
-        text,
-        label;
+        options = field.strings && field.strings.options,
+        values = [],
+        texts = [],
+        value, box, text, label;
+
+    if (options) {
+        for (var k in options) {
+            values.push(k === 'undefined' ? undefined : k);
+            texts.push(field.t('check.' + k, { 'default': options[k] }));
+        }
+    } else {
+        values = [undefined, 'yes'];
+        texts = [t('inspector.unknown'), t('inspector.check.yes')];
+        if (field.type === 'check') {
+            values.push('no');
+            texts.push(t('inspector.check.no'));
+        }
+    }
 
     var check = function(selection) {
         selection.classed('checkselect', 'true');
@@ -24,7 +35,7 @@ iD.ui.preset.defaultcheck = function(field) {
             .attr('id', 'preset-input-' + field.id);
 
         enter.append('span')
-            .text(t('inspector.unknown'))
+            .text(texts[0])
             .attr('class', 'value');
 
         box = label.select('input')
@@ -42,8 +53,7 @@ iD.ui.preset.defaultcheck = function(field) {
         value = tags[field.key];
         box.property('indeterminate', field.type === 'check' && !value);
         box.property('checked', value === 'yes');
-        text.text(value ? t('inspector.check.' + value, {default: value}) :
-            field.type === 'check' ? t('inspector.unknown') : t('inspector.check.no'));
+        text.text(texts[values.indexOf(value)]);
         label.classed('set', !!value);
     };
 
