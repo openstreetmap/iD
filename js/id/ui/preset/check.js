@@ -1,5 +1,5 @@
 iD.ui.preset.check =
-iD.ui.preset.defaultcheck = function(field) {
+iD.ui.preset.defaultcheck = function(field, context) {
     var event = d3.dispatch('change'),
         options = field.strings && field.strings.options,
         values = [],
@@ -17,6 +17,15 @@ iD.ui.preset.defaultcheck = function(field) {
         if (field.type === 'check') {
             values.push('no');
             texts.push(t('inspector.check.no'));
+        }
+    }
+
+    // hack: pretend oneway field is a oneway_yes field if `junction=roundabout` is set.
+    if (field.id === 'oneway') {
+        var way = context.entity(context.selectedIDs()[0]);
+        if (way.tags.junction === 'roundabout') {
+            texts.shift();
+            texts.unshift(t('presets.fields.oneway_yes.check.undefined', { 'default': 'Assumed to be Yes' }));
         }
     }
 
