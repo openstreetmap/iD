@@ -22,8 +22,9 @@ iD.ui.preset.defaultcheck = function(field, context) {
 
     // hack: pretend oneway field is a oneway_yes field if `junction=roundabout` is set.
     if (field.id === 'oneway') {
-        var way = context.entity(context.selectedIDs()[0]);
-        if (way.tags.junction === 'roundabout') {
+        var ids = context.selectedIDs(),
+            way = ids.length && context.entity(ids[0]);
+        if (way && way.tags.junction === 'roundabout') {
             texts.shift();
             texts.unshift(t('presets.fields.oneway_yes.check.undefined', { 'default': 'Assumed to be Yes' }));
         }
