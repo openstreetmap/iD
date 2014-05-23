@@ -1,5 +1,5 @@
 iD.ui.preset.check =
-iD.ui.preset.defaultcheck = function(field, context) {
+iD.ui.preset.defaultcheck = function(field) {
     var event = d3.dispatch('change'),
         options = field.strings && field.strings.options,
         values = [],
