@@ -48,11 +48,11 @@ _.extend(iD.Way.prototype, {
         if (['no', '0'].indexOf(this.tags.oneway) !== -1) { return false; }
 
         // implied oneway tag..
-        return this.tags.waterway === 'river' ||
-            this.tags.waterway === 'stream' ||
-            this.tags.highway === 'motorway' ||
-            this.tags.highway === 'motorway_link' ||
-            this.tags.junction === 'roundabout';
+        for (var key in this.tags) {
+            if (key in iD.oneWayTags && (this.tags[key] in iD.oneWayTags[key]))
+                return true;
+        }
+        return false;
     },
 
     isClosed: function() {

@@ -21,10 +21,16 @@ iD.ui.preset.defaultcheck = function(field) {
     }
 
     var check = function(selection) {
-        // hack: pretend oneway field is a oneway_yes field if `junction=roundabout` is set. #2220, #1841
-        if (field.id === 'oneway' && entity.tags.junction === 'roundabout') {
-            texts.shift();
-            texts.unshift(t('presets.fields.oneway_yes.check.undefined', { 'default': 'Assumed to be Yes' }));
+        // hack: pretend oneway field is a oneway_yes field
+        // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
+        if (field.id === 'oneway') {
+            for (var key in entity.tags) {
+                if (key in iD.oneWayTags && (entity.tags[key] in iD.oneWayTags[key])) {
+                    texts.shift();
+                    texts.unshift(t('presets.fields.oneway_yes.check.undefined', { 'default': 'Assumed to be Yes' }));
+                    break;
+                }
+            }
         }
 
         selection.classed('checkselect', 'true');
