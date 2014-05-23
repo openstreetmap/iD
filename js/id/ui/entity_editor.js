@@ -133,11 +133,13 @@ iD.ui.EntityEditor = function(context) {
 
     function clean(o) {
         var out = {}, k, v;
+        /*jshint -W083 */
         for (k in o) {
             if (k && (v = o[k]) !== undefined) {
-                out[k] = v.trim();
+                out[k] = v.split(';').map(function(s) { return s.trim(); }).join(';');
             }
         }
+        /*jshint +W083 */
         return out;
     }
 

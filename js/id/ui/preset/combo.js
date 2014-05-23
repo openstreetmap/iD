@@ -44,7 +44,12 @@ iD.ui.preset.typeCombo = function(field) {
     }
 
     function change() {
-        var value = input.value().replace(/\s+/g, '_');
+        var value = input.value()
+            .split(';')
+            .map(function(s) { return s.trim(); })
+            .join(';')
+            .replace(/\s+/g, '_');
+
         if (field.type === 'typeCombo' && !value) value = 'yes';
 
         var t = {};
