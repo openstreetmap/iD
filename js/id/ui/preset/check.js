@@ -4,7 +4,7 @@ iD.ui.preset.defaultcheck = function(field, context) {
         options = field.strings && field.strings.options,
         values = [],
         texts = [],
-        value, box, text, label;
+        entity, value, box, text, label;
 
     if (options) {
         for (var k in options) {
@@ -20,17 +20,13 @@ iD.ui.preset.defaultcheck = function(field, context) {
         }
     }
 
-    // hack: pretend oneway field is a oneway_yes field if `junction=roundabout` is set.
-    if (field.id === 'oneway') {
-        var ids = context.selectedIDs(),
-            way = ids.length && context.entity(ids[0]);
-        if (way && way.tags.junction === 'roundabout') {
+    var check = function(selection) {
+        // hack: pretend oneway field is a oneway_yes field if `junction=roundabout` is set. #2220, #1841
+        if (field.id === 'oneway' && entity.tags.junction === 'roundabout') {
             texts.shift();
             texts.unshift(t('presets.fields.oneway_yes.check.undefined', { 'default': 'Assumed to be Yes' }));
         }
-    }
 
-    var check = function(selection) {
         selection.classed('checkselect', 'true');
 
         label = selection.selectAll('.preset-input-wrap')
@@ -57,6 +53,12 @@ iD.ui.preset.defaultcheck = function(field, context) {
             });
 
         text = label.select('span.value');
+    };
+
+    check.entity = function(_) {
+        if (!arguments.length) return entity;
+        entity = _;
+        return check;
     };
 
     check.tags = function(tags) {
