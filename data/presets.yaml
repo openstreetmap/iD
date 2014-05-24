@@ -966,6 +966,9 @@ en:
       footway/crossing: 
         name: Crossing
         terms: "<translate with synonyms or related terms for 'Crossing', separated by commas>"
+      footway/crosswalk: 
+        name: Crosswalk
+        terms: "<translate with synonyms or related terms for 'Crosswalk', separated by commas>"
       footway/sidewalk: 
         name: Sidewalk
         terms: "<translate with synonyms or related terms for 'Sidewalk', separated by commas>"
@@ -1008,6 +1011,9 @@ en:
       highway/crossing: 
         name: Crossing
         terms: "<translate with synonyms or related terms for 'Crossing', separated by commas>"
+      highway/crosswalk: 
+        name: Crosswalk
+        terms: "<translate with synonyms or related terms for 'Crosswalk', separated by commas>"
       highway/cycleway: 
         name: Cycle Path
         terms: "<translate with synonyms or related terms for 'Cycle Path', separated by commas>"
@@ -1024,8 +1030,8 @@ en:
         name: Motorway
         terms: "<translate with synonyms or related terms for 'Motorway', separated by commas>"
       highway/motorway_junction: 
-        name: Motorway Junction
-        terms: "<translate with synonyms or related terms for 'Motorway Junction', separated by commas>"
+        name: Motorway Junction / Exit
+        terms: "<translate with synonyms or related terms for 'Motorway Junction / Exit', separated by commas>"
       highway/motorway_link: 
         name: Motorway Link
         terms: "<translate with synonyms or related terms for 'Motorway Link', separated by commas>"

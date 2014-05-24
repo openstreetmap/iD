@@ -11,8 +11,12 @@
     ],
     "tags": {
         "highway": "footway",
-        "footway": "crossing"
+        "footway": "crossing",
+        "crossing": "zebra"
     },
-    "terms": [],
-    "name": "Crossing"
+    "terms": [
+        "crosswalk",
+        "zebra crossing"
+    ],
+    "name": "Crosswalk"
 }

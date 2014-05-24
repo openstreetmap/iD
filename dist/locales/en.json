@@ -1739,6 +1739,10 @@
             },
             "footway/crossing": {
                 "name": "Crossing",
+                "terms": ""
+            },
+            "footway/crosswalk": {
+                "name": "Crosswalk",
                 "terms": "crosswalk,zebra crossing"
             },
             "footway/sidewalk": {
@@ -1795,6 +1799,10 @@
             },
             "highway/crossing": {
                 "name": "Crossing",
+                "terms": ""
+            },
+            "highway/crosswalk": {
+                "name": "Crosswalk",
                 "terms": "crosswalk,zebra crossing"
             },
             "highway/cycleway": {
@@ -1818,7 +1826,7 @@
                 "terms": ""
             },
             "highway/motorway_junction": {
-                "name": "Motorway Junction",
+                "name": "Motorway Junction / Exit",
                 "terms": ""
             },
             "highway/motorway_link": {

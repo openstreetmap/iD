@@ -30,7 +30,7 @@
         "point"
     ],
     "vertex": [
-        "highway/crossing",
+        "highway/crosswalk",
         "railway/level_crossing",
         "highway/traffic_signals",
         "highway/turning_circle",

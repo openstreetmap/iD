@@ -8,8 +8,12 @@
         "vertex"
     ],
     "tags": {
-        "highway": "crossing"
+        "highway": "crossing",
+        "crossing": "zebra"
     },
-    "terms": [],
-    "name": "Crossing"
+    "terms": [
+        "crosswalk",
+        "zebra crossing"
+    ],
+    "name": "Crosswalk"
 }

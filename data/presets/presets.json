@@ -3527,7 +3527,9 @@
         "fields": [
             "crossing",
             "access",
-            "surface"
+            "surface",
+            "sloped_curb",
+            "tactile_paving"
         ],
         "geometry": [
             "line"
@@ -3536,11 +3538,30 @@
             "highway": "footway",
             "footway": "crossing"
         },
+        "terms": [],
+        "name": "Crossing"
+    },
+    "footway/crosswalk": {
+        "fields": [
+            "crossing",
+            "access",
+            "surface",
+            "sloped_curb",
+            "tactile_paving"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "footway",
+            "footway": "crossing",
+            "crossing": "zebra"
+        },
         "terms": [
             "crosswalk",
             "zebra crossing"
         ],
-        "name": "Crossing"
+        "name": "Crosswalk"
     },
     "footway/sidewalk": {
         "fields": [
@@ -3741,11 +3762,27 @@
         "tags": {
             "highway": "crossing"
         },
+        "terms": [],
+        "name": "Crossing"
+    },
+    "highway/crosswalk": {
+        "fields": [
+            "crossing",
+            "sloped_curb",
+            "tactile_paving"
+        ],
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "highway": "crossing",
+            "crossing": "zebra"
+        },
         "terms": [
             "crosswalk",
             "zebra crossing"
         ],
-        "name": "Crossing"
+        "name": "Crosswalk"
     },
     "highway/cycleway": {
         "icon": "highway-cycleway",
@@ -3869,7 +3906,7 @@
         "fields": [
             "ref"
         ],
-        "name": "Motorway Junction"
+        "name": "Motorway Junction / Exit"
     },
     "highway/motorway_link": {
         "icon": "highway-motorway-link",
