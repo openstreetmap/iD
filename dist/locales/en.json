@@ -1150,7 +1150,7 @@
                 "terms": "doctor,doctor's office"
             },
             "amenity/dojo": {
-                "name": "Martial Arts Training Hall",
+                "name": "Dojo / Martial Arts Academy",
                 "terms": "martial arts,dojo,dojang"
             },
             "amenity/drinking_water": {
@@ -2130,7 +2130,7 @@
                 "terms": ""
             },
             "leisure/sports_center": {
-                "name": "Sports Center",
+                "name": "Sports Center / Gym",
                 "terms": "gym"
             },
             "leisure/stadium": {

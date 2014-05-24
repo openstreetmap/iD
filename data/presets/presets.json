@@ -764,7 +764,7 @@
         ]
     },
     "amenity/dojo": {
-        "name": "Martial Arts Training Hall",
+        "icon": "pitch",
         "geometry": [
             "point",
             "area"
@@ -777,11 +777,11 @@
         "tags": {
             "amenity": "dojo"
         },
-        "icon": "pitch",
         "fields": [
             "address",
             "sport"
-        ]
+        ],
+        "name": "Dojo / Martial Arts Academy"
     },
     "amenity/drinking_water": {
         "icon": "water",
@@ -5065,6 +5065,7 @@
         "name": "Slipway"
     },
     "leisure/sports_center": {
+        "icon": "pitch",
         "geometry": [
             "point",
             "area"
@@ -5075,10 +5076,13 @@
         "terms": [
             "gym"
         ],
-        "icon": "sports",
-        "name": "Sports Center"
+        "fields": [
+            "sport"
+        ],
+        "name": "Sports Center / Gym"
     },
     "leisure/stadium": {
+        "icon": "pitch",
         "geometry": [
             "point",
             "area"

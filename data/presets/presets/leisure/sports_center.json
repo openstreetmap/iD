@@ -1,4 +1,5 @@
 {
+    "icon": "pitch",
     "geometry": [
         "point",
         "area"
@@ -9,6 +10,8 @@
     "terms": [
         "gym"
     ],
-    "icon": "sports",
-    "name": "Sports Center"
+    "fields": [
+        "sport"
+    ],
+    "name": "Sports Center / Gym"
 }
