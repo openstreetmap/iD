@@ -32,7 +32,7 @@ iD.ui.preset.typeCombo = function(field) {
         function options(opts) {
             combobox.data(opts.map(function(d) {
                 var o = {};
-                o.title = o.value = d.replace('_', ' ');
+                o.title = o.value = d.replace(/_+/g, ' ');
                 return o;
             }));
 
@@ -44,7 +44,12 @@ iD.ui.preset.typeCombo = function(field) {
     }
 
     function change() {
-        var value = input.value().replace(' ', '_');
+        var value = input.value()
+            .split(';')
+            .map(function(s) { return s.trim(); })
+            .join(';')
+            .replace(/\s+/g, '_');
+
         if (field.type === 'typeCombo' && !value) value = 'yes';
 
         var t = {};

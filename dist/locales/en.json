@@ -761,10 +761,20 @@
                 "label": "Type"
             },
             "oneway": {
-                "label": "One Way"
+                "label": "One Way",
+                "options": {
+                    "undefined": "Assumed to be No",
+                    "yes": "Yes",
+                    "no": "No"
+                }
             },
             "oneway_yes": {
-                "label": "One Way"
+                "label": "One Way",
+                "options": {
+                    "undefined": "Assumed to be Yes",
+                    "yes": "Yes",
+                    "no": "No"
+                }
             },
             "opening_hours": {
                 "label": "Hours"

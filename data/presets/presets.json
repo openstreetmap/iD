@@ -3822,7 +3822,7 @@
     "highway/motorway": {
         "icon": "highway-motorway",
         "fields": [
-            "oneway",
+            "oneway_yes",
             "maxspeed",
             "structure",
             "access",

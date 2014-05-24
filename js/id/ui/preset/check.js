@@ -1,15 +1,38 @@
 iD.ui.preset.check =
 iD.ui.preset.defaultcheck = function(field) {
     var event = d3.dispatch('change'),
-        values = field.type === 'check' ?
-            [undefined, 'yes', 'no'] :
-            [undefined, 'yes'],
-        value,
-        box,
-        text,
-        label;
+        options = field.strings && field.strings.options,
+        values = [],
+        texts = [],
+        entity, value, box, text, label;
+
+    if (options) {
+        for (var k in options) {
+            values.push(k === 'undefined' ? undefined : k);
+            texts.push(field.t('check.' + k, { 'default': options[k] }));
+        }
+    } else {
+        values = [undefined, 'yes'];
+        texts = [t('inspector.unknown'), t('inspector.check.yes')];
+        if (field.type === 'check') {
+            values.push('no');
+            texts.push(t('inspector.check.no'));
+        }
+    }
 
     var check = function(selection) {
+        // hack: pretend oneway field is a oneway_yes field
+        // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
+        if (field.id === 'oneway') {
+            for (var key in entity.tags) {
+                if (key in iD.oneWayTags && (entity.tags[key] in iD.oneWayTags[key])) {
+                    texts.shift();
+                    texts.unshift(t('presets.fields.oneway_yes.check.undefined', { 'default': 'Assumed to be Yes' }));
+                    break;
+                }
+            }
+        }
+
         selection.classed('checkselect', 'true');
 
         label = selection.selectAll('.preset-input-wrap')
@@ -24,7 +47,7 @@ iD.ui.preset.defaultcheck = function(field) {
             .attr('id', 'preset-input-' + field.id);
 
         enter.append('span')
-            .text(t('inspector.unknown'))
+            .text(texts[0])
             .attr('class', 'value');
 
         box = label.select('input')
@@ -38,12 +61,17 @@ iD.ui.preset.defaultcheck = function(field) {
         text = label.select('span.value');
     };
 
+    check.entity = function(_) {
+        if (!arguments.length) return entity;
+        entity = _;
+        return check;
+    };
+
     check.tags = function(tags) {
         value = tags[field.key];
         box.property('indeterminate', field.type === 'check' && !value);
         box.property('checked', value === 'yes');
-        text.text(value ? t('inspector.check.' + value, {default: value}) :
-            field.type === 'check' ? t('inspector.unknown') : t('inspector.check.no'));
+        text.text(texts[values.indexOf(value)]);
         label.classed('set', !!value);
     };
 
