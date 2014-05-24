@@ -66,6 +66,7 @@ iD.ui.Sidebar = function(context) {
 
         sidebar.hide = function() {
             featureListWrap.classed('inspector-hidden', false);
+            inspectorWrap.classed('inspector-hidden', true);
             if (current) current.remove();
             current = null;
         };
