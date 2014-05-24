@@ -522,6 +522,9 @@ en:
       amenity/doctor: 
         name: Doctor
         terms: "<translate with synonyms or related terms for 'Doctor', separated by commas>"
+      amenity/dojo: 
+        name: Martial Arts Training Hall
+        terms: "<translate with synonyms or related terms for 'Martial Arts Training Hall', separated by commas>"
       amenity/drinking_water: 
         name: Drinking Water
         terms: "<translate with synonyms or related terms for 'Drinking Water', separated by commas>"

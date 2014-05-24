@@ -1149,6 +1149,10 @@
                 "name": "Doctor",
                 "terms": "doctor,doctor's office"
             },
+            "amenity/dojo": {
+                "name": "Martial Arts Training Hall",
+                "terms": "martial arts,dojo,dojang"
+            },
             "amenity/drinking_water": {
                 "name": "Drinking Water",
                 "terms": "water fountain,potable water"
