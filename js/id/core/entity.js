@@ -113,7 +113,7 @@ iD.Entity.prototype = {
     },
 
     isHighwayIntersection: function() {
-        return false
+        return false;
     },
 
     deprecatedTags: function() {
