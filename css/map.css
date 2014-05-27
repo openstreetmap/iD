@@ -261,15 +261,24 @@ path.fill.tag-leisure-park {
     background-color: rgba(140, 208, 95, 0.2);
 }
 
+path.fill.tag-landuse-residential,
+path.fill.tag-landuse-retail,
+path.fill.tag-landuse-commercial,
+path.fill.tag-landuse-industrial {
+    fill: none;
+    stroke-width: 60px;
+}
+
 path.stroke.tag-landuse-residential {
     stroke: rgb(224, 110, 95);
 }
 path.fill.tag-landuse-residential {
-    fill: rgba(224, 110, 95, 0.1);
+    stroke: rgba(224, 110, 95, 0.3);
 }
 .preset-icon-fill-area.tag-landuse-residential {
     border-color: rgb(224, 110, 95);
-    background-color: rgba(224, 110, 95, 0.1);
+    background: none;
+    box-shadow: inset 0 0 0 5px rgba(224, 110, 95, 0.3);
 }
 
 path.stroke.tag-landuse-retail,
@@ -278,23 +287,25 @@ path.stroke.tag-landuse-commercial {
 }
 path.fill.tag-landuse-retail,
 path.fill.tag-landuse-commercial {
-    fill: rgba(234, 176, 86, 0.1);
+    stroke: rgba(234, 176, 86, 0.3);
 }
 .preset-icon-fill-area.tag-landuse-retail,
 .preset-icon-fill-area.tag-landuse-commercial {
     border-color: rgb(234, 176, 86);
-    background-color: rgba(234, 176, 86, 0.1);
+    background: none;
+    box-shadow: inset 0 0 0 5px rgba(234, 176, 86, 0.3);
 }
 
 path.stroke.tag-landuse-industrial {
     stroke: rgb(228, 164, 245);
 }
 path.fill.tag-landuse-industrial {
-    fill: rgba(228, 164, 245, 0.1);
+    stroke: rgba(228, 164, 245, 0.3);
 }
 .preset-icon-fill-area.tag-landuse-industrial {
     border-color: rgb(228, 164, 245);
-    background-color: rgba(228, 164, 245, 0.1);
+    background: none;
+    box-shadow: inset 0 0 0 5px rgba(228, 164, 245, 0.3);
 }
 
 path.stroke.tag-landuse-basin,
