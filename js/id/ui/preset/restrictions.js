@@ -119,7 +119,9 @@ iD.ui.preset.restrictions = function(field, context) {
         }
 
         function render() {
-            restrictions(selection);
+            if (context.hasEntity(vertexID)) {
+                restrictions(selection);
+            }
         }
     }
 
