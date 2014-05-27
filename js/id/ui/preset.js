@@ -72,7 +72,7 @@ iD.ui.preset = function(context) {
                 }
             });
 
-            if (geometry === 'vertex' && entity.isIntersection(context.graph())) {
+            if (entity.isHighwayIntersection(context.graph())) {
                 fields.push(UIField(context.presets().field('restrictions'), entity, true));
             }
 

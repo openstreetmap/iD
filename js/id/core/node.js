@@ -37,6 +37,14 @@ _.extend(iD.Node.prototype, {
         });
     },
 
+    isHighwayIntersection: function(resolver) {
+        return resolver.transient(this, 'isHighwayIntersection', function() {
+            return resolver.parentWays(this).filter(function(parent) {
+                return parent.tags.highway && parent.geometry(resolver) === 'line';
+            }).length > 1;
+        });
+    },
+
     asJXON: function(changeset_id) {
         var r = {
             node: {

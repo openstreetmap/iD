@@ -52,12 +52,30 @@ describe('iD.Node', function () {
             expect(node.isIntersection(graph)).to.equal(true);
         });
 
-        it("returns true for a node shared by more two non-highways", function () {
+        it("returns true for a node shared by more than one waterway", function () {
             var node = iD.Node(),
-                w1 = iD.Way({nodes: [node.id]}),
-                w2 = iD.Way({nodes: [node.id]}),
+                w1 = iD.Way({nodes: [node.id], tags: {waterway: 'river'}}),
+                w2 = iD.Way({nodes: [node.id], tags: {waterway: 'river'}}),
                 graph = iD.Graph([node, w1, w2]);
-            expect(node.isIntersection(graph)).to.equal(false);
+            expect(node.isIntersection(graph)).to.equal(true);
+        });
+    });
+
+    describe("#isHighwayIntersection", function () {
+        it("returns true for a node shared by more than one highway", function () {
+            var node = iD.Node(),
+                w1 = iD.Way({nodes: [node.id], tags: {highway: 'residential'}}),
+                w2 = iD.Way({nodes: [node.id], tags: {highway: 'residential'}}),
+                graph = iD.Graph([node, w1, w2]);
+            expect(node.isHighwayIntersection(graph)).to.equal(true);
+        });
+
+        it("returns false for a node shared by more than one waterway", function () {
+            var node = iD.Node(),
+                w1 = iD.Way({nodes: [node.id], tags: {waterway: 'river'}}),
+                w2 = iD.Way({nodes: [node.id], tags: {waterway: 'river'}}),
+                graph = iD.Graph([node, w1, w2]);
+            expect(node.isHighwayIntersection(graph)).to.equal(false);
         });
     });
 
