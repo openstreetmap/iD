@@ -5,39 +5,50 @@ iD.svg.Midpoints = function(projection, context) {
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
 
-            if (entity.type !== 'way') continue;
-            if (context.selectedIDs().indexOf(entity.id) < 0) continue;
+            if (entity.type !== 'way')
+                continue;
+            if (!filter(entity))
+                continue;
+            if (context.selectedIDs().indexOf(entity.id) < 0)
+                continue;
 
             var nodes = graph.childNodes(entity);
-
-            // skip the last node because it is always repeated
             for (var j = 0; j < nodes.length - 1; j++) {
 
                 var a = nodes[j],
                     b = nodes[j + 1],
                     id = [a.id, b.id].sort().join('-');
 
-                // Redraw midpoints in two cases:
-                //   1. One of the two endpoint nodes changed (e.g. was moved).
-                //   2. A node was deleted. The midpoint between the two new
-                //      endpoints needs to be redrawn. In this case only the
-                //      way will be in the diff.
-                if (!midpoints[id] && (filter(a) || filter(b) || filter(entity))) {
+                if (midpoints[id]) {
+                    midpoints[id].parents.push(entity);
+                } else {
                     var loc = iD.geo.interp(a.loc, b.loc, 0.5);
                     if (extent.intersects(loc) && iD.geo.euclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
                         midpoints[id] = {
                             type: 'midpoint',
                             id: id,
                             loc: loc,
-                            edge: [a.id, b.id]
+                            edge: [a.id, b.id],
+                            parents: [entity]
                         };
                     }
                 }
             }
         }
 
+        function midpointFilter(d) {
+            if (midpoints[d.id])
+                return true;
+
+            for (var i = 0; i < d.parents.length; i++)
+                if (filter(d.parents[i]))
+                    return true;
+
+            return false;
+        }
+
         var groups = surface.select('.layer-hit').selectAll('g.midpoint')
-            .filter(filter)
+            .filter(midpointFilter)
             .data(_.values(midpoints), function(d) { return d.id; });
 
         var group = groups.enter()
