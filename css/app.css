@@ -1542,6 +1542,11 @@ input[type=number] {
     height: 300px;
 }
 
+.form-field-restrictions svg {
+    width: 100%;
+    height: 100%;
+}
+
 .form-field-restrictions .restriction-help {
     z-index: 1;
     position: absolute;

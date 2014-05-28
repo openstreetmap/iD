@@ -112,6 +112,10 @@ iD.Entity.prototype = {
         });
     },
 
+    isHighwayIntersection: function() {
+        return false;
+    },
+
     deprecatedTags: function() {
         var tags = _.pairs(this.tags);
         var deprecated = {};

@@ -35,7 +35,7 @@ iD.ui.Inspector = function(context) {
             entity = context.entity(entityID),
             showEditor = state === 'hover' ||
                 entity.isUsed(graph) ||
-                (entity.type === 'node' && entity.isIntersection(graph));
+                entity.isHighwayIntersection(graph);
 
         if (showEditor) {
             $wrap.style('right', '0%');
