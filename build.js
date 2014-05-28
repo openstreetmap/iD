@@ -90,15 +90,7 @@ function generateFields() {
 }
 
 function suggestionsToPresets(presets) {
-    var existing = {},
-        countThreshold = 0;
-
-    for (var preset in presets) {
-        existing[presets[preset].name] = {
-            category: preset,
-            count: -1
-        };
-    }
+    var existing = {};
 
     for (var key in suggestions) {
         for (var value in suggestions[key]) {
@@ -107,14 +99,19 @@ function suggestionsToPresets(presets) {
                     tags = {},
                     count = suggestions[key][value][name].count;
 
-                tags = _.extend({name: name}, suggestions[key][value][name].tags);
-
-                if (!existing[name] && count > countThreshold) addPreset(item, tags, name, count);
+                if (existing[name] && count > existing[name].count) {
+                    delete presets[existing[name].category];
+                    delete existing[name];
+                }
+                if (!existing[name]) {
+                    tags = _.extend({name: name}, suggestions[key][value][name].tags);
+                    addSuggestion(item, tags, name, count);
+                }
             }
         }
     }
 
-    function addPreset(category, tags, name, count) {
+    function addSuggestion(category, tags, name, count) {
         var tag = category.split('/'),
             parent = presets[tag[0] + '/' + tag[1]];
 

@@ -8760,25 +8760,6 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Sainsbury's": {
-        "tags": {
-            "name": "Sainsbury's",
-            "amenity": "fuel"
-        },
-        "name": "Sainsbury's",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/OMV": {
         "tags": {
             "name": "OMV",
@@ -8817,25 +8798,6 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Tesco": {
-        "tags": {
-            "name": "Tesco",
-            "amenity": "fuel"
-        },
-        "name": "Tesco",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/JET": {
         "tags": {
             "name": "JET",
@@ -8855,50 +8817,12 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Morrisons": {
-        "tags": {
-            "name": "Morrisons",
-            "amenity": "fuel"
-        },
-        "name": "Morrisons",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/United": {
         "tags": {
             "name": "United",
             "amenity": "fuel"
         },
         "name": "United",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
-    "amenity/fuel/Canadian Tire": {
-        "tags": {
-            "name": "Canadian Tire",
-            "amenity": "fuel"
-        },
-        "name": "Canadian Tire",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -8988,25 +8912,6 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/ABC": {
-        "tags": {
-            "name": "ABC",
-            "amenity": "fuel"
-        },
-        "name": "ABC",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/ARAL": {
         "tags": {
             "name": "ARAL",
@@ -9083,25 +8988,6 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Intermarché": {
-        "tags": {
-            "name": "Intermarché",
-            "amenity": "fuel"
-        },
-        "name": "Intermarché",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/Total Access": {
         "tags": {
             "name": "Total Access",
@@ -9121,69 +9007,12 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Super U": {
-        "tags": {
-            "name": "Super U",
-            "amenity": "fuel"
-        },
-        "name": "Super U",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
-    "amenity/fuel/Auchan": {
-        "tags": {
-            "name": "Auchan",
-            "amenity": "fuel"
-        },
-        "name": "Auchan",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/Elf": {
         "tags": {
             "name": "Elf",
             "amenity": "fuel"
         },
         "name": "Elf",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
-    "amenity/fuel/Carrefour": {
-        "tags": {
-            "name": "Carrefour",
-            "amenity": "fuel"
-        },
-        "name": "Carrefour",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -9539,25 +9368,6 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Raiffeisenbank": {
-        "tags": {
-            "name": "Raiffeisenbank",
-            "amenity": "fuel"
-        },
-        "name": "Raiffeisenbank",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/Tamoil": {
         "tags": {
             "name": "Tamoil",
@@ -9640,25 +9450,6 @@
             "amenity": "fuel"
         },
         "name": "LPG",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
-    "amenity/fuel/Coop": {
-        "tags": {
-            "name": "Coop",
-            "amenity": "fuel"
-        },
-        "name": "Coop",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -9868,25 +9659,6 @@
             "amenity": "fuel"
         },
         "name": "Petro-Canada",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
-    "amenity/fuel/7-Eleven": {
-        "tags": {
-            "name": "7-Eleven",
-            "amenity": "fuel"
-        },
-        "name": "7-Eleven",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -11021,25 +10793,6 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Wawa": {
-        "tags": {
-            "name": "Wawa",
-            "amenity": "fuel"
-        },
-        "name": "Wawa",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/Pertamina": {
         "tags": {
             "name": "Pertamina",
@@ -11535,25 +11288,6 @@
         ],
         "suggestion": true
     },
-    "amenity/fuel/Circle K": {
-        "tags": {
-            "name": "Circle K",
-            "amenity": "fuel"
-        },
-        "name": "Circle K",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
     "amenity/fuel/Posto Ipiranga": {
         "tags": {
             "name": "Posto Ipiranga",
@@ -11693,25 +11427,6 @@
             "amenity": "fuel"
         },
         "name": "QuikTrip",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
-    "amenity/fuel/Stewart's": {
-        "tags": {
-            "name": "Stewart's",
-            "amenity": "fuel"
-        },
-        "name": "Stewart's",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -11883,25 +11598,6 @@
             "amenity": "fuel"
         },
         "name": "Posto",
-        "icon": "fuel",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "address",
-            "building_area"
-        ],
-        "suggestion": true
-    },
-    "amenity/fuel/H-E-B": {
-        "tags": {
-            "name": "H-E-B",
-            "amenity": "fuel"
-        },
-        "name": "H-E-B",
         "icon": "fuel",
         "geometry": [
             "point",
@@ -12976,6 +12672,28 @@
             "amenity": "fast_food"
         },
         "name": "McDonald's",
+        "icon": "fast-food",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "cuisine",
+            "building_area",
+            "address",
+            "opening_hours",
+            "smoking"
+        ],
+        "suggestion": true
+    },
+    "amenity/fast_food/Subway": {
+        "tags": {
+            "name": "Subway",
+            "cuisine": "sandwich",
+            "amenity": "fast_food"
+        },
+        "name": "Subway",
         "icon": "fast-food",
         "geometry": [
             "point",
@@ -17684,6 +17402,26 @@
             "amenity": "bank"
         },
         "name": "NatWest",
+        "icon": "bank",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "atm",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/bank/Raiffeisenbank": {
+        "tags": {
+            "name": "Raiffeisenbank",
+            "amenity": "bank"
+        },
+        "name": "Raiffeisenbank",
         "icon": "bank",
         "geometry": [
             "point",
@@ -23417,26 +23155,6 @@
         ],
         "suggestion": true
     },
-    "amenity/pharmacy/Радуга": {
-        "tags": {
-            "name": "Радуга",
-            "amenity": "pharmacy"
-        },
-        "name": "Радуга",
-        "icon": "pharmacy",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
     "amenity/pharmacy/サンドラッグ": {
         "tags": {
             "name": "サンドラッグ",
@@ -24597,6 +24315,25 @@
         ],
         "suggestion": true
     },
+    "shop/supermarket/Morrisons": {
+        "tags": {
+            "name": "Morrisons",
+            "shop": "supermarket"
+        },
+        "name": "Morrisons",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
     "shop/supermarket/Interspar": {
         "tags": {
             "name": "Interspar",
@@ -24622,6 +24359,25 @@
             "shop": "supermarket"
         },
         "name": "Merkur",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/Sainsbury's": {
+        "tags": {
+            "name": "Sainsbury's",
+            "shop": "supermarket"
+        },
+        "name": "Sainsbury's",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -24698,6 +24454,44 @@
             "shop": "supermarket"
         },
         "name": "Iceland",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/Coop": {
+        "tags": {
+            "name": "Coop",
+            "shop": "supermarket"
+        },
+        "name": "Coop",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/Tesco": {
+        "tags": {
+            "name": "Tesco",
+            "shop": "supermarket"
+        },
+        "name": "Tesco",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -25053,25 +24847,6 @@
         ],
         "suggestion": true
     },
-    "shop/supermarket/Tesco Express": {
-        "tags": {
-            "name": "Tesco Express",
-            "shop": "supermarket"
-        },
-        "name": "Tesco Express",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
     "shop/supermarket/King Soopers": {
         "tags": {
             "name": "King Soopers",
@@ -25173,6 +24948,25 @@
             "shop": "supermarket"
         },
         "name": "Tengelmann",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/Carrefour": {
+        "tags": {
+            "name": "Carrefour",
+            "shop": "supermarket"
+        },
+        "name": "Carrefour",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -25585,6 +25379,25 @@
         ],
         "suggestion": true
     },
+    "shop/supermarket/Super U": {
+        "tags": {
+            "name": "Super U",
+            "shop": "supermarket"
+        },
+        "name": "Super U",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
     "shop/supermarket/Metro": {
         "tags": {
             "name": "Metro",
@@ -25800,25 +25613,6 @@
             "shop": "supermarket"
         },
         "name": "Giant",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
-    "shop/supermarket/COOP Jednota": {
-        "tags": {
-            "name": "COOP Jednota",
-            "shop": "supermarket"
-        },
-        "name": "COOP Jednota",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -26459,6 +26253,25 @@
         ],
         "suggestion": true
     },
+    "shop/supermarket/Auchan": {
+        "tags": {
+            "name": "Auchan",
+            "shop": "supermarket"
+        },
+        "name": "Auchan",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
     "shop/supermarket/Mercadona": {
         "tags": {
             "name": "Mercadona",
@@ -26611,25 +26424,6 @@
         ],
         "suggestion": true
     },
-    "shop/supermarket/Costcutter": {
-        "tags": {
-            "name": "Costcutter",
-            "shop": "supermarket"
-        },
-        "name": "Costcutter",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
     "shop/supermarket/Maxi": {
         "tags": {
             "name": "Maxi",
@@ -26674,6 +26468,25 @@
             "shop": "supermarket"
         },
         "name": "The Co-operative",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
+    "shop/supermarket/Intermarché": {
+        "tags": {
+            "name": "Intermarché",
+            "shop": "supermarket"
+        },
+        "name": "Intermarché",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -26845,25 +26658,6 @@
             "shop": "supermarket"
         },
         "name": "denn's Biomarkt",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
-    "shop/supermarket/dm": {
-        "tags": {
-            "name": "dm",
-            "shop": "supermarket"
-        },
-        "name": "dm",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -27111,25 +26905,6 @@
             "shop": "supermarket"
         },
         "name": "Maxima",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
-    "shop/supermarket/Petit Casino": {
-        "tags": {
-            "name": "Petit Casino",
-            "shop": "supermarket"
-        },
-        "name": "Petit Casino",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -27732,25 +27507,6 @@
         ],
         "suggestion": true
     },
-    "shop/supermarket/Fressnapf": {
-        "tags": {
-            "name": "Fressnapf",
-            "shop": "supermarket"
-        },
-        "name": "Fressnapf",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
     "shop/supermarket/Coop Konsum": {
         "tags": {
             "name": "Coop Konsum",
@@ -27985,25 +27741,6 @@
             "shop": "supermarket"
         },
         "name": "Евроопт",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
-    "shop/supermarket/Centra": {
-        "tags": {
-            "name": "Centra",
-            "shop": "supermarket"
-        },
-        "name": "Centra",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -28606,6 +28343,25 @@
         ],
         "suggestion": true
     },
+    "shop/supermarket/H-E-B": {
+        "tags": {
+            "name": "H-E-B",
+            "shop": "supermarket"
+        },
+        "name": "H-E-B",
+        "icon": "grocery",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "building_area",
+            "address"
+        ],
+        "suggestion": true
+    },
     "shop/supermarket/Атак": {
         "tags": {
             "name": "Атак",
@@ -28663,25 +28419,6 @@
         ],
         "suggestion": true
     },
-    "shop/supermarket/Lewiatan": {
-        "tags": {
-            "name": "Lewiatan",
-            "shop": "supermarket"
-        },
-        "name": "Lewiatan",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
     "shop/supermarket/Sigma": {
         "tags": {
             "name": "Sigma",
@@ -28707,25 +28444,6 @@
             "shop": "supermarket"
         },
         "name": "АТБ",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
-    "shop/supermarket/Społem": {
-        "tags": {
-            "name": "Społem",
-            "shop": "supermarket"
-        },
-        "name": "Społem",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -28802,25 +28520,6 @@
             "shop": "supermarket"
         },
         "name": "Магнолия",
-        "icon": "grocery",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "operator",
-            "building_area",
-            "address"
-        ],
-        "suggestion": true
-    },
-    "shop/supermarket/Магазин": {
-        "tags": {
-            "name": "Магазин",
-            "shop": "supermarket"
-        },
-        "name": "Магазин",
         "icon": "grocery",
         "geometry": [
             "point",
@@ -29271,6 +28970,25 @@
         ],
         "suggestion": true
     },
+    "shop/convenience/Tesco Express": {
+        "tags": {
+            "name": "Tesco Express",
+            "shop": "convenience"
+        },
+        "name": "Tesco Express",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/convenience/One Stop": {
         "tags": {
             "name": "One Stop",
@@ -29309,6 +29027,25 @@
         ],
         "suggestion": true
     },
+    "shop/convenience/7-Eleven": {
+        "tags": {
+            "name": "7-Eleven",
+            "shop": "convenience"
+        },
+        "name": "7-Eleven",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/convenience/Sale": {
         "tags": {
             "name": "Sale",
@@ -29334,6 +29071,25 @@
             "shop": "convenience"
         },
         "name": "Siwa",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/convenience/COOP Jednota": {
+        "tags": {
+            "name": "COOP Jednota",
+            "shop": "convenience"
+        },
+        "name": "COOP Jednota",
         "icon": "shop",
         "geometry": [
             "point",
@@ -29423,12 +29179,50 @@
         ],
         "suggestion": true
     },
+    "shop/convenience/Costcutter": {
+        "tags": {
+            "name": "Costcutter",
+            "shop": "convenience"
+        },
+        "name": "Costcutter",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/convenience/Valintatalo": {
         "tags": {
             "name": "Valintatalo",
             "shop": "convenience"
         },
         "name": "Valintatalo",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/convenience/Circle K": {
+        "tags": {
+            "name": "Circle K",
+            "shop": "convenience"
+        },
+        "name": "Circle K",
         "icon": "shop",
         "geometry": [
             "point",
@@ -29469,6 +29263,25 @@
             "shop": "convenience"
         },
         "name": "ローソン",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/convenience/Petit Casino": {
+        "tags": {
+            "name": "Petit Casino",
+            "shop": "convenience"
+        },
+        "name": "Petit Casino",
         "icon": "shop",
         "geometry": [
             "point",
@@ -29678,6 +29491,25 @@
             "shop": "convenience"
         },
         "name": "Premier",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/convenience/ABC": {
+        "tags": {
+            "name": "ABC",
+            "shop": "convenience"
+        },
+        "name": "ABC",
         "icon": "shop",
         "geometry": [
             "point",
@@ -29922,6 +29754,25 @@
         ],
         "suggestion": true
     },
+    "shop/convenience/Магазин": {
+        "tags": {
+            "name": "Магазин",
+            "shop": "convenience"
+        },
+        "name": "Магазин",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/convenience/Гастроном": {
         "tags": {
             "name": "Гастроном",
@@ -29960,6 +29811,25 @@
         ],
         "suggestion": true
     },
+    "shop/convenience/Centra": {
+        "tags": {
+            "name": "Centra",
+            "shop": "convenience"
+        },
+        "name": "Centra",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/convenience/サークルK": {
         "tags": {
             "name": "サークルK",
@@ -29967,6 +29837,25 @@
             "shop": "convenience"
         },
         "name": "サークルK",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/convenience/Wawa": {
+        "tags": {
+            "name": "Wawa",
+            "shop": "convenience"
+        },
+        "name": "Wawa",
         "icon": "shop",
         "geometry": [
             "point",
@@ -30151,6 +30040,25 @@
         ],
         "suggestion": true
     },
+    "shop/convenience/Społem": {
+        "tags": {
+            "name": "Społem",
+            "shop": "convenience"
+        },
+        "name": "Społem",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/convenience/Cumberland Farms": {
         "tags": {
             "name": "Cumberland Farms",
@@ -30176,6 +30084,25 @@
             "shop": "convenience"
         },
         "name": "Tesco Lotus Express",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/convenience/Kiosk": {
+        "tags": {
+            "name": "Kiosk",
+            "shop": "convenience"
+        },
+        "name": "Kiosk",
         "icon": "shop",
         "geometry": [
             "point",
@@ -30284,6 +30211,25 @@
         ],
         "suggestion": true
     },
+    "shop/convenience/Stewart's": {
+        "tags": {
+            "name": "Stewart's",
+            "shop": "convenience"
+        },
+        "name": "Stewart's",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/convenience/Продукти": {
         "tags": {
             "name": "Продукти",
@@ -30309,6 +30255,25 @@
             "shop": "convenience"
         },
         "name": "ローソンストア100 (LAWSON STORE 100)",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/convenience/Радуга": {
+        "tags": {
+            "name": "Радуга",
+            "shop": "convenience"
+        },
+        "name": "Радуга",
         "icon": "shop",
         "geometry": [
             "point",
@@ -30702,6 +30667,25 @@
         ],
         "suggestion": true
     },
+    "shop/convenience/Lewiatan": {
+        "tags": {
+            "name": "Lewiatan",
+            "shop": "convenience"
+        },
+        "name": "Lewiatan",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/convenience/Продуктовый магазин": {
         "tags": {
             "name": "Продуктовый магазин",
@@ -30930,6 +30914,25 @@
         ],
         "suggestion": true
     },
+    "shop/convenience/Boutique": {
+        "tags": {
+            "name": "Boutique",
+            "shop": "convenience"
+        },
+        "name": "Boutique",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/convenience/მარკეტი (Market)": {
         "tags": {
             "name": "მარკეტი (Market)",
@@ -30956,6 +30959,25 @@
         },
         "name": "Stores",
         "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/chemist/dm": {
+        "tags": {
+            "name": "dm",
+            "shop": "chemist"
+        },
+        "name": "dm",
+        "icon": "chemist",
         "geometry": [
             "point",
             "vertex",
@@ -31139,25 +31161,6 @@
         ],
         "suggestion": true
     },
-    "shop/car_repair/Peugeot": {
-        "tags": {
-            "name": "Peugeot",
-            "shop": "car_repair"
-        },
-        "name": "Peugeot",
-        "icon": "car",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
     "shop/car_repair/Kwik Fit": {
         "tags": {
             "name": "Kwik Fit",
@@ -31291,44 +31294,6 @@
         ],
         "suggestion": true
     },
-    "shop/car_repair/Автозапчасти": {
-        "tags": {
-            "name": "Автозапчасти",
-            "shop": "car_repair"
-        },
-        "name": "Автозапчасти",
-        "icon": "car",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/car_repair/Renault": {
-        "tags": {
-            "name": "Renault",
-            "shop": "car_repair"
-        },
-        "name": "Renault",
-        "icon": "car",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
     "shop/car_repair/Pit Stop": {
         "tags": {
             "name": "Pit Stop",
@@ -31449,25 +31414,6 @@
             "shop": "car_repair"
         },
         "name": "шиномонтаж",
-        "icon": "car",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/car_repair/Citroen": {
-        "tags": {
-            "name": "Citroen",
-            "shop": "car_repair"
-        },
-        "name": "Citroen",
         "icon": "car",
         "geometry": [
             "point",
@@ -32089,6 +32035,25 @@
         ],
         "suggestion": true
     },
+    "shop/doityourself/Canadian Tire": {
+        "tags": {
+            "name": "Canadian Tire",
+            "shop": "doityourself"
+        },
+        "name": "Canadian Tire",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/doityourself/Leroy Merlin": {
         "tags": {
             "name": "Leroy Merlin",
@@ -32317,25 +32282,6 @@
         ],
         "suggestion": true
     },
-    "shop/doityourself/Хозтовары": {
-        "tags": {
-            "name": "Хозтовары",
-            "shop": "doityourself"
-        },
-        "name": "Хозтовары",
-        "icon": "shop",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
     "shop/doityourself/Стройматериалы": {
         "tags": {
             "name": "Стройматериалы",
@@ -32505,6 +32451,42 @@
         ],
         "suggestion": true
     },
+    "shop/car/Citroen": {
+        "tags": {
+            "name": "Citroen",
+            "shop": "car"
+        },
+        "name": "Citroen",
+        "icon": "car",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/car/Renault": {
+        "tags": {
+            "name": "Renault",
+            "shop": "car"
+        },
+        "name": "Renault",
+        "icon": "car",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/car/Mercedes-Benz": {
         "tags": {
             "name": "Mercedes-Benz",
@@ -32529,6 +32511,24 @@
             "shop": "car"
         },
         "name": "Volvo",
+        "icon": "car",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/car/Ford": {
+        "tags": {
+            "name": "Ford",
+            "shop": "car"
+        },
+        "name": "Ford",
         "icon": "car",
         "geometry": [
             "point",
@@ -32601,6 +32601,24 @@
             "shop": "car"
         },
         "name": "Fiat",
+        "icon": "car",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/car/Автозапчасти": {
+        "tags": {
+            "name": "Автозапчасти",
+            "shop": "car"
+        },
+        "name": "Автозапчасти",
         "icon": "car",
         "geometry": [
             "point",
@@ -32709,6 +32727,24 @@
             "shop": "car"
         },
         "name": "Honda",
+        "icon": "car",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/car/Peugeot": {
+        "tags": {
+            "name": "Peugeot",
+            "shop": "car"
+        },
+        "name": "Peugeot",
         "icon": "car",
         "geometry": [
             "point",
@@ -33255,25 +33291,6 @@
             "shop": "clothes"
         },
         "name": "Dorothy Perkins",
-        "icon": "clothing-store",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "suggestion": true
-    },
-    "shop/clothes/Deichmann": {
-        "tags": {
-            "name": "Deichmann",
-            "shop": "clothes"
-        },
-        "name": "Deichmann",
         "icon": "clothing-store",
         "geometry": [
             "point",
@@ -35567,6 +35584,25 @@
         ],
         "suggestion": true
     },
+    "shop/pet/Fressnapf": {
+        "tags": {
+            "name": "Fressnapf",
+            "shop": "pet"
+        },
+        "name": "Fressnapf",
+        "icon": "dog-park",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
     "shop/pet/PetSmart": {
         "tags": {
             "name": "PetSmart",
@@ -35650,6 +35686,25 @@
         },
         "name": "Зоомагазин",
         "icon": "dog-park",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/shoes/Deichmann": {
+        "tags": {
+            "name": "Deichmann",
+            "shop": "shoes"
+        },
+        "name": "Deichmann",
+        "icon": "shop",
         "geometry": [
             "point",
             "vertex",
@@ -36960,6 +37015,25 @@
             "shop": "hardware"
         },
         "name": "1000 мелочей",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "shop/hardware/Хозтовары": {
+        "tags": {
+            "name": "Хозтовары",
+            "shop": "hardware"
+        },
+        "name": "Хозтовары",
         "icon": "shop",
         "geometry": [
             "point",
