@@ -207,7 +207,7 @@ iD.Connection = function() {
 
     connection.changesetTags = function(comment, imageryUsed) {
         var tags = {
-            imagery_used: imageryUsed.join(';'),
+            imagery_used: imageryUsed.join(';').substr(0, 255),
             created_by: 'iD ' + iD.version
         };
 
