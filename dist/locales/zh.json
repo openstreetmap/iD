@@ -905,9 +905,6 @@
             "highway/motorway": {
                 "name": "高速公路"
             },
-            "highway/motorway_junction": {
-                "name": "高速公路连接点"
-            },
             "highway/motorway_link": {
                 "name": "高速公路匝道"
             },

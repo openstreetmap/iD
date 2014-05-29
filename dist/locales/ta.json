@@ -1,23 +1,45 @@
 {
     "modes": {
         "add_area": {
-            "title": "பரப்பளவு"
+            "title": "பரப்பளவு",
+            "description": "வரைபடத்தை பூங்காக்கள், கட்டிடங்கள், ஏரிகள் அல்லது மற்ற பகுதிகளில் சேர்.",
+            "tail": "பூங்கா, ஏரி, அல்லது கட்டிடம் வரைய வரைபடத்தை கிளிக் செய்க."
         },
         "add_line": {
-            "title": "கோடு"
+            "title": "கோடு",
+            "description": "வரைபடத்தை நெடுஞ்சாலைகள், தெருக்களில், பாதசாரி பாதைகள், கால்வாய்கள் அல்லது மற்ற வரிகளை சேர்க்கவும்.",
+            "tail": "சாலை, பாதை, அல்லது இந்த வரைபடத்தை கிளிக் செய்க."
         },
         "add_point": {
-            "title": "புள்ளி"
+            "title": "புள்ளி",
+            "description": "வரைபடத்தை உணவகங்கள், நினைவு சின்னங்கள், தபால் பெட்டிகள் அல்லது மற்ற சேர்க்கவும்.",
+            "tail": "ஒரு புள்ளி சேர்க்க வரைபடத்தை கிளிக் செய்க."
+        },
+        "browse": {
+            "title": "உலவ"
         }
     },
     "operations": {
+        "start": {
+            "annotation": {
+                "line": "வரி தொடங்கியது",
+                "area": "பகுதி தொடங்கியது"
+            }
+        },
         "continue": {
-            "key": "A"
+            "key": "A",
+            "annotation": {
+                "line": "வரி தொ ங்கியது"
+            }
+        },
+        "cancel_draw": {
+            "annotation": "வரைவது தவிர்கபட்டது "
         },
         "circularize": {
             "key": "O"
         },
         "orthogonalize": {
+            "title": "சதுரம்",
             "key": "S"
         },
         "straighten": {
@@ -31,19 +53,28 @@
             }
         },
         "disconnect": {
+            "title": "தொடர்பை -துண்டி",
             "key": "D"
         },
         "merge": {
+            "title": "இணை",
+            "description": "இந்த கோடுகளை இணை",
             "key": "C"
         },
         "move": {
             "title": "நகர்த்து",
-            "key": "M"
+            "key": "M",
+            "annotation": {
+                "point": "புள்ளி நகர்த்தப்பட்டது",
+                "area": "பரப்பை நகர்த்தபட்டது "
+            }
         },
         "rotate": {
+            "title": "திருப்பு",
             "key": "R"
         },
         "reverse": {
+            "title": "தலைகீழாக்கு",
             "key": "V"
         },
         "split": {
@@ -175,10 +206,14 @@
             "crossing": {
                 "label": "வகை"
             },
+            "emergency": {
+                "label": "அவசரநிலை"
+            },
             "entrance": {
                 "label": "வகை"
             },
             "fax": {
+                "label": "தொலைநகல்",
                 "placeholder": "+31 42 123 4567"
             },
             "fire_hydrant/type": {
@@ -205,6 +240,9 @@
             "information": {
                 "label": "வகை"
             },
+            "internet_access": {
+                "label": "இணைய அணுகல்"
+            },
             "landuse": {
                 "label": "வகை"
             },
@@ -212,10 +250,14 @@
                 "label": "சந்துகள்",
                 "placeholder": "1, 2, 3..."
             },
+            "layer": {
+                "label": "அடுக்கு"
+            },
             "leisure": {
                 "label": "வகை"
             },
             "levels": {
+                "label": "நிலைகள்",
                 "placeholder": "2, 4, 6..."
             },
             "location": {
@@ -234,6 +276,9 @@
             "natural": {
                 "label": "இயற்கையான"
             },
+            "network": {
+                "label": "நெட்வொர்க்"
+            },
             "note": {
                 "label": "குறிப்பு"
             },
@@ -248,6 +293,9 @@
             },
             "opening_hours": {
                 "label": "மணிநேரங்கள்"
+            },
+            "operator": {
+                "label": "இயக்குபவர்"
             },
             "par": {
                 "placeholder": "3, 4, 5..."
@@ -280,6 +328,7 @@
                     "christian": "கிறித்தவர்",
                     "muslim": "இசுலாமியர்",
                     "buddhist": "புத்த மதத்தினர்",
+                    "jewish": "ஜெவிஷ்",
                     "hindu": "இந்து"
                 }
             },
@@ -351,11 +400,17 @@
             "aeroway/aerodrome": {
                 "name": "விமானநிலையம்"
             },
+            "aeroway/helipad": {
+                "name": "சிறு விமானம் இறங்கும் தளம்"
+            },
             "amenity/bank": {
                 "name": "வங்கி"
             },
             "amenity/bicycle_parking": {
                 "name": "ஈருருளை நிறுத்தகம்"
+            },
+            "amenity/bicycle_rental": {
+                "name": "சைக்கிள் வாடகை"
             },
             "amenity/cafe": {
                 "name": "டீக்கடை"
@@ -375,11 +430,17 @@
             "amenity/grave_yard": {
                 "name": "இடுகாடு"
             },
+            "amenity/hospital": {
+                "name": "மருத்துவமனை "
+            },
             "amenity/library": {
                 "name": "புத்தகச்சாலை"
             },
             "amenity/marketplace": {
                 "name": "பஜார்"
+            },
+            "amenity/parking": {
+                "name": "கார் பார்க்கிங்"
             },
             "amenity/pharmacy": {
                 "name": "மருந்தகம்"
@@ -402,6 +463,9 @@
             "amenity/restaurant": {
                 "name": "உணவகம்"
             },
+            "amenity/school": {
+                "name": "பள்ளி மைதானத்தில்"
+            },
             "amenity/swimming_pool": {
                 "name": "நீச்சல் குளம்"
             },
@@ -413,6 +477,9 @@
             },
             "amenity/toilets": {
                 "name": "கழிவறைகள்"
+            },
+            "amenity/townhall": {
+                "name": "நகராட்சிமன்றம்"
             },
             "amenity/university": {
                 "name": "பல்கலைக்கழகம்"
@@ -443,6 +510,9 @@
             },
             "craft/painter": {
                 "name": "ஓவியர்"
+            },
+            "entrance": {
+                "name": "நுழைவு / வெளியேறு"
             },
             "highway/bus_stop": {
                 "name": "பேருந்து நிலையம்"

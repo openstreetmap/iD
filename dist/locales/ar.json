@@ -1128,10 +1128,6 @@
                 "name": "طريق سريع",
                 "terms": "طريق سريع"
             },
-            "highway/motorway_junction": {
-                "name": "مفرق طريق سريع",
-                "terms": "مفرق طريق سريع"
-            },
             "highway/motorway_link": {
                 "name": "رابط لطريق سريع",
                 "terms": "رابط لطريق سريع"
@@ -1403,10 +1399,6 @@
             "leisure/slipway": {
                 "name": "مزلقة سفن",
                 "terms": "مزلقة سفن"
-            },
-            "leisure/sports_center": {
-                "name": "مركز رياضة",
-                "terms": "مركز رياضي، مركز للتسلية والترفيه"
             },
             "leisure/stadium": {
                 "name": "مدرج رياضي",

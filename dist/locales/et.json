@@ -697,9 +697,6 @@
             "highway/motorway": {
                 "name": "Kiirtee"
             },
-            "highway/motorway_junction": {
-                "name": "Kiirtee liiklussõlm"
-            },
             "highway/path": {
                 "name": "Rada"
             },

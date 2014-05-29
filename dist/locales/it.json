@@ -182,6 +182,18 @@
             },
             "not_eligible": "Le linee non possono essere divise al loro inizio o alla loro fine.",
             "multiple_ways": "Ci sono troppe linee da dividere."
+        },
+        "restriction": {
+            "help": {
+                "select": "Clicca per selezionare un segmento di strada.",
+                "toggle": "Clicca per attivare una limitazione.",
+                "toggle_on": "Clicca per aggiungere \"{restriction}\".",
+                "toggle_off": "Clicca per rimuovere \"{restriction}\"."
+            },
+            "annotation": {
+                "create": "Limitazione aggiunta",
+                "delete": "Limitazione rimossa"
+            }
         }
     },
     "undo": {
@@ -412,6 +424,9 @@
             "category-rail": {
                 "name": "Ferrovia"
             },
+            "category-restriction": {
+                "name": "Limitazione"
+            },
             "category-road": {
                 "name": "Strada"
             },
@@ -594,6 +609,9 @@
             "entrance": {
                 "label": "Tipo"
             },
+            "except": {
+                "label": "Eccezioni"
+            },
             "fax": {
                 "label": "Fax",
                 "placeholder": "+39 01 123 456"
@@ -707,10 +725,16 @@
                 "label": "Tipo"
             },
             "oneway": {
-                "label": "Senso unico"
+                "label": "Senso unico",
+                "options": {
+                    "undefined": "No (ipotesi)"
+                }
             },
             "oneway_yes": {
-                "label": "Senso unico"
+                "label": "Senso unico",
+                "options": {
+                    "undefined": "Si (ipotesi)"
+                }
             },
             "opening_hours": {
                 "label": "Orari"
@@ -785,6 +809,9 @@
             },
             "restriction": {
                 "label": "Tipo"
+            },
+            "restrictions": {
+                "label": "Obblighi di svolta"
             },
             "route": {
                 "label": "Tipo"
@@ -1070,6 +1097,10 @@
             "amenity/doctor": {
                 "name": "Medico di base",
                 "terms": "dottore,medico,studio medico"
+            },
+            "amenity/dojo": {
+                "name": "Dojo/Accademia di arti marziali",
+                "terms": "dojo,karate,judo,arti marziali"
             },
             "amenity/drinking_water": {
                 "name": "Fontanella",
@@ -1562,6 +1593,10 @@
                 "name": "Attraversamento",
                 "terms": "attraversamento pedonale,strisce pedonali,attraversamento,dosso"
             },
+            "footway/crosswalk": {
+                "name": "Attraversamento pedonale",
+                "terms": "strisce pedonali,attraversamento"
+            },
             "footway/sidewalk": {
                 "name": "Marciapiede",
                 "terms": "marciapiedi,passeggio,salvagente,banchina"
@@ -1610,6 +1645,10 @@
                 "name": "Attraversamento",
                 "terms": "attraversamento pedonale,strisce pedonali,attraversamento,dosso"
             },
+            "highway/crosswalk": {
+                "name": "Attraversamento pedonale",
+                "terms": "strisce pedonali,attraversamento"
+            },
             "highway/cycleway": {
                 "name": "Percorso ciclabile",
                 "terms": "Percorso ciclabile"
@@ -1631,7 +1670,7 @@
                 "terms": "Autostrada"
             },
             "highway/motorway_junction": {
-                "name": "Uscita autostradale",
+                "name": "Uscita/Svincolo da o verso Autostrada",
                 "terms": "Uscita autostradale"
             },
             "highway/motorway_link": {
@@ -1935,7 +1974,7 @@
                 "terms": "Rampa per la messa in acqua di imbarcazioni"
             },
             "leisure/sports_center": {
-                "name": "Centro sportivo",
+                "name": "Centro sportivo/Palestra",
                 "terms": "sport,centro sportivo,pista,polivalente,tennis,calcio,campi,campetti,pallavolo,volley,palestra"
             },
             "leisure/stadium": {
@@ -2656,6 +2695,34 @@
             "type/restriction": {
                 "name": "Limitazione",
                 "terms": "Restrizione"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "Divieto di svolta a sinistra",
+                "terms": "divieto,vietato,curva,sinistra"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "Divieto di svolta a destra",
+                "terms": "divieto,vietato,curva,destra"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "Divieto di proseguire dritto",
+                "terms": "divieto,vietato,dritto"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "Divieto di inversione",
+                "terms": "divieto,vietato,inversione a u"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Obbligo di svolta a sinistra",
+                "terms": "obbligo,curva,sinistra"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Obbligo di svolta a destra",
+                "terms": "obbligo,curva,destra"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "Direzione obbligatoria dritto",
+                "terms": "obbligo,dritto,diritto,divieto di svolta"
             },
             "type/route": {
                 "name": "Percorso",

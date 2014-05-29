@@ -1307,10 +1307,6 @@
                 "name": "高速公路",
                 "terms": "Motorway,高速公路"
             },
-            "highway/motorway_junction": {
-                "name": "高速公路口",
-                "terms": "Motorway Junction,高速公路交匯處,高速公路口,高速公路連接點"
-            },
             "highway/motorway_link": {
                 "name": "高速公路駁路",
                 "terms": "Motorway Link,高速公路匝道,高速公路引道,高速公路駁路"
@@ -1586,10 +1582,6 @@
             "leisure/slipway": {
                 "name": "船排",
                 "terms": "Slipway,船排,船架滑道,船臺"
-            },
-            "leisure/sports_center": {
-                "name": "體育館",
-                "terms": "Sports Center,體育,體育中心,體育館"
             },
             "leisure/stadium": {
                 "name": "大體育館",

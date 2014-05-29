@@ -1614,10 +1614,6 @@
                 "name": "Autoroute",
                 "terms": "Autoroute, Voie rapide"
             },
-            "highway/motorway_junction": {
-                "name": "Bretelle d'autoroute",
-                "terms": "Échangeur autoroutier"
-            },
             "highway/motorway_link": {
                 "name": "Bretelle d'autoroute",
                 "terms": "Bretelle d'autoroute"
@@ -1911,10 +1907,6 @@
             "leisure/slipway": {
                 "name": "Plan incliné",
                 "terms": "Cale de lancement"
-            },
-            "leisure/sports_center": {
-                "name": "Centre sportif",
-                "terms": "Centre sportif"
             },
             "leisure/stadium": {
                 "name": "Stade",

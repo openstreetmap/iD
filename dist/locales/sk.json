@@ -1715,10 +1715,6 @@
                 "name": "Diaľnica",
                 "terms": "dialnica,rýchlocesta,rychlocesta"
             },
-            "highway/motorway_junction": {
-                "name": "Diaľničná križovatka",
-                "terms": "Dialnicna krizovatka,krizovatka,dialnica,kríženie,krizenie"
-            },
             "highway/motorway_link": {
                 "name": "Diaľničný privádzač",
                 "terms": "Dialnicny privadzac,privadzac,privádzač,zjazd,vyjazd,výjazd,nájazd,najazd,pripojovací pruh,pripojovaci pruh"
@@ -2026,10 +2022,6 @@
             "leisure/slipway": {
                 "name": "Spúšťanie lodí",
                 "terms": "Spustanie lodi,dok,lodenica,klzacka,kĺzačka"
-            },
-            "leisure/sports_center": {
-                "name": "Športové centrum",
-                "terms": "sportove centrum,fitness centrum,fitnes centrum,fitko"
             },
             "leisure/stadium": {
                 "name": "Štadión",

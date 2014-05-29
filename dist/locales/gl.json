@@ -182,6 +182,18 @@
             },
             "not_eligible": "As liñas non se poden dividir no seu inicio ou fin.",
             "multiple_ways": "Aquí hai demasiadas liñas para dividir."
+        },
+        "restriction": {
+            "help": {
+                "select": "Fai clic para seleccionar un segmento de estrada.",
+                "toggle": "Fai clic para alternar as restricións de xiro.",
+                "toggle_on": "Fai clic para engadir unha restrición \"{restriction}\".",
+                "toggle_off": "Fai clic para eliminar a restrición \"{restriction}\"."
+            },
+            "annotation": {
+                "create": "Engadida unha restrición de xiro.",
+                "delete": "Eliminada unha restrición de xiro."
+            }
         }
     },
     "undo": {

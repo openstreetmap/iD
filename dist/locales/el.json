@@ -1127,10 +1127,6 @@
                 "name": "Αυτοκινητόδρομος",
                 "terms": "Αυτοκινητόδρομος"
             },
-            "highway/motorway_junction": {
-                "name": "Διασταύρωση Αυτοκινητόδρομου",
-                "terms": "Διασταύρωση αυτοκινητόδρομου"
-            },
             "highway/motorway_link": {
                 "name": "Σύνδεση Αυτοκινητόδρομου",
                 "terms": "Σύνδεσμος Αυτοκινητόδρομου "
@@ -1359,9 +1355,6 @@
             "leisure/slipway": {
                 "name": "Γλύστρα",
                 "terms": "Γλίστρα"
-            },
-            "leisure/sports_center": {
-                "name": "Αθλητικό Κέντρο"
             },
             "leisure/stadium": {
                 "name": "Στάδιο",

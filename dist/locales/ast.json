@@ -1458,9 +1458,6 @@
             "highway/motorway": {
                 "name": "Autopista"
             },
-            "highway/motorway_junction": {
-                "name": "Xunión d'autopista"
-            },
             "highway/motorway_link": {
                 "name": "Enllaz d'autopista",
                 "terms": "Salida, accesu, enllaz, autopista"
@@ -1681,10 +1678,6 @@
             },
             "leisure/slipway": {
                 "name": "Rampla de botadura"
-            },
-            "leisure/sports_center": {
-                "name": "Centru deportivu",
-                "terms": "Polideportivu, Pabellón deportivu"
             },
             "leisure/stadium": {
                 "name": "Estadiu"

@@ -1380,10 +1380,6 @@
                 "name": "Autoput",
                 "terms": "autoput,autocesta"
             },
-            "highway/motorway_junction": {
-                "name": "Čvorište autoputa",
-                "terms": "čvorište autoceste,čvorište autoputa"
-            },
             "highway/motorway_link": {
                 "name": "Poveznica na autoput",
                 "terms": "poveznica na autoput,poveznica na autocestu"
@@ -1659,10 +1655,6 @@
             "leisure/slipway": {
                 "name": "Navoz",
                 "terms": "navoz,navoz na šine"
-            },
-            "leisure/sports_center": {
-                "name": "Sportski centar",
-                "terms": "sportski centar,centar za sport, centar za sportske aktivnosti"
             },
             "leisure/stadium": {
                 "name": "Stadion",
