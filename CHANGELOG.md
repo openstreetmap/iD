@@ -1,3 +1,14 @@
+## 1.4.0
+
+* Ensure combobox menus are closed on blur (#2207)
+* Limit imagery_used tag to 255 characters (#2181)
+* Simplify and fix midpoint drawing logic (#2136)
+* Prefer more specific 'Crosswalk' preset over generic 'Crossing'
+* Add amenity=dojo preset
+* Correctly trim whitespace in semicolon-separated multivalues (#2236)
+* oneway fields now show "Assumed to be No" or "Assumed to be Yes" instead of "Unknown" (#2220)
+* Add turn restriction editor
+
 ## 1.3.10
 
 * `oneway=no` overrides implicit oneways on junction=roundabout, etc. (#2220)
