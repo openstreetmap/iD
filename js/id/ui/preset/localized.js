@@ -15,16 +15,16 @@ iD.ui.preset.localized = function(field, context) {
             .attr('class', 'localized-main')
             .attr('placeholder', field.placeholder());
 
-        input
-            .on('blur', change)
-            .on('change', change);
-
         if (field.id === 'name') {
             var preset = context.presets().match(entity, context.graph());
             input.call(d3.combobox().fetcher(
                 iD.util.SuggestNames(preset, iD.data.suggestions)
             ));
         }
+
+        input
+            .on('blur', change)
+            .on('change', change);
 
         var translateButton = selection.selectAll('.localized-add')
             .data([0]);

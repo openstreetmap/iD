@@ -41,9 +41,9 @@ iD.ui.preset.wikipedia = function(field, context) {
             .value('English');
 
         lang
+            .call(langcombo)
             .on('blur', changeLang)
-            .on('change', changeLang)
-            .call(langcombo);
+            .on('change', changeLang);
 
         title = selection.selectAll('input.wiki-title')
             .data([0]);
@@ -54,9 +54,9 @@ iD.ui.preset.wikipedia = function(field, context) {
             .attr('id', 'preset-input-' + field.id);
 
         title
+            .call(titlecombo)
             .on('blur', change)
-            .on('change', change)
-            .call(titlecombo);
+            .on('change', change);
 
         link = selection.selectAll('a.wiki-link')
             .data([0]);

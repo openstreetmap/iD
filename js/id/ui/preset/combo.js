@@ -14,6 +14,7 @@ iD.ui.preset.typeCombo = function(field) {
             .attr('id', 'preset-input-' + field.id);
 
         input
+            .call(combobox)
             .on('change', change)
             .on('blur', change)
             .each(function() {
@@ -26,8 +27,7 @@ iD.ui.preset.typeCombo = function(field) {
                         if (!err) options(_.pluck(data, 'value'));
                     });
                 }
-            })
-            .call(combobox);
+            });
 
         function options(opts) {
             combobox.data(opts.map(function(d) {

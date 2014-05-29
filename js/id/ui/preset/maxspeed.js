@@ -23,9 +23,9 @@ iD.ui.preset.maxspeed = function(field, context) {
             .attr('placeholder', field.placeholder());
 
         input
+            .call(combobox)
             .on('change', change)
-            .on('blur', change)
-            .call(combobox);
+            .on('blur', change);
 
         var childNodes = context.graph().childNodes(context.entity(entity.id)),
             loc = childNodes[~~(childNodes.length/2)].loc;

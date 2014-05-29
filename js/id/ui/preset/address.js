@@ -124,10 +124,6 @@ iD.ui.preset.address = function(field, context) {
         city = wrap.select('.addr-city');
         postcode = wrap.select('.addr-postcode');
 
-        wrap.selectAll('input')
-            .on('blur', change)
-            .on('change', change);
-
         street
             .call(d3.combobox()
                 .fetcher(function(value, callback) {
@@ -145,6 +141,10 @@ iD.ui.preset.address = function(field, context) {
                 .fetcher(function(value, callback) {
                     callback(getPostCodes());
                 }));
+
+        wrap.selectAll('input')
+            .on('blur', change)
+            .on('change', change);
     }
 
     function change() {
