@@ -1,36 +1,36 @@
 iD.svg.Lines = function(projection) {
 
-    var highway_stack = {
-        motorway: 0,
-        motorway_link: 1,
-        trunk: 2,
-        trunk_link: 3,
-        primary: 4,
-        primary_link: 5,
-        secondary: 6,
-        tertiary: 7,
-        unclassified: 8,
-        residential: 9,
-        service: 10,
-        footway: 11
-    };
+    // var highway_stack = {
+    //     motorway: 0,
+    //     motorway_link: 1,
+    //     trunk: 2,
+    //     trunk_link: 3,
+    //     primary: 4,
+    //     primary_link: 5,
+    //     secondary: 6,
+    //     tertiary: 7,
+    //     unclassified: 8,
+    //     residential: 9,
+    //     service: 10,
+    //     footway: 11
+    // };
 
-    function waystack(a, b) {
-        if (!a || !b || !a.tags || !b.tags) return 0;
-        if (a.tags.layer !== undefined && b.tags.layer !== undefined) {
-            return a.tags.layer - b.tags.layer;
-        }
-        if (a.tags.bridge) return 1;
-        if (b.tags.bridge) return -1;
-        if (a.tags.tunnel) return -1;
-        if (b.tags.tunnel) return 1;
-        var as = 0, bs = 0;
-        if (a.tags.highway && b.tags.highway) {
-            as -= highway_stack[a.tags.highway];
-            bs -= highway_stack[b.tags.highway];
-        }
-        return as - bs;
-    }
+    // function waystack(a, b) {
+    //     if (!a || !b || !a.tags || !b.tags) return 0;
+    //     if (a.tags.layer !== undefined && b.tags.layer !== undefined) {
+    //         return a.tags.layer - b.tags.layer;
+    //     }
+    //     if (a.tags.bridge) return 1;
+    //     if (b.tags.bridge) return -1;
+    //     if (a.tags.tunnel) return -1;
+    //     if (b.tags.tunnel) return 1;
+    //     var as = 0, bs = 0;
+    //     if (a.tags.highway && b.tags.highway) {
+    //         as -= highway_stack[a.tags.highway];
+    //         bs -= highway_stack[b.tags.highway];
+    //     }
+    //     return as - bs;
+    // }
 
     return function drawLines(surface, graph, entities, filter) {
         var lines = [],
@@ -47,7 +47,8 @@ iD.svg.Lines = function(projection) {
         }
 
         lines = lines.filter(path);
-        lines.sort(waystack);
+        // lines.sort(waystack);
+        lines.sort(function(a, b) { return a.layer() - b.layer(); });
 
         function drawPaths(klass) {
             var paths = surface.select('.layer-' + klass)

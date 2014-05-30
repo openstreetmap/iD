@@ -42,6 +42,26 @@ _.extend(iD.Way.prototype, {
         if (this.nodes[this.nodes.length - 1] === node) return 'suffix';
     },
 
+    layer: function() {
+        // explicit layer tag..
+        if (this.tags.layer !== undefined) return +(this.tags.layer);
+
+        // implied layer tag..
+        if (this.tags.location === 'overground') return 1;
+        if (this.tags.location === 'underground') return -1;
+        if (this.tags.location === 'underwater') return -10;
+
+        if (this.tags.power === 'line') return 20;
+        if (this.tags.power === 'minor_line') return 15;
+        if (this.tags.aerialway) return 10;
+        if (this.tags.bridge) return 1;
+        if (this.tags.cutting) return -1;
+        if (this.tags.tunnel) return -1;
+        if (this.tags.waterway) return -1;
+        if (this.tags.manmade === 'pipeline') return -10;
+        return 0;
+    },
+
     isOneWay: function() {
         // explicit oneway tag..
         if (['yes', '1', '-1'].indexOf(this.tags.oneway) !== -1) { return true; }
