@@ -43,6 +43,7 @@ iD.svg = {
                 i = 0,
                 offset = dt,
                 segments = [],
+                viewport = iD.geo.Extent(projection.clipExtent()),
                 coordinates = graph.childNodes(entity).map(function(n) {
                     return n.loc;
                 });
@@ -61,9 +62,10 @@ iD.svg = {
                     b = [x, y];
 
                     if (a) {
-                        var span = iD.geo.euclideanDistance(a, b) - offset;
+                        var extent = iD.geo.Extent(a).extend(b),
+                            span = iD.geo.euclideanDistance(a, b) - offset;
 
-                        if (span >= 0) {
+                        if (extent.intersects(viewport) && span >= 0) {
                             var angle = Math.atan2(b[1] - a[1], b[0] - a[0]),
                                 dx = dt * Math.cos(angle),
                                 dy = dt * Math.sin(angle),
