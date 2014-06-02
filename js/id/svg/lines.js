@@ -47,39 +47,38 @@ iD.svg.Lines = function(projection) {
         }
 
         lines = lines.filter(path);
-        // lines.sort(waystack);
         lines.sort(function(a, b) { return a.layer() - b.layer(); });
 
-        function drawPaths(klass) {
-            var paths = surface.select('.layer-' + klass)
-                .selectAll('path.line')
-                .filter(filter)
-                .data(lines, iD.Entity.key);
+        var groups = surface.select('.layer-line')
+            .selectAll('g')
+            .filter(filter)
+            .data(lines, iD.Entity.key);
 
-            var enter = paths.enter()
+        var enter = groups.enter()
+            .append('g')
+            .attr('class', function(d) { return d.id; });
+
+        ['shadow', 'casing', 'stroke'].forEach(function(klass) {
+            enter
                 .append('path')
-                .attr('class', function(d) { return 'way line ' + klass + ' ' + d.id; });
+                .attr('class', function(d) { return 'way line ' + klass + ' ' + d.id; })
+                .call(iD.svg.TagClasses());
+        });
 
-            // Optimization: call simple TagClasses only on enter selection. This
-            // works because iD.Entity.key is defined to include the entity v attribute.
-            if (klass !== 'stroke') {
-                enter.call(iD.svg.TagClasses());
-            } else {
-                paths.call(iD.svg.TagClasses()
-                    .tags(iD.svg.MultipolygonMemberTags(graph)));
-            }
+        groups
+            .order();
 
-            paths
-                .order()
-                .attr('d', path);
+        groups.selectAll('path')
+            .attr('d', path);
 
-            paths.exit()
-                .remove();
-        }
+        // Optimization: call simple TagClasses only on enter selection. This
+        // works because iD.Entity.key is defined to include the entity v attribute.
+        groups.selectAll('path.stroke')
+            .call(iD.svg.TagClasses().tags(iD.svg.MultipolygonMemberTags(graph)));
 
-        drawPaths('shadow');
-        drawPaths('casing');
-        drawPaths('stroke');
+        groups.exit()
+            .remove();
+
 
         var segments = _(lines)
             .filter(function(d) { return d.isOneWay(); })
