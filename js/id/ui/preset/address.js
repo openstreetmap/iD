@@ -1,5 +1,5 @@
 iD.ui.preset.address = function(field, context) {
-    var event = d3.dispatch('change'),
+    var event = d3.dispatch('init', 'change'),
         housenumber,
         street,
         city,
@@ -95,63 +95,72 @@ iD.ui.preset.address = function(field, context) {
             country,
             addressFormat;
 
+        /*
         country = _.find(iD.data.countries.features, function(f) {
             return iD.geo.pointInFeature(center, f);
         });
 
         if (country)
             countryCode = country.properties.countryCode;
-
-        addressFormat = _.find(iD.data.addressFormats, function (a) {
-            return a && a.countryCodes && _.contains(a.countryCodes, countryCode);
-        }) || _.first(iD.data.addressFormats);
+        */
 
         // Enter
 
         var enter = wrap.enter().append('div')
             .attr('class', 'preset-input-wrap');
 
-        enter.selectAll('div')
-            .data(addressFormat.format)
-            .enter()
-            .append('div')
-            .attr('class', 'addr-row')
-            .selectAll('input')
-            .data(function (d) { return d; })
-            .enter()
-            .append('input')
-            .property('type', 'text')
-            .attr('placeholder', function (d) { return field.t('placeholders.' + d); })
-            .attr('class', function (d) { return 'addr-column addr-' + d; });
+        d3.json('http://nominatim.openstreetmap.org/reverse?format=json&lon=' + center[0] + '&lat=' + center[1], function (err, result) {
+            if (result && result.address && result.address.country_code)
+                countryCode = result.address.country_code;
 
-        // Update
+            addressFormat = _.find(iD.data.addressFormats, function (a) {
+                return a && a.countryCodes && _.contains(a.countryCodes, countryCode);
+            }) || _.first(iD.data.addressFormats);
 
-        housenumber = wrap.select('.addr-number');
-        street = wrap.select('.addr-street');
-        city = wrap.select('.addr-city');
-        postcode = wrap.select('.addr-postcode');
+            enter.selectAll('div')
+                .data(addressFormat.format)
+                .enter()
+                .append('div')
+                .attr('class', 'addr-row')
+                .selectAll('input')
+                .data(function (d) { return d; })
+                .enter()
+                .append('input')
+                .property('type', 'text')
+                .attr('placeholder', function (d) { return field.t('placeholders.' + d); })
+                .attr('class', function (d) { return 'addr-column addr-' + d; });
 
-        street
-            .call(d3.combobox()
-                .fetcher(function(value, callback) {
-                    callback(getStreets());
-                }));
+            // Update
 
-        city
-            .call(d3.combobox()
-                .fetcher(function(value, callback) {
-                    callback(getCities());
-                }));
+            housenumber = wrap.select('.addr-number');
+            street = wrap.select('.addr-street');
+            city = wrap.select('.addr-city');
+            postcode = wrap.select('.addr-postcode');
 
-        postcode
-            .call(d3.combobox()
-                .fetcher(function(value, callback) {
-                    callback(getPostCodes());
-                }));
+            street
+                .call(d3.combobox()
+                    .fetcher(function(value, callback) {
+                        callback(getStreets());
+                    }));
 
-        wrap.selectAll('input')
-            .on('blur', change)
-            .on('change', change);
+            city
+                .call(d3.combobox()
+                    .fetcher(function(value, callback) {
+                        callback(getCities());
+                    }));
+
+            postcode
+                .call(d3.combobox()
+                    .fetcher(function(value, callback) {
+                        callback(getPostCodes());
+                    }));
+
+            wrap.selectAll('input')
+                .on('blur', change)
+                .on('change', change);
+
+            event.init();
+        });
     }
 
     function change() {
@@ -170,10 +179,12 @@ iD.ui.preset.address = function(field, context) {
     };
 
     address.tags = function(tags) {
-        housenumber.value(tags['addr:housenumber'] || '');
-        street.value(tags['addr:street'] || '');
-        city.value(tags['addr:city'] || '');
-        postcode.value(tags['addr:postcode'] || '');
+        event.on('init', function () {
+            housenumber.value(tags['addr:housenumber'] || '');
+            street.value(tags['addr:street'] || '');
+            city.value(tags['addr:city'] || '');
+            postcode.value(tags['addr:postcode'] || '');
+        });
     };
 
     address.focus = function() {
