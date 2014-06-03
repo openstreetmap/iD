@@ -59,6 +59,7 @@ _.extend(iD.Way.prototype, {
         if (this.tags.tunnel) return -1;
         if (this.tags.waterway) return -1;
         if (this.tags.manmade === 'pipeline') return -10;
+        if (this.tags.boundary) return -20;
         return 0;
     },
 
