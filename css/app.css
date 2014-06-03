@@ -1497,38 +1497,45 @@ input[type=number] {
 
 /* Preset form address */
 
-.form-field .addr-housename {
-    border: 0;
+.addr-row .addr-column[type="text"] {    
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.addr-row:first-of-type .addr-column[type="text"] {    
+    border-top: 0;
+}
+
+.addr-row .addr-column[type="text"]:first-of-type {    
+    border-left: 0;
+}
+
+.addr-column[type="text"] {     
     border-radius: 0;
+}
+
+.addr-row:last-of-type .addr-column[type="text"]:first-of-type {
+    border-radius: 0 0 0 4px;
+}
+
+.addr-row:last-of-type .addr-column[type="text"]:last-of-type {
+    border-radius: 0 0 4px 0;
 }
 
 .form-field .addr-number {
     width: 33.3333%;
-    border: 0;
-    border-radius: 0;
 }
 
 .form-field .addr-street {
     width: 66.6666%;
-    border-top: 0;
-    border-right: 0;
-    border-bottom: 0;
-    border-radius: 0;
 }
 
 .form-field .addr-city {
     width: 66.6666%;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    border-radius: 0 0 0 4px;
 }
 
 .form-field .addr-postcode {
     width: 33.3333%;
-    border-right: 0;
-    border-bottom: 0;
-    border-radius: 0 0 4px 0;
 }
 
 /* Restrictions editor */

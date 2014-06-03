@@ -1,0 +1,9 @@
+[
+    {
+        "format": [["number", "street"], ["city", "postcode"]]
+    },
+    {
+        "countryCodes": ["AT", "CH", "DE"],
+        "format": [["street", "number"], ["postcode", "city"]]
+    }
+]

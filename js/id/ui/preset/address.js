@@ -89,33 +89,40 @@ iD.ui.preset.address = function(field, context) {
     }
 
     function address(selection) {
-        var wrap = selection.selectAll('.preset-input-wrap')
-            .data([0]);
+        var wrap = selection.selectAll('.preset-input-wrap').data([0]),
+            center = entity.extent(context.graph()).center(),
+            countryCode,
+            country,
+            addressFormat;
+
+        country = _.find(iD.data.countries.features, function(f) {
+            return iD.geo.pointInFeature(center, f);
+        });
+
+        if (country)
+            countryCode = country.properties.countryCode;
+
+        addressFormat = _.find(iD.data.addressFormats, function (a) {
+            return a && a.countryCodes && _.contains(a.countryCodes, countryCode);
+        }) || _.first(iD.data.addressFormats);
 
         // Enter
 
         var enter = wrap.enter().append('div')
             .attr('class', 'preset-input-wrap');
 
-        enter.append('input')
+        enter.selectAll('div')
+            .data(addressFormat.format)
+            .enter()
+            .append('div')
+            .attr('class', 'addr-row')
+            .selectAll('input')
+            .data(function (d) { return d; })
+            .enter()
+            .append('input')
             .property('type', 'text')
-            .attr('placeholder', field.t('placeholders.number'))
-            .attr('class', 'addr-number');
-
-        enter.append('input')
-            .property('type', 'text')
-            .attr('placeholder', field.t('placeholders.street'))
-            .attr('class', 'addr-street');
-
-        enter.append('input')
-            .property('type', 'text')
-            .attr('placeholder', field.t('placeholders.city'))
-            .attr('class', 'addr-city');
-
-        enter.append('input')
-            .property('type', 'text')
-            .attr('placeholder', field.t('placeholders.postcode'))
-            .attr('class', 'addr-postcode');
+            .attr('placeholder', function (d) { return field.t('placeholders.' + d); })
+            .attr('class', function (d) { return 'addr-column addr-' + d; });
 
         // Update
 

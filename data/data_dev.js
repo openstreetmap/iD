@@ -18,7 +18,9 @@ iD.data = {
             path + 'data/operations-sprite.json',
             path + 'data/locales.json',
             path + 'dist/locales/en.json',
-            path + 'data/name-suggestions.json'
+            path + 'data/name-suggestions.json',
+            path + 'data/address-formats.json',
+            path + 'data/countries.json'
             ], d3.json, function (err, data) {
 
             iD.data = {
@@ -37,7 +39,9 @@ iD.data = {
                 operations: data[10],
                 locales: data[11],
                 en: data[12],
-                suggestions: data[13]
+                suggestions: data[13],
+                addressFormats: data[14],
+                countries: data[15]
             };
 
             callback();
