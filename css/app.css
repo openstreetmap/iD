@@ -1497,20 +1497,20 @@ input[type=number] {
 
 /* Preset form address */
 
-.addr-row .addr-column[type="text"] {    
+.addr-row .addr-column[type="text"] {
     border-right: 0;
     border-bottom: 0;
 }
 
-.addr-row:first-of-type .addr-column[type="text"] {    
+.addr-row:first-of-type .addr-column[type="text"] {
     border-top: 0;
 }
 
-.addr-row .addr-column[type="text"]:first-of-type {    
+.addr-row .addr-column[type="text"]:first-of-type {
     border-left: 0;
 }
 
-.addr-column[type="text"] {     
+.addr-column[type="text"] {
     border-radius: 0;
 }
 
@@ -1520,6 +1520,9 @@ input[type=number] {
 
 .addr-row:last-of-type .addr-column[type="text"]:last-of-type {
     border-radius: 0 0 4px 0;
+}
+
+.form-field .addr-housename {
 }
 
 .form-field .addr-number {

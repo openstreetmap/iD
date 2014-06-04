@@ -1,5 +1,6 @@
 iD.ui.preset.address = function(field, context) {
     var event = d3.dispatch('init', 'change'),
+        housename,
         housenumber,
         street,
         city,
@@ -92,7 +93,7 @@ iD.ui.preset.address = function(field, context) {
         var wrap = selection.selectAll('.preset-input-wrap').data([0]),
             center = entity.extent(context.graph()).center(),
             countryCode,
-            country,
+            //country,
             addressFormat;
 
         /*
@@ -132,6 +133,7 @@ iD.ui.preset.address = function(field, context) {
 
             // Update
 
+            housename = wrap.select('.addr-housename');
             housenumber = wrap.select('.addr-number');
             street = wrap.select('.addr-street');
             city = wrap.select('.addr-city');
@@ -165,6 +167,7 @@ iD.ui.preset.address = function(field, context) {
 
     function change() {
         event.change({
+            'addr:housename': housename.value() || undefined,
             'addr:housenumber': housenumber.value() || undefined,
             'addr:street': street.value() || undefined,
             'addr:city': city.value() || undefined,
@@ -180,6 +183,7 @@ iD.ui.preset.address = function(field, context) {
 
     address.tags = function(tags) {
         event.on('init', function () {
+            housename.value(tags['addr:housename'] || '');
             housenumber.value(tags['addr:housenumber'] || '');
             street.value(tags['addr:street'] || '');
             city.value(tags['addr:city'] || '');
