@@ -181,7 +181,7 @@ iD.ui.preset = function(context) {
 
         function show(field) {
             field.show = true;
-            context.presets()(selection);
+            presets(selection);
             field.input.focus();
         }
 
