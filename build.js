@@ -7,8 +7,7 @@ var fs = require('fs'),
     jsonschema = require('jsonschema'),
     fieldSchema = require('./data/presets/schema/field.json'),
     presetSchema = require('./data/presets/schema/preset.json'),
-    suggestions = require('./data/name-suggestions.json'),
-    countries = require('./data/countries.json');
+    suggestions = require('./data/name-suggestions.json');
 
 function readtxt(f) {
     return fs.readFileSync(f, 'utf8');
@@ -182,14 +181,6 @@ function generatePresets() {
     };
 }
 
-function updateCountryBounds() {
-    _.forEach(countries.features, function (country) {
-        country.properties.bounds = d3.geo.bounds(country);
-    });
-
-    return countries;
-}
-
 function validateCategoryPresets(categories, presets) {
     _.forEach(categories, function(category) {
         if (category.members) {
@@ -230,7 +221,6 @@ validatePresetFields(presets.presets, fields);
 fs.writeFileSync('data/presets/categories.json', stringify(categories));
 fs.writeFileSync('data/presets/fields.json', stringify(fields));
 fs.writeFileSync('data/presets/presets.json', stringify(presets.presets));
-fs.writeFileSync('data/countries.json', stringify(updateCountryBounds(countries)));
 fs.writeFileSync('js/id/core/area_keys.js', '/* jshint -W109 */\niD.areaKeys = ' + stringify(presets.areaKeys) + ';');
 fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: presets.presetsYaml}}));
 
@@ -257,6 +247,5 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     locales: r('locales.json'),
     en: read('dist/locales/en.json'),
     suggestions: r('name-suggestions.json'),
-    addressFormats: r('address-formats.json'),
-    countries: r('countries.json')
+    addressFormats: r('address-formats.json')
 }) + ';');
