@@ -1,6 +1,6 @@
 iD.countryCode  = function() {
     var countryCode = {},
-        endpoint = 'http://countrycode.refactory.at/?';
+        endpoint = 'http://countrycode.refactory.at/api/1/?';
 
     if (!iD.countryCode.cache) {
         iD.countryCode.cache = [];
