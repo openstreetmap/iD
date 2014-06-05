@@ -241,12 +241,12 @@ describe('iD.geo', function() {
             expect(iD.geo.pointInFeature(point, feature)).to.be.true;
         });
         it('point should be in a polygon feature with bounds', function() {
-            var feature = { geometry: { type: 'Polygon', coordinates: [[[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]]] }, properties: { bounds: [[0, 0], [1, 1]] } };
+            var feature = { geometry: { type: 'Polygon', coordinates: [[[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]]] }, bounds: [[0, 0], [1, 1]] };
             var point = [0.5, 0.5];
             expect(iD.geo.pointInFeature(point, feature)).to.be.true;
         });
         it('point should not be in a polygon feature with bounds', function() {
-            var feature = { geometry: { type: 'Polygon', coordinates: [[[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]]] }, properties: { bounds: [[0, 0], [1, 1]] } };
+            var feature = { geometry: { type: 'Polygon', coordinates: [[[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]]] }, bounds: [[0, 0], [1, 1]] };
             var point = [0.5, 1.5];
             expect(iD.geo.pointInFeature(point, feature)).to.be.false;
         });

@@ -137,8 +137,8 @@ iD.geo.pathLength = function(path) {
 };
 
 iD.geo.pointInFeature = function(point, feature) {
-    if (feature.properties && feature.properties.bounds) {
-        var bounds = feature.properties.bounds;
+    if (feature.bounds) {
+        var bounds = feature.bounds;
 
         if (point[0] < bounds[0][0] || point[0] > bounds[1][0] || point[1] < bounds[0][1] || point[1] > bounds[1][1])
             return false;

@@ -93,26 +93,16 @@ iD.ui.preset.address = function(field, context) {
         var wrap = selection.selectAll('.preset-input-wrap').data([0]),
             center = entity.extent(context.graph()).center(),
             countryCode,
-            //country,
             addressFormat;
-
-        /*
-        country = _.find(iD.data.countries.features, function(f) {
-            return iD.geo.pointInFeature(center, f);
-        });
-
-        if (country)
-            countryCode = country.properties.countryCode;
-        */
 
         // Enter
 
         var enter = wrap.enter().append('div')
             .attr('class', 'preset-input-wrap');
 
-        d3.json('http://nominatim.openstreetmap.org/reverse?format=json&lon=' + center[0] + '&lat=' + center[1], function (err, result) {
-            if (result && result.address && result.address.country_code)
-                countryCode = result.address.country_code;
+        iD.countryCode().search(center, function (err, result) {
+            if (result)
+                countryCode = result.countryCode;
 
             addressFormat = _.find(iD.data.addressFormats, function (a) {
                 return a && a.countryCodes && _.contains(a.countryCodes, countryCode);

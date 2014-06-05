@@ -3,11 +3,11 @@
         "format": [["number", "street"], ["city", "postcode"]]
     },
     {
-        "countryCodes": ["gb"],
+        "countryCodes": ["GB"],
         "format": [["housename"], ["number", "street"], ["city", "postcode"]]
     },
     {
-        "countryCodes": ["at", "ch", "de"],
+        "countryCodes": ["AT", "CH", "DE"],
         "format": [["street", "number"], ["postcode", "city"]]
     }
 ]
