@@ -182,6 +182,18 @@
             },
             "not_eligible": "Linien können nicht am Anfang oder Ende geteilt werden.",
             "multiple_ways": "Es gibt hier zu viele Linien, um diese teilen zu können."
+        },
+        "restriction": {
+            "help": {
+                "select": "Klicke um ein Straßensegment zu selektieren.",
+                "toggle": "Klicke um das Abbiegeverbot umzudrehen.",
+                "toggle_on": "Klicke um ein \"{restriction}\" Verbot anzulegen.",
+                "toggle_off": "Klicke um das \"{restriction}\" Verbot zu löschen."
+            },
+            "annotation": {
+                "create": "Füge ein Abbiegeverbot ein",
+                "delete": "Lösche ein Abbiegeverbot"
+            }
         }
     },
     "undo": {
@@ -412,6 +424,9 @@
             "category-rail": {
                 "name": "Schiene"
             },
+            "category-restriction": {
+                "name": "Abbiegevorschrift"
+            },
             "category-road": {
                 "name": "Straße"
             },
@@ -594,6 +609,9 @@
             "entrance": {
                 "label": "Typ"
             },
+            "except": {
+                "label": "Ausnahmen"
+            },
             "fax": {
                 "label": "Fax",
                 "placeholder": "+31 42 123 4567"
@@ -737,10 +755,16 @@
                 "label": "Typ"
             },
             "oneway": {
-                "label": "Einbahnstraße"
+                "label": "Einbahnstraße",
+                "options": {
+                    "undefined": "Vermutlich Nein"
+                }
             },
             "oneway_yes": {
-                "label": "Einbahnstraße"
+                "label": "Einbahnstraße",
+                "options": {
+                    "undefined": "Vermutlich Ja"
+                }
             },
             "opening_hours": {
                 "label": "Öffnungszeiten"
@@ -815,6 +839,9 @@
             },
             "restriction": {
                 "label": "Typ"
+            },
+            "restrictions": {
+                "label": "Abbiegevorschriften"
             },
             "route": {
                 "label": "Typ"
@@ -1111,6 +1138,10 @@
             "amenity/doctor": {
                 "name": "Arzt",
                 "terms": "Arzt, Mediziner"
+            },
+            "amenity/dojo": {
+                "name": "Kampfsportstudio",
+                "terms": "Kampfsportstudio, Kampfsportzentrum, Karatestudio"
             },
             "amenity/drinking_water": {
                 "name": "Trinkwasserstelle",
@@ -1700,6 +1731,10 @@
                 "name": "Fussgängerüberweg",
                 "terms": "Zebrastreifen"
             },
+            "footway/crosswalk": {
+                "name": "Zebrastreifen",
+                "terms": "Zebrastreifen, Fußgängerübergang, Fußgängerstreifen"
+            },
             "footway/sidewalk": {
                 "name": "Bürgersteig",
                 "terms": "Gehsteig, Fußgängerweg, Gehweg, Fußweg, Gangsteig, Trottoir"
@@ -1756,6 +1791,10 @@
                 "name": "Fußgängerüberweg",
                 "terms": "Zebrastreifen"
             },
+            "highway/crosswalk": {
+                "name": "Zebrastreifen",
+                "terms": "Zebrastreifen, Fußgängerübergang, Fußgängerstreifen"
+            },
             "highway/cycleway": {
                 "name": "Radweg",
                 "terms": "Radweg"
@@ -1777,8 +1816,8 @@
                 "terms": "Autobahn"
             },
             "highway/motorway_junction": {
-                "name": "Autobahnausfahrt",
-                "terms": "Autobahn-Anschlussstelle, Autobahn-Abfahrt"
+                "name": "Autobahnkreuz / Autobahnanschluss",
+                "terms": "Autobahnkreuz, Autobahnanschluss, Autobahndreieck, Autobahnknoten, Autobahnzubringer"
             },
             "highway/motorway_link": {
                 "name": "Autobahnanschluss",
@@ -2089,8 +2128,8 @@
                 "terms": "Gleitbahn, Rampe"
             },
             "leisure/sports_center": {
-                "name": "Sportzentrum",
-                "terms": "Fitnesscenter"
+                "name": "Fitnessstudio",
+                "terms": "Fitnessstudio, Sportstudio, Trainingszentrum"
             },
             "leisure/stadium": {
                 "name": "Stadion",
@@ -2825,8 +2864,36 @@
                 "terms": "Multipolygon"
             },
             "type/restriction": {
-                "name": "Beschränkung",
-                "terms": "Beschränkung, Einschränkung"
+                "name": "Sonstige Abbiegevorschrift",
+                "terms": "Abbiegebeschränkung, Beschränkung, Einschränkung"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "Linksabbiegeverbot",
+                "terms": "Linksabbiegeverbot, Linksabbiegen verboten, kein Linksabbiegen, kein Abbiegen nach links"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "Rechtsabbiegeverbot",
+                "terms": "Rechtsabbiegeverbot, Rechtsabbiegen verboten, kein Rechtsabbiegen, kein Abbiegen nach rechts"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "Geradeausfahrverbot",
+                "terms": "Geradeausfahrverbot, Geradeausfahren verboten, geradeaus fahren nicht erlaubt"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "Kehrtwendeverbot",
+                "terms": "Kehrtwendeverbot, Kehrtwende verboten, Umdrehen verboten"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Linksabbiegegebot",
+                "terms": "Linksabbiegegebot, Links abbiegen geboten, nur links abbiegen erlaubt"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Rechtsabbiegegebot",
+                "terms": "Rechtsabbiegegebot, Rechts abbiegen geboten, nur rechts abbiegen erlaubt"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "Kehrtwendeverbot",
+                "terms": "Kehrwendeverbot, keine Kehrtwende erlaubt, Umdrehverbot, Umdrehen verboten"
             },
             "type/route": {
                 "name": "Route",

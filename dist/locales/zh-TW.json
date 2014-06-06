@@ -182,6 +182,18 @@
             },
             "not_eligible": "不能於線段的首尾進行分割。",
             "multiple_ways": "太多線段，未能進行分割。"
+        },
+        "restriction": {
+            "help": {
+                "select": "點擊以選擇一段道路",
+                "toggle": "點擊以切換轉向限制。",
+                "toggle_on": "點擊以增加\"{restriction}\"的限制。",
+                "toggle_off": "點擊以移除\"{restriction}\"的限制。"
+            },
+            "annotation": {
+                "create": "已增加轉向限制",
+                "delete": "已移除轉向限制"
+            }
         }
     },
     "undo": {
@@ -267,6 +279,8 @@
         "percent_brightness": "{opacity}%的光度",
         "none": "無",
         "custom": "客製化",
+        "custom_button": "編輯自訂的背景",
+        "custom_prompt": "輸入地圖影像區塊的URL模版。以 Z/X/Y 方式存取區塊的伺服器，可在模版中使用{z}, {x}, {y}作參數，而以quadtile存取區塊的伺服器，則可使用{u}作參數。",
         "fix_misalignment": "校準",
         "reset": "重設"
     },
@@ -409,6 +423,9 @@
             },
             "category-rail": {
                 "name": "鐵道"
+            },
+            "category-restriction": {
+                "name": "限制"
             },
             "category-road": {
                 "name": "道路"
@@ -589,6 +606,9 @@
             "entrance": {
                 "label": "種類"
             },
+            "except": {
+                "label": "例外"
+            },
             "fax": {
                 "label": "傳真",
                 "placeholder": "+31 42 123 4567"
@@ -601,6 +621,9 @@
             },
             "fixme": {
                 "label": "Fix Me"
+            },
+            "fuel": {
+                "label": "加油站"
             },
             "gauge": {
                 "label": "軌距"
@@ -698,10 +721,16 @@
                 "label": "種類"
             },
             "oneway": {
-                "label": "單行道"
+                "label": "單行道",
+                "options": {
+                    "undefined": "假設為否"
+                }
             },
             "oneway_yes": {
-                "label": "單程路"
+                "label": "單程路",
+                "options": {
+                    "undefined": "假設為是"
+                }
             },
             "opening_hours": {
                 "label": "小時"
@@ -774,6 +803,9 @@
             "restriction": {
                 "label": "種類"
             },
+            "restrictions": {
+                "label": "轉向限制"
+            },
             "route": {
                 "label": "種類"
             },
@@ -794,6 +826,9 @@
             },
             "shop": {
                 "label": "種類"
+            },
+            "smoking": {
+                "label": "吸煙"
             },
             "social_facility_for": {
                 "label": "服務對象",
@@ -952,6 +987,9 @@
             "amenity/bar": {
                 "name": "酒吧"
             },
+            "amenity/bbq": {
+                "name": "燒烤"
+            },
             "amenity/bench": {
                 "name": "長椅"
             },
@@ -978,6 +1016,9 @@
             "amenity/car_wash": {
                 "name": "洗車店",
                 "terms": "洗車行,洗車店"
+            },
+            "amenity/charging_station": {
+                "name": "充電站"
             },
             "amenity/childcare": {
                 "name": "托兒所",
@@ -1039,6 +1080,9 @@
             },
             "amenity/marketplace": {
                 "name": "市場"
+            },
+            "amenity/nightclub": {
+                "name": "夜總會"
             },
             "amenity/parking": {
                 "name": "停車場"
@@ -1204,8 +1248,23 @@
             "building/apartments": {
                 "name": "分層公寓"
             },
+            "building/bunker": {
+                "name": "地堡"
+            },
+            "building/cathedral": {
+                "name": "大教堂"
+            },
+            "building/church": {
+                "name": "教堂"
+            },
             "building/commercial": {
                 "name": "商用樓宇"
+            },
+            "building/construction": {
+                "name": "施工中屋宇"
+            },
+            "building/entrance": {
+                "name": "入口/出口"
             },
             "building/garage": {
                 "name": "車庫"
@@ -1411,6 +1470,9 @@
             "emergency/phone": {
                 "name": "緊急電話"
             },
+            "entrance": {
+                "name": "入口/出口"
+            },
             "footway/crossing": {
                 "name": "行人過路線"
             },
@@ -1469,7 +1531,7 @@
                 "name": "高速公路"
             },
             "highway/motorway_junction": {
-                "name": "高速公路交匯處"
+                "name": "高速公路交匯處/出口"
             },
             "highway/motorway_link": {
                 "name": "高速公路引道"
@@ -1618,6 +1680,9 @@
             "landuse/industrial": {
                 "name": "工業區"
             },
+            "landuse/landfill": {
+                "name": "堆填區"
+            },
             "landuse/meadow": {
                 "name": "牧場"
             },
@@ -1690,7 +1755,7 @@
                 "name": "船架滑道"
             },
             "leisure/sports_center": {
-                "name": "體肓中心"
+                "name": "體肓中心/健身室"
             },
             "leisure/stadium": {
                 "name": "體育場"
@@ -2238,6 +2303,27 @@
             },
             "type/restriction": {
                 "name": "限制"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "不准左轉"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "不准右轉"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "不准直駛"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "不准掉頭"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "只准左轉"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "只准右轉"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "只准直駛"
             },
             "type/route": {
                 "name": "路線"

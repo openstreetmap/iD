@@ -182,6 +182,18 @@
             },
             "not_eligible": "Viivoja ei voi jakaa alusta tai lopusta.",
             "multiple_ways": "Viivoja on liian monta jotta niitä voitaisiin jakaa osiin."
+        },
+        "restriction": {
+            "help": {
+                "select": "Valitse tienpätkä napsauttamalla.",
+                "toggle": "Muuta kääntymiskieltoja napsauttamalla.",
+                "toggle_on": "Lisää kääntymisrajoitus \"{restriction}\" napsauttamalla.",
+                "toggle_off": "Poista kääntymisrajoitus \"{restriction}\" napsauttamalla."
+            },
+            "annotation": {
+                "create": "Kääntymisrajoitus lisätty.",
+                "delete": "Kääntymisrajoitus poistettu."
+            }
         }
     },
     "undo": {
@@ -408,6 +420,9 @@
             "category-rail": {
                 "name": "Rautatie"
             },
+            "category-restriction": {
+                "name": "Rajoitus"
+            },
             "category-road": {
                 "name": "Tie"
             },
@@ -533,7 +548,7 @@
             },
             "capacity": {
                 "label": "Paikkamäärä",
-                "placeholder": "50, 100, 200..."
+                "placeholder": "5, 10, 20, 100..."
             },
             "cardinal_direction": {
                 "label": "Suunta"
@@ -572,6 +587,9 @@
             "description": {
                 "label": "Kuvaus"
             },
+            "electrified": {
+                "label": "Sähköistys"
+            },
             "elevation": {
                 "label": "Korkeus"
             },
@@ -580,6 +598,9 @@
             },
             "entrance": {
                 "label": "Tyyppi"
+            },
+            "except": {
+                "label": "Poikkeukset"
             },
             "fax": {
                 "label": "Faksinumero",
@@ -742,6 +763,9 @@
             "place": {
                 "label": "Tyyppi"
             },
+            "population": {
+                "label": "Asukasmäärä"
+            },
             "power": {
                 "label": "Tyyppi"
             },
@@ -781,6 +805,9 @@
             "restriction": {
                 "label": "Tyyppi"
             },
+            "restrictions": {
+                "label": "Kääntymisrajoitukset"
+            },
             "route": {
                 "label": "Tyyppi"
             },
@@ -798,6 +825,9 @@
             },
             "shop": {
                 "label": "Tyyppi"
+            },
+            "sloped_curb": {
+                "label": "Viistetty reunakivi"
             },
             "smoking": {
                 "label": "Tupakointi"
@@ -826,6 +856,9 @@
             },
             "surface": {
                 "label": "Päällyste"
+            },
+            "tactile_paving": {
+                "label": "Huomioreuna näkövammaisille"
             },
             "tourism": {
                 "label": "Tyyppi"
@@ -877,7 +910,7 @@
                 "name": "Ilmarata"
             },
             "aerialway/cable_car": {
-                "name": "köysirata"
+                "name": "Köysirata"
             },
             "aerialway/chair_lift": {
                 "name": "Tuolihissi"
@@ -982,8 +1015,8 @@
                 "terms": "Kahvila, Kahvitupa, Teehuone"
             },
             "amenity/car_rental": {
-                "name": "Auton vuokraus",
-                "terms": "autovuokraamo, autonvuokraus, auton vuokraus, auto, vuokra-auto"
+                "name": "Autonvuokraus",
+                "terms": "autovuokraamo, autonvuokraus, auton vuokraus, auto, vuokra-auto, auton vuokraaminen, vuokraaminen"
             },
             "amenity/car_sharing": {
                 "name": "Kimppakyyti"
@@ -1054,7 +1087,7 @@
                 "terms": "Sairaala-alue"
             },
             "amenity/kindergarten": {
-                "name": "Päiväkodin piha",
+                "name": "Päiväkotialue",
                 "terms": "päiväkoti, piha, ulkoilualue, lastentarha"
             },
             "amenity/library": {
@@ -1118,8 +1151,8 @@
                 "terms": "Ravintola, Ruokaravintola, Bistro, Krouvi, Pizzeria, Ruokala"
             },
             "amenity/school": {
-                "name": "Koulun piha",
-                "terms": "Koulun piha, Koulualue"
+                "name": "Koulualue",
+                "terms": "koulu, koulutus, ala-aste, koulualue, alue, koulupiha, piha, välitunti, välituntialue"
             },
             "amenity/shelter": {
                 "name": "Katos"
@@ -1232,6 +1265,9 @@
             "building/apartments": {
                 "name": "Kerrostalo"
             },
+            "building/barn": {
+                "name": "Lato"
+            },
             "building/church": {
                 "name": "Kirkko"
             },
@@ -1290,6 +1326,10 @@
                 "name": "Vaja",
                 "terms": "vaja, mökki, liiteri"
             },
+            "building/stable": {
+                "name": "Talli",
+                "terms": "hevonen, hevostalli, hevoset, ratsastus, ratsastaminen, hevoskoti"
+            },
             "building/terrace": {
                 "name": "Rivitalo"
             },
@@ -1312,13 +1352,13 @@
                 "name": "Mehiläistarha"
             },
             "craft/blacksmith": {
-                "name": "seppä"
+                "name": "Rautaseppä"
             },
             "craft/boatbuilder": {
                 "name": "veneentekijä"
             },
             "craft/bookbinder": {
-                "name": "Kirjansitomo"
+                "name": "Kirjasitomo"
             },
             "craft/brewery": {
                 "name": "panimo"
@@ -1362,14 +1402,14 @@
                 "terms": "eriste, eristeet, eristesuunnittelija, eristesuunnittelu, eristeliike"
             },
             "craft/jeweler": {
-                "name": "kultaseppä"
+                "name": "Kultaseppä"
             },
             "craft/key_cutter": {
                 "name": "Lukkoseppä",
                 "terms": "avain, lukko, avaimet, lukot, lukkoseppä, lukkoliike, avainliike, avainseppä"
             },
             "craft/locksmith": {
-                "name": "lukkoseppä"
+                "name": "Lukkoseppä"
             },
             "craft/metal_construction": {
                 "name": "metallirakennelma"
@@ -1399,7 +1439,7 @@
                 "name": "Kattoseppä"
             },
             "craft/saddler": {
-                "name": "satulaseppä"
+                "name": "Satulaseppä"
             },
             "craft/sailmaker": {
                 "name": "purjeentekijä"
@@ -1415,7 +1455,7 @@
                 "name": "Kuvanveistämö"
             },
             "craft/shoemaker": {
-                "name": "suutari"
+                "name": "Suutari"
             },
             "craft/stonemason": {
                 "name": "Kivenhakkaamo"
@@ -1524,7 +1564,8 @@
                 "name": "Moottoritie"
             },
             "highway/motorway_junction": {
-                "name": "Moottoritien liittymä"
+                "name": "Moottoritien liittymä",
+                "terms": "ramppi, eritasoliittymä, monitasoliittymä, moottoritie, poistumisliittymä, poistumisramppi"
             },
             "highway/motorway_link": {
                 "name": "Moottoritien ramppi"
@@ -1635,7 +1676,8 @@
                 "name": "Tienvarren risti"
             },
             "historic/wayside_shrine": {
-                "name": "Tienvarren alttari"
+                "name": "Tienvarsialttari",
+                "terms": "tienvarsi, kadunvarsi, varsi, tie, katu, rukoilupaikka, pyhättö, uskonnot, uskonto, kirkko, pyhä, uhripaikka, uhrauspaikka, uhrilahja"
             },
             "landuse": {
                 "name": "Maankäyttö"
@@ -1729,7 +1771,8 @@
                 "terms": "skeittipuisto, skeittaus, skeitti, rullalautailu, rullalauta, rullalautailupuisto, parkit, parkki, skeittiparkki, skeittiparkit"
             },
             "leisure/pitch/soccer": {
-                "name": "Jalkapallokenttä"
+                "name": "Jalkapallokenttä",
+                "terms": "jalkapallo, urheilu, liikunta, kenttä, areena, futis"
             },
             "leisure/pitch/tennis": {
                 "name": "Tenniskenttä"
@@ -1744,9 +1787,6 @@
             "leisure/slipway": {
                 "name": "Veneramppi",
                 "terms": "veneramppi, vesillelaskupaikka, veneenlaskupaikka, vene, järveenlaskupaikka, järviramppi"
-            },
-            "leisure/sports_center": {
-                "name": "Urheilukeskus"
             },
             "leisure/stadium": {
                 "name": "Stadion"
@@ -1834,6 +1874,9 @@
                 "name": "Rannikko",
                 "terms": "Rantaviiva"
             },
+            "natural/fell": {
+                "name": "Tunturi"
+            },
             "natural/glacier": {
                 "name": "Jäätikkö"
             },
@@ -1882,6 +1925,9 @@
             "office/accountant": {
                 "name": "Tilintarkastustoimisto",
                 "terms": "tilintarkastus, tilintarkastaja, kirjanpito, kirjanpitäjä, kirjanpitotoimisto"
+            },
+            "office/architect": {
+                "name": "Arkkitehtitoimisto"
             },
             "office/company": {
                 "name": "Yritystoimisto"
@@ -2050,6 +2096,10 @@
             "shop/alcohol": {
                 "name": "Alkoholimyymälä"
             },
+            "shop/art": {
+                "name": "Taideliike",
+                "terms": "maalaus, taide, yritys, kauppa, liike, putiikki, antiikki, veistos, maalaaminen"
+            },
             "shop/bakery": {
                 "name": "Leipomo"
             },
@@ -2157,6 +2207,10 @@
             },
             "shop/laundry": {
                 "name": "Pesula"
+            },
+            "shop/locksmith": {
+                "name": "Lukkoliike",
+                "terms": "lukkoseppä, lukko, lukot, hälytys, valvonta, hälytin, hälyttimet, lukonavaus"
             },
             "shop/lottery": {
                 "name": "Veikkauspiste",
@@ -2290,6 +2344,27 @@
             "type/restriction": {
                 "name": "Rajoitus"
             },
+            "type/restriction/no_left_turn": {
+                "name": "Ei saa kääntyä vasemmalle"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "Ei saa kääntyä oikealle"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "Ei saa ajaa suoraan"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "Ei saa tehdä U-käännöstä"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Saa kääntyä vain vasemmalle"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Saa kääntyä vain oikealle"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "Ei saa kääntyä lainkaan"
+            },
             "type/route": {
                 "name": "Reitti"
             },
@@ -2308,6 +2383,9 @@
             },
             "type/route/foot": {
                 "name": "Kävelyreitti"
+            },
+            "type/route/hiking": {
+                "name": "Vaellusreitti"
             },
             "type/route/pipeline": {
                 "name": "Putkilinja"

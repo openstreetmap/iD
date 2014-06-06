@@ -180,6 +180,12 @@
             },
             "not_eligible": "Linie nie mogą zostać rozdzielone na ich początku lub końcu.",
             "multiple_ways": "Jest tu zbyt wiele linii do rozdzielenia."
+        },
+        "restriction": {
+            "annotation": {
+                "create": "Dodano zakaz/nakaz skrętu",
+                "delete": "Usunięto zakaz/nakaz skrętu"
+            }
         }
     },
     "undo": {
@@ -746,6 +752,9 @@
             "restriction": {
                 "label": "Typ"
             },
+            "restrictions": {
+                "label": "Zakazy skrętu"
+            },
             "route": {
                 "label": "Typ"
             },
@@ -789,7 +798,8 @@
                     "bridge": "Most",
                     "tunnel": "Tunel",
                     "embankment": "Nasyp",
-                    "cutting": "Wykop"
+                    "cutting": "Wykop",
+                    "ford": "Bród"
                 }
             },
             "studio_type": {
@@ -976,6 +986,9 @@
             "amenity/car_wash": {
                 "name": "Myjnia samochodowa",
                 "terms": "myjnia"
+            },
+            "amenity/charging_station": {
+                "name": "Stacja ładowania pojazdów"
             },
             "amenity/childcare": {
                 "name": "Żłobek",
@@ -1233,7 +1246,7 @@
                 "terms": "budynek,budowla,dom"
             },
             "building/apartments": {
-                "name": "Apartamenty",
+                "name": "Budynek mieszkalny wielorodzinny",
                 "terms": "blok,kamienica"
             },
             "building/barn": {
@@ -1257,6 +1270,9 @@
             "building/commercial": {
                 "name": "Nieruchomość komercyjna",
                 "terms": "sklep,komercyjny,sprzedaż,handlowy"
+            },
+            "building/detached": {
+                "name": "Dom wolnostojący"
             },
             "building/dormitory": {
                 "name": "Akademik",
@@ -1353,8 +1369,14 @@
             "craft/handicraft": {
                 "name": "Rzemiosło"
             },
+            "craft/hvac": {
+                "name": "Klimatyzacja"
+            },
             "craft/jeweler": {
                 "name": "Jubiler"
+            },
+            "craft/key_cutter": {
+                "name": "Dorabianie kluczy"
             },
             "craft/locksmith": {
                 "name": "Ślusarz"
@@ -1448,6 +1470,9 @@
                 "name": "Chodnik",
                 "terms": "chodnik"
             },
+            "ford": {
+                "name": "Bród"
+            },
             "golf/hole": {
                 "name": "dołek na polu golfowym "
             },
@@ -1486,10 +1511,6 @@
             "highway/motorway": {
                 "name": "Autostrada",
                 "terms": "autostrada"
-            },
-            "highway/motorway_junction": {
-                "name": "Węzeł autostradowy",
-                "terms": "węzeł, skrzyżowanie, autostrad"
             },
             "highway/motorway_link": {
                 "name": "Autostrada - wjazd/zjazd",
@@ -1675,6 +1696,10 @@
             "landuse/industrial": {
                 "name": "Obszar przemysłowy"
             },
+            "landuse/landfill": {
+                "name": "Wysypisko",
+                "terms": "składowisko odpadów,śmieci"
+            },
             "landuse/meadow": {
                 "name": "Łąka",
                 "terms": "Łąka"
@@ -1707,6 +1732,9 @@
             },
             "leisure/dog_park": {
                 "name": "Park dla psów"
+            },
+            "leisure/firepit": {
+                "name": "Miejsce na ognisko"
             },
             "leisure/garden": {
                 "name": "Ogród",
@@ -1767,10 +1795,6 @@
             "leisure/slipway": {
                 "name": "Pochylnia okrętowa",
                 "terms": "pochylnia"
-            },
-            "leisure/sports_center": {
-                "name": "Centrum sportowe",
-                "terms": "centrum,sportowe,rekreacji,rekreacja,sport,boisko,stadion"
             },
             "leisure/stadium": {
                 "name": "Stadion",
@@ -2063,6 +2087,9 @@
                 "name": "Kolej jednoszynowa",
                 "terms": "Kolej jednoszynowa"
             },
+            "railway/narrow_gauge": {
+                "name": "Linia kolejowa wąskotorowa"
+            },
             "railway/platform": {
                 "name": "Peron kolejowy"
             },
@@ -2182,6 +2209,10 @@
             "shop/florist": {
                 "name": "Kwiaciarnia",
                 "terms": "kwiaciarnia"
+            },
+            "shop/funeral_directors": {
+                "name": "Zakład pogrzebowy",
+                "terms": "pochówek,pogrzeb"
             },
             "shop/furniture": {
                 "name": "Sklep meblowy",
@@ -2366,6 +2397,24 @@
             "type/restriction": {
                 "name": "Ograniczenie",
                 "terms": "restrykcja"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "Zakaz skrętu w lewo"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "Zakaz skrętu w prawo"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "Zakaz jazdy prosto"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "Zakaz zawracania"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Nakaz skrętu w lewo"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Nakaz skrętu w prawo"
             },
             "type/route": {
                 "name": "Trasa",

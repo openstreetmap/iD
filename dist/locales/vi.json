@@ -182,6 +182,18 @@
             },
             "not_eligible": "Không thể cắt đôi đường kẻ vào đầu hoặc cuối đường.",
             "multiple_ways": "Có quá nhiều đường kẻ tại đây để cắt đôi."
+        },
+        "restriction": {
+            "help": {
+                "select": "Nhấn chuột để chọn một khúc đường.",
+                "toggle": "Nhấn chuột để thêm hoặc bỏ hạn chế rẽ.",
+                "toggle_on": "Nhấn chuột để thêm hạn chế “{restriction}”.",
+                "toggle_off": "Bấm để bỏ hạn chế “{restriction}”."
+            },
+            "annotation": {
+                "create": "thêm hạn chế rẽ",
+                "delete": "bỏ hạn chế rẽ"
+            }
         }
     },
     "undo": {
@@ -412,6 +424,9 @@
             "category-rail": {
                 "name": "Đường sắt"
             },
+            "category-restriction": {
+                "name": "Hạn chế"
+            },
             "category-road": {
                 "name": "Đường"
             },
@@ -594,6 +609,9 @@
             "entrance": {
                 "label": "Kiểu"
             },
+            "except": {
+                "label": "Ngoại lệ"
+            },
             "fax": {
                 "label": "Số Fax",
                 "placeholder": "+84 1 234 5678"
@@ -737,10 +755,16 @@
                 "label": "Kiểu"
             },
             "oneway": {
-                "label": "Một chiều"
+                "label": "Một chiều",
+                "options": {
+                    "undefined": "Có lẽ Phải"
+                }
             },
             "oneway_yes": {
-                "label": "Một chiều"
+                "label": "Một chiều",
+                "options": {
+                    "undefined": "Có lẽ Không phải"
+                }
             },
             "opening_hours": {
                 "label": "Giờ Mở cửa"
@@ -815,6 +839,9 @@
             },
             "restriction": {
                 "label": "Kiểu"
+            },
+            "restrictions": {
+                "label": "Hạn chế rẽ"
             },
             "route": {
                 "label": "Kiểu"
@@ -1111,6 +1138,10 @@
             "amenity/doctor": {
                 "name": "Bác sĩ",
                 "terms": "văn phòng bác sĩ, văn phòng bác sỹ, văn phòng thầy thuốc, van phong bac si, van phong bac sy, van phong thay thuoc"
+            },
+            "amenity/dojo": {
+                "name": "Võ đường",
+                "terms": "võ đường, trường võ thuật, phòng tập võ thuật, võ thuật, karate, judo, nhu đạo, vo duong, truong vo thuat, phong tap vo thuat, vo thuat, nhu dao"
             },
             "amenity/drinking_water": {
                 "name": "Nước Uống",
@@ -1700,6 +1731,10 @@
                 "name": "Lối Băng qua Đường",
                 "terms": "lối băng qua đường, lối qua đường, đường ngựa vằn, loi bang qua duong, loi qua duong, duong ngua van"
             },
+            "footway/crosswalk": {
+                "name": "Lối Băng qua Đường",
+                "terms": "lối băng qua đường, lối qua đường, đường ngựa vằn, loi bang qua duong, loi qua duong, duong ngua van"
+            },
             "footway/sidewalk": {
                 "name": "Lề đường",
                 "terms": "lề đường, vỉa hè, đường đi bộ, đường dạo, le duong, vie he, duong di bo, duong dao"
@@ -1756,6 +1791,10 @@
                 "name": "Lối Băng qua Đường",
                 "terms": "lối băng qua đường, lối qua đường, đường ngựa vằn, loi bang qua duong, loi qua duong, duong ngua van"
             },
+            "highway/crosswalk": {
+                "name": "Lối Băng qua Đường",
+                "terms": "lối băng qua đường, lối qua đường, đường ngựa vằn, loi bang qua duong, loi qua duong, duong ngua van"
+            },
             "highway/cycleway": {
                 "name": "Đường Xe đạp",
                 "terms": "đường xe đạp, đường mòn xe đạp, duong xe dap, duong mon xe dap"
@@ -1778,7 +1817,7 @@
             },
             "highway/motorway_junction": {
                 "name": "Giao lộ Đường Cao tốc",
-                "terms": "giao lộ đường cao tốc, giao lộ quốc lộ, giao lộ xa lộ liên tiểu bang, giao lộ xa lộ liên bang, giao lo duong cao toc, giao lo quoc lo, giao lo xa lo lien tieu bang, giao lo xa lo lien bang"
+                "terms": "giao lộ đường cao tốc, giao lộ quốc lộ, giao lộ xa lộ liên tiểu bang, giao lộ xa lộ liên bang, lối ra đường cao tốc, lối ra quốc lộ, lối ra xa lộ liên tiểu bang, lối ra xa lộ liên bang, giao lo duong cao toc, giao lo quoc lo, giao lo xa lo lien tieu bang, giao lo xa lo lien bang, loi ra duong cao toc, loi ra quoc lo, loi ra xa lo lien tieu bang, loi ra xa lo lien bang"
             },
             "highway/motorway_link": {
                 "name": "Nhánh Ra vào Đường Cao tốc",
@@ -2089,8 +2128,8 @@
                 "terms": "đường trượt tàu, duong truot tau"
             },
             "leisure/sports_center": {
-                "name": "Trung tâm Thể thao",
-                "terms": "trung tâm thể thao, tòa nhà thể thao, toà nhà thể thao, trung tâm bơi lội, trung tâm spa, trung tâm thể dục, sân vận động trong nhà, SVĐ trong nhà, trung tam the thao, toa nha the thao, trung tam boi loi, trung tam spa, trung tam the duc, san van dong trong nha, svd trong nha"
+                "name": "Trung tâm Thể dục Thể thao",
+                "terms": "trung tâm thể thao, trung tâm thể dục, tòa nhà thể thao, toà nhà thể thao, tòa nhà thể dục, toà nhà thể dục, trung tâm bơi lội, trung tâm spa, trung tâm thể dục, sân vận động trong nhà, SVĐ trong nhà, trung tam the thao, trung tam theo duc, toa nha the thao, toa nha the duc, trung tam boi loi, trung tam spa, trung tam the duc, san van dong trong nha, svd trong nha"
             },
             "leisure/stadium": {
                 "name": "Sân vận động",
@@ -2827,6 +2866,34 @@
             "type/restriction": {
                 "name": "Hạn chế",
                 "terms": "hạn chế, giới hạn, cấm chỉ, han che, gioi han, cam chi"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "Cấm Rẽ Trái",
+                "terms": "cấm rẽ trái, không rẽ trái, đừng rẽ trái, cấm quẹo trái, không quẹo trái, đừng quẹo trái, cấm ngoặt trái, không ngoặt trái, đừng ngoặt trái, cấm ngoắt trái, không ngoắt trái, đừng ngoắt trái, cấm quặt trái, không quặt trái, đừng quặt trái, cam re trai, khong re trai, dung re trai, cam queo trai, khong queo trai, dung queo trai, cam ngoat trai, khong ngoat trai, dung ngoat trai, cam ngoat trai, khong ngoat trai, dung ngoat trai, cam quat trai, khong quat trai, dung quat trai"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "Cấm Rẽ Phải",
+                "terms": "cấm rẽ phải, không rẽ phải, đừng rẽ phải, cấm quẹo phải, không quẹo phải, đừng quẹo phải, cấm ngoặt phải, không ngoặt phải, đừng ngoặt phải, cấm ngoắt phải, không ngoắt phải, đừng ngoắt phải, cấm quặt phải, không quặt phải, đừng quặt phải, cam re phai, khong re phai, dung re phai, cam queo phai, khong queo phai, dung queo phai, cam ngoat phai, khong ngoat phai, dung ngoat phai, cam ngoat phai, khong ngoat phai, dung ngoat phai, cam quat phai, khong quat phai, dung quat phai"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "Cấm Chạy Thẳng",
+                "terms": "cấm chạy thẳng, không chạy thẳng, đừng chạy thẳng, cam chay thang, khong chay thang, dung chay thang"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "Cấm Quay Ngược",
+                "terms": "cấm quay ngược trở lại, không quay ngược trở lại, đừng quay ngược trở lại, cam quay nguoc tro lai, khong quay nguoc tro lai, dung quay nguoc tro lai, cam quay nguoc tro lai"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Chỉ Rẽ Trái",
+                "terms": "chỉ rẽ trái, chỉ cho phép rẽ trái, chỉ quẹo trái, chỉ cho phép quẹo trái, chỉ ngoặt trái, chỉ cho phép ngoặt trái, chỉ ngoắt trái, chỉ cho phép ngoắt trái, chỉ quặt trái, chỉ cho phép quặt trái, chi re trai, chi cho phep re trai, chi queo trai, chi cho phep queo trai, chi ngoat trai, chi cho phep ngoat trai, chi ngoat trai, chi cho phep ngoat trai, chi quat trai, chi cho phep quat trai"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Chỉ Rẽ Phải",
+                "terms": "chỉ rẽ phải, chỉ cho phép rẽ phải, chỉ quẹo phải, chỉ cho phép quẹo phải, chỉ ngoặt phải, chỉ cho phép ngoặt phải, chỉ ngoắt phải, chỉ cho phép ngoắt phải, chỉ quặt phải, chỉ cho phép quặt phải, chi re phai, chi cho phep re phai, chi queo phai, chi cho phep queo phai, chi ngoat phai, chi cho phep ngoat phai, chi ngoat phai, chi cho phep ngoat phai, chi quat phai, chi cho phep quat phai"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "Cấm Rẽ Trái/Phải",
+                "terms": "cấm rẽ trái phải, không rẽ trái phải, đừng rẽ trái phải, cấm quẹo trái phải, không quẹo trái phải, đừng quẹo trái phải, chỉ chạy thẳng, chỉ cho phép chạy thẳng, cam re trai phai, khong re trai phai, dung re trai phai, cam queo trai phai, khong queo trai phai, dung queo trai phai, chi chay thang, chi cho phep chay thang"
             },
             "type/route": {
                 "name": "Tuyến đường",

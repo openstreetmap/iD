@@ -406,6 +406,9 @@
             "category-rail": {
                 "name": "Шина"
             },
+            "category-restriction": {
+                "name": "Ограничења"
+            },
             "category-road": {
                 "name": "Пут"
             },
@@ -580,6 +583,9 @@
             },
             "entrance": {
                 "label": "Врста"
+            },
+            "except": {
+                "label": "Изузеци"
             },
             "fax": {
                 "label": "Факс",
@@ -785,6 +791,9 @@
             },
             "restriction": {
                 "label": "Врста"
+            },
+            "restrictions": {
+                "label": "Znaci zabrane kretanja"
             },
             "route": {
                 "label": "Врста"
@@ -1379,6 +1388,9 @@
             "footway/crossing": {
                 "name": "Прелаз"
             },
+            "footway/crosswalk": {
+                "name": "Пешачки прелаз"
+            },
             "footway/sidewalk": {
                 "name": "Тротоар"
             },
@@ -1401,6 +1413,9 @@
             "highway/crossing": {
                 "name": "Прелаз"
             },
+            "highway/crosswalk": {
+                "name": "Пешачки прелаз"
+            },
             "highway/cycleway": {
                 "name": "Бициклистичка стаза"
             },
@@ -1415,9 +1430,6 @@
             },
             "highway/motorway": {
                 "name": "Магистрални пут"
-            },
-            "highway/motorway_junction": {
-                "name": "Магистрално чвориште"
             },
             "highway/motorway_link": {
                 "name": "Прилаз аутопуту"
@@ -1643,9 +1655,6 @@
             },
             "leisure/slipway": {
                 "name": "Навоз"
-            },
-            "leisure/sports_center": {
-                "name": "Спортски центар"
             },
             "leisure/stadium": {
                 "name": "Стадион"
@@ -2132,6 +2141,27 @@
             },
             "type/restriction": {
                 "name": "Ограничење"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "Забрана скретања улево"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "Забрана скретања удесно"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "Забрана саобраћаја у једном смеру"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "Забрана полукружног окретања"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Обавезан смер - лево"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Обавезан смер - десно"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "Обавезан смер - право"
             },
             "type/route": {
                 "name": "Путања"

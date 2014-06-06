@@ -412,6 +412,9 @@
             "category-rail": {
                 "name": "Ferrocarril"
             },
+            "category-restriction": {
+                "name": "Restricción"
+            },
             "category-road": {
                 "name": "Carretera"
             },
@@ -593,6 +596,9 @@
             },
             "entrance": {
                 "label": "Tipo"
+            },
+            "except": {
+                "label": "Excepciones"
             },
             "fax": {
                 "label": "Fax",
@@ -1140,6 +1146,9 @@
                 "name": "Aparcamiento de automóviles",
                 "terms": "aparcamiento, parking, aparcadero, estacionamiento, garaje"
             },
+            "amenity/parking_entrance": {
+                "name": "Entrada/Salida del Estacionamiento"
+            },
             "amenity/pharmacy": {
                 "name": "Farmacia",
                 "terms": "farmacia,botica, laboratorio, apoteca, herbolario"
@@ -1379,6 +1388,10 @@
             },
             "building/dormitory": {
                 "name": "Dormitorio"
+            },
+            "building/entrance": {
+                "name": "Entrada/Salida",
+                "terms": "puerta, portal, vestíbulo, umbral, soportal, pórtico, abertura, acceso, boca, embocadura, agujero, hueco"
             },
             "building/garage": {
                 "name": "Garaje",
@@ -1635,9 +1648,16 @@
                 "name": "Teléfono de emergencias",
                 "terms": "Teléfono de emergencia, SOS"
             },
+            "entrance": {
+                "name": "Entrada/Salida"
+            },
             "footway/crossing": {
                 "name": "Cruce peatonal",
                 "terms": "cruce, travesía, paso, cruzamiento, pasaje, vado, paseo, traviesa, paso de peatones, paso de cebra"
+            },
+            "footway/crosswalk": {
+                "name": "Cruce peatonal",
+                "terms": "cruce, travesía, paso, cruzamiento, pasaje, vado, paseo, traviesa, paso de peatones"
             },
             "footway/sidewalk": {
                 "name": "Acera",
@@ -1684,6 +1704,10 @@
                 "name": "Cruce peatonal",
                 "terms": "cruce peatonal, paso peatonal, paso de cebra, paso de peatones, paso semafórico"
             },
+            "highway/crosswalk": {
+                "name": "Cruce peatonal",
+                "terms": "cruce, travesía, paso, cruzamiento, pasaje, vado, paseo, traviesa, paso de peatones"
+            },
             "highway/cycleway": {
                 "name": "Sendero ciclista",
                 "terms": "Camino para bicicletas, senda ciclable, sendero ciclista, carril bici"
@@ -1705,7 +1729,7 @@
                 "terms": "autopista, autovía, vía rápida"
             },
             "highway/motorway_junction": {
-                "name": "Cruce de autopista",
+                "name": "Cruce / salida de autopista",
                 "terms": "enlace, acceso, autopista, autovía, salida"
             },
             "highway/motorway_link": {
@@ -2011,8 +2035,8 @@
                 "terms": "Grada"
             },
             "leisure/sports_center": {
-                "name": "Centro deportivo",
-                "terms": "Complejo deportivo"
+                "name": "Centro deportivo / Gimnasio",
+                "terms": "centro deportivo, club deportivo, club atlético, gimnasio"
             },
             "leisure/stadium": {
                 "name": "Estadio",
@@ -2724,6 +2748,24 @@
             "type/restriction": {
                 "name": "Restricción",
                 "terms": "restricción, limitación, prohibición"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "No girar a la izquierda",
+                "terms": "no girar a la izquierda, prohibido girar a la izquierda"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "No girar a la derecha",
+                "terms": "no girar a la derecha, prohibido girar a la derecha"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Sólo girar a la izquierda"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Sólo girar a la derecha"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "No girar",
+                "terms": "no girar, prohibido girar"
             },
             "type/route": {
                 "name": "Ruta",

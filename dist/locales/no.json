@@ -833,9 +833,6 @@
             "highway/motorway": {
                 "name": "Motorvei"
             },
-            "highway/motorway_junction": {
-                "name": "Motorveikrysning"
-            },
             "highway/motorway_link": {
                 "name": "Motorveirampe"
             },

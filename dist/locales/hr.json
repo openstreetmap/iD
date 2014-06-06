@@ -182,6 +182,18 @@
             },
             "not_eligible": "Linije ne mogu biti razdvojene na svom početku ili kraju.",
             "multiple_ways": "Previše linija za razdvajanje."
+        },
+        "restriction": {
+            "help": {
+                "select": "Klikni za selektiranje dijela ceste.",
+                "toggle": "Klikni za uključivanje zabrane skretanja.",
+                "toggle_on": "Klikni za dodavanje \"{restriction}\" zabrane.",
+                "toggle_off": "Klikni za uklanjanje \"{restriction}\" zabrane."
+            },
+            "annotation": {
+                "create": "Zabrana skretanja je dodana",
+                "delete": "Zabrana skretanja je uklonjena"
+            }
         }
     },
     "undo": {
@@ -1402,9 +1414,6 @@
             "highway/motorway": {
                 "name": "Autocesta"
             },
-            "highway/motorway_junction": {
-                "name": "Sjecište autoceste"
-            },
             "highway/motorway_link": {
                 "name": "Pristupna cesta autoceste"
             },
@@ -1625,10 +1634,6 @@
             "leisure/slipway": {
                 "name": "Navoz za brodove",
                 "terms": "istezalište"
-            },
-            "leisure/sports_center": {
-                "name": "Sportski centar",
-                "terms": "sportski centar,sport,dvorana,sportska dvorana,stadion,igralište"
             },
             "leisure/stadium": {
                 "name": "Stadion"

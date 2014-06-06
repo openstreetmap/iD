@@ -1394,10 +1394,6 @@
                 "name": "高速公路",
                 "terms": "高速公路"
             },
-            "highway/motorway_junction": {
-                "name": "高速公路连接点",
-                "terms": "高速公路连接点"
-            },
             "highway/motorway_link": {
                 "name": "高速公路匝道",
                 "terms": "高速公路匝道"
@@ -1688,10 +1684,6 @@
             "leisure/slipway": {
                 "name": "船台",
                 "terms": "船台"
-            },
-            "leisure/sports_center": {
-                "name": "体育,体育中心",
-                "terms": "体育中心"
             },
             "leisure/stadium": {
                 "name": "体育场",

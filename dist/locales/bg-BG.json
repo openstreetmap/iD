@@ -931,9 +931,6 @@
             "highway/motorway": {
                 "name": "Автомагистрала"
             },
-            "highway/motorway_junction": {
-                "name": "Автомагистрален пътен възел"
-            },
             "highway/motorway_link": {
                 "name": "Автомагистрална връзка"
             },

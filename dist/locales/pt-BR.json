@@ -1759,10 +1759,6 @@
                 "name": "Autoestrada",
                 "terms": "Autoestrada, Via Expressa"
             },
-            "highway/motorway_junction": {
-                "name": "Saída de Autoestrada",
-                "terms": "Saída de Autoestrada"
-            },
             "highway/motorway_link": {
                 "name": "Ligação de Autoestrada",
                 "terms": "Acesso a Autoestrada"
@@ -2070,10 +2066,6 @@
             "leisure/slipway": {
                 "name": "Rampa Náutica",
                 "terms": "Rampa Náutica"
-            },
-            "leisure/sports_center": {
-                "name": "Centro/Clube Esportivo",
-                "terms": "Centro Esportivo, Clube Esportivo, Ginásio de Esportes, Ginásio Poliesportivo, Academia de Esportes, Academia de Ginástica"
             },
             "leisure/stadium": {
                 "name": "Estádio",

@@ -182,6 +182,18 @@
             },
             "not_eligible": "基点/終端を境としたライン分割はできません。",
             "multiple_ways": "複数のラインを分割します"
+        },
+        "restriction": {
+            "help": {
+                "select": "道路の区間を選択するにはクリックしてください。",
+                "toggle": "進行方向制限を切り替えるにはクリックしてください。",
+                "toggle_on": "「{restriction}」の制約を追加するにはクリックしてください。",
+                "toggle_off": "「{restriction}」の制約を削除するにはクリックしてください。"
+            },
+            "annotation": {
+                "create": "進行方向制限を追加しました",
+                "delete": "進行方向制限を削除しました"
+            }
         }
     },
     "undo": {
@@ -412,6 +424,9 @@
             "category-rail": {
                 "name": "線路"
             },
+            "category-restriction": {
+                "name": "制限"
+            },
             "category-road": {
                 "name": "道路"
             },
@@ -594,6 +609,9 @@
             "entrance": {
                 "label": "タイプ"
             },
+            "except": {
+                "label": "例外"
+            },
             "fax": {
                 "label": "FAX",
                 "placeholder": "+31 42 123 4567"
@@ -737,10 +755,16 @@
                 "label": "タイプ"
             },
             "oneway": {
-                "label": "一方通行"
+                "label": "一方通行",
+                "options": {
+                    "undefined": "おそらくいいえ"
+                }
             },
             "oneway_yes": {
-                "label": "一方通行"
+                "label": "一方通行",
+                "options": {
+                    "undefined": "おそらくはい"
+                }
             },
             "opening_hours": {
                 "label": "利用可能な時間帯"
@@ -815,6 +839,9 @@
             },
             "restriction": {
                 "label": "タイプ"
+            },
+            "restrictions": {
+                "label": "進行方向制限"
             },
             "route": {
                 "label": "タイプ"
@@ -1111,6 +1138,10 @@
             "amenity/doctor": {
                 "name": "医院",
                 "terms": "医者,医師"
+            },
+            "amenity/dojo": {
+                "name": "道場",
+                "terms": "道場"
             },
             "amenity/drinking_water": {
                 "name": "水飲み場",
@@ -1700,6 +1731,10 @@
                 "name": "横断歩道",
                 "terms": "横断歩道, 自転車横断帯"
             },
+            "footway/crosswalk": {
+                "name": "横断歩道",
+                "terms": "横断歩道, 歩行者踏切"
+            },
             "footway/sidewalk": {
                 "name": "歩道",
                 "terms": "歩道"
@@ -1755,6 +1790,10 @@
             "highway/crossing": {
                 "name": "横断歩道",
                 "terms": "横断歩道, 自転車横断帯"
+            },
+            "highway/crosswalk": {
+                "name": "横断歩道",
+                "terms": "横断歩道"
             },
             "highway/cycleway": {
                 "name": "自転車道",
@@ -2089,8 +2128,8 @@
                 "terms": "進水路, スリップウェイ"
             },
             "leisure/sports_center": {
-                "name": "スポーツセンター",
-                "terms": "スポーツセンター"
+                "name": "スポーツセンター／ジム",
+                "terms": "スポーツセンター, ジム, フィットネスクラブ"
             },
             "leisure/stadium": {
                 "name": "スタジアム",
@@ -2827,6 +2866,34 @@
             "type/restriction": {
                 "name": "進行方向制限",
                 "terms": "進行方向制限"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "左折禁止",
+                "terms": "左折禁止"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "右折禁止",
+                "terms": "右折禁止"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "直進禁止",
+                "terms": "直進禁止"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "転回禁止",
+                "terms": "転回禁止, Uターン禁止"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "左折のみ可",
+                "terms": "左折のみ可"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "右折のみ可",
+                "terms": "右折のみ可"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "直進のみ可",
+                "terms": "直進のみ可"
             },
             "type/route": {
                 "name": "ルート",

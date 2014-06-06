@@ -89,10 +89,6 @@ button,
 .radial-menu-item {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
-    cursor: -webkit-image-set(
-        url(img/cursor-pointer.png) 1x,
-        url(img/cursor-pointer2x.png) 2x
-        ) 6 1, pointer;
 }
 
 h2 {

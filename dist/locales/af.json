@@ -860,9 +860,6 @@
             "highway/motorway": {
                 "name": "Snelweg"
             },
-            "highway/motorway_junction": {
-                "name": "Snelwegkruising"
-            },
             "highway/motorway_link": {
                 "name": "Snelwegaansluiting"
             },

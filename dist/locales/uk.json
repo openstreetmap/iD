@@ -1230,10 +1230,6 @@
                 "name": "Автомагістраль",
                 "terms": "Motorway,fdnjvfuscnhfkm"
             },
-            "highway/motorway_junction": {
-                "name": "З’єднання з автомагістраллю",
-                "terms": "Motorway Junction,plyfyyz p fdnjvfuscnhfkk, розв’язка,естакада,з’їзд,заїзд"
-            },
             "highway/motorway_link": {
                 "name": "З’їзд з/на автомагістраль",
                 "terms": "Motorway Link,ppl fdnjvfuscnhfkm,естакада,виїзд з,виїзд на,з’їзд з,з’їзд на"
@@ -1504,10 +1500,6 @@
             "leisure/slipway": {
                 "name": "Стапель",
                 "terms": "Slipway,cnfgtkm"
-            },
-            "leisure/sports_center": {
-                "name": "Спортивний центр",
-                "terms": "Sports Center,cgjhnbdybq wtynh"
             },
             "leisure/stadium": {
                 "name": "Стадіон",

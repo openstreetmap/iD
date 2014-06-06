@@ -1530,10 +1530,6 @@
                 "name": "Dálnice",
                 "terms": "dálnice"
             },
-            "highway/motorway_junction": {
-                "name": "Dálniční sjezd",
-                "terms": "dálniční nájezd, dálniční výjezd, dálniční exit"
-            },
             "highway/motorway_link": {
                 "name": "Dálnice - nájezd",
                 "terms": "nájezd,sjezd,výjezd,příjezd,rampa,exit"
@@ -1817,10 +1813,6 @@
             "leisure/slipway": {
                 "name": "Vodní skluz",
                 "terms": "spouštění lodi,dok,loděnice,skluz v loděnici,skluzavka"
-            },
-            "leisure/sports_center": {
-                "name": "Sportovní areál",
-                "terms": "sportovní areál,sportovní centrum"
             },
             "leisure/stadium": {
                 "name": "Stadion",
