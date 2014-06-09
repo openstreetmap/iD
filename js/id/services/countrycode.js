@@ -1,35 +1,36 @@
 iD.countryCode  = function() {
     var countryCode = {},
-        endpoint = 'http://countrycode.refactory.at/api/1/?';
+        endpoint = 'http://nominatim.openstreetmap.org/reverse?';
 
     if (!iD.countryCode.cache) {
-        iD.countryCode.cache = [];
+        iD.countryCode.cache = rbush();
     }
 
     var cache = iD.countryCode.cache;
 
     countryCode.search = function(location, callback) {
-        var country = _.find(cache, function (country) {
-            return iD.geo.pointInFeature(location, country);
-        });
+        var countryCodes = cache.search([location[0], location[1], location[0], location[1]]);
 
-        if (country)
-            return callback(null, country);
+        if (countryCodes.length > 0)
+            return callback(null, countryCodes[0][4]);
 
         d3.json(endpoint +
             iD.util.qsString({
+                format: 'json',
+                addressdetails: 1,
                 lat: location[1],
-                lon: location[0],
-                geometry: 1
-            }), function(err, country) {
+                lon: location[0]
+            }), function(err, result) {
                 if (err)
                     return callback(err);
-                else if (country && country.error)
-                    return callback(country.error);
+                else if (result && result.error)
+                    return callback(result.error);
 
-                cache.push(country);
+                var extent = iD.geo.Extent(location).padByMeters(1000);
 
-                callback(null, country);
+                cache.insert([extent[0][0], extent[0][1], extent[1][0], extent[1][1], result.address.country_code]);
+
+                callback(null, result.address.country_code);
             });
     };
 

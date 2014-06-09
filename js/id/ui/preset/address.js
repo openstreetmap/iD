@@ -92,7 +92,6 @@ iD.ui.preset.address = function(field, context) {
     function address(selection) {
         var wrap = selection.selectAll('.preset-input-wrap').data([0]),
             center = entity.extent(context.graph()).center(),
-            countryCode,
             addressFormat;
 
         // Enter
@@ -100,10 +99,7 @@ iD.ui.preset.address = function(field, context) {
         var enter = wrap.enter().append('div')
             .attr('class', 'preset-input-wrap');
 
-        iD.countryCode().search(center, function (err, result) {
-            if (result)
-                countryCode = result.countryCode;
-
+        iD.countryCode().search(center, function (err, countryCode) {
             addressFormat = _.find(iD.data.addressFormats, function (a) {
                 return a && a.countryCodes && _.contains(a.countryCodes, countryCode);
             }) || _.first(iD.data.addressFormats);
