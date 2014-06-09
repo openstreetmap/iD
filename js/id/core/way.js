@@ -43,23 +43,25 @@ _.extend(iD.Way.prototype, {
     },
 
     layer: function() {
-        // explicit layer tag..
-        if (this.tags.layer !== undefined) return +(this.tags.layer);
+        // explicit layer tag, clamp between -10, 10..
+        if (this.tags.layer !== undefined) {
+            return Math.max(-10, Math.min(+(this.tags.layer), 10));
+        }
 
         // implied layer tag..
         if (this.tags.location === 'overground') return 1;
         if (this.tags.location === 'underground') return -1;
         if (this.tags.location === 'underwater') return -10;
 
-        if (this.tags.power === 'line') return 20;
-        if (this.tags.power === 'minor_line') return 15;
+        if (this.tags.power === 'line') return 10;
+        if (this.tags.power === 'minor_line') return 10;
         if (this.tags.aerialway) return 10;
         if (this.tags.bridge) return 1;
         if (this.tags.cutting) return -1;
         if (this.tags.tunnel) return -1;
         if (this.tags.waterway) return -1;
         if (this.tags.manmade === 'pipeline') return -10;
-        if (this.tags.boundary) return -20;
+        if (this.tags.boundary) return -10;
         return 0;
     },
 

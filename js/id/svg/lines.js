@@ -52,20 +52,11 @@ iD.svg.Lines = function(projection) {
         var layergroup = surface
             .select('.layer-lines')
             .selectAll('g.layergroup')
-            .data(
-                _.keys(pathdata).map(Number),
-                function(d) { return d; }
-            );
+            .data(d3.range(-10, 11));
 
         layergroup.enter()
             .append('g')
             .attr('class', function(d) { return 'layer layergroup layer' + String(d); });
-
-        layergroup
-            .sort(d3.ascending);
-
-        layergroup.exit()
-            .remove();
 
 
         var linegroup = layergroup
@@ -81,7 +72,7 @@ iD.svg.Lines = function(projection) {
             .selectAll('path')
             .filter(filter)
             .data(
-                function(d) { return pathdata[this.parentNode.parentNode.__data__]; },
+                function() { return pathdata[this.parentNode.parentNode.__data__] || []; },
                 iD.Entity.key
             );
 
@@ -107,14 +98,14 @@ iD.svg.Lines = function(projection) {
 
         onewaygroup.enter()
             .append('g')
-            .attr('class', function(d) { return 'layer onewaygroup'; });
+            .attr('class', 'layer onewaygroup');
 
 
         var oneways = onewaygroup
             .selectAll('path')
             .filter(filter)
             .data(
-                function(d) { return onewaydata[this.parentNode.parentNode.__data__]; },
+                function() { return onewaydata[this.parentNode.parentNode.__data__] || []; },
                 function(d) { return [d.id, d.index]; }
             );
 
