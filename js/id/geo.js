@@ -135,33 +135,3 @@ iD.geo.pathLength = function(path) {
     }
     return length;
 };
-
-iD.geo.pointInFeature = function(point, feature) {
-    if (feature.bounds) {
-        var bounds = feature.bounds;
-
-        if (point[0] < bounds[0][0] || point[0] > bounds[1][0] || point[1] < bounds[0][1] || point[1] > bounds[1][1])
-            return false;
-    }
-
-    if (feature.geometry.type === 'Polygon') {
-        return _.every(feature.geometry.coordinates, function (ring, i) {
-            if (i === 0)
-                return iD.geo.pointInPolygon(point, ring);
-
-            return !iD.geo.pointInPolygon(point, ring);
-        });
-    }
-    else if (feature.geometry.type === 'MultiPolygon') {
-        return _.some(feature.geometry.coordinates, function (polygon) {
-            return _.every(polygon, function (ring, i) {
-                if (i === 0)
-                    return iD.geo.pointInPolygon(point, ring);
-
-                return !iD.geo.pointInPolygon(point, ring);
-            });
-        });
-    }
-
-    return false;
-};
