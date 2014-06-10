@@ -5,7 +5,8 @@ iD.ui.preset.address = function(field, context) {
         street,
         city,
         postcode,
-        entity;
+        entity,
+        isInitialized;
 
     function getStreets() {
         var extent = entity.extent(context.graph()),
@@ -90,6 +91,8 @@ iD.ui.preset.address = function(field, context) {
     }
 
     function address(selection) {
+        selection.selectAll('.preset-input-wrap').remove();
+
         var wrap = selection.selectAll('.preset-input-wrap').data([0]),
             center = entity.extent(context.graph()).center(),
             addressFormat;
@@ -148,6 +151,7 @@ iD.ui.preset.address = function(field, context) {
                 .on('change', change);
 
             event.init();
+            isInitialized = true;
         });
     }
 
@@ -161,6 +165,14 @@ iD.ui.preset.address = function(field, context) {
         });
     }
 
+    function updateTags(tags) {
+        housename.value(tags['addr:housename'] || '');
+        housenumber.value(tags['addr:housenumber'] || '');
+        street.value(tags['addr:street'] || '');
+        city.value(tags['addr:city'] || '');
+        postcode.value(tags['addr:postcode'] || '');
+    }
+
     address.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
@@ -168,13 +180,14 @@ iD.ui.preset.address = function(field, context) {
     };
 
     address.tags = function(tags) {
-        event.on('init', function () {
-            housename.value(tags['addr:housename'] || '');
-            housenumber.value(tags['addr:housenumber'] || '');
-            street.value(tags['addr:street'] || '');
-            city.value(tags['addr:city'] || '');
-            postcode.value(tags['addr:postcode'] || '');
-        });
+        if (isInitialized) {
+            updateTags(tags);
+        }
+        else {
+            event.on('init', function () {
+                updateTags(tags);
+            });
+        }
     };
 
     address.focus = function() {
