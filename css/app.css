@@ -1522,26 +1522,6 @@ input[type=number] {
     border-radius: 0 0 4px 0;
 }
 
-.form-field .addr-housename {
-    width: 100%;
-}
-
-.form-field .addr-housenumber {
-    width: 33.3333%;
-}
-
-.form-field .addr-street {
-    width: 66.6666%;
-}
-
-.form-field .addr-city {
-    width: 66.6666%;
-}
-
-.form-field .addr-postcode {
-    width: 33.3333%;
-}
-
 /* Restrictions editor */
 
 .form-field-restrictions .preset-input-wrap {

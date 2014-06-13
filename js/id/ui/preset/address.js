@@ -4,6 +4,13 @@ iD.ui.preset.address = function(field, context) {
         entity,
         isInitialized;
 
+    var widths = {
+        housenumber: 1/3,
+        street: 2/3,
+        city: 2/3,
+        postcode: 1/3
+    };
+
     function getStreets() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
@@ -103,18 +110,33 @@ iD.ui.preset.address = function(field, context) {
                 return a && a.countryCodes && _.contains(a.countryCodes, countryCode);
             }) || _.first(iD.data.addressFormats);
 
+            function row(row) {
+                // Normalize widths.
+                var total = _.reduce(row, function(sum, field) {
+                    return sum + (widths[field] || .5);
+                }, 0);
+
+                return row.map(function (field) {
+                    return {
+                        id: field,
+                        width: (widths[field] || .5) / total
+                    };
+                })
+            }
+
             enter.selectAll('div')
                 .data(addressFormat.format)
                 .enter()
                 .append('div')
                 .attr('class', 'addr-row')
                 .selectAll('input')
-                .data(function (d) { return d; })
+                .data(row)
                 .enter()
                 .append('input')
                 .property('type', 'text')
-                .attr('placeholder', function (d) { return field.t('placeholders.' + d); })
-                .attr('class', function (d) { return 'addr-' + d; });
+                .attr('placeholder', function (d) { return field.t('placeholders.' + d.id); })
+                .attr('class', function (d) { return 'addr-' + d.id; })
+                .style('width', function (d) { return d.width * 100 + '%'; });
 
             // Update
 
@@ -150,7 +172,7 @@ iD.ui.preset.address = function(field, context) {
 
         wrap.selectAll('input')
             .each(function (field) {
-                tags['addr:' + field] = this.value || undefined;
+                tags['addr:' + field.id] = this.value || undefined;
             });
 
         event.change(tags);
@@ -159,7 +181,7 @@ iD.ui.preset.address = function(field, context) {
     function updateTags(tags) {
         wrap.selectAll('input')
             .value(function (field) {
-                return tags['addr:' + field] || '';
+                return tags['addr:' + field.id] || '';
             });
     }
 
