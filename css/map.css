@@ -774,41 +774,81 @@ path.casing.tag-boundary-national_park {
 /* bridges */
 
 path.casing.tag-bridge {
-    stroke-width: 14;
-    stroke-opacity: 0.5;
+    stroke-width: 16;
+    stroke-opacity: 0.6;
     stroke: #000;
+    stroke-linecap: butt;
 }
 
+path.shadow.tag-bridge {
+    stroke-width: 22;
+}
+
+path.casing.line.tag-railway.tag-bridge,
 path.casing.tag-highway-living_street.tag-bridge,
-path.casing.tag-highway-path.tag-bridge {
-    stroke-width: 6;
-}
-
-path.casing.line.tag-highway-pedestrian,
+path.casing.tag-highway-path.tag-bridge,
+path.casing.line.tag-highway-pedestrian.tag-bridge,
 path.casing.tag-highway-service.tag-bridge,
 path.casing.tag-highway-track.tag-bridge,
 path.casing.tag-highway-steps.tag-bridge,
 path.casing.tag-highway-footway.tag-bridge,
 path.casing.tag-highway-cycleway.tag-bridge,
 path.casing.tag-highway-bridleway.tag-bridge {
-    stroke-width: 8;
+    stroke-width: 10;
 }
 
-path.shadow.tag-highway-residential.tag-bridge {
-    stroke-width:22;
-}
-
+path.shadow.line.tag-railway.tag-bridge,
 path.shadow.tag-highway-living_street.tag-bridge,
 path.shadow.tag-highway-path.tag-bridge,
-path.shadow.line.tag-highway-pedestrian,
+path.shadow.line.tag-highway-pedestrian.tag-bridge,
 path.shadow.tag-highway-service.tag-bridge,
 path.shadow.tag-highway-track.tag-bridge,
 path.shadow.tag-highway-steps.tag-bridge,
 path.shadow.tag-highway-footway.tag-bridge,
 path.shadow.tag-highway-cycleway.tag-bridge,
 path.shadow.tag-highway-bridleway.tag-bridge {
-    stroke-width: 16;
+    stroke-width: 17;
 }
+
+
+.low-zoom path.casing.tag-bridge {
+    stroke-width: 10;
+    stroke-opacity: 0.6;
+    stroke: #000;
+    stroke-linecap: butt;
+}
+
+.low-zoom path.shadow.tag-bridge {
+    stroke-width: 14;
+}
+
+.low-zoom path.casing.line.tag-railway.tag-bridge,
+.low-zoom path.casing.tag-highway-living_street.tag-bridge,
+.low-zoom path.casing.tag-highway-path.tag-bridge,
+.low-zoom path.casing.line.tag-highway-pedestrian.tag-bridge,
+.low-zoom path.casing.tag-highway-service.tag-bridge,
+.low-zoom path.casing.tag-highway-track.tag-bridge,
+.low-zoom path.casing.tag-highway-steps.tag-bridge,
+.low-zoom path.casing.tag-highway-footway.tag-bridge,
+.low-zoom path.casing.tag-highway-cycleway.tag-bridge,
+.low-zoom path.casing.tag-highway-bridleway.tag-bridge {
+    stroke-width: 6;
+}
+
+.low-zoom path.shadow.line.tag-railway.tag-bridge,
+.low-zoom path.shadow.tag-highway-living_street.tag-bridge,
+.low-zoom path.shadow.tag-highway-path.tag-bridge,
+.low-zoom path.shadow.line.tag-highway-pedestrian.tag-bridge,
+.low-zoom path.shadow.tag-highway-service.tag-bridge,
+.low-zoom path.shadow.tag-highway-track.tag-bridge,
+.low-zoom path.shadow.tag-highway-steps.tag-bridge,
+.low-zoom path.shadow.tag-highway-footway.tag-bridge,
+.low-zoom path.shadow.tag-highway-cycleway.tag-bridge,
+.low-zoom path.shadow.tag-highway-bridleway.tag-bridge {
+    stroke-width: 13;
+}
+
+
 
 /* tunnels */
 

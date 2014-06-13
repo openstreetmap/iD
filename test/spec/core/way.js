@@ -148,6 +148,68 @@ describe('iD.Way', function() {
         });
     });
 
+    describe('#layer', function() {
+        it('returns 0 when the way has no tags', function() {
+            expect(iD.Way().layer()).to.equal(0);
+        });
+
+        it('returns the layer when the way has an explicit layer tag', function() {
+            expect(iD.Way({tags: { layer: '2' }}).layer()).to.equal(2);
+            expect(iD.Way({tags: { layer: '-5' }}).layer()).to.equal(-5);
+        });
+
+        it('clamps the layer to within -10, 10', function() {
+            expect(iD.Way({tags: { layer: '12' }}).layer()).to.equal(10);
+            expect(iD.Way({tags: { layer: '-15' }}).layer()).to.equal(-10);
+        });
+
+        it('returns 1 for location=overground', function() {
+            expect(iD.Way({tags: { location: 'overground' }}).layer()).to.equal(1);
+        });
+
+        it('returns -1 for location=underground', function() {
+            expect(iD.Way({tags: { location: 'underground' }}).layer()).to.equal(-1);
+        });
+
+        it('returns -10 for location=underwater', function() {
+            expect(iD.Way({tags: { location: 'underwater' }}).layer()).to.equal(-10);
+        });
+
+        it('returns 10 for power lines', function() {
+            expect(iD.Way({tags: { power: 'line' }}).layer()).to.equal(10);
+            expect(iD.Way({tags: { power: 'minor_line' }}).layer()).to.equal(10);
+        });
+
+        it('returns 10 for aerialways', function() {
+            expect(iD.Way({tags: { aerialway: 'cable_car' }}).layer()).to.equal(10);
+        });
+
+        it('returns 1 for bridges', function() {
+            expect(iD.Way({tags: { bridge: 'yes' }}).layer()).to.equal(1);
+        });
+
+        it('returns -1 for cuttings', function() {
+            expect(iD.Way({tags: { cutting: 'yes' }}).layer()).to.equal(-1);
+        });
+
+        it('returns -1 for tunnels', function() {
+            expect(iD.Way({tags: { tunnel: 'yes' }}).layer()).to.equal(-1);
+        });
+
+        it('returns -1 for waterways', function() {
+            expect(iD.Way({tags: { waterway: 'stream' }}).layer()).to.equal(-1);
+        });
+
+        it('returns -10 for pipelines', function() {
+            expect(iD.Way({tags: { man_made: 'pipeline' }}).layer()).to.equal(-10);
+        });
+
+        it('returns -10 for boundaries', function() {
+            expect(iD.Way({tags: { boundary: 'administrative' }}).layer()).to.equal(-10);
+        });
+
+    });
+
     describe('#isOneWay', function() {
         it('returns false when the way has no tags', function() {
             expect(iD.Way().isOneWay()).to.be.false;
