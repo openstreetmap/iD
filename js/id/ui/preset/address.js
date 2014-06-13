@@ -102,7 +102,7 @@ iD.ui.preset.address = function(field, context) {
 
         // Enter
 
-        var enter = wrap = selection.append('div')
+        wrap = selection.append('div')
             .attr('class', 'preset-input-wrap');
 
         iD.countryCode().search(center, function (err, countryCode) {
@@ -110,21 +110,21 @@ iD.ui.preset.address = function(field, context) {
                 return a && a.countryCodes && _.contains(a.countryCodes, countryCode);
             }) || _.first(iD.data.addressFormats);
 
-            function row(row) {
+            function row(r) {
                 // Normalize widths.
-                var total = _.reduce(row, function(sum, field) {
-                    return sum + (widths[field] || .5);
+                var total = _.reduce(r, function(sum, field) {
+                    return sum + (widths[field] || 0.5);
                 }, 0);
 
-                return row.map(function (field) {
+                return r.map(function (field) {
                     return {
                         id: field,
-                        width: (widths[field] || .5) / total
+                        width: (widths[field] || 0.5) / total
                     };
-                })
+                });
             }
 
-            enter.selectAll('div')
+            wrap.selectAll('div')
                 .data(addressFormat.format)
                 .enter()
                 .append('div')
