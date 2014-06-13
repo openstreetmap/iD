@@ -1497,32 +1497,33 @@ input[type=number] {
 
 /* Preset form address */
 
-.addr-row .addr-column[type="text"] {
+.addr-row input {
     border-right: 0;
     border-bottom: 0;
 }
 
-.addr-row:first-of-type .addr-column[type="text"] {
+.addr-row:first-of-type input {
     border-top: 0;
 }
 
-.addr-row .addr-column[type="text"]:first-of-type {
+.addr-row input:first-of-type {
     border-left: 0;
 }
 
-.addr-column[type="text"] {
+.addr-row input {
     border-radius: 0;
 }
 
-.addr-row:last-of-type .addr-column[type="text"]:first-of-type {
+.addr-row:last-of-type input:first-of-type {
     border-radius: 0 0 0 4px;
 }
 
-.addr-row:last-of-type .addr-column[type="text"]:last-of-type {
+.addr-row:last-of-type input:last-of-type {
     border-radius: 0 0 4px 0;
 }
 
 .form-field .addr-housename {
+    width: 100%;
 }
 
 .form-field .addr-number {

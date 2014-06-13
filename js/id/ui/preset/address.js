@@ -118,7 +118,7 @@ iD.ui.preset.address = function(field, context) {
                 .append('input')
                 .property('type', 'text')
                 .attr('placeholder', function (d) { return field.t('placeholders.' + d); })
-                .attr('class', function (d) { return 'addr-column addr-' + d; });
+                .attr('class', function (d) { return 'addr-' + d; });
 
             // Update
 
