@@ -73,19 +73,6 @@ describe("iD.svg.Lines", function () {
         expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
     });
 
-    // it("preserves non-line paths", function () {
-    //     var line = iD.Way(),
-    //         graph = iD.Graph([line]);
-
-    //     surface.select('.area-fill')
-    //         .append('path')
-    //         .attr('class', 'other');
-
-    //     surface.call(iD.svg.Lines(projection), graph, [line], all);
-
-    //     expect(surface.selectAll('.other')[0].length).to.equal(1);
-    // });
-
     describe("z-indexing", function() {
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
