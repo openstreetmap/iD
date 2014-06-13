@@ -3,6 +3,7 @@ var fs = require('fs'),
     glob = require('glob'),
     YAML = require('js-yaml'),
     _ = require('./js/lib/lodash'),
+    d3 = require('d3'),
     jsonschema = require('jsonschema'),
     fieldSchema = require('./data/presets/schema/field.json'),
     presetSchema = require('./data/presets/schema/preset.json'),
@@ -245,5 +246,6 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     operations: r('operations-sprite.json'),
     locales: r('locales.json'),
     en: read('dist/locales/en.json'),
-    suggestions: r('name-suggestions.json')
+    suggestions: r('name-suggestions.json'),
+    addressFormats: r('address-formats.json')
 }) + ';');
