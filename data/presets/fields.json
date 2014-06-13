@@ -63,6 +63,7 @@
     "address": {
         "type": "address",
         "keys": [
+            "addr:housename",
             "addr:housenumber",
             "addr:street",
             "addr:city",
@@ -76,7 +77,8 @@
         "label": "Address",
         "strings": {
             "placeholders": {
-                "number": "123",
+                "housename": "Housename",
+                "housenumber": "123",
                 "street": "Street",
                 "city": "City",
                 "postcode": "Postal code"

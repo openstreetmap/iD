@@ -1,13 +1,13 @@
 [
     {
-        "format": [["number", "street"], ["city", "postcode"]]
+        "format": [["housenumber", "street"], ["city", "postcode"]]
     },
     {
         "countryCodes": ["gb"],
-        "format": [["housename"], ["number", "street"], ["city", "postcode"]]
+        "format": [["housename"], ["housenumber", "street"], ["city", "postcode"]]
     },
     {
         "countryCodes": ["at", "ch", "de"],
-        "format": [["street", "number"], ["postcode", "city"]]
+        "format": [["street", "housenumber"], ["postcode", "city"]]
     }
 ]

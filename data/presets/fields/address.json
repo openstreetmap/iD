@@ -14,7 +14,7 @@
     "strings": {
         "placeholders": {
           "housename": "Housename",
-          "number": "123",
+          "housenumber": "123",
           "street": "Street",
           "city": "City",
           "postcode": "Postal code"

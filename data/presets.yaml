@@ -55,7 +55,8 @@ en:
       address: 
         label: Address
         placeholders: 
-          number: "123"
+          housename: Housename
+          housenumber: "123"
           street: Street
           city: City
           postcode: Postal code

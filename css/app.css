@@ -1526,7 +1526,7 @@ input[type=number] {
     width: 100%;
 }
 
-.form-field .addr-number {
+.form-field .addr-housenumber {
     width: 33.3333%;
 }
 

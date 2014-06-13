@@ -1,10 +1,6 @@
 iD.ui.preset.address = function(field, context) {
     var event = d3.dispatch('init', 'change'),
-        housename,
-        housenumber,
-        street,
-        city,
-        postcode,
+        wrap,
         entity,
         isInitialized;
 
@@ -91,15 +87,15 @@ iD.ui.preset.address = function(field, context) {
     }
 
     function address(selection) {
-        selection.selectAll('.preset-input-wrap').remove();
+        selection.selectAll('.preset-input-wrap')
+            .remove();
 
-        var wrap = selection.selectAll('.preset-input-wrap').data([0]),
-            center = entity.extent(context.graph()).center(),
+        var center = entity.extent(context.graph()).center(),
             addressFormat;
 
         // Enter
 
-        var enter = wrap.enter().append('div')
+        var enter = wrap = selection.append('div')
             .attr('class', 'preset-input-wrap');
 
         iD.countryCode().search(center, function (err, countryCode) {
@@ -122,25 +118,19 @@ iD.ui.preset.address = function(field, context) {
 
             // Update
 
-            housename = wrap.select('.addr-housename');
-            housenumber = wrap.select('.addr-number');
-            street = wrap.select('.addr-street');
-            city = wrap.select('.addr-city');
-            postcode = wrap.select('.addr-postcode');
-
-            street
+            wrap.selectAll('.addr-street')
                 .call(d3.combobox()
                     .fetcher(function(value, callback) {
                         callback(getStreets());
                     }));
 
-            city
+            wrap.selectAll('.addr-city')
                 .call(d3.combobox()
                     .fetcher(function(value, callback) {
                         callback(getCities());
                     }));
 
-            postcode
+            wrap.selectAll('.addr-postcode')
                 .call(d3.combobox()
                     .fetcher(function(value, callback) {
                         callback(getPostCodes());
@@ -156,21 +146,21 @@ iD.ui.preset.address = function(field, context) {
     }
 
     function change() {
-        event.change({
-            'addr:housename': housename.value() || undefined,
-            'addr:housenumber': housenumber.value() || undefined,
-            'addr:street': street.value() || undefined,
-            'addr:city': city.value() || undefined,
-            'addr:postcode': postcode.value() || undefined
-        });
+        var tags = {};
+
+        wrap.selectAll('input')
+            .each(function (field) {
+                tags['addr:' + field] = this.value || undefined;
+            });
+
+        event.change(tags);
     }
 
     function updateTags(tags) {
-        housename.value(tags['addr:housename'] || '');
-        housenumber.value(tags['addr:housenumber'] || '');
-        street.value(tags['addr:street'] || '');
-        city.value(tags['addr:city'] || '');
-        postcode.value(tags['addr:postcode'] || '');
+        wrap.selectAll('input')
+            .value(function (field) {
+                return tags['addr:' + field] || '';
+            });
     }
 
     address.entity = function(_) {
@@ -182,8 +172,7 @@ iD.ui.preset.address = function(field, context) {
     address.tags = function(tags) {
         if (isInitialized) {
             updateTags(tags);
-        }
-        else {
+        } else {
             event.on('init', function () {
                 updateTags(tags);
             });
@@ -191,7 +180,7 @@ iD.ui.preset.address = function(field, context) {
     };
 
     address.focus = function() {
-        housenumber.node().focus();
+        wrap.selectAll('input').node().focus();
     };
 
     return d3.rebind(address, event, 'on');
