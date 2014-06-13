@@ -9,5 +9,9 @@
     {
         "countryCodes": ["at", "ch", "de"],
         "format": [["street", "housenumber"], ["postcode", "city"]]
+    },
+    {
+        "countryCodes": ["br"],
+        "format": [["street"], ["housenumber", "suburb"], ["city", "postcode"]]
     }
 ]
