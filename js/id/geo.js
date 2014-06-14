@@ -87,6 +87,39 @@ iD.geo.chooseEdge = function(nodes, point, projection) {
     };
 };
 
+// Return the intersection point of 2 line segments.
+// From https://github.com/pgkelley4/line-segments-intersect
+// This uses the vector cross product approach described below:
+//  http://stackoverflow.com/a/565282/786339
+iD.geo.lineIntersection = function(a, b) {
+    function subtractPoints(point1, point2) {
+        return [point1[0] - point2[0], point1[1] - point2[1]];
+    }
+    function crossProduct(point1, point2) {
+        return point1[0] * point2[1] - point1[1] * point2[0];
+    }
+
+    var p = [a[0][0], a[0][1]],
+        p2 = [a[1][0], a[1][1]],
+        q = [b[0][0], b[0][1]],
+        q2 = [b[1][0], b[1][1]],
+        r = subtractPoints(p2, p),
+        s = subtractPoints(q2, q),
+        uNumerator = crossProduct(subtractPoints(q, p), r),
+        denominator = crossProduct(r, s);
+
+    if (uNumerator && denominator) {
+        var u = uNumerator / denominator,
+            t = crossProduct(subtractPoints(q, p), s) / denominator;
+
+        if ((t >= 0) && (t <= 1) && (u >= 0) && (u <= 1)) {
+            return iD.geo.interp(p, p2, t);
+        }
+    }
+
+    return null;
+}
+
 // Return whether point is contained in polygon.
 //
 // `point` should be a 2-item array of coordinates.
