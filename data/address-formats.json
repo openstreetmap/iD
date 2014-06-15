@@ -13,5 +13,9 @@
     {
         "countryCodes": ["br"],
         "format": [["street"], ["housenumber", "suburb"], ["city", "postcode"]]
+    },
+    {
+        "countryCodes": ["vn"],
+        "format": [["housenumber", "street"], ["subdistrict"], ["district"], ["city"], ["province", "postcode"]]
     }
 ]
