@@ -16,6 +16,6 @@
     },
     {
         "countryCodes": ["vn"],
-        "format": [["housenumber", "street"], ["subdistrict", "district"], ["suburb", "city"], ["province", "postcode"]]
+        "format": [["housenumber", "street"], ["subdistrict"], ["district"], ["city"], ["province", "postcode"]]
     }
 ]
