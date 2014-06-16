@@ -118,7 +118,7 @@ iD.geo.lineIntersection = function(a, b) {
     }
 
     return null;
-}
+};
 
 // Return whether point is contained in polygon.
 //
