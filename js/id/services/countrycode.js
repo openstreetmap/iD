@@ -7,7 +7,7 @@ iD.countryCode  = function(context) {
     }
 
     countryCode.search = function(location, callback) {
-        iD.countryCode.grid.getCode (location[1], location[0], callback); 
+        iD.countryCode.grid.getCode (location[1], location[0], callback);
         return;
     };
 
