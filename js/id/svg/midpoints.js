@@ -1,6 +1,7 @@
 iD.svg.Midpoints = function(projection, context) {
     return function drawMidpoints(surface, graph, entities, filter, extent) {
-        var midpoints = {};
+        var poly = extent.polygon(),
+            midpoints = {};
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -24,12 +25,11 @@ iD.svg.Midpoints = function(projection, context) {
                 } else {
                     if (iD.geo.euclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
                         var point = iD.geo.interp(a.loc, b.loc, 0.5),
-                            loc;
+                            loc = null;
 
                         if (extent.intersects(point)) {
                             loc = point;
                         } else {
-                            var poly = extent.polygon();
                             for (var k = 0; k < 4; k++) {
                                 point = iD.geo.lineIntersection([a.loc, b.loc], [poly[k], poly[k+1]]);
                                 if (point &&
@@ -51,7 +51,6 @@ iD.svg.Midpoints = function(projection, context) {
                                 parents: [entity]
                             };
                         }
-
                     }
                 }
             }
