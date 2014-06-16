@@ -12,6 +12,7 @@ TODO: turn this into a script.
 
 - [ ] make translations
 - [ ] make imagery
+- [ ] make tiles
 - [ ] Update CHANGELOG.md
 - [ ] Update version number in id.js
 - [ ] Update version number in package.json

@@ -37,7 +37,8 @@ window.iD = function () {
         ui = iD.ui(context),
         connection = iD.Connection(),
         locale = iD.detect().locale,
-        localePath;
+        localePath,
+        countryCode;
 
     if (locale && iD.data.locales.indexOf(locale) === -1) {
         locale = locale.split('-')[0];
@@ -69,6 +70,13 @@ window.iD = function () {
         } else {
             cb();
         }
+    };
+
+    /* Country Code */
+    context.countryCode = function(_) {
+        if (!arguments.length) return countryCode;
+        countryCode = _;
+        return context;
     };
 
     /* Straight accessors. Avoid using these if you can. */

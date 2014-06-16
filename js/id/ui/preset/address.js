@@ -97,74 +97,72 @@ iD.ui.preset.address = function(field, context) {
         selection.selectAll('.preset-input-wrap')
             .remove();
 
-        var center = entity.extent(context.graph()).center(),
-            addressFormat;
+        var addressFormat;
 
         // Enter
 
         wrap = selection.append('div')
             .attr('class', 'preset-input-wrap');
 
-        iD.countryCode().search(center, function (err, countryCode) {
-            addressFormat = _.find(iD.data.addressFormats, function (a) {
-                return a && a.countryCodes && _.contains(a.countryCodes, countryCode);
-            }) || _.first(iD.data.addressFormats);
+        var countryCode = context.countryCode();
+        addressFormat = _.find(iD.data.addressFormats, function (a) {
+            return a && a.countryCodes && _.contains(a.countryCodes, countryCode);
+        }) || _.first(iD.data.addressFormats);
 
-            function row(r) {
-                // Normalize widths.
-                var total = _.reduce(r, function(sum, field) {
-                    return sum + (widths[field] || 0.5);
-                }, 0);
+        function row(r) {
+            // Normalize widths.
+            var total = _.reduce(r, function(sum, field) {
+                return sum + (widths[field] || 0.5);
+            }, 0);
 
-                return r.map(function (field) {
-                    return {
-                        id: field,
-                        width: (widths[field] || 0.5) / total
-                    };
-                });
-            }
+            return r.map(function (field) {
+                return {
+                    id: field,
+                    width: (widths[field] || 0.5) / total
+                };
+            });
+        }
 
-            wrap.selectAll('div')
-                .data(addressFormat.format)
-                .enter()
-                .append('div')
-                .attr('class', 'addr-row')
-                .selectAll('input')
-                .data(row)
-                .enter()
-                .append('input')
-                .property('type', 'text')
-                .attr('placeholder', function (d) { return field.t('placeholders.' + d.id); })
-                .attr('class', function (d) { return 'addr-' + d.id; })
-                .style('width', function (d) { return d.width * 100 + '%'; });
+        wrap.selectAll('div')
+            .data(addressFormat.format)
+            .enter()
+            .append('div')
+            .attr('class', 'addr-row')
+            .selectAll('input')
+            .data(row)
+            .enter()
+            .append('input')
+            .property('type', 'text')
+            .attr('placeholder', function (d) { return field.t('placeholders.' + d.id); })
+            .attr('class', function (d) { return 'addr-' + d.id; })
+            .style('width', function (d) { return d.width * 100 + '%'; });
 
-            // Update
+        // Update
 
-            wrap.selectAll('.addr-street')
-                .call(d3.combobox()
-                    .fetcher(function(value, callback) {
-                        callback(getStreets());
-                    }));
+        wrap.selectAll('.addr-street')
+            .call(d3.combobox()
+                .fetcher(function(value, callback) {
+                    callback(getStreets());
+                }));
 
-            wrap.selectAll('.addr-city')
-                .call(d3.combobox()
-                    .fetcher(function(value, callback) {
-                        callback(getCities());
-                    }));
+        wrap.selectAll('.addr-city')
+            .call(d3.combobox()
+                .fetcher(function(value, callback) {
+                    callback(getCities());
+                }));
 
-            wrap.selectAll('.addr-postcode')
-                .call(d3.combobox()
-                    .fetcher(function(value, callback) {
-                        callback(getPostCodes());
-                    }));
+        wrap.selectAll('.addr-postcode')
+            .call(d3.combobox()
+                .fetcher(function(value, callback) {
+                    callback(getPostCodes());
+                }));
 
-            wrap.selectAll('input')
-                .on('blur', change)
-                .on('change', change);
+        wrap.selectAll('input')
+            .on('blur', change)
+            .on('change', change);
 
-            event.init();
-            isInitialized = true;
-        });
+        event.init();
+        isInitialized = true;
     }
 
     function change() {
