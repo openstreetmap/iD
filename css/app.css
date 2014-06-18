@@ -2201,6 +2201,14 @@ img.wiki-image {
     margin-right: 10px;
 }
 
+#scale {
+    position:relative;
+    float:left;
+    height:20px;
+    width:100%;
+    padding:5px;
+}
+
 .source-switch a {
     padding: 2px 4px 4px 4px;
     border-radius: 2px;

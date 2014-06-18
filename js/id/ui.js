@@ -80,8 +80,16 @@ iD.ui = function(context) {
             .attr('class', 'map-control help-control')
             .call(iD.ui.Help(context));
 
-        var about = content.append('div')
-            .attr('class','col12 about-block fillD');
+        var aboutBlock = content.append('div')
+            .attr('class', 'col12 about-block fillD');
+
+        aboutBlock.append('div')
+            .attr('id', 'scale-block')
+            .attr('class', 'col3')
+            .call(iD.ui.Scale(context));
+
+        var about = aboutBlock.append('div')
+            .attr('class', 'col9');
 
         about.append('div')
             .attr('class', 'api-status')
