@@ -1,6 +1,7 @@
 iD.svg.Midpoints = function(projection, context) {
     return function drawMidpoints(surface, graph, entities, filter, extent) {
-        var midpoints = {};
+        var poly = extent.polygon(),
+            midpoints = {};
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -22,15 +23,34 @@ iD.svg.Midpoints = function(projection, context) {
                 if (midpoints[id]) {
                     midpoints[id].parents.push(entity);
                 } else {
-                    var loc = iD.geo.interp(a.loc, b.loc, 0.5);
-                    if (extent.intersects(loc) && iD.geo.euclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
-                        midpoints[id] = {
-                            type: 'midpoint',
-                            id: id,
-                            loc: loc,
-                            edge: [a.id, b.id],
-                            parents: [entity]
-                        };
+                    if (iD.geo.euclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
+                        var point = iD.geo.interp(a.loc, b.loc, 0.5),
+                            loc = null;
+
+                        if (extent.intersects(point)) {
+                            loc = point;
+                        } else {
+                            for (var k = 0; k < 4; k++) {
+                                point = iD.geo.lineIntersection([a.loc, b.loc], [poly[k], poly[k+1]]);
+                                if (point &&
+                                    iD.geo.euclideanDistance(projection(a.loc), projection(point)) > 20 &&
+                                    iD.geo.euclideanDistance(projection(b.loc), projection(point)) > 20)
+                                {
+                                    loc = point;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (loc) {
+                            midpoints[id] = {
+                                type: 'midpoint',
+                                id: id,
+                                loc: loc,
+                                edge: [a.id, b.id],
+                                parents: [entity]
+                            };
+                        }
                     }
                 }
             }

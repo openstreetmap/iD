@@ -76,10 +76,9 @@ iD.Map = function(context) {
             if (map.editable() && !transformed) {
                 var all = context.intersects(map.extent()),
                     filter = d3.functor(true),
-                    extent = map.extent(),
                     graph = context.graph();
-                surface.call(vertices, graph, all, filter, extent, map.zoom());
-                surface.call(midpoints, graph, all, filter, extent);
+                surface.call(vertices, graph, all, filter, map.extent(), map.zoom());
+                surface.call(midpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.drawn({full: false});
             }
         });
@@ -114,7 +113,7 @@ iD.Map = function(context) {
             .call(vertices, graph, all, filter, map.extent(), map.zoom())
             .call(lines, graph, all, filter)
             .call(areas, graph, all, filter)
-            .call(midpoints, graph, all, filter, map.extent())
+            .call(midpoints, graph, all, filter, map.trimmedExtent())
             .call(labels, graph, all, filter, dimensions, !difference && !extent);
 
         if (points.points(context.intersects(map.extent()), 100).length >= 100) {
@@ -364,6 +363,12 @@ iD.Map = function(context) {
             var extent = iD.geo.Extent(_);
             map.centerZoom(extent.center(), map.extentZoom(extent));
         }
+    };
+
+    map.trimmedExtent = function() {
+        var headerY = 60, footerY = 30, pad = 10;
+        return new iD.geo.Extent(projection.invert([pad, dimensions[1] - footerY - pad]),
+                projection.invert([dimensions[0] - pad, headerY + pad]));
     };
 
     map.extentZoom = function(_) {

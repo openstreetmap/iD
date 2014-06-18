@@ -156,6 +156,34 @@ describe('iD.geo', function() {
         });
     });
 
+    describe('.lineIntersection', function() {
+        it('returns null if lines are colinear with overlap', function() {
+            var a = [[0, 0], [10, 0]],
+                b = [[-5, 0], [5, 0]];
+            expect(iD.geo.lineIntersection(a, b)).to.be.null;
+        });
+        it('returns null if lines are colinear but disjoint', function() {
+            var a = [[5, 0], [10, 0]],
+                b = [[-10, 0], [-5, 0]];
+            expect(iD.geo.lineIntersection(a, b)).to.be.null;
+        });
+        it('returns null if lines are parallel', function() {
+            var a = [[0, 0], [10, 0]],
+                b = [[0, 5], [10, 5]];
+            expect(iD.geo.lineIntersection(a, b)).to.be.null;
+        });
+        it('returns the intersection point between 2 lines', function() {
+            var a = [[0, 0], [10, 0]],
+                b = [[5, 10], [5, -10]];
+            expect(iD.geo.lineIntersection(a, b)).to.eql([5, 0]);
+        });
+        it('returns null if lines are not parallel but not intersecting', function() {
+            var a = [[0, 0], [10, 0]],
+                b = [[-5, 10], [-5, -10]];
+            expect(iD.geo.lineIntersection(a, b)).to.be.null;
+        });
+    });
+
     describe('.pointInPolygon', function() {
         it('says a point in a polygon is on a polygon', function() {
             var poly = [[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]];
