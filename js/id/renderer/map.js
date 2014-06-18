@@ -366,8 +366,9 @@ iD.Map = function(context) {
     };
 
     map.trimmedExtent = function() {
-        return new iD.geo.Extent(projection.invert([10, dimensions[1] - 40]),
-                projection.invert([dimensions[0] - 10, 70]));
+        var headerY = 60, footerY = 30, pad = 10;
+        return new iD.geo.Extent(projection.invert([pad, dimensions[1] - footerY - pad]),
+                projection.invert([dimensions[0] - pad, headerY + pad]));
     };
 
     map.extentZoom = function(_) {
