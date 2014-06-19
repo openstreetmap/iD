@@ -85,11 +85,11 @@ iD.ui = function(context) {
 
         aboutBlock.append('div')
             .attr('id', 'scale-block')
-            .attr('class', 'col3')
+            .attr('class', 'fl')
             .call(iD.ui.Scale(context));
 
         var about = aboutBlock.append('div')
-            .attr('class', 'col9');
+            .attr('class', 'fr');
 
         about.append('div')
             .attr('class', 'api-status')

@@ -2209,6 +2209,20 @@ img.wiki-image {
     padding:5px;
 }
 
+#scale text {
+    font: 12px sans-serif;
+    stroke: none;
+    fill: #ccc;
+    text-anchor: start;
+}
+
+#scale path {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
 .source-switch a {
     padding: 2px 4px 4px 4px;
     border-radius: 2px;
