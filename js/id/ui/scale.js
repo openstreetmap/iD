@@ -61,7 +61,7 @@ iD.ui.Scale = function(context) {
         }
 
         return scale;
-    };
+    }
 
     function update(selection) {
         // choose loc1, loc2 along bottom of viewport (near where the scale will be drawn)
@@ -77,7 +77,7 @@ iD.ui.Scale = function(context) {
             .attr('x', scale.px + 8)
             .attr('y', tickHeight)
             .text(scale.text);
-    };
+    }
 
     return function(selection) {
         var g = selection.append('svg')
