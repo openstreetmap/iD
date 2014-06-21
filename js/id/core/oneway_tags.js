@@ -17,8 +17,7 @@ iD.oneWayTags = {
         'roundabout': true
     },
     'man_made': {
-        'piste:halfpipe': true,
-        'pipeline': true
+        'piste:halfpipe': true
     },
     'piste:type': {
         'downhill': true,
