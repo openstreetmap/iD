@@ -247,5 +247,6 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     locales: r('locales.json'),
     en: read('dist/locales/en.json'),
     suggestions: r('name-suggestions.json'),
-    addressFormats: r('address-formats.json')
+    addressFormats: r('address-formats.json'),
+    worldGrid: read(__dirname + '/dist/tiles/worldgrid.json')
 }) + ';');

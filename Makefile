@@ -33,6 +33,7 @@ dist/iD.js: \
 	js/lib/rbush.js \
 	js/lib/togeojson.js \
 	js/lib/marked.js \
+	js/lib/codegrid.js \
 	js/id/start.js \
 	js/id/id.js \
 	js/id/services/*.js \

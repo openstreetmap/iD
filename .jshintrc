@@ -17,7 +17,8 @@
         "JXON": false,
         "osmAuth": false,
         "toGeoJSON": false,
-        "marked": false
+        "marked": false,
+        "codegrid": false
     },
     "browser": true,
     "unused": true,
