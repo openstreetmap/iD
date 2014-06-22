@@ -119,6 +119,11 @@ iD.ui = function(context) {
             );
 
         linkList.append('li')
+                .attr('class', 'country-code')
+                .style('display', 'none')
+                .call(iD.ui.CountryCode(context));
+
+        linkList.append('li')
             .attr('class', 'user-list')
             .attr('tabindex', -1)
             .call(iD.ui.Contributors(context));

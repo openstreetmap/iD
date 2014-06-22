@@ -2240,6 +2240,20 @@ img.wiki-image {
     content: ', ';
 }
 
+/* Country code */
+.country-code {
+    color: #fff;
+}
+
+.country-code-text {
+    padding: 2px 4px 4px 4px;
+    border-radius: 2px;
+}
+
+.wiki-link a:not(:last-child):after {
+    content: ', ';
+}
+
 /* API Status */
 
 .api-status {

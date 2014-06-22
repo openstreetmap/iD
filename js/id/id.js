@@ -31,13 +31,14 @@ window.iD = function () {
     };
 
     var history = iD.History(context),
-        dispatch = d3.dispatch('enter', 'exit'),
+        dispatch = d3.dispatch('enter', 'exit', 'country'),
         mode,
         container,
         ui = iD.ui(context),
         connection = iD.Connection(),
         locale = iD.detect().locale,
-        localePath;
+        localePath,
+        countryCode;
 
     if (locale && iD.data.locales.indexOf(locale) === -1) {
         locale = locale.split('-')[0];
@@ -69,6 +70,13 @@ window.iD = function () {
         } else {
             cb();
         }
+    };
+
+    /* Country Code */
+    context.countryCode = function(_) {
+        if (!arguments.length) return countryCode;
+        countryCode = _;
+        return context;
     };
 
     /* Straight accessors. Avoid using these if you can. */
@@ -220,6 +228,33 @@ window.iD = function () {
         //   https://bugzilla.mozilla.org/show_bug.cgi?id=530985
         return context.surface().node().parentNode.getBoundingClientRect();
     };
+
+    /* Update of country code */
+    map.on('move.countrycode', _.debounce(function() {
+        updateCountryCode();
+    }, 500));
+
+    connection.on('load.countrycode', function () {
+        updateCountryCode();
+    });
+
+    updateCountryCode = function () {
+        var center = context.map().extent().center();
+        // keep track only at higher zoom to avoid triggering
+        // events when user pan the map at low zoom levels.
+        if (context.map().zoom()>=9) {
+            iD.countryCode(context).search (center, function (error, result) {
+                if (result !== context.countryCode()) {
+                    if ((!error) && (result !== 'None')) {
+                        context.countryCode(result);
+                    } else {
+                        context.countryCode('');
+                    }
+                    dispatch.country(result);
+                }
+            });
+        }
+    }
 
     /* Presets */
     var presets = iD.presets()
