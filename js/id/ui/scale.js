@@ -4,25 +4,10 @@ iD.ui.Scale = function(context) {
         maxLength = 180,
         tickHeight = 8;
 
-    // http://stackoverflow.com/a/27943/7620
-    // Haversine distance formula
-    function distance(loc1, loc2) {
-        var R = 6371009;  // Mean radius of the earth in m
-        var dLat = (loc2[1] - loc1[1]) * (Math.PI / 180);
-        var dLon = (loc2[0] - loc1[0]) * (Math.PI / 180);
-        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(loc1[1] * (Math.PI / 180)) *
-            Math.cos(loc2[1] * (Math.PI / 180)) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        var d = R * c;  // Distance in m
-        return d;
-    }
-
     function scaleDefs(loc1, loc2) {
         var lat = (loc2[1] + loc1[1]) / 2,
             conversion = (imperial ? 3.28084 : 1),
-            dist = distance(loc1, loc2) * conversion,
+            dist = iD.geo.lonToMeters(loc2[0] - loc1[0], lat) * conversion,
             scale = { dist: 0, px: 0, text: '' },
             buckets, i, val, dLon;
 
@@ -41,7 +26,7 @@ iD.ui.Scale = function(context) {
             }
         }
 
-        dLon = scale.dist / (111132.954 * conversion) / Math.abs(Math.cos( lat * (Math.PI / 180)));
+        dLon = iD.geo.metersToLon(scale.dist / conversion, lat);
         scale.px = Math.round(projection([loc1[0] + dLon, loc1[1]])[0]);
 
         if (imperial) {
