@@ -93,6 +93,10 @@ suggestions:
 	npm install name-suggestion-index@git://github.com/osmlab/name-suggestion-index.git
 	cp node_modules/name-suggestion-index/name-suggestions.json data/name-suggestions.json
 
+tiles:
+	npm install country-code-grid@git://github.com/osmlab/country-code-grid.git
+	cp -r node_modules/country-code-grid/tiles dist/
+
 SPRITE = inkscape --export-area-page
 
 dist/img/line-presets.png: svg/line-presets.svg
