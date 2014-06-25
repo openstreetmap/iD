@@ -49,18 +49,20 @@ iD.svg.Vertices = function(projection, context) {
             return iD.Entity.key(entity) + ',' + zoom;
         });
 
+        var icons = {},
+            z;
+
         if (zoom < 17) {
-            zoom = 0;
+            z = 0;
         } else if (zoom < 18) {
-            zoom = 1;
+            z = 1;
         } else {
-            zoom = 2;
+            z = 2;
         }
 
-        var icons = {};
         function icon(entity) {
             if (entity.id in icons) return icons[entity.id];
-            icons[entity.id] = zoom !== 0 &&
+            icons[entity.id] =
                 entity.hasInterestingTags() &&
                 context.presets().match(entity, graph).icon;
             return icons[entity.id];
@@ -71,7 +73,7 @@ iD.svg.Vertices = function(projection, context) {
             return function(entity) {
                 var i = icon(entity),
                     c = i ? 0.5 : 0,
-                    r = rads[i ? 3 : zoom];
+                    r = rads[i ? 3 : z];
                 this.setAttribute('class', 'node vertex ' + klass + ' ' + entity.id);
                 this.setAttribute('cx', c);
                 this.setAttribute('cy', -c);
