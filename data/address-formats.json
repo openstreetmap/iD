@@ -3,8 +3,12 @@
         "format": [["housenumber", "street"], ["city", "postcode"]]
     },
     {
-        "countryCodes": ["gb", "ie"],
+        "countryCodes": ["gb"],
         "format": [["housename"], ["housenumber", "street"], ["city", "postcode"]]
+    },
+    {
+        "countryCodes": ["ie"],
+        "format": [["housename"], ["housenumber", "street"], ["city"]]
     },
     {
         "countryCodes": ["ad", "at", "ba", "be", "ch", "cz", "de", "dk", "es", "fi", "gr", "hr", "is", "it", "li", "nl", "no", "pl", "pt", "se", "si", "sk", "sm", "va"],
