@@ -9,7 +9,7 @@ iD.ui.Account = function(context) {
         }
 
         connection.userDetails(function(err, details) {
-            var userLink = selection.select('#userLink')
+            var userLink = selection.select('#userLink'),
                 logoutLink = selection.select('#logoutLink');
 
             userLink.html('');
