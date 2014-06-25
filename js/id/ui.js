@@ -80,30 +80,23 @@ iD.ui = function(context) {
             .attr('class', 'map-control help-control')
             .call(iD.ui.Help(context));
 
-        var aboutBlock = content.append('div')
-            .attr('class', 'col12 about-block fillD');
+        var footer = content.append('div')
+            .attr('id', 'footer')
+            .attr('class', 'fillD');
 
-        aboutBlock.append('div')
+        footer.append('div')
             .attr('id', 'scale-block')
-            .attr('class', 'fl')
             .call(iD.ui.Scale(context));
 
-        var about = aboutBlock.append('div')
-            .attr('class', 'fr');
-
-        about.append('div')
-            .attr('class', 'api-status')
-            .call(iD.ui.Status(context));
+        var linkList = footer.append('div')
+            .attr('id', 'info-block')
+            .append('ul')
+            .attr('id', 'about-list')
+            .attr('class', 'link-list');
 
         if (!context.embed()) {
-            about.append('div')
-                .attr('class', 'account')
-                .call(iD.ui.Account(context));
+            linkList.call(iD.ui.Account(context));
         }
-
-        var linkList = about.append('ul')
-            .attr('id', 'about')
-            .attr('class', 'link-list');
 
         linkList.append('li')
             .append('a')
@@ -130,6 +123,10 @@ iD.ui = function(context) {
             .attr('class', 'user-list')
             .attr('tabindex', -1)
             .call(iD.ui.Contributors(context));
+
+        footer.append('div')
+            .attr('class', 'api-status')
+            .call(iD.ui.Status(context));
 
         window.onbeforeunload = function() {
             return context.save();

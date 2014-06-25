@@ -68,7 +68,7 @@ iD.ui.Scale = function(context) {
         var g = selection.append('svg')
             .attr('id', 'scale')
             .append('g')
-            .attr('transform', 'translate(10,' + tickHeight + ')');
+            .attr('transform', 'translate(10,11)');
 
         g.append('path').attr('id', 'scalepath');
         g.append('text').attr('id', 'scaletext');

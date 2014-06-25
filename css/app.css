@@ -2181,7 +2181,8 @@ img.wiki-image {
 /* About Section
 ------------------------------------------------------- */
 
-.about-block {
+#footer {
+    width: 100%;
     position: absolute;
     right:0;
     bottom:0;
@@ -2192,21 +2193,27 @@ img.wiki-image {
     transition: opacity 200ms;
 }
 
-.about-block:hover {
+#footer:hover {
     opacity: 1;
 }
 
-#about {
-    text-align: right;
-    margin-right: 10px;
+#scale-block {
+    display: table-cell;
+    vertical-align: bottom;
+    width: 250px;
+    height: 30px;
+    float: left;
+    clear: left;
+}
+
+#info-block {
+    float: right;
+    clear: right;
 }
 
 #scale {
-    position:relative;
-    float:left;
-    height:20px;
-    width:100%;
-    padding:5px;
+    height: 30px;
+    width: 100%;
 }
 
 #scale text {
@@ -2221,6 +2228,12 @@ img.wiki-image {
     stroke: #ccc;
     stroke-width: 1;
     shape-rendering: crispEdges;
+}
+
+#about-list {
+    text-align: right;
+    margin-right: 10px;
+    clear: right;
 }
 
 .source-switch a {
@@ -2262,29 +2275,18 @@ img.wiki-image {
     content: ', ';
 }
 
-/* API Status */
-
 .api-status {
-    float: left;
+    float: right;
+    clear: both;
+    text-align: right;
+    width: 100%;
 }
 
 .api-status.offline,
-.api-status.readonly {
+.api-status.readonly,
+.api-status.error {
     background: red;
-    padding: 5px 10px;
-}
-
-/* Account Information */
-
-.account {
-    float: left;
-    padding: 5px 10px;
-}
-
-.account .logout {
-    margin-left:10px;
-    border-left: 1px solid white;
-    padding-left: 10px;
+    padding: 0px 5px;
 }
 
 /* Modals
