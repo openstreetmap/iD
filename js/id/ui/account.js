@@ -3,20 +3,25 @@ iD.ui.Account = function(context) {
 
     function update(selection) {
         if (!connection.authenticated()) {
-            selection.html('')
+            selection.selectAll('#userLink, #logoutLink')
                 .style('display', 'none');
             return;
         }
 
-        selection.style('display', 'block');
-
         connection.userDetails(function(err, details) {
-            selection.html('');
+            var userLink = selection.select('#userLink'),
+                logoutLink = selection.select('#logoutLink');
+
+            userLink.html('');
+            logoutLink.html('');
 
             if (err) return;
 
+            selection.selectAll('#userLink, #logoutLink')
+                .style('display', 'list-item');
+
             // Link
-            var userLink = selection.append('a')
+            userLink.append('a')
                 .attr('href', connection.userURL(details.display_name))
                 .attr('target', '_blank');
 
@@ -35,7 +40,7 @@ iD.ui.Account = function(context) {
                 .attr('class', 'label')
                 .text(details.display_name);
 
-            selection.append('a')
+            logoutLink.append('a')
                 .attr('class', 'logout')
                 .attr('href', '#')
                 .text(t('logout'))
@@ -47,7 +52,15 @@ iD.ui.Account = function(context) {
     }
 
     return function(selection) {
-        connection.on('auth', function() { update(selection); });
+        selection.append('li')
+            .attr('id', 'logoutLink')
+            .style('display', 'none');
+
+        selection.append('li')
+            .attr('id', 'userLink')
+            .style('display', 'none');
+
+        connection.on('auth.account', function() { update(selection); });
         update(selection);
     };
 };

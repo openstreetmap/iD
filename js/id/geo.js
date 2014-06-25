@@ -21,11 +21,38 @@ iD.geo.euclideanDistance = function(a, b) {
     var x = a[0] - b[0], y = a[1] - b[1];
     return Math.sqrt((x * x) + (y * y));
 };
+
+// using WGS84 polar radius (6356752.314245179 m)
+// const = 2 * PI * r / 360
+iD.geo.latToMeters = function(dLat) {
+    return dLat * 110946.257617;
+};
+
+// using WGS84 equatorial radius (6378137.0 m)
+// const = 2 * PI * r / 360
+iD.geo.lonToMeters = function(dLon, atLat) {
+    return Math.abs(atLat) >= 90 ? 0 :
+        dLon * 111319.490793 * Math.abs(Math.cos(atLat * (Math.PI/180)));
+};
+
+// using WGS84 polar radius (6356752.314245179 m)
+// const = 2 * PI * r / 360
+iD.geo.metersToLat = function(m) {
+    return m / 110946.257617;
+};
+
+// using WGS84 equatorial radius (6378137.0 m)
+// const = 2 * PI * r / 360
+iD.geo.metersToLon = function(m, atLat) {
+    return Math.abs(atLat) >= 90 ? 0 :
+        m / 111319.490793 / Math.abs(Math.cos(atLat * (Math.PI/180)));
+};
+
 // Equirectangular approximation of spherical distances on Earth
 iD.geo.sphericalDistance = function(a, b) {
-    var x = Math.cos(a[1]*Math.PI/180) * (a[0] - b[0]),
-        y = a[1] - b[1];
-    return 6.3710E6 * Math.sqrt((x * x) + (y * y)) * Math.PI/180;
+    var x = iD.geo.lonToMeters(a[0] - b[0], (a[1] + b[1]) / 2),
+        y = iD.geo.latToMeters(a[1] - b[1]);
+    return Math.sqrt((x * x) + (y * y));
 };
 
 iD.geo.edgeEqual = function(a, b) {

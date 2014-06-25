@@ -58,8 +58,8 @@ _.extend(iD.geo.Extent.prototype, {
     },
 
     padByMeters: function(meters) {
-        var dLat = meters / 111200,
-            dLon = meters / 111200 / Math.abs(Math.cos(this.center()[1]));
+        var dLat = iD.geo.metersToLat(meters),
+            dLon = iD.geo.metersToLon(meters, this.center()[1]);
         return iD.geo.Extent(
                 [this[0][0] - dLon, this[0][1] - dLat],
                 [this[1][0] + dLon, this[1][1] + dLat]);
