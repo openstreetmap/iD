@@ -501,6 +501,11 @@
             }
         }
     },
+    "lamp_type": {
+        "key": "lamp_type",
+        "type": "combo",
+        "label": "Type"
+    },
     "landuse": {
         "key": "landuse",
         "type": "typeCombo",

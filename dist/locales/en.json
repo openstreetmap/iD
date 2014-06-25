@@ -722,6 +722,9 @@
                     "terminal": "Terminal"
                 }
             },
+            "lamp_type": {
+                "label": "Type"
+            },
             "landuse": {
                 "label": "Type"
             },
@@ -1915,6 +1918,10 @@
             "highway/stop": {
                 "name": "Stop Sign",
                 "terms": "stop sign"
+            },
+            "highway/street_lamp": {
+                "name": "Street Lamp",
+                "terms": "streetlight,street light,lamp,light,gaslight"
             },
             "highway/tertiary": {
                 "name": "Tertiary Road",

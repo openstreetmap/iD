@@ -4256,6 +4256,27 @@
         ],
         "name": "Stop Sign"
     },
+    "highway/street_lamp": {
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "highway": "street_lamp"
+        },
+        "fields": [
+            "lamp_type",
+            "ref"
+        ],
+        "terms": [
+            "streetlight",
+            "street light",
+            "lamp",
+            "light",
+            "gaslight"
+        ],
+        "name": "Street Lamp"
+    },
     "highway/tertiary": {
         "icon": "highway-tertiary",
         "fields": [

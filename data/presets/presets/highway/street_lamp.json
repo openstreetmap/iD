@@ -1,0 +1,21 @@
+{
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "highway": "street_lamp"
+    },
+    "fields": [
+        "lamp_type",
+        "ref"
+    ],
+    "terms": [
+        "streetlight",
+        "street light",
+        "lamp",
+        "light",
+        "gaslight"
+    ],
+    "name": "Street Lamp"
+}

@@ -217,6 +217,8 @@ en:
           wlan: Wifi
           wired: Wired
           terminal: Terminal
+      lamp_type: 
+        label: Type
       landuse: 
         label: Type
       lanes: 
@@ -1098,6 +1100,9 @@ en:
       highway/stop: 
         name: Stop Sign
         terms: "<translate with synonyms or related terms for 'Stop Sign', separated by commas>"
+      highway/street_lamp: 
+        name: Street Lamp
+        terms: "<translate with synonyms or related terms for 'Street Lamp', separated by commas>"
       highway/tertiary: 
         name: Tertiary Road
         terms: "<translate with synonyms or related terms for 'Tertiary Road', separated by commas>"
