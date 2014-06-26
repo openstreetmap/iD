@@ -17,6 +17,10 @@ iD.ui.RawMemberEditor = function(context) {
         context.perform(
             iD.actions.DeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation'));
+
+        if (!context.hasEntity(d.relation.id)) {
+            context.enter(iD.modes.Browse(context));
+        }
     }
 
     function rawMemberEditor(selection) {
