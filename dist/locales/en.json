@@ -1707,10 +1707,6 @@
                 "name": "Chimney Sweep",
                 "terms": "sweep,chimney sweep"
             },
-            "craft/tailor": {
-                "name": "Tailor",
-                "terms": "tailor,clothes"
-            },
             "craft/tiler": {
                 "name": "Tiler",
                 "terms": "tiler"
@@ -2782,6 +2778,10 @@
             "shop/supermarket": {
                 "name": "Supermarket",
                 "terms": "bazaar,boutique,chain,co-op,cut-rate store,discount store,five-and-dime,flea market,galleria,grocery store,mall,mart,outlet,outlet store,shop,shopping center,shopping centre,shopping plaza,stand,store,supermarket,thrift shop"
+            },
+            "shop/tailor": {
+                "name": "Tailor",
+                "terms": "tailor,clothes"
             },
             "shop/toys": {
                 "name": "Toy Store",
