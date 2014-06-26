@@ -3351,7 +3351,8 @@
             "address",
             "operator",
             "opening_hours"
-        ]
+        ],
+        "searchable": false
     },
     "craft/tiler": {
         "name": "Tiler",
@@ -7589,6 +7590,27 @@
             "shop": "supermarket"
         },
         "name": "Supermarket"
+    },
+    "shop/tailor": {
+        "name": "Tailor",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "tailor",
+            "clothes"
+        ],
+        "tags": {
+            "shop": "tailor"
+        },
+        "icon": "clothing-store",
+        "fields": [
+            "building_area",
+            "address",
+            "operator",
+            "opening_hours"
+        ]
     },
     "shop/toys": {
         "icon": "shop",
