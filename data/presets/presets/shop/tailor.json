@@ -9,7 +9,7 @@
         "clothes"
     ],
     "tags": {
-        "craft": "tailor"
+        "shop": "tailor"
     },
     "icon": "clothing-store",
     "fields": [
@@ -17,6 +17,5 @@
         "address",
         "operator",
         "opening_hours"
-    ],
-    "searchable": false
+    ]
 }

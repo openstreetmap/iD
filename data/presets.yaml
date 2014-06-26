@@ -1748,6 +1748,9 @@ en:
       shop/supermarket: 
         name: Supermarket
         terms: "<translate with synonyms or related terms for 'Supermarket', separated by commas>"
+      shop/tailor: 
+        name: Tailor
+        terms: "<translate with synonyms or related terms for 'Tailor', separated by commas>"
       shop/toys: 
         name: Toy Store
         terms: "<translate with synonyms or related terms for 'Toy Store', separated by commas>"
