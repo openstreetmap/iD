@@ -9,7 +9,7 @@
         "clothes"
     ],
     "tags": {
-        "craft": "tailor"
+        "shop": "tailor"
     },
     "icon": "clothing-store",
     "fields": [
