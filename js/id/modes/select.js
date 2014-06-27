@@ -187,8 +187,17 @@ iD.modes.Select = function(context, selectedIDs) {
             context.uninstall(behavior);
         });
 
-        var q = iD.util.stringQs(location.hash.substring(1));
-        location.replace('#' + iD.util.qsString(_.omit(q, 'id'), true));
+        var q = _.omit(iD.util.stringQs(location.hash.substring(1)), 'id'),
+            center = context.map().center(),
+            zoom = context.map().zoom(),
+            precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
+            newhash = '#' + iD.util.qsString(_.assign(q, {
+                map: zoom.toFixed(2) +
+                    '/' + center[0].toFixed(precision) +
+                    '/' + center[1].toFixed(precision)
+            }), true);
+
+        location.replace(newhash);
 
         keybinding.off();
 

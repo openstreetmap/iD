@@ -11,6 +11,7 @@ describe("iD.modes.AddPoint", function() {
             .append('div')
             .attr('class', 'inspector-wrap');
 
+        context.map().centerZoom([-77.02271, 38.90085], 20);
         context.enter(iD.modes.AddPoint(context));
     });
 
