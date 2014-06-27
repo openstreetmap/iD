@@ -3,8 +3,7 @@ iD.modes.Browse = function(context) {
         button: 'browse',
         id: 'browse',
         title: t('modes.browse.title'),
-        description: t('modes.browse.description'),
-        key: '1'
+        description: t('modes.browse.description')
     }, sidebar;
 
     var behaviors = [
