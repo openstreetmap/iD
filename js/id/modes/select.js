@@ -93,17 +93,6 @@ iD.modes.Select = function(context, selectedIDs) {
             });
         });
 
-        var notNew = selectedIDs.filter(function(id) {
-            return !context.entity(id).isNew();
-        });
-
-        if (notNew.length) {
-            var q = iD.util.stringQs(location.hash.substring(1));
-            location.replace('#' + iD.util.qsString(_.assign(q, {
-                id: notNew.join(',')
-            }), true));
-        }
-
         context.ui().sidebar
             .select(singular() ? singular().id : null, newFeature);
 
@@ -186,18 +175,6 @@ iD.modes.Select = function(context, selectedIDs) {
         behaviors.forEach(function(behavior) {
             context.uninstall(behavior);
         });
-
-        var q = _.omit(iD.util.stringQs(location.hash.substring(1)), 'id'),
-            center = context.map().center(),
-            zoom = context.map().zoom(),
-            precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
-            newhash = '#' + iD.util.qsString(_.assign(q, {
-                map: zoom.toFixed(2) +
-                    '/' + center[0].toFixed(precision) +
-                    '/' + center[1].toFixed(precision)
-            }), true);
-
-        location.replace(newhash);
 
         keybinding.off();
 

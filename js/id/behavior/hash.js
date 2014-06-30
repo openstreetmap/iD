@@ -14,15 +14,29 @@ iD.behavior.Hash = function(context) {
     };
 
     var formatter = function(map) {
-        var center = map.center(),
+        var mode = context.mode(),
+            center = map.center(),
             zoom = map.zoom(),
-            precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
-        var q = iD.util.stringQs(location.hash.substring(1));
-        return '#' + iD.util.qsString(_.assign(q, {
-                map: zoom.toFixed(2) +
-                    '/' + center[0].toFixed(precision) +
-                    '/' + center[1].toFixed(precision)
-            }), true);
+            precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
+            q = iD.util.stringQs(location.hash.substring(1)),
+            newParams = {};
+
+        if (mode && mode.id === 'browse') {
+            delete q.id;
+        } else {
+            var selected = context.selectedIDs().filter(function(id) {
+                return !context.entity(id).isNew();
+            });
+            if (selected.length) {
+                newParams.id = selected.join(',');
+            }
+        }
+
+        newParams.map = zoom.toFixed(2) +
+                '/' + center[0].toFixed(precision) +
+                '/' + center[1].toFixed(precision);
+
+        return '#' + iD.util.qsString(_.assign(q, newParams), true);
     };
 
     function update() {
@@ -30,7 +44,7 @@ iD.behavior.Hash = function(context) {
         if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
     }
 
-    var move = _.throttle(update, 500);
+    var throttledUpdate = _.throttle(update, 500);
 
     function hashchange() {
         if (location.hash === s0) return; // ignore spurious hashchange events
@@ -41,14 +55,17 @@ iD.behavior.Hash = function(context) {
 
     function hash() {
         context.map()
-            .on('move.hash', move);
+            .on('move.hash', throttledUpdate);
+
+        context
+            .on('enter.hash', throttledUpdate);
 
         d3.select(window)
             .on('hashchange.hash', hashchange);
 
         if (location.hash) {
             var q = iD.util.stringQs(location.hash.substring(1));
-            if (q.id) context.loadEntity(q.id, !q.map);
+            if (q.id) context.loadEntity(q.id.split(',')[0], !q.map);
             hashchange();
             if (q.map) hash.hadHash = true;
         }
@@ -57,6 +74,9 @@ iD.behavior.Hash = function(context) {
     hash.off = function() {
         context.map()
             .on('move.hash', null);
+
+        context
+            .on('enter.hash', null);
 
         d3.select(window)
             .on('hashchange.hash', null);
