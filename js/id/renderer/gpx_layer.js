@@ -40,7 +40,7 @@ iD.GpxLayer = function(context) {
                 .append('text')
                 .attr('class', 'gpx')
                 .text(function(d) {
-                    return d.properties.name;
+                    return d.properties.desc || d.properties.name;
                 })
                 .attr('x', function(d) {
                     var centroid = path.centroid(d);
