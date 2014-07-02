@@ -67,15 +67,16 @@ iD.ui.FeatureList = function(context) {
                 });
             }
 
-            var locationMatch = q.match(/^(-?\d+\.?\d*)\s+(-?\d+\.?\d*)$/);
+            var locationMatch = sexagesimal.pair(q.toUpperCase()) || q.match(/^(-?\d+\.?\d*)\s+(-?\d+\.?\d*)$/);
 
             if (locationMatch) {
+                var loc = [parseFloat(locationMatch[0]), parseFloat(locationMatch[1])];
                 result.push({
                     id: -1,
                     geometry: 'point',
                     type: t('inspector.location'),
-                    name: locationMatch[0],
-                    location: [parseFloat(locationMatch[1]), parseFloat(locationMatch[2])]
+                    name: loc[0].toFixed(6) + ', ' + loc[1].toFixed(6),
+                    location: loc
                 });
             }
 
