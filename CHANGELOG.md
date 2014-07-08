@@ -1,3 +1,10 @@
+## 1.5.0
+* Add support for localized address fields (#2246)
+* Rendering improvements for layers (#2250)
+* Add a map scale (#2266)
+* Fix preset buttons (#2247)
+* Better midpoint rendering (#2257)
+
 ## 1.4.0
 
 * Ensure combobox menus are closed on blur (#2207)
