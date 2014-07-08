@@ -276,7 +276,6 @@
         "untagged_area": "Área ensin etiquetar",
         "many_deletions": "Va desaniciar {n} oxetos. ¿Ta seguru de que ye esto lo que quier facer? Esto desaniciarálos del mapa que ve tol mundu en openstreetmap.org.",
         "tag_suggests_area": "La etiqueta {tag} suxer que la llinia tendría de ser un área, pero nun ye un area",
-        "untagged_tooltip": "Seleicione un tipu de carauterística que describe qué tipu de {geometry} ye.",
         "deprecated_tags": "Etiquetes anticuaes: {tags}"
     },
     "zoom": {
@@ -396,10 +395,8 @@
             "address": {
                 "label": "Direición",
                 "placeholders": {
-                    "number": "123",
                     "street": "Cai",
-                    "city": "Ciudá",
-                    "postcode": "Códigu postal"
+                    "city": "Ciudá"
                 }
             },
             "admin_level": {

@@ -387,10 +387,8 @@
             "address": {
                 "label": "Διεύθυνση",
                 "placeholders": {
-                    "number": "123",
                     "street": "Οδός",
-                    "city": "Πόλη",
-                    "postcode": "Ταχυδρομικός Κώδικας"
+                    "city": "Πόλη"
                 }
             },
             "admin_level": {
@@ -961,7 +959,7 @@
             },
             "barrier/bollard": {
                 "name": "Στύλος",
-                "terms": "Κολώνα, Στύλος"
+                "terms": "Κολόνα, Στύλος, Στύλοι"
             },
             "barrier/cattle_grid": {
                 "name": "Συρματόπλεγμα"
@@ -1244,7 +1242,7 @@
             },
             "landuse/cemetery": {
                 "name": "Κοιμητήριο",
-                "terms": "Κοιμητήριο"
+                "terms": "Νεκροταφείο"
             },
             "landuse/commercial": {
                 "name": "Εμπορική",
@@ -1866,8 +1864,8 @@
                 "terms": "Χώρος εκδρομής, Χώρος πικ νικ"
             },
             "tourism/theme_park": {
-                "name": "Θεματικό Πάρκο",
-                "terms": "Θεματικό πάρκο"
+                "name": "Πάρκο Ψυχαγωγίας",
+                "terms": "Θεματικό πάρκο, Λούνα παρκ"
             },
             "tourism/viewpoint": {
                 "name": "Σημείο θέασης",

@@ -24,7 +24,8 @@
         "add": {
             "annotation": {
                 "point": "Legg til et punkt.",
-                "vertex": "Legg til et punkt til veien."
+                "vertex": "Legg til et punkt til veien.",
+                "relation": "La til en relasjo"
             }
         },
         "start": {
@@ -77,6 +78,12 @@
                 "multiple": "Fjernet {n} objekter."
             }
         },
+        "add_member": {
+            "annotation": "La et medlem til i en relasjon"
+        },
+        "delete_member": {
+            "annotation": "Fjernet et medlem fra en relasjon"
+        },
         "connect": {
             "annotation": {
                 "point": "Koblet en vei til et punkt.",
@@ -87,13 +94,15 @@
         },
         "disconnect": {
             "title": "Kobl fra",
+            "description": "Koble disse linjene/areane fra hverandre",
             "key": "D"
         },
         "merge": {
             "title": "Knytt sammen",
             "description": "Knytt disse linjene sammen.",
             "key": "C",
-            "annotation": "Knyttet {n} linjer sammen."
+            "annotation": "Knyttet {n} linjer sammen.",
+            "incomplete_relation": "Disse funksjonene kan ikke bli knyttet sammen fordi hvertfall én av dem er ikke ferdig nedlastet."
         },
         "move": {
             "title": "Flytt",
@@ -123,13 +132,17 @@
         },
         "split": {
             "title": "Del",
-            "key": "X"
+            "key": "X",
+            "annotation": {
+                "line": "Splitt en linje"
+            }
         }
     },
     "undo": {
         "nothing": "Ingen ting å gjøre."
     },
     "redo": {
+        "tooltip": "Omgjør: {action}",
         "nothing": "Ingen ting å gjøre tilbake."
     },
     "browser_notice": "Denne editor er støttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og høyere. Vennligst oppgrader din nettleser eller bruk Potlatch 2 for å redigere kartet.",
@@ -152,6 +165,9 @@
         "deleted": "Fjernet",
         "created": "Opprettet"
     },
+    "geocoder": {
+        "no_results_worldwide": "Ingen resultater funnet"
+    },
     "geolocate": {
         "title": "Vis min posisjon"
     },
@@ -160,13 +176,17 @@
         "no_documentation_key": "Det finnes ingen dokumentasjon tilgjengelig for denne nøkkelen",
         "show_more": "Vis mer",
         "all_members": "Alle medlemmer",
+        "new_relation": "Ny relasjon...",
         "role": "Rolle",
         "choose": "Velg egenskapstype",
         "results": "{n} resultater for {search}",
+        "back_tooltip": "Endre funksjon",
         "remove": "Fjern",
         "search": "Søk",
         "unknown": "Ukjent",
+        "edit": "Endre funksjon",
         "way": "Vei",
+        "relation": "Relasjon",
         "location": "Sted"
     },
     "background": {
@@ -176,7 +196,8 @@
         "reset": "tilbakestill"
     },
     "restore": {
-        "heading": "Du har ulagrede endringer"
+        "heading": "Du har ulagrede endringer",
+        "reset": "Tilbakestill"
     },
     "save": {
         "title": "Lagre",
@@ -227,6 +248,9 @@
         "navigation": {
             "title": "Navigasjon",
             "drag": "Hovedkartet viser data fra OpenstreetMap lagt over en bakgrunn. Du kan navigere ved å dra eller scrolle, slik som et vanlig nettkart. **Dra kartet!**"
+        },
+        "areas": {
+            "search": "**Søk etter '{name}'.**"
         },
         "lines": {
             "title": "Linjer"
@@ -301,10 +325,8 @@
             "address": {
                 "label": "Adresse",
                 "placeholders": {
-                    "number": "123",
                     "street": "Gate",
-                    "city": "By",
-                    "postcode": "Postkode"
+                    "city": "By"
                 }
             },
             "admin_level": {

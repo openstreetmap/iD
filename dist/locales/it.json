@@ -332,7 +332,9 @@
         "untagged_area": "Area senza tag",
         "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
         "tag_suggests_area": "Il tag {tag} fa pensare che la linea sia un'area, ma non rappresenta un'area",
-        "untagged_tooltip": "Seleziona un tipo di elemento che descriva il tipo di {geometry}.",
+        "untagged_point_tooltip": "Seleziona un tipo di elemento che descriva cos'è questo punto.",
+        "untagged_line_tooltip": "Seleziona un tipo di elemento che descriva cos'è questa linea.",
+        "untagged_area_tooltip": "Seleziona un tipo di elemento che descriva cos'è quest'area.",
         "deprecated_tags": "Tag deprecati: {tags}"
     },
     "zoom": {
@@ -484,10 +486,19 @@
             "address": {
                 "label": "Indirizzo",
                 "placeholders": {
-                    "number": "123",
+                    "housename": "Numero civico",
+                    "housenumber": "123",
                     "street": "Strada",
                     "city": "Città",
-                    "postcode": "Codice postale"
+                    "postcode": "Codice postale",
+                    "place": "Luogo",
+                    "hamlet": "Località",
+                    "suburb": "Circoscrizione",
+                    "subdistrict": "Sottodistretto",
+                    "district": "Distretto",
+                    "province": "Provincia",
+                    "state": "Stato/Regione",
+                    "country": "Nazione"
                 }
             },
             "admin_level": {
@@ -677,6 +688,9 @@
                     "wired": "Via cavo",
                     "terminal": "Terminale"
                 }
+            },
+            "lamp_type": {
+                "label": "Tipo"
             },
             "landuse": {
                 "label": "Tipo"
@@ -1749,6 +1763,10 @@
                 "name": "Segnale di stop",
                 "terms": "segnale di stop,cartello di stop,stop, lo stop"
             },
+            "highway/street_lamp": {
+                "name": "Lampione stradale",
+                "terms": "lampada,lampione,luce,neon,alogena,sodio"
+            },
             "highway/tertiary": {
                 "name": "Terziaria",
                 "terms": "Terziaria"
@@ -2583,6 +2601,10 @@
             "shop/supermarket": {
                 "name": "Supermercato",
                 "terms": "bazar,boutique,negozio,discount,mercato delle pulci,galleria,centro commerciale,mercato,outlet,chiosco,supermercato,negozio dell'usato"
+            },
+            "shop/tailor": {
+                "name": "Sartoria",
+                "terms": "sarto,vestiti,abiti"
             },
             "shop/toys": {
                 "name": "Negozio di giocattoli",

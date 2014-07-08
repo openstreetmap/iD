@@ -332,7 +332,6 @@
         "untagged_area": "Área sen etiquetar",
         "many_deletions": "Estás borrando {n} obxectos. Estás seguro de querer facelo? Esta acción quitaraos do mapa que os demáis ven en openstreetmap.org.",
         "tag_suggests_area": "A etiqueta {tag} suxire que a liña debería ser unha área, pero non é unha área.",
-        "untagged_tooltip": "Escolle un tipo de elemento que describa o que é esta {geometry}.",
         "deprecated_tags": "Etiquetas obsoletas: {tags}"
     },
     "zoom": {
@@ -467,10 +466,8 @@
             "address": {
                 "label": "Enderezo",
                 "placeholders": {
-                    "number": "123",
                     "street": "Rúa",
-                    "city": "Cidade",
-                    "postcode": "Código postal"
+                    "city": "Cidade"
                 }
             },
             "admin_level": {

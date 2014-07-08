@@ -2,17 +2,17 @@
     "modes": {
         "add_area": {
             "title": "Obszar",
-            "description": "Dodaj parki, budynki, jeziora i inne obszary do mapy.",
+            "description": "Dodaj do mapy parki, budynki, jeziora i inne obszary.",
             "tail": "Kliknij mapę, aby zacząć rysować obszar taki jak park, jezioro czy budynek."
         },
         "add_line": {
             "title": "Linia",
-            "description": "Dodaj autostrady, ulice, ścieżki dla pieszych, kanały i inne linie do mapy.",
+            "description": "Dodaj do mapy autostrady, ulice, ścieżki dla pieszych, kanały i inne linie.",
             "tail": "Kliknij mapę, aby zacząć rysować drogę, ścieżkę lub trasę."
         },
         "add_point": {
             "title": "Punkt",
-            "description": "Dodaj restauracje, pomniki, skrzynki pocztowe i inne punkty do mapy.",
+            "description": "Dodaj do mapy restauracje, pomniki, skrzynki pocztowe i inne punkty.",
             "tail": "Kliknij mapę, aby dodać punkt."
         },
         "browse": {
@@ -52,7 +52,7 @@
             }
         },
         "cancel_draw": {
-            "annotation": "Przestano rysować."
+            "annotation": "Rysowanie przerwane."
         },
         "change_role": {
             "annotation": "Zmieniono rolę członka relacji."
@@ -71,7 +71,8 @@
                 "line": "Stworzono okrąg z linii.",
                 "area": "Stworzono koło z obszaru."
             },
-            "not_closed": "Z tego obiektu nie można zrobić okręgu, gdyż nie jest pętlą."
+            "not_closed": "Z tego obiektu nie można zrobić okręgu, ponieważ nie jest pętlą.",
+            "too_large": "Nie można tego zaokrąglić, ponieważ nie jest widoczne wystarczająco dużo tego obiektu."
         },
         "orthogonalize": {
             "title": "Koryguj prostopadłość",
@@ -84,7 +85,8 @@
                 "line": "Stworzono kąty proste z narożników linii.",
                 "area": "Stworzono kąty proste obszaru."
             },
-            "not_squarish": "Nie można stworzyć kątów prostych, gdyż obiekt nie posiada czterech boków."
+            "not_squarish": "Nie można stworzyć kątów prostych, gdyż obiekt nie posiada czterech boków.",
+            "too_large": "Nie można skorygować równoległości, ponieważ nie jest widoczne wystarczająco dużo tego obiektu."
         },
         "straighten": {
             "title": "Prostowanie",
@@ -124,7 +126,7 @@
             "title": "Rozłącz",
             "description": "Rozłącz te dwie drogi.",
             "key": "D",
-            "annotation": "Rozłączono drogi.",
+            "annotation": "Rozłączono drogi/obszary.",
             "not_connected": "Nie ma tu wystarczająco wielu linii/obszarów do rozłączenia."
         },
         "merge": {
@@ -161,7 +163,7 @@
         },
         "reverse": {
             "title": "Odwróć",
-            "description": "Spraw by ta linia biegła w przeciwnym kierunku.",
+            "description": "Zmień kierunek tej linii na przeciwny.",
             "key": "V",
             "annotation": "Odwrócono linię."
         },
@@ -182,6 +184,12 @@
             "multiple_ways": "Jest tu zbyt wiele linii do rozdzielenia."
         },
         "restriction": {
+            "help": {
+                "select": "Kliknij aby wybrać fragment drogi.",
+                "toggle": "Kliknij aby zmienić zakazy/nakazy skrętu.",
+                "toggle_on": "Kliknij aby dodać zakaz/nakaz skrętu \"{restriction}\".",
+                "toggle_off": "Kliknij aby usunąć zakaz/nakaz skrętu \"{restriction}\"."
+            },
             "annotation": {
                 "create": "Dodano zakaz/nakaz skrętu",
                 "delete": "Usunięto zakaz/nakaz skrętu"
@@ -197,7 +205,7 @@
         "nothing": "Nie ma nic do powtórzenia."
     },
     "tooltip_keyhint": "Skrót:",
-    "browser_notice": "Ten edytor działa w Firefoksie, Chrome, Safari, Operze oraz Internet Explorerze 9 i wyżej. Zaktualizuj swoją przeglądarkę lub użyj Potlatch 2, aby edytować mapę.",
+    "browser_notice": "Ten edytor działa w Firefoksie, Chrome, Safari, Operze oraz Internet Explorerze 9 i wyższych. Zaktualizuj swoją przeglądarkę lub użyj Potlatch 2 aby edytować mapę.",
     "translate": {
         "translate": "Przetłumacz",
         "localized_translation_label": "Wielojęzyczna nazwa",
@@ -239,8 +247,8 @@
         "title": "Pokaż moją pozycję"
     },
     "inspector": {
-        "no_documentation_combination": "Nie ma dostępnej dokumentacji dla tej kombinacji tagów",
-        "no_documentation_key": "Nie ma dostępnej dokumentacji dla tego klucza",
+        "no_documentation_combination": "Nie ma dokumentacji dla tej kombinacji tagów",
+        "no_documentation_key": "Nie ma dokumentacji dla tego klucza",
         "show_more": "Pokaż więcej",
         "view_on_osm": "Zobacz na openstreetmap.org",
         "all_tags": "Wszystkie tagi",
@@ -262,7 +270,7 @@
         "none": "Brak",
         "node": "Węzeł",
         "way": "Droga",
-        "relation": "Ralacja",
+        "relation": "Relacja",
         "location": "Lokalizacja"
     },
     "background": {
@@ -272,6 +280,7 @@
         "none": "Brak",
         "custom": "Własne",
         "custom_button": "Edycja własnego podkładu",
+        "custom_prompt": "Wprowadź szablon URL dla kafelków. Dozwolone elementy to {z}, {x}, {y} dla schematu Z/X/Y oraz {u} dla schematu quadtile.",
         "fix_misalignment": "Wyrównaj podkład",
         "reset": "resetuj"
     },
@@ -323,7 +332,9 @@
         "untagged_area": "Nieoznaczony obszar",
         "many_deletions": "Usuwasz {n} obiektów. Czy na pewno chcesz to zrobić? Ta operacja usunie je z mapy, którą widzą wszyscy na openstreetmap.org.",
         "tag_suggests_area": "Tag {tag} sugeruje, że linia powinna być obszarem, ale nim nie jest.",
-        "untagged_tooltip": "Wybierz typ obiektu, króry opisuje czym to (geometria) jest.",
+        "untagged_point_tooltip": "Wybierz typ obiektu, który opisuje czym jest ten punkt.",
+        "untagged_line_tooltip": "Wybierz typ obiektu, który opisuje czym jest ta linia.",
+        "untagged_area_tooltip": "Wybierz typ obiektu, który opisuje czym jest ten obszar.",
         "deprecated_tags": "Przestarzałe tagi: {tags}"
     },
     "zoom": {
@@ -415,6 +426,9 @@
             "category-rail": {
                 "name": "Kolej"
             },
+            "category-restriction": {
+                "name": "Nakaz/zakaz"
+            },
             "category-road": {
                 "name": "Drogi"
             },
@@ -472,10 +486,19 @@
             "address": {
                 "label": "Adres",
                 "placeholders": {
-                    "number": "123",
+                    "housename": "Nazwa domu",
+                    "housenumber": "123",
                     "street": "Ulica",
                     "city": "Miasto",
-                    "postcode": "Kod pocztowy"
+                    "postcode": "Kod pocztowy",
+                    "place": "Miejsce",
+                    "hamlet": "Przysiółek",
+                    "suburb": "Dzielnica",
+                    "subdistrict": "Sub-dystrykt",
+                    "district": "Dystrykt",
+                    "province": "Prowincja",
+                    "state": "Stan",
+                    "country": "Kraj"
                 }
             },
             "admin_level": {
@@ -564,6 +587,9 @@
             "country": {
                 "label": "Kraj"
             },
+            "covered": {
+                "label": "Zadaszenie"
+            },
             "crossing": {
                 "label": "Typ"
             },
@@ -591,6 +617,9 @@
             "entrance": {
                 "label": "Typ"
             },
+            "except": {
+                "label": "Wyjątki"
+            },
             "fax": {
                 "label": "Faks",
                 "placeholder": "+48 42 123 45 67"
@@ -607,6 +636,12 @@
             "fuel": {
                 "label": "Paliwo"
             },
+            "fuel/e85": {
+                "label": "E85"
+            },
+            "fuel/lpg": {
+                "label": "LPG"
+            },
             "gauge": {
                 "label": "Wskaźnik"
             },
@@ -619,11 +654,21 @@
             "generator/type": {
                 "label": "Typ"
             },
+            "golf_hole": {
+                "label": "Numer referencyjny",
+                "placeholder": "Numer dołka (1-18)"
+            },
+            "handicap": {
+                "placeholder": "1-18"
+            },
             "highway": {
                 "label": "Typ"
             },
             "historic": {
                 "label": "Typ"
+            },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -633,6 +678,9 @@
             },
             "incline": {
                 "label": "Nachylenie"
+            },
+            "information": {
+                "label": "Typ"
             },
             "internet_access": {
                 "label": "Dostęp do internetu",
@@ -654,6 +702,9 @@
             },
             "leisure": {
                 "label": "Typ"
+            },
+            "length": {
+                "label": "Długość (w metrach)"
             },
             "levels": {
                 "label": "Poziomy",
@@ -689,16 +740,25 @@
                 "label": "Typ"
             },
             "oneway": {
-                "label": "Jednokierunkowa"
+                "label": "Jednokierunkowa",
+                "options": {
+                    "undefined": "Domyślnie nie"
+                }
             },
             "oneway_yes": {
-                "label": "Jednokierunkowa"
+                "label": "Jednokierunkowa",
+                "options": {
+                    "undefined": "Domyślnie tak"
+                }
             },
             "opening_hours": {
                 "label": "Godziny"
             },
             "operator": {
                 "label": "Operator"
+            },
+            "par": {
+                "placeholder": "3, 4, 5..."
             },
             "park_ride": {
                 "label": "Parkuj i jedź"
@@ -730,6 +790,15 @@
             },
             "railway": {
                 "label": "Typ"
+            },
+            "recycling/clothes": {
+                "label": "Ubrania"
+            },
+            "recycling/glass": {
+                "label": "Szkło"
+            },
+            "recycling/paper": {
+                "label": "Papier"
             },
             "ref": {
                 "label": "Numer referencyjny"
@@ -779,8 +848,15 @@
             "shop": {
                 "label": "Typ"
             },
+            "sloped_curb": {
+                "label": "Podjazd dla wózków"
+            },
             "smoking": {
                 "label": "Dla palących, Palenie, "
+            },
+            "social_facility_for": {
+                "label": "Przeznaczone dla osób",
+                "placeholder": "Bezdomni, niepełnosprawni, dzieci itp."
             },
             "source": {
                 "label": "Źródło"
@@ -829,6 +905,9 @@
             "tree_type": {
                 "label": "Typ"
             },
+            "trees": {
+                "label": "Drzewa"
+            },
             "tunnel": {
                 "label": "Tunel"
             },
@@ -850,6 +929,9 @@
             },
             "wheelchair": {
                 "label": "Dostęp dla wózków inwalidzkich"
+            },
+            "width": {
+                "label": "Szerokość (w metrach)"
             },
             "wikipedia": {
                 "label": "Wikipedia"
@@ -1009,6 +1091,9 @@
                 "name": "Uczelnia",
                 "terms": "uczelnia"
             },
+            "amenity/compressed_air": {
+                "name": "Kompresor"
+            },
             "amenity/courthouse": {
                 "name": "Sąd",
                 "terms": "sąd,sprawiedliwość,trybunał"
@@ -1019,6 +1104,9 @@
             },
             "amenity/doctor": {
                 "name": "Doktor"
+            },
+            "amenity/dojo": {
+                "name": "Dojo/szkoła sztuk walki"
             },
             "amenity/drinking_water": {
                 "name": "Woda pitna",
@@ -1048,6 +1136,12 @@
                 "name": "Cmentarz",
                 "terms": "cmentarz,pochówek"
             },
+            "amenity/hospital": {
+                "name": "Teren szpitala"
+            },
+            "amenity/kindergarten": {
+                "name": "Teren przedszkola"
+            },
             "amenity/library": {
                 "name": "Biblioteka",
                 "terms": "biblioteka,czytelnia"
@@ -1062,6 +1156,9 @@
             },
             "amenity/parking": {
                 "name": "Parking samochodowy"
+            },
+            "amenity/parking_entrance": {
+                "name": "Wjazd/wyjazd z parkingu/garażu"
             },
             "amenity/pharmacy": {
                 "name": "Apteka",
@@ -1110,6 +1207,9 @@
                 "name": "Restauracja",
                 "terms": "bar,kawiarnia,stołówka,jadalnia,drive-in,knajpa,jadłodajnia,fast food,grill,gospoda,klub nocny,pizzeria"
             },
+            "amenity/school": {
+                "name": "Teren szkoły"
+            },
             "amenity/shelter": {
                 "name": "Schronienie",
                 "terms": "schronienie, "
@@ -1120,6 +1220,9 @@
             "amenity/social_facility/food_bank": {
                 "name": "Bank żywności",
                 "terms": "Bank żywności, "
+            },
+            "amenity/social_facility/group_home": {
+                "name": "Wspólny dom"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Schronisko dla bezdomnych"
@@ -1255,6 +1358,9 @@
             "building/bunker": {
                 "name": "Bunkier"
             },
+            "building/cabin": {
+                "name": "Chata"
+            },
             "building/cathedral": {
                 "name": "Katedra",
                 "terms": "Katedra, "
@@ -1271,12 +1377,18 @@
                 "name": "Nieruchomość komercyjna",
                 "terms": "sklep,komercyjny,sprzedaż,handlowy"
             },
+            "building/construction": {
+                "name": "Budynek w budowie"
+            },
             "building/detached": {
                 "name": "Dom wolnostojący"
             },
             "building/dormitory": {
                 "name": "Akademik",
                 "terms": "Akademik, bursa, "
+            },
+            "building/entrance": {
+                "name": "Wejście/wyjście"
             },
             "building/garage": {
                 "name": "Garaż",
@@ -1288,6 +1400,12 @@
             "building/greenhouse": {
                 "name": "Szklarnia",
                 "terms": "Szklarnia"
+            },
+            "building/hospital": {
+                "name": "Budynek szpitala"
+            },
+            "building/hotel": {
+                "name": "Budynek hotelu"
             },
             "building/house": {
                 "name": "Dom",
@@ -1308,6 +1426,9 @@
                 "name": "Budynek mieszkalny",
                 "terms": "blok, kamienica, dom, czynszówka"
             },
+            "building/retail": {
+                "name": "Budynek handlu detalicznego"
+            },
             "building/roof": {
                 "name": "Zadaszenie",
                 "terms": "Dach,"
@@ -1321,9 +1442,18 @@
             "building/stable": {
                 "name": "Stajnia"
             },
+            "building/static_caravan": {
+                "name": "Stojący dom na kołach"
+            },
+            "building/terrace": {
+                "name": "Domki szeregowe"
+            },
             "building/train_station": {
                 "name": "Stacja kolejowa",
                 "terms": "Stacja kolejowa, "
+            },
+            "building/university": {
+                "name": "Budynek uczelni"
             },
             "building/warehouse": {
                 "name": "Magazyn"
@@ -1337,12 +1467,21 @@
             "craft/blacksmith": {
                 "name": "Kowal"
             },
+            "craft/boatbuilder": {
+                "name": "Budowa statków"
+            },
             "craft/bookbinder": {
                 "name": "Introligator"
             },
             "craft/brewery": {
                 "name": "Gorzelnia",
                 "terms": "Gorzelnia, "
+            },
+            "craft/carpenter": {
+                "name": "Cieśla"
+            },
+            "craft/carpet_layer": {
+                "name": "Układanie dywanów"
             },
             "craft/caterer": {
                 "name": "Żywieniowiec"
@@ -1372,6 +1511,9 @@
             "craft/hvac": {
                 "name": "Klimatyzacja"
             },
+            "craft/insulator": {
+                "name": "Kładzenie izolacji"
+            },
             "craft/jeweler": {
                 "name": "Jubiler"
             },
@@ -1380,6 +1522,9 @@
             },
             "craft/locksmith": {
                 "name": "Ślusarz"
+            },
+            "craft/metal_construction": {
+                "name": "Konstrukcje metalowe"
             },
             "craft/optician": {
                 "name": "Optyk",
@@ -1418,6 +1563,9 @@
             "craft/sawmill": {
                 "name": "Tartak"
             },
+            "craft/scaffolder": {
+                "name": "Rusztowania"
+            },
             "craft/sculpter": {
                 "name": "Rzeźbiarz"
             },
@@ -1447,6 +1595,9 @@
             "craft/watchmaker": {
                 "name": "Zegarmistrz"
             },
+            "craft/window_construction": {
+                "name": "Montaż okien"
+            },
             "embankment": {
                 "name": "Nasyp"
             },
@@ -1462,9 +1613,15 @@
                 "name": "Telefon alarmowy",
                 "terms": "telefon,alarmowy,alarm"
             },
+            "entrance": {
+                "name": "Wejście/wyjście"
+            },
             "footway/crossing": {
                 "name": "Przejście dla pieszych",
                 "terms": "przejście dla pieszych, "
+            },
+            "footway/crosswalk": {
+                "name": "Przejście dla pieszych"
             },
             "footway/sidewalk": {
                 "name": "Chodnik",
@@ -1492,6 +1649,9 @@
                 "name": "Przejście dla pieszych",
                 "terms": "skrzyżowanie,krzyżówka"
             },
+            "highway/crosswalk": {
+                "name": "Przejście dla pieszych"
+            },
             "highway/cycleway": {
                 "name": "Ścieżka rowerowa",
                 "terms": "droga,rowerowa,ścieżka,rowerów"
@@ -1511,6 +1671,9 @@
             "highway/motorway": {
                 "name": "Autostrada",
                 "terms": "autostrada"
+            },
+            "highway/motorway_junction": {
+                "name": "Wjazd/zjazd z autostrady"
             },
             "highway/motorway_link": {
                 "name": "Autostrada - wjazd/zjazd",
@@ -1667,6 +1830,9 @@
                 "name": "Cmentarz",
                 "terms": "cmentarz"
             },
+            "landuse/churchyard": {
+                "name": "Dziedziniec kościelny"
+            },
             "landuse/commercial": {
                 "name": "Handlowy"
             },
@@ -1796,6 +1962,9 @@
                 "name": "Pochylnia okrętowa",
                 "terms": "pochylnia"
             },
+            "leisure/sports_center": {
+                "name": "Centrum sportowe"
+            },
             "leisure/stadium": {
                 "name": "Stadion",
                 "terms": "stadion"
@@ -1823,6 +1992,9 @@
             },
             "man_made/embankment": {
                 "name": "Nasyp"
+            },
+            "man_made/flagpole": {
+                "name": "Maszt flagowy"
             },
             "man_made/lighthouse": {
                 "name": "Latarnia morska",
@@ -1954,9 +2126,15 @@
                 "name": "Księgowy",
                 "terms": "księgowy"
             },
+            "office/administrative": {
+                "name": "Biuro administracji"
+            },
             "office/architect": {
                 "name": "Architekt",
                 "terms": "architekt"
+            },
+            "office/company": {
+                "name": "Biuro prywatnego przedsiębiorstwa"
             },
             "office/educational_institution": {
                 "name": "Instytucja edukacyjna"
@@ -1968,9 +2146,21 @@
             "office/estate_agent": {
                 "name": "Biuro nieruchomości"
             },
+            "office/financial": {
+                "name": "Biuro finansowe"
+            },
+            "office/government": {
+                "name": "Biuro rządowe"
+            },
             "office/insurance": {
                 "name": "Biuro ubezpieczeń",
                 "terms": "Agencja ubezpieczeniowa"
+            },
+            "office/it": {
+                "name": "Biuro branży IT (informatycznej)"
+            },
+            "office/lawyer": {
+                "name": "Biuro prawnicze"
             },
             "office/newspaper": {
                 "name": "Gazeta"
@@ -1984,6 +2174,9 @@
             "office/political_party": {
                 "name": "Partia polityczna",
                 "terms": "partia polityczna"
+            },
+            "office/research": {
+                "name": "Biuro badawcze"
             },
             "office/telecommunication": {
                 "name": "Biuro firmy telekomunikacyjnej"
@@ -2059,6 +2252,9 @@
             "power/transformer": {
                 "name": "Transformator"
             },
+            "public_transport/platform": {
+                "name": "Miejsce oczekiwania"
+            },
             "public_transport/stop_position": {
                 "name": "Miejsce zatrzymania"
             },
@@ -2125,6 +2321,9 @@
             },
             "shop/alcohol": {
                 "name": "Sklep monopolowy"
+            },
+            "shop/art": {
+                "name": "Sklep z dziełami sztuki"
             },
             "shop/bakery": {
                 "name": "Piekarnia",
@@ -2287,6 +2486,9 @@
             "shop/photo": {
                 "name": "sklep fotograficzny"
             },
+            "shop/seafood": {
+                "name": "Sklep z owocami morza"
+            },
             "shop/shoes": {
                 "name": "Sklep obuwniczy"
             },
@@ -2415,6 +2617,9 @@
             },
             "type/restriction/only_right_turn": {
                 "name": "Nakaz skrętu w prawo"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "Nakaz jazdy prosto"
             },
             "type/route": {
                 "name": "Trasa",

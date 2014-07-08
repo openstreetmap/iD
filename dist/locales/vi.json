@@ -332,7 +332,9 @@
         "untagged_area": "Vùng không có thẻ",
         "many_deletions": "Bạn có chắc chắn muốn xóa {n} đối tượng? Các đối tượng này sẽ bị xóa khỏi bản đồ công cộng tại openstreetmap.org.",
         "tag_suggests_area": "Thẻ {tag} có lẽ dành cho vùng nhưng được gắn vào đường kẻ",
-        "untagged_tooltip": "Chọn loại {geometry} của đối tượng này.",
+        "untagged_point_tooltip": "Chọn loại điểm.",
+        "untagged_line_tooltip": "Chọn loại đường kẻ.",
+        "untagged_area_tooltip": "Chọn loại vùng.",
         "deprecated_tags": "Không khuyến khích sử dụng các thẻ: {tags}"
     },
     "zoom": {
@@ -484,10 +486,19 @@
             "address": {
                 "label": "Địa chỉ",
                 "placeholders": {
-                    "number": "123",
-                    "street": "Tên đường",
-                    "city": "Thành phố",
-                    "postcode": "Mã bưu điện"
+                    "housename": "Tên nhà",
+                    "housenumber": "123",
+                    "street": "Đường",
+                    "city": "Thành phố/thị xã",
+                    "postcode": "Mã bưu chính",
+                    "place": "Địa phương",
+                    "hamlet": "Thôn",
+                    "suburb": "Khu phố",
+                    "subdistrict": "Phường/xã/thị trấn",
+                    "district": "Quận/thị xã/huyện",
+                    "province": "Tỉnh",
+                    "state": "Tiểu bang",
+                    "country": "Quốc gia"
                 }
             },
             "admin_level": {
@@ -704,6 +715,9 @@
                     "wired": "Qua dây điện",
                     "terminal": "Máy tính công cộng"
                 }
+            },
+            "lamp_type": {
+                "label": "Kiểu"
             },
             "landuse": {
                 "label": "Mục đích"
@@ -1808,8 +1822,8 @@
                 "terms": "đường dân sinh, dân sinh, phố sống, khu nhà ở, duong dan sinh, dan sinh, pho song, khu nha o"
             },
             "highway/mini_roundabout": {
-                "name": "Đường vòng Nhỏ",
-                "terms": "đường vòng nhỏ, duong vong nho"
+                "name": "Bùng binh Nhỏ",
+                "terms": "bùng binh nhỏ, đường vòng nhỏ, bung binh nho, duong vong nho"
             },
             "highway/motorway": {
                 "name": "Đường Cao tốc",
@@ -1894,6 +1908,10 @@
             "highway/stop": {
                 "name": "Bảng Dừng lại",
                 "terms": "bảng dừng lại, biển dừng lại, bảng dừng xe, biển dừng xe, bang dung lai, bien dung lai, bang dung xe, bien dung xe"
+            },
+            "highway/street_lamp": {
+                "name": "Cột Đèn",
+                "terms": "cột đèn, đèn đường phố, cot den, den duong pho"
             },
             "highway/tertiary": {
                 "name": "Phố",
@@ -2754,6 +2772,10 @@
             "shop/supermarket": {
                 "name": "Siêu thị",
                 "terms": "siêu thị, chợ siêu thị, sieu thi, cho sieu thi"
+            },
+            "shop/tailor": {
+                "name": "Tiệm May",
+                "terms": "tiệm may, cửa hàng may, thợ may, may quần áo, tiem may, cua hang may, tho may, may quan ao"
             },
             "shop/toys": {
                 "name": "Tiệm Đồ chơi",

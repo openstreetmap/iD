@@ -424,10 +424,8 @@
             "address": {
                 "label": "Heimilisfang",
                 "placeholders": {
-                    "number": "123",
                     "street": "Gata",
-                    "city": "Sveitarfélag",
-                    "postcode": "Póstnúmer"
+                    "city": "Sveitarfélag"
                 }
             },
             "admin_level": {

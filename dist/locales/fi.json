@@ -329,7 +329,6 @@
         "untagged_area": "Alue, jolla ei ole tageja",
         "many_deletions": "Haluatko varmasti poistaa {n} kohdetta? Kohteet poistetaan kaikkien näkyviltä OpenStreetMap-palvelussa.",
         "tag_suggests_area": "Tagin {tag} mukaan viiva on alue, vaikka se ei sitä ole.",
-        "untagged_tooltip": "Valitse karttakohteen tyyppi, joka parhaiten edustaa sitä mikä tämä {geometry} on.",
         "deprecated_tags": "Vanhentuneet tagit: {tags}"
     },
     "zoom": {
@@ -477,10 +476,8 @@
             "address": {
                 "label": "Osoite",
                 "placeholders": {
-                    "number": "123",
                     "street": "Kadunnimi",
-                    "city": "Paikkakunta",
-                    "postcode": "Postinumero"
+                    "city": "Paikkakunta"
                 }
             },
             "admin_level": {
@@ -726,10 +723,16 @@
                 "label": "Tyyppi"
             },
             "oneway": {
-                "label": "Yksisuuntaisuus"
+                "label": "Yksisuuntaisuus",
+                "options": {
+                    "undefined": "Oletettavasti Ei"
+                }
             },
             "oneway_yes": {
-                "label": "Yksisuuntaisuus"
+                "label": "Yksisuuntaisuus",
+                "options": {
+                    "undefined": "Oletettavasti Kyllä"
+                }
             },
             "opening_hours": {
                 "label": "Aukioloajat"

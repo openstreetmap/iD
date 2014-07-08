@@ -332,7 +332,9 @@
         "untagged_area": "エリアにタグが付与されていません",
         "many_deletions": "{n} オブジェクトを削除しています。本当に削除してよろしいですか？ 削除した結果はopenstreetmap.orgに反映されます。",
         "tag_suggests_area": "ラインに {tag} タグが付与されています。エリアで描かれるべきです",
-        "untagged_tooltip": "この {geometry} があらわす地物の種類を選択してください。",
+        "untagged_point_tooltip": "この点が表す地物の種類を選択してください。",
+        "untagged_line_tooltip": "この直線が表す地物の種類を選択してください。",
+        "untagged_area_tooltip": "このエリアが表す地物の種類を選択してください。",
         "deprecated_tags": "タグの重複: {tags}"
     },
     "zoom": {
@@ -484,10 +486,19 @@
             "address": {
                 "label": "住所",
                 "placeholders": {
-                    "number": "123",
+                    "housename": "地番",
+                    "housenumber": "123",
                     "street": "所属する街路名",
                     "city": "市町村名",
-                    "postcode": "郵便番号"
+                    "postcode": "郵便番号",
+                    "place": "地名",
+                    "hamlet": "Hamlet",
+                    "suburb": "Suburb",
+                    "subdistrict": "Subdistrict",
+                    "district": "District",
+                    "province": "県",
+                    "state": "州",
+                    "country": "郡"
                 }
             },
             "admin_level": {
@@ -704,6 +715,9 @@
                     "wired": "有線LAN",
                     "terminal": "情報端末"
                 }
+            },
+            "lamp_type": {
+                "label": "種別"
             },
             "landuse": {
                 "label": "土地区分"
@@ -1895,6 +1909,10 @@
                 "name": "一時停止標識",
                 "terms": "一時停止標識"
             },
+            "highway/street_lamp": {
+                "name": "街路灯",
+                "terms": "街灯, 街路灯"
+            },
             "highway/tertiary": {
                 "name": "一般道（2車線以上）",
                 "terms": "一般道（2車線以上）"
@@ -2005,7 +2023,7 @@
             },
             "landuse/forest": {
                 "name": "人工林",
-                "terms": "人工林, 営林, 保安林, 鉄道林"
+                "terms": "人工林, 二次林, 営林, 保安林, 鉄道林"
             },
             "landuse/grass": {
                 "name": "草地",
@@ -2754,6 +2772,10 @@
             "shop/supermarket": {
                 "name": "スーパーマーケット",
                 "terms": "スーパーマーケット, スーパー"
+            },
+            "shop/tailor": {
+                "name": "仕立て屋",
+                "terms": "仕立て屋,テイラー,洋裁店"
             },
             "shop/toys": {
                 "name": "玩具店",

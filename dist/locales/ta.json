@@ -143,7 +143,6 @@
             "address": {
                 "label": "முகவரி",
                 "placeholders": {
-                    "number": "123",
                     "street": "தெரு",
                     "city": "மாநகரம்"
                 }

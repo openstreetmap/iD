@@ -272,7 +272,6 @@
             "address": {
                 "label": "చిరునామా",
                 "placeholders": {
-                    "number": "123",
                     "street": "వీధి",
                     "city": "నగరం"
                 }

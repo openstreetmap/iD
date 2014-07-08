@@ -332,7 +332,9 @@
         "untagged_area": "Neoznačeno područje",
         "many_deletions": "Brišeš {n} objekata. Jesi li siguran/na da to želiš učiniti? Ovo će ih obrisati sa karte koju svi vide na openstreetmap.org.",
         "tag_suggests_area": "Oznaka {tag} ukazuje da bi linija trebala biti područje, ali nije područje",
-        "untagged_tooltip": "Odaberi značajku koja opisuje što ova {geometrija} predstavlja.",
+        "untagged_point_tooltip": "Odaberi značajku koja opisuje što ova točka predstavlja.",
+        "untagged_line_tooltip": "Odaberi značajku koja opisuje što ova linija predstavlja.",
+        "untagged_area_tooltip": "Odaberi značajku koja opisuje što ovo područje predstavlja.",
         "deprecated_tags": "Zastarjele oznake: {tags}"
     },
     "zoom": {
@@ -481,7 +483,6 @@
             "address": {
                 "label": "Adresa",
                 "placeholders": {
-                    "number": "123",
                     "street": "Ulica",
                     "city": "Grad",
                     "postcode": "Poštanski broj"
@@ -1040,6 +1041,10 @@
             "amenity/hospital": {
                 "name": "Bolničko zemljište"
             },
+            "amenity/kindergarten": {
+                "name": "Teren oko vrtića",
+                "terms": "vrtić, jaslice, dječji vrtić"
+            },
             "amenity/library": {
                 "name": "Knjižnica",
                 "terms": "knjižnica,biblioteka,čitaonica,zbirka knjiga"
@@ -1102,6 +1107,10 @@
             "amenity/restaurant": {
                 "name": "Restoran",
                 "terms": "restoran,buffet,zdravljak,zalogajnica"
+            },
+            "amenity/school": {
+                "name": "Škola i teren oko škole",
+                "terms": "škola, školsko zemljište"
             },
             "amenity/shelter": {
                 "name": "Sklonište"
@@ -1236,6 +1245,9 @@
             "building/detached": {
                 "name": "Samostojni dom"
             },
+            "building/entrance": {
+                "name": "Ulaz/izlaz"
+            },
             "building/garage": {
                 "name": "Garaža"
             },
@@ -1272,7 +1284,8 @@
                 "name": "Krov"
             },
             "building/school": {
-                "name": "Školska zgrada"
+                "name": "Školska zgrada",
+                "terms": "škola"
             },
             "building/shed": {
                 "name": "Šupa"
@@ -1381,6 +1394,9 @@
             "emergency/phone": {
                 "name": "Telefon za nuždu"
             },
+            "entrance": {
+                "name": "Ulaz/izlaz"
+            },
             "golf/rough": {
                 "name": "Grubo"
             },
@@ -1413,6 +1429,9 @@
             },
             "highway/motorway": {
                 "name": "Autocesta"
+            },
+            "highway/motorway_junction": {
+                "name": "Petlja ili izlaz sa autoceste"
             },
             "highway/motorway_link": {
                 "name": "Pristupna cesta autoceste"
@@ -1547,7 +1566,7 @@
                 "name": "Građevinsko"
             },
             "landuse/farm": {
-                "name": "Gospodarstvo"
+                "name": "Poljoprivredno zemljište"
             },
             "landuse/farmyard": {
                 "name": "Gospodarsko imanje"

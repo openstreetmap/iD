@@ -354,10 +354,8 @@
             "address": {
                 "label": "Aadress",
                 "placeholders": {
-                    "number": "123",
                     "street": "Tänav",
-                    "city": "Linn",
-                    "postcode": "Postiindeks"
+                    "city": "Linn"
                 }
             },
             "aeroway": {

@@ -1,7 +1,7 @@
 {
     "modes": {
         "add_area": {
-            "title": "فضاها",
+            "title": "محدوده",
             "description": "افزودن پارک ها، ساختمان ها، دریاچه ها و سایر فضاها به نقشه.",
             "tail": "برای شروع کشیدن فضا هایی مثل پارک، دریاچه، یا ساختمان روی نقشه کلیک کنید."
         },
@@ -179,6 +179,11 @@
             },
             "not_eligible": "خطوط در شروع و پایانشان قابل تقسیم نیستند.",
             "multiple_ways": "تعداد خیلی زیادی خط برای تقسیم اینجا وجود دارد."
+        },
+        "restriction": {
+            "help": {
+                "select": "کلیک برای انتخاب یک بخش جاده"
+            }
         }
     },
     "undo": {
@@ -264,6 +269,7 @@
         "percent_brightness": "{opacity}% روشنایی",
         "none": "هیچ",
         "custom": "سفارشی",
+        "custom_button": "ویرایش پشت زمینه سفارشی",
         "fix_misalignment": "تعمیر تراز",
         "reset": "باز نشاندن"
     },
@@ -315,7 +321,6 @@
         "untagged_area": "فضای برچسب گذاری نشده",
         "many_deletions": "شما در حال حذف {n} شیئ هستید. مطمئنید میخواهید این کار را انجام دهید؟ این کار آنها را از نقشه ای که دیگران در openstreetmap.org میبینند حذف می کند.",
         "tag_suggests_area": "برچسب  {tag} پیشنهاد میکند خط باید یک فضا باشد، اما این یک فضا نیست",
-        "untagged_tooltip": "یک نوع ویژگی را انتخاب کنید که توصیف کند این {geometry} چیست.",
         "deprecated_tags": "برچسب های توصیه شده: {tags}"
     },
     "zoom": {
@@ -458,10 +463,8 @@
             "address": {
                 "label": "ادرس",
                 "placeholders": {
-                    "number": "123",
                     "street": "خيابان",
-                    "city": "شهر",
-                    "postcode": "کد پستی"
+                    "city": "شهر"
                 }
             },
             "admin_level": {
@@ -580,6 +583,9 @@
             "entrance": {
                 "label": "نوع"
             },
+            "except": {
+                "label": "استثناها"
+            },
             "fax": {
                 "label": "نمابر",
                 "placeholder": "+31 42 123 4567"
@@ -592,6 +598,9 @@
             },
             "fixme": {
                 "label": "تصحیح من"
+            },
+            "fuel": {
+                "label": "سوخت"
             },
             "gauge": {
                 "label": "مقیاس"
@@ -618,6 +627,9 @@
             },
             "historic": {
                 "label": "نوع"
+            },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "یاتا"
@@ -651,6 +663,9 @@
             },
             "leisure": {
                 "label": "نوع"
+            },
+            "length": {
+                "label": "طول (متر)"
             },
             "levels": {
                 "label": "سطح",
@@ -759,6 +774,9 @@
             "sac_scale": {
                 "label": "سختی مسیر"
             },
+            "seasonal": {
+                "label": "فصلی"
+            },
             "service": {
                 "label": "نوع"
             },
@@ -771,11 +789,17 @@
             "shop": {
                 "label": "نوع"
             },
+            "social_facility_for": {
+                "placeholder": "بی خانمان، معلول، کودک، و غیره"
+            },
             "source": {
                 "label": "منبع"
             },
             "sport": {
                 "label": "ورزشي"
+            },
+            "sport_ice": {
+                "label": "ورزشی"
             },
             "structure": {
                 "label": "ساختاری",
@@ -813,6 +837,9 @@
             },
             "tree_type": {
                 "label": "نوع"
+            },
+            "trees": {
+                "label": "درخت‌ها"
             },
             "tunnel": {
                 "label": "تونل"
@@ -964,6 +991,9 @@
                 "name": "کارواش",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کارواش'، با کاما جدا میشوند>"
             },
+            "amenity/charging_station": {
+                "name": "ایستگاه شارژ"
+            },
             "amenity/childcare": {
                 "name": "مراقبت از کودک",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مراقبت از کودک'، با کاما جدا میشوند>"
@@ -1020,6 +1050,12 @@
                 "name": "مقبره",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مقبره'، با کاما جدا میشوند>"
             },
+            "amenity/hospital": {
+                "name": "محیط بیمارستان"
+            },
+            "amenity/kindergarten": {
+                "name": "محیط کودکستان"
+            },
             "amenity/library": {
                 "name": "کتابخانه",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کتابخانه'، با کاما جدا میشوند>"
@@ -1030,6 +1066,9 @@
             },
             "amenity/parking": {
                 "name": "پارکینگ خودرو"
+            },
+            "amenity/parking_entrance": {
+                "name": "ورودی/خروجی پارکینگ"
             },
             "amenity/pharmacy": {
                 "name": "داروخانه",
@@ -1081,8 +1120,17 @@
                 "name": "رستوران",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'رستوران'، با کاما جدا میشوند>"
             },
+            "amenity/school": {
+                "name": "محیط مدرسه"
+            },
             "amenity/shelter": {
                 "name": "پناه گاه"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "فروشگاه مواد غذایی"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "پناهگاه بی خانمان‌ها"
             },
             "amenity/studio": {
                 "name": "استدیو"
@@ -1209,13 +1257,46 @@
                 "name": "آپارتمان ها",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'آپارتمان'، با کاما جدا میشوند>"
             },
+            "building/cabin": {
+                "name": "کابین"
+            },
+            "building/cathedral": {
+                "name": "کلیسای بزرگ"
+            },
+            "building/chapel": {
+                "name": "کلیسای کوچک"
+            },
+            "building/church": {
+                "name": "کلیسا"
+            },
             "building/commercial": {
                 "name": "ساختمان ارتباطی",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان ارتباطی'، با کاما جدا میشوند>"
             },
+            "building/construction": {
+                "name": "ساختمان در دست ساخت"
+            },
+            "building/dormitory": {
+                "name": "خوابگاه"
+            },
+            "building/entrance": {
+                "name": "ورود/خروج"
+            },
             "building/garage": {
                 "name": "گاراژ",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گاراژ'، با کاما جدا میشوند>"
+            },
+            "building/garages": {
+                "name": "گاراژ"
+            },
+            "building/greenhouse": {
+                "name": "گلخانه"
+            },
+            "building/hospital": {
+                "name": "ساختمان بیمارستان"
+            },
+            "building/hotel": {
+                "name": "ساختمان هتل"
             },
             "building/house": {
                 "name": "خانه",
@@ -1229,9 +1310,30 @@
                 "name": "ساختمان صنعتی",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان صنعتی'، با کاما جدا میشوند>"
             },
+            "building/public": {
+                "name": "ساختمان عمومی"
+            },
             "building/residential": {
                 "name": "ساختمان مسکونی",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان مسکونی'، با کاما جدا میشوند>"
+            },
+            "building/retail": {
+                "name": "ساختمان خرده فروشی"
+            },
+            "building/roof": {
+                "name": "سقف"
+            },
+            "building/school": {
+                "name": "ساختمان مدرسه"
+            },
+            "building/stable": {
+                "name": "اصطبل"
+            },
+            "building/train_station": {
+                "name": "ایستگاه قطار"
+            },
+            "building/university": {
+                "name": "ساختمان دانشگاه"
             },
             "craft/basket_maker": {
                 "name": "سبد ساز"
@@ -1375,6 +1477,9 @@
                 "name": "تلفن اورژانسی",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تلفن اورژانسی'، با کاما جدا میشوند>"
             },
+            "entrance": {
+                "name": "ورود/خروج"
+            },
             "footway/crossing": {
                 "name": "خط عابر پیاده"
             },
@@ -1438,12 +1543,16 @@
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'Mini-Roundabout'، با کاما جدا میشوند>"
             },
             "highway/motorway": {
-                "name": "مسیر موتور سواری",
-                "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'راه وسایل موتوری'، با کاما جدا میشوند>"
+                "name": "بزرگراه",
+                "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بزرگراه'، با کاما جدا میشوند>"
+            },
+            "highway/motorway_junction": {
+                "name": "تقاطع بزرگراه / خروج",
+                "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تقاطع بزرگراه/خروج'، با کاما جدا میشوند>"
             },
             "highway/motorway_link": {
-                "name": "اتصال جاده موتور سیکلت",
-                "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیوستن جاده موتور'، با کاما جدا میشوند>"
+                "name": "اتصال بزرگراه",
+                "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پیوستن بزرگراه'، با کاما جدا میشوند>"
             },
             "highway/path": {
                 "name": "مسیر",
@@ -1610,8 +1719,14 @@
             "landuse/industrial": {
                 "name": "صنعتی"
             },
+            "landuse/landfill": {
+                "name": "محل دفن مواد (زباله)"
+            },
             "landuse/meadow": {
                 "name": "مرغزار"
+            },
+            "landuse/military": {
+                "name": "نظامی"
             },
             "landuse/orchard": {
                 "name": "باغ میوه"
@@ -1678,6 +1793,9 @@
             },
             "leisure/slipway": {
                 "name": "قایق ساکن"
+            },
+            "leisure/sports_center": {
+                "name": "مرکز ورزشی/ بدنسازی"
             },
             "leisure/stadium": {
                 "name": "ورزشگاه"
@@ -1985,6 +2103,9 @@
             "shop/alcohol": {
                 "name": "مغازه مشروب فروشی"
             },
+            "shop/art": {
+                "name": "فروشگاه هنری"
+            },
             "shop/bakery": {
                 "name": "نانوایی"
             },
@@ -1996,6 +2117,9 @@
             },
             "shop/bicycle": {
                 "name": "فروشگاه دوچرخه"
+            },
+            "shop/bookmaker": {
+                "name": "صحافی"
             },
             "shop/books": {
                 "name": "کتاب فروشی"
@@ -2086,6 +2210,9 @@
             },
             "shop/locksmith": {
                 "name": "قفل سازی"
+            },
+            "shop/lottery": {
+                "name": "فروشگاه قرعه کشی"
             },
             "shop/mall": {
                 "name": "مرکز خرید"

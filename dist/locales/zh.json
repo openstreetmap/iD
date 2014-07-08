@@ -393,10 +393,8 @@
             "address": {
                 "label": "地址",
                 "placeholders": {
-                    "number": "123",
                     "street": "街道",
-                    "city": "城市",
-                    "postcode": "邮政编码"
+                    "city": "城市"
                 }
             },
             "admin_level": {

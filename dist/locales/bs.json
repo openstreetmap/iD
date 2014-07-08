@@ -458,10 +458,8 @@
             "address": {
                 "label": "Adresa",
                 "placeholders": {
-                    "number": "123",
                     "street": "Ulica",
-                    "city": "Grad",
-                    "postcode": "Poštanski broj"
+                    "city": "Grad"
                 }
             },
             "admin_level": {

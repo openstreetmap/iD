@@ -30,7 +30,8 @@
         "add": {
             "annotation": {
                 "point": "Добавена е точка.",
-                "vertex": "Добавен е възел към път."
+                "vertex": "Добавен е възел към път.",
+                "relation": "Добавена е връзка"
             }
         },
         "start": {
@@ -40,6 +41,8 @@
             }
         },
         "continue": {
+            "title": "Продължи",
+            "description": "Продължи тази линия.",
             "annotation": {
                 "line": "Продължена е линия.",
                 "area": "Продължен е площен обект."
@@ -68,6 +71,8 @@
             "not_closed": "Този обект не може да стане кръг, защото не е затворен."
         },
         "orthogonalize": {
+            "title": "Квадрат",
+            "key": "S",
             "annotation": {
                 "line": "Изправихте ъглите на линия.",
                 "area": "Изправихте ъглите на площен обект."
@@ -131,6 +136,7 @@
         },
         "rotate": {
             "title": "Въртене",
+            "description": "Завъртете този обект около централната му точка.",
             "key": "R",
             "annotation": {
                 "line": "Завъртяна е линия.",
@@ -158,9 +164,18 @@
             },
             "not_eligible": "Линиите не могат да бъдат разделяни в началото или края им.",
             "multiple_ways": "Има твърде много линии за разделяне тук."
+        },
+        "restriction": {
+            "help": {
+                "select": "Клик за селекция на пътен сегмент"
+            },
+            "annotation": {
+                "create": "Добавено ограничение в завойте"
+            }
         }
     },
     "undo": {
+        "tooltip": "Назад: {action}",
         "nothing": "Нищо за отменяне."
     },
     "redo": {
@@ -200,6 +215,11 @@
         "list": "Редакции от {users}",
         "truncated_list": "Редакции от {users} и още {count} други"
     },
+    "geocoder": {
+        "search": "Търси навсякъде...",
+        "no_results_visible": "Няма резултати във видимата част на картата",
+        "no_results_worldwide": "Няма намерени резултати"
+    },
     "geolocate": {
         "title": "Показване на моето местоположение"
     },
@@ -211,6 +231,7 @@
         "all_tags": "Всички тагове",
         "all_members": "Всички членове",
         "all_relations": "Всички релации",
+        "new_relation": "Нова връзка...",
         "role": "Роля",
         "choose": "Изберете вид обект",
         "results": "{n} резултата за {search}",
@@ -226,6 +247,7 @@
         "title": "Изображения",
         "description": "Изображения настройки",
         "percent_brightness": "{opacity}% яркост",
+        "fix_misalignment": "Подравняване",
         "reset": "презареждане"
     },
     "restore": {
@@ -246,7 +268,9 @@
         "edited_osm": "Редактирахте OSM!",
         "just_edited": "Вие редактирахте OpenStreetMap!",
         "view_on_osm": "Вижте в OSM",
-        "facebook": "Споделете във Facebook"
+        "facebook": "Споделете във Facebook",
+        "twitter": "Сподели в Twitter",
+        "google": "Сподели в Google+"
     },
     "confirm": {
         "okay": "Окей"
@@ -395,10 +419,17 @@
             "address": {
                 "label": "Адрес",
                 "placeholders": {
-                    "number": "123",
+                    "housename": "Къща",
+                    "housenumber": "123",
                     "street": "Улица",
                     "city": "Град",
-                    "postcode": "Пощенски код"
+                    "place": "Място",
+                    "suburb": "Квартал",
+                    "subdistrict": "Землище",
+                    "district": "Община",
+                    "province": "Област",
+                    "state": "Икономически район NUT2",
+                    "country": "Държава"
                 }
             },
             "admin_level": {
@@ -507,6 +538,9 @@
                     "wired": "Кабелен",
                     "terminal": "Терминал"
                 }
+            },
+            "lamp_type": {
+                "label": "Тип"
             },
             "landuse": {
                 "label": "Вид"
@@ -978,6 +1012,9 @@
             },
             "highway/steps": {
                 "name": "Стъпала"
+            },
+            "highway/street_lamp": {
+                "name": "Улична лампа"
             },
             "highway/tertiary": {
                 "name": "Третокласен път"
@@ -1530,6 +1567,21 @@
             },
             "type/restriction": {
                 "name": "Ограничение"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "Без десен завой"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "Без обратен завой"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Завой само на ляво"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Завой само на дясно"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "Без завиване"
             },
             "type/route": {
                 "name": "Маршрут"

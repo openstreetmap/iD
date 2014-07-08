@@ -320,7 +320,6 @@
         "untagged_area": "Walang tag na area o poligon",
         "many_deletions": "Nagbura ka ng {n} bagay sa mapa. Sigurado ka bang gusto mong gawin ito? Ito ay tatanggalin sa mapa na nakikita sa openstreetmap.org.",
         "tag_suggests_area": "Ang tag na {tag} ay kalimitang para sa mga area o poligon sublait ito ay nasa linya lamang.",
-        "untagged_tooltip": "Pumili ng uri ng \"feature\" na naglalarawan kung ano ang {geometry} na ito.",
         "deprecated_tags": "Hindi na ginagamit na \"tag\": {tags}"
     },
     "zoom": {
@@ -392,7 +391,6 @@
             "address": {
                 "label": "Address",
                 "placeholders": {
-                    "number": "123",
                     "street": "Kalsada",
                     "city": "Siyudad"
                 }

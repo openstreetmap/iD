@@ -332,7 +332,9 @@
         "untagged_area": "Område uden tags",
         "many_deletions": "Du er ved at slette {n} objekter. Er du sikker på du ønsker at gøre dette? Det vil slette dem fra det kort som alle andre ser på openstreetmap.org.",
         "tag_suggests_area": "Tagget {tag} antyder at linjen er et område,  selvom det ikke er et område",
-        "untagged_tooltip": "Vælg en objekttype der beskriver hvad det {geometritype} er.",
+        "untagged_point_tooltip": "Vælg en objekttype der beskriver hvad dette punkt er.",
+        "untagged_line_tooltip": "Vælg en objekttype der beskriver hvad slags linje dette er.",
+        "untagged_area_tooltip": "Vælg en objekttype der beskriver hvad slags område dette er.",
         "deprecated_tags": "Forældede tags: {tags}"
     },
     "zoom": {
@@ -484,10 +486,19 @@
             "address": {
                 "label": "Adresse",
                 "placeholders": {
-                    "number": "123",
+                    "housename": "Husnavn",
+                    "housenumber": "123",
                     "street": "Gade",
                     "city": "By",
-                    "postcode": "Postnummer"
+                    "postcode": "Postnummer",
+                    "place": "Sted",
+                    "hamlet": "Mindre beboet område",
+                    "suburb": "Bydel",
+                    "subdistrict": "Kvarter",
+                    "district": "Distrikt",
+                    "province": "Provins",
+                    "state": "Region",
+                    "country": "Land"
                 }
             },
             "admin_level": {
@@ -704,6 +715,9 @@
                     "wired": "Kabeladgang",
                     "terminal": "Terminal"
                 }
+            },
+            "lamp_type": {
+                "label": "Type"
             },
             "landuse": {
                 "label": "Type"
@@ -1895,6 +1909,10 @@
                 "name": "Stopskilt",
                 "terms": "Stopskilt"
             },
+            "highway/street_lamp": {
+                "name": "Gadelampe",
+                "terms": "Gadelampe, Gadebelysning"
+            },
             "highway/tertiary": {
                 "name": " Tertiær vej",
                 "terms": "Tertiær vej, Tertiærvej"
@@ -2754,6 +2772,10 @@
             "shop/supermarket": {
                 "name": "Supermarked",
                 "terms": "Supermarked, Lavprisbutik, Discountbutik"
+            },
+            "shop/tailor": {
+                "name": "Skrædder",
+                "terms": "Skrædder"
             },
             "shop/toys": {
                 "name": "Legetøjsbutik",

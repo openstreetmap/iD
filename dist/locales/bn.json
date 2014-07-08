@@ -391,10 +391,8 @@
             "address": {
                 "label": "ঠিকানা",
                 "placeholders": {
-                    "number": "১২৩",
                     "street": "স্ট্রীট",
-                    "city": "শহর",
-                    "postcode": "পিনকোড"
+                    "city": "শহর"
                 }
             },
             "aeroway": {

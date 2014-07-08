@@ -164,7 +164,7 @@
         "reverse": {
             "title": "Inverter",
             "description": "Inverter direção da linha.",
-            "key": "I",
+            "key": "V",
             "annotation": "Invertida a direção da linha."
         },
         "split": {
@@ -174,7 +174,7 @@
                 "area": "Dividir o contorno desta área em dois.",
                 "multiple": "Dividir os contornos das linhas/área neste ponto em duas."
             },
-            "key": "D",
+            "key": "X",
             "annotation": {
                 "line": "Dividir linha.",
                 "area": "Dividir contorno da área.",
@@ -187,8 +187,8 @@
             "help": {
                 "select": "Clique para selecionar um segmento de estrada.",
                 "toggle": "Clique para inverter as restrições de viragem.",
-                "toggle_on": "Clique para adicionar uma \"{restriction}\" restrição.",
-                "toggle_off": "Clique para remover a \"{restriction}\" restrição."
+                "toggle_on": "Clique para adicionar uma restrição de \"{restriction}\".",
+                "toggle_off": "Clique para remover a restrição de \"{restriction}\"."
             },
             "annotation": {
                 "create": "Restrição de viragem adicionada.",
@@ -332,7 +332,9 @@
         "untagged_area": "Área sem etiquetas",
         "many_deletions": "Está a eliminar {n} objetos. Tem a certeza que deseja continuar? Esta operação eliminará os objetos do mapa que outras pessoas visualizam no openstreetmap.org.",
         "tag_suggests_area": "A etiqueta {tag} sugere que a linha deveria ser uma área, mas não o é.",
-        "untagged_tooltip": "Selecione um tipo de funcionalidade que descreva o que esta {geometria} é .",
+        "untagged_point_tooltip": "Escolhe um elemento que define o que este ponto é.",
+        "untagged_line_tooltip": "Escolhe um elemento que define o que esta linha é.",
+        "untagged_area_tooltip": "Escolhe um elemento que define o que esta área é.",
         "deprecated_tags": "Etiquetas obsoletas: {tags}"
     },
     "zoom": {
@@ -354,6 +356,7 @@
         "gps": "# GPS\n\nOs dados GPS são os de maior confiança para o OpenStreetMap. Este editor\npermite usar ficheiros `.gpx` como fundo para ajudar a editar mapas.\nPode obter dados GPS com vários telemóveis, assim como dispositivos GPS.\n\nPara mais informações sobre a obtenção de dados GPS ver a página [Gravando trilhos GPS] (http://wiki.openstreetmap.org/wiki/Recording_GPS_tracks).\n\nPara usar um ficheiro GPX como imagem de fundo, arraste o ficheiro do seu\ncomputador para o mapa. Se o ficheiro for reconhecido corretamente o trilho GPS\nserá mostrado a verde. Clique em  'Configuração da imagem de fundo' do lado\ndireito para mostrar ou esconder o trilho GPS, assim como enquadrar todo\no trilho GPS na janela.\n\nEste trilho GPS não é carregado para o OpenStreetMap para estar disponível\na outros editores, é apenas um ficheiro local GPS que pode utilizar para servir\nde referência e ajuda a editar o mapa. Também pode [carregar o ficheiro GPX para o OpenStreetMap](http://www.openstreetmap.org/trace/create)⏎\npara que outros o possam utilizar ao editar mapas.\n\n",
         "imagery": "# Imagens de Satélite\n\nAs imagens de satélite são um recurso importante na criação e alteração\ndos mapas. Existe um grande leque de fontes de informações totalmente\ngratuitas no lado direito \ndo editor sob 'Configurações da Imagem de Fundo'.\n\nPor defeito são usado os mapas do [Bing](http://www.bing.com/maps/), que\npode variar no nível de qualidade. Em regra geral as capitais e os centros\npopulacionais têm as imagens de maior qualidade.\n\nExistem áreas do globo que contêm outros tipos de imagens de satélite,\ncomo por exemplo as zonas abrangidas pelo satélite de Mapnik.\n\nAs vezes a imagem pode encontrar-se desalinhada, se verificar que existe\numa grande quantidade de estradas fora do lugar mas geralmente sempre\npara o mesmo sentido, é recomendado mexer o mapa de maneira a alinhar.\nPara alinhar basta clicar onde diz 'Corrigir Alinhamento' no fim das \n'Configurações da Imagem de Fundo'.\n",
         "addresses": "# Endereços\n\nEndereços são das informações mais importantes para o mapa.\n\nApesar de endereços serem frequentemente representados em muitos mapas como parte de ruas, no OpenStreetMap eles são armazenados como atributos de edifícios e locais ao longo de ruas.\n\nDados de endereço podem ser adicionados tanto a locais representados como contornos de edifícios, como aos representados como um único ponto. A fonte ideal de dados de endereço é a recolha no local ou conhecimento pessoal — tal como com qualquer outro elemento, a cópia de fontes comerciais como o Google Maps é estritamente proibida.\n",
+        "inspector": "# Utilizando o Inspector Lateral\n\nO inspector lateral que situa-se no lado esquerdo do ecrã permite editar\nos detalhes de um determinado elemento.\n\n### Seleccionando um Elemento\n\nDepois de adicionado um nó, linha ou área no mapa, é possível escolher\nque tipo de elemento é que se trata, como por exemplo, indicar uma\nautoestrada ou uma rua residencial, um supermercado ou um café, etc.\nO inspector lateral mostra os tipos de elementos mais comuns, sendo\npossível procurar por outros através da ferramenta de pesquisa situada\nno cimo do painel.\n\nClique no ícone 'i' situado no lado direito de cada etiqueta para obter uma\ndescrição do elemento.\n\n### Usando Campos e Editar Etiquetas\n\nApós escolher uma característica ou quando se selecciona uma\ncaracterística que já tem um tipo atribuído, o painel lateral ira apresentar\num conjunto de campos úteis, como por exemplo o nome e a morada se\nse tratar de uma casa.\n\nAbaixo dos campos encontrará uns ícones em que pode clicar para \nadicionar outras características pertinentes, como uma ligação para um\nartigo na  [Wikipedia](http://www.wikipedia.org/), se existe acesso para cadeira de rodas, notas, entre\noutros.\n\nNo fim do painel lateral clique em 'Todas as etiquetas' para adicionar\nqualquer tipos de etiquetas, mesmo as incomuns. Pode recorrer ao sítio\n[Taginfo](http://taginfo.openstreetmap.org/) para saber que tipo de combinações de etiquetas são mais utilizadas.\n\nAlterações que sejam feitas no inspector lateral serão automaticamente\naplicadas no mapa. Pode sempre reverter uma alteração ao clicar no botão\n'Desfazer'.\n",
         "buildings": "# Edifícios\n\nO OpenStreetMap é a maior base de dados de edifícios que existe sob licença\nlivre. Pode adicionar e  melhorar o mapa com edifícios.\n\n### Selecionar\n\nPode selecionar edifícios clicando nos contornos da área que delimita o edifício.\nSerá mostrado então o menu de botões e o painel lateral direito com informações\nsobre o edifício.\n\n### Alterar\n\nPor vezes os edifícios são desenhados incorretamente colocados fora do sítio\nou têm etiquetas incompletas ou erradas.\n\nPara mover um edifício, selecione-o e clique no botão 'Mover' que aparece\nà volta do edifício selecionado. De seguida desloque o rato para deslocar\no edifício. Para terminar o movimento clique de novo.\n\nPara corrigir os contornos do edifício clique e desloque os pontos que formam\na área do edifício. caso seja necessário adicionar pontos clique e desloque\num ponto central que aparece entre dois pontos já existentes. Para remover\num ponto, clique no ponto e de seguida no botão de Eliminar que aparece\nà volta do ponto.\n\n### Criar\n\nPodem-se criar edifícios como áreas ou pontos. Sempre que possível, e caso\nse conheça a área que um edifício ocupa, caso esteja ligado a outros, deve-se\ncriar uma área para cada edifício. Se uma loja ou serviço ocupar um edifício todo\npode-se acrescentar etiquetas sobre a loja ou serviço ao edifício (área) todo,\ncaso existam vários num só edifício, os serviços e lojas devem ser criados\ncom pontos dentro do edifício com as etiquetas correspondentes.\n\nPara criar um edifício como área, clique no botão superior 'Área' e comece\na clicar para criar os pontos que definem a área do edifício. Termine de criar\na área clicando no ponto inicial, ou na tecla de mudança de linha do teclado.\n\n\n### Eliminar\n\nSe um edifício estiver incorreto - pode-se confirmar pela imagem de satélite (ter em\nconta que a imagem de satélite pode ter alguns anos e o edifício pode ter sido\nedificado posteriormente) e preferencialmente confirmar presencialmente  - pode\neliminar o edifício. É necessária precaução ao eliminar elementos do mapa.\nTal como qualquer outra alteração, os resultados serão visíveis a todos os outros.\n\nPode eliminar um edifício clicando na área dele para o selecionar e de seguida\nclicar no ícone do caixote do lixo que aparece ao lado, ou simplesmente\npressionar na tecla 'Del' do teclado.\n",
         "relations": "# Relações\n\nNo OpenStreetMap Uma relação é um tipo especial de função pois é capaz\nde agrupar vários tipos de funções diferentes. Por exemplo, dois tipos\ncomuns de relações são: *rotas*, onde são agrupadas diferentes tipos de\nestradas que pertencem ao mesmo grupo, como por exemplo as\nautoestradas, e *multipolígonos*, que agrupa diferentes linhas de forma a\ncompor formas e áreas complexas (uma área com várias secções ou\nburacos como num donut.)\n\nO conjunto de funções que constituem uma relação são chamados de\n*membros*. Na barra lateral, podes ver quais relações uma determinada\nfunção pertence e clicando nela é possível seleccionar a relação. Quando\na relação é seleccionada, é possível ver todos os seus membros assim\ncomo ver-los iluminados no mapa.\n\nNa maior parte das vezes, o editor iD gere automaticamente as relações\nque são criadas, adicionando qualquer alteração que faças. O que\nnecessitas de ter em atenção é que se eliminares, por exemplo, uma\nsecção de estrada de maneira a mapear-la de forma diferente, tens de te\ncertificar que a nova secção pertence à mesma relação onde a antiga\nestrada estava inserida.\n\n## Editando Relações\n\nCaso queiras editar uma relação, aqui estão algumas ideias para\ncomeçares.\n\nPara adicionar uma nova função a uma relação, selecciona a função desejada, clica no botão \"+\" na parte onde diz \"Todas as Relações\" e\nescolhe \"Nova relação...\"\n\nPara remover uma função de uma relação, selecciona a função desejada\ne clica no ícone com o caixote de lixo que fica à direita da relação.\n\nÉ possível criar multipoligonos com buracos utilizando a ferramenta \"Unir\". Desenha primeiro duas áreas (uma dentro e outra\nfora), sustem a tecla Shift e clica em cada uma delas para as seleccionar a\nambas e depois basta \"unir-las\" clicando no botão que tem o símbolo \"+\".\n"
     },
@@ -483,10 +486,19 @@
             "address": {
                 "label": "Morada",
                 "placeholders": {
-                    "number": "123",
+                    "housename": "Nome da Habitação",
+                    "housenumber": "123",
                     "street": "Rua",
                     "city": "Localidade",
-                    "postcode": "Código postal"
+                    "postcode": "Código Postal",
+                    "place": "Sítio",
+                    "hamlet": "Aldeia",
+                    "suburb": "Subúrbio ",
+                    "subdistrict": "Subdistrito",
+                    "district": "Distrito",
+                    "province": "Província",
+                    "state": "Estado",
+                    "country": "País"
                 }
             },
             "admin_level": {
@@ -704,6 +716,9 @@
                     "terminal": "Terminal de acesso"
                 }
             },
+            "lamp_type": {
+                "label": "Tipo"
+            },
             "landuse": {
                 "label": "Tipo"
             },
@@ -840,7 +855,7 @@
                 "label": "Tipo"
             },
             "restrictions": {
-                "label": "Restrição de Curvas"
+                "label": "Restrição de Viragens"
             },
             "route": {
                 "label": "Tipo"
@@ -1011,7 +1026,7 @@
                 "terms": "Aerodromo, Aviões, Avião, Helicóptero"
             },
             "aeroway/aerodrome": {
-                "name": "Aeroporto",
+                "name": "Aeroporto / Aeródromo",
                 "terms": "Avião, aeródromo"
             },
             "aeroway/apron": {
@@ -1039,7 +1054,7 @@
                 "terms": "Rolar, Faixa de Rolagem"
             },
             "aeroway/terminal": {
-                "name": "Terminal de Aeroporto",
+                "name": "Terminal de Aeroporto / Aeródromo",
                 "terms": "Aeroporto, Aeródromo"
             },
             "amenity": {
@@ -1195,7 +1210,7 @@
                 "terms": "Estacionamento, Lugar de Estacionamento"
             },
             "amenity/parking_entrance": {
-                "name": "Entrada / Saída de Parque de Estacionamento",
+                "name": "Entrada / Saída de Parque de \nEstacionamento",
                 "terms": "Parking Garage Entrance/Exit"
             },
             "amenity/pharmacy": {
@@ -1799,12 +1814,12 @@
                 "terms": "Bicicleta"
             },
             "highway/footway": {
-                "name": "Via Pedonal",
+                "name": "Caminho Pedonal",
                 "terms": "Andar, Caminho, Estrada, Pé, Pedestre, Percurso, Rua, Ruela, Trajectória, Trilha, Trilho, Via, Viela, Caminho Pedonal"
             },
             "highway/living_street": {
-                "name": "Zonas de coexistência",
-                "terms": "Zona de Peões"
+                "name": "Zona de Coexistência",
+                "terms": "Living Street, Zona de Peões"
             },
             "highway/mini_roundabout": {
                 "name": "Mini-Rotunda",
@@ -1835,7 +1850,7 @@
                 "terms": "Estrada Principal, Rodovia Principal, Estrada Primária, Rodovia Primária, Primário"
             },
             "highway/primary_link": {
-                "name": "Nó de Ligação a uma Estrada Nacional (Primária)",
+                "name": "Nó de Ligação a uma Estrada Nacional\n(Primária)",
                 "terms": "Ligação Estrada Nacional, Ligação Rodovia Nacional, Ligação Nacional,  Ligação Estrada Principal, Entrada Estrada Nacional, Entrada Rodovia Nacional, Entrada Nacional, Entrada Estrada Nacional, Saída Nacional, Saída Rodovia Nacional, Saída Nacional, Saída Estrada Nacional,"
             },
             "highway/residential": {
@@ -1855,7 +1870,7 @@
                 "terms": "Estrada Secundária, Rodovia Secundária, Secundário"
             },
             "highway/secondary_link": {
-                "name": "Nó de ligação a uma Estrada Regional (Secundária)",
+                "name": "Nó de ligação a uma Estrada Regional\n(Secundária)",
                 "terms": "Ligação Estrada Regional, Ligação Rodovia Regional, Ligação Regional,  Ligação Estrada Secundária, Entrada Estrada Regional, Entrada Rodovia Regional, Entrada Regional, Entrada Estrada Secundária, Saída Regional, Saída Rodovia Regional, Saída Regional, Saída Estrada Secundária"
             },
             "highway/service": {
@@ -1894,17 +1909,21 @@
                 "name": "Sinal de Stop",
                 "terms": "Stop Sign, Sinal de Paragem, Paragem Obrigatória, Sinal de paragem obrigatória no cruzamento ou entroncamento"
             },
+            "highway/street_lamp": {
+                "name": "Poste de Luz",
+                "terms": "Street Lamp, Posto de Iluminação, Lâmpada, Luz, Iluminação"
+            },
             "highway/tertiary": {
                 "name": "Estrada / Caminho Municipal (Terciária)",
                 "terms": "Estrada Terciária, Rodovia Terciária, Terciário, Caminho Municipal"
             },
             "highway/tertiary_link": {
-                "name": "Nó de ligação a uma Estrada / Caminho Municipal (Terciária)",
+                "name": "Nó de ligação a uma Estrada / Caminho Municipal\n(Terciária)",
                 "terms": "Ligação Estrada Municipal, Ligação Rodovia Municipal, Ligação Municipal,  Ligação Estrada Terciária, Entrada Estrada Municipal, Entrada Rodovia Municipal, Entrada Municipal, Entrada Estrada Terciária, Saída Municipal, Saída Rodovia Municipal, Saída Municipal, Saída Estrada Municipal"
             },
             "highway/track": {
                 "name": "Estrada Florestal / Agrícola",
-                "terms": "Estrada Rural"
+                "terms": "Track, Estrada Rural, Carreiro, Carreiro Florestal"
             },
             "highway/traffic_signals": {
                 "name": "Semáforos",
@@ -2191,8 +2210,8 @@
                 "terms": "Torre, Alto, Tower"
             },
             "man_made/wastewater_plant": {
-                "name": "ETAR",
-                "terms": "ETAR, E.T.A.R., Estação de Tratamento de Resíduos, Estação de Tratamento de Águas Residuais"
+                "name": "Estação de Tratamento de Águas Residuais",
+                "terms": "Wastewater Plant, E.T.A.R., Estação de Tratamento de Resíduos"
             },
             "man_made/water_tower": {
                 "name": "Reservatório Elevado",
@@ -2395,8 +2414,8 @@
                 "terms": "Lugar"
             },
             "place/city": {
-                "name": "Capital de DIstrito (cidade)",
-                "terms": "Cidade"
+                "name": "Capital de Distrito",
+                "terms": "City, Cidade, Capital, Distrito"
             },
             "place/hamlet": {
                 "name": "Aldeia",
@@ -2439,16 +2458,16 @@
                 "terms": "Energia"
             },
             "power/generator": {
-                "name": "Gerador elétrico",
-                "terms": "Gerador de Energia"
+                "name": "Central de Geração de Energia",
+                "terms": "Power Generator, Gerador Elétrico, Energia Eólica, Energia Solar, Energia Termoeléctrica, Energia Nuclear, Central de Energia"
             },
             "power/line": {
-                "name": "Linha de Transmissão",
-                "terms": "Linha de Eletricidade"
+                "name": "Linha de Média e Alta Tensão",
+                "terms": "Linha de Eletricidade, Linha de Transmissão"
             },
             "power/minor_line": {
-                "name": "Linha de Transmissão Menor",
-                "terms": "Minor Power Line, Linha de Energia Menor"
+                "name": "Linha de Baixa Tensão",
+                "terms": "Minor Power Line, Linha de Transmissão Menor, Linha de Energia Menor"
             },
             "power/pole": {
                 "name": "Poste de Eletricidade",
@@ -2754,6 +2773,10 @@
                 "name": "Supermercado",
                 "terms": "Bazar, Centro Comercial, Compras, Feira, Hipermercado, Minimercado, Stand, Outlet"
             },
+            "shop/tailor": {
+                "name": "Alfaiate",
+                "terms": "Tailor, Vestido, Fato, Roupa"
+            },
             "shop/toys": {
                 "name": "Loja de Brinquedos",
                 "terms": "Loja de Brinquedos"
@@ -2879,7 +2902,7 @@
                 "terms": "No Straight On, Proibido Seguir em Frente, Proibição de Seguir em Frente"
             },
             "type/restriction/no_u_turn": {
-                "name": "Proibição de Inversão do Sentido de Marcha",
+                "name": "Proibição de Inversão do Sentido de \nMarcha",
                 "terms": "No U-turn, Não Inverter o Sentido"
             },
             "type/restriction/only_left_turn": {

@@ -315,7 +315,6 @@
         "untagged_area": "冇籤嘅範圍",
         "many_deletions": "你要刪走物件{n}個。你真係想咁做？咁人人用開嘅公家街圖入便，都會刪走埋。",
         "tag_suggests_area": "{tag}籤話條綫係範圍，實情佢唔係。",
-        "untagged_tooltip": "揀個地貌，形容到爾一{geometry}。",
         "deprecated_tags": "廢籤：{tags}"
     },
     "zoom": {
@@ -463,10 +462,8 @@
             "address": {
                 "label": "地埗",
                 "placeholders": {
-                    "number": "一百二十三號",
                     "street": "街",
-                    "city": "城",
-                    "postcode": "郵政編號"
+                    "city": "城"
                 }
             },
             "admin_level": {

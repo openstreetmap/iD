@@ -332,7 +332,9 @@
         "untagged_area": "태그되지 않은 지역",
         "many_deletions": "개체 {n}개를 삭제하고 있습니다. 이를 수행하겠습니까? 다른 사람이 openstreetmap.org에서 보는 지도에서 삭제됩니다.",
         "tag_suggests_area": "{tag} 태그 제안 선은 지역이여야 하지만 태그는 지역이 아닙니다",
-        "untagged_tooltip": "이 {geometry}가 무엇인지 설명하는 기능 유형을 선택하세요.",
+        "untagged_point_tooltip": "이 지점이 무엇인지 설명하는 기능 유형을 선택하세요.",
+        "untagged_line_tooltip": "이 선이 무엇인지 설명하는 기능 유형을 선택하세요.",
+        "untagged_area_tooltip": "이 지역이 무엇인지 설명하는 기능 유형을 선택하세요.",
         "deprecated_tags": "사용되지 않는 태그: {tags}"
     },
     "zoom": {
@@ -481,10 +483,8 @@
             "address": {
                 "label": "주소",
                 "placeholders": {
-                    "number": "123",
                     "street": "거리",
-                    "city": "도시",
-                    "postcode": "우편 번호"
+                    "city": "도시"
                 }
             },
             "admin_level": {

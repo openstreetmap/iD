@@ -4,7 +4,6 @@
             "address": {
                 "label": "주소",
                 "placeholders": {
-                    "number": "123",
                     "street": "길",
                     "city": "도시"
                 }

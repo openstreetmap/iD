@@ -320,7 +320,6 @@
         "untagged_area": "Címkézetlen terület",
         "many_deletions": "{n} objektum törlésére készülsz. Biztos vagy benne? Ez törli őket a térképről, amit mindenki más lát az openstreetmap.org-on.",
         "tag_suggests_area": "A(z) {tag} címke alapján a vonal terület kéne legyen, de ez nem terület",
-        "untagged_tooltip": "Válassz egy elemtípust, ami leírja, hogy mi ez a {geometry}.",
         "deprecated_tags": "Elavult címkék: {tags}"
     },
     "zoom": {
@@ -468,10 +467,8 @@
             "address": {
                 "label": "Cím",
                 "placeholders": {
-                    "number": "123",
                     "street": "utca",
-                    "city": "város",
-                    "postcode": "Irányítószám"
+                    "city": "város"
                 }
             },
             "admin_level": {

@@ -318,10 +318,8 @@
             "address": {
                 "label": "Adrese",
                 "placeholders": {
-                    "number": "123",
                     "street": "Iela",
-                    "city": "Pilsēta",
-                    "postcode": "Pasta indekss"
+                    "city": "Pilsēta"
                 }
             },
             "aeroway": {

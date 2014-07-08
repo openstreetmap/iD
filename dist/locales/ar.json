@@ -408,10 +408,8 @@
             "address": {
                 "label": "العنوان",
                 "placeholders": {
-                    "number": "١٢٣",
                     "street": "الشارع",
-                    "city": "المدينة",
-                    "postcode": "الرمز البريدي"
+                    "city": "المدينة"
                 }
             },
             "admin_level": {

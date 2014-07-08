@@ -351,10 +351,8 @@
             "address": {
                 "label": "Adres",
                 "placeholders": {
-                    "number": "123",
                     "street": "Sokak",
-                    "city": "Şehir",
-                    "postcode": "Posta kodu"
+                    "city": "Şehir"
                 }
             },
             "aerialway/capacity": {

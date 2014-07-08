@@ -285,10 +285,8 @@
             "address": {
                 "label": "Naslov",
                 "placeholders": {
-                    "number": "123",
                     "street": "Ulica",
-                    "city": "Mesto",
-                    "postcode": "Poštna številka"
+                    "city": "Mesto"
                 }
             },
             "aerialway": {

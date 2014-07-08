@@ -320,7 +320,6 @@
         "untagged_area": "Neoznačená plocha",
         "many_deletions": "Vymazávate {n} objektov. Ste si naozaj istý? Týmto ich vymažete z mapy na openstreetmap.org, ktorú používajú ďalší používatelia.",
         "tag_suggests_area": "Označenie {tag} predpokladá, že objekt by mal byť plochou a nie čiarou.",
-        "untagged_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je tento/táto {geometry}.",
         "deprecated_tags": "Neschválené označenie: {tags}"
     },
     "zoom": {
@@ -469,10 +468,8 @@
             "address": {
                 "label": "Adresa",
                 "placeholders": {
-                    "number": "123",
                     "street": "Ulica",
-                    "city": "Mesto",
-                    "postcode": "PSČ"
+                    "city": "Mesto"
                 }
             },
             "admin_level": {

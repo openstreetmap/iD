@@ -328,10 +328,8 @@
             "address": {
                 "label": "Adres",
                 "placeholders": {
-                    "number": "123",
                     "street": "Straat",
-                    "city": "Tipe",
-                    "postcode": "Pos Kode"
+                    "city": "Tipe"
                 }
             },
             "admin_level": {

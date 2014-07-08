@@ -320,7 +320,6 @@
         "untagged_area": "Полігон без  теґів",
         "many_deletions": "Ви збираєтесь вилучити {n} об’єктів. Ви дійсно бажаєте це зробити? Таке вилучення призведе до їх зникнення з мапи openstreetmap.org.",
         "tag_suggests_area": "Теґ {tag} зазвичай ставиться на полігони, але об’єкт не є полігоном",
-        "untagged_tooltip": "Оберіть тип об’єкту, що описує чим є {geometry}.",
         "deprecated_tags": "Застарілі теґи: {tags}"
     },
     "zoom": {
@@ -469,10 +468,8 @@
             "address": {
                 "label": "Адреса",
                 "placeholders": {
-                    "number": "Номер",
                     "street": "Вулиця",
-                    "city": "Місто",
-                    "postcode": "Поштовий індекс"
+                    "city": "Місто"
                 }
             },
             "admin_level": {

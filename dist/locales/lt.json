@@ -315,7 +315,6 @@
         "untagged_area": "Plotas be žymų",
         "many_deletions": "Jūs naikinate {n} objektų. Ar tikrai norite tai padaryti? Tai panaikins objektus iš žemėlapio, kurį visi mato svetainėje openstreetmap.org.",
         "tag_suggests_area": "Žyma {tag} rodo, kad linija turėtų būti plotas, bet ji nėra plotas",
-        "untagged_tooltip": "Parinkite objekto tipą, kuris aprašo, kas yra šis {geometry}.",
         "deprecated_tags": "Pasenusios žymos: {tags}"
     },
     "zoom": {
@@ -458,10 +457,8 @@
             "address": {
                 "label": "Adresas",
                 "placeholders": {
-                    "number": "123",
                     "street": "Gatvė",
-                    "city": "Miestas",
-                    "postcode": "Pašto kodas"
+                    "city": "Miestas"
                 }
             },
             "aeroway": {

@@ -332,7 +332,6 @@
         "untagged_area": "未有標籤的區域",
         "many_deletions": "你正在刪除 {n} 個物件。這些物件會從openstreetmap.org上所有人可以看見的地圖上刪除，你是否確定需要這樣做？",
         "tag_suggests_area": "{tag} 標籤所建議的線段應為區域，但這個不是一區域",
-        "untagged_tooltip": "選擇可描述這個{geometry}的一個物件種類。",
         "deprecated_tags": "已棄用的標籤︰{tags}"
     },
     "zoom": {
@@ -484,10 +483,18 @@
             "address": {
                 "label": "地址",
                 "placeholders": {
-                    "number": "123",
+                    "housename": "屋宇名稱",
+                    "housenumber": "123",
                     "street": "街道",
                     "city": "城市",
-                    "postcode": "郵政編碼"
+                    "place": "地方",
+                    "hamlet": "村莊",
+                    "suburb": "細區",
+                    "subdistrict": "分區",
+                    "district": "區",
+                    "province": "省",
+                    "state": "州",
+                    "country": "國家"
                 }
             },
             "admin_level": {
