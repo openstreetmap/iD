@@ -10113,7 +10113,7 @@
         "name": "Locator Overlay",
         "type": "tms",
         "description": "Shows major features to help orient you.",
-        "template": "http://{switch:a,b,c}.tiles.mapbox.com/v3/openstreetmap.map-btyhiati/{zoom}/{x}/{y}.png",
+        "template": "http://{switch:a,b,c}.tiles.mapbox.com/v4/openstreetmap.map-inh76ba2/{zoom}/{x}/{y}.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q",
         "scaleExtent": [
             0,
             16
@@ -10133,7 +10133,7 @@
         "name": "Mapbox Satellite",
         "type": "tms",
         "description": "Satellite and aerial imagery.",
-        "template": "http://{switch:a,b,c}.tiles.mapbox.com/v3/openstreetmap.map-4wvf9l0l/{zoom}/{x}/{y}.png",
+        "template": "http://{switch:a,b,c}.tiles.mapbox.com/v4/openstreetmap.map-inh7ifmo/{zoom}/{x}/{y}.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJhNVlHd29ZIn0.ti6wATGDWOmCnCYen-Ip7Q",
         "scaleExtent": [
             0,
             19
