@@ -34,6 +34,7 @@ dist/iD.js: \
 	js/lib/sexagesimal.js \
 	js/lib/togeojson.js \
 	js/lib/marked.js \
+	js/lib/codegrid.js \
 	js/id/start.js \
 	js/id/id.js \
 	js/id/services/*.js \
@@ -92,6 +93,10 @@ imagery:
 suggestions:
 	npm install name-suggestion-index@git://github.com/osmlab/name-suggestion-index.git
 	cp node_modules/name-suggestion-index/name-suggestions.json data/name-suggestions.json
+
+tiles:
+	npm install country-code-grid@git://github.com/osmlab/country-code-grid.git
+	cp -r node_modules/country-code-grid/tiles dist/
 
 SPRITE = inkscape --export-area-page
 

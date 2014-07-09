@@ -19,7 +19,8 @@ iD.data = {
             path + 'data/locales.json',
             path + 'dist/locales/en.json',
             path + 'data/name-suggestions.json',
-            path + 'data/address-formats.json'
+            path + 'data/address-formats.json',
+            path + 'dist/tiles/worldgrid.json'
             ], d3.json, function (err, data) {
 
             iD.data = {
@@ -39,7 +40,8 @@ iD.data = {
                 locales: data[11],
                 en: data[12],
                 suggestions: data[13],
-                addressFormats: data[14]
+                addressFormats: data[14],
+                worldGrid: data[15]
             };
 
             callback();
