@@ -8,7 +8,6 @@
     },
     "fields": [
         "entrance",
-        "access_simple",
         "address"
     ],
     "name": "Entrance/Exit"

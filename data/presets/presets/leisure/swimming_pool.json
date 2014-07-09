@@ -1,7 +1,4 @@
 {
-    "fields": [
-        "access_simple"
-    ],
     "geometry": [
         "point",
         "vertex",

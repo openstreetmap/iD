@@ -4,7 +4,6 @@
         "parking",
         "capacity",
         "fee",
-        "access_simple",
         "supervised",
         "park_ride",
         "address"
