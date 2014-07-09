@@ -37,9 +37,9 @@ iD.ui.EditMenu = function(context, operations) {
         // pack menu items into columns and rows..
         if (items <= 5) {
             cols = items;
-        } else if ([7, 8, 11, 12].indexOf(items) != -1) {
+        } else if ([7, 8, 11, 12].indexOf(items) !== -1) {
             cols = 4;
-        } else if ([6, 9].indexOf(items) != -1) {
+        } else if ([6, 9].indexOf(items) !== -1) {
             cols = 3;
         } else {
             cols = 5;
@@ -58,7 +58,7 @@ iD.ui.EditMenu = function(context, operations) {
 
         // pick the menu direction that obscures the fewest points..
         var best = Infinity,
-            dim = id.map().dimensions();
+            dim = context.map().dimensions();
 
         _.each(_.values(directions), function(dir) {
             var min = [0,0],
@@ -113,7 +113,7 @@ iD.ui.EditMenu = function(context, operations) {
             .attr('width', width)
             .attr('height', height)
             .attr('rx', spacing / 2)
-            .attr('ry', spacing / 2)
+            .attr('ry', spacing / 2);
 
         var button = menu.selectAll()
             .data(operations)
@@ -148,7 +148,7 @@ iD.ui.EditMenu = function(context, operations) {
             d3.event.stopPropagation(); // https://github.com/openstreetmap/iD/issues/1869
         }
 
-        function mouseover(d, i) {
+        function mouseover(d) {
             // pin tooltip to bottom of editmenu..
             var rect = context.surfaceRect(),
                 top = rect.top + start[1] + height + 'px',
