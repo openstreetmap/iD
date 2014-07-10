@@ -36,10 +36,8 @@ iD.ui.preset.typeCombo = function(field) {
                 return o;
             }));
 
-            input.attr('placeholder', function() {
-                if (opts.length < 3) return '';
-                return opts.slice(0, 3).join(', ') + '...';
-            });
+            input.attr('placeholder', field.placeholder() ||
+                (opts.length < 3 ? '' : opts.slice(0, 3).join(', ') + '...'));
         }
     }
 
