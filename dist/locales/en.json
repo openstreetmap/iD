@@ -485,6 +485,10 @@
                 }
             },
             "access_simple": {
+                "label": "Access",
+                "placeholder": "yes"
+            },
+            "access_toilets": {
                 "label": "Access"
             },
             "address": {

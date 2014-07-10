@@ -52,6 +52,9 @@ en:
             description: Access permitted only to reach a destination
       access_simple: 
         label: Access
+        placeholder: yes
+      access_toilets: 
+        label: Access
       address: 
         label: Address
         placeholders: 
