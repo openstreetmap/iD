@@ -20,7 +20,7 @@ describe("iD.countryCode", function() {
             var callback = sinon.spy();
             countryCode.search([16, 48], callback);
 
-            server.respondWith("GET", "http://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=48&lon=16",
+            server.respondWith("GET", "https://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=48&lon=16",
                 [200, { "Content-Type": "application/json" },
                     '{"address":{"country_code":"at"}}']);
             server.respond();
@@ -33,7 +33,7 @@ describe("iD.countryCode", function() {
             var callback = sinon.spy();
             countryCode.search([16, 48], callback);
 
-            server.respondWith("GET", "http://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=48&lon=16",
+            server.respondWith("GET", "https://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=48&lon=16",
                 [200, { "Content-Type": "application/json" },
                     '{"address":{"country_code":"at"}}']);
             server.respond();
@@ -47,7 +47,7 @@ describe("iD.countryCode", function() {
 
             countryCode.search([17, 49], callback);
 
-            server.respondWith("GET", "http://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=49&lon=17",
+            server.respondWith("GET", "https://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=49&lon=17",
                 [200, { "Content-Type": "application/json" },
                     '{"address":{"country_code":"cz"}}']);
             server.respond();
@@ -60,7 +60,7 @@ describe("iD.countryCode", function() {
             var callback = sinon.spy();
             countryCode.search([16, 48], callback);
 
-            server.respondWith("GET", "http://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=48&lon=16",
+            server.respondWith("GET", "https://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=48&lon=16",
                 [200, { "Content-Type": "application/json" },
                     '{"address":{"country_code":"at"}}']);
             server.respond();
@@ -74,7 +74,7 @@ describe("iD.countryCode", function() {
 
             countryCode.search([16.01, 48.01], callback);
 
-            server.respondWith("GET", "http://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=48.01&lon=16.01",
+            server.respondWith("GET", "https://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=48.01&lon=16.01",
                 [200, { "Content-Type": "application/json" },
                     '{"address":{"country_code":"cz"}}']);
             server.respond();
@@ -85,7 +85,7 @@ describe("iD.countryCode", function() {
             var callback = sinon.spy();
             countryCode.search([1000, 1000], callback);
 
-            server.respondWith("GET", "http://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=1000&lon=1000",
+            server.respondWith("GET", "https://nominatim.openstreetmap.org/reverse?addressdetails=1&format=json&lat=1000&lon=1000",
                 [200, { "Content-Type": "application/json" },
                     '{"error":"Unable to geocode"}']);
             server.respond();

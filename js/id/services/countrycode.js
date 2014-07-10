@@ -1,6 +1,6 @@
 iD.countryCode  = function() {
     var countryCode = {},
-        endpoint = 'http://nominatim.openstreetmap.org/reverse?';
+        endpoint = 'https://nominatim.openstreetmap.org/reverse?';
 
     if (!iD.countryCode.cache) {
         iD.countryCode.cache = rbush();
