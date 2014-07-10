@@ -486,8 +486,8 @@
             "address": {
                 "label": "Адрес",
                 "placeholders": {
-                    "housename": "Номер дома",
-                    "housenumber": "123",
+                    "housename": "Housename",
+                    "housenumber": "Номер",
                     "street": "Улица",
                     "city": "Город",
                     "postcode": "Почтовый индекс",
@@ -1501,6 +1501,9 @@
             },
             "craft/carpet_layer": {
                 "name": "Ковровое покрытие"
+            },
+            "craft/caterer": {
+                "name": "Поставщик"
             },
             "craft/clockmaker": {
                 "name": "Часовщик",
