@@ -1,31 +1,37 @@
 iD.operations.Rotate = function(selectedIDs, context) {
-    var entityId = selectedIDs[0];
+    var entityId = selectedIDs[0],
+        entity = context.entity(entityId),
+        extent = entity.extent(context.graph()),
+        geometry = context.geometry(entityId);
 
     var operation = function() {
         context.enter(iD.modes.RotateWay(context, entityId));
     };
 
     operation.available = function() {
-        var graph = context.graph(),
-            entity = graph.entity(entityId);
-
-        if (selectedIDs.length !== 1 ||
-            entity.type !== 'way')
+        if (selectedIDs.length !== 1 || entity.type !== 'way')
             return false;
-        if (context.geometry(entityId) === 'area')
+        if (geometry === 'area')
             return true;
         if (entity.isClosed() &&
-            graph.parentRelations(entity).some(function(r) { return r.isMultipolygon(); }))
+            context.graph().parentRelations(entity).some(function(r) { return r.isMultipolygon(); }))
             return true;
         return false;
     };
 
     operation.disabled = function() {
-        return false;
+        if (extent.percentContainedIn(context.extent()) < 0.8) {
+            return 'too_large';
+        } else {
+            return false;
+        }
     };
 
     operation.tooltip = function() {
-        return t('operations.rotate.description');
+        var disable = operation.disabled();
+        return disable ?
+            t('operations.rotate.' + disable) :
+            t('operations.rotate.description');
     };
 
     operation.id = 'rotate';

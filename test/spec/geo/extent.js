@@ -158,4 +158,29 @@ describe("iD.geo.Extent", function () {
             expect(b.intersection(a)).to.eql(iD.geo.Extent([1, 1], [2, 2]));
         });
     });
+
+    describe("#percentContainedIn", function () {
+        it("returns a 0 if self does not intersect other", function () {
+            var a = iD.geo.Extent([0, 0], [1, 1]),
+                b = iD.geo.Extent([0, 3], [4, 1]);
+            expect(a.percentContainedIn(b)).to.eql(0);
+            expect(b.percentContainedIn(a)).to.eql(0);
+        });
+
+        it("returns the percent contained of self with other (1)", function () {
+            var a = iD.geo.Extent([0, 0], [2, 1]),
+                b = iD.geo.Extent([1, 0], [3, 1]);
+            expect(a.percentContainedIn(b)).to.eql(0.5);
+            expect(b.percentContainedIn(a)).to.eql(0.5);
+        });
+
+        it("returns the percent contained of self with other (2)", function () {
+            var a = iD.geo.Extent([0, 0], [4, 1]),
+                b = iD.geo.Extent([3, 0], [4, 2]);
+            expect(a.percentContainedIn(b)).to.eql(0.25);
+            expect(b.percentContainedIn(a)).to.eql(0.5);
+        });
+
+    });
+
 });

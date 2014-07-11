@@ -57,6 +57,18 @@ _.extend(iD.geo.Extent.prototype, {
                                   Math.min(obj[1][1], this[1][1])]);
     },
 
+    percentContainedIn: function(obj) {
+        if (!(obj instanceof iD.geo.Extent)) obj = new iD.geo.Extent(obj);
+        var a1 = this.intersection(obj).area(),
+            a2 = this.area();
+
+        if (a1 === Infinity || a2 === Infinity || a1 === 0 || a2 === 0) {
+            return 0;
+        } else {
+            return a1 / a2;
+        }
+    },
+
     padByMeters: function(meters) {
         var dLat = iD.geo.metersToLat(meters),
             dLon = iD.geo.metersToLon(meters, this.center()[1]);
@@ -68,4 +80,5 @@ _.extend(iD.geo.Extent.prototype, {
     toParam: function() {
         return [this[0][0], this[0][1], this[1][0], this[1][1]].join(',');
     }
+
 });

@@ -1,4 +1,8 @@
 iD.operations.Move = function(selectedIDs, context) {
+    var extent = selectedIDs.reduce(function(extent, id) {
+            return extent.extend(context.entity(id).extent(context.graph()));
+        }, iD.geo.Extent());
+
     var operation = function() {
         context.enter(iD.modes.Move(context, selectedIDs));
     };
@@ -9,8 +13,11 @@ iD.operations.Move = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        return iD.actions.Move(selectedIDs)
-            .disabled(context.graph());
+        var reason;
+        if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+            reason = 'too_large';
+        }
+        return iD.actions.Move(selectedIDs).disabled(context.graph()) || reason;
     };
 
     operation.tooltip = function() {

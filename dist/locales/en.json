@@ -150,7 +150,8 @@
                 "area": "Moved an area.",
                 "multiple": "Moved multiple objects."
             },
-            "incomplete_relation": "This feature can't be moved because it hasn't been fully downloaded."
+            "incomplete_relation": "This feature can't be moved because it hasn't been fully downloaded.",
+            "too_large": "This can't be moved because not enough of it is currently visible."
         },
         "rotate": {
             "title": "Rotate",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Rotated a line.",
                 "area": "Rotated an area."
-            }
+            },
+            "too_large": "This can't be rotated because not enough of it is currently visible."
         },
         "reverse": {
             "title": "Reverse",
