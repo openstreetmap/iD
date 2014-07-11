@@ -1,7 +1,7 @@
 iD.ui.RawMemberEditor = function(context) {
     var id;
 
-    function downloadMember(d) {
+    function downloadMember() {
         // using interim class to indicate progress
         // need advice on the appropriate class to use
         d3.select(this.parentNode).classed('tag-reference-loading', true);
@@ -75,9 +75,10 @@ iD.ui.RawMemberEditor = function(context) {
                 .classed('member-incomplete', function(d) { return !d.member; });
 
             $enter.each(function(d) {
+                var $label = d3.select(this).append('label');
+
                 if (d.member) {
-                    var $label = d3.select(this).append('label')
-                        .attr('class', 'form-label')
+                    $label.attr('class', 'form-label')
                         .append('a')
                         .attr('href', '#')
                         .on('click', selectMember);
@@ -91,8 +92,7 @@ iD.ui.RawMemberEditor = function(context) {
                         .text(function(d) { return iD.util.displayName(d.member); });
 
                 } else {
-                    var $label = d3.select(this).append('label')
-                        .attr('class', 'form-label')
+                    $label.attr('class', 'form-label')
                         .text(t('inspector.incomplete'));
 
                     var wrap = $label.append('div')
