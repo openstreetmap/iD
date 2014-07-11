@@ -75,10 +75,9 @@ iD.ui.RawMemberEditor = function(context) {
                 .classed('member-incomplete', function(d) { return !d.member; });
 
             $enter.each(function(d) {
-                var $label = d3.select(this).append('label');
-
                 if (d.member) {
-                    $label.attr('class', 'form-label')
+                    var $label = d3.select(this).append('label')
+                        .attr('class', 'form-label')
                         .append('a')
                         .attr('href', '#')
                         .on('click', selectMember);
@@ -92,10 +91,11 @@ iD.ui.RawMemberEditor = function(context) {
                         .text(function(d) { return iD.util.displayName(d.member); });
 
                 } else {
-                    $label.attr('class', 'form-label')
+                    var $incomplete_label = d3.select(this).append('label')
+                        .attr('class', 'form-label')
                         .text(t('inspector.incomplete'));
 
-                    var wrap = $label.append('div')
+                    var wrap = $incomplete_label.append('div')
                         .attr('class', 'form-label-button-wrap');
 
                     // need advise on the appropriate icon
