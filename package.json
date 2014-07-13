@@ -33,7 +33,7 @@
     "sinon-chai": "~2.3.1",
     "happen": "0.1.2",
     "glob": "~3.1.21",
-    "js-yaml": "~2.0.3",
+    "js-yaml": "~3.1.0",
     "request": "~2.16.2",
     "jsonschema": "~0.3.2",
     "delve": "0.2",
