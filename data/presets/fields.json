@@ -614,7 +614,6 @@
     "oneway_yes": {
         "key": "oneway",
         "type": "check",
-        "default": "yes",
         "label": "One Way",
         "strings": {
             "options": {
