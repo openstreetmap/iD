@@ -26,8 +26,7 @@ iD.ui.preset.defaultcheck = function(field) {
         if (field.id === 'oneway') {
             for (var key in entity.tags) {
                 if (key in iD.oneWayTags && (entity.tags[key] in iD.oneWayTags[key])) {
-                    texts.shift();
-                    texts.unshift(t('presets.fields.oneway_yes.options.undefined', { 'default': 'Assumed to be Yes' }));
+                    texts[0] = t('presets.fields.oneway_yes.options.undefined');
                     break;
                 }
             }
