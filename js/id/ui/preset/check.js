@@ -9,7 +9,7 @@ iD.ui.preset.defaultcheck = function(field) {
     if (options) {
         for (var k in options) {
             values.push(k === 'undefined' ? undefined : k);
-            texts.push(field.t('check.' + k, { 'default': options[k] }));
+            texts.push(field.t('options.' + k, { 'default': options[k] }));
         }
     } else {
         values = [undefined, 'yes'];
@@ -27,7 +27,7 @@ iD.ui.preset.defaultcheck = function(field) {
             for (var key in entity.tags) {
                 if (key in iD.oneWayTags && (entity.tags[key] in iD.oneWayTags[key])) {
                     texts.shift();
-                    texts.unshift(t('presets.fields.oneway_yes.check.undefined', { 'default': 'Assumed to be Yes' }));
+                    texts.unshift(t('presets.fields.oneway_yes.options.undefined', { 'default': 'Assumed to be Yes' }));
                     break;
                 }
             }
