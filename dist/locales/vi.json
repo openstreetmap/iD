@@ -150,7 +150,8 @@
                 "area": "di chuyển vùng",
                 "multiple": "di chuyển hơn một đối tượng"
             },
-            "incomplete_relation": "Không thể di chuyển đối tượng chưa được tải về hoàn toàn."
+            "incomplete_relation": "Không thể di chuyển đối tượng chưa được tải về hoàn toàn.",
+            "too_large": "Không thể di chuyển đối tượng này vì chỉ có thấy được một phần rất nhỏ."
         },
         "rotate": {
             "title": "Xoay",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "xoay đường kẻ",
                 "area": "xoay vùng"
-            }
+            },
+            "too_large": "Không thể xoay đối tượng này vì chỉ có thấy được một phần rất nhỏ."
         },
         "reverse": {
             "title": "Đảo ngược",
@@ -481,6 +483,10 @@
                 }
             },
             "access_simple": {
+                "label": "Quyền Truy cập",
+                "placeholder": "có"
+            },
+            "access_toilets": {
                 "label": "Quyền Truy cập"
             },
             "address": {
@@ -711,6 +717,8 @@
             "internet_access": {
                 "label": "Truy cập Internet",
                 "options": {
+                    "yes": "Có",
+                    "no": "Không có",
                     "wlan": "Wi-Fi",
                     "wired": "Qua dây điện",
                     "terminal": "Máy tính công cộng"
@@ -771,13 +779,17 @@
             "oneway": {
                 "label": "Một chiều",
                 "options": {
-                    "undefined": "Có lẽ Phải"
+                    "undefined": "Có lẽ Phải",
+                    "yes": "Phải",
+                    "no": "Không phải"
                 }
             },
             "oneway_yes": {
                 "label": "Một chiều",
                 "options": {
-                    "undefined": "Có lẽ Không phải"
+                    "undefined": "Có lẽ Không phải",
+                    "yes": "Phải",
+                    "no": "Không phải"
                 }
             },
             "opening_hours": {

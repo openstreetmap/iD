@@ -150,7 +150,8 @@
                 "area": "エリアの移動",
                 "multiple": "Moved multiple objects."
             },
-            "incomplete_relation": "地物全体がダウンロードされていないため、移動させることができません。"
+            "incomplete_relation": "地物全体がダウンロードされていないため、移動させることができません。",
+            "too_large": "ウェイの一部がダウンロードされていないため、移動させることができません。"
         },
         "rotate": {
             "title": "回転",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "ラインの回転",
                 "area": "エリアの回転"
-            }
+            },
+            "too_large": "ウェイの一部がダウンロードされていないため、回転させることができません。"
         },
         "reverse": {
             "title": "方向反転",
@@ -460,11 +462,11 @@
                     },
                     "no": {
                         "title": "制限あり",
-                        "description": "なんらかの理由により、一般の通行が許可されていない"
+                        "description": "一般の通行が許可されていない"
                     },
                     "permissive": {
                         "title": "所有者許諾あり",
-                        "description": "所有者によって利用が許可されており、特定状況下では所有者によって通行制限が課されることがある"
+                        "description": "所有者が通行制限しない限り通行可"
                     },
                     "private": {
                         "title": "私有",
@@ -481,7 +483,11 @@
                 }
             },
             "access_simple": {
-                "label": "通行制限"
+                "label": "通行制限",
+                "placeholder": "可"
+            },
+            "access_toilets": {
+                "label": "利用対象"
             },
             "address": {
                 "label": "住所",
@@ -508,7 +514,7 @@
                 "label": "タイプ"
             },
             "aerialway/access": {
-                "label": "通行制限"
+                "label": "乗降場所"
             },
             "aerialway/bubble": {
                 "label": "覆い"
@@ -529,7 +535,7 @@
                 "placeholder": "2, 4, 8..."
             },
             "aerialway/summer/access": {
-                "label": "夏季運行"
+                "label": "乗降場所（夏季）"
             },
             "aeroway": {
                 "label": "形態"
@@ -711,6 +717,8 @@
             "internet_access": {
                 "label": "インターネット利用",
                 "options": {
+                    "yes": "有り",
+                    "no": "無し",
                     "wlan": "Wi-Fi",
                     "wired": "有線LAN",
                     "terminal": "情報端末"
@@ -771,13 +779,17 @@
             "oneway": {
                 "label": "一方通行",
                 "options": {
-                    "undefined": "おそらくいいえ"
+                    "undefined": "おそらくいいえ",
+                    "yes": "はい",
+                    "no": "いいえ"
                 }
             },
             "oneway_yes": {
                 "label": "一方通行",
                 "options": {
-                    "undefined": "おそらくはい"
+                    "undefined": "おそらくはい",
+                    "yes": "はい",
+                    "no": "いいえ"
                 }
             },
             "opening_hours": {

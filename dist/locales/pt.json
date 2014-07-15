@@ -150,7 +150,8 @@
                 "area": "Área movida.",
                 "multiple": "Vários objetos movidos."
             },
-            "incomplete_relation": "Este elemento não pode ser deslocado porque não foi completamente descarregado."
+            "incomplete_relation": "Este elemento não pode ser deslocado porque não foi completamente descarregado.",
+            "too_large": "Não é possível mover pois existem secções que não estão visíveis neste momento."
         },
         "rotate": {
             "title": "Rodar",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Linha rodada.",
                 "area": "Área rodada."
-            }
+            },
+            "too_large": "Não é possível girar pois existem secções que não estão visíveis neste momento."
         },
         "reverse": {
             "title": "Inverter",
@@ -481,6 +483,10 @@
                 }
             },
             "access_simple": {
+                "label": "Acesso",
+                "placeholder": "sim"
+            },
+            "access_toilets": {
                 "label": "Acesso"
             },
             "address": {
@@ -711,6 +717,8 @@
             "internet_access": {
                 "label": "Acesso à Internet",
                 "options": {
+                    "yes": "Sim",
+                    "no": "não",
                     "wlan": "Wi-Fi",
                     "wired": "Com fio",
                     "terminal": "Terminal de acesso"
@@ -771,13 +779,17 @@
             "oneway": {
                 "label": "Sentido Único",
                 "options": {
-                    "undefined": "Assumido que seja Não"
+                    "undefined": "Assumido que seja Não",
+                    "yes": "Sim",
+                    "no": "não"
                 }
             },
             "oneway_yes": {
                 "label": "Sentido Único",
                 "options": {
-                    "undefined": "Assumido que seja Sim"
+                    "undefined": "Assumido que seja Sim",
+                    "yes": "Sim",
+                    "no": "Não"
                 }
             },
             "opening_hours": {
@@ -1850,7 +1862,7 @@
                 "terms": "Estrada Principal, Rodovia Principal, Estrada Primária, Rodovia Primária, Primário"
             },
             "highway/primary_link": {
-                "name": "Nó de Ligação a uma Estrada Nacional\n(Primária)",
+                "name": "Nó de Ligação a uma Estrada Nacional (Primária)",
                 "terms": "Ligação Estrada Nacional, Ligação Rodovia Nacional, Ligação Nacional,  Ligação Estrada Principal, Entrada Estrada Nacional, Entrada Rodovia Nacional, Entrada Nacional, Entrada Estrada Nacional, Saída Nacional, Saída Rodovia Nacional, Saída Nacional, Saída Estrada Nacional,"
             },
             "highway/residential": {
@@ -1870,7 +1882,7 @@
                 "terms": "Estrada Secundária, Rodovia Secundária, Secundário"
             },
             "highway/secondary_link": {
-                "name": "Nó de ligação a uma Estrada Regional\n(Secundária)",
+                "name": "Nó de ligação a uma Estrada Regional (Secundária)",
                 "terms": "Ligação Estrada Regional, Ligação Rodovia Regional, Ligação Regional,  Ligação Estrada Secundária, Entrada Estrada Regional, Entrada Rodovia Regional, Entrada Regional, Entrada Estrada Secundária, Saída Regional, Saída Rodovia Regional, Saída Regional, Saída Estrada Secundária"
             },
             "highway/service": {
@@ -1918,7 +1930,7 @@
                 "terms": "Estrada Terciária, Rodovia Terciária, Terciário, Caminho Municipal"
             },
             "highway/tertiary_link": {
-                "name": "Nó de ligação a uma Estrada / Caminho Municipal\n(Terciária)",
+                "name": "Nó de ligação a uma Estrada / Caminho \n\nMunicipal (Terciária)",
                 "terms": "Ligação Estrada Municipal, Ligação Rodovia Municipal, Ligação Municipal,  Ligação Estrada Terciária, Entrada Estrada Municipal, Entrada Rodovia Municipal, Entrada Municipal, Entrada Estrada Terciária, Saída Municipal, Saída Rodovia Municipal, Saída Municipal, Saída Estrada Municipal"
             },
             "highway/track": {

@@ -2,17 +2,17 @@
     "modes": {
         "add_area": {
             "title": "Obszar",
-            "description": "Dodaj do mapy parki, budynki, jeziora i inne obszary.",
+            "description": "Dodawaj do mapy parki, budynki, jeziora i inne obszary.",
             "tail": "Kliknij mapę, aby zacząć rysować obszar taki jak park, jezioro czy budynek."
         },
         "add_line": {
             "title": "Linia",
-            "description": "Dodaj do mapy autostrady, ulice, ścieżki dla pieszych, kanały i inne linie.",
+            "description": "Dodawaj do mapy autostrady, ulice, ścieżki dla pieszych, kanały i inne linie.",
             "tail": "Kliknij mapę, aby zacząć rysować drogę, ścieżkę lub trasę."
         },
         "add_point": {
             "title": "Punkt",
-            "description": "Dodaj do mapy restauracje, pomniki, skrzynki pocztowe i inne punkty.",
+            "description": "Dodawaj do mapy restauracje, pomniki, skrzynki pocztowe i inne punkty.",
             "tail": "Kliknij mapę, aby dodać punkt."
         },
         "browse": {
@@ -150,7 +150,8 @@
                 "area": "Przesunięto obszar.",
                 "multiple": "Przesunięto wiele obiektów."
             },
-            "incomplete_relation": "Tego obiektu nie można przesunąć, gdyż nie został całkiem pobrany."
+            "incomplete_relation": "Tego obiektu nie można przesunąć, gdyż nie został całkiem pobrany.",
+            "too_large": "Tego obiektu nie można przesunąć, gdyż nie jest ono wystarczająco widoczne."
         },
         "rotate": {
             "title": "Obróć",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Obrócono linię.",
                 "area": "Obrócono obszar."
-            }
+            },
+            "too_large": "Tego obiektu nie można obrócić, gdyż nie jest ono wystarczająco widoczne."
         },
         "reverse": {
             "title": "Odwróć",
@@ -481,6 +483,10 @@
                 }
             },
             "access_simple": {
+                "label": "Dostęp",
+                "placeholder": "tak"
+            },
+            "access_toilets": {
                 "label": "Dostęp"
             },
             "address": {
@@ -685,10 +691,15 @@
             "internet_access": {
                 "label": "Dostęp do internetu",
                 "options": {
+                    "yes": "Tak",
+                    "no": "Nie",
                     "wlan": "Bezprzewodowy",
                     "wired": "Przewodowy",
                     "terminal": "Terminal"
                 }
+            },
+            "lamp_type": {
+                "label": "Typ"
             },
             "landuse": {
                 "label": "Typ"
@@ -725,7 +736,7 @@
             },
             "name": {
                 "label": "Nazwa",
-                "placeholder": "Powszechna nazwa (jeśli istnieje)"
+                "placeholder": "Nazwa zwyczajowa (jeśli występuje)"
             },
             "natural": {
                 "label": "Natura"
@@ -742,13 +753,17 @@
             "oneway": {
                 "label": "Jednokierunkowa",
                 "options": {
-                    "undefined": "Domyślnie nie"
+                    "undefined": "Domyślnie nie",
+                    "yes": "Tak",
+                    "no": "Nie"
                 }
             },
             "oneway_yes": {
                 "label": "Jednokierunkowa",
                 "options": {
-                    "undefined": "Domyślnie tak"
+                    "undefined": "Domyślnie tak",
+                    "yes": "Tak",
+                    "no": "Nie"
                 }
             },
             "opening_hours": {
@@ -790,6 +805,9 @@
             },
             "railway": {
                 "label": "Typ"
+            },
+            "recycling/cans": {
+                "label": "Przyjmowanie puszek"
             },
             "recycling/clothes": {
                 "label": "Ubrania"
@@ -1103,7 +1121,8 @@
                 "terms": "Dentysta, "
             },
             "amenity/doctor": {
-                "name": "Doktor"
+                "name": "Doktor",
+                "terms": "lekarz,doktor,konował,medyk,uzdrowiciel"
             },
             "amenity/dojo": {
                 "name": "Dojo/szkoła sztuk walki"
@@ -1137,10 +1156,12 @@
                 "terms": "cmentarz,pochówek"
             },
             "amenity/hospital": {
-                "name": "Teren szpitala"
+                "name": "Teren szpitala",
+                "terms": "Teren szpitala, szpital, przychodnia, klinika, pomoc, służba zdrowia, hospicjum, ambulatorium, instytucja, dom opieki, sanatorium, chirurgia, oddział"
             },
             "amenity/kindergarten": {
-                "name": "Teren przedszkola"
+                "name": "Teren przedszkola",
+                "terms": "zerówka, żłobek, opieka nad dzieckiem, teren, przedszkole,"
             },
             "amenity/library": {
                 "name": "Biblioteka",
@@ -1256,7 +1277,7 @@
             },
             "amenity/university": {
                 "name": "Uniwersytet",
-                "terms": "college,uniwersytet,szkoła wyższa"
+                "terms": "college,uniwersytet,szkoła wyższa,uczelnia"
             },
             "amenity/vending_machine": {
                 "name": "Automat sprzedający",
@@ -1465,7 +1486,8 @@
                 "name": "Pszczelarz"
             },
             "craft/blacksmith": {
-                "name": "Kowal"
+                "name": "Kowal",
+                "terms": "kowal"
             },
             "craft/boatbuilder": {
                 "name": "Budowa statków"
@@ -1478,7 +1500,8 @@
                 "terms": "Gorzelnia, "
             },
             "craft/carpenter": {
-                "name": "Cieśla"
+                "name": "Cieśla",
+                "terms": "cieśla,stolarz"
             },
             "craft/carpet_layer": {
                 "name": "Układanie dywanów"
@@ -1487,7 +1510,8 @@
                 "name": "Żywieniowiec"
             },
             "craft/clockmaker": {
-                "name": "Zegarmistrz"
+                "name": "Zegarmistrz",
+                "terms": "zegarmistrz"
             },
             "craft/confectionary": {
                 "name": "Cukiernik"
@@ -1496,10 +1520,12 @@
                 "name": "Krawiec"
             },
             "craft/electrician": {
-                "name": "Elektryk"
+                "name": "Elektryk",
+                "terms": "elektryk,elektrotechnik"
             },
             "craft/gardener": {
-                "name": "Ogrodnik"
+                "name": "Ogrodnik",
+                "terms": "ogrodnik,sadownik"
             },
             "craft/glaziery": {
                 "name": "Szklarz",
@@ -1515,13 +1541,15 @@
                 "name": "Kładzenie izolacji"
             },
             "craft/jeweler": {
-                "name": "Jubiler"
+                "name": "Jubiler",
+                "terms": "jubiler"
             },
             "craft/key_cutter": {
                 "name": "Dorabianie kluczy"
             },
             "craft/locksmith": {
-                "name": "Ślusarz"
+                "name": "Ślusarz",
+                "terms": "ślusarz"
             },
             "craft/metal_construction": {
                 "name": "Konstrukcje metalowe"
@@ -1621,7 +1649,8 @@
                 "terms": "przejście dla pieszych, "
             },
             "footway/crosswalk": {
-                "name": "Przejście dla pieszych"
+                "name": "Przejście dla pieszych",
+                "terms": "przejście,pasy,zebra"
             },
             "footway/sidewalk": {
                 "name": "Chodnik",
@@ -1650,7 +1679,8 @@
                 "terms": "skrzyżowanie,krzyżówka"
             },
             "highway/crosswalk": {
-                "name": "Przejście dla pieszych"
+                "name": "Przejście dla pieszych",
+                "terms": "przejście,pasy,zebra"
             },
             "highway/cycleway": {
                 "name": "Ścieżka rowerowa",
@@ -1726,7 +1756,8 @@
                 "name": "Drive-through"
             },
             "highway/service/driveway": {
-                "name": "Podjazd"
+                "name": "Podjazd",
+                "terms": "droga dojazdowa,podjazd"
             },
             "highway/service/emergency_access": {
                 "name": "Dojazd dla służb ratowniczych"
@@ -1745,6 +1776,10 @@
             "highway/stop": {
                 "name": "Znak stop",
                 "terms": "znak,stop,zatrzymania"
+            },
+            "highway/street_lamp": {
+                "name": "Lampa uliczna",
+                "terms": "lampa,oświetlenie,latarnia"
             },
             "highway/tertiary": {
                 "name": "Droga trzeciorzędna",
@@ -2227,10 +2262,12 @@
                 "name": "Punkt"
             },
             "power": {
-                "name": "Energetyka"
+                "name": "Energetyka",
+                "terms": "energia,napięcie,prąd,zasilanie"
             },
             "power/generator": {
-                "name": "Elektrownia"
+                "name": "Elektrownia",
+                "terms": "generator,prądnica,wytwornica"
             },
             "power/line": {
                 "name": "Linia elektryczna",
@@ -2277,7 +2314,8 @@
                 "terms": "stacja,przystanek,kolej,kolejowa"
             },
             "railway/level_crossing": {
-                "name": "Rogatka"
+                "name": "Rogatka",
+                "terms": "skrzyżowanie, krzyżówka, Przejazd kolejowy"
             },
             "railway/monorail": {
                 "name": "Kolej jednoszynowa",
@@ -2320,7 +2358,8 @@
                 "terms": "Sklep"
             },
             "shop/alcohol": {
-                "name": "Sklep monopolowy"
+                "name": "Sklep monopolowy",
+                "terms": "alkohol"
             },
             "shop/art": {
                 "name": "Sklep z dziełami sztuki"
@@ -2502,6 +2541,9 @@
                 "name": "Supermarket",
                 "terms": "supermarket"
             },
+            "shop/tailor": {
+                "name": "Krawiec"
+            },
             "shop/toys": {
                 "name": "Sklep z zabawkami",
                 "terms": "sklep z zabawkami"
@@ -2601,25 +2643,32 @@
                 "terms": "restrykcja"
             },
             "type/restriction/no_left_turn": {
-                "name": "Zakaz skrętu w lewo"
+                "name": "Zakaz skrętu w lewo",
+                "terms": "zakaz,lewoskręt"
             },
             "type/restriction/no_right_turn": {
-                "name": "Zakaz skrętu w prawo"
+                "name": "Zakaz skrętu w prawo",
+                "terms": "zakaz,prawoskręt"
             },
             "type/restriction/no_straight_on": {
-                "name": "Zakaz jazdy prosto"
+                "name": "Zakaz jazdy prosto",
+                "terms": "zakaz,prosto"
             },
             "type/restriction/no_u_turn": {
-                "name": "Zakaz zawracania"
+                "name": "Zakaz zawracania",
+                "terms": "zakaz,zawracanie"
             },
             "type/restriction/only_left_turn": {
-                "name": "Nakaz skrętu w lewo"
+                "name": "Nakaz skrętu w lewo",
+                "terms": "nakaz,lewoskręt"
             },
             "type/restriction/only_right_turn": {
-                "name": "Nakaz skrętu w prawo"
+                "name": "Nakaz skrętu w prawo",
+                "terms": "nakaz,prawoskręt"
             },
             "type/restriction/only_straight_on": {
-                "name": "Nakaz jazdy prosto"
+                "name": "Nakaz jazdy prosto",
+                "terms": "zakaz,nakręcanie,wykręcanie,skręt"
             },
             "type/route": {
                 "name": "Trasa",

@@ -477,7 +477,8 @@
                 "label": "Osoite",
                 "placeholders": {
                     "street": "Kadunnimi",
-                    "city": "Paikkakunta"
+                    "city": "Paikkakunta",
+                    "postcode": "Postinumero"
                 }
             },
             "admin_level": {
@@ -928,7 +929,7 @@
                 "name": "Sompahissi"
             },
             "aerialway/pylon": {
-                "name": "ilmaradan pylväs"
+                "name": "Ilmaradan pylväs"
             },
             "aerialway/rope_tow": {
                 "name": "Naruhissi"
@@ -1050,6 +1051,10 @@
             "amenity/college": {
                 "name": "Ammattiopisto",
                 "terms": "ammattiopisto, amis, ammattikoulu, koulu, koulutus, oppilaitos, toinen aste"
+            },
+            "amenity/compressed_air": {
+                "name": "Ilmanpainepiste",
+                "terms": "renkaat, auto, autoilu, rengas, täyttö, paineilma, ilmantäyttö, kompressori"
             },
             "amenity/courthouse": {
                 "name": "Käräjäoikeus",
@@ -1364,7 +1369,8 @@
                 "name": "Kirjasitomo"
             },
             "craft/brewery": {
-                "name": "panimo"
+                "name": "Olutpanimo",
+                "terms": "panimo, olut, viina, viini, alkoholi, alko"
             },
             "craft/carpenter": {
                 "name": "Puuseppä"
@@ -1388,7 +1394,7 @@
                 "name": "Sähköasentaja"
             },
             "craft/gardener": {
-                "name": "puutarhuri"
+                "name": "Puutarhuri"
             },
             "craft/glaziery": {
                 "name": "Lasinpuhallus"
@@ -1426,11 +1432,15 @@
             "craft/photographer": {
                 "name": "valokuvaaja"
             },
+            "craft/photographic_laboratory": {
+                "name": "Valokuvausliike",
+                "terms": "valokuva, valokuvaaminen, valokuvaus, kuvaaminen, kuvaus, kehittämö, kuvankehittämö, kuvankehitys, kuvakehitys"
+            },
             "craft/plasterer": {
                 "name": "Rappaaja"
             },
             "craft/plumber": {
-                "name": "putkiasentaja"
+                "name": "Putkimies"
             },
             "craft/pottery": {
                 "name": "savenvalimo"
@@ -1470,7 +1480,7 @@
                 "name": "Räätäli"
             },
             "craft/tiler": {
-                "name": "laatoittaja"
+                "name": "Laattaliike"
             },
             "craft/tinsmith": {
                 "name": "Peltiseppä"
@@ -1629,6 +1639,10 @@
                 "name": "Pakollinen pysähtyminen",
                 "terms": "stop, stop-merkki, stop merkki, liikennemerkki, kieltomerkki, kieltomerkit, pysähtyminen, pysähdys, liikennesääntö, liikennesäännöt, pakollisuus, pakollinen"
             },
+            "highway/street_lamp": {
+                "name": "Katuvalaisin",
+                "terms": "valo, valaisin, valotolppa, valopylväs, valaisintolppa, valaisinpylväs, katupylväs, katuvalo, valaisintolppa"
+            },
             "highway/tertiary": {
                 "name": "Yhdystie"
             },
@@ -1757,6 +1771,10 @@
                 "name": "Puisto",
                 "terms": "Puisto, Viheralue, Puistikko"
             },
+            "leisure/picnic_table": {
+                "name": "Piknikpöytä",
+                "terms": "piknik, eväsretki, ulkoilu, ulkopöytä, pöytä, puupöytä, penkki, ruokailu, ulkoruokailu, ulkoruokailupöytä, ulkoruokapöytä"
+            },
             "leisure/pitch": {
                 "name": "Urheilukenttä"
             },
@@ -1791,6 +1809,10 @@
                 "name": "Veneramppi",
                 "terms": "veneramppi, vesillelaskupaikka, veneenlaskupaikka, vene, järveenlaskupaikka, järviramppi"
             },
+            "leisure/sports_center": {
+                "name": "Urheilukeskus/kuntosali",
+                "terms": "urheilu, urheilukenttä, kenttä, urheilusali, sali, kuntoilu, kunto, kuntosali, urheilukeskus, urheilualue, sisäpelihalli, sisähalli, sisäliikunta, halli"
+            },
             "leisure/stadium": {
                 "name": "Stadion"
             },
@@ -1817,7 +1839,7 @@
                 "terms": "pengerrys, tienreuna, meluvalli, äänivalli, äänimuuri, melumuuri"
             },
             "man_made/flagpole": {
-                "name": "Lipputank",
+                "name": "Lipputanko",
                 "terms": "lippu, liputus, salko, lippusalko, tanko, tolppa, lipputolppa, liputuspäivä, liputtaa"
             },
             "man_made/lighthouse": {

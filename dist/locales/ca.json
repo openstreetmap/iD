@@ -150,7 +150,8 @@
                 "area": "Heu mogut una àrea.",
                 "multiple": "Heu mogut múltiples objectes."
             },
-            "incomplete_relation": "Aquesta característica no es pot moure ja que no s'ha descarregat completament."
+            "incomplete_relation": "Aquesta característica no es pot desplaçar ja que no s'ha descarregat completament.",
+            "too_large": "Això no es pot desplaçar perquè no hi ha la suficient superfície visible."
         },
         "rotate": {
             "title": "Girar-ho",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Heu girat una línia.",
                 "area": "Heu girat una àrea."
-            }
+            },
+            "too_large": "Això no es pot girar perquè no hi ha la suficient superfície visible."
         },
         "reverse": {
             "title": "Revertir",
@@ -481,6 +483,10 @@
                 }
             },
             "access_simple": {
+                "label": "Accés",
+                "placeholder": "sí"
+            },
+            "access_toilets": {
                 "label": "Accés"
             },
             "address": {
@@ -711,6 +717,8 @@
             "internet_access": {
                 "label": "Accés a Internet",
                 "options": {
+                    "yes": "Sí",
+                    "no": "No",
                     "wlan": "WiFi",
                     "wired": "Per cable",
                     "terminal": "Mitjançant un terminal"
@@ -771,13 +779,17 @@
             "oneway": {
                 "label": "Sentit únic",
                 "options": {
-                    "undefined": "Sobreentès que és no"
+                    "undefined": "Sobreentès que és no",
+                    "yes": "Sí",
+                    "no": "No"
                 }
             },
             "oneway_yes": {
                 "label": "Sentit únic",
                 "options": {
-                    "undefined": "Sobreentès que és sí"
+                    "undefined": "Sobreentès que és sí",
+                    "yes": "Sí",
+                    "no": "No"
                 }
             },
             "opening_hours": {

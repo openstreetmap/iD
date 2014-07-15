@@ -150,7 +150,8 @@
                 "area": "Mossa un'area.",
                 "multiple": "Spostati diversi oggetti."
             },
-            "incomplete_relation": "Questo elemento non può essere spostato perché non è ancora stato scaricato completamente."
+            "incomplete_relation": "Questo elemento non può essere spostato perché non è ancora stato scaricato completamente.",
+            "too_large": "Questo elemento non può essere mosso perché non è del tutto visibile."
         },
         "rotate": {
             "title": "Ruota",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Ruotata una linea.",
                 "area": "Ruotata un'area."
-            }
+            },
+            "too_large": "Questo elemento non può essere ruotato perché non è del tutto visibile."
         },
         "reverse": {
             "title": "Inverti Direzione",
@@ -481,6 +483,10 @@
                 }
             },
             "access_simple": {
+                "label": "Accesso",
+                "placeholder": "sì"
+            },
+            "access_toilets": {
                 "label": "Accesso"
             },
             "address": {
@@ -684,6 +690,8 @@
             "internet_access": {
                 "label": "Accesso ad Internet",
                 "options": {
+                    "yes": "Sì",
+                    "no": "No",
                     "wlan": "Wifi",
                     "wired": "Via cavo",
                     "terminal": "Terminale"
@@ -741,13 +749,17 @@
             "oneway": {
                 "label": "Senso unico",
                 "options": {
-                    "undefined": "No (ipotesi)"
+                    "undefined": "No (ipotesi)",
+                    "yes": "Sì",
+                    "no": "No"
                 }
             },
             "oneway_yes": {
                 "label": "Senso unico",
                 "options": {
-                    "undefined": "Si (ipotesi)"
+                    "undefined": "Si (ipotesi)",
+                    "yes": "Sì",
+                    "no": "No"
                 }
             },
             "opening_hours": {

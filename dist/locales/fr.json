@@ -483,6 +483,9 @@
             "access_simple": {
                 "label": "Accès"
             },
+            "access_toilets": {
+                "label": "Accès"
+            },
             "address": {
                 "label": "Adresse",
                 "placeholders": {
@@ -1622,6 +1625,10 @@
                 "name": "Passage pieton ",
                 "terms": "Passage piéton"
             },
+            "footway/crosswalk": {
+                "name": "Passage piéton",
+                "terms": "Passage piéton, Zébra, Passage zébré"
+            },
             "footway/sidewalk": {
                 "name": "Trottoir",
                 "terms": "Trottoir"
@@ -2271,7 +2278,12 @@
                 "terms": "Localité"
             },
             "place/neighbourhood": {
-                "name": "Voisinage"
+                "name": "Voisinage",
+                "terms": "Environs, Voisinage, Quartier"
+            },
+            "place/suburb": {
+                "name": "Commune",
+                "terms": "Commune, Municipalité, District, Arrondissement, Bourough"
             },
             "place/town": {
                 "name": "Ville (10.000-100.000 habitants)",

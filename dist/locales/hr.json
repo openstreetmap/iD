@@ -150,7 +150,8 @@
                 "area": "Područje je premješteno.",
                 "multiple": "Nekoliko objekata je premješteno."
             },
-            "incomplete_relation": "Ovo svojstvo se ne može premjestiti jer nije potpuno preuzeto."
+            "incomplete_relation": "Ovo svojstvo se ne može premjestiti jer nije potpuno preuzeto.",
+            "too_large": "Ovo se ne može premjestiti jer je premalo objekta trenutno vidljivo."
         },
         "rotate": {
             "title": "Rotiraj",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Linija je rotirana.",
                 "area": "Područje je rotirana."
-            }
+            },
+            "too_large": "Ovo se ne može zakrenuti jer je premalo objekta trenutno vidljivo."
         },
         "reverse": {
             "title": "Obrni smjer",

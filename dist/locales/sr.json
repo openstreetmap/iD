@@ -460,6 +460,10 @@
                 }
             },
             "access_simple": {
+                "label": "Приступ",
+                "placeholder": "да"
+            },
+            "access_toilets": {
                 "label": "Приступ"
             },
             "address": {
@@ -669,6 +673,8 @@
             "internet_access": {
                 "label": "Приступ Интернету",
                 "options": {
+                    "yes": "Да",
+                    "no": "Не",
                     "wlan": "Бежични Интернет",
                     "wired": "Кабловски",
                     "terminal": "Терминал"
@@ -727,10 +733,18 @@
                 "label": "Врста"
             },
             "oneway": {
-                "label": "Једносмерни"
+                "label": "Једносмерни",
+                "options": {
+                    "yes": "Да",
+                    "no": "Не"
+                }
             },
             "oneway_yes": {
-                "label": "Једносмерна"
+                "label": "Једносмерна",
+                "options": {
+                    "yes": "Да",
+                    "no": "Не"
+                }
             },
             "opening_hours": {
                 "label": "Радно време"
@@ -1022,6 +1036,9 @@
             },
             "amenity/doctor": {
                 "name": "Лекар"
+            },
+            "amenity/dojo": {
+                "name": "Школа борилачких вештина"
             },
             "amenity/drinking_water": {
                 "name": "Пијаћа вода"
@@ -2070,6 +2087,9 @@
             },
             "shop/supermarket": {
                 "name": "Самопослуга"
+            },
+            "shop/tailor": {
+                "name": "Kројач"
             },
             "shop/toys": {
                 "name": "Продавница играчака"

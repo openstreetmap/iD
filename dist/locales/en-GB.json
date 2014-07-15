@@ -60,7 +60,27 @@
         }
     },
     "presets": {
+        "fields": {
+            "fax": {
+                "placeholder": "+44 207 123456"
+            },
+            "fuel/lpg": {
+                "label": "Sells LPG"
+            },
+            "lit": {
+                "label": "Street Lighting"
+            },
+            "phone": {
+                "placeholder": "+44 207 123456"
+            },
+            "toilets/disposal": {
+                "label": "Toilet Disposal"
+            }
+        },
         "presets": {
+            "aerialway/gondola": {
+                "terms": "Dangleway"
+            },
             "amenity/arts_centre": {
                 "name": "Arts Centre"
             },
@@ -85,10 +105,34 @@
                 "name": "Terraced houses"
             },
             "footway/crosswalk": {
-                "name": "Zebra Crossing"
+                "name": "Pedestrian Crossing"
+            },
+            "highway/bridleway": {
+                "name": "Bridleway"
             },
             "highway/crosswalk": {
                 "name": "Zebra Crossing"
+            },
+            "landuse/commercial": {
+                "name": "Commercial landuse"
+            },
+            "leisure/pitch/baseball": {
+                "name": "Baseball"
+            },
+            "leisure/pitch/soccer": {
+                "name": "Football Field"
+            },
+            "office/estate_agent": {
+                "name": "Estate Agent"
+            },
+            "shop/alcohol": {
+                "name": "Off license"
+            },
+            "shop/confectionery": {
+                "name": "Confectionery Shop"
+            },
+            "shop/farm": {
+                "name": "Farm Shop"
             },
             "shop/garden_centre": {
                 "name": "Garden Centre"

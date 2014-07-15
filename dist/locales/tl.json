@@ -1,12 +1,12 @@
 {
     "modes": {
         "add_area": {
-            "title": "Area o poligon",
+            "title": "Poligon",
             "description": "Magdagdag ng mga parke, mga gusali, lawa o iba pang mga \"area\" sa mapa.",
             "tail": "Mag-click sa mapa upang simulan ang pagguhit ng isang lugar, tulad ng isang parke, lawa, o gusali."
         },
         "add_line": {
-            "title": "Linya o guhit",
+            "title": "Linya",
             "description": "Magdagdag ng mga kalsada o kalye, mga daanang pantao, kanal o iba pang mga linya sa mapa.",
             "tail": "Mag-click sa mapa upang simulan ang pagguhit ng isang linya tulad ng kalsada, daanang pantao, o ruta."
         },
@@ -17,10 +17,10 @@
         },
         "browse": {
             "title": "Mag-browse",
-            "description": "I-pan at i-zoom ang mapa."
+            "description": "Mag-pan at mag-zoom sa mapa."
         },
         "draw_area": {
-            "tail": "I-click upang magdagdag ng mga node sa iyong polygon o area. I-click ang unang node upang isarado ang polygon o area."
+            "tail": "I-click upang magdagdag ng mga tuldok sa poligon. I-click ang unang tuldok upang isarado ang poligon o area."
         },
         "draw_line": {
             "tail": "I-click upang magdagdag ng higit pang mga node sa linya. Mag-click sa iba pang mga linya upang kumonekta sa kanila, at i-double click upang tapusin ang linya."
@@ -182,6 +182,18 @@
             },
             "not_eligible": "Hindi maaaring hatiin ang linya mula sa umpisa o dulong \"node\" nito.",
             "multiple_ways": "Masyadong maraming mga linya dito upang hatiin."
+        },
+        "restriction": {
+            "help": {
+                "select": "I-click upang pumili ng isang segment ng kalsada.",
+                "toggle": "I-click upang i-toggle ang mga \"turn restrictions\".",
+                "toggle_on": "I-click upang magdagdag ng \"{restriction}\" restriction.",
+                "toggle_off": "I-click upang alisin ang \"{restriction}\" restriction."
+            },
+            "annotation": {
+                "create": "Idinagdag isang \"turn restriction\"",
+                "delete": "Tinanggal ang isang \"turn restriction\""
+            }
         }
     },
     "undo": {
@@ -320,6 +332,9 @@
         "untagged_area": "Walang tag na area o poligon",
         "many_deletions": "Nagbura ka ng {n} bagay sa mapa. Sigurado ka bang gusto mong gawin ito? Ito ay tatanggalin sa mapa na nakikita sa openstreetmap.org.",
         "tag_suggests_area": "Ang tag na {tag} ay kalimitang para sa mga area o poligon sublait ito ay nasa linya lamang.",
+        "untagged_point_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang puntong ito.",
+        "untagged_line_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang linyang ito.",
+        "untagged_area_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang poligong ito.",
         "deprecated_tags": "Hindi na ginagamit na \"tag\": {tags}"
     },
     "zoom": {
@@ -336,7 +351,8 @@
     "help": {
         "title": "Tulong",
         "help": "# Help\n\nIto ay isang editor para sa [OpenStreetMap] (http://www.openstreetmap.org/), isang libre at maaaring i-edit na mapa ng mundo. Maaari mo itong gamitin upang idagdag at i-update ang iyong lugar, sa paggawa ng isang open-source at open-data na mapa ng mundo para magamit ng lahat.\n\nAng pag-edit na gagawin mo sa mapang ito ay makikita ng lahat ng gumagamit OpenStreetMap. Upang makapag-edit, kakailanganin mo ng [OpenStreetMap account] (https://www.openstreetmap.org/user/new). \n\nAng [iD editor] (http://ideditor.com/) ay isang collaborative proyekto,  ang [source code ay matatagpuan sa GitHub] (https://github.com/openstreetmap/iD).\n",
-        "editing_saving": "### Pag-edit & Saving\n\nEditor na ito ay dinisenyo upang gumana lalo na sa online, at ina-access mo ito sa pamamagitan ng isang website sa ngayon.\n\n### Pagpili ng Mga Tampok\n\nUpang pumili ng isang tampok ng mapa , tulad ng kalsada o punto ng interes , i-click \nsa ito sa mapa. Ito ay i-highlight ang mga napiling tampok , buksan ang isang panel na may \nmga detalye tungkol dito , at ipakita ang menu ng mga bagay na maaari mong gawin gamit ang tampok. \n\nUpang pumili ng maraming mga tampok , pindutin nang matagal ang 'Shift ' key. Pagkatapos ay i-click ang alinman sa \nsa ang tampok na gusto mong piliin , o i-drag sa mapa upang gumuhit ng parihaba . \nAy ito gumuhit ng isang kahon at piliin ang lahat ng mga punto sa loob nito.\n\n### Saving Pag-edit \n\nKapag gumawa ka ng mga pagbabago tulad ng pag-edit ng mga kalsada, gusali , at mga lugar, ang mga ito ay \nnaka-imbak sa isang lugar lamang hanggang sa i-save mo ang mga ito sa server. Huwag mag-alala kung gumawa ka \nisang pagkakamali - maaari mong i-undo ang mga pagbabago sa pamamagitan ng pag-click sa pindutan undo , at gawing muli ang \nmga pagbabago sa pamamagitan ng pag-click sa pindutan gawing muli.\n\nI-click ang 'I-save ' upang matapos sa isang pangkat ng mga pag-edit - halimbawa , kung nag- nakumpleto \nisang lugar ng bayan at nais na magsimula sa isang bagong lugar . Magkakaroon ka ng pagkakataong \nupang suriin kung ano ang iyong nagawa , at ang editor supplies nakakatulong na mga mungkahi\nat babala kung may isang bagay ay hindi tila karapatan tungkol sa mga pagbabago . \n\nKung mukhang maganda ang lahat ng bagay , maaari mong ipasok ang isang maikling komento na nagpapaliwanag ng mga pagbabago\nna ginawa mo , at i-click muli ang ' I-save' upang i-post ang mga pagbabago\nsa [ OpenStreetMap.org ] ( http://www.openstreetmap.org/ ), kung saan ang mga ito ay nakikita \nsa lahat ng iba pang mga gumagamit at magagamit para sa iba upang bumuo at pagbutihin sa.\n\nKung hindi mo maaaring tapusin ang iyong mga pag-edit sa isang sitting , maaari mong iwanan ang editor window at bumalik ( sa parehong browser at computer ) , at ang\neditor application ay mag-aalok upang ibalik ang iyong trabaho .\n\n"
+        "editing_saving": "### Pag-edit & Saving\n\nEditor na ito ay dinisenyo upang gumana lalo na sa online, at ina-access mo ito sa pamamagitan ng isang website sa ngayon.\n\n### Pagpili ng Mga Tampok\n\nUpang pumili ng isang tampok ng mapa , tulad ng kalsada o punto ng interes , i-click \nsa ito sa mapa. Ito ay i-highlight ang mga napiling tampok , buksan ang isang panel na may \nmga detalye tungkol dito , at ipakita ang menu ng mga bagay na maaari mong gawin gamit ang tampok. \n\nUpang pumili ng maraming mga tampok , pindutin nang matagal ang 'Shift ' key. Pagkatapos ay i-click ang alinman sa \nsa ang tampok na gusto mong piliin , o i-drag sa mapa upang gumuhit ng parihaba . \nAy ito gumuhit ng isang kahon at piliin ang lahat ng mga punto sa loob nito.\n\n### Saving Pag-edit \n\nKapag gumawa ka ng mga pagbabago tulad ng pag-edit ng mga kalsada, gusali , at mga lugar, ang mga ito ay \nnaka-imbak sa isang lugar lamang hanggang sa i-save mo ang mga ito sa server. Huwag mag-alala kung gumawa ka \nisang pagkakamali - maaari mong i-undo ang mga pagbabago sa pamamagitan ng pag-click sa pindutan undo , at gawing muli ang \nmga pagbabago sa pamamagitan ng pag-click sa pindutan gawing muli.\n\nI-click ang 'I-save ' upang matapos sa isang pangkat ng mga pag-edit - halimbawa , kung nag- nakumpleto \nisang lugar ng bayan at nais na magsimula sa isang bagong lugar . Magkakaroon ka ng pagkakataong \nupang suriin kung ano ang iyong nagawa , at ang editor supplies nakakatulong na mga mungkahi\nat babala kung may isang bagay ay hindi tila karapatan tungkol sa mga pagbabago . \n\nKung mukhang maganda ang lahat ng bagay , maaari mong ipasok ang isang maikling komento na nagpapaliwanag ng mga pagbabago\nna ginawa mo , at i-click muli ang ' I-save' upang i-post ang mga pagbabago\nsa [ OpenStreetMap.org ] ( http://www.openstreetmap.org/ ), kung saan ang mga ito ay nakikita \nsa lahat ng iba pang mga gumagamit at magagamit para sa iba upang bumuo at pagbutihin sa.\n\nKung hindi mo maaaring tapusin ang iyong mga pag-edit sa isang sitting , maaari mong iwanan ang editor window at bumalik ( sa parehong browser at computer ) , at ang\neditor application ay mag-aalok upang ibalik ang iyong trabaho .\n\n",
+        "gps": "# GPS\n\nAng datos mula sa GPS data ay isa sa pinagkakatiwalaang pinagmumulan ng\ndatos para sa OpenStreetMap.  Gamit ang Editor na ito, maaring i-dagdag \nang iyong mga GPS trace mula sa inyong lokal na computer. \nMaaari kang mangolekta ng ganitong uri ng GPS trace sa gamit ang iyong \nsmartphone o anumang GPS receiver. \n\nPara sa impormasyon kung paano magsagawa ng survey sa pamamagitan ng\nGPS, basahin ang: \n[Pag-survey gamit ang GPS] (http://learnosm.org/en/beginner/using-gps/). \n\nUpang magamit ang GPX track para sa pagmamapa, i-drag at i-drop ang GPX file papunta sa mapa. \nMakikita ito sa mapa bilang isang berdeng linya. \nMag-click sa menu na 'Background Settings' sa kanang bahagi upang \ni-enable, disable, o mag-zoom sa GPX layer. \n\nAng GPX track ay hindi direktang naia-upload sa OpenStreetMap. \nGamitin ito bilang isang gabay para sa mga bagong tampok na nais \nmong idagdag.  Kung nais mong i-upload ito sa OpenStreetMap para magamit na iba,  pumunta lamang sa \n[upload ito sa OpenStreetMap] (http://www.openstreetmap.org/trace/create).\n"
     },
     "intro": {
         "navigation": {
@@ -372,6 +388,7 @@
             "title": "Mga linya",
             "add": "Ang mga linya ay ginagamit para kumatawan sa mga \"feature\" na gaya ng mga kalsada, riles ng tren at ilog. **I-click ang button para sa \"Linya\" upang magdagdag ng bagong linya. **",
             "start": "**Simulan ang linya sa pamamagitan ng pag-click sa dulo ng kalsada.**",
+            "intersect": "I-click upang magdagdag ng higit pang mga tuldok sa linya. Maaari mong i-drag ang mapa habang gumuguhit kung kinakailangan. Ang mga kalsada, at iba pang mga uri ng linya, ay pwedeng bahagi ng isang mas malaking network. Mahalaga para sa mga linyang ito ay konektado, maayos ang pagkaka-sunod-sunod para sa routing upang gumana ng mga application. ** Mag-click sa Flower Street, upang lumikha ng isang panulukang naka-konekta sa dalawang linya. **",
             "finish": "Ang mga linya ay matatapos sa pamamagitan ng pag-click muli sa huling node. **Taposin ang pagguhit ng kalsada.**",
             "road": "**Piliin ang \"Road\" mula sa talaan**",
             "residential": "Mayroong iba't ibang mga uri ng mga kalsada, ang pinaka-karaniwang ay residential. **Piliin ang residential na uri ng kalsada**",

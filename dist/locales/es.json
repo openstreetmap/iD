@@ -150,7 +150,8 @@
                 "area": "Área movida",
                 "multiple": "Múltiples objetos movidos."
             },
-            "incomplete_relation": "Este elemento del mapa no puede ser desplazado porque no se ha descargado completamente."
+            "incomplete_relation": "Este elemento del mapa no puede ser desplazado porque no se ha descargado completamente.",
+            "too_large": "Esto no puede ser movido porque no está completamente visible."
         },
         "rotate": {
             "title": "Rotar",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Línea rotada.",
                 "area": "Área rotada."
-            }
+            },
+            "too_large": "Esto no puede rotarse porque no está completamente visible."
         },
         "reverse": {
             "title": "Invertir",
@@ -481,6 +483,10 @@
                 }
             },
             "access_simple": {
+                "label": "Acceso",
+                "placeholder": "sí"
+            },
+            "access_toilets": {
                 "label": "Acceso"
             },
             "address": {
@@ -711,10 +717,15 @@
             "internet_access": {
                 "label": "Acceso a Internet",
                 "options": {
+                    "yes": "Sí",
+                    "no": "No",
                     "wlan": "Wi-Fi",
                     "wired": "Por cable",
                     "terminal": "Terminal"
                 }
+            },
+            "lamp_type": {
+                "label": "Tipo"
             },
             "landuse": {
                 "label": "Tipo"
@@ -768,13 +779,17 @@
             "oneway": {
                 "label": "Sentido único",
                 "options": {
-                    "undefined": "Se asume que es No"
+                    "undefined": "Se asume que es No",
+                    "yes": "Sí",
+                    "no": "No"
                 }
             },
             "oneway_yes": {
                 "label": "Sentido único",
                 "options": {
-                    "undefined": "Se asume que es Sí"
+                    "undefined": "Se asume que es Sí",
+                    "yes": "Sí",
+                    "no": "No"
                 }
             },
             "opening_hours": {
@@ -1864,6 +1879,9 @@
                 "name": "Señal de Stop",
                 "terms": "señal de detención, señal de parada, señal, stop, detención, parada"
             },
+            "highway/street_lamp": {
+                "name": "Lámpara de alumbrado público"
+            },
             "highway/tertiary": {
                 "name": "Carretera terciaria",
                 "terms": "calle, ronda, carril, ruta, arteria, rúa, trayecto, avenida, carretera, paseo, camino, vía, local, terciaria"
@@ -2061,7 +2079,7 @@
                 "terms": "Cancha de fútbol americano"
             },
             "leisure/pitch/baseball": {
-                "name": "Diamante de Béisbol",
+                "name": "Diamante de béisbol",
                 "terms": "Campo de Beisbol"
             },
             "leisure/pitch/basketball": {
@@ -2249,7 +2267,7 @@
             },
             "natural/water/pond": {
                 "name": "Estanque",
-                "terms": "Estanque"
+                "terms": "estanque, charca, pozo de agua, agua estancada"
             },
             "natural/water/reservoir": {
                 "name": "Embalse",
@@ -2358,7 +2376,7 @@
             },
             "place/island": {
                 "name": "Isla",
-                "terms": "Isla"
+                "terms": "isla"
             },
             "place/isolated_dwelling": {
                 "name": "Vivienda aislada",
@@ -2699,6 +2717,9 @@
             "shop/supermarket": {
                 "name": "Supermercado",
                 "terms": "supermercado, autoservicio, mercado, hipermercado, alimentación, víveres"
+            },
+            "shop/tailor": {
+                "name": "Sastre"
             },
             "shop/toys": {
                 "name": "Tienda de juguetes",

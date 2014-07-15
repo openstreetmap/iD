@@ -150,7 +150,8 @@
                 "area": "Flyttade ett område.",
                 "multiple": "Flyttade flera objekt."
             },
-            "incomplete_relation": "Detta objekt kan inte flyttas då det inte är nedladdat i sin helhet."
+            "incomplete_relation": "Detta objekt kan inte flyttas då det inte är nedladdat i sin helhet.",
+            "too_large": "Denna kan inte flyttas då inte tillräckligt är synligt för tillfället."
         },
         "rotate": {
             "title": "Rotera",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Roterade en linje.",
                 "area": "Roterade ett område."
-            }
+            },
+            "too_large": "Denna kan inte roteras då inte tillräckligt är synligt för tillfället."
         },
         "reverse": {
             "title": "Byt riktning",
@@ -330,6 +332,9 @@
         "untagged_area": "Otaggat område",
         "many_deletions": "Du håller på att ta bort {n} objekt. Är du helt säker? Detta tar bort dem för alla som använder openstreetmap.org.",
         "tag_suggests_area": "Taggen {tag} indikerar att detta borde vara ett område istället för en linje",
+        "untagged_point_tooltip": "Välj en typ som beskriver vad denna punkt är.",
+        "untagged_line_tooltip": "Välj en typ som beskriver vad denna linje är.",
+        "untagged_area_tooltip": "Välj en typ som beskriver vad denna yta är.",
         "deprecated_tags": "Borttagna taggar: {tags}"
     },
     "zoom": {
@@ -346,6 +351,7 @@
     "help": {
         "title": "Hjälp",
         "help": "# Hjälp\n\nDetta är en redigerare för [OpenStreetMap](http://www.openstreetmap.org/), den\nfri och redigerbara världskartan. Du kan använda den för att lägga till och uppdatera\ndata i ditt närområde, allt för att ytterligare förbättra en världskarta för alla baserad på öppen källkod och data.\n\nÄndringar du gör i den här kartan kommer att visas för alla som använder\nOpenStreetMap. För att göra en ändring behöver du ett\n[gratis OpenStreetMap-konto](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) är ett samarbetsprojekt med [källkodkod \ntillgänglig på GitHub](https://github.com/openstreetmap/iD).\n",
+        "editing_saving": "# Redigera & spara\n\nDenna redigerare är designad att främst fungera online, och du använder den via en webbsida just nu.\n\n### Välj objekt\n\nFör att välja ett kartobjekt, t.ex. en väg eller en punkt, klicka på den på kartan. Detta kommer att markera det valda objektet, öppna en panel med detaljer om det, och visa en meny med saker du kan göra med det.\n\nFör att välja flera objekt, håll ner Skift-tangenten. Klicka sedan på objekten du vill välja eller dra på kartan för att rita en rektangel. Detta kommer att rita en ruta och markera punkterna inuti den.\n\n### Spara redigeringar\n\nNär du gör ändringar som att ändra på en väg, byggnad eller plats är detta sparat lokalt fram tills att du spara det på servern. Oroa dig inte om du gör ett misstag, du kan alltid ångra en ändring genom att klicka på Ånga-knappen och göra om din förändring genom att klicka på Gör om-knappen.\n\nKlicka på Spara för att slutföra en grupp att förändringar, t.ex. om du fullfört ett område i en stad och vill börja ändra i ett annat område. Du får möjlighet att granska vad du gjort och redigeraren ger dig hjälpsamma förslag och varningar om någon ändring inte verka korrekt.\n\nOm allt ser bra ut kan du ange en kort kommentar som förklarar vad du gjort och sedan klicka på Spara igen för att skicka iväg ändringarna till [OpenStreetMap.org](http://www.openstreetmap.org/) där de blir synliga för alla andra användare och tillgängliga för andra att bygga sina förbättringar på.\n\nOm du inte kan slutföra din ändring på en gång kan du lämna redigeringsfönstret öppet och komma tillbaka (i samma webbläsare på samma dator) och redigeringsprogrammet kommer att ge dig möjlighet att återställa ditt arbete.\n",
         "gps": "# GPS \n\nGPS-data är den mest pålitliga källan för uppgifter till OpenStreetMap. Denna redigerare \nstödjer lokala spår – ”.GPX”-filer på din lokala dator. Du kan skapa \ndenna typ av GPS-spår med ett flertal smartphone-appar samt med\npersonlig GPS-hårdvara. \n\nFör information om hur man skapar en GPS-spårning, läs \n[Kartläggning med en GPS](http://learnosm.org/en/beginner/using-gps/). \n\nFör att använda ett GPX-spår för kartläggning, dra och släpp GPX-filen på \nkartredigeraren. Om den känns igen kommer den att läggas till på kartan som en klargrön \nlinje. Klicka på menyn \"Bakgrundsinställningar\" på höger sida för att aktivera, \navaktivera eller zooma till detta nya GPX-drivna lager. \n\nGPX spår överförs inte direkt till OpenStreetMap - det bästa sättet att \nanvända dem är att rita på kartan, använda den som en guide för de nya objekt som \ndu lägger till, och också [ladda upp dem till OpenStreetMap](http://www.openstreetmap.org/trace/create) \nför att användas av andra.\n",
         "buildings": "# Byggnader\n\nOpenStreetMap är världens största databas över byggnader. Du kan skapa\noch förbättra denna databas.\n\n### Markering\n\nDu kan markera en byggnad genom att klicka på dess kant. Detta kommer att markera \nbyggnaden och öppna en litet verktygsmeny och ett sidofält som visar mer information\nom byggnaden.\n\n### Modifiering\n\nIbland är byggnader felaktigt placerade eller har felaktiga taggar.\n\nFör att flytta en hel byggnad, markera den och klicka sedan på \"Flytta\"-verktyget. flytta\nmus för att flytta byggnaden, och klicka när den är korrekt placerad.\n\nFör att fixa den specifika formen av en byggnad, klicka och dra noderna som bildar\nramen till bättre platser.\n\n### Skapa\n\nEn av de viktigaste frågorna att tänka på vid tilläggning av byggnader till kartan är att\nOpenStreetMap registrerar byggnader både som form och punkt. Tumregeln\när att _kartlägga en byggnad som en form när möjligt_ och kartlägg företag, bostäder,\nfacilitet, och andra saker finns i byggandena som punkter placerade\ninuti byggnadernas ram.\n\nBörja rita en byggnad som en ram genom att klicka på knappen \"område\" högst upp till vänster\ngränssnittet, och avsluta det antingen genom att trycka på \"Retur\" på tangentbordet\neller genom att klicka på den första ritade noden för att stänga formen.\n\n### Radering\n\nOm en byggnad är helt fel – du kan se att den inte finns med i någon satellitbild\noch helst har bekräftat lokalt att det inte finns – kan du ta bort\nden, vilket tar bort det från kartan. Var försiktig när du tar bort objekt –\nlikt alla ändringar kommer resultatet ses av alla och satellitbilder\när ofta föråldrad, så byggnaden kan helt enkelt vara nybyggd.\n\nDu kan ta bort en byggnad genom att klicka på den för att markera den och sedan klicka på\nikonen papperskorg eller trycka på \"Delete\"-tangenten.\n"
     },

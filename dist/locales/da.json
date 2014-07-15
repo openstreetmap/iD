@@ -150,7 +150,8 @@
                 "area": "Flyttede et område.",
                 "multiple": "Flyttede flere objekter."
             },
-            "incomplete_relation": "Dette element kan ikke flyttes, fordi det ikke er fuldstændigt downloadet."
+            "incomplete_relation": "Dette element kan ikke flyttes, fordi det ikke er fuldstændigt downloadet.",
+            "too_large": "Dette kan ikke flyttes pga der ikke er nok synligt."
         },
         "rotate": {
             "title": "Roter",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Roterede en linje.",
                 "area": "Roterede et område."
-            }
+            },
+            "too_large": "Dette kunne ikke blive roteret pga der ikke var nok synligt."
         },
         "reverse": {
             "title": "Reverser",
@@ -481,6 +483,10 @@
                 }
             },
             "access_simple": {
+                "label": "Adgang",
+                "placeholder": "ja"
+            },
+            "access_toilets": {
                 "label": "Adgang"
             },
             "address": {
@@ -711,6 +717,8 @@
             "internet_access": {
                 "label": "Internetadgang",
                 "options": {
+                    "yes": "Ja",
+                    "no": "Nej",
                     "wlan": "Wifi",
                     "wired": "Kabeladgang",
                     "terminal": "Terminal"
@@ -771,13 +779,17 @@
             "oneway": {
                 "label": "Ensrettet",
                 "options": {
-                    "undefined": "Forventet at være Nej"
+                    "undefined": "Forventet at være Nej",
+                    "yes": "Ja",
+                    "no": "Nej"
                 }
             },
             "oneway_yes": {
                 "label": "Ensrettet",
                 "options": {
-                    "undefined": "Forventet at være Ja"
+                    "undefined": "Forventet at være Ja",
+                    "yes": "Ja",
+                    "no": "Nej"
                 }
             },
             "opening_hours": {

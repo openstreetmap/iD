@@ -150,7 +150,8 @@
                 "area": "Fläche verschoben.",
                 "multiple": "Mehrere Objekte verschoben."
             },
-            "incomplete_relation": "Dieses Objekt kann nicht verschoben werden, da es nicht vollständig heruntergeladen wurde."
+            "incomplete_relation": "Dieses Objekt kann nicht verschoben werden, da es nicht vollständig heruntergeladen wurde.",
+            "too_large": "Das Objekt kann nicht bewegt werden, weil nicht genug davon sichtbar ist."
         },
         "rotate": {
             "title": "Drehen",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Linie gedreht.",
                 "area": "Fläche gedreht."
-            }
+            },
+            "too_large": "Das Objekt kann nicht gedreht werden, weil nicht genug davon sichtbar ist."
         },
         "reverse": {
             "title": "Umkehren",
@@ -256,17 +258,17 @@
         "all_relations": "Alle Relationen",
         "new_relation": "Neue Relation …",
         "role": "Rolle",
-        "choose": "Eigenschaftstyp auswählen",
+        "choose": "Objekttyp auswählen",
         "results": "{n} Resultate für {search}",
         "reference": "Im OpenStreetMap-Wiki anschauen",
-        "back_tooltip": "Eigenschaft ändern",
+        "back_tooltip": "Objekt ändern",
         "remove": "Entfernen",
         "search": "Suchen",
         "multiselect": "Ausgewählte Elemente",
         "unknown": "Unbekannt",
         "incomplete": "<nicht heruntergeladen>",
         "feature_list": "Objekte suchen",
-        "edit": "Eigenschaft bearbeiten",
+        "edit": "Objekt bearbeiten",
         "none": "Nichts",
         "node": "Punkt",
         "way": "Weg",
@@ -352,12 +354,12 @@
         "title": "Hilfe",
         "help": "#Hilfe\n\nDies ist ein Editor für [OpenStreetMap](http://www.openstreetmap.org/), der freien und editierbaren Weltkarte. Du kannst ihn verwenden, um Daten in deiner Umgebung hinzuzufügen oder zu verändern und so diese Karte mit freien Quellen und freien Daten für jeden verbessern.\n\nVeränderungen werden für alle Nutzer von OpenStreetMap sichtbar. Um Veränderungen vornehmen zu können, musst du ein [kostenloses OpenStreetMap-Profil](https://www.openstreetmap.org/user/new) anlegen.\n\nDer [iD-Editor](http://ideditor.com/) ist ein Gemeinschaftsprojekt dessen [Quellcode\nauf GitHub verfügbar ist](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Bearbeiten & Speichern\n\nDieser Editor wurde entworfen, um online zu arbeiten und du erreichst ihn über diese Webseite.\n\n### Objekte auswählen\n\nUm ein Kartenobjekt wie eine Straße oder ein Sonderziel (POI) auszuwählen, klicke auf der Karte darauf. Dadurch wird das Objekt hervorgehoben und ein Bedienfeld mit Details und Möglichkeiten zur Veränderung aufgerufen.\n\nMehrere Objekte kannst du auswählen indem du die Umschalttaste (Shift) drückst und die Objekte einzeln anklickst oder klickst und einen Rahmen darum ziehst. So können mehrere Objekte gleichzeitig geändert werden.\n\n### Speichern der Änderungen\n\nWenn du Änderungen an einer Straße, einem Gebäude oder einem Platz vorgenommen hast, sind diese lokal gespeichert, bis du sie auf dem Server speicherst. Keine Sorge falls du einen Fehler machen solltest: Du kannst Änderungen jederzeit über den Rückgängig-Knopf rückgängig machen oder über den Wiederherstellen-Knopf noch einmal ausführen.\n\nKlicke auf \"Speichern\", um eine Gruppe von Änderungen zu speichern. Zum Beispiel, wenn du in einem Stadtteil fertig bist und in einer neuen Gegend weiter arbeiten willst. Du bekommst dann die Möglichkeit noch einmal zu überprüfen, was du gerade getan hast und der Editor zeigt dir nützliche Hinweise oder mögliche Fehler, wenn etwas nicht in Ordnung zu sein scheint.\n\nWenn alles gut aussieht kannst du einen kurzen Kommentar schreiben, der erklärt, was du gemacht hast. Drücke nun \"Speichern\", um die Änderungen auf dem Server zu speichern. Nun können es alle auf [OpenStreetMap.org](http://www.openstreetmap.org/) sehen und darauf aufbauen.\n\nWenn du es zeitlich nicht schaffst, kannst du das Editor-Fenster einfach schließen. Wenn du die Seite wieder aufrufst (mit dem gleichen Browser und Rechner) wird dir angeboten, die letzte Sitzung wiederherzustellen.\n",
-        "roads": "# Straßen\n\nMit dem Editor kannst du Wege erstellen, verändern und löschen. Wege können alles mögliche sein, zum Beispiel Pfade, Straßen, Schienen, Fahrradwege und anderes.\n\n### Auswählen\n\nKlicke auf einen Weg, um ihn auszuwählen. Er sollte nun hervorgehoben werden. Außerdem erscheint ein kleines Werkzeugmenü und eine Seitenleiste mit den Eigenschaften des Weges.\n\n### Modifizieren\n\nOft sieht man, dass Wege nicht mit dem Luftbild oder einer GPS-Spur übereinstimmen. Du kannst den Weg aber so anpassen, dass er an der richtigen Stelle ist. Beachte jedoch, dass Luftbilder einen Versatz aufweisen können.\n\nAls Erstes wählst du einen Weg aus. Dieser wird nun hervorgehoben und es werden die Knoten des Weges angezeigt. Diese kannst du verschieben, bis sie an der richtigen Stelle sind. Wenn du neue Knoten hinzufügen möchtest, klicke doppelt zwischen den Knoten auf die Linie und es wird ein neuer Punkt erzeugt.\n\nWenn zwei Wege in Wirklichkeit mit einander verbunden sind, aber auf der Karte nicht, kannst du sie verbinden, indem du einen Knoten des einen Weges auf den anderen Weg ziehst. Dass Wege verbunden sind, ist wichtig für die Karte und essentiell für die Nutzung von Routenführung.\n\nDu kannst auch das \"Bewegen\"-Werkzeug nutzen oder \"M\" drücken, um den kompletten Weg zu verschieben. Beende die Aktion mit einem Klick.\n\n### Löschen\n\nWenn du weißt, dass ein Weg nicht existiert, kannst du ihn löschen, um ihn von der Karte zu entfernen. Sei beim Löschen von Objekten besonders vorsichtig, da diese Änderungen von jedem gesehen werden können und Luftbilder oft veraltet sind. Das heißt, dass ein Weg, der im Luftbild nicht zu sehen ist, vielleicht einfach neu gebaut wurde.\n\nDu kannst Wege löschen, indem du sie anklickst und das Mülltonnensymbol auswählst oder die \"Entfernen\"-Taste drückst.\n\n### Erstellen\n\nDu kennst einen Weg der nicht eingezeichnet ist? Dann klicke auf das \"Linien\"-Symbol oben links im Editor oder drücke die Taste \"2\" und beginne mit dem Zeichnen einer Linie.\n\nKlicke dort hin, wo die Straße anfängt. Sollte sie von einer bereits existierenden Straße abzweigen, klicke an der entsprechenden Stelle auf diese Straße.\n\nZeichne nun den Weg, indem du Punkte anhand der Luftaufnahme oder der GPS-Spur entlang des Weges setzt. Sollte der Weg einen anderen kreuzen, klicke auf den Kreuzungspunkt, um beide Wege zu verbinden. Wenn du mit dem Zeichnen fertig bist, klicke doppelt oder drücke \"Enter\" auf der Tastatur, um den Weg abzuschließen.\n",
+        "roads": "# Straßen\n\nMit dem Editor kannst du Wege erstellen, verändern und löschen. Wege können alles mögliche sein, zum Beispiel Pfade, Straßen, Schienen, Fahrradwege und anderes.\n\n### Auswählen\n\nKlicke auf einen Weg, um ihn auszuwählen. Er sollte nun hervorgehoben werden. Außerdem erscheint ein kleines Werkzeugmenü und eine Seitenleiste mit den Eigenschaften des Weges.\n\n### Modifizieren\n\nOft sieht man, dass Wege nicht mit dem Luftbild oder einer GPS-Spur übereinstimmen. Du kannst den Weg aber so anpassen, dass er an der richtigen Stelle ist. Beachte jedoch, dass Luftbilder einen Versatz aufweisen können.\n\nAls Erstes wählst du einen Weg aus. Dieser wird nun hervorgehoben und es werden die Knoten des Weges angezeigt. Diese kannst du verschieben, bis sie an der richtigen Stelle sind. Wenn du neue Knoten hinzufügen möchtest, klicke doppelt zwischen den Knoten auf die Linie und es wird ein neuer Punkt erzeugt.\n\nWenn zwei Wege in Wirklichkeit mit einander verbunden sind, aber auf der Karte nicht, kannst du sie verbinden, indem du einen Knoten des einen Weges auf den anderen Weg ziehst. Dass Wege verbunden sind, ist wichtig für die Karte und essentiell für die Nutzung von Routenführung.\n\nDu kannst auch das \"Bewegen\"-Werkzeug nutzen oder \"M\" drücken, um den kompletten Weg zu verschieben. Beende die Aktion mit einem Klick.\n\n### Löschen\n\nWenn du weißt, dass ein Weg nicht existiert, kannst du ihn löschen, um ihn von der Karte zu entfernen. Sei beim Löschen von Objekten - wie immer beim Editieren vorsichtig, da die Ergebnisse von jedem gesehen werden können und Luftbilder oft veraltet sind. Das heißt, dass ein Weg, der im Luftbild nicht zu sehen ist, vielleicht einfach neu gebaut wurde.\n\nDu kannst Wege löschen, indem du sie anklickst und das Mülltonnensymbol auswählst oder die \"Entfernen\"-Taste drückst.\n\n### Erstellen\n\nDu kennst einen Weg der nicht eingezeichnet ist? Dann klicke auf das \"Linien\"-Symbol oben links im Editor oder drücke die Taste \"2\" und beginne mit dem Zeichnen einer Linie.\n\nKlicke dort hin, wo die Straße anfängt. Sollte sie von einer bereits existierenden Straße abzweigen, klicke an der entsprechenden Stelle auf diese Straße.\n\nZeichne nun den Weg, indem du Punkte anhand der Luftaufnahme oder der GPS-Spur entlang des Weges setzt. Sollte der Weg einen anderen kreuzen, klicke auf den Kreuzungspunkt, um beide Wege zu verbinden. Wenn du mit dem Zeichnen fertig bist, klicke doppelt oder drücke \"Enter\" auf der Tastatur, um den Weg abzuschließen.\n",
         "gps": "# GPS\n\nGPS-Daten sind die vertrauenswürdigste Quelle für OpenStreetMap. Dieser Editor unterstützt lokale GPS-Spuren — \".gpx\"-Dateien auf deinem Rechner. Du kannst diese GPS-Spuren mit Hilfe diverser Smartphone-Apps oder anderen GPS-Geräten aufnehmen.\n\nFür Informationen über das Sammeln von GPS-Daten kannst du dir folgende Anleitung durchlesen: [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/) (zur Zeit nur auf Englisch).\n\nUm eine GPX-Spur zu verwenden, ziehe sie einfach in den Karteneditor. Wenn sie erkannt wurde, wird diese Spur als leuchtend grüne Linie auf der Karte dargestellt. Klicke auf \"Hintergrundeinstellungen\", um sie zu (de-)aktivieren, oder um zum Gebiet der Spur zu gelangen (Lupe).\n\nDie GPX-Spur wird nicht automatisch direkt zu OpenStreetMap hoch geladen. Am besten verwendest du sie, um neue Wege hinzuzufügen. Möchtest du die GPX-Spur jedem zugänglich machen, kannst du sie über die [Track-Upload-Seite](http://www.openstreetmap.org/trace/create) hochladen.\n",
         "imagery": "# Bildmaterial\n\nLuftbilder sind eine wichtige Quelle für das Kartografieren. Eine Kombination aus Luftbildern von Flugzeugen, Satellitenbilder und freien Quellen sind im Editor über das \"Hintergrundeinstellungen\"-Menü auf der linken Seite verfügbar.\n\nAls Standard ist die [Bing-Maps](http://www.bing.com/maps/)-Satelliten-Ebene ausgewählt. Je nach angezeigter Gegend werden Dir verschiedene andere Quellen angezeigt. In einigen Länder wie den USA, Frankreich, Deutschland und Dänemark stehen zum Teil sehr hochauflösende Luftbilder zur Verfügung.\n\nLuftbilder sind manchmal durch Fehler der Luftbild-Anbieter verschoben. Wenn du feststellst, dass viele Straßen gegenüber dem Hintergrund verschoben sind, dann verschiebe nicht die Straßen sondern das Luftbild, bis sie übereinstimmen. Um das Luftbild zu korrigieren, klicke auf \"Fehlerhafte Ausrichtung korrigieren\" unten in den Hintergrundeinstellungen.\n\n",
-        "addresses": "# Adressen\n\nAdressen sind eine der wichtigsten Informationen einer Karte.\n\nObwohl Adressen oft als Teil einer Straße repräsentiert werden, werden sie in OpenStreetMap als Eigenschaften von Gebäuden oder Objekten neben der Straße eingetragen.\n\nDu kannst Adressinformationen sowohl zu Flächen, die als Gebäudegrundriss gezeichnet sind, als auch zu einzelnen Punkten hinzufügen. Adressen musst du über eine Stadtbegehung oder dein eigenes Wissen herausfinden, da die Nutzung kommerzieller Quellen wie Google Maps strikt verboten ist.\n",
-        "inspector": "# Den Inspektor benutzen\n\nDer Inspektor ist das Bedienelement, das rechts im Editor erscheint, wenn du ein Objekt auswählst. Mit dem Inspektor kannst du die Details des Objektes bearbeiten.\n\n### Eine Eigenschaft auswählen\n\nNachdem du einen Punkt, eine Linie oder eine Fläche hinzugefügt hast kannst du auswählen, welche Eigenschaft das Objekt hat – ob es eine Autobahn oder eine Wohnstraße; ein Supermarkt oder ein Café ist. Der Inspektor wird Knöpfe für die am häufigsten verwendeten Eigenschaften zeigen. Andere Eigenschaften findest du, indem du im Suchfeld eingibst wonach du suchst.\n\nKlicke auf den 'i'-Knopf in der Ecke rechts unten in einem Eigenschaften-Knopf, um mehr darüber zu erfahren.\n\n### Vorlagen verwenden und Tags editieren\n\nNachdem du ein Objekt mit einer Eigenschaft versehen oder ausgewählt hast, zeigt der Inspektor Felder mit Details zu der Eigenschaft an wie Name und Adresse.\n\nUnter diesen Feldern kannst du Icons anklicken, um weitere Details hinzuzufügen wie zum Beispiel einen [Wikipedia](http://www.wikipedia.org/)-Link, Zugänglichkeit für Rollstühle und anderes.\n\nGanz unten im Inspektor kannst du auf 'Weitere Merkmale' klicken, um das Objekt mit beliebigen anderen Eigenschaften zu versehen. [Taginfo](http://taginfo.openstreetmap.org/) ist eine gute Quelle, um oft genutzte Kombinationen von Eigenschaften zu finden.\n\nÄnderungen die du im Inspektor vornimmst, werden automatisch auf die ausgewählten Objekte angewendet. Durch Klicken auf den 'Rückgängig'-Knopf kannst du sie rückgängig machen.\n\n### Den Inspektor schließen\n\nDu kannst den Inspektor schließen, indem du auf den Schließen-Knopf oben rechts klickst, den 'Escape'-Knopf auf der Tastatur drückst oder in die Karte klickst.\n",
-        "buildings": "# Gebäude\n\nOpenStreetMap ist die weltgrößte Datenbank für Gebäude und du kannst helfen sie weiter zu verbessern.\n\n### Auswahl\n\nDu kannst ein Gebäude auswählen, indem du auf dessen Umrisslinie klickst. Der Umriss wird nun hervorgehoben. Außerdem wird ein Werkzeugmenü und eine Seitenleiste eingeblendet, welche Informationen zum Gebäude zeigt.\n\n### Bearbeitung\n\nManchmal sind Gebäude falsch platziert oder haben falsche Eigenschaften.\n\nUm ein Gebäude komplett zu verschieben wähle es aus und klicke auf das „Bewegen“-Werkzeug. Verschiebe nun das Gebäude mit der Maus und klicke einmal, wenn es an der richtigen Stelle ist.\n\nUm den Gebäudeumriss zu korrigieren, klicke und ziehe die Umrissknoten, bis sie an der richtigen Stelle sind.\n\n### Erstellen\n\nEine oft gestellte Frage bezieht sich auf das Erstellen von Gebäuden als Gebäudefläche und/oder als Punkt. Hier gilt, wann immer es möglich ist, sollte das Gebäude als Fläche eingetragen werden. Firmen, Geschäfte und ähnliches werden zusätzlich als Punkte innerhalb des Gebäudeumrisses angelegt.\n\nUm ein Gebäude als Fläche zu zeichnen, klicke auf den „Fläche“-Knopf oben links und vollende das Gebäude, indem du entweder die \"Enter\"-Taste drückst, oder auf den ersten Knoten klickst.\n\n### Löschen\n\nWenn du siehst und weißt, dass ein Gebäude nicht existiert – zum Beispiel, weil du vor Ort warst – kannst du es löschen und es wird von der Karte entfernt. Sei vorsichtig mit der Löschfunktion! Das Ergebnis kann, wie bei jeder anderen Veränderung, von allen gesehen werden. Außerdem sind Satellitenbilder oft veraltet und ein Gebäude könnte einfach neu gebaut sein.\n\nDu kannst ein Gebäude löschen, indem du es auswählst und auf das Papierkorbsymbol klickst oder die „Entfernen“-Taste betätigst.\n",
+        "addresses": "# Adressen\n\nAdressen sind eine der wichtigsten Informationen einer Karte.\n\nObwohl Adressen oft als Teil einer Straße repräsentiert werden, werden sie in OpenStreetMap als Eigenschaften von Gebäuden oder Objekten neben der Straße eingetragen.\n\nDu kannst Adressinformationen sowohl zu Flächen, die als Gebäudegrundriss gezeichnet sind, als auch zu einzelnen Punkten hinzufügen. 'Die beste Quelle für Adressen ist eigenes Wisse oder eine Erhebung vor Ort. Wie bei allen anderen Objekten ist die Nutzung kommerzieller Quellen wie Google Maps strikt verboten.\n",
+        "inspector": "# Den Inspektor benutzen\n\nDer Inspektor ist das Bedienelement, das rechts im Editor erscheint, wenn du ein Objekt auswählst. Mit dem Inspektor kannst du die Details des Objektes bearbeiten.\n\n### Eine Eigenschaft auswählen\n\nNachdem du einen Punkt, eine Linie oder eine Fläche hinzugefügt hast kannst du auswählen, welchen Typ das Objekt hat – ob es eine Autobahn oder eine Wohnstraße; ein Supermarkt oder ein Café ist. Der Inspektor wird Knöpfe für die am häufigsten verwendeten Eigenschaften zeigen. Andere Eigenschaften findest du, indem du im Suchfeld eingibst wonach du suchst.\n\nKlicke auf den 'i'-Knopf in der Ecke rechts unten bei einem Objekt-Typ, um mehr darüber zu erfahren.\n\n### Vorlagen verwenden und Tags editieren\n\nNachdem du ein Objekt mit einer Eigenschaft versehen oder ausgewählt hast, zeigt der Inspektor Felder mit Details zu der Eigenschaft an wie Name und Adresse.\n\nUnter diesen Feldern kannst du Icons anklicken, um weitere Details hinzuzufügen wie zum Beispiel einen [Wikipedia](http://www.wikipedia.org/)-Link, Zugänglichkeit für Rollstühle und anderes.\n\nGanz unten im Inspektor kannst du auf 'Weitere Merkmale' klicken, um das Objekt mit beliebigen anderen Eigenschaften zu versehen. [Taginfo](http://taginfo.openstreetmap.org/) ist eine gute Quelle, um oft genutzte Kombinationen von Eigenschaften zu finden.\n\nÄnderungen die du im Inspektor vornimmst, werden automatisch auf die ausgewählten Objekte angewendet. Durch Klicken auf den 'Rückgängig'-Knopf kannst du sie rückgängig machen.\n\n### Den Inspektor schließen\n\nDu kannst den Inspektor schließen, indem du auf den Schließen-Knopf oben rechts klickst, den 'Escape'-Knopf auf der Tastatur drückst oder in die Karte klickst.\n",
+        "buildings": "# Gebäude\n\nOpenStreetMap ist die weltgrößte Datenbank für Gebäude und du kannst helfen sie weiter zu verbessern.\n\n### Auswahl\n\nDu kannst ein Gebäude auswählen, indem du auf dessen Umrisslinie klickst. Der Umriss wird nun hervorgehoben. Außerdem wird ein Werkzeugmenü und eine Seitenleiste eingeblendet, welche Informationen zum Gebäude zeigt.\n\n### Bearbeitung\n\nManchmal sind Gebäude falsch platziert oder haben falsche Eigenschaften.\n\nUm ein Gebäude komplett zu verschieben wähle es aus und klicke auf das „Bewegen“-Werkzeug. Verschiebe nun das Gebäude mit der Maus und klicke einmal, wenn es an der richtigen Stelle ist.\n\nUm den Gebäudeumriss zu korrigieren, klicke und ziehe die Umrissknoten, bis sie an der richtigen Stelle sind.\n\n### Erstellen\n\nEine oft gestellte Frage bezieht sich auf das Erstellen von Gebäuden als Gebäudefläche und/oder als Punkt. Hier gilt, wann immer es möglich ist, sollte das Gebäude als Fläche eingetragen werden. Firmen, Geschäfte und ähnliches werden zusätzlich als Punkte innerhalb des Gebäudeumrisses angelegt.\n\nUm ein Gebäude als Fläche zu zeichnen, klicke auf den „Fläche“-Knopf oben links und vollende das Gebäude, indem du entweder die \"Enter\"-Taste drückst, oder auf den ersten Knoten klickst.\n\n### Löschen\n\nWenn du siehst und weißt, dass ein Gebäude nicht existiert – zum Beispiel, weil du vor Ort warst – kannst du es löschen und es wird von der Karte entfernt. Sei vorsichtig beim Löschen von Objekten, das Ergebnis kann, wie bei jeder anderen Veränderung, von allen gesehen werden. Außerdem sind Satellitenbilder oft veraltet und ein Gebäude könnte einfach neu gebaut sein.\n\nDu kannst ein Gebäude löschen, indem du es auswählst und auf das Papierkorbsymbol klickst oder die „Entfernen“-Taste betätigst.\n",
         "relations": "# Relationen\n\nEine Relation ist ein besonderes Element in OpenStreetMap, welches andere Elemente zusammenfasst. Es gibt zwei gängige Arten von Relationen: *Routen* fassen Abschnitte eines Weges zu einer Autobahn (oder zu einem anderen Weg) zusammen. *Multipolygone* fassen mehrere Flächen zu einer komplexen Fläche zusammen, dabei kann auch eine Fläche ein Loch in einer anderen Fläche (wie der Innenhof in einem Gebäude oder die Lichtung im Wald) beschreiben.\n\nDie Elemente in einer Relation werden *Mitglieder* genannt. In der Seitenleiste kannst Du sehen, in welchen Relationen ein Element enthalten ist. Durch Klick auf eine Relation werden alle Elemente der Relation in der Seitenleisten aufgezeigt und auf der Karte markiert.\n\nNormalerweise kümmert sich iD während der Bearbeitung automatisch um die Pflege der Relationen. Wenn Du einen Abschnitt eines Weges löscht um ihn genauer neu zu zeichnen, solltest Du sicherstellen, dass der neuen Abschnitt Mitglied in den gleichen Relationen wie das Original wird.\n\n## Bearbeiten von Relationen\n\nUm ein Element einer Relation hinzuzufügen, wähle das zukünftige Mitglied aus und klicke in der Seitenleiste auf die Schaltfläche \"+\" im Abschnitt \"Alle Relationen\". Du kannst dann die Relation auswählen oder den Namen der Relation eintippen.\n\nUm eine neue Relation erstellen, wähle das erste zukünftige Mitglied aus und klicke in der Seitenleiste auf die Schaltfläche \"+\" im Abschnitt \"Alle Relationen\" und wähle \"Neue Relation …\".\n\nUm ein Element aus einer Relation zu entfernen, wähle das Mitglied aus und klicke auf den Papierkorb neben der Relation aus der Du es entfernen willst.\n\nDu kannst Multipolygone mit Löchern mit dem \"Vereinigen\"-Werkzeug erstellen. Zeichne zwei Bereiche (den äußeren und den inneren Bereich) und klicke auf den äußeren Bereich. Dann halte die Umschalttaste gedrückt und klicke auf den inneren Bereich und klicke dann auf \"Vereinigen\" (+).\n"
     },
     "intro": {
@@ -366,7 +368,7 @@
             "drag": "Die Karte zeigt OpenStreetMap-Daten auf einem Hintergrund. Du kannst sie wie jede andere Karte im Internet durch Ziehen und Scrollen bewegen. **Verschiebe die Karte.**",
             "select": "Kartenobjekte werden auf drei verschiedenen Weisen repräsentiert: als Punkte, Linien oder Flächen. Alle Objekte können durch Klicken ausgewählt werden. **Klicke auf einen Punkt, um ihn auszuwählen.**",
             "header": "Die Kopfzeile zeigt den Typ des Objektes.",
-            "pane": "Wird ein Objekt ausgewählt, wird der Eigenschaftseditor angezeigt. Die Kopfzeile zeigt den Typ des Objektes an. Im Hauptfenster werden die Eigenschaften des Objektes angezeigt, wie etwa sein Name und seine Adresse.\n**Schließe den Eigenschaftseditor mit dem Schließen-Knopf rechts oben.**"
+            "pane": "Wird ein Objekt ausgewählt, wird der Objekteditor angezeigt. Die Kopfzeile zeigt den Typ des Objektes an. Im Hauptfenster werden die Eigenschaften des Objektes angezeigt, wie etwa sein Name und seine Adresse.\n**Schließe den Eigenschaftseditor mit dem Schließen-Knopf rechts oben.**"
         },
         "points": {
             "title": "Punkte",
@@ -374,10 +376,10 @@
             "place": "Punkte können durch Klicken auf die Karte platziert werden. **Platziere einen Punkt auf dem Gebäude.**",
             "search": "Es gibt viele verschiedene Objekte, die ein Punkt repräsentieren kann. Der Punkt, den du gerade hinzugefügt hast, ist ein Café. **Suche nach '{name}'.**",
             "choose": "**Wähle \"Café\" aus der Liste aus.**",
-            "describe": "Der Knoten wurde nun als Café markiert. Mit dem Eigenschaftseditor können wir mehr Informationen über das Objekt angeben. **Füge einen Namen hinzu.**",
-            "close": "Der Eigenschaftseditor kann mithilfe des Schließen-Knopfes beendet werden. **Schließe den Eigenschaftseditor.**",
+            "describe": "Der Knoten wurde nun als Café markiert. Mit dem Objekteditor können wir mehr Informationen über das Objekt angeben. **Füge einen Namen hinzu.**",
+            "close": "Der Objekteditor kann mithilfe des Schließen-Knopfes beendet werden. **Schließe den Objekteditor.**",
             "reselect": "Oftmals existieren Knoten bereits, haben aber falsche oder unvollständige Eigenschaften. Wir können vorhandene Knoten bearbeiten. **Wähle den Punkt aus, den du gerade erstellt hast.**",
-            "fixname": "**Ändere den Namen und schließe den Eigenschaftseditor.**",
+            "fixname": "**Ändere den Namen und schließe den Objekteditor.**",
             "reselect_delete": "Alle Sachen auf der Karte können gelöscht werden. **Klicke auf den von dir erzeugten Punkt.**",
             "delete": "Das Menü um den Knoten herum beinhaltet Werkzeuge, um diesen zu bearbeiten. So kann man ihn unter anderem auch löschen. **Lösche den Knoten.**"
         },
@@ -388,7 +390,7 @@
             "place": "Zeichne eine Fläche, indem du mehr Punkte hinzufügst. Beende die Fläche, indem du auf den Startpunkt klickst. **Zeichne eine Fläche für den Spielplatz.**",
             "search": "**Suche nach '{name}'.**",
             "choose": "**Wähle \"Spielplatz\" aus der Liste aus.**",
-            "describe": "**Füge einen Namen hinzu und schließe den Eigenschaftseditor.**"
+            "describe": "**Füge einen Namen hinzu und schließe den Objekteditor.**"
         },
         "lines": {
             "title": "Linien",
@@ -398,7 +400,7 @@
             "finish": "Linien können vollendet werden, indem man den letzten Punkt erneut anklickt **Beende das Zeichnen der Straße.**",
             "road": "**Wähle \"Straße\" aus der Liste aus.**",
             "residential": "Es gibt verschiedene Straßenarten, die häufigste ist die Wohngebietsstraße. **Wähle die Wohngebietsstraße.**",
-            "describe": "**Benenne die Straße und schließe den Eigenschaftseditor.**",
+            "describe": "**Benenne die Straße und schließe den Objekteditor.**",
             "restart": "Die Straße muss die Flower Street schneiden.",
             "wrong_preset": "Du hast nicht die Wohngebietsstraße ausgewählt. **Klicke hier, um es erneut zu versuchen.**"
         },
@@ -481,6 +483,10 @@
                 }
             },
             "access_simple": {
+                "label": "Zugang",
+                "placeholder": "Ja"
+            },
+            "access_toilets": {
                 "label": "Zugang"
             },
             "address": {
@@ -687,10 +693,10 @@
                 "placeholder": "1-18"
             },
             "highway": {
-                "label": "Art"
+                "label": "Typ"
             },
             "historic": {
-                "label": "Art"
+                "label": "Typ"
             },
             "hoops": {
                 "label": "Basketball",
@@ -711,6 +717,8 @@
             "internet_access": {
                 "label": "Internetzugang",
                 "options": {
+                    "yes": "Ja",
+                    "no": "Nein",
                     "wlan": "Wifi",
                     "wired": "kabelgebunden",
                     "terminal": "Terminal"
@@ -720,7 +728,7 @@
                 "label": "Typ"
             },
             "landuse": {
-                "label": "Art"
+                "label": "Typ"
             },
             "lanes": {
                 "label": "Fahrspuren",
@@ -730,7 +738,7 @@
                 "label": "Ebene"
             },
             "leisure": {
-                "label": "Art"
+                "label": "Typ"
             },
             "length": {
                 "label": "Länge (Meter)"
@@ -746,7 +754,7 @@
                 "label": "Position"
             },
             "man_made": {
-                "label": "Art"
+                "label": "Typ"
             },
             "maxspeed": {
                 "label": "Höchstgeschwindigkeit",
@@ -771,13 +779,17 @@
             "oneway": {
                 "label": "Einbahnstraße",
                 "options": {
-                    "undefined": "Vermutlich Nein"
+                    "undefined": "Vermutlich Nein",
+                    "yes": "Ja",
+                    "no": "Nein"
                 }
             },
             "oneway_yes": {
                 "label": "Einbahnstraße",
                 "options": {
-                    "undefined": "Vermutlich Ja"
+                    "undefined": "Vermutlich Ja",
+                    "yes": "Ja",
+                    "no": "Nein"
                 }
             },
             "opening_hours": {
@@ -810,7 +822,7 @@
                 "label": "Typ"
             },
             "place": {
-                "label": "Art"
+                "label": "Typ"
             },
             "population": {
                 "label": "Bevölkerung"
@@ -819,7 +831,7 @@
                 "label": "Typ"
             },
             "railway": {
-                "label": "Art"
+                "label": "Typ"
             },
             "recycling/cans": {
                 "label": "Dosen"
@@ -1058,7 +1070,7 @@
                 "terms": "Flughafen,Terminal,Flughafenterminal,Abfertigungsgebäude,Abfertigungshalle"
             },
             "amenity": {
-                "name": "Einrichtungen",
+                "name": "Einrichtung",
                 "terms": "Einrichtung, Nützlichkeit"
             },
             "amenity/arts_centre": {
@@ -1218,7 +1230,7 @@
                 "terms": "Apotheke"
             },
             "amenity/place_of_worship": {
-                "name": "Gebetsort",
+                "name": "Andachtsstätte",
                 "terms": "Abtei,Basilika,geweihter Ort,Kathedrale,Altarraum,Kantorei,Kapelle,Kirche,Kirchgemeinde,Gotteshaus,Gebetshaus,Dom,Moschee,Oratorium,Heiligtum,Sacellum,Schrein,Synagoge,Tabernakel,Tempel"
             },
             "amenity/place_of_worship/buddhist": {
@@ -1246,7 +1258,7 @@
                 "terms": "Briefkasten,Postkasten,Postbriefkasten"
             },
             "amenity/post_office": {
-                "name": "Poststelle",
+                "name": "Post",
                 "terms": "Post, Postamt"
             },
             "amenity/pub": {
@@ -1319,7 +1331,7 @@
             },
             "amenity/university": {
                 "name": "Universität",
-                "terms": "Hochschule"
+                "terms": "Universität, Hochschule"
             },
             "amenity/vending_machine": {
                 "name": "Automat",
@@ -1835,7 +1847,7 @@
             },
             "highway/motorway_link": {
                 "name": "Autobahnanschluss",
-                "terms": "Auffahrt"
+                "terms": "Autobahnanschluss, Autobahnauffahrt, Autobahnabfahrt, Auffahrt, Abfahrt"
             },
             "highway/path": {
                 "name": "Pfad",
@@ -1851,7 +1863,7 @@
             },
             "highway/primary_link": {
                 "name": "Bundesstraßenanschluss",
-                "terms": "Auffahrt"
+                "terms": "Bundesstraßenanschluss, Bundesstraßenauffahrt, Bundesstraßenabfahrt, Auffahrt, Abfahrt"
             },
             "highway/residential": {
                 "name": "Wohngebietsstraße",
@@ -1871,7 +1883,7 @@
             },
             "highway/secondary_link": {
                 "name": "Landesstraßenanschluss",
-                "terms": "Auffahrt"
+                "terms": "Landesstraßenanschluss, Landesstraßenauffahrt, Landesstraßenabfahrt, Auffahrt, Abfahrt"
             },
             "highway/service": {
                 "name": "Erschließungsweg",
@@ -1918,7 +1930,7 @@
                 "terms": "Drittrangige Straße"
             },
             "highway/tertiary_link": {
-                "name": "Kreisstraßenanschluss",
+                "name": "Kreisstraßenanschluss, Kreisstraßenauffahrt, Kreisstraßenabfahrt, Auffahrt, Abfahrt",
                 "terms": "Auffahrt"
             },
             "highway/track": {
@@ -1935,7 +1947,7 @@
             },
             "highway/trunk_link": {
                 "name": "Schnellstraßenanschluss",
-                "terms": "Auffahrt"
+                "terms": "Schnellstraßenanschluss, Schnellstraßenauffahrt, Schnellstraßenabfahrt, Auffahrt, Abfahrt"
             },
             "highway/turning_circle": {
                 "name": "Wendestelle",
@@ -2010,8 +2022,8 @@
                 "terms": "Baugebiet, Baustelle, Großbaustelle"
             },
             "landuse/farm": {
-                "name": "Bauernhof",
-                "terms": "Bauernhof, Farm"
+                "name": " Landwirtschaftliche Fläche",
+                "terms": "Acker, Feld, Plantage, Tierhaltung"
             },
             "landuse/farmland": {
                 "name": "Acker",
@@ -2270,7 +2282,7 @@
                 "terms": "Gletscher"
             },
             "natural/grassland": {
-                "name": "Grasland",
+                "name": "Wiese",
                 "terms": "Weide, Wiese, Grünland"
             },
             "natural/heath": {
@@ -2547,7 +2559,7 @@
             },
             "railway/tram": {
                 "name": "Straßenbahn",
-                "terms": "Straßenbahn"
+                "terms": "Straßenbahn, Bim, Tramway, Stadtbahn"
             },
             "relation": {
                 "name": "Relation",
@@ -2682,7 +2694,7 @@
                 "terms": "Geschenkeladen, Geschenkehandlung"
             },
             "shop/greengrocer": {
-                "name": "Obst- u. Gemüsehändler",
+                "name": "Gemüsehändler",
                 "terms": "Obsthandlung, Gemüsehandlung, Obst- und Gemüsehandlung"
             },
             "shop/hairdresser": {
@@ -2826,7 +2838,7 @@
                 "terms": "Campingplatz, Zeltplatz"
             },
             "tourism/caravan_site": {
-                "name": "Wohnmobilstellplatz",
+                "name": "Campingplatz",
                 "terms": "Wohnwagenpark, Campingplatz"
             },
             "tourism/chalet": {
