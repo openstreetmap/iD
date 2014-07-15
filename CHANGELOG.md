@@ -1,3 +1,9 @@
+## 1.5.2
+
+* Fixed Chrome/Windows selection bug (#2151)
+* Don't automatically tag motorways, etc. as oneway=yes
+* Disable Move and Rotate operations if area < 80% contained in the viewport
+
 ## 1.5.1
 
 * Fix mixed content errors on https osm.org (#2281)
