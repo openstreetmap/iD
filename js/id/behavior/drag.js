@@ -91,6 +91,9 @@ iD.behavior.drag = function() {
             var p = point(),
                 dx = p[0] - origin_[0],
                 dy = p[1] - origin_[1];
+            
+            if (dx === 0 && dy === 0)
+                return;
 
             if (!started) {
                 started = true;
