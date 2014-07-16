@@ -1,6 +1,6 @@
 iD.ui.Scale = function(context) {
     var projection = context.projection,
-        imperial = (iD.detect().locale === 'en-us'),
+        imperial = (iD.detect().locale.toLowerCase() === 'en-us'),
         maxLength = 180,
         tickHeight = 8;
 
