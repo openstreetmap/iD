@@ -18,6 +18,7 @@ describe("iD.svg.Midpoints", function () {
             extent = iD.geo.Extent([0, 0], [100, 100]);
 
         context.selectedIDs = function() { return [line.id]; };
+        context.entity = function(id) { return graph.entity(id); };
         surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
 
         expect(surface.select('.midpoint').datum().loc).to.eql([25, 0]);
@@ -57,6 +58,7 @@ describe("iD.svg.Midpoints", function () {
             extent = iD.geo.Extent([0, 0], [100, 100]);
 
         context.selectedIDs = function() { return [line.id]; };
+        context.entity = function(id) { return graph.entity(id); };
         surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
 
         expect(surface.select('.midpoint').datum().loc).to.eql([100, 0]);

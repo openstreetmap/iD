@@ -75,19 +75,25 @@ iD.svg.Midpoints = function(projection, context) {
             .insert('g', ':first-child')
             .attr('class', 'midpoint');
 
-        group.append('circle')
-            .attr('r', 7)
+        group.append('polygon')
+            .attr('points', '-6,8 8,0 -6,-8')
             .attr('class', 'shadow');
 
-        group.append('circle')
-            .attr('r', 3)
+        group.append('polygon')
+            .attr('points', '-3,4 4,0 -3,-4')
             .attr('class', 'fill');
 
-        groups.attr('transform', iD.svg.PointTransform(projection));
+        groups.attr('transform', function(d) {
+            var translate = iD.svg.PointTransform(projection),
+                a = context.entity(d.edge[0]),
+                b = context.entity(d.edge[1]),
+                angle = iD.geo.angle(a, b, projection) * (180 / Math.PI);
+            return translate(d) + ' rotate(' + angle + ')';
+        });
 
         // Propagate data bindings.
-        groups.select('circle.shadow');
-        groups.select('circle.fill');
+        groups.select('polygon.shadow');
+        groups.select('polygon.fill');
 
         groups.exit()
             .remove();
