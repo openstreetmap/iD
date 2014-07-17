@@ -76,18 +76,18 @@ iD.svg.Midpoints = function(projection, context) {
             .attr('class', 'midpoint');
 
         group.append('polygon')
-            .attr('points', '-6,8 8,0 -6,-8')
+            .attr('points', '-6,8 10,0 -6,-8')
             .attr('class', 'shadow');
 
         group.append('polygon')
-            .attr('points', '-3,4 4,0 -3,-4')
+            .attr('points', '-3,4 5,0 -3,-4')
             .attr('class', 'fill');
 
         groups.attr('transform', function(d) {
             var translate = iD.svg.PointTransform(projection),
                 a = context.entity(d.edge[0]),
                 b = context.entity(d.edge[1]),
-                angle = iD.geo.angle(a, b, projection) * (180 / Math.PI);
+                angle = Math.round(iD.geo.angle(a, b, projection) * (180 / Math.PI));
             return translate(d) + ' rotate(' + angle + ')';
         });
 
