@@ -5,20 +5,6 @@ iD.ui.preset.typeCombo = function(field) {
         strings = {},
         input;
 
-    if (optstrings) {
-        _.each(optstrings, function(v, k) {
-            strings[k] = field.t('options.' + k, { 'default': v });
-        });
-    } else {
-        iD.taginfo().values({key: field.key}, function(err, data) {
-            if (!err) {
-                _.each(_.pluck(data, 'value'), function(k) {
-                    strings[k] = k.replace(/_+/g, ' ');
-                });
-            }
-        });
-    }
-
     function combo(selection) {
         var combobox = d3.combobox();
 
@@ -37,22 +23,40 @@ iD.ui.preset.typeCombo = function(field) {
             .on('change', change)
             .on('blur', change)
             .each(function() {
-                var keys = _.keys(strings),
-                    strs = [],
-                    placeholders;
-
-                combobox.data(keys.map(function(k) {
-                    var s = strings[k],
-                        o = {};
-                    o.title = o.value = s;
-                    if (s.length < 20) { strs.push(s); }
-                    return o;
-                }));
-
-                placeholders = strs.length ? strs : keys;
-                input.attr('placeholder', field.placeholder() ||
-                    (placeholders.slice(0, 3).join(', ') + '...'));
+                if (optstrings) {
+                    _.each(optstrings, function(v, k) {
+                        strings[k] = field.t('options.' + k, { 'default': v });
+                    });
+                    stringsLoaded();
+                } else {
+                    iD.taginfo().values({key: field.key}, function(err, data) {
+                        if (!err) {
+                            _.each(_.pluck(data, 'value'), function(k) {
+                                strings[k] = k.replace(/_+/g, ' ');
+                            });
+                            stringsLoaded();
+                        }
+                    });
+                }
             });
+
+        function stringsLoaded() {
+            var keys = _.keys(strings),
+                strs = [],
+                placeholders;
+
+            combobox.data(keys.map(function(k) {
+                var s = strings[k],
+                    o = {};
+                o.title = o.value = s;
+                if (s.length < 20) { strs.push(s); }
+                return o;
+            }));
+
+            placeholders = strs.length ? strs : keys;
+            input.attr('placeholder', field.placeholder() ||
+                (placeholders.slice(0, 3).join(', ') + '...'));
+        }
     }
 
     function change() {
