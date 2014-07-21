@@ -44,8 +44,12 @@ d3.combobox = function() {
                         // on mousedown
                         d3.event.stopPropagation();
                         d3.event.preventDefault();
-                        input.node().focus();
-                        fetch('', render);
+                        if (!shown) {
+                            input.node().focus();
+                            fetch('', render);
+                        } else {
+                            hide();
+                        }
                     });
             });
 
