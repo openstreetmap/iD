@@ -1,10 +1,12 @@
 {
     "key": "aerialway:summer:access",
     "type": "combo",
-    "options": [
-        "entry",
-        "exit",
-        "both"
-    ],
-    "label": "Access (summer)"
+    "label": "Access (summer)",
+    "strings": {
+        "options": {
+            "entry": "Entry",
+            "exit": "Exit",
+            "both": "Both"
+        }
+    }
 }

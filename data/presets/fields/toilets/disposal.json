@@ -1,5 +1,13 @@
 {
     "key": "toilets:disposal",
     "type": "combo",
-    "label": "Disposal"
+    "label": "Disposal",
+    "strings": {
+        "options": {
+            "flush": "Flush",
+            "pitlatrine": "Pit/Latrine",
+            "chemical": "Chemical",
+            "bucket": "Bucket"
+        }
+    }
 }

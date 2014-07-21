@@ -1,10 +1,12 @@
 {
     "key": "aerialway:access",
     "type": "combo",
-    "options": [
-        "entry",
-        "exit",
-        "both"
-    ],
-    "label": "Access"
+    "label": "Access",
+    "strings": {
+        "options": {
+            "entry": "Entry",
+            "exit": "Exit",
+            "both": "Both"
+        }
+    }
 }

@@ -4324,6 +4324,7 @@
         "icon": "highway-track",
         "fields": [
             "tracktype",
+            "smoothness",
             "oneway",
             "maxspeed",
             "structure",

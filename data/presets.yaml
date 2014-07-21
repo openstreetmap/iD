@@ -77,6 +77,10 @@ en:
         label: Type
       aerialway/access:
         label: Access
+        options:
+          entry: Entry
+          exit: Exit
+          both: Both
       aerialway/bubble:
         label: Bubble
       aerialway/capacity:
@@ -92,6 +96,10 @@ en:
         placeholder: "2, 4, 8..."
       aerialway/summer/access:
         label: Access (summer)
+        options:
+          entry: Entry
+          exit: Exit
+          both: Both
       aeroway:
         label: Type
       amenity:
@@ -119,6 +127,23 @@ en:
         placeholder: "50, 100, 200..."
       cardinal_direction:
         label: Direction
+        options:
+          "N": North
+          E: East
+          S: South
+          W: West
+          NE: Northeast
+          SE: Southeast
+          SW: Southwest
+          NW: Northwest
+          NNE: North-northeast
+          ENE: East-northeast
+          ESE: East-southeast
+          SSE: South-southeast
+          SSW: South-southwest
+          WSW: West-southwest
+          WNW: West-northwest
+          NNW: North-northwest
       clock_direction:
         label: Direction
         options:
@@ -146,6 +171,12 @@ en:
         label: Description
       electrified:
         label: Electrification
+        placeholder: "Contact Line, Electrified Rail..."
+        options:
+          contact_line: Contact Line
+          rail: Electrified Rail
+          "yes": Yes (unspecified)
+          "no": "No"
       elevation:
         label: Elevation
       emergency:
@@ -161,6 +192,11 @@ en:
         label: Fee
       fire_hydrant/type:
         label: Type
+        options:
+          pillar: Pillar/Aboveground
+          underground: Underground
+          wall: Wall
+          pond: Pond
       fixme:
         label: Fix Me
       fuel:
@@ -279,15 +315,49 @@ en:
         label: Park and Ride
       parking:
         label: Type
+        options:
+          surface: Surface
+          multi-storey: Multilevel
+          underground: Underground
+          sheds: Sheds
+          carports: Carports
+          garage_boxes: Garage Boxes
+          lane: Roadside Lane
       phone:
         label: Phone
         placeholder: +31 42 123 4567
       piste/difficulty:
         label: Difficulty
+        placeholder: "Easy, Intermediate, Advanced..."
+        options:
+          novice: Novice (instructional)
+          easy: Easy (green circle)
+          intermediate: Intermediate (blue square)
+          advanced: Advanced (black diamond)
+          expert: Expert (double black diamond)
+          freeride: Freeride (off-piste)
+          extreme: Extreme (climing equipment required)
       piste/grooming:
         label: Grooming
+        options:
+          classic: Classic
+          mogul: Mogul
+          backcountry: Backcountry
+          classic+skating: Classic and Skating
+          scooter: Scooter/Snowmobile
+          skating: Skating
       piste/type:
         label: Type
+        options:
+          downhill: Downhill
+          nordic: Nordic
+          skitour: Skitour
+          sled: Sled
+          hike: Hike
+          sleigh: Sleigh
+          ice_skate: Ice Skate
+          snow_park: Snow Park
+          playground: Playground
       place:
         label: Type
       population:
@@ -328,20 +398,62 @@ en:
         label: Type
       sac_scale:
         label: Path Difficulty
+        placeholder: "Mountain Hiking, Alpine Hiking..."
+        options:
+          hiking: "T1: Hiking"
+          mountain_hiking: "T2: Mountain Hiking"
+          demanding_mountain_hiking: "T3: Demanding Mountain Hiking"
+          alpine_hiking: "T4: Alpine Hiking"
+          demanding_alpine_hiking: "T5: Demanding Alpine Hiking"
+          difficult_alpine_hiking: "T6: Difficult Alpine Hiking"
       seasonal:
         label: Seasonal
       service:
         label: Type
+        options:
+          parking_aisle: Parking Aisle
+          driveway: Driveway
+          alley: Alley
+          emergency_access: Emergency Access
+          drive-through: Drive-through
       shelter:
         label: Shelter
       shelter_type:
         label: Type
+        options:
+          public_transport: Public Transport
+          picnic_shelter: Picnic Shelter
+          weather_shelter: Weather Shelter
+          lean_to: Lean-to
+          basic_hut: Basic Hut
+          field_shelter: Field Shelter
+          rock_shelter: Rock Shelter
       shop:
         label: Type
       sloped_curb:
         label: Sloped Curb
       smoking:
         label: Smoking
+        placeholder: "No, Separated, Yes..."
+        options:
+          "no": No smoking anywhere
+          separated: "In smoking areas, not physically isolated"
+          isolated: "In smoking areas, physically isolated"
+          outside: Allowed outside
+          "yes": Allowed everywhere
+          dedicated: "Dedicated to smokers (e.g. smokers' club)"
+      smoothness:
+        label: Smoothness
+        placeholder: "Thin Rollers, Wheels, Off-Road..."
+        options:
+          excellent: "Thin Rollers: rollerblade, skateboard"
+          good: "Thin Wheels: racing bike"
+          intermediate: "Wheels: city bike, wheelchair, scooter"
+          bad: "Robust Wheels: trekking bike, car, rickshaw"
+          very_bad: "High Clearance: light duty off-road vehicle"
+          horrible: "Off-Road: heavy duty off-road vehicle"
+          very_horrible: "Specialized off-road: tractor, ATV"
+          impassible: Impassible / No wheeled vehicle
       social_facility_for:
         label: People served
         placeholder: "Homeless, Disabled, Child, etc"
@@ -351,6 +463,12 @@ en:
         label: Sport
       sport_ice:
         label: Sport
+        options:
+          skating: Ice Skating
+          hockey: Ice Hockey
+          multi: Multi
+          curling: Curling
+          ice_stock: Ice Stock
       structure:
         label: Structure
         placeholder: Unknown
@@ -362,6 +480,9 @@ en:
           ford: Ford
       studio_type:
         label: Type
+        options:
+          audio: Audio
+          video: Video
       supervised:
         label: Supervised
       surface:
@@ -370,16 +491,40 @@ en:
         label: Tactile Paving
       toilets/disposal:
         label: Disposal
+        options:
+          flush: Flush
+          pitlatrine: Pit/Latrine
+          chemical: Chemical
+          bucket: Bucket
       tourism:
         label: Type
       towertype:
         label: Tower type
       tracktype:
         label: Type
+        placeholder: "Solid, Mostly Solid, Soft..."
+        options:
+          grade1: "Solid: paved or heavily compacted hardcore surface"
+          grade2: "Mostly Solid: gravel/rock with some soft material mixed in"
+          grade3: Even mixture of hard and soft materials
+          grade4: "Mostly Soft: soil/sand/grass with some hard material mixed in"
+          grade5: "Soft: soil/sand/grass"
       trail_visibility:
         label: Trail Visibility
+        placeholder: "Excellent, Good, Bad..."
+        options:
+          excellent: "Excellent: unambiguous path or markers everywhere"
+          good: "Good: markers visible, sometimes require searching"
+          intermediate: "Intermediate: few markers, path mostly visible"
+          bad: "Bad: no markers, path sometimes invisible/pathless"
+          horrible: "Horrible: often pathless, some orientation skills required"
+          "no": "No: pathless, excellent orientation skills required"
       tree_type:
         label: Type
+        options:
+          broad_leaved: Broad Leaved
+          conifer: Conifer
+          palm: Palm
       trees:
         label: Trees
       tunnel:

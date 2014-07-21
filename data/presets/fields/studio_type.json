@@ -1,9 +1,11 @@
 {
     "key": "type",
     "type": "combo",
-    "options": [
-        "audio",
-        "video"
-    ],
-    "label": "Type"
+    "label": "Type",
+    "strings": {
+        "options": {
+            "audio": "Audio",
+            "video": "Video"
+        }
+    }
 }

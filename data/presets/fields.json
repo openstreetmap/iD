@@ -118,12 +118,14 @@
     "aerialway/access": {
         "key": "aerialway:access",
         "type": "combo",
-        "options": [
-            "entry",
-            "exit",
-            "both"
-        ],
-        "label": "Access"
+        "label": "Access",
+        "strings": {
+            "options": {
+                "entry": "Entry",
+                "exit": "Exit",
+                "both": "Both"
+            }
+        }
     },
     "aerialway/bubble": {
         "key": "aerialway:bubble",
@@ -156,12 +158,14 @@
     "aerialway/summer/access": {
         "key": "aerialway:summer:access",
         "type": "combo",
-        "options": [
-            "entry",
-            "exit",
-            "both"
-        ],
-        "label": "Access (summer)"
+        "label": "Access (summer)",
+        "strings": {
+            "options": {
+                "entry": "Entry",
+                "exit": "Exit",
+                "both": "Both"
+            }
+        }
     },
     "aeroway": {
         "key": "aeroway",
@@ -229,32 +233,31 @@
     "cardinal_direction": {
         "key": "direction",
         "type": "combo",
-        "options": [
-            "N",
-            "E",
-            "S",
-            "W",
-            "NE",
-            "SE",
-            "SW",
-            "NNE",
-            "ENE",
-            "ESE",
-            "SSE",
-            "SSW",
-            "WSW",
-            "WNW",
-            "NNW"
-        ],
-        "label": "Direction"
+        "label": "Direction",
+        "strings": {
+            "options": {
+                "N": "North",
+                "E": "East",
+                "S": "South",
+                "W": "West",
+                "NE": "Northeast",
+                "SE": "Southeast",
+                "SW": "Southwest",
+                "NW": "Northwest",
+                "NNE": "North-northeast",
+                "ENE": "East-northeast",
+                "ESE": "East-southeast",
+                "SSE": "South-southeast",
+                "SSW": "South-southwest",
+                "WSW": "West-southwest",
+                "WNW": "West-northwest",
+                "NNW": "North-northwest"
+            }
+        }
     },
     "clock_direction": {
         "key": "direction",
         "type": "combo",
-        "options": [
-            "clockwise",
-            "anticlockwise"
-        ],
         "label": "Direction",
         "strings": {
             "options": {
@@ -318,12 +321,15 @@
         "key": "electrified",
         "type": "combo",
         "label": "Electrification",
-        "options": [
-            "contact_line",
-            "rail",
-            "yes",
-            "no"
-        ]
+        "placeholder": "Contact Line, Electrified Rail...",
+        "strings": {
+            "options": {
+                "contact_line": "Contact Line",
+                "rail": "Electrified Rail",
+                "yes": "Yes (unspecified)",
+                "no": "No"
+            }
+        }
     },
     "elevation": {
         "key": "ele",
@@ -361,13 +367,15 @@
     "fire_hydrant/type": {
         "key": "fire_hydrant:type",
         "type": "combo",
-        "options": [
-            "pillar",
-            "pond",
-            "underground",
-            "wall"
-        ],
-        "label": "Type"
+        "label": "Type",
+        "strings": {
+            "options": {
+                "pillar": "Pillar/Aboveground",
+                "underground": "Underground",
+                "wall": "Wall",
+                "pond": "Pond"
+            }
+        }
     },
     "fixme": {
         "key": "fixme",
@@ -495,13 +503,6 @@
     "internet_access": {
         "key": "internet_access",
         "type": "combo",
-        "options": [
-            "yes",
-            "no",
-            "wlan",
-            "wired",
-            "terminal"
-        ],
         "label": "Internet Access",
         "strings": {
             "options": {
@@ -647,16 +648,18 @@
     "parking": {
         "key": "parking",
         "type": "combo",
-        "options": [
-            "surface",
-            "multi-storey",
-            "underground",
-            "sheds",
-            "carports",
-            "garage_boxes",
-            "lane"
-        ],
-        "label": "Type"
+        "label": "Type",
+        "strings": {
+            "options": {
+                "surface": "Surface",
+                "multi-storey": "Multilevel",
+                "underground": "Underground",
+                "sheds": "Sheds",
+                "carports": "Carports",
+                "garage_boxes": "Garage Boxes",
+                "lane": "Roadside Lane"
+            }
+        }
     },
     "phone": {
         "key": "phone",
@@ -669,17 +672,52 @@
     "piste/difficulty": {
         "key": "piste:difficulty",
         "type": "combo",
-        "label": "Difficulty"
+        "label": "Difficulty",
+        "placeholder": "Easy, Intermediate, Advanced...",
+        "strings": {
+            "options": {
+                "novice": "Novice (instructional)",
+                "easy": "Easy (green circle)",
+                "intermediate": "Intermediate (blue square)",
+                "advanced": "Advanced (black diamond)",
+                "expert": "Expert (double black diamond)",
+                "freeride": "Freeride (off-piste)",
+                "extreme": "Extreme (climing equipment required)"
+            }
+        }
     },
     "piste/grooming": {
         "key": "piste:grooming",
         "type": "combo",
-        "label": "Grooming"
+        "label": "Grooming",
+        "strings": {
+            "options": {
+                "classic": "Classic",
+                "mogul": "Mogul",
+                "backcountry": "Backcountry",
+                "classic+skating": "Classic and Skating",
+                "scooter": "Scooter/Snowmobile",
+                "skating": "Skating"
+            }
+        }
     },
     "piste/type": {
         "key": "piste:type",
         "type": "typeCombo",
-        "label": "Type"
+        "label": "Type",
+        "strings": {
+            "options": {
+                "downhill": "Downhill",
+                "nordic": "Nordic",
+                "skitour": "Skitour",
+                "sled": "Sled",
+                "hike": "Hike",
+                "sleigh": "Sleigh",
+                "ice_skate": "Ice Skate",
+                "snow_park": "Snow Park",
+                "playground": "Playground"
+            }
+        }
     },
     "place": {
         "key": "place",
@@ -734,15 +772,6 @@
     "religion": {
         "key": "religion",
         "type": "combo",
-        "options": [
-            "christian",
-            "muslim",
-            "buddhist",
-            "jewish",
-            "hindu",
-            "shinto",
-            "taoist"
-        ],
         "label": "Religion",
         "strings": {
             "options": {
@@ -783,7 +812,18 @@
     "sac_scale": {
         "key": "sac_scale",
         "type": "combo",
-        "label": "Path Difficulty"
+        "label": "Path Difficulty",
+        "placeholder": "Mountain Hiking, Alpine Hiking...",
+        "strings": {
+            "options": {
+                "hiking": "T1: Hiking",
+                "mountain_hiking": "T2: Mountain Hiking",
+                "demanding_mountain_hiking": "T3: Demanding Mountain Hiking",
+                "alpine_hiking": "T4: Alpine Hiking",
+                "demanding_alpine_hiking": "T5: Demanding Alpine Hiking",
+                "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"
+            }
+        }
     },
     "seasonal": {
         "key": "seasonal",
@@ -793,14 +833,16 @@
     "service": {
         "key": "service",
         "type": "combo",
-        "options": [
-            "parking_aisle",
-            "driveway",
-            "alley",
-            "drive-through",
-            "emergency_access"
-        ],
-        "label": "Type"
+        "label": "Type",
+        "strings": {
+            "options": {
+                "parking_aisle": "Parking Aisle",
+                "driveway": "Driveway",
+                "alley": "Alley",
+                "emergency_access": "Emergency Access",
+                "drive-through": "Drive-through"
+            }
+        }
     },
     "shelter": {
         "key": "shelter",
@@ -810,16 +852,18 @@
     "shelter_type": {
         "key": "shelter_type",
         "type": "combo",
-        "options": [
-            "public_transport",
-            "picnic_shelter",
-            "weather_shelter",
-            "lean_to",
-            "basic_hut",
-            "field_shelter",
-            "rock_shelter"
-        ],
-        "label": "Type"
+        "label": "Type",
+        "strings": {
+            "options": {
+                "public_transport": "Public Transport",
+                "picnic_shelter": "Picnic Shelter",
+                "weather_shelter": "Weather Shelter",
+                "lean_to": "Lean-to",
+                "basic_hut": "Basic Hut",
+                "field_shelter": "Field Shelter",
+                "rock_shelter": "Rock Shelter"
+            }
+        }
     },
     "shop": {
         "key": "shop",
@@ -834,13 +878,36 @@
     "smoking": {
         "key": "smoking",
         "type": "combo",
-        "options": [
-            "no",
-            "outside",
-            "separated",
-            "yes"
-        ],
-        "label": "Smoking"
+        "label": "Smoking",
+        "placeholder": "No, Separated, Yes...",
+        "strings": {
+            "options": {
+                "no": "No smoking anywhere",
+                "separated": "In smoking areas, not physically isolated",
+                "isolated": "In smoking areas, physically isolated",
+                "outside": "Allowed outside",
+                "yes": "Allowed everywhere",
+                "dedicated": "Dedicated to smokers (e.g. smokers' club)"
+            }
+        }
+    },
+    "smoothness": {
+        "key": "smoothness",
+        "type": "combo",
+        "label": "Smoothness",
+        "placeholder": "Thin Rollers, Wheels, Off-Road...",
+        "strings": {
+            "options": {
+                "excellent": "Thin Rollers: rollerblade, skateboard",
+                "good": "Thin Wheels: racing bike",
+                "intermediate": "Wheels: city bike, wheelchair, scooter",
+                "bad": "Robust Wheels: trekking bike, car, rickshaw",
+                "very_bad": "High Clearance: light duty off-road vehicle",
+                "horrible": "Off-Road: heavy duty off-road vehicle",
+                "very_horrible": "Specialized off-road: tractor, ATV",
+                "impassible": "Impassible / No wheeled vehicle"
+            }
+        }
     },
     "social_facility_for": {
         "key": "social_facility:for",
@@ -879,14 +946,16 @@
     "sport_ice": {
         "key": "sport",
         "type": "combo",
-        "options": [
-            "skating",
-            "hockey",
-            "multi",
-            "curling",
-            "ice_stock"
-        ],
-        "label": "Sport"
+        "label": "Sport",
+        "strings": {
+            "options": {
+                "skating": "Ice Skating",
+                "hockey": "Ice Hockey",
+                "multi": "Multi",
+                "curling": "Curling",
+                "ice_stock": "Ice Stock"
+            }
+        }
     },
     "structure": {
         "type": "radio",
@@ -912,11 +981,13 @@
     "studio_type": {
         "key": "type",
         "type": "combo",
-        "options": [
-            "audio",
-            "video"
-        ],
-        "label": "Type"
+        "label": "Type",
+        "strings": {
+            "options": {
+                "audio": "Audio",
+                "video": "Video"
+            }
+        }
     },
     "supervised": {
         "key": "supervised",
@@ -936,7 +1007,15 @@
     "toilets/disposal": {
         "key": "toilets:disposal",
         "type": "combo",
-        "label": "Disposal"
+        "label": "Disposal",
+        "strings": {
+            "options": {
+                "flush": "Flush",
+                "pitlatrine": "Pit/Latrine",
+                "chemical": "Chemical",
+                "bucket": "Bucket"
+            }
+        }
     },
     "tourism": {
         "key": "tourism",
@@ -951,22 +1030,45 @@
     "tracktype": {
         "key": "tracktype",
         "type": "combo",
-        "label": "Type"
+        "label": "Type",
+        "placeholder": "Solid, Mostly Solid, Soft...",
+        "strings": {
+            "options": {
+                "grade1": "Solid: paved or heavily compacted hardcore surface",
+                "grade2": "Mostly Solid: gravel/rock with some soft material mixed in",
+                "grade3": "Even mixture of hard and soft materials",
+                "grade4": "Mostly Soft: soil/sand/grass with some hard material mixed in",
+                "grade5": "Soft: soil/sand/grass"
+            }
+        }
     },
     "trail_visibility": {
         "key": "trail_visibility",
         "type": "combo",
-        "label": "Trail Visibility"
+        "label": "Trail Visibility",
+        "placeholder": "Excellent, Good, Bad...",
+        "strings": {
+            "options": {
+                "excellent": "Excellent: unambiguous path or markers everywhere",
+                "good": "Good: markers visible, sometimes require searching",
+                "intermediate": "Intermediate: few markers, path mostly visible",
+                "bad": "Bad: no markers, path sometimes invisible/pathless",
+                "horrible": "Horrible: often pathless, some orientation skills required",
+                "no": "No: pathless, excellent orientation skills required"
+            }
+        }
     },
     "tree_type": {
         "key": "type",
         "type": "combo",
-        "options": [
-            "broad_leaved",
-            "conifer",
-            "palm"
-        ],
-        "label": "Type"
+        "label": "Type",
+        "strings": {
+            "options": {
+                "broad_leaved": "Broad Leaved",
+                "conifer": "Conifer",
+                "palm": "Palm"
+            }
+        }
     },
     "trees": {
         "key": "trees",

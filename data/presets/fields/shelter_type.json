@@ -1,14 +1,17 @@
 {
     "key": "shelter_type",
     "type": "combo",
-    "options": [
-        "public_transport",
-        "picnic_shelter",
-        "weather_shelter",
-        "lean_to",
-        "basic_hut",
-        "field_shelter",
-        "rock_shelter"
-    ],
-    "label": "Type"
+    "label": "Type",
+    "strings": {
+        "options": {
+            "public_transport": "Public Transport",
+            "picnic_shelter": "Picnic Shelter",
+            "weather_shelter": "Weather Shelter",
+            "lean_to": "Lean-to",
+            "basic_hut": "Basic Hut",
+            "field_shelter": "Field Shelter",
+            "rock_shelter": "Rock Shelter"
+        }
+    }
+
 }

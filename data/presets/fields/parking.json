@@ -1,14 +1,16 @@
 {
     "key": "parking",
     "type": "combo",
-    "options": [
-        "surface",
-        "multi-storey",
-        "underground",
-        "sheds",
-        "carports",
-        "garage_boxes",
-        "lane"
-    ],
-    "label": "Type"
+    "label": "Type",
+    "strings": {
+        "options": {
+            "surface": "Surface",
+            "multi-storey": "Multilevel",
+            "underground": "Underground",
+            "sheds": "Sheds",
+            "carports": "Carports",
+            "garage_boxes": "Garage Boxes",
+            "lane": "Roadside Lane"
+        }
+    }
 }

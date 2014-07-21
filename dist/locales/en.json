@@ -518,7 +518,12 @@
                 "label": "Type"
             },
             "aerialway/access": {
-                "label": "Access"
+                "label": "Access",
+                "options": {
+                    "entry": "Entry",
+                    "exit": "Exit",
+                    "both": "Both"
+                }
             },
             "aerialway/bubble": {
                 "label": "Bubble"
@@ -539,7 +544,12 @@
                 "placeholder": "2, 4, 8..."
             },
             "aerialway/summer/access": {
-                "label": "Access (summer)"
+                "label": "Access (summer)",
+                "options": {
+                    "entry": "Entry",
+                    "exit": "Exit",
+                    "both": "Both"
+                }
             },
             "aeroway": {
                 "label": "Type"
@@ -579,7 +589,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Direction"
+                "label": "Direction",
+                "options": {
+                    "N": "North",
+                    "E": "East",
+                    "S": "South",
+                    "W": "West",
+                    "NE": "Northeast",
+                    "SE": "Southeast",
+                    "SW": "Southwest",
+                    "NW": "Northwest",
+                    "NNE": "North-northeast",
+                    "ENE": "East-northeast",
+                    "ESE": "East-southeast",
+                    "SSE": "South-southeast",
+                    "SSW": "South-southwest",
+                    "WSW": "West-southwest",
+                    "WNW": "West-northwest",
+                    "NNW": "North-northwest"
+                }
             },
             "clock_direction": {
                 "label": "Direction",
@@ -619,7 +647,14 @@
                 "label": "Description"
             },
             "electrified": {
-                "label": "Electrification"
+                "label": "Electrification",
+                "placeholder": "Contact Line, Electrified Rail...",
+                "options": {
+                    "contact_line": "Contact Line",
+                    "rail": "Electrified Rail",
+                    "yes": "Yes (unspecified)",
+                    "no": "No"
+                }
             },
             "elevation": {
                 "label": "Elevation"
@@ -641,7 +676,13 @@
                 "label": "Fee"
             },
             "fire_hydrant/type": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "pillar": "Pillar/Aboveground",
+                    "underground": "Underground",
+                    "wall": "Wall",
+                    "pond": "Pond"
+                }
             },
             "fixme": {
                 "label": "Fix Me"
@@ -810,20 +851,58 @@
                 "label": "Park and Ride"
             },
             "parking": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "surface": "Surface",
+                    "multi-storey": "Multilevel",
+                    "underground": "Underground",
+                    "sheds": "Sheds",
+                    "carports": "Carports",
+                    "garage_boxes": "Garage Boxes",
+                    "lane": "Roadside Lane"
+                }
             },
             "phone": {
                 "label": "Phone",
                 "placeholder": "+31 42 123 4567"
             },
             "piste/difficulty": {
-                "label": "Difficulty"
+                "label": "Difficulty",
+                "placeholder": "Easy, Intermediate, Advanced...",
+                "options": {
+                    "novice": "Novice (instructional)",
+                    "easy": "Easy (green circle)",
+                    "intermediate": "Intermediate (blue square)",
+                    "advanced": "Advanced (black diamond)",
+                    "expert": "Expert (double black diamond)",
+                    "freeride": "Freeride (off-piste)",
+                    "extreme": "Extreme (climing equipment required)"
+                }
             },
             "piste/grooming": {
-                "label": "Grooming"
+                "label": "Grooming",
+                "options": {
+                    "classic": "Classic",
+                    "mogul": "Mogul",
+                    "backcountry": "Backcountry",
+                    "classic+skating": "Classic and Skating",
+                    "scooter": "Scooter/Snowmobile",
+                    "skating": "Skating"
+                }
             },
             "piste/type": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "downhill": "Downhill",
+                    "nordic": "Nordic",
+                    "skitour": "Skitour",
+                    "sled": "Sled",
+                    "hike": "Hike",
+                    "sleigh": "Sleigh",
+                    "ice_skate": "Ice Skate",
+                    "snow_park": "Snow Park",
+                    "playground": "Playground"
+                }
             },
             "place": {
                 "label": "Type"
@@ -880,19 +959,44 @@
                 "label": "Type"
             },
             "sac_scale": {
-                "label": "Path Difficulty"
+                "label": "Path Difficulty",
+                "placeholder": "Mountain Hiking, Alpine Hiking...",
+                "options": {
+                    "hiking": "T1: Hiking",
+                    "mountain_hiking": "T2: Mountain Hiking",
+                    "demanding_mountain_hiking": "T3: Demanding Mountain Hiking",
+                    "alpine_hiking": "T4: Alpine Hiking",
+                    "demanding_alpine_hiking": "T5: Demanding Alpine Hiking",
+                    "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"
+                }
             },
             "seasonal": {
                 "label": "Seasonal"
             },
             "service": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "parking_aisle": "Parking Aisle",
+                    "driveway": "Driveway",
+                    "alley": "Alley",
+                    "emergency_access": "Emergency Access",
+                    "drive-through": "Drive-through"
+                }
             },
             "shelter": {
                 "label": "Shelter"
             },
             "shelter_type": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "public_transport": "Public Transport",
+                    "picnic_shelter": "Picnic Shelter",
+                    "weather_shelter": "Weather Shelter",
+                    "lean_to": "Lean-to",
+                    "basic_hut": "Basic Hut",
+                    "field_shelter": "Field Shelter",
+                    "rock_shelter": "Rock Shelter"
+                }
             },
             "shop": {
                 "label": "Type"
@@ -901,7 +1005,30 @@
                 "label": "Sloped Curb"
             },
             "smoking": {
-                "label": "Smoking"
+                "label": "Smoking",
+                "placeholder": "No, Separated, Yes...",
+                "options": {
+                    "no": "No smoking anywhere",
+                    "separated": "In smoking areas, not physically isolated",
+                    "isolated": "In smoking areas, physically isolated",
+                    "outside": "Allowed outside",
+                    "yes": "Allowed everywhere",
+                    "dedicated": "Dedicated to smokers (e.g. smokers' club)"
+                }
+            },
+            "smoothness": {
+                "label": "Smoothness",
+                "placeholder": "Thin Rollers, Wheels, Off-Road...",
+                "options": {
+                    "excellent": "Thin Rollers: rollerblade, skateboard",
+                    "good": "Thin Wheels: racing bike",
+                    "intermediate": "Wheels: city bike, wheelchair, scooter",
+                    "bad": "Robust Wheels: trekking bike, car, rickshaw",
+                    "very_bad": "High Clearance: light duty off-road vehicle",
+                    "horrible": "Off-Road: heavy duty off-road vehicle",
+                    "very_horrible": "Specialized off-road: tractor, ATV",
+                    "impassible": "Impassible / No wheeled vehicle"
+                }
             },
             "social_facility_for": {
                 "label": "People served",
@@ -914,7 +1041,14 @@
                 "label": "Sport"
             },
             "sport_ice": {
-                "label": "Sport"
+                "label": "Sport",
+                "options": {
+                    "skating": "Ice Skating",
+                    "hockey": "Ice Hockey",
+                    "multi": "Multi",
+                    "curling": "Curling",
+                    "ice_stock": "Ice Stock"
+                }
             },
             "structure": {
                 "label": "Structure",
@@ -928,7 +1062,11 @@
                 }
             },
             "studio_type": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "audio": "Audio",
+                    "video": "Video"
+                }
             },
             "supervised": {
                 "label": "Supervised"
@@ -940,7 +1078,13 @@
                 "label": "Tactile Paving"
             },
             "toilets/disposal": {
-                "label": "Disposal"
+                "label": "Disposal",
+                "options": {
+                    "flush": "Flush",
+                    "pitlatrine": "Pit/Latrine",
+                    "chemical": "Chemical",
+                    "bucket": "Bucket"
+                }
             },
             "tourism": {
                 "label": "Type"
@@ -949,13 +1093,35 @@
                 "label": "Tower type"
             },
             "tracktype": {
-                "label": "Type"
+                "label": "Type",
+                "placeholder": "Solid, Mostly Solid, Soft...",
+                "options": {
+                    "grade1": "Solid: paved or heavily compacted hardcore surface",
+                    "grade2": "Mostly Solid: gravel/rock with some soft material mixed in",
+                    "grade3": "Even mixture of hard and soft materials",
+                    "grade4": "Mostly Soft: soil/sand/grass with some hard material mixed in",
+                    "grade5": "Soft: soil/sand/grass"
+                }
             },
             "trail_visibility": {
-                "label": "Trail Visibility"
+                "label": "Trail Visibility",
+                "placeholder": "Excellent, Good, Bad...",
+                "options": {
+                    "excellent": "Excellent: unambiguous path or markers everywhere",
+                    "good": "Good: markers visible, sometimes require searching",
+                    "intermediate": "Intermediate: few markers, path mostly visible",
+                    "bad": "Bad: no markers, path sometimes invisible/pathless",
+                    "horrible": "Horrible: often pathless, some orientation skills required",
+                    "no": "No: pathless, excellent orientation skills required"
+                }
             },
             "tree_type": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "broad_leaved": "Broad Leaved",
+                    "conifer": "Conifer",
+                    "palm": "Palm"
+                }
             },
             "trees": {
                 "label": "Trees"
