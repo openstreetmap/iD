@@ -37,15 +37,21 @@ iD.ui.preset.typeCombo = function(field) {
             .on('change', change)
             .on('blur', change)
             .each(function() {
-                var keys = _.keys(strings);
+                var keys = _.keys(strings),
+                    strs = [],
+                    placeholders;
+
                 combobox.data(keys.map(function(k) {
-                    var o = {};
-                    o.title = o.value = strings[k];
+                    var s = strings[k],
+                        o = {};
+                    o.title = o.value = s;
+                    if (s.length < 20) { strs.push(s); }
                     return o;
                 }));
 
+                placeholders = strs.length ? strs : keys;
                 input.attr('placeholder', field.placeholder() ||
-                    (keys.length < 3 ? '' : keys.slice(0, 3).join(', ') + '...'));
+                    (placeholders.slice(0, 3).join(', ') + '...'));
             });
     }
 
