@@ -1113,6 +1113,10 @@
                 "name": "Boat Rental",
                 "terms": ""
             },
+            "amenity/bus_station": {
+                "name": "Bus Station",
+                "terms": ""
+            },
             "amenity/cafe": {
                 "name": "Cafe",
                 "terms": "coffee,tea,coffee shop"

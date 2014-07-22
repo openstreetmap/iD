@@ -507,6 +507,19 @@
         ],
         "name": "Boat Rental"
     },
+    "amenity/bus_station": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "amenity": "bus_station"
+        },
+        "fields": [
+            "operator"
+        ],
+        "name": "Bus Station"
+    },
     "amenity/cafe": {
         "icon": "cafe",
         "fields": [
