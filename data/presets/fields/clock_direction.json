@@ -1,15 +1,11 @@
 {
     "key": "direction",
     "type": "combo",
-    "options": [
-        "clockwise",
-        "anticlockwise"
-    ],
     "label": "Direction",
     "strings": {
         "options": {
-          "clockwise": "Clockwise",
-          "anticlockwise": "Counterclockwise"
+            "clockwise": "Clockwise",
+            "anticlockwise": "Counterclockwise"
         }
     }
 }

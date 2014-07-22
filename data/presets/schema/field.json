@@ -79,9 +79,6 @@
         "default": {
             "type": "string"
         },
-        "indexed": {
-            "type": "boolean"
-        },
         "options": {
             "type": "array",
             "items": {
