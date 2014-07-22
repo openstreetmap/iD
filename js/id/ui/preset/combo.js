@@ -2,6 +2,7 @@ iD.ui.preset.combo =
 iD.ui.preset.typeCombo = function(field) {
     var event = d3.dispatch('change'),
         optstrings = field.strings && field.strings.options,
+        optarray = field.options,
         strings = {},
         input;
 
@@ -26,6 +27,11 @@ iD.ui.preset.typeCombo = function(field) {
                 if (optstrings) {
                     _.each(optstrings, function(v, k) {
                         strings[k] = field.t('options.' + k, { 'default': v });
+                    });
+                    stringsLoaded();
+                } else if (optarray) {
+                    _.each(optarray, function(k) {
+                        strings[k] = k.replace(/_+/g, ' ');
                     });
                     stringsLoaded();
                 } else {
@@ -53,7 +59,7 @@ iD.ui.preset.typeCombo = function(field) {
                 return o;
             }));
 
-            placeholders = strs.length ? strs : keys;
+            placeholders = strs.length > 1 ? strs : keys;
             input.attr('placeholder', field.placeholder() ||
                 (placeholders.slice(0, 3).join(', ') + '...'));
         }
