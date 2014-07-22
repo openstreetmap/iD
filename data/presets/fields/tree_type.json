@@ -2,11 +2,9 @@
     "key": "type",
     "type": "combo",
     "label": "Type",
-    "strings": {
-        "options": {
-            "broad_leaved": "Broad Leaved",
-            "conifer": "Conifer",
-            "palm": "Palm"
-        }
-    }
+    "options": [
+        "broad_leaved",
+        "conifer",
+        "palm"
+    ]
 }

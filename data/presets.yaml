@@ -380,14 +380,6 @@ en:
         label: Type
       religion:
         label: Religion
-        options:
-          christian: Christian
-          muslim: Muslim
-          buddhist: Buddhist
-          jewish: Jewish
-          hindu: Hindu
-          shinto: Shinto
-          taoist: Taoist
       restriction:
         label: Type
       restrictions:
@@ -410,24 +402,10 @@ en:
         label: Seasonal
       service:
         label: Type
-        options:
-          parking_aisle: Parking Aisle
-          driveway: Driveway
-          alley: Alley
-          emergency_access: Emergency Access
-          drive-through: Drive-through
       shelter:
         label: Shelter
       shelter_type:
         label: Type
-        options:
-          public_transport: Public Transport
-          picnic_shelter: Picnic Shelter
-          weather_shelter: Weather Shelter
-          lean_to: Lean-to
-          basic_hut: Basic Hut
-          field_shelter: Field Shelter
-          rock_shelter: Rock Shelter
       shop:
         label: Type
       sloped_curb:
@@ -463,12 +441,6 @@ en:
         label: Sport
       sport_ice:
         label: Sport
-        options:
-          skating: Ice Skating
-          hockey: Ice Hockey
-          multi: Multi
-          curling: Curling
-          ice_stock: Ice Stock
       structure:
         label: Structure
         placeholder: Unknown
@@ -480,9 +452,6 @@ en:
           ford: Ford
       studio_type:
         label: Type
-        options:
-          audio: Audio
-          video: Video
       supervised:
         label: Supervised
       surface:
@@ -521,10 +490,6 @@ en:
           "no": "No: pathless, excellent orientation skills required"
       tree_type:
         label: Type
-        options:
-          broad_leaved: Broad Leaved
-          conifer: Conifer
-          palm: Palm
       trees:
         label: Trees
       tunnel:

@@ -2,13 +2,11 @@
     "key": "service",
     "type": "combo",
     "label": "Type",
-    "strings": {
-        "options": {
-            "parking_aisle": "Parking Aisle",
-            "driveway": "Driveway",
-            "alley": "Alley",
-            "emergency_access": "Emergency Access",
-            "drive-through": "Drive-through"
-        }
-    }
+    "options": [
+        "parking_aisle",
+        "driveway",
+        "alley",
+        "emergency_access",
+        "drive-through"
+    ]
 }

@@ -2,10 +2,8 @@
     "key": "type",
     "type": "combo",
     "label": "Type",
-    "strings": {
-        "options": {
-            "audio": "Audio",
-            "video": "Video"
-        }
-    }
+    "options": [
+        "audio",
+        "video"
+    ]
 }

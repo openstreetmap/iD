@@ -2,14 +2,11 @@
     "key": "sport",
     "type": "combo",
     "label": "Sport",
-    "strings": {
-        "options": {
-            "skating": "Ice Skating",
-            "hockey": "Ice Hockey",
-            "multi": "Multi",
-            "curling": "Curling",
-            "ice_stock": "Ice Stock"
-        }
-    }
-
+    "options": [
+        "skating",
+        "hockey",
+        "multi",
+        "curling",
+        "ice_stock"
+    ]
 }

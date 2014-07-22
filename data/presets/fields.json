@@ -771,18 +771,7 @@
     "religion": {
         "key": "religion",
         "type": "combo",
-        "label": "Religion",
-        "strings": {
-            "options": {
-                "christian": "Christian",
-                "muslim": "Muslim",
-                "buddhist": "Buddhist",
-                "jewish": "Jewish",
-                "hindu": "Hindu",
-                "shinto": "Shinto",
-                "taoist": "Taoist"
-            }
-        }
+        "label": "Religion"
     },
     "restriction": {
         "key": "restriction",
@@ -833,15 +822,13 @@
         "key": "service",
         "type": "combo",
         "label": "Type",
-        "strings": {
-            "options": {
-                "parking_aisle": "Parking Aisle",
-                "driveway": "Driveway",
-                "alley": "Alley",
-                "emergency_access": "Emergency Access",
-                "drive-through": "Drive-through"
-            }
-        }
+        "options": [
+            "parking_aisle",
+            "driveway",
+            "alley",
+            "emergency_access",
+            "drive-through"
+        ]
     },
     "shelter": {
         "key": "shelter",
@@ -851,18 +838,7 @@
     "shelter_type": {
         "key": "shelter_type",
         "type": "combo",
-        "label": "Type",
-        "strings": {
-            "options": {
-                "public_transport": "Public Transport",
-                "picnic_shelter": "Picnic Shelter",
-                "weather_shelter": "Weather Shelter",
-                "lean_to": "Lean-to",
-                "basic_hut": "Basic Hut",
-                "field_shelter": "Field Shelter",
-                "rock_shelter": "Rock Shelter"
-            }
-        }
+        "label": "Type"
     },
     "shop": {
         "key": "shop",
@@ -946,15 +922,13 @@
         "key": "sport",
         "type": "combo",
         "label": "Sport",
-        "strings": {
-            "options": {
-                "skating": "Ice Skating",
-                "hockey": "Ice Hockey",
-                "multi": "Multi",
-                "curling": "Curling",
-                "ice_stock": "Ice Stock"
-            }
-        }
+        "options": [
+            "skating",
+            "hockey",
+            "multi",
+            "curling",
+            "ice_stock"
+        ]
     },
     "structure": {
         "type": "radio",
@@ -981,12 +955,10 @@
         "key": "type",
         "type": "combo",
         "label": "Type",
-        "strings": {
-            "options": {
-                "audio": "Audio",
-                "video": "Video"
-            }
-        }
+        "options": [
+            "audio",
+            "video"
+        ]
     },
     "supervised": {
         "key": "supervised",
@@ -1061,13 +1033,11 @@
         "key": "type",
         "type": "combo",
         "label": "Type",
-        "strings": {
-            "options": {
-                "broad_leaved": "Broad Leaved",
-                "conifer": "Conifer",
-                "palm": "Palm"
-            }
-        }
+        "options": [
+            "broad_leaved",
+            "conifer",
+            "palm"
+        ]
     },
     "trees": {
         "key": "trees",
