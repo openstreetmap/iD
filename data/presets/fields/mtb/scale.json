@@ -1,0 +1,17 @@
+{
+    "key": "mtb:scale",
+    "type": "combo",
+    "label": "Mountain Biking Difficulty",
+    "placeholder": "0, 1, 2, 3...",
+    "strings": {
+        "options": {
+            "0": "0: Solid gravel/packed earth, no obstacles, wide curves",
+            "1": "1: Some loose surface, small obstacles, wide curves",
+            "2": "2: Much loose surface, large obstacles, easy hairpins",
+            "3": "3: Slippery surface, large obstacles, tight hairpins",
+            "4": "4: Loose surface or boulders, dangerous hairpins",
+            "5": "5: Maximum difficulty, boulder fields, landslides",
+            "6": "6: Not rideable except by the very best mountain bikers"
+        }
+    }
+}

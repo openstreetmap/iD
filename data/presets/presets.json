@@ -3951,9 +3951,12 @@
             "width",
             "structure",
             "access",
-            "sac_scale",
             "incline",
+            "sac_scale",
             "trail_visibility",
+            "mtb/scale",
+            "mtb/scale/uphill",
+            "mtb/scale/imba",
             "ref"
         ],
         "geometry": [
@@ -4336,13 +4339,16 @@
     "highway/track": {
         "icon": "highway-track",
         "fields": [
-            "tracktype",
-            "smoothness",
-            "oneway",
-            "maxspeed",
+            "surface",
+            "width",
             "structure",
             "access",
-            "surface"
+            "incline",
+            "tracktype",
+            "smoothness",
+            "mtb/scale",
+            "mtb/scale/uphill",
+            "mtb/scale/imba"
         ],
         "geometry": [
             "line"

@@ -281,6 +281,36 @@ en:
       maxspeed:
         label: Speed Limit
         placeholder: "40, 50, 60..."
+      mtb/scale:
+        label: Mountain Biking Difficulty
+        placeholder: "0, 1, 2, 3..."
+        options:
+          "0": "0: Solid gravel/packed earth, no obstacles, wide curves"
+          "1": "1: Some loose surface, small obstacles, wide curves"
+          "2": "2: Much loose surface, large obstacles, easy hairpins"
+          "3": "3: Slippery surface, large obstacles, tight hairpins"
+          "4": "4: Loose surface or boulders, dangerous hairpins"
+          "5": "5: Maximum difficulty, boulder fields, landslides"
+          "6": "6: Not rideable except by the very best mountain bikers"
+      mtb/scale/imba:
+        label: IMBA Trail Difficulty
+        placeholder: "Easy, Medium, Difficult..."
+        options:
+          "0": Easiest (white circle)
+          "1": Easy (green circle)
+          "2": Medium (blue square)
+          "3": Difficult (black diamond)
+          "4": Extremely Difficult (double black diamond)
+      mtb/scale/uphill:
+        label: Mountain Biking Uphill Difficulty
+        placeholder: "0, 1, 2, 3..."
+        options:
+          "0": "0: Avg. incline <10%, gravel/packed earth, no obstacles"
+          "1": "1: Avg. incline <15%, gravel/packed earth, few small objects"
+          "2": "2: Avg. incline <20%, stable surface, fistsize rocks/roots"
+          "3": "3: Avg. incline <25%, variable surface, fistsize rocks/branches"
+          "4": "4: Avg. incline <30%, poor condition, big rocks/branches"
+          "5": "5: Very steep, bike generally needs to be pushed or carried"
       name:
         label: Name
         placeholder: Common name (if any)
@@ -389,7 +419,7 @@ en:
       route_master:
         label: Type
       sac_scale:
-        label: Path Difficulty
+        label: Hiking Difficulty
         placeholder: "Mountain Hiking, Alpine Hiking..."
         options:
           hiking: "T1: Hiking"
@@ -470,7 +500,7 @@ en:
       towertype:
         label: Tower type
       tracktype:
-        label: Type
+        label: Track Type
         placeholder: "Solid, Mostly Solid, Soft..."
         options:
           grade1: "Solid: paved or heavily compacted hardcore surface"

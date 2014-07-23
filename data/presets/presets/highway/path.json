@@ -5,9 +5,12 @@
         "width",
         "structure",
         "access",
-        "sac_scale",
         "incline",
+        "sac_scale",
         "trail_visibility",
+        "mtb/scale",
+        "mtb/scale/uphill",
+        "mtb/scale/imba",
         "ref"
     ],
     "geometry": [

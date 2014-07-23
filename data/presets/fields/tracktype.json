@@ -1,7 +1,7 @@
 {
     "key": "tracktype",
     "type": "combo",
-    "label": "Type",
+    "label": "Track Type",
     "placeholder": "Solid, Mostly Solid, Soft...",
     "strings": {
         "options": {
