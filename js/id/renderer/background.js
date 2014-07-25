@@ -149,8 +149,11 @@ iD.Background = function(context) {
 
     background.zoomToGpxLayer = function() {
         if (background.hasGpxLayer()) {
-            context.map()
-                .extent(d3.geo.bounds(gpxLayer.geojson()));
+            var gpx = d3.geo.bounds(gpxLayer.geojson());
+
+            if (!context.map().extent().intersects(gpx)) {
+                context.map().extent(gpx);
+            }
         }
     };
 
