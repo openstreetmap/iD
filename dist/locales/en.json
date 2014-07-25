@@ -578,18 +578,6 @@
             "boundary": {
                 "label": "Type"
             },
-            "brand_fast_food": {
-                "label": "Brand",
-                "placeholder": "McDonald's, Subway, KFC..."
-            },
-            "brand_fuel": {
-                "label": "Brand",
-                "placeholder": "Shell, Exxon, BP..."
-            },
-            "brand_restaurant": {
-                "label": "Brand",
-                "placeholder": "Olive Garden, Applebee's, TGI Friday's..."
-            },
             "building": {
                 "label": "Building"
             },
@@ -1360,7 +1348,7 @@
             },
             "amenity/fast_food": {
                 "name": "Fast Food",
-                "terms": "breakfast,cafe*,café,coffee,dine*,dining,dinner,drive-in,eat*,grill,hamburger,lunch,pizza,sandwich,take*"
+                "terms": ""
             },
             "amenity/fire_station": {
                 "name": "Fire Station",
@@ -1456,7 +1444,7 @@
             },
             "amenity/restaurant": {
                 "name": "Restaurant",
-                "terms": "breakfast,cafe*,café,coffee,dine*,dining,dinner,drive-in,eat*,grill,hamburger,lunch,pizza,sandwich,take*"
+                "terms": "bar,cafeteria,café,canteen,chophouse,coffee shop,diner,dining room,dive*,doughtnut shop,drive-in,eatery,eating house,eating place,fast-food place,fish and chips,greasy spoon,grill,hamburger stand,hashery,hideaway,hotdog stand,inn,joint*,luncheonette,lunchroom,night club,outlet*,pizzeria,saloon,soda fountain,watering hole"
             },
             "amenity/school": {
                 "name": "School Grounds",

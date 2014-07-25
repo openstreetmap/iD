@@ -1,10 +1,9 @@
 {
     "icon": "fuel",
     "fields": [
-        "brand_fuel",
+        "operator",
         "address",
-        "building_area",
-        "operator"
+        "building_area"
     ],
     "geometry": [
         "point",

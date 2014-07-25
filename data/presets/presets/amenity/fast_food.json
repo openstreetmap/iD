@@ -1,7 +1,6 @@
 {
     "icon": "fast-food",
     "fields": [
-        "brand_fast_food",
         "cuisine",
         "building_area",
         "address",
@@ -16,22 +15,6 @@
     "tags": {
         "amenity": "fast_food"
     },
-    "terms": [
-        "breakfast",
-        "cafe*",
-        "café",
-        "coffee",
-        "dine*",
-        "dining",
-        "dinner",
-        "drive-in",
-        "eat*",
-        "grill",
-        "hamburger",
-        "lunch",
-        "pizza",
-        "sandwich",
-        "take*"
-    ],
+    "terms": [],
     "name": "Fast Food"
 }

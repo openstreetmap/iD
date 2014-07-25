@@ -105,7 +105,7 @@ function suggestionsToPresets(presets) {
                     delete existing[name];
                 }
                 if (!existing[name]) {
-                    tags = _.extend({name: name, brand: name}, suggestions[key][value][name].tags);
+                    tags = _.extend({name: name}, suggestions[key][value][name].tags);
                     addSuggestion(item, tags, name, count);
                 }
             }

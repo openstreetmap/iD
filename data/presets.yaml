@@ -118,15 +118,6 @@ en:
         label: Type
       boundary:
         label: Type
-      brand_fast_food:
-        label: Brand
-        placeholder: "McDonald's, Subway, KFC..."
-      brand_fuel:
-        label: Brand
-        placeholder: "Shell, Exxon, BP..."
-      brand_restaurant:
-        label: Brand
-        placeholder: "Olive Garden, Applebee's, TGI Friday's..."
       building:
         label: Building
       building_area:
