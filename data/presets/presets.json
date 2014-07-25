@@ -828,6 +828,7 @@
     "amenity/fast_food": {
         "icon": "fast-food",
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -842,7 +843,23 @@
         "tags": {
             "amenity": "fast_food"
         },
-        "terms": [],
+        "terms": [
+            "breakfast",
+            "cafe*",
+            "café",
+            "coffee",
+            "dine*",
+            "dining",
+            "dinner",
+            "drive-in",
+            "eat*",
+            "grill",
+            "hamburger",
+            "lunch",
+            "pizza",
+            "sandwich",
+            "take*"
+        ],
         "name": "Fast Food"
     },
     "amenity/fire_station": {
@@ -1386,6 +1403,7 @@
     "amenity/restaurant": {
         "icon": "restaurant",
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -1399,38 +1417,21 @@
             "area"
         ],
         "terms": [
-            "bar",
-            "cafeteria",
+            "breakfast",
+            "cafe*",
             "café",
-            "canteen",
-            "chophouse",
-            "coffee shop",
-            "diner",
-            "dining room",
-            "dive*",
-            "doughtnut shop",
+            "coffee",
+            "dine*",
+            "dining",
+            "dinner",
             "drive-in",
-            "eatery",
-            "eating house",
-            "eating place",
-            "fast-food place",
-            "fish and chips",
-            "greasy spoon",
+            "eat*",
             "grill",
-            "hamburger stand",
-            "hashery",
-            "hideaway",
-            "hotdog stand",
-            "inn",
-            "joint*",
-            "luncheonette",
-            "lunchroom",
-            "night club",
-            "outlet*",
-            "pizzeria",
-            "saloon",
-            "soda fountain",
-            "watering hole"
+            "hamburger",
+            "lunch",
+            "pizza",
+            "sandwich",
+            "take*"
         ],
         "tags": {
             "amenity": "restaurant"
@@ -13106,6 +13107,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13129,6 +13131,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13152,6 +13155,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13175,6 +13179,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13197,6 +13202,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13220,6 +13226,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13242,6 +13249,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13265,6 +13273,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13288,6 +13297,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13310,6 +13320,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13332,6 +13343,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13354,6 +13366,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13376,6 +13389,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13399,6 +13413,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13421,6 +13436,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13443,6 +13459,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13466,6 +13483,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13488,6 +13506,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13510,6 +13529,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13532,6 +13552,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13554,6 +13575,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13576,6 +13598,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13598,6 +13621,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13620,6 +13644,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13642,6 +13667,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13664,6 +13690,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13687,6 +13714,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13709,6 +13737,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13731,6 +13760,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13753,6 +13783,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13775,6 +13806,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13797,6 +13829,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13820,6 +13853,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13843,6 +13877,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13865,6 +13900,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13888,6 +13924,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13910,6 +13947,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13932,6 +13970,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13955,6 +13994,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13977,6 +14017,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -13999,6 +14040,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14021,6 +14063,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14044,6 +14087,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14066,6 +14110,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14088,6 +14133,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14111,6 +14157,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14135,6 +14182,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14157,6 +14205,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14179,6 +14228,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14201,6 +14251,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14223,6 +14274,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14245,6 +14297,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14269,6 +14322,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14291,6 +14345,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14313,6 +14368,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14336,6 +14392,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14358,6 +14415,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14380,6 +14438,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14402,6 +14461,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14424,6 +14484,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14446,6 +14507,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14469,6 +14531,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14491,6 +14554,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14513,6 +14577,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14535,6 +14600,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14557,6 +14623,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14579,6 +14646,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14601,6 +14669,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14623,6 +14692,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14646,6 +14716,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14668,6 +14739,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14690,6 +14762,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14712,6 +14785,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14735,6 +14809,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14758,6 +14833,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14780,6 +14856,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14802,6 +14879,7 @@
             "area"
         ],
         "fields": [
+            "brand_fast_food",
             "cuisine",
             "building_area",
             "address",
@@ -14824,6 +14902,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -14847,6 +14926,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -14870,6 +14950,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -14893,6 +14974,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -14916,6 +14998,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -14939,6 +15022,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -14962,6 +15046,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -14985,6 +15070,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15008,6 +15094,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15031,6 +15118,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15054,6 +15142,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15077,6 +15166,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15100,6 +15190,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15123,6 +15214,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15146,6 +15238,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15169,6 +15262,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15192,6 +15286,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15215,6 +15310,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15238,6 +15334,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15261,6 +15358,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15284,6 +15382,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15307,6 +15406,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15330,6 +15430,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15353,6 +15454,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15376,6 +15478,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15399,6 +15502,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15422,6 +15526,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15445,6 +15550,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15468,6 +15574,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15491,6 +15598,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15514,6 +15622,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15537,6 +15646,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15560,6 +15670,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15583,6 +15694,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15606,6 +15718,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15629,6 +15742,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15652,6 +15766,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15675,6 +15790,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15698,6 +15814,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15721,6 +15838,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15744,6 +15862,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15767,6 +15886,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15790,6 +15910,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15813,6 +15934,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15836,6 +15958,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15859,6 +15982,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15882,6 +16006,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15905,6 +16030,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15928,6 +16054,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15951,6 +16078,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15974,6 +16102,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -15997,6 +16126,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16020,6 +16150,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16043,6 +16174,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16066,6 +16198,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16089,6 +16222,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16112,6 +16246,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16135,6 +16270,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16158,6 +16294,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16181,6 +16318,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16204,6 +16342,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16227,6 +16366,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16250,6 +16390,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16273,6 +16414,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16296,6 +16438,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16319,6 +16462,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16342,6 +16486,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16365,6 +16510,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16388,6 +16534,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16411,6 +16558,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16434,6 +16582,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16457,6 +16606,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16480,6 +16630,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16503,6 +16654,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16526,6 +16678,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16549,6 +16702,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16572,6 +16726,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16595,6 +16750,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16618,6 +16774,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16641,6 +16798,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16664,6 +16822,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16687,6 +16846,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16710,6 +16870,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16733,6 +16894,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16756,6 +16918,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16779,6 +16942,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16802,6 +16966,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16825,6 +16990,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16848,6 +17014,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16871,6 +17038,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16894,6 +17062,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16917,6 +17086,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16940,6 +17110,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16963,6 +17134,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -16986,6 +17158,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17009,6 +17182,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17032,6 +17206,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17055,6 +17230,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17078,6 +17254,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17101,6 +17278,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17124,6 +17302,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17147,6 +17326,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17170,6 +17350,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17194,6 +17375,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17217,6 +17399,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17240,6 +17423,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17263,6 +17447,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17286,6 +17471,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17309,6 +17495,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17332,6 +17519,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17355,6 +17543,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17378,6 +17567,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17401,6 +17591,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17424,6 +17615,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17447,6 +17639,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17470,6 +17663,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17493,6 +17687,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17516,6 +17711,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17539,6 +17735,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17562,6 +17759,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17585,6 +17783,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17608,6 +17807,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17631,6 +17831,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17654,6 +17855,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",
@@ -17677,6 +17879,7 @@
             "area"
         ],
         "fields": [
+            "brand_restaurant",
             "cuisine",
             "building_area",
             "address",

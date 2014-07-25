@@ -212,10 +212,22 @@
         "type": "combo",
         "label": "Type"
     },
+    "brand_fast_food": {
+        "key": "brand",
+        "type": "text",
+        "placeholder": "McDonald's, Subway, KFC...",
+        "label": "Brand"
+    },
     "brand_fuel": {
         "key": "brand",
         "type": "text",
         "placeholder": "Shell, Exxon, BP...",
+        "label": "Brand"
+    },
+    "brand_restaurant": {
+        "key": "brand",
+        "type": "text",
+        "placeholder": "Olive Garden, Applebee's, TGI Friday's...",
         "label": "Brand"
     },
     "building": {
