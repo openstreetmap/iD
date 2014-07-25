@@ -772,16 +772,7 @@
                 "label": "Typ"
             },
             "religion": {
-                "label": "Náboženství",
-                "options": {
-                    "christian": "Křesťanství",
-                    "muslim": "Islám",
-                    "buddhist": "Buddhismus",
-                    "jewish": "Judaismus",
-                    "hindu": "Hinduismus",
-                    "shinto": "Šintoismus",
-                    "taoist": "Taoismus"
-                }
+                "label": "Náboženství"
             },
             "restriction": {
                 "label": "Typ"
@@ -794,9 +785,6 @@
             },
             "route_master": {
                 "label": "Typ"
-            },
-            "sac_scale": {
-                "label": "Obtížnost stezky"
             },
             "service": {
                 "label": "Typ"
@@ -848,9 +836,6 @@
             },
             "towertype": {
                 "label": "Typ věže"
-            },
-            "tracktype": {
-                "label": "Typ"
             },
             "trail_visibility": {
                 "label": "Viditelnost stezky"

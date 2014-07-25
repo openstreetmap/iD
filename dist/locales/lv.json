@@ -460,16 +460,7 @@
                 "label": "Atskaites punkts"
             },
             "religion": {
-                "label": "Reliģija",
-                "options": {
-                    "christian": "Kristietiešu",
-                    "muslim": "Musulmaņu",
-                    "buddhist": "Budistu",
-                    "jewish": "Ebreju",
-                    "hindu": "Hinduistu",
-                    "shinto": "Sintoistu",
-                    "taoist": "Taoistu"
-                }
+                "label": "Reliģija"
             },
             "service": {
                 "label": "Tips"
@@ -499,9 +490,6 @@
                 "label": "Segums"
             },
             "tourism": {
-                "label": "Tips"
-            },
-            "tracktype": {
                 "label": "Tips"
             },
             "water": {

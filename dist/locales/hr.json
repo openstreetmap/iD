@@ -762,16 +762,7 @@
                 "label": "Vrsta"
             },
             "religion": {
-                "label": "Religija",
-                "options": {
-                    "christian": "Kršćanski",
-                    "muslim": "Muslimanski",
-                    "buddhist": "Budistički",
-                    "jewish": "Židovski",
-                    "hindu": "Hinduistički",
-                    "shinto": "Šintoistički",
-                    "taoist": "Taoistički"
-                }
+                "label": "Religija"
             },
             "restriction": {
                 "label": "Vrsta"
@@ -781,9 +772,6 @@
             },
             "route_master": {
                 "label": "Vrsta"
-            },
-            "sac_scale": {
-                "label": "Težina staze"
             },
             "service": {
                 "label": "Vrsta"
@@ -824,9 +812,6 @@
             },
             "towertype": {
                 "label": "Vrsta tornja"
-            },
-            "tracktype": {
-                "label": "Vrsta"
             },
             "trail_visibility": {
                 "label": "Vidljivost staze"
@@ -1612,41 +1597,51 @@
                 "name": "Park za pse"
             },
             "leisure/garden": {
-                "name": "Vrt"
+                "name": "Vrt",
+                "terms": "Vrt"
             },
             "leisure/golf_course": {
-                "name": "Golf tečaj"
+                "name": "Golf tečaj",
+                "terms": "Golf teren"
             },
             "leisure/marina": {
-                "name": "Marina"
+                "name": "Marina",
+                "terms": "Marina"
             },
             "leisure/park": {
                 "name": "Park"
             },
             "leisure/pitch": {
-                "name": "Sportski teren"
+                "name": "Sportski teren",
+                "terms": "Sportsko igralište"
             },
             "leisure/pitch/american_football": {
-                "name": "Američki nogomet"
+                "name": "Američki nogomet",
+                "terms": "Igralište za Američki nogomet"
             },
             "leisure/pitch/baseball": {
-                "name": "Baseball igralište"
+                "name": "Baseball igralište",
+                "terms": "Bejzbol igralište"
             },
             "leisure/pitch/basketball": {
-                "name": "Košarkaški teren"
+                "name": "Košarkaški teren",
+                "terms": "Košarkaško igralište"
             },
             "leisure/pitch/skateboard": {
                 "name": "Skate park",
                 "terms": "skate park,skejt park,skejt,skate,park za ekstremne sportove"
             },
             "leisure/pitch/soccer": {
-                "name": "Nogometno igralište"
+                "name": "Nogometno igralište",
+                "terms": "Nogometno igralište"
             },
             "leisure/pitch/tennis": {
-                "name": "Teniski teren"
+                "name": "Teniski teren",
+                "terms": "Teniski teren"
             },
             "leisure/pitch/volleyball": {
-                "name": "Odbojkaško igralište"
+                "name": "Odbojkaško igralište",
+                "terms": "Odbojkaško igralište"
             },
             "leisure/playground": {
                 "name": "Igralište",
@@ -1657,17 +1652,20 @@
                 "terms": "istezalište"
             },
             "leisure/stadium": {
-                "name": "Stadion"
+                "name": "Stadion",
+                "terms": "Stadion, Sportska arena"
             },
             "leisure/swimming_pool": {
-                "name": "Sportski bazen"
+                "name": "Sportski bazen",
+                "terms": "Bazen"
             },
             "leisure/track": {
                 "name": "Autodrom",
                 "terms": "trkaća staza,staza za utrke,staza za trkanje,pista"
             },
             "line": {
-                "name": "Linija"
+                "name": "Linija",
+                "terms": "Linija, Crta"
             },
             "man_made": {
                 "name": "Ljudske tvorevine",
@@ -1808,7 +1806,8 @@
                 "terms": "prašuma,prirodna šuma,džungla"
             },
             "office": {
-                "name": "Ured"
+                "name": "Ured",
+                "terms": "Ured, Kancelarija"
             },
             "office/accountant": {
                 "name": "Računovođa"
@@ -1978,101 +1977,127 @@
                 "terms": "kozmetički salon,solarij,salon ljepote,pediker,beauty centar"
             },
             "shop/beverages": {
-                "name": "Trgovina s pićima"
+                "name": "Trgovina s pićima",
+                "terms": "Podrum pića, Trgovina za piće"
             },
             "shop/bicycle": {
-                "name": "prodavaonica bicikala"
+                "name": "prodavaonica bicikala",
+                "terms": "Trgovina biciklima"
             },
             "shop/books": {
-                "name": "Knjižara"
+                "name": "Knjižara",
+                "terms": "Knjižara"
             },
             "shop/boutique": {
-                "name": "Butik"
+                "name": "Butik",
+                "terms": "Butik, Trgovina odjeće"
             },
             "shop/butcher": {
-                "name": "Mesnica"
+                "name": "Mesnica",
+                "terms": "Mesnica"
             },
             "shop/car": {
-                "name": "Prodavaonica automobila"
+                "name": "Prodavaonica automobila",
+                "terms": "Autozastupnik, Auto trgovina"
             },
             "shop/car_parts": {
                 "name": "Trgovina rezevnih dijelova za automobile",
                 "terms": "autodijelovi,dijelovi za automobile"
             },
             "shop/car_repair": {
-                "name": "Automehaničar"
+                "name": "Automehaničar",
+                "terms": "Automehaničar, Auto-servis"
             },
             "shop/chemist": {
-                "name": "Drogerija"
+                "name": "Drogerija",
+                "terms": "Ljekarna, Farmacija, Apoteka"
             },
             "shop/clothes": {
-                "name": "Prodavaonica odjeće"
+                "name": "Prodavaonica odjeće",
+                "terms": "Dućan sa odjećom"
             },
             "shop/computer": {
-                "name": "Prodavaonica računala"
+                "name": "Prodavaonica računala",
+                "terms": "Trgovina računalne opreme"
             },
             "shop/confectionery": {
-                "name": "Slastičarnica"
+                "name": "Slastičarnica",
+                "terms": "Slastičarna, Poslastičarnica"
             },
             "shop/convenience": {
                 "name": "Trgovina mješovitom robom",
                 "terms": "dućan,trgovina,prodavaonica,samoposluga,kvartovska trgovina,trgovina mješovitom robom, prodavaonica mješovite robe"
             },
             "shop/deli": {
-                "name": "Prodavaonica delikatesa"
+                "name": "Prodavaonica delikatesa",
+                "terms": "Delikatesni dućan, Trgovina delikatesama"
             },
             "shop/department_store": {
-                "name": "Robna kuća"
+                "name": "Robna kuća",
+                "terms": "Robna kuća"
             },
             "shop/doityourself": {
                 "name": "Uradi sam",
                 "terms": "alat,vrt,uređenje doma,bauhaus,pevec,uradi sam"
             },
             "shop/dry_cleaning": {
-                "name": "Kemijska čistionica"
+                "name": "Kemijska čistionica",
+                "terms": "Kemijska čistionica"
             },
             "shop/electronics": {
-                "name": "Prodavaonica elektronike"
+                "name": "Prodavaonica elektronike",
+                "terms": "Trgovina elektroničke opreme, Prodavaonica elektroničke robe"
             },
             "shop/farm": {
                 "name": "Prodavaonica proizvoda farme"
             },
             "shop/fishmonger": {
-                "name": "Ribarnica"
+                "name": "Ribarnica",
+                "terms": "Ribarnica"
             },
             "shop/florist": {
-                "name": "Cvjećarna"
+                "name": "Cvjećarna",
+                "terms": "Cvjećara, Cvjećarna"
             },
             "shop/furniture": {
-                "name": "Salon namještaja"
+                "name": "Salon namještaja",
+                "terms": "Trgovina namještaja, Prodavaonica namještaja"
             },
             "shop/garden_centre": {
-                "name": "Vrtni centar"
+                "name": "Vrtni centar",
+                "terms": "Trgovina vrtne opreme, Vrtni centar"
             },
             "shop/gift": {
-                "name": "Suvenirnica"
+                "name": "Suvenirnica",
+                "terms": "Suvenirnica"
             },
             "shop/greengrocer": {
-                "name": "Voćarna"
+                "name": "Voćarna",
+                "terms": "Piljarnica, Trgovina voćem i povrćem"
             },
             "shop/hairdresser": {
                 "name": "Frizerski salon",
                 "terms": "frizer,frizerski salon,frizerski studio,brijačnica,brico,šišanje"
             },
             "shop/hardware": {
-                "name": "Željezarija"
+                "name": "Željezarija",
+                "terms": "Željezarija, Željezar"
             },
             "shop/hifi": {
-                "name": "Prodavaonica audio opreme"
+                "name": "Prodavaonica audio opreme",
+                "terms": "Trgovina audio opreme"
             },
             "shop/jewelry": {
-                "name": "Zlatarnica"
+                "name": "Zlatarnica",
+                "terms": "Zlatarna, Zlatara, Zlatar"
             },
             "shop/kiosk": {
-                "name": "Kiosk"
+                "name": "Kiosk",
+                "terms": "Kiosk, Tisak, Trafika, Prodavaonica novina"
             },
             "shop/laundry": {
-                "name": "Praonica rublja"
+                "name": "Praonica rublja",
+                "terms": "Praonica rublja"
             },
             "shop/locksmith": {
                 "name": "Bravar"
@@ -2086,62 +2111,79 @@
                 "terms": "šoping centar,trgovački centar,outlet centar,prodajni centar"
             },
             "shop/mobile_phone": {
-                "name": "Prodavaonica mobilnih telefona"
+                "name": "Prodavaonica mobilnih telefona",
+                "terms": "Prodavaonica mobitela"
             },
             "shop/motorcycle": {
-                "name": "Prodavaonica motocikala"
+                "name": "Prodavaonica motocikala",
+                "terms": "Trgovina motocikala"
             },
             "shop/music": {
-                "name": "Prodavaonica glazbene opreme"
+                "name": "Prodavaonica glazbene opreme",
+                "terms": "Glazbeni dućan, Glazbena trgovina"
             },
             "shop/newsagent": {
-                "name": "Prodavaonica novina"
+                "name": "Prodavaonica novina",
+                "terms": "Prodavaonica novina"
             },
             "shop/optician": {
-                "name": "Optičar"
+                "name": "Optičar",
+                "terms": "Optičar"
             },
             "shop/outdoor": {
-                "name": "Prodavaonica planinarske opreme"
+                "name": "Prodavaonica planinarske opreme",
+                "terms": "Vanjska trgovina"
             },
             "shop/pet": {
-                "name": "Prodavaonica kućnim ljubimcima"
+                "name": "Prodavaonica kućnim ljubimcima",
+                "terms": "Dućan za kućne ljubimce"
             },
             "shop/photo": {
                 "name": "Prodavaonica fotografske opreme"
             },
             "shop/shoes": {
-                "name": "Prodavaonica obuće"
+                "name": "Prodavaonica obuće",
+                "terms": "Trgovina obuće"
             },
             "shop/sports": {
-                "name": "Prodavaonica sportske opreme"
+                "name": "Prodavaonica sportske opreme",
+                "terms": "Trgovina sportske opreme, Dućan sportske opreme, Sportski dućan"
             },
             "shop/stationery": {
-                "name": "Knjižara"
+                "name": "Knjižara",
+                "terms": "Papirnica"
             },
             "shop/supermarket": {
                 "name": "Veletrgovina",
                 "terms": "veletrgovina,supermarket,trgovina,samoposluga,"
             },
             "shop/toys": {
-                "name": "Prodavaonica igračaka"
+                "name": "Prodavaonica igračaka",
+                "terms": "Trgovina igračaka"
             },
             "shop/travel_agency": {
-                "name": "Putnička agencija"
+                "name": "Putnička agencija",
+                "terms": "Putnička agencija, Turistička agencija"
             },
             "shop/tyres": {
-                "name": "Prodavaonica pneumaticima"
+                "name": "Prodavaonica pneumaticima",
+                "terms": "Trgovina guma, Trgovina auto-guma"
             },
             "shop/vacant": {
-                "name": "Prazan dućanski prostor"
+                "name": "Prazan dućanski prostor",
+                "terms": "Prazan dućan, Prazna trgovina"
             },
             "shop/variety_store": {
-                "name": "Prodavaonica mješovite robe"
+                "name": "Prodavaonica mješovite robe",
+                "terms": "Prodavaonica mješovite robe"
             },
             "shop/video": {
-                "name": "Videoteka"
+                "name": "Videoteka",
+                "terms": "Videoteka"
             },
             "tourism": {
-                "name": "Turizam"
+                "name": "Turizam",
+                "terms": "Turizam"
             },
             "tourism/alpine_hut": {
                 "name": "Planinarski dom",
@@ -2152,16 +2194,20 @@
                 "terms": "skulptura,slika,kip,bista"
             },
             "tourism/attraction": {
-                "name": "Turistička atrakcija"
+                "name": "Turistička atrakcija",
+                "terms": "Turistička atrakcija, Turistička znamenitost"
             },
             "tourism/camp_site": {
-                "name": "Kamp"
+                "name": "Kamp",
+                "terms": "Autokamp"
             },
             "tourism/caravan_site": {
-                "name": "Parkiralište za kamp kućice"
+                "name": "Parkiralište za kamp kućice",
+                "terms": "Park za rekreativna vozila, Park za kamp-prikolice, RV park"
             },
             "tourism/chalet": {
-                "name": "Bungalov"
+                "name": "Bungalov",
+                "terms": "Planinarski dom, Planinska koliba"
             },
             "tourism/guest_house": {
                 "name": "Gostinjska kuća"

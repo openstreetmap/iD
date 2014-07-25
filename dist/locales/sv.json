@@ -749,16 +749,7 @@
                 "label": "Typ"
             },
             "religion": {
-                "label": "Religion",
-                "options": {
-                    "christian": "Kristendom",
-                    "muslim": "Muslim",
-                    "buddhist": "Buddist",
-                    "jewish": "Judendom",
-                    "hindu": "Hinduist",
-                    "shinto": "Shintoism",
-                    "taoist": "Taoism"
-                }
+                "label": "Religion"
             },
             "restriction": {
                 "label": "Typ"
@@ -771,9 +762,6 @@
             },
             "route_master": {
                 "label": "Typ"
-            },
-            "sac_scale": {
-                "label": "Svårighetsgrad"
             },
             "service": {
                 "label": "Typ"
@@ -811,9 +799,6 @@
             },
             "towertype": {
                 "label": "Typ av torn"
-            },
-            "tracktype": {
-                "label": "Typ"
             },
             "trail_visibility": {
                 "label": "Synlighet"

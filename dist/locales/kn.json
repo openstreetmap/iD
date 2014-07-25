@@ -20,12 +20,6 @@
             "atm": {
                 "label": "ATM"
             },
-            "religion": {
-                "options": {
-                    "christian": "ಕ್ರೈಸ್ತ",
-                    "hindu": "ಹಿಂದು"
-                }
-            },
             "source": {
                 "label": "ಮೂಲ"
             }

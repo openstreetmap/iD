@@ -353,13 +353,7 @@
                 "label": "Tip"
             },
             "religion": {
-                "label": "Religie",
-                "options": {
-                    "christian": "Creștin",
-                    "muslim": "Musulman",
-                    "buddhist": "Budist",
-                    "jewish": "Evreu"
-                }
+                "label": "Religie"
             },
             "service": {
                 "label": "Tip"

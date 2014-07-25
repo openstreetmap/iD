@@ -766,16 +766,7 @@
                 "label": "Typ"
             },
             "religion": {
-                "label": "Náboženstvo",
-                "options": {
-                    "christian": "Kresťanstvo",
-                    "muslim": "Islam",
-                    "buddhist": "Budhizmus",
-                    "jewish": "Židovské",
-                    "hindu": "Hinduistické",
-                    "shinto": "Šintuizmus",
-                    "taoist": "Taoizmus"
-                }
+                "label": "Náboženstvo"
             },
             "restriction": {
                 "label": "Typ"
@@ -785,9 +776,6 @@
             },
             "route_master": {
                 "label": "Typ"
-            },
-            "sac_scale": {
-                "label": "Obtiažnosť chodníka"
             },
             "seasonal": {
                 "label": "Sezónne"
@@ -853,9 +841,6 @@
             },
             "towertype": {
                 "label": "Typ veže"
-            },
-            "tracktype": {
-                "label": "Typ"
             },
             "trail_visibility": {
                 "label": "Viditeľnosť trasy"

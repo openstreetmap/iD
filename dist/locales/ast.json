@@ -713,16 +713,7 @@
                 "label": "Tipu"
             },
             "religion": {
-                "label": "Relixon",
-                "options": {
-                    "christian": "Christianu",
-                    "muslim": "Musulmán",
-                    "buddhist": "Budista",
-                    "jewish": "Xudíu",
-                    "hindu": "Hindu",
-                    "shinto": "Sintoista",
-                    "taoist": "Taoista"
-                }
+                "label": "Relixon"
             },
             "restriction": {
                 "label": "Tipu"
@@ -732,9 +723,6 @@
             },
             "route_master": {
                 "label": "Tipu"
-            },
-            "sac_scale": {
-                "label": "Dificultá del camín"
             },
             "seasonal": {
                 "label": "Estacional"
@@ -792,9 +780,6 @@
             },
             "towertype": {
                 "label": "Tipu de torre"
-            },
-            "tracktype": {
-                "label": "Tipu"
             },
             "trail_visibility": {
                 "label": "Visibilidá del senderu"

@@ -623,16 +623,7 @@
                 "label": "Вид"
             },
             "religion": {
-                "label": "Религия",
-                "options": {
-                    "christian": "Християнство",
-                    "muslim": "Мюсюлманство",
-                    "buddhist": "Будизъм",
-                    "jewish": "Юдаизъм",
-                    "hindu": "Хиндуизъм",
-                    "shinto": "Шинтоизъм",
-                    "taoist": "Таоизъм"
-                }
+                "label": "Религия"
             },
             "restriction": {
                 "label": "Вид"
@@ -642,9 +633,6 @@
             },
             "route_master": {
                 "label": "Вид"
-            },
-            "sac_scale": {
-                "label": "Трудност на пътеката"
             },
             "service": {
                 "label": "Вид"
@@ -682,9 +670,6 @@
             },
             "towertype": {
                 "label": "Вид кула"
-            },
-            "tracktype": {
-                "label": "Вид"
             },
             "trail_visibility": {
                 "label": "Видимост на туристическата пътека"

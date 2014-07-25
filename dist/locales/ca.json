@@ -514,7 +514,12 @@
                 "label": "Tipus"
             },
             "aerialway/access": {
-                "label": "Accés"
+                "label": "Accés",
+                "options": {
+                    "entry": "Entrada",
+                    "exit": "Sortida",
+                    "both": "Ambdues"
+                }
             },
             "aerialway/bubble": {
                 "label": "Bombolla"
@@ -535,7 +540,12 @@
                 "placeholder": "2, 4, 8..."
             },
             "aerialway/summer/access": {
-                "label": "Accés (estival)"
+                "label": "Accés (estival)",
+                "options": {
+                    "entry": "Entrada",
+                    "exit": "Sortida",
+                    "both": "Ambdues"
+                }
             },
             "aeroway": {
                 "label": "Tipus"
@@ -575,7 +585,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Direcció"
+                "label": "Direcció",
+                "options": {
+                    "N": "Nord",
+                    "E": "Est",
+                    "S": "Sud",
+                    "W": "Oest",
+                    "NE": "Nord-est",
+                    "SE": "Sud-est",
+                    "SW": "Sud-oest",
+                    "NW": "Nord-oest",
+                    "NNE": "Nord-nord-est",
+                    "ENE": "Est-nord-est",
+                    "ESE": "Est-sud-est",
+                    "SSE": "Sud-sud-est",
+                    "SSW": "Sud-sud-oest",
+                    "WSW": "Oest-sud-oest",
+                    "WNW": "Oest-nord-oest",
+                    "NNW": "Nord-nord-oest"
+                }
             },
             "clock_direction": {
                 "label": "Direcció",
@@ -615,7 +643,14 @@
                 "label": "Descripció"
             },
             "electrified": {
-                "label": "Electrificació"
+                "label": "Electrificació",
+                "placeholder": "Catenària, 3r rail...",
+                "options": {
+                    "contact_line": "Catenària",
+                    "rail": "3r rail",
+                    "yes": "Sí (no especificat)",
+                    "no": "No"
+                }
             },
             "elevation": {
                 "label": "Elevació"
@@ -637,7 +672,13 @@
                 "label": "Pagament"
             },
             "fire_hydrant/type": {
-                "label": "Tipus"
+                "label": "Tipus",
+                "options": {
+                    "pillar": "Pilona/visible",
+                    "underground": "Subterrani",
+                    "wall": "Mur",
+                    "pond": "Bassa"
+                }
             },
             "fixme": {
                 "label": "Arregla'm"
@@ -760,6 +801,42 @@
                 "label": "Límit de velocitat",
                 "placeholder": "40, 50, 60..."
             },
+            "mtb/scale": {
+                "label": "Dificultat per a bicicletes de muntanya",
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Grava sòlida/terra compactada, sense obstacles, corbes de radi ample",
+                    "1": "1: Algunes zones amb superfície inestable, petits obstacles, corbes de radi ample",
+                    "2": "2: Bastantes zones amb superfície inestable, grans obstacles, corbes en paella fàcils",
+                    "3": "3: Superfície lliscant, grans obstacles, corbes en paella estretes",
+                    "4": "4: Superfície inestable o còdols, corbes en paella perilloses",
+                    "5": "5: Dificultat màxima, camps de còdols, esllavissades",
+                    "6": "6: No ciclable excepte per als millors ciclistes de muntanya"
+                }
+            },
+            "mtb/scale/imba": {
+                "label": "Dificultat del camí segons IMBA",
+                "placeholder": "Fàcil, Mitjana, Difícil...",
+                "options": {
+                    "0": "La més fàcil (cercle blanc)",
+                    "1": "Fàcil (cercle verd)",
+                    "2": "Mitjana (quadrat blau)",
+                    "3": "Difícil (diamant negre)",
+                    "4": "Extremadament difícil (diamant negre doble)"
+                }
+            },
+            "mtb/scale/uphill": {
+                "label": "Dificultat d'ascens per a ciclistes de muntanya",
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Incl. mitjana <10%, grava/terra compactada, sense obstacles",
+                    "1": "1: Incl. mitjana <15%. grava/terra compactada, pocs i petits obstacles",
+                    "2": "2: Incl. mitjana <20%, superfície estable, roques i arrels de la mida d'un puny",
+                    "3": "3: Incl. mitjana <25%, superfície veriable, roques i banques de la mida d'un puny",
+                    "4": "4: Incl. mitjana <30%, condicions pobres, grans roques/branques",
+                    "5": "5: Molt empinat, generalment la bicicleta ha de ser empesa."
+                }
+            },
             "name": {
                 "label": "Nom",
                 "placeholder": "Nom comú (si n'hi ha)"
@@ -779,7 +856,7 @@
             "oneway": {
                 "label": "Sentit únic",
                 "options": {
-                    "undefined": "Sobreentès que és no",
+                    "undefined": "Sobreentès que no",
                     "yes": "Sí",
                     "no": "No"
                 }
@@ -787,7 +864,7 @@
             "oneway_yes": {
                 "label": "Sentit únic",
                 "options": {
-                    "undefined": "Sobreentès que és sí",
+                    "undefined": "Sobreentès que sí",
                     "yes": "Sí",
                     "no": "No"
                 }
@@ -806,20 +883,58 @@
                 "label": "Aparca i viatja "
             },
             "parking": {
-                "label": "Tipus"
+                "label": "Tipus",
+                "options": {
+                    "surface": "Superfície",
+                    "multi-storey": "Diversos nivells",
+                    "underground": "Subterrani",
+                    "sheds": "Garatges",
+                    "carports": "Aixoplucs",
+                    "garage_boxes": "Boxs",
+                    "lane": "Adossat a la carretera"
+                }
             },
             "phone": {
                 "label": "Telèfon",
                 "placeholder": "+31 42 123 4567"
             },
             "piste/difficulty": {
-                "label": "Dificultat"
+                "label": "Dificultat",
+                "placeholder": "Fàcil, Intermedi, avançat...",
+                "options": {
+                    "novice": "Debutants (instrucció)",
+                    "easy": "Fàcil (pista verda)",
+                    "intermediate": "Intermedi (Pista blava)",
+                    "advanced": "Avançat (Pista Negre nivell I )",
+                    "expert": "Expert (Pista negra nivell II)",
+                    "freeride": "Pista no oficial (fora pistes)",
+                    "extreme": "Extrem (es necessita equipament d'escalada)"
+                }
             },
             "piste/grooming": {
-                "label": "Adequació"
+                "label": "Adequació",
+                "options": {
+                    "classic": "Classic",
+                    "mogul": "Mogul",
+                    "backcountry": "Backcountry",
+                    "classic+skating": "Classic i Skating",
+                    "scooter": "Retrack petita/moto de neu",
+                    "skating": "Skating"
+                }
             },
             "piste/type": {
-                "label": "Tipus"
+                "label": "Tipus",
+                "options": {
+                    "downhill": "Descens",
+                    "nordic": "Esquí de fons",
+                    "skitour": "Esquí de muntanya",
+                    "sled": "Trineus",
+                    "hike": "Raquetes/senderistes",
+                    "sleigh": "Trineus multiplaça",
+                    "ice_skate": "Patinatge sobre gel",
+                    "snow_park": "Parc per a snowboards",
+                    "playground": "Parc infantil"
+                }
             },
             "place": {
                 "label": "Tipus"
@@ -852,16 +967,7 @@
                 "label": "Tipus"
             },
             "religion": {
-                "label": "Religió",
-                "options": {
-                    "christian": "Cristiana",
-                    "muslim": "Musulmana",
-                    "buddhist": "Budista",
-                    "jewish": "Jueva",
-                    "hindu": "Hinduista",
-                    "shinto": "Sintoista",
-                    "taoist": "Taoista"
-                }
+                "label": "Religió"
             },
             "restriction": {
                 "label": "Tipus"
@@ -876,7 +982,16 @@
                 "label": "Tipus"
             },
             "sac_scale": {
-                "label": "Dificultat del camí"
+                "label": "Dificultat per al senderisme",
+                "placeholder": "Muntanysime, Alpinisme...",
+                "options": {
+                    "hiking": "T1: Senderisme",
+                    "mountain_hiking": "T2: Muntanyisme",
+                    "demanding_mountain_hiking": "T3: Muntanyisme exigent",
+                    "alpine_hiking": "T4: Alpinisme",
+                    "demanding_alpine_hiking": "T5: Alpinisme exigent",
+                    "difficult_alpine_hiking": "T6: Alpinisme difícil"
+                }
             },
             "seasonal": {
                 "label": "Estacional"
@@ -897,7 +1012,30 @@
                 "label": "Corba peraltada"
             },
             "smoking": {
-                "label": "Apte per a fumadors"
+                "label": "Apte per a fumadors",
+                "placeholder": "No, Separats, Sí...",
+                "options": {
+                    "no": "Prohibit fumar a tot arreu",
+                    "separated": "A les àrees per a fumadors, no aïllades físicament",
+                    "isolated": "A les àrees per a fumadors, aïllades físicament",
+                    "outside": "Permès a fora",
+                    "yes": "Permès a tot arreu",
+                    "dedicated": "Dedicat a fumadors (ex: club de fumadors)"
+                }
+            },
+            "smoothness": {
+                "label": "Uniformitat",
+                "placeholder": "Rodetes, Rodes, Tot terreny...",
+                "options": {
+                    "excellent": "Rodetes: Patí en línia, skateboard",
+                    "good": "Rodes primes: bicicleta de competició",
+                    "intermediate": "Rodes: bicicleta urbana, cadira de rodes, patinet",
+                    "bad": "Rodes robustes: bicicleta de muntanya, cotxe, carruatge oriental",
+                    "very_bad": "Gran altura: vehicle utilitari lleuger tot terreny",
+                    "horrible": "Tot terreny : vehicle utilitari pesant tot terreny",
+                    "very_horrible": "Tot terreny especialitzades: tractors, Quads",
+                    "impassible": "Intransitable / Cap vehicle amb rodes"
+                }
             },
             "social_facility_for": {
                 "label": "Persones ateses",
@@ -936,7 +1074,13 @@
                 "label": "Paviment rugós"
             },
             "toilets/disposal": {
-                "label": "Contenidor"
+                "label": "Contenidor",
+                "options": {
+                    "flush": "Renovació d'aigua",
+                    "pitlatrine": "Latrina",
+                    "chemical": "Químic",
+                    "bucket": "Cubell"
+                }
             },
             "tourism": {
                 "label": "Tipus"
@@ -945,10 +1089,27 @@
                 "label": "Tipus de torre"
             },
             "tracktype": {
-                "label": "Tipus"
+                "label": "Tipus de pista",
+                "placeholder": "Sòlid, majoritàriament sòlid, tou...",
+                "options": {
+                    "grade1": "Sòlid: pavimentat o amb superfície altament compactada",
+                    "grade2": "Majoritàriament sòlid: Grava/roca amb materials tous barrejats",
+                    "grade3": "Barreja uniforme de materials durs i tous",
+                    "grade4": "Majoritàriament tou: terra/sorra/herba amb alguns materials durs barrejats",
+                    "grade5": "Tou: terra/sorra/herba"
+                }
             },
             "trail_visibility": {
-                "label": "Visibilitat del camí"
+                "label": "Visibilitat del camí",
+                "placeholder": "Excel·lent, Bona, Dolenta...",
+                "options": {
+                    "excellent": "Excel·lent: camí no ambigu o amb presència de marques a tots llocs",
+                    "good": "Bona: marcadors visibles, a vegades cal cercar-los",
+                    "intermediate": "Intermedia: pocs marcadors, el camí es majoritàriament visible",
+                    "bad": "Dolenta: sense marcadors. el camí a vegades no es veu/no hi és",
+                    "horrible": "Horrible: a vegades sense camí, calen nocions d'orientació",
+                    "no": "Nul·la: sense camí, calen coneixements experts d'orientació"
+                }
             },
             "tree_type": {
                 "label": "Tipus"
@@ -1095,6 +1256,9 @@
             },
             "amenity/boat_rental": {
                 "name": "Lloguer d'embarcacions"
+            },
+            "amenity/bus_station": {
+                "name": "Estació d'autobusos"
             },
             "amenity/cafe": {
                 "name": "Cafè",

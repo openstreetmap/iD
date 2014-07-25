@@ -818,16 +818,7 @@
                 "label": "Type"
             },
             "religion": {
-                "label": "Religion",
-                "options": {
-                    "christian": "Chrétienne",
-                    "muslim": "Islamique",
-                    "buddhist": "Bouddhiste",
-                    "jewish": "Juive",
-                    "hindu": "Hindouiste",
-                    "shinto": "Shintoïste",
-                    "taoist": "Taoïste"
-                }
+                "label": "Religion"
             },
             "restriction": {
                 "label": "Type"
@@ -837,9 +828,6 @@
             },
             "route_master": {
                 "label": "Type"
-            },
-            "sac_scale": {
-                "label": "Difficulté du chemin"
             },
             "service": {
                 "label": "Type"
@@ -896,9 +884,6 @@
             },
             "towertype": {
                 "label": "Type de tour"
-            },
-            "tracktype": {
-                "label": "Type"
             },
             "trail_visibility": {
                 "label": "Visibilité du sentier"
@@ -1058,6 +1043,10 @@
             "amenity/boat_rental": {
                 "name": "Location de bateau",
                 "terms": "Location de bateaux"
+            },
+            "amenity/bus_station": {
+                "name": "Gare routière",
+                "terms": "Gare, Arrêt, Arrêt de bus"
             },
             "amenity/cafe": {
                 "name": "Café",
@@ -1662,7 +1651,7 @@
             },
             "highway/bus_stop": {
                 "name": "Arrêt de bus",
-                "terms": "Arrêt de bus"
+                "terms": "Arrêt de bus, Gare, Gare routière"
             },
             "highway/crossing": {
                 "name": "Passage piéton",
@@ -2334,7 +2323,7 @@
                 "terms": "Quai"
             },
             "public_transport/stop_position": {
-                "name": "Arrêt",
+                "name": "Position d’arrêt sur une route de transport en commun",
                 "terms": "Arrêt"
             },
             "railway": {
@@ -2353,8 +2342,8 @@
                 "name": "Funiculaire"
             },
             "railway/halt": {
-                "name": "Hall de gare",
-                "terms": "Halte ferroviaire"
+                "name": "Halte ferroviaire",
+                "terms": "Arrêt ferroviaire, Arrêt"
             },
             "railway/level_crossing": {
                 "name": "Passage à niveau",
@@ -2368,7 +2357,7 @@
                 "name": "Voie étroite"
             },
             "railway/platform": {
-                "name": "Quai de gare",
+                "name": "Quai de gare ferroviaire",
                 "terms": "Quai de gare"
             },
             "railway/rail": {
@@ -2376,8 +2365,8 @@
                 "terms": "Rail"
             },
             "railway/station": {
-                "name": "Gare",
-                "terms": "Gare ferroviaire, Gare"
+                "name": "Gare ferroviaire",
+                "terms": "Gare ferroviaire, Gare, Arrêt"
             },
             "railway/subway": {
                 "name": "Métro",

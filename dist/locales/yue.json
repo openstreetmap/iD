@@ -735,16 +735,7 @@
                 "label": "類"
             },
             "religion": {
-                "label": "宗敎",
-                "options": {
-                    "christian": "基督敎",
-                    "muslim": "囘敎",
-                    "buddhist": "佛敎",
-                    "jewish": "猶太敎",
-                    "hindu": "印度敎",
-                    "shinto": "神道敎",
-                    "taoist": "道敎"
-                }
+                "label": "宗敎"
             },
             "restriction": {
                 "label": "類"
@@ -754,9 +745,6 @@
             },
             "route_master": {
                 "label": "類"
-            },
-            "sac_scale": {
-                "label": "行徑難度"
             },
             "service": {
                 "label": "類"
@@ -800,9 +788,6 @@
             },
             "towertype": {
                 "label": "塔類"
-            },
-            "tracktype": {
-                "label": "類"
             },
             "trail_visibility": {
                 "label": "徑明顯度"

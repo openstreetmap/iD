@@ -577,14 +577,7 @@
                 "label": "টাইপ"
             },
             "religion": {
-                "label": "ধর্ম",
-                "options": {
-                    "christian": "খ্রিষ্টান",
-                    "muslim": "মুসলিম",
-                    "buddhist": "বৌদ্ধ",
-                    "jewish": "ইহুদি",
-                    "hindu": "হিন্দু"
-                }
+                "label": "ধর্ম"
             },
             "restriction": {
                 "label": "টাইপ"
@@ -594,9 +587,6 @@
             },
             "route_master": {
                 "label": "টাইপ"
-            },
-            "sac_scale": {
-                "label": "পথের কঠিনতা"
             },
             "service": {
                 "label": "টাইপ"
@@ -625,9 +615,6 @@
                 "label": "উপরিভাগ"
             },
             "tourism": {
-                "label": "টাইপ"
-            },
-            "tracktype": {
                 "label": "টাইপ"
             },
             "water": {

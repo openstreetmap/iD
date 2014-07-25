@@ -490,7 +490,11 @@
                 "label": "Врста"
             },
             "aerialway/access": {
-                "label": "Приступ"
+                "label": "Приступ",
+                "options": {
+                    "entry": "Улаз",
+                    "exit": "Излаз"
+                }
             },
             "aerialway/capacity": {
                 "label": "Капацитет (по сату)",
@@ -507,7 +511,11 @@
                 "placeholder": "2, 4, 8..."
             },
             "aerialway/summer/access": {
-                "label": "Приступ (лети)"
+                "label": "Приступ (лети)",
+                "options": {
+                    "entry": "Улаз",
+                    "exit": "Излаз"
+                }
             },
             "aeroway": {
                 "label": "Врста"
@@ -547,7 +555,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Правац"
+                "label": "Правац",
+                "options": {
+                    "N": "Север",
+                    "E": "Исток",
+                    "S": "Југ",
+                    "W": "Запад",
+                    "NE": "Североисток",
+                    "SE": "Југоисток",
+                    "SW": "Југозапад",
+                    "NW": "Северозапад",
+                    "NNE": "Север-северозапад",
+                    "ENE": "Исток-североисток",
+                    "ESE": "Исток-југоисток",
+                    "SSE": "Југ-југоисток",
+                    "SSW": "Југ-југозапад",
+                    "WSW": "Запад-југозапад",
+                    "WNW": "Запад-северозапад",
+                    "NNW": "Север-северозапад"
+                }
             },
             "clock_direction": {
                 "label": "Правац",
@@ -584,7 +610,12 @@
                 "label": "Опис"
             },
             "electrified": {
-                "label": "Електрификација"
+                "label": "Електрификација",
+                "options": {
+                    "contact_line": "Контактна мрежа",
+                    "yes": "Да (неодређено)",
+                    "no": "Не"
+                }
             },
             "elevation": {
                 "label": "Надморска висина"
@@ -606,10 +637,19 @@
                 "label": "Провизија"
             },
             "fire_hydrant/type": {
-                "label": "Врста"
+                "label": "Врста",
+                "options": {
+                    "pillar": "Стуб/Надземни",
+                    "underground": "Подземни",
+                    "wall": "Зид",
+                    "pond": "Резервоар"
+                }
             },
             "fixme": {
                 "label": "Поправи ме"
+            },
+            "fuel": {
+                "label": "Гориво"
             },
             "fuel/biodiesel": {
                 "label": "Продаје биодизел"
@@ -716,6 +756,12 @@
                 "label": "Ограничење брзине",
                 "placeholder": "40, 50, 60..."
             },
+            "mtb/scale": {
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/uphill": {
+                "placeholder": "0, 1, 2, 3..."
+            },
             "name": {
                 "label": "Име",
                 "placeholder": "Уобичајени назив (ако постоји)"
@@ -759,7 +805,12 @@
                 "label": "Подстицај паркирања"
             },
             "parking": {
-                "label": "Врста"
+                "label": "Врста",
+                "options": {
+                    "multi-storey": "Вишеспратни",
+                    "underground": "Подземни",
+                    "sheds": "Наткривени"
+                }
             },
             "phone": {
                 "label": "Телефон",
@@ -769,7 +820,10 @@
                 "label": "Тежина"
             },
             "piste/type": {
-                "label": "Врста"
+                "label": "Врста",
+                "options": {
+                    "playground": "Игралиште"
+                }
             },
             "place": {
                 "label": "Врста"
@@ -802,16 +856,7 @@
                 "label": "Врста"
             },
             "religion": {
-                "label": "Религија",
-                "options": {
-                    "christian": "Хришћанство",
-                    "muslim": "Ислам",
-                    "buddhist": "Будизам",
-                    "jewish": "Јудаизам",
-                    "hindu": "Хинду",
-                    "shinto": "Шинто",
-                    "taoist": "Таоизам"
-                }
+                "label": "Религија"
             },
             "restriction": {
                 "label": "Врста"
@@ -824,9 +869,6 @@
             },
             "route_master": {
                 "label": "Врста"
-            },
-            "sac_scale": {
-                "label": "Тежина стазе"
             },
             "seasonal": {
                 "label": "Сезонско"
@@ -887,11 +929,9 @@
             "towertype": {
                 "label": "Врста торња"
             },
-            "tracktype": {
-                "label": "Врста"
-            },
             "trail_visibility": {
-                "label": "Видљивост стазе"
+                "label": "Видљивост стазе",
+                "placeholder": "Одлично, добро, лоше..."
             },
             "tree_type": {
                 "label": "Врста"

@@ -428,6 +428,9 @@
             "category-rail": {
                 "name": "Рейки"
             },
+            "category-restriction": {
+                "name": "Заборона"
+            },
             "category-road": {
                 "name": "Дороги"
             },
@@ -480,13 +483,25 @@
                 }
             },
             "access_simple": {
+                "label": "Доступ",
+                "placeholder": "так"
+            },
+            "access_toilets": {
                 "label": "Доступ"
             },
             "address": {
                 "label": "Адреса",
                 "placeholders": {
+                    "housename": "Ім’я будинку",
+                    "housenumber": "123",
                     "street": "Вулиця",
-                    "city": "Місто"
+                    "city": "Місто",
+                    "postcode": "Поштовий індекс",
+                    "place": "Місцевість",
+                    "hamlet": "Хутір",
+                    "suburb": "Передмістя",
+                    "district": "Район",
+                    "country": "Країна"
                 }
             },
             "admin_level": {
@@ -496,7 +511,35 @@
                 "label": "Тип"
             },
             "aerialway/access": {
-                "label": "Доступ"
+                "label": "Доступ",
+                "options": {
+                    "entry": "Вхід",
+                    "exit": "Вихід",
+                    "both": "Вхід/Вихід"
+                }
+            },
+            "aerialway/capacity": {
+                "label": "Пропускна здатність (на годину)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Тривалість (хвилин)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "З підігрівом"
+            },
+            "aerialway/occupancy": {
+                "label": "Кількість місць",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Доступ влітку",
+                "options": {
+                    "entry": "Вхід",
+                    "exit": "Вихід",
+                    "both": "Вхід/Вихід"
+                }
             },
             "aeroway": {
                 "label": "Тип"
@@ -536,7 +579,25 @@
                 "placeholder": "50, 100, 200…"
             },
             "cardinal_direction": {
-                "label": "Напрямок"
+                "label": "Напрямок",
+                "options": {
+                    "N": "Північ",
+                    "E": "Схід",
+                    "S": "Південь",
+                    "W": "Захід",
+                    "NE": "Північний схід",
+                    "SE": "Південний схід",
+                    "SW": "Південний захід",
+                    "NW": "Північний захід",
+                    "NNE": "Північно-північний схід",
+                    "ENE": "Східно-північний схід",
+                    "ESE": "Східно-південний схід",
+                    "SSE": "Південно-південний схід",
+                    "SSW": "Південно-південний захід",
+                    "WSW": "Західно-південний захід",
+                    "WNW": "Західно-північний захід",
+                    "NNW": "Північно-північний захід"
+                }
             },
             "clock_direction": {
                 "label": "Напрямок",
@@ -569,6 +630,9 @@
             "description": {
                 "label": "Опис"
             },
+            "electrified": {
+                "label": "Електрифікація"
+            },
             "elevation": {
                 "label": "Висота"
             },
@@ -578,6 +642,9 @@
             "entrance": {
                 "label": "Тип"
             },
+            "except": {
+                "label": "Вийнятки"
+            },
             "fax": {
                 "label": "Факс",
                 "placeholder": "+31 42 123 4567"
@@ -586,10 +653,39 @@
                 "label": "Плата"
             },
             "fire_hydrant/type": {
-                "label": "Тип"
+                "label": "Тип",
+                "options": {
+                    "pillar": "Надземний",
+                    "underground": "Підземний",
+                    "wall": "Настінний"
+                }
             },
             "fixme": {
                 "label": "Потребує виправлення"
+            },
+            "fuel": {
+                "label": "АЗС"
+            },
+            "fuel/biodiesel": {
+                "label": "Біодизель"
+            },
+            "fuel/diesel": {
+                "label": "Дизельне паливо"
+            },
+            "fuel/e10": {
+                "label": "E10"
+            },
+            "fuel/e85": {
+                "label": "E85"
+            },
+            "fuel/lpg": {
+                "label": "Пропан"
+            },
+            "fuel/octane_100": {
+                "label": "Гоночний бензин"
+            },
+            "fuel/octane_91": {
+                "label": "Звичайний бензин"
             },
             "generator/method": {
                 "label": "Метод"
@@ -614,6 +710,9 @@
             "historic": {
                 "label": "Тип"
             },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
+            },
             "iata": {
                 "label": "IATA"
             },
@@ -629,10 +728,15 @@
             "internet_access": {
                 "label": "Доступ до Інтеренету",
                 "options": {
+                    "yes": "Так",
+                    "no": "Ні",
                     "wlan": "Wifi",
                     "wired": "Дротовий",
                     "terminal": "Термінал"
                 }
+            },
+            "lamp_type": {
+                "label": "Тип"
             },
             "landuse": {
                 "label": "Тип"
@@ -646,6 +750,9 @@
             },
             "leisure": {
                 "label": "Тип"
+            },
+            "length": {
+                "label": "Довжина (метрів)"
             },
             "levels": {
                 "label": "Поверхи",
@@ -681,10 +788,18 @@
                 "label": "Тип"
             },
             "oneway": {
-                "label": "Односторонній рух"
+                "label": "Односторонній рух",
+                "options": {
+                    "yes": "Так",
+                    "no": "Ні"
+                }
             },
             "oneway_yes": {
-                "label": "Односторонній рух"
+                "label": "Односторонній рух",
+                "options": {
+                    "yes": "Так",
+                    "no": "Ні"
+                }
             },
             "opening_hours": {
                 "label": "Години"
@@ -699,7 +814,15 @@
                 "label": "Перехоплююча стоянка"
             },
             "parking": {
-                "label": "Тип"
+                "label": "Тип",
+                "options": {
+                    "surface": "Покриття",
+                    "multi-storey": "Багаторівнева",
+                    "underground": "Підземна",
+                    "sheds": "Гаражі",
+                    "carports": "Навіси",
+                    "garage_boxes": "Гаражі"
+                }
             },
             "phone": {
                 "label": "Телефон",
@@ -720,6 +843,18 @@
             "railway": {
                 "label": "Тип"
             },
+            "recycling/cans": {
+                "label": "Бляшані банки"
+            },
+            "recycling/clothes": {
+                "label": "Одяг"
+            },
+            "recycling/glass": {
+                "label": "Скло"
+            },
+            "recycling/paper": {
+                "label": "Папір"
+            },
             "ref": {
                 "label": "Номер"
             },
@@ -727,19 +862,13 @@
                 "label": "Тип"
             },
             "religion": {
-                "label": "Релігія",
-                "options": {
-                    "christian": "Християнство",
-                    "muslim": "Мусульманство",
-                    "buddhist": "Будизм",
-                    "jewish": "Іудейство",
-                    "hindu": "Хінду",
-                    "shinto": "Сінто",
-                    "taoist": "Даосизм"
-                }
+                "label": "Релігія"
             },
             "restriction": {
                 "label": "Тип"
+            },
+            "restrictions": {
+                "label": "Заборони повороту"
             },
             "route": {
                 "label": "Тип"
@@ -747,8 +876,8 @@
             "route_master": {
                 "label": "Тип"
             },
-            "sac_scale": {
-                "label": "Складність маршруту"
+            "seasonal": {
+                "label": "Сезонний"
             },
             "service": {
                 "label": "Тип"
@@ -761,6 +890,18 @@
             },
             "shop": {
                 "label": "Тип"
+            },
+            "smoking": {
+                "label": "Паління",
+                "placeholder": "Заборонено, окремо, дозволено,...",
+                "options": {
+                    "no": "Паління заборонено",
+                    "separated": "У відведених зонах, не ізольованих",
+                    "isolated": "У відведених зонах, ізольованих",
+                    "outside": "Дозволено зовні",
+                    "yes": "Дозволено скрізь",
+                    "dedicated": "Призначено для курців"
+                }
             },
             "source": {
                 "label": "Джерело"
@@ -788,7 +929,13 @@
                 "label": "Поверхня"
             },
             "toilets/disposal": {
-                "label": "Тип туалету"
+                "label": "Тип туалету",
+                "options": {
+                    "flush": "Зливний",
+                    "pitlatrine": "Яма",
+                    "chemical": "Хімічний",
+                    "bucket": "Відро"
+                }
             },
             "tourism": {
                 "label": "Тип"
@@ -797,13 +944,32 @@
                 "label": "Тип опори"
             },
             "tracktype": {
-                "label": "Тип"
+                "placeholder": "Тверде, переважно тверде, м’яке",
+                "options": {
+                    "grade1": "Тверде: з твердим покриттям чи з ущільненою поверхнею на твердих породах",
+                    "grade2": "Переважно тверде: гравій/камінь з домішками м’яких порід",
+                    "grade3": "Рівна кількість твердих і м’яких матеріалів",
+                    "grade4": "Переважно м’яке: грунт/пісок/трава з домішками твердих порід",
+                    "grade5": "М’яке: грунт/пісок/трава"
+                }
             },
             "trail_visibility": {
-                "label": "Видимість маршруту"
+                "label": "Видимість маршруту",
+                "placeholder": "Відмінна, Хороша, Погана,...",
+                "options": {
+                    "excellent": "Відмінна: чіткий шлях чи вказівники повсюди",
+                    "good": "Хороша: вказівники в межах видимості, шлях не завжди чіткий",
+                    "intermediate": "Середня: мала кількість вказівників, шлях в основному видимий",
+                    "bad": "Погана: без вказівників, шлях іноді відсутній",
+                    "horrible": "Жахлива: шлях часто відсутній, потребує навичок орієнтування",
+                    "no": "Немає: шлях відсутній, потребує хороших навичок орієнтування"
+                }
             },
             "tree_type": {
                 "label": "Тип"
+            },
+            "trees": {
+                "label": "Дерева"
             },
             "tunnel": {
                 "label": "Тунель"
@@ -827,6 +993,9 @@
             "wheelchair": {
                 "label": "Для інвалідних візків"
             },
+            "width": {
+                "label": "Ширина (метрів)"
+            },
             "wikipedia": {
                 "label": "Вікіпедія"
             },
@@ -838,6 +1007,25 @@
             "address": {
                 "name": "Адреса",
                 "terms": "Address, адреса, місце"
+            },
+            "aerialway": {
+                "name": "Канатна дорога",
+                "terms": "Aerialway, rfyfnyf ljhjuf"
+            },
+            "aerialway/cable_car": {
+                "name": "Фунікулер",
+                "terms": "Cable car, aeysrekth"
+            },
+            "aerialway/chair_lift": {
+                "name": "Крісельний підйомник",
+                "terms": "Chair lift, rhsctkmybq gslqjvybr"
+            },
+            "aerialway/gondola": {
+                "name": "Гондоли",
+                "terms": "Gondola, Ujyljkb"
+            },
+            "aerialway/magic_carpet": {
+                "name": "Стрічковий транспортер"
             },
             "aeroway": {
                 "name": "Аеропорт",
@@ -911,6 +1099,10 @@
                 "name": "Прокат човнів",
                 "terms": "Boat Rental,ghjrfn xjdysd, катамарани"
             },
+            "amenity/bus_station": {
+                "name": "Автобусна станція",
+                "terms": "Bus Station, fdnjecyf cnfywsz"
+            },
             "amenity/cafe": {
                 "name": "Кафе",
                 "terms": "Cafe, rfat"
@@ -927,6 +1119,10 @@
                 "name": "Автомийка",
                 "terms": "Car Wash, fdnjvbqrf, мийка"
             },
+            "amenity/charging_station": {
+                "name": "Зарядна станція",
+                "terms": "Charging station, pfhzlyf cnfywsz"
+            },
             "amenity/childcare": {
                 "name": "Дитяча кімната",
                 "terms": "Childcare, lbnzxf rsvyfnf, догляд за дітьми, ігрова зона, ігрова кімната"
@@ -935,6 +1131,10 @@
                 "name": "Кінотеатр",
                 "terms": "Cinema, rsyjntfnh,кіно,кінематографія"
             },
+            "amenity/clock": {
+                "name": "Годинник",
+                "terms": "Clock, ujlbyybr"
+            },
             "amenity/college": {
                 "name": "Коледж",
                 "terms": "College, rjktl,училище,технікум"
@@ -942,6 +1142,14 @@
             "amenity/courthouse": {
                 "name": "Суд",
                 "terms": "Courthouse, cel, суд"
+            },
+            "amenity/dentist": {
+                "name": "Дантист",
+                "terms": "Dentist, lfynbcn"
+            },
+            "amenity/doctor": {
+                "name": "Лікар",
+                "terms": "Doctor, Ksrfh"
             },
             "amenity/drinking_water": {
                 "name": "Питна вода",
@@ -971,6 +1179,14 @@
                 "name": "Цвинтар",
                 "terms": "Graveyard, wdbynfh,кладовище"
             },
+            "amenity/hospital": {
+                "name": "Територія лікарні",
+                "terms": "Hospital grounds, nthbnjhsz ksrfhys"
+            },
+            "amenity/kindergarten": {
+                "name": "Територія дитсадка",
+                "terms": "Kindergarten grounds, nthbnjhsz lbncflrf"
+            },
             "amenity/library": {
                 "name": "Бібліотека",
                 "terms": "Library, sksjntrf"
@@ -978,6 +1194,10 @@
             "amenity/marketplace": {
                 "name": "Ринок",
                 "terms": "Marketplace, hbyjr,базар,базарна площа"
+            },
+            "amenity/nightclub": {
+                "name": "Нічний клуб",
+                "terms": "Nightclub, ysxybq rke"
             },
             "amenity/parking": {
                 "name": "Автостоянка",
@@ -1034,8 +1254,16 @@
                 "name": "Ресторан",
                 "terms": "Restaurant, htcnjhfy"
             },
+            "amenity/school": {
+                "name": "Територія школи",
+                "terms": "School grounds, nthbnjhsz irjkb"
+            },
             "amenity/shelter": {
                 "name": "Притулок"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Притулок для бездомних",
+                "terms": "Homeless shelter, ghbnekjr lkz tpljvyb"
             },
             "amenity/swimming_pool": {
                 "name": "Басейн",
@@ -1068,6 +1296,10 @@
             "amenity/vending_machine": {
                 "name": "Торговельний автомат",
                 "terms": "Vending Machine,njhujdtkmybq fdnjvfn, торгівельний автомат, торговий автомат"
+            },
+            "amenity/veterinary": {
+                "name": "Ветеринарна лікарня",
+                "terms": "Veterinary, dtnthbyfhyf ksrfhyz"
             },
             "amenity/waste_basket": {
                 "name": "Бак для сміття",
@@ -1157,13 +1389,49 @@
                 "name": "Житло",
                 "terms": "Apartments,bnkj"
             },
+            "building/bunker": {
+                "name": "Бункер",
+                "terms": "Bunker, eyrth"
+            },
+            "building/cathedral": {
+                "name": "Собор",
+                "terms": "Cathedral, cjjh"
+            },
+            "building/chapel": {
+                "name": "Каплиця",
+                "terms": "Chapel, rfgkbwz"
+            },
+            "building/church": {
+                "name": "Церква",
+                "terms": "Church, wthrdf"
+            },
             "building/commercial": {
                 "name": "Комерційна нерухомість",
                 "terms": "Commercial Building,rjvthwsqyf ythejvscnm"
             },
+            "building/entrance": {
+                "name": "Вхід/Вихід",
+                "terms": "Entrance, exit, dsl, dbsl"
+            },
             "building/garage": {
                 "name": "Гараж",
                 "terms": "Garage,ufhf"
+            },
+            "building/garages": {
+                "name": "Гаражі",
+                "terms": "Garages, ufhfs"
+            },
+            "building/greenhouse": {
+                "name": "Теплиця",
+                "terms": "Greenhouse, ntgkbwz"
+            },
+            "building/hospital": {
+                "name": "Госпіталь",
+                "terms": "Hospital, ujcgsnfkm"
+            },
+            "building/hotel": {
+                "name": "Готель",
+                "terms": "Hotel, ujntkm"
             },
             "building/house": {
                 "name": "Дім",
@@ -1180,6 +1448,40 @@
             "building/residential": {
                 "name": "Житлова будівля",
                 "terms": "Residential Building,bnkjdf elsdkz"
+            },
+            "building/retail": {
+                "name": "Роздрібна торгівля",
+                "terms": "Retail, hjplhsyf njdusdkz"
+            },
+            "building/roof": {
+                "name": "Дах",
+                "terms": "Roof, lf, накриття"
+            },
+            "building/school": {
+                "name": "Школа",
+                "terms": "School, irjkf"
+            },
+            "building/stable": {
+                "name": "Стайні",
+                "terms": "Stable, cnfqys"
+            },
+            "building/train_station": {
+                "name": "Залізнична станція",
+                "terms": "Train station, pfkspybxyf cnfywsz"
+            },
+            "building/university": {
+                "name": "Університет",
+                "terms": "University, eysdthcbntn"
+            },
+            "building/warehouse": {
+                "name": "Склад",
+                "terms": "warehouse, crkfl"
+            },
+            "craft/blacksmith": {
+                "name": "Коваль"
+            },
+            "craft/electrician": {
+                "name": "Електрик"
             },
             "craft/photographer": {
                 "name": "Фотограф"
@@ -1676,7 +1978,7 @@
             },
             "natural/wetland": {
                 "name": "Заболочені землі",
-                "terms": "Wetland,pfjkjxtys ptvks"
+                "terms": "Wetland,pfjkjxtys ptvks, болото"
             },
             "natural/wood": {
                 "name": "Дерева",

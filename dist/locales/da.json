@@ -514,7 +514,12 @@
                 "label": "Type"
             },
             "aerialway/access": {
-                "label": "Adgang"
+                "label": "Adgang",
+                "options": {
+                    "entry": "Indgang",
+                    "exit": "Udgang",
+                    "both": "Begge"
+                }
             },
             "aerialway/bubble": {
                 "label": "Skikabine"
@@ -535,7 +540,12 @@
                 "placeholder": "2, 4, 8..."
             },
             "aerialway/summer/access": {
-                "label": "Adgang (sommer)"
+                "label": "Adgang (sommer)",
+                "options": {
+                    "entry": "Indgang",
+                    "exit": "Udgang",
+                    "both": "Begge"
+                }
             },
             "aeroway": {
                 "label": "Type"
@@ -575,7 +585,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Retning"
+                "label": "Retning",
+                "options": {
+                    "N": "Nord",
+                    "E": "Øst",
+                    "S": "Syd",
+                    "W": "Vest",
+                    "NE": "Nordøst",
+                    "SE": "Sydøst",
+                    "SW": "Sydvest",
+                    "NW": "Nordvest",
+                    "NNE": "Nord-nordøst",
+                    "ENE": "Øst-nordøst",
+                    "ESE": "Øst-sydøst",
+                    "SSE": "Syd-sydøst",
+                    "SSW": "Syd-sydvest",
+                    "WSW": "Vest-sydvest",
+                    "WNW": "Vest-nordvest",
+                    "NNW": "Nord-nordvest"
+                }
             },
             "clock_direction": {
                 "label": "Retning",
@@ -615,7 +643,10 @@
                 "label": "Beskrivelse"
             },
             "electrified": {
-                "label": "Elektrificering"
+                "label": "Elektrificering",
+                "options": {
+                    "no": "Nej"
+                }
             },
             "elevation": {
                 "label": "Højde over havet"
@@ -637,7 +668,12 @@
                 "label": "Gebyr"
             },
             "fire_hydrant/type": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "pillar": "Brandhane/Overjordisk",
+                    "underground": "Underjordisk",
+                    "wall": "Mur"
+                }
             },
             "fixme": {
                 "label": "Ret mig"
@@ -760,6 +796,21 @@
                 "label": "Hastighedsbegrænsning",
                 "placeholder": "40, 50, 60..."
             },
+            "mtb/scale": {
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/imba": {
+                "options": {
+                    "0": "Nemmeste (hvid cirkel)",
+                    "1": "Let (grøn cirkel)",
+                    "2": "Medium (blå firkant)",
+                    "3": "Vanskelig (sort diamant)",
+                    "4": "Ekstremt vanskeligt (dobbelt sort diamant)"
+                }
+            },
+            "mtb/scale/uphill": {
+                "placeholder": "0, 1, 2, 3..."
+            },
             "name": {
                 "label": "Navn",
                 "placeholder": "Mest kendte navn (hvis nogen)"
@@ -806,20 +857,37 @@
                 "label": "Park and ride-anlæg"
             },
             "parking": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "surface": "Overflade",
+                    "underground": "Underjordisk",
+                    "sheds": "Skur",
+                    "carports": "Carporte",
+                    "garage_boxes": "Garagebokse"
+                }
             },
             "phone": {
                 "label": "Telefon",
                 "placeholder": "+31 42 123 4567"
             },
             "piste/difficulty": {
-                "label": "Vanskelighedsniveau"
+                "label": "Vanskelighedsniveau",
+                "options": {
+                    "novice": "Nybegynder (instruktioner)",
+                    "easy": "Nemt (grøn cirkel)",
+                    "freeride": "Freeride (off-piste)"
+                }
             },
             "piste/grooming": {
                 "label": "Sikkerhed"
             },
             "piste/type": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "nordic": "Nordisk",
+                    "sleigh": "Kælk",
+                    "playground": "Legeplads"
+                }
             },
             "place": {
                 "label": "Type"
@@ -852,16 +920,7 @@
                 "label": "Type"
             },
             "religion": {
-                "label": "Religion",
-                "options": {
-                    "christian": "Kristen",
-                    "muslim": "Muslimsk",
-                    "buddhist": "Buddhist",
-                    "jewish": "Jødisk",
-                    "hindu": "Hinduisme",
-                    "shinto": "Shinto",
-                    "taoist": "Taoist"
-                }
+                "label": "Religion"
             },
             "restriction": {
                 "label": "Type"
@@ -876,7 +935,14 @@
                 "label": "Type"
             },
             "sac_scale": {
-                "label": "Sti sværhedsgrad"
+                "options": {
+                    "hiking": "T1: Vandring",
+                    "mountain_hiking": "T2: Bjergvandring",
+                    "demanding_mountain_hiking": "T3: Udfordrende bjergvandring",
+                    "alpine_hiking": "T4: Alpint vandring",
+                    "demanding_alpine_hiking": "T5: Udfordrende alpint vandring",
+                    "difficult_alpine_hiking": "T6: Vanskelig alpint vandring"
+                }
             },
             "seasonal": {
                 "label": " Sæsonpræget"
@@ -897,7 +963,11 @@
                 "label": "Sløfekurve"
             },
             "smoking": {
-                "label": "Rygning"
+                "label": "Rygning",
+                "options": {
+                    "outside": "Tilladt udenfor",
+                    "yes": "Tilladt alle steder"
+                }
             },
             "social_facility_for": {
                 "label": "Serviceret folk",
@@ -936,16 +1006,16 @@
                 "label": "Tactile Paving"
             },
             "toilets/disposal": {
-                "label": "Bortskaffelse affald"
+                "label": "Bortskaffelse affald",
+                "options": {
+                    "bucket": "Spand"
+                }
             },
             "tourism": {
                 "label": "Type"
             },
             "towertype": {
                 "label": "Tårn type"
-            },
-            "tracktype": {
-                "label": "Type"
             },
             "trail_visibility": {
                 "label": "Spor synlighed"
@@ -1108,6 +1178,10 @@
             "amenity/boat_rental": {
                 "name": "Bådudlejning",
                 "terms": "Bådudlejning, lystbådudlejning"
+            },
+            "amenity/bus_station": {
+                "name": "Busstation",
+                "terms": "Busstation, Rutebilsstation"
             },
             "amenity/cafe": {
                 "name": "Cafe",

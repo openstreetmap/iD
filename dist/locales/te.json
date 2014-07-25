@@ -396,13 +396,7 @@
                 "label": "రకం"
             },
             "religion": {
-                "label": "మతం",
-                "options": {
-                    "christian": "క్రైస్తవం",
-                    "muslim": "ముస్లిం",
-                    "buddhist": "బౌద్ధం",
-                    "hindu": "హిందు"
-                }
+                "label": "మతం"
             },
             "restriction": {
                 "label": "రకం"
@@ -435,9 +429,6 @@
                 "label": "ఉపరితలం"
             },
             "tourism": {
-                "label": "రకం"
-            },
-            "tracktype": {
                 "label": "రకం"
             },
             "water": {

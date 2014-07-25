@@ -637,16 +637,7 @@
                 "label": "Tegund"
             },
             "religion": {
-                "label": "Trúarbrögð",
-                "options": {
-                    "christian": "Kristni",
-                    "muslim": "Múhameðstrú",
-                    "buddhist": "Búddismi",
-                    "jewish": "Gyðingdómur",
-                    "hindu": "Hindu",
-                    "shinto": "Shinto",
-                    "taoist": "Tao"
-                }
+                "label": "Trúarbrögð"
             },
             "restriction": {
                 "label": "Tegund"
@@ -656,9 +647,6 @@
             },
             "route_master": {
                 "label": "Tegund"
-            },
-            "sac_scale": {
-                "label": "Erfiðleikastig"
             },
             "seasonal": {
                 "label": "Árstíðabundið"
@@ -705,9 +693,6 @@
             },
             "towertype": {
                 "label": "Turntegund"
-            },
-            "tracktype": {
-                "label": "Tegund"
             },
             "trail_visibility": {
                 "label": "Sýnileiki"

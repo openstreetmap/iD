@@ -646,16 +646,7 @@
                 "label": "Tipas"
             },
             "religion": {
-                "label": "Religija",
-                "options": {
-                    "christian": "Krikščionis",
-                    "muslim": "Musulmonas",
-                    "buddhist": "Budistas",
-                    "jewish": "Žydas",
-                    "hindu": "Indas",
-                    "shinto": "Šintoistas",
-                    "taoist": "Daoistas"
-                }
+                "label": "Religija"
             },
             "restriction": {
                 "label": "Tipas"
@@ -665,9 +656,6 @@
             },
             "route_master": {
                 "label": "Tipas"
-            },
-            "sac_scale": {
-                "label": "Tako sudėtingumas"
             },
             "service": {
                 "label": "Tipas"
@@ -702,9 +690,6 @@
             },
             "towertype": {
                 "label": "Bokšto tipas"
-            },
-            "tracktype": {
-                "label": "Tipas"
             },
             "trail_visibility": {
                 "label": "Maršruto matomumas"

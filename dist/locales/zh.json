@@ -582,22 +582,10 @@
                 "label": "类型"
             },
             "religion": {
-                "label": "宗教",
-                "options": {
-                    "christian": "基督教",
-                    "muslim": "穆斯林",
-                    "buddhist": "佛教",
-                    "jewish": "犹太教",
-                    "hindu": "印度教",
-                    "shinto": "神道教",
-                    "taoist": "道教"
-                }
+                "label": "宗教"
             },
             "route": {
                 "label": "类型"
-            },
-            "sac_scale": {
-                "label": "路径难度"
             },
             "service": {
                 "label": "类型"
@@ -635,9 +623,6 @@
             },
             "towertype": {
                 "label": "塔型"
-            },
-            "tracktype": {
-                "label": "类型"
             },
             "trail_visibility": {
                 "label": "路径可见度"

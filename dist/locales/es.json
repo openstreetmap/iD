@@ -514,7 +514,12 @@
                 "label": "Tipo"
             },
             "aerialway/access": {
-                "label": "Acceso"
+                "label": "Acceso",
+                "options": {
+                    "entry": "Entrada",
+                    "exit": "Salida",
+                    "both": "Ambas"
+                }
             },
             "aerialway/bubble": {
                 "label": "Burbuja"
@@ -535,7 +540,12 @@
                 "placeholder": "2, 4, 8..."
             },
             "aerialway/summer/access": {
-                "label": "Acceso (verano)"
+                "label": "Acceso (verano)",
+                "options": {
+                    "entry": "Entrada",
+                    "exit": "Salida",
+                    "both": "Ambas"
+                }
             },
             "aeroway": {
                 "label": "Tipo"
@@ -575,7 +585,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Dirección"
+                "label": "Dirección",
+                "options": {
+                    "N": "Norte",
+                    "E": "Este",
+                    "S": "Sur",
+                    "W": "Oeste",
+                    "NE": "Noreste",
+                    "SE": "Sureste",
+                    "SW": "Suroeste",
+                    "NW": "Noroeste",
+                    "NNE": "Norte-Noreste",
+                    "ENE": "Este-Noreste",
+                    "ESE": "Este-Sureste",
+                    "SSE": "Sur-Sureste",
+                    "SSW": "Sur-Suroeste",
+                    "WSW": "Oeste-Sureste",
+                    "WNW": "Oeste-Noroeste",
+                    "NNW": "Norte-Noroeste"
+                }
             },
             "clock_direction": {
                 "label": "Dirección",
@@ -615,7 +643,11 @@
                 "label": "Descripción"
             },
             "electrified": {
-                "label": "Electrificación"
+                "label": "Electrificación",
+                "options": {
+                    "yes": "Sí (sin especificar)",
+                    "no": "No"
+                }
             },
             "elevation": {
                 "label": "Altitud"
@@ -834,7 +866,7 @@
                 "label": "Tipo"
             },
             "recycling/cans": {
-                "label": "Acepta latas"
+                "label": "Acepta envases"
             },
             "recycling/clothes": {
                 "label": "Acepta ropas"
@@ -852,16 +884,7 @@
                 "label": "Tipo"
             },
             "religion": {
-                "label": "Religión",
-                "options": {
-                    "christian": "Cristiana",
-                    "muslim": "Musulmana",
-                    "buddhist": "Budista",
-                    "jewish": "Judía",
-                    "hindu": "Hindú",
-                    "shinto": "Sintoísta",
-                    "taoist": "Taoísta"
-                }
+                "label": "Religión"
             },
             "restriction": {
                 "label": "Tipo"
@@ -874,9 +897,6 @@
             },
             "route_master": {
                 "label": "Tipo"
-            },
-            "sac_scale": {
-                "label": "Dificultad del sendero"
             },
             "seasonal": {
                 "label": "Estacional"
@@ -943,9 +963,6 @@
             },
             "towertype": {
                 "label": "Tipo de torre"
-            },
-            "tracktype": {
-                "label": "Tipo"
             },
             "trail_visibility": {
                 "label": "Visibilidad de la senda"

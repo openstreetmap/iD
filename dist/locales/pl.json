@@ -825,16 +825,7 @@
                 "label": "Typ"
             },
             "religion": {
-                "label": "Religia",
-                "options": {
-                    "christian": "Chrześcijaństwo",
-                    "muslim": "Islam",
-                    "buddhist": "Buddyzm",
-                    "jewish": "Judaizm",
-                    "hindu": "Hinduizm",
-                    "shinto": "Szintoizm",
-                    "taoist": "Taoizm"
-                }
+                "label": "Religia"
             },
             "restriction": {
                 "label": "Typ"
@@ -847,9 +838,6 @@
             },
             "route_master": {
                 "label": "Typ"
-            },
-            "sac_scale": {
-                "label": "Trudność trasy"
             },
             "seasonal": {
                 "label": "Sezonowy"
@@ -870,7 +858,17 @@
                 "label": "Podjazd dla wózków"
             },
             "smoking": {
-                "label": "Dla palących, Palenie, "
+                "label": "Dla palących",
+                "placeholder": "Nie, Wydzielone, Tak...",
+                "options": {
+                    "no": "Całkowity zakaz palenia"
+                }
+            },
+            "smoothness": {
+                "label": "Gładkość",
+                "options": {
+                    "excellent": "Cienkie kółka: łyżworolki, skateboard"
+                }
             },
             "social_facility_for": {
                 "label": "Przeznaczone dla osób",
@@ -905,6 +903,9 @@
             "surface": {
                 "label": "Nawierzchnia"
             },
+            "tactile_paving": {
+                "label": "Wypustki dla niewidomych"
+            },
             "toilets/disposal": {
                 "label": "Opróżnianie"
             },
@@ -914,11 +915,9 @@
             "towertype": {
                 "label": "Typ wieży"
             },
-            "tracktype": {
-                "label": "Typ"
-            },
             "trail_visibility": {
-                "label": "Widoczność szlaku"
+                "label": "Widoczność szlaku",
+                "placeholder": "Doskonała, Dobra, Zła..."
             },
             "tree_type": {
                 "label": "Typ"
@@ -1071,6 +1070,9 @@
             "amenity/boat_rental": {
                 "name": "Wpożyczalnia łodzi",
                 "terms": "wynajem łodzi"
+            },
+            "amenity/bus_station": {
+                "name": "Dworzec autobusowy"
             },
             "amenity/cafe": {
                 "name": "Kawiarnia",
@@ -1745,8 +1747,8 @@
                 "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/service": {
-                "name": "Droga serwisowa",
-                "terms": "droga,serwisowa,wewnętrzna"
+                "name": "Droga wewnętrzna",
+                "terms": "droga dojazdowa, podjazd"
             },
             "highway/service/alley": {
                 "name": "Alejka",

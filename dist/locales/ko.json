@@ -150,7 +150,8 @@
                 "area": "지역을 이동했습니다.",
                 "multiple": "여러 개체를 이동했습니다."
             },
-            "incomplete_relation": "이 기능은 완전히 다운로드되어 있지 않기 때문에 이동할 수 없습니다."
+            "incomplete_relation": "이 기능은 완전히 다운로드되어 있지 않기 때문에 이동할 수 없습니다.",
+            "too_large": "지역이 현재 충분히 보이지 않기 때문에 옮길 수 없습니다."
         },
         "rotate": {
             "title": "회전",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "선을 회전했습니다.",
                 "area": "지역을 회전했습니다."
-            }
+            },
+            "too_large": "지역이 현재 충분히 보이지 않기 때문에 회전할 수 없습니다."
         },
         "reverse": {
             "title": "반대로",
@@ -478,7 +480,8 @@
                 }
             },
             "access_simple": {
-                "label": "통행 허가 여부"
+                "label": "통행 허가 여부",
+                "placeholder": "예"
             },
             "address": {
                 "label": "주소",
@@ -543,7 +546,12 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "방향"
+                "label": "방향",
+                "options": {
+                    "N": "북",
+                    "NE": "북동",
+                    "NW": "북서"
+                }
             },
             "clock_direction": {
                 "label": "방향",
@@ -575,6 +583,11 @@
             },
             "description": {
                 "label": "설명"
+            },
+            "electrified": {
+                "options": {
+                    "no": "아니오"
+                }
             },
             "elevation": {
                 "label": "고도"
@@ -638,6 +651,8 @@
             "internet_access": {
                 "label": "인터넷 액세스",
                 "options": {
+                    "yes": "예",
+                    "no": "아니오",
                     "wlan": "와이파이",
                     "wired": "유선",
                     "terminal": "단말기"
@@ -690,10 +705,18 @@
                 "label": "유형"
             },
             "oneway": {
-                "label": "일방통행"
+                "label": "일방통행",
+                "options": {
+                    "yes": "예",
+                    "no": "아니오"
+                }
             },
             "oneway_yes": {
-                "label": "일방통행"
+                "label": "일방통행",
+                "options": {
+                    "yes": "예",
+                    "no": "아니오"
+                }
             },
             "opening_hours": {
                 "label": "이용할 수 있는 시간"
@@ -733,16 +756,7 @@
                 "label": "유형"
             },
             "religion": {
-                "label": "종교",
-                "options": {
-                    "christian": "기독교",
-                    "muslim": "이슬람교",
-                    "buddhist": "불교",
-                    "jewish": "유대교",
-                    "hindu": "힌두교",
-                    "shinto": "신도",
-                    "taoist": "도교"
-                }
+                "label": "종교"
             },
             "restriction": {
                 "label": "유형"
@@ -752,9 +766,6 @@
             },
             "route_master": {
                 "label": "유형"
-            },
-            "sac_scale": {
-                "label": "통행의 어려움"
             },
             "service": {
                 "label": "유형"
@@ -801,9 +812,6 @@
             },
             "towertype": {
                 "label": "탑 용도"
-            },
-            "tracktype": {
-                "label": "유형"
             },
             "trail_visibility": {
                 "label": "도로의 가시성"

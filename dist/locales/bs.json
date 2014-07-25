@@ -728,16 +728,7 @@
                 "label": "Vrsta"
             },
             "religion": {
-                "label": "Religija",
-                "options": {
-                    "christian": "Kršćanstvo",
-                    "muslim": "Islam",
-                    "buddhist": "Budizam",
-                    "jewish": "Judaizam",
-                    "hindu": "Hinduizam",
-                    "shinto": "Šintoizam",
-                    "taoist": "Taoizam"
-                }
+                "label": "Religija"
             },
             "restriction": {
                 "label": "Vrsta"
@@ -747,9 +738,6 @@
             },
             "route_master": {
                 "label": "Vrsta"
-            },
-            "sac_scale": {
-                "label": "Težina staze"
             },
             "service": {
                 "label": "Vrsta"
@@ -796,9 +784,6 @@
             },
             "towertype": {
                 "label": "Tip tornja"
-            },
-            "tracktype": {
-                "label": "vrsta"
             },
             "trail_visibility": {
                 "label": "Vidljivost traga"

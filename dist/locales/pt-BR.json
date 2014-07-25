@@ -150,7 +150,8 @@
                 "area": "Moveu uma área.",
                 "multiple": "Moveu múltiplos objetos."
             },
-            "incomplete_relation": "Este objeto não pode ser movido porque ainda não foi totalmente baixado."
+            "incomplete_relation": "Este objeto não pode ser movido porque ainda não foi totalmente baixado.",
+            "too_large": "Não pode ser movido porque não há o suficiente disso visível no momento."
         },
         "rotate": {
             "title": "Girar",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Girou uma linha.",
                 "area": "Girou uma área."
-            }
+            },
+            "too_large": "Não pode ser rotacionado porque não há o suficiente disso visível no momento."
         },
         "reverse": {
             "title": "Inverter",
@@ -481,6 +483,10 @@
                 }
             },
             "access_simple": {
+                "label": "Acesso",
+                "placeholder": "sim"
+            },
+            "access_toilets": {
                 "label": "Acesso"
             },
             "address": {
@@ -495,6 +501,8 @@
                     "hamlet": "Lugarejo",
                     "suburb": "Bairro",
                     "subdistrict": "Sub-Bairro",
+                    "district": "Distrito",
+                    "province": "Província",
                     "state": "Estado",
                     "country": "País"
                 }
@@ -506,7 +514,12 @@
                 "label": "Tipo"
             },
             "aerialway/access": {
-                "label": "Acesso"
+                "label": "Acesso",
+                "options": {
+                    "entry": "Entrada",
+                    "exit": "Saída",
+                    "both": "Ambos"
+                }
             },
             "aerialway/bubble": {
                 "label": "Bolha"
@@ -527,7 +540,12 @@
                 "placeholder": "2, 4, 8..."
             },
             "aerialway/summer/access": {
-                "label": "Acesso (verão)"
+                "label": "Acesso (verão)",
+                "options": {
+                    "entry": "Entrada",
+                    "exit": "Saída",
+                    "both": "Ambos"
+                }
             },
             "aeroway": {
                 "label": "Tipo"
@@ -567,7 +585,19 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Direção"
+                "label": "Direção",
+                "options": {
+                    "N": "Norte",
+                    "E": "Leste",
+                    "S": "Sul",
+                    "W": "West",
+                    "NE": "Nordeste",
+                    "SE": "Sudeste",
+                    "SW": "Sudoeste",
+                    "NW": "Noroeste",
+                    "NNE": "Norte-nordeste",
+                    "ENE": "Yes (indefinido)"
+                }
             },
             "clock_direction": {
                 "label": "Direção",
@@ -607,7 +637,11 @@
                 "label": "Descrição"
             },
             "electrified": {
-                "label": "Eletrificação"
+                "label": "Eletrificação",
+                "options": {
+                    "yes": "Sim (indefinido)",
+                    "no": "Não"
+                }
             },
             "elevation": {
                 "label": "Altitude"
@@ -629,7 +663,12 @@
                 "label": "Taxa"
             },
             "fire_hydrant/type": {
-                "label": "Tipo"
+                "label": "Tipo",
+                "options": {
+                    "underground": "Subterrâneo",
+                    "wall": "Muro",
+                    "pond": "Lagoa"
+                }
             },
             "fixme": {
                 "label": "Corrija-me"
@@ -709,6 +748,8 @@
             "internet_access": {
                 "label": "Acesso à Internet",
                 "options": {
+                    "yes": "Sim",
+                    "no": "Não",
                     "wlan": "Sem Fio",
                     "wired": "Cabeada",
                     "terminal": "Terminal de Acesso"
@@ -750,6 +791,22 @@
                 "label": "Limite de Velocidade",
                 "placeholder": "40, 50, 60..."
             },
+            "mtb/scale": {
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/imba": {
+                "placeholder": "Fácil, Médio, Difícil...",
+                "options": {
+                    "0": "Mais fácil (cículo branco)",
+                    "1": "Fácil (círculo verde)",
+                    "2": "Médio (quadrado azul)",
+                    "3": "Difícil (diamante negro)",
+                    "4": "Extremamente Difícil (duplo diamante negro)"
+                }
+            },
+            "mtb/scale/uphill": {
+                "placeholder": "0, 1, 2, 3..."
+            },
             "name": {
                 "label": "Nome",
                 "placeholder": "Nome comum (se houver)"
@@ -769,13 +826,17 @@
             "oneway": {
                 "label": "Mão Única",
                 "options": {
-                    "undefined": "Assumindo ser Não"
+                    "undefined": "Assumindo ser Não",
+                    "yes": "Sim",
+                    "no": "Não"
                 }
             },
             "oneway_yes": {
                 "label": "Mão Única",
                 "options": {
-                    "undefined": "Assumindo ser Sim"
+                    "undefined": "Assumindo ser Sim",
+                    "yes": "Sim",
+                    "no": "Não"
                 }
             },
             "opening_hours": {
@@ -792,17 +853,27 @@
                 "label": "Estacionamento de Intercâmbio"
             },
             "parking": {
-                "label": "Tipo"
+                "label": "Tipo",
+                "options": {
+                    "surface": "Superfície",
+                    "underground": "Subterrâneo"
+                }
             },
             "phone": {
                 "label": "Telefone",
                 "placeholder": "+55 11 0982 1098"
             },
             "piste/difficulty": {
-                "label": "Dificuldade"
+                "label": "Dificuldade",
+                "options": {
+                    "easy": "Fácil (círculo verde)"
+                }
             },
             "piste/grooming": {
-                "label": "Tosa de Animais"
+                "label": "Tosa de Animais",
+                "options": {
+                    "classic": "Clássico"
+                }
             },
             "piste/type": {
                 "label": "Modelo"
@@ -838,16 +909,7 @@
                 "label": "Tipo"
             },
             "religion": {
-                "label": "Religião",
-                "options": {
-                    "christian": "Cristão",
-                    "muslim": "Muçulmano",
-                    "buddhist": "Budista",
-                    "jewish": "Judeu",
-                    "hindu": "Hinduísta",
-                    "shinto": "Xintoísta",
-                    "taoist": "Taoista"
-                }
+                "label": "Religião"
             },
             "restriction": {
                 "label": "Tipo"
@@ -860,9 +922,6 @@
             },
             "route_master": {
                 "label": "Tipo"
-            },
-            "sac_scale": {
-                "label": "Dificuldade do Caminho"
             },
             "seasonal": {
                 "label": "Sazonal"
@@ -921,7 +980,11 @@
                 "label": "Piso Tátil"
             },
             "toilets/disposal": {
-                "label": "Descarte"
+                "label": "Descarte",
+                "options": {
+                    "pitlatrine": "Fossa/Latrina",
+                    "chemical": "Químico"
+                }
             },
             "tourism": {
                 "label": "Tipo"
@@ -930,10 +993,11 @@
                 "label": "Tipo de Torre"
             },
             "tracktype": {
-                "label": "Tipo"
+                "label": "Tipo de trilha"
             },
             "trail_visibility": {
-                "label": "Visibilidade da Trilha"
+                "label": "Visibilidade da Trilha",
+                "placeholder": "Excelente, Bom, Ruim..."
             },
             "tree_type": {
                 "label": "Tipo"
@@ -1093,6 +1157,9 @@
             "amenity/boat_rental": {
                 "name": "Aluguel de Barcos",
                 "terms": "Aluguel de Embarcações"
+            },
+            "amenity/bus_station": {
+                "name": "Rodoviária"
             },
             "amenity/cafe": {
                 "name": "Cafeteria",

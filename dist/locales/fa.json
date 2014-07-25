@@ -751,16 +751,7 @@
                 "label": "نوع"
             },
             "religion": {
-                "label": "دین",
-                "options": {
-                    "christian": "مسیحی",
-                    "muslim": "مسلمان",
-                    "buddhist": "بودایی",
-                    "jewish": "یهودی",
-                    "hindu": "هندو",
-                    "shinto": "شینتو",
-                    "taoist": "تائو"
-                }
+                "label": "دین"
             },
             "restriction": {
                 "label": "نوع"
@@ -770,9 +761,6 @@
             },
             "route_master": {
                 "label": "نوع"
-            },
-            "sac_scale": {
-                "label": "سختی مسیر"
             },
             "seasonal": {
                 "label": "فصلی"
@@ -828,9 +816,6 @@
             },
             "towertype": {
                 "label": "نوع برج"
-            },
-            "tracktype": {
-                "label": "نوع"
             },
             "trail_visibility": {
                 "label": "مسیر پیاده روی"

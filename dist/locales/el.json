@@ -620,16 +620,7 @@
                 "label": "Είδος"
             },
             "religion": {
-                "label": "Θρησκεία",
-                "options": {
-                    "christian": "Χριστιανισμός",
-                    "muslim": "Μουσουλμάνισμος",
-                    "buddhist": "Βουδισμός",
-                    "jewish": "Ιουδαϊσμός",
-                    "hindu": "Ινδουισμός",
-                    "shinto": "Σιντοϊσμός",
-                    "taoist": "Ταοϊσμός"
-                }
+                "label": "Θρησκεία"
             },
             "restriction": {
                 "label": "Είδος"
@@ -639,9 +630,6 @@
             },
             "route_master": {
                 "label": "Είδος"
-            },
-            "sac_scale": {
-                "label": "Δυσκολία Μονοπατιού"
             },
             "service": {
                 "label": "Τύπος"
@@ -685,9 +673,6 @@
             },
             "towertype": {
                 "label": "Τύπος Πύργου"
-            },
-            "tracktype": {
-                "label": "Είδος"
             },
             "trail_visibility": {
                 "label": "Ορατότητα Μονοπατιού"

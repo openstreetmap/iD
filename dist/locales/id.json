@@ -697,16 +697,7 @@
                 "label": "Tipe"
             },
             "religion": {
-                "label": "Agama",
-                "options": {
-                    "christian": "Kristen",
-                    "muslim": "Islam",
-                    "buddhist": "Budha",
-                    "jewish": "Yahudi",
-                    "hindu": "Hindu",
-                    "shinto": "Shinto",
-                    "taoist": "Tao"
-                }
+                "label": "Agama"
             },
             "restriction": {
                 "label": "Tipe"
@@ -764,9 +755,6 @@
             },
             "towertype": {
                 "label": "Tipe Tower"
-            },
-            "tracktype": {
-                "label": "Tipe"
             },
             "tree_type": {
                 "label": "Tipe"

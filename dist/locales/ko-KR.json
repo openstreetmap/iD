@@ -76,14 +76,7 @@
                 "label": "종류"
             },
             "religion": {
-                "label": "종교",
-                "options": {
-                    "christian": "기독교",
-                    "muslim": "이슬람교",
-                    "buddhist": "불교",
-                    "jewish": "유대교",
-                    "hindu": "힌두교"
-                }
+                "label": "종교"
             },
             "service": {
                 "label": "종류"

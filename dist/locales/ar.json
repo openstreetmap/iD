@@ -624,16 +624,7 @@
                 "label": "النوع"
             },
             "religion": {
-                "label": "الديانة",
-                "options": {
-                    "christian": "المسيحية",
-                    "muslim": "الإسلام",
-                    "buddhist": "البوذية",
-                    "jewish": "اليهودية",
-                    "hindu": "الهيندوسية",
-                    "shinto": "الشينتو",
-                    "taoist": "التاو"
-                }
+                "label": "الديانة"
             },
             "restriction": {
                 "label": "النوع"
@@ -643,9 +634,6 @@
             },
             "route_master": {
                 "label": "النوع"
-            },
-            "sac_scale": {
-                "label": "صعوبة الطريق"
             },
             "service": {
                 "label": "النوع"
@@ -689,9 +677,6 @@
             },
             "towertype": {
                 "label": "نوع البرج"
-            },
-            "tracktype": {
-                "label": "نوع"
             },
             "trail_visibility": {
                 "label": "وضوحية الطريق"

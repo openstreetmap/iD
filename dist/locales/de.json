@@ -356,7 +356,7 @@
         "editing_saving": "# Bearbeiten & Speichern\n\nDieser Editor wurde entworfen, um online zu arbeiten und du erreichst ihn über diese Webseite.\n\n### Objekte auswählen\n\nUm ein Kartenobjekt wie eine Straße oder ein Sonderziel (POI) auszuwählen, klicke auf der Karte darauf. Dadurch wird das Objekt hervorgehoben und ein Bedienfeld mit Details und Möglichkeiten zur Veränderung aufgerufen.\n\nMehrere Objekte kannst du auswählen indem du die Umschalttaste (Shift) drückst und die Objekte einzeln anklickst oder klickst und einen Rahmen darum ziehst. So können mehrere Objekte gleichzeitig geändert werden.\n\n### Speichern der Änderungen\n\nWenn du Änderungen an einer Straße, einem Gebäude oder einem Platz vorgenommen hast, sind diese lokal gespeichert, bis du sie auf dem Server speicherst. Keine Sorge falls du einen Fehler machen solltest: Du kannst Änderungen jederzeit über den Rückgängig-Knopf rückgängig machen oder über den Wiederherstellen-Knopf noch einmal ausführen.\n\nKlicke auf \"Speichern\", um eine Gruppe von Änderungen zu speichern. Zum Beispiel, wenn du in einem Stadtteil fertig bist und in einer neuen Gegend weiter arbeiten willst. Du bekommst dann die Möglichkeit noch einmal zu überprüfen, was du gerade getan hast und der Editor zeigt dir nützliche Hinweise oder mögliche Fehler, wenn etwas nicht in Ordnung zu sein scheint.\n\nWenn alles gut aussieht kannst du einen kurzen Kommentar schreiben, der erklärt, was du gemacht hast. Drücke nun \"Speichern\", um die Änderungen auf dem Server zu speichern. Nun können es alle auf [OpenStreetMap.org](http://www.openstreetmap.org/) sehen und darauf aufbauen.\n\nWenn du es zeitlich nicht schaffst, kannst du das Editor-Fenster einfach schließen. Wenn du die Seite wieder aufrufst (mit dem gleichen Browser und Rechner) wird dir angeboten, die letzte Sitzung wiederherzustellen.\n",
         "roads": "# Straßen\n\nMit dem Editor kannst du Wege erstellen, verändern und löschen. Wege können alles mögliche sein, zum Beispiel Pfade, Straßen, Schienen, Fahrradwege und anderes.\n\n### Auswählen\n\nKlicke auf einen Weg, um ihn auszuwählen. Er sollte nun hervorgehoben werden. Außerdem erscheint ein kleines Werkzeugmenü und eine Seitenleiste mit den Eigenschaften des Weges.\n\n### Modifizieren\n\nOft sieht man, dass Wege nicht mit dem Luftbild oder einer GPS-Spur übereinstimmen. Du kannst den Weg aber so anpassen, dass er an der richtigen Stelle ist. Beachte jedoch, dass Luftbilder einen Versatz aufweisen können.\n\nAls Erstes wählst du einen Weg aus. Dieser wird nun hervorgehoben und es werden die Knoten des Weges angezeigt. Diese kannst du verschieben, bis sie an der richtigen Stelle sind. Wenn du neue Knoten hinzufügen möchtest, klicke doppelt zwischen den Knoten auf die Linie und es wird ein neuer Punkt erzeugt.\n\nWenn zwei Wege in Wirklichkeit mit einander verbunden sind, aber auf der Karte nicht, kannst du sie verbinden, indem du einen Knoten des einen Weges auf den anderen Weg ziehst. Dass Wege verbunden sind, ist wichtig für die Karte und essentiell für die Nutzung von Routenführung.\n\nDu kannst auch das \"Bewegen\"-Werkzeug nutzen oder \"M\" drücken, um den kompletten Weg zu verschieben. Beende die Aktion mit einem Klick.\n\n### Löschen\n\nWenn du weißt, dass ein Weg nicht existiert, kannst du ihn löschen, um ihn von der Karte zu entfernen. Sei beim Löschen von Objekten - wie immer beim Editieren vorsichtig, da die Ergebnisse von jedem gesehen werden können und Luftbilder oft veraltet sind. Das heißt, dass ein Weg, der im Luftbild nicht zu sehen ist, vielleicht einfach neu gebaut wurde.\n\nDu kannst Wege löschen, indem du sie anklickst und das Mülltonnensymbol auswählst oder die \"Entfernen\"-Taste drückst.\n\n### Erstellen\n\nDu kennst einen Weg der nicht eingezeichnet ist? Dann klicke auf das \"Linien\"-Symbol oben links im Editor oder drücke die Taste \"2\" und beginne mit dem Zeichnen einer Linie.\n\nKlicke dort hin, wo die Straße anfängt. Sollte sie von einer bereits existierenden Straße abzweigen, klicke an der entsprechenden Stelle auf diese Straße.\n\nZeichne nun den Weg, indem du Punkte anhand der Luftaufnahme oder der GPS-Spur entlang des Weges setzt. Sollte der Weg einen anderen kreuzen, klicke auf den Kreuzungspunkt, um beide Wege zu verbinden. Wenn du mit dem Zeichnen fertig bist, klicke doppelt oder drücke \"Enter\" auf der Tastatur, um den Weg abzuschließen.\n",
         "gps": "# GPS\n\nGPS-Daten sind die vertrauenswürdigste Quelle für OpenStreetMap. Dieser Editor unterstützt lokale GPS-Spuren — \".gpx\"-Dateien auf deinem Rechner. Du kannst diese GPS-Spuren mit Hilfe diverser Smartphone-Apps oder anderen GPS-Geräten aufnehmen.\n\nFür Informationen über das Sammeln von GPS-Daten kannst du dir folgende Anleitung durchlesen: [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/) (zur Zeit nur auf Englisch).\n\nUm eine GPX-Spur zu verwenden, ziehe sie einfach in den Karteneditor. Wenn sie erkannt wurde, wird diese Spur als leuchtend grüne Linie auf der Karte dargestellt. Klicke auf \"Hintergrundeinstellungen\", um sie zu (de-)aktivieren, oder um zum Gebiet der Spur zu gelangen (Lupe).\n\nDie GPX-Spur wird nicht automatisch direkt zu OpenStreetMap hoch geladen. Am besten verwendest du sie, um neue Wege hinzuzufügen. Möchtest du die GPX-Spur jedem zugänglich machen, kannst du sie über die [Track-Upload-Seite](http://www.openstreetmap.org/trace/create) hochladen.\n",
-        "imagery": "# Bildmaterial\n\nLuftbilder sind eine wichtige Quelle für das Kartografieren. Eine Kombination aus Luftbildern von Flugzeugen, Satellitenbilder und freien Quellen sind im Editor über das \"Hintergrundeinstellungen\"-Menü auf der linken Seite verfügbar.\n\nAls Standard ist die [Bing-Maps](http://www.bing.com/maps/)-Satelliten-Ebene ausgewählt. Je nach angezeigter Gegend werden Dir verschiedene andere Quellen angezeigt. In einigen Länder wie den USA, Frankreich, Deutschland und Dänemark stehen zum Teil sehr hochauflösende Luftbilder zur Verfügung.\n\nLuftbilder sind manchmal durch Fehler der Luftbild-Anbieter verschoben. Wenn du feststellst, dass viele Straßen gegenüber dem Hintergrund verschoben sind, dann verschiebe nicht die Straßen sondern das Luftbild, bis sie übereinstimmen. Um das Luftbild zu korrigieren, klicke auf \"Fehlerhafte Ausrichtung korrigieren\" unten in den Hintergrundeinstellungen.\n\n",
+        "imagery": "# Bildmaterial\n\nLuftbilder sind eine wichtige Quelle für das Kartografieren. Eine Kombination aus Luftbildern von Flugzeugen, Satellitenbilder und freien Quellen sind im Editor über das \"Hintergrundeinstellungen\"-Menü auf der linken Seite verfügbar.\n\nAls Standard ist die [Bing-Maps](http://www.bing.com/maps/)-Satelliten-Ebene ausgewählt. Je nach angezeigter Gegend werden Dir verschiedene andere Quellen angezeigt. In einigen Länder wie den USA, Frankreich, Deutschland und Dänemark stehen zum Teil sehr hochauflösende Luftbilder zur Verfügung.\n\nLuftbilder sind manchmal durch Fehler der Luftbild-Anbieter verschoben. Wenn du feststellst, dass viele Straßen gegenüber dem Hintergrund verschoben sind, dann verschiebe nicht die Straßen sondern das Luftbild, bis sie übereinstimmen. Um das Luftbild zu korrigieren, klicke auf \"Fehlerhafte Ausrichtung korrigieren\" unten in den Hintergrundeinstellungen.\n",
         "addresses": "# Adressen\n\nAdressen sind eine der wichtigsten Informationen einer Karte.\n\nObwohl Adressen oft als Teil einer Straße repräsentiert werden, werden sie in OpenStreetMap als Eigenschaften von Gebäuden oder Objekten neben der Straße eingetragen.\n\nDu kannst Adressinformationen sowohl zu Flächen, die als Gebäudegrundriss gezeichnet sind, als auch zu einzelnen Punkten hinzufügen. 'Die beste Quelle für Adressen ist eigenes Wisse oder eine Erhebung vor Ort. Wie bei allen anderen Objekten ist die Nutzung kommerzieller Quellen wie Google Maps strikt verboten.\n",
         "inspector": "# Den Inspektor benutzen\n\nDer Inspektor ist das Bedienelement, das rechts im Editor erscheint, wenn du ein Objekt auswählst. Mit dem Inspektor kannst du die Details des Objektes bearbeiten.\n\n### Eine Eigenschaft auswählen\n\nNachdem du einen Punkt, eine Linie oder eine Fläche hinzugefügt hast kannst du auswählen, welchen Typ das Objekt hat – ob es eine Autobahn oder eine Wohnstraße; ein Supermarkt oder ein Café ist. Der Inspektor wird Knöpfe für die am häufigsten verwendeten Eigenschaften zeigen. Andere Eigenschaften findest du, indem du im Suchfeld eingibst wonach du suchst.\n\nKlicke auf den 'i'-Knopf in der Ecke rechts unten bei einem Objekt-Typ, um mehr darüber zu erfahren.\n\n### Vorlagen verwenden und Tags editieren\n\nNachdem du ein Objekt mit einer Eigenschaft versehen oder ausgewählt hast, zeigt der Inspektor Felder mit Details zu der Eigenschaft an wie Name und Adresse.\n\nUnter diesen Feldern kannst du Icons anklicken, um weitere Details hinzuzufügen wie zum Beispiel einen [Wikipedia](http://www.wikipedia.org/)-Link, Zugänglichkeit für Rollstühle und anderes.\n\nGanz unten im Inspektor kannst du auf 'Weitere Merkmale' klicken, um das Objekt mit beliebigen anderen Eigenschaften zu versehen. [Taginfo](http://taginfo.openstreetmap.org/) ist eine gute Quelle, um oft genutzte Kombinationen von Eigenschaften zu finden.\n\nÄnderungen die du im Inspektor vornimmst, werden automatisch auf die ausgewählten Objekte angewendet. Durch Klicken auf den 'Rückgängig'-Knopf kannst du sie rückgängig machen.\n\n### Den Inspektor schließen\n\nDu kannst den Inspektor schließen, indem du auf den Schließen-Knopf oben rechts klickst, den 'Escape'-Knopf auf der Tastatur drückst oder in die Karte klickst.\n",
         "buildings": "# Gebäude\n\nOpenStreetMap ist die weltgrößte Datenbank für Gebäude und du kannst helfen sie weiter zu verbessern.\n\n### Auswahl\n\nDu kannst ein Gebäude auswählen, indem du auf dessen Umrisslinie klickst. Der Umriss wird nun hervorgehoben. Außerdem wird ein Werkzeugmenü und eine Seitenleiste eingeblendet, welche Informationen zum Gebäude zeigt.\n\n### Bearbeitung\n\nManchmal sind Gebäude falsch platziert oder haben falsche Eigenschaften.\n\nUm ein Gebäude komplett zu verschieben wähle es aus und klicke auf das „Bewegen“-Werkzeug. Verschiebe nun das Gebäude mit der Maus und klicke einmal, wenn es an der richtigen Stelle ist.\n\nUm den Gebäudeumriss zu korrigieren, klicke und ziehe die Umrissknoten, bis sie an der richtigen Stelle sind.\n\n### Erstellen\n\nEine oft gestellte Frage bezieht sich auf das Erstellen von Gebäuden als Gebäudefläche und/oder als Punkt. Hier gilt, wann immer es möglich ist, sollte das Gebäude als Fläche eingetragen werden. Firmen, Geschäfte und ähnliches werden zusätzlich als Punkte innerhalb des Gebäudeumrisses angelegt.\n\nUm ein Gebäude als Fläche zu zeichnen, klicke auf den „Fläche“-Knopf oben links und vollende das Gebäude, indem du entweder die \"Enter\"-Taste drückst, oder auf den ersten Knoten klickst.\n\n### Löschen\n\nWenn du siehst und weißt, dass ein Gebäude nicht existiert – zum Beispiel, weil du vor Ort warst – kannst du es löschen und es wird von der Karte entfernt. Sei vorsichtig beim Löschen von Objekten, das Ergebnis kann, wie bei jeder anderen Veränderung, von allen gesehen werden. Außerdem sind Satellitenbilder oft veraltet und ein Gebäude könnte einfach neu gebaut sein.\n\nDu kannst ein Gebäude löschen, indem du es auswählst und auf das Papierkorbsymbol klickst oder die „Entfernen“-Taste betätigst.\n",
@@ -514,7 +514,12 @@
                 "label": "Typ"
             },
             "aerialway/access": {
-                "label": "Zugang"
+                "label": "Zugang",
+                "options": {
+                    "entry": "Eingang",
+                    "exit": "Ausgang",
+                    "both": "Beide"
+                }
             },
             "aerialway/bubble": {
                 "label": "Blase"
@@ -535,7 +540,12 @@
                 "placeholder": "2, 4, 8..."
             },
             "aerialway/summer/access": {
-                "label": "Zugang (Sommer)"
+                "label": "Zugang (Sommer)",
+                "options": {
+                    "entry": "Eingang",
+                    "exit": "Ausgang",
+                    "both": "Beide"
+                }
             },
             "aeroway": {
                 "label": "Typ"
@@ -575,7 +585,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Richtung"
+                "label": "Richtung",
+                "options": {
+                    "N": "Nord",
+                    "E": "Ost",
+                    "S": "Süd",
+                    "W": "West",
+                    "NE": "Nordost",
+                    "SE": "Südost",
+                    "SW": "Südwest",
+                    "NW": "Nordwest",
+                    "NNE": "Nord-Nordost",
+                    "ENE": "Ost-Nordost",
+                    "ESE": "Ost-Südost",
+                    "SSE": "Süd-Südost",
+                    "SSW": "Süd-Südwest",
+                    "WSW": "West-Südwest",
+                    "WNW": "West-Nordwest",
+                    "NNW": "Nord-Nordwest"
+                }
             },
             "clock_direction": {
                 "label": "Richtung",
@@ -615,7 +643,14 @@
                 "label": "Beschreibung"
             },
             "electrified": {
-                "label": "Elektrifizierung"
+                "label": "Elektrifizierung",
+                "placeholder": "Fahrleitung, elektrifizierte Eisenbahn ...",
+                "options": {
+                    "contact_line": "Fahrleitung",
+                    "rail": "Elektrifizierte Eisenbahn",
+                    "yes": "Ja (unspezifiziert)",
+                    "no": "Nein"
+                }
             },
             "elevation": {
                 "label": "Höhe über dem Meeresspiegel"
@@ -637,7 +672,13 @@
                 "label": "Gebühr"
             },
             "fire_hydrant/type": {
-                "label": "Typ"
+                "label": "Typ",
+                "options": {
+                    "pillar": "Ständer/Oberirdisch",
+                    "underground": "Untergrund",
+                    "wall": "Mauer",
+                    "pond": "Teich"
+                }
             },
             "fixme": {
                 "label": "Korrigiere mich"
@@ -760,6 +801,42 @@
                 "label": "Höchstgeschwindigkeit",
                 "placeholder": "40, 50, 60..."
             },
+            "mtb/scale": {
+                "label": "Mountain Bike Schwierigkeit",
+                "placeholder": "0, 1, 2, 3 ...",
+                "options": {
+                    "0": "0: Solider Kies/komprimierte Erde, keine Hindernisse, weite Kurven",
+                    "1": "1: Teilweise lockerer Untergrund, kleine Hindernisse, weite Kurve",
+                    "2": "2: Viel looser Untergrund, große Hindernisse, einfach Haarnadelkurven",
+                    "3": "3: Rutschige Oberfläche, große Hindernisse, enge Haarnadelkurven",
+                    "4": "4: Lockere Oberfläche oder Felsbrocken, gefährliche Haarnadelkurven",
+                    "5": "5: Maximale Schwierigkeit, Geröllfelder, Erdrutsche",
+                    "6": "6: Nicht befahrbar ausgenommen durch die allerbesten Mountain Biker"
+                }
+            },
+            "mtb/scale/imba": {
+                "label": "IMBA Schwierigkeitsgrad",
+                "placeholder": "Einfach, Mittel, Schwierig ...",
+                "options": {
+                    "0": "Am Einfachsten (weißer Kreis)",
+                    "1": "einfach (grüner Kreis)",
+                    "2": "Mittel (blaues Quadrat)",
+                    "3": "Schwierig (schwarze Raute)",
+                    "4": "Sehr schwierig (doppelte schwarze Raute)"
+                }
+            },
+            "mtb/scale/uphill": {
+                "label": "Mountain Bike Bergauf-Hinderniss",
+                "placeholder": "0, 1, 2, 3 ...",
+                "options": {
+                    "0": "0: Durschnittliche Steigung <10%, Kies/verdichtete Erde, keine Hindernisse",
+                    "1": "1: Durchschnittliche Steigung <15%, Kies/verdichtete Erde, wenige kleine Hindernisse",
+                    "2": "2: Durchschnittliche Steigung <20%, stabiel Oberfläche, fautgroße Steine/Wurzeln",
+                    "3": "3: Durchschnittliche Steigung <25%, unterschiedliche Oberfläche, faustgroße Steine/Wurzeln",
+                    "4": "4: Durchschnittliche Steigung <30%, schlechter Zustand, große Steine/Zweige",
+                    "5": "5: sehr steig, Fahrrad muss generell geschoben oder getragen werden"
+                }
+            },
             "name": {
                 "label": "Name",
                 "placeholder": "allgemeine Bezeichnung (falls vorhanden)"
@@ -806,20 +883,58 @@
                 "label": "Park and Ride"
             },
             "parking": {
-                "label": "Typ"
+                "label": "Typ",
+                "options": {
+                    "surface": "Oberfläche",
+                    "multi-storey": "Mehrstufig",
+                    "underground": "Untergrund",
+                    "sheds": "Schuppen",
+                    "carports": "Carports",
+                    "garage_boxes": "Garagen",
+                    "lane": "Straßenrand"
+                }
             },
             "phone": {
                 "label": "Telefon",
                 "placeholder": "+31 42 123 4567"
             },
             "piste/difficulty": {
-                "label": "Schwierigkeit"
+                "label": "Schwierigkeit",
+                "placeholder": "Einfach, Mittel, Fortgeschritten ...",
+                "options": {
+                    "novice": "Anfänger (Unterricht)",
+                    "easy": "Einfach (grüner Kreis)",
+                    "intermediate": "Mittel (blaues Quadrat)",
+                    "advanced": "fortgeschritten (schwarze Raute)",
+                    "expert": "Experte (doppelte schwarze Raute)",
+                    "freeride": "Variantenabfahrt (abseits der Piste)",
+                    "extreme": "Extrem (Kletterausrüstung benötigt)"
+                }
             },
             "piste/grooming": {
-                "label": "Grooming"
+                "label": "Grooming",
+                "options": {
+                    "classic": "Klassisch",
+                    "mogul": "Buckelpiste",
+                    "backcountry": "Hinterland-Skitouren",
+                    "classic+skating": "Klassisch oder Skating",
+                    "scooter": "Roller/Schneemobil",
+                    "skating": "Skating"
+                }
             },
             "piste/type": {
-                "label": "Typ"
+                "label": "Typ",
+                "options": {
+                    "downhill": "Abfahrt",
+                    "nordic": "Nordisch",
+                    "skitour": "Skitour",
+                    "sled": "Rodeln",
+                    "hike": "Wandern",
+                    "sleigh": "Schlitten fahren",
+                    "ice_skate": "Eislaufen",
+                    "snow_park": "Snowpark",
+                    "playground": "Spielplatz"
+                }
             },
             "place": {
                 "label": "Typ"
@@ -852,16 +967,7 @@
                 "label": "Typ"
             },
             "religion": {
-                "label": "Religion",
-                "options": {
-                    "christian": "Christlich",
-                    "muslim": "Muslimisch",
-                    "buddhist": "Buddhistisch",
-                    "jewish": "Jüdisch",
-                    "hindu": "Hindu",
-                    "shinto": "Shinto",
-                    "taoist": "Tao"
-                }
+                "label": "Religion"
             },
             "restriction": {
                 "label": "Typ"
@@ -876,7 +982,16 @@
                 "label": "Typ"
             },
             "sac_scale": {
-                "label": "SAC-Wanderskala"
+                "label": "Wanderweg Klassifizierung",
+                "placeholder": "Bergwandern, Bergsteigen ...",
+                "options": {
+                    "hiking": "T1: Wandern",
+                    "mountain_hiking": "T2: Bergwandern",
+                    "demanding_mountain_hiking": "T3: Anspruchsvolles Bergwandern",
+                    "alpine_hiking": "T4: Bergsteigen",
+                    "demanding_alpine_hiking": "T5: Anspruchsvolles Bergsteigen",
+                    "difficult_alpine_hiking": "T6: Schwieriges Bergsteigen"
+                }
             },
             "seasonal": {
                 "label": "Saisonal"
@@ -897,10 +1012,33 @@
                 "label": "abgeschrägter Bordstein"
             },
             "smoking": {
-                "label": "Rauchen"
+                "label": "Rauchen",
+                "placeholder": "Nein, Getrennt, Ja ...",
+                "options": {
+                    "no": "Rauchen überall verboten",
+                    "separated": "In Raucherzonen, nicht baulich getrennt",
+                    "isolated": "In Raucherzonen, baulich getrennt",
+                    "outside": "Im Freien erlaubt",
+                    "yes": "Überall erlaubt",
+                    "dedicated": "Für Raucher besteimmt (z.B.: Raucherklub)"
+                }
+            },
+            "smoothness": {
+                "label": "Gleichmäßigkeit",
+                "placeholder": "Schmale Reifen, Räder, Off-Road ...",
+                "options": {
+                    "excellent": "Schmale Reifen: Rollerblade, Skateboard",
+                    "good": "Schmale Reifen: Rennrad",
+                    "intermediate": "Räder: Citybike, Rollstuhl, Roller",
+                    "bad": "Robuste Räder: Trekkingrad, Auto, Rikscha",
+                    "very_bad": "Hoher Radstand: leichtes Off-Road-Fahrzeug",
+                    "horrible": "Off-Road: Schweres Off-Road-Fahrzeug",
+                    "very_horrible": "Spezialisiertes Off-Road: Traktor, Quad",
+                    "impassible": "Unpassierbar / keine Reifen-Fahrzeuge"
+                }
             },
             "social_facility_for": {
-                "label": "Sozialküche",
+                "label": "Zielgruppe der Einrichtung",
                 "placeholder": "Obdachlose, Behinderte, Kinder, etc."
             },
             "source": {
@@ -936,7 +1074,13 @@
                 "label": "taktile Oberfläche"
             },
             "toilets/disposal": {
-                "label": "Toiletten-Bauart"
+                "label": "Toiletten-Bauart",
+                "options": {
+                    "flush": "flach",
+                    "pitlatrine": "Grube/Latrine",
+                    "chemical": "Chemisch",
+                    "bucket": "Eimer"
+                }
             },
             "tourism": {
                 "label": "Typ"
@@ -945,10 +1089,27 @@
                 "label": "Turmart"
             },
             "tracktype": {
-                "label": "Typ"
+                "label": "Feld-/Waldweg-Typ",
+                "placeholder": "fest, großteils fest, weich ...",
+                "options": {
+                    "grade1": "Fest: befestigt oder sehr kompakte harte Oberfläche",
+                    "grade2": "Großteils Fest: Kies/Stein gemischt mit etwas weichem Material",
+                    "grade3": "Gleichmäßige Mischung von harten und weichem Material",
+                    "grade4": "Großteils weich: Erde/Sand/Gras gemischt mit etwas hartem Material",
+                    "grade5": "Weiche: Erde/Sand/Gras"
+                }
             },
             "trail_visibility": {
-                "label": "Erkennbarkeit des Wanderweges"
+                "label": "Erkennbarkeit des Wanderweges",
+                "placeholder": "Ausgezeichnet, Gut, Schlecht ...",
+                "options": {
+                    "excellent": "Ausgezeichnet: unmissverständlicher Weg oder überall Markierungen",
+                    "good": "Gut: sicherbare Markierungen, müssen teilweise gesucht werden",
+                    "intermediate": "Mittelmäßig: Wenige Markierungen, Weg großteils sichtbar",
+                    "bad": "Schlecht: Keine Markierungen, Weg teilweise unsichtbar oder nicht vorhanden",
+                    "horrible": "Schrecklich: oft kein Weg, teilweise Orientierungserfahrung benötigt",
+                    "no": "Nein: Kein Weg, ausgezeichnete Orientierungserfahrung benötigt"
+                }
             },
             "tree_type": {
                 "label": "Typ"
@@ -1108,6 +1269,10 @@
             "amenity/boat_rental": {
                 "name": "Bootvermietung",
                 "terms": "Bootsverleih"
+            },
+            "amenity/bus_station": {
+                "name": "Busbahnhof",
+                "terms": "Omnibusbahnhof, ZOB"
             },
             "amenity/cafe": {
                 "name": "Café",
@@ -1811,7 +1976,7 @@
             },
             "highway/bus_stop": {
                 "name": "Bushaltestelle",
-                "terms": "Bushaltestelle"
+                "terms": "Bushaltestelle, Verkehrshalt, Halt, Haltestelle, Endhaltestelle, Endstelle"
             },
             "highway/crossing": {
                 "name": "Fußgängerüberweg",
@@ -2502,7 +2667,7 @@
                 "terms": "Halte-Plattform"
             },
             "public_transport/stop_position": {
-                "name": "Halteplatz",
+                "name": "Halteposition",
                 "terms": "Verkehrshalt, Halt"
             },
             "railway": {

@@ -554,16 +554,7 @@
                 "label": "Tip"
             },
             "religion": {
-                "label": "Dini",
-                "options": {
-                    "christian": "Hristiyan",
-                    "muslim": "Müslüman",
-                    "buddhist": "Budist",
-                    "jewish": "Yahudi",
-                    "hindu": "Hindu",
-                    "shinto": "Şinto",
-                    "taoist": "Taoist"
-                }
+                "label": "Dini"
             },
             "route": {
                 "label": "Tip"
@@ -598,9 +589,6 @@
                 "label": "Yüzey"
             },
             "tourism": {
-                "label": "Tip"
-            },
-            "tracktype": {
                 "label": "Tip"
             },
             "tunnel": {

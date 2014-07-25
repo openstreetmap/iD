@@ -359,7 +359,7 @@
         "imagery": "# Immagini\n\nLe immagini aeree sono un'importante risorsa per la mappatura. Una\ncombinazione di foto aeree, immagini satellitari e risorse liberamente\ncompilate sono disponibili nell'editor nel menu 'Impostazioni dello sfondo'\nsulla destra.\n\nLe immagini predefinite presentate nell'editor sono quelle satellitari di\n[Bing Maps](http://www.bing.com/maps/), ma spostando o ingrandendo\nla mappa in specifiche aree geografiche potranno essere disponibili più\nrisorse. Alcune nazioni, come Stati Uniti, Francia e Danimarca, hanno a\ndisposizione, per alcune aree, immagini ad alta definizione.\n\nLe immagini sono a volte disallineate rispetto ai dati della mappa a causa\ndi errori da parte di chi le fornisce. Se vedi numerose strade spostate\nrispetto alle immagini di sfondo non correggerle tutte subito per farle\nnuovamente combaciare. Puoi invece aggiustare l'allineamento delle immagini\nsullo sfondo in modo da ri-allinearle con i dati esistenti cliccando su\n'Allinea' in fondo al menu.\n",
         "addresses": "# Indirizzi stradali\n\nGli indirizzi sono tra le informazioni più utili per una mappa.\n\nNonostante gli indirizzi siano spesso rappresentati come parte delle strade, in OpenStreetMap\nvengono memorizzati come attributi degli edifici e dei luoghi lungo le strade.\n\nPotrai aggiungere informazioni sull'indirizzo a dei luoghi mappati come contorni di edificio\ncosì come a quelli mappati come singoli punti. La sorgente ottimale dei dati degli indirizzi\nè un rilevamento per strada o la conoscenza personale dato che copiare da sorgenti\ncommerciali come ad es. Google Maps è severamente vietato.\n",
         "inspector": "# Utilizzo dell'inspector\n\nL'inspector è quell'elemento dell'interfaccia utente sulla parte sinistra della pagina che appare quando viene selezionata una funzionalità e che consente di modificarne i dettagli.\n\n### Selezione di un tipo di funzionalità\n\nDopo che è stato aggiunto un punto, una linea o un'area, è possibile scegliere quale tipo di caratteristica abbia, come ad esempio se si tratta di una strada principale o una strada residenziale, di un supermarket o di un caffè.\nL'inspector visualizzerà i pulsanti per le caratteristiche più comuni e sarà possibile trovarne altre semplicemente digitando la caratteristica voluta nella casella di ricerca.\n\nFare clic sulla 'i' che si trova nell'angolo in basso a destra del pulsante per saperne di più. Fare clic su un pulsante per scegliere quel tipo.\n\n### Utilizzo di Form e di Tag di modifica\n\nDopo aver scelto un tipo di caratteristica o quando si è selezionato una caratteristica per la quale è già stato assegnato un tipo, l'inspector mostrerà i campi con i dettagli come ad esempio il nome e l'indirizzo.\n\nAl di sotto dei campi è possibile fare clic sulle icone per aggiungere ulteriori dettagli come ad es. informazioni [Wikipedia](http://www.wikipedia.org/), accesso consentito alle carrozzine, e altro.\n\nSotto l'inspector è possibile fare clic su 'Tag aggiuntivi' per aggiungere arbitrariamente altri tag all'elemento. [Taginfo](http://taginfo.openstreetmap.org/) è una buona risorsa per imparare qualcosa sulle combinazioni di tag più comuni.\n\nLe modifiche effettuate nell'inspector vengono applicate automaticamente alla mappa.\nE' possibile annullarle in ogni momento cliccando semplicemente sul pulsante 'Ripristina'.\n",
-        "buildings": "# Edifici\n\nOpenStreetMap è il più grande database online di edifici. Puoi creare e migliorare questo database.\n\n### Selezione\n\nPuoi selezionare un edificio cliccando sul suo bordo. Ciò evidenzierà l'edificio e aprirà un piccolo menu degli strumenti ed una barra laterale contenente ulteriori informazioni sull'edificio.\n\n### Modifica\n\nTalvolta gli edifici sono posizionati in maniera errata o hanno tag incorretti.\n\nPer spostare un edificio, selezionalo, quindi clicca sullo strumento 'Sposta'. Sposta il mouse per traslare l'edificio, clicca nuovamente quando è nel posto giusto.\n\nPer migliorare la forma di un edificio, clicca e sposta i nodi che formano il suo contorno in una posizione corretta.\n\n### Creazione\n\nUna delle principali diatribe sulla aggiunta degli edifici alla mappa riguarda il fatto che OpenStreetMap permette di creare edifici come aree o come singoli punti. La regola generale in questi casi è di _mappare un edificio come un'area quando possibile_, e di mappare compagnie, case, amenità e altri oggetti che operano nell'edificio come punti all'interno della forma dell'edificio.\n\nInizia a disegnare un edificio come una forma cliccando sul pulsante 'Area' nella parte alta a sinistra dell'interfaccia, e termina premendo 'Invio' sulla tastiera o cliccando sul primo nodo che hai disegnato per chiudere la forma.\n\n### Eliminazione\n\nSe un edificio è completamente sbagliato - non è presente nelle immagini satellitari e possibilmente hai controllato di persona che esso non esista davvero - puoi eliminarlo, in modo da toglierlo dalla mappa. Sii cauto quando elimini un elemento - come ogni modifica, i risultati sono visibili a tutti e le immagini satellitari sono spesso datate, perciò l'edificio potrebbe essere stato costruito nel frattempo.\n\nPuoi eliminare un edificio cliccandoci sopra per selezionarlo, quindi cliccando sull'icona del cestino o premendo il tasto 'Canc' sulla tastiera.\n\n",
+        "buildings": "# Edifici\n\nOpenStreetMap è il più grande database online di edifici. Puoi creare e migliorare questo database.\n\n### Selezione\n\nPuoi selezionare un edificio cliccando sul suo bordo. Ciò evidenzierà l'edificio e aprirà un piccolo menu degli strumenti ed una barra laterale contenente ulteriori informazioni sull'edificio.\n\n### Modifica\n\nTalvolta gli edifici sono posizionati in maniera errata o hanno tag incorretti.\n\nPer spostare un edificio, selezionalo, quindi clicca sullo strumento 'Sposta'. Sposta il mouse per traslare l'edificio, clicca nuovamente quando è nel posto giusto.\n\nPer migliorare la forma di un edificio, clicca e sposta i nodi che formano il suo contorno in una posizione corretta.\n\n### Creazione\n\nUna delle principali diatribe sulla aggiunta degli edifici alla mappa riguarda il fatto che OpenStreetMap permette di creare edifici come aree o come singoli punti. La regola generale in questi casi è di _mappare un edificio come un'area quando possibile_, e di mappare compagnie, case, amenità e altri oggetti che operano nell'edificio come punti all'interno della forma dell'edificio.\n\nInizia a disegnare un edificio come una forma cliccando sul pulsante 'Area' nella parte alta a sinistra dell'interfaccia, e termina premendo 'Invio' sulla tastiera o cliccando sul primo nodo che hai disegnato per chiudere la forma.\n\n### Eliminazione\n\nSe un edificio è completamente sbagliato - non è presente nelle immagini satellitari e possibilmente hai controllato di persona che esso non esista davvero - puoi eliminarlo, in modo da toglierlo dalla mappa. Sii cauto quando elimini un elemento - come ogni modifica, i risultati sono visibili a tutti e le immagini satellitari sono spesso datate, perciò l'edificio potrebbe essere stato costruito nel frattempo.\n\nPuoi eliminare un edificio cliccandoci sopra per selezionarlo, quindi cliccando sull'icona del cestino o premendo il tasto 'Canc' sulla tastiera.\n",
         "relations": "# Relazioni\n\nUna relazione è un particolare elemento di OpenStreetMap che raggruppa altri\nelementi. Per esempio due tipi comuni di relazione sono le *relazioni percorso*,\nche raggruppano pezzi di strada che appartengono alla stessa via o autostrada,\ne i *multipoligoni*, che raggruppano diverse linee componenti aree complesse\n(un'area con più pezzi o con dei buchi in essa come una ciambella).\n\nGli elementi di una relazione sono chiamati *membri*. Nella barra laterale puoi\nvedere di quale relazione un elemento è membro e cliccare sulla relazione per\nselezionarla. Quando una relazione viene selezionata puoi vedere l'elenco di\ntutti i suoi membri nella barra laterale e gli stessi selezionati nella mappa.\n\nNella maggior parte dei casi iD si occuperà delle relazioni automaticamente\ndurante la modifica. Controlla solo che quando cancelli un elemento per\nridisegnarlo più accuratamente, il nuovo elemento sia un membro della stessa\nrelazione dell'originale.\n\n## Modificare le Relazioni\n\nSe vuoi modificare le relazioni, ecco le basi.\n\nPer aggiungere un elemento ad una relazione seleziona l'elemento, clicca il\ntasto \"+\" nella sezione \"Tutte le relazioni\" della barra laterale e quindi seleziona\nla relazione o digita il suo nome.\n\nPer creare una nuova relazione seleziona il primo elemento che diventerà\nmembro, clicca il tasto \"+\" nella sezione \"Tutte le relazioni\" della barra laterale\ne seleziona \"Nuova relazione...\".\n\nPer rimuovere un elemento da una relazione seleziona l'elemento e clicca sul\ncestino vicino alla relazione da cui vuoi rimuoverlo.\n\nPuoi creare dei multipoligoni con dei buchi usando lo strumento \"Unisci\".\nDisegna due aree (quella esterna e quella interna), tenendo premuto il tasto\nMaiusc della tastiera clicca su ognuno di loro per selezionarli entrambi e quindi\nclicca sul tasto \"Unisci\" (+).\n"
     },
     "intro": {
@@ -514,7 +514,12 @@
                 "label": "Tipo"
             },
             "aerialway/access": {
-                "label": "Accesso"
+                "label": "Accesso",
+                "options": {
+                    "entry": "Ingresso",
+                    "exit": "Uscita",
+                    "both": "Entrambe"
+                }
             },
             "aerialway/bubble": {
                 "label": "Copertura paravento"
@@ -535,7 +540,12 @@
                 "placeholder": "2, 4, 8..."
             },
             "aerialway/summer/access": {
-                "label": "Accesso (estate)"
+                "label": "Accesso (estate)",
+                "options": {
+                    "entry": "Ingresso",
+                    "exit": "Uscita",
+                    "both": "Entrambe"
+                }
             },
             "aeroway": {
                 "label": "Tipo"
@@ -575,7 +585,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Direzione"
+                "label": "Direzione",
+                "options": {
+                    "N": "Nord",
+                    "E": "Est",
+                    "S": "Sud",
+                    "W": "Ovest",
+                    "NE": "Nordest",
+                    "SE": "Sudest",
+                    "SW": "Sudovest",
+                    "NW": "Nordovest",
+                    "NNE": "Nord-nordest",
+                    "ENE": "Est-nordest",
+                    "ESE": "Est-sudest",
+                    "SSE": "Sud-sudest",
+                    "SSW": "Sud-sudovest",
+                    "WSW": "Ovest-sudovest",
+                    "WNW": "Ovest-nordovest",
+                    "NNW": "Nord-nordovest"
+                }
             },
             "clock_direction": {
                 "label": "Direzione",
@@ -615,7 +643,14 @@
                 "label": "Descrizione"
             },
             "electrified": {
-                "label": "Elettrificata"
+                "label": "Elettrificata",
+                "placeholder": "Linea Aerea, Rotaia Elettrificata...",
+                "options": {
+                    "contact_line": "Linea Aerea di Contatto",
+                    "rail": "Rotaia Elettrificata",
+                    "yes": "Sì (non specificato)",
+                    "no": "No"
+                }
             },
             "elevation": {
                 "label": "Altitudine"
@@ -637,7 +672,13 @@
                 "label": "Tariffa"
             },
             "fire_hydrant/type": {
-                "label": "Tipo"
+                "label": "Tipo",
+                "options": {
+                    "pillar": "Colonnina/Fuoriterra",
+                    "underground": "Sotterraneo",
+                    "wall": "A muro",
+                    "pond": "Stagno"
+                }
             },
             "fixme": {
                 "label": "Sistemare"
@@ -730,6 +771,13 @@
                 "label": "Limite di velocità",
                 "placeholder": "40, 50, 60..."
             },
+            "mtb/scale": {
+                "label": "Difficoltà Mountain Bike",
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/uphill": {
+                "placeholder": "0, 1, 2, 3..."
+            },
             "name": {
                 "label": "Nome",
                 "placeholder": "Nome comune (se presente)"
@@ -776,20 +824,58 @@
                 "label": "Parcheggio di Interscambio"
             },
             "parking": {
-                "label": "Tipo"
+                "label": "Tipo",
+                "options": {
+                    "surface": "Superficie",
+                    "multi-storey": "Più piani",
+                    "underground": "Sotterraneo",
+                    "sheds": "Capanno",
+                    "carports": "Tettoia",
+                    "garage_boxes": "Box garage",
+                    "lane": "Corsia"
+                }
             },
             "phone": {
                 "label": "Telefono",
                 "placeholder": "+39 01 123 456"
             },
             "piste/difficulty": {
-                "label": "Difficoltà"
+                "label": "Difficoltà",
+                "placeholder": "Facile, Intermedia, Avanzata...",
+                "options": {
+                    "novice": "Neofita (verde)",
+                    "easy": "Facile (blu)",
+                    "intermediate": "Media (rossa)",
+                    "advanced": "Avanzata (nera)",
+                    "expert": "Esperto (arancione)",
+                    "freeride": "Fuoripista (gialla)",
+                    "extreme": "Estrema (equipaggiamento da scalata richiesto)"
+                }
             },
             "piste/grooming": {
-                "label": "Terreno"
+                "label": "Terreno",
+                "options": {
+                    "classic": "Classico",
+                    "mogul": "Gobbe",
+                    "backcountry": "Fuoripista",
+                    "classic+skating": "Classico e sci di fondo",
+                    "scooter": "Scooter/Motoslitta",
+                    "skating": "Sci di fondo"
+                }
             },
             "piste/type": {
-                "label": "Tipo"
+                "label": "Tipo",
+                "options": {
+                    "downhill": "Discesa libera",
+                    "nordic": "Combinata nordica",
+                    "skitour": "Sci alpinismo",
+                    "sled": "Slittino",
+                    "hike": "Escursionismo",
+                    "sleigh": "Slitta",
+                    "ice_skate": "Pattinaggio sul ghiaccio",
+                    "snow_park": "Snow Park",
+                    "playground": "Parco giochi"
+                }
             },
             "place": {
                 "label": "Tipo"
@@ -822,16 +908,7 @@
                 "label": "Tipo"
             },
             "religion": {
-                "label": "Religione",
-                "options": {
-                    "christian": "Cristiana",
-                    "muslim": "Musulmana",
-                    "buddhist": "Buddista",
-                    "jewish": "Ebraica",
-                    "hindu": "Indù",
-                    "shinto": "Shintoista",
-                    "taoist": "Taoista"
-                }
+                "label": "Religione"
             },
             "restriction": {
                 "label": "Tipo"
@@ -846,7 +923,16 @@
                 "label": "Tipo"
             },
             "sac_scale": {
-                "label": "Difficoltà del sentiero"
+                "label": "Difficoltà escurione",
+                "placeholder": " Escursionismo in Montagna , Sentiero Alpino...",
+                "options": {
+                    "hiking": "T1: Escursionismo",
+                    "mountain_hiking": "T2: Escursionismo in montagna ",
+                    "demanding_mountain_hiking": "T3: Escursionismo impegnativo in montagna",
+                    "alpine_hiking": "T4: Sentiero alpino",
+                    "demanding_alpine_hiking": "T5: Sentiero alpino impegnativo",
+                    "difficult_alpine_hiking": "T6: Sentiero alpino difficile"
+                }
             },
             "seasonal": {
                 "label": "Stagionale"
@@ -867,7 +953,30 @@
                 "label": "Cordolo inclinato"
             },
             "smoking": {
-                "label": "Zona fumatori"
+                "label": "Zona fumatori",
+                "placeholder": "No, Separato, Sì...",
+                "options": {
+                    "no": "Vietato fumare",
+                    "separated": "In zone fumatori, non fisicamente isolate",
+                    "isolated": "In zone fumatori, fisicamente isolate",
+                    "outside": "Permesso all'esterno",
+                    "yes": "Permesso ovunque",
+                    "dedicated": "Dedicato ai soli fumatori (es. circolo fumatori)"
+                }
+            },
+            "smoothness": {
+                "label": "Percorribilità",
+                "placeholder": "Rotelle, Ruote, Fuoristrada...",
+                "options": {
+                    "excellent": "Rotelle: pattini in linea, skateboard e simili",
+                    "good": "Ruote sottili: biciclette da corsa e simili",
+                    "intermediate": "Ruote: biciclette da città, sedie a rotelle, scooter e simili",
+                    "bad": " Ruote robuste: biciclette per cicloturismo, auto, risciò e simili",
+                    "very_bad": "Altezza da terra elevata: veicoli fuoristrada leggeri e simili",
+                    "horrible": "Fuoristrada: veicoli fuoristrada pesanti e simili. ",
+                    "very_horrible": "Fuoristrada speciali: trattori agricoli, quad-bike, autoblindo e simili",
+                    "impassible": "Nessun veicolo ruotato"
+                }
             },
             "social_facility_for": {
                 "label": "Tipo di utenza",
@@ -906,7 +1015,13 @@
                 "label": "Pavimento tattile"
             },
             "toilets/disposal": {
-                "label": "Smaltimento"
+                "label": "Smaltimento",
+                "options": {
+                    "flush": "Sciaquone",
+                    "pitlatrine": "Fossa/Latrina",
+                    "chemical": "Chimico",
+                    "bucket": "Contenitore"
+                }
             },
             "tourism": {
                 "label": "Tipo"
@@ -915,10 +1030,27 @@
                 "label": "Tipo di torre"
             },
             "tracktype": {
-                "label": "Tipo"
+                "label": "Tipo di strada",
+                "placeholder": "Solido, Soprattutto Solido, Morbido...",
+                "options": {
+                    "grade1": "Solido: strada asfaltata o con superficie dura e ben compattata",
+                    "grade2": "Soprattutto solido: superficie in ghiaia o di terra/sabbia ben compattata",
+                    "grade3": "Superficie mista di materiali duri e cedevoli",
+                    "grade4": "Soprattutto Morbido: terra, sabbia, erba mista ad una componente dura",
+                    "grade5": "Morbido: erba, sabbia o terreno"
+                }
             },
             "trail_visibility": {
-                "label": "Visibilità del Tracciato"
+                "label": "Visibilità del Tracciato",
+                "placeholder": "Eccellente, Buona, Cattiva...",
+                "options": {
+                    "excellent": "Eccellente: tracciato evidente o segnavia sempre presenti",
+                    "good": "Buona: segnavia visibili, ma talvolta difficile da individuare",
+                    "intermediate": "Media: tracciato non sempre visibile",
+                    "bad": "Cattiva: tracciato visibile a stento",
+                    "horrible": "Orribile:  spesso non tracciato",
+                    "no": "Nessuna:  perlopiù non tracciato"
+                }
             },
             "tree_type": {
                 "label": "Tipo"
@@ -1075,6 +1207,10 @@
             "amenity/boat_rental": {
                 "name": "Noleggio barche",
                 "terms": "noleggio barche,noleggio,barche,porto,negozio"
+            },
+            "amenity/bus_station": {
+                "name": "Stazione degli autobus",
+                "terms": "autobus,bus,tram,stazione,fermata,capolinea"
             },
             "amenity/cafe": {
                 "name": "Caffè",

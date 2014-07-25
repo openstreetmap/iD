@@ -766,16 +766,7 @@
                 "label": "Type"
             },
             "religion": {
-                "label": "Religie",
-                "options": {
-                    "christian": "Christelijk",
-                    "muslim": "Moslim",
-                    "buddhist": "Boeddist",
-                    "jewish": "Joods",
-                    "hindu": "Hindoestaans",
-                    "shinto": "Shinto",
-                    "taoist": "Taoisme"
-                }
+                "label": "Religie"
             },
             "restriction": {
                 "label": "Type"
@@ -788,9 +779,6 @@
             },
             "route_master": {
                 "label": "Type"
-            },
-            "sac_scale": {
-                "label": "Moeilijkheidsgraad"
             },
             "service": {
                 "label": "Type"
@@ -844,9 +832,6 @@
             },
             "towertype": {
                 "label": "Type toren"
-            },
-            "tracktype": {
-                "label": "Type"
             },
             "trail_visibility": {
                 "label": "Zichtbaarheid van de weg"

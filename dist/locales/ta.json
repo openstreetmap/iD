@@ -322,14 +322,7 @@
                 "label": "வகை"
             },
             "religion": {
-                "label": "மதம்",
-                "options": {
-                    "christian": "கிறித்தவர்",
-                    "muslim": "இசுலாமியர்",
-                    "buddhist": "புத்த மதத்தினர்",
-                    "jewish": "ஜெவிஷ்",
-                    "hindu": "இந்து"
-                }
+                "label": "மதம்"
             },
             "restriction": {
                 "label": "வகை"
@@ -364,9 +357,6 @@
                 "label": "வகை"
             },
             "tourism": {
-                "label": "வகை"
-            },
-            "tracktype": {
                 "label": "வகை"
             },
             "tree_type": {

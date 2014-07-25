@@ -652,16 +652,7 @@
                 "label": "Tipo"
             },
             "religion": {
-                "label": "Relixión",
-                "options": {
-                    "christian": "Cristiá",
-                    "muslim": "Musulmá",
-                    "buddhist": "Budista",
-                    "jewish": "Xudía",
-                    "hindu": "Hinduísta",
-                    "shinto": "Xintoísta",
-                    "taoist": "Taoísta"
-                }
+                "label": "Relixión"
             },
             "restriction": {
                 "label": "Tipo"
@@ -671,9 +662,6 @@
             },
             "route_master": {
                 "label": "Tipo"
-            },
-            "sac_scale": {
-                "label": "Dificultade do sendeiro"
             },
             "service": {
                 "label": "Tipo"
@@ -711,9 +699,6 @@
             },
             "towertype": {
                 "label": "Tipo de torre"
-            },
-            "tracktype": {
-                "label": "Tipo"
             },
             "trail_visibility": {
                 "label": "Visibilidade do sendeiro"

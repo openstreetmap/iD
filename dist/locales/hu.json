@@ -737,16 +737,7 @@
                 "label": "Típus"
             },
             "religion": {
-                "label": "Vallás",
-                "options": {
-                    "christian": "Keresztény",
-                    "muslim": "Muzulmán",
-                    "buddhist": "Buddhista",
-                    "jewish": "Zsidó",
-                    "hindu": "Hindu",
-                    "shinto": "Sintó",
-                    "taoist": "Taoista"
-                }
+                "label": "Vallás"
             },
             "restriction": {
                 "label": "Típus"
@@ -756,9 +747,6 @@
             },
             "route_master": {
                 "label": "Típus"
-            },
-            "sac_scale": {
-                "label": "Ösvény nehézsége"
             },
             "seasonal": {
                 "label": "Időszakos"
@@ -814,9 +802,6 @@
             },
             "towertype": {
                 "label": "Torony típus"
-            },
-            "tracktype": {
-                "label": "Típus"
             },
             "trail_visibility": {
                 "label": "Ösvény láthatósága"

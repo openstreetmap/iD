@@ -520,16 +520,7 @@
                 "label": "Tipe"
             },
             "religion": {
-                "label": "Geloof",
-                "options": {
-                    "christian": "Christen",
-                    "muslim": "Moslem",
-                    "buddhist": "Boeddhis",
-                    "jewish": "Joods",
-                    "hindu": "Hindoe",
-                    "shinto": "Sjinto",
-                    "taoist": "Taoist"
-                }
+                "label": "Geloof"
             },
             "restriction": {
                 "label": "Tipe"
@@ -539,9 +530,6 @@
             },
             "route_master": {
                 "label": "Tipe"
-            },
-            "sac_scale": {
-                "label": "Moeilikheidsgraad van voetslaanpad"
             },
             "service": {
                 "label": "Tipe"
@@ -579,9 +567,6 @@
             },
             "towertype": {
                 "label": "Toring tipe"
-            },
-            "tracktype": {
-                "label": "Tipe"
             },
             "trail_visibility": {
                 "label": "Sigbaarheid van voetslaanpad"
