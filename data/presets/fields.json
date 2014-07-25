@@ -212,6 +212,12 @@
         "type": "combo",
         "label": "Type"
     },
+    "brand_fuel": {
+        "key": "brand",
+        "type": "text",
+        "placeholder": "Shell, Exxon, BP...",
+        "label": "Brand"
+    },
     "building": {
         "key": "building",
         "type": "typeCombo",

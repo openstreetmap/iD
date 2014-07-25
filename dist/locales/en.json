@@ -578,6 +578,10 @@
             "boundary": {
                 "label": "Type"
             },
+            "brand_fuel": {
+                "label": "Brand",
+                "placeholder": "Shell, Exxon, BP..."
+            },
             "building": {
                 "label": "Building"
             },

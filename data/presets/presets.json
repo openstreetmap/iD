@@ -876,9 +876,10 @@
     "amenity/fuel": {
         "icon": "fuel",
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "geometry": [
             "point",
@@ -8589,9 +8590,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8609,9 +8611,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8629,9 +8632,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8649,9 +8653,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8669,9 +8674,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8689,9 +8695,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8709,9 +8716,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8729,9 +8737,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8749,9 +8758,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8769,9 +8779,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8789,9 +8800,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8809,9 +8821,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8829,9 +8842,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8849,9 +8863,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8869,9 +8884,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8889,9 +8905,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8909,9 +8926,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8929,9 +8947,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8949,9 +8968,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8969,9 +8989,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -8989,9 +9010,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9009,9 +9031,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9029,9 +9052,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9049,9 +9073,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9069,9 +9094,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9089,9 +9115,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9109,9 +9136,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9129,9 +9157,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9149,9 +9178,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9169,9 +9199,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9189,9 +9220,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9209,9 +9241,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9229,9 +9262,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9249,9 +9283,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9269,9 +9304,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9289,9 +9325,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9309,9 +9346,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9329,9 +9367,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9349,9 +9388,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9369,9 +9409,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9389,9 +9430,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9409,9 +9451,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9429,9 +9472,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9449,9 +9493,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9469,9 +9514,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9489,9 +9535,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9509,9 +9556,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9529,9 +9577,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9549,9 +9598,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9569,9 +9619,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9589,9 +9640,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9609,9 +9661,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9629,9 +9682,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9649,9 +9703,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9669,9 +9724,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9689,9 +9745,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9709,9 +9766,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9729,9 +9787,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9749,9 +9808,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9769,9 +9829,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9789,9 +9850,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9809,9 +9871,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9829,9 +9892,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9849,9 +9913,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9869,9 +9934,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9889,9 +9955,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9909,9 +9976,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9929,9 +9997,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9949,9 +10018,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9969,9 +10039,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -9989,9 +10060,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10009,9 +10081,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10029,9 +10102,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10049,9 +10123,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10069,9 +10144,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10089,9 +10165,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10109,9 +10186,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10129,9 +10207,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10149,9 +10228,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10169,9 +10249,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10189,9 +10270,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10209,9 +10291,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10229,9 +10312,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10249,9 +10333,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10269,9 +10354,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10289,9 +10375,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10309,9 +10396,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10329,9 +10417,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10349,9 +10438,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10369,9 +10459,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10389,9 +10480,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10409,9 +10501,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10429,9 +10522,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10449,9 +10543,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10469,9 +10564,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10489,9 +10585,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10509,9 +10606,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10529,9 +10627,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10549,9 +10648,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10569,9 +10669,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10589,9 +10690,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10609,9 +10711,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10629,9 +10732,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10649,9 +10753,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10669,9 +10774,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10689,9 +10795,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10709,9 +10816,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10729,9 +10837,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10749,9 +10858,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10769,9 +10879,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10789,9 +10900,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10809,9 +10921,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10829,9 +10942,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10849,9 +10963,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10869,9 +10984,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10889,9 +11005,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10909,9 +11026,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10929,9 +11047,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10949,9 +11068,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10969,9 +11089,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -10989,9 +11110,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11009,9 +11131,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11029,9 +11152,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11049,9 +11173,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11069,9 +11194,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11089,9 +11215,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11109,9 +11236,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11129,9 +11257,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11149,9 +11278,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11169,9 +11299,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11189,9 +11320,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11209,9 +11341,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11229,9 +11362,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11249,9 +11383,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11269,9 +11404,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11289,9 +11425,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11309,9 +11446,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11329,9 +11467,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11349,9 +11488,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11369,9 +11509,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11390,9 +11531,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11410,9 +11552,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11430,9 +11573,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11450,9 +11594,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11470,9 +11615,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11490,9 +11636,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11510,9 +11657,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11530,9 +11678,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11550,9 +11699,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11570,9 +11720,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11590,9 +11741,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11610,9 +11762,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11630,9 +11783,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11650,9 +11804,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11670,9 +11825,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11690,9 +11846,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11710,9 +11867,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11730,9 +11888,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11750,9 +11909,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11770,9 +11930,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11790,9 +11951,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11810,9 +11972,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11830,9 +11993,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11850,9 +12014,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11870,9 +12035,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11890,9 +12056,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11910,9 +12077,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11930,9 +12098,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11950,9 +12119,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
@@ -11970,9 +12140,10 @@
             "area"
         ],
         "fields": [
-            "operator",
+            "brand_fuel",
             "address",
-            "building_area"
+            "building_area",
+            "operator"
         ],
         "suggestion": true
     },
