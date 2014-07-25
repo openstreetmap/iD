@@ -1,3 +1,11 @@
+## 1.5.3
+
+* When adding gpx, only rezoom map if gpx not in viewport (#2297)
+* Workaround for Chrome crash (#2295)
+* Add mtb fields (#2244)
+* Support option strings for combo fields (#2296)
+* Render triangular midpoints to show direction of any selected way (#2292)
+
 ## 1.5.2
 
 * Fixed Chrome/Windows selection bug (#2151)
