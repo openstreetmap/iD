@@ -149,10 +149,14 @@ iD.Background = function(context) {
 
     background.zoomToGpxLayer = function() {
         if (background.hasGpxLayer()) {
-            var gpx = d3.geo.bounds(gpxLayer.geojson());
+            var viewport = context.map().extent().polygon(),
+                coords = _.reduce(gpxLayer.geojson().features, function(coords, feature) {
+                    var c = feature.geometry.coordinates;
+                    return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
+                }, []);
 
-            if (!context.map().extent().intersects(gpx)) {
-                context.map().extent(gpx);
+            if (!iD.geo.polygonIntersectsPolygon(viewport, coords)) {
+                context.map().extent(d3.geo.bounds(gpxLayer.geojson()));
             }
         }
     };
