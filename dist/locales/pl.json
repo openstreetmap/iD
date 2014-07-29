@@ -718,7 +718,7 @@
                 "label": "Długość (w metrach)"
             },
             "levels": {
-                "label": "Poziomy",
+                "label": "Liczba kondygnacji",
                 "placeholder": "2, 4, 6..."
             },
             "lit": {
@@ -733,6 +733,17 @@
             "maxspeed": {
                 "label": "Ograniczenie prędkości",
                 "placeholder": "40, 50, 60..."
+            },
+            "mtb/scale/uphill": {
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Śr. nachylenie <10%, żwir/ubita ziemia, brak przeszkód",
+                    "1": "1: Śr. nachylenie <15%, żwir/ubita ziemia, kilka mniejszych obiektów",
+                    "2": "2: Śr. nachylenie <20%, stabilne podłoże, kamienie wielkości pięści/korzenie",
+                    "3": "3: Śr. nachylenie <25%, zróżnicowane podłoże, kamienie wielkości pięści/gałęzie",
+                    "4": "4: Śr. nachylenie <30%, zły stan, duże kamienie/gałęzie",
+                    "5": "5: Bardzo strome, rower zwykle musi być wprowadzony"
+                }
             },
             "name": {
                 "label": "Nazwa",
@@ -779,7 +790,16 @@
                 "label": "Parkuj i jedź"
             },
             "parking": {
-                "label": "Typ"
+                "label": "Typ",
+                "options": {
+                    "surface": "Naziemny",
+                    "multi-storey": "Wielopoziomowy",
+                    "underground": "Podziemny",
+                    "sheds": "Garaże",
+                    "carports": "Wiaty",
+                    "garage_boxes": "Boksy garażowe",
+                    "lane": "Pas na jezdni"
+                }
             },
             "phone": {
                 "label": "Telefon",
@@ -861,7 +881,12 @@
                 "label": "Dla palących",
                 "placeholder": "Nie, Wydzielone, Tak...",
                 "options": {
-                    "no": "Całkowity zakaz palenia"
+                    "no": "Całkowity zakaz palenia",
+                    "separated": "W miejscach dla palących, nieoddzielonych fizycznie",
+                    "isolated": "W miejscach dla palących, fizycznie oddzielonych",
+                    "outside": "Dozwolone na zewnątrz",
+                    "yes": "Dozwolone wszędzie",
+                    "dedicated": "Miejsce dla palących (np. klub palaczy)"
                 }
             },
             "smoothness": {
@@ -914,6 +939,17 @@
             },
             "towertype": {
                 "label": "Typ wieży"
+            },
+            "tracktype": {
+                "label": "Typ drogi nieutwardzonej",
+                "placeholder": "Utwardzona, nieubita...",
+                "options": {
+                    "grade1": "Utwardzona lub mocna ubita powierzchnia",
+                    "grade2": "Żwirowa z niewielką domieszką piasku, mułu lub gliny",
+                    "grade3": "Składająca się z równej ilości twardych i miękkich materiałów",
+                    "grade4": "Ziemia/piasek/trawa z domieszką twardych materiałów",
+                    "grade5": "Ziemia/piasek/trawa, bez dodatku materiałów utwardzonych, słabo widoczna"
+                }
             },
             "trail_visibility": {
                 "label": "Widoczność szlaku",
@@ -1748,7 +1784,7 @@
             },
             "highway/service": {
                 "name": "Droga wewnętrzna",
-                "terms": "droga dojazdowa, podjazd"
+                "terms": "droga dojazdowa, podjazd, serwisowa"
             },
             "highway/service/alley": {
                 "name": "Alejka",

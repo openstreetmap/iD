@@ -150,7 +150,8 @@
                 "area": "Polygone déplacé.",
                 "multiple": "Plusieurs objets déplacés"
             },
-            "incomplete_relation": "Cet élément ne peut pas être déplacé car il n'a pas été téléchargé dans son intégralité."
+            "incomplete_relation": "Cet élément ne peut pas être déplacé car il n'a pas été téléchargé dans son intégralité.",
+            "too_large": "Ne peut être déplacé parce que n'est pas suffisamment visible dans la fenêtre."
         },
         "rotate": {
             "title": "Rotation",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Pivoter la ligne.",
                 "area": "Pivoter un polyone."
-            }
+            },
+            "too_large": "Ne peut être pivoté parce que n'est pas suffisamment visible dans la fenêtre."
         },
         "reverse": {
             "title": "Inverser",
@@ -481,7 +483,8 @@
                 }
             },
             "access_simple": {
-                "label": "Accès"
+                "label": "Accès",
+                "placeholder": "oui"
             },
             "access_toilets": {
                 "label": "Accès"
@@ -569,7 +572,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Sens"
+                "label": "Sens",
+                "options": {
+                    "N": "Nord",
+                    "E": "Est",
+                    "S": "Sud",
+                    "W": "Ouest",
+                    "NE": "Nord-Est",
+                    "SE": "Sud-Est",
+                    "SW": "Sud-Ouest",
+                    "NW": "Nord-Ouest",
+                    "NNE": "Nord-Nord-Est",
+                    "ENE": "Est-Nord-Est",
+                    "ESE": "Est-Sud-Est",
+                    "SSE": "Sud-Sud-Est",
+                    "SSW": "Sud-Sud-Ouest",
+                    "WSW": "Ouest-Sud-Ouest",
+                    "WNW": "Ouest-Nord-Ouest",
+                    "NNW": "Nord-Nord-Ouest"
+                }
             },
             "clock_direction": {
                 "label": "Sens",
@@ -609,7 +630,12 @@
                 "label": "Description"
             },
             "electrified": {
-                "label": "Électrification"
+                "label": "Électrification",
+                "options": {
+                    "rail": "Rails électrifiés",
+                    "yes": "Oui (non spécifié)",
+                    "no": "Non"
+                }
             },
             "elevation": {
                 "label": "Altitude"
@@ -631,7 +657,12 @@
                 "label": "Prix"
             },
             "fire_hydrant/type": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "underground": "Sous-terrain",
+                    "wall": "Mur",
+                    "pond": "Étang"
+                }
             },
             "fixme": {
                 "label": "À corriger"
@@ -653,6 +684,21 @@
             },
             "fuel/lpg": {
                 "label": "Vente de gaz propane"
+            },
+            "fuel/octane_100": {
+                "label": "Vente d'Octane 100"
+            },
+            "fuel/octane_91": {
+                "label": "Vente de carburant Ordinaire"
+            },
+            "fuel/octane_95": {
+                "label": "Vente de Super 95"
+            },
+            "fuel/octane_98": {
+                "label": "Vente de Super 98"
+            },
+            "gauge": {
+                "label": "Écartement"
             },
             "generator/method": {
                 "label": "Méthode"
@@ -695,6 +741,8 @@
             "internet_access": {
                 "label": "Accès internet",
                 "options": {
+                    "yes": "Oui",
+                    "no": "Non",
                     "wlan": "Wifi",
                     "wired": "Par câble",
                     "terminal": "Ordinateur"
@@ -736,6 +784,31 @@
                 "label": "Vitesse maximale autorisée",
                 "placeholder": "50, 70, 90..."
             },
+            "mtb/scale": {
+                "label": "Difficulté VTT",
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/imba": {
+                "placeholder": "Facile, Intermédiaire, Difficile...",
+                "options": {
+                    "0": "Simplissime (ronds blancs)",
+                    "1": "Facile (ronds verts)",
+                    "2": "Intermédiaire (carrés bleus)",
+                    "3": "Difficile (losanges noirs)",
+                    "4": "Extrèmement difficile (doubles losanges noirs)"
+                }
+            },
+            "mtb/scale/uphill": {
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Inclinaison <10% , sol consistent, pas d'obstacles",
+                    "1": "1: Inclinaison < 15%, sol consistant, quelques menus obstacles",
+                    "2": "2: Inclinaison <20%, surface stable, pierres/racines",
+                    "3": "3: Inclinaison <25%, différents types de terrains, pierres/branches",
+                    "4": "4: Inclinaison <30%, conditions difficiles, rochers/branches",
+                    "5": "5: Abrupt, le vélo doit généralement être porté ou poussé"
+                }
+            },
             "name": {
                 "label": "Nom",
                 "placeholder": "Nom courant (si existant)"
@@ -753,10 +826,20 @@
                 "label": "Type"
             },
             "oneway": {
-                "label": "Sens unique"
+                "label": "Sens unique",
+                "options": {
+                    "undefined": "Supposément Non",
+                    "yes": "Oui",
+                    "no": "Non"
+                }
             },
             "oneway_yes": {
-                "label": "Sens unique"
+                "label": "Sens unique",
+                "options": {
+                    "undefined": "Supposément Oui",
+                    "yes": "Oui",
+                    "no": "Non"
+                }
             },
             "opening_hours": {
                 "label": "Heures"
@@ -779,7 +862,16 @@
                 "placeholder": "+33 1 23 45 67 89"
             },
             "piste/difficulty": {
-                "label": "Difficulté"
+                "label": "Difficulté",
+                "placeholder": "Facile, Intermédiaire, Avancé...",
+                "options": {
+                    "easy": "Facile (ronds verts)",
+                    "intermediate": "Intermédiaire (carrés bleus)",
+                    "advanced": "Avancé (losanges noirs)",
+                    "expert": "Expert (doubles losanges noirs)",
+                    "freeride": "Freeride (hors piste)",
+                    "extreme": "Extrème (matériel d'escalade requis)"
+                }
             },
             "piste/grooming": {
                 "label": "Damage"
@@ -886,7 +978,16 @@
                 "label": "Type de tour"
             },
             "trail_visibility": {
-                "label": "Visibilité du sentier"
+                "label": "Visibilité du sentier",
+                "placeholder": "Excellent, Bon, Mauvais...",
+                "options": {
+                    "excellent": "Excellent: chemin clairement identifiable ou balisage fréquent",
+                    "good": "Bon: balisage globalement visible",
+                    "intermediate": "Intermédiaire: peu de balisage, sentier identifiable",
+                    "bad": "Mauvais: pas de balisage, sentier inconsistent",
+                    "horrible": "Horrible: sentier disaraît fréquemment, nécessite de s'orienter",
+                    "no": "Non: sans sentier, nécessite de bonnes compétences d'orientation"
+                }
             },
             "tree_type": {
                 "label": "Type"
@@ -959,7 +1060,8 @@
                 "terms": "Pylône de remontée mécanique"
             },
             "aerialway/rope_tow": {
-                "name": "Télécorde"
+                "name": "Télécorde",
+                "terms": "Téléski, Tire-fesse, Télécorde"
             },
             "aerialway/station": {
                 "name": "Gare de remontée mécanique",
@@ -1063,6 +1165,10 @@
             "amenity/car_wash": {
                 "name": "Lavage de voiture, Lave auto",
                 "terms": "Lavage de voiture, lave auto"
+            },
+            "amenity/charging_station": {
+                "name": "Borne de recharge",
+                "terms": "Station de recharge, Borne de recharge"
             },
             "amenity/childcare": {
                 "name": "Garderie",
@@ -1485,7 +1591,8 @@
                 "name": "Confiserie"
             },
             "craft/dressmaker": {
-                "name": "Couturier"
+                "name": "Couturier",
+                "terms": "Couturier, Tailleur, Designer textile"
             },
             "craft/electrician": {
                 "name": "Electricien",
@@ -2323,7 +2430,7 @@
                 "terms": "Quai"
             },
             "public_transport/stop_position": {
-                "name": "Position d’arrêt sur une route de transport en commun",
+                "name": "Position exacte d’arrêt du vehicule sur le « way » d’une route de transport en commun",
                 "terms": "Arrêt"
             },
             "railway": {
@@ -2358,7 +2465,7 @@
             },
             "railway/platform": {
                 "name": "Quai de gare ferroviaire",
-                "terms": "Quai de gare"
+                "terms": "Quai de gare, Quai"
             },
             "railway/rail": {
                 "name": "Voie ferrée",
@@ -2456,8 +2563,8 @@
                 "terms": "Confiserie"
             },
             "shop/convenience": {
-                "name": "Magasin d'appoint",
-                "terms": "Dépanneur"
+                "name": "Petite épicerie du coin",
+                "terms": "Supérette, Petite épicerie du coin"
             },
             "shop/deli": {
                 "name": "Épicerie de luxe",
@@ -2592,7 +2699,7 @@
             },
             "shop/supermarket": {
                 "name": "Supermarché",
-                "terms": "Supermarché, épicerie"
+                "terms": "Supermarché"
             },
             "shop/tailor": {
                 "name": "Tailleur"
@@ -2614,8 +2721,8 @@
                 "terms": "Espace vacant, lot vacant"
             },
             "shop/variety_store": {
-                "name": "Magasin à prix unique",
-                "terms": "Magasin à 1$, magasin à un dollar"
+                "name": "Supérette, Petite épicerie du coin",
+                "terms": "Épicerie"
             },
             "shop/video": {
                 "name": "Vidéo-club",

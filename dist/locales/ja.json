@@ -867,10 +867,22 @@
                 "label": "難易度"
             },
             "piste/grooming": {
-                "label": "整備状況"
+                "label": "整備状況",
+                "options": {
+                    "classic": "クラシック",
+                    "mogul": "モーグル",
+                    "backcountry": "バックカントリー",
+                    "scooter": "スクーター/スノーモービル",
+                    "skating": "スケーティング"
+                }
             },
             "piste/type": {
-                "label": "種別"
+                "label": "種別",
+                "options": {
+                    "downhill": "ダウンヒル",
+                    "nordic": "ノルディック",
+                    "skitour": "スキーツアー"
+                }
             },
             "place": {
                 "label": "タイプ"

@@ -782,6 +782,9 @@
             "mtb/scale": {
                 "placeholder": "0, 1, 2, 3…"
             },
+            "mtb/scale/uphill": {
+                "placeholder": "0, 1, 2, 3…"
+            },
             "name": {
                 "label": "Название",
                 "placeholder": "Разговорное название (если есть)"
@@ -827,7 +830,10 @@
                 "label": "Перехватывающая парковка"
             },
             "parking": {
-                "label": "Тип"
+                "label": "Тип",
+                "options": {
+                    "surface": "Покрытие"
+                }
             },
             "phone": {
                 "label": "Телефон",

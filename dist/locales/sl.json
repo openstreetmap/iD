@@ -340,8 +340,8 @@
         "deprecated_tags": "Zastarele oznake: {tags}"
     },
     "zoom": {
-        "in": "Povečaj",
-        "out": "Pomanjšaj"
+        "in": "Približaj",
+        "out": "Oddalji"
     },
     "cannot_zoom": "Nadaljnje oddaljevanje v trenutnem načinu ni več mogoče.",
     "gpx": {
@@ -802,11 +802,16 @@
                 "placeholder": "30, 50, 60..."
             },
             "mtb/scale": {
-                "label": "Gorsko-kolesarska težavnost",
+                "label": "Gorsko-kolesarska zahtevnost",
                 "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Trden konglomerat (prodniki)/zbita prst, brez ovir, široki zavoji",
-                    "1": "1: Ponekod nestabilna podlaga, majhne ovire, široki zavoji"
+                    "1": "1: Ponekod nestabilna podlaga, majhne ovire, široki zavoji",
+                    "2": "2: Več nestabilne podlage, velike ovire, preprosto obračanje na prednjem kolesu",
+                    "3": "3: Spolzka podlaga, velike ovire, tesno obračanje na prednjem kolesu",
+                    "4": "4: Nestabilna podlaga ali večje skale, tvegano obračanje na prednjem kolesu",
+                    "5": "5: Največja zahtevnost, večja območja skal, zemeljski plazovi, usadi",
+                    "6": "6: Ni mogoče premagati na kolesu, razen za najbolj izurjene gorske kolesarje"
                 }
             },
             "mtb/scale/imba": {
@@ -815,7 +820,9 @@
                 "options": {
                     "0": "Najlažje (bel krogec)",
                     "1": "Lahko (zelen krogec)",
-                    "2": "Srednje zahtevno (moder kvadratek)"
+                    "2": "Srednje zahtevno (moder kvadratek)",
+                    "3": "Zahtevno (črn karo)",
+                    "4": "Izjemno zahtevno (dvojni črn karo)"
                 }
             },
             "mtb/scale/uphill": {
@@ -892,16 +899,16 @@
                 "placeholder": "+386 31 123 4567"
             },
             "piste/difficulty": {
-                "label": "Težavnost",
-                "placeholder": "Lahke, srednje težke, težke",
+                "label": "Zahtevnost",
+                "placeholder": "Lahke, srednje zahtevne, zahtevne...",
                 "options": {
                     "novice": "Za začetnike",
                     "easy": "Lahka",
-                    "intermediate": "Srednje težka",
-                    "advanced": "Težka",
-                    "expert": "Zelo težka",
+                    "intermediate": "Srednje zahtevna",
+                    "advanced": "Zahtevna",
+                    "expert": "Zelo zahtevna",
                     "freeride": "Variantno smučanje - neteptana",
-                    "extreme": "Alpinistično smučanje"
+                    "extreme": "Izjemno zahtevna (za vzpon nujna uporaba plezalnih pripomočkov)"
                 }
             },
             "piste/grooming": {

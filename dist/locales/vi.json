@@ -514,7 +514,12 @@
                 "label": "Kiểu"
             },
             "aerialway/access": {
-                "label": "Quyền Truy cập"
+                "label": "Quyền Truy cập",
+                "options": {
+                    "entry": "Vào",
+                    "exit": "Ra",
+                    "both": "Ra vào"
+                }
             },
             "aerialway/bubble": {
                 "label": "Mái vòm"
@@ -535,7 +540,12 @@
                 "placeholder": "2, 4, 8…"
             },
             "aerialway/summer/access": {
-                "label": "Quyền Truy cập (Mùa hè)"
+                "label": "Quyền Truy cập (Mùa hè)",
+                "options": {
+                    "entry": "Vào",
+                    "exit": "Ra",
+                    "both": "Ra vào"
+                }
             },
             "aeroway": {
                 "label": "Loại"
@@ -575,7 +585,25 @@
                 "placeholder": "50, 100, 200…"
             },
             "cardinal_direction": {
-                "label": "Chiều"
+                "label": "Chiều",
+                "options": {
+                    "N": "Bắc",
+                    "E": "Đông",
+                    "S": "Nam",
+                    "W": "Tây",
+                    "NE": "Đông Bắc",
+                    "SE": "Đông Nam",
+                    "SW": "Tây Nam",
+                    "NW": "Tây Bắc",
+                    "NNE": "Bắc Đông Bắc",
+                    "ENE": "Đông Đông Bắc",
+                    "ESE": "Đông Đông Nam",
+                    "SSE": "Nam Đông Nam",
+                    "SSW": "Nam Tây Nam",
+                    "WSW": "Tây Tây Nam",
+                    "WNW": "Tây Tây Bắc",
+                    "NNW": "Bắc Tây Bắc"
+                }
             },
             "clock_direction": {
                 "label": "Chiều",
@@ -615,7 +643,14 @@
                 "label": "Miêu tả"
             },
             "electrified": {
-                "label": "Điện khí hóa"
+                "label": "Điện khí hóa",
+                "placeholder": "Dây điện Bên trên, Đường ray Điện…",
+                "options": {
+                    "contact_line": "Dây điện Bên trên",
+                    "rail": "Đường ray Điện",
+                    "yes": "Có (không xác định)",
+                    "no": "Không có"
+                }
             },
             "elevation": {
                 "label": "Cao độ"
@@ -637,7 +672,13 @@
                 "label": "Phí"
             },
             "fire_hydrant/type": {
-                "label": "Kiểu"
+                "label": "Kiểu",
+                "options": {
+                    "pillar": "Cột",
+                    "underground": "Dưới đất",
+                    "wall": "Tường",
+                    "pond": "Ao"
+                }
             },
             "fixme": {
                 "label": "Cần Sửa chữa"
@@ -760,6 +801,42 @@
                 "label": "Tốc độ Tối đa",
                 "placeholder": "40, 50, 60…"
             },
+            "mtb/scale": {
+                "label": "Độ hiểm trở Đạp xe Leo núi",
+                "placeholder": "0, 1, 2, 3…",
+                "options": {
+                    "0": "0: Sỏi/đất chắc, không có trở ngại, uốn từ từ",
+                    "1": "1: Mặt có một tí phần không chặt, trở ngại nhỏ, uốn từ từ",
+                    "2": "2: Mặt có nhiều phần không chặt, trở ngại lớn, chữ chi dễ dàng",
+                    "3": "3. Mặt trơn, trở ngại lớn, chữ chi đột ngột",
+                    "4": "4. Mặt không chặt hoặc hòn đá, chữ chi nguy hiểm",
+                    "5": "5. Cực hiểm trở, sân đầy hòn đá, lở đất",
+                    "6": "6. Không thể đạp xe trừ những người lão luyện nhất"
+                }
+            },
+            "mtb/scale/imba": {
+                "label": "Độ hiểm trở Đường mòn IMBA",
+                "placeholder": "Dễ, Trung bình, Khó…",
+                "options": {
+                    "0": "Dễ nhất (hình tròn màu trắng)",
+                    "1": "Dễ (hình tròn màu xanh lục)",
+                    "2": "Trung bình (hình vuông màu xanh lam)",
+                    "3": "Khó (hình thoi màu đen)",
+                    "4": "Cực Khó (2 hình thoi màu đen)"
+                }
+            },
+            "mtb/scale/uphill": {
+                "label": "Độ hiểm trở Đạp xe Leo lên núi",
+                "placeholder": "0, 1, 2, 3…",
+                "options": {
+                    "0": "0: Độ dốc trung bình <10%, sỏi/đất chắc, không có trở ngại",
+                    "1": "1: Độ dốc trung bình <15%, sỏi/đất chắc, vài thứ nhỏ",
+                    "2": "2: Độ dốc trung bình <20%, mặt vững, đá/rễ bằng cỡ tay",
+                    "3": "3: Độ dốc trung bình <25%, mặt thay đổi, đá/rễ bằng cỡ tay",
+                    "4": "4: Độ dốc trung bình <30%, phẩm chất kém, đá/rễ lớn",
+                    "5": "5: Rất dốc, thường phải đẩy hoặc vác xe đạp"
+                }
+            },
             "name": {
                 "label": "Tên",
                 "placeholder": "Tên phổ biến (nếu có)"
@@ -779,7 +856,7 @@
             "oneway": {
                 "label": "Một chiều",
                 "options": {
-                    "undefined": "Có lẽ Phải",
+                    "undefined": "Có lẽ Không phải",
                     "yes": "Phải",
                     "no": "Không phải"
                 }
@@ -787,7 +864,7 @@
             "oneway_yes": {
                 "label": "Một chiều",
                 "options": {
-                    "undefined": "Có lẽ Không phải",
+                    "undefined": "Có lẽ Phải",
                     "yes": "Phải",
                     "no": "Không phải"
                 }
@@ -806,20 +883,58 @@
                 "label": "Trung chuyển"
             },
             "parking": {
-                "label": "Kiểu"
+                "label": "Kiểu",
+                "options": {
+                    "surface": "Ngoài trời",
+                    "multi-storey": "Cao tầng",
+                    "underground": "Ngầm",
+                    "sheds": "Lán",
+                    "carports": "Nhà xe",
+                    "garage_boxes": "Ga ra",
+                    "lane": "Làn đường"
+                }
             },
             "phone": {
                 "label": "Số Điện thoại",
                 "placeholder": "+84 1 234 5678"
             },
             "piste/difficulty": {
-                "label": "Độ Hiểm trở"
+                "label": "Độ Hiểm trở",
+                "placeholder": "Dễ, Trung bình, Nâng cao…",
+                "options": {
+                    "novice": "Tập",
+                    "easy": "Dễ (Mỹ: tròn lục; Âu: xanh lục; Nhật: lục)",
+                    "intermediate": "Trung bình (Mỹ: vuông lam; Âu: đỏ; Nhật: đỏ)",
+                    "advanced": "Nâng cao (Mỹ: thoi đen; Âu: đen; Nhật: đen)",
+                    "expert": "Lão luyện (Mỹ: 2 thoi đen; Âu: cam)",
+                    "freeride": "Tự do (xa đường; Âu: vàng)",
+                    "extreme": "Cực độ (cần thiết bị leo núi)"
+                }
             },
             "piste/grooming": {
-                "label": "Kiểu Ủi Tuyết"
+                "label": "Kiểu Ủi Tuyết",
+                "options": {
+                    "classic": "Cổ điển",
+                    "mogul": "Mogul",
+                    "backcountry": "Hẻo lánh",
+                    "classic+skating": "Cổ điển và Trượt băng",
+                    "scooter": "Xe máy Trượt tuyết",
+                    "skating": "Trượt băng"
+                }
             },
             "piste/type": {
-                "label": "Kiểu"
+                "label": "Kiểu",
+                "options": {
+                    "downhill": "Xuống dốc",
+                    "nordic": "Trượt tuyết Bắc Âu",
+                    "skitour": "Skitour",
+                    "sled": "Xe Trượt tuyết",
+                    "hike": "Đi bộ đường dài",
+                    "sleigh": "Xe trượt tuyết",
+                    "ice_skate": "Trượt băng",
+                    "snow_park": "Vườn Tuyết",
+                    "playground": "Vui chơi"
+                }
             },
             "place": {
                 "label": "Kiểu"
@@ -866,6 +981,18 @@
             "route_master": {
                 "label": "Kiểu"
             },
+            "sac_scale": {
+                "label": "Độ hiểm trở Đi bộ Đường dài",
+                "placeholder": "Đi bộ Đường dài Núi, Đi bộ Đường dài Anpơ…",
+                "options": {
+                    "hiking": "T1: Đi bộ Đường dài",
+                    "mountain_hiking": "T2: Đi bộ Đường dài Núi",
+                    "demanding_mountain_hiking": "T3: Đi bộ Đường dài Núi Rán sức",
+                    "alpine_hiking": "T4: Đi bộ Đường dài Anpơ",
+                    "demanding_alpine_hiking": "T5: Đi bộ Đường dài Anpơ Rán sức",
+                    "difficult_alpine_hiking": "T6: Đi bộ Đường dài Anpơ Khó"
+                }
+            },
             "seasonal": {
                 "label": "Tùy Mùa"
             },
@@ -885,7 +1012,30 @@
                 "label": "Lề đường Dốc"
             },
             "smoking": {
-                "label": "Hút thuốc"
+                "label": "Hút thuốc",
+                "placeholder": "Cấm, Nơi dành riêng, Cho phép…",
+                "options": {
+                    "no": "Hoàn toàn cấm hút thuốc",
+                    "separated": "Ở nơi hút thuốc không có tường",
+                    "isolated": "Ở nơi hút thuốc có tường",
+                    "outside": "Cho phép ở ngoài trời",
+                    "yes": "Cho phép ở bất cứ nơi nào",
+                    "dedicated": "Dành riêng cho người hút thuốc (ví dụ quán hút thuốc)"
+                }
+            },
+            "smoothness": {
+                "label": "Độ nhẵn",
+                "placeholder": "Bánh xe Trượt, Bánh xe, Xa đường…",
+                "options": {
+                    "excellent": "Bánh xe Trượt: Giày patanh, ván trượt",
+                    "good": "Bánh xe Mỏng: Xe đạp đua",
+                    "intermediate": "Bánh xe: Xe đạp lai, xe lăn, vét pa",
+                    "bad": "Bánh xe Bền: Xe hơi, xích lô, xe đạp dã ngoại",
+                    "very_bad": "Gầm Cao: Xe xa đường nhẹ",
+                    "horrible": "Xa đường: Xe xa đường nặng",
+                    "very_horrible": "Xa đường Chuyên dụng: Máy kéo, ATV",
+                    "impassible": "Không thể qua được bằng bánh xe"
+                }
             },
             "social_facility_for": {
                 "label": "Dân được phục vụ",
@@ -924,7 +1074,13 @@
                 "label": "Gạch dành cho Người Khiếm thị"
             },
             "toilets/disposal": {
-                "label": "Phương pháp thải"
+                "label": "Phương pháp thải",
+                "options": {
+                    "flush": "Bấm",
+                    "pitlatrine": "Mương",
+                    "chemical": "Hóa chất",
+                    "bucket": "Thùng"
+                }
             },
             "tourism": {
                 "label": "Loại"
@@ -932,8 +1088,28 @@
             "towertype": {
                 "label": "Kiểu Tháp"
             },
+            "tracktype": {
+                "label": "Loại Đường mòn",
+                "placeholder": "Rất chắc, Khá Chắc, Mềm…",
+                "options": {
+                    "grade1": "Rất Chắc: Mặt lát hoặc bằng cốt liệu chắc",
+                    "grade2": "Khá Chắc: Sỏi đá pha một tí nguyên liệu mềm",
+                    "grade3": "Pha trộn đều các nguyên liệu cứng mềm",
+                    "grade4": "Khá Mềm: Đất/cát/cỏ pha một tí nguyên liệu cứng",
+                    "grade5": "Rất Mềm: Đất/cát/cỏ"
+                }
+            },
             "trail_visibility": {
-                "label": "Tầm nhìn trên Đường mòn"
+                "label": "Tầm nhìn trên Đường mòn",
+                "placeholder": "Tốt, Khá, Trung bình…",
+                "options": {
+                    "excellent": "Tốt: Lối đi rõ ràng hoặc có cắm bảng từng quãng một",
+                    "good": "Khá: Có bảng thấy được nhưng đôi khi cần phải mò mẫm",
+                    "intermediate": "Trung bình: Ít bảng, lối đi thấy được phần lớn",
+                    "bad": "Kém: Không có cắm bảng, đôi khi không thấy được lối đi hoặc không có lối đi",
+                    "horrible": "Tồi: Nhiều khi không có lối đi, cần biết dò đường một chút",
+                    "no": "Không có lối đi, rất cần biết dò đường"
+                }
             },
             "tree_type": {
                 "label": "Loại"
@@ -1093,6 +1269,10 @@
             "amenity/boat_rental": {
                 "name": "Cho thuê Tàu",
                 "terms": "dịch vụ cho thuê tàu, chỗ thuê tàu, tiệm thuê tàu, thuê tàu, dịch vụ cho mướn tàu, chỗ mướn tàu, tiệm mướn tàu, mướn tàu, dịch vụ cho thuê thuyền, chỗ thuê thuyền, tiệm thuê thuyền, thuê thuyền, dịch vụ cho mướn thuyền, chỗ mướn thuyền, tiệm mướn thuyền, mướn thuyền, dich vu cho thue tau, cho thue tau, tiem thue tau, thue tau, dich vu cho muon tau, cho muon tau, tiem muon tau, muon tau, dich vu cho thue thuyen, cho thue thuyen, tiem thue thuyen, thue thuyen, dich vu cho muon thuyen, cho muon thuyen, tiem muon thuyen, muon thuyen"
+            },
+            "amenity/bus_station": {
+                "name": "Ga Xe buýt",
+                "terms": "ga xe buýt, nhà ga xe buýt, nhà ga buýt, ga buýt, ga xe buyt, nha ga xe buyt, nha ga buyt, ga buyt"
             },
             "amenity/cafe": {
                 "name": "Quán Cà phê",

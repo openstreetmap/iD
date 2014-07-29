@@ -832,7 +832,7 @@
                     "0": "0: Incl. mitjana <10%, grava/terra compactada, sense obstacles",
                     "1": "1: Incl. mitjana <15%. grava/terra compactada, pocs i petits obstacles",
                     "2": "2: Incl. mitjana <20%, superfície estable, roques i arrels de la mida d'un puny",
-                    "3": "3: Incl. mitjana <25%, superfície veriable, roques i banques de la mida d'un puny",
+                    "3": "3: Incl. mitjana <25%, superfície variable, roques i banques de la mida d'un puny",
                     "4": "4: Incl. mitjana <30%, condicions pobres, grans roques/branques",
                     "5": "5: Molt empinat, generalment la bicicleta ha de ser empesa."
                 }
@@ -905,7 +905,7 @@
                     "novice": "Debutants (instrucció)",
                     "easy": "Fàcil (pista verda)",
                     "intermediate": "Intermedi (Pista blava)",
-                    "advanced": "Avançat (Pista Negre nivell I )",
+                    "advanced": "Avançat (Pista negra nivell I )",
                     "expert": "Expert (Pista negra nivell II)",
                     "freeride": "Pista no oficial (fora pistes)",
                     "extreme": "Extrem (es necessita equipament d'escalada)"
@@ -1362,7 +1362,7 @@
             },
             "amenity/parking": {
                 "name": "Aparcament",
-                "terms": "Aparcament, Pàrquing, Garatge"
+                "terms": "Aparcament, Pàrquing, Garatge, Parking, parking"
             },
             "amenity/parking_entrance": {
                 "name": "Entrada de Garatge/Sortida"

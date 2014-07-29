@@ -71,6 +71,9 @@
         },
         "orthogonalize": {
             "title": "Ferhyrningur",
+            "description": {
+                "area": "Rétta horn þessa svæðis."
+            },
             "key": "S",
             "annotation": {
                 "line": "Réttaði horn á línu.",
@@ -79,6 +82,7 @@
             "not_squarish": "Það er ekki hægt að hornrétta þetta því að það er ekki kassalaga"
         },
         "straighten": {
+            "title": "Slétta",
             "annotation": "Slétti úr línu",
             "too_bendy": "Það er ekki hægt að slétta úr þessu því að það beygir of skarplega"
         },
@@ -167,6 +171,11 @@
             },
             "not_eligible": "Ekki er hægt að aðskilja línur við upphaf þeirra eða endi.",
             "multiple_ways": "Of margar línur hér til að hægt sé að aðskilja."
+        },
+        "restriction": {
+            "help": {
+                "select": "Smelltu til að velja veghluta"
+            }
         }
     },
     "undo": {
@@ -242,6 +251,8 @@
         "edit": "Breyta eigindi",
         "none": "Ekkert",
         "node": "Hnútur",
+        "way": "Ferill",
+        "relation": "Vensl",
         "location": "Staðsetning"
     },
     "background": {

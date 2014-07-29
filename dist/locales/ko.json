@@ -428,6 +428,9 @@
             "category-rail": {
                 "name": "선로"
             },
+            "category-restriction": {
+                "name": "제한"
+            },
             "category-road": {
                 "name": "도로"
             },
@@ -486,8 +489,14 @@
             "address": {
                 "label": "주소",
                 "placeholders": {
+                    "housename": "집이름",
+                    "housenumber": "123",
                     "street": "거리",
-                    "city": "도시"
+                    "city": "도시",
+                    "postcode": "우편 번호",
+                    "place": "장소",
+                    "hamlet": "작은 마을",
+                    "country": "국가"
                 }
             },
             "admin_level": {
@@ -495,6 +504,12 @@
             },
             "aerialway": {
                 "label": "유형"
+            },
+            "aerialway/access": {
+                "options": {
+                    "exit": "출구",
+                    "both": "둘 다"
+                }
             },
             "aerialway/capacity": {
                 "label": "수용자 수 (시간당)",
@@ -507,6 +522,11 @@
             "aerialway/occupancy": {
                 "label": "무게",
                 "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "options": {
+                    "exit": "출구"
+                }
             },
             "aeroway": {
                 "label": "유형"
@@ -549,8 +569,21 @@
                 "label": "방향",
                 "options": {
                     "N": "북",
+                    "E": "동",
+                    "S": "남",
+                    "W": "서",
                     "NE": "북동",
-                    "NW": "북서"
+                    "SE": "남동",
+                    "SW": "남서",
+                    "NW": "북서",
+                    "NNE": "북북동",
+                    "ENE": "동북동",
+                    "ESE": "동남동",
+                    "SSE": "남남동",
+                    "SSW": "남남서",
+                    "WSW": "서남서",
+                    "WNW": "서북서",
+                    "NNW": "북북서"
                 }
             },
             "clock_direction": {
@@ -586,6 +619,7 @@
             },
             "electrified": {
                 "options": {
+                    "yes": "예 (지정되지 않음)",
                     "no": "아니오"
                 }
             },
@@ -610,6 +644,36 @@
             },
             "fixme": {
                 "label": "고치기"
+            },
+            "fuel": {
+                "label": "주유소"
+            },
+            "fuel/biodiesel": {
+                "label": "바이오디젤 판매"
+            },
+            "fuel/diesel": {
+                "label": "디젤 판매"
+            },
+            "fuel/e10": {
+                "label": "E10 판매"
+            },
+            "fuel/e85": {
+                "label": "E85 판매"
+            },
+            "fuel/lpg": {
+                "label": "프로판 판매; LPG"
+            },
+            "fuel/octane_100": {
+                "label": "경주용 휘발유 판매"
+            },
+            "fuel/octane_91": {
+                "label": "보통 휘발유 판매"
+            },
+            "fuel/octane_95": {
+                "label": "중급 휘발유 판매"
+            },
+            "fuel/octane_98": {
+                "label": "고급 휘발유 판매"
             },
             "generator/method": {
                 "label": "방식"
@@ -658,6 +722,9 @@
                     "terminal": "단말기"
                 }
             },
+            "lamp_type": {
+                "label": "유형"
+            },
             "landuse": {
                 "label": "유형"
             },
@@ -670,6 +737,9 @@
             },
             "leisure": {
                 "label": "유형"
+            },
+            "length": {
+                "label": "길이 (미터)"
             },
             "levels": {
                 "label": "수준",
@@ -687,6 +757,22 @@
             "maxspeed": {
                 "label": "제한 속도",
                 "placeholder": "40, 50, 60..."
+            },
+            "mtb/scale": {
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/imba": {
+                "placeholder": "쉬움, 중간, 어려움...",
+                "options": {
+                    "0": "매우 쉬움 (하얀 동그라미)",
+                    "1": "쉬움 (초록 동그라미)",
+                    "2": "중간 (파란 네모)",
+                    "3": "어려움 (검은 마름모)",
+                    "4": "매우 어려움 (두 검은 마름모)"
+                }
+            },
+            "mtb/scale/uphill": {
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "이름",
@@ -707,6 +793,7 @@
             "oneway": {
                 "label": "일방통행",
                 "options": {
+                    "undefined": "아니오로 간주",
                     "yes": "예",
                     "no": "아니오"
                 }
@@ -714,6 +801,7 @@
             "oneway_yes": {
                 "label": "일방통행",
                 "options": {
+                    "undefined": "예로 간주",
                     "yes": "예",
                     "no": "아니오"
                 }
@@ -737,8 +825,25 @@
                 "label": "전화",
                 "placeholder": "+31 42 123 4567"
             },
+            "piste/difficulty": {
+                "label": "어려움",
+                "placeholder": "초급, 중급, 고급...",
+                "options": {
+                    "novice": "새내기 (교육용)",
+                    "easy": "초급 (초록 동그라미)",
+                    "intermediate": "중급 (파란 네모)",
+                    "advanced": "고급 (검은 마름모)",
+                    "expert": "숙련자 (두 검은 마름모)",
+                    "freeride": "프리라이드 (off-piste)"
+                }
+            },
             "piste/type": {
-                "label": "유형"
+                "label": "유형",
+                "options": {
+                    "ice_skate": "아이스 스케이트",
+                    "snow_park": "스노우 파크",
+                    "playground": "놀이터"
+                }
             },
             "place": {
                 "label": "유형"
@@ -767,6 +872,18 @@
             "route_master": {
                 "label": "유형"
             },
+            "sac_scale": {
+                "label": "하이킹 어려움",
+                "placeholder": "등산, 알파인 하이킹...",
+                "options": {
+                    "hiking": "T1: 하이킹",
+                    "mountain_hiking": "T2: 등산",
+                    "demanding_mountain_hiking": "T3: 까다로운 등산",
+                    "alpine_hiking": "T4: 알파인 하이킹",
+                    "demanding_alpine_hiking": "T5: 까다로운 알파인 하이킹",
+                    "difficult_alpine_hiking": "T6: 어려운 알파인 하이킹"
+                }
+            },
             "service": {
                 "label": "유형"
             },
@@ -778,6 +895,14 @@
             },
             "shop": {
                 "label": "유형"
+            },
+            "smoking": {
+                "label": "흡연",
+                "options": {
+                    "no": "이디서든 금연",
+                    "separated": "흡연 구역이나, 격리되지 않음",
+                    "isolated": "흡연 구역이고, 격리됨"
+                }
             },
             "source": {
                 "label": "참조 정보"
@@ -792,7 +917,8 @@
                     "bridge": "다리",
                     "tunnel": "터널",
                     "embankment": "둑",
-                    "cutting": "절토"
+                    "cutting": "절토",
+                    "ford": "여울"
                 }
             },
             "studio_type": {
@@ -812,6 +938,9 @@
             },
             "towertype": {
                 "label": "탑 용도"
+            },
+            "tracktype": {
+                "label": "트랙 유형"
             },
             "trail_visibility": {
                 "label": "도로의 가시성"
@@ -838,6 +967,9 @@
             "wheelchair": {
                 "label": "휠체어 접근"
             },
+            "width": {
+                "label": "폭 (미터)"
+            },
             "wikipedia": {
                 "label": "위키백과"
             },
@@ -848,6 +980,15 @@
         "presets": {
             "address": {
                 "name": "주소"
+            },
+            "aerialway/cable_car": {
+                "name": "케이블 카"
+            },
+            "aerialway/chair_lift": {
+                "name": "체어 리프트"
+            },
+            "aerialway/magic_carpet": {
+                "name": "매직 카펫 리프트"
             },
             "aeroway": {
                 "name": "항공 시설"
@@ -905,6 +1046,9 @@
                 "name": "보트 대여",
                 "terms": "보트 대여소,보트 렌탈"
             },
+            "amenity/bus_station": {
+                "name": "버스 정류장"
+            },
             "amenity/cafe": {
                 "name": "카페"
             },
@@ -932,6 +1076,12 @@
             "amenity/courthouse": {
                 "name": "법원"
             },
+            "amenity/dentist": {
+                "name": "치과 의원"
+            },
+            "amenity/doctor": {
+                "name": "의원"
+            },
             "amenity/drinking_water": {
                 "name": "식수"
             },
@@ -953,11 +1103,20 @@
             "amenity/grave_yard": {
                 "name": "묘지"
             },
+            "amenity/hospital": {
+                "name": "병원 부지"
+            },
+            "amenity/kindergarten": {
+                "name": "유치원 부지"
+            },
             "amenity/library": {
                 "name": "도서관"
             },
             "amenity/marketplace": {
                 "name": "시장"
+            },
+            "amenity/nightclub": {
+                "name": "나이트클럽"
             },
             "amenity/parking": {
                 "name": "자동차 주차장"
@@ -1008,6 +1167,9 @@
             },
             "amenity/shelter": {
                 "name": "피난처"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "푸드 뱅크"
             },
             "amenity/swimming_pool": {
                 "name": "수영장"
@@ -1103,8 +1265,17 @@
             "building/commercial": {
                 "name": "상업 건물"
             },
+            "building/entrance": {
+                "name": "입구/출구"
+            },
             "building/garage": {
                 "name": "차고"
+            },
+            "building/hospital": {
+                "name": "병원 건물"
+            },
+            "building/hotel": {
+                "name": "호텔 건물"
             },
             "building/house": {
                 "name": "주택"
@@ -1115,11 +1286,23 @@
             "building/industrial": {
                 "name": "산업 건물"
             },
+            "building/public": {
+                "name": "공공 건물"
+            },
             "building/residential": {
                 "name": "주거 건물"
             },
+            "building/retail": {
+                "name": "소매 건물"
+            },
             "building/school": {
                 "name": "학교 건물"
+            },
+            "building/train_station": {
+                "name": "기차역"
+            },
+            "craft/tailor": {
+                "name": "양복점"
             },
             "embankment": {
                 "name": "둑",
@@ -1135,11 +1318,20 @@
             "emergency/phone": {
                 "name": "긴급 전화"
             },
+            "entrance": {
+                "name": "입구/출구"
+            },
             "footway/crossing": {
                 "name": "횡단보도"
             },
+            "footway/crosswalk": {
+                "name": "횡단 보도"
+            },
             "footway/sidewalk": {
                 "name": "보도"
+            },
+            "ford": {
+                "name": "여울"
             },
             "golf/bunker": {
                 "name": "샌드 트랩",
@@ -1179,6 +1371,9 @@
             "highway/crossing": {
                 "name": "교차"
             },
+            "highway/crosswalk": {
+                "name": "횡단 보도"
+            },
             "highway/cycleway": {
                 "name": "자전거로"
             },
@@ -1193,6 +1388,9 @@
             },
             "highway/motorway": {
                 "name": "고속도로"
+            },
+            "highway/motorway_junction": {
+                "name": "고속도로 분기점 / 출구"
             },
             "highway/motorway_link": {
                 "name": "고속도로 연결도"
@@ -1212,6 +1410,9 @@
             },
             "highway/residential": {
                 "name": "주거 도로"
+            },
+            "highway/rest_area": {
+                "name": "휴게소"
             },
             "highway/road": {
                 "name": "알 수 없는 도로"
@@ -1336,8 +1537,14 @@
             "landuse/industrial": {
                 "name": "산업"
             },
+            "landuse/landfill": {
+                "name": "매립지"
+            },
             "landuse/meadow": {
                 "name": "목초지"
+            },
+            "landuse/military": {
+                "name": "군사지"
             },
             "landuse/orchard": {
                 "name": "과수원"
@@ -1363,6 +1570,9 @@
             },
             "leisure/dog_park": {
                 "name": "개 공원"
+            },
+            "leisure/firepit": {
+                "name": "불구덩이"
             },
             "leisure/garden": {
                 "name": "정원"
@@ -1412,6 +1622,9 @@
             },
             "leisure/slipway": {
                 "name": "슬립 웨이"
+            },
+            "leisure/sports_center": {
+                "name": "스포츠 센터 / 체육관"
             },
             "leisure/stadium": {
                 "name": "경기장"
@@ -1728,6 +1941,9 @@
             "shop/alcohol": {
                 "name": "주류 상점"
             },
+            "shop/art": {
+                "name": "예술 상점"
+            },
             "shop/bakery": {
                 "name": "제과점"
             },
@@ -1739,6 +1955,9 @@
             },
             "shop/bicycle": {
                 "name": "자전거 가게"
+            },
+            "shop/bookmaker": {
+                "name": "마권업자"
             },
             "shop/books": {
                 "name": "서점"
@@ -1797,6 +2016,9 @@
             "shop/florist": {
                 "name": "꽃집"
             },
+            "shop/funeral_directors": {
+                "name": "장례식장"
+            },
             "shop/furniture": {
                 "name": "가구점"
             },
@@ -1831,6 +2053,10 @@
                 "name": "열쇠 제조공",
                 "terms": "자물쇠 제조공"
             },
+            "shop/lottery": {
+                "name": "복권 가게",
+                "terms": "복덕방"
+            },
             "shop/mall": {
                 "name": "쇼핑몰"
             },
@@ -1858,6 +2084,10 @@
             "shop/photo": {
                 "name": "사진 가게"
             },
+            "shop/seafood": {
+                "name": "해산물 가게",
+                "terms": "씨푸드 가게"
+            },
             "shop/shoes": {
                 "name": "신발 가게"
             },
@@ -1869,6 +2099,9 @@
             },
             "shop/supermarket": {
                 "name": "수퍼마켓"
+            },
+            "shop/tailor": {
+                "name": "양복점"
             },
             "shop/toys": {
                 "name": "완구점"
@@ -1887,6 +2120,10 @@
             },
             "shop/video": {
                 "name": "비디오 가게"
+            },
+            "shop/wine": {
+                "name": "와인 가게",
+                "terms": "포도주 가게"
             },
             "tourism": {
                 "name": "관광",
@@ -1952,6 +2189,27 @@
             },
             "type/restriction": {
                 "name": "제한"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "좌회전 없음"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "우회전 없음"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "직진 없음"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "유턴 없음"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "좌회전만"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "우회전만"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "회전 없음"
             },
             "type/route": {
                 "name": "노선"

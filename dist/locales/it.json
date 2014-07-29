@@ -848,8 +848,7 @@
                     "intermediate": "Media (rossa)",
                     "advanced": "Avanzata (nera)",
                     "expert": "Esperto (arancione)",
-                    "freeride": "Fuoripista (gialla)",
-                    "extreme": "Estrema (equipaggiamento da scalata richiesto)"
+                    "freeride": "Fuoripista (gialla)"
                 }
             },
             "piste/grooming": {

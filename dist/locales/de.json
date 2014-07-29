@@ -1367,7 +1367,7 @@
                 "terms": "Krankenhaus, Klinik, Klinikgelände, Hospital"
             },
             "amenity/kindergarten": {
-                "name": "Kindergartengelände",
+                "name": "Kindergarten",
                 "terms": "Kindergarten, Spielplatz, Sandkasten"
             },
             "amenity/library": {
@@ -2687,8 +2687,8 @@
                 "terms": "Standseilbahn, Seilbahn, Drahtseilbahn, Kettenbahn"
             },
             "railway/halt": {
-                "name": "Bahn-Haltestelle",
-                "terms": "Bahn-Haltestelle, Zug-Haltestelle, Haltestelle"
+                "name": "Eisenbahn-Haltestelle",
+                "terms": "Bahn-Haltestelle, Zug-Haltestelle, Haltestelle, Haltepunkt"
             },
             "railway/level_crossing": {
                 "name": "Bahnübergang",
@@ -2712,7 +2712,7 @@
             },
             "railway/station": {
                 "name": "Bahnhof",
-                "terms": "Bahnhof"
+                "terms": "Bahnhof, Haltepunkt, Haltestelle"
             },
             "railway/subway": {
                 "name": "U-Bahn",
@@ -2808,7 +2808,7 @@
             },
             "shop/convenience": {
                 "name": "Gemischtwarenhandel",
-                "terms": "Kaufgeschäft"
+                "terms": "Gemischtwarenladen, Kaufgeschäft"
             },
             "shop/deli": {
                 "name": "Feinkostladen",
@@ -2972,7 +2972,7 @@
             },
             "shop/variety_store": {
                 "name": "Gemischtwarenhandel",
-                "terms": "Gemischtwarenladen"
+                "terms": "Gemischtwarenladen, Kaufgeschäft"
             },
             "shop/video": {
                 "name": "Videothek",

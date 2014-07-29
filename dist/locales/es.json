@@ -408,7 +408,7 @@
             "title": "Empezar a editar",
             "help": "Para ver más documentación y este tutorial pulse aquí.",
             "save": "¡No olvide guardar sus cambios regularmente!",
-            "start": "Empezar"
+            "start": "¡Empezar a editar el mapa!"
         }
     },
     "presets": {
@@ -644,7 +644,10 @@
             },
             "electrified": {
                 "label": "Electrificación",
+                "placeholder": "Línea de contacto, Riel electrificada...",
                 "options": {
+                    "contact_line": "Línea de contacto",
+                    "rail": "Riel electrificada",
                     "yes": "Sí (sin especificar)",
                     "no": "No"
                 }
@@ -669,7 +672,13 @@
                 "label": "De pago"
             },
             "fire_hydrant/type": {
-                "label": "Tipo"
+                "label": "Tipo",
+                "options": {
+                    "pillar": "Pilar/Sobre la tierra",
+                    "underground": "Subterráneo",
+                    "wall": "Pared",
+                    "pond": "Estanque"
+                }
             },
             "fixme": {
                 "label": "Arréglame"
@@ -792,6 +801,42 @@
                 "label": "Límite de velocidad",
                 "placeholder": "40, 50, 60..."
             },
+            "mtb/scale": {
+                "label": "Dificultad de bicicleta de montaña",
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: grava sólida/tierra apisonada, no hay obstáculos, curvas amplias",
+                    "1": "1: Poca superficie suleta, pequeños obstáculos, curvas amplias",
+                    "2": "2: Mucha superficie suelta, grandes obstáculos, giros en U fáciles",
+                    "3": "3: Superficie resbaladiza, grandes obstáculos, giros en U cerrados",
+                    "4": "4: Superficie suelta o rocosa, giros en U peligrosos",
+                    "5": "5: Dificultad máxima, campo rocoso, derrumbes",
+                    "6": "6: No manejable, excepto por los mejores ciclistas de montaña"
+                }
+            },
+            "mtb/scale/imba": {
+                "label": "Dificultad de pista IMBA",
+                "placeholder": "Fácil, Medio, Difícil...",
+                "options": {
+                    "0": "Más fácil (círculo blanco)",
+                    "1": "Fácil (círculo verde)",
+                    "2": "Medium (blue square)",
+                    "3": "Difficult (black diamond)",
+                    "4": "Extremadamente difícil (doble diamante negro)"
+                }
+            },
+            "mtb/scale/uphill": {
+                "label": "Dificultad de ciclismo de montaña cuesta arriba",
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Promedio de inclinación <10%, grava/tierra apisonada, sin obstáculos",
+                    "1": "1: Promedio de inclinación <15%, grava/tierra apisonada, pocos objetos pequeños",
+                    "2": "2: Promedio de inclinación <20%, superficie estable, rocas del tamaño del puño/raíces",
+                    "3": "3: Promedio de inclinación <25%, superficie variable, rocas del tamaño del puño/ramas",
+                    "4": "4: Promedio de inclinación <30%, mal estado, rocas grandes/ramas",
+                    "5": "5: Muy empinado, la bicicleta generalmente necesita ser empujada o llevada"
+                }
+            },
             "name": {
                 "label": "Nombre",
                 "placeholder": "Nombre común (si existe)"
@@ -838,20 +883,51 @@
                 "label": "Aparcamiento disuasorio"
             },
             "parking": {
-                "label": "Tipo"
+                "label": "Tipo",
+                "options": {
+                    "surface": "Superficie",
+                    "multi-storey": "Multinivel",
+                    "underground": "Subterráneo",
+                    "sheds": "Galpones",
+                    "carports": "Cocheras",
+                    "garage_boxes": "Garaje en cubículos",
+                    "lane": "Carril al borde del camino"
+                }
             },
             "phone": {
                 "label": "Teléfono",
                 "placeholder": "+31 42 123 4567"
             },
             "piste/difficulty": {
-                "label": "Dificultad"
+                "label": "Dificultad",
+                "placeholder": "Fácil, Intermedio, Avanzado...",
+                "options": {
+                    "novice": "Novato (instrucción)",
+                    "easy": "Fácil (círculo verde)",
+                    "intermediate": "Intermediate (blue square)",
+                    "advanced": "Avanzado (diamante negro)",
+                    "expert": "Experto (doble diamante negro)",
+                    "freeride": "Paseo libre (fuera de pista)",
+                    "extreme": "Extremo (necesario equipo de escalada)"
+                }
             },
             "piste/grooming": {
-                "label": "Adiestramiento"
+                "label": "Adiestramiento",
+                "options": {
+                    "classic": "Clásico",
+                    "classic+skating": "Clásico y patinaje",
+                    "scooter": "Ciclomotor/Motonieve",
+                    "skating": "Patinaje"
+                }
             },
             "piste/type": {
-                "label": "Tipo"
+                "label": "Tipo",
+                "options": {
+                    "downhill": "Cuesta abajo",
+                    "hike": "Caminata",
+                    "ice_skate": "Patín sobre hielo",
+                    "playground": "Jardín de juegos"
+                }
             },
             "place": {
                 "label": "Tipo"
@@ -898,6 +974,10 @@
             "route_master": {
                 "label": "Tipo"
             },
+            "sac_scale": {
+                "label": "Dificultad de senderismo",
+                "placeholder": "Caminata de montaña, Caminata Alpina..."
+            },
             "seasonal": {
                 "label": "Estacional"
             },
@@ -917,7 +997,22 @@
                 "label": "Bordillo inclinado"
             },
             "smoking": {
-                "label": "Fumar"
+                "label": "Fumar",
+                "placeholder": "No, Separado, Sí...",
+                "options": {
+                    "no": "No fumar en todas partes",
+                    "separated": "En zonas de fumadores, no físicamente aislado",
+                    "isolated": "En zonas de fumadores, físicamente aislados",
+                    "outside": "Permitido fuera",
+                    "yes": "Permitido en todas partes",
+                    "dedicated": "Dedicado a los fumadores (ej: el club de los fumadores)"
+                }
+            },
+            "smoothness": {
+                "options": {
+                    "good": "Ruedas finas: bicicletas de competición",
+                    "intermediate": "Ruedas: bicicleta urbana, silla de ruedas, ciclomotor"
+                }
             },
             "social_facility_for": {
                 "label": "Personas atendidas",
@@ -956,7 +1051,13 @@
                 "label": "Pavimento táctil"
             },
             "toilets/disposal": {
-                "label": "Disponible"
+                "label": "Disponible",
+                "options": {
+                    "flush": "Descarga",
+                    "pitlatrine": "Pozo/Letrina",
+                    "chemical": "Chemical",
+                    "bucket": "Bucket"
+                }
             },
             "tourism": {
                 "label": "Tipo"
@@ -1116,10 +1217,13 @@
             },
             "amenity/bicycle_rental": {
                 "name": "Alquiler de bicicletas",
-                "terms": "bicicleta, bici, alquiler, rent"
+                "terms": "alquiler de bicicletas, préstamo de bicicletas, bici, bicicleta"
             },
             "amenity/boat_rental": {
                 "name": "Alquiler de barcos"
+            },
+            "amenity/bus_station": {
+                "name": "Estación de autobuses"
             },
             "amenity/cafe": {
                 "name": "Cafetería",
@@ -2535,7 +2639,7 @@
             },
             "shop/art": {
                 "name": "Tienda de arte",
-                "terms": "Galería de arte"
+                "terms": "tienda de arte, galería de arte, sala de arte, arte, cultura, pintura, dibujo, escultura, cuadro, retrato, exposición"
             },
             "shop/bakery": {
                 "name": "Panadería",
@@ -2543,7 +2647,7 @@
             },
             "shop/beauty": {
                 "name": "Salón de belleza",
-                "terms": "salón de belleza, estética"
+                "terms": "salón de belleza, estética, belleza, cuidado personal, embellecimiento"
             },
             "shop/beverages": {
                 "name": "Tienda de bebidas",
@@ -2551,7 +2655,7 @@
             },
             "shop/bicycle": {
                 "name": "Tienda de bicicletas",
-                "terms": "tienda de bicicletas, bici, bicicleta, taller de bicicletas"
+                "terms": "tienda de bicicletas, taller de bicicletas, reparación de bicicletas, bici, bicicleta"
             },
             "shop/bookmaker": {
                 "name": "Librero"
@@ -2578,7 +2682,7 @@
             },
             "shop/car_repair": {
                 "name": "Taller de reparación de automóviles",
-                "terms": "reparación, automóvil, vehículo, carro, coche, taller"
+                "terms": "taller mecánico, mecánico, chapero, reparación, automóvil, vehículo, carro, coche, taller"
             },
             "shop/chemist": {
                 "name": "Droguería",
@@ -2645,7 +2749,7 @@
             },
             "shop/gift": {
                 "name": "Tienda de regalos",
-                "terms": "tienda, comercio, local, regalo, obsequio"
+                "terms": "tienda, comercio, local, regalo, obsequio, presentes"
             },
             "shop/greengrocer": {
                 "name": "Frutería",
@@ -2680,8 +2784,8 @@
                 "terms": "cerrajero, cerradura, candado"
             },
             "shop/lottery": {
-                "name": "Administración de Lotería",
-                "terms": "Administración de loterías, Venta de lotería"
+                "name": "Tienda de lotería",
+                "terms": "lotería, juego"
             },
             "shop/mall": {
                 "name": "Centro comercial",
@@ -2719,7 +2823,7 @@
                 "terms": "fotografía, tienda , establecimiento, fotógrafo, cámara, retratista, revelado"
             },
             "shop/seafood": {
-                "name": "Tienda de Mariscos"
+                "name": "Tienda de frutos de mar"
             },
             "shop/shoes": {
                 "name": "Zapatería",
@@ -2762,7 +2866,7 @@
                 "terms": "tienda, alquiler, renta, tienda de vídeos, videoclub, alquiler de vídeos, renta de vídeos"
             },
             "shop/wine": {
-                "name": "Vinoteca, Tienda de vinos",
+                "name": "Tienda de vinos",
                 "terms": "vinatería, vinos, espirituosos, licorería, bebidas"
             },
             "tourism": {

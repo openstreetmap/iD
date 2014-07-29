@@ -1092,11 +1092,11 @@
                 "label": "Qualidade da Superfície ",
                 "placeholder": "Sólido, Intermédio, Macio...",
                 "options": {
-                    "grade1": "Sólida: pavimentada ou com material fortemente compactado",
-                    "grade2": "Sobretudo sólida: cascalho ou pedras misturadas com algum material macio",
-                    "grade3": "Intermédia: Mistura de materiais sólidos e macios",
-                    "grade4": "Sobretudo macia: terra, erva ou areia misturadas com algum material sólido",
-                    "grade5": "Macia: Terra, erva ou areia"
+                    "grade1": "1 - Sólida: pavimentada ou com material fortemente compactado",
+                    "grade2": "2 - Sobretudo sólida: cascalho ou pedras misturadas com algum material macio",
+                    "grade3": "3 - Intermédia, mistura de materiais sólidos e macios",
+                    "grade4": "4 - Sobretudo macia: terra, erva ou areia misturadas com algum material sólido",
+                    "grade5": "5 - Macia: Terra, erva ou areia"
                 }
             },
             "trail_visibility": {

@@ -518,6 +518,9 @@
                     "both": "Вхід/Вихід"
                 }
             },
+            "aerialway/bubble": {
+                "label": "Захисний екран"
+            },
             "aerialway/capacity": {
                 "label": "Пропускна здатність (на годину)",
                 "placeholder": "500, 2500, 5000..."
@@ -770,6 +773,12 @@
             "maxspeed": {
                 "label": "Обмеження швидкості",
                 "placeholder": "40, 50, 60…"
+            },
+            "mtb/scale": {
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/uphill": {
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Назва",
@@ -1261,6 +1270,10 @@
             "amenity/shelter": {
                 "name": "Притулок"
             },
+            "amenity/social_facility": {
+                "name": "Соціальний центр",
+                "terms": "Social facility, cjwsfkmybq wtynh"
+            },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Притулок для бездомних",
                 "terms": "Homeless shelter, ghbnekjr lkz tpljvyb"
@@ -1375,7 +1388,7 @@
             },
             "barrier/wall": {
                 "name": "Стіна",
-                "terms": "Wall,cnsyf"
+                "terms": "wall, cnsyf"
             },
             "boundary/administrative": {
                 "name": "Адміністративний кордон",
@@ -1480,8 +1493,20 @@
             "craft/blacksmith": {
                 "name": "Коваль"
             },
+            "craft/boatbuilder": {
+                "name": "Корабельня",
+                "terms": "Boat builder, rjhffkmyz"
+            },
             "craft/electrician": {
                 "name": "Електрик"
+            },
+            "craft/hvac": {
+                "name": "Опалення, вентиляція та кондиціювання повітря",
+                "terms": "HVAC, jgfktyyz, dbynbkzwsz, rjylbwsdfyyz gjdsnhz"
+            },
+            "craft/optician": {
+                "name": "Окуліст",
+                "terms": "Optician, jrekscn"
             },
             "craft/photographer": {
                 "name": "Фотограф"

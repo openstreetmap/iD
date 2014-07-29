@@ -644,7 +644,11 @@
             },
             "electrified": {
                 "label": "Elektrificering",
+                "placeholder": "Kontaktlinje, Elektrificeret jernbane",
                 "options": {
+                    "contact_line": "Kontaktlinje",
+                    "rail": "Elektrificeret jernbane",
+                    "yes": "Ja (udspecificeret)",
                     "no": "Nej"
                 }
             },
@@ -879,12 +883,23 @@
                 }
             },
             "piste/grooming": {
-                "label": "Sikkerhed"
+                "label": "Sikkerhed",
+                "options": {
+                    "classic": "Klassisk",
+                    "mogul": "Pukkelpist",
+                    "backcountry": "Offpiste",
+                    "classic+skating": "Klassisk og skiløb",
+                    "scooter": "Snescooter",
+                    "skating": "Skøjteløb"
+                }
             },
             "piste/type": {
                 "label": "Type",
                 "options": {
+                    "downhill": "Styrtløb",
                     "nordic": "Nordisk",
+                    "sled": "Slæde",
+                    "hike": "Skivandretur",
                     "sleigh": "Kælk",
                     "playground": "Legeplads"
                 }
@@ -935,6 +950,8 @@
                 "label": "Type"
             },
             "sac_scale": {
+                "label": "Vandrings vanskelighedsniveau",
+                "placeholder": "Bjergvandring, Alpintvandring...",
                 "options": {
                     "hiking": "T1: Vandring",
                     "mountain_hiking": "T2: Bjergvandring",
@@ -967,6 +984,11 @@
                 "options": {
                     "outside": "Tilladt udenfor",
                     "yes": "Tilladt alle steder"
+                }
+            },
+            "smoothness": {
+                "options": {
+                    "very_horrible": "Specialiseret off-road: traktor, ATV"
                 }
             },
             "social_facility_for": {
@@ -1008,6 +1030,9 @@
             "toilets/disposal": {
                 "label": "Bortskaffelse affald",
                 "options": {
+                    "flush": "Træk & Slip",
+                    "pitlatrine": "Latrin",
+                    "chemical": "Kemisk",
                     "bucket": "Spand"
                 }
             },
@@ -1016,6 +1041,9 @@
             },
             "towertype": {
                 "label": "Tårn type"
+            },
+            "tracktype": {
+                "label": "Sportype"
             },
             "trail_visibility": {
                 "label": "Spor synlighed"
