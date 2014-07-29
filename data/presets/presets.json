@@ -331,6 +331,7 @@
         "tags": {
             "amenity": "*"
         },
+        "searchable": false,
         "name": "Amenity"
     },
     "amenity/arts_centre": {

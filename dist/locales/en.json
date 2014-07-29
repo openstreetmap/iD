@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "Delete",
-            "description": "Remove this from the map.",
+            "description": "Delete object permanently.",
             "annotation": {
                 "point": "Deleted a point.",
                 "vertex": "Deleted a node from a way.",
