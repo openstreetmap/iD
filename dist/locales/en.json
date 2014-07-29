@@ -1274,6 +1274,10 @@
                 "name": "Boat Rental",
                 "terms": ""
             },
+            "amenity/bureau_de_change": {
+                "name": "Currency Exchange",
+                "terms": "bureau de change,money changer"
+            },
             "amenity/bus_station": {
                 "name": "Bus Station",
                 "terms": ""

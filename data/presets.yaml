@@ -634,6 +634,9 @@ en:
       amenity/boat_rental:
         name: Boat Rental
         terms: "<translate with synonyms or related terms for 'Boat Rental', separated by commas>"
+      amenity/bureau_de_change:
+        name: Currency Exchange
+        terms: "<translate with synonyms or related terms for 'Currency Exchange', separated by commas>"
       amenity/bus_station:
         name: Bus Station
         terms: "<translate with synonyms or related terms for 'Bus Station', separated by commas>"
