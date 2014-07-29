@@ -1,3 +1,9 @@
+## 1.5.4
+
+* Do not fully fill certain landuse values, e.g. landuse=residential (#542)
+* Class midpoints to match parent way and adjust styles
+* Test visibility of gpx coords instead of just comparing extents
+
 ## 1.5.3
 
 * When adding gpx, only rezoom map if gpx not in viewport (#2297)
