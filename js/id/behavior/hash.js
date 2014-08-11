@@ -18,7 +18,7 @@ iD.behavior.Hash = function(context) {
             center = map.center(),
             zoom = map.zoom(),
             precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
-            q = iD.util.stringQs(location.hash.substring(1)),
+            q = _.omit(iD.util.stringQs(location.hash.substring(1)), 'comment'),
             newParams = {};
 
         if (mode && mode.id === 'browse') {
@@ -66,6 +66,7 @@ iD.behavior.Hash = function(context) {
         if (location.hash) {
             var q = iD.util.stringQs(location.hash.substring(1));
             if (q.id) context.loadEntity(q.id.split(',')[0], !q.map);
+            if (q.comment) context.storage('comment', q.comment);
             hashchange();
             if (q.map) hash.hadHash = true;
         }
