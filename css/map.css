@@ -270,30 +270,30 @@ path.fill.tag-landuse-industrial {
 }
 
 path.stroke.tag-landuse-residential {
-    stroke: rgb(224, 110, 95);
+    stroke: rgb(196, 189, 25);
 }
 path.fill.tag-landuse-residential {
-    stroke: rgba(224, 110, 95, 0.3);
+    stroke: rgba(196, 189, 25, 0.3);
 }
 .preset-icon-fill-area.tag-landuse-residential {
-    border-color: rgb(224, 110, 95);
+    border-color: rgb(196, 189, 25);
     background: none;
-    box-shadow: inset 0 0 0 5px rgba(224, 110, 95, 0.3);
+    box-shadow: inset 0 0 0 5px rgba(196, 189, 25, 0.3);
 }
 
 path.stroke.tag-landuse-retail,
 path.stroke.tag-landuse-commercial {
-    stroke: rgb(234, 176, 86);
+    stroke: rgb(214, 136, 26);
 }
 path.fill.tag-landuse-retail,
 path.fill.tag-landuse-commercial {
-    stroke: rgba(234, 176, 86, 0.3);
+    stroke: rgba(214, 136, 26, 0.3);
 }
 .preset-icon-fill-area.tag-landuse-retail,
 .preset-icon-fill-area.tag-landuse-commercial {
-    border-color: rgb(234, 176, 86);
+    border-color: rgb(214, 136, 26);
     background: none;
-    box-shadow: inset 0 0 0 5px rgba(234, 176, 86, 0.3);
+    box-shadow: inset 0 0 0 5px rgba(214, 136, 26, 0.3);
 }
 
 path.stroke.tag-landuse-industrial {
@@ -345,22 +345,22 @@ path.fill.tag-landuse-landfill {
 }
 
 path.stroke.tag-landuse-construction {
-    stroke: rgb(224, 110, 95);
+    stroke: rgb(196, 189, 25);
 }
 .pattern-color-construction {
-    fill: rgba(224, 110, 95, 0.2);
+    fill: rgba(196, 189, 25, 0.2);
 }
 .preset-icon-fill-area.tag-landuse-construction {
-    border-color: rgb(224, 110, 95);
-    background-color: rgba(224, 110, 95, 0.2);
+    border-color: rgb(196, 189, 25);
+    background-color: rgba(196, 189, 25, 0.2);
 }
 
 path.stroke.tag-landuse-military {
-    stroke: rgb(224, 110, 95);
+    stroke: rgb(214, 136, 26);
 }
 .preset-icon-fill-area.tag-landuse-military {
-    border-color: rgb(224, 110, 95);
-    background-color: rgba(224, 110, 95, 0.2);
+    border-color: rgb(214, 136, 26);
+    background-color: rgba(214, 136, 26, 0.2);
 }
 
 path.stroke.tag-natural-wetland {
