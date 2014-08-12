@@ -2,6 +2,7 @@ iD.MapillaryImageLayer = function (context) {
     var projection,
         gj = {},
         enable = false,
+        dimension,
         svg_image;
 
     function render(selection) {
@@ -58,7 +59,6 @@ iD.MapillaryImageLayer = function (context) {
     };
 
     render.geojson = function (_) {
-        console.log("mapillary_image_layer.geojson", arguments);
         if (!arguments.length) return gj;
         gj = _;
         return render;
@@ -67,12 +67,13 @@ iD.MapillaryImageLayer = function (context) {
     render.dimensions = function (_) {
         if (!arguments.length) return svg_sequences.dimensions();
 //        if(!enable) return render()
+        dimension = _;
         svg_image.dimensions(_);
         return render;
     };
 
     render.updateImageMarker = function (data) {
-        console.log('mapillary_image_layer.updateImageMarker', gj, projection);
+        render.dimensions(dimension);
         var path = d3.geo.path().projection(projection);
         var paths = svg_image
             .selectAll('path')
@@ -81,16 +82,16 @@ iD.MapillaryImageLayer = function (context) {
             .attr("d", path);
         var mapPath = paths.attr("d");
         var coords = mapPath.split("m")[0].split(",");
+        var size = 40;
+        var x = coords[0].substr(1);
+        var y = coords[1];
         svg_image.selectAll("image")
             .attr("xlink:href", "/css/img/arrow-icon.jpg")
-            .attr("width", 48)
-            .attr("height", 48)
-            .attr("transform", "translate("+coords[0].substr(1)+","+coords[1]+")rotate("+ gj.features[0].properties.ca +")");
+            .attr("width", size)
+            .attr("height", size)
+            .attr("transform", "translate("+( x-size/2)+","+( y-    size/2)+")rotate("+ gj.features[0].properties.ca +","+size/2+","+size/2+")");
 
 
-//        var path = d3.geo.path()
-//            .projection(projection);
-//        console.log("path", path);
     };
     render.click = function click() {
         console.log('mapillary_image_layer.clicked', arguments);
@@ -103,7 +104,6 @@ iD.MapillaryImageLayer = function (context) {
     render.id = 'layer-mapillary-image';
 
     render.updatePosition = function () {
-        console.log("mapillary_image_layer.updatePosition", arguments);
         var coords = context.map().mouseCoordinates();
         d3.json("http://api.mapillary.com/v1/im/close?limit=1&lat=" + coords[1] + "&limit=1&lon=" + coords[0] + "&geojson=true", function (error, data) {
             console.log("Got", data);

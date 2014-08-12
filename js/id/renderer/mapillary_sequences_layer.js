@@ -2,10 +2,10 @@ iD.MapillarySequencesLayer = function (context) {
     var projection,
         gj = {},
         enable = false,
+        dimension,
         svg_sequences;
 
     function render(selection) {
-        console.log("mapillary_sequences_layer.render", enable);
         svg_sequences = selection.selectAll('svg')
             .data([render]);
 
@@ -39,30 +39,28 @@ iD.MapillarySequencesLayer = function (context) {
         paths
             .attr('d', path);
 
-        if (typeof gj.features !== 'undefined') {
-            svg_sequences
-                .selectAll('text')
-                .remove();
+        /*svg_sequences
+            .selectAll('text')
+            .remove();
 
-            svg_sequences
-                .selectAll('path')
-                .data(gj.features)
-                .enter()
-                .append('text')
-                .attr('class', 'mapillary-sequence')
-                .text(function (d) {
-                    return d.properties.key || d.properties.name;
-                })
-                .attr('x', function (d) {
-                    var centroid = path.centroid(d);
-                    return centroid[0] + 5;
-                })
-                .attr('y', function (d) {
-                    var centroid = path.centroid(d);
-                    return centroid[1];
-                });
-        }
-
+        svg_sequences
+            .selectAll('path')
+            .data(gj.features)
+            .enter()
+            .append('text')
+            .attr('class', 'mapillary-sequence')
+            .text(function (d) {
+                return d.properties.key || d.properties.name;
+            })
+            .attr('x', function (d) {
+                var centroid = path.centroid(d);
+                return centroid[0] + 5;
+            })
+            .attr('y', function (d) {
+                var centroid = path.centroid(d);
+                return centroid[1];
+            });
+*/
         d3
             .select("#sidebar")
             .selectAll('#mapillary-inspector')
@@ -89,21 +87,20 @@ iD.MapillarySequencesLayer = function (context) {
     };
 
     render.geojson = function (_) {
-        console.log("mapillary_sequence_layer.geojson", arguments);
         if (!arguments.length) return gj;
         gj = _;
         return render;
     };
 
     render.dimensions = function (_) {
-        console.log("mapillary.dimensions", arguments);
         if (!arguments.length) return svg_sequences.dimensions();
-//        if(!enable) return render()
+        dimension = _;
         svg_sequences.dimensions(_);
         return render;
     };
 
     render.updateImageMarker = function (data) {
+        render.dimensions(dimension);
         var paths = svg_sequences
             .selectAll('path')
             .data([gj]);
@@ -120,7 +117,6 @@ iD.MapillarySequencesLayer = function (context) {
             .attr('d', path);
     };
     render.click = function click() {
-        console.log('clicked', arguments);
         d3.event.stopPropagation();
         d3.event.preventDefault();
 
@@ -129,10 +125,10 @@ iD.MapillarySequencesLayer = function (context) {
         console.log(mapillary_wrapper);
 
         var coords = context.map().mouseCoordinates();
-        d3.json("http://api.mapillary.com/v1/im/close?limit=1&lat="+coords[1]+"&limit=10&lon="+coords[0], function (error, data) {
+        d3.json("http://api.mapillary.com/v1/im/close?limit=1&lat=" + coords[1] + "&limit=1&lon=" + coords[0], function (error, data) {
             console.log("mapillary_sequence_layer.Got", data);
-            if(data) {
-                mapillary_wrapper.html('<a target="_blank" href="http://mapillary.com/map/im/'+data[0].key+'"><img src="https://d1cuyjsrcm0gby.cloudfront.net/'+data[0].key+'/thumb-320.jpg"></img></a>');
+            if (data) {
+                mapillary_wrapper.html('<a target="_blank" href="http://mapillary.com/map/im/' + data[0].key + '"><img src="https://d1cuyjsrcm0gby.cloudfront.net/' + data[0].key + '/thumb-320.jpg"></img></a>');
             } else {
                 mapillary_wrapper.html("No picture found, try clicking near the Mapillary sequences");
             }
@@ -143,12 +139,12 @@ iD.MapillarySequencesLayer = function (context) {
     render.id = 'layer-mapillary';
 
     render.updatePosition = function () {
-        var dimensions = context.map().extent();
-        console.log("mapillary_sequence_layer.updatePosition", dimensions    );
-//        console.log("updatePosition", context.map().pointLocation([0, dimensions[0]]));
-        d3.json("http://api.mapillary.com/v1/s/search?min-lat="+dimensions[0][1]+"&max-lat="+dimensions[1][1]+"\&min-lon\="+dimensions[0][0]+"&max-lon="+dimensions[1][0]+"&max-results=100&geojson=true", function (error, data) {
-            console.log("Got", data);
+        var extent = context.map().extent();
+
+        d3.json("http://api.mapillary.com/v1/s/search?min-lat=" + extent[0][1] + "&max-lat=" + extent[1][1] + "\&min-lon\=" + extent[0][0] + "&max-lon=" + extent[1][0] + "&max-results=100&geojson=true", function (error, data) {
+            console.log("sequenceLayer.updatePosition, Got", data);
             render.geojson(data);
+            render.updateImageMarker(data);
         });
     }
 
