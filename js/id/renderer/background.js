@@ -4,7 +4,9 @@ iD.Background = function(context) {
             .projection(context.projection),
         gpxLayer = iD.GpxLayer(context, dispatch)
             .projection(context.projection),
-        mapillaryLayer = iD.MapillaryLayer(context, dispatch)
+        mapillarySequencesLayer = iD.MapillarySequencesLayer(context, dispatch)
+            .projection(context.projection),
+        mapillaryImageLayer = iD.MapillaryImageLayer(context, dispatch)
             .projection(context.projection),
         overlayLayers = [];
 
@@ -100,14 +102,14 @@ iD.Background = function(context) {
         mapillary_sequence_layer.enter().insert('div', '.layer-data')
             .attr('class', 'layer-layer mapillary-sequence-layer');
 
-        mapillary_sequence_layer.call(mapillaryLayer);
-
+        mapillary_sequence_layer.call(mapillarySequencesLayer);
         var mapillary_image_layer = selection.selectAll('.mapillary-image-layer')
             .data([0]);
+
         mapillary_image_layer.enter().insert('div', '.layer-data')
             .attr('class', 'layer-layer mapillary-image-layer');
 
-        mapillary_image_layer.call(mapillaryLayer);
+        mapillary_image_layer.call(mapillaryImageLayer);
 
     }
 
@@ -120,7 +122,8 @@ iD.Background = function(context) {
     background.dimensions = function(_) {
         baseLayer.dimensions(_);
         gpxLayer.dimensions(_);
-        mapillaryLayer.dimensions(_);
+        mapillarySequencesLayer.dimensions(_);
+        mapillaryImageLayer.dimensions(_);
 
         overlayLayers.forEach(function(layer) {
             layer.dimensions(_);
@@ -185,7 +188,8 @@ iD.Background = function(context) {
         dispatch.change();
     };
     background.toggleMapillaryLayer = function() {
-        mapillaryLayer.enable(!mapillaryLayer.enable());
+        mapillarySequencesLayer.enable(!mapillarySequencesLayer.enable());
+        mapillaryImageLayer.enable(!mapillaryImageLayer.enable());
         dispatch.change();
     };
 
@@ -193,11 +197,14 @@ iD.Background = function(context) {
         console.log("background.updateMapillaryLayer");
         var mapillary = d3.selectAll('.mapillary-sequence-layer')
             .data([0]);
-        mapillary.call(mapillaryLayer);
+        mapillary.call(mapillarySequencesLayer);
     }
 
-    background.mapillaryLayer = function() {
-        return mapillaryLayer;
+    background.mapillarySequenceLayer = function() {
+        return mapillarySequencesLayer;
+    }
+    background.mapillaryImageLayer = function() {
+        return mapillaryImageLayer;
     }
 
 

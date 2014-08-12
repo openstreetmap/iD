@@ -1153,6 +1153,13 @@ text.mapillary {
     cursor: url(img/cursor-select-add.png), pointer; /* FF */
 }
 
+/*path.mapillary-image {
+    fill: red;
+    stroke-width: 4;
+    stroke: red;
+    background-image: green;
+}*/
+
 /* Modes */
 
 .mode-draw-line .vertex.active,
