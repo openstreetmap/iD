@@ -76,6 +76,10 @@ iD.ui.Background = function(context) {
             context.background().toggleGpxLayer();
             update();
         }
+        function clickMapillary() {
+            context.background().toggleMapillaryLayer();
+            update();
+        }
 
         function drawList(layerList, type, change, filter) {
             var sources = context.background()
@@ -311,6 +315,25 @@ iD.ui.Background = function(context) {
 
         label.append('span')
             .text(t('gpx.local_layer'));
+
+        var mapillaryLayerItem = content.append('ul')
+            .attr('class', 'layer-list')
+            .append('li')
+            .classed('layer-toggle-gpx', true);
+
+        var mapillaryLabel = mapillaryLayerItem.append('label')
+            .call(bootstrap.tooltip()
+                .title(t('mapillary.title'))
+                .placement('top'));
+
+        mapillaryLabel.append('input')
+            .attr('type', 'checkbox')
+            .on('change', clickMapillary);
+
+        mapillaryLabel.append('span')
+            .text(t('mapillary.title'));
+
+
 
         var adjustments = content.append('div')
             .attr('class', 'adjustments');

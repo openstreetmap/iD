@@ -4,6 +4,8 @@ iD.Background = function(context) {
             .projection(context.projection),
         gpxLayer = iD.GpxLayer(context, dispatch)
             .projection(context.projection),
+        mapillaryLayer = iD.MapillaryLayer(context, dispatch)
+            .projection(context.projection),
         overlayLayers = [];
 
     var backgroundSources = iD.data.imagery.map(function(source) {
@@ -91,6 +93,22 @@ iD.Background = function(context) {
 
         overlays.exit()
             .remove();
+
+        var mapillary_sequence_layer = selection.selectAll('.mapillary-sequence-layer')
+            .data([0]);
+
+        mapillary_sequence_layer.enter().insert('div', '.layer-data')
+            .attr('class', 'layer-layer mapillary-sequence-layer');
+
+        mapillary_sequence_layer.call(mapillaryLayer);
+
+        var mapillary_image_layer = selection.selectAll('.mapillary-image-layer')
+            .data([0]);
+        mapillary_image_layer.enter().insert('div', '.layer-data')
+            .attr('class', 'layer-layer mapillary-image-layer');
+
+        mapillary_image_layer.call(mapillaryLayer);
+
     }
 
     background.sources = function(extent) {
@@ -102,6 +120,7 @@ iD.Background = function(context) {
     background.dimensions = function(_) {
         baseLayer.dimensions(_);
         gpxLayer.dimensions(_);
+        mapillaryLayer.dimensions(_);
 
         overlayLayers.forEach(function(layer) {
             layer.dimensions(_);
@@ -165,6 +184,22 @@ iD.Background = function(context) {
         gpxLayer.enable(!gpxLayer.enable());
         dispatch.change();
     };
+    background.toggleMapillaryLayer = function() {
+        mapillaryLayer.enable(!mapillaryLayer.enable());
+        dispatch.change();
+    };
+
+    background.updateMapillaryLayer = function() {
+        console.log("background.updateMapillaryLayer");
+        var mapillary = d3.selectAll('.mapillary-sequence-layer')
+            .data([0]);
+        mapillary.call(mapillaryLayer);
+    }
+
+    background.mapillaryLayer = function() {
+        return mapillaryLayer;
+    }
+
 
     background.showsLayer = function(d) {
         return d === baseLayer.source() ||

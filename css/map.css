@@ -1139,6 +1139,20 @@ text.gpx {
     fill:#FF26D4;
 }
 
+/* Mapillary Sequences */
+path.mapillary-sequence {
+    stroke: red;
+    stroke-width: 4;
+    fill: none;
+    pointer-events: visibleStroke;
+}
+
+text.mapillary {
+    fill:#FF26D4;
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-add.png), pointer; /* FF */
+}
+
 /* Modes */
 
 .mode-draw-line .vertex.active,

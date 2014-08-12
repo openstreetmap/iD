@@ -336,7 +336,7 @@ a.hide {
 .panewrap {
     position:absolute;
     width:200%;
-    height:100%;
+    height:70%;
     right: -100%;
 }
 
@@ -700,7 +700,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .inspector-wrap {
     width: 100%;
-    height: 100%;
+    height: 70%;
 }
 
 .inspector-hidden {
@@ -715,6 +715,14 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     left: 0;
     bottom: 0;
 }
+
+#mapillary-inspector {
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+}
+
 
 .feature-list-pane .inspector-body {
     top: 120px;

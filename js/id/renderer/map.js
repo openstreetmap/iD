@@ -64,6 +64,11 @@ iD.Map = function(context) {
             }
         });
 
+        surface.on('click.mapillary', function() {
+            var click = d3.event;
+            context.background().mapillaryLayer().click();
+        });
+
         surface.on('mouseout.vertices', function() {
             if (map.editable() && !transformed) {
                 var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
