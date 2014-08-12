@@ -19,6 +19,9 @@ in the hash portion of the URL:
   `{z}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
   DNS multiplexing. Example:
   `background=custom:http://{switch:a,b,c}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png`
+* `comment` - Prefills the changeset comment box, for use when integrating iD with
+  external task management or quality assurance tools. Example:
+  `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon%20%23hotosm-task-592`.
 
 When constructing a URL to an instance of iD embedded in the OpenStreetMap Rails
 Port (e.g. `http://www.openstreetmap.org/edit?editor=id`), the following parameters
