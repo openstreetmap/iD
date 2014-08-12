@@ -105,7 +105,7 @@ iD.MapillaryImageLayer = function (context) {
 
     render.updatePosition = function () {
         var coords = context.map().mouseCoordinates();
-        d3.json("http://api.mapillary.com/v1/im/close?limit=1&lat=" + coords[1] + "&limit=1&lon=" + coords[0] + "&geojson=true", function (error, data) {
+        d3.json("https://mapillary-read-api.herokuapp.com/v1/im/close?limit=1&lat=" + coords[1] + "&lon=" + coords[0], function (error, data) {
             console.log("Got", data);
             if (data) {
                 render.geojson({

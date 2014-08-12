@@ -125,7 +125,7 @@ iD.MapillarySequencesLayer = function (context) {
         console.log(mapillary_wrapper);
 
         var coords = context.map().mouseCoordinates();
-        d3.json("http://api.mapillary.com/v1/im/close?limit=1&lat=" + coords[1] + "&limit=1&lon=" + coords[0], function (error, data) {
+        d3.json("https://mapillary-read-api.herokuapp.com/v1/im/close?limit=1&lat=" + coords[1] + "&limit=1&lon=" + coords[0], function (error, data) {
             console.log("mapillary_sequence_layer.Got", data);
             if (data) {
                 mapillary_wrapper.html('<a target="_blank" href="http://mapillary.com/map/im/' + data[0].key + '"><img src="https://d1cuyjsrcm0gby.cloudfront.net/' + data[0].key + '/thumb-320.jpg"></img></a>');
@@ -141,7 +141,7 @@ iD.MapillarySequencesLayer = function (context) {
     render.updatePosition = function () {
         var extent = context.map().extent();
 
-        d3.json("http://api.mapillary.com/v1/s/search?min-lat=" + extent[0][1] + "&max-lat=" + extent[1][1] + "\&min-lon\=" + extent[0][0] + "&max-lon=" + extent[1][0] + "&max-results=100&geojson=true", function (error, data) {
+        d3.json("https://mapillary-read-api.herokuapp.com/v1/s/search?min-lat=" + extent[0][1] + "&max-lat=" + extent[1][1] + "\&min-lon\=" + extent[0][0] + "&max-lon=" + extent[1][0] + "&limit=350", function (error, data) {
             console.log("sequenceLayer.updatePosition, Got", data);
             render.geojson(data);
             render.updateImageMarker(data);
