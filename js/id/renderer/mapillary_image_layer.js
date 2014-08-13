@@ -96,7 +96,7 @@ iD.MapillaryImageLayer = function (context) {
         var x = coords[0].substr(1);
         var y = coords[1];
         svg_image.selectAll("image")
-            .attr("xlink:href", "/css/img/arrow-icon.png")
+            .attr("xlink:href", "../img/arrow-icon.png")
             .attr("width", size)
             .attr("height", size)
             .attr("transform", "translate(" + ( x - size / 2) + "," + ( y - size / 2) + ")rotate(" + gj.features[0].properties.ca + "," + size / 2 + "," + size / 2 + ")");
