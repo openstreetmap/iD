@@ -180,9 +180,20 @@ iD.geo.polygonContainsPolygon = function(outer, inner) {
 };
 
 iD.geo.polygonIntersectsPolygon = function(outer, inner) {
+    function testSegments(outer, inner) {
+        for (var i = 0; i < outer.length - 1; i++) {
+            for (var j = 0; j < inner.length - 1; j++) {
+                var a = [ outer[i], outer[i+1] ],
+                    b = [ inner[j], inner[j+1] ];
+                if (iD.geo.lineIntersection(a, b)) return true;
+            }
+        }
+        return false;
+    }
+
     return _.some(inner, function(point) {
         return iD.geo.pointInPolygon(point, outer);
-    });
+    }) || testSegments(outer, inner);
 };
 
 iD.geo.pathLength = function(path) {

@@ -294,9 +294,15 @@ describe('iD.geo', function() {
             expect(iD.geo.polygonIntersectsPolygon(outer, inner)).to.be.true;
         });
 
-        it('says a polygon that partially intersects does', function() {
+        it('says a polygon that partially intersects does when some points are contained', function() {
             var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
             var inner = [[-1, -1], [1, 2], [2, 2], [2, 1], [1, 1]];
+            expect(iD.geo.polygonIntersectsPolygon(outer, inner)).to.be.true;
+        });
+
+        it('says a polygon that partially intersects does when no points are contained', function() {
+            var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
+            var inner = [[1, -1], [1, 4], [2, 4], [2, -1], [1, -1]];
             expect(iD.geo.polygonIntersectsPolygon(outer, inner)).to.be.true;
         });
 
