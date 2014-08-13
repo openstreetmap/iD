@@ -293,6 +293,8 @@ en:
     drag_drop: "Drag and drop a .gpx file on the page, or click the button to the right to browse"
     zoom: "Zoom to GPX track"
     browse: "Browse for a .gpx file"
+  mapillary:
+    title: "Mapillary"
   help:
     title: "Help"
     help: |
