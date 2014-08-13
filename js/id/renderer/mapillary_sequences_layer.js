@@ -39,38 +39,6 @@ iD.MapillarySequencesLayer = function (context) {
         paths
             .attr('d', path);
 
-        /*svg_sequences
-            .selectAll('text')
-            .remove();
-
-        svg_sequences
-            .selectAll('path')
-            .data(gj.features)
-            .enter()
-            .append('text')
-            .attr('class', 'mapillary-sequence')
-            .text(function (d) {
-                return d.properties.key || d.properties.name;
-            })
-            .attr('x', function (d) {
-                var centroid = path.centroid(d);
-                return centroid[0] + 5;
-            })
-            .attr('y', function (d) {
-                var centroid = path.centroid(d);
-                return centroid[1];
-            });
-*/
-        d3
-            .select("#sidebar")
-            .selectAll('#mapillary-inspector')
-            .remove();
-        d3.select("#sidebar")
-            .append('div')
-            .attr("id", "mapillary-inspector")
-            .append('h4')
-            .html('mapillary');
-
         return render.updatePosition();
     }
 
@@ -120,19 +88,7 @@ iD.MapillarySequencesLayer = function (context) {
         d3.event.stopPropagation();
         d3.event.preventDefault();
 
-        var mapillary_wrapper = d3.select("#sidebar")
-            .select('#mapillary-inspector');
-        console.log(mapillary_wrapper);
 
-        var coords = context.map().mouseCoordinates();
-        d3.json("https://mapillary-read-api.herokuapp.com/v1/im/close?limit=1&lat=" + coords[1] + "&limit=1&lon=" + coords[0], function (error, data) {
-            console.log("mapillary_sequence_layer.Got", data);
-            if (data) {
-                mapillary_wrapper.html('<a target="_blank" href="http://mapillary.com/map/im/' + data[0].key + '"><img src="https://d1cuyjsrcm0gby.cloudfront.net/' + data[0].key + '/thumb-320.jpg"></img></a>');
-            } else {
-                mapillary_wrapper.html("No picture found, try clicking near the Mapillary sequences");
-            }
-        });
     }
 
 
@@ -141,8 +97,7 @@ iD.MapillarySequencesLayer = function (context) {
     render.updatePosition = function () {
         var extent = context.map().extent();
 
-        d3.json("https://mapillary-read-api.herokuapp.com/v1/s/search?min-lat=" + extent[0][1] + "&max-lat=" + extent[1][1] + "\&min-lon\=" + extent[0][0] + "&max-lon=" + extent[1][0] + "&limit=350", function (error, data) {
-            console.log("sequenceLayer.updatePosition, Got", data);
+        d3.json("http://api.mapillary.com/v1/s/search?min-lat=" + extent[0][1] + "&max-lat=" + extent[1][1] + "\&min-lon\=" + extent[0][0] + "&max-lon=" + extent[1][0] + "&max-results=100&geojson=true", function (error, data) {
             render.geojson(data);
             render.updateImageMarker(data);
         });

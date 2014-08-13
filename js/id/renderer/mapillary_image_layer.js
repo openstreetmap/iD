@@ -6,7 +6,6 @@ iD.MapillaryImageLayer = function (context) {
         svg_image;
 
     function render(selection) {
-        console.log("mapillary_image_layer.render", enable);
         svg_image = selection.selectAll('svg')
             .data([render]);
 
@@ -42,6 +41,17 @@ iD.MapillaryImageLayer = function (context) {
 
         paths
             .attr('d', path);
+
+        d3
+            .select("#sidebar")
+            .selectAll('#mapillary-inspector')
+            .remove();
+        d3.select("#sidebar")
+            .append('div')
+            .attr("id", "mapillary-inspector")
+            .append('h4')
+            .html('mapillary');
+
 
         return render.updatePosition();
     }
@@ -86,15 +96,19 @@ iD.MapillaryImageLayer = function (context) {
         var x = coords[0].substr(1);
         var y = coords[1];
         svg_image.selectAll("image")
-            .attr("xlink:href", "/css/img/arrow-icon.jpg")
+            .attr("xlink:href", "/css/img/arrow-icon.png")
             .attr("width", size)
             .attr("height", size)
-            .attr("transform", "translate("+( x-size/2)+","+( y-    size/2)+")rotate("+ gj.features[0].properties.ca +","+size/2+","+size/2+")");
+            .attr("transform", "translate(" + ( x - size / 2) + "," + ( y - size / 2) + ")rotate(" + gj.features[0].properties.ca + "," + size / 2 + "," + size / 2 + ")");
 
+        //update image
+        var mapillary_wrapper = d3.select("#sidebar")
+            .select('#mapillary-inspector');
+
+        mapillary_wrapper.html('<a target="_blank" href="http://mapillary.com/map/im/' + gj.features[0].properties.key + '"><img src="https://d1cuyjsrcm0gby.cloudfront.net/' + gj.features[0].properties.key + '/thumb-320.jpg"></img></a>');
 
     };
     render.click = function click() {
-        console.log('mapillary_image_layer.clicked', arguments);
         d3.event.stopPropagation();
         d3.event.preventDefault();
         render.updatePosition();
@@ -105,8 +119,7 @@ iD.MapillaryImageLayer = function (context) {
 
     render.updatePosition = function () {
         var coords = context.map().mouseCoordinates();
-        d3.json("https://mapillary-read-api.herokuapp.com/v1/im/close?limit=1&lat=" + coords[1] + "&lon=" + coords[0], function (error, data) {
-            console.log("Got", data);
+        d3.json("http://api.mapillary.com/v1/im/close?limit=1&lat=" + coords[1] + "&limit=1&lon=" + coords[0] + "&geojson=true", function (error, data) {
             if (data) {
                 render.geojson({
                         type: 'FeatureCollection',
