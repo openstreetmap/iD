@@ -27,6 +27,8 @@ iD.Map = function(context) {
             .on('change.map', redraw);
         context.background()
             .on('change.map', redraw);
+        context.features()
+            .on('redraw.map', redraw);
 
         selection.call(zoom);
 
@@ -77,6 +79,8 @@ iD.Map = function(context) {
                 var all = context.intersects(map.extent()),
                     filter = d3.functor(true),
                     graph = context.graph();
+
+                all = context.features().filter(all);
                 surface.call(vertices, graph, all, filter, map.extent(), map.zoom());
                 surface.call(midpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.drawn({full: false});
@@ -109,18 +113,16 @@ iD.Map = function(context) {
             filter = d3.functor(true);
         }
 
+        context.features().gatherStats(context.intersects(map.extent()));
+        all = context.features().filter(all);
+
         surface
             .call(vertices, graph, all, filter, map.extent(), map.zoom())
             .call(lines, graph, all, filter)
             .call(areas, graph, all, filter)
             .call(midpoints, graph, all, filter, map.trimmedExtent())
-            .call(labels, graph, all, filter, dimensions, !difference && !extent);
-
-        if (points.points(context.intersects(map.extent()), 100).length >= 100) {
-            surface.select('.layer-hit').selectAll('g.point').remove();
-        } else {
-            surface.call(points, points.points(all), filter);
-        }
+            .call(labels, graph, all, filter, dimensions, !difference && !extent)
+            .call(points, all, filter);
 
         dispatch.drawn({full: true});
     }

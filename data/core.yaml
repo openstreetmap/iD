@@ -172,6 +172,8 @@ en:
   logout: logout
   loading_auth: "Connecting to OpenStreetMap..."
   report_a_bug: report a bug
+  feature_info:
+    hidden_features: "Hidden: {features}"
   status:
     error: Unable to connect to API.
     offline: The API is offline. Please try editing later.
@@ -237,6 +239,45 @@ en:
     custom_prompt: "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
     fix_misalignment: Fix alignment
     reset: reset
+  features:
+    title: Map Features
+    description: Map Features
+    points:
+      description: Points
+      tooltip: "Points of Interest"
+    major_roads:
+      description: Major Roads
+      tooltip: "Highways, Streets, etc."
+    minor_roads:
+      description: Minor Roads
+      tooltip: "Service Roads, Parking Aisles, Tracks, etc."
+    paths:
+      description: Paths
+      tooltip: "Sidewalks, Foot Paths, Cycle Paths, etc."
+    buildings:
+      description: Buildings
+      tooltip: "Buildings, Shelters, Garages, etc."
+    landuse:
+      description: Landuse Features
+      tooltip: "Forests, Farmland, Parks, Residential, Commercial, etc."
+    boundaries:
+      description: Boundaries
+      tooltip: "Administrative Boundaries"
+    water:
+      description: Water Features
+      tooltip: "Rivers, Lakes, Ponds, Basins, etc."
+    rail:
+      description: Rail Features
+      tooltip: "Railways"
+    power:
+      description: Power Features
+      tooltip: "Power Lines, Power Plants, Substations, etc."
+    past_future:
+      description: Past/Future
+      tooltip: "Proposed, Construction, Abandoned, Demolished, etc."
+    others:
+      description: Others
+      tooltip: "Everything Else"
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"

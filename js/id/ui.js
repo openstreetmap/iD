@@ -54,9 +54,6 @@ iD.ui = function(context) {
             .attr('class', 'spinner')
             .call(iD.ui.Spinner(context));
 
-        content
-            .call(iD.ui.Attribution(context));
-
         content.append('div')
             .style('display', 'none')
             .attr('class', 'help-wrap map-overlay fillL col5 content');
@@ -77,10 +74,21 @@ iD.ui = function(context) {
             .call(iD.ui.Background(context));
 
         controls.append('div')
+            .attr('class', 'map-control features-control')
+            .call(iD.ui.Features(context));
+
+        controls.append('div')
             .attr('class', 'map-control help-control')
             .call(iD.ui.Help(context));
 
-        var footer = content.append('div')
+        var about = content.append('div')
+            .attr('id', 'about');
+
+        about.append('div')
+            .attr('id', 'attrib')
+            .call(iD.ui.Attribution(context));
+
+        var footer = about.append('div')
             .attr('id', 'footer')
             .attr('class', 'fillD');
 
@@ -123,6 +131,10 @@ iD.ui = function(context) {
             .attr('class', 'user-list')
             .attr('tabindex', -1)
             .call(iD.ui.Contributors(context));
+
+        footer.append('div')
+            .attr('class', 'feature-info')
+            .call(iD.ui.FeatureInfo(context));
 
         footer.append('div')
             .attr('class', 'api-status')

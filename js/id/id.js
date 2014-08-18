@@ -203,6 +203,10 @@ window.iD = function () {
     var background = iD.Background(context);
     context.background = function() { return background; };
 
+    /* Features */
+    var features = iD.Features(context);
+    context.features = function() { return features; };
+
     /* Map */
     var map = iD.Map(context);
     context.map = function() { return map; };
