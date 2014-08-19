@@ -58,8 +58,8 @@ iD.MapillaryImageLayer = function (context) {
             .select("#sidebar")
             .selectAll('#mapillary-inspector')
             .remove();
-        d3.selectAll("#sidebar").append('div')
-            .attr("id", "mapillary-inspector")
+        d3.selectAll('#sidebar').append('div')
+            .attr('id', "mapillary-inspector")
             .append('h4')
             .html('mapillary');
 
