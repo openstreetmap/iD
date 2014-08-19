@@ -61,7 +61,7 @@ iD.MapillaryImageLayer = function (context) {
         d3.selectAll('#sidebar').append('div')
             .attr('id', "mapillary-inspector")
             .append('h4')
-            .html('mapillary');
+            .html(t('mapillary.no_image_found'));
 
 
         return render.updatePosition();
@@ -115,9 +115,17 @@ iD.MapillaryImageLayer = function (context) {
         var mapillary_wrapper = d3.select("#sidebar")
             .select('#mapillary-inspector');
 
-        mapillary_wrapper.html('<a target="_blank" href="https://mapillary.com/map/im/' + gj.features[0].properties.key + '"><img src="https://d1cuyjsrcm0gby.cloudfront.net/' + gj.features[0].properties.key + '/thumb-320.jpg"></img><div class="link"><span>View image on Mapillary</span></div></a>');
+        mapillary_wrapper.html('<a target="_blank" href="https://mapillary.com/map/im/' + gj.features[0].properties.key + '"><img src="https://d1cuyjsrcm0gby.cloudfront.net/' + gj.features[0].properties.key + '/thumb-320.jpg"></img><div class="link"><span>'+t('mapillary.view_on_mapillary')+'</span></div></a>');
 
     };
+
+    render.noImageFound = function() {
+        var mapillary_wrapper = d3.select("#sidebar")
+            .select('#mapillary-inspector');
+
+        mapillary_wrapper.html('<h4>'+t('mapillary.no_image_found')+'</h4>');
+
+    }
     render.click = function click() {
         d3.event.stopPropagation();
         d3.event.preventDefault();
@@ -130,7 +138,7 @@ iD.MapillaryImageLayer = function (context) {
     render.updatePosition = function () {
         var coords = context.map().mouseCoordinates();
         d3.json("https://api.mapillary.com/v1/im/close?limit=1&lat=" + coords[1] + "&limit=1&lon=" + coords[0] + "&geojson=true", function (error, data) {
-            if (data) {
+            if (data && data.length > 0) {
                 render.geojson({
                         type: 'FeatureCollection',
                         features: [
@@ -150,6 +158,7 @@ iD.MapillaryImageLayer = function (context) {
                 );
                 render.updateImageMarker(data);
             } else {
+                render.noImageFound();
             }
         });
     }
