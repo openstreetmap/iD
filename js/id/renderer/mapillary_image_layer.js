@@ -13,6 +13,12 @@ iD.MapillaryImageLayer = function (context) {
             d3
                 .selectAll('.mapillary-image-layer')
                 .remove();
+            d3
+                .selectAll('.inspector-wrap')
+                .classed("part65", false);
+            d3
+                .selectAll('.panewrap')
+                .classed("part65", false);
             return;
         }
         svg_image.enter()
@@ -43,11 +49,16 @@ iD.MapillaryImageLayer = function (context) {
             .attr('d', path);
 
         d3
+            .selectAll('.inspector-wrap')
+            .classed("part65", true);
+        d3
+            .selectAll('.panewrap')
+            .classed("part65", true);
+        d3
             .select("#sidebar")
             .selectAll('#mapillary-inspector')
             .remove();
-        d3.select("#sidebar")
-            .append('div')
+        d3.selectAll("#sidebar").append('div')
             .attr("id", "mapillary-inspector")
             .append('h4')
             .html('mapillary');
@@ -104,7 +115,7 @@ iD.MapillaryImageLayer = function (context) {
         var mapillary_wrapper = d3.select("#sidebar")
             .select('#mapillary-inspector');
 
-        mapillary_wrapper.html('<a target="_blank" href="http://mapillary.com/map/im/' + gj.features[0].properties.key + '"><img src="https://d1cuyjsrcm0gby.cloudfront.net/' + gj.features[0].properties.key + '/thumb-320.jpg"></img></a>');
+        mapillary_wrapper.html('<a target="_blank" href="http://mapillary.com/map/im/' + gj.features[0].properties.key + '"><img src="https://d1cuyjsrcm0gby.cloudfront.net/' + gj.features[0].properties.key + '/thumb-320.jpg"></img><div class="link"><span>View image on Mapillary</span></div></a>');
 
     };
     render.click = function click() {

@@ -336,8 +336,12 @@ a.hide {
 .panewrap {
     position:absolute;
     width:200%;
-    height:70%;
+    height:100%;
     right: -100%;
+}
+
+.part65 {
+    height: 65%;
 }
 
 .pane {
@@ -668,6 +672,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-top: 1px solid #ccc;
     background-color: #fafafa;
     width: 100%;
+    z-index: 100;
 }
 
 .sidebar-component .body {
@@ -700,7 +705,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .inspector-wrap {
     width: 100%;
-    height: 70%;
+    height: 100%;
 }
 
 .inspector-hidden {
@@ -718,9 +723,34 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 #mapillary-inspector {
     width: 100%;
-    height: 30%;
+    height: 35%;
     position: absolute;
     bottom: 0;
+    padding: 10px;
+    padding-bottom: 30px;
+    padding-top: 0px;
+}
+
+#mapillary-inspector > a {
+    display: block;
+    width: 100%;
+    height: auto;
+    color: white;
+    position: relative;
+}
+
+#mapillary-inspector .link {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    text-align: center;
+}
+
+#mapillary-inspector img {
+    margin: 0 auto;
+    display: block;
+    width: 90%;
 }
 
 
