@@ -355,9 +355,7 @@
         "browse": "Browse for a .gpx file"
     },
     "mapillary": {
-        "title": "Mapillary",
-        "view_on_mapillary": "View this image on Mapillary",
-        "no_image_found": "No Mapillary image found, feel free to take some yourself here!"
+        "title": "Mapillary"
     },
     "help": {
         "title": "Help",
