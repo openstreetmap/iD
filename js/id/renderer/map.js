@@ -65,7 +65,6 @@ iD.Map = function(context) {
         });
 
         surface.on('click.mapillary', function() {
-            var click = d3.event;
             context.background().mapillarySequenceLayer().click();
             context.background().mapillaryImageLayer().click();
         });

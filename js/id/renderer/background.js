@@ -194,18 +194,17 @@ iD.Background = function(context) {
     };
 
     background.updateMapillaryLayer = function() {
-        console.log("background.updateMapillaryLayer");
         var mapillary = d3.selectAll('.mapillary-sequence-layer')
             .data([0]);
         mapillary.call(mapillarySequencesLayer);
-    }
+    };
 
     background.mapillarySequenceLayer = function() {
         return mapillarySequencesLayer;
-    }
+    };
     background.mapillaryImageLayer = function() {
         return mapillaryImageLayer;
-    }
+    };
 
 
     background.showsLayer = function(d) {

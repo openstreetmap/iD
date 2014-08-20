@@ -11,7 +11,7 @@ iD.MapillarySequencesLayer = function (context) {
 
         if (!enable) {
             d3
-                .select("#sidebar")
+                .select('#sidebar')
                 .selectAll('#mapillary-inspector')
                 .remove();
             selection
@@ -66,7 +66,7 @@ iD.MapillarySequencesLayer = function (context) {
         return render;
     };
 
-    render.updateImageMarker = function (data) {
+    render.updateImageMarker = function () {
         render.dimensions(dimension);
         var paths = svg_sequences
             .selectAll('path')
@@ -88,7 +88,7 @@ iD.MapillarySequencesLayer = function (context) {
         d3.event.preventDefault();
 
 
-    }
+    };
 
 
     render.id = 'layer-mapillary';
@@ -96,11 +96,11 @@ iD.MapillarySequencesLayer = function (context) {
     render.updatePosition = function () {
         var extent = context.map().extent();
 
-        d3.json("https://api.mapillary.com/v1/s/search?min-lat=" + extent[0][1] + "&max-lat=" + extent[1][1] + "\&min-lon\=" + extent[0][0] + "&max-lon=" + extent[1][0] + "&max-results=100&geojson=true", function (error, data) {
+        d3.json('https://api.mapillary.com/v1/s/search?min-lat=' + extent[0][1] + '&max-lat=' + extent[1][1] + '\&min-lon\=' + extent[0][0] + '&max-lon=' + extent[1][0] + '&max-results=100&geojson=true', function (error, data) {
             render.geojson(data);
             render.updateImageMarker(data);
         });
-    }
+    };
 
     return render;
 

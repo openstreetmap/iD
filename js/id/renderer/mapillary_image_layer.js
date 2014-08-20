@@ -15,10 +15,10 @@ iD.MapillaryImageLayer = function (context) {
                 .remove();
             d3
                 .selectAll('.inspector-wrap')
-                .classed("part65", false);
+                .classed('part65', false);
             d3
                 .selectAll('.panewrap')
-                .classed("part65", false);
+                .classed('part65', false);
             return;
         }
         svg_image.enter()
@@ -50,16 +50,16 @@ iD.MapillaryImageLayer = function (context) {
 
         d3
             .selectAll('.inspector-wrap')
-            .classed("part65", true);
+            .classed('part65', true);
         d3
             .selectAll('.panewrap')
-            .classed("part65", true);
+            .classed('part65', true);
         d3
             .select('#mapillary-inspector')
             .remove();
         d3.select('#sidebar')
             .append('div')
-            .attr('id', "mapillary-inspector")
+            .attr('id', 'mapillary-inspector')
             .append('h4')
             .html(t('mapillary.no_image_found'));
 
@@ -86,33 +86,33 @@ iD.MapillaryImageLayer = function (context) {
     };
 
     render.dimensions = function (_) {
-        if (!arguments.length) return svg_sequences.dimensions();
+        if (!arguments.length) return svg_image.dimensions();
         dimension = _;
         svg_image.dimensions(_);
         return render;
     };
 
-    render.updateImageMarker = function (data) {
+    render.updateImageMarker = function () {
         render.dimensions(dimension);
         var path = d3.geo.path().projection(projection);
         var paths = svg_image
             .selectAll('path')
             .datum(gj)
             .attr('class', 'mapillary-image fa-arrow-circle-up')
-            .attr("d", path);
-        var mapPath = paths.attr("d");
-        var coords = mapPath.split("m")[0].split(",");
+            .attr('d', path);
+        var mapPath = paths.attr('d');
+        var coords = mapPath.split('m')[0].split(",");
         var size = 40;
         var x = coords[0].substr(1);
         var y = coords[1];
-        svg_image.selectAll("image")
-            .attr("xlink:href", "img/arrow-icon.png")
-            .attr("width", size)
-            .attr("height", size)
-            .attr("transform", "translate(" + ( x - size / 2) + "," + ( y - size / 2) + ")rotate(" + gj.features[0].properties.ca + "," + size / 2 + "," + size / 2 + ")");
+        svg_image.selectAll('image')
+            .attr('xlink:href', 'img/arrow-icon.png')
+            .attr('width', size)
+            .attr('height', size)
+            .attr('transform', 'translate(' + ( x - size / 2) + ',' + ( y - size / 2) + ')rotate(' + gj.features[0].properties.ca + ',' + size / 2 + ',' + size / 2 + ')');
 
         //update image
-        var mapillary_wrapper = d3.select("#sidebar")
+        var mapillary_wrapper = d3.select('#sidebar')
             .select('#mapillary-inspector');
 
         mapillary_wrapper.html('<a target="_blank" href="https://mapillary.com/map/im/' + gj.features[0].properties.key + '"><img src="https://d1cuyjsrcm0gby.cloudfront.net/' + gj.features[0].properties.key + '/thumb-320.jpg"></img><div class="link"><span>'+t('mapillary.view_on_mapillary')+'</span></div></a>');
@@ -120,24 +120,24 @@ iD.MapillaryImageLayer = function (context) {
     };
 
     render.noImageFound = function() {
-        var mapillary_wrapper = d3.select("#sidebar")
+        var mapillary_wrapper = d3.select('#sidebar')
             .select('#mapillary-inspector');
 
         mapillary_wrapper.html('<h4>'+t('mapillary.no_image_found')+'</h4>');
 
-    }
+    };
     render.click = function click() {
         d3.event.stopPropagation();
         d3.event.preventDefault();
         render.updatePosition();
-    }
+    };
 
 
     render.id = 'layer-mapillary-image';
 
     render.updatePosition = function () {
         var coords = context.map().mouseCoordinates();
-        d3.json("https://api.mapillary.com/v1/im/close?limit=1&lat=" + coords[1] + "&limit=1&lon=" + coords[0] + "&geojson=true", function (error, data) {
+        d3.json('https://api.mapillary.com/v1/im/close?limit=1&lat=' + coords[1] + '&limit=1&lon=' + coords[0] + '&geojson=true', function (error, data) {
             if (data && data.length > 0) {
                 render.geojson({
                         type: 'FeatureCollection',
@@ -161,7 +161,7 @@ iD.MapillaryImageLayer = function (context) {
                 render.noImageFound();
             }
         });
-    }
+    };
 
     return render;
 
