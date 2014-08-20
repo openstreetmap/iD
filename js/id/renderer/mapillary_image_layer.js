@@ -101,7 +101,7 @@ iD.MapillaryImageLayer = function (context) {
             .attr('class', 'mapillary-image fa-arrow-circle-up')
             .attr('d', path);
         var mapPath = paths.attr('d');
-        var coords = mapPath.split('m')[0].split(",");
+        var coords = mapPath.split('m')[0].split(',');
         var size = 40;
         var x = coords[0].substr(1);
         var y = coords[1];
