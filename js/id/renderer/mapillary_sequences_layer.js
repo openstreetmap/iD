@@ -14,8 +14,7 @@ iD.MapillarySequencesLayer = function (context) {
                 .select("#sidebar")
                 .selectAll('#mapillary-inspector')
                 .remove();
-            d3
-                .selectAll('.mapillary-sequence-layer')
+            selection
                 .remove();
             return;
         }
