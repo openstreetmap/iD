@@ -10,7 +10,7 @@ iD.MapillaryImageLayer = function (context) {
             .data([render]);
 
         if (!enable) {
-            d3
+            selection
                 .selectAll('.mapillary-image-layer')
                 .remove();
             d3
@@ -55,10 +55,10 @@ iD.MapillaryImageLayer = function (context) {
             .selectAll('.panewrap')
             .classed("part65", true);
         d3
-            .select("#sidebar")
-            .selectAll('#mapillary-inspector')
+            .select('#mapillary-inspector')
             .remove();
-        d3.selectAll('#sidebar').append('div')
+        d3.select('#sidebar')
+            .append('div')
             .attr('id', "mapillary-inspector")
             .append('h4')
             .html(t('mapillary.no_image_found'));
