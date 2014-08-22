@@ -471,6 +471,8 @@ en:
         label: Sport
       sport_ice:
         label: Sport
+      sport_racing:
+        label: Sport
       structure:
         label: Structure
         placeholder: Unknown
@@ -1207,6 +1209,9 @@ en:
       highway/primary_link:
         name: Primary Link
         terms: "<translate with synonyms or related terms for 'Primary Link', separated by commas>"
+      highway/raceway:
+        name: Motor Raceway
+        terms: "<translate with synonyms or related terms for 'Motor Raceway', separated by commas>"
       highway/residential:
         name: Residential Road
         terms: "<translate with synonyms or related terms for 'Residential Road', separated by commas>"
@@ -1423,6 +1428,9 @@ en:
       leisure/playground:
         name: Playground
         terms: "<translate with synonyms or related terms for 'Playground', separated by commas>"
+      leisure/running_track:
+        name: Running Track
+        terms: "<translate with synonyms or related terms for 'Running Track', separated by commas>"
       leisure/slipway:
         name: Slipway
         terms: "<translate with synonyms or related terms for 'Slipway', separated by commas>"
@@ -1436,8 +1444,8 @@ en:
         name: Swimming Pool
         terms: "<translate with synonyms or related terms for 'Swimming Pool', separated by commas>"
       leisure/track:
-        name: Race Track
-        terms: "<translate with synonyms or related terms for 'Race Track', separated by commas>"
+        name: Racetrack (non-Motorsport)
+        terms: "<translate with synonyms or related terms for 'Racetrack (non-Motorsport)', separated by commas>"
       line:
         name: Line
         terms: "<translate with synonyms or related terms for 'Line', separated by commas>"

@@ -4049,6 +4049,31 @@
         ],
         "name": "Primary Link"
     },
+    "highway/raceway": {
+        "icon": "highway-unclassified",
+        "fields": [
+            "oneway",
+            "surface",
+            "sport_racing",
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "raceway"
+        },
+        "addTags": {
+            "highway": "raceway",
+            "sport": "motor"
+        },
+        "terms": [
+            "auto*",
+            "race*",
+            "nascar"
+        ],
+        "name": "Motor Raceway"
+    },
     "highway/residential": {
         "icon": "highway-residential",
         "fields": [
@@ -5151,6 +5176,25 @@
             "play area"
         ]
     },
+    "leisure/running_track": {
+        "icon": "pitch",
+        "fields": [
+            "surface",
+            "sport_racing",
+            "lit",
+            "width",
+            "lanes"
+        ],
+        "geometry": [
+            "point",
+            "line"
+        ],
+        "tags": {
+            "leisure": "track",
+            "sport": "running"
+        },
+        "name": "Running Track"
+    },
     "leisure/slipway": {
         "geometry": [
             "point",
@@ -5208,21 +5252,22 @@
         "name": "Swimming Pool"
     },
     "leisure/track": {
-        "icon": "pitch",
+        "icon": "highway-road",
         "fields": [
             "surface",
+            "sport_racing",
             "lit",
-            "width"
+            "width",
+            "lanes"
         ],
         "geometry": [
             "point",
-            "line",
-            "area"
+            "line"
         ],
         "tags": {
             "leisure": "track"
         },
-        "name": "Race Track"
+        "name": "Racetrack (non-Motorsport)"
     },
     "line": {
         "name": "Line",

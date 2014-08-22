@@ -1054,6 +1054,9 @@
             "sport_ice": {
                 "label": "Sport"
             },
+            "sport_racing": {
+                "label": "Sport"
+            },
             "structure": {
                 "label": "Structure",
                 "placeholder": "Unknown",
@@ -2038,6 +2041,10 @@
                 "name": "Primary Link",
                 "terms": "ramp,on ramp,off ramp"
             },
+            "highway/raceway": {
+                "name": "Motor Raceway",
+                "terms": "auto*,race*,nascar"
+            },
             "highway/residential": {
                 "name": "Residential Road",
                 "terms": ""
@@ -2326,6 +2333,10 @@
                 "name": "Playground",
                 "terms": "jungle gym,play area"
             },
+            "leisure/running_track": {
+                "name": "Running Track",
+                "terms": ""
+            },
             "leisure/slipway": {
                 "name": "Slipway",
                 "terms": ""
@@ -2343,7 +2354,7 @@
                 "terms": ""
             },
             "leisure/track": {
-                "name": "Race Track",
+                "name": "Racetrack (non-Motorsport)",
                 "terms": ""
             },
             "line": {

@@ -48,6 +48,7 @@ iD.areaKeys = {
     "landuse": {},
     "leisure": {
         "picnic_table": true,
+        "track": true,
         "slipway": true
     },
     "man_made": {

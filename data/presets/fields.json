@@ -978,6 +978,20 @@
             "ice_stock"
         ]
     },
+    "sport_racing": {
+        "key": "sport",
+        "type": "combo",
+        "label": "Sport",
+        "options": [
+            "cycling",
+            "dog_racing",
+            "horse_racing",
+            "karting",
+            "motor",
+            "motocross",
+            "running"
+        ]
+    },
     "structure": {
         "type": "radio",
         "keys": [
