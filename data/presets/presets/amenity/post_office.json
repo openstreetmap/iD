@@ -3,7 +3,8 @@
     "fields": [
         "operator",
         "collection_times",
-        "building_area"
+        "building_area",
+        "address"
     ],
     "geometry": [
         "point",
