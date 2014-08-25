@@ -1,5 +1,11 @@
 {
-    "name": "Glaziery",
+    "icon": "fire-station",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
@@ -13,11 +19,5 @@
     "tags": {
         "craft": "glaziery"
     },
-    "icon": "fire-station",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Glaziery"
 }

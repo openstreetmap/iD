@@ -210,26 +210,27 @@ path.fill.tag-natural-water {
     background-color: rgba(119, 211, 222, 0.3);
 }
 
-path.stroke.tag-amenity-school {
-    stroke: rgb(255, 255, 148);
-}
-path.fill.tag-amenity-school {
-    fill: rgba(255, 255, 148, 0.2);
-}
-.preset-icon-fill-area.tag-amenity-school {
-    border-color: rgb(255, 255, 148);
-    background-color: rgba(255, 255, 148, 0.2);
-}
-
+path.stroke.tag-amenity-childcare,
+path.stroke.tag-amenity-kindergarten,
+path.stroke.tag-amenity-school,
+path.stroke.tag-amenity-college,
 path.stroke.tag-amenity-university {
     stroke: rgb(255, 255, 148);
 }
+path.fill.tag-amenity-childcare,
+path.fill.tag-amenity-kindergarten,
+path.fill.tag-amenity-school,
+path.fill.tag-amenity-college,
 path.fill.tag-amenity-university {
-    fill: rgba(255, 255, 148, 0.1);
+    fill: rgba(255, 255, 148, 0.15);
 }
+.preset-icon-fill-area.tag-amenity-childcare,
+.preset-icon-fill-area.tag-amenity-kindergarten,
+.preset-icon-fill-area.tag-amenity-school,
+.preset-icon-fill-area.tag-amenity-college,
 .preset-icon-fill-area.tag-amenity-university {
     border-color: rgb(255, 255, 148);
-    background-color: rgba(255, 255, 148, 0.1);
+    background-color: rgba(255, 255, 148, 0.15);
 }
 
 path.stroke.tag-landuse,

@@ -1,5 +1,12 @@
 {
-    "name": "Homeless Shelter",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "wheelchair",
+        "social_facility_for"
+    ],
     "geometry": [
         "point",
         "area"
@@ -14,12 +21,5 @@
         "social_facility": "shelter",
         "social_facility:for": "homeless"
     },
-    "fields": [
-        "social_facility_for",
-        "address",
-        "phone",
-        "opening_hours",
-        "wheelchair",
-        "operator"
-    ]
+    "name": "Homeless Shelter"
 }

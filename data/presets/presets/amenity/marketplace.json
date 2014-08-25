@@ -1,4 +1,9 @@
 {
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "vertex",
@@ -7,8 +12,5 @@
     "tags": {
         "amenity": "marketplace"
     },
-    "fields": [
-        "building_area"
-    ],
     "name": "Marketplace"
 }

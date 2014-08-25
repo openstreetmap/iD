@@ -2,8 +2,9 @@
     "icon": "bank",
     "fields": [
         "atm",
-        "building_area",
+        "operator",
         "address",
+        "building_area",
         "opening_hours"
     ],
     "geometry": [

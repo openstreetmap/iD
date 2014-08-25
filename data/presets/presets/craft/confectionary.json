@@ -1,5 +1,11 @@
 {
-    "name": "Confectionary",
+    "icon": "bakery",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
@@ -12,11 +18,5 @@
     "tags": {
         "craft": "confectionary"
     },
-    "icon": "bakery",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Confectionary"
 }

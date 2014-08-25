@@ -3,6 +3,7 @@
     "fields": [
         "operator",
         "address",
+        "building_area",
         "smoking"
     ],
     "geometry": [

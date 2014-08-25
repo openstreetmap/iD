@@ -11,7 +11,8 @@
         "area"
     ],
     "terms": [
-        "keys"
+        "key*",
+        "lock*"
     ],
     "tags": {
         "shop": "locksmith"

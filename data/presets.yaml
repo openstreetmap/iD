@@ -658,8 +658,8 @@ en:
         name: Charging Station
         terms: "<translate with synonyms or related terms for 'Charging Station', separated by commas>"
       amenity/childcare:
-        name: Childcare
-        terms: "<translate with synonyms or related terms for 'Childcare', separated by commas>"
+        name: Nursery/Childcare
+        terms: "<translate with synonyms or related terms for 'Nursery/Childcare', separated by commas>"
       amenity/cinema:
         name: Cinema
         terms: "<translate with synonyms or related terms for 'Cinema', separated by commas>"
@@ -670,8 +670,8 @@ en:
         name: Clock
         terms: "<translate with synonyms or related terms for 'Clock', separated by commas>"
       amenity/college:
-        name: College
-        terms: "<translate with synonyms or related terms for 'College', separated by commas>"
+        name: College Grounds
+        terms: "<translate with synonyms or related terms for 'College Grounds', separated by commas>"
       amenity/compressed_air:
         name: Compressed Air
         terms: "<translate with synonyms or related terms for 'Compressed Air', separated by commas>"
@@ -712,8 +712,8 @@ en:
         name: Hospital Grounds
         terms: "<translate with synonyms or related terms for 'Hospital Grounds', separated by commas>"
       amenity/kindergarten:
-        name: Kindergarten Grounds
-        terms: "<translate with synonyms or related terms for 'Kindergarten Grounds', separated by commas>"
+        name: Preschool/Kindergarten Grounds
+        terms: "<translate with synonyms or related terms for 'Preschool/Kindergarten Grounds', separated by commas>"
       amenity/library:
         name: Library
         terms: "<translate with synonyms or related terms for 'Library', separated by commas>"
@@ -781,8 +781,8 @@ en:
         name: Food Bank
         terms: "<translate with synonyms or related terms for 'Food Bank', separated by commas>"
       amenity/social_facility/group_home:
-        name: Group Home
-        terms: "<translate with synonyms or related terms for 'Group Home', separated by commas>"
+        name: Elderly Group Home
+        terms: "<translate with synonyms or related terms for 'Elderly Group Home', separated by commas>"
       amenity/social_facility/homeless_shelter:
         name: Homeless Shelter
         terms: "<translate with synonyms or related terms for 'Homeless Shelter', separated by commas>"
@@ -808,8 +808,8 @@ en:
         name: Town Hall
         terms: "<translate with synonyms or related terms for 'Town Hall', separated by commas>"
       amenity/university:
-        name: University
-        terms: "<translate with synonyms or related terms for 'University', separated by commas>"
+        name: University Grounds
+        terms: "<translate with synonyms or related terms for 'University Grounds', separated by commas>"
       amenity/vending_machine:
         name: Vending Machine
         terms: "<translate with synonyms or related terms for 'Vending Machine', separated by commas>"
@@ -900,6 +900,9 @@ en:
       building/church:
         name: Church
         terms: "<translate with synonyms or related terms for 'Church', separated by commas>"
+      building/college:
+        name: College Building
+        terms: "<translate with synonyms or related terms for 'College Building', separated by commas>"
       building/commercial:
         name: Commercial Building
         terms: "<translate with synonyms or related terms for 'Commercial Building', separated by commas>"
@@ -939,6 +942,9 @@ en:
       building/industrial:
         name: Industrial Building
         terms: "<translate with synonyms or related terms for 'Industrial Building', separated by commas>"
+      building/kindergarten:
+        name: Preschool/Kindergarten Building
+        terms: "<translate with synonyms or related terms for 'Preschool/Kindergarten Building', separated by commas>"
       building/public:
         name: Public Building
         terms: "<translate with synonyms or related terms for 'Public Building', separated by commas>"
@@ -1489,8 +1495,8 @@ en:
         name: Water Tower
         terms: "<translate with synonyms or related terms for 'Water Tower', separated by commas>"
       man_made/water_well:
-        name: Water well
-        terms: "<translate with synonyms or related terms for 'Water well', separated by commas>"
+        name: Water Well
+        terms: "<translate with synonyms or related terms for 'Water Well', separated by commas>"
       man_made/water_works:
         name: Water Works
         terms: "<translate with synonyms or related terms for 'Water Works', separated by commas>"

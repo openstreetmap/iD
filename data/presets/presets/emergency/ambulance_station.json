@@ -1,6 +1,9 @@
 {
+    "icon": "hospital",
     "fields": [
-        "operator"
+        "operator",
+        "building_area",
+        "address"
     ],
     "geometry": [
         "area",

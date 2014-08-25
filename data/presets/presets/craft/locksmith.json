@@ -1,22 +1,21 @@
 {
-    "name": "Locksmith",
+    "icon": "marker-stroked",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "locksmith",
-        "lock"
+        "lock*"
     ],
     "tags": {
         "craft": "locksmith"
     },
-    "icon": "marker-stroked",
-    "searchable": false,
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Locksmith",
+    "searchable": false
 }

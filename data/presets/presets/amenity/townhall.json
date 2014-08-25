@@ -1,8 +1,8 @@
 {
     "icon": "town-hall",
     "fields": [
-        "building_area",
-        "address"
+        "address",
+        "building_area"
     ],
     "geometry": [
         "point",

@@ -1,6 +1,8 @@
 {
     "icon": "recycling",
     "fields": [
+        "operator",
+        "address",
         "recycling/cans",
         "recycling/glass",
         "recycling/paper",

@@ -2,8 +2,9 @@
     "icon": "post",
     "fields": [
         "operator",
-        "collection_times",
-        "building_area"
+        "address",
+        "building_area",
+        "collection_times"
     ],
     "geometry": [
         "point",

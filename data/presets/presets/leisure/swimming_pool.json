@@ -1,6 +1,8 @@
 {
     "fields": [
-        "access_simple"
+        "access_simple",
+        "operator",
+        "address"
     ],
     "geometry": [
         "point",

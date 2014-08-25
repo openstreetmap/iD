@@ -10,11 +10,12 @@
         "area"
     ],
     "terms": [
-        "academy",
-        "school*"
+        "kindergarten",
+        "kindergarden",
+        "preschool"
     ],
     "tags": {
-        "building": "school"
+        "building": "kindergarten"
     },
-    "name": "School Building"
+    "name": "Preschool/Kindergarten Building"
 }

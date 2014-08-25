@@ -1,8 +1,9 @@
 {
     "icon": "cinema",
     "fields": [
+        "address",
         "building_area",
-        "address"
+        "opening_hours"
     ],
     "geometry": [
         "point",

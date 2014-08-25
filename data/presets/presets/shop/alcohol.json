@@ -10,11 +10,11 @@
         "vertex",
         "area"
     ],
-    "tags": {
-        "shop": "alcohol"
-    },
     "terms": [
         "alcohol"
     ],
+    "tags": {
+        "shop": "alcohol"
+    },
     "name": "Liquor Store"
 }

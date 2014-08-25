@@ -1,5 +1,11 @@
 {
-    "name": "Dressmaker",
+    "icon": "clothing-store",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
@@ -11,11 +17,5 @@
     "tags": {
         "craft": "dressmaker"
     },
-    "icon": "clothing-store",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Dressmaker"
 }

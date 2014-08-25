@@ -2,8 +2,8 @@
     "icon": "fire-station",
     "fields": [
         "operator",
-        "building_area",
-        "address"
+        "address",
+        "building_area"
     ],
     "geometry": [
         "point",

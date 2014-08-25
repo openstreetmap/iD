@@ -1,5 +1,11 @@
 {
-    "name": "Photographer",
+    "icon": "camera",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
@@ -10,11 +16,5 @@
     "tags": {
         "craft": "photographer"
     },
-    "icon": "camera",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Photographer"
 }

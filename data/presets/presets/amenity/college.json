@@ -8,9 +8,12 @@
         "point",
         "area"
     ],
+    "terms": [
+        "college",
+        "university"
+    ],
     "tags": {
         "amenity": "college"
     },
-    "terms": [],
-    "name": "College"
+    "name": "College Grounds"
 }

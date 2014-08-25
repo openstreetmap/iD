@@ -1243,7 +1243,7 @@
             },
             "amenity/arts_centre": {
                 "name": "Arts Center",
-                "terms": "arts,arts centre"
+                "terms": "art*"
             },
             "amenity/atm": {
                 "name": "ATM",
@@ -1306,8 +1306,8 @@
                 "terms": "EV,Electric Vehicle,Supercharger"
             },
             "amenity/childcare": {
-                "name": "Childcare",
-                "terms": "nursery,orphanage,playgroup"
+                "name": "Nursery/Childcare",
+                "terms": "daycare,nursery,orphanage,playgroup"
             },
             "amenity/cinema": {
                 "name": "Cinema",
@@ -1322,8 +1322,8 @@
                 "terms": ""
             },
             "amenity/college": {
-                "name": "College",
-                "terms": ""
+                "name": "College Grounds",
+                "terms": "college,university"
             },
             "amenity/compressed_air": {
                 "name": "Compressed Air",
@@ -1335,11 +1335,11 @@
             },
             "amenity/dentist": {
                 "name": "Dentist",
-                "terms": "dentist,dentist's office"
+                "terms": "dentist*,tooth,teeth"
             },
             "amenity/doctor": {
                 "name": "Doctor",
-                "terms": "doctor,doctor's office"
+                "terms": "doctor*,medic*"
             },
             "amenity/dojo": {
                 "name": "Dojo / Martial Arts Academy",
@@ -1378,8 +1378,8 @@
                 "terms": "clinic,emergency room,health service,hospice,infirmary,institution,nursing home,rest home,sanatorium,sanitarium,sick bay,surgery,ward"
             },
             "amenity/kindergarten": {
-                "name": "Kindergarten Grounds",
-                "terms": "nursery,preschool"
+                "name": "Preschool/Kindergarten Grounds",
+                "terms": "kindergarten,kindergarden,preschool"
             },
             "amenity/library": {
                 "name": "Library",
@@ -1403,7 +1403,7 @@
             },
             "amenity/pharmacy": {
                 "name": "Pharmacy",
-                "terms": ""
+                "terms": "drug,medicine"
             },
             "amenity/place_of_worship": {
                 "name": "Place of Worship",
@@ -1455,7 +1455,7 @@
             },
             "amenity/school": {
                 "name": "School Grounds",
-                "terms": "academy,alma mater,blackboard,college,department,discipline,establishment,faculty,hall,halls of ivy,institute,institution,jail*,schoolhouse,seminary,university"
+                "terms": "academy,school*"
             },
             "amenity/shelter": {
                 "name": "Shelter",
@@ -1470,7 +1470,7 @@
                 "terms": ""
             },
             "amenity/social_facility/group_home": {
-                "name": "Group Home",
+                "name": "Elderly Group Home",
                 "terms": "elderly,old,senior living"
             },
             "amenity/social_facility/homeless_shelter": {
@@ -1506,8 +1506,8 @@
                 "terms": "village hall,city government,courthouse,municipal building,municipal center,municipal centre"
             },
             "amenity/university": {
-                "name": "University",
-                "terms": "college"
+                "name": "University Grounds",
+                "terms": "college,university"
             },
             "amenity/vending_machine": {
                 "name": "Vending Machine",
@@ -1629,6 +1629,10 @@
                 "name": "Church",
                 "terms": ""
             },
+            "building/college": {
+                "name": "College Building",
+                "terms": "college,university"
+            },
             "building/commercial": {
                 "name": "Commercial Building",
                 "terms": ""
@@ -1681,6 +1685,10 @@
                 "name": "Industrial Building",
                 "terms": ""
             },
+            "building/kindergarten": {
+                "name": "Preschool/Kindergarten Building",
+                "terms": "kindergarten,kindergarden,preschool"
+            },
             "building/public": {
                 "name": "Public Building",
                 "terms": ""
@@ -1699,7 +1707,7 @@
             },
             "building/school": {
                 "name": "School Building",
-                "terms": ""
+                "terms": "academy,school*"
             },
             "building/shed": {
                 "name": "Shed",
@@ -1723,7 +1731,7 @@
             },
             "building/university": {
                 "name": "University Building",
-                "terms": ""
+                "terms": "college,university"
             },
             "building/warehouse": {
                 "name": "Warehouse",
@@ -1731,11 +1739,11 @@
             },
             "craft/basket_maker": {
                 "name": "Basket Maker",
-                "terms": "basket,basketry,basket maker,basket weaver"
+                "terms": "basket*"
             },
             "craft/beekeeper": {
                 "name": "Beekeeper",
-                "terms": "bees,beekeeper,bee box"
+                "terms": "bee*"
             },
             "craft/blacksmith": {
                 "name": "Blacksmith",
@@ -1763,11 +1771,11 @@
             },
             "craft/caterer": {
                 "name": "Caterer",
-                "terms": "Caterer,Catering"
+                "terms": "cater*"
             },
             "craft/clockmaker": {
                 "name": "Clockmaker",
-                "terms": "clock,clockmaker,clock repair"
+                "terms": "clock*"
             },
             "craft/confectionary": {
                 "name": "Confectionary",
@@ -1795,11 +1803,11 @@
             },
             "craft/hvac": {
                 "name": "HVAC",
-                "terms": "heating,ventilating,air-conditioning,air conditioning"
+                "terms": "heat*,vent*,air-conditioning,air conditioning"
             },
             "craft/insulator": {
                 "name": "Insulator",
-                "terms": "insulation,insulator"
+                "terms": "insulat*"
             },
             "craft/jeweler": {
                 "name": "Jeweler",
@@ -1807,11 +1815,11 @@
             },
             "craft/key_cutter": {
                 "name": "Key Cutter",
-                "terms": "key,key cutter"
+                "terms": "key*"
             },
             "craft/locksmith": {
                 "name": "Locksmith",
-                "terms": "locksmith,lock"
+                "terms": "lock*"
             },
             "craft/metal_construction": {
                 "name": "Metal Construction",
@@ -1831,7 +1839,7 @@
             },
             "craft/photographic_laboratory": {
                 "name": "Photographic Laboratory",
-                "terms": "photographic laboratory,film developer"
+                "terms": "photo*,film"
             },
             "craft/plasterer": {
                 "name": "Plasterer",
@@ -1843,7 +1851,7 @@
             },
             "craft/pottery": {
                 "name": "Pottery",
-                "terms": "pottery,potter"
+                "terms": "potter*,ceramic*"
             },
             "craft/rigger": {
                 "name": "Rigger",
@@ -1855,11 +1863,11 @@
             },
             "craft/saddler": {
                 "name": "Saddler",
-                "terms": "saddler"
+                "terms": "saddle*"
             },
             "craft/sailmaker": {
                 "name": "Sailmaker",
-                "terms": "sailmaker"
+                "terms": "sail*"
             },
             "craft/sawmill": {
                 "name": "Sawmill",
@@ -1883,7 +1891,7 @@
             },
             "craft/sweep": {
                 "name": "Chimney Sweep",
-                "terms": "sweep,chimney sweep"
+                "terms": "sweep,chimney"
             },
             "craft/tailor": {
                 "name": "Tailor",
@@ -1903,11 +1911,11 @@
             },
             "craft/watchmaker": {
                 "name": "Watchmaker",
-                "terms": "watch,watchmaker,watch repair"
+                "terms": "watch*"
             },
             "craft/window_construction": {
                 "name": "Window Construction",
-                "terms": "window,window maker,window construction"
+                "terms": "window*"
             },
             "embankment": {
                 "name": "Embankment",
@@ -2407,14 +2415,14 @@
             },
             "man_made/wastewater_plant": {
                 "name": "Wastewater Plant",
-                "terms": "sewage works,sewage treatment plant,water treatment plant,reclamation plant"
+                "terms": "sewage*,water treatment plant,reclamation plant"
             },
             "man_made/water_tower": {
                 "name": "Water Tower",
                 "terms": ""
             },
             "man_made/water_well": {
-                "name": "Water well",
+                "name": "Water Well",
                 "terms": ""
             },
             "man_made/water_works": {
@@ -2543,7 +2551,7 @@
             },
             "office/employment_agency": {
                 "name": "Employment Agency",
-                "terms": ""
+                "terms": "job"
             },
             "office/estate_agent": {
                 "name": "Real Estate Office",
@@ -2763,7 +2771,7 @@
             },
             "shop/art": {
                 "name": "Art Shop",
-                "terms": "art store,art gallery"
+                "terms": "art*"
             },
             "shop/bakery": {
                 "name": "Bakery",
@@ -2907,7 +2915,7 @@
             },
             "shop/locksmith": {
                 "name": "Locksmith",
-                "terms": "keys"
+                "terms": "key*,lock*"
             },
             "shop/lottery": {
                 "name": "Lottery Shop",

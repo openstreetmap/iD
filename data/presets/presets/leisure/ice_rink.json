@@ -1,9 +1,12 @@
 {
     "icon": "pitch",
     "fields": [
-        "building_area",
         "seasonal",
-        "sport_ice"
+        "sport_ice",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
     ],
     "geometry": [
         "point",

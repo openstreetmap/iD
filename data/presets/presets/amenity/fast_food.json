@@ -2,8 +2,9 @@
     "icon": "fast-food",
     "fields": [
         "cuisine",
-        "building_area",
+        "operator",
         "address",
+        "building_area",
         "opening_hours",
         "smoking"
     ],

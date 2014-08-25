@@ -1,21 +1,21 @@
 {
-    "name": "Chimney Sweep",
+    "icon": "marker-stroked",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
         "sweep",
-        "chimney sweep"
+        "chimney"
     ],
     "tags": {
         "craft": "sweep"
     },
-    "icon": "marker-stroked",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Chimney Sweep"
 }

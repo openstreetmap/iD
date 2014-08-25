@@ -11,8 +11,7 @@
         "area"
     ],
     "terms": [
-        "art store",
-        "art gallery"
+        "art*"
     ],
     "tags": {
         "shop": "art"

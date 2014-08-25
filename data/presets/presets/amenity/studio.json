@@ -1,5 +1,10 @@
 {
-    "name": "Studio",
+    "icon": "music",
+    "fields": [
+        "studio_type",
+        "address",
+        "building_area"
+    ],
     "geometry": [
         "point",
         "area"
@@ -15,10 +20,5 @@
     "tags": {
         "amenity": "studio"
     },
-    "icon": "music",
-    "fields": [
-        "building_area",
-        "studio_type",
-        "address"
-    ]
+    "name": "Studio"
 }

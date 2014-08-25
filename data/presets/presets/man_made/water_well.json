@@ -1,4 +1,7 @@
 {
+    "fields": [
+        "operator"
+    ],
     "geometry": [
         "point",
         "area"
@@ -6,5 +9,5 @@
     "tags": {
         "man_made": "water_well"
     },
-    "name": "Water well"
+    "name": "Water Well"
 }

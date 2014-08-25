@@ -1,8 +1,8 @@
 {
     "icon": "bar",
     "fields": [
-        "building_area",
         "address",
+        "building_area",
         "opening_hours",
         "smoking"
     ],

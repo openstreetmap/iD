@@ -1,20 +1,21 @@
 {
-    "name": "Dentist",
+    "icon": "hospital",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "dentist",
-        "dentist's office"
+        "dentist*",
+        "tooth",
+        "teeth"
     ],
     "tags": {
         "amenity": "dentist"
     },
-    "icon": "hospital",
-    "fields": [
-        "building_area",
-        "address",
-        "opening_hours"
-    ]
+    "name": "Dentist"
 }

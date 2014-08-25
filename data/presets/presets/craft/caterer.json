@@ -1,22 +1,21 @@
 {
-    "name": "Caterer",
+    "icon": "bakery",
+    "fields": [
+        "cuisine",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "Caterer",
-        "Catering"
+        "cater*"
     ],
     "tags": {
         "craft": "caterer"
     },
-    "icon": "bakery",
-    "fields": [
-        "cuisine",
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Caterer"
 }

@@ -10,11 +10,11 @@
         "area"
     ],
     "terms": [
-        "academy",
-        "school*"
+        "college",
+        "university"
     ],
     "tags": {
-        "building": "school"
+        "building": "college"
     },
-    "name": "School Building"
+    "name": "College Building"
 }

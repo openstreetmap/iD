@@ -1,5 +1,12 @@
 {
-    "name": "Group Home",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "wheelchair",
+        "social_facility_for"
+    ],
     "geometry": [
         "point",
         "area"
@@ -14,12 +21,5 @@
         "social_facility": "group_home",
         "social_facility_for": "senior"
     },
-    "fields": [
-        "social_facility_for",
-        "address",
-        "phone",
-        "opening_hours",
-        "wheelchair",
-        "operator"
-    ]
+    "name": "Elderly Group Home"
 }
