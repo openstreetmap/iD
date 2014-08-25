@@ -584,7 +584,7 @@ en:
       delete: "The menu around the point contains operations that can be performed on it, including delete. **Delete the point.**"
     areas:
       title: "Areas"
-      add: "Areas are a more detailed way to represent features. They provide information on the boundaries of the feature. Areas can be used for most feature types points can be used for, and are often preferred. **Click the Area button to add a new area.**"
+      add: "Areas are used to show the boundaries of features like lakes, buildings, and residential areas. They can be also be used for more detailed mapping of many features you might normally map as points. **Click the Area button to add a new area.**"
       corner: "Areas are drawn by placing nodes that mark the boundary of the area. **Place the starting node on one of the corners of the playground.**"
       place: "Draw the area by placing more nodes. Finish the area by clicking on the starting node. **Draw an area for the playground.**"
       search: "**Search for '{name}'.**"
