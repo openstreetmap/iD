@@ -1,6 +1,9 @@
 {
+    "icon": "swimming",
     "fields": [
-        "access_simple"
+        "access_simple",
+        "operator",
+        "address"
     ],
     "geometry": [
         "point",
@@ -10,6 +13,5 @@
     "tags": {
         "leisure": "swimming_pool"
     },
-    "icon": "swimming",
     "name": "Swimming Pool"
 }

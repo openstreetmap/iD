@@ -1,20 +1,21 @@
 {
-    "name": "Electrician",
+    "icon": "marker-stroked",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "electrician"
+        "power",
+        "wire"
     ],
     "tags": {
         "craft": "electrician"
     },
-    "icon": "marker-stroked",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Electrician"
 }

@@ -10,7 +10,9 @@
         "vertex",
         "area"
     ],
-    "terms": [],
+    "terms": [
+        "camp"
+    ],
     "tags": {
         "tourism": "picnic_site"
     },

@@ -12,6 +12,8 @@
     "tags": {
         "leisure": "pitch"
     },
-    "terms": [],
+    "terms": [
+        "field"
+    ],
     "name": "Sport Pitch"
 }

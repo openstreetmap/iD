@@ -1,22 +1,17 @@
 {
-    "name": "Beekeeper",
+    "icon": "farm",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
-    "terms": [
-        "bees",
-        "beekeeper",
-        "bee box"
-    ],
     "tags": {
         "craft": "beekeeper"
     },
-    "icon": "farm",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Beekeeper"
 }

@@ -1,0 +1,19 @@
+{
+    "icon": "building",
+    "fields": [
+        "address",
+        "levels"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "kindergarden",
+        "pre-school"
+    ],
+    "tags": {
+        "building": "kindergarten"
+    },
+    "name": "Preschool/Kindergarten Building"
+}

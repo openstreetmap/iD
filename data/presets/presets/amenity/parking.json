@@ -1,6 +1,7 @@
 {
     "icon": "parking",
     "fields": [
+        "operator",
         "parking",
         "capacity",
         "fee",

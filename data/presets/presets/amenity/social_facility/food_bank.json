@@ -1,5 +1,11 @@
 {
-    "name": "Food Bank",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "social_facility_for"
+    ],
     "geometry": [
         "point",
         "area"
@@ -10,12 +16,5 @@
         "amenity": "social_facility",
         "social_facility": "food_bank"
     },
-    "fields": [
-        "social_facility_for",
-        "address",
-        "phone",
-        "opening_hours",
-        "wheelchair",
-        "operator"
-    ]
+    "name": "Food Bank"
 }

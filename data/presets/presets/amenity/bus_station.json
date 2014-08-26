@@ -1,4 +1,7 @@
 {
+    "fields": [
+        "operator"
+    ],
     "geometry": [
         "point",
         "area"
@@ -6,8 +9,5 @@
     "tags": {
         "amenity": "bus_station"
     },
-    "fields": [
-        "operator"
-    ],
     "name": "Bus Station"
 }

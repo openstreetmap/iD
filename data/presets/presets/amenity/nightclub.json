@@ -1,14 +1,14 @@
 {
     "icon": "bar",
     "fields": [
-        "building_area",
+        "operator",
         "address",
+        "building_area",
         "opening_hours",
         "smoking"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

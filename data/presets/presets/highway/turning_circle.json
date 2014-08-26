@@ -6,6 +6,8 @@
     "tags": {
         "highway": "turning_circle"
     },
-    "terms": [],
+    "terms": [
+        "cul-de-sac"
+    ],
     "name": "Turning Circle"
 }

@@ -1,19 +1,24 @@
 {
     "icon": "bar",
     "fields": [
-        "building_area",
+        "operator",
         "address",
+        "building_area",
         "opening_hours",
         "smoking"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
+    ],
+    "terms": [
+        "dive",
+        "beer",
+        "bier",
+        "booze"
     ],
     "tags": {
         "amenity": "bar"
     },
-    "terms": [],
     "name": "Bar"
 }

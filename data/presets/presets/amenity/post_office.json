@@ -2,14 +2,17 @@
     "icon": "post",
     "fields": [
         "operator",
-        "collection_times",
+        "address",
         "building_area",
-        "address"
+        "collection_times"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
+    ],
+    "terms": [
+        "letter",
+        "mail"
     ],
     "tags": {
         "amenity": "post_office"

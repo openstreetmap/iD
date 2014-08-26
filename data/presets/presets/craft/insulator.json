@@ -1,22 +1,17 @@
 {
-    "name": "Insulator",
+    "icon": "marker-stroked",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
-    "terms": [
-        "insulation",
-        "insulator"
-        
-    ],
     "tags": {
         "craft": "insulation"
     },
-    "icon": "marker-stroked",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Insulator"
 }

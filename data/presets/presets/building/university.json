@@ -6,8 +6,10 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
+    ],
+    "terms": [
+        "college"
     ],
     "tags": {
         "building": "university"

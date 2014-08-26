@@ -157,6 +157,8 @@ en:
         label: Country
       covered:
         label: Covered
+      craft:
+        label: Type
       crop:
         label: Crop
       crossing:
@@ -658,8 +660,8 @@ en:
         name: Charging Station
         terms: "<translate with synonyms or related terms for 'Charging Station', separated by commas>"
       amenity/childcare:
-        name: Childcare
-        terms: "<translate with synonyms or related terms for 'Childcare', separated by commas>"
+        name: Nursery/Childcare
+        terms: "<translate with synonyms or related terms for 'Nursery/Childcare', separated by commas>"
       amenity/cinema:
         name: Cinema
         terms: "<translate with synonyms or related terms for 'Cinema', separated by commas>"
@@ -670,8 +672,8 @@ en:
         name: Clock
         terms: "<translate with synonyms or related terms for 'Clock', separated by commas>"
       amenity/college:
-        name: College
-        terms: "<translate with synonyms or related terms for 'College', separated by commas>"
+        name: College Grounds
+        terms: "<translate with synonyms or related terms for 'College Grounds', separated by commas>"
       amenity/compressed_air:
         name: Compressed Air
         terms: "<translate with synonyms or related terms for 'Compressed Air', separated by commas>"
@@ -712,8 +714,8 @@ en:
         name: Hospital Grounds
         terms: "<translate with synonyms or related terms for 'Hospital Grounds', separated by commas>"
       amenity/kindergarten:
-        name: Kindergarten Grounds
-        terms: "<translate with synonyms or related terms for 'Kindergarten Grounds', separated by commas>"
+        name: Preschool/Kindergarten Grounds
+        terms: "<translate with synonyms or related terms for 'Preschool/Kindergarten Grounds', separated by commas>"
       amenity/library:
         name: Library
         terms: "<translate with synonyms or related terms for 'Library', separated by commas>"
@@ -781,8 +783,8 @@ en:
         name: Food Bank
         terms: "<translate with synonyms or related terms for 'Food Bank', separated by commas>"
       amenity/social_facility/group_home:
-        name: Group Home
-        terms: "<translate with synonyms or related terms for 'Group Home', separated by commas>"
+        name: Elderly Group Home
+        terms: "<translate with synonyms or related terms for 'Elderly Group Home', separated by commas>"
       amenity/social_facility/homeless_shelter:
         name: Homeless Shelter
         terms: "<translate with synonyms or related terms for 'Homeless Shelter', separated by commas>"
@@ -808,8 +810,8 @@ en:
         name: Town Hall
         terms: "<translate with synonyms or related terms for 'Town Hall', separated by commas>"
       amenity/university:
-        name: University
-        terms: "<translate with synonyms or related terms for 'University', separated by commas>"
+        name: University Grounds
+        terms: "<translate with synonyms or related terms for 'University Grounds', separated by commas>"
       amenity/vending_machine:
         name: Vending Machine
         terms: "<translate with synonyms or related terms for 'Vending Machine', separated by commas>"
@@ -900,6 +902,9 @@ en:
       building/church:
         name: Church
         terms: "<translate with synonyms or related terms for 'Church', separated by commas>"
+      building/college:
+        name: College Building
+        terms: "<translate with synonyms or related terms for 'College Building', separated by commas>"
       building/commercial:
         name: Commercial Building
         terms: "<translate with synonyms or related terms for 'Commercial Building', separated by commas>"
@@ -939,6 +944,9 @@ en:
       building/industrial:
         name: Industrial Building
         terms: "<translate with synonyms or related terms for 'Industrial Building', separated by commas>"
+      building/kindergarten:
+        name: Preschool/Kindergarten Building
+        terms: "<translate with synonyms or related terms for 'Preschool/Kindergarten Building', separated by commas>"
       building/public:
         name: Public Building
         terms: "<translate with synonyms or related terms for 'Public Building', separated by commas>"
@@ -975,6 +983,9 @@ en:
       building/warehouse:
         name: Warehouse
         terms: "<translate with synonyms or related terms for 'Warehouse', separated by commas>"
+      craft:
+        name: Craft
+        terms: "<translate with synonyms or related terms for 'Craft', separated by commas>"
       craft/basket_maker:
         name: Basket Maker
         terms: "<translate with synonyms or related terms for 'Basket Maker', separated by commas>"
@@ -1110,6 +1121,9 @@ en:
       craft/window_construction:
         name: Window Construction
         terms: "<translate with synonyms or related terms for 'Window Construction', separated by commas>"
+      craft/winery:
+        name: Winery
+        terms: "<translate with synonyms or related terms for 'Winery', separated by commas>"
       embankment:
         name: Embankment
         terms: "<translate with synonyms or related terms for 'Embankment', separated by commas>"
@@ -1489,8 +1503,8 @@ en:
         name: Water Tower
         terms: "<translate with synonyms or related terms for 'Water Tower', separated by commas>"
       man_made/water_well:
-        name: Water well
-        terms: "<translate with synonyms or related terms for 'Water well', separated by commas>"
+        name: Water Well
+        terms: "<translate with synonyms or related terms for 'Water Well', separated by commas>"
       man_made/water_works:
         name: Water Works
         terms: "<translate with synonyms or related terms for 'Water Works', separated by commas>"
@@ -1749,15 +1763,33 @@ en:
       shop/alcohol:
         name: Liquor Store
         terms: "<translate with synonyms or related terms for 'Liquor Store', separated by commas>"
+      shop/anime:
+        name: Anime Shop
+        terms: "<translate with synonyms or related terms for 'Anime Shop', separated by commas>"
+      shop/antiques:
+        name: Antiques Shop
+        terms: "<translate with synonyms or related terms for 'Antiques Shop', separated by commas>"
       shop/art:
-        name: Art Shop
-        terms: "<translate with synonyms or related terms for 'Art Shop', separated by commas>"
+        name: Art Gallery
+        terms: "<translate with synonyms or related terms for 'Art Gallery', separated by commas>"
+      shop/baby_goods:
+        name: Baby Goods Store
+        terms: "<translate with synonyms or related terms for 'Baby Goods Store', separated by commas>"
+      shop/bag:
+        name: Bag/Luggage Store
+        terms: "<translate with synonyms or related terms for 'Bag/Luggage Store', separated by commas>"
       shop/bakery:
         name: Bakery
         terms: "<translate with synonyms or related terms for 'Bakery', separated by commas>"
+      shop/bathroom_furnishing:
+        name: Bathroom Furnishing Store
+        terms: "<translate with synonyms or related terms for 'Bathroom Furnishing Store', separated by commas>"
       shop/beauty:
         name: Beauty Shop
         terms: "<translate with synonyms or related terms for 'Beauty Shop', separated by commas>"
+      shop/bed:
+        name: Bedding/Mattress Store
+        terms: "<translate with synonyms or related terms for 'Bedding/Mattress Store', separated by commas>"
       shop/beverages:
         name: Beverage Store
         terms: "<translate with synonyms or related terms for 'Beverage Store', separated by commas>"
@@ -1768,14 +1800,17 @@ en:
         name: Bookmaker
         terms: "<translate with synonyms or related terms for 'Bookmaker', separated by commas>"
       shop/books:
-        name: Bookstore
-        terms: "<translate with synonyms or related terms for 'Bookstore', separated by commas>"
+        name: Book Store
+        terms: "<translate with synonyms or related terms for 'Book Store', separated by commas>"
       shop/boutique:
         name: Boutique
         terms: "<translate with synonyms or related terms for 'Boutique', separated by commas>"
       shop/butcher:
         name: Butcher
         terms: "<translate with synonyms or related terms for 'Butcher', separated by commas>"
+      shop/candles:
+        name: Candle Shop
+        terms: "<translate with synonyms or related terms for 'Candle Shop', separated by commas>"
       shop/car:
         name: Car Dealership
         terms: "<translate with synonyms or related terms for 'Car Dealership', separated by commas>"
@@ -1785,9 +1820,18 @@ en:
       shop/car_repair:
         name: Car Repair Shop
         terms: "<translate with synonyms or related terms for 'Car Repair Shop', separated by commas>"
+      shop/carpet:
+        name: Carpet Store
+        terms: "<translate with synonyms or related terms for 'Carpet Store', separated by commas>"
+      shop/cheese:
+        name: Cheese Store
+        terms: "<translate with synonyms or related terms for 'Cheese Store', separated by commas>"
       shop/chemist:
         name: Chemist
         terms: "<translate with synonyms or related terms for 'Chemist', separated by commas>"
+      shop/chocolate:
+        name: Chocolate Store
+        terms: "<translate with synonyms or related terms for 'Chocolate Store', separated by commas>"
       shop/clothes:
         name: Clothing Store
         terms: "<translate with synonyms or related terms for 'Clothing Store', separated by commas>"
@@ -1795,11 +1839,26 @@ en:
         name: Computer Store
         terms: "<translate with synonyms or related terms for 'Computer Store', separated by commas>"
       shop/confectionery:
-        name: Confectionery
-        terms: "<translate with synonyms or related terms for 'Confectionery', separated by commas>"
+        name: Candy Store
+        terms: "<translate with synonyms or related terms for 'Candy Store', separated by commas>"
       shop/convenience:
         name: Convenience Store
         terms: "<translate with synonyms or related terms for 'Convenience Store', separated by commas>"
+      shop/copyshop:
+        name: Copy Store
+        terms: "<translate with synonyms or related terms for 'Copy Store', separated by commas>"
+      shop/cosmetics:
+        name: Cosmetics Store
+        terms: "<translate with synonyms or related terms for 'Cosmetics Store', separated by commas>"
+      shop/craft:
+        name: Arts and Crafts Store
+        terms: "<translate with synonyms or related terms for 'Arts and Crafts Store', separated by commas>"
+      shop/curtain:
+        name: Curtain Store
+        terms: "<translate with synonyms or related terms for 'Curtain Store', separated by commas>"
+      shop/dairy:
+        name: Dairy Store
+        terms: "<translate with synonyms or related terms for 'Dairy Store', separated by commas>"
       shop/deli:
         name: Deli
         terms: "<translate with synonyms or related terms for 'Deli', separated by commas>"
@@ -1810,23 +1869,38 @@ en:
         name: DIY Store
         terms: "<translate with synonyms or related terms for 'DIY Store', separated by commas>"
       shop/dry_cleaning:
-        name: Dry Cleaners
-        terms: "<translate with synonyms or related terms for 'Dry Cleaners', separated by commas>"
+        name: Dry Cleaner
+        terms: "<translate with synonyms or related terms for 'Dry Cleaner', separated by commas>"
       shop/electronics:
         name: Electronics Store
         terms: "<translate with synonyms or related terms for 'Electronics Store', separated by commas>"
+      shop/erotic:
+        name: Erotic Store
+        terms: "<translate with synonyms or related terms for 'Erotic Store', separated by commas>"
+      shop/fabric:
+        name: Fabric Store
+        terms: "<translate with synonyms or related terms for 'Fabric Store', separated by commas>"
       shop/farm:
         name: Produce Stand
         terms: "<translate with synonyms or related terms for 'Produce Stand', separated by commas>"
+      shop/fashion:
+        name: Fashion Store
+        terms: "<translate with synonyms or related terms for 'Fashion Store', separated by commas>"
       shop/fishmonger:
         name: Fishmonger
         terms: "<translate with synonyms or related terms for 'Fishmonger', separated by commas>"
       shop/florist:
         name: Florist
         terms: "<translate with synonyms or related terms for 'Florist', separated by commas>"
+      shop/frame:
+        name: Framing Shop
+        terms: "<translate with synonyms or related terms for 'Framing Shop', separated by commas>"
       shop/funeral_directors:
         name: Funeral Home
         terms: "<translate with synonyms or related terms for 'Funeral Home', separated by commas>"
+      shop/furnace:
+        name: Furnace Store
+        terms: "<translate with synonyms or related terms for 'Furnace Store', separated by commas>"
       shop/furniture:
         name: Furniture Store
         terms: "<translate with synonyms or related terms for 'Furniture Store', separated by commas>"
@@ -1845,18 +1919,33 @@ en:
       shop/hardware:
         name: Hardware Store
         terms: "<translate with synonyms or related terms for 'Hardware Store', separated by commas>"
+      shop/hearing_aids:
+        name: Hearing Aids Store
+        terms: "<translate with synonyms or related terms for 'Hearing Aids Store', separated by commas>"
+      shop/herbalist:
+        name: Herbalist
+        terms: "<translate with synonyms or related terms for 'Herbalist', separated by commas>"
       shop/hifi:
         name: Hifi Store
         terms: "<translate with synonyms or related terms for 'Hifi Store', separated by commas>"
+      shop/interior_decoration:
+        name: Interior Decoration Store
+        terms: "<translate with synonyms or related terms for 'Interior Decoration Store', separated by commas>"
       shop/jewelry:
         name: Jeweler
         terms: "<translate with synonyms or related terms for 'Jeweler', separated by commas>"
       shop/kiosk:
-        name: Kiosk
-        terms: "<translate with synonyms or related terms for 'Kiosk', separated by commas>"
+        name: News Kiosk
+        terms: "<translate with synonyms or related terms for 'News Kiosk', separated by commas>"
+      shop/kitchen:
+        name: Kitchen Design Store
+        terms: "<translate with synonyms or related terms for 'Kitchen Design Store', separated by commas>"
       shop/laundry:
         name: Laundry
         terms: "<translate with synonyms or related terms for 'Laundry', separated by commas>"
+      shop/leather:
+        name: Leather Store
+        terms: "<translate with synonyms or related terms for 'Leather Store', separated by commas>"
       shop/locksmith:
         name: Locksmith
         terms: "<translate with synonyms or related terms for 'Locksmith', separated by commas>"
@@ -1866,33 +1955,69 @@ en:
       shop/mall:
         name: Mall
         terms: "<translate with synonyms or related terms for 'Mall', separated by commas>"
+      shop/massage:
+        name: Massage Shop
+        terms: "<translate with synonyms or related terms for 'Massage Shop', separated by commas>"
+      shop/medical_supply:
+        name: Medical Supply Store
+        terms: "<translate with synonyms or related terms for 'Medical Supply Store', separated by commas>"
       shop/mobile_phone:
         name: Mobile Phone Store
         terms: "<translate with synonyms or related terms for 'Mobile Phone Store', separated by commas>"
+      shop/money_lender:
+        name: Money Lender
+        terms: "<translate with synonyms or related terms for 'Money Lender', separated by commas>"
       shop/motorcycle:
         name: Motorcycle Dealership
         terms: "<translate with synonyms or related terms for 'Motorcycle Dealership', separated by commas>"
       shop/music:
         name: Music Store
         terms: "<translate with synonyms or related terms for 'Music Store', separated by commas>"
+      shop/musical_instrument:
+        name: Musical Instrument Store
+        terms: "<translate with synonyms or related terms for 'Musical Instrument Store', separated by commas>"
       shop/newsagent:
-        name: Newsagent
-        terms: "<translate with synonyms or related terms for 'Newsagent', separated by commas>"
+        name: Newspaper/Magazine Shop
+        terms: "<translate with synonyms or related terms for 'Newspaper/Magazine Shop', separated by commas>"
       shop/optician:
         name: Optician
         terms: "<translate with synonyms or related terms for 'Optician', separated by commas>"
+      shop/organic:
+        name: Organic Goods Store
+        terms: "<translate with synonyms or related terms for 'Organic Goods Store', separated by commas>"
       shop/outdoor:
-        name: Outdoor Store
-        terms: "<translate with synonyms or related terms for 'Outdoor Store', separated by commas>"
+        name: Outdoors Store
+        terms: "<translate with synonyms or related terms for 'Outdoors Store', separated by commas>"
+      shop/paint:
+        name: Paint Store
+        terms: "<translate with synonyms or related terms for 'Paint Store', separated by commas>"
+      shop/pawnbroker:
+        name: Pawn Shop
+        terms: "<translate with synonyms or related terms for 'Pawn Shop', separated by commas>"
       shop/pet:
         name: Pet Store
         terms: "<translate with synonyms or related terms for 'Pet Store', separated by commas>"
       shop/photo:
         name: Photography Store
         terms: "<translate with synonyms or related terms for 'Photography Store', separated by commas>"
+      shop/pyrotechnics:
+        name: Fireworks Store
+        terms: "<translate with synonyms or related terms for 'Fireworks Store', separated by commas>"
+      shop/radiotechnics:
+        name: Radio/Electronic Component Store
+        terms: "<translate with synonyms or related terms for 'Radio/Electronic Component Store', separated by commas>"
+      shop/religion:
+        name: Religious Store
+        terms: "<translate with synonyms or related terms for 'Religious Store', separated by commas>"
+      shop/scuba_diving:
+        name: Scuba Diving Shop
+        terms: "<translate with synonyms or related terms for 'Scuba Diving Shop', separated by commas>"
       shop/seafood:
         name: Seafood Shop
         terms: "<translate with synonyms or related terms for 'Seafood Shop', separated by commas>"
+      shop/second_hand:
+        name: Consignment/Thrift Store
+        terms: "<translate with synonyms or related terms for 'Consignment/Thrift Store', separated by commas>"
       shop/shoes:
         name: Shoe Store
         terms: "<translate with synonyms or related terms for 'Shoe Store', separated by commas>"
@@ -1908,6 +2033,18 @@ en:
       shop/tailor:
         name: Tailor
         terms: "<translate with synonyms or related terms for 'Tailor', separated by commas>"
+      shop/tattoo:
+        name: Tattoo Parlor
+        terms: "<translate with synonyms or related terms for 'Tattoo Parlor', separated by commas>"
+      shop/tea:
+        name: Tea Store
+        terms: "<translate with synonyms or related terms for 'Tea Store', separated by commas>"
+      shop/ticket:
+        name: Ticket Seller
+        terms: "<translate with synonyms or related terms for 'Ticket Seller', separated by commas>"
+      shop/tobacco:
+        name: Tobacco Shop
+        terms: "<translate with synonyms or related terms for 'Tobacco Shop', separated by commas>"
       shop/toys:
         name: Toy Store
         terms: "<translate with synonyms or related terms for 'Toy Store', separated by commas>"
@@ -1920,12 +2057,27 @@ en:
       shop/vacant:
         name: Vacant Shop
         terms: "<translate with synonyms or related terms for 'Vacant Shop', separated by commas>"
+      shop/vacuum_cleaner:
+        name: Vacuum Cleaner Store
+        terms: "<translate with synonyms or related terms for 'Vacuum Cleaner Store', separated by commas>"
       shop/variety_store:
         name: Variety Store
         terms: "<translate with synonyms or related terms for 'Variety Store', separated by commas>"
       shop/video:
         name: Video Store
         terms: "<translate with synonyms or related terms for 'Video Store', separated by commas>"
+      shop/video_games:
+        name: Video Game Store
+        terms: "<translate with synonyms or related terms for 'Video Game Store', separated by commas>"
+      shop/water_sports:
+        name: Watersport/Swim Shop
+        terms: "<translate with synonyms or related terms for 'Watersport/Swim Shop', separated by commas>"
+      shop/weapons:
+        name: Weapon Shop
+        terms: "<translate with synonyms or related terms for 'Weapon Shop', separated by commas>"
+      shop/window_blind:
+        name: Window Blind Store
+        terms: "<translate with synonyms or related terms for 'Window Blind Store', separated by commas>"
       shop/wine:
         name: Wine Shop
         terms: "<translate with synonyms or related terms for 'Wine Shop', separated by commas>"

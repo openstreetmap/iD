@@ -1,9 +1,9 @@
 {
     "fields": [
-        "building_area",
-        "opening_hours",
         "operator",
-        "phone"
+        "address",
+        "building_area",
+        "opening_hours"
     ],
     "geometry": [
         "point",

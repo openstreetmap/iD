@@ -1,20 +1,17 @@
 {
-    "name": "Tinsmith",
+    "icon": "marker-stroked",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
-    "terms": [
-        "tinsmith"
-    ],
     "tags": {
         "craft": "tinsmith"
     },
-    "icon": "marker-stroked",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Tinsmith"
 }

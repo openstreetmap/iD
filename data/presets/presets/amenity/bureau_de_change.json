@@ -7,12 +7,12 @@
         "point",
         "vertex"
     ],
-    "tags": {
-        "amenity": "bureau_de_change"
-    },
-    "name": "Currency Exchange",
     "terms": [
         "bureau de change",
         "money changer"
-    ]
+    ],
+    "tags": {
+        "amenity": "bureau_de_change"
+    },
+    "name": "Currency Exchange"
 }

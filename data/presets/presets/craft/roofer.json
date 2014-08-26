@@ -1,20 +1,17 @@
 {
-    "name": "Roofer",
+    "icon": "marker-stroked",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
-    "terms": [
-        "roofer"
-    ],
     "tags": {
         "craft": "roofer"
     },
-    "icon": "marker-stroked",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Roofer"
 }

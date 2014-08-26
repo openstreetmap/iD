@@ -7,12 +7,10 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [
-        "jewish",
-        "synagogue"
+        "jewish"
     ],
     "tags": {
         "amenity": "place_of_worship",

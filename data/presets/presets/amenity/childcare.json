@@ -1,21 +1,22 @@
 {
     "icon": "school",
     "fields": [
+        "operator",
+        "address",
         "building_area",
-        "address"
+        "opening_hours"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [
-        "nursery",
+        "daycare",
         "orphanage",
         "playgroup"
     ],
     "tags": {
         "amenity": "childcare"
     },
-    "name": "Childcare"
+    "name": "Nursery/Childcare"
 }

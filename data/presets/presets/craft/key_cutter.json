@@ -1,21 +1,17 @@
 {
-    "name": "Key Cutter",
+    "icon": "marker-stroked",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
-    "terms": [
-        "key",
-        "key cutter"
-    ],
     "tags": {
         "craft": "key_cutter"
     },
-    "icon": "marker-stroked",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Key Cutter"
 }

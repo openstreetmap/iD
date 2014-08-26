@@ -6,12 +6,13 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
+    ],
+    "terms": [
+        "college"
     ],
     "tags": {
         "amenity": "university"
     },
-    "terms": ["college"],
-    "name": "University"
+    "name": "University Grounds"
 }

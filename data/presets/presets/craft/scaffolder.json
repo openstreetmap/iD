@@ -1,20 +1,17 @@
 {
-    "name": "Scaffolder",
+    "icon": "marker-stroked",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
-    "terms": [
-        "scaffolder"
-    ],
     "tags": {
         "craft": "scaffolder"
     },
-    "icon": "marker-stroked",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Scaffolder"
 }

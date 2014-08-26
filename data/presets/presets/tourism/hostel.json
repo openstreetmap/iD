@@ -2,13 +2,12 @@
     "icon": "lodging",
     "fields": [
         "operator",
-        "building_area",
         "address",
+        "building_area",
         "smoking"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

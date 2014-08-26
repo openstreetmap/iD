@@ -1,6 +1,8 @@
 {
     "icon": "rail",
     "fields": [
+        "operator",
+        "address",
         "building_area"
     ],
     "geometry": [

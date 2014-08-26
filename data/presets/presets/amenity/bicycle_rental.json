@@ -10,6 +10,9 @@
         "vertex",
         "area"
     ],
+    "terms": [
+        "bike"
+    ],
     "tags": {
         "amenity": "bicycle_rental"
     },

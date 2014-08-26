@@ -7,6 +7,11 @@
         "point",
         "vertex"
     ],
+    "terms": [
+        "money",
+        "cash",
+        "machine"
+    ],
     "tags": {
         "amenity": "atm"
     },

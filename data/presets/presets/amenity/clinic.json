@@ -1,20 +1,20 @@
 {
-    "name": "Clinic",
+    "icon": "hospital",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "clinic",
-        "medical clinic"
+        "medical",
+        "urgentcare"
     ],
     "tags": {
         "amenity": "clinic"
     },
-    "icon": "hospital",
-    "fields": [
-        "building_area",
-        "address",
-        "opening_hours"
-    ]
+    "name": "Clinic"
 }

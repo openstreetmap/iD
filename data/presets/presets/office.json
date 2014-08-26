@@ -3,6 +3,7 @@
     "fields": [
         "office",
         "address",
+        "building_area",
         "opening_hours",
         "smoking"
     ],

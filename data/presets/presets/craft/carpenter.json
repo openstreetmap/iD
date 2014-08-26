@@ -1,21 +1,20 @@
 {
-    "name": "Carpenter",
+    "icon": "logging",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "carpenter",
         "woodworker"
     ],
     "tags": {
         "craft": "carpenter"
     },
-    "icon": "logging",
-    "fields": [
-        "building_area",
-        "address",
-        "operator",
-        "opening_hours"
-    ]
+    "name": "Carpenter"
 }
