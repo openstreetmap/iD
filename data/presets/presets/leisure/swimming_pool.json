@@ -1,4 +1,5 @@
 {
+    "icon": "swimming",
     "fields": [
         "access_simple",
         "operator",
@@ -12,6 +13,5 @@
     "tags": {
         "leisure": "swimming_pool"
     },
-    "icon": "swimming",
     "name": "Swimming Pool"
 }

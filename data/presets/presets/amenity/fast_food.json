@@ -10,12 +10,13 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "amenity": "fast_food"
     },
-    "terms": [],
+    "terms": [
+        "restaurant"
+    ],
     "name": "Fast Food"
 }

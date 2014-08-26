@@ -11,11 +11,12 @@
         "area"
     ],
     "terms": [
-        "tailor",
-        "clothes"
+        "clothes",
+        "suit"
     ],
     "tags": {
         "craft": "tailor"
     },
-    "name": "Tailor"
+    "name": "Tailor",
+    "searchable": false
 }

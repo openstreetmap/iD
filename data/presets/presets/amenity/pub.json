@@ -8,12 +8,16 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "amenity": "pub"
     },
-    "terms": [],
+    "terms": [
+        "dive",
+        "beer",
+        "bier",
+        "booze"
+    ],
     "name": "Pub"
 }

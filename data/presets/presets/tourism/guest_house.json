@@ -8,7 +8,6 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
@@ -16,7 +15,6 @@
     },
     "terms": [
         "B&B",
-        "Bed & Breakfast",
         "Bed and Breakfast"
     ],
     "name": "Guest House"

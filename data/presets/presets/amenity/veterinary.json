@@ -1,6 +1,7 @@
 {
     "icon": "dog-park",
     "fields": [
+        "operator",
         "address",
         "building_area",
         "opening_hours"

@@ -10,13 +10,11 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [
         "coffee",
-        "tea",
-        "coffee shop"
+        "tea"
     ],
     "tags": {
         "amenity": "cafe"

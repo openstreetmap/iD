@@ -18,6 +18,9 @@
     "tags": {
         "highway": "track"
     },
-    "terms": [],
+    "terms": [
+        "woods road",
+        "fire road"
+    ],
     "name": "Track"
 }

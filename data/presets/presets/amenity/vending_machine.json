@@ -6,6 +6,11 @@
     "geometry": [
         "point"
     ],
+    "terms": [
+        "snack",
+        "soda",
+        "ticket"
+    ],
     "tags": {
         "amenity": "vending_machine"
     },

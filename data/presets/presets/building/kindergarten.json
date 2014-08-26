@@ -6,13 +6,11 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [
-        "kindergarten",
         "kindergarden",
-        "preschool"
+        "pre-school"
     ],
     "tags": {
         "building": "kindergarten"

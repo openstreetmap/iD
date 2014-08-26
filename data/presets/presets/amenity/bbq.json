@@ -1,18 +1,16 @@
 {
-    "geometry": [
-        "point"
-    ],
-    "tags": {
-        "amenity": "bbq"
-    },
     "fields": [
         "covered",
         "fuel"
     ],
-    "terms": [
-        "barbecue",
-        "bbq",
-        "grill"
+    "geometry": [
+        "point"
     ],
+    "terms": [
+        "bbq"
+    ],
+    "tags": {
+        "amenity": "bbq"
+    },
     "name": "Barbecue/Grill"
 }

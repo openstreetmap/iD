@@ -6,11 +6,9 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [
-        "college",
         "university"
     ],
     "tags": {

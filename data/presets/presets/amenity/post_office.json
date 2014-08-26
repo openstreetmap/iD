@@ -8,8 +8,11 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
+    ],
+    "terms": [
+        "letter",
+        "mail"
     ],
     "tags": {
         "amenity": "post_office"

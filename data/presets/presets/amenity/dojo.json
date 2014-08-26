@@ -7,11 +7,11 @@
         "opening_hours"
     ],
     "geometry" : [
-        "point", "area"
+        "point",
+        "area"
     ],
     "terms": [
         "martial arts",
-        "dojo",
         "dojang"
     ],
     "tags": {

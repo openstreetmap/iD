@@ -6,9 +6,13 @@
         "address"
     ],
     "geometry": [
-        "area",
         "point",
-        "vertex"
+        "area"
+    ],
+    "terms": [
+        "EMS",
+        "EMT",
+        "rescue"
     ],
     "tags": {
         "emergency": "ambulance_station"

@@ -628,6 +628,9 @@
             "covered": {
                 "label": "Covered"
             },
+            "craft": {
+                "label": "Type"
+            },
             "crop": {
                 "label": "Crop"
             },
@@ -1243,23 +1246,23 @@
             },
             "amenity/arts_centre": {
                 "name": "Arts Center",
-                "terms": "art*"
+                "terms": ""
             },
             "amenity/atm": {
                 "name": "ATM",
-                "terms": ""
+                "terms": "money,cash,machine"
             },
             "amenity/bank": {
                 "name": "Bank",
-                "terms": "coffer,countinghouse,credit union,depository,exchequer,fund,hoard,investment firm,repository,reserve,reservoir,safe,savings,stock,stockpile,store,storehouse,thrift,treasury,trust company,vault"
+                "terms": "credit union,check,deposit,fund,investment,repository,reserve,safe,savings,stock,treasury,trust,vault"
             },
             "amenity/bar": {
                 "name": "Bar",
-                "terms": ""
+                "terms": "dive,beer,bier,booze"
             },
             "amenity/bbq": {
                 "name": "Barbecue/Grill",
-                "terms": "barbecue,bbq,grill"
+                "terms": "bbq"
             },
             "amenity/bench": {
                 "name": "Bench",
@@ -1267,11 +1270,11 @@
             },
             "amenity/bicycle_parking": {
                 "name": "Bicycle Parking",
-                "terms": ""
+                "terms": "bike"
             },
             "amenity/bicycle_rental": {
                 "name": "Bicycle Rental",
-                "terms": ""
+                "terms": "bike"
             },
             "amenity/boat_rental": {
                 "name": "Boat Rental",
@@ -1287,7 +1290,7 @@
             },
             "amenity/cafe": {
                 "name": "Cafe",
-                "terms": "coffee,tea,coffee shop"
+                "terms": "coffee,tea"
             },
             "amenity/car_rental": {
                 "name": "Car Rental",
@@ -1307,15 +1310,15 @@
             },
             "amenity/childcare": {
                 "name": "Nursery/Childcare",
-                "terms": "daycare,nursery,orphanage,playgroup"
+                "terms": "daycare,orphanage,playgroup"
             },
             "amenity/cinema": {
                 "name": "Cinema",
-                "terms": "big screen,bijou,cine,drive-in,film,flicks,motion pictures,movie house,movie theater,moving pictures,nabes,photoplay,picture show,pictures,playhouse,show,silver screen"
+                "terms": "drive-in,film,flick,movie,theater,picture,show,screen"
             },
             "amenity/clinic": {
                 "name": "Clinic",
-                "terms": "clinic,medical clinic"
+                "terms": "medical,urgentcare"
             },
             "amenity/clock": {
                 "name": "Clock",
@@ -1323,7 +1326,7 @@
             },
             "amenity/college": {
                 "name": "College Grounds",
-                "terms": "college,university"
+                "terms": "university"
             },
             "amenity/compressed_air": {
                 "name": "Compressed Air",
@@ -1335,19 +1338,19 @@
             },
             "amenity/dentist": {
                 "name": "Dentist",
-                "terms": "dentist*,tooth,teeth"
+                "terms": "tooth,teeth"
             },
             "amenity/doctor": {
                 "name": "Doctor",
-                "terms": "doctor*,medic*"
+                "terms": "medic*"
             },
             "amenity/dojo": {
                 "name": "Dojo / Martial Arts Academy",
-                "terms": "martial arts,dojo,dojang"
+                "terms": "martial arts,dojang"
             },
             "amenity/drinking_water": {
                 "name": "Drinking Water",
-                "terms": "water fountain,potable water"
+                "terms": "fountain,potable"
             },
             "amenity/embassy": {
                 "name": "Embassy",
@@ -1355,7 +1358,7 @@
             },
             "amenity/fast_food": {
                 "name": "Fast Food",
-                "terms": ""
+                "terms": "restaurant"
             },
             "amenity/fire_station": {
                 "name": "Fire Station",
@@ -1375,15 +1378,15 @@
             },
             "amenity/hospital": {
                 "name": "Hospital Grounds",
-                "terms": "clinic,emergency room,health service,hospice,infirmary,institution,nursing home,rest home,sanatorium,sanitarium,sick bay,surgery,ward"
+                "terms": "clinic,doctor,emergency room,health service,hospice,infirmary,institution,nursing home,sanatorium,sanitarium,sick,surgery,ward"
             },
             "amenity/kindergarten": {
                 "name": "Preschool/Kindergarten Grounds",
-                "terms": "kindergarten,kindergarden,preschool"
+                "terms": "kindergarden,pre-school"
             },
             "amenity/library": {
                 "name": "Library",
-                "terms": ""
+                "terms": "book"
             },
             "amenity/marketplace": {
                 "name": "Marketplace",
@@ -1415,31 +1418,31 @@
             },
             "amenity/place_of_worship/christian": {
                 "name": "Church",
-                "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Synagogue",
-                "terms": "jewish,synagogue"
+                "terms": "jewish"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Mosque",
-                "terms": "muslim,mosque"
+                "terms": "muslim"
             },
             "amenity/police": {
                 "name": "Police",
-                "terms": "badge,bear,blue,bluecoat,bobby,boy scout,bull,constable,constabulary,cop,copper,corps,county mounty,detective,fed,flatfoot,force,fuzz,gendarme,gumshoe,heat,law,law enforcement,man,narc,officers,patrolman,police"
+                "terms": "badge,constable,constabulary,cop,detective,fed,law,enforcement,officer,patrol"
             },
             "amenity/post_box": {
                 "name": "Mailbox",
-                "terms": "letter drop,letterbox,mail drop,mailbox,pillar box,postbox"
+                "terms": "letter,post"
             },
             "amenity/post_office": {
                 "name": "Post Office",
-                "terms": ""
+                "terms": "letter,mail"
             },
             "amenity/pub": {
                 "name": "Pub",
-                "terms": ""
+                "terms": "dive,beer,bier,booze"
             },
             "amenity/ranger_station": {
                 "name": "Ranger Station",
@@ -1447,19 +1450,19 @@
             },
             "amenity/recycling": {
                 "name": "Recycling",
-                "terms": ""
+                "terms": "can,bottle,garbage,scrap,trash"
             },
             "amenity/restaurant": {
                 "name": "Restaurant",
-                "terms": "bar,cafeteria,café,canteen,chophouse,coffee shop,diner,dining room,dive*,doughtnut shop,drive-in,eatery,eating house,eating place,fast-food place,fish and chips,greasy spoon,grill,hamburger stand,hashery,hideaway,hotdog stand,inn,joint*,luncheonette,lunchroom,night club,outlet*,pizzeria,saloon,soda fountain,watering hole"
+                "terms": "bar,breakfast,cafe,café,canteen,coffee,dine,dining,dinner,drive-in,eat,grill,lunch,table"
             },
             "amenity/school": {
                 "name": "School Grounds",
-                "terms": "academy,school*"
+                "terms": "academy,elementary school,middle school,high school"
             },
             "amenity/shelter": {
                 "name": "Shelter",
-                "terms": "lean-to"
+                "terms": "lean-to,gazebo,picnic"
             },
             "amenity/social_facility": {
                 "name": "Social Facility",
@@ -1471,7 +1474,7 @@
             },
             "amenity/social_facility/group_home": {
                 "name": "Elderly Group Home",
-                "terms": "elderly,old,senior living"
+                "terms": "old,senior,living"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Homeless Shelter",
@@ -1479,7 +1482,7 @@
             },
             "amenity/studio": {
                 "name": "Studio",
-                "terms": "recording studio,studio,radio,radio studio,television,television studio"
+                "terms": "recording,radio,television"
             },
             "amenity/swimming_pool": {
                 "name": "Swimming Pool",
@@ -1503,15 +1506,15 @@
             },
             "amenity/townhall": {
                 "name": "Town Hall",
-                "terms": "village hall,city government,courthouse,municipal building,municipal center,municipal centre"
+                "terms": "village,city,government,courthouse,municipal"
             },
             "amenity/university": {
                 "name": "University Grounds",
-                "terms": "college,university"
+                "terms": "college"
             },
             "amenity/vending_machine": {
                 "name": "Vending Machine",
-                "terms": ""
+                "terms": "snack,soda,ticket"
             },
             "amenity/veterinary": {
                 "name": "Veterinary",
@@ -1519,7 +1522,7 @@
             },
             "amenity/waste_basket": {
                 "name": "Waste Basket",
-                "terms": "rubbish bin,litter bin,trash can,garbage can"
+                "terms": "rubbish,litter,trash,garbage"
             },
             "area": {
                 "name": "Area",
@@ -1631,7 +1634,7 @@
             },
             "building/college": {
                 "name": "College Building",
-                "terms": "college,university"
+                "terms": "university"
             },
             "building/commercial": {
                 "name": "Commercial Building",
@@ -1687,7 +1690,7 @@
             },
             "building/kindergarten": {
                 "name": "Preschool/Kindergarten Building",
-                "terms": "kindergarten,kindergarden,preschool"
+                "terms": "kindergarden,pre-school"
             },
             "building/public": {
                 "name": "Public Building",
@@ -1707,7 +1710,7 @@
             },
             "building/school": {
                 "name": "School Building",
-                "terms": "academy,school*"
+                "terms": "academy,elementary school,middle school,high school"
             },
             "building/shed": {
                 "name": "Shed",
@@ -1731,191 +1734,199 @@
             },
             "building/university": {
                 "name": "University Building",
-                "terms": "college,university"
+                "terms": "college"
             },
             "building/warehouse": {
                 "name": "Warehouse",
                 "terms": ""
             },
+            "craft": {
+                "name": "Craft",
+                "terms": ""
+            },
             "craft/basket_maker": {
                 "name": "Basket Maker",
-                "terms": "basket*"
+                "terms": ""
             },
             "craft/beekeeper": {
                 "name": "Beekeeper",
-                "terms": "bee*"
+                "terms": ""
             },
             "craft/blacksmith": {
                 "name": "Blacksmith",
-                "terms": "blacksmith"
+                "terms": ""
             },
             "craft/boatbuilder": {
                 "name": "Boat Builder",
-                "terms": "boat builder"
+                "terms": ""
             },
             "craft/bookbinder": {
                 "name": "Bookbinder",
-                "terms": "bookbinder,book repair"
+                "terms": "book repair"
             },
             "craft/brewery": {
                 "name": "Brewery",
-                "terms": "brewery"
+                "terms": "beer,bier"
             },
             "craft/carpenter": {
                 "name": "Carpenter",
-                "terms": "carpenter,woodworker"
+                "terms": "woodworker"
             },
             "craft/carpet_layer": {
                 "name": "Carpet Layer",
-                "terms": "carpet layer"
+                "terms": ""
             },
             "craft/caterer": {
                 "name": "Caterer",
-                "terms": "cater*"
+                "terms": ""
             },
             "craft/clockmaker": {
                 "name": "Clockmaker",
-                "terms": "clock*"
+                "terms": ""
             },
             "craft/confectionary": {
                 "name": "Confectionary",
-                "terms": "confectionary,sweets,candy"
+                "terms": "sweets,candy"
             },
             "craft/dressmaker": {
                 "name": "Dressmaker",
-                "terms": "dress,dressmaker"
+                "terms": "seamstress"
             },
             "craft/electrician": {
                 "name": "Electrician",
-                "terms": "electrician"
+                "terms": "power,wire"
             },
             "craft/gardener": {
                 "name": "Gardener",
-                "terms": "gardener,landscaper,grounds keeper"
+                "terms": "landscaper,grounds keeper"
             },
             "craft/glaziery": {
                 "name": "Glaziery",
-                "terms": "glass,glass foundry,stained-glass,window"
+                "terms": "glass,stained-glass,window"
             },
             "craft/handicraft": {
                 "name": "Handicraft",
-                "terms": "handicraft"
+                "terms": ""
             },
             "craft/hvac": {
                 "name": "HVAC",
-                "terms": "heat*,vent*,air-conditioning,air conditioning"
+                "terms": "heat*,vent*,air conditioning"
             },
             "craft/insulator": {
                 "name": "Insulator",
-                "terms": "insulat*"
+                "terms": ""
             },
             "craft/jeweler": {
                 "name": "Jeweler",
-                "terms": "jeweler,gem,diamond"
+                "terms": ""
             },
             "craft/key_cutter": {
                 "name": "Key Cutter",
-                "terms": "key*"
+                "terms": ""
             },
             "craft/locksmith": {
                 "name": "Locksmith",
-                "terms": "lock*"
+                "terms": ""
             },
             "craft/metal_construction": {
                 "name": "Metal Construction",
-                "terms": "metal construction"
+                "terms": ""
             },
             "craft/optician": {
                 "name": "Optician",
-                "terms": "glasses,optician"
+                "terms": ""
             },
             "craft/painter": {
                 "name": "Painter",
-                "terms": "painter"
+                "terms": ""
             },
             "craft/photographer": {
                 "name": "Photographer",
-                "terms": "photographer"
+                "terms": ""
             },
             "craft/photographic_laboratory": {
                 "name": "Photographic Laboratory",
-                "terms": "photo*,film"
+                "terms": "film"
             },
             "craft/plasterer": {
                 "name": "Plasterer",
-                "terms": "plasterer"
+                "terms": ""
             },
             "craft/plumber": {
                 "name": "Plumber",
-                "terms": "pumber"
+                "terms": "pipe"
             },
             "craft/pottery": {
                 "name": "Pottery",
-                "terms": "potter*,ceramic*"
+                "terms": "ceramic"
             },
             "craft/rigger": {
                 "name": "Rigger",
-                "terms": "rigger"
+                "terms": ""
             },
             "craft/roofer": {
                 "name": "Roofer",
-                "terms": "roofer"
+                "terms": ""
             },
             "craft/saddler": {
                 "name": "Saddler",
-                "terms": "saddle*"
+                "terms": ""
             },
             "craft/sailmaker": {
                 "name": "Sailmaker",
-                "terms": "sail*"
+                "terms": ""
             },
             "craft/sawmill": {
                 "name": "Sawmill",
-                "terms": "sawmill,lumber"
+                "terms": "lumber"
             },
             "craft/scaffolder": {
                 "name": "Scaffolder",
-                "terms": "scaffolder"
+                "terms": ""
             },
             "craft/sculpter": {
                 "name": "Sculpter",
-                "terms": "sculpter"
+                "terms": ""
             },
             "craft/shoemaker": {
                 "name": "Shoemaker",
-                "terms": "shoe repair,shoemaker"
+                "terms": "cobbler"
             },
             "craft/stonemason": {
                 "name": "Stonemason",
-                "terms": "stonemason,masonry"
+                "terms": "masonry"
             },
             "craft/sweep": {
                 "name": "Chimney Sweep",
-                "terms": "sweep,chimney"
+                "terms": ""
             },
             "craft/tailor": {
                 "name": "Tailor",
-                "terms": "tailor,clothes"
+                "terms": "clothes,suit"
             },
             "craft/tiler": {
                 "name": "Tiler",
-                "terms": "tiler"
+                "terms": ""
             },
             "craft/tinsmith": {
                 "name": "Tinsmith",
-                "terms": "tinsmith"
+                "terms": ""
             },
             "craft/upholsterer": {
                 "name": "Upholsterer",
-                "terms": "upholsterer"
+                "terms": ""
             },
             "craft/watchmaker": {
                 "name": "Watchmaker",
-                "terms": "watch*"
+                "terms": ""
             },
             "craft/window_construction": {
                 "name": "Window Construction",
-                "terms": "window*"
+                "terms": "glass"
+            },
+            "craft/winery": {
+                "name": "Winery",
+                "terms": ""
             },
             "embankment": {
                 "name": "Embankment",
@@ -1923,7 +1934,7 @@
             },
             "emergency/ambulance_station": {
                 "name": "Ambulance Station",
-                "terms": ""
+                "terms": "EMS,EMT,rescue"
             },
             "emergency/fire_hydrant": {
                 "name": "Fire Hydrant",
@@ -1943,7 +1954,7 @@
             },
             "footway/crosswalk": {
                 "name": "Crosswalk",
-                "terms": "crosswalk,zebra crossing"
+                "terms": "zebra crossing"
             },
             "footway/sidewalk": {
                 "name": "Sidewalk",
@@ -1963,7 +1974,7 @@
             },
             "golf/green": {
                 "name": "Putting Green",
-                "terms": "putting green"
+                "terms": ""
             },
             "golf/hole": {
                 "name": "Golf Hole",
@@ -1991,7 +2002,7 @@
             },
             "highway/bridleway": {
                 "name": "Bridle Path",
-                "terms": "bridleway,equestrian trail,horse riding path,bridle road,horse trail"
+                "terms": "bridleway,equestrian,horse"
             },
             "highway/bus_stop": {
                 "name": "Bus Stop",
@@ -2003,15 +2014,15 @@
             },
             "highway/crosswalk": {
                 "name": "Crosswalk",
-                "terms": "crosswalk,zebra crossing"
+                "terms": "zebra crossing"
             },
             "highway/cycleway": {
                 "name": "Cycle Path",
-                "terms": ""
+                "terms": "bike"
             },
             "highway/footway": {
                 "name": "Foot Path",
-                "terms": "beaten path,boulevard,clearing,course,cut*,drag*,footpath,highway,lane,line,orbit,passage,pathway,rail,rails,road,roadway,route,street,thoroughfare,trackway,trail,trajectory,walk"
+                "terms": "hike,hiking,trackway,trail,walk"
             },
             "highway/living_street": {
                 "name": "Living Street",
@@ -2035,7 +2046,7 @@
             },
             "highway/path": {
                 "name": "Path",
-                "terms": ""
+                "terms": "hike,hiking,trackway,trail,walk"
             },
             "highway/pedestrian": {
                 "name": "Pedestrian",
@@ -2059,7 +2070,7 @@
             },
             "highway/rest_area": {
                 "name": "Rest Area",
-                "terms": "rest stop,turnout,lay-by"
+                "terms": "rest stop"
             },
             "highway/road": {
                 "name": "Unknown Road",
@@ -2123,7 +2134,7 @@
             },
             "highway/track": {
                 "name": "Track",
-                "terms": ""
+                "terms": "woods road,fire road"
             },
             "highway/traffic_signals": {
                 "name": "Traffic Signals",
@@ -2139,7 +2150,7 @@
             },
             "highway/turning_circle": {
                 "name": "Turning Circle",
-                "terms": ""
+                "terms": "cul-de-sac"
             },
             "highway/unclassified": {
                 "name": "Unclassified Road",
@@ -2295,7 +2306,7 @@
             },
             "leisure/marina": {
                 "name": "Marina",
-                "terms": ""
+                "terms": "boat"
             },
             "leisure/park": {
                 "name": "Park",
@@ -2303,11 +2314,11 @@
             },
             "leisure/picnic_table": {
                 "name": "Picnic Table",
-                "terms": "bench,table"
+                "terms": "bench"
             },
             "leisure/pitch": {
                 "name": "Sport Pitch",
-                "terms": ""
+                "terms": "field"
             },
             "leisure/pitch/american_football": {
                 "name": "American Football Field",
@@ -2347,7 +2358,7 @@
             },
             "leisure/slipway": {
                 "name": "Slipway",
-                "terms": ""
+                "terms": "boat launch,boat ramp"
             },
             "leisure/sports_center": {
                 "name": "Sports Center / Gym",
@@ -2767,19 +2778,43 @@
             },
             "shop/alcohol": {
                 "name": "Liquor Store",
-                "terms": "alcohol"
+                "terms": "alcohol,beer,booze,wine"
+            },
+            "shop/anime": {
+                "name": "Anime Shop",
+                "terms": ""
+            },
+            "shop/antiques": {
+                "name": "Antiques Shop",
+                "terms": ""
             },
             "shop/art": {
-                "name": "Art Shop",
-                "terms": "art*"
+                "name": "Art Gallery",
+                "terms": ""
+            },
+            "shop/baby_goods": {
+                "name": "Baby Goods Store",
+                "terms": ""
+            },
+            "shop/bag": {
+                "name": "Bag/Luggage Store",
+                "terms": "handbag,purse"
             },
             "shop/bakery": {
                 "name": "Bakery",
                 "terms": ""
             },
+            "shop/bathroom_furnishing": {
+                "name": "Bathroom Furnishing Store",
+                "terms": ""
+            },
             "shop/beauty": {
                 "name": "Beauty Shop",
                 "terms": "nail spa,spa,salon,tanning"
+            },
+            "shop/bed": {
+                "name": "Bedding/Mattress Store",
+                "terms": ""
             },
             "shop/beverages": {
                 "name": "Beverage Store",
@@ -2794,7 +2829,7 @@
                 "terms": ""
             },
             "shop/books": {
-                "name": "Bookstore",
+                "name": "Book Store",
                 "terms": ""
             },
             "shop/boutique": {
@@ -2803,22 +2838,38 @@
             },
             "shop/butcher": {
                 "name": "Butcher",
+                "terms": "meat"
+            },
+            "shop/candles": {
+                "name": "Candle Shop",
                 "terms": ""
             },
             "shop/car": {
                 "name": "Car Dealership",
-                "terms": ""
+                "terms": "auto"
             },
             "shop/car_parts": {
                 "name": "Car Parts Store",
-                "terms": ""
+                "terms": "auto"
             },
             "shop/car_repair": {
                 "name": "Car Repair Shop",
+                "terms": "auto"
+            },
+            "shop/carpet": {
+                "name": "Carpet Store",
+                "terms": "rug"
+            },
+            "shop/cheese": {
+                "name": "Cheese Store",
                 "terms": ""
             },
             "shop/chemist": {
                 "name": "Chemist",
+                "terms": ""
+            },
+            "shop/chocolate": {
+                "name": "Chocolate Store",
                 "terms": ""
             },
             "shop/clothes": {
@@ -2830,16 +2881,36 @@
                 "terms": ""
             },
             "shop/confectionery": {
-                "name": "Confectionery",
+                "name": "Candy Store",
                 "terms": ""
             },
             "shop/convenience": {
                 "name": "Convenience Store",
                 "terms": ""
             },
+            "shop/copyshop": {
+                "name": "Copy Store",
+                "terms": ""
+            },
+            "shop/cosmetics": {
+                "name": "Cosmetics Store",
+                "terms": ""
+            },
+            "shop/craft": {
+                "name": "Arts and Crafts Store",
+                "terms": ""
+            },
+            "shop/curtain": {
+                "name": "Curtain Store",
+                "terms": "drape*,window"
+            },
+            "shop/dairy": {
+                "name": "Dairy Store",
+                "terms": "milk,egg,cheese"
+            },
             "shop/deli": {
                 "name": "Deli",
-                "terms": ""
+                "terms": "lunch,meat,sandwich"
             },
             "shop/department_store": {
                 "name": "Department Store",
@@ -2850,16 +2921,28 @@
                 "terms": ""
             },
             "shop/dry_cleaning": {
-                "name": "Dry Cleaners",
+                "name": "Dry Cleaner",
                 "terms": ""
             },
             "shop/electronics": {
                 "name": "Electronics Store",
-                "terms": ""
+                "terms": "appliance,audio,computer,tv"
+            },
+            "shop/erotic": {
+                "name": "Erotic Store",
+                "terms": "sex,porn"
+            },
+            "shop/fabric": {
+                "name": "Fabric Store",
+                "terms": "sew"
             },
             "shop/farm": {
                 "name": "Produce Stand",
                 "terms": "farm shop,farm stand"
+            },
+            "shop/fashion": {
+                "name": "Fashion Store",
+                "terms": ""
             },
             "shop/fishmonger": {
                 "name": "Fishmonger",
@@ -2867,19 +2950,27 @@
             },
             "shop/florist": {
                 "name": "Florist",
+                "terms": "flower"
+            },
+            "shop/frame": {
+                "name": "Framing Shop",
                 "terms": ""
             },
             "shop/funeral_directors": {
                 "name": "Funeral Home",
-                "terms": "undertaker,funeral parlour,funeral parlor,memorial home"
+                "terms": "undertaker,memorial home"
+            },
+            "shop/furnace": {
+                "name": "Furnace Store",
+                "terms": "oven,stove"
             },
             "shop/furniture": {
                 "name": "Furniture Store",
-                "terms": ""
+                "terms": "chair,sofa,table"
             },
             "shop/garden_centre": {
                 "name": "Garden Center",
-                "terms": "garden centre"
+                "terms": "landscape,mulch,shrub,tree"
             },
             "shop/gift": {
                 "name": "Gift Shop",
@@ -2887,7 +2978,7 @@
             },
             "shop/greengrocer": {
                 "name": "Greengrocer",
-                "terms": ""
+                "terms": "fruit,vegetable"
             },
             "shop/hairdresser": {
                 "name": "Hairdresser",
@@ -2897,25 +2988,45 @@
                 "name": "Hardware Store",
                 "terms": ""
             },
+            "shop/hearing_aids": {
+                "name": "Hearing Aids Store",
+                "terms": ""
+            },
+            "shop/herbalist": {
+                "name": "Herbalist",
+                "terms": ""
+            },
             "shop/hifi": {
                 "name": "Hifi Store",
+                "terms": "stereo,video"
+            },
+            "shop/interior_decoration": {
+                "name": "Interior Decoration Store",
                 "terms": ""
             },
             "shop/jewelry": {
                 "name": "Jeweler",
-                "terms": ""
+                "terms": "diamond,gem,ring"
             },
             "shop/kiosk": {
-                "name": "Kiosk",
+                "name": "News Kiosk",
+                "terms": ""
+            },
+            "shop/kitchen": {
+                "name": "Kitchen Design Store",
                 "terms": ""
             },
             "shop/laundry": {
                 "name": "Laundry",
                 "terms": ""
             },
+            "shop/leather": {
+                "name": "Leather Store",
+                "terms": ""
+            },
             "shop/locksmith": {
                 "name": "Locksmith",
-                "terms": "key*,lock*"
+                "terms": "key,lockpick"
             },
             "shop/lottery": {
                 "name": "Lottery Shop",
@@ -2925,8 +3036,20 @@
                 "name": "Mall",
                 "terms": ""
             },
+            "shop/massage": {
+                "name": "Massage Shop",
+                "terms": ""
+            },
+            "shop/medical_supply": {
+                "name": "Medical Supply Store",
+                "terms": ""
+            },
             "shop/mobile_phone": {
                 "name": "Mobile Phone Store",
+                "terms": ""
+            },
+            "shop/money_lender": {
+                "name": "Money Lender",
                 "terms": ""
             },
             "shop/motorcycle": {
@@ -2935,31 +3058,67 @@
             },
             "shop/music": {
                 "name": "Music Store",
+                "terms": "CD,vinyl"
+            },
+            "shop/musical_instrument": {
+                "name": "Musical Instrument Store",
                 "terms": ""
             },
             "shop/newsagent": {
-                "name": "Newsagent",
+                "name": "Newspaper/Magazine Shop",
                 "terms": ""
             },
             "shop/optician": {
                 "name": "Optician",
+                "terms": "eye,glasses"
+            },
+            "shop/organic": {
+                "name": "Organic Goods Store",
                 "terms": ""
             },
             "shop/outdoor": {
-                "name": "Outdoor Store",
+                "name": "Outdoors Store",
+                "terms": "camping,climbing,hiking"
+            },
+            "shop/paint": {
+                "name": "Paint Store",
+                "terms": ""
+            },
+            "shop/pawnbroker": {
+                "name": "Pawn Shop",
                 "terms": ""
             },
             "shop/pet": {
                 "name": "Pet Store",
-                "terms": ""
+                "terms": "cat,dog,fish"
             },
             "shop/photo": {
                 "name": "Photography Store",
+                "terms": "camera,film"
+            },
+            "shop/pyrotechnics": {
+                "name": "Fireworks Store",
+                "terms": ""
+            },
+            "shop/radiotechnics": {
+                "name": "Radio/Electronic Component Store",
+                "terms": ""
+            },
+            "shop/religion": {
+                "name": "Religious Store",
+                "terms": ""
+            },
+            "shop/scuba_diving": {
+                "name": "Scuba Diving Shop",
                 "terms": ""
             },
             "shop/seafood": {
                 "name": "Seafood Shop",
                 "terms": "fishmonger"
+            },
+            "shop/second_hand": {
+                "name": "Consignment/Thrift Store",
+                "terms": "secondhand,second hand,resale,thrift,used"
             },
             "shop/shoes": {
                 "name": "Shoe Store",
@@ -2971,15 +3130,31 @@
             },
             "shop/stationery": {
                 "name": "Stationery Store",
-                "terms": ""
+                "terms": "card,paper"
             },
             "shop/supermarket": {
                 "name": "Supermarket",
-                "terms": "bazaar,boutique,chain,co-op,cut-rate store,discount store,five-and-dime,flea market,galleria,grocery store,mall,mart,outlet,outlet store,shop,shopping center,shopping centre,shopping plaza,stand,store,supermarket,thrift shop"
+                "terms": "grocery,store,shop"
             },
             "shop/tailor": {
                 "name": "Tailor",
-                "terms": "tailor,clothes"
+                "terms": "clothes,suit"
+            },
+            "shop/tattoo": {
+                "name": "Tattoo Parlor",
+                "terms": ""
+            },
+            "shop/tea": {
+                "name": "Tea Store",
+                "terms": ""
+            },
+            "shop/ticket": {
+                "name": "Ticket Seller",
+                "terms": ""
+            },
+            "shop/tobacco": {
+                "name": "Tobacco Shop",
+                "terms": ""
             },
             "shop/toys": {
                 "name": "Toy Store",
@@ -2997,17 +3172,37 @@
                 "name": "Vacant Shop",
                 "terms": ""
             },
+            "shop/vacuum_cleaner": {
+                "name": "Vacuum Cleaner Store",
+                "terms": ""
+            },
             "shop/variety_store": {
                 "name": "Variety Store",
                 "terms": ""
             },
             "shop/video": {
                 "name": "Video Store",
+                "terms": "DVD"
+            },
+            "shop/video_games": {
+                "name": "Video Game Store",
+                "terms": ""
+            },
+            "shop/water_sports": {
+                "name": "Watersport/Swim Shop",
+                "terms": ""
+            },
+            "shop/weapons": {
+                "name": "Weapon Shop",
+                "terms": "ammo,gun,knife,knives"
+            },
+            "shop/window_blind": {
+                "name": "Window Blind Store",
                 "terms": ""
             },
             "shop/wine": {
                 "name": "Wine Shop",
-                "terms": "winery"
+                "terms": ""
             },
             "tourism": {
                 "name": "Tourism",
@@ -3027,7 +3222,7 @@
             },
             "tourism/camp_site": {
                 "name": "Camp Site",
-                "terms": "camping"
+                "terms": ""
             },
             "tourism/caravan_site": {
                 "name": "RV Park",
@@ -3039,7 +3234,7 @@
             },
             "tourism/guest_house": {
                 "name": "Guest House",
-                "terms": "B&B,Bed & Breakfast,Bed and Breakfast"
+                "terms": "B&B,Bed and Breakfast"
             },
             "tourism/hostel": {
                 "name": "Hostel",
@@ -3059,11 +3254,11 @@
             },
             "tourism/museum": {
                 "name": "Museum",
-                "terms": "exhibition,exhibits archive,foundation,gallery,hall,institution,library,menagerie,repository,salon,storehouse,treasury,vault"
+                "terms": "exhibition,foundation,gallery,hall,institution"
             },
             "tourism/picnic_site": {
                 "name": "Picnic Site",
-                "terms": ""
+                "terms": "camp"
             },
             "tourism/theme_park": {
                 "name": "Theme Park",

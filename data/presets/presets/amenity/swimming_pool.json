@@ -8,6 +8,6 @@
     "tags": {
         "amenity": "swimming_pool"
     },
-    "searchable": false,
-    "name": "Swimming Pool"
+    "name": "Swimming Pool",
+    "searchable": false
 }

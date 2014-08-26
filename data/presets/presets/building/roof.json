@@ -1,12 +1,10 @@
 {
     "icon": "building",
     "fields": [
-        "address",
-        "levels"
+        "address"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

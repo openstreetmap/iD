@@ -8,12 +8,13 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
+    ],
+    "terms": [
+        "book"
     ],
     "tags": {
         "amenity": "library"
     },
-    "terms": [],
     "name": "Library"
 }

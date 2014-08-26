@@ -7,12 +7,11 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
+    "terms": [],
     "tags": {
         "amenity": "fire_station"
     },
-    "terms": [],
     "name": "Fire Station"
 }

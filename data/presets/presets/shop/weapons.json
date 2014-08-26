@@ -1,0 +1,23 @@
+{
+    "icon": "shop",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "ammo",
+        "gun",
+        "knife",
+        "knives"
+    ],
+    "tags": {
+        "shop": "weapons"
+    },
+    "name": "Weapon Shop"
+}

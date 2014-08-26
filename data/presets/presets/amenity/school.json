@@ -10,7 +10,9 @@
     ],
     "terms": [
         "academy",
-        "school*"
+        "elementary school",
+        "middle school",
+        "high school"
     ],
     "tags": {
         "amenity": "school"

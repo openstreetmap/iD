@@ -8,10 +8,8 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
-    "terms": [],
     "tags": {
         "tourism": "hotel"
     },

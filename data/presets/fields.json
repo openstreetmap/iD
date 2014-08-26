@@ -286,6 +286,11 @@
         "type": "check",
         "label": "Covered"
     },
+    "craft": {
+        "key": "craft",
+        "type": "typeCombo",
+        "label": "Type"
+    },
     "crop": {
         "key": "crop",
         "type": "combo",

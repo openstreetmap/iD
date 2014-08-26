@@ -10,12 +10,9 @@
         "area"
     ],
     "terms": [
-        "recording studio",
-        "studio",
+        "recording",
         "radio",
-        "radio studio",
-        "television",
-        "television studio"
+        "television"
     ],
     "tags": {
         "amenity": "studio"

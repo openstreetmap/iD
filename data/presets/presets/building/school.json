@@ -6,12 +6,13 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [
         "academy",
-        "school*"
+        "elementary school",
+        "middle school",
+        "high school"
     ],
     "tags": {
         "building": "school"

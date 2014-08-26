@@ -2,38 +2,18 @@
     "icon": "grocery",
     "fields": [
         "operator",
-        "building_area",
         "address",
+        "building_area",
         "opening_hours"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [
-        "bazaar",
-        "boutique",
-        "chain",
-        "co-op",
-        "cut-rate store",
-        "discount store",
-        "five-and-dime",
-        "flea market",
-        "galleria",
-        "grocery store",
-        "mall",
-        "mart",
-        "outlet",
-        "outlet store",
-        "shop",
-        "shopping center",
-        "shopping centre",
-        "shopping plaza",
-        "stand",
+        "grocery",
         "store",
-        "supermarket",
-        "thrift shop"
+        "shop"
     ],
     "tags": {
         "shop": "supermarket"

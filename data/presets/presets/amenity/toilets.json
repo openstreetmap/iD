@@ -1,4 +1,5 @@
 {
+    "icon": "toilets",
     "fields": [
         "toilets/disposal",
         "operator",
@@ -25,6 +26,5 @@
     "tags": {
         "amenity": "toilets"
     },
-    "icon": "toilets",
     "name": "Toilets"
 }

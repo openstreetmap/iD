@@ -7,11 +7,13 @@
         "vertex",
         "area"
     ],
+    "terms": [
+        "lean-to",
+        "gazebo",
+        "picnic"
+    ],
     "tags": {
         "amenity": "shelter"
     },
-    "terms": [
-        "lean-to"
-    ],
     "name": "Shelter"
 }

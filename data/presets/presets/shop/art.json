@@ -1,20 +1,17 @@
 {
     "icon": "art-gallery",
     "fields": [
+        "operator",
         "address",
         "building_area",
         "opening_hours"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
-    ],
-    "terms": [
-        "art*"
     ],
     "tags": {
         "shop": "art"
     },
-    "name": "Art Shop"
+    "name": "Art Gallery"
 }
