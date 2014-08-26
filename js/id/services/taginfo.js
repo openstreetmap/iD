@@ -86,7 +86,7 @@ iD.taginfo = function() {
 
     taginfo.keys = function(parameters, callback) {
         var debounce = parameters.debounce;
-        parameters = clean(shorten(setSort(setFilter(parameters))));
+        parameters = clean(shorten(setSort(parameters)));
         request(endpoint + 'keys/all?' +
             iD.util.qsString(_.extend({
                 rp: 10,
