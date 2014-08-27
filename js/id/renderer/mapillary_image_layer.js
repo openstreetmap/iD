@@ -19,6 +19,10 @@ iD.MapillaryImageLayer = function (context) {
             d3
                 .selectAll('.panewrap')
                 .classed('part65', false);
+            svg_image
+              .selectAll('image')
+              .remove();
+
             return;
         }
         svg_image.enter()
