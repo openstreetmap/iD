@@ -12,7 +12,8 @@ iD.Map = function(context) {
         transformStart,
         transformed = false,
         minzoom = 0,
-        points = iD.svg.Points(roundedProjection, context),
+        points = iD.svg.Points(projection, context),
+        images = iD.svg.MapillaryImages(projection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
         lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(projection),
@@ -64,11 +65,6 @@ iD.Map = function(context) {
             }
         });
 
-        surface.on('click.mapillary', function() {
-            context.background().mapillarySequenceLayer().click();
-            context.background().mapillaryImageLayer().click();
-        });
-
         surface.on('mouseout.vertices', function() {
             if (map.editable() && !transformed) {
                 var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
@@ -78,6 +74,7 @@ iD.Map = function(context) {
         });
 
         context.on('enter.map', function() {
+            map.dimensions(selection.dimensions());
             if (map.editable() && !transformed) {
                 var all = context.intersects(map.extent()),
                     filter = d3.functor(true),
@@ -86,9 +83,9 @@ iD.Map = function(context) {
                 surface.call(midpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.drawn({full: false});
             }
+            reloadMapillaryImages();
         });
 
-        map.dimensions(selection.dimensions());
 
         labels.supersurface(supersurface);
     }
@@ -127,6 +124,7 @@ iD.Map = function(context) {
             surface.call(points, points.points(all), filter);
         }
 
+        reloadMapillaryImages();
         dispatch.drawn({full: true});
     }
 
@@ -137,6 +135,14 @@ iD.Map = function(context) {
         if (!(mode && mode.id === 'browse')) {
             context.enter(iD.modes.Browse(context));
         }
+    }
+
+    function reloadMapillaryImages() {
+        var extent = map.extent();
+        d3.json('https://mapillary-read-api.herokuapp.com/v1/s/search?min-lat=' + extent[0][1] + '&max-lat=' + extent[1][1] + '&min-lon=' + extent[0][0] + '&max-lon=' + extent[1][0] + '&max-results=2&geojson=true', function (error, data) {
+            surface.call(images, context, data);
+
+        });
     }
 
     function zoomPan() {
@@ -166,7 +172,7 @@ iD.Map = function(context) {
         transformed = true;
         iD.util.setTransform(supersurface, tX, tY, scale);
         queueRedraw();
-
+        reloadMapillaryImages();
         dispatch.move(map);
     }
 

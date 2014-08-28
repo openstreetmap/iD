@@ -12,6 +12,11 @@ iD.ui.Sidebar = function(context) {
         var inspectorWrap = selection.append('div')
             .attr('class', 'inspector-hidden inspector-wrap fr');
 
+        var imageInspector = selection.append('div')
+            .attr('class', 'image-wrap fr')
+            .append('div')
+            .attr('id',"image-inspector");
+
         sidebar.hover = function(id) {
             if (!current && id) {
                 featureListWrap.classed('inspector-hidden', true);
@@ -70,6 +75,13 @@ iD.ui.Sidebar = function(context) {
             if (current) current.remove();
             current = null;
         };
+
+        sidebar.showImage = function(image) {
+            var key = image.properties.key;
+            console.log('showing image', key);
+            selection.select('#image-inspector')
+                .html('<a href="http://mapillary.com/map/im/' + key+'"><img src="https://d1cuyjsrcm0gby.cloudfront.net/'+key+'/thumb-320.jpg"></img></a>');
+        }
     }
 
     sidebar.hover = function() {};

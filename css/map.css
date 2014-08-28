@@ -1140,20 +1140,39 @@ text.gpx {
 }
 
 /* Mapillary Sequences */
-path.mapillary-sequence {
+.sequence {
     stroke: red;
     stroke-width: 4;
     fill: none;
     pointer-events: visibleStroke;
 }
 
-path.mapillary-image-location {
-  stroke: green;
-  stroke-width: 2;
-  fill: yellow;
+g.image.point.hover {
+    stroke-opacity: 0.3;
 }
 
+g.image.point{
+  stroke: orange;
+  stroke-width: 2;
+  fill: none;
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
+}
 
+g.image.point path{
+  stroke-width: 4;
+  stroke: none;
+  marker-end:url(#mapillary_direction_arrow);
+}
+
+g.image.point circle{
+    fill: orange;
+    fill-opacity: 0.3;
+}
+
+#mapillary_direction_arrow {
+  fill: orange;
+}
 
 /* Modes */
 
