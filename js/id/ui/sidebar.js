@@ -15,6 +15,10 @@ iD.ui.Sidebar = function(context) {
         var imageInspector = selection.append('div')
             .attr('class', 'image-wrap fr')
             .append('div')
+            .attr('class','panewrap')
+            .append('div')
+            .attr('class', 'image-inspector-pane pane')
+            .append('div')
             .attr('id',"image-inspector");
 
         sidebar.hover = function(id) {
@@ -77,10 +81,12 @@ iD.ui.Sidebar = function(context) {
         };
 
         sidebar.showImage = function(image) {
-            var key = image.properties.key;
-            console.log('showing image', key);
-            selection.select('#image-inspector')
-                .html('<a href="http://mapillary.com/map/im/' + key+'"><img src="https://d1cuyjsrcm0gby.cloudfront.net/'+key+'/thumb-320.jpg"></img></a>');
+            console.log('showing image', image);
+            if(image) {
+                var key = image.properties.key;
+                selection.select('#image-inspector')
+                    .html('<a href="http://mapillary.com/map/im/' + key+'"><img src="https://d1cuyjsrcm0gby.cloudfront.net/'+key+'/thumb-320.jpg"></img></a>');
+            }
         }
     }
 

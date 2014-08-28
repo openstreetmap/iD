@@ -36,13 +36,10 @@ iD.svg.MapillaryImages = function (projection, context) {
             })
             .on('mouseover', function (d) {
                 surface.select('.key_' + d.properties.key).classed('hover', true);
-                context.ui().sidebar.showImage(d);
             })
             .on('mouseout', function (d) {
                 surface.select('.key_' + d.properties.key).classed('hover', false);
             });
-//            .on('click', );
-//        images.exit().remove();
 
 
         image.append('path')

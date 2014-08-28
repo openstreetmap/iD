@@ -1169,6 +1169,10 @@ g.image.point circle{
     fill: orange;
     fill-opacity: 0.3;
 }
+g.image.point.selected circle{
+    fill: green;
+    fill-opacity: 0.8;
+}
 
 #mapillary_direction_arrow {
   fill: orange;
