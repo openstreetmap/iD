@@ -4,10 +4,6 @@ iD.Background = function(context) {
             .projection(context.projection),
         gpxLayer = iD.GpxLayer(context, dispatch)
             .projection(context.projection),
-//        mapillarySequencesLayer = iD.MapillarySequencesLayer(context, dispatch)
-//            .projection(context.projection),
-//        mapillaryImageLayer = iD.MapillaryImageLayer(context, dispatch)
-//            .projection(context.projection),
         overlayLayers = [];
 
     var backgroundSources = iD.data.imagery.map(function(source) {
@@ -96,21 +92,6 @@ iD.Background = function(context) {
         overlays.exit()
             .remove();
 
-       /* var mapillary_sequence_layer = selection.selectAll('.mapillary-sequence-layer')
-            .data([0]);
-
-        mapillary_sequence_layer.enter().insert('div', '.layer-data')
-            .attr('class', 'layer-layer mapillary-sequence-layer');
-
-        mapillary_sequence_layer.call(mapillarySequencesLayer);
-        var mapillary_image_layer = selection.selectAll('.mapillary-image-layer')
-            .data([0]);
-
-        mapillary_image_layer.enter().insert('div', '.layer-data')
-            .attr('class', 'layer-layer mapillary-image-layer');
-
-        mapillary_image_layer.call(mapillaryImageLayer);
-*/
     }
 
     background.sources = function(extent) {
@@ -122,8 +103,6 @@ iD.Background = function(context) {
     background.dimensions = function(_) {
         baseLayer.dimensions(_);
         gpxLayer.dimensions(_);
-//        mapillarySequencesLayer.dimensions(_);
-//        mapillaryImageLayer.dimensions(_);
 
         overlayLayers.forEach(function(layer) {
             layer.dimensions(_);
@@ -187,25 +166,6 @@ iD.Background = function(context) {
         gpxLayer.enable(!gpxLayer.enable());
         dispatch.change();
     };
-    background.toggleMapillaryLayer = function() {
-        mapillarySequencesLayer.enable(!mapillarySequencesLayer.enable());
-        mapillaryImageLayer.enable(!mapillaryImageLayer.enable());
-        dispatch.change();
-    };
-
-    background.updateMapillaryLayer = function() {
-        var mapillary = d3.selectAll('.mapillary-sequence-layer')
-            .data([0]);
-        mapillary.call(mapillarySequencesLayer);
-    };
-
-    background.mapillarySequenceLayer = function() {
-        return mapillarySequencesLayer;
-    };
-    background.mapillaryImageLayer = function() {
-        return mapillaryImageLayer;
-    };
-
 
     background.showsLayer = function(d) {
         return d === baseLayer.source() ||
