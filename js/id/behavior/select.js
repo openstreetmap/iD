@@ -18,7 +18,7 @@ iD.behavior.Select = function(context) {
         var datum = d3.event.target.__data__;
         var lasso = d3.select('#surface .lasso').node();
         if(datum.properties != undefined && datum.properties.entityType == 'image') {
-            context.enter(iD.modes.SelectImage(context, datum))
+            context.enter(iD.modes.SelectImage(context, datum));
         } else if (!(datum instanceof iD.Entity)) {
             if (!d3.event.shiftKey && !lasso)
                 context.enter(iD.modes.Browse(context));

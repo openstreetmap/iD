@@ -13,7 +13,6 @@ iD.Map = function(context) {
         transformed = false,
         minzoom = 0,
         points = iD.svg.Points(projection, context),
-        images = iD.svg.MapillaryImages(projection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
         lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(projection),
@@ -83,7 +82,6 @@ iD.Map = function(context) {
                 surface.call(midpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.drawn({full: false});
             }
-            reloadMapillaryImages();
         });
 
 
@@ -124,7 +122,6 @@ iD.Map = function(context) {
             surface.call(points, points.points(all), filter);
         }
 
-        reloadMapillaryImages();
         dispatch.drawn({full: true});
     }
 
@@ -137,13 +134,7 @@ iD.Map = function(context) {
         }
     }
 
-    function reloadMapillaryImages() {
-        var extent = map.extent();
-        d3.json('https://mapillary-read-api.herokuapp.com/v1/s/search?min-lat=' + extent[0][1] + '&max-lat=' + extent[1][1] + '&min-lon=' + extent[0][0] + '&max-lon=' + extent[1][0] + '&max-results=2&geojson=true', function (error, data) {
-            surface.call(images, context, data);
 
-        });
-    }
 
     function zoomPan() {
         if (d3.event && d3.event.sourceEvent.type === 'dblclick') {
@@ -172,7 +163,6 @@ iD.Map = function(context) {
         transformed = true;
         iD.util.setTransform(supersurface, tX, tY, scale);
         queueRedraw();
-        reloadMapillaryImages();
         dispatch.move(map);
     }
 
