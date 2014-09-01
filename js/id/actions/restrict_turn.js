@@ -14,11 +14,11 @@
 // If `restriction` is not provided, it is automatically determined by the
 // angle of the turn:
 //
-//    0-23  degrees: no_u_turn
-//   23-158 degrees: no_right_turn
+//    0-5   degrees: no_u_turn
+//    5-158 degrees: no_right_turn
 //  158-202 degrees: no_straight_on
-//  202-326 degrees: no_left_turn
-//  336-360 degrees: no_u_turn
+//  202-355 degrees: no_left_turn
+//  355-360 degrees: no_u_turn
 //
 // If necessary, the `from` and `to` ways are split. In these cases, `from.node`
 // and `to.node` are used to determine which portion of the split ways become
