@@ -1,4 +1,15 @@
 {
+    "category-barrier": {
+        "geometry": "line",
+        "name": "Barrier",
+        "icon": "barrier",
+        "members": [
+            "barrier/fence",
+            "barrier/wall",
+            "barrier/ditch",
+            "barrier"
+        ]
+    },
     "category-building": {
         "geometry": "area",
         "name": "Building Features",
