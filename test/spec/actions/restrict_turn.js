@@ -250,7 +250,7 @@ describe("iD.actions.RestrictTurn", function() {
         expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '==', type: 'way'});
     });
 
-    it('guesses the restriction type based on the turn angle', function() {
+    it('infers the restriction type based on the turn angle', function() {
         // u====*~~~~w
         //      |
         //      x
@@ -306,4 +306,49 @@ describe("iD.actions.RestrictTurn", function() {
         }, projection, 'r')(graph);
         expect(u.entity('r').tags.restriction).to.equal('no_u_turn');
     });
+
+    it('infers no_u_turn from acute angle made by forward oneways', function() {
+        //      *
+        //     / \
+        //  w2/   \w1
+        //   /     \
+        //  u       x
+        var graph = iD.Graph([
+                iD.Node({id: 'u', loc: [-1, -20]}),
+                iD.Node({id: '*', loc: [ 0,   0]}),
+                iD.Node({id: 'x', loc: [ 1, -20]}),
+                iD.Way({id: 'w1', nodes: ['x', '*'], tags: {oneway: 'yes'}}),
+                iD.Way({id: 'w2', nodes: ['*', 'u'], tags: {oneway: 'yes'}})
+            ]);
+
+        var r = iD.actions.RestrictTurn({
+            from: {node: 'x', way: 'w1'},
+            via:  {node: '*'},
+            to:   {node: 'u', way: 'w2'}
+        }, projection, 'r')(graph);
+        expect(r.entity('r').tags.restriction).to.equal('no_u_turn');
+    });
+
+    it('infers no_u_turn from acute angle made by reverse oneways', function() {
+        //      *
+        //     / \
+        //  w2/   \w1
+        //   /     \
+        //  u       x
+        var graph = iD.Graph([
+                iD.Node({id: 'u', loc: [-1, -20]}),
+                iD.Node({id: '*', loc: [ 0,   0]}),
+                iD.Node({id: 'x', loc: [ 1, -20]}),
+                iD.Way({id: 'w1', nodes: ['*', 'x'], tags: {oneway: '-1'}}),
+                iD.Way({id: 'w2', nodes: ['u', '*'], tags: {oneway: '-1'}})
+            ]);
+
+        var r = iD.actions.RestrictTurn({
+            from: {node: 'x', way: 'w1'},
+            via:  {node: '*'},
+            to:   {node: 'u', way: 'w2'}
+        }, projection, 'r')(graph);
+        expect(r.entity('r').tags.restriction).to.equal('no_u_turn');
+    });
+
 });

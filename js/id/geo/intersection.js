@@ -118,23 +118,33 @@ iD.geo.Intersection = function(graph, vertexId) {
     return intersection;
 };
 
-iD.geo.inferRestriction = function(from, via, to, projection) {
-    var angle = iD.geo.angle(via, from, projection) -
-                iD.geo.angle(via, to, projection);
+
+iD.geo.inferRestriction = function(graph, from, via, to, projection) {
+    var fromWay = graph.entity(from.way),
+        fromNode = graph.entity(from.node),
+        toWay = graph.entity(to.way),
+        toNode = graph.entity(to.node),
+        viaNode = graph.entity(via.node),
+        fromOneWay = (fromWay.tags.oneway === 'yes' && fromWay.last() === via.node) ||
+            (fromWay.tags.oneway === '-1' && fromWay.first() === via.node),
+        toOneWay = (toWay.tags.oneway === 'yes' && toWay.first() === via.node) ||
+            (toWay.tags.oneway === '-1' && toWay.last() === via.node),
+        angle = iD.geo.angle(viaNode, fromNode, projection) -
+                iD.geo.angle(viaNode, toNode, projection);
 
     angle = angle * 180 / Math.PI;
 
     while (angle < 0)
         angle += 360;
 
-    if (angle < 23)
+    if (fromNode === toNode)
+        return 'no_u_turn';
+    if ((angle < 23 || angle > 336) && fromOneWay && toOneWay)
         return 'no_u_turn';
     if (angle < 158)
         return 'no_right_turn';
-    if (angle < 202)
-        return 'no_straight_on';
-    if (angle < 336)
+    if (angle > 202)
         return 'no_left_turn';
 
-    return 'no_u_turn';
+    return 'no_straight_on';
 };

@@ -11,14 +11,8 @@
 // `from.node` in `from.way` toward `to.node` in `to.way` via `via.node`.
 // (The action does not check that these entities form a valid intersection.)
 //
-// If `restriction` is not provided, it is automatically determined by the
-// angle of the turn:
-//
-//    0-23  degrees: no_u_turn
-//   23-158 degrees: no_right_turn
-//  158-202 degrees: no_straight_on
-//  202-326 degrees: no_left_turn
-//  336-360 degrees: no_u_turn
+// If `restriction` is not provided, it is automatically determined by
+// iD.geo.inferRestriction.
 //
 // If necessary, the `from` and `to` ways are split. In these cases, `from.node`
 // and `to.node` are used to determine which portion of the split ways become
@@ -74,9 +68,10 @@ iD.actions.RestrictTurn = function(turn, projection, restrictionId) {
                 type: 'restriction',
                 restriction: turn.restriction ||
                     iD.geo.inferRestriction(
-                        graph.entity(turn.from.node),
-                        via,
-                        graph.entity(turn.to.node),
+                        graph,
+                        turn.from,
+                        turn.via,
+                        turn.to,
                         projection)
             },
             members: [

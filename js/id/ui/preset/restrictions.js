@@ -99,9 +99,10 @@ iD.ui.preset.restrictions = function(field, context) {
                 } else {
                     preset = presets.item('type/restriction/' +
                         iD.geo.inferRestriction(
-                            graph.entity(datum.from.node),
-                            graph.entity(datum.via.node),
-                            graph.entity(datum.to.node),
+                            graph,
+                            datum.from,
+                            datum.via,
+                            datum.to,
                             projection));
                 }
 
