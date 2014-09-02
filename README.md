@@ -26,7 +26,7 @@ If you have Python handy, just `cd` into the project root directory and run
 
 Or, with a Mac, you can enable Web Sharing and clone iD into your website directory.
 
-Come on in, the water's lovely. More help? Ping tmcw or jfire on IRC
+Come on in, the water's lovely. More help? Ping tmcw, jfire, or bhousel on IRC
 (`irc.oftc.net`, in `#osm-dev` or `#osm`) or on the OSM mailing lists.
 
 For guidance on building a packaged version, running tests, and contributing to
