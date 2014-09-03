@@ -1,0 +1,19 @@
+{
+    "icon": "railway-rail",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "construction",
+        "construction": "narrow_gauge"
+    },
+    "terms": [
+        "narrow gauge railway",
+        "narrow gauge railroad"
+    ],
+    "name": "Narrow Gauge Rail (Under Construction)",
+    "matchScore": 0.8
+}

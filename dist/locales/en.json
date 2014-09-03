@@ -1740,6 +1740,122 @@
                 "name": "Warehouse",
                 "terms": ""
             },
+            "construction/bridleway": {
+                "name": "Bridle Path (Under Construction)",
+                "terms": "bridleway,equestrian,horse"
+            },
+            "construction/cycleway": {
+                "name": "Cycle Path (Under Construction)",
+                "terms": "bike"
+            },
+            "construction/footway": {
+                "name": "Foot Path (Under Construction)",
+                "terms": "hike,hiking,trackway,trail,walk"
+            },
+            "construction/funicular": {
+                "name": "Funicular (Under Construction)",
+                "terms": "venicular,cliff railway,cable car,cable railway,funicular railway"
+            },
+            "construction/living_street": {
+                "name": "Living Street (Under Construction)",
+                "terms": ""
+            },
+            "construction/monorail": {
+                "name": "Monorail (Under Construction)",
+                "terms": ""
+            },
+            "construction/motorway": {
+                "name": "Motorway (Under Construction)",
+                "terms": ""
+            },
+            "construction/motorway_link": {
+                "name": "Motorway Link (Under Construction)",
+                "terms": "ramp,on ramp,off ramp"
+            },
+            "construction/narrow_gauge": {
+                "name": "Narrow Gauge Rail (Under Construction)",
+                "terms": "narrow gauge railway,narrow gauge railroad"
+            },
+            "construction/path": {
+                "name": "Path (Under Construction)",
+                "terms": "hike,hiking,trackway,trail,walk"
+            },
+            "construction/pedestrian": {
+                "name": "Pedestrian Way (Under Construction)",
+                "terms": ""
+            },
+            "construction/platform": {
+                "name": "Railway Platform (Under Construction)",
+                "terms": ""
+            },
+            "construction/primary": {
+                "name": "Primary Road (Under Construction)",
+                "terms": ""
+            },
+            "construction/primary_link": {
+                "name": "Primary Link (Under Construction)",
+                "terms": "ramp,on ramp,off ramp"
+            },
+            "construction/rail": {
+                "name": "Rail (Under Construction)",
+                "terms": ""
+            },
+            "construction/residential": {
+                "name": "Residential Road (Under Construction)",
+                "terms": ""
+            },
+            "construction/road": {
+                "name": "Unknown Road (Under Construction)",
+                "terms": ""
+            },
+            "construction/secondary": {
+                "name": "Secondary Road (Under Construction)",
+                "terms": ""
+            },
+            "construction/secondary_link": {
+                "name": "Secondary Link (Under Construction)",
+                "terms": "ramp,on ramp,off ramp"
+            },
+            "construction/service": {
+                "name": "Service Road (Under Construction)",
+                "terms": ""
+            },
+            "construction/steps": {
+                "name": "Steps (Under Construction)",
+                "terms": "stairs,staircase"
+            },
+            "construction/subway": {
+                "name": "Subway (Under Construction)",
+                "terms": ""
+            },
+            "construction/tertiary": {
+                "name": "Tertiary Road (Under Construction)",
+                "terms": ""
+            },
+            "construction/tertiary_link": {
+                "name": "Tertiary Link (Under Construction)",
+                "terms": "ramp,on ramp,off ramp"
+            },
+            "construction/track": {
+                "name": "Track (Under Construction)",
+                "terms": "woods road,fire road"
+            },
+            "construction/tram": {
+                "name": "Tram (Under Construction)",
+                "terms": "streetcar"
+            },
+            "construction/trunk": {
+                "name": "Trunk Road (Under Construction)",
+                "terms": ""
+            },
+            "construction/trunk_link": {
+                "name": "Trunk Link (Under Construction)",
+                "terms": "ramp,on ramp,off ramp"
+            },
+            "construction/unclassified": {
+                "name": "Unclassified Road (Under Construction)",
+                "terms": ""
+            },
             "craft": {
                 "name": "Craft",
                 "terms": ""

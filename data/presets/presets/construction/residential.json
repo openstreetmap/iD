@@ -1,0 +1,16 @@
+{
+    "icon": "highway-residential",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "residential"
+    },
+    "terms": [],
+    "name": "Residential Road (Under Construction)",
+    "matchScore": 0.8
+}

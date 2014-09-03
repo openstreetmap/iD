@@ -1,0 +1,23 @@
+{
+    "icon": "highway-footway",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "footway"
+    },
+    "terms": [
+        "hike",
+        "hiking",
+        "trackway",
+        "trail",
+        "walk"
+    ],
+    "name": "Foot Path (Under Construction)",
+    "matchScore": 0.8
+}

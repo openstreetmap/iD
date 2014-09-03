@@ -1,0 +1,19 @@
+{
+    "icon": "highway-track",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "track"
+    },
+    "terms": [
+        "woods road",
+        "fire road"
+    ],
+    "name": "Track (Under Construction)",
+    "matchScore": 0.8
+}

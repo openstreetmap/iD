@@ -1,0 +1,18 @@
+{
+    "icon": "highway-trunk",
+    "fields": [
+        "structure",
+        "lanes",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "trunk"
+    },
+    "terms": [],
+    "name": "Trunk Road (Under Construction)",
+    "matchScore": 0.8
+}

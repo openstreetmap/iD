@@ -1,0 +1,15 @@
+{
+    "icon": "highway-living-street",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "living_street"
+    },
+    "name": "Living Street (Under Construction)",
+    "matchScore": 0.8
+}

@@ -1,0 +1,18 @@
+{
+    "icon": "highway-primary",
+    "fields": [
+        "structure",
+        "lanes",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "primary"
+    },
+    "terms": [],
+    "name": "Primary Road (Under Construction)",
+    "matchScore": 0.8
+}

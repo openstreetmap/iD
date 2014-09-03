@@ -1,0 +1,18 @@
+{
+    "icon": "highway-cycleway",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "cycleway"
+    },
+    "terms": [
+        "bike"
+    ],
+    "name": "Cycle Path (Under Construction)",
+    "matchScore": 0.8
+}

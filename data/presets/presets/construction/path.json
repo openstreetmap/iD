@@ -1,0 +1,23 @@
+{
+    "icon": "highway-path",
+    "fields": [
+        "structure",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "hike",
+        "hiking",
+        "trackway",
+        "trail",
+        "walk"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "path"
+    },
+    "name": "Path (Under Construction)",
+    "matchScore": 0.8
+}

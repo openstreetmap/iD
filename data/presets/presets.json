@@ -2527,6 +2527,539 @@
         },
         "name": "Warehouse"
     },
+    "construction/bridleway": {
+        "icon": "highway-bridleway",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "bridleway"
+        },
+        "terms": [
+            "bridleway",
+            "equestrian",
+            "horse"
+        ],
+        "name": "Bridle Path (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/cycleway": {
+        "icon": "highway-cycleway",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "cycleway"
+        },
+        "terms": [
+            "bike"
+        ],
+        "name": "Cycle Path (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/footway": {
+        "icon": "highway-footway",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "footway"
+        },
+        "terms": [
+            "hike",
+            "hiking",
+            "trackway",
+            "trail",
+            "walk"
+        ],
+        "name": "Foot Path (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/funicular": {
+        "icon": "railway-rail",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "terms": [
+            "venicular",
+            "cliff railway",
+            "cable car",
+            "cable railway",
+            "funicular railway"
+        ],
+        "tags": {
+            "railway": "construction",
+            "construction": "funicular"
+        },
+        "name": "Funicular (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/living_street": {
+        "icon": "highway-living-street",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "living_street"
+        },
+        "name": "Living Street (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/monorail": {
+        "icon": "railway-monorail",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "railway": "construction",
+            "construction": "monorail"
+        },
+        "terms": [],
+        "name": "Monorail (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/motorway": {
+        "icon": "highway-motorway",
+        "fields": [
+            "oneway_yes",
+            "structure",
+            "lanes",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "motorway"
+        },
+        "terms": [],
+        "name": "Motorway (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/motorway_link": {
+        "icon": "highway-motorway-link",
+        "fields": [
+            "oneway_yes",
+            "structure",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "motorway_link"
+        },
+        "terms": [
+            "ramp",
+            "on ramp",
+            "off ramp"
+        ],
+        "name": "Motorway Link (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/narrow_gauge": {
+        "icon": "railway-rail",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "railway": "construction",
+            "construction": "narrow_gauge"
+        },
+        "terms": [
+            "narrow gauge railway",
+            "narrow gauge railroad"
+        ],
+        "name": "Narrow Gauge Rail (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/path": {
+        "icon": "highway-path",
+        "fields": [
+            "structure",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "terms": [
+            "hike",
+            "hiking",
+            "trackway",
+            "trail",
+            "walk"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "path"
+        },
+        "name": "Path (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/pedestrian": {
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line",
+            "area"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "pedestrian"
+        },
+        "terms": [],
+        "name": "Pedestrian Way (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/platform": {
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "railway": "construction",
+            "construction": "platform"
+        },
+        "name": "Railway Platform (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/primary": {
+        "icon": "highway-primary",
+        "fields": [
+            "structure",
+            "lanes",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "primary"
+        },
+        "terms": [],
+        "name": "Primary Road (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/primary_link": {
+        "icon": "highway-primary-link",
+        "fields": [
+            "structure",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "primary_link"
+        },
+        "terms": [
+            "ramp",
+            "on ramp",
+            "off ramp"
+        ],
+        "name": "Primary Link (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/rail": {
+        "icon": "railway-rail",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "railway": "construction",
+            "construction": "rail"
+        },
+        "terms": [],
+        "name": "Rail (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/residential": {
+        "icon": "highway-residential",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "residential"
+        },
+        "terms": [],
+        "name": "Residential Road (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/road": {
+        "icon": "highway-road",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "road"
+        },
+        "terms": [],
+        "name": "Unknown Road (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/secondary": {
+        "icon": "highway-secondary",
+        "fields": [
+            "structure",
+            "lanes",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "secondary"
+        },
+        "terms": [],
+        "name": "Secondary Road (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/secondary_link": {
+        "icon": "highway-secondary-link",
+        "fields": [
+            "structure",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "secondary_link"
+        },
+        "terms": [
+            "ramp",
+            "on ramp",
+            "off ramp"
+        ],
+        "name": "Secondary Link (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/service": {
+        "icon": "highway-service",
+        "fields": [
+            "service",
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "service"
+        },
+        "terms": [],
+        "name": "Service Road (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/steps": {
+        "icon": "highway-steps",
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "steps"
+        },
+        "terms": [
+            "stairs",
+            "staircase"
+        ],
+        "name": "Steps (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/subway": {
+        "icon": "railway-subway",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "railway": "construction",
+            "construction": "subway"
+        },
+        "terms": [],
+        "name": "Subway (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/tertiary": {
+        "icon": "highway-tertiary",
+        "fields": [
+            "structure",
+            "lanes",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "tertiary"
+        },
+        "terms": [],
+        "name": "Tertiary Road (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/tertiary_link": {
+        "icon": "highway-tertiary-link",
+        "fields": [
+            "structure",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "tertiary_link"
+        },
+        "terms": [
+            "ramp",
+            "on ramp",
+            "off ramp"
+        ],
+        "name": "Tertiary Link (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/track": {
+        "icon": "highway-track",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "track"
+        },
+        "terms": [
+            "woods road",
+            "fire road"
+        ],
+        "name": "Track (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/tram": {
+        "icon": "railway-light-rail",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "railway": "construction",
+            "construction": "tram"
+        },
+        "terms": [
+            "streetcar"
+        ],
+        "name": "Tram (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/trunk": {
+        "icon": "highway-trunk",
+        "fields": [
+            "structure",
+            "lanes",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "trunk"
+        },
+        "terms": [],
+        "name": "Trunk Road (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/trunk_link": {
+        "icon": "highway-trunk-link",
+        "fields": [
+            "structure",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "trunk_link"
+        },
+        "terms": [
+            "ramp",
+            "on ramp",
+            "off ramp"
+        ],
+        "name": "Trunk Link (Under Construction)",
+        "matchScore": 0.8
+    },
+    "construction/unclassified": {
+        "icon": "highway-unclassified",
+        "fields": [
+            "structure"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "construction",
+            "construction": "unclassified"
+        },
+        "terms": [],
+        "name": "Unclassified Road (Under Construction)",
+        "matchScore": 0.8
+    },
     "craft": {
         "icon": "marker-stroked",
         "fields": [

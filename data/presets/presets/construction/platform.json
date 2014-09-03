@@ -1,0 +1,14 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "railway": "construction",
+        "construction": "platform"
+    },
+    "name": "Railway Platform (Under Construction)",
+    "matchScore": 0.8
+}

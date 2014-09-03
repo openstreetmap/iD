@@ -1,0 +1,16 @@
+{
+    "icon": "railway-monorail",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "construction",
+        "construction": "monorail"
+    },
+    "terms": [],
+    "name": "Monorail (Under Construction)",
+    "matchScore": 0.8
+}

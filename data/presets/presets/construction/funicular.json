@@ -1,0 +1,22 @@
+{
+    "icon": "railway-rail",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "venicular",
+        "cliff railway",
+        "cable car",
+        "cable railway",
+        "funicular railway"
+    ],
+    "tags": {
+        "railway": "construction",
+        "construction": "funicular"
+    },
+    "name": "Funicular (Under Construction)",
+    "matchScore": 0.8
+}

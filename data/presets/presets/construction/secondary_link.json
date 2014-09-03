@@ -1,0 +1,21 @@
+{
+    "icon": "highway-secondary-link",
+    "fields": [
+        "structure",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "secondary_link"
+    },
+    "terms": [
+        "ramp",
+        "on ramp",
+        "off ramp"
+    ],
+    "name": "Secondary Link (Under Construction)",
+    "matchScore": 0.8
+}

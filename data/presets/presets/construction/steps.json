@@ -1,0 +1,16 @@
+{
+    "icon": "highway-steps",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "steps"
+    },
+    "terms": [
+        "stairs",
+        "staircase"
+    ],
+    "name": "Steps (Under Construction)",
+    "matchScore": 0.8
+}
