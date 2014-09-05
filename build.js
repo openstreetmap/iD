@@ -224,6 +224,43 @@ fs.writeFileSync('data/presets/presets.json', stringify(presets.presets));
 fs.writeFileSync('js/id/core/area_keys.js', '/* jshint -W109 */\niD.areaKeys = ' + stringify(presets.areaKeys) + ';');
 fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: presets.presetsYaml}}));
 
+// Write taginfo data
+var taginfo = {
+    "data_format": 1,
+    "data_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/data/taginfo.json",
+    "project": {
+        "name": "iD Editor",
+        "description": "Online editor for OSM data.",
+        "project_url": "https://github.com/openstreetmap/iD",
+        "doc_url": "https://github.com/openstreetmap/iD/blob/master/data/presets/README.md",
+        "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/dist/img/logo.png",
+        "keywords": [
+            "editor"
+        ]
+    },
+    "tags": []
+};
+
+_.forEach(presets.presets, function(preset) {
+    if (preset.suggestion)
+        return;
+
+    var keys = Object.keys(preset.tags),
+        last = keys[keys.length - 1],
+        tag = {key: last};
+
+    if (!last)
+        return;
+
+    if (preset.tags[last] !== '*') {
+        tag.value = preset.tags[last];
+    }
+
+    taginfo.tags.push(tag);
+});
+
+fs.writeFileSync('data/taginfo.json', stringify(taginfo));
+
 // Push changes from data/core.yaml into en.json
 var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
 var presets = {en: {presets: translations}};
