@@ -10,11 +10,9 @@ iD.modes.SelectImage = function (context) {
     ];
 
     function click() {
-        console.log('selectImage click');
         var datum = d3.event.target.__data__;
         var lasso = d3.select('#surface .lasso').node();
         if (isImage(datum)) {
-            console.log('selectImage clicked image', datum);
             if (currentImage) {
                 context.surface().selectAll('.key_' + currentImage.properties.key)
                     .classed('selected', false);
@@ -28,7 +26,6 @@ iD.modes.SelectImage = function (context) {
     }
 
     function isImage(datum) {
-        console.log('selectImage.isImage');
         return datum != undefined && datum && datum.properties != undefined && datum.properties.entityType == 'image';
     }
 
@@ -54,13 +51,11 @@ iD.modes.SelectImage = function (context) {
         context.surface()
             .on('mouseover.image', function () {
                 var datum = d3.event.target.__data__;
-                console.log('mouseover.image', datum, arguments);
                 if (isImage(datum)) {
                     context.ui().sidebar.hover(datum);
                 }
             })
             .on('mouseout.image', function () {
-                console.log('mouseout.image');
                 if (currentImage !== undefined) {
                     context.ui().sidebar.showSelectedImage(currentImage);
                 }

@@ -3,7 +3,6 @@ iD.svg.Sequences = function (projection, context) {
 
 
     function drawSequences(_surface) {
-//        console.log('drawSequences');
         surface = _surface;
 
         if (enabled) {
@@ -23,7 +22,6 @@ iD.svg.Sequences = function (projection, context) {
     }
 
     drawSequences.plotSequences = function (surface, context, sequences) {
-        console.log('plotSequences', surface, sequences);
         var arrow_marker = surface.select('defs').selectAll('marker.arrow')
             .data([0]);
         arrow_marker.enter()
