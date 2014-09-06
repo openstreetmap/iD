@@ -59,7 +59,10 @@ iD.behavior.Hover = function() {
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
                 dispatch.hover(target.id);
-            } else {
+            } else if (target && target.properties != undefined && target.properties.entityType == 'image') {
+                dispatch.hover(target);
+            }
+                else {
                 dispatch.hover(null);
             }
         }

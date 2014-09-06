@@ -319,13 +319,12 @@ iD.ui.Background = function(context) {
 
         var mapillaryLabel = mapillaryLayerItem.append('label')
             .call(bootstrap.tooltip()
-                .title(t('mapillary.title'))
+                .title(t('mapillary.tooltip'))
                 .placement('top'));
 
         mapillaryLabel.append('input')
             .attr('type', 'checkbox')
             .on('change', function(){
-                console.log('clickMapillary', this);
                 if(this.checked) {
                     context.enter(iD.modes.SelectImage(context));
                 } else {

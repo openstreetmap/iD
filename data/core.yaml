@@ -297,6 +297,7 @@ en:
     zoom: "Zoom to GPX track"
     browse: "Browse for a .gpx file"
   mapillary:
+    tooltip: "Mapillary street photos"
     title: "Mapillary"
     view_on_mapillary: "View this image on Mapillary."
     no_image_found: "No image found on Mapillary. Go and take some here!"

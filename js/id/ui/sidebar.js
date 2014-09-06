@@ -1,5 +1,6 @@
 iD.ui.Sidebar = function(context) {
     var inspector = iD.ui.Inspector(context),
+        imageView = iD.ui.ImageView(context),
         current;
 
     function sidebar(selection) {
@@ -12,17 +13,20 @@ iD.ui.Sidebar = function(context) {
         var inspectorWrap = selection.append('div')
             .attr('class', 'inspector-hidden inspector-wrap fr');
 
-        var imageInspector = selection.append('div')
-            .attr('class', 'image-wrap fr')
-            .append('div')
-            .attr('class','panewrap')
-            .append('div')
-            .attr('class', 'image-inspector-pane pane')
-            .append('div')
-            .attr('id',"image-inspector");
+        var imageWrap = selection.append('div')
+            .attr('class', 'image-list-pane')
+            .call(imageView);
 
         sidebar.hover = function(id) {
-            if (!current && id) {
+            if (id && id.properties != undefined && id.properties.entityType == 'image') {
+                console.log('sidebar.hover', id);
+                featureListWrap.classed('inspector-hidden', true);
+                inspectorWrap.classed('inspector-hidden', true)
+                imageWrap.classed('inspector-hidden', false)
+                    .classed('inspector-hover', true);
+                imageView.hoverImage(id);
+
+            } else if (!current && id) {
                 featureListWrap.classed('inspector-hidden', true);
                 inspectorWrap.classed('inspector-hidden', false)
                     .classed('inspector-hover', true);
@@ -80,13 +84,26 @@ iD.ui.Sidebar = function(context) {
             current = null;
         };
 
+        sidebar.selectImage = function(image) {
+            imageView.selectedImage(image);
+            return sidebar;
+        };
+
+
         sidebar.showImage = function(image) {
-            console.log('showing image', image);
-            if(image) {
-                var key = image.properties.key;
-                selection.select('#image-inspector')
-                    .html('<a href="http://mapillary.com/map/im/' + key+'"><img src="https://d1cuyjsrcm0gby.cloudfront.net/'+key+'/thumb-320.jpg"></img></a>');
-            }
+            console.log('sidebar.showImage', image);
+            featureListWrap.classed('inspector-hidden', true);
+            inspectorWrap.classed('inspector-hidden', true);
+            imageWrap.classed('inspector-hidden', false);
+            inspectorWrap.classed('inspector-hidden', true);
+        }
+        sidebar.showSelectedImage = function(image) {
+            console.log('sidebar.showImage', image);
+            featureListWrap.classed('inspector-hidden', true);
+            inspectorWrap.classed('inspector-hidden', true);
+            imageWrap.classed('inspector-hidden', false);
+            inspectorWrap.classed('inspector-hidden', true);
+            imageView.showSelectedImage();
         }
     }
 
