@@ -56,9 +56,7 @@ iD.modes.SelectImage = function (context) {
                 }
             })
             .on('mouseout.image', function () {
-                if (currentImage !== undefined) {
                     context.ui().sidebar.showSelectedImage(currentImage);
-                }
             })
     };
 
