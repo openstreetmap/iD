@@ -11,7 +11,8 @@
         "area"
     ],
     "tags": {
-        "shop": "organic"
+        "shop": "supermarket",
+        "organic": "true"
     },
     "name": "Organic Goods Store"
 }

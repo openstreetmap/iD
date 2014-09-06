@@ -1893,8 +1893,8 @@
             "value": "optician"
         },
         {
-            "key": "shop",
-            "value": "organic"
+            "key": "organic",
+            "value": "true"
         },
         {
             "key": "shop",
