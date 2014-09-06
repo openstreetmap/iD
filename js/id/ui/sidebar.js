@@ -100,7 +100,7 @@ iD.ui.Sidebar = function(context) {
             inspectorWrap.classed('inspector-hidden', true);
             imageView.hoverImage(image)
         }
-        sidebar.showSelectedImage = function(image) {
+        sidebar.showSelectedImage = function() {
             featureListWrap.classed('inspector-hidden', true);
             inspectorWrap.classed('inspector-hidden', true);
             imageWrap.classed('inspector-hidden', false);
