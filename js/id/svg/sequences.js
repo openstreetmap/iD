@@ -35,7 +35,7 @@ iD.svg.Sequences = function (projection, context) {
             .attr('orient', '180')
             .append("polyline")
             .attr('points', '0,0 40,80 80,0');
-        var imagePoints = drawSequences.images(sequences, 100);
+        var imagePoints = drawSequences.images(sequences, 1000);
         var images = surface.select('.layer-hit').selectAll('g.image')
             .data(imagePoints);
 
@@ -89,7 +89,7 @@ iD.svg.Sequences = function (projection, context) {
 
     drawSequences.reloadMapillaryImages = function () {
         var extent = context.map().extent();
-        d3.json('https://mapillary-read-api.herokuapp.com/v1/s/search?min-lat=' + extent[0][1] + '&max-lat=' + extent[1][1] + '&min-lon=' + extent[0][0] + '&max-lon=' + extent[1][0] + '&max-results=2&geojson=true', function (error, data) {
+        d3.json('https://mapillary-read-api.herokuapp.com/v1/s/search?min-lat=' + extent[0][1] + '&max-lat=' + extent[1][1] + '&min-lon=' + extent[0][0] + '&max-lon=' + extent[1][0] + '&max-results=100&geojson=true', function (error, data) {
             drawSequences.plotSequences(context.surface(), context, data);
 
         });

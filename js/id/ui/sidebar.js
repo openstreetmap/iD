@@ -22,15 +22,16 @@ iD.ui.Sidebar = function(context) {
         }
 
         sidebar.hover = function(id) {
+            console.log('sidebar.hover', id);
             if (isImage(id)) {
-                featureListWrap.classed('inspector-hidden', true);
+                featureListWrap.classed('inspector-hidden', false);
                 inspectorWrap.classed('inspector-hidden', true)
-                imageWrap.classed('inspector-hidden', false)
-                    .classed('inspector-hover', true);
+                imageWrap.classed('inspector-hidden', false);
                 imageView.hoverImage(id);
 
             } else if (!current && id) {
                 featureListWrap.classed('inspector-hidden', true);
+                imageWrap.classed('inspector-hidden', false);
                 inspectorWrap.classed('inspector-hidden', false)
                     .classed('inspector-hover', true);
 
@@ -43,6 +44,7 @@ iD.ui.Sidebar = function(context) {
                 }
             } else if (!current) {
                 featureListWrap.classed('inspector-hidden', false);
+                imageWrap.classed('inspector-hidden', false);
                 inspectorWrap.classed('inspector-hidden', true);
                 inspector.state('hide');
             }
@@ -53,6 +55,7 @@ iD.ui.Sidebar = function(context) {
         sidebar.select = function(id, newFeature) {
             if (!current && id) {
                 featureListWrap.classed('inspector-hidden', true);
+                imageWrap.classed('inspector-hidden', false);
                 inspectorWrap.classed('inspector-hidden', false)
                     .classed('inspector-hover', false);
 
@@ -66,6 +69,7 @@ iD.ui.Sidebar = function(context) {
                 }
             } else if (!current) {
                 featureListWrap.classed('inspector-hidden', false);
+                imageWrap.classed('inspector-hidden', false);
                 inspectorWrap.classed('inspector-hidden', true);
                 inspector.state('hide');
             }
@@ -101,7 +105,7 @@ iD.ui.Sidebar = function(context) {
             imageView.hoverImage(image)
         }
         sidebar.showSelectedImage = function() {
-            featureListWrap.classed('inspector-hidden', true);
+            featureListWrap.classed('inspector-hidden', false);
             inspectorWrap.classed('inspector-hidden', true);
             imageWrap.classed('inspector-hidden', false);
             inspectorWrap.classed('inspector-hidden', true);
