@@ -362,7 +362,7 @@
         "tooltip": "Mapillary street photos",
         "title": "Mapillary",
         "view_on_mapillary": "View this image on Mapillary.",
-        "no_image_found": "No image found on [Mapillary](http://mapillary.com). Go and take some!\n"
+        "no_image_found": "No image found on <a href=\"http://mapillary.com/\" target=\"_blank\">Mapillary</a>. Go and take some!\n"
     },
     "help": {
         "title": "Help",

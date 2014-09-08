@@ -38,7 +38,7 @@ iD.ui.ImageView = function () {
                 imageWrapper.classed('hidden', true);
             });
         content.append('div').html('<div><img src="https://d1cuyjsrcm0gby.cloudfront.net/'+key+'/thumb-320.jpg"></img></div>' +
-            '<a class="link" href="http://mapillary.com/map/im/' + key+'">View on Mapillary</a>');
+            '<a class="link" target="_blank" href="http://mapillary.com/map/im/' + key+'">View on Mapillary</a>');
 
     };
 
