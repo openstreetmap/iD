@@ -16,9 +16,16 @@ iD.modes.SelectImage = function (context) {
                 context.surface().selectAll('.key_' + currentImage.properties.key)
                     .classed('selected', false);
             }
-            currentImage = datum;
-            context.surface().selectAll('.key_' + currentImage.properties.key)
-                .classed('selected', true);
+            if(currentImage == datum) {
+                context.surface().selectAll('.key_' + currentImage.properties.key)
+                    .classed('selected', false);
+                currentImage = undefined;
+
+            } else {
+                currentImage = datum;
+                context.surface().selectAll('.key_' + currentImage.properties.key)
+                    .classed('selected', true);
+            }
 //            imageView.selectedImage(currentImage);
             imageView.show(currentImage);
         }

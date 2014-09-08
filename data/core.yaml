@@ -300,7 +300,8 @@ en:
     tooltip: "Mapillary street photos"
     title: "Mapillary"
     view_on_mapillary: "View this image on Mapillary."
-    no_image_found: "No image found on Mapillary. Go and take some here!"
+    no_image_found: |
+      No image found on [Mapillary](http://mapillary.com). Go and take some!
   help:
     title: "Help"
     help: |

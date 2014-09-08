@@ -11,7 +11,7 @@ iD.ui.ImageView = function (context) {
     };
 
     imageView.showEmpty = function () {
-            d3.select('#mapillaryImage').html('No image selected');
+            d3.select('#mapillaryImage').html(marked(t('mapillary.no_image_found')));
     }
     imageView.hoverImage = function (hoverImage) {
         imageView.show(hoverImage);
