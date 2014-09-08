@@ -22,6 +22,23 @@ iD.svg.Sequences = function (projection, context) {
     };
 
     drawSequences.plotSequences = function (surface, context, sequences) {
+
+
+        surface.select('.layer-hit').selectAll('g.sequence').remove();
+        var seq = surface
+            .select('.layer-hit').selectAll('g.sequence')
+            .data(sequences.features, function (d) {
+                return d.properties.key;
+            });
+        seq.enter()
+            .append('g')
+            .attr('class', function (d) {
+                return 'sequence key_' + d.properties.key;
+            })
+            .append('path')
+            .attr('d', d3.geo.path().projection(context.projection));
+
+
         var arrow_marker = surface.select('defs').selectAll('marker.arrow')
             .data([0]);
         arrow_marker.enter()
@@ -73,19 +90,6 @@ iD.svg.Sequences = function (projection, context) {
         images.select('.shadow');
         images.select('.stroke');
 
-        surface.select('.layer-hit').selectAll('g.sequence').remove();
-        var seq = surface
-            .select('.layer-hit').selectAll('g.sequence')
-            .data(sequences.features, function (d) {
-                return d.properties.key;
-            });
-        seq.enter()
-            .append('g')
-            .attr('class', function (d) {
-                return 'sequence key_' + d.properties.key;
-            })
-            .append('path')
-            .attr('d', d3.geo.path().projection(context.projection));
     };
 
     drawSequences.reloadMapillaryImages = function () {
