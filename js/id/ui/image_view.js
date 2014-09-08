@@ -4,7 +4,6 @@ iD.ui.ImageView = function (context) {
     function imageView(sel) {
     }
 
-
     imageView.selectedImage = function (_) {
         console.log("imageView.selectedImage", _);
         if (!arguments.length) return selectedImage;
@@ -12,7 +11,7 @@ iD.ui.ImageView = function (context) {
     };
 
     imageView.showEmpty = function () {
-            d3.select('#mapillaryImage').html('no image selected');
+            d3.select('#mapillaryImage').html('No image selected');
     }
     imageView.hoverImage = function (hoverImage) {
         imageView.show(hoverImage);
@@ -35,8 +34,5 @@ iD.ui.ImageView = function (context) {
 
     };
 
-
-
     return imageView;
-
 };

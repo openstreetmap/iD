@@ -33,6 +33,7 @@ iD.ui = function(context) {
             .call(map);
         var imageViewer = content.append('div')
             .attr('id', 'mapillaryImage')
+            .classed('hidden', true)
             .call(iD.ui.ImageView(context));
 
         bar.append('div')

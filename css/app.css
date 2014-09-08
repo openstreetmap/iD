@@ -723,10 +723,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 #mapillaryImage {
     position: absolute;
-    bottom: 20px;
-    padding: 10px;
-    background-color: #ffffff;
-    right: 0
+    right: 0;
+    bottom: 30px;
+    padding: 8px;
+    background-color: #fff;
+}
+#mapillaryImage > div {
+    position: relative;
 }
 
 #mapillaryImage > a {
@@ -738,21 +741,31 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 #mapillaryImage .link {
+    background-color: rgba(0,0,0,0.5);
+    color: #45B29D;
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 30px;
+    height: 20px;
     text-align: center;
 }
 
 #mapillaryImage img {
-    margin: 0 auto;
+    width: 100%;
+    heigth: auto;
     display: block;
-    width: 90%;
 }
 
 #mapillaryImage.hidden {
   visibility: hidden;
+}
+
+#mapillaryImage .close {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #EB5055;
 }
 
 
