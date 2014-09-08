@@ -12,9 +12,7 @@ iD.ui.Sidebar = function(context) {
         var inspectorWrap = selection.append('div')
             .attr('class', 'inspector-hidden inspector-wrap fr');
 
-
         sidebar.hover = function(id) {
-            console.log('sidebar.hover', id);
            if (!current && id) {
                 featureListWrap.classed('inspector-hidden', true);
                 inspectorWrap.classed('inspector-hidden', false)
@@ -72,22 +70,6 @@ iD.ui.Sidebar = function(context) {
             if (current) current.remove();
             current = null;
         };
-
-        sidebar.selectImage = function(image) {
-            return sidebar;
-        };
-
-
-        sidebar.showImage = function(image) {
-            featureListWrap.classed('inspector-hidden', true);
-            inspectorWrap.classed('inspector-hidden', true);
-            inspectorWrap.classed('inspector-hidden', true);
-        }
-        sidebar.showSelectedImage = function() {
-            featureListWrap.classed('inspector-hidden', false);
-            inspectorWrap.classed('inspector-hidden', true);
-            inspectorWrap.classed('inspector-hidden', true);
-        }
     }
 
     sidebar.hover = function() {};

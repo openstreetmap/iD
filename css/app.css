@@ -340,9 +340,6 @@ a.hide {
     right: -100%;
 }
 
-.part65 {
-    height: 65%;
-}
 
 .pane {
     position:absolute;
@@ -672,7 +669,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-top: 1px solid #ccc;
     background-color: #fafafa;
     width: 100%;
-    z-index: 100;
 }
 
 .sidebar-component .body {

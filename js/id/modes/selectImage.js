@@ -49,6 +49,7 @@ iD.modes.SelectImage = function (context) {
 
         imageView = context.imageView();
         console.log('selectImage.enter', imageView);
+        imageView.showEmpty();
         context.surface()
             .on('click.image', click);
         context.surface()
@@ -75,6 +76,10 @@ iD.modes.SelectImage = function (context) {
     mode.exit = function () {
         console.log('selectImage.exit');
         context.map().enableSequences(false);
+        if(!currentImage) {
+            var imageWrapper = d3.select('#mapillaryImage').classed('hidden', true);
+
+        }
         behaviors.forEach(function (behavior) {
             context.uninstall(behavior);
         });

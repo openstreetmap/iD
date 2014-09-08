@@ -11,7 +11,16 @@ iD.ui.ImageView = function (context) {
     };
 
     imageView.showEmpty = function () {
-            d3.select('#mapillaryImage').html(marked(t('mapillary.no_image_found')));
+        var imageWrapper = d3.select('#mapillaryImage');
+        imageWrapper.html('');
+        var content = imageWrapper
+            .append('div');
+        content.append('div')
+            .on('click', function(){
+                imageWrapper.classed('hidden', true);
+            });
+
+        content.append('div').html(marked(t('mapillary.no_image_found')));
     }
     imageView.hoverImage = function (hoverImage) {
         imageView.show(hoverImage);

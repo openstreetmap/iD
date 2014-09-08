@@ -12,7 +12,7 @@ iD.Map = function(context) {
         transformStart,
         transformed = false,
         minzoom = 0,
-        points = iD.svg.Points(projection, context),
+        points = iD.svg.Points(roundedProjection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
         lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(projection),
@@ -74,7 +74,6 @@ iD.Map = function(context) {
         });
 
         context.on('enter.map', function() {
-            map.dimensions(selection.dimensions());
             if (map.editable() && !transformed) {
                 var all = context.intersects(map.extent()),
                     filter = d3.functor(true),
@@ -85,6 +84,7 @@ iD.Map = function(context) {
             }
         });
 
+        map.dimensions(selection.dimensions());
 
         labels.supersurface(supersurface);
     }
@@ -163,6 +163,7 @@ iD.Map = function(context) {
         transformed = true;
         iD.util.setTransform(supersurface, tX, tY, scale);
         queueRedraw();
+
         dispatch.move(map);
     }
 
