@@ -13,7 +13,7 @@ iD.ui.Sidebar = function(context) {
             .attr('class', 'inspector-hidden inspector-wrap fr');
 
         sidebar.hover = function(id) {
-           if (!current && id) {
+            if (!current && id) {
                 featureListWrap.classed('inspector-hidden', true);
                 inspectorWrap.classed('inspector-hidden', false)
                     .classed('inspector-hover', true);
