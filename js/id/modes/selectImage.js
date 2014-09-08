@@ -16,7 +16,7 @@ iD.modes.SelectImage = function (context) {
                 context.surface().selectAll('.key_' + currentImage.properties.key)
                     .classed('selected', false);
             }
-            if(currentImage == datum) {
+            if(currentImage === datum) {
                 context.surface().selectAll('.key_' + currentImage.properties.key)
                     .classed('selected', false);
                 currentImage = undefined;
@@ -32,7 +32,7 @@ iD.modes.SelectImage = function (context) {
     }
 
     function isImage(datum) {
-        return datum != undefined && datum && datum.properties != undefined && datum.properties.entityType == 'image';
+        return datum !== undefined && datum && datum.properties !== undefined && datum.properties.entityType === 'image';
     }
 
     mode.enter = function () {
@@ -48,13 +48,11 @@ iD.modes.SelectImage = function (context) {
         }
 
         imageView = context.imageView();
-        console.log('selectImage.enter', imageView);
         imageView.showEmpty();
         context.surface()
             .on('click.image', click);
         context.surface()
             .on('mouseover.image', function () {
-                console.log('selectImage.mouseover');
                 var datum = d3.event.target.__data__;
                 if (isImage(datum)) {
                     imageView.hoverImage(datum);
@@ -63,30 +61,25 @@ iD.modes.SelectImage = function (context) {
             .on('mouseout.image', function () {
                 var datum = d3.event.target.__data__;
                 if (isImage(datum)) {
-                    console.log('selectImage.mouseout');
                     if(currentImage) {
                         imageView.show(currentImage);
                     } else {
                         imageView.showEmpty();
                     }
                 }
-            })
+            });
     };
 
     mode.exit = function () {
-        console.log('selectImage.exit');
         context.map().enableSequences(false);
         if(!currentImage) {
-            var imageWrapper = d3.select('#mapillaryImage').classed('hidden', true);
+            d3.select('#mapillaryImage').classed('hidden', true);
 
         }
         behaviors.forEach(function (behavior) {
             context.uninstall(behavior);
         });
 
-        if (sidebar) {
-            context.ui().sidebar.hide(sidebar);
-        }
         context.surface().select('defs').selectAll('marker.arrow')
             .remove();
         context.surface().select('.layer-hit').selectAll('g.image')
@@ -95,13 +88,6 @@ iD.modes.SelectImage = function (context) {
             .remove();
 
     };
-
-    mode.sidebar = function (_) {
-        if (!arguments.length) return sidebar;
-        sidebar = _;
-        return mode;
-    };
-
 
     return mode;
 };

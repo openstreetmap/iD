@@ -1,11 +1,10 @@
-iD.ui.ImageView = function (context) {
-    var sel, selectedImage;
+iD.ui.ImageView = function () {
+    var selectedImage;
 
-    function imageView(sel) {
+    function imageView() {
     }
 
     imageView.selectedImage = function (_) {
-        console.log("imageView.selectedImage", _);
         if (!arguments.length) return selectedImage;
         selectedImage = _;
     };
@@ -21,7 +20,7 @@ iD.ui.ImageView = function (context) {
             });
 
         content.append('div').html(marked(t('mapillary.no_image_found')));
-    }
+    };
     imageView.hoverImage = function (hoverImage) {
         imageView.show(hoverImage);
     };

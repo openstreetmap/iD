@@ -219,7 +219,7 @@ window.iD = function () {
     var imageView = iD.ui.ImageView(context);
     context.imageView = function() {
         console.log('Id.imageView', imageView);
-        return imageView
+        return imageView;
     };
 
     context.surfaceRect = function() {

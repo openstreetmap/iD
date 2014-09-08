@@ -19,7 +19,7 @@ iD.svg.Sequences = function (projection, context) {
     drawSequences.enable = function (enable) {
         enabled = enable;
         drawSequences(surface);
-    }
+    };
 
     drawSequences.plotSequences = function (surface, context, sequences) {
         var arrow_marker = surface.select('defs').selectAll('marker.arrow')
@@ -33,7 +33,7 @@ iD.svg.Sequences = function (projection, context) {
             .attr('markerHeight', '3 ')
             .attr('viewBox', '0 0 80 80')
             .attr('orient', '180')
-            .append("polyline")
+            .append('polyline')
             .attr('points', '0,0 40,80 80,0');
         var imagePoints = drawSequences.images(sequences, 1000);
         var images = surface.select('.layer-hit').selectAll('g.image')
@@ -48,7 +48,7 @@ iD.svg.Sequences = function (projection, context) {
             .attr('transform', function (d) {
                 var translate = iD.svg.PointTransform(context.projection)({loc: d.geometry.coordinates});
                 if (d.properties.ca) {
-                    return translate + 'rotate(' + d.properties.ca + ',0,0)'
+                    return translate + 'rotate(' + d.properties.ca + ',0,0)';
                 }
                 return translate;
             })
@@ -74,18 +74,19 @@ iD.svg.Sequences = function (projection, context) {
         images.select('.stroke');
 
         surface.select('.layer-hit').selectAll('g.sequence').remove();
-        var sequences = surface.select('.layer-hit').selectAll('g.sequence')
+        var seq = surface
+            .select('.layer-hit').selectAll('g.sequence')
             .data(sequences.features, function (d) {
                 return d.properties.key;
             });
-        var sequence = sequences.enter()
+        seq.enter()
             .append('g')
             .attr('class', function (d) {
                 return 'sequence key_' + d.properties.key;
             })
             .append('path')
             .attr('d', d3.geo.path().projection(context.projection));
-    }
+    };
 
     drawSequences.reloadMapillaryImages = function () {
         var extent = context.map().extent();
@@ -93,11 +94,10 @@ iD.svg.Sequences = function (projection, context) {
             drawSequences.plotSequences(context.surface(), context, data);
 
         });
-    }
+    };
 
     drawSequences.images = function (sequences, limit) {
-        var graph = context.graph(),
-            images = [];
+        var images = [];
 
         for (var i = 0; i < sequences.features.length; i++) {
             var sequence = sequences.features[i];
@@ -125,7 +125,7 @@ iD.svg.Sequences = function (projection, context) {
             .attr('class', klass)
             .attr('transform', 'translate(0, 0)')
             .attr('d', 'M 0,0 l 0,-10');
-    }
+    };
 
 
     return drawSequences;

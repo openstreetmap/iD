@@ -404,7 +404,7 @@ iD.Map = function(context) {
 
     map.enableSequences = function (enable) {
         sequences.enable(enable);
-    }
+    };
 
     return d3.rebind(map, dispatch, 'on');
 };
