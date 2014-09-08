@@ -4,7 +4,7 @@ iD.Background = function(context) {
             .projection(context.projection),
         gpxLayer = iD.GpxLayer(context, dispatch)
             .projection(context.projection),
-        overlayLayers =     [];
+        overlayLayers = [];
 
     var backgroundSources = iD.data.imagery.map(function(source) {
         if (source.type === 'bing') {
@@ -91,7 +91,6 @@ iD.Background = function(context) {
 
         overlays.exit()
             .remove();
-
     }
 
     background.sources = function(extent) {

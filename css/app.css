@@ -721,17 +721,15 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     bottom: 0;
 }
 
-#mapillary-inspector {
-    width: 100%;
-    height: 35%;
+#mapillaryImage {
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
     padding: 10px;
-    padding-bottom: 30px;
-    padding-top: 0px;
+    background-color: #ffffff;
+    right: 0
 }
 
-#mapillary-inspector > a {
+#mapillaryImage > a {
     display: block;
     width: 100%;
     height: auto;
@@ -739,18 +737,22 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     position: relative;
 }
 
-#mapillary-inspector .link {
+#mapillaryImage .link {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 20px;
+    height: 30px;
     text-align: center;
 }
 
-#mapillary-inspector img {
+#mapillaryImage img {
     margin: 0 auto;
     display: block;
     width: 90%;
+}
+
+#mapillaryImage.hidden {
+  visibility: hidden;
 }
 
 

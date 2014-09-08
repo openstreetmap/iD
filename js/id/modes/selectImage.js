@@ -4,14 +4,13 @@ iD.modes.SelectImage = function (context) {
         id: 'selectImage',
         title: t('modes.selectImage.title'),
         description: t('modes.selectImage.description')
-    }, sidebar, currentImage;
+    }, imageView, currentImage;
 
     var behaviors = [
     ];
 
     function click() {
         var datum = d3.event.target.__data__;
-        var lasso = d3.select('#surface .lasso').node();
         if (isImage(datum)) {
             if (currentImage) {
                 context.surface().selectAll('.key_' + currentImage.properties.key)
@@ -20,8 +19,8 @@ iD.modes.SelectImage = function (context) {
             currentImage = datum;
             context.surface().selectAll('.key_' + currentImage.properties.key)
                 .classed('selected', true);
-            context.ui().sidebar.selectImage(currentImage);
-            context.ui().sidebar.showSelectedImage(currentImage);
+//            imageView.selectedImage(currentImage);
+            imageView.show(currentImage);
         }
     }
 
@@ -41,27 +40,33 @@ iD.modes.SelectImage = function (context) {
             document.activeElement.blur();
         }
 
-        if (sidebar) {
-            context.ui().sidebar.show(sidebar);
-        } else {
-            context.ui().sidebar.select(null);
-        }
+        imageView = context.imageView();
+        console.log('selectImage.enter', imageView);
         context.surface()
             .on('click.image', click);
         context.surface()
             .on('mouseover.image', function () {
+                console.log('selectImage.mouseover');
                 var datum = d3.event.target.__data__;
                 if (isImage(datum)) {
-                    context.ui().sidebar.hover(datum);
+                    imageView.hoverImage(datum);
                 }
             })
             .on('mouseout.image', function () {
-                    context.ui().sidebar.showSelectedImage(currentImage);
+                var datum = d3.event.target.__data__;
+                if (isImage(datum)) {
+                    console.log('selectImage.mouseout');
+                    if(currentImage) {
+                        imageView.show(currentImage);
+                    } else {
+                        imageView.showEmpty();
+                    }
+                }
             })
     };
 
     mode.exit = function () {
-//        console.log('selectImage.exit');
+        console.log('selectImage.exit');
         context.map().enableSequences(false);
         behaviors.forEach(function (behavior) {
             context.uninstall(behavior);
