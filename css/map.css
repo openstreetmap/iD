@@ -1160,9 +1160,10 @@ g.image.point{
 }
 
 g.image.point path{
-  stroke-width: 4;
-  stroke: none;
-  marker-end:url(#mapillary_direction_arrow);
+  stroke-width: 3;
+  stroke: orange;
+  fill: orange;
+  /*marker-end:url(#mapillary_direction_arrow);*/
 }
 
 g.image.point circle{

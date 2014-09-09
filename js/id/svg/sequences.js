@@ -39,19 +39,6 @@ iD.svg.Sequences = function (projection, context) {
             .attr('d', d3.geo.path().projection(context.projection));
 
 
-        var arrow_marker = surface.select('defs').selectAll('marker.arrow')
-            .data([0]);
-        arrow_marker.enter()
-            .append('svg:marker')
-            .attr('id', 'mapillary_direction_arrow')
-            .attr('refX', '40')
-            .attr('refY', '0')
-            .attr('markerWidth', '4')
-            .attr('markerHeight', '3 ')
-            .attr('viewBox', '0 0 80 80')
-            .attr('orient', '180')
-            .append('polyline')
-            .attr('points', '0,0 40,80 80,0');
         var imagePoints = drawSequences.images(sequences, 1000);
         var images = surface.select('.layer-hit').selectAll('g.image')
             .data(imagePoints);
@@ -128,7 +115,7 @@ iD.svg.Sequences = function (projection, context) {
         selection
             .attr('class', klass)
             .attr('transform', 'translate(0, 0)')
-            .attr('d', 'M 0,0 l 0,-10');
+            .attr('d', 'M 0,0 l 0,-30 l -5,20 l 10,0 l -5,-20');
     };
 
 
