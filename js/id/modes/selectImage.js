@@ -3,8 +3,10 @@ iD.modes.SelectImage = function (context) {
         button: 'selectImage',
         id: 'selectImage',
         title: t('modes.selectImage.title'),
-        description: t('modes.selectImage.description')
+        description: t('modes.selectImage.description'),
+        key: 'm'
     }, imageView, currentImage;
+    ;
 
     var behaviors = [
     ];

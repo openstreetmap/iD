@@ -26,7 +26,7 @@
             "tail": "Click to add more nodes to the line. Click on other lines to connect to them, and double-click to end the line."
         },
         "selectImage": {
-            "title": "Mapillary",
+            "title": "Photos",
             "description": "Choose and fix a Mapillary image for mapping."
         }
     },

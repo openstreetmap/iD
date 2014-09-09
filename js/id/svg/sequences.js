@@ -23,22 +23,6 @@ iD.svg.Sequences = function (projection, context) {
 
     drawSequences.plotSequences = function (surface, context, sequences) {
 
-
-        surface.select('.layer-hit').selectAll('g.sequence').remove();
-        var seq = surface
-            .select('.layer-hit').selectAll('g.sequence')
-            .data(sequences.features, function (d) {
-                return d.properties.key;
-            });
-        seq.enter()
-            .append('g')
-            .attr('class', function (d) {
-                return 'sequence key_' + d.properties.key;
-            })
-            .append('path')
-            .attr('d', d3.geo.path().projection(context.projection));
-
-
         var imagePoints = drawSequences.images(sequences, 1000);
         var images = surface.select('.layer-hit').selectAll('g.image')
             .data(imagePoints);

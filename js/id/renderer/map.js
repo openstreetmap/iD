@@ -380,6 +380,7 @@ iD.Map = function(context) {
     map.extentZoom = function(_) {
         var extent = iD.geo.Extent(_),
             tl = projection([extent[0][0], extent[1][1]]),
+            tl = projection([extent[0][0], extent[1][1]]),
             br = projection([extent[1][0], extent[0][1]]);
 
         // Calculate maximum zoom that fits extent

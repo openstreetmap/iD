@@ -763,6 +763,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     background-color: #f2f2f2;
 }
 
+.selectImage.icon {
+    background: transparent url("img/mapillary_icon.png") center right no-repeat;
+    background-size: 100%;
+}
+
 
 .feature-list-pane .inspector-body {
     top: 120px;
