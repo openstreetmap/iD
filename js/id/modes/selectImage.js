@@ -6,7 +6,6 @@ iD.modes.SelectImage = function (context) {
         description: t('modes.selectImage.description'),
         key: 'm'
     }, imageView, currentImage;
-    ;
 
     var behaviors = [
     ];
