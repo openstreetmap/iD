@@ -737,8 +737,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 #mapillaryImage .link {
-    background-color: rgba(0,0,0,0.5);
-    color: #45B29D;
+    background-color: black;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -761,7 +760,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     position: absolute;
     right: 0;
     top: 0;
-    background-color: #EB5055;
+    background-color: #f2f2f2;
 }
 
 
