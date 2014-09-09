@@ -1894,7 +1894,7 @@
         },
         {
             "key": "organic",
-            "value": "true"
+            "value": "only"
         },
         {
             "key": "shop",
