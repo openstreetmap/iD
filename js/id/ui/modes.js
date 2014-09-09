@@ -2,8 +2,7 @@ iD.ui.Modes = function(context) {
     var modes = [
         iD.modes.AddPoint(context),
         iD.modes.AddLine(context),
-        iD.modes.AddArea(context),
-        iD.modes.SelectImage(context)];
+        iD.modes.AddArea(context)];
 
     return function(selection) {
         var buttons = selection.selectAll('button.add-button')
@@ -11,7 +10,7 @@ iD.ui.Modes = function(context) {
 
        buttons.enter().append('button')
            .attr('tabindex', -1)
-           .attr('class', function(mode) { return mode.id + ' add-button col3'; })
+           .attr('class', function(mode) { return mode.id + ' add-button col4'; })
            .on('click.mode-buttons', function(mode) {
                if (mode.id === context.mode().id) {
                    context.enter(iD.modes.Browse(context));

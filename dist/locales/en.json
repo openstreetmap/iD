@@ -27,7 +27,7 @@
         },
         "selectImage": {
             "title": "Photos",
-            "description": "Choose and fix a Mapillary image for mapping."
+            "description": "Choose and fix a Mapillary image for mapping. Shortcut: 'm'"
         }
     },
     "operations": {
