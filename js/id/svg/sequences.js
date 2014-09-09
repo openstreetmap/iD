@@ -115,7 +115,7 @@ iD.svg.Sequences = function (projection, context) {
         selection
             .attr('class', klass)
             .attr('transform', 'translate(0, 0)')
-            .attr('d', 'M 0,0 l 0,-30 l -5,20 l 10,0 l -5,-20');
+            .attr('d', 'M 0,-10 l 0,-20 l -5,20 l 10,0 l -5,-20');
     };
 
 
