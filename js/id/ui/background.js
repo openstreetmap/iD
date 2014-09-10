@@ -324,6 +324,7 @@ iD.ui.Background = function(context) {
 
         mapillaryLabel.append('input')
             .attr('type', 'checkbox')
+            .attr('id', 'select_image_checkbox')
             .on('change', function(){
                 if(this.checked) {
                     context.enter(iD.modes.SelectImage(context));

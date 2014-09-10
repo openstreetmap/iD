@@ -38,6 +38,8 @@ iD.modes.SelectImage = function (context) {
     mode.enter = function () {
 //        console.log('selectImage.enter');
         context.map().enableSequences(true);
+        context.container().select('#select_image_checkbox')
+            .attr('checked','checked');
         behaviors.forEach(function (behavior) {
             context.install(behavior);
         });
@@ -72,6 +74,9 @@ iD.modes.SelectImage = function (context) {
 
     mode.exit = function () {
         context.map().enableSequences(false);
+        context.container().select('#select_image_checkbox')
+            .attr('checked',null);
+
         if(!currentImage) {
             context.container()
                 .select('#mapillaryImage')
