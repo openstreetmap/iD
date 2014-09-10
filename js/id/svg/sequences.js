@@ -13,8 +13,11 @@ iD.svg.Sequences = function (projection, context) {
     }
 
     drawSequences.removeAll = function () {
-        surface.select('.layer-hit').selectAll('g.image').remove();
-        surface.select('.layer-hit').selectAll('g.sequence').remove();
+        var hit_layer = surface.select('.layer-hit');
+        if (hit_layer) {
+            hit_layer.selectAll('g.image').remove();
+            hit_layer.selectAll('g.sequence').remove();
+        }
     };
     drawSequences.enable = function (enable) {
         enabled = enable;
@@ -22,7 +25,6 @@ iD.svg.Sequences = function (projection, context) {
     };
 
     drawSequences.plotSequences = function (surface, context, sequences) {
-
         var imagePoints = drawSequences.images(sequences, 1000);
         var images = surface.select('.layer-hit').selectAll('g.image')
             .data(imagePoints);
