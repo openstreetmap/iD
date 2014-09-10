@@ -27,7 +27,6 @@ iD.modes.SelectImage = function (context) {
                 context.surface().selectAll('.key_' + currentImage.properties.key)
                     .classed('selected', true);
             }
-//            imageView.selectedImage(currentImage);
             imageView.show(currentImage);
         }
     }
@@ -56,7 +55,7 @@ iD.modes.SelectImage = function (context) {
             .on('mouseover.image', function () {
                 var datum = d3.event.target.__data__;
                 if (isImage(datum)) {
-                    imageView.hoverImage(datum);
+                    imageView.show(datum);
                 }
             })
             .on('mouseout.image', function () {
@@ -74,7 +73,9 @@ iD.modes.SelectImage = function (context) {
     mode.exit = function () {
         context.map().enableSequences(false);
         if(!currentImage) {
-            d3.select('#mapillaryImage').classed('hidden', true);
+            context.container()
+                .select('#mapillaryImage')
+                .classed('hidden', true);
 
         }
         behaviors.forEach(function (behavior) {

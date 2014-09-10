@@ -1,16 +1,9 @@
-iD.ui.ImageView = function () {
-    var selectedImage;
-
+iD.ui.ImageView = function (context) {
     function imageView() {
     }
 
-    imageView.selectedImage = function (_) {
-        if (!arguments.length) return selectedImage;
-        selectedImage = _;
-    };
-
     imageView.showEmpty = function () {
-        var imageWrapper = d3.select('#mapillaryImage');
+        var imageWrapper = context.container().select('#mapillaryImage');
         imageWrapper.html('');
         var content = imageWrapper
             .append('div');
@@ -21,13 +14,10 @@ iD.ui.ImageView = function () {
 
         content.append('div').html(marked(t('mapillary.no_image_found')));
     };
-    imageView.hoverImage = function (hoverImage) {
-        imageView.show(hoverImage);
-    };
 
     imageView.show = function (imageToShow) {
         var key = imageToShow.properties.key;
-        var imageWrapper = d3.select('#mapillaryImage');
+        var imageWrapper = context.container().select('#mapillaryImage');
         imageWrapper.classed('hidden', false);
         imageWrapper.html('');
         var content = imageWrapper
@@ -37,8 +27,8 @@ iD.ui.ImageView = function () {
             .on('click', function(){
                 imageWrapper.classed('hidden', true);
             });
-        content.append('div').html('<div><img src="https://d1cuyjsrcm0gby.cloudfront.net/'+key+'/thumb-320.jpg"></img></div>' +
-            '<a class="link" target="_blank" href="http://mapillary.com/map/im/' + key+'">View on Mapillary</a>');
+        content.append('div').html('<div><img src="https://d1cuyjsrcm0gby.cloudfront.net/KEY/thumb-320.jpg"></img></div><a class="link" target="_blank" href="http://mapillary.com/map/im/KEY">View on Mapillary</a>'
+                .replace(/KEY/g, key));
 
     };
 
