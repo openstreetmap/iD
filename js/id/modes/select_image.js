@@ -7,42 +7,35 @@ iD.modes.SelectImage = function (context) {
         key: 'm'
     }, imageView, currentImage;
 
-    var behaviors = [
-    ];
-
     function click() {
         var datum = d3.event.target.__data__;
         if (isImage(datum)) {
-            if (currentImage) {
-                context.surface().selectAll('.key_' + currentImage.properties.key)
-                    .classed('selected', false);
-            }
-            if(currentImage === datum) {
-                context.surface().selectAll('.key_' + currentImage.properties.key)
+            if (currentImage === datum) {
+                context.surface().selectAll('.image.point')
                     .classed('selected', false);
                 currentImage = undefined;
-
             } else {
                 currentImage = datum;
-                context.surface().selectAll('.key_' + currentImage.properties.key)
-                    .classed('selected', true);
+                context.surface().selectAll('.image.point')
+                    .classed('selected', function(d) {
+                        return d === datum;
+                    });
+                imageView.show(currentImage);
             }
-            imageView.show(currentImage);
         }
     }
 
     function isImage(datum) {
-        return datum !== undefined && datum && datum.properties !== undefined && datum.properties.entityType === 'image';
+        return datum &&
+            datum.properties !== undefined &&
+            datum.properties.entityType === 'image';
     }
 
     mode.enter = function () {
-//        console.log('selectImage.enter');
         context.map().enableSequences(true);
-        context.container().select('#select_image_checkbox')
+        context.container()
+            .select('#select_image_checkbox')
             .attr('checked','checked');
-        behaviors.forEach(function (behavior) {
-            context.install(behavior);
-        });
 
         // Get focus on the body.
         if (document.activeElement && document.activeElement.blur) {
@@ -51,9 +44,9 @@ iD.modes.SelectImage = function (context) {
 
         imageView = context.imageView();
         imageView.showEmpty();
+
         context.surface()
-            .on('click.image', click);
-        context.surface()
+            .on('click.image', click)
             .on('mouseover.image', function () {
                 var datum = d3.event.target.__data__;
                 if (isImage(datum)) {
@@ -63,7 +56,7 @@ iD.modes.SelectImage = function (context) {
             .on('mouseout.image', function () {
                 var datum = d3.event.target.__data__;
                 if (isImage(datum)) {
-                    if(currentImage) {
+                    if (currentImage) {
                         imageView.show(currentImage);
                     } else {
                         imageView.showEmpty();
@@ -75,17 +68,13 @@ iD.modes.SelectImage = function (context) {
     mode.exit = function () {
         context.map().enableSequences(false);
         context.container().select('#select_image_checkbox')
-            .attr('checked',null);
+            .attr('checked', null);
 
-        if(!currentImage) {
+        if (!currentImage) {
             context.container()
                 .select('#mapillaryImage')
                 .classed('hidden', true);
-
         }
-        behaviors.forEach(function (behavior) {
-            context.uninstall(behavior);
-        });
 
         context.surface().select('defs').selectAll('marker.arrow')
             .remove();
@@ -93,7 +82,6 @@ iD.modes.SelectImage = function (context) {
             .remove();
         context.surface().select('.layer-hit').selectAll('g.sequence')
             .remove();
-
     };
 
     return mode;

@@ -1141,43 +1141,29 @@ text.gpx {
 }
 
 /* Mapillary Sequences */
-.sequence {
-    stroke: red;
-    stroke-width: 4;
-    fill: none;
-    pointer-events: visibleStroke;
+
+g.image.point {
+  cursor: pointer; /* Opera */
+  cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
 }
 
-g.image.point.hover {
-    stroke-opacity: 0.3;
-}
-
-g.image.point{
-  stroke: orange;
-  stroke-width: 2;
-  fill: none;
-    cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
-}
-
-g.image.point path{
+g.image.point path,
+g.image.point circle {
   stroke-width: 3;
-  stroke: orange;
-  fill: orange;
-  /*marker-end:url(#mapillary_direction_arrow);*/
+  stroke: #ffc600;
+  fill: #ffc600;
 }
 
-g.image.point circle{
-    fill: orange;
-    fill-opacity: 0.3;
+g.image.point circle {
+  fill-opacity: 0.3;
+  stroke-width: 4;
 }
-g.image.point.selected circle{
-    fill: yellow;
-    fill-opacity: 0.9;
-}
-
-#mapillary_direction_arrow {
-  fill: orange;
+g.image.point.selected circle,
+g.image.point.selected path,
+g.image.point:hover circle,
+g.image.point:hover path {
+  stroke: #ff9900;
+  fill: #ff9900;
 }
 
 /* Modes */

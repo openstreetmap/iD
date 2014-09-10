@@ -326,19 +326,16 @@ iD.ui.Background = function(context) {
             .attr('type', 'checkbox')
             .attr('id', 'select_image_checkbox')
             .on('change', function(){
-                if(this.checked) {
+                if (this.checked) {
                     context.enter(iD.modes.SelectImage(context));
                 } else {
                     context.enter(iD.modes.Browse(context));
                 }
                 update();
-
             });
 
         mapillaryLabel.append('span')
             .text(t('mapillary.title'));
-
-
 
         var adjustments = content.append('div')
             .attr('class', 'adjustments');
@@ -389,7 +386,6 @@ iD.ui.Background = function(context) {
         keybinding.on('m', function() {
             context.enter(iD.modes.SelectImage(context));
         });
-
 
         d3.select(document)
             .call(keybinding);
