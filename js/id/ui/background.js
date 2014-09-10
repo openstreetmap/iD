@@ -312,6 +312,34 @@ iD.ui.Background = function(context) {
         label.append('span')
             .text(t('gpx.local_layer'));
 
+        var mapillaryLayerItem = content.append('ul')
+            .attr('class', 'layer-list')
+            .append('li')
+            .classed('layer-toggle-gpx', true);
+
+        var mapillaryLabel = mapillaryLayerItem.append('label')
+            .call(bootstrap.tooltip()
+                .title(t('modes.selectImage.description'))
+                .placement('top'));
+
+        mapillaryLabel.append('input')
+            .attr('type', 'checkbox')
+            .attr('id', 'select_image_checkbox')
+            .on('change', function(){
+                if(this.checked) {
+                    context.enter(iD.modes.SelectImage(context));
+                } else {
+                    context.enter(iD.modes.Browse(context));
+                }
+                update();
+
+            });
+
+        mapillaryLabel.append('span')
+            .text(t('mapillary.title'));
+
+
+
         var adjustments = content.append('div')
             .attr('class', 'adjustments');
 
@@ -358,6 +386,10 @@ iD.ui.Background = function(context) {
 
         var keybinding = d3.keybinding('background');
         keybinding.on(key, toggle);
+        keybinding.on('m', function() {
+            context.enter(iD.modes.SelectImage(context));
+        });
+
 
         d3.select(document)
             .call(keybinding);
