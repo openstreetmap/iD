@@ -4,6 +4,7 @@ iD.Background = function(context) {
             .projection(context.projection),
         gpxLayer = iD.GpxLayer(context, dispatch)
             .projection(context.projection),
+        mapillaryLayer = iD.MapillaryLayer(context),
         overlayLayers = [];
 
     var backgroundSources = iD.data.imagery.map(function(source) {
@@ -91,6 +92,14 @@ iD.Background = function(context) {
 
         overlays.exit()
             .remove();
+
+        var mapillary = selection.selectAll('.layer-mapillary')
+            .data([0]);
+
+        mapillary.enter().insert('div')
+            .attr('class', 'layer-layer layer-mapillary');
+
+        mapillary.call(mapillaryLayer);
     }
 
     background.sources = function(extent) {
@@ -102,6 +111,7 @@ iD.Background = function(context) {
     background.dimensions = function(_) {
         baseLayer.dimensions(_);
         gpxLayer.dimensions(_);
+        mapillaryLayer.dimensions(_);
 
         overlayLayers.forEach(function(layer) {
             layer.dimensions(_);
@@ -163,6 +173,15 @@ iD.Background = function(context) {
 
     background.toggleGpxLayer = function() {
         gpxLayer.enable(!gpxLayer.enable());
+        dispatch.change();
+    };
+
+    background.showsMapillaryLayer = function() {
+        return mapillaryLayer.enable();
+    };
+
+    background.toggleMapillaryLayer = function() {
+        mapillaryLayer.enable(!mapillaryLayer.enable());
         dispatch.change();
     };
 

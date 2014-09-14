@@ -5,6 +5,7 @@ describe('iD.behavior.Hash', function () {
 
     beforeEach(function () {
         context = iD();
+        context.container(d3.select(document.createElement('div')));
 
         // Neuter connection
         context.connection().loadTiles = function () {};

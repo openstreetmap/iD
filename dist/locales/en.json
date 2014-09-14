@@ -24,10 +24,6 @@
         },
         "draw_line": {
             "tail": "Click to add more nodes to the line. Click on other lines to connect to them, and double-click to end the line."
-        },
-        "selectImage": {
-            "title": "Photos",
-            "description": "Choose and fix a Mapillary image for mapping. Shortcut: 'm'"
         }
     },
     "operations": {
@@ -359,10 +355,9 @@
         "browse": "Browse for a .gpx file"
     },
     "mapillary": {
-        "tooltip": "Mapillary street photos",
-        "title": "Photo overlay",
-        "view_on_mapillary": "View this image on Mapillary",
-        "no_image_found": "No image found on <a href=\"http://mapillary.com/\" target=\"_blank\">Mapillary</a>. Go and take some!\n"
+        "tooltip": "Street-level photos from Mapillary",
+        "title": "Photo Overlay (Mapillary)",
+        "view_on_mapillary": "View this image on Mapillary"
     },
     "help": {
         "title": "Help",

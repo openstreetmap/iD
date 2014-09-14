@@ -1,8 +1,10 @@
 describe('iD.Map', function() {
-    var map;
+    var context, map;
 
     beforeEach(function() {
-        map = iD().map();
+        context = iD();
+        context.container(d3.select(document.createElement('div')));
+        map = context.map();
         d3.select(document.createElement('div'))
             .call(map);
     });

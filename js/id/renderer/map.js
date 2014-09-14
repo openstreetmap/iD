@@ -18,7 +18,6 @@ iD.Map = function(context) {
         areas = iD.svg.Areas(projection),
         midpoints = iD.svg.Midpoints(roundedProjection, context),
         labels = iD.svg.Labels(projection, context),
-        sequences = iD.svg.Sequences(projection, context),
         supersurface, surface,
         mouse,
         mousemove;
@@ -33,8 +32,6 @@ iD.Map = function(context) {
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface');
-
-        supersurface.call(context.background());
 
         // Need a wrapper div because Opera can't cope with an absolutely positioned
         // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
@@ -52,6 +49,8 @@ iD.Map = function(context) {
             })
             .attr('id', 'surface')
             .call(iD.svg.Surface(context));
+
+        supersurface.call(context.background());
 
         surface.on('mousemove.map', function() {
             mousemove = d3.event;
@@ -114,7 +113,6 @@ iD.Map = function(context) {
             .call(vertices, graph, all, filter, map.extent(), map.zoom())
             .call(lines, graph, all, filter)
             .call(areas, graph, all, filter)
-            .call(sequences, surface)
             .call(midpoints, graph, all, filter, map.trimmedExtent())
             .call(labels, graph, all, filter, dimensions, !difference && !extent);
 
@@ -400,10 +398,6 @@ iD.Map = function(context) {
         if (!arguments.length) return minzoom;
         minzoom = _;
         return map;
-    };
-
-    map.enableSequences = function (enable) {
-        sequences.enable(enable);
     };
 
     return d3.rebind(map, dispatch, 'on');

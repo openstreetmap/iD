@@ -214,13 +214,6 @@ window.iD = function () {
     context.zoomIn = map.zoomIn;
     context.zoomOut = map.zoomOut;
 
-
-    /* Mapillary image view */
-    var imageView = iD.ui.ImageView(context);
-    context.imageView = function() {
-        return imageView;
-    };
-
     context.surfaceRect = function() {
         // Work around a bug in Firefox.
         //   http://stackoverflow.com/questions/18153989/

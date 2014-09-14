@@ -1140,32 +1140,34 @@ text.gpx {
     fill:#FF26D4;
 }
 
-/* Mapillary Sequences */
+/* Mapillary Layer */
 
-g.image.point {
-  cursor: pointer; /* Opera */
-  cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
+.layer-mapillary {
+    pointer-events: none;
 }
 
-g.image.point path,
-g.image.point circle {
-  stroke-width: 2;
-  stroke: #ffc600;
-  fill: #ffc600;
+.layer-mapillary g {
+    pointer-events: visible;
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
 }
 
-g.image.point:hover circle,
-g.image.point:hover path {
-  fill: #ff9900;
-  stroke-width: 2;
-  stroke: #ff9900;
+.layer-mapillary g * {
+    stroke-width: 2;
+    stroke: #ffc600;
+    fill: #ffc600;
 }
 
-g.image.point.selected circle,
-g.image.point.selected path {
-  fill: #ff5800;
-  stroke-width: 4;
-  stroke: #ff5800;
+.layer-mapillary g:hover * {
+    stroke-width: 2;
+    stroke: #ff9900;
+    fill: #ff9900;
+}
+
+.layer-mapillary g.selected * {
+    stroke-width: 4;
+    stroke: #ff5800;
+    fill: #ff5800;
 }
 
 /* Modes */

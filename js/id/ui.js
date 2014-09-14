@@ -31,10 +31,6 @@ iD.ui = function(context) {
         var m = content.append('div')
             .attr('id', 'map')
             .call(map);
-        content.append('div')
-            .attr('id', 'mapillaryImage')
-            .classed('hidden', true)
-            .call(iD.ui.ImageView(context));
 
         bar.append('div')
             .attr('class', 'spacer col4');

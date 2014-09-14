@@ -77,6 +77,11 @@ iD.ui.Background = function(context) {
             update();
         }
 
+        function clickMapillary() {
+            context.background().toggleMapillaryLayer();
+            update();
+        }
+
         function drawList(layerList, type, change, filter) {
             var sources = context.background()
                 .sources(context.map().extent())
@@ -123,6 +128,13 @@ iD.ui.Background = function(context) {
                 .selectAll('input')
                 .property('disabled', !hasGpx)
                 .property('checked', showsGpx);
+
+            var showsMapillary = context.background().showsMapillaryLayer();
+
+            mapillaryLayerItem
+                .classed('active', showsMapillary)
+                .selectAll('input')
+                .property('checked', showsMapillary);
 
             selectLayer();
 
@@ -266,26 +278,16 @@ iD.ui.Background = function(context) {
 
         var mapillaryLayerItem = overlayList.append('li');
 
-        var mapillaryLabel = mapillaryLayerItem.append('label')
+        label = mapillaryLayerItem.append('label')
             .call(bootstrap.tooltip()
-                .title(t('modes.selectImage.description'))
+                .title(t('mapillary.tooltip'))
                 .placement('top'));
 
-        mapillaryLabel.append('input')
+        label.append('input')
             .attr('type', 'checkbox')
-            .attr('id', 'select_image_checkbox')
-            .on('change', function(){
-                if (this.checked) {
-                    mapillaryLayerItem.classed('active',true);
-                    context.enter(iD.modes.SelectImage(context));
-                } else {
-                    mapillaryLayerItem.classed('active',false);
-                    context.enter(iD.modes.Browse(context));
-                }
-                update();
-            });
+            .on('change', clickMapillary);
 
-        mapillaryLabel.append('span')
+        label.append('span')
             .text(t('mapillary.title'));
 
         var gpxLayerItem = content.append('ul')
