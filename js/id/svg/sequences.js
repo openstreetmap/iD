@@ -12,8 +12,7 @@ iD.svg.Sequences = function (projection, context) {
     }
 
     drawSequences.removeAll = function () {
-        var hit_layer = surface.selectAll('.layer-hit').selectAll('g.image').remove();
-        var hit_layer = surface.selectAll('.layer-hit').selectAll('g.sequence').remove();
+        surface.selectAll('.layer-hit').selectAll('g.image').remove();
     };
 
     drawSequences.enable = function (enable) {
@@ -24,6 +23,7 @@ iD.svg.Sequences = function (projection, context) {
     drawSequences.imagePoints = [];
 
     drawSequences.plotSequences = function (surface, context, sequences) {
+        //TODO: make d3 follow changes in drawSequences.imagePoints instead of re-populating
         drawSequences.removeAll();
         var points = drawSequences.images(sequences, 1000);
         var newUniquePoints = [];
