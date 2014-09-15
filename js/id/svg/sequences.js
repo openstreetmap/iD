@@ -21,10 +21,28 @@ iD.svg.Sequences = function (projection, context) {
         drawSequences(surface);
     };
 
+    drawSequences.imagePoints = [];
+
     drawSequences.plotSequences = function (surface, context, sequences) {
-        var imagePoints = drawSequences.images(sequences, 1000);
+        drawSequences.removeAll();
+        var points = drawSequences.images(sequences, 1000);
+        var newUniquePoints = [];
+        for (var i = 0; i < points.length; i++) {
+            var found = false;
+            var newPointKey = points[i].properties.key;
+            for (var j = 0 ; j < drawSequences.imagePoints.length && !found; j++) {
+                var oldPointKey = drawSequences.imagePoints[j].properties.key;
+                if(oldPointKey === newPointKey) {
+                    found = true;
+                }
+            }
+            if(!found) {
+                newUniquePoints.push(points[i]);
+            }
+        }
+        drawSequences.imagePoints = drawSequences.imagePoints.concat(newUniquePoints);
         var images = surface.select('.layer-hit').selectAll('g.image')
-            .data(imagePoints);
+            .data(drawSequences.imagePoints);
         var pointTransform = iD.svg.PointTransform(context.projection);
 
         var image = images.enter()
