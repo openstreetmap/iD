@@ -319,7 +319,7 @@ iD.ui.Background = function(context) {
 
         var mapillaryLabel = mapillaryLayerItem.append('label')
             .call(bootstrap.tooltip()
-                .title(t('modes.selectImage.description'))
+                .title(t('modes.select_image.description'))
                 .placement('top'));
 
         mapillaryLabel.append('input')

@@ -12,11 +12,8 @@ iD.svg.Sequences = function (projection, context) {
     }
 
     drawSequences.removeAll = function () {
-        var hit_layer = surface.select('.layer-hit');
-        if (hit_layer) {
-            hit_layer.selectAll('g.image').remove();
-            hit_layer.selectAll('g.sequence').remove();
-        }
+        var hit_layer = surface.selectAll('.layer-hit').selectAll('g.image').remove();
+        var hit_layer = surface.selectAll('.layer-hit').selectAll('g.sequence').remove();
     };
 
     drawSequences.enable = function (enable) {

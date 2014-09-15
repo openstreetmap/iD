@@ -2,8 +2,8 @@ iD.modes.SelectImage = function (context) {
     var mode = {
         button: 'selectImage',
         id: 'selectImage',
-        title: t('modes.selectImage.title'),
-        description: t('modes.selectImage.description'),
+        title: t('modes.select_image.title'),
+        description: t('modes.select_image.description'),
         key: 'm'
     }, imageView, currentImage;
 
@@ -72,15 +72,13 @@ iD.modes.SelectImage = function (context) {
 
         if (!currentImage) {
             context.container()
-                .select('#mapillaryImage')
+                .select('#mapillary_image')
                 .classed('hidden', true);
         }
 
-        context.surface().select('defs').selectAll('marker.arrow')
+        context.surface().selectAll('.layer-hit g.image')
             .remove();
-        context.surface().select('.layer-hit').selectAll('g.image')
-            .remove();
-        context.surface().select('.layer-hit').selectAll('g.sequence')
+        context.surface().selectAll('.layer-hit g.sequence')
             .remove();
     };
 

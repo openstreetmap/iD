@@ -32,7 +32,7 @@ iD.ui = function(context) {
             .attr('id', 'map')
             .call(map);
         content.append('div')
-            .attr('id', 'mapillaryImage')
+            .attr('id', 'mapillary_image')
             .classed('hidden', true)
             .call(iD.ui.ImageView(context));
 

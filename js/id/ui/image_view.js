@@ -3,7 +3,7 @@ iD.ui.ImageView = function (context) {
 
     imageView.showEmpty = function () {
         var imageWrapper = context.container()
-            .select('#mapillaryImage');
+            .select('#mapillary_image');
 
         imageWrapper.html('');
 
@@ -21,7 +21,7 @@ iD.ui.ImageView = function (context) {
 
     imageView.show = function (imageToShow) {
         var key = imageToShow.properties.key;
-        var imageWrapper = context.container().select('#mapillaryImage');
+        var imageWrapper = context.container().select('#mapillary_image');
         imageWrapper.classed('hidden', false);
         imageWrapper.html('');
         var content = imageWrapper
@@ -39,7 +39,7 @@ iD.ui.ImageView = function (context) {
             .text(t('mapillary.view_on_mapillary'))
             .attr('class', 'link')
             .attr('target', '_blank')
-            .attr('src', 'http://mapillary.com/map/im/KEY'.replace('KEY', key));
+            .attr('href', 'http://mapillary.com/map/im/KEY'.replace('KEY', key));
     };
 
     return imageView;

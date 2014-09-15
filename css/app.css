@@ -717,18 +717,18 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     bottom: 0;
 }
 
-#mapillaryImage {
+#mapillary_image {
     position: absolute;
     right: 0;
     bottom: 30px;
     padding: 8px;
     background-color: #fff;
 }
-#mapillaryImage > div {
+#mapillary_image > div {
     position: relative;
 }
 
-#mapillaryImage > a {
+#mapillary_image > a {
     display: block;
     width: 100%;
     height: auto;
@@ -736,7 +736,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     position: relative;
 }
 
-#mapillaryImage .link {
+#mapillary_image .link {
     background-color: black;
     position: absolute;
     bottom: 0;
@@ -744,17 +744,17 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     right: 0;
 }
 
-#mapillaryImage img {
+#mapillary_image img {
     width: 100%;
     height: auto;
     display: block;
 }
 
-#mapillaryImage.hidden {
+#mapillary_image.hidden {
   visibility: hidden;
 }
 
-#mapillaryImage .close {
+#mapillary_image .close {
     cursor: pointer;
     position: absolute;
     right: 0;
