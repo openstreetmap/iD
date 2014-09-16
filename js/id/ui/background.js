@@ -264,6 +264,30 @@ iD.ui.Background = function(context) {
         var overlayList = content.append('ul')
             .attr('class', 'layer-list');
 
+        var mapillaryLayerItem = overlayList.append('li');
+
+        var mapillaryLabel = mapillaryLayerItem.append('label')
+            .call(bootstrap.tooltip()
+                .title(t('modes.selectImage.description'))
+                .placement('top'));
+
+        mapillaryLabel.append('input')
+            .attr('type', 'checkbox')
+            .attr('id', 'select_image_checkbox')
+            .on('change', function(){
+                if (this.checked) {
+                    mapillaryLayerItem.classed('active',true);
+                    context.enter(iD.modes.SelectImage(context));
+                } else {
+                    mapillaryLayerItem.classed('active',false);
+                    context.enter(iD.modes.Browse(context));
+                }
+                update();
+            });
+
+        mapillaryLabel.append('span')
+            .text(t('mapillary.title'));
+
         var gpxLayerItem = content.append('ul')
             .style('display', iD.detect().filedrop ? 'block' : 'none')
             .attr('class', 'layer-list')
@@ -311,31 +335,6 @@ iD.ui.Background = function(context) {
 
         label.append('span')
             .text(t('gpx.local_layer'));
-
-        var mapillaryLayerItem = content.append('ul')
-            .attr('class', 'layer-list')
-            .append('li')
-            .classed('layer-toggle-gpx', true);
-
-        var mapillaryLabel = mapillaryLayerItem.append('label')
-            .call(bootstrap.tooltip()
-                .title(t('modes.selectImage.description'))
-                .placement('top'));
-
-        mapillaryLabel.append('input')
-            .attr('type', 'checkbox')
-            .attr('id', 'select_image_checkbox')
-            .on('change', function(){
-                if (this.checked) {
-                    context.enter(iD.modes.SelectImage(context));
-                } else {
-                    context.enter(iD.modes.Browse(context));
-                }
-                update();
-            });
-
-        mapillaryLabel.append('span')
-            .text(t('mapillary.title'));
 
         var adjustments = content.append('div')
             .attr('class', 'adjustments');

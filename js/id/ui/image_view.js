@@ -26,20 +26,24 @@ iD.ui.ImageView = function (context) {
         imageWrapper.html('');
         var content = imageWrapper
             .append('div');
-        content.append('div')
-            .attr('class', 'icon close')
-            .on('click', function(){
-                imageWrapper.classed('hidden', true);
-            });
+        content.append('button')
+                .on('click', function(){
+                    imageWrapper.classed('hidden', true);
+                })
+                .append('div')
+                .attr('class', 'icon close');
         var wrap = content.append('div');
         wrap.append('div')
             .append('img')
             .attr('src', 'https://d1cuyjsrcm0gby.cloudfront.net/KEY/thumb-320.jpg'.replace('KEY', key));
-        wrap.append('a')
+        var wrapLink = wrap.append('a')
+                        .attr('class', 'link')
+                        .attr('target', '_blank')
+                        .attr('src', 'http://mapillary.com/map/im/KEY'.replace('KEY', key));
+        wrapLink.append('span')
+            .attr('class','icon icon-pre-text out-link')
+        wrapLink.append('span')
             .text(t('mapillary.view_on_mapillary'))
-            .attr('class', 'link')
-            .attr('target', '_blank')
-            .attr('src', 'http://mapillary.com/map/im/KEY'.replace('KEY', key));
     };
 
     return imageView;

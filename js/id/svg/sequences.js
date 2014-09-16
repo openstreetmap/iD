@@ -47,7 +47,7 @@ iD.svg.Sequences = function (projection, context) {
         image.append('circle')
             .attr('dx', '0')
             .attr('dy', '0')
-            .attr('r', '10');
+            .attr('r', '8');
 
         // Selecting the following implicitly
         // sets the data (point entity) on the element
@@ -93,7 +93,7 @@ iD.svg.Sequences = function (projection, context) {
         selection
             .attr('class', klass)
             .attr('transform', 'translate(0, 0)')
-            .attr('d', 'M 0,-10 l 0,-20 l -5,20 l 10,0 l -5,-20');
+            .attr('d', 'M 0,-5 l 0,-20 l -5,30 l 10,0 l -5,-30');
     };
 
     return drawSequences;

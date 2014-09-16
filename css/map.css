@@ -1149,21 +1149,23 @@ g.image.point {
 
 g.image.point path,
 g.image.point circle {
-  stroke-width: 3;
+  stroke-width: 2;
   stroke: #ffc600;
   fill: #ffc600;
 }
 
-g.image.point circle {
-  fill-opacity: 0.3;
-  stroke-width: 4;
-}
-g.image.point.selected circle,
-g.image.point.selected path,
 g.image.point:hover circle,
 g.image.point:hover path {
-  stroke: #ff9900;
   fill: #ff9900;
+  stroke-width: 2;
+  stroke: #ff9900;
+}
+
+g.image.point.selected circle,
+g.image.point.selected path {
+  fill: #ff5800;
+  stroke-width: 4;
+  stroke: #ff5800;
 }
 
 /* Modes */

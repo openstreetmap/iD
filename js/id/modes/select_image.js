@@ -19,7 +19,10 @@ iD.modes.SelectImage = function (context) {
                 context.surface().selectAll('.image.point')
                     .classed('selected', function(d) {
                         return d === datum;
-                    });
+                    })
+                context.container()
+                    .select('#mapillaryImage')
+                    .classed('temp', false);
                 imageView.show(currentImage);
             }
         }
@@ -51,6 +54,11 @@ iD.modes.SelectImage = function (context) {
                 var datum = d3.event.target.__data__;
                 if (isImage(datum)) {
                     imageView.show(datum);
+                    if (currentImage !== datum) {
+                        context.container()
+                            .select('#mapillaryImage')
+                            .classed('temp', true);
+                    }
                 }
             })
             .on('mouseout.image', function () {
@@ -73,7 +81,8 @@ iD.modes.SelectImage = function (context) {
         if (!currentImage) {
             context.container()
                 .select('#mapillaryImage')
-                .classed('hidden', true);
+                .classed('hidden', true)
+                .classed('temp', false);
         }
 
         context.surface().select('defs').selectAll('marker.arrow')
