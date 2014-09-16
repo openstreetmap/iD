@@ -41,9 +41,9 @@ iD.ui.ImageView = function (context) {
                         .attr('target', '_blank')
                         .attr('src', 'http://mapillary.com/map/im/KEY'.replace('KEY', key));
         wrapLink.append('span')
-            .attr('class','icon icon-pre-text out-link')
+            .attr('class','icon icon-pre-text out-link');
         wrapLink.append('span')
-            .text(t('mapillary.view_on_mapillary'))
+            .text(t('mapillary.view_on_mapillary'));
     };
 
     return imageView;

@@ -19,7 +19,7 @@ iD.modes.SelectImage = function (context) {
                 context.surface().selectAll('.image.point')
                     .classed('selected', function(d) {
                         return d === datum;
-                    })
+                    });
                 context.container()
                     .select('#mapillaryImage')
                     .classed('temp', false);
