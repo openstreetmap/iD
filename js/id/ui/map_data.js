@@ -241,8 +241,17 @@ iD.ui.MapData = function(context) {
 
         update();
 
-        var keybinding = d3.keybinding('features');
-        keybinding.on(key, toggle);
+        var keybinding = d3.keybinding('features')
+            .on(key, toggle)
+            .on('w', function toggleWireframe() {
+                if (d3.event) d3.event.preventDefault();
+                var surface = context.surface(),
+                    wf = surface.classed('style-wireframe');
+
+                surface
+                    .classed('style-wireframe', !wf);
+
+            });
 
         d3.select(document)
             .call(keybinding);

@@ -1128,16 +1128,18 @@ g.turn circle {
 }
 
 /* GPX Paths */
+div.layer-gpx {
+    pointer-events: none;
+}
+
 path.gpx {
     stroke: #FF26D4;
     stroke-width: 2;
     fill: none;
-    pointer-events: none;
 }
 
-/* GPS Labels */
 text.gpx {
-    fill:#FF26D4;
+    fill: #FF26D4;
 }
 
 /* Mapillary Layer */
@@ -1192,4 +1194,21 @@ text.gpx {
 .mode-add-area .area.fill,
 .mode-drag-node .area.fill {
     pointer-events: none;
+}
+
+
+/* Styles */
+.style-wireframe path.stroke {
+    stroke-width: 1.5;
+    stroke-opacity: 0.5;
+    stroke-dasharray: none;
+    fill: none;
+}
+
+.style-wireframe .point,
+.style-wireframe path.shadow,
+.style-wireframe path.casing,
+.style-wireframe path.fill,
+.style-wireframe path.oneway {
+    display: none;
 }
