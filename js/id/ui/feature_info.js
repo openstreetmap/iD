@@ -8,7 +8,7 @@ iD.ui.FeatureInfo = function(context) {
         if (hidden.length) {
             var stats = features.stats(),
                 hiddenList = _.map(hidden, function(k) {
-                    return String(stats[k]) + ' ' + t('features.' + k + '.description');
+                    return String(stats[k]) + ' ' + t('feature.' + k + '.description');
                 });
 
             selection.append('span')

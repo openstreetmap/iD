@@ -72,16 +72,6 @@ iD.ui.Background = function(context) {
             selectLayer();
         }
 
-        function clickGpx() {
-            context.background().toggleGpxLayer();
-            update();
-        }
-
-        function clickMapillary() {
-            context.background().toggleMapillaryLayer();
-            update();
-        }
-
         function drawList(layerList, type, change, filter) {
             var sources = context.background()
                 .sources(context.map().extent())
@@ -119,22 +109,6 @@ iD.ui.Background = function(context) {
         function update() {
             backgroundList.call(drawList, 'radio', clickSetSource, function(d) { return !d.overlay; });
             overlayList.call(drawList, 'checkbox', clickSetOverlay, function(d) { return d.overlay; });
-
-            var hasGpx = context.background().hasGpxLayer(),
-                showsGpx = context.background().showsGpxLayer();
-
-            gpxLayerItem
-                .classed('active', showsGpx)
-                .selectAll('input')
-                .property('disabled', !hasGpx)
-                .property('checked', showsGpx);
-
-            var showsMapillary = context.background().showsMapillaryLayer();
-
-            mapillaryLayerItem
-                .classed('active', showsMapillary)
-                .selectAll('input')
-                .property('checked', showsMapillary);
 
             selectLayer();
 
@@ -275,68 +249,6 @@ iD.ui.Background = function(context) {
 
         var overlayList = content.append('ul')
             .attr('class', 'layer-list');
-
-        var mapillaryLayerItem = overlayList.append('li');
-
-        label = mapillaryLayerItem.append('label')
-            .call(bootstrap.tooltip()
-                .title(t('mapillary.tooltip'))
-                .placement('top'));
-
-        label.append('input')
-            .attr('type', 'checkbox')
-            .on('change', clickMapillary);
-
-        label.append('span')
-            .text(t('mapillary.title'));
-
-        var gpxLayerItem = content.append('ul')
-            .style('display', iD.detect().filedrop ? 'block' : 'none')
-            .attr('class', 'layer-list')
-            .append('li')
-            .classed('layer-toggle-gpx', true);
-
-        gpxLayerItem.append('button')
-            .attr('class', 'layer-extent')
-            .call(bootstrap.tooltip()
-                .title(t('gpx.zoom'))
-                .placement('left'))
-            .on('click', function() {
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
-                context.background().zoomToGpxLayer();
-            })
-            .append('span')
-            .attr('class', 'icon geolocate');
-
-        gpxLayerItem.append('button')
-            .attr('class', 'layer-browse')
-            .call(bootstrap.tooltip()
-                .title(t('gpx.browse'))
-                .placement('left'))
-            .on('click', function() {
-                d3.select(document.createElement('input'))
-                    .attr('type', 'file')
-                    .on('change', function() {
-                        context.background().gpxLayerFiles(d3.event.target.files);
-                    })
-                    .node().click();
-            })
-            .append('span')
-            .attr('class', 'icon geocode');
-
-        label = gpxLayerItem.append('label')
-            .call(bootstrap.tooltip()
-                .title(t('gpx.drag_drop'))
-                .placement('top'));
-
-        label.append('input')
-            .attr('type', 'checkbox')
-            .property('disabled', true)
-            .on('change', clickGpx);
-
-        label.append('span')
-            .text(t('gpx.local_layer'));
 
         var adjustments = content.append('div')
             .attr('class', 'adjustments');

@@ -239,9 +239,12 @@ en:
     custom_prompt: "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
     fix_misalignment: Fix alignment
     reset: reset
-  features:
-    title: Map Features
-    description: Map Features
+  map_data:
+    title: Map Data
+    description: Map Data
+    show_features: Show Features
+    show_layers: Show Layers
+  feature:
     points:
       description: Points
       tooltip: "Points of Interest"
@@ -460,7 +463,7 @@ en:
 
       To use a GPX track for mapping, drag and drop the GPX file onto the map
       editor. If it's recognized, it will be added to the map as a bright green
-      line. Click on the 'Background Settings' menu on the right side to enable,
+      line. Click on the 'Map Data' menu on the right side to enable,
       disable, or zoom to this new GPX-powered layer.
 
       The GPX track isn't directly uploaded to OpenStreetMap - the best way to

@@ -74,8 +74,8 @@ iD.ui = function(context) {
             .call(iD.ui.Background(context));
 
         controls.append('div')
-            .attr('class', 'map-control features-control')
-            .call(iD.ui.Features(context));
+            .attr('class', 'map-control map-data-control')
+            .call(iD.ui.MapData(context));
 
         controls.append('div')
             .attr('class', 'map-control help-control')
