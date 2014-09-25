@@ -180,6 +180,8 @@ path.area.stroke {
     stroke-width: 1;
 }
 path.area.fill {
+    stroke-width: 0;
+    stroke: rgba(255, 255, 255, 0.3);
     fill: rgba(255, 255, 255, 0.3);
     fill-rule: evenodd;
 }
@@ -192,6 +194,7 @@ path.stroke.tag-natural {
     stroke: rgb(182, 225, 153);
 }
 path.fill.tag-natural {
+    stroke: rgba(182, 225, 153, 0.3);
     fill: rgba(182, 225, 153, 0.3);
 }
 .preset-icon-fill-area.tag-natural {
@@ -199,12 +202,19 @@ path.fill.tag-natural {
     background-color: rgba(182, 225, 153, 0.3);
 }
 
-path.stroke.tag-natural-water {
+path.stroke.tag-natural-water,
+path.stroke.tag-landuse-basin,
+path.stroke.tag-landuse-reservoir {
     stroke: rgb(119, 211, 222);
 }
+path.fill.tag-landuse-basin,
+path.fill.tag-landuse-reservoir,
 path.fill.tag-natural-water {
+    stroke: rgba(119, 211, 222, 0.3);
     fill: rgba(119, 211, 222, 0.3);
 }
+.preset-icon-fill-area.tag-landuse-basin,
+.preset-icon-fill-area.tag-landuse-reservoir,
 .preset-icon-fill-area.tag-natural-water {
     border-color: rgb(119, 211, 222);
     background-color: rgba(119, 211, 222, 0.3);
@@ -222,6 +232,7 @@ path.fill.tag-amenity-kindergarten,
 path.fill.tag-amenity-school,
 path.fill.tag-amenity-college,
 path.fill.tag-amenity-university {
+    stroke: rgba(255, 255, 148, 0.15);
     fill: rgba(255, 255, 148, 0.15);
 }
 .preset-icon-fill-area.tag-amenity-childcare,
@@ -249,7 +260,8 @@ path.fill.tag-natural-grassland,
 path.fill.tag-natural-grass,
 path.fill.tag-leisure-pitch,
 path.fill.tag-leisure-park {
-    fill: rgba(140, 208, 95, 0.2);
+    stroke: rgba(140, 208, 95, 0.3);
+    fill: rgba(140, 208, 95, 0.3);
 }
 .preset-icon-fill-area.tag-landuse,
 .preset-icon-fill-area.tag-natural-wood,
@@ -259,15 +271,7 @@ path.fill.tag-leisure-park {
 .preset-icon-fill-area.tag-leisure-pitch,
 .preset-icon-fill-area.tag-leisure-park {
     border-color: rgb(140, 208, 95);
-    background-color: rgba(140, 208, 95, 0.2);
-}
-
-path.fill.tag-landuse-residential,
-path.fill.tag-landuse-retail,
-path.fill.tag-landuse-commercial,
-path.fill.tag-landuse-industrial {
-    fill: none;
-    stroke-width: 60px;
+    background-color: rgba(140, 208, 95, 0.3);
 }
 
 path.stroke.tag-landuse-residential {
@@ -275,6 +279,7 @@ path.stroke.tag-landuse-residential {
 }
 path.fill.tag-landuse-residential {
     stroke: rgba(196, 189, 25, 0.3);
+    fill: rgba(196, 189, 25, 0.3);
 }
 .preset-icon-fill-area.tag-landuse-residential {
     border-color: rgb(196, 189, 25);
@@ -289,6 +294,7 @@ path.stroke.tag-landuse-commercial {
 path.fill.tag-landuse-retail,
 path.fill.tag-landuse-commercial {
     stroke: rgba(214, 136, 26, 0.3);
+    fill: rgba(214, 136, 26, 0.3);
 }
 .preset-icon-fill-area.tag-landuse-retail,
 .preset-icon-fill-area.tag-landuse-commercial {
@@ -302,6 +308,7 @@ path.stroke.tag-landuse-industrial {
 }
 path.fill.tag-landuse-industrial {
     stroke: rgba(228, 164, 245, 0.3);
+    fill: rgba(228, 164, 245, 0.3);
 }
 .preset-icon-fill-area.tag-landuse-industrial {
     border-color: rgb(228, 164, 245);
@@ -309,24 +316,11 @@ path.fill.tag-landuse-industrial {
     box-shadow: inset 0 0 0 5px rgba(228, 164, 245, 0.3);
 }
 
-path.stroke.tag-landuse-basin,
-path.stroke.tag-landuse-reservoir {
-    stroke: rgb(119, 211, 222);
-}
-path.fill.tag-landuse-basin,
-path.fill.tag-landuse-reservoir {
-    fill: rgba(119, 211, 222, 0.3);
-}
-.preset-icon-fill-area.tag-landuse-basin,
-.preset-icon-fill-area.tag-landuse-reservoir {
-    border-color: rgb(119, 211, 222);
-    background-color: rgba(119, 211, 222, 0.3);
-}
-
 path.stroke.tag-landuse-quarry {
     stroke: rgb(166, 149, 123);
 }
 path.fill.tag-landuse-quarry {
+    stroke: rgba(166, 149, 123, 0.2);
     fill: rgba(166, 149, 123, 0.2);
 }
 .preset-icon-fill-area.tag-landuse-quarry {
@@ -338,6 +332,7 @@ path.stroke.tag-landuse-landfill {
     stroke: rgb(255, 153, 51);
 }
 path.fill.tag-landuse-landfill {
+    stroke: rgba(255, 153, 51, 0.2);
     fill: rgba(255, 153, 51, 0.2);
 }
 .preset-icon-fill-area.tag-landuse-landfill {
@@ -345,11 +340,15 @@ path.fill.tag-landuse-landfill {
     background-color: rgba(255, 153, 51, 0.2);
 }
 
+.pattern-color-construction {
+    fill: rgba(196, 189, 25, 0.2);
+}
 path.stroke.tag-landuse-construction {
     stroke: rgb(196, 189, 25);
 }
-.pattern-color-construction {
-    fill: rgba(196, 189, 25, 0.2);
+path.fill.tag-landuse-construction {
+    stroke: url('/#pattern-construction');
+    fill: url('/#pattern-construction');
 }
 .preset-icon-fill-area.tag-landuse-construction {
     border-color: rgb(196, 189, 25);
@@ -359,49 +358,69 @@ path.stroke.tag-landuse-construction {
 path.stroke.tag-landuse-military {
     stroke: rgb(214, 136, 26);
 }
+path.fill.tag-landuse-military {
+    stroke: rgba(214, 136, 26, 0.2);
+    fill: rgba(214, 136, 26, 0.2);
+}
 .preset-icon-fill-area.tag-landuse-military {
     border-color: rgb(214, 136, 26);
     background-color: rgba(214, 136, 26, 0.2);
 }
 
+.pattern-color-wetland {
+    fill: rgba(182, 225, 153, 0.2);
+}
 path.stroke.tag-natural-wetland {
     stroke: rgb(182, 225, 153);
 }
-.pattern-color-wetland {
-    fill: rgba(182, 225, 153, 0.2);
+path.fill.tag-natural-wetland {
+    stroke: url('/#pattern-wetland');
+    fill: url('/#pattern-wetland');
 }
 .preset-icon-fill-area.tag-natural-wetland {
     border-color: rgb(182, 225, 153);
     background-color: rgba(182, 225, 153, 0.2);
 }
 
+.pattern-color-meadow {
+    fill: rgba(182, 225, 153, 0.2);
+}
 path.stroke.tag-landuse-meadow {
     stroke: rgb(182, 225, 153);
 }
-.pattern-color-meadow {
-    fill: rgba(182, 225, 153, 0.2);
+path.fill.tag-landuse-meadow {
+    stroke: url('/#pattern-meadow');
+    fill: url('/#pattern-meadow');
 }
 .preset-icon-fill-area.tag-landuse-meadow {
     border-color: rgb(182, 225, 153);
     background-color: rgba(182, 225, 153, 0.2);
 }
 
+.pattern-color-beach {
+    fill: rgba(255, 255, 126, 0.2);
+}
 path.stroke.tag-natural-beach {
     stroke: rgb(255, 255, 126);
 }
-.pattern-color-beach {
-    fill: rgba(255, 255, 126, 0.2);
+path.fill.tag-natural-beach {
+    stroke: url('/#pattern-beach');
+    fill: url('/#pattern-beach');
 }
 .preset-icon-fill-area.tag-natural-beach {
     border-color: rgb(255, 255, 126);
     background-color: rgba(255, 255, 126, 0.2);
 }
 
+.pattern-color-scrub {
+    fill: rgba(219, 240, 139, 0.2);
+}
 path.stroke.tag-natural-scrub {
     stroke: rgb(219, 240, 139);
 }
-.pattern-color-scrub {
-    fill: rgba(219, 240, 139, 0.2);
+path.fill.tag-natural-scrub {
+    stroke: url('/#pattern-scrub');
+    fill: url('/#pattern-scrub');
 }
 .preset-icon-fill-area.tag-natural-scrub {
     border-color: rgb(219, 240, 139);
@@ -412,29 +431,46 @@ path.stroke.tag-natural-scrub {
 .pattern-color-farmland {
     fill: rgba(140, 208, 95, 0.2);
 }
+path.stroke.tag-landuse-farm,
+path.stroke.tag-landuse-farmland {
+    stroke: rgb(140, 208, 95);
+}
+path.fill.tag-landuse-farm,
+path.fill.tag-landuse-farmland {
+    stroke: url('/#pattern-farmland');
+    fill: url('/#pattern-farmland');
+}
 .preset-icon-fill-area.tag-landuse-farm,
 .preset-icon-fill-area.tag-landuse-farmland {
     background-color: rgba(140, 208, 95, 0.2);
 }
 
-.pattern-color-cemetery {
-    fill: rgba(140, 208, 95, 0.2)
+.pattern-color-cemetery,
+.pattern-color-orchard {
+    fill: rgba(140, 208, 95, 0.2);
 }
+path.stroke.tag-landuse-cemetery,
+path.stroke.tag-landuse-orchard {
+    stroke: rgb(140, 208, 95);
+}
+path.fill.tag-landuse-cemetery {
+    stroke: url('/#pattern-cemetery');
+    fill: url('/#pattern-cemetery');
+}
+path.fill.tag-landuse-orchard {
+    stroke: url('/#pattern-orchard');
+    fill: url('/#pattern-orchard');
+}
+.preset-icon-fill-area.tag-landuse-cemetery,
 .preset-icon-fill-area.tag-landuse-cemetery {
     background-color: rgba(140, 208, 95, 0.2);
-}
-
-.pattern-color-orchard {
-    fill: rgba(140, 208, 95, 0.2)
-}
-.preset-icon-fill-area.tag-landuse-orchard {
-    background-color: rgba(140, 208, 95, 0.8);
 }
 
 path.stroke.tag-amenity-parking {
     stroke: rgb(170, 170, 170);
 }
 path.fill.tag-amenity-parking {
+    stroke: rgba(170, 170, 170, 0.3);
     fill: rgba(170, 170, 170, 0.3);
 }
 .preset-icon-fill-area.tag-amenity-parking {
@@ -679,12 +715,14 @@ path.casing.tag-aeroway-runway {
     stroke-linecap: square;
 }
 path.fill.tag-aeroway-runway {
+    stroke: rgba(0, 0, 0, 0.6);
     fill: rgba(0, 0, 0, 0.6);
 }
 path.stroke.tag-aeroway-apron {
     stroke: #805C80;
 }
 path.fill.tag-aeroway-apron {
+    stroke: rgba(128, 92, 128, 0.2);
     fill: rgba(128, 92, 128, 0.2);
 }
 
@@ -738,6 +776,7 @@ path.casing.tag-railway-platform {
 /* waterways */
 
 path.fill.tag-waterway {
+    stroke: rgba(119, 211, 222, 0.3);
     fill: rgba(119, 211, 222, 0.3);
 }
 
@@ -872,8 +911,6 @@ path.shadow.tag-highway-bridleway.tag-bridge {
     stroke-width: 13;
 }
 
-
-
 /* tunnels */
 
 path.stroke.tag-tunnel {
@@ -953,6 +990,7 @@ path.stroke.tag-amenity-shelter {
 }
 path.fill.tag-building,
 path.fill.tag-amenity-shelter {
+    stroke: rgba(224, 110, 95, 0.3);
     fill: rgba(224, 110, 95, 0.3);
 }
 .preset-icon-fill-area.tag-building,
@@ -1197,18 +1235,36 @@ text.gpx {
 }
 
 
-/* Styles */
-.style-wireframe path.stroke {
-    stroke-width: 1.5;
+/* Fill Styles */
+.low-zoom.fill-wireframe path.stroke,
+.fill-wireframe path.stroke {
+    stroke-width: 2;
     stroke-opacity: 0.5;
     stroke-dasharray: none;
     fill: none;
 }
 
-.style-wireframe .point,
-.style-wireframe path.shadow,
-.style-wireframe path.casing,
-.style-wireframe path.fill,
-.style-wireframe path.oneway {
+.low-zoom.fill-wireframe path.shadow,
+.fill-wireframe path.shadow {
+    stroke-width: 8;
+}
+
+.fill-wireframe path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.2;
+}
+.fill-wireframe path.shadow.selected {
+    stroke-opacity: 0.4;
+}
+
+.fill-wireframe .point,
+.fill-wireframe .icon,
+.fill-wireframe path.casing,
+.fill-wireframe path.fill,
+.fill-wireframe path.oneway {
     display: none;
+}
+
+.fill-partial path.fill {
+    fill: none;
+    stroke-width: 60px;
 }

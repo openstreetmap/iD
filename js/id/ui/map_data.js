@@ -245,11 +245,26 @@ iD.ui.MapData = function(context) {
             .on(key, toggle)
             .on('w', function toggleWireframe() {
                 if (d3.event) d3.event.preventDefault();
-                var surface = context.surface(),
-                    wf = surface.classed('style-wireframe');
 
-                surface
-                    .classed('style-wireframe', !wf);
+                var surface = context.surface(),
+                    fw = surface.classed('fill-wireframe'),
+                    fp = surface.classed('fill-partial');
+
+                if (fw) {
+                    surface
+                        .classed('fill-wireframe', false)
+                        .classed('fill-partial', true);
+                }
+                else if (fp) {
+                    surface
+                        .classed('fill-wireframe', false)
+                        .classed('fill-partial', false);
+
+                } else {
+                    surface
+                        .classed('fill-wireframe', true)
+                        .classed('fill-partial', false);
+                }
 
             });
 
