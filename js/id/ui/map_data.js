@@ -1,7 +1,11 @@
 iD.ui.MapData = function(context) {
-    var key = 'f';
+    var key = 'F',
+        features = context.features().keys(),
+        fills = ['wireframe', 'partial', 'full'],
+        fillDefault = context.storage('area-fill') || 'partial',
+        fillSelected = fillDefault;
 
-    function features(selection) {
+    function map_data(selection) {
 
         function showsFeature(d) {
             return context.features().enabled(d);
@@ -9,6 +13,24 @@ iD.ui.MapData = function(context) {
 
         function clickFeature(d) {
             context.features().toggle(d);
+            update();
+        }
+
+        function showsFill(d) {
+            return fillSelected === d;
+        }
+
+        function setFill(d) {
+            _.each(fills, function(opt) {
+                context.surface().classed('fill-' + opt, Boolean(opt === d));
+            });
+
+            fillSelected = d;
+            if (d !== 'wireframe') {
+                fillDefault = d;
+                context.storage('area-fill', d);
+            }
+            update();
         }
 
         function clickGpx() {
@@ -21,58 +43,57 @@ iD.ui.MapData = function(context) {
             update();
         }
 
-        function drawFeatureList(selection) {
-            var data = context.features().keys();
-
-            var layerLinks = selection.selectAll('li.layer')
+        function drawList(selection, data, type, name, change, active) {
+            var items = selection.selectAll('li')
                 .data(data);
 
             //enter
-            var enter = layerLinks.enter()
-                .insert('li', '.custom_layer')
-                .attr('class', 'layer');
-
-            enter.filter(function(d) { return d; })
+            var enter = items.enter()
+                .append('li')
+                .attr('class', 'layer')
                 .call(bootstrap.tooltip()
-                    .title(function(d) { return t('feature.' + d + '.tooltip'); })
+                    .html(true)
+                    .title(function(d) {
+                        return iD.ui.tooltipHtml(
+                            t(name + '.' + d + '.tooltip'), (d === 'wireframe' ? 'W' : null)
+                        );
+                    })
                     .placement('top'));
 
             var label = enter.append('label');
 
             label.append('input')
-                .attr('type', 'checkbox')
-                .attr('name', function(d) { return d; })
-                .on('change', clickFeature);
+                .attr('type', type)
+                .attr('name', name)
+                .on('change', change);
 
             label.append('span')
-                .text(function(d) { return t('feature.' + d + '.description'); });
+                .text(function(d) { return t(name + '.' + d + '.description'); });
 
             //update
-            layerLinks
-                .classed('active', showsFeature)
+            items
+                .classed('active', active)
                 .selectAll('input')
-                .property('checked', showsFeature);
+                .property('checked', active);
 
             //exit
-            layerLinks.exit()
+            items.exit()
                 .remove();
-
-            selection.style('display', selection.selectAll('li.layer').data().length > 0 ? 'block' : 'none');
         }
 
         function update() {
-            featureList.call(drawFeatureList);
+            featureList.call(drawList, features, 'checkbox', 'feature', clickFeature, showsFeature);
+            fillList.call(drawList, fills, 'radio', 'area_fill', setFill, showsFill);
 
             var hasGpx = context.background().hasGpxLayer(),
-                showsGpx = context.background().showsGpxLayer();
+                showsGpx = context.background().showsGpxLayer(),
+                showsMapillary = context.background().showsMapillaryLayer();
 
             gpxLayerItem
                 .classed('active', showsGpx)
                 .selectAll('input')
                 .property('disabled', !hasGpx)
                 .property('checked', showsGpx);
-
-            var showsMapillary = context.background().showsMapillaryLayer();
 
             mapillaryLayerItem
                 .classed('active', showsMapillary)
@@ -87,12 +108,20 @@ iD.ui.MapData = function(context) {
                 .html(true)
                 .title(iD.ui.tooltipHtml(t('map_data.description'), key));
 
-        function hide() { setVisible(false); }
+        function hidePanel() { setVisible(false); }
 
-        function toggle() {
+        function togglePanel() {
             if (d3.event) d3.event.preventDefault();
             tooltip.hide(button);
             setVisible(!button.classed('active'));
+        }
+
+        function toggleWireframe() {
+            if (d3.event) {
+                d3.event.preventDefault();
+                d3.event.stopPropagation();
+            }
+            setFill((fillSelected === 'wireframe' ? fillDefault : 'wireframe'));
         }
 
         function setVisible(show) {
@@ -125,7 +154,7 @@ iD.ui.MapData = function(context) {
 
         var button = selection.append('button')
                 .attr('tabindex', -1)
-                .on('click', toggle)
+                .on('click', togglePanel)
                 .call(tooltip),
             shown = false;
 
@@ -135,6 +164,7 @@ iD.ui.MapData = function(context) {
         content.append('h4')
             .text(t('map_data.title'));
 
+        // feature filters
         content.append('a')
             .text(t('map_data.show_features'))
             .attr('href', '#')
@@ -154,7 +184,7 @@ iD.ui.MapData = function(context) {
         var featureList = featureContainer.append('ul')
             .attr('class', 'layer-list');
 
-
+        // data layers
         content.append('a')
             .text(t('map_data.show_layers'))
             .attr('href', '#')
@@ -236,44 +266,47 @@ iD.ui.MapData = function(context) {
             .text(t('gpx.local_layer'));
 
 
+        // area fills
+        content.append('a')
+            .text(t('map_data.fill_area'))
+            .attr('href', '#')
+            .classed('hide-toggle', true)
+            .classed('expanded', true)
+            .on('click', function() {
+                var exp = d3.select(this).classed('expanded');
+                fillContainer.style('display', exp ? 'none' : 'block');
+                d3.select(this).classed('expanded', !exp);
+                d3.event.preventDefault();
+            });
+
+        var fillContainer = content.append('div')
+            .attr('class', 'filters')
+            .style('display', 'block');
+
+        var fillList = fillContainer.append('ul')
+            .attr('class', 'layer-list');
+
+
         context.features()
             .on('change.map_data-update', update);
 
         update();
+        setFill(fillDefault);
 
         var keybinding = d3.keybinding('features')
-            .on(key, toggle)
-            .on('w', function toggleWireframe() {
-                if (d3.event) d3.event.preventDefault();
+            .on(key, togglePanel)
+            .on('W', toggleWireframe);
 
-                var surface = context.surface(),
-                    fw = surface.classed('fill-wireframe'),
-                    fp = surface.classed('fill-partial');
-
-                if (fw) {
-                    surface
-                        .classed('fill-wireframe', false)
-                        .classed('fill-partial', true);
-                }
-                else if (fp) {
-                    surface
-                        .classed('fill-wireframe', false)
-                        .classed('fill-partial', false);
-
-                } else {
-                    surface
-                        .classed('fill-wireframe', true)
-                        .classed('fill-partial', false);
-                }
-
-            });
+        // keybinding.on('m', function() {
+        //         context.enter(iD.modes.SelectImage(context));
+        //     });
 
         d3.select(document)
             .call(keybinding);
 
-        context.surface().on('mousedown.map_data-outside', hide);
-        context.container().on('mousedown.map_data-outside', hide);
+        context.surface().on('mousedown.map_data-outside', hidePanel);
+        context.container().on('mousedown.map_data-outside', hidePanel);
     }
 
-    return features;
+    return map_data;
 };

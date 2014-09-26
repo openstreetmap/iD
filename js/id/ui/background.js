@@ -1,5 +1,5 @@
 iD.ui.Background = function(context) {
-    var key = 'b',
+    var key = 'B',
         opacities = [1, 0.75, 0.5, 0.25],
         directions = [
             ['left', [1, 0]],
@@ -296,9 +296,6 @@ iD.ui.Background = function(context) {
 
         var keybinding = d3.keybinding('background');
         keybinding.on(key, toggle);
-        keybinding.on('m', function() {
-            context.enter(iD.modes.SelectImage(context));
-        });
 
         d3.select(document)
             .call(keybinding);

@@ -2816,6 +2816,7 @@ img.wiki-image {
 }
 
 .map-overlay .tooltip-inner,
+.map-overlay .keyhint-wrap,
 .entity-editor-pane .tooltip-inner,
 .warning-section .tooltip-inner {
     background: #000;

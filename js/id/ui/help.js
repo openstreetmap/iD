@@ -1,5 +1,5 @@
 iD.ui.Help = function(context) {
-    var key = 'h';
+    var key = 'H';
 
     var docKeys = [
         'help.help',

@@ -297,8 +297,9 @@
     "map_data": {
         "title": "Map Data",
         "description": "Map Data",
-        "show_features": "Show Features",
-        "show_layers": "Show Layers"
+        "show_features": "Show Map Features",
+        "show_layers": "Show Data Layers",
+        "fill_area": "Fill Areas"
     },
     "feature": {
         "points": {
@@ -348,6 +349,20 @@
         "others": {
             "description": "Others",
             "tooltip": "Everything Else"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "No Fill (Wireframe)",
+            "tooltip": "Enabling wireframe mode makes it easy to see the background imagery."
+        },
+        "partial": {
+            "description": "Partial Fill",
+            "tooltip": "Areas are drawn with fill only around their inner edges. (Recommended for beginner mappers)"
+        },
+        "full": {
+            "description": "Full Fill",
+            "tooltip": "Areas are drawn fully filled."
         }
     },
     "restore": {
