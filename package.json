@@ -24,7 +24,7 @@
     "smash": "0.0",
     "lodash-cli": "2.3.0",
     "uglify-js": "~2.2.5",
-    "maki": "0.4",
+    "maki": "0.4.2",
     "jshint": "2.3.0",
     "mocha": "1",
     "mocha-phantomjs": "3",
