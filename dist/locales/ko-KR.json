@@ -164,9 +164,6 @@
             "amenity/toilets": {
                 "name": "화장실"
             },
-            "amenity/university": {
-                "name": "대학교"
-            },
             "building": {
                 "name": "건물"
             },

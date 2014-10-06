@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "Odstrani",
-            "description": "Odstrani izbor z zemljevida.",
+            "description": "Trajno izbriši objekt.",
             "annotation": {
                 "point": "Točka je izbrisana.",
                 "vertex": "Vozlišče je izbrisano.",
@@ -249,8 +249,8 @@
         "title": "Prikaži moj položaj"
     },
     "inspector": {
-        "no_documentation_combination": "Za to kombinacijo oznak dokumentacija ni na voljo",
-        "no_documentation_key": "Za ta ključ dokumentacija ni na voljo",
+        "no_documentation_combination": "Za to kombinacijo oznak ni na voljo dokumentacije",
+        "no_documentation_key": "Za ta ključ ni na voljo dokumentacije",
         "show_more": "Pokaži več",
         "view_on_osm": "Ogled na openstreetmap.org",
         "all_tags": "Vse oznake",
@@ -385,7 +385,6 @@
         },
         "areas": {
             "title": "Mnogokotniki",
-            "add": "Mnogokotniki so bolj podroben način za predstavitev geografskih prvin. Nosijo informacijo o meji geografske prvine. Mnogokotniki so lahko uporabljena za predstavitev večine prvin, za katere lahko uporabimo tudi točke, in so pogostejša izbira. **Kliknite na gumb Mnogokotnik za dodajanje novega mnogokotnika.**",
             "corner": "Mnogokotnike narišemo tako, da vozlišča postavimo na rob območja. **Postavite začetno vozlišče v enega od kotov igrišča.**",
             "place": "Mnogokotnike narišete s postavljanjem več vozlišč, zaključite jih s klikom na začetno vozlišče. **Narišite mnogokotnik za igrišče.**",
             "search": "**Išči '{name}'.**",
@@ -1050,6 +1049,9 @@
             "sport_ice": {
                 "label": "Šport"
             },
+            "sport_racing": {
+                "label": "Šport"
+            },
             "structure": {
                 "label": "Premostitveni objekt",
                 "placeholder": "Neznano",
@@ -1270,6 +1272,10 @@
                 "name": "Izposoja plovil",
                 "terms": "najem čolnov,rent-a-boat,izposoja čolnov"
             },
+            "amenity/bureau_de_change": {
+                "name": "Menjalnica",
+                "terms": "menjalnica,menjava,devize"
+            },
             "amenity/bus_station": {
                 "name": "Avtobusna postaja",
                 "terms": "AP"
@@ -1295,8 +1301,7 @@
                 "terms": "elektro črpalka,polnilni terminal"
             },
             "amenity/childcare": {
-                "name": "Varstvo otrok (ZAVRNJEN v OSMc!)",
-                "terms": "varstvo otrok,sirotišnica"
+                "name": "Jasli/Vrtec"
             },
             "amenity/cinema": {
                 "name": "Kino",
@@ -1309,10 +1314,6 @@
             "amenity/clock": {
                 "name": "Ura",
                 "terms": "čas"
-            },
-            "amenity/college": {
-                "name": "Srednja šola",
-                "terms": "šola,SŠ,srednja šola, kolidž"
             },
             "amenity/compressed_air": {
                 "name": "Zračni kompresor",
@@ -1365,10 +1366,6 @@
             "amenity/hospital": {
                 "name": "Klinični center",
                 "terms": "klinika,zdravstvene storitve,bolnišnica"
-            },
-            "amenity/kindergarten": {
-                "name": "Otroški vrtec",
-                "terms": "vrtec"
             },
             "amenity/library": {
                 "name": "Knjižnica",
@@ -1458,10 +1455,6 @@
                 "name": "Banka hrane",
                 "terms": "banka s hrano"
             },
-            "amenity/social_facility/group_home": {
-                "name": "Stanovanjska skupina",
-                "terms": "Skupni začasni dom,prehodni dom"
-            },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Zatočišče za brezdomce",
                 "terms": "zavetišče za brezdomce"
@@ -1493,10 +1486,6 @@
             "amenity/townhall": {
                 "name": "Mestna hiša",
                 "terms": "magistrat,rotovž"
-            },
-            "amenity/university": {
-                "name": "Univerza",
-                "terms": "fakulteta,visoka šola,višja šola,šola"
             },
             "amenity/vending_machine": {
                 "name": "Prodajni avtomat",
@@ -1717,6 +1706,9 @@
             "building/warehouse": {
                 "name": "Skladišče",
                 "terms": "depo"
+            },
+            "craft": {
+                "name": "Obrt"
             },
             "craft/basket_maker": {
                 "name": "Košar",
@@ -2318,6 +2310,9 @@
                 "name": "Otroško igrišče",
                 "terms": "igrišče za otroke"
             },
+            "leisure/running_track": {
+                "name": "Tekaška steza"
+            },
             "leisure/slipway": {
                 "name": "Rampa",
                 "terms": "rampa za vodna plovila"
@@ -2333,10 +2328,6 @@
             "leisure/swimming_pool": {
                 "name": "Plavalni bazen",
                 "terms": "bazen,kopališče"
-            },
-            "leisure/track": {
-                "name": "Tekmovalna steza",
-                "terms": "tekaška steza na stadionu,kolesarska steza na stadionu"
             },
             "line": {
                 "name": "Črta",
@@ -2395,8 +2386,7 @@
                 "terms": "rezervar,rezervoar"
             },
             "man_made/water_well": {
-                "name": "Vodnjak",
-                "terms": "štirna"
+                "name": "Vodnjak"
             },
             "man_made/water_works": {
                 "name": "Vodovod",
@@ -2742,9 +2732,9 @@
                 "name": "Trgovina z alkoholnimi pijačami",
                 "terms": "alkoholne pijače"
             },
-            "shop/art": {
-                "name": "Trgovina z umetninam",
-                "terms": "umetnine,prodaja umetni"
+            "shop/antiques": {
+                "name": "Starinarnica",
+                "terms": "starinarnica,antikvariat"
             },
             "shop/bakery": {
                 "name": "Pekarna",
@@ -2767,8 +2757,7 @@
                 "terms": "pobiralec stav"
             },
             "shop/books": {
-                "name": "Knjigarna",
-                "terms": "knjigarnica"
+                "name": "Knjigarna"
             },
             "shop/boutique": {
                 "name": "Butik",
@@ -2802,13 +2791,12 @@
                 "name": "Računalniška trgovina",
                 "terms": "računalniki,komponente"
             },
-            "shop/confectionery": {
-                "name": "Trgovina s sladkarijami",
-                "terms": "slaščičarna, slaščičarstvo, slaščice, bonboniera"
-            },
             "shop/convenience": {
                 "name": "Minimarket",
                 "terms": "mini-market,trgovinica"
+            },
+            "shop/copyshop": {
+                "name": "Fotokopirnica"
             },
             "shop/deli": {
                 "name": "Delikatesa",
@@ -2823,12 +2811,14 @@
                 "terms": "orodje"
             },
             "shop/dry_cleaning": {
-                "name": "Čistilnica",
-                "terms": "kemična čistilnica"
+                "name": "Čistilnica"
             },
             "shop/electronics": {
                 "name": "Elektronska trgovina",
                 "terms": "elektronika,hifi"
+            },
+            "shop/fabric": {
+                "name": "Trgovina z metrskim blagom"
             },
             "shop/farm": {
                 "name": "Prodaja domačih pridelkov",
@@ -2870,6 +2860,9 @@
                 "name": "Železnina",
                 "terms": "izdelki iz kovin"
             },
+            "shop/herbalist": {
+                "name": "Zeliščarstvo"
+            },
             "shop/hifi": {
                 "name": "Trgovina z avdio opremo",
                 "terms": "hifi"
@@ -2877,10 +2870,6 @@
             "shop/jewelry": {
                 "name": "Draguljarna",
                 "terms": "bižuterija,nakit,zlatarna"
-            },
-            "shop/kiosk": {
-                "name": "Kiosk",
-                "terms": "kiosk,trafika"
             },
             "shop/laundry": {
                 "name": "Pralnica",
@@ -2898,9 +2887,15 @@
                 "name": "Trgovski center",
                 "terms": "nakupovalni center,trgovski center,nakupovalni center"
             },
+            "shop/medical_supply": {
+                "name": "Trgovina z medicinskimi primpomočki"
+            },
             "shop/mobile_phone": {
                 "name": "Trgovina z mobilnimi telefoni",
                 "terms": "mobi trgovina"
+            },
+            "shop/money_lender": {
+                "name": "Posojilnica"
             },
             "shop/motorcycle": {
                 "name": "Trgovina z motorji",
@@ -2910,17 +2905,18 @@
                 "name": "Trgovina z glasbo",
                 "terms": "muzikalije"
             },
-            "shop/newsagent": {
-                "name": "Trafika",
-                "terms": "prodaja časopisov"
-            },
             "shop/optician": {
                 "name": "Optik",
                 "terms": "optika,očala"
             },
             "shop/outdoor": {
-                "name": "Trgovina za dejavosti na prostem",
-                "terms": "prostočasna trgovina"
+                "name": "Trgovina za dejavosti na prostem"
+            },
+            "shop/paint": {
+                "name": "Trgovina z barvami"
+            },
+            "shop/pawnbroker": {
+                "name": "Zastavljalnica"
             },
             "shop/pet": {
                 "name": "Trgovina za domače živali",
@@ -2954,6 +2950,9 @@
                 "name": "Krojač",
                 "terms": "krojač,oblačila"
             },
+            "shop/tea": {
+                "name": "Čajnica"
+            },
             "shop/toys": {
                 "name": "Trgovina igrač",
                 "terms": "igrače"
@@ -2980,7 +2979,7 @@
             },
             "shop/wine": {
                 "name": "Kletarstvo",
-                "terms": "kletarstvo,vinska klet"
+                "terms": "kletarstvo,vinska klet,vinotoč"
             },
             "tourism": {
                 "name": "Turizem",

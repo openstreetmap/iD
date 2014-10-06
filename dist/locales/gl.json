@@ -71,7 +71,7 @@
                 "line": "Liña redondeada.",
                 "area": "Área redondeada."
             },
-            "not_closed": "Isto non se pode redonderar porque non é un bucle.",
+            "not_closed": "Isto non se pode redondear porque non é un bucle.",
             "too_large": "Isto non se pode redondear porque non está completamente visible."
         },
         "orthogonalize": {
@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "Borrar",
-            "description": "Borrar isto do mapa.",
+            "description": "Eliminar permanentemente o obxecto.",
             "annotation": {
                 "point": "Punto borrado.",
                 "vertex": "Eliminado un nodo dunha vía.",
@@ -150,7 +150,8 @@
                 "area": "Área movida.",
                 "multiple": "Varios obxectos movidos."
             },
-            "incomplete_relation": "Este elemento non se pode mover porque non se descargou completamente."
+            "incomplete_relation": "Este elemento non se pode mover porque non se descargou completamente.",
+            "too_large": "Isto non se pode mover debido a que non está completamente visible."
         },
         "rotate": {
             "title": "Rotar.",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Liña rotada.",
                 "area": "Área rotada."
-            }
+            },
+            "too_large": "Isto non se pode rotar debido a que non está completamente visible."
         },
         "reverse": {
             "title": "Inverter",
@@ -332,6 +334,9 @@
         "untagged_area": "Área sen etiquetar",
         "many_deletions": "Estás borrando {n} obxectos. Estás seguro de querer facelo? Esta acción quitaraos do mapa que os demáis ven en openstreetmap.org.",
         "tag_suggests_area": "A etiqueta {tag} suxire que a liña debería ser unha área, pero non é unha área.",
+        "untagged_point_tooltip": "Escolle un tipo de elemento que describa o que é este punto.",
+        "untagged_line_tooltip": "Escolle un tipo de elemento que describa o que é esta liña.",
+        "untagged_area_tooltip": "Escolle un tipo de elemento que describa o que é esta área.",
         "deprecated_tags": "Etiquetas obsoletas: {tags}"
     },
     "zoom": {
@@ -372,7 +377,7 @@
         },
         "areas": {
             "title": "Áreas",
-            "add": "As áreas son unha maneira máis detallada de representar elementos, xa que dan información sobre os límites do elemento. As áreas pódense usar para a maioría dos tipos de elemento para os que se poden usar os puntos, e normalmente son a opción preferida. **Fai clic no botón \"Área\" para engadir unha nova área.**",
+            "add": "As áreas utilízanse para mostrar os límites de elementos tales como lagos, edificios ou áreas residenciais. Tamén poden ser usados para cartografar máis detalladamente moitos dos elementos que normalmente se cartografarían como puntos. **Fai clic no botón \"Área\" para engadir unha nova área.**",
             "corner": "As áreas debúxanse colocando vértices que marquen os límites da área. **Sitúa o vértice inicial nunha das esquinas do parque infantil.**",
             "place": "Debuxa a área situando máis vértices. Finaliza a área facendo clic no vértice inicial. **Debuxa unha área para o parque infantil.**",
             "search": "**Busca por '{name}'.**",
@@ -403,6 +408,9 @@
             "category-building": {
                 "name": "Edificio"
             },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Uso do solo"
             },
@@ -411,6 +419,9 @@
             },
             "category-rail": {
                 "name": "Ferrocarril"
+            },
+            "category-restriction": {
+                "name": "Restrición"
             },
             "category-road": {
                 "name": "Estrada"
@@ -463,11 +474,25 @@
                     }
                 }
             },
+            "access_simple": {
+                "label": "Acceso",
+                "placeholder": "si"
+            },
+            "access_toilets": {
+                "label": "Acceso"
+            },
             "address": {
                 "label": "Enderezo",
                 "placeholders": {
+                    "housename": "Nome da casa",
+                    "housenumber": "123",
                     "street": "Rúa",
-                    "city": "Cidade"
+                    "city": "Cidade",
+                    "postcode": "Código postal",
+                    "place": "Lugar",
+                    "hamlet": "Aldea",
+                    "suburb": "Barrio",
+                    "country": "País"
                 }
             },
             "admin_level": {
@@ -479,8 +504,17 @@
             "amenity": {
                 "label": "Tipo"
             },
+            "artist": {
+                "label": "Artista"
+            },
+            "artwork_type": {
+                "label": "Tipo"
+            },
             "atm": {
                 "label": "Caixeiro automático"
+            },
+            "backrest": {
+                "label": "Respaldo"
             },
             "barrier": {
                 "label": "Tipo"
@@ -502,7 +536,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Sentido"
+                "label": "Sentido",
+                "options": {
+                    "N": "Norte",
+                    "E": "Leste",
+                    "S": "Sur",
+                    "W": "Oeste",
+                    "NE": "Nordeste",
+                    "SE": "Sueste",
+                    "SW": "Suroeste",
+                    "NW": "Noroeste",
+                    "NNE": "Nor-nordeste",
+                    "ENE": "Les-nordeste",
+                    "ESE": "Les-sueste",
+                    "SSE": "Sur-sueste",
+                    "SSW": "Sur-suroeste",
+                    "WSW": "Oés-suroeste",
+                    "WNW": "Oés-noroeste",
+                    "NNW": "Nor-noroeste"
+                }
             },
             "clock_direction": {
                 "label": "Sentido",
@@ -519,6 +571,12 @@
             },
             "country": {
                 "label": "País"
+            },
+            "covered": {
+                "label": "Cuberto"
+            },
+            "crop": {
+                "label": "Cultivo"
             },
             "crossing": {
                 "label": "Tipo"
@@ -544,6 +602,9 @@
             "entrance": {
                 "label": "Tipo"
             },
+            "except": {
+                "label": "Excepcións"
+            },
             "fax": {
                 "label": "Fax",
                 "placeholder": "+34 989 12 34 56"
@@ -553,6 +614,21 @@
             },
             "fixme": {
                 "label": "Amáñame"
+            },
+            "fuel": {
+                "label": "Combustible"
+            },
+            "fuel/biodiesel": {
+                "label": "Biodiesel"
+            },
+            "fuel/diesel": {
+                "label": "Diésel"
+            },
+            "fuel/octane_95": {
+                "label": "Gasolina 95"
+            },
+            "fuel/octane_98": {
+                "label": "Gasolina 98"
             },
             "highway": {
                 "label": "Tipo"
@@ -566,10 +642,15 @@
             "internet_access": {
                 "label": "Acceso a internet",
                 "options": {
+                    "yes": "Si",
+                    "no": "Non",
                     "wlan": "Wi-Fi",
                     "wired": "Por cable",
                     "terminal": "Terminal"
                 }
+            },
+            "lamp_type": {
+                "label": "Tipo"
             },
             "landuse": {
                 "label": "Tipo"
@@ -583,6 +664,9 @@
             },
             "leisure": {
                 "label": "Tipo"
+            },
+            "length": {
+                "label": "Lonxitude (metros)"
             },
             "levels": {
                 "label": "Niveis",
@@ -601,6 +685,10 @@
                 "label": "Límite de velocidade",
                 "placeholder": "40, 50, 60..."
             },
+            "mtb/scale": {
+                "label": "Dificultade en Bicicleta de Montaña",
+                "placeholder": "0, 1, 2, 3..."
+            },
             "name": {
                 "label": "Nome",
                 "placeholder": "Nome común (se existe)"
@@ -618,10 +706,20 @@
                 "label": "Tipo"
             },
             "oneway": {
-                "label": "Sentido único"
+                "label": "Sentido único",
+                "options": {
+                    "undefined": "Suponse Non",
+                    "yes": "Si",
+                    "no": "Non"
+                }
             },
             "oneway_yes": {
-                "label": "Sentido único"
+                "label": "Sentido único",
+                "options": {
+                    "undefined": "Suponse Si",
+                    "yes": "Si",
+                    "no": "Non"
+                }
             },
             "opening_hours": {
                 "label": "Horas"
@@ -638,6 +736,9 @@
             },
             "place": {
                 "label": "Tipo"
+            },
+            "population": {
+                "label": "Poboación"
             },
             "power": {
                 "label": "Tipo"
@@ -656,6 +757,9 @@
             },
             "restriction": {
                 "label": "Tipo"
+            },
+            "restrictions": {
+                "label": "Restricións de xiro"
             },
             "route": {
                 "label": "Tipo"
@@ -763,6 +867,9 @@
             "amenity/bicycle_rental": {
                 "name": "Alugamento de Bicicletas"
             },
+            "amenity/bus_station": {
+                "name": "Estación de autobuses"
+            },
             "amenity/cafe": {
                 "name": "Cafetería",
                 "terms": "cafetería, café, bar"
@@ -773,11 +880,26 @@
             "amenity/car_wash": {
                 "name": "Lavado de automóbiles"
             },
+            "amenity/charging_station": {
+                "name": "Estación de carga"
+            },
             "amenity/cinema": {
                 "name": "Cine"
             },
+            "amenity/clinic": {
+                "name": "Clínica"
+            },
+            "amenity/clock": {
+                "name": "Reloxo"
+            },
             "amenity/courthouse": {
                 "name": "Pazo de xustiza"
+            },
+            "amenity/dentist": {
+                "name": "Dentista"
+            },
+            "amenity/doctor": {
+                "name": "Consulta médica"
             },
             "amenity/drinking_water": {
                 "name": "Fonte"
@@ -802,9 +924,6 @@
             },
             "amenity/hospital": {
                 "name": "Hospital"
-            },
-            "amenity/kindergarten": {
-                "name": "Gardería"
             },
             "amenity/library": {
                 "name": "Biblioteca"
@@ -846,6 +965,9 @@
             "amenity/pub": {
                 "name": "Pub"
             },
+            "amenity/recycling": {
+                "name": "Reciclaxe"
+            },
             "amenity/restaurant": {
                 "name": "Restaurante",
                 "terms": "restaurante, mesón, taberna, comedor, comida, comer, xantar, cear, menú"
@@ -856,6 +978,9 @@
             },
             "amenity/swimming_pool": {
                 "name": "Piscina"
+            },
+            "amenity/taxi": {
+                "name": "Parada de taxis"
             },
             "amenity/telephone": {
                 "name": "Teléfono"
@@ -872,6 +997,12 @@
             },
             "amenity/university": {
                 "name": "Universidade"
+            },
+            "amenity/vending_machine": {
+                "name": "Máquina expendedora"
+            },
+            "amenity/veterinary": {
+                "name": "Veterinario"
             },
             "amenity/waste_basket": {
                 "name": "Papeleira",
@@ -939,6 +1070,9 @@
             },
             "building/hut": {
                 "name": "Refuxio"
+            },
+            "building/train_station": {
+                "name": "Estación de tren"
             },
             "emergency/phone": {
                 "name": "Teléfono de emerxencia"
@@ -1079,6 +1213,9 @@
             "landuse/farm": {
                 "name": "Terra de cultivo"
             },
+            "landuse/farmland": {
+                "name": "Terra de cultivo"
+            },
             "landuse/farmyard": {
                 "name": "Granxa"
             },
@@ -1178,9 +1315,6 @@
             },
             "man_made/water_tower": {
                 "name": "Torre de auga"
-            },
-            "man_made/water_well": {
-                "name": "Pozo"
             },
             "natural": {
                 "name": "Natural"
@@ -1340,9 +1474,6 @@
             "shop/bicycle": {
                 "name": "Tenda de bicicletas"
             },
-            "shop/books": {
-                "name": "Librería"
-            },
             "shop/butcher": {
                 "name": "Carnicería"
             },
@@ -1387,9 +1518,6 @@
             },
             "shop/jewelry": {
                 "name": "Xoiería"
-            },
-            "shop/kiosk": {
-                "name": "Quiosco"
             },
             "shop/laundry": {
                 "name": "Lavandería"
@@ -1496,6 +1624,24 @@
             },
             "type/restriction": {
                 "name": "Restrición"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "Prohibido xirar á esquerda"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "Prohibido xirar á dereita"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "Prohibido o cambio de sentido"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Obrigatorio xirar á esquerda"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Obrigatorio xirar á dereita"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "Obrigatorio continuar recto"
             },
             "type/route": {
                 "name": "Ruta"

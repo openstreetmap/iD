@@ -88,7 +88,6 @@
         },
         "delete": {
             "title": "Eyða",
-            "description": "Fjarlægja af korti.",
             "annotation": {
                 "point": "Eyddi punkti.",
                 "vertex": "Eyddi hnút af leið.",
@@ -349,7 +348,6 @@
         },
         "areas": {
             "title": "Svæði",
-            "add": "Svæði eru nákvæmari leið til að tákna hluti. Þau sýna ytri mörk hlutarins. Svæði er hægt að nota fyrir flestallt það sem punktar sýna, og eru oft fyrsta val. **Smelltu á takkann 'Svæði' til að bæta nýju svæði við**",
             "corner": "Svæði eru dregin með því að setja niður hnúta sem tákna ytri mörk svæðisins. **Settu byrjunarhnútinn í eitt horn leiksvæðisins.**",
             "place": "Teiknaðu svæðið með því að setja fleiri hnúta á kortið. Kláraðu svæðið með því að smella í lokin á upphafshnútinn. **Teiknaðu svæði fyrir leikvöllinn.**",
             "search": "**Leita að '{name}'.**",
@@ -806,18 +804,12 @@
             "amenity/car_wash": {
                 "name": "Bílaþvottur"
             },
-            "amenity/childcare": {
-                "name": "Barnagæsla"
-            },
             "amenity/cinema": {
                 "name": "Kvikmyndahús",
                 "terms": "bíó"
             },
             "amenity/clock": {
                 "name": "Klukka"
-            },
-            "amenity/college": {
-                "name": "Háskóli"
             },
             "amenity/courthouse": {
                 "name": "Dómhús"
@@ -845,9 +837,6 @@
             },
             "amenity/hospital": {
                 "name": "Spítalalóð"
-            },
-            "amenity/kindergarten": {
-                "name": "Leikskólalóð"
             },
             "amenity/library": {
                 "name": "Bókasafn"
@@ -923,9 +912,6 @@
             },
             "amenity/townhall": {
                 "name": "Ráðhús"
-            },
-            "amenity/university": {
-                "name": "Háskóli"
             },
             "amenity/veterinary": {
                 "name": "Dýralæknir"
@@ -1408,9 +1394,6 @@
             "man_made/water_tower": {
                 "name": "Vatnsturn"
             },
-            "man_made/water_well": {
-                "name": "Brunnur"
-            },
             "man_made/water_works": {
                 "name": "Vatnsveita"
             },
@@ -1573,9 +1556,6 @@
             "shop/alcohol": {
                 "name": "Vínbúð"
             },
-            "shop/art": {
-                "name": "Listverslun"
-            },
             "shop/bakery": {
                 "name": "Bakarí"
             },
@@ -1590,9 +1570,6 @@
             },
             "shop/bookmaker": {
                 "name": "Veðmangari"
-            },
-            "shop/books": {
-                "name": "Bóksala"
             },
             "shop/boutique": {
                 "name": "Búð"
@@ -1618,9 +1595,6 @@
             "shop/computer": {
                 "name": "Tölvuverslun"
             },
-            "shop/confectionery": {
-                "name": "Konfektbúð"
-            },
             "shop/convenience": {
                 "name": "Kjörbúð"
             },
@@ -1632,9 +1606,6 @@
             },
             "shop/doityourself": {
                 "name": "Handlaginna verslun"
-            },
-            "shop/dry_cleaning": {
-                "name": "Þurrhreinsun"
             },
             "shop/electronics": {
                 "name": "Raftækjaverslun"
@@ -1675,9 +1646,6 @@
             "shop/jewelry": {
                 "name": "Skartgripabúð"
             },
-            "shop/kiosk": {
-                "name": "Blaðastandur"
-            },
             "shop/laundry": {
                 "name": "Þvottur"
             },
@@ -1693,14 +1661,8 @@
             "shop/music": {
                 "name": "Tónlistarbúð"
             },
-            "shop/newsagent": {
-                "name": "Blaðasali"
-            },
             "shop/optician": {
                 "name": "Gleraugnaverslun"
-            },
-            "shop/outdoor": {
-                "name": "Útivistarbúð"
             },
             "shop/pet": {
                 "name": "Dýrabúð"

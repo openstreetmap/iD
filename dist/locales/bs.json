@@ -95,7 +95,6 @@
         },
         "delete": {
             "title": "Izbrišite",
-            "description": "Uklonite ovo sa karte.",
             "annotation": {
                 "point": "Izbrisana tačka.",
                 "vertex": "Izbrisan čvor sa putanje.",
@@ -358,7 +357,6 @@
         },
         "areas": {
             "title": "Područja",
-            "add": "Područja su detaljniji način da se predstave značajke. Ona pružaju informacije o granicama značajke. Područja mogu biti korištena za većinu vrsta značajki za koje se koriste tačke, i često su preferirane. **Kliknite na dugme 'Područje' da dodate novo područje.**",
             "corner": "Područja se crtaju postavljanjem čvorova koji označavaju granicu područja. **Postavite početni čvor na uglovima igrališta.**",
             "place": "Nacrtati područje postavljanjem više čvorova. Završiti područje klikom na početni čvor. **Nacrtati područje za igralište.**",
             "search": "**Tražiti '{name}'.**",
@@ -916,20 +914,12 @@
                 "name": "Autopraonica",
                 "terms": "autopraonica,samouslužna autopraonica,praonica automobila"
             },
-            "amenity/childcare": {
-                "name": "Briga o djeci",
-                "terms": "čuvanje djece,dnevni boravak djece,briga o djeci"
-            },
             "amenity/cinema": {
                 "name": "Kino",
                 "terms": "kino,kino dvorana,multipleks"
             },
             "amenity/clinic": {
                 "name": "Klinika"
-            },
-            "amenity/college": {
-                "name": "Koledž",
-                "terms": "koledž,fakultet,faks"
             },
             "amenity/courthouse": {
                 "name": "Sudnica",
@@ -1065,10 +1055,6 @@
             "amenity/townhall": {
                 "name": "Gradska vijećnica",
                 "terms": "gradska vijećnica,vijećnica"
-            },
-            "amenity/university": {
-                "name": "Univerzitet",
-                "terms": "univerzitet,koledž"
             },
             "amenity/vending_machine": {
                 "name": "Automat",
@@ -1647,10 +1633,6 @@
                 "name": "Bazen",
                 "terms": "bazen,bazen za plivanje,plivački bazen"
             },
-            "leisure/track": {
-                "name": "Staza za utrku",
-                "terms": "staza za utrku,trkaća staza"
-            },
             "line": {
                 "name": "Linija",
                 "terms": "linija"
@@ -1706,10 +1688,6 @@
             "man_made/water_tower": {
                 "name": "Vodo-toranj",
                 "terms": "vodo-toranj,vodeni toranj"
-            },
-            "man_made/water_well": {
-                "name": "Bunar",
-                "terms": "bunar,umjetni rezervoar za vodu"
             },
             "man_made/water_works": {
                 "name": "Vodosnadbjevanje",
@@ -2051,10 +2029,6 @@
                 "name": "Prodavnica bicikala",
                 "terms": "prodavnica bicikala,radnja za prodaju bicikala"
             },
-            "shop/books": {
-                "name": "Knjižara",
-                "terms": "knjižara,radnja za prodaju knjiga"
-            },
             "shop/boutique": {
                 "name": "Butik",
                 "terms": "butik,radnja za prodaju odjeće"
@@ -2087,10 +2061,6 @@
                 "name": "Prodavnica računara",
                 "terms": "radnja za prodaju računara,prodaja računara i računarske opreme"
             },
-            "shop/confectionery": {
-                "name": "Slastičarna",
-                "terms": "slastičarna,slatki butik"
-            },
             "shop/convenience": {
                 "name": "Bakalnica",
                 "terms": "bakalnica,dragstor,prodavnica,granap"
@@ -2106,10 +2076,6 @@
             "shop/doityourself": {
                 "name": "Sve za kuću",
                 "terms": "sve za kuću,prodaja dijelova za \"uradi sam\" radove"
-            },
-            "shop/dry_cleaning": {
-                "name": "Hemijsko čišćenje",
-                "terms": "hemijska čistionica,hemijsko čišćenje odjeće"
             },
             "shop/electronics": {
                 "name": "Prodavnica elektronike",
@@ -2159,10 +2125,6 @@
                 "name": "Zlatar",
                 "terms": "zlatara,radnja za prodaju nakita"
             },
-            "shop/kiosk": {
-                "name": "Trafika",
-                "terms": "trafika,kiosk"
-            },
             "shop/laundry": {
                 "name": "Praonica",
                 "terms": "praonica,servis za pranje rublja"
@@ -2187,17 +2149,9 @@
                 "name": "Muzička prodavnica",
                 "terms": "muzička prodavnica,prodaja muzičke opreme i muzike"
             },
-            "shop/newsagent": {
-                "name": "Kiosk",
-                "terms": "trafika,kiosk"
-            },
             "shop/optician": {
                 "name": "Optičar",
                 "terms": "optičar,optičarska radnja"
-            },
-            "shop/outdoor": {
-                "name": "Prodavnica opreme za rekreaciju",
-                "terms": "prodavnica planinarske opreme,prodaja kamp opreme,prodaja GPS uređaja"
             },
             "shop/pet": {
                 "name": "Prodavnica kućnih ljubnimaca",

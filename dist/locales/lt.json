@@ -95,7 +95,6 @@
         },
         "delete": {
             "title": "Ištrinti",
-            "description": "Pašalinti tai iš žemėlapio.",
             "annotation": {
                 "point": "Taškas ištrintas.",
                 "vertex": "Viršūnė pašalinta iš kelio.",
@@ -359,7 +358,6 @@
         },
         "areas": {
             "title": "Plotai",
-            "add": "Plotai - tai detalesnis objektų vaizdavimo būdas. Jie nurodo objekto išorės kontūrus. Plotus galima naudoti beveik visiems objektams, kuriuos galima žymėti taškais ir jei tik galima, ploto žymėjimas yra pageidaujamas. **Spauskite ploto mygtuką ir pridėkite naują plotą.**",
             "corner": "Plotai paišomi dėliojant taškus, nurodančius ploto kontūrą. **Sukurkite pradinį tašką viename iš žaidimų aikštelės kampų.**",
             "place": "Nupieškite plotą pridėdami daugiau taškų. Baikite ploto braižymą pažymėję pradinį tašką. **Nubraižykite žaidimų aikštelės plotą.**",
             "search": "**Ieškoti '{name}'.**",
@@ -776,9 +774,6 @@
             "amenity/cinema": {
                 "name": "Kino teatras"
             },
-            "amenity/college": {
-                "name": "Kolegija"
-            },
             "amenity/courthouse": {
                 "name": "Teismo rūmai"
             },
@@ -869,9 +864,6 @@
             },
             "amenity/townhall": {
                 "name": "Rotušė"
-            },
-            "amenity/university": {
-                "name": "Universitetas"
             },
             "amenity/vending_machine": {
                 "name": "Prekių automatas"
@@ -1138,9 +1130,6 @@
             "leisure/swimming_pool": {
                 "name": "Baseinas"
             },
-            "leisure/track": {
-                "name": "Lenktynių trasa"
-            },
             "line": {
                 "name": "Linija"
             },
@@ -1164,9 +1153,6 @@
             },
             "man_made/water_tower": {
                 "name": "Vandens bokštas"
-            },
-            "man_made/water_well": {
-                "name": "Vandens šulinys"
             },
             "military/bunker": {
                 "name": "Bunkeris"
@@ -1336,9 +1322,6 @@
             "shop/bicycle": {
                 "name": "Dviračių parduotuvė"
             },
-            "shop/books": {
-                "name": "Knygynas"
-            },
             "shop/butcher": {
                 "name": "Mėsinė"
             },
@@ -1353,9 +1336,6 @@
             },
             "shop/computer": {
                 "name": "Kompiuterių parduotuvė"
-            },
-            "shop/confectionery": {
-                "name": "Konditerija"
             },
             "shop/convenience": {
                 "name": "Savitarnos parduotuvė"
@@ -1390,9 +1370,6 @@
             },
             "shop/jewelry": {
                 "name": "Juvelyrikos parduotuvė"
-            },
-            "shop/kiosk": {
-                "name": "Kioskas "
             },
             "shop/laundry": {
                 "name": "Skalbykla"

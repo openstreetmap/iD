@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "Törlés",
-            "description": "Eltávolítás a térképről.",
+            "description": "Az objektum végleges törlése",
             "annotation": {
                 "point": "Pont törlése.",
                 "vertex": "Pont törlése egy vonalból.",
@@ -333,6 +333,11 @@
         "zoom": "Nagyítás a GPX nyomvonalra",
         "browse": ".gpx fájl tallózása"
     },
+    "mapillary": {
+        "tooltip": "Utcafotók a Mapillary-ból",
+        "title": "Fotó réteg (Mapillary)",
+        "view_on_mapillary": "E kép megtekintése a Mapillary weboldalon"
+    },
     "help": {
         "title": "Súgó",
         "help": "# Súgó\n\nEz egy szerkesztő az [OpenStreetMap](http://www.openstreetmap.org/)-hoz, az ingyenes és szerkeszthető világtérképhez. A környezetedről tölthetsz fel, vagy frissíthetsz adatokat, ezáltal mindenki számára jobbá téve egy ingyenes térképet.\n\nAmit ezen a térképen alkotsz, mindenki számára látható lesz, aki használja az OpenStreetMap-ot. A szerkesztéshez mindösszesen egy [ingyenes OpenStreetMap fiókra](https://www.openstreetmap.org/user/new) lesz szükséged.\n\nAz [iD szerkesztő](http://ideditor.com/) egy együttműködésen alapuló projekt, a [GitHub-on elérhető forráskóddal](https://github.com/openstreetmap/iD).\n",
@@ -367,7 +372,6 @@
         },
         "areas": {
             "title": "Területek",
-            "add": "Az objektumok részletesebb ábrázolásának módja a területek rajzolása, mert információval szolgálnak annak körvonaláról. A legtöbb pontként ábrázolt elemtípust területként is lehet ábrázolni, sőt, gyakran ez a preferált. **Kattints a Terület gombra és hozz létre egy új területet.**",
             "corner": "Területet létrehozni az objektum körvonalát jelölő pontsorozat rajzolásával lehet. **Helyezd el a kezdőpontot a játszótér valamelyik sarkában.**",
             "place": "Rajzol jegy területet több pont elhelyezésével. Befejezni a kezdőpontra kattintva tudod. **Rajzold meg a játszótér területét.**",
             "search": "**Keress rá erre: '{name}'.**",
@@ -462,13 +466,21 @@
                 }
             },
             "access_simple": {
-                "label": "Behajtás"
+                "label": "Behajtás",
+                "placeholder": "igen"
             },
             "address": {
                 "label": "Cím",
                 "placeholders": {
+                    "housename": "Háznév",
+                    "housenumber": "123",
                     "street": "utca",
-                    "city": "város"
+                    "city": "város",
+                    "postcode": "írányítószám",
+                    "hamlet": "Falucska",
+                    "district": "Kerület",
+                    "state": "Régió",
+                    "country": "Ország"
                 }
             },
             "admin_level": {
@@ -539,7 +551,13 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Irány"
+                "label": "Irány",
+                "options": {
+                    "N": "Észak",
+                    "E": "Kelet",
+                    "S": "Dél",
+                    "W": "Nyugat"
+                }
             },
             "clock_direction": {
                 "label": "Irány",
@@ -573,7 +591,10 @@
                 "label": "Leírás"
             },
             "electrified": {
-                "label": "Villamosítottság"
+                "label": "Villamosítottság",
+                "options": {
+                    "rail": "Villamosított vasútvonal"
+                }
             },
             "elevation": {
                 "label": "Tengerszint feletti magasság"
@@ -682,7 +703,10 @@
                 "label": "Egyirányú"
             },
             "oneway_yes": {
-                "label": "Egyirányú"
+                "label": "Egyirányú",
+                "options": {
+                    "yes": "igen"
+                }
             },
             "opening_hours": {
                 "label": "Nyitva tartás"
@@ -694,7 +718,10 @@
                 "label": "P+R"
             },
             "parking": {
-                "label": "Típus"
+                "label": "Típus",
+                "options": {
+                    "surface": "Felület"
+                }
             },
             "phone": {
                 "label": "Telefonszám",
@@ -707,10 +734,16 @@
                 "label": "Kezelés"
             },
             "piste/type": {
-                "label": "Típus"
+                "label": "Típus",
+                "options": {
+                    "playground": "Játszótér"
+                }
             },
             "place": {
                 "label": "Típus"
+            },
+            "population": {
+                "label": "Lakosság"
             },
             "power": {
                 "label": "Típus"
@@ -764,7 +797,10 @@
                 "label": "Típus"
             },
             "smoking": {
-                "label": "Dohányzó"
+                "label": "Dohányzó",
+                "options": {
+                    "dedicated": "Dohányzóknak ( pl. Dohányzó Klub, Közösségi dohányzóhely) "
+                }
             },
             "source": {
                 "label": "Forrás"
@@ -833,6 +869,9 @@
             },
             "wheelchair": {
                 "label": "Kerekesszékes hozzáférhetőség"
+            },
+            "width": {
+                "label": "Szélesség (Méter)"
             },
             "wikipedia": {
                 "label": "Wikipédia"
@@ -917,47 +956,74 @@
                 "name": "Ismeretlen típusú szolgáltatás"
             },
             "amenity/arts_centre": {
-                "name": "Művészeti központ"
+                "name": "Művészeti központ",
+                "terms": "galéria,kiállítás, kiállító terem,tárlat,képzőművészet,festészet,képek"
             },
             "amenity/atm": {
-                "name": "Bankautomata"
+                "name": "Bankautomata",
+                "terms": "ATM, Pénzautomata, Pénzkiadó automata"
             },
             "amenity/bank": {
-                "name": "Bank"
+                "name": "Bank",
+                "terms": "Takarékszövetkezet,  Pénzintézet, Takarék, "
             },
             "amenity/bar": {
-                "name": "Bár"
+                "name": "Bár",
+                "terms": "bár,kocsma, éjszaki szórakozó"
+            },
+            "amenity/bbq": {
+                "name": "Közösségi grillező - szallonasütő",
+                "terms": "tábortűz,grill,piknik,tűzrakó"
             },
             "amenity/bench": {
                 "name": "Pad"
             },
             "amenity/bicycle_parking": {
-                "name": "Kerékpárparkoló"
+                "name": "Kerékpárparkoló",
+                "terms": "bicaj - bringa - bicikli - kétkerekű parkoló"
             },
             "amenity/bicycle_rental": {
-                "name": "Kerékpárkölcsönző"
+                "name": "Kerékpárkölcsönző",
+                "terms": "bicaj - bringa - bicikli - kétkerekű  kölcsönző, "
             },
             "amenity/boat_rental": {
-                "name": "Hajókölcsönző"
+                "name": "Hajókölcsönző",
+                "terms": "csónak és kishajó kölcsönző "
+            },
+            "amenity/bureau_de_change": {
+                "name": "Pénzváltó",
+                "terms": "Valuta váltás, EURO váltó"
+            },
+            "amenity/bus_station": {
+                "name": "busz állomás",
+                "terms": "busz, autóbusz"
             },
             "amenity/cafe": {
-                "name": "Kávézó"
+                "name": "Kávézó",
+                "terms": "kávéház, presszó, kávézó,"
             },
             "amenity/car_rental": {
-                "name": "Autókölcsönző"
+                "name": "Autókölcsönző",
+                "terms": "gépkocsi - gépjármű - személygépkocsi -személygépjármű, automobil - jármű - verda -kocsi -  járgány - tragacs köcsönzés és bérlés"
             },
             "amenity/car_sharing": {
-                "name": "Autómegosztó"
+                "name": "Autómegosztó",
+                "terms": "közösségi autó, közösségi gépjármű"
             },
             "amenity/car_wash": {
-                "name": "Autómosó"
+                "name": "Autómosó",
+                "terms": "gépkocsi - gépjármű - személygépkocsi -személygépjármű, automobil - jármű - verda -kocsi -  járgány - tragacs  MOSÓ"
+            },
+            "amenity/charging_station": {
+                "name": "elektronikus töltőállomás,elmű töltőoszlop,e-mobility állomás,áram töltő,akkumlátor töltő,elektromos autó,"
             },
             "amenity/childcare": {
-                "name": "Gyermekgondozás",
-                "terms": "bölcsőde, óvoda, nevelési tanácsadó"
+                "name": "Bölcsőde",
+                "terms": " Csecsemőotthon"
             },
             "amenity/cinema": {
-                "name": "Mozi"
+                "name": "Mozi",
+                "terms": "Filmszínház, Mozi"
             },
             "amenity/clinic": {
                 "name": "Klinika",
@@ -967,11 +1033,13 @@
                 "name": "Óra",
                 "terms": "Óra"
             },
-            "amenity/college": {
-                "name": "Főiskola"
+            "amenity/compressed_air": {
+                "name": "sűrített levegő és kompresszor állomás",
+                "terms": "gumi"
             },
             "amenity/courthouse": {
-                "name": "Bíróság"
+                "name": "Bíróság",
+                "terms": "Törvényszék, Kúria , Ítélőtábla, Bírósági Hivatal, ítélőszék"
             },
             "amenity/dentist": {
                 "name": "Fogorvos",
@@ -981,72 +1049,97 @@
                 "name": "Orvos",
                 "terms": "Orvos, Doktor"
             },
+            "amenity/dojo": {
+                "name": "Harcművészeti edzőterem - dojo",
+                "terms": "kick-box,karate, kung fu, aikido, taekwando,  judo, jujitsu, kendo,capoeira,dzsudo,baranta,zenbukan,kempo,boksz,krav maga,csikung,vusu,saolin,kungfu,"
+            },
             "amenity/drinking_water": {
-                "name": "Ivóvíz"
+                "name": "Ivóvíz",
+                "terms": "Ivókút"
             },
             "amenity/embassy": {
-                "name": "Nagykövetség"
+                "name": "Nagykövetség",
+                "terms": "Követség,  Konzulátus"
             },
             "amenity/fast_food": {
-                "name": "Gyorsétterem"
+                "name": "Gyorsétterem",
+                "terms": "Pizzás, Gyroszos, Gyorskajálda, Lángosos "
             },
             "amenity/fire_station": {
-                "name": "Tűzoltóság"
+                "name": "Tűzoltóság",
+                "terms": "Tűzoltóállomás"
             },
             "amenity/fountain": {
-                "name": "Szökőkút"
+                "name": "Szökőkút",
+                "terms": "Szökőkút,kút"
             },
             "amenity/fuel": {
-                "name": "Benzinkút"
+                "name": "Benzinkút",
+                "terms": "töltőállomás,shell,bp,agip,oil,lukoil,tesco,e85,esso,omv,kagyló,mol,benzin,gázolaj,benzinkút,üzemanyag,petrol,autógáz,motorbenzin,adalékanyag,kenőanyag,dízel,diesel,bioetanol"
             },
             "amenity/grave_yard": {
-                "name": "Sírkert"
+                "name": "Templomi Sírkert",
+                "terms": "Temető, "
             },
             "amenity/hospital": {
                 "name": "Kórház"
             },
             "amenity/kindergarten": {
-                "name": "Óvoda"
+                "name": "bölcsőde - óvoda",
+                "terms": "iskolaelőkészítő"
             },
             "amenity/library": {
-                "name": "Könyvtár"
+                "name": "Könyvtár",
+                "terms": "könyvkölcsönző, kölcsönkönyvtár, közkönyvtár"
             },
             "amenity/marketplace": {
                 "name": "Piac"
+            },
+            "amenity/nightclub": {
+                "name": "Night Club - Éjszakai bár - diszkó",
+                "terms": "Night Club, Éjszakai bár, Diszkó"
             },
             "amenity/parking": {
                 "name": "Parkoló",
                 "terms": "parkolóház"
             },
             "amenity/pharmacy": {
-                "name": "Gyógyszertár"
+                "name": "Gyógyszertár",
+                "terms": "gyógyszertár, gyógyszerész,pharmaceutist,patika,pharma,drogéria,gyógyszer,orvosság, pirula, tabletta, kapszula, medicina, gyógyír, ellenszer,gyógy"
             },
             "amenity/place_of_worship": {
-                "name": "Istentiszteleti hely"
+                "name": "Istentiszteleti hely",
+                "terms": "katolikus,református,görögkatolikus,buddhista,evangelikus,zsidó,izraelita,orthodox,unitárius,baptista,hit gyülekezete,metodista,pünkösdi,anglikán,episzkopális,gyülekezet,adventsta,krisna-tudatú,jehova,utolsó napok szentjeinek,vallási közösség,görögkeleti,keresztény"
             },
             "amenity/place_of_worship/buddhist": {
-                "name": "Buddhista templom"
+                "name": "Buddhista templom",
+                "terms": "buddhista templom, tan kapuja buddhista egyház,\nbuddhista misszió arya maitreya mandala,karma kagyüpa buddhista közösség, magyarországi chanbuddhista egyház, gyémánt út buddhista közösség"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Templom"
+                "name": "Keresztény templom",
+                "terms": "katolikus,református,görögkatolikus,evangelikus,orthodox,unitárius,baptista,hit gyülekezete,metodista,pünkösdi,anglikán,episzkopális,gyülekezet,adventista,jehova,utolsó napok szentjeinek,vallási közösség,görögkeleti,keresztény"
             },
             "amenity/place_of_worship/jewish": {
-                "name": "Zsinagóga"
+                "name": "Zsinagóga",
+                "terms": "imaház,ortodox zsidó, zsinagóga,"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Mecset"
             },
             "amenity/police": {
-                "name": "Rendőrség"
+                "name": "Rendőrség",
+                "terms": "rendőr,csendőr,börtön,fakabát, közrendőr, hekus, zsaru, zsernyák, kopó, jard,közlekedésrendészet,rendészet,nyomozó,kapitányság"
             },
             "amenity/post_box": {
                 "name": "Postaláda"
             },
             "amenity/post_office": {
-                "name": "Posta"
+                "name": "Posta",
+                "terms": "postaközpont,posta,levél,kézbesítő,kézbesítés"
             },
             "amenity/pub": {
-                "name": "Kocsma"
+                "name": "Kocsma",
+                "terms": "italmérés,  késdobáló, csehó, borozó, poharazó, italbolt, ivó, talponálló, kricsmi, piálda, söntés, csapszék, söröző, sörház, "
             },
             "amenity/ranger_station": {
                 "name": "Vadőrház"
@@ -1056,7 +1149,8 @@
                 "terms": "hulladék, szelektív hulladék, szeméttelep, szemétlerakó, veszélyes hulladék"
             },
             "amenity/restaurant": {
-                "name": "Étterem"
+                "name": "Étterem",
+                "terms": "kajálda, étkezde, vendéglő, csárda, fogadó, ebédlő, kisvendéglő"
             },
             "amenity/school": {
                 "name": "Iskola"
@@ -1064,6 +1158,17 @@
             "amenity/shelter": {
                 "name": "Menedék",
                 "terms": "fedett, fedél, esőház, esőkunyhó, menedékház"
+            },
+            "amenity/social_facility": {
+                "name": "szociális szolgáltatás"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": " Élelmiszerbank ",
+                "terms": "élelmiszer-adomány elosztó, Élelmiszersegély begyűjtő és elosztó"
+            },
+            "amenity/social_facility/group_home": {
+                "name": "Idősek otthona",
+                "terms": "idősek szociális gondozója"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Hajléktalan menedék",
@@ -1074,25 +1179,31 @@
                 "terms": "Stúdió"
             },
             "amenity/swimming_pool": {
-                "name": "Úszómedence"
+                "name": "Úszómedence",
+                "terms": "úszómedence, uszoda,"
             },
             "amenity/taxi": {
                 "name": "Taxiállomás"
             },
             "amenity/telephone": {
-                "name": "Nyilvános telefon"
+                "name": "Nyilvános telefon",
+                "terms": "Telefonfülke, telefonkészülék,telefon"
             },
             "amenity/theatre": {
-                "name": "Színház"
+                "name": "Színház",
+                "terms": "amfiteátrum, játékszín, teátrum, bábszínház, operaház"
             },
             "amenity/toilets": {
-                "name": "WC"
+                "name": "WC",
+                "terms": "vécé, illemhely, toalett, klotyó, árnyékszék, budi, pottyantós"
             },
             "amenity/townhall": {
-                "name": "Városháza"
+                "name": "Városháza",
+                "terms": "Polgármesteri hivatal, Községháza, "
             },
             "amenity/university": {
-                "name": "Egyetem"
+                "name": "Egyetemi terület",
+                "terms": "kampusz"
             },
             "amenity/vending_machine": {
                 "name": "Árusító automata",
@@ -1118,7 +1229,8 @@
                 "name": "Oszlop"
             },
             "barrier/cattle_grid": {
-                "name": "Marharács"
+                "name": "Marharács",
+                "terms": "tehénrács, marha rács"
             },
             "barrier/city_wall": {
                 "name": "Városfal"
@@ -1190,8 +1302,12 @@
                 "terms": "Kápolna, Imaház"
             },
             "building/church": {
-                "name": "Templom",
+                "name": "Templom épület",
                 "terms": "Templom, Plébánia, Imaház"
+            },
+            "building/college": {
+                "name": "Főiskola",
+                "terms": "Főiskolai  felsőoktatási  intézmény"
             },
             "building/commercial": {
                 "name": "Kereskedelmi épület"
@@ -1217,7 +1333,7 @@
             },
             "building/hospital": {
                 "name": "Kórházi épület",
-                "terms": "Kórházi épület"
+                "terms": "Kórházi épület, Klinika épület, Gyógyintézet épület"
             },
             "building/hotel": {
                 "name": "Hotel épület",
@@ -1232,6 +1348,10 @@
             "building/industrial": {
                 "name": "Ipari épület",
                 "terms": "Gyárépület"
+            },
+            "building/kindergarten": {
+                "name": "Óvodai épület",
+                "terms": "Iskolai előkészítő épület,  ovi épület, bölcsőde épület, kisdedóvó épület, dedó épület"
             },
             "building/public": {
                 "name": "Nyilvános épület",
@@ -1263,7 +1383,7 @@
             },
             "building/university": {
                 "name": "Egyetemi épület",
-                "terms": "Egyetemi épület"
+                "terms": "Egyetemi épület, Egyetemi  felsőoktatási és kutatási intézmény épülete"
             },
             "building/warehouse": {
                 "name": "Raktár",
@@ -1279,11 +1399,11 @@
             },
             "craft/blacksmith": {
                 "name": "Patkolókovács",
-                "terms": "Patkolókovács"
+                "terms": "Patkolókovács, Kézi kovácsoló"
             },
             "craft/boatbuilder": {
-                "name": "Hajógyáros",
-                "terms": "Hajógyáros"
+                "name": "Hajótervező és építő hely",
+                "terms": "Hajó és csónak építészet "
             },
             "craft/bookbinder": {
                 "name": "Könyvkötő",
@@ -1296,6 +1416,10 @@
             "craft/carpenter": {
                 "name": "Asztalos",
                 "terms": "Asztalos, Ács"
+            },
+            "craft/caterer": {
+                "name": "Catering-Partyszerviz",
+                "terms": "Catering, Partyszerviz, Rendezvényszervező "
             },
             "craft/electrician": {
                 "name": "Villanyszerelő",
@@ -1318,12 +1442,12 @@
                 "terms": "Kulcsos, Kulcskészítő, Kulcsmásoló"
             },
             "craft/optician": {
-                "name": "Szemész",
-                "terms": "Szemész"
+                "name": "Optikai labor-műhely",
+                "terms": "Szemész és látásműhely, Optikus műhely,  Látszerész műhely,  látszerész  labor, "
             },
             "craft/painter": {
-                "name": "Festő",
-                "terms": "Festő, Festőművész"
+                "name": "Festő műhely",
+                "terms": "Festő és mázoló műhely"
             },
             "craft/photographer": {
                 "name": "Fotós",
@@ -1331,23 +1455,23 @@
             },
             "craft/photographic_laboratory": {
                 "name": "Fotólabor",
-                "terms": "Fotólabor"
+                "terms": "Fotólabor , Fotóműhely , Fotólaboratórium"
             },
             "craft/shoemaker": {
                 "name": "Cipész",
-                "terms": "Cipész, Cipőkészítő"
+                "terms": "Cipész, Cipőkészítő, Cipőjavító, Suszter, Csizmadia, Varga, Lábbeli készítő és javító mester"
             },
             "craft/sweep": {
-                "name": "Kéményseprő",
-                "terms": "Kéményseprő"
+                "name": "Kéményseprő iroda",
+                "terms": "Kéményseprő valamint tüzeléstechnika és kéményszakértő iroda, kéményseprő-ipari közszolgáltató, FŐKÉTÜSZ Fővárosi Kéményseprőipari Kft., Kéményseprőipari Szolgáltató és Kereskedelmi Kft."
             },
             "craft/tailor": {
                 "name": "Szabó",
                 "terms": "Szabó"
             },
             "craft/watchmaker": {
-                "name": "Órás",
-                "terms": "Órás"
+                "name": "Órás műhely",
+                "terms": "Órakészítő és javító műhely"
             },
             "embankment": {
                 "name": "Töltés"
@@ -1360,7 +1484,8 @@
                 "name": "Tűzcsap"
             },
             "emergency/phone": {
-                "name": "Segélykérő telefon"
+                "name": "Segélykérő telefon",
+                "terms": "Vészhelyzeti telefon"
             },
             "footway/crossing": {
                 "name": "Kereszteződés"
@@ -1378,7 +1503,8 @@
                 "name": "Buszmegálló"
             },
             "highway/crossing": {
-                "name": "Gyalogátkelő"
+                "name": "Gyalogátkelő",
+                "terms": "Gyalogátkelőhely, Zebra"
             },
             "highway/cycleway": {
                 "name": "Kerékpárút"
@@ -1481,7 +1607,8 @@
                 "name": "Határkő"
             },
             "historic/castle": {
-                "name": "Kastély"
+                "name": "Kastély",
+                "terms": "Vár, Palota"
             },
             "historic/memorial": {
                 "name": "Emlékmű"
@@ -1493,10 +1620,12 @@
                 "name": "Romok"
             },
             "historic/wayside_cross": {
-                "name": "Útmenti kereszt"
+                "name": "Útmenti kereszt",
+                "terms": "Kőkereszt,  Jézus kereszt,  Keresztény kereszt"
             },
             "historic/wayside_shrine": {
-                "name": "Útmenti kegyhely"
+                "name": "Útmenti kegyhely",
+                "terms": "Útmenti szentély"
             },
             "landuse": {
                 "name": "Területfunkció"
@@ -1508,7 +1637,8 @@
                 "name": "Vízgyűjtő medence"
             },
             "landuse/cemetery": {
-                "name": "Temető"
+                "name": "Temető",
+                "terms": "Köztemető"
             },
             "landuse/commercial": {
                 "name": "Irodák"
@@ -1622,9 +1752,6 @@
             "leisure/swimming_pool": {
                 "name": "Úszómedence"
             },
-            "leisure/track": {
-                "name": "Versenypálya"
-            },
             "line": {
                 "name": "Vonal"
             },
@@ -1667,9 +1794,6 @@
             },
             "man_made/water_tower": {
                 "name": "Víztorony"
-            },
-            "man_made/water_well": {
-                "name": "Kút"
             },
             "man_made/water_works": {
                 "name": "Vízmű"
@@ -1767,7 +1891,8 @@
                 "terms": "vállalkozás, iroda, magánvállalkozás"
             },
             "office/educational_institution": {
-                "name": "Foglalkoztatási hivatal"
+                "name": "Foglalkoztatási hivatal",
+                "terms": "Nevelési tanácsadó, Pedagógiai és Pályaválasztási Intézet,  Pedagógiai Szakszolgálat"
             },
             "office/employment_agency": {
                 "name": "Foglalkoztatási hivatal",
@@ -1805,7 +1930,8 @@
                 "terms": "doktor"
             },
             "office/political_party": {
-                "name": "Politikai párt"
+                "name": "Politikai párt",
+                "terms": "fidesz,kdnp,mszp,lmp,jobbik,pm,dk,mlp,pártiroda,fidesz magyar polgári szövetség, magyar kétfarkú kutya párt,kalózpárt,munkáspárt,humanista párt,mlp,demokratikus koalíció,párbeszéd magyarországért,liberális,lehet más a politika,kereszténydemokrata néppárt,magyar szocialista párt"
             },
             "office/research": {
                 "name": "Kutatóintézet"
@@ -1888,13 +2014,16 @@
                 "name": "Megállóhely"
             },
             "railway": {
-                "name": "Vasút"
+                "name": "Vasút",
+                "terms": "vasút"
             },
             "railway/abandoned": {
-                "name": "Felhagyott vasútvonal"
+                "name": "Felszedett vasútvonal",
+                "terms": "felhagyott vasútvonal aminek alig van nyoma, Megszüntetett vasútvonal ahol a vágányokat is felszedték"
             },
             "railway/disused": {
-                "name": "Használaton kívüli vasút"
+                "name": "Használaton kívüli vasút",
+                "terms": "Közforgalomtól lezárt de még meglévő  vasútvonal"
             },
             "railway/funicular": {
                 "name": "Sikló",
@@ -1902,26 +2031,29 @@
             },
             "railway/halt": {
                 "name": "Vasúti megállóhely",
-                "terms": "megállóhely"
+                "terms": "Vasúti megállóhely, Vasúti megálló"
             },
             "railway/level_crossing": {
                 "name": "Szintbeli kereszteződés"
             },
             "railway/monorail": {
-                "name": "Egysínű vasút"
+                "name": "Egysínű vasút",
+                "terms": " nyeregvasút, mágnesvasút "
             },
             "railway/narrow_gauge": {
                 "name": "Kisvasút",
                 "terms": "Kisvasút, Keskeny nyomközű vasút"
             },
             "railway/platform": {
-                "name": "Vasúti platform"
+                "name": "Vasúti peron",
+                "terms": "vasúti fel és leszállóhely, vasútmenti járda"
             },
             "railway/rail": {
                 "name": "Vasút"
             },
             "railway/station": {
-                "name": "Vasútállomás"
+                "name": "Vasútállomás",
+                "terms": "vasúti pályaudvar"
             },
             "railway/subway": {
                 "name": "Metró"
@@ -1939,55 +2071,136 @@
                 "name": "Kompút"
             },
             "shop": {
-                "name": "Ismeretlen típusú üzlet"
+                "name": "Ismeretlen típusú üzlet",
+                "terms": "valamilyen üzlet,  valamilyen kiskereskedés, valamilyen bolt"
             },
             "shop/alcohol": {
-                "name": "alkoholüzlet"
+                "name": "alkoholüzlet",
+                "terms": "unikum,pálinka,baileys,konyak,tokaji,vodka,wiszki,whiskey,kosher szilvapálinka,zwack"
+            },
+            "shop/anime": {
+                "name": "Anime rajzfilmekkel kapcsolatos bolt",
+                "terms": "képregény,anime"
+            },
+            "shop/antiques": {
+                "name": "Antikvitás",
+                "terms": "Régiségkereskedés"
+            },
+            "shop/art": {
+                "name": "Művészeti Galéria",
+                "terms": "Műalkotások boltja"
+            },
+            "shop/baby_goods": {
+                "name": "Bababolt",
+                "terms": "babruha - babakocsi - babaágy - babjáték bolt"
+            },
+            "shop/bag": {
+                "name": "Táska és böröndbolt",
+                "terms": "bőrdíszmű és táskabolt,koffer,utazótáska "
             },
             "shop/bakery": {
-                "name": "Pékség"
+                "name": "Pékség",
+                "terms": "pogácsa,kifli,kenyér,pékség,péksütemény"
+            },
+            "shop/bathroom_furnishing": {
+                "name": " Fürdőszoba-felszerelés és -fürdőszobabútor bolt",
+                "terms": "Szaniter, csaptelep és fürdőszoba felszerelés szaküzlet"
             },
             "shop/beauty": {
                 "name": "Kozmetikus"
             },
+            "shop/bed": {
+                "name": "Ágy és matrac bolt",
+                "terms": " Hálószobabútorok és franciaágyak szaküzlete"
+            },
             "shop/beverages": {
-                "name": "Italbolt"
+                "name": "Italbolt",
+                "terms": "pálinka,wiskey,wiski,vodka,bor,konyak"
             },
             "shop/bicycle": {
-                "name": "Kerékpárbolt"
+                "name": "Kerékpárbolt",
+                "terms": "bicaj - bringa - bicikli  és kétkerekűek boltja"
+            },
+            "shop/bookmaker": {
+                "name": "Fogadóiroda",
+                "terms": "bukméker"
             },
             "shop/books": {
-                "name": "Könyvesbolt"
+                "name": "Könyvesbolt",
+                "terms": "Könyvesbolt"
             },
             "shop/boutique": {
                 "name": "Butik"
             },
             "shop/butcher": {
-                "name": "Hentes"
+                "name": "Hentes",
+                "terms": "Hentes, Mészáros, Húsbolt"
+            },
+            "shop/candles": {
+                "name": "Gyertya és Mécses bolt"
             },
             "shop/car": {
-                "name": "Autókereskedés"
+                "name": "Autókereskedés",
+                "terms": "Autó szalon és márkakereskedés, Személygépkocsi- automobil - jármű és verda árúk bemutatóhelye"
             },
             "shop/car_parts": {
-                "name": "Autóalkatrész üzlet"
+                "name": "Autóalkatrész üzlet",
+                "terms": "gépkocsi alkatrész bolt,  gépjármű alkatrész szaküzlet, személygépkocsi  alkatrész szaküzlet, személygépjármű  alkatrész szaküzlet,  automobil - jármű és verda  alkatrészek szaküzlete"
             },
             "shop/car_repair": {
-                "name": "Autószerviz"
+                "name": "Autószerviz",
+                "terms": "gépkocsi szerviz és javító, gépjármű  szerviz és javító személygépkocsi  szerviz és javító, automobil - jármű és verda  szerviz és javítóhely"
+            },
+            "shop/carpet": {
+                "name": "Szőnyegbolt",
+                "terms": "Szőnyegház, Padlószőnyeg áruház, Diego"
+            },
+            "shop/cheese": {
+                "name": "Sajtbolt",
+                "terms": "Kecskesajt bolt, Francia sajtok boltja"
             },
             "shop/chemist": {
                 "name": "Drogéria"
             },
+            "shop/chocolate": {
+                "name": "Csokoládé bolt",
+                "terms": "Csokoládé Bolt, Gombóc Artúr kedvenc boltja, Kézműves csokoládé bolt, Bonbon bolt, kézzel készült egyedi bonbonok és kézműves csokoládé bolt,  Csokibolt"
+            },
             "shop/clothes": {
-                "name": "Ruhabolt"
+                "name": "Ruhabolt",
+                "terms": "Ruházati bolt , fehérnemű bolt, öltönyáruház, "
             },
             "shop/computer": {
-                "name": "Számítógépbolt"
+                "name": "Számítógépbolt",
+                "terms": "Számítástechnikai üzlet, notebook bolt, laptop bolt, Apple bolt"
             },
             "shop/confectionery": {
-                "name": "Cukrászda"
+                "name": "Cukrászda és sütemények boltja",
+                "terms": " Édesség és süteménybolt,  Tortaszaküzlet,   cukrászüzlet, cukrászat"
             },
             "shop/convenience": {
-                "name": "Kisbolt"
+                "name": "Kisbolt",
+                "terms": "ABC, sarki élelmiszer, kisbolt"
+            },
+            "shop/copyshop": {
+                "name": "Fénymásoló ",
+                "terms": "Önkiszolgáló nyomtatás és fénymásolás, Copyguru, Copy Generál, Fénymásolás - nyomtatás- diplomakötés- spirálozás"
+            },
+            "shop/cosmetics": {
+                "name": "Kozmetikai bolt",
+                "terms": "Natúr és biokozmetikumok boltja, Szépségápolási szaküzlet,  Sminkbolt,  Parfüm bolt,"
+            },
+            "shop/craft": {
+                "name": "Művészellátó és hobby bolt",
+                "terms": "Hobbyművész, Kreatív Art - Hobby és Művészellátó bolt, Művészellátó és Hobbibolt, Dekorációs hobby- és művészellátó bolt"
+            },
+            "shop/curtain": {
+                "name": "Függöny, drapéria bolt",
+                "terms": "karnis,függöny,kárpit,"
+            },
+            "shop/dairy": {
+                "name": "Tej-Tejtermékek Boltja",
+                "terms": "Házi Tejtermékek Boltja, Kecsketej bolt. Kézműves tejtermékek boltja"
             },
             "shop/deli": {
                 "name": "Delikatesz bolt"
@@ -1996,114 +2209,278 @@
                 "name": "Áruház"
             },
             "shop/doityourself": {
-                "name": "Barkácsáruház"
+                "name": "Barkácsáruház",
+                "terms": "barkács,bütyköl,tákol,ezermester,obi,praktiker,baumax,barkácsbolt,felújítás,"
             },
             "shop/dry_cleaning": {
-                "name": "Ruhatisztító"
+                "name": "Vegytisztitó",
+                "terms": " Száraztisztító"
             },
             "shop/electronics": {
                 "name": "Elektronikai bolt"
             },
+            "shop/erotic": {
+                "name": "Erotikus bolt",
+                "terms": "vibrátor-ok - erotikus ruhák  - szex kiegészítők boltja, Szexshop , \nSzexáruház, intim bolt, erotikus segédeszközök boltja"
+            },
+            "shop/fabric": {
+                "name": "Rövidáru és Méteráru bolt",
+                "terms": " RÖLTEX - lakástextil bolt,  Rőfösbolt"
+            },
             "shop/farm": {
                 "name": "Árú stand"
+            },
+            "shop/fashion": {
+                "name": "divat üzlet",
+                "terms": "Női divat és ruhabolt "
             },
             "shop/fishmonger": {
                 "name": "Halárus"
             },
             "shop/florist": {
-                "name": "Virágbolt"
+                "name": "Virágbolt",
+                "terms": "Rózsák boltja,  Szobanövény bolt,   dísznövény és bonsai bolt, virágdísznövények és kaktuszok boltja"
+            },
+            "shop/frame": {
+                "name": "Képkeretező bolt"
+            },
+            "shop/funeral_directors": {
+                "name": "Temetkezési iroda",
+                "terms": "Temetkezési ügyintézés, temetkezési intézet,  temetkezési és hamvasztási ügyintézés"
+            },
+            "shop/furnace": {
+                "name": "Kazán és Központi fűtés bolt",
+                "terms": "Gázkazán - radiátor  konvektor és fűtésszerelési bolt,\nFűtéstechnika radiátor  szerelvény és kazánbolt,gáz,fűtés"
             },
             "shop/furniture": {
-                "name": "Bútorbolt"
+                "name": "Bútorbolt",
+                "terms": "IKEA bútorok  boltja"
             },
             "shop/garden_centre": {
                 "name": "Kertészet"
             },
             "shop/gift": {
-                "name": "Ajándékbolt"
+                "name": "Ajándékbolt",
+                "terms": "meglepetés, ajándéktárgy, szuvenír"
             },
             "shop/greengrocer": {
-                "name": "Zöldséges"
+                "name": "zöldség-gyümölcs bolt",
+                "terms": "Zöldség - Gyümölcs"
             },
             "shop/hairdresser": {
-                "name": "Fodrász"
+                "name": "Fodrász",
+                "terms": "hajszobrász, frizérozó, frizuraszerviz, hajvágás, borbély, hajszalon ,  mesterfodrász, hajegyenesítés,haj,bajusz"
             },
             "shop/hardware": {
                 "name": "Háztartási felszerelés bolt"
             },
+            "shop/hearing_aids": {
+                "name": "Hallókészülék bolt",
+                "terms": "hallókészülékek és fülillesztékek boltja"
+            },
+            "shop/herbalist": {
+                "name": "Gyógynövénybolt",
+                "terms": "Gyógynövények - teák - étrendkiegészítők boltja, \nGyógynövény és biobolt "
+            },
             "shop/hifi": {
-                "name": "Hifi bolt"
+                "name": "Hifi bolt",
+                "terms": "akusztika, extreme audio,hifi,hi-fi,audio,audiophyl,high end,házimozi,erősítő,hangfal,"
+            },
+            "shop/interior_decoration": {
+                "name": "Belsőépítészeti bolt"
             },
             "shop/jewelry": {
-                "name": "Ékszerész"
+                "name": "Ékszerész",
+                "terms": "arany, ezüst, gyémánt, briliáns,  ékszer,bijou,bizsu,fülbevaló,nyakék,karkötő,divatékszer,jegygyűrű,gyűrű"
             },
             "shop/kiosk": {
-                "name": "Trafik"
+                "name": "Trafik",
+                "terms": "újságos trafik"
+            },
+            "shop/kitchen": {
+                "name": "Konyhatervezési stúdió"
             },
             "shop/laundry": {
-                "name": "Mosoda"
+                "name": "Mosoda",
+                "terms": "önkiszolgáló textil és ruhatisztító,  Önkiszolgáló mosoda, önkiszolgáló gyorstisztító,  "
+            },
+            "shop/leather": {
+                "name": "Bőrszaküzlet",
+                "terms": "bőrkézműves"
             },
             "shop/locksmith": {
                 "name": "Lakatos",
                 "terms": "kulcsmásoló, záras, zárszerelő"
             },
+            "shop/lottery": {
+                "name": "Lottózó",
+                "terms": "Szerencsejáték  bolt, Szerencsejáték fogadóiroda, Joker üzlet és lottozó"
+            },
             "shop/mall": {
                 "name": "Bevásárlóközpont"
             },
+            "shop/massage": {
+                "name": "Masszázs szalon",
+                "terms": "masszőr,  masszázs, gyógymasszázs, svédmasszázs, thai masszázs, keleti masszázs, gyúrás"
+            },
+            "shop/medical_supply": {
+                "name": "Gyógyászati és Orvosi Segédeszköz Bolt",
+                "terms": "Gyógybolt, Egészségbolt, Gyógyászati eszközök boltja"
+            },
             "shop/mobile_phone": {
-                "name": "Mobiltelefon bolt"
+                "name": "Mobiltelefon bolt",
+                "terms": "android,iphone,nokia"
+            },
+            "shop/money_lender": {
+                "name": "Pénzkölcsönző",
+                "terms": "gyorskölcsön pénzkölcsönző, hitel centrum, Cofidis Gyorskölcsönző, gyorshitelező,  Személyi kölcsönző"
             },
             "shop/motorcycle": {
-                "name": "Motorkerékpár kereskedés"
+                "name": "Motorkerékpár kereskedés",
+                "terms": "Motorbicikli Márkakereskedő, Robogó és motor márkakereskedő, "
             },
             "shop/music": {
-                "name": "Lemezbolt"
+                "name": "Lemezbolt",
+                "terms": "Zenebolt, CD és DVD bolt, Zeneműbolt, Muzsikabolt,   kotta és hanglemezbolt"
+            },
+            "shop/musical_instrument": {
+                "name": "Hangszer bolt",
+                "terms": "Hangszer és kotta bolt, Hangszerdiszkont"
             },
             "shop/newsagent": {
-                "name": "Újságos"
+                "name": "újságos"
             },
             "shop/optician": {
-                "name": "Optikus"
+                "name": "Optikus bolt",
+                "terms": "Szemüveg és kontaktlencse bolt"
+            },
+            "shop/organic": {
+                "name": "Biobolt",
+                "terms": "Bio és natúr élelmiszer bolt, Biominőségű és egészséges táplálékok boltja, Natura bolt,  Natura Reformtáplálkozási Szaküzlet, Bio és organikus ételek és áruk boltja"
             },
             "shop/outdoor": {
-                "name": "Túrabolt"
+                "name": "Túrafelszerelés bolt",
+                "terms": "Hegymászó felszerelés bolt,  Outdoor sportbolt, \nVilágjárók Boltja, \nBakancs - sátor - túracipő - hátizsák és hálózsák bolt"
+            },
+            "shop/paint": {
+                "name": "Festékbolt",
+                "terms": " Falfesték bolt,  Tikkurila Festékbolt, Színkeverő bolt,  Festék- vegyi áru szaküzlet "
+            },
+            "shop/pawnbroker": {
+                "name": "Zálogház, zaci"
             },
             "shop/pet": {
-                "name": "Kisállatkereskedés"
+                "name": "Kisállatkereskedés",
+                "terms": "Kisállat kereskedés, Kisállat és  állateledelt árusító bolt, \nÁllateledel, "
             },
             "shop/photo": {
                 "name": "Fotósbolt",
                 "terms": "fényképész, fényképezés, filmkidolgozás, előhívás, igazolványkép"
             },
+            "shop/pyrotechnics": {
+                "name": "Pirotechnikai bolt",
+                "terms": "robbanószerek - tűzijátékok - petárdák és csillagszórók boltja"
+            },
+            "shop/radiotechnics": {
+                "name": "Rádiótechnikai bolt",
+                "terms": "Elektronikai alkatrészek - termékek és mérőműszerek boltja"
+            },
+            "shop/religion": {
+                "name": "Kegytárgybolt",
+                "terms": "vallásos - vallási témájú tárgyak - könyvek - szobrok boltja"
+            },
+            "shop/scuba_diving": {
+                "name": "Búvárfelszerelések boltja",
+                "terms": "Búvárfelszerelések boltja, Búvárbolt, Búvárszakáruház "
+            },
+            "shop/seafood": {
+                "name": "Halárus",
+                "terms": "Tengeri halak boltja,  Halkereskedés, Tengeri halak és finomságok boltja, Halak - rákok - kagylók és más tengeri jószágok boltja"
+            },
+            "shop/second_hand": {
+                "name": "Használt cikkek boltja",
+                "terms": "Használtruha bolt, Turkáló , Turi, Turkáló butik, bálás bolt,  second hand bolt"
+            },
             "shop/shoes": {
-                "name": "Cipőbolt"
+                "name": "Cipőbolt",
+                "terms": "cipőbolt,  cipő papucs csizma és más lábbelik boltja , cipobolt"
             },
             "shop/sports": {
                 "name": "Sportbolt"
             },
             "shop/stationery": {
-                "name": "Írószerbolt"
+                "name": "Írószerbolt",
+                "terms": "Papír - Írószer és nyomtatván bolt,  Papír - írószer és irodaszer kereskedelem, papirbolt, irodaszerbolt"
             },
             "shop/supermarket": {
                 "name": "Szupermarket"
             },
+            "shop/tailor": {
+                "name": "Szabóüzlet",
+                "terms": "szabóság,  méretre ruhát készítő üzlet"
+            },
+            "shop/tattoo": {
+                "name": "Tetováló szalon",
+                "terms": "Tetoválás és  piercing, Piercing Tetováló Szalon, Piercing Szúrás Tetoválás, Fülbelövés - Tatoo"
+            },
+            "shop/tea": {
+                "name": "Teaüzlet",
+                "terms": "Teabolt, TEA Szaküzlet és Teázó"
+            },
+            "shop/ticket": {
+                "name": "Jegyárusító üzlet",
+                "terms": "koncertjegy,színházjegy,interticket,hajójegy,sportesemények,utazás,üdülési csekk,szállásfoglalás"
+            },
+            "shop/tobacco": {
+                "name": "Dohánybolt",
+                "terms": "Nemzeti dohánybolt, Dohány  cigaretta szivar és pipadohány bolt"
+            },
             "shop/toys": {
-                "name": "Játékbolt"
+                "name": "Játékbolt",
+                "terms": "barbie,lego,hasbro,mattel,babák,fisher price,logikai,barkács,bébi,gyermek,kreatív"
             },
             "shop/travel_agency": {
-                "name": "Utazási iroda"
+                "name": "Utazási iroda",
+                "terms": "ibusz,vista,neckermann,nyaralás,last minute,utazás,travel,karthago tours,tours,tui,reisen,otp travel,voyage"
             },
             "shop/tyres": {
-                "name": "Autógumis"
+                "name": "Autógumis",
+                "terms": "téli és nyári autógumi,gumiabroncs,michelin,continental,bridgestone, goodyear, avon, michelin, nexen, pirelli, dunlop,hankook,négyévszakos gumi,4x4 gumiabroncs, gumiszerelés,terepjáró gumi, transporter gumi, barum, falken, kumho, toyo, semperit, nokian, infinity, debica, fulda,  nankang, strial, kormoran, kleber, vredestein, firestone, dayton, bfgoodrich, sava, zetum, uniroyal"
             },
             "shop/vacant": {
                 "name": "üres üzlethelyiség"
             },
+            "shop/vacuum_cleaner": {
+                "name": "Porszívóbolt",
+                "terms": "Porszívó, takarítógép"
+            },
             "shop/variety_store": {
-                "name": "100 forintos bolt"
+                "name": "100 forintos bolt",
+                "terms": "olcsó áruk boltja, 1 eurós bolt"
             },
             "shop/video": {
-                "name": "DVD kölcsönző"
+                "name": "DVD kölcsönző",
+                "terms": "DVD és videokazetta és film kölcsönző"
+            },
+            "shop/video_games": {
+                "name": "Videójátékok boltja",
+                "terms": "számítógépes és konzolos videójátékok boltja"
+            },
+            "shop/water_sports": {
+                "name": "Vizisport eszközök boltja,",
+                "terms": "kajak,csónak,mentőmellény,úszóruha,hajók,vízíjárművek,szörf,windszörf"
+            },
+            "shop/weapons": {
+                "name": "Fegyverbolt",
+                "terms": " Kések  lőfegyverek és riasztófegyverek boltja"
+            },
+            "shop/window_blind": {
+                "name": "Redőnyök rolók és ablaksötétítők boltja",
+                "terms": " rolók, ablaksötétítők"
+            },
+            "shop/wine": {
+                "name": "Borszaküzlet",
+                "terms": "Borkereskedés "
             },
             "tourism": {
                 "name": "Turizmus"
@@ -2112,7 +2489,8 @@
                 "name": "Menedékház"
             },
             "tourism/artwork": {
-                "name": "Műalkotás"
+                "name": "Műalkotás",
+                "terms": "Művészeti alkotás, szobor, fafaragás, "
             },
             "tourism/attraction": {
                 "name": "Turistalátványosság"

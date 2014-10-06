@@ -1,0 +1,99 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "Areo",
+            "description": "Aldoni parkoj, konstruaĵoj, lagoj aŭ aliaj areoj por la mapo.",
+            "tail": "Klaku sur la mapo por komenci desegni areo, kiel parko, lago, aŭ konstruaĵo."
+        },
+        "add_line": {
+            "title": "linio",
+            "description": "Aldoni ŝoseoj, stratoj, piediranto vojoj, kanaloj aŭ aliajn liniojn al la mapo.",
+            "tail": "Klaku sur la mapo por komenci desegni vojo, vojo, aŭ itinero."
+        },
+        "add_point": {
+            "title": "punkto",
+            "description": "Aldoni restoracioj, monumentoj, bildkartoj skatoloj aŭ aliaj punktoj al la mapo.",
+            "tail": "Klaku sur la mapo por aldoni punkton."
+        },
+        "browse": {
+            "title": "Foliumi",
+            "description": "Pan kaj zomi la mapon."
+        },
+        "draw_area": {
+            "tail": "Klaku por aldoni nodoj al via areo. Klaku la unuan nodo fini la areo."
+        },
+        "draw_line": {
+            "tail": "Klaku por aldoni pli nodoj al la linio. Klaku sur aliaj linioj por konekti al ili, kaj duoble klaki por fino la linion."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Aldonita punkto.",
+                "vertex": "Aldonita nodon al vojo.",
+                "relation": "Aldonita rilato."
+            }
+        },
+        "continue": {
+            "title": "Daŭrigu",
+            "description": "Daŭrigu tiun linion.",
+            "not_eligible": "Neniu linio povas esti daŭrigita tien.",
+            "multiple": "Pluraj linioj povas esti daŭrigita tien. Elekti linion, premu la klavo Shift kaj klaku sur ĝi por elekti ĝin.",
+            "annotation": {
+                "line": "Daŭre linion.",
+                "area": "Daŭre areo."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Nuligita desegno."
+        },
+        "change_role": {
+            "annotation": "Ŝanĝis la rolo de rilato membron."
+        },
+        "change_tags": {
+            "annotation": "Ŝanĝita etikedojn."
+        },
+        "circularize": {
+            "title": "Circularize"
+        },
+        "delete": {
+            "annotation": {
+                "point": "Forigita punkton.",
+                "line": "Forigita linion."
+            }
+        },
+        "disconnect": {
+            "title": "Malkonekti"
+        },
+        "rotate": {
+            "title": "Rotacio"
+        }
+    },
+    "translate": {
+        "translate": "Traduki",
+        "localized_translation_label": "Multlingva nomon"
+    },
+    "intro": {
+        "navigation": {
+            "title": "Navigado"
+        },
+        "points": {
+            "title": "Punktoj"
+        },
+        "areas": {
+            "title": "Areoj",
+            "choose": "** Elektu Playground el la listo. **",
+            "describe": "**Aldoni nomo, kaj fermi la redaktilon trajto **"
+        },
+        "lines": {
+            "title": "Linioj",
+            "wrong_preset": "Vi ne selektis la Residencial vojo tipo. ** Klaku tie ĉi por elekti denove **"
+        },
+        "startediting": {
+            "title": "Komenco Redaktado",
+            "help": "Pli dokumentado kaj tiu walkthrough estas havebla ĉi tie.",
+            "save": "Ne forgesu regule savu viajn ŝanĝojn!",
+            "start": "Starti surĵeto!"
+        }
+    }
+}

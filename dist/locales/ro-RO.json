@@ -61,7 +61,6 @@
         },
         "delete": {
             "title": "Sterge",
-            "description": "Șterge de pe hartă.",
             "annotation": {
                 "point": "Șterge un punct.",
                 "vertex": "Șterge un nod dintr-o cale.",
@@ -464,9 +463,6 @@
             },
             "amenity/townhall": {
                 "name": "Primărie"
-            },
-            "amenity/university": {
-                "name": "Universitate"
             },
             "building": {
                 "name": "Clădire"

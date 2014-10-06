@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "Xóa",
-            "description": "Xóa đối tượng này khỏi bản đồ.",
+            "description": "Xóa đối tượng vĩnh viễn.",
             "annotation": {
                 "point": "xóa địa điểm",
                 "vertex": "xóa nốt khỏi lối",
@@ -165,7 +165,7 @@
         },
         "reverse": {
             "title": "Đảo ngược",
-            "description": "Đảo nguợc chiều đường kẻ này.",
+            "description": "Đảo ngược chiều đường kẻ này.",
             "key": "V",
             "annotation": "đảo ngược đường kẻ"
         },
@@ -350,6 +350,11 @@
         "zoom": "Phóng vừa tuyến đường GPX",
         "browse": "Chọn một tập tin .gpx"
     },
+    "mapillary": {
+        "tooltip": "Hình ảnh từ con đường do Mapillary cung cấp",
+        "title": "Lớp phủ Hình ảnh (Mapillary)",
+        "view_on_mapillary": "Xem hình này trên Mapillary"
+    },
     "help": {
         "title": "Trợ giúp",
         "help": "# Trợ giúp\n\nĐây là trình vẽ của [OpenStreetMap](http://www.openstreetmap.org/), bản đồ có mã nguồn mở và dữ liệu mở cho phép mọi người cùng sửa đổi. Bạn có thể sử dụng chương trình này để bổ sung và cập nhật dữ liệu bản đồ tại khu vực của bạn. Bạn có thể cải tiến bản đồ thế giới mở để cho mọi người sử dụng.\n\nCác sửa đổi của bạn trên bản đồ này sẽ xuất hiện cho mọi người dùng OpenStreetMap. Để sửa bản đồ, bạn cần có một [tài khoản OpenStreetMap miễn phí](https://www.openstreetmap.org/user/new).\n\n[Tình vẽ iD](http://ideditor.com/) là một dự án cộng tác và xuất bản [tất cả mã nguồn tại GitHub](https://github.com/openstreetmap/iD).\n",
@@ -385,7 +390,7 @@
         },
         "areas": {
             "title": "Vùng",
-            "add": "Bạn có thể vẽ kỹ hơn bằng cách vẽ vùng thay vì địa điểm. Phần nhiều thể loại địa điểm có thể được vẽ như vùng. Khuyên bạn cố gắng vẽ vùng thay vì địa điểm để cho biết đường biên của đối tượng. **Nhấn vào nút Vùng để bắt đầu vẽ vùng mới.**",
+            "add": "Các vùng cho biết hình dạng của hồ nước, tòa nhà, và khu vực dân cư. Bạn có thể cung cấp nhiều chi tiết hơn dùng vùng so với địa điểm. **Nhấn vào nút Vùng để bắt đầu vẽ vùng mới.**",
             "corner": "Để vẽ vùng, đặt các nốt theo đường biên của vùng. **Đặt nốt đầu tiên vào một góc của sân chơi trẻ em.**",
             "place": "Đặt thêm nốt để tiếp tục vẽ vùng, rồi nhấn vào nốt đầu tiên để “đóng” vùng này. **Vẽ một vùng cho sân chơI trẻ em.**",
             "search": "**Tìm “{name}”.**",
@@ -623,6 +628,9 @@
             },
             "covered": {
                 "label": "Có Mái Che"
+            },
+            "craft": {
+                "label": "Loại"
             },
             "crop": {
                 "label": "Loại cây"
@@ -1050,6 +1058,9 @@
             "sport_ice": {
                 "label": "Môn Thể thao"
             },
+            "sport_racing": {
+                "label": "Môn Thể thao"
+            },
             "structure": {
                 "label": "Cấu trúc",
                 "placeholder": "Không rõ",
@@ -1270,6 +1281,10 @@
                 "name": "Cho thuê Tàu",
                 "terms": "dịch vụ cho thuê tàu, chỗ thuê tàu, tiệm thuê tàu, thuê tàu, dịch vụ cho mướn tàu, chỗ mướn tàu, tiệm mướn tàu, mướn tàu, dịch vụ cho thuê thuyền, chỗ thuê thuyền, tiệm thuê thuyền, thuê thuyền, dịch vụ cho mướn thuyền, chỗ mướn thuyền, tiệm mướn thuyền, mướn thuyền, dich vu cho thue tau, cho thue tau, tiem thue tau, thue tau, dich vu cho muon tau, cho muon tau, tiem muon tau, muon tau, dich vu cho thue thuyen, cho thue thuyen, tiem thue thuyen, thue thuyen, dich vu cho muon thuyen, cho muon thuyen, tiem muon thuyen, muon thuyen"
             },
+            "amenity/bureau_de_change": {
+                "name": "Đổi tiền",
+                "terms": "đổi tiền, chuyển đổi tiền tệ, nơi đổi tiền, quán đổi tiền, máy đổi tiền, trạm đổi tiền, doi tien, chuyen doi tien te, noi doi tien, quan doi tien, may doi tien, tram doi tien"
+            },
             "amenity/bus_station": {
                 "name": "Ga Xe buýt",
                 "terms": "ga xe buýt, nhà ga xe buýt, nhà ga buýt, ga buýt, ga xe buyt, nha ga xe buyt, nha ga buyt, ga buyt"
@@ -1296,7 +1311,7 @@
             },
             "amenity/childcare": {
                 "name": "Giữ trẻ",
-                "terms": "giữ trẻ, giữ con nít, giữ đứa bé, giu tre, giu con nit, giu dua be"
+                "terms": "nhà trẻ, giữ trẻ, giữ con nít, giữ đứa bé, nha tre, giu tre, giu con nit, giu dua be"
             },
             "amenity/cinema": {
                 "name": "Rạp phim",
@@ -1311,8 +1326,8 @@
                 "terms": "đồng hồ, dong ho"
             },
             "amenity/college": {
-                "name": "Trường Cao đẳng",
-                "terms": "trường cao đẳng, cao đẳng, CĐ, truong cao dang, cao dang, CD"
+                "name": "Sân trường Cao đẳng",
+                "terms": "sân trường cao đẳng, trường cao đẳng, cao đẳng, CĐ, san truong cao dang, truong cao dang, cao dang, CD"
             },
             "amenity/compressed_air": {
                 "name": "Khí Nén",
@@ -1459,8 +1474,8 @@
                 "terms": "nhà phân phát thực phẩm, dịch vụ phân phối thực phẩm, cơ quan cung cấp thực phẩm, cơ quan cung cấp thức ăn, cơ quan cung cấp đồ ăn, giao thức ăn cho người đói, food bank, nha phan phat thuc pham, dich vu phan phoi thuc pham, co quan cung cap thuc pham, co quan cung cap thuc an, co quan cung cap do an, giao thuc an cho nguoi doi"
             },
             "amenity/social_facility/group_home": {
-                "name": "Nhà trọ Cộng đồng",
-                "terms": "nhà trọ cộng đồng, nhà tập thể, group home, nha tro cong dong, nha tap the"
+                "name": "Nhà trọ Cộng đồng Người già",
+                "terms": "nhà trọ cộng đồng người già, nhà tập thể của người già, group home, nha tro cong dong nguoi gia, nha tap the cua nguoi gia"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Cứu trợ Người Vô gia cư",
@@ -1495,8 +1510,8 @@
                 "terms": "tòa thị chính, tòa thị chánh, toà thị chính, toà thị chánh, trụ sở thành phố, trụ sở thị xã, trụ sở làng, toa thi chinh, toa thi chanh, tru so thanh pho, tru so thi xa, tru so lang"
             },
             "amenity/university": {
-                "name": "Trường Đại học",
-                "terms": "cao đẳng, trường cao đẳng, đại học, CĐ, ĐH, cao dang, truong cao dang, dai hoc, CD, DH"
+                "name": "Sân trường Đại học",
+                "terms": "sân trường đại học, sân viện đại học, sân trường cao đẳng, trường đại học, viện đại học, trường cao đẳng, ĐH, CĐ, san truong dai hoc, san vien dai hoc, san truong cao dang, truong dai hoc, vien dai hoc, truong cao dang"
             },
             "amenity/vending_machine": {
                 "name": "Máy bán hàng",
@@ -1618,6 +1633,10 @@
                 "name": "Nhà thờ",
                 "terms": "nhà thờ, Ki-tô giáo, Kitô giáo, Thiên Chúa giáo, đạo Thiên Chúa, Công giáo, Tin Lành, giáo xứ, thánh đường, nha tho, Ki-to giao, Kito giao, Thien Chua giao, dao Thien Chua, Cong giao, Tin Lanh, giao xu, thanh duong"
             },
+            "building/college": {
+                "name": "Tòa nhà Trường Cao đẳng",
+                "terms": "tòa nhà trường cao đẳng, toà nhà trường cao đẳng, toa nha truong cao dang"
+            },
             "building/commercial": {
                 "name": "Tòa nhà Thương mại",
                 "terms": "tòa nhà thương mại, toà nhà thương mại, toa nha thuong mai"
@@ -1670,6 +1689,10 @@
                 "name": "Tòa nhà Công nghiệp",
                 "terms": "tòa nhà công nghiệp, toà nhà công nghiệp, toa nha cong nghiep"
             },
+            "building/kindergarten": {
+                "name": "Nhà trẻ",
+                "terms": "nhà trẻ, nhà giữ trẻ, trường mẫu giáo, trường mầm non, nha tre, nha giu tre, truong mau giao, truong mam non"
+            },
             "building/public": {
                 "name": "Tòa nhà Công cộng",
                 "terms": "tòa nhà công cộng, toà nhà công cộng"
@@ -1717,6 +1740,10 @@
             "building/warehouse": {
                 "name": "Nhà kho",
                 "terms": "nhà kho, kho, kho tàng, kho bãi, nha kho, kho tang, kho bai"
+            },
+            "craft": {
+                "name": "Nghề",
+                "terms": "nghề, nghề nghiệp, nghệ, nghệ nghiềp, nghe, nghe nghiep"
             },
             "craft/basket_maker": {
                 "name": "Đan Rổ rá",
@@ -1898,6 +1925,10 @@
                 "name": "Xây Cửa sổ",
                 "terms": "thợ xây cửa sổ, người xây cửa sổ, tho xay cua so, nguoi xay cua so"
             },
+            "craft/winery": {
+                "name": "Nhà máy Rượu vang",
+                "terms": "nhà máy rượu vang, nha may ruou vang"
+            },
             "embankment": {
                 "name": "Đường đắp cao",
                 "terms": "đường đắp cao, đê, duong dap cao, de"
@@ -2029,6 +2060,10 @@
             "highway/primary_link": {
                 "name": "Nhánh Ra vào Đường Chính",
                 "terms": "đường nhánh đường chính, đường nhánh quốc lộ, đường nhánh xa lộ, đoạn nhánh đường chính, đoạn nhánh quốc lộ, đoạn nhánh xa lộ, đường nhánh rẽ đường chính, đường nhánh rẽ quốc lộ, đường nhánh rẽ xa lộ, đoạn nhánh rẽ đường chính, đoạn nhánh rẽ quốc lộ, đoạn nhánh rẽ xa lộ, đường nhánh chuyển đường chính, đường nhánh chuyển quốc lộ, đường nhánh chuyển xa lộ, nhánh chuyển đường chính, nhánh chuyển quốc lộ, nhánh chuyển xa lộ, lối ra vào đường chính, lối ra vào quốc lộ, lối ra vào xa lộ, lối ra đường chính, lối ra quốc lộ, lối ra xa lộ, lối vào đường chính, lối vào quốc lộ, lối vào xa lộ, nhánh ra đường chính, nhánh ra quốc lộ, nhánh ra xa lộ, nhánh vào đường chính, nhánh vào quốc lộ, nhánh vào xa lộ, đường nối đường chính, đường nối quốc lộ, đường nối xa lộ, duong nhanh duong chinh, duong nhanh quoc lo, duong nhanh xa lo, doan nhanh duong chinh, doan nhanh quoc lo, doan nhanh xa lo, duong nhanh re duong chinh, duong nhanh re quoc lo, duong nhanh re xa lo, doan nhanh re duong chinh, doan nhanh re quoc lo, doan nhanh re xa lo, duong nhanh chuyen duong chinh, duong nhanh chuyen quoc lo, duong nhanh chuyen xa lo, nhanh chuyen duong chinh, nhanh chuyen quoc lo, nhanh chuyen xa lo, loi ra vao duong chinh, loi ra vao quoc lo, loi ra vao xa lo, loi ra duong chinh, loi ra quoc lo, loi ra xa lo, loi vao duong chinh, loi vao quoc lo, loi vao xa lo, nhanh ra duong chinh, nhanh ra quoc lo, nhanh ra xa lo, nhanh vao duong chinh, nhanh vao quoc lo, nhanh vao xa lo, duong noi duong chinh, duong noi quoc lo, duong noi xa lo"
+            },
+            "highway/raceway": {
+                "name": "Đường Đua Ô tô",
+                "terms": "đường đua xe hơi, đường đua ô tô, đường đua ô-tô, đường đua ôtô, trường đua xe hơi, trường đua ô tô, trường đua ô-tô, trường đua ôtô, duong dua xe, truong dua xe, duong dua xe hoi, duong dua o to, duong dua o-to, duong dua oto, truong dua xe hoi, truong dua o to, truong dua o-to, truong dua oto"
             },
             "highway/residential": {
                 "name": "Ngõ Dân cư",
@@ -2318,6 +2353,10 @@
                 "name": "Sân chơi",
                 "terms": "sân chơi, khu vui chơi, khu vui chơi trẻ em, đồ chơi, công viên trẻ em, cầu tuột, đu, xích đu, thang leo, san choi, khu vui choi, khu vui choi tre em, do choi, cong vien tre em, cau tuot, du, xich du, thang leo"
             },
+            "leisure/running_track": {
+                "name": "Đường Chạy",
+                "terms": "đường chạy, đường chạy đua, đường chạy điền kinh, duong chay, duong chay dua, duong chay dien kinh"
+            },
             "leisure/slipway": {
                 "name": "Đường Trượt tàu",
                 "terms": "đường trượt tàu, duong truot tau"
@@ -2335,8 +2374,8 @@
                 "terms": "hồ bơi, hồ tắm, ho boi, ho tam"
             },
             "leisure/track": {
-                "name": "Đường Đua",
-                "terms": "đường đua, trường đua, đường chạy điền kinh, đua ngựa, đua xe đạp, duong dua, truong dua, duong chay dien kinh, dua ngua, dua xe dap"
+                "name": "Đường Đua (Không phải Ô tô)",
+                "terms": "đường đua, trường đua, đường đua ngựa, đường đua xe đạp, duong dua, truong dua, duong dua ngua, duong dua xe dap"
             },
             "line": {
                 "name": "Đường kẻ",
@@ -2742,17 +2781,41 @@
                 "name": "Tiệm Rượu",
                 "terms": "tiệm rượu, nơi bán rượu, chỗ bán rượu, quầy bán rượu, cửa hàng rượu, cửa hàng bán rượu, tiệm bán rượu, tiem ruou, noi ban ruou, cho ban ruou, quay ban ruou, cua hang ruou, cua hang ban ruou, tiem ban ruou"
             },
+            "shop/anime": {
+                "name": "Tiệm Anime",
+                "terms": "tiệm anime, cửa hàng anime, cửa hiệu anime, quán anime, tiem anime, cua hang anime, cua hieu anime, quan anime"
+            },
+            "shop/antiques": {
+                "name": "Tiệm Đồ Cổ",
+                "terms": "tiệm đồ cổ, cửa hàng đồ cổ, cửa hiệu đồ cổ, người bán đồ cổ, chỗ bán đồ cổ, nơi bán đồ cổ, tiem do co, cua hang do co, cua hieu do co, nguoi ban do co, cho ban do co, noi ban do co"
+            },
             "shop/art": {
                 "name": "Tiệm Nghệ phẩm",
                 "terms": "tiệm nghệ phẩm, tiệm bức tranh, tiệm bức vẽ, cửa hàng nghệ phẩm, cửa hàng bức tranh, cửa hàng bức vẽ, quán nghệ phẩm, quán bức tranh, quán bức vẽ, nơi bán nghệ phẩm, nơi bán bức tranh, nơi bán bức vẽ, tiem nghe pham, tiem buc tranh, tiem buc ve, cua hang nghe pham, cua hang buc tranh, cua hang buc ve, quan nghe pham, quan buc tranh, quan buc ve, noi ban nghe pham, noi ban buc tranh, noi ban buc ve"
+            },
+            "shop/baby_goods": {
+                "name": "Tiệm Đồ Sơ sinh",
+                "terms": "tiệm đồ sơ sinh, cửa hàng đồ sơ sinh, cửa hiệu đồ sơ sinh, tiệm đồ em bé, cửa hàng đồ em bé, cửa hiệu đồ em bé, chăm sóc em bé, đồ chơi em bé, sữa, tiem do so sinh, cua hang do so sinh, cua hieu do so sinh, tiem do em be, cua hang do em be, cua hieu do em be, cham soc em be, do choi em be, sua"
+            },
+            "shop/bag": {
+                "name": "Tiệm Túi",
+                "terms": "tiệm túi, cửa hàng tửi, cửa hiệu túi, quán túi, tiệm bao, cửa hàng bao, cửa hiệu bao, quán bao, tiệm va li, cửa hàng va li, cửa hiệu va li, quán va li, tiệm va-li, cửa hàng va-li, cửa hiệu va-li, quán va-li, tiệm vali, cửa hàng vali, cửa hiệu vali, quán vali, tiệm xắc, cửa hàng xắc, cửa hiệu xắc, quán xắc, tiem tui, cua hang tui, cua hieu tui, quan tui, tiem bao, cua hang bao, cua hieu bao, quan bao, tiem va li, cua hang va li, cua hieu va li, quan va li, tiem va-li, cua hang va-li, cua hieu va-li, quan va-li, tiem vali, cua hang vali, cua hieu vali, quan vali, tiem xac, cua hang xac, cua hieu xac, quan xac"
             },
             "shop/bakery": {
                 "name": "Tiệm Bánh",
                 "terms": "tiệm bánh, tiệm bánh mì, tiệm bán bánh, nơi bán bánh, chỗ bán bánh, quầy bán bánh, nhà bán bánh, tiem banh, tiem banh mi, tiem ban banh, noi ban banh, cho ban banh, quay ban banh, nha ban banh"
             },
+            "shop/bathroom_furnishing": {
+                "name": "Tiệm Bán đồ Phòng tắm",
+                "terms": "tiệm bán đồ phòng tắm, cửa hàng bán đồ phòng tắm, cửa hiệu bán đồ phòng tắm, tiệm thiết bị phòng tắm, cửa hàng thiết bị phòng tắm, cửa hiệu thiết bị phòng tắm, tiem ban do phong tam, cua hang ban do phong tam, cua hieu ban do phong tam, tiem thiet bi phong tam, cua hang thiet bi phong tam, cua hieu thiet bi phong tam"
+            },
             "shop/beauty": {
                 "name": "Tiệm Mỹ phẩm",
                 "terms": "thẩm mỹ viện, thẩm mĩ viện, nơi làm đẹp, cửa hàng làm đẹp, nhà làm đẹp, chỗ làm đẹp, tham my vien, tham mi vien, noi lam dep, cua hang lam dep, nha lam dep, cho lam dep"
+            },
+            "shop/bed": {
+                "name": "Tiệm Nệm",
+                "terms": "tiệm nệm, cửa hàng nệm, cửa hiệu nệm, tiệm đệm, cửa hàng đệm, cửa hiệu đệm, tiệm đồ giường, cửa hàng đồ giường, cửa hiệu đồ giường, tiem nem, cua hang nem, cua hieu nem, tiem dem, cua hang dem, cua hieu dem, tiem do giuong, cua hang do giuong, cua hieu do giuong"
             },
             "shop/beverages": {
                 "name": "Tiệm Đồ uống",
@@ -2778,6 +2841,10 @@
                 "name": "Hàng Thịt",
                 "terms": "hàng thịt, tiệm thịt, chỗ bán thịt, hang thit, tiem thit, cho ban thit"
             },
+            "shop/candles": {
+                "name": "Tiệm Cây nến",
+                "terms": "tiệm cây nến, cửa hàng cây nến, cửa hiệu cây nến, quán cây nến, tiem cay nen, cua hang cay nen, cua hieu cay nen, quan cay nen"
+            },
             "shop/car": {
                 "name": "Tiệm Xe hơi",
                 "terms": "tiệm xe hơi, tiệm bán xe hơi, cửa hàng xe hơi, chỗ bán xe cộ, tiem xe hoi, tiem ban xe hoi, cua hang xe hoi, cho ban xe co"
@@ -2790,9 +2857,21 @@
                 "name": "Tiệm Sửa Xe",
                 "terms": "tiệm sửa xe, cửa hàng sửa xe, chỗ sửa xe, tiem sua xe, cua hang sua xe, cho sua xe"
             },
+            "shop/carpet": {
+                "name": "Tiệm Thảm",
+                "terms": "tiệm thảm, cửa hàng thảm, cửa hiệu thảm, quán thảm, tiem tham, cua hang tham, cua hieu tham, quan tham"
+            },
+            "shop/cheese": {
+                "name": "Tiệm Pho mát",
+                "terms": "tiệm pho mát, cửa hàng pho mát, cửa hiệu pho mát, quán pho mát, tiệm pho-mát, cửa hàng pho-mát, cửa hiệu pho-mát, quán pho-mát, tiệm phó mát, cửa hàng phó mát, cửa hiệu phó mát, quán phó mát, tiệm phô mai, cửa hàng phô mai, cửa hiệu phô mai, quán phô mai, tiệm phô-ma, cửa hàng phô-ma, cửa hiệu phô-ma, quán phô-ma, tiệm phôma, cửa hàng phôma, cửa hiệu phôma, quán phôma, tiem pho mat, cua hang pho mat, cua hieu pho mat, quan pho mat, tiem pho-mat, cua hang pho-mat, cua hieu pho-mat, quan pho-mat, tiem pho mai, cua hang pho mai, cua hieu pho mai, quan pho mai, tiem pho-ma, cua hang pho-ma, cua hieu pho-ma, quan pho-ma, tiem phoma, cua hang phoma, cua hieu phoma, quan phoma"
+            },
             "shop/chemist": {
                 "name": "Tiệm Dược phẩm",
                 "terms": "tiệm dược phẩm, cửa hàng dược phẩm, chỗ bán dược phẩm, tiem duoc pham, cua hang duoc pham, cho ban duoc pham"
+            },
+            "shop/chocolate": {
+                "name": "Tiệm Sô-cô-la",
+                "terms": "tiệm sô-cô-la, cửa hàng sô-cô-la, cửa hiệu sô-cô-la, quán sô-cô-la, tiệm sôcôla, cửa hàng sôcôla, cửa hiệu sôcôla, quán sôcôla, tiệm súc-cù-là, cửa hàng súc-cù-là, cửa hiệu súc-cù-là, quán súc-cù-là, tiem so-co-la, cua hang so-co-la, cua hieu so-co-la, quan so-co-la, tiem socola, cua hang socola, cua hieu socola, quan socola, tiem suc-cu-la, cua hang suc-cu-la, cua hieu suc-cu-la, quan suc-cu-la"
             },
             "shop/clothes": {
                 "name": "Tiệm Quần áo",
@@ -2810,6 +2889,26 @@
                 "name": "Tiệm Tiện lợi",
                 "terms": "tiệm tiện lợi, tiệm tạp hóa, tiệm tạp hoá, cửa hàng tiện lợi, cửa hàng tạp hóa, cửa hàng tạp hoá, tiem tien loi, tiem tap hoa, cua hang tien loi, cua hang tap hoa"
             },
+            "shop/copyshop": {
+                "name": "Tiệm Sao chép",
+                "terms": "tiệm sao chép, cửa hàng sao chép, cửa hiệu sao chép, in ấn, máy in, máy quét, fax, tiem sao chep, cua hang sao chep, cua hieu sao chep, in an, may in, may quet"
+            },
+            "shop/cosmetics": {
+                "name": "Tiệm Mỹ phẩm",
+                "terms": "tiệm mỹ phẩm, tiệm mĩ phẩm, cửa hàng mỹ phẩm, cửa hàng mĩ phẩm, cửa hiệu mỹ phẩm, cửa hiệu mỹ phẩm, quán mỹ phẩm, quán mĩ phẩm, tiem my pham, tiem mi pham, cua hang my pham, cua hang mi pham, cua hieu my pham, cua hieu my pham, quan my pham, quan mi pham"
+            },
+            "shop/craft": {
+                "name": "Tiệm Bán đồ Thủ công",
+                "terms": "tiệm bán đồ thủ công, cửa hàng bán đồ thủ công, cửa hiệu bán đồ thủ công, thủ công mỹ nghệ, nội thất, sơn, hoa giả, giấy, bút, khắc gỗ, tiem ban do thu cong, cua hang ban do thu cong, cua hieu ban do thu cong, thu cong my nghe, noi that, son, hoa gia, giay, but, khac go"
+            },
+            "shop/curtain": {
+                "name": "Tiệm Màn cửa",
+                "terms": "tiệm màn cửa, cửa hàng màn cửa, cửa hiệu màn cửa, tiem man cua, cua hang man cua, cua hieu man cua"
+            },
+            "shop/dairy": {
+                "name": "Tiệm Sữa",
+                "terms": "tiệm sữa, cửa hàng sữa, cửa hiệu sữa, quán sữa, pho mát, pho-mát, phó mát, phô mai, phô-ma, phôma, sữa chua, da ua, da-ua, tiem sua, cua hang sua, cua hieu sua, quan sua, pho mat, pho-mat, pho mat, pho mai, pho-ma, phoma, sua chua"
+            },
             "shop/deli": {
                 "name": "Tiệm Deli",
                 "terms": "tiệm deli, cửa hàng deli, chỗ bán đồ ăn nấu sẵn, tiệm đồ ăn thượng hạng, tiem deli, cua hang deli, cho ban do an nau san, tiem do an thuong hang"
@@ -2824,15 +2923,27 @@
             },
             "shop/dry_cleaning": {
                 "name": "Tiệm Giặt khô",
-                "terms": "tiệm giặt hấp tẩy, cửa hàng giặt hấp tẩy, tiệm giặt sấy, cửa hàng giặt sấy, tiem giat hap tay, cua hang giat hap tay, tiem giat say, cua hang giat say"
+                "terms": "tiệm giặt khô, cửa hàng giặt khô, tiệm giặt hấp tẩy, cửa hàng giặt hấp tẩy, tiệm giặt sấy, cửa hàng giặt sấy, tiem giat kho, cua hang giat kho, tiem giat hap tay, cua hang giat hap tay, tiem giat say, cua hang giat say"
             },
             "shop/electronics": {
                 "name": "Cửa hàng điện tử",
                 "terms": "chỗ bán đồ điện, tiệm bán đồ điện, nơi bán đồ điện, cửa hàng bán đồ điện, cửa hiệu bán đồ điện, quầy bán đồ điện, cửa tiệm đồ điện, tiệm điện tử, cửa hàng điện tử, máy tính, vi tính, điện thoại, tivi, TV, máy giặt, máy lạnh, máy sưởi, loa, máy ảnh, máy chụp hình, cho ban do dien, tiem ban do dien, noi ban do dien, cua hang ban do dien, cua hieu ban do dien, quay ban do dien, cua tiem do dien, tiem dien tu, cua hang dien tu, may tinh, vi tinh, dien thoai, may giat, may lanh, may suoi, may anh, may chup hinh"
             },
+            "shop/erotic": {
+                "name": "Tiệm Bán đồ Khiêu dâm",
+                "terms": "tiệm bán đồ khiêu dâm, cửa hàng bán đồ khiêu dâm, cửa hiệu bán đồ khiêu dâm, tiem ban do khieu dam, cua hang ban do khieu dam, cua hieu ban do khieu dam"
+            },
+            "shop/fabric": {
+                "name": "Tiệm Vải",
+                "terms": "tiệm vải, cửa hàng vải, cửa hiệu vải, tiem vai, cua hang vai, cua hieu vai"
+            },
             "shop/farm": {
                 "name": "Quầy Nông sản",
                 "terms": "quầy bán rau cỏ, quầy rau cỏ, quầy bán trái cây, quầy trái cây, tiệm nông sản, cửa hàng nông sản, rau quả, quay ban rau co, quay rau co, quay ban trai cay, quay trai cay, tiem nong san, cua hang nong san, rau qua"
+            },
+            "shop/fashion": {
+                "name": "Tiệm Thời trang",
+                "terms": "tiệm thời trang, cửa hàng thời trang, cửa hiệu thời trang, áo dài, tiem thoi trang, cua hang thoi trang, cua hieu thoi trang, ao dai"
             },
             "shop/fishmonger": {
                 "name": "Tiệm Cá",
@@ -2842,9 +2953,17 @@
                 "name": "Tiệm Hoa",
                 "terms": "quầy bán hoa, tiệm bán hoa, chỗ bán hoa, nơi bán hoa, cửa hàng hoa, cửa hàng bán hoa, nơi bán hoa, bông hoa, quay ban hoa, tiem ban hoa, cho ban hoa, noi ban hoa, cua hang hoa, cua hang ban hoa, noi ban hoa, bong hoa"
             },
+            "shop/frame": {
+                "name": "Tiệm Khung Tranh",
+                "terms": "tiệm khung tranh, tiệm đóng khung tranh, cửa hàng khung tranh, cửa hàng đóng khung tranh, cửa hiệu khung tranh, cửa hiệu đóng khung tranh, tiem khung tranh, tiem dong khung tranh, cua hang khung tranh, cua hang dong khung tranh, cua hieu khung tranh, cua hieu dong khung tranh"
+            },
             "shop/funeral_directors": {
                 "name": "Nhà quàn",
                 "terms": "nhà quàn, nhà tang lễ, nha quan, nha tang le"
+            },
+            "shop/furnace": {
+                "name": "Tiệm Máy sưởi",
+                "terms": "tiệm máy sưởi, cửa hàng máy sưởi, cửa hiệu máy sưởi, tiem may suoi, cua hang may suoi, cua hieu may suoi"
             },
             "shop/furniture": {
                 "name": "Cửa hàng Nội thất",
@@ -2870,21 +2989,41 @@
                 "name": "Tiệm Ngũ kim",
                 "terms": "khu vực bán đồ ngũ kim, chỗ bán đồ ngũ kim, tiệm bán đồ ngũ kim, nơi bán đồ ngũ kim, cửa hàng bán đồ ngũ kim, cửa hiệu bán đồ ngũ kim, quầy bán đồ ngũ kim, nơi đồ ngũ kim, cửa tiệm đồ ngũ kim, đồ xây dựng, vít, đinh, ốc, sơn, đèn, pin, khu vuc ban do ngu kim, cho ban do ngu kim, tiem ban do ngu kim, noi ban do ngu kim, cua hang ban do ngu kim, cua hieu ban do ngu kim, quay ban do ngu kim, noi do ngu kim, cua tiem do ngu kim, do xay dung, vit, dinh, oc, son, den"
             },
+            "shop/hearing_aids": {
+                "name": "Tiệm Ống nghe",
+                "terms": "tiệm ống nghe, cửa hàng ống nghe, cửa hiệu ống nghe, điếc tai, tiem ong nghe, cua hang ong nghe, cua hieu ong nghe, diec tai"
+            },
+            "shop/herbalist": {
+                "name": "Tiệm Thuốc Bắc/Nam",
+                "terms": "tiệm thuốc bắc, tiệm thuốc nam, cửa hàng thuốc bắc, cửa hàng thuốc nam, cửa hiệu thuốc bắc, cửa hiệu thuốc nam, tiệm thuốc đông y, tiệm thuốc đông dược, cửa hàng thuốc đông y, cửa hàng thuốc đông dược, cửa hiệu thuốc đông y, cửa hiệu thuốc đông dược, tiem thuoc bac, tiem thuoc nam, cua hang thuoc bac, cua hang thuoc nam, cua hieu thuoc bac, cua hieu thuoc nam, tiem thuoc dong y, tiem thuoc dong duoc, cua hang thuoc dong y, cua hang thuoc dong duoc, cua hieu thuoc dong y, cua hieu thuoc dong duoc"
+            },
             "shop/hifi": {
                 "name": "Tiệm Thiết bị Âm thanh",
                 "terms": "tiệm thiết bị âm thanh, cửa hàng thiết bị âm thanh, chỗ bán thiết bị âm thanh, cửa hiệu thiết bị âm thanh, hifi, hi-fi, video, loa, tiem thiet bi am thanh, cua hang thiet bi am thanh, cho ban thiet bi am thanh, cua hieu thiet bi am thanh"
+            },
+            "shop/interior_decoration": {
+                "name": "Tiệm Trang trí Nội thất",
+                "terms": "tiệm trang trí nội thất, cửa hàng trang trí nội thất, cửa hiệu trang trí nội thất"
             },
             "shop/jewelry": {
                 "name": "Tiệm Kim hoàn",
                 "terms": "khu vực bán kim hoàn, chỗ bán kim hoàn, tiệm bán kim hoàn, nơi bán kim hoàn, cửa hàng bán kim hoàn, cửa hiệu bán kim hoàn, quầy bán kim hoàn, cửa tiệm kim hoàn, đồ trang sức, vàng, ngọc, khu vuc ban kim hoan, cho ban kim hoan, tiem ban kim hoan, noi ban kim hoan, cua hang ban kim hoan, cua hieu ban kim hoan, quay ban kim hoan, cua tiem kim hoan, do trang suc, vang, ngoc"
             },
             "shop/kiosk": {
-                "name": "Gian hàng",
-                "terms": "gian hàng, quầy, gian hang, quay"
+                "name": "Quầy Báo",
+                "terms": "quầy báo, gian hàng, tạp chí, tin tức, quay bao, gian hang, tap chi, tin tức"
+            },
+            "shop/kitchen": {
+                "name": "Tiệm Trang trí Nội thất",
+                "terms": "tiem trang tri noi that, cua hang trang tri noi that, cua hieu trang tri noi that"
             },
             "shop/laundry": {
                 "name": "Tiệm Máy giặt",
                 "terms": "tiệm máy giặt, tiệm giặt ủi, chỗ giặt quần áo, chỗ giặt ủi, cửa hàng giặt ủi, tiem may giat, tiem giat ui, cho giat quan ao, cho giat ui, cua hang giat ui"
+            },
+            "shop/leather": {
+                "name": "Tiệm Đồ Da",
+                "terms": "tiệm đồ da, cửa hàng đồ da, cửa hiệu đồ da, quán đồ da, tiệm quần áo da, cửa hàng quần áo da, cửa hiệu quần áo da, quán quần áo da, tiem do da, cua hang do da, cua hieu do da, quan do da, tiem quan ao da, cua hang quan ao da, cua hieu quan ao da, quan quan ao da"
             },
             "shop/locksmith": {
                 "name": "Thợ khóa",
@@ -2898,9 +3037,21 @@
                 "name": "Trung tâm Thương mại",
                 "terms": "trung tâm thương mại, khu thương mại, trung tam thuong mai, khu thuong mai"
             },
+            "shop/massage": {
+                "name": "Tiệm Xoa bóp",
+                "terms": "tiệm xoa bóp, cửa hàng xoa bóp, cửa hiệu xoa bóp, quán xoa bóp, tiệm châm cứu, cửa hàng châm cứu, cửa hiệu châm cứu, quán châm cứu, tiem xoa bop, cua hang xoa bop, cua hieu xoa bop, quan xoa bop, tiem cham cuu, cua hang cham cuu, cua hieu cham cuu, quan cham cuu"
+            },
+            "shop/medical_supply": {
+                "name": "Tiệm Thiết bị Y tế",
+                "terms": "tiệm thiết bị y tế, cửa hàng thiết bị y tế, cửa hiệu thiết bị y tế, tiem thiet bi y te, cua hang thiet bi y te, cua hieu thiet bi y te"
+            },
             "shop/mobile_phone": {
                 "name": "Tiệm Điện thoại Di động",
                 "terms": "tiệm điện thoại di động, tiệm điện thoại cầm tay, quầy điện thoại di động, cửa hàng điện thoại di động, cửa hiệu điện thoại di động, chỗ bán điện thoại di động, tiem dien thoai di dong, tiem dien thoai cam tay, quay dien thoai di dong, cua hang dien thoai di dong, cua hieu dien thoai di dong, cho ban dien thoai di dong"
+            },
+            "shop/money_lender": {
+                "name": "Chỗ Mượn Tiền",
+                "terms": "chỗ mượn tiền, nơi mượn tiền, tiệm mượn tiền, cửa hàng mượn tiền, cửa hiệu mượn tiền, quán mượn tiền, cho muon tien, noi muon tien, tiem muon tien, cua hang muon tien, cua hieu muon tien, quan muon tien"
             },
             "shop/motorcycle": {
                 "name": "Tiệm Xe máy",
@@ -2910,17 +3061,33 @@
                 "name": "Tiệm Âm nhạc",
                 "terms": "tiệm nhạc cụ, tiệm đĩa nhạc, tiệm thiết bị âm nhạc, tiệm bản nhạc, chỗ bán nhạc, quầy nhạc, cửa hàng nhạc, cửa hiệu nhạc, tiem nhac cu, tiem dia nhac, tiem thiet bi am nhac, tiem ban nhac, cho ban nhac, quay nhac, cua hang nhac, cua hieu nhac"
             },
+            "shop/musical_instrument": {
+                "name": "Tiệm Nhạc cụ",
+                "terms": "nhạc cụ, pianô, ghi-ta, ghita, kèn, trống, nhac cu, ken, trong"
+            },
             "shop/newsagent": {
-                "name": "Quầy báo",
-                "terms": "quầy báo, sạp báo, tiệm báo, cửa hàng báo, cửa hiệu báo, tin tức, tờ báo, nhật báo, tạp chí, thời sự, quay bao, sap bao, tiem bao, cua hang bao, cua hieu bao, tin tuc, to bao, nhat bao, tap chi, thoi su"
+                "name": "Tiệm Báo",
+                "terms": "tiệm báo, cửa hàng báo, cửa hiệu báo, quán báo, tiệm tạp chí, cửa hàng tạp chí, cửa hiệu tạp chí, quán tạp chí, tiem bao, cua hang bao, cua hieu bao, quan bao, tiem tap chi, cua hang tap chi, cua hieu tap chi, quan tap chi"
             },
             "shop/optician": {
                 "name": "Tiệm Kính mắt",
                 "terms": "tiệm kính đeo mắt, tiệm kiếng đeo mắt, chỗ đo mắt, bác sĩ mắt, văn phòng đo mắt, cửa hàng kính đeo mắt, cửa hiệu kính đeo mắt, chỗ làm kính đeo mắt, tiem kinh deo mat, tiem kieng deo mat, cho do mat, bac si mat, van phong do mat, cua hang kinh deo mat, cua hieu kinh deo mat, cho lam kinh deo mat"
             },
+            "shop/organic": {
+                "name": "Tiệm Thực phẩm Hữu cơ",
+                "terms": "tiệm thực phẩm hữu cơ, tiệm đồ ăn hữu cơ, cửa hàng thực phẩm hữu cơ, cửa hàng đồ ăn hữu cơ, cửa hiệu thực phẩm hữu cơ, cửa hiệu đồ ăn hữu cơ, tiem thuc pham huu co, tiem do an huu co, cua hang thuc pham huu co, cua hang do an huu co, cua hieu thuc pham huu co, cua hieu do an huu co"
+            },
             "shop/outdoor": {
                 "name": "Tiệm Thể thao Ngoài trời",
                 "terms": "tiệm bán thiết bị thể thao ngoài trời, chỗ bán thiết bị dã ngoại, đồ cắm trại, giày đi bộ, GPS, cửa hàng thể thao ngoài trời, cửa hiệu thể thao ngoài trời, tiem ban thiet bi the thao ngoai troi, cho ban thiet bi da ngoai, do cam trai, giay di bo, cua hang the thao ngoai troi, cua hieu the thao ngoai troi"
+            },
+            "shop/paint": {
+                "name": "Tiệm Sơn",
+                "terms": "tiệm sơn, cửa hàng sơn, cửa hiệu sơn, quán sơn, tiem son, cua hang son, cua hieu son, quan son"
+            },
+            "shop/pawnbroker": {
+                "name": "Tiệm Cầm đồ",
+                "terms": "tiệm cầm đồ, cửa hàng cầm đồ, cửa hiệu cầm đồ, quán cầm đồ, tiem cam do, cua hang cam do, cua hieu cam do, quan cam do"
             },
             "shop/pet": {
                 "name": "Tiệm Vật nuôi",
@@ -2930,9 +3097,29 @@
                 "name": "Tiệm Chụp Hình",
                 "terms": "tiệm chụp hình, tiệm lấy hình, tiệm lấy ảnh, tiệm nhiếp ảnh, cửa hàng chụp hình, cửa hàng lấy hình, cửa hàng lấy ảnh, cửa hàng nhiếp ảnh, tiem chup hinh, tiem lay hinh, tiem lay anh, tiem nhiep anh, cua hang chup hinh, cua hang lay hinh, cua hang lay anh, cua hang nhiep anh"
             },
+            "shop/pyrotechnics": {
+                "name": "Tiệm Pháo bông",
+                "terms": "tiệm pháo bông, cửa hàng pháo bông, cửa hiệu pháo bông, quán pháo bông, tiệm pháo hoa, cửa hàng pháo hoa, cửa hiệu pháo hoa, quán pháo hoa, tiem phao bong, cua hang phao bong, cua hieu phao bong, quan phao bong, tiem phao hoa, cua hang phao hoa, cua hieu phao hoa, quan phao hoa"
+            },
+            "shop/radiotechnics": {
+                "name": "Tiệm Linh kiện Điện tử",
+                "terms": "tiệm linh kiện điện tử, tiệm linh kiện điện thoại, tiệm linh kiện vô tuyến, tiệm linh kiện rađiô, tiệm linh kiện radio, cửa hàng linh kiện điện tử, cửa hàng linh kiện điện thoại, cửa hàng linh kiện vô tuyến, cửa hàng linh kiện rađiô, cửa hàng linh kiện radio, cửa hiệu linh kiện điện tử, cửa hiệu linh kiện điện thoại, cửa hiệu linh kiện vô tuyến, cửa hiệu linh kiện rađiô, cửa hiệu linh kiện radio, tiem linh kien dien tu, tiem linh kien dien thoai, tiem linh kien vo tuyen, tiem linh kien radio, cua hang linh kien dien tu, cua hang linh kien dien thoai, cua hang linh kien vo tuyen, cua hang linh kien radio, cua hieu linh kien dien tu, cua hieu linh kien dien thoai, cua hieu linh kien vo tuyen, cua hieu linh kien radio"
+            },
+            "shop/religion": {
+                "name": "Tiệm Bán đồ Tôn giáo",
+                "terms": "tiệm bán đồ tôn giáo, cửa hàng bán đồ tôn giáo, cửa hiệu bán đồ tôn giáo, tiệm sách tôn giáo, hiệu sách tôn giáo, cửa hàng sách tôn giáo, cửa hiệu sách tôn giáo, tiem ban do ton giao, cua hang ban do ton giao, cua hieu ban do ton giao, tiem sach ton giao, hieu sach ton giao, cua hang sach ton giao, cua hieu sach ton giao"
+            },
+            "shop/scuba_diving": {
+                "name": "Tiệm Dụng cụ Lặn Scuba",
+                "terms": "tiệm dụng cụ lặn scuba, cửa hàng dụng cụ lặn scuba, cửa hiệu dụng cụ lặn scuba, tiem dung cu lan scuba, cua hang dung cu lan scuba, cua hieu dung cu lan scuba"
+            },
             "shop/seafood": {
                 "name": "Tiệm Hải sản",
                 "terms": "tiệm hải sản, tiệm cá, tiem hai san, tiem ca"
+            },
+            "shop/second_hand": {
+                "name": "Tiệm Mua lại",
+                "terms": "tiệm mua lại, cửa hàng mua lại, cửa hiệu mua lại, tiệm bán đồ cũ, cửa hàng bán đồ cũ, cửa hiệu bán đồ cũ, tiem mua lai, cua hang mua lai, cua hieu mua lai, tiem ban do cu, cua hang ban do cu, cua hieu ban do cu"
             },
             "shop/shoes": {
                 "name": "Tiệm Giày",
@@ -2954,6 +3141,22 @@
                 "name": "Tiệm May",
                 "terms": "tiệm may, cửa hàng may, thợ may, may quần áo, tiem may, cua hang may, tho may, may quan ao"
             },
+            "shop/tattoo": {
+                "name": "Tiệm Xăm",
+                "terms": "tiệm xăm, cửa hàng xăm, cửa hiệu xăm, tiem xam, cua hang xam, cua hieu xam"
+            },
+            "shop/tea": {
+                "name": "Tiệm Trà Khô",
+                "terms": "tiệm bán trà khô, tiệm bán chè khô, cửa hàng bán trà khô, cửa hàng bán chè khô, cửa hiệu bán trà khô, cửa hiệu bán chè khô, tiem ban tra kho, tiem ban che kho, cua hang ban tra kho, cua hang ban che kho, cua hieu ban tra kho, cua hieu ban che kho"
+            },
+            "shop/ticket": {
+                "name": "Đại lý Bán Vé",
+                "terms": "đại lý bán vé, đại lí bán vé, văn phòng bán vé, vé buổi hòa nhạc, vé buổi hoà nhạc, vé xe buýt, vé xe lửa, vé máy bay, vé phi cơ, dai ly ban ve, dai li ban ve, van phong ban ve, ve buoi hoa nhac, ve xe buyt, ve xe lua, ve may bay, ve phi co"
+            },
+            "shop/tobacco": {
+                "name": "Tiệm Thuốc lá",
+                "terms": "tiệm thuốc lá, cửa hàng thuốc lá, cửa hiệu thuốc lá, tiệm xì gà, cửa hàng xì gà, cửa hiệu xì gà, tiem thuoc la, cua hang thuoc la, cua hieu thuoc la, tiem xi ga, cua hang xi ga, cua hieu xi ga"
+            },
             "shop/toys": {
                 "name": "Tiệm Đồ chơi",
                 "terms": "tiệm đồ chơi cho trẻ em, chỗ bán đồ chơi, cửa hàng đồ chơi, cửa hiệu đồ chơi, đồ chơi trẻ nhỏ, tiem do choi cho tre em, cho ban do choi, cua hang do choi, cua hieu do choi, do choi tre nho"
@@ -2970,6 +3173,10 @@
                 "name": "Tiệm Đóng cửa",
                 "terms": "tiệm đóng cửa, tiệm chưa mở cửa, tiệm chuẩn bị khai trương, tiệm chưa có hàng, cửa hàng đóng cửa, cửa hàng chưa mở cửa, cửa hiệu đóng cửa, cửa hiệu chưa mở cửa, quầy chưa có hàng, chỗ đóng cửa, chỗ chưa mở cửa, tiem dong cua, tiem chua mo cua, tiem chuan bi khai truong, tiem chua co hang, cua hang dong cua, cua hang chua mo cua, cua hieu dong cua, cua hieu chua mo cua, quay chua co hang, cho dong cua, cho chua mo cua"
             },
+            "shop/vacuum_cleaner": {
+                "name": "Tiệm Máy Hút bụi",
+                "terms": "tiệm máy hút bụi, cửa hàng máy hút bụi, cửa hiệu máy hút bụi, quán hút bụi"
+            },
             "shop/variety_store": {
                 "name": "Tiệm Tạp hóa",
                 "terms": "tiệm tạp hóa, tiệm tạp hoá, cửa hàng tạp hóa, cửa hiệu tạp hóa, chỗ bán tạp hóa, quầy tạp hóa, tiệm bán nhiều thứ, tiem tap hoa, tiem tap hoa, cua hang tap hoa, cua hieu tap hoa, cho ban tap hoa, quay tap hoa, tiem ban nhieu thu"
@@ -2977,6 +3184,22 @@
             "shop/video": {
                 "name": "Tiệm Phim",
                 "terms": "tiệm bán phim, tiệm bán video, tiệm mướn phim, tiệm mướn video, chỗ bán phim, chỗ mướn phim, cửa hàng phim, cửa hiệu phim, quầy bán phim, tiem ban phim, tiem ban video, tiem muon phim, tiem muon video, cho ban phim, cho muon phim, cua hang phim, cua hieu phim, quay ban phim"
+            },
+            "shop/video_games": {
+                "name": "Tiệm Video Game",
+                "terms": "tiệm video game, tiệm trò chơi video, tiệm trò chơi điện tử, tiệm game, cửa hàng video game, cửa hàng trò chơi video, cửa hàng trò chơi điện tử, cửa hàng game, cửa hiệu video game, cửa hiệu trò chơi video, cửa hiệu trò chơi điện tử, cửa hiệu game, tiem video game, tiem tro choi video, tiem tro choi dien tu, tiem game, cua hang video game, cua hang tro choi video, cua hang tro choi dien tu, cua hang game, cua hieu video game, cua hieu tro choi video, cua hieu tro choi dien tu, cua hieu game"
+            },
+            "shop/water_sports": {
+                "name": "Tiệm Dụng cụ Bơi lội",
+                "terms": "tiệm dụng cụ bơi lội, tiệm bán đồ bơi lội, cửa hàng dụng cụ bơi lội, cửa hàng bán đồ bơi lội, cửa hiệu dụng cụ bơi lội, cửa hiệu bán đồ bơi lội, tiem dung cu boi loi, tiem ban do boi loi, cua hang dung cu boi loi, cua hang ban do boi loi, cua hieu dung cu boi loi, cua hieu ban do boi loi"
+            },
+            "shop/weapons": {
+                "name": "Tiệm Súng",
+                "terms": "tiệm súng, cửa hàng súng, cửa hiệu súng, quán súng"
+            },
+            "shop/window_blind": {
+                "name": "Tiệm Mành",
+                "terms": "tiệm mành mành, cửa hàng mành mành, cửa hiệu mành mành, tiệm màn sáo, cửa hàng màn sáo, cửa hiệu màn sáo, tiem manh manh, cua hang manh manh, cua hieu manh manh, tiem man sao, cua hang man sao, cua hieu man sao"
             },
             "shop/wine": {
                 "name": "Tiệm Rượu vang",

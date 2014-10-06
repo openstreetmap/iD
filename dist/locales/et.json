@@ -25,7 +25,7 @@
             "annotation": {
                 "point": "Punkt lisatud.",
                 "vertex": "Joonele lisatud punkt.",
-                "relation": "Relatsioon lisatud."
+                "relation": "Seos lisatud."
             }
         },
         "start": {
@@ -87,13 +87,12 @@
         },
         "delete": {
             "title": "Kustuta",
-            "description": "Eemalda kaardilt.",
             "annotation": {
                 "point": "Punkt kustutatud.",
                 "vertex": "Punkt kustutatud joonelt.",
                 "line": "Joon kustutatud.",
                 "area": "Ala kustutatud.",
-                "relation": "Relatsioon kustutatud.",
+                "relation": "Seos kustutatud.",
                 "multiple": "{n} objekti kustutatud."
             }
         },
@@ -101,7 +100,7 @@
             "annotation": "Lisatud relatsiooni liige."
         },
         "delete_member": {
-            "annotation": "Relatsiooni liige kustutatud."
+            "annotation": "Seose liige kustutatud."
         },
         "connect": {
             "annotation": {
@@ -182,7 +181,7 @@
         "localized_translation_language": "Vali keel",
         "localized_translation_name": "Nimi"
     },
-    "zoom_in_edit": "Muutmiseks zuumi sisse",
+    "zoom_in_edit": "Muutmiseks suurenda sisse",
     "logout": "Logi välja",
     "loading_auth": "OpenStreetMap'iga ühendamine...",
     "report_a_bug": "teata veast",
@@ -218,8 +217,8 @@
         "view_on_osm": "Vaata openstreetmap.org lehel",
         "all_tags": "Kõik sildid",
         "all_members": "Kõik liikmed",
-        "all_relations": "Kõik relatsioonid",
-        "new_relation": "Uus relatsioon...",
+        "all_relations": "Kõik seosed",
+        "new_relation": "Uus seos...",
         "role": "Roll",
         "choose": "Vali objekti liik",
         "results": "{n} tulemust otsingule {search}",
@@ -227,12 +226,16 @@
         "back_tooltip": "Muuda objekti",
         "remove": "Eemalda",
         "search": "Otsi",
-        "multiselect": "Valitud ühikud",
+        "multiselect": "Valitud objektid",
         "unknown": "Teadmata",
         "incomplete": "<alla laadimata>",
         "feature_list": "Otsi objekte",
         "edit": "Muuda objekti",
-        "none": "Puudub"
+        "none": "Puudub",
+        "node": "Punkt",
+        "way": "Joon",
+        "relation": "Seos",
+        "location": "Asukoht"
     },
     "background": {
         "title": "Taust",
@@ -240,6 +243,7 @@
         "percent_brightness": "{opacity}% heledus",
         "none": "Puudub",
         "custom": "Kohandatud",
+        "custom_button": "Muuda kohandatud tausta",
         "fix_misalignment": "Korrigeeri nihet",
         "reset": "lähtesta"
     },
@@ -273,7 +277,7 @@
         "welcome": "Tere tulemast kasutama iD OpenStreetMap redaktorit",
         "text": "iD on kasutajasõbralik ja samas võimas töövahend parima vaba maailmakaardi täiendamiseks. See on versioon {version}. Rohkem infot võib leida veebilehelt {website} ja vigadest saab teatada lehel {github}.",
         "walkthrough": "Alusta tutvustust",
-        "start": "Kohe redigeerima"
+        "start": "Alusta muutmist"
     },
     "source_switch": {
         "live": "live",
@@ -299,7 +303,7 @@
     },
     "gpx": {
         "local_layer": "Kohalik GPX fail",
-        "zoom": "Zuumi GPX jälg sisse",
+        "zoom": "Suurenda GPX jälg sisse",
         "browse": "Vali .gpx fail"
     },
     "help": {
@@ -327,13 +331,19 @@
             "road": "**Vali nimekirjast tee**"
         },
         "startediting": {
-            "title": "Alusta redigeerimist",
+            "title": "Alusta muutmist",
             "save": "Ära unusta oma muudatusi regulaarselt salvestada!",
             "start": "Alusta kaardistamist!"
         }
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Hoone"
+            },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Maakasutus"
             },
@@ -343,19 +353,80 @@
             "category-rail": {
                 "name": "Raudtee"
             },
+            "category-restriction": {
+                "name": "Piirang"
+            },
             "category-road": {
                 "name": "Tee"
+            },
+            "category-route": {
+                "name": "Teekond"
+            },
+            "category-water-area": {
+                "name": "Vesi"
+            },
+            "category-water-line": {
+                "name": "Vesi"
             }
         },
         "fields": {
             "access": {
-                "label": "Ligipääs"
+                "label": "Juurdepääs",
+                "placeholder": "Teadmata",
+                "types": {
+                    "access": "Üldine",
+                    "foot": "Jalg",
+                    "motor_vehicle": "Mootorsõidukid",
+                    "bicycle": "Jalgrattad",
+                    "horse": "Hobused"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Lubatud",
+                        "description": "Juurdepääs seaduse alusel; igameheõigus"
+                    },
+                    "no": {
+                        "title": "Keelatud",
+                        "description": "Avalik juurdepääs puudub"
+                    },
+                    "permissive": {
+                        "title": "Soovituslik",
+                        "description": "Juurdepääs on lubatud ajani, mil omanik tühistab loa"
+                    },
+                    "private": {
+                        "title": "Era",
+                        "description": "Juurdepääs lubatud ainult omaniku eriloal"
+                    },
+                    "designated": {
+                        "title": "Määratud"
+                    },
+                    "destination": {
+                        "title": "Sihtkoht"
+                    }
+                }
+            },
+            "access_simple": {
+                "label": "Juurdepääs",
+                "placeholder": "jah"
+            },
+            "access_toilets": {
+                "label": "Juurdepääs"
             },
             "address": {
                 "label": "Aadress",
                 "placeholders": {
+                    "housename": "Maja nimetus",
+                    "housenumber": "123",
                     "street": "Tänav",
-                    "city": "Linn"
+                    "city": "Linn",
+                    "postcode": "Sihtnumber",
+                    "place": "Koht",
+                    "country": "Riik"
+                }
+            },
+            "aerialway/access": {
+                "options": {
+                    "both": "Mõlemad"
                 }
             },
             "aeroway": {
@@ -385,8 +456,8 @@
             "clock_direction": {
                 "label": "Suund",
                 "options": {
-                    "clockwise": "Kellasuunas",
-                    "anticlockwise": "Kella vastassuunas"
+                    "clockwise": "Päripäeva",
+                    "anticlockwise": "Vastupäeva"
                 }
             },
             "collection_times": {
@@ -561,7 +632,7 @@
                 "name": "Tuletõrjedepoo"
             },
             "amenity/fountain": {
-                "name": "Purskaev"
+                "name": "Purskkaev"
             },
             "amenity/fuel": {
                 "name": "Bensiinijaam"
@@ -597,10 +668,10 @@
                 "name": "Postkontor"
             },
             "amenity/pub": {
-                "name": "Pubi"
+                "name": "Kõrts"
             },
             "amenity/restaurant": {
-                "name": "Restoraan"
+                "name": "Restoran"
             },
             "amenity/swimming_pool": {
                 "name": "Ujumisbassein"
@@ -613,9 +684,6 @@
             },
             "amenity/toilets": {
                 "name": "Tualett"
-            },
-            "amenity/university": {
-                "name": "Ülikool"
             },
             "amenity/waste_basket": {
                 "name": "Prügikast"
@@ -653,17 +721,89 @@
             "building/apartments": {
                 "name": "Korterid"
             },
+            "building/church": {
+                "name": "Kirik"
+            },
             "building/commercial": {
                 "name": "Ärihoone"
+            },
+            "building/construction": {
+                "name": "Ehitusjärgus hoone"
+            },
+            "building/detached": {
+                "name": "Eramu"
+            },
+            "building/dormitory": {
+                "name": "Ühiselamu"
+            },
+            "building/entrance": {
+                "name": "Sissepääs"
+            },
+            "building/garage": {
+                "name": "Garaaz"
+            },
+            "building/garages": {
+                "name": "Garaazid"
+            },
+            "building/greenhouse": {
+                "name": "Kasvuhoone"
+            },
+            "building/hospital": {
+                "name": "Haigla"
+            },
+            "building/hotel": {
+                "name": "Hotell"
             },
             "building/house": {
                 "name": "Maja"
             },
+            "building/hut": {
+                "name": "Onn"
+            },
             "building/industrial": {
                 "name": "Tööstushoone"
             },
+            "building/kindergarten": {
+                "name": "Lasteaed"
+            },
+            "building/public": {
+                "name": "Avalik hoone"
+            },
             "building/residential": {
                 "name": "Elamu"
+            },
+            "building/roof": {
+                "name": "Katus"
+            },
+            "building/train_station": {
+                "name": "Raudteejaam"
+            },
+            "building/university": {
+                "name": "Ülikool"
+            },
+            "building/warehouse": {
+                "name": "Ladu"
+            },
+            "craft/basket_maker": {
+                "name": "Korvimeister"
+            },
+            "craft/beekeeper": {
+                "name": "Mesinik"
+            },
+            "craft/blacksmith": {
+                "name": "Sepikoda"
+            },
+            "craft/boatbuilder": {
+                "name": "Paadiehitaja"
+            },
+            "craft/bookbinder": {
+                "name": "Raamatuköitja"
+            },
+            "craft/brewery": {
+                "name": "Pruulikoda"
+            },
+            "craft/carpenter": {
+                "name": "Puusepp"
             },
             "emergency/phone": {
                 "name": "Hädaabi telefon"
@@ -672,7 +812,7 @@
                 "name": "Tee"
             },
             "highway/bridleway": {
-                "name": "Ratsutamistee"
+                "name": "Ratsutamise rada"
             },
             "highway/bus_stop": {
                 "name": "Bussipeatus"
@@ -747,16 +887,16 @@
                 "name": "Surnuaed"
             },
             "landuse/commercial": {
-                "name": "Kommertsmaa"
+                "name": "Ärimaa"
             },
             "landuse/forest": {
-                "name": "Mets"
+                "name": "Metsamaa"
             },
             "landuse/grass": {
                 "name": "Muru"
             },
             "landuse/industrial": {
-                "name": "Tüüstuslik"
+                "name": "Tootmismaa"
             },
             "landuse/meadow": {
                 "name": "Niit"
@@ -768,10 +908,10 @@
                 "name": "Karjäär"
             },
             "landuse/residential": {
-                "name": "Elamupiirkond"
+                "name": "Elamumaa"
             },
             "landuse/retail": {
-                "name": "Kaubanduslik"
+                "name": "Jaekaubandus"
             },
             "landuse/vineyard": {
                 "name": "Viinapuuaed"
@@ -832,9 +972,6 @@
             },
             "man_made/water_tower": {
                 "name": "Veetorn"
-            },
-            "man_made/water_well": {
-                "name": "Veekaev"
             },
             "natural": {
                 "name": "Looduslik"
@@ -971,9 +1108,6 @@
             "shop/bicycle": {
                 "name": "Rattapood"
             },
-            "shop/books": {
-                "name": "Raamatupood"
-            },
             "shop/butcher": {
                 "name": "Lihapood"
             },
@@ -992,12 +1126,6 @@
             "shop/computer": {
                 "name": "Arvutipood"
             },
-            "shop/confectionery": {
-                "name": "Kommipood"
-            },
-            "shop/dry_cleaning": {
-                "name": "Keemiline puhastus"
-            },
             "shop/electronics": {
                 "name": "Elektroonikapood"
             },
@@ -1012,9 +1140,6 @@
             },
             "shop/hairdresser": {
                 "name": "Juuksurisalong"
-            },
-            "shop/kiosk": {
-                "name": "Kiosk"
             },
             "shop/laundry": {
                 "name": "Pesumaja"
@@ -1065,7 +1190,7 @@
                 "name": "Kunstiteos"
             },
             "tourism/attraction": {
-                "name": "\tTurismiatraktsioon"
+                "name": "Turismiatraktsioon"
             },
             "tourism/caravan_site": {
                 "name": "Karavanipark"

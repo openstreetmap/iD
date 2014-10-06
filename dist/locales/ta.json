@@ -410,9 +410,6 @@
             "amenity/clock": {
                 "name": "கடிகாரம்"
             },
-            "amenity/college": {
-                "name": "கல்லூரி"
-            },
             "amenity/fire_station": {
                 "name": "தீயணைப்பு நிலையம்"
             },
@@ -469,9 +466,6 @@
             },
             "amenity/townhall": {
                 "name": "நகராட்சிமன்றம்"
-            },
-            "amenity/university": {
-                "name": "பல்கலைக்கழகம்"
             },
             "area": {
                 "name": "பரப்பளவு"
@@ -665,9 +659,6 @@
             "shop/alcohol": {
                 "name": "மதுபானக் கடை"
             },
-            "shop/books": {
-                "name": "புத்தகக்கடை"
-            },
             "shop/car": {
                 "name": "வாகன விற்பனையகம்"
             },
@@ -676,9 +667,6 @@
             },
             "shop/computer": {
                 "name": "கணினி விற்பனையகம்"
-            },
-            "shop/dry_cleaning": {
-                "name": "உலர் சலவையகம்"
             },
             "shop/florist": {
                 "name": "பூக்கடை"

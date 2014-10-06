@@ -95,7 +95,6 @@
         },
         "delete": {
             "title": "刪",
-            "description": "地圖度拎走佢。",
             "annotation": {
                 "point": "刪咗處。",
                 "vertex": "道度刪咗節。",
@@ -362,7 +361,6 @@
         },
         "areas": {
             "title": "範圍",
-            "add": "範圍係更祥細講地貌。佢畀埋地貌界綫。處出地嘅地貌，範圍多數都用到，做到範圍就做範圍。**撳住範圍掣，開新範圍。**",
             "corner": "要畫範圍，就用節來勾出邊界，包住範圍。**擺開始一節，喺遊樂場一角。**",
             "place": "畫範圍，就要擺多啲節。要完成範圍，就欽返頭嗰節。**畫個範圍畀遊樂場。**",
             "search": "**搵【{name}】。**",
@@ -933,17 +931,9 @@
                 "name": "洗車舖",
                 "terms": "Car Wash,洗車,洗車店,洗車舖"
             },
-            "amenity/childcare": {
-                "name": "托兒所",
-                "terms": "Childcare,托兒所"
-            },
             "amenity/cinema": {
                 "name": "電影戲院",
                 "terms": "Cinema,戲院,電影,電影戲院,電影院"
-            },
-            "amenity/college": {
-                "name": "學院",
-                "terms": "College,大學,大專,學院,專上學院,專校,專科學院,書院,理工"
             },
             "amenity/courthouse": {
                 "name": "法庭",
@@ -1068,10 +1058,6 @@
             "amenity/townhall": {
                 "name": "大會堂",
                 "terms": "Town Hall,大會堂,市政府,市政廳"
-            },
-            "amenity/university": {
-                "name": "大學",
-                "terms": "University,大學,大專"
             },
             "amenity/vending_machine": {
                 "name": "售賣機",
@@ -1573,10 +1559,6 @@
                 "name": "游水池",
                 "terms": "Swimming Pool,游水池,游泳池,遊泳池"
             },
-            "leisure/track": {
-                "name": "賽車跑道",
-                "terms": "Race Track,賽車跑道"
-            },
             "line": {
                 "name": "綫",
                 "terms": "Line,綫,線"
@@ -1632,10 +1614,6 @@
             "man_made/water_tower": {
                 "name": "水塔",
                 "terms": "Water Tower,水塔"
-            },
-            "man_made/water_well": {
-                "name": "井",
-                "terms": "Water well,井,水井"
             },
             "man_made/water_works": {
                 "name": "供水廠",
@@ -1981,10 +1959,6 @@
                 "name": "單車舖",
                 "terms": "Bicycle Shop,單車店,單車舖,自行車店"
             },
-            "shop/books": {
-                "name": "書局",
-                "terms": "Bookstore,書局,書店"
-            },
             "shop/boutique": {
                 "name": "時裝店",
                 "terms": "Boutique,時裝店,服飾店,精品店"
@@ -2017,10 +1991,6 @@
                 "name": "電腦舖",
                 "terms": "Computer Store,電腦店,電腦舖"
             },
-            "shop/confectionery": {
-                "name": "糖菓舖",
-                "terms": "Confectionery,甜點店,糖菓舖"
-            },
             "shop/convenience": {
                 "name": "便利店",
                 "terms": "Convenience Store,便利店"
@@ -2036,10 +2006,6 @@
             "shop/doityourself": {
                 "name": "自組舖",
                 "terms": "DIY Store,DIY商店,自組舖"
-            },
-            "shop/dry_cleaning": {
-                "name": "乾洗",
-                "terms": "Dry Cleaners,乾洗,乾洗店"
             },
             "shop/electronics": {
                 "name": "電子舖",
@@ -2089,10 +2055,6 @@
                 "name": "珠寶金行",
                 "terms": "Jeweler,珠寶店,珠寶舖,珠寶金行,首飾店,首飾舖"
             },
-            "shop/kiosk": {
-                "name": "小賣部、報紙檔、煙仔檔等",
-                "terms": "Kiosk,售貨亭,售賣亭,報刊亭,報攤,小賣部,書報攤"
-            },
             "shop/laundry": {
                 "name": "洗衣舖",
                 "terms": "Laundry,洗衣店,洗衣舖"
@@ -2117,17 +2079,9 @@
                 "name": "唱片舖",
                 "terms": "Music Store,唱片舖,音樂店"
             },
-            "shop/newsagent": {
-                "name": "報紙檔（有舖）",
-                "terms": "Newsagent,報攤,報紙檔,書報攤"
-            },
             "shop/optician": {
                 "name": "眼鏡鋪",
                 "terms": "Optician,眼鏡店,眼鏡行,眼鏡鋪"
-            },
-            "shop/outdoor": {
-                "name": "行山舖",
-                "terms": "Outdoor Store,戶外用品店,行山舖"
             },
             "shop/pet": {
                 "name": "寵物舖",

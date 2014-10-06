@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "Вилучити",
-            "description": "Вилучити об’єкт з мапи.",
+            "description": "Вилучити об'єкт назавжди.",
             "annotation": {
                 "point": "Вилучено точку.",
                 "vertex": "Вилучено точку з лінії.",
@@ -385,7 +385,7 @@
         },
         "areas": {
             "title": "Полігони",
-            "add": "Полігони — більш докладний спосіб представлення об’єктів. Вони надають інформацію про межі об’єктів. Полігони можуть застосовуватись для більшості об’єктів, що позначаються точками, і є більш бажаними у застосуванні. **Натисніть на 'Полігон' для додавання нового полігону.**",
+            "add": "Полігони використовуються, щоб показати межі об’єктів, наприклад: озер, будинків території житлової забудови. Їх також використовують для більш детального нанесення на мапу об’єктів, які зазвичай позначаються точками. **Натисніть на кнопку Полігон, щоб додати його до мапи.**",
             "corner": "Полігони кресляться додаванням точок на межах об’єкта. **Поставте першу точку на куті ігрового майданчика.**",
             "place": "Окресліть територію, додаючи точки. Закінчіть креслення, клацнувши на першу точку. **Накресліть полігон для ігрового майданчика.**",
             "search": "**Знайдіть '{name}'.**",
@@ -1132,10 +1132,6 @@
                 "name": "Зарядна станція",
                 "terms": "Charging station, pfhzlyf cnfywsz"
             },
-            "amenity/childcare": {
-                "name": "Дитяча кімната",
-                "terms": "Childcare, lbnzxf rsvyfnf, догляд за дітьми, ігрова зона, ігрова кімната"
-            },
             "amenity/cinema": {
                 "name": "Кінотеатр",
                 "terms": "Cinema, rsyjntfnh,кіно,кінематографія"
@@ -1143,10 +1139,6 @@
             "amenity/clock": {
                 "name": "Годинник",
                 "terms": "Clock, ujlbyybr"
-            },
-            "amenity/college": {
-                "name": "Коледж",
-                "terms": "College, rjktl,училище,технікум"
             },
             "amenity/courthouse": {
                 "name": "Суд",
@@ -1191,10 +1183,6 @@
             "amenity/hospital": {
                 "name": "Територія лікарні",
                 "terms": "Hospital grounds, nthbnjhsz ksrfhys"
-            },
-            "amenity/kindergarten": {
-                "name": "Територія дитсадка",
-                "terms": "Kindergarten grounds, nthbnjhsz lbncflrf"
             },
             "amenity/library": {
                 "name": "Бібліотека",
@@ -1257,7 +1245,8 @@
                 "terms": "Ranger Station,rjynjhf kscybwndf, лісник, лісництво"
             },
             "amenity/recycling": {
-                "name": "Переробка"
+                "name": "Переробка вторсировини",
+                "terms": "Recycling, Gththjrf dnjhcbhjdbyb, пункт прийому вторсировини"
             },
             "amenity/restaurant": {
                 "name": "Ресторан",
@@ -1301,10 +1290,6 @@
             "amenity/townhall": {
                 "name": "Міська державна адміністрація",
                 "terms": "Town Hall, vscmrf lthfdyf flvsyscnhfwsz, мерія,ратуша,міськвиконком"
-            },
-            "amenity/university": {
-                "name": "Університет",
-                "terms": "University, eysdthcbntn"
             },
             "amenity/vending_machine": {
                 "name": "Торговельний автомат",
@@ -1755,6 +1740,10 @@
                 "name": "Промзона",
                 "terms": "Industrial,ghjvpjyf"
             },
+            "landuse/landfill": {
+                "name": "Звалище",
+                "terms": "Landfill, Pdfkbot, смітник, свалка, мусорка, "
+            },
             "landuse/meadow": {
                 "name": "Левада",
                 "terms": "Meadow,ktdflf"
@@ -1851,10 +1840,6 @@
                 "name": "Басейн",
                 "terms": "Swimming Pool,fctqy"
             },
-            "leisure/track": {
-                "name": "Гоночний трек",
-                "terms": "Race Track,ujyjxybq nhtr, бігова доріжка"
-            },
             "line": {
                 "name": "Лінія",
                 "terms": "Line,ksysz"
@@ -1908,10 +1893,6 @@
             "man_made/water_tower": {
                 "name": "Водонапірна вежа",
                 "terms": "Water Tower,djljyfgshyf dtf"
-            },
-            "man_made/water_well": {
-                "name": "Колодязь",
-                "terms": "Water well,rjkjlzpm,вода"
             },
             "man_made/water_works": {
                 "name": "Водозабір",
@@ -2203,10 +2184,6 @@
                 "name": "Веломагазин",
                 "terms": "Bicycle Shop,dtkjvfufpby"
             },
-            "shop/books": {
-                "name": "Книгарня",
-                "terms": "Bookstore,rybufhyz"
-            },
             "shop/boutique": {
                 "name": "Бутік",
                 "terms": "Boutique,ensr"
@@ -2239,10 +2216,6 @@
                 "name": "Комп’ютери",
                 "terms": "Computer Store,rjvgnthb"
             },
-            "shop/confectionery": {
-                "name": "Кондитерська",
-                "terms": "Confectionery,rjylbnthcmrf, цукерки, солодощі"
-            },
             "shop/convenience": {
                 "name": "Міні-маркет",
                 "terms": "Convenience Store,vsys-vfhrtn, ларьок, магазин"
@@ -2258,10 +2231,6 @@
             "shop/doityourself": {
                 "name": "Зроби сам",
                 "terms": "DIY Store,phjb cfv"
-            },
-            "shop/dry_cleaning": {
-                "name": "Хімчистка",
-                "terms": "Dry Cleaners,vsxbcnrf"
             },
             "shop/electronics": {
                 "name": "Електроніка",
@@ -2311,10 +2280,6 @@
                 "name": "Ювелірні прикраси",
                 "terms": "Jeweler,dtkshys ghbrhfcb"
             },
-            "shop/kiosk": {
-                "name": "Кіоск",
-                "terms": "Kiosk,rsjcr, МАФ, ларьок"
-            },
             "shop/laundry": {
                 "name": "Пральня",
                 "terms": "Laundry,ghfkmyz"
@@ -2339,17 +2304,9 @@
                 "name": "Музичний магазин",
                 "terms": "Music Store,vepbxybq vfufpby"
             },
-            "shop/newsagent": {
-                "name": "Газетний кіоск",
-                "terms": "Newsagent,ufptnybq rsjcr"
-            },
             "shop/optician": {
                 "name": "Оптика",
                 "terms": "Optician,jgnbrf"
-            },
-            "shop/outdoor": {
-                "name": "Товари для активного відпочинку",
-                "terms": "Outdoor Store,njdfhb lkz frnbdyjuj dslgjxbyre, туризм, туристичне спорядження"
             },
             "shop/pet": {
                 "name": "Товари для тварин",

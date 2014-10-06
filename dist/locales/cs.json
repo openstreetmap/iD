@@ -97,7 +97,6 @@
         },
         "delete": {
             "title": "Smazat",
-            "description": "Odstranit objekt z mapy.",
             "annotation": {
                 "point": "Smazán uzel.",
                 "vertex": "Smazán uzel z cesty.",
@@ -380,7 +379,6 @@
         },
         "areas": {
             "title": "Plochy",
-            "add": "Reálný objekt lze podrobněji reprezentovat pomocí plochy, která opisuje jeho hranici. Pro většinu typů objektů lze místo uzlu použít plochu - a často je to tak lepší. **Klikněte na tlačítko Plocha a přidejte tak novou plochu.**",
             "corner": "Plochu nakreslíte tak, že postupně nanášíte jeden uzel za druhým podél hranice plochy. **Umístěte první uzel na jeden z rohů hřiště.**",
             "place": "Plochu zakreslíte tak, že přidáte další uzly. Kreslení zakončíte kliknutím na počáteční uzel. **Nakreslete plochu hřiště.**",
             "search": "**Dejte hledat '{name}'.**",
@@ -1008,10 +1006,6 @@
                 "name": "Mytí aut",
                 "terms": "myčka,automyčka,mytí,čistění,umývání,čistírna"
             },
-            "amenity/childcare": {
-                "name": "Mimoškolní péče",
-                "terms": "družina,školka,péče o děti,kroužek,tábor"
-            },
             "amenity/cinema": {
                 "name": "Kino",
                 "terms": "kino,film,cinema,multikino,bio,biograf,kinematograf"
@@ -1023,10 +1017,6 @@
             "amenity/clock": {
                 "name": "Hodiny",
                 "terms": "hodiny,orloj,hodinky,chronometr,ciferník,čas,ukazatel času"
-            },
-            "amenity/college": {
-                "name": "College",
-                "terms": "Vysoká škola,univerzita,akademie"
             },
             "amenity/courthouse": {
                 "name": "Soud",
@@ -1070,9 +1060,6 @@
             },
             "amenity/hospital": {
                 "name": "Prostor nemocnice"
-            },
-            "amenity/kindergarten": {
-                "name": "Dětské Hriště"
             },
             "amenity/library": {
                 "name": "Knihovna",
@@ -1181,10 +1168,6 @@
             "amenity/townhall": {
                 "name": "Radnice",
                 "terms": "radnice,místní správa,obecní správa,obecní úřad"
-            },
-            "amenity/university": {
-                "name": "Vysoká škola",
-                "terms": "vysoká škola,univerzita,universita,vyšší odborná škola,VOŠ,college"
             },
             "amenity/vending_machine": {
                 "name": "Prodejní automat",
@@ -1930,10 +1913,6 @@
                 "name": "Plavecký bazén",
                 "terms": "plovárna,koupaliště"
             },
-            "leisure/track": {
-                "name": "Závodní dráha",
-                "terms": "závodní dráha, závodiště, dráha, ovál, stadion, areál"
-            },
             "line": {
                 "name": "Cesta",
                 "terms": "čára,cesta,trať,kanál,trasa"
@@ -1989,10 +1968,6 @@
             "man_made/water_tower": {
                 "name": "Vodárenská věž",
                 "terms": "vodojem,věž s vodojemem,věž,vodárenská věž"
-            },
-            "man_made/water_well": {
-                "name": "Studna",
-                "terms": "studna,studánka,čerpadlo,vodní zdroj,pramen"
             },
             "man_made/water_works": {
                 "name": "Vodárna",
@@ -2346,10 +2321,6 @@
                 "name": "Cykloprodejna",
                 "terms": "obchod s koly,kola,horská kola,jízdní kola,cyklistika,cykloprodejna"
             },
-            "shop/books": {
-                "name": "Knihkupectví",
-                "terms": "Knihovnictví"
-            },
             "shop/boutique": {
                 "name": "Módní butik",
                 "terms": "oblečení,šaty,oděv,oděvy,butik,móda,módní"
@@ -2382,10 +2353,6 @@
                 "name": "Počítače",
                 "terms": "obchod s výpočetní technikou,počítače,elektro,elektronika,výpočetní technika"
             },
-            "shop/confectionery": {
-                "name": "Cukrovinky",
-                "terms": "cukrárna,cukrovinky,cukrářství,cukrářské zboží,sladkosti,cukroví"
-            },
             "shop/convenience": {
                 "name": "Smíšené zboží",
                 "terms": "smíšené zboží,krám,obchod,potraviny,večerka"
@@ -2401,10 +2368,6 @@
             "shop/doityourself": {
                 "name": "Obchod pro kutily",
                 "terms": "obchod pro kutily,stavební materiál,stavebniny,staviva,potřeby pro kutily,zahradní potřeby,železářství,kutil"
-            },
-            "shop/dry_cleaning": {
-                "name": "Čistírna",
-                "terms": "čistírna,chemické čištění,čištění oděvů za sucha"
             },
             "shop/electronics": {
                 "name": "Elektro",
@@ -2454,10 +2417,6 @@
                 "name": "Klenotnictví",
                 "terms": "zlatnictví,šperky,klenotník,klenoty,klenotnictví,bižutérie,náramky,náušnice,prsteny"
             },
-            "shop/kiosk": {
-                "name": "Stánek",
-                "terms": "stánek,noviny,kiosek,občerstvení,tabák"
-            },
             "shop/laundry": {
                 "name": "Prádelna",
                 "terms": "prádelna,čistírna,prádlo"
@@ -2482,17 +2441,9 @@
                 "name": "Obchod s hudbou",
                 "terms": "hudební obchod,obchod s hudbou,cd,lp"
             },
-            "shop/newsagent": {
-                "name": "Trafika",
-                "terms": "prodavač novin,trafikant,trafika,noviny,časopisy,tabák"
-            },
             "shop/optician": {
                 "name": "Optika",
                 "terms": "optik,optika,brýle,zrak,kontaktní čočky,čočky"
-            },
-            "shop/outdoor": {
-                "name": "Vybavení do přírody",
-                "terms": "obchod s vybavením pro pobyt v přírodě,stany,spacáky,outdoor"
             },
             "shop/pet": {
                 "name": "Chovatelské potřeby",

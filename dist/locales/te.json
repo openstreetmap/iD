@@ -71,7 +71,6 @@
         },
         "delete": {
             "title": "తొలగించు",
-            "description": "మ్యాప్ నుండి ఇది తొలగించు",
             "annotation": {
                 "point": "ఒక బిందువును తొలగించారు.",
                 "line": "గీత తొలగించబడింది",
@@ -506,9 +505,6 @@
             },
             "amenity/toilets": {
                 "name": "మరుగుదొడ్లు"
-            },
-            "amenity/university": {
-                "name": "విశ్వవిద్యాలయం"
             },
             "barrier/fence": {
                 "name": "కంచె"

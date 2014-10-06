@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "Cancella",
-            "description": "Cancella questo dalla mappa.",
+            "description": "Cancella l'oggetto irreversibilmente.",
             "annotation": {
                 "point": "Cancellato un punto.",
                 "vertex": "Cancellato un punto da una way.",
@@ -350,6 +350,11 @@
         "zoom": "Zoom su traccia GPX",
         "browse": "Scegli un file .gpx"
     },
+    "mapillary": {
+        "tooltip": "Fotografie stradali da Mapillary",
+        "title": "Livello Foto (Mapillary)",
+        "view_on_mapillary": "Guarda questa immagine su Mapillary"
+    },
     "help": {
         "title": "Aiuto",
         "help": "# Aiuto\n\nQuesto è un editor per [OpenStreetMap](http://www.openstreetmap.org/), la\nmappa del mondo gratuita e modificabile. Puoi usarlo per aggiungere ed aggiornare\ndati nella tua area, creando una mappa del mondo open-source e open-data\nmigliore per tutti.\n\nLe modifiche che fai a questa mappa saranno visibili a chiunque usa\nOpenStreetMap. Per fare una modifica, avrai bisogno di un\n[account gratuito OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) è un progetto collaborativo il cui [codice\nsorgente è disponibile su GitHub](https://github.com/openstreetmap/iD).\n",
@@ -385,7 +390,7 @@
         },
         "areas": {
             "title": "Aree",
-            "add": "Le aree sono un modo più dettagliato di rappresentare degli elementi. Esse forniscono le informazioni circa il contorno fisico di un oggetto. Le aree possono essere usate per quasi tutti i casi in cui potresti usare un punto, e sono spesso da preferirsi. **Clicca il pulsante Area per aggiungere una nuova area.**",
+            "add": "Le aree sono utilizzate per indicare i contorni degli elementi come ad esempio i laghi, gli edifici e le aree residenziali. Possono anche essere utilizzate per rappresentare in modo più dettagliato elementi che normalmente vengono mappati come punti. **Clicca il pulsante Area per aggiungere una nuova area.**",
             "corner": "Le aree devono essere disegnate posizionando i punti che segnano il confine dell'area. **Posizionare il punto di partenza a uno degli angoli del parchetto.**",
             "place": "Disegna l'area posizionando più punti. Terminare l'area cliccando sul punto di partenza. **Disegnare un'area per il parchetto.**",
             "search": "**Cerca per '{name}'.**",
@@ -754,6 +759,9 @@
             "leisure": {
                 "label": "Tipo"
             },
+            "length": {
+                "label": "Lunghezza (Metri)"
+            },
             "levels": {
                 "label": "Piani",
                 "placeholder": "2, 4, 6..."
@@ -773,7 +781,14 @@
             },
             "mtb/scale": {
                 "label": "Difficoltà Mountain Bike",
-                "placeholder": "0, 1, 2, 3..."
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Ghiaia solida/terra battuta, nessun ostacolo, curve ampie"
+                }
+            },
+            "mtb/scale/imba": {
+                "label": "Difficoltà IMBA del tracciato",
+                "placeholder": "Facile, Medio, Difficile..."
             },
             "mtb/scale/uphill": {
                 "placeholder": "0, 1, 2, 3..."
@@ -848,7 +863,8 @@
                     "intermediate": "Media (rossa)",
                     "advanced": "Avanzata (nera)",
                     "expert": "Esperto (arancione)",
-                    "freeride": "Fuoripista (gialla)"
+                    "freeride": "Fuoripista (gialla)",
+                    "extreme": "Estrema (equipaggiamento da scalata richiesto)"
                 }
             },
             "piste/grooming": {
@@ -990,6 +1006,9 @@
             "sport_ice": {
                 "label": "Sport"
             },
+            "sport_racing": {
+                "label": "Sport"
+            },
             "structure": {
                 "label": "Struttura",
                 "placeholder": "Sconosciuto",
@@ -1078,6 +1097,9 @@
             },
             "wheelchair": {
                 "label": "Accesso in carrozzina"
+            },
+            "width": {
+                "label": "Larghezza (Metri)"
             },
             "wikipedia": {
                 "label": "Wikipedia"
@@ -1207,6 +1229,10 @@
                 "name": "Noleggio barche",
                 "terms": "noleggio barche,noleggio,barche,porto,negozio"
             },
+            "amenity/bureau_de_change": {
+                "name": "Cambiavalute",
+                "terms": "cambi,ufficio cambi,cambio,valuta,cambiovaluta"
+            },
             "amenity/bus_station": {
                 "name": "Stazione degli autobus",
                 "terms": "autobus,bus,tram,stazione,fermata,capolinea"
@@ -1227,9 +1253,8 @@
                 "name": "Autolavaggio",
                 "terms": "Autolavaggio"
             },
-            "amenity/childcare": {
-                "name": "Doposcuola",
-                "terms": "Assistenza infanzia"
+            "amenity/charging_station": {
+                "name": "Stazione di ricarica"
             },
             "amenity/cinema": {
                 "name": "Cinema",
@@ -1243,9 +1268,8 @@
                 "name": "Orologio",
                 "terms": "ora,orario,orologio"
             },
-            "amenity/college": {
-                "name": "College",
-                "terms": "Accademia"
+            "amenity/compressed_air": {
+                "name": "Aria Compressa"
             },
             "amenity/courthouse": {
                 "name": "Tribunale",
@@ -1294,10 +1318,6 @@
             "amenity/hospital": {
                 "name": "Area Ospedaliera",
                 "terms": "ospedale,clinica,pronto soccorso,servizio sanitario,salute,hospice,ospizio,infermeria,istituzione,casa di cura,casa di riposo,sanatorio,ambulatorio,chirurgia,reparto"
-            },
-            "amenity/kindergarten": {
-                "name": "Area della Scuola dell'infanzia",
-                "terms": "scuola d'infanzia,scuola di infanzia,asilo,assistenza all'infanzia,asilo d'infanzia,scuola materna,scuola dell'infanzia,asilo nido"
             },
             "amenity/library": {
                 "name": "Biblioteca",
@@ -1387,10 +1407,6 @@
                 "name": "Banco alimentare",
                 "terms": "mensa del povero,mensa caritas"
             },
-            "amenity/social_facility/group_home": {
-                "name": "Comunità",
-                "terms": "casa comunitaria,terapia di gruppo,comunità"
-            },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Dormitorio",
                 "terms": "ricovero,senzadimora,barboni,senza fissa dimora,senza dimora,senza casa"
@@ -1424,8 +1440,7 @@
                 "terms": "sala del comune,palazzo di governo,tribunale,munipio"
             },
             "amenity/university": {
-                "name": "Università",
-                "terms": "college"
+                "name": "Area universitaria"
             },
             "amenity/vending_machine": {
                 "name": "Distributore automatico",
@@ -1668,6 +1683,9 @@
                 "name": "Costruttore di orologi",
                 "terms": "orologi"
             },
+            "craft/confectionary": {
+                "name": "Pasticceria"
+            },
             "craft/dressmaker": {
                 "name": "Sartoria",
                 "terms": "sarto,merceria,vestiti su misura"
@@ -1725,6 +1743,9 @@
             "craft/shoemaker": {
                 "name": "Calzolaio",
                 "terms": "scarpe,scarpino,calzature"
+            },
+            "craft/upholsterer": {
+                "name": "Tappezziere"
             },
             "craft/watchmaker": {
                 "name": "Orologiaio",
@@ -1853,6 +1874,10 @@
             "highway/primary_link": {
                 "name": "Svincolo primario",
                 "terms": "Svincolo primario"
+            },
+            "highway/raceway": {
+                "name": "Circuito",
+                "terms": "pista,autodromo,pista automobilistica,pista motoristica"
             },
             "highway/residential": {
                 "name": "Residenziale",
@@ -2134,6 +2159,10 @@
                 "name": "Parco giochi",
                 "terms": "area giochi,scivolo,parco,giochi"
             },
+            "leisure/running_track": {
+                "name": "Pista di atletica",
+                "terms": "atletica,tartan,pista"
+            },
             "leisure/slipway": {
                 "name": "Scivolo per barche",
                 "terms": "Rampa per la messa in acqua di imbarcazioni"
@@ -2151,8 +2180,8 @@
                 "terms": "Piscina"
             },
             "leisure/track": {
-                "name": "Pista",
-                "terms": "Pista automobilistica"
+                "name": "Pista (sport non motoristici)",
+                "terms": "circuito"
             },
             "line": {
                 "name": "Linea",
@@ -2541,6 +2570,10 @@
                 "name": "Negozio di liquori",
                 "terms": "alcool,liquori,grappa,rum,vodka"
             },
+            "shop/antiques": {
+                "name": "Antiquario",
+                "terms": "antichità,mobili antichi"
+            },
             "shop/art": {
                 "name": "Negozio di opere d'arte",
                 "terms": "opere d'arte,quadri,sculture,galleria"
@@ -2589,6 +2622,10 @@
                 "name": "Autofficina",
                 "terms": "Officina"
             },
+            "shop/carpet": {
+                "name": "Negozio di tappeti",
+                "terms": "tappeti,persiani"
+            },
             "shop/chemist": {
                 "name": "Drogheria",
                 "terms": "Articoli di pulizia e bellezza"
@@ -2600,10 +2637,6 @@
             "shop/computer": {
                 "name": "Negozio di informatica",
                 "terms": "Negozio di computer"
-            },
-            "shop/confectionery": {
-                "name": "Negozio per dolciumi",
-                "terms": "caramelle,bonbon"
             },
             "shop/convenience": {
                 "name": "Minimarket",
@@ -2677,10 +2710,6 @@
                 "name": "Gioielliere",
                 "terms": "Gioielleria"
             },
-            "shop/kiosk": {
-                "name": "Chiosco",
-                "terms": "Chiosco"
-            },
             "shop/laundry": {
                 "name": "Lavanderia",
                 "terms": "Lavanderia"
@@ -2709,17 +2738,9 @@
                 "name": "Negozio di musica",
                 "terms": "Negozio di nusica"
             },
-            "shop/newsagent": {
-                "name": "Edicola",
-                "terms": "Edicola"
-            },
             "shop/optician": {
                 "name": "Ottico",
                 "terms": "Ottico"
-            },
-            "shop/outdoor": {
-                "name": "Negozio per sport all'aperto",
-                "terms": "Negozio all'aperto"
             },
             "shop/pet": {
                 "name": "Negozio di animali",

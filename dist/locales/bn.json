@@ -88,7 +88,6 @@
         },
         "delete": {
             "title": "মুছে ফেলুন",
-            "description": "ম্যাপ থেকে এটিকে মুছে ফেলুন।",
             "annotation": {
                 "point": "একটি বিন্দু মুছে ফেলা হয়েছে।",
                 "vertex": "একটি গমনপথ থেকে একটি নোড মুছে ফেলা হয়েছে।",
@@ -342,6 +341,15 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "দালান"
+            },
+            "category-golf": {
+                "name": "গল্ফ"
+            },
+            "category-landuse": {
+                "name": "ভুমির ব্যবহার"
+            },
             "category-path": {
                 "name": "পথ"
             },
@@ -350,6 +358,12 @@
             },
             "category-road": {
                 "name": "রাস্তা"
+            },
+            "category-water-area": {
+                "name": "জল"
+            },
+            "category-water-line": {
+                "name": "জল"
             }
         },
         "fields": {
@@ -365,7 +379,8 @@
                 },
                 "options": {
                     "yes": {
-                        "title": "অনুমোদিত"
+                        "title": "অনুমোদিত",
+                        "description": "অাইনানুসারে প্রবেশ অনুমোদিত"
                     },
                     "no": {
                         "title": "নিষিদ্ধ",
@@ -388,11 +403,54 @@
                     }
                 }
             },
+            "access_simple": {
+                "label": "প্রবেশ করা",
+                "placeholder": "হ্যা"
+            },
+            "access_toilets": {
+                "label": "প্রবেশ করা"
+            },
             "address": {
                 "label": "ঠিকানা",
                 "placeholders": {
+                    "housename": "বাড়ির নাম",
+                    "housenumber": "১২৩",
                     "street": "স্ট্রীট",
-                    "city": "শহর"
+                    "city": "শহর",
+                    "postcode": "পিনকোড",
+                    "place": "জায়গা",
+                    "suburb": "শহরতলি",
+                    "subdistrict": "উপজেলা",
+                    "district": "জেলা",
+                    "state": "রাজ্য",
+                    "country": "দেশ"
+                }
+            },
+            "aerialway": {
+                "label": "টাইপ"
+            },
+            "aerialway/access": {
+                "label": "প্রবেশ করা",
+                "options": {
+                    "entry": "প্রবেশ",
+                    "exit": "প্রস্থাণ",
+                    "both": "উভয়"
+                }
+            },
+            "aerialway/capacity": {
+                "placeholder": "৫০০, ২৫০০, ৫০০০ ..."
+            },
+            "aerialway/duration": {
+                "placeholder": "১, ২, ৩..."
+            },
+            "aerialway/occupancy": {
+                "placeholder": "২, ৪, ৮..."
+            },
+            "aerialway/summer/access": {
+                "options": {
+                    "entry": "প্রবেশ",
+                    "exit": "প্রস্থাণ",
+                    "both": "উভয়"
                 }
             },
             "aeroway": {
@@ -430,7 +488,14 @@
                 "placeholder": "৫০, ১০০, ২০০..."
             },
             "cardinal_direction": {
-                "label": "দিক/অভিমুখ"
+                "label": "দিক/অভিমুখ",
+                "options": {
+                    "N": "উত্তর",
+                    "E": "পূর্ব",
+                    "S": "দক্ষিণ",
+                    "W": "পশ্চিম",
+                    "NE": "উত্তরপূর্ব"
+                }
             },
             "clock_direction": {
                 "label": "দিক/অভিমুখ",
@@ -463,6 +528,9 @@
             "entrance": {
                 "label": "টাইপ"
             },
+            "except": {
+                "label": "ব্যতিক্রম"
+            },
             "fax": {
                 "label": "ফ্যাক্স",
                 "placeholder": "+৩১ ৪২ ১২৩ ৪৫৬৭"
@@ -471,16 +539,30 @@
                 "label": "মূল্য"
             },
             "fire_hydrant/type": {
-                "label": "টাইপ"
+                "label": "টাইপ",
+                "options": {
+                    "wall": "দেয়াল",
+                    "pond": "পুকুর"
+                }
             },
             "fixme": {
                 "label": "অামাকে ঠিক করুন"
             },
+            "fuel": {
+                "label": "জ্বালানি"
+            },
             "generator/method": {
                 "label": "পদ্ধতি"
             },
+            "generator/source": {
+                "label": "উৎস"
+            },
             "generator/type": {
                 "label": "টাইপ"
+            },
+            "handicap": {
+                "label": "বিকলাঙ্গ",
+                "placeholder": "১-১৮"
             },
             "highway": {
                 "label": "টাইপ"
@@ -488,12 +570,20 @@
             "historic": {
                 "label": "টাইপ"
             },
+            "hoops": {
+                "placeholder": "১, ২, ৪..."
+            },
             "incline": {
                 "label": "ঝোকা"
+            },
+            "information": {
+                "label": "টাইপ"
             },
             "internet_access": {
                 "label": "ইন্টারনেট সুবিধা",
                 "options": {
+                    "yes": "হ্যা",
+                    "no": "না",
                     "wlan": "তারবিহীন",
                     "wired": "তারযুক্ত",
                     "terminal": "টার্মিনাল"
@@ -511,6 +601,9 @@
             },
             "leisure": {
                 "label": "টাইপ"
+            },
+            "length": {
+                "label": "দৈর্ঘ্য (মিটার)"
             },
             "levels": {
                 "label": "স্তর",
@@ -680,14 +773,8 @@
             "amenity/car_rental": {
                 "name": "গাড়ি ভাড়া"
             },
-            "amenity/childcare": {
-                "name": "শিশুপালন"
-            },
             "amenity/cinema": {
                 "name": "সিনেমা"
-            },
-            "amenity/college": {
-                "name": "কলেজ/মহাবিদ্যালয়"
             },
             "amenity/drinking_water": {
                 "name": "পানীয় জল"
@@ -763,9 +850,6 @@
             },
             "amenity/townhall": {
                 "name": "টাউন হল"
-            },
-            "amenity/university": {
-                "name": "বিশ্ববিদ্যালয়"
             },
             "area": {
                 "name": "এলাকা"
@@ -992,9 +1076,6 @@
             "man_made/water_tower": {
                 "name": "জল স্তম্ভ"
             },
-            "man_made/water_well": {
-                "name": "নলকুপ"
-            },
             "natural": {
                 "name": "প্রাকৃতিক"
             },
@@ -1130,9 +1211,6 @@
             "shop/bicycle": {
                 "name": "সাইকেল-এর দোকান"
             },
-            "shop/books": {
-                "name": "বই-এর দোকান"
-            },
             "shop/boutique": {
                 "name": "বুটিক"
             },
@@ -1156,9 +1234,6 @@
             },
             "shop/computer": {
                 "name": "কম্পিউটার-এর দোকান"
-            },
-            "shop/confectionery": {
-                "name": "কনফেকশনারি"
             },
             "shop/department_store": {
                 "name": "ডিপার্টমেন্ট স্টোর"

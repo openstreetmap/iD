@@ -2,8 +2,8 @@
     "modes": {
         "add_area": {
             "title": "Area",
-            "description": "Menambah taman, bangunan, danau atau area lain pada peta.",
-            "tail": "Klik pada peta untuk mulai menggambar sebuah area, seperti sebuah taman, danau, atau bangunan."
+            "description": "Tambahkan taman, bangunan, danau atau area lain pada peta.",
+            "tail": "Klik pada peta untuk mulai menggambar sebuah area, misalnya taman, danau, atau bangunan."
         },
         "add_line": {
             "title": "Garis",
@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "Hapus",
-            "description": "Buang ini dari peta.",
+            "description": "Hapus objek secara permanen.",
             "annotation": {
                 "point": "Menghapus sebuah titik.",
                 "vertex": "Menghapus sebuah simpul dari jalan.",
@@ -150,7 +150,8 @@
                 "area": "Menggeser sebuah area.",
                 "multiple": "Menggeser beberapa obyek."
             },
-            "incomplete_relation": "Fitur ini tidak bisa dipindahkan karena belum sepenuhnya terunduh."
+            "incomplete_relation": "Fitur ini tidak bisa dipindahkan karena belum sepenuhnya terunduh.",
+            "too_large": "Objek ini tidak dapat dipindahkan karena baru separuhnya yang tampak di layar."
         },
         "rotate": {
             "title": "Putar",
@@ -159,7 +160,8 @@
             "annotation": {
                 "line": "Memutar sebuah garis.",
                 "area": "Memutar sebuah area."
-            }
+            },
+            "too_large": "Objek ini tidak dapat diputar karena baru separuhnya yang tampak di layar."
         },
         "reverse": {
             "title": "Balik",
@@ -185,7 +187,14 @@
         },
         "restriction": {
             "help": {
-                "select": "Klik untuk memilih segmen jalan."
+                "select": "Klik untuk memilih segmen jalan.",
+                "toggle": "Klik untuk menentukan larangan belok kiri/kanan.",
+                "toggle_on": "Klik untuk menambahkan larangan \"{restriction}\".",
+                "toggle_off": "Klik untuk menghapus larangan \"{restriction}\"."
+            },
+            "annotation": {
+                "create": "Menambahkan larangan belok",
+                "delete": "Menghapus larangan belok"
             }
         }
     },
@@ -341,6 +350,11 @@
         "zoom": "Perbesar ke jejak GPX",
         "browse": "Telusuri untuk file .gpx"
     },
+    "mapillary": {
+        "tooltip": "Pemandangan jalan dari Mapillary",
+        "title": "Lapisan Foto (Mapillary)",
+        "view_on_mapillary": "Lihat gambar ini di Mapillary"
+    },
     "help": {
         "title": "Bantuan",
         "help": "#Bantuan\n\nIni adalah editor untuk [OpenStreetMap] (http://www.openstreetmap.org/), \npeta dunia gratis dan bisa disunting. Anda dapat menggunakannya dengan menambahkan dan memperbarui\n data di area anda, membangun sebuah peta sumber-terbuka dan data-terbuka di seluruh dunia\n yang lebih baik untuk semua orang.\n\nPerubahan yang anda buat akan terlihat ke semua orang yang menggunakan \nOpenStreetMap. Untuk melakukan penyutingan, anda membutuhkan \n[free OpenStreetMap account] (https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) adalah proyek kolaborasi dengan [kode sumber tersedia di GitHub](https://github.com/openstreetmap/iD).\n"
@@ -368,7 +382,7 @@
         },
         "areas": {
             "title": "Area",
-            "add": "Area merupakan bentuk lain yang lebih rinci untuk mewakili sebuah fitur. Mereka memberikan informasi batas wilayah sebuah fitur. Area dapat digunakan untuk banyak tipe fitur yang diwakili titik, bahkan sering lebih disarankan. **Klik tombol Area untuk menambahkan sebuah area baru. **",
+            "add": "Area digunakan untuk menampilkan batas fitur-fitur seperti danau, bangunan, dan kawasan permukiman. Area juga dapat digunakan untuk memetakan fitur-fitur yang biasanya dipetakan menggunakan titik secara lebih rinci lagi. **Klik tombol Area untuk menambahkan area baru.**",
             "corner": "Area tergambar dengan meletakkan simpul yang menandakan batas suatu area. **Letakan simpul pemula di satu sudut dari tempat-bermain.**",
             "place": "Gambar area dengan meletakan lebih banyak simpul. Selesaikan area dengan mengklik pada simpul awal. **Gambar sebuah area untuk tempat bermain.**",
             "search": "**Pencarian untuk '{name}'.**",
@@ -877,10 +891,6 @@
             "amenity/clock": {
                 "name": "Jam"
             },
-            "amenity/college": {
-                "name": "Kampus",
-                "terms": "Kampus"
-            },
             "amenity/courthouse": {
                 "name": "Pengadilan",
                 "terms": "Pengadilan"
@@ -1002,10 +1012,6 @@
             "amenity/townhall": {
                 "name": "Balai Kota",
                 "terms": "Balai Kota,"
-            },
-            "amenity/university": {
-                "name": "Universitas",
-                "terms": "Universitas, Kampus,"
             },
             "amenity/vending_machine": {
                 "name": "Mesin Minuman"
@@ -1379,9 +1385,6 @@
             "leisure/swimming_pool": {
                 "name": "Kolam Renang"
             },
-            "leisure/track": {
-                "name": "Trek Balap"
-            },
             "line": {
                 "name": "Garis"
             },
@@ -1405,9 +1408,6 @@
             },
             "man_made/water_tower": {
                 "name": "Tower Air"
-            },
-            "man_made/water_well": {
-                "name": "Sumur"
             },
             "natural": {
                 "name": "Alami"
@@ -1600,9 +1600,6 @@
             "shop/alcohol": {
                 "name": "Toko Minuman"
             },
-            "shop/art": {
-                "name": "Toko Kerajinan dan Keseninan"
-            },
             "shop/bakery": {
                 "name": "Toko Roti"
             },
@@ -1614,9 +1611,6 @@
             },
             "shop/bicycle": {
                 "name": "Toko Sepeda"
-            },
-            "shop/books": {
-                "name": "Toko Buku"
             },
             "shop/boutique": {
                 "name": "Butik"
@@ -1675,9 +1669,6 @@
             "shop/jewelry": {
                 "name": "Toko Perhiasan"
             },
-            "shop/kiosk": {
-                "name": "Kios"
-            },
             "shop/laundry": {
                 "name": "Laundri"
             },
@@ -1693,14 +1684,8 @@
             "shop/music": {
                 "name": "Toko Musik"
             },
-            "shop/newsagent": {
-                "name": "Agen Koran dan Majalah"
-            },
             "shop/optician": {
                 "name": "Optik"
-            },
-            "shop/outdoor": {
-                "name": "Toko Outdoor"
             },
             "shop/pet": {
                 "name": "Toko Peliharaan"

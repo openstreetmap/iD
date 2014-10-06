@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "Slet",
-            "description": "Fjern dette fra kortet.",
+            "description": "Slet objekt permanent.",
             "annotation": {
                 "point": "Slettede et punkt.",
                 "vertex": "Slettede et punkt på en vej.",
@@ -350,6 +350,11 @@
         "zoom": "Zoom hen til GPX spor",
         "browse": "Browse efter en .gpx fil"
     },
+    "mapillary": {
+        "tooltip": "Gadeniveau billeder fra Mapillary",
+        "title": "Fotolag (Mapillary)",
+        "view_on_mapillary": "Vis dette billede på Mapillary"
+    },
     "help": {
         "title": "Hjælp",
         "help": "# Hjælp\n\nDette er et redigeringsværktøj for [OpenStreetMap](http://www.openstreetmap.org/), det\nåbne og redigeringsbare verdenskort. Du kan bruge dette værktøj til at opdatere\ngeodata i dit lokalområde. Derved skaber du et bedre verdenskort med open source og frie geodata\ntil gavn for alle.\n\nDine ændringer på kortet vil blive synligt for alle og enhver der benytter\nOpenStreetMap. For at lave redigeringer skal du oprette\n[en gratis OpenStreetMap konto](https://www.openstreetmap.org/user/new).\n\nDette [iD redigeringsværktøj](http://ideditor.com/) er et kollaborativ projekt og [kildekoden\ner tilgængelig på GitHub](https://github.com/systemed/iD). \n",
@@ -385,7 +390,7 @@
         },
         "areas": {
             "title": "Områder",
-            "add": "Områder er en mere detaljeret måde at repræsentere objekter på. De yder information om objektets afgrænsning. Områder kan bruges for de fleste objekttyper punkter kan bruges til og foretrækkes ofte.**Klik på område knappen for at tilføje et nyt område.**",
+            "add": "Områder bruges til at vise omkredsen af objekter som fx søer, bygninger og beboelsesområder. De kan også bruges til mere detaljeret kortlægning af objekter som du normalt kortlægger som punkter. *'Klik på Område knappen for at tilføje et nyt område.**",
             "corner": "Områder indtegnes ved at placere punkter der markerer områdets afgrænsning. **Placerer startpunktet på et af legepladsens hjørner.**",
             "place": "Tegn området ved at placere flere punkter. Afslut området ved at klikke på det først indtegnede punkt.**Tegn legepladsens område.**",
             "search": "**Søg efter  '{name}'.**",
@@ -624,6 +629,9 @@
             "covered": {
                 "label": "Overdækket"
             },
+            "craft": {
+                "label": "Type"
+            },
             "crop": {
                 "label": "Afgrøde"
             },
@@ -676,7 +684,8 @@
                 "options": {
                     "pillar": "Brandhane/Overjordisk",
                     "underground": "Underjordisk",
-                    "wall": "Mur"
+                    "wall": "Mur",
+                    "pond": "Dam"
                 }
             },
             "fixme": {
@@ -801,9 +810,21 @@
                 "placeholder": "40, 50, 60..."
             },
             "mtb/scale": {
-                "placeholder": "0, 1, 2, 3..."
+                "label": "Mountain bike vanskelighedsniveau",
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Fast grus/ pakket jord, ingen forhindringer, brede kurver",
+                    "1": "1: Noget løst overflade, små forhindringer, brede kurver",
+                    "2": "2: Meget løs overflade, store forhindringer, nemme hårnåle sving",
+                    "3": "3: Glat overflade, store forhindringer, stramme hårnåle sving",
+                    "4": "4: løs overflade eller kampesten, farlige hårnåle sving",
+                    "5": "5: Maksimal sværhedsgrad, kampestensområder, jordskred",
+                    "6": "6: Ikke farbar område undtagen for de allerbedste mountainbikere"
+                }
             },
             "mtb/scale/imba": {
+                "label": "IMBA spor vanskelighedsniveau",
+                "placeholder": "Nemt, Medium, Svært",
                 "options": {
                     "0": "Nemmeste (hvid cirkel)",
                     "1": "Let (grøn cirkel)",
@@ -813,7 +834,16 @@
                 }
             },
             "mtb/scale/uphill": {
-                "placeholder": "0, 1, 2, 3..."
+                "label": "Mountainbike op ad bakke Sværhedsgrad",
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Gennemsnitlig hældning <10%, grus / hård jord, ingen forhindringer",
+                    "1": "1: Gennemsnitlig hældning <15%, grus / hård jord, nogle små genstande",
+                    "2": "2: Gennemsnitlig hældning <20%, stabil overflade, klipperstykker/trærødder",
+                    "3": "3: Gennemsnitlig hældning <25%, variabel overflade, klippestykker/træstykker",
+                    "4": "4: Gennemsnitlig  hældning <30%, dårlige forhold, store sten /træstykker",
+                    "5": "5: Meget stejlt, cykel er generelt nødvendigt blive skubbet eller bæres"
+                }
             },
             "name": {
                 "label": "Navn",
@@ -864,10 +894,12 @@
                 "label": "Type",
                 "options": {
                     "surface": "Overflade",
+                    "multi-storey": "Multiniveau",
                     "underground": "Underjordisk",
                     "sheds": "Skur",
                     "carports": "Carporte",
-                    "garage_boxes": "Garagebokse"
+                    "garage_boxes": "Garagebokse",
+                    "lane": "Vejsidespor"
                 }
             },
             "phone": {
@@ -876,10 +908,15 @@
             },
             "piste/difficulty": {
                 "label": "Vanskelighedsniveau",
+                "placeholder": "Let, Mellemsvært, Avanceret...",
                 "options": {
                     "novice": "Nybegynder (instruktioner)",
                     "easy": "Nemt (grøn cirkel)",
-                    "freeride": "Freeride (off-piste)"
+                    "intermediate": "Mellemsvært (blå firkant)",
+                    "advanced": "Avanceret (sort diamant)",
+                    "expert": "Ekspert (dobbelt sort diamant)",
+                    "freeride": "Freeride (off-piste)",
+                    "extreme": "Ekstremt (klatreudstyr påkrævet)"
                 }
             },
             "piste/grooming": {
@@ -898,9 +935,12 @@
                 "options": {
                     "downhill": "Styrtløb",
                     "nordic": "Nordisk",
+                    "skitour": "Skirute",
                     "sled": "Slæde",
                     "hike": "Skivandretur",
                     "sleigh": "Kælk",
+                    "ice_skate": "Skøjter",
+                    "snow_park": "Snepark",
                     "playground": "Legeplads"
                 }
             },
@@ -981,14 +1021,28 @@
             },
             "smoking": {
                 "label": "Rygning",
+                "placeholder": "Nej, Separeret, Ja...",
                 "options": {
+                    "no": "Rygning forbudt overalt",
+                    "separated": "I rygeområder, ikke fysisk isolerede",
+                    "isolated": "I rygeområder, fysisk isolerede",
                     "outside": "Tilladt udenfor",
-                    "yes": "Tilladt alle steder"
+                    "yes": "Tilladt alle steder",
+                    "dedicated": "Dedikeret til rygere (fx rygeres klub)"
                 }
             },
             "smoothness": {
+                "label": "Glathed",
+                "placeholder": "Tynd hjul, Hjul, Off-Road...",
                 "options": {
-                    "very_horrible": "Specialiseret off-road: traktor, ATV"
+                    "excellent": "Tynde hjul: rulleskøjter, skateboard",
+                    "good": "Tynde hjul: racercykel",
+                    "intermediate": "Hjul: citybike, kørestol, scooter",
+                    "bad": "Robuste hjul:  mountainbikecykel, bil, rickshaw",
+                    "very_bad": "Høj frihøjde: lettere terrængående køretøj",
+                    "horrible": "Off-Road: terrængående køretøj",
+                    "very_horrible": "Specialiseret off-road: traktor, ATV",
+                    "impassible": "Ufremkommelige / Ingen køretøjer på hjem"
                 }
             },
             "social_facility_for": {
@@ -1002,6 +1056,9 @@
                 "label": "Sport"
             },
             "sport_ice": {
+                "label": "Sport"
+            },
+            "sport_racing": {
                 "label": "Sport"
             },
             "structure": {
@@ -1043,10 +1100,27 @@
                 "label": "Tårn type"
             },
             "tracktype": {
-                "label": "Sportype"
+                "label": "Sportype",
+                "placeholder": "Solid, for det meste solid, blød",
+                "options": {
+                    "grade1": "Solid: hårdt vejbelagt eller stærkt komprimeret overflade",
+                    "grade2": "Overvejende solid: grus / småsten med nogle bløde materiale blandet i",
+                    "grade3": "En blanding af hårde og bløde materialer",
+                    "grade4": "Overvejende blødt: jord / sand / græs med nogle hårde materialer blandet i",
+                    "grade5": "Blødt: jord/sand/græs"
+                }
             },
             "trail_visibility": {
-                "label": "Spor synlighed"
+                "label": "Spor synlighed",
+                "placeholder": "Udmærket, God, Dårlig...",
+                "options": {
+                    "excellent": "Udmærket: entydig sti eller markører overalt",
+                    "good": "Godt: markører synlige, undertiden kræves at lave lidt søgning",
+                    "intermediate": "Mellemsværhedsgrad: få markører, sti for det meste synlig",
+                    "bad": "Dårlig: ​​ingen markører, sti til tider usynlig /sporløse",
+                    "horrible": "Horrible: ofte sporløse, kræves nogle orientering færdigheder",
+                    "no": "Nej: sporløse, kræves glimrende orientering færdigheder"
+                }
             },
             "tree_type": {
                 "label": "Type"
@@ -1207,6 +1281,10 @@
                 "name": "Bådudlejning",
                 "terms": "Bådudlejning, lystbådudlejning"
             },
+            "amenity/bureau_de_change": {
+                "name": "Valutaveksling",
+                "terms": "Valutaveksling"
+            },
             "amenity/bus_station": {
                 "name": "Busstation",
                 "terms": "Busstation, Rutebilsstation"
@@ -1232,8 +1310,8 @@
                 "terms": "Opladerstation, elbilopladerstation"
             },
             "amenity/childcare": {
-                "name": "Børnepasning",
-                "terms": "Børnehave, Børnepasning, Vuggestue, Dagpleje, Fritidshjem"
+                "name": "Dagpleje/Vuggestue",
+                "terms": "Dagpleje/Vuggestue"
             },
             "amenity/cinema": {
                 "name": "Biograf",
@@ -1248,8 +1326,8 @@
                 "terms": "Ur"
             },
             "amenity/college": {
-                "name": "Gymnasie",
-                "terms": "Gymnasie, Handelsgymnasie"
+                "name": "Universitetsområder",
+                "terms": "Universitetsområder"
             },
             "amenity/compressed_air": {
                 "name": "Luftpumpe",
@@ -1304,8 +1382,8 @@
                 "terms": "Hospitalsområde"
             },
             "amenity/kindergarten": {
-                "name": "Børnehaveområde",
-                "terms": "Børnehaveområde"
+                "name": "Børnehavegrund",
+                "terms": "Børnehavegrund"
             },
             "amenity/library": {
                 "name": "Bibliotek",
@@ -1396,8 +1474,8 @@
                 "terms": "Fødevarebank, folkekøkken"
             },
             "amenity/social_facility/group_home": {
-                "name": "Gruppehjem",
-                "terms": "Gruppehjem"
+                "name": "Plejehjem",
+                "terms": "Plejehjem, Alderdomshjem"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Hjemmeløsskur",
@@ -1432,8 +1510,8 @@
                 "terms": "Rådhus, Kommunerådhus"
             },
             "amenity/university": {
-                "name": "Universitet",
-                "terms": "Universitet"
+                "name": "Universitetsområde",
+                "terms": "Universitetsområde"
             },
             "amenity/vending_machine": {
                 "name": "Automat",
@@ -1555,6 +1633,10 @@
                 "name": "Kirke",
                 "terms": "Kirke"
             },
+            "building/college": {
+                "name": "Universitetsbygning",
+                "terms": "Universitetsbygning"
+            },
             "building/commercial": {
                 "name": "Indkøbscenter",
                 "terms": "Indkøbscenter, Storcenter"
@@ -1607,6 +1689,10 @@
                 "name": "Industribygning",
                 "terms": "Industribygning"
             },
+            "building/kindergarten": {
+                "name": "Børnehavebygning",
+                "terms": "Børnehavebygning"
+            },
             "building/public": {
                 "name": "Offentlig bygning",
                 "terms": "Offentlig bygning"
@@ -1654,6 +1740,10 @@
             "building/warehouse": {
                 "name": "Lager",
                 "terms": "Lager, Lagerhotel, Varelager"
+            },
+            "craft": {
+                "name": "Håndværk",
+                "terms": "Håndværk"
             },
             "craft/basket_maker": {
                 "name": "Kurvemager",
@@ -1835,6 +1925,10 @@
                 "name": "Vinduebygger",
                 "terms": "Vinduebygger"
             },
+            "craft/winery": {
+                "name": "Vingård",
+                "terms": "Vingård"
+            },
             "embankment": {
                 "name": "Forhøjning til tog, vej",
                 "terms": "Forhøjning"
@@ -1966,6 +2060,10 @@
             "highway/primary_link": {
                 "name": "Link til primær vej",
                 "terms": "Link til primær vej"
+            },
+            "highway/raceway": {
+                "name": "Racerbane",
+                "terms": "Racerbane, Motorsportsbane"
             },
             "highway/residential": {
                 "name": "Villavej",
@@ -2255,6 +2353,10 @@
                 "name": "Legeplads",
                 "terms": "Legeplads, Naturlegeplads, Børnelegeplads"
             },
+            "leisure/running_track": {
+                "name": "Løberute",
+                "terms": "Løberute, Løbespor, Motionsløberute"
+            },
             "leisure/slipway": {
                 "name": "Bådrampe",
                 "terms": "Bådrampe, Skibsrampe"
@@ -2272,8 +2374,8 @@
                 "terms": "Svømmebassin, Swimming Pool, Pool"
             },
             "leisure/track": {
-                "name": "Racerbane",
-                "terms": "Racerbane"
+                "name": "Racebane (ej motorspor)",
+                "terms": "Racebane (ej motorspor)"
             },
             "line": {
                 "name": "Linje",
@@ -2332,8 +2434,8 @@
                 "terms": "Vandtårn"
             },
             "man_made/water_well": {
-                "name": "Brønd",
-                "terms": "Brønd, Vandbrønd"
+                "name": "Vandbrønd",
+                "terms": "Vandbrønd"
             },
             "man_made/water_works": {
                 "name": "Vandforsyning",
@@ -2679,17 +2781,41 @@
                 "name": "Vinforhandler",
                 "terms": "Vinforhandler, Vinbutik, Vinforretning"
             },
+            "shop/anime": {
+                "name": "Animebutik",
+                "terms": "Animebutik, Animeforretning"
+            },
+            "shop/antiques": {
+                "name": "Antikvitetsforretning",
+                "terms": "Antikvitetsforretning, Antikvitetsbutik"
+            },
             "shop/art": {
-                "name": "Kunstbutik",
-                "terms": "Kunstbutik, Kunstforretning"
+                "name": "Kunstgalleri",
+                "terms": "Kunstgalleri"
+            },
+            "shop/baby_goods": {
+                "name": "Babyudstyrsbutik",
+                "terms": "Babyudstyrsbutik, Babyudstyrsforretning"
+            },
+            "shop/bag": {
+                "name": "Taske/Kuffertbutik",
+                "terms": "Taske/Kuffertbutik"
             },
             "shop/bakery": {
                 "name": "Bager",
                 "terms": "Bager, Bageri"
             },
+            "shop/bathroom_furnishing": {
+                "name": "Badeværelseindretningsbutik",
+                "terms": "Badeværelseindretningsbutik"
+            },
             "shop/beauty": {
                 "name": "Parfumebutik",
                 "terms": "Parfumebutik, Skønhedbutik"
+            },
+            "shop/bed": {
+                "name": "Sengetøj / Madras forhandler",
+                "terms": "Sengetøj / Madras forhandler"
             },
             "shop/beverages": {
                 "name": "Vinforhandler",
@@ -2715,6 +2841,10 @@
                 "name": "Slagter",
                 "terms": "Slagter, Slagterbutik, Slagterforretning"
             },
+            "shop/candles": {
+                "name": "Stearinlysforhandler",
+                "terms": "Stearinlysforhandler, Stearinlysbutik"
+            },
             "shop/car": {
                 "name": "Bilforhandler",
                 "terms": "Bilforhandler"
@@ -2727,9 +2857,21 @@
                 "name": "Autoværksted",
                 "terms": "Autoværksted, Bilværksted"
             },
+            "shop/carpet": {
+                "name": "Tæppeforhandler",
+                "terms": "Tæppeforhandler, Tæppeforretning"
+            },
+            "shop/cheese": {
+                "name": "Ostehandler",
+                "terms": "Ostehandler, Ostebutik, Osteforretning"
+            },
             "shop/chemist": {
                 "name": "Kemiforhandler",
                 "terms": "Kemiforhandler"
+            },
+            "shop/chocolate": {
+                "name": "Chokoladeforretning",
+                "terms": "Chokoladeforretning, Chokoladebutik"
             },
             "shop/clothes": {
                 "name": "Tøjbutik",
@@ -2741,11 +2883,31 @@
             },
             "shop/confectionery": {
                 "name": "Slikbutik",
-                "terms": "Slikbutik, Chokoladeforretning, Chokoladebutik, Slikforretning"
+                "terms": "Slikbutik, Slikforretning"
             },
             "shop/convenience": {
                 "name": "Minimarked",
                 "terms": "Minimarked, Minikøbmand"
+            },
+            "shop/copyshop": {
+                "name": "Fotokopishop",
+                "terms": "Fotokopishop"
+            },
+            "shop/cosmetics": {
+                "name": "Kosmetikbutik",
+                "terms": "Kosmetikbutik, Kosmetikforretning"
+            },
+            "shop/craft": {
+                "name": "Kunst- og håndværksbutik",
+                "terms": "Kunst- og håndværksbutik"
+            },
+            "shop/curtain": {
+                "name": "Gardinbutik",
+                "terms": "Gardinbutik, Gardinforretning"
+            },
+            "shop/dairy": {
+                "name": "Ismejeri",
+                "terms": "Ismejeri, Mejeri"
             },
             "shop/deli": {
                 "name": "Deli",
@@ -2760,16 +2922,28 @@
                 "terms": "Gør-det-selv butik"
             },
             "shop/dry_cleaning": {
-                "name": "Tøjrenseri",
-                "terms": "Tøjrenseri, Renseri"
+                "name": "Renseri",
+                "terms": "Renseri"
             },
             "shop/electronics": {
                 "name": "Elektronikbutik",
                 "terms": "Elektronikbutik"
             },
+            "shop/erotic": {
+                "name": "Erotikbutik",
+                "terms": "Erotikbutik, Sexlegetøjsbutik, Erotiklegetøjsforretning"
+            },
+            "shop/fabric": {
+                "name": "Fabriksudsalg",
+                "terms": "Fabriksudsalg"
+            },
             "shop/farm": {
                 "name": "Produktionstand",
                 "terms": "Produktionstand"
+            },
+            "shop/fashion": {
+                "name": "Modebutik",
+                "terms": "Modebutik"
             },
             "shop/fishmonger": {
                 "name": "Fiskeforretning",
@@ -2779,9 +2953,17 @@
                 "name": "Blomsterbutik",
                 "terms": "Blomsterbutik, Blomsterforretning"
             },
+            "shop/frame": {
+                "name": "Rammebutik",
+                "terms": "Rammebutik"
+            },
             "shop/funeral_directors": {
                 "name": "Bedemandsforretning",
                 "terms": "Bedemandsforretning, Begravelsesbutik"
+            },
+            "shop/furnace": {
+                "name": "Ovnbutik",
+                "terms": "Ovnbutik, Ovnforreting, Komfurhandler, Komfurbutik"
             },
             "shop/furniture": {
                 "name": "Møbelforhandler",
@@ -2807,21 +2989,41 @@
                 "name": "Værktøjsbutik",
                 "terms": "Værktøjsbutik"
             },
+            "shop/hearing_aids": {
+                "name": "Høreapparatbutik",
+                "terms": "Høreapparatbutik"
+            },
+            "shop/herbalist": {
+                "name": "Homopat",
+                "terms": "Homopat"
+            },
             "shop/hifi": {
                 "name": "Radioforhandler",
                 "terms": "Værktøjsbutik"
+            },
+            "shop/interior_decoration": {
+                "name": "Indendørsudsmykningsbutik",
+                "terms": "Indendørsudsmykningsbutik"
             },
             "shop/jewelry": {
                 "name": "Juvelér",
                 "terms": "Juvelér, Smykkeforretning"
             },
             "shop/kiosk": {
-                "name": "Kiosk",
-                "terms": "Kiosk"
+                "name": "Aviskiosk",
+                "terms": "Aviskiosk"
+            },
+            "shop/kitchen": {
+                "name": "Køkkenudstyrsbutik",
+                "terms": "Køkkenudstyrsbutik"
             },
             "shop/laundry": {
                 "name": "Vaskeri",
                 "terms": "Vaskeri, Møntvaskeri"
+            },
+            "shop/leather": {
+                "name": "Læderbutik",
+                "terms": "Læderbutik, Skinbutik"
             },
             "shop/locksmith": {
                 "name": "Låsesmed",
@@ -2835,9 +3037,21 @@
                 "name": "Indkøbscenter",
                 "terms": "Indkøbscenter"
             },
+            "shop/massage": {
+                "name": "Massagebutik",
+                "terms": "Massagebutik"
+            },
+            "shop/medical_supply": {
+                "name": "Håndkøbsmedicinforhandler",
+                "terms": "Håndkøbsmedicinforhandler"
+            },
             "shop/mobile_phone": {
                 "name": "Mobiltelefonforhandler",
                 "terms": "Mobiltelefonforhandler"
+            },
+            "shop/money_lender": {
+                "name": "Pengeudlåner",
+                "terms": "Pengeudlåner"
             },
             "shop/motorcycle": {
                 "name": "Motorcykelforhandler",
@@ -2847,17 +3061,33 @@
                 "name": "Musikbutik",
                 "terms": "Musikbutik, Musikforretning"
             },
+            "shop/musical_instrument": {
+                "name": "Musikinstrumentbutik",
+                "terms": "Musikinstrumentbutik, Musikinstrumentforretning"
+            },
             "shop/newsagent": {
-                "name": "Bladforhandler",
-                "terms": "Bladforhandler"
+                "name": "Avis/Bladforhandler",
+                "terms": "Avis/Bladforhandler"
             },
             "shop/optician": {
                 "name": "Optiker",
                 "terms": "Optiker, Optikerforretning"
             },
+            "shop/organic": {
+                "name": "Økologiskbutik",
+                "terms": "Økologiskbutik"
+            },
             "shop/outdoor": {
-                "name": "Friluftudstyrsbutik",
-                "terms": "Friluftudstyrsbutik"
+                "name": "Friluftsudstyrsbutik",
+                "terms": "Friluftsudstyrsbutik, Friluftsudstyrsforretning"
+            },
+            "shop/paint": {
+                "name": "Malerforretning",
+                "terms": "Malerforretning, Malerbutik"
+            },
+            "shop/pawnbroker": {
+                "name": "Panteudlåner",
+                "terms": "Panteudlåner"
             },
             "shop/pet": {
                 "name": "Kæledyrsbutik",
@@ -2867,9 +3097,29 @@
                 "name": "Fotoforretning",
                 "terms": "<Oversæt med synonymer eller relaterede termer for \"Fotoforretning\", adskilt af kommaer>"
             },
+            "shop/pyrotechnics": {
+                "name": "Fyrværkeributik",
+                "terms": "Fyrværkeributik, Fyrværkeriforretning"
+            },
+            "shop/radiotechnics": {
+                "name": "Radio/Elektronikbutik",
+                "terms": "Radio/Elektronikbutik"
+            },
+            "shop/religion": {
+                "name": "Religøs",
+                "terms": "Religøsbutik"
+            },
+            "shop/scuba_diving": {
+                "name": "Dykkerudstyrsbutik",
+                "terms": "Dykkerudstyrsbutik"
+            },
             "shop/seafood": {
                 "name": "Fiskehandler",
                 "terms": "Fiskehandler, Fiskebutik"
+            },
+            "shop/second_hand": {
+                "name": "Genbrugsbutik",
+                "terms": "Velgørenhedsbutik, Velgørenhedsforretning, Genbrugsbutik"
             },
             "shop/shoes": {
                 "name": "Skobutik",
@@ -2891,6 +3141,22 @@
                 "name": "Skrædder",
                 "terms": "Skrædder"
             },
+            "shop/tattoo": {
+                "name": "Tatovør",
+                "terms": "Tatovør, Tatovørforretning"
+            },
+            "shop/tea": {
+                "name": "Tebutik",
+                "terms": "Tebutik, Teforhandler"
+            },
+            "shop/ticket": {
+                "name": "Billetsælger",
+                "terms": "Billetsælger, Billetbutik"
+            },
+            "shop/tobacco": {
+                "name": "Tobaksforretning",
+                "terms": "Tobaksforretning, Cigarforhandler"
+            },
             "shop/toys": {
                 "name": "Legetøjsbutik",
                 "terms": "Legetøjsforretning, Legetøjsbutik"
@@ -2907,6 +3173,10 @@
                 "name": "Lukket butik (ingen salg pt)",
                 "terms": "Lukket butik (ingen salg pt)"
             },
+            "shop/vacuum_cleaner": {
+                "name": "Støvsugerforhandler",
+                "terms": "Støvsugerforhandler"
+            },
             "shop/variety_store": {
                 "name": "Spøg og skæmtbutik ",
                 "terms": "Spøg og skæmtbutik "
@@ -2914,6 +3184,22 @@
             "shop/video": {
                 "name": "Videobutik",
                 "terms": "Videobutik, Videoforretning, Videoudlejning"
+            },
+            "shop/video_games": {
+                "name": "Videospilbutik",
+                "terms": "Videospilbutik, Videospilforretning"
+            },
+            "shop/water_sports": {
+                "name": "Svømmesport/Svømmeudstyr butik",
+                "terms": "Svømmesport/Svømmeudstyr butik"
+            },
+            "shop/weapons": {
+                "name": "Våbenbutik",
+                "terms": "Våbenbutik, Våbenforretning"
+            },
+            "shop/window_blind": {
+                "name": "Persienneforhandler",
+                "terms": "Persienneforhandler, Persienneforretning"
             },
             "shop/wine": {
                 "name": "Vinforretning",

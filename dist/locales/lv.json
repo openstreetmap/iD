@@ -69,7 +69,6 @@
         },
         "delete": {
             "title": "Dzēst",
-            "description": "Izdzēst no kartes.",
             "annotation": {
                 "point": "Punkts dzēsts.",
                 "vertex": "Mezgls dzests.",
@@ -614,9 +613,6 @@
             "amenity/townhall": {
                 "name": "Pilsētas dome"
             },
-            "amenity/university": {
-                "name": "Universitāte"
-            },
             "barrier": {
                 "name": "Barjera"
             },
@@ -956,9 +952,6 @@
             "shop/bicycle": {
                 "name": "Velo veikals"
             },
-            "shop/books": {
-                "name": "Grāmatu veikals"
-            },
             "shop/boutique": {
                 "name": "Veikals"
             },
@@ -983,9 +976,6 @@
             "shop/computer": {
                 "name": "Datorveikals"
             },
-            "shop/confectionery": {
-                "name": "Saldumu veikals"
-            },
             "shop/convenience": {
                 "name": "Veikals"
             },
@@ -994,9 +984,6 @@
             },
             "shop/department_store": {
                 "name": "Lielveikals"
-            },
-            "shop/dry_cleaning": {
-                "name": "Ķīmiskā tīrītava"
             },
             "shop/electronics": {
                 "name": "Elektronikas veikals"
@@ -1022,9 +1009,6 @@
             "shop/jewelry": {
                 "name": "Juvelieris"
             },
-            "shop/kiosk": {
-                "name": "Kiosks"
-            },
             "shop/laundry": {
                 "name": "Veļas mazgātuve"
             },
@@ -1042,9 +1026,6 @@
             },
             "shop/optician": {
                 "name": "Optometrists"
-            },
-            "shop/outdoor": {
-                "name": "Aktīvās atpūtas veikals"
             },
             "shop/pet": {
                 "name": "Dzīvnieku veikals"

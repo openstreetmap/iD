@@ -8,7 +8,7 @@
         "add_line": {
             "title": "Linie",
             "description": "Füge Autobahnen, Straßen, Fußwege, Kanäle oder andere Linien zur Karte hinzu.",
-            "tail": "Klicke in die Karte, um das Zeichnen einer Straße, eines Pfades oder einer Route zu starten."
+            "tail": "Klicke auf die Karte, um das Zeichnen einer Straße, eines Pfades oder eines Weges zu starten."
         },
         "add_point": {
             "title": "Punkt",
@@ -17,7 +17,7 @@
         },
         "browse": {
             "title": "Durchsuchen",
-            "description": "Verschieben und Vergrößern/Verkleinern des Kartenausschnitts."
+            "description": "Verschiebe und zoome die Karte."
         },
         "draw_area": {
             "tail": "Klicke, um Punkte zur Fläche hinzuzufügen. Klicke auf den ersten Punkt, um die Fläche abzuschließen."
@@ -71,8 +71,8 @@
                 "line": "Eine Fläche abgerundet",
                 "area": "Eine Fläche kreisförmig gemacht"
             },
-            "not_closed": "Dieses Objekt kann nicht kreisförmig gemacht werden, da es keine geschlossene Linie ist.",
-            "too_large": "Die Elemente können nicht kreisförmig gemacht werden, weil zu wenig sichtbar ist."
+            "not_closed": "Dieses Objekt kann nicht kreisförmig gemacht werden, da es keine Schleife ist.",
+            "too_large": "Dieses Objekt kann nicht kreisförmig gemacht werden, weil zu wenig sichtbar ist."
         },
         "orthogonalize": {
             "title": "Rechteck",
@@ -86,7 +86,7 @@
                 "area": "Die Ecken einer Fläche rechtwinklig ausgerichtet."
             },
             "not_squarish": "Dieses Objekt kann nicht rechtwinklig gemacht werden, da es nicht annähernd rechtwinklig ist.",
-            "too_large": "Die Elemente können nicht quadratisch gemacht werden, weil zu wenig sichtbar ist."
+            "too_large": "Dieses Objekt kann nicht quadratisch gemacht werden, weil zu wenig sichtbar ist."
         },
         "straighten": {
             "title": "Begradigen",
@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "Löschen",
-            "description": "Lösche dies aus der Karte.",
+            "description": "Objekt löschen.",
             "annotation": {
                 "point": "Punkt gelöscht.",
                 "vertex": "Punkt aus einem Weg gelöscht.",
@@ -151,7 +151,7 @@
                 "multiple": "Mehrere Objekte verschoben."
             },
             "incomplete_relation": "Dieses Objekt kann nicht verschoben werden, da es nicht vollständig heruntergeladen wurde.",
-            "too_large": "Das Objekt kann nicht bewegt werden, weil nicht genug davon sichtbar ist."
+            "too_large": "Dieses Objekt kann nicht bewegt werden, weil nicht genug davon sichtbar ist."
         },
         "rotate": {
             "title": "Drehen",
@@ -350,6 +350,11 @@
         "zoom": "Zur GPX-Spur zoomen",
         "browse": "Eine GPX-Datei laden"
     },
+    "mapillary": {
+        "tooltip": "Fotos auf Straßenhöhe von Mapillary",
+        "title": "Fotoeinblendung (Mapillary)",
+        "view_on_mapillary": "Dieses Bild auf Mapillary ansehen"
+    },
     "help": {
         "title": "Hilfe",
         "help": "#Hilfe\n\nDies ist ein Editor für [OpenStreetMap](http://www.openstreetmap.org/), der freien und editierbaren Weltkarte. Du kannst ihn verwenden, um Daten in deiner Umgebung hinzuzufügen oder zu verändern und so diese Karte mit freien Quellen und freien Daten für jeden verbessern.\n\nVeränderungen werden für alle Nutzer von OpenStreetMap sichtbar. Um Veränderungen vornehmen zu können, musst du ein [kostenloses OpenStreetMap-Profil](https://www.openstreetmap.org/user/new) anlegen.\n\nDer [iD-Editor](http://ideditor.com/) ist ein Gemeinschaftsprojekt dessen [Quellcode\nauf GitHub verfügbar ist](https://github.com/openstreetmap/iD).\n",
@@ -385,20 +390,20 @@
         },
         "areas": {
             "title": "Flächen",
-            "add": "Flächen sind eine Möglichkeit, Objekte detailliert wiederzugeben. Diese bieten Information über die Grenzen des Objektes. Flächen können fast immer da verwendet werden, wo auch Knoten Verwendung finden, werden aber oft bevorzugt. **Benutze den Flächen-Knopf, um ein neues Gebiet hinzuzufügen.**",
+            "add": "Flächen werden benutzt um Grenzen von Objekten wie Seen, Gebäuden oder Wohngebieten zu erfassen. Sie können auch benutzt werden um viele Objekte die normalerweise als Punkte erfasst werden detaillierter zu erfassen. **Klicke auf den Knopf Fläche um eine neue Fläche hinzuzufügen.**",
             "corner": "Flächen werden gezeichnet, indem man Punkte platziert, die den Umriss der Fläche repräsentieren. **Setze den Startpunkt auf eine Ecke des Spielplatzes.**",
             "place": "Zeichne eine Fläche, indem du mehr Punkte hinzufügst. Beende die Fläche, indem du auf den Startpunkt klickst. **Zeichne eine Fläche für den Spielplatz.**",
             "search": "**Suche nach '{name}'.**",
-            "choose": "**Wähle \"Spielplatz\" aus der Liste aus.**",
+            "choose": "**Wähle Spielplatz aus der Liste aus.**",
             "describe": "**Füge einen Namen hinzu und schließe den Objekteditor.**"
         },
         "lines": {
             "title": "Linien",
-            "add": "Linien werden verwendet um Sachen wie Straßen, Bahngleise und Flüsse zu erzeugen. **Klicke auf den Linien-Knopf um eine neue Linie zu zeichnen.**",
+            "add": "Linien werden verwendet um Objekte wie Straßen, Bahngleise und Flüsse zu erzeugen. **Klicke auf den Linien-Knopf um eine neue Linie zu zeichnen.**",
             "start": "**Beginne die Linie, indem du auf das Ende der Straße klickst.**",
             "intersect": "Klicke, um mehr Punkte zu einer Linie hinzuzufügen. Du kannst während des Zeichnens die Karte verschieben. Straßen und andere Wege sind Teil eines großen Netzwerkes und müssen ordnungsgemäß miteinander verbunden sein, um sie für Routenführung nutzen zu können. **Klicke auf die \"Flower Street\", um eine Kreuzung zu erzeugen und beide Linien zu verbinden.**",
             "finish": "Linien können vollendet werden, indem man den letzten Punkt erneut anklickt **Beende das Zeichnen der Straße.**",
-            "road": "**Wähle \"Straße\" aus der Liste aus.**",
+            "road": "**Wähle Straße aus der Liste aus.**",
             "residential": "Es gibt verschiedene Straßenarten, die häufigste ist die Wohngebietsstraße. **Wähle die Wohngebietsstraße.**",
             "describe": "**Benenne die Straße und schließe den Objekteditor.**",
             "restart": "Die Straße muss die Flower Street schneiden.",
@@ -624,6 +629,9 @@
             "covered": {
                 "label": "Überdacht / Verdeckt"
             },
+            "craft": {
+                "label": "Typ"
+            },
             "crop": {
                 "label": "Ernte"
             },
@@ -684,7 +692,7 @@
                 "label": "Korrigiere mich"
             },
             "fuel": {
-                "label": "Treibstogg"
+                "label": "Brennstoff"
             },
             "fuel/biodiesel": {
                 "label": "Verkauft Biodiesel"
@@ -1050,6 +1058,9 @@
             "sport_ice": {
                 "label": "Sport"
             },
+            "sport_racing": {
+                "label": "Sport"
+            },
             "structure": {
                 "label": "Struktur",
                 "placeholder": "Unbekannt",
@@ -1270,6 +1281,10 @@
                 "name": "Bootvermietung",
                 "terms": "Bootsverleih"
             },
+            "amenity/bureau_de_change": {
+                "name": "Wechselstube",
+                "terms": "Wechselstube, Geldwechselgeschäft, Währungsumtauschgeschäft, Bargeldumtauschgeschäft"
+            },
             "amenity/bus_station": {
                 "name": "Busbahnhof",
                 "terms": "Omnibusbahnhof, ZOB"
@@ -1295,8 +1310,8 @@
                 "terms": "Ladestation"
             },
             "amenity/childcare": {
-                "name": "Kindertagesbetreuung",
-                "terms": "Hort"
+                "name": "Kindertagesstätte/Kinderbetreuung",
+                "terms": "Kindergarten,Kinderkrippe,"
             },
             "amenity/cinema": {
                 "name": "Kino",
@@ -1311,8 +1326,8 @@
                 "terms": "Uhr, Turmuhr, Kirchenuhr"
             },
             "amenity/college": {
-                "name": "Hochschule",
-                "terms": "Hochschule, Kolleg"
+                "name": "Hochschulgelände",
+                "terms": "Schulgelände,Collegegeglände"
             },
             "amenity/compressed_air": {
                 "name": "Druckluft",
@@ -1367,8 +1382,8 @@
                 "terms": "Krankenhaus, Klinik, Klinikgelände, Hospital"
             },
             "amenity/kindergarten": {
-                "name": "Kindergarten",
-                "terms": "Kindergarten, Spielplatz, Sandkasten"
+                "name": "Vorschul-/Kindergartengelände",
+                "terms": "Kindergartengeläde,Kinderkrippengelände"
             },
             "amenity/library": {
                 "name": "Bibliothek",
@@ -1459,8 +1474,8 @@
                 "terms": "Essensausgabe, Sozialmarkt"
             },
             "amenity/social_facility/group_home": {
-                "name": "Wohngemeinschaft",
-                "terms": "Wohngemeinschaft, Gemeinschaftswohnen"
+                "name": "Seniorenresidenz",
+                "terms": "Seniorenresidenz,betreutes Seniorenwohnen"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Obdachlosenheim",
@@ -1495,8 +1510,8 @@
                 "terms": "Gemeindezentrum,Stadtverwaltung,Landratsamt,Rathaus,Verwaltungszentrum"
             },
             "amenity/university": {
-                "name": "Universität",
-                "terms": "Universität, Hochschule"
+                "name": "Universitätsgelände",
+                "terms": "Universitätsgelände,Universitätscampus"
             },
             "amenity/vending_machine": {
                 "name": "Automat",
@@ -1618,6 +1633,10 @@
                 "name": "Kirche",
                 "terms": "Kirche"
             },
+            "building/college": {
+                "name": "Hochschulgebäude",
+                "terms": "Schulgebäude"
+            },
             "building/commercial": {
                 "name": "Geschäftshaus",
                 "terms": "Gewerbehaus,gewerblich genutztes Gebäude,"
@@ -1670,6 +1689,10 @@
                 "name": "Industriegebäude",
                 "terms": "Industriegebäude"
             },
+            "building/kindergarten": {
+                "name": "Vorschul-/Kindergartengebäude",
+                "terms": "Kindergartengebäude,Kinderkrippengebäude"
+            },
             "building/public": {
                 "name": "Öffentliches Gebäude",
                 "terms": "Öffentliches Gebäude"
@@ -1717,6 +1740,10 @@
             "building/warehouse": {
                 "name": "Lagerhalle",
                 "terms": "Lagerhaus, Lagergebäude"
+            },
+            "craft": {
+                "name": "Handwerk",
+                "terms": "Kunsthandwerk"
             },
             "craft/basket_maker": {
                 "name": "Korbflechter",
@@ -1898,6 +1925,10 @@
                 "name": "Fensterbauer",
                 "terms": "Fensterbauer, Fensterhersteller, Fenstererzeuger"
             },
+            "craft/winery": {
+                "name": "Weingut",
+                "terms": "Weingut,Weinkellerei"
+            },
             "embankment": {
                 "name": "Fahrdamm",
                 "terms": "Damm"
@@ -2029,6 +2060,10 @@
             "highway/primary_link": {
                 "name": "Bundesstraßenanschluss",
                 "terms": "Bundesstraßenanschluss, Bundesstraßenauffahrt, Bundesstraßenabfahrt, Auffahrt, Abfahrt"
+            },
+            "highway/raceway": {
+                "name": "Autorennstrecke",
+                "terms": "Autorennstrecke"
             },
             "highway/residential": {
                 "name": "Wohngebietsstraße",
@@ -2318,6 +2353,10 @@
                 "name": "Spielplatz",
                 "terms": "Kinderspielplatz,Klettergerüst"
             },
+            "leisure/running_track": {
+                "name": "Laufbahn",
+                "terms": "Laufbahn.Fahrstraße"
+            },
             "leisure/slipway": {
                 "name": "Slipanlage",
                 "terms": "Gleitbahn, Rampe"
@@ -2335,8 +2374,8 @@
                 "terms": "Schwimmbecken"
             },
             "leisure/track": {
-                "name": "Rennstrecke",
-                "terms": "Rennstrecke"
+                "name": "Rennbahn (nicht-Motorsport)",
+                "terms": "Rennbahn (Nicht Motorsport),Rennstrecke (Nicht Motorsport)"
             },
             "line": {
                 "name": "Linie",
@@ -2395,8 +2434,8 @@
                 "terms": "Wasserturm"
             },
             "man_made/water_well": {
-                "name": "Brunnen",
-                "terms": "Tiefbrunnen, Brunnen"
+                "name": "Wasserbrunnen",
+                "terms": "Wasserbrunnen,Brunnen"
             },
             "man_made/water_works": {
                 "name": "Wasserwerk",
@@ -2742,17 +2781,41 @@
                 "name": "Spirituosenladen",
                 "terms": "Alkohol"
             },
+            "shop/anime": {
+                "name": "Zeichentrickladen",
+                "terms": "Zeichentrickladen,Zeichentrickgeschäft"
+            },
+            "shop/antiques": {
+                "name": "Antiquitätenladen",
+                "terms": "Antiquitätengeschäft"
+            },
             "shop/art": {
                 "name": "Kunsthandlung",
-                "terms": "Kunsthandlung, Kunstladen"
+                "terms": "Kunstgalerie"
+            },
+            "shop/baby_goods": {
+                "name": "Babysachengeschäft",
+                "terms": "Babysachengeschäft,Babybekleidungsgeschäft,Babygeschäft"
+            },
+            "shop/bag": {
+                "name": "Taschen/Koffer-Geschäft",
+                "terms": "Taschen/Koffer-Geschäft,Reisegepäckgeschäft"
             },
             "shop/bakery": {
                 "name": "Bäckerei",
                 "terms": "Bäckerei"
             },
+            "shop/bathroom_furnishing": {
+                "name": "Badeinrichtungsgeschäft",
+                "terms": "Badezimmereinrichtungsgeschäft,Badeinrichtungsgeschäft"
+            },
             "shop/beauty": {
                 "name": "Kosmetikladen",
                 "terms": "Schönheits-Salon, Nagelstudio"
+            },
+            "shop/bed": {
+                "name": "Betten/Matratzengeschäft",
+                "terms": "Matratzengeschäft,Schlafzimmerbedarf,Bettengeschäft,Schlafzimmereinrichtungsgeschäft"
             },
             "shop/beverages": {
                 "name": "Getränkeladen",
@@ -2767,8 +2830,8 @@
                 "terms": "Buchmacher"
             },
             "shop/books": {
-                "name": "Buchhandlung",
-                "terms": "Buchhandlung, Buchladen"
+                "name": "Buchladen",
+                "terms": "Buchhandlung"
             },
             "shop/boutique": {
                 "name": "Boutique",
@@ -2777,6 +2840,10 @@
             "shop/butcher": {
                 "name": "Fleischer",
                 "terms": "Fleischer, Schlachter"
+            },
+            "shop/candles": {
+                "name": "Kerzengeschäft",
+                "terms": "Kerzenhandlung"
             },
             "shop/car": {
                 "name": "Autohändler",
@@ -2790,9 +2857,21 @@
                 "name": "Autowerkstatt",
                 "terms": "Autowerkstatt, Kfz-Werkstatt, Autoreparatur"
             },
+            "shop/carpet": {
+                "name": "Teppichgeschäft",
+                "terms": "Teppichhändler"
+            },
+            "shop/cheese": {
+                "name": "Käseladen",
+                "terms": "Käseladen"
+            },
             "shop/chemist": {
                 "name": "Drogerie",
                 "terms": "Drogerie"
+            },
+            "shop/chocolate": {
+                "name": "Schokoladeladen",
+                "terms": "Schokoladeladen,Schokoladegeschäft"
             },
             "shop/clothes": {
                 "name": "Bekleidungsgeschäft",
@@ -2803,12 +2882,32 @@
                 "terms": "Computergeschäft"
             },
             "shop/confectionery": {
-                "name": "Süßwarenladen",
-                "terms": "Süßigkeiten-Laden,Bonbonkocherei"
+                "name": "Süßigkeitengeschäft",
+                "terms": "Süßigkeitenladen,Süßigkeitengeschäft"
             },
             "shop/convenience": {
                 "name": "Gemischtwarenhandel",
                 "terms": "Gemischtwarenladen, Kaufgeschäft"
+            },
+            "shop/copyshop": {
+                "name": "Kopierladen",
+                "terms": "Kopieranstalt,Copy-Shop"
+            },
+            "shop/cosmetics": {
+                "name": "Drogerie",
+                "terms": "Drogerie,Kosmetikladen"
+            },
+            "shop/craft": {
+                "name": "Kunsthandwerkgeschäft",
+                "terms": "Kunsthandwerkgeschäft"
+            },
+            "shop/curtain": {
+                "name": "Vorhanggeschäft",
+                "terms": "Gardinenladen,Vorhanggeschäft"
+            },
+            "shop/dairy": {
+                "name": "Milchgeschäft",
+                "terms": "Milchladen,Milchproduktegeschäft"
             },
             "shop/deli": {
                 "name": "Feinkostladen",
@@ -2824,15 +2923,27 @@
             },
             "shop/dry_cleaning": {
                 "name": "Chemische Reinigung",
-                "terms": "Chemische Reinigung"
+                "terms": "Reinigung,Putzerei"
             },
             "shop/electronics": {
                 "name": "Elektronikfachgeschäft",
                 "terms": "Elektro-Geschäft, Elektronik-Geschäft"
             },
+            "shop/erotic": {
+                "name": "Erotikgeschäft",
+                "terms": "Erotikladen"
+            },
+            "shop/fabric": {
+                "name": "Boutique",
+                "terms": "Boutique,Bekleidungsgeschäft"
+            },
             "shop/farm": {
                 "name": "Obst- und Gemüsestand",
                 "terms": "Hofladen"
+            },
+            "shop/fashion": {
+                "name": "Modegeschäft",
+                "terms": "Modegeschäft,Boutique"
             },
             "shop/fishmonger": {
                 "name": "Fischhändler",
@@ -2842,9 +2953,17 @@
                 "name": "Blumenhändler",
                 "terms": "Florist, Blumenladen, Blumengeschäft"
             },
+            "shop/frame": {
+                "name": "Bilderrahmengeschäft",
+                "terms": "Bilderrahmengeschäft"
+            },
             "shop/funeral_directors": {
                 "name": "Beerdigungsinstitut",
                 "terms": "Beerdigungsinstitut, Bestattungsinstitut, Bestattungsunternehmen"
+            },
+            "shop/furnace": {
+                "name": "Heizungsinstallateur",
+                "terms": "Heizungstechniker,Zentralheizungstechnikladen"
             },
             "shop/furniture": {
                 "name": "Möbelhaus",
@@ -2870,21 +2989,41 @@
                 "name": "Eisenwarenhandel",
                 "terms": "Baustoffmarkt, Baustoff-Handlung"
             },
+            "shop/hearing_aids": {
+                "name": "Hörgerätegeschäft",
+                "terms": "Hörgerätegeschäft,Hörhilfengeschäft"
+            },
+            "shop/herbalist": {
+                "name": "Kräuterladen",
+                "terms": "Naturheilkundigearzt,Kräuterarzt"
+            },
             "shop/hifi": {
                 "name": "Hifi-Laden",
                 "terms": "Hifi Geschäft"
+            },
+            "shop/interior_decoration": {
+                "name": "Innenausstattungsgeschäft",
+                "terms": "Inneneinrichter,Inneneinrichtungsgeschäft,Innenausstatter,Innendekorateur,Innenraumgestalter"
             },
             "shop/jewelry": {
                 "name": "Juwelier",
                 "terms": "Juwelier, Schmuckgeschäft"
             },
             "shop/kiosk": {
-                "name": "Kiosk",
-                "terms": "Kiosk, Bude"
+                "name": "Zeitungskiosk",
+                "terms": "Zeitschriftenkiosk,Zeitungskiosk"
+            },
+            "shop/kitchen": {
+                "name": "Kücheneinrichtungsgeschäft",
+                "terms": "Kücheneinrichter,Kücheneinrichtungsgeschäft"
             },
             "shop/laundry": {
                 "name": "Wäscherei",
                 "terms": "Wäscherei"
+            },
+            "shop/leather": {
+                "name": "Lederbekleidungsgeschäft",
+                "terms": "Lederwarengeschäft"
             },
             "shop/locksmith": {
                 "name": "Schlosser",
@@ -2898,9 +3037,21 @@
                 "name": "Einkaufzentrum",
                 "terms": "Einkaufszentrum, Mall"
             },
+            "shop/massage": {
+                "name": "Massagesalon",
+                "terms": "Massagesalon,Masseur"
+            },
+            "shop/medical_supply": {
+                "name": "Medizinbedarfgeschäft",
+                "terms": "Drogerie,Medizinbedarf"
+            },
             "shop/mobile_phone": {
                 "name": "Mobiltelefonladen",
                 "terms": "Handygeschäft"
+            },
+            "shop/money_lender": {
+                "name": "Geldverleiher",
+                "terms": "Geldleiher,Pfandleiher"
             },
             "shop/motorcycle": {
                 "name": "Motorradhändler",
@@ -2910,17 +3061,33 @@
                 "name": "Musikgeschäft",
                 "terms": "Musikladen, Musikgeschäft"
             },
+            "shop/musical_instrument": {
+                "name": "Musikinstrumentegeschäft",
+                "terms": "Musikinstrumentengeschäft,Instrumentenladen"
+            },
             "shop/newsagent": {
-                "name": "Zeitschriftenladen",
-                "terms": "Zeitungsladen"
+                "name": "Zeitungs/Magazin-Geschäft",
+                "terms": "Zeitungs/Zeitschriftenladen"
             },
             "shop/optician": {
                 "name": "Optiker",
                 "terms": "Optiker"
             },
+            "shop/organic": {
+                "name": "Bioladen",
+                "terms": "Bioladen,Biolebensmittelhändler"
+            },
             "shop/outdoor": {
-                "name": "Outdoor-Geschäft",
-                "terms": "Outdoor-Laden"
+                "name": "Outdoorgeschäft",
+                "terms": "Outdoorgeschäft,Sportbekleidungsgeschäft"
+            },
+            "shop/paint": {
+                "name": "Farbengeschäft",
+                "terms": "Farbengeschäft,Malerbedarf,Anstreicherbedarf"
+            },
+            "shop/pawnbroker": {
+                "name": "Pfandleiher",
+                "terms": "Leihhaus,Pfandleihhaus"
             },
             "shop/pet": {
                 "name": "Tierhandlung",
@@ -2930,9 +3097,29 @@
                 "name": "Fotofachgeschäft",
                 "terms": "Fotoladen, Fotograf, Fotogeschäft"
             },
+            "shop/pyrotechnics": {
+                "name": "Feuerwerksgeschäft",
+                "terms": "Feuerwerksartikelladen,Feuerwerkskörpergeschäft"
+            },
+            "shop/radiotechnics": {
+                "name": "Radio/Elektronik-Geschäft",
+                "terms": "Elektronikladen,Radio/Elektro-Laden"
+            },
+            "shop/religion": {
+                "name": "Relegionsgeschäft",
+                "terms": "Religionsbedarfsladen,Klosterladen,Kirchenladen"
+            },
+            "shop/scuba_diving": {
+                "name": "Tauchwarengeschäft",
+                "terms": "Tauchladen,Sporttauchladen"
+            },
             "shop/seafood": {
                 "name": "Fischgeschäft",
                 "terms": "Fischgeschäft, Meeresfrüchtegeschäft"
+            },
+            "shop/second_hand": {
+                "name": "Spediteur",
+                "terms": "Spediteur,Speditionsgeschäft"
             },
             "shop/shoes": {
                 "name": "Schuhgeschäft",
@@ -2954,6 +3141,22 @@
                 "name": "Schneider",
                 "terms": "Schneider, Herrenschneider"
             },
+            "shop/tattoo": {
+                "name": "Tätowierungsladen",
+                "terms": "Tätowierungsladen,Peckerlstube"
+            },
+            "shop/tea": {
+                "name": "Teegeschäft",
+                "terms": "Teegeschäft,Teeladen"
+            },
+            "shop/ticket": {
+                "name": "Eintrittskartenverkäufer",
+                "terms": "Ticketoffice,Kartenbüro,Eintrittskartengeschäft"
+            },
+            "shop/tobacco": {
+                "name": "Trafik",
+                "terms": "Traffik,Tabakwarengeschäft"
+            },
             "shop/toys": {
                 "name": "Spielwarengeschäft",
                 "terms": "Spielwarengeschäft, Spielzeughandlung, Spielzeugladen, Spielzeuggeschäft"
@@ -2970,6 +3173,10 @@
                 "name": "Freistehendes Geschäft",
                 "terms": "leer stehendes Geschäft"
             },
+            "shop/vacuum_cleaner": {
+                "name": "Staubsaugergeschäft",
+                "terms": "Staubsaugergeschäft,Staubsaugerladen"
+            },
             "shop/variety_store": {
                 "name": "Gemischtwarenhandel",
                 "terms": "Gemischtwarenladen, Kaufgeschäft"
@@ -2977,6 +3184,22 @@
             "shop/video": {
                 "name": "Videothek",
                 "terms": "Video-Geschäft, DVD-Geschäft"
+            },
+            "shop/video_games": {
+                "name": "Videospielgeschäft",
+                "terms": "Videospielladen,Videospielgeschäft"
+            },
+            "shop/water_sports": {
+                "name": "Wassersportgeschäft",
+                "terms": "Wassersportladen,Schwimmbedarf"
+            },
+            "shop/weapons": {
+                "name": "Waffengeschäft",
+                "terms": "Waffengeschäft,Waffenhändler"
+            },
+            "shop/window_blind": {
+                "name": "Fensterladengeschäft",
+                "terms": "Fensterladengeschäft,Rolladengeschäft"
             },
             "shop/wine": {
                 "name": "Vinothek",

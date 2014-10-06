@@ -75,7 +75,6 @@
         },
         "delete": {
             "title": "删除",
-            "description": "从地图中删除此。",
             "annotation": {
                 "point": "删除一个点。",
                 "vertex": "删除线上一个结点。",
@@ -310,7 +309,6 @@
         },
         "areas": {
             "title": "面。",
-            "add": "面能较详细地代表物件，提供该物件的边界资料。大部份以点可以代表的物件类别，都可以用区域代表，而后者往往更为适合。 **点击「区域」按钮，以新增一个新面**",
             "corner": "透过将节点放到面的边界上，可绘制面。 **将起始节点置于游乐场的其中一角**",
             "place": "放置更多节点，以勾画该面。点击起始节点以完成绘制面。 **绘制一区域以代表游乐场**",
             "search": "**搜寻'{名称}'。**",
@@ -711,9 +709,6 @@
             "amenity/cinema": {
                 "name": "电影院"
             },
-            "amenity/college": {
-                "name": "学院"
-            },
             "amenity/courthouse": {
                 "name": "法院"
             },
@@ -785,9 +780,6 @@
             },
             "amenity/townhall": {
                 "name": "市政府"
-            },
-            "amenity/university": {
-                "name": "大学"
             },
             "amenity/waste_basket": {
                 "name": "垃圾箱"
@@ -1119,9 +1111,6 @@
             "man_made/water_tower": {
                 "name": "水塔"
             },
-            "man_made/water_well": {
-                "name": "水井"
-            },
             "man_made/water_works": {
                 "name": "水务设施"
             },
@@ -1284,9 +1273,6 @@
             "shop/bicycle": {
                 "name": "自行车店"
             },
-            "shop/books": {
-                "name": "书店"
-            },
             "shop/boutique": {
                 "name": "精品店"
             },
@@ -1311,9 +1297,6 @@
             "shop/computer": {
                 "name": "电脑店"
             },
-            "shop/confectionery": {
-                "name": "甜点店"
-            },
             "shop/convenience": {
                 "name": "便利店"
             },
@@ -1325,9 +1308,6 @@
             },
             "shop/doityourself": {
                 "name": "DIY商店"
-            },
-            "shop/dry_cleaning": {
-                "name": "干洗店"
             },
             "shop/electronics": {
                 "name": "电器店"
@@ -1362,9 +1342,6 @@
             "shop/jewelry": {
                 "name": "珠宝店"
             },
-            "shop/kiosk": {
-                "name": "报刊亭"
-            },
             "shop/laundry": {
                 "name": "洗衣店"
             },
@@ -1380,14 +1357,8 @@
             "shop/music": {
                 "name": "音乐店"
             },
-            "shop/newsagent": {
-                "name": "报摊"
-            },
             "shop/optician": {
                 "name": "眼镜店"
-            },
-            "shop/outdoor": {
-                "name": "户外用品店"
             },
             "shop/pet": {
                 "name": "宠物店"

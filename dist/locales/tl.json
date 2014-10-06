@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "Burahin",
-            "description": "Burahin ito sa mapa.",
+            "description": "Permanenteng burahin ito. ",
             "annotation": {
                 "point": "Binura ang isang point o tuldok.",
                 "vertex": "Binura ang isang node mula sa way o linya.",
@@ -377,7 +377,6 @@
         },
         "areas": {
             "title": "Mga area o poligon",
-            "add": "Ang mga area o poligon ay mas detalyadong paraan upang kumatawan sa mga tampok. Nagbibigay ang mga ito ng impormasyon sa mga hangganan o boundary ng lugar. Ang karamihan ng maaring i-mapa gamit ang puntos ay pwede rin i-katawan bilang area o poligon. **I-click ang button para sa Area upang magdagdag ng bagong area o poligon.**",
             "corner": "Ang paglikha ng area o poligon ay sa pamamagitan ng paglalagay node sa paligid ng mga hangganan ng lugar. **Ilagay ang unang node sa isa sa mga sulok ng palaruan.**",
             "place": "Ipagpatuloy ang pag-guhit ng area o pligon sa pamamagitan ng paglalagay ng higit pang mga node. Tapusin ito sa pamamagitan ng pag-click sa umpisang node. ** Gumuhit ng area o pilgon ng palaruan.**",
             "search": "**Hanapin ang '{name}'.**",

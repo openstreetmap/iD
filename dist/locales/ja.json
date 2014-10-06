@@ -97,7 +97,7 @@
         },
         "delete": {
             "title": "削除",
-            "description": "この地物をマップから削除",
+            "description": "オブジェクトを完全に削除",
             "annotation": {
                 "point": "ポイントを削除",
                 "vertex": "ウェイ上のノードを削除",
@@ -350,6 +350,11 @@
         "zoom": "GPX軌跡へズーム",
         "browse": ".gpxファイル追加"
     },
+    "mapillary": {
+        "tooltip": "Mapillaryによる通りレベルの写真",
+        "title": "写真の重ね合わせ (Mapillary)",
+        "view_on_mapillary": "この画像をMapillaryで表示"
+    },
     "help": {
         "title": "ヘルプ",
         "help": "# ヘルプ\n\nこのアプリケーションは、自由に編集できる世界地図 [OpenStreetMap](http://www.openstreetmap.org/)のエディターです。このエディターを利用して、あなたの地域のデータを追加したり更新したりして、誰にとってもより便利なオープンソースかつオープンデータの世界地図を作成できます。\n\nあなたが編集した結果は、OpenStreetMapを利用するすべての人が閲覧することができます。編集するためには [無料のOpenStreetMapアカウント](https://www.openstreetmap.org/user/new) が必要です。\n\nこの [iDエディター](http://ideditor.com/) は[GitHub上のソースコード](https://github.com/openstreetmap/iD)による協力型プロジェクトです。\n",
@@ -385,7 +390,7 @@
         },
         "areas": {
             "title": "エリア",
-            "add": "エリアで描くことで、その地物をより詳細に表現してみましょう。 ポイントと違い、エリアではその地物の境界線を表現することが可能です。 ポイントで表現している地物のほとんどは、エリアとしても描くことが可能です。 **エリアボタンをクリックすることで、新しいエリアを描くことができます。**",
+            "add": "エリアは、湖や建物、住宅区域などの地物の境界線を表現するために使われます。エリアを使うことで、ポイントよりも詳しく地物をマッピングできることが多く存在します。 **エリアボタンをクリックして、新しいエリアを描いてみましょう。**",
             "corner": "複数のポイントを描くことで、エリアの境界線を表現することができます。**エリアを作成して、児童公園を描いてみましょう。**",
             "place": "ノードを描くことで、エリアを表現することができます。エリアの描画を完了するには、描き始めたノードをもう一度クリックしてください。**エリアを作成して、児童公園を描いてみましょう。**",
             "search": "** '{name}' を検索してみましょう **",
@@ -624,6 +629,9 @@
             "covered": {
                 "label": "屋根"
             },
+            "craft": {
+                "label": "タイプ"
+            },
             "crop": {
                 "label": "収穫物"
             },
@@ -802,13 +810,39 @@
                 "placeholder": "40, 50, 60..."
             },
             "mtb/scale": {
-                "label": "マウンテンバイクの困難さ",
+                "label": "マウンテンバイク難易度",
                 "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: 硬い砂利/圧縮土、障害物なし、緩いカーブ",
                     "1": "1: いくらか緩んだ表面、小さな障害物、緩いカーブ",
                     "2": "2: とても緩んだ表面、大きな障害物、容易なヘアピンカーブ",
-                    "3": "3: 滑りやすい表面、大きな障害物、きついヘアピンカーブ"
+                    "3": "3: 滑りやすい表面、大きな障害物、きついヘアピンカーブ",
+                    "4": "4: 緩んだ地面や杭、危険なヘアピンカーブ",
+                    "5": "5: 最大の難しさ、漂礫地や地滑り",
+                    "6": "6: 最上級のマウンテンバイクでなければ乗れない"
+                }
+            },
+            "mtb/scale/imba": {
+                "label": "IMBAトレイル難易度",
+                "placeholder": "初級者、中級者、上級者...",
+                "options": {
+                    "0": "非常に容易 (白い円)",
+                    "1": "容易 (緑色の円)",
+                    "2": "中程度 (青い四角形)",
+                    "3": "困難 (黒いひし形)",
+                    "4": "非常に困難 (黒いひし形2つ)"
+                }
+            },
+            "mtb/scale/uphill": {
+                "label": "マウンテンバイク登山難易度",
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: 平均10%未満の傾斜、地面は舗装/圧縮、障害物なし",
+                    "1": "1: 平均15%未満の傾斜、地面は舗装/圧縮、小さな障害物あり",
+                    "2": "2: 平均20%未満の傾斜、安定した地面、それなりの石や木の根がある",
+                    "3": "3: 平均25%未満の傾斜、変化のある地面、それなりの石や枝がある",
+                    "4": "4: 平均30%未満の傾斜、地面状態は良くない、大きい岩や木の枝がある",
+                    "5": "5: 非常に険しく、通常マウンテンバイクを押すか運ぶかする必要がある"
                 }
             },
             "name": {
@@ -857,7 +891,16 @@
                 "label": "パーク＆ライド"
             },
             "parking": {
-                "label": "タイプ"
+                "label": "タイプ",
+                "options": {
+                    "surface": "地面",
+                    "multi-storey": "マルチレベル",
+                    "underground": "地下",
+                    "sheds": "納屋",
+                    "carports": "カーポート",
+                    "garage_boxes": "箱型ガレージ",
+                    "lane": "路側帯"
+                }
             },
             "phone": {
                 "label": "電話番号",
@@ -881,7 +924,13 @@
                 "options": {
                     "downhill": "ダウンヒル",
                     "nordic": "ノルディック",
-                    "skitour": "スキーツアー"
+                    "skitour": "スキーツアー",
+                    "sled": "小型そり",
+                    "hike": "ハイキング",
+                    "sleigh": "そり",
+                    "ice_skate": "アイススケート",
+                    "snow_park": "スキー場",
+                    "playground": "児童公園"
                 }
             },
             "place": {
@@ -929,6 +978,18 @@
             "route_master": {
                 "label": "タイプ"
             },
+            "sac_scale": {
+                "label": "ハイキングの難易度",
+                "placeholder": "山岳ハイキング, 高地登山…",
+                "options": {
+                    "hiking": "T1: ハイキング",
+                    "mountain_hiking": "T2: 山岳ハイキング",
+                    "demanding_mountain_hiking": "T3: 中難度の山岳ハイキング",
+                    "alpine_hiking": "T4: 高地登山",
+                    "demanding_alpine_hiking": "T5: 中難度の高地登山",
+                    "difficult_alpine_hiking": "T6: 高難度の高地登山"
+                }
+            },
             "seasonal": {
                 "label": "季節限定"
             },
@@ -949,14 +1010,29 @@
             },
             "smoking": {
                 "label": "喫煙",
+                "placeholder": "いいえ、分けた、はい...",
                 "options": {
+                    "no": "どこにも禁煙",
+                    "separated": "喫煙エリア（分煙でない）",
+                    "isolated": "喫煙エリア（分煙）",
                     "outside": "屋外のみ喫煙可",
                     "yes": "喫煙可",
                     "dedicated": "喫煙者向け（例: スモーカーズクラブ）"
                 }
             },
             "smoothness": {
-                "label": "スムーズさ"
+                "label": "スムーズさ",
+                "placeholder": "ローラースケートなど, 二輪車・四輪車, オフロード車…",
+                "options": {
+                    "excellent": "ローラースケート・スケートボード",
+                    "good": "レース用自転車",
+                    "intermediate": "二輪車など：ママチャリ・車いす・スクーター",
+                    "bad": "二輪車・四輪車：マウンテンバイク・自動車・オートリキシャ",
+                    "very_bad": "最低地上高が高い：軽クロカン車",
+                    "horrible": "オフロード：重オフロード車",
+                    "very_horrible": "特殊オフロード車：トラクター・ATV（全地形対応車）",
+                    "impassible": "通過不能／車両通行不可"
+                }
             },
             "social_facility_for": {
                 "label": "施設の対象者",
@@ -969,6 +1045,9 @@
                 "label": "スポーツ"
             },
             "sport_ice": {
+                "label": "スポーツ"
+            },
+            "sport_racing": {
                 "label": "スポーツ"
             },
             "structure": {
@@ -999,7 +1078,8 @@
                 "options": {
                     "flush": "水洗式",
                     "pitlatrine": "汲み取り式",
-                    "chemical": "化学処理"
+                    "chemical": "化学処理",
+                    "bucket": "バスケットゴール"
                 }
             },
             "tourism": {
@@ -1008,8 +1088,28 @@
             "towertype": {
                 "label": "塔の用途"
             },
+            "tracktype": {
+                "label": "トラック種別",
+                "placeholder": "硬質, 大部分が硬質, 軟質…",
+                "options": {
+                    "grade1": "硬質: 舗装もしくは煉瓦・砕石の締固め路盤",
+                    "grade2": "大部分が硬質: 砂利・岩と柔らかい物質の混合",
+                    "grade3": "硬軟の物質の混合",
+                    "grade4": "大部分が軟質: 土／砂／草と硬い物質の混合",
+                    "grade5": "軟質: 土／砂／草"
+                }
+            },
             "trail_visibility": {
-                "label": "道の可視度"
+                "label": "道の可視度",
+                "placeholder": "優・良・悪…",
+                "options": {
+                    "excellent": "優: すべて明確な道・目印あり",
+                    "good": "良: 判別可能な目印あり（場合によっては目印の探索が必要）",
+                    "intermediate": "中間: 道の大部分は分かるが目印は少ない",
+                    "bad": "悪: 道はなかったりわからなかったりで，かつ目印なし",
+                    "horrible": "劣悪: ほとんど道がなく定位技量が必要",
+                    "no": "不可: 道はなく，高度な定位技量が必要"
+                }
             },
             "tree_type": {
                 "label": "タイプ"
@@ -1170,6 +1270,10 @@
                 "name": "貸しボート",
                 "terms": "貸しボート"
             },
+            "amenity/bureau_de_change": {
+                "name": "両替",
+                "terms": "両替商"
+            },
             "amenity/bus_station": {
                 "name": "バスターミナル",
                 "terms": "バスターミナル"
@@ -1194,10 +1298,6 @@
                 "name": "充電スタンド",
                 "terms": "充電ステーション, 急速充電システム, 充電スタンド, 給電スタンド"
             },
-            "amenity/childcare": {
-                "name": "保育施設",
-                "terms": "託児所,保育園,幼稚園,学童保育"
-            },
             "amenity/cinema": {
                 "name": "映画館",
                 "terms": "映画館,上映施設,スクリーン,銀幕"
@@ -1209,10 +1309,6 @@
             "amenity/clock": {
                 "name": "時計",
                 "terms": "時計"
-            },
-            "amenity/college": {
-                "name": "単科大学",
-                "terms": "大学,短大,専門学校,高専"
             },
             "amenity/compressed_air": {
                 "name": "空気入れ",
@@ -1265,10 +1361,6 @@
             "amenity/hospital": {
                 "name": "病院の敷地",
                 "terms": "病院の敷地"
-            },
-            "amenity/kindergarten": {
-                "name": "幼稚園の敷地",
-                "terms": "幼稚園の敷地, 保育園の敷地"
             },
             "amenity/library": {
                 "name": "図書館",
@@ -1358,10 +1450,6 @@
                 "name": "フードバンク",
                 "terms": "フードバンク"
             },
-            "amenity/social_facility/group_home": {
-                "name": "グループホーム",
-                "terms": "グループホーム"
-            },
             "amenity/social_facility/homeless_shelter": {
                 "name": "ホームレス緊急一時宿泊施設",
                 "terms": "ホームレス緊急一時宿泊施設, ホームレスシェルター"
@@ -1393,10 +1481,6 @@
             "amenity/townhall": {
                 "name": "役場",
                 "terms": "市役所,区役所,町役場,村役場,市庁"
-            },
-            "amenity/university": {
-                "name": "大学",
-                "terms": "大学"
             },
             "amenity/vending_machine": {
                 "name": "自動販売機",
@@ -1491,8 +1575,8 @@
                 "terms": "建物, ビル"
             },
             "building/apartments": {
-                "name": "アパート",
-                "terms": "アパート"
+                "name": "集合住宅",
+                "terms": "アパート, マンション"
             },
             "building/barn": {
                 "name": "納屋",
@@ -1930,6 +2014,10 @@
                 "name": "主要地方道の接続路",
                 "terms": "主要地方道の連絡路"
             },
+            "highway/raceway": {
+                "name": "サーキット",
+                "terms": "サーキット,自動車レース場"
+            },
             "highway/residential": {
                 "name": "居住区域内道路",
                 "terms": "居住区域内道路"
@@ -2218,6 +2306,10 @@
                 "name": "児童公園",
                 "terms": "児童公園, 遊び場"
             },
+            "leisure/running_track": {
+                "name": "トラック（周回走路）",
+                "terms": "ランニングトラック,ランニング用周回走路"
+            },
             "leisure/slipway": {
                 "name": "進水路",
                 "terms": "進水路, スリップウェイ"
@@ -2235,8 +2327,8 @@
                 "terms": "遊泳プール"
             },
             "leisure/track": {
-                "name": "競技トラック",
-                "terms": "競技トラック"
+                "name": "（モータースポーツ以外の）レース用トラック（周回走路）",
+                "terms": "レース用トラック, レース用周回走路"
             },
             "line": {
                 "name": "線",
@@ -2293,10 +2385,6 @@
             "man_made/water_tower": {
                 "name": "給水塔",
                 "terms": "給水塔"
-            },
-            "man_made/water_well": {
-                "name": "井戸",
-                "terms": "井戸"
             },
             "man_made/water_works": {
                 "name": "浄水場",
@@ -2642,10 +2730,6 @@
                 "name": "酒店",
                 "terms": "酒店, 酒屋"
             },
-            "shop/art": {
-                "name": "美術工芸品店",
-                "terms": "美術工芸品店, 美術品店, アートショップ,工芸品店"
-            },
             "shop/bakery": {
                 "name": "パン屋",
                 "terms": "パン屋, ベーカリー"
@@ -2665,10 +2749,6 @@
             "shop/bookmaker": {
                 "name": "公営競技投票券売り場",
                 "terms": "公営競技投票券売り場, 馬券売り場, 車券売り場, 舟券売り場"
-            },
-            "shop/books": {
-                "name": "書店",
-                "terms": "書店, 本屋"
             },
             "shop/boutique": {
                 "name": "ブティック",
@@ -2702,10 +2782,6 @@
                 "name": "コンピューター店",
                 "terms": "コンピューター店, パソコン店"
             },
-            "shop/confectionery": {
-                "name": "菓子店",
-                "terms": "菓子店"
-            },
             "shop/convenience": {
                 "name": "コンビニエンスストア",
                 "terms": "コンビニエンスストア, コンビニ"
@@ -2721,10 +2797,6 @@
             "shop/doityourself": {
                 "name": "日曜大工用品店",
                 "terms": "日曜大工用品店, 工具店, DIYショップ, ホームセンター"
-            },
-            "shop/dry_cleaning": {
-                "name": "ドライクリーニング店",
-                "terms": "ドライクリーニング店"
             },
             "shop/electronics": {
                 "name": "家電販売店",
@@ -2778,10 +2850,6 @@
                 "name": "宝石店",
                 "terms": "宝石店"
             },
-            "shop/kiosk": {
-                "name": "キオスク",
-                "terms": "キオスク"
-            },
             "shop/laundry": {
                 "name": "洗濯屋・コインランドリー",
                 "terms": "洗濯屋, コインランドリー"
@@ -2810,17 +2878,9 @@
                 "name": "CD/レコード店",
                 "terms": "CD店, レコード店"
             },
-            "shop/newsagent": {
-                "name": "新聞・雑誌販売店",
-                "terms": "新聞・雑誌販売店, 新聞販売店, 雑誌販売店"
-            },
             "shop/optician": {
                 "name": "メガネ",
                 "terms": "メガネ,眼鏡,メガネ屋,眼鏡屋"
-            },
-            "shop/outdoor": {
-                "name": "アウトドア",
-                "terms": "アウトドアショップ"
             },
             "shop/pet": {
                 "name": "ペットショップ",

@@ -71,7 +71,8 @@
                 "line": "环形化线。",
                 "area": "环形化区域。"
             },
-            "not_closed": "它不是闭合的环形，无法圆形化。"
+            "not_closed": "它不是闭合的环形，无法圆形化。",
+            "too_large": "因为可见部分不足，不能变成圆形。"
         },
         "orthogonalize": {
             "title": "直角化",
@@ -84,7 +85,8 @@
                 "line": "拉直线上角的边。",
                 "area": "已将区域的弯角换成直角。"
             },
-            "not_squarish": "因为它不是近似方形的，这不能被直角化。"
+            "not_squarish": "因为它不是近似方形的，这不能被直角化。",
+            "too_large": "因为可见部分不足，不能变成方形。"
         },
         "straighten": {
             "title": "拉直",
@@ -95,7 +97,7 @@
         },
         "delete": {
             "title": "删除",
-            "description": "从地图上删除。",
+            "description": "彻底删除对象。",
             "annotation": {
                 "point": "删除点。",
                 "vertex": "删除路径上的节点。",
@@ -148,7 +150,8 @@
                 "area": "移动区域。",
                 "multiple": "移动多个对象。"
             },
-            "incomplete_relation": "该特征还没有下载完整，无法移动。"
+            "incomplete_relation": "该特征还没有下载完整，无法移动。",
+            "too_large": "因为可见部分不足，不能移动。"
         },
         "rotate": {
             "title": "旋转",
@@ -157,7 +160,8 @@
             "annotation": {
                 "line": "旋转线。",
                 "area": "旋转区域。"
-            }
+            },
+            "too_large": "因为可见部分不足，不能旋转。"
         },
         "reverse": {
             "title": "反转",
@@ -330,6 +334,9 @@
         "untagged_area": "未标记的区域",
         "many_deletions": "您正在删除 {n} 个对象，您确定要这么做吗？这将会把它们从大家所见的 openstreetmap.org 地图上删除。",
         "tag_suggests_area": "标签{tag}表明线应该为区域，但它不是区域",
+        "untagged_point_tooltip": "选择该点的特征类型。",
+        "untagged_line_tooltip": "选择描述这条线的特征类型。",
+        "untagged_area_tooltip": "选择描述这块区域的特征类型。",
         "deprecated_tags": "弃用标签：{tags}"
     },
     "zoom": {
@@ -378,7 +385,6 @@
         },
         "areas": {
             "title": "区域",
-            "add": "区域能较详细地代表物件，提供该物件的边界资料。大部份以点可以代表的物件类别，都可以用区域代表，而后者往往更为适合。 **点击「区域」按钮，以新增一个区域**",
             "corner": "通过将节点放到面的边界上，可绘制面。 **将起始节点置于游乐场的其中一角**",
             "place": "放置更多节点可绘制区域。点击开始节点即可完成绘制。**在沙盒绘制一个区域。**",
             "search": "**搜索'{name}'。**",
@@ -476,15 +482,24 @@
                 }
             },
             "access_simple": {
-                "label": "通行限制"
+                "label": "通行限制",
+                "placeholder": "是"
+            },
+            "access_toilets": {
+                "label": "连接"
             },
             "address": {
                 "label": "地址",
                 "placeholders": {
+                    "housename": "房屋名称",
+                    "housenumber": "123号",
                     "street": "街道",
                     "city": "城市",
                     "postcode": "邮政编码",
+                    "place": "地方",
+                    "hamlet": "村庄",
                     "suburb": "地区",
+                    "subdistrict": "街道",
                     "district": "行政区",
                     "province": "行政省",
                     "state": "行政州",
@@ -498,7 +513,15 @@
                 "label": "类型"
             },
             "aerialway/access": {
-                "label": "通行限制"
+                "label": "通行限制",
+                "options": {
+                    "entry": "入口",
+                    "exit": "出口",
+                    "both": "双向"
+                }
+            },
+            "aerialway/bubble": {
+                "label": "圆形顶"
             },
             "aerialway/capacity": {
                 "label": "容量(每小时)",
@@ -508,8 +531,20 @@
                 "label": "持续时间(分钟)",
                 "placeholder": "1, 2, 3..."
             },
+            "aerialway/heating": {
+                "label": "暖气"
+            },
             "aerialway/occupancy": {
+                "label": "载客数",
                 "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "通行方向（夏季）",
+                "options": {
+                    "entry": "入口",
+                    "exit": "出口",
+                    "both": "双方"
+                }
             },
             "aeroway": {
                 "label": "类型"
@@ -549,7 +584,18 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "方向"
+                "label": "方向",
+                "options": {
+                    "N": "北",
+                    "E": "东",
+                    "S": "南",
+                    "W": "西",
+                    "NE": "东北",
+                    "SE": "东南",
+                    "SW": "西南",
+                    "NW": "西北",
+                    "NNE": "东北偏北"
+                }
             },
             "clock_direction": {
                 "label": "方向",
@@ -570,6 +616,9 @@
             "covered": {
                 "label": "覆盖"
             },
+            "crop": {
+                "label": "庄稼"
+            },
             "crossing": {
                 "label": "类型"
             },
@@ -586,7 +635,14 @@
                 "label": "说明"
             },
             "electrified": {
-                "label": "电气化"
+                "label": "电气化",
+                "placeholder": "接触线、电气化铁路…",
+                "options": {
+                    "contact_line": "接触线",
+                    "rail": "电气化铁路",
+                    "yes": "是(未指明)",
+                    "no": "否"
+                }
             },
             "elevation": {
                 "label": "海拔"
@@ -608,7 +664,13 @@
                 "label": "费用"
             },
             "fire_hydrant/type": {
-                "label": "类型"
+                "label": "类型",
+                "options": {
+                    "pillar": "支柱/地上",
+                    "underground": "地铁",
+                    "wall": "墙",
+                    "pond": "池塘"
+                }
             },
             "fixme": {
                 "label": "修复我"
@@ -670,6 +732,7 @@
                 "label": "类型"
             },
             "hoops": {
+                "label": "篮球",
                 "placeholder": "1, 2, 4..."
             },
             "iata": {
@@ -687,10 +750,15 @@
             "internet_access": {
                 "label": "互联网接入",
                 "options": {
+                    "yes": "是",
+                    "no": "否",
                     "wlan": "Wi-Fi",
                     "wired": "有线网络",
                     "terminal": "终端"
                 }
+            },
+            "lamp_type": {
+                "label": "类型"
             },
             "landuse": {
                 "label": "类型"
@@ -725,6 +793,20 @@
                 "label": "速度限制",
                 "placeholder": "40, 50, 60..."
             },
+            "mtb/scale": {
+                "label": "登山車难度",
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/imba": {
+                "placeholder": "简单,中等,困难...",
+                "options": {
+                    "0": "最简单的(白色圆圈)"
+                }
+            },
+            "mtb/scale/uphill": {
+                "label": "山地自行车上坡难度",
+                "placeholder": "0, 1, 2, 3..."
+            },
             "name": {
                 "label": "名称",
                 "placeholder": "常用名称（如果有）"
@@ -744,13 +826,17 @@
             "oneway": {
                 "label": "单行线",
                 "options": {
-                    "undefined": "假定为否"
+                    "undefined": "假定为否",
+                    "yes": "是",
+                    "no": "否"
                 }
             },
             "oneway_yes": {
                 "label": "单行线",
                 "options": {
-                    "undefined": "假定为是"
+                    "undefined": "假定为是",
+                    "yes": "是",
+                    "no": "否"
                 }
             },
             "opening_hours": {
@@ -760,23 +846,45 @@
                 "label": "经营者"
             },
             "par": {
+                "label": "标准杆",
                 "placeholder": "3, 4, 5..."
             },
             "park_ride": {
                 "label": "停车换乘"
             },
             "parking": {
-                "label": "类型"
+                "label": "类型",
+                "options": {
+                    "surface": "地面",
+                    "multi-storey": "多晨",
+                    "underground": "地下",
+                    "sheds": "单独车库",
+                    "carports": "车棚",
+                    "lane": "路边"
+                }
             },
             "phone": {
                 "label": "电话",
                 "placeholder": "+31 42 123 4567"
             },
             "piste/difficulty": {
-                "label": "困难"
+                "label": "困难",
+                "options": {
+                    "advanced": "高级(黑钻)"
+                }
+            },
+            "piste/grooming": {
+                "options": {
+                    "skating": "滑冰"
+                }
             },
             "piste/type": {
-                "label": "类型"
+                "label": "类型",
+                "options": {
+                    "downhill": "下坡",
+                    "ice_skate": "滑冰",
+                    "playground": "操场"
+                }
             },
             "place": {
                 "label": "类型"
@@ -823,6 +931,10 @@
             "route_master": {
                 "label": "类型"
             },
+            "sac_scale": {
+                "label": "远足难度",
+                "placeholder": "高山远足"
+            },
             "seasonal": {
                 "label": "具备季节性"
             },
@@ -839,7 +951,16 @@
                 "label": "类型"
             },
             "smoking": {
-                "label": "吸烟"
+                "label": "吸烟",
+                "placeholder": "禁止、隔开、允许...",
+                "options": {
+                    "no": "禁止吸烟",
+                    "separated": "指定区域可使用（布隔开）",
+                    "isolated": "指定区域可使用（隔开）",
+                    "outside": "外面可使用",
+                    "yes": "随处可使用",
+                    "dedicated": "吸烟专用"
+                }
             },
             "social_facility_for": {
                 "placeholder": "无家可归者，残疾人，儿童等"
@@ -1020,6 +1141,12 @@
                 "name": "船舶租赁处",
                 "terms": "船舶租赁处"
             },
+            "amenity/bureau_de_change": {
+                "name": "货币兑换"
+            },
+            "amenity/bus_station": {
+                "name": "公交车站"
+            },
             "amenity/cafe": {
                 "name": "咖啡馆",
                 "terms": "咖啡厅,茶座,小餐馆,咖啡,小餐厅"
@@ -1040,10 +1167,6 @@
                 "name": "充电站",
                 "terms": "充电站"
             },
-            "amenity/childcare": {
-                "name": "托儿所",
-                "terms": "托儿所"
-            },
             "amenity/cinema": {
                 "name": "电影院",
                 "terms": "电影院,电影,戏院"
@@ -1055,10 +1178,6 @@
             "amenity/clock": {
                 "name": "时钟",
                 "terms": "时钟,钟表,钟"
-            },
-            "amenity/college": {
-                "name": "学院",
-                "terms": "学院,书院,专科学院"
             },
             "amenity/compressed_air": {
                 "name": "压缩空气"
@@ -1109,9 +1228,6 @@
             },
             "amenity/hospital": {
                 "name": "医院"
-            },
-            "amenity/kindergarten": {
-                "name": "幼儿园"
             },
             "amenity/library": {
                 "name": "图书馆",
@@ -1227,10 +1343,6 @@
             "amenity/townhall": {
                 "name": "市政府",
                 "terms": "市政府,市政厅,大会堂"
-            },
-            "amenity/university": {
-                "name": "大学",
-                "terms": "大学"
             },
             "amenity/vending_machine": {
                 "name": "售卖机",
@@ -1367,7 +1479,7 @@
                 "name": "医院大楼"
             },
             "building/hotel": {
-                "name": "酒店大楼"
+                "name": "宾馆楼"
             },
             "building/house": {
                 "name": "房屋",
@@ -1428,8 +1540,23 @@
                 "name": "酿酒厂",
                 "terms": "酒厂,酿酒厂,酒坊"
             },
+            "craft/carpenter": {
+                "name": "木匠"
+            },
+            "craft/carpet_layer": {
+                "name": "铺地毯的人"
+            },
+            "craft/caterer": {
+                "name": "酒席承办人"
+            },
             "craft/clockmaker": {
                 "name": "钟表匠"
+            },
+            "craft/confectionary": {
+                "name": "糖果店"
+            },
+            "craft/dressmaker": {
+                "name": "女装裁缝"
             },
             "craft/electrician": {
                 "name": "电工"
@@ -1437,8 +1564,17 @@
             "craft/gardener": {
                 "name": "园艺工"
             },
+            "craft/glaziery": {
+                "name": "装玻璃的人"
+            },
             "craft/handicraft": {
                 "name": "手工匠"
+            },
+            "craft/hvac": {
+                "name": "高压交流电"
+            },
+            "craft/insulator": {
+                "name": "绝缘体"
             },
             "craft/jeweler": {
                 "name": "珠宝店"
@@ -1446,14 +1582,23 @@
             "craft/key_cutter": {
                 "name": "切割钥匙（配匙）"
             },
+            "craft/locksmith": {
+                "name": "锁匠"
+            },
             "craft/optician": {
                 "name": "眼镜店"
+            },
+            "craft/painter": {
+                "name": "油漆匠"
             },
             "craft/photographer": {
                 "name": "照相店"
             },
             "craft/photographic_laboratory": {
                 "name": "照片冲洗店"
+            },
+            "craft/plasterer": {
+                "name": "泥水匠"
             },
             "craft/plumber": {
                 "name": "管道工"
@@ -1462,16 +1607,43 @@
                 "name": "陶器场",
                 "terms": "陶器场"
             },
+            "craft/rigger": {
+                "name": "装配工"
+            },
+            "craft/roofer": {
+                "name": "盖屋顶的人"
+            },
+            "craft/saddler": {
+                "name": "造马鞍的人"
+            },
+            "craft/sailmaker": {
+                "name": "修帆的人"
+            },
             "craft/sawmill": {
                 "name": "锯木厂",
                 "terms": "锯木厂"
             },
+            "craft/scaffolder": {
+                "name": "搭脚手架的人"
+            },
+            "craft/sculpter": {
+                "name": "雕刻师"
+            },
             "craft/shoemaker": {
                 "name": "制鞋店"
+            },
+            "craft/stonemason": {
+                "name": "石匠"
+            },
+            "craft/sweep": {
+                "name": "扫烟囱的人"
             },
             "craft/tailor": {
                 "name": "裁缝",
                 "terms": "裁缝"
+            },
+            "craft/tiler": {
+                "name": "砖瓦匠"
             },
             "craft/tinsmith": {
                 "name": "锡制品手工店"
@@ -1519,6 +1691,12 @@
                 "name": "人行道",
                 "terms": "人行道,便道,走道"
             },
+            "ford": {
+                "name": "浅滩"
+            },
+            "golf/bunker": {
+                "name": "沙坑"
+            },
             "golf/fairway": {
                 "name": "高尔夫球道",
                 "terms": "球道,高尔夫球道"
@@ -1529,6 +1707,9 @@
             },
             "golf/hole": {
                 "name": "高尔夫球洞"
+            },
+            "golf/rough": {
+                "name": "深草区"
             },
             "golf/tee": {
                 "name": "开球区",
@@ -1901,10 +2082,6 @@
                 "name": "游泳池",
                 "terms": "游泳池"
             },
-            "leisure/track": {
-                "name": "赛车跑道",
-                "terms": "赛车跑道"
-            },
             "line": {
                 "name": "线",
                 "terms": "线"
@@ -1960,10 +2137,6 @@
             "man_made/water_tower": {
                 "name": "水塔",
                 "terms": "水塔"
-            },
-            "man_made/water_well": {
-                "name": "水井",
-                "terms": "水井"
             },
             "man_made/water_works": {
                 "name": "供水厂",
@@ -2149,6 +2322,9 @@
                 "name": "旅行社",
                 "terms": "旅行社"
             },
+            "piste": {
+                "name": "滑雪道"
+            },
             "place": {
                 "name": "地点",
                 "terms": "地点"
@@ -2176,6 +2352,10 @@
             "place/neighbourhood": {
                 "name": "街坊",
                 "terms": "社区,街坊"
+            },
+            "place/suburb": {
+                "name": "区",
+                "terms": "区"
             },
             "place/town": {
                 "name": "城镇",
@@ -2301,9 +2481,6 @@
                 "name": "酒水店",
                 "terms": "酒庄"
             },
-            "shop/art": {
-                "name": "艺术店"
-            },
             "shop/bakery": {
                 "name": "面包店",
                 "terms": "面包店"
@@ -2320,9 +2497,8 @@
                 "name": "自行车店",
                 "terms": "自行车,单车"
             },
-            "shop/books": {
-                "name": "书店",
-                "terms": "书店"
+            "shop/bookmaker": {
+                "name": "书商"
             },
             "shop/boutique": {
                 "name": "精品店",
@@ -2356,10 +2532,6 @@
                 "name": "电脑店",
                 "terms": "电脑店"
             },
-            "shop/confectionery": {
-                "name": "糖果店",
-                "terms": "甜点店"
-            },
             "shop/convenience": {
                 "name": "便利店",
                 "terms": "便利店"
@@ -2375,10 +2547,6 @@
             "shop/doityourself": {
                 "name": "DIY店",
                 "terms": "DIY商店"
-            },
-            "shop/dry_cleaning": {
-                "name": "干洗店",
-                "terms": "干洗店"
             },
             "shop/electronics": {
                 "name": "电器店",
@@ -2431,10 +2599,6 @@
                 "name": "珠宝店",
                 "terms": "珠宝店"
             },
-            "shop/kiosk": {
-                "name": "报刊亭",
-                "terms": "报刊亭"
-            },
             "shop/laundry": {
                 "name": "洗衣店",
                 "terms": "洗衣店"
@@ -2462,17 +2626,9 @@
                 "name": "音乐店",
                 "terms": "音乐店"
             },
-            "shop/newsagent": {
-                "name": "报摊",
-                "terms": "报摊"
-            },
             "shop/optician": {
                 "name": "眼镜店",
                 "terms": "眼镜店"
-            },
-            "shop/outdoor": {
-                "name": "户外用品店",
-                "terms": "户外用品店"
             },
             "shop/pet": {
                 "name": "宠物店",
@@ -2500,6 +2656,9 @@
             "shop/supermarket": {
                 "name": "超市",
                 "terms": "超级市场"
+            },
+            "shop/tailor": {
+                "name": "裁缝"
             },
             "shop/toys": {
                 "name": "玩具店",
@@ -2566,8 +2725,8 @@
                 "terms": "招待所"
             },
             "tourism/hotel": {
-                "name": "酒店",
-                "terms": "酒店"
+                "name": "宾馆",
+                "terms": "宾馆,酒店,旅馆"
             },
             "tourism/information": {
                 "name": "信息",

@@ -18,13 +18,20 @@
         "browse": {
             "title": "Browse",
             "description": "Pan and zoom the map."
+        },
+        "draw_area": {
+            "tail": "Click to add nodes to your area. Click the first node to finish the area."
+        },
+        "draw_line": {
+            "tail": "Click to add more nodes to the line. Click on other lines to connect to them, and double-click to end the line."
         }
     },
     "operations": {
         "add": {
             "annotation": {
                 "point": "Added a point.",
-                "vertex": "Added a node to a way."
+                "vertex": "Added a node to a way.",
+                "relation": "Added a relation."
             }
         },
         "start": {
@@ -33,15 +40,176 @@
                 "area": "Started an area."
             }
         },
+        "continue": {
+            "key": "A",
+            "title": "Continue",
+            "description": "Continue this line.",
+            "not_eligible": "No line can be continued here.",
+            "multiple": "Several lines can be continued here. To choose a line, press the Shift key and click on it to select it.",
+            "annotation": {
+                "line": "Continued a line.",
+                "area": "Continued an area."
+            }
+        },
         "cancel_draw": {
             "annotation": "Cancelled drawing."
         },
+        "change_role": {
+            "annotation": "Changed the role of a relation member."
+        },
+        "change_tags": {
+            "annotation": "Changed tags."
+        },
         "circularize": {
-            "title": "Circularise"
+            "title": "Circularise",
+            "description": {
+                "line": "Make this line circular.",
+                "area": "Make this area circular."
+            },
+            "key": "O",
+            "annotation": {
+                "line": "Made a line circular.",
+                "area": "Made an area circular."
+            },
+            "not_closed": "This can't be made circular because it's not a loop.",
+            "too_large": "This can't be made circular because not enough of it is currently visible."
+        },
+        "orthogonalize": {
+            "title": "Square",
+            "description": {
+                "line": "Square the corners of this line.",
+                "area": "Square the corners of this area."
+            },
+            "key": "S",
+            "annotation": {
+                "line": "Squared the corners of a line.",
+                "area": "Squared the corners of an area."
+            },
+            "not_squarish": "This can't be made square because it is not squarish.",
+            "too_large": "This can't be made square because not enough of it is currently visible."
+        },
+        "straighten": {
+            "title": "Straighten",
+            "description": "Straighten this line.",
+            "key": "S",
+            "annotation": "Straightened a line.",
+            "too_bendy": "This can't be straightened because it bends too much."
+        },
+        "delete": {
+            "title": "Delete",
+            "description": "Delete object permanently.",
+            "annotation": {
+                "point": "Deleted a point.",
+                "vertex": "Deleted a node from a way.",
+                "line": "Deleted a line.",
+                "area": "Deleted an area.",
+                "relation": "Deleted a relation.",
+                "multiple": "Deleted {n} objects."
+            },
+            "incomplete_relation": "This feature can't be deleted because it hasn't been fully downloaded."
+        },
+        "add_member": {
+            "annotation": "Added a member to a relation."
+        },
+        "delete_member": {
+            "annotation": "Removed a member from a relation."
+        },
+        "connect": {
+            "annotation": {
+                "point": "Connected a way to a point.",
+                "vertex": "Connected a way to another.",
+                "line": "Connected a way to a line.",
+                "area": "Connected a way to an area."
+            }
+        },
+        "disconnect": {
+            "title": "Disconnect",
+            "description": "Disconnect these lines/areas from each other.",
+            "key": "D",
+            "annotation": "Disconnected lines/areas.",
+            "not_connected": "There aren't enough lines/areas here to disconnect."
+        },
+        "merge": {
+            "title": "Merge",
+            "description": "Merge these lines.",
+            "key": "C",
+            "annotation": "Merged {n} lines.",
+            "not_eligible": "These features can't be merged.",
+            "not_adjacent": "These lines can't be merged because they aren't connected.",
+            "restriction": "These lines can't be merged because at least one is a member of a \"{relation}\" relation.",
+            "incomplete_relation": "These features can't be merged because at least one hasn't been fully downloaded."
+        },
+        "move": {
+            "title": "Move",
+            "description": "Move this to a different location.",
+            "key": "M",
+            "annotation": {
+                "point": "Moved a point.",
+                "vertex": "Moved a node in a way.",
+                "line": "Moved a line.",
+                "area": "Moved an area.",
+                "multiple": "Moved multiple objects."
+            },
+            "incomplete_relation": "This feature can't be moved because it hasn't been fully downloaded.",
+            "too_large": "This can't be moved because not enough of it is currently visible."
         },
         "rotate": {
-            "description": "Rotate this object around its centre point."
+            "title": "Rotate",
+            "description": "Rotate this object around its centre point.",
+            "key": "R",
+            "annotation": {
+                "line": "Rotated a line.",
+                "area": "Rotated an area."
+            },
+            "too_large": "This can't be rotated because not enough of it is currently visible."
+        },
+        "reverse": {
+            "title": "Reverse",
+            "description": "Make this line go in the opposite direction.",
+            "key": "V",
+            "annotation": "Reversed a line."
+        },
+        "split": {
+            "title": "Split",
+            "description": {
+                "line": "Split this line into two at this node.",
+                "area": "Split the boundary of this area into two.",
+                "multiple": "Split the lines/area boundaries at this node into two."
+            },
+            "key": "X",
+            "annotation": {
+                "line": "Split a line.",
+                "area": "Split an area boundary.",
+                "multiple": "Split {n} lines/area boundaries."
+            },
+            "not_eligible": "Lines can't be split at their beginning or end.",
+            "multiple_ways": "There are too many lines here to split."
+        },
+        "restriction": {
+            "help": {
+                "select": "Click to select a road segment.",
+                "toggle": "Click to toggle turn restrictions.",
+                "toggle_on": "Click to add a \"{restriction}\" restriction.",
+                "toggle_off": "Click to remove the \"{restriction}\" restriction."
+            },
+            "annotation": {
+                "create": "Added a turn restriction",
+                "delete": "Deleted a turn restriction"
+            }
         }
+    },
+    "undo": {
+        "tooltip": "Undo: {action}",
+        "nothing": "Nothing to undo."
+    },
+    "redo": {
+        "tooltip": "Redo: {action}",
+        "nothing": "Nothing to redo."
+    },
+    "tooltip_keyhint": "Shortcut:",
+    "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
+    "translate": {
+        "translate": "Translate"
     },
     "zoom_in_edit": "Zoom in to Edit",
     "inspector": {
@@ -127,9 +295,6 @@
             },
             "shop/alcohol": {
                 "name": "Off license"
-            },
-            "shop/confectionery": {
-                "name": "Confectionery Shop"
             },
             "shop/farm": {
                 "name": "Farm Shop"
