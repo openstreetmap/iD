@@ -9239,7 +9239,8 @@
         "name": "Road Route",
         "icon": "route-road",
         "fields": [
-            "ref"
+            "ref",
+            "network"
         ]
     },
     "type/route/train": {
