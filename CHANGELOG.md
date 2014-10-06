@@ -1,3 +1,14 @@
+## 1.6.0
+
+* Add nework field to Road Route relation preset (#2372)
+* Updated TIGER layer to use TIGER 2014
+* Added support for street-level imagery from Mapillary
+* Added support for taginfo projects data
+* Better infer restriction for no_u_turn (#2345)
+* Update to rbush 1.3.3
+* Improved a variety of presets
+* Added `comment` url param to prefill changeset comment (#2311)
+
 ## 1.5.4
 
 * Do not fully fill certain landuse values, e.g. landuse=residential (#542)
