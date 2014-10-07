@@ -92,7 +92,7 @@ iD.behavior.Draw = function(context) {
         context.install(hover);
         context.install(edit);
 
-        if (!iD.behavior.Draw.usedTails[tail.text()]) {
+        if (!context.inIntro() && !iD.behavior.Draw.usedTails[tail.text()]) {
             context.install(tail);
         }
 
@@ -116,7 +116,7 @@ iD.behavior.Draw = function(context) {
         context.uninstall(hover);
         context.uninstall(edit);
 
-        if (!iD.behavior.Draw.usedTails[tail.text()]) {
+        if (!context.inIntro() && !iD.behavior.Draw.usedTails[tail.text()]) {
             context.uninstall(tail);
             iD.behavior.Draw.usedTails[tail.text()] = true;
         }
