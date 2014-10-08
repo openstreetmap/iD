@@ -11,7 +11,7 @@ iD.geo.Extent = function geoExtent(min, max) {
     }
 };
 
-iD.geo.Extent.prototype = [[], []];
+iD.geo.Extent.prototype = new Array(2);
 
 _.extend(iD.geo.Extent.prototype, {
     extend: function(obj) {
