@@ -41,8 +41,7 @@ iD.Features = function(context) {
         'obliterated': true
     };
 
-    var graph = context.graph(),
-        dispatch = d3.dispatch('change', 'redraw'),
+    var dispatch = d3.dispatch('change', 'redraw'),
         feature = {};
 
     function defineFeature(k, filter, max) {
@@ -64,24 +63,24 @@ iD.Features = function(context) {
     }
 
     defineFeature('points', function(entity) {
-        return entity.geometry(graph) === 'point';
+        return entity.geometry(context.graph()) === 'point';
     }, 100);
 
     defineFeature('major_roads', function(entity) {
-        return entity.geometry(graph) === 'line' && major_roads[entity.tags.highway];
+        return entity.geometry(context.graph()) === 'line' && major_roads[entity.tags.highway];
     });
 
     defineFeature('minor_roads', function(entity) {
-        return entity.geometry(graph) === 'line' && minor_roads[entity.tags.highway];
+        return entity.geometry(context.graph()) === 'line' && minor_roads[entity.tags.highway];
     });
 
     defineFeature('paths', function(entity) {
-        return entity.geometry(graph) === 'line' && paths[entity.tags.highway];
+        return entity.geometry(context.graph()) === 'line' && paths[entity.tags.highway];
     });
 
     defineFeature('buildings', function(entity) {
         return (
-            entity.geometry(graph) === 'area' && (
+            entity.geometry(context.graph()) === 'area' && (
                 (!!entity.tags.building && entity.tags.building !== 'no') ||
                 entity.tags.amenity === 'shelter' ||
                 entity.tags.parking === 'multi-storey' ||
@@ -93,7 +92,7 @@ iD.Features = function(context) {
     }, 100);
 
     defineFeature('landuse', function(entity) {
-        return entity.geometry(graph) === 'area' &&
+        return entity.geometry(context.graph()) === 'area' &&
             !feature.buildings.filter(entity) &&
             !feature.water.filter(entity);
     });
@@ -138,8 +137,8 @@ iD.Features = function(context) {
     // lines or areas that don't match another feature filter.
     defineFeature('others', function(entity) {
         return (
-            entity.geometry(graph) === 'line' ||
-            entity.geometry(graph) === 'area'
+            entity.geometry(context.graph()) === 'line' ||
+            entity.geometry(context.graph()) === 'area'
         ) &&
         _.reduce(_.omit(feature, 'others'), function(result, v) {
             return result && !v.filter(entity);
@@ -244,17 +243,38 @@ iD.Features = function(context) {
         return stats;
     };
 
-    features.isHidden = function(entity) {
-        var hidden = features.hidden();
+    features.isHiddenFeature = function(entity) {
+        return _.any(features.hidden(), function(k) { return feature[k].filter(entity); });
+    };
 
-        function isHiddenFeature(entity) {
-            return _.any(hidden, function(k) { return feature[k].filter(entity); });
+    features.isHiddenChild = function(entity) {
+        var g = context.graph(),
+            parents = _.union(g.parentWays(entity), g.parentRelations(entity));
+        return parents.length ? _.all(parents, features.isHidden) : false;
+    };
+
+    features.hasHiddenConnections = function(entity) {
+        var g = context.graph(),
+            childNodes, connections;
+
+        if (entity.type === 'midpoint') {
+            childNodes = [context.entity(entity.edge[0]), context.entity(entity.edge[1])];
+        } else {
+            childNodes = g.childNodes(entity);
         }
-        function isHiddenChild(entity) {
-            var parents = _.union(graph.parentWays(entity), graph.parentRelations(entity));
-            return parents.length ? _.all(parents, features.isHidden) : false;
-        }
-        return isHiddenFeature(entity) || isHiddenChild(entity);
+
+        // gather parents..
+        connections = _.union(g.parentWays(entity), g.parentRelations(entity));
+        // gather ways connected to child nodes..
+        connections = _.reduce(childNodes, function(result, e) {
+            return g.isShared(e) ? _.union(result, g.parentWays(e)) : result;
+        }, connections);
+
+        return connections.length ? _.any(connections, features.isHidden) : false;
+    };
+
+    features.isHidden = function(entity) {
+        return features.isHiddenFeature(entity) || features.isHiddenChild(entity);
     };
 
     features.filter = function(d) {

@@ -22,6 +22,8 @@ iD.operations.Rotate = function(selectedIDs, context) {
     operation.disabled = function() {
         if (extent.percentContainedIn(context.extent()) < 0.8) {
             return 'too_large';
+        } else if (context.hasHiddenConnections(entityId)) {
+            return 'connected_to_hidden';
         } else {
             return false;
         }

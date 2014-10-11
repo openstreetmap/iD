@@ -21,6 +21,8 @@ iD.operations.Orthogonalize = function(selectedIDs, context) {
         var reason;
         if (extent.percentContainedIn(context.extent()) < 0.8) {
             reason = 'too_large';
+        } else if (context.hasHiddenConnections(entityId)) {
+            reason = 'connected_to_hidden';
         }
         return action.disabled(context.graph()) || reason;
     };

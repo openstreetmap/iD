@@ -206,6 +206,10 @@ window.iD = function () {
     /* Features */
     var features = iD.Features(context);
     context.features = function() { return features; };
+    context.hasHiddenConnections = function(id) {
+        var entity = history.graph().entity(id);
+        return features.hasHiddenConnections(entity);
+    };
 
     /* Map */
     var map = iD.Map(context);
