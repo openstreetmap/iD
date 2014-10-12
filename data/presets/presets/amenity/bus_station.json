@@ -1,5 +1,7 @@
 {
+    "icon": "bus",
     "fields": [
+        "building_area",
         "operator"
     ],
     "geometry": [
