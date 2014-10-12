@@ -29,10 +29,15 @@ iD.ui.Zoom = function(context) {
             .attr('class', function(d) { return d.id + ' icon'; });
 
         var keybinding = d3.keybinding('zoom')
-            .on('+', function() { context.zoomIn(); })
-            .on('-', function() { context.zoomOut(); })
-            .on('⇧=', function() { context.zoomIn(); })
-            .on('dash', function() { context.zoomOut(); });
+
+        _.each(['=','ffequals','plus','ffplus'], function(key) {
+            keybinding.on(key, function() { context.zoomIn(); });
+            keybinding.on('⇧' + key, function() { context.zoomIn(); });
+        });
+        _.each(['-','ffminus','_','dash'], function(key) {
+            keybinding.on(key, function() { context.zoomOut(); });
+            keybinding.on('⇧' + key, function() { context.zoomOut(); });
+        });
 
         d3.select(document)
             .call(keybinding);

@@ -139,14 +139,20 @@ d3.keybinding = function(namespace) {
         // Up Arrow Key, or ↓
         '↓': 40, down: 40, 'arrow-down': 40,
         // odities, printing characters that come out wrong:
+        // Firefox Equals
+        'ffequals': 61,
         // Num-Multiply, or *
         '*': 106, star: 106, asterisk: 106, multiply: 106,
         // Num-Plus or +
         '+': 107, 'plus': 107,
         // Num-Subtract, or -
         '-': 109, subtract: 109,
+        // Firefox Minus
+        'ffplus': 171,
+        // Firefox Minus
+        'ffminus': 173,
         // Semicolon
-        ';': 186, semicolon:186,
+        ';': 186, semicolon: 186,
         // = or equals
         '=': 187, 'equals': 187,
         // Comma, or ,
