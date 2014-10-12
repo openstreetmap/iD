@@ -674,6 +674,9 @@ en:
       amenity/college:
         name: College Grounds
         terms: "<translate with synonyms or related terms for 'College Grounds', separated by commas>"
+      amenity/community_centre:
+        name: Community Center
+        terms: "<translate with synonyms or related terms for 'Community Center', separated by commas>"
       amenity/compressed_air:
         name: Compressed Air
         terms: "<translate with synonyms or related terms for 'Compressed Air', separated by commas>"

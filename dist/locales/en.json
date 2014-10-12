@@ -1333,6 +1333,10 @@
                 "name": "College Grounds",
                 "terms": "university"
             },
+            "amenity/community_centre": {
+                "name": "Community Center",
+                "terms": "event,hall"
+            },
             "amenity/compressed_air": {
                 "name": "Compressed Air",
                 "terms": ""

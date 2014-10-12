@@ -178,6 +178,10 @@
         },
         {
             "key": "amenity",
+            "value": "community_centre"
+        },
+        {
+            "key": "amenity",
             "value": "compressed_air"
         },
         {
