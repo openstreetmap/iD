@@ -8718,8 +8718,7 @@
         "icon": "campsite",
         "fields": [
             "operator",
-            "address",
-            "smoking"
+            "address"
         ],
         "geometry": [
             "point",
