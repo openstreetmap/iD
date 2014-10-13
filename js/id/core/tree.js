@@ -19,21 +19,19 @@ iD.Tree = function(head) {
     }
 
     function updateParents(entity, insertions, memo) {
-        if (memo && memo[entity.id]) return;
-        memo = memo || {};
-        memo[entity.id] = true;
-
         head.parentWays(entity).forEach(function(parent) {
             if (rectangles[parent.id]) {
                 rtree.remove(rectangles[parent.id]);
-                insertions.push(parent);
+                insertions[parent.id] = parent;
             }
         });
 
         head.parentRelations(entity).forEach(function(parent) {
+            if (memo[entity.id]) return;
+            memo[entity.id] = true;
             if (rectangles[parent.id]) {
                 rtree.remove(rectangles[parent.id]);
-                insertions.push(parent);
+                insertions[parent.id] = parent;
             }
             updateParents(parent, insertions, memo);
         });
@@ -42,18 +40,19 @@ iD.Tree = function(head) {
     var tree = {};
 
     tree.rebase = function(entities) {
-        var insertions = [];
+        var insertions = {};
 
-        entities.forEach(function(entity) {
+        for (var i = 0; i < entities.length; i++) {
+            var entity = entities[i];
+
             if (head.entities.hasOwnProperty(entity.id) || rectangles[entity.id])
-                return;
+                continue;
 
-            insertions.push(entity);
-            updateParents(entity, insertions);
-        });
+            insertions[entity.id] = entity;
+            updateParents(entity, insertions, {});
+        }
 
-        insertions = _.unique(insertions).map(entityRectangle);
-        rtree.load(insertions);
+        rtree.load(_.map(insertions, entityRectangle));
 
         return tree;
     };
@@ -61,7 +60,7 @@ iD.Tree = function(head) {
     tree.intersects = function(extent, graph) {
         if (graph !== head) {
             var diff = iD.Difference(head, graph),
-                insertions = [];
+                insertions = {};
 
             head = graph;
 
@@ -72,16 +71,15 @@ iD.Tree = function(head) {
 
             diff.modified().forEach(function(entity) {
                 rtree.remove(rectangles[entity.id]);
-                insertions.push(entity);
+                insertions[entity.id] = entity;
                 updateParents(entity, insertions);
             });
 
             diff.created().forEach(function(entity) {
-                insertions.push(entity);
+                insertions[entity.id] = entity;
             });
 
-            insertions = _.unique(insertions).map(entityRectangle);
-            rtree.load(insertions);
+            rtree.load(_.map(insertions, entityRectangle));
         }
 
         return rtree.search(extentRectangle(extent)).map(function(rect) {
