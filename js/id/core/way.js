@@ -14,14 +14,14 @@ _.extend(iD.Way.prototype, {
 
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
-            return this.nodes.reduce(function(extent, id) {
-                var node = resolver.hasEntity(id);
+            var extent = iD.geo.Extent();
+            for (var i = 0; i < this.nodes.length; i++) {
+                var node = resolver.hasEntity(this.nodes[i]);
                 if (node) {
-                    return extent.extend(node.extent());
-                } else {
-                    return extent;
+                    extent._extend(node.extent());
                 }
-            }, iD.geo.Extent());
+            };
+            return extent;
         });
     },
 

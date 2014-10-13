@@ -25,14 +25,15 @@ _.extend(iD.Relation.prototype, {
             if (memo && memo[this.id]) return iD.geo.Extent();
             memo = memo || {};
             memo[this.id] = true;
-            return this.members.reduce(function(extent, member) {
-                member = resolver.hasEntity(member.id);
+
+            var extent = iD.geo.Extent();
+            for (var i = 0; i < this.members.length; i++) {
+                var member = resolver.hasEntity(this.members[i].id);
                 if (member) {
-                    return extent.extend(member.extent(resolver, memo));
-                } else {
-                    return extent;
+                    extent._extend(member.extent(resolver, memo));
                 }
-            }, iD.geo.Extent());
+            }
+            return extent;
         });
     },
 
