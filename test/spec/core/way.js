@@ -469,6 +469,22 @@ describe('iD.Way', function() {
             expect(s).to.be.lt(l);
         });
 
+        it("treats unclosed areas as if they were closed", function () {
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
+                iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
+                iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
+                iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
+                iD.Way({id: 's', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
+                iD.Way({id: 'l', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd']})
+            ]);
+
+            var s = graph.entity('s').area(graph),
+                l = graph.entity('l').area(graph);
+
+            expect(s).to.equal(l);
+        });
+
         it("returns 0 for degenerate areas", function () {
             var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),

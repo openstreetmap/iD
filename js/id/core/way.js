@@ -218,20 +218,20 @@ _.extend(iD.Way.prototype, {
         return resolver.transient(this, 'area', function() {
             var nodes = resolver.childNodes(this);
 
-            if (!this.isClosed() && nodes.length) {
-                nodes = nodes.concat([nodes[0]]);
-            }
-
             var json = {
                 type: 'Polygon',
                 coordinates: [_.pluck(nodes, 'loc')]
             };
 
+            if (!this.isClosed() && nodes.length) {
+                json.coordinates[0].push(nodes[0].loc);
+            }
+
             var area = d3.geo.area(json);
 
             // Heuristic for detecting counterclockwise winding order. Assumes
             // that OpenStreetMap polygons are not hemisphere-spanning.
-            if (d3.geo.area(json) > 2 * Math.PI) {
+            if (area > 2 * Math.PI) {
                 json.coordinates[0] = json.coordinates[0].reverse();
                 area = d3.geo.area(json);
             }
