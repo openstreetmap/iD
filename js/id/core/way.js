@@ -20,7 +20,7 @@ _.extend(iD.Way.prototype, {
                 if (node) {
                     extent._extend(node.extent());
                 }
-            };
+            }
             return extent;
         });
     },
