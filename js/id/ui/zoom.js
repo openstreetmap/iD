@@ -28,7 +28,7 @@ iD.ui.Zoom = function(context) {
         button.append('span')
             .attr('class', function(d) { return d.id + ' icon'; });
 
-        var keybinding = d3.keybinding('zoom')
+        var keybinding = d3.keybinding('zoom');
 
         _.each(['=','ffequals','plus','ffplus'], function(key) {
             keybinding.on(key, function() { context.zoomIn(); });
