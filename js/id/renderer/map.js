@@ -297,8 +297,8 @@ iD.Map = function(context) {
         return redraw();
     };
 
-    map.zoomIn = function() { return map.zoom(Math.ceil(map.zoom() + 1)); };
-    map.zoomOut = function() { return map.zoom(Math.floor(map.zoom() - 1)); };
+    map.zoomIn = function() { return map.zoom(~~map.zoom() + 1); };
+    map.zoomOut = function() { return map.zoom(~~map.zoom() - 1); };
 
     map.center = function(loc) {
         if (!arguments.length) {
