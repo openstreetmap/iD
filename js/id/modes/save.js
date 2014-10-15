@@ -30,7 +30,7 @@ iD.modes.Save = function(context) {
                     confirm
                         .select('.modal-section.message-text')
                         .append('p')
-                        .text(err.responseText);
+                        .text(err.responseText || t('save.unknown_error_details'));
                 } else {
                     context.flush();
                     success(e, changeset_id);

@@ -301,6 +301,7 @@
         "help": "Save changes to OpenStreetMap, making them visible to other users.",
         "no_changes": "No changes to save.",
         "error": "An error occurred while trying to save",
+        "unknown_error_details": "Please ensure you are connected to the internet.",
         "uploading": "Uploading changes to OpenStreetMap.",
         "unsaved_changes": "You have unsaved changes"
     },
