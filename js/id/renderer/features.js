@@ -62,6 +62,8 @@ iD.Features = function(context) {
         dispatch.redraw();
     }
 
+
+
     defineFeature('points', function(entity) {
         return entity.geometry(context.graph()) === 'point';
     }, 100);
@@ -115,7 +117,11 @@ iD.Features = function(context) {
     });
 
     defineFeature('rail', function(entity) {
-        return (
+        return !(
+            feature.major_roads.filter(entity) ||
+            feature.minor_roads.filter(entity) ||
+            feature.paths.filter(entity)
+        ) && (
             !!entity.tags.railway ||
             entity.tags.landuse === 'railway'
         );
@@ -128,10 +134,11 @@ iD.Features = function(context) {
     // contains a past/future tag, but not in active use as a road/path/cycleway/etc..
     defineFeature('past_future', function(entity) {
         var strings = _.flatten(_.pairs(entity.tags));
-        return _.any(strings, function(s) { return past_futures[s]; }) &&
-            !feature.major_roads.filter(entity) &&
-            !feature.minor_roads.filter(entity) &&
-            !feature.paths.filter(entity);
+        return !(
+            feature.major_roads.filter(entity) ||
+            feature.minor_roads.filter(entity) ||
+            feature.paths.filter(entity)
+        ) && _.any(strings, function(s) { return past_futures[s]; });
     });
 
     // lines or areas that don't match another feature filter.
