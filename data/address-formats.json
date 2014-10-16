@@ -25,5 +25,13 @@
     {
         "countryCodes": ["vn"],
         "format": [["housenumber", "street"], ["subdistrict"], ["district"], ["city"], ["province", "postcode"]]
+    },
+    {
+        "countryCodes": ["us"],
+        "format": [["housenumber", "street"], ["city", "state", "postcode"]]
+    },
+    {
+        "countryCodes": ["ca"],
+        "format": [["housenumber", "street"], ["city", "province", "postcode"]]
     }
 ]
