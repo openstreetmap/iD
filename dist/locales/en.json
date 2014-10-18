@@ -2702,6 +2702,10 @@
                 "name": "Substation",
                 "terms": ""
             },
+            "power/substation": {
+                "name": "Substation",
+                "terms": ""
+            },
             "power/tower": {
                 "name": "High-Voltage Tower",
                 "terms": ""

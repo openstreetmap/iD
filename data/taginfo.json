@@ -1524,6 +1524,10 @@
         },
         {
             "key": "power",
+            "value": "substation"
+        },
+        {
+            "key": "power",
             "value": "tower"
         },
         {

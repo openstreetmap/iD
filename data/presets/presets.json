@@ -6368,6 +6368,21 @@
         "tags": {
             "power": "sub_station"
         },
+        "name": "Substation",
+        "searchable": false
+    },
+    "power/substation": {
+        "fields": [
+            "operator",
+            "building"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "power": "substation"
+        },
         "name": "Substation"
     },
     "power/tower": {

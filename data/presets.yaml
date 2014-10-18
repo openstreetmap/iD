@@ -1700,6 +1700,9 @@ en:
       power/sub_station:
         name: Substation
         terms: "<translate with synonyms or related terms for 'Substation', separated by commas>"
+      power/substation:
+        name: Substation
+        terms: "<translate with synonyms or related terms for 'Substation', separated by commas>"
       power/tower:
         name: High-Voltage Tower
         terms: "<translate with synonyms or related terms for 'High-Voltage Tower', separated by commas>"
