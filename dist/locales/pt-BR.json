@@ -2632,7 +2632,7 @@
                 "name": "Poste de Transmissão",
                 "terms": "Poste Elétrico"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Subestação Elétrica",
                 "terms": "Subestação"
             },

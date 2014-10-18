@@ -2640,7 +2640,7 @@
                 "name": "Steber daljnovoda",
                 "terms": "kandelaber"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Razdelilna transformatorska postaja",
                 "terms": "rtp,transformator,stikališče,razdelilna postaja"
             },

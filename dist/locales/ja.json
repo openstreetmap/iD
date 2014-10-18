@@ -2638,7 +2638,7 @@
                 "name": "電柱",
                 "terms": "電柱"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "変電所",
                 "terms": "変電所"
             },

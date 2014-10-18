@@ -6356,7 +6356,7 @@
         },
         "name": "Power Pole"
     },
-    "power/sub_station": {
+    "power/substation": {
         "fields": [
             "operator",
             "building"
@@ -6366,7 +6366,7 @@
             "area"
         ],
         "tags": {
-            "power": "sub_station"
+            "power": "substation"
         },
         "name": "Substation"
     },

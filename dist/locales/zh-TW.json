@@ -2689,7 +2689,7 @@
                 "name": "電線桿",
                 "terms": "電線桿"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "變電所",
                 "terms": "變電站"
             },

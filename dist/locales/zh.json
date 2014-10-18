@@ -1207,7 +1207,7 @@
             "power/pole": {
                 "name": "电线杆"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "变电站"
             },
             "power/tower": {

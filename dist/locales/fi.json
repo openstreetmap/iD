@@ -2090,7 +2090,7 @@
             "power/pole": {
                 "name": "Voimalinjapylväs"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Sähköasema"
             },
             "power/tower": {

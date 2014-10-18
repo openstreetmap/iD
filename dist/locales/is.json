@@ -1499,7 +1499,7 @@
             "power/pole": {
                 "name": "Orkustaur"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Undirstöð"
             },
             "power/tower": {

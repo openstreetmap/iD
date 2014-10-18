@@ -1996,7 +1996,7 @@
             "power/pole": {
                 "name": "مسیر برق متوسط"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "ایستگاه فرعی"
             },
             "power/tower": {

@@ -2689,7 +2689,7 @@
                 "name": "Strommast",
                 "terms": "Strommast, Stromleitungsmast"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Umspannwerk",
                 "terms": "Umspannwerk, Umspannungswerk"
             },

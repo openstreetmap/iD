@@ -1901,7 +1901,7 @@
             "power/pole": {
                 "name": "Напонски стуб"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Трафо станица"
             },
             "power/tower": {

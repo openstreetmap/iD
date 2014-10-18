@@ -2501,7 +2501,7 @@
             "power/pole": {
                 "name": "Piló de línia elèctrica"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Subestació",
                 "terms": "Subestació"
             },

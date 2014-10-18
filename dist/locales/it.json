@@ -2478,7 +2478,7 @@
                 "name": "Palo della luce",
                 "terms": "Pilone elettricità"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Sottostazione elettrica",
                 "terms": "Sottostazione elettrica,centralina,trasformatore"
             },

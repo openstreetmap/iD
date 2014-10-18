@@ -2164,7 +2164,7 @@
             "power/pole": {
                 "name": "Elektriciteitspaal"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Klein onderstation"
             },
             "power/tower": {

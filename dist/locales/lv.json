@@ -898,7 +898,7 @@
             "power/line": {
                 "name": "Elektrolīnija"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Metro stacija"
             },
             "power/tower": {

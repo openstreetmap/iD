@@ -2689,7 +2689,7 @@
                 "name": "Poste eléctrico",
                 "terms": "torre, torreta, alta, tensión, poste, electricidad"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Subestación",
                 "terms": "Subestación"
             },

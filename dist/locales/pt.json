@@ -2689,7 +2689,7 @@
                 "name": "Torre de Baixa Tensão",
                 "terms": "Power Pole, Poste de Eletricidade"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Subestação",
                 "terms": "Substation"
             },
