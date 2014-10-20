@@ -23,6 +23,13 @@ iD.modes.Save = function(context) {
                 loading.close();
                 if (err) {
                     var confirm = iD.ui.confirm(context.container());
+                    var detailedErrorMessage;
+                    if (typeof err.responseText === 'undefined') {
+                        detailedErrorMessage = t('save.unknown_error_details');
+                    } else {
+                        detailedErrorMessage = err.responseText;
+                    }
+
                     confirm
                         .select('.modal-section.header')
                         .append('h3')
@@ -30,7 +37,7 @@ iD.modes.Save = function(context) {
                     confirm
                         .select('.modal-section.message-text')
                         .append('p')
-                        .text(err.responseText);
+                        .text(detailedErrorMessage);
                 } else {
                     context.flush();
                     success(e, changeset_id);
