@@ -3281,6 +3281,22 @@
                 "name": "Zoo",
                 "terms": ""
             },
+            "traffic_calming/bump": {
+                "name": "Speed Bump",
+                "terms": "speed hump"
+            },
+            "traffic_calming/hump": {
+                "name": "Speed Hump",
+                "terms": "speed bump"
+            },
+            "traffic_calming/rumble_strip": {
+                "name": "Rumble Strip",
+                "terms": "sleeper lines,audible lines,growlers"
+            },
+            "traffic_calming/table": {
+                "name": "Raised Pedestrian Crossing",
+                "terms": "speed table,flat top hump"
+            },
             "type/boundary": {
                 "name": "Boundary",
                 "terms": ""

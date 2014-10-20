@@ -8959,6 +8959,67 @@
         },
         "name": "Zoo"
     },
+    "traffic_calming/bump": {
+        "fields": [
+            "surface"
+        ],
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "traffic_calming": "bump"
+        },
+        "terms": [
+            "speed hump"
+        ],
+        "name": "Speed Bump"
+    },
+    "traffic_calming/hump": {
+        "fields": [
+            "surface"
+        ],
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "traffic_calming": "hump"
+        },
+        "terms": [
+            "speed bump"
+        ],
+        "name": "Speed Hump"
+    },
+    "traffic_calming/rumble_strip": {
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "traffic_calming": "rumble_strip"
+        },
+        "terms": [
+            "sleeper lines",
+            "audible lines",
+            "growlers"
+        ],
+        "name": "Rumble Strip"
+    },
+    "traffic_calming/table": {
+        "fields": [
+            "surface"
+        ],
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "highway": "crossing",
+            "traffic_calming": "table"
+        },
+        "terms": [
+            "speed table",
+            "flat top hump"
+        ],
+        "name": "Raised Pedestrian Crossing"
+    },
     "type/boundary": {
         "geometry": [
             "relation"

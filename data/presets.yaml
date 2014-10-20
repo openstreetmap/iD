@@ -2135,6 +2135,18 @@ en:
       tourism/zoo:
         name: Zoo
         terms: "<translate with synonyms or related terms for 'Zoo', separated by commas>"
+      traffic_calming/bump:
+        name: Speed Bump
+        terms: "<translate with synonyms or related terms for 'Speed Bump', separated by commas>"
+      traffic_calming/hump:
+        name: Speed Hump
+        terms: "<translate with synonyms or related terms for 'Speed Hump', separated by commas>"
+      traffic_calming/rumble_strip:
+        name: Rumble Strip
+        terms: "<translate with synonyms or related terms for 'Rumble Strip', separated by commas>"
+      traffic_calming/table:
+        name: Raised Pedestrian Crossing
+        terms: "<translate with synonyms or related terms for 'Raised Pedestrian Crossing', separated by commas>"
       type/boundary:
         name: Boundary
         terms: "<translate with synonyms or related terms for 'Boundary', separated by commas>"

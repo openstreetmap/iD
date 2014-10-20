@@ -2096,6 +2096,22 @@
             "value": "zoo"
         },
         {
+            "key": "traffic_calming",
+            "value": "bump"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "hump"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "rumble_strip"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "table"
+        },
+        {
             "key": "type",
             "value": "boundary"
         },
