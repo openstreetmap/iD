@@ -7611,7 +7611,7 @@
         "name": "Garden Center"
     },
     "shop/gift": {
-        "icon": "shop",
+        "icon": "gift",
         "fields": [
             "operator",
             "address",
