@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "surface"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "traffic_calming": "bump"
+    },
+    "terms": [
+        "speed hump"
+    ],
+    "name": "Speed Bump"
+}
