@@ -222,11 +222,17 @@ window.iD = function () {
     };
 
     /* Presets */
-    var presets = iD.presets()
-        .load(iD.data.presets);
+    var presets = iD.presets();
 
-    context.presets = function() {
-        return presets;
+    context.presets = function(_) {
+        if (!arguments.length) return presets;
+        presets.load(_);
+        return context;
+    };
+
+    context.imagery = function(_) {
+        background.load(_);
+        return context;
     };
 
     context.container = function(_) {

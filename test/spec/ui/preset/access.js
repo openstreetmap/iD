@@ -3,7 +3,7 @@ describe('iD.ui.preset.access', function() {
 
     beforeEach(function() {
         selection = d3.select(document.createElement('div'));
-        field = iD().presets().field('access');
+        field = iD().presets(iD.data.presets).presets().field('access');
     });
 
     it('creates inputs for a variety of modes of access', function() {

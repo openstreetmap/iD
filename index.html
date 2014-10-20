@@ -230,7 +230,10 @@
         <div id='id-container'></div>
         <script>
             iD.data.load(function() {
-                id = iD().assetPath('dist/');
+                id = iD()
+                    .presets(iD.data.presets)
+                    .imagery(iD.data.imagery)
+                    .assetPath('dist/');
 
                 d3.select('#id-container')
                     .call(id.ui());

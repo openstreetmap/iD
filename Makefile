@@ -4,6 +4,8 @@ all: \
 	dist/iD.css \
 	dist/iD.js \
 	dist/iD.min.js \
+	dist/presets.js \
+	dist/imagery.js \
 	dist/img/line-presets.png \
 	dist/img/relation-presets.png
 

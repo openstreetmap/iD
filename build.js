@@ -270,14 +270,7 @@ fs.writeFileSync('dist/locales/en.json', stringify(en.en));
 fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     deprecated: r('deprecated.json'),
     discarded: r('discarded.json'),
-    imagery: r('imagery.json'),
     wikipedia: r('wikipedia.json'),
-    presets: {
-        presets: rp('presets.json'),
-        defaults: rp('defaults.json'),
-        categories: rp('categories.json'),
-        fields: rp('fields.json')
-    },
     imperial: r('imperial.json'),
     featureIcons: r('feature-icons.json'),
     operations: r('operations-sprite.json'),
@@ -286,3 +279,12 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     suggestions: r('name-suggestions.json'),
     addressFormats: r('address-formats.json')
 }) + ';');
+
+fs.writeFileSync('dist/presets.js', 'iD.data.presets = ' + stringify({
+    presets: rp('presets.json'),
+    defaults: rp('defaults.json'),
+    categories: rp('categories.json'),
+    fields: rp('fields.json')
+}) + ';');
+
+fs.writeFileSync('dist/imagery.js', 'iD.data.imagery = ' + stringify(r('imagery.json')) + ';');

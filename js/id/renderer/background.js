@@ -7,15 +7,7 @@ iD.Background = function(context) {
         mapillaryLayer = iD.MapillaryLayer(context),
         overlayLayers = [];
 
-    var backgroundSources = iD.data.imagery.map(function(source) {
-        if (source.type === 'bing') {
-            return iD.BackgroundSource.Bing(source, dispatch);
-        } else {
-            return iD.BackgroundSource(source);
-        }
-    });
-
-    backgroundSources.unshift(iD.BackgroundSource.None());
+    var backgroundSources;
 
     function findSource(id) {
         return _.find(backgroundSources, function(d) {
@@ -231,36 +223,48 @@ iD.Background = function(context) {
         return background;
     };
 
-    var q = iD.util.stringQs(location.hash.substring(1)),
-        chosen = q.background || q.layer;
-
-    if (chosen && chosen.indexOf('custom:') === 0) {
-        background.baseLayerSource(iD.BackgroundSource.Custom(chosen.replace(/^custom:/, '')));
-    } else {
-        background.baseLayerSource(findSource(chosen) || findSource('Bing'));
-    }
-
-    var locator = _.find(backgroundSources, function(d) {
-        return d.overlay && d.default;
-    });
-
-    if (locator) {
-        background.toggleOverlayLayer(locator);
-    }
-
-    var overlays = (q.overlays || '').split(',');
-    overlays.forEach(function(overlay) {
-        overlay = findSource(overlay);
-        if (overlay) background.toggleOverlayLayer(overlay);
-    });
-
-    var gpx = q.gpx;
-    if (gpx) {
-        d3.text(gpx, function(err, gpxTxt) {
-            gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
-            dispatch.change();
+    background.load = function(imagery) {
+        backgroundSources = imagery.map(function(source) {
+            if (source.type === 'bing') {
+                return iD.BackgroundSource.Bing(source, dispatch);
+            } else {
+                return iD.BackgroundSource(source);
+            }
         });
-    }
+
+        backgroundSources.unshift(iD.BackgroundSource.None());
+
+        var q = iD.util.stringQs(location.hash.substring(1)),
+            chosen = q.background || q.layer;
+
+        if (chosen && chosen.indexOf('custom:') === 0) {
+            background.baseLayerSource(iD.BackgroundSource.Custom(chosen.replace(/^custom:/, '')));
+        } else {
+            background.baseLayerSource(findSource(chosen) || findSource('Bing'));
+        }
+
+        var locator = _.find(backgroundSources, function(d) {
+            return d.overlay && d.default;
+        });
+
+        if (locator) {
+            background.toggleOverlayLayer(locator);
+        }
+
+        var overlays = (q.overlays || '').split(',');
+        overlays.forEach(function(overlay) {
+            overlay = findSource(overlay);
+            if (overlay) background.toggleOverlayLayer(overlay);
+        });
+
+        var gpx = q.gpx;
+        if (gpx) {
+            d3.text(gpx, function(err, gpxTxt) {
+                gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
+                dispatch.change();
+            });
+        }
+    };
 
     return d3.rebind(background, dispatch, 'on');
 };

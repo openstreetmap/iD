@@ -3,7 +3,7 @@ describe('iD.ui.preset.wikipedia', function() {
 
     beforeEach(function() {
         selection = d3.select(document.createElement('div'));
-        field = iD().presets().field('wikipedia');
+        field = iD().presets(iD.data.presets).presets().field('wikipedia');
     });
 
     it('recognizes lang:title format', function() {
