@@ -1,4 +1,32 @@
 iD.svg.Areas = function(projection) {
+    // Patterns only work in Firefox when set directly on element.
+    // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
+    var patterns = {
+        wetland: 'wetland',
+        beach: 'beach',
+        scrub: 'scrub',
+        construction: 'construction',
+        military: 'construction',
+        cemetery: 'cemetery',
+        grave_yard: 'cemetery',
+        meadow: 'meadow',
+        farm: 'farmland',
+        farmland: 'farmland',
+        orchard: 'orchard'
+    };
+
+    var patternKeys = ['landuse', 'natural', 'amenity'];
+
+    function setPattern(d) {
+        for (var i = 0; i < patternKeys.length; i++) {
+            if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
+                this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
+                return;
+            }
+        }
+        this.style.fill = this.style.stroke = '';
+    }
+
     return function drawAreas(surface, graph, entities, filter) {
         var path = iD.svg.Path(projection, graph, true),
             areas = {},
@@ -93,6 +121,7 @@ iD.svg.Areas = function(projection) {
 
                 if (layer === 'fill') {
                     this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
+                    setPattern.apply(this, arguments);
                 }
             })
             .call(iD.svg.TagClasses());
