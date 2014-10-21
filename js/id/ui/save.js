@@ -34,7 +34,7 @@ iD.ui.Save = function(context) {
             .text('0');
 
         var keybinding = d3.keybinding('undo-redo')
-            .on(key, save);
+            .on(key, save, true);
 
         d3.select(document)
             .call(keybinding);
