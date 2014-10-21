@@ -91,3 +91,61 @@ To build presets, all you need to do is run `make`.
 This command will take care of running the build script, which packages all presets
 together with imagery data, and deprecated or discarded tags into one file, `data/data.js`,
 which is included in the packaged iD.js file.
+
+## Custom Presets
+
+iD supports deployments which use a custom set of presets. You can supply presets via
+the `presets` accessor:
+
+```js
+var id = iD().presets({
+    presets: { ... },
+    fields: { ... },
+    defaults: { ... },
+    categories: { ... }
+});
+```
+
+All four parts (presets, fields, defaults, and categories) must be supplied. In addition,
+several base presets and fields must be included.
+
+Basic geometric presets must be included so that every feature matches at least one preset.
+For example:
+
+```js
+"area": {
+    "name": "Area",
+    "tags": {},
+    "geometry": ["area"],
+    "matchScore": 0.1
+},
+"line": {
+    "name": "Line",
+    "tags": {},
+    "geometry": ["line"],
+    "matchScore": 0.1
+},
+"point": {
+    "name": "Point",
+    "tags": {},
+    "geometry": ["point"],
+    "matchScore": 0.1
+},
+"vertex": {
+    "name": "Other",
+    "tags": {},
+    "geometry": ["vertex"],
+    "matchScore": 0.1
+}
+```
+
+A "name" field must be included:
+
+```js
+"name": {
+    "key": "name",
+    "type": "localized",
+    "label": "Name",
+    "placeholder": "Common name (if any)"
+}
+```
