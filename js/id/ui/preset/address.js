@@ -8,6 +8,7 @@ iD.ui.preset.address = function(field, context) {
         housenumber: 1/3,
         street: 2/3,
         city: 2/3,
+        state: 1/4,
         postcode: 1/3
     };
 
