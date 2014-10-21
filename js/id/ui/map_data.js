@@ -159,7 +159,7 @@ iD.ui.MapData = function(context) {
             shown = false;
 
         button.append('span')
-            .attr('class', 'icon layers light');
+            .attr('class', 'icon data light');
 
         content.append('h4')
             .text(t('map_data.title'));
