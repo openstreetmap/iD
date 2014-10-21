@@ -1417,7 +1417,7 @@
             "power/pole": {
                 "name": "Poste eléctrico"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Subestación"
             },
             "power/tower": {

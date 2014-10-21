@@ -1862,7 +1862,7 @@
             "power/pole": {
                 "name": "Poste eléctricu"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Subestación"
             },
             "power/tower": {

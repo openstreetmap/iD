@@ -1281,7 +1281,7 @@
             "power/pole": {
                 "name": "Електрически стълб"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Подстанция"
             },
             "power/tower": {

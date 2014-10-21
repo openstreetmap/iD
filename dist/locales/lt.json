@@ -1256,7 +1256,7 @@
             "power/pole": {
                 "name": "Elektros stulpas"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Pastotė"
             },
             "power/tower": {

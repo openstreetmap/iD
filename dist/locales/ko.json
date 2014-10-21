@@ -1958,7 +1958,7 @@
             "power/pole": {
                 "name": "전봇대"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "변전소"
             },
             "power/tower": {

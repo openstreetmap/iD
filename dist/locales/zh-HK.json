@@ -1785,7 +1785,7 @@
                 "name": "電綫杆",
                 "terms": "Power Pole,電綫杆,電線桿"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "配電站",
                 "terms": "Substation,變電站,配電站"
             },

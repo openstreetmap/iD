@@ -2633,7 +2633,7 @@
                 "name": "Elektrický stĺp",
                 "terms": "stlp elektrickeho vedenia,stožiar,stoziar,elektrický stĺp,elektricky stlp,Stĺp elektrického vedenia"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Rozvodná stanica",
                 "terms": "Rozvodna stanica,Rozvodná stanica,transformator"
             },

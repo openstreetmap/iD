@@ -2689,7 +2689,7 @@
                 "name": "Kraftledningsstolpe",
                 "terms": "Kraftledningsstolpe, elledningsstolpe, stolpe, kraftledningsmast, elledningsmast, mast"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Fördelningsstation",
                 "terms": "Transformator, elomvandling, elskåp, fördelningsstation, stadsnätstation, elfördelning"
             },

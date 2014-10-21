@@ -1051,7 +1051,7 @@
             "power/pole": {
                 "name": "Elektripost"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Alajaam"
             },
             "power/transformer": {

@@ -1697,7 +1697,7 @@ en:
       power/pole:
         name: Power Pole
         terms: "<translate with synonyms or related terms for 'Power Pole', separated by commas>"
-      power/sub_station:
+      power/substation:
         name: Substation
         terms: "<translate with synonyms or related terms for 'Substation', separated by commas>"
       power/tower:

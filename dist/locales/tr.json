@@ -1535,7 +1535,7 @@
             "power/line": {
                 "name": "Güç Hattı"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Ara istasyon"
             },
             "railway": {

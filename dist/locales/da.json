@@ -2689,7 +2689,7 @@
                 "name": "Elmast (telefonmast)",
                 "terms": "Elmast (telefonmast)"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Transformatorstation",
                 "terms": "Transformatorstation"
             },

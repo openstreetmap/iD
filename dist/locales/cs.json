@@ -2213,7 +2213,7 @@
                 "name": "Eletrický sloup",
                 "terms": "sloup el.vedení,elektrický sloup,sloup elektrického vedení,sloupový stožár"
             },
-            "power/sub_station": {
+            "power/substation": {
                 "name": "Transformátorová stanice",
                 "terms": "Transformátorová stanice"
             },
