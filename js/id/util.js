@@ -41,7 +41,7 @@ iD.util.stringQs = function(str) {
 };
 
 iD.util.qsString = function(obj, noencode) {
-    function softEncode(s) { return s.replace('&', '%26'); }
+    function softEncode(s) { return s.replace('&', '%26').replace('=', '%3D'); }
     return Object.keys(obj).sort().map(function(key) {
         return encodeURIComponent(key) + '=' + (
             noencode ? softEncode(obj[key]) : encodeURIComponent(obj[key]));
