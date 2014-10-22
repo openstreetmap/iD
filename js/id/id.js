@@ -227,6 +227,7 @@ window.iD = function () {
     context.presets = function(_) {
         if (!arguments.length) return presets;
         presets.load(_);
+        iD.areaKeys = presets.areaKeys();
         return context;
     };
 

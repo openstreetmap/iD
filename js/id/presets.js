@@ -40,6 +40,32 @@ iD.presets = function() {
         return match || all.item(geometry);
     };
 
+    all.areaKeys = function() {
+
+        // A closed way is considered to be an area if it has a tag with one
+        // of the following keys, and the value is _not_ one of the associated
+        // values for the respective key.
+
+        var areaKeys = {};
+
+        all.collection.forEach(function(d) {
+            if (d.tags) {
+                for (var key in d.tags) break;
+                var value = d.tags[key];
+
+                if (['highway', 'footway', 'railway', 'type'].indexOf(key) === -1) {
+                    if (d.geometry.indexOf('area') >= 0) {
+                        areaKeys[key] = areaKeys[key] || {};
+                    } else if (key in areaKeys && value !== '*') {
+                        areaKeys[key][value] = true;
+                    }
+                }
+            }
+        });
+
+        return areaKeys;
+    };
+
     all.load = function(d) {
 
         if (d.fields) {

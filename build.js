@@ -137,11 +137,6 @@ function suggestionsToPresets(presets) {
 function generatePresets() {
     var presets = {};
 
-    // A closed way is considered to be an area if it has a tag with one
-    // of the following keys, and the value is _not_ one of the associated
-    // values for the respective key.
-    var areaKeys = {};
-
     glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
         var preset = read(file),
             id = file.match(/presets\/presets\/([^.]*)\.json/)[1];
@@ -152,18 +147,6 @@ function generatePresets() {
             name: preset.name,
             terms: (preset.terms || []).join(',')
         };
-
-        for (var key in preset.tags) break;
-        var value = preset.tags[key];
-
-        if (['highway', 'footway', 'railway', 'type'].indexOf(key) === -1) {
-            if (preset.geometry.indexOf('area') >= 0) {
-                areaKeys[key] = areaKeys[key] || {};
-            } else if (key in areaKeys && value !== '*') {
-                areaKeys[key][value] = true;
-            }
-        }
-
         presets[id] = preset;
     });
 
@@ -176,7 +159,6 @@ function generatePresets() {
 
     return {
         presets: presets,
-        areaKeys: areaKeys,
         presetsYaml: presetsYaml
     };
 }
@@ -221,7 +203,6 @@ validatePresetFields(presets.presets, fields);
 fs.writeFileSync('data/presets/categories.json', stringify(categories));
 fs.writeFileSync('data/presets/fields.json', stringify(fields));
 fs.writeFileSync('data/presets/presets.json', stringify(presets.presets));
-fs.writeFileSync('js/id/core/area_keys.js', '/* jshint -W109 */\niD.areaKeys = ' + stringify(presets.areaKeys) + ';');
 fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: presets.presetsYaml}}));
 
 // Write taginfo data

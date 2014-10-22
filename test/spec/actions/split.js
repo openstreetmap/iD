@@ -1,4 +1,9 @@
 describe("iD.actions.Split", function () {
+
+    beforeEach(function () {
+        iD.areaKeys = iD().presets(iD.data.presets).presets().areaKeys();
+    });
+
     describe("#disabled", function () {
         it("returns falsy for a non-end node of a single way", function () {
             var graph = iD.Graph([

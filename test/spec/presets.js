@@ -40,6 +40,33 @@ describe("iD.presets", function() {
         });
     });
 
+    describe("#areaKeys", function() {
+        var presets = iD.presets().load({
+            presets: {
+                a: {
+                    tags: {
+                        a: '*'
+                    },
+                    geometry: ['point', 'line', 'area']
+                },
+                ab: {
+                    tags: {
+                        a: 'b'
+                    },
+                    geometry: ['line']
+                }
+            }
+        });
+
+        it("whitelists keys from presets with area geometry", function() {
+            expect(presets.areaKeys()).to.have.key('a');
+        });
+
+        it("blacklists key-values from presets without an area geometry", function() {
+            expect(presets.areaKeys().a.b).to.eq(true);
+        });
+    });
+
     describe("expected matches", function() {
         var presets;
 
