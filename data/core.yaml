@@ -184,6 +184,7 @@ en:
     upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
     save: Save
     cancel: Cancel
+    changes: Changes
     warnings: Warnings
     modified: Modified
     deleted: Deleted

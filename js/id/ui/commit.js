@@ -134,7 +134,7 @@ iD.ui.Commit = function(context) {
             .attr('class', 'commit-section modal-section fillL2');
 
         changeSection.append('h3')
-            .text(summary.length + ' Changes');
+            .text(summary.length + ' ' + t('commit.changes'));
 
         var li = changeSection.append('ul')
             .attr('class', 'changeset-list')
@@ -154,7 +154,7 @@ iD.ui.Commit = function(context) {
         li.append('span')
             .attr('class', 'change-type')
             .text(function(d) {
-                return d.changeType + ' ';
+                return t('commit.' + d.changeType) + ' ';
             });
 
         li.append('strong')
