@@ -2286,14 +2286,6 @@ img.wiki-image {
     width: 100%;
     float: left;
     clear: both;
-    opacity: .625;
-    -webkit-transition: opacity 200ms;
-    -moz-transition: opacity 200ms;
-    transition: opacity 200ms;
-}
-
-#footer:hover {
-    opacity: 1;
 }
 
 #scale-block {
