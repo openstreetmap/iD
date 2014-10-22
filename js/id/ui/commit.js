@@ -134,7 +134,7 @@ iD.ui.Commit = function(context) {
             .attr('class', 'commit-section modal-section fillL2');
 
         changeSection.append('h3')
-            .text(summary.length + ' ' + t('commit.changes'));
+            .text(t('commit.changes', {count: summary.length}));
 
         var li = changeSection.append('ul')
             .attr('class', 'changeset-list')
