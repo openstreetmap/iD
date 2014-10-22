@@ -12,12 +12,12 @@ iD.ui.RawTagEditor = function(context) {
 
         selection.call(iD.ui.Disclosure()
             .title(t('inspector.all_tags') + ' (' + count + ')')
-            .expanded(iD.ui.RawTagEditor.expanded || preset.isFallback())
+            .expanded(context.storage('raw_tag_editor.expanded') === 'true' || preset.isFallback())
             .on('toggled', toggled)
             .content(content));
 
         function toggled(expanded) {
-            iD.ui.RawTagEditor.expanded = expanded;
+            context.storage('raw_tag_editor.expanded', expanded);
             if (expanded) {
                 selection.node().parentNode.scrollTop += 200;
             }
