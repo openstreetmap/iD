@@ -481,7 +481,7 @@ en:
       [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).
 
       To use a GPX track for mapping, drag and drop the GPX file onto the map
-      editor. If it's recognized, it will be added to the map as a bright green
+      editor. If it's recognized, it will be added to the map as a bright purple
       line. Click on the 'Map Data' menu on the right side to enable,
       disable, or zoom to this new GPX-powered layer.
 
