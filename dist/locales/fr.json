@@ -834,7 +834,7 @@
                 }
             },
             "mtb/scale/uphill": {
-                "label": "VTT Uphill Difficulté",
+                "label": "Difficulté VTT en montée",
                 "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Inclinaison <10% , sol consistent, pas d'obstacles",
@@ -1046,6 +1046,7 @@
                 }
             },
             "social_facility_for": {
+                "label": "Personnes desservies",
                 "placeholder": "Sans-abris, handicapés, enfants, etc."
             },
             "source": {
@@ -1104,7 +1105,7 @@
                 "options": {
                     "grade1": "Dur : pavé ou surface très compacte",
                     "grade2": "Majoritairement dur : gravier/pierre avec quelque matériaux mous mélangés dedans",
-                    "grade3": "Mélange homogène entre matériaux mous et durs",
+                    "grade3": "Mélange à égalité entre matériaux mous et durs",
                     "grade4": "Majoritairement mou : terre/sable/herbe avec quelque matériaux durs mélangés dedans",
                     "grade5": "Mou : terre/sable/herbe"
                 }
@@ -1418,7 +1419,7 @@
             },
             "amenity/place_of_worship/christian": {
                 "name": "Église",
-                "terms": "Eglise"
+                "terms": "Église"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Synagogue",
@@ -1650,7 +1651,7 @@
             },
             "building/dormitory": {
                 "name": "Résidence universitaire",
-                "terms": "Foyer"
+                "terms": "Dortoir,Foyer"
             },
             "building/entrance": {
                 "name": "Entrée/Sortie",
@@ -2653,7 +2654,7 @@
                 "terms": "Environs, Voisinage, Quartier"
             },
             "place/suburb": {
-                "name": "Commune",
+                "name": "Quartier",
                 "terms": "Commune, Municipalité, District, Arrondissement, Bourough"
             },
             "place/town": {
@@ -3245,8 +3246,8 @@
                 "terms": "Hôtel"
             },
             "tourism/information": {
-                "name": "Office de tourisme",
-                "terms": "Renseignements"
+                "name": "Informations",
+                "terms": "Informations,Renseignements,Office de tourisme,Panneau,Carte"
             },
             "tourism/motel": {
                 "name": "Motel",
@@ -3295,6 +3296,10 @@
             "type/restriction/no_right_turn": {
                 "name": "Interdiction de tourner à droite",
                 "terms": "Interdiction de tourner à droite"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "Interdiction d'aller tout droit",
+                "terms": "Interdiction d'aller tout droit"
             },
             "type/restriction/no_u_turn": {
                 "name": "Demi-tour interdit",

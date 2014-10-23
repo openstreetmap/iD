@@ -340,15 +340,19 @@
         "deprecated_tags": "Etiquetas obsoletas: {tags}"
     },
     "zoom": {
-        "in": "Acercar",
-        "out": "Afastar"
+        "in": "Ampliar",
+        "out": "Reducir"
     },
-    "cannot_zoom": "Non se pode afastar máis no modo actual.",
+    "cannot_zoom": "Non se pode reducir máis no modo actual.",
     "gpx": {
         "local_layer": "Ficheiro GPX local",
         "drag_drop": "Arrastra e solta un ficheiro .gpx sobre a páxina, ou fai clic no botón da dereita para buscalo",
         "zoom": "Facer zoom á pista GPX",
         "browse": "Buscar un ficheiro .gpx"
+    },
+    "mapillary": {
+        "tooltip": "Fotos a pé de rúa de Mapillary",
+        "title": "Superposición de fotos (Mapillary)"
     },
     "help": {
         "title": "Axuda",

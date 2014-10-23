@@ -353,7 +353,7 @@
     "mapillary": {
         "tooltip": "Fotos a nivel de calle de Mapillary",
         "title": "Superposición de fotos (Mapillary)",
-        "view_on_mapillary": "Ver esta imagen en Mapillary"
+        "view_on_mapillary": "Ver esta imaxe en Mapillary"
     },
     "help": {
         "title": "Ayuda",
@@ -1382,8 +1382,8 @@
                 "terms": "Recinto hospitalario, hospital, clínica"
             },
             "amenity/kindergarten": {
-                "name": "Terreno Preescolar / Jardín de infantes",
-                "terms": "terrenos del preescolar"
+                "name": "Área de preescolar / Jardín de infancia",
+                "terms": "preescolar, jardín de infancia, parvulario, parvulos, terreno, área, suelo"
             },
             "amenity/library": {
                 "name": "Biblioteca",
@@ -1474,16 +1474,16 @@
                 "terms": "Banco de alimentos"
             },
             "amenity/social_facility/group_home": {
-                "name": "Hogar de Ancianos",
-                "terms": "Hogar de mayores"
+                "name": "Residencia de la tercera edad",
+                "terms": "Hogar de mayores, ancianos, residencia, tercera edad"
             },
             "amenity/social_facility/homeless_shelter": {
-                "name": "Refugio de personas sin hogar",
-                "terms": "Refugio social"
+                "name": "Centro de acofgida para personas sin hogar",
+                "terms": "refugio social, refugio, comedor social, alberge, centro, vagabundo"
             },
             "amenity/studio": {
                 "name": "Estudio",
-                "terms": "estudio, taller"
+                "terms": "estudio, taller, gabinete"
             },
             "amenity/swimming_pool": {
                 "name": "Piscina",
@@ -1491,7 +1491,7 @@
             },
             "amenity/taxi": {
                 "name": "Parada de taxis",
-                "terms": "Parada de Taxis, sitio de taxis"
+                "terms": "taxi, parada"
             },
             "amenity/telephone": {
                 "name": "Teléfono",
@@ -1510,8 +1510,8 @@
                 "terms": "ayuntamiento, alcaldía, municipio, municipalidad, municipal, corporación, concejo, consistorio, cabildo, gobierno local, gobierno municipal, alcalde, intendente, concejales, ediles, comuna, casa consistorial"
             },
             "amenity/university": {
-                "name": "Terreno Universidad",
-                "terms": "terrenos de la universidad"
+                "name": "Área universitaria",
+                "terms": "terrenos, universidad, campus, colegio mayor, facultad"
             },
             "amenity/vending_machine": {
                 "name": "Máquina expendedora",
@@ -1519,7 +1519,7 @@
             },
             "amenity/veterinary": {
                 "name": "Veterinario",
-                "terms": "veterinario, albéitar, mascotas, animales"
+                "terms": "veterinario, albéitar, mascotas, animales, perros, gatos"
             },
             "amenity/waste_basket": {
                 "name": "Papelera",
@@ -1527,11 +1527,11 @@
             },
             "area": {
                 "name": "Área",
-                "terms": "superficie, extensión, espacio, zona, sector, campo, dominio, territorio, tierra, parcela"
+                "terms": "superficie, extensión, espacio, zona, sector, campo, dominio, territorio, tierra, parcela, terreno"
             },
             "barrier": {
                 "name": "Barrera",
-                "terms": "barrera,valla, muro, tapia, seto, barda, bardal, vallado, cerca, empalizada, parapeto, verja\nobstáculo, impedimento, oposición, inconveniente, estorbo"
+                "terms": "barrera,valla, muro, tapia, seto, barda, bardal, vallado, cerca, empalizada, parapeto, verja, obstáculo, impedimento, oposición, inconveniente, estorbo"
             },
             "barrier/block": {
                 "name": "Bloque",
@@ -1623,7 +1623,7 @@
             },
             "building/cathedral": {
                 "name": "Catedral",
-                "terms": "Iglesia, Lugar de culto, templo, basílica, parroquia, santuario, oratorio, iglesia, basílica"
+                "terms": "iglesia, lugar de culto, templo, basílica, parroquia, santuario, oratorio, iglesia, basílica"
             },
             "building/chapel": {
                 "name": "Capilla",
@@ -1639,7 +1639,7 @@
             },
             "building/commercial": {
                 "name": "Edificio comercial",
-                "terms": "centro comercial, edificio comercial"
+                "terms": "centro comercial, edificio comercial, tiendas"
             },
             "building/construction": {
                 "name": "Edificio en construcción",
@@ -1647,11 +1647,11 @@
             },
             "building/detached": {
                 "name": "Casa unifamiliar",
-                "terms": "Chalet, unifamiliar, casa independiente"
+                "terms": "chalet, unifamiliar, casa, vivienda, construcción"
             },
             "building/dormitory": {
                 "name": "Dormitorio",
-                "terms": "Dormitorio, residencia universitaria"
+                "terms": "dormitorio, residencia universitaria"
             },
             "building/entrance": {
                 "name": "Entrada/Salida",
@@ -1671,7 +1671,7 @@
             },
             "building/hospital": {
                 "name": "Edificio de hospital",
-                "terms": "Hospital, sanatorio, Centro de primeros auxilios"
+                "terms": "hospital, sanatorio, centro de primeros auxilios, clínica, psiquiátrico"
             },
             "building/hotel": {
                 "name": "Edificio de hotel",
@@ -1691,11 +1691,11 @@
             },
             "building/kindergarten": {
                 "name": "Edificio Preescolar / Jardín de infantes ",
-                "terms": "edificio del preescolar"
+                "terms": "preescolar, parvulario, párvulos, jardín de infancia, edificio, colegio"
             },
             "building/public": {
                 "name": "Edificio público",
-                "terms": "Edificio público"
+                "terms": "edificio público, construcción, centro cultural, centro social, delegación"
             },
             "building/residential": {
                 "name": "Edificio residencial",
@@ -1707,7 +1707,7 @@
             },
             "building/roof": {
                 "name": "Tejado",
-                "terms": "Tejado, Techumbre"
+                "terms": "tejado, techumbre, cubierta, techo"
             },
             "building/school": {
                 "name": "Edificio escolar",
@@ -1719,7 +1719,7 @@
             },
             "building/stable": {
                 "name": "Establo de caballos",
-                "terms": "Cuadra de caballos, caballeriza, caballos"
+                "terms": "cuadra, caballos, caballeriza, caballos, yegua"
             },
             "building/static_caravan": {
                 "name": "Caravana estática",
@@ -1735,7 +1735,7 @@
             },
             "building/university": {
                 "name": "Edificio universitario",
-                "terms": "Universidad, Facultad, Escuela universitaria"
+                "terms": "universidad, facultad, escuela universitaria, colegio mayor"
             },
             "building/warehouse": {
                 "name": "Almacén",
@@ -1751,11 +1751,11 @@
             },
             "craft/beekeeper": {
                 "name": "Apicultor",
-                "terms": "apicultor, colmenero"
+                "terms": "apicultor, colmenero, abeja, panel, miel"
             },
             "craft/blacksmith": {
                 "name": "Herrero",
-                "terms": "herrero, herrería, herrajes, hierro, forja"
+                "terms": "herrero, herrería, herrajes, hierro, forja, herradura, fragua"
             },
             "craft/boatbuilder": {
                 "name": "Constructor de barco",
@@ -1795,7 +1795,7 @@
             },
             "craft/electrician": {
                 "name": "Electricista",
-                "terms": "electricista, iluminista, trabajo de electricista"
+                "terms": "electricista, iluminista, trabajo de electricidad"
             },
             "craft/gardener": {
                 "name": "Jardinero",
@@ -1831,11 +1831,11 @@
             },
             "craft/metal_construction": {
                 "name": "Construcción metálica",
-                "terms": "Metalúrgica, Taller metálico, Construcciones de metal, Calderería"
+                "terms": "metalúrgica, taller metálico, construcciones de metal, calderería,"
             },
             "craft/optician": {
                 "name": "Óptico",
-                "terms": "óptico, óptica, gafas"
+                "terms": "óptico, óptica, gafas, optometrista, oculista, lentillas"
             },
             "craft/painter": {
                 "name": "Pintor",
@@ -1851,11 +1851,11 @@
             },
             "craft/plasterer": {
                 "name": "Yesero",
-                "terms": "yeso, albañil, obra"
+                "terms": "yeso, albañil, obra, construcción"
             },
             "craft/plumber": {
                 "name": "Fontanero",
-                "terms": "Fontanero, Fontanería, Plomero, Plomería"
+                "terms": "fontanero, fontanería, plomero, plomería, desatascador, tubero"
             },
             "craft/pottery": {
                 "name": "Cerámica",
@@ -1867,7 +1867,7 @@
             },
             "craft/roofer": {
                 "name": "Techador",
-                "terms": "Techador, Techista"
+                "terms": "techador, techista, tejado, cubierta, encofrador"
             },
             "craft/saddler": {
                 "name": "Talabartero",
@@ -1875,7 +1875,7 @@
             },
             "craft/sailmaker": {
                 "name": "Velero",
-                "terms": "Fabricante de velas"
+                "terms": "Fabricante de velas, velero, barco"
             },
             "craft/sawmill": {
                 "name": "Aserradero",
@@ -1899,7 +1899,7 @@
             },
             "craft/sweep": {
                 "name": "Deshollinador",
-                "terms": "Deshollinador, Limpiachimeneas"
+                "terms": "deshollinador, limpiachimeneas, chimenea"
             },
             "craft/tailor": {
                 "name": "Sastre",
@@ -1911,7 +1911,7 @@
             },
             "craft/tinsmith": {
                 "name": "Hojalatero",
-                "terms": "Hojalatero, Soldador"
+                "terms": "hojalatero, soldador, metal"
             },
             "craft/upholsterer": {
                 "name": "Tapicero",
@@ -3406,8 +3406,8 @@
                 "terms": "torrente, riachuelo, arroyuelo, regato, reguero, torrentera, rivera, corriente, afluente, brazo, toma, río, arroyo"
             },
             "waterway/weir": {
-                "name": "Vertedero",
-                "terms": "presa, azud"
+                "name": "Presa",
+                "terms": "presa, azud, dique, represa"
             }
         }
     }

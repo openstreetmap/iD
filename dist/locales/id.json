@@ -425,6 +425,9 @@
             "category-rail": {
                 "name": "Rel"
             },
+            "category-restriction": {
+                "name": "Larangan"
+            },
             "category-road": {
                 "name": "Jalan"
             },
@@ -458,25 +461,38 @@
                         "description": "Akses terbatas untuk umum"
                     },
                     "permissive": {
-                        "title": "Dibolehkan"
+                        "title": "Dibolehkan",
+                        "description": "Akses diperbolehkan sampai batas pemilik membatalkan izin"
                     },
                     "private": {
-                        "title": "Pribadi"
+                        "title": "Pribadi",
+                        "description": "Akses diperbolehkan hanya dengan perizinan dari pemilik pada tingkatan pribadi"
+                    },
+                    "designated": {
+                        "title": "Ditunjuk",
+                        "description": "Akses diperbolehkan sesuai dengan tanda atau peraturan lokal yang spesifik"
                     },
                     "destination": {
-                        "title": "Tujuan"
+                        "title": "Tujuan",
+                        "description": "Akses diperbolehkan hanya untuk mencapai tujuan"
                     }
                 }
             },
             "access_simple": {
+                "label": "Akses",
+                "placeholder": "iya"
+            },
+            "access_toilets": {
                 "label": "Akses"
             },
             "address": {
                 "label": "Alamat",
                 "placeholders": {
+                    "housename": "Nama rumah",
                     "housenumber": "123",
                     "street": "Jalan",
                     "city": "Kota",
+                    "postcode": "Kode pos",
                     "place": "Tempat",
                     "hamlet": "Dusun",
                     "suburb": "Kelurahan",
@@ -490,15 +506,38 @@
             "admin_level": {
                 "label": "Tingkat Admin"
             },
+            "aerialway": {
+                "label": "Tipe"
+            },
+            "aerialway/access": {
+                "label": "Akses",
+                "options": {
+                    "entry": "Masuk",
+                    "exit": "Keluar",
+                    "both": "Keduanya"
+                }
+            },
             "aerialway/capacity": {
+                "label": "Kapasitas (perjam)",
                 "placeholder": "500, 2500, 5000..."
             },
             "aerialway/duration": {
                 "label": "Durasi (menit)",
                 "placeholder": "1, 2, 3..."
             },
+            "aerialway/heating": {
+                "label": "Dipanaskan"
+            },
             "aerialway/occupancy": {
+                "label": "Hunian",
                 "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "options": {
+                    "entry": "Masuk",
+                    "exit": "Keluar",
+                    "both": "Keduanya"
+                }
             },
             "aeroway": {
                 "label": "Tipe"
@@ -532,7 +571,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Arah"
+                "label": "Arah",
+                "options": {
+                    "N": "Utara",
+                    "E": "Timur",
+                    "S": "Selatan",
+                    "W": "Barat",
+                    "NE": "Timur Laut",
+                    "SE": "Tenggara",
+                    "SW": "Barat Daya",
+                    "NW": "Barat Laut",
+                    "NNE": "Utara-timur laut",
+                    "ENE": "Timur-timur laut",
+                    "ESE": "Timur-tenggara",
+                    "SSE": "Selatan-tenggara",
+                    "SSW": "Selatan-barat daya",
+                    "WSW": "Barat-barat daya",
+                    "WNW": "Barat-barat laut",
+                    "NNW": "Timur-barat laut"
+                }
             },
             "clock_direction": {
                 "label": "Arah",
@@ -553,6 +610,12 @@
             "covered": {
                 "label": "Terlindungi"
             },
+            "craft": {
+                "label": "Tipe"
+            },
+            "crop": {
+                "label": "Tanaman"
+            },
             "crossing": {
                 "label": "Tipe"
             },
@@ -568,6 +631,11 @@
             "description": {
                 "label": "Deskripsi"
             },
+            "electrified": {
+                "options": {
+                    "no": "Tidak"
+                }
+            },
             "elevation": {
                 "label": "Ketinggian"
             },
@@ -577,6 +645,9 @@
             "entrance": {
                 "label": "Tipe"
             },
+            "except": {
+                "label": "Pengecualian"
+            },
             "fax": {
                 "label": "Faks",
                 "placeholder": "+31 42 123 4567"
@@ -585,10 +656,30 @@
                 "label": "Biaya"
             },
             "fire_hydrant/type": {
-                "label": "Tipe"
+                "label": "Tipe",
+                "options": {
+                    "underground": "Dibawah tanah",
+                    "wall": "Tembok",
+                    "pond": "Kolam"
+                }
             },
             "fixme": {
                 "label": "Perbaiki Saya"
+            },
+            "fuel/biodiesel": {
+                "label": "Menjual Biodiesel"
+            },
+            "fuel/diesel": {
+                "label": "Menjual Diesel"
+            },
+            "fuel/e10": {
+                "label": "Menjual E10"
+            },
+            "fuel/e85": {
+                "label": "Menjual E85"
+            },
+            "fuel/lpg": {
+                "label": "Menjual Propana"
             },
             "generator/method": {
                 "label": "Metode"
@@ -614,18 +705,27 @@
             "incline": {
                 "label": "Lereng"
             },
+            "information": {
+                "label": "Tipe"
+            },
             "internet_access": {
                 "label": "Akses Internet",
                 "options": {
+                    "yes": "Iya",
+                    "no": "Tidak",
                     "wlan": "Wifi",
                     "wired": "Kabel",
                     "terminal": "Terminal"
                 }
             },
+            "lamp_type": {
+                "label": "Tipe"
+            },
             "landuse": {
                 "label": "Tipe"
             },
             "lanes": {
+                "label": "Jalur",
                 "placeholder": "1, 2, 3..."
             },
             "layer": {
@@ -651,6 +751,22 @@
                 "label": "Batas Kecepatan",
                 "placeholder": "40, 50, 60..."
             },
+            "mtb/scale": {
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/imba": {
+                "placeholder": "Mudah, Menengah, Susah...",
+                "options": {
+                    "0": "Sangat Mudah (lingkaran putih)",
+                    "1": "Mudah (lingkaran hijau)",
+                    "2": "Menengah (kotak biru)",
+                    "3": "Susah (berlian hitam)",
+                    "4": "Sangat Susah (berlian hitam ganda)"
+                }
+            },
+            "mtb/scale/uphill": {
+                "placeholder": "0, 1, 2, 3..."
+            },
             "name": {
                 "label": "Nama",
                 "placeholder": "Nama yang umum (jika ada)"
@@ -668,10 +784,18 @@
                 "label": "Tipe"
             },
             "oneway": {
-                "label": "Satu Arah"
+                "label": "Satu Arah",
+                "options": {
+                    "yes": "Iya",
+                    "no": "Tidak"
+                }
             },
             "oneway_yes": {
-                "label": "Satu Arah"
+                "label": "Satu Arah",
+                "options": {
+                    "yes": "Iya",
+                    "no": "Tidak"
+                }
             },
             "opening_hours": {
                 "label": "Jam"
@@ -679,8 +803,15 @@
             "operator": {
                 "label": "Operator"
             },
+            "par": {
+                "placeholder": "3, 4, 5..."
+            },
             "parking": {
-                "label": "Tipe"
+                "label": "Tipe",
+                "options": {
+                    "surface": "Permukaan",
+                    "underground": "Bawah Tanah"
+                }
             },
             "phone": {
                 "label": "Telepon",
@@ -690,7 +821,10 @@
                 "label": "Tingkat Kesulitan"
             },
             "piste/type": {
-                "label": "Tipe"
+                "label": "Tipe",
+                "options": {
+                    "playground": "Taman Bermain"
+                }
             },
             "place": {
                 "label": "Tipe"
@@ -769,6 +903,9 @@
             },
             "towertype": {
                 "label": "Tipe Tower"
+            },
+            "tracktype": {
+                "label": "Tipe Trek"
             },
             "tree_type": {
                 "label": "Tipe"
@@ -858,6 +995,9 @@
             "amenity/bbq": {
                 "name": "Barbekyu/Pemanggang"
             },
+            "amenity/bench": {
+                "name": "Kursi"
+            },
             "amenity/bicycle_parking": {
                 "name": "Parkir Sepeda",
                 "terms": "Parkir Sepeda"
@@ -868,6 +1008,9 @@
             },
             "amenity/boat_rental": {
                 "name": "Penyewaan Perahu Boat"
+            },
+            "amenity/bus_station": {
+                "name": "Terminal Bus"
             },
             "amenity/cafe": {
                 "name": "Cafe",
@@ -890,6 +1033,9 @@
             },
             "amenity/clock": {
                 "name": "Jam"
+            },
+            "amenity/college": {
+                "name": "Lapangan Kampus"
             },
             "amenity/courthouse": {
                 "name": "Pengadilan",
@@ -1064,11 +1210,17 @@
             "building/barn": {
                 "name": "Lumbung"
             },
+            "building/cabin": {
+                "name": "Kabin"
+            },
             "building/cathedral": {
                 "name": "Katedral"
             },
             "building/church": {
                 "name": "Gereja"
+            },
+            "building/college": {
+                "name": "Bangunan Kampus"
             },
             "building/commercial": {
                 "name": "Bangunan Komersil"
@@ -1612,11 +1764,17 @@
             "shop/bicycle": {
                 "name": "Toko Sepeda"
             },
+            "shop/books": {
+                "name": "Toko Buku"
+            },
             "shop/boutique": {
                 "name": "Butik"
             },
             "shop/butcher": {
                 "name": "Penjagalan"
+            },
+            "shop/candles": {
+                "name": "Toko Lilin"
             },
             "shop/car": {
                 "name": "Dealer Mobil"
@@ -1627,8 +1785,17 @@
             "shop/car_repair": {
                 "name": "Bengkel Mobil"
             },
+            "shop/carpet": {
+                "name": "Toko Karpet"
+            },
+            "shop/cheese": {
+                "name": "Toko Keju"
+            },
             "shop/chemist": {
                 "name": "Toko Kimia"
+            },
+            "shop/chocolate": {
+                "name": "Toko Cokelat"
             },
             "shop/clothes": {
                 "name": "Toko Baju"
@@ -1636,14 +1803,29 @@
             "shop/computer": {
                 "name": "Toko Komputer"
             },
+            "shop/confectionery": {
+                "name": "Toko Permen"
+            },
             "shop/convenience": {
                 "name": "Toko Kelontong"
+            },
+            "shop/copyshop": {
+                "name": "Tempat Fotokopi"
+            },
+            "shop/cosmetics": {
+                "name": "Toko Kosmetik"
+            },
+            "shop/craft": {
+                "name": "Toko Kesenian dan Kerajinan Tangan"
             },
             "shop/department_store": {
                 "name": "Pasar Swalayan"
             },
             "shop/electronics": {
                 "name": "Toko Elektronik"
+            },
+            "shop/fabric": {
+                "name": "Toko Kain"
             },
             "shop/florist": {
                 "name": "Toko Bunga"
@@ -1669,11 +1851,23 @@
             "shop/jewelry": {
                 "name": "Toko Perhiasan"
             },
+            "shop/kiosk": {
+                "name": "Kios Berita"
+            },
+            "shop/kitchen": {
+                "name": "Toko Desain Interior Dapur"
+            },
             "shop/laundry": {
                 "name": "Laundri"
             },
+            "shop/leather": {
+                "name": "Toko Kulit"
+            },
             "shop/mall": {
                 "name": "Mall"
+            },
+            "shop/medical_supply": {
+                "name": "Toko Peralatan Medis"
             },
             "shop/mobile_phone": {
                 "name": "Toko Handphone"
@@ -1684,11 +1878,29 @@
             "shop/music": {
                 "name": "Toko Musik"
             },
+            "shop/newsagent": {
+                "name": "Toko Majalah/Koran"
+            },
             "shop/optician": {
                 "name": "Optik"
             },
+            "shop/organic": {
+                "name": "Toko Barang Organik"
+            },
+            "shop/outdoor": {
+                "name": "Toko Perlengkapan Outdoor"
+            },
             "shop/pet": {
                 "name": "Toko Peliharaan"
+            },
+            "shop/photo": {
+                "name": "Toko Fotografi"
+            },
+            "shop/radiotechnics": {
+                "name": "Toko Komponen Radio/Elektronik"
+            },
+            "shop/scuba_diving": {
+                "name": "Toko Perlengkapan Menyelam"
             },
             "shop/seafood": {
                 "name": "Toko Seafood"
@@ -1705,6 +1917,15 @@
             "shop/supermarket": {
                 "name": "Supermarket",
                 "terms": "<alihbahasa dengan sinonim atau istilah terkait untuk 'Supermarket', dipisahkan dengan koma>"
+            },
+            "shop/tailor": {
+                "name": "Tukang Jahit"
+            },
+            "shop/tattoo": {
+                "name": "Jasa Pembuatan Tato"
+            },
+            "shop/ticket": {
+                "name": "Penjual Tiket"
             },
             "shop/toys": {
                 "name": "Toko Mainan"
@@ -1770,13 +1991,28 @@
             "type/multipolygon": {
                 "name": "Banyak-poligon"
             },
+            "type/restriction": {
+                "name": "Larangan"
+            },
             "type/restriction/no_left_turn": {
                 "name": "Dilarang Berbelok ke Kiri"
             },
             "type/restriction/no_right_turn": {
                 "name": "Dilarang Berbelok ke Kanan"
             },
+            "type/restriction/no_straight_on": {
+                "name": "Tidak Boleh Lurus"
+            },
             "type/restriction/no_u_turn": {
+                "name": "Dilarang Putar Balik"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Belok Kiri Saja"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Belok Kanan Saja"
+            },
+            "type/restriction/only_straight_on": {
                 "name": "Dilarang Putar Balik"
             },
             "type/route": {

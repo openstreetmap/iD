@@ -231,6 +231,7 @@
         "upload_explanation_with_user": "你以 {user} 具名的修改將會在所有使用OpenStreetMap資料的地圖上看到。",
         "save": "儲存",
         "cancel": "取消",
+        "changes": "{count}  變動數",
         "warnings": "警告",
         "modified": "已修改",
         "deleted": "已刪除",
@@ -297,6 +298,7 @@
         "help": "儲存修改至OpenStreetMap，讓其他用戶看見。",
         "no_changes": "沒有修改需要儲存。",
         "error": "儲存編輯時發生錯誤",
+        "unknown_error_details": "請確定你已經連上網路。",
         "uploading": "正在上載修改至OpenStreetMap。",
         "unsaved_changes": "你有未儲存的編輯"
     },
@@ -793,7 +795,7 @@
                 "label": "長度 (公尺)"
             },
             "levels": {
-                "label": "屋宇層數",
+                "label": "房屋樓層數",
                 "placeholder": "2, 4, 6..."
             },
             "lit": {
@@ -1329,6 +1331,10 @@
                 "name": "學院用地",
                 "terms": "學院"
             },
+            "amenity/community_centre": {
+                "name": "社區中心",
+                "terms": "社區發展協會,里活動中心,村活動中心"
+            },
             "amenity/compressed_air": {
                 "name": "壓縮空氣",
                 "terms": "冷氣,冷氣機"
@@ -1466,8 +1472,8 @@
                 "terms": "遮雨棚,亭,亭子"
             },
             "amenity/social_facility": {
-                "name": "社福設施",
-                "terms": "社福機構"
+                "name": "社福機構",
+                "terms": "社福設施"
             },
             "amenity/social_facility/food_bank": {
                 "name": "食物銀行",
@@ -2375,7 +2381,7 @@
             },
             "leisure/track": {
                 "name": "賽道(非摩托賽道)",
-                "terms": "賽道(非摩托賽道)"
+                "terms": "賽道(非摩托賽道),操場"
             },
             "line": {
                 "name": "線",

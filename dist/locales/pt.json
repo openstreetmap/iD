@@ -2042,7 +2042,7 @@
                 "terms": "Motorway Junction / Exit, Junção de Autoestradas, Saída de Autoestradas"
             },
             "highway/motorway_link": {
-                "name": "Nó de ligação a uma Autoestrada",
+                "name": "Ligação a uma Autoestrada",
                 "terms": "Ligação Autoestrada, Entrada Autoestrada, Saída Autoestrada"
             },
             "highway/path": {
@@ -2058,7 +2058,7 @@
                 "terms": "Primary Road, Estrada Nacional, Rodovia Principal, Estrada Primária, Rodovia Primária, Primário"
             },
             "highway/primary_link": {
-                "name": "Nó de Ligação a uma Estrada Primária",
+                "name": "Ligação a uma Estrada Primária",
                 "terms": "Primary Link, Ligação Estrada Nacional, Ligação Rodovia Nacional, Ligação Nacional,  Ligação Estrada Principal, Entrada Estrada Nacional, Entrada Rodovia Nacional, Entrada Nacional, Entrada Estrada Nacional, Saída Nacional, Saída Rodovia Nacional, Saída Nacional, Saída Estrada Nacional,"
             },
             "highway/raceway": {
@@ -2074,7 +2074,7 @@
                 "terms": "Rest Area, Posto de Descanço"
             },
             "highway/road": {
-                "name": "Estrada com Classificação Desconhecida",
+                "name": "Estrada de Tipo Indeterminado",
                 "terms": "Estrada Genérica, Rodovia Genérica, Estrada Desconhecida, Rodovia Desconhecida"
             },
             "highway/secondary": {
@@ -2082,7 +2082,7 @@
                 "terms": "Secondary Road, Estrada Regional, Rodovia Secundária, Secundário"
             },
             "highway/secondary_link": {
-                "name": "Nó de Ligação a uma Estrada Secundária",
+                "name": "Ligação a uma Estrada Secundária",
                 "terms": "Secondary Link, Ligação Estrada Regional, Ligação Rodovia Regional, Ligação Regional,  Ligação Estrada Secundária, Entrada Estrada Regional, Entrada Rodovia Regional, Entrada Regional, Entrada Estrada Secundária, Saída Regional, Saída Rodovia Regional, Saída Regional, Saída Estrada Secundária"
             },
             "highway/service": {
@@ -2130,7 +2130,7 @@
                 "terms": "Tertiary Road, Estrada Municipal, Caminho Municipal, Rodovia Terciária, Terciário, Caminho Municipal"
             },
             "highway/tertiary_link": {
-                "name": "Nó de Ligação a uma Estrada Terciária",
+                "name": "Ligação a uma Estrada Terciária",
                 "terms": "Tertiary Link, Ligação Estrada Municipal, Ligação Rodovia Municipal, Ligação Municipal,  Ligação Estrada Terciária, Entrada Estrada Municipal, Entrada Rodovia Municipal, Entrada Municipal, Entrada Estrada Terciária, Saída Municipal, Saída Rodovia Municipal, Saída Municipal, Saída Estrada Municipal"
             },
             "highway/track": {
@@ -2146,7 +2146,7 @@
                 "terms": "Via Reservada a Automóveis e Motociclos, Estrada Reservada a Automóveis e Motociclos, Via Expressa, Via Reservada"
             },
             "highway/trunk_link": {
-                "name": "Nó de ligação a uma Via Rápida",
+                "name": "Ligação a uma Via Rápida",
                 "terms": "Ligação Via Rápida, Entrada Via Rápida, Saída Via Rápida, Ligação Via Reservada a Automóveis e Motociclos, Entrada Via Reservada a Automóveis e Motociclos, Saída Via Reservada a Automóveis e Motociclos, Ligação Via Expressa, Entrada Expressa, Saída Via Expressa, Ligação Via Reservada, Entrada Via Reservada, Saída Via Reservada"
             },
             "highway/turning_circle": {

@@ -297,6 +297,7 @@
         "help": "Lưu các thay đổi vào OpenStreetMap để cho mọi người xem.",
         "no_changes": "Không có thay đổi nào để lưu.",
         "error": "Xảy ra lỗi khi lưu",
+        "unknown_error_details": "Xin vui lòng chắc chắn rằng bạn được kết nối với Internet.",
         "uploading": "Đang tải các thay đổi lên OpenStreetMap.",
         "unsaved_changes": "Bạn có Thay đổi Chưa lưu"
     },
@@ -1328,6 +1329,10 @@
             "amenity/college": {
                 "name": "Sân trường Cao đẳng",
                 "terms": "sân trường cao đẳng, trường cao đẳng, cao đẳng, CĐ, san truong cao dang, truong cao dang, cao dang, CD"
+            },
+            "amenity/community_centre": {
+                "name": "Trung tâm Cộng đồng",
+                "terms": "trung tâm cộng đồng, hội trường cộng đồng, trung tam cong dong, hoi truong cong dong"
             },
             "amenity/compressed_air": {
                 "name": "Khí Nén",
@@ -2693,6 +2698,10 @@
                 "name": "Trạm Điện Phụ",
                 "terms": "trạm điện phụ, tram dien phu"
             },
+            "power/substation": {
+                "name": "Trạm Điện Phụ",
+                "terms": "trạm điện phụ, tram dien phu"
+            },
             "power/tower": {
                 "name": "Cột điện Cao thế",
                 "terms": "cột điện cao thế, cot dien cao the"
@@ -3272,6 +3281,22 @@
             "tourism/zoo": {
                 "name": "Vườn thú",
                 "terms": "vườn thú, vườn bách thú, vuon thu, vuon bach thu"
+            },
+            "traffic_calming/bump": {
+                "name": "Gờ Giảm Tốc độ",
+                "terms": "gờ giảm tốc độ, bướu tốc độ, go giam toc do, buou toc do"
+            },
+            "traffic_calming/hump": {
+                "name": "Bướu Tốc độ",
+                "terms": "bướu tốc độ, bướu giảm tốc độ, buou toc do, buou giam toc do"
+            },
+            "traffic_calming/rumble_strip": {
+                "name": "Dải Gây Ồn",
+                "terms": "dải gây ồn, dai gay on"
+            },
+            "traffic_calming/table": {
+                "name": "Lối Băng qua Đường Nổi lên",
+                "terms": "lối băng qua đường nổi lên, lối băng qua đường nhô lên, loi bang qua duong noi len, loi bang qua duong nho len"
             },
             "type/boundary": {
                 "name": "Ranh giới",

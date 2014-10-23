@@ -1309,6 +1309,9 @@
             "amenity/college": {
                 "name": "Escola professional"
             },
+            "amenity/community_centre": {
+                "name": "Centre Comunitari"
+            },
             "amenity/compressed_air": {
                 "name": "Aire comprimit"
             },

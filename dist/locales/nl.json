@@ -297,6 +297,7 @@
         "help": "Sla de aanpassingen bij OpenStreetMap op om deze voor andere gebruikers zichtbaar te maken",
         "no_changes": "Geen aanpassingen om op te slaan.",
         "error": "Bij het opslaan is een fout opgetreden",
+        "unknown_error_details": "Controleer of je bent verbonden met het internet.",
         "uploading": "De aanpassingen worden naar OpenStreetMap geüpload.",
         "unsaved_changes": "Je hebt niet-opgeslagen aanpassingen"
     },

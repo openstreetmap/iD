@@ -297,6 +297,7 @@
         "help": "Speichere Änderungen auf OpenStreetMap, wodurch sie für andere Nutzer sichtbar werden.",
         "no_changes": "Keine zu speichernden Änderungen.",
         "error": "Beim Speichern ist ein Fehler aufgetreten",
+        "unknown_error_details": "Bitte überprüfe dass Dein Gerät mit dem Internet verbunden ist.",
         "uploading": "Änderungen werden zu OpenStreetMap hoch geladen.",
         "unsaved_changes": "Ungesicherte Änderungen vorhanden"
     },
@@ -1328,6 +1329,10 @@
             "amenity/college": {
                 "name": "Hochschulgelände",
                 "terms": "Schulgelände,Collegegeglände"
+            },
+            "amenity/community_centre": {
+                "name": "Gemeindezentrum",
+                "terms": "Gemeindezentrum, Stadteilzentrum, Sozialzentrum, Gemeinschaftszentrum, Bürgerhaus"
             },
             "amenity/compressed_air": {
                 "name": "Druckluft",
@@ -2693,6 +2698,10 @@
                 "name": "Umspannwerk",
                 "terms": "Umspannwerk, Umspannungswerk"
             },
+            "power/substation": {
+                "name": "Umspannwerk",
+                "terms": "Umspannwerk, Transformatorenstation, Schaltanlage"
+            },
             "power/tower": {
                 "name": "Hochspannungsmast",
                 "terms": "Hochspannungsmast"
@@ -3272,6 +3281,22 @@
             "tourism/zoo": {
                 "name": "Zoo",
                 "terms": "Zoo"
+            },
+            "traffic_calming/bump": {
+                "name": "Temposchwelle",
+                "terms": "Temposchwelle, Bodenschwelle, Beruhigungsschwelle, Rüttelschwelle, Fahrbahnhöcker, Bremsschwelle, Bremshügel"
+            },
+            "traffic_calming/hump": {
+                "name": "Bodenschwelle",
+                "terms": "Bodenschwelle, Bremshügel"
+            },
+            "traffic_calming/rumble_strip": {
+                "name": "Fahrbahnschwelle",
+                "terms": "Fahrbahnschwelle, Rüttelstreifen"
+            },
+            "traffic_calming/table": {
+                "name": "Erhöhter Fußgängerübergang",
+                "terms": "Erhöhter Fußgängerübergang"
             },
             "type/boundary": {
                 "name": "Grenze",

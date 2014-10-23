@@ -629,6 +629,9 @@
             "covered": {
                 "label": "Coperto"
             },
+            "craft": {
+                "label": "Tipo"
+            },
             "crop": {
                 "label": "Coltura"
             },
@@ -690,6 +693,33 @@
             },
             "fuel": {
                 "label": "Carburante"
+            },
+            "fuel/biodiesel": {
+                "label": "Vendita di biodiesel"
+            },
+            "fuel/diesel": {
+                "label": "Vendita di diesel"
+            },
+            "fuel/e10": {
+                "label": "Vendita di carburante E10"
+            },
+            "fuel/e85": {
+                "label": "Vendita di carburante E85"
+            },
+            "fuel/lpg": {
+                "label": "Vendita di propano"
+            },
+            "fuel/octane_100": {
+                "label": "Vendita di carburante da competizione"
+            },
+            "fuel/octane_91": {
+                "label": "Vendita di carburante normale (87)"
+            },
+            "fuel/octane_95": {
+                "label": "Vendita di carburante medio (89)"
+            },
+            "fuel/octane_98": {
+                "label": "Vendita di carburante super (93)"
             },
             "gauge": {
                 "label": "Scartamento"

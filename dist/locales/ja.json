@@ -1310,6 +1310,14 @@
                 "name": "時計",
                 "terms": "時計"
             },
+            "amenity/college": {
+                "name": "大学の敷地",
+                "terms": "キャンパス"
+            },
+            "amenity/community_centre": {
+                "name": "コミュニティセンター",
+                "terms": "公民館"
+            },
             "amenity/compressed_air": {
                 "name": "空気入れ",
                 "terms": "空気入れ, エアー調整"
@@ -1361,6 +1369,10 @@
             "amenity/hospital": {
                 "name": "病院の敷地",
                 "terms": "病院の敷地"
+            },
+            "amenity/kindergarten": {
+                "name": "保育園/幼稚園の敷地",
+                "terms": "幼稚園の敷地, 保育園の敷地"
             },
             "amenity/library": {
                 "name": "図書館",
@@ -1450,6 +1462,10 @@
                 "name": "フードバンク",
                 "terms": "フードバンク"
             },
+            "amenity/social_facility/group_home": {
+                "name": "老人ホーム",
+                "terms": "老人ホーム, グループホーム"
+            },
             "amenity/social_facility/homeless_shelter": {
                 "name": "ホームレス緊急一時宿泊施設",
                 "terms": "ホームレス緊急一時宿泊施設, ホームレスシェルター"
@@ -1481,6 +1497,10 @@
             "amenity/townhall": {
                 "name": "役場",
                 "terms": "市役所,区役所,町役場,村役場,市庁"
+            },
+            "amenity/university": {
+                "name": "大学の敷地",
+                "terms": "大学の敷地, キャンパス"
             },
             "amenity/vending_machine": {
                 "name": "自動販売機",
@@ -1602,6 +1622,10 @@
                 "name": "教会",
                 "terms": "教会"
             },
+            "building/college": {
+                "name": "大学の建物",
+                "terms": "大学の建物"
+            },
             "building/commercial": {
                 "name": "オフィスビル",
                 "terms": "オフィスビル"
@@ -1654,6 +1678,10 @@
                 "name": "工場",
                 "terms": "工場"
             },
+            "building/kindergarten": {
+                "name": "保育園/幼稚園の建物",
+                "terms": "保育園/幼稚園の建物"
+            },
             "building/public": {
                 "name": "公共施設",
                 "terms": "公共施設"
@@ -1701,6 +1729,10 @@
             "building/warehouse": {
                 "name": "倉庫",
                 "terms": "倉庫, 蔵"
+            },
+            "craft": {
+                "name": "工房",
+                "terms": "工房"
             },
             "craft/basket_maker": {
                 "name": "かご製造所",
@@ -1881,6 +1913,10 @@
             "craft/window_construction": {
                 "name": "窓職人",
                 "terms": "窓職人"
+            },
+            "craft/winery": {
+                "name": "ワイナリー",
+                "terms": "ワイナリー"
             },
             "embankment": {
                 "name": "土手",
@@ -2386,6 +2422,10 @@
                 "name": "給水塔",
                 "terms": "給水塔"
             },
+            "man_made/water_well": {
+                "name": "井戸",
+                "terms": "井戸"
+            },
             "man_made/water_works": {
                 "name": "浄水場",
                 "terms": "浄水場"
@@ -2729,6 +2769,22 @@
             "shop/alcohol": {
                 "name": "酒店",
                 "terms": "酒店, 酒屋"
+            },
+            "shop/anime": {
+                "name": "アニメショップ",
+                "terms": "アニメショップ"
+            },
+            "shop/antiques": {
+                "name": "古美術品店",
+                "terms": "古美術品店, アンティークショップ"
+            },
+            "shop/art": {
+                "name": "アートギャラリー",
+                "terms": "アートギャラリー"
+            },
+            "shop/baby_goods": {
+                "name": "赤ちゃん用品店",
+                "terms": "赤ちゃん用品店, ベビー用品店"
             },
             "shop/bakery": {
                 "name": "パン屋",
