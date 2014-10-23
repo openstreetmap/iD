@@ -12,20 +12,22 @@ iD.svg.Vertices = function(projection, context) {
         var vertices = {};
 
         function addChildVertices(entity) {
-            var i;
-            if (entity.type === 'way') {
-                for (i = 0; i < entity.nodes.length; i++) {
-                    addChildVertices(graph.entity(entity.nodes[i]));
-                }
-            } else if (entity.type === 'relation') {
-                for (i = 0; i < entity.members.length; i++) {
-                    var member = context.hasEntity(entity.members[i].id);
-                    if (member) {
-                        addChildVertices(member);
+            if (!context.features().isHiddenFeature(entity)) {
+                var i;
+                if (entity.type === 'way') {
+                    for (i = 0; i < entity.nodes.length; i++) {
+                        addChildVertices(graph.entity(entity.nodes[i]));
                     }
+                } else if (entity.type === 'relation') {
+                    for (i = 0; i < entity.members.length; i++) {
+                        var member = context.hasEntity(entity.members[i].id);
+                        if (member) {
+                            addChildVertices(member);
+                        }
+                    }
+                } else if (entity.intersects(extent, graph)) {
+                    vertices[entity.id] = entity;
                 }
-            } else if (entity.intersects(extent, graph)) {
-                vertices[entity.id] = entity;
             }
         }
 
