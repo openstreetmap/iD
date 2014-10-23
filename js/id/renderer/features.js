@@ -42,7 +42,8 @@ iD.Features = function(context) {
     };
 
     var dispatch = d3.dispatch('change', 'redraw'),
-        feature = {};
+        feature = {},
+        cullFactor = 1;
 
     function defineFeature(k, filter, max) {
         feature[k] = {
@@ -53,7 +54,7 @@ iD.Features = function(context) {
             defaultMax: (max || Infinity),
             enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
             disable: function() { this.enabled = false; this.currentMax = 0; },
-            hidden: function() { return this.count > this.currentMax; }
+            hidden: function() { return this.count > this.currentMax * cullFactor; }
         };
     }
 
@@ -66,7 +67,7 @@ iD.Features = function(context) {
 
     defineFeature('points', function(entity) {
         return entity.geometry(context.graph()) === 'point';
-    }, 100);
+    }, 200);
 
     defineFeature('major_roads', function(entity) {
         return entity.geometry(context.graph()) === 'line' && major_roads[entity.tags.highway];
@@ -91,7 +92,7 @@ iD.Features = function(context) {
                 entity.tags.parking === 'garage_boxes'
             )
         ) || !!entity.tags['building:part'];
-    }, 100);
+    }, 250);
 
     defineFeature('landuse', function(entity) {
         return entity.geometry(context.graph()) === 'area' &&
@@ -221,7 +222,12 @@ iD.Features = function(context) {
     };
 
     features.resetStats = function() {
+        var dimensions = context.map().dimensions();
         _.each(feature, function(f) { f.count = 0; });
+
+        // adjust the threshold for point/building culling based on viewport size..
+        // a cullFactor of 1 corresponds to a 1000x1000px viewport..
+        cullFactor = dimensions[0] * dimensions[1] / 1000000;
     };
 
     features.gatherStats = function(d) {
