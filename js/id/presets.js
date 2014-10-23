@@ -40,25 +40,30 @@ iD.presets = function() {
         return match || all.item(geometry);
     };
 
+    // Because of the open nature of tagging, iD will never have a complete
+    // list of tags used in OSM, so we want it to have logic like "assume
+    // that a closed way with an amenity tag is an area, unless the amenity
+    // is one of these specific types". This function computes a structure
+    // that allows testing of such conditions, based on the presets designated
+    // as as supporting (or not supporting) the area geometry.
+    //
+    // The returned object L is a whitelist/blacklist of tags. A closed way
+    // with a tag (k, v) is considered to be an area if `k in L && !(v in L[k])`
+    // (see `iD.Way#isArea()`). In other words, the keys of L form the whitelist,
+    // and the subkeys form the blacklist.
     all.areaKeys = function() {
-
-        // A closed way is considered to be an area if it has a tag with one
-        // of the following keys, and the value is _not_ one of the associated
-        // values for the respective key.
-
         var areaKeys = {};
 
         all.collection.forEach(function(d) {
-            if (d.tags) {
-                for (var key in d.tags) break;
-                var value = d.tags[key];
+            for (var key in d.tags) break;
+            if (!key) return;
+            var value = d.tags[key];
 
-                if (['highway', 'footway', 'railway', 'type'].indexOf(key) === -1) {
-                    if (d.geometry.indexOf('area') >= 0) {
-                        areaKeys[key] = areaKeys[key] || {};
-                    } else if (key in areaKeys && value !== '*') {
-                        areaKeys[key][value] = true;
-                    }
+            if (['highway', 'footway', 'railway', 'type'].indexOf(key) === -1) {
+                if (d.geometry.indexOf('area') >= 0) {
+                    areaKeys[key] = areaKeys[key] || {};
+                } else if (key in areaKeys && value !== '*') {
+                    areaKeys[key][value] = true;
                 }
             }
         });
