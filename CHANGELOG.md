@@ -1,3 +1,14 @@
+## 1.6.1
+
+* Remember raw tag editor expansion state across sessions (#2416)
+* Translate text in changes section on save panel (#2417)
+* Encode URL hash correctly (#2406)
+* Capture ⌘-S even in input fields (#2409)
+* Added some traffic_calming=* presets
+* Prefer power=substation to sub_station
+* Include state/province in U.S. and Canadian address formats
+* Improve the error message on saving when offline (#2373)
+
 ## 1.6.0
 
 * Add nework field to Road Route relation preset (#2372)
