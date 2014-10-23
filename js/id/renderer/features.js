@@ -287,7 +287,8 @@ iD.Features = function(context) {
     };
 
     features.isHidden = function(entity) {
-        return features.isHiddenFeature(entity) || features.isHiddenChild(entity);
+        return !!entity.version &&
+            (features.isHiddenFeature(entity) || features.isHiddenChild(entity));
     };
 
     features.filter = function(d) {
