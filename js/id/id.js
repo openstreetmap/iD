@@ -243,6 +243,14 @@ window.iD = function () {
         return context;
     };
 
+    /* Taginfo */
+    var taginfo;
+    context.taginfo = function(_) {
+        if (!arguments.length) return taginfo;
+        taginfo = _;
+        return context;
+    };
+
     var embed = false;
     context.embed = function(_) {
         if (!arguments.length) return embed;

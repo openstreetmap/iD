@@ -1,5 +1,5 @@
 iD.ui.preset.combo =
-iD.ui.preset.typeCombo = function(field) {
+iD.ui.preset.typeCombo = function(field, context) {
     var event = d3.dispatch('change'),
         optstrings = field.strings && field.strings.options,
         optarray = field.options,
@@ -34,8 +34,8 @@ iD.ui.preset.typeCombo = function(field) {
                         strings[k] = k.replace(/_+/g, ' ');
                     });
                     stringsLoaded();
-                } else {
-                    iD.taginfo().values({key: field.key}, function(err, data) {
+                } else if (context.taginfo()) {
+                    context.taginfo().values({key: field.key}, function(err, data) {
                         if (!err) {
                             _.each(_.pluck(data, 'value'), function(k) {
                                 strings[k] = k.replace(/_+/g, ' ');

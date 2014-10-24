@@ -66,7 +66,8 @@
             } else {
                 var id = iD()
                   .presets(iD.data.presets)
-                  .imagery(iD.data.imagery);
+                  .imagery(iD.data.imagery)
+                  .taginfo(iD.taginfo());
 
                 d3.select('#id-container')
                     .call(id.ui());

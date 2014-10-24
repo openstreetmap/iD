@@ -1,6 +1,5 @@
-iD.ui.TagReference = function(tag) {
+iD.ui.TagReference = function(tag, context) {
     var tagReference = {},
-        taginfo = iD.taginfo(),
         button,
         body,
         loaded,
@@ -34,7 +33,7 @@ iD.ui.TagReference = function(tag) {
     function load() {
         button.classed('tag-reference-loading', true);
 
-        taginfo.docs(tag, function(err, docs) {
+        context.taginfo().docs(tag, function(err, docs) {
             if (!err && docs) {
                 docs = findLocal(docs);
             }
@@ -117,7 +116,9 @@ iD.ui.TagReference = function(tag) {
             } else if (loaded) {
                 show();
             } else {
-                load();
+                if (context.taginfo()) {
+                    load();
+                }
             }
         });
     };

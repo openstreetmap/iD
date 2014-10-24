@@ -1,6 +1,5 @@
 iD.ui.RawTagEditor = function(context) {
     var event = d3.dispatch('change'),
-        taginfo = iD.taginfo(),
         showBlank = false,
         state,
         preset,
@@ -77,14 +76,16 @@ iD.ui.RawTagEditor = function(context) {
             .append('span')
             .attr('class', 'icon delete');
 
-        $enter.each(bindTypeahead);
+        if (context.taginfo()) {
+            $enter.each(bindTypeahead);
+        }
 
         // Update
 
         $items.order();
 
         $items.each(function(tag) {
-            var reference = iD.ui.TagReference({key: tag.key});
+            var reference = iD.ui.TagReference({key: tag.key}, context);
 
             if (state === 'hover') {
                 reference.showing(false);
@@ -139,7 +140,7 @@ iD.ui.RawTagEditor = function(context) {
 
             key.call(d3.combobox()
                 .fetcher(function(value, callback) {
-                    taginfo.keys({
+                    context.taginfo().keys({
                         debounce: true,
                         geometry: context.geometry(id),
                         query: value
@@ -150,7 +151,7 @@ iD.ui.RawTagEditor = function(context) {
 
             value.call(d3.combobox()
                 .fetcher(function(value, callback) {
-                    taginfo.values({
+                    context.taginfo().values({
                         debounce: true,
                         key: key.value(),
                         geometry: context.geometry(id),
