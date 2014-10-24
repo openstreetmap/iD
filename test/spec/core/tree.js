@@ -117,6 +117,20 @@ describe("iD.Tree", function() {
             expect(tree.intersects(extent, graph)).to.eql([]);
         });
 
+        it("adjusts parent relations when a member node is moved", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                relation = iD.Relation({members: [{type: 'node', id: 'n'}]}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            graph = graph.replace(node).replace(relation);
+            expect(tree.intersects(extent, graph)).to.eql([node, relation]);
+
+            graph = graph.replace(node.move([3, 3]));
+            expect(tree.intersects(extent, graph)).to.eql([]);
+        });
+
         it("adjusts parent ways when a member node is removed", function() {
             var graph = iD.Graph(),
                 tree = iD.Tree(graph),
