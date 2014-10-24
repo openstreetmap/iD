@@ -72,7 +72,7 @@ iD.Tree = function(head) {
             diff.modified().forEach(function(entity) {
                 rtree.remove(rectangles[entity.id]);
                 insertions[entity.id] = entity;
-                updateParents(entity, insertions);
+                updateParents(entity, insertions, {});
             });
 
             diff.created().forEach(function(entity) {
