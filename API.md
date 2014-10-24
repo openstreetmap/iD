@@ -94,3 +94,51 @@ Elements that are currently active (being clicked or dragged) shall have the `.a
 class. (TODO)
 
 Elements that are currently selected shall have the `.selected` class.
+
+## Customized Deployments
+
+iD is used to edit data outside of the OpenStreetMap environment. There are some basic configuration steps to introduce custom presets, imagery and tag information.
+
+### Presets
+
+iD can use external presets exclusively or along with the default OpenStreetMap presets. This is configured using the `iD().presets` accessor. To use external presets alone, initialize iD in index.html with the Presets object.
+
+```js
+
+var iD = iD()
+  .presets(customPresets)
+  .taginfo(iD.taginfo())
+  .imagery(iD.data.imagery);
+
+```
+
+The format of the Preset object is [documented here](https://github.com/openstreetmap/iD/tree/master/data/presets#custom-presets).
+
+### Imagery
+
+Just like Presets, Imagery can be configured using the `iD().imagery` accessor.
+
+```js
+
+var iD = iD()
+  .presets(customPresets)
+  .taginfo(iD.taginfo())
+  .imagery(customImagery);
+
+```
+
+The Imagery object should follow the structure defined by [editor-imagery-index](https://github.com/osmlab/editor-imagery-index/blob/gh-pages/schema.json)
+
+
+### Taginfo
+
+[Taginfo](http://taginfo.openstreetmap.org/) is a service that provides comprehensive documentation about the tags used in OpenStreetMap. iD uses Taginfo to display description and also autocomplete keys and values. This can be completely disabled by removing the `iD().taginfo` accessor. To point iD to a different instance of Taginfo other than the default OpenStreetMap instance
+
+```js
+
+var iD = iD()
+  .presets(customPresets)
+  .taginfo(iD.taginfo().endpoint('url'))
+  .imagery(customImagery);
+
+```    
