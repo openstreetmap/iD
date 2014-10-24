@@ -265,7 +265,7 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '1.6.1';
+iD.version = '1.6.2';
 
 (function() {
     var detected = {};

@@ -1,3 +1,7 @@
+## 1.6.2
+
+* Fix "TypeError: r is undefined" (#2421)
+
 ## 1.6.1
 
 * Remember raw tag editor expansion state across sessions (#2416)
