@@ -14,6 +14,13 @@ iD.geo.Extent = function geoExtent(min, max) {
 iD.geo.Extent.prototype = new Array(2);
 
 _.extend(iD.geo.Extent.prototype, {
+    equals: function (obj) {
+        return this[0][0] === obj[0][0] &&
+            this[0][1] === obj[0][1] &&
+            this[1][0] === obj[1][0] &&
+            this[1][1] === obj[1][1];
+    },
+
     extend: function(obj) {
         if (!(obj instanceof iD.geo.Extent)) obj = new iD.geo.Extent(obj);
         return iD.geo.Extent([Math.min(obj[0][0], this[0][0]),
