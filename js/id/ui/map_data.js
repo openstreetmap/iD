@@ -8,7 +8,11 @@ iD.ui.MapData = function(context) {
     function map_data(selection) {
 
         function showsFeature(d) {
-            return context.features().enabled(d);
+            return autoHiddenFeature(d) ? null : !context.features().hidden(d);
+        }
+
+        function autoHiddenFeature(d) {
+            return context.features().autoHidden(d);
         }
 
         function clickFeature(d) {
@@ -54,11 +58,16 @@ iD.ui.MapData = function(context) {
                 .call(bootstrap.tooltip()
                     .html(true)
                     .title(function(d) {
-                        return iD.ui.tooltipHtml(
-                            t(name + '.' + d + '.tooltip'), (d === 'wireframe' ? 'W' : null)
-                        );
+                        var tip = t(name + '.' + d + '.tooltip'),
+                            key = (d === 'wireframe' ? 'W' : null);
+
+                        if (name === 'feature' && autoHiddenFeature(d)) {
+                            tip += '<div>' + t('map_data.autohidden') + '</div>';
+                        }
+                        return iD.ui.tooltipHtml(tip, key);
                     })
-                    .placement('top'));
+                    .placement('top')
+                );
 
             var label = enter.append('label');
 
@@ -75,6 +84,13 @@ iD.ui.MapData = function(context) {
                 .classed('active', active)
                 .selectAll('input')
                 .property('checked', active);
+
+            if (name === 'feature') {
+                items
+                    .selectAll('input')
+                    .property('disabled', autoHiddenFeature)
+                    .property('indeterminate', autoHiddenFeature);
+            }
 
             //exit
             items.exit()
@@ -164,25 +180,6 @@ iD.ui.MapData = function(context) {
         content.append('h4')
             .text(t('map_data.title'));
 
-        // feature filters
-        content.append('a')
-            .text(t('map_data.show_features'))
-            .attr('href', '#')
-            .classed('hide-toggle', true)
-            .classed('expanded', false)
-            .on('click', function() {
-                var exp = d3.select(this).classed('expanded');
-                featureContainer.style('display', exp ? 'none' : 'block');
-                d3.select(this).classed('expanded', !exp);
-                d3.event.preventDefault();
-            });
-
-        var featureContainer = content.append('div')
-            .attr('class', 'filters')
-            .style('display', 'none');
-
-        var featureList = featureContainer.append('ul')
-            .attr('class', 'layer-list');
 
         // data layers
         content.append('a')
@@ -201,6 +198,7 @@ iD.ui.MapData = function(context) {
             .attr('class', 'filters')
             .style('display', 'block');
 
+        // mapillary
         var mapillaryLayerItem = layerContainer.append('ul')
             .attr('class', 'layer-list')
             .append('li');
@@ -217,6 +215,7 @@ iD.ui.MapData = function(context) {
         label.append('span')
             .text(t('mapillary.title'));
 
+        // gpx
         var gpxLayerItem = layerContainer.append('ul')
             .style('display', iD.detect().filedrop ? 'block' : 'none')
             .attr('class', 'layer-list')
@@ -271,7 +270,7 @@ iD.ui.MapData = function(context) {
             .text(t('map_data.fill_area'))
             .attr('href', '#')
             .classed('hide-toggle', true)
-            .classed('expanded', true)
+            .classed('expanded', false)
             .on('click', function() {
                 var exp = d3.select(this).classed('expanded');
                 fillContainer.style('display', exp ? 'none' : 'block');
@@ -281,9 +280,30 @@ iD.ui.MapData = function(context) {
 
         var fillContainer = content.append('div')
             .attr('class', 'filters')
-            .style('display', 'block');
+            .style('display', 'none');
 
         var fillList = fillContainer.append('ul')
+            .attr('class', 'layer-list');
+
+
+        // feature filters
+        content.append('a')
+            .text(t('map_data.show_features'))
+            .attr('href', '#')
+            .classed('hide-toggle', true)
+            .classed('expanded', false)
+            .on('click', function() {
+                var exp = d3.select(this).classed('expanded');
+                featureContainer.style('display', exp ? 'none' : 'block');
+                d3.select(this).classed('expanded', !exp);
+                d3.event.preventDefault();
+            });
+
+        var featureContainer = content.append('div')
+            .attr('class', 'filters')
+            .style('display', 'none');
+
+        var featureList = featureContainer.append('ul')
             .attr('class', 'layer-list');
 
 

@@ -45,6 +45,11 @@ iD.Features = function(context) {
         feature = {},
         cullFactor = 1;
 
+    function update() {
+        dispatch.change();
+        dispatch.redraw();
+    }
+
     function defineFeature(k, filter, max) {
         feature[k] = {
             filter: filter,
@@ -54,15 +59,10 @@ iD.Features = function(context) {
             defaultMax: (max || Infinity),
             enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
             disable: function() { this.enabled = false; this.currentMax = 0; },
-            hidden: function() { return this.count > this.currentMax * cullFactor; }
+            hidden: function() { return this.count > this.currentMax * cullFactor; },
+            autoHidden: function() { return this.hidden() && this.currentMax > 0; }
         };
     }
-
-    function update() {
-        dispatch.change();
-        dispatch.redraw();
-    }
-
 
 
     defineFeature('points', function(entity) {
@@ -179,6 +179,13 @@ iD.Features = function(context) {
             return _.filter(features.keys(), function(k) { return feature[k].hidden(); });
         }
         return feature[k] && feature[k].hidden();
+    };
+
+    features.autoHidden = function(k) {
+        if (!arguments.length) {
+            return _.filter(features.keys(), function(k) { return feature[k].autoHidden(); });
+        }
+        return feature[k] && feature[k].autoHidden();
     };
 
     features.enable = function(k) {

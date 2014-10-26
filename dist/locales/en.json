@@ -307,7 +307,8 @@
         "description": "Map Data",
         "show_features": "Show Map Features",
         "show_layers": "Show Data Layers",
-        "fill_area": "Fill Areas"
+        "fill_area": "Fill Areas",
+        "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
     },
     "feature": {
         "points": {
