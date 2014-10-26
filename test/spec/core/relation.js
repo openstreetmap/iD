@@ -33,7 +33,7 @@ describe('iD.Relation', function () {
                 r = iD.Relation({members: [{id: a.id}, {id: b.id}]}),
                 graph = iD.Graph([a, b, r]);
 
-            expect(r.extent(graph)).to.eql([[0, 0], [5, 10]])
+            expect(r.extent(graph).equals([[0, 0], [5, 10]])).to.be.ok;
         });
 
         it("returns the known extent of incomplete relations", function () {
@@ -42,13 +42,13 @@ describe('iD.Relation', function () {
                 r = iD.Relation({members: [{id: a.id}, {id: b.id}]}),
                 graph = iD.Graph([a, r]);
 
-            expect(r.extent(graph)).to.eql([[0, 0], [0, 0]])
+            expect(r.extent(graph).equals([[0, 0], [0, 0]])).to.be.ok;
         });
 
         it("does not error on self-referencing relations", function () {
             var r = iD.Relation();
             r = r.addMember({id: r.id});
-            expect(r.extent(iD.Graph([r]))).to.eql(iD.geo.Extent())
+            expect(r.extent(iD.Graph([r]))).to.eql(iD.geo.Extent());
         });
     });
 

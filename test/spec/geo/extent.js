@@ -1,31 +1,31 @@
 describe("iD.geo.Extent", function () {
     describe("constructor", function () {
         it("defaults to infinitely empty extent", function () {
-            expect(iD.geo.Extent()).to.eql([[Infinity, Infinity], [-Infinity, -Infinity]]);
+            expect(iD.geo.Extent().equals([[Infinity, Infinity], [-Infinity, -Infinity]])).to.be.ok;
         });
 
         it("constructs via a point", function () {
             var p = [0, 0];
-            expect(iD.geo.Extent(p)).to.eql([p, p]);
+            expect(iD.geo.Extent(p).equals([p, p])).to.be.ok;
         });
 
         it("constructs via two points", function () {
             var min = [0, 0],
                 max = [5, 10];
-            expect(iD.geo.Extent(min, max)).to.eql([min, max]);
+            expect(iD.geo.Extent(min, max).equals([min, max])).to.be.ok;
         });
 
         it("constructs via an extent", function () {
             var min = [0, 0],
                 max = [5, 10];
-            expect(iD.geo.Extent([min, max])).to.eql([min, max]);
+            expect(iD.geo.Extent([min, max]).equals([min, max])).to.be.ok;
         });
 
         it("constructs via an iD.geo.Extent", function () {
             var min = [0, 0],
                 max = [5, 10],
                 extent = iD.geo.Extent(min, max);
-            expect(iD.geo.Extent(extent)).to.equal(extent);
+            expect(iD.geo.Extent(extent).equals(extent)).to.be.ok;
         });
 
         it("has length 2", function () {
@@ -42,6 +42,16 @@ describe("iD.geo.Extent", function () {
             var min = [0, 0],
                 max = [5, 10];
             expect(iD.geo.Extent(min, max)[1]).to.equal(max);
+        });
+    });
+
+    describe("#equals", function () {
+        it("tests extent equality", function () {
+            var e1 = iD.geo.Extent([0, 0], [10, 10]),
+                e2 = iD.geo.Extent([0, 0], [10, 10]),
+                e3 = iD.geo.Extent([0, 0], [12, 12]);
+            expect(e1.equals(e2)).to.be.ok;
+            expect(e1.equals(e3)).to.be.not.ok;
         });
     });
 
@@ -73,17 +83,17 @@ describe("iD.geo.Extent", function () {
         it("does not modify self", function () {
             var extent = iD.geo.Extent([0, 0], [0, 0]);
             extent.extend([1, 1]);
-            expect(extent).to.eql([[0, 0], [0, 0]]);
+            expect(extent.equals([[0, 0], [0, 0]])).to.be.ok;
         });
 
         it("returns the minimal extent containing self and the given point", function () {
-            expect(iD.geo.Extent().extend([0, 0])).to.eql([[0, 0], [0, 0]]);
-            expect(iD.geo.Extent([0, 0], [0, 0]).extend([5, 10])).to.eql([[0, 0], [5, 10]]);
+            expect(iD.geo.Extent().extend([0, 0]).equals([[0, 0], [0, 0]])).to.be.ok;
+            expect(iD.geo.Extent([0, 0], [0, 0]).extend([5, 10]).equals([[0, 0], [5, 10]])).to.be.ok;
         });
 
         it("returns the minimal extent containing self and the given extent", function () {
-            expect(iD.geo.Extent().extend([[0, 0], [5, 10]])).to.eql([[0, 0], [5, 10]]);
-            expect(iD.geo.Extent([0, 0], [0, 0]).extend([[4, -1], [5, 10]])).to.eql([[0, -1], [5, 10]]);
+            expect(iD.geo.Extent().extend([[0, 0], [5, 10]]).equals([[0, 0], [5, 10]])).to.be.ok;
+            expect(iD.geo.Extent([0, 0], [0, 0]).extend([[4, -1], [5, 10]]).equals([[0, -1], [5, 10]])).to.be.ok;
         });
     });
 

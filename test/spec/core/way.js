@@ -69,7 +69,7 @@ describe('iD.Way', function() {
                 node2 = iD.Node({loc: [5, 10]}),
                 way   = iD.Way({nodes: [node1.id, node2.id]}),
                 graph = iD.Graph([node1, node2, way]);
-            expect(way.extent(graph)).to.eql([[0, 0], [5, 10]]);
+            expect(way.extent(graph).equals([[0, 0], [5, 10]])).to.be.ok;
         });
     });
 

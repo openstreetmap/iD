@@ -14,7 +14,7 @@ describe('iD.Node', function () {
 
     describe("#extent", function() {
         it("returns a point extent", function() {
-            expect(iD.Node({loc: [5, 10]}).extent()).to.eql([[5, 10], [5, 10]]);
+            expect(iD.Node({loc: [5, 10]}).extent().equals([[5, 10], [5, 10]])).to.be.ok;
         });
     });
 

@@ -35,7 +35,7 @@ describe('iD.geo', function() {
             var o = [0, 0],
                 a = [-2, 0],
                 b = [2, 0];
-            expect(iD.geo.cross(o, a, b)).to.eql(0);
+            expect(iD.geo.cross(o, a, b)).to.equal(0);
         });
     });
 
