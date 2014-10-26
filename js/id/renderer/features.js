@@ -209,21 +209,6 @@ iD.Features = function(context) {
         }
     };
 
-    features.setAll = function(val) {
-        if (val !== undefined) {
-            _.each(feature, function(f) { return val ? f.enable() : f.disable(); });
-            update();
-        }
-    };
-
-    features.enableAll = function() {
-        features.setAll(true);
-    };
-
-    features.disableAll = function() {
-        features.setAll(false);
-    };
-
     features.count = function(k) {
         return feature[k] && feature[k].count;
     };
