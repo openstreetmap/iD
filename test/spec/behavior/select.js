@@ -4,7 +4,7 @@ describe("iD.behavior.Select", function() {
     beforeEach(function() {
         container = d3.select('body').append('div');
 
-        context = iD().imagery(iD.data.imagery).container(container);
+        context = iD().presets(iD.data.presets).imagery(iD.data.imagery).container(container);
 
         a = iD.Node({loc: [0, 0]});
         b = iD.Node({loc: [0, 0]});

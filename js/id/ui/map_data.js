@@ -1,6 +1,5 @@
 iD.ui.MapData = function(context) {
     var key = 'F',
-        features = context.features().keys(),
         fills = ['wireframe', 'partial', 'full'],
         fillDefault = context.storage('area-fill') || 'partial',
         fillSelected = fillDefault;
@@ -58,8 +57,16 @@ iD.ui.MapData = function(context) {
                 .call(bootstrap.tooltip()
                     .html(true)
                     .title(function(d) {
-                        var tip = t(name + '.' + d + '.tooltip'),
-                            key = (d === 'wireframe' ? 'W' : null);
+                        var key,
+                            tip = t(name + '.' + d + '.tooltip');
+                        if (d === 'focused') {
+                            var focusedEntity = context.entity(context.focusedID());
+                            var displayName = iD.util.displayName(focusedEntity);
+                            if (displayName) {
+                                tip = displayName;
+                            }
+                        }
+                        key = (d === 'wireframe' ? 'W' : null);
 
                         if (name === 'feature' && autoHiddenFeature(d)) {
                             tip += '<div>' + t('map_data.autohidden') + '</div>';
@@ -94,7 +101,7 @@ iD.ui.MapData = function(context) {
         }
 
         function update() {
-            featureList.call(drawList, features, 'checkbox', 'feature', clickFeature, showsFeature);
+            featureList.call(drawList, context.features().keys(), 'checkbox', 'feature', clickFeature, showsFeature);
             fillList.call(drawList, fills, 'radio', 'area_fill', setFill, showsFill);
 
             var hasGpx = context.background().hasGpxLayer(),

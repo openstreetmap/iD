@@ -14,8 +14,8 @@ iD.Map = function(context) {
         minzoom = 0,
         points = iD.svg.Points(projection, context),
         vertices = iD.svg.Vertices(projection, context),
-        lines = iD.svg.Lines(projection),
-        areas = iD.svg.Areas(projection),
+        lines = iD.svg.Lines(projection, context),
+        areas = iD.svg.Areas(projection, context),
         midpoints = iD.svg.Midpoints(projection, context),
         labels = iD.svg.Labels(projection, context),
         supersurface, surface,
@@ -139,12 +139,6 @@ iD.Map = function(context) {
         dispatch.drawn({full: true});
     }
 
-    function editOff() {
-        context.features().resetStats();
-        surface.selectAll('.layer *').remove();
-        dispatch.drawn({full: true});
-    }
-
     function dblClick() {
         if (!dblclickEnabled) {
             d3.event.preventDefault();
@@ -208,12 +202,11 @@ iD.Map = function(context) {
             supersurface.call(context.background());
         }
 
-        if (map.editable()) {
+        if (map.zoom() >= context.minEditableZoom()) {
             context.loadTiles(projection, dimensions);
-            drawVector(difference, extent);
-        } else {
-            editOff();
         }
+
+        drawVector(difference, extent);
 
         transformStart = [
             projection.scale() * 2 * Math.PI,
@@ -383,7 +376,7 @@ iD.Map = function(context) {
         if (!isFinite(extent.area())) return;
 
         var zoom = map.trimmedExtentZoom(extent);
-        zoomLimits = zoomLimits || [context.minEditableZoom(), 20];
+        zoomLimits = zoomLimits || [0, 20];
         map.centerZoom(extent.center(), Math.min(Math.max(zoom, zoomLimits[0]), zoomLimits[1]));
     };
 

@@ -12,7 +12,7 @@ iD.svg.Vertices = function(projection, context) {
         var vertices = {};
 
         function addChildVertices(entity) {
-            if (!context.features().isHiddenFeature(entity, graph, entity.geometry(graph))) {
+            if (!context.features().isHiddenFeature(entity, graph, entity.geometry(graph)) && context.map().editable()) {
                 var i;
                 if (entity.type === 'way') {
                     for (i = 0; i < entity.nodes.length; i++) {
@@ -156,8 +156,9 @@ iD.svg.Vertices = function(projection, context) {
                 continue;
 
             if (entity.id in selected ||
-                entity.hasInterestingTags() ||
-                entity.isIntersection(graph)) {
+                (context.map().editable() &&
+                (entity.hasInterestingTags() ||
+                 entity.isIntersection(graph)))) {
                 vertices.push(entity);
             }
         }

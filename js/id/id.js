@@ -219,6 +219,13 @@ window.iD = function () {
         }
     };
 
+    var focusedID;
+    context.focusedID = function(_) {
+        if (!arguments.length) return focusedID;
+        focusedID = _;
+        return context;
+    };
+
     /* Behaviors */
     context.install = function(behavior) {
         context.surface().call(behavior);

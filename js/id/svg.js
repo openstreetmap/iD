@@ -7,12 +7,31 @@ iD.svg = {
         };
     },
 
-    Path: function(projection, graph, polygon) {
+    Simplify: function () {
+        var line;
+        return d3.geo.transform({
+            lineStart: function() { line = []; },
+            point: function(x, y) { return line.push([x, y]); },
+            lineEnd: function() {
+                this.stream.lineStart();
+                line = simplify(line, 1, false);
+                for (var i = 0; i < line.length; ++i)
+                    this.stream.point(line[i][0], line[i][1]);
+                this.stream.lineEnd();
+            }
+        });
+    },
+
+    Path: function(projection, graph, polygon, simple) {
         var cache = {},
+            simplify = iD.svg.Simplify().stream,
             clip = d3.geo.clipExtent().extent(projection.clipExtent()).stream,
             project = projection.stream,
             path = d3.geo.path()
-                .projection({stream: function(output) { return polygon ? project(output) : project(clip(output)); }});
+                .projection({stream: function(output) {
+                   if (simple) output = simplify(output);
+                   return polygon ? project(output) : project(clip(output));
+                }});
 
         return function(entity) {
             if (entity.id in cache) {
