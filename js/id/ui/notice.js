@@ -5,7 +5,7 @@ iD.ui.Notice = function(context) {
 
         var button = div.append('button')
             .attr('class', 'zoom-to notice')
-            .on('click', function() { context.map().zoom(16); });
+            .on('click', function() { context.map().zoom(context.minEditableZoom()); });
 
         button.append('span')
             .attr('class', 'icon zoom-in-invert');

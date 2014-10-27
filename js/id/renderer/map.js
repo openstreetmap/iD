@@ -162,7 +162,7 @@ iD.Map = function(context) {
             iD.ui.flash(context.container())
                 .select('.content')
                 .text(t('cannot_zoom'));
-            return setZoom(16, true);
+            return setZoom(context.minEditableZoom(), true);
         }
 
         projection
@@ -342,7 +342,7 @@ iD.Map = function(context) {
     map.zoomTo = function(entity, zoomLimits) {
         var extent = entity.extent(context.graph()),
             zoom = map.extentZoom(extent);
-        zoomLimits = zoomLimits || [16, 20];
+        zoomLimits = zoomLimits || [context.minEditableZoom(), 20];
         map.centerZoom(extent.center(), Math.min(Math.max(zoom, zoomLimits[0]), zoomLimits[1]));
     };
 
@@ -406,7 +406,7 @@ iD.Map = function(context) {
     };
 
     map.editable = function() {
-        return map.zoom() >= 16;
+        return map.zoom() >= context.minEditableZoom();
     };
 
     map.minzoom = function(_) {

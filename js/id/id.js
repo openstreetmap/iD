@@ -30,6 +30,16 @@ window.iD = function () {
         }
     };
 
+    /* Accessor for setting minimum zoom for editing features. */
+
+    var minEditableZoom = 16;
+    context.minEditableZoom = function(_) {
+        if (!arguments.length) return minEditableZoom;
+        minEditableZoom = _;
+        connection.tileZoom(_);
+        return context;
+    };
+
     var history = iD.History(context),
         dispatch = d3.dispatch('enter', 'exit'),
         mode,

@@ -1,7 +1,7 @@
 iD.behavior.Edit = function(context) {
     function edit() {
         context.map()
-            .minzoom(16);
+            .minzoom(context.minEditableZoom());
     }
 
     edit.off = function() {

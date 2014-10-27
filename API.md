@@ -141,4 +141,17 @@ var iD = iD()
   .taginfo(iD.taginfo().endpoint('url'))
   .imagery(customImagery);
 
-```    
+```
+
+### Minimum Editable Zoom
+
+The minimum zoom at which iD enters the edit mode is configured using the `iD().minEditableZoom()` accessor. The default value is 16. To change this initialise iD as 
+
+```js
+
+var iD = iD().
+  .minEditableZoom(zoom_level)
+
+```
+
+This should be set with caution for performance reasons. The OpenStreetMap API has a limitation of 50000 nodes per request.
