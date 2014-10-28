@@ -34,7 +34,6 @@ describe('iD.Features', function() {
         expect(enabled).to.not.include('rail');
         expect(disabled).to.include('rail');
         expect(disabled).to.not.include('water');
-        features.enable('rail');
     });
 
     describe("matching", function() {
@@ -152,8 +151,6 @@ describe('iD.Features', function() {
                 'forest', 'boundary', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
-
-            features.enable('points');
         });
 
 
@@ -172,8 +169,6 @@ describe('iD.Features', function() {
                 'forest', 'boundary', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
-
-            features.enable('major_roads');
         });
 
 
@@ -190,8 +185,6 @@ describe('iD.Features', function() {
                 'forest', 'boundary', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
-
-            features.enable('minor_roads');
         });
 
 
@@ -209,8 +202,6 @@ describe('iD.Features', function() {
                 'forest', 'boundary', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
-
-            features.enable('paths');
         });
 
 
@@ -228,8 +219,6 @@ describe('iD.Features', function() {
                 'forest', 'boundary', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
-
-            features.enable('buildings');
         });
 
 
@@ -247,8 +236,6 @@ describe('iD.Features', function() {
                 'boundary', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
-
-            features.enable('landuse');
         });
 
 
@@ -265,8 +252,6 @@ describe('iD.Features', function() {
                 'forest', 'water', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
-
-            features.enable('boundaries');
         });
 
 
@@ -284,8 +269,6 @@ describe('iD.Features', function() {
                 'forest', 'boundary', 'railway', 'power_line',
                 'motorway_construction', 'fence'
             ]);
-
-            features.enable('water');
         });
 
 
@@ -304,8 +287,6 @@ describe('iD.Features', function() {
                 'forest', 'boundary', 'water', 'power_line',
                 'motorway_construction', 'fence'
             ]);
-
-            features.enable('rail');
         });
 
 
@@ -322,8 +303,6 @@ describe('iD.Features', function() {
                 'forest', 'boundary', 'water', 'railway',
                 'motorway_construction', 'fence'
             ]);
-
-            features.enable('power');
         });
 
 
@@ -341,8 +320,6 @@ describe('iD.Features', function() {
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'water', 'railway', 'power_line', 'fence'
             ]);
-
-            features.enable('past_future');
         });
 
 
@@ -359,8 +336,6 @@ describe('iD.Features', function() {
                 'forest', 'boundary', 'water', 'railway', 'power_line',
                 'motorway_construction',
             ]);
-
-            features.enable('others');
         });
 
     });
@@ -375,13 +350,11 @@ describe('iD.Features', function() {
         features.disable('paths');
         features.gatherStats(all, graph, dimensions);
 
-        expect(features.isHiddenChild(graph.entity('a'), graph)).to.be.true;
-        expect(features.isHidden(graph.entity('a'), graph)).to.be.true;
-
-        features.enable('paths');
+        expect(features.isHiddenChild(a, graph)).to.be.true;
+        expect(features.isHidden(a, graph)).to.be.true;
     });
 
-    it('hides child ways on a hidden relation', function() {
+    it('hides child ways on a hidden multipolygon relation', function() {
         var a = iD.Node({id: 'a', version: 1}),
             b = iD.Node({id: 'b', version: 1}),
             c = iD.Node({id: 'c', version: 1}),
@@ -405,10 +378,114 @@ describe('iD.Features', function() {
         features.disable('landuse');
         features.gatherStats(all, graph, dimensions);
 
-        expect(features.isHiddenChild(graph.entity('inner'), graph)).to.be.true;
-        expect(features.isHidden(graph.entity('inner'), graph)).to.be.true;
+        expect(features.isHiddenChild(inner, graph)).to.be.true;
+        expect(features.isHidden(inner, graph)).to.be.true;
+    });
 
-        features.enable('landuse');
+    it('hides only versioned entities', function() {
+        var a = iD.Node({id: 'a', version: 1}),
+            b = iD.Node({id: 'b'}),
+            graph = iD.Graph([a, b]),
+            all = _.values(graph.base().entities);
+
+        features.disable('points');
+        features.gatherStats(all, graph, dimensions);
+
+        expect(features.isHidden(a, graph)).to.be.true;
+        expect(features.isHidden(b, graph)).to.be.false;
+    });
+
+    it('counts features', function() {
+        var graph = iD.Graph([
+                iD.Node({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
+                iD.Node({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
+                iD.Node({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
+                iD.Node({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
+                iD.Node({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
+                iD.Way({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
+                iD.Way({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
+                iD.Way({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
+                iD.Way({id: 'fence', tags: {barrier: 'fence'}, version: 1})
+            ]),
+            all = _.values(graph.base().entities),
+            stats;
+
+        features.gatherStats(all, graph, dimensions);
+        stats = features.stats();
+
+        expect(stats.boundaries).to.eql(1);
+        expect(stats.buildings).to.eql(1);
+        expect(stats.landuse).to.eql(0);
+        expect(stats.major_roads).to.eql(1);
+        expect(stats.minor_roads).to.eql(0);
+        expect(stats.others).to.eql(1);
+        expect(stats.past_future).to.eql(1);
+        expect(stats.paths).to.eql(0);
+        expect(stats.points).to.eql(5);
+        expect(stats.power).to.eql(1);
+        expect(stats.rail).to.eql(2);
+        expect(stats.water).to.eql(1);
+    });
+
+    it('auto-hides features', function() {
+        var graph = iD.Graph([]),
+            maxPoints = 200,
+            all, hidden, autoHidden, i, msg;
+
+        for(i = 0; i < maxPoints; i++) {
+            graph.rebase([iD.Node({version: 1})], [graph]);
+        }
+
+        all = _.values(graph.base().entities);
+        features.gatherStats(all, graph, dimensions);
+        hidden = features.hidden();
+        autoHidden = features.autoHidden();
+        msg = i + ' points';
+
+        expect(hidden, msg).to.not.include('points');
+        expect(autoHidden, msg).to.not.include('points');
+
+        graph.rebase([iD.Node({version: 1})], [graph]);
+
+        all = _.values(graph.base().entities);
+        features.gatherStats(all, graph, dimensions);
+        hidden = features.hidden();
+        autoHidden = features.autoHidden();
+        msg = ++i + ' points';
+
+        expect(hidden, msg).to.include('points');
+        expect(autoHidden, msg).to.include('points');
+    });
+
+    it('doubles auto-hide threshold when doubling viewport size', function() {
+        var graph = iD.Graph([]),
+            maxPoints = 400,
+            dimensions = [2000, 1000],
+            all, hidden, autoHidden, i, msg;
+
+        for(i = 0; i < maxPoints; i++) {
+            graph.rebase([iD.Node({version: 1})], [graph]);
+        }
+
+        all = _.values(graph.base().entities);
+        features.gatherStats(all, graph, dimensions);
+        hidden = features.hidden();
+        autoHidden = features.autoHidden();
+        msg = i + ' points';
+
+        expect(hidden, msg).to.not.include('points');
+        expect(autoHidden, msg).to.not.include('points');
+
+        graph.rebase([iD.Node({version: 1})], [graph]);
+
+        all = _.values(graph.base().entities);
+        features.gatherStats(all, graph, dimensions);
+        hidden = features.hidden();
+        autoHidden = features.autoHidden();
+        msg = ++i + ' points';
+
+        expect(hidden, msg).to.include('points');
+        expect(autoHidden, msg).to.include('points');
     });
 
 });
