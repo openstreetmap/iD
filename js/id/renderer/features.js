@@ -59,7 +59,7 @@ iD.Features = function(context) {
             defaultMax: (max || Infinity),
             enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
             disable: function() { this.enabled = false; this.currentMax = 0; },
-            hidden: function() { return this.count > this.currentMax * cullFactor; },
+            hidden: function() { return this.count >= this.currentMax * cullFactor; },
             autoHidden: function() { return this.hidden() && this.currentMax > 0; }
         };
     }
