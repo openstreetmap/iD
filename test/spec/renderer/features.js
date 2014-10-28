@@ -1,9 +1,9 @@
 describe('iD.Features', function() {
-    var context, features;
+    var dimensions = [1000, 1000],
+        features;
 
     beforeEach(function() {
-        context = iD();
-        features = context.features();
+        features = iD().features();
     });
 
     it('returns feature keys', function() {
@@ -121,23 +121,26 @@ describe('iD.Features', function() {
             // Others
             iD.Way({id: 'fence', tags: {barrier: 'fence'}, version: 1}),
             iD.Way({id: 'pipeline', tags: {man_made: 'pipeline'}, version: 1})
-        ]);
+        ]),
+        all = _.values(graph.base().entities);
+
 
         function doMatch(ids) {
             _.each(ids, function(id) {
-                expect(features.isHidden(graph.entity(id)), id).to.be.true;
+                expect(features.isHidden(graph.entity(id), graph), 'doMatch: ' + id).to.be.true;
             });
         }
 
         function dontMatch(ids) {
             _.each(ids, function(id) {
-                expect(features.isHidden(graph.entity(id)), id).to.be.false;
+                expect(features.isHidden(graph.entity(id), graph), 'dontMatch: ' + id).to.be.false;
             });
         }
 
 
         it("matches points", function () {
             features.disable('points');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'point_bar', 'point_dock', 'point_rail_station',
@@ -156,6 +159,7 @@ describe('iD.Features', function() {
 
         it("matches major roads", function () {
             features.disable('major_roads');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'motorway', 'motorway_link', 'trunk', 'trunk_link',
@@ -175,6 +179,7 @@ describe('iD.Features', function() {
 
         it("matches minor roads", function () {
             features.disable('minor_roads');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'service', 'living_street', 'road', 'unclassified', 'track'
@@ -192,6 +197,7 @@ describe('iD.Features', function() {
 
         it("matches paths", function () {
             features.disable('paths');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'path', 'footway', 'cycleway', 'bridleway',
@@ -210,6 +216,7 @@ describe('iD.Features', function() {
 
         it("matches buildings", function () {
             features.disable('buildings');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'building_yes', 'building_part', 'shelter',
@@ -228,6 +235,7 @@ describe('iD.Features', function() {
 
         it("matches landuse", function () {
             features.disable('landuse');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'forest', 'scrub', 'industrial', 'parkinglot', 'building_no',
@@ -246,6 +254,7 @@ describe('iD.Features', function() {
 
         it("matches boundaries", function () {
             features.disable('boundaries');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'boundary'
@@ -263,6 +272,7 @@ describe('iD.Features', function() {
 
         it("matches water", function () {
             features.disable('water');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'point_dock', 'water', 'coastline', 'bay', 'pond',
@@ -281,6 +291,7 @@ describe('iD.Features', function() {
 
         it("matches rail", function () {
             features.disable('rail');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'point_rail_station', 'point_old_rail_station',
@@ -300,6 +311,7 @@ describe('iD.Features', function() {
 
         it("matches power", function () {
             features.disable('power');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'point_generator', 'power_line'
@@ -317,6 +329,7 @@ describe('iD.Features', function() {
 
         it("matches past/future", function () {
             features.disable('past_future');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'point_old_rail_station', 'rail_disused',
@@ -335,6 +348,7 @@ describe('iD.Features', function() {
 
         it("matches others", function () {
             features.disable('others');
+            features.gatherStats(all, graph, dimensions);
 
             doMatch([
                 'fence', 'pipeline'
@@ -355,32 +369,44 @@ describe('iD.Features', function() {
         var a = iD.Node({id: 'a', version: 1}),
             b = iD.Node({id: 'b', version: 1}),
             w = iD.Way({id: 'w', nodes: [a.id, b.id], tags: {highway: 'path'}, version: 1}),
-            graph = iD.Graph([a, b, w]);
+            graph = iD.Graph([a, b, w]),
+            all = _.values(graph.base().entities);
 
         features.disable('paths');
+        features.gatherStats(all, graph, dimensions);
 
-        expect(features.isHiddenChild(graph.entity('a'))).to.be.true;
-        expect(features.isHidden(graph.entity('a'))).to.be.true;
+        expect(features.isHiddenChild(graph.entity('a'), graph)).to.be.true;
+        expect(features.isHidden(graph.entity('a'), graph)).to.be.true;
 
         features.enable('paths');
     });
 
     it('hides child ways on a hidden relation', function() {
-        var a = iD.Node({id: 'a'}),
-            b = iD.Node({id: 'b'}),
-            c = iD.Node({id: 'c'}),
-            d = iD.Node({id: 'd'}),
-            e = iD.Node({id: 'e'}),
-            f = iD.Node({id: 'f'}),
-            outer = iD.Way({id: 'outer', nodes: [a.id, b.id, c.id, a.id], tags: {natural: 'wood'}}),
-            inner = iD.Way({id: 'inner', nodes: [d.id, e.id, f.id, d.id]}),
-            r = iD.Relation({members: [{id: outer.id, type: 'way'}, {id: inner.id, role: 'inner', type: 'way'}]}),
-            graph = iD.Graph([a, b, c, d, e, f, outer, inner, r]);
+        var a = iD.Node({id: 'a', version: 1}),
+            b = iD.Node({id: 'b', version: 1}),
+            c = iD.Node({id: 'c', version: 1}),
+            d = iD.Node({id: 'd', version: 1}),
+            e = iD.Node({id: 'e', version: 1}),
+            f = iD.Node({id: 'f', version: 1}),
+            outer = iD.Way({id: 'outer', nodes: [a.id, b.id, c.id, a.id], tags: {area: 'yes', natural: 'wood'}, version: 1}),
+            inner = iD.Way({id: 'inner', nodes: [d.id, e.id, f.id, d.id], version: 1}),
+            r = iD.Relation({
+                id: 'r',
+                tags: {type: 'multipolygon'},
+                members: [
+                    {id: outer.id, role: 'outer', type: 'way'},
+                    {id: inner.id, role: 'inner', type: 'way'}
+                ],
+                version: 1
+            }),
+            graph = iD.Graph([a, b, c, d, e, f, outer, inner, r]),
+            all = _.values(graph.base().entities);
 
         features.disable('landuse');
+        features.gatherStats(all, graph, dimensions);
 
-        expect(features.isHiddenChild(graph.entity('inner'))).to.be.true;
-        expect(features.isHidden(graph.entity('inner'))).to.be.true;
+        expect(features.isHiddenChild(graph.entity('inner'), graph)).to.be.true;
+        expect(features.isHidden(graph.entity('inner'), graph)).to.be.true;
 
         features.enable('landuse');
     });

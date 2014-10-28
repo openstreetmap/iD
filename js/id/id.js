@@ -207,8 +207,9 @@ window.iD = function () {
     var features = iD.Features(context);
     context.features = function() { return features; };
     context.hasHiddenConnections = function(id) {
-        var entity = history.graph().entity(id);
-        return features.hasHiddenConnections(entity);
+        var graph = history.graph(),
+            entity = graph.entity(id);
+        return features.hasHiddenConnections(entity, graph);
     };
 
     /* Map */

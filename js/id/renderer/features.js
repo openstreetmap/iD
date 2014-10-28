@@ -42,6 +42,7 @@ iD.Features = function(context) {
     };
 
     var dispatch = d3.dispatch('change', 'redraw'),
+        resolver = context.graph(),
         feature = {},
         cullFactor = 1;
 
@@ -59,31 +60,31 @@ iD.Features = function(context) {
             defaultMax: (max || Infinity),
             enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
             disable: function() { this.enabled = false; this.currentMax = 0; },
-            hidden: function() { return this.count >= this.currentMax * cullFactor; },
+            hidden: function() { return this.count > this.currentMax * cullFactor; },
             autoHidden: function() { return this.hidden() && this.currentMax > 0; }
         };
     }
 
 
     defineFeature('points', function(entity) {
-        return entity.geometry(context.graph()) === 'point';
+        return entity.geometry(resolver) === 'point';
     }, 200);
 
     defineFeature('major_roads', function(entity) {
-        return entity.geometry(context.graph()) === 'line' && major_roads[entity.tags.highway];
+        return entity.geometry(resolver) === 'line' && major_roads[entity.tags.highway];
     });
 
     defineFeature('minor_roads', function(entity) {
-        return entity.geometry(context.graph()) === 'line' && minor_roads[entity.tags.highway];
+        return entity.geometry(resolver) === 'line' && minor_roads[entity.tags.highway];
     });
 
     defineFeature('paths', function(entity) {
-        return entity.geometry(context.graph()) === 'line' && paths[entity.tags.highway];
+        return entity.geometry(resolver) === 'line' && paths[entity.tags.highway];
     });
 
     defineFeature('buildings', function(entity) {
         return (
-            entity.geometry(context.graph()) === 'area' && (
+            entity.geometry(resolver) === 'area' && (
                 (!!entity.tags.building && entity.tags.building !== 'no') ||
                 entity.tags.amenity === 'shelter' ||
                 entity.tags.parking === 'multi-storey' ||
@@ -95,7 +96,7 @@ iD.Features = function(context) {
     }, 250);
 
     defineFeature('landuse', function(entity) {
-        return entity.geometry(context.graph()) === 'area' &&
+        return entity.geometry(resolver) === 'area' &&
             !feature.buildings.filter(entity) &&
             !feature.water.filter(entity);
     });
@@ -145,8 +146,8 @@ iD.Features = function(context) {
     // lines or areas that don't match another feature filter.
     defineFeature('others', function(entity) {
         return (
-            entity.geometry(context.graph()) === 'line' ||
-            entity.geometry(context.graph()) === 'area'
+            entity.geometry(resolver) === 'line' ||
+            entity.geometry(resolver) === 'area'
         ) &&
         _.reduce(_.omit(feature, 'others'), function(result, v) {
             return result && !v.filter(entity);
@@ -213,20 +214,18 @@ iD.Features = function(context) {
         return feature[k] && feature[k].count;
     };
 
-    features.resetStats = function() {
-        var dimensions = context.map().dimensions();
+
+    features.gatherStats = function(d, graph, dimensions) {
+        var hidden = features.hidden(),
+            keys = features.keys();
+        resolver = graph || resolver;
+
         _.each(feature, function(f) { f.count = 0; });
 
         // adjust the threshold for point/building culling based on viewport size..
         // a cullFactor of 1 corresponds to a 1000x1000px viewport..
         cullFactor = dimensions[0] * dimensions[1] / 1000000;
-    };
 
-    features.gatherStats = function(d) {
-        var hidden = features.hidden(),
-            keys = features.keys();
-
-        features.resetStats();
         _.each(d, function(entity) {
             _.each(keys, function(k) {
                 if (feature[k].filter(entity)) {
@@ -248,43 +247,54 @@ iD.Features = function(context) {
         return stats;
     };
 
-    features.isHiddenFeature = function(entity) {
+    features.isHiddenFeature = function(entity, graph) {
+        resolver = graph || resolver;
         return _.any(features.hidden(), function(k) { return feature[k].filter(entity); });
     };
 
-    features.isHiddenChild = function(entity) {
-        var g = context.graph(),
-            parents = _.union(g.parentWays(entity), g.parentRelations(entity));
-        return parents.length ? _.all(parents, features.isHidden) : false;
+    features.isHiddenChild = function(entity, graph) {
+        var parents;
+        resolver = graph || resolver;
+
+        parents = _.union(resolver.parentWays(entity), resolver.parentRelations(entity));
+        return parents.length ? _.all(parents, function(e) {
+            return features.isHidden(e, resolver);
+        }) : false;
     };
 
-    features.hasHiddenConnections = function(entity) {
-        var g = context.graph(),
-            childNodes, connections;
+    features.hasHiddenConnections = function(entity, graph) {
+        var childNodes, connections;
+        resolver = graph || resolver;
 
         if (entity.type === 'midpoint') {
-            childNodes = [context.entity(entity.edge[0]), context.entity(entity.edge[1])];
+            childNodes = [resolver.entity(entity.edge[0]), resolver.entity(entity.edge[1])];
         } else {
-            childNodes = g.childNodes(entity);
+            childNodes = resolver.childNodes(entity);
         }
 
         // gather parents..
-        connections = _.union(g.parentWays(entity), g.parentRelations(entity));
+        connections = _.union(resolver.parentWays(entity), resolver.parentRelations(entity));
         // gather ways connected to child nodes..
         connections = _.reduce(childNodes, function(result, e) {
-            return g.isShared(e) ? _.union(result, g.parentWays(e)) : result;
+            return resolver.isShared(e) ? _.union(result, resolver.parentWays(e)) : result;
         }, connections);
 
-        return connections.length ? _.any(connections, features.isHidden) : false;
+        return connections.length ? _.any(connections, function(e) {
+            return features.isHidden(e, resolver);
+        }) : false;
     };
 
-    features.isHidden = function(entity) {
+    features.isHidden = function(entity, graph) {
+        resolver = graph || resolver;
         return !!entity.version &&
-            (features.isHiddenFeature(entity) || features.isHiddenChild(entity));
+            (features.isHiddenFeature(entity, resolver) || features.isHiddenChild(entity, resolver));
     };
 
-    features.filter = function(d) {
-        return features.hidden().length ? _.reject(d, features.isHidden) : d;
+    features.filter = function(d, graph) {
+        resolver = graph || resolver;
+        return features.hidden().length ? _.reject(d, function(e) {
+            return features.isHidden(e, resolver);
+        }) : d;
     };
 
     return d3.rebind(features, dispatch, 'on');

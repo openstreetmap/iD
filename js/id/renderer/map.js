@@ -95,34 +95,36 @@ iD.Map = function(context) {
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
 
     function drawVector(difference, extent) {
-        var filter, all,
-            graph = context.graph();
+        var graph = context.graph(),
+            features = context.features(),
+            all = context.intersects(map.extent()),
+            data, filter;
 
         if (difference) {
             var complete = difference.complete(map.extent());
-            all = _.compact(_.values(complete));
+            data = _.compact(_.values(complete));
             filter = function(d) { return d.id in complete; };
 
         } else if (extent) {
-            all = context.intersects(map.extent().intersection(extent));
-            var set = d3.set(_.pluck(all, 'id'));
+            data = context.intersects(map.extent().intersection(extent));
+            var set = d3.set(_.pluck(data, 'id'));
             filter = function(d) { return set.has(d.id); };
 
         } else {
-            all = context.intersects(map.extent());
+            data = all;
             filter = d3.functor(true);
         }
 
-        context.features().gatherStats(context.intersects(map.extent()));
-        all = context.features().filter(all);
+        features.gatherStats(all, graph, dimensions);
+        data = features.filter(data, graph);
 
         surface
-            .call(vertices, graph, all, filter, map.extent(), map.zoom())
-            .call(lines, graph, all, filter)
-            .call(areas, graph, all, filter)
-            .call(midpoints, graph, all, filter, map.trimmedExtent())
-            .call(labels, graph, all, filter, dimensions, !difference && !extent)
-            .call(points, all, filter);
+            .call(vertices, graph, data, filter, map.extent(), map.zoom())
+            .call(lines, graph, data, filter)
+            .call(areas, graph, data, filter)
+            .call(midpoints, graph, data, filter, map.trimmedExtent())
+            .call(labels, graph, data, filter, dimensions, !difference && !extent)
+            .call(points, data, filter);
 
         dispatch.drawn({full: true});
     }
