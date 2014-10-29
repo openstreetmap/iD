@@ -98,13 +98,13 @@ iD.modes.DragNode = function(context) {
         if (nudge) startNudge(nudge);
         else stopNudge();
 
-        var loc = context.map().mouseCoordinates();
+        var loc = context.projection.invert(d3.event.point);
 
         var d = datum();
         if (d.type === 'node' && d.id !== entity.id) {
             loc = d.loc;
         } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
-            loc = iD.geo.chooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
+            loc = iD.geo.chooseEdge(context.childNodes(d), d3.event.point, context.projection).loc;
         }
 
         context.replace(
@@ -118,7 +118,7 @@ iD.modes.DragNode = function(context) {
         var d = datum();
 
         if (d.type === 'way') {
-            var choice = iD.geo.chooseEdge(context.childNodes(d), context.mouse(), context.projection);
+            var choice = iD.geo.chooseEdge(context.childNodes(d), d3.event.point, context.projection);
             context.replace(
                 iD.actions.AddMidpoint({ loc: choice.loc, edge: [d.nodes[choice.index - 1], d.nodes[choice.index]] }, entity),
                 connectAnnotation(d));
