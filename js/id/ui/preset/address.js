@@ -203,7 +203,8 @@ iD.ui.preset.address = function(field, context) {
     };
 
     address.focus = function() {
-        wrap.selectAll('input').node().focus();
+        var node = wrap.selectAll('input').node();
+        if (node) node.focus();
     };
 
     return d3.rebind(address, event, 'on');

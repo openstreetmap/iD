@@ -164,37 +164,32 @@ iD.ui.preset = function(context) {
             };
         });
 
-        function notShown_placeholder() {
-            var placeholder = [];
-            for (var field in notShown) {
-                placeholder.push(notShown[field].title);
-            }
-            return placeholder.slice(0,3).join(', ') + ((placeholder.length > 3) ? '…' : '');
-        }
-
         var $more = $form.selectAll('.more-fields')
             .data((notShown.length > 0) ? [0] : []);
-
-        var $input = $more.selectAll('.value')
-            .data([0]);
 
         $more.enter().append('div')
             .attr('class', 'more-fields')
             .append('label')
                 .text('Add additional fields');
 
+        var $input = $more.selectAll('.value')
+            .data([0]);
+
         $input.enter().append('input')
             .attr('class', 'value')
-            .attr('type', 'text')
-            .attr('placeholder', notShown_placeholder);
+            .attr('type', 'text');
 
-        $input.call(d3.combobox().data(notShown)
-            .minItems(1)
-            .on('accept', function(item) {
-                show(item);
-                $input.value('')
-                    .attr('placeholder', notShown_placeholder);
-            }));
+        $input.value('')
+            .attr('placeholder', function() {
+                var placeholder = [];
+                for (var field in notShown) {
+                    placeholder.push(notShown[field].title);
+                }
+                return placeholder.slice(0,3).join(', ') + ((placeholder.length > 3) ? '…' : '');
+            })
+            .call(d3.combobox().data(notShown)
+                .minItems(1)
+                .on('accept', show));
 
         $more.exit()
             .remove();
