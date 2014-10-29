@@ -6,34 +6,78 @@ describe('iD.Features', function() {
         features = iD().features();
     });
 
-    it('returns feature keys', function() {
-        var keys = features.keys();
-        expect(keys).to.have.members([
-            'points', 'major_roads', 'minor_roads', 'paths',
-            'buildings', 'landuse', 'boundaries', 'water', 'rail',
-            'power', 'past_future', 'others'
-        ]);
+    describe('#keys', function() {
+        it('returns feature keys', function() {
+            var keys = features.keys();
+            expect(keys).to.have.members([
+                'points', 'major_roads', 'minor_roads', 'paths',
+                'buildings', 'landuse', 'boundaries', 'water', 'rail',
+                'power', 'past_future', 'others'
+            ]);
+        });
     });
 
-    it('disables and enables features', function() {
-        var enabled, disabled;
+    describe('#disable', function() {
+        it('disables features', function() {
+            features.disable('water');
+            expect(features.disabled()).to.include('water');
+            expect(features.enabled()).to.not.include('water');
+        });
+    });
 
-        features.disable('water');
-        features.disable('rail');
-        enabled = features.enabled();
-        disabled = features.disabled();
+    describe('#enable', function() {
+        it('enables features', function() {
+            features.disable('water');
+            features.enable('water');
+            expect(features.disabled()).to.not.include('water');
+            expect(features.enabled()).to.include('water');
+        });
+    });
 
-        expect(enabled).to.not.have.members(['water', 'rail']);
-        expect(disabled).to.have.members(['water', 'rail']);
+    describe('#toggle', function() {
+        it('toggles features', function() {
+            features.toggle('water');
+            expect(features.disabled()).to.include('water');
+            expect(features.enabled()).to.not.include('water');
 
-        features.enable('water');
-        enabled = features.enabled();
-        disabled = features.disabled();
+            features.toggle('water');
+            expect(features.disabled()).to.not.include('water');
+            expect(features.enabled()).to.include('water');
+        });
+    });
 
-        expect(enabled).to.include('water');
-        expect(enabled).to.not.include('rail');
-        expect(disabled).to.include('rail');
-        expect(disabled).to.not.include('water');
+    describe('#gatherStats', function() {
+        it('counts features', function() {
+            var graph = iD.Graph([
+                    iD.Node({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
+                    iD.Node({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
+                    iD.Node({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
+                    iD.Node({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
+                    iD.Node({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
+                    iD.Way({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
+                    iD.Way({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
+                    iD.Way({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
+                    iD.Way({id: 'fence', tags: {barrier: 'fence'}, version: 1})
+                ]),
+                all = _.values(graph.base().entities),
+                stats;
+
+            features.gatherStats(all, graph, dimensions);
+            stats = features.stats();
+
+            expect(stats.boundaries).to.eql(1);
+            expect(stats.buildings).to.eql(1);
+            expect(stats.landuse).to.eql(0);
+            expect(stats.major_roads).to.eql(1);
+            expect(stats.minor_roads).to.eql(0);
+            expect(stats.others).to.eql(1);
+            expect(stats.past_future).to.eql(1);
+            expect(stats.paths).to.eql(0);
+            expect(stats.points).to.eql(5);
+            expect(stats.power).to.eql(1);
+            expect(stats.rail).to.eql(2);
+            expect(stats.water).to.eql(1);
+        });
     });
 
     describe("matching", function() {
@@ -337,155 +381,125 @@ describe('iD.Features', function() {
                 'motorway_construction',
             ]);
         });
-
     });
 
-    it('hides child vertices on a hidden way', function() {
-        var a = iD.Node({id: 'a', version: 1}),
-            b = iD.Node({id: 'b', version: 1}),
-            w = iD.Way({id: 'w', nodes: [a.id, b.id], tags: {highway: 'path'}, version: 1}),
-            graph = iD.Graph([a, b, w]),
+
+    describe('hiding', function() {
+        it('hides child vertices on a hidden way', function() {
+            var a = iD.Node({id: 'a', version: 1}),
+                b = iD.Node({id: 'b', version: 1}),
+                w = iD.Way({id: 'w', nodes: [a.id, b.id], tags: {highway: 'path'}, version: 1}),
+                graph = iD.Graph([a, b, w]),
+                all = _.values(graph.base().entities);
+
+            features.disable('paths');
+            features.gatherStats(all, graph, dimensions);
+
+            expect(features.isHiddenChild(a, graph)).to.be.true;
+            expect(features.isHidden(a, graph)).to.be.true;
+        });
+
+        it('hides child ways on a hidden multipolygon relation', function() {
+            var a = iD.Node({id: 'a', version: 1}),
+                b = iD.Node({id: 'b', version: 1}),
+                c = iD.Node({id: 'c', version: 1}),
+                d = iD.Node({id: 'd', version: 1}),
+                e = iD.Node({id: 'e', version: 1}),
+                f = iD.Node({id: 'f', version: 1}),
+                outer = iD.Way({id: 'outer', nodes: [a.id, b.id, c.id, a.id], tags: {area: 'yes', natural: 'wood'}, version: 1}),
+                inner = iD.Way({id: 'inner', nodes: [d.id, e.id, f.id, d.id], version: 1}),
+                r = iD.Relation({
+                    id: 'r',
+                    tags: {type: 'multipolygon'},
+                    members: [
+                        {id: outer.id, role: 'outer', type: 'way'},
+                        {id: inner.id, role: 'inner', type: 'way'}
+                    ],
+                    version: 1
+                }),
+                graph = iD.Graph([a, b, c, d, e, f, outer, inner, r]),
+                all = _.values(graph.base().entities);
+
+            features.disable('landuse');
+            features.gatherStats(all, graph, dimensions);
+
+            expect(features.isHiddenChild(inner, graph)).to.be.true;
+            expect(features.isHidden(inner, graph)).to.be.true;
+        });
+
+        it('hides only versioned entities', function() {
+            var a = iD.Node({id: 'a', version: 1}),
+                b = iD.Node({id: 'b'}),
+                graph = iD.Graph([a, b]),
+                all = _.values(graph.base().entities);
+
+            features.disable('points');
+            features.gatherStats(all, graph, dimensions);
+
+            expect(features.isHidden(a, graph)).to.be.true;
+            expect(features.isHidden(b, graph)).to.be.false;
+        });
+
+        it('auto-hides features', function() {
+            var graph = iD.Graph([]),
+                maxPoints = 200,
+                all, hidden, autoHidden, i, msg;
+
+            for(i = 0; i < maxPoints; i++) {
+                graph.rebase([iD.Node({version: 1})], [graph]);
+            }
+
             all = _.values(graph.base().entities);
+            features.gatherStats(all, graph, dimensions);
+            hidden = features.hidden();
+            autoHidden = features.autoHidden();
+            msg = i + ' points';
 
-        features.disable('paths');
-        features.gatherStats(all, graph, dimensions);
+            expect(hidden, msg).to.not.include('points');
+            expect(autoHidden, msg).to.not.include('points');
 
-        expect(features.isHiddenChild(a, graph)).to.be.true;
-        expect(features.isHidden(a, graph)).to.be.true;
-    });
-
-    it('hides child ways on a hidden multipolygon relation', function() {
-        var a = iD.Node({id: 'a', version: 1}),
-            b = iD.Node({id: 'b', version: 1}),
-            c = iD.Node({id: 'c', version: 1}),
-            d = iD.Node({id: 'd', version: 1}),
-            e = iD.Node({id: 'e', version: 1}),
-            f = iD.Node({id: 'f', version: 1}),
-            outer = iD.Way({id: 'outer', nodes: [a.id, b.id, c.id, a.id], tags: {area: 'yes', natural: 'wood'}, version: 1}),
-            inner = iD.Way({id: 'inner', nodes: [d.id, e.id, f.id, d.id], version: 1}),
-            r = iD.Relation({
-                id: 'r',
-                tags: {type: 'multipolygon'},
-                members: [
-                    {id: outer.id, role: 'outer', type: 'way'},
-                    {id: inner.id, role: 'inner', type: 'way'}
-                ],
-                version: 1
-            }),
-            graph = iD.Graph([a, b, c, d, e, f, outer, inner, r]),
-            all = _.values(graph.base().entities);
-
-        features.disable('landuse');
-        features.gatherStats(all, graph, dimensions);
-
-        expect(features.isHiddenChild(inner, graph)).to.be.true;
-        expect(features.isHidden(inner, graph)).to.be.true;
-    });
-
-    it('hides only versioned entities', function() {
-        var a = iD.Node({id: 'a', version: 1}),
-            b = iD.Node({id: 'b'}),
-            graph = iD.Graph([a, b]),
-            all = _.values(graph.base().entities);
-
-        features.disable('points');
-        features.gatherStats(all, graph, dimensions);
-
-        expect(features.isHidden(a, graph)).to.be.true;
-        expect(features.isHidden(b, graph)).to.be.false;
-    });
-
-    it('counts features', function() {
-        var graph = iD.Graph([
-                iD.Node({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
-                iD.Node({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
-                iD.Node({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
-                iD.Node({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
-                iD.Node({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
-                iD.Way({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
-                iD.Way({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
-                iD.Way({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
-                iD.Way({id: 'fence', tags: {barrier: 'fence'}, version: 1})
-            ]),
-            all = _.values(graph.base().entities),
-            stats;
-
-        features.gatherStats(all, graph, dimensions);
-        stats = features.stats();
-
-        expect(stats.boundaries).to.eql(1);
-        expect(stats.buildings).to.eql(1);
-        expect(stats.landuse).to.eql(0);
-        expect(stats.major_roads).to.eql(1);
-        expect(stats.minor_roads).to.eql(0);
-        expect(stats.others).to.eql(1);
-        expect(stats.past_future).to.eql(1);
-        expect(stats.paths).to.eql(0);
-        expect(stats.points).to.eql(5);
-        expect(stats.power).to.eql(1);
-        expect(stats.rail).to.eql(2);
-        expect(stats.water).to.eql(1);
-    });
-
-    it('auto-hides features', function() {
-        var graph = iD.Graph([]),
-            maxPoints = 200,
-            all, hidden, autoHidden, i, msg;
-
-        for(i = 0; i < maxPoints; i++) {
             graph.rebase([iD.Node({version: 1})], [graph]);
-        }
 
-        all = _.values(graph.base().entities);
-        features.gatherStats(all, graph, dimensions);
-        hidden = features.hidden();
-        autoHidden = features.autoHidden();
-        msg = i + ' points';
+            all = _.values(graph.base().entities);
+            features.gatherStats(all, graph, dimensions);
+            hidden = features.hidden();
+            autoHidden = features.autoHidden();
+            msg = ++i + ' points';
 
-        expect(hidden, msg).to.not.include('points');
-        expect(autoHidden, msg).to.not.include('points');
+            expect(hidden, msg).to.include('points');
+            expect(autoHidden, msg).to.include('points');
+        });
 
-        graph.rebase([iD.Node({version: 1})], [graph]);
+        it('doubles auto-hide threshold when doubling viewport size', function() {
+            var graph = iD.Graph([]),
+                maxPoints = 400,
+                dimensions = [2000, 1000],
+                all, hidden, autoHidden, i, msg;
 
-        all = _.values(graph.base().entities);
-        features.gatherStats(all, graph, dimensions);
-        hidden = features.hidden();
-        autoHidden = features.autoHidden();
-        msg = ++i + ' points';
+            for(i = 0; i < maxPoints; i++) {
+                graph.rebase([iD.Node({version: 1})], [graph]);
+            }
 
-        expect(hidden, msg).to.include('points');
-        expect(autoHidden, msg).to.include('points');
-    });
+            all = _.values(graph.base().entities);
+            features.gatherStats(all, graph, dimensions);
+            hidden = features.hidden();
+            autoHidden = features.autoHidden();
+            msg = i + ' points';
 
-    it('doubles auto-hide threshold when doubling viewport size', function() {
-        var graph = iD.Graph([]),
-            maxPoints = 400,
-            dimensions = [2000, 1000],
-            all, hidden, autoHidden, i, msg;
+            expect(hidden, msg).to.not.include('points');
+            expect(autoHidden, msg).to.not.include('points');
 
-        for(i = 0; i < maxPoints; i++) {
             graph.rebase([iD.Node({version: 1})], [graph]);
-        }
 
-        all = _.values(graph.base().entities);
-        features.gatherStats(all, graph, dimensions);
-        hidden = features.hidden();
-        autoHidden = features.autoHidden();
-        msg = i + ' points';
+            all = _.values(graph.base().entities);
+            features.gatherStats(all, graph, dimensions);
+            hidden = features.hidden();
+            autoHidden = features.autoHidden();
+            msg = ++i + ' points';
 
-        expect(hidden, msg).to.not.include('points');
-        expect(autoHidden, msg).to.not.include('points');
-
-        graph.rebase([iD.Node({version: 1})], [graph]);
-
-        all = _.values(graph.base().entities);
-        features.gatherStats(all, graph, dimensions);
-        hidden = features.hidden();
-        autoHidden = features.autoHidden();
-        msg = ++i + ' points';
-
-        expect(hidden, msg).to.include('points');
-        expect(autoHidden, msg).to.include('points');
+            expect(hidden, msg).to.include('points');
+            expect(autoHidden, msg).to.include('points');
+        });
     });
 
 });

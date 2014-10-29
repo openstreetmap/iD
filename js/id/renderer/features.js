@@ -203,6 +203,13 @@ iD.Features = function(context) {
         }
     };
 
+    features.toggle = function(k) {
+        if (feature[k]) {
+            (function(f) { return f.enabled ? f.disable() : f.enable(); }(feature[k]));
+            update();
+        }
+    };
+
     features.gatherStats = function(d, graph, dimensions) {
         var hidden = features.hidden(),
             keys = features.keys();
