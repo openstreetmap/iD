@@ -8,7 +8,7 @@ iD.ui.MapData = function(context) {
     function map_data(selection) {
 
         function showsFeature(d) {
-            return autoHiddenFeature(d) ? null : !context.features().hidden(d);
+            return autoHiddenFeature(d) ? null : context.features().enabled(d);
         }
 
         function autoHiddenFeature(d) {
@@ -88,7 +88,6 @@ iD.ui.MapData = function(context) {
             if (name === 'feature') {
                 items
                     .selectAll('input')
-                    .property('disabled', autoHiddenFeature)
                     .property('indeterminate', autoHiddenFeature);
             }
 
