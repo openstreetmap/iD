@@ -314,7 +314,9 @@ iD.ui.MapData = function(context) {
 
         var keybinding = d3.keybinding('features')
             .on(key, togglePanel)
-            .on('W', toggleWireframe);
+            .on('W', toggleWireframe)
+            .on('B', hidePanel)
+            .on('H', hidePanel);
 
         // keybinding.on('m', function() {
         //         context.enter(iD.modes.SelectImage(context));

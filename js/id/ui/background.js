@@ -294,8 +294,10 @@ iD.ui.Background = function(context) {
         update();
         setOpacity(opacityDefault);
 
-        var keybinding = d3.keybinding('background');
-        keybinding.on(key, toggle);
+        var keybinding = d3.keybinding('background')
+            .on(key, toggle)
+            .on('F', hide)
+            .on('H', hide);
 
         d3.select(document)
             .call(keybinding);
