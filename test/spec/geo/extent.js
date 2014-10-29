@@ -101,11 +101,11 @@ describe("iD.geo.Extent", function () {
         it("extends self to the minimal extent containing self and the given extent", function () {
             var e = iD.geo.Extent();
             e._extend([[0, 0], [5, 10]]);
-            expect(e).to.eql([[0, 0], [5, 10]]);
+            expect(e.equals([[0, 0], [5, 10]])).to.be.ok;
 
             e = iD.geo.Extent([0, 0], [0, 0]);
             e._extend([[4, -1], [5, 10]]);
-            expect(e).to.eql([[0, -1], [5, 10]]);
+            expect(e.equals([[0, -1], [5, 10]])).to.be.ok;
         });
     });
 
