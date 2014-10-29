@@ -1136,7 +1136,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-hover .entity-editor-pane .header button,
 .inspector-hover .spin-control,
 .inspector-hover .hide-toggle:before,
-.inspector-hover .more-buttons,
+.inspector-hover .more-fields,
 .inspector-hover .form-label-button-wrap,
 .inspector-hover .tag-reference-button,
 .inspector-hover .view-on-osm {
@@ -1161,9 +1161,9 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-bottom-left-radius: 4px;
 }
 
-.inspector-hover .inspector-body .more-buttons {
+.inspector-hover .more-fields {
     max-height: 0;
-    padding-bottom: 0;
+    margin-bottom: -10px;
 }
 
 /* Unstyle button fields */
@@ -1231,7 +1231,7 @@ input,
 .entity-editor-pane .header button,
 .toggle-list label span,
 .spin-control,
-.more-buttons,
+.more-fields,
 .view-on-osm,
 .hide-toggle:before,
 .entity-editor-pane .toggle-list label::before,
@@ -1265,8 +1265,8 @@ input,
 
 /* adding additional preset fields */
 
-.inspector-body .more-buttons {
-    max-height: 100px;
+.inspector-inner .more-fields {
+    font-weight: bold;
     padding-top: 0;
     -webkit-transition: padding 200ms 200ms, max-height 200ms 200ms;
        -moz-transition: padding 200ms 200ms, max-height 200ms 200ms;
