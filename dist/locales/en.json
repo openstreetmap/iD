@@ -278,7 +278,8 @@
         "node": "Node",
         "way": "Way",
         "relation": "Relation",
-        "location": "Location"
+        "location": "Location",
+        "add_fields": "Add additional fields"
     },
     "background": {
         "title": "Background",
