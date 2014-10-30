@@ -286,9 +286,15 @@ iD.Features = function(context) {
     };
 
     features.filter = function(d, graph) {
+        var selected = context.selectedIDs();
         resolver = graph || resolver;
+
         return features.hidden().length ? _.reject(d, function(e) {
-            return features.isHidden(e, resolver);
+            var hidden = features.isHidden(e, resolver);
+            if (hidden && _.contains(selected, e.id)) {
+                context.enter(iD.modes.Browse(context));
+            }
+            return hidden;
         }) : d;
     };
 
