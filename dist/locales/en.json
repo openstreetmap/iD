@@ -227,7 +227,8 @@
     "loading_auth": "Connecting to OpenStreetMap...",
     "report_a_bug": "report a bug",
     "feature_info": {
-        "hidden_features": "Hidden: {features}"
+        "hidden_warning": "{count} hidden features",
+        "hidden_details": "These features are currently hidden: {details}"
     },
     "status": {
         "error": "Unable to connect to API.",
@@ -305,9 +306,9 @@
     "map_data": {
         "title": "Map Data",
         "description": "Map Data",
-        "show_features": "Show Map Features",
-        "show_layers": "Show Data Layers",
+        "data_layers": "Data Layers",
         "fill_area": "Fill Areas",
+        "map_features": "Map Features",
         "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
     },
     "feature": {

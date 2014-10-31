@@ -96,24 +96,23 @@ iD.ui = function(context) {
             .attr('id', 'scale-block')
             .call(iD.ui.Scale(context));
 
-        var linkList = footer.append('div')
+        var aboutList = footer.append('div')
             .attr('id', 'info-block')
             .append('ul')
-            .attr('id', 'about-list')
-            .attr('class', 'link-list');
+            .attr('id', 'about-list');
 
         if (!context.embed()) {
-            linkList.call(iD.ui.Account(context));
+            aboutList.call(iD.ui.Account(context));
         }
 
-        linkList.append('li')
+        aboutList.append('li')
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .attr('href', 'http://github.com/openstreetmap/iD')
             .text(iD.version);
 
-        var bugReport = linkList.append('li')
+        var bugReport = aboutList.append('li')
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
@@ -127,14 +126,15 @@ iD.ui = function(context) {
                 .placement('top')
             );
 
-        linkList.append('li')
+        aboutList.append('li')
+            .attr('class', 'feature-warning')
+            .attr('tabindex', -1)
+            .call(iD.ui.FeatureInfo(context));
+
+        aboutList.append('li')
             .attr('class', 'user-list')
             .attr('tabindex', -1)
             .call(iD.ui.Contributors(context));
-
-        footer.append('div')
-            .attr('class', 'feature-info')
-            .call(iD.ui.FeatureInfo(context));
 
         footer.append('div')
             .attr('class', 'api-status')

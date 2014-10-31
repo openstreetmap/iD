@@ -275,18 +275,6 @@ ul li { list-style: none;}
     background: #E8EBFF;
 }
 
-.link-list li {
-    float: right;
-    border-left: 1px solid rgba(255,255,255,.5);
-    padding: 5px 0 5px 5px;
-    margin-left: 5px;
-}
-
-ul.link-list li:last-child {
-    border-left: 0;
-    margin-left: 0;
-    padding-left: 0;
-}
 
 /* Utility Classes
 ------------------------------------------------------- */
@@ -316,7 +304,8 @@ ul.link-list li:last-child {
 div.hide,
 form.hide,
 button.hide,
-a.hide {
+a.hide,
+li.hide {
     display: none;
 }
 
@@ -2327,6 +2316,19 @@ img.wiki-image {
     clear: right;
 }
 
+#about-list li {
+    float: right;
+    border-left: 1px solid rgba(255,255,255,.5);
+    padding: 5px 0 5px 5px;
+    margin-left: 5px;
+}
+
+#about-list li:last-child {
+    border-left: 0;
+    margin-left: 0;
+    padding-left: 0;
+}
+
 .source-switch a {
     padding: 2px 4px 4px 4px;
     border-radius: 2px;
@@ -2336,18 +2338,18 @@ img.wiki-image {
     color:#fff;
 }
 
-@media screen and (max-width: 1200px) {
-    .user-list {
-        display: none !important;
-    }
+.feature-warning a {
+    background: #1e90ff;
+    padding: 2px 4px 4px 4px;
+    border-radius: 2px;
+    color: #eee;
 }
 
 .user-list a:not(:last-child):after {
     content: ', ';
 }
 
-.api-status,
-.feature-info {
+.api-status {
     float: right;
     clear: both;
     text-align: right;
@@ -2359,10 +2361,6 @@ img.wiki-image {
 .api-status.readonly,
 .api-status.error {
     background: red;
-}
-
-.feature-info {
-    background: #1e90ff;
 }
 
 /* Modals
@@ -2885,6 +2883,19 @@ img.wiki-image {
     /* override hide for save button */
     #bar .save .label { display: block;}
 }
+
+@media screen and (max-width: 1200px) {
+    .user-list { display: none !important; }
+}
+
+@media screen and (max-width: 1000px) {
+    #userLink { display: none !important; }
+}
+
+@media screen and (max-width: 900px) {
+    #scale-block { display: none !important; }
+}
+
 
 /* Scrollbars
  ----------------------------------------------------- */

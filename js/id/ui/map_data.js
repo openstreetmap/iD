@@ -182,7 +182,7 @@ iD.ui.MapData = function(context) {
 
         // data layers
         content.append('a')
-            .text(t('map_data.show_layers'))
+            .text(t('map_data.data_layers'))
             .attr('href', '#')
             .classed('hide-toggle', true)
             .classed('expanded', true)
@@ -287,7 +287,7 @@ iD.ui.MapData = function(context) {
 
         // feature filters
         content.append('a')
-            .text(t('map_data.show_features'))
+            .text(t('map_data.map_features'))
             .attr('href', '#')
             .classed('hide-toggle', true)
             .classed('expanded', false)
@@ -317,10 +317,6 @@ iD.ui.MapData = function(context) {
             .on('W', toggleWireframe)
             .on('B', hidePanel)
             .on('H', hidePanel);
-
-        // keybinding.on('m', function() {
-        //         context.enter(iD.modes.SelectImage(context));
-        //     });
 
         d3.select(document)
             .call(keybinding);
