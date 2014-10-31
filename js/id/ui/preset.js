@@ -164,7 +164,7 @@ iD.ui.preset = function(context) {
             };
         });
 
-        var $more = $form.selectAll('.more-fields')
+        var $more = selection.selectAll('.more-fields')
             .data((notShown.length > 0) ? [0] : []);
 
         $more.enter().append('div')

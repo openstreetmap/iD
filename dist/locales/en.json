@@ -279,7 +279,7 @@
         "way": "Way",
         "relation": "Relation",
         "location": "Location",
-        "add_fields": "Add additional fields"
+        "add_fields": "Add field:"
     },
     "background": {
         "title": "Background",
