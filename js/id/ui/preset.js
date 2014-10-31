@@ -98,7 +98,7 @@ iD.ui.preset = function(context) {
         // Enter
 
         var $enter = $fields.enter()
-            .insert('div', '.more-fields')
+            .append('div')
             .attr('class', function(field) {
                 return 'form-field form-field-' + field.id;
             });
