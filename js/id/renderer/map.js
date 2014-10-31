@@ -105,17 +105,24 @@ iD.Map = function(context) {
             data = _.compact(_.values(complete));
             filter = function(d) { return d.id in complete; };
 
-        } else if (extent) {
-            data = context.intersects(map.extent().intersection(extent));
-            var set = d3.set(_.pluck(data, 'id'));
-            filter = function(d) { return set.has(d.id); };
-
         } else {
-            data = all;
-            filter = d3.functor(true);
+            // force a full redraw if gatherStats detects that a feature
+            // should be auto-hidden (e.g. points or buildings)..
+            if (features.gatherStats(all, graph, dimensions)) {
+                extent = undefined;
+            }
+
+            if (extent) {
+                data = context.intersects(map.extent().intersection(extent));
+                var set = d3.set(_.pluck(data, 'id'));
+                filter = function(d) { return set.has(d.id); };
+
+            } else {
+                data = all;
+                filter = d3.functor(true);
+            }
         }
 
-        features.gatherStats(all, graph, dimensions);
         data = features.filter(data, graph);
 
         surface

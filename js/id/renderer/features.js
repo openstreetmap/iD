@@ -212,7 +212,9 @@ iD.Features = function(context) {
 
     features.gatherStats = function(d, graph, dimensions) {
         var hidden = features.hidden(),
-            keys = features.keys();
+            keys = features.keys(),
+            needsRedraw = false;
+
         resolver = graph || resolver;
 
         _.each(feature, function(f) { f.count = 0; });
@@ -231,7 +233,10 @@ iD.Features = function(context) {
 
         if (hidden !== features.hidden()) {
             dispatch.change();
+            needsRedraw = true;
         }
+
+        return needsRedraw;
     };
 
     features.stats = function() {
