@@ -55,6 +55,8 @@ iD.presets = function() {
         var areaKeys = {};
 
         all.collection.forEach(function(d) {
+            if (d.suggestion) return;
+
             for (var key in d.tags) break;
             if (!key) return;
             var value = d.tags[key];
