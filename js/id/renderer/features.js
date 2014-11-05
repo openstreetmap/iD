@@ -42,16 +42,19 @@ iD.Features = function(context) {
     };
 
     var dispatch = d3.dispatch('change', 'redraw'),
-        resolver = context.graph(),
         feature = {},
-        cullFactor = 1;
+        cullFactor = 1,
+        _keys = [],
+        _hidden = [];
 
     function update() {
+        _hidden = features.hidden();
         dispatch.change();
         dispatch.redraw();
     }
 
     function defineFeature(k, filter, max) {
+        _keys.push(k);
         feature[k] = {
             filter: filter,
             enabled: true,   // whether the user wants it enabled..
@@ -66,23 +69,23 @@ iD.Features = function(context) {
     }
 
 
-    defineFeature('points', function(entity) {
+    defineFeature('points', function(entity, resolver) {
         return entity.geometry(resolver) === 'point';
     }, 200);
 
-    defineFeature('major_roads', function(entity) {
+    defineFeature('major_roads', function(entity, resolver) {
         return entity.geometry(resolver) === 'line' && major_roads[entity.tags.highway];
     });
 
-    defineFeature('minor_roads', function(entity) {
+    defineFeature('minor_roads', function(entity, resolver) {
         return entity.geometry(resolver) === 'line' && minor_roads[entity.tags.highway];
     });
 
-    defineFeature('paths', function(entity) {
+    defineFeature('paths', function(entity, resolver) {
         return entity.geometry(resolver) === 'line' && paths[entity.tags.highway];
     });
 
-    defineFeature('buildings', function(entity) {
+    defineFeature('buildings', function(entity, resolver) {
         return (
             entity.geometry(resolver) === 'area' && (
                 (!!entity.tags.building && entity.tags.building !== 'no') ||
@@ -95,10 +98,10 @@ iD.Features = function(context) {
         ) || !!entity.tags['building:part'];
     }, 250);
 
-    defineFeature('landuse', function(entity) {
+    defineFeature('landuse', function(entity, resolver) {
         return entity.geometry(resolver) === 'area' &&
-            !feature.buildings.filter(entity) &&
-            !feature.water.filter(entity);
+            !feature.buildings.filter(entity, resolver) &&
+            !feature.water.filter(entity, resolver);
     });
 
     defineFeature('boundaries', function(entity) {
@@ -118,11 +121,11 @@ iD.Features = function(context) {
         );
     });
 
-    defineFeature('rail', function(entity) {
+    defineFeature('rail', function(entity, resolver) {
         return !(
-            feature.major_roads.filter(entity) ||
-            feature.minor_roads.filter(entity) ||
-            feature.paths.filter(entity)
+            feature.major_roads.filter(entity, resolver) ||
+            feature.minor_roads.filter(entity, resolver) ||
+            feature.paths.filter(entity, resolver)
         ) && (
             !!entity.tags.railway ||
             entity.tags.landuse === 'railway'
@@ -134,57 +137,55 @@ iD.Features = function(context) {
     });
 
     // contains a past/future tag, but not in active use as a road/path/cycleway/etc..
-    defineFeature('past_future', function(entity) {
+    defineFeature('past_future', function(entity, resolver) {
         var strings = _.flatten(_.pairs(entity.tags));
         return !(
-            feature.major_roads.filter(entity) ||
-            feature.minor_roads.filter(entity) ||
-            feature.paths.filter(entity)
+            feature.major_roads.filter(entity, resolver) ||
+            feature.minor_roads.filter(entity, resolver) ||
+            feature.paths.filter(entity, resolver)
         ) && _.any(strings, function(s) { return past_futures[s]; });
     });
 
     // lines or areas that don't match another feature filter.
-    defineFeature('others', function(entity) {
-        return (
-            entity.geometry(resolver) === 'line' ||
-            entity.geometry(resolver) === 'area'
-        ) &&
-        _.reduce(_.omit(feature, 'others'), function(result, v) {
-            return result && !v.filter(entity);
-        }, true);
+    defineFeature('others', function(entity, resolver) {
+        var geom = entity.geometry(resolver);
+        return (geom === 'line' || geom === 'area') &&
+            _.reduce(_.omit(feature, 'others'), function(result, v) {
+                return result && !v.filter(entity, resolver);
+            }, true);
     });
 
 
     function features() {}
 
     features.keys = function() {
-        return _.keys(feature);
+        return _keys;
     };
 
     features.enabled = function(k) {
         if (!arguments.length) {
-            return _.filter(features.keys(), function(k) { return feature[k].enabled; });
+            return _.filter(_keys, function(k) { return feature[k].enabled; });
         }
         return feature[k] && feature[k].enabled;
     };
 
     features.disabled = function(k) {
         if (!arguments.length) {
-            return _.reject(features.keys(), function(k) { return feature[k].enabled; });
+            return _.reject(_keys, function(k) { return feature[k].enabled; });
         }
         return feature[k] && !feature[k].enabled;
     };
 
     features.hidden = function(k) {
         if (!arguments.length) {
-            return _.filter(features.keys(), function(k) { return feature[k].hidden(); });
+            return _.filter(_keys, function(k) { return feature[k].hidden(); });
         }
         return feature[k] && feature[k].hidden();
     };
 
     features.autoHidden = function(k) {
         if (!arguments.length) {
-            return _.filter(features.keys(), function(k) { return feature[k].autoHidden(); });
+            return _.filter(_keys, function(k) { return feature[k].autoHidden(); });
         }
         return feature[k] && feature[k].autoHidden();
     };
@@ -210,12 +211,9 @@ iD.Features = function(context) {
         }
     };
 
-    features.gatherStats = function(d, graph, dimensions) {
-        var hidden = features.hidden(),
-            keys = features.keys(),
-            needsRedraw = false;
-
-        resolver = graph || resolver;
+    features.gatherStats = function(d, resolver, dimensions) {
+        var needsRedraw = false,
+            currHidden;
 
         _.each(feature, function(f) { f.count = 0; });
 
@@ -223,15 +221,25 @@ iD.Features = function(context) {
         // a cullFactor of 1 corresponds to a 1000x1000px viewport..
         cullFactor = dimensions[0] * dimensions[1] / 1000000;
 
-        _.each(d, function(entity) {
-            _.each(keys, function(k) {
-                if (feature[k].filter(entity)) {
-                    feature[k].count++;
-                }
-            });
-        });
+        for (var i = 0, imax = d.length; i !== imax; i++) {
+            var feats = d[i].features(this, resolver);
+            for (var j = 0, jmax = feats.length; j !== jmax; j++) {
+                feature[feats[j]].count++;
+            }
+        }
 
-        if (hidden !== features.hidden()) {
+        // _.each(d, function(entity) {
+        //     _.each(entity.features(this, resolver), function(k) { feature[k].count++; });
+        //     // _.each(_keys, function(k) {
+        //     //     if (feature[k].filter(entity)) {
+        //     //         feature[k].count++;
+        //     //     }
+        //     // });
+        // });
+
+        currHidden = features.hidden();
+        if (currHidden !== _hidden) {
+            _hidden = currHidden;
             dispatch.change();
             needsRedraw = true;
         }
@@ -241,30 +249,57 @@ iD.Features = function(context) {
 
     features.stats = function() {
         var stats = {};
-        _.each(features.keys(), function(k) {
+        _.each(_keys, function(k) {
             stats[k] = feature[k].count;
         });
         return stats;
     };
 
-    features.isHiddenFeature = function(entity, graph) {
-        resolver = graph || resolver;
-        return _.any(features.hidden(), function(k) { return feature[k].filter(entity); });
+    features.match = function(entity, resolver) {
+        var result = [];
+
+        for (var i = 0, imax = _keys.length; i !== imax; i++) {
+            if (feature[_keys[i]].filter(entity, resolver)) { result.push(_keys[i]); }
+        }
+        return result;
+        // return _.filter(_keys, function(k) { return feature[k].filter(entity, resolver); });
     };
 
-    features.isHiddenChild = function(entity, graph) {
-        var parents;
-        resolver = graph || resolver;
+    features.isHiddenFeature = function(entity, resolver) {
+        var feats = entity.features(this, resolver);
 
-        parents = _.union(resolver.parentWays(entity), resolver.parentRelations(entity));
-        return parents.length ? _.all(parents, function(e) {
-            return features.isHidden(e, resolver);
-        }) : false;
+        for (var i = 0, imax = _hidden.length; i !== imax; i++) {
+            for (var j = 0, jmax = feats.length; j !== jmax; j++) {
+                if (_hidden[i] === feats[j]) { return true; }
+            }
+        }
+        return false;
+        // return _.any(features.hidden(), function(k) { return feature[k].filter(entity, resolver); });
     };
 
-    features.hasHiddenConnections = function(entity, graph) {
+    features.isHiddenChild = function(entity, resolver) {
+        var parents = [];
+        parents.push.apply(parents, resolver.parentWays(entity));
+        parents.push.apply(parents, resolver.parentRelations(entity));
+
+        if (!parents.length) {
+            return false;
+        }
+        for (var i = 0, imax = parents.length; i !== imax; i++) {
+            if (!features.isHidden(parents[i], resolver)) {
+                return false;
+            }
+        }
+        return true;
+
+        // var parents = _.union(resolver.parentWays(entity), resolver.parentRelations(entity));
+        // return parents.length ? _.all(parents, function(e) {
+        //     return features.isHidden(e, resolver);
+        // }) : false;
+    };
+
+    features.hasHiddenConnections = function(entity, resolver) {
         var childNodes, connections;
-        resolver = graph || resolver;
 
         if (entity.type === 'midpoint') {
             childNodes = [resolver.entity(entity.edge[0]), resolver.entity(entity.edge[1])];
@@ -284,23 +319,42 @@ iD.Features = function(context) {
         }) : false;
     };
 
-    features.isHidden = function(entity, graph) {
-        resolver = graph || resolver;
+    features.isHidden = function(entity, resolver) {
         return !!entity.version &&
             (features.isHiddenFeature(entity, resolver) || features.isHiddenChild(entity, resolver));
     };
 
-    features.filter = function(d, graph) {
-        var selected = context.selectedIDs();
-        resolver = graph || resolver;
+    features.filter = function(d, resolver) {
+        var selected = context.selectedIDs(),
+            result = [];
 
-        return features.hidden().length ? _.reject(d, function(e) {
-            var hidden = features.isHidden(e, resolver);
-            if (hidden && _.contains(selected, e.id)) {
-                context.enter(iD.modes.Browse(context));
+        if (!_hidden.length) {
+            return d;
+        } else {
+            for (var i = 0, imax = d.length; i !== imax; i++) {
+                if (features.isHidden(d[i], resolver)) {
+                    for (var j = 0, jmax = selected.length; j !== jmax; j++) {
+                        if (selected[j] === d[i].id) {
+                            context.enter(iD.modes.Browse(context));
+                            break;
+                        }
+                    }
+                } else {
+                    result.push(d[i]);
+                }
             }
-            return hidden;
-        }) : d;
+            return result;
+        }
+
+        // return features.hidden().length ? _.reject(d, function(e) {
+        //     var isHidden = features.isHidden(e, resolver);
+        //     if (isHidden && selected.length) {
+        //         if _.contains(selected, e.id)) {
+        //             context.enter(iD.modes.Browse(context));
+        //         }
+        //     }
+        //     return isHidden;
+        // }) : d;
     };
 
     return d3.rebind(features, dispatch, 'on');

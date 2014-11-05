@@ -80,7 +80,7 @@ iD.Map = function(context) {
                     filter = d3.functor(true),
                     graph = context.graph();
 
-                all = context.features().filter(all);
+                all = context.features().filter(all, graph);
                 surface.call(vertices, graph, all, filter, map.extent(), map.zoom());
                 surface.call(midpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.drawn({full: false});
