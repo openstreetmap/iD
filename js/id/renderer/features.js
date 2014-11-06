@@ -288,7 +288,10 @@ iD.Features = function(context) {
     };
 
     features.match = function(entity, resolver) {
-        var result = [];
+        var result = [],
+            geometry = entity.geometry(resolver);
+
+        if (geometry === 'vertex') { return []; }
 
         for (var i = 0, imax = _keys.length; i !== imax; i++) {
             if (feature[_keys[i]].filter(entity, resolver)) { result.push(_keys[i]); }
@@ -309,13 +312,20 @@ iD.Features = function(context) {
         // return _.any(features.hidden(), function(k) { return feature[k].filter(entity, resolver); });
     };
 
-    features.isHiddenChild = function(entity, resolver) {
-        var parents = resolver.parentWays(entity);
-        parents.push.apply(parents, resolver.parentRelations(entity));
+    features.isHiddenChild = function(entity, resolver, geom) {
+        var geometry = geom || entity.geometry(resolver),
+            parents;
 
-        if (!parents.length) {
+        if (geometry === 'point') {
             return false;
+        } else if (geometry === 'vertex') {
+            parents = resolver.parentWays(entity);
+        } else {   // 'line', 'area', 'relation'
+            parents = resolver.parentRelations(entity);
         }
+
+        if (!parents.length) { return false; }
+
         for (var i = 0, imax = parents.length; i !== imax; i++) {
             if (!features.isHidden(parents[i], resolver)) {
                 return false;
@@ -351,8 +361,14 @@ iD.Features = function(context) {
     };
 
     features.isHidden = function(entity, resolver) {
-        return !!entity.version &&
-            (features.isHiddenFeature(entity, resolver) || features.isHiddenChild(entity, resolver));
+        if (!entity.version) return false;
+
+        var geometry = entity.geometry(resolver);
+        if (geometry === 'vertex') return features.isHiddenChild(entity, resolver, geometry);
+        if (geometry === 'point')  return features.isHiddenFeature(entity, resolver);
+
+        return (features.isHiddenFeature(entity, resolver) ||
+            features.isHiddenChild(entity, resolver, geometry));
     };
 
     features.filter = function(d, resolver) {
