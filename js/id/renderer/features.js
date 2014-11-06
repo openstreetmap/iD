@@ -69,46 +69,45 @@ iD.Features = function(context) {
     }
 
 
-    defineFeature('points', function(entity, resolver) {
+    defineFeature('points', function isPoint(entity, resolver) {
         return entity.geometry(resolver) === 'point';
     }, 200);
 
-    defineFeature('major_roads', function(entity, resolver) {
-        return entity.geometry(resolver) === 'line' && major_roads[entity.tags.highway];
+    defineFeature('major_roads', function isMajorRoad(entity) {
+        return major_roads[entity.tags.highway];
     });
 
-    defineFeature('minor_roads', function(entity, resolver) {
-        return entity.geometry(resolver) === 'line' && minor_roads[entity.tags.highway];
+    defineFeature('minor_roads', function isMinorRoad(entity) {
+        return minor_roads[entity.tags.highway];
     });
 
-    defineFeature('paths', function(entity, resolver) {
-        return entity.geometry(resolver) === 'line' && paths[entity.tags.highway];
+    defineFeature('paths', function isPath(entity) {
+        return paths[entity.tags.highway];
     });
 
-    defineFeature('buildings', function(entity, resolver) {
+    defineFeature('buildings', function isBuilding(entity) {
         return (
-            entity.geometry(resolver) === 'area' && (
-                (!!entity.tags.building && entity.tags.building !== 'no') ||
-                entity.tags.amenity === 'shelter' ||
-                entity.tags.parking === 'multi-storey' ||
-                entity.tags.parking === 'sheds' ||
-                entity.tags.parking === 'carports' ||
-                entity.tags.parking === 'garage_boxes'
-            )
-        ) || !!entity.tags['building:part'];
+            !!entity.tags['building:part'] ||
+            (!!entity.tags.building && entity.tags.building !== 'no') ||
+            entity.tags.amenity === 'shelter' ||
+            entity.tags.parking === 'multi-storey' ||
+            entity.tags.parking === 'sheds' ||
+            entity.tags.parking === 'carports' ||
+            entity.tags.parking === 'garage_boxes'
+        );
     }, 250);
 
-    defineFeature('landuse', function(entity, resolver) {
+    defineFeature('landuse', function isLanduse(entity, resolver) {
         return entity.geometry(resolver) === 'area' &&
-            !feature.buildings.filter(entity, resolver) &&
-            !feature.water.filter(entity, resolver);
+            !feature.buildings.filter(entity) &&
+            !feature.water.filter(entity);
     });
 
-    defineFeature('boundaries', function(entity) {
+    defineFeature('boundaries', function isBoundary(entity) {
         return !!entity.tags.boundary;
     });
 
-    defineFeature('water', function(entity) {
+    defineFeature('water', function isWater(entity) {
         return (
             !!entity.tags.waterway ||
             entity.tags.natural === 'water' ||
@@ -121,38 +120,66 @@ iD.Features = function(context) {
         );
     });
 
-    defineFeature('rail', function(entity, resolver) {
-        return !(
-            feature.major_roads.filter(entity, resolver) ||
-            feature.minor_roads.filter(entity, resolver) ||
-            feature.paths.filter(entity, resolver)
-        ) && (
+    defineFeature('rail', function isRail(entity) {
+        return (
             !!entity.tags.railway ||
             entity.tags.landuse === 'railway'
+        ) && !(
+            major_roads[entity.tags.highway] ||
+            minor_roads[entity.tags.highway] ||
+            paths[entity.tags.highway]
         );
     });
 
-    defineFeature('power', function(entity) {
+    defineFeature('power', function isPower(entity) {
         return !!entity.tags.power;
     });
 
     // contains a past/future tag, but not in active use as a road/path/cycleway/etc..
-    defineFeature('past_future', function(entity, resolver) {
-        var strings = _.flatten(_.pairs(entity.tags));
-        return !(
-            feature.major_roads.filter(entity, resolver) ||
-            feature.minor_roads.filter(entity, resolver) ||
-            feature.paths.filter(entity, resolver)
-        ) && _.any(strings, function(s) { return past_futures[s]; });
+    defineFeature('past_future', function isPastFuture(entity) {
+        if (
+            major_roads[entity.tags.highway] ||
+            minor_roads[entity.tags.highway] ||
+            paths[entity.tags.highway]
+        ) { return false; }
+
+        var strings = Object.keys(entity.tags);
+
+        for (var i = 0, imax = strings.length; i !== imax; i++) {
+            var s = strings[i];
+            if (past_futures[s] || past_futures[entity.tags[s]]) { return true; }
+        }
+        return false;
+
+
+        // var strings = _.flatten(_.pairs(entity.tags));
+        // return !(
+        //     major_roads[entity.tags.highway] ||
+        //     minor_roads[entity.tags.highway] ||
+        //     paths[entity.tags.highway]
+        // ) && _.any(strings, function(s) { return past_futures[s]; });
     });
 
     // lines or areas that don't match another feature filter.
-    defineFeature('others', function(entity, resolver) {
+    defineFeature('others', function isOther(entity, resolver) {
         var geom = entity.geometry(resolver);
-        return (geom === 'line' || geom === 'area') &&
-            _.reduce(_.omit(feature, 'others'), function(result, v) {
-                return result && !v.filter(entity, resolver);
-            }, true);
+        return (geom === 'line' || geom === 'area') && !(
+            feature.major_roads.filter(entity, resolver) ||
+            feature.minor_roads.filter(entity, resolver) ||
+            feature.paths.filter(entity, resolver) ||
+            feature.buildings.filter(entity, resolver) ||
+            feature.landuse.filter(entity, resolver) ||
+            feature.boundaries.filter(entity, resolver) ||
+            feature.water.filter(entity, resolver) ||
+            feature.rail.filter(entity, resolver) ||
+            feature.power.filter(entity, resolver) ||
+            feature.past_future.filter(entity, resolver)
+        );
+
+        // return (geom === 'line' || geom === 'area') &&
+        //     _.reduce(_.omit(feature, 'others'), function(result, v) {
+        //         return result && !v.filter(entity, resolver);
+        //     }, true);
     });
 
 
@@ -278,8 +305,7 @@ iD.Features = function(context) {
     };
 
     features.isHiddenChild = function(entity, resolver) {
-        var parents = [];
-        parents.push.apply(parents, resolver.parentWays(entity));
+        var parents = resolver.parentWays(entity);
         parents.push.apply(parents, resolver.parentRelations(entity));
 
         if (!parents.length) {
