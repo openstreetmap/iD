@@ -138,11 +138,14 @@ iD.Map = function(context) {
 
     function editOff() {
         var mode = context.mode();
+
+        context.features().resetStats();
         surface.selectAll('.layer *').remove();
-        dispatch.drawn({full: true});
         if (!(mode && mode.id === 'browse')) {
             context.enter(iD.modes.Browse(context));
         }
+
+        dispatch.drawn({full: true});
     }
 
     function zoomPan() {

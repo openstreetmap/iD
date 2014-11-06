@@ -238,6 +238,11 @@ iD.Features = function(context) {
         }
     };
 
+    features.resetStats = function() {
+        _.each(feature, function(f) { f.count = 0; });
+        dispatch.change();
+    };
+
     features.gatherStats = function(d, resolver, dimensions) {
         var needsRedraw = false,
             currHidden;
