@@ -557,18 +557,18 @@ path.casing.tag-highway-living_street {
     stroke-width:6;
 }
 
-path.stroke.line.tag-highway-pedestrian {
+path.stroke.tag-highway-pedestrian {
     stroke:#fff;
     stroke-dasharray: 2, 8;
     stroke-width:4;
-    shapeRendering: auto;
 }
-path.casing.line.tag-highway-pedestrian {
+path.casing.tag-highway-pedestrian {
     stroke:#8cd05f;
     stroke-width:6;
 }
 path.stroke.area.tag-highway-pedestrian {
     stroke:#fff;
+    stroke-dasharray: none;
     stroke-width: 2;
 }
 
@@ -1234,4 +1234,5 @@ text.gpx {
 .fill-partial path.fill {
     fill-opacity: 0;
     stroke-width: 60px;
+    pointer-events: visibleStroke;
 }
