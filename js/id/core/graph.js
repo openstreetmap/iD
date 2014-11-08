@@ -59,7 +59,6 @@ iD.Graph.prototype = {
             }
         }
         return result;
-        // return _.map(this._parentWays[entity.id], this.entity, this);
     },
 
     isPoi: function(entity) {
@@ -82,7 +81,6 @@ iD.Graph.prototype = {
             }
         }
         return result;
-        // return _.map(this._parentRels[entity.id], this.entity, this);
     },
 
     childNodes: function(entity) {

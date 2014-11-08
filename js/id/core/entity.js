@@ -97,12 +97,6 @@ iD.Entity.prototype = {
         return this.extent(resolver).intersects(extent);
     },
 
-    features: function(feat, resolver) {
-        return resolver.transient(this, 'features', function() {
-            return feat.match(this, resolver);
-        });
-    },
-
     isUsed: function(resolver) {
         return _.without(Object.keys(this.tags), 'area').length > 0 ||
             resolver.parentRelations(this).length > 0;
