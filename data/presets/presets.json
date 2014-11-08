@@ -2749,7 +2749,7 @@
         },
         "name": "Clockmaker"
     },
-    "craft/confectionary": {
+    "craft/confectionery": {
         "icon": "bakery",
         "fields": [
             "operator",
@@ -2766,9 +2766,9 @@
             "candy"
         ],
         "tags": {
-            "craft": "confectionary"
+            "craft": "confectionery"
         },
-        "name": "Confectionary"
+        "name": "Confectionery"
     },
     "craft/dressmaker": {
         "icon": "clothing-store",

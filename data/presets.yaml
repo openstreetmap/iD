@@ -1019,9 +1019,9 @@ en:
       craft/clockmaker:
         name: Clockmaker
         terms: "<translate with synonyms or related terms for 'Clockmaker', separated by commas>"
-      craft/confectionary:
-        name: Confectionary
-        terms: "<translate with synonyms or related terms for 'Confectionary', separated by commas>"
+      craft/confectionery:
+        name: Confectionery
+        terms: "<translate with synonyms or related terms for 'Confectionery', separated by commas>"
       craft/dressmaker:
         name: Dressmaker
         terms: "<translate with synonyms or related terms for 'Dressmaker', separated by commas>"
