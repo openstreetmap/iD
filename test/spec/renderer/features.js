@@ -1,19 +1,22 @@
 describe('iD.Features', function() {
     var dimensions = [1000, 1000],
+        context,
         features;
 
     beforeEach(function() {
-        features = iD().features();
+        context = iD();
+        context.map().zoom(16);
+        features = iD.Features(context);
     });
 
     describe('#keys', function() {
         it('returns feature keys', function() {
             var keys = features.keys();
-            expect(keys).to.have.members([
+            expect(keys).to.include(
                 'points', 'major_roads', 'minor_roads', 'paths',
                 'buildings', 'landuse', 'boundaries', 'water', 'rail',
                 'power', 'past_future', 'others'
-            ]);
+            );
         });
     });
 

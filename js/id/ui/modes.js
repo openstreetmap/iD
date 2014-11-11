@@ -5,7 +5,7 @@ iD.ui.Modes = function(context) {
         iD.modes.AddArea(context)];
 
     function editable() {
-        return context.editable() && context.mode().id !== 'save'
+        return context.editable() && context.mode().id !== 'save';
     }
 
     return function(selection) {
