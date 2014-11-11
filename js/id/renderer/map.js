@@ -104,7 +104,7 @@ iD.Map = function(context) {
             var complete = difference.complete(map.extent());
             data = _.compact(_.values(complete));
             filter = function(d) { return d.id in complete; };
-            features.reset(data);
+            features.clear(data);
 
         } else {
             // force a full redraw if gatherStats detects that a feature

@@ -267,14 +267,18 @@ iD.Features = function(context) {
         return _stats;
     };
 
-    features.reset = function(d) {
+    features.clear = function(d) {
         for (var i = 0, imax = d.length; i !== imax; i++) {
-            features.resetEntity(d[i]);
+            features.clearEntity(d[i]);
         }
     };
 
-    features.resetEntity = function(entity) {
+    features.clearEntity = function(entity) {
         delete _cache[iD.Entity.key(entity)];
+    };
+
+    features.reset = function() {
+        _cache = {};
     };
 
     features.match = function(d) {
@@ -309,6 +313,8 @@ iD.Features = function(context) {
     features.isHiddenFeature = function(entity, resolver) {
         var matches = features.matchEntity(entity, resolver);
 
+        if (!entity.version) return false;
+
         for (var i = 0, imax = _hidden.length; i !== imax; i++) {
             if (matches[_hidden[i]]) { return true; }
         }
@@ -319,9 +325,9 @@ iD.Features = function(context) {
         var geometry = geom || entity.geometry(resolver),
             parents;
 
-        if (geometry === 'point') {
-            return false;
-        } else if (geometry === 'vertex') {
+        if (!entity.version || geometry === 'point') { return false; }
+
+        if (geometry === 'vertex') {
             parents = resolver.parentWays(entity);
         } else {   // 'line', 'area', 'relation'
             parents = resolver.parentRelations(entity);
@@ -359,9 +365,11 @@ iD.Features = function(context) {
     };
 
     features.isHidden = function(entity, resolver) {
+        var geometry;
+
         if (!entity.version) return false;
 
-        var geometry = entity.geometry(resolver);
+        geometry = entity.geometry(resolver);
         if (geometry === 'vertex') return features.isHiddenChild(entity, resolver, geometry);
         if (geometry === 'point')  return features.isHiddenFeature(entity, resolver);
 

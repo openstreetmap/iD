@@ -97,6 +97,7 @@ window.iD = function () {
 
     context.flush = function() {
         connection.flush();
+        features.reset();
         history.reset();
         return context;
     };
