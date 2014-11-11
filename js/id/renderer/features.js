@@ -1,4 +1,4 @@
-iD.Features = function(context) {
+iD.Features = function() {
     var major_roads = {
         'motorway': true,
         'motorway_link': true,
@@ -378,21 +378,13 @@ iD.Features = function(context) {
     };
 
     features.filter = function(d, resolver) {
-        var selected = context.selectedIDs(),
-            result = [];
+        var result = [];
 
         if (!_hidden.length) {
             return d;
         } else {
             for (var i = 0, imax = d.length; i !== imax; i++) {
-                if (features.isHidden(d[i], resolver)) {
-                    for (var j = 0, jmax = selected.length; j !== jmax; j++) {
-                        if (selected[j] === d[i].id) {
-                            context.enter(iD.modes.Browse(context));
-                            break;
-                        }
-                    }
-                } else {
+                if (!features.isHidden(d[i], resolver)) {
                     result.push(d[i]);
                 }
             }

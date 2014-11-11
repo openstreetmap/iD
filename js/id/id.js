@@ -205,7 +205,7 @@ window.iD = function () {
     context.background = function() { return background; };
 
     /* Features */
-    var features = iD.Features(context);
+    var features = iD.Features();
     context.features = function() { return features; };
     context.hasHiddenConnections = function(id) {
         var graph = history.graph(),
