@@ -365,31 +365,31 @@ iD.Features = function(context) {
     };
 
     features.isHidden = function(entity, resolver) {
-        var geometry;
-
         if (!entity.version) return false;
 
-        geometry = entity.geometry(resolver);
-        if (geometry === 'vertex') return features.isHiddenChild(entity, resolver, geometry);
-        if (geometry === 'point')  return features.isHiddenFeature(entity, resolver);
+        var geometry = entity.geometry(resolver);
 
-        return (features.isHiddenFeature(entity, resolver) ||
-            features.isHiddenChild(entity, resolver, geometry));
+        if (geometry === 'vertex')
+            return features.isHiddenChild(entity, resolver, geometry);
+        if (geometry === 'point')
+            return features.isHiddenFeature(entity, resolver);
+
+        return features.isHiddenFeature(entity, resolver) ||
+               features.isHiddenChild(entity, resolver, geometry);
     };
 
     features.filter = function(d, resolver) {
-        var result = [];
-
-        if (!_hidden.length) {
+        if (!_hidden.length)
             return d;
-        } else {
-            for (var i = 0, imax = d.length; i !== imax; i++) {
-                if (!features.isHidden(d[i], resolver)) {
-                    result.push(d[i]);
-                }
+
+        var result = [];
+        for (var i = 0, imax = d.length; i !== imax; i++) {
+            var entity = d[i];
+            if (!features.isHidden(entity, resolver)) {
+                result.push(entity);
             }
-            return result;
         }
+        return result;
     };
 
     return d3.rebind(features, dispatch, 'on');
