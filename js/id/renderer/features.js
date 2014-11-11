@@ -1,4 +1,4 @@
-iD.Features = function() {
+iD.Features = function(context) {
     var major_roads = {
         'motorway': true,
         'motorway_link': true,
@@ -65,7 +65,7 @@ iD.Features = function() {
             defaultMax: (max || Infinity),
             enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
             disable: function() { this.enabled = false; this.currentMax = 0; },
-            hidden: function() { return this.count > this.currentMax * _cullFactor; },
+            hidden: function() { return !context.editable() || this.count > this.currentMax * _cullFactor; },
             autoHidden: function() { return this.hidden() && this.currentMax > 0; }
         };
     }

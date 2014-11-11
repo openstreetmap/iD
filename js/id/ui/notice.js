@@ -15,7 +15,7 @@ iD.ui.Notice = function(context) {
             .text(t('zoom_in_edit'));
 
         function disableTooHigh() {
-            div.style('display', context.map().editable() ? 'none' : 'block');
+            div.style('display', context.editable() ? 'none' : 'block');
         }
 
         context.map()

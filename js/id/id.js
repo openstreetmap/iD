@@ -185,7 +185,7 @@ window.iD = function () {
     };
 
     context.editable = function() {
-        return map.editable() && mode && mode.id !== 'save';
+        return map.editable();
     };
 
     /* Behaviors */
@@ -205,7 +205,7 @@ window.iD = function () {
     context.background = function() { return background; };
 
     /* Features */
-    var features = iD.Features();
+    var features = iD.Features(context);
     context.features = function() { return features; };
     context.hasHiddenConnections = function(id) {
         var graph = history.graph(),
