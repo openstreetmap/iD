@@ -275,18 +275,6 @@ ul li { list-style: none;}
     background: #E8EBFF;
 }
 
-.link-list li {
-    float: right;
-    border-left: 1px solid rgba(255,255,255,.5);
-    padding: 5px 0 5px 5px;
-    margin-left: 5px;
-}
-
-ul.link-list li:last-child {
-    border-left: 0;
-    margin-left: 0;
-    padding-left: 0;
-}
 
 /* Utility Classes
 ------------------------------------------------------- */
@@ -316,7 +304,8 @@ ul.link-list li:last-child {
 div.hide,
 form.hide,
 button.hide,
-a.hide {
+a.hide,
+li.hide {
     display: none;
 }
 
@@ -539,6 +528,7 @@ button.save.has-count .count::before {
 .icon.relation.route         { background-position: -540px 0;}
 .icon.relation.multipolygon  { background-position: -560px 0;}
 .icon.vertex     { background-position: -580px 0;}
+.icon.data       { background-position: -600px 0;}
 
 .icon.inspect.light    { background-position: -220px -20px;}
 .icon.plus.light       { background-position: -240px -20px;}
@@ -551,6 +541,7 @@ button.save.has-count .count::before {
 .icon.geolocate.light  { background-position: -360px -20px;}
 .icon.bug.light        { background-position: -400px -20px;}
 .icon.help.light       { background-position: -460px -20px;}
+.icon.data.light       { background-position: -600px -20px;}
 
 .icon.back.blue        { background-position: -420px -20px;}
 .icon.forward.blue     { background-position: -440px -20px;}
@@ -572,6 +563,7 @@ button[disabled] .icon.geocode    { background-position: -280px -40px;}
 button[disabled] .icon.layers     { background-position: -300px -40px;}
 button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
+button[disabled] .icon.data       { background-position: -600px -40px;}
 
 .icon.point.deleted  { background-position: -302px -80px;}
 .icon.line.deleted   { background-position: -320px -80px;}
@@ -1828,12 +1820,18 @@ img.wiki-image {
     border-radius: 4px 0 0 0;
 }
 
-/* Background Settings */
+/* Background / Map Data Settings */
+
+
+.map-data-control button {
+    border-radius: 0;
+}
 
 .background-control button {
     border-radius: 4px 0 0 0;
 }
 
+.map-data-control,
 .background-control {
     position: relative;
 }
@@ -1846,7 +1844,8 @@ img.wiki-image {
     border: 0;
 }
 
-.background-control .hide-toggle  {
+.map-data-control .hide-toggle,
+.background-control .hide-toggle {
     padding-bottom: 10px;
 }
 
@@ -1991,6 +1990,8 @@ img.wiki-image {
     z-index: 9999;
 }
 
+.map-data-control li:hover .select-box,
+.map-data-control li.selected .select-box,
 .background-control li:hover .select-box,
 .background-control li.selected .select-box {
     border: 2px solid #7092ff;
@@ -1998,6 +1999,8 @@ img.wiki-image {
     opacity: .5;
 }
 
+.map-data-control li.selected:hover .select-box,
+.map-data-control li.selected .select-box,
 .background-control li.selected:hover .select-box,
 .background-control li.selected .select-box {
     opacity: 1;
@@ -2010,6 +2013,7 @@ img.wiki-image {
     height:18px;
 }
 
+.map-data-control .layer-list button,
 .background-control .layer-list button {
     float: right;
     height: 100%;
@@ -2018,12 +2022,19 @@ img.wiki-image {
     border-radius: 0;
 }
 
+.map-data-control .layer-list button .icon,
 .background-control .layer-list button .icon {
     opacity: 0.5;
 }
 
+.map-data-control .layer-list button:first-of-type,
 .background-control .layer-list button:first-of-type {
     border-radius: 0 3px 3px 0;
+}
+
+.map-data-control .map-overlay,
+.background-control .map-overlay {
+    z-index: -1;
 }
 
 /* Geolocator */
@@ -2045,9 +2056,6 @@ img.wiki-image {
     overflow: auto;
 }
 
-.background-control .map-overlay {
-    z-index: -1;
-}
 /* Help */
 
 .help-control button {
@@ -2166,20 +2174,49 @@ img.wiki-image {
 /* About Section
 ------------------------------------------------------- */
 
-#footer {
+#about {
     width: 100%;
     position: absolute;
     right:0;
     bottom:0;
     border-radius: 0;
-    opacity: .625;
-    -webkit-transition: opacity 200ms;
-    -moz-transition: opacity 200ms;
-    transition: opacity 200ms;
 }
 
-#footer:hover {
-    opacity: 1;
+#attrib {
+    width: 100%;
+    height: 20px;
+    float: left;
+    clear: both;
+}
+
+.base-layer-attribution,
+.overlay-layer-attribution {
+    position: absolute;
+    color: #888;
+    font-size: 10px;
+}
+
+.base-layer-attribution {
+    left: 10px;
+}
+
+.overlay-layer-attribution {
+    right: 10px;
+}
+
+.overlay-layer-attribution .attribution:not(:last-child):after {
+    content: '; ';
+}
+
+.source-image {
+    height:20px;
+    vertical-align:top;
+}
+
+#footer {
+    width: 100%;
+    float: left;
+    clear: both;
 }
 
 #scale-block {
@@ -2221,6 +2258,19 @@ img.wiki-image {
     clear: right;
 }
 
+#about-list li {
+    float: right;
+    border-left: 1px solid rgba(255,255,255,.5);
+    padding: 5px 0 5px 5px;
+    margin-left: 5px;
+}
+
+#about-list li:last-child {
+    border-left: 0;
+    margin-left: 0;
+    padding-left: 0;
+}
+
 .source-switch a {
     padding: 2px 4px 4px 4px;
     border-radius: 2px;
@@ -2230,30 +2280,11 @@ img.wiki-image {
     color:#fff;
 }
 
-/* Attribution overlay */
-.base-layer-attribution,
-.overlay-layer-attribution {
-    position: absolute;
-    bottom: 35px;
-    color: #888;
-    font-size: 10px;
-}
-
-.base-layer-attribution {
-    left: 10px;
-}
-
-.overlay-layer-attribution {
-    right: 10px;
-}
-
-.overlay-layer-attribution .attribution:not(:last-child):after {
-    content: '; ';
-}
-
-.source-image {
-    height:20px;
-    vertical-align:top;
+.feature-warning a {
+    background: #1e90ff;
+    padding: 2px 4px 4px 4px;
+    border-radius: 2px;
+    color: #eee;
 }
 
 .user-list a:not(:last-child):after {
@@ -2265,13 +2296,13 @@ img.wiki-image {
     clear: both;
     text-align: right;
     width: 100%;
+    padding: 0px 5px;
 }
 
 .api-status.offline,
 .api-status.readonly,
 .api-status.error {
     background: red;
-    padding: 0px 5px;
 }
 
 /* Modals
@@ -2724,6 +2755,7 @@ img.wiki-image {
 }
 
 .map-overlay .tooltip-inner,
+.map-overlay .keyhint-wrap,
 .entity-editor-pane .tooltip-inner,
 .warning-section .tooltip-inner {
     background: #000;
@@ -2793,6 +2825,19 @@ img.wiki-image {
     /* override hide for save button */
     #bar .save .label { display: block;}
 }
+
+@media screen and (max-width: 1200px) {
+    .user-list { display: none !important; }
+}
+
+@media screen and (max-width: 1000px) {
+    #userLink { display: none !important; }
+}
+
+@media screen and (max-width: 900px) {
+    #scale-block { display: none !important; }
+}
+
 
 /* Scrollbars
  ----------------------------------------------------- */

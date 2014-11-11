@@ -27,6 +27,8 @@ iD.Map = function(context) {
             .on('change.map', redraw);
         context.background()
             .on('change.map', redraw);
+        context.features()
+            .on('redraw.map', redraw);
 
         selection.call(zoom);
 
@@ -77,6 +79,8 @@ iD.Map = function(context) {
                 var all = context.intersects(map.extent()),
                     filter = d3.functor(true),
                     graph = context.graph();
+
+                all = context.features().filter(all, graph);
                 surface.call(vertices, graph, all, filter, map.extent(), map.zoom());
                 surface.call(midpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.drawn({full: false});
@@ -91,47 +95,58 @@ iD.Map = function(context) {
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
 
     function drawVector(difference, extent) {
-        var filter, all,
-            graph = context.graph();
+        var graph = context.graph(),
+            features = context.features(),
+            all = context.intersects(map.extent()),
+            data, filter;
 
         if (difference) {
             var complete = difference.complete(map.extent());
-            all = _.compact(_.values(complete));
+            data = _.compact(_.values(complete));
             filter = function(d) { return d.id in complete; };
-
-        } else if (extent) {
-            all = context.intersects(map.extent().intersection(extent));
-            var set = d3.set(_.pluck(all, 'id'));
-            filter = function(d) { return set.has(d.id); };
+            features.clear(data);
 
         } else {
-            all = context.intersects(map.extent());
-            filter = d3.functor(true);
+            // force a full redraw if gatherStats detects that a feature
+            // should be auto-hidden (e.g. points or buildings)..
+            if (features.gatherStats(all, graph, dimensions)) {
+                extent = undefined;
+            }
+
+            if (extent) {
+                data = context.intersects(map.extent().intersection(extent));
+                var set = d3.set(_.pluck(data, 'id'));
+                filter = function(d) { return set.has(d.id); };
+
+            } else {
+                data = all;
+                filter = d3.functor(true);
+            }
         }
+
+        data = features.filter(data, graph);
 
         surface
-            .call(vertices, graph, all, filter, map.extent(), map.zoom())
-            .call(lines, graph, all, filter)
-            .call(areas, graph, all, filter)
-            .call(midpoints, graph, all, filter, map.trimmedExtent())
-            .call(labels, graph, all, filter, dimensions, !difference && !extent);
-
-        if (points.points(context.intersects(map.extent()), 100).length >= 100) {
-            surface.select('.layer-hit').selectAll('g.point').remove();
-        } else {
-            surface.call(points, points.points(all), filter);
-        }
+            .call(vertices, graph, data, filter, map.extent(), map.zoom())
+            .call(lines, graph, data, filter)
+            .call(areas, graph, data, filter)
+            .call(midpoints, graph, data, filter, map.trimmedExtent())
+            .call(labels, graph, data, filter, dimensions, !difference && !extent)
+            .call(points, data, filter);
 
         dispatch.drawn({full: true});
     }
 
     function editOff() {
         var mode = context.mode();
+
+        context.features().resetStats();
         surface.selectAll('.layer *').remove();
-        dispatch.drawn({full: true});
         if (!(mode && mode.id === 'browse')) {
             context.enter(iD.modes.Browse(context));
         }
+
+        dispatch.drawn({full: true});
     }
 
     function zoomPan() {

@@ -97,6 +97,7 @@ window.iD = function () {
 
     context.flush = function() {
         connection.flush();
+        features.reset();
         history.reset();
         return context;
     };
@@ -202,6 +203,15 @@ window.iD = function () {
     /* Background */
     var background = iD.Background(context);
     context.background = function() { return background; };
+
+    /* Features */
+    var features = iD.Features();
+    context.features = function() { return features; };
+    context.hasHiddenConnections = function(id) {
+        var graph = history.graph(),
+            entity = graph.entity(id);
+        return features.hasHiddenConnections(entity, graph);
+    };
 
     /* Map */
     var map = iD.Map(context);

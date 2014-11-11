@@ -16,6 +16,8 @@ iD.operations.Move = function(selectedIDs, context) {
         var reason;
         if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
             reason = 'too_large';
+        } else if (_.any(selectedIDs, context.hasHiddenConnections)) {
+            reason = 'connected_to_hidden';
         }
         return iD.actions.Move(selectedIDs).disabled(context.graph()) || reason;
     };

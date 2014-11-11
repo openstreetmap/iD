@@ -50,7 +50,15 @@ iD.Graph.prototype = {
     },
 
     parentWays: function(entity) {
-        return _.map(this._parentWays[entity.id], this.entity, this);
+        var parents = this._parentWays[entity.id],
+            result = [];
+
+        if (parents) {
+            for (var i = 0, imax = parents.length; i !== imax; i++) {
+                result.push(this.entity(parents[i]));
+            }
+        }
+        return result;
     },
 
     isPoi: function(entity) {
@@ -64,7 +72,15 @@ iD.Graph.prototype = {
     },
 
     parentRelations: function(entity) {
-        return _.map(this._parentRels[entity.id], this.entity, this);
+        var parents = this._parentRels[entity.id],
+            result = [];
+
+        if (parents) {
+            for (var i = 0, imax = parents.length; i !== imax; i++) {
+                result.push(this.entity(parents[i]));
+            }
+        }
+        return result;
     },
 
     childNodes: function(entity) {
@@ -72,8 +88,10 @@ iD.Graph.prototype = {
             return this._childNodes[entity.id];
 
         var nodes = [];
-        for (var i = 0, l = entity.nodes.length; i < l; i++) {
-            nodes[i] = this.entity(entity.nodes[i]);
+        if (entity.nodes) {
+            for (var i = 0, l = entity.nodes.length; i < l; i++) {
+                nodes[i] = this.entity(entity.nodes[i]);
+            }
         }
 
         if (iD.debug) Object.freeze(nodes);

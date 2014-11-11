@@ -17,20 +17,14 @@ iD.svg.Areas = function(projection) {
 
     var patternKeys = ['landuse', 'natural', 'amenity'];
 
-    var clipped = ['residential', 'commercial', 'retail', 'industrial'];
-
-    function clip(entity) {
-        return clipped.indexOf(entity.tags.landuse) !== -1;
-    }
-
     function setPattern(d) {
         for (var i = 0; i < patternKeys.length; i++) {
             if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
-                this.style.fill = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
+                this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
                 return;
             }
         }
-        this.style.fill = '';
+        this.style.fill = this.style.stroke = '';
     }
 
     return function drawAreas(surface, graph, entities, filter) {
@@ -65,7 +59,7 @@ iD.svg.Areas = function(projection) {
         });
 
         var data = {
-            clip: areas.filter(clip),
+            clip: areas,
             shadow: strokes,
             stroke: strokes,
             fill: areas
@@ -125,11 +119,8 @@ iD.svg.Areas = function(projection) {
 
                 this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
 
-                if (layer === 'fill' && clip(entity)) {
-                    this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
-                }
-
                 if (layer === 'fill') {
+                    this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
                     setPattern.apply(this, arguments);
                 }
             })

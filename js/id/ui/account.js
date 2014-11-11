@@ -4,7 +4,7 @@ iD.ui.Account = function(context) {
     function update(selection) {
         if (!connection.authenticated()) {
             selection.selectAll('#userLink, #logoutLink')
-                .style('display', 'none');
+                .classed('hide', true);
             return;
         }
 
@@ -18,7 +18,7 @@ iD.ui.Account = function(context) {
             if (err) return;
 
             selection.selectAll('#userLink, #logoutLink')
-                .style('display', 'list-item');
+                .classed('hide', false);
 
             // Link
             userLink.append('a')
@@ -54,11 +54,11 @@ iD.ui.Account = function(context) {
     return function(selection) {
         selection.append('li')
             .attr('id', 'logoutLink')
-            .style('display', 'none');
+            .classed('hide', true);
 
         selection.append('li')
             .attr('id', 'userLink')
-            .style('display', 'none');
+            .classed('hide', true);
 
         connection.on('auth.account', function() { update(selection); });
         update(selection);

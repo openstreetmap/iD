@@ -48,7 +48,9 @@ iD.modes.DragNode = function(context) {
     }
 
     function start(entity) {
-        cancelled = d3.event.sourceEvent.shiftKey;
+        cancelled = d3.event.sourceEvent.shiftKey ||
+            context.features().hasHiddenConnections(entity, context.graph());
+
         if (cancelled) return behavior.cancel();
 
         wasMidpoint = entity.type === 'midpoint';

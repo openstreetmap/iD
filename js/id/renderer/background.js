@@ -64,19 +64,11 @@ iD.Background = function(context) {
 
         base.call(baseLayer);
 
-        var gpx = selection.selectAll('.gpx-layer')
-            .data([0]);
-
-        gpx.enter().insert('div', '.layer-data')
-            .attr('class', 'layer-layer gpx-layer');
-
-        gpx.call(gpxLayer);
-
-        var overlays = selection.selectAll('.overlay-layer')
+        var overlays = selection.selectAll('.layer-overlay')
             .data(overlayLayers, function(d) { return d.source().name(); });
 
         overlays.enter().insert('div', '.layer-data')
-            .attr('class', 'layer-layer overlay-layer');
+            .attr('class', 'layer-layer layer-overlay');
 
         overlays.each(function(layer) {
             d3.select(this).call(layer);
@@ -84,6 +76,14 @@ iD.Background = function(context) {
 
         overlays.exit()
             .remove();
+
+        var gpx = selection.selectAll('.layer-gpx')
+            .data([0]);
+
+        gpx.enter().insert('div')
+            .attr('class', 'layer-layer layer-gpx');
+
+        gpx.call(gpxLayer);
 
         var mapillary = selection.selectAll('.layer-mapillary')
             .data([0]);

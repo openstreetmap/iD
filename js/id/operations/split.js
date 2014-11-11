@@ -29,7 +29,11 @@ iD.operations.Split = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        return action.disabled(context.graph());
+        var reason;
+        if (_.any(selectedIDs, context.hasHiddenConnections)) {
+            reason = 'connected_to_hidden';
+        }
+        return action.disabled(context.graph()) || reason;
     };
 
     operation.tooltip = function() {

@@ -54,9 +54,6 @@ iD.ui = function(context) {
             .attr('class', 'spinner')
             .call(iD.ui.Spinner(context));
 
-        content
-            .call(iD.ui.Attribution(context));
-
         content.append('div')
             .style('display', 'none')
             .attr('class', 'help-wrap map-overlay fillL col5 content');
@@ -77,10 +74,21 @@ iD.ui = function(context) {
             .call(iD.ui.Background(context));
 
         controls.append('div')
+            .attr('class', 'map-control map-data-control')
+            .call(iD.ui.MapData(context));
+
+        controls.append('div')
             .attr('class', 'map-control help-control')
             .call(iD.ui.Help(context));
 
-        var footer = content.append('div')
+        var about = content.append('div')
+            .attr('id', 'about');
+
+        about.append('div')
+            .attr('id', 'attrib')
+            .call(iD.ui.Attribution(context));
+
+        var footer = about.append('div')
             .attr('id', 'footer')
             .attr('class', 'fillD');
 
@@ -88,24 +96,23 @@ iD.ui = function(context) {
             .attr('id', 'scale-block')
             .call(iD.ui.Scale(context));
 
-        var linkList = footer.append('div')
+        var aboutList = footer.append('div')
             .attr('id', 'info-block')
             .append('ul')
-            .attr('id', 'about-list')
-            .attr('class', 'link-list');
+            .attr('id', 'about-list');
 
         if (!context.embed()) {
-            linkList.call(iD.ui.Account(context));
+            aboutList.call(iD.ui.Account(context));
         }
 
-        linkList.append('li')
+        aboutList.append('li')
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .attr('href', 'http://github.com/openstreetmap/iD')
             .text(iD.version);
 
-        var bugReport = linkList.append('li')
+        var bugReport = aboutList.append('li')
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
@@ -119,7 +126,12 @@ iD.ui = function(context) {
                 .placement('top')
             );
 
-        linkList.append('li')
+        aboutList.append('li')
+            .attr('class', 'feature-warning')
+            .attr('tabindex', -1)
+            .call(iD.ui.FeatureInfo(context));
+
+        aboutList.append('li')
             .attr('class', 'user-list')
             .attr('tabindex', -1)
             .call(iD.ui.Contributors(context));
@@ -191,5 +203,11 @@ iD.ui = function(context) {
 };
 
 iD.ui.tooltipHtml = function(text, key) {
-    return '<span>' + text + '</span>' + '<div class="keyhint-wrap">' + '<span> ' + (t('tooltip_keyhint')) + ' </span>' + '<span class="keyhint"> ' + key + '</span></div>';
+    var s = '<span>' + text + '</span>';
+    if (key) {
+        s += '<div class="keyhint-wrap">' +
+            '<span> ' + (t('tooltip_keyhint')) + ' </span>' +
+            '<span class="keyhint"> ' + key + '</span></div>';
+    }
+    return s;
 };

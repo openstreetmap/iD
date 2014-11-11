@@ -137,9 +137,16 @@ iD.modes.Select = function(context, selectedIDs) {
             .call(keybinding);
 
         function selectElements() {
-            context.surface()
-                .selectAll(iD.util.entityOrMemberSelector(selectedIDs, context.graph()))
-                .classed('selected', true);
+            var selection = context.surface()
+                    .selectAll(iD.util.entityOrMemberSelector(selectedIDs, context.graph()));
+
+            if (selection.empty()) {
+                // Exit mode if selected DOM elements have disappeared..
+                context.enter(iD.modes.Browse(context));
+            } else {
+                selection
+                    .classed('selected', true);
+            }
         }
 
         context.map().on('drawn.select', selectElements);

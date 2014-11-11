@@ -240,8 +240,8 @@ describe("iD.History", function () {
             history.perform(iD.actions.DeleteNode('n3')); // deletion
             var json = JSON.parse(history.toJSON());
             expect(json.version).to.eql(3);
-            expect(json.entities).to.eql([node_1, node2.update({tags: {k: 'v'}})]);
-            expect(json.baseEntities).to.eql([node2, node3]);
+            expect( _.isEqual(json.entities, [node_1, node2.update({tags: {k: 'v'}})]) ).to.be.ok;
+            expect( _.isEqual(json.baseEntities, [node2, node3]) ).to.be.ok;
         });
     });
 

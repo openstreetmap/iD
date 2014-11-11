@@ -16,7 +16,11 @@ iD.operations.Straighten = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        return action.disabled(context.graph());
+        var reason;
+        if (context.hasHiddenConnections(entityId)) {
+            reason = 'connected_to_hidden';
+        }
+        return action.disabled(context.graph()) || reason;
     };
 
     operation.tooltip = function() {
