@@ -66,7 +66,7 @@ iD.behavior.drag = function() {
             started = false,
             selectEnable = d3_event_userSelectSuppress(touchId !== null ? 'drag-' + touchId : 'drag');
 
-        var w = d3.select(window)
+        var w = d3.select(touchId !== null ? target : window)
             .on(touchId !== null ? 'touchmove.drag-' + touchId : 'mousemove.drag', dragmove)
             .on(touchId !== null ? 'touchend.drag-' + touchId : 'mouseup.drag', dragend, true);
 
@@ -77,7 +77,7 @@ iD.behavior.drag = function() {
             offset = [0, 0];
         }
 
-        if (touchId === null) d3.event.stopPropagation();
+        d3.event.stopPropagation();
 
         function point() {
             var p = target.parentNode || surface;
