@@ -96,8 +96,8 @@ Use `make` to build the translations with the local changes.
 ## Contributing Documentation
 
 Documentation is maintained as a series of [Markdown](http://daringfireball.net/projects/markdown/)
-documents in [core.yaml](/data/core.yaml). The documentation 
-is in the `help` section (currently starting at line 258). The first line 
+documents in [core.yaml](/data/core.yaml). The documentation
+is in the `help` section (currently starting at line 258). The first line
 of each new section of documentation should be of the form
 
     # GPS
@@ -110,8 +110,8 @@ To add a new piece of documentation, simply add to [core.yaml](/data/core.yaml) 
 
 ## Adding or Refining Presets
 
-Presets save time for iD users by automatically showing them the tags they are 
-likely to add for a given feature. They are stored in `data/presets/presets`. If 
+Presets save time for iD users by automatically showing them the tags they are
+likely to add for a given feature. They are stored in `data/presets/presets`. If
 you're going to update the presets, [review the Presets README](/data/presets/README.md).
 
 ## Javascript
@@ -143,7 +143,7 @@ always, indented by the level of the tree:
 Just like HTML and Javascript, 4 space soft tabs always.
 
 ```css
-.radial-menu-tooltip {
+.edit-menu-tooltip {
     background: rgba(255, 255, 255, 0.8);
 }
 ```

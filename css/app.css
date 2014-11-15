@@ -86,7 +86,7 @@ a,
 button,
 .checkselect label:hover,
 .opacity-options li,
-.radial-menu-item {
+.edit-menu-item {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
 }
@@ -2780,33 +2780,39 @@ img.wiki-image {
     left: 60px;
 }
 
-.radial-menu-tooltip {
+.edit-menu-tooltip {
     opacity: 0.8;
     display: none;
     position: absolute;
     width: 200px;
 }
 
-.radial-menu-background {
+.edit-menu-background {
     stroke: black;
     stroke-opacity: 0.5;
+    fill: black;
+    fill-opacity: 0.5;
 }
 
-.radial-menu-item {
+.edit-menu-item {
     fill: white;
 }
 
-.radial-menu-item:hover {
+.edit-menu-item:hover {
     fill: #ececec;
 }
 
-.radial-menu-item:active {
+.edit-menu-item:active {
     fill: #ececec;
 }
 
-.radial-menu-item.disabled {
+.edit-menu-item.disabled {
     cursor: auto;
     fill: rgba(255,255,255,.5);
+}
+
+.edit-menu .icon {
+    pointer-events: none;
 }
 
 .lasso-box {
