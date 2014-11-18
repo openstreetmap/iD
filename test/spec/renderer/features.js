@@ -173,13 +173,17 @@ describe('iD.Features', function() {
 
         function doMatch(ids) {
             _.each(ids, function(id) {
-                expect(features.isHidden(graph.entity(id), graph), 'doMatch: ' + id).to.be.true;
+                var entity = graph.entity(id),
+                    geometry = entity.geometry(graph);
+                expect(features.isHidden(entity, graph, geometry), 'doMatch: ' + id).to.be.true;
             });
         }
 
         function dontMatch(ids) {
             _.each(ids, function(id) {
-                expect(features.isHidden(graph.entity(id), graph), 'dontMatch: ' + id).to.be.false;
+                var entity = graph.entity(id),
+                    geometry = entity.geometry(graph);
+                expect(features.isHidden(entity, graph, geometry), 'dontMatch: ' + id).to.be.false;
             });
         }
 
@@ -393,13 +397,14 @@ describe('iD.Features', function() {
                 b = iD.Node({id: 'b', version: 1}),
                 w = iD.Way({id: 'w', nodes: [a.id, b.id], tags: {highway: 'path'}, version: 1}),
                 graph = iD.Graph([a, b, w]),
+                geometry = a.geometry(graph),
                 all = _.values(graph.base().entities);
 
             features.disable('paths');
             features.gatherStats(all, graph, dimensions);
 
-            expect(features.isHiddenChild(a, graph)).to.be.true;
-            expect(features.isHidden(a, graph)).to.be.true;
+            expect(features.isHiddenChild(a, graph, geometry)).to.be.true;
+            expect(features.isHidden(a, graph, geometry)).to.be.true;
         });
 
         it('hides child ways on a hidden multipolygon relation', function() {
@@ -421,26 +426,29 @@ describe('iD.Features', function() {
                     version: 1
                 }),
                 graph = iD.Graph([a, b, c, d, e, f, outer, inner, r]),
+                geometry = inner.geometry(graph),
                 all = _.values(graph.base().entities);
 
             features.disable('landuse');
             features.gatherStats(all, graph, dimensions);
 
-            expect(features.isHiddenChild(inner, graph)).to.be.true;
-            expect(features.isHidden(inner, graph)).to.be.true;
+            expect(features.isHiddenChild(inner, graph, geometry)).to.be.true;
+            expect(features.isHidden(inner, graph, geometry)).to.be.true;
         });
 
         it('hides only versioned entities', function() {
             var a = iD.Node({id: 'a', version: 1}),
                 b = iD.Node({id: 'b'}),
                 graph = iD.Graph([a, b]),
+                ageo = a.geometry(graph),
+                bgeo = b.geometry(graph),
                 all = _.values(graph.base().entities);
 
             features.disable('points');
             features.gatherStats(all, graph, dimensions);
 
-            expect(features.isHidden(a, graph)).to.be.true;
-            expect(features.isHidden(b, graph)).to.be.false;
+            expect(features.isHidden(a, graph, ageo)).to.be.true;
+            expect(features.isHidden(b, graph, bgeo)).to.be.false;
         });
 
         it('auto-hides features', function() {
