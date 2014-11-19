@@ -93,6 +93,8 @@ iD.modes.Select = function(context, selectedIDs) {
             });
         });
 
+        radialMenu = iD.ui.RadialMenu(context, operations);
+
         context.ui().sidebar
             .select(singular() ? singular().id : null, newFeature);
 
@@ -152,7 +154,6 @@ iD.modes.Select = function(context, selectedIDs) {
         context.map().on('drawn.select', selectElements);
         selectElements();
 
-        radialMenu = iD.ui.RadialMenu(context, operations);
         var show = d3.event && !suppressMenu;
 
         if (show) {
