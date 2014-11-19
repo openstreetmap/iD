@@ -194,9 +194,6 @@ window.iD = function () {
         });
     };
 
-    context.editable = function() {
-        return map.editable();
-    };
 
     /* Behaviors */
     context.install = function(behavior) {
@@ -228,6 +225,7 @@ window.iD = function () {
     context.map = function() { return map; };
     context.layers = function() { return map.layers; };
     context.surface = function() { return map.surface; };
+    context.editable = function() { return map.editable(); };
     context.mouse = map.mouse;
     context.extent = map.extent;
     context.pan = map.pan;
