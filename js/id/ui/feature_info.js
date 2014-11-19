@@ -1,18 +1,19 @@
 iD.ui.FeatureInfo = function(context) {
     function update(selection) {
         var features = context.features(),
-            hidden = features.hidden();
+            stats = features.stats(),
+            count = 0,
+            hiddenList = _.compact(_.map(features.hidden(), function(k) {
+                if (stats[k]) {
+                    count += stats[k];
+                    return String(stats[k]) + ' ' + t('feature.' + k + '.description');
+                }
+            }));
 
         selection.html('');
 
-        if (hidden.length) {
-            var stats = features.stats(),
-                count = 0,
-                hiddenList = _.map(hidden, function(k) {
-                    count += stats[k];
-                    return String(stats[k]) + ' ' + t('feature.' + k + '.description');
-                }),
-                tooltip = bootstrap.tooltip()
+        if (hiddenList.length) {
+            var tooltip = bootstrap.tooltip()
                     .placement('top')
                     .html(true)
                     .title(function() {
@@ -32,7 +33,7 @@ iD.ui.FeatureInfo = function(context) {
         }
 
         selection
-            .classed('hide', !hidden.length);
+            .classed('hide', !hiddenList.length);
     }
 
     return function(selection) {
