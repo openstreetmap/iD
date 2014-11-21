@@ -357,12 +357,12 @@ iD.Features = function(context) {
 
         if (entity.type === 'midpoint') {
             childNodes = [resolver.entity(entity.edge[0]), resolver.entity(entity.edge[1])];
+            connections = [];
         } else {
             childNodes = resolver.childNodes(entity);
+            connections = features.getParents(entity, resolver, entity.geometry(resolver));
         }
 
-        // gather parents..
-        connections = features.getParents(entity, resolver, entity.geometry(resolver));
         // gather ways connected to child nodes..
         connections = _.reduce(childNodes, function(result, e) {
             return resolver.isShared(e) ? _.union(result, resolver.parentWays(e)) : result;
