@@ -3697,7 +3697,9 @@
         "icon": "bus",
         "fields": [
             "operator",
-            "shelter"
+            "bench",
+            "shelter",
+            "covered"
         ],
         "geometry": [
             "point",

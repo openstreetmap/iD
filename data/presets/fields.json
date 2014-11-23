@@ -202,6 +202,11 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "bench": {
+        "key": "bench",
+        "type": "check",
+        "label": "Bench"
+    },
     "bicycle_parking": {
         "key": "bicycle_parking",
         "type": "combo",
