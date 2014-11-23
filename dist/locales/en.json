@@ -664,6 +664,9 @@
             "barrier": {
                 "label": "Type"
             },
+            "bench": {
+                "label": "Bench"
+            },
             "bicycle_parking": {
                 "label": "Type"
             },
