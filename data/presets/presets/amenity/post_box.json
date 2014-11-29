@@ -2,7 +2,8 @@
     "icon": "post",
     "fields": [
         "operator",
-        "collection_times"
+        "collection_times",
+        "drive_through"
     ],
     "geometry": [
         "point",

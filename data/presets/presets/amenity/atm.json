@@ -1,7 +1,8 @@
 {
     "icon": "bank",
     "fields": [
-        "operator"
+        "operator",
+        "drive_through"
     ],
     "geometry": [
         "point",
