@@ -8,34 +8,82 @@ iD.modes.Save = function(context) {
     }
 
     function save(e) {
-        var loading = iD.ui.Loading(context)
-            .message(t('save.uploading'))
-            .blocking(true);
+        var altGraph = iD.Graph(),
+            history = context.history(),
+            connection = context.connection(),
+            changes = history.changes(iD.actions.DiscardTags(history.difference())),
+            toCheck = _.pluck(changes.modified, 'id'),
+            loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
+            errors = [];
 
         context.container()
             .call(loading);
 
-        context.connection().putChangeset(
-            context.history().changes(iD.actions.DiscardTags(context.history().difference())),
-            e.comment,
-            context.history().imageryUsed(),
-            function(err, changeset_id) {
-                loading.close();
+        // check for version conflicts.. reload modified entities into an alternate graph.
+        context.altGraph(altGraph);
+
+        _.each(toCheck, function(id) {
+            connection.loadEntity(id, function(err) {
+                var version = context.entity(id).version,
+                    altVersion = context.altGraph().entity(id).version;
+
+                toCheck = _.without(toCheck, id);
+
+                if (version !== altVersion) {
+                    errors.push('Version mismatch for ' + id + ': local=' + version + ', server=' + altVersion);
+                }
+
                 if (err) {
-                    var confirm = iD.ui.confirm(context.container());
-                    confirm
-                        .select('.modal-section.header')
-                        .append('h3')
-                        .text(t('save.error'));
-                    confirm
-                        .select('.modal-section.message-text')
-                        .append('p')
-                        .text(err.responseText || t('save.unknown_error_details'));
-                } else {
-                    context.flush();
-                    success(e, changeset_id);
+                    errors.push(err.responseText);
+                }
+
+                if (!toCheck.length) {
+                    finalize();
                 }
             });
+        });
+
+
+        function finalize() {
+            if (errors.length) {
+                showErrors(errors);
+            } else {
+                connection.putChangeset(
+                    changes,
+                    e.comment,
+                    history.imageryUsed(),
+                    function(err, changeset_id) {
+                        if (err) {
+                            errors.push(err.responseText);
+                            showErrors(errors);
+                        } else {
+                            loading.close();
+                            context.flush();
+                            success(e, changeset_id);
+                        }
+                    });
+            }
+        }
+
+
+        function showErrors(errors) {
+            var confirm = iD.ui.confirm(context.container());
+
+            context.altGraph(undefined);
+            loading.close();
+
+            confirm
+                .select('.modal-section.header')
+                .append('h3')
+                .text(t('save.error'));
+            confirm
+                .select('.modal-section.message-text')
+                .append('p')
+                .text(errors.join('<br/>') || t('save.unknown_error_details'));
+        }
+
+
+
     }
 
     function success(e, changeset_id) {
