@@ -47,14 +47,19 @@ window.iD = function () {
         ui = iD.ui(context),
         connection = iD.Connection(),
         locale = iD.detect().locale,
-        localePath;
+        localePath,
+        altGraph;
 
     if (locale && iD.data.locales.indexOf(locale) === -1) {
         locale = locale.split('-')[0];
     }
 
     connection.on('load.context', function loadContext(err, result) {
-        history.merge(result.data, result.extent);
+        if (altGraph) {
+            altGraph.rebase(result.data, [altGraph]);
+        } else {
+            history.merge(result.data, result.extent);
+        }
     });
 
     context.preauth = function(options) {
@@ -91,6 +96,13 @@ window.iD = function () {
     context.changes = history.changes;
     context.intersects = history.intersects;
 
+    context.altGraph = function(_) {
+        if (!arguments.length) return altGraph;
+        altGraph = _;
+        return context;
+    };
+
+
     var inIntro = false;
 
     context.inIntro = function(_) {
@@ -106,6 +118,7 @@ window.iD = function () {
     };
 
     context.flush = function() {
+        altGraph = undefined;
         connection.flush();
         features.reset();
         history.reset();
