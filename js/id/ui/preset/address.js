@@ -95,6 +95,8 @@ iD.ui.preset.address = function(field, context) {
     }
 
     function address(selection) {
+        isInitialized = false;
+        
         selection.selectAll('.preset-input-wrap')
             .remove();
 
