@@ -572,6 +572,9 @@
             "barrier": {
                 "label": "Тип"
             },
+            "bench": {
+                "label": "Скамейка"
+            },
             "bicycle_parking": {
                 "label": "Тип"
             },

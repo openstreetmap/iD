@@ -234,7 +234,9 @@ iD.History = function(context) {
                     // this merges originals for changed entities into the base of
                     // the stack even if the current stack doesn't have them (for
                     // example when iD has been restarted in a different region)
-                    var baseEntities = h.baseEntities.map(iD.Entity);
+                    var baseEntities = h.baseEntities.map(function(entity) {
+                        return iD.Entity(entity);
+                    });
                     stack[0].graph.rebase(baseEntities, _.pluck(stack, 'graph'));
                     tree.rebase(baseEntities);
                 }
