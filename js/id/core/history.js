@@ -41,6 +41,10 @@ iD.History = function(context) {
             return stack[index].graph;
         },
 
+        base: function() {
+            return stack[0].graph;
+        },
+
         merge: function(entities, extent) {
             stack[0].graph.rebase(entities, _.pluck(stack, 'graph'), false);
             tree.rebase(entities, false);

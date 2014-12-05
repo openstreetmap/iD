@@ -56,7 +56,7 @@ window.iD = function () {
 
     connection.on('load.context', function loadContext(err, result) {
         if (altGraph) {
-            altGraph.rebase(result.data, [altGraph], false);
+            _.each(result.data, function(entity) { altGraph.replace(entity); });
         } else {
             history.merge(result.data, result.extent);
         }

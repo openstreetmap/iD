@@ -8,12 +8,13 @@ iD.modes.Save = function(context) {
     }
 
     function save(e) {
-        var altGraph = iD.Graph(),
+        var altGraph = iD.Graph(context.history().base(), true),
             history = context.history(),
             connection = context.connection(),
             changes = history.changes(iD.actions.DiscardTags(history.difference())),
-            toCheck = _.pluck(changes.modified, 'id'),
             loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
+            toCheck = _.pluck(changes.modified, 'id'),
+            toMerge = [];
             errors = [];
 
         context.container()
@@ -21,32 +22,44 @@ iD.modes.Save = function(context) {
 
         // check for version conflicts.. reload modified entities into an alternate graph.
         context.altGraph(altGraph);
+        _.each(toCheck, check);
 
-        _.each(toCheck, function(id) {
+        function check(id) {
             connection.loadEntity(id, function(err) {
-                var version = context.entity(id).version,
-                    altVersion = context.altGraph().entity(id).version;
-
                 toCheck = _.without(toCheck, id);
-
-                if (version !== altVersion) {
-                    errors.push('Version mismatch for ' + id + ': local=' + version + ', server=' + altVersion);
-                }
 
                 if (err) {
                     errors.push(err.responseText);
+                }
+                else {
+                    var entity = context.graph().entity(id),
+                        altEntity = context.altGraph().entity(id);
+
+                    if (entity.version !== altEntity.version) {
+                        toMerge.push(id);
+                        errors.push('Version mismatch for ' + id + ': local=' + entity.version + ', server=' + altEntity.version);
+                    }
                 }
 
                 if (!toCheck.length) {
                     finalize();
                 }
             });
-        });
+        }
 
+        function merge() {
+            var diff = context.history().difference(),
+                altDiff = iD.Difference(context.history().base(), context.altGraph());
+
+            // TODO
+            debugger;
+        }
 
         function finalize() {
+            if (toMerge.length) merge();
+
             if (errors.length) {
-                showErrors(errors);
+                showErrors();
             } else {
                 connection.putChangeset(
                     changes,
@@ -55,7 +68,7 @@ iD.modes.Save = function(context) {
                     function(err, changeset_id) {
                         if (err) {
                             errors.push(err.responseText);
-                            showErrors(errors);
+                            showErrors();
                         } else {
                             loading.close();
                             context.flush();
@@ -66,7 +79,7 @@ iD.modes.Save = function(context) {
         }
 
 
-        function showErrors(errors) {
+        function showErrors() {
             var confirm = iD.ui.confirm(context.container());
 
             context.altGraph(undefined);

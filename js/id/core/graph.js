@@ -16,10 +16,7 @@ iD.Graph = function(other, mutable) {
 
     this.transients = {};
     this._childNodes = {};
-
-    if (!mutable) {
-        this.freeze();
-    }
+    this.frozen = !mutable;
 };
 
 iD.Graph.prototype = {
