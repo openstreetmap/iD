@@ -93,6 +93,16 @@ describe('iD.Graph', function() {
             expect(graph.entity('n')).to.equal(a);
         });
 
+        it("gives precedence to new entities when force = true", function () {
+            var a = iD.Node({id: 'n'}),
+                b = iD.Node({id: 'n'}),
+                graph = iD.Graph([a]);
+
+            graph.rebase([b], [graph], true);
+
+            expect(graph.entity('n')).to.equal(b);
+        });
+
         it("inherits entities from base prototypally", function () {
             var graph = iD.Graph();
 
