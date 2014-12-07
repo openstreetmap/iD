@@ -8,13 +8,10 @@ iD.modes.Save = function(context) {
     }
 
     function save(e) {
-        var altGraph = iD.Graph(context.history().base(), true),
+        var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
-            connection = context.connection(),
-            changes = history.changes(iD.actions.DiscardTags(history.difference())),
-            loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
-            toCheck = _.pluck(changes.modified, 'id'),
-            toMerge = [];
+            altGraph = iD.Graph(history.base(), true),
+            toCheck = _.pluck(history.changes().modified, 'id'),
             errors = [];
 
         context.container()
@@ -25,19 +22,23 @@ iD.modes.Save = function(context) {
         _.each(toCheck, check);
 
         function check(id) {
-            connection.loadEntity(id, function(err) {
+            context.connection().loadEntity(id, function(err) {
                 toCheck = _.without(toCheck, id);
 
                 if (err) {
                     errors.push(err.responseText);
                 }
                 else {
-                    var entity = context.graph().entity(id),
-                        altEntity = context.altGraph().entity(id);
+                    var base = history.base().entity(id),
+                        local = context.graph().entity(id),
+                        remote = context.altGraph().entity(id),
+                        diff;
 
-                    if (entity.version !== altEntity.version) {
-                        toMerge.push(id);
-                        errors.push('Version mismatch for ' + id + ': local=' + entity.version + ', server=' + altEntity.version);
+                    if (local.version !== remote.version) {
+                        diff = history.perform(iD.actions.MergeRemoteChanges(base, local, remote));
+                        if (!diff.length) {
+                            errors.push('Version mismatch for ' + id + ': local=' + local.version + ', remote=' + remote.version);
+                        }
                     }
                 }
 
@@ -47,22 +48,12 @@ iD.modes.Save = function(context) {
             });
         }
 
-        function merge() {
-            var diff = context.history().difference(),
-                altDiff = iD.Difference(context.history().base(), context.altGraph());
-
-            // TODO
-            debugger;
-        }
-
         function finalize() {
-            if (toMerge.length) merge();
-
             if (errors.length) {
                 showErrors();
             } else {
-                connection.putChangeset(
-                    changes,
+                context.connection().putChangeset(
+                    history.changes(iD.actions.DiscardTags(history.difference())),
                     e.comment,
                     history.imageryUsed(),
                     function(err, changeset_id) {
@@ -77,7 +68,6 @@ iD.modes.Save = function(context) {
                     });
             }
         }
-
 
         function showErrors() {
             var confirm = iD.ui.confirm(context.container());
@@ -94,9 +84,6 @@ iD.modes.Save = function(context) {
                 .append('p')
                 .text(errors.join('<br/>') || t('save.unknown_error_details'));
         }
-
-
-
     }
 
     function success(e, changeset_id) {
