@@ -106,7 +106,7 @@ describe('iD.Graph', function() {
         it("inherits entities from base prototypally", function () {
             var graph = iD.Graph();
 
-            graph.rebase([iD.Node()], [graph]);
+            graph.rebase([iD.Node({id: 'n'})], [graph]);
 
             expect(graph.entities).not.to.have.ownProperty('n');
         });
