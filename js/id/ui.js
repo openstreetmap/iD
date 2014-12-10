@@ -54,10 +54,6 @@ iD.ui = function(context) {
             .attr('class', 'spinner')
             .call(iD.ui.Spinner(context));
 
-        content.append('div')
-            .style('display', 'none')
-            .attr('class', 'help-wrap map-overlay fillL col5 content');
-
         var controls = bar.append('div')
             .attr('class', 'map-controls');
 

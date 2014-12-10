@@ -21,7 +21,6 @@ iD.ui.Help = function(context) {
     });
 
     function help(selection) {
-        var shown = false;
 
         function hide() {
             setVisible(false);
@@ -37,7 +36,11 @@ iD.ui.Help = function(context) {
             if (show !== shown) {
                 button.classed('active', show);
                 shown = show;
+
                 if (show) {
+                    selection.on('mousedown.help-inside', function() {
+                        return d3.event.stopPropagation();
+                    });
                     pane.style('display', 'block')
                         .style('right', '-500px')
                         .transition()
@@ -51,6 +54,7 @@ iD.ui.Help = function(context) {
                         .each('end', function() {
                             d3.select(this).style('display', 'none');
                         });
+                    selection.on('mousedown.help-inside', null);
                 }
             }
         }
@@ -92,21 +96,22 @@ iD.ui.Help = function(context) {
             setVisible(false);
         }
 
-        var tooltip = bootstrap.tooltip()
-            .placement('left')
-            .html(true)
-            .title(iD.ui.tooltipHtml(t('help.title'), key));
 
-        var button = selection.append('button')
-            .attr('tabindex', -1)
-            .on('click', toggle)
-            .call(tooltip);
+        var pane = selection.append('div')
+                .attr('class', 'help-wrap map-overlay fillL col5 content hide'),
+            tooltip = bootstrap.tooltip()
+                .placement('left')
+                .html(true)
+                .title(iD.ui.tooltipHtml(t('help.title'), key)),
+            button = selection.append('button')
+                .attr('tabindex', -1)
+                .on('click', toggle)
+                .call(tooltip),
+            shown = false;
 
         button.append('span')
             .attr('class', 'icon help light');
 
-        var pane = context.container()
-            .select('.help-wrap');
 
         var toc = pane.append('ul')
             .attr('class', 'toc');
@@ -148,12 +153,7 @@ iD.ui.Help = function(context) {
             .call(keybinding);
 
         context.surface().on('mousedown.help-outside', hide);
-        context.container().on('mousedown.b.help-outside', hide);
-
-        pane.on('mousedown.help-inside', function() {
-            return d3.event.stopPropagation();
-        });
-
+        context.container().on('mousedown.help-outside', hide);
     }
 
     return help;

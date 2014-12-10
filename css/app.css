@@ -2033,9 +2033,11 @@ img.wiki-image {
 }
 
 .map-data-control .map-overlay,
-.background-control .map-overlay {
+.background-control .map-overlay,
+.help-control .map-overlay {
     z-index: -1;
 }
+
 
 /* Geolocator */
 
