@@ -10,7 +10,6 @@ iD.modes.Save = function(context) {
     function save(e) {
         var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
-            altGraph = iD.Graph(history.base(), true),
             toCheck = _.pluck(history.changes().modified, 'id'),
             errors = [];
 
@@ -18,7 +17,7 @@ iD.modes.Save = function(context) {
             .call(loading);
 
         // check for version conflicts.. reload modified entities into an alternate graph.
-        context.altGraph(altGraph);
+        context.altGraph(iD.Graph(history.base(), true));
         _.each(toCheck, check);
 
         function check(id) {
@@ -29,13 +28,13 @@ iD.modes.Save = function(context) {
                     errors.push(err.responseText);
                 }
                 else {
-                    var base = history.base().entity(id),
-                        local = context.graph().entity(id),
-                        remote = context.altGraph().entity(id),
-                        diff;
+                    var graph = context.graph(),
+                        altGraph = context.altGraph(),
+                        local = graph.entity(id),
+                        remote = altGraph.entity(id);
 
                     if (local.version !== remote.version) {
-                        diff = history.perform(iD.actions.MergeRemoteChanges(base, local, remote));
+                        var diff = history.perform(iD.actions.MergeRemoteChanges(id, graph, altGraph));
                         if (!diff.length) {
                             errors.push('Version mismatch for ' + id + ': local=' + local.version + ', remote=' + remote.version);
                         }

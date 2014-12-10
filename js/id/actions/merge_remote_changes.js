@@ -1,10 +1,9 @@
-iD.actions.MergeRemoteChanges = function(base, local, remote) {
-    var option = 'safe',  // 'safe', 'force_local', 'force_remote'
+iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
+    var base = localGraph.base().entities[id],
+        local = localGraph.entities[id],
+        remote = remoteGraph.entities[id],
+        option = 'safe',  // 'safe', 'force_local', 'force_remote'
         target;
-
-    function assertIds() {
-        return (base.id === local.id) && (base.id === remote.id);
-    }
 
     function sameLocation() {
         var epsilon = 1e-6;
@@ -46,7 +45,6 @@ iD.actions.MergeRemoteChanges = function(base, local, remote) {
     }
 
     var action = function(graph) {
-        if (!assertIds()) { return graph; }
 
         target = iD.Entity(local, {version: remote.version});
         if (option === 'force_remote') { return graph.replace(remote); }
