@@ -148,23 +148,79 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(graph.entity('w1').tags).to.eql({foo: 'foo_local', bar: 'bar_remote', area: 'yes'});
             });
 
-            it("doesn't merge ways if nodelist reordered", function () {
+            it("merges ways if nodelist changed only remotely", function () {
                 var localNodes = ['p1', 'p2', 'p3', 'p4', 'p1'],    // didn't change nodes
-                    remoteNodes = ['p1', 'p3', 'p4', 'p2', 'p1'],   // reordered nodes
+                    remoteNodes = ['p1', 'r2', 'r3', 'p4', 'p1'],   // changed nodes
                     localTags = {foo: 'foo_local', area: 'yes'},                 // changed tag foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote', area: 'yes'},   // didn't change tag foo, added tag bar
                     local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
                     remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
                     graph = makeGraph([local]),
+                    altGraph = makeGraph([remote, r2, r3]),
+                    action = iD.actions.MergeRemoteChanges('w1', graph, altGraph);
+
+                graph = action(graph);
+
+                expect(graph.entity('w1').version).to.eql('2');
+                expect(graph.entity('w1').tags).to.eql({foo: 'foo_local', bar: 'bar_remote', area: 'yes'});
+                expect(graph.entity('w1').nodes).to.eql(remoteNodes);
+                expect(graph.hasEntity('r2')).to.eql(r2);
+                expect(graph.hasEntity('r3')).to.eql(r3);
+            });
+
+            it("merges ways if nodelist changed only locally", function () {
+                var localNodes = ['p1', 'r2', 'r3', 'p4', 'p1'],    // changed nodes
+                    remoteNodes = ['p1', 'p2', 'p3', 'p4', 'p1'],   // didn't change nodes
+                    localTags = {foo: 'foo_local', area: 'yes'},                 // changed tag foo
+                    remoteTags = {foo: 'foo', bar: 'bar_remote', area: 'yes'},   // didn't change tag foo, added tag bar
+                    local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
+                    remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
+                    graph = makeGraph([local, r2, r3]),
                     altGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('w1', graph, altGraph);
+
+                graph = action(graph);
+
+                expect(graph.entity('w1').version).to.eql('2');
+                expect(graph.entity('w1').tags).to.eql({foo: 'foo_local', bar: 'bar_remote', area: 'yes'});
+                expect(graph.entity('w1').nodes).to.eql(localNodes);
+            });
+
+            it("merges ways if nodelist changes don't overlap", function () {
+                var localNodes = ['p1', 'r1', 'r2',  'p3',     'p4',    'p1'],   // changed p2 -> r1, r2
+                    remoteNodes = ['p1',   'p2',     'p3',  'r3', 'r4', 'p1'],   // changed p4 -> r3, r4
+                    localTags = {foo: 'foo_local', area: 'yes'},                 // changed tag foo
+                    remoteTags = {foo: 'foo', bar: 'bar_remote', area: 'yes'},   // didn't change tag foo, added tag bar
+                    local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
+                    remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
+                    graph = makeGraph([local, r1, r2]),
+                    altGraph = makeGraph([remote, r3, r4]),
+                    action = iD.actions.MergeRemoteChanges('w1', graph, altGraph);
+
+                graph = action(graph);
+
+                expect(graph.entity('w1').version).to.eql('2');
+                expect(graph.entity('w1').tags).to.eql({foo: 'foo_local', bar: 'bar_remote', area: 'yes'});
+                expect(graph.entity('w1').nodes).to.eql(['p1', 'r1', 'r2', 'p3', 'r3', 'r4', 'p1']);
+                expect(graph.hasEntity('r3')).to.eql(r3);
+                expect(graph.hasEntity('r4')).to.eql(r4);
+            });
+
+            it("doesn't merge ways if nodelist changes overlap", function () {
+                var localNodes = ['p1', 'r1', 'r2', 'p3', 'p4', 'p1'],   // changed p2 -> r1, r2
+                    remoteNodes = ['p1', 'r3', 'r4', 'p3', 'p4', 'p1'],   // changed p2 -> r3, r4
+                    localTags = {foo: 'foo_local', area: 'yes'},                 // changed tag foo
+                    remoteTags = {foo: 'foo', bar: 'bar_remote', area: 'yes'},   // didn't change tag foo, added tag bar
+                    local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
+                    remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
+                    graph = makeGraph([local, r1, r2]),
+                    altGraph = makeGraph([remote, r3, r4]),
                     action = iD.actions.MergeRemoteChanges('w1', graph, altGraph);
 
                 graph = action(graph);
 
                 expect(graph.entity('w1')).to.eql(local);
             });
-
-            it("merges ways if nodelist order preserved");
 
         });
 

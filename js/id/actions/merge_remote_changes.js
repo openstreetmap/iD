@@ -6,45 +6,82 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
 
 
     function mergeLocation(target) {
+        if (!target) return;
+
         function pointEqual(a, b) {
             var epsilon = 1e-6;
             return (Math.abs(a[0] - b[0]) < epsilon) && (Math.abs(a[1] - b[1]) < epsilon);
         }
 
-        if (!pointEqual(remote.loc, local.loc)) {
-            return (option === 'force_remote') ? target.update({loc: remote.loc}) : undefined;
+        if (pointEqual(target.loc, remote.loc)) {
+            return target;
         }
-        return target;
+        if (option === 'force_remote') {
+            return target.update({loc: remote.loc});
+        }
+
+        return;  // fail merge
     }
 
     function mergeRemoteChildren(target) {
+        if (!target) return;
+
+        if (_.isEqual(target.nodes, remote.nodes)) {
+            return target;
+        }
         if (option === 'force_remote') {
             return target.update({nodes: remote.nodes});
         }
 
-        // todo, support non-destructive merging
-        // for now fail on any change..
-        if (!_.isEqual(local.nodes, remote.nodes)) {
-            return;
+        var o = base.nodes || [],
+            a = local.nodes || [],
+            b = remote.nodes || [],
+            nodes = [],
+            hunks = Diff3.diff3_merge(a, o, b, true);
+
+        for (var i = 0, imax = hunks.length; i !== imax; i++) {
+            var hunk = hunks[i];
+            if (hunk.ok) {
+                nodes.push.apply(nodes, hunk.ok);
+            }
+            else {
+                // for all conflicts, we can assume c.a !== c.b
+                // because `diff3_merge` called with `true` option to exclude false conflicts..
+                var c = hunk.conflict;
+                if (_.isEqual(c.o, c.a)) {  // only changed remotely
+                    nodes.push.apply(nodes, c.b);
+                }
+                else if (_.isEqual(c.o, c.b)) {  // only changed locally
+                    nodes.push.apply(nodes, c.a);
+                }
+                else {       // changed both locally and remotely
+                    return;  // fail merge..
+                }
+            }
         }
-        return target;
+
+        return target.update({nodes: nodes});
     }
 
     function mergeRemoteMembers(target) {
+        if (!target) return;
+
+        if (_.isEqual(target.members, remote.members)) {
+            return target;
+        }
         if (option === 'force_remote') {
             return target.update({members: remote.members});
         }
 
-        // todo, support non-destructive merging
-        // for now fail on any change..
-        if (!_.isEqual(local.members, remote.members)) {
-            return;
-        }
-        return target;
+        return;  // fail merge
     }
 
     function mergeRemoteTags(target) {
-        if (!target) { return; }
+        if (!target) return;
+
+        if (_.isEqual(target.tags, remote.tags)) {
+            return target;
+        }
         if (option === 'force_remote') {
             return target.update({tags: remote.tags});
         }
@@ -60,9 +97,10 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
         for (var i = 0, imax = keys.length; i !== imax; i++) {
             var k = keys[i];
             if (remote.tags[k] !== base.tags[k]) {  // tag modified remotely..
-                if (local.tags[k] && local.tags[k] !== remote.tags[k]) {
-                    return;
-                } else {
+                if (target.tags[k] && target.tags[k] !== remote.tags[k]) {
+                    return;  // fail merge..
+                }
+                else {
                     tags[k] = remote.tags[k];
                     changed = true;
                 }
@@ -81,10 +119,12 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
 
         if (target.type === 'node') {
             target = mergeLocation(target);
-        } else if (target.type === 'way') {
+        }
+        else if (target.type === 'way') {
             graph.rebase(remoteGraph.childNodes(remote), [graph], false);
             target = mergeRemoteChildren(target);
-        } else if (target.type === 'relation') {
+        }
+        else if (target.type === 'relation') {
             target = mergeRemoteMembers(target);
         }
 
