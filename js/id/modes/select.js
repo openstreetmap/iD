@@ -115,7 +115,7 @@ iD.modes.Select = function(context, selectedIDs) {
             }
         }
 
-        function selectElements() {
+        function selectElements(drawn) {
             var entity = singular();
             if (entity && context.geometry(entity.id) === 'relation') {
                 suppressMenu = true;
@@ -126,8 +126,9 @@ iD.modes.Select = function(context, selectedIDs) {
                     .selectAll(iD.util.entityOrMemberSelector(selectedIDs, context.graph()));
 
             if (selection.empty()) {
-                // Exit mode if selected DOM elements have disappeared..
-                context.enter(iD.modes.Browse(context));
+                if (drawn) {  // Exit mode if selected DOM elements have disappeared..
+                    context.enter(iD.modes.Browse(context));
+                }
             } else {
                 selection
                     .classed('selected', true);
