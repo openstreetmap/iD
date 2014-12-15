@@ -209,6 +209,7 @@ iD.modes.Select = function(context, selectedIDs) {
 
         keybinding.off();
         closeMenu();
+        radialMenu = undefined;
 
         context.history()
             .on('undone.select', null)
