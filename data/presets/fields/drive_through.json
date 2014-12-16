@@ -1,0 +1,12 @@
+{
+    "key": "drive_through",
+    "type": "combo",
+    "label": "Drive through",
+    "placeholder": "Yes, no...",
+    "strings": {
+        "options": {
+            "yes": "It is possible to use without leaving your car",
+            "no": "No"
+        }
+    }
+}

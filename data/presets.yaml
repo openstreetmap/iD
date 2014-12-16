@@ -173,6 +173,12 @@ en:
         label: Denotation
       description:
         label: Description
+      drive_through:
+        label: Drive through
+        placeholder: "Yes, no..."
+        options:
+          "yes": It is possible to use without leaving your car
+          "no": "No"
       electrified:
         label: Electrification
         placeholder: "Contact Line, Electrified Rail..."
