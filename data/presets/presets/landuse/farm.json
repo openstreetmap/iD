@@ -11,5 +11,6 @@
     },
     "terms": [],
     "name": "Farm",
-    "icon": "farm"
+    "icon": "farm",
+    "searchable": false
 }
