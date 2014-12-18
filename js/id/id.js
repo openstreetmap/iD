@@ -55,10 +55,12 @@ window.iD = function () {
     }
 
     connection.on('load.context', function loadContext(err, result) {
-        if (altGraph) {
-            _.each(result.data, function(entity) { altGraph.replace(entity); });
-        } else {
-            history.merge(result.data, result.extent);
+        if (!err) {
+            if (altGraph) {
+                _.each(result.data, function(entity) { altGraph.replace(entity); });
+            } else {
+                history.merge(result.data, result.extent);
+            }
         }
     });
 

@@ -42,10 +42,10 @@ iD.Connection = function() {
     };
 
     connection.loadFromURL = function(url, callback) {
-        function done(dom) {
-            return callback(null, parse(dom));
+        function done(err, dom) {
+            return callback(err, parse(dom));
         }
-        return d3.xml(url).get().on('load', done);
+        return d3.xml(url).get(done);
     };
 
     connection.loadEntity = function(id, callback) {
@@ -137,7 +137,7 @@ iD.Connection = function() {
     };
 
     function parse(dom) {
-        if (!dom || !dom.childNodes) return new Error('Bad request');
+        if (!dom || !dom.childNodes) return;
 
         var root = dom.childNodes[0],
             children = root.childNodes,
