@@ -4618,7 +4618,8 @@
         },
         "terms": [],
         "name": "Farm",
-        "icon": "farm"
+        "icon": "farm",
+        "searchable": false
     },
     "landuse/farmland": {
         "fields": [
@@ -4631,10 +4632,11 @@
         "tags": {
             "landuse": "farmland"
         },
-        "terms": [],
-        "name": "Farmland",
-        "icon": "farm",
-        "searchable": false
+        "terms": [
+            "farmland"
+        ],
+        "name": "Farm",
+        "icon": "farm"
     },
     "landuse/farmyard": {
         "fields": [
@@ -5494,6 +5496,21 @@
             "natural": "beach"
         },
         "name": "Beach"
+    },
+    "natural/cave_entrance": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "fields": [
+            "fee",
+            "access_simple"
+        ],
+        "terms": [],
+        "tags": {
+            "natural": "cave_entrance"
+        },
+        "name": "Cave Entrance"
     },
     "natural/cliff": {
         "geometry": [

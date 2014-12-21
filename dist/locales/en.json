@@ -2324,8 +2324,8 @@
                 "terms": ""
             },
             "landuse/farmland": {
-                "name": "Farmland",
-                "terms": ""
+                "name": "Farm",
+                "terms": "farmland"
             },
             "landuse/farmyard": {
                 "name": "Farmyard",
@@ -2565,6 +2565,10 @@
             },
             "natural/beach": {
                 "name": "Beach",
+                "terms": ""
+            },
+            "natural/cave_entrance": {
+                "name": "Cave Entrance",
                 "terms": ""
             },
             "natural/cliff": {

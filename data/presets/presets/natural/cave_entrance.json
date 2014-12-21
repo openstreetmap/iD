@@ -1,0 +1,15 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+        "fee",
+        "access_simple"
+    ],
+    "terms": [],
+    "tags": {
+        "natural": "cave_entrance"
+    },
+    "name": "Cave Entrance"
+}

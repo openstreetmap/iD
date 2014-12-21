@@ -1352,8 +1352,8 @@ en:
         name: Farm
         terms: "<translate with synonyms or related terms for 'Farm', separated by commas>"
       landuse/farmland:
-        name: Farmland
-        terms: "<translate with synonyms or related terms for 'Farmland', separated by commas>"
+        name: Farm
+        terms: "<translate with synonyms or related terms for 'Farm', separated by commas>"
       landuse/farmyard:
         name: Farmyard
         terms: "<translate with synonyms or related terms for 'Farmyard', separated by commas>"
@@ -1534,6 +1534,9 @@ en:
       natural/beach:
         name: Beach
         terms: "<translate with synonyms or related terms for 'Beach', separated by commas>"
+      natural/cave_entrance:
+        name: Cave Entrance
+        terms: "<translate with synonyms or related terms for 'Cave Entrance', separated by commas>"
       natural/cliff:
         name: Cliff
         terms: "<translate with synonyms or related terms for 'Cliff', separated by commas>"

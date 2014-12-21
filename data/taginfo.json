@@ -1308,6 +1308,10 @@
         },
         {
             "key": "natural",
+            "value": "cave_entrance"
+        },
+        {
+            "key": "natural",
             "value": "cliff"
         },
         {
