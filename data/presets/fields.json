@@ -311,6 +311,11 @@
         "type": "combo",
         "label": "Cuisine"
     },
+    "delivery": {
+        "key": "delivery",
+        "type": "check",
+        "label": "Delivery"
+    },
     "denomination": {
         "key": "denomination",
         "type": "combo",
@@ -1046,6 +1051,19 @@
         "key": "tactile_paving",
         "type": "check",
         "label": "Tactile Paving"
+    },
+    "takeaway": {
+        "key": "takeaway",
+        "type": "combo",
+        "label": "Takeaway",
+        "placeholder": "Yes, No, Takeaway Only...",
+        "strings": {
+            "options": {
+                "yes": "Yes",
+                "no": "No",
+                "only": "Takeaway Only"
+            }
+        }
     },
     "toilets/disposal": {
         "key": "toilets:disposal",

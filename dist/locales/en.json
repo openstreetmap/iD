@@ -735,6 +735,9 @@
             "cuisine": {
                 "label": "Cuisine"
             },
+            "delivery": {
+                "label": "Delivery"
+            },
             "denomination": {
                 "label": "Denomination"
             },
@@ -1177,6 +1180,15 @@
             },
             "tactile_paving": {
                 "label": "Tactile Paving"
+            },
+            "takeaway": {
+                "label": "Takeaway",
+                "placeholder": "Yes, No, Takeaway Only...",
+                "options": {
+                    "yes": "Yes",
+                    "no": "No",
+                    "only": "Takeaway Only"
+                }
             },
             "toilets/disposal": {
                 "label": "Disposal",
