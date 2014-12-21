@@ -306,6 +306,10 @@
         },
         {
             "key": "amenity",
+            "value": "register_office"
+        },
+        {
+            "key": "amenity",
             "value": "restaurant"
         },
         {

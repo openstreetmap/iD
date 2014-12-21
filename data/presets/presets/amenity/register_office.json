@@ -1,0 +1,19 @@
+{
+    "icon": "town-hall",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+    ],
+    "tags": {
+        "amenity": "register_office"
+    },
+    "name": "Register Office"
+}

@@ -772,6 +772,9 @@ en:
       amenity/recycling:
         name: Recycling
         terms: "<translate with synonyms or related terms for 'Recycling', separated by commas>"
+      amenity/register_office:
+        name: Register Office
+        terms: "<translate with synonyms or related terms for 'Register Office', separated by commas>"
       amenity/restaurant:
         name: Restaurant
         terms: "<translate with synonyms or related terms for 'Restaurant', separated by commas>"

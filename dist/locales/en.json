@@ -1551,6 +1551,10 @@
                 "name": "Recycling",
                 "terms": "can,bottle,garbage,scrap,trash"
             },
+            "amenity/register_office": {
+                "name": "Register Office",
+                "terms": ""
+            },
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "bar,breakfast,cafe,café,canteen,coffee,dine,dining,dinner,drive-in,eat,grill,lunch,table"
