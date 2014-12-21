@@ -1360,6 +1360,9 @@ en:
       landuse/forest:
         name: Forest
         terms: "<translate with synonyms or related terms for 'Forest', separated by commas>"
+      landuse/garages:
+        name: Garages
+        terms: "<translate with synonyms or related terms for 'Garages', separated by commas>"
       landuse/grass:
         name: Grass
         terms: "<translate with synonyms or related terms for 'Grass', separated by commas>"

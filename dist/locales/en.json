@@ -2335,6 +2335,10 @@
                 "name": "Forest",
                 "terms": ""
             },
+            "landuse/garages": {
+                "name": "Garages",
+                "terms": ""
+            },
             "landuse/grass": {
                 "name": "Grass",
                 "terms": ""

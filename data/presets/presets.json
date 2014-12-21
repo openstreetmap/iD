@@ -4668,6 +4668,16 @@
         "terms": [],
         "name": "Forest"
     },
+    "landuse/garages": {
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "garages"
+        },
+        "terms": [],
+        "name": "Garages"
+    },
     "landuse/grass": {
         "geometry": [
             "point",

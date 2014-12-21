@@ -1083,6 +1083,10 @@
         },
         {
             "key": "landuse",
+            "value": "garages"
+        },
+        {
+            "key": "landuse",
             "value": "grass"
         },
         {
