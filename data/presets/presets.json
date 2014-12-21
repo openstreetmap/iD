@@ -4534,6 +4534,16 @@
         },
         "name": "Wayside Shrine"
     },
+    "junction": {
+        "geometry": [
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "junction": "yes"
+        },
+        "name": "Junction"
+    },
     "landuse": {
         "fields": [
             "landuse"

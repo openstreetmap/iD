@@ -2307,6 +2307,10 @@
                 "name": "Wayside Shrine",
                 "terms": ""
             },
+            "junction": {
+                "name": "Junction",
+                "terms": ""
+            },
             "landuse": {
                 "name": "Landuse",
                 "terms": ""
