@@ -44,7 +44,11 @@ iD.Entity.prototype = {
             var source = sources[i];
             for (var prop in source) {
                 if (Object.prototype.hasOwnProperty.call(source, prop)) {
-                    this[prop] = source[prop];
+                    if (source[prop] === undefined) {
+                        delete this[prop];
+                    } else {
+                        this[prop] = source[prop];
+                    }
                 }
             }
         }
@@ -63,6 +67,23 @@ iD.Entity.prototype = {
         }
 
         return this;
+    },
+
+    copy: function(attrs) {
+        var clone = {},
+            omit = {};
+
+        _.each(['tags', 'loc', 'nodes', 'members'], function(prop) {
+            if (this.hasOwnProperty(prop)) clone[prop] = _.cloneDeep(this[prop]);
+        }, this);
+
+        _.each(['id', 'user', 'v', 'version'], function(prop) {
+            omit[prop] = undefined;
+        });
+
+        // Returns an array so that we can support deep copying ways and relations.
+        // The first array element will contain this.copy, followed by any descendants.
+        return [ iD.Entity(this, _.extend(clone, (attrs || {}), omit)) ];
     },
 
     osmId: function() {

@@ -26,6 +26,54 @@ describe('iD.Relation', function () {
         expect(iD.Relation({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
 
+    describe("#copy", function () {
+        it("returns a new Relation", function () {
+            var r1 = iD.Relation({id: 'r1'}),
+                result = r1.copy(),
+                r2 = result[0];
+
+            expect(result).to.have.length(1);
+            expect(r2).to.be.an.instanceof(iD.Relation);
+            expect(r1).not.to.equal(r2);
+        });
+
+        it("keeps same members when deep = false", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w1 = iD.Way({id: 'w1', nodes: ['a','b','c','a']}),
+                r1 = iD.Relation({id: 'r1', members: [{id: 'w1', role: 'outer'}]}),
+                graph = iD.Graph([a, b, c, w1, r1]),
+                result = r1.copy(),
+                r2 = result[0];
+
+            expect(result).to.have.length(1);
+            expect(r1.members).not.to.equal(r2.members);
+            expect(r1.members).to.deep.equal(r2.members);
+        });
+
+        it("makes new members when deep = true", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w1 = iD.Way({id: 'w1', nodes: ['a','b','c','a']}),
+                r1 = iD.Relation({id: 'r1', members: [{id: 'w1', role: 'outer'}]}),
+                graph = iD.Graph([a, b, c, w1, r1]),
+                result = r1.copy({}, true, graph),
+                r2 = result[0];
+
+            expect(result).to.have.length(5);
+            expect(result[0]).to.be.an.instanceof(iD.Relation);
+            expect(result[1]).to.be.an.instanceof(iD.Way);
+            expect(result[2]).to.be.an.instanceof(iD.Node);
+            expect(result[3]).to.be.an.instanceof(iD.Node);
+            expect(result[4]).to.be.an.instanceof(iD.Node);
+
+            expect(r2.members[0].id).not.to.equal(r1.members[0].id);
+            expect(r2.members[0].role).to.equal(r1.members[0].role);
+        });
+    });
+
     describe("#extent", function () {
         it("returns the minimal extent containing the extents of all members", function () {
             var a = iD.Node({loc: [0, 0]}),

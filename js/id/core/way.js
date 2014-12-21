@@ -12,6 +12,31 @@ _.extend(iD.Way.prototype, {
     type: 'way',
     nodes: [],
 
+    copy: function(attrs, deep, resolver) {
+        var fn = iD.Entity.prototype.copy;
+
+        if (deep && resolver) {
+            var nodes = [],
+                descendants = [],
+                replacements = {},
+                i, oldid, newid, child;
+
+            for (i = 0; i < this.nodes.length; i++) {
+                oldid = this.nodes[i];
+                newid = replacements[oldid];
+                if (!newid) {
+                    child = resolver.entity(oldid).copy();
+                    newid = replacements[oldid] = child[0].id;
+                    descendants = child.concat(descendants);
+                }
+                nodes.push(newid);
+            }
+            return fn.call(this, _.extend(attrs, {nodes: nodes})).concat(descendants);
+        } else {
+            return fn.call(this, attrs);
+        }
+    },
+
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
             var extent = iD.geo.Extent();
