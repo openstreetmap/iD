@@ -1037,6 +1037,11 @@
             "video"
         ]
     },
+    "substation": {
+        "key": "substation",
+        "type": "typeCombo",
+        "label": "Type"
+    },
     "supervised": {
         "key": "supervised",
         "type": "check",

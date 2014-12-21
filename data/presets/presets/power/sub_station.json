@@ -1,5 +1,6 @@
 {
     "fields": [
+        "substation",
         "operator",
         "building"
     ],

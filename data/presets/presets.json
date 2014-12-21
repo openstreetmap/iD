@@ -6420,6 +6420,7 @@
     },
     "power/sub_station": {
         "fields": [
+            "substation",
             "operator",
             "building"
         ],
@@ -6435,6 +6436,7 @@
     },
     "power/substation": {
         "fields": [
+            "substation",
             "operator",
             "building"
         ],

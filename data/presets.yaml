@@ -490,6 +490,8 @@ en:
           ford: Ford
       studio_type:
         label: Type
+      substation:
+        label: Type
       supervised:
         label: Supervised
       surface:
