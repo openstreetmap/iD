@@ -2347,6 +2347,13 @@ img.wiki-image {
     border-bottom: 1px solid #CCC;
 }
 
+.error-detail-item {
+    padding-left: 10px;
+}
+.error-detail-item:before {
+    content: '- ';
+}
+
 .modal-section:last-child {
     border-bottom: 0;
 }

@@ -11,32 +11,56 @@ iD.modes.Save = function(context) {
         var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
             toCheck = _.pluck(history.changes().modified, 'id'),
+            didMerge = false,
             errors = [];
 
         context.container()
             .call(loading);
 
-        // check for version conflicts.. reload modified entities into an alternate graph.
-        context.altGraph(iD.Graph(history.base(), true));
-        _.each(toCheck, check);
+        if (toCheck.length) {
+            // Reload modified entities into an alternate graph and check for conflicts..
+            context.altGraph(iD.Graph(history.base(), true));
+            _.each(toCheck, check);
+        } else {
+            finalize();
+        }
 
         function check(id) {
             context.connection().loadEntity(id, function(err) {
+                var graph = context.graph(),
+                    local = graph.entity(id),
+                    type = iD.util.displayType(id),
+                    name = iD.util.displayName(local) || '';
+
                 toCheck = _.without(toCheck, id);
 
                 if (err) {
-                    errors.push(err.responseText);
+                    var rtext = err.status === 410 ?  // Status: Gone (no responseText)
+                            t('save.status_gone', {id: id, type: type, name: name}) :
+                            err.responseText;
+
+                    errors.push({
+                        id: id,
+                        msg: rtext,
+                        details: [ t('save.status_code', {code: err.status}) ]
+                    });
                 }
                 else {
-                    var graph = context.graph(),
-                        altGraph = context.altGraph(),
-                        local = graph.entity(id),
+                    var altGraph = context.altGraph(),
                         remote = altGraph.entity(id);
 
                     if (local.version !== remote.version) {
-                        var diff = history.perform(iD.actions.MergeRemoteChanges(id, graph, altGraph));
-                        if (!diff.length) {
-                            errors.push('Version mismatch for ' + id + ': local=' + local.version + ', remote=' + remote.version);
+                        var action = iD.actions.MergeRemoteChanges(id, graph, altGraph),
+                            diff = history.perform(action);
+
+                        if (diff.length()) {
+                            didMerge = true;
+                        } else {
+                            errors.push({
+                                id: id,
+                                msg: t('merge_remote_changes.conflict.general', {id: id, type: type, name: name}),
+                                details: action.conflicts()
+                            });
                         }
                     }
                 }
@@ -48,6 +72,10 @@ iD.modes.Save = function(context) {
         }
 
         function finalize() {
+            if (didMerge) {  // set undo checkpoint..
+                history.perform([iD.actions.Noop, t('merge_remote_changes.annotation')]);
+            }
+
             if (errors.length) {
                 showErrors();
             } else {
@@ -57,7 +85,10 @@ iD.modes.Save = function(context) {
                     history.imageryUsed(),
                     function(err, changeset_id) {
                         if (err) {
-                            errors.push(err.responseText);
+                            errors.push({
+                                msg: err.responseText,
+                                details: [ t('save.status_code', {code: err.status}) ]
+                            });
                             showErrors();
                         } else {
                             loading.close();
@@ -78,10 +109,48 @@ iD.modes.Save = function(context) {
                 .select('.modal-section.header')
                 .append('h3')
                 .text(t('save.error'));
-            confirm
-                .select('.modal-section.message-text')
-                .append('p')
-                .text(errors.join('<br/>') || t('save.unknown_error_details'));
+
+            var message = confirm
+                .select('.modal-section.message-text');
+
+            var items = message
+                .selectAll('div')
+                .data(errors);
+
+            var enter = items.enter()
+                .append('div')
+                .attr('class', 'error-container');
+
+            enter
+                .append('a')
+                .attr('class', 'error-description')
+                .attr('href', '#')
+                .classed('hide-toggle', true)
+                .text(function(d) { return d.msg || t('save.unknown_error_details'); })
+                .on('click', function() {
+                    var error = d3.select(this),
+                        details = d3.select(this.nextElementSibling),
+                        exp = error.classed('expanded');
+
+                    details.style('display', exp ? 'none' : 'block');
+                    error.classed('expanded', !exp);
+
+                    d3.event.preventDefault();
+                });
+
+            enter
+                .append('ul')
+                .attr('class', 'error-detail-list')
+                .style('display', 'none')
+                .selectAll('li')
+                .data(function(d) { return d.details; })
+                .enter()
+                .append('li')
+                .attr('class', 'error-detail-item')
+                .text(function(d) { return d;});
+
+            items.exit()
+                .remove();
         }
     }
 
