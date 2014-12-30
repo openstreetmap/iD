@@ -312,10 +312,20 @@ en:
     title: Save
     help: "Save changes to OpenStreetMap, making them visible to other users."
     no_changes: No changes to save.
-    error: An error occurred while trying to save
+    error: Errors occurred while trying to save
+    status_code: "Server returned status code {code}"
+    status_gone: '{type} "{id}" {name} has already been deleted.'
     unknown_error_details: "Please ensure you are connected to the internet."
     uploading: Uploading changes to OpenStreetMap.
     unsaved_changes: You have unsaved changes
+  merge_remote_changes:
+    annotation: Merged remote changes from server.
+    conflict:
+      general: 'Conflicting edits were made to {type} "{id}" {name}'
+      location: Location was changed both locally and remotely.
+      nodelist: Nodes were changed both locally and remotely.
+      memberlist: Relation members were changed both locally and remotely.
+      tags: 'Tag "{tag}" was changed to "{local}" locally and "{remote}" remotely.'
   success:
     edited_osm: "Edited OSM!"
     just_edited: "You just edited OpenStreetMap!"

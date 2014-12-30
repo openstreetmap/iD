@@ -2,7 +2,8 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
     var base = localGraph.base().entities[id],
         local = localGraph.entity(id),
         remote = remoteGraph.entity(id),
-        option = 'safe';  // 'safe', 'force_local', 'force_remote'
+        option = 'safe',  // 'safe', 'force_local', 'force_remote'
+        conflicts = [];
 
 
     function mergeLocation(target) {
@@ -20,6 +21,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
             return target.update({loc: remote.loc});
         }
 
+        conflicts.push(t('merge_remote_changes.conflict.location'));
         return;  // fail merge
     }
 
@@ -55,6 +57,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
                     nodes.push.apply(nodes, c.a);
                 }
                 else {       // changed both locally and remotely
+                    conflicts.push(t('merge_remote_changes.conflict.nodelist'));
                     return;  // fail merge..
                 }
             }
@@ -73,6 +76,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
             return target.update({members: remote.members});
         }
 
+        conflicts.push(t('merge_remote_changes.conflict.memberlist'));
         return;  // fail merge
     }
 
@@ -87,8 +91,9 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
         }
 
         var keys = _.reject(_.union(_.keys(base.tags), _.keys(remote.tags)), ignoreKey),
-            tags = _.cloneDeep(target.tags),
-            changed = false;
+            tags = _.clone(target.tags),
+            changed = false,
+            fail = false;
 
         function ignoreKey(k) {
             return k.indexOf('tiger:') === 0 || _.contains(iD.data.discarded, k);
@@ -98,7 +103,9 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
             var k = keys[i];
             if (remote.tags[k] !== base.tags[k]) {  // tag modified remotely..
                 if (target.tags[k] && target.tags[k] !== remote.tags[k]) {
-                    return;  // fail merge..
+                    conflicts.push(t('merge_remote_changes.conflict.tags',
+                        { tag: k, local: target.tags[k], remote: remote.tags[k] }));
+                    fail = true;
                 }
                 else {
                     tags[k] = remote.tags[k];
@@ -107,7 +114,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
             }
         }
 
-        return changed ? target.update({tags: tags}) : target;
+        return fail ? undefined : changed ? target.update({tags: tags}) : target;
     }
 
     var action = function(graph) {
@@ -135,6 +142,10 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
     action.withOption = function(opt) {
         option = opt;
         return action;
+    };
+
+    action.conflicts = function() {
+        return conflicts;
     };
 
     return action;

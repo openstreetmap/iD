@@ -53,14 +53,42 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 nodes: ['s1', 's2', 's3', 's4', 's1'],
                 version: '1',
                 tags: {foo: 'foo_new', area: 'yes'}
-            });
+            }),
+
+        saved, error;
+
+    // setup mock locale object..
+    beforeEach(function() {
+        saved = locale;
+        error = console.error;
+        console.error = function () {};
+        locale = {
+            _current: 'en',
+            en: {
+                "merge_remote_changes": {
+                    "annotation": "Merged remote changes from server.",
+                    "conflict": {
+                        "general": "Conflicting edits were made to {type} {id} {name}",
+                        "location": "Location was changed both locally and remotely.",
+                        "nodelist": "Nodes were changed both locally and remotely.",
+                        "memberlist": "Relation members were changed both locally and remotely.",
+                        "tags": "Tag \"{tag}\" was changed to \"{local}\" locally and \"{remote}\" remotely."
+                    }
+                }
+            }
+        };
+    });
+
+    afterEach(function() {
+        locale = saved;
+        console.error = error;
+    });
 
     function makeGraph(entities) {
         return _.reduce(entities, function(graph, entity) {
             return graph.replace(entity);
         }, iD.Graph(base));
     }
-
 
     describe("non-destuctive merging", function () {
         describe("nodes", function () {
@@ -270,6 +298,22 @@ describe("iD.actions.MergeRemoteChanges", function () {
 
                 expect(graph.entity('r').version).to.eql('2');
                 expect(graph.entity('r').tags).to.eql({type: 'multipolygon', foo: 'foo_local', bar: 'bar_remote'});
+            });
+        });
+
+        describe("#conflicts", function () {
+            it("returns conflict details", function () {
+                var localLoc = [1, 1],      // didn't move node
+                    remoteLoc = [3, 3],     // moved node
+                    local = iD.Node({id: 'a', loc: localLoc, version: '1', v: 2}),
+                    remote = iD.Node({id: 'a', loc: remoteLoc, version: '2'}),
+                    graph = makeGraph([local]),
+                    altGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('a', graph, altGraph);
+
+                graph = action(graph);
+
+                expect(action.conflicts()).not.to.be.empty;
             });
         });
     });
