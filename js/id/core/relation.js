@@ -20,30 +20,31 @@ _.extend(iD.Relation.prototype, {
     type: 'relation',
     members: [],
 
-    copy: function(attrs, deep, resolver) {
-        var fn = iD.Entity.prototype.copy;
+    copy: function(deep, resolver) {
+        var copy = iD.Entity.prototype.copy.call(this);
 
-        if (deep && resolver && this.isComplete(resolver)) {
-            var members = [],
-                descendants = [],
-                replacements = {},
-                i, oldmember, oldid, newid, child;
-
-            for (i = 0; i < this.members.length; i++) {
-                oldmember = this.members[i];
-                oldid = oldmember.id;
-                newid = replacements[oldid];
-                if (!newid) {
-                    child = resolver.entity(oldid).copy({}, true, resolver);
-                    newid = replacements[oldid] = child[0].id;
-                    descendants = child.concat(descendants);
-                }
-                members.push({id: newid, type: oldmember.type, role: oldmember.role});
-            }
-            return fn.call(this, _.extend(attrs, {members: members})).concat(descendants);
-        } else {
-            return fn.call(this, attrs);
+        if (!deep || !resolver || !this.isComplete(resolver)) {
+            return copy;
         }
+
+        var members = [],
+            replacements = {},
+            i, oldmember, oldid, newid, children;
+
+        for (i = 0; i < this.members.length; i++) {
+            oldmember = this.members[i];
+            oldid = oldmember.id;
+            newid = replacements[oldid];
+            if (!newid) {
+                children = resolver.entity(oldid).copy(true, resolver);
+                newid = replacements[oldid] = children[0].id;
+                copy = copy.concat(children);
+            }
+            members.push({id: newid, type: oldmember.type, role: oldmember.role});
+        }
+
+        copy[0] = copy[0].update({members: members});
+        return copy;
     },
 
     extent: function(resolver, memo) {

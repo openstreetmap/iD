@@ -47,7 +47,6 @@ describe('iD.Way', function() {
                 w2 = result[0];
 
             expect(result).to.have.length(1);
-            expect(w1.nodes).not.to.equal(w2.nodes);
             expect(w1.nodes).to.deep.equal(w2.nodes);
         });
 
@@ -57,7 +56,7 @@ describe('iD.Way', function() {
                 c = iD.Node({id: 'c'}),
                 w1 = iD.Entity({id: 'w1', nodes: ['a','b','c','a']}),
                 graph = iD.Graph([a, b, c, w1]),
-                result = w1.copy({}, true, graph),
+                result = w1.copy(true, graph),
                 w2 = result[0];
 
             expect(result).to.have.length(4);

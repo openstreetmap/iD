@@ -45,19 +45,17 @@ describe('iD.Entity', function () {
             expect(a).not.to.equal(result[0]);
         });
 
-        it("resets 'id', 'user', 'v', and 'version' properties", function () {
-            var a = iD.Entity({id: 'n1234', version: 10, v: 4, user: 'bot-mode'}),
+        it("resets 'id', 'user', and 'version' properties", function () {
+            var a = iD.Entity({id: 'n1234', version: 10, user: 'bot-mode'}),
                 b = a.copy()[0];
             expect(b.isNew()).to.be.ok;
             expect(b.version).to.be.undefined;
-            expect(b.v).to.be.undefined;
             expect(b.user).to.be.undefined;
         });
 
         it("copies tags", function () {
             var a = iD.Entity({id: 'n1234', version: 10, user: 'test', tags: {foo: 'foo'}}),
                 b = a.copy()[0];
-            expect(b.tags).not.to.equal(a.tags);
             expect(b.tags).to.deep.equal(a.tags);
         });
     });

@@ -48,7 +48,6 @@ describe('iD.Relation', function () {
                 r2 = result[0];
 
             expect(result).to.have.length(1);
-            expect(r1.members).not.to.equal(r2.members);
             expect(r1.members).to.deep.equal(r2.members);
         });
 
@@ -59,7 +58,7 @@ describe('iD.Relation', function () {
                 w1 = iD.Way({id: 'w1', nodes: ['a','b','c','a']}),
                 r1 = iD.Relation({id: 'r1', members: [{id: 'w1', role: 'outer'}]}),
                 graph = iD.Graph([a, b, c, w1, r1]),
-                result = r1.copy({}, true, graph),
+                result = r1.copy(true, graph),
                 r2 = result[0];
 
             expect(result).to.have.length(5);
