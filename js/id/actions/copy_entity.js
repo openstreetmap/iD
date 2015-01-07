@@ -1,11 +1,19 @@
 iD.actions.CopyEntity = function(entity, deep) {
-    return function(graph) {
-        var newEntities = entity.copy(deep, graph);
+    var newEntities = [];
 
-        for (var i = 0, imax = newEntities.length; i !== imax; i++) {
+    var action = function(graph) {
+        newEntities = entity.copy(deep, graph);
+
+        for (var i = 0; i < newEntities.length; i++) {
             graph = graph.replace(newEntities[i]);
         }
 
         return graph;
     };
+
+    action.newEntities = function() {
+        return newEntities;
+    };
+
+    return action;
 };

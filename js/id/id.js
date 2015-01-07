@@ -204,6 +204,14 @@ window.iD = function () {
         context.surface().call(behavior.off);
     };
 
+    /* Copy/Paste */
+    var copiedIDs = [];
+    context.copiedIDs = function(_) {
+        if (!arguments.length) return copiedIDs;
+        copiedIDs = _;
+        return context;
+    };
+
     /* Projection */
     context.projection = iD.geo.RawMercator();
 
