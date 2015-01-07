@@ -93,7 +93,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
             fail = false;
 
         function ignoreKey(k) {
-            return k.indexOf('tiger:') === 0 || _.contains(iD.data.discarded, k);
+            return _.contains(iD.data.discarded, k);
         }
 
         for (var i = 0; i < keys.length; i++) {
