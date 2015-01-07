@@ -258,15 +258,9 @@ iD.Graph.prototype = {
             arguments[i].call(graph, graph);
         }
 
-        return this.frozen ? graph.freeze() : this;
-    },
+        if (this.frozen) graph.frozen = true;
 
-    freeze: function() {
-        this.frozen = true;
-
-        // No longer freezing entities here due to in-place updates needed in rebase.
-
-        return this;
+        return graph;
     },
 
     // Obliterates any existing entities

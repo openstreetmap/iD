@@ -30,7 +30,7 @@ describe('iD.Graph', function() {
         });
 
         it("remains mutable if passed true as second argument", function () {
-            expect(iD.Graph([], true).frozen).not.to.be.true;
+            expect(iD.Graph([], true).frozen).to.be.false;
         });
     });
 
@@ -55,12 +55,6 @@ describe('iD.Graph', function() {
 
         it("throws when the entity is not present", function () {
             expect(function() { iD.Graph().entity('1'); }).to.throw;
-        });
-    });
-
-    describe("#freeze", function () {
-        it("sets the frozen flag", function () {
-            expect(iD.Graph([], true).freeze().frozen).to.be.true;
         });
     });
 
