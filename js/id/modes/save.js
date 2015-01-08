@@ -10,6 +10,7 @@ iD.modes.Save = function(context) {
     function save(e) {
         var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
+            altGraph = iD.Graph(history.base(), true),
             toCheck = _.pluck(history.changes().modified, 'id'),
             didMerge = false,
             errors = [];
@@ -19,14 +20,13 @@ iD.modes.Save = function(context) {
 
         if (toCheck.length) {
             // Reload modified entities into an alternate graph and check for conflicts..
-            context.altGraph(iD.Graph(history.base(), true));
             _.each(toCheck, check);
         } else {
             finalize();
         }
 
         function check(id) {
-            context.connection().loadEntity(id, function(err) {
+            context.connection().loadEntity(id, function(err, result) {
                 var graph = context.graph(),
                     local = graph.entity(id),
                     type = iD.util.displayType(id),
@@ -44,11 +44,11 @@ iD.modes.Save = function(context) {
                         msg: rtext,
                         details: [ t('save.status_code', {code: err.status}) ]
                     });
-                }
-                else {
-                    var altGraph = context.altGraph(),
-                        remote = altGraph.entity(id);
 
+                } else {
+                    _.each(result.data, function(entity) { altGraph.replace(entity); });
+
+                    var remote = altGraph.entity(id);
                     if (local.version !== remote.version) {
                         var action = iD.actions.MergeRemoteChanges(id, graph, altGraph),
                             diff = history.perform(action);
@@ -101,8 +101,6 @@ iD.modes.Save = function(context) {
 
         function showErrors() {
             var confirm = iD.ui.confirm(context.container());
-
-            context.altGraph(undefined);
             loading.close();
 
             confirm

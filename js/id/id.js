@@ -47,22 +47,11 @@ window.iD = function () {
         ui = iD.ui(context),
         connection = iD.Connection(),
         locale = iD.detect().locale,
-        localePath,
-        altGraph;
+        localePath;
 
     if (locale && iD.data.locales.indexOf(locale) === -1) {
         locale = locale.split('-')[0];
     }
-
-    connection.on('load.context', function loadContext(err, result) {
-        if (!err) {
-            if (altGraph) {
-                _.each(result.data, function(entity) { altGraph.replace(entity); });
-            } else {
-                history.merge(result.data, result.extent);
-            }
-        }
-    });
 
     context.preauth = function(options) {
         connection.switch(options);
@@ -93,17 +82,55 @@ window.iD = function () {
     context.connection = function() { return connection; };
     context.history = function() { return history; };
 
+    /* Connection */
+    function entitiesLoaded(err, result) {
+        if (!err) history.merge(result.data, result.extent);
+    }
+
+    context.loadTiles = function(projection, dimensions, callback) {
+        function done(err, result) {
+            entitiesLoaded(err, result);
+            if (callback) callback(err, result);
+        }
+        connection.loadTiles(projection, dimensions, done);
+    };
+
+    context.loadEntity = function(id, callback) {
+        function done(err, result) {
+            entitiesLoaded(err, result);
+            if (callback) callback(err, result);
+        }
+        connection.loadEntity(id, done);
+    };
+
+    context.zoomToEntity = function(id, zoomTo) {
+        if (zoomTo !== false) {
+            this.loadEntity(id, function(err, result) {
+                if (err) return;
+                var entity = _.find(result.data, function(e) { return e.id === id; });
+                if (entity) { map.zoomTo(entity); }
+            });
+        }
+
+        map.on('drawn.zoomToEntity', function() {
+            if (!context.hasEntity(id)) return;
+            map.on('drawn.zoomToEntity', null);
+            context.on('enter.zoomToEntity', null);
+            context.enter(iD.modes.Select(context, [id]));
+        });
+
+        context.on('enter.zoomToEntity', function() {
+            if (mode.id !== 'browse') {
+                map.on('drawn.zoomToEntity', null);
+                context.on('enter.zoomToEntity', null);
+            }
+        });
+    };
+
     /* History */
     context.graph = history.graph;
     context.changes = history.changes;
     context.intersects = history.intersects;
-
-    context.altGraph = function(_) {
-        if (!arguments.length) return altGraph;
-        altGraph = _;
-        return context;
-    };
-
 
     var inIntro = false;
 
@@ -120,7 +147,6 @@ window.iD = function () {
     };
 
     context.flush = function() {
-        altGraph = undefined;
         connection.flush();
         features.reset();
         history.reset();
@@ -184,31 +210,6 @@ window.iD = function () {
             return [];
         }
     };
-
-    context.loadEntity = function(id, zoomTo) {
-        if (zoomTo !== false) {
-            connection.loadEntity(id, function(error, entity) {
-                if (entity) {
-                    map.zoomTo(entity);
-                }
-            });
-        }
-
-        map.on('drawn.loadEntity', function() {
-            if (!context.hasEntity(id)) return;
-            map.on('drawn.loadEntity', null);
-            context.on('enter.loadEntity', null);
-            context.enter(iD.modes.Select(context, [id]));
-        });
-
-        context.on('enter.loadEntity', function() {
-            if (mode.id !== 'browse') {
-                map.on('drawn.loadEntity', null);
-                context.on('enter.loadEntity', null);
-            }
-        });
-    };
-
 
     /* Behaviors */
     context.install = function(behavior) {

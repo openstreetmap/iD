@@ -211,7 +211,7 @@ iD.Map = function(context) {
         }
 
         if (map.editable()) {
-            context.connection().loadTiles(projection, dimensions);
+            context.loadTiles(projection, dimensions);
             drawVector(difference, extent);
         } else {
             editOff();
