@@ -13,6 +13,7 @@ iD.modes.Save = function(context) {
             altGraph = iD.Graph(history.base(), true),
             toCheck = _.pluck(history.changes().modified, 'id'),
             didMerge = false,
+            conflicts = [],
             errors = [];
 
         context.container()
@@ -35,15 +36,19 @@ iD.modes.Save = function(context) {
                 toCheck = _.without(toCheck, id);
 
                 if (err) {
-                    var rtext = err.status === 410 ?  // Status: Gone (no responseText)
-                            t('save.status_gone', {id: id, type: type, name: name}) :
-                            err.responseText;
-
-                    errors.push({
-                        id: id,
-                        msg: rtext,
-                        details: [ t('save.status_code', {code: err.status}) ]
-                    });
+                    if (err.status === 410) {   // Status: Gone (contains no responseText)
+                        conflicts.push({
+                            id: id,
+                            msg: t('save.status_gone', {id: id, type: type, name: name}),
+                            details: [ t('save.status_code', {code: err.status}) ]
+                        });
+                    } else {
+                        errors.push({
+                            id: id,
+                            msg: err.responseText,
+                            details: [ t('save.status_code', {code: err.status}) ]
+                        });
+                    }
 
                 } else {
                     _.each(result.data, function(entity) { altGraph.replace(entity); });
@@ -56,7 +61,7 @@ iD.modes.Save = function(context) {
                         if (diff.length()) {
                             didMerge = true;
                         } else {
-                            errors.push({
+                            conflicts.push({
                                 id: id,
                                 msg: t('merge_remote_changes.conflict.general', {id: id, type: type, name: name}),
                                 details: action.conflicts()
@@ -76,7 +81,9 @@ iD.modes.Save = function(context) {
                 history.perform([iD.actions.Noop, t('merge_remote_changes.annotation')]);
             }
 
-            if (errors.length) {
+            if (conflicts.length) {
+                showConflicts();
+            } else if (errors.length) {
                 showErrors();
             } else {
                 context.connection().putChangeset(
@@ -99,6 +106,29 @@ iD.modes.Save = function(context) {
             }
         }
 
+        function showConflicts() {
+            var confirm = iD.ui.confirm(context.container());
+            loading.close();
+
+            confirm
+                .select('.modal-section.header')
+                .append('h3')
+                .text('Conflicts!');
+                // .text(t('save.error'));
+
+            addItems(confirm, conflicts);
+
+            confirm
+                .select('.modal-section.buttons')
+                .append('button')
+                .attr('class', 'col2 action')
+                .on('click.confirm', function() {
+                    confirm.remove();
+                })
+                .text('NOT Ok');
+                // .text(t('confirm.okay'));
+        }
+
         function showErrors() {
             var confirm = iD.ui.confirm(context.container());
             loading.close();
@@ -108,12 +138,17 @@ iD.modes.Save = function(context) {
                 .append('h3')
                 .text(t('save.error'));
 
+            addItems(confirm, errors);
+            confirm.okButton();
+        }
+
+        function addItems(confirm, data) {
             var message = confirm
                 .select('.modal-section.message-text');
 
             var items = message
                 .selectAll('div')
-                .data(errors);
+                .data(data);
 
             var enter = items.enter()
                 .append('div')
