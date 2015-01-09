@@ -15,12 +15,17 @@ iD.ui.confirm = function(selection) {
     var buttonwrap = section.append('div')
         .attr('class', 'modal-section buttons cf');
 
-    buttonwrap.append('button')
-        .attr('class', 'col2 action')
-        .on('click.confirm', function() {
-            modal.remove();
-        })
-        .text(t('confirm.okay'));
+    modal.okButton = function() {
+        buttonwrap
+            .append('button')
+            .attr('class', 'col2 action')
+            .on('click.confirm', function() {
+                modal.remove();
+            })
+            .text(t('confirm.okay'));
+
+        return modal;
+    };
 
     return modal;
 };
