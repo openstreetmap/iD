@@ -12,13 +12,13 @@ iD.ui.confirm = function(selection) {
     section.append('div')
         .attr('class', 'modal-section message-text');
 
-    var buttonwrap = section.append('div')
+    var buttons = section.append('div')
         .attr('class', 'modal-section buttons cf');
 
     modal.okButton = function() {
-        buttonwrap
+        buttons
             .append('button')
-            .attr('class', 'col2 action')
+            .attr('class', 'action col2')
             .on('click.confirm', function() {
                 modal.remove();
             })

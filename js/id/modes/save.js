@@ -108,25 +108,49 @@ iD.modes.Save = function(context) {
 
         function showConflicts() {
             var confirm = iD.ui.confirm(context.container());
+
             loading.close();
 
             confirm
                 .select('.modal-section.header')
                 .append('h3')
-                .text('Conflicts!');
-                // .text(t('save.error'));
+                .text(t('save.conflicts.header'));
+
+            confirm
+                .select('.modal-section.message-text')
+                .append('div')
+                .attr('class', 'conflicts-help')
+                .text(t('save.conflicts.help'));
 
             addItems(confirm, conflicts);
 
-            confirm
-                .select('.modal-section.buttons')
+
+            var buttons = confirm
+                .select('.modal-section.buttons');
+
+            buttons
                 .append('button')
-                .attr('class', 'col2 action')
-                .on('click.confirm', function() {
+                .attr('class', 'action col3')
+                .on('click.try_again', function() {
                     confirm.remove();
                 })
-                .text('NOT Ok');
-                // .text(t('confirm.okay'));
+                .text(t('save.conflicts.try_again'));
+
+            buttons
+                .append('button')
+                .attr('class', 'action col3')
+                .on('click.cancel', function() {
+                    confirm.remove();
+                })
+                .text(t('confirm.cancel'));
+
+            buttons
+                .append('button')
+                .attr('class', 'action col3')
+                .on('click.download', function() {
+                    confirm.remove();
+                })
+                .text(t('save.conflicts.download_changes'));
         }
 
         function showErrors() {
@@ -136,7 +160,7 @@ iD.modes.Save = function(context) {
             confirm
                 .select('.modal-section.header')
                 .append('h3')
-                .text(t('save.error'));
+                .text(t('save.errors'));
 
             addItems(confirm, errors);
             confirm.okButton();
@@ -147,7 +171,7 @@ iD.modes.Save = function(context) {
                 .select('.modal-section.message-text');
 
             var items = message
-                .selectAll('div')
+                .selectAll('.error-container')
                 .data(data);
 
             var enter = items.enter()
