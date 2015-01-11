@@ -133,6 +133,7 @@ iD.modes.Save = function(context) {
                 .attr('class', 'action col3')
                 .on('click.try_again', function() {
                     confirm.remove();
+                    save(e);
                 })
                 .text(t('save.conflicts.try_again'));
 
@@ -148,6 +149,12 @@ iD.modes.Save = function(context) {
                 .append('button')
                 .attr('class', 'action col3')
                 .on('click.download', function() {
+                    var diff = iD.actions.DiscardTags(history.difference()),
+                        changes = history.changes(diff),
+                        data = JXON.stringify(context.connection().osmChangeJXON('CHANGEME', changes)),
+                        win = window.open("data:text/xml," + encodeURIComponent(data), "_blank");
+
+                    win.focus();
                     confirm.remove();
                 })
                 .text(t('save.conflicts.download_changes'));
