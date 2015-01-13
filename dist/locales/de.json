@@ -1088,7 +1088,7 @@
             "toilets/disposal": {
                 "label": "Toiletten-Bauart",
                 "options": {
-                    "flush": "flach",
+                    "flush": "Spülung",
                     "pitlatrine": "Grube/Latrine",
                     "chemical": "Chemisch",
                     "bucket": "Eimer"

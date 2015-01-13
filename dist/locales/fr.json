@@ -1087,7 +1087,7 @@
             "toilets/disposal": {
                 "label": "Élimination",
                 "options": {
-                    "flush": "Toilettes publiques",
+                    "flush": "Chasse d'eau / liquide",
                     "pitlatrine": "Latrines",
                     "chemical": "Chimique",
                     "bucket": "Seau"
