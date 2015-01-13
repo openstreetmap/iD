@@ -1,7 +1,17 @@
 iD.modes.Save = function(context) {
-    var ui = iD.ui.Commit(context)
-        .on('cancel', cancel)
-        .on('save', save);
+    var undeletions = [],
+        ui = iD.ui.Commit(context)
+            .on('cancel', cancel)
+            .on('save', save);
+
+    function undelete(id) {
+        return function(graph) {
+            var entity = context.entity(id),
+                target = iD.Entity(entity, { version: +entity.version + 1 });
+            undeletions.push(id);
+            return graph.replace(target);
+        };
+    }
 
     function choice(text, actions) {
         return {
@@ -18,7 +28,8 @@ iD.modes.Save = function(context) {
         var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
             altGraph = iD.Graph(history.base(), true),
-            toCheck = _.pluck(history.changes().modified, 'id'),
+            modified = _.pluck(history.changes().modified, 'id'),
+            toCheck = _.clone(modified),
             didMerge = false,
             conflicts = [],
             errors = [],
@@ -39,23 +50,29 @@ iD.modes.Save = function(context) {
                 var graph = context.graph(),
                     local = graph.entity(id),
                     type = iD.util.displayType(id),
-                    name = iD.util.displayName(local) || '';
+                    name = iD.util.displayName(local) || (type + ' ' + id);
 
                 toCheck = _.without(toCheck, id);
 
                 if (err) {
                     if (err.status === 410) {   // Status: Gone (contains no responseText)
-                        conflicts.push({
-                            id: id,
-                            msg: t('save.status_gone', { id: id, type: type, name: name }),
-                            details: [ t('save.status_code', { code: err.status }) ],
-                            choices: [
-                                choice(t('save.conflict.restore'),
-                                    [ iD.actions.Noop() /*FIXME*/, t('save.conflict.annotation.restore', {id: id}) ]),
-                                choice(t('save.conflict.delete'),
-                                    [ iD.actions.DeleteMultiple([id]), t('save.conflict.annotation.delete', {id: id}) ])
-                            ]
-                        });
+                        if (undeletions.indexOf(id) === -1) {  // skip if we have already undeleted it..
+                            if (local.type === 'node') {
+                                checkParents(local);
+                            }
+
+                            conflicts.push({
+                                id: id,
+                                msg: t('save.status_gone', { name: name }),
+                                details: [ t('save.status_code', { code: err.status }) ],
+                                choices: [
+                                    choice(t('save.conflict.restore'),
+                                        [ undelete(id), t('save.conflict.annotation.restore', {id: id}) ]),
+                                    choice(t('save.conflict.delete'),
+                                        [ iD.actions.DeleteMultiple([id]), t('save.conflict.annotation.delete', {id: id}) ])
+                                ]
+                            });
+                        }
                     } else {
                         errors.push({
                             id: id,
@@ -82,7 +99,7 @@ iD.modes.Save = function(context) {
 
                             conflicts.push({
                                 id: id,
-                                msg: t('save.conflict.message', { id: id, type: type, name: name }),
+                                msg: t('save.conflict.message', { name: name }),
                                 details: details,
                                 choices: [
                                     choice(t('save.conflict.keep_local'),
@@ -99,6 +116,18 @@ iD.modes.Save = function(context) {
                     finalize();
                 }
             });
+        }
+
+        function checkParents(entity) {
+            var ids = _.pluck(context.graph().parentWays(entity), 'id');
+
+            for (var i = 0; i < ids.length; i++) {
+                if (modified.indexOf(ids[i]) === -1) {
+                    modified.push(ids[i]);
+                    toCheck.push(ids[i]);
+                    check(ids[i]);
+                }
+            }
         }
 
         function finalize() {

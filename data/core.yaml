@@ -314,23 +314,23 @@ en:
     no_changes: No changes to save.
     error: Errors occurred while trying to save
     status_code: "Server returned status code {code}"
-    status_gone: '{type} "{id}" {name} has already been deleted.'
+    status_gone: '{name} has already been deleted.'
     unknown_error_details: "Please ensure you are connected to the internet."
     uploading: Uploading changes to OpenStreetMap.
     unsaved_changes: You have unsaved changes
     conflict:
       header: Conflicting edits detected
-      message: 'Conflicting edits were made to {type} "{id}" {name}'
+      message: 'Conflicting edits were made to {name}'
       keep_local: Keep Mine
       keep_remote: Keep Theirs
       restore: Restore
       delete: Leave Deleted
       annotation:
         safe: Merged remote changes from server.
-        keep_local: 'Kept local version of "{id}".'
-        keep_remote: 'Kept remote version of "{id}".'
-        restore: 'Restored local version of "{id}".'
-        delete: 'Deleted local version of "{id}".'
+        keep_local: 'Kept local version of {id}.'
+        keep_remote: 'Kept remote version of {id}.'
+        restore: 'Restored local version of {id}.'
+        delete: 'Deleted local version of {id}.'
       try_again: Try Again
       download_changes: Download Changes
       help: |
