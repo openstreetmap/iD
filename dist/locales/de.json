@@ -1651,8 +1651,8 @@
                 "terms": "Gebäude im Bau"
             },
             "building/detached": {
-                "name": "Doppelhaus",
-                "terms": "Haushälfte, Doppelhaus"
+                "name": "freistehendes Haus",
+                "terms": "freistehendes Haus"
             },
             "building/dormitory": {
                 "name": "Schlafsaal",
