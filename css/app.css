@@ -2375,8 +2375,23 @@ img.wiki-image {
 .error-detail-item {
     padding-left: 10px;
 }
+
 .error-detail-item:before {
     content: '- ';
+}
+
+.error-detail-container .error-choices {
+    padding: 5px;
+}
+
+.error-detail-container .error-choices .error-choice.action {
+    display: inline-block;
+    margin: 0 5px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+    font-weight: normal;
+    height: 30px;
 }
 
 .modal-section:last-child {

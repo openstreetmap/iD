@@ -243,12 +243,12 @@ iD.modes.Save = function(context) {
 
             details
                 .append('div')
-                .attr('class', 'error-choices')
-                .selectAll('a')
+                .attr('class', 'error-choices cf')
+                .selectAll('button')
                 .data(function(d) { return d.choices || []; })
                 .enter()
-                .append('a')
-                .attr('class', 'error-choice')
+                .append('button')
+                .attr('class', 'error-choice action col2')
                 .text(function(d) { return d.text; })
                 .on('click', function(d) {
                     d.action();
