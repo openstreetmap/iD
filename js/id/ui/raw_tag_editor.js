@@ -192,6 +192,7 @@ iD.ui.RawTagEditor = function(context) {
             var tag = {};
             tag[d.key] = undefined;
             event.change(tag);
+            d3.select(this.parentNode).remove();
         }
 
         function addTag() {
