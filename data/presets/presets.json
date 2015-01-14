@@ -1364,6 +1364,27 @@
         ],
         "name": "Pub"
     },
+    "amenity/public_bookcase": {
+        "icon": "library",
+        "fields": [
+            "name",
+            "operator",
+            "capacity",
+            "website"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "library",
+            "bookcrossing"
+        ],
+        "tags": {
+            "amenity": "public_bookcase"
+        },
+        "name": "Public Bookcase"
+    },
     "amenity/ranger_station": {
         "fields": [
             "operator",
