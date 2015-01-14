@@ -1178,6 +1178,10 @@
         },
         {
             "key": "leisure",
+            "value": "nature_reserve"
+        },
+        {
+            "key": "leisure",
             "value": "park"
         },
         {

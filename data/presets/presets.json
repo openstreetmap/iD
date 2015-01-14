@@ -5010,6 +5010,21 @@
         },
         "name": "Marina"
     },
+    "leisure/nature_reserve": {
+        "icon": "park",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "nature_reserve"
+        },
+        "terms": [
+            "protected",
+            "wildlife"
+        ],
+        "name": "Nature Reserve"
+    },
     "leisure/park": {
         "icon": "park",
         "geometry": [

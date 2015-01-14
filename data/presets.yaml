@@ -1455,6 +1455,9 @@ en:
       leisure/marina:
         name: Marina
         terms: "<translate with synonyms or related terms for 'Marina', separated by commas>"
+      leisure/nature_reserve:
+        name: Nature Reserve
+        terms: "<translate with synonyms or related terms for 'Nature Reserve', separated by commas>"
       leisure/park:
         name: Park
         terms: "<translate with synonyms or related terms for 'Park', separated by commas>"
