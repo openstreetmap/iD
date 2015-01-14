@@ -126,6 +126,10 @@
         },
         {
             "key": "amenity",
+            "value": "bicycle_repair_station"
+        },
+        {
+            "key": "amenity",
             "value": "boat_rental"
         },
         {

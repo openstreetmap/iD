@@ -1,0 +1,12 @@
+{
+    "key": "service:bicycle:pump",
+    "type": "check",
+    "label": "Air Pump",
+    "strings": {
+        "options": {
+            "undefined": "Assumed to be No",
+            "yes": "Yes",
+            "no": "No"
+        }
+    }
+}

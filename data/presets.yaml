@@ -438,6 +438,18 @@ en:
         label: Seasonal
       service:
         label: Type
+      service/bicycle/chaintool:
+        label: Chain Tool
+        options:
+          undefined: Assumed to be No
+          "yes": "Yes"
+          "no": "No"
+      service/bicycle/pump:
+        label: Air Pump
+        options:
+          undefined: Assumed to be No
+          "yes": "Yes"
+          "no": "No"
       shelter:
         label: Shelter
       shelter_type:
@@ -648,6 +660,9 @@ en:
       amenity/bicycle_rental:
         name: Bicycle Rental
         terms: "<translate with synonyms or related terms for 'Bicycle Rental', separated by commas>"
+      amenity/bicycle_repair_station:
+        name: Bicycle Repair Station
+        terms: "<translate with synonyms or related terms for 'Bicycle Repair Station', separated by commas>"
       amenity/boat_rental:
         name: Boat Rental
         terms: "<translate with synonyms or related terms for 'Boat Rental', separated by commas>"

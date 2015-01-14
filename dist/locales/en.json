@@ -1104,6 +1104,22 @@
             "service": {
                 "label": "Type"
             },
+            "service/bicycle/chaintool": {
+                "label": "Chain Tool",
+                "options": {
+                    "undefined": "Assumed to be No",
+                    "yes": "Yes",
+                    "no": "No"
+                }
+            },
+            "service/bicycle/pump": {
+                "label": "Air Pump",
+                "options": {
+                    "undefined": "Assumed to be No",
+                    "yes": "Yes",
+                    "no": "No"
+                }
+            },
             "shelter": {
                 "label": "Shelter"
             },
@@ -1384,6 +1400,10 @@
             },
             "amenity/bicycle_rental": {
                 "name": "Bicycle Rental",
+                "terms": "bike"
+            },
+            "amenity/bicycle_repair_station": {
+                "name": "Bicycle Repair Station",
                 "terms": "bike"
             },
             "amenity/boat_rental": {
