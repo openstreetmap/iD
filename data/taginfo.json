@@ -298,6 +298,10 @@
         },
         {
             "key": "amenity",
+            "value": "public_bookcase"
+        },
+        {
+            "key": "amenity",
             "value": "ranger_station"
         },
         {

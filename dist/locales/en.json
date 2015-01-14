@@ -1558,6 +1558,10 @@
                 "name": "Pub",
                 "terms": "dive,beer,bier,booze"
             },
+            "amenity/public_bookcase": {
+                "name": "Public Bookcase",
+                "terms": "library,bookcrossing"
+            },
             "amenity/ranger_station": {
                 "name": "Ranger Station",
                 "terms": "visitor center,visitor centre,permit center,permit centre,backcountry office,warden office,warden center"
