@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "access_simple"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "amenity": "grit_bin"
+    },
+    "terms": [
+        "salt",
+        "sand"
+    ],
+    "name": "Grit Bin"
+}

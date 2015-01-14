@@ -230,6 +230,10 @@
         },
         {
             "key": "amenity",
+            "value": "grit_bin"
+        },
+        {
+            "key": "amenity",
             "value": "hospital"
         },
         {

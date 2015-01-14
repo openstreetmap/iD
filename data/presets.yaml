@@ -726,6 +726,9 @@ en:
       amenity/grave_yard:
         name: Graveyard
         terms: "<translate with synonyms or related terms for 'Graveyard', separated by commas>"
+      amenity/grit_bin:
+        name: Grit Bin
+        terms: "<translate with synonyms or related terms for 'Grit Bin', separated by commas>"
       amenity/hospital:
         name: Hospital Grounds
         terms: "<translate with synonyms or related terms for 'Hospital Grounds', separated by commas>"
