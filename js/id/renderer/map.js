@@ -326,6 +326,13 @@ iD.Map = function(context) {
             return Math.max(Math.log(projection.scale() * 2 * Math.PI) / Math.LN2 - 8, 0);
         }
 
+        if (z < minzoom) {
+            iD.ui.flash(context.container())
+                .select('.content')
+                .text(t('cannot_zoom'));
+            z = context.minEditableZoom();
+        }
+
         if (setZoom(z)) {
             dispatch.move(map);
         }

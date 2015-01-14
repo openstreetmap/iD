@@ -30,6 +30,12 @@ describe('iD.Map', function() {
             map.zoom(4);
             expect(spy).not.to.have.been.called;
         });
+
+        it('respects minzoom', function() {
+            map.minzoom(16);
+            map.zoom(15);
+            expect(map.zoom()).to.equal(16);
+        });
     });
 
     describe('#zoomIn', function() {
