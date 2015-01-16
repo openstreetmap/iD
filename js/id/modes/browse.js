@@ -7,6 +7,7 @@ iD.modes.Browse = function(context) {
     }, sidebar;
 
     var behaviors = [
+        iD.behavior.Paste(context),
         iD.behavior.Hover(context)
             .on('hover', context.ui().sidebar.hover),
         iD.behavior.Select(context),

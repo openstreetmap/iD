@@ -36,6 +36,30 @@ describe('iD.Entity', function () {
         });
     });
 
+    describe("#copy", function () {
+        it("returns a new Entity", function () {
+            var a = iD.Entity(),
+                result = a.copy();
+            expect(result).to.have.length(1);
+            expect(result[0]).to.be.an.instanceof(iD.Entity);
+            expect(a).not.to.equal(result[0]);
+        });
+
+        it("resets 'id', 'user', and 'version' properties", function () {
+            var a = iD.Entity({id: 'n1234', version: 10, user: 'bot-mode'}),
+                b = a.copy()[0];
+            expect(b.isNew()).to.be.ok;
+            expect(b.version).to.be.undefined;
+            expect(b.user).to.be.undefined;
+        });
+
+        it("copies tags", function () {
+            var a = iD.Entity({id: 'n1234', version: 10, user: 'test', tags: {foo: 'foo'}}),
+                b = a.copy()[0];
+            expect(b.tags).to.deep.equal(a.tags);
+        });
+    });
+
     describe("#update", function () {
         it("returns a new Entity", function () {
             var a = iD.Entity(),

@@ -26,6 +26,52 @@ describe('iD.Way', function() {
         expect(iD.Way({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
 
+    describe("#copy", function () {
+        it("returns a new Way", function () {
+            var w1 = iD.Way({id: 'w1'}),
+                result = w1.copy(),
+                w2 = result[0];
+
+            expect(result).to.have.length(1);
+            expect(w2).to.be.an.instanceof(iD.Way);
+            expect(w1).not.to.equal(w2);
+        });
+
+        it("keeps same nodes when deep = false", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w1 = iD.Entity({id: 'w1', nodes: ['a','b','c','a']}),
+                graph = iD.Graph([a, b, c, w1]),
+                result = w1.copy(),
+                w2 = result[0];
+
+            expect(result).to.have.length(1);
+            expect(w1.nodes).to.deep.equal(w2.nodes);
+        });
+
+        it("makes new nodes when deep = true", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w1 = iD.Entity({id: 'w1', nodes: ['a','b','c','a']}),
+                graph = iD.Graph([a, b, c, w1]),
+                result = w1.copy(true, graph),
+                w2 = result[0];
+
+            expect(result).to.have.length(4);
+            expect(result[0]).to.be.an.instanceof(iD.Way);
+            expect(result[1]).to.be.an.instanceof(iD.Node);
+            expect(result[2]).to.be.an.instanceof(iD.Node);
+            expect(result[3]).to.be.an.instanceof(iD.Node);
+
+            expect(w2.nodes[0]).not.to.equal(w1.nodes[0]);
+            expect(w2.nodes[1]).not.to.equal(w1.nodes[1]);
+            expect(w2.nodes[2]).not.to.equal(w1.nodes[2]);
+            expect(w2.nodes[3]).to.equal(w2.nodes[0]);
+        });
+    });
+
     describe("#first", function () {
         it("returns the first node", function () {
             expect(iD.Way({nodes: ['a', 'b', 'c']}).first()).to.equal('a');

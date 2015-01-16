@@ -7,6 +7,8 @@ iD.modes.Select = function(context, selectedIDs) {
     var keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [
+            iD.behavior.Copy(context),
+            iD.behavior.Paste(context),
             iD.behavior.Hover(context),
             iD.behavior.Select(context),
             iD.behavior.Lasso(context),
