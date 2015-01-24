@@ -42,7 +42,7 @@ iD.behavior.Copy = function(context) {
 
         for (i = 0; i < selected.relation.length; i++) {
             entity = selected.relation[i];
-            if (!skip[entity.id] && entity.isComplete()) {
+            if (!skip[entity.id] && entity.isComplete(graph)) {
                 canCopy.push(entity.id);
                 skip = getDescendants(entity.id, graph, skip);
             }
