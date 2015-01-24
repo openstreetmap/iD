@@ -9,8 +9,30 @@ iD.modes.Move = function(context, entityIDs) {
         annotation = entityIDs.length === 1 ?
             t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
             t('operations.move.annotation.multiple'),
+        cache,
         origin,
         nudgeInterval;
+
+    function clearCache() {
+        cache = {
+            startLoc: {},
+            lastEdge: {}
+        };
+    }
+
+    function cacheLocs(ids) {
+        _.each(ids, function(id) {
+            var entity = context.entity(id);
+
+            if (entity.type === 'node') {
+                cache.startLoc[id] = entity.loc;
+            } else if (entity.type === 'way') {
+                cacheLocs(entity.nodes);
+            } else {
+                cacheLocs(_.pluck(entity.members, 'id'));
+            }
+        });
+    }
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
@@ -26,7 +48,7 @@ iD.modes.Move = function(context, entityIDs) {
         nudgeInterval = window.setInterval(function() {
             context.pan(nudge);
             context.replace(
-                iD.actions.Move(entityIDs, [-nudge[0], -nudge[1]], context.projection),
+                iD.actions.Move(entityIDs, [-nudge[0], -nudge[1]], context.projection, cache),
                 annotation);
             var c = context.projection(origin);
             origin = context.projection.invert([c[0] - nudge[0], c[1] - nudge[1]]);
@@ -53,7 +75,7 @@ iD.modes.Move = function(context, entityIDs) {
         origin = context.map().mouseCoordinates();
 
         context.replace(
-            iD.actions.Move(entityIDs, delta, context.projection),
+            iD.actions.Move(entityIDs, delta, context.projection, cache),
             annotation);
     }
 
@@ -76,6 +98,9 @@ iD.modes.Move = function(context, entityIDs) {
     }
 
     mode.enter = function() {
+        clearCache();
+        cacheLocs(entityIDs);
+
         context.install(edit);
 
         context.perform(
