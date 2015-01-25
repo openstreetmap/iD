@@ -1,6 +1,7 @@
 {
     "fields": [
-        "tree_type",
+        "leaf_type",
+        "leaf_cycle",
         "denotation"
     ],
     "icon": "park",

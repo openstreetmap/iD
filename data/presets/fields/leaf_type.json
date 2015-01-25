@@ -1,0 +1,13 @@
+{
+    "key": "leaf_type",
+    "type": "combo",
+    "label": "Leaf Type",
+    "strings": {
+        "options": {
+            "broadleaved": "Broadleaved",
+            "needleleaved": "Needleleaved",
+            "mixed": "Mixed",
+            "leafless": "Leafless"
+        }
+    }
+}

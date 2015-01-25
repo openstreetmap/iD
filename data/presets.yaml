@@ -273,6 +273,21 @@ en:
         placeholder: "1, 2, 3..."
       layer:
         label: Layer
+      leaf_cycle:
+        label: Leaf Cycle
+        options:
+          evergreen: Evergreen
+          deciduous: Deciduous
+          semi_evergreen: Semi-Evergreen
+          semi_deciduous: Semi-Deciduous
+          mixed: Mixed
+      leaf_type:
+        label: Leaf Type
+        options:
+          broadleaved: Broadleaved
+          needleleaved: Needleleaved
+          mixed: Mixed
+          leafless: Leafless
       leisure:
         label: Type
       length:
@@ -549,8 +564,6 @@ en:
           bad: "Bad: no markers, path sometimes invisible/pathless"
           horrible: "Horrible: often pathless, some orientation skills required"
           "no": "No: pathless, excellent orientation skills required"
-      tree_type:
-        label: Type
       trees:
         label: Trees
       tunnel:
@@ -572,8 +585,6 @@ en:
         label: Width (Meters)
       wikipedia:
         label: Wikipedia
-      wood:
-        label: Type
     presets:
       address:
         name: Address

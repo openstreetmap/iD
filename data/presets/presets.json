@@ -4748,10 +4748,11 @@
         "icon": "farm"
     },
     "landuse/forest": {
-        "fields": [
-            "wood"
-        ],
         "icon": "park2",
+        "fields": [
+            "leaf_type",
+            "leaf_cycle"
+        ],
         "geometry": [
             "point",
             "area"
@@ -4759,7 +4760,9 @@
         "tags": {
             "landuse": "forest"
         },
-        "terms": [],
+        "terms": [
+            "tree"
+        ],
         "name": "Forest"
     },
     "landuse/garages": {
@@ -5761,7 +5764,8 @@
     },
     "natural/tree": {
         "fields": [
-            "tree_type",
+            "leaf_type",
+            "leaf_cycle",
             "denotation"
         ],
         "icon": "park",
@@ -5849,10 +5853,11 @@
         "name": "Wetland"
     },
     "natural/wood": {
-        "fields": [
-            "wood"
-        ],
         "icon": "park2",
+        "fields": [
+            "leaf_type",
+            "leaf_cycle"
+        ],
         "geometry": [
             "point",
             "area"
@@ -5860,7 +5865,9 @@
         "tags": {
             "natural": "wood"
         },
-        "terms": [],
+        "terms": [
+            "tree"
+        ],
         "name": "Wood"
     },
     "office": {

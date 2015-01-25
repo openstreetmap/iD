@@ -886,6 +886,25 @@
             "layer": {
                 "label": "Layer"
             },
+            "leaf_cycle": {
+                "label": "Leaf Cycle",
+                "options": {
+                    "evergreen": "Evergreen",
+                    "deciduous": "Deciduous",
+                    "semi_evergreen": "Semi-Evergreen",
+                    "semi_deciduous": "Semi-Deciduous",
+                    "mixed": "Mixed"
+                }
+            },
+            "leaf_type": {
+                "label": "Leaf Type",
+                "options": {
+                    "broadleaved": "Broadleaved",
+                    "needleleaved": "Needleleaved",
+                    "mixed": "Mixed",
+                    "leafless": "Leafless"
+                }
+            },
             "leisure": {
                 "label": "Type"
             },
@@ -1250,9 +1269,6 @@
                     "no": "No: pathless, excellent orientation skills required"
                 }
             },
-            "tree_type": {
-                "label": "Type"
-            },
             "trees": {
                 "label": "Trees"
             },
@@ -1283,9 +1299,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Type"
             }
         },
         "presets": {
@@ -2387,7 +2400,7 @@
             },
             "landuse/forest": {
                 "name": "Forest",
-                "terms": ""
+                "terms": "tree"
             },
             "landuse/garages": {
                 "name": "Garages",
@@ -2699,7 +2712,7 @@
             },
             "natural/wood": {
                 "name": "Wood",
-                "terms": ""
+                "terms": "tree"
             },
             "office": {
                 "name": "Office",

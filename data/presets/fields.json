@@ -554,6 +554,33 @@
         "type": "combo",
         "label": "Layer"
     },
+    "leaf_cycle": {
+        "key": "leaf_cycle",
+        "type": "combo",
+        "label": "Leaf Cycle",
+        "strings": {
+            "options": {
+                "evergreen": "Evergreen",
+                "deciduous": "Deciduous",
+                "semi_evergreen": "Semi-Evergreen",
+                "semi_deciduous": "Semi-Deciduous",
+                "mixed": "Mixed"
+            }
+        }
+    },
+    "leaf_type": {
+        "key": "leaf_type",
+        "type": "combo",
+        "label": "Leaf Type",
+        "strings": {
+            "options": {
+                "broadleaved": "Broadleaved",
+                "needleleaved": "Needleleaved",
+                "mixed": "Mixed",
+                "leafless": "Leafless"
+            }
+        }
+    },
     "leisure": {
         "key": "leisure",
         "type": "typeCombo",
@@ -1153,16 +1180,6 @@
             }
         }
     },
-    "tree_type": {
-        "key": "type",
-        "type": "combo",
-        "label": "Type",
-        "options": [
-            "broad_leaved",
-            "conifer",
-            "palm"
-        ]
-    },
     "trees": {
         "key": "trees",
         "type": "combo",
@@ -1224,10 +1241,5 @@
         "icon": "wikipedia",
         "universal": true,
         "label": "Wikipedia"
-    },
-    "wood": {
-        "key": "wood",
-        "type": "combo",
-        "label": "Type"
     }
 }
