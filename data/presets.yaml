@@ -120,6 +120,8 @@ en:
         label: Type
       boundary:
         label: Type
+      brand:
+        label: Brand
       building:
         label: Building
       building_area:

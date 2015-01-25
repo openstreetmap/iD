@@ -673,6 +673,9 @@
             "boundary": {
                 "label": "Type"
             },
+            "brand": {
+                "label": "Brand"
+            },
             "building": {
                 "label": "Building"
             },

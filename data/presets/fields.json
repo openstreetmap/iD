@@ -217,6 +217,11 @@
         "type": "combo",
         "label": "Type"
     },
+    "brand": {
+        "key": "brand",
+        "type": "text",
+        "label": "Brand"
+    },
     "building": {
         "key": "building",
         "type": "typeCombo",

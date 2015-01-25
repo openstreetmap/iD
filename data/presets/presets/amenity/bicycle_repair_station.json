@@ -2,6 +2,7 @@
     "icon": "bicycle",
     "fields": [
         "operator",
+        "brand",
         "opening_hours",
         "fee",
         "service/bicycle/chaintool",
