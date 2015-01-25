@@ -3169,6 +3169,10 @@
                 "name": "Hifi Store",
                 "terms": "stereo,video"
             },
+            "shop/household": {
+                "name": "Household Store",
+                "terms": "home"
+            },
             "shop/interior_decoration": {
                 "name": "Interior Decoration Store",
                 "terms": ""

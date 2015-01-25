@@ -1985,6 +1985,9 @@ en:
       shop/hifi:
         name: Hifi Store
         terms: "<translate with synonyms or related terms for 'Hifi Store', separated by commas>"
+      shop/household:
+        name: Household Store
+        terms: "<translate with synonyms or related terms for 'Household Store', separated by commas>"
       shop/interior_decoration:
         name: Interior Decoration Store
         terms: "<translate with synonyms or related terms for 'Interior Decoration Store', separated by commas>"

@@ -7892,6 +7892,26 @@
         },
         "name": "Hifi Store"
     },
+    "shop/household": {
+        "icon": "shop",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "home"
+        ],
+        "tags": {
+            "shop": "household"
+        },
+        "name": "Household Store"
+    },
     "shop/interior_decoration": {
         "icon": "shop",
         "fields": [
