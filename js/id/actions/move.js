@@ -7,9 +7,9 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
             var entity = graph.entity(id);
 
             if (entity.type === 'node') {
-                nodes.push(entity);
+                nodes.push(entity.id);
             } else if (entity.type === 'way') {
-                ways.push(entity);
+                ways.push(entity.id);
                 addIds(entity.nodes, nodes, ways, graph);
             } else {
                 addIds(_.pluck(entity.members, 'id'), nodes, ways, graph);
@@ -18,7 +18,9 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
     }
 
     // Place a vertex where the moved vertex used to be, to preserve way shape..
-    function replaceMovedVertex(nodeId, wayId, graph) {
+    function replaceMovedVertex(nodeId, wayId, graph, delta) {
+        if (!cache.startLoc[nodeId]) return graph;
+
         var way = graph.entity(wayId),
             moved = graph.entity(nodeId),
             movedIndex = way.nodes.indexOf(nodeId),
@@ -40,12 +42,24 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
         // Don't add orig vertex at endpoint..
         if (!prev || !next) return graph;
 
-        var orig = iD.Node({loc: cache.startLoc[nodeId]}),
+        var start, end;
+        if (delta) {
+            start = projection(cache.startLoc[nodeId]);
+            end = projection.invert([start[0] + delta[0], start[1] + delta[1]]);
+        } else {
+            end = cache.startLoc[nodeId];
+        }
+
+        var orig = iD.Node({loc: end}),
             angle = Math.abs(iD.geo.angle(orig, prev, projection) -
                 iD.geo.angle(orig, next, projection)) * 180 / Math.PI;
 
         // Don't add orig vertex if it would just make a straight line..
-        if (angle > 175 && angle < 185) return graph;
+        if (angle > 170 && angle < 190) return graph;
+
+        // Don't add orig vertex if points are already close (within 20m)
+        if (iD.geo.sphericalDistance(prev.loc, orig.loc) < 20 ||
+            iD.geo.sphericalDistance(orig.loc, next.loc) < 20) return graph;
 
         // moving forward or backward along way?
         var p1 = [prev.loc, orig.loc, moved.loc, next.loc].map(projection),
@@ -61,59 +75,85 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
         return graph.replace(orig).replace(way);
     }
 
+    function unZorro(nodeId, wayId1, wayId2, graph) {
+        var vertex = graph.entity(nodeId),
+            way1 = graph.entity(wayId1),
+            way2 = graph.entity(wayId2),
+            isEP1 = isEndpoint(nodeId, way1),
+            isEP2 = isEndpoint(nodeId, way2);
+
+        // don't move the vertex if it is the endpoint of both ways.
+        if (isEP1 && isEP2) return graph;
+
+        var nodes1 = _.without(graph.childNodes(way1), vertex),
+            nodes2 = _.without(graph.childNodes(way2), vertex);
+
+        if (way1.isClosed() && way1.first() === nodeId) nodes1.push(nodes1[0]);
+        if (way2.isClosed() && way2.first() === nodeId) nodes2.push(nodes2[0]);
+
+        var edge1 = !isEP1 && iD.geo.chooseEdge(nodes1, projection(vertex.loc), projection),
+            edge2 = !isEP2 && iD.geo.chooseEdge(nodes2, projection(vertex.loc), projection),
+            loc;
+
+        // snap vertex to nearest edge (or some point between them)..
+        if (!isEP1 && !isEP2) {
+            var epsilon = 1e-4, maxIter = 10;
+            for (var i = 0; i < maxIter; i++) {
+                loc = iD.geo.interp(edge1.loc, edge2.loc, 0.5);
+                edge1 = iD.geo.chooseEdge(nodes1, projection(loc), projection);
+                edge2 = iD.geo.chooseEdge(nodes2, projection(loc), projection);
+                if (Math.abs(edge1.distance - edge2.distance) < epsilon) break;
+            }
+        } else if (!isEP1) {
+            loc = edge1.loc;
+        } else {
+            loc = edge2.loc;
+        }
+
+        graph = graph.replace(vertex.move(loc));
+
+        // if zorro happened, reorder nodes..
+        if (!isEP1 && edge1.index !== way1.nodes.indexOf(nodeId)) {
+            way1 = way1.removeNode(nodeId).addNode(nodeId, edge1.index);
+            graph = graph.replace(way1);
+        }
+        if (!isEP2 && edge2.index !== way2.nodes.indexOf(nodeId)) {
+            way2 = way2.removeNode(nodeId).addNode(nodeId, edge2.index);
+            graph = graph.replace(way2);
+        }
+
+        return graph;
+    }
+
     function isEndpoint(id, way) {
-        return !way.isClosed() && way.affix(id);
+        return !way.isClosed() && !!way.affix(id);
     }
 
     function cleanupWays(movedWays, graph) {
-        _.each(movedWays, function(movedWay) {
-            var movedVertices = _.filter(graph.childNodes(movedWay),
+        _.each(movedWays, function(movedId) {
+            var movedWay = graph.entity(movedId),
+                intersections = _.filter(graph.childNodes(movedWay),
                 function(vertex) { return (graph.parentWays(vertex).length === 2); });
 
-            _.each(movedVertices, function(movedVertex) {
-                var id = movedVertex.id,
-                    loc = movedVertex.loc,
-                    firstTime = !cache.lastEdge[id],
-                    way = _.find(graph.parentWays(movedVertex),
+            _.each(intersections, function(vertex) {
+                var fixedWay = _.find(graph.parentWays(vertex),
                         function(way) { return way.id !== movedWay.id; });
 
-                if (firstTime) {
-                    graph = replaceMovedVertex(id, way.id, graph);
-                    way = graph.entity(way.id);
+                if (cache.startLoc[vertex.id]) {
+                    graph = replaceMovedVertex(vertex.id, movedWay.id, graph, delta);
+                    graph = replaceMovedVertex(vertex.id, fixedWay.id, graph, null);
+                    delete cache.startLoc[vertex.id];
                 }
 
-                // get closest edge on connected way..
-                var nodes = _.without(graph.childNodes(way), movedVertex);
-                if (way.isClosed() && way.first() === id) nodes.push(nodes[0]);
-
-                var lastEdge = cache.lastEdge[id],
-                    currEdge = iD.geo.chooseEdge(nodes, projection(loc), projection);
-
-                // zorro happened, reorder nodes..
-                if (lastEdge && lastEdge.index !== currEdge.index) {
-                    way = way.removeNode(id).addNode(id, currEdge.index);
-                    graph = graph.replace(way);
-                }
-
-                // snap movedVertex to edge of connected way..
-                if (!isEndpoint(id, way)) {
-                    graph = graph.replace(movedVertex.move(currEdge.loc));
-                }
-
-                // TODO:
-                //  extend search to a connected way beyond end of way?
-                //  don't mess up points between two intersections
-
-                cache.lastEdge[id] = currEdge;
-
+                graph = unZorro(vertex.id, movedWay.id, fixedWay.id, graph);
             });
         });
         return graph;
     }
 
     // Don't move a vertex where >2 ways meet, unless all parentWays are moving too..
-    function canMove(entity, graph) {
-        var parents = graph.parentWays(entity);
+    function canMove(nodeId, graph) {
+        var parents = graph.parentWays(graph.entity(nodeId));
         if (parents.length < 3) return true;
 
         return _.all(_.pluck(parents, 'id'), function(id) {
@@ -128,10 +168,11 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
             ways = [];
 
         addIds(moveIds, nodes, ways, graph);
-        nodes = _.filter(nodes, function(node) { return canMove(node, graph); });
+        nodes = _.filter(nodes, function(id) { return canMove(id, graph); });
 
-        _.uniq(nodes).forEach(function(node) {
-            var start = projection(node.loc),
+        _.uniq(nodes).forEach(function(id) {
+            var node = graph.entity(id),
+                start = projection(node.loc),
                 end = projection.invert([start[0] + delta[0], start[1] + delta[1]]);
             graph = graph.replace(node.move(end));
         });

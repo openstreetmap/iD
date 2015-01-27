@@ -16,7 +16,6 @@ iD.modes.Move = function(context, entityIDs) {
     function clearCache() {
         cache = {
             startLoc: {},
-            lastEdge: {}
         };
     }
 
