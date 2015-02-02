@@ -122,6 +122,49 @@ describe("iD.History", function () {
         });
     });
 
+    describe("#overwrite", function () {
+        it("returns a difference", function () {
+            history.perform(action, "annotation");
+            expect(history.overwrite(action).changes()).to.eql({});
+        });
+
+        it("updates the graph", function () {
+            history.perform(action, "annotation");
+            var node = iD.Node();
+            history.overwrite(function (graph) { return graph.replace(node); });
+            expect(history.graph().entity(node.id)).to.equal(node);
+        });
+
+        it("replaces the undo annotation", function () {
+            history.perform(action, "annotation1");
+            history.overwrite(action, "annotation2");
+            expect(history.undoAnnotation()).to.equal("annotation2");
+        });
+
+        it("does not push the redo stack", function () {
+            history.perform(action, "annotation");
+            history.overwrite(action, "annotation2");
+            expect(history.redoAnnotation()).to.be.undefined;
+        });
+
+        it("emits a change event", function () {
+            history.perform(action, "annotation");
+            history.on('change', spy);
+            var difference = history.overwrite(action, "annotation2");
+            expect(spy).to.have.been.calledWith(difference);
+        });
+
+        it("performs multiple actions", function () {
+            var action1 = sinon.stub().returns(iD.Graph()),
+                action2 = sinon.stub().returns(iD.Graph());
+            history.perform(action, "annotation");
+            history.overwrite(action1, action2, "annotation2");
+            expect(action1).to.have.been.called;
+            expect(action2).to.have.been.called;
+            expect(history.undoAnnotation()).to.equal("annotation2");
+        });
+    });
+
     describe("#undo", function () {
         it("returns a difference", function () {
             expect(history.undo().changes()).to.eql({});

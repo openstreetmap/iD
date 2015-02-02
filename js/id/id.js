@@ -126,6 +126,7 @@ window.iD = function () {
     context.perform = withDebouncedSave(history.perform);
     context.replace = withDebouncedSave(history.replace);
     context.pop = withDebouncedSave(history.pop);
+    context.overwrite = withDebouncedSave(history.overwrite);
     context.undo = withDebouncedSave(history.undo);
     context.redo = withDebouncedSave(history.redo);
 
