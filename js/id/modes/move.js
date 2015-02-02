@@ -14,31 +14,6 @@ iD.modes.Move = function(context, entityIDs) {
         delta,
         nudgeInterval;
 
-    function clearCache() {
-        cache = {
-            moving: {},
-            startLoc: {}
-        };
-    }
-
-    function cacheLocs(ids) {
-        _.each(ids, function(id) {
-            if (cache.moving[id]) return;
-            cache.moving[id] = true;
-
-            var entity = context.hasEntity(id);
-            if (!entity) return;
-
-            if (entity.type === 'node') {
-                cache.startLoc[id] = entity.loc;
-            } else if (entity.type === 'way') {
-                cacheLocs(entity.nodes);
-            } else {
-                cacheLocs(_.pluck(entity.members, 'id'));
-            }
-        });
-    }
-
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
         if (point[0] > size[0] - pad[0]) return [-10, 0];
@@ -59,8 +34,7 @@ iD.modes.Move = function(context, entityIDs) {
             delta = [delta[0] - nudge[0], delta[1] - nudge[1]];
             origin = context.projection.invert(orig);
 
-            context.pop();
-            context.perform(
+            context.overwrite(
                 iD.actions.Move(entityIDs, delta, context.projection, cache),
                 annotation);
         }, 50);
@@ -81,8 +55,7 @@ iD.modes.Move = function(context, entityIDs) {
         if (nudge) startNudge(nudge);
         else stopNudge();
 
-        context.pop();
-        context.perform(
+        context.overwrite(
             iD.actions.Move(entityIDs, delta, context.projection, cache),
             annotation);
     }
@@ -106,10 +79,9 @@ iD.modes.Move = function(context, entityIDs) {
     }
 
     mode.enter = function() {
-        clearCache();
-        cacheLocs(entityIDs);
         origin = context.map().mouseCoordinates();
         delta = [0, 0];
+        cache = {};
 
         context.install(edit);
 
