@@ -11,17 +11,23 @@ iD.modes.Move = function(context, entityIDs) {
             t('operations.move.annotation.multiple'),
         cache,
         origin,
+        delta,
         nudgeInterval;
 
     function clearCache() {
         cache = {
-            startLoc: {},
+            moving: {},
+            startLoc: {}
         };
     }
 
     function cacheLocs(ids) {
         _.each(ids, function(id) {
-            var entity = context.entity(id);
+            if (cache.moving[id]) return;
+            cache.moving[id] = true;
+
+            var entity = context.hasEntity(id);
+            if (!entity) return;
 
             if (entity.type === 'node') {
                 cache.startLoc[id] = entity.loc;
@@ -46,11 +52,17 @@ iD.modes.Move = function(context, entityIDs) {
         if (nudgeInterval) window.clearInterval(nudgeInterval);
         nudgeInterval = window.setInterval(function() {
             context.pan(nudge);
-            context.replace(
-                iD.actions.Move(entityIDs, [-nudge[0], -nudge[1]], context.projection, cache),
+
+            var orig = context.projection(origin);
+
+            orig = [orig[0] - nudge[1], orig[1] - nudge[1]];
+            delta = [delta[0] - nudge[0], delta[1] - nudge[1]];
+            origin = context.projection.invert(orig);
+
+            context.pop();
+            context.perform(
+                iD.actions.Move(entityIDs, delta, context.projection, cache),
                 annotation);
-            var c = context.projection(origin);
-            origin = context.projection.invert([c[0] - nudge[0], c[1] - nudge[1]]);
         }, 50);
     }
 
@@ -60,20 +72,17 @@ iD.modes.Move = function(context, entityIDs) {
     }
 
     function move() {
-        var p = context.mouse();
+        var mouse = context.mouse(),
+            orig = context.projection(origin);
 
-        var delta = origin ?
-            [p[0] - context.projection(origin)[0],
-                p[1] - context.projection(origin)[1]] :
-            [0, 0];
+        delta = [mouse[0] - orig[0], mouse[1] - orig[1]];
 
-        var nudge = edge(p, context.map().dimensions());
+        var nudge = edge(mouse, context.map().dimensions());
         if (nudge) startNudge(nudge);
         else stopNudge();
 
-        origin = context.map().mouseCoordinates();
-
-        context.replace(
+        context.pop();
+        context.perform(
             iD.actions.Move(entityIDs, delta, context.projection, cache),
             annotation);
     }
@@ -99,6 +108,8 @@ iD.modes.Move = function(context, entityIDs) {
     mode.enter = function() {
         clearCache();
         cacheLocs(entityIDs);
+        origin = context.map().mouseCoordinates();
+        delta = [0, 0];
 
         context.install(edit);
 
