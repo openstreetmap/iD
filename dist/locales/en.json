@@ -2396,12 +2396,12 @@
                 "terms": ""
             },
             "landuse/farm": {
-                "name": "Farm",
+                "name": "Farmland",
                 "terms": ""
             },
             "landuse/farmland": {
                 "name": "Farmland",
-                "terms": "farmland"
+                "terms": ""
             },
             "landuse/farmyard": {
                 "name": "Farmyard",

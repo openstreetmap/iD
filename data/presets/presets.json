@@ -4707,7 +4707,7 @@
             "landuse": "farm"
         },
         "terms": [],
-        "name": "Farm",
+        "name": "Farmland",
         "searchable": false
     },
     "landuse/farmland": {
@@ -4721,9 +4721,7 @@
         "tags": {
             "landuse": "farmland"
         },
-        "terms": [
-            "farmland"
-        ],
+        "terms": [],
         "name": "Farmland"
     },
     "landuse/farmyard": {
