@@ -824,6 +824,15 @@
             "gauge": {
                 "label": "Gauge"
             },
+            "gender": {
+                "label": "Gender",
+                "placeholder": "Unknown",
+                "options": {
+                    "male": "Male",
+                    "female": "Female",
+                    "unisex": "Unisex"
+                }
+            },
             "generator/method": {
                 "label": "Method"
             },
