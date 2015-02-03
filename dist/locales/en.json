@@ -2379,7 +2379,7 @@
                 "terms": ""
             },
             "landuse/commercial": {
-                "name": "Commercial",
+                "name": "Commercial Area",
                 "terms": ""
             },
             "landuse/construction": {
@@ -2391,7 +2391,7 @@
                 "terms": ""
             },
             "landuse/farmland": {
-                "name": "Farm",
+                "name": "Farmland",
                 "terms": "farmland"
             },
             "landuse/farmyard": {
@@ -2411,7 +2411,7 @@
                 "terms": ""
             },
             "landuse/industrial": {
-                "name": "Industrial",
+                "name": "Industrial Area",
                 "terms": ""
             },
             "landuse/landfill": {
@@ -2423,7 +2423,7 @@
                 "terms": ""
             },
             "landuse/military": {
-                "name": "Military",
+                "name": "Military Area",
                 "terms": ""
             },
             "landuse/orchard": {
@@ -2435,11 +2435,11 @@
                 "terms": ""
             },
             "landuse/residential": {
-                "name": "Residential",
+                "name": "Residential Area",
                 "terms": ""
             },
             "landuse/retail": {
-                "name": "Retail",
+                "name": "Retail Area",
                 "terms": ""
             },
             "landuse/vineyard": {

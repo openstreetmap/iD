@@ -5,7 +5,6 @@
         "leaf_cycle"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {

@@ -4621,7 +4621,6 @@
     },
     "landuse/allotments": {
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -4632,7 +4631,6 @@
     },
     "landuse/basin": {
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -4648,8 +4646,6 @@
             "denomination"
         ],
         "geometry": [
-            "point",
-            "vertex",
             "area"
         ],
         "tags": {
@@ -4675,14 +4671,13 @@
     "landuse/commercial": {
         "icon": "commercial",
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
             "landuse": "commercial"
         },
         "terms": [],
-        "name": "Commercial"
+        "name": "Commercial Area"
     },
     "landuse/construction": {
         "fields": [
@@ -4690,7 +4685,6 @@
             "operator"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -4700,6 +4694,7 @@
         "name": "Construction"
     },
     "landuse/farm": {
+        "icon": "farm",
         "fields": [
             "crop"
         ],
@@ -4712,15 +4707,14 @@
         },
         "terms": [],
         "name": "Farm",
-        "icon": "farm",
         "searchable": false
     },
     "landuse/farmland": {
+        "icon": "farm",
         "fields": [
             "crop"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -4729,23 +4723,21 @@
         "terms": [
             "farmland"
         ],
-        "name": "Farm",
-        "icon": "farm"
+        "name": "Farmland"
     },
     "landuse/farmyard": {
+        "icon": "farm",
         "fields": [
             "crop"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
             "landuse": "farmyard"
         },
         "terms": [],
-        "name": "Farmyard",
-        "icon": "farm"
+        "name": "Farmyard"
     },
     "landuse/forest": {
         "icon": "park2",
@@ -4754,7 +4746,6 @@
             "leaf_cycle"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -4777,7 +4768,6 @@
     },
     "landuse/grass": {
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -4789,14 +4779,13 @@
     "landuse/industrial": {
         "icon": "industrial",
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
             "landuse": "industrial"
         },
         "terms": [],
-        "name": "Industrial"
+        "name": "Industrial Area"
     },
     "landuse/landfill": {
         "geometry": [
@@ -4812,7 +4801,6 @@
     },
     "landuse/meadow": {
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -4829,26 +4817,24 @@
             "landuse": "military"
         },
         "terms": [],
-        "name": "Military"
+        "name": "Military Area"
     },
     "landuse/orchard": {
+        "icon": "park2",
         "fields": [
             "trees"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
             "landuse": "orchard"
         },
         "terms": [],
-        "name": "Orchard",
-        "icon": "park2"
+        "name": "Orchard"
     },
     "landuse/quarry": {
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -4860,29 +4846,26 @@
     "landuse/residential": {
         "icon": "building",
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
             "landuse": "residential"
         },
         "terms": [],
-        "name": "Residential"
+        "name": "Residential Area"
     },
     "landuse/retail": {
         "icon": "shop",
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
             "landuse": "retail"
         },
-        "name": "Retail"
+        "name": "Retail Area"
     },
     "landuse/vineyard": {
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {

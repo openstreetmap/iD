@@ -1,9 +1,9 @@
 {
+    "icon": "farm",
     "fields": [
         "crop"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
@@ -12,6 +12,5 @@
     "terms": [
         "farmland"
     ],
-    "name": "Farm",
-    "icon": "farm"
+    "name": "Farmland"
 }

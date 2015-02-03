@@ -1,15 +1,14 @@
 {
+    "icon": "park2",
     "fields": [
         "trees"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "landuse": "orchard"
     },
     "terms": [],
-    "name": "Orchard",
-    "icon": "park2"
+    "name": "Orchard"
 }

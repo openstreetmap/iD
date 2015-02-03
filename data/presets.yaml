@@ -1394,8 +1394,8 @@ en:
         name: Churchyard
         terms: "<translate with synonyms or related terms for 'Churchyard', separated by commas>"
       landuse/commercial:
-        name: Commercial
-        terms: "<translate with synonyms or related terms for 'Commercial', separated by commas>"
+        name: Commercial Area
+        terms: "<translate with synonyms or related terms for 'Commercial Area', separated by commas>"
       landuse/construction:
         name: Construction
         terms: "<translate with synonyms or related terms for 'Construction', separated by commas>"
@@ -1403,8 +1403,8 @@ en:
         name: Farm
         terms: "<translate with synonyms or related terms for 'Farm', separated by commas>"
       landuse/farmland:
-        name: Farm
-        terms: "<translate with synonyms or related terms for 'Farm', separated by commas>"
+        name: Farmland
+        terms: "<translate with synonyms or related terms for 'Farmland', separated by commas>"
       landuse/farmyard:
         name: Farmyard
         terms: "<translate with synonyms or related terms for 'Farmyard', separated by commas>"
@@ -1418,8 +1418,8 @@ en:
         name: Grass
         terms: "<translate with synonyms or related terms for 'Grass', separated by commas>"
       landuse/industrial:
-        name: Industrial
-        terms: "<translate with synonyms or related terms for 'Industrial', separated by commas>"
+        name: Industrial Area
+        terms: "<translate with synonyms or related terms for 'Industrial Area', separated by commas>"
       landuse/landfill:
         name: Landfill
         terms: "<translate with synonyms or related terms for 'Landfill', separated by commas>"
@@ -1427,8 +1427,8 @@ en:
         name: Meadow
         terms: "<translate with synonyms or related terms for 'Meadow', separated by commas>"
       landuse/military:
-        name: Military
-        terms: "<translate with synonyms or related terms for 'Military', separated by commas>"
+        name: Military Area
+        terms: "<translate with synonyms or related terms for 'Military Area', separated by commas>"
       landuse/orchard:
         name: Orchard
         terms: "<translate with synonyms or related terms for 'Orchard', separated by commas>"
@@ -1436,11 +1436,11 @@ en:
         name: Quarry
         terms: "<translate with synonyms or related terms for 'Quarry', separated by commas>"
       landuse/residential:
-        name: Residential
-        terms: "<translate with synonyms or related terms for 'Residential', separated by commas>"
+        name: Residential Area
+        terms: "<translate with synonyms or related terms for 'Residential Area', separated by commas>"
       landuse/retail:
-        name: Retail
-        terms: "<translate with synonyms or related terms for 'Retail', separated by commas>"
+        name: Retail Area
+        terms: "<translate with synonyms or related terms for 'Retail Area', separated by commas>"
       landuse/vineyard:
         name: Vineyard
         terms: "<translate with synonyms or related terms for 'Vineyard', separated by commas>"

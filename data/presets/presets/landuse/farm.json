@@ -1,4 +1,5 @@
 {
+    "icon": "farm",
     "fields": [
         "crop"
     ],
@@ -11,6 +12,5 @@
     },
     "terms": [],
     "name": "Farm",
-    "icon": "farm",
     "searchable": false
 }
