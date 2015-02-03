@@ -7899,7 +7899,7 @@
         },
         "name": "Hifi Store"
     },
-    "shop/household": {
+    "shop/houseware": {
         "icon": "shop",
         "fields": [
             "operator",
@@ -7912,12 +7912,13 @@
             "area"
         ],
         "terms": [
-            "home"
+            "home",
+            "household"
         ],
         "tags": {
-            "shop": "household"
+            "shop": "houseware"
         },
-        "name": "Household Store"
+        "name": "Houseware Store"
     },
     "shop/interior_decoration": {
         "icon": "shop",

@@ -3182,9 +3182,9 @@
                 "name": "Hifi Store",
                 "terms": "stereo,video"
             },
-            "shop/household": {
-                "name": "Household Store",
-                "terms": "home"
+            "shop/houseware": {
+                "name": "Houseware Store",
+                "terms": "home,household"
             },
             "shop/interior_decoration": {
                 "name": "Interior Decoration Store",
