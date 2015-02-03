@@ -2,25 +2,46 @@
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
 iD.actions.Move = function(moveIds, delta, projection, cache) {
 
-    function addIds(ids, nodes, ways, graph) {
+    function setupCache(graph) {
+        if (!cache) {
+            cache = {};
+        }
+        if (!cache.ok) {
+            cache.moving = {};
+            cache.replacedVertex = {};
+            cache.startLoc = {};
+            cache.nodes = [];
+            cache.ways = [];
+
+            cacheEntities(moveIds, graph);
+            cache.nodes = _.filter(cache.nodes, function(id) { return canMove(id, graph); });
+
+            cache.ok = true;
+        }
+    }
+
+    function cacheEntities(ids, graph) {
         _.each(ids, function(id) {
-            var entity = graph.entity(id);
+            if (cache.moving[id]) return;
+            cache.moving[id] = true;
+
+            var entity = graph.hasEntity(id);
+            if (!entity) return;
 
             if (entity.type === 'node') {
-                nodes.push(entity.id);
+                cache.nodes.push(id);
+                cache.startLoc[id] = entity.loc;
             } else if (entity.type === 'way') {
-                ways.push(entity.id);
-                addIds(entity.nodes, nodes, ways, graph);
+                cache.ways.push(id);
+                cacheEntities(entity.nodes, graph);
             } else {
-                addIds(_.pluck(entity.members, 'id'), nodes, ways, graph);
+                cacheEntities(_.pluck(entity.members, 'id'), graph);
             }
         });
     }
 
     // Place a vertex where the moved vertex used to be, to preserve way shape..
     function replaceMovedVertex(nodeId, wayId, graph, delta) {
-        if (!cache.startLoc[nodeId]) return graph;
-
         var way = graph.entity(wayId),
             moved = graph.entity(nodeId),
             movedIndex = way.nodes.indexOf(nodeId),
@@ -42,6 +63,14 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
         // Don't add orig vertex at endpoint..
         if (!prev || !next) return graph;
 
+        var key = wayId + '_' + nodeId,
+            orig = cache.replacedVertex[key];
+        if (!orig) {
+            orig = iD.Node();
+            cache.replacedVertex[key] = orig;
+            cache.startLoc[orig.id] = cache.startLoc[nodeId];
+        }
+
         var start, end;
         if (delta) {
             start = projection(cache.startLoc[nodeId]);
@@ -49,17 +78,13 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
         } else {
             end = cache.startLoc[nodeId];
         }
+        orig = orig.move(end);
 
-        var orig = iD.Node({loc: end}),
-            angle = Math.abs(iD.geo.angle(orig, prev, projection) -
+        var angle = Math.abs(iD.geo.angle(orig, prev, projection) -
                 iD.geo.angle(orig, next, projection)) * 180 / Math.PI;
 
         // Don't add orig vertex if it would just make a straight line..
         if (angle > 170 && angle < 190) return graph;
-
-        // Don't add orig vertex if points are already close (within 20m)
-        if (iD.geo.sphericalDistance(prev.loc, orig.loc) < 20 ||
-            iD.geo.sphericalDistance(orig.loc, next.loc) < 20) return graph;
 
         // moving forward or backward along way?
         var p1 = [prev.loc, orig.loc, moved.loc, next.loc].map(projection),
@@ -75,11 +100,16 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
         return graph.replace(orig).replace(way);
     }
 
-    function unZorro(nodeId, wayId1, wayId2, graph) {
+    // Reorder nodes around intersections of ways that have moved..
+    function unZorroIntersection(nodeId, graph) {
         var vertex = graph.entity(nodeId),
-            way1 = graph.entity(wayId1),
-            way2 = graph.entity(wayId2),
-            isEP1 = isEndpoint(nodeId, way1),
+            parents = graph.parentWays(vertex),
+            way1 = parents[0],
+            way2 = parents[1];
+
+        if (!way1 || !way2) return graph;
+
+        var isEP1 = isEndpoint(nodeId, way1),
             isEP2 = isEndpoint(nodeId, way2);
 
         // don't move the vertex if it is the endpoint of both ways.
@@ -125,61 +155,120 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
         return graph;
     }
 
+    // // scale the vertices between keynodes..
+    // function rescaleSegments(wayId, keyNodeIds, graph) {
+    //     function scale(p, dmin, dmax, rmin, rmax) {
+    //         var x = (dmax[0] === dmin[0]) ? p[0] :
+    //                 ((rmax[0] - rmin[0]) * (p[0] - dmin[0]) / (dmax[0] - dmin[0])) + rmin[0],
+    //             y = (dmax[1] === dmin[1]) ? p[1] :
+    //                 ((rmax[1] - rmin[1]) * (p[1] - dmin[1]) / (dmax[1] - dmin[1])) + rmin[1];
+    //         return [x, y];
+    //     }
+
+    //     function rescaleSegment(from, to, ids, graph) {
+    //         if (!ids.length) return graph;
+
+    //         var dmin = projection(cache.startLoc[from]),
+    //             dmax = projection(cache.startLoc[to]),
+    //             rmin = projection(graph.entity(from).loc),
+    //             rmax = projection(graph.entity(to).loc);
+    //         // var dmin = (cache.startLoc[from]),
+    //         //     dmax = (cache.startLoc[to]),
+    //         //     rmin = (graph.entity(from).loc),
+    //         //     rmax = (graph.entity(to).loc);
+
+    //         var j, node, p1, p2;
+
+    //         // console.log('');
+    //         for (j = 0; j < ids.length; j++) {
+    //             node = graph.entity(ids[j]);
+    //             p1 = projection(cache.startLoc[ids[j]]);
+    //             // p1 = (cache.startLoc[ids[j]]);
+    //             p2 = scale(p1, dmin, dmax, rmin, rmax);
+    //             // console.log(ids[j] + ': move from ' + iD.geo.roundCoords(p1) + ' to ' + iD.geo.roundCoords(p2));
+    //             graph = graph.replace(node.move(projection.invert(p2)));
+    //             // graph = graph.replace(node.move(p2));
+    //         }
+    //         return graph;
+    //     }
+
+    //     var way = graph.entity(wayId);
+    //     if (way.isClosed()) return graph;
+
+    //     var ids = [],
+    //         from, to;
+
+    //     for (var i = 0; i < way.nodes.length; i++) {
+    //         if (keyNodeIds.indexOf(way.nodes[i]) !== -1) {
+    //             if (!from) {
+    //                 from = way.nodes[i];
+    //             } else {
+    //                 to = way.nodes[i];
+    //                 graph = rescaleSegment(from, to, ids, graph);
+
+    //                 ids = [];
+    //                 from = to;
+    //                 to = undefined;
+    //             }
+    //         } else {
+    //             ids.push(way.nodes[i]);
+    //         }
+    //     }
+
+    //     return graph;
+    // }
+
     function isEndpoint(id, way) {
         return !way.isClosed() && !!way.affix(id);
     }
 
-    function cleanupWays(movedWays, graph) {
-        _.each(movedWays, function(movedId) {
-            var movedWay = graph.entity(movedId),
-                intersections = _.filter(graph.childNodes(movedWay),
-                function(vertex) { return (graph.parentWays(vertex).length === 2); });
+    function cleanupWay(id, graph) {
+        var movedWay = graph.entity(id),
+            movedNodes = graph.childNodes(movedWay),
+            intersections = _.filter(movedNodes,
+                function(node) { return (graph.parentWays(node).length === 2); });
+            // keyNodeIds = [movedWay.first()].concat(_.pluck(intersections, 'id'), [movedWay.last()]);
 
-            _.each(intersections, function(vertex) {
-                var fixedWay = _.find(graph.parentWays(vertex),
-                        function(way) { return way.id !== movedWay.id; });
-
-                if (cache.startLoc[vertex.id]) {
-                    graph = replaceMovedVertex(vertex.id, movedWay.id, graph, delta);
-                    graph = replaceMovedVertex(vertex.id, fixedWay.id, graph, null);
-                    delete cache.startLoc[vertex.id];
-                }
-
-                graph = unZorro(vertex.id, movedWay.id, fixedWay.id, graph);
-            });
+        _.each(intersections, function(node) {
+            var unmovedWay = _.find(graph.parentWays(node), function(way) { return !cache.moving[way.id]; });
+            if (unmovedWay) {
+                graph = replaceMovedVertex(node.id, movedWay.id, graph, delta);
+                graph = replaceMovedVertex(node.id, unmovedWay.id, graph, null);
+                graph = unZorroIntersection(node.id, graph);
+            }
         });
+
+        // graph = rescaleSegments(movedWay.id, keyNodeIds, graph);
+
         return graph;
     }
 
     // Don't move a vertex where >2 ways meet, unless all parentWays are moving too..
     function canMove(nodeId, graph) {
-        var parents = graph.parentWays(graph.entity(nodeId));
+        var parents = _.pluck(graph.parentWays(graph.entity(nodeId)), 'id');
         if (parents.length < 3) return true;
 
-        return _.all(_.pluck(parents, 'id'), function(id) {
-            return _.contains(moveIds, id);
-        });
+        var parentsMoving = _.all(parents, function(id) { return cache.moving[id]; });
+        if (!parentsMoving) delete cache.moving[nodeId];
+
+        return parentsMoving;
     }
 
     var action = function(graph) {
-        if (_.isEqual(delta, [0,0])) return graph;
+        if (delta[0] === 0 && delta[1] === 0) return graph;
 
-        var nodes = [],
-            ways = [];
+        setupCache(graph);
 
-        addIds(moveIds, nodes, ways, graph);
-        nodes = _.filter(nodes, function(id) { return canMove(id, graph); });
-
-        _.uniq(nodes).forEach(function(id) {
+        _.each(cache.nodes, function(id) {
             var node = graph.entity(id),
                 start = projection(node.loc),
                 end = projection.invert([start[0] + delta[0], start[1] + delta[1]]);
             graph = graph.replace(node.move(end));
         });
 
-        if (cache) {
-            graph = cleanupWays(_.uniq(ways), graph);
-        }
+        _.each(cache.ways, function(id) {
+            graph = cleanupWay(id, graph);
+        });
 
         return graph;
     };
