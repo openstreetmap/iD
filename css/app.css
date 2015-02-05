@@ -2603,6 +2603,7 @@ img.wiki-image {
 
 .tooltip-inner {
     display: inline-block;
+    border-radius: 3px;
     max-width: 200px;
     min-width: 80px;
     padding: 10px;
@@ -2635,6 +2636,7 @@ img.wiki-image {
 }
 
 .tail div {
+    border-radius: 3px;
     padding: 10px;
     background: white;
     position: absolute;
@@ -2702,6 +2704,7 @@ img.wiki-image {
     background: #F6F6F6;
     padding: 10px;
     margin: 10px -10px -10px;
+    border-radius: 0 0 3px 3px;
 }
 
 .tooltip-inner .keyhint {
