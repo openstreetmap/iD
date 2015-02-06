@@ -109,6 +109,35 @@ describe("iD.geo.Extent", function () {
         });
     });
 
+    describe('#contains', function () {
+        it("returns true for a point inside self", function () {
+            expect(iD.geo.Extent([0, 0], [5, 5]).contains([2, 2])).to.be.true;
+        });
+
+        it("returns true for a point on the boundary of self", function () {
+            expect(iD.geo.Extent([0, 0], [5, 5]).contains([0, 0])).to.be.true;
+        });
+
+        it("returns false for a point outside self", function () {
+            expect(iD.geo.Extent([0, 0], [5, 5]).contains([6, 6])).to.be.false;
+        });
+
+        it("returns true for an extent contained by self", function () {
+            expect(iD.geo.Extent([0, 0], [5, 5]).contains([[1, 1], [2, 2]])).to.be.true;
+            expect(iD.geo.Extent([1, 1], [2, 2]).contains([[0, 0], [5, 5]])).to.be.false;
+        });
+
+        it("returns false for an extent partially contained by self", function () {
+            expect(iD.geo.Extent([0, 0], [5, 5]).contains([[1, 1], [6, 6]])).to.be.false;
+            expect(iD.geo.Extent([1, 1], [6, 6]).contains([[0, 0], [5, 5]])).to.be.false;
+        });
+
+        it("returns false for an extent not intersected by self", function () {
+            expect(iD.geo.Extent([0, 0], [5, 5]).contains([[6, 6], [7, 7]])).to.be.false;
+            expect(iD.geo.Extent([[6, 6], [7, 7]]).contains([[0, 0], [5, 5]])).to.be.false;
+        });
+    });
+
     describe('#intersects', function () {
         it("returns true for a point inside self", function () {
             expect(iD.geo.Extent([0, 0], [5, 5]).intersects([2, 2])).to.be.true;
@@ -127,7 +156,7 @@ describe("iD.geo.Extent", function () {
             expect(iD.geo.Extent([1, 1], [2, 2]).intersects([[0, 0], [5, 5]])).to.be.true;
         });
 
-        it("returns true for an extent intersected by self", function () {
+        it("returns true for an extent partially contained by self", function () {
             expect(iD.geo.Extent([0, 0], [5, 5]).intersects([[1, 1], [6, 6]])).to.be.true;
             expect(iD.geo.Extent([1, 1], [6, 6]).intersects([[0, 0], [5, 5]])).to.be.true;
         });
