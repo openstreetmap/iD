@@ -147,6 +147,19 @@ iD.geo.lineIntersection = function(a, b) {
     return null;
 };
 
+iD.geo.pathIntersections = function(path1, path2) {
+    var intersections = [];
+    for (var i = 0; i < path1.length - 1; i++) {
+        for (var j = 0; j < path2.length - 1; j++) {
+            var a = [ path1[i], path1[i+1] ],
+                b = [ path2[j], path2[j+1] ],
+                hit = iD.geo.lineIntersection(a, b);
+            if (hit) intersections.push(hit);
+        }
+    }
+    return intersections;
+};
+
 // Return whether point is contained in polygon.
 //
 // `point` should be a 2-item array of coordinates.

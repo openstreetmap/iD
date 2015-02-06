@@ -84,7 +84,11 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
                 iD.geo.angle(orig, next, projection)) * 180 / Math.PI;
 
         // Don't add orig vertex if it would just make a straight line..
-        if (angle > 170 && angle < 190) return graph;
+        if (angle > 175 && angle < 195) return graph;
+
+        // Don't add orig vertex if another point is already nearby (within 10m)
+        if (iD.geo.sphericalDistance(prev.loc, orig.loc) < 10 ||
+            iD.geo.sphericalDistance(orig.loc, next.loc) < 10) return graph;
 
         // moving forward or backward along way?
         var p1 = [prev.loc, orig.loc, moved.loc, next.loc].map(projection),
@@ -155,64 +159,58 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
         return graph;
     }
 
-    // // scale the vertices between keynodes..
-    // function rescaleSegments(wayId, keyNodeIds, graph) {
-    //     function scale(p, dmin, dmax, rmin, rmax) {
-    //         var x = (dmax[0] === dmin[0]) ? p[0] :
-    //                 ((rmax[0] - rmin[0]) * (p[0] - dmin[0]) / (dmax[0] - dmin[0])) + rmin[0],
-    //             y = (dmax[1] === dmin[1]) ? p[1] :
-    //                 ((rmax[1] - rmin[1]) * (p[1] - dmin[1]) / (dmax[1] - dmin[1])) + rmin[1];
-    //         return [x, y];
-    //     }
+    // // Adjust any vertices that have been moved beyond the endpoints..
+    // function unZorroEndpoint(nodeId, movedId, unmovedId, graph) {
 
-    //     function rescaleSegment(from, to, ids, graph) {
-    //         if (!ids.length) return graph;
-
-    //         var dmin = projection(cache.startLoc[from]),
-    //             dmax = projection(cache.startLoc[to]),
-    //             rmin = projection(graph.entity(from).loc),
-    //             rmax = projection(graph.entity(to).loc);
-    //         // var dmin = (cache.startLoc[from]),
-    //         //     dmax = (cache.startLoc[to]),
-    //         //     rmin = (graph.entity(from).loc),
-    //         //     rmax = (graph.entity(to).loc);
-
-    //         var j, node, p1, p2;
-
-    //         // console.log('');
-    //         for (j = 0; j < ids.length; j++) {
-    //             node = graph.entity(ids[j]);
-    //             p1 = projection(cache.startLoc[ids[j]]);
-    //             // p1 = (cache.startLoc[ids[j]]);
-    //             p2 = scale(p1, dmin, dmax, rmin, rmax);
-    //             // console.log(ids[j] + ': move from ' + iD.geo.roundCoords(p1) + ' to ' + iD.geo.roundCoords(p2));
-    //             graph = graph.replace(node.move(projection.invert(p2)));
-    //             // graph = graph.replace(node.move(p2));
-    //         }
-    //         return graph;
-    //     }
-
-    //     var way = graph.entity(wayId);
-    //     if (way.isClosed()) return graph;
-
-    //     var ids = [],
-    //         from, to;
-
-    //     for (var i = 0; i < way.nodes.length; i++) {
-    //         if (keyNodeIds.indexOf(way.nodes[i]) !== -1) {
-    //             if (!from) {
-    //                 from = way.nodes[i];
-    //             } else {
-    //                 to = way.nodes[i];
-    //                 graph = rescaleSegment(from, to, ids, graph);
-
-    //                 ids = [];
-    //                 from = to;
-    //                 to = undefined;
+    //     function diffMultiPoint(a1, a2) {
+    //         var result = [];
+    //         outer: for (var i = 0; i < a1.length; i++) {
+    //             for (var j = 0; j < a2.length; j++) {
+    //                 if (a1[i][0] === a2[j][0] && a1[i][1] === a2[j][1]) continue outer;
     //             }
-    //         } else {
-    //             ids.push(way.nodes[i]);
+    //             result.push(a1[i]);
     //         }
+    //         return result;
+    //     }
+
+    //     var movedWay = graph.entity(movedId),
+    //         unmovedWay = graph.entity(unmovedId),
+    //         movedNodes = graph.childNodes(movedWay),
+    //         unmovedNodes = graph.childNodes(unmovedWay);
+
+    //     if (movedNodes.length < 3) return graph;
+    //     if (movedWay.last() === nodeId) movedNodes.reverse();
+
+    //     var movedPath = _.pluck(movedNodes, 'loc').map(projection),
+    //         unmovedPath = _.pluck(unmovedNodes, 'loc').map(projection),
+    //         testPath = _.clone(movedPath),
+    //         keep = [],
+    //         remove = [],
+    //         index = 0;
+
+    //     // try removing segments from movedPath until zorros disappear..
+    //     do {
+    //         // paths intersect where there is not a vertex?
+    //         var intersections = iD.geo.pathIntersections(testPath, unmovedPath),
+    //             zorros = diffMultiPoint(intersections, testPath);
+    //         if (!zorros.length) break;
+
+    //         var node = movedNodes[++index];
+    //         (node.hasInterestingTags() ? keep : keep).push(node);
+    //         testPath.splice(1, 1);
+
+    //     } while (testPath.length > 2);
+
+    //     // either movedPath ok, or testPath left with nothing but the 2 endpoints..
+    //     if (index === 0 || testPath.length === 2) return graph;
+
+    //     if (remove.length) {
+    //         graph = iD.actions.DeleteMultiple(_.pluck(remove, 'id'))(graph);
+    //     }
+
+    //     for (var i = 0; i < keep.length; i++) {
+    //         var point = iD.geo.interp(movedPath[0], movedPath[index+1], (i + 1) / keep.length);
+    //         graph = graph.replace(keep[i].move(projection.invert(point)));
     //     }
 
     //     return graph;
@@ -225,20 +223,33 @@ iD.actions.Move = function(moveIds, delta, projection, cache) {
     function cleanupWay(id, graph) {
         var movedWay = graph.entity(id),
             movedNodes = graph.childNodes(movedWay),
-            intersections = _.filter(movedNodes,
-                function(node) { return (graph.parentWays(node).length === 2); });
-            // keyNodeIds = [movedWay.first()].concat(_.pluck(intersections, 'id'), [movedWay.last()]);
+            intersections = {};
 
-        _.each(intersections, function(node) {
-            var unmovedWay = _.find(graph.parentWays(node), function(way) { return !cache.moving[way.id]; });
-            if (unmovedWay) {
-                graph = replaceMovedVertex(node.id, movedWay.id, graph, delta);
-                graph = replaceMovedVertex(node.id, unmovedWay.id, graph, null);
-                graph = unZorroIntersection(node.id, graph);
-            }
+        // consider only intersections with 1 moved and 1 unmoved way.
+        _.each(movedNodes, function(node) {
+            var parents = graph.parentWays(node);
+            if (parents.length !== 2) return;
+
+            var unmovedWay = _.find(parents, function(way) { return !cache.moving[way.id]; });
+            if (!unmovedWay) return;
+
+            intersections[node.id] = {
+                movedWay: movedWay,
+                unmovedWay: unmovedWay
+            };
         });
 
-        // graph = rescaleSegments(movedWay.id, keyNodeIds, graph);
+        _.each(intersections, function(obj, id) {
+            graph = replaceMovedVertex(id, obj.movedWay.id, graph, delta);
+            graph = replaceMovedVertex(id, obj.unmovedWay.id, graph, null);
+            graph = unZorroIntersection(id, graph);
+        });
+
+        // _.each(intersections, function(obj, id) {
+        //     if (isEndpoint(id, obj.movedWay)) {
+        //         graph = unZorroEndpoint(id, obj.movedWay.id, obj.unmovedWay.id, graph);
+        //     }
+        // });
 
         return graph;
     }
