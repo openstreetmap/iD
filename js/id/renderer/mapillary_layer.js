@@ -102,9 +102,9 @@ iD.MapillaryLayer = function (context) {
         if (request)
             request.abort();
 
-        request = d3.json('https://mapillary-read-api.herokuapp.com/v1/s/search?min-lat=' +
-            extent[0][1] + '&max-lat=' + extent[1][1] + '&min-lon=' +
-            extent[0][0] + '&max-lon=' + extent[1][0] + '&max-results=100&geojson=true',
+        request = d3.json('https://a.mapillary.com/v2/search/s/geojson?client_id=NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzoxNjQ3MDY4ZTUxY2QzNGI2&min_lat=' +
+            extent[0][1] + '&max_lat=' + extent[1][1] + '&min_lon=' +
+            extent[0][0] + '&max_lon=' + extent[1][0] + '&max_results=100&geojson=true',
             function (error, data) {
                 if (error) return;
 
