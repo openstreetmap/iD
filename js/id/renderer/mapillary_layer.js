@@ -120,7 +120,6 @@ iD.MapillaryLayer = function (context) {
                         });
                         if (images.length >= 1000) break;
                     }
-                    console.log('images', images)
                 }
 
                 var g = svg.selectAll('g')
