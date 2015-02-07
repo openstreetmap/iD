@@ -173,7 +173,9 @@ iD.modes.Save = function(context) {
 
             header.append('button')
                 .attr('class', 'fr')
-                .on('click', cancel)
+                .on('click', function() {
+                    confirm.remove();
+                })
                 .append('span')
                 .attr('class', 'icon close');
 
@@ -244,13 +246,9 @@ iD.modes.Save = function(context) {
             var message = confirm
                 .select('.message-text');
 
-            console.log(message);
-
             var items = message
                 .selectAll('.error-container')
                 .data(data);
-
-            console.log(data);
 
             var enter = items.enter()
                 .append('div')
