@@ -44,7 +44,11 @@ iD.Entity.prototype = {
             var source = sources[i];
             for (var prop in source) {
                 if (Object.prototype.hasOwnProperty.call(source, prop)) {
-                    this[prop] = source[prop];
+                    if (source[prop] === undefined) {
+                        delete this[prop];
+                    } else {
+                        this[prop] = source[prop];
+                    }
                 }
             }
         }
@@ -63,6 +67,12 @@ iD.Entity.prototype = {
         }
 
         return this;
+    },
+
+    copy: function() {
+        // Returns an array so that we can support deep copying ways and relations.
+        // The first array element will contain this.copy, followed by any descendants.
+        return [iD.Entity(this, {id: undefined, user: undefined, version: undefined})];
     },
 
     osmId: function() {

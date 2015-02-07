@@ -1,0 +1,21 @@
+{
+    "icon": "shop",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "home",
+        "household"
+    ],
+    "tags": {
+        "shop": "houseware"
+    },
+    "name": "Houseware Store"
+}

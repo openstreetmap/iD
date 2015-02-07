@@ -2,6 +2,7 @@
     "icon": "commercial",
     "fields": [
         "address",
+        "levels",
         "smoking"
     ],
     "geometry": [

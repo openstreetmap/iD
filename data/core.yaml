@@ -231,8 +231,8 @@ en:
     feature_list: Search features
     edit: Edit feature
     check:
-      yes: Yes
-      no: No
+      "yes": "Yes"
+      "no": "No"
     none: None
     node: Node
     way: Way

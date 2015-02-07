@@ -20,6 +20,34 @@ _.extend(iD.Relation.prototype, {
     type: 'relation',
     members: [],
 
+    copy: function(deep, resolver, replacements) {
+        var copy = iD.Entity.prototype.copy.call(this);
+        if (!deep || !resolver || !this.isComplete(resolver)) {
+            return copy;
+        }
+
+        var members = [],
+            i, oldmember, oldid, newid, children;
+
+        replacements = replacements || {};
+        replacements[this.id] = copy[0].id;
+
+        for (i = 0; i < this.members.length; i++) {
+            oldmember = this.members[i];
+            oldid = oldmember.id;
+            newid = replacements[oldid];
+            if (!newid) {
+                children = resolver.entity(oldid).copy(true, resolver, replacements);
+                newid = replacements[oldid] = children[0].id;
+                copy = copy.concat(children);
+            }
+            members.push({id: newid, type: oldmember.type, role: oldmember.role});
+        }
+
+        copy[0] = copy[0].update({members: members});
+        return copy;
+    },
+
     extent: function(resolver, memo) {
         return resolver.transient(this, 'extent', function() {
             if (memo && memo[this.id]) return iD.geo.Extent();

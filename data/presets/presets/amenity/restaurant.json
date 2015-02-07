@@ -6,6 +6,8 @@
         "building_area",
         "opening_hours",
         "capacity",
+        "takeaway",
+        "delivery",
         "smoking"
     ],
     "geometry": [

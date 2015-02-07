@@ -126,6 +126,10 @@
         },
         {
             "key": "amenity",
+            "value": "bicycle_repair_station"
+        },
+        {
+            "key": "amenity",
             "value": "boat_rental"
         },
         {
@@ -230,6 +234,10 @@
         },
         {
             "key": "amenity",
+            "value": "grit_bin"
+        },
+        {
+            "key": "amenity",
             "value": "hospital"
         },
         {
@@ -298,11 +306,19 @@
         },
         {
             "key": "amenity",
+            "value": "public_bookcase"
+        },
+        {
+            "key": "amenity",
             "value": "ranger_station"
         },
         {
             "key": "amenity",
             "value": "recycling"
+        },
+        {
+            "key": "amenity",
+            "value": "register_office"
         },
         {
             "key": "amenity",
@@ -325,7 +341,7 @@
             "value": "food_bank"
         },
         {
-            "key": "social_facility_for",
+            "key": "social_facility:for",
             "value": "senior"
         },
         {
@@ -1039,6 +1055,10 @@
             "value": "wayside_shrine"
         },
         {
+            "key": "junction",
+            "value": "yes"
+        },
+        {
             "key": "landuse"
         },
         {
@@ -1080,6 +1100,10 @@
         {
             "key": "landuse",
             "value": "forest"
+        },
+        {
+            "key": "landuse",
+            "value": "garages"
         },
         {
             "key": "landuse",
@@ -1151,6 +1175,10 @@
         {
             "key": "leisure",
             "value": "marina"
+        },
+        {
+            "key": "leisure",
+            "value": "nature_reserve"
         },
         {
             "key": "leisure",
@@ -1305,6 +1333,10 @@
         {
             "key": "natural",
             "value": "beach"
+        },
+        {
+            "key": "natural",
+            "value": "cave_entrance"
         },
         {
             "key": "natural",
@@ -1827,6 +1859,10 @@
         {
             "key": "shop",
             "value": "hifi"
+        },
+        {
+            "key": "shop",
+            "value": "houseware"
         },
         {
             "key": "shop",

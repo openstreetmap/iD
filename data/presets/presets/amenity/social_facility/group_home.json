@@ -19,7 +19,7 @@
     "tags": {
         "amenity": "social_facility",
         "social_facility": "group_home",
-        "social_facility_for": "senior"
+        "social_facility:for": "senior"
     },
     "name": "Elderly Group Home"
 }

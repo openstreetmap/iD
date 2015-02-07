@@ -1,0 +1,13 @@
+{
+    "key": "takeaway",
+    "type": "combo",
+    "label": "Takeaway",
+    "placeholder": "Yes, No, Takeaway Only...",
+    "strings": {
+        "options": {
+            "yes": "Yes",
+            "no": "No",
+            "only": "Takeaway Only"
+        }
+    }
+}

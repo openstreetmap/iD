@@ -4,7 +4,8 @@
         "toilets/disposal",
         "operator",
         "building_area",
-        "access_toilets"
+        "access_toilets",
+        "gender"
     ],
     "geometry": [
         "point",

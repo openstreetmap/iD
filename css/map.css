@@ -207,6 +207,7 @@ path.stroke.tag-natural-wood,
 path.stroke.tag-natural-tree,
 path.stroke.tag-natural-grassland,
 path.stroke.tag-natural-grass,
+path.stroke.tag-leisure-nature_reserve,
 path.stroke.tag-leisure-pitch,
 path.stroke.tag-leisure-park {
     stroke: rgb(140, 208, 95);
@@ -216,6 +217,7 @@ path.fill.tag-natural-wood,
 path.fill.tag-natural-tree,
 path.fill.tag-natural-grassland,
 path.fill.tag-natural-grass,
+path.fill.tag-leisure-nature_reserve,
 path.fill.tag-leisure-pitch,
 path.fill.tag-leisure-park {
     stroke: rgba(140, 208, 95, 0.3);
@@ -226,6 +228,7 @@ path.fill.tag-leisure-park {
 .preset-icon-fill-area.tag-natural-tree,
 .preset-icon-fill-area.tag-natural-grassland,
 .preset-icon-fill-area.tag-natural-grass,
+.preset-icon-fill-area.tag-leisure-nature_reserve,
 .preset-icon-fill-area.tag-leisure-pitch,
 .preset-icon-fill-area.tag-leisure-park {
     border-color: rgb(140, 208, 95);

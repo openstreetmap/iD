@@ -120,6 +120,8 @@ en:
         label: Type
       boundary:
         label: Type
+      brand:
+        label: Brand
       building:
         label: Building
       building_area:
@@ -167,6 +169,8 @@ en:
         label: Type
       cuisine:
         label: Cuisine
+      delivery:
+        label: Delivery
       denomination:
         label: Denomination
       denotation:
@@ -225,6 +229,13 @@ en:
         label: Sells Premium Gasoline
       gauge:
         label: Gauge
+      gender:
+        label: Gender
+        placeholder: Unknown
+        options:
+          male: Male
+          female: Female
+          unisex: Unisex
       generator/method:
         label: Method
       generator/source:
@@ -269,6 +280,21 @@ en:
         placeholder: "1, 2, 3..."
       layer:
         label: Layer
+      leaf_cycle:
+        label: Leaf Cycle
+        options:
+          evergreen: Evergreen
+          deciduous: Deciduous
+          semi_evergreen: Semi-Evergreen
+          semi_deciduous: Semi-Deciduous
+          mixed: Mixed
+      leaf_type:
+        label: Leaf Type
+        options:
+          broadleaved: Broadleaved
+          needleleaved: Needleleaved
+          mixed: Mixed
+          leafless: Leafless
       leisure:
         label: Type
       length:
@@ -436,6 +462,18 @@ en:
         label: Seasonal
       service:
         label: Type
+      service/bicycle/chaintool:
+        label: Chain Tool
+        options:
+          undefined: Assumed to be No
+          "yes": "Yes"
+          "no": "No"
+      service/bicycle/pump:
+        label: Air Pump
+        options:
+          undefined: Assumed to be No
+          "yes": "Yes"
+          "no": "No"
       shelter:
         label: Shelter
       shelter_type:
@@ -488,12 +526,21 @@ en:
           ford: Ford
       studio_type:
         label: Type
+      substation:
+        label: Type
       supervised:
         label: Supervised
       surface:
         label: Surface
       tactile_paving:
         label: Tactile Paving
+      takeaway:
+        label: Takeaway
+        placeholder: "Yes, No, Takeaway Only..."
+        options:
+          "yes": "Yes"
+          "no": "No"
+          only: Takeaway Only
       toilets/disposal:
         label: Disposal
         options:
@@ -524,8 +571,6 @@ en:
           bad: "Bad: no markers, path sometimes invisible/pathless"
           horrible: "Horrible: often pathless, some orientation skills required"
           "no": "No: pathless, excellent orientation skills required"
-      tree_type:
-        label: Type
       trees:
         label: Trees
       tunnel:
@@ -547,8 +592,6 @@ en:
         label: Width (Meters)
       wikipedia:
         label: Wikipedia
-      wood:
-        label: Type
     presets:
       address:
         name: Address
@@ -637,6 +680,9 @@ en:
       amenity/bicycle_rental:
         name: Bicycle Rental
         terms: "<translate with synonyms or related terms for 'Bicycle Rental', separated by commas>"
+      amenity/bicycle_repair_station:
+        name: Bicycle Repair Station
+        terms: "<translate with synonyms or related terms for 'Bicycle Repair Station', separated by commas>"
       amenity/boat_rental:
         name: Boat Rental
         terms: "<translate with synonyms or related terms for 'Boat Rental', separated by commas>"
@@ -715,6 +761,9 @@ en:
       amenity/grave_yard:
         name: Graveyard
         terms: "<translate with synonyms or related terms for 'Graveyard', separated by commas>"
+      amenity/grit_bin:
+        name: Grit Bin
+        terms: "<translate with synonyms or related terms for 'Grit Bin', separated by commas>"
       amenity/hospital:
         name: Hospital Grounds
         terms: "<translate with synonyms or related terms for 'Hospital Grounds', separated by commas>"
@@ -766,12 +815,18 @@ en:
       amenity/pub:
         name: Pub
         terms: "<translate with synonyms or related terms for 'Pub', separated by commas>"
+      amenity/public_bookcase:
+        name: Public Bookcase
+        terms: "<translate with synonyms or related terms for 'Public Bookcase', separated by commas>"
       amenity/ranger_station:
         name: Ranger Station
         terms: "<translate with synonyms or related terms for 'Ranger Station', separated by commas>"
       amenity/recycling:
         name: Recycling
         terms: "<translate with synonyms or related terms for 'Recycling', separated by commas>"
+      amenity/register_office:
+        name: Register Office
+        terms: "<translate with synonyms or related terms for 'Register Office', separated by commas>"
       amenity/restaurant:
         name: Restaurant
         terms: "<translate with synonyms or related terms for 'Restaurant', separated by commas>"
@@ -1327,6 +1382,9 @@ en:
       historic/wayside_shrine:
         name: Wayside Shrine
         terms: "<translate with synonyms or related terms for 'Wayside Shrine', separated by commas>"
+      junction:
+        name: Junction
+        terms: "<translate with synonyms or related terms for 'Junction', separated by commas>"
       landuse:
         name: Landuse
         terms: "<translate with synonyms or related terms for 'Landuse', separated by commas>"
@@ -1343,14 +1401,14 @@ en:
         name: Churchyard
         terms: "<translate with synonyms or related terms for 'Churchyard', separated by commas>"
       landuse/commercial:
-        name: Commercial
-        terms: "<translate with synonyms or related terms for 'Commercial', separated by commas>"
+        name: Commercial Area
+        terms: "<translate with synonyms or related terms for 'Commercial Area', separated by commas>"
       landuse/construction:
         name: Construction
         terms: "<translate with synonyms or related terms for 'Construction', separated by commas>"
       landuse/farm:
-        name: Farm
-        terms: "<translate with synonyms or related terms for 'Farm', separated by commas>"
+        name: Farmland
+        terms: "<translate with synonyms or related terms for 'Farmland', separated by commas>"
       landuse/farmland:
         name: Farmland
         terms: "<translate with synonyms or related terms for 'Farmland', separated by commas>"
@@ -1360,12 +1418,15 @@ en:
       landuse/forest:
         name: Forest
         terms: "<translate with synonyms or related terms for 'Forest', separated by commas>"
+      landuse/garages:
+        name: Garages
+        terms: "<translate with synonyms or related terms for 'Garages', separated by commas>"
       landuse/grass:
         name: Grass
         terms: "<translate with synonyms or related terms for 'Grass', separated by commas>"
       landuse/industrial:
-        name: Industrial
-        terms: "<translate with synonyms or related terms for 'Industrial', separated by commas>"
+        name: Industrial Area
+        terms: "<translate with synonyms or related terms for 'Industrial Area', separated by commas>"
       landuse/landfill:
         name: Landfill
         terms: "<translate with synonyms or related terms for 'Landfill', separated by commas>"
@@ -1373,8 +1434,8 @@ en:
         name: Meadow
         terms: "<translate with synonyms or related terms for 'Meadow', separated by commas>"
       landuse/military:
-        name: Military
-        terms: "<translate with synonyms or related terms for 'Military', separated by commas>"
+        name: Military Area
+        terms: "<translate with synonyms or related terms for 'Military Area', separated by commas>"
       landuse/orchard:
         name: Orchard
         terms: "<translate with synonyms or related terms for 'Orchard', separated by commas>"
@@ -1382,11 +1443,11 @@ en:
         name: Quarry
         terms: "<translate with synonyms or related terms for 'Quarry', separated by commas>"
       landuse/residential:
-        name: Residential
-        terms: "<translate with synonyms or related terms for 'Residential', separated by commas>"
+        name: Residential Area
+        terms: "<translate with synonyms or related terms for 'Residential Area', separated by commas>"
       landuse/retail:
-        name: Retail
-        terms: "<translate with synonyms or related terms for 'Retail', separated by commas>"
+        name: Retail Area
+        terms: "<translate with synonyms or related terms for 'Retail Area', separated by commas>"
       landuse/vineyard:
         name: Vineyard
         terms: "<translate with synonyms or related terms for 'Vineyard', separated by commas>"
@@ -1414,6 +1475,9 @@ en:
       leisure/marina:
         name: Marina
         terms: "<translate with synonyms or related terms for 'Marina', separated by commas>"
+      leisure/nature_reserve:
+        name: Nature Reserve
+        terms: "<translate with synonyms or related terms for 'Nature Reserve', separated by commas>"
       leisure/park:
         name: Park
         terms: "<translate with synonyms or related terms for 'Park', separated by commas>"
@@ -1534,6 +1598,9 @@ en:
       natural/beach:
         name: Beach
         terms: "<translate with synonyms or related terms for 'Beach', separated by commas>"
+      natural/cave_entrance:
+        name: Cave Entrance
+        terms: "<translate with synonyms or related terms for 'Cave Entrance', separated by commas>"
       natural/cliff:
         name: Cliff
         terms: "<translate with synonyms or related terms for 'Cliff', separated by commas>"
@@ -1936,6 +2003,9 @@ en:
       shop/hifi:
         name: Hifi Store
         terms: "<translate with synonyms or related terms for 'Hifi Store', separated by commas>"
+      shop/houseware:
+        name: Houseware Store
+        terms: "<translate with synonyms or related terms for 'Houseware Store', separated by commas>"
       shop/interior_decoration:
         name: Interior Decoration Store
         terms: "<translate with synonyms or related terms for 'Interior Decoration Store', separated by commas>"

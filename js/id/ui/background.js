@@ -139,13 +139,6 @@ iD.ui.Background = function(context) {
             }
         }
 
-        var content = selection.append('div')
-                .attr('class', 'fillL map-overlay col3 content hide'),
-            tooltip = bootstrap.tooltip()
-                .placement('left')
-                .html(true)
-                .title(iD.ui.tooltipHtml(t('background.description'), key));
-
         function hide() { setVisible(false); }
 
         function toggle() {
@@ -182,17 +175,25 @@ iD.ui.Background = function(context) {
             }
         }
 
-        var button = selection.append('button')
+
+        var content = selection.append('div')
+                .attr('class', 'fillL map-overlay col3 content hide'),
+            tooltip = bootstrap.tooltip()
+                .placement('left')
+                .html(true)
+                .title(iD.ui.tooltipHtml(t('background.description'), key)),
+            button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
                 .call(tooltip),
-            opa = content
-                .append('div')
-                .attr('class', 'opacity-options-wrapper'),
             shown = false;
 
         button.append('span')
             .attr('class', 'icon layers light');
+
+
+        var opa = content.append('div')
+                .attr('class', 'opacity-options-wrapper');
 
         opa.append('h4')
             .text(t('background.title'));

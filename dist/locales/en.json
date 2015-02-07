@@ -702,6 +702,9 @@
             "boundary": {
                 "label": "Type"
             },
+            "brand": {
+                "label": "Brand"
+            },
             "building": {
                 "label": "Building"
             },
@@ -763,6 +766,9 @@
             },
             "cuisine": {
                 "label": "Cuisine"
+            },
+            "delivery": {
+                "label": "Delivery"
             },
             "denomination": {
                 "label": "Denomination"
@@ -847,6 +853,15 @@
             "gauge": {
                 "label": "Gauge"
             },
+            "gender": {
+                "label": "Gender",
+                "placeholder": "Unknown",
+                "options": {
+                    "male": "Male",
+                    "female": "Female",
+                    "unisex": "Unisex"
+                }
+            },
             "generator/method": {
                 "label": "Method"
             },
@@ -908,6 +923,25 @@
             },
             "layer": {
                 "label": "Layer"
+            },
+            "leaf_cycle": {
+                "label": "Leaf Cycle",
+                "options": {
+                    "evergreen": "Evergreen",
+                    "deciduous": "Deciduous",
+                    "semi_evergreen": "Semi-Evergreen",
+                    "semi_deciduous": "Semi-Deciduous",
+                    "mixed": "Mixed"
+                }
+            },
+            "leaf_type": {
+                "label": "Leaf Type",
+                "options": {
+                    "broadleaved": "Broadleaved",
+                    "needleleaved": "Needleleaved",
+                    "mixed": "Mixed",
+                    "leafless": "Leafless"
+                }
             },
             "leisure": {
                 "label": "Type"
@@ -1130,6 +1164,22 @@
             "service": {
                 "label": "Type"
             },
+            "service/bicycle/chaintool": {
+                "label": "Chain Tool",
+                "options": {
+                    "undefined": "Assumed to be No",
+                    "yes": "Yes",
+                    "no": "No"
+                }
+            },
+            "service/bicycle/pump": {
+                "label": "Air Pump",
+                "options": {
+                    "undefined": "Assumed to be No",
+                    "yes": "Yes",
+                    "no": "No"
+                }
+            },
             "shelter": {
                 "label": "Shelter"
             },
@@ -1198,6 +1248,9 @@
             "studio_type": {
                 "label": "Type"
             },
+            "substation": {
+                "label": "Type"
+            },
             "supervised": {
                 "label": "Supervised"
             },
@@ -1206,6 +1259,15 @@
             },
             "tactile_paving": {
                 "label": "Tactile Paving"
+            },
+            "takeaway": {
+                "label": "Takeaway",
+                "placeholder": "Yes, No, Takeaway Only...",
+                "options": {
+                    "yes": "Yes",
+                    "no": "No",
+                    "only": "Takeaway Only"
+                }
             },
             "toilets/disposal": {
                 "label": "Disposal",
@@ -1245,9 +1307,6 @@
                     "no": "No: pathless, excellent orientation skills required"
                 }
             },
-            "tree_type": {
-                "label": "Type"
-            },
             "trees": {
                 "label": "Trees"
             },
@@ -1278,9 +1337,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Type"
             }
         },
         "presets": {
@@ -1400,6 +1456,10 @@
                 "name": "Bicycle Rental",
                 "terms": "bike"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "Bicycle Repair Station",
+                "terms": "bike"
+            },
             "amenity/boat_rental": {
                 "name": "Boat Rental",
                 "terms": ""
@@ -1504,6 +1564,10 @@
                 "name": "Graveyard",
                 "terms": ""
             },
+            "amenity/grit_bin": {
+                "name": "Grit Bin",
+                "terms": "salt,sand"
+            },
             "amenity/hospital": {
                 "name": "Hospital Grounds",
                 "terms": "clinic,doctor,emergency room,health service,hospice,infirmary,institution,nursing home,sanatorium,sanitarium,sick,surgery,ward"
@@ -1572,6 +1636,10 @@
                 "name": "Pub",
                 "terms": "dive,beer,bier,booze"
             },
+            "amenity/public_bookcase": {
+                "name": "Public Bookcase",
+                "terms": "library,bookcrossing"
+            },
             "amenity/ranger_station": {
                 "name": "Ranger Station",
                 "terms": "visitor center,visitor centre,permit center,permit centre,backcountry office,warden office,warden center"
@@ -1579,6 +1647,10 @@
             "amenity/recycling": {
                 "name": "Recycling",
                 "terms": "can,bottle,garbage,scrap,trash"
+            },
+            "amenity/register_office": {
+                "name": "Register Office",
+                "terms": ""
             },
             "amenity/restaurant": {
                 "name": "Restaurant",
@@ -2320,6 +2392,10 @@
                 "name": "Wayside Shrine",
                 "terms": ""
             },
+            "junction": {
+                "name": "Junction",
+                "terms": ""
+            },
             "landuse": {
                 "name": "Landuse",
                 "terms": ""
@@ -2341,7 +2417,7 @@
                 "terms": ""
             },
             "landuse/commercial": {
-                "name": "Commercial",
+                "name": "Commercial Area",
                 "terms": ""
             },
             "landuse/construction": {
@@ -2349,7 +2425,7 @@
                 "terms": ""
             },
             "landuse/farm": {
-                "name": "Farm",
+                "name": "Farmland",
                 "terms": ""
             },
             "landuse/farmland": {
@@ -2362,6 +2438,10 @@
             },
             "landuse/forest": {
                 "name": "Forest",
+                "terms": "tree"
+            },
+            "landuse/garages": {
+                "name": "Garages",
                 "terms": ""
             },
             "landuse/grass": {
@@ -2369,7 +2449,7 @@
                 "terms": ""
             },
             "landuse/industrial": {
-                "name": "Industrial",
+                "name": "Industrial Area",
                 "terms": ""
             },
             "landuse/landfill": {
@@ -2381,7 +2461,7 @@
                 "terms": ""
             },
             "landuse/military": {
-                "name": "Military",
+                "name": "Military Area",
                 "terms": ""
             },
             "landuse/orchard": {
@@ -2393,11 +2473,11 @@
                 "terms": ""
             },
             "landuse/residential": {
-                "name": "Residential",
+                "name": "Residential Area",
                 "terms": ""
             },
             "landuse/retail": {
-                "name": "Retail",
+                "name": "Retail Area",
                 "terms": ""
             },
             "landuse/vineyard": {
@@ -2435,6 +2515,10 @@
             "leisure/marina": {
                 "name": "Marina",
                 "terms": "boat"
+            },
+            "leisure/nature_reserve": {
+                "name": "Nature Reserve",
+                "terms": "protected,wildlife"
             },
             "leisure/park": {
                 "name": "Park",
@@ -2596,6 +2680,10 @@
                 "name": "Beach",
                 "terms": ""
             },
+            "natural/cave_entrance": {
+                "name": "Cave Entrance",
+                "terms": ""
+            },
             "natural/cliff": {
                 "name": "Cliff",
                 "terms": ""
@@ -2662,7 +2750,7 @@
             },
             "natural/wood": {
                 "name": "Wood",
-                "terms": ""
+                "terms": "tree"
             },
             "office": {
                 "name": "Office",
@@ -3131,6 +3219,10 @@
             "shop/hifi": {
                 "name": "Hifi Store",
                 "terms": "stereo,video"
+            },
+            "shop/houseware": {
+                "name": "Houseware Store",
+                "terms": "home,household"
             },
             "shop/interior_decoration": {
                 "name": "Interior Decoration Store",
