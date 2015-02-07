@@ -161,29 +161,56 @@ iD.modes.Save = function(context) {
         }
 
         function showConflicts() {
-            confirm = iD.ui.confirm(context.container());
+            confirm = context.container()
+                .select('#sidebar')
+                .append('div')
+                    .attr('class','sidebar-component');
+
             loading.close();
 
-            confirm
-                .select('.modal-section.header')
-                .append('h3')
+            var header = confirm.append('div')
+                .attr('class', 'header fillL');
+
+            header.append('button')
+                .attr('class', 'fr')
+                .on('click', cancel)
+                .append('span')
+                .attr('class', 'icon close');
+
+            header.append('h3')
                 .text(t('save.conflict.header'));
 
-            confirm
-                .select('.modal-section.message-text')
-                .append('div')
+            var body = confirm.append('div')
+                .attr('class', 'body fillL');
+
+            body.append('div')
                 .attr('class', 'conflicts-help')
-                .text(t('save.conflict.help'));
+                    .text(t('save.conflict.help'))
+                    .append('a')
+                        .attr('class', 'conflicts-download')
+                        .on('click.download', function() {
+                            var diff = iD.actions.DiscardTags(history.difference()),
+                                changes = history.changes(diff),
+                                data = JXON.stringify(context.connection().osmChangeJXON('CHANGEME', changes)),
+                                win = window.open('data:text/xml,' + encodeURIComponent(data), '_blank');
+
+                            win.focus();
+                            confirm.remove();
+                        })
+                        .text(t('save.conflict.download_changes'));
+
+            var message = body.append('div')
+                .attr('class','message-text conflicts-message-text');
 
             addItems(confirm, conflicts);
 
-
-            var buttons = confirm
-                .select('.modal-section.buttons');
+            var buttons = body
+                .append('div')
+                .attr('class','buttons col12 joined conflicts-buttons');
 
             buttons
                 .append('button')
-                .attr('class', 'action col3')
+                .attr('class', 'action conflicts-button col6')
                 .on('click.try_again', function() {
                     confirm.remove();
                     save(e);
@@ -192,25 +219,12 @@ iD.modes.Save = function(context) {
 
             buttons
                 .append('button')
-                .attr('class', 'action col3')
+                .attr('class', 'secondary-action conflicts-button col6')
                 .on('click.cancel', function() {
                     confirm.remove();
                 })
                 .text(t('confirm.cancel'));
 
-            buttons
-                .append('button')
-                .attr('class', 'action col3')
-                .on('click.download', function() {
-                    var diff = iD.actions.DiscardTags(history.difference()),
-                        changes = history.changes(diff),
-                        data = JXON.stringify(context.connection().osmChangeJXON('CHANGEME', changes)),
-                        win = window.open('data:text/xml,' + encodeURIComponent(data), '_blank');
-
-                    win.focus();
-                    confirm.remove();
-                })
-                .text(t('save.conflict.download_changes'));
         }
 
         function showErrors() {
@@ -228,11 +242,15 @@ iD.modes.Save = function(context) {
 
         function addItems(confirm, data) {
             var message = confirm
-                .select('.modal-section.message-text');
+                .select('.message-text');
+
+            console.log(message);
 
             var items = message
                 .selectAll('.error-container')
                 .data(data);
+
+            console.log(data);
 
             var enter = items.enter()
                 .append('div')
@@ -272,12 +290,12 @@ iD.modes.Save = function(context) {
 
             details
                 .append('div')
-                .attr('class', 'error-choices cf')
+                .attr('class', 'error-choice-buttons joined cf')
                 .selectAll('button')
                 .data(function(d) { return d.choices || []; })
                 .enter()
                 .append('button')
-                .attr('class', 'error-choice action col2')
+                .attr('class', 'error-choice-button action col6')
                 .text(function(d) { return d.text; })
                 .on('click', function(d) {
                     d.action();

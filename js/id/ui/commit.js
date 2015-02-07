@@ -116,7 +116,7 @@ iD.ui.Commit = function(context) {
 
         // Confirm Button
         var saveButton = saveSection.append('button')
-            .attr('class', 'action col4 button')
+            .attr('class', 'action col6 button')
             .on('click.save', function() {
                 event.save({
                     comment: commentField.node().value

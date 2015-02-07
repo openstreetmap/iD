@@ -418,6 +418,10 @@ button.minor:hover {
     border-right: 1px solid rgba(0,0,0,.5);
 }
 
+.fillL .joined button {
+    border-right: 1px solid white;
+}
+
 .joined button:first-child {
     border-radius:4px 0 0 4px;
 }
@@ -429,11 +433,21 @@ button.minor:hover {
 
 button.action {
     background: #7092ff;
+    color: white;
 }
 
 button.action:focus,
 button.action:hover {
     background: #597BE7;
+}
+
+button.secondary-action {
+    background: #ececec;
+}
+
+button.secondary-action:focus,
+button.secondary-action:hover {
+    background: #cccccc;
 }
 
 button.save.has-count {
@@ -619,7 +633,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .header h3 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -2311,6 +2325,7 @@ img.wiki-image {
 .modal {
     display: inline-block;
     position:absolute;
+    border-radius: 0 0 3px 3px;
     left: 0;
     right: 0;
     margin: auto;
@@ -2362,42 +2377,6 @@ img.wiki-image {
     vertical-align: middle;
 }
 
-.conflicts-help {
-    color: #8a6d3b;
-    background-color: #fcf8e3;
-    border-color: #faebcc;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-}
-
-.error-detail-item {
-    padding-left: 10px;
-}
-
-.error-detail-item:before {
-    content: '- ';
-}
-
-.error-detail-container .error-choices {
-    padding: 5px;
-}
-
-.error-detail-container .error-choices .error-choice.action {
-    display: inline-block;
-    margin: 0 5px;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 12px;
-    font-weight: normal;
-    height: 30px;
-}
-
-.modal-section:last-child {
-    border-bottom: 0;
-}
-
 .loading-modal {
     text-align: center;
 }
@@ -2432,6 +2411,10 @@ img.wiki-image {
 
 .modal-actions :first-child {
     border-right: 1px solid #CCC;
+}
+
+.modal-section:last-child {
+    border-bottom: 0;
 }
 
 /* Restore Modal
@@ -2503,14 +2486,6 @@ img.wiki-image {
     margin-bottom: 0;
 }
 
-.mode-save button.action {
-    float: none;
-    margin: auto;
-    display: block;
-    color: white;
-    font-size: 14px;
-}
-
 .mode-save .user-info img {
     float: left;
 }
@@ -2572,6 +2547,51 @@ img.wiki-image {
 .changeset-list li span.count:after { content: ')'; }
 
 .changeset-list li:first-child { border-top: 0;}
+
+/* Conflict resolution
+------------------------------------------------------- */
+
+.conflicts-help {
+    padding: 20px;
+    background-color: #ffffbb;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.conflicts-message-text {
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.conflicts-buttons {
+    padding: 20px;
+    border-top: 1px solid #ccc;
+}
+
+.mode-save button.conflicts-button {
+    float: left;
+}
+
+.error-detail-container {
+    display: block;
+    padding: 20px;
+    background: #f6f6f6;
+    border-radius: 3px;
+    margin: 10px 0;
+}
+
+.error-detail-item {
+    margin-left: 15px;
+    list-style: disc;
+}
+
+.error-choice-buttons {
+    margin-top: 10px;
+}
+
+.error-choice-button {
+    height: 30px;
+}
 
 /* Notices
 ------------------------------------------------------- */

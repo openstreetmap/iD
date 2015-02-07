@@ -319,10 +319,10 @@ en:
     uploading: Uploading changes to OpenStreetMap.
     unsaved_changes: You have unsaved changes
     conflict:
-      header: Conflicting edits detected
+      header: Resolve conflicting edits
       message: 'Conflicting edits were made to {name}'
-      keep_local: Keep Mine
-      keep_remote: Keep Theirs
+      keep_local: Keep my changes
+      keep_remote: Discard my changes
       restore: Restore
       delete: Leave Deleted
       annotation:
@@ -331,12 +331,12 @@ en:
         keep_remote: 'Kept remote version of {id}.'
         restore: 'Restored local version of {id}.'
         delete: 'Deleted local version of {id}.'
-      try_again: Try Again
-      download_changes: Download Changes
+      try_again: Try to Save
+      download_changes: Download your changes.
       help: |
-        It looks like another OpenStreetMap user has changed some of the same map features that you changed.
-        You can click on each item below for more details about the conflict, and choose whether to keep
-        your changes or the other user's changes. Or, you can download your changes to a file.
+        Another user changed some of the same map features you changed.
+        Click on each item below for more details about the conflict, and choose whether to keep
+        your changes or the other user's changes.
   merge_remote_changes:
     conflict:
       location: Location was changed both locally and remotely.

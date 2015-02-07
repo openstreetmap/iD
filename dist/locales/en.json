@@ -393,10 +393,10 @@
         "uploading": "Uploading changes to OpenStreetMap.",
         "unsaved_changes": "You have unsaved changes",
         "conflict": {
-            "header": "Conflicting edits detected",
+            "header": "Resolve conflicting edits",
             "message": "Conflicting edits were made to {name}",
-            "keep_local": "Keep Mine",
-            "keep_remote": "Keep Theirs",
+            "keep_local": "Keep my changes",
+            "keep_remote": "Discard my changes",
             "restore": "Restore",
             "delete": "Leave Deleted",
             "annotation": {
@@ -406,9 +406,9 @@
                 "restore": "Restored local version of {id}.",
                 "delete": "Deleted local version of {id}."
             },
-            "try_again": "Try Again",
-            "download_changes": "Download Changes",
-            "help": "It looks like another OpenStreetMap user has changed some of the same map features that you changed.\nYou can click on each item below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes. Or, you can download your changes to a file.\n"
+            "try_again": "Try to Save",
+            "download_changes": "Download your changes.",
+            "help": "Another user changed some of the same map features you changed.\nClick on each item below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"
         }
     },
     "merge_remote_changes": {
