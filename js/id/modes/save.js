@@ -302,10 +302,7 @@ iD.modes.Save = function(context) {
                     d.action();
                     d3.event.preventDefault();
                     var container = this.parentElement.parentElement.parentElement;
-                    var next = container.nextElementSibling;
-
-                    // wrong d. This isn't our data :
-                    console.log(d);
+                    var next = container.parentElement.firstElementChild.classList.contains('expanded') ? container.nextElementSibling : container.parentElement.firstElementChild;
 
                     window.setTimeout(function() {
                         if (next) {
