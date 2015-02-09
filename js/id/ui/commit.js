@@ -6,6 +6,7 @@ iD.ui.Commit = function(context) {
             summary = context.history().difference().summary();
 
         function zoomToEntity(change) {
+
             var entity = change.entity;
             if (change.changeType !== 'deleted' &&
                 context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {

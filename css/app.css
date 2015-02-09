@@ -2582,6 +2582,10 @@ img.wiki-image {
     display: block;
 }
 
+.conflicts-done {
+    padding: 20px 20px 0 20px;
+}
+
 .error-container:not(.expanded) .error-description:hover {
     background: #ececec;
 }

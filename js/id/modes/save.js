@@ -13,10 +13,11 @@ iD.modes.Save = function(context) {
         };
     }
 
-    function choice(text, actions) {
+    function choice(text, actions, id) {
         return {
             text: text,
-            action: function() { context.perform.apply(this, actions); }
+            action: function() { context.perform.apply(this, actions) },
+            id: id
         };
     }
 
@@ -67,9 +68,9 @@ iD.modes.Save = function(context) {
                                 details: [ t('save.status_code', { code: err.status }) ],
                                 choices: [
                                     choice(t('save.conflict.restore'),
-                                        [ undelete(id), t('save.conflict.annotation.restore', {id: id}) ]),
+                                        [ undelete(id), t('save.conflict.annotation.restore', {id: id})], id),
                                     choice(t('save.conflict.delete'),
-                                        [ iD.actions.DeleteMultiple([id]), t('save.conflict.annotation.delete', {id: id}) ])
+                                        [ iD.actions.DeleteMultiple([id]), t('save.conflict.annotation.delete', {id: id})], id)
                                 ]
                             });
                         }
@@ -103,9 +104,9 @@ iD.modes.Save = function(context) {
                                 details: details,
                                 choices: [
                                     choice(t('save.conflict.keep_local'),
-                                        [ forceLocal, t('save.conflict.annotation.keep_local', {id: id}) ]),
+                                        [ forceLocal, t('save.conflict.annotation.keep_local', {id: id})], id),
                                     choice(t('save.conflict.keep_remote'),
-                                        [ forceRemote, t('save.conflict.annotation.keep_remote', {id: id}) ])
+                                        [ forceRemote, t('save.conflict.annotation.keep_remote', {id: id})], id)
                                 ]
                             });
                         }
@@ -256,6 +257,9 @@ iD.modes.Save = function(context) {
                 .attr('class', 'error-container')
                 .classed('expanded', function(d, i) {
                     return i === 0;
+                })
+                .each(function(d,i) {
+                    if (i === 0) zoomToEntity(d);
                 });
 
             enter
@@ -263,29 +267,10 @@ iD.modes.Save = function(context) {
                 .attr('class', 'error-description')
                 .attr('href', '#')
                 .text(function(d) { return d.msg || t('save.unknown_error_details'); })
-                .on('click', function() {
-                    toggleExpanded(this.parentElement);
+                .on('click', function(d) {
+                    toggleExpanded(this.parentElement, d);
                     d3.event.preventDefault();
                 });
-
-            function toggleExpanded(el) {
-
-                var error = d3.select(el),
-                    detail = d3.select(el.getElementsByTagName('div')[0]),
-                    exp = error.classed('expanded');
-
-                /* Clear old expanded */
-                enter.classed('expanded', false);
-                details.style('display', 'none');
-
-                detail
-                    .style('opacity', exp ? 1 : 0)
-                    .transition()
-                    .style('opacity', exp ? 0 : 1)
-                    .style('display', exp ? 'none' : 'block');
-
-                error.classed('expanded', !exp);
-            };
 
             var details = enter
                 .append('div')
@@ -319,11 +304,15 @@ iD.modes.Save = function(context) {
                     var container = this.parentElement.parentElement.parentElement;
                     var next = container.nextElementSibling;
 
-                    window.setTimeout( function() {
+                    // wrong d. This isn't our data :
+                    console.log(d);
+
+                    window.setTimeout(function() {
                         if (next) {
-                            toggleExpanded(next);
+                            toggleExpanded(next, d);
                         } else {
-                            d3.select(container.parentElement).append('p')
+                            d3.select(container.parentElement).append('div')
+                                .attr('class','conflicts-done')
                                 .text(t('save.conflict.done'));
 
                             d3.select('.conflicts-button')
@@ -339,6 +328,40 @@ iD.modes.Save = function(context) {
 
             items.exit()
                 .remove();
+
+            function toggleExpanded(el, d) {
+
+                var error = d3.select(el),
+                    detail = d3.select(el.getElementsByTagName('div')[0]),
+                    exp = error.classed('expanded');
+
+                // Clear old expanded
+                enter.classed('expanded', false);
+                details.style('display', 'none');
+
+                // Set new
+                detail
+                    .style('opacity', exp ? 1 : 0)
+                    .transition()
+                    .style('opacity', exp ? 0 : 1)
+                    .style('display', exp ? 'none' : 'block');
+
+                zoomToEntity(d);
+
+                error.classed('expanded', !exp);
+            };
+
+            function zoomToEntity(d) {
+                var entity = context.graph().entity(d.id);
+
+                if (entity) {
+                    context.map().zoomTo(entity);
+                    context.surface().selectAll(
+                        iD.util.entityOrMemberSelector([entity.id], context.graph()))
+                        .classed('hover', true);
+                }
+            }
+
         }
     }
 
