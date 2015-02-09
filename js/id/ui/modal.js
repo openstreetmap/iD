@@ -52,15 +52,9 @@ iD.ui.modal = function(selection, blocking) {
 
     if (animate) {
         shaded.transition().style('opacity', 1);
-        modal
-            .style('top','0px')
-            .transition()
-            .duration(200)
-            .style('top','40px');
     } else {
         shaded.style('opacity', 1);
     }
-
 
     return shaded;
 };

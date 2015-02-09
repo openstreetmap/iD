@@ -2331,9 +2331,11 @@ img.wiki-image {
 ------------------------------------------------------- */
 
 .modal {
+    top: 40px;
     display: inline-block;
     position:absolute;
-    border-radius: 0 0 3px 3px;
+    border-radius: 3px;
+    overflow: hidden;
     left: 0;
     right: 0;
     margin: auto;
