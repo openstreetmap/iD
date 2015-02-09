@@ -12,7 +12,7 @@
             "very_bad": "High Clearance: light duty off-road vehicle",
             "horrible": "Off-Road: heavy duty off-road vehicle",
             "very_horrible": "Specialized off-road: tractor, ATV",
-            "impassible": "Impassible / No wheeled vehicle"
+            "impassable": "Impassable / No wheeled vehicle"
         }
     }
 }
