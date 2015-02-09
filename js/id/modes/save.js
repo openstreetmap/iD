@@ -212,12 +212,13 @@ iD.modes.Save = function(context) {
 
             buttons
                 .append('button')
+                .attr('disabled', true)
                 .attr('class', 'action conflicts-button col6')
                 .on('click.try_again', function() {
                     confirm.remove();
                     save(e);
                 })
-                .text(t('save.conflict.try_again'));
+                .text(t('save.title'));
 
             buttons
                 .append('button')
@@ -259,22 +260,35 @@ iD.modes.Save = function(context) {
                 .attr('class', 'error-description')
                 .attr('href', '#')
                 .classed('hide-toggle', true)
+                .classed('expanded', function(d, i) {
+                    return i === 0;
+                })
                 .text(function(d) { return d.msg || t('save.unknown_error_details'); })
                 .on('click', function() {
-                    var error = d3.select(this),
-                        detail = d3.select(this.nextElementSibling),
-                        exp = error.classed('expanded');
-
-                    detail.style('display', exp ? 'none' : 'block');
-                    error.classed('expanded', !exp);
-
+                    toggleExpanded(this);
                     d3.event.preventDefault();
                 });
+
+            function toggleExpanded(el) {
+               var error = d3.select(el),
+                    detail = d3.select(el.nextElementSibling),
+                    exp = error.classed('expanded');
+
+                detail
+                    .style('opacity', exp ? 1 : 0)
+                    .transition()
+                    .style('opacity', exp ? 0 : 1)
+                    .style('display', exp ? 'none' : 'block');
+
+                error.classed('expanded', !exp);
+            };
 
             var details = enter
                 .append('div')
                 .attr('class', 'error-detail-container')
-                .style('display', 'none');
+                .style('display', function(d,i) {
+                    return i === 0 ? 'block' : 'none';
+                });
 
             details
                 .append('ul')
@@ -298,7 +312,22 @@ iD.modes.Save = function(context) {
                 .on('click', function(d) {
                     d.action();
                     d3.event.preventDefault();
-                    d3.select(this.parentElement.parentElement.parentElement)
+                    var container = this.parentElement.parentElement.parentElement;
+                    var next = container.nextElementSibling;
+
+                    window.setTimeout( function() {
+                        if (next) {
+                            toggleExpanded(next.getElementsByTagName('A')[0]);
+                        } else {
+                            d3.select(container.parentElement).append('p')
+                                .text(t('save.conflict.done'));
+
+                            d3.select('.conflicts-button')
+                                .attr('disabled', null);
+                        }
+                    }, 250);
+
+                    d3.select(container)
                         .transition()
                         .style('opacity', 0)
                         .remove();
