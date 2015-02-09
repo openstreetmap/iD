@@ -394,7 +394,7 @@
         "unsaved_changes": "You have unsaved changes",
         "conflict": {
             "header": "Resolve conflicting edits",
-            "message": "Conflicting edits were made to {name}",
+            "message": "{name}",
             "keep_local": "Keep mine",
             "keep_remote": "Use theirs",
             "restore": "Restore",

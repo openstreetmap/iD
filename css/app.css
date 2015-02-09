@@ -436,7 +436,8 @@ button.action {
     color: white;
 }
 
-button[disabled].action {
+button[disabled].action,
+button[disabled].action:hover {
     background: #cccccc;
     color: #888;
 }
@@ -584,13 +585,13 @@ button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
 button[disabled] .icon.data       { background-position: -600px -40px;}
 
-.icon.point.deleted  { background-position: -302px -80px;}
-.icon.line.deleted   { background-position: -320px -80px;}
-.icon.area.deleted   { background-position: -340px -80px;}
+.icon.point.deleted  { background-position: -480px -80px;}
+.icon.line.deleted   { background-position: -500px -80px;}
+.icon.area.deleted   { background-position: -520px -80px;}
 
-.icon.point.created  { background-position: -302px -100px;}
-.icon.line.created   { background-position: -320px -100px;}
-.icon.area.created   { background-position: -340px -100px;}
+.icon.point.created  { background-position: -480px -100px;}
+.icon.line.created   { background-position: -500px -100px;}
+.icon.area.created   { background-position: -520px -100px;}
 
 .icon.point.modified  { background-position: -22px 0; }
 
@@ -2562,40 +2563,40 @@ img.wiki-image {
     padding: 20px;
     background-color: #ffffbb;
     border-bottom: 1px solid #ccc;
-    margin-bottom: 20px;
-}
-
-.conflicts-message-text {
-    padding: 0 20px;
-    margin-bottom: 20px;
 }
 
 .conflicts-buttons {
     padding: 20px;
-    border-top: 1px solid #ccc;
 }
 
 .mode-save button.conflicts-button {
     float: left;
 }
 
-.error-detail-container {
+.error-container {
+    border-bottom: 1px solid #ccc;
+}
+
+.error-description {
+    padding: 5px 20px;
+    display: block;
+}
+
+.error-container:not(.expanded) .error-description:hover {
+    background: #ececec;
+}
+
+.error-container.expanded {
+    padding: 10px 0;
     background: #f6f6f6;
-    border-radius: 3px;
-    margin: 10px 0;
 }
 
-.error-detail-item {
-    margin-left: 15px;
-    list-style: disc;
-}
-
-.error-detail-list {
-    padding: 20px 20px 10px 20px;
+.error-detail-container {
+    padding: 0 20px 10px 20px;
 }
 
 .error-choice-buttons {
-    padding: 0 20px 20px 20px;
+    margin-top: 10px;
 }
 
 .error-choice-button {

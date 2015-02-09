@@ -253,26 +253,30 @@ iD.modes.Save = function(context) {
 
             var enter = items.enter()
                 .append('div')
-                .attr('class', 'error-container');
+                .attr('class', 'error-container')
+                .classed('expanded', function(d, i) {
+                    return i === 0;
+                });
 
             enter
                 .append('a')
                 .attr('class', 'error-description')
                 .attr('href', '#')
-                .classed('hide-toggle', true)
-                .classed('expanded', function(d, i) {
-                    return i === 0;
-                })
                 .text(function(d) { return d.msg || t('save.unknown_error_details'); })
                 .on('click', function() {
-                    toggleExpanded(this);
+                    toggleExpanded(this.parentElement);
                     d3.event.preventDefault();
                 });
 
             function toggleExpanded(el) {
-               var error = d3.select(el),
-                    detail = d3.select(el.nextElementSibling),
+
+                var error = d3.select(el),
+                    detail = d3.select(el.getElementsByTagName('div')[0]),
                     exp = error.classed('expanded');
+
+                /* Clear old expanded */
+                enter.classed('expanded', false);
+                details.style('display', 'none');
 
                 detail
                     .style('opacity', exp ? 1 : 0)
@@ -317,7 +321,7 @@ iD.modes.Save = function(context) {
 
                     window.setTimeout( function() {
                         if (next) {
-                            toggleExpanded(next.getElementsByTagName('A')[0]);
+                            toggleExpanded(next);
                         } else {
                             d3.select(container.parentElement).append('p')
                                 .text(t('save.conflict.done'));
