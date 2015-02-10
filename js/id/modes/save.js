@@ -205,7 +205,7 @@ iD.modes.Save = function(context) {
             var message = body.append('div')
                 .attr('class','message-text conflicts-message-text');
 
-            addItems(confirm, conflicts);
+            addConflictItems(confirm, conflicts);
 
             var buttons = body
                 .append('div')
@@ -231,30 +231,17 @@ iD.modes.Save = function(context) {
 
         }
 
-        function showErrors() {
-            confirm = iD.ui.confirm(context.container());
-            loading.close();
-
-            confirm
-                .select('.modal-section.header')
-                .append('h3')
-                .text(t('save.error'));
-
-            addItems(confirm, errors);
-            confirm.okButton();
-        }
-
-        function addItems(confirm, data) {
+        function addConflictItems(confirm, data) {
             var message = confirm
                 .select('.message-text');
 
             var items = message
-                .selectAll('.error-container')
+                .selectAll('.conflict-container')
                 .data(data);
 
             var enter = items.enter()
                 .append('div')
-                .attr('class', 'error-container')
+                .attr('class', 'conflict-container')
                 .classed('expanded', function(d, i) {
                     return i === 0;
                 })
@@ -264,7 +251,7 @@ iD.modes.Save = function(context) {
 
             enter
                 .append('a')
-                .attr('class', 'error-description')
+                .attr('class', 'conflict-description')
                 .attr('href', '#')
                 .text(function(d) { return d.msg || t('save.unknown_error_details'); })
                 .on('click', function(d) {
@@ -274,33 +261,32 @@ iD.modes.Save = function(context) {
 
             var details = enter
                 .append('div')
-                .attr('class', 'error-detail-container')
+                .attr('class', 'conflict-detail-container')
                 .style('display', function(d,i) {
                     return i === 0 ? 'block' : 'none';
                 });
 
             details
                 .append('ul')
-                .attr('class', 'error-detail-list')
+                .attr('class', 'conflict-detail-list')
                 .selectAll('li')
                 .data(function(d) { return d.details || []; })
                 .enter()
                 .append('li')
-                .attr('class', 'error-detail-item')
+                .attr('class', 'conflict-detail-item')
                 .text(function(d) { return d; });
 
             details
                 .append('div')
-                .attr('class', 'error-choice-buttons joined cf')
+                .attr('class', 'conflict-choice-buttons joined cf')
                 .selectAll('button')
                 .data(function(d) { return d.choices || []; })
                 .enter()
                 .append('button')
-                .attr('class', 'error-choice-button action col6')
+                .attr('class', 'conflict-choice-button action col6')
                 .text(function(d) { return d.text; })
                 .on('click', function(d) {
                     d.action();
-                    d3.event.preventDefault();
                     var container = this.parentElement.parentElement.parentElement;
                     var next = container.parentElement.firstElementChild.classList.contains('expanded') ? container.nextElementSibling : container.parentElement.firstElementChild;
 
@@ -321,6 +307,7 @@ iD.modes.Save = function(context) {
                         .transition()
                         .style('opacity', 0)
                         .remove();
+                    d3.event.preventDefault();
                 });
 
             items.exit()
@@ -346,19 +333,81 @@ iD.modes.Save = function(context) {
                 zoomToEntity(d);
 
                 error.classed('expanded', !exp);
-            };
-
-            function zoomToEntity(d) {
-                var entity = context.graph().entity(d.id);
-
-                if (entity) {
-                    context.map().zoomTo(entity);
-                    context.surface().selectAll(
-                        iD.util.entityOrMemberSelector([entity.id], context.graph()))
-                        .classed('hover', true);
-                }
             }
 
+        }
+
+        function showErrors() {
+            confirm = iD.ui.confirm(context.container());
+            loading.close();
+
+            confirm
+                .select('.modal-section.header')
+                .append('h3')
+                .text(t('save.error'));
+
+            addErrorItems(confirm, errors);
+            confirm.okButton();
+        }
+
+        function addErrorItems(confirm, data) {
+            var message = confirm
+                .select('.modal-section.message-text');
+
+            var items = message
+                .selectAll('.error-container')
+                .data(data);
+
+            var enter = items.enter()
+                .append('div')
+                .attr('class', 'error-container');
+
+            enter
+                .append('a')
+                .attr('class', 'error-description')
+                .attr('href', '#')
+                .classed('hide-toggle', true)
+                .text(function(d) { return d.msg || t('save.unknown_error_details'); })
+                .on('click', function() {
+                    var error = d3.select(this),
+                        detail = d3.select(this.nextElementSibling),
+                        exp = error.classed('expanded');
+
+                    detail.style('display', exp ? 'none' : 'block');
+                    error.classed('expanded', !exp);
+
+                    d3.event.preventDefault();
+                });
+
+            var details = enter
+                .append('div')
+                .attr('class', 'error-detail-container')
+                .style('display', 'none');
+
+            details
+                .append('ul')
+                .attr('class', 'error-detail-list')
+                .selectAll('li')
+                .data(function(d) { return d.details || []; })
+                .enter()
+                .append('li')
+                .attr('class', 'error-detail-item')
+                .text(function(d) { return d; });
+
+            items.exit()
+                .remove();
+        }
+
+    }
+
+    function zoomToEntity(d) {
+        var entity = context.graph().entity(d.id);
+
+        if (entity) {
+            context.map().zoomTo(entity);
+            context.surface().selectAll(
+                iD.util.entityOrMemberSelector([entity.id], context.graph()))
+                .classed('hover', true);
         }
     }
 

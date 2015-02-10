@@ -239,9 +239,6 @@ ul li { list-style: none;}
     background-color: white;
     color: #7092FF;
     cursor: pointer;
-       -moz-transition: all 100ms;
-         -o-transition: all 100ms;
-            transition: all 100ms;
 }
 
 .toggle-list > label:hover {
@@ -823,9 +820,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     text-overflow: ellipsis;
     overflow: hidden;
     border-left: 1px solid rgba(0, 0, 0, .1);
-    -moz-transition: all 100ms;
-    -o-transition: all 100ms;
-    transition: all 100ms;
 }
 
 .feature-list-item .label .icon {
@@ -905,9 +899,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     text-overflow: ellipsis;
     overflow: hidden;
     border-left: 1px solid rgba(0, 0, 0, .1);
-    -moz-transition: all 100ms;
-    -o-transition: all 100ms;
-    transition: all 100ms;
     border-radius: 0 3px 3px 0;
     }
 
@@ -1190,6 +1181,17 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     opacity: 1;
     line-height: 20px;
     width: 100%;
+}
+
+/* Hide placeholder for radio buttons if another is active, or not in hover state */
+.toggle-list label.active ~ .placeholder,
+.toggle-list .placeholder {
+    padding: 0;
+    opacity: 0;
+    width: 0;
+    line-height: 0;
+    display: block;
+    overflow: hidden;
 }
 
 /* adding additional preset fields */
@@ -2489,11 +2491,11 @@ img.wiki-image {
     float: left;
 }
 
-.error-container {
+.conflict-container {
     border-bottom: 1px solid #ccc;
 }
 
-.error-description {
+.conflict-description {
     padding: 5px 20px;
     display: block;
 }
@@ -2502,24 +2504,24 @@ img.wiki-image {
     padding: 20px 20px 0 20px;
 }
 
-.error-container:not(.expanded) .error-description:hover {
+.conflict-container:not(.expanded) .conflict-description:hover {
     background: #ececec;
 }
 
-.error-container.expanded {
+.conflict-container.expanded {
     padding: 10px 0;
     background: #f6f6f6;
 }
 
-.error-detail-container {
+.conflict-detail-container {
     padding: 0 20px 10px 20px;
 }
 
-.error-choice-buttons {
+.conflict-choice-buttons {
     margin-top: 10px;
 }
 
-.error-choice-button {
+.conflict-choice-button {
     height: 30px;
 }
 
@@ -2703,28 +2705,7 @@ img.wiki-image {
 }
 
 .tooltip-inner .keyhint {
-    font-size: 10px;
-    padding: 0 7px;
     font-weight: bold;
-    display: inline-block;
-    border-radius: 2px;
-    border: 1px solid #CCC;
-    position: relative;
-    z-index: 1;
-    text-align: left;
-}
-
-.tooltip-inner .keyhint::after {
-    content: "";
-    position: absolute;
-    border-radius: 2px;
-    height: 10px;
-    width: 100%;
-    z-index: 0;
-    bottom: -4px;
-    left: -1px;
-    border: 1px solid #CCC;
-    border-top: 0;
 }
 
 /* Exceptions for tooltip layouts */

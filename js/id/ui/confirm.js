@@ -18,7 +18,7 @@ iD.ui.confirm = function(selection) {
     modal.okButton = function() {
         buttons
             .append('button')
-            .attr('class', 'action col2')
+            .attr('class', 'action col4')
             .on('click.confirm', function() {
                 modal.remove();
             })
