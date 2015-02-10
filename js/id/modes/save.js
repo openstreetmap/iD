@@ -16,7 +16,7 @@ iD.modes.Save = function(context) {
     function choice(text, actions, id) {
         return {
             text: text,
-            action: function() { context.perform.apply(this, actions) },
+            action: function() { context.perform.apply(this, actions); },
             id: id
         };
     }
@@ -202,7 +202,7 @@ iD.modes.Save = function(context) {
                         })
                         .text(t('save.conflict.download_changes'));
 
-            var message = body.append('div')
+            body.append('div')
                 .attr('class','message-text conflicts-message-text');
 
             addConflictItems(confirm, conflicts);
