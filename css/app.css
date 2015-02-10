@@ -664,7 +664,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .footer {
     position: absolute;
     bottom: 0;
-    padding: 5px 30px 5px 30px;
+    padding: 5px 20px 5px 20px;
     border-top: 1px solid #ccc;
     background-color: #fafafa;
     width: 100%;
@@ -1534,10 +1534,6 @@ div.combobox {
     width: 40%;
     float: left;
     height: 30px;
-    -webkit-transition: width 200ms;
-       -moz-transition: width 200ms;
-         -o-transition: width 200ms;
-            transition: width 200ms;
 }
 
 .tag-row input.key {
