@@ -350,11 +350,6 @@ button {
     display: inline-block;
     height:40px;
     border-radius:4px;
-    /* Crashes Safari: https://github.com/openstreetmap/iD/issues/1188 */
-    /*-webkit-transition: all 100ms;*/
-       -moz-transition: all 100ms;
-         -o-transition: all 100ms;
-            transition: all 100ms;
 }
 
 button:focus,
