@@ -140,10 +140,6 @@ strong {
 
 a:visited, a {
     color: #7092ff;
-    -webkit-transition: all 100ms;
-       -moz-transition: all 100ms;
-         -o-transition: all 100ms;
-            transition: all 100ms;
 }
 
 a:hover {
@@ -172,10 +168,6 @@ input[type=email] {
     width: 100%;
     border-radius:4px;
     text-overflow: ellipsis;
-    -webkit-transition: all 200ms;
-       -moz-transition: all 200ms;
-         -o-transition: all 200ms;
-            transition: all 200ms;
 }
 
 textarea:focus,
@@ -1161,7 +1153,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* Styles for raw tag inspector on hover */
 .inspector-hover .tag-row .key-wrap,
-.inspector-hover .tag-row .input-wrap-position {
+.inspector-hover .tag-row .form-field.input-wrap-position {
     width: 50%;
 }
 
@@ -1205,89 +1197,11 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     width: 100%;
 }
 
-/* Hide placeholder for radio buttons if another is active, or not in hover state */
-.toggle-list label.active ~ .placeholder,
-.toggle-list .placeholder {
-    padding: 0;
-    opacity: 0;
-    width: 0;
-    line-height: 0;
-    display: block;
-    overflow: hidden;
-    -webkit-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-       -moz-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-         -o-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-            transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-}
-
-/* first phase hover-to-active animations */
-
-textarea,
-.form-label,
-.preset-input-wrap,
-.preset-input-wrap .label {
-    -webkit-transition: all 200ms;
-       -moz-transition: all 200ms;
-         -o-transition: all 200ms;
-            transition: all 200ms;
-}
-
-/* second phase hover-to-active animations */
-
-input,
-.checkselect label:last-of-type {
-    -webkit-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-       -moz-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-         -o-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-            transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-}
-
-.entity-editor-pane button.minor,
-.combobox-caret,
-.entity-editor-pane .header button,
-.toggle-list label span,
-.spin-control,
-.more-fields,
-.view-on-osm,
-.hide-toggle:before,
-.entity-editor-pane .toggle-list label::before,
-.entity-editor-pane .toggle-list label.remove .icon {
-    -webkit-transition: opacity 200ms 200ms;
-       -moz-transition: opacity 200ms 200ms;
-         -o-transition: opacity 200ms 200ms;
-            transition: opacity 200ms 200ms;
-}
-
-.entity-editor-pane a.hide-toggle {
-    -webkit-transition: padding-left 200ms 200ms, color 200ms 200ms;
-       -moz-transition: padding-left 200ms 200ms, color 200ms 200ms;
-         -o-transition: padding-left 200ms 200ms, color 200ms 200ms;
-            transition: padding-left 200ms 200ms, color 200ms 200ms;
-}
-
-.entity-editor-pane .toggle-list label:not(.active) {
-    -webkit-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-       -moz-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-         -o-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-            transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-}
-
-.entity-editor-pane .toggle-list label {
-    -webkit-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-       -moz-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-         -o-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-            transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-}
-
 /* adding additional preset fields */
 
 .more-fields {
     padding: 0 20px 20px 20px;
     font-weight: bold;
-    -webkit-transition: padding 200ms 200ms, max-height 200ms 200ms;
-       -moz-transition: padding 200ms 200ms, max-height 200ms 200ms;
-         -o-transition: padding 200ms 200ms, max-height 200ms 200ms;
-            transition: padding 200ms 200ms, max-height 200ms 200ms;
 }
 
 .more-fields label { padding: 5px 10px 5px 0; }
