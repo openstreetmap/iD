@@ -72,7 +72,8 @@
                 "area": "Usporiadanie plochy do kruhu."
             },
             "not_closed": "Tento objekt nemožno usporiadať do kruhu, pretože nie je uzavretý do slučky.",
-            "too_large": "Tento objekt nemožno usporiadať do kruhu, pretože niektoré jeho časti nie sú viditeľné."
+            "too_large": "Tento objekt nemožno usporiadať do kruhu, pretože niektoré jeho časti nie sú viditeľné.",
+            "connected_to_hidden": "Tento objekt nemožno usporiadať do kruhu, pretože je spojený so skrytým objektom."
         },
         "orthogonalize": {
             "title": "Usporiadaj do pravého uhla.",
@@ -86,14 +87,16 @@
                 "area": "Usporiadanie rohov plochy do pravého uhla."
             },
             "not_squarish": "Tento objekt nemožno usporiadať do pravého uhla, pretože nie je štvorcový.",
-            "too_large": "Tento objekt nemožno usporiadať do pravého uhla, pretože niektoré jeho časti nie sú viditeľné."
+            "too_large": "Tento objekt nemožno usporiadať do pravého uhla, pretože niektoré jeho časti nie sú viditeľné.",
+            "connected_to_hidden": "Tento objekt nemožno usporiadať do pravého uhla, pretože je spojený so skrytým objektom."
         },
         "straighten": {
             "title": "Vyrovnaj",
             "description": "Vyrovnaj túto čiaru.",
             "key": "S",
             "annotation": "Vyrovnanie čiary.",
-            "too_bendy": "Tento objekt nemožno vyrovnať, pretože je príliš nepravidelný."
+            "too_bendy": "Tento objekt nemožno vyrovnať, pretože je príliš nepravidelný.",
+            "connected_to_hidden": "Túto čiaru nemožno vyrovnať, pretože je spojená so skrytým objektom."
         },
         "delete": {
             "title": "Vymaž",
@@ -106,7 +109,8 @@
                 "relation": "Odstránenie relácie.",
                 "multiple": "Odstránenie {n} objektov."
             },
-            "incomplete_relation": "Tento objekt nemožno vymazať, pretože nebol úplne stiahnutý."
+            "incomplete_relation": "Tento objekt nemožno vymazať, pretože nebol úplne stiahnutý.",
+            "connected_to_hidden": "Tento objekt nemožno vymazať, pretože je spojený so skrytým objektom."
         },
         "add_member": {
             "annotation": "Pridanie člena do relácie."
@@ -127,7 +131,8 @@
             "description": "Oddeľ od seba tieto čiary/plochy.",
             "key": "D",
             "annotation": "Oddelenie čiar/plôch.",
-            "not_connected": "Nie je dostatočný počet čiar/plôch na oddelenie."
+            "not_connected": "Nie je dostatočný počet čiar/plôch na oddelenie.",
+            "connected_to_hidden": "Tento objekt nemožno oddeliť, pretože je spojený so skrytým objektom."
         },
         "merge": {
             "title": "Zlúč",
@@ -151,7 +156,8 @@
                 "multiple": "Presunutie viacerých objektov."
             },
             "incomplete_relation": "Tento objekt nemožno presunúť, pretože nebol úplne stiahnutý.",
-            "too_large": "Tento objekt nemôže byť presunutý, pretože niektoré jeho časti nie sú viditeľné."
+            "too_large": "Tento objekt nemôže byť presunutý, pretože niektoré jeho časti nie sú viditeľné.",
+            "connected_to_hidden": "Tento objekt nemôže byť presunutý, pretože je spojený so skrytým objektom."
         },
         "rotate": {
             "title": "Otoč",
@@ -161,7 +167,8 @@
                 "line": "Otočenie čiary.",
                 "area": "Otočenie plochy."
             },
-            "too_large": "Tento objekt nemôže byť otočený, pretože niektoré jeho časti nie sú viditeľné."
+            "too_large": "Tento objekt nemôže byť otočený, pretože niektoré jeho časti nie sú viditeľné.",
+            "connected_to_hidden": "Tento objekt nemôže byť otočený, pretože je spojený so skrytým objektom."
         },
         "reverse": {
             "title": "Obráť",
@@ -183,7 +190,8 @@
                 "multiple": "Rozdelenie {n} čiar/hraníc plôch. "
             },
             "not_eligible": "Čiary nemôžu byť rozdelené na ich začiatku alebo konci.",
-            "multiple_ways": "Príliš veľa čiar na rozdelenie."
+            "multiple_ways": "Príliš veľa čiar na rozdelenie.",
+            "connected_to_hidden": "Tento objekt nemôžno rozdeliť, pretože je spojený so skrytým objektom."
         },
         "restriction": {
             "help": {
@@ -218,6 +226,10 @@
     "logout": "odhlásiť",
     "loading_auth": "Pripájam na OpenStreetMap...",
     "report_a_bug": "nahlásiť chybu",
+    "feature_info": {
+        "hidden_warning": "{count} skrytých objektov",
+        "hidden_details": "Tieto objekty sú skryté: {details}"
+    },
     "status": {
         "error": "Nepodarilo sa spojiť s API.",
         "offline": "API je offline. Skúste upravovať neskôr.",
@@ -231,6 +243,7 @@
         "upload_explanation_with_user": "Zmeny, ktoré nahráte ako {user}, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
         "save": "Ulož",
         "cancel": "Zruš",
+        "changes": "{count} Zmien",
         "warnings": "Varovania",
         "modified": "Upravené",
         "deleted": "Odstránené",
@@ -269,11 +282,16 @@
         "incomplete": "<nebolo stiahnuté>",
         "feature_list": "Hľadaj objekty",
         "edit": "Uprav objekt",
+        "check": {
+            "yes": "Áno",
+            "no": "Nie"
+        },
         "none": "Žiadne",
         "node": "Uzol",
         "way": "Cesta",
         "relation": "Relácia",
-        "location": "Poloha"
+        "location": "Poloha",
+        "add_fields": "Pridaj pole:"
     },
     "background": {
         "title": "Pozadie",
@@ -286,6 +304,78 @@
         "fix_misalignment": "Oprav zarovnanie",
         "reset": "vynulovať"
     },
+    "map_data": {
+        "title": "Mapové údaje",
+        "description": "Mapové údaje",
+        "data_layers": "Dátové vrstvy",
+        "fill_area": "Výplň plôch",
+        "map_features": "Mapové objekty",
+        "autohidden": "Tieto objekty boli automaticky skryté, pretože by ich bolo zobrazených príliš veľa. Pre ich editáciu, priblížte mapu."
+    },
+    "feature": {
+        "points": {
+            "description": "Body",
+            "tooltip": "Body záujmu"
+        },
+        "major_roads": {
+            "description": "Hlavné cesty",
+            "tooltip": "Diaľnice, ulice, atď."
+        },
+        "minor_roads": {
+            "description": "Vedľajšie cesty",
+            "tooltip": "Servisné cesty, parkovacie uličky, lesná cesta, atď."
+        },
+        "paths": {
+            "description": "Cestičky",
+            "tooltip": "Chodníky, cestičky pre pešich, cyklocesty, atď."
+        },
+        "buildings": {
+            "description": "Budovy",
+            "tooltip": "Budovy, prístrešky, garáže, atď."
+        },
+        "landuse": {
+            "description": "Využitie územia",
+            "tooltip": "Lesy, farmy, parky, obytné územie, firemné plochy, atď."
+        },
+        "boundaries": {
+            "description": "Hranice",
+            "tooltip": "Administratívne hranice"
+        },
+        "water": {
+            "description": "Vodné objekty",
+            "tooltip": "Rieky, jazerá, rybníky, nádrže, atď."
+        },
+        "rail": {
+            "description": "Železničné objekty",
+            "tooltip": "Železnice"
+        },
+        "power": {
+            "description": "Elektrické objety",
+            "tooltip": "Elektrické vedenia, elektrárne, transformátory, atď."
+        },
+        "past_future": {
+            "description": "Bývalý/Budúci objekt",
+            "tooltip": "Navrhovaný, vo výstavbe, opustený, zbúraný, atď."
+        },
+        "others": {
+            "description": "Iné objekty",
+            "tooltip": "Všetko ostané"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "Bez výplne (obrys)",
+            "tooltip": "Aktivovanie obrysového módu umožní lepšie vidieť družicové snímky na pozadí."
+        },
+        "partial": {
+            "description": "Čiastočná výplň",
+            "tooltip": "Plochy sú vykresné s výplňou iba okolo vnútornych okrajoch. (Odporúčané pre začínajúcich užívateľov)"
+        },
+        "full": {
+            "description": "Plná výplň",
+            "tooltip": "Plochy su vykreslené plne vyplnené."
+        }
+    },
     "restore": {
         "heading": "Máte neuložené zmeny",
         "description": "Želáte si obnoviť neuložené zmeny z predchádzajúcej relácie?",
@@ -297,6 +387,7 @@
         "help": "Ulož zmeny do OpenStreetMap a sprístupni ich ďalším užívateľom.",
         "no_changes": "Žiadne zmeny na uloženie.",
         "error": "Počas ukladania sa vyskytla chyba",
+        "unknown_error_details": "Uistite sa prosím, že ste pripojený k internetu.",
         "uploading": "Nahrávam zmeny do OpenStreetMap.",
         "unsaved_changes": "Máte neuložené zmeny"
     },
@@ -360,7 +451,7 @@
         "help": "# Pomoc\n\nToto je editor pre [OpenStreetMap](http://www.openstreetmap.org/), slobodnú a upravovateľnú mapu sveta. Môžete ho používať na pridávanie a aktualizovanie údajov vo vašom okolí a vylepšiť tak mapu sveta s otvoreným kódom a dátami pre všetkých.\n\nÚpravy, ktoré v tejto mape spravíte, budú viditeľné pre každého, kto používa OpenStreetMap. Na to, aby ste mohli upravovať, budete potrebovať [bezplatný OpenStreetMap účet](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je kolaboratívny projekt so [zdrojovým kódom dostupným na GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Upravovanie a ukladanie\n\nTento editor je primárne navrhnutý na prácu online, a aj práve teraz ho používate cez internetovú stránku.\n\n### Výber objektov\n\nPre výber objektu, ako napríklad cesta alebo bod záujmu, naň kliknite na mape. Týmto sa vybraný objekt zvýrazní, otvorí sa panel s jeho detajlami a zobrazí sa ponuka s úkonmi, ktoré môžete s objektom urobiť.\n\nViacero objektov je možné vybrať podržaním klávesu \"Shift\". Potom jednoducho kliknite na objekty, ktoré chcete vybrať, alebo pretiahnite po mape akoby ste chceli nakresliť obdĺžnik. Týmto sa zobrazí rám a vyberú sa všetky objekty, ktoré sa v ňom nachádzajú.\n\n### Ukladanie úprav\n\nKed urobíte zmeny ako úpravy ciest, budov a miest, tieto budú lokálne uložené, až pokiaľ ich neuložíte na server. Netrápte sa ak urobíte chybu. Zmeny môžete vrátit späť kliknutím na tlačítko vrátiť a zopakovať kliknutím na tlačitko zopakovať.\n\nKeď chcete ukončit sériu úprav, kliknite na \"Uložiť\". Napríklad  ak ste dokončili časť mesta a chcete začať s inou časťou. Budete mať možnosť si prehliadnuť, čo ste urobili a editor poskytne užitočné návrhy a varovania ak niečo nie je so zmenami vporiadku.\n\nAk všetko vyzerá vporiadku, môžete vyplniť krátky komentár vysvetľujúci, čo ste urobili a kliknite znovu na \"Uložiť\" pre odoslanie zmien na [OpenStreetMap.org](http://www.openstreetmap.org/), kde budú viditeľné pre ostatných používateľov a tak dostupné pre ďalšie vylepšenia.\n\nAk nemôžete dokončiť úpravy počas jedného sedenia, môžete zatvoriť okno prehliadača, vrátiť sa späť (na rovnakom prehliadači a počítači) a editor vám ponúkne obnoviť vašu prácu.\n",
         "roads": "# Cesty\n\nS týmto editorom môžete cesty vytvoriť, opraviť alebo vymazať. Cesty môžu byť rôzneho druhu: chodníky, diaľnice, lesné cestičky, cyklochodníky a iné. Akýkoľvek často prechádzaný úsek by malo byť možné zmapovať.\n\n### Výber\n\nKliknite na cestu pre jej výber. Viditeľným by sa mal stať jej obrys spolu s malou ponukou nástrojov na mape a postranným panelom, ukazujúcim dodatočné informácie o ceste.\n\n### Úprava\n\nČasto krát uvidíte cesty, ktoré nie sú zarovnané so snímkami pod nimi alebo s GPS stopu. Tieto cesty môžete upraviť tak, aby boli na správnom mieste.\n\nNajskôr kliknite na cestu, ktorú chcete zmeniť. Týmto sa zvýrazní a po jej dĺžke sa ukážu kontrolné body, ktoré môžete pretiahnuť na lepšiu pozíciu. Ak chcete pridať nový kontrolný bod pre viac detailov, dva krát kliknite na časť cesty bez uzla a jeden bude pridaný.\n\nAk sa cesta spája s inou cestou, ale nie je správne spojená na mape, môžete pretiahnuť jeden z jej kontrolných bodov na druhú cestu, aby ste ich spojili. Spojenie ciest je dôležité pre mapu a nevyhnutné pre poskytovanie navigácie na cestách.\n\nMôžete tiež kliknúť na nástroj \"Presuň\" alebo stlačiť kláves \"M\" pre posunutie celej cesty naraz a potom kliknite znovu, aby ste uložili presun.\n\n### Vymazávanie\n\nAk je cesta úplne nesprávna - vidíte, že cesta neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam cesta nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný, rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže cesta môže byť jednoducho novopostavená.\n\nCestu môžete vymazať, tak že na ňu kliknete čim ju vyberiete  a potom kliknete na ikonu smetného koša alebo stlačením klávesu \"Delete\".\n\n### Vytváranie\n\nZistili ste, že niekde by mala byť cesta ale ona tam nie je? Kliknite naľavo hore na ikonu \"Čiara\" alebo stlačte kláves \"2\" pre kreslenie čiary.\n\nAby ste začali kresliť, kliknite na začiatok cesty na mape. Ak cesta odbočuje z inej existujúcej cesty, začnite kliknútím na miesto, kde sa spájajú.\n\nPotom kliknite na body pozdĺž cesty tak, aby nasledovali správny smer podľa satelitných snímkov alebo GPS. Ak cesta, ktorú kreslíte, pretína ďalšiu cestu, spojte ich kliknutím v mieste križovatky. Keď ste hotový s skreslením, dva krát kliknite alebo stlačte kláves \"Enter\" na vašej klávesnici.\n",
-        "gps": "# GPS\nGPS údaje sú najviac dôveryhodný zdroj dát pre OpenStreetMap. Tento editor podporuje stopy z lokálnych \".gpx\" súborov na vašom počítači. Tento typ GPS stôp môžete zachytiť pomocou rôznych aplikácií pre múdre telefóny ako aj GPS prístrojmi.\n\nPre informácie, ako robiť GPS prieskum, si prečítajte [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby ste použili GPX trasu pre mapovanie, pretiahnite a pustite GPX súbor na mapový editor. Po rozpoznaní, bude pridaný na mapu ako jasná zelená čiara. Kliknite na ponuku \"Nastavenia pozadia\" na ľavej strane pre zapnutie, vypnutie alebo priblíženie na túto novú GPX vrstvu.\n\nGPX trasa nie je priamo nahraná na OpenStreetMap. Najlepší spôsob ako ju využiť je, použiť ju ako predlohu pre zakreslovanie nových objektov a potom ju [nahrať na OpenStreetMap](http://www.openstreetmap.org/trace/create) pre ďalších uživateľov.\n \n",
+        "gps": "# GPS\nGPS údaje sú najviac dôveryhodný zdroj dát pre OpenStreetMap. Tento editor podporuje stopy z lokálnych \".gpx\" súborov na vašom počítači. Tento typ GPS stôp môžete zachytiť pomocou rôznych aplikácií pre múdre telefóny ako aj GPS prístrojmi.\n\nPre informácie, ako robiť GPS prieskum, si prečítajte [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby ste použili GPX trasu pre mapovanie, pretiahnite a pustite GPX súbor na mapový editor. Po rozpoznaní, bude pridaný na mapu ako jasná fialová čiara. Kliknite na ponuku \"Mapové údaje\" na ľavej strane pre zapnutie, vypnutie alebo priblíženie na túto novú GPX vrstvu.\n\nGPX trasa nie je priamo nahraná na OpenStreetMap. Najlepší spôsob ako ju využiť je, použiť ju ako predlohu pre zakreslovanie nových objektov a potom ju [nahrať na OpenStreetMap](http://www.openstreetmap.org/trace/create) pre ďalších uživateľov.\n \n",
         "imagery": "# Snímky povrchu\n\nLetecké snímky sú dôležitým zdrojom pre mapovanie. Kombinácia leteckých fotografií, satelitných snímok a voľne skompilovaných zdrojov je v editore dostupná vpravo pod ponukou \"Nastavenia pozadia\".\n\nŠtandardne je v editore predvolená satelitná vrstva z [Bing Maps](http://www.bing.com/maps/), ale ako posuniete a priblížite mapu na nové geografické miesta, dostupnými sa stanú nové zdroje. Niektoré krajiny ako Spojené Štáty, Francúzsko, a Dánsko majú pre niektoré oblasti dostupné veľmi kvalitné snímky.\n\nSnímky môžu byť niekedy posunuté voči mapovým dátam, kvôli chybe na strane poskytovateľa snímkov. Ak uvidíte veľa ciest posunutých voči pozadiu, neposúvajte ich hneď všetky, aby ste ich zarovnali s pozadím. Namiesto toho môžete upraviť snímky, aby odpovedali existujúcim dátam tým, že kliknete na \"Oprav zarovnanie\" naspodku Nastavenia pozadia.\n",
         "addresses": "# Adresy\n\nAdresy sú jedny z najužitočnejších informácií na mape.\n\nHoci sú adresy často znázorňované ako časti ulíc, v OpenStreetMap sú zaznamenávané ako atribúty budov a miest pozdĺž ulíc.\n\nInformáciu o adrese môžete pridať ku miestam znázornených ako obrysy budov, ale aj ku tým, ktoré boli zmapované ako jediný bod. Najvhodnejším zdrojom adresných údajov je miestny prieskum alebo znalosť lokality. Tak ako pri iných objektoch, kopírovanie z komerčných zdrojov ako Google Mapy je prísne zakázané.\n",
         "inspector": "# Používanie Inšpektora\n\nInšpektor je používateľské rozhranie na ľavej strane stránky, ktoré sa objaví po vybraní objektu a umožní vám upravovať detaily.\n\n### Voľba typu objektu\n\nPo tom ako pridáte bod, čiaru alebo plochu, môžete vybrať aký je to typ objektu. Napríklad či je to diaľnica alebo obytná ulica, či supermarket alebo kaviareň. Inšpektor zobrazí tlačítka pre bežné typy objektov a nájsť ďalšie môžete zadaním toho, čo hľadáte do vyhľadávacieho políčka.\n\nKliknite na \"i\" v pravom dolnom rohu tlačítka pre výber typu objektu, ak sa chcete o ňom dozvedieť viac. Kliknite na tlačítko a vyberte typ objektu.\n\n### Používanie formulárov a upravovanie označenia\n\nPo tom ako zvolíte typ objektu, alebo keď vyberiete objekt, ktorý už má pridelený typ, inšpektor zobrazí polia s detailmi o objekte ako jeho meno a adresa.\n\nPod poliami sú ikony, na ktoré môžete kliknúť a pridať ďalšie detaily ako informácie z [Wikipédie](http://www.wikipedia.org/), prístup pre vozičkárov a ďalšie.\n\nNaspodku inšpektora kliknite na \"Dodatočné označenia\" pre pridanie  ľubovoľných označení pre daný element. [Taginfo](http://taginfo.openstreetmap.org/) je výborný zdroj pre zistenie populárnych kombinácií označení.\n\nZmeny, ktoré spravíte v inšpektorovi, sú automaticky aplikované na mapu. Vrátiť späť ich môžete kedykoľvek kliknutím na tlačítko \"Vrátiť\".\n",
@@ -573,11 +664,17 @@
             "barrier": {
                 "label": "Typ"
             },
+            "bench": {
+                "label": "Lavička"
+            },
             "bicycle_parking": {
                 "label": "Typ"
             },
             "boundary": {
                 "label": "Typ"
+            },
+            "brand": {
+                "label": "Značka"
             },
             "building": {
                 "label": "Budova"
@@ -641,6 +738,9 @@
             "cuisine": {
                 "label": "Druh jedla"
             },
+            "delivery": {
+                "label": "Zásobovnie"
+            },
             "denomination": {
                 "label": "Vierovyznanie"
             },
@@ -652,7 +752,10 @@
             },
             "electrified": {
                 "label": "Elektrifikovaná",
+                "placeholder": "Troleje, elektrifikované koľaje...",
                 "options": {
+                    "contact_line": "Troleje",
+                    "rail": "Elektrifikované koľaje",
                     "yes": "Áno (nešpecifikované)",
                     "no": "Nie"
                 }
@@ -721,6 +824,15 @@
             "gauge": {
                 "label": "Rozchod"
             },
+            "gender": {
+                "label": "Pohlavie",
+                "placeholder": "Neznáme",
+                "options": {
+                    "male": "Muži",
+                    "female": "Ženy",
+                    "unisex": "Unisex"
+                }
+            },
             "generator/method": {
                 "label": "Metóda"
             },
@@ -783,6 +895,25 @@
             "layer": {
                 "label": "Vrstva"
             },
+            "leaf_cycle": {
+                "label": "Opadavosť",
+                "options": {
+                    "evergreen": "Neopadavý",
+                    "deciduous": "Opadavý",
+                    "semi_evergreen": "Poloopadavý",
+                    "semi_deciduous": "Krátkoopadavé",
+                    "mixed": "Zmiešaný"
+                }
+            },
+            "leaf_type": {
+                "label": "Typ listov",
+                "options": {
+                    "broadleaved": "Širokolisté",
+                    "needleleaved": "Ihličnaté",
+                    "mixed": "Zmiešané",
+                    "leafless": "Bezlisté"
+                }
+            },
             "leisure": {
                 "label": "Typ"
             },
@@ -844,7 +975,7 @@
             },
             "name": {
                 "label": "Názov",
-                "placeholder": "Vlastné meno objektu (iba ak existuje)"
+                "placeholder": "Vlastné meno objektu (nepovinné)"
             },
             "natural": {
                 "label": "Prírodný"
@@ -931,7 +1062,14 @@
                 "label": "Typ",
                 "options": {
                     "downhill": "Zjazd",
-                    "nordic": "Severské lyžovanie"
+                    "nordic": "Severské lyžovanie",
+                    "skitour": "Bežkovanie do kopca",
+                    "sled": "Sánky",
+                    "hike": "Pešie túry",
+                    "sleigh": "Záprah",
+                    "ice_skate": "Korčuľovanie",
+                    "snow_park": "Snežný park",
+                    "playground": "Ihrisko"
                 }
             },
             "place": {
@@ -997,6 +1135,22 @@
             "service": {
                 "label": "Typ"
             },
+            "service/bicycle/chaintool": {
+                "label": "Oprava reťaze",
+                "options": {
+                    "undefined": "Pravdepodobne nie",
+                    "yes": "Áno",
+                    "no": "Nie"
+                }
+            },
+            "service/bicycle/pump": {
+                "label": "Vzduchová pumpa",
+                "options": {
+                    "undefined": "Pravdepodobne nie",
+                    "yes": "Áno",
+                    "no": "Nie"
+                }
+            },
             "shelter": {
                 "label": "Prístrešok"
             },
@@ -1019,6 +1173,20 @@
                     "outside": "Vo vonkajšich priestoroch",
                     "yes": "Povolené všade",
                     "dedicated": "Určený pre fajčiarov (napr. fajčiarský klub)"
+                }
+            },
+            "smoothness": {
+                "label": "Rovnosť vozovky",
+                "placeholder": "Malé kolieska, kolesá, off-road...",
+                "options": {
+                    "excellent": "Malé kolieska: kolieskové korčule, skateboard",
+                    "good": "Tenké kolesá: závodný bicykel",
+                    "intermediate": "Kolesá: mestský bicykel, invalidný vozík, skúter",
+                    "bad": "Pevné kolesá: trekový bicykel, auto, rikša",
+                    "very_bad": "Zvýšený podvozok: ľahké off-road vozidlo",
+                    "horrible": "Off-road: výkonné off-road vozidlo",
+                    "very_horrible": "Špecializovaný off-road: traktor, štvorkolka",
+                    "impassible": "Nepriechodné / Nie pre kolesové vozidlá"
                 }
             },
             "social_facility_for": {
@@ -1051,6 +1219,9 @@
             "studio_type": {
                 "label": "Typ"
             },
+            "substation": {
+                "label": "Typ"
+            },
             "supervised": {
                 "label": "Pod dohľadom"
             },
@@ -1059,6 +1230,15 @@
             },
             "tactile_paving": {
                 "label": "Taktilné značenie"
+            },
+            "takeaway": {
+                "label": "Jedlo so sebou",
+                "placeholder": "Áno, Nie, Iba so sebou...",
+                "options": {
+                    "yes": "Áno",
+                    "no": "Nie",
+                    "only": "Iba so sebou"
+                }
             },
             "toilets/disposal": {
                 "label": "Odstraňovanie",
@@ -1098,9 +1278,6 @@
                     "no": "Nie: bez chodníka, vyžaduje výborné orientačné zručnosti"
                 }
             },
-            "tree_type": {
-                "label": "Typ"
-            },
             "trees": {
                 "label": "Stromy"
             },
@@ -1131,9 +1308,6 @@
             },
             "wikipedia": {
                 "label": "Wikipédia"
-            },
-            "wood": {
-                "label": "Typ"
             }
         },
         "presets": {
@@ -1253,6 +1427,10 @@
                 "name": "Prenájom bicyklov",
                 "terms": "požičovňa bicyklov, pozicovna bicyklov,cyklopožičovňa,cyklopozicovna"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "Stojan pre opravu bicyklov",
+                "terms": "stojan,oprava,bicykle,bicykel,reťaz,retaz,pumpa,hustilka,vzduch,koleso,kolesá,kolesa"
+            },
             "amenity/boat_rental": {
                 "name": "Prenájom lodí",
                 "terms": "prenajom lodi,požičovňa lodí,pozicovna lodi,prenájom člnov,prenajom clnov,pozivocna clnov,požičovňa člnov, čln,cln,člny,clny,lode,skútre,skutre,vodné skútre,vodne skutre"
@@ -1305,6 +1483,10 @@
                 "name": "Vysoká škola",
                 "terms": "vysoka skola"
             },
+            "amenity/community_centre": {
+                "name": "Komunitné centrum",
+                "terms": "komunitne centrum,centrum voľného času,centrum volneho casu,cvc,cvč,krúžky,kruzky,vzdelavanie,vzdelávanie,výchova,vychova"
+            },
             "amenity/compressed_air": {
                 "name": "Stlačený vzduch",
                 "terms": "stlaceny vzduch,kompresor"
@@ -1352,6 +1534,10 @@
             "amenity/grave_yard": {
                 "name": "Pohrebisko",
                 "terms": "cintorin,cintorín,pohrebnź ústav,pohrebny ustav,pohreb"
+            },
+            "amenity/grit_bin": {
+                "name": "Nádoba s posypom",
+                "terms": "nadoba s posypom,posyp,strk,štrk,posypový materiál,posypovy material"
             },
             "amenity/hospital": {
                 "name": "Nemocničný areál",
@@ -1421,6 +1607,10 @@
                 "name": "Krčma",
                 "terms": "krcma,hostinec,hospoda,šenk,senk,piváreň,pivaren"
             },
+            "amenity/public_bookcase": {
+                "name": "Verejná knihovnička",
+                "terms": "verejna knihovnicka,policka na knihy,polička na knihy,verejná požičovňa kníh,verejna pozicovna knih"
+            },
             "amenity/ranger_station": {
                 "name": "Stanica horskej služby",
                 "terms": "stanica horskej sluzby,sprava narodneho parku, správa národného parku,narodny park,národný park"
@@ -1428,6 +1618,10 @@
             "amenity/recycling": {
                 "name": "Recyklácia",
                 "terms": "recyklacia, zber, recyklovanie"
+            },
+            "amenity/register_office": {
+                "name": "Matričný úrad",
+                "terms": "matricny urad,matrika"
             },
             "amenity/restaurant": {
                 "name": "Reštaurácia",
@@ -1448,6 +1642,10 @@
             "amenity/social_facility/food_bank": {
                 "name": "Potravinová banka",
                 "terms": "potravinova banka,vydaj jedla,výdaj jedla,jedlo,strava"
+            },
+            "amenity/social_facility/group_home": {
+                "name": "Domov dôchodcov",
+                "terms": "domov dochodcov"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Ubytovňa pre bezdomovcov",
@@ -1758,8 +1956,8 @@
                 "terms": "vyroba hodin"
             },
             "craft/confectionery": {
-                "name": "Cukrárstvo",
-                "terms": "cukrarstvo,cukrovinky"
+                "name": "Výroba cukroviniek",
+                "terms": "vyroba cukroviniek,cukrovinky,sladkosti"
             },
             "craft/dressmaker": {
                 "name": "Krajčírstvo",
@@ -1897,6 +2095,10 @@
                 "name": "Výroba okien",
                 "terms": "vyroba okien"
             },
+            "craft/winery": {
+                "name": "Výroba vín",
+                "terms": "vyroba vin,vino,víno,vína,vina,vinaren,vináreň,vinica,vínna pivnica,vinna pivnica,pivnica"
+            },
             "embankment": {
                 "name": "Násyp",
                 "terms": "nasyp,hrádza,hradza,val"
@@ -2005,6 +2207,10 @@
                 "name": "Diaľnica",
                 "terms": "dialnica,rýchlocesta,rychlocesta"
             },
+            "highway/motorway_junction": {
+                "name": "Dialničná križovatka / výjazd",
+                "terms": "dialnicna krizovatka,vyjazd,exit"
+            },
             "highway/motorway_link": {
                 "name": "Diaľničný privádzač",
                 "terms": "Dialnicny privadzac,privadzac,privádzač,zjazd,vyjazd,výjazd,nájazd,najazd,pripojovací pruh,pripojovaci pruh"
@@ -2024,6 +2230,10 @@
             "highway/primary_link": {
                 "name": "Privádzač na cestu 1. triedy",
                 "terms": "Privadzac na cestu 1. triedy,privadzac,privádzač,zjazd,vyjazd,výjazd,nájazd,najazd,pripojovací pruh,pripojovaci pruh"
+            },
+            "highway/raceway": {
+                "name": "Pretekárska strať",
+                "terms": "pretekarska trat,nascar,formula,enduro"
             },
             "highway/residential": {
                 "name": "Obytná ulica",
@@ -2153,6 +2363,10 @@
                 "name": "Prícestný svätostánok",
                 "terms": "pricestny svatostanok,svatyna,svätyňa,svatostanok,svätostánok"
             },
+            "junction": {
+                "name": "Križovatka",
+                "terms": "krizovatka"
+            },
             "landuse": {
                 "name": "Využitie územia",
                 "terms": "vyuzitie uzemia,využitie,zyuzitie,les,lúka,luka,hora,pole"
@@ -2174,8 +2388,8 @@
                 "terms": "kostolny pozemok,kostol"
             },
             "landuse/commercial": {
-                "name": "Obchodné",
-                "terms": "obchodne,komercia,komercne,komerčné"
+                "name": "Komerčná zóna",
+                "terms": "komercna zona,business park,kancelárie,kancelarie,plocha"
             },
             "landuse/construction": {
                 "name": "Stavenisko",
@@ -2186,24 +2400,28 @@
                 "terms": "pole,farma,dobytok,polia,záhrady,zahrady,pestovatelska plocha"
             },
             "landuse/farmland": {
-                "name": "Farma",
-                "terms": "druzstvo,družstvo,chov,výbeh,vybeh,pole,roľa,rola"
+                "name": "Pestovateľská plocha",
+                "terms": "pole,farma,dobytok,polia,záhrady,zahrady,pestovatelska plocha"
             },
             "landuse/farmyard": {
                 "name": "Farma",
-                "terms": "pole,farma,dobytok,polia,záhrady,zahrady,pestovatelska plocha"
+                "terms": "Družstvo,druztvo,jrd,jzd,kravín,kravin,statok,gazdovstvo"
             },
             "landuse/forest": {
                 "name": "Les",
                 "terms": "hora,stromy"
+            },
+            "landuse/garages": {
+                "name": "Garáže",
+                "terms": "garaze,parkovanie,kryte parkovanie,kryté parkovanie"
             },
             "landuse/grass": {
                 "name": "Tráva",
                 "terms": "trava,trávnik,travnik,trávnata plocha,travnata plocha,park"
             },
             "landuse/industrial": {
-                "name": "Priemyselné",
-                "terms": "priemyselne,vyroba,industrialne,industriálne"
+                "name": "Priemyselná zóna",
+                "terms": "priemyselna plocha,továreň,tovaren,závod,zavod,priemyselna zona"
             },
             "landuse/landfill": {
                 "name": "Skládka",
@@ -2214,8 +2432,8 @@
                 "terms": "luka,pastviny,trava,tráva,paša,pasa"
             },
             "landuse/military": {
-                "name": "Armádne",
-                "terms": "armadne, armada"
+                "name": "Vojenský obvod",
+                "terms": "vojensky obvod,vojenské cvičisko,vojenske cvicisko,tankodrom,armádna zóna,zrmadna zona"
             },
             "landuse/orchard": {
                 "name": "Sad",
@@ -2226,12 +2444,12 @@
                 "terms": "kamenolom,lom,kamene,strk,kameňe,štrk"
             },
             "landuse/residential": {
-                "name": "Obytné",
-                "terms": "obytne,domy"
+                "name": "Obytná zóna",
+                "terms": "obytna oblast,mesto,dedina,rezidencna oblast,rezidenčná oblast,obytna zona"
             },
             "landuse/retail": {
-                "name": "Maloobchod",
-                "terms": "obchod,maloobchodny,maloobchodný"
+                "name": "Maloobchodná zóna",
+                "terms": "maloobchodna zona,maloobchod,predajna,predajňa,predaj,obchod,obchodná zóna"
             },
             "landuse/vineyard": {
                 "name": "Vinica",
@@ -2268,6 +2486,10 @@
             "leisure/marina": {
                 "name": "Lodenica",
                 "terms": "pristav,prístav,jachta,jachty,loď,lod"
+            },
+            "leisure/nature_reserve": {
+                "name": "Prírodná rezervácia",
+                "terms": "prirodna rezervacia,park,chko,narodný park,narodny park"
             },
             "leisure/park": {
                 "name": "Park",
@@ -2313,9 +2535,17 @@
                 "name": "Ihrisko pre deti",
                 "terms": "ihrisko,preliezačky,pieskovisko,pre deti,preliezacky,detske ihrisko,detské ihrisko"
             },
+            "leisure/running_track": {
+                "name": "Bežecká trať",
+                "terms": "bezecka trat"
+            },
             "leisure/slipway": {
                 "name": "Spúšťanie lodí",
                 "terms": "Spustanie lodi,dok,lodenica,klzacka,kĺzačka"
+            },
+            "leisure/sports_center": {
+                "name": "Športové centrum",
+                "terms": "sportove centrum,fitko,fitness centrum,posilňovňa,posilnovna,posilovna,polovňa"
             },
             "leisure/stadium": {
                 "name": "Štadión",
@@ -2324,6 +2554,10 @@
             "leisure/swimming_pool": {
                 "name": "Plaváreň",
                 "terms": "Plavaren,kúpalisko,kupalisko"
+            },
+            "leisure/track": {
+                "name": "Pretekárska dráha (nemotoristická)",
+                "terms": "pretekarska draha (nemotoristicka),zavodná dráha,zavodna draha"
             },
             "line": {
                 "name": "Čiara",
@@ -2381,6 +2615,10 @@
                 "name": "Veža s vodojemom",
                 "terms": "vodojem,veza s vodojemom,veza,veža,vodárenská veža,vodarenska veza"
             },
+            "man_made/water_well": {
+                "name": "Studňa",
+                "terms": "studna,voda"
+            },
             "man_made/water_works": {
                 "name": "Vodojem",
                 "terms": "vodáreň,vodaren,vodný zdroj,vodny zdroj,prameň,pramen"
@@ -2412,6 +2650,10 @@
             "natural/beach": {
                 "name": "Pláž",
                 "terms": "plaz,kúpalisko,kupalisko,piesok,pobrežie,pobrezie,more"
+            },
+            "natural/cave_entrance": {
+                "name": "Vstup do jaskyne",
+                "terms": "jaskyňa,jaskyna"
             },
             "natural/cliff": {
                 "name": "Útes",
@@ -2637,6 +2879,10 @@
                 "name": "Rozvodná stanica",
                 "terms": "Rozvodna stanica,Rozvodná stanica,transformator"
             },
+            "power/substation": {
+                "name": "Elektrická rozvodňa",
+                "terms": "elektricka rozvodna,transformator,transformátor"
+            },
             "power/tower": {
                 "name": "Stĺp vysokého napätia",
                 "terms": "stlp vysokeho napatia,vysoké napätie,vysoke napatie"
@@ -2725,13 +2971,41 @@
                 "name": "Obchod s alkoholom",
                 "terms": "alkohol"
             },
+            "shop/anime": {
+                "name": "Obchod s anime",
+                "terms": "anime"
+            },
+            "shop/antiques": {
+                "name": "Obchod so tarožitnosťami",
+                "terms": "obchod so starozitnostami,starozitnosti,starožitnosti,starý nábytok,stary nabytok"
+            },
+            "shop/art": {
+                "name": "Obchod s umením",
+                "terms": "obchod s umenim,obrazy,umelecké diela,umelecke diela"
+            },
+            "shop/baby_goods": {
+                "name": "Obchod s detskými potrebami",
+                "terms": "obchod s detskymi potrebami"
+            },
+            "shop/bag": {
+                "name": "Obchod s kuframi",
+                "terms": "kufre,kufor,batoh,batožina,batozina"
+            },
             "shop/bakery": {
                 "name": "Pekáreň",
                 "terms": "pekaren,pekárstvo,pekarstvo,chlieb,pecivo,pečivo"
             },
+            "shop/bathroom_furnishing": {
+                "name": "Obchod s kúpelňami",
+                "terms": "obchod s kuplenami,kupelka,kúpelka,kúpelňa,kupelna"
+            },
             "shop/beauty": {
                 "name": "Bižutéria",
                 "terms": "bizuteria,šperky,sperky,naramky,náramnky,nausnice,náušnice,prstene,nahrdelniky,náhrdelniky"
+            },
+            "shop/bed": {
+                "name": "Obchod s posteľami/matracmi",
+                "terms": "matrac,matrace,posteľ,postel,postele,spálňa,spalna"
             },
             "shop/beverages": {
                 "name": "Obchod s nápojmi",
@@ -2745,6 +3019,10 @@
                 "name": "Stávková kancelária",
                 "terms": "stavkova kancelaria,stavky,tipos,sportka,bingo,stavka,stávka,kurz"
             },
+            "shop/books": {
+                "name": "Kníhkupectvo",
+                "terms": "knihkupectvo,knihy,kniha,obchod s knihami"
+            },
             "shop/boutique": {
                 "name": "Butik",
                 "terms": "oblecenie,oblečenie,šaty,saty,odev,odevy"
@@ -2752,6 +3030,10 @@
             "shop/butcher": {
                 "name": "Mäsiarstvo",
                 "terms": "masiarstvo,maso,mäso,predajňa mäsa,predajna masa"
+            },
+            "shop/candles": {
+                "name": "Obchod so svičkami",
+                "terms": "obchod so svieckami,sviecka,sviečka,sviečky,sviecky"
             },
             "shop/car": {
                 "name": "Predajňa áut",
@@ -2765,9 +3047,21 @@
                 "name": "Autoservis",
                 "terms": "autoservis,oprava aút,oprava aut,servis"
             },
+            "shop/carpet": {
+                "name": "Obchod s kobercami",
+                "terms": "koberec,koberce,pokrovec,rokožka,rohozka"
+            },
+            "shop/cheese": {
+                "name": "Obchod so syrmi",
+                "terms": "syr,syry,korbáčiki,korbaciky,oštiepok,ostiepok,oštiepky,ostiepky"
+            },
             "shop/chemist": {
                 "name": "Drogéria",
                 "terms": "drogeria"
+            },
+            "shop/chocolate": {
+                "name": "Obchod s čokoládou",
+                "terms": "obchod s cokoladou,cokolada,čokoláda,pralinky"
             },
             "shop/clothes": {
                 "name": "Obchod s odevami",
@@ -2777,9 +3071,33 @@
                 "name": "Obchod s výpočtovou technikou",
                 "terms": "obchod s vypoctovou technikou,pocitace,počitače,elektro,elektronika,vypoctova technika,výpočtová technika"
             },
+            "shop/confectionery": {
+                "name": "Obchod so sladkosťami",
+                "terms": "obchod so sladkostami,sladkosti,cukrovinky"
+            },
             "shop/convenience": {
                 "name": "Samoobsluha",
                 "terms": "cukraren,cukrovinky,cukrárstvo,cukrarstvo,obchod s cukrovinkami"
+            },
+            "shop/copyshop": {
+                "name": "Fotokopírovanie",
+                "terms": "fotokopirovanie,fotokopírka,fotokopirka"
+            },
+            "shop/cosmetics": {
+                "name": "Obchod s kozmetikou",
+                "terms": "kozmetika,drogeria"
+            },
+            "shop/craft": {
+                "name": "Obchod s umeleckými potrebami",
+                "terms": "Obchod s umeleckymi potrebami,umelecké potreby,umelecke potreby"
+            },
+            "shop/curtain": {
+                "name": "Obchod so záclonami",
+                "terms": "obchod so zaclonami,záclony,zaclony,záclona,zaclona,záves,zaves,závesy,zavesy"
+            },
+            "shop/dairy": {
+                "name": "Obchod s mliečnymi výrobkami",
+                "terms": "obchod s mliecnymi vyrobkami,mlieko,jogurt,jogurty,smotana,syr,syry"
             },
             "shop/deli": {
                 "name": "Delikatesy",
@@ -2793,13 +3111,29 @@
                 "name": "Obchod pre kutilov",
                 "terms": "stavebný materiál,stavebny material,hornbach,baumax"
             },
+            "shop/dry_cleaning": {
+                "name": "Čistiareň odevov",
+                "terms": "cistiaren odevov,suché čistenie,suche cistenie"
+            },
             "shop/electronics": {
                 "name": "Elektro obchod",
                 "terms": "elektro,elektronika"
             },
+            "shop/erotic": {
+                "name": "Ochod s erotickými potrebami",
+                "terms": "obchod s erotickymi potrebami,sexshop,sex shop"
+            },
+            "shop/fabric": {
+                "name": "Obchod s látkami",
+                "terms": "obchod s latkami,textil"
+            },
             "shop/farm": {
                 "name": "Voľný predaj ovocia",
                 "terms": "Volny predaj ovocia,ovocie"
+            },
+            "shop/fashion": {
+                "name": "Obchod s módnymi doplnkami",
+                "terms": "obchod s modmymi doplnkami"
             },
             "shop/fishmonger": {
                 "name": "Predaj rýb",
@@ -2809,9 +3143,17 @@
                 "name": "Kvetinárstvo",
                 "terms": "kvetinarstvo,kvety,kytice"
             },
+            "shop/frame": {
+                "name": "Obchod s rámami",
+                "terms": "obchod s ramami,obrazy,rám,ram"
+            },
             "shop/funeral_directors": {
                 "name": "Pohrebný ústav",
                 "terms": "pohrebny ustav,pohreb,pohreb,pohrebníctvo,pohrebnictvo"
+            },
+            "shop/furnace": {
+                "name": "Obchod so kotlami",
+                "terms": "pec,kotol"
             },
             "shop/furniture": {
                 "name": "Obchod s nábytkom",
@@ -2837,17 +3179,45 @@
                 "name": "Železiarstvo",
                 "terms": "zeleziarstvo,baumax,hornbach,náradie,naradie,predajna nárradia,predajna naradia"
             },
+            "shop/hearing_aids": {
+                "name": "Obchod s načúvacími prístrojmi",
+                "terms": "obchod s nacuvacimi pristrojmi,nacuvaci pristroj,načúvací prístroj"
+            },
+            "shop/herbalist": {
+                "name": "Bylinkárstvo",
+                "terms": "bylinkarstvo,bylinky"
+            },
             "shop/hifi": {
                 "name": "Obchod s ozvučením",
                 "terms": "Obchod so zvukovymi systemami,hifi,hi-fi,zvuk,ozvučenie,ozvucenie,obchod s ozvucenim,Obchod so zvukovými systémami"
+            },
+            "shop/houseware": {
+                "name": "Domáce potreby",
+                "terms": "domace potreby,zeleziarstvo,železiarstvo"
+            },
+            "shop/interior_decoration": {
+                "name": "Obchod s bytovými dekoráciami",
+                "terms": "obchod s bytovami dekoraciami,intriérové dekorácie,intrierove dekoracie"
             },
             "shop/jewelry": {
                 "name": "Zlatníctvo",
                 "terms": "zlatnictvo,šperky,sperky,zlato,striebro"
             },
+            "shop/kiosk": {
+                "name": "Novinový stánok",
+                "terms": "novinovy stanok,noviny,casopisy,časopisy"
+            },
+            "shop/kitchen": {
+                "name": "Kuchynské štúdio",
+                "terms": "kuchynske studio,kuchyna,uchyňa,kuchyne,kuchyňe,kuchynský kút,kuchynsky kut,kuchynské kúty,kuchynske kuty"
+            },
             "shop/laundry": {
                 "name": "Čistiareň",
                 "terms": "cistiaren,Čistiareň odevov,Práčovňa,cistiaren odevov,pracovna"
+            },
+            "shop/leather": {
+                "name": "Obchod s kožennými výrobkami",
+                "terms": "obchod s kozennymi vyrobkami,koza,koža"
             },
             "shop/locksmith": {
                 "name": "Zámočníctvo",
@@ -2861,9 +3231,21 @@
                 "name": "Nákupné centrum",
                 "terms": "nakupne centrum,obchodne cenrum,obchodné centrum,obchody"
             },
+            "shop/massage": {
+                "name": "Masérstvo",
+                "terms": "maserstvo,masáže,masaze,masáž,masaz"
+            },
+            "shop/medical_supply": {
+                "name": "Obchod so zdravotníckymi pomôckami",
+                "terms": "obchod so zdravonickymi pomockami"
+            },
             "shop/mobile_phone": {
                 "name": "Obchod s mobilnými telefónmi",
                 "terms": "obchod s mobilnymi telefonmi,mobilne telefony,mobily,telefony,mobilné telefóny,telefóny"
+            },
+            "shop/money_lender": {
+                "name": "Požičovňa peňazí",
+                "terms": "pozicovna penazi,peniaze,pôžicky,pozicky"
             },
             "shop/motorcycle": {
                 "name": "Predajňa motocyklov",
@@ -2873,9 +3255,33 @@
                 "name": "Obchod s hudbou",
                 "terms": "hudba,hudobný obchod,hudobny obchod,CD,mp3"
             },
+            "shop/musical_instrument": {
+                "name": "Obchod s hudobnými nástrojmi",
+                "terms": "obchod s hudobnymi nastrojmi, hudobne nastroje,hudobné nástroje"
+            },
+            "shop/newsagent": {
+                "name": "Obchod s novinami/časopismi",
+                "terms": "obchod s novinami/casopismi,noviny,casopisy,časopisy"
+            },
             "shop/optician": {
                 "name": "Optika",
                 "terms": "okuliare,zrak,"
+            },
+            "shop/organic": {
+                "name": "Obchod s eko potravinami",
+                "terms": "eko potraviny"
+            },
+            "shop/outdoor": {
+                "name": "Outdoorový obchod",
+                "terms": "outdoorovy obchod,trekový obchod,trekovy ochod,outdoor"
+            },
+            "shop/paint": {
+                "name": "Obchod s nátermi",
+                "terms": "obchod s natermi,farby,laky,nátery,natery"
+            },
+            "shop/pawnbroker": {
+                "name": "Záložňa",
+                "terms": "zalozna"
             },
             "shop/pet": {
                 "name": "Chovprodukt",
@@ -2885,9 +3291,29 @@
                 "name": "Obchod s fototechnikou",
                 "terms": "Fotoateliér,fotoatelier,fotostudio,fotoštúdio,fotografia"
             },
+            "shop/pyrotechnics": {
+                "name": "Obchod s pyrotechnikov",
+                "terms": "pyrotechnika,ohňostroj,ohnostroj,prskavky,rakety,delobuchy"
+            },
+            "shop/radiotechnics": {
+                "name": "Obchod s elektronikou",
+                "terms": "elektronika"
+            },
+            "shop/religion": {
+                "name": "Obchod s náboženkými pomôckami",
+                "terms": "obchod s nabozenskymi pomockami"
+            },
+            "shop/scuba_diving": {
+                "name": "Obchod s potápačským vybavením",
+                "terms": "obchod s potapacskym vybavemin,potapacske vybavenie,potapačské vybanie,"
+            },
             "shop/seafood": {
                 "name": "Obchod s morskými špecialitami",
                 "terms": "obchod s morskymi specialitami,plody mora,ryby,morské ryby,morske ryby,kreverty,treska,tuniak"
+            },
+            "shop/second_hand": {
+                "name": "Second hand",
+                "terms": "z druhej ruky"
             },
             "shop/shoes": {
                 "name": "Obchod s obuvov",
@@ -2905,6 +3331,26 @@
                 "name": "Supermarket",
                 "terms": "potraviny,obchod,samoška,samoska,samoobsluha"
             },
+            "shop/tailor": {
+                "name": "Krajčírstvo",
+                "terms": "krajcirstvo,krajcir,krajčir"
+            },
+            "shop/tattoo": {
+                "name": "Tetovací salón",
+                "terms": "tetovaci salon,tetovania,tetovanie"
+            },
+            "shop/tea": {
+                "name": "Obchod s čajom",
+                "terms": "obchod s cajom,cajovy obchod,čajový ochod"
+            },
+            "shop/ticket": {
+                "name": "Predajňa vstupeniek",
+                "terms": "predajna listkov,vstupenky,predajna vstupeniek,vstupenka,listok,lístok"
+            },
+            "shop/tobacco": {
+                "name": "Obchod s tabakom",
+                "terms": "tabak,trafika"
+            },
             "shop/toys": {
                 "name": "Hračkárstvo",
                 "terms": "hrackarstvo,hracky,hry,hračky"
@@ -2921,6 +3367,10 @@
                 "name": "Prázdny obchod",
                 "terms": "prazdny obchod,neobsadený obchod,neobsadeny ochod"
             },
+            "shop/vacuum_cleaner": {
+                "name": "Obchod s vysavačmi",
+                "terms": "bchod s vysavacmi,vysavače,vysavace,vysavač,vysavac"
+            },
             "shop/variety_store": {
                 "name": "Obchod so zmiešaným tovarom",
                 "terms": "obchod so zmiesanym tovarom,rozlicny tovar,rozličný tovar"
@@ -2928,6 +3378,22 @@
             "shop/video": {
                 "name": "Videopožičovňa",
                 "terms": "videopozicovna,DVD,CD,VHS,blue-ray,blueray,blue ray,video"
+            },
+            "shop/video_games": {
+                "name": "Obchod s videohrami",
+                "terms": "videohry,počítačové hry,pocitacove hry"
+            },
+            "shop/water_sports": {
+                "name": "Ochod s plaveckým vybavením",
+                "terms": "ochod s plaveckym vybavenim"
+            },
+            "shop/weapons": {
+                "name": "Ochod so zbraňami",
+                "terms": "obchod so zbranami,zbraňe,zbrane,nože,noze"
+            },
+            "shop/window_blind": {
+                "name": "Obchod so žalúziami",
+                "terms": "obchod so zaluziami,zaluzie,žalúzie"
             },
             "shop/wine": {
                 "name": "Vináreň",
@@ -3000,6 +3466,22 @@
             "tourism/zoo": {
                 "name": "Zoo",
                 "terms": "zoologická záhrada,zoologicka zahrada,zvieratá,zvierata"
+            },
+            "traffic_calming/bump": {
+                "name": "Spomalovcí prah",
+                "terms": "spomalovaci prah,retardér,retarder"
+            },
+            "traffic_calming/hump": {
+                "name": "Spomalovací hrb",
+                "terms": "spomalovaci hrb"
+            },
+            "traffic_calming/rumble_strip": {
+                "name": "Nízky spomaľovací prah",
+                "terms": "nizky spomalovaci prah"
+            },
+            "traffic_calming/table": {
+                "name": "Vyvýšený prechod pre chodcov",
+                "terms": "vyvyseny prechod pre chodcov"
             },
             "type/boundary": {
                 "name": "Hranica",

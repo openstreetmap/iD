@@ -3,7 +3,7 @@
         "add_area": {
             "title": "المساحة",
             "description": "أضف مواقف أو مباني أو بحيرات أو مناطق أخرى إلى الخارطة.",
-            "tail": "انقر على الخارطة للبدء في رسم منطقة، كحديقة, بجيرة أو مبنى."
+            "tail": "انقر على الخارطة للبدء في رسم منطقة مثل حديقة أو بحيرة أو مبنى."
         },
         "add_line": {
             "title": "خط",
@@ -12,7 +12,7 @@
         },
         "add_point": {
             "title": "نقطة",
-            "description": "أضف مطاعم، نُصب تذكارية، مكاتب بريد أو نقاط اخرى إلى الخارطة.",
+            "description": "أضف مطاعم، نُصب تذكارية، مكاتب بريد أو نقاط أخري إلى الخارطة.",
             "tail": "اضغط على الخارطة ﻹضافة نقطة. "
         },
         "browse": {
@@ -41,6 +41,7 @@
             }
         },
         "continue": {
+            "key": "A",
             "title": "استمر",
             "description": "مواصلة هذا الخط.",
             "not_eligible": "لا يوجد خط يمكن تكملته هنا.",
@@ -84,10 +85,12 @@
         "straighten": {
             "title": "مستقيم",
             "description": "اجعل هذا الخط مستقيماً.",
+            "key": "S",
             "annotation": "قوُم خطاً."
         },
         "delete": {
             "title": "حذف",
+            "description": "احذف الكائن نهائيا",
             "annotation": {
                 "point": "احذف نقطة",
                 "vertex": "احذف عقدة من طريق",
@@ -124,8 +127,10 @@
             "description": "ادمج هذه الخطوط",
             "key": "C",
             "annotation": "ادمج {n} خطوط",
+            "not_eligible": "هذه المميزات لا يمكن دمجها",
             "not_adjacent": "لا يمكن دمج هذه الخطوط لأنها غير متصلة.",
-            "restriction": "لا يمكن دمج هذه الخطوط بسبب أن أحدها على الأقل لديه علاقة بـ \"{relation}\""
+            "restriction": "لا يمكن دمج هذه الخطوط بسبب أن أحدها على الأقل لديه علاقة بـ \"{relation}\"",
+            "incomplete_relation": "لا يمكن دمج هذه المميزات لأن واحد منها على الأقل لم يتم تحميله بالكامل."
         },
         "move": {
             "title": "تحريك",
@@ -163,6 +168,7 @@
             "key": "X",
             "annotation": {
                 "line": "افصل الخط.",
+                "area": "افصل حدود منطقة",
                 "multiple": "افصل حدود {n} خطوط/منطقة"
             },
             "not_eligible": "لا يمكن فصل الخطوط عند البداية أو النهاية.",
@@ -236,7 +242,15 @@
         "unknown": "غير معروف",
         "feature_list": "إبحث عن الميزات",
         "edit": "حرر ميزة",
-        "none": "None"
+        "check": {
+            "yes": "نعم",
+            "no": "لا"
+        },
+        "none": "None",
+        "way": "مسار",
+        "relation": "علاقة",
+        "location": "مكان",
+        "add_fields": "أضف حقل"
     },
     "background": {
         "title": "الخلفية",
@@ -341,6 +355,9 @@
             "category-building": {
                 "name": "مبنى"
             },
+            "category-golf": {
+                "name": "جولف"
+            },
             "category-landuse": {
                 "name": "استخدام الأرض"
             },
@@ -402,17 +419,41 @@
                 }
             },
             "access_simple": {
+                "label": "الدخول",
+                "placeholder": "نعم"
+            },
+            "access_toilets": {
                 "label": "الدخول"
             },
             "address": {
                 "label": "العنوان",
                 "placeholders": {
+                    "housename": "اسم المنزل",
+                    "housenumber": "123",
                     "street": "الشارع",
-                    "city": "المدينة"
+                    "city": "المدينة",
+                    "postcode": "الرمز البريدي",
+                    "state": "ولاية",
+                    "country": "دولة"
                 }
             },
             "admin_level": {
                 "label": "مستوى الإدارة"
+            },
+            "aerialway": {
+                "label": "نوع"
+            },
+            "aerialway/access": {
+                "label": "دخول",
+                "options": {
+                    "entry": "مدخل",
+                    "exit": "مخرج",
+                    "both": "كلاهما"
+                }
+            },
+            "aerialway/duration": {
+                "label": "المدة (دقائق)",
+                "placeholder": "1, 2, 3..."
             },
             "aeroway": {
                 "label": "النوع"
@@ -680,9 +721,6 @@
             "trail_visibility": {
                 "label": "وضوحية الطريق"
             },
-            "tree_type": {
-                "label": "النوع"
-            },
             "vending": {
                 "label": "أنواع البضائع"
             },
@@ -704,9 +742,6 @@
             },
             "wikipedia": {
                 "label": "ويكيبيديا"
-            },
-            "wood": {
-                "label": "النوع"
             }
         },
         "presets": {
@@ -1250,17 +1285,9 @@
                 "name": "مقبرة",
                 "terms": "مقبرة, مدفن, جبانة"
             },
-            "landuse/commercial": {
-                "name": "تجاري",
-                "terms": "تجاري"
-            },
             "landuse/construction": {
                 "name": "إنشاءات",
                 "terms": "إنشاءات, تشييد, تعمير"
-            },
-            "landuse/farm": {
-                "name": "مزرعة",
-                "terms": "مزرعة"
             },
             "landuse/farmyard": {
                 "name": "فناء المزرعة",
@@ -1274,10 +1301,6 @@
                 "name": "عشب",
                 "terms": "عشب, غطاء أخضر"
             },
-            "landuse/industrial": {
-                "name": "صناعي",
-                "terms": "صناعي"
-            },
             "landuse/meadow": {
                 "name": "مرج",
                 "terms": " مرج, روضة, مخضرة"
@@ -1289,14 +1312,6 @@
             "landuse/quarry": {
                 "name": "محجر",
                 "terms": "محجر"
-            },
-            "landuse/residential": {
-                "name": "سكني",
-                "terms": "سكتي"
-            },
-            "landuse/retail": {
-                "name": "بيع بالتجزئة",
-                "terms": "بيع بالتجزئة ، بالقطاعي ، بالمفرق"
             },
             "landuse/vineyard": {
                 "name": "مزرعة العنب",

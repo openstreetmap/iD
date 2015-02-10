@@ -104,9 +104,6 @@
             },
             "wikipedia": {
                 "label": "위키페디아"
-            },
-            "wood": {
-                "label": "종류"
             }
         },
         "presets": {
@@ -224,23 +221,14 @@
             "landuse/basin": {
                 "name": "온천"
             },
-            "landuse/commercial": {
-                "name": "상업"
-            },
             "landuse/construction": {
                 "name": "개발중"
-            },
-            "landuse/farm": {
-                "name": "경작 및 재배에 사용되는 농지"
             },
             "landuse/forest": {
                 "name": "숲"
             },
             "landuse/grass": {
                 "name": "목초지"
-            },
-            "landuse/industrial": {
-                "name": "공업"
             },
             "landuse/quarry": {
                 "name": "채석장"

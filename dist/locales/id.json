@@ -286,6 +286,24 @@
         "fix_misalignment": "Perbaiki perataan",
         "reset": "ulang"
     },
+    "feature": {
+        "paths": {
+            "description": "Jalan Kecil"
+        },
+        "buildings": {
+            "description": "Bangunan"
+        },
+        "boundaries": {
+            "description": "Batas",
+            "tooltip": "Batas Administrasi"
+        },
+        "past_future": {
+            "description": "Masa Lalu/Akan Datang"
+        },
+        "others": {
+            "description": "Lainnya"
+        }
+    },
     "restore": {
         "heading": "Anda memiliki perubahan yang belum disimpan",
         "description": "Apakah anda ingin mengembalikan perubahan yang belum tersimpan dari sesi penyuntingan sebelumnya?",
@@ -907,9 +925,6 @@
             "tracktype": {
                 "label": "Tipe Trek"
             },
-            "tree_type": {
-                "label": "Tipe"
-            },
             "trees": {
                 "label": "Pepohonan"
             },
@@ -937,9 +952,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Tipe"
             }
         },
         "presets": {
@@ -1356,7 +1368,7 @@
                 "name": "Jalan Tinggal"
             },
             "highway/motorway": {
-                "name": "Jalur Motor"
+                "name": "Jalan Tol"
             },
             "highway/motorway_link": {
                 "name": "Jalan Tol"
@@ -1368,7 +1380,7 @@
                 "name": "Pejalan kaki"
             },
             "highway/primary": {
-                "name": "Jalan Utama"
+                "name": "Jalan Provinsi"
             },
             "highway/residential": {
                 "name": "Jalan Perumahan"
@@ -1377,7 +1389,7 @@
                 "name": "Tempat Peristirahatan"
             },
             "highway/secondary": {
-                "name": "Jalan Sekunder"
+                "name": "Jalan Kabupaten"
             },
             "highway/service": {
                 "name": "Jalan Layanan"
@@ -1392,7 +1404,7 @@
                 "name": "Titian"
             },
             "highway/tertiary": {
-                "name": "Jalan Tersier"
+                "name": "Jalan Kota"
             },
             "highway/track": {
                 "name": "Titian"
@@ -1402,7 +1414,7 @@
                 "terms": "<alihbahasa dengan sinonim atau istilah terkait untuk 'Lampu Merah', dipisahkan dengan koma>"
             },
             "highway/trunk": {
-                "name": "Jalan Utama"
+                "name": "Jalan Nasional"
             },
             "highway/turning_circle": {
                 "name": "Putaran"
@@ -1443,17 +1455,8 @@
             "landuse/churchyard": {
                 "name": "Halaman Gereja"
             },
-            "landuse/commercial": {
-                "name": "Komersil"
-            },
             "landuse/construction": {
                 "name": "Konstruksi"
-            },
-            "landuse/farm": {
-                "name": "Ternak"
-            },
-            "landuse/farmland": {
-                "name": "Lahan Pertanian"
             },
             "landuse/farmyard": {
                 "name": "Peternakan"
@@ -1464,23 +1467,14 @@
             "landuse/grass": {
                 "name": "Rumput"
             },
-            "landuse/industrial": {
-                "name": "Industri"
-            },
             "landuse/meadow": {
                 "name": "Padang Rumput"
-            },
-            "landuse/military": {
-                "name": "Militer"
             },
             "landuse/orchard": {
                 "name": "Kebun Buah"
             },
             "landuse/quarry": {
                 "name": "Pertambangan"
-            },
-            "landuse/residential": {
-                "name": "Pemukiman"
             },
             "landuse/vineyard": {
                 "name": "Kebun Anggur"

@@ -72,7 +72,8 @@
                 "area": "Područje je zaokruženo."
             },
             "not_closed": "Ovo se ne može zaokružiti jer nije zatvoren objekt.",
-            "too_large": "Ovo se ne može zaokružiti jer se trenutno ne vidi cijeli objekt."
+            "too_large": "Ovo se ne može zaokružiti jer se trenutno ne vidi cijeli objekt.",
+            "connected_to_hidden": "Ovo se ne može zaokružiti jer je spojeno na skrivenu značajku."
         },
         "orthogonalize": {
             "title": "Stavi pod pravi kut",
@@ -86,14 +87,16 @@
                 "area": "Kutovi područja su pod pravim kutom."
             },
             "not_squarish": "Ovo se ne može ukvadratičiti jer nije kvadratičastog oblika.",
-            "too_large": "Ovo se ne može ukvadratičiti jer se trenutno ne vidi cijeli objekt."
+            "too_large": "Ovo se ne može ukvadratičiti jer se trenutno ne vidi cijeli objekt.",
+            "connected_to_hidden": "Ovo se ne može ukvadratičiti jer je spojeno na skrivenu značajku."
         },
         "straighten": {
             "title": "Izravnaj",
             "description": "Izravnaj ovu liniju.",
             "key": "S",
             "annotation": "Linija je izravnana.",
-            "too_bendy": "Ovo se ne može izravnati jer je previše krivudavo."
+            "too_bendy": "Ovo se ne može izravnati jer je previše krivudavo.",
+            "connected_to_hidden": "Ova linija se ne može ispraviti jer je spojena na skrivenu značajku."
         },
         "delete": {
             "title": "Izbriši",
@@ -106,7 +109,8 @@
                 "relation": "Relacija je obrisana.",
                 "multiple": "Obrisano je {n} objekata."
             },
-            "incomplete_relation": "Ovo se svojstvo ne može se obrisati jer nije potpuno preuzeto."
+            "incomplete_relation": "Ovo se svojstvo ne može se obrisati jer nije potpuno preuzeto.",
+            "connected_to_hidden": "Ovo se ne može se obrisati jer je spojeno na skrivenu značajku."
         },
         "add_member": {
             "annotation": "Dodaj člana relacije."
@@ -127,7 +131,8 @@
             "description": "Međusobno razdvoji ove linije/područja.",
             "key": "D",
             "annotation": "Razdvoji linije/područja.",
-            "not_connected": "Ovdje nema dovoljno linija/područja za odvajanje."
+            "not_connected": "Ovdje nema dovoljno linija/područja za odvajanje.",
+            "connected_to_hidden": "Ovo se ne može odvojiti jer je spojeno na skrivenu značajku."
         },
         "merge": {
             "title": "Spoji",
@@ -151,7 +156,8 @@
                 "multiple": "Nekoliko objekata je premješteno."
             },
             "incomplete_relation": "Ovo svojstvo se ne može premjestiti jer nije potpuno preuzeto.",
-            "too_large": "Ovo se ne može premjestiti jer je premalo objekta trenutno vidljivo."
+            "too_large": "Ovo se ne može premjestiti jer je premalo objekta trenutno vidljivo.",
+            "connected_to_hidden": "Ovo se ne može premjestiti jer je spojeno na skrivenu značajku."
         },
         "rotate": {
             "title": "Rotiraj",
@@ -161,7 +167,8 @@
                 "line": "Linija je rotirana.",
                 "area": "Područje je rotirana."
             },
-            "too_large": "Ovo se ne može zakrenuti jer je premalo objekta trenutno vidljivo."
+            "too_large": "Ovo se ne može zakrenuti jer je premalo objekta trenutno vidljivo.",
+            "connected_to_hidden": " Ovo se ne može zakrenuti jer je spojeno na skrivenu značajku."
         },
         "reverse": {
             "title": "Obrni smjer",
@@ -183,7 +190,8 @@
                 "multiple": "Razdvoji {n} granica linija/područja."
             },
             "not_eligible": "Linije ne mogu biti razdvojene na svom početku ili kraju.",
-            "multiple_ways": "Previše linija za razdvajanje."
+            "multiple_ways": "Previše linija za razdvajanje.",
+            "connected_to_hidden": "Ovo se ne može razdvojiti jer je spojeno na skrivenu značajku."
         },
         "restriction": {
             "help": {
@@ -218,6 +226,10 @@
     "logout": "odjava",
     "loading_auth": "Spajanje na OpenStreetMap...",
     "report_a_bug": "Prijavi grešku",
+    "feature_info": {
+        "hidden_warning": "{count} skrivenih značajki",
+        "hidden_details": "Ove značajke su trenutno skrivene: {details}"
+    },
     "status": {
         "error": "Onemogućeno spajanje na API.",
         "offline": "API je izvan mreže. Molim pokušaj uređivanje kasnije.",
@@ -231,6 +243,7 @@
         "upload_explanation_with_user": "Promjene koje postaviš kao {user} biti će vidljive na svim kartama koje koriste podatke OpenStreetMap-a.",
         "save": "Spremi",
         "cancel": "Otkaži",
+        "changes": "{count} Promjena",
         "warnings": "Upozorenja",
         "modified": "Promijenjeno",
         "deleted": "Obrisano",
@@ -269,11 +282,16 @@
         "incomplete": "<nije preuzeto>",
         "feature_list": "Pretraži svojstva",
         "edit": "Uredi svojstvo",
+        "check": {
+            "yes": "Da",
+            "no": "Ne"
+        },
         "none": "Nijedna",
         "node": "Točka",
         "way": "Put",
         "relation": "Relacija",
-        "location": "Lokacija"
+        "location": "Lokacija",
+        "add_fields": "Dodaj polje:"
     },
     "background": {
         "title": "Pozadina",
@@ -286,6 +304,78 @@
         "fix_misalignment": "Popravi odstupanje",
         "reset": "resetiraj"
     },
+    "map_data": {
+        "title": "Podaci karte",
+        "description": "Podaci karte",
+        "data_layers": "Slojevi podataka",
+        "fill_area": "Ispuni područja",
+        "map_features": "Značajke karte",
+        "autohidden": "Ove značajke su automatski skrivene jer ih je previše za prikaz na zaslonu. Možeš povećati prikaz za njihovo uređivanje."
+    },
+    "feature": {
+        "points": {
+            "description": "Točke",
+            "tooltip": "Interesne točke"
+        },
+        "major_roads": {
+            "description": "Glavne ceste",
+            "tooltip": "Prometnice, ulice, itd."
+        },
+        "minor_roads": {
+            "description": "Sporedne ceste",
+            "tooltip": "Pristupne ceste, parkirni prolazi, zemljani putovi, itd."
+        },
+        "paths": {
+            "description": "Staze",
+            "tooltip": "Pločnici, pješačke staze, biciklističke staze, itd."
+        },
+        "buildings": {
+            "description": "Građevine",
+            "tooltip": "Zgrade, skloništa, garaže, itd."
+        },
+        "landuse": {
+            "description": "Značajke korištenja zemljišta",
+            "tooltip": "Šume, poljoprivredno zemlj., parkovi, građevinsko, poslovna zona, itd."
+        },
+        "boundaries": {
+            "description": "Granice",
+            "tooltip": "Administrativne granice"
+        },
+        "water": {
+            "description": "Vodene značajke",
+            "tooltip": "Rijeke, jezera, lokve, bazeni, itd."
+        },
+        "rail": {
+            "description": "Značajke željeznice",
+            "tooltip": "Željezničke pruge"
+        },
+        "power": {
+            "description": "Elektroenergetske značajke",
+            "tooltip": "Dalekovodi, elektrane, trafostanice, itd."
+        },
+        "past_future": {
+            "description": "Prošlost/Budućnost",
+            "tooltip": "U planu, u izgradnji, napušteno, srušeno, itd."
+        },
+        "others": {
+            "description": "Ostali",
+            "tooltip": "Sve ostalo"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "Bez ispune (žičani način)",
+            "tooltip": "Omogućenjem žičanog načina jednostavnije je vidjeti pozadinske snimke."
+        },
+        "partial": {
+            "description": "Djelomična ispuna",
+            "tooltip": "Područja su iscrtana s ispunom samo oko njihovih unutarnjih rubova. (Preporučeno za početnike)"
+        },
+        "full": {
+            "description": "Potpuno ispuni",
+            "tooltip": "Područja su iscrtana potpuno ispunjena."
+        }
+    },
     "restore": {
         "heading": "Imaš nespremljenih promjena",
         "description": "Želiš li vratiti nespremljene promjene od posljednji puta kada si uređivao/la?",
@@ -297,6 +387,7 @@
         "help": "Spremi promjene na OpenStreetMap, čime će biti vidljive drugim korisnicima.",
         "no_changes": "Nema promjena za spremiti.",
         "error": "Dogodila se pogreška pri pokušaju spremanja.",
+        "unknown_error_details": "Molim provjeri jesi li spojen na internet.",
         "uploading": "Postavljanje promjena na OpenStreetMap.",
         "unsaved_changes": "Imaš nespremljenih promjena."
     },
@@ -360,7 +451,7 @@
         "help": "# Pomoć\n\niD je program za uređivanje [OpenStreetMap](http://www.openstreetmap.org/), \nbesplatne karte svijeta. Možeš ga koristiti za dodavanje i obnavljanje podataka u \nsvom području, čime stvaraš bolju kartu svijeta slobodnih izvornika i podataka \ndostupnu svima.\n\nKorekcije koje napraviš na karti će biti vidljive svakome tko koristi\nOpenStreetMap. Da bi mogao/la uređivati kartu, trebaš [besplatni\nOpenStreetMap korisnički račun](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je suradnički projekt sa [izvornim kôdom dostupnim \nna GitHub-u](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Uređivanje i spremanje promjena\n\nOvaj uređivač je primarno dizajniran za uređivanje na mreži i trenutačno ga\nkoristiš kroz internet preglednik kao web stranicu.\n\n### Odabir značajki\n\nZa odabir značajke karte, npr. ceste ili točke od interesa, klikni na nju na karti.\nPojaviti će se obrub oko značajke, otvoriti će se bočno okno koje prikazuje više\ndetalja o značajki i prikazati će se alatni izbornik sa mogućnostima koje možeš\nnapraviti na značajki.\n\nZa odabir nekoliko značajki istovremeno, drži tipku \"Shift\". Zatim ili klikni na\nznačajke koje želiš odabrati ili klikni i povuci za crtanje četverokuta. Time ćeš\nodabrati sve točke unutar četverokuta.\n\n### Spremanje uređivanja\n\nKada napraviš promjene na karti, npr. urediš ulice, zgrade i mjesta, one su\nspremljene lokalno sve dok ih ne spremiš na server. Nemoraš se briniti ukoliko\nnapraviš pogrešku - možeš poništiti promjene klikom na tipku \"Opovrgni\" i\nponoviti promjene klikom na tipku \"Ponovi\".\n\nKlikni na tipku \"Spremi\" da završiš grupu promjena - na primjer ako si završio/la\npodručje grada i želiš početi uređivati novo područje. Nakon što stisneš \"Spremi\"\nmoći ćeš pregledati sve promjene koje si napravio/la i uređivač će ti dati korisne\nprijedloge i upozorenja ako je nešto neuobičajeno među promjenama.\n\nAko je sve u redu, možeš ostaviti kratak komentar u kojem ćeš opisati napravljenu\npromjenu na karti. Ponovno klikni \"Spremi\" za postavljanje promjena na\n[OpenStreetMap.org](http://www.openstreetmap.org/), gdje će biti vidljive svim\ndrugim korisnicima i dostupne drugima za dopunu i nadogradnju.\n\nAko ne možeš završiti sve planirane promjene odjednom, možeš ugasiti prozor\nuređivača i kasnije se vratiti (na isti internet preglednik i isto računalo) i uređivač\nće ti ponuditi da nastaviš gdje si stao/la. \n",
         "roads": "# Ceste\n\nMožeš stvarati, popraviti/urediti i obrisati ceste pomoću ovog uređivača. Ceste\nmogu biti svih vrsta: puteljci, ceste, poljski putovi, biciklističke staze i drugo -\nsve staze preko kojih se često prolazi bi se trebale kartirati.\n\n### Odabir\n\nKlikni na cestu da ju odabereš. Pojaviti će se obrub oko ceste, zajedno s\nmalim alatnim izbornikom na karti i bočnim oknom koji prikazuje dodatne\ninformacije o selektiranoj cesti.\n\n### Uređivanje\n\nČesto ćeš vidjeti ceste koje se ne podudaraju s pozadinskim snimcima ili s\nGNSS tragom. Možeš urediti te ceste tako da se nalaze na ispravnom mjestu.\n\nPrvo klikni na cestu koju želiš urediti. To će ju označiti i prikazati kontrolne\ntočke unutar nje koje možeš premjestiti na točnije lokacije. Ako želiš dodati\nnove kontrolne točke za precizniju putanju, klikni dvoklikom na dio ceste gdje\nnema točke kako bi dodao/la novu.\n\nAko se cesta spaja s drugom cestom, ali nije ispravno spojena na karti, možeš\npovući kontrolnu točku na drugu cestu kako bi ih spojio/la. Spojene ceste su\nvrlo važne za kartu i osnova za omogućavanje uputa za navigaciju.\n\nTakođer možeš kliknuti alat \"Premjesti\" ili pritisnuti kraticu - tipku `M` za\npomak cijele ceste odjednom i zatim kliknuti ponovno za spremanje tog\npomaka.\n\n### Brisanje\n\nAko je cesta potpuno krivo ucrtana - ne vidi se na satelitskim snimkama i ako\nsi utvrdio/la da zbilja ne postoji uvidom na terenu možeš ju obrisati, što će ju\nobrisati s karte. Budi oprezan/na kada brišeš značajke - kao i kod svakog\ndrugog uređivanja rezultati su vidljivi svima, a satelitske snimke su često\nzastarjele, pa je moguće da je cesta nedavno sagrađena.\n\nZa brisanje ceste najprije ju označi, a zatim klikni na ikonicu kante za smeće ili\npritisni tipku \"Delete\".\n\n### Stvaranje\n\nAko si pronašao/la cestu koja bi trebala biti ucrtana ali nije, klikni ikonicu\n\"Linija\" na gornjem lijevom dijelu uređivača ili pritisni kraticu - tipku `2` da\nzapočneš crtanje linije.\n\nKlikni na početak ceste na karti da započneš crtanje. Ako se cesta odvaja od\npostojeće ceste, klikni na mjesto gdje se spajaju.\n\nZatim klikni na točke duž ceste tako da prate ispravnu putanju ceste, prema\npodacima satelitske snimke ili GNSS traga. Ako se cesta koju crtaš križa s\ndrugom cestom, spoji ih klikom na mjestu raskrižja. Kada si završio/la s\ncrtanjem, klikni dvoklikom sastrane ili pritisni tipku \"Return\" ili \"Enter\" na\ntipkovnici.\n",
-        "gps": "# GNSS\n\nPojam GNSS obuhvaća sve \"Globalne Navigacijske Satelitske Sustave\", to su: američki Navstar GPS, ruski GLONASS, europski GALILEO i kineski BEIDOU. Suvremeni uređaji često koriste signale više sustava istovremeno za određivanje pozicije. GNSS podaci su najpouzdaniji izvor podataka za OpenStreetMap. Ovaj\nuređivač podržava lokalne tragove - `.gpx` datoteteke koje se nalaze na tvom računalu.\nTakav oblik GNSS traga možeš prikupiti s raznim aplikacijama za pametne\ntelefone kao i sa drugim GNSS/GPS uređajima.\n\nZa više informacija o postupku izmjere pomoću GNSS satelita, pročitaj članak\n[\"Mjerenje GPS-om\"](http://learnosm.org/en/beginner/using-gps/).\n\nKako bi koristio/la GPX tragove za kartiranje, povuci i ispusti GPX datoteku\nna uređivač karte. Ako se datoteka ispravno učita, biti će dodana na kartu\nkao linija svjetlo zelene boje. Klikni na izbornik \"Postavke pozadine\" s\ndesne strane za uključivanje, isključivanje ili povećanje na taj novi GPX sloj.\n\nGPX trag nije direktno postavljen na OpenStreetMap, samo je prikazan na\nkarti. Da bi ga iskoristio/la na najbolji način, preko njega crtaj na\nkarti koristeći ga kao vodilju za dodavanje novih značajki. Trag možeš također\n[postaviti na OpenStreetMap](http://www.openstreetmap.org/trace/create)\nkako bi ga i drugi korisnici mogli koristiti.\n",
+        "gps": "# GNSS \n\nGNSS podaci su najpouzdaniji izvor podataka za OpenStreetMap. Ovaj uređivač podržava lokalne tragove - `.gpx` datoteteke s tvog računala. Takav oblik GNSS traga možeš prikupiti s raznim aplikacijama za pametne telefone kao i s drugim GNSS/GPS uređajima.\n\nZa više informacija o postupku izmjere pomoću GNSS satelita, pročitaj članak [\"Mjerenje sa GPS-om\"](http://learnosm.org/en/beginner/using-gps/).\n\nKako bi koristio GPX tragove za kartiranje, povuci i ispusti GPX datoteku na uređivač karte. Ako se datoteka ispravno učita, biti će dodana na kartu kao linija svjetlo ljubičaste boje. Klikni na izbornik \"Podaci karte\" s desne strane za uključivanje, isključivanje ili povećanje na taj novi GPX sloj.\n\nGPX trag nije direktno postavljen na OpenStreetMap, samo je prikazan na karti. Da bi ga iskoristio/la na najbolji način, preko njega crtaj na karti koristeći ga kao vodilju za dodavanje novih značajki. Trag možeš također [postaviti na OpenStreetMap](http://www.openstreetmap.org/trace/create) kako bi ga i drugi\nkorisnici mogli koristiti.\n",
         "imagery": "# Fotografski snimci\n\nZračni snimci su važan izvor za kartiranje. Kombinacija snimaka iz aviona,\nsatelitskih snimaka i drugih besplatno prikupljenih izvornika je dostupna s\ndesne strane u izborniku \"Postavke pozadine\".\n\nPočetno je u pozadini prikazan sloj satelitskih snimaka [karte Bing Maps](http://www.bing.com/maps/). Novi izvornici postaju dostupni pomicanjem\ni povećanjem karte na novo geografsko područje. Neke države, poput SAD-a,\nFrancuske i Danske imaju dostupne vrlo kvalitetne snimke za određena\npodručja.\n\nSnimke su ponekad pomaknute u odnosu na podatke karte zbog pogreške\nna koordinatama izvornih snimaka. Ako vidiš puno cesta izmaknutih u\nodnosu na pozadinu, nemoj ih odmah pomicati da se poklope sa pozadinom.\nUmjesto toga, možeš podesiti snimke da odgovaraju postojećim podacima\ntako da klikneš \"Popravi odstupanje\" na dnu izbornika \"Postavke pozadine\".\n",
         "addresses": "# Adrese\n\nAdrese spadaju u najkorisnije informacije na karti.\n\nIako su adrese često prikazane kao dio ulica, na OpenStreetMap karti su zapisane\nkao svojstva građevina i mjesta uzduž ulica.\n\nMožeš dodati informacije o adresi na mjesta kartirana kao rub građevine, ali i na\ngrađevine koje su kartirane kao točkasti objekt. Najbolji izvor podataka o adresama\nje prikupljanje podataka na terenu ili iz osobnog znanja - kao i svake druge\nznačajke, kopiranje sa komercijalnih izvora poput Google Maps servisa je strogo\nzabranjeno.\n",
         "inspector": "# Korištenje preglednika\n\nPreglednik je element korisničkog sučelja na lijevoj strani stranice koji se pojavljuje\nnakon što se neka značajka odabere i on omogućava uređivanje detalja značajke.\n\n### Odabir vrste značajke\n\nNakon što dodaš točku, liniju ili područje, možeš odabrati koje je vrste ta značajka,\nnpr. je li to državna cesta ili ulica, veletrgovina ili kafić.\n\nPreglednik će prikazati tipke za često korištene vrste značajki, a ostale možeš\npronaći upisivanjem naziva vrste koju tražiš u okvir za pretraživanje.\n\nKlikni na \"i\" na desnoj strani vrste značajke da saznaš više o toj značajki. Klikni na\ntipku sa imenom vrste da odabereš tu vrstu.\n\n### Korištenje obrazaca i oznaka\n\nNakon što odabereš vrstu značajke ili kada odabereš značajku koja već ima\ndefeniranu vrstu, preglednik će ti prikazati polja sa detaljima o značajki, npr.\nnjezino ime i adresu.\n\nIspod polja možeš kliknuti na ikone za dodavanje drugih detalja, kao informacije sa\n[Wikipedije](http://www.wikipedia.org/), pristup invalidskim kolicima i drugo.\n\nNa dnu preglednika, klikni na \"Sve oznake\" za dodavanje proizvoljnih drugih\noznaka za značajke. [Taginfo](http://taginfo.openstreetmap.org/) je izvrstan\nizvornik za učenje o popularnim kombinacijama oznaka koje se koriste.\n\nPromjene koje napraviš u pregledniku su automatski primijenjene na kartu.\n\nMožeš poništiti promjene u bilo kojem trenutku pritiskom na tipku \"Opovrgni\".\n",
@@ -573,6 +664,9 @@
             "barrier": {
                 "label": "Vrsta"
             },
+            "bench": {
+                "label": "Klupa"
+            },
             "bicycle_parking": {
                 "label": "Vrsta"
             },
@@ -629,6 +723,9 @@
             "covered": {
                 "label": "Pokriven"
             },
+            "craft": {
+                "label": "Vrsta"
+            },
             "crop": {
                 "label": "Usjev"
             },
@@ -637,6 +734,9 @@
             },
             "cuisine": {
                 "label": "Kuhinja"
+            },
+            "delivery": {
+                "label": "Dostava"
             },
             "denomination": {
                 "label": "Vjeroispovijed"
@@ -1040,9 +1140,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Vrsta"
             }
         },
         "presets": {
@@ -1137,6 +1234,9 @@
                 "name": "Bar",
                 "terms": "lokal,caffe bar,kafić,noćni bar"
             },
+            "amenity/bbq": {
+                "name": "Roštilj"
+            },
             "amenity/bench": {
                 "name": "Klupa",
                 "terms": "klupa,stolac"
@@ -1149,9 +1249,18 @@
                 "name": "Najam bicikla",
                 "terms": "rentanje bicikala,rentanje bicikla,iznajmljivanje bicikala,iznajmljivanje bicikla,najam bicikala,najam bicikla,rent a bike"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "Bicikl servis"
+            },
             "amenity/boat_rental": {
                 "name": "Najam brodova",
                 "terms": "rentanje brodova,rentanje broda,iznajmljivanje brodova,iznajmljivanje broda,najam brodova,najam broda,rentanje čamaca,rentanje čamca,iznajmljivanje čamaca,iznajmljivanje čamca,najam čamaca,najam čamca,rent a boat"
+            },
+            "amenity/bureau_de_change": {
+                "name": "Mjenjačnica"
+            },
+            "amenity/bus_station": {
+                "name": "Autobusna stanica"
             },
             "amenity/cafe": {
                 "name": "Kafić",
@@ -1169,6 +1278,9 @@
                 "name": "Autopraonica",
                 "terms": "praonica automobila"
             },
+            "amenity/charging_station": {
+                "name": "Punionica"
+            },
             "amenity/cinema": {
                 "name": "Kino",
                 "terms": "dvorana za gledanje filmova,kinematograf,kino dvorana"
@@ -1178,6 +1290,12 @@
             },
             "amenity/clock": {
                 "name": "Sat"
+            },
+            "amenity/college": {
+                "name": "Fakultetsko zemljište"
+            },
+            "amenity/compressed_air": {
+                "name": "Komprimirani zrak"
             },
             "amenity/courthouse": {
                 "name": "Zgrada suda",
@@ -1220,6 +1338,9 @@
             "amenity/hospital": {
                 "name": "Bolničko zemljište"
             },
+            "amenity/kindergarten": {
+                "name": "Dvorište vrtića"
+            },
             "amenity/library": {
                 "name": "Knjižnica",
                 "terms": "knjižnica,biblioteka,čitaonica,zbirka knjiga"
@@ -1228,9 +1349,15 @@
                 "name": "Tržnica",
                 "terms": "tržnica,pijaca,pijac,pija,plac"
             },
+            "amenity/nightclub": {
+                "name": "Noćni klub"
+            },
             "amenity/parking": {
                 "name": "Parkiralište za automobile",
                 "terms": "parkiralište,garaža,parkirno mjesto,podzemna garaža,parking"
+            },
+            "amenity/parking_entrance": {
+                "name": "Parking garaža Ulaz/Izlaz"
             },
             "amenity/pharmacy": {
                 "name": "Ljekarna",
@@ -1272,6 +1399,9 @@
                 "name": "Pivnica",
                 "terms": "pivnica,birtija,birc,bircuz"
             },
+            "amenity/public_bookcase": {
+                "name": "Javna knjižnica"
+            },
             "amenity/ranger_station": {
                 "name": "Rendžerska postaja",
                 "terms": "rendžerska postaja,rendžerska služba,stanica rendžerske službe,rendžerska stanica,rendžer"
@@ -1289,6 +1419,12 @@
             },
             "amenity/shelter": {
                 "name": "Sklonište"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Sklonište za beskućnike"
+            },
+            "amenity/studio": {
+                "name": "Studio"
             },
             "amenity/swimming_pool": {
                 "name": "Sportski bazen",
@@ -1313,6 +1449,9 @@
             "amenity/townhall": {
                 "name": "Gradska vijećnica",
                 "terms": "gradska vijećnica,vijećnica,općinski dom"
+            },
+            "amenity/university": {
+                "name": "Fakultetsko zemljište"
             },
             "amenity/vending_machine": {
                 "name": "Automat za prodaju",
@@ -1385,7 +1524,7 @@
                 "name": "Zid"
             },
             "boundary/administrative": {
-                "name": "Administrativne granice"
+                "name": "Administrativna granica"
             },
             "building": {
                 "name": "Građevina",
@@ -1410,11 +1549,20 @@
             "building/church": {
                 "name": "Crkva"
             },
+            "building/college": {
+                "name": "Zgrada fakulteta"
+            },
             "building/commercial": {
                 "name": "Poslovna zgrada"
             },
+            "building/construction": {
+                "name": "Zgrada u izgradnji"
+            },
             "building/detached": {
                 "name": "Samostojni dom"
+            },
+            "building/dormitory": {
+                "name": "Studentski dom"
             },
             "building/entrance": {
                 "name": "Ulaz/izlaz"
@@ -1445,6 +1593,12 @@
             "building/industrial": {
                 "name": "Industrijska zgrada"
             },
+            "building/kindergarten": {
+                "name": "Zgrada vrtića"
+            },
+            "building/public": {
+                "name": "Javna građevina"
+            },
             "building/residential": {
                 "name": "Stambena zgrada"
             },
@@ -1465,7 +1619,7 @@
                 "name": "Staja"
             },
             "building/train_station": {
-                "name": "Željeznička stanica"
+                "name": "Željeznički kolodvor"
             },
             "building/university": {
                 "name": "Zgrada fakulteta"
@@ -1482,17 +1636,23 @@
             "craft/boatbuilder": {
                 "name": "Brodograditelj"
             },
+            "craft/bookbinder": {
+                "name": "Knjigovezac"
+            },
             "craft/brewery": {
                 "name": "Pivara"
             },
             "craft/carpenter": {
                 "name": "Stolar"
             },
+            "craft/caterer": {
+                "name": "Dostavljač"
+            },
             "craft/clockmaker": {
                 "name": "Urar (ručni satovi)"
             },
             "craft/confectionery": {
-                "name": "Trgovina slatkišima"
+                "name": "Slastičarnica"
             },
             "craft/dressmaker": {
                 "name": "Krojač"
@@ -1506,6 +1666,9 @@
             "craft/glaziery": {
                 "name": "Staklarna"
             },
+            "craft/handicraft": {
+                "name": "Ručni rad"
+            },
             "craft/jeweler": {
                 "name": "Draguljar"
             },
@@ -1514,6 +1677,9 @@
             },
             "craft/locksmith": {
                 "name": "Bravar"
+            },
+            "craft/metal_construction": {
+                "name": "Željezar"
             },
             "craft/optician": {
                 "name": "Optičar"
@@ -1524,17 +1690,35 @@
             "craft/photographer": {
                 "name": "Fotograf"
             },
+            "craft/photographic_laboratory": {
+                "name": "Fotografska radionica"
+            },
+            "craft/plasterer": {
+                "name": "Fasader"
+            },
             "craft/plumber": {
                 "name": "Vodoinstalater"
             },
             "craft/pottery": {
                 "name": "Lončarstvo"
             },
+            "craft/rigger": {
+                "name": "Monter"
+            },
             "craft/roofer": {
                 "name": "Krovopokrivač"
             },
+            "craft/saddler": {
+                "name": "Sedlar"
+            },
+            "craft/sailmaker": {
+                "name": "Jedrar"
+            },
             "craft/sawmill": {
                 "name": "Pilana"
+            },
+            "craft/scaffolder": {
+                "name": "Građevinska skela"
             },
             "craft/sculpter": {
                 "name": "Kipar"
@@ -1551,8 +1735,26 @@
             "craft/tailor": {
                 "name": "Krojač"
             },
+            "craft/tiler": {
+                "name": "Keramičar"
+            },
+            "craft/tinsmith": {
+                "name": "Kotlar / Kazandžija"
+            },
+            "craft/upholsterer": {
+                "name": "Tapetar"
+            },
             "craft/watchmaker": {
                 "name": "Urar"
+            },
+            "craft/window_construction": {
+                "name": "Izrada prozora"
+            },
+            "craft/winery": {
+                "name": "Vinarija"
+            },
+            "embankment": {
+                "name": "Nasip"
             },
             "emergency/ambulance_station": {
                 "name": "Garaža hitne pomoći",
@@ -1683,7 +1885,7 @@
                 "name": "Pristupna cesta brze ceste"
             },
             "highway/turning_circle": {
-                "name": "Kružni tok"
+                "name": "Površina na kraju ceste za polukružno okretanje"
             },
             "highway/unclassified": {
                 "name": "Nerazvrstana cesta"
@@ -1731,14 +1933,8 @@
             "landuse/cemetery": {
                 "name": "Groblje"
             },
-            "landuse/commercial": {
-                "name": "Poslovno"
-            },
             "landuse/construction": {
                 "name": "Građevinsko"
-            },
-            "landuse/farm": {
-                "name": "Poljoprivredno zemljište"
             },
             "landuse/farmyard": {
                 "name": "Gospodarsko imanje"
@@ -1750,9 +1946,6 @@
             "landuse/grass": {
                 "name": "Travnjak"
             },
-            "landuse/industrial": {
-                "name": "Industrijsko"
-            },
             "landuse/meadow": {
                 "name": "Livada"
             },
@@ -1761,12 +1954,6 @@
             },
             "landuse/quarry": {
                 "name": "Kamenolom"
-            },
-            "landuse/residential": {
-                "name": "Stambeno"
-            },
-            "landuse/retail": {
-                "name": "Maloprodaja"
             },
             "landuse/vineyard": {
                 "name": "Vinograd"

@@ -274,7 +274,8 @@
         "node": "節點",
         "way": "路徑",
         "relation": "關係",
-        "location": "地點"
+        "location": "地點",
+        "add_fields": "新增空間"
     },
     "background": {
         "title": "背景",
@@ -286,6 +287,40 @@
         "custom_prompt": "輸入地圖影像區塊的URL模版。以 Z/X/Y 方式存取區塊的伺服器，可在模版中使用{z}, {x}, {y}作參數，而以quadtile存取區塊的伺服器，則可使用{u}作參數。",
         "fix_misalignment": "校準",
         "reset": "重設"
+    },
+    "map_data": {
+        "title": "地圖圖資",
+        "description": "地圖圖資",
+        "data_layers": "資料圖層",
+        "fill_area": "填土區",
+        "map_features": "地圖圖徵"
+    },
+    "feature": {
+        "points": {
+            "description": "點",
+            "tooltip": "興趣點"
+        },
+        "major_roads": {
+            "description": "主要道路",
+            "tooltip": "公路、街道等"
+        },
+        "buildings": {
+            "description": "建築物"
+        },
+        "water": {
+            "description": "水域圖徵",
+            "tooltip": "河道、湖泊、池溏、蓄水池等"
+        },
+        "rail": {
+            "description": "鐵路圖徵",
+            "tooltip": "鐵路"
+        },
+        "past_future": {
+            "description": "過去/未來"
+        },
+        "others": {
+            "description": "其他"
+        }
     },
     "restore": {
         "heading": "您有未儲存的編輯",
@@ -362,7 +397,6 @@
         "help": "# 幫助\n\n這是[開放街圖](http://www.openstreetmap.org/)的編輯器。\n開放街圖是自由及可編輯的世界地圖。您可以用這個編輯器來添加和更新您所在區域的地圖資料，令這個開源和開放資料的世界地圖變得更好。\n\n您在地圖上所做的編輯，將會讓所有使用開放街圖的人看到。為了進行編輯，您需要一個[免費的開放街圖帳戶](https://www.openstreetmap.org/user/new)。\n\n[iD編輯器](http://ideditor.com/) 是採用開源方式合作開發的專案， [原始碼可在GitHub找到](https://github.com/openstreetmap/iD)。\n",
         "editing_saving": "# 編輯和儲存\n\n這個編輯器主要為線上編輯而設計，而你現在透過網站使用它。\n\n### 選擇物件\n\n要選擇地圖上一個物件，如道路或興趣點，可於地圖上按該物件。這將令所選取的物件以高亮顯示，並開啟詳情的側邊欄，以及顯示可進行操作的功能選單。\n\n要選擇多個物件，可以按住'Shift'鍵，在地圖上按下並拖曳。這將選擇所顯示的方框內的所有物件，讓您可同時操作多個物件。\n\n### 儲存編輯\n\n當您修改地圖，如編輯道路，建築物和場所，這些修改都會先儲存在本機上而未被上傳，直到您將它們上傳到伺服器為止。如果您在這段時間做出錯誤的修改，也不用擔心，您可以按下“撤消”按鈕修改，亦可按下“重做”按鈕，重做經撤消的修改。\n\n按下“儲存”按鈕以完成編輯 － 例如，如果您已經完成了某市鎮的一個區域，而想開始一個新區域。您將有機會覆核你做了什麼編輯，而如果看起來您作出了一些不適當的改變，編輯器將會提供有用的建議及警告。\n\n如果一切看起來不錯，您可以輸入簡短的註釋，解釋您作出的修改，並再按下“儲存”以向[OpenStreetMap.org](http://www.openstreetmap.org/)發布這些修改。這些修改將可被其他OpenStreetMap用戶看見，並可供其他用戶在其上作進一步修訂及完善。\n\n如果您不能一次就完成您的編輯，您可以離開編輯器視窗，日後(在相同的瀏覽器和電腦上)回來，編輯器將讓你選擇是否希望恢復上一次未完成的編輯。\n",
         "roads": "# 道路\n\n您可以利用這個編輯器創建，修復，及刪除道路。道路可以有很多種：行人路徑，公路，步道，單車路線等等 － 任何經常使用的路段都可製圖。\n\n### 選擇道路\n\n按圖上的道路以選擇該道路。道路的輪廓會以高亮度顯示，而同時地圖上會出現小工具選單，旁邊亦會彈出面板，顯示有關該道路的資訊。\n\n### 修改道路\n\n您或會經常注意到，道路並非對齊在背景中顯示的衛星圖像或GPS軌跡。您可以調整這些道路，讓他們位於正確的位置。\n\n首先，按您想修訂的道路。這會將道路以高亮度顯示，並顯示沿著這道路的節點，你可以拖曳這些節點到更好的位置。如果您想增加細節，可以為道路添加新的節點，點擊兩下道路上沒有節點的部分，便可在該處増加節點。\n\n如果道路連接到另一條道路，但在地圖上並未妥善連接，你可以拖曳道路的其中一個節點到另一條道路上，以連接兩條道路。連接好道路，對地圖非常重要，特別是對提供駕駛指示的應用程序而言，是必要的。\n\n您也可以按下'移動'工具或按`M`快速鍵，來移動整條道路，然後按一下以完成移動的動作。\n\n### 刪除道路\n\n如果一條道路完全不正確 － 您看到它在衛星圖像上不存在，並最好實地證實它根本不存在 － 您可以將道路刪除，這會從地圖中將之移除。刪除物件時務必要小心 － 像任何其他的編輯，結果會被大家看見，而衛星圖像往往會過時，因此該道路或許只是新建的。\n\n要刪除道路，您可以按住它以選擇，然後按下垃圾桶圖標，或按 ’Delete’ 鍵。\n\n### 繪製新道路\n\n發現某處應有一條道路，但地圖上沒有？按編輯器左上方的'線'按鈕，或按下`2`快速鍵，以開始繪製線段。\n\n在地圖上點擊道路的開端，以開始繪製道路。如果道路從一條現有的道路分支出來，應點擊兩者連接的地方，以開始繪製。\n\n然後按住沿著道路的點，以根據衛星影像或GPS軌跡，正確地繪製道路。如果您繪製的道路如果與另一條道路交匯，請點擊相交點以將它們連接起來。當您完成繪製後，可按兩下滑鼠或按鍵盤上的 'Return' 或 ’Enter’ 鍵。\n",
-        "gps": "# GPS軌跡\n\nGPS數據是OpenStreetMap中最可信的的數據來源。此編輯器\n支援在您的電腦上的GPS軌跡 - `.gpx`文件。你可以使用多個智能手機的應用程序或個人GPS硬件，收集這類GPS數據。\n\n有關如何進行GPS測量的資料，請參閱[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/)。\n\n要使用一個GPX軌跡製圖，可將GPX文件拖曳到編輯器中。如果編輯器能讀取該文件，它會被添加到地圖上，並以明亮的綠色線顯示。點擊左側的'設置背景'選單，便可啟用、停用或縮放這個新的的GPX圖層。\n\nGPX軌跡並不會直接上載到OpenStreetMap － 使用GPX軌跡的最佳方式，是以它作為指引，在繪製地圖時添加新的物件，並[上傳至 OpenStreetMap](http://www.openstreetmap.org/trace/create)來讓其他使用者運用。\n",
         "imagery": "# 圖像\n\n空照圖是繪製地圖重要的資料來源。在畫面右方的'背景圖像設定'選單中，可選擇使用的圖像，\n他們分別為空照圖、衛星影像和其他可自由編輯的圖像資源。\n\n編輯器預設使用[Bing Maps](http://www.bing.com/maps/)的衛星圖層，\n但當您平移或縮放地圖至一個新的地理區域，或可使用新的資源。\n在一些國家，像美國、法國和丹麥，部分區域有非常高品質的圖像。\n\n圖像會與地圖數據有所偏移。如果你看見很多的道路與背景有偏移，請不要立刻將它們全部搬移以與背景刎合。相反，你可以在「背景設定」選單中，點擊下方的「校準底圖」，以調整圖像以配合現有地圖數據。 \n\n圖像有時候或會因為圖像提供者方面的誤差，與地圖資料有所偏移。\n如果您看到有很多路與背景是平移錯位的，請不要立刻將它們全部搬移以與背景刎合。\n您只需要點擊圖像設定介面底部的'校準'來調整圖像，讓它符合現有資料。\n",
         "addresses": "# 地址 \n\n地址是地圖中最有用的訊息之一。 \n\n雖然地址通常被視為街道的一部分，在 OpenStreetMap 中，它們是沿相關街道的建築物和地方的屬性。 \n\n您可以將地址訊息，添加到以建築物輪廓為代表、或以點為代表的地方之上。地址資料的最佳來源，是實地調查或個人知識 － 與任何其他物件一樣，嚴格禁止抄襲商業來源（如Google 地圖）的地圖資料。\n",
         "inspector": "# 使用檢視面板\n\n檢視面板是畫面右面的用戶界面元素，當您選擇一個物件時便會出現，讓您可編輯物件的詳細資料。\n\n### 選擇物件類型\n\n在您添加一個點、線段或區域後，您可以選擇物件的類型，例如該物件應是高速公路還是住宅區道路，是超級市場還是咖啡廳。檢視面板將顯示常用物件類型的按鈕，要找出其他物件類型，您可以在搜尋框中輸入您所要的物件類型。\n\n點選物件類型按鈕右下角的'i'字，可顯示物件類型的更多資訊。點選按鈕以選擇該類型。\n\n### 使用表格和編輯標籤\n\n在您選擇物件類型後，或選擇已經被編配類型的物件時，檢查面板會顯示該物件詳細資料的欄位，\n如名稱和地址。\n\n在欄位下方，您可以點選按鈕，以添加其他詳細資料，如[維基百科](http://www.wikipedia.org/)的條目資料，輪椅可否到達，以及其他更多資料。\n\n在面板的底部，點擊'增加標籤'以添加其他任意的標籤到該物件。您可透過[Taginfo](http://taginfo.openstreetmap.org/)，了解有關常用的標籤組合的更多資料。\n\n您在檢查面板所做的更改，會自動應用到地圖上。您可以隨時點選'撤消'按鈕，撤消這些更改。\n\n### 關閉檢查面板\n\n您可以點選檢查面板右上角的關閉按鈕、按’Escape'鍵，或在地圖上點一下，以關閉檢查面板。\n",
@@ -575,11 +609,17 @@
             "barrier": {
                 "label": "種類"
             },
+            "bench": {
+                "label": "長凳"
+            },
             "bicycle_parking": {
                 "label": "種類"
             },
             "boundary": {
                 "label": "種類"
+            },
+            "brand": {
+                "label": "品牌"
             },
             "building": {
                 "label": "建築物"
@@ -787,6 +827,9 @@
             },
             "layer": {
                 "label": "層"
+            },
+            "leaf_cycle": {
+                "label": "落葉期"
             },
             "leisure": {
                 "label": "種類"
@@ -1009,6 +1052,14 @@
             "service": {
                 "label": "種類"
             },
+            "service/bicycle/pump": {
+                "label": "打氣設備",
+                "options": {
+                    "undefined": "預設沒有",
+                    "yes": "有",
+                    "no": "沒有"
+                }
+            },
             "shelter": {
                 "label": "涼亭"
             },
@@ -1077,6 +1128,9 @@
             "studio_type": {
                 "label": "種類"
             },
+            "substation": {
+                "label": "種類"
+            },
             "supervised": {
                 "label": "受監察"
             },
@@ -1085,6 +1139,15 @@
             },
             "tactile_paving": {
                 "label": "人行道視障引導設施"
+            },
+            "takeaway": {
+                "label": "外帶",
+                "placeholder": "可以, 不行, 只能外帶 ...",
+                "options": {
+                    "yes": "可以",
+                    "no": "不行",
+                    "only": "只能外帶"
+                }
             },
             "toilets/disposal": {
                 "label": "處置方式",
@@ -1124,9 +1187,6 @@
                     "no": "無：沒有路徑、需具備完整的定向能力"
                 }
             },
-            "tree_type": {
-                "label": "種類"
-            },
             "trees": {
                 "label": "樹"
             },
@@ -1157,9 +1217,6 @@
             },
             "wikipedia": {
                 "label": "維基百科"
-            },
-            "wood": {
-                "label": "種類"
             }
         },
         "presets": {
@@ -1279,6 +1336,10 @@
                 "name": "單車出租",
                 "terms": "腳踏車出租"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "自行車維修站",
+                "terms": "提供自行車維修服務的地方"
+            },
             "amenity/boat_rental": {
                 "name": "小艇出租",
                 "terms": "租船處,小艇租賃"
@@ -1383,6 +1444,10 @@
                 "name": "墓地",
                 "terms": "墳場,墓地"
             },
+            "amenity/grit_bin": {
+                "name": "沙盒",
+                "terms": "儲存用來加速路面融雪的沙、鹽混合物容器"
+            },
             "amenity/hospital": {
                 "name": "醫院用地",
                 "terms": "醫院"
@@ -1451,6 +1516,10 @@
                 "name": "Pub",
                 "terms": "酒館"
             },
+            "amenity/public_bookcase": {
+                "name": "開放書架",
+                "terms": "可以自由取用、放置書籍的書架"
+            },
             "amenity/ranger_station": {
                 "name": "郊野公園管理站",
                 "terms": "國家公園管理站,自然保護區管理站"
@@ -1458,6 +1527,10 @@
             "amenity/recycling": {
                 "name": "回收設施",
                 "terms": "回收筒,回收箱"
+            },
+            "amenity/register_office": {
+                "name": "戶政事務所",
+                "terms": "戶政事務所"
             },
             "amenity/restaurant": {
                 "name": "餐廳",
@@ -1792,8 +1865,8 @@
                 "terms": "製鐘店"
             },
             "craft/confectionery": {
-                "name": "甜品店",
-                "terms": "甜品店"
+                "name": "甜點店",
+                "terms": "糕餅店"
             },
             "craft/dressmaker": {
                 "name": "製衣店",
@@ -2100,8 +2173,8 @@
                 "terms": "小巷,巷弄,後巷,橫巷,窄巷,胡同"
             },
             "highway/service/drive-through": {
-                "name": "穿越道路",
-                "terms": "駕駛通過以獲取服務,穿越性道路"
+                "name": "德來速車道",
+                "terms": "駕駛通過以獲取服務,德來速車道"
             },
             "highway/service/driveway": {
                 "name": "車道",
@@ -2219,21 +2292,9 @@
                 "name": "教堂院落",
                 "terms": "教堂用地"
             },
-            "landuse/commercial": {
-                "name": "商業區",
-                "terms": "商業區"
-            },
             "landuse/construction": {
                 "name": "建築工地",
                 "terms": "建築工程"
-            },
-            "landuse/farm": {
-                "name": "農場",
-                "terms": "農田,稻田,農地,田"
-            },
-            "landuse/farmland": {
-                "name": "耕地",
-                "terms": "耕地"
             },
             "landuse/farmyard": {
                 "name": "農莊",
@@ -2243,13 +2304,13 @@
                 "name": "森林",
                 "terms": "森林"
             },
+            "landuse/garages": {
+                "name": "車庫群",
+                "terms": "許多相連的車庫"
+            },
             "landuse/grass": {
                 "name": "草地",
                 "terms": "草地"
-            },
-            "landuse/industrial": {
-                "name": "工業區",
-                "terms": "工業區"
             },
             "landuse/landfill": {
                 "name": "埯埋場",
@@ -2259,10 +2320,6 @@
                 "name": "牧場",
                 "terms": "牧場"
             },
-            "landuse/military": {
-                "name": "軍事用地",
-                "terms": "軍用地,部隊用地"
-            },
             "landuse/orchard": {
                 "name": "果園",
                 "terms": "果園"
@@ -2270,14 +2327,6 @@
             "landuse/quarry": {
                 "name": "礦區",
                 "terms": "礦場"
-            },
-            "landuse/residential": {
-                "name": "住宅區",
-                "terms": "住宅區"
-            },
-            "landuse/retail": {
-                "name": "零售",
-                "terms": "零售"
             },
             "landuse/vineyard": {
                 "name": "酒莊",
@@ -2474,6 +2523,10 @@
             "natural/beach": {
                 "name": "沙灘",
                 "terms": "沙灘,海灘"
+            },
+            "natural/cave_entrance": {
+                "name": "洞穴入口",
+                "terms": "洞穴入口"
             },
             "natural/cliff": {
                 "name": "懸崖",
@@ -2699,13 +2752,17 @@
                 "name": "變電所",
                 "terms": "變電站"
             },
+            "power/substation": {
+                "name": "變電所",
+                "terms": "變電站"
+            },
             "power/tower": {
                 "name": "高壓電塔",
                 "terms": "高壓輸電塔"
             },
             "power/transformer": {
-                "name": "變電所",
-                "terms": "變電所,變電站"
+                "name": "變壓器",
+                "terms": "變壓器"
             },
             "public_transport/platform": {
                 "name": "月台",
@@ -2721,7 +2778,7 @@
             },
             "railway/abandoned": {
                 "name": "鐵路線遺跡",
-                "terms": "鐵路線遺跡"
+                "terms": "舊鐵路線"
             },
             "railway/disused": {
                 "name": "廢棄鐵路",
@@ -3278,6 +3335,22 @@
             "tourism/zoo": {
                 "name": "動物園",
                 "terms": "動物園"
+            },
+            "traffic_calming/bump": {
+                "name": "減速丘",
+                "terms": "減速帶,減速器"
+            },
+            "traffic_calming/hump": {
+                "name": "減速標線",
+                "terms": "減速標線"
+            },
+            "traffic_calming/rumble_strip": {
+                "name": "跳動路面",
+                "terms": "起皺狹長路段"
+            },
+            "traffic_calming/table": {
+                "name": "隆起行人穿越道",
+                "terms": "隆起行人穿越道"
             },
             "type/boundary": {
                 "name": "邊界",

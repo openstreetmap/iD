@@ -281,9 +281,6 @@
             "highway/crosswalk": {
                 "name": "Zebra Crossing"
             },
-            "landuse/commercial": {
-                "name": "Commercial landuse"
-            },
             "leisure/pitch/baseball": {
                 "name": "Baseball"
             },

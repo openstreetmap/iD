@@ -97,6 +97,7 @@
         },
         "delete": {
             "title": "Poista",
+            "description": "Poista tämä kohde pysyvästi.",
             "annotation": {
                 "point": "Paikkapiste poistettu.",
                 "vertex": "Piste poistettu viivalta.",
@@ -217,6 +218,10 @@
     "logout": "kirjaudu ulos",
     "loading_auth": "Yhdistetään OpenStreetMap-palveluun...",
     "report_a_bug": "ilmoita ongelmasta",
+    "feature_info": {
+        "hidden_warning": "{count} piilotettua karttakohdetta",
+        "hidden_details": "Nämä ominaisuudet ovat nykyisin piilotettu: {details}"
+    },
     "status": {
         "error": "Ei yhteyttä sovellusrajapintaan.",
         "offline": "Sovellusrajapintaan ei ole yhteyttä. Yritä muokkaamista myöhemmin.",
@@ -230,6 +235,7 @@
         "upload_explanation_with_user": "Palvelimelle lähetetään muutokset käyttäjätunnisteella {user}. Muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
         "save": "Tallenna",
         "cancel": "Peru",
+        "changes": "{count} muutosta",
         "warnings": "Varoitukset",
         "modified": "Muokattu",
         "deleted": "Poistettu",
@@ -272,7 +278,8 @@
         "node": "Noodi",
         "way": "Tie",
         "relation": "Relaatio",
-        "location": "Sijainti"
+        "location": "Sijainti",
+        "add_fields": "Lisää kenttä:"
     },
     "background": {
         "title": "Tausta",
@@ -284,6 +291,38 @@
         "custom_prompt": "Kirjoita tiilen verkko-osoitemallinne. Kelvollisia merkkejä ovat {z}, {x}, {y} Z/X/Y-skeemalle ja {u} quadtile-skeemalle.",
         "fix_misalignment": "Korjaa ilmakuvavirhe",
         "reset": "palauta"
+    },
+    "map_data": {
+        "title": "Karttatiedot",
+        "description": "Karttatiedot",
+        "data_layers": "Tietokerrokset",
+        "map_features": "Karttaominaisuudet"
+    },
+    "feature": {
+        "points": {
+            "description": "Pisteet",
+            "tooltip": "Paikkapisteet"
+        },
+        "major_roads": {
+            "description": "Päätiet",
+            "tooltip": "Valtatiet, kadut, jne."
+        },
+        "minor_roads": {
+            "description": "Pienemmät tiet"
+        },
+        "paths": {
+            "description": "Polut"
+        },
+        "buildings": {
+            "description": "Rakennukset"
+        },
+        "rail": {
+            "tooltip": "Rautatiet"
+        },
+        "others": {
+            "description": "Muut",
+            "tooltip": "Kaikki muu"
+        }
     },
     "restore": {
         "heading": "Kaikkia muutoksia ei ole tallennettu",
@@ -354,10 +393,9 @@
         "help": "# Ohje\n\nTämä on ohjelma [OpenStreetMap-kartan](http://www.openstreetmap.org/)\nilmaisen ja muokattavan kartan muokkaamiseen. Voit käyttää ja \nmuokata sitä alueellasi vapaasti ja osallistua ihmisten tekemän\nmaailmankartan luomiseen.\n\nKarttaan tehtävät muutokset ovat näkyvillä kaikille\nOpenStreetMapin käyttäjille. Kartan muokkaaminen edellyttää\n[ilmaista OpenStreetMap-käyttäjätiliä](https://www.openstreetmap.org/user/new).\n\n[iD-muokkausohjelma](http://ideditor.com/) on yhteistyöprojekti, jonka [lähdekoodi\non saatavilla GitHubista](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Muokkaaminen ja tallentaminen\n\nTätä muokkausohjelmaa tulisi ensisijaisesti käyttää toimivalla\n Internet-yhteydellä, kuten nyt verkkoselaimella.\n\n### Karttakohteiden valitseminen\n\nValitse karttakohde, kuten tie tai ravintola napsauttamalla\nsitä kerran kartalla. Tällöin karttakohde korostetaan ja vasemmalle\navautuu kohteen muokkausnäkymä.\n\nValitse useita karttakohteita kerralla napsauttamalla niitä\nja pitämällä Shiht-näppäin pohjassapohjassa tai vetämällä kartalle valintaikkunan.\nKaikki valintaikkunan sisällä olevat kohteet valitaan.\n\n### Muokkausten tallentaminen\n\nKartalle tehtävät muutokset tallennetaan tietokoneelle,\nkunnes ne tallennetaan palvelimelle. Älä pelkää virheiden\ntekemistä - muutoksen voi perua napsauttamalla Kumoa ja tuoda\ntakaisin napsauttamalla Tee uudelleen\n\nTallenna kaikki karttaan tehdyt muutokset napsauttamalla\n\"Tallenna\" - tee näin säännöllisesti. Karttalaadun varmistamiseksi\niD varmistaa muutokset tyypillisten huolimattomuusvirheiden varalta\nja varoittaa, jos osa muutoksista edellyttää toimenpiteitä ennen tallennusta.\n\nJos huomautettavaa ei ole, lisää pieni kommentti tehdyistä muutoksista\nja tallenna muutokset palvelimelle napsauttamalla jälleen \"Tallenna\".\nMuutokset tulevat näkyviin [OpenStreetMap.orgiin](http://www.openstreetmap.org/), missä ne ovat\nkaikkien käyttäjien nähtävissä ja tarkasteltavissa.\n\nJos muutokset meinaavat jäädä kesken ja et halua vielä tallentaa niitä,\nvoit sulkea selainikkunan. Seuraavalla kerralla iD-muokkain\nmahdollistaa viime kerran muokkausten palauttamisten.\n",
         "roads": "# Tiet\n\nTällä muokkausohjelmalla voi lisätä, muokata ja poistaa teitä. Tie-sanalla\ntarkoitetaan kaikkia väyliä, kuten moottoriteitä, latuja, polkuja, pyöräteitä\nja monia muita.\n\n### Valitseminen\n\nValitse tie kartalta napsauttamalla sitä. Tien ulkoreuna korostuu, sen viereen\navautuu pikatoimintopalkki ja sivupalkkiin ilmestyy tien kohdemuokkain.\n\n### Siirtäminen ja muotoileminen\n\nKartalta voi löytää usein teitä, jotka eivät täsmää taustalla olevan ilmakuvan\ntai GPS-jäljen kanssa. Tällaiset tiet tulisi siirtää nopeasti oikealle paikalleen.\n\nAloita napsauttamalla siirrettävää tietä. Tien ulkoreunat korostuvat ja sen\nviivapisteet korostuvat. Tien muotoa voi muuttaa vetämällä viivapisteitä\nuusiin paikkoihin. Uuden viivapisteen voi luoda kaksoisnapsauttamalla\nmitä tahansa tien kohtaa, jossa ei jo ole viivapistettä.\n\nJos oikeassa maailmassa on kahden tien risteys, mutta ne eivät risteä\nkartalla, vedä joku viivapiste toiseen tiehen, jolloin niiden välille tulee\nristeys. Ei riitä, että tiet vain näyttävät risteävän kartalla, vaan niillä tulee\nolla yhteinen viivapiste. Tämä on erityisen tärkeää navigaattoreiden\nreititysohjelmistojen toimivuuden vuoksi.\n\nSiirrä koko tietä kerralla pikatoimintopalkin Siirrä-toiminnolla tai painamalla\nnäppäimistöstä M-näppäintä. Siirrä tie uudelle paikalleen ja lukitse siirto\nnapsauttamalla.\n\n### Poistaminen\n\nJos tie on täysin virheellinen - se esimerkiksi puuttuu satelliittikuvasta\nkokonaan tai se ei varmasti ole enää olemassa - se tulee poistaa\nkartalta. Mieti tarkkaan ennen karttakohteiden poistamispäätöstä -\nmuutos näkyy kartalla kaikille ja lisäksi satelliittikuvat ovat usein\nvanhentuneita, joten tie on jo voitu ehtiä rakentaa uudelleen.\n\nPoista tie valitsemalla se ja napsauttamalla sitten roskakorin\nkuvaketta tai napsauttamalla näppäimistön Delete-näppäintä.\n\n### Luominen\n\nPuuttuuko tie kartalta? Aloita tien piirtäminen napsauttamalla yläpalkista\nViiva tai paina pikanäppäintä `2` näppäimistöstä.\n\nNapsauta seuraavaksi tien lähtöpistettä. Jos tie lähtee jo kartalla olevan tien\nristeyksestä, napsauta risteyskohtaa.\n\nJatka napsauttelemalla tielle viivapisteitä säännöllisin välimatkoin\nseuraamalla ilmakuvaa tai GPS-jälkeä. Jos tie risteää jonkun muun tien kanssa, muodosta risteys napsauttamalla risteyskohtaa ja jatka taas normaaliin tapaan. Lopeta piirtäminen ja viimeistele tie\nkaksoisnapsauttamalla tai painamalla Enter-näppäintä. Peru tien piirtäminen ja poista tie painamalla näppäimistön askelpalautinta.\n",
-        "gps": "# GPS\n\nGPS-mittaukset ovat tärkein OpenStreetMapin aineiston lähde. Tämä\nmuokkausohjelma tukee omalta tietokoneeltasi käytettäviä `.gpx`-tiedostoja.\nGPS-mittauksia voi tehdä useilla älypuhelinsovelluksilla ja tietysti myös\nerillisillä GPS-mittalaitteilla.\n\nLisätietoja GPS-mittausten tekemisestä on sivuilla\n[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/)\nja [Aloittelijan opas](http://wiki.openstreetmap.org/wiki/Fi:Beginners_Guide_1.1).\n\nKäytä GPX-tiedostoa kartoittamisen apuna vetämällä ja pudottamalla\ntiedosto kartanmuokkausohjelmaan. Jos se toimii, GPS-jälki ilmestyy\nkarttapohjalle kirkkaanvihreänä viivana. Tämän uuden GPX-karttatason\nasetuksia voi muuttaa Taustan asetukset -valikossa.\n\nTällä tavalla kartoittamisen apuna käytettyä GPX-tiedostoa ei tallenneta\nOpenStreetMapiin - tiedosto tulee hyödynnettyä parhaiten tallentamalla\ntiedosto myös muiden [karttakehittäjien käyttöön](http://www.openstreetmap.org/trace/create).\n",
         "imagery": "# Ilmakuvat\n\nIlmakuvat ovat tärkeä kartoittamisen apuväline. Lentokuvien,\nsatelliittikuvien ja vapaasti koottujen materiaalien kokoelma on\nkäytettävissä Taustan asetukset -valikosta oikean reunan sivupalkista.\n\nOletuksena taustalla näytetään [Bing-karttojen](http://www.bing.com/maps/) satelliittikuvat,\nmutta karttaa lähentämällä vaihtoehtoja tulee lisää.\nJoissakin maissa, kuten Suomessa, Ranskassa ja Tanskassa\non saatavilla korkealaatuisia lentokoneesta kuvattuja ilmakuvia.\n\nIlmakuva voi näyttää virheelliseltä palveluntarjoajan sivuston\nvirheen vuoksi. Jos tiestön sijainti heittää ilmakuvasta, älä ala heti\nsiirtämään niitä vastaamaan taustakuvaa, vaan siirrä ilmakuvataustaa\nvastaamaan tiestöä asetuksella \"Korjaa ilmakuvavirhe\"\nTaustan asetusten alaosassa.\n",
         "addresses": "# Osoitteet\n\nOsoitteet ovat yksi tärkeimmistä kartalla olevasta tiedosta.\n\nSen lisäksi että osoitetiedot ovat myös katujen nimiä,\nOpenStreetMapissa ne ovat olennaisia myös rakennusten\nja muiden kadunvarsikohteiden tiedoissa.\n\nOsoitetietoja voi katujen lisäksi lisätä rakennuksien ulkoreunoille\nja paikkapisteille. Paras osoitetietojen lähde on jalkautuminen tai\noma paikallistuntemus. Kuten kaikessa muussakin muokkaamisessa,\ntietojen kopioiminen kaupallisista lähteistä kuten Google Kartoista\non ehdottomasti kielletty.\n",
-        "inspector": "# Kohdemuokkaimen\nkäyttö\n\nKohdemuokkain on näytön vasemmassa reunassa oleva osio,\njolla muutetaan valitun kohteen ominaisuuksia.\n\n### Kohteen tyypin valitseminen\n\nPisteen, viivan tai alueen lisäämisen jälkeen tulee valita, millainen kohde\nse on - kuten kahvila, moottoritie, joki tai leikkipuisto. Kohdemuokkain\nnäyttää painikkeet yleisimmille kohteille. Jos kohde ei näy listalla, hae\npaikkaa hakusanalla ja valitse se sitten luettelosta. Haku ymmärtää myös\nsynonyymit ja englanninkieliset nimet, joten kokeile sitä rohkeasti.\n\nTarkastele kohdetyypin lisätietoja tarkemmin napsauttamalla i-kirjainta\nsen reunassa. Valitse kohdetyyppi muokattavalle kohteelle napsauttamalla.\n\n### Kohteen tagien muokkaaminen\n\nKun kohdetyyppi on valittu, kohdemuokkain näyttää tietokenttiä, joilla\nvoidaan kuvailla kohteen ominaisuuksia, kuten nimi ja osoite.\n\nKenttäjoukon alapuolella on rivi painikkeita, joilla voi avata lisäkenttiä,\nkuten [Wikipedia-sivun](http://fi.wikipedia.org/), esteettömyystiedot\nja paljon muuta.\n\nKohdemuokkaimen alaosassa on Kaikki tagit -kohta, jossa voi lisätä\nkohteelle mitä tahansa tageja eli ominaisuustietoja. [Taginfosta](http://taginfo.openstreetmap.org/)\nlöytää lisätietoja erilaisista tageista ja niiden käyttömahdollisuuksista.\n\nKohdemuokkaimella tehtävät muutokset päivittyvät muokkauskartalle.\nreaaliaikaisesti. Muutoksen voi kuitenkin aina perua napsauttamalla\nKumoa-painiketta.\n",
+        "inspector": "# Kohdemuokkaimen käyttö\n\nKohdemuokkain on näytön vasemmassa reunassa oleva osio,\njolla muutetaan valitun kohteen ominaisuuksia.\n\n### Kohteen tyypin valitseminen\n\nPisteen, viivan tai alueen lisäämisen jälkeen tulee valita, millainen kohde\nse on - kuten kahvila, moottoritie, joki tai leikkipuisto. Kohdemuokkain\nnäyttää painikkeet yleisimmille kohteille. Jos kohde ei näy listalla, hae\npaikkaa hakusanalla ja valitse se sitten luettelosta. Haku ymmärtää myös\nsynonyymit ja englanninkieliset nimet, joten kokeile sitä rohkeasti.\n\nTarkastele kohdetyypin lisätietoja tarkemmin napsauttamalla i-kirjainta\nsen reunassa. Valitse kohdetyyppi muokattavalle kohteelle napsauttamalla.\n\n### Kohteen tagien muokkaaminen\n\nKun kohdetyyppi on valittu, kohdemuokkain näyttää tietokenttiä, joilla\nvoidaan kuvailla kohteen ominaisuuksia, kuten nimi ja osoite.\n\nKenttäjoukon alapuolella on rivi painikkeita, joilla voi avata lisäkenttiä,\nkuten [Wikipedia-sivun](http://fi.wikipedia.org/), esteettömyystiedot\nja paljon muuta.\n\nKohdemuokkaimen alaosassa on Kaikki tagit -kohta, jossa voi lisätä\nkohteelle mitä tahansa tageja eli ominaisuustietoja. [Taginfosta](http://taginfo.openstreetmap.org/)\nlöytää lisätietoja erilaisista tageista ja niiden käyttömahdollisuuksista.\n\nKohdemuokkaimella tehtävät muutokset päivittyvät muokkauskartalle.\nreaaliaikaisesti. Muutoksen voi kuitenkin aina perua napsauttamalla\nKumoa-painiketta.\n",
         "buildings": "# Rakennukset\n\nOpenStreetMap sisältää maailman laajimman rakennustietokannan.\nVoit osallistua tämän tietokannan luomiseen ja kehittämiseen.\n\n### Valitseminen\n\nValitse rakennus napsauttamalla sen seinää. Rakennus korostuu,\nrakennuksen viereen tulee pikatoiminto palkki ja rakennuksen\nmuokkausnäkymä avautuu.\n\n### Muokkaaminen\n\nJoskus rakennukset ovat väärin sijoitettuja tai niiden tiedot ovat virheellisiä.\n\nSiirrä rakennusta valitsemalla se ja napsauttamalla Muokkaa. Liikuta\nrakennusta hiirellä ja aseta se uudelle paikalleen napsauttamalla.\n\nMuuta rakennuksen muotoa napsauttamalla ja vetämällä\nsen rajojen pisteitä oikeille kohdille.\n\n### Piirtäminen\n\nYksi yleisimmistä rakennusten piirtämiseen liittyvistä kysymyksistä on se,\nettä OpenStreetMapissa rakennus voidaan piirtää tai merkitä vain pisteellä.\nNyrkkisääntö on, että rakennusten ulkomuodot tulisi aina pyrkiä piirtämään\nmahdollisimman tarkasti ja sijoittaa mahdolliset sisällä toimivat yritykset paikkapisteinä sen sisään.\n\nAloita rakennuksen piirtäminen napsauttamalla yläpalkista Alue.\nPeruuta piirtäminen painamalla näppäimistön askelpalautinta.\nViimeistele rakennus sulkemalla se napsauttamalla lähtöpistettä uudelleen.\n\n### Poistaminen\n\nJos rakennus on täysin virheellinen - se esimerkiksi puuttuu satelliittikuvasta\nkokonaan tai se ei varmasti ole enää olemassa - se tulee poistaa\nkartalta. Mieti tarkkaan ennen karttakohteiden poistamispäätöstä -\nmuutos näkyy kartalla kaikille ja lisäksi satelliittikuvat ovat usein\nvanhentuneita, joten rakennus on jo voitu ehtiä rakentaa uudelleen.\n\nPoista rakennus valitsemalla se ja napsauttamalla sitten roskakorin\nkuvaketta tai napsauttamalla näppäimistön Delete-näppäintä.\n",
         "relations": "# Suhteet\n\nSuhde on erityistyyppinen OpenStreetMap-ominaisuus, joka ryhmittää yhteen muita\nominaisuuksia. Esimerkiksi kaksi yleistä suhdetyyppiä ovat *route relations*,\njotka ryhmittävät yhteen tienosat, jotka kuuluvat tiettyyn moottoritiehen tai\npäätiehen, ja *multipolygons*, jotka ryhmittävät yhteen useita viivoja, jotka määrittävät\nmutkikkaita alueita (sellaisia, joissa on useita kappaleita tai reikiä, kuten donitsissa).\n\nOminaisryhmää suhteessa kutsutaan *members*. Sivupalkissa voit nähdä\nminkä suhteiden jäsenenä ominaisuus on, ja napsauttaa suhdetta siellä\nsen valitsemiseksi. Kun suhde on valittu, voit nähdä kaikki sen jäsenet\nlueteltuina sivupalkissa ja korostettuna kartalla.\n\nEnimmäkseen iD huolehtii suhteiden ylläpidosta automaattisesti muokkauksen\naikana. Tärkein seikka, josta sinun pitäisi olla tietoinen, on että jos poistat\ntienpätkän piirtääksesi sen tarkempaa, sinun pitäisi varmistua, että uusi pätkä on\nsaman suhteen jäsen kuin alkuperäinen.\n\n## Suhteiden muokkaus\n\nJos haluat muokata suhteita, tässä ovat perusasiat.\n\nOminaisuuden lisäämiseksi suhteeseen, valitse ominaisuus, napsauta ”+”-painiketta\nsivupalkin ”All relations”-kappaleessa, ja valitse tai kirjoita suhteen nimi.\n\nUuden suhteen luomisesksi valitse ensin ominaisuus, jonka pitäisi olla jäsen,\nnapsauta ”+”-painiketta ”All relations”-kappaleessa ja valitse ”New relation...”.\n\nOminaisuuden poistamiseksi suhteesta valitse ominaisuus ja napsauta\nroskakoripainiketta sen suhteen vieressä, josta haluat sen poistaa.\n\nVoit luoda monikulmioita rei'illä käyttäen ”Merge”-työkalua. Piirrä kaksi aluetta (sisempi\nja ulompi), pidä Vaihto-näppäin alhaalla ja napsauta niistä kumpaakin molempien\nvalitsemiseksi, ja napsauta sitten ”Merge” (+)-painiketta.\n"
     },
@@ -551,6 +589,9 @@
             "barrier": {
                 "label": "Tyyppi"
             },
+            "bench": {
+                "label": "Penkki"
+            },
             "bicycle_parking": {
                 "label": "Tyyppi"
             },
@@ -573,6 +614,7 @@
                     "N": "Pohjoinen",
                     "E": "Itä",
                     "S": "Etelä",
+                    "W": "Länsi",
                     "NE": "Koillinen",
                     "SE": "Kaakko",
                     "SW": "Lounas",
@@ -589,7 +631,7 @@
                 }
             },
             "collection_times": {
-                "label": "Tyhjennysaika"
+                "label": "Tyhjennysajat"
             },
             "construction": {
                 "label": "Tyyppi"
@@ -599,6 +641,9 @@
             },
             "covered": {
                 "label": "Katos"
+            },
+            "craft": {
+                "label": "Tyyppi"
             },
             "crossing": {
                 "label": "Tyyppi"
@@ -618,6 +663,8 @@
             "electrified": {
                 "label": "Sähköistys",
                 "options": {
+                    "contact_line": "Sähkojohtimet",
+                    "rail": "Sähkökisko",
                     "yes": "Kyllä (määrittelemätön)",
                     "no": "Ei"
                 }
@@ -740,7 +787,7 @@
                 "label": "Pituus (metreinä)"
             },
             "levels": {
-                "label": "Kerrokset",
+                "label": "Kerroslukumäärä",
                 "placeholder": "2, 4, 6..."
             },
             "lit": {
@@ -757,9 +804,20 @@
                 "placeholder": "40, 50, 60..."
             },
             "mtb/scale": {
-                "placeholder": "0, 1, 2, 3..."
+                "label": "Maastopyöräilyn haastavuus",
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Tasainen sora/pakattu maa-aines, ei esteitä, laajakaariset käännökset",
+                    "1": "1: Hieman irtomaata, pieniä esteitä, laajakaariset käännökset",
+                    "2": "2: Runsaasti irtomaata, suuria esteitä, helpot käännökset",
+                    "3": "3: Liukas pinta, suuria esteitä, tiukat käännökset",
+                    "4": "4: Irtomaapäällyste tai -kalliot, vaarralliset käännökset",
+                    "5": "5: Vaikein mahdollinen, kivikkoa, jyrkänteitä",
+                    "6": "6: Ei ajokelpoinen huippuammattilaisia lukuunottamatta"
+                }
             },
             "mtb/scale/imba": {
+                "label": "IMBA-polkuluokitus",
                 "placeholder": "Helppo, keskivaikea, Vaikea...",
                 "options": {
                     "0": "Helpoin (valkoinen ympyrä)",
@@ -770,7 +828,16 @@
                 }
             },
             "mtb/scale/uphill": {
-                "placeholder": "0, 1, 2, 3..."
+                "label": "Ylämäkipyöräilyn haastavuus",
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Nousu keskimäärin <10%, sorapohja, ei esteitä",
+                    "1": "1: Nousu keskimäärin <15%, sorapohja, satunnaisia pieniä esteitä",
+                    "2": "2: Nousu keskimäärin <20%, vakaa pinta, juurikkoa",
+                    "3": "3: Nousu keskimäärin <25%, vaihteleva pinta, kiviä, runsasta juurikkoa",
+                    "4": "4: Nousu keskimäärin <30%, huonokuntoinen, suuria kiviä ja erittäin runsasta juurikkoa",
+                    "5": "5: Todella jyrkkä, pyörän taluttaminen tai kantaminen suositeltavaa"
+                }
             },
             "name": {
                 "label": "Nimi",
@@ -828,13 +895,36 @@
                 "placeholder": "+358 40 123 4567"
             },
             "piste/difficulty": {
-                "label": "Haastavuus"
+                "label": "Haastavuus",
+                "placeholder": "Helppo, keskivaikea, vaikea...",
+                "options": {
+                    "novice": "Vasta-alkaja (ohjeellinen)",
+                    "easy": "Erittäin helppo (vihreä ympyrä)",
+                    "intermediate": "Helppo (sininen neliö)",
+                    "advanced": "Keskivaikea (punainen timantti)",
+                    "expert": "Vaikea (musta timantti)",
+                    "freeride": "Merkitsemätön (off-rinne)",
+                    "extreme": "Extreme (edellyttää kiipeilyvarusteet)"
+                }
             },
             "piste/grooming": {
-                "label": "Latupohjan soveltuvuus"
+                "label": "Rinne/latupohja",
+                "options": {
+                    "classic": "Tasainen",
+                    "mogul": "Kumpare",
+                    "backcountry": "Maaseutuhiihto",
+                    "classic+skating": "Perinteinen ja vapaa hiihtotyyli",
+                    "scooter": "Lumikelkka",
+                    "skating": "Luistelu"
+                }
             },
             "piste/type": {
-                "label": "Tyyppi"
+                "label": "Tyyppi",
+                "options": {
+                    "downhill": "Laskettelu",
+                    "nordic": "Murtomaahiihto",
+                    "playground": "Leikkipuisto"
+                }
             },
             "place": {
                 "label": "Tyyppi"
@@ -880,6 +970,21 @@
             },
             "route_master": {
                 "label": "Tyyppi"
+            },
+            "sac_scale": {
+                "label": "Patikointireitin vaikeustaso",
+                "placeholder": "Vuoristopatikointi, alppipatikointi...",
+                "options": {
+                    "hiking": "T1: Patikointi",
+                    "mountain_hiking": "T2: Vuoristopatikointi",
+                    "demanding_mountain_hiking": "T3: Vaativa vuoristopatikointi",
+                    "alpine_hiking": "T4: Alppipatikointi",
+                    "demanding_alpine_hiking": "T5: Vaativa alppipatikointi",
+                    "difficult_alpine_hiking": "T6: Vaikea alppipatikointi"
+                }
+            },
+            "seasonal": {
+                "label": "Kausiluonteisuus"
             },
             "service": {
                 "label": "Tyyppi"
@@ -927,6 +1032,14 @@
             "tactile_paving": {
                 "label": "Huomioreuna näkövammaisille"
             },
+            "toilets/disposal": {
+                "label": "Tyhjennystekniikka",
+                "options": {
+                    "flush": "Huuhtelu",
+                    "pitlatrine": "Peittoaines",
+                    "chemical": "Kemikaalinen"
+                }
+            },
             "tourism": {
                 "label": "Tyyppi"
             },
@@ -934,7 +1047,19 @@
                 "label": "Tornin tyyppi"
             },
             "trail_visibility": {
-                "label": "Näkyvyys"
+                "label": "Havaittavuus",
+                "placeholder": "Erinomainen, hyvä, huono...",
+                "options": {
+                    "excellent": "Erinomainen: selkeästi erottuva tai viitoitettu polku",
+                    "good": "Hyvä: viitoitettu hyvin, vaatii satunnaisesti polun hakemista",
+                    "intermediate": "Keskinkertainen: viitoitettu satunnaisesti, polku pääosin näkyvissä",
+                    "bad": "Huono: ei viitoitusta, polku on satunnaisesti heikosti havaittavissa/puuttuu kokonaan",
+                    "horrible": "Surkea: pääosin ei polkua ollenkaan, suunnistustaidot välttämättömiä",
+                    "no": "Ei: ei minkäänlaista polkua, edistyneet suunnistustaidot välttämättömiä"
+                }
+            },
+            "trees": {
+                "label": "Puut"
             },
             "tunnel": {
                 "label": "Tunneli"
@@ -960,9 +1085,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Tyyppi"
             }
         },
         "presets": {
@@ -1074,6 +1196,14 @@
                 "name": "Venevuokraamo",
                 "terms": "vene, laiva, paatti, jolla, veneenvuokraus, venevuokra, vuokra, venevuokraus, venevuokraamo, veneenvuokraamo"
             },
+            "amenity/bureau_de_change": {
+                "name": "Valuutanvaihtopiste",
+                "terms": "valuutta, raha, vaihto, vaihtaminen, valuutanvaihto, valuutanvaihtaminen, rahanvaihto, rahanvaihtaminen, Forex"
+            },
+            "amenity/bus_station": {
+                "name": "Linja-autoasema",
+                "terms": "linja, linja-auto, asema, pysäkki, keskus, matkakeskus, bussiasema, bussi, bussit, nysse, dösä, terminaali, linja-autoterminaali, bussiterminaali"
+            },
             "amenity/cafe": {
                 "name": "Kahvila",
                 "terms": "Kahvila, Kahvitupa, Teehuone"
@@ -1092,6 +1222,10 @@
             "amenity/charging_station": {
                 "name": "Latauspiste",
                 "terms": "sähköauto, sähkönlataus, sähköpiste, latauspiste, lataaminen, lataus"
+            },
+            "amenity/childcare": {
+                "name": "Päiväkoti",
+                "terms": "päivähoito, perhepäivähoito, päiväkoti, lapset, lapsi, lastenhoito, lastenvahti, lapsenvahti, lapsenhoito, vahtiminen"
             },
             "amenity/cinema": {
                 "name": "Elokuvateatteri",
@@ -1146,6 +1280,10 @@
                 "name": "Sairaala-alue",
                 "terms": "Sairaala-alue"
             },
+            "amenity/kindergarten": {
+                "name": "Esikoulu",
+                "terms": "eskari, leikkikoulu, koulu, nollaluokka, 0. luokka, 0 luokka, 0-luokka"
+            },
             "amenity/library": {
                 "name": "Kirjasto",
                 "terms": "kirjasto, kirjalainaamo, kirjanlainaus, kirjan lainaus, kirja, kirjan lainaaminen"
@@ -1159,6 +1297,10 @@
             "amenity/parking": {
                 "name": "Autopysäköinti",
                 "terms": "auto, parkki, parkkihalli, pysäköintialue, pysäköinti, parkki, parkkipaikka, pysäköintialue, parkkialue"
+            },
+            "amenity/parking_entrance": {
+                "name": "Pysäköintihallin sisäänajo",
+                "terms": "pysäköinti, parkkipaikka, pysäköintipaikka, parkki, pysäköintitalo, parkkitalo, ulosajo, sisäänajo, ajo, ulos, sisään"
             },
             "amenity/pharmacy": {
                 "name": "Apteekki",
@@ -1264,7 +1406,8 @@
                 "name": "Este"
             },
             "barrier/bollard": {
-                "name": "Sulkutolppa"
+                "name": "Sulkutolppa",
+                "terms": "pollari, tolppa, pylväs"
             },
             "barrier/cattle_grid": {
                 "name": "Karjaeste"
@@ -1320,6 +1463,9 @@
             "building/barn": {
                 "name": "Lato"
             },
+            "building/bunker": {
+                "name": "Bunkkeri"
+            },
             "building/church": {
                 "name": "Kirkko"
             },
@@ -1357,6 +1503,9 @@
             },
             "building/industrial": {
                 "name": "Teollisuusrakennus"
+            },
+            "building/kindergarten": {
+                "name": "Esikoulurakennus"
             },
             "building/public": {
                 "name": "Julkinen rakennus"
@@ -1427,9 +1576,6 @@
             },
             "craft/clockmaker": {
                 "name": "Kelloseppä"
-            },
-            "craft/confectionery": {
-                "name": "Konditoria"
             },
             "craft/dressmaker": {
                 "name": "ompelija"
@@ -1752,14 +1898,12 @@
             "landuse/cemetery": {
                 "name": "Hautausmaa"
             },
-            "landuse/commercial": {
-                "name": "Yritysalue"
+            "landuse/churchyard": {
+                "name": "Hautausmaa",
+                "terms": "hautaaminen, vainaja, kuollut, ruumis, hautuumaa, hautaus, hauta, haudat"
             },
             "landuse/construction": {
                 "name": "Rakennustyömaa"
-            },
-            "landuse/farm": {
-                "name": "Maatila"
             },
             "landuse/farmyard": {
                 "name": "Pihamaa"
@@ -1770,9 +1914,6 @@
             "landuse/grass": {
                 "name": "Ruohokenttä"
             },
-            "landuse/industrial": {
-                "name": "Teollisuusalue"
-            },
             "landuse/meadow": {
                 "name": "Niitty/pelto"
             },
@@ -1781,12 +1922,6 @@
             },
             "landuse/quarry": {
                 "name": "Louhos"
-            },
-            "landuse/residential": {
-                "name": "Asuinalue"
-            },
-            "landuse/retail": {
-                "name": "Vähittäiskauppa"
             },
             "landuse/vineyard": {
                 "name": "Viinitarha"
@@ -1849,6 +1984,9 @@
                 "name": "Leikkipuisto",
                 "terms": "leikkipuisto, leikkipaikka, leikki, leikkiä, lapsipuisto, leikkipiste"
             },
+            "leisure/running_track": {
+                "name": "Juoksupolku"
+            },
             "leisure/slipway": {
                 "name": "Veneramppi",
                 "terms": "veneramppi, vesillelaskupaikka, veneenlaskupaikka, vene, järveenlaskupaikka, järviramppi"
@@ -1910,6 +2048,10 @@
             },
             "man_made/water_works": {
                 "name": "Vesilaitos"
+            },
+            "military/airfield": {
+                "name": "Lentotukikohta",
+                "terms": "hävittäjä, armeija, sotilas, sota, puolustus, ase, asevoimat, asevoima, lentokone, lentokenttä, lentoasema, kiitorata, tukikohta"
             },
             "military/barracks": {
                 "name": "Parakit"
@@ -2159,6 +2301,24 @@
             "shop/alcohol": {
                 "name": "Alkoholimyymälä"
             },
+            "shop/anime": {
+                "name": "Anime-myymälä",
+                "terms": "cosplay, anime, manga, pukeutuminen"
+            },
+            "shop/antiques": {
+                "name": "Antiikkiliike"
+            },
+            "shop/art": {
+                "name": "Taidegalleria"
+            },
+            "shop/baby_goods": {
+                "name": "Vauvatarvikeliike",
+                "terms": "vauva, lapsi, vastasyntynyt, vauvatalo, lastenhoito, lapset, vauvat, vauvanhoito, hoito, lapsenhoito"
+            },
+            "shop/bag": {
+                "name": "Matkalaukkumyymälä",
+                "terms": "matkalaukku, matkatavara, laukku, kassi, säkki, kapsäkki, laukut, kassit, säkit, kapsäkit"
+            },
             "shop/bakery": {
                 "name": "Leipomo"
             },
@@ -2172,11 +2332,17 @@
                 "name": "Pyöräliike",
                 "terms": "pyöräkauppa, pyöräliike, pyörän varaosa, pyörämyymälä, polkupyöräkauppa, polkupyöräliike, polkupyörän varaosa, polkupyörämyymälä, polkupyörä, pyörä"
             },
+            "shop/books": {
+                "name": "Kirjakauppa"
+            },
             "shop/boutique": {
                 "name": "Muotiliike"
             },
             "shop/butcher": {
                 "name": "Lihakauppias"
+            },
+            "shop/candles": {
+                "name": "Kynttiläkauppa"
             },
             "shop/car": {
                 "name": "Autokauppa"
@@ -2189,8 +2355,17 @@
                 "name": "Autokorjaamo",
                 "terms": "autokorjaamo, korjaamo, autohuolto, huolto, katsastus, autokatsastus, auto, autot, autoliike"
             },
+            "shop/carpet": {
+                "name": "Mattokauppa"
+            },
+            "shop/cheese": {
+                "name": "Juustopuoti"
+            },
             "shop/chemist": {
                 "name": "Kemisti"
+            },
+            "shop/chocolate": {
+                "name": "Suklaapuoti"
             },
             "shop/clothes": {
                 "name": "Vaatekauppa"
@@ -2198,8 +2373,18 @@
             "shop/computer": {
                 "name": "Tietokoneliike"
             },
+            "shop/confectionery": {
+                "name": "Karkkipuoti"
+            },
             "shop/convenience": {
                 "name": "Lähikauppa"
+            },
+            "shop/cosmetics": {
+                "name": "Kosmetiikkamyymälä"
+            },
+            "shop/dairy": {
+                "name": "Maitotuotemyymälä",
+                "terms": "maito, meijeri, maitotuote, maitoa, juusto, jogurtti, viili, piimä, jäätelö, lehmä"
             },
             "shop/deli": {
                 "name": "Deli"
@@ -2212,6 +2397,9 @@
             },
             "shop/electronics": {
                 "name": "Elektroniikkamyymälä"
+            },
+            "shop/erotic": {
+                "name": "Erotiikkamyymälä"
             },
             "shop/farm": {
                 "name": "Tuotteen esittelypiste",
@@ -2253,6 +2441,12 @@
             "shop/jewelry": {
                 "name": "Jalokiviliike"
             },
+            "shop/kiosk": {
+                "name": "Lehtikioski"
+            },
+            "shop/kitchen": {
+                "name": "Keittiöliike"
+            },
             "shop/laundry": {
                 "name": "Pesula"
             },
@@ -2287,6 +2481,10 @@
             "shop/photo": {
                 "name": "Valokuvausliike"
             },
+            "shop/scuba_diving": {
+                "name": "Sukellusliike",
+                "terms": "laitesukellus, sukellus, sukeltaminen, laitesukeltaminen, sukelluskauppa, sukellusliike"
+            },
             "shop/shoes": {
                 "name": "Kenkäkauppa"
             },
@@ -2301,6 +2499,9 @@
             },
             "shop/tailor": {
                 "name": "räätäli"
+            },
+            "shop/tobacco": {
+                "name": "Tupakkapuoti"
             },
             "shop/toys": {
                 "name": "Lelukauppa"
@@ -2376,6 +2577,9 @@
             },
             "tourism/zoo": {
                 "name": "Eläintarha"
+            },
+            "traffic_calming/table": {
+                "name": "Korotettu suojatie"
             },
             "type/boundary": {
                 "name": "Raja"

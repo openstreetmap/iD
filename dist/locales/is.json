@@ -41,7 +41,10 @@
             }
         },
         "continue": {
+            "key": " ",
             "title": "Halda áfram",
+            "not_eligible": "Ekki hægt að framlengja neina línu hér.",
+            "multiple": "Hægt er að halda áfram með nokkrar línur héðan. Veldu línu með því að ýta á Shift og velja rétta línu.",
             "annotation": {
                 "line": "Hélt áfram með línu.",
                 "area": "Hélt áfram með svæði."
@@ -79,15 +82,18 @@
                 "line": "Réttaði horn á línu.",
                 "area": "Réttaði horn svæðis."
             },
-            "not_squarish": "Það er ekki hægt að hornrétta þetta því að það er ekki kassalaga"
+            "not_squarish": "Það er ekki hægt að hornrétta þetta því að það er ekki kassalaga",
+            "too_large": "Ekki hægt að hornrétta þar sem hluti er utan sjónsviðs."
         },
         "straighten": {
             "title": "Slétta",
             "annotation": "Slétti úr línu",
-            "too_bendy": "Það er ekki hægt að slétta úr þessu því að það beygir of skarplega"
+            "too_bendy": "Það er ekki hægt að slétta úr þessu því að það beygir of skarplega",
+            "connected_to_hidden": "Ekki er hægt að slétta línuna þar sem hún er tengd földu eigindi."
         },
         "delete": {
             "title": "Eyða",
+            "description": "Eyða hlut endanlega.",
             "annotation": {
                 "point": "Eyddi punkti.",
                 "vertex": "Eyddi hnút af leið.",
@@ -117,7 +123,8 @@
             "description": "Aftengja þessar línur/svæði.",
             "key": "D",
             "annotation": "Aðskilja línur/svæði.",
-            "not_connected": "Það eru ekki nógu margar línur/svæði hérna til að aftengja."
+            "not_connected": "Það eru ekki nógu margar línur/svæði hérna til að aftengja.",
+            "connected_to_hidden": "Það er ekki hægt að aftengja því að falið eigindi tengist þessu."
         },
         "merge": {
             "title": "Sameina",
@@ -143,11 +150,13 @@
         },
         "rotate": {
             "title": "Snúa",
+            "description": "Snúa þessu um miðpunkt sinn.",
             "key": "R",
             "annotation": {
                 "line": "Snéri línu.",
                 "area": "Snéri svæði."
-            }
+            },
+            "too_large": "Ekki er hægt að snúa þessu þar sem hluti þess er utan sjónsviðs."
         },
         "reverse": {
             "title": "Öfugt",
@@ -261,6 +270,35 @@
         "none": "Ekkert",
         "reset": "endurstilla"
     },
+    "map_data": {
+        "description": "Kortagögn",
+        "fill_area": "Fylla svæði"
+    },
+    "feature": {
+        "major_roads": {
+            "description": "Aðalvegir"
+        },
+        "minor_roads": {
+            "description": "Minni vegir"
+        },
+        "buildings": {
+            "description": "Byggingar",
+            "tooltip": "Byggingar, skýli, bílskúrar oþh."
+        },
+        "boundaries": {
+            "description": "Svæðamörk",
+            "tooltip": "Stjórnsýslumörk"
+        },
+        "water": {
+            "tooltip": "Ár, vötn, tjarnir, lón og fl."
+        },
+        "rail": {
+            "description": "Lestareigindi"
+        },
+        "past_future": {
+            "tooltip": "Tillaga,  í byggingu, í eyði, niðurrif oþh"
+        }
+    },
     "restore": {
         "heading": "Þú átt óvistaðar breytingar",
         "description": "Viltu endurvekja óvistaðar breytingar frá því síðast?",
@@ -272,6 +310,7 @@
         "help": "Vista breytingar á OpenStreetMap, þær verða sýnilegar öðrum notendum.",
         "no_changes": "Engar breytingar til að vista.",
         "error": "Villa kom upp þegar reynt var að vista",
+        "unknown_error_details": "Aðgættu hvort að nettengingin er í lagi.",
         "uploading": "Hleð breytingum inn á OpenStreetMap.",
         "unsaved_changes": "Þú átt óvistaðar breytingar"
     },
@@ -317,7 +356,12 @@
     "cannot_zoom": "Get ekki þysjað lengra út í núverandi ham.",
     "gpx": {
         "local_layer": "Staðvær GPX-skrá",
-        "drag_drop": "Dragðu og slepptu .gpx skrá á síðuna eða smelltu á takkann til hægri til að fletta"
+        "drag_drop": "Dragðu og slepptu .gpx skrá á síðuna eða smelltu á takkann til hægri til að fletta",
+        "browse": "Finna .gpx skrá"
+    },
+    "mapillary": {
+        "title": "Ljósmyndaþekja (Mapillary)",
+        "view_on_mapillary": "Skoða þessa mynd á Mapillary"
     },
     "help": {
         "title": "Hjálp",
@@ -356,6 +400,7 @@
         },
         "lines": {
             "title": "Línur",
+            "add": "Línur eru notaðar fyrir til dæmis vegi, lestarteina og ár. **Ýtið á línutakkann til að bæta við nýrri línu.**",
             "start": "**Byrjaðu línuna með því að smella á enda vegarins.**",
             "intersect": "Smelltu til að bæta fleiri hnútum við línuna. Þú getur dregið kortið til á meðan ef þarf. Vegir, og margar aðrar línur, eru hluti af stærra neti. Það er mikilvægt að þessar línur tengist rétt saman svo að leiðarvísiforrit virki rétt. **Smelltu á Flower Street til að búa til vegamót með því að tengja línurnar saman.**",
             "finish": "Hægt er að klára línur með því að smella aftur á síðasta hnútinn. **Kláraðu að teikna veginn.**",
@@ -390,6 +435,9 @@
             },
             "category-route": {
                 "name": "Leið"
+            },
+            "category-water-area": {
+                "name": "Vatn"
             }
         },
         "fields": {
@@ -434,16 +482,29 @@
                 "label": "Heimilisfang",
                 "placeholders": {
                     "street": "Gata",
-                    "city": "Sveitarfélag"
+                    "city": "Sveitarfélag",
+                    "subdistrict": "Undirsvæði"
                 }
             },
             "admin_level": {
                 "label": "Stjórnsýslustig"
             },
+            "aerialway/access": {
+                "options": {
+                    "exit": "Útgangur",
+                    "both": "Bæði"
+                }
+            },
+            "aerialway/capacity": {
+                "placeholder": "500, 2500, 5000..."
+            },
             "aeroway": {
                 "label": "Tegund"
             },
             "amenity": {
+                "label": "Tegund"
+            },
+            "artwork_type": {
                 "label": "Tegund"
             },
             "atm": {
@@ -469,7 +530,10 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Átt"
+                "label": "Átt",
+                "options": {
+                    "NW": "Norðvestur"
+                }
             },
             "clock_direction": {
                 "label": "Átt",
@@ -486,6 +550,9 @@
             },
             "country": {
                 "label": "Land"
+            },
+            "covered": {
+                "label": "Yfirbyggt"
             },
             "crop": {
                 "label": "Uppskera"
@@ -548,6 +615,7 @@
             "internet_access": {
                 "label": "Internetaðgangur",
                 "options": {
+                    "no": "Nei",
                     "wlan": "Þráðlaust",
                     "wired": "Leiðslur",
                     "terminal": "Útstöð"
@@ -608,15 +676,27 @@
             "operator": {
                 "label": "Rekstraraðili"
             },
+            "par": {
+                "label": "Par"
+            },
             "park_ride": {
                 "label": "Bílastæði fyrir almenningssamgöngur"
             },
             "parking": {
-                "label": "Tegund"
+                "label": "Tegund",
+                "options": {
+                    "surface": "Yfirborð"
+                }
             },
             "phone": {
                 "label": "Sími",
                 "placeholder": "+31 42 123 4567"
+            },
+            "piste/type": {
+                "options": {
+                    "sleigh": "Sleði",
+                    "ice_skate": "Skautar"
+                }
             },
             "place": {
                 "label": "Tegund"
@@ -665,6 +745,9 @@
             },
             "shelter": {
                 "label": "Skýli"
+            },
+            "shelter_type": {
+                "label": "Tegund"
             },
             "shop": {
                 "label": "Tegund"
@@ -730,9 +813,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Tegund"
             }
         },
         "presets": {
@@ -889,6 +969,9 @@
             "amenity/school": {
                 "name": "Skólalóð"
             },
+            "amenity/shelter": {
+                "name": "Skýli"
+            },
             "amenity/social_facility/food_bank": {
                 "name": "Mataraðstoð"
             },
@@ -1007,6 +1090,9 @@
             "building/construction": {
                 "name": "Á byggingarstigi"
             },
+            "building/detached": {
+                "name": "Raðhús"
+            },
             "building/dormitory": {
                 "name": "Heimavist"
             },
@@ -1015,6 +1101,9 @@
             },
             "building/garages": {
                 "name": "Bílskúrar"
+            },
+            "building/greenhouse": {
+                "name": "Gróðurhús"
             },
             "building/hospital": {
                 "name": "Sjúkrahúsbygging"
@@ -1065,6 +1154,12 @@
             "building/warehouse": {
                 "name": "Vöruhús"
             },
+            "craft/blacksmith": {
+                "name": "Járnsmiður"
+            },
+            "craft/bookbinder": {
+                "name": "Bókbindari"
+            },
             "craft/dressmaker": {
                 "name": "Kjólasaumari"
             },
@@ -1107,11 +1202,20 @@
             "craft/watchmaker": {
                 "name": "Úrsmiður"
             },
+            "craft/winery": {
+                "name": "Víngerð"
+            },
             "emergency/ambulance_station": {
                 "name": "Sjúkrabílastöð"
             },
+            "emergency/fire_hydrant": {
+                "name": "Brunahani"
+            },
             "emergency/phone": {
                 "name": "Neyðarsími"
+            },
+            "golf/green": {
+                "name": "Púttflöt"
             },
             "highway": {
                 "name": "Þjóðvegur"
@@ -1258,14 +1362,8 @@
             "landuse/cemetery": {
                 "name": "Kirkjugarður"
             },
-            "landuse/commercial": {
-                "name": "Atvinnusvæði"
-            },
             "landuse/construction": {
                 "name": "Byggingarframkvæmdir"
-            },
-            "landuse/farm": {
-                "name": "Býli"
             },
             "landuse/farmyard": {
                 "name": "Bóndabýli"
@@ -1276,30 +1374,17 @@
             "landuse/grass": {
                 "name": "Gras"
             },
-            "landuse/industrial": {
-                "name": "Iðnaðarsvæði"
-            },
             "landuse/landfill": {
                 "name": "Landfylling"
             },
             "landuse/meadow": {
                 "name": "Engi"
             },
-            "landuse/military": {
-                "name": "Hersvæði",
-                "terms": "herstöð, æfingasvæði"
-            },
             "landuse/orchard": {
                 "name": "Aldingarður"
             },
             "landuse/quarry": {
                 "name": "Náma"
-            },
-            "landuse/residential": {
-                "name": "Íbúabyggð"
-            },
-            "landuse/retail": {
-                "name": "Verslun"
             },
             "landuse/vineyard": {
                 "name": "Vínekra"
@@ -1352,8 +1437,14 @@
             "leisure/playground": {
                 "name": "Leikvöllur"
             },
+            "leisure/running_track": {
+                "name": "Hlaupabraut"
+            },
             "leisure/slipway": {
                 "name": "Dráttarbraut"
+            },
+            "leisure/sports_center": {
+                "name": "Íþróttamiðstöð / heilsurækt"
             },
             "leisure/stadium": {
                 "name": "Leikvangur"
@@ -1396,6 +1487,9 @@
             },
             "man_made/water_works": {
                 "name": "Vatnsveita"
+            },
+            "military/barracks": {
+                "name": "Herbúðir"
             },
             "natural": {
                 "name": "Náttúrulegt"
@@ -1454,8 +1548,17 @@
             "office": {
                 "name": "Skrifstofa"
             },
+            "office/architect": {
+                "name": "Arkitekt"
+            },
+            "office/newspaper": {
+                "name": "Fréttablað"
+            },
             "office/political_party": {
                 "name": "Stjórnmálaflokkur"
+            },
+            "office/travel_agent": {
+                "name": "Ferðaskrifstofa"
             },
             "place": {
                 "name": "Staður"
@@ -1595,6 +1698,9 @@
             "shop/computer": {
                 "name": "Tölvuverslun"
             },
+            "shop/confectionery": {
+                "name": "Nammibúð"
+            },
             "shop/convenience": {
                 "name": "Kjörbúð"
             },
@@ -1649,8 +1755,14 @@
             "shop/laundry": {
                 "name": "Þvottur"
             },
+            "shop/locksmith": {
+                "name": "Lásasmiður"
+            },
             "shop/mall": {
                 "name": "Verslunarmiðstöð"
+            },
+            "shop/massage": {
+                "name": "Nuddstofa"
             },
             "shop/mobile_phone": {
                 "name": "Farsímaverslun"
@@ -1663,6 +1775,9 @@
             },
             "shop/optician": {
                 "name": "Gleraugnaverslun"
+            },
+            "shop/outdoor": {
+                "name": "Útivistarbúð"
             },
             "shop/pet": {
                 "name": "Dýrabúð"
@@ -1682,6 +1797,12 @@
             },
             "shop/supermarket": {
                 "name": "Stórmarkaður"
+            },
+            "shop/tailor": {
+                "name": "Skraddari"
+            },
+            "shop/ticket": {
+                "name": "Miðasala"
             },
             "shop/toys": {
                 "name": "Dótabúð"

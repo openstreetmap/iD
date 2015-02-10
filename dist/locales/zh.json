@@ -643,9 +643,6 @@
             },
             "wikipedia": {
                 "label": "维基百科"
-            },
-            "wood": {
-                "label": "类型"
             }
         },
         "presets": {
@@ -991,14 +988,8 @@
             "landuse/cemetery": {
                 "name": "墓地"
             },
-            "landuse/commercial": {
-                "name": "商业区"
-            },
             "landuse/construction": {
                 "name": "建筑物"
-            },
-            "landuse/farm": {
-                "name": "农场"
             },
             "landuse/farmyard": {
                 "name": "农庄"
@@ -1009,9 +1000,6 @@
             "landuse/grass": {
                 "name": "草地"
             },
-            "landuse/industrial": {
-                "name": "工业区"
-            },
             "landuse/meadow": {
                 "name": "牧场"
             },
@@ -1020,12 +1008,6 @@
             },
             "landuse/quarry": {
                 "name": "矿场"
-            },
-            "landuse/residential": {
-                "name": "住宅区"
-            },
-            "landuse/retail": {
-                "name": "零售"
             },
             "landuse/vineyard": {
                 "name": "酒庄"

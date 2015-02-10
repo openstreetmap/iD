@@ -587,9 +587,6 @@
             "towertype": {
                 "label": "Tårntype"
             },
-            "tree_type": {
-                "label": "Type"
-            },
             "tunnel": {
                 "label": "Tunnel"
             },
@@ -611,9 +608,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Type"
             }
         },
         "presets": {
@@ -908,14 +902,8 @@
             "landuse/cemetery": {
                 "name": "Kirkegård"
             },
-            "landuse/commercial": {
-                "name": "Kommersielt"
-            },
             "landuse/construction": {
                 "name": "Konstruksjon"
-            },
-            "landuse/farm": {
-                "name": "Gård"
             },
             "landuse/farmyard": {
                 "name": "Gårdsplass"
@@ -926,9 +914,6 @@
             "landuse/grass": {
                 "name": "Gress"
             },
-            "landuse/industrial": {
-                "name": "Industrielt"
-            },
             "landuse/meadow": {
                 "name": "Blomstereng"
             },
@@ -937,12 +922,6 @@
             },
             "landuse/quarry": {
                 "name": "Steinbrudd"
-            },
-            "landuse/residential": {
-                "name": "Boligområde"
-            },
-            "landuse/retail": {
-                "name": "Handel"
             },
             "landuse/vineyard": {
                 "name": "Vingård"

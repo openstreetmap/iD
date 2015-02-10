@@ -72,7 +72,8 @@
                 "area": "Crea un'area circolare"
             },
             "not_closed": "Questo non può essere reso circolare perché non è un anello.",
-            "too_large": "Questo elemento non può essere reso circolare perché non è del tutto visibile."
+            "too_large": "Questo elemento non può essere reso circolare perché non è del tutto visibile.",
+            "connected_to_hidden": "Questo elemento non può essere reso circolare perché è connesso con un elemento invisibile."
         },
         "orthogonalize": {
             "title": "Ortogonalizza",
@@ -86,14 +87,16 @@
                 "area": "Gli angoli dell'area sono stati resi ortogonali."
             },
             "not_squarish": "Questo non può essere reso squadrato perché non è squadrabile.",
-            "too_large": "Questo elemento non può essere reso squadrato perché non è del tutto visibile."
+            "too_large": "Questo elemento non può essere reso squadrato perché non è del tutto visibile.",
+            "connected_to_hidden": "Questo elemento non può essere reso squadrato perché è connesso con un elemento invisibile."
         },
         "straighten": {
             "title": "Raddrizzare",
             "description": "Raddrizza questa linea.",
             "key": "S",
             "annotation": "Linea raddrizzata.",
-            "too_bendy": "Questa linea non può essere raddrizzata perché è troppo tortuosa."
+            "too_bendy": "Questa linea non può essere raddrizzata perché è troppo tortuosa.",
+            "connected_to_hidden": "Questa linea non può essere raddrizzata perché è connessa ad un elemento nascosto."
         },
         "delete": {
             "title": "Cancella",
@@ -106,7 +109,8 @@
                 "relation": "Cancellata una relazione.",
                 "multiple": "Cancellati {n} oggetti."
             },
-            "incomplete_relation": "Questo elemento non può essere cancellato perché non è stato completamente scaricato."
+            "incomplete_relation": "Questo elemento non può essere cancellato perché non è stato completamente scaricato.",
+            "connected_to_hidden": "Questo elemento non può essere cancellato perché è connesso ad un elemento nascosto."
         },
         "add_member": {
             "annotation": "Aggiunto membro alla relazione"
@@ -127,7 +131,8 @@
             "description": "Disconnetti queste linee tra loro.",
             "key": "D",
             "annotation": "Linee disconnesse.",
-            "not_connected": "Non ci sono sufficienti linee/aree da disconnettere."
+            "not_connected": "Non ci sono sufficienti linee/aree da disconnettere.",
+            "connected_to_hidden": "Questo elemento non può essere staccato perché è connesso ad un elemento nascosto."
         },
         "merge": {
             "title": "Unisci",
@@ -151,7 +156,8 @@
                 "multiple": "Spostati diversi oggetti."
             },
             "incomplete_relation": "Questo elemento non può essere spostato perché non è ancora stato scaricato completamente.",
-            "too_large": "Questo elemento non può essere mosso perché non è del tutto visibile."
+            "too_large": "Questo elemento non può essere mosso perché non è del tutto visibile.",
+            "connected_to_hidden": "Questo elemento non può essere mosso perché è connesso ad un elemento nascosto."
         },
         "rotate": {
             "title": "Ruota",
@@ -161,7 +167,8 @@
                 "line": "Ruotata una linea.",
                 "area": "Ruotata un'area."
             },
-            "too_large": "Questo elemento non può essere ruotato perché non è del tutto visibile."
+            "too_large": "Questo elemento non può essere ruotato perché non è del tutto visibile.",
+            "connected_to_hidden": "Questo elemento non può essere ruotato perché è connesso ad un elemento nascosto."
         },
         "reverse": {
             "title": "Inverti Direzione",
@@ -183,7 +190,8 @@
                 "multiple": "Dividi {n} linee/bordi di aree."
             },
             "not_eligible": "Le linee non possono essere divise al loro inizio o alla loro fine.",
-            "multiple_ways": "Ci sono troppe linee da dividere."
+            "multiple_ways": "Ci sono troppe linee da dividere.",
+            "connected_to_hidden": "Questo elemento non può essere diviso perché è connesso ad un elemento nascosto."
         },
         "restriction": {
             "help": {
@@ -218,6 +226,10 @@
     "logout": "esci",
     "loading_auth": "Connettendomi ad OpenStreetMap...",
     "report_a_bug": "segnala un bug",
+    "feature_info": {
+        "hidden_warning": "{count} elementi nascosti",
+        "hidden_details": "Questi sono gli elementi attualmente nascosti: {details}"
+    },
     "status": {
         "error": "Impossibile connettersi all'API.",
         "offline": "L'API non è in linea. Prova più tardi.",
@@ -231,6 +243,7 @@
         "upload_explanation_with_user": "Le modifiche che carichi come {user} saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
         "save": "Salva",
         "cancel": "Annulla",
+        "changes": "{count} Cambiamenti",
         "warnings": "Avvertimenti",
         "modified": "Modificati",
         "deleted": "Cancellati",
@@ -269,11 +282,16 @@
         "incomplete": "<non scaricato>",
         "feature_list": "Cerca elementi",
         "edit": "Modifica elemento",
+        "check": {
+            "yes": "Sì",
+            "no": "No"
+        },
         "none": "Nessuno",
         "node": "Nodo",
         "way": "Linea",
         "relation": "Relazione",
-        "location": "Posizione"
+        "location": "Posizione",
+        "add_fields": "Aggiungi campo:"
     },
     "background": {
         "title": "Sfondo",
@@ -286,6 +304,78 @@
         "fix_misalignment": "Allinea",
         "reset": "reset"
     },
+    "map_data": {
+        "title": "Dati mappa",
+        "description": "Dati della mappa",
+        "data_layers": "Livelli di dati",
+        "fill_area": "Riempimento aree",
+        "map_features": "Elementi della mappa",
+        "autohidden": "Questi elementi sono stati automaticamente nascosti perché sarebbero stati troppi da visualizzare. Per modificarli è necessario ingrandire."
+    },
+    "feature": {
+        "points": {
+            "description": "Punti",
+            "tooltip": "Punti di interesse"
+        },
+        "major_roads": {
+            "description": "Strade principali",
+            "tooltip": "Autostrade, strade, ecc."
+        },
+        "minor_roads": {
+            "description": "Strade minori",
+            "tooltip": "Strade di servizio, corsie di parcheggi, piste, ecc."
+        },
+        "paths": {
+            "description": "Sentieri",
+            "tooltip": "Marciapiedi, piste pedonali, piste ciclabili, ecc."
+        },
+        "buildings": {
+            "description": "Edifici",
+            "tooltip": "Edifici, rimesse, garage, ecc."
+        },
+        "landuse": {
+            "description": "Usi del territorio",
+            "tooltip": "Foreste, coltivazioni, residenziale, commerciale, ecc."
+        },
+        "boundaries": {
+            "description": "Confini",
+            "tooltip": "Confini Amministrativi"
+        },
+        "water": {
+            "description": "Elementi idraulici",
+            "tooltip": "Fiumi, laghi, stagni, bacini, ecc."
+        },
+        "rail": {
+            "description": "Elementi ferroviari",
+            "tooltip": "Ferrovie"
+        },
+        "power": {
+            "description": "Elementi energetici",
+            "tooltip": "Linee elettriche, centrali, sottostazioni, ecc."
+        },
+        "past_future": {
+            "description": "Elementi passati o futuri",
+            "tooltip": "Proposti, in costruzione, abbandonati, demoliti, ecc."
+        },
+        "others": {
+            "description": "Altri",
+            "tooltip": "Tutto il resto"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "Nessun riempimento (reticolo)",
+            "tooltip": "Abilitando la modalità reticolo è più facile vedere l'immagine di sfondo."
+        },
+        "partial": {
+            "description": "Riempimento parziale",
+            "tooltip": "Le aree vengono riempite solo attorno ai bordi interni. (Raccomandato per i mappatori alle prime armi)"
+        },
+        "full": {
+            "description": "Riempimento totale",
+            "tooltip": "Le aree vengono completamente riempite."
+        }
+    },
     "restore": {
         "heading": "Hai modifiche non salvate",
         "description": "Hai modifiche non salvate da una sessione precedente. Vuoi ripristinare questi cambiamenti?",
@@ -297,6 +387,7 @@
         "help": "Salva i cambiamenti su OpenStreetMap, rendendoli visibili ad altri utenti.",
         "no_changes": "Nessuna modifica da salvare.",
         "error": "E' accaduto un errore mentre veniva tentato il salvataggio",
+        "unknown_error_details": "Assicurati di essere connesso ad internet.",
         "uploading": "Caricamento delle modifiche su OpenStreetMap.",
         "unsaved_changes": "Hai modifiche non salvate"
     },
@@ -360,7 +451,7 @@
         "help": "# Aiuto\n\nQuesto è un editor per [OpenStreetMap](http://www.openstreetmap.org/), la\nmappa del mondo gratuita e modificabile. Puoi usarlo per aggiungere ed aggiornare\ndati nella tua area, creando una mappa del mondo open-source e open-data\nmigliore per tutti.\n\nLe modifiche che fai a questa mappa saranno visibili a chiunque usa\nOpenStreetMap. Per fare una modifica, avrai bisogno di un\n[account gratuito OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) è un progetto collaborativo il cui [codice\nsorgente è disponibile su GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Modifica & salvataggio\n\nQuesto editor è stato pensato per funzionare principalmente online\ned anche in questo momento lo stai utilizzando tramite browser web.\n\n### Selezione degli Elementi\n\nPer selezionare un elemento della mappa, come ad esempio una strada o\nun punto di interesse, clicca su di esso sulla mappa. Questo farà in modo\nche l'elemento selezionato venga evidenziato, che si apra un pannello con\ni dettagli e che si apra un menu di azioni che è possibile fare con l'elemento\nstesso.\n\nPer selezionare più elementi tenendo premuto il tasto 'Maiusc' clicca su ogni\nelemento o trascina il mouse disegnando un riquadro sulla mappa. Questo\nfarà sì che tutti gli elementi all'interno del riquadro vengano selezionati\nconsentendo di compiere azioni su più elementi in una volta sola.\n\n### Salvataggio delle modifiche\n\nQuando si fanno dei cambiamenti, come modifiche alle strade, agli edifici e\nai luoghi, queste vengono memorizzate localmente fino a che non si effettua\nil salvataggio sul server. Non preoccuparti se fai un errore, puoi annullare\nla modifica premento il tasto 'Annulla' e rieffettuare la modifica cliccando\nsul tasto 'Ripeti'.\n\nSe ad esempio hai completato un'area della città e vuoi iniziare un'altra\narea clicca su 'Salva' e porre fine ad un gruppo di modifiche. Avrai comunque\nla possibilità di revisionare ciò che hai modificato inoltre l'editor fornirà\nsuggerimenti e avvertimenti se qualcosa nelle tue modifiche non sembra\nandare bene.\n\nSe tutto è a posto puoi aggiungere un piccolo commento per spiegare la\nmodifica effettuata e cliccare su 'Salva' di nuovo per caricare le modifiche su\n[OpenStreetMap.org](http://www.openstreetmap.org/), dove saranno visibili\na tutti gli utenti e disponibili agli altri per consentire di costruirci sopra o\nmigliorarle ulteriormente.\n\nSe non riesci a finire le modifiche in una seduta, puoi abbandonare la\nfinestra dell'editor e tornarci più tardi (utilizzando lo stesso browser e lo\nstesso computer): l'editor ti offrirà infatti la possibiltà di recuperare il tuo lavoro.\n",
         "roads": "# Strade\n\nE' possibile creare, aggiustare ed eliminare le strade con questo editor. Le strade possono essere di tutti i tipi: percorsi, autostrade, cammini, piste ciclabili o altro. E' possibile mappare ogni segmento calpestabile.\n\n### Selezione\n\nCliccare su una strada per selezionarla. Verranno visualizzati un contorno e un piccolo menu strumenti sulla mappa oltre ad una barra laterale che mostra informazioni dettagliate sulla strada.\n\n### Modifica\n\nVi capiterà spesso di vedere strade non combacianti con le immagini sullo sfondo o con il tracciato GPS. E' possibile allineare queste strada in modo che si trovino nella giusta posizione.\n\nPer prima cosa cliccare sulla strada che si vuole modificare. Questo farà in modo che la strada venga evidenziata e che vengano visualizzati i punti di controllo lungo di essa che possono essere spostati in luoghi più consoni. Se si vuole aggiungere nuovi punti di controllo per aggiungere maggiori dettagli, basta fare doppio clic su parte della strada senza nodi.\n\nSe la strada è connessa ad un'altra strada ma non è ben connessa sulla mappa, è possibile spostare uno di questi punti di controllo sull'altra strada in modo da unirli. E' importante per la mappa che le strade siano correttamente connesse  anche per garantire giuste indicazioni di guida.\n\nE' possibile cliccare sullo strumento 'Sposta' o premere il tasto rapido `M` per muovere l'intera strada in una volta sola. Cliccare nuovamente per memorizzare lo spostamento.\n\n### Eliminizione\n\nSe la strada è completamente sbagliata, ovvero non compare sulle immagini satellitari e non viene rilevata nella realtà, è possibile eliminarla eliminandola dalla mappa. Attenzione ad effettuare questa operazione di eliminazione poiché, come per ogni altra modifica, i risultati vengono visti da tutti. Considera che le immagini satellitari sono spesso vecchie quindi è possibile che la strada sia stata costruita solo di recente.\n\nE' possibile eliminare una strada cliccando prima su di essa per selezionarla e poi sull'icona cestino o premendo il tasto 'Canc' della tastiera.\n\n### Creazione\n\nHai notato che in un punto della mappa dovrebbe esserci una strada ma non c'è ? Clicca sull'incona 'Linea' in alto a sinistra nell'editor o premi il tasto `2` per iniziare a disegnare una linea.\n\nCliccare sull'inizio della strada sulla mappa per iniziare a disegnarla. Se la strada  è unita ad una strada già esistente, iniziare cliccando nel punto dove sono connesse.\n\nQuindi cliccare i nuovi punti lungo la strada in modo che segua il percorso giusto dettato dall'immagine satellitare o dai dati del GPS. Se la strada che stai disegnando attraversa un'altra strada, collegala cliccando sul punto di intersezione. Quando hai finito di disegnare fai doppio clic o premi 'Invio' o 'Enter' sulla tua tastiera.\n",
-        "gps": "# GPS\n\nI dati provenienti dal GPS sono la sorgente dati più fidata per OpenStreetMap.\nQuesto editor supporta i tracciati locali - i file `.gpx` che si trovano sul tuo\ncomputer.  È possibile raccogliere questo tipo di tracciati GPS con un gran\nnumero di applicazioni per smartphone o tramite dispositivi GPS personali.\n\nPer informazioni su come effettuare un rilevamento GPS è possibile leggere\n[Rilevamenti con un GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPer utilizzare un tracciato GPX al fine di effettuare una mappatura, trascina il\nfile GPX sull'editor di mappe. Se viene riconosciuto verrà aggiunto alla mappa\ned evidenziato tramite una linea verde chiaro. Cliccare sul menu 'Impostazioni\nsfondo' che si trova sulla sinitra per abilitare, disabilitare o zoomare il livello creato dal file GPX.\n\nIl tracciato GPX non viene caricato direttamente su OpenStreetMap - il modo\nmigliore di utilizzarlo è quello di disegnare sulla mappa usando il tracciato\ncome guida per i nuovi elementi che vuoi aggiungere e [caricarlo comunque\nsu OpenStreetMap](http://www.openstreetmap.org/trace/create) per renderlo\npoi disponibile agli altri utenti.\n",
+        "gps": "# GPS\n\nI dati provenienti dal GPS sono la sorgente dati più fidata per OpenStreetMap.\nQuesto editor supporta i tracciati locali - i file `.gpx` che si trovano sul tuo\ncomputer.  È possibile raccogliere questo tipo di tracciati GPS con un gran\nnumero di applicazioni per smartphone o tramite dispositivi GPS personali.\n\nPer informazioni su come effettuare un rilevamento GPS è possibile leggere\n[Rilevamenti con un GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPer utilizzare un tracciato GPX al fine di effettuare una mappatura, trascina il\nfile GPX sull'editor di mappe. Se viene riconosciuto verrà aggiunto alla mappa\ned evidenziato tramite una linea violetta. Cliccare sul menu 'Dati mappa' che si trova sulla sinitra per abilitare, disabilitare o zoomare il livello creato dal file GPX.\n\nIl tracciato GPX non viene caricato direttamente su OpenStreetMap - il modo\nmigliore di utilizzarlo è quello di disegnare sulla mappa usando il tracciato\ncome guida per i nuovi elementi che vuoi aggiungere e [caricarlo comunque\nsu OpenStreetMap](http://www.openstreetmap.org/trace/create) per renderlo\npoi disponibile agli altri utenti.\n",
         "imagery": "# Immagini\n\nLe immagini aeree sono un'importante risorsa per la mappatura. Una\ncombinazione di foto aeree, immagini satellitari e risorse liberamente\ncompilate sono disponibili nell'editor nel menu 'Impostazioni dello sfondo'\nsulla destra.\n\nLe immagini predefinite presentate nell'editor sono quelle satellitari di\n[Bing Maps](http://www.bing.com/maps/), ma spostando o ingrandendo\nla mappa in specifiche aree geografiche potranno essere disponibili più\nrisorse. Alcune nazioni, come Stati Uniti, Francia e Danimarca, hanno a\ndisposizione, per alcune aree, immagini ad alta definizione.\n\nLe immagini sono a volte disallineate rispetto ai dati della mappa a causa\ndi errori da parte di chi le fornisce. Se vedi numerose strade spostate\nrispetto alle immagini di sfondo non correggerle tutte subito per farle\nnuovamente combaciare. Puoi invece aggiustare l'allineamento delle immagini\nsullo sfondo in modo da ri-allinearle con i dati esistenti cliccando su\n'Allinea' in fondo al menu.\n",
         "addresses": "# Indirizzi stradali\n\nGli indirizzi sono tra le informazioni più utili per una mappa.\n\nNonostante gli indirizzi siano spesso rappresentati come parte delle strade, in OpenStreetMap\nvengono memorizzati come attributi degli edifici e dei luoghi lungo le strade.\n\nPotrai aggiungere informazioni sull'indirizzo a dei luoghi mappati come contorni di edificio\ncosì come a quelli mappati come singoli punti. La sorgente ottimale dei dati degli indirizzi\nè un rilevamento per strada o la conoscenza personale dato che copiare da sorgenti\ncommerciali come ad es. Google Maps è severamente vietato.\n",
         "inspector": "# Utilizzo dell'inspector\n\nL'inspector è quell'elemento dell'interfaccia utente sulla parte sinistra della pagina che appare quando viene selezionata una funzionalità e che consente di modificarne i dettagli.\n\n### Selezione di un tipo di funzionalità\n\nDopo che è stato aggiunto un punto, una linea o un'area, è possibile scegliere quale tipo di caratteristica abbia, come ad esempio se si tratta di una strada principale o una strada residenziale, di un supermarket o di un caffè.\nL'inspector visualizzerà i pulsanti per le caratteristiche più comuni e sarà possibile trovarne altre semplicemente digitando la caratteristica voluta nella casella di ricerca.\n\nFare clic sulla 'i' che si trova nell'angolo in basso a destra del pulsante per saperne di più. Fare clic su un pulsante per scegliere quel tipo.\n\n### Utilizzo di Form e di Tag di modifica\n\nDopo aver scelto un tipo di caratteristica o quando si è selezionato una caratteristica per la quale è già stato assegnato un tipo, l'inspector mostrerà i campi con i dettagli come ad esempio il nome e l'indirizzo.\n\nAl di sotto dei campi è possibile fare clic sulle icone per aggiungere ulteriori dettagli come ad es. informazioni [Wikipedia](http://www.wikipedia.org/), accesso consentito alle carrozzine, e altro.\n\nSotto l'inspector è possibile fare clic su 'Tag aggiuntivi' per aggiungere arbitrariamente altri tag all'elemento. [Taginfo](http://taginfo.openstreetmap.org/) è una buona risorsa per imparare qualcosa sulle combinazioni di tag più comuni.\n\nLe modifiche effettuate nell'inspector vengono applicate automaticamente alla mappa.\nE' possibile annullarle in ogni momento cliccando semplicemente sul pulsante 'Ripristina'.\n",
@@ -573,11 +664,17 @@
             "barrier": {
                 "label": "Tipo"
             },
+            "bench": {
+                "label": "Panchina"
+            },
             "bicycle_parking": {
                 "label": "Tipo"
             },
             "boundary": {
                 "label": "Tipo"
+            },
+            "brand": {
+                "label": "Brand"
             },
             "building": {
                 "label": "Edificio"
@@ -640,6 +737,9 @@
             },
             "cuisine": {
                 "label": "Cucina"
+            },
+            "delivery": {
+                "label": "Consegna"
             },
             "denomination": {
                 "label": "Confessione"
@@ -724,6 +824,15 @@
             "gauge": {
                 "label": "Scartamento"
             },
+            "gender": {
+                "label": "Genere",
+                "placeholder": "Sconosciuto",
+                "options": {
+                    "male": "Maschile",
+                    "female": "Femminile",
+                    "unisex": "Unisex"
+                }
+            },
             "generator/method": {
                 "label": "Metodo"
             },
@@ -786,6 +895,25 @@
             "layer": {
                 "label": "Livello"
             },
+            "leaf_cycle": {
+                "label": "Fogliame",
+                "options": {
+                    "evergreen": "Sempreverde",
+                    "deciduous": "Deciduo",
+                    "semi_evergreen": "Semi-sempreverde",
+                    "semi_deciduous": "Semi-deciduo",
+                    "mixed": "Misto"
+                }
+            },
+            "leaf_type": {
+                "label": "Tipo di foglia",
+                "options": {
+                    "broadleaved": "Latifoglia",
+                    "needleleaved": "Aghifoglia",
+                    "mixed": "Misto",
+                    "leafless": "Senza foglie"
+                }
+            },
             "leisure": {
                 "label": "Tipo"
             },
@@ -813,15 +941,37 @@
                 "label": "Difficoltà Mountain Bike",
                 "placeholder": "0, 1, 2, 3...",
                 "options": {
-                    "0": "0: Ghiaia solida/terra battuta, nessun ostacolo, curve ampie"
+                    "0": "0: Ghiaia solida/terra battuta, nessun ostacolo, curve ampie",
+                    "1": "1: Un po' di terriccio, piccoli ostacoli, curve ampie",
+                    "2": "2: Principalmente terriccio, ostacoli grandi, tornanti ampi",
+                    "3": "3: Superficie scivolosa, ostacoli grandi, tornanti stretti",
+                    "4": "4: Terriccio o macigni, tornanti pericolosi",
+                    "5": "5: Difficoltà massima, massi sparsi, frane",
+                    "6": "6: Impraticabile tranne dai ciclisti più esperti"
                 }
             },
             "mtb/scale/imba": {
                 "label": "Difficoltà IMBA del tracciato",
-                "placeholder": "Facile, Medio, Difficile..."
+                "placeholder": "Facile, Medio, Difficile...",
+                "options": {
+                    "0": "Più semplice (cerchio bianco)",
+                    "1": "Semplice (cerchio verde)",
+                    "2": "Medio (quadrato blu)",
+                    "3": "Difficile (rombo nero)",
+                    "4": "Estremamente difficile (rombo nero doppio)"
+                }
             },
             "mtb/scale/uphill": {
-                "placeholder": "0, 1, 2, 3..."
+                "label": "Difficoltà in salita per mountain bike",
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Pendenza media <10%, ghiaia/terra battuta, nessun ostacolo",
+                    "1": "1: Pendenza media <15%, ghiaia/terra battuta, ostacoli rari e piccoli",
+                    "2": "2: Pendenza media <20%, superficie stabile, radici/roccie grandi come un pugno",
+                    "3": "3: Pendenza media <25%, superficie varia, rami/roccie grandi come un pugno",
+                    "4": "4: Pendenza media <30%, in cattive condizioni, rami/roccie grandi",
+                    "5": "5: Pendenza estrema, in genere è necessario spigere o sollevare la bici"
+                }
             },
             "name": {
                 "label": "Nome",
@@ -985,6 +1135,22 @@
             "service": {
                 "label": "Tipo"
             },
+            "service/bicycle/chaintool": {
+                "label": "Smagliacatene",
+                "options": {
+                    "undefined": "No (ipotesi)",
+                    "yes": "Sì",
+                    "no": "No"
+                }
+            },
+            "service/bicycle/pump": {
+                "label": "Pompa",
+                "options": {
+                    "undefined": "No (ipotesi)",
+                    "yes": "Sì",
+                    "no": "No"
+                }
+            },
             "shelter": {
                 "label": "Riparo"
             },
@@ -1053,6 +1219,9 @@
             "studio_type": {
                 "label": "Tipo"
             },
+            "substation": {
+                "label": "Tipo"
+            },
             "supervised": {
                 "label": "Custodito"
             },
@@ -1061,6 +1230,15 @@
             },
             "tactile_paving": {
                 "label": "Pavimento tattile"
+            },
+            "takeaway": {
+                "label": "Asporto",
+                "placeholder": "Sì, no, solo da asporto...",
+                "options": {
+                    "yes": "Sì",
+                    "no": "No",
+                    "only": "Solo da asporto"
+                }
             },
             "toilets/disposal": {
                 "label": "Smaltimento",
@@ -1100,9 +1278,6 @@
                     "no": "Nessuna:  perlopiù non tracciato"
                 }
             },
-            "tree_type": {
-                "label": "Tipo"
-            },
             "trees": {
                 "label": "Alberi"
             },
@@ -1133,9 +1308,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Tipo"
             }
         },
         "presets": {
@@ -1255,6 +1427,10 @@
                 "name": "Stazione del Bike Sharing",
                 "terms": "Noleggio biciclette"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "Stazione di riparazione biciclette",
+                "terms": "riparazione,bibiclette,meccanico,bici,cicli"
+            },
             "amenity/boat_rental": {
                 "name": "Noleggio barche",
                 "terms": "noleggio barche,noleggio,barche,porto,negozio"
@@ -1277,14 +1453,18 @@
             },
             "amenity/car_sharing": {
                 "name": "Car Sharing",
-                "terms": "'Car Sharing"
+                "terms": "Car Sharing"
             },
             "amenity/car_wash": {
                 "name": "Autolavaggio",
                 "terms": "Autolavaggio"
             },
             "amenity/charging_station": {
-                "name": "Stazione di ricarica"
+                "name": "Stazione di ricarica",
+                "terms": "stazione di ricarica,ricarica"
+            },
+            "amenity/childcare": {
+                "name": "Asilo nido"
             },
             "amenity/cinema": {
                 "name": "Cinema",
@@ -1297,6 +1477,9 @@
             "amenity/clock": {
                 "name": "Orologio",
                 "terms": "ora,orario,orologio"
+            },
+            "amenity/community_centre": {
+                "name": "Centro sociale"
             },
             "amenity/compressed_air": {
                 "name": "Aria Compressa"
@@ -1348,6 +1531,10 @@
             "amenity/hospital": {
                 "name": "Area Ospedaliera",
                 "terms": "ospedale,clinica,pronto soccorso,servizio sanitario,salute,hospice,ospizio,infermeria,istituzione,casa di cura,casa di riposo,sanatorio,ambulatorio,chirurgia,reparto"
+            },
+            "amenity/kindergarten": {
+                "name": "Area della Scuola dell'infanzia",
+                "terms": "scuola d'infanzia,scuola di infanzia,asilo,assistenza all'infanzia,asilo d'infanzia,scuola materna,scuola dell'infanzia,asilo nido"
             },
             "amenity/library": {
                 "name": "Biblioteca",
@@ -1409,6 +1596,10 @@
                 "name": "Pub",
                 "terms": "Pub"
             },
+            "amenity/public_bookcase": {
+                "name": "Libreria pubblica",
+                "terms": "scambialibri,scambio,libri,libreria,scaffale"
+            },
             "amenity/ranger_station": {
                 "name": "Guardiaparco",
                 "terms": "Stazione guardia forestale"
@@ -1416,6 +1607,10 @@
             "amenity/recycling": {
                 "name": "Isola ecologica",
                 "terms": "riciclo,raccolta differenziata,cestino,pattume,riciclaggio"
+            },
+            "amenity/register_office": {
+                "name": "Anagrafe",
+                "terms": "anagrafe,comune,archivio di stato"
             },
             "amenity/restaurant": {
                 "name": "Ristorante",
@@ -1688,6 +1883,9 @@
                 "name": "Magazzino",
                 "terms": "magazzino,ripostiglio,rimessa"
             },
+            "craft/basket_maker": {
+                "name": "Cestaio"
+            },
             "craft/beekeeper": {
                 "name": "Apicoltore"
             },
@@ -1709,12 +1907,12 @@
                 "name": "Carpentiere",
                 "terms": "carpenteria,legno"
             },
+            "craft/caterer": {
+                "name": "Fornitore di catering"
+            },
             "craft/clockmaker": {
                 "name": "Costruttore di orologi",
                 "terms": "orologi"
-            },
-            "craft/confectionery": {
-                "name": "Pasticceria"
             },
             "craft/dressmaker": {
                 "name": "Sartoria",
@@ -1767,6 +1965,9 @@
                 "name": "Segheria",
                 "terms": "legno,segheria"
             },
+            "craft/scaffolder": {
+                "name": "Impalcature"
+            },
             "craft/sculpter": {
                 "name": "Scultore"
             },
@@ -1774,12 +1975,28 @@
                 "name": "Calzolaio",
                 "terms": "scarpe,scarpino,calzature"
             },
+            "craft/stonemason": {
+                "name": "Tagliapietre"
+            },
+            "craft/tailor": {
+                "name": "Sarto"
+            },
+            "craft/tiler": {
+                "name": "Piastrellista"
+            },
+            "craft/tinsmith": {
+                "name": "Lattoniere"
+            },
             "craft/upholsterer": {
                 "name": "Tappezziere"
             },
             "craft/watchmaker": {
                 "name": "Orologiaio",
                 "terms": "orologi,riparazione"
+            },
+            "craft/winery": {
+                "name": "Cantina vinicola",
+                "terms": "azienda vinicola, azienda vitivinicola"
             },
             "embankment": {
                 "name": "Terrapieno",
@@ -1836,6 +2053,9 @@
             "golf/lateral_water_hazard": {
                 "name": "Ostacolo d'acqua laterale",
                 "terms": "buca,acqua,golf,ostacolo"
+            },
+            "golf/rough": {
+                "name": "Irregolare, grezzo"
             },
             "golf/water_hazard": {
                 "name": "Ostacolo d'acqua",
@@ -2037,6 +2257,10 @@
                 "name": "Edicola votiva",
                 "terms": "Edicola votiva"
             },
+            "junction": {
+                "name": "Svincolo",
+                "terms": "svincolo,uscita"
+            },
             "landuse": {
                 "name": "Uso del suolo",
                 "terms": "Utilizzo del suolo"
@@ -2058,16 +2282,16 @@
                 "terms": "sagrato,parrocchia"
             },
             "landuse/commercial": {
-                "name": "Commerciale",
-                "terms": "Commerciale"
+                "name": "Area commerciale",
+                "terms": "centro commerciale,area commerciale,commerciale,commercio"
             },
             "landuse/construction": {
                 "name": "Costruzione",
                 "terms": "In costruzione"
             },
             "landuse/farm": {
-                "name": "Agricolo",
-                "terms": "Fattoria"
+                "name": "Terreno agricolo",
+                "terms": "fattoria"
             },
             "landuse/farmland": {
                 "name": "Terreno agricolo",
@@ -2081,13 +2305,17 @@
                 "name": "Foresta",
                 "terms": "Foresta"
             },
+            "landuse/garages": {
+                "name": "Garage",
+                "terms": "garage,rimessa,autorimessa"
+            },
             "landuse/grass": {
                 "name": "Erba",
                 "terms": "Erba"
             },
             "landuse/industrial": {
-                "name": "Industriale",
-                "terms": "Industriale"
+                "name": "Area industriale",
+                "terms": "zona industriale,zona artigianale,industria,artigianato"
             },
             "landuse/landfill": {
                 "name": "Discarica",
@@ -2098,7 +2326,7 @@
                 "terms": "Prato"
             },
             "landuse/military": {
-                "name": "Militare",
+                "name": "Area militare",
                 "terms": "base,militare,forze dell'ordine,soldati,caserma,fanteria,artiglieria"
             },
             "landuse/orchard": {
@@ -2110,11 +2338,11 @@
                 "terms": "Cava"
             },
             "landuse/residential": {
-                "name": "Residenziale",
-                "terms": "Residenziale"
+                "name": "Area residenziale",
+                "terms": "residenziale,zona residenziale,case,abitazioni,alloggi"
             },
             "landuse/retail": {
-                "name": "Negozio di vendita al dettaglio",
+                "name": "Area di vendita al dettaglio",
                 "terms": "Commerciale"
             },
             "landuse/vineyard": {
@@ -2144,6 +2372,10 @@
             "leisure/marina": {
                 "name": "Marina",
                 "terms": "Porto turistico"
+            },
+            "leisure/nature_reserve": {
+                "name": "Riserva naturale",
+                "terms": "riserva,natura,parco,naturale"
             },
             "leisure/park": {
                 "name": "Parco",
@@ -2304,6 +2536,10 @@
                 "name": "Spiaggia",
                 "terms": "Spiaggia"
             },
+            "natural/cave_entrance": {
+                "name": "Ingresso grotta",
+                "terms": "grotta,caverna,anfratto,dolina"
+            },
             "natural/cliff": {
                 "name": "Scogliera",
                 "terms": "Rupe"
@@ -2388,6 +2624,9 @@
                 "name": "Architetto",
                 "terms": "architetto,studio,design"
             },
+            "office/company": {
+                "name": "Ufficio aziendale"
+            },
             "office/employment_agency": {
                 "name": "Agenzia per l'impiego",
                 "terms": "interinale,impiego,lavoro,ufficio per l'impiego,ufficio interinale"
@@ -2471,6 +2710,9 @@
             "place/locality": {
                 "name": "Località",
                 "terms": "Località (luogo con nome, non popolato)"
+            },
+            "place/neighbourhood": {
+                "name": "Vicinanze"
             },
             "place/suburb": {
                 "name": "Sobborgo",
@@ -2600,6 +2842,9 @@
                 "name": "Negozio di liquori",
                 "terms": "alcool,liquori,grappa,rum,vodka"
             },
+            "shop/anime": {
+                "name": "Negozio di manga"
+            },
             "shop/antiques": {
                 "name": "Antiquario",
                 "terms": "antichità,mobili antichi"
@@ -2656,6 +2901,10 @@
                 "name": "Negozio di tappeti",
                 "terms": "tappeti,persiani"
             },
+            "shop/cheese": {
+                "name": "Negozio di formaggi",
+                "terms": "Formaggeria"
+            },
             "shop/chemist": {
                 "name": "Drogheria",
                 "terms": "Articoli di pulizia e bellezza"
@@ -2671,6 +2920,9 @@
             "shop/convenience": {
                 "name": "Minimarket",
                 "terms": "Drogheria"
+            },
+            "shop/curtain": {
+                "name": "Negozio di tende"
             },
             "shop/deli": {
                 "name": "Gastronomia",
@@ -2691,6 +2943,10 @@
             "shop/electronics": {
                 "name": "Negozio di elettronica",
                 "terms": "Negozio di elettronica"
+            },
+            "shop/erotic": {
+                "name": "Negozio erotico",
+                "terms": "Sexy shop"
             },
             "shop/farm": {
                 "name": "Banchetto Alimentari Freschi",
@@ -2735,6 +2991,10 @@
             "shop/hifi": {
                 "name": "Negozio Hifi",
                 "terms": "Negozio Hi-Fi"
+            },
+            "shop/houseware": {
+                "name": "Casalinghi",
+                "terms": "casalinghi,negozio di casalinghi,pentole"
             },
             "shop/jewelry": {
                 "name": "Gioielliere",

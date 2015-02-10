@@ -72,7 +72,8 @@
                 "area": "Gjorde ett område runt."
             },
             "not_closed": "Denna kan inte göras rund då den inte är en loop.",
-            "too_large": "Denna kan inte göras runt då inte tillräckligt är synligt för tillfället."
+            "too_large": "Denna kan inte göras runt då inte tillräckligt är synligt för tillfället.",
+            "connected_to_hidden": "Detta kan inte göras runt då det är kopplat till ett dolt objekt."
         },
         "orthogonalize": {
             "title": "Räta upp",
@@ -86,14 +87,16 @@
                 "area": "Gjort hörnen på ett område fyrkantiga."
             },
             "not_squarish": "Denna kan inte rätas upp då den inte är fyrkantig.",
-            "too_large": "Denna kan inte rätas upp då inte tillräckligt är synligt för tillfället."
+            "too_large": "Denna kan inte rätas upp då inte tillräckligt är synligt för tillfället.",
+            "connected_to_hidden": "Detta kan inte rätas upp då det är kopplat till ett dolt objekt."
         },
         "straighten": {
             "title": "Räta ut",
             "description": "Räta ut denna linje.",
             "key": "S",
             "annotation": "Rätade ut en linje.",
-            "too_bendy": "Den kan inte rätas upp då den är för böjd."
+            "too_bendy": "Den kan inte rätas upp då den är för böjd.",
+            "connected_to_hidden": "Denna linje kan inte rätas ut då den är kopplad till ett dolt objekt."
         },
         "delete": {
             "title": "Ta bort",
@@ -106,7 +109,8 @@
                 "relation": "Tagit bort en relation.",
                 "multiple": "Tagit bort {n} objekt."
             },
-            "incomplete_relation": "Detta objekt kan inte raderas, då det inte är komplett hämtad."
+            "incomplete_relation": "Detta objekt kan inte raderas, då det inte är komplett hämtad.",
+            "connected_to_hidden": "Detta kan inte tas bort då det är kopplat till ett dolt objekt."
         },
         "add_member": {
             "annotation": "Lägg till ett objekt i relationen."
@@ -127,7 +131,8 @@
             "description": "Bryt av dessa vägar från varandra.",
             "key": "D",
             "annotation": "Bryt av linjen.",
-            "not_connected": "Det finns inte tillräckligt med linjer/områden här att koppla ifrån."
+            "not_connected": "Det finns inte tillräckligt med linjer/områden här att koppla ifrån.",
+            "connected_to_hidden": "Detta kan inte brytas av då det är anslutet till ett dolt objekt."
         },
         "merge": {
             "title": "Sammanfoga",
@@ -151,7 +156,8 @@
                 "multiple": "Flyttade flera objekt."
             },
             "incomplete_relation": "Detta objekt kan inte flyttas då det inte är nedladdat i sin helhet.",
-            "too_large": "Denna kan inte flyttas då inte tillräckligt är synligt för tillfället."
+            "too_large": "Denna kan inte flyttas då inte tillräckligt är synligt för tillfället.",
+            "connected_to_hidden": "Detta kan inte flyttas då det är anslutet till ett dolt objekt."
         },
         "rotate": {
             "title": "Rotera",
@@ -161,7 +167,8 @@
                 "line": "Roterade en linje.",
                 "area": "Roterade ett område."
             },
-            "too_large": "Denna kan inte roteras då inte tillräckligt är synligt för tillfället."
+            "too_large": "Denna kan inte roteras då inte tillräckligt är synligt för tillfället.",
+            "connected_to_hidden": "Detta kan inte roteras då det är anslutet till ett dolt objekt."
         },
         "reverse": {
             "title": "Byt riktning",
@@ -183,7 +190,8 @@
                 "multiple": "Dela gränsen för {n} linjer/områden."
             },
             "not_eligible": "Linjer kan inte delas vid deras början eller slut.",
-            "multiple_ways": "Det är för många linjer här för att kunna dela dem."
+            "multiple_ways": "Det är för många linjer här för att kunna dela dem.",
+            "connected_to_hidden": "Detta kan inte delas då det är anslutet till ett dolt objekt."
         },
         "restriction": {
             "help": {
@@ -218,6 +226,10 @@
     "logout": "logga ut",
     "loading_auth": "Ansluter till OpenStreetMap...",
     "report_a_bug": "rapportera ett fel",
+    "feature_info": {
+        "hidden_warning": "{count} dolda objekt",
+        "hidden_details": "Detta objekt är dolt för tillfället: {details}"
+    },
     "status": {
         "error": "Kan inte ansluta till API:et.",
         "offline": "API:et är inte tillgängligt. Vänligen försök redigera senare.",
@@ -231,6 +243,7 @@
         "upload_explanation_with_user": "De redigeringar du bidrar med som {user} kommer att synas på alla kartor som använder OpenStreetMaps data.",
         "save": "Spara",
         "cancel": "Avbryt",
+        "changes": "{count} ändringar",
         "warnings": "Varningar",
         "modified": "Ändrat",
         "deleted": "Borttaget",
@@ -269,11 +282,16 @@
         "incomplete": "<inte hämtad>",
         "feature_list": "Sök efter egenskaper",
         "edit": "Ändra objekt",
+        "check": {
+            "yes": "Ja",
+            "no": "Nej"
+        },
         "none": "Ingen",
         "node": "Nod",
         "way": "Väg",
         "relation": "Relation",
-        "location": "Plats"
+        "location": "Plats",
+        "add_fields": "Lägg till fällt:"
     },
     "background": {
         "title": "Bakgrund",
@@ -286,6 +304,78 @@
         "fix_misalignment": "Justera bildplacering",
         "reset": "ta bort"
     },
+    "map_data": {
+        "title": "Kartdata",
+        "description": "Kartdata",
+        "data_layers": "Datalager",
+        "fill_area": "Fyllda områden",
+        "map_features": "Kartobjekt",
+        "autohidden": "Dessa objekt har dolts automatiskt då för mycket annars skulle ha visats på skärmen. Du kan zooma in för att redigera dem. "
+    },
+    "feature": {
+        "points": {
+            "description": "Punkter",
+            "tooltip": "Intressanta platser"
+        },
+        "major_roads": {
+            "description": "Större vägar",
+            "tooltip": "Landsväg, gata m.m."
+        },
+        "minor_roads": {
+            "description": "Mindre vägar",
+            "tooltip": "Servicevägar, parkeringsvägar, bruksväg m.m."
+        },
+        "paths": {
+            "description": "Stigar",
+            "tooltip": "Trottoarer, gångvägar, cykelvägar m.m."
+        },
+        "buildings": {
+            "description": "Byggnader",
+            "tooltip": "Byggnader, skydd, garage, m-m-"
+        },
+        "landuse": {
+            "description": "Markanvändning",
+            "tooltip": "Skogar, åkermark, parker, bostadsområden, shoppingområden m.m."
+        },
+        "boundaries": {
+            "description": "Gränser",
+            "tooltip": "Administrativa gränser"
+        },
+        "water": {
+            "description": "Vattenobjekt",
+            "tooltip": "Floder, sjöar, dammar m.m."
+        },
+        "rail": {
+            "description": "Rälsobjekt",
+            "tooltip": "Järnvägar"
+        },
+        "power": {
+            "description": "Kraftobjekt",
+            "tooltip": "Kraftledningar, kraftverk, fördelningsstation m.m."
+        },
+        "past_future": {
+            "description": "Då- och framtid",
+            "tooltip": "Föreslaget, under uppbyggnad, övergivet, rivet m.m."
+        },
+        "others": {
+            "description": "Annat",
+            "tooltip": "Allt annat"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "Ingen ifyllnad (trådram)",
+            "tooltip": "Genom att använda trådram blir det enklare att se bakomliggande flygbild."
+        },
+        "partial": {
+            "description": "Delvist fylld",
+            "tooltip": "Områden ritas med fyllnad enbart längst insidan av kanterna. (Rekommenderas för nybörjare)"
+        },
+        "full": {
+            "description": "Full ifyllnad",
+            "tooltip": "Områden är ritade fullt ifyllda."
+        }
+    },
     "restore": {
         "heading": "Du har icke-sparade ändringar.",
         "description": "Du har ändringar från förra sessionen som inte har sparats. Vill du hämta dessa ändringar?",
@@ -297,6 +387,7 @@
         "help": "Spara ändringar till OpenStreetMap så att andra användare kan se dem.",
         "no_changes": "Inga ändringar att spara.",
         "error": "Något gick fel vid sparandet",
+        "unknown_error_details": "Kontrollera att du är ansluten till Internet.",
         "uploading": "Dina ändringar sparas nu till OpenStreetMap.",
         "unsaved_changes": "Du har icke-sparade ändringar."
     },
@@ -360,7 +451,7 @@
         "help": "# Hjälp\n\nDetta är en redigerare för [OpenStreetMap](http://www.openstreetmap.org/), den\nfri och redigerbara världskartan. Du kan använda den för att lägga till och uppdatera\ndata i ditt närområde, allt för att ytterligare förbättra en världskarta för alla baserad på öppen källkod och data.\n\nÄndringar du gör i den här kartan kommer att visas för alla som använder\nOpenStreetMap. För att göra en ändring behöver du ett\n[gratis OpenStreetMap-konto](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) är ett samarbetsprojekt med [källkodkod \ntillgänglig på GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Redigera & spara\n\nDenna redigerare är designad att främst fungera online, och du använder den via en webbsida just nu.\n\n### Välj objekt\n\nFör att välja ett kartobjekt, t.ex. en väg eller en punkt, klicka på den på kartan. Detta kommer att markera det valda objektet, öppna en panel med detaljer om det, och visa en meny med saker du kan göra med det.\n\nFör att välja flera objekt, håll ner Skift-tangenten. Klicka sedan på objekten du vill välja eller dra på kartan för att rita en rektangel. Detta kommer att rita en ruta och markera punkterna inuti den.\n\n### Spara redigeringar\n\nNär du gör ändringar som att ändra på en väg, byggnad eller plats är detta sparat lokalt fram tills att du spara det på servern. Oroa dig inte om du gör ett misstag, du kan alltid ångra en ändring genom att klicka på Ånga-knappen och göra om din förändring genom att klicka på Gör om-knappen.\n\nKlicka på Spara för att slutföra en grupp att förändringar, t.ex. om du fullfört ett område i en stad och vill börja ändra i ett annat område. Du får möjlighet att granska vad du gjort och redigeraren ger dig hjälpsamma förslag och varningar om någon ändring inte verka korrekt.\n\nOm allt ser bra ut kan du ange en kort kommentar som förklarar vad du gjort och sedan klicka på Spara igen för att skicka iväg ändringarna till [OpenStreetMap.org](http://www.openstreetmap.org/) där de blir synliga för alla andra användare och tillgängliga för andra att bygga sina förbättringar på.\n\nOm du inte kan slutföra din ändring på en gång kan du lämna redigeringsfönstret öppet och komma tillbaka (i samma webbläsare på samma dator) och redigeringsprogrammet kommer att ge dig möjlighet att återställa ditt arbete.\n",
         "roads": "# Vägar\n\nDu kan skapa, fixa och ta bort vägar med denna redigerare. Vägar kan vara alla typer av: stigar, bilvägar, spår, cykelvägar m.m - alla välanvända segment ska mappas.\n\n### Markering\n\nKlicka på en väg för att välja den. En markering blir då synlig tillsammans med en liten verktygsmeny på kartan och ett sidofällt visar mer information om vägen.\n\n### Modifiering\n\nOfta ser du vägar som inte är justerade till bakgrundsbilden eller till ett GPS-spår. Du kan justera dessa vägar så att de är på korrekt plats.\n\nKlicka först på vägen du vill ändra. Detta kommer att markera den och visa kontrollpunkt längst den som du kan dra i för att justera den. Om du vill lägga till en ny kontrollpunkt för högre detaljrikedom, dubbelklicka på en del av vägen utan en punkt så kommer en kontrollpunkt läggas till.\n\nOm vägen är ansluten till en annan väg, men är inte det på kartan, kan du dra en av dess kontrollpunkt till den andra vägen för att koppla dem tillsammans. Att vägarna är kopplade till varandra är viktigt för kartan och avgörande för att kunna ge korrekta körinstruktioner.\n\nDu kan också klicka på verktyget 'Flytta' eller trycka på tangenten 'M' på tangentbordet för att flytta en hel väg på en gång, och sedan klicka igen för att spara flytten.\n\n### Borttagning\n\nOm hela vägen är helt fel - du kan se att den inte existerar på satellitbilderna och har helst bekräftat i verkligheten att den inte finns - kan du ta bort den, vilket tar bort den från kartan. Var försiktigt när du ta bort objekt - precis som vi all redigering kan alla se resultatet och satellitbilderna är oftast gamla, så vägen kan helt enkelt vara nybyggd.\n\nDu kan ta bort en väg genom att klicka på den för att markera den och sedan klicka på ikonen soptunna eller klicka på knappen 'Delete' på tangentbordet.\n\n### Skapa\n\nHittat någonstans att det borde finnas en väg där de inte finns en? Klicka på ikonen 'Linje'  högst upp till vänster i redigeringsfönstret eller klicka på knappen '2' på tangentbordet för att börja rita en linje.\n\nKlicka på början av vägen på kartan för att påbörja ritningen. Om vägen viker av från en existerande väg, starta genom att klicka där de ansluter till varandra. \n\nKlicka sedan på punkter längst vägen så att den följer vägens sträckning enligt satellitbilder eller GPS-spår. Om vägen du ritar korsar en annan väg, anslut dem tillsammans genom att klicka där de korsar. När du är klar med att rita in vägen, dubbelklicka eller tryck 'Enter' på tangentbordet.\n",
-        "gps": "# GPS \n\nGPS-data är den mest pålitliga källan för uppgifter till OpenStreetMap. Denna redigerare \nstödjer lokala spår – ”.GPX”-filer på din lokala dator. Du kan skapa \ndenna typ av GPS-spår med ett flertal smartphone-appar samt med\npersonlig GPS-hårdvara. \n\nFör information om hur man skapar en GPS-spårning, läs \n[Kartläggning med en GPS](http://learnosm.org/en/beginner/using-gps/). \n\nFör att använda ett GPX-spår för kartläggning, dra och släpp GPX-filen på \nkartredigeraren. Om den känns igen kommer den att läggas till på kartan som en klargrön \nlinje. Klicka på menyn \"Bakgrundsinställningar\" på höger sida för att aktivera, \navaktivera eller zooma till detta nya GPX-drivna lager. \n\nGPX spår överförs inte direkt till OpenStreetMap - det bästa sättet att \nanvända dem är att rita på kartan, använda den som en guide för de nya objekt som \ndu lägger till, och också [ladda upp dem till OpenStreetMap](http://www.openstreetmap.org/trace/create) \nför att användas av andra.\n",
+        "gps": "# GPS\n\nGPS-data är den mest tillförlitliga källan för data till OpenStreetMap. Denna redigeraren stöder lokala spår - .gpx-filer på din lokala dator. Du kan samla in denna typ av GPS-spår med ett antal olika appar till din smartphone eller en GPS-enhet.\n\nFör information om du du gör en GPS-uppmätning, läs [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nFör att använda ett GPX-spår för att kartlägga, dra och släpp GPX-filen på kartredigeraren. Om det accepteras kommer det att läggas till på kartan som en ljuslila linje. Klicka på menyn Kartdata till höger för att aktivera, avaktivera eller zooma in till detta nya GPX-skapade lager.\n\nGPX-spåret laddas inte direkt upp till OpenStreetMap - bästa sätet att använda det är att rita på kartan och använda det som en guide för att lägga till ny information, men också för att [ladda upp det till OpenStreetMap] (http://www.openstreetmap.org/trace/create) så att andra kan använda det. \n",
         "imagery": "# Flygbilder\n\nFlygbilder är en viktig källa vid kartläggning. En kombination av bilder från flygplan, satelliter och andra fria källor finns tillgängliga i redigeraren i menyn 'Bakgrundsinställningar' till höger.\n\nNormalt visas ett satellitlager från  [Bing Maps](http://www.bing.com/maps/) i redigeraren, men när du förflytta dig runt och zooma till nya geografiska områden kommer nya källor bli tillgängliga. Vissa länder, som t.ex. USA, Frankrike och Danmark har bilder av väldigt hög kvalité tillgängliga för vissa områden. \n\nFlygbilderna är ibland förskjutna till kartan på grund av misstag från leverantören av flygbilder. Om du ser att många vägar är förskjutna i förhållande till flygfotot, flytta dem inte direkt för att matcha bakgrunden. Istället kan du justera flygfotot så att det matchar med existerande data genom att klicka 'Justera bildplacering' längst ner i menyn för Bakgrundsinställningar.\n",
         "addresses": "# Adresser\n\nAdresser är bland den mest användbara informationen på kartan.\n\nÄven om adresser normalt oftast är relaterade till segment av gatan är de i OpenStreetMap hanterade som attribut på byggnader och platser längst gatan.\n\nDu kan lägga till adressinformation både på platser kartlagda som byggnadskonturer och på platser kartlagda som enskilda punkter. \nDen bästa källan för adressinformation är från egen kunskap eller genom att besöka platsen - precis som för allt annat, att kopiera från kommersiella källor som Google Maps är strikt förbjudet.\n",
         "inspector": "# Använda kontrollfunktionen\n\nUpplysningen är området området till vänster på sidan som låter dig ändra detaljerna för valt objekt.\n\n### Välj objekttyp\n\nEfter att du lagt till en punkt, linje eller område kan du välja vad för typ av objekt det är, t.ex. om det är en huvudväg eller bostadsgata, shoppingcenter eller café. \nDetaljverktyget visar knappar för vanliga objekttyper, och du kan söka efter andra typer i sökfönstret. \n\nKlicka på 'i' i högra nedre hörnet för en objekttyp för att lära dig mer om det. Klicka på en knapp för att välja typ.\n\n### Andra formulär och ändra taggar\n\nEfter att du valt en objekttyp, eller om du väljer ett objekt som redan har en typ associerad, kommer kontrollfunktionen visa fällt med detaljer om objekttypen som namn och adress. \n\nUnder fälten kan du klicka på ikoner för att lägga till andra detaljer, som t.ex.  [Wikipedia]-information (http://www.wikipedia.se/), handikappanpassning m.m.\n\nLängst ner i kontrollfunktionen, klicka på 'Fler taggar' för att lägga till ytterligare godtyckliga taggar till objektet.  [Taginfo](http://taginfo.openstreetmap.org/) är en bra resurs för att lära dig mer om populära tagg-kombinationer.\n\nÄndringar du gör i kontrollfunktionen dyker automatiskt upp på kartan. Du kan ångra dem när du vill genom att klicka på 'Ånga'-knappen.\n",
@@ -434,7 +525,7 @@
                 "name": "Spår"
             },
             "category-restriction": {
-                "name": "Restriktioner"
+                "name": "Restriktion"
             },
             "category-road": {
                 "name": "Väg"
@@ -573,11 +664,17 @@
             "barrier": {
                 "label": "Typ"
             },
+            "bench": {
+                "label": "Bänk"
+            },
             "bicycle_parking": {
                 "label": "Typ"
             },
             "boundary": {
                 "label": "Typ"
+            },
+            "brand": {
+                "label": "Varumärke"
             },
             "building": {
                 "label": "Byggnad"
@@ -640,6 +737,9 @@
             },
             "cuisine": {
                 "label": "Typ av mat"
+            },
+            "delivery": {
+                "label": "Hemleverans"
             },
             "denomination": {
                 "label": "Samfund"
@@ -724,6 +824,15 @@
             "gauge": {
                 "label": "Spårvidd"
             },
+            "gender": {
+                "label": "Kön",
+                "placeholder": "Okänt",
+                "options": {
+                    "male": "Man",
+                    "female": "Kvinna",
+                    "unisex": "Unisex"
+                }
+            },
             "generator/method": {
                 "label": "Metod"
             },
@@ -785,6 +894,25 @@
             },
             "layer": {
                 "label": "Lager"
+            },
+            "leaf_cycle": {
+                "label": "Lövcykel",
+                "options": {
+                    "evergreen": "Vintergröna",
+                    "deciduous": "Lövfällande",
+                    "semi_evergreen": "Delvist vintergröna",
+                    "semi_deciduous": "Delvist lövfällande",
+                    "mixed": "Mixat"
+                }
+            },
+            "leaf_type": {
+                "label": "Lövtyp",
+                "options": {
+                    "broadleaved": "Löv",
+                    "needleleaved": "Barr",
+                    "mixed": "Blandat",
+                    "leafless": "Utan löv"
+                }
             },
             "leisure": {
                 "label": "Typ"
@@ -1007,6 +1135,22 @@
             "service": {
                 "label": "Typ"
             },
+            "service/bicycle/chaintool": {
+                "label": "Kedjebrytare",
+                "options": {
+                    "undefined": "Förväntas vara Nej",
+                    "yes": "Ja",
+                    "no": "Nej"
+                }
+            },
+            "service/bicycle/pump": {
+                "label": "Cykelpump",
+                "options": {
+                    "undefined": "Förväntas vara Nej",
+                    "yes": "Ja",
+                    "no": "Nej"
+                }
+            },
             "shelter": {
                 "label": "Shelter"
             },
@@ -1075,6 +1219,9 @@
             "studio_type": {
                 "label": "Typ"
             },
+            "substation": {
+                "label": "Typ"
+            },
             "supervised": {
                 "label": "Övervakad"
             },
@@ -1083,6 +1230,15 @@
             },
             "tactile_paving": {
                 "label": "Ledstråk"
+            },
+            "takeaway": {
+                "label": "Hämtmat",
+                "placeholder": "Ja, nej, enbart hämtmat",
+                "options": {
+                    "yes": "Ja",
+                    "no": "Nej",
+                    "only": "Enbart hämtmat"
+                }
             },
             "toilets/disposal": {
                 "label": "Omhändertagande",
@@ -1122,9 +1278,6 @@
                     "no": "Ingen: stiglös, utmärkta orienteringskunskaper krävs"
                 }
             },
-            "tree_type": {
-                "label": "Typ"
-            },
             "trees": {
                 "label": "Träd"
             },
@@ -1155,9 +1308,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Typ"
             }
         },
         "presets": {
@@ -1277,6 +1427,10 @@
                 "name": "Cykeluthyrning",
                 "terms": "Cykeluthyrning, cykellån, cykelleasing, lånecykel, hyrcykel"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "Station för cykelreparation ",
+                "terms": "Cykelreparation, kedjebrytare, cykelpump, tryckluft, pumpstation, cykel, "
+            },
             "amenity/boat_rental": {
                 "name": "Båtuthyrning",
                 "terms": "Båtuthyrning, båtlån, båtleasing, lånebåt, hyrbåt"
@@ -1329,6 +1483,10 @@
                 "name": "Gymnasieområde",
                 "terms": "Gymnasium, gymnasie, college, vidareutbildning, gymnasiumområde, gymnasieområde"
             },
+            "amenity/community_centre": {
+                "name": "Samlingslokal",
+                "terms": "Samlingslokal, folkets hus, folkets park, festlokal, bygdegård, Hembygdsgård, Sockenstuga, bystuga, Byalag, byförening, festlokal"
+            },
             "amenity/compressed_air": {
                 "name": "Tryckluft",
                 "terms": "Tryckluft, pumpstation, komprimerad luft"
@@ -1376,6 +1534,10 @@
             "amenity/grave_yard": {
                 "name": "Kyrkogård",
                 "terms": "Gravplats, kyrkogård, begravningsplats, kyrkogård, urnlund, minneslund, griftegård"
+            },
+            "amenity/grit_bin": {
+                "name": "Sandkista",
+                "terms": "Sandlåda, sandkista, sandbehållare, halkbekämpning, halka"
             },
             "amenity/hospital": {
                 "name": "Sjukhusområde",
@@ -1445,6 +1607,10 @@
                 "name": "Pub",
                 "terms": "Pub, bar, ölservering, ölstuga, krog, nattklubb"
             },
+            "amenity/public_bookcase": {
+                "name": "Offentlig bokhylla",
+                "terms": "Offentlig bokhylla, publik bokhylla, begagnade böcker, låneböcker, bokdelning"
+            },
             "amenity/ranger_station": {
                 "name": "Friluftsanläggningen",
                 "terms": "Friluftsanläggningen, friluftsområde, park, friluftsliv, infocenter, informationscenter "
@@ -1452,6 +1618,10 @@
             "amenity/recycling": {
                 "name": "Återvinning",
                 "terms": "återvinning, återbruk, återvinningsstation, sopstation "
+            },
+            "amenity/register_office": {
+                "name": "Registreringsbyrå",
+                "terms": "Registreringsbyrå, borgerlig vigsel, stadshus,  registrerade enhet, inskrivningskontor, registreringskontor, Folkbokföring, Skattemyndigheten, mantalslängder"
             },
             "amenity/restaurant": {
                 "name": "Restaurang",
@@ -1787,7 +1957,7 @@
             },
             "craft/confectionery": {
                 "name": "Konditori",
-                "terms": "konfektyr, godis, godsaker, choklad, Konditori, kondis, sockerbageri, finbageri"
+                "terms": "Fik, Kafé"
             },
             "craft/dressmaker": {
                 "name": "Sömmerska",
@@ -2193,6 +2363,10 @@
                 "name": "Helgedom vid väg",
                 "terms": "Helgedom längs väg, helgedom vid väg, helgedom, pilgrim"
             },
+            "junction": {
+                "name": "Korsning",
+                "terms": "korsning, vägkorsningar, övergångsställe, järnvägskorsning, rondell, cirkulationsplats, trafiksignal, stoppskylt, stoppsignal, vägkors, trafikplats, trafikkorsning, gatukorsning"
+            },
             "landuse": {
                 "name": "Markanvändning",
                 "terms": "Markanvändning, Översiktsplan"
@@ -2213,21 +2387,9 @@
                 "name": "Kyrkogård (utan gravar)",
                 "terms": "Kyrkogård, kyrka, kyrkområde"
             },
-            "landuse/commercial": {
-                "name": "Kommersiell",
-                "terms": "Kommersiell, kommersiellt, affärsområde, handelsområde, shoppingområde"
-            },
             "landuse/construction": {
                 "name": "Byggarbetsplats",
                 "terms": "Byggarbetsplats, bygge, Byggnad under konstruktion, Byggnad under uppförande, byggarbete,  byggnation, byggnadsplats"
-            },
-            "landuse/farm": {
-                "name": "Åker",
-                "terms": "Åker, åkerjord, åkerfält, fält, gärde, teg, åkerlapp, inäga, odling, odlingsfält, lantbruk"
-            },
-            "landuse/farmland": {
-                "name": "Åker",
-                "terms": "Åker, åkerjord, åkerfält, fält, gärde, teg, åkerlapp, inäga, odling, odlingsfält, lantbruk"
             },
             "landuse/farmyard": {
                 "name": "Bondgård",
@@ -2237,13 +2399,13 @@
                 "name": "Skog (brukad)",
                 "terms": "Skog, skogsvård, skogsområde, skogstrakt, träd, skogsdunge, dunge, lund, skogsplantering"
             },
+            "landuse/garages": {
+                "name": "garage",
+                "terms": "garage, bilstall, bilskjul, carport, varmgarage, kallgarage, bilplatser"
+            },
             "landuse/grass": {
                 "name": "Gräs",
                 "terms": "Gräs, klippt gräs, refug, rondell, mittremsa"
-            },
-            "landuse/industrial": {
-                "name": "Industriell",
-                "terms": "Industriell, industriområde, fabriksområde, fabrik"
             },
             "landuse/landfill": {
                 "name": "Soptipp",
@@ -2253,10 +2415,6 @@
                 "name": "Äng",
                 "terms": "Äng, slåttermark"
             },
-            "landuse/military": {
-                "name": "Militärt",
-                "terms": "Militärt, militärt område, regemente, övningsområde, försvar, krigsmakt"
-            },
             "landuse/orchard": {
                 "name": "Fruktodling",
                 "terms": "Fruktodling, fruktträdgård, fruktträd, äppelträd"
@@ -2264,14 +2422,6 @@
             "landuse/quarry": {
                 "name": "Stenbrott/Sandtag",
                 "terms": "täkt, gruva, utgrävning, stenbrott, sand, stenbrytning, sten, sandtäckt, sandtag"
-            },
-            "landuse/residential": {
-                "name": "Bostadsområde",
-                "terms": "Bostadsområde, villaområde, lägenhetsområde, getto, miljonområde, förort"
-            },
-            "landuse/retail": {
-                "name": "Detaljhandel",
-                "terms": "Detaljhandel, affärsområde, försäljningsområde, affärer, försäljning, shoppingcenter, shoppingområde, shopping, handel, handelsområde"
             },
             "landuse/vineyard": {
                 "name": "Vingård",
@@ -2308,6 +2458,10 @@
             "leisure/marina": {
                 "name": "Marina",
                 "terms": "Marina, småbårtshamn, hamn, småbåt, segelbåt, yacht, fritidsbåt, gästhamn"
+            },
+            "leisure/nature_reserve": {
+                "name": "Naturreservat",
+                "terms": "naturreservat, nationalpark, naturpark, naturområde, reservat, naturskyddsområde"
             },
             "leisure/park": {
                 "name": "Park",
@@ -2468,6 +2622,10 @@
             "natural/beach": {
                 "name": "Strand",
                 "terms": "Strand, sandstrand, badstrand, grusstrand,  badplats, strandlinje, badställe, flodstrand"
+            },
+            "natural/cave_entrance": {
+                "name": "Grottingång",
+                "terms": "Grottingång, grotta, grottsystem, bergrum, berghåla, grottöppning, bergsöppning, grotthål"
             },
             "natural/cliff": {
                 "name": "Klippa",
@@ -2690,6 +2848,10 @@
                 "terms": "Kraftledningsstolpe, elledningsstolpe, stolpe, kraftledningsmast, elledningsmast, mast"
             },
             "power/sub_station": {
+                "name": "Fördelningsstation",
+                "terms": "Transformator, elomvandling, elskåp, fördelningsstation, stadsnätstation, elfördelning"
+            },
+            "power/substation": {
                 "name": "Fördelningsstation",
                 "terms": "Transformator, elomvandling, elskåp, fördelningsstation, stadsnätstation, elfördelning"
             },
@@ -3272,6 +3434,22 @@
             "tourism/zoo": {
                 "name": "Zoo",
                 "terms": "Zoo, zoologisk trädgård, djurpark"
+            },
+            "traffic_calming/bump": {
+                "name": "Fartbula (kort gupp)",
+                "terms": "Fartbula, bula, fartgupp, farthinder, gupp, vägbula, bump"
+            },
+            "traffic_calming/hump": {
+                "name": "Normalt fartgupp",
+                "terms": "Cirkulärt gupp, GP-gupp, Wattska guppet, Wattgupp, standardgupp, normalt fartgupp, puckel, fartpuckel, gupp, farthinder, fartgupp"
+            },
+            "traffic_calming/rumble_strip": {
+                "name": "Bullerräfflor",
+                "terms": "Bullerräfflor, Pennsylvaniaräfflor"
+            },
+            "traffic_calming/table": {
+                "name": "Platågupp",
+                "terms": "Platågupp, gupp, farthinder, fartgupp"
             },
             "type/boundary": {
                 "name": "Gräns",

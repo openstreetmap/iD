@@ -359,9 +359,6 @@
             "tourism": {
                 "label": "வகை"
             },
-            "tree_type": {
-                "label": "வகை"
-            },
             "water": {
                 "label": "வகை"
             },
@@ -377,9 +374,6 @@
             },
             "wikipedia": {
                 "label": "விக்கிப்பீடியா"
-            },
-            "wood": {
-                "label": "வகை"
             }
         },
         "presets": {
@@ -518,9 +512,6 @@
             "landuse/construction": {
                 "name": "கட்டுமானம்"
             },
-            "landuse/farm": {
-                "name": "பண்ணை"
-            },
             "landuse/farmyard": {
                 "name": "பண்ணை"
             },
@@ -529,9 +520,6 @@
             },
             "landuse/grass": {
                 "name": "புல்வெளி"
-            },
-            "landuse/industrial": {
-                "name": "தொழிற்சாலை"
             },
             "leisure/marina": {
                 "name": "மரினா"

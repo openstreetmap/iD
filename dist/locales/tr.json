@@ -821,9 +821,6 @@
             },
             "wikipedia": {
                 "label": "Vikipedi"
-            },
-            "wood": {
-                "label": "Tip"
             }
         },
         "presets": {
@@ -1301,17 +1298,8 @@
             "landuse/cemetery": {
                 "name": "Mezarlık"
             },
-            "landuse/commercial": {
-                "name": "Ticari"
-            },
             "landuse/construction": {
                 "name": "İnşaat"
-            },
-            "landuse/farm": {
-                "name": "Tarla"
-            },
-            "landuse/farmland": {
-                "name": "Çiftlik"
             },
             "landuse/farmyard": {
                 "name": "Çiftlik avlusu"
@@ -1322,26 +1310,17 @@
             "landuse/grass": {
                 "name": "Yeşil Alan"
             },
-            "landuse/industrial": {
-                "name": "Endüstri"
-            },
             "landuse/landfill": {
                 "name": "Çöplük"
             },
             "landuse/meadow": {
                 "name": "Çayır"
             },
-            "landuse/military": {
-                "name": "Çeril"
-            },
             "landuse/orchard": {
                 "name": "Meyve Bahçesi"
             },
             "landuse/quarry": {
                 "name": "Ocak"
-            },
-            "landuse/residential": {
-                "name": "Yerleşim"
             },
             "landuse/vineyard": {
                 "name": "Bağ"

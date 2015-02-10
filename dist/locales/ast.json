@@ -782,9 +782,6 @@
             "trail_visibility": {
                 "label": "Visibilidá del senderu"
             },
-            "tree_type": {
-                "label": "Tipu"
-            },
             "trees": {
                 "label": "Árboles"
             },
@@ -815,9 +812,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Tipu"
             }
         },
         "presets": {
@@ -1257,10 +1251,6 @@
                 "name": "Reloxería",
                 "terms": "Reloxeru"
             },
-            "craft/confectionery": {
-                "name": "Confitería",
-                "terms": "Pastelería, Bollería"
-            },
             "craft/dressmaker": {
                 "name": "Modista"
             },
@@ -1552,14 +1542,8 @@
             "landuse/churchyard": {
                 "name": "Antoxana d'ilesia"
             },
-            "landuse/commercial": {
-                "name": "Comercial"
-            },
             "landuse/construction": {
                 "name": "Construccion"
-            },
-            "landuse/farm": {
-                "name": "Tierra de llabor"
             },
             "landuse/farmyard": {
                 "name": "Quintana"
@@ -1570,29 +1554,17 @@
             "landuse/grass": {
                 "name": "Pación"
             },
-            "landuse/industrial": {
-                "name": "Industrial"
-            },
             "landuse/landfill": {
                 "name": "Escombrera"
             },
             "landuse/meadow": {
                 "name": "Prau"
             },
-            "landuse/military": {
-                "name": "Militar"
-            },
             "landuse/orchard": {
                 "name": "Plantación"
             },
             "landuse/quarry": {
                 "name": "Cantera"
-            },
-            "landuse/residential": {
-                "name": "Residencial"
-            },
-            "landuse/retail": {
-                "name": "Comercial"
             },
             "landuse/vineyard": {
                 "name": "Viñéu"

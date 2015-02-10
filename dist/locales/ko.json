@@ -72,7 +72,8 @@
                 "area": "지역을 둥글게 만들었습니다."
             },
             "not_closed": "지역이 닫혀있지 않기 때문에 둥글게 만들 수 없습니다.",
-            "too_large": "지역이 현재 충분히 보이지 않기 때문에 둥글게 만들 수 없습니다."
+            "too_large": "지역이 현재 충분히 보이지 않기 때문에 둥글게 만들 수 없습니다.",
+            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 둥글게 만들 수 없습니다."
         },
         "orthogonalize": {
             "title": "사각지기",
@@ -86,14 +87,16 @@
                 "area": "지역의 모서리를 사각지게 했습니다."
             },
             "not_squarish": "사각 형태가 아니기 때문에 사각지게 만들 수 없습니다.",
-            "too_large": "지역이 현재 충분히 보이지 않기 때문에 사각지게 만들 수 없습니다."
+            "too_large": "지역이 현재 충분히 보이지 않기 때문에 사각지게 만들 수 없습니다.",
+            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 사각지게 만들 수 없습니다."
         },
         "straighten": {
             "title": "곧게 하기",
             "description": "이 선을 곧게 합니다.",
             "key": "S",
             "annotation": "선을 곧게 했습니다.",
-            "too_bendy": "너무 구부러져 있기 때문에 곧게 할 수 없습니다."
+            "too_bendy": "너무 구부러져 있기 때문에 곧게 할 수 없습니다.",
+            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 곧게 할 수 없습니다."
         },
         "delete": {
             "title": "삭제",
@@ -106,7 +109,8 @@
                 "relation": "관계를 삭제했습니다.",
                 "multiple": "개체 {n}개를 삭제했습니다."
             },
-            "incomplete_relation": "이 기능은 완전히 다운로드되어 있지 않기 때문에 삭제할 수 없습니다."
+            "incomplete_relation": "이 기능은 완전히 다운로드되어 있지 않기 때문에 삭제할 수 없습니다.",
+            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 삭제할 수 없습니다."
         },
         "add_member": {
             "annotation": "관계에 구성원을 추가했습니다."
@@ -127,7 +131,8 @@
             "description": "서로 이 선/지역을 연결 해제합니다.",
             "key": "D",
             "annotation": "선/지역을 연결 해제했습니다.",
-            "not_connected": "여기에 연결 해제할 충분한 선/지역이 없습니다."
+            "not_connected": "여기에 연결 해제할 충분한 선/지역이 없습니다.",
+            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 연결을 해제할 수 없습니다."
         },
         "merge": {
             "title": "병합",
@@ -151,7 +156,8 @@
                 "multiple": "여러 개체를 이동했습니다."
             },
             "incomplete_relation": "이 기능은 완전히 다운로드되어 있지 않기 때문에 이동할 수 없습니다.",
-            "too_large": "지역이 현재 충분히 보이지 않기 때문에 옮길 수 없습니다."
+            "too_large": "지역이 현재 충분히 보이지 않기 때문에 이동할 수 없습니다.",
+            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 이동할 수 없습니다."
         },
         "rotate": {
             "title": "회전",
@@ -161,7 +167,8 @@
                 "line": "선을 회전했습니다.",
                 "area": "지역을 회전했습니다."
             },
-            "too_large": "지역이 현재 충분히 보이지 않기 때문에 회전할 수 없습니다."
+            "too_large": "지역이 현재 충분히 보이지 않기 때문에 회전할 수 없습니다.",
+            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 회전할 수 없습니다."
         },
         "reverse": {
             "title": "반대로",
@@ -183,7 +190,8 @@
                 "multiple": "선/지역 {n}개 경계를 분할합니다."
             },
             "not_eligible": "선은 시작이나 끝에서 분할할 수 없습니다.",
-            "multiple_ways": "분할하는 데 너무 많은 선이 있습니다."
+            "multiple_ways": "분할하는 데 너무 많은 선이 있습니다.",
+            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 분할할 수 없습니다."
         },
         "restriction": {
             "help": {
@@ -218,6 +226,10 @@
     "logout": "로그아웃",
     "loading_auth": "OpenStreetMap에 연결 중...",
     "report_a_bug": "버그 보고",
+    "feature_info": {
+        "hidden_warning": "숨겨진 기능 {count}개",
+        "hidden_details": "이 기능은 현재 숨겨져 있습니다: {details}"
+    },
     "status": {
         "error": "API에 연결할 수 없습니다.",
         "offline": "API가 오프라인입니다. 나중에 편집을 시도하세요.",
@@ -231,6 +243,7 @@
         "upload_explanation_with_user": "{user} 사용자로 올린 바뀜은 OpenStreetMap 데이터를 사용하는 모든 지도에 보여집니다.",
         "save": "저장",
         "cancel": "취소",
+        "changes": "바뀜 {count}번",
         "warnings": "경고",
         "modified": "수정됨",
         "deleted": "삭제됨",
@@ -269,11 +282,16 @@
         "incomplete": "<다운로드되지 않음>",
         "feature_list": "기능 검색",
         "edit": "기능 편집",
+        "check": {
+            "yes": "예",
+            "no": "아니오"
+        },
         "none": "없음",
         "node": "노드",
         "way": "길",
         "relation": "관계",
-        "location": "위치"
+        "location": "위치",
+        "add_fields": "필드 추가:"
     },
     "background": {
         "title": "배경",
@@ -286,6 +304,78 @@
         "fix_misalignment": "정렬 고치기",
         "reset": "재설정"
     },
+    "map_data": {
+        "title": "지도 데이터",
+        "description": "지도 데이터",
+        "data_layers": "데이터 레이어",
+        "fill_area": "지역 채우기",
+        "map_features": "지도 기능",
+        "autohidden": "이 기능은 화면에 너무 많이 보여질 수 있기 때문에 자동으로 숨겨집니다. 편집하려면 확대할 수 있습니다."
+    },
+    "feature": {
+        "points": {
+            "description": "지점",
+            "tooltip": "관심 있는 지점"
+        },
+        "major_roads": {
+            "description": "주요 도로",
+            "tooltip": "고속도로, 거리 등"
+        },
+        "minor_roads": {
+            "description": "보조 도로",
+            "tooltip": "취부 도로, 주차장 통로, 트랙 등"
+        },
+        "paths": {
+            "description": "경로",
+            "tooltip": "인도, 보도, 자전거로 등"
+        },
+        "buildings": {
+            "description": "건물",
+            "tooltip": "건물, 대피소, 차고 등"
+        },
+        "landuse": {
+            "description": "토지 이용 기능",
+            "tooltip": "숲, 농토, 공원, 주거, 상업 등"
+        },
+        "boundaries": {
+            "description": "경계",
+            "tooltip": "행정 경계"
+        },
+        "water": {
+            "description": "물 기능",
+            "tooltip": "강, 호수, 연못, 웅덩이 등"
+        },
+        "rail": {
+            "description": "철로 기능",
+            "tooltip": "철도"
+        },
+        "power": {
+            "description": "전력 기능",
+            "tooltip": "송전선, 발전소, 변전소 등"
+        },
+        "past_future": {
+            "description": "과거/미래",
+            "tooltip": "제안, 건설, 폐지, 철거 등"
+        },
+        "others": {
+            "description": "기타",
+            "tooltip": "그 밖의 모두"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "채우기 없음 (와이어프레임)",
+            "tooltip": "와이어프레임 모드를 활성화하면 쉽게 배경 영상을 볼 수 있도록 합니다."
+        },
+        "partial": {
+            "description": "부분 채우기",
+            "tooltip": "지역은 그들의 안쪽 가장자리 주변으로만 채워 그려집니다. (초보자 매퍼에게 권장)"
+        },
+        "full": {
+            "description": "전체 채우기",
+            "tooltip": "지역이 전체로 채워 그려집니다."
+        }
+    },
     "restore": {
         "heading": "저장하지 않은 바뀜이 있습니다",
         "description": "이전 저장 세션에서 저장하지 않은 바뀜을 되살리겠습니까?",
@@ -297,6 +387,7 @@
         "help": "OpenStreetMap에 바뀜을 저장하며, 다른 사용자에게 보이도록 합니다.",
         "no_changes": "저장할 바뀜이 없습니다.",
         "error": "저장하는 동안 오류가 발생했습니다",
+        "unknown_error_details": "인터넷에 연결되어 있는지 확인해주세요.",
         "uploading": "OpenStreetMap에 바뀜을 올리고 있습니다.",
         "unsaved_changes": "저장하지 않은 바뀜이 있습니다"
     },
@@ -360,7 +451,7 @@
         "help": "# 도움말\n\n이 편집기는 세계의 자유롭고 편집할 수 있는 지도인,\n[OpenStreetMap](http://www.openstreetmap.org/)을 위한 편집기입니다.\n모두를 위한 더 나은 세계의 오픈 소스 및 오픈 데이터 지도를 만들고, 당신의\n지역에서 데이터를 추가하거나 업데이드하려면 이를 사용할 수 있습니다.\n\n이 지도에서 만든 편집은 OpenStreetMap을 사용하는 모두에게\n보여질 수 있습니다. 편집을 하기 위해, [무료 OpenStreetMap\n계정](https://www.openstreetmap.org/user/new)이 필요합니다.\n\n[iD 편집기](http://ideditor.com/)는 [GitHub에 사용할 수 있는 소스\n코드](https://github.com/openstreetmap/iD)로 된 협업 프로젝트입니다.\n",
         "editing_saving": "# 편집 및 저장\n\n이 편집기는 주로 온라인으로 작동하도록 설계되었고, 지금 웹사이트를 통해\n접근할 수 있습니다.\n\n### 기능 선택하기\n\n도로나 관심 있는 지점과 같은 지도 기능을 선택하려면, 지도에\n그것을 클릭하세요. 선택된 기능이 강조되고, 그것에 대한 세부 정보로\n된 패널을 열고, 기능을 수행할 수 있는 메뉴를 보여줍니다.\n\n여러 기능을 선택하려면 'Shift' 키를 누르고 있으세요. 다음 선택하려는\n기능을 클릭하거나, 사각형으로 그리기 위해 지도에 드래그하세요.\n상자가 그려지고 그 안에 있는 모든 지점이 선택됩니다.\n\n### 편집 저장하기\n\n도로, 건물과 장소 등을 편집하여 바꿀 때, 서버에 저장할 때까지는\n로컬에 저장됩니다. 실수를 걱정하지 마십시오 - 실행 취소\n버튼을 클릭해 바뀜을 실행 취소할 수 있고, 다시 실행 버튼을 클릭해\n바뀜을 다시 실행할 수 있습니다.\n\n편집의 그룹을 마치려면 '저장'을 클릭하세요 - 예를 들어, 마을의\n지역을 완료했고 새 지역에서 시작하고 싶으면 말입니다. 무엇을\n했는지 검토할 기회가 있을 것이며, 무언가 바꾸는 것에 대한 권한이\n없어 보이면 편집기가 유용한 제안과 경고를 제공합니다.\n\n모든 것이 좋아 보이면, 모든 다른 사용자에게 보여지고 구축하고 개선하기 위해 다른\n사용자가 사용할 수 있는 곳인, [OpenStreetMap.org](http://www.openstreetmap.org/)에\n바뀜을 게시하기 위해 바꾼 것을 설명할 짧은 요약을 입력하고 '저장'을\n다시 클릭할 수 있습니다.\n\n한 번에 앉아서 편집을 마칠 수 없으면, (같은 브라우저와 컴퓨터에서)\n편집기 창을 떠나고 나서 돌아올 수 있으며, 편집기 애플리케이션은\n작업을 되돌리도록 제공합니다.\n",
         "roads": "# 도로\n\n이 편집기로 도로를 만들고, 고치고, 삭제할 수 있습니다. 도로는 모든 종류가\n될 수 있습니다: 경로, 고속도로, 산책로, 자전거 도로와 더 많이 - 어떠한 자주 교차되는 분절도 매핑할 수 있어야 합니다.\n\n### 선택하기\n\n도로를 선택하려면 도로를 클릭하세요. 지도와 도로에 대한 자세한\n정보를 보여주는 사이드바가 있는 작은 도구 메뉴와 함께, 외곽선이\n보여져야 합니다.\n\n### 수정하기\n\n때때로 도로 뒤나 GPS 트랙에 있는 영상이 정렬되지 않은 도로를\n볼 수 있습니다. 이러한 도로를 조정할 수 있으며 조정하면 올바른\n위치에 있게 됩니다.\n\n먼저 바꾸고 싶은 도로를 클릭하세요. 도로가 강조되고 더 나은 위치로\n드래그할 수 있는 조절 점이 보여집니다. 더 자세하게 하기 위해 새\n조절 점을 추가하고 싶으면, 노드 없이 도로의 부분을 더블 클릭하면\n추가됩니다.\n\n길을 다른 길로 연결하지만, 제대로 지도에 연결되어 있지 않으면,\n그들과 합치기 위해 다른 도로 위에 그 도로의 조절 점 중 하나를\n드래그할 수 있습니다. 도로 연결이 있는 것은 지도에 있어서 중요하고\n운전 경로를 제공하는 데 있어서 필수입니다.\n\n또한 한 번에 전체 도로를 옮기려면 '이동' 도구를 클릭하거나 `M` 바로가기 키를 누를 수\n있으며, 해당 움직임을 저장하려면 다시 클릭할 수 있습니다.\n\n### 삭제하기\n\n도로가 전체적으로 잘못되었다면 - 위성 영상에서 존재하지 않는 것을 볼 수\n있으며 이상적으로는 나타나지 않는 것으로 현지로 확인되었습니다 - 지도에서\n도로를 제거할 수 있습니다. 기능을 삭제할 때 주의하십시오 -\n어떠한 다른 편집, 모두에게 보여지는 결과와 위성 영상 같은 것은 때때로\n오래되었으며, 그래서 도로는 단순히 새로 지어졌을 수 있습니다.\n\n도로를 클릭하여 선택한 다음, 휴지통 아이콘을 클릭하거나 '삭제' 키를\n눌러 도로를 삭제할 수 있습니다.\n\n### 만들기\n\n어딘가에 찾은 도로가 있어야 하지만 없습니까? 선 그리기를 시작하려면\n편집기의 위 왼쪽에 '선' 아이콘을 클릭하거나 `2` 바로가기 키를 누르세요.\n\n그리기를 시작하려면 지도에 도로의 시작 부분을 클릭하세요. 도로가\n기존 도로에서 분기되어 있다면, 연결할 장소를 클릭하여 시작하세요.\n\n다음 위성 영상이나 GPS에 따라, 올바른 경로를 따를 수 있도록 도로를 따라\n점을 클릭하세요. 그리는 도로가 다른 도로와 교차하면, 교차점을 클릭하여\n도로를 연결하세요. 그리기가 완료되면, 더블 클릭하거나\n키보드에 있는 'Return' 또는 'Enter'를 누르세요.\n",
-        "gps": "# GPS\n\nGPS 데이터는 OpenStreetMap에 대한 데이터의 가장 신뢰할 수 있는 자료입니다.\n이 편집기는 로컬 컴퓨터에 있는 `.gpx` 파일로 로컬 추적을 지원합니다. 스마트폰\n애플리케이션과 개인 GPS 하드웨어와 같은 것으로 GPS 추적을 모을 수 있습니다.\n\nGPS 측량을 수행하는 방법에 대한 자세한 정보는\n[GPS에 의한 측량](http://learnosm.org/en/beginner/using-gps/)을 읽으세요.\n\n매핑에 GPX 트랙을 사용하려면, 지도 편집기 위에 GPX 파일을 끌어 놓으세요.\n인식되면, 밝은 초록 선으로 지도에 추가됩니다. 활성화, 비활성화, 또는 새 GPX가\n배치된 레이어로 확대하려면 오른쪽에 있는 '배경 설정' 메뉴를 클릭하세요.\n\nGPX 트랙은 OpenStreetMap에 직접 올려지지 않습니다 - 그것을 사용하는 최상의\n방법은 새로운 기능을 추가하기 위한 가이드로 사용하여, 지도를 그리는 것이며,\n다른 사용자가 사용하기 위해 [OpenStreetMap에 그것을 올리는](http://www.openstreetmap.org/trace/create)\n것입니다.\n",
+        "gps": "# GPS\n\nGPS 데이터는 OpenStreetMap에 대한 데이터의 가장 신뢰할 수 있는 자료입니다.\n이 편집기는 로컬 컴퓨터에 있는 `.gpx` 파일로 로컬 추적을 지원합니다. 스마트폰\n애플리케이션의 수와 같은 개인 GPS 하드웨어로 GPS 추적의 종류를 모을 수 있습니다.\n\nGPS 측량을 수행하는 방법에 대한 자세한 정보는\n[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/)를 읽으세요.\n\n매핑에 GPX 트랙을 사용하려면, 지도 편집기 위에 GPX 파일을 끌어 놓으세요.\n인식되면, 밝은 보라 선으로 지도에 추가됩니다. 새 GPX 레이어로 활성화, 비활성화,\n또는 확대하려면 오른쪽에 있는 '지도 데이터' 메뉴를 클릭하세요.\n\nGPX 트랙은 OpenStreetMap에 직접 올려지지 않습니다 - 그것을 사용하는 최상의\n방법은 추가하는 새로운 기능을 위한 가이드로 사용하여, 지도를 그리는 것이며,\n다른 사용자가 사용하기 위해 [OpenStreetMap에 그것을 올리는](http://www.openstreetmap.org/trace/create)\n것입니다.\n",
         "imagery": "# 영상\n\n항공 영상은 매핑에 있어서 중요한 자료입니다. 비행기 플라이오버, 위성 뷰와\n자유롭게 컴파일된 자료의 조합은 편집기에서 오른쪽에 있는 '배경 설정' 메뉴에서\n사용할 수 있습니다.\n\n기본적으로 [Bing 지도](http://www.bing.com/maps/) 위성 레이어가 편집기에\n표현되지만, 기존대로 새 지리적 지역으로 지도를 이동하고 확대할 수 있고, 새 자료는\n사용할 수 있게 될 것입니다. 미합중국, 프랑스와 덴마크와 같은 일부 국가는 일부 지역에서\n매우 높은 품질의 영상을 사용할 수 있습니다.\n\n영상은 때때로 영상 제공자 측이 실수하기 때문에 지도 데이터에 오프셋이 있습니다.\n만약 배경에서 도로가 옮겨진 것이 많이 보인다면, 즉시 배경에 맞게 그들 모두를 이동하지\n마십시오. 대신 영상을 조정할 수 있으며 배경 설정 UI의 아래에 있는 '정렬 고치기'를\n클릭하여 기존 데이터에 맞추면 됩니다.\n",
         "addresses": "# 주소\n\n주소는 지도를 위한 가장 유용한 정보의 일부입니다.\n\n주소가 주로 거리의 부분으로 표현되어 있더라도, OpenStreetMap에서 주소는\n거리를 따라 건물과 장소의 특성으로 기록하고 있습니다.\n\n건물 외곽선으로 매핑된 장소뿐만 아니라 단일 지점으로 매핑된 장소에 주소\n정보를 추가할 수 있습니다. 최적의 주소 데이터 자료는 지상에서의 측량이나\n개인 지식에서 있습니다 - 다른 기능과 마찬가지로, Google 지도와 같은 상용\n자료에서 복사하는 행위는 엄격히 금지됩니다.\n",
         "inspector": "# 특성 편집기 사용하기\n\n특성 편집기는 선택한 기능의 자세한 내용을 편집할 수 있도록 하는 문서의 왼쪽에\n있는 부분입니다.\n\n### 기능 유형 선택하기\n\n지점, 선이나 지역을 추가하고 나서, 고속도로나 주거 도로, 수퍼마켓이나 카페와\n같은\t어떤 유형인지 선택할 수 있습니다. 특성 편집기는 일반 기능 유형에 대한\n버튼를 보여주며, 검색 상자에 무엇을 찾고 있는지 입력하여 다른 기능을 찾을\n수 있습니다.\n\n기능에 대해 자세히 알아보려면 기능 유형 버튼의 아래 오른쪽 모서리에 있는\n'i'를 클릭하세요. 해당 유형을 선택하려면 버튼을 클릭하세요.\n\n### 양식을 사용하여 태그 편집하기\n\n기능 유형을 선택하고 나서, 또는 이미 유형이 할당된 기능을 선택할 때,\n특성 편집기는 그것의 이름과 주소와 같은 기능에 대한 자세한 내용으로 된\n필드를 보여줍니다.\n\n볼 수 있는 필드 아래에, [위키백과](http://www.wikipedia.org/) 정보,\n휠체어 접근과 그 외와 같은, 다른 자세한 내용을 추가하려면 아이콘을\n클릭할 수 있습니다.\n\n특성 편집기 아래에, 요소에 임의의 다른 태그를 추가하려면 '추가적인 태그'를\n클릭하세요. [Taginfo](http://taginfo.openstreetmap.org/)는 인기 있는 태그\n조합에 대한 자세히 알아보기 위한 훌륭한 자료입니다.\n\n특성 편집기에서 바꾼 내용은 자동으로 지도에 적용됩니다. '실행 취소' 버튼을\n클릭하여 언제든지 되돌릴 수 있습니다.\n",
@@ -431,7 +522,7 @@
                 "name": "경로"
             },
             "category-rail": {
-                "name": "선로"
+                "name": "철로"
             },
             "category-restriction": {
                 "name": "제한"
@@ -567,11 +658,17 @@
             "barrier": {
                 "label": "유형"
             },
+            "bench": {
+                "label": "벤치"
+            },
             "bicycle_parking": {
                 "label": "유형"
             },
             "boundary": {
                 "label": "유형"
+            },
+            "brand": {
+                "label": "상표"
             },
             "building": {
                 "label": "건물"
@@ -635,6 +732,9 @@
             "cuisine": {
                 "label": "요리 종류"
             },
+            "delivery": {
+                "label": "배달"
+            },
             "denomination": {
                 "label": "교단"
             },
@@ -645,7 +745,11 @@
                 "label": "설명"
             },
             "electrified": {
+                "label": "전력화",
+                "placeholder": "연결로, 전철...",
                 "options": {
+                    "contact_line": "연결로",
+                    "rail": "전철",
                     "yes": "예 (지정되지 않음)",
                     "no": "아니오"
                 }
@@ -659,6 +763,9 @@
             "entrance": {
                 "label": "유형"
             },
+            "except": {
+                "label": "예외"
+            },
             "fax": {
                 "label": "팩스",
                 "placeholder": "+31 42 123 4567"
@@ -669,8 +776,10 @@
             "fire_hydrant/type": {
                 "label": "유형",
                 "options": {
+                    "pillar": "기둥/지상",
+                    "underground": "지하",
                     "wall": "벽",
-                    "pond": "호수"
+                    "pond": "연못"
                 }
             },
             "fixme": {
@@ -707,7 +816,16 @@
                 "label": "고급 휘발유 판매"
             },
             "gauge": {
-                "label": "게이지"
+                "label": "궤간"
+            },
+            "gender": {
+                "label": "성별",
+                "placeholder": "알 수 없음",
+                "options": {
+                    "male": "남자",
+                    "female": "여자",
+                    "unisex": "남녀 공용"
+                }
             },
             "generator/method": {
                 "label": "방식"
@@ -861,7 +979,8 @@
             "parking": {
                 "label": "유형",
                 "options": {
-                    "surface": "노면"
+                    "surface": "노면",
+                    "garage_boxes": "차고 상자"
                 }
             },
             "phone": {
@@ -895,6 +1014,9 @@
             },
             "place": {
                 "label": "유형"
+            },
+            "population": {
+                "label": "인구"
             },
             "power": {
                 "label": "유형"
@@ -938,8 +1060,22 @@
             "service": {
                 "label": "유형"
             },
+            "service/bicycle/chaintool": {
+                "options": {
+                    "undefined": "아니오로 간주",
+                    "yes": "예",
+                    "no": "아니오"
+                }
+            },
+            "service/bicycle/pump": {
+                "options": {
+                    "undefined": "아니오로 간주",
+                    "yes": "예",
+                    "no": "아니오"
+                }
+            },
             "shelter": {
-                "label": "피난처"
+                "label": "대피소"
             },
             "shelter_type": {
                 "label": "유형"
@@ -991,6 +1127,12 @@
             "surface": {
                 "label": "노면"
             },
+            "takeaway": {
+                "options": {
+                    "yes": "예",
+                    "no": "아니오"
+                }
+            },
             "toilets/disposal": {
                 "label": "처분"
             },
@@ -1004,10 +1146,7 @@
                 "label": "트랙 유형"
             },
             "trail_visibility": {
-                "label": "도로의 가시성"
-            },
-            "tree_type": {
-                "label": "유형"
+                "label": "철로의 가시성"
             },
             "trees": {
                 "label": "나무"
@@ -1039,9 +1178,6 @@
             },
             "wikipedia": {
                 "label": "위키백과"
-            },
-            "wood": {
-                "label": "유형"
             }
         },
         "presets": {
@@ -1247,10 +1383,13 @@
                 "name": "학교 운동장"
             },
             "amenity/shelter": {
-                "name": "피난처"
+                "name": "대피소"
             },
             "amenity/social_facility/food_bank": {
                 "name": "푸드 뱅크"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "이재민 대피소"
             },
             "amenity/studio": {
                 "name": "스튜디오"
@@ -1346,13 +1485,22 @@
             "building/apartments": {
                 "name": "아파트먼트"
             },
+            "building/college": {
+                "name": "대학 건물"
+            },
             "building/commercial": {
                 "name": "상업 건물"
+            },
+            "building/construction": {
+                "name": "공사 중인 건물"
             },
             "building/entrance": {
                 "name": "입구/출구"
             },
             "building/garage": {
+                "name": "차고"
+            },
+            "building/garages": {
                 "name": "차고"
             },
             "building/hospital": {
@@ -1370,6 +1518,9 @@
             "building/industrial": {
                 "name": "산업 건물"
             },
+            "building/kindergarten": {
+                "name": "유치원 건물"
+            },
             "building/public": {
                 "name": "공공 건물"
             },
@@ -1384,6 +1535,9 @@
             },
             "building/train_station": {
                 "name": "기차역"
+            },
+            "building/university": {
+                "name": "대학교 건물"
             },
             "craft/tailor": {
                 "name": "양복점"
@@ -1412,7 +1566,7 @@
                 "name": "횡단 보도"
             },
             "footway/sidewalk": {
-                "name": "보도"
+                "name": "인도"
             },
             "ford": {
                 "name": "여울"
@@ -1525,12 +1679,18 @@
             "highway/service/parking_aisle": {
                 "name": "주차장 통로"
             },
+            "highway/services": {
+                "name": "서비스 지역"
+            },
             "highway/steps": {
                 "name": "계단"
             },
             "highway/stop": {
                 "name": "멈춤 신호",
                 "terms": "정지 신호"
+            },
+            "highway/street_lamp": {
+                "name": "가로등"
             },
             "highway/tertiary": {
                 "name": "3차 도로"
@@ -1591,23 +1751,23 @@
                 "name": "텃밭"
             },
             "landuse/basin": {
-                "name": "분지"
+                "name": "웅덩이",
+                "terms": "분지"
             },
             "landuse/cemetery": {
                 "name": "묘지"
             },
             "landuse/commercial": {
-                "name": "상업"
+                "name": "상업 지역"
             },
             "landuse/construction": {
                 "name": "공사중"
             },
             "landuse/farm": {
-                "name": "농장"
+                "name": "농토"
             },
             "landuse/farmland": {
-                "name": "농토",
-                "terms": "농지"
+                "name": "농토"
             },
             "landuse/farmyard": {
                 "name": "농지"
@@ -1615,11 +1775,14 @@
             "landuse/forest": {
                 "name": "숲"
             },
+            "landuse/garages": {
+                "name": "차고"
+            },
             "landuse/grass": {
                 "name": "잔디"
             },
             "landuse/industrial": {
-                "name": "산업"
+                "name": "산업 지역"
             },
             "landuse/landfill": {
                 "name": "매립지"
@@ -1628,7 +1791,7 @@
                 "name": "목초지"
             },
             "landuse/military": {
-                "name": "군사지"
+                "name": "군사 지역"
             },
             "landuse/orchard": {
                 "name": "과수원"
@@ -1637,10 +1800,10 @@
                 "name": "채석장"
             },
             "landuse/residential": {
-                "name": "주거"
+                "name": "주거 지역"
             },
             "landuse/retail": {
-                "name": "소매점"
+                "name": "소매점 지역"
             },
             "landuse/vineyard": {
                 "name": "포도밭"
@@ -1703,6 +1866,9 @@
             },
             "leisure/playground": {
                 "name": "놀이터"
+            },
+            "leisure/running_track": {
+                "name": "육상 트랙"
             },
             "leisure/slipway": {
                 "name": "슬립 웨이"
@@ -1778,8 +1944,7 @@
                 "name": "벙커"
             },
             "military/range": {
-                "name": "군사지",
-                "terms": "군사 지역"
+                "name": "군사 범위"
             },
             "natural": {
                 "name": "자연"
@@ -1830,7 +1995,7 @@
                 "name": "호수"
             },
             "natural/water/pond": {
-                "name": "호수"
+                "name": "연못"
             },
             "natural/water/reservoir": {
                 "name": "저수지"
@@ -1916,6 +2081,9 @@
             "office/travel_agent": {
                 "name": "여행사"
             },
+            "piste": {
+                "name": "활강/스키 트레일"
+            },
             "place": {
                 "name": "장소"
             },
@@ -1953,12 +2121,15 @@
                 "name": "송전선"
             },
             "power/minor_line": {
-                "name": "작은 송전선"
+                "name": "보조 송전선"
             },
             "power/pole": {
                 "name": "전봇대"
             },
             "power/sub_station": {
+                "name": "변전소"
+            },
+            "power/substation": {
                 "name": "변전소"
             },
             "power/tower": {
@@ -1992,11 +2163,14 @@
             "railway/monorail": {
                 "name": "모노레일"
             },
+            "railway/narrow_gauge": {
+                "name": "협궤 철로"
+            },
             "railway/platform": {
                 "name": "철도 플랫폼"
             },
             "railway/rail": {
-                "name": "선로"
+                "name": "철로"
             },
             "railway/station": {
                 "name": "철도역"
@@ -2342,7 +2516,7 @@
                 "name": "강"
             },
             "waterway/riverbank": {
-                "name": "강가"
+                "name": "강둑"
             },
             "waterway/stream": {
                 "name": "개울"

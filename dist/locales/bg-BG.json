@@ -699,9 +699,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Вид"
             }
         },
         "presets": {
@@ -1065,14 +1062,8 @@
             "landuse/cemetery": {
                 "name": "Гробищен парк"
             },
-            "landuse/commercial": {
-                "name": "Търговия"
-            },
             "landuse/construction": {
                 "name": "Строеж"
-            },
-            "landuse/farm": {
-                "name": "Селско стопанство"
             },
             "landuse/farmyard": {
                 "name": "Селскостопански двор"
@@ -1083,9 +1074,6 @@
             "landuse/grass": {
                 "name": "Трева"
             },
-            "landuse/industrial": {
-                "name": "Индустрия"
-            },
             "landuse/meadow": {
                 "name": "Пасище"
             },
@@ -1094,12 +1082,6 @@
             },
             "landuse/quarry": {
                 "name": "Кариера"
-            },
-            "landuse/residential": {
-                "name": "Жилищна територия"
-            },
-            "landuse/retail": {
-                "name": "Търговия"
             },
             "landuse/vineyard": {
                 "name": "Лозе"

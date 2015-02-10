@@ -725,9 +725,6 @@
             },
             "wikipedia": {
                 "label": "উইকিপিডিয়া"
-            },
-            "wood": {
-                "label": "টাইপ"
             }
         },
         "presets": {
@@ -980,14 +977,8 @@
             "landuse/cemetery": {
                 "name": "কবরখানা"
             },
-            "landuse/commercial": {
-                "name": "বানিজ্যিক"
-            },
             "landuse/construction": {
                 "name": "মেরামত"
-            },
-            "landuse/farm": {
-                "name": "খামারবাড়ি"
             },
             "landuse/farmyard": {
                 "name": "খামার"
@@ -998,9 +989,6 @@
             "landuse/grass": {
                 "name": "ঘাস"
             },
-            "landuse/industrial": {
-                "name": "শিল্পায়িত"
-            },
             "landuse/meadow": {
                 "name": "তৃণক্ষেত্র"
             },
@@ -1009,12 +997,6 @@
             },
             "landuse/quarry": {
                 "name": "খনি"
-            },
-            "landuse/residential": {
-                "name": "অাবাসিক"
-            },
-            "landuse/retail": {
-                "name": "খুচরো ব্যবসা"
             },
             "landuse/vineyard": {
                 "name": "অাঙুরখেত"

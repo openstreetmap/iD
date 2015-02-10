@@ -34,6 +34,12 @@
                 "relation": "Aldonita rilato."
             }
         },
+        "start": {
+            "annotation": {
+                "line": "Komenciĝis linion.",
+                "area": "Komenciĝis areon."
+            }
+        },
         "continue": {
             "title": "Daŭrigu",
             "description": "Daŭrigu tiun linion.",
@@ -54,7 +60,22 @@
             "annotation": "Ŝanĝita etikedojn."
         },
         "circularize": {
-            "title": "Circularize"
+            "title": "Circularize",
+            "description": {
+                "line": "Faru ĉi linio cirkuli.",
+                "area": "Faru ĉi areon cirkuli."
+            },
+            "annotation": {
+                "line": "Farita cirkulero de linio.",
+                "area": "Farita cirkulero de areo."
+            }
+        },
+        "orthogonalize": {
+            "title": "Kvadrata",
+            "description": {
+                "line": "Kvadrata la anguloj de ĉi tiu linio.",
+                "area": "Kvadrata la anguloj de ĉi tiu areo."
+            }
         },
         "delete": {
             "annotation": {
@@ -66,7 +87,14 @@
             "title": "Malkonekti"
         },
         "rotate": {
-            "title": "Rotacio"
+            "title": "Rotacio",
+            "description": "Rotacii tiu objekto ĉirkaŭ ĝia centra punkto.",
+            "annotation": {
+                "line": "Turnita linion."
+            }
+        },
+        "reverse": {
+            "title": "dorsflanko"
         }
     },
     "translate": {
@@ -82,11 +110,12 @@
         },
         "areas": {
             "title": "Areoj",
-            "choose": "** Elektu Playground el la listo. **",
+            "choose": "**Rifo Korto de la listo.**",
             "describe": "**Aldoni nomo, kaj fermi la redaktilon trajto **"
         },
         "lines": {
             "title": "Linioj",
+            "road": "**Selektas Ŝoseon de la listo**",
             "wrong_preset": "Vi ne selektis la Residencial vojo tipo. ** Klaku tie ĉi por elekti denove **"
         },
         "startediting": {
@@ -94,6 +123,167 @@
             "help": "Pli dokumentado kaj tiu walkthrough estas havebla ĉi tie.",
             "save": "Ne forgesu regule savu viajn ŝanĝojn!",
             "start": "Starti surĵeto!"
+        }
+    },
+    "presets": {
+        "categories": {
+            "category-golf": {
+                "name": "Golfo"
+            },
+            "category-path": {
+                "name": "Vojo"
+            },
+            "category-water-area": {
+                "name": "Akvo"
+            },
+            "category-water-line": {
+                "name": "Akvo"
+            }
+        },
+        "fields": {
+            "access": {
+                "placeholder": "Nekonata",
+                "types": {
+                    "bicycle": "Bicikloj",
+                    "horse": "Ĉevaloj"
+                },
+                "options": {
+                    "yes": {
+                        "title": "Permesita"
+                    },
+                    "no": {
+                        "title": "Malpermesita"
+                    }
+                }
+            },
+            "access_simple": {
+                "placeholder": "jes"
+            },
+            "address": {
+                "label": "Adreso",
+                "placeholders": {
+                    "housenumber": "123",
+                    "street": "Strato",
+                    "city": "Urbo",
+                    "province": "Provinco",
+                    "country": "Lando"
+                }
+            },
+            "aerialway/capacity": {
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/occupancy": {
+                "placeholder": "2, 4, 8..."
+            },
+            "artist": {
+                "label": "Artisto"
+            },
+            "country": {
+                "label": "Lando"
+            },
+            "electrified": {
+                "options": {
+                    "no": "Ne"
+                }
+            },
+            "fax": {
+                "placeholder": "+31 42 123 4567"
+            },
+            "gender": {
+                "placeholder": "Nekonata"
+            },
+            "golf_hole": {
+                "label": "Referenco"
+            },
+            "handicap": {
+                "placeholder": "1-18"
+            },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
+            },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
+            "internet_access": {
+                "options": {
+                    "yes": "Jes",
+                    "no": "Ne",
+                    "wlan": "Wi-Fi"
+                }
+            },
+            "lanes": {
+                "placeholder": "1, 2, 3..."
+            },
+            "levels": {
+                "placeholder": "2, 4, 6..."
+            },
+            "maxspeed": {
+                "placeholder": "40, 50, 60..."
+            },
+            "mtb/scale": {
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/imba": {
+                "options": {
+                    "1": "Facila (verda rondo)"
+                }
+            },
+            "name": {
+                "label": "Nomo"
+            },
+            "note": {
+                "label": "Noto"
+            },
+            "oneway": {
+                "options": {
+                    "yes": "Jes",
+                    "no": "Ne"
+                }
+            },
+            "oneway_yes": {
+                "options": {
+                    "yes": "Jes",
+                    "no": "Ne"
+                }
+            },
+            "opening_hours": {
+                "label": "Horoj"
+            },
+            "par": {
+                "placeholder": "3, 4, 5..."
+            },
+            "phone": {
+                "label": "Telefono",
+                "placeholder": "+31 42 1231 4567"
+            },
+            "ref": {
+                "label": "Referenco"
+            },
+            "religion": {
+                "label": "Religio"
+            },
+            "source": {
+                "label": "Fonto"
+            },
+            "structure": {
+                "options": {
+                    "bridge": "Ponto"
+                }
+            }
+        },
+        "presets": {
+            "building/church": {
+                "name": "Eklezio"
+            },
+            "building/house": {
+                "name": "Domo"
+            }
         }
     }
 }

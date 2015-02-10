@@ -444,9 +444,6 @@
             },
             "wikipedia": {
                 "label": "వికీపీడియా"
-            },
-            "wood": {
-                "label": "రకం"
             }
         },
         "presets": {
@@ -539,20 +536,11 @@
             "historic": {
                 "name": "చారిత్రక ప్రదేశం"
             },
-            "landuse/farm": {
-                "name": "పొలం"
-            },
             "landuse/forest": {
                 "name": "అడవి"
             },
             "landuse/grass": {
                 "name": "పచ్చిక"
-            },
-            "landuse/industrial": {
-                "name": "పారిశ్రామికం"
-            },
-            "landuse/residential": {
-                "name": "నివాస ప్రాంతం"
             },
             "leisure/garden": {
                 "name": "తోట"

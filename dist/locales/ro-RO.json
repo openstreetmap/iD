@@ -35,6 +35,7 @@
         },
         "continue": {
             "key": "A",
+            "title": "Continuă",
             "annotation": {
                 "line": "Am continuat o linie.",
                 "area": "Am continuat o suprafață. "
@@ -125,9 +126,11 @@
             }
         }
     },
+    "tooltip_keyhint": "Scurtătură:",
     "browser_notice": "Acest editor este compatibil cu Firefox, Chrome, Safari, Opera și Internet Explorer 9 sau o versiune ulterioară . Te rugăm să iți actualizezi navigatorul de internet sau folosește Potlach 2 să editezi harta.",
     "translate": {
         "translate": "Traduce",
+        "localized_translation_language": "Alege limba",
         "localized_translation_name": "Nume"
     },
     "logout": "logout",
@@ -146,6 +149,9 @@
     "contributors": {
         "list": "Editări făcute de {user}"
     },
+    "geocoder": {
+        "no_results_worldwide": "Nu s-a găsit nici un rezultat"
+    },
     "geolocate": {
         "title": "Arată locația mea "
     },
@@ -153,11 +159,14 @@
         "no_documentation_combination": "Nu este documentație disponibilă pentru combinația de tag-uri (cuvinte cheie)",
         "no_documentation_key": "Nu este documentație pentru această cheie.",
         "show_more": "Arată mai mult",
+        "view_on_osm": "Vezi pe openstreetmap.org",
         "all_members": "Toți membrii",
         "all_relations": "Toate relațiile",
         "role": "Rol",
         "results": "{n} rezultate pentru {search}",
         "back_tooltip": "Schimbă trăsătură",
+        "remove": "Şterge",
+        "search": "Caută",
         "unknown": "Necunoscut",
         "location": "Locație"
     },
@@ -166,6 +175,15 @@
         "description": "Setări fundal",
         "percent_brightness": "{opacity}% luminozitate",
         "reset": "resetează"
+    },
+    "feature": {
+        "points": {
+            "description": "Puncte",
+            "tooltip": "Puncte de interes"
+        },
+        "buildings": {
+            "description": "Clădiri"
+        }
     },
     "restore": {
         "heading": "Ai modificări nesalvate.",
@@ -182,7 +200,10 @@
         "unsaved_changes": "Ai modificări nesalvate."
     },
     "success": {
-        "facebook": "Distribuie pe Facebook"
+        "view_on_osm": "Vezi pe OSM",
+        "facebook": "Distribuie pe Facebook",
+        "twitter": "Distribuie pe Twitter",
+        "google": "Distribuie pe Google+"
     },
     "splash": {
         "welcome": "Bine ai venit în editorul iD OpenStreetMap",
@@ -229,9 +250,11 @@
             "search": "**Caută {name}.**"
         },
         "lines": {
-            "title": "Linii"
+            "title": "Linii",
+            "road": "**Selectează drumul din listă**"
         },
         "startediting": {
+            "title": "Începe editarea",
             "start": "Începe cartografierea!"
         }
     },
@@ -389,9 +412,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Tip"
             }
         },
         "presets": {

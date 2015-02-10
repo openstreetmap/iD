@@ -829,9 +829,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Tipo"
             }
         },
         "presets": {
@@ -1208,17 +1205,8 @@
             "landuse/cemetery": {
                 "name": "Cemiterio"
             },
-            "landuse/commercial": {
-                "name": "Comercial"
-            },
             "landuse/construction": {
                 "name": "Construción"
-            },
-            "landuse/farm": {
-                "name": "Terra de cultivo"
-            },
-            "landuse/farmland": {
-                "name": "Terra de cultivo"
             },
             "landuse/farmyard": {
                 "name": "Granxa"
@@ -1229,9 +1217,6 @@
             "landuse/grass": {
                 "name": "Herba"
             },
-            "landuse/industrial": {
-                "name": "Industrial"
-            },
             "landuse/meadow": {
                 "name": "Campo"
             },
@@ -1240,9 +1225,6 @@
             },
             "landuse/quarry": {
                 "name": "Canteira"
-            },
-            "landuse/residential": {
-                "name": "Urbano"
             },
             "landuse/vineyard": {
                 "name": "Viña"

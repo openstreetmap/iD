@@ -231,6 +231,7 @@
         "upload_explanation_with_user": "Zmiany, które wyślesz jako {user} będą widoczne na wszystkich mapach używających danych OpenStreetMap.",
         "save": "Zapisz",
         "cancel": "Anuluj",
+        "changes": "{count} zmian",
         "warnings": "Ostrzeżenia",
         "modified": "Zmodyfikowano",
         "deleted": "Usunięto",
@@ -269,11 +270,16 @@
         "incomplete": "<nie pobrane>",
         "feature_list": "Wyszukiwanie rodzaju obiektu",
         "edit": "Edytuj obiekt",
+        "check": {
+            "yes": "Tak",
+            "no": "Nie"
+        },
         "none": "Brak",
         "node": "Węzeł",
         "way": "Droga",
         "relation": "Relacja",
-        "location": "Lokalizacja"
+        "location": "Lokalizacja",
+        "add_fields": "Dodaj pole:"
     },
     "background": {
         "title": "Tło",
@@ -285,6 +291,48 @@
         "custom_prompt": "Wprowadź szablon URL dla kafelków. Dozwolone elementy to {z}, {x}, {y} dla schematu Z/X/Y oraz {u} dla schematu quadtile.",
         "fix_misalignment": "Wyrównaj podkład",
         "reset": "resetuj"
+    },
+    "map_data": {
+        "title": "Dane mapy",
+        "description": "Dane mapy",
+        "data_layers": "Warstwy danych",
+        "fill_area": "Wypełnianie obszarów",
+        "map_features": "Obiekty na mapie"
+    },
+    "feature": {
+        "points": {
+            "description": "Punkty",
+            "tooltip": "Użyteczne miejsce (POI)"
+        },
+        "major_roads": {
+            "description": "Główne drogi"
+        },
+        "minor_roads": {
+            "description": "Drogi drugorzędne"
+        },
+        "paths": {
+            "description": "Ścieżki"
+        },
+        "buildings": {
+            "description": "Budynki"
+        },
+        "boundaries": {
+            "description": "Granice"
+        },
+        "others": {
+            "description": "Inne"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "Bez wypełnienia (szkielet)"
+        },
+        "partial": {
+            "description": "Częściowe wypełnienie"
+        },
+        "full": {
+            "description": "Pełne wypełnienie"
+        }
     },
     "restore": {
         "heading": "Masz niezapisane zmiany",
@@ -350,12 +398,15 @@
         "zoom": "Pokaż ślad GPX",
         "browse": "Otwórz plik .gpx"
     },
+    "mapillary": {
+        "title": "Nakładka zdjęć (Mapillary)",
+        "view_on_mapillary": "Zobacz ten obraz w Mapillary"
+    },
     "help": {
         "title": "Pomoc",
         "help": "# Pomoc\n\nTo jest edytor [OpenStreetMap](http://www.openstreetmap.org/),\nwolnej i edytowalnej mapy świata. Możesz  go używać do dodawania i\naktualizacji danych w twoim rejonie, czyniąc otwartą mapę świata lepszą\ndla każdego.\n\nModyfikacje wprowadzone na tej mapie będą widoczne dla wszystkich\nużywających OpenStreetMap. Aby wprowadzić modyfikacje, potrzebujesz\n[darmowego konta OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[Edytor iD](http://ideditor.com/) jest projektem społecznościowym z\n[kodem dostępnym na GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Edycja i zapis\n\nTen edytor został zaprojektowany do pracy w trybie online i już go używasz poprzez stronę\ninternetową.\n\n### Wybieranie obiektów\n\nAby wybrać obiekt na mapie, na przykład droga, czy POI, kliknij go na mapie.\nSpowoduje to podświetlenie wybranego obiektu, otworzenie panelu zawierającego szczegóły\no nim i wyświetlenie menu z poleceniami, które możesz wykonać na obiekcie.\n\nWiele obiektów może zostać wybranych przez przytrzymanie wciśniętego klawisza 'Shift' i lewego klawisza myszy, z jednoczesnym przeciągnięciem zaznaczając interesujący nas obszar mapy. Spowoduje to wybór wszystkich obiektów zawartych w narysowanym prostokącie, umożliwiając Tobie wykonywanie działań na kilku obiektach naraz.\n\n### Zapisywanie modyfikacji\n\nGdy wprowadzisz zmiany, na przykład przez modyfikacje dróg, budynków i miejsc, są one\nprzechowywane lokalnie aż zapiszesz je na serwerze. Nie martw się, gdy popełnisz błąd - możesz\ncofnąć zmiany przez kliknięcie na przycisk cofnij i powtórzyć je poprzez kliknięcie na przycisk powtórz.\n\nKliknij 'Zapisz' aby skończyć grupę modyfikacji - na przykład, gdy skończyłeś pewien obszar miasta i\nchcesz zacząć następny. Będziesz miał wtedy szansę przejrzeć, co zrobiłeś, a edytor dostarczy pomocne\nsugestie i ostrzeżenia w razie, gdyby coś było nie tak z twoimi zmianami.\n\nJeśli wszystko dobrze wygląda, możesz podać krótki komentarz opisujący zmianę, którą wprowadziłeś\ni kliknąć 'Zapisz' ponownie, aby wysłać zmiany do [OpenStreetMap.org](http://www.openstreetmap.org/),\ngdzie będą one widoczne dla wszystkich użytkowników i dostępne dla innych do bazowania na nich i\ndalszego ulepszania.\n\nJeżeli nie możesz skończyć swoich modyfikacji w czasie jednej sesji, możesz opuścić okno edytora i\nwrócić później (na tym samym komputerze i w tej samej przeglądarce), a edytor zaoferuje ci przywrócenie\ntwojej pracy.\n",
         "roads": "# Drogi\n\nMożesz tworzyć, poprawiać i usuwać drogi używając tego edytora. Drogi mogą być wszelkiego rodzaju:\nścieżki, ulice, szlaki, ścieżki rowerowe i tak dalej - każdy często uczęszczany odcinek powinien dać się\nprzedstawić.\n\n### Zaznaczanie\n\nKliknij drogę, aby ją zaznaczyć. Obwiednia powinna stać się widoczna, wraz z małym menu\nnarzędziowym na mapie oraz panelem bocznym pokazującym więcej informacji na temat drogi.\n\n### Modyfikowanie\n\nCzęsto będziesz widział drogi, które nie są wyrównane ze zdjęciami satelitarnymi lub śladami GPS.\nMożesz dopasować te drogi tak, aby były we właściwym miejscu.\n\nNajpierw kliknij drogę, którą chcesz zmienić. Podświetli ją to oraz pokaże punkty kontrolne, które\nmożesz przesunąć w lepsze miejsce. Jeżeli chcesz dodać nowe punkty kontrolne, aby droga\nbyła bardziej szczegółowa, dwukrotnie kliknij część drogi bez punktu, a w tym miejscu nowy się\npojawi.\n\nJeżeli droga łączy się z inną drogą, ale nie jest prawidłowo połączona z nią na mapie, możesz\nprzeciągnąć jeden z puntów kontrolnych na drugą drogę w celu ich połączenia. Prawidłowe połączenia\ndróg są ważne dla mapy i kluczowe dla wyznaczania tras.\n\nMożesz też kliknąć narzędzie 'Przesuń' lub nacisnąć klawisz `M` aby przesunąć jednocześnie całą\ndrogę, a następnie kliknąć ponownie, aby zachować to przesunięcie.\n\n### Usuwanie\n\nGdy droga jest całkiem błędna - widzisz, że nie istnieje na zdjęciach satelitarnych (a najlepiej sam\nsprawdziłeś w terenie, że jej nie ma) - możesz usunąć ją. Uważaj, gdy usuwasz obiekty - wyniki usunięcia,\ntak jak każdej modyfikacji, są widoczne dla wszystkich, a zdjęcie satelitarne często nie są aktualne,\nwięc droga może być po prostu nowo wybudowana.\n\nMożesz usunąć drogę przez zaznaczenie jej, a następnie kliknięcie ikony kosza lub wciśnięcie\nklawisza 'Delete'.\n\n### Tworzenie\n\nGdzieś tam powinna być droga, ale jej nie ma? Kliknij przycisk 'Linia' w górnym lewym rogu edytora\nlub naciśnij klawisz '2' na klawiaturze, aby zacząć rysować linię.\n\nKliknij początek drogi na mapie, aby zacząć rysować. Jeżeli droga odchodzi od już istniejącej, zacznij\nprzez kliknięcie w miejscu, w którym się łączą.\n\nNastępnie klikaj na punktach wzdłuż drogi tak, aby biegła ona odpowiednio według zdjęć satelitarnych\nlub GPS. Jeżeli droga, którą rysujesz, krzyżuje się z inną, połącz je, klikając na punkcie przecięcia. Gdy\nskończysz rysować, dwukrotnie kliknij ostatni punkt lub naciśnij klawisz 'Enter' na klawiaturze.\n",
-        "gps": "# GPS\n\nDane GPS są najbardziej zaufanym źródłem dla OpenStreetMap. Ten edytor obsługuje lokalne ślady -\npliki `.gpx` na twoim komputerze. Możesz zbierać tego rodzaju ślady GPS używając aplikacji na\nsmartfony lub sprzętu GPS.\n\nInformacje jak używać GPS-u do zbierania informacji o okolicy możesz znaleźć pod\n[Zbieranie informacji z GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby użyć śladu GPX do rysowania mapy, przeciągnij i upuść plik GPX na edytor. Jeżeli zostanie\nrozpoznany, zostanie dodany na mapę w postaci jaskrawej linii. Kliknij menu 'Ustawienia tła'\npo prawej stronie, aby włączyć, wyłączyć lub powiększyć do nowej warstwy GPX.\n\nŚlad GPX nie jest bezpośrednio wysyłany do OpenStreetMap - najlepiej użyć go do rysowania mapy,\nużywając go jako wzoru dla nowych obiektów, które dodasz. Aby wysłać ślad na serwer odwiedź stronę \n [Publiczne ślady GPS](http://www.openstreetmap.org/trace/create), będziesz mógł go udostępnić\ninnym użytkownikom.\n",
         "imagery": "# Zdjęcia\n\nZdjęcia lotnicze/satelitarne są ważnym zasobem w rysowaniu map. Kolekcja zdjęć lotniczych,\nsatelitarnych i innych wolnodostępnych źródeł jest dostępna w edytorze w menu 'Ustawienia tła' po\nprawej stronie.\n\nDomyślnie wyświetlana jest warstwa zdjęć satelitarnych z [Bing Maps](http://www.bing.com/maps/),\nale w miarę przybliżania i pojawiają się nowe źródła. Niektóre kraje, takie jak Stany Zjednoczone, Francja\nczy Dania mają w pewnych miejscach dostępne zdjęcia bardzo wysokiej jakości.\n\nZdjęcia są czasem przesunięte względem danych na mapie z powodu błędu dostawcy zdjęć. Jeżeli\nwidzisz dużo dróg przesuniętych względem tła, zastanów się, zanim je wszystkie wyrównasz względem\ntła. Zamiast tego możesz dostosować przesunięcie zdjęć tak, aby zgadzały się z istniejącymi danymi przez\nnaciśnięcie przycisku 'Wyrównaj podkład' na dole Ustawień tła.\n",
         "addresses": "# Adresy\n\nAdresy są jedną z najbardziej użytecznych informacji na mapie.\n\nMimo że adresy są często reprezentowane jako części ulic, w OpenStreetMap są one\nzapisywane jako atrybuty budynków i miejsc wzdłuż ulicy.\n\nMożesz dodać nową informację adresową do miejsc narysowanych w postaci\nobwiedni budynków jak również do tych narysowanych w postaci pojedynczych punktów.\nNajlepszym źródłem danych adresowych jest jak zwykle zwiedzanie okolicy\nlub własna wiedza - tak jak z każdym innym obiektem, kopiowanie danych z komercyjnych\nźródeł takich jak Google Maps jest zabronione.\n",
         "inspector": "# Używanie Inspektora\n\nInspektor jest elementem interfejsu po lewej stronie strony, który pojawia się po zaznaczeniu obiektu\ni który pozwala ci modyfikować jego szczegóły.\n\n### Zaznaczanie typu obiektu\n\nPo dodaniu punktu, linii lub obszaru, możesz wybrać, jakiego rodzaju to jest obiekt, na przykład czy jest\nto autostrada czy droga lokalna, kawiarnia czy supermarket. Inspektor wyświetli przyciski dla\npopularnych typów obiektów, a ty możesz znaleźć inne przez wpisanie tego, czego szukasz do pola\nszukania.\n\nKliknij 'i' w prawym dolnym rogu przycisku typu obiektu, aby dowiedzieć się o nim więcej.\nKliknij przycisk, aby wybrać ten typ.\n\n### Używanie formularzy i edycja tagów\n\nPo wybraniu typu obiektu lub gdy wybierzesz obiekt, który ma już nadany typ, inspektor wyświetli pola\nzawierające szczegóły na temat obiektu, takie jak nazwa i adres.\n\nPoniżej pól, które widzisz, możesz kliknąć ikony w celu dodania innych szczegółów, jak na przykład\ninformacja z [Wikipedii](http://www.wikipedia.org/), dostęp dla wózków inwalidzkich i innych.\n\nNa dole inspektora kliknij 'Dodatkowe tagi', aby dodać dowolne inne tagi do elementu.\n[Taginfo](http://taginfo.openstreetmap.org/) jest świetnym źródłem informacji o popularnych\nkombinacjach tagów.\n\nZmiany, które wprowadzisz w inspektorze, są automatycznie nanoszone na mapę. Możesz je cofnąć w\nkażdym momencie przez wciśnięcie przycisku 'Cofnij'.\n\n### Zamykanie Inspektora\n\nMożesz zamknąć inspektora przez kliknięcie na przycisk zamknij w górnym prawym rogu, wciśnięcie\nklawisza 'Escape' lub kliknięcie mapy.\n",
@@ -513,7 +564,12 @@
                 "label": "Typ"
             },
             "aerialway/access": {
-                "label": "Dostęp"
+                "label": "Dostęp",
+                "options": {
+                    "entry": "Wejście",
+                    "exit": "Wyjście",
+                    "both": "Oba"
+                }
             },
             "aerialway/bubble": {
                 "label": "osłona przeciwwiatrowa"
@@ -534,7 +590,11 @@
                 "placeholder": "2, 4, 8..."
             },
             "aerialway/summer/access": {
-                "label": "Dostępność w sezonie letnim"
+                "label": "Dostępność w sezonie letnim",
+                "options": {
+                    "entry": "Wejście",
+                    "exit": "Wyjście"
+                }
             },
             "aeroway": {
                 "label": "Typ"
@@ -613,6 +673,9 @@
             "covered": {
                 "label": "Zadaszenie"
             },
+            "craft": {
+                "label": "Typ"
+            },
             "crossing": {
                 "label": "Typ"
             },
@@ -629,7 +692,14 @@
                 "label": "Opis"
             },
             "electrified": {
-                "label": "Elektryfikacja"
+                "label": "Elektryfikacja",
+                "placeholder": "Linia napowietrzna, Trzecia szyna",
+                "options": {
+                    "contact_line": "Linia napowietrzna",
+                    "rail": "Trzecia szyna",
+                    "yes": "Tak (nieokreślone)",
+                    "no": "Nie"
+                }
             },
             "elevation": {
                 "label": "Wysokość"
@@ -651,13 +721,26 @@
                 "label": "Opłata"
             },
             "fire_hydrant/type": {
-                "label": "Typ"
+                "label": "Typ",
+                "options": {
+                    "wall": "Mur",
+                    "pond": "Staw"
+                }
             },
             "fixme": {
                 "label": "Napraw mnie"
             },
             "fuel": {
                 "label": "Paliwo"
+            },
+            "fuel/biodiesel": {
+                "label": "Biodiesel"
+            },
+            "fuel/diesel": {
+                "label": "Diesel"
+            },
+            "fuel/e10": {
+                "label": "E10"
             },
             "fuel/e85": {
                 "label": "E85"
@@ -750,6 +833,9 @@
             "maxspeed": {
                 "label": "Ograniczenie prędkości",
                 "placeholder": "40, 50, 60..."
+            },
+            "mtb/scale": {
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/uphill": {
                 "placeholder": "0, 1, 2, 3...",
@@ -882,6 +968,18 @@
             "service": {
                 "label": "Typ"
             },
+            "service/bicycle/chaintool": {
+                "options": {
+                    "yes": "Tak",
+                    "no": "Nie"
+                }
+            },
+            "service/bicycle/pump": {
+                "options": {
+                    "yes": "Tak",
+                    "no": "Nie"
+                }
+            },
             "shelter": {
                 "label": "Schronienie"
             },
@@ -933,6 +1031,9 @@
             "sport_ice": {
                 "label": "Sport"
             },
+            "sport_racing": {
+                "label": "Sport"
+            },
             "structure": {
                 "label": "Struktura",
                 "placeholder": "Nieznane",
@@ -947,6 +1048,9 @@
             "studio_type": {
                 "label": "Typ"
             },
+            "substation": {
+                "label": "Typ"
+            },
             "supervised": {
                 "label": "Strzeżone"
             },
@@ -955,6 +1059,14 @@
             },
             "tactile_paving": {
                 "label": "Wypustki dla niewidomych"
+            },
+            "takeaway": {
+                "placeholder": "Tak, Nie, Tylko na wynos...",
+                "options": {
+                    "yes": "Tak",
+                    "no": "Nie",
+                    "only": "Tylko na wynos."
+                }
             },
             "toilets/disposal": {
                 "label": "Opróżnianie"
@@ -979,9 +1091,6 @@
             "trail_visibility": {
                 "label": "Widoczność szlaku",
                 "placeholder": "Doskonała, Dobra, Zła..."
-            },
-            "tree_type": {
-                "label": "Typ"
             },
             "trees": {
                 "label": "Drzewa"
@@ -1013,9 +1122,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Typ"
             }
         },
         "presets": {
@@ -1128,8 +1234,11 @@
                 "name": "Wypożyczalnia rowerów",
                 "terms": "wypożyczalnia"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "Punkt naprawy rowerów"
+            },
             "amenity/boat_rental": {
-                "name": "Wpożyczalnia łodzi",
+                "name": "Wypożyczalnia łodzi",
                 "terms": "wynajem łodzi"
             },
             "amenity/bureau_de_change": {
@@ -1195,7 +1304,7 @@
             },
             "amenity/drinking_water": {
                 "name": "Woda pitna",
-                "terms": "wodotrysk,woda pitna"
+                "terms": "wodotrysk,woda pitna,poidło"
             },
             "amenity/embassy": {
                 "name": "Ambasada",
@@ -1207,7 +1316,7 @@
             },
             "amenity/fire_station": {
                 "name": "Straż pożarna",
-                "terms": "straż,osp"
+                "terms": "straż,osp,psp,ochotnicza straż pożarna"
             },
             "amenity/fountain": {
                 "name": "Fontanna",
@@ -1220,6 +1329,9 @@
             "amenity/grave_yard": {
                 "name": "Cmentarz",
                 "terms": "cmentarz,pochówek"
+            },
+            "amenity/grit_bin": {
+                "name": "Pojemnik z piaskiem, żwirem..."
             },
             "amenity/hospital": {
                 "name": "Teren szpitala",
@@ -1285,6 +1397,9 @@
             "amenity/pub": {
                 "name": "Pub",
                 "terms": "pub,piwo,wino"
+            },
+            "amenity/public_bookcase": {
+                "name": "Półka bookcrossingowa"
             },
             "amenity/recycling": {
                 "name": "Recykling"
@@ -1464,14 +1579,15 @@
                 "terms": "sklep,komercyjny,sprzedaż,handlowy"
             },
             "building/construction": {
-                "name": "Budynek w budowie"
+                "name": "Budynek w budowie",
+                "terms": "Budowa"
             },
             "building/detached": {
                 "name": "Dom wolnostojący"
             },
             "building/dormitory": {
                 "name": "Akademik",
-                "terms": "Akademik, bursa, "
+                "terms": "Akademik, bursa, internat"
             },
             "building/entrance": {
                 "name": "Wejście/wyjście"
@@ -1502,7 +1618,7 @@
                 "terms": "chata,szałas,schronienie,koliba"
             },
             "building/industrial": {
-                "name": "Budynek przymysłowy",
+                "name": "Budynek przemysłowy",
                 "terms": "przemysłowy,produkcyjny,fabryczny,industrialny"
             },
             "building/kindergarten": {
@@ -1581,9 +1697,6 @@
             "craft/clockmaker": {
                 "name": "Zegarmistrz",
                 "terms": "zegarmistrz"
-            },
-            "craft/confectionery": {
-                "name": "Cukiernik"
             },
             "craft/dressmaker": {
                 "name": "Krawiec"
@@ -1864,7 +1977,7 @@
                 "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/track": {
-                "name": "Droga gruntowa",
+                "name": "Droga polna lub leśna",
                 "terms": "polna, leśna, gruntowa"
             },
             "highway/traffic_signals": {
@@ -1942,19 +2055,9 @@
             "landuse/churchyard": {
                 "name": "Dziedziniec kościelny"
             },
-            "landuse/commercial": {
-                "name": "Handlowy"
-            },
             "landuse/construction": {
                 "name": "Budowa",
                 "terms": "budowa,teren,budowy"
-            },
-            "landuse/farm": {
-                "name": "Teren rolny (orny)",
-                "terms": "Farma, gospodarstwo, zagroda"
-            },
-            "landuse/farmland": {
-                "name": "Pole uprawne"
             },
             "landuse/farmyard": {
                 "name": "Zabudowa rolnicza",
@@ -1964,12 +2067,12 @@
                 "name": "Las",
                 "terms": "Las"
             },
+            "landuse/garages": {
+                "name": "Garaże"
+            },
             "landuse/grass": {
                 "name": "Trawa",
                 "terms": "trawa, trawnik, "
-            },
-            "landuse/industrial": {
-                "name": "Obszar przemysłowy"
             },
             "landuse/landfill": {
                 "name": "Wysypisko",
@@ -1979,9 +2082,6 @@
                 "name": "Łąka",
                 "terms": "Łąka"
             },
-            "landuse/military": {
-                "name": "Wojskowy"
-            },
             "landuse/orchard": {
                 "name": "Sad",
                 "terms": "Sad"
@@ -1989,13 +2089,6 @@
             "landuse/quarry": {
                 "name": "Kamieniołom",
                 "terms": "kamieniołom, żwirownia, kruszywo"
-            },
-            "landuse/residential": {
-                "name": "Zabudowa mieszkalna",
-                "terms": "mieszkalny, zamieszkany, mieszkaniowy"
-            },
-            "landuse/retail": {
-                "name": "Obszar handlowy"
             },
             "landuse/vineyard": {
                 "name": "Winnica",
@@ -2025,6 +2118,9 @@
             "leisure/marina": {
                 "name": "Przystań",
                 "terms": "przystań"
+            },
+            "leisure/nature_reserve": {
+                "name": "Rezerwat przyrody"
             },
             "leisure/park": {
                 "name": "Park",
@@ -2066,6 +2162,9 @@
             "leisure/playground": {
                 "name": "Plac zabaw",
                 "terms": "plac zabaw"
+            },
+            "leisure/running_track": {
+                "name": "Bieżnia"
             },
             "leisure/slipway": {
                 "name": "Pochylnia okrętowa",
@@ -2154,6 +2253,9 @@
             "natural/beach": {
                 "name": "Plaża",
                 "terms": "plaża"
+            },
+            "natural/cave_entrance": {
+                "name": "Wejście do jaskini"
             },
             "natural/cliff": {
                 "name": "Klif",
@@ -2352,6 +2454,9 @@
             "power/sub_station": {
                 "name": "Podstacja"
             },
+            "power/substation": {
+                "name": "Podstacja"
+            },
             "power/tower": {
                 "name": "Wieża wysokiego napięcia"
             },
@@ -2496,6 +2601,10 @@
                 "name": "Sklep ogólnospożywczy",
                 "terms": "mały sklep, sklepik osiedlowy"
             },
+            "shop/copyshop": {
+                "name": "Punkt ksero",
+                "terms": "kopiowanie"
+            },
             "shop/deli": {
                 "name": "Delikatesy"
             },
@@ -2557,6 +2666,9 @@
             "shop/jewelry": {
                 "name": "Jubiler"
             },
+            "shop/kiosk": {
+                "name": "Kiosk z prasą"
+            },
             "shop/laundry": {
                 "name": "Pralnia",
                 "terms": "pralnia"
@@ -2581,6 +2693,9 @@
                 "name": "Sklep muzyczny",
                 "terms": "sklep muzyczny"
             },
+            "shop/newsagent": {
+                "name": "Sklep z prasą"
+            },
             "shop/optician": {
                 "name": "Optyk",
                 "terms": "optyk"
@@ -2594,6 +2709,15 @@
             },
             "shop/photo": {
                 "name": "sklep fotograficzny"
+            },
+            "shop/pyrotechnics": {
+                "name": "Sklep z ogniami sztucznymi"
+            },
+            "shop/religion": {
+                "name": "Sklep z dewocjonaliami"
+            },
+            "shop/scuba_diving": {
+                "name": "Sklep nurkowy"
             },
             "shop/seafood": {
                 "name": "Sklep z owocami morza"
@@ -2614,6 +2738,9 @@
             "shop/tailor": {
                 "name": "Krawiec",
                 "terms": "krawcowa, odzież na miarę"
+            },
+            "shop/tea": {
+                "name": "Herbaciarnia"
             },
             "shop/toys": {
                 "name": "Sklep z zabawkami",

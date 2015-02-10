@@ -72,7 +72,8 @@
                 "area": "Gjorde et område cirkulært."
             },
             "not_closed": "Dette kan ikke gøres cirkulært fordi det ikke er en løkke.",
-            "too_large": "Dette kan ikke laves rundt da  der ikke er nok vist kortudsnit."
+            "too_large": "Dette kan ikke laves rundt da  der ikke er nok vist kortudsnit.",
+            "connected_to_hidden": "Dette kan ikke laves rundt da det er forbundet til et skjult objekt."
         },
         "orthogonalize": {
             "title": "Firkantet",
@@ -86,14 +87,16 @@
                 "area": "Gjorde hjørner på et område retvinklede."
             },
             "not_squarish": "Dette kan ikke laves firkantet da det ikke er firkantet.",
-            "too_large": "Dette kan ikke laves firkantet da det ikke er nok vist kortudsnit."
+            "too_large": "Dette kan ikke laves firkantet da det ikke er nok vist kortudsnit.",
+            "connected_to_hidden": "Det kan ikke laves til en firkant da det er forbundet til et skjult objekt."
         },
         "straighten": {
             "title": "Ret lige",
             "description": "Ret denne linje lige ud",
             "key": "S",
             "annotation": "Rettede en linje ud.",
-            "too_bendy": "Denne linje kan ikke rettes ud da den er for alt for bøjet."
+            "too_bendy": "Denne linje kan ikke rettes ud da den er for alt for bøjet.",
+            "connected_to_hidden": "Denne linje kan ikke rettes lige ud da den er forbundet til et skjult objekt."
         },
         "delete": {
             "title": "Slet",
@@ -106,7 +109,8 @@
                 "relation": "Sletede en relation.",
                 "multiple": "Slettede {n} objekter."
             },
-            "incomplete_relation": "Dette objekt kan ikke slettes, da det ikke er blevet downloadet helt ned."
+            "incomplete_relation": "Dette objekt kan ikke slettes, da det ikke er blevet downloadet helt ned.",
+            "connected_to_hidden": "Dette kan ikke slettes da det er forbundet til et skjult objekt."
         },
         "add_member": {
             "annotation": "Tilføj et medlem til en relation."
@@ -127,7 +131,8 @@
             "description": "Kobl disse veje/områder fra hinanden.",
             "key": "D",
             "annotation": "Frakoblede linjer/områder.",
-            "not_connected": "Der er ikke nok linjer/områder her til at fraklippe."
+            "not_connected": "Der er ikke nok linjer/områder her til at fraklippe.",
+            "connected_to_hidden": "Dette kan ikke klippes over da det er forbundet til et skjult objekt."
         },
         "merge": {
             "title": "Fusioner",
@@ -151,7 +156,8 @@
                 "multiple": "Flyttede flere objekter."
             },
             "incomplete_relation": "Dette element kan ikke flyttes, fordi det ikke er fuldstændigt downloadet.",
-            "too_large": "Dette kan ikke flyttes pga der ikke er nok synligt."
+            "too_large": "Dette kan ikke flyttes pga der ikke er nok synligt.",
+            "connected_to_hidden": "Dette kan ikke flyttes da det er forbundet til et skjult objekt."
         },
         "rotate": {
             "title": "Roter",
@@ -161,7 +167,8 @@
                 "line": "Roterede en linje.",
                 "area": "Roterede et område."
             },
-            "too_large": "Dette kunne ikke blive roteret pga der ikke var nok synligt."
+            "too_large": "Dette kunne ikke blive roteret pga der ikke var nok synligt.",
+            "connected_to_hidden": "Dette kan ikke roteres da det er forbundet til et skjult objekt."
         },
         "reverse": {
             "title": "Reverser",
@@ -183,7 +190,8 @@
                 "multiple": "Split {n} afgrænsninger for linjer/områder ."
             },
             "not_eligible": "Linje kan ikke deles op ved deres begyndelse eller ende.",
-            "multiple_ways": "Der er for mange linjer her til at dele op."
+            "multiple_ways": "Der er for mange linjer her til at dele op.",
+            "connected_to_hidden": "Dette kan ikke klippes da det er forbundet til et skjult objekt."
         },
         "restriction": {
             "help": {
@@ -218,6 +226,10 @@
     "logout": "log ud",
     "loading_auth": "Forbinder til OpenStreetMap...",
     "report_a_bug": "rapporter en fejl",
+    "feature_info": {
+        "hidden_warning": "{count}  skjulte objekter",
+        "hidden_details": "Disse objekter er pt. skjulte: {details}"
+    },
     "status": {
         "error": "Er ikke i stand til at forbinde til API'et.",
         "offline": "API'et er off-line. Prøv venligst senere.",
@@ -231,6 +243,7 @@
         "upload_explanation_with_user": "Ændringer du som brugernavn {user} uploader, vil blive synlige på alle kort der bruger OpenStreetMap data.",
         "save": "Gem",
         "cancel": "Annuller",
+        "changes": "{count} Ændringer",
         "warnings": "Advarsler",
         "modified": "Modificeret",
         "deleted": "Slettet",
@@ -269,11 +282,16 @@
         "incomplete": "<ikke downloadet>",
         "feature_list": "Søgefunktioner",
         "edit": "Ret objekt",
+        "check": {
+            "yes": "Ja",
+            "no": "Nej"
+        },
         "none": "Ingen",
         "node": "Punkt",
         "way": "Vej",
         "relation": "Relation",
-        "location": "Lokalitet"
+        "location": "Lokalitet",
+        "add_fields": "Tilføj felt:"
     },
     "background": {
         "title": "Baggrund",
@@ -286,6 +304,78 @@
         "fix_misalignment": "Ret justering",
         "reset": "nulstil"
     },
+    "map_data": {
+        "title": "Kortdata",
+        "description": "Kortdata",
+        "data_layers": "Data lag",
+        "fill_area": "Fyldte områder",
+        "map_features": "Kortobjekter",
+        "autohidden": "Disse objekter er automatisk blevet skjult da ellers for mange vil blive vist på skærmen.\nDu kan zoome ind for at redigere i dem."
+    },
+    "feature": {
+        "points": {
+            "description": "Punkter",
+            "tooltip": "Interessepunkter"
+        },
+        "major_roads": {
+            "description": "Store veje",
+            "tooltip": "Veje, Gader, osv."
+        },
+        "minor_roads": {
+            "description": "Mindre veje",
+            "tooltip": "Serviceveje, parkeringspladsveje, markveje, skoveveje osv."
+        },
+        "paths": {
+            "description": "Stier",
+            "tooltip": "Fortov, gangstier, cykelstier, osv."
+        },
+        "buildings": {
+            "description": "Bygninger",
+            "tooltip": "Bygninger, Shelter, Garager, osv."
+        },
+        "landuse": {
+            "description": "Landområdeobjekter",
+            "tooltip": "Skove, Marker, Parker, Boligområder, Handelsområder, os.v"
+        },
+        "boundaries": {
+            "description": "Grænser",
+            "tooltip": "Administrative grænser"
+        },
+        "water": {
+            "description": "Vandobjekter",
+            "tooltip": "Floder, Søer, Damme, Basiner, osv."
+        },
+        "rail": {
+            "description": "Jernbaneobjekter",
+            "tooltip": "Jernbaner"
+        },
+        "power": {
+            "description": "Elektricitetsobjekter",
+            "tooltip": "Højspændingsmaster, kraftstationer, transformatorstationer, osv."
+        },
+        "past_future": {
+            "description": "Fortid/Fremtid",
+            "tooltip": "Planlagt, Konstruktion, Forladt, Tilintetgjort, osv."
+        },
+        "others": {
+            "description": "Andet",
+            "tooltip": "Alt andet"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "Ingen fyld (Trådnet)",
+            "tooltip": "At slå trådnet visning til gør det lettere at se baggrundsbilledet."
+        },
+        "partial": {
+            "description": "En smule fyldt",
+            "tooltip": "Områder er optegnet med fyld kun omkring inderkanten. (Anbefales til nybegyndere)"
+        },
+        "full": {
+            "description": "Fuldt fyld",
+            "tooltip": "Områder er optegnet med fuldt fyld."
+        }
+    },
     "restore": {
         "heading": "Du har ændringer der ikke er gemt endnu",
         "description": "Ønsker du at gendanne ikke gemte ændringer fra en foregående session?",
@@ -297,6 +387,7 @@
         "help": "Gem ændringer til OpenStreetMap og gør dem synlige for andre brugere.",
         "no_changes": "Ingen ændringer at gemme.",
         "error": "Der skete en fejl under forsøget på at gemme",
+        "unknown_error_details": "Vær sikker på du er forbundet til internettet.",
         "uploading": "Gemmer ændringer til OpenStreetMap.",
         "unsaved_changes": "Du har endnu ikke gemte ændringer"
     },
@@ -573,11 +664,17 @@
             "barrier": {
                 "label": "Type"
             },
+            "bench": {
+                "label": "Bænk"
+            },
             "bicycle_parking": {
                 "label": "Type"
             },
             "boundary": {
                 "label": "Type"
+            },
+            "brand": {
+                "label": "Brand"
             },
             "building": {
                 "label": "Bygning"
@@ -640,6 +737,9 @@
             },
             "cuisine": {
                 "label": "Cuisine"
+            },
+            "delivery": {
+                "label": "Levering"
             },
             "denomination": {
                 "label": "Trosretning"
@@ -724,6 +824,15 @@
             "gauge": {
                 "label": "Sporvidde"
             },
+            "gender": {
+                "label": "Køn",
+                "placeholder": "Ukendt",
+                "options": {
+                    "male": "Mand",
+                    "female": "Kvinde",
+                    "unisex": "Unisex"
+                }
+            },
             "generator/method": {
                 "label": "Metode"
             },
@@ -785,6 +894,25 @@
             },
             "layer": {
                 "label": "Lag"
+            },
+            "leaf_cycle": {
+                "label": "Bladcyklus",
+                "options": {
+                    "evergreen": "Altid grønt",
+                    "deciduous": "Løvfældende",
+                    "semi_evergreen": "Semi-grønt",
+                    "semi_deciduous": "Semi-løvfældende",
+                    "mixed": "Blandet"
+                }
+            },
+            "leaf_type": {
+                "label": "Bladtype",
+                "options": {
+                    "broadleaved": "Løvtræsblade",
+                    "needleleaved": "Nåleblade",
+                    "mixed": "Blandet",
+                    "leafless": "Bladløs"
+                }
             },
             "leisure": {
                 "label": "Type"
@@ -1007,6 +1135,22 @@
             "service": {
                 "label": "Type"
             },
+            "service/bicycle/chaintool": {
+                "label": "Kædeværktøj",
+                "options": {
+                    "undefined": "Forventet at være Nej",
+                    "yes": "Ja",
+                    "no": "Nej"
+                }
+            },
+            "service/bicycle/pump": {
+                "label": "Luftpumpe",
+                "options": {
+                    "undefined": "Er forventet at være Nej",
+                    "yes": "Ja",
+                    "no": "Nej"
+                }
+            },
             "shelter": {
                 "label": "Shelter"
             },
@@ -1075,6 +1219,9 @@
             "studio_type": {
                 "label": "Type"
             },
+            "substation": {
+                "label": "Type"
+            },
             "supervised": {
                 "label": "Supervision"
             },
@@ -1083,6 +1230,15 @@
             },
             "tactile_paving": {
                 "label": "Tactile Paving"
+            },
+            "takeaway": {
+                "label": "Takeaway",
+                "placeholder": "Ja, Nej, kun Takeaway...",
+                "options": {
+                    "yes": "Ja",
+                    "no": "Nej",
+                    "only": "Kun Takeway"
+                }
             },
             "toilets/disposal": {
                 "label": "Bortskaffelse affald",
@@ -1122,9 +1278,6 @@
                     "no": "Nej: sporløse, kræves glimrende orientering færdigheder"
                 }
             },
-            "tree_type": {
-                "label": "Type"
-            },
             "trees": {
                 "label": "Træer"
             },
@@ -1155,9 +1308,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Type"
             }
         },
         "presets": {
@@ -1277,6 +1427,10 @@
                 "name": "Cykeludlejning",
                 "terms": "Cykeludlejning, Rent-a-Bike"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "Cykelværktøjlån",
+                "terms": "Cykelværktøjlån, Cykelværktøj"
+            },
             "amenity/boat_rental": {
                 "name": "Bådudlejning",
                 "terms": "Bådudlejning, lystbådudlejning"
@@ -1329,6 +1483,10 @@
                 "name": "Universitetsområder",
                 "terms": "Universitetsområder"
             },
+            "amenity/community_centre": {
+                "name": "Medborgerhus",
+                "terms": "Medborgerhus, Forsamlingshus"
+            },
             "amenity/compressed_air": {
                 "name": "Luftpumpe",
                 "terms": "Luftpumpe, Billuftpumpe"
@@ -1376,6 +1534,10 @@
             "amenity/grave_yard": {
                 "name": "Kirkegård",
                 "terms": "Kirkegård, Gravsted"
+            },
+            "amenity/grit_bin": {
+                "name": "Vejsaltkasse",
+                "terms": "Vejsaltkasse, Saltkasse"
             },
             "amenity/hospital": {
                 "name": "Hospitalsområde",
@@ -1445,6 +1607,10 @@
                 "name": "Værtshus",
                 "terms": "Værtshus, Pub, Ølstue"
             },
+            "amenity/public_bookcase": {
+                "name": "Bogkasse",
+                "terms": "Bogkasse"
+            },
             "amenity/ranger_station": {
                 "name": "Rangerstation",
                 "terms": "Rangerstation"
@@ -1452,6 +1618,10 @@
             "amenity/recycling": {
                 "name": "Genbrug",
                 "terms": "Genbrug"
+            },
+            "amenity/register_office": {
+                "name": "Tinglysningskontor",
+                "terms": "Tinglysningskontor"
             },
             "amenity/restaurant": {
                 "name": "Restaurant",
@@ -1787,7 +1957,7 @@
             },
             "craft/confectionery": {
                 "name": "Slikbutik",
-                "terms": "Slikbutik, Konfekturebutik"
+                "terms": "Slikbutik, Chokoladeforretning"
             },
             "craft/dressmaker": {
                 "name": "Skrædder",
@@ -2193,6 +2363,10 @@
                 "name": "Vejsideskrin",
                 "terms": "Vejsideskrin"
             },
+            "junction": {
+                "name": "Vejfletning",
+                "terms": "Vejfletning, Gadefletning"
+            },
             "landuse": {
                 "name": "Brug af land",
                 "terms": "Brug af land"
@@ -2227,7 +2401,7 @@
             },
             "landuse/farmland": {
                 "name": "Landbrugsjord",
-                "terms": "Landbrugsjord, Marker"
+                "terms": "Landbrugsjord"
             },
             "landuse/farmyard": {
                 "name": "Gårdsplads",
@@ -2237,13 +2411,17 @@
                 "name": "Skov",
                 "terms": "Skov, Plantageskov"
             },
+            "landuse/garages": {
+                "name": "Garager",
+                "terms": "Garager"
+            },
             "landuse/grass": {
                 "name": "Græs",
                 "terms": "Græs"
             },
             "landuse/industrial": {
                 "name": "Industriområde",
-                "terms": "Industriområde, Fabriksområde"
+                "terms": "Industriområde"
             },
             "landuse/landfill": {
                 "name": "Losseplads",
@@ -2254,8 +2432,8 @@
                 "terms": "Eng"
             },
             "landuse/military": {
-                "name": "Militær",
-                "terms": "Militær"
+                "name": "Militært område",
+                "terms": "Militært område, Militærbase"
             },
             "landuse/orchard": {
                 "name": "Frugtplantage",
@@ -2266,12 +2444,12 @@
                 "terms": "Grusgrav, Stenbrud, Minedriftsområde"
             },
             "landuse/residential": {
-                "name": "Beboelsesområde",
-                "terms": "Boligområde"
+                "name": "Beboet område",
+                "terms": "Beboet område"
             },
             "landuse/retail": {
                 "name": "Handelsområde",
-                "terms": "Handelsområde, Butiksområde"
+                "terms": "Handelsområde"
             },
             "landuse/vineyard": {
                 "name": "Vingård",
@@ -2309,12 +2487,16 @@
                 "name": "Lystbådehavn",
                 "terms": "Lystbådehavn, Marina"
             },
+            "leisure/nature_reserve": {
+                "name": "Naturreservat",
+                "terms": "Naturreservat"
+            },
             "leisure/park": {
                 "name": "Park",
                 "terms": "Park, Parkområde"
             },
             "leisure/picnic_table": {
-                "name": "Picnicborg",
+                "name": "Picnicbord",
                 "terms": "Picnicbord, Frokostbord"
             },
             "leisure/pitch": {
@@ -2468,6 +2650,10 @@
             "natural/beach": {
                 "name": "Strand",
                 "terms": "Strand"
+            },
+            "natural/cave_entrance": {
+                "name": "Huleindgang",
+                "terms": "Huleindgang"
             },
             "natural/cliff": {
                 "name": "Klint",
@@ -2690,6 +2876,10 @@
                 "terms": "Elmast (telefonmast)"
             },
             "power/sub_station": {
+                "name": "Transformatorstation",
+                "terms": "Transformatorstation"
+            },
+            "power/substation": {
                 "name": "Transformatorstation",
                 "terms": "Transformatorstation"
             },
@@ -3001,6 +3191,10 @@
                 "name": "Radioforhandler",
                 "terms": "Værktøjsbutik"
             },
+            "shop/houseware": {
+                "name": "Køkkenudstyr",
+                "terms": "Køkkenudstyr"
+            },
             "shop/interior_decoration": {
                 "name": "Indendørsudsmykningsbutik",
                 "terms": "Indendørsudsmykningsbutik"
@@ -3272,6 +3466,22 @@
             "tourism/zoo": {
                 "name": "Zoologisk have",
                 "terms": "Zoologisk have, Zoo"
+            },
+            "traffic_calming/bump": {
+                "name": "Vejbump",
+                "terms": "Vejbump"
+            },
+            "traffic_calming/hump": {
+                "name": "Fartbumprampe",
+                "terms": "Fartbumprampe"
+            },
+            "traffic_calming/rumble_strip": {
+                "name": "Rumlestriber",
+                "terms": "Rumlestriber,  Rumleriller"
+            },
+            "traffic_calming/table": {
+                "name": "Fodgængerfelt",
+                "terms": "Fodgængerfelt, Fodgængerovergang"
             },
             "type/boundary": {
                 "name": "Grænse",
