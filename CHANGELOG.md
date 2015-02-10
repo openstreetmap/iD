@@ -1,3 +1,40 @@
+## 1.6.3
+
+* Fix typo in smoothness field - should be "impassable" (#2523)
+* Update to Mapillary API v2 calls (#2522)
+* Add Rounded tooltips (#2521)
+* Add gender field to amenity=toilets preset (#2422)
+* Update landuse presets (no single nodes, and better descriptions) (#2518)
+* Update tree and forest presets to use leaf_type and leaf_cycle fields (#2512)
+* Add shop=houseware preset (#2509)
+* Make "Yes" and "No" translatable (#2286)
+* Fix group home preset (#2510)
+* Add amenity=grit_bin preset (#2500)
+* Prevent user from zooming out too far when drawing (#2499)
+* Add amenity=bicycle_repair_station preset (#2497)
+* Add leisure=nature_reserve preset (#2496)
+* Support copy and paste of selected features with ⌘-C/⌘-V (#642)
+* Add amenity=public_bookcase preset (#2507)
+* Add substation type field (#2486)
+* Add junction=yes preset (#2484)
+* Add takeaway and delivery fields to food presets (#2483)
+* Add levels field to building=commercial preset (#2454)
+* Add amenity=register_office preset (#2431)
+* Add landuse=garages preset (#2430)
+* Add natural=cave_entrance preset (#2412)
+* Add amenity=fast_food preset (#2446)
+* Switch to landuse=farmland as preferred Farm preset (#2478)
+* Add bench and covered fields to bus stop preset (#2451)
+* Replace icon fields with dropdown (#2433)
+* Add Map Data panel
+    - Data Layers (GPX, Mapillary)
+    - Area filling options (full, partial, wireframe) (#813)
+    - Map Features filtering (#1299, #1871, #2033)
+
+## 1.6.2
+
+* Fix "TypeError: r is undefined" (#2421)
+
 ## 1.6.1
 
 * Remember raw tag editor expansion state across sessions (#2416)
@@ -11,7 +48,7 @@
 
 ## 1.6.0
 
-* Add nework field to Road Route relation preset (#2372)
+* Add network field to Road Route relation preset (#2372)
 * Updated TIGER layer to use TIGER 2014
 * Added support for street-level imagery from Mapillary
 * Added support for taginfo projects data
