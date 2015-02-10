@@ -1071,6 +1071,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     text-align: right;
 }
 
+.form-label-button-wrap .tag-reference-button {
+    border-radius: 0 3px 0 0;
+}
+
 .form-label-button-wrap .icon {
     opacity: .5;
 }
@@ -2207,9 +2211,13 @@ img.wiki-image {
 #attrib {
     width: 100%;
     height: 20px;
+    margin-bottom: 5px;
     float: left;
     clear: both;
+    pointer-events: none;
 }
+
+#attrib * { pointer-events: all; }
 
 .base-layer-attribution,
 .overlay-layer-attribution {
@@ -2318,7 +2326,7 @@ img.wiki-image {
     clear: both;
     text-align: right;
     width: 100%;
-    padding: 0px 5px;
+    padding: 0px 10px;
 }
 
 .api-status.offline,
@@ -2413,7 +2421,8 @@ img.wiki-image {
     display: block;
     content: '';
     height: 100px;
-    width: 100px;
+    width: 100%;
+    max-width: 100px;
     margin: auto;
     margin-bottom: 10px;
     background:transparent url(img/sprite.svg) no-repeat 0 -220px;
