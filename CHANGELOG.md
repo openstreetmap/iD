@@ -1,4 +1,4 @@
-## 1.6.3
+## 1.7.0
 
 * Fix typo in smoothness field - should be "impassable" (#2523)
 * Update to Mapillary API v2 calls (#2522)
