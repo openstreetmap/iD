@@ -1186,7 +1186,7 @@
                     "very_bad": "Garde au sol élevée : véhicule léger tout terrain",
                     "horrible": "Hors-Piste : Gros véhicule hors-piste",
                     "very_horrible": "Spécialisé tout-terrain : tracteur, véhicule tout-terrain",
-                    "impassible": "Impossible / Pas de véhicule avec des roues"
+                    "impassable": "Infranchissable / Pas de véhicules à roues"
                 }
             },
             "social_facility_for": {
@@ -2345,11 +2345,11 @@
             },
             "historic/memorial": {
                 "name": "Mémorial",
-                "terms": "Mémorial"
+                "terms": "Mémorial, Monument aux morts, statue, buste, stèle, plaque"
             },
             "historic/monument": {
-                "name": "Monument",
-                "terms": "Monument"
+                "name": "Monument commémoratif",
+                "terms": "Grand mémorial"
             },
             "historic/ruins": {
                 "name": "Ruines",

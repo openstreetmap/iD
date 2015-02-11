@@ -1186,7 +1186,7 @@
                     "very_bad": "Gran Despeje: vehículo todoterreno de trabajo livianos",
                     "horrible": "Todoterreno: vehículo todoterreno de trabajo pesado",
                     "very_horrible": "Todoterreno especializado: tractor, cuatriciclos",
-                    "impassible": "Impracticable / No apto para vehículos de ruedas"
+                    "impassable": "Impasable / Ningún vehículo con ruedas"
                 }
             },
             "social_facility_for": {

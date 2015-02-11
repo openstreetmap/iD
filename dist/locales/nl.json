@@ -1186,7 +1186,7 @@
                     "very_bad": "Grote Bodemvrijheid: lichte offroadvoertuigen",
                     "horrible": "Offroad: zware offroadvoertuigen",
                     "very_horrible": "Gespecialiseerde offroad: tractor, quad",
-                    "impassible": "Ondoordringbaar / Geen voertuig op wielen"
+                    "impassable": "Ontoegankelijk / Geen voertuig op wielen"
                 }
             },
             "social_facility_for": {
@@ -1823,7 +1823,8 @@
                 "name": "Rijhuizen"
             },
             "building/train_station": {
-                "name": "Treinstation"
+                "name": "Treinstation",
+                "terms": "station, NMBS, NS, spoorwegstation"
             },
             "building/university": {
                 "name": "Gebouw van universiteit of hogeschool",
@@ -3211,7 +3212,8 @@
                 "name": "Autoroute"
             },
             "type/route/train": {
-                "name": "Treinroute"
+                "name": "Treinroute",
+                "terms": "spoor, NMBS, NS"
             },
             "type/route/tram": {
                 "name": "Tramtraject"

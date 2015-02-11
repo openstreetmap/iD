@@ -1094,8 +1094,7 @@
                     "bad": "強化輪胎：休旅自行車、汽車、人力車",
                     "very_bad": "輕量化：低負重越野車輛",
                     "horrible": "越野：高負重越野車輛",
-                    "very_horrible": "越野專用：拖拉機、全地形越野車",
-                    "impassible": "不可能 / 無輪車輛"
+                    "very_horrible": "越野專用：拖拉機、全地形越野車"
                 }
             },
             "social_facility_for": {

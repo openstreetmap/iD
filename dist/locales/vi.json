@@ -1186,7 +1186,7 @@
                     "very_bad": "Gầm Cao: Xe xa đường nhẹ",
                     "horrible": "Xa đường: Xe xa đường nặng",
                     "very_horrible": "Xa đường Chuyên dụng: Máy kéo, ATV",
-                    "impassible": "Không thể qua được bằng bánh xe"
+                    "impassable": "Không thể qua được bằng bánh xe"
                 }
             },
             "social_facility_for": {

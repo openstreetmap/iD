@@ -1185,8 +1185,7 @@
                     "bad": "Rossz: vastagabb kerékkel, terepbiciklivel, autóval, riksával járható",
                     "very_bad": "Nagyon rossz:  Könnyű terepjárós út",
                     "horrible": "Borzalmas: Off-Road - nagy teherbírású terepjáróval járható",
-                    "very_horrible": "Extrém borzalmas: Traktor ajánlott.",
-                    "impassible": "Lehetetlen kerekes járművel közlekedni"
+                    "very_horrible": "Extrém borzalmas: Traktor ajánlott."
                 }
             },
             "social_facility_for": {

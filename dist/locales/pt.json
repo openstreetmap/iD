@@ -1186,7 +1186,7 @@
                     "very_bad": "Má: carroças, SUVs, etc.",
                     "horrible": "Muito má: bicicletas de montanha, carros todo-o-terreno, etc.",
                     "very_horrible": "Péssima: tratores, moto-quatros, etc.",
-                    "impassible": "Intransitável: Transito impossível a veículos com rodas"
+                    "impassable": "Intransitável / Veículos sem rodas"
                 }
             },
             "social_facility_for": {

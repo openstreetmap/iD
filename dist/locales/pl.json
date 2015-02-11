@@ -1014,8 +1014,7 @@
                     "bad": "Solidne koła: rower trekkingowy, samochód, riksza",
                     "very_bad": "Duży prześwit: lekki pojazd terenowy",
                     "horrible": "Off-road: ciężki pojazd terenowy",
-                    "very_horrible": "Wyspecjalizowany off-road: traktor, ATV (quad)",
-                    "impassible": "Nieprzejezdny dla pojazdów kołowych"
+                    "very_horrible": "Wyspecjalizowany off-road: traktor, ATV (quad)"
                 }
             },
             "social_facility_for": {

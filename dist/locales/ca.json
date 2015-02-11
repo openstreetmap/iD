@@ -1176,8 +1176,7 @@
                     "bad": "Rodes robustes: bicicleta de muntanya, cotxe, carruatge oriental",
                     "very_bad": "Gran altura: vehicle utilitari lleuger tot terreny",
                     "horrible": "Tot terreny : vehicle utilitari pesant tot terreny",
-                    "very_horrible": "Tot terreny especialitzades: tractors, Quads",
-                    "impassible": "Intransitable / Cap vehicle amb rodes"
+                    "very_horrible": "Tot terreny especialitzades: tractors, Quads"
                 }
             },
             "social_facility_for": {

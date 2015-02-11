@@ -1186,7 +1186,7 @@
                     "very_bad": "Altezza da terra elevata: veicoli fuoristrada leggeri e simili",
                     "horrible": "Fuoristrada: veicoli fuoristrada pesanti e simili. ",
                     "very_horrible": "Fuoristrada speciali: trattori agricoli, quad-bike, autoblindo e simili",
-                    "impassible": "Nessun veicolo ruotato"
+                    "impassable": "Nessun veicolo ruotato"
                 }
             },
             "social_facility_for": {

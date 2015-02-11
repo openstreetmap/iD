@@ -285,6 +285,55 @@
         "fix_misalignment": "Çizilemeyi ya da başka deyişle hizalamayı onar.",
         "reset": "Sıfırla"
     },
+    "map_data": {
+        "title": "Harita Verisi",
+        "description": "Harita Verisi",
+        "data_layers": "Veri Katmanları",
+        "fill_area": "Alanları Doldur",
+        "map_features": "Harita Özellikleri",
+        "autohidden": "Bu özellikler ekranda çok sayıda gösterilebileceği için otomatik olarak gizlendi. Düzenlemek için zum yapabilirsiniz."
+    },
+    "feature": {
+        "points": {
+            "description": "Noktalar"
+        },
+        "major_roads": {
+            "tooltip": "Karayolu, Sokak, vb."
+        },
+        "buildings": {
+            "description": "Binalar",
+            "tooltip": "Binalar, Barınaklar, Garajlar, vb."
+        },
+        "landuse": {
+            "description": "Arazi Özellikleri",
+            "tooltip": "Ormanlar, Tarım arazisi, Parklar, Yerleşim, Ticari, vb."
+        },
+        "boundaries": {
+            "description": "Sınırlar"
+        },
+        "water": {
+            "tooltip": "Nehirler, Göller, Havuzlar, Havzalar, vb."
+        },
+        "rail": {
+            "description": "Demiryolu Özellikleri",
+            "tooltip": "Demiryolları"
+        },
+        "power": {
+            "tooltip": "Enerji Nakil Hatları, Enerji Santralleri, Trafolar, vb."
+        },
+        "others": {
+            "tooltip": "Geriye Kalanlar"
+        }
+    },
+    "area_fill": {
+        "partial": {
+            "description": "Kısmen Doldur"
+        },
+        "full": {
+            "description": "Tamamen Doldur",
+            "tooltip": "Alanlar tamamen doldurulmuş olarak çizildi."
+        }
+    },
     "restore": {
         "heading": "Kaydedilmemiş bir değişikliğiniz var",
         "description": "Daha önceki oturumunuzdan kaydedilmemiş değişiklikler var. Bu değişiklikleri geri getirmek ister misiniz?",
@@ -296,6 +345,7 @@
         "help": "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz.",
         "no_changes": "Kaydedilecek bir değişiklik yok",
         "error": "Kaydederken bir hata oluştu",
+        "unknown_error_details": "Lütfen internete bağlı olduğunuzdan emin olun.",
         "uploading": "Değişiklikleriniz OpenStreetMap'e gönderiliyor.",
         "unsaved_changes": "Kaydedilmemiş değişiklikleriniz var"
     },
@@ -349,6 +399,9 @@
         "zoom": "GPX izine yakınlaş",
         "browse": ".gpx dosyası için gözat"
     },
+    "mapillary": {
+        "view_on_mapillary": "Bu resmi Mapillary'de görüntüle"
+    },
     "help": {
         "title": "Yardım",
         "help": "# Yardım\n\nBu, dünyanın özgür ve düzenlenebilir haritası [OpenStreetMap](http://www.openstreetmap.org/)\niçin bir düzenleyici. Bunu bulunduğunuz bölgeyle ilgili bir veri\neklemek ya da güncellemek, böylece herkes için daha iyi bir açık kaynak\nve açık veri  bir dünya haritası oluşturmak için kullanabilirsiniz\n\nBu haritada yaptığınız düzenlemeler OpenStreetMap kullanan herkesçe\ngörülebilir olacak. Düzenleyebilek için bir \n[ücretsiz OpenStreetMap kullanıcısına](https://www.openstreetmap.org/user/new)\ngereksiniminiz var.\n\n[iD düzenleyicisi](http://ideditor.com/) ortak çaba ürünü bir proje ya da başka deyişle tasarı ve [kaynak kodu GitHub üzerinden erişilebilir](https://github.com/openstreetmap/iD).\n"
@@ -377,6 +430,7 @@
         "areas": {
             "title": "Alanlar",
             "corner": "Alanlar alan sınırlarını belirleyen noktaların konulması ile çizilirler. **Test alanında bir alanın köşe noktasına tıklayarak çizime başlayın.**",
+            "place": "Alanı daha fazla nokta ekleyerek çiziniz. Başladığınız noktaya tıklayarak alan çizimini bitiriniz. **Test alanı için bir alan çiziniz.**",
             "search": "**'{name}' ara.**",
             "choose": "**Listeden Oyunalanı seç.**",
             "describe": "**Bir ad ekleyerek editörü kapatınız**"

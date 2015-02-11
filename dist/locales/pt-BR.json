@@ -1185,8 +1185,7 @@
                     "bad": "Rodas resistentes: trekking bike, carro, riquixá",
                     "very_bad": "Alta desobstrução: veículo fora de estrada para serviço leve",
                     "horrible": "Fora de estrada:  veículo fora de estrada para serviço pesado.",
-                    "very_horrible": "Especializado em fora de estrada: trator, quadriciclo",
-                    "impassible": "Indiferente / Não para veículos sobre rodas"
+                    "very_horrible": "Especializado em fora de estrada: trator, quadriciclo"
                 }
             },
             "social_facility_for": {

@@ -1031,8 +1031,7 @@
                     "bad": "Robustna kolesa: za treking kolo, avto, rikšo ipd.",
                     "very_bad": "Visoko podvozje: za vozila z večjim odmikom od tal, lažje terence",
                     "horrible": "Terenska vozila: za terenska vozila ipd.",
-                    "very_horrible": "Posebna terenska vozila: traktor, štirikolesnik, tank, gorsko kolo",
-                    "impassible": "Neprehodno - za nobeno vozilo s kolesi"
+                    "very_horrible": "Posebna terenska vozila: traktor, štirikolesnik, tank, gorsko kolo"
                 }
             },
             "social_facility_for": {

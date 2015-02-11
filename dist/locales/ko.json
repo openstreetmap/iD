@@ -73,7 +73,7 @@
             },
             "not_closed": "지역이 닫혀있지 않기 때문에 둥글게 만들 수 없습니다.",
             "too_large": "지역이 현재 충분히 보이지 않기 때문에 둥글게 만들 수 없습니다.",
-            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 둥글게 만들 수 없습니다."
+            "connected_to_hidden": "이것은 숨겨진 지물에 연결되어 있기 때문에 둥글게 만들 수 없습니다."
         },
         "orthogonalize": {
             "title": "사각지기",
@@ -88,7 +88,7 @@
             },
             "not_squarish": "사각 형태가 아니기 때문에 사각지게 만들 수 없습니다.",
             "too_large": "지역이 현재 충분히 보이지 않기 때문에 사각지게 만들 수 없습니다.",
-            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 사각지게 만들 수 없습니다."
+            "connected_to_hidden": "이것은 숨겨진 지물에 연결되어 있기 때문에 사각지게 만들 수 없습니다."
         },
         "straighten": {
             "title": "곧게 하기",
@@ -96,7 +96,7 @@
             "key": "S",
             "annotation": "선을 곧게 했습니다.",
             "too_bendy": "너무 구부러져 있기 때문에 곧게 할 수 없습니다.",
-            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 곧게 할 수 없습니다."
+            "connected_to_hidden": "이것은 숨겨진 지물에 연결되어 있기 때문에 곧게 할 수 없습니다."
         },
         "delete": {
             "title": "삭제",
@@ -109,8 +109,8 @@
                 "relation": "관계를 삭제했습니다.",
                 "multiple": "개체 {n}개를 삭제했습니다."
             },
-            "incomplete_relation": "이 기능은 완전히 다운로드되어 있지 않기 때문에 삭제할 수 없습니다.",
-            "connected_to_hidden": "이것은 숨겨진 기능에 연결되어 있기 때문에 삭제할 수 없습니다."
+            "incomplete_relation": "이 지물은 완전히 다운로드되어 있지 않기 때문에 삭제할 수 없습니다.",
+            "connected_to_hidden": "이것은 숨겨진 지물에 연결되어 있기 때문에 삭제할 수 없습니다."
         },
         "add_member": {
             "annotation": "관계에 구성원을 추가했습니다."

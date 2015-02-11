@@ -545,6 +545,7 @@
                 "label": "Prieiga",
                 "placeholder": "Nežinoma",
                 "types": {
+                    "access": "Bendra",
                     "foot": "Pėstieji",
                     "motor_vehicle": "Motorinis transportas",
                     "bicycle": "Dviračiai",
@@ -671,6 +672,9 @@
             },
             "boundary": {
                 "label": "Tipas"
+            },
+            "brand": {
+                "label": "Markė"
             },
             "building": {
                 "label": "Pastatas"
@@ -818,6 +822,14 @@
             },
             "gauge": {
                 "label": "Matuoklis"
+            },
+            "gender": {
+                "label": "Lytis",
+                "placeholder": "Nežinoma",
+                "options": {
+                    "male": "Vyras",
+                    "female": "Moteris"
+                }
             },
             "generator/method": {
                 "label": "Metodas"
@@ -1111,10 +1123,11 @@
                 }
             },
             "smoothness": {
-                "label": "Tikslumas",
-                "options": {
-                    "impassible": "Nepravažiuojama / jokiam ratuotam transportui"
-                }
+                "label": "Tikslumas"
+            },
+            "social_facility_for": {
+                "label": "Aptarnaujama žmonių",
+                "placeholder": "Benamiai, neįgalūs, vaikai ir pan."
             },
             "source": {
                 "label": "Šaltinis"
@@ -1458,7 +1471,8 @@
                 "name": "Mokyklos kiemas"
             },
             "amenity/shelter": {
-                "name": "Pastogė"
+                "name": "Pastogė",
+                "terms": "pastogė"
             },
             "amenity/social_facility/food_bank": {
                 "name": "Maisto  bankas",
@@ -1477,7 +1491,8 @@
                 "terms": "baseinas,plaukimo baseinas"
             },
             "amenity/taxi": {
-                "name": "Taksi stendas"
+                "name": "Taksi stendas",
+                "terms": "taksi aikštelė"
             },
             "amenity/telephone": {
                 "name": "Telefonas",
@@ -1496,7 +1511,8 @@
                 "terms": "rotušė"
             },
             "amenity/university": {
-                "name": "Universiteto kiemas"
+                "name": "Universiteto kiemas",
+                "terms": "universiteto teritorija"
             },
             "amenity/vending_machine": {
                 "name": "Prekių automatas"

@@ -1050,8 +1050,7 @@
                     "bad": "强化轮胎：休旅自行车，汽车，人力车",
                     "very_bad": "轻量化：低负重越野车辆",
                     "horrible": "越野：高负重越野车辆",
-                    "very_horrible": "越野专用：拖拉机，全地形越野车",
-                    "impassible": "不可能/无轮车辆"
+                    "very_horrible": "越野专用：拖拉机，全地形越野车"
                 }
             },
             "social_facility_for": {

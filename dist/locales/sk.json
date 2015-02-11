@@ -1185,8 +1185,7 @@
                     "bad": "Pevné kolesá: trekový bicykel, auto, rikša",
                     "very_bad": "Zvýšený podvozok: ľahké off-road vozidlo",
                     "horrible": "Off-road: výkonné off-road vozidlo",
-                    "very_horrible": "Špecializovaný off-road: traktor, štvorkolka",
-                    "impassible": "Nepriechodné / Nie pre kolesové vozidlá"
+                    "very_horrible": "Špecializovaný off-road: traktor, štvorkolka"
                 }
             },
             "social_facility_for": {

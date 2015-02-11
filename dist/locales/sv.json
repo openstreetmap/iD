@@ -1186,7 +1186,7 @@
                     "very_bad": "Hög frigång: lätta terrängfordon",
                     "horrible": "Terräng: tunga terrängfordon",
                     "very_horrible": "Specialiserade för terräng: traktor, fyrhjuling",
-                    "impassible": "Ogenomträngliga / Ej hjulbaserade fordon"
+                    "impassable": "Oframkomligt / Inga hjulfordon"
                 }
             },
             "social_facility_for": {
@@ -2387,9 +2387,21 @@
                 "name": "Kyrkogård (utan gravar)",
                 "terms": "Kyrkogård, kyrka, kyrkområde"
             },
+            "landuse/commercial": {
+                "name": "Kommersiell område",
+                "terms": "Kommersiell, kommersiellt, affärsområde, handelsområde, shoppingområde, handel, butiksområde"
+            },
             "landuse/construction": {
                 "name": "Byggarbetsplats",
                 "terms": "Byggarbetsplats, bygge, Byggnad under konstruktion, Byggnad under uppförande, byggarbete,  byggnation, byggnadsplats"
+            },
+            "landuse/farm": {
+                "name": "Gård",
+                "terms": "Bondgård, gård, jordbruk, lantbruk, lantegendom, lantgård"
+            },
+            "landuse/farmland": {
+                "name": "Åkermark",
+                "terms": "Åker, åkerjord, åkerfält, fält, gärde, teg, åkerlapp, inäga, odling, odlingsfält, lantbruk, åkermark"
             },
             "landuse/farmyard": {
                 "name": "Bondgård",
@@ -2407,6 +2419,10 @@
                 "name": "Gräs",
                 "terms": "Gräs, klippt gräs, refug, rondell, mittremsa"
             },
+            "landuse/industrial": {
+                "name": "Industriområde",
+                "terms": "Industriområde, fabriksområde, fabriksdistrikt, industricentrum"
+            },
             "landuse/landfill": {
                 "name": "Soptipp",
                 "terms": "Soptipp, återvinningscentral, avskrädeshög, avfallsanläggning, tipp"
@@ -2415,6 +2431,10 @@
                 "name": "Äng",
                 "terms": "Äng, slåttermark"
             },
+            "landuse/military": {
+                "name": "Militärt område",
+                "terms": "Militärt område, militärt övningsområde, regemente, försvar, krigsmakt"
+            },
             "landuse/orchard": {
                 "name": "Fruktodling",
                 "terms": "Fruktodling, fruktträdgård, fruktträd, äppelträd"
@@ -2422,6 +2442,14 @@
             "landuse/quarry": {
                 "name": "Stenbrott/Sandtag",
                 "terms": "täkt, gruva, utgrävning, stenbrott, sand, stenbrytning, sten, sandtäckt, sandtag"
+            },
+            "landuse/residential": {
+                "name": "Bostadsområde",
+                "terms": "Bostadsområde, villaområde, lägenhetsområde, getto, miljonområde, förort, "
+            },
+            "landuse/retail": {
+                "name": "Detaljhandel",
+                "terms": "Detaljhandel, affärsområde, försäljningsområde, affärer, försäljning, shoppingcenter, shoppingområde, shopping, handel, handelsområde"
             },
             "landuse/vineyard": {
                 "name": "Vingård",
@@ -3162,6 +3190,10 @@
             "shop/hifi": {
                 "name": "HiFi-butik",
                 "terms": "HIFI-butik, hifi, ljud, ljudåtergivning, förstärkare, högtalare, ljudanläggning, audio, stereo, stereoanläggning"
+            },
+            "shop/houseware": {
+                "name": "Husgeråd",
+                "terms": "husgeråd, köksredskap, bestick, porslin, prydnadsföremål"
             },
             "shop/interior_decoration": {
                 "name": "Inredningsaffär",

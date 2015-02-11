@@ -1186,7 +1186,7 @@
                     "very_bad": "Hoher Radstand: leichtes Off-Road-Fahrzeug",
                     "horrible": "Off-Road: Schweres Off-Road-Fahrzeug",
                     "very_horrible": "Spezialisiertes Off-Road: Traktor, Quad",
-                    "impassible": "Unpassierbar / keine Reifen-Fahrzeuge"
+                    "impassable": "Unpassierbar / Keine Fahrzeuge mit Rädern"
                 }
             },
             "social_facility_for": {

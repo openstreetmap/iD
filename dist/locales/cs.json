@@ -1186,7 +1186,7 @@
                     "very_bad": "Vysoký podvozek: lehká terénní auta",
                     "horrible": "Terénní kola: off-road auta",
                     "very_horrible": "Speciální terénní kola: traktory, čtyřkolky, tanky, MTB",
-                    "impassible": "Nesjízdné pro žádná vozidla s koly"
+                    "impassable": "Neprůjezdné žádným vozidlem"
                 }
             },
             "social_facility_for": {

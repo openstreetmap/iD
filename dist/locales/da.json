@@ -1186,7 +1186,7 @@
                     "very_bad": "Høj frihøjde: lettere terrængående køretøj",
                     "horrible": "Off-Road: terrængående køretøj",
                     "very_horrible": "Specialiseret off-road: traktor, ATV",
-                    "impassible": "Ufremkommelige / Ingen køretøjer på hjem"
+                    "impassable": "Ufremkommeligt /Intet køretøj på hjul"
                 }
             },
             "social_facility_for": {
