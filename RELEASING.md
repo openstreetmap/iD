@@ -17,7 +17,7 @@ TODO: turn this into a script.
 - [ ] Update version number in package.json
 - [ ] git checkout release && git reset --hard master
 - [ ] make
-- [ ] git add -f dist/iD.* && git commit -m 'Check in build'
+- [ ] git add -f dist/*.css dist/*.js && git commit -m 'Check in build'
 - [ ] git tag vA.B.C
 - [ ] git push origin -f release vA.B.C
 
