@@ -33,12 +33,15 @@ iD.actions.DeleteWay = function(wayId) {
 
     action.disabled = function(graph) {
         var way = graph.entity(wayId);
-        var reltypes = ['route','boundary'];
+        var reltypes = ['route','boundary','multipolygon'];
+        var required_roles = { 'multipolygon': 'outer' };
         var disabled = false;
         graph.parentRelations(way)
             .forEach(function(parent) {
                 if (reltypes.indexOf(parent.tags.type)>-1) {
-                    disabled = 'part_of_relation';
+                    if (!required_roles[parent.tags.type] || parent.containsEntityInRole(way,required_roles[parent.tags.type])) {
+                        disabled = 'part_of_relation';
+                    }
                 }
             });
         return disabled;
