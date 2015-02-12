@@ -31,8 +31,17 @@ iD.actions.DeleteWay = function(wayId) {
         return graph.remove(way);
     };
 
-    action.disabled = function() {
-        return false;
+    action.disabled = function(graph) {
+        var way = graph.entity(wayId);
+        var reltypes = ['route','boundary'];
+        var disabled = false;
+        graph.parentRelations(way)
+            .forEach(function(parent) {
+                if (reltypes.indexOf(parent.tags.type)>-1) {
+                    disabled = 'part_of_relation';
+                }
+            });
+        return disabled;
     };
 
     return action;

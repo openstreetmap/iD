@@ -110,6 +110,7 @@
                 "multiple": "Deleted {n} objects."
             },
             "incomplete_relation": "This feature can't be deleted because it hasn't been fully downloaded.",
+            "part_of_relation": "This feature can't be deleted because it's part of a larger relation. You must remove it from the relation first.",
             "connected_to_hidden": "This can't be deleted because it is connected to a hidden feature."
         },
         "add_member": {
