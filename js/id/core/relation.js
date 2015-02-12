@@ -115,16 +115,6 @@ _.extend(iD.Relation.prototype, {
         }
     },
 
-    // Test whether the relation contains an entity in the given role.
-    containsEntityInRole: function(entity, role) {
-        for (var i = 0; i < this.members.length; i++) {
-            if (this.members[i].id === entity.id && this.members[i].type === entity.type && this.members[i].role === role) {
-                return true;
-            }
-        }
-        return false;
-    },
-
     addMember: function(member, index) {
         var members = this.members.slice();
         members.splice(index === undefined ? members.length : index, 0, member);
