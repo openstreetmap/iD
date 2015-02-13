@@ -4611,8 +4611,6 @@
             "landuse"
         ],
         "geometry": [
-            "point",
-            "vertex",
             "area"
         ],
         "tags": {
