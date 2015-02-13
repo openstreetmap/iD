@@ -387,10 +387,38 @@
         "title": "Save",
         "help": "Save changes to OpenStreetMap, making them visible to other users.",
         "no_changes": "No changes to save.",
-        "error": "An error occurred while trying to save",
+        "error": "Errors occurred while trying to save",
+        "status_code": "Server returned status code {code}",
+        "status_gone": "{name} has already been deleted.",
         "unknown_error_details": "Please ensure you are connected to the internet.",
         "uploading": "Uploading changes to OpenStreetMap.",
-        "unsaved_changes": "You have unsaved changes"
+        "unsaved_changes": "You have unsaved changes",
+        "conflict": {
+            "header": "Conflicting edits detected",
+            "message": "Conflicting edits were made to {name}",
+            "keep_local": "Keep Mine",
+            "keep_remote": "Keep Theirs",
+            "restore": "Restore",
+            "delete": "Leave Deleted",
+            "annotation": {
+                "safe": "Merged remote changes from server.",
+                "keep_local": "Kept local version of {id}.",
+                "keep_remote": "Kept remote version of {id}.",
+                "restore": "Restored local version of {id}.",
+                "delete": "Deleted local version of {id}."
+            },
+            "try_again": "Try Again",
+            "download_changes": "Download Changes",
+            "help": "It looks like another OpenStreetMap user has changed some of the same map features that you changed.\nYou can click on each item below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes. Or, you can download your changes to a file.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "location": "Location was changed both locally and remotely.",
+            "nodelist": "Nodes were changed both locally and remotely.",
+            "memberlist": "Relation members were changed both locally and remotely.",
+            "tags": "Tag \"{tag}\" was changed to \"{local}\" locally and \"{remote}\" remotely."
+        }
     },
     "success": {
         "edited_osm": "Edited OSM!",
@@ -402,7 +430,8 @@
         "help_html": "Your changes should appear in the \"Standard\" layer in a few minutes. Other layers, and certain features, may take longer\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).\n"
     },
     "confirm": {
-        "okay": "Okay"
+        "okay": "Okay",
+        "cancel": "Cancel"
     },
     "splash": {
         "welcome": "Welcome to the iD OpenStreetMap editor",

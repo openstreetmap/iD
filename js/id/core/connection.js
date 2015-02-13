@@ -1,6 +1,5 @@
 iD.Connection = function() {
-
-    var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'load', 'loaded'),
+    var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'loaded'),
         url = 'http://www.openstreetmap.org',
         connection = {},
         inflight = {},
@@ -42,10 +41,10 @@ iD.Connection = function() {
     };
 
     connection.loadFromURL = function(url, callback) {
-        function done(dom) {
-            return callback(null, parse(dom));
+        function done(err, dom) {
+            return callback(err, parse(dom));
         }
-        return d3.xml(url).get().on('load', done);
+        return d3.xml(url).get(done);
     };
 
     connection.loadEntity = function(id, callback) {
@@ -55,8 +54,7 @@ iD.Connection = function() {
         connection.loadFromURL(
             url + '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
             function(err, entities) {
-                event.load(err, {data: entities});
-                if (callback) callback(err, entities && _.find(entities, function(e) { return e.id === id; }));
+                if (callback) callback(err, {data: entities});
             });
     };
 
@@ -137,7 +135,7 @@ iD.Connection = function() {
     };
 
     function parse(dom) {
-        if (!dom || !dom.childNodes) return new Error('Bad request');
+        if (!dom || !dom.childNodes) return;
 
         var root = dom.childNodes[0],
             children = root.childNodes,
@@ -292,7 +290,7 @@ iD.Connection = function() {
         return connection;
     };
 
-    connection.loadTiles = function(projection, dimensions) {
+    connection.loadTiles = function(projection, dimensions, callback) {
 
         if (off) return;
 
@@ -345,7 +343,7 @@ iD.Connection = function() {
                 loadedTiles[id] = true;
                 delete inflight[id];
 
-                event.load(err, _.extend({data: parsed}, tile));
+                if (callback) callback(err, _.extend({data: parsed}, tile));
 
                 if (_.isEmpty(inflight)) {
                     event.loaded();

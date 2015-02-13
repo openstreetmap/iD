@@ -2349,6 +2349,53 @@ img.wiki-image {
     border-bottom: 1px solid #CCC;
 }
 
+.modal-section.header h3 {
+    padding: 0;
+}
+
+.modal-section.buttons {
+    text-align: center;
+}
+
+.modal-section.buttons .action {
+    display: inline-block;
+    margin: 0 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.conflicts-help {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.error-detail-item {
+    padding-left: 10px;
+}
+
+.error-detail-item:before {
+    content: '- ';
+}
+
+.error-detail-container .error-choices {
+    padding: 5px;
+}
+
+.error-detail-container .error-choices .error-choice.action {
+    display: inline-block;
+    margin: 0 5px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+    font-weight: normal;
+    height: 30px;
+}
+
 .modal-section:last-child {
     border-bottom: 0;
 }

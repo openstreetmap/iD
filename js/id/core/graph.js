@@ -16,10 +16,7 @@ iD.Graph = function(other, mutable) {
 
     this.transients = {};
     this._childNodes = {};
-
-    if (!mutable) {
-        this.freeze();
-    }
+    this.frozen = !mutable;
 };
 
 iD.Graph.prototype = {
@@ -112,20 +109,19 @@ iD.Graph.prototype = {
     // is used only during the history operation that merges newly downloaded
     // data into each state. To external consumers, it should appear as if the
     // graph always contained the newly downloaded data.
-    rebase: function(entities, stack) {
+    rebase: function(entities, stack, force) {
         var base = this.base(),
             i, j, k, id;
 
         for (i = 0; i < entities.length; i++) {
             var entity = entities[i];
 
-            if (base.entities[entity.id])
+            if (!force && base.entities[entity.id])
                 continue;
 
             // Merging data into the base graph
             base.entities[entity.id] = entity;
-            this._updateCalculated(undefined, entity,
-                base.parentWays, base.parentRels);
+            this._updateCalculated(undefined, entity, base.parentWays, base.parentRels);
 
             // Restore provisionally-deleted nodes that are discovered to have an extant parent
             if (entity.type === 'way') {
@@ -262,15 +258,9 @@ iD.Graph.prototype = {
             arguments[i].call(graph, graph);
         }
 
-        return this.frozen ? graph.freeze() : this;
-    },
+        if (this.frozen) graph.frozen = true;
 
-    freeze: function() {
-        this.frozen = true;
-
-        // No longer freezing entities here due to in-place updates needed in rebase.
-
-        return this;
+        return graph;
     },
 
     // Obliterates any existing entities

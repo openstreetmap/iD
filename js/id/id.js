@@ -53,10 +53,6 @@ window.iD = function () {
         locale = locale.split('-')[0];
     }
 
-    connection.on('load.context', function loadContext(err, result) {
-        history.merge(result.data, result.extent);
-    });
-
     context.preauth = function(options) {
         connection.switch(options);
         return context;
@@ -85,6 +81,51 @@ window.iD = function () {
     context.ui = function() { return ui; };
     context.connection = function() { return connection; };
     context.history = function() { return history; };
+
+    /* Connection */
+    function entitiesLoaded(err, result) {
+        if (!err) history.merge(result.data, result.extent);
+    }
+
+    context.loadTiles = function(projection, dimensions, callback) {
+        function done(err, result) {
+            entitiesLoaded(err, result);
+            if (callback) callback(err, result);
+        }
+        connection.loadTiles(projection, dimensions, done);
+    };
+
+    context.loadEntity = function(id, callback) {
+        function done(err, result) {
+            entitiesLoaded(err, result);
+            if (callback) callback(err, result);
+        }
+        connection.loadEntity(id, done);
+    };
+
+    context.zoomToEntity = function(id, zoomTo) {
+        if (zoomTo !== false) {
+            this.loadEntity(id, function(err, result) {
+                if (err) return;
+                var entity = _.find(result.data, function(e) { return e.id === id; });
+                if (entity) { map.zoomTo(entity); }
+            });
+        }
+
+        map.on('drawn.zoomToEntity', function() {
+            if (!context.hasEntity(id)) return;
+            map.on('drawn.zoomToEntity', null);
+            context.on('enter.zoomToEntity', null);
+            context.enter(iD.modes.Select(context, [id]));
+        });
+
+        context.on('enter.zoomToEntity', function() {
+            if (mode.id !== 'browse') {
+                map.on('drawn.zoomToEntity', null);
+                context.on('enter.zoomToEntity', null);
+            }
+        });
+    };
 
     /* History */
     context.graph = history.graph;
@@ -169,31 +210,6 @@ window.iD = function () {
             return [];
         }
     };
-
-    context.loadEntity = function(id, zoomTo) {
-        if (zoomTo !== false) {
-            connection.loadEntity(id, function(error, entity) {
-                if (entity) {
-                    map.zoomTo(entity);
-                }
-            });
-        }
-
-        map.on('drawn.loadEntity', function() {
-            if (!context.hasEntity(id)) return;
-            map.on('drawn.loadEntity', null);
-            context.on('enter.loadEntity', null);
-            context.enter(iD.modes.Select(context, [id]));
-        });
-
-        context.on('enter.loadEntity', function() {
-            if (mode.id !== 'browse') {
-                map.on('drawn.loadEntity', null);
-                context.on('enter.loadEntity', null);
-            }
-        });
-    };
-
 
     /* Behaviors */
     context.install = function(behavior) {
