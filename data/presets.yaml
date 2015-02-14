@@ -468,12 +468,6 @@ en:
           undefined: Assumed to be No
           "yes": "Yes"
           "no": "No"
-      service/bicycle/chaintool:
-        label: Chain Tool
-        options:
-          undefined: Assumed to be No
-          "yes": "Yes"
-          "no": "No"
       service/bicycle/pump:
         label: Air Pump
         options:

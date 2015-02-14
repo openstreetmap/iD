@@ -954,18 +954,6 @@
             }
         }
     },
-    "service/bicycle/chaintool": {
-        "key": "service:bicycle:chain_tool",
-        "type": "check",
-        "label": "Chain Tool",
-        "strings": {
-            "options": {
-                "undefined": "Assumed to be No",
-                "yes": "Yes",
-                "no": "No"
-            }
-        }
-    },
     "service/bicycle/pump": {
         "key": "service:bicycle:pump",
         "type": "check",
