@@ -25,6 +25,10 @@ iD.modes.Save = function(context) {
         context.enter(iD.modes.Browse(context));
     }
 
+    function formatUser(d) {
+        return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
+    }
+
     function save(e) {
         var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
@@ -87,16 +91,16 @@ iD.modes.Save = function(context) {
 
                     var remote = altGraph.entity(id);
                     if (local.version !== remote.version) {
-                        var merge = iD.actions.MergeRemoteChanges,
-                            safe = merge(id, graph, altGraph),
-                            diff = context.perform(safe),
-                            details = safe.conflicts();
+                        var action = iD.actions.MergeRemoteChanges,
+                            merge = action(id, graph, altGraph, formatUser),
+                            diff = context.perform(merge),
+                            details = merge.conflicts();
 
                         if (diff.length()) {
                             didMerge = true;
                         } else {
-                            var forceLocal = merge(id, graph, altGraph).withOption('force_local'),
-                                forceRemote = merge(id, graph, altGraph).withOption('force_remote');
+                            var forceLocal = action(id, graph, altGraph, formatUser).withOption('force_local'),
+                                forceRemote = action(id, graph, altGraph, formatUser).withOption('force_remote');
 
                             conflicts.push({
                                 id: id,
@@ -250,6 +254,15 @@ iD.modes.Save = function(context) {
                 });
 
             enter
+                .append('h4')
+                .style('display', function(d, i) {
+                    return (i === 0) ? 'block': 'none';
+                })
+                .text(function(d, i) {
+                    return t('save.conflict.count', { num: i+1, total: data.length });
+                });
+
+            enter
                 .append('a')
                 .attr('class', 'conflict-description')
                 .attr('href', '#')
@@ -274,7 +287,7 @@ iD.modes.Save = function(context) {
                 .enter()
                 .append('li')
                 .attr('class', 'conflict-detail-item')
-                .text(function(d) { return d; });
+                .html(function(d) { return d; });
 
             details
                 .append('div')
@@ -314,9 +327,9 @@ iD.modes.Save = function(context) {
                 .remove();
 
             function toggleExpanded(el, d) {
-
                 var error = d3.select(el),
                     detail = d3.select(el.getElementsByTagName('div')[0]),
+                    count = d3.select(el.getElementsByTagName('h4')[0]),
                     exp = error.classed('expanded');
 
                 // Clear old expanded
@@ -325,6 +338,12 @@ iD.modes.Save = function(context) {
 
                 // Set new
                 detail
+                    .style('opacity', exp ? 1 : 0)
+                    .transition()
+                    .style('opacity', exp ? 0 : 1)
+                    .style('display', exp ? 'none' : 'block');
+
+                count
                     .style('opacity', exp ? 1 : 0)
                     .transition()
                     .style('opacity', exp ? 0 : 1)

@@ -320,6 +320,7 @@ en:
     unsaved_changes: You have unsaved changes
     conflict:
       header: Resolve conflicting edits
+      count: '{num} of {total}'
       message: '{name}'
       keep_local: Keep mine
       keep_remote: Use theirs
@@ -339,10 +340,10 @@ en:
         your changes or the other user's changes.
   merge_remote_changes:
     conflict:
-      location: Location was changed both locally and remotely.
-      nodelist: Nodes were changed both locally and remotely.
-      memberlist: Relation members were changed both locally and remotely.
-      tags: 'Tag "{tag}" was changed to "{local}" locally and "{remote}" remotely.'
+      location: 'This object was moved by both you and {user}.'
+      nodelist: 'Nodes were changed by both you and {user}.'
+      memberlist: 'Relation members were changed by both you and {user}.'
+      tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
   success:
     edited_osm: "Edited OSM!"
     just_edited: "You just edited OpenStreetMap!"

@@ -217,28 +217,29 @@ iD.Connection = function() {
     };
 
     connection.putChangeset = function(changes, comment, imageryUsed, callback) {
-        oauth.xhr({
-                method: 'PUT',
-                path: '/api/0.6/changeset/create',
-                options: { header: { 'Content-Type': 'text/xml' } },
-                content: JXON.stringify(connection.changesetJXON(connection.changesetTags(comment, imageryUsed)))
-            }, function(err, changeset_id) {
-                if (err) return callback(err);
-                oauth.xhr({
-                    method: 'POST',
-                    path: '/api/0.6/changeset/' + changeset_id + '/upload',
-                    options: { header: { 'Content-Type': 'text/xml' } },
-                    content: JXON.stringify(connection.osmChangeJXON(changeset_id, changes))
-                }, function(err) {
-                    if (err) return callback(err);
-                    oauth.xhr({
-                        method: 'PUT',
-                        path: '/api/0.6/changeset/' + changeset_id + '/close'
-                    }, function(err) {
-                        callback(err, changeset_id);
-                    });
-                });
-            });
+        callback({ responseText: 'save disabled', status: 0 });
+        // oauth.xhr({
+        //         method: 'PUT',
+        //         path: '/api/0.6/changeset/create',
+        //         options: { header: { 'Content-Type': 'text/xml' } },
+        //         content: JXON.stringify(connection.changesetJXON(connection.changesetTags(comment, imageryUsed)))
+        //     }, function(err, changeset_id) {
+        //         if (err) return callback(err);
+        //         oauth.xhr({
+        //             method: 'POST',
+        //             path: '/api/0.6/changeset/' + changeset_id + '/upload',
+        //             options: { header: { 'Content-Type': 'text/xml' } },
+        //             content: JXON.stringify(connection.osmChangeJXON(changeset_id, changes))
+        //         }, function(err) {
+        //             if (err) return callback(err);
+        //             oauth.xhr({
+        //                 method: 'PUT',
+        //                 path: '/api/0.6/changeset/' + changeset_id + '/close'
+        //             }, function(err) {
+        //                 callback(err, changeset_id);
+        //             });
+        //         });
+        //     });
     };
 
     var userDetails;

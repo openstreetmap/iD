@@ -1,10 +1,13 @@
-iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
+iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser) {
     var base = localGraph.base().entities[id],
         local = localGraph.entity(id),
         remote = remoteGraph.entity(id),
         option = 'safe',  // 'safe', 'force_local', 'force_remote'
         conflicts = [];
 
+    function user(d) {
+        return _.isFunction(formatUser) ? formatUser(d) : d;
+    }
 
     function mergeLocation(target) {
         if (!target) return;
@@ -21,7 +24,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
             return target.update({loc: remote.loc});
         }
 
-        conflicts.push(t('merge_remote_changes.conflict.location'));
+        conflicts.push(t('merge_remote_changes.conflict.location', { user: user(remote.user) }));
         return;  // fail merge
     }
 
@@ -54,7 +57,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
                 } else if (_.isEqual(c.o, c.b)) {  // only changed locally
                     nodes.push.apply(nodes, c.a);
                 } else {       // changed both locally and remotely
-                    conflicts.push(t('merge_remote_changes.conflict.nodelist'));
+                    conflicts.push(t('merge_remote_changes.conflict.nodelist', { user: user(remote.user) }));
                     return;  // fail merge..
                 }
             }
@@ -73,7 +76,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
             return target.update({members: remote.members});
         }
 
-        conflicts.push(t('merge_remote_changes.conflict.memberlist'));
+        conflicts.push(t('merge_remote_changes.conflict.memberlist', { user: user(remote.user) }));
         return;  // fail merge
     }
 
@@ -101,7 +104,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph) {
             if (remote.tags[k] !== base.tags[k]) {  // tag modified remotely..
                 if (target.tags[k] && target.tags[k] !== remote.tags[k]) {
                     conflicts.push(t('merge_remote_changes.conflict.tags',
-                        { tag: k, local: target.tags[k], remote: remote.tags[k] }));
+                        { tag: k, local: target.tags[k], remote: remote.tags[k], user: user(remote.user) }));
                     fail = true;
                 } else {
                     tags[k] = remote.tags[k];
