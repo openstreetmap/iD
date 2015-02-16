@@ -1,40 +1,19 @@
 iD.modes.Save = function(context) {
-    var undeletions = [],
-        ui = iD.ui.Commit(context)
+    var ui = iD.ui.Commit(context)
             .on('cancel', cancel)
             .on('save', save);
 
-    function undelete(id) {
-        return function(graph) {
-            var entity = context.entity(id),
-                target = iD.Entity(entity, { version: +entity.version + 1 });
-            undeletions.push(id);
-            return graph.replace(target);
-        };
-    }
-
-    function choice(text, actions, id) {
-        return {
-            text: text,
-            action: function() { context.perform.apply(this, actions); },
-            id: id
-        };
-    }
-
     function cancel() {
         context.enter(iD.modes.Browse(context));
-    }
-
-    function formatUser(d) {
-        return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
     }
 
     function save(e) {
         var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
             altGraph = iD.Graph(history.base(), true),
-            modified = _.pluck(history.changes().modified, 'id'),
-            toCheck = _.clone(modified),
+            modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
+            toCheck = _.pluck(_.pluck(modified, 'entity'), 'id'),
+            deletedIds = [],
             didMerge = false,
             conflicts = [],
             errors = [],
@@ -45,39 +24,19 @@ iD.modes.Save = function(context) {
 
         if (toCheck.length) {
             // Reload modified entities into an alternate graph and check for conflicts..
-            _.each(toCheck, check);
+            _.each(toCheck, loadAndCheck);
         } else {
             finalize();
         }
 
-        function check(id) {
-            context.connection().loadEntity(id, function(err, result) {
-                var graph = context.graph(),
-                    local = graph.entity(id),
-                    type = iD.util.displayType(id),
-                    name = iD.util.displayName(local) || (type + ' ' + id);
 
+        function loadAndCheck(id) {
+            context.connection().loadEntity(id, function(err, result) {
                 toCheck = _.without(toCheck, id);
 
                 if (err) {
                     if (err.status === 410) {   // Status: Gone (contains no responseText)
-                        if (undeletions.indexOf(id) === -1) {  // skip if we have already undeleted it..
-                            if (local.type === 'node') {
-                                checkParents(local);
-                            }
-
-                            conflicts.push({
-                                id: id,
-                                msg: t('save.status_gone', { name: name }),
-                                details: [ t('save.status_code', { code: err.status }) ],
-                                choices: [
-                                    choice(t('save.conflict.restore'),
-                                        [ undelete(id), t('save.conflict.annotation.restore', {id: id})], id),
-                                    choice(t('save.conflict.delete'),
-                                        [ iD.actions.DeleteMultiple([id]), t('save.conflict.annotation.delete', {id: id})], id)
-                                ]
-                            });
-                        }
+                        addDeleteConflict(id, err);
                     } else {
                         errors.push({
                             id: id,
@@ -88,33 +47,7 @@ iD.modes.Save = function(context) {
 
                 } else {
                     _.each(result.data, function(entity) { altGraph.replace(entity); });
-
-                    var remote = altGraph.entity(id);
-                    if (local.version !== remote.version) {
-                        var action = iD.actions.MergeRemoteChanges,
-                            merge = action(id, graph, altGraph, formatUser),
-                            diff = context.perform(merge),
-                            details = merge.conflicts();
-
-                        if (diff.length()) {
-                            didMerge = true;
-                        } else {
-                            var forceLocal = action(id, graph, altGraph, formatUser).withOption('force_local'),
-                                forceRemote = action(id, graph, altGraph, formatUser).withOption('force_remote');
-
-                            conflicts.push({
-                                id: id,
-                                msg: t('save.conflict.message', { name: name }),
-                                details: details,
-                                choices: [
-                                    choice(t('save.conflict.keep_local'),
-                                        [ forceLocal, t('save.conflict.annotation.keep_local', {id: id})], id),
-                                    choice(t('save.conflict.keep_remote'),
-                                        [ forceRemote, t('save.conflict.annotation.keep_remote', {id: id})], id)
-                                ]
-                            });
-                        }
-                    }
+                    checkConflicts(id);
                 }
 
                 if (!toCheck.length) {
@@ -123,17 +56,66 @@ iD.modes.Save = function(context) {
             });
         }
 
-        function checkParents(entity) {
-            var ids = _.pluck(context.graph().parentWays(entity), 'id');
+        function addDeleteConflict(id, err) {
+            if (deletedIds.indexOf(id) !== -1) return;
+            else deletedIds.push(id);
 
-            for (var i = 0; i < ids.length; i++) {
-                if (modified.indexOf(ids[i]) === -1) {
-                    modified.push(ids[i]);
-                    toCheck.push(ids[i]);
-                    check(ids[i]);
+            function undelete(id) {
+                return function(graph) {
+                    var entity = context.entity(id),
+                        target = iD.Entity(entity, { version: +entity.version + 1 });
+                    return graph.replace(target);
+                };
+            }
+
+            var local = context.graph().entity(id);
+
+            conflicts.push({
+                id: id,
+                msg: t('save.status_gone', { name: entityName(local) }),
+                details: [ t('save.status_code', { code: err.status }) ],
+                choices: [
+                    choice(id, t('save.conflict.restore'),
+                        [ undelete(id), t('save.conflict.annotation.restore', {id: id})]),
+                    choice(id, t('save.conflict.delete'),
+                        [ iD.actions.DeleteMultiple([id]), t('save.conflict.annotation.delete', {id: id})])
+                ]
+            });
+        }
+
+
+        function checkConflicts(id) {
+            var graph = context.graph(),
+                local = graph.entity(id),
+                remote = altGraph.entity(id);
+
+            if (local.version !== remote.version) {
+                var action = iD.actions.MergeRemoteChanges,
+                    merge = action(id, graph, altGraph, formatUser),
+                    diff = context.perform(merge),
+                    details = merge.conflicts();
+
+                if (diff.length()) {
+                    didMerge = true;
+                } else {
+                    var forceLocal = action(id, graph, altGraph, formatUser).withOption('force_local'),
+                        forceRemote = action(id, graph, altGraph, formatUser).withOption('force_remote');
+
+                    conflicts.push({
+                        id: id,
+                        msg: t('save.conflict.message', { name: entityName(local) }),
+                        details: details,
+                        choices: [
+                            choice(id, t('save.conflict.keep_local'),
+                                [ forceLocal, t('save.conflict.annotation.keep_local', {id: id})]),
+                            choice(id, t('save.conflict.keep_remote'),
+                                [ forceRemote, t('save.conflict.annotation.keep_remote', {id: id})])
+                        ]
+                    });
                 }
             }
         }
+
 
         function finalize() {
             if (didMerge) {  // set undo checkpoint..
@@ -416,7 +398,23 @@ iD.modes.Save = function(context) {
             items.exit()
                 .remove();
         }
+    }
 
+
+    function formatUser(d) {
+        return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
+    }
+
+    function entityName(entity) {
+        return iD.util.displayName(entity) || (iD.util.displayType(entity.id) + ' ' + entity.id);
+    }
+
+    function choice(id, text, actions) {
+        return {
+            id: id,
+            text: text,
+            action: function() { context.perform.apply(this, actions); }
+        };
     }
 
     function zoomToEntity(d) {
@@ -429,6 +427,7 @@ iD.modes.Save = function(context) {
                 .classed('hover', true);
         }
     }
+
 
     function success(e, changeset_id) {
         context.enter(iD.modes.Browse(context)
