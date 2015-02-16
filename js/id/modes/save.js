@@ -10,6 +10,7 @@ iD.modes.Save = function(context) {
     function save(e) {
         var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
+            origChanges = history.changes(iD.actions.DiscardTags(history.difference())),
             altGraph = iD.Graph(history.base(), true),
             modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
             toCheck = _.pluck(_.pluck(modified, 'entity'), 'id'),
@@ -178,13 +179,9 @@ iD.modes.Save = function(context) {
                     .append('a')
                         .attr('class', 'conflicts-download')
                         .on('click.download', function() {
-                            var diff = iD.actions.DiscardTags(history.difference()),
-                                changes = history.changes(diff),
-                                data = JXON.stringify(context.connection().osmChangeJXON('CHANGEME', changes)),
+                            var data = JXON.stringify(context.connection().osmChangeJXON('CHANGEME', origChanges)),
                                 win = window.open('data:text/xml,' + encodeURIComponent(data), '_blank');
-
                             win.focus();
-                            confirm.remove();
                         })
                         .text(t('save.conflict.download_changes'));
 
