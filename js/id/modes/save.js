@@ -89,13 +89,13 @@ iD.modes.Save = function(context) {
 
             if (local.version !== remote.version) {
                 var action = iD.actions.MergeRemoteChanges,
-                    merge = action(id, graph, altGraph, formatUser),
+                    merge = action(id, altGraph, formatUser),
                     diff = history.replace(merge);
 
                 if (diff.length()) return;  // merged safely
 
-                var forceLocal = action(id, graph, altGraph, formatUser).withOption('force_local'),
-                    forceRemote = action(id, graph, altGraph, formatUser).withOption('force_remote');
+                var forceLocal = action(id, altGraph, formatUser).withOption('force_local'),
+                    forceRemote = action(id, altGraph, formatUser).withOption('force_remote');
 
                 conflicts.push({
                     id: id,
