@@ -400,13 +400,6 @@
             "keep_remote": "Use theirs",
             "restore": "Restore",
             "delete": "Leave Deleted",
-            "annotation": {
-                "safe": "Merged remote changes from server.",
-                "keep_local": "Kept local version of {id}.",
-                "keep_remote": "Kept remote version of {id}.",
-                "restore": "Restored local version of {id}.",
-                "delete": "Deleted local version of {id}."
-            },
             "download_changes": "Download your changes.",
             "done": "All conflicts resolved!",
             "help": "Another user changed some of the same map features you changed.\nClick on each item below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"

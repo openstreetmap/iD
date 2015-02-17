@@ -15,13 +15,11 @@ iD.modes.Save = function(context) {
             modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
             toCheck = _.pluck(_.pluck(modified, 'entity'), 'id'),
             deletedIds = [],
-            didMerge = false,
             conflicts = [],
-            errors = [],
-            confirm;
+            errors = [];
 
-        context.container()
-            .call(loading);
+        history.perform(iD.actions.Noop());  // checkpoint
+        context.container().call(loading);
 
         if (toCheck.length) {
             // Reload modified entities into an alternate graph and check for conflicts..
@@ -57,6 +55,7 @@ iD.modes.Save = function(context) {
             });
         }
 
+
         function addDeleteConflict(id, err) {
             if (deletedIds.indexOf(id) !== -1) return;
             else deletedIds.push(id);
@@ -76,10 +75,8 @@ iD.modes.Save = function(context) {
                 msg: t('save.status_gone', { name: entityName(local) }),
                 details: [ t('save.status_code', { code: err.status }) ],
                 choices: [
-                    choice(id, t('save.conflict.restore'),
-                        [ undelete(id), t('save.conflict.annotation.restore', {id: id})]),
-                    choice(id, t('save.conflict.delete'),
-                        [ iD.actions.DeleteMultiple([id]), t('save.conflict.annotation.delete', {id: id})])
+                    choice(id, t('save.conflict.restore'), undelete(id)),
+                    choice(id, t('save.conflict.delete'), iD.actions.DeleteMultiple([id]))
                 ]
             });
         }
@@ -93,36 +90,27 @@ iD.modes.Save = function(context) {
             if (local.version !== remote.version) {
                 var action = iD.actions.MergeRemoteChanges,
                     merge = action(id, graph, altGraph, formatUser),
-                    diff = context.perform(merge),
-                    details = merge.conflicts();
+                    diff = history.replace(merge);
 
-                if (diff.length()) {
-                    didMerge = true;
-                } else {
-                    var forceLocal = action(id, graph, altGraph, formatUser).withOption('force_local'),
-                        forceRemote = action(id, graph, altGraph, formatUser).withOption('force_remote');
+                if (diff.length()) return;  // merged safely
 
-                    conflicts.push({
-                        id: id,
-                        msg: t('save.conflict.message', { name: entityName(local) }),
-                        details: details,
-                        choices: [
-                            choice(id, t('save.conflict.keep_local'),
-                                [ forceLocal, t('save.conflict.annotation.keep_local', {id: id})]),
-                            choice(id, t('save.conflict.keep_remote'),
-                                [ forceRemote, t('save.conflict.annotation.keep_remote', {id: id})])
-                        ]
-                    });
-                }
+                var forceLocal = action(id, graph, altGraph, formatUser).withOption('force_local'),
+                    forceRemote = action(id, graph, altGraph, formatUser).withOption('force_remote');
+
+                conflicts.push({
+                    id: id,
+                    msg: t('save.conflict.message', { name: entityName(local) }),
+                    details: merge.conflicts(),
+                    choices: [
+                        choice(id, t('save.conflict.keep_local'), forceLocal),
+                        choice(id, t('save.conflict.keep_remote'), forceRemote)
+                    ]
+                });
             }
         }
 
 
         function finalize() {
-            if (didMerge) {  // set undo checkpoint..
-                context.perform(iD.actions.Noop(), t('save.conflict.annotation.safe'));
-            }
-
             if (conflicts.length) {
                 showConflicts();
             } else if (errors.length) {
@@ -148,21 +136,23 @@ iD.modes.Save = function(context) {
             }
         }
 
+
         function showConflicts() {
-            confirm = context.container()
+            var selection = context.container()
                 .select('#sidebar')
                 .append('div')
                     .attr('class','sidebar-component');
 
             loading.close();
 
-            var header = confirm.append('div')
+            var header = selection.append('div')
                 .attr('class', 'header fillL');
 
             header.append('button')
                 .attr('class', 'fr')
                 .on('click', function() {
-                    confirm.remove();
+                    history.pop();
+                    selection.remove();
                 })
                 .append('span')
                 .attr('class', 'icon close');
@@ -170,7 +160,7 @@ iD.modes.Save = function(context) {
             header.append('h3')
                 .text(t('save.conflict.header'));
 
-            var body = confirm.append('div')
+            var body = selection.append('div')
                 .attr('class', 'body fillL');
 
             body.append('div')
@@ -188,7 +178,7 @@ iD.modes.Save = function(context) {
             body.append('div')
                 .attr('class','message-text conflicts-message-text');
 
-            addConflictItems(confirm, conflicts);
+            addConflictItems(selection, conflicts);
 
             var buttons = body
                 .append('div')
@@ -199,7 +189,7 @@ iD.modes.Save = function(context) {
                 .attr('disabled', true)
                 .attr('class', 'action conflicts-button col6')
                 .on('click.try_again', function() {
-                    confirm.remove();
+                    selection.remove();
                     save(e);
                 })
                 .text(t('save.title'));
@@ -208,14 +198,15 @@ iD.modes.Save = function(context) {
                 .append('button')
                 .attr('class', 'secondary-action conflicts-button col6')
                 .on('click.cancel', function() {
-                    confirm.remove();
+                    history.pop();
+                    selection.remove();
                 })
                 .text(t('confirm.cancel'));
-
         }
 
-        function addConflictItems(confirm, data) {
-            var message = confirm
+
+        function addConflictItems(selection, data) {
+            var message = selection
                 .select('.message-text');
 
             var items = message
@@ -335,21 +326,25 @@ iD.modes.Save = function(context) {
 
         }
 
+
         function showErrors() {
-            confirm = iD.ui.confirm(context.container());
+            var selection = iD.ui.confirm(context.container());
+
+            history.pop();
             loading.close();
 
-            confirm
+            selection
                 .select('.modal-section.header')
                 .append('h3')
                 .text(t('save.error'));
 
-            addErrorItems(confirm, errors);
-            confirm.okButton();
+            addErrorItems(selection, errors);
+            selection.okButton();
         }
 
-        function addErrorItems(confirm, data) {
-            var message = confirm
+
+        function addErrorItems(selection, data) {
+            var message = selection
                 .select('.modal-section.message-text');
 
             var items = message
@@ -395,36 +390,36 @@ iD.modes.Save = function(context) {
             items.exit()
                 .remove();
         }
-    }
 
 
-    function formatUser(d) {
-        return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
-    }
-
-    function entityName(entity) {
-        return iD.util.displayName(entity) || (iD.util.displayType(entity.id) + ' ' + entity.id);
-    }
-
-    function choice(id, text, actions) {
-        return {
-            id: id,
-            text: text,
-            action: function() { context.perform.apply(this, actions); }
-        };
-    }
-
-    function zoomToEntity(d) {
-        var entity = context.graph().entity(d.id);
-
-        if (entity) {
-            context.map().zoomTo(entity);
-            context.surface().selectAll(
-                iD.util.entityOrMemberSelector([entity.id], context.graph()))
-                .classed('hover', true);
+        function formatUser(d) {
+            return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
         }
-    }
 
+        function entityName(entity) {
+            return iD.util.displayName(entity) || (iD.util.displayType(entity.id) + ' ' + entity.id);
+        }
+
+        function choice(id, text, action) {
+            return {
+                id: id,
+                text: text,
+                action: function() { history.replace(action); }
+            };
+        }
+
+        function zoomToEntity(d) {
+            var entity = context.graph().entity(d.id);
+
+            if (entity) {
+                context.map().zoomTo(entity);
+                context.surface().selectAll(
+                    iD.util.entityOrMemberSelector([entity.id], context.graph()))
+                    .classed('hover', true);
+            }
+        }
+
+    }
 
     function success(e, changeset_id) {
         context.enter(iD.modes.Browse(context)
