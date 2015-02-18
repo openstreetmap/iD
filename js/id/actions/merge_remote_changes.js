@@ -6,47 +6,35 @@ iD.actions.MergeRemoteChanges = function(id, remoteGraph, formatUser) {
         return _.isFunction(formatUser) ? formatUser(d) : d;
     }
 
-    function mergeChildren(remote, target, graph) {
-        var children = graph.childNodes(target),
-            updateNodes = [],
-            removeNodes = [],
-            i;
+    function mergeChildNodes(target, children, replacements) {
+        if (!target) return;
 
-        for (i = 0; i < children.length; i++) {
-            var lnode = children[i],
-                rnode = remoteGraph.hasEntity(lnode.id);
+        for (var i = 0; i < children.length; i++) {
+            var localNode = children[i],
+                remoteNode = remoteGraph.hasEntity(localNode.id);
+
+            if (!remoteNode) continue;
 
             if (option === 'force_remote') {
-                if (rnode) {
-                    updateNodes.push(rnode);
-                } else {
-                    removeNodes.push(lnode);
-                }
+                replacements.push(remoteNode);
             } else {
-                var tversion = (rnode && rnode.version) || (+lnode.version + 1),
-                    tnode = iD.Entity(lnode, { version: tversion });
-
-                tnode = mergeLocation(rnode, tnode);
-                if (tnode) {
-                    updateNodes.push(tnode);
+                var targetNode = iD.Entity(localNode, { version: remoteNode.version });
+                targetNode = mergeLocation(remoteNode, targetNode);
+                if (targetNode) {
+                    replacements.push(targetNode);
                 } else {
-                    return graph;  // child location conflict
+                    return;  // fail merge
                 }
             }
         }
 
-        for (i = 0; i < updateNodes.length; i++) {
-            graph = graph.replace(updateNodes[i]);
-        }
-        for (i = 0; i < removeNodes.length; i++) {
-            graph = iD.actions.DeleteNode(removeNodes[i].id)(graph);
-        }
-
-        return graph;
+        return target;
     }
 
 
     function mergeLocation(remote, target) {
+        if (!target) return;
+
         function pointEqual(a, b) {
             var epsilon = 1e-6;
             return (Math.abs(a[0] - b[0]) < epsilon) && (Math.abs(a[1] - b[1]) < epsilon);
@@ -65,6 +53,8 @@ iD.actions.MergeRemoteChanges = function(id, remoteGraph, formatUser) {
 
 
     function mergeNodes(base, remote, target) {
+        if (!target) return;
+
         if (option === 'force_local' || _.isEqual(target.nodes, remote.nodes)) {
             return target;
         }
@@ -102,6 +92,8 @@ iD.actions.MergeRemoteChanges = function(id, remoteGraph, formatUser) {
 
 
     function mergeMembers(remote, target) {
+        if (!target) return;
+
         if (option === 'force_local' || _.isEqual(target.members, remote.members)) {
             return target;
         }
@@ -150,24 +142,34 @@ iD.actions.MergeRemoteChanges = function(id, remoteGraph, formatUser) {
         return fail ? undefined : changed ? target.update({tags: tags}) : target;
     }
 
+
     var action = function(graph) {
         var base = graph.base().entities[id],
             local = graph.entity(id),
             remote = remoteGraph.entity(id),
-            target = iD.Entity(local, { version: remote.version });
+            target = iD.Entity(local, { version: remote.version }),
+            replacements = [];
 
         if (target.type === 'node') {
             target = mergeLocation(remote, target);
         } else if (target.type === 'way') {
             graph.rebase(remoteGraph.childNodes(remote), [graph], false);
-            graph = mergeChildren(remote, target, graph);
+            target = mergeChildNodes(target, graph.childNodes(local), replacements);
             target = mergeNodes(base, remote, target);
         } else if (target.type === 'relation') {
             target = mergeMembers(remote, target);
         }
 
         target = mergeTags(base, remote, target);
-        return target ? graph.replace(target) : graph;
+
+        if (target) {
+            graph = graph.replace(target);
+            for (var i = 0; i < replacements.length; i++) {
+                graph = graph.replace(replacements[i]);
+            }
+        }
+
+        return graph;
     };
 
     action.withOption = function(opt) {
