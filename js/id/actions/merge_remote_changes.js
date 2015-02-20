@@ -1,4 +1,4 @@
-iD.actions.MergeRemoteChanges = function(id, remoteGraph, formatUser) {
+iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser) {
     var option = 'safe',  // 'safe', 'force_local', 'force_remote'
         conflicts = [];
 
@@ -132,9 +132,19 @@ iD.actions.MergeRemoteChanges = function(id, remoteGraph, formatUser) {
     }
 
 
+    //  `graph.base()` is the common ancestor of the two graphs.
+    //  `localGraph` contains user's edits up to saving
+    //  `remoteGraph` contains remote edits to modified nodes
+    //  `graph` must be a descendent of `localGraph` and may include
+    //      some conflict resolution actions performed on it.
+    //
+    //                  --- ... --- `localGraph` -- ... -- `graph`
+    //                 /
+    //  `graph.base()` --- ... --- `remoteGraph`
+    //
     var action = function(graph) {
         var base = graph.base().entities[id],
-            local = graph.entity(id),
+            local = localGraph.entity(id),
             remote = remoteGraph.entity(id),
             target = iD.Entity(local, { version: remote.version }),
             replacements = [];
@@ -142,6 +152,7 @@ iD.actions.MergeRemoteChanges = function(id, remoteGraph, formatUser) {
         if (target.type === 'node') {
             target = mergeLocation(remote, target);
         } else if (target.type === 'way') {
+            // pull in any child nodes that may not be present locally..
             graph.rebase(remoteGraph.childNodes(remote), [graph], false);
             target = mergeChildNodes(target, graph.childNodes(local), replacements);
             target = mergeNodes(base, remote, target);

@@ -99,8 +99,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Node({id: 'a', loc: localLoc, version: '1', v: 2, tags: localTags }),
                     remote = iD.Node({id: 'a', loc: remoteLoc, version: '2', tags: remoteTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', altGraph);
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('a', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -115,8 +115,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Node({id: 'a', loc: localLoc, version: '1', v: 2, tags: localTags }),
                     remote = iD.Node({id: 'a', loc: remoteLoc, version: '2', tags: remoteTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', altGraph);
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('a', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -131,8 +131,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Node({id: 'a', loc: localLoc, version: '1', v: 2, tags: localTags }),
                     remote = iD.Node({id: 'a', loc: remoteLoc, version: '2', tags: remoteTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', altGraph);
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('a', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -147,8 +147,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Node({id: 'a', loc: localLoc, version: '1', v: 2, tags: localTags }),
                     remote = iD.Node({id: 'a', loc: remoteLoc, version: '2', tags: remoteTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', altGraph);
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('a', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -164,8 +164,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Node({id: 'a', loc: localLoc, version: '1', v: 2, tags: localTags }),
                     remote = iD.Node({id: 'a', loc: remoteLoc, version: '2', tags: remoteTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', altGraph);
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('a', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -183,8 +183,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
                     remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('w1', altGraph);
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('w1', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -199,8 +199,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
                     remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('w1', altGraph);
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('w1', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -216,8 +216,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
                     remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote, r2, r3]),
-                    action = iD.actions.MergeRemoteChanges('w1', altGraph);
+                    remoteGraph = makeGraph([remote, r2, r3]),
+                    action = iD.actions.MergeRemoteChanges('w1', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -236,8 +236,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
                     remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
                     graph = makeGraph([local, r2, r3]),
-                    altGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('w1', altGraph);
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('w1', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -254,8 +254,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
                     remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
                     graph = makeGraph([local, r1, r2]),
-                    altGraph = makeGraph([remote, r3, r4]),
-                    action = iD.actions.MergeRemoteChanges('w1', altGraph);
+                    remoteGraph = makeGraph([remote, r3, r4]),
+                    action = iD.actions.MergeRemoteChanges('w1', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -274,8 +274,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
                     remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
                     graph = makeGraph([local, r1, r2]),
-                    altGraph = makeGraph([remote, r3, r4]),
-                    action = iD.actions.MergeRemoteChanges('w1', altGraph);
+                    remoteGraph = makeGraph([remote, r3, r4]),
+                    action = iD.actions.MergeRemoteChanges('w1', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -293,8 +293,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Relation({id: 'r', members: localMembers, version: '1', v: 2, tags: localRelTags}),
                     remote = iD.Relation({id: 'r', members: remoteMembers, version: '2', tags: remoteRelTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([s1, s2, s3, s4, w4]);
-                    action = iD.actions.MergeRemoteChanges('r', altGraph);
+                    remoteGraph = makeGraph([s1, s2, s3, s4, w4]);
+                    action = iD.actions.MergeRemoteChanges('r', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -308,8 +308,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Relation({id: 'r', members: relMembers, version: '1', v: 2, tags: localRelTags}),
                     remote = iD.Relation({id: 'r', members: relMembers, version: '2', tags: remoteRelTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]);
-                    action = iD.actions.MergeRemoteChanges('r', altGraph);
+                    remoteGraph = makeGraph([remote]);
+                    action = iD.actions.MergeRemoteChanges('r', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -323,8 +323,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Relation({id: 'r', members: relMembers, version: '1', v: 2, tags: localRelTags}),
                     remote = iD.Relation({id: 'r', members: relMembers, version: '2', tags: remoteRelTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]);
-                    action = iD.actions.MergeRemoteChanges('r', altGraph);
+                    remoteGraph = makeGraph([remote]);
+                    action = iD.actions.MergeRemoteChanges('r', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -340,8 +340,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Node({id: 'a', loc: localLoc, version: '1', v: 2}),
                     remote = iD.Node({id: 'a', loc: remoteLoc, version: '2'}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', altGraph);
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('a', graph, remoteGraph);
 
                 graph = action(graph);
 
@@ -360,8 +360,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Node({id: 'a', loc: localLoc, version: '1', v: 2, tags: localTags}),
                     remote = iD.Node({id: 'a', loc: remoteLoc, version: '2', tags: remoteTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', altGraph).withOption('force_local');
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('a', graph, remoteGraph).withOption('force_local');
 
                 graph = action(graph);
 
@@ -378,8 +378,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Node({id: 'a', loc: localLoc, version: '1', v: 2, tags: localTags}),
                     remote = iD.Node({id: 'a', loc: remoteLoc, version: '2', tags: remoteTags}),
                     graph = makeGraph([local]),
-                    altGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', altGraph).withOption('force_remote');
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('a', graph, remoteGraph).withOption('force_remote');
 
                 graph = action(graph);
 
@@ -398,8 +398,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
                     remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
                     graph = makeGraph([local, r1]),
-                    altGraph = makeGraph([remote, s3]),
-                    action = iD.actions.MergeRemoteChanges('w1', altGraph).withOption('force_local');
+                    remoteGraph = makeGraph([remote, s3]),
+                    action = iD.actions.MergeRemoteChanges('w1', graph, remoteGraph).withOption('force_local');
 
                 graph = action(graph);
 
@@ -416,8 +416,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Way({id: 'w1', nodes: localNodes, version: '1', v: 2, tags: localTags}),
                     remote = iD.Way({id: 'w1', nodes: remoteNodes, version: '2', tags: remoteTags}),
                     graph = makeGraph([local, r1]),
-                    altGraph = makeGraph([remote, s3]),
-                    action = iD.actions.MergeRemoteChanges('w1', altGraph).withOption('force_remote');
+                    remoteGraph = makeGraph([remote, s3]),
+                    action = iD.actions.MergeRemoteChanges('w1', graph, remoteGraph).withOption('force_remote');
 
                 graph = action(graph);
 
@@ -437,8 +437,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Relation({id: 'r', members: localMembers, version: '1', v: 2, tags: localRelTags}),
                     remote = iD.Relation({id: 'r', members: remoteMembers, version: '2', tags: remoteRelTags}),
                     graph = makeGraph([local, r1, r2, r3, r4, w3]),
-                    altGraph = makeGraph([remote, s1, s2, s3, s4, w4]),
-                    action = iD.actions.MergeRemoteChanges('r', altGraph).withOption('force_local');
+                    remoteGraph = makeGraph([remote, s1, s2, s3, s4, w4]),
+                    action = iD.actions.MergeRemoteChanges('r', graph, remoteGraph).withOption('force_local');
 
                 graph = action(graph);
 
@@ -455,8 +455,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     local = iD.Relation({id: 'r', members: localMembers, version: '1', v: 2, tags: localRelTags}),
                     remote = iD.Relation({id: 'r', members: remoteMembers, version: '2', tags: remoteRelTags}),
                     graph = makeGraph([local, r1, r2, r3, r4, w3]),
-                    altGraph = makeGraph([remote, s1, s2, s3, s4, w4]),
-                    action = iD.actions.MergeRemoteChanges('r', altGraph).withOption('force_remote');
+                    remoteGraph = makeGraph([remote, s1, s2, s3, s4, w4]),
+                    action = iD.actions.MergeRemoteChanges('r', graph, remoteGraph).withOption('force_remote');
 
                 graph = action(graph);
 

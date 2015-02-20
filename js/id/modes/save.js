@@ -11,7 +11,8 @@ iD.modes.Save = function(context) {
         var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
             origChanges = history.changes(iD.actions.DiscardTags(history.difference())),
-            altGraph = iD.Graph(history.base(), true),
+            localGraph = context.graph(),
+            remoteGraph = iD.Graph(history.base(), true),
             modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
             toCheck = _.pluck(_.pluck(modified, 'entity'), 'id'),
             deletedIds = [],
@@ -45,7 +46,7 @@ iD.modes.Save = function(context) {
                     }
 
                 } else {
-                    _.each(result.data, function(entity) { altGraph.replace(entity); });
+                    _.each(result.data, function(entity) { remoteGraph.replace(entity); });
                     checkConflicts(id);
                 }
 
@@ -85,17 +86,17 @@ iD.modes.Save = function(context) {
         function checkConflicts(id) {
             var graph = context.graph(),
                 local = graph.entity(id),
-                remote = altGraph.entity(id);
+                remote = remoteGraph.entity(id);
 
             if (local.version !== remote.version) {
                 var action = iD.actions.MergeRemoteChanges,
-                    merge = action(id, altGraph, formatUser),
+                    merge = action(id, localGraph, remoteGraph, formatUser),
                     diff = history.replace(merge);
 
                 if (diff.length()) return;  // merged safely
 
-                var forceLocal = action(id, altGraph, formatUser).withOption('force_local'),
-                    forceRemote = action(id, altGraph, formatUser).withOption('force_remote');
+                var forceLocal = action(id, localGraph, remoteGraph, formatUser).withOption('force_local'),
+                    forceRemote = action(id, localGraph, remoteGraph, formatUser).withOption('force_remote');
 
                 conflicts.push({
                     id: id,
@@ -270,6 +271,16 @@ iD.modes.Save = function(context) {
                 .text(function(d) { return d.text; })
                 .on('click', function(d) {
                     d.action();
+                    d3.event.preventDefault();
+                });
+
+            details
+                .append('div')
+                .attr('class', 'conflict-choice-buttons joined cf')
+                .append('button')
+                .attr('class', 'conflict-choice-button action col4')
+                .text(t('confirm.okay'))
+                .on('click', function(d) {
                     var container = this.parentElement.parentElement.parentElement;
                     var next = container.parentElement.firstElementChild.classList.contains('expanded') ? container.nextElementSibling : container.parentElement.firstElementChild;
 
@@ -290,11 +301,13 @@ iD.modes.Save = function(context) {
                         .transition()
                         .style('opacity', 0)
                         .remove();
+
                     d3.event.preventDefault();
                 });
 
             items.exit()
                 .remove();
+
 
             function toggleExpanded(el, d) {
                 var error = d3.select(el),
