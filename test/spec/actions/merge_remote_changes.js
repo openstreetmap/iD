@@ -107,7 +107,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(graph.entity('a')).to.eql(local);
             });
 
-            it("doesn't merge nodes if changed tags conflict", function () {
+            it("doesn't merge nodes if changed tags conflict (tag change)", function () {
                 var localTags = {foo: 'foo_local'},                        // changed tag foo
                     remoteTags = {foo: 'foo_remote', bar: 'bar_remote'},   // changed tag foo, added tag bar
                     localLoc = [1, 1],      // didn't move node
@@ -123,7 +123,23 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(graph.entity('a')).to.eql(local);
             });
 
-            it("merges nodes if location is same and changed tags don't conflict", function () {
+            it("doesn't merge nodes if changed tags conflict (tag delete)", function () {
+                var localTags = {},                     // deleted tag foo
+                    remoteTags = {foo: 'foo_remote'},   // changed tag foo
+                    localLoc = [1, 1],      // didn't move node
+                    remoteLoc = [1, 1],     // didn't move node
+                    local = iD.Node({id: 'a', loc: localLoc, version: '1', v: 2, tags: localTags }),
+                    remote = iD.Node({id: 'a', loc: remoteLoc, version: '2', tags: remoteTags}),
+                    graph = makeGraph([local]),
+                    altGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('a', altGraph);
+
+                graph = action(graph);
+
+                expect(graph.entity('a')).to.eql(local);
+            });
+
+            it("merges nodes if location is same and changed tags don't conflict (tag change)", function () {
                 var localTags = {foo: 'foo_local'},                 // changed tag foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote'},   // didn't change tag foo, added tag bar
                     localLoc = [1, 1],      // didn't move node
@@ -138,6 +154,23 @@ describe("iD.actions.MergeRemoteChanges", function () {
 
                 expect(graph.entity('a').version).to.eql('2');
                 expect(graph.entity('a').tags).to.eql({foo: 'foo_local', bar: 'bar_remote'});
+            });
+
+            it("merges nodes if location is same and changed tags don't conflict (tag delete)", function () {
+                var localTags = {},                                 // deleted tag foo
+                    remoteTags = {foo: 'foo', bar: 'bar_remote'},   // didn't change tag foo, added tag bar
+                    localLoc = [1, 1],      // didn't move node
+                    remoteLoc = [1, 1],     // didn't move node
+                    local = iD.Node({id: 'a', loc: localLoc, version: '1', v: 2, tags: localTags }),
+                    remote = iD.Node({id: 'a', loc: remoteLoc, version: '2', tags: remoteTags}),
+                    graph = makeGraph([local]),
+                    altGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('a', altGraph);
+
+                graph = action(graph);
+
+                expect(graph.entity('a').version).to.eql('2');
+                expect(graph.entity('a').tags).to.eql({bar: 'bar_remote'});
             });
         });
 

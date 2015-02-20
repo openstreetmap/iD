@@ -108,18 +108,21 @@ iD.actions.MergeRemoteChanges = function(id, remoteGraph, formatUser) {
         }
 
         var ccount = conflicts.length,
-            keys = _.reject(_.union(_.keys(base.tags), _.keys(remote.tags)), ignoreKey),
-            tags = _.clone(target.tags),
+            o = base.tags || {},
+            a = target.tags || {},
+            b = remote.tags || {},
+            keys = _.reject(_.union(_.keys(o), _.keys(a), _.keys(b)), ignoreKey),
+            tags = _.clone(a),
             changed = false;
 
         for (var i = 0; i < keys.length; i++) {
             var k = keys[i];
-            if (remote.tags[k] !== base.tags[k]) {  // tag modified remotely..
-                if (target.tags[k] && target.tags[k] !== remote.tags[k]) {
+            if (o[k] !== b[k] && a[k] !== b[k]) {   // changed remotely..
+                if (o[k] !== a[k]) {   // changed locally..
                     conflicts.push(t('merge_remote_changes.conflict.tags',
-                        { tag: k, local: target.tags[k], remote: remote.tags[k], user: user(remote.user) }));
+                        { tag: k, local: a[k], remote: b[k], user: user(remote.user) }));
                 } else {
-                    tags[k] = remote.tags[k];
+                    tags[k] = b[k];    // unchanged locally, accept remote tag..
                     changed = true;
                 }
             }
