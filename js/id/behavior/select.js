@@ -25,7 +25,7 @@ iD.behavior.Select = function(context) {
             if (context.selectedIDs().length !== 1 || context.selectedIDs()[0] !== datum.id) {
                 context.enter(iD.modes.Select(context, [datum.id]));
             } else {
-                context.mode().reselect();
+                context.mode().suppressMenu(false).reselect();
             }
         } else if (context.selectedIDs().indexOf(datum.id) >= 0) {
             var selectedIDs = _.without(context.selectedIDs(), datum.id);
