@@ -1829,6 +1829,9 @@ en:
       relation:
         name: Relation
         terms: "<translate with synonyms or related terms for 'Relation', separated by commas>"
+      roundabout:
+        name: Roundabout
+        terms: "<translate with synonyms or related terms for 'Roundabout', separated by commas>"
       route/ferry:
         name: Ferry Route
         terms: "<translate with synonyms or related terms for 'Ferry Route', separated by commas>"

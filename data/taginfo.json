@@ -1630,6 +1630,10 @@
             "value": "tram"
         },
         {
+            "key": "junction",
+            "value": "roundabout"
+        },
+        {
             "key": "route",
             "value": "ferry"
         },

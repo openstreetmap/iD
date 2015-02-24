@@ -2960,6 +2960,10 @@
                 "name": "Relation",
                 "terms": ""
             },
+            "roundabout": {
+                "name": "Roundabout",
+                "terms": ""
+            },
             "route/ferry": {
                 "name": "Ferry Route",
                 "terms": ""

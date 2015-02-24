@@ -52,21 +52,30 @@ iD.presets = function() {
     // (see `iD.Way#isArea()`). In other words, the keys of L form the whitelist,
     // and the subkeys form the blacklist.
     all.areaKeys = function() {
-        var areaKeys = {};
+        var areaKeys = {},
+            ignore = ['highway', 'footway', 'railway', 'type'],
+            presets = _.reject(all.collection, 'suggestion');
 
-        all.collection.forEach(function(d) {
-            if (d.suggestion) return;
-
+        // whitelist
+        presets.forEach(function(d) {
             for (var key in d.tags) break;
             if (!key) return;
-            var value = d.tags[key];
+            if (ignore.indexOf(key) !== -1) return;
 
-            if (['highway', 'footway', 'railway', 'type'].indexOf(key) === -1) {
-                if (d.geometry.indexOf('area') >= 0) {
-                    areaKeys[key] = areaKeys[key] || {};
-                } else if (key in areaKeys && value !== '*') {
-                    areaKeys[key][value] = true;
-                }
+            if (d.geometry.indexOf('area') !== -1) {
+                areaKeys[key] = areaKeys[key] || {};
+            }
+        });
+
+        // blacklist
+        presets.forEach(function(d) {
+            for (var key in d.tags) break;
+            if (!key) return;
+            if (ignore.indexOf(key) !== -1) return;
+
+            var value = d.tags[key];
+            if (d.geometry.indexOf('area') === -1 && key in areaKeys && value !== '*') {
+                areaKeys[key][value] = true;
             }
         });
 

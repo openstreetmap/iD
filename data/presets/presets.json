@@ -6804,6 +6804,17 @@
             "relation"
         ]
     },
+    "roundabout": {
+        "geometry": [
+            "vertex",
+            "line"
+        ],
+        "tags": {
+            "junction": "roundabout"
+        },
+        "name": "Roundabout",
+        "searchable": false
+    },
     "route/ferry": {
         "icon": "ferry",
         "geometry": [
