@@ -179,7 +179,7 @@ iD.modes.Save = function(context) {
             body.append('div')
                 .attr('class','message-text conflicts-message-text');
 
-            addConflictItems(selection, conflicts);
+            addConflicts(selection, conflicts);
 
             var buttons = body
                 .append('div')
@@ -206,7 +206,7 @@ iD.modes.Save = function(context) {
         }
 
 
-        function addConflictItems(selection, data) {
+        function addConflicts(selection, data) {
             var message = selection
                 .select('.message-text');
 
@@ -246,13 +246,13 @@ iD.modes.Save = function(context) {
             var details = enter
                 .append('div')
                 .attr('class', 'conflict-detail-container')
-                .style('display', function(d,i) {
-                    return i === 0 ? 'block' : 'none';
-                });
+                .style('display', function(d, i) { return i === 0 ? 'block' : 'none'; });
 
             details
                 .append('ul')
-                .attr('class', 'conflict-detail-list')
+                .attr('class', 'conflict-detail-list');
+
+            details
                 .selectAll('li')
                 .data(function(d) { return d.details || []; })
                 .enter()
@@ -261,18 +261,41 @@ iD.modes.Save = function(context) {
                 .html(function(d) { return d; });
 
             details
-                .append('div')
-                .attr('class', 'conflict-choice-buttons joined cf')
-                .selectAll('button')
-                .data(function(d) { return d.choices || []; })
-                .enter()
-                .append('button')
-                .attr('class', 'conflict-choice-button action col6')
-                .text(function(d) { return d.text; })
-                .on('click', function(d) {
-                    d.action();
-                    d3.event.preventDefault();
-                });
+                .each(addChoices);
+
+            // var choices = details
+            //     .append('ul')
+            //     .attr('class', 'layer-list')
+            //     .selectAll('li')
+            //     .data(function(d) { return d.choices || []; })
+            //     .enter();
+
+            // choices
+            //     .append('li')
+            //     .attr('class', 'layer')
+            //     .append('label')
+            //     .append('input')
+            //     .attr('type', 'radio')
+            //     .on('change', function(d) {
+            //         d.action();
+            //         d3.event.preventDefault();
+            //     })
+            //     .append('span')
+            //     .text(function(d) { return d.text; });
+
+            // details
+            //     .append('div')
+            //     .attr('class', 'conflict-choice-buttons joined cf')
+            //     .selectAll('button')
+            //     .data(function(d) { return d.choices || []; })
+            //     .enter()
+            //     .append('button')
+            //     .attr('class', 'conflict-choice-button action col6')
+            //     .text(function(d) { return d.text; })
+            //     .on('click', function(d) {
+            //         d.action();
+            //         d3.event.preventDefault();
+            //     });
 
             details
                 .append('div')
@@ -339,6 +362,55 @@ iD.modes.Save = function(context) {
 
         }
 
+        function addChoices(datum) {
+            var selection = d3.select(this)
+                .append('ul')
+                .attr('class', 'layer-list');
+
+            var choices = selection
+                .selectAll('li')
+                .data(function(d) { return d.choices || []; });
+
+            // enter
+            var enter = choices.enter()
+                .append('li')
+                .attr('class', 'layer');
+
+            var label = enter
+                .append('label');
+
+            label
+                .append('input')
+                .attr('type', 'radio')
+                .attr('name', datum.id)
+                .on('change', function(d) { choose(this, d); });
+
+            label
+                .append('span')
+                .text(function(d) { return d.text; });
+
+            // update
+            choices
+                .selectAll('input')
+                .each(function(d, i) { if (i === 0) choose(this, d); });
+
+            // exit
+            choices.exit()
+                .remove();
+        }
+
+        function choose(el, datum) {
+            if (d3.event) d3.event.preventDefault();
+
+            d3.select(el.parentElement.parentElement.parentElement)
+                .selectAll('li')
+                .classed('active', function(d) { return d === datum; })
+                .selectAll('input')
+                .property('checked', function(d) { return d === datum; });
+
+            datum.action();
+        }
+
 
         function showErrors() {
             var selection = iD.ui.confirm(context.container());
@@ -351,12 +423,12 @@ iD.modes.Save = function(context) {
                 .append('h3')
                 .text(t('save.error'));
 
-            addErrorItems(selection, errors);
+            addErrors(selection, errors);
             selection.okButton();
         }
 
 
-        function addErrorItems(selection, data) {
+        function addErrors(selection, data) {
             var message = selection
                 .select('.modal-section.message-text');
 
