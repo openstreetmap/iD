@@ -7,7 +7,7 @@ iD.modes.Save = function(context) {
         context.enter(iD.modes.Browse(context));
     }
 
-    function save(e) {
+    function save(e, tryAgain) {
         var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
             origChanges = history.changes(iD.actions.DiscardTags(history.difference())),
@@ -19,17 +19,17 @@ iD.modes.Save = function(context) {
             conflicts = [],
             errors = [];
 
-        history.perform(iD.actions.Noop());  // checkpoint
+        if (!tryAgain) history.perform(iD.actions.Noop());  // checkpoint
         context.container().call(loading);
 
         if (toCheck.length) {
-            // Reload modified entities into an alternate graph and check for conflicts..
             _.each(toCheck, loadAndCheck);
         } else {
             finalize();
         }
 
 
+        // Reload modified entities into an alternate graph and check for conflicts..
         function loadAndCheck(id) {
             context.connection().loadEntity(id, function(err, result) {
                 toCheck = _.without(toCheck, id);
@@ -191,7 +191,7 @@ iD.modes.Save = function(context) {
                 .attr('class', 'action conflicts-button col6')
                 .on('click.try_again', function() {
                     selection.remove();
-                    save(e);
+                    save(e, true);
                 })
                 .text(t('save.title'));
 
@@ -217,20 +217,14 @@ iD.modes.Save = function(context) {
             var enter = items.enter()
                 .append('div')
                 .attr('class', 'conflict-container')
-                .classed('expanded', function(d, i) {
-                    return i === 0;
-                })
-                .each(function(d,i) {
-                    if (i === 0) zoomToEntity(d);
-                });
+                .classed('expanded', function(d, i) { return i === 0; })
+                .each(function(d, i) { if (i === 0) zoomToEntity(d); });
 
             enter
                 .append('h4')
-                .style('display', function(d, i) {
-                    return (i === 0) ? 'block': 'none';
-                })
+                .style('display', function(d, i) { return (i === 0) ? 'block' : 'none'; })
                 .text(function(d, i) {
-                    return t('save.conflict.count', { num: i+1, total: data.length });
+                    return t('save.conflict.count', { num: i + 1, total: data.length });
                 });
 
             enter
@@ -263,45 +257,11 @@ iD.modes.Save = function(context) {
             details
                 .each(addChoices);
 
-            // var choices = details
-            //     .append('ul')
-            //     .attr('class', 'layer-list')
-            //     .selectAll('li')
-            //     .data(function(d) { return d.choices || []; })
-            //     .enter();
-
-            // choices
-            //     .append('li')
-            //     .attr('class', 'layer')
-            //     .append('label')
-            //     .append('input')
-            //     .attr('type', 'radio')
-            //     .on('change', function(d) {
-            //         d.action();
-            //         d3.event.preventDefault();
-            //     })
-            //     .append('span')
-            //     .text(function(d) { return d.text; });
-
-            // details
-            //     .append('div')
-            //     .attr('class', 'conflict-choice-buttons joined cf')
-            //     .selectAll('button')
-            //     .data(function(d) { return d.choices || []; })
-            //     .enter()
-            //     .append('button')
-            //     .attr('class', 'conflict-choice-button action col6')
-            //     .text(function(d) { return d.text; })
-            //     .on('click', function(d) {
-            //         d.action();
-            //         d3.event.preventDefault();
-            //     });
-
             details
                 .append('div')
-                .attr('class', 'conflict-choice-buttons joined cf')
+                .attr('class', 'modal-section buttons cf')
                 .append('button')
-                .attr('class', 'conflict-choice-button action col4')
+                .attr('class', 'action col4')
                 .text(t('confirm.okay'))
                 .on('click', function(d) {
                     var container = this.parentElement.parentElement.parentElement;
@@ -371,7 +331,6 @@ iD.modes.Save = function(context) {
                 .selectAll('li')
                 .data(function(d) { return d.choices || []; });
 
-            // enter
             var enter = choices.enter()
                 .append('li')
                 .attr('class', 'layer');
@@ -383,26 +342,26 @@ iD.modes.Save = function(context) {
                 .append('input')
                 .attr('type', 'radio')
                 .attr('name', datum.id)
-                .on('change', function(d) { choose(this, d); });
+                .on('change', function(d) {
+                    var ul = this.parentElement.parentElement.parentElement;
+                    choose(ul, d);
+                });
 
             label
                 .append('span')
                 .text(function(d) { return d.text; });
 
-            // update
+            // choose first choice by default..
             choices
-                .selectAll('input')
-                .each(function(d, i) { if (i === 0) choose(this, d); });
-
-            // exit
-            choices.exit()
-                .remove();
+                .each(function(d, i) {
+                    if (i === 0) choose(this.parentElement, d);
+                });
         }
 
         function choose(el, datum) {
             if (d3.event) d3.event.preventDefault();
 
-            d3.select(el.parentElement.parentElement.parentElement)
+            d3.select(el)
                 .selectAll('li')
                 .classed('active', function(d) { return d === datum; })
                 .selectAll('input')
