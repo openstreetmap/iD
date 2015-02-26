@@ -8,7 +8,7 @@ iD.ui.MapData = function(context) {
     function map_data(selection) {
 
         function showsFeature(d) {
-            return autoHiddenFeature(d) ? null : context.features().enabled(d);
+            return context.features().enabled(d);
         }
 
         function autoHiddenFeature(d) {
@@ -83,13 +83,10 @@ iD.ui.MapData = function(context) {
             items
                 .classed('active', active)
                 .selectAll('input')
-                .property('checked', active);
-
-            if (name === 'feature') {
-                items
-                    .selectAll('input')
-                    .property('indeterminate', autoHiddenFeature);
-            }
+                .property('checked', active)
+                .property('indeterminate', function(d) {
+                    return (name === 'feature' && autoHiddenFeature(d));
+                });
 
             //exit
             items.exit()
@@ -309,7 +306,6 @@ iD.ui.MapData = function(context) {
         context.features()
             .on('change.map_data-update', update);
 
-        update();
         setFill(fillDefault);
 
         var keybinding = d3.keybinding('features')
