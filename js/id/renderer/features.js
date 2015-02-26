@@ -173,6 +173,10 @@ iD.Features = function(context) {
 
     function features() {}
 
+    features.features = function() {
+        return _features;
+    };
+
     features.keys = function() {
         return _keys;
     };
