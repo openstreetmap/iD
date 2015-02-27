@@ -87,27 +87,44 @@ iD.modes.Save = function(context) {
             var local = localGraph.entity(id),
                 remote = remoteGraph.entity(id);
 
-            if (local.version !== remote.version) {
-                var action = iD.actions.MergeRemoteChanges,
-                    merge = action(id, localGraph, remoteGraph, formatUser),
-                    diff = history.replace(merge);
+            if (compareVersions(local, remote)) return;
 
-                if (diff.length()) return;  // merged safely
+            var action = iD.actions.MergeRemoteChanges,
+                merge = action(id, localGraph, remoteGraph, formatUser),
+                diff = history.replace(merge);
 
-                var forceLocal = action(id, localGraph, remoteGraph, formatUser).withOption('force_local'),
-                    forceRemote = action(id, localGraph, remoteGraph, formatUser).withOption('force_remote');
+            if (diff.length()) return;  // merged safely
 
-                conflicts.push({
-                    id: id,
-                    name: entityName(local),
-                    details: merge.conflicts(),
-                    chosen: 1,
-                    choices: [
-                        choice(id, t('save.conflict.keep_local'), forceLocal),
-                        choice(id, t('save.conflict.keep_remote'), forceRemote)
-                    ]
-                });
+            var forceLocal = action(id, localGraph, remoteGraph, formatUser).withOption('force_local'),
+                forceRemote = action(id, localGraph, remoteGraph, formatUser).withOption('force_remote');
+
+            conflicts.push({
+                id: id,
+                name: entityName(local),
+                details: merge.conflicts(),
+                chosen: 1,
+                choices: [
+                    choice(id, t('save.conflict.keep_local'), forceLocal),
+                    choice(id, t('save.conflict.keep_remote'), forceRemote)
+                ]
+            });
+        }
+
+        function compareVersions(local, remote) {
+            if (local.version !== remote.version) return false;
+
+            if (local.type === 'way') {
+                var children = _.union(local.nodes, remote.nodes);
+
+                for (var i = 0; i < children.length; i++) {
+                    var a = localGraph.hasEntity(children[i]),
+                        b = remoteGraph.hasEntity(children[i]);
+
+                    if (!a || !b || a.version !== b.version) return false;
+                }
             }
+
+            return true;
         }
 
 
