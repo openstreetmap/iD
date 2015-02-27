@@ -2504,15 +2504,6 @@ img.wiki-image {
     padding: 20px 20px 0 20px;
 }
 
-.conflict-container:not(.expanded) .conflict-description:hover {
-    background: #ececec;
-}
-
-.conflict-container.expanded {
-    padding: 10px 0;
-    background: #f6f6f6;
-}
-
 .conflict-detail-container {
     padding: 10px 20px;
 }

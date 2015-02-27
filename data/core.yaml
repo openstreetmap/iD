@@ -314,16 +314,17 @@ en:
     no_changes: No changes to save.
     error: Errors occurred while trying to save
     status_code: "Server returned status code {code}"
-    status_gone: '{name} has already been deleted.'
     unknown_error_details: "Please ensure you are connected to the internet."
     uploading: Uploading changes to OpenStreetMap.
     unsaved_changes: You have unsaved changes
     conflict:
       header: Resolve conflicting edits
       count: 'Conflict {num} of {total}'
-      message: '{name}'
+      previous: '< Previous'
+      next: 'Next >'
       keep_local: Keep mine
       keep_remote: Use theirs
+      deleted: 'This object has been deleted.'
       restore: Restore
       delete: Leave Deleted
       download_changes: Download your changes.

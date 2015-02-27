@@ -36,7 +36,7 @@ iD.modes.Save = function(context) {
 
                 if (err) {
                     if (err.status === 410) {   // Status: Gone (contains no responseText)
-                        addDeleteConflict(id, err);
+                        addDeleteConflict(id);
                     } else {
                         errors.push({
                             id: id,
@@ -57,35 +57,34 @@ iD.modes.Save = function(context) {
         }
 
 
-        function addDeleteConflict(id, err) {
+        function addDeleteConflict(id) {
             if (deletedIds.indexOf(id) !== -1) return;
             else deletedIds.push(id);
 
-            function undelete(id) {
-                return function(graph) {
-                    var entity = context.entity(id),
-                        target = iD.Entity(entity, { version: +entity.version + 1 });
-                    return graph.replace(target);
-                };
-            }
-
-            var local = context.graph().entity(id);
+            var local = localGraph.entity(id);
 
             conflicts.push({
                 id: id,
-                msg: t('save.status_gone', { name: entityName(local) }),
-                details: [ t('save.status_code', { code: err.status }) ],
+                name: entityName(local),
+                details: [ t('save.conflict.deleted') ],
+                chosen: 1,
                 choices: [
-                    choice(id, t('save.conflict.restore'), undelete(id)),
+                    choice(id, t('save.conflict.restore'), undelete(local)),
                     choice(id, t('save.conflict.delete'), iD.actions.DeleteMultiple([id]))
-                ]
+                ],
             });
+
+            function undelete(entity) {
+                return function(graph) {
+                    var target = iD.Entity(entity, { version: +entity.version + 1 });
+                    return graph.replace(target);
+                };
+            }
         }
 
 
         function checkConflicts(id) {
-            var graph = context.graph(),
-                local = graph.entity(id),
+            var local = localGraph.entity(id),
                 remote = remoteGraph.entity(id);
 
             if (local.version !== remote.version) {
@@ -100,8 +99,9 @@ iD.modes.Save = function(context) {
 
                 conflicts.push({
                     id: id,
-                    msg: t('save.conflict.message', { name: entityName(local) }),
+                    name: entityName(local),
                     details: merge.conflicts(),
+                    chosen: 1,
                     choices: [
                         choice(id, t('save.conflict.keep_local'), forceLocal),
                         choice(id, t('save.conflict.keep_remote'), forceRemote)
@@ -113,6 +113,7 @@ iD.modes.Save = function(context) {
 
         function finalize() {
             if (conflicts.length) {
+                conflicts.sort(function(a,b) { return b.id.localeCompare(a.id); });
                 showConflicts();
             } else if (errors.length) {
                 showErrors();
@@ -125,7 +126,7 @@ iD.modes.Save = function(context) {
                         if (err) {
                             errors.push({
                                 msg: err.responseText,
-                                details: [ t('save.status_code', {code: err.status}) ]
+                                details: [ t('save.status_code', { code: err.status }) ]
                             });
                             showErrors();
                         } else {
@@ -183,10 +184,15 @@ iD.modes.Save = function(context) {
 
             body
                 .append('div')
-                .attr('class', 'message-text conflicts-message-text');
+                .attr('class', 'conflict-container fillL3')
+                .call(showConflict, 0);
 
             body
-                .call(showConflict, conflicts, 0);
+                .append('div')
+                .attr('class', 'conflicts-done')
+                .attr('opacity', 0)
+                .style('display', 'none')
+                .text(t('save.conflict.done'));
 
             var buttons = body
                 .append('div')
@@ -194,7 +200,7 @@ iD.modes.Save = function(context) {
 
             buttons
                 .append('button')
-                .attr('disabled', true)
+                .attr('disabled', conflicts.length > 1)
                 .attr('class', 'action conflicts-button col6')
                 .text(t('save.title'))
                 .on('click.try_again', function() {
@@ -213,38 +219,48 @@ iD.modes.Save = function(context) {
         }
 
 
-        function showConflict(selection, data, index) {
+        function showConflict(selection, index) {
+            var parent = d3.select(selection.node().parentElement);
+
+            // enable save button if this is the last conflict being reviewed..
+            if (index === conflicts.length - 1) {
+                window.setTimeout(function() {
+                    parent.select('.conflicts-button')
+                        .attr('disabled', null);
+
+                    parent.select('.conflicts-done')
+                        .transition()
+                        .attr('opacity', 1)
+                        .style('display', 'block');
+                }, 250);
+            }
+
             var item = selection
-                .selectAll('.conflict-container')
-                .data([data[index]]);
+                .selectAll('.conflict')
+                .data([conflicts[index]]);
 
             var enter = item.enter()
                 .append('div')
-                .attr('class', 'conflict-container');
-                // .classed('expanded', function(d, i) { return i === 0; })
-                // .each(function(d, i) { if (i === 0) zoomToEntity(d); });
+                .attr('class', 'conflict');
 
             enter
                 .append('h4')
                 .attr('class', 'conflict-count')
-                // .style('display', function(d, i) { return (i === 0) ? 'block' : 'none'; })
-                .text(t('save.conflict.count', { num: index + 1, total: data.length }));
+                .text(t('save.conflict.count', { num: index + 1, total: conflicts.length }));
 
             enter
                 .append('a')
                 .attr('class', 'conflict-description')
                 .attr('href', '#')
-                .text(function(d) { return d.msg || t('save.unknown_error_details'); })
+                .text(function(d) { return d.name; })
                 .on('click', function(d) {
                     zoomToEntity(d.id);
-                    // toggleExpanded(this.parentElement, d);
                     d3.event.preventDefault();
                 });
 
             var details = enter
                 .append('div')
                 .attr('class', 'conflict-detail-container');
-                // .style('display', function(d, i) { return i === 0 ? 'block' : 'none'; });
 
             details
                 .append('ul')
@@ -259,92 +275,44 @@ iD.modes.Save = function(context) {
             details
                 .append('div')
                 .attr('class', 'conflict-choices')
-                .each(addChoices);
+                .call(addChoices);
 
             details
                 .append('div')
                 .attr('class', 'conflict-nav-buttons joined cf')
                 .selectAll('button')
-                .data(['prev', 'next'])
+                .data(['previous', 'next'])
                 .enter()
                 .append('button')
+                .text(function(d) { return t('save.conflict.' + d); })
                 .attr('class', 'conflict-nav-button action col6')
-                .text(function(d) { return d; })
-                .on('click', function(d) {
+                .attr('disabled', function(d, i) {
+                    return (i === 0 && index === 0) ||
+                        (i === 1 && index === conflicts.length - 1) || null;
+                })
+                .on('click', function(d, i) {
+                    var container = parent.select('.conflict-container'), //d3.select(this.parentElement.parentElement.parentElement.parentElement),
+                    sign = (i === 0 ? -1 : 1);
+
+                    container
+                        .selectAll('.conflict')
+                        .remove();
+
+                    container
+                        .call(showConflict, index + sign);
+
                     d3.event.preventDefault();
                 });
-
-            // details
-            //     .append('div')
-            //     .attr('class', 'modal-section buttons cf')
-            //     .append('button')
-            //     .attr('class', 'action col4')
-            //     .text(t('confirm.okay'))
-            //     .on('click', function(d) {
-            //         var container = this.parentElement.parentElement.parentElement;
-            //         var next = container.parentElement.firstElementChild.classList.contains('expanded') ? container.nextElementSibling : container.parentElement.firstElementChild;
-
-            //         window.setTimeout(function() {
-            //             if (next) {
-            //                 toggleExpanded(next, d);
-            //             } else {
-            //                 d3.select(container.parentElement).append('div')
-            //                     .attr('class','conflicts-done')
-            //                     .text(t('save.conflict.done'));
-
-            //                 d3.select('.conflicts-button')
-            //                     .attr('disabled', null);
-            //             }
-            //         }, 250);
-
-            //         d3.select(container)
-            //             .transition()
-            //             .style('opacity', 0)
-            //             .remove();
-
-            //         d3.event.preventDefault();
-            //     });
 
             item.exit()
                 .remove();
 
-
-            function toggleExpanded(el, d) {
-                var error = d3.select(el),
-                    detail = d3.select(el.getElementsByTagName('div')[0]),
-                    count = d3.select(el.getElementsByTagName('h4')[0]),
-                    exp = error.classed('expanded');
-
-                // Clear old expanded
-                enter.classed('expanded', false);
-                details.style('display', 'none');
-
-                // Set new
-                detail
-                    .style('opacity', exp ? 1 : 0)
-                    .transition()
-                    .style('opacity', exp ? 0 : 1)
-                    .style('display', exp ? 'none' : 'block');
-
-                count
-                    .style('opacity', exp ? 1 : 0)
-                    .transition()
-                    .style('opacity', exp ? 0 : 1)
-                    .style('display', exp ? 'none' : 'block');
-
-                zoomToEntity(d);
-
-                error.classed('expanded', !exp);
-            }
-
         }
 
-        function addChoices(datum) {
-            var selection = d3.select(this)
-                .append('ul')
-                .attr('class', 'layer-list');
-
+        function addChoices(selection) {
             var choices = selection
+                .append('ul')
+                .attr('class', 'layer-list')
                 .selectAll('li')
                 .data(function(d) { return d.choices || []; });
 
@@ -358,9 +326,10 @@ iD.modes.Save = function(context) {
             label
                 .append('input')
                 .attr('type', 'radio')
-                .attr('name', datum.id)
-                .on('change', function(d) {
+                .attr('name', function(d) { return d.id; })
+                .on('change', function(d, i) {
                     var ul = this.parentElement.parentElement.parentElement;
+                    ul.__data__.chosen = i;
                     choose(ul, d);
                 });
 
@@ -368,17 +337,17 @@ iD.modes.Save = function(context) {
                 .append('span')
                 .text(function(d) { return d.text; });
 
-            // choose first choice by default..
             choices
                 .each(function(d, i) {
-                    if (i === 0) choose(this.parentElement, d);
+                    var ul = this.parentElement;
+                    if (ul.__data__.chosen === i) choose(ul, d);
                 });
         }
 
-        function choose(el, datum) {
+        function choose(ul, datum) {
             if (d3.event) d3.event.preventDefault();
 
-            d3.select(el)
+            d3.select(ul)
                 .selectAll('li')
                 .classed('active', function(d) { return d === datum; })
                 .selectAll('input')
@@ -471,8 +440,10 @@ iD.modes.Save = function(context) {
         }
 
         function zoomToEntity(id) {
-            var entity = context.graph().hasEntity(id);
+            context.surface().selectAll('.hover')
+                .classed('hover', false);
 
+            var entity = context.graph().hasEntity(id);
             if (entity) {
                 context.map().zoomTo(entity);
                 context.surface().selectAll(
@@ -499,27 +470,13 @@ iD.modes.Save = function(context) {
         id: 'save'
     };
 
-    var behaviors = [
-        iD.behavior.Hover(context),
-        // iD.behavior.Select(context),
-        iD.behavior.Lasso(context),
-        iD.modes.DragNode(context).behavior];
-
     mode.enter = function() {
-        behaviors.forEach(function(behavior) {
-            context.install(behavior);
-        });
-
         context.connection().authenticate(function() {
             context.ui().sidebar.show(ui);
         });
     };
 
     mode.exit = function() {
-        behaviors.forEach(function(behavior) {
-            context.uninstall(behavior);
-        });
-
         context.ui().sidebar.hide(ui);
     };
 
