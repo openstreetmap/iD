@@ -80,15 +80,14 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
                 remoteNode = remoteGraph.hasEntity(id);
 
             // restore wanted..
-            if (remoteNode && option === 'force_remote') {
-                updates.replacements.push(remoteNode);
-            } else if (localNode && option === 'force_local') {
-                updates.replacements.push(localNode);
+            if (option === 'force_remote') {
+                if (remoteNode) updates.replacements.push(remoteNode);
             } else if (localNode && remoteNode) {
                 var targetNode = iD.Entity(localNode, { version: remoteNode.version });
-                targetNode = mergeLocation(remoteNode, targetNode);
-                if (conflicts.length !== ccount) break;
-
+                if (option !== 'force_local') {
+                    targetNode = mergeLocation(remoteNode, targetNode);
+                    if (conflicts.length !== ccount) break;
+                }
                 updates.replacements.push(targetNode);
             }
         }
