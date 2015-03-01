@@ -199,6 +199,12 @@ iD.History = function(context) {
                     if (id in base.graph.entities) {
                         baseEntities[id] = base.graph.entities[id];
                     }
+                    // get originals of parent entities too
+                    _.forEach(base.graph._parentWays[id], function(parentId) {
+                        if (parentId in base.graph.entities) {
+                            baseEntities[parentId] = base.graph.entities[parentId];
+                        }
+                    });
                 });
 
                 var x = {};
