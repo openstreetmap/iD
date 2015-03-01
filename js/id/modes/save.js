@@ -15,7 +15,6 @@ iD.modes.Save = function(context) {
             remoteGraph = iD.Graph(history.base(), true),
             modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
             toCheck = _.pluck(_.pluck(modified, 'entity'), 'id'),
-            deletedIds = [],
             conflicts = [],
             errors = [];
 
@@ -36,6 +35,7 @@ iD.modes.Save = function(context) {
 
                 if (err) {
                     if (err.status === 410) {   // Status: Gone (contains no responseText)
+                        remoteGraph.remove(remoteGraph.hasEntity(id));
                         addDeleteConflict(id);
                     } else {
                         errors.push({
@@ -58,10 +58,10 @@ iD.modes.Save = function(context) {
 
 
         function addDeleteConflict(id) {
-            if (deletedIds.indexOf(id) !== -1) return;
-            else deletedIds.push(id);
-
-            var local = localGraph.entity(id);
+            var local = localGraph.entity(id),
+                action = iD.actions.MergeRemoteChanges,
+                forceLocal = action(id, localGraph, remoteGraph).withOption('force_local'),
+                forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote');
 
             conflicts.push({
                 id: id,
@@ -69,17 +69,10 @@ iD.modes.Save = function(context) {
                 details: [ t('save.conflict.deleted') ],
                 chosen: 1,
                 choices: [
-                    choice(id, t('save.conflict.restore'), undelete(local)),
-                    choice(id, t('save.conflict.delete'), iD.actions.DeleteMultiple([id]))
+                    choice(id, t('save.conflict.restore'), forceLocal),
+                    choice(id, t('save.conflict.delete'), forceRemote)
                 ],
             });
-
-            function undelete(entity) {
-                return function(graph) {
-                    var target = iD.Entity(entity, { version: +entity.version + 1 });
-                    return graph.replace(target);
-                };
-            }
         }
 
 
@@ -95,8 +88,8 @@ iD.modes.Save = function(context) {
 
             if (diff.length()) return;  // merged safely
 
-            var forceLocal = action(id, localGraph, remoteGraph, formatUser).withOption('force_local'),
-                forceRemote = action(id, localGraph, remoteGraph, formatUser).withOption('force_remote');
+            var forceLocal = action(id, localGraph, remoteGraph).withOption('force_local'),
+                forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote');
 
             conflicts.push({
                 id: id,
@@ -308,7 +301,7 @@ iD.modes.Save = function(context) {
                         (i === 1 && index === conflicts.length - 1) || null;
                 })
                 .on('click', function(d, i) {
-                    var container = parent.select('.conflict-container'), //d3.select(this.parentElement.parentElement.parentElement.parentElement),
+                    var container = parent.select('.conflict-container'),
                     sign = (i === 0 ? -1 : 1);
 
                     container

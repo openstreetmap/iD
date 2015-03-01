@@ -63,36 +63,60 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
     }
 
 
-    function mergeChildNodes(target, children, updates, graph) {
+    function mergeChildren(target, children, updates, graph) {
+        function isUsed(node) {
+            return node.hasInterestingTags() ||
+                graph.parentWays(node).length > 0 ||
+                graph.parentRelations(node).length > 0;
+        }
+
         var ccount = conflicts.length;
 
         for (var i = 0; i < children.length; i++) {
             var id = children[i],
                 node = graph.hasEntity(id);
 
-            // remove unwanted.
+            // remove unused childNodes.
             if (target.nodes.indexOf(id) === -1) {
-                if (node && !node.hasInterestingTags()) updates.removeIds.push(id);
+                if (node && !isUsed(node)) {
+                    updates.removeIds.push(id);
+                }
                 continue;
             }
 
+            // restore used childNodes..
             var localNode = localGraph.hasEntity(id),
-                remoteNode = remoteGraph.hasEntity(id);
+                remoteNode = remoteGraph.hasEntity(id),
+                targetNode;
 
-            // restore wanted..
-            if (option === 'force_remote') {
-                if (remoteNode) updates.replacements.push(remoteNode);
-            } else if (localNode && remoteNode) {
-                var targetNode = iD.Entity(localNode, { version: remoteNode.version });
-                if (option !== 'force_local') {
-                    targetNode = mergeLocation(remoteNode, targetNode);
-                    if (conflicts.length !== ccount) break;
-                }
+            if (remoteNode && option === 'force_remote') {
+                updates.replacements.push(remoteNode);
+
+            } else if (localNode && option === 'force_local') {
+                targetNode = iD.Entity(localNode,
+                    { version: (remoteNode ? remoteNode.version : localNode.version + 1) });
+                updates.replacements.push(targetNode);
+
+            } else if (localNode && remoteNode && option === 'safe') {
+                targetNode = iD.Entity(localNode, { version: remoteNode.version });
+                targetNode = mergeLocation(remoteNode, targetNode);
+                if (conflicts.length !== ccount) break;
                 updates.replacements.push(targetNode);
             }
         }
 
         return target;
+    }
+
+
+    function updateChildren(updates, graph) {
+        for (var i = 0; i < updates.replacements.length; i++) {
+            graph = graph.replace(updates.replacements[i]);
+        }
+        if (updates.removeIds.length) {
+            graph = iD.actions.DeleteMultiple(updates.removeIds)(graph);
+        }
+        return graph;
     }
 
 
@@ -157,19 +181,42 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
     //  `graph.base()` --- ... --- `remoteGraph`
     //
     var action = function(graph) {
-        var base = graph.base().entities[id],
+        var updates = { replacements: [], removeIds: [] },
+            base = graph.base().entities[id],
             local = localGraph.entity(id),
-            remote = remoteGraph.entity(id),
-            target = iD.Entity(local, { version: remote.version }),
-            updates = { replacements: [], removeIds: [] };
+            remote = remoteGraph.hasEntity(id),
+            target;
+
+        // delete/undelete
+        if (!remote) {
+            if (option === 'force_remote') {
+                return iD.actions.DeleteMultiple([id])(graph);
+
+            } else if (option === 'force_local') {
+                target = iD.Entity(local, { version: local.version + 1 });
+                if (target.type === 'way') {
+                    target = mergeChildren(target, _.uniq(local.nodes), updates, graph);
+                    graph = updateChildren(updates, graph);
+                }
+                return graph.replace(target);
+
+            } else {
+                return graph;  // do nothing
+            }
+        }
+
+        // merge
+        target = iD.Entity(local, { version: remote.version });
 
         if (target.type === 'node') {
             target = mergeLocation(remote, target);
+
         } else if (target.type === 'way') {
             // pull in any child nodes that may not be present locally..
             graph.rebase(remoteGraph.childNodes(remote), [graph], false);
             target = mergeNodes(base, remote, target);
-            target = mergeChildNodes(target, _.union(local.nodes, remote.nodes), updates, graph);
+            target = mergeChildren(target, _.union(local.nodes, remote.nodes), updates, graph);
+
         } else if (target.type === 'relation') {
             target = mergeMembers(remote, target);
         }
@@ -177,13 +224,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
         target = mergeTags(base, remote, target);
 
         if (!conflicts.length) {
-            graph = graph.replace(target);
-            for (var i = 0; i < updates.replacements.length; i++) {
-                graph = graph.replace(updates.replacements[i]);
-            }
-            if (updates.removeIds.length) {
-                graph = iD.actions.DeleteMultiple(updates.removeIds)(graph);
-            }
+            graph = updateChildren(updates, graph).replace(target);
         }
 
         return graph;
