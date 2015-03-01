@@ -341,8 +341,10 @@ iD.Map = function(context) {
     };
 
     map.zoomTo = function(entity, zoomLimits) {
-        var extent = entity.extent(context.graph()),
-            zoom = map.trimmedExtentZoom(extent);
+        var extent = entity.extent(context.graph());
+        if (!isFinite(extent.area())) return;
+
+        var zoom = map.trimmedExtentZoom(extent);
         zoomLimits = zoomLimits || [context.minEditableZoom(), 20];
         map.centerZoom(extent.center(), Math.min(Math.max(zoom, zoomLimits[0]), zoomLimits[1]));
     };
