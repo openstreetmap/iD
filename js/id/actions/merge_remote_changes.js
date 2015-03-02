@@ -155,12 +155,18 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
 
         for (var i = 0; i < keys.length; i++) {
             var k = keys[i];
-            if (o[k] !== b[k] && a[k] !== b[k]) {   // changed remotely..
-                if (o[k] !== a[k]) {   // changed locally..
+
+            if (o[k] !== b[k] && a[k] !== b[k]) {    // changed remotely..
+                if (o[k] !== a[k]) {      // changed locally..
                     conflicts.push(t('merge_remote_changes.conflict.tags',
                         { tag: k, local: a[k], remote: b[k], user: user(remote.user) }));
-                } else {
-                    tags[k] = b[k];    // unchanged locally, accept remote tag..
+
+                } else {                  // unchanged locally, accept remote change..
+                    if (b.hasOwnProperty(k)) {
+                        tags[k] = b[k];
+                    } else {
+                        delete tags[k];
+                    }
                     changed = true;
                 }
             }
@@ -201,6 +207,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
                 return graph.replace(target);
 
             } else {
+                conflicts.push(t('merge_remote_changes.conflict.deleted'));
                 return graph;  // do nothing
             }
         }

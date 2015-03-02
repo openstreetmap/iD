@@ -398,7 +398,6 @@
             "next": "Next >",
             "keep_local": "Keep mine",
             "keep_remote": "Use theirs",
-            "deleted": "This object has been deleted.",
             "restore": "Restore",
             "delete": "Leave Deleted",
             "download_changes": "Download your changes.",
@@ -408,6 +407,7 @@
     },
     "merge_remote_changes": {
         "conflict": {
+            "deleted": "This object has been deleted.",
             "location": "This object was moved by both you and {user}.",
             "nodelist": "Nodes were changed by both you and {user}.",
             "memberlist": "Relation members were changed by both you and {user}.",

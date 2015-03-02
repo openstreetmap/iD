@@ -66,7 +66,7 @@ iD.modes.Save = function(context) {
             conflicts.push({
                 id: id,
                 name: entityName(local),
-                details: [ t('save.conflict.deleted') ],
+                details: [ t('merge_remote_changes.conflict.deleted') ],
                 chosen: 1,
                 choices: [
                     choice(id, t('save.conflict.restore'), forceLocal),
