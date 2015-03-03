@@ -64,9 +64,10 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
 
 
     function mergeChildren(target, children, updates, graph) {
-        function isUsed(node) {
+        function isUsed(node, target) {
+            var parentWays = _.pluck(graph.parentWays(node), 'id');
             return node.hasInterestingTags() ||
-                graph.parentWays(node).length > 0 ||
+                _.without(parentWays, target.id).length > 0 ||
                 graph.parentRelations(node).length > 0;
         }
 
@@ -76,9 +77,9 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
             var id = children[i],
                 node = graph.hasEntity(id);
 
-            // remove unused childNodes.
+            // remove unused childNodes..
             if (target.nodes.indexOf(id) === -1) {
-                if (node && !isUsed(node)) {
+                if (node && !isUsed(node, target)) {
                     updates.removeIds.push(id);
                 }
                 continue;
