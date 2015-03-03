@@ -2,10 +2,10 @@ describe("iD.actions.MergeRemoteChanges", function () {
     var base = iD.Graph([
             iD.Node({id: 'a', loc: [1, 1], version: '1', tags: {foo: 'foo'}}),
 
-            iD.Node({id: 'p1', loc: [ 10,  10], version: '1', tags: {foo: 'foo'}}),
-            iD.Node({id: 'p2', loc: [ 10, -10], version: '1', tags: {foo: 'foo'}}),
-            iD.Node({id: 'p3', loc: [-10, -10], version: '1', tags: {foo: 'foo'}}),
-            iD.Node({id: 'p4', loc: [-10,  10], version: '1', tags: {foo: 'foo'}}),
+            iD.Node({id: 'p1', loc: [ 10,  10], version: '1'}),
+            iD.Node({id: 'p2', loc: [ 10, -10], version: '1'}),
+            iD.Node({id: 'p3', loc: [-10, -10], version: '1'}),
+            iD.Node({id: 'p4', loc: [-10,  10], version: '1'}),
             iD.Way({
                 id: 'w1',
                 nodes: ['p1', 'p2', 'p3', 'p4', 'p1'],
@@ -13,10 +13,10 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 tags: {foo: 'foo', area: 'yes'}
             }),
 
-            iD.Node({id: 'q1', loc: [ 5,  5], version: '1', tags: {foo: 'foo'}}),
-            iD.Node({id: 'q2', loc: [ 5, -5], version: '1', tags: {foo: 'foo'}}),
-            iD.Node({id: 'q3', loc: [-5, -5], version: '1', tags: {foo: 'foo'}}),
-            iD.Node({id: 'q4', loc: [-5,  5], version: '1', tags: {foo: 'foo'}}),
+            iD.Node({id: 'q1', loc: [ 5,  5], version: '1'}),
+            iD.Node({id: 'q2', loc: [ 5, -5], version: '1'}),
+            iD.Node({id: 'q3', loc: [-5, -5], version: '1'}),
+            iD.Node({id: 'q4', loc: [-5,  5], version: '1'}),
             iD.Way({
                 id: 'w2',
                 nodes: ['q1', 'q2', 'q3', 'q4', 'q1'],
@@ -33,10 +33,10 @@ describe("iD.actions.MergeRemoteChanges", function () {
         ]),
 
         // some new objects not in the graph yet..
-        r1 = iD.Node({id: 'r1', loc: [ 12,  12], version: '1', tags: {foo: 'foo_new'}}),
-        r2 = iD.Node({id: 'r2', loc: [ 12, -12], version: '1', tags: {foo: 'foo_new'}}),
-        r3 = iD.Node({id: 'r3', loc: [-12, -12], version: '1', tags: {foo: 'foo_new'}}),
-        r4 = iD.Node({id: 'r4', loc: [-12,  12], version: '1', tags: {foo: 'foo_new'}}),
+        r1 = iD.Node({id: 'r1', loc: [ 12,  12], version: '1'}),
+        r2 = iD.Node({id: 'r2', loc: [ 12, -12], version: '1'}),
+        r3 = iD.Node({id: 'r3', loc: [-12, -12], version: '1'}),
+        r4 = iD.Node({id: 'r4', loc: [-12,  12], version: '1'}),
         w3 = iD.Way({
                 id: 'w3',
                 nodes: ['r1', 'r2', 'r3', 'r4', 'r1'],
@@ -44,10 +44,10 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 tags: {foo: 'foo_new', area: 'yes'}
             }),
 
-        s1 = iD.Node({id: 's1', loc: [ 6,  6], version: '1', tags: {foo: 'foo_new'}}),
-        s2 = iD.Node({id: 's2', loc: [ 6, -6], version: '1', tags: {foo: 'foo_new'}}),
-        s3 = iD.Node({id: 's3', loc: [-6, -6], version: '1', tags: {foo: 'foo_new'}}),
-        s4 = iD.Node({id: 's4', loc: [-6,  6], version: '1', tags: {foo: 'foo_new'}}),
+        s1 = iD.Node({id: 's1', loc: [ 6,  6], version: '1'}),
+        s2 = iD.Node({id: 's2', loc: [ 6, -6], version: '1'}),
+        s3 = iD.Node({id: 's3', loc: [-6, -6], version: '1'}),
+        s4 = iD.Node({id: 's4', loc: [-6,  6], version: '1'}),
         w4 = iD.Way({
                 id: 'w4',
                 nodes: ['s1', 's2', 's3', 's4', 's1'],
@@ -301,6 +301,33 @@ describe("iD.actions.MergeRemoteChanges", function () {
 
                 expect(result).to.eql(localGraph);
             });
+
+            it("merges ways if childNode location is same", function () {
+                var localLoc = [12, 12],     // moved node
+                    remoteLoc = [12, 12],    // moved node
+                    local = base.entity('p1').update({loc: localLoc}),
+                    remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
+                    localGraph = makeGraph([local]),
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph),
+                    result = action(localGraph);
+
+                expect(result.entity('p1').version).to.eql('2');
+                expect(result.entity('p1').loc).to.eql(remoteLoc);
+            });
+
+            it("doesn't merge ways if childNode location is different", function () {
+                var localLoc = [12, 12],     // moved node
+                    remoteLoc = [13, 13],    // moved node
+                    local = base.entity('p1').update({loc: localLoc}),
+                    remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
+                    localGraph = makeGraph([local]),
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph),
+                    result = action(localGraph);
+
+                expect(result).to.eql(localGraph);
+            });
         });
 
 
@@ -428,6 +455,52 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.entity('w1').version).to.eql('2');
                 expect(result.entity('w1').tags).to.eql(remoteTags);
                 expect(result.entity('w1').nodes).to.eql(remoteNodes);
+                expect(result.hasEntity('r3')).to.eql(r3);
+                expect(result.hasEntity('r4')).to.eql(r4);
+            });
+
+            it("merges way childNodes with 'force_local' option", function () {
+                var localLoc = [12, 12],     // moved node
+                    remoteLoc = [13, 13],    // moved node
+                    local = base.entity('p1').update({loc: localLoc}),
+                    remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
+                    localGraph = makeGraph([local]),
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_local'),
+                    result = action(localGraph);
+
+                expect(result.entity('p1').version).to.eql('2');
+                expect(result.entity('p1').loc).to.eql(localLoc);
+            });
+
+            it("merges way childNodes with 'force_remote' option", function () {
+                var localLoc = [12, 12],     // moved node
+                    remoteLoc = [13, 13],    // moved node
+                    local = base.entity('p1').update({loc: localLoc}),
+                    remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
+                    localGraph = makeGraph([local]),
+                    remoteGraph = makeGraph([remote]),
+                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_remote'),
+                    result = action(localGraph);
+
+                expect(result.entity('p1').version).to.eql('2');
+                expect(result.entity('p1').loc).to.eql(remoteLoc);
+            });
+
+            it("keeps only important childNodes when merging", function () {
+                var localNodes  = ['p1', 'r1', 'r2', 'p3', 'p4', 'p1'],    // changed p2 -> r1, r2
+                    remoteNodes = ['p1', 'r3', 'r4', 'p3', 'p4', 'p1'],    // changed p2 -> r3, r4
+                    localr1 = r1.update({tags: {highway: 'traffic_signals'}}),  // r1 has interesting tags
+                    local = base.entity('w1').update({nodes: localNodes}),
+                    remote = base.entity('w1').update({nodes: remoteNodes, version: '2'}),
+                    localGraph = makeGraph([local, localr1, r2]),
+                    remoteGraph = makeGraph([remote, r3, r4]),
+                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_remote'),
+                    result = action(localGraph);
+
+                expect(result.entity('w1').nodes).to.eql(remoteNodes);
+                expect(result.hasEntity('r1')).to.eql(localr1);
+                expect(result.hasEntity('r2')).to.be.not.ok;
             });
         });
 
