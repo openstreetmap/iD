@@ -63,11 +63,11 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
     }
 
 
-    function mergeChildren(target, children, updates, graph) {
-        function isUsed(node, target) {
+    function mergeChildren(targetWay, children, updates, graph) {
+        function isUsed(node, targetWay) {
             var parentWays = _.pluck(graph.parentWays(node), 'id');
             return node.hasInterestingTags() ||
-                _.without(parentWays, target.id).length > 0 ||
+                _.without(parentWays, targetWay.id).length > 0 ||
                 graph.parentRelations(node).length > 0;
         }
 
@@ -78,35 +78,41 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
                 node = graph.hasEntity(id);
 
             // remove unused childNodes..
-            if (target.nodes.indexOf(id) === -1) {
-                if (node && !isUsed(node, target)) {
+            if (targetWay.nodes.indexOf(id) === -1) {
+                if (node && !isUsed(node, targetWay)) {
                     updates.removeIds.push(id);
                 }
                 continue;
             }
 
             // restore used childNodes..
-            var localNode = localGraph.hasEntity(id),
-                remoteNode = remoteGraph.hasEntity(id),
-                targetNode;
+            var local = localGraph.hasEntity(id),
+                remote = remoteGraph.hasEntity(id),
+                target;
 
-            if (remoteNode && option === 'force_remote') {
-                updates.replacements.push(remoteNode);
+            if (!remote) continue;
 
-            } else if (localNode && option === 'force_local') {
-                targetNode = iD.Entity(localNode,
-                    { version: (remoteNode ? remoteNode.version : +localNode.version + 1) });
-                updates.replacements.push(targetNode);
+            if (option === 'force_remote' && remote.visible) {
+                updates.replacements.push(remote);
+            }
+            if (option === 'force_local' && local) {
+                target = iD.Entity(local, { version: remote.version });
+                updates.replacements.push(target);
+            }
+            if (option === 'safe' && local && remote) {
+                target = iD.Entity(local, { version: remote.version });
+                if (remote.visible) {
+                    target = mergeLocation(remote, target);
+                } else {
+                    conflicts.push(t('merge_remote_changes.conflict.deleted', { user: user(remote.user) }));
+                }
 
-            } else if (localNode && remoteNode && option === 'safe') {
-                targetNode = iD.Entity(localNode, { version: remoteNode.version });
-                targetNode = mergeLocation(remoteNode, targetNode);
                 if (conflicts.length !== ccount) break;
-                updates.replacements.push(targetNode);
+                updates.replacements.push(target);
             }
         }
 
-        return target;
+        return targetWay;
     }
 
 
@@ -191,16 +197,15 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
         var updates = { replacements: [], removeIds: [] },
             base = graph.base().entities[id],
             local = localGraph.entity(id),
-            remote = remoteGraph.hasEntity(id),
-            target;
+            remote = remoteGraph.entity(id),
+            target = iD.Entity(local, { version: remote.version });
 
         // delete/undelete
-        if (!remote) {
+        if (!remote.visible) {
             if (option === 'force_remote') {
                 return iD.actions.DeleteMultiple([id])(graph);
 
             } else if (option === 'force_local') {
-                target = iD.Entity(local, { version: +local.version + 1 });
                 if (target.type === 'way') {
                     target = mergeChildren(target, _.uniq(local.nodes), updates, graph);
                     graph = updateChildren(updates, graph);
@@ -208,14 +213,12 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
                 return graph.replace(target);
 
             } else {
-                conflicts.push(t('merge_remote_changes.conflict.deleted'));
+                conflicts.push(t('merge_remote_changes.conflict.deleted', { user: user(remote.user) }));
                 return graph;  // do nothing
             }
         }
 
         // merge
-        target = iD.Entity(local, { version: remote.version });
-
         if (target.type === 'node') {
             target = mergeLocation(remote, target);
 

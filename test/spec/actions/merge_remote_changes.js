@@ -68,7 +68,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 'merge_remote_changes': {
                     "annotation": "Merged remote changes from server.",
                     "conflict": {
-                        "deleted": "This object has been deleted.",
+                        "deleted": "This object has been deleted by {user}.",
                         "location": "This object was moved by both you and {user}.",
                         "nodelist": "Nodes were changed by both you and {user}.",
                         "memberlist": "Relation members were changed by both you and {user}.",

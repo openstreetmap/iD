@@ -8,6 +8,14 @@ iD.modes.Save = function(context) {
     }
 
     function save(e, tryAgain) {
+        function withChildNodes(ids) {
+            return _.uniq(_.reduce(toCheck, function(result, id) {
+                var e = context.entity(id);
+                if (e.type === 'way') result.push.apply(result, e.nodes);
+                return result;
+            }, _.clone(ids)));
+        }
+
         var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
             origChanges = history.changes(iD.actions.DiscardTags(history.difference())),
@@ -15,6 +23,7 @@ iD.modes.Save = function(context) {
             remoteGraph = iD.Graph(history.base(), true),
             modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
             toCheck = _.pluck(_.pluck(modified, 'entity'), 'id'),
+            toLoad = withChildNodes(toCheck),
             conflicts = [],
             errors = [];
 
@@ -22,88 +31,69 @@ iD.modes.Save = function(context) {
         context.container().call(loading);
 
         if (toCheck.length) {
-            _.each(toCheck, loadAndCheck);
+            context.connection().loadMultiple(toLoad, loaded);
         } else {
             finalize();
         }
 
 
         // Reload modified entities into an alternate graph and check for conflicts..
-        function loadAndCheck(id) {
-            context.connection().loadEntity(id, function(err, result) {
-                toCheck = _.without(toCheck, id);
+        function loaded(err, result) {
+            if (errors.length) return;
 
-                if (err) {
-                    if (err.status === 410) {   // Status: Gone (contains no responseText)
-                        if (!tryAgain) {
-                            remoteGraph.remove(remoteGraph.hasEntity(id));
-                            addDeleteConflict(id);
-                        }
-                    } else {
-                        errors.push({
-                            id: id,
-                            msg: err.responseText,
-                            details: [ t('save.status_code', { code: err.status }) ]
-                        });
-                    }
+            if (err) {
+                errors.push({
+                    msg: err.responseText,
+                    details: [ t('save.status_code', { code: err.status }) ]
+                });
+                showErrors();
 
-                } else {
-                    _.each(result.data, function(entity) { remoteGraph.replace(entity); });
-                    checkConflicts(id);
+            } else {
+                _.each(result.data, function(entity) {
+                    remoteGraph.replace(entity);
+                    toLoad = _.without(toLoad, entity.id);
+                });
+
+                if (!toLoad.length) {
+                    checkConflicts();
                 }
-
-                if (!toCheck.length) {
-                    finalize();
-                }
-            });
+            }
         }
 
 
-        function addDeleteConflict(id) {
-            var local = localGraph.entity(id),
-                action = iD.actions.MergeRemoteChanges,
-                forceLocal = action(id, localGraph, remoteGraph).withOption('force_local'),
-                forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote');
+        function checkConflicts() {
+            _.each(toCheck, function(id) {
+                var local = localGraph.entity(id),
+                    remote = remoteGraph.entity(id);
 
-            conflicts.push({
-                id: id,
-                name: entityName(local),
-                details: [ t('merge_remote_changes.conflict.deleted') ],
-                chosen: 1,
-                choices: [
-                    choice(id, t('save.conflict.restore'), forceLocal),
-                    choice(id, t('save.conflict.delete'), forceRemote)
-                ],
+                if (compareVersions(local, remote)) return;
+
+                var action = iD.actions.MergeRemoteChanges,
+                    merge = action(id, localGraph, remoteGraph, formatUser),
+                    diff = history.replace(merge);
+
+                if (diff.length()) return;  // merged safely
+
+                var forceLocal = action(id, localGraph, remoteGraph).withOption('force_local'),
+                    forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote'),
+                    keepMine = t('save.conflict.' + (remote.visible ? 'keep_local' : 'restore')),
+                    keepTheirs = t('save.conflict.' + (remote.visible ? 'keep_remote' : 'delete'));
+
+                conflicts.push({
+                    id: id,
+                    name: entityName(local),
+                    details: merge.conflicts(),
+                    chosen: 1,
+                    choices: [
+                        choice(id, keepMine, forceLocal),
+                        choice(id, keepTheirs, forceRemote)
+                    ]
+                });
             });
+
+            finalize();
         }
 
-
-        function checkConflicts(id) {
-            var local = localGraph.entity(id),
-                remote = remoteGraph.entity(id);
-
-            if (compareVersions(local, remote)) return;
-
-            var action = iD.actions.MergeRemoteChanges,
-                merge = action(id, localGraph, remoteGraph, formatUser),
-                diff = history.replace(merge);
-
-            if (diff.length()) return;  // merged safely
-
-            var forceLocal = action(id, localGraph, remoteGraph).withOption('force_local'),
-                forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote');
-
-            conflicts.push({
-                id: id,
-                name: entityName(local),
-                details: merge.conflicts(),
-                chosen: 1,
-                choices: [
-                    choice(id, t('save.conflict.keep_local'), forceLocal),
-                    choice(id, t('save.conflict.keep_remote'), forceRemote)
-                ]
-            });
-        }
 
         function compareVersions(local, remote) {
             if (local.version !== remote.version) return false;
