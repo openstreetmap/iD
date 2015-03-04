@@ -116,6 +116,21 @@ describe('iD.Connection', function () {
         });
     });
 
+    describe('#loadMultiple', function () {
+        beforeEach(function() {
+            server = sinon.fakeServer.create();
+        });
+
+        afterEach(function() {
+            server.restore();
+        });
+
+        it('loads nodes');
+        it('loads ways');
+
+    });
+
+
     describe('#osmChangeJXON', function() {
         it('converts change data to JXON', function() {
             var jxon = c.osmChangeJXON('1234', {created: [], modified: [], deleted: []});

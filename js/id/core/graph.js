@@ -116,7 +116,7 @@ iD.Graph.prototype = {
         for (i = 0; i < entities.length; i++) {
             var entity = entities[i];
 
-            if (!force && base.entities[entity.id])
+            if (!entity.visible || (!force && base.entities[entity.id]))
                 continue;
 
             // Merging data into the base graph

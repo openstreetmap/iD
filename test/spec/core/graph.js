@@ -77,6 +77,15 @@ describe('iD.Graph', function() {
             expect(graph.entity('n')).to.equal(node);
         });
 
+        it("doesn't rebase deleted entities", function () {
+            var node = iD.Node({id: 'n', visible: false}),
+                graph = iD.Graph();
+
+            graph.rebase([node], [graph]);
+
+            expect(graph.hasEntity('n')).to.be.not.ok;
+        });
+
         it("gives precedence to existing entities", function () {
             var a = iD.Node({id: 'n'}),
                 b = iD.Node({id: 'n'}),
