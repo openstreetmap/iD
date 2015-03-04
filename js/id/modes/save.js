@@ -35,8 +35,10 @@ iD.modes.Save = function(context) {
 
                 if (err) {
                     if (err.status === 410) {   // Status: Gone (contains no responseText)
-                        remoteGraph.remove(remoteGraph.hasEntity(id));
-                        addDeleteConflict(id);
+                        if (!tryAgain) {
+                            remoteGraph.remove(remoteGraph.hasEntity(id));
+                            addDeleteConflict(id);
+                        }
                     } else {
                         errors.push({
                             id: id,

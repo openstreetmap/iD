@@ -95,7 +95,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
 
             } else if (localNode && option === 'force_local') {
                 targetNode = iD.Entity(localNode,
-                    { version: (remoteNode ? remoteNode.version : localNode.version + 1) });
+                    { version: (remoteNode ? remoteNode.version : +localNode.version + 1) });
                 updates.replacements.push(targetNode);
 
             } else if (localNode && remoteNode && option === 'safe') {
@@ -200,7 +200,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
                 return iD.actions.DeleteMultiple([id])(graph);
 
             } else if (option === 'force_local') {
-                target = iD.Entity(local, { version: local.version + 1 });
+                target = iD.Entity(local, { version: +local.version + 1 });
                 if (target.type === 'way') {
                     target = mergeChildren(target, _.uniq(local.nodes), updates, graph);
                     graph = updateChildren(updates, graph);
