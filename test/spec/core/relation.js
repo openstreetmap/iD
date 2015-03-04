@@ -91,7 +91,7 @@ describe('iD.Relation', function () {
             expect(r1_copy.members[1].id).to.equal(r2_copy.members[0].id);
         });
 
-        // it("deep copies cyclical relation graphs without issue", function () {
+        it("deep copies cyclical relation graphs without issue"); //, function () {
         //     var r1 = iD.Relation({id: 'r1', members: [{id: 'r2'}]}),
         //         r2 = iD.Relation({id: 'r2', members: [{id: 'r1'}]}),
         //         graph = iD.Graph([r1, r2]),
@@ -109,7 +109,7 @@ describe('iD.Relation', function () {
         //     expect(r2_copy.members[0].id).to.equal(r1_copy.id, msg);
         // });
 
-        // it("deep copies self-refrencing relations without issue", function () {
+        it("deep copies self-refrencing relations without issue"); //, function () {
         //     var r1 = iD.Relation({id: 'r1', members: [{id: 'r1'}]}),
         //         graph = iD.Graph([r1]),
         //         result = r1.copy(true, graph),
