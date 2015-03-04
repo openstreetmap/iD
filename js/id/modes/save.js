@@ -62,6 +62,33 @@ iD.modes.Save = function(context) {
 
 
         function checkConflicts() {
+            function choice(id, text, action) {
+                return { id: id, text: text, action: function() { history.replace(action); } };
+            }
+            function formatUser(d) {
+                return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
+            }
+            function entityName(entity) {
+                return iD.util.displayName(entity) || (iD.util.displayType(entity.id) + ' ' + entity.id);
+            }
+
+            function compareVersions(local, remote) {
+                if (local.version !== remote.version) return false;
+
+                if (local.type === 'way') {
+                    var children = _.union(local.nodes, remote.nodes);
+
+                    for (var i = 0; i < children.length; i++) {
+                        var a = localGraph.hasEntity(children[i]),
+                            b = remoteGraph.hasEntity(children[i]);
+
+                        if (!a || !b || a.version !== b.version) return false;
+                    }
+                }
+
+                return true;
+            }
+
             _.each(toCheck, function(id) {
                 var local = localGraph.entity(id),
                     remote = remoteGraph.entity(id);
@@ -92,24 +119,6 @@ iD.modes.Save = function(context) {
             });
 
             finalize();
-        }
-
-
-        function compareVersions(local, remote) {
-            if (local.version !== remote.version) return false;
-
-            if (local.type === 'way') {
-                var children = _.union(local.nodes, remote.nodes);
-
-                for (var i = 0; i < children.length; i++) {
-                    var a = localGraph.hasEntity(children[i]),
-                        b = remoteGraph.hasEntity(children[i]);
-
-                    if (!a || !b || a.version !== b.version) return false;
-                }
-            }
-
-            return true;
         }
 
 
@@ -149,214 +158,22 @@ iD.modes.Save = function(context) {
 
             loading.close();
 
-            var header = selection
-                .append('div')
-                .attr('class', 'header fillL');
-
-            header
-                .append('button')
-                .attr('class', 'fr')
-                .on('click', function() {
-                    history.pop();
-                    selection.remove();
-                })
-                .append('span')
-                .attr('class', 'icon close');
-
-            header
-                .append('h3')
-                .text(t('save.conflict.header'));
-
-            var body = selection
-                .append('div')
-                .attr('class', 'body fillL');
-
-            body
-                .append('div')
-                .attr('class', 'conflicts-help')
-                .text(t('save.conflict.help'))
-                .append('a')
-                .attr('class', 'conflicts-download')
-                .text(t('save.conflict.download_changes'))
-                .on('click.download', function() {
+            selection.call(iD.ui.Conflicts(context)
+                .list(conflicts)
+                .on('download', function() {
                     var data = JXON.stringify(context.connection().osmChangeJXON('CHANGEME', origChanges)),
                         win = window.open('data:text/xml,' + encodeURIComponent(data), '_blank');
                     win.focus();
-                });
-
-            body
-                .append('div')
-                .attr('class', 'conflict-container fillL3')
-                .call(showConflict, 0);
-
-            body
-                .append('div')
-                .attr('class', 'conflicts-done')
-                .attr('opacity', 0)
-                .style('display', 'none')
-                .text(t('save.conflict.done'));
-
-            var buttons = body
-                .append('div')
-                .attr('class','buttons col12 joined conflicts-buttons');
-
-            buttons
-                .append('button')
-                .attr('disabled', conflicts.length > 1)
-                .attr('class', 'action conflicts-button col6')
-                .text(t('save.title'))
-                .on('click.try_again', function() {
-                    selection.remove();
-                    save(e, true);
-                });
-
-            buttons
-                .append('button')
-                .attr('class', 'secondary-action conflicts-button col6')
-                .text(t('confirm.cancel'))
-                .on('click.cancel', function() {
+                })
+                .on('cancel', function() {
                     history.pop();
                     selection.remove();
-                });
-        }
-
-
-        function showConflict(selection, index) {
-            var parent = d3.select(selection.node().parentElement);
-
-            // enable save button if this is the last conflict being reviewed..
-            if (index === conflicts.length - 1) {
-                window.setTimeout(function() {
-                    parent.select('.conflicts-button')
-                        .attr('disabled', null);
-
-                    parent.select('.conflicts-done')
-                        .transition()
-                        .attr('opacity', 1)
-                        .style('display', 'block');
-                }, 250);
-            }
-
-            var item = selection
-                .selectAll('.conflict')
-                .data([conflicts[index]]);
-
-            var enter = item.enter()
-                .append('div')
-                .attr('class', 'conflict');
-
-            enter
-                .append('h4')
-                .attr('class', 'conflict-count')
-                .text(t('save.conflict.count', { num: index + 1, total: conflicts.length }));
-
-            enter
-                .append('a')
-                .attr('class', 'conflict-description')
-                .attr('href', '#')
-                .text(function(d) { return d.name; })
-                .on('click', function(d) {
-                    zoomToEntity(d.id);
-                    d3.event.preventDefault();
-                });
-
-            var details = enter
-                .append('div')
-                .attr('class', 'conflict-detail-container');
-
-            details
-                .append('ul')
-                .attr('class', 'conflict-detail-list')
-                .selectAll('li')
-                .data(function(d) { return d.details || []; })
-                .enter()
-                .append('li')
-                .attr('class', 'conflict-detail-item')
-                .html(function(d) { return d; });
-
-            details
-                .append('div')
-                .attr('class', 'conflict-choices')
-                .call(addChoices);
-
-            details
-                .append('div')
-                .attr('class', 'conflict-nav-buttons joined cf')
-                .selectAll('button')
-                .data(['previous', 'next'])
-                .enter()
-                .append('button')
-                .text(function(d) { return t('save.conflict.' + d); })
-                .attr('class', 'conflict-nav-button action col6')
-                .attr('disabled', function(d, i) {
-                    return (i === 0 && index === 0) ||
-                        (i === 1 && index === conflicts.length - 1) || null;
                 })
-                .on('click', function(d, i) {
-                    var container = parent.select('.conflict-container'),
-                    sign = (i === 0 ? -1 : 1);
-
-                    container
-                        .selectAll('.conflict')
-                        .remove();
-
-                    container
-                        .call(showConflict, index + sign);
-
-                    d3.event.preventDefault();
-                });
-
-            item.exit()
-                .remove();
-
-        }
-
-        function addChoices(selection) {
-            var choices = selection
-                .append('ul')
-                .attr('class', 'layer-list')
-                .selectAll('li')
-                .data(function(d) { return d.choices || []; });
-
-            var enter = choices.enter()
-                .append('li')
-                .attr('class', 'layer');
-
-            var label = enter
-                .append('label');
-
-            label
-                .append('input')
-                .attr('type', 'radio')
-                .attr('name', function(d) { return d.id; })
-                .on('change', function(d, i) {
-                    var ul = this.parentElement.parentElement.parentElement;
-                    ul.__data__.chosen = i;
-                    choose(ul, d);
-                });
-
-            label
-                .append('span')
-                .text(function(d) { return d.text; });
-
-            choices
-                .each(function(d, i) {
-                    var ul = this.parentElement;
-                    if (ul.__data__.chosen === i) choose(ul, d);
-                });
-        }
-
-        function choose(ul, datum) {
-            if (d3.event) d3.event.preventDefault();
-
-            d3.select(ul)
-                .selectAll('li')
-                .classed('active', function(d) { return d === datum; })
-                .selectAll('input')
-                .property('checked', function(d) { return d === datum; });
-
-            datum.action();
-            zoomToEntity(datum.id);
+                .on('save', function() {
+                    selection.remove();
+                    save(e, true);
+                })
+            );
         }
 
 
@@ -424,37 +241,8 @@ iD.modes.Save = function(context) {
                 .remove();
         }
 
-
-        function formatUser(d) {
-            return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
-        }
-
-        function entityName(entity) {
-            return iD.util.displayName(entity) || (iD.util.displayType(entity.id) + ' ' + entity.id);
-        }
-
-        function choice(id, text, action) {
-            return {
-                id: id,
-                text: text,
-                action: function() { history.replace(action); }
-            };
-        }
-
-        function zoomToEntity(id) {
-            context.surface().selectAll('.hover')
-                .classed('hover', false);
-
-            var entity = context.graph().hasEntity(id);
-            if (entity) {
-                context.map().zoomTo(entity);
-                context.surface().selectAll(
-                    iD.util.entityOrMemberSelector([entity.id], context.graph()))
-                    .classed('hover', true);
-            }
-        }
-
     }
+
 
     function success(e, changeset_id) {
         context.enter(iD.modes.Browse(context)
