@@ -14,6 +14,8 @@ iD.modes.Move = function(context, entityIDs) {
         delta,
         nudgeInterval;
 
+    function vecSub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
+
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
         if (point[0] > size[0] - pad[0]) return [-10, 0];
@@ -30,13 +32,13 @@ iD.modes.Move = function(context, entityIDs) {
 
             var orig = context.projection(origin);
 
-            orig = [orig[0] - nudge[1], orig[1] - nudge[1]];
-            delta = [delta[0] - nudge[0], delta[1] - nudge[1]];
+            orig = vecSub(orig, nudge);
             origin = context.projection.invert(orig);
 
-            context.overwrite(
-                iD.actions.Move(entityIDs, delta, context.projection, cache),
-                annotation);
+            // delta = vecSub(delta, nudge);
+            // context.overwrite(
+            //     iD.actions.Move(entityIDs, delta, context.projection, cache),
+            //     annotation);
         }, 50);
     }
 
@@ -49,15 +51,15 @@ iD.modes.Move = function(context, entityIDs) {
         var mouse = context.mouse(),
             orig = context.projection(origin);
 
-        delta = [mouse[0] - orig[0], mouse[1] - orig[1]];
+        var action = iD.actions.Move(entityIDs, vecSub(mouse, orig), context.projection, cache);
+        context.overwrite(action, annotation);
+        delta = action.delta();
 
+        // TODO restrict nudging if move was restricted..
+        // (because geometry may not be under the mouse pointer)
         var nudge = edge(mouse, context.map().dimensions());
         if (nudge) startNudge(nudge);
         else stopNudge();
-
-        context.overwrite(
-            iD.actions.Move(entityIDs, delta, context.projection, cache),
-            annotation);
     }
 
     function finish() {
