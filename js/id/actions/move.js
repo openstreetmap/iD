@@ -51,6 +51,8 @@ iD.actions.Move = function(moveIds, tryDelta, projection, cache) {
                         unmoved = _.find(parents, function(way) { return !cache.moving[way.id]; });
                     if (!unmoved) return;
 
+                    if (moved.isArea() || unmoved.isArea()) return;
+
                     cache.intersection[node.id] = {
                         nodeId: node.id,
                         movedId: moved.id,
