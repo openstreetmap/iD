@@ -11,7 +11,6 @@ iD.modes.Move = function(context, entityIDs) {
             t('operations.move.annotation.multiple'),
         cache,
         origin,
-        delta,
         nudgeInterval;
 
     function vecSub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
@@ -30,15 +29,13 @@ iD.modes.Move = function(context, entityIDs) {
         nudgeInterval = window.setInterval(function() {
             context.pan(nudge);
 
-            var orig = context.projection(origin);
+            var currMouse = context.mouse(),
+                origMouse = context.projection(origin),
+                delta = vecSub(vecSub(currMouse, origMouse), nudge),
+                action = iD.actions.Move(entityIDs, delta, context.projection, cache);
 
-            orig = vecSub(orig, nudge);
-            origin = context.projection.invert(orig);
+            context.overwrite(action, annotation);
 
-            // delta = vecSub(delta, nudge);
-            // context.overwrite(
-            //     iD.actions.Move(entityIDs, delta, context.projection, cache),
-            //     annotation);
         }, 50);
     }
 
@@ -48,31 +45,27 @@ iD.modes.Move = function(context, entityIDs) {
     }
 
     function move() {
-        var mouse = context.mouse(),
-            orig = context.projection(origin);
+        var currMouse = context.mouse(),
+            origMouse = context.projection(origin),
+            delta = vecSub(currMouse, origMouse),
+            action = iD.actions.Move(entityIDs, delta, context.projection, cache);
 
-        var action = iD.actions.Move(entityIDs, vecSub(mouse, orig), context.projection, cache);
         context.overwrite(action, annotation);
-        delta = action.delta();
 
-        // TODO restrict nudging if move was restricted..
-        // (because geometry may not be under the mouse pointer)
-        var nudge = edge(mouse, context.map().dimensions());
+        var nudge = edge(currMouse, context.map().dimensions());
         if (nudge) startNudge(nudge);
         else stopNudge();
     }
 
     function finish() {
         d3.event.stopPropagation();
-        context.enter(iD.modes.Select(context, entityIDs)
-            .suppressMenu(true));
+        context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
         stopNudge();
     }
 
     function cancel() {
         context.pop();
-        context.enter(iD.modes.Select(context, entityIDs)
-            .suppressMenu(true));
+        context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
         stopNudge();
     }
 
@@ -82,7 +75,6 @@ iD.modes.Move = function(context, entityIDs) {
 
     mode.enter = function() {
         origin = context.map().mouseCoordinates();
-        delta = [0, 0];
         cache = {};
 
         context.install(edit);
