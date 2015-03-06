@@ -326,7 +326,7 @@ en:
       keep_remote: Use theirs
       restore: Restore
       delete: Leave Deleted
-      download_changes: Download your changes.
+      download_changes: Or download your changes.
       done: "All conflicts resolved!"
       help: |
         Another user changed some of the same map features you changed.
