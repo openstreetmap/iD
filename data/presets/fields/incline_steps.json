@@ -1,0 +1,11 @@
+{
+    "key": "incline",
+    "type": "combo",
+    "label": "Incline",
+    "strings": {
+        "options": {
+            "up": "Up",
+            "down": "Down"
+        }
+    }
+}

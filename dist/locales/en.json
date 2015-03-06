@@ -894,6 +894,13 @@
             "incline": {
                 "label": "Incline"
             },
+            "incline_steps": {
+                "label": "Incline",
+                "options": {
+                    "up": "Up",
+                    "down": "Down"
+                }
+            },
             "information": {
                 "label": "Type"
             },

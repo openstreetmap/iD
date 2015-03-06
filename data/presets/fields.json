@@ -531,6 +531,17 @@
         "type": "combo",
         "label": "Incline"
     },
+    "incline_steps": {
+        "key": "incline",
+        "type": "combo",
+        "label": "Incline",
+        "strings": {
+            "options": {
+                "up": "Up",
+                "down": "Down"
+            }
+        }
+    },
     "information": {
         "key": "information",
         "type": "typeCombo",

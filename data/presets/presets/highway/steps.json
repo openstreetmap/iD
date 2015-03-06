@@ -3,6 +3,7 @@
         "surface",
         "lit",
         "width",
+        "incline_steps",
         "access"
     ],
     "icon": "highway-steps",
