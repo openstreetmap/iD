@@ -205,7 +205,7 @@ iD.Map = function(context) {
         }
 
         if (map.editable()) {
-            context.connection().loadTiles(projection, dimensions);
+            context.loadTiles(projection, dimensions);
             drawVector(difference, extent);
         } else {
             editOff();
@@ -341,8 +341,10 @@ iD.Map = function(context) {
     };
 
     map.zoomTo = function(entity, zoomLimits) {
-        var extent = entity.extent(context.graph()),
-            zoom = map.extentZoom(extent);
+        var extent = entity.extent(context.graph());
+        if (!isFinite(extent.area())) return;
+
+        var zoom = map.trimmedExtentZoom(extent);
         zoomLimits = zoomLimits || [context.minEditableZoom(), 20];
         map.centerZoom(extent.center(), Math.min(Math.max(zoom, zoomLimits[0]), zoomLimits[1]));
     };
@@ -391,19 +393,28 @@ iD.Map = function(context) {
                 projection.invert([dimensions[0] - pad, headerY + pad]));
     };
 
-    map.extentZoom = function(_) {
-        var extent = iD.geo.Extent(_),
-            tl = projection([extent[0][0], extent[1][1]]),
+    function calcZoom(extent, dim) {
+        var tl = projection([extent[0][0], extent[1][1]]),
             br = projection([extent[1][0], extent[0][1]]);
 
         // Calculate maximum zoom that fits extent
-        var hFactor = (br[0] - tl[0]) / dimensions[0],
-            vFactor = (br[1] - tl[1]) / dimensions[1],
+        var hFactor = (br[0] - tl[0]) / dim[0],
+            vFactor = (br[1] - tl[1]) / dim[1],
             hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2,
             vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
             newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
 
         return newZoom;
+    }
+
+    map.extentZoom = function(_) {
+        return calcZoom(iD.geo.Extent(_), dimensions);
+    };
+
+    map.trimmedExtentZoom = function(_) {
+        var trimY = 120, trimX = 40,
+            trimmed = [dimensions[0] - trimX, dimensions[1] - trimY];
+        return calcZoom(iD.geo.Extent(_), trimmed);
     };
 
     map.editable = function() {

@@ -30,6 +30,14 @@ iD.util.displayName = function(entity) {
     return entity.tags[localeName] || entity.tags.name || entity.tags.ref;
 };
 
+iD.util.displayType = function(id) {
+    return {
+        n: t('inspector.node'),
+        w: t('inspector.way'),
+        r: t('inspector.relation')
+    }[id.charAt(0)];
+};
+
 iD.util.stringQs = function(str) {
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');

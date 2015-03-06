@@ -12,15 +12,20 @@ iD.ui.confirm = function(selection) {
     section.append('div')
         .attr('class', 'modal-section message-text');
 
-    var buttonwrap = section.append('div')
+    var buttons = section.append('div')
         .attr('class', 'modal-section buttons cf');
 
-    buttonwrap.append('button')
-        .attr('class', 'col2 action')
-        .on('click.confirm', function() {
-            modal.remove();
-        })
-        .text(t('confirm.okay'));
+    modal.okButton = function() {
+        buttons
+            .append('button')
+            .attr('class', 'action col4')
+            .on('click.confirm', function() {
+                modal.remove();
+            })
+            .text(t('confirm.okay'));
+
+        return modal;
+    };
 
     return modal;
 };

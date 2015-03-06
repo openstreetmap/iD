@@ -41,9 +41,13 @@ iD.History = function(context) {
             return stack[index].graph;
         },
 
+        base: function() {
+            return stack[0].graph;
+        },
+
         merge: function(entities, extent) {
-            stack[0].graph.rebase(entities, _.pluck(stack, 'graph'));
-            tree.rebase(entities);
+            stack[0].graph.rebase(entities, _.pluck(stack, 'graph'), false);
+            tree.rebase(entities, false);
 
             dispatch.change(undefined, extent);
         },
@@ -195,6 +199,12 @@ iD.History = function(context) {
                     if (id in base.graph.entities) {
                         baseEntities[id] = base.graph.entities[id];
                     }
+                    // get originals of parent entities too
+                    _.forEach(base.graph._parentWays[id], function(parentId) {
+                        if (parentId in base.graph.entities) {
+                            baseEntities[parentId] = base.graph.entities[parentId];
+                        }
+                    });
                 });
 
                 var x = {};
@@ -237,8 +247,8 @@ iD.History = function(context) {
                     var baseEntities = h.baseEntities.map(function(entity) {
                         return iD.Entity(entity);
                     });
-                    stack[0].graph.rebase(baseEntities, _.pluck(stack, 'graph'));
-                    tree.rebase(baseEntities);
+                    stack[0].graph.rebase(baseEntities, _.pluck(stack, 'graph'), true);
+                    tree.rebase(baseEntities, true);
                 }
 
                 stack = h.stack.map(function(d) {

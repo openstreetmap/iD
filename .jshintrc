@@ -13,6 +13,7 @@
         "_": false,
         "t": false,
         "bootstrap": false,
+        "Diff3": false,
         "rbush": false,
         "JXON": false,
         "osmAuth": false,

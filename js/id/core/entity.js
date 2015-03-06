@@ -56,6 +56,9 @@ iD.Entity.prototype = {
         if (!this.id && this.type) {
             this.id = iD.Entity.id(this.type);
         }
+        if (!this.hasOwnProperty('visible')) {
+            this.visible = true;
+        }
 
         if (iD.debug) {
             Object.freeze(this);

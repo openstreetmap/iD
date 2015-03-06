@@ -31,6 +31,7 @@
     <script src='../js/lib/d3.value.js'></script>
     <script src='../js/lib/d3-compat.js'></script>
     <script src='../js/lib/bootstrap-tooltip.js'></script>
+    <script src='../js/lib/diff3.js'></script>
     <script src='../js/lib/rbush.js'></script>
     <script src='../js/lib/togeojson.js'></script>
     <script src='../js/lib/osmauth.js'></script>
@@ -76,6 +77,7 @@
     <script src='../js/id/ui/modal.js'></script>
     <script src='../js/id/ui/cmd.js'></script>
     <script src='../js/id/ui/confirm.js'></script>
+    <script src='../js/id/ui/conflicts.js'></script>
     <script src='../js/id/ui/commit.js'></script>
     <script src='../js/id/ui/success.js'></script>
     <script src='../js/id/ui/loading.js'></script>
@@ -117,9 +119,9 @@
     <script src='../js/id/ui/preset/wikipedia.js'></script>
 
     <script src='../js/id/actions.js'></script>
+    <script src='../js/id/actions/add_entity.js'></script>
     <script src='../js/id/actions/add_member.js'></script>
     <script src="../js/id/actions/add_midpoint.js"></script>
-    <script src='../js/id/actions/add_entity.js'></script>
     <script src='../js/id/actions/add_vertex.js'></script>
     <script src='../js/id/actions/change_member.js'></script>
     <script src='../js/id/actions/change_preset.js'></script>
@@ -137,8 +139,9 @@
     <script src='../js/id/actions/join.js'></script>
     <script src='../js/id/actions/merge.js'></script>
     <script src='../js/id/actions/merge_polygon.js'></script>
-    <script src='../js/id/actions/move_node.js'></script>
+    <script src='../js/id/actions/merge_remote_changes.js'></script>
     <script src='../js/id/actions/move.js'></script>
+    <script src='../js/id/actions/move_node.js'></script>
     <script src='../js/id/actions/noop.js'></script>
     <script src='../js/id/actions/orthogonalize.js'></script>
     <script src='../js/id/actions/restrict_turn.js'></script>
@@ -216,6 +219,7 @@
     <!-- include spec files here... -->
     <script src="spec/lib/d3.combobox.js"></script>
     <script src="spec/lib/d3.keybinding.js"></script>
+    <script src="spec/lib/diff3.js"></script>
     <script src="spec/lib/locale.js"></script>
 
     <script src="spec/actions/add_member.js"></script>
@@ -239,6 +243,7 @@
     <script src="spec/actions/join.js"></script>
     <script src='spec/actions/merge.js'></script>
     <script src="spec/actions/merge_polygon.js"></script>
+    <script src="spec/actions/merge_remote_changes.js"></script>
     <script src="spec/actions/move_node.js"></script>
     <script src="spec/actions/move.js"></script>
     <script src="spec/actions/noop.js"></script>

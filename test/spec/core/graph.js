@@ -30,7 +30,7 @@ describe('iD.Graph', function() {
         });
 
         it("remains mutable if passed true as second argument", function () {
-            expect(iD.Graph([], true).frozen).not.to.be.true;
+            expect(iD.Graph([], true).frozen).to.be.false;
         });
     });
 
@@ -58,12 +58,6 @@ describe('iD.Graph', function() {
         });
     });
 
-    describe("#freeze", function () {
-        it("sets the frozen flag", function () {
-            expect(iD.Graph([], true).freeze().frozen).to.be.true;
-        });
-    });
-
     describe("#rebase", function () {
         it("preserves existing entities", function () {
             var node = iD.Node({id: 'n'}),
@@ -83,6 +77,15 @@ describe('iD.Graph', function() {
             expect(graph.entity('n')).to.equal(node);
         });
 
+        it("doesn't rebase deleted entities", function () {
+            var node = iD.Node({id: 'n', visible: false}),
+                graph = iD.Graph();
+
+            graph.rebase([node], [graph]);
+
+            expect(graph.hasEntity('n')).to.be.not.ok;
+        });
+
         it("gives precedence to existing entities", function () {
             var a = iD.Node({id: 'n'}),
                 b = iD.Node({id: 'n'}),
@@ -93,10 +96,20 @@ describe('iD.Graph', function() {
             expect(graph.entity('n')).to.equal(a);
         });
 
+        it("gives precedence to new entities when force = true", function () {
+            var a = iD.Node({id: 'n'}),
+                b = iD.Node({id: 'n'}),
+                graph = iD.Graph([a]);
+
+            graph.rebase([b], [graph], true);
+
+            expect(graph.entity('n')).to.equal(b);
+        });
+
         it("inherits entities from base prototypally", function () {
             var graph = iD.Graph();
 
-            graph.rebase([iD.Node()], [graph]);
+            graph.rebase([iD.Node({id: 'n'})], [graph]);
 
             expect(graph.entities).not.to.have.ownProperty('n');
         });

@@ -313,10 +313,33 @@ en:
     title: Save
     help: "Save changes to OpenStreetMap, making them visible to other users."
     no_changes: No changes to save.
-    error: An error occurred while trying to save
+    error: Errors occurred while trying to save
+    status_code: "Server returned status code {code}"
     unknown_error_details: "Please ensure you are connected to the internet."
     uploading: Uploading changes to OpenStreetMap.
     unsaved_changes: You have unsaved changes
+    conflict:
+      header: Resolve conflicting edits
+      count: 'Conflict {num} of {total}'
+      previous: '< Previous'
+      next: 'Next >'
+      keep_local: Keep mine
+      keep_remote: Use theirs
+      restore: Restore
+      delete: Leave Deleted
+      download_changes: Or download your changes.
+      done: "All conflicts resolved!"
+      help: |
+        Another user changed some of the same map features you changed.
+        Click on each item below for more details about the conflict, and choose whether to keep
+        your changes or the other user's changes.
+  merge_remote_changes:
+    conflict:
+      deleted: 'This object has been deleted by {user}.'
+      location: 'This object was moved by both you and {user}.'
+      nodelist: 'Nodes were changed by both you and {user}.'
+      memberlist: 'Relation members were changed by both you and {user}.'
+      tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
   success:
     edited_osm: "Edited OSM!"
     just_edited: "You just edited OpenStreetMap!"
@@ -329,6 +352,7 @@ en:
       (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).
   confirm:
     okay: "Okay"
+    cancel: "Cancel"
   splash:
     welcome: Welcome to the iD OpenStreetMap editor
     text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}."

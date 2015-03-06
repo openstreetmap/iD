@@ -89,6 +89,10 @@ iD.ui = function(context) {
             .attr('class', 'fillD');
 
         footer.append('div')
+            .attr('class', 'api-status')
+            .call(iD.ui.Status(context));
+
+        footer.append('div')
             .attr('id', 'scale-block')
             .call(iD.ui.Scale(context));
 
@@ -131,10 +135,6 @@ iD.ui = function(context) {
             .attr('class', 'user-list')
             .attr('tabindex', -1)
             .call(iD.ui.Contributors(context));
-
-        footer.append('div')
-            .attr('class', 'api-status')
-            .call(iD.ui.Status(context));
 
         window.onbeforeunload = function() {
             return context.save();

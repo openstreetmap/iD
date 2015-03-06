@@ -39,13 +39,13 @@ iD.Tree = function(head) {
 
     var tree = {};
 
-    tree.rebase = function(entities) {
+    tree.rebase = function(entities, force) {
         var insertions = {};
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
 
-            if (head.entities.hasOwnProperty(entity.id) || rectangles[entity.id])
+            if (!entity.visible || (!force && (head.entities.hasOwnProperty(entity.id) || rectangles[entity.id])))
                 continue;
 
             insertions[entity.id] = entity;

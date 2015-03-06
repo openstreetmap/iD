@@ -140,10 +140,6 @@ strong {
 
 a:visited, a {
     color: #7092ff;
-    -webkit-transition: all 100ms;
-       -moz-transition: all 100ms;
-         -o-transition: all 100ms;
-            transition: all 100ms;
 }
 
 a:hover {
@@ -172,10 +168,6 @@ input[type=email] {
     width: 100%;
     border-radius:4px;
     text-overflow: ellipsis;
-    -webkit-transition: all 200ms;
-       -moz-transition: all 200ms;
-         -o-transition: all 200ms;
-            transition: all 200ms;
 }
 
 textarea:focus,
@@ -247,9 +239,6 @@ ul li { list-style: none;}
     background-color: white;
     color: #7092FF;
     cursor: pointer;
-       -moz-transition: all 100ms;
-         -o-transition: all 100ms;
-            transition: all 100ms;
 }
 
 .toggle-list > label:hover {
@@ -358,11 +347,6 @@ button {
     display: inline-block;
     height:40px;
     border-radius:4px;
-    /* Crashes Safari: https://github.com/openstreetmap/iD/issues/1188 */
-    /*-webkit-transition: all 100ms;*/
-       -moz-transition: all 100ms;
-         -o-transition: all 100ms;
-            transition: all 100ms;
 }
 
 button:focus,
@@ -418,6 +402,10 @@ button.minor:hover {
     border-right: 1px solid rgba(0,0,0,.5);
 }
 
+.fillL .joined button {
+    border-right: 1px solid white;
+}
+
 .joined button:first-child {
     border-radius:4px 0 0 4px;
 }
@@ -429,11 +417,27 @@ button.minor:hover {
 
 button.action {
     background: #7092ff;
+    color: white;
+}
+
+button[disabled].action,
+button[disabled].action:hover {
+    background: #cccccc;
+    color: #888;
 }
 
 button.action:focus,
 button.action:hover {
     background: #597BE7;
+}
+
+button.secondary-action {
+    background: #ececec;
+}
+
+button.secondary-action:focus,
+button.secondary-action:hover {
+    background: #cccccc;
 }
 
 button.save.has-count {
@@ -565,13 +569,13 @@ button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
 button[disabled] .icon.data       { background-position: -600px -40px;}
 
-.icon.point.deleted  { background-position: -302px -80px;}
-.icon.line.deleted   { background-position: -320px -80px;}
-.icon.area.deleted   { background-position: -340px -80px;}
+.icon.point.deleted  { background-position: -480px -80px;}
+.icon.line.deleted   { background-position: -500px -80px;}
+.icon.area.deleted   { background-position: -520px -80px;}
 
-.icon.point.created  { background-position: -302px -100px;}
-.icon.line.created   { background-position: -320px -100px;}
-.icon.area.created   { background-position: -340px -100px;}
+.icon.point.created  { background-position: -480px -100px;}
+.icon.line.created   { background-position: -500px -100px;}
+.icon.area.created   { background-position: -520px -100px;}
 
 .icon.point.modified  { background-position: -22px 0; }
 
@@ -619,7 +623,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .header h3 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -657,7 +661,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .footer {
     position: absolute;
     bottom: 0;
-    padding: 5px 30px 5px 30px;
+    padding: 5px 20px 5px 20px;
     border-top: 1px solid #ccc;
     background-color: #fafafa;
     width: 100%;
@@ -816,9 +820,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     text-overflow: ellipsis;
     overflow: hidden;
     border-left: 1px solid rgba(0, 0, 0, .1);
-    -moz-transition: all 100ms;
-    -o-transition: all 100ms;
-    transition: all 100ms;
 }
 
 .feature-list-item .label .icon {
@@ -898,9 +899,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     text-overflow: ellipsis;
     overflow: hidden;
     border-left: 1px solid rgba(0, 0, 0, .1);
-    -moz-transition: all 100ms;
-    -o-transition: all 100ms;
-    transition: all 100ms;
     border-radius: 0 3px 3px 0;
     }
 
@@ -1051,6 +1049,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     text-align: right;
 }
 
+.form-label-button-wrap .tag-reference-button {
+    border-radius: 0 3px 0 0;
+}
+
 .form-label-button-wrap .icon {
     opacity: .5;
 }
@@ -1137,7 +1139,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* Styles for raw tag inspector on hover */
 .inspector-hover .tag-row .key-wrap,
-.inspector-hover .tag-row .input-wrap-position {
+.inspector-hover .tag-row .form-field.input-wrap-position {
     width: 50%;
 }
 
@@ -1190,69 +1192,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     line-height: 0;
     display: block;
     overflow: hidden;
-    -webkit-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-       -moz-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-         -o-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-            transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-}
-
-/* first phase hover-to-active animations */
-
-textarea,
-.form-label,
-.preset-input-wrap,
-.preset-input-wrap .label {
-    -webkit-transition: all 200ms;
-       -moz-transition: all 200ms;
-         -o-transition: all 200ms;
-            transition: all 200ms;
-}
-
-/* second phase hover-to-active animations */
-
-input,
-.checkselect label:last-of-type {
-    -webkit-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-       -moz-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-         -o-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-            transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-}
-
-.entity-editor-pane button.minor,
-.combobox-caret,
-.entity-editor-pane .header button,
-.toggle-list label span,
-.spin-control,
-.more-fields,
-.view-on-osm,
-.hide-toggle:before,
-.entity-editor-pane .toggle-list label::before,
-.entity-editor-pane .toggle-list label.remove .icon {
-    -webkit-transition: opacity 200ms 200ms;
-       -moz-transition: opacity 200ms 200ms;
-         -o-transition: opacity 200ms 200ms;
-            transition: opacity 200ms 200ms;
-}
-
-.entity-editor-pane a.hide-toggle {
-    -webkit-transition: padding-left 200ms 200ms, color 200ms 200ms;
-       -moz-transition: padding-left 200ms 200ms, color 200ms 200ms;
-         -o-transition: padding-left 200ms 200ms, color 200ms 200ms;
-            transition: padding-left 200ms 200ms, color 200ms 200ms;
-}
-
-.entity-editor-pane .toggle-list label:not(.active) {
-    -webkit-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-       -moz-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-         -o-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-            transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-}
-
-.entity-editor-pane .toggle-list label {
-    -webkit-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-       -moz-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-         -o-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-            transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
 }
 
 /* adding additional preset fields */
@@ -1260,10 +1199,6 @@ input,
 .more-fields {
     padding: 0 20px 20px 20px;
     font-weight: bold;
-    -webkit-transition: padding 200ms 200ms, max-height 200ms 200ms;
-       -moz-transition: padding 200ms 200ms, max-height 200ms 200ms;
-         -o-transition: padding 200ms 200ms, max-height 200ms 200ms;
-            transition: padding 200ms 200ms, max-height 200ms 200ms;
 }
 
 .more-fields label { padding: 5px 10px 5px 0; }
@@ -1601,10 +1536,6 @@ div.combobox {
     width: 40%;
     float: left;
     height: 30px;
-    -webkit-transition: width 200ms;
-       -moz-transition: width 200ms;
-         -o-transition: width 200ms;
-            transition: width 200ms;
 }
 
 .tag-row input.key {
@@ -2187,9 +2118,13 @@ img.wiki-image {
 #attrib {
     width: 100%;
     height: 20px;
+    margin-bottom: 5px;
     float: left;
     clear: both;
+    pointer-events: none;
 }
+
+#attrib * { pointer-events: all; }
 
 .base-layer-attribution,
 .overlay-layer-attribution {
@@ -2298,7 +2233,7 @@ img.wiki-image {
     clear: both;
     text-align: right;
     width: 100%;
-    padding: 0px 5px;
+    padding: 0px 10px;
 }
 
 .api-status.offline,
@@ -2311,8 +2246,11 @@ img.wiki-image {
 ------------------------------------------------------- */
 
 .modal {
+    top: 40px;
     display: inline-block;
     position:absolute;
+    border-radius: 3px;
+    overflow: hidden;
     left: 0;
     right: 0;
     margin: auto;
@@ -2349,8 +2287,19 @@ img.wiki-image {
     border-bottom: 1px solid #CCC;
 }
 
-.modal-section:last-child {
-    border-bottom: 0;
+.modal-section.header h3 {
+    padding: 0;
+}
+
+.modal-section.buttons {
+    text-align: center;
+}
+
+.modal-section.buttons .action {
+    display: inline-block;
+    margin: 0 10px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .loading-modal {
@@ -2379,7 +2328,8 @@ img.wiki-image {
     display: block;
     content: '';
     height: 100px;
-    width: 100px;
+    width: 100%;
+    max-width: 100px;
     margin: auto;
     margin-bottom: 10px;
     background:transparent url(img/sprite.svg) no-repeat 0 -220px;
@@ -2387,6 +2337,10 @@ img.wiki-image {
 
 .modal-actions :first-child {
     border-right: 1px solid #CCC;
+}
+
+.modal-section:last-child {
+    border-bottom: 0;
 }
 
 /* Restore Modal
@@ -2458,14 +2412,6 @@ img.wiki-image {
     margin-bottom: 0;
 }
 
-.mode-save button.action {
-    float: none;
-    margin: auto;
-    display: block;
-    color: white;
-    font-size: 14px;
-}
-
 .mode-save .user-info img {
     float: left;
 }
@@ -2527,6 +2473,56 @@ img.wiki-image {
 .changeset-list li span.count:after { content: ')'; }
 
 .changeset-list li:first-child { border-top: 0;}
+
+/* Conflict resolution
+------------------------------------------------------- */
+
+.conflicts-help {
+    padding: 20px;
+    background-color: #ffffbb;
+    border-bottom: 1px solid #ccc;
+}
+
+.conflicts-buttons {
+    padding: 20px;
+}
+
+.mode-save button.conflicts-button {
+    float: left;
+}
+
+.conflict-container {
+    border-bottom: 1px solid #ccc;
+}
+
+.conflict-description {
+    padding: 5px 20px;
+    display: block;
+}
+
+.conflicts-done {
+    padding: 20px 20px 0 20px;
+}
+
+.conflict-detail-container {
+    padding: 10px 20px;
+}
+
+.conflict-count {
+    padding: 10px 20px;
+}
+
+.conflict-choices {
+    margin-top: 10px;
+}
+
+.conflict-nav-buttons {
+    padding: 10px 0 20px 0;
+}
+
+.conflict-nav-button {
+    height: 30px;
+}
 
 /* Notices
 ------------------------------------------------------- */
@@ -2708,28 +2704,7 @@ img.wiki-image {
 }
 
 .tooltip-inner .keyhint {
-    font-size: 10px;
-    padding: 0 7px;
     font-weight: bold;
-    display: inline-block;
-    border-radius: 2px;
-    border: 1px solid #CCC;
-    position: relative;
-    z-index: 1;
-    text-align: left;
-}
-
-.tooltip-inner .keyhint::after {
-    content: "";
-    position: absolute;
-    border-radius: 2px;
-    height: 10px;
-    width: 100%;
-    z-index: 0;
-    bottom: -4px;
-    left: -1px;
-    border: 1px solid #CCC;
-    border-top: 0;
 }
 
 /* Exceptions for tooltip layouts */

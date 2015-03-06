@@ -223,7 +223,7 @@ iD.ui.FeatureList = function(context) {
             else if (d.entity) {
                 context.enter(iD.modes.Select(context, [d.entity.id]));
             } else {
-                context.loadEntity(d.id);
+                context.zoomToEntity(d.id);
             }
         }
 

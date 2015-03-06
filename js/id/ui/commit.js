@@ -6,6 +6,7 @@ iD.ui.Commit = function(context) {
             summary = context.history().difference().summary();
 
         function zoomToEntity(change) {
+
             var entity = change.entity;
             if (change.changeType !== 'deleted' &&
                 context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
@@ -116,7 +117,7 @@ iD.ui.Commit = function(context) {
 
         // Confirm Button
         var saveButton = saveSection.append('button')
-            .attr('class', 'action col4 button')
+            .attr('class', 'action col6 button')
             .on('click.save', function() {
                 event.save({
                     comment: commentField.node().value
