@@ -30,7 +30,9 @@ iD.Map = function(context) {
         context.features()
             .on('redraw.map', redraw);
 
-        selection.call(zoom);
+        selection
+            .on('dblclick.map', dblClick)
+            .call(zoom);
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface');
@@ -143,15 +145,14 @@ iD.Map = function(context) {
         dispatch.drawn({full: true});
     }
 
-    function zoomPan() {
-        if (d3.event && d3.event.sourceEvent.type === 'dblclick') {
-            if (!dblclickEnabled) {
-                zoom.scale(projection.scale() * 2 * Math.PI)
-                    .translate(projection.translate());
-                return d3.event.sourceEvent.preventDefault();
-            }
+    function dblClick() {
+        if (!dblclickEnabled) {
+            d3.event.preventDefault();
+            d3.event.stopImmediatePropagation();
         }
+    }
 
+    function zoomPan() {
         if (Math.log(d3.event.scale / Math.LN2 - 8) < minzoom + 1) {
             iD.ui.flash(context.container())
                 .select('.content')
