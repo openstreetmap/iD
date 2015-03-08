@@ -1,6 +1,7 @@
 {
     "icon": "rail",
     "fields": [
+        "network",
         "operator",
         "address",
         "building_area"
