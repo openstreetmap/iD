@@ -147,7 +147,7 @@ iD.Features = function(context) {
 
         var strings = Object.keys(entity.tags);
 
-        for (var i = 0, imax = strings.length; i !== imax; i++) {
+        for (var i = 0; i < strings.length; i++) {
             var s = strings[i];
             if (past_futures[s] || past_futures[entity.tags[s]]) { return true; }
         }
@@ -245,11 +245,11 @@ iD.Features = function(context) {
         // a _cullFactor of 1 corresponds to a 1000x1000px viewport..
         _cullFactor = dimensions[0] * dimensions[1] / 1000000;
 
-        for (var i = 0, imax = d.length; i !== imax; i++) {
+        for (var i = 0; i < d.length; i++) {
             geometry = d[i].geometry(resolver);
             if (!(geometry === 'vertex' || geometry === 'relation')) {
                 matches = Object.keys(features.getMatches(d[i], resolver, geometry));
-                for (var j = 0, jmax = matches.length; j !== jmax; j++) {
+                for (var j = 0; j < matches.length; j++) {
                     _features[matches[j]].count++;
                 }
             }
@@ -271,7 +271,7 @@ iD.Features = function(context) {
     };
 
     features.clear = function(d) {
-        for (var i = 0, imax = d.length; i !== imax; i++) {
+        for (var i = 0; i < d.length; i++) {
             features.clearEntity(d[i]);
         }
     };
@@ -295,7 +295,7 @@ iD.Features = function(context) {
                 hasMatch = false;
 
             if (!(geometry === 'vertex' || geometry === 'relation')) {
-                for (var i = 0, imax = _keys.length; i !== imax; i++) {
+                for (var i = 0; i < _keys.length; i++) {
                     if (hasMatch && _keys[i] === 'others') {
                         continue;
                     }
@@ -335,7 +335,7 @@ iD.Features = function(context) {
 
         var matches = features.getMatches(entity, resolver, geometry);
 
-        for (var i = 0, imax = _hidden.length; i !== imax; i++) {
+        for (var i = 0; i < _hidden.length; i++) {
             if (matches[_hidden[i]]) { return true; }
         }
         return false;
@@ -348,7 +348,7 @@ iD.Features = function(context) {
 
         if (!parents.length) { return false; }
 
-        for (var i = 0, imax = parents.length; i !== imax; i++) {
+        for (var i = 0; i < parents.length; i++) {
             if (!features.isHidden(parents[i], resolver, parents[i].geometry(resolver))) {
                 return false;
             }
@@ -394,7 +394,7 @@ iD.Features = function(context) {
             return d;
 
         var result = [];
-        for (var i = 0, imax = d.length; i !== imax; i++) {
+        for (var i = 0; i < d.length; i++) {
             var entity = d[i];
             if (!features.isHidden(entity, resolver, entity.geometry(resolver))) {
                 result.push(entity);

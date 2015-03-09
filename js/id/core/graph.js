@@ -51,7 +51,7 @@ iD.Graph.prototype = {
             result = [];
 
         if (parents) {
-            for (var i = 0, imax = parents.length; i !== imax; i++) {
+            for (var i = 0; i < parents.length; i++) {
                 result.push(this.entity(parents[i]));
             }
         }
@@ -73,7 +73,7 @@ iD.Graph.prototype = {
             result = [];
 
         if (parents) {
-            for (var i = 0, imax = parents.length; i !== imax; i++) {
+            for (var i = 0; i < parents.length; i++) {
                 result.push(this.entity(parents[i]));
             }
         }
@@ -86,7 +86,7 @@ iD.Graph.prototype = {
 
         var nodes = [];
         if (entity.nodes) {
-            for (var i = 0, l = entity.nodes.length; i < l; i++) {
+            for (var i = 0; i < entity.nodes.length; i++) {
                 nodes[i] = this.entity(entity.nodes[i]);
             }
         }
