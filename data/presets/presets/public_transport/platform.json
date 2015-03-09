@@ -1,8 +1,8 @@
 {
     "fields": [
         "ref",
-        "operator",
         "network",
+        "operator",
         "shelter"
     ],
     "geometry": [
