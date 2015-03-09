@@ -3781,6 +3781,7 @@
     "highway/bus_stop": {
         "icon": "bus",
         "fields": [
+            "network",
             "operator",
             "bench",
             "shelter",
@@ -6536,8 +6537,8 @@
     "public_transport/platform": {
         "fields": [
             "ref",
-            "operator",
             "network",
+            "operator",
             "shelter"
         ],
         "geometry": [
@@ -6555,8 +6556,8 @@
         "icon": "bus",
         "fields": [
             "ref",
-            "operator",
-            "network"
+            "network",
+            "operator"
         ],
         "geometry": [
             "vertex"

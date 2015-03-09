@@ -2,8 +2,8 @@
     "icon": "bus",
     "fields": [
         "ref",
-        "operator",
-        "network"
+        "network",
+        "operator"
     ],
     "geometry": [
         "vertex"
