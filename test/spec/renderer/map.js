@@ -39,18 +39,24 @@ describe('iD.Map', function() {
     });
 
     describe('#zoomIn', function() {
-        it('increments zoom', function() {
+        it('increments zoom', function(done) {
             expect(map.zoom(4)).to.equal(map);
-            expect(map.zoomIn()).to.equal(map);
-            expect(map.zoom()).to.equal(5);
+            map.zoomIn();
+            window.setTimeout(function() {
+                expect(map.zoom()).to.equal(5);
+                done();
+            }, 500);
         });
     });
 
     describe('#zoomOut', function() {
-        it('decrements zoom', function() {
+        it('decrements zoom', function(done) {
             expect(map.zoom(4)).to.equal(map);
-            expect(map.zoomOut()).to.equal(map);
-            expect(map.zoom()).to.equal(3);
+            map.zoomOut();
+            window.setTimeout(function() {
+                expect(map.zoom()).to.equal(3);
+                done();
+            }, 500);
         });
     });
 

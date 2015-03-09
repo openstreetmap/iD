@@ -153,11 +153,15 @@ iD.Map = function(context) {
     }
 
     function zoomPan() {
-        if (Math.log(d3.event.scale / Math.LN2 - 8) < minzoom + 1) {
+        if (Math.log(d3.event.scale) / Math.LN2 - 8 < minzoom) {
+            surface.interrupt();
             iD.ui.flash(context.container())
                 .select('.content')
                 .text(t('cannot_zoom'));
-            return setZoom(context.minEditableZoom(), true);
+            setZoom(context.minEditableZoom(), true);
+            queueRedraw();
+            dispatch.move(map);
+            return;
         }
 
         projection
@@ -253,6 +257,22 @@ iD.Map = function(context) {
         return map;
     };
 
+    function interpolateZoom(_) {
+        var k = projection.scale(),
+            t = projection.translate();
+
+        surface.node().__chart__ = {
+            x: t[0],
+            y: t[1],
+            k: k * 2 * Math.PI
+        };
+
+        setZoom(_);
+        projection.scale(k).translate(t);  // undo setZoom projection changes
+
+        zoom.event(surface.transition());
+    }
+
     function setZoom(_, force) {
         if (_ === map.zoom() && !force)
             return false;
@@ -307,8 +327,8 @@ iD.Map = function(context) {
         return redraw();
     };
 
-    map.zoomIn = function() { return map.zoom(~~map.zoom() + 1); };
-    map.zoomOut = function() { return map.zoom(~~map.zoom() - 1); };
+    map.zoomIn = function() { interpolateZoom(~~map.zoom() + 1); };
+    map.zoomOut = function() { interpolateZoom(~~map.zoom() - 1); };
 
     map.center = function(loc) {
         if (!arguments.length) {
@@ -328,6 +348,7 @@ iD.Map = function(context) {
         }
 
         if (z < minzoom) {
+            surface.interrupt();
             iD.ui.flash(context.container())
                 .select('.content')
                 .text(t('cannot_zoom'));
