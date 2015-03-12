@@ -11,7 +11,8 @@
     ],
     "fields": [
         "structure",
-        "gauge"
+        "gauge",
+        "service_rail"
     ],
     "tags": {
         "railway": "funicular"

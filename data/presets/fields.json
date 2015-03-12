@@ -977,6 +977,19 @@
             }
         }
     },
+    "service_rail": {
+        "key": "service",
+        "type": "combo",
+        "label": "Service Type",
+        "strings": {
+            "options": {
+                "spur": "Spur",
+                "yard": "Yard",
+                "siding": "Siding",
+                "crossover": "Crossover"
+            }
+        }
+    },
     "shelter": {
         "key": "shelter",
         "type": "check",

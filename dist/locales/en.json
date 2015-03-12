@@ -1183,6 +1183,15 @@
                     "no": "No"
                 }
             },
+            "service_rail": {
+                "label": "Service Type",
+                "options": {
+                    "spur": "Spur",
+                    "yard": "Yard",
+                    "siding": "Siding",
+                    "crossover": "Crossover"
+                }
+            },
             "shelter": {
                 "label": "Shelter"
             },

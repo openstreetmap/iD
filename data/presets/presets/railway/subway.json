@@ -1,16 +1,17 @@
 {
     "icon": "railway-subway",
-    "fields": [
-        "structure",
-        "gauge",
-        "electrified"
-    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "subway"
     },
+    "fields": [
+        "structure",
+        "gauge",
+        "electrified",
+        "service_rail"
+    ],
     "terms": [],
     "name": "Subway"
 }

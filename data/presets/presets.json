@@ -6591,7 +6591,8 @@
             "railway": "abandoned"
         },
         "fields": [
-            "structure"
+            "structure",
+            "service_rail"
         ],
         "terms": [],
         "name": "Abandoned Railway"
@@ -6605,7 +6606,8 @@
             "railway": "disused"
         },
         "fields": [
-            "structure"
+            "structure",
+            "service_rail"
         ],
         "terms": [],
         "name": "Disused Railway"
@@ -6623,7 +6625,8 @@
         ],
         "fields": [
             "structure",
-            "gauge"
+            "gauge",
+            "service_rail"
         ],
         "tags": {
             "railway": "funicular"
@@ -6677,7 +6680,8 @@
         },
         "fields": [
             "structure",
-            "electrified"
+            "electrified",
+            "service_rail"
         ],
         "terms": [],
         "name": "Monorail"
@@ -6693,7 +6697,8 @@
         "fields": [
             "structure",
             "gauge",
-            "electrified"
+            "electrified",
+            "service_rail"
         ],
         "terms": [
             "narrow gauge railway",
@@ -6724,7 +6729,8 @@
         "fields": [
             "structure",
             "gauge",
-            "electrified"
+            "electrified",
+            "service_rail"
         ],
         "terms": [],
         "name": "Rail"
@@ -6753,17 +6759,18 @@
     },
     "railway/subway": {
         "icon": "railway-subway",
-        "fields": [
-            "structure",
-            "gauge",
-            "electrified"
-        ],
         "geometry": [
             "line"
         ],
         "tags": {
             "railway": "subway"
         },
+        "fields": [
+            "structure",
+            "gauge",
+            "electrified",
+            "service_rail"
+        ],
         "terms": [],
         "name": "Subway"
     },
@@ -6789,7 +6796,8 @@
         "fields": [
             "structure",
             "gauge",
-            "electrified"
+            "electrified",
+            "service_rail"
         ],
         "terms": [
             "streetcar"

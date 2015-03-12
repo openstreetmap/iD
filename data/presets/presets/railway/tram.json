@@ -9,7 +9,8 @@
     "fields": [
         "structure",
         "gauge",
-        "electrified"
+        "electrified",
+        "service_rail"
     ],
     "terms": ["streetcar"],
     "name": "Tram"
