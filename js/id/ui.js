@@ -32,6 +32,11 @@ iD.ui = function(context) {
             .attr('id', 'map')
             .call(map);
 
+        content.append('div')
+            .attr('class', 'map-in-map-wrap')
+            .style('display', 'none')
+            .call(iD.ui.MapInMap(context));
+
         bar.append('div')
             .attr('class', 'spacer col4');
 

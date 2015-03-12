@@ -683,7 +683,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     float: left;
     height: 100%;
     overflow: hidden;
-    z-index: 2;
+    z-index: 10;
     background: #f6f6f6;
 }
 
@@ -2102,6 +2102,35 @@ img.wiki-image {
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+/* Map-In-Map
+------------------------------------------------------- */
+
+.map-in-map-wrap {
+    position: absolute;
+    overflow: hidden;
+    top: 60px;
+    width: 200px;
+    height: 150px;
+    z-index: 9;
+    background: #000;
+    border: #aaa 1px solid;
+    box-shadow: 0 0 2em black;
+    pointer-events: none;
+}
+
+.map-in-map-wrap svg {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.map-in-map-bbox {
+    fill: none;
+    stroke: rgba(255, 255, 0, 0.75);
+    stroke-width: 1;
+    shape-rendering: crispEdges;
 }
 
 /* About Section
