@@ -135,6 +135,8 @@ describe('iD.Features', function() {
             iD.Way({id: 'scrub', tags: {area: 'yes', natural: 'scrub'}, version: 1}),
             iD.Way({id: 'industrial', tags: {area: 'yes', landuse: 'industrial'}, version: 1}),
             iD.Way({id: 'parkinglot', tags: {area: 'yes', amenity: 'parking', parking: 'surface'}, version: 1}),
+
+            // Landuse with hole
             iD.Way({id: 'inner', version: 1}),
             iD.Way({id: 'outer', version: 1}),
             iD.Relation({id: 'retail', tags: {landuse: 'retail', type: 'multipolygon'},
@@ -175,7 +177,17 @@ describe('iD.Features', function() {
 
             // Others
             iD.Way({id: 'fence', tags: {barrier: 'fence'}, version: 1}),
-            iD.Way({id: 'pipeline', tags: {man_made: 'pipeline'}, version: 1})
+            iD.Way({id: 'pipeline', tags: {man_made: 'pipeline'}, version: 1}),
+
+            // Site relation
+            iD.Relation({id: 'site', tags: {type: 'site'},
+                    members: [
+                        {id: 'fence', role: 'perimeter'},
+                        {id: 'building_yes'}
+                    ],
+                    version: 1
+                }),
+
         ]),
         all = _.values(graph.base().entities);
 

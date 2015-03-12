@@ -305,8 +305,10 @@ iD.Features = function(context) {
                             var parents = features.getParents(entity, resolver, geometry);
                             if (parents.length === 1) {
                                 var pkey = iD.Entity.key(parents[0]);
-                                matches = _.clone(_cache[pkey].matches);
-                                continue;
+                                if (_cache[pkey] && _cache[pkey].matches) {
+                                    matches = _.clone(_cache[pkey].matches);
+                                    continue;
+                                }
                             }
                         }
                     }
