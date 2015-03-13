@@ -2107,7 +2107,7 @@ img.wiki-image {
 /* Map-In-Map
 ------------------------------------------------------- */
 
-.map-in-map-wrap {
+.map-in-map {
     position: absolute;
     overflow: hidden;
     top: 60px;
@@ -2117,13 +2117,25 @@ img.wiki-image {
     background: #000;
     border: #aaa 1px solid;
     box-shadow: 0 0 2em black;
-    pointer-events: none;
 }
 
-.map-in-map-wrap svg {
+.map-in-map-tiles {
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.map-in-map-svg {
     position: relative;
     overflow: hidden;
     height: 100%;
+    width: 100%;
 }
 
 .map-in-map-bbox {

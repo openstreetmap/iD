@@ -33,7 +33,7 @@ iD.ui = function(context) {
             .call(map);
 
         content.append('div')
-            .attr('class', 'map-in-map-wrap')
+            .attr('class', 'map-in-map')
             .style('display', 'none')
             .call(iD.ui.MapInMap(context));
 
