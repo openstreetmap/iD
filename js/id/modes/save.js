@@ -8,10 +8,13 @@ iD.modes.Save = function(context) {
     }
 
     function save(e, tryAgain) {
-        function withChildNodes(ids) {
-            return _.uniq(_.reduce(toCheck, function(result, id) {
-                var e = context.entity(id);
-                if (e.type === 'way') result.push.apply(result, e.nodes);
+        function withChildNodes(ids, graph) {
+            return _.uniq(_.reduce(ids, function(result, id) {
+                var e = graph.entity(id);
+                if (e.type === 'way') {
+                    var cn = graph.childNodes(e);
+                    result.push.apply(result, _.pluck(_.filter(cn, 'version'), 'id'));
+                }
                 return result;
             }, _.clone(ids)));
         }
@@ -23,7 +26,7 @@ iD.modes.Save = function(context) {
             remoteGraph = iD.Graph(history.base(), true),
             modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
             toCheck = _.pluck(_.pluck(modified, 'entity'), 'id'),
-            toLoad = withChildNodes(toCheck),
+            toLoad = withChildNodes(toCheck, localGraph),
             conflicts = [],
             errors = [];
 
@@ -96,10 +99,12 @@ iD.modes.Save = function(context) {
                 if (compareVersions(local, remote)) return;
 
                 var action = iD.actions.MergeRemoteChanges,
-                    merge = action(id, localGraph, remoteGraph, formatUser),
-                    diff = history.replace(merge);
+                    merge = action(id, localGraph, remoteGraph, formatUser);
 
-                if (diff.length()) return;  // merged safely
+                history.replace(merge);
+
+                var conflicts = merge.conflicts();
+                if (!conflicts.length) return;  // merged safely
 
                 var forceLocal = action(id, localGraph, remoteGraph).withOption('force_local'),
                     forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote'),
@@ -109,7 +114,7 @@ iD.modes.Save = function(context) {
                 conflicts.push({
                     id: id,
                     name: entityName(local),
-                    details: merge.conflicts(),
+                    details: conflicts,
                     chosen: 1,
                     choices: [
                         choice(id, keepMine, forceLocal),
