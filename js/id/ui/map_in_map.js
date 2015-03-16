@@ -1,5 +1,5 @@
 iD.ui.MapInMap = function(context) {
-    var key = 'M';
+    var key = '/';
 
     function map_in_map(selection) {
         var backgroundLayer = iD.TileLayer(),
