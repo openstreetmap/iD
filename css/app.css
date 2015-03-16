@@ -655,7 +655,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     right: 0;
     top: 0;
     height: 59px;
-    z-index: 3;
+    z-index: 50;
 }
 
 .footer {
@@ -2295,7 +2295,7 @@ img.wiki-image {
     left: 0;
     right: 0;
     margin: auto;
-    z-index: 3;
+    z-index: 50;
 }
 
 .modal .loader {
@@ -2307,7 +2307,7 @@ img.wiki-image {
 }
 
 .shaded {
-    z-index: 2;
+    z-index: 49;
     position: absolute;
     top: 0;
     bottom: 0;
