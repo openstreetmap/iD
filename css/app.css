@@ -609,7 +609,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     top:0;
     right:0;
     height:60px;
-    z-index: 1;
+    z-index: 9;
     min-width: 768px;
 }
 
@@ -655,7 +655,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     right: 0;
     top: 0;
     height: 59px;
-    z-index: 3;
+    z-index: 50;
 }
 
 .footer {
@@ -683,7 +683,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     float: left;
     height: 100%;
     overflow: hidden;
-    z-index: 2;
+    z-index: 10;
     background: #f6f6f6;
 }
 
@@ -2104,6 +2104,51 @@ img.wiki-image {
     bottom: 0;
 }
 
+/* Map-In-Map
+------------------------------------------------------- */
+
+.map-in-map {
+    position: absolute;
+    overflow: hidden;
+    top: 60px;
+    width: 200px;
+    height: 150px;
+    z-index: 5;
+    background: #000;
+    border: #aaa 1px solid;
+    box-shadow: 0 0 2em black;
+}
+
+.map-in-map-tiles {
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.map-in-map-svg {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.map-in-map-bbox {
+    fill: none;
+    stroke: rgba(255, 255, 0, 0.75);
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.map-in-map-bbox.thick {
+    stroke-width: 5;
+}
+
 /* About Section
 ------------------------------------------------------- */
 
@@ -2254,7 +2299,7 @@ img.wiki-image {
     left: 0;
     right: 0;
     margin: auto;
-    z-index: 3;
+    z-index: 50;
 }
 
 .modal .loader {
@@ -2266,7 +2311,7 @@ img.wiki-image {
 }
 
 .shaded {
-    z-index: 2;
+    z-index: 49;
     position: absolute;
     top: 0;
     bottom: 0;
