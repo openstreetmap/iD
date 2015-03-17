@@ -204,7 +204,8 @@ iD.ui.MapInMap = function(context) {
                     .attr('class', 'map-in-map-bbox');
 
                 path
-                    .attr('d', getPath);
+                    .attr('d', getPath)
+                    .classed('thick', function(d) { return getPath.area(d) < 30; });
             }
         }
 

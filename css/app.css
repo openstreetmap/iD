@@ -2145,6 +2145,10 @@ img.wiki-image {
     shape-rendering: crispEdges;
 }
 
+.map-in-map-bbox.thick {
+    stroke-width: 5;
+}
+
 /* About Section
 ------------------------------------------------------- */
 
