@@ -10,44 +10,48 @@ iD.ui.MapInMap = function(context) {
                 .on('zoom', zoomPan),
             transformed = false,
             panning = false,
-            tStart = [0, 0],
-            tLast = [0, 0],
-            tCurr = [0, 0],
-            kLast = 1,
-            kCurr = 1,
-            tiles,
-            timeoutId;
+            zDiff = 6,    // by default, minimap renders at (main zoom - 6)
+            tStart, tLast, tCurr, kLast, kCurr, tiles, svg, timeoutId;
 
         function ztok(z) { return 256 * Math.pow(2, z); }
         function ktoz(k) { return Math.log(k) / Math.LN2 - 8; }
 
 
-        function startZoomPan() {
-            context.surface().on('mouseup.map-in-map-outside', endZoomPan);
-            context.container().on('mouseup.map-in-map-outside', endZoomPan);
+        function startMouse() {
+            context.surface().on('mouseup.map-in-map-outside', endMouse);
+            context.container().on('mouseup.map-in-map-outside', endMouse);
+
             tStart = tLast = tCurr = projection.translate();
             panning = true;
         }
 
 
         function zoomPan() {
-            var t = d3.event.translate,
+            var e = d3.event.sourceEvent,
+                t = d3.event.translate,
                 k = d3.event.scale,
-                e = d3.event.sourceEvent;
+                zMain = ktoz(context.projection.scale() * 2 * Math.PI),
+                zMini = ktoz(k);
 
-            if (e.type === 'wheel') {
-                // for now, ignore wheel events
-                kCurr = k;
-                zoom.translate(tCurr).scale(kCurr);
-
-            } else if (e.type === 'mousemove') {
-                tCurr = t;
+            // restrict minimap zoom to < (main zoom - 3)
+            if (zMini > zMain - 3) {
+                zMini = zMain - 3;
+                zoom.scale(kCurr).translate(tCurr);  // restore last good values
+                return;
             }
 
-            var tTiles = [ tCurr[0] - tLast[0], tCurr[1] - tLast[1] ];
-            iD.util.setTransform(tiles, tTiles[0], tTiles[1]);
+            tCurr = t;
+            kCurr = k;
+            zDiff = zMain - zMini;
 
+            var scale = kCurr / kLast,
+                tX = Math.round((tCurr[0] / scale - tLast[0]) * scale),
+                tY = Math.round((tCurr[1] / scale - tLast[1]) * scale);
+
+            iD.util.setTransform(tiles, tX, tY, scale);
+            iD.util.setTransform(svg, 0, 0, scale);
             transformed = true;
+
             queueRedraw();
 
             e.preventDefault();
@@ -55,7 +59,7 @@ iD.ui.MapInMap = function(context) {
         }
 
 
-        function endZoomPan() {
+        function endMouse() {
             context.surface().on('mouseup.map-in-map-outside', null);
             context.container().on('mouseup.map-in-map-outside', null);
 
@@ -63,48 +67,50 @@ iD.ui.MapInMap = function(context) {
             panning = false;
 
             if (tCurr[0] !== tStart[0] && tCurr[1] !== tStart[1]) {
-                var d = selection.dimensions(),
-                    c = [ d[0] / 2, d[1] / 2 ];
+                var dMini = selection.dimensions(),
+                    cMini = [ dMini[0] / 2, dMini[1] / 2 ];
 
-                context.map().center(projection.invert(c));
+                context.map().center(projection.invert(cMini));
             }
         }
 
 
         function updateProjection() {
             var loc = context.map().center(),
-                d = selection.dimensions(),
-                c = [ d[0] / 2, d[1] / 2 ],
-                t1 = context.projection.translate(),
-                k1 = context.projection.scale(),
-                z1 = ktoz(k1 * 2 * Math.PI),
-                z = Math.max(z1 - 6, 0.5),
-                k = ztok(z);
+                dMini = selection.dimensions(),
+                cMini = [ dMini[0] / 2, dMini[1] / 2 ],
+                tMain = context.projection.translate(),
+                kMain = context.projection.scale(),
+                zMain = ktoz(kMain * 2 * Math.PI),
+                zMini = Math.max(zMain - zDiff, 0.5),
+                kMini = ztok(zMini);
 
             projection
-                .translate(t1)
-                .scale(k / (2 * Math.PI));
+                .translate(tMain)
+                .scale(kMini / (2 * Math.PI));
 
             var s = projection(loc),
                 mouse = panning ? [ tCurr[0] - tStart[0], tCurr[1] - tStart[1] ] : [0, 0],
-                t = [
-                    c[0] - s[0] + t1[0] + mouse[0],
-                    c[1] - s[1] + t1[1] + mouse[1]
+                tMini = [
+                    cMini[0] - s[0] + tMain[0] + mouse[0],
+                    cMini[1] - s[1] + tMain[1] + mouse[1]
                 ];
 
             projection
-                .translate(t)
-                .clipExtent([[0, 0], d]);
+                .translate(tMini)
+                .clipExtent([[0, 0], dMini]);
 
             zoom
-                .translate(t)
-                .scale(k);
+                .center(cMini)
+                .translate(tMini)
+                .scale(kMini);
 
-            tLast = tCurr = t;
-            kLast = kCurr = k;
+            tLast = tCurr = tMini;
+            kLast = kCurr = kMini;
 
             if (transformed) {
                 iD.util.setTransform(tiles, 0, 0);
+                iD.util.setTransform(svg, 0, 0);
                 transformed = false;
             }
         }
@@ -115,8 +121,8 @@ iD.ui.MapInMap = function(context) {
 
             updateProjection();
 
-            var d = selection.dimensions(),
-                z = ktoz(projection.scale() * 2 * Math.PI);
+            var dMini = selection.dimensions(),
+                zMini = ktoz(projection.scale() * 2 * Math.PI);
 
             // setup tile container
             tiles = selection
@@ -133,7 +139,7 @@ iD.ui.MapInMap = function(context) {
             backgroundLayer
                 .source(context.background().baseLayerSource())
                 .projection(projection)
-                .dimensions(d);
+                .dimensions(dMini);
 
             var background = tiles
                 .selectAll('.map-in-map-background')
@@ -151,11 +157,11 @@ iD.ui.MapInMap = function(context) {
                 hasOverlay = false;
 
             for (var i = 0; i < overlaySources.length; i++) {
-                if (overlaySources[i].validZoom(z)) {
+                if (overlaySources[i].validZoom(zMini)) {
                     overlayLayer
                         .source(overlaySources[i])
                         .projection(projection)
-                        .dimensions(d);
+                        .dimensions(dMini);
 
                     hasOverlay = true;
                     break;
@@ -183,7 +189,7 @@ iD.ui.MapInMap = function(context) {
                 var getPath = d3.geo.path().projection(projection),
                     bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
 
-                var svg = selection.selectAll('.map-in-map-svg')
+                svg = selection.selectAll('.map-in-map-svg')
                     .data([0]);
 
                 svg.enter()
@@ -242,8 +248,8 @@ iD.ui.MapInMap = function(context) {
 
 
         selection
-            .on('mousedown.map-in-map', startZoomPan)
-            .on('mouseup.map-in-map', endZoomPan);
+            .on('mousedown.map-in-map', startMouse)
+            .on('mouseup.map-in-map', endMouse);
 
         selection
             .call(zoom)
