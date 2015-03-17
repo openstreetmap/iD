@@ -609,7 +609,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     top:0;
     right:0;
     height:60px;
-    z-index: 1;
+    z-index: 9;
     min-width: 768px;
 }
 
@@ -2113,7 +2113,7 @@ img.wiki-image {
     top: 60px;
     width: 200px;
     height: 150px;
-    z-index: 9;
+    z-index: 5;
     background: #000;
     border: #aaa 1px solid;
     box-shadow: 0 0 2em black;
