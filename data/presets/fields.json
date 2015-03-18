@@ -336,6 +336,11 @@
         "type": "textarea",
         "label": "Description"
     },
+    "drive_through": {
+        "key": "drive_through",
+        "type": "check",
+        "label": "Drive-Through"
+    },
     "electrified": {
         "key": "electrified",
         "type": "combo",

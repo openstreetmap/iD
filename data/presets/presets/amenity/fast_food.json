@@ -8,6 +8,7 @@
         "opening_hours",
         "takeaway",
         "delivery",
+        "drive_through",
         "smoking"
     ],
     "geometry": [

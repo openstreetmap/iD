@@ -775,6 +775,9 @@
             "description": {
                 "label": "Description"
             },
+            "drive_through": {
+                "label": "Drive-Through"
+            },
             "electrified": {
                 "label": "Electrification",
                 "placeholder": "Contact Line, Electrified Rail...",

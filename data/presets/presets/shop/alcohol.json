@@ -4,7 +4,8 @@
         "operator",
         "address",
         "building_area",
-        "opening_hours"
+        "opening_hours",
+        "drive_through"
     ],
     "geometry": [
         "point",
