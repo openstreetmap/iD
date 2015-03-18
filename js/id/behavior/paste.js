@@ -26,18 +26,20 @@ iD.behavior.Paste = function(context) {
 
         if (!iD.geo.pointInPolygon(mouse, viewport)) return;
 
-        var graph = context.graph(),
-            extent = iD.geo.Extent(),
-            oldIDs = context.copiedIDs(),
+        var extent = iD.geo.Extent(),
+            oldIDs = context.copyIDs(),
+            oldGraph = context.copyGraph(),
             newIDs = [],
             i, j;
 
+        if (!oldIDs.length) return;
+
         for (i = 0; i < oldIDs.length; i++) {
-            var oldEntity = graph.entity(oldIDs[i]),
-                action = iD.actions.CopyEntity(oldEntity, true),
+            var oldEntity = oldGraph.entity(oldIDs[i]),
+                action = iD.actions.CopyEntity(oldEntity.id, oldGraph, true),
                 newEntities;
 
-            extent._extend(oldEntity.extent(graph));
+            extent._extend(oldEntity.extent(oldGraph));
             context.perform(action);
 
             // First element in `newEntities` contains the copied Entity,

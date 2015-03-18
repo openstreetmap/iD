@@ -221,10 +221,12 @@ window.iD = function () {
     };
 
     /* Copy/Paste */
-    var copiedIDs = [];
-    context.copiedIDs = function(_) {
-        if (!arguments.length) return copiedIDs;
-        copiedIDs = _;
+    var copyIDs = [], copyGraph;
+    context.copyGraph = function() { return copyGraph; };
+    context.copyIDs = function(_) {
+        if (!arguments.length) return copyIDs;
+        copyIDs = _;
+        copyGraph = history.graph();
         return context;
     };
 

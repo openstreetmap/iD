@@ -61,7 +61,7 @@ iD.behavior.Copy = function(context) {
             }
         }
 
-        context.copiedIDs(canCopy);
+        context.copyIDs(canCopy);
     }
 
     function copy() {
