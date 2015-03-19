@@ -1,5 +1,10 @@
 iD.ui.SelectionList = function(context, selectedIDs) {
 
+    function selectEntity(entity) {
+        context.enter(iD.modes.Select(context, [entity.id]).suppressMenu(true));
+    }
+
+
     function selectionList(selection) {
         selection.classed('selection-list-pane', true);
 
@@ -28,9 +33,7 @@ iD.ui.SelectionList = function(context, selectedIDs) {
 
             var enter = items.enter().append('button')
                 .attr('class', 'feature-list-item')
-                .on('click', function(entity) {
-                    context.enter(iD.modes.Select(context, [entity.id]));
-                });
+                .on('click', selectEntity);
 
             // Enter
 
