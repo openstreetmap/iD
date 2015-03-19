@@ -1119,9 +1119,14 @@ g.turn circle {
 }
 
 .mode-add-point #map,
-.lasso #map,
-.lasso .way,
-.lasso .vertex {
+.mode-browse.lasso #map,
+.mode-browse.lasso .way,
+.mode-browse.lasso .vertex,
+.mode-browse.lasso .midpoint,
+.mode-select.lasso #map,
+.mode-select.lasso .way,
+.mode-select.lasso .vertex,
+.mode-select.lasso .midpoint {
     cursor: crosshair; /* Opera */
     cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
 }
