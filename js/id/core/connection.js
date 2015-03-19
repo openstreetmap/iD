@@ -242,12 +242,15 @@ iD.Connection = function() {
 
     connection.changesetTags = function(comment, imageryUsed) {
         var tags = {
+            created_by: 'iD ' + iD.version,
+            host: (window.location.origin + window.location.pathname).substr(0, 255),
+            locale: iD.detect().locale,
+            user_agent: navigator.userAgent.substr(0, 255),
             imagery_used: imageryUsed.join(';').substr(0, 255),
-            created_by: 'iD ' + iD.version
         };
 
         if (comment) {
-            tags.comment = comment;
+            tags.comment = comment.substr(0, 255);
         }
 
         return tags;
