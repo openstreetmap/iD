@@ -241,11 +241,14 @@ iD.Connection = function() {
     };
 
     connection.changesetTags = function(comment, imageryUsed) {
-        var tags = {
+        var detected = iD.detect(),
+            tags = {
             created_by: 'iD ' + iD.version,
-            host: (window.location.origin + window.location.pathname).substr(0, 255),
-            locale: iD.detect().locale,
             imagery_used: imageryUsed.join(';').substr(0, 255),
+            'iD:host': (window.location.origin + window.location.pathname).substr(0, 255),
+            'iD:locale': detected.locale,
+            'iD:browser': detected.browser + ' ' + detected.version,
+            'iD:platform': detected.platform
         };
 
         if (comment) {
