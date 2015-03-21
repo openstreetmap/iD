@@ -81,6 +81,21 @@ iD.History = function(context) {
             }
         },
 
+        // Same as calling pop and then perform
+        overwrite: function() {
+            var previous = stack[index].graph;
+
+            if (index > 0) {
+                index--;
+                stack.pop();
+            }
+            stack = stack.slice(0, index + 1);
+            stack.push(perform(arguments));
+            index++;
+
+            return change(previous);
+        },
+
         undo: function() {
             var previous = stack[index].graph;
 
