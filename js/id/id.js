@@ -333,23 +333,30 @@ iD.version = '1.7.0';
     var ua = navigator.userAgent,
         m = null;
 
-    m = ua.match(/Trident\/.*rv:([0-9]{1,}[\.0-9]{0,})/i);   // IE11
+    m = ua.match(/Trident\/.*rv:([0-9]{1,}[\.0-9]{0,})/i);   // IE11+
     if (m !== null) {
         detected.browser = 'msie';
         detected.version = m[1];
-    } else {
+    }
+    if (!detected.browser) {
+        m = ua.match(/(opr)\/?\s*(\.?\d+(\.\d+)*)/i);   // Opera 15+
+        if (m !== null) {
+            detected.browser = 'Opera';
+            detected.version = m[2];
+        }
+    }
+    if (!detected.browser) {
         m = ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
         if (m !== null) {
             detected.browser = m[1];
             detected.version = m[2];
             m = ua.match(/version\/([\.\d]+)/i);
-            if (m !== null) {
-                detected.version = m[1];
-            }
-        } else {
-            detected.browser = navigator.appName;
-            detected.version = navigator.appVersion;
+            if (m !== null) detected.version = m[1];
         }
+    }
+    if (!detected.browser) {
+        detected.browser = navigator.appName;
+        detected.version = navigator.appVersion;
     }
 
     // keep major.minor version only..
@@ -363,7 +370,7 @@ iD.version = '1.7.0';
     }
 
     // Added due to incomplete svg style support. See #715
-    detected.opera = (detected.browser.toLowerCase() === 'opera');
+    detected.opera = (detected.browser.toLowerCase() === 'opera' && parseFloat(detected.version) < 15 );
 
     detected.locale = navigator.language || navigator.userLanguage;
 
