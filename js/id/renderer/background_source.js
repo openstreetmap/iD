@@ -57,8 +57,7 @@ iD.BackgroundSource = function(data) {
     };
 
     source.validZoom = function(z) {
-        return source.scaleExtent[0] <= z &&
-            (!source.isLocatorOverlay() || source.scaleExtent[1] > z);
+        return source.scaleExtent[0] <= z && source.scaleExtent[1] > z;
     };
 
     source.isLocatorOverlay = function() {

@@ -19,4 +19,18 @@ describe('iD.BackgroundSource', function() {
         expect(source.url([0,1,1])).to.equal('b/1/0/1');
         expect(source.url([0,2,1])).to.equal('a/1/0/2');
     });
+
+    it('displays overlays on the correct zoom levels', function() {
+        var source = iD.BackgroundSource({ scaleExtent: [6,16], name: 'Custom overlay'});
+        expect(source.validZoom(10)).to.be.true;
+        expect(source.validZoom(3)).to.be.false;
+        expect(source.validZoom(17)).to.be.false;
+    });
+
+    it('displays the Locator Overlay on the correct zoom levels', function() {
+        var source = iD.BackgroundSource({ scaleExtent: [6,16], name: 'Locator Overlay'});
+        expect(source.validZoom(10)).to.be.true;
+        expect(source.validZoom(3)).to.be.false;
+        expect(source.validZoom(17)).to.be.false;
+    });
 });
