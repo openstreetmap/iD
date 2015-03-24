@@ -6,4 +6,3 @@ dist/iD.css
 dist/presets.js
 dist/imagery.js
 transifex.auth
-dist/locales/en.json
