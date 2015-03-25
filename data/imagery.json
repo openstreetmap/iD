@@ -10515,6 +10515,7 @@
             0,
             16
         ],
+        "overzoom": false,
         "terms_url": "http://www.mapbox.com/about/maps/",
         "terms_text": "Terms & Feedback",
         "default": true,
