@@ -83,6 +83,10 @@ sources.forEach(function(source) {
         ]];
     }
 
+    if (source.name == 'Locator Overlay') {
+        im.overzoom = false;
+    }
+
     var attribution = source.attribution || {};
     if (attribution.url) {
         im.terms_url = attribution.url;
