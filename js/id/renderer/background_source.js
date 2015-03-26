@@ -4,7 +4,7 @@ iD.BackgroundSource = function(data) {
         name = source.name;
 
     source.scaleExtent = data.scaleExtent || [0, 20];
-    source.overzoom = data.overzoom !== false ? true : false;
+    source.overzoom = data.overzoom !== false;
 
     source.offset = function(_) {
         if (!arguments.length) return offset;
