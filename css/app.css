@@ -2149,6 +2149,20 @@ img.wiki-image {
     stroke-width: 5;
 }
 
+/* Info Box
+------------------------------------------------------- */
+.infobox {
+    position: absolute;
+    overflow: hidden;
+    top: 220px;
+    width: 200px;
+    height: 150px;
+    z-index: 5;
+    background:rgba(0,0,0,.8);
+    border-radius: 0 0 0 4px;
+}
+
+
 /* About Section
 ------------------------------------------------------- */
 
