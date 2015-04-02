@@ -204,6 +204,25 @@ en:
   contributors:
     list: "Edits by {users}"
     truncated_list: "Edits by {users} and {count} others"
+  infobox:
+    key: I
+    selected: "{n} selected"
+    geometry: Geometry
+    closed: closed
+    center: Center
+    perimeter: Perimeter
+    length: Length
+    area: Area
+    centroid: Centroid
+    location: Location
+    metric: Switch to metric
+    imperial: Switch to imperial
+  geometry:
+    point: point
+    vertex: vertex
+    line: line
+    area: area
+    relation: relation
   geocoder:
     search: Search worldwide...
     no_results_visible: No results in visible map area

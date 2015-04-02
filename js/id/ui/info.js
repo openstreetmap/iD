@@ -1,5 +1,5 @@
 iD.ui.Info = function(context) {
-    var key = 'I',
+    var key = t('infobox.key'),
         imperial = (iD.detect().locale.toLowerCase() === 'en-us');
 
     function info(selection) {
@@ -15,7 +15,7 @@ iD.ui.Info = function(context) {
 
         function displayLength(m) {
             var d = m * (imperial ? 3.28084 : 1),
-                unit;
+                p, unit;
 
             if (imperial) {
                 if (d >= 5280) {
@@ -32,7 +32,11 @@ iD.ui.Info = function(context) {
                     unit = 'm';
                 }
             }
-            return String(d.toFixed(2)) + ' ' + unit;
+
+            // drop unnecessary precision
+            p = d > 1000 ? 0 : d > 100 ? 1 : 2;
+
+            return String(d.toFixed(p)) + ' ' + unit;
         }
 
         function displayArea(m2) {
@@ -88,7 +92,7 @@ iD.ui.Info = function(context) {
 
             selection.html('');
             selection.append('h3')
-                .text(singular || (String(selected.length) + ' selected'));
+                .text(singular || t('infobox.selected', { n: selected.length }));
 
             if (!selected.length) return;
 
@@ -105,7 +109,7 @@ iD.ui.Info = function(context) {
             // multiple selection, just display extent center..
             if (!singular) {
                 list.append('li')
-                    .text('Center: ' + center[0].toFixed(5) + ', ' + center[1].toFixed(5));
+                    .text(t('infobox.center') + ': ' + center[0].toFixed(5) + ', ' + center[1].toFixed(5));
                 return;
             }
 
@@ -117,28 +121,29 @@ iD.ui.Info = function(context) {
                 var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate()),
                     feature = entity.asGeoJSON(resolver),
                     length = radiansToMeters(d3.geo.length(feature)),
-                    lengthLabel = closed ? 'Perimeter' : 'Length',
+                    lengthLabel = t('infobox.' + (closed ? 'perimeter' : 'length')),
                     centroid = d3.geo.centroid(feature);
 
                 list.append('li')
-                    .text('Geometry: ' + geometry + (closed ? ' (closed)' : ''));
+                    .text(t('infobox.geometry') + ': ' +
+                        (closed ? t('infobox.closed') + ' ' : '') + t('geometry.' + geometry) );
 
                 if (closed) {
                     var area = steradiansToSqmeters(entity.area(resolver));
                     list.append('li')
-                        .text('Area: ' + displayArea(area));
+                        .text(t('infobox.area') + ': ' + displayArea(area));
                 }
 
                 list.append('li')
                     .text(lengthLabel + ': ' + displayLength(length));
 
                 list.append('li')
-                    .text('Centroid: ' + centroid[0].toFixed(5) + ', ' + centroid[1].toFixed(5));
+                    .text(t('infobox.centroid') + ': ' + centroid[0].toFixed(5) + ', ' + centroid[1].toFixed(5));
 
 
                 var toggle  = imperial ? 'metric' : 'imperial';
                 selection.append('p').append('a')
-                    .text('Switch to ' + toggle)
+                    .text(t('infobox.' + toggle))
                     .attr('href', '#')
                     .on('click', function() {
                         d3.event.preventDefault();
@@ -147,10 +152,10 @@ iD.ui.Info = function(context) {
                     });
 
             } else {
-                var centerLabel = (geometry === 'point' || geometry === 'vertex') ? 'Location' : 'Center';
+                var centerLabel = t('infobox.' + (entity.type === 'node' ? 'location' : 'center'));
 
                 list.append('li')
-                    .text('Geometry: ' + geometry);
+                    .text(t('infobox.geometry') + ': ' + t('geometry.' + geometry));
 
                 list.append('li')
                     .text(centerLabel + ': ' + center[0].toFixed(5) + ', ' + center[1].toFixed(5));
