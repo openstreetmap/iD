@@ -2152,16 +2152,30 @@ img.wiki-image {
 /* Info Box
 ------------------------------------------------------- */
 .infobox {
+    z-index: 5;
     position: absolute;
     overflow: hidden;
     top: 220px;
     width: 200px;
     height: 150px;
-    z-index: 5;
-    background:rgba(0,0,0,.8);
-    border-radius: 0 0 0 4px;
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 0 4px 4px 0;
+    color: #ccc;
 }
 
+.infobox h3 {
+    color: rgba(255, 255, 0, 0.9);
+    font-weight: normal;
+}
+
+.infobox ul {
+    margin-bottom: 10px;
+}
+
+.infobox li {
+    line-height: 1.25;
+}
 
 /* About Section
 ------------------------------------------------------- */

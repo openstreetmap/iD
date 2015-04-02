@@ -1,10 +1,160 @@
 iD.ui.Info = function(context) {
-    var key = 'I';
+    var key = 'I',
+        imperial = (iD.detect().locale.toLowerCase() === 'en-us');
 
     function info(selection) {
+        function radiansToMeters(r) {
+            // using WGS84 authalic radius (6371007.1809 m)
+            return r * 6371007.1809;
+        }
+
+        function steradiansToSqmeters(r) {
+            // http://gis.stackexchange.com/a/124857/40446
+            return r / 12.56637 * 510065621724000;
+        }
+
+        function displayLength(m) {
+            var d = m * (imperial ? 3.28084 : 1),
+                unit;
+
+            if (imperial) {
+                if (d >= 5280) {
+                    d /= 5280;
+                    unit = 'mi';
+                } else {
+                    unit = 'ft';
+                }
+            } else {
+                if (d >= 1000) {
+                    d /= 1000;
+                    unit = 'km';
+                } else {
+                    unit = 'm';
+                }
+            }
+            return String(d.toFixed(2)) + ' ' + unit;
+        }
+
+        function displayArea(m2) {
+            var d = m2 * (imperial ? 10.7639111056 : 1),
+                d1, d2, p1, p2, unit1, unit2;
+
+            if (imperial) {
+                if (d >= 6969600) {     // > 0.25mi² show mi²
+                    d1 = d / 27878400;
+                    unit1 = 'mi²';
+                } else {
+                    d1 = d;
+                    unit1 = 'ft²';
+                }
+
+                if (d > 4356 && d < 43560000) {   // 0.1 - 1000 acres
+                    d2 = d / 43560;
+                    unit2 = 'ac';
+                }
+
+            } else {
+                if (d >= 250000) {    // > 0.25km² show km²
+                    d1 = d / 1000000;
+                    unit1 = 'km²';
+                } else {
+                    d1 = d;
+                    unit1 = 'm²';
+                }
+
+                if (d > 1000 && d < 10000000) {   // 0.1 - 1000 hectares
+                    d2 = d / 10000;
+                    unit2 = 'ha';
+                }
+            }
+
+            // drop unnecessary precision
+            p1 = d1 > 1000 ? 0 : d1 > 100 ? 1 : 2;
+            p2 = d2 > 1000 ? 0 : d2 > 100 ? 1 : 2;
+
+            return String(d1.toFixed(p1)) + ' ' + unit1 +
+                (d2 ? ' (' + String(d2.toFixed(p2)) + ' ' + unit2 + ')' : '');
+        }
+
 
         function redraw() {
             if (hidden()) return;
+
+            var resolver = context.graph(),
+                selected = context.selectedIDs(),
+                singular = selected.length === 1 ? selected[0] : null,
+                extent = iD.geo.Extent(),
+                entity;
+
+            selection.html('');
+            selection.append('h3')
+                .text(singular || (String(selected.length) + ' selected'));
+
+            if (!selected.length) return;
+
+            var center;
+            for (var i = 0; i < selected.length; i++) {
+                entity = context.entity(selected[i]);
+                extent._extend(entity.extent(resolver));
+            }
+            center = extent.center();
+
+
+            var list = selection.append('ul');
+
+            // multiple selection, just display extent center..
+            if (!singular) {
+                list.append('li')
+                    .text('Center: ' + center[0].toFixed(5) + ', ' + center[1].toFixed(5));
+                return;
+            }
+
+            // single selection, display details..
+            if (!entity) return;
+            var geometry = entity.geometry(resolver);
+
+            if (geometry === 'line' || geometry === 'area') {
+                var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate()),
+                    feature = entity.asGeoJSON(resolver),
+                    length = radiansToMeters(d3.geo.length(feature)),
+                    lengthLabel = closed ? 'Perimeter' : 'Length',
+                    centroid = d3.geo.centroid(feature);
+
+                list.append('li')
+                    .text('Geometry: ' + geometry + (closed ? ' (closed)' : ''));
+
+                if (closed) {
+                    var area = steradiansToSqmeters(entity.area(resolver));
+                    list.append('li')
+                        .text('Area: ' + displayArea(area));
+                }
+
+                list.append('li')
+                    .text(lengthLabel + ': ' + displayLength(length));
+
+                list.append('li')
+                    .text('Centroid: ' + centroid[0].toFixed(5) + ', ' + centroid[1].toFixed(5));
+
+
+                var toggle  = imperial ? 'metric' : 'imperial';
+                selection.append('p').append('a')
+                    .text('Switch to ' + toggle)
+                    .attr('href', '#')
+                    .on('click', function() {
+                        d3.event.preventDefault();
+                        imperial = !imperial;
+                        redraw();
+                    });
+
+            } else {
+                var centerLabel = (geometry === 'point' || geometry === 'vertex') ? 'Location' : 'Center';
+
+                list.append('li')
+                    .text('Geometry: ' + geometry);
+
+                list.append('li')
+                    .text(centerLabel + ': ' + center[0].toFixed(5) + ', ' + center[1].toFixed(5));
+            }
         }
 
 
