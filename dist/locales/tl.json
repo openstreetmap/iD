@@ -1,0 +1,548 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "Poligon",
+            "description": "Magdagdag ng mga parke, mga gusali, lawa o iba pang mga \"area\" sa mapa.",
+            "tail": "Mag-click sa mapa upang simulan ang pagguhit ng isang lugar, tulad ng isang parke, lawa, o gusali."
+        },
+        "add_line": {
+            "title": "Linya",
+            "description": "Magdagdag ng mga kalsada o kalye, mga daanang pantao, kanal o iba pang mga linya sa mapa.",
+            "tail": "Mag-click sa mapa upang simulan ang pagguhit ng isang linya tulad ng kalsada, daanang pantao, o ruta."
+        },
+        "add_point": {
+            "title": "Punto o tuldok",
+            "description": "Magdagdag ng kainan, monumento, \"postbox\" o iba pang mga punto o tuldok sa mapa.",
+            "tail": "Mag-click sa mapa upang magdagdag ng isang punto o tuldok."
+        },
+        "browse": {
+            "title": "Mag-browse",
+            "description": "Mag-pan at mag-zoom sa mapa."
+        },
+        "draw_area": {
+            "tail": "I-click upang magdagdag ng mga tuldok sa poligon. I-click ang unang tuldok upang isarado ang poligon o area."
+        },
+        "draw_line": {
+            "tail": "I-click upang magdagdag ng higit pang mga node sa linya. Mag-click sa iba pang mga linya upang kumonekta sa kanila, at i-double click upang tapusin ang linya."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "Nagdagdag ng isang punto o tuldok.",
+                "vertex": "Nagdagdag ng node sa isang way.",
+                "relation": "Nagdagdag ng relation."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "Nagsimula ng isang linya.",
+                "area": "Nagsimula sa isang area o polygon."
+            }
+        },
+        "continue": {
+            "key": "S",
+            "title": "Ipagpatuloy",
+            "description": "Ipagpatuloy ang linyang ito.",
+            "not_eligible": "Walang linyang maaring ipagpatuloy dito.",
+            "multiple": "Mga ilang mga linya ay maaaring ipagpatuloy dito. Upang pumili ng isang linya, pindutin ang ng Shift at i-click ito upang piliin.",
+            "annotation": {
+                "line": "Karugtong ng isang linya.",
+                "area": "Nagpatuloy sa pagguhit ng area o poligon."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "Kinansela ang pagguhit."
+        },
+        "change_role": {
+            "annotation": "Binago ang role ng isang kasapi ng  relation."
+        },
+        "change_tags": {
+            "annotation": "Pinalitan ang mga tag."
+        },
+        "circularize": {
+            "title": "Pina-bilog",
+            "description": {
+                "line": "Gawing pabilog ang linyang ito.",
+                "area": "Gawing pabilog ang area o poligong ito."
+            },
+            "key": "O",
+            "annotation": {
+                "line": "Ginawang pabilog and isang linya.",
+                "area": "Ginawang pabilog and isang area o poligon."
+            },
+            "not_closed": "Hindi ito maaaring gawing pabilog dahil hindi ito isang \"loop\".",
+            "too_large": "Hindi na ito maaaring gawing pabilog dahil hindi sapat ang kasalukuyang nakikita sa mapa."
+        },
+        "orthogonalize": {
+            "title": "Iskawalado",
+            "description": {
+                "line": "Gawing iskwalado ang mga kanto ng linyang ito.",
+                "area": "Gawing iskwalado ang mga kanto ng area o poligong ito."
+            },
+            "key": "S",
+            "annotation": {
+                "line": "Ginawang iskawalado ang bawat kanto ng linya.",
+                "area": "Ginawang iskawalado ang bawat kanto ng area o poligon."
+            },
+            "not_squarish": "Hindi maaring gawing iskwalado.",
+            "too_large": "Hindi ito maaaring gawing iskuwalado dahil hindi sapat ang kasalukuyang nakikita sa mapa."
+        },
+        "straighten": {
+            "title": "Ituwid",
+            "description": "Ituwid ang linyang ito.",
+            "key": "S",
+            "annotation": "Naituwid ang linya.",
+            "too_bendy": "Hindi naituwid dahil masyadong kurbado."
+        },
+        "delete": {
+            "title": "Burahin",
+            "description": "Permanenteng burahin ito. ",
+            "annotation": {
+                "point": "Binura ang isang point o tuldok.",
+                "vertex": "Binura ang isang node mula sa way o linya.",
+                "line": "Binura ang isang linya.",
+                "area": "Binary ang isang area o poligon.",
+                "relation": "Binura ang isang \"relation\".",
+                "multiple": "Binura ang {n} bagay sa mapa."
+            },
+            "incomplete_relation": "Hindi maaring mabura dahil ito ay hindi pa ganap na nai-download."
+        },
+        "add_member": {
+            "annotation": "Dinagdag ang kasapi o miyembro ng relation."
+        },
+        "delete_member": {
+            "annotation": "Inalis ang kasapi o miyembro ng relation."
+        },
+        "connect": {
+            "annotation": {
+                "point": "Dinugtong ang isang \"way\" sa isang punto o tuldok.",
+                "vertex": "Dinugtong ang isang \"way\" sa isa pang \"way\".",
+                "line": "Dinugtong ang isang \"way\" sa isang linya.",
+                "area": "Dinugtong ang isang \"way\" sa isang area o poligon."
+            }
+        },
+        "disconnect": {
+            "title": "Alisin ang pagkakadugtong",
+            "description": "Alisin sa pagkakadugtong ang mga linya / poligon.",
+            "key": "D",
+            "annotation": "Naalis sa pagkakadugtong ang mga linya / poligon.",
+            "not_connected": "Hindi sapat na bilang ng mga linya upang i-diskonekta o paghiwalayin."
+        },
+        "merge": {
+            "title": "Pagsamahin",
+            "description": "Pagdugtungin ang mga linyang ito.",
+            "key": "C",
+            "annotation": "Dinugtung ang {n} linya.",
+            "not_eligible": "Ang mga bagay na ito ay hindi maaaring pagsamahin.",
+            "not_adjacent": "Hindi mapagsama ang linyang ito dahil sila ay hindi konektado.",
+            "restriction": "Hindi maaaring ipagsama o i-merge dahil ang isa sa mga miyembro ng '{relation}\" ito ay hindi pa ganap na nai-download.",
+            "incomplete_relation": "Hindi maaaring ipagsama o i-merge dahil ang isa sa mga ito ay hindi pa ganap na nai-download."
+        },
+        "move": {
+            "title": "Ilipat ng posisyon",
+            "description": "Ilipat ang posisyon.",
+            "key": "M",
+            "annotation": {
+                "point": "Inilipat ang posisyon ng isang punto o tuldok.",
+                "vertex": "Inilipat ang posisyon ng isang \"node\" na sa isang \"way\".",
+                "line": "Inilipat ang posisyon ng isang linya.",
+                "area": "Inilipat ang posisyon ng isang area o poligon.",
+                "multiple": "Inilipat ang posisyon ang maraming bagay."
+            },
+            "incomplete_relation": "Hindi maaring ilipat ng posisyon dahil ito ay hindi pa ganap na nai-download."
+        },
+        "rotate": {
+            "title": "Paikutin",
+            "description": "Paikutin ang bagay na ito mula sa kanyang \"center point\".",
+            "key": "R",
+            "annotation": {
+                "line": "Pinaikot ang linya.",
+                "area": "Pinaikot ang area o poligon."
+            }
+        },
+        "reverse": {
+            "title": "Baliktarin",
+            "description": "Baliktarin ang direksyon ng linyang ito.",
+            "key": "V",
+            "annotation": "Binaliktad ang direksyon ng linya."
+        },
+        "split": {
+            "title": "Hatiin",
+            "description": {
+                "line": "Hatiin sa dalawa ang linya mula sa node na ito.",
+                "area": "Hatiin ang hangganan ng lugar na ito sa dalawa.",
+                "multiple": "Hatiin ang linya o hangganan ng lugar na ito sa dalawa."
+            },
+            "key": "X",
+            "annotation": {
+                "line": "Hatiin ang linya.",
+                "area": "Hatiin ang hangganan ng area o poligon.",
+                "multiple": "Hatiin ang {n} linya/area o poligon."
+            },
+            "not_eligible": "Hindi maaaring hatiin ang linya mula sa umpisa o dulong \"node\" nito.",
+            "multiple_ways": "Masyadong maraming mga linya dito upang hatiin."
+        },
+        "restriction": {
+            "help": {
+                "select": "I-click upang pumili ng isang segment ng kalsada.",
+                "toggle": "I-click upang i-toggle ang mga \"turn restrictions\".",
+                "toggle_on": "I-click upang magdagdag ng \"{restriction}\" restriction.",
+                "toggle_off": "I-click upang alisin ang \"{restriction}\" restriction."
+            },
+            "annotation": {
+                "create": "Idinagdag isang \"turn restriction\"",
+                "delete": "Tinanggal ang isang \"turn restriction\""
+            }
+        }
+    },
+    "undo": {
+        "tooltip": "I-undo:{action}",
+        "nothing": "Walang ma-undo"
+    },
+    "redo": {
+        "tooltip": "i-redo: {action}",
+        "nothing": "Walang ma-redo."
+    },
+    "tooltip_keyhint": "Shortcut:",
+    "browser_notice": "Ang editor na ito ay suportado sa Firefox, Chrome, Safari, Opera, at Internet Explorer 9 at sa mas mataas pang bersion. I-upgrade ang inyong browser o gamitin Potlatch 2 upang i-edit ng mapa.",
+    "translate": {
+        "translate": "I-salin",
+        "localized_translation_label": "Multilingual name",
+        "localized_translation_language": "Pumili ng wika",
+        "localized_translation_name": "Pangalan"
+    },
+    "zoom_in_edit": "Mag-zoom-in para makapag-edit",
+    "logout": "Mag-logout",
+    "loading_auth": "Kumokonekta sa OpenStreetMap ...",
+    "report_a_bug": "I-ulat ang bug",
+    "status": {
+        "error": "Hindi maka-konekta sa API.",
+        "offline": "Kasalukuyang offline ang API. Subukang mag-edit muli sa ibang pagkakataon.",
+        "readonly": "Kasalukuyang nasa read-only ang API. Kailangan mong maghintay upang i-save ang iyong mga pagbabago."
+    },
+    "commit": {
+        "title": "I-save ang mga binago.",
+        "description_placeholder": "Maikling paglalarawan ng iyong mga ambag o edits",
+        "message_label": "Mag-commit mensahe",
+        "upload_explanation": "Ang mga pagbabagong na-upload ay makikita sa lahat ng mapang gumagamit ng datos ng OpenStreetMap.",
+        "upload_explanation_with_user": "Ang mga pagbabagong na-upload bilang {user} ay makikita sa lahat ng mapang gumagamit ng datos ng OpenStreetMap.",
+        "save": "I-save",
+        "cancel": "Kanselahin",
+        "warnings": "Mga babala",
+        "modified": "Binago",
+        "deleted": "Binura",
+        "created": "Nilikha"
+    },
+    "contributors": {
+        "list": "Edits nina {users}",
+        "truncated_list": "Edits nina {users} at {count} iba pa"
+    },
+    "geocoder": {
+        "search": "Maghanap sa buong mundo ...",
+        "no_results_visible": "Walang mga resulta sa kasalukuyang lugar sa mapa",
+        "no_results_worldwide": "Walang mga resultang natagpuan"
+    },
+    "geolocate": {
+        "title": "Ipakita ang kasalukuyang lokasyon."
+    },
+    "inspector": {
+        "no_documentation_combination": "Walang documentation para sa kumbinasyon ng mga tag na ginamit",
+        "no_documentation_key": "Walang \"documentation\" na magagamit para sa \"key\" na ito.",
+        "show_more": "Higit pang detalye",
+        "view_on_osm": "Tingnan sa openstreetmap.org",
+        "all_tags": "Lahat ng tags",
+        "all_members": "Lahat ng kasapi",
+        "all_relations": "Lahat ng \"relation\"",
+        "new_relation": "Bagong relation ...",
+        "role": "Kasapi",
+        "choose": "Pumili ng uri ng \"features\"",
+        "results": "{n} mga resulta para sa {search}",
+        "reference": "Tingnan sa OpenStreetMap Wiki",
+        "back_tooltip": "Baguhin ang \"feature\"",
+        "remove": "Alisin",
+        "search": "Mag-search",
+        "multiselect": "Napiling mga item",
+        "unknown": "Unknown",
+        "incomplete": "<not downloaded>",
+        "feature_list": "Mag-hanap ng \"feature\"",
+        "edit": "I-edit ang \"feature\"",
+        "none": "Wala",
+        "node": "Node",
+        "way": "Way",
+        "relation": "Relation",
+        "location": "Lokasyon"
+    },
+    "background": {
+        "title": "\"Background\" o \"imagery\"",
+        "description": "Mga setting ng \"background\" o \"imagery\"",
+        "percent_brightness": "{opacity}% Pagkalinaw",
+        "none": "Wala",
+        "custom": "Custom",
+        "custom_button": "I-edit ang custom na background",
+        "custom_prompt": "Magpasok ng template na tile URL. Ang wastong mga token ay {z}, {x}, {y} para sa Z/X/Y scheme at {u} naman para sa quadtile scheme.",
+        "fix_misalignment": "Ayusin ang pagkakahanay ng \"imagery\"",
+        "reset": "I-reset"
+    },
+    "restore": {
+        "heading": "Mayroon kang hindi na-save ng mga pagbabago",
+        "description": "Ibig mo bang ibalik ang mga hindi na-save na pagbabago mula sa isang nakaraang session sa pag-edit?",
+        "restore": "Ibalik",
+        "reset": "I-reset"
+    },
+    "save": {
+        "title": "I-save",
+        "help": "I-save ang mga pagbabago sa OpenStreetMap upang makita ng ibang gumagamit ng datos.",
+        "no_changes": "Walang mga pagbabago upang i-save.",
+        "error": "May error habang sinusubukang i-save",
+        "uploading": "Ina-upload ang mga pagbabago sa OpenStreetMap.",
+        "unsaved_changes": "Mayroon kang hindi na-save ng mga pagbabago"
+    },
+    "success": {
+        "edited_osm": "Nag-edit sa OSM!",
+        "just_edited": "Nag-edit ka sa OpenStreetMap!",
+        "view_on_osm": "Tingnan sa OSM",
+        "facebook": "I-share sa Facebook",
+        "twitter": "I-share sa Twitter",
+        "google": "I-share sa Google+",
+        "help_html": "Ang iyong nagawang mga pagbabago ay lilitaw sa \"Standard\" layer sa loob ng ilang minuto. Para sa iba pang mga layer at ang ilang mga tampok, maaaring mas matagal kaysa ilang minuto\n(<a href ='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank '>basahin ang detalye dito</ a>).\n"
+    },
+    "confirm": {
+        "okay": "Okay"
+    },
+    "splash": {
+        "welcome": "Maligayang pagdating sa iD OpenStreetMap editor",
+        "text": "Ang iD ay isang simple ngunit magandang editor para sa pag-edit ng libreng mapa ng buong mundo.  Ito ay bersyon {version}. Para sa karagdagang impormasyon tingnan ang {website} at i-ulat ang mga bugs sa {github}.",
+        "walkthrough": "Simulan ang \"Walkthrough\"",
+        "start": "Simulan ang pag-edit"
+    },
+    "source_switch": {
+        "live": "live",
+        "lose_changes": "Mayroon kang hindi na-save ang mga pagbabago. Mawawala ang pagbabagong ito kung lilipat sa ibang map server.   Sigurado ka bang gusto mong lumipat ng server?",
+        "dev": "dev"
+    },
+    "tag_reference": {
+        "description": "Paglalarawan",
+        "on_wiki": "{tag} sa wiki.osm.org",
+        "used_with": "Kabilang sa gingamait ang {type}"
+    },
+    "validations": {
+        "untagged_point": "Walang tag na punto o tuldok",
+        "untagged_line": "Walang tag na linya",
+        "untagged_area": "Walang tag na area o poligon",
+        "many_deletions": "Nagbura ka ng {n} bagay sa mapa. Sigurado ka bang gusto mong gawin ito? Ito ay tatanggalin sa mapa na nakikita sa openstreetmap.org.",
+        "tag_suggests_area": "Ang tag na {tag} ay kalimitang para sa mga area o poligon sublait ito ay nasa linya lamang.",
+        "untagged_point_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang puntong ito.",
+        "untagged_line_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang linyang ito.",
+        "untagged_area_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang poligong ito.",
+        "deprecated_tags": "Hindi na ginagamit na \"tag\": {tags}"
+    },
+    "zoom": {
+        "in": "i-zoom in",
+        "out": "I-zoom out"
+    },
+    "cannot_zoom": "Hindi na pwedeng mag-zoom out sa kasalukuyang \"mode\".",
+    "gpx": {
+        "local_layer": "Lokal na GPX file",
+        "drag_drop": "I-drag at i-drop ang .gpx file mula sa inyong \"computer\" sa pahinang ito, o i-click ang button sa kanan upang mag-browse",
+        "zoom": "I-zoom sa GPX track",
+        "browse": "Mag-browse ng .gpx file"
+    },
+    "help": {
+        "title": "Tulong",
+        "help": "# Help\n\nIto ay isang editor para sa [OpenStreetMap] (http://www.openstreetmap.org/), isang libre at maaaring i-edit na mapa ng mundo. Maaari mo itong gamitin upang idagdag at i-update ang iyong lugar, sa paggawa ng isang open-source at open-data na mapa ng mundo para magamit ng lahat.\n\nAng pag-edit na gagawin mo sa mapang ito ay makikita ng lahat ng gumagamit OpenStreetMap. Upang makapag-edit, kakailanganin mo ng [OpenStreetMap account] (https://www.openstreetmap.org/user/new). \n\nAng [iD editor] (http://ideditor.com/) ay isang collaborative proyekto,  ang [source code ay matatagpuan sa GitHub] (https://github.com/openstreetmap/iD).\n",
+        "editing_saving": "### Pag-edit & Saving\n\nEditor na ito ay dinisenyo upang gumana lalo na sa online, at ina-access mo ito sa pamamagitan ng isang website sa ngayon.\n\n### Pagpili ng Mga Tampok\n\nUpang pumili ng isang tampok ng mapa , tulad ng kalsada o punto ng interes , i-click \nsa ito sa mapa. Ito ay i-highlight ang mga napiling tampok , buksan ang isang panel na may \nmga detalye tungkol dito , at ipakita ang menu ng mga bagay na maaari mong gawin gamit ang tampok. \n\nUpang pumili ng maraming mga tampok , pindutin nang matagal ang 'Shift ' key. Pagkatapos ay i-click ang alinman sa \nsa ang tampok na gusto mong piliin , o i-drag sa mapa upang gumuhit ng parihaba . \nAy ito gumuhit ng isang kahon at piliin ang lahat ng mga punto sa loob nito.\n\n### Saving Pag-edit \n\nKapag gumawa ka ng mga pagbabago tulad ng pag-edit ng mga kalsada, gusali , at mga lugar, ang mga ito ay \nnaka-imbak sa isang lugar lamang hanggang sa i-save mo ang mga ito sa server. Huwag mag-alala kung gumawa ka \nisang pagkakamali - maaari mong i-undo ang mga pagbabago sa pamamagitan ng pag-click sa pindutan undo , at gawing muli ang \nmga pagbabago sa pamamagitan ng pag-click sa pindutan gawing muli.\n\nI-click ang 'I-save ' upang matapos sa isang pangkat ng mga pag-edit - halimbawa , kung nag- nakumpleto \nisang lugar ng bayan at nais na magsimula sa isang bagong lugar . Magkakaroon ka ng pagkakataong \nupang suriin kung ano ang iyong nagawa , at ang editor supplies nakakatulong na mga mungkahi\nat babala kung may isang bagay ay hindi tila karapatan tungkol sa mga pagbabago . \n\nKung mukhang maganda ang lahat ng bagay , maaari mong ipasok ang isang maikling komento na nagpapaliwanag ng mga pagbabago\nna ginawa mo , at i-click muli ang ' I-save' upang i-post ang mga pagbabago\nsa [ OpenStreetMap.org ] ( http://www.openstreetmap.org/ ), kung saan ang mga ito ay nakikita \nsa lahat ng iba pang mga gumagamit at magagamit para sa iba upang bumuo at pagbutihin sa.\n\nKung hindi mo maaaring tapusin ang iyong mga pag-edit sa isang sitting , maaari mong iwanan ang editor window at bumalik ( sa parehong browser at computer ) , at ang\neditor application ay mag-aalok upang ibalik ang iyong trabaho .\n\n"
+    },
+    "intro": {
+        "navigation": {
+            "title": "Navigation",
+            "drag": "Ang pangunahing lugar ng mapa ay nagpapakita ng datos ng na makikita sa OpenStreetMap. Maaari kang mag-navigate sa pamamagitan ng pag-drag at pag-scroll, tulad ng anumang webmap. **I-drag ang mapa!**",
+            "select": "Mga tampok ng mapa ay kinakatawan ng tatlong paraan: gamit ang mga puntos, mga linya o area/poligon. Ang lahat ng mga tampok ay maaaring piliin sa pamamagitan ng pag-click sa mga ito. **Mag-click sa punto upang piliin ito.**",
+            "header": "Ang \"header\" ay nagpapakita kung anong uri ng \"feature\" ito.",
+            "pane": "Kapag ang isang tampok ay pinili, ang feature editor ay ipinapakita. Ang header ay nagpapakita kung anong uri ng tampok at ipinapakita sa pangunahing pane ang mga katangian ng tampok, tulad ng pangalan at address. **Isara ang feature editor gamit ang close button na malapit sa kanang tuktok. **"
+        },
+        "points": {
+            "title": "Mga Punto o tuldok",
+            "add": "Ang mga puntos ay maaaring gamitin upang kumatawan sa mga tampok tulad ng mga tindahan, kainan at mga monumento. Markahan ang mga ito sa tukoy na lokasyon, at ilarawan kung ano ito. **I-click ang pindutan ng Point upang magdagdag ng bagong punto.**",
+            "place": "Gumawa ng punto sa pamamagitan ng pag-click sa mapa. **Ilagay ang tuldok sa tuktok ng gusali.**",
+            "search": "Maraming iba't ibang mga tampok ang pwedeng kumatawan bilang puntos. Ang puntong iyong nai-dagdag ay isang Cafe. **I-search ang '{name}'**",
+            "choose": "**Pumili ng Cafe mula sa talaan.**",
+            "describe": "Ang punto o tuldok na ito ay minarkahan bilang \"cafe\".  Gamit ang \"feature editor\", maari tayong magdagdag ng iba pang impormasyon. **Magdagdag ng pangalan**",
+            "close": "Ang feature editor ay maaring isara sa pamamagitan ng pag-click ng \"Close\". **Isara the feature editor**",
+            "reselect": "Kadalasan, may mga puntos nang nalikha ng ibang mappers, ngunit may mga mali o hindi kumpleto. Maaaring i-edit ang mga puntos na ito. **Piliin ang punto na nilikha mo kanina.**",
+            "fixname": "**Baguhin o magdagdag ng pangalan ng kalsada at isara ang \"feature editor\"**",
+            "reselect_delete": "Ang lahat ng mga nasa mapa ay maaring burahin. **Mag-click sa punto na nilikha mo.**",
+            "delete": "Ang menu sa paligid ng punto ay naglalaman ng mga operasyon na maaaring isagawa dito, tulad ng pagbura. **Burahin ang punto. **"
+        },
+        "areas": {
+            "title": "Mga area o poligon",
+            "corner": "Ang paglikha ng area o poligon ay sa pamamagitan ng paglalagay node sa paligid ng mga hangganan ng lugar. **Ilagay ang unang node sa isa sa mga sulok ng palaruan.**",
+            "place": "Ipagpatuloy ang pag-guhit ng area o pligon sa pamamagitan ng paglalagay ng higit pang mga node. Tapusin ito sa pamamagitan ng pag-click sa umpisang node. ** Gumuhit ng area o pilgon ng palaruan.**",
+            "search": "**Hanapin ang '{name}'.**",
+            "choose": "**Pliin ang \"Playground\" mula sa talaan.**",
+            "describe": "**Magdagdag ng pangalan at isara ang \"feature editor\"**"
+        },
+        "lines": {
+            "title": "Mga linya",
+            "add": "Ang mga linya ay ginagamit para kumatawan sa mga \"feature\" na gaya ng mga kalsada, riles ng tren at ilog. **I-click ang button para sa \"Linya\" upang magdagdag ng bagong linya. **",
+            "start": "**Simulan ang linya sa pamamagitan ng pag-click sa dulo ng kalsada.**",
+            "intersect": "I-click upang magdagdag ng higit pang mga tuldok sa linya. Maaari mong i-drag ang mapa habang gumuguhit kung kinakailangan. Ang mga kalsada, at iba pang mga uri ng linya, ay pwedeng bahagi ng isang mas malaking network. Mahalaga para sa mga linyang ito ay konektado, maayos ang pagkaka-sunod-sunod para sa routing upang gumana ng mga application. ** Mag-click sa Flower Street, upang lumikha ng isang panulukang naka-konekta sa dalawang linya. **",
+            "finish": "Ang mga linya ay matatapos sa pamamagitan ng pag-click muli sa huling node. **Taposin ang pagguhit ng kalsada.**",
+            "road": "**Piliin ang \"Road\" mula sa talaan**",
+            "residential": "Mayroong iba't ibang mga uri ng mga kalsada, ang pinaka-karaniwang ay residential. **Piliin ang residential na uri ng kalsada**",
+            "describe": "**Magdagdag ng pangalan ng kalsada at isara ang \"feature editor\"**",
+            "restart": "Kailangang i-intersect ang kalsada sa Flower Street.",
+            "wrong_preset": "Hindi ka pumili ang Residential na uri ng kalsada. **I-click dito upang piliin muli**"
+        },
+        "startediting": {
+            "title": "Umpisahan ang pag-edit",
+            "help": "Higit pang mga documentation at ang walkthrough ang makukuha dito.",
+            "save": "Huwag kalimutan na regular na i-save ang iyong mga binago!",
+            "start": "Simulan ang pagma-mapa!"
+        }
+    },
+    "presets": {
+        "fields": {
+            "address": {
+                "label": "Address",
+                "placeholders": {
+                    "street": "Kalsada",
+                    "city": "Siyudad"
+                }
+            },
+            "aerialway": {
+                "label": "Uri"
+            },
+            "aeroway": {
+                "label": "Uri"
+            },
+            "amenity": {
+                "label": "Uri"
+            },
+            "artwork_type": {
+                "label": "Uri"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "barrier": {
+                "label": "Uri"
+            },
+            "bicycle_parking": {
+                "label": "Uri"
+            },
+            "boundary": {
+                "label": "Uri"
+            },
+            "building": {
+                "label": "Gusali"
+            },
+            "building_area": {
+                "label": "Gusali"
+            },
+            "capacity": {
+                "label": "Kapasidad"
+            },
+            "construction": {
+                "label": "Uri"
+            },
+            "crossing": {
+                "label": "Uri"
+            },
+            "entrance": {
+                "label": "Uri"
+            },
+            "fire_hydrant/type": {
+                "label": "Uri"
+            },
+            "generator/type": {
+                "label": "Uri"
+            },
+            "highway": {
+                "label": "Uri"
+            },
+            "historic": {
+                "label": "Uri"
+            },
+            "information": {
+                "label": "Uri"
+            },
+            "internet_access": {
+                "options": {
+                    "wlan": "Wifi"
+                }
+            },
+            "landuse": {
+                "label": "Uri"
+            },
+            "leisure": {
+                "label": "Uri"
+            },
+            "man_made": {
+                "label": "Uri"
+            },
+            "name": {
+                "label": "Pangalan"
+            },
+            "office": {
+                "label": "Uri"
+            },
+            "parking": {
+                "label": "Uri"
+            },
+            "piste/type": {
+                "label": "Uri"
+            },
+            "place": {
+                "label": "Uri"
+            },
+            "power": {
+                "label": "Uri"
+            },
+            "railway": {
+                "label": "Uri"
+            },
+            "relation": {
+                "label": "Uri"
+            },
+            "restriction": {
+                "label": "Uri"
+            },
+            "route": {
+                "label": "Uri"
+            },
+            "route_master": {
+                "label": "Uri"
+            },
+            "service": {
+                "label": "Uri"
+            },
+            "shelter_type": {
+                "label": "Uri"
+            },
+            "shop": {
+                "label": "Uri"
+            },
+            "studio_type": {
+                "label": "Uri"
+            },
+            "tourism": {
+                "label": "Uri"
+            },
+            "water": {
+                "label": "Uri"
+            },
+            "waterway": {
+                "label": "Uri"
+            },
+            "wetland": {
+                "label": "Uri"
+            }
+        },
+        "presets": {
+            "building": {
+                "name": "Gusali"
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "handle tow",
+        "bugel lift"
+    ],
+    "fields": [
+        "aerialway/capacity",
+        "aerialway/duration"
+    ],
+    "tags": {
+        "aerialway": "rope_tow"
+    },
+    "name": "Rope Tow Lift"
+}

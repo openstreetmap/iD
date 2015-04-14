@@ -1,1 +1,18 @@
-{}
+{
+    "modes": {
+        "browse": {
+            "title": "Circa"
+        }
+    },
+    "operations": {
+        "delete": {
+            "title": "Boga"
+        },
+        "move": {
+            "title": "Movi"
+        },
+        "split": {
+            "title": "Sperra"
+        }
+    }
+}

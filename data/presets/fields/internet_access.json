@@ -1,13 +1,6 @@
 {
     "key": "internet_access",
     "type": "combo",
-    "options": [
-        "yes",
-        "no",
-        "wlan",
-        "wired",
-        "terminal"
-    ],
     "label": "Internet Access",
     "strings": {
         "options": {

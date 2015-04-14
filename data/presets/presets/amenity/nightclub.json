@@ -1,0 +1,24 @@
+{
+    "icon": "bar",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "smoking"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "nightclub"
+    },
+    "terms": [
+       "disco*",
+       "night club",
+       "dancing",
+       "dance club"
+    ],
+    "name": "Nightclub"
+}

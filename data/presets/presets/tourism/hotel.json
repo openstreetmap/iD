@@ -2,15 +2,14 @@
     "icon": "lodging",
     "fields": [
         "operator",
+        "address",
         "building_area",
-        "address"
+        "smoking"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
-    "terms": [],
     "tags": {
         "tourism": "hotel"
     },

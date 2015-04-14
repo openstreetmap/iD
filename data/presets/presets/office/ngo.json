@@ -1,0 +1,19 @@
+{
+    "icon": "commercial",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours",
+        "smoking"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "office": "ngo"
+    },
+    "terms": [],
+    "name": "NGO Office"
+}

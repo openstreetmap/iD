@@ -1,6 +1,5 @@
 iD.ui.RawTagEditor = function(context) {
     var event = d3.dispatch('change'),
-        taginfo = iD.taginfo(),
         showBlank = false,
         state,
         preset,
@@ -12,12 +11,12 @@ iD.ui.RawTagEditor = function(context) {
 
         selection.call(iD.ui.Disclosure()
             .title(t('inspector.all_tags') + ' (' + count + ')')
-            .expanded(iD.ui.RawTagEditor.expanded || preset.isFallback())
+            .expanded(context.storage('raw_tag_editor.expanded') === 'true' || preset.isFallback())
             .on('toggled', toggled)
             .content(content));
 
         function toggled(expanded) {
-            iD.ui.RawTagEditor.expanded = expanded;
+            context.storage('raw_tag_editor.expanded', expanded);
             if (expanded) {
                 selection.node().parentNode.scrollTop += 200;
             }
@@ -77,14 +76,16 @@ iD.ui.RawTagEditor = function(context) {
             .append('span')
             .attr('class', 'icon delete');
 
-        $enter.each(bindTypeahead);
+        if (context.taginfo()) {
+            $enter.each(bindTypeahead);
+        }
 
         // Update
 
         $items.order();
 
         $items.each(function(tag) {
-            var reference = iD.ui.TagReference({key: tag.key});
+            var reference = iD.ui.TagReference({key: tag.key}, context);
 
             if (state === 'hover') {
                 reference.showing(false);
@@ -139,7 +140,7 @@ iD.ui.RawTagEditor = function(context) {
 
             key.call(d3.combobox()
                 .fetcher(function(value, callback) {
-                    taginfo.keys({
+                    context.taginfo().keys({
                         debounce: true,
                         geometry: context.geometry(id),
                         query: value
@@ -150,7 +151,7 @@ iD.ui.RawTagEditor = function(context) {
 
             value.call(d3.combobox()
                 .fetcher(function(value, callback) {
-                    taginfo.values({
+                    context.taginfo().values({
                         debounce: true,
                         key: key.value(),
                         geometry: context.geometry(id),
@@ -162,10 +163,22 @@ iD.ui.RawTagEditor = function(context) {
         }
 
         function keyChange(d) {
-            var tag = {};
-            tag[d.key] = undefined;
-            tag[this.value] = d.value;
-            d.key = this.value; // Maintain DOM identity through the subsequent update.
+            var kOld = d.key,
+                kNew = this.value.trim(),
+                tag = {};
+
+            if (kNew && kNew !== kOld) {
+                var match = kNew.match(/^(.*?)(?:_(\d+))?$/),
+                    base = match[1],
+                    suffix = +(match[2] || 1);
+                while (tags[kNew]) {  // rename key if already in use
+                    kNew = base + '_' + suffix++;
+                }
+            }
+            tag[kOld] = undefined;
+            tag[kNew] = d.value;
+            d.key = kNew; // Maintain DOM identity through the subsequent update.
+            this.value = kNew;
             event.change(tag);
         }
 
@@ -179,6 +192,7 @@ iD.ui.RawTagEditor = function(context) {
             var tag = {};
             tag[d.key] = undefined;
             event.change(tag);
+            d3.select(this.parentNode).remove();
         }
 
         function addTag() {

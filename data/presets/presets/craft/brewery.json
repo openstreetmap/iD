@@ -1,0 +1,21 @@
+{
+    "icon": "beer",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "beer",
+        "bier"
+    ],
+    "tags": {
+        "craft": "brewery"
+    },
+    "name": "Brewery"
+}

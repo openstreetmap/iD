@@ -1,0 +1,11 @@
+{
+    "icon": "golf",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "golf": "rough",
+        "landuse": "grass"
+    },
+    "name": "Rough"
+}

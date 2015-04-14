@@ -1,5 +1,11 @@
 {
     "icon": "rail",
+    "fields": [
+        "network",
+        "operator",
+        "address",
+        "building_area"
+    ],
     "geometry": [
         "point",
         "vertex",
@@ -8,5 +14,9 @@
     "tags": {
         "railway": "station"
     },
+    "terms": [
+        "train station",
+        "station"
+    ],
     "name": "Railway Station"
 }

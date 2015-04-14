@@ -1,5 +1,6 @@
 {
     "name": "Other",
     "tags": {},
-    "geometry": ["vertex"]
+    "geometry": ["vertex"],
+    "matchScore": 0.1
 }

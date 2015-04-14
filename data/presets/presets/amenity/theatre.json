@@ -2,12 +2,11 @@
     "icon": "theatre",
     "fields": [
         "operator",
-        "building_area",
-        "address"
+        "address",
+        "building_area"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [

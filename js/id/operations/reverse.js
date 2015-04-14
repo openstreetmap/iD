@@ -20,7 +20,7 @@ iD.operations.Reverse = function(selectedIDs, context) {
         return t('operations.reverse.description');
     };
 
-    operation.id = "reverse";
+    operation.id = 'reverse';
     operation.keys = [t('operations.reverse.key')];
     operation.title = t('operations.reverse.title');
 

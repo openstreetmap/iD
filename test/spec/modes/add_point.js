@@ -5,12 +5,15 @@ describe("iD.modes.AddPoint", function() {
         var container = d3.select(document.createElement('div'));
 
         context = iD()
+            .presets(iD.data.presets)
+            .imagery(iD.data.imagery)
             .container(container);
 
         container.call(context.map())
             .append('div')
             .attr('class', 'inspector-wrap');
 
+        context.map().centerZoom([-77.02271, 38.90085], 20);
         context.enter(iD.modes.AddPoint(context));
     });
 

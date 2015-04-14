@@ -1,6 +1,8 @@
 {
     "fields": [
-        "crossing"
+        "crossing",
+        "sloped_curb",
+        "tactile_paving"
     ],
     "geometry": [
         "vertex"
@@ -8,9 +10,6 @@
     "tags": {
         "highway": "crossing"
     },
-    "terms": [
-        "crosswalk",
-        "zebra crossing"
-    ],
+    "terms": [],
     "name": "Crossing"
 }

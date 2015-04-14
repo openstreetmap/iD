@@ -1,5 +1,8 @@
 {
     "icon": "water",
+    "fields": [
+        "operator"
+    ],
     "geometry": [
         "point",
         "area"

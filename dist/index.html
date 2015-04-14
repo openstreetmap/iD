@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
         <meta charset='utf-8'>
         <title>iD</title>
         <link rel='stylesheet' href='iD.css'>
@@ -18,6 +19,8 @@
 
         <!--[if !IE]>-->
         <script src='iD.js'></script>
+        <script src='presets.js'></script>
+        <script src='imagery.js'></script>
         <!--<![endif]-->
     </head>
     <body>
@@ -61,7 +64,11 @@
                 document.getElementById('id-container').innerHTML = 'Sorry, Internet Explorer is not currently supported. Please use Potlatch 2 to edit the map.';
                 document.getElementById('id-container').className = 'unsupported';
             } else {
-                var id = iD();
+                var id = iD()
+                  .presets(iD.data.presets)
+                  .imagery(iD.data.imagery)
+                  .taginfo(iD.taginfo());
+
                 d3.select('#id-container')
                     .call(id.ui());
             }

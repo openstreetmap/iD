@@ -1,15 +1,18 @@
 {
+    "icon": "park",
     "fields": [
         "operator",
-        "building_area",
-        "address"
+        "address",
+        "smoking"
     ],
     "geometry": [
         "point",
         "vertex",
         "area"
     ],
-    "terms": [],
+    "terms": [
+        "camp"
+    ],
     "tags": {
         "tourism": "picnic_site"
     },

@@ -1,0 +1,14 @@
+{
+    "icon": "golf",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "golf": "tee",
+        "landuse": "grass"
+    },
+    "terms": [
+        "teeing ground"
+    ],
+    "name": "Tee Box"
+}

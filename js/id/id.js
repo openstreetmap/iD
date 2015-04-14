@@ -5,7 +5,7 @@ window.iD = function () {
     var context = {},
         storage;
 
-    // https://github.com/systemed/iD/issues/772
+    // https://github.com/openstreetmap/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
     try { storage = localStorage; } catch (e) {}
     storage = storage || (function() {
@@ -24,8 +24,20 @@ window.iD = function () {
             else storage.setItem(k, v);
         } catch(e) {
             // localstorage quota exceeded
+            /* jshint devel:true */
             if (typeof console !== 'undefined') console.error('localStorage quota exceeded');
+            /* jshint devel:false */
         }
+    };
+
+    /* Accessor for setting minimum zoom for editing features. */
+
+    var minEditableZoom = 16;
+    context.minEditableZoom = function(_) {
+        if (!arguments.length) return minEditableZoom;
+        minEditableZoom = _;
+        connection.tileZoom(_);
+        return context;
     };
 
     var history = iD.History(context),
@@ -40,10 +52,6 @@ window.iD = function () {
     if (locale && iD.data.locales.indexOf(locale) === -1) {
         locale = locale.split('-')[0];
     }
-
-    connection.on('load.context', function loadContext(err, result) {
-        history.merge(result.data, result.extent);
-    });
 
     context.preauth = function(options) {
         connection.switch(options);
@@ -74,13 +82,53 @@ window.iD = function () {
     context.connection = function() { return connection; };
     context.history = function() { return history; };
 
+    /* Connection */
+    function entitiesLoaded(err, result) {
+        if (!err) history.merge(result.data, result.extent);
+    }
+
+    context.loadTiles = function(projection, dimensions, callback) {
+        function done(err, result) {
+            entitiesLoaded(err, result);
+            if (callback) callback(err, result);
+        }
+        connection.loadTiles(projection, dimensions, done);
+    };
+
+    context.loadEntity = function(id, callback) {
+        function done(err, result) {
+            entitiesLoaded(err, result);
+            if (callback) callback(err, result);
+        }
+        connection.loadEntity(id, done);
+    };
+
+    context.zoomToEntity = function(id, zoomTo) {
+        if (zoomTo !== false) {
+            this.loadEntity(id, function(err, result) {
+                if (err) return;
+                var entity = _.find(result.data, function(e) { return e.id === id; });
+                if (entity) { map.zoomTo(entity); }
+            });
+        }
+
+        map.on('drawn.zoomToEntity', function() {
+            if (!context.hasEntity(id)) return;
+            map.on('drawn.zoomToEntity', null);
+            context.on('enter.zoomToEntity', null);
+            context.enter(iD.modes.Select(context, [id]));
+        });
+
+        context.on('enter.zoomToEntity', function() {
+            if (mode.id !== 'browse') {
+                map.on('drawn.zoomToEntity', null);
+                context.on('enter.zoomToEntity', null);
+            }
+        });
+    };
+
     /* History */
     context.graph = history.graph;
-    context.perform = history.perform;
-    context.replace = history.replace;
-    context.pop = history.pop;
-    context.undo = history.undo;
-    context.redo = history.redo;
     context.changes = history.changes;
     context.intersects = history.intersects;
 
@@ -93,16 +141,35 @@ window.iD = function () {
     };
 
     context.save = function() {
-        if (inIntro) return;
+        if (inIntro || (mode && mode.id === 'save')) return;
         history.save();
         if (history.hasChanges()) return t('save.unsaved_changes');
     };
 
     context.flush = function() {
         connection.flush();
+        features.reset();
         history.reset();
         return context;
     };
+
+    // Debounce save, since it's a synchronous localStorage write,
+    // and history changes can happen frequently (e.g. when dragging).
+    var debouncedSave = _.debounce(context.save, 350);
+    function withDebouncedSave(fn) {
+        return function() {
+            var result = fn.apply(history, arguments);
+            debouncedSave();
+            return result;
+        };
+    }
+
+    context.perform = withDebouncedSave(history.perform);
+    context.replace = withDebouncedSave(history.replace);
+    context.pop = withDebouncedSave(history.pop);
+    context.overwrite = withDebouncedSave(history.overwrite);
+    context.undo = withDebouncedSave(history.undo);
+    context.redo = withDebouncedSave(history.redo);
 
     /* Graph */
     context.hasEntity = function(id) {
@@ -145,34 +212,6 @@ window.iD = function () {
         }
     };
 
-    context.loadEntity = function(id, zoomTo) {
-        if (zoomTo !== false) {
-            connection.loadEntity(id, function(error, entity) {
-                if (entity) {
-                    map.zoomTo(entity);
-                }
-            });
-        }
-
-        map.on('drawn.loadEntity', function() {
-            if (!context.hasEntity(id)) return;
-            map.on('drawn.loadEntity', null);
-            context.on('enter.loadEntity', null);
-            context.enter(iD.modes.Select(context, [id]));
-        });
-
-        context.on('enter.loadEntity', function() {
-            if (mode.id !== 'browse') {
-                map.on('drawn.loadEntity', null);
-                context.on('enter.loadEntity', null);
-            }
-        });
-    };
-
-    context.editable = function() {
-        return map.editable() && mode && mode.id !== 'save';
-    };
-
     /* Behaviors */
     context.install = function(behavior) {
         context.surface().call(behavior);
@@ -182,20 +221,38 @@ window.iD = function () {
         context.surface().call(behavior.off);
     };
 
+    /* Copy/Paste */
+    var copyIDs = [], copyGraph;
+    context.copyGraph = function() { return copyGraph; };
+    context.copyIDs = function(_) {
+        if (!arguments.length) return copyIDs;
+        copyIDs = _;
+        copyGraph = history.graph();
+        return context;
+    };
+
     /* Projection */
-    context.projection = d3.geo.mercator()
-        .scale(512 / Math.PI)
-        .precision(0);
+    context.projection = iD.geo.RawMercator();
 
     /* Background */
     var background = iD.Background(context);
     context.background = function() { return background; };
+
+    /* Features */
+    var features = iD.Features(context);
+    context.features = function() { return features; };
+    context.hasHiddenConnections = function(id) {
+        var graph = history.graph(),
+            entity = graph.entity(id);
+        return features.hasHiddenConnections(entity, graph);
+    };
 
     /* Map */
     var map = iD.Map(context);
     context.map = function() { return map; };
     context.layers = function() { return map.layers; };
     context.surface = function() { return map.surface; };
+    context.editable = function() { return map.editable(); };
     context.mouse = map.mouse;
     context.extent = map.extent;
     context.pan = map.pan;
@@ -210,17 +267,32 @@ window.iD = function () {
     };
 
     /* Presets */
-    var presets = iD.presets()
-        .load(iD.data.presets);
+    var presets = iD.presets();
 
-    context.presets = function() {
-        return presets;
+    context.presets = function(_) {
+        if (!arguments.length) return presets;
+        presets.load(_);
+        iD.areaKeys = presets.areaKeys();
+        return context;
+    };
+
+    context.imagery = function(_) {
+        background.load(_);
+        return context;
     };
 
     context.container = function(_) {
         if (!arguments.length) return container;
         container = _;
         container.classed('id-container', true);
+        return context;
+    };
+
+    /* Taginfo */
+    var taginfo;
+    context.taginfo = function(_) {
+        if (!arguments.length) return taginfo;
+        taginfo = _;
         return context;
     };
 
@@ -253,23 +325,52 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '1.2.0';
+iD.version = '1.7.0';
 
 (function() {
     var detected = {};
 
     var ua = navigator.userAgent,
-        msie = new RegExp("MSIE ([0-9]{1,}[\\.0-9]{0,})");
+        m = null;
 
-    if (msie.exec(ua) !== null) {
-        var rv = parseFloat(RegExp.$1);
-        detected.support = !(rv && rv < 9);
+    m = ua.match(/Trident\/.*rv:([0-9]{1,}[\.0-9]{0,})/i);   // IE11+
+    if (m !== null) {
+        detected.browser = 'msie';
+        detected.version = m[1];
+    }
+    if (!detected.browser) {
+        m = ua.match(/(opr)\/?\s*(\.?\d+(\.\d+)*)/i);   // Opera 15+
+        if (m !== null) {
+            detected.browser = 'Opera';
+            detected.version = m[2];
+        }
+    }
+    if (!detected.browser) {
+        m = ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+        if (m !== null) {
+            detected.browser = m[1];
+            detected.version = m[2];
+            m = ua.match(/version\/([\.\d]+)/i);
+            if (m !== null) detected.version = m[1];
+        }
+    }
+    if (!detected.browser) {
+        detected.browser = navigator.appName;
+        detected.version = navigator.appVersion;
+    }
+
+    // keep major.minor version only..
+    detected.version = detected.version.split(/\W/).slice(0,2).join('.');
+
+    if (detected.browser.toLowerCase() === 'msie') {
+        detected.browser = 'Internet Explorer';
+        detected.support = parseFloat(detected.version) > 9;
     } else {
         detected.support = true;
     }
 
     // Added due to incomplete svg style support. See #715
-    detected.opera = ua.indexOf('Opera') >= 0;
+    detected.opera = (detected.browser.toLowerCase() === 'opera' && parseFloat(detected.version) < 15 );
 
     detected.locale = navigator.language || navigator.userLanguage;
 
@@ -279,11 +380,22 @@ iD.version = '1.2.0';
         return navigator.userAgent.indexOf(x) !== -1;
     }
 
-    if (nav('Win')) detected.os = 'win';
-    else if (nav('Mac')) detected.os = 'mac';
-    else if (nav('X11')) detected.os = 'linux';
-    else if (nav('Linux')) detected.os = 'linux';
-    else detected.os = 'win';
+    if (nav('Win')) {
+        detected.os = 'win';
+        detected.platform = 'Windows';
+    }
+    else if (nav('Mac')) {
+        detected.os = 'mac';
+        detected.platform = 'Macintosh';
+    }
+    else if (nav('X11') || nav('Linux')) {
+        detected.os = 'linux';
+        detected.platform = 'Linux';
+    }
+    else {
+        detected.os = 'win';
+        detected.platform = 'Unknown';
+    }
 
     iD.detect = function() { return detected; };
 })();

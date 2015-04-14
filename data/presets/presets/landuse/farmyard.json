@@ -1,6 +1,9 @@
 {
+    "icon": "farm",
+    "fields": [
+        "crop"
+    ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {

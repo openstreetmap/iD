@@ -19,7 +19,7 @@ iD.ui.RadialMenu = function(context, operations) {
 
         menu = selection.append('g')
             .attr('class', 'radial-menu')
-            .attr('transform', "translate(" + center + ")")
+            .attr('transform', 'translate(' + center + ')')
             .attr('opacity', 0);
 
         menu.transition()
@@ -53,6 +53,7 @@ iD.ui.RadialMenu = function(context, operations) {
             .attr('r', 15)
             .classed('disabled', function(d) { return d.disabled(); })
             .on('click', click)
+            .on('mousedown', mousedown)
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
 
@@ -64,6 +65,10 @@ iD.ui.RadialMenu = function(context, operations) {
         tooltip = d3.select(document.body)
             .append('div')
             .attr('class', 'tooltip-inner radial-menu-tooltip');
+
+        function mousedown() {
+            d3.event.stopPropagation(); // https://github.com/openstreetmap/iD/issues/1869
+        }
 
         function mouseover(d, i) {
             var rect = context.surfaceRect(),
@@ -103,7 +108,9 @@ iD.ui.RadialMenu = function(context, operations) {
 
     radialMenu.close = function() {
         if (menu) {
-            menu.transition()
+            menu
+                .style('pointer-events', 'none')
+                .transition()
                 .attr('opacity', 0)
                 .remove();
         }

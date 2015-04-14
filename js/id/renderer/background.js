@@ -4,15 +4,10 @@ iD.Background = function(context) {
             .projection(context.projection),
         gpxLayer = iD.GpxLayer(context, dispatch)
             .projection(context.projection),
+        mapillaryLayer = iD.MapillaryLayer(context),
         overlayLayers = [];
 
-    var backgroundSources = iD.data.imagery.map(function(source) {
-        if (source.type === 'bing') {
-            return iD.BackgroundSource.Bing(source, dispatch);
-        } else {
-            return iD.BackgroundSource(source);
-        }
-    });
+    var backgroundSources;
 
     function findSource(id) {
         return _.find(backgroundSources, function(d) {
@@ -26,7 +21,7 @@ iD.Background = function(context) {
             q = iD.util.stringQs(location.hash.substring(1));
 
         var id = b.id;
-        if (!id && b.name === 'Custom') {
+        if (id === 'custom') {
             id = 'custom:' + b.template;
         }
 
@@ -44,17 +39,12 @@ iD.Background = function(context) {
 
         location.replace('#' + iD.util.qsString(q, true));
 
-        var imageryUsed = [];
-        if (b.name === 'Custom') {
-            imageryUsed.push('Custom (' + b.template + ')');
-        } else {
-            imageryUsed.push(b.id || b.name);
-        }
+        var imageryUsed = [b.imageryUsed()];
 
         overlayLayers.forEach(function (d) {
             var source = d.source();
             if (!source.isLocatorOverlay()) {
-                imageryUsed.push(source.id || source.name);
+                imageryUsed.push(source.imageryUsed());
             }
         });
 
@@ -74,19 +64,11 @@ iD.Background = function(context) {
 
         base.call(baseLayer);
 
-        var gpx = selection.selectAll('.gpx-layer')
-            .data([0]);
-
-        gpx.enter().insert('div', '.layer-data')
-            .attr('class', 'layer-layer gpx-layer');
-
-        gpx.call(gpxLayer);
-
-        var overlays = selection.selectAll('.overlay-layer')
-            .data(overlayLayers, function(d) { return d.source().name });
+        var overlays = selection.selectAll('.layer-overlay')
+            .data(overlayLayers, function(d) { return d.source().name(); });
 
         overlays.enter().insert('div', '.layer-data')
-            .attr('class', 'layer-layer overlay-layer');
+            .attr('class', 'layer-layer layer-overlay');
 
         overlays.each(function(layer) {
             d3.select(this).call(layer);
@@ -94,6 +76,22 @@ iD.Background = function(context) {
 
         overlays.exit()
             .remove();
+
+        var gpx = selection.selectAll('.layer-gpx')
+            .data([0]);
+
+        gpx.enter().insert('div')
+            .attr('class', 'layer-layer layer-gpx');
+
+        gpx.call(gpxLayer);
+
+        var mapillary = selection.selectAll('.layer-mapillary')
+            .data([0]);
+
+        mapillary.enter().insert('div')
+            .attr('class', 'layer-layer layer-mapillary');
+
+        mapillary.call(mapillaryLayer);
     }
 
     background.sources = function(extent) {
@@ -105,6 +103,7 @@ iD.Background = function(context) {
     background.dimensions = function(_) {
         baseLayer.dimensions(_);
         gpxLayer.dimensions(_);
+        mapillaryLayer.dimensions(_);
 
         overlayLayers.forEach(function(layer) {
             layer.dimensions(_);
@@ -122,7 +121,7 @@ iD.Background = function(context) {
     };
 
     background.bing = function() {
-        background.baseLayerSource(findSource("Bing"));
+        background.baseLayerSource(findSource('Bing'));
     };
 
     background.hasGpxLayer = function() {
@@ -133,10 +132,36 @@ iD.Background = function(context) {
         return background.hasGpxLayer() && gpxLayer.enable();
     };
 
+    function toDom(x) {
+        return (new DOMParser()).parseFromString(x, 'text/xml');
+    }
+
+    background.gpxLayerFiles = function(fileList) {
+        var f = fileList[0],
+            reader = new FileReader();
+
+        reader.onload = function(e) {
+            gpxLayer.geojson(toGeoJSON.gpx(toDom(e.target.result)));
+            background.zoomToGpxLayer();
+            dispatch.change();
+        };
+
+        reader.readAsText(f);
+    };
+
     background.zoomToGpxLayer = function() {
         if (background.hasGpxLayer()) {
-            context.map()
-                .extent(d3.geo.bounds(gpxLayer.geojson()));
+            var map = context.map(),
+                viewport = map.trimmedExtent().polygon(),
+                coords = _.reduce(gpxLayer.geojson().features, function(coords, feature) {
+                    var c = feature.geometry.coordinates;
+                    return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
+                }, []);
+
+            if (!iD.geo.polygonIntersectsPolygon(viewport, coords)) {
+                var extent = iD.geo.Extent(d3.geo.bounds(gpxLayer.geojson()));
+                map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
+            }
         }
     };
 
@@ -145,10 +170,23 @@ iD.Background = function(context) {
         dispatch.change();
     };
 
+    background.showsMapillaryLayer = function() {
+        return mapillaryLayer.enable();
+    };
+
+    background.toggleMapillaryLayer = function() {
+        mapillaryLayer.enable(!mapillaryLayer.enable());
+        dispatch.change();
+    };
+
     background.showsLayer = function(d) {
         return d === baseLayer.source() ||
-            (d.name === 'Custom' && baseLayer.source().name === 'Custom') ||
+            (d.id === 'custom' && baseLayer.source().id === 'custom') ||
             overlayLayers.some(function(l) { return l.source() === d; });
+    };
+
+    background.overlayLayerSources = function() {
+        return overlayLayers.map(function (l) { return l.source(); });
     };
 
     background.toggleOverlayLayer = function(d) {
@@ -187,31 +225,48 @@ iD.Background = function(context) {
         return background;
     };
 
-    var q = iD.util.stringQs(location.hash.substring(1)),
-        chosen = q.background || q.layer;
+    background.load = function(imagery) {
+        backgroundSources = imagery.map(function(source) {
+            if (source.type === 'bing') {
+                return iD.BackgroundSource.Bing(source, dispatch);
+            } else {
+                return iD.BackgroundSource(source);
+            }
+        });
 
-    if (chosen && chosen.indexOf('custom:') === 0) {
-        background.baseLayerSource(iD.BackgroundSource({
-            template: chosen.replace(/^custom:/, ''),
-            name: 'Custom'
-        }));
-    } else {
-        background.baseLayerSource(findSource(chosen) || findSource("Bing"));
-    }
+        backgroundSources.unshift(iD.BackgroundSource.None());
 
-    var locator = _.find(backgroundSources, function(d) {
-        return d.overlay && d.default;
-    });
+        var q = iD.util.stringQs(location.hash.substring(1)),
+            chosen = q.background || q.layer;
 
-    if (locator) {
-        background.toggleOverlayLayer(locator);
-    }
+        if (chosen && chosen.indexOf('custom:') === 0) {
+            background.baseLayerSource(iD.BackgroundSource.Custom(chosen.replace(/^custom:/, '')));
+        } else {
+            background.baseLayerSource(findSource(chosen) || findSource('Bing') || backgroundSources[1]);
+        }
 
-    var overlays = (q.overlays || '').split(',');
-    overlays.forEach(function(overlay) {
-        overlay = findSource(overlay);
-        if (overlay) background.toggleOverlayLayer(overlay);
-    });
+        var locator = _.find(backgroundSources, function(d) {
+            return d.overlay && d.default;
+        });
+
+        if (locator) {
+            background.toggleOverlayLayer(locator);
+        }
+
+        var overlays = (q.overlays || '').split(',');
+        overlays.forEach(function(overlay) {
+            overlay = findSource(overlay);
+            if (overlay) background.toggleOverlayLayer(overlay);
+        });
+
+        var gpx = q.gpx;
+        if (gpx) {
+            d3.text(gpx, function(err, gpxTxt) {
+                gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
+                dispatch.change();
+            });
+        }
+    };
 
     return d3.rebind(background, dispatch, 'on');
 };

@@ -1,0 +1,19 @@
+{
+    "icon": "marker-stroked",
+    "fields": [
+        "craft",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "craft": "*"
+    },
+    "terms": [],
+    "name": "Craft"
+}

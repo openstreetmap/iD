@@ -2,12 +2,11 @@
     "icon": "religious-christian",
     "fields": [
         "denomination",
-        "building_yes",
+        "building_area",
         "address"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [
@@ -19,7 +18,6 @@
         "chancel",
         "chantry",
         "chapel",
-        "church",
         "fold",
         "house of God",
         "house of prayer",

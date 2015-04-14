@@ -1,5 +1,5 @@
 {
     "key": "aeroway",
-    "type": "combo",
+    "type": "typeCombo",
     "label": "Type"
 }

@@ -1,20 +1,30 @@
 {
     "icon": "highway-path",
     "fields": [
+        "surface",
+        "width",
         "structure",
         "access",
-        "sac_scale",
-        "surface",
         "incline",
+        "sac_scale",
         "trail_visibility",
+        "mtb/scale",
+        "mtb/scale/uphill",
+        "mtb/scale/imba",
         "ref"
     ],
     "geometry": [
         "line"
     ],
+    "terms": [
+        "hike",
+        "hiking",
+        "trackway",
+        "trail",
+        "walk"
+    ],
     "tags": {
         "highway": "path"
     },
-    "terms": [],
     "name": "Path"
 }

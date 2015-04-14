@@ -17,22 +17,26 @@
     <script src="lib/bind-shim.js"></script>
 
     <!-- include source files here... -->
-    <script src='../dist/iD.min.js'></script>
+    <script src='../dist/iD.js'></script>
+    <script src='../dist/presets.js'></script>
+    <script src='../dist/imagery.js'></script>
 
     <script src="spec/spec_helpers.js"></script>
 
     <!-- include spec files here... -->
     <script src="spec/lib/d3.keybinding.js"></script>
+    <script src="spec/lib/diff3.js"></script>
     <script src="spec/lib/locale.js"></script>
 
+    <script src="spec/actions/add_entity.js"></script>
     <script src="spec/actions/add_member.js"></script>
     <script src="spec/actions/add_midpoint.js"></script>
-    <script src="spec/actions/add_entity.js"></script>
     <script src="spec/actions/change_member.js"></script>
     <script src="spec/actions/change_preset.js"></script>
     <script src="spec/actions/change_tags.js"></script>
     <script src='spec/actions/circularize.js'></script>
     <script src='spec/actions/connect.js'></script>
+    <script src="spec/actions/copy_entity.js"></script>
     <script src='spec/actions/delete_member.js'></script>
     <script src="spec/actions/delete_multiple.js"></script>
     <script src="spec/actions/delete_node.js"></script>
@@ -42,15 +46,21 @@
     <script src='spec/actions/disconnect.js'></script>
     <script src="spec/actions/join.js"></script>
     <script src='spec/actions/merge.js'></script>
-    <script src="spec/actions/move_node.js"></script>
+    <script src='spec/actions/merge_polygon.js'></script>
+    <script src='spec/actions/merge_remote_changes.js'></script>
     <script src="spec/actions/move.js"></script>
+    <script src="spec/actions/move_node.js"></script>
     <script src="spec/actions/noop.js"></script>
+    <script src="spec/actions/orthogonalize.js"></script>
+    <script src="spec/actions/restrict_turn.js"></script>
     <script src="spec/actions/reverse.js"></script>
     <script src="spec/actions/split.js"></script>
+    <script src="spec/actions/straighten.js"></script>
+    <script src="spec/actions/unrestrict_turn.js"></script>
 
     <script src="spec/geo/extent.js"></script>
+    <script src="spec/geo/intersection.js"></script>
     <script src="spec/geo/multipolygon.js"></script>
-    <script src="spec/geo/turn.js"></script>
 
     <script src="spec/core/connection.js"></script>
     <script src="spec/core/graph.js"></script>
@@ -64,6 +74,7 @@
 
     <script src="spec/renderer/tile_layer.js"></script>
     <script src="spec/renderer/background_source.js"></script>
+    <script src="spec/renderer/features.js"></script>
     <script src="spec/renderer/map.js"></script>
 
     <script src="spec/svg.js"></script>
@@ -73,7 +84,6 @@
     <script src="spec/svg/points.js"></script>
     <script src="spec/svg/vertices.js"></script>
     <script src="spec/svg/tag_classes.js"></script>
-    <script src="spec/svg/restrictions.js"></script>
 
     <script src="spec/ui/inspector.js"></script>
     <script src="spec/ui/raw_tag_editor.js"></script>
@@ -82,9 +92,17 @@
     <script src="spec/ui/confirm.js"></script>
     <script src="spec/ui/cmd.js"></script>
 
+    <script src="spec/ui/preset/access.js"></script>
+    <script src="spec/ui/preset/localized.js"></script>
+    <script src="spec/ui/preset/wikipedia.js"></script>
+
+    <script src="spec/countrycode.js"></script>
     <script src="spec/geo.js"></script>
     <script src="spec/taginfo.js"></script>
+
     <script src="spec/util.js"></script>
+    <script src='spec/util/session_mutex.js'></script>
+    <script src='spec/util/suggest_names.js'></script>
 
     <script src="spec/behavior/hash.js"></script>
     <script src="spec/behavior/hover.js"></script>
@@ -97,6 +115,7 @@
     <script src="spec/presets/preset.js"></script>
     <script src="spec/presets/collection.js"></script>
     <script src="spec/presets/category.js"></script>
+    <script src="spec/id.js"></script>
 
     <script>
         (window.mochaPhantomJS || window.mocha).run();

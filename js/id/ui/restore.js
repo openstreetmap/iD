@@ -15,12 +15,12 @@ iD.ui.Restore = function(context) {
         introModal.append('div')
             .attr('class', 'modal-section')
             .append('h3')
-                .text(t('restore.heading'));
+            .text(t('restore.heading'));
 
         introModal.append('div')
             .attr('class','modal-section')
             .append('p')
-                .text(t('restore.description'));
+            .text(t('restore.description'));
 
         var buttonWrap = introModal.append('div')
             .attr('class', 'modal-actions cf');
@@ -43,6 +43,4 @@ iD.ui.Restore = function(context) {
 
         restore.node().focus();
     };
-        modal.select('button.close').attr('class','hide');
-
 };

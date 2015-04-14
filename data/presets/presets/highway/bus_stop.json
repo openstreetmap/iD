@@ -1,8 +1,11 @@
 {
     "icon": "bus",
     "fields": [
+        "network",
         "operator",
-        "shelter"
+        "bench",
+        "shelter",
+        "covered"
     ],
     "geometry": [
         "point",

@@ -2,15 +2,18 @@
     "icon": "golf",
     "fields": [
         "operator",
-        "address"
+        "address",
+        "opening_hours"
     ],
     "geometry": [
         "point",
         "area"
     ],
+    "terms": [
+        "links"
+    ],
     "tags": {
         "leisure": "golf_course"
     },
-    "terms": [],
     "name": "Golf Course"
 }

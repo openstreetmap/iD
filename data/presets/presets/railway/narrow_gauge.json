@@ -1,0 +1,20 @@
+{
+    "icon": "railway-rail",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "narrow_gauge"
+    },
+    "fields": [
+        "structure",
+        "gauge",
+        "electrified",
+        "service_rail"
+    ],
+    "terms": [
+        "narrow gauge railway",
+        "narrow gauge railroad"
+    ],
+    "name": "Narrow Gauge Rail"
+}

@@ -1,7 +1,9 @@
 {
     "icon": "park2",
+    "fields": [
+        "trees"
+    ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {

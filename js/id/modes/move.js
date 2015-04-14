@@ -9,8 +9,11 @@ iD.modes.Move = function(context, entityIDs) {
         annotation = entityIDs.length === 1 ?
             t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
             t('operations.move.annotation.multiple'),
+        cache,
         origin,
         nudgeInterval;
+
+    function vecSub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
@@ -25,11 +28,14 @@ iD.modes.Move = function(context, entityIDs) {
         if (nudgeInterval) window.clearInterval(nudgeInterval);
         nudgeInterval = window.setInterval(function() {
             context.pan(nudge);
-            context.replace(
-                iD.actions.Move(entityIDs, [-nudge[0], -nudge[1]], context.projection),
-                annotation);
-            var c = context.projection(origin);
-            origin = context.projection.invert([c[0] - nudge[0], c[1] - nudge[1]]);
+
+            var currMouse = context.mouse(),
+                origMouse = context.projection(origin),
+                delta = vecSub(vecSub(currMouse, origMouse), nudge),
+                action = iD.actions.Move(entityIDs, delta, context.projection, cache);
+
+            context.overwrite(action, annotation);
+
         }, 50);
     }
 
@@ -39,35 +45,27 @@ iD.modes.Move = function(context, entityIDs) {
     }
 
     function move() {
-        var p = context.mouse();
+        var currMouse = context.mouse(),
+            origMouse = context.projection(origin),
+            delta = vecSub(currMouse, origMouse),
+            action = iD.actions.Move(entityIDs, delta, context.projection, cache);
 
-        var delta = origin ?
-            [p[0] - context.projection(origin)[0],
-                p[1] - context.projection(origin)[1]] :
-            [0, 0];
+        context.overwrite(action, annotation);
 
-        var nudge = edge(p, context.map().dimensions());
+        var nudge = edge(currMouse, context.map().dimensions());
         if (nudge) startNudge(nudge);
         else stopNudge();
-
-        origin = context.map().mouseCoordinates();
-
-        context.replace(
-            iD.actions.Move(entityIDs, delta, context.projection),
-            annotation);
     }
 
     function finish() {
         d3.event.stopPropagation();
-        context.enter(iD.modes.Select(context, entityIDs)
-            .suppressMenu(true));
+        context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
         stopNudge();
     }
 
     function cancel() {
         context.pop();
-        context.enter(iD.modes.Select(context, entityIDs)
-            .suppressMenu(true));
+        context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
         stopNudge();
     }
 
@@ -76,6 +74,9 @@ iD.modes.Move = function(context, entityIDs) {
     }
 
     mode.enter = function() {
+        origin = context.map().mouseCoordinates();
+        cache = {};
+
         context.install(edit);
 
         context.perform(

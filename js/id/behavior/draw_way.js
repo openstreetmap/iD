@@ -11,7 +11,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         start = iD.Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
         end = iD.Node({loc: context.map().mouseCoordinates()}),
         segment = iD.Way({
-            nodes: [start.id, end.id],
+            nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
             tags: _.clone(way.tags)
         });
 
@@ -123,12 +123,13 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     // Connect the way to an existing way.
     drawWay.addWay = function(loc, edge) {
+        var previousEdge = startIndex ?
+            [way.nodes[startIndex], way.nodes[startIndex - 1]] :
+            [way.nodes[0], way.nodes[1]];
 
         // Avoid creating duplicate segments
-        if (!isArea) {
-            if (edge[0] === way.nodes[way.nodes.length - 1] ||
-                edge[1] === way.nodes[way.nodes.length - 1]) return;
-        }
+        if (!isArea && iD.geo.edgeEqual(edge, previousEdge))
+            return;
 
         var newNode = iD.Node({ loc: loc });
 

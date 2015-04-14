@@ -13,13 +13,13 @@ iD.ui.Success = function(context) {
             .attr('class', 'fr')
             .append('span')
             .attr('class', 'icon close')
-            .on('click', function() { event.cancel(success) });
+            .on('click', function() { event.cancel(success); });
 
         header.append('h3')
             .text(t('success.just_edited'));
 
         var body = selection.append('div')
-            .attr('class', 'body save-success');
+            .attr('class', 'body save-success fillL');
 
         body.append('p')
             .html(t('success.help_html'));

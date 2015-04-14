@@ -36,6 +36,30 @@ describe('iD.Entity', function () {
         });
     });
 
+    describe("#copy", function () {
+        it("returns a new Entity", function () {
+            var a = iD.Entity(),
+                result = a.copy();
+            expect(result).to.have.length(1);
+            expect(result[0]).to.be.an.instanceof(iD.Entity);
+            expect(a).not.to.equal(result[0]);
+        });
+
+        it("resets 'id', 'user', and 'version' properties", function () {
+            var a = iD.Entity({id: 'n1234', version: 10, user: 'bot-mode'}),
+                b = a.copy()[0];
+            expect(b.isNew()).to.be.ok;
+            expect(b.version).to.be.undefined;
+            expect(b.user).to.be.undefined;
+        });
+
+        it("copies tags", function () {
+            var a = iD.Entity({id: 'n1234', version: 10, user: 'test', tags: {foo: 'foo'}}),
+                b = a.copy()[0];
+            expect(b.tags).to.deep.equal(a.tags);
+        });
+    });
+
     describe("#update", function () {
         it("returns a new Entity", function () {
             var a = iD.Entity(),
@@ -199,44 +223,6 @@ describe('iD.Entity', function () {
 
         it("return false if the entity has only tiger tags", function () {
             expect(iD.Entity({tags: {'tiger:source': 'blah', 'tiger:foo': 'bar'}}).hasInterestingTags()).to.equal(false);
-        });
-    });
-
-    describe("#area", function() {
-        it("returns a relative measure of area", function () {
-            var graph = iD.Graph({
-                    'a': iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
-                    'b': iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
-                    'c': iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
-                    'd': iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
-                    'e': iD.Node({id: 'a', loc: [-0.0004,  0.0002]}),
-                    'f': iD.Node({id: 'b', loc: [ 0.0004,  0.0002]}),
-                    'g': iD.Node({id: 'c', loc: [ 0.0004, -0.0002]}),
-                    'h': iD.Node({id: 'd', loc: [-0.0004, -0.0002]}),
-                    's': iD.Way({id: 's', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
-                    'l': iD.Way({id: 'l', tags: {area: 'yes'}, nodes: ['e', 'f', 'g', 'h', 'e']})
-                });
-
-            var s = Math.abs(graph.entity('s').area(graph)),
-                l = Math.abs(graph.entity('l').area(graph));
-
-            expect(s).to.be.lt(l);
-        });
-
-        it("returns 0 for degenerate areas", function () {
-            var graph = iD.Graph({
-                    'a': iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
-                    'b': iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
-                    'c': iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
-                    'd': iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
-                    '0': iD.Way({id: '0', tags: {area: 'yes'}, nodes: []}),
-                    '1': iD.Way({id: '1', tags: {area: 'yes'}, nodes: ['a']}),
-                    '2': iD.Way({id: '2', tags: {area: 'yes'}, nodes: ['a', 'b']})
-                });
-
-            expect(graph.entity('0').area(graph)).to.equal(0);
-            expect(graph.entity('1').area(graph)).to.equal(0);
-            expect(graph.entity('2').area(graph)).to.equal(0);
         });
     });
 });

@@ -39,6 +39,13 @@ body {
     height: 100%;
 }
 
+#defs {
+    /* Can't be display: none or the clippaths are ignored. */
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
 .spacer {
     height: 40px;
     margin-right: 10px;
@@ -82,10 +89,6 @@ button,
 .radial-menu-item {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
-    cursor: -webkit-image-set(
-        url(img/cursor-pointer.png) 1x,
-        url(img/cursor-pointer2x.png) 2x
-        ) 6 1, pointer;
 }
 
 h2 {
@@ -137,10 +140,6 @@ strong {
 
 a:visited, a {
     color: #7092ff;
-    -webkit-transition: all 100ms;
-       -moz-transition: all 100ms;
-         -o-transition: all 100ms;
-            transition: all 100ms;
 }
 
 a:hover {
@@ -169,11 +168,6 @@ input[type=email] {
     width: 100%;
     border-radius:4px;
     text-overflow: ellipsis;
-    overflow: hidden;
-    -webkit-transition: all 200ms;
-       -moz-transition: all 200ms;
-         -o-transition: all 200ms;
-            transition: all 200ms;
 }
 
 textarea:focus,
@@ -237,73 +231,39 @@ table.tags, table.tags td, table.tags th {
 
 ul li { list-style: none;}
 
-.toggle-list {
-    border-radius: 4px;
-    border: 1px solid #CCC;
-}
-
 .toggle-list > label {
     position: relative;
     padding: 5px 10px;
-    display:block;
+    display: block;
     height: 30px;
-    border-bottom: 1px solid #ccc;
     background-color: white;
     color: #7092FF;
     cursor: pointer;
-       -moz-transition: all 100ms;
-         -o-transition: all 100ms;
-            transition: all 100ms;
 }
 
 .toggle-list > label:hover {
     background-color: #ececec;
 }
 
-.toggle-list > label:first-child {
-    border-radius: 3px 3px 0 0;
+.toggle-list > label:not(:last-child) {
+    border-bottom: 1px solid #ccc;
 }
 
 .toggle-list > label:last-child {
     border-radius: 0 0 3px 3px;
-    border-bottom-width: 0;
 }
 
-.toggle-list > label:only-child {
-    border-radius: 3px;
-}
-
-.toggle-list label > span { 
+.toggle-list label > span {
     display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.toggle-list > label.remove span.icon {
-    display: block;
-    width: 14px;
-    float: left;
-    margin-right: 5px;
-    background-position: -204px 0;
-}
-
 .toggle-list > label.active {
     background: #E8EBFF;
 }
 
-.link-list li {
-    float: right;
-    border-left: 1px solid rgba(255,255,255,.5);
-    padding: 5px 0 5px 5px;
-    margin-left: 5px;
-}
-
-ul.link-list li:last-child {
-    border-left: 0;
-    margin-left: 0;
-    padding-left: 0;
-}
 
 /* Utility Classes
 ------------------------------------------------------- */
@@ -333,7 +293,8 @@ ul.link-list li:last-child {
 div.hide,
 form.hide,
 button.hide,
-a.hide {
+a.hide,
+li.hide {
     display: none;
 }
 
@@ -356,6 +317,7 @@ a.hide {
     height:100%;
     right: -100%;
 }
+
 
 .pane {
     position:absolute;
@@ -385,11 +347,6 @@ button {
     display: inline-block;
     height:40px;
     border-radius:4px;
-    /* Crashes Safari: https://github.com/systemed/iD/issues/1188 */
-    /*-webkit-transition: all 100ms;*/
-       -moz-transition: all 100ms;
-         -o-transition: all 100ms;
-            transition: all 100ms;
 }
 
 button:focus,
@@ -445,6 +402,10 @@ button.minor:hover {
     border-right: 1px solid rgba(0,0,0,.5);
 }
 
+.fillL .joined button {
+    border-right: 1px solid white;
+}
+
 .joined button:first-child {
     border-radius:4px 0 0 4px;
 }
@@ -456,11 +417,27 @@ button.minor:hover {
 
 button.action {
     background: #7092ff;
+    color: white;
+}
+
+button[disabled].action,
+button[disabled].action:hover {
+    background: #cccccc;
+    color: #888;
 }
 
 button.action:focus,
 button.action:hover {
     background: #597BE7;
+}
+
+button.secondary-action {
+    background: #ececec;
+}
+
+button.secondary-action:focus,
+button.secondary-action:hover {
+    background: #cccccc;
 }
 
 button.save.has-count {
@@ -554,6 +531,8 @@ button.save.has-count .count::before {
 .icon.relation    { background-position: -520px 0;}
 .icon.relation.route         { background-position: -540px 0;}
 .icon.relation.multipolygon  { background-position: -560px 0;}
+.icon.vertex     { background-position: -580px 0;}
+.icon.data       { background-position: -600px 0;}
 
 .icon.inspect.light    { background-position: -220px -20px;}
 .icon.plus.light       { background-position: -240px -20px;}
@@ -566,6 +545,7 @@ button.save.has-count .count::before {
 .icon.geolocate.light  { background-position: -360px -20px;}
 .icon.bug.light        { background-position: -400px -20px;}
 .icon.help.light       { background-position: -460px -20px;}
+.icon.data.light       { background-position: -600px -20px;}
 
 .icon.back.blue        { background-position: -420px -20px;}
 .icon.forward.blue     { background-position: -440px -20px;}
@@ -587,6 +567,19 @@ button[disabled] .icon.geocode    { background-position: -280px -40px;}
 button[disabled] .icon.layers     { background-position: -300px -40px;}
 button[disabled] .icon.avatar     { background-position: -320px -40px;}
 button[disabled] .icon.nearby     { background-position: -340px -40px;}
+button[disabled] .icon.data       { background-position: -600px -40px;}
+
+.icon.point.deleted  { background-position: -480px -80px;}
+.icon.line.deleted   { background-position: -500px -80px;}
+.icon.area.deleted   { background-position: -520px -80px;}
+
+.icon.point.created  { background-position: -480px -100px;}
+.icon.line.created   { background-position: -500px -100px;}
+.icon.area.created   { background-position: -520px -100px;}
+
+.icon.point.modified  { background-position: -22px 0; }
+
+.icon.modified { opacity: .5; }
 
 /* Out link is special */
 
@@ -616,7 +609,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     top:0;
     right:0;
     height:60px;
-    z-index: 1;
+    z-index: 9;
     min-width: 768px;
 }
 
@@ -630,7 +623,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .header h3 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -662,13 +655,13 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     right: 0;
     top: 0;
     height: 59px;
-    z-index: 3;
+    z-index: 50;
 }
 
 .footer {
     position: absolute;
     bottom: 0;
-    padding: 5px 30px 5px 30px;
+    padding: 5px 20px 5px 20px;
     border-top: 1px solid #ccc;
     background-color: #fafafa;
     width: 100%;
@@ -690,7 +683,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     float: left;
     height: 100%;
     overflow: hidden;
-    z-index: 2;
+    z-index: 10;
     background: #f6f6f6;
 }
 
@@ -720,6 +713,48 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     bottom: 0;
 }
 
+.mapillary-image {
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    width: 330px;
+    height: 250px;
+    padding: 5px;
+    background-color: #fff;
+}
+
+.mapillary-image a {
+    display: block;
+    position: absolute;
+    height: auto;
+    background-color: rgba(0,0,0,.5);
+    bottom: 0;
+    right: 0;
+    padding: 5px 10px;
+}
+
+.mapillary-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.mapillary-image.hidden {
+    visibility: hidden;
+}
+
+.mapillary-image.temp button {
+    display: none;
+}
+
+.mapillary-image button {
+    border-radius: 0;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
 .feature-list-pane .inspector-body {
     top: 120px;
 }
@@ -729,6 +764,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 .entity-editor-pane .inspector-body {
+    top: 60px;
+}
+
+.selection-list-pane .inspector-body {
     top: 60px;
 }
 
@@ -781,9 +820,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     text-overflow: ellipsis;
     overflow: hidden;
     border-left: 1px solid rgba(0, 0, 0, .1);
-    -moz-transition: all 100ms;
-    -o-transition: all 100ms;
-    transition: all 100ms;
 }
 
 .feature-list-item .label .icon {
@@ -863,9 +899,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     text-overflow: ellipsis;
     overflow: hidden;
     border-left: 1px solid rgba(0, 0, 0, .1);
-    -moz-transition: all 100ms;
-    -o-transition: all 100ms;
-    transition: all 100ms;
     border-radius: 0 3px 3px 0;
     }
 
@@ -877,6 +910,15 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     height: 100%;
     border: 1px solid #CCC;
     border-radius: 0 3px 3px 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10%;
+    background: #fafafa;
+}
+
+.preset-list-item button.tag-reference-button .icon {
+    opacity: .5;
 }
 
 .current .preset-list-button,
@@ -922,35 +964,24 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 /* Preset icon colors */
 
-.preset-icon-fill.icon-area {
+.preset-icon-fill-area {
     cursor: inherit;
-    height: 45px;
-    width: 45px;
+    height: 39px;
+    width: 39px;
     margin: auto;
     position: absolute;
-    left: 7px; top: 7px;
-    background:transparent url(img/sprite.svg) no-repeat -240px -80px;
+    left: 10px;
+    top: 10px;
 }
 
-.preset-icon-fill.tag-shop,
-.preset-icon-fill.tag-building {
+.preset-icon-fill-area:after {
+    content: '';
+    left: -4px;
+    top: -4px;
+    height: 45px;
+    width: 45px;
+    position: absolute;
     background:transparent url(img/sprite.svg) no-repeat 0 -80px;
-}
-
-.preset-icon-fill.tag-natural-water {
-    background:transparent url(img/sprite.svg) no-repeat -60px -80px;
-}
-
-.preset-icon-fill.tag-landuse,
-.preset-icon-fill.tag-natural-wood,
-.preset-icon-fill.tag-natural-tree,
-.preset-icon-fill.tag-natural-grassland,
-.preset-icon-fill.tag-leisure-park {
-    background:transparent url(img/sprite.svg) no-repeat -120px -80px;
-}
-
-.preset-icon-fill.tag-amenity-parking {
-    background:transparent url(img/sprite.svg) no-repeat -180px -80px;
 }
 
 /* preset form basics */
@@ -961,7 +992,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 
 .inspector-preset .preset-form {
     padding: 10px;
-    margin: 0 10px 20px 10px;
+    margin: 0 10px 10px 10px;
     border-radius: 8px;
 }
 
@@ -1005,26 +1036,43 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     background: #f6f6f6;
     display: block;
     border-radius: 4px 4px 0 0;
+    overflow: hidden;
+}
+
+.form-label-button-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    text-align: right;
+}
+
+.form-label-button-wrap .tag-reference-button {
+    border-radius: 0 3px 0 0;
+}
+
+.form-label-button-wrap .icon {
+    opacity: .5;
 }
 
 .form-label button {
     border-left: 1px solid #CCC;
+    width: 10%;
+    height: 100%;
+    border-radius: 0;
+    background: #fafafa;
 }
 
-.form-label .modified-icon {
-    border-right: 0;
-    opacity: 0;
-    z-index: -10;
-    right: 10%;
+.form-label .modified-icon,
+.form-field .remove-icon {
+    display: none;
 }
 
-.modified .form-label .modified-icon {
-    opacity: 1;
-    z-index: 1;
-}
-
-.form-label button.tag-reference-button {
-    border-top-right-radius: 3px;
+.modified .form-label .modified-icon,
+.present .form-label .remove-icon {
+    display: inline-block;
 }
 
 .form-field > input,
@@ -1034,15 +1082,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     min-height: 30px;
     border-top: 0;
     border-radius: 0 0 4px 4px;
-    overflow: hidden;
 }
 
 .form-field textarea {
     height: 65px;
-}
-
-.form-field button.remove {
-    border-radius: 0 0 4px 0;
 }
 
 .inspector-border {
@@ -1067,7 +1110,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 .inspector-hidden,
 .inspector-hover label input[type="checkbox"],
 .inspector-hover label input[type="radio"],
-.inspector-hover .toggle-list label:not(.active),
+.inspector-hover .toggle-list label,
 .inspector-hover .toggle-list label span,
 .inspector-hover .inspector-inner .add-tag,
 .inspector-hover .inspector-inner .add-relation,
@@ -1082,20 +1125,21 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
 }
 
 /* hide but preserve in layout */
-.inspector-hover .modified .form-label .modified-icon,
 .inspector-hover .entity-editor-pane button.minor,
-.inspector-hover .combobox-carat,
+.inspector-hover .combobox-caret,
 .inspector-hover .entity-editor-pane .header button,
 .inspector-hover .spin-control,
 .inspector-hover .hide-toggle:before,
-.inspector-hover .more-buttons,
+.inspector-hover .more-fields,
+.inspector-hover .form-label-button-wrap,
+.inspector-hover .tag-reference-button,
 .inspector-hover .view-on-osm {
     opacity: 0;
 }
 
 /* Styles for raw tag inspector on hover */
 .inspector-hover .tag-row .key-wrap,
-.inspector-hover .tag-row .input-wrap-position {
+.inspector-hover .tag-row .form-field.input-wrap-position {
     width: 50%;
 }
 
@@ -1111,9 +1155,9 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     border-bottom-left-radius: 4px;
 }
 
-.inspector-hover .inspector-body .more-buttons {
+.inspector-hover .more-fields {
     max-height: 0;
-    padding-bottom: 0;
+    margin-bottom: -10px;
 }
 
 /* Unstyle button fields */
@@ -1148,143 +1192,17 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     line-height: 0;
     display: block;
     overflow: hidden;
-    -webkit-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-       -moz-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-         -o-transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-            transition: opacity 200ms, width 0 200ms, padding 0 200ms, line-height 0 200ms;
-}
-
-/* first phase hover-to-active animations */
-
-textarea,
-.form-label,
-.preset-input-wrap,
-.preset-input-wrap .label {
-    -webkit-transition: all 200ms;
-       -moz-transition: all 200ms;
-         -o-transition: all 200ms;
-            transition: all 200ms;
-}
-
-/* second phase hover-to-active animations */
-
-input,
-.checkselect label:last-of-type {
-    -webkit-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-       -moz-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-         -o-transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-            transition: opacity 200ms 200ms, width 200ms 200ms, margin-right 200ms 200ms;
-}
-
-.modified .form-label .modified-icon,
-.entity-editor-pane button.minor,
-.combobox-carat,
-.entity-editor-pane .header button,
-.toggle-list label span,
-.spin-control,
-.more-buttons,
-.view-on-osm,
-.hide-toggle:before,
-.entity-editor-pane .toggle-list label::before,
-.entity-editor-pane .toggle-list label.remove .icon {
-    -webkit-transition: opacity 200ms 200ms;
-       -moz-transition: opacity 200ms 200ms;
-         -o-transition: opacity 200ms 200ms;
-            transition: opacity 200ms 200ms;
-}
-
-.entity-editor-pane a.hide-toggle {
-    -webkit-transition: padding-left 200ms 200ms, color 200ms 200ms;
-       -moz-transition: padding-left 200ms 200ms, color 200ms 200ms;
-         -o-transition: padding-left 200ms 200ms, color 200ms 200ms;
-            transition: padding-left 200ms 200ms, color 200ms 200ms;
-}
-
-.entity-editor-pane .toggle-list label:not(.active) {
-    -webkit-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-       -moz-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-         -o-transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-            transition: height 200ms 200ms, padding 200ms 200ms, border-width 100ms 300ms;
-}
-
-.entity-editor-pane .toggle-list label {
-    -webkit-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-       -moz-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-         -o-transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
-            transition: border-width 100ms 300ms, padding 200ms 200ms, background-color 200ms 200ms, color 200ms 200ms;
 }
 
 /* adding additional preset fields */
 
-.inspector-body .more-buttons {
-    max-height: 100px;
-    padding-top: 0;
-    -webkit-transition: padding 200ms 200ms, max-height 200ms 200ms;
-       -moz-transition: padding 200ms 200ms, max-height 200ms 200ms;
-         -o-transition: padding 200ms 200ms, max-height 200ms 200ms;
-            transition: padding 200ms 200ms, max-height 200ms 200ms;
+.more-fields {
+    padding: 0 20px 20px 20px;
+    font-weight: bold;
 }
 
-button.preset-add-field {
-    background: #f6f6f6;
-    width: 25%;
-    height: 40px;
-    -webkit-transition: width 200ms;
-       -moz-transition: width 200ms;
-         -o-transition: width 200ms;
-            transition: width 200ms;
-}
-
-button.preset-add-field:hover {
-    background: #ececec;
-}
-
-/* set width based on # of buttons */
-
-button.preset-add-field:only-child {
-    width: 100%;
-}
-
-button.preset-add-field:nth-last-child(2),
-button.preset-add-field:nth-last-child(2) ~ button.preset-add-field {
-    width: 50%;
-}
-
-button.preset-add-field:nth-last-child(3),
-button.preset-add-field:nth-last-child(3) ~ button.preset-add-field {
-    width: 33.3333%;
-}
-
-button.preset-add-field:nth-last-child(4),
-button.preset-add-field:nth-last-child(4) ~ button.preset-add-field {
-    width: 25%;
-}
-
-button.preset-add-field:nth-last-child(5),
-button.preset-add-field:nth-last-child(5) ~ button.preset-add-field {
-    width: 20%;
-}
-
-button.preset-add-field:nth-last-child(6),
-button.preset-add-field:nth-last-child(6) ~ button.preset-add-field {
-    width: 16.6666%;
-}
-
-button.preset-add-field:nth-last-child(7),
-button.preset-add-field:nth-last-child(7) ~ button.preset-add-field {
-    width: 14.2857%;
-}
-
-button.preset-add-field:nth-last-child(8),
-button.preset-add-field:nth-last-child(8) ~ button.preset-add-field {
-    width: 12.5%;
-}
-
-.preset-fav button.fav {
-    height: 30px;
-    margin: 5px;
-    padding: 0 10px;
-}
+.more-fields label { padding: 5px 10px 5px 0; }
+.more-fields input { width: 50%;}
 
 /* preset form access */
 
@@ -1407,7 +1325,7 @@ input[type=number] {
     padding-right: 10%;
 }
 
-.form-field .wiki-title ~ .combobox-carat {
+.form-field .wiki-title ~ .combobox-caret {
     margin-left: -18%;
     margin-right: 9%;
 }
@@ -1481,47 +1399,65 @@ input[type=number] {
 }
 
 .form-field .localized-wrap .entry .localized-value {
-    padding-right: 10%;
     border-top-width: 0;
     border-radius: 0 0 4px 4px;
 }
 
+.form-field .localized-wrap .form-label button {
+    border-top-right-radius: 3px;
+}
+
 /* Preset form address */
 
-.form-field .addr-housename {
-    border: 0;
-    border-radius: 0;
+.addr-row input {
+    border-right: 0;
+    border-bottom: 0;
 }
 
-.form-field .addr-number {
-    width: 33.3333%;
+.addr-row:first-of-type input {
+    border-top: 0;
+}
+
+.addr-row input:first-of-type {
     border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
+}
+
+.addr-row input {
     border-radius: 0;
 }
 
-.form-field .addr-street {
-    width: 66.6666%;
-    border-right: 0;
-    border-bottom: 0;
-    border-radius: 0;
-}
-
-.form-field .addr-city {
-    width: 66.6666%;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
+.addr-row:last-of-type input:first-of-type {
     border-radius: 0 0 0 4px;
 }
 
-.form-field .addr-postcode {
-    width: 33.3333%;
-    border-right: 0;
-    border-bottom: 0;
+.addr-row:last-of-type input:last-of-type {
     border-radius: 0 0 4px 0;
 }
+
+/* Restrictions editor */
+
+.form-field-restrictions .preset-input-wrap {
+    position: relative;
+    height: 300px;
+}
+
+.form-field-restrictions svg {
+    width: 100%;
+    height: 100%;
+}
+
+.form-field-restrictions .restriction-help {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 2px 6px;
+    background-color: rgba(255, 255, 255, .8);
+    color: #999;
+    text-align: center;
+}
+
 /* combobox dropdown */
 
 div.combobox {
@@ -1555,10 +1491,21 @@ div.combobox {
     border-top: 0;
 }
 
-.combobox-carat {
-    margin-left: -20px;
-    margin-right: 10px;
-    display:inline-block;
+.combobox-caret {
+    display: inline-block;
+    position: relative;
+    height: 30px;
+    width: 30px;
+    margin-left: -30px;
+    vertical-align: top;
+}
+
+.combobox-caret::after {
+    content:"";
+    height: 0; width: 0;
+    position: absolute;
+    left: 0; right: 0; bottom: 0; top: 0;
+    margin: auto;
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
@@ -1589,10 +1536,6 @@ div.combobox {
     width: 40%;
     float: left;
     height: 30px;
-    -webkit-transition: width 200ms;
-       -moz-transition: width 200ms;
-         -o-transition: width 200ms;
-            transition: width 200ms;
 }
 
 .tag-row input.key {
@@ -1644,6 +1587,10 @@ div.combobox {
 
 .tag-row .tag-reference-button {
     right: 0;
+    border-radius: 0;
+    width: 10%;
+    top: 0;
+    background: #fafafa;
 }
 
 /* Adding form fields to tag editor */
@@ -1677,6 +1624,7 @@ button.minor.tag-reference-loading {
 
 .tag-reference-body {
     overflow: hidden;
+    clear: both;
 }
 
 .tag-reference-body p,
@@ -1751,6 +1699,10 @@ img.wiki-image {
     padding-left: 10px;
 }
 
+.member-incomplete .member-delete {
+    display: none;
+}
+
 .member-row-new .member-entity-input {
     border-radius: 4px 4px 0 0;
     border: 1px solid #cfcfcf;
@@ -1788,19 +1740,9 @@ img.wiki-image {
     background: rgba(0, 0, 0, .8);
 }
 
+.map-control > button.active,
 .map-control > button.active:hover {
     background: #7092ff;
-}
-
-.map-overlay {
-    z-index: -1;
-    right: 75%;
-    max-width: 260px;
-    min-width: 210px;
-    position: fixed;
-    left: 30px;
-    display: block;
-    padding: 10px 10px 0 10px;
 }
 
 /* Zoomer */
@@ -1809,42 +1751,83 @@ img.wiki-image {
     border-radius: 4px 0 0 0;
 }
 
-/* Background Settings */
+/* Background / Map Data Settings */
 
 
-.toggle-list.layer-list {
-    margin-bottom: 10px;
+.map-data-control button {
+    border-radius: 0;
 }
 
 .background-control button {
     border-radius: 4px 0 0 0;
 }
 
-
-.background-control button.active {
-    border-radius: 0;
-}
-
+.map-data-control,
 .background-control {
     position: relative;
 }
 
-.background-control .map-overlay {
-    position: absolute;
-    top: 0;
-}
-
 .nudge-container {
-    border-top: 1px solid #CCC;
-    margin: 0 -10px;
+    border: 1px solid #CCC;
 }
 
 .background-control .adjustments button:last-child {
     border: 0;
 }
 
-.background-control .hide-toggle  {
+.map-data-control .hide-toggle,
+.background-control .hide-toggle {
     padding-bottom: 10px;
+}
+
+.layer-list {
+    margin-bottom: 10px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+}
+
+.layer-list li {
+    position: relative;
+    height: 30px;
+    background-color: white;
+    color: #7092FF;
+}
+
+.layer-list > li:first-child {
+    border-radius: 3px 3px 0 0;
+}
+
+.layer-list > li:last-child {
+    border-radius: 0 0 3px 3px;
+}
+
+.layer-list > li:only-child {
+    border-radius: 3px;
+}
+
+.layer-list li:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+}
+
+.layer-list li:hover {
+    background-color: #ececec;
+}
+
+.layer-list li.active {
+    background: #E8EBFF;
+}
+
+.layer-list label {
+    display: block;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.layer-list label > span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .hide-toggle {
@@ -1877,7 +1860,6 @@ img.wiki-image {
     float: left;
     display: block;
     width:20%;
-    border-radius: 0;
     border-right: 1px solid #CCC;
     position: relative;
 }
@@ -1919,10 +1901,10 @@ img.wiki-image {
 .opacity-options {
     background: url(img/background-pattern-opacity.png) 0 0 repeat;
     height:20px;
-    width:62px;
+    width:82px;
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 50px;
+    top: 20px;
     border: 1px solid #ccc;
 }
 
@@ -1939,6 +1921,8 @@ img.wiki-image {
     z-index: 9999;
 }
 
+.map-data-control li:hover .select-box,
+.map-data-control li.selected .select-box,
 .background-control li:hover .select-box,
 .background-control li.selected .select-box {
     border: 2px solid #7092ff;
@@ -1946,6 +1930,8 @@ img.wiki-image {
     opacity: .5;
 }
 
+.map-data-control li.selected:hover .select-box,
+.map-data-control li.selected .select-box,
 .background-control li.selected:hover .select-box,
 .background-control li.selected .select-box {
     opacity: 1;
@@ -1958,14 +1944,31 @@ img.wiki-image {
     height:18px;
 }
 
-.background-control .layer-toggle-gpx .layer-extent {
+.map-data-control .layer-list button,
+.background-control .layer-list button {
+    float: right;
+    height: 100%;
+    width: 10%;
     border-left: 1px solid #CCC;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0;
 }
 
-.background-control .layer-toggle-gpx.selected .layer-extent {
-    display:inline-block;
+.map-data-control .layer-list button .icon,
+.background-control .layer-list button .icon {
+    opacity: 0.5;
 }
+
+.map-data-control .layer-list button:first-of-type,
+.background-control .layer-list button:first-of-type {
+    border-radius: 0 3px 3px 0;
+}
+
+.map-data-control .map-overlay,
+.background-control .map-overlay,
+.help-control .map-overlay {
+    z-index: -1;
+}
+
 
 /* Geolocator */
 
@@ -1977,19 +1980,19 @@ img.wiki-image {
     border-radius: 0 0 0 4px;
 }
 
-/* Help */
-
-.help-control button {
-    border-radius: 0 0 0 4px;
-}
-
-.help-wrap {
+.map-overlay.content {
     position: fixed;
     top:60px;
     bottom: 30px;
     padding: 20px 50px 20px 20px;
     right: 0;
-    overflow-y: scroll;
+    overflow: auto;
+}
+
+/* Help */
+
+.help-control button {
+    border-radius: 0 0 0 4px;
 }
 
 .help-wrap p {
@@ -2101,27 +2104,153 @@ img.wiki-image {
     bottom: 0;
 }
 
+/* Map-In-Map
+------------------------------------------------------- */
+
+.map-in-map {
+    position: absolute;
+    overflow: hidden;
+    top: 60px;
+    width: 200px;
+    height: 150px;
+    z-index: 5;
+    background: #000;
+    border: #aaa 1px solid;
+    box-shadow: 0 0 2em black;
+}
+
+.map-in-map-tiles {
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.map-in-map-svg {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.map-in-map-bbox {
+    fill: none;
+    stroke: rgba(255, 255, 0, 0.75);
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.map-in-map-bbox.thick {
+    stroke-width: 5;
+}
+
 /* About Section
 ------------------------------------------------------- */
 
-.about-block {
+#about {
+    width: 100%;
     position: absolute;
     right:0;
     bottom:0;
     border-radius: 0;
-    opacity: .625;
-    -webkit-transition: opacity 200ms;
-    -moz-transition: opacity 200ms;
-    transition: opacity 200ms;
 }
 
-.about-block:hover {
-    opacity: 1;
+#attrib {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 5px;
+    float: left;
+    clear: both;
+    pointer-events: none;
 }
 
-#about {
+#attrib * { pointer-events: all; }
+
+.base-layer-attribution,
+.overlay-layer-attribution {
+    position: absolute;
+    color: #888;
+    font-size: 10px;
+}
+
+.base-layer-attribution {
+    left: 10px;
+}
+
+.overlay-layer-attribution {
+    right: 10px;
+}
+
+.overlay-layer-attribution .attribution:not(:last-child):after {
+    content: '; ';
+}
+
+.source-image {
+    height:20px;
+    vertical-align:top;
+}
+
+#footer {
+    width: 100%;
+    float: left;
+    clear: both;
+}
+
+#scale-block {
+    display: table-cell;
+    vertical-align: bottom;
+    width: 250px;
+    height: 30px;
+    float: left;
+    clear: left;
+}
+
+#info-block {
+    float: right;
+    clear: right;
+}
+
+#scale {
+    height: 30px;
+    width: 100%;
+}
+
+#scale text {
+    font: 12px sans-serif;
+    stroke: none;
+    fill: #ccc;
+    text-anchor: start;
+}
+
+#scale path {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+#about-list {
     text-align: right;
     margin-right: 10px;
+    clear: right;
+}
+
+#about-list li {
+    float: right;
+    border-left: 1px solid rgba(255,255,255,.5);
+    padding: 5px 0 5px 5px;
+    margin-left: 5px;
+}
+
+#about-list li:last-child {
+    border-left: 0;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 .source-switch a {
@@ -2133,59 +2262,44 @@ img.wiki-image {
     color:#fff;
 }
 
-/* Attribution overlay */
-.attribution {
-    position: absolute;
-    bottom: 35px;
-    left:10px;
-    color:#888;
-    font-size:10px;
-}
-
-.source-image {
-    height:20px;
-    vertical-align:top;
+.feature-warning a {
+    background: #1e90ff;
+    padding: 2px 4px 4px 4px;
+    border-radius: 2px;
+    color: #eee;
 }
 
 .user-list a:not(:last-child):after {
     content: ', ';
 }
 
-/* API Status */
-
 .api-status {
-    float: left;
+    float: right;
+    clear: both;
+    text-align: right;
+    width: 100%;
+    padding: 0px 10px;
 }
 
 .api-status.offline,
-.api-status.readonly {
+.api-status.readonly,
+.api-status.error {
     background: red;
-    padding: 5px 10px;
-}
-
-/* Account Information */
-
-.account {
-    float: left;
-    padding: 5px 10px;
-}
-
-.account .logout {
-    margin-left:10px;
-    border-left: 1px solid white;
-    padding-left: 10px;
 }
 
 /* Modals
 ------------------------------------------------------- */
 
 .modal {
+    top: 40px;
     display: inline-block;
     position:absolute;
+    border-radius: 3px;
+    overflow: hidden;
     left: 0;
     right: 0;
     margin: auto;
-    z-index: 3;
+    z-index: 50;
 }
 
 .modal .loader {
@@ -2197,7 +2311,7 @@ img.wiki-image {
 }
 
 .shaded {
-    z-index: 2;
+    z-index: 49;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -2218,8 +2332,19 @@ img.wiki-image {
     border-bottom: 1px solid #CCC;
 }
 
-.modal-section:last-child {
-    border-bottom: 0;
+.modal-section.header h3 {
+    padding: 0;
+}
+
+.modal-section.buttons {
+    text-align: center;
+}
+
+.modal-section.buttons .action {
+    display: inline-block;
+    margin: 0 10px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .loading-modal {
@@ -2248,7 +2373,8 @@ img.wiki-image {
     display: block;
     content: '';
     height: 100px;
-    width: 100px;
+    width: 100%;
+    max-width: 100px;
     margin: auto;
     margin-bottom: 10px;
     background:transparent url(img/sprite.svg) no-repeat 0 -220px;
@@ -2256,6 +2382,10 @@ img.wiki-image {
 
 .modal-actions :first-child {
     border-right: 1px solid #CCC;
+}
+
+.modal-section:last-child {
+    border-bottom: 0;
 }
 
 /* Restore Modal
@@ -2327,12 +2457,6 @@ img.wiki-image {
     margin-bottom: 0;
 }
 
-.mode-save button.action {
-    float: none;
-    margin: auto;
-    display: block;
-}
-
 .mode-save .user-info img {
     float: left;
 }
@@ -2351,12 +2475,14 @@ img.wiki-image {
     color:#fff;
 }
 
+.mode-save .commit-info {
+    margin-bottom: 10px;
+}
+
 .mode-save .changeset-list {
-    overflow: auto;
     border:1px solid #ccc;
     border-radius: 4px;
     background:#fff;
-    max-height: 160px;
 }
 
 .mode-save .warning-section .changeset-list button {
@@ -2367,6 +2493,15 @@ img.wiki-image {
     position: relative;
     border-top:1px solid #ccc;
     padding:5px 10px;
+    cursor: pointer;
+}
+
+.mode-save .changeset-list li:hover {
+    background-color: #ececec;
+}
+
+.mode-save .changeset-list .alert {
+    opacity: 0.5;
 }
 
 .changeset-list li span.count {
@@ -2374,11 +2509,65 @@ img.wiki-image {
     color:#555;
 }
 
+.mode-save .commit-section .changeset-list button {
+    border-left: 1px solid #CCC;
+}
+
 .changeset-list li span.count:before { content: '('; }
 
 .changeset-list li span.count:after { content: ')'; }
 
 .changeset-list li:first-child { border-top: 0;}
+
+/* Conflict resolution
+------------------------------------------------------- */
+
+.conflicts-help {
+    padding: 20px;
+    background-color: #ffffbb;
+    border-bottom: 1px solid #ccc;
+}
+
+.conflicts-buttons {
+    padding: 20px;
+}
+
+.mode-save button.conflicts-button {
+    float: left;
+}
+
+.conflict-container {
+    border-bottom: 1px solid #ccc;
+}
+
+.conflict-description {
+    padding: 5px 20px;
+    display: block;
+}
+
+.conflicts-done {
+    padding: 20px 20px 0 20px;
+}
+
+.conflict-detail-container {
+    padding: 10px 20px;
+}
+
+.conflict-count {
+    padding: 10px 20px;
+}
+
+.conflict-choices {
+    margin-top: 10px;
+}
+
+.conflict-nav-buttons {
+    padding: 10px 0 20px 0;
+}
+
+.conflict-nav-button {
+    height: 30px;
+}
 
 /* Notices
 ------------------------------------------------------- */
@@ -2455,6 +2644,7 @@ img.wiki-image {
 
 .tooltip-inner {
     display: inline-block;
+    border-radius: 3px;
     max-width: 200px;
     min-width: 80px;
     padding: 10px;
@@ -2487,6 +2677,7 @@ img.wiki-image {
 }
 
 .tail div {
+    border-radius: 3px;
     padding: 10px;
     background: white;
     position: absolute;
@@ -2554,55 +2745,50 @@ img.wiki-image {
     background: #F6F6F6;
     padding: 10px;
     margin: 10px -10px -10px;
+    border-radius: 0 0 3px 3px;
 }
 
 .tooltip-inner .keyhint {
-    font-size: 10px;
-    padding: 0 7px;
     font-weight: bold;
-    display: inline-block;
-    border-radius: 2px;
-    border: 1px solid #CCC;
-    position: relative;
-    z-index: 1;
-    text-align: left;
-}
-
-.tooltip-inner .keyhint::after {
-    content: "";
-    position: absolute;
-    border-radius: 2px;
-    height: 10px;
-    width: 100%;
-    z-index: 0;
-    bottom: -4px;
-    left: -1px;
-    border: 1px solid #CCC;
-    border-top: 0;
 }
 
 /* Exceptions for tooltip layouts */
 
-/* make tooltips in editor pane dark */
-.entity-editor-pane .tooltip.top .tooltip-arrow {
+/* make tooltips in panels dark */
+.map-overlay .tooltip.top .tooltip-arrow,
+.entity-editor-pane .tooltip.top .tooltip-arrow,
+.warning-section .tooltip.top .tooltip-arrow {
     border-top-color: #000;
 }
 
-.entity-editor-pane .tooltip.bottom .tooltip-arrow {
+.map-overlay .tooltip.bottom .tooltip-arrow,
+.entity-editor-pane .tooltip.bottom .tooltip-arrow,
+.warning-section .tooltip.bottom .tooltip-arrow {
     border-bottom-color: #000;
 }
 
-.entity-editor-pane .tooltip.left .tooltip-arrow {
+.map-overlay .tooltip.left .tooltip-arrow,
+.entity-editor-pane .tooltip.left .tooltip-arrow,
+.warning-section .tooltip.left .tooltip-arrow {
     border-left-color: #000;
 }
 
-.entity-editor-pane .tooltip.right .tooltip-arrow {
+.map-overlay .tooltip.right .tooltip-arrow,
+.entity-editor-pane .tooltip.right .tooltip-arrow,
+.warning-section .tooltip.right .tooltip-arrow {
     border-right-color: #000;
 }
 
-.entity-editor-pane .tooltip-inner {
+.map-overlay .tooltip-inner,
+.map-overlay .keyhint-wrap,
+.entity-editor-pane .tooltip-inner,
+.warning-section .tooltip-inner {
     background: #000;
     color: #ccc;
+}
+/* commit warning tooltips need to be closer */
+.warning-section .tooltip.top {
+    margin-top: -5px;
 }
 
 /* Uncramp map-control tooltips */
@@ -2611,7 +2797,7 @@ img.wiki-image {
 }
 /* Move over tooltips that are near the edge of screen */
 .add-point .tooltip {
-    left: 33.3333% !important; 
+    left: 33.3333% !important;
 }
 
 .curtain-tooltip.intro-points-add .tooltip-arrow,
@@ -2648,10 +2834,6 @@ img.wiki-image {
     fill: rgba(255,255,255,.5);
 }
 
-.radial-menu .icon {
-    pointer-events: none;
-}
-
 .lasso-box {
     fill-opacity:0.1;
     stroke: #fff;
@@ -2668,6 +2850,19 @@ img.wiki-image {
     /* override hide for save button */
     #bar .save .label { display: block;}
 }
+
+@media screen and (max-width: 1200px) {
+    .user-list { display: none !important; }
+}
+
+@media screen and (max-width: 1000px) {
+    #userLink { display: none !important; }
+}
+
+@media screen and (max-width: 900px) {
+    #scale-block { display: none !important; }
+}
+
 
 /* Scrollbars
  ----------------------------------------------------- */

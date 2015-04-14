@@ -8,10 +8,7 @@ iD.actions.AddMidpoint = function(midpoint, node) {
 
         parents.forEach(function(way) {
             for (var i = 0; i < way.nodes.length - 1; i++) {
-                if ((way.nodes[i]     === midpoint.edge[0] &&
-                     way.nodes[i + 1] === midpoint.edge[1]) ||
-                    (way.nodes[i]     === midpoint.edge[1] &&
-                     way.nodes[i + 1] === midpoint.edge[0])) {
+                if (iD.geo.edgeEqual([way.nodes[i], way.nodes[i + 1]], midpoint.edge)) {
                     graph = graph.replace(graph.entity(way.id).addNode(node.id, i + 1));
 
                     // Add only one midpoint on doubled-back segments,

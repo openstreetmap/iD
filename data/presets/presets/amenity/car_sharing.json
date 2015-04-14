@@ -1,4 +1,9 @@
 {
+    "icon": "car",
+    "fields": [
+        "operator",
+        "capacity"
+    ],
     "geometry": [
         "point",
         "area"
@@ -6,9 +11,5 @@
     "tags": {
         "amenity": "car_sharing"
     },
-    "fields": [
-        "operator",
-        "capacity"
-    ],
     "name": "Car Sharing"
 }

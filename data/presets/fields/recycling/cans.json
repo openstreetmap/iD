@@ -1,0 +1,5 @@
+{
+    "key": "recycling:cans",
+    "type": "check",
+    "label": "Accepts Cans"
+}

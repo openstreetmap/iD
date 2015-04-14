@@ -7,6 +7,9 @@
             "bicycle",
             "horse"
         ],
+        "reference": {
+            "key": "access"
+        },
         "type": "access",
         "label": "Access",
         "placeholder": "Unknown",
@@ -46,6 +49,18 @@
             }
         }
     },
+    "access_simple": {
+        "key": "access",
+        "type": "combo",
+        "label": "Access",
+        "placeholder": "yes",
+        "options": [
+            "permissive",
+            "private",
+            "customers",
+            "no"
+        ]
+    },
     "access_toilets": {
         "key": "access",
         "type": "combo",
@@ -66,16 +81,27 @@
             "addr:city",
             "addr:postcode"
         ],
+        "reference": {
+            "key": "addr"
+        },
         "icon": "address",
         "universal": true,
         "label": "Address",
         "strings": {
             "placeholders": {
                 "housename": "Housename",
-                "number": "123",
+                "housenumber": "123",
                 "street": "Street",
                 "city": "City",
-                "postcode": "Postal code"
+                "postcode": "Postcode",
+                "place": "Place",
+                "hamlet": "Hamlet",
+                "suburb": "Suburb",
+                "subdistrict": "Subdistrict",
+                "district": "District",
+                "province": "Province",
+                "state": "State",
+                "country": "Country"
             }
         }
     },
@@ -84,14 +110,71 @@
         "type": "number",
         "label": "Admin Level"
     },
+    "aerialway": {
+        "key": "aerialway",
+        "type": "typeCombo",
+        "label": "Type"
+    },
+    "aerialway/access": {
+        "key": "aerialway:access",
+        "type": "combo",
+        "label": "Access",
+        "strings": {
+            "options": {
+                "entry": "Entry",
+                "exit": "Exit",
+                "both": "Both"
+            }
+        }
+    },
+    "aerialway/bubble": {
+        "key": "aerialway:bubble",
+        "type": "check",
+        "label": "Bubble"
+    },
+    "aerialway/capacity": {
+        "key": "aerialway:capacity",
+        "type": "number",
+        "label": "Capacity (per hour)",
+        "placeholder": "500, 2500, 5000..."
+    },
+    "aerialway/duration": {
+        "key": "aerialway:duration",
+        "type": "number",
+        "label": "Duration (minutes)",
+        "placeholder": "1, 2, 3..."
+    },
+    "aerialway/heating": {
+        "key": "aerialway:heating",
+        "type": "check",
+        "label": "Heated"
+    },
+    "aerialway/occupancy": {
+        "key": "aerialway:occupancy",
+        "type": "number",
+        "label": "Occupancy",
+        "placeholder": "2, 4, 8..."
+    },
+    "aerialway/summer/access": {
+        "key": "aerialway:summer:access",
+        "type": "combo",
+        "label": "Access (summer)",
+        "strings": {
+            "options": {
+                "entry": "Entry",
+                "exit": "Exit",
+                "both": "Both"
+            }
+        }
+    },
     "aeroway": {
         "key": "aeroway",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "amenity": {
         "key": "amenity",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "artist": {
@@ -116,8 +199,13 @@
     },
     "barrier": {
         "key": "barrier",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
+    },
+    "bench": {
+        "key": "bench",
+        "type": "check",
+        "label": "Bench"
     },
     "bicycle_parking": {
         "key": "bicycle_parking",
@@ -129,22 +217,21 @@
         "type": "combo",
         "label": "Type"
     },
+    "brand": {
+        "key": "brand",
+        "type": "text",
+        "label": "Brand"
+    },
     "building": {
         "key": "building",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Building"
     },
     "building_area": {
         "key": "building",
-        "type": "check",
-        "default": "yes",
-        "geometry": "area",
-        "label": "Building"
-    },
-    "building_yes": {
-        "key": "building",
         "type": "combo",
         "default": "yes",
+        "geometry": "area",
         "label": "Building"
     },
     "capacity": {
@@ -156,32 +243,31 @@
     "cardinal_direction": {
         "key": "direction",
         "type": "combo",
-        "options": [
-            "N",
-            "E",
-            "S",
-            "W",
-            "NE",
-            "SE",
-            "SW",
-            "NNE",
-            "ENE",
-            "ESE",
-            "SSE",
-            "SSW",
-            "WSW",
-            "WNW",
-            "NNW"
-        ],
-        "label": "Direction"
+        "label": "Direction",
+        "strings": {
+            "options": {
+                "N": "North",
+                "E": "East",
+                "S": "South",
+                "W": "West",
+                "NE": "Northeast",
+                "SE": "Southeast",
+                "SW": "Southwest",
+                "NW": "Northwest",
+                "NNE": "North-northeast",
+                "ENE": "East-northeast",
+                "ESE": "East-southeast",
+                "SSE": "South-southeast",
+                "SSW": "South-southwest",
+                "WSW": "West-southwest",
+                "WNW": "West-northwest",
+                "NNW": "North-northwest"
+            }
+        }
     },
     "clock_direction": {
         "key": "direction",
         "type": "combo",
-        "options": [
-            "clockwise",
-            "anticlockwise"
-        ],
         "label": "Direction",
         "strings": {
             "options": {
@@ -205,6 +291,21 @@
         "type": "combo",
         "label": "Country"
     },
+    "covered": {
+        "key": "covered",
+        "type": "check",
+        "label": "Covered"
+    },
+    "craft": {
+        "key": "craft",
+        "type": "typeCombo",
+        "label": "Type"
+    },
+    "crop": {
+        "key": "crop",
+        "type": "combo",
+        "label": "Crop"
+    },
     "crossing": {
         "key": "crossing",
         "type": "combo",
@@ -213,8 +314,12 @@
     "cuisine": {
         "key": "cuisine",
         "type": "combo",
-        "indexed": true,
         "label": "Cuisine"
+    },
+    "delivery": {
+        "key": "delivery",
+        "type": "check",
+        "label": "Delivery"
     },
     "denomination": {
         "key": "denomination",
@@ -231,6 +336,25 @@
         "type": "textarea",
         "label": "Description"
     },
+    "drive_through": {
+        "key": "drive_through",
+        "type": "check",
+        "label": "Drive-Through"
+    },
+    "electrified": {
+        "key": "electrified",
+        "type": "combo",
+        "label": "Electrification",
+        "placeholder": "Contact Line, Electrified Rail...",
+        "strings": {
+            "options": {
+                "contact_line": "Contact Line",
+                "rail": "Electrified Rail",
+                "yes": "Yes (unspecified)",
+                "no": "No"
+            }
+        }
+    },
     "elevation": {
         "key": "ele",
         "type": "number",
@@ -245,8 +369,13 @@
     },
     "entrance": {
         "key": "entrance",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
+    },
+    "except": {
+        "key": "except",
+        "type": "combo",
+        "label": "Exceptions"
     },
     "fax": {
         "key": "fax",
@@ -262,18 +391,92 @@
     "fire_hydrant/type": {
         "key": "fire_hydrant:type",
         "type": "combo",
-        "options": [
-            "pillar",
-            "pond",
-            "underground",
-            "wall"
-        ],
-        "label": "Type"
+        "label": "Type",
+        "strings": {
+            "options": {
+                "pillar": "Pillar/Aboveground",
+                "underground": "Underground",
+                "wall": "Wall",
+                "pond": "Pond"
+            }
+        }
     },
     "fixme": {
         "key": "fixme",
         "type": "textarea",
         "label": "Fix Me"
+    },
+    "fuel": {
+        "key": "fuel",
+        "type": "combo",
+        "label": "Fuel"
+    },
+    "fuel/biodiesel": {
+        "key": "fuel:biodiesel",
+        "type": "check",
+        "label": "Sells Biodiesel"
+    },
+    "fuel/diesel": {
+        "key": "fuel:diesel",
+        "type": "check",
+        "label": "Sells Diesel"
+    },
+    "fuel/e10": {
+        "key": "fuel:e10",
+        "type": "check",
+        "label": "Sells E10"
+    },
+    "fuel/e85": {
+        "key": "fuel:e85",
+        "type": "check",
+        "label": "Sells E85"
+    },
+    "fuel/lpg": {
+        "key": "fuel:lpg",
+        "type": "check",
+        "label": "Sells Propane"
+    },
+    "fuel/octane_100": {
+        "key": "fuel:octane_100",
+        "type": "check",
+        "label": "Sells Racing Gasoline"
+    },
+    "fuel/octane_91": {
+        "key": "fuel:octane_91",
+        "type": "check",
+        "label": "Sells Regular Gasoline"
+    },
+    "fuel/octane_95": {
+        "key": "fuel:octane_95",
+        "type": "check",
+        "label": "Sells Midgrade Gasoline"
+    },
+    "fuel/octane_98": {
+        "key": "fuel:octane_98",
+        "type": "check",
+        "label": "Sells Premium Gasoline"
+    },
+    "gauge": {
+        "key": "gauge",
+        "type": "combo",
+        "label": "Gauge"
+    },
+    "gender": {
+        "type": "radio",
+        "keys": [
+            "male",
+            "female",
+            "unisex"
+        ],
+        "label": "Gender",
+        "placeholder": "Unknown",
+        "strings": {
+            "options": {
+                "male": "Male",
+                "female": "Female",
+                "unisex": "Unisex"
+            }
+        }
     },
     "generator/method": {
         "key": "generator:method",
@@ -290,15 +493,33 @@
         "type": "combo",
         "label": "Type"
     },
+    "golf_hole": {
+        "key": "ref",
+        "type": "text",
+        "label": "Reference",
+        "placeholder": "Hole number (1-18)"
+    },
+    "handicap": {
+        "key": "handicap",
+        "type": "number",
+        "label": "Handicap",
+        "placeholder": "1-18"
+    },
     "highway": {
         "key": "highway",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "historic": {
         "key": "historic",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
+    },
+    "hoops": {
+        "key": "hoops",
+        "type": "number",
+        "label": "Hoops",
+        "placeholder": "1, 2, 4..."
     },
     "iata": {
         "key": "iata",
@@ -315,16 +536,25 @@
         "type": "combo",
         "label": "Incline"
     },
+    "incline_steps": {
+        "key": "incline",
+        "type": "combo",
+        "label": "Incline",
+        "strings": {
+            "options": {
+                "up": "Up",
+                "down": "Down"
+            }
+        }
+    },
+    "information": {
+        "key": "information",
+        "type": "typeCombo",
+        "label": "Type"
+    },
     "internet_access": {
         "key": "internet_access",
         "type": "combo",
-        "options": [
-            "yes",
-            "no",
-            "wlan",
-            "wired",
-            "terminal"
-        ],
         "label": "Internet Access",
         "strings": {
             "options": {
@@ -336,9 +566,14 @@
             }
         }
     },
+    "lamp_type": {
+        "key": "lamp_type",
+        "type": "combo",
+        "label": "Type"
+    },
     "landuse": {
         "key": "landuse",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "lanes": {
@@ -352,10 +587,42 @@
         "type": "combo",
         "label": "Layer"
     },
+    "leaf_cycle": {
+        "key": "leaf_cycle",
+        "type": "combo",
+        "label": "Leaf Cycle",
+        "strings": {
+            "options": {
+                "evergreen": "Evergreen",
+                "deciduous": "Deciduous",
+                "semi_evergreen": "Semi-Evergreen",
+                "semi_deciduous": "Semi-Deciduous",
+                "mixed": "Mixed"
+            }
+        }
+    },
+    "leaf_type": {
+        "key": "leaf_type",
+        "type": "combo",
+        "label": "Leaf Type",
+        "strings": {
+            "options": {
+                "broadleaved": "Broadleaved",
+                "needleleaved": "Needleleaved",
+                "mixed": "Mixed",
+                "leafless": "Leafless"
+            }
+        }
+    },
     "leisure": {
         "key": "leisure",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
+    },
+    "length": {
+        "key": "length",
+        "type": "number",
+        "label": "Length (Meters)"
     },
     "levels": {
         "key": "building:levels",
@@ -375,7 +642,7 @@
     },
     "man_made": {
         "key": "man_made",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "maxspeed": {
@@ -383,6 +650,54 @@
         "type": "maxspeed",
         "label": "Speed Limit",
         "placeholder": "40, 50, 60..."
+    },
+    "mtb/scale": {
+        "key": "mtb:scale",
+        "type": "combo",
+        "label": "Mountain Biking Difficulty",
+        "placeholder": "0, 1, 2, 3...",
+        "strings": {
+            "options": {
+                "0": "0: Solid gravel/packed earth, no obstacles, wide curves",
+                "1": "1: Some loose surface, small obstacles, wide curves",
+                "2": "2: Much loose surface, large obstacles, easy hairpins",
+                "3": "3: Slippery surface, large obstacles, tight hairpins",
+                "4": "4: Loose surface or boulders, dangerous hairpins",
+                "5": "5: Maximum difficulty, boulder fields, landslides",
+                "6": "6: Not rideable except by the very best mountain bikers"
+            }
+        }
+    },
+    "mtb/scale/imba": {
+        "key": "mtb:scale:imba",
+        "type": "combo",
+        "label": "IMBA Trail Difficulty",
+        "placeholder": "Easy, Medium, Difficult...",
+        "strings": {
+            "options": {
+                "0": "Easiest (white circle)",
+                "1": "Easy (green circle)",
+                "2": "Medium (blue square)",
+                "3": "Difficult (black diamond)",
+                "4": "Extremely Difficult (double black diamond)"
+            }
+        }
+    },
+    "mtb/scale/uphill": {
+        "key": "mtb:scale:uphill",
+        "type": "combo",
+        "label": "Mountain Biking Uphill Difficulty",
+        "placeholder": "0, 1, 2, 3...",
+        "strings": {
+            "options": {
+                "0": "0: Avg. incline <10%, gravel/packed earth, no obstacles",
+                "1": "1: Avg. incline <15%, gravel/packed earth, few small objects",
+                "2": "2: Avg. incline <20%, stable surface, fistsize rocks/roots",
+                "3": "3: Avg. incline <25%, variable surface, fistsize rocks/branches",
+                "4": "4: Avg. incline <30%, poor condition, big rocks/branches",
+                "5": "5: Very steep, bike generally needs to be pushed or carried"
+            }
+        }
     },
     "name": {
         "key": "name",
@@ -392,7 +707,7 @@
     },
     "natural": {
         "key": "natural",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Natural"
     },
     "network": {
@@ -409,19 +724,32 @@
     },
     "office": {
         "key": "office",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "oneway": {
         "key": "oneway",
         "type": "check",
-        "label": "One Way"
+        "label": "One Way",
+        "strings": {
+            "options": {
+                "undefined": "Assumed to be No",
+                "yes": "Yes",
+                "no": "No"
+            }
+        }
     },
     "oneway_yes": {
         "key": "oneway",
         "type": "check",
-        "default": "yes",
-        "label": "One Way"
+        "label": "One Way",
+        "strings": {
+            "options": {
+                "undefined": "Assumed to be Yes",
+                "yes": "Yes",
+                "no": "No"
+            }
+        }
     },
     "opening_hours": {
         "key": "opening_hours",
@@ -433,6 +761,12 @@
         "type": "text",
         "label": "Operator"
     },
+    "par": {
+        "key": "par",
+        "type": "number",
+        "label": "Par",
+        "placeholder": "3, 4, 5..."
+    },
     "park_ride": {
         "key": "park_ride",
         "type": "check",
@@ -441,16 +775,18 @@
     "parking": {
         "key": "parking",
         "type": "combo",
-        "options": [
-            "surface",
-            "multi-storey",
-            "underground",
-            "sheds",
-            "carports",
-            "garage_boxes",
-            "lane"
-        ],
-        "label": "Type"
+        "label": "Type",
+        "strings": {
+            "options": {
+                "surface": "Surface",
+                "multi-storey": "Multilevel",
+                "underground": "Underground",
+                "sheds": "Sheds",
+                "carports": "Carports",
+                "garage_boxes": "Garage Boxes",
+                "lane": "Roadside Lane"
+            }
+        }
     },
     "phone": {
         "key": "phone",
@@ -460,20 +796,95 @@
         "label": "Phone",
         "placeholder": "+31 42 123 4567"
     },
+    "piste/difficulty": {
+        "key": "piste:difficulty",
+        "type": "combo",
+        "label": "Difficulty",
+        "placeholder": "Easy, Intermediate, Advanced...",
+        "strings": {
+            "options": {
+                "novice": "Novice (instructional)",
+                "easy": "Easy (green circle)",
+                "intermediate": "Intermediate (blue square)",
+                "advanced": "Advanced (black diamond)",
+                "expert": "Expert (double black diamond)",
+                "freeride": "Freeride (off-piste)",
+                "extreme": "Extreme (climbing equipment required)"
+            }
+        }
+    },
+    "piste/grooming": {
+        "key": "piste:grooming",
+        "type": "combo",
+        "label": "Grooming",
+        "strings": {
+            "options": {
+                "classic": "Classic",
+                "mogul": "Mogul",
+                "backcountry": "Backcountry",
+                "classic+skating": "Classic and Skating",
+                "scooter": "Scooter/Snowmobile",
+                "skating": "Skating"
+            }
+        }
+    },
+    "piste/type": {
+        "key": "piste:type",
+        "type": "typeCombo",
+        "label": "Type",
+        "strings": {
+            "options": {
+                "downhill": "Downhill",
+                "nordic": "Nordic",
+                "skitour": "Skitour",
+                "sled": "Sled",
+                "hike": "Hike",
+                "sleigh": "Sleigh",
+                "ice_skate": "Ice Skate",
+                "snow_park": "Snow Park",
+                "playground": "Playground"
+            }
+        }
+    },
     "place": {
         "key": "place",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
+    },
+    "population": {
+        "key": "population",
+        "type": "text",
+        "label": "Population"
     },
     "power": {
         "key": "power",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "railway": {
         "key": "railway",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
+    },
+    "recycling/cans": {
+        "key": "recycling:cans",
+        "type": "check",
+        "label": "Accepts Cans"
+    },
+    "recycling/clothes": {
+        "key": "recycling:clothes",
+        "type": "check",
+        "label": "Accepts Clothes"
+    },
+    "recycling/glass": {
+        "key": "recycling:glass",
+        "type": "check",
+        "label": "Accepts Glass"
+    },
+    "recycling/paper": {
+        "key": "recycling:paper",
+        "type": "check",
+        "label": "Accepts Paper"
     },
     "ref": {
         "key": "ref",
@@ -488,32 +899,21 @@
     "religion": {
         "key": "religion",
         "type": "combo",
-        "options": [
-            "christian",
-            "muslim",
-            "buddhist",
-            "jewish",
-            "hindu",
-            "shinto",
-            "taoist"
-        ],
-        "label": "Religion",
-        "strings": {
-            "options": {
-                "christian": "Christian",
-                "muslim": "Muslim",
-                "buddhist": "Buddhist",
-                "jewish": "Jewish",
-                "hindu": "Hindu",
-                "shinto": "Shinto",
-                "taoist": "Taoist"
-            }
-        }
+        "label": "Religion"
     },
     "restriction": {
         "key": "restriction",
         "type": "combo",
         "label": "Type"
+    },
+    "restrictions": {
+        "type": "restrictions",
+        "geometry": "vertex",
+        "icon": "restrictions",
+        "reference": {
+            "rtype": "restriction"
+        },
+        "label": "Turn Restrictions"
     },
     "route": {
         "key": "route",
@@ -528,29 +928,148 @@
     "sac_scale": {
         "key": "sac_scale",
         "type": "combo",
-        "label": "Path Difficulty"
+        "label": "Hiking Difficulty",
+        "placeholder": "Mountain Hiking, Alpine Hiking...",
+        "strings": {
+            "options": {
+                "hiking": "T1: Hiking",
+                "mountain_hiking": "T2: Mountain Hiking",
+                "demanding_mountain_hiking": "T3: Demanding Mountain Hiking",
+                "alpine_hiking": "T4: Alpine Hiking",
+                "demanding_alpine_hiking": "T5: Demanding Alpine Hiking",
+                "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"
+            }
+        }
+    },
+    "seasonal": {
+        "key": "seasonal",
+        "type": "check",
+        "label": "Seasonal"
     },
     "service": {
         "key": "service",
         "type": "combo",
+        "label": "Type",
         "options": [
             "parking_aisle",
             "driveway",
             "alley",
-            "drive-through",
-            "emergency_access"
-        ],
-        "label": "Type"
+            "emergency_access",
+            "drive-through"
+        ]
+    },
+    "service/bicycle/chain_tool": {
+        "key": "service:bicycle:chain_tool",
+        "type": "check",
+        "label": "Chain Tool",
+        "strings": {
+            "options": {
+                "undefined": "Assumed to be No",
+                "yes": "Yes",
+                "no": "No"
+            }
+        }
+    },
+    "service/bicycle/pump": {
+        "key": "service:bicycle:pump",
+        "type": "check",
+        "label": "Air Pump",
+        "strings": {
+            "options": {
+                "undefined": "Assumed to be No",
+                "yes": "Yes",
+                "no": "No"
+            }
+        }
+    },
+    "service_rail": {
+        "key": "service",
+        "type": "combo",
+        "label": "Service Type",
+        "strings": {
+            "options": {
+                "spur": "Spur",
+                "yard": "Yard",
+                "siding": "Siding",
+                "crossover": "Crossover"
+            }
+        }
     },
     "shelter": {
         "key": "shelter",
         "type": "check",
         "label": "Shelter"
     },
-    "shop": {
-        "key": "shop",
+    "shelter_type": {
+        "key": "shelter_type",
         "type": "combo",
         "label": "Type"
+    },
+    "shop": {
+        "key": "shop",
+        "type": "typeCombo",
+        "label": "Type"
+    },
+    "sloped_curb": {
+        "key": "sloped_curb",
+        "type": "combo",
+        "label": "Sloped Curb"
+    },
+    "smoking": {
+        "key": "smoking",
+        "type": "combo",
+        "label": "Smoking",
+        "placeholder": "No, Separated, Yes...",
+        "strings": {
+            "options": {
+                "no": "No smoking anywhere",
+                "separated": "In smoking areas, not physically isolated",
+                "isolated": "In smoking areas, physically isolated",
+                "outside": "Allowed outside",
+                "yes": "Allowed everywhere",
+                "dedicated": "Dedicated to smokers (e.g. smokers' club)"
+            }
+        }
+    },
+    "smoothness": {
+        "key": "smoothness",
+        "type": "combo",
+        "label": "Smoothness",
+        "placeholder": "Thin Rollers, Wheels, Off-Road...",
+        "strings": {
+            "options": {
+                "excellent": "Thin Rollers: rollerblade, skateboard",
+                "good": "Thin Wheels: racing bike",
+                "intermediate": "Wheels: city bike, wheelchair, scooter",
+                "bad": "Robust Wheels: trekking bike, car, rickshaw",
+                "very_bad": "High Clearance: light duty off-road vehicle",
+                "horrible": "Off-Road: heavy duty off-road vehicle",
+                "very_horrible": "Specialized off-road: tractor, ATV",
+                "impassable": "Impassable / No wheeled vehicle"
+            }
+        }
+    },
+    "social_facility_for": {
+        "key": "social_facility:for",
+        "type": "radio",
+        "label": "People served",
+        "placeholder": "Homeless, Disabled, Child, etc",
+        "options": [
+            "abused",
+            "child",
+            "disabled",
+            "diseased",
+            "drug_addicted",
+            "homeless",
+            "juvenile",
+            "mental_health",
+            "migrant",
+            "orphan",
+            "senior",
+            "underprivileged",
+            "unemployed",
+            "victim"
+        ]
     },
     "source": {
         "key": "source",
@@ -564,13 +1083,40 @@
         "type": "combo",
         "label": "Sport"
     },
+    "sport_ice": {
+        "key": "sport",
+        "type": "combo",
+        "label": "Sport",
+        "options": [
+            "skating",
+            "hockey",
+            "multi",
+            "curling",
+            "ice_stock"
+        ]
+    },
+    "sport_racing": {
+        "key": "sport",
+        "type": "combo",
+        "label": "Sport",
+        "options": [
+            "cycling",
+            "dog_racing",
+            "horse_racing",
+            "karting",
+            "motor",
+            "motocross",
+            "running"
+        ]
+    },
     "structure": {
         "type": "radio",
         "keys": [
             "bridge",
             "tunnel",
             "embankment",
-            "cutting"
+            "cutting",
+            "ford"
         ],
         "label": "Structure",
         "placeholder": "Unknown",
@@ -579,9 +1125,24 @@
                 "bridge": "Bridge",
                 "tunnel": "Tunnel",
                 "embankment": "Embankment",
-                "cutting": "Cutting"
+                "cutting": "Cutting",
+                "ford": "Ford"
             }
         }
+    },
+    "studio_type": {
+        "key": "type",
+        "type": "combo",
+        "label": "Type",
+        "options": [
+            "audio",
+            "video"
+        ]
+    },
+    "substation": {
+        "key": "substation",
+        "type": "typeCombo",
+        "label": "Type"
     },
     "supervised": {
         "key": "supervised",
@@ -593,14 +1154,40 @@
         "type": "combo",
         "label": "Surface"
     },
+    "tactile_paving": {
+        "key": "tactile_paving",
+        "type": "check",
+        "label": "Tactile Paving"
+    },
+    "takeaway": {
+        "key": "takeaway",
+        "type": "combo",
+        "label": "Takeaway",
+        "placeholder": "Yes, No, Takeaway Only...",
+        "strings": {
+            "options": {
+                "yes": "Yes",
+                "no": "No",
+                "only": "Takeaway Only"
+            }
+        }
+    },
     "toilets/disposal": {
         "key": "toilets:disposal",
         "type": "combo",
-        "label": "Disposal"
+        "label": "Disposal",
+        "strings": {
+            "options": {
+                "flush": "Flush",
+                "pitlatrine": "Pit/Latrine",
+                "chemical": "Chemical",
+                "bucket": "Bucket"
+            }
+        }
     },
     "tourism": {
         "key": "tourism",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "towertype": {
@@ -611,12 +1198,43 @@
     "tracktype": {
         "key": "tracktype",
         "type": "combo",
-        "label": "Type"
+        "label": "Track Type",
+        "placeholder": "Solid, Mostly Solid, Soft...",
+        "strings": {
+            "options": {
+                "grade1": "Solid: paved or heavily compacted hardcore surface",
+                "grade2": "Mostly Solid: gravel/rock with some soft material mixed in",
+                "grade3": "Even mixture of hard and soft materials",
+                "grade4": "Mostly Soft: soil/sand/grass with some hard material mixed in",
+                "grade5": "Soft: soil/sand/grass"
+            }
+        }
     },
     "trail_visibility": {
         "key": "trail_visibility",
         "type": "combo",
-        "label": "Trail Visibility"
+        "label": "Trail Visibility",
+        "placeholder": "Excellent, Good, Bad...",
+        "strings": {
+            "options": {
+                "excellent": "Excellent: unambiguous path or markers everywhere",
+                "good": "Good: markers visible, sometimes require searching",
+                "intermediate": "Intermediate: few markers, path mostly visible",
+                "bad": "Bad: no markers, path sometimes invisible/pathless",
+                "horrible": "Horrible: often pathless, some orientation skills required",
+                "no": "No: pathless, excellent orientation skills required"
+            }
+        }
+    },
+    "trees": {
+        "key": "trees",
+        "type": "combo",
+        "label": "Trees"
+    },
+    "tunnel": {
+        "key": "tunnel",
+        "type": "combo",
+        "label": "Tunnel"
     },
     "vending": {
         "key": "vending",
@@ -630,7 +1248,7 @@
     },
     "waterway": {
         "key": "waterway",
-        "type": "combo",
+        "type": "typeCombo",
         "label": "Type"
     },
     "website": {
@@ -658,16 +1276,16 @@
         "universal": true,
         "label": "Wheelchair Access"
     },
+    "width": {
+        "key": "width",
+        "type": "number",
+        "label": "Width (Meters)"
+    },
     "wikipedia": {
         "key": "wikipedia",
         "type": "wikipedia",
         "icon": "wikipedia",
         "universal": true,
         "label": "Wikipedia"
-    },
-    "wood": {
-        "key": "wood",
-        "type": "combo",
-        "label": "Type"
     }
 }

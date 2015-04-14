@@ -1,0 +1,17 @@
+{
+    "icon": "swimming",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "scuba_diving"
+    },
+    "name": "Scuba Diving Shop"
+}

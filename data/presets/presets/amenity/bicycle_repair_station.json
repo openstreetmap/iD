@@ -1,0 +1,23 @@
+{
+    "icon": "bicycle",
+    "fields": [
+        "operator",
+        "brand",
+        "opening_hours",
+        "fee",
+        "service/bicycle/chain_tool",
+        "service/bicycle/pump"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "bike"
+    ],
+    "tags": {
+        "amenity": "bicycle_repair_station"
+    },
+    "name": "Bicycle Repair Station"
+}

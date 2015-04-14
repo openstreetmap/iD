@@ -11,15 +11,33 @@ iD.geo.Extent = function geoExtent(min, max) {
     }
 };
 
-iD.geo.Extent.prototype = [[], []];
+iD.geo.Extent.prototype = new Array(2);
 
 _.extend(iD.geo.Extent.prototype, {
+    equals: function (obj) {
+        return this[0][0] === obj[0][0] &&
+            this[0][1] === obj[0][1] &&
+            this[1][0] === obj[1][0] &&
+            this[1][1] === obj[1][1];
+    },
+
     extend: function(obj) {
         if (!(obj instanceof iD.geo.Extent)) obj = new iD.geo.Extent(obj);
         return iD.geo.Extent([Math.min(obj[0][0], this[0][0]),
                               Math.min(obj[0][1], this[0][1])],
                              [Math.max(obj[1][0], this[1][0]),
                               Math.max(obj[1][1], this[1][1])]);
+    },
+
+    _extend: function(extent) {
+        this[0][0] = Math.min(extent[0][0], this[0][0]);
+        this[0][1] = Math.min(extent[0][1], this[0][1]);
+        this[1][0] = Math.max(extent[1][0], this[1][0]);
+        this[1][1] = Math.max(extent[1][1], this[1][1]);
+    },
+
+    area: function() {
+        return Math.abs((this[1][0] - this[0][0]) * (this[1][1] - this[0][1]));
     },
 
     center: function() {
@@ -34,7 +52,15 @@ _.extend(iD.geo.Extent.prototype, {
             [this[1][0], this[1][1]],
             [this[1][0], this[0][1]],
             [this[0][0], this[0][1]]
-        ]
+        ];
+    },
+
+    contains: function(obj) {
+        if (!(obj instanceof iD.geo.Extent)) obj = new iD.geo.Extent(obj);
+        return obj[0][0] >= this[0][0] &&
+               obj[0][1] >= this[0][1] &&
+               obj[1][0] <= this[1][0] &&
+               obj[1][1] <= this[1][1];
     },
 
     intersects: function(obj) {
@@ -53,9 +79,21 @@ _.extend(iD.geo.Extent.prototype, {
                                   Math.min(obj[1][1], this[1][1])]);
     },
 
+    percentContainedIn: function(obj) {
+        if (!(obj instanceof iD.geo.Extent)) obj = new iD.geo.Extent(obj);
+        var a1 = this.intersection(obj).area(),
+            a2 = this.area();
+
+        if (a1 === Infinity || a2 === Infinity || a1 === 0 || a2 === 0) {
+            return 0;
+        } else {
+            return a1 / a2;
+        }
+    },
+
     padByMeters: function(meters) {
-        var dLat = meters / 111200,
-            dLon = meters / 111200 / Math.abs(Math.cos(this.center()[1]));
+        var dLat = iD.geo.metersToLat(meters),
+            dLon = iD.geo.metersToLon(meters, this.center()[1]);
         return iD.geo.Extent(
                 [this[0][0] - dLon, this[0][1] - dLat],
                 [this[1][0] + dLon, this[1][1] + dLat]);
@@ -64,4 +102,5 @@ _.extend(iD.geo.Extent.prototype, {
     toParam: function() {
         return [this[0][0], this[0][1], this[1][0], this[1][1]].join(',');
     }
+
 });

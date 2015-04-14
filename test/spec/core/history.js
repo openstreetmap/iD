@@ -19,14 +19,14 @@ describe("iD.History", function () {
     describe("#merge", function () {
         it("merges the entities into all graph versions", function () {
             var n = iD.Node({id: 'n'});
-            history.merge({n: n});
+            history.merge([n]);
             expect(history.graph().entity('n')).to.equal(n);
         });
 
         it("emits a change event with the specified extent", function () {
             var extent = {};
             history.on('change', spy);
-            history.merge({}, extent);
+            history.merge([], extent);
             expect(spy).to.have.been.calledWith(undefined, extent);
         });
     });
@@ -122,6 +122,49 @@ describe("iD.History", function () {
         });
     });
 
+    describe("#overwrite", function () {
+        it("returns a difference", function () {
+            history.perform(action, "annotation");
+            expect(history.overwrite(action).changes()).to.eql({});
+        });
+
+        it("updates the graph", function () {
+            history.perform(action, "annotation");
+            var node = iD.Node();
+            history.overwrite(function (graph) { return graph.replace(node); });
+            expect(history.graph().entity(node.id)).to.equal(node);
+        });
+
+        it("replaces the undo annotation", function () {
+            history.perform(action, "annotation1");
+            history.overwrite(action, "annotation2");
+            expect(history.undoAnnotation()).to.equal("annotation2");
+        });
+
+        it("does not push the redo stack", function () {
+            history.perform(action, "annotation");
+            history.overwrite(action, "annotation2");
+            expect(history.redoAnnotation()).to.be.undefined;
+        });
+
+        it("emits a change event", function () {
+            history.perform(action, "annotation");
+            history.on('change', spy);
+            var difference = history.overwrite(action, "annotation2");
+            expect(spy).to.have.been.calledWith(difference);
+        });
+
+        it("performs multiple actions", function () {
+            var action1 = sinon.stub().returns(iD.Graph()),
+                action2 = sinon.stub().returns(iD.Graph());
+            history.perform(action, "annotation");
+            history.overwrite(action1, action2, "annotation2");
+            expect(action1).to.have.been.called;
+            expect(action2).to.have.been.called;
+            expect(history.undoAnnotation()).to.equal("annotation2");
+        });
+    });
+
     describe("#undo", function () {
         it("returns a difference", function () {
             expect(history.undo().changes()).to.eql({});
@@ -186,14 +229,14 @@ describe("iD.History", function () {
         it("includes modified entities", function () {
             var node1 = iD.Node({id: "n1"}),
                 node2 = node1.update({ tags: { yes: "no" } });
-            history.merge({ n1: node1});
+            history.merge([node1]);
             history.perform(function (graph) { return graph.replace(node2); });
             expect(history.changes().modified).to.eql([node2]);
         });
 
         it("includes deleted entities", function () {
             var node = iD.Node({id: "n1"});
-            history.merge({ n1: node });
+            history.merge([node]);
             history.perform(function (graph) { return graph.remove(node); });
             expect(history.changes().deleted).to.eql([node]);
         });
@@ -208,22 +251,6 @@ describe("iD.History", function () {
 
         it("is false when all of change's values are empty", function() {
             expect(history.hasChanges()).to.eql(false);
-        });
-    });
-
-    describe("#numChanges", function() {
-        it("is 0 when there are no changes", function() {
-            expect(history.numChanges()).to.eql(0);
-        });
-
-        it("is the sum of all types of changes", function() {
-            var node1 = iD.Node({id: "n1"}),
-                node2 = iD.Node();
-            history.merge({ n1: node1 });
-            history.perform(function (graph) { return graph.remove(node1); });
-            expect(history.numChanges()).to.eql(1);
-            history.perform(function (graph) { return graph.replace(node2); });
-            expect(history.numChanges()).to.eql(2);
         });
     });
 
@@ -244,60 +271,20 @@ describe("iD.History", function () {
         });
     });
 
-    describe("#lock", function() {
-        it("acquires lock if possible", function() {
-            expect(history.lock()).to.be.true;
-            expect(history.lock()).to.be.false;
-        });
-    });
-
-    describe("#save", function() {
-        it("doesn't do anything if it doesn't have the lock", function() {
-            var key = history._getKey('saved_history');
-            context.storage(key, null);
-            history.save();
-            expect(context.storage(key)).to.be.null;
-            context.storage(key, 'something');
-            expect(context.storage(key)).to.equal('something');
-            history.save();
-            context.storage(key, null);
-        });
-
-        it("saves to localStorage", function() {
-            var node = iD.Node({ id: 'n' });
-            history.lock();
-            history.perform(iD.actions.AddEntity(node));
-            history.save();
-            var saved = JSON.parse(context.storage(history._getKey('saved_history')));
-            expect(saved.stack[1].modified[0]).to.eql('nv0');
-        });
-    });
-
-    describe("#restore", function() {
-        it("saves and restores a created and deleted entities", function() {
-            var node = iD.Node({ id: 'n' }),
-                node2 = iD.Node({ id: 'n2' });
-            history.lock();
-            history.perform(iD.actions.AddEntity(node));
-            history.perform(iD.actions.AddEntity(node2));
-            history.perform(iD.actions.DeleteNode('n2'));
-            history.save();
-            history.reset();
-            expect(history.graph().hasEntity('n')).to.be.undefined
-            history.restore();
-            expect(history.graph().entity('n').id).to.equal('n');
-            expect(history.graph().hasEntity('n2')).to.be.undefined;
-        });
-    });
-
     describe("#toJSON", function() {
-        it("generates v2 JSON", function() {
-            var node = iD.Node({id: 'n-1'});
-            history.merge({n1: iD.Node({id: 'n1'})});
-            history.perform(iD.actions.AddEntity(node));
+        it("generates v3 JSON", function() {
+            var node_1 = iD.Node({id: 'n-1'}),
+                node1 = iD.Node({id: 'n1'}),
+                node2 = iD.Node({id: 'n2'}),
+                node3 = iD.Node({id: 'n3'});
+            history.merge([node1, node2, node3]);
+            history.perform(iD.actions.AddEntity(node_1)); // addition
+            history.perform(iD.actions.ChangeTags('n2', {k: 'v'})); // modification
+            history.perform(iD.actions.DeleteNode('n3')); // deletion
             var json = JSON.parse(history.toJSON());
-            expect(json.version).to.eql(2);
-            expect(json.entities).to.eql([node]);
+            expect(json.version).to.eql(3);
+            expect( _.isEqual(json.entities, [node_1, node2.update({tags: {k: 'v'}})]) ).to.be.ok;
+            expect( _.isEqual(json.baseEntities, [node2, node3]) ).to.be.ok;
         });
     });
 
@@ -345,7 +332,7 @@ describe("iD.History", function () {
                 "index": 1
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge({n1: iD.Node({id: 'n1'})});
+            history.merge([iD.Node({id: 'n1'})]);
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql("Deleted a point.");
             expect(history.imageryUsed()).to.eql(["Bing"]);
@@ -370,28 +357,29 @@ describe("iD.History", function () {
             expect(history.undoAnnotation()).to.eql("Added a point.");
             expect(history.imageryUsed()).to.eql(["Bing"]);
             expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(history.difference().created().length).to.eql(1);
         });
 
         it("restores from v2 JSON (modification)", function() {
             var json = {
                 "version": 2,
                 "entities": [
-                    {"loc": [1, 2], "id": "n-1"},
-                    {"loc": [2, 3], "id": "n-1", "v": 1}
+                    {"loc": [2, 3], "id": "n1", "v": 1}
                 ],
                 "stack": [
                     {},
-                    {"modified": ["n-1v0"], "imageryUsed": ["Bing"], "annotation": "Added a point."},
-                    {"modified": ["n-1v1"], "imageryUsed": ["Bing"], "annotation": "Moved a point."}
+                    {"modified": ["n1v1"], "imageryUsed": ["Bing"], "annotation": "Moved a point."}
                 ],
                 "nextIDs": {"node": -2, "way": -1, "relation": -1},
-                "index": 2
+                "index": 1
             };
             history.fromJSON(JSON.stringify(json));
-            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [2, 3], v: 1}));
+            history.merge([iD.Node({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
+            expect(history.graph().entity('n1')).to.eql(iD.Node({id: 'n1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql("Moved a point.");
             expect(history.imageryUsed()).to.eql(["Bing"]);
             expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(history.difference().modified().length).to.eql(1);
         });
 
         it("restores from v2 JSON (deletion)", function() {
@@ -406,11 +394,76 @@ describe("iD.History", function () {
                 "index": 1
             };
             history.fromJSON(JSON.stringify(json));
-            history.merge({n1: iD.Node({id: 'n1'})});
+            history.merge([iD.Node({id: 'n1'})]); // Shouldn't be necessary; flaw in v2 format (see #2135)
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql("Deleted a point.");
             expect(history.imageryUsed()).to.eql(["Bing"]);
             expect(iD.Entity.id.next).to.eql({node: -1, way: -2, relation: -3});
+            expect(history.difference().deleted().length).to.eql(1);
+        });
+
+        it("restores from v3 JSON (creation)", function() {
+            var json = {
+                "version": 3,
+                "entities": [
+                    {"loc": [1, 2], "id": "n-1"}
+                ],
+                "baseEntities": [],
+                "stack": [
+                    {},
+                    {"modified": ["n-1v0"], "imageryUsed": ["Bing"], "annotation": "Added a point."}
+                ],
+                "nextIDs": {"node": -2, "way": -1, "relation": -1},
+                "index": 1
+            };
+            history.fromJSON(JSON.stringify(json));
+            expect(history.graph().entity('n-1')).to.eql(iD.Node({id: 'n-1', loc: [1, 2]}));
+            expect(history.undoAnnotation()).to.eql("Added a point.");
+            expect(history.imageryUsed()).to.eql(["Bing"]);
+            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(history.difference().created().length).to.eql(1);
+        });
+
+        it("restores from v3 JSON (modification)", function() {
+            var json = {
+                "version": 3,
+                "entities": [
+                    {"loc": [2, 3], "id": "n1", "v": 1}
+                ],
+                "baseEntities": [{"loc": [1, 2], "id": "n1"}],
+                "stack": [
+                    {},
+                    {"modified": ["n1v1"], "imageryUsed": ["Bing"], "annotation": "Moved a point."}
+                ],
+                "nextIDs": {"node": -2, "way": -1, "relation": -1},
+                "index": 1
+            };
+            history.fromJSON(JSON.stringify(json));
+            expect(history.graph().entity('n1')).to.eql(iD.Node({id: 'n1', loc: [2, 3], v: 1}));
+            expect(history.undoAnnotation()).to.eql("Moved a point.");
+            expect(history.imageryUsed()).to.eql(["Bing"]);
+            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(history.difference().modified().length).to.eql(1);
+        });
+
+        it("restores from v3 JSON (deletion)", function() {
+            var json = {
+                "version": 3,
+                "entities": [],
+                "baseEntities": [{"loc": [1, 2], "id": "n1"}],
+                "stack": [
+                    {},
+                    {"deleted": ["n1"], "imageryUsed": ["Bing"], "annotation": "Deleted a point."}
+                ],
+                "nextIDs": {"node": -1, "way": -2, "relation": -3},
+                "index": 1
+            };
+            history.fromJSON(JSON.stringify(json));
+            expect(history.graph().hasEntity('n1')).to.be.undefined;
+            expect(history.undoAnnotation()).to.eql("Deleted a point.");
+            expect(history.imageryUsed()).to.eql(["Bing"]);
+            expect(iD.Entity.id.next).to.eql({node: -1, way: -2, relation: -3});
+            expect(history.difference().deleted().length).to.eql(1);
         });
     });
 });

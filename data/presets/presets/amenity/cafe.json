@@ -3,18 +3,18 @@
     "fields": [
         "cuisine",
         "internet_access",
+        "address",
         "building_area",
-        "address"
+        "opening_hours",
+        "smoking"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [
         "coffee",
-        "tea",
-        "coffee shop"
+        "tea"
     ],
     "tags": {
         "amenity": "cafe"

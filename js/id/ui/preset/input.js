@@ -20,7 +20,7 @@ iD.ui.preset.url = function(field) {
             .on('blur', change)
             .on('change', change);
 
-        if (field.type == 'number') {
+        if (field.type === 'number') {
             input.attr('type', 'text');
 
             var spinControl = selection.selectAll('.spin-control')

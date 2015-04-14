@@ -1,0 +1,21 @@
+{
+    "icon": "bakery",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "sweets",
+        "candy"
+    ],
+    "tags": {
+        "craft": "confectionery"
+    },
+    "name": "Confectionery"
+}

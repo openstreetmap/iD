@@ -1,5 +1,5 @@
 {
     "key": "tourism",
-    "type": "combo",
+    "type": "typeCombo",
     "label": "Type"
 }

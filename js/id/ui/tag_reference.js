@@ -1,6 +1,5 @@
-iD.ui.TagReference = function(tag) {
+iD.ui.TagReference = function(tag, context) {
     var tagReference = {},
-        taginfo = iD.taginfo(),
         button,
         body,
         loaded,
@@ -34,7 +33,7 @@ iD.ui.TagReference = function(tag) {
     function load() {
         button.classed('tag-reference-loading', true);
 
-        taginfo.docs(tag, function(err, docs) {
+        context.taginfo().docs(tag, function(err, docs) {
             if (!err && docs) {
                 docs = findLocal(docs);
             }
@@ -51,7 +50,7 @@ iD.ui.TagReference = function(tag) {
                 body
                     .append('img')
                     .attr('class', 'wiki-image')
-                    .attr('src', docs.image.thumb_url_prefix + "100" + docs.image.thumb_url_suffix)
+                    .attr('src', docs.image.thumb_url_prefix + '100' + docs.image.thumb_url_suffix)
                     .on('load', function() { show(); })
                     .on('error', function() { d3.select(this).remove(); show(); });
             } else {
@@ -104,7 +103,7 @@ iD.ui.TagReference = function(tag) {
 
         var enter = button.enter().append('button')
             .attr('tabindex', -1)
-            .attr('class', 'tag-reference-button minor');
+            .attr('class', 'tag-reference-button');
 
         enter.append('span')
             .attr('class', 'icon inspect');
@@ -117,7 +116,9 @@ iD.ui.TagReference = function(tag) {
             } else if (loaded) {
                 show();
             } else {
-                load();
+                if (context.taginfo()) {
+                    load();
+                }
             }
         });
     };

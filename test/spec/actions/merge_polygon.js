@@ -1,14 +1,14 @@
 describe("iD.actions.MergePolygon", function () {
     
     function node(id, x, y) {
-        e[id] = iD.Node({ id: id, loc: [x, y] });
+        e.push(iD.Node({ id: id, loc: [x, y] }));
     }
 
     function way(id, nodes) {
-        e[id] = iD.Way({ id: id, nodes: nodes.map(function(n) { return 'n' + n; }) });
+        e.push(iD.Way({ id: id, nodes: nodes.map(function(n) { return 'n' + n; }) }));
     }
 
-    var e = {};
+    var e = [];
 
     node('n0', 0, 0);
     node('n1', 5, 0);
@@ -85,19 +85,50 @@ describe("iD.actions.MergePolygon", function () {
         expect(find(r, 'w5').role).to.equal('outer');
     });
 
-    it("moves all tags to the relation", function() {
-        graph = graph.replace(e.w0.update({ tags: { 'building': 'yes' }}));
-        graph = graph.replace(e.w1.update({ tags: { 'natural': 'water' }}));
-        graph = iD.actions.MergePolygon(['w0', 'w1'], 'r')(graph);
-        var r = graph.entity('r');
+    it("merges multipolygon tags", function() {
+        var graph = iD.Graph([
+            iD.Relation({id: 'r1', tags: {type: 'multipolygon', a: 'a'}}),
+            iD.Relation({id: 'r2', tags: {type: 'multipolygon', b: 'b'}})
+        ]);
+
+        graph = iD.actions.MergePolygon(['r1', 'r2'])(graph);
+
+        expect(graph.entity('r1').tags.a).to.equal('a');
+        expect(graph.entity('r1').tags.b).to.equal('b');
+    });
+
+    it("merges tags from closed outer ways", function() {
+        graph = graph.replace(graph.entity('w0').update({ tags: { 'building': 'yes' }}));
+        graph = iD.actions.MergePolygon(['w0', 'w5'], 'r')(graph);
         expect(graph.entity('w0').tags.building).to.equal(undefined);
-        expect(graph.entity('w1').tags.natural).to.equal(undefined);
-        expect(r.tags.natural).to.equal('water');
-        expect(r.tags.building).to.equal('yes');
+        expect(graph.entity('r').tags.building).to.equal('yes');
+    });
+
+    it("merges no tags from unclosed outer ways", function() {
+        graph = graph.replace(graph.entity('w3').update({ tags: { 'natural': 'water' }}));
+
+        var r1 = iD.Relation({id: 'r1', tags: {type: 'multipolygon'}});
+        var r2 = iD.Relation({id: 'r2', tags: {type: 'multipolygon'},
+            members: [
+                { type: 'way', role: 'outer', id: 'w3' },
+                { type: 'way', role: 'outer', id: 'w4' }
+            ]});
+
+        graph = graph.replace(r1).replace(r2);
+        graph = iD.actions.MergePolygon(['r1', 'r2'])(graph);
+        expect(graph.entity('w3').tags.natural).to.equal('water');
+        expect(graph.entity('r1').tags.natural).to.equal(undefined);
+    });
+
+    it("merges no tags from inner ways", function() {
+        graph = graph.replace(graph.entity('w1').update({ tags: { 'natural': 'water' }}));
+        graph = iD.actions.MergePolygon(['w0', 'w1'], 'r')(graph);
+        expect(graph.entity('w1').tags.natural).to.equal('water');
+        expect(graph.entity('r').tags.natural).to.equal(undefined);
     });
 
     it("doesn't copy area tags from ways", function() {
-        graph = graph.replace(e.w0.update({ tags: { 'area': 'yes' }}));
+        graph = graph.replace(graph.entity('w0').update({ tags: { 'area': 'yes' }}));
         graph = iD.actions.MergePolygon(['w0', 'w1'], 'r')(graph);
         var r = graph.entity('r');
         expect(r.tags.area).to.equal(undefined);

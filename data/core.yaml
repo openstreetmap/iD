@@ -13,7 +13,6 @@ en:
       description: "Add restaurants, monuments, postal boxes or other points to the map."
       tail: Click on the map to add a point.
     browse:
-
       title: Browse
       description: Pan and zoom the map.
     draw_area:
@@ -55,6 +54,8 @@ en:
         line: Made a line circular.
         area: Made an area circular.
       not_closed: This can't be made circular because it's not a loop.
+      too_large: This can't be made circular because not enough of it is currently visible.
+      connected_to_hidden: This can't be made circular because it is connected to a hidden feature.
     orthogonalize:
       title: Square
       description:
@@ -64,15 +65,19 @@ en:
       annotation:
         line: Squared the corners of a line.
         area: Squared the corners of an area.
+      not_squarish: This can't be made square because it is not squarish.
+      too_large: This can't be made square because not enough of it is currently visible.
+      connected_to_hidden: This can't be made square because it is connected to a hidden feature.
     straighten:
       title: Straighten
       description: Straighten this line.
       key: S
       annotation: Straightened a line.
       too_bendy: This can't be straightened because it bends too much.
+      connected_to_hidden: This line can't be straightened because it is connected to a hidden feature.
     delete:
       title: Delete
-      description: Remove this from the map.
+      description: Delete object permanently.
       annotation:
         point: Deleted a point.
         vertex: Deleted a node from a way.
@@ -81,6 +86,8 @@ en:
         relation: Deleted a relation.
         multiple: "Deleted {n} objects."
       incomplete_relation: This feature can't be deleted because it hasn't been fully downloaded.
+      part_of_relation: This feature can't be deleted because it's part of a larger relation. You must remove it from the relation first.
+      connected_to_hidden: This can't be deleted because it is connected to a hidden feature.
     add_member:
       annotation: Added a member to a relation.
     delete_member:
@@ -97,6 +104,7 @@ en:
       key: D
       annotation: Disconnected lines/areas.
       not_connected: There aren't enough lines/areas here to disconnect.
+      connected_to_hidden: This can't be disconnected because it is connected to a hidden feature.
     merge:
       title: Merge
       description: Merge these lines.
@@ -105,6 +113,7 @@ en:
       not_eligible: These features can't be merged.
       not_adjacent: These lines can't be merged because they aren't connected.
       restriction: These lines can't be merged because at least one is a member of a "{relation}" relation.
+      incomplete_relation: These features can't be merged because at least one hasn't been fully downloaded.
     move:
       title: Move
       description: Move this to a different location.
@@ -116,6 +125,8 @@ en:
         area: Moved an area.
         multiple: Moved multiple objects.
       incomplete_relation: This feature can't be moved because it hasn't been fully downloaded.
+      too_large: This can't be moved because not enough of it is currently visible.
+      connected_to_hidden: This can't be moved because it is connected to a hidden feature.
     rotate:
       title: Rotate
       description: Rotate this object around its center point.
@@ -123,6 +134,8 @@ en:
       annotation:
         line: Rotated a line.
         area: Rotated an area.
+      too_large: This can't be rotated because not enough of it is currently visible.
+      connected_to_hidden: This can't be rotated because it is connected to a hidden feature.
     reverse:
       title: Reverse
       description: Make this line go in the opposite direction.
@@ -141,6 +154,16 @@ en:
         multiple: "Split {n} lines/area boundaries."
       not_eligible: Lines can't be split at their beginning or end.
       multiple_ways: There are too many lines here to split.
+      connected_to_hidden: This can't be split because it is connected to a hidden feature.
+    restriction:
+      help:
+        select: Click to select a road segment.
+        toggle: Click to toggle turn restrictions.
+        toggle_on: 'Click to add a "{restriction}" restriction.'
+        toggle_off: 'Click to remove the "{restriction}" restriction.'
+      annotation:
+        create: Added a turn restriction
+        delete: Deleted a turn restriction
   undo:
     tooltip: "Undo: {action}"
     nothing: Nothing to undo.
@@ -158,6 +181,9 @@ en:
   logout: logout
   loading_auth: "Connecting to OpenStreetMap..."
   report_a_bug: report a bug
+  feature_info:
+    hidden_warning: "{count} hidden features"
+    hidden_details: "These features are currently hidden: {details}"
   status:
     error: Unable to connect to API.
     offline: The API is offline. Please try editing later.
@@ -170,6 +196,7 @@ en:
     upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
     save: Save
     cancel: Cancel
+    changes: "{count} Changes"
     warnings: Warnings
     modified: Modified
     deleted: Deleted
@@ -199,18 +226,84 @@ en:
     back_tooltip: Change feature
     remove: Remove
     search: Search
+    multiselect: Selected items
     unknown: Unknown
     incomplete: <not downloaded>
     feature_list: Search features
     edit: Edit feature
+    check:
+      "yes": "Yes"
+      "no": "No"
+    none: None
+    node: Node
+    way: Way
+    relation: Relation
+    location: Location
+    add_fields: "Add field:"
   background:
     title: Background
     description: Background settings
     percent_brightness: "{opacity}% brightness"
+    none: None
     custom: Custom
-    custom_prompt: "Enter a tile template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
-    fix_misalignment: Fix misalignment
+    custom_button: Edit custom background
+    custom_prompt: "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
+    fix_misalignment: Fix alignment
     reset: reset
+  map_data:
+    title: Map Data
+    description: Map Data
+    data_layers: Data Layers
+    fill_area: Fill Areas
+    map_features: Map Features
+    autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
+  feature:
+    points:
+      description: Points
+      tooltip: "Points of Interest"
+    major_roads:
+      description: Major Roads
+      tooltip: "Highways, Streets, etc."
+    minor_roads:
+      description: Minor Roads
+      tooltip: "Service Roads, Parking Aisles, Tracks, etc."
+    paths:
+      description: Paths
+      tooltip: "Sidewalks, Foot Paths, Cycle Paths, etc."
+    buildings:
+      description: Buildings
+      tooltip: "Buildings, Shelters, Garages, etc."
+    landuse:
+      description: Landuse Features
+      tooltip: "Forests, Farmland, Parks, Residential, Commercial, etc."
+    boundaries:
+      description: Boundaries
+      tooltip: "Administrative Boundaries"
+    water:
+      description: Water Features
+      tooltip: "Rivers, Lakes, Ponds, Basins, etc."
+    rail:
+      description: Rail Features
+      tooltip: "Railways"
+    power:
+      description: Power Features
+      tooltip: "Power Lines, Power Plants, Substations, etc."
+    past_future:
+      description: Past/Future
+      tooltip: "Proposed, Construction, Abandoned, Demolished, etc."
+    others:
+      description: Others
+      tooltip: "Everything Else"
+  area_fill:
+    wireframe:
+      description: No Fill (Wireframe)
+      tooltip: "Enabling wireframe mode makes it easy to see the background imagery."
+    partial:
+      description: Partial Fill
+      tooltip: "Areas are drawn with fill only around their inner edges. (Recommended for beginner mappers)"
+    full:
+      description: Full Fill
+      tooltip: "Areas are drawn fully filled."
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"
@@ -220,9 +313,33 @@ en:
     title: Save
     help: "Save changes to OpenStreetMap, making them visible to other users."
     no_changes: No changes to save.
-    error: An error occurred while trying to save
+    error: Errors occurred while trying to save
+    status_code: "Server returned status code {code}"
+    unknown_error_details: "Please ensure you are connected to the internet."
     uploading: Uploading changes to OpenStreetMap.
     unsaved_changes: You have unsaved changes
+    conflict:
+      header: Resolve conflicting edits
+      count: 'Conflict {num} of {total}'
+      previous: '< Previous'
+      next: 'Next >'
+      keep_local: Keep mine
+      keep_remote: Use theirs
+      restore: Restore
+      delete: Leave Deleted
+      download_changes: Or download your changes.
+      done: "All conflicts resolved!"
+      help: |
+        Another user changed some of the same map features you changed.
+        Click on each item below for more details about the conflict, and choose whether to keep
+        your changes or the other user's changes.
+  merge_remote_changes:
+    conflict:
+      deleted: 'This object has been deleted by {user}.'
+      location: 'This object was moved by both you and {user}.'
+      nodelist: 'Nodes were changed by both you and {user}.'
+      memberlist: 'Relation members were changed by both you and {user}.'
+      tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
   success:
     edited_osm: "Edited OSM!"
     just_edited: "You just edited OpenStreetMap!"
@@ -235,6 +352,7 @@ en:
       (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).
   confirm:
     okay: "Okay"
+    cancel: "Cancel"
   splash:
     welcome: Welcome to the iD OpenStreetMap editor
     text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}."
@@ -254,6 +372,9 @@ en:
     untagged_area: Untagged area
     many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org."
     tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area"
+    untagged_point_tooltip: "Select a feature type that describes what this point is."
+    untagged_line_tooltip: "Select a feature type that describes what this line is."
+    untagged_area_tooltip: "Select a feature type that describes what this area is."
     deprecated_tags: "Deprecated tags: {tags}"
   zoom:
     in: Zoom In
@@ -261,7 +382,13 @@ en:
   cannot_zoom: "Cannot zoom out further in current mode."
   gpx:
     local_layer: "Local GPX file"
-    drag_drop: "Drag and drop a .gpx file on the page"
+    drag_drop: "Drag and drop a .gpx file on the page, or click the button to the right to browse"
+    zoom: "Zoom to GPX track"
+    browse: "Browse for a .gpx file"
+  mapillary:
+    tooltip: "Street-level photos from Mapillary"
+    title: "Photo Overlay (Mapillary)"
+    view_on_mapillary: "View this image on Mapillary"
   help:
     title: "Help"
     help: |
@@ -273,11 +400,11 @@ en:
       better for everyone.
 
       Edits that you make on this map will be visible to everyone who uses
-      OpenStreetMap. In order to make an edit, you'll need a
-      [free OpenStreetMap account](https://www.openstreetmap.org/user/new).
+      OpenStreetMap. In order to make an edit, you'll need to
+      [log in](https://www.openstreetmap.org/login).
 
       The [iD editor](http://ideditor.com/) is a collaborative project with [source
-      code available on GitHub](https://github.com/systemed/iD).
+      code available on GitHub](https://github.com/openstreetmap/iD).
     editing_saving: |
       # Editing & Saving
 
@@ -382,8 +509,8 @@ en:
       [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).
 
       To use a GPX track for mapping, drag and drop the GPX file onto the map
-      editor. If it's recognized, it will be added to the map as a bright green
-      line. Click on the 'Background Settings' menu on the right side to enable,
+      editor. If it's recognized, it will be added to the map as a bright purple
+      line. Click on the 'Map Data' menu on the right side to enable,
       disable, or zoom to this new GPX-powered layer.
 
       The GPX track isn't directly uploaded to OpenStreetMap - the best way to
@@ -395,7 +522,7 @@ en:
 
       Aerial imagery is an important resource for mapping. A combination of
       airplane flyovers, satellite views, and freely-compiled sources are available
-      in the editor under the 'Background Settings' menu on the left.
+      in the editor under the 'Background Settings' menu on the right.
 
       By default a [Bing Maps](http://www.bing.com/maps/) satellite layer is
       presented in the editor, but as you pan and zoom the map to new geographical
@@ -423,8 +550,8 @@ en:
     inspector: |
       # Using the Inspector
 
-      The inspector is the user interface element on the right-hand side of the
-      page that appears when a feature is selected and allows you to edit its details.
+      The inspector is the section on the left side of the page that allows you to
+      edit the details of the selected feature.
 
       ### Selecting a Feature Type
 
@@ -452,11 +579,6 @@ en:
 
       Changes you make in the inspector are automatically applied to the map.
       You can undo them at any time by clicking the 'Undo' button.
-
-      ### Closing the Inspector
-
-      You can close the inspector by clicking the close button in the top-right,
-      pressing the 'Escape' key, or clicking on the map.
     buildings: |
       # Buildings
 
@@ -558,7 +680,7 @@ en:
       delete: "The menu around the point contains operations that can be performed on it, including delete. **Delete the point.**"
     areas:
       title: "Areas"
-      add: "Areas are a more detailed way to represent features. They provide information on the boundaries of the feature. Areas can be used for most feature types points can be used for, and are often preferred. **Click the Area button to add a new area.**"
+      add: "Areas are used to show the boundaries of features like lakes, buildings, and residential areas. They can be also be used for more detailed mapping of many features you might normally map as points. **Click the Area button to add a new area.**"
       corner: "Areas are drawn by placing nodes that mark the boundary of the area. **Place the starting node on one of the corners of the playground.**"
       place: "Draw the area by placing more nodes. Finish the area by clicking on the starting node. **Draw an area for the playground.**"
       search: "**Search for '{name}'.**"

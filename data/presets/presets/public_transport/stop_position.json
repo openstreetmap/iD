@@ -1,0 +1,15 @@
+{
+    "icon": "bus",
+    "fields": [
+        "ref",
+        "network",
+        "operator"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "public_transport": "stop_position"
+    },
+    "name": "Stop Position"
+}

@@ -1,7 +1,8 @@
 {
     "icon": "tennis",
     "fields": [
-        "surface"
+        "surface",
+        "lit"
     ],
     "geometry": [
         "point",

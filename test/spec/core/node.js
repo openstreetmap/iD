@@ -14,7 +14,7 @@ describe('iD.Node', function () {
 
     describe("#extent", function() {
         it("returns a point extent", function() {
-            expect(iD.Node({loc: [5, 10]}).extent()).to.eql([[5, 10], [5, 10]]);
+            expect(iD.Node({loc: [5, 10]}).extent().equals([[5, 10], [5, 10]])).to.be.ok;
         });
     });
 
@@ -52,12 +52,30 @@ describe('iD.Node', function () {
             expect(node.isIntersection(graph)).to.equal(true);
         });
 
-        it("returns true for a node shared by more two non-highways", function () {
+        it("returns true for a node shared by more than one waterway", function () {
             var node = iD.Node(),
-                w1 = iD.Way({nodes: [node.id]}),
-                w2 = iD.Way({nodes: [node.id]}),
+                w1 = iD.Way({nodes: [node.id], tags: {waterway: 'river'}}),
+                w2 = iD.Way({nodes: [node.id], tags: {waterway: 'river'}}),
                 graph = iD.Graph([node, w1, w2]);
-            expect(node.isIntersection(graph)).to.equal(false);
+            expect(node.isIntersection(graph)).to.equal(true);
+        });
+    });
+
+    describe("#isHighwayIntersection", function () {
+        it("returns true for a node shared by more than one highway", function () {
+            var node = iD.Node(),
+                w1 = iD.Way({nodes: [node.id], tags: {highway: 'residential'}}),
+                w2 = iD.Way({nodes: [node.id], tags: {highway: 'residential'}}),
+                graph = iD.Graph([node, w1, w2]);
+            expect(node.isHighwayIntersection(graph)).to.equal(true);
+        });
+
+        it("returns false for a node shared by more than one waterway", function () {
+            var node = iD.Node(),
+                w1 = iD.Way({nodes: [node.id], tags: {waterway: 'river'}}),
+                w2 = iD.Way({nodes: [node.id], tags: {waterway: 'river'}}),
+                graph = iD.Graph([node, w1, w2]);
+            expect(node.isHighwayIntersection(graph)).to.equal(false);
         });
     });
 
@@ -78,14 +96,12 @@ describe('iD.Node', function () {
     });
 
     describe("#asGeoJSON", function () {
-        it("converts to a GeoJSON Point features", function () {
+        it("converts to a GeoJSON Point geometry", function () {
             var node = iD.Node({tags: {amenity: 'cafe'}, loc: [1, 2]}),
                 json = node.asGeoJSON();
 
-            expect(json.type).to.equal('Feature');
-            expect(json.properties).to.eql({amenity: 'cafe'});
-            expect(json.geometry.type).to.equal('Point');
-            expect(json.geometry.coordinates).to.eql([1, 2]);
+            expect(json.type).to.equal('Point');
+            expect(json.coordinates).to.eql([1, 2]);
         });
     });
 });

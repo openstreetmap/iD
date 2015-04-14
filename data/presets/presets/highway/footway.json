@@ -1,37 +1,20 @@
 {
     "icon": "highway-footway",
     "fields": [
+        "surface",
+        "lit",
+        "width",
         "structure",
-        "access",
-        "surface"
+        "access"
     ],
     "geometry": [
         "line", "area"
     ],
     "terms": [
-        "beaten path",
-        "boulevard",
-        "clearing",
-        "course",
-        "cut*",
-        "drag*",
-        "footpath",
-        "highway",
-        "lane",
-        "line",
-        "orbit",
-        "passage",
-        "pathway",
-        "rail",
-        "rails",
-        "road",
-        "roadway",
-        "route",
-        "street",
-        "thoroughfare",
+        "hike",
+        "hiking",
         "trackway",
         "trail",
-        "trajectory",
         "walk"
     ],
     "tags": {

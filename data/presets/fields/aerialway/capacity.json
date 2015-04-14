@@ -1,0 +1,6 @@
+{
+    "key": "aerialway:capacity",
+    "type": "number",
+    "label": "Capacity (per hour)",
+    "placeholder": "500, 2500, 5000..."
+}

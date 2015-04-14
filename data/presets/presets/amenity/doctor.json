@@ -1,0 +1,19 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "medic*"
+    ],
+    "tags": {
+        "amenity": "doctors"
+    },
+    "name": "Doctor"
+}

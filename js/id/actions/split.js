@@ -15,19 +15,70 @@
 iD.actions.Split = function(nodeId, newWayIds) {
     var wayIds;
 
+    // if the way is closed, we need to search for a partner node
+    // to split the way at.
+    //
+    // The following looks for a node that is both far away from
+    // the initial node in terms of way segment length and nearby
+    // in terms of beeline-distance. This assures that areas get
+    // split on the most "natural" points (independent of the number
+    // of nodes).
+    // For example: bone-shaped areas get split across their waist
+    // line, circles across the diameter.
+    function splitArea(nodes, idxA, graph) {
+        var lengths = new Array(nodes.length),
+            length,
+            i,
+            best = 0,
+            idxB;
+
+        function wrap(index) {
+            return iD.util.wrap(index, nodes.length);
+        }
+
+        function dist(nA, nB) {
+            return iD.geo.sphericalDistance(graph.entity(nA).loc, graph.entity(nB).loc);
+        }
+
+        // calculate lengths
+        length = 0;
+        for (i = wrap(idxA+1); i !== idxA; i = wrap(i+1)) {
+            length += dist(nodes[i], nodes[wrap(i-1)]);
+            lengths[i] = length;
+        }
+
+        length = 0;
+        for (i = wrap(idxA-1); i !== idxA; i = wrap(i-1)) {
+            length += dist(nodes[i], nodes[wrap(i+1)]);
+            if (length < lengths[i])
+                lengths[i] = length;
+        }
+
+        // determine best opposite node to split
+        for (i = 0; i < nodes.length; i++) {
+            var cost = lengths[i] / dist(nodes[idxA], nodes[i]);
+            if (cost > best) {
+                idxB = i;
+                best = cost;
+            }
+        }
+
+        return idxB;
+    }
+
     function split(graph, wayA, newWayId) {
         var wayB = iD.Way({id: newWayId, tags: wayA.tags}),
             nodesA,
             nodesB,
-            isArea = wayA.isArea();
+            isArea = wayA.isArea(),
+            isOuter = iD.geo.isSimpleMultipolygonOuterMember(wayA, graph);
 
         if (wayA.isClosed()) {
             var nodes = wayA.nodes.slice(0, -1),
                 idxA = _.indexOf(nodes, nodeId),
-                idxB = idxA + Math.floor(nodes.length / 2);
+                idxB = splitArea(nodes, idxA, graph);
 
-            if (idxB >= nodes.length) {
-                idxB %= nodes.length;
+            if (idxB < idxA) {
                 nodesA = nodes.slice(idxA).concat(nodes.slice(0, idxB + 1));
                 nodesB = nodes.slice(idxB, idxA + 1);
             } else {
@@ -54,24 +105,23 @@ iD.actions.Split = function(nodeId, newWayIds) {
                     graph = graph.replace(relation);
                 }
             } else {
-                var role = relation.memberById(wayA.id).role,
-                    last = wayB.last(),
-                    i = relation.memberById(wayA.id).index,
-                    j;
-
-                for (j = 0; j < relation.members.length; j++) {
-                    var entity = graph.hasEntity(relation.members[j].id);
-                    if (entity && entity.type === 'way' && entity.contains(last)) {
-                        break;
-                    }
+                if (relation === isOuter) {
+                    graph = graph.replace(relation.mergeTags(wayA.tags));
+                    graph = graph.replace(wayA.update({tags: {}}));
+                    graph = graph.replace(wayB.update({tags: {}}));
                 }
 
-                relation = relation.addMember({id: wayB.id, type: 'way', role: role}, i <= j ? i + 1 : i);
-                graph = graph.replace(relation);
+                var member = {
+                    id: wayB.id,
+                    type: 'way',
+                    role: relation.memberById(wayA.id).role
+                };
+
+                graph = iD.actions.AddMember(relation.id, member)(graph);
             }
         });
 
-        if (isArea) {
+        if (!isOuter && isArea) {
             var multipolygon = iD.Relation({
                 tags: _.extend({}, wayA.tags, {type: 'multipolygon'}),
                 members: [
@@ -97,10 +147,14 @@ iD.actions.Split = function(nodeId, newWayIds) {
 
     action.ways = function(graph) {
         var node = graph.entity(nodeId),
-            parents = graph.parentWays(node);
+            parents = graph.parentWays(node),
+            hasLines = _.any(parents, function(parent) { return parent.geometry(graph) === 'line'; });
 
         return parents.filter(function(parent) {
             if (wayIds && wayIds.indexOf(parent.id) === -1)
+                return false;
+
+            if (!wayIds && hasLines && parent.geometry(graph) !== 'line')
                 return false;
 
             if (parent.isClosed()) {

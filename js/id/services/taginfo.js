@@ -1,6 +1,6 @@
 iD.taginfo = function() {
     var taginfo = {},
-        endpoint = 'http://taginfo.openstreetmap.org/api/4/',
+        endpoint = 'https://taginfo.openstreetmap.org/api/4/',
         tag_sorts = {
             point: 'count_nodes',
             vertex: 'count_nodes',
@@ -86,7 +86,7 @@ iD.taginfo = function() {
 
     taginfo.keys = function(parameters, callback) {
         var debounce = parameters.debounce;
-        parameters = clean(shorten(setSort(setFilter(parameters))));
+        parameters = clean(shorten(setSort(parameters)));
         request(endpoint + 'keys/all?' +
             iD.util.qsString(_.extend({
                 rp: 10,
@@ -104,7 +104,7 @@ iD.taginfo = function() {
         parameters = clean(shorten(setSort(setFilter(parameters))));
         request(endpoint + 'key/values?' +
             iD.util.qsString(_.extend({
-                rp: 20,
+                rp: 25,
                 sortname: 'count_all',
                 sortorder: 'desc',
                 page: 1
@@ -117,7 +117,12 @@ iD.taginfo = function() {
     taginfo.docs = function(parameters, callback) {
         var debounce = parameters.debounce;
         parameters = clean(setSort(parameters));
-        request(endpoint + (parameters.value ? 'tag/wiki_pages?' : 'key/wiki_pages?') +
+
+        var path = 'key/wiki_pages?';
+        if (parameters.value) path = 'tag/wiki_pages?';
+        else if (parameters.rtype) path = 'relation/wiki_pages?';
+
+        request(endpoint + path +
             iD.util.qsString(parameters), debounce, callback);
     };
 

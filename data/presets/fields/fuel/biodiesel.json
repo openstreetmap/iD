@@ -1,0 +1,5 @@
+{
+    "key": "fuel:biodiesel",
+    "type": "check",
+    "label": "Sells Biodiesel"
+}

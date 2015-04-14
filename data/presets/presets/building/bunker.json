@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "address",
+        "levels"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "building": "bunker"
+    },
+    "name": "Bunker",
+    "searchable": false
+}

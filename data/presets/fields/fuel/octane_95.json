@@ -1,0 +1,5 @@
+{
+    "key": "fuel:octane_95",
+    "type": "check",
+    "label": "Sells Midgrade Gasoline"
+}

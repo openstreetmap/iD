@@ -4,7 +4,7 @@ describe("iD.svg.Points", function () {
         context;
 
     beforeEach(function () {
-        context = iD();
+        context = iD().presets(iD.data.presets);
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
             .call(iD.svg.Surface(context));
     });

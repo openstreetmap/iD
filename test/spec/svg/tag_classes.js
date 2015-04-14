@@ -12,11 +12,32 @@ describe("iD.svg.TagClasses", function () {
         expect(selection.attr('class')).to.equal(null);
     });
 
-    it('adds classes for highway tags', function() {
+    it('adds classes for primary tag key and key-value', function() {
         selection
             .datum(iD.Entity({tags: {highway: 'primary'}}))
             .call(iD.svg.TagClasses());
         expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
+    });
+
+    it('adds only one primary tag', function() {
+        selection
+            .datum(iD.Entity({tags: {highway: 'primary', railway: 'abandoned'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
+    });
+
+    it('orders primary tags', function() {
+        selection
+            .datum(iD.Entity({tags: {railway: 'abandoned', highway: 'primary'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
+    });
+
+    it('adds secondary tags', function() {
+        selection
+            .datum(iD.Entity({tags: {highway: 'primary', bridge: 'yes'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary tag-bridge tag-bridge-yes');
     });
 
     it('adds no bridge=no tags', function() {

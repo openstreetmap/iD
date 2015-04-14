@@ -3,9 +3,10 @@
     "fields": [
         "surface",
         "lit",
+        "width",
+        "oneway",
         "structure",
-        "access",
-        "oneway"
+        "access"
     ],
     "geometry": [
         "line"
@@ -13,6 +14,8 @@
     "tags": {
         "highway": "cycleway"
     },
-    "terms": [],
+    "terms": [
+        "bike"
+    ],
     "name": "Cycle Path"
 }

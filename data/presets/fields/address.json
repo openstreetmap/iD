@@ -7,16 +7,25 @@
         "addr:city",
         "addr:postcode"
     ],
+    "reference": {"key": "addr"},
     "icon": "address",
     "universal": true,
     "label": "Address",
     "strings": {
         "placeholders": {
           "housename": "Housename",
-          "number": "123",
+          "housenumber": "123",
           "street": "Street",
           "city": "City",
-          "postcode": "Postal code"
+          "postcode": "Postcode",
+          "place": "Place",
+          "hamlet": "Hamlet",
+          "suburb": "Suburb",
+          "subdistrict": "Subdistrict",
+          "district": "District",
+          "province": "Province",
+          "state": "State",
+          "country": "Country"
         }
     }
 }

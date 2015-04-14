@@ -1,0 +1,22 @@
+{
+    "icon": "shop",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "milk",
+        "egg",
+        "cheese"
+    ],
+    "tags": {
+        "shop": "dairy"
+    },
+    "name": "Dairy Store"
+}

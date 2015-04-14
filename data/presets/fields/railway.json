@@ -1,5 +1,5 @@
 {
     "key": "railway",
-    "type": "combo",
+    "type": "typeCombo",
     "label": "Type"
 }

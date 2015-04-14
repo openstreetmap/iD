@@ -3,5 +3,6 @@
     "tags": {
         "area": "yes"
     },
-    "geometry": ["area"]
+    "geometry": ["area"],
+    "matchScore": 0.1
 }

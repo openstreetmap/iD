@@ -1,0 +1,21 @@
+{
+    "icon": "music",
+    "fields": [
+        "studio_type",
+        "address",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "recording",
+        "radio",
+        "television"
+    ],
+    "tags": {
+        "amenity": "studio"
+    },
+    "name": "Studio"
+}

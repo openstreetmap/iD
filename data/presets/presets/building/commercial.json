@@ -1,8 +1,12 @@
 {
     "icon": "commercial",
+    "fields": [
+        "address",
+        "levels",
+        "smoking"
+    ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

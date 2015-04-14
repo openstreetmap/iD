@@ -4,6 +4,10 @@ iD.ui.Modes = function(context) {
         iD.modes.AddLine(context),
         iD.modes.AddArea(context)];
 
+    function editable() {
+        return context.editable() && context.mode().id !== 'save';
+    }
+
     return function(selection) {
         var buttons = selection.selectAll('button.add-button')
             .data(modes);
@@ -31,8 +35,6 @@ iD.ui.Modes = function(context) {
         context
             .on('enter.modes', update);
 
-        update();
-
         buttons.append('span')
             .attr('class', function(mode) { return mode.id + ' icon icon-pre-text'; });
 
@@ -43,25 +45,25 @@ iD.ui.Modes = function(context) {
         context.on('enter.editor', function(entered) {
             buttons.classed('active', function(mode) { return entered.button === mode.button; });
             context.container()
-                .classed("mode-" + entered.id, true);
+                .classed('mode-' + entered.id, true);
         });
 
         context.on('exit.editor', function(exited) {
             context.container()
-                .classed("mode-" + exited.id, false);
+                .classed('mode-' + exited.id, false);
         });
 
         var keybinding = d3.keybinding('mode-buttons');
 
         modes.forEach(function(m) {
-            keybinding.on(m.key, function() { if (context.editable()) context.enter(m); });
+            keybinding.on(m.key, function() { if (editable()) context.enter(m); });
         });
 
         d3.select(document)
             .call(keybinding);
 
         function update() {
-            buttons.property('disabled', !context.editable());
+            buttons.property('disabled', !editable());
         }
     };
 };

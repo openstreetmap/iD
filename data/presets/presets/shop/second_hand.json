@@ -1,0 +1,24 @@
+{
+    "icon": "shop",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "secondhand",
+        "second hand",
+        "resale",
+        "thrift",
+        "used"
+    ],
+    "tags": {
+        "shop": "second_hand"
+    },
+    "name": "Consignment/Thrift Store"
+}

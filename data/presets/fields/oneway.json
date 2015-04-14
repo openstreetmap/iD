@@ -1,5 +1,12 @@
 {
     "key": "oneway",
     "type": "check",
-    "label": "One Way"
+    "label": "One Way",
+    "strings": {
+        "options": {
+            "undefined": "Assumed to be No",
+            "yes": "Yes",
+            "no": "No"
+        }
+    }
 }

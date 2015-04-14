@@ -1,11 +1,14 @@
 {
+    "fields": [
+        "capacity"
+    ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "building": "garage"
     },
-    "name": "Garage"
+    "name": "Garage",
+    "icon": "warehouse"
 }

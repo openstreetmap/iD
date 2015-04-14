@@ -1,0 +1,16 @@
+{
+    "icon": "building",
+    "fields": [
+        "address",
+        "levels",
+        "smoking"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "building": "hotel"
+    },
+    "name": "Hotel Building"
+}

@@ -3,9 +3,11 @@ var fs = require('fs'),
     glob = require('glob'),
     YAML = require('js-yaml'),
     _ = require('./js/lib/lodash'),
+    d3 = require('d3'),
     jsonschema = require('jsonschema'),
     fieldSchema = require('./data/presets/schema/field.json'),
-    presetSchema = require('./data/presets/schema/preset.json');
+    presetSchema = require('./data/presets/schema/preset.json'),
+    suggestions = require('./data/name-suggestions.json');
 
 function readtxt(f) {
     return fs.readFileSync(f, 'utf8');
@@ -58,7 +60,7 @@ function generateCategories() {
 
         categories[id] = field;
     });
-    fs.writeFileSync('data/presets/categories.json', stringify(categories));
+    return categories;
 }
 
 function generateFields() {
@@ -85,11 +87,56 @@ function generateFields() {
 
         fields[id] = field;
     });
-    fs.writeFileSync('data/presets/fields.json', stringify(fields));
+    return fields;
+}
+
+function suggestionsToPresets(presets) {
+    var existing = {};
+
+    for (var key in suggestions) {
+        for (var value in suggestions[key]) {
+            for (var name in suggestions[key][value]) {
+                var item = key + '/' + value + '/' + name,
+                    tags = {},
+                    count = suggestions[key][value][name].count;
+
+                if (existing[name] && count > existing[name].count) {
+                    delete presets[existing[name].category];
+                    delete existing[name];
+                }
+                if (!existing[name]) {
+                    tags = _.extend({name: name}, suggestions[key][value][name].tags);
+                    addSuggestion(item, tags, name, count);
+                }
+            }
+        }
+    }
+
+    function addSuggestion(category, tags, name, count) {
+        var tag = category.split('/'),
+            parent = presets[tag[0] + '/' + tag[1]];
+
+        presets[category] = {
+            tags: parent.tags ? _.merge(tags, parent.tags) : tags,
+            name: name,
+            icon: parent.icon,
+            geometry: parent.geometry,
+            fields: parent.fields,
+            suggestion: true
+        };
+
+        existing[name] = {
+            category: category,
+            count: count
+        };
+    }
+
+    return presets;
 }
 
 function generatePresets() {
     var presets = {};
+
     glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
         var preset = read(file),
             id = file.match(/presets\/presets\/([^.]*)\.json/)[1];
@@ -100,23 +147,100 @@ function generatePresets() {
             name: preset.name,
             terms: (preset.terms || []).join(',')
         };
-
         presets[id] = preset;
     });
 
-    fs.writeFileSync('data/presets/presets.json', stringify(presets));
+    presets = _.merge(presets, suggestionsToPresets(presets));
 
     var presetsYaml = _.cloneDeep(translations);
     _.forEach(presetsYaml.presets, function(preset) {
         preset.terms = "<translate with synonyms or related terms for '" + preset.name + "', separated by commas>"
     });
 
-    fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: presetsYaml}}));
+    return {
+        presets: presets,
+        presetsYaml: presetsYaml
+    };
 }
 
-generateCategories();
-generateFields();
-generatePresets();
+function validateCategoryPresets(categories, presets) {
+    _.forEach(categories, function(category) {
+        if (category.members) {
+            category.members.forEach(function(preset) {
+                if (presets[preset] === undefined) {
+                    console.error('Unknown preset: ' + preset + ' in category ' + category.name);
+                    process.exit(1);
+                }
+            });
+        }
+    });
+}
+
+function validatePresetFields(presets, fields) {
+    var presets = rp('presets.json'),
+        fields = rp('fields.json');
+    _.forEach(presets, function(preset) {
+        if (preset.fields) {
+            preset.fields.forEach(function(field) {
+                if (fields[field] === undefined) {
+                    console.error('Unknown preset field: ' + field + ' in preset ' + preset.name);
+                    process.exit(1);
+                }
+            });
+        }
+    });
+}
+
+var categories = generateCategories(),
+    fields = generateFields(),
+    presets = generatePresets();
+
+// additional consistency checks
+validateCategoryPresets(categories, presets.presets);
+validatePresetFields(presets.presets, fields);
+
+// Save individual data files
+fs.writeFileSync('data/presets/categories.json', stringify(categories));
+fs.writeFileSync('data/presets/fields.json', stringify(fields));
+fs.writeFileSync('data/presets/presets.json', stringify(presets.presets));
+fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: presets.presetsYaml}}));
+
+// Write taginfo data
+var taginfo = {
+    "data_format": 1,
+    "data_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/data/taginfo.json",
+    "project": {
+        "name": "iD Editor",
+        "description": "Online editor for OSM data.",
+        "project_url": "https://github.com/openstreetmap/iD",
+        "doc_url": "https://github.com/openstreetmap/iD/blob/master/data/presets/README.md",
+        "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/dist/img/logo.png",
+        "keywords": [
+            "editor"
+        ]
+    },
+    "tags": []
+};
+
+_.forEach(presets.presets, function(preset) {
+    if (preset.suggestion)
+        return;
+
+    var keys = Object.keys(preset.tags),
+        last = keys[keys.length - 1],
+        tag = {key: last};
+
+    if (!last)
+        return;
+
+    if (preset.tags[last] !== '*') {
+        tag.value = preset.tags[last];
+    }
+
+    taginfo.tags.push(tag);
+});
+
+fs.writeFileSync('data/taginfo.json', stringify(taginfo));
 
 // Push changes from data/core.yaml into en.json
 var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
@@ -127,17 +251,21 @@ fs.writeFileSync('dist/locales/en.json', stringify(en.en));
 fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     deprecated: r('deprecated.json'),
     discarded: r('discarded.json'),
-    imagery: r('imagery.json'),
     wikipedia: r('wikipedia.json'),
-    presets: {
-        presets: rp('presets.json'),
-        defaults: rp('defaults.json'),
-        categories: rp('categories.json'),
-        fields: rp('fields.json')
-    },
     imperial: r('imperial.json'),
     featureIcons: r('feature-icons.json'),
     operations: r('operations-sprite.json'),
     locales: r('locales.json'),
-    en: read('dist/locales/en.json')
+    en: read('dist/locales/en.json'),
+    suggestions: r('name-suggestions.json'),
+    addressFormats: r('address-formats.json')
 }) + ';');
+
+fs.writeFileSync('dist/presets.js', 'iD.data.presets = ' + stringify({
+    presets: rp('presets.json'),
+    defaults: rp('defaults.json'),
+    categories: rp('categories.json'),
+    fields: rp('fields.json')
+}) + ';');
+
+fs.writeFileSync('dist/imagery.js', 'iD.data.imagery = ' + stringify(r('imagery.json')) + ';');

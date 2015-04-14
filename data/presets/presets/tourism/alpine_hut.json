@@ -2,11 +2,11 @@
     "icon": "lodging",
     "fields": [
         "operator",
-        "address"
+        "address",
+        "building_area"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

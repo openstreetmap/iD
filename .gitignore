@@ -1,4 +1,8 @@
+.DS_Store
+node_modules
 dist/iD.js
 dist/iD.min.js
 dist/iD.css
+dist/presets.js
+dist/imagery.js
 transifex.auth

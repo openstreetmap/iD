@@ -1,0 +1,14 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "highway": "rest_area"
+    },
+    "terms": [
+        "rest stop"
+    ],
+    "name": "Rest Area"
+}

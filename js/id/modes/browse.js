@@ -3,11 +3,11 @@ iD.modes.Browse = function(context) {
         button: 'browse',
         id: 'browse',
         title: t('modes.browse.title'),
-        description: t('modes.browse.description'),
-        key: '1'
+        description: t('modes.browse.description')
     }, sidebar;
 
     var behaviors = [
+        iD.behavior.Paste(context),
         iD.behavior.Hover(context)
             .on('hover', context.ui().sidebar.hover),
         iD.behavior.Select(context),
@@ -15,14 +15,12 @@ iD.modes.Browse = function(context) {
         iD.modes.DragNode(context).behavior];
 
     mode.enter = function() {
-        context.save();
-
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });
 
         // Get focus on the body.
-        if (document.activeElement) {
+        if (document.activeElement && document.activeElement.blur) {
             document.activeElement.blur();
         }
 

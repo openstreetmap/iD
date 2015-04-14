@@ -16,11 +16,30 @@ var censor = {
     "Skobbler": true,
 
     "Stadtplan Z\u00fcrich": true, // https://github.com/osmlab/editor-imagery-index/issues/14
-    "Public Transport (\u00d6PNV)": true // https://github.com/osmlab/editor-imagery-index/issues/15
+    "Public Transport (\u00d6PNV)": true, // https://github.com/osmlab/editor-imagery-index/issues/15
+
+    "TIGER 2012 Roads Overlay": true, // https://github.com/openstreetmap/iD/pull/2010,
+
+    "Waymarked Trails: Cycling": true,
+    "Waymarked Trails: Hiking": true,
+    "Waymarked Trails: MTB": true,
+    "Waymarked Trails: Skating": true,
+    "Waymarked Trails: Winter Sports": true,
+
+    "OSM Inspector: Geometry": true,
+    "OSM Inspector: Highways": true,
+    "OSM Inspector: Multipolygon": true,
+    "OSM Inspector: Places": true,
+    "OSM Inspector: Tagging": true,
+    "OSM Inspector: Addresses (EU)": true,
+    "OSM Inspector: Boundaries (EU)": true,
+    "OSM Inspector: Routing (EU)": true,
+
+    "QA No Address": true
 };
 
-var description = {
-    'MapBox Satellite': 'Satellite and aerial imagery.',
+var descriptions = {
+    'Mapbox Satellite': 'Satellite and aerial imagery.',
     'OpenStreetMap (Mapnik)': 'The default OpenStreetMap layer.',
     'TIGER 2012 Roads Overlay': 'Public domain road data from the US Government.',
     'Bing aerial imagery': 'Satellite and aerial imagery.',
@@ -38,7 +57,8 @@ sources.forEach(function(source) {
         type: source.type
     };
 
-    if (description[im.name]) im.description = description[im.name];
+    var description = source.description || descriptions[im.name];
+    if (description) im.description = description;
 
     im.template = source.url;
 
@@ -63,12 +83,19 @@ sources.forEach(function(source) {
         ]];
     }
 
+    if (source.name == 'Locator Overlay') {
+        im.overzoom = false;
+    }
+
     var attribution = source.attribution || {};
     if (attribution.url) {
         im.terms_url = attribution.url;
     }
     if (attribution.text) {
         im.terms_text = attribution.text;
+    }
+    if (attribution.html) {
+        im.terms_html = attribution.html;
     }
 
     ['id', 'default', 'overlay'].forEach(function(a) {

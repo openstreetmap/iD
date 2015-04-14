@@ -1,12 +1,12 @@
 {
+    "icon": "town-hall",
     "fields": [
         "operator",
-        "building_area",
-        "address"
+        "address",
+        "building_area"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

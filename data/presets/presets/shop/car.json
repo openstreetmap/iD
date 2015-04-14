@@ -1,14 +1,17 @@
 {
-    "icon": "shop",
+    "icon": "car",
     "fields": [
+        "operator",
         "address",
         "building_area",
         "opening_hours"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
+    ],
+    "terms": [
+        "auto"
     ],
     "tags": {
         "shop": "car"

@@ -1,5 +1,5 @@
 {
     "key": "man_made",
-    "type": "combo",
+    "type": "typeCombo",
     "label": "Type"
 }

@@ -1,12 +1,11 @@
 {
     "fields": [
         "operator",
-        "building_area",
-        "address"
+        "address",
+        "opening_hours"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

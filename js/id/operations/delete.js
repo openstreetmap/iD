@@ -27,8 +27,8 @@ iD.operations.Delete = function(selectedIDs, context) {
                 } else if (i === nodes.length - 1) {
                     i--;
                 } else {
-                    var a = iD.geo.dist(entity.loc, context.entity(nodes[i - 1]).loc),
-                        b = iD.geo.dist(entity.loc, context.entity(nodes[i + 1]).loc);
+                    var a = iD.geo.sphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc),
+                        b = iD.geo.sphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
                     i = a < b ? i - 1 : i + 1;
                 }
 
@@ -36,15 +36,15 @@ iD.operations.Delete = function(selectedIDs, context) {
             }
         }
 
-        context.perform(
-            action,
-            annotation);
-
         if (nextSelectedID && context.hasEntity(nextSelectedID)) {
             context.enter(iD.modes.Select(context, [nextSelectedID]));
         } else {
             context.enter(iD.modes.Browse(context));
         }
+
+        context.perform(
+            action,
+            annotation);
     };
 
     operation.available = function() {
@@ -52,7 +52,11 @@ iD.operations.Delete = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        return action.disabled(context.graph());
+        var reason;
+        if (_.any(selectedIDs, context.hasHiddenConnections)) {
+            reason = 'connected_to_hidden';
+        }
+        return action.disabled(context.graph()) || reason;
     };
 
     operation.tooltip = function() {
@@ -62,7 +66,7 @@ iD.operations.Delete = function(selectedIDs, context) {
             t('operations.delete.description');
     };
 
-    operation.id = "delete";
+    operation.id = 'delete';
     operation.keys = [iD.ui.cmd('⌘⌫'), iD.ui.cmd('⌘⌦')];
     operation.title = t('operations.delete.title');
 

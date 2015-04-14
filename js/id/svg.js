@@ -13,29 +13,27 @@ iD.svg = {
         };
     },
 
+    Round: function () {
+        return d3.geo.transform({
+            point: function(x, y) { return this.stream.point(Math.floor(x), Math.floor(y)); }
+        });
+    },
+
     Path: function(projection, graph, polygon) {
         var cache = {},
-            path = d3.geo.path().projection(projection);
+            round = iD.svg.Round().stream,
+            clip = d3.geo.clipExtent().extent(projection.clipExtent()).stream,
+            project = projection.stream,
+            path = d3.geo.path()
+                .projection({stream: function(output) { return polygon ? project(round(output)) : project(clip(round(output))); }});
 
-        function result(entity) {
-            if (entity.id in cache) return cache[entity.id];
-
-            var buffer = '';
-
-            path.context({
-                beginPath: function() {},
-                moveTo: function(x, y) { buffer += 'M' + Math.floor(x) + ',' + Math.floor(y); },
-                lineTo: function(x, y) { buffer += 'L' + Math.floor(x) + ',' + Math.floor(y); },
-                arc: function() {},
-                closePath: function() { buffer += 'Z'; }
-            });
-
-            path(entity.asGeoJSON(graph, polygon));
-
-            return cache[entity.id] = buffer;
-        }
-
-        return result;
+        return function(entity) {
+            if (entity.id in cache) {
+                return cache[entity.id];
+            } else {
+                return cache[entity.id] = path(entity.asGeoJSON(graph)); // jshint ignore:line
+            }
+        };
     },
 
     OneWaySegments: function(projection, graph, dt) {
@@ -45,6 +43,7 @@ iD.svg = {
                 i = 0,
                 offset = dt,
                 segments = [],
+                viewport = iD.geo.Extent(projection.clipExtent()),
                 coordinates = graph.childNodes(entity).map(function(n) {
                     return n.loc;
                 });
@@ -63,9 +62,10 @@ iD.svg = {
                     b = [x, y];
 
                     if (a) {
-                        var span = iD.geo.dist(a, b) - offset;
+                        var extent = iD.geo.Extent(a).extend(b),
+                            span = iD.geo.euclideanDistance(a, b) - offset;
 
-                        if (span >= 0) {
+                        if (extent.intersects(viewport) && span >= 0) {
                             var angle = Math.atan2(b[1] - a[1], b[0] - a[0]),
                                 dx = dt * Math.cos(angle),
                                 dy = dt * Math.sin(angle),

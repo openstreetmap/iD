@@ -26,6 +26,101 @@ describe('iD.Relation', function () {
         expect(iD.Relation({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
 
+    describe("#copy", function () {
+        it("returns a new Relation", function () {
+            var r1 = iD.Relation({id: 'r1'}),
+                result = r1.copy(),
+                r2 = result[0];
+
+            expect(result).to.have.length(1);
+            expect(r2).to.be.an.instanceof(iD.Relation);
+            expect(r1).not.to.equal(r2);
+        });
+
+        it("keeps same members when deep = false", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w1 = iD.Way({id: 'w1', nodes: ['a','b','c','a']}),
+                r1 = iD.Relation({id: 'r1', members: [{id: 'w1', role: 'outer'}]}),
+                graph = iD.Graph([a, b, c, w1, r1]),
+                result = r1.copy(),
+                r1_copy = result[0];
+
+            expect(result).to.have.length(1);
+            expect(r1.members).to.deep.equal(r1_copy.members);
+        });
+
+        it("makes new members when deep = true", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w1 = iD.Way({id: 'w1', nodes: ['a','b','c','a']}),
+                r1 = iD.Relation({id: 'r1', members: [{id: 'w1', role: 'outer'}]}),
+                graph = iD.Graph([a, b, c, w1, r1]),
+                result = r1.copy(true, graph),
+                r1_copy = result[0];
+
+            expect(result).to.have.length(5);
+            expect(result[0]).to.be.an.instanceof(iD.Relation);
+            expect(result[1]).to.be.an.instanceof(iD.Way);
+            expect(result[2]).to.be.an.instanceof(iD.Node);
+            expect(result[3]).to.be.an.instanceof(iD.Node);
+            expect(result[4]).to.be.an.instanceof(iD.Node);
+
+            expect(r1_copy.members[0].id).not.to.equal(r1.members[0].id);
+            expect(r1_copy.members[0].role).to.equal(r1.members[0].role);
+        });
+
+        it("deep copies non-tree relation graphs without duplicating children", function () {
+            var w = iD.Way({id: 'w'}),
+                r1 = iD.Relation({id: 'r1', members: [{id: 'r2'}, {id: 'w'}]}),
+                r2 = iD.Relation({id: 'r2', members: [{id: 'w'}]}),
+                graph = iD.Graph([w, r1, r2]),
+                result = r1.copy(true, graph),
+                r1_copy = result[0],
+                r2_copy = result[1],
+                w_copy = result[2];
+
+            expect(result).to.have.length(3);
+            expect(r1_copy).to.be.an.instanceof(iD.Relation);
+            expect(r2_copy).to.be.an.instanceof(iD.Relation);
+            expect(w_copy).to.be.an.instanceof(iD.Way);
+
+            expect(r1_copy.members[0].id).to.equal(r2_copy.id);
+            expect(r1_copy.members[1].id).to.equal(r2_copy.members[0].id);
+        });
+
+        it("deep copies cyclical relation graphs without issue"); //, function () {
+        //     var r1 = iD.Relation({id: 'r1', members: [{id: 'r2'}]}),
+        //         r2 = iD.Relation({id: 'r2', members: [{id: 'r1'}]}),
+        //         graph = iD.Graph([r1, r2]),
+        //         result = r1.copy(true, graph),
+        //         r1_copy = result[0],
+        //         r2_copy = result[1];
+
+        //     expect(result).to.have.length(2);
+        //     expect(r1_copy).to.be.an.instanceof(iD.Relation);
+        //     expect(r2_copy).to.be.an.instanceof(iD.Relation);
+
+        //     var msg = 'r1_copy = ' + JSON.stringify(r1_copy) +
+        //               'r2_copy = ' + JSON.stringify(r2_copy);
+        //     expect(r1_copy.members[0].id).to.equal(r2_copy.id, msg);
+        //     expect(r2_copy.members[0].id).to.equal(r1_copy.id, msg);
+        // });
+
+        it("deep copies self-refrencing relations without issue"); //, function () {
+        //     var r1 = iD.Relation({id: 'r1', members: [{id: 'r1'}]}),
+        //         graph = iD.Graph([r1]),
+        //         result = r1.copy(true, graph),
+        //         r1_copy = result[0];
+
+        //     expect(result).to.have.length(1);
+        //     expect(r1_copy).to.be.an.instanceof(iD.Relation);
+        //     expect(r1_copy.members[0].id).to.equal(r1_copy.id);
+        // });
+    });
+
     describe("#extent", function () {
         it("returns the minimal extent containing the extents of all members", function () {
             var a = iD.Node({loc: [0, 0]}),
@@ -33,7 +128,7 @@ describe('iD.Relation', function () {
                 r = iD.Relation({members: [{id: a.id}, {id: b.id}]}),
                 graph = iD.Graph([a, b, r]);
 
-            expect(r.extent(graph)).to.eql([[0, 0], [5, 10]])
+            expect(r.extent(graph).equals([[0, 0], [5, 10]])).to.be.ok;
         });
 
         it("returns the known extent of incomplete relations", function () {
@@ -42,7 +137,13 @@ describe('iD.Relation', function () {
                 r = iD.Relation({members: [{id: a.id}, {id: b.id}]}),
                 graph = iD.Graph([a, r]);
 
-            expect(r.extent(graph)).to.eql([[0, 0], [0, 0]])
+            expect(r.extent(graph).equals([[0, 0], [0, 0]])).to.be.ok;
+        });
+
+        it("does not error on self-referencing relations", function () {
+            var r = iD.Relation();
+            r = r.addMember({id: r.id});
+            expect(r.extent(iD.Graph([r]))).to.eql(iD.geo.Extent());
         });
     });
 
@@ -204,7 +305,7 @@ describe('iD.Relation', function () {
     });
 
     describe("#asGeoJSON", function (){
-        it('converts a multipolygon to a GeoJSON MultiPolygon feature', function() {
+        it('converts a multipolygon to a GeoJSON MultiPolygon geometry', function() {
             var a = iD.Node({loc: [1, 1]}),
                 b = iD.Node({loc: [3, 3]}),
                 c = iD.Node({loc: [2, 2]}),
@@ -213,10 +314,8 @@ describe('iD.Relation', function () {
                 g = iD.Graph([a, b, c, w, r]),
                 json = r.asGeoJSON(g);
 
-            expect(json.type).to.equal('Feature');
-            expect(json.properties).to.eql({type: 'multipolygon'});
-            expect(json.geometry.type).to.equal('MultiPolygon');
-            expect(json.geometry.coordinates).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
+            expect(json.type).to.equal('MultiPolygon');
+            expect(json.coordinates).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         it('forces clockwise winding order for outer multipolygon ways', function() {
@@ -228,7 +327,7 @@ describe('iD.Relation', function () {
                 g = iD.Graph([a, b, c, w, r]),
                 json = r.asGeoJSON(g);
 
-            expect(json.geometry.coordinates[0][0]).to.eql([a.loc, b.loc, c.loc, a.loc]);
+            expect(json.coordinates[0][0]).to.eql([a.loc, b.loc, c.loc, a.loc]);
         });
 
         it('forces counterclockwise winding order for inner multipolygon ways', function() {
@@ -470,6 +569,22 @@ describe('iD.Relation', function () {
                 g  = iD.Graph([a, b, c, w1, r]);
 
             expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc]]]);
+        });
+    });
+
+    describe(".creationOrder comparator", function () {
+        specify("orders existing relations newest-first", function () {
+            var a = iD.Relation({ id: 'r1' }),
+                b = iD.Relation({ id: 'r2' });
+            expect(iD.Relation.creationOrder(a, b)).to.be.above(0);
+            expect(iD.Relation.creationOrder(b, a)).to.be.below(0);
+        });
+
+        specify("orders new relations newest-first", function () {
+            var a = iD.Relation({ id: 'r-1' }),
+                b = iD.Relation({ id: 'r-2' });
+            expect(iD.Relation.creationOrder(a, b)).to.be.above(0);
+            expect(iD.Relation.creationOrder(b, a)).to.be.below(0);
         });
     });
 });

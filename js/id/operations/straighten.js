@@ -16,7 +16,11 @@ iD.operations.Straighten = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        return action.disabled(context.graph());
+        var reason;
+        if (context.hasHiddenConnections(entityId)) {
+            reason = 'connected_to_hidden';
+        }
+        return action.disabled(context.graph()) || reason;
     };
 
     operation.tooltip = function() {
@@ -26,7 +30,7 @@ iD.operations.Straighten = function(selectedIDs, context) {
             t('operations.straighten.description');
     };
 
-    operation.id = "straighten";
+    operation.id = 'straighten';
     operation.keys = [t('operations.straighten.key')];
     operation.title = t('operations.straighten.title');
 

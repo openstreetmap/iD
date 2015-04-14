@@ -26,6 +26,52 @@ describe('iD.Way', function() {
         expect(iD.Way({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
 
+    describe("#copy", function () {
+        it("returns a new Way", function () {
+            var w1 = iD.Way({id: 'w1'}),
+                result = w1.copy(),
+                w2 = result[0];
+
+            expect(result).to.have.length(1);
+            expect(w2).to.be.an.instanceof(iD.Way);
+            expect(w1).not.to.equal(w2);
+        });
+
+        it("keeps same nodes when deep = false", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w1 = iD.Entity({id: 'w1', nodes: ['a','b','c','a']}),
+                graph = iD.Graph([a, b, c, w1]),
+                result = w1.copy(),
+                w2 = result[0];
+
+            expect(result).to.have.length(1);
+            expect(w1.nodes).to.deep.equal(w2.nodes);
+        });
+
+        it("makes new nodes when deep = true", function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w1 = iD.Entity({id: 'w1', nodes: ['a','b','c','a']}),
+                graph = iD.Graph([a, b, c, w1]),
+                result = w1.copy(true, graph),
+                w2 = result[0];
+
+            expect(result).to.have.length(4);
+            expect(result[0]).to.be.an.instanceof(iD.Way);
+            expect(result[1]).to.be.an.instanceof(iD.Node);
+            expect(result[2]).to.be.an.instanceof(iD.Node);
+            expect(result[3]).to.be.an.instanceof(iD.Node);
+
+            expect(w2.nodes[0]).not.to.equal(w1.nodes[0]);
+            expect(w2.nodes[1]).not.to.equal(w1.nodes[1]);
+            expect(w2.nodes[2]).not.to.equal(w1.nodes[2]);
+            expect(w2.nodes[3]).to.equal(w2.nodes[0]);
+        });
+    });
+
     describe("#first", function () {
         it("returns the first node", function () {
             expect(iD.Way({nodes: ['a', 'b', 'c']}).first()).to.equal('a');
@@ -69,7 +115,7 @@ describe('iD.Way', function() {
                 node2 = iD.Node({loc: [5, 10]}),
                 way   = iD.Way({nodes: [node1.id, node2.id]}),
                 graph = iD.Graph([node1, node2, way]);
-            expect(way.extent(graph)).to.eql([[0, 0], [5, 10]]);
+            expect(way.extent(graph).equals([[0, 0], [5, 10]])).to.be.ok;
         });
     });
 
@@ -87,26 +133,156 @@ describe('iD.Way', function() {
         });
     });
 
+    describe('#isConvex', function() {
+        it('returns true for convex ways', function() {
+            //    d -- e
+            //    |     \
+            //    |      a
+            //    |     /
+            //    c -- b
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [ 0.0003,  0.0000]}),
+                iD.Node({id: 'b', loc: [ 0.0002, -0.0002]}),
+                iD.Node({id: 'c', loc: [-0.0002, -0.0002]}),
+                iD.Node({id: 'd', loc: [-0.0002,  0.0002]}),
+                iD.Node({id: 'e', loc: [ 0.0002,  0.0002]}),
+                iD.Way({id: 'w', nodes: ['a','b','c','d','e','a']})
+            ]);
+            expect(graph.entity('w').isConvex(graph)).to.be.true;
+        });
+
+        it('returns false for concave ways', function() {
+            //    d -- e
+            //    |   /
+            //    |  a
+            //    |   \
+            //    c -- b
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [ 0.0000,  0.0000]}),
+                iD.Node({id: 'b', loc: [ 0.0002, -0.0002]}),
+                iD.Node({id: 'c', loc: [-0.0002, -0.0002]}),
+                iD.Node({id: 'd', loc: [-0.0002,  0.0002]}),
+                iD.Node({id: 'e', loc: [ 0.0002,  0.0002]}),
+                iD.Way({id: 'w', nodes: ['a','b','c','d','e','a']})
+            ]);
+            expect(graph.entity('w').isConvex(graph)).to.be.false;
+        });
+
+        it('returns null for non-closed ways', function() {
+            //    d -- e
+            //    |
+            //    |  a
+            //    |   \
+            //    c -- b
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [ 0.0000,  0.0000]}),
+                iD.Node({id: 'b', loc: [ 0.0002, -0.0002]}),
+                iD.Node({id: 'c', loc: [-0.0002, -0.0002]}),
+                iD.Node({id: 'd', loc: [-0.0002,  0.0002]}),
+                iD.Node({id: 'e', loc: [ 0.0002,  0.0002]}),
+                iD.Way({id: 'w', nodes: ['a','b','c','d','e']})
+            ]);
+            expect(graph.entity('w').isConvex(graph)).to.be.null;
+        });
+
+        it('returns null for degenerate ways', function() {
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0.0000,  0.0000]}),
+                iD.Way({id: 'w', nodes: ['a','a']})
+            ]);
+            expect(graph.entity('w').isConvex(graph)).to.be.null;
+        });
+    });
+
+    describe('#layer', function() {
+        it('returns 0 when the way has no tags', function() {
+            expect(iD.Way().layer()).to.equal(0);
+        });
+
+        it('returns the layer when the way has an explicit layer tag', function() {
+            expect(iD.Way({tags: { layer: '2' }}).layer()).to.equal(2);
+            expect(iD.Way({tags: { layer: '-5' }}).layer()).to.equal(-5);
+        });
+
+        it('clamps the layer to within -10, 10', function() {
+            expect(iD.Way({tags: { layer: '12' }}).layer()).to.equal(10);
+            expect(iD.Way({tags: { layer: '-15' }}).layer()).to.equal(-10);
+        });
+
+        it('returns 1 for location=overground', function() {
+            expect(iD.Way({tags: { location: 'overground' }}).layer()).to.equal(1);
+        });
+
+        it('returns -1 for location=underground', function() {
+            expect(iD.Way({tags: { location: 'underground' }}).layer()).to.equal(-1);
+        });
+
+        it('returns -10 for location=underwater', function() {
+            expect(iD.Way({tags: { location: 'underwater' }}).layer()).to.equal(-10);
+        });
+
+        it('returns 10 for power lines', function() {
+            expect(iD.Way({tags: { power: 'line' }}).layer()).to.equal(10);
+            expect(iD.Way({tags: { power: 'minor_line' }}).layer()).to.equal(10);
+        });
+
+        it('returns 10 for aerialways', function() {
+            expect(iD.Way({tags: { aerialway: 'cable_car' }}).layer()).to.equal(10);
+        });
+
+        it('returns 1 for bridges', function() {
+            expect(iD.Way({tags: { bridge: 'yes' }}).layer()).to.equal(1);
+        });
+
+        it('returns -1 for cuttings', function() {
+            expect(iD.Way({tags: { cutting: 'yes' }}).layer()).to.equal(-1);
+        });
+
+        it('returns -1 for tunnels', function() {
+            expect(iD.Way({tags: { tunnel: 'yes' }}).layer()).to.equal(-1);
+        });
+
+        it('returns -1 for waterways', function() {
+            expect(iD.Way({tags: { waterway: 'stream' }}).layer()).to.equal(-1);
+        });
+
+        it('returns -10 for pipelines', function() {
+            expect(iD.Way({tags: { man_made: 'pipeline' }}).layer()).to.equal(-10);
+        });
+
+        it('returns -10 for boundaries', function() {
+            expect(iD.Way({tags: { boundary: 'administrative' }}).layer()).to.equal(-10);
+        });
+
+    });
+
     describe('#isOneWay', function() {
         it('returns false when the way has no tags', function() {
-            expect(iD.Way().isOneWay()).to.eql(false);
+            expect(iD.Way().isOneWay()).to.be.false;
         });
 
         it('returns false when the way has tag oneway=no', function() {
-            expect(iD.Way({tags: { oneway: 'no' }}).isOneWay()).to.equal(false);
+            expect(iD.Way({tags: { oneway: 'no' }}).isOneWay()).to.be.false;
+            expect(iD.Way({tags: { oneway: '0' }}).isOneWay()).to.be.false;
         });
 
         it('returns true when the way has tag oneway=yes', function() {
-            expect(iD.Way({tags: { oneway: 'yes' }}).isOneWay()).to.equal(true);
+            expect(iD.Way({tags: { oneway: 'yes' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { oneway: '1' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { oneway: '-1' }}).isOneWay()).to.be.true;
         });
 
-        it('returns true when the way has tag waterway=river or waterway=stream', function() {
-            expect(iD.Way({tags: { waterway: 'river' }}).isOneWay()).to.equal(true);
-            expect(iD.Way({tags: { waterway: 'stream' }}).isOneWay()).to.equal(true);
+        it('returns true when the way has implied oneway tag (waterway=river, waterway=stream, etc)', function() {
+            expect(iD.Way({tags: { waterway: 'river' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { waterway: 'stream' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { highway: 'motorway' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { highway: 'motorway_link' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { junction: 'roundabout' }}).isOneWay()).to.be.true;
         });
 
-        it('returns true when the way has tag junction=roundabout', function() {
-            expect(iD.Way({tags: { junction: 'roundabout' }}).isOneWay()).to.equal(true);
+        it('returns false when oneway=no overrides implied oneway tag', function() {
+            expect(iD.Way({tags: { junction: 'roundabout', oneway: 'no' }}).isOneWay()).to.be.false;
+            expect(iD.Way({tags: { highway: 'motorway', oneway: 'no' }}).isOneWay()).to.be.false;
         });
     });
 
@@ -123,11 +299,11 @@ describe('iD.Way', function() {
             expect(iD.Way({nodes: ['n1', 'n1']}).isArea()).to.equal(false);
         });
 
-        it('returns true if the way is closed and has a key in iD.Way.areaKeys', function() {
+        it('returns true if the way is closed and has a key in iD.areaKeys', function() {
             expect(iD.Way({nodes: ['n1', 'n1'], tags: {building: 'yes'}}).isArea()).to.equal(true);
         });
 
-        it('returns false if the way is closed and has no keys in iD.Way.areaKeys', function() {
+        it('returns false if the way is closed and has no keys in iD.areaKeys', function() {
             expect(iD.Way({nodes: ['n1', 'n1'], tags: {a: 'b'}}).isArea()).to.equal(false);
         });
 
@@ -282,20 +458,18 @@ describe('iD.Way', function() {
     });
 
     describe("#asGeoJSON", function () {
-        it("converts a line to a GeoJSON LineString feature", function () {
+        it("converts a line to a GeoJSON LineString geometry", function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [3, 4]}),
                 w = iD.Way({tags: {highway: 'residential'}, nodes: [a.id, b.id]}),
                 graph = iD.Graph([a, b, w]),
                 json = w.asGeoJSON(graph);
 
-            expect(json.type).to.equal('Feature');
-            expect(json.properties).to.eql({highway: 'residential'});
-            expect(json.geometry.type).to.equal('LineString');
-            expect(json.geometry.coordinates).to.eql([[1, 2], [3, 4]]);
+            expect(json.type).to.equal('LineString');
+            expect(json.coordinates).to.eql([a.loc, b.loc]);
         });
 
-        it("converts an area to a GeoJSON Polygon feature", function () {
+        it("converts an area to a GeoJSON Polygon geometry", function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [5, 6]}),
                 c = iD.Node({loc: [3, 4]}),
@@ -303,21 +477,72 @@ describe('iD.Way', function() {
                 graph = iD.Graph([a, b, c, w]),
                 json = w.asGeoJSON(graph, true);
 
-            expect(json.type).to.equal('Feature');
-            expect(json.properties).to.eql({area: 'yes'});
-            expect(json.geometry.type).to.equal('Polygon');
-            expect(json.geometry.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
+            expect(json.type).to.equal('Polygon');
+            expect(json.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
         });
 
-        it("forces clockwise polygon winding order", function () {
+        it("converts an unclosed area to a GeoJSON LineString geometry", function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [5, 6]}),
                 c = iD.Node({loc: [3, 4]}),
-                w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, c.id, b.id, a.id]}),
+                w = iD.Way({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id]}),
                 graph = iD.Graph([a, b, c, w]),
                 json = w.asGeoJSON(graph, true);
 
-            expect(json.geometry.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
+            expect(json.type).to.equal('LineString');
+            expect(json.coordinates).to.eql([a.loc, b.loc, c.loc]);
+        });
+    });
+
+    describe("#area", function() {
+        it("returns a relative measure of area", function () {
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
+                iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
+                iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
+                iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
+                iD.Node({id: 'e', loc: [-0.0004,  0.0002]}),
+                iD.Node({id: 'f', loc: [ 0.0004,  0.0002]}),
+                iD.Node({id: 'g', loc: [ 0.0004, -0.0002]}),
+                iD.Node({id: 'h', loc: [-0.0004, -0.0002]}),
+                iD.Way({id: 's', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
+                iD.Way({id: 'l', tags: {area: 'yes'}, nodes: ['e', 'f', 'g', 'h', 'e']})
+            ]);
+
+            var s = Math.abs(graph.entity('s').area(graph)),
+                l = Math.abs(graph.entity('l').area(graph));
+
+            expect(s).to.be.lt(l);
+        });
+
+        it("treats unclosed areas as if they were closed", function () {
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
+                iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
+                iD.Node({id: 'c', loc: [ 0.0002, -0.0001]}),
+                iD.Node({id: 'd', loc: [-0.0002, -0.0001]}),
+                iD.Way({id: 's', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']}),
+                iD.Way({id: 'l', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd']})
+            ]);
+
+            var s = graph.entity('s').area(graph),
+                l = graph.entity('l').area(graph);
+
+            expect(s).to.equal(l);
+        });
+
+        it("returns 0 for degenerate areas", function () {
+            var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
+                iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
+                iD.Way({id: '0', tags: {area: 'yes'}, nodes: []}),
+                iD.Way({id: '1', tags: {area: 'yes'}, nodes: ['a']}),
+                iD.Way({id: '2', tags: {area: 'yes'}, nodes: ['a', 'b']})
+            ]);
+
+            expect(graph.entity('0').area(graph)).to.equal(0);
+            expect(graph.entity('1').area(graph)).to.equal(0);
+            expect(graph.entity('2').area(graph)).to.equal(0);
         });
     });
 });

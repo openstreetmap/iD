@@ -16,80 +16,98 @@ iD.svg.Lines = function(projection) {
     };
 
     function waystack(a, b) {
-        if (!a || !b || !a.tags || !b.tags) return 0;
-        if (a.tags.layer !== undefined && b.tags.layer !== undefined) {
-            return a.tags.layer - b.tags.layer;
-        }
-        if (a.tags.bridge) return 1;
-        if (b.tags.bridge) return -1;
-        if (a.tags.tunnel) return -1;
-        if (b.tags.tunnel) return 1;
         var as = 0, bs = 0;
-        if (a.tags.highway && b.tags.highway) {
-            as -= highway_stack[a.tags.highway];
-            bs -= highway_stack[b.tags.highway];
-        }
+
+        if (a.tags.highway) { as -= highway_stack[a.tags.highway]; }
+        if (b.tags.highway) { bs -= highway_stack[b.tags.highway]; }
         return as - bs;
     }
 
     return function drawLines(surface, graph, entities, filter) {
-        var lines = [],
-            path = iD.svg.Path(projection, graph);
+        var ways = [], pathdata = {}, onewaydata = {},
+            getPath = iD.svg.Path(projection, graph);
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i],
                 outer = iD.geo.simpleMultipolygonOuterMember(entity, graph);
             if (outer) {
-                lines.push(entity.mergeTags(outer.tags));
+                ways.push(entity.mergeTags(outer.tags));
             } else if (entity.geometry(graph) === 'line') {
-                lines.push(entity);
+                ways.push(entity);
             }
         }
 
-        lines = lines.filter(path);
-        lines.sort(waystack);
+        ways = ways.filter(getPath);
 
-        function drawPaths(klass) {
-            var paths = surface.select('.layer-' + klass)
-                .selectAll('path.line')
-                .filter(filter)
-                .data(lines, iD.Entity.key);
+        pathdata = _.groupBy(ways, function(way) { return way.layer(); });
 
-            var enter = paths.enter()
-                .append('path')
-                .attr('class', function(d) { return 'way line ' + klass + ' ' + d.id; });
+        _.forOwn(pathdata, function(v, k) {
+            onewaydata[k] = _(v)
+                .filter(function(d) { return d.isOneWay(); })
+                .map(iD.svg.OneWaySegments(projection, graph, 35))
+                .flatten()
+                .valueOf();
+        });
 
-            // Optimization: call simple TagClasses only on enter selection. This
-            // works because iD.Entity.key is defined to include the entity v attribute.
-            if (klass !== 'stroke') {
-                enter.call(iD.svg.TagClasses());
-            } else {
-                paths.call(iD.svg.TagClasses()
-                    .tags(iD.svg.MultipolygonMemberTags(graph)));
-            }
+        var layergroup = surface
+            .select('.layer-lines')
+            .selectAll('g.layergroup')
+            .data(d3.range(-10, 11));
 
-            paths
-                .order()
-                .attr('d', path);
+        layergroup.enter()
+            .append('g')
+            .attr('class', function(d) { return 'layer layergroup layer' + String(d); });
 
-            paths.exit()
-                .remove();
-        }
 
-        drawPaths('shadow');
-        drawPaths('casing');
-        drawPaths('stroke');
+        var linegroup = layergroup
+            .selectAll('g.linegroup')
+            .data(['shadow', 'casing', 'stroke']);
 
-        var segments = _(lines)
-            .filter(function(d) { return d.isOneWay(); })
-            .map(iD.svg.OneWaySegments(projection, graph, 35))
-            .flatten()
-            .valueOf();
+        linegroup.enter()
+            .append('g')
+            .attr('class', function(d) { return 'layer linegroup line-' + d; });
 
-        var oneways = surface.select('.layer-oneway')
-            .selectAll('path.oneway')
+
+        var lines = linegroup
+            .selectAll('path')
             .filter(filter)
-            .data(segments, function(d) { return [d.id, d.index]; });
+            .data(
+                function() { return pathdata[this.parentNode.parentNode.__data__] || []; },
+                iD.Entity.key
+            );
+
+        // Optimization: call simple TagClasses only on enter selection. This
+        // works because iD.Entity.key is defined to include the entity v attribute.
+        lines.enter()
+            .append('path')
+            .attr('class', function(d) { return 'way line ' + this.parentNode.__data__ + ' ' + d.id; })
+            .call(iD.svg.TagClasses());
+
+        lines
+            .sort(waystack)
+            .attr('d', getPath)
+            .call(iD.svg.TagClasses().tags(iD.svg.MultipolygonMemberTags(graph)));
+
+        lines.exit()
+            .remove();
+
+
+        var onewaygroup = layergroup
+            .selectAll('g.onewaygroup')
+            .data(['oneway']);
+
+        onewaygroup.enter()
+            .append('g')
+            .attr('class', 'layer onewaygroup');
+
+
+        var oneways = onewaygroup
+            .selectAll('path')
+            .filter(filter)
+            .data(
+                function() { return onewaydata[this.parentNode.parentNode.__data__] || []; },
+                function(d) { return [d.id, d.index]; }
+            );
 
         oneways.enter()
             .append('path')
@@ -97,10 +115,10 @@ iD.svg.Lines = function(projection) {
             .attr('marker-mid', 'url(#oneway-marker)');
 
         oneways
-            .order()
             .attr('d', function(d) { return d.d; });
 
         oneways.exit()
             .remove();
+
     };
 };

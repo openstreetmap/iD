@@ -1,74 +1,212 @@
 describe("iD.Tree", function() {
-    var tree;
-
-    beforeEach(function() {
-        tree = iD.Tree(iD.Graph());
-    });
-
     describe("#rebase", function() {
         it("adds entities to the tree", function() {
-            var node = iD.Node({ id: 'n', loc: [1, 1]});
-            tree.graph().rebase({ 'n': node });
-            tree.rebase(['n']);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), tree.graph())).to.eql([node]);
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({id: 'n', loc: [1, 1]});
+
+            graph.rebase([node], [graph]);
+            tree.rebase([node]);
+
+            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), graph)).to.eql([node]);
+        });
+
+        it("is idempotent", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            graph.rebase([node], [graph]);
+            tree.rebase([node]);
+            expect(tree.intersects(extent, graph)).to.eql([node]);
+
+            graph.rebase([node], [graph]);
+            tree.rebase([node]);
+            expect(tree.intersects(extent, graph)).to.eql([node]);
         });
 
         it("does not insert if entity has a modified version", function() {
-            var node = iD.Node({ id: 'n', loc: [1, 1]}),
-                node_ = node.update({ loc: [10, 10]}),
-                g = tree.graph().replace(node_);
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                node_ = node.update({loc: [10, 10]}),
+                g = graph.replace(node_);
+
             expect(tree.intersects(iD.geo.Extent([9, 9], [11, 11]), g)).to.eql([node_]);
-            tree.graph().rebase({ 'n': node });
-            tree.rebase(['n']);
+
+            graph.rebase([node], [graph]);
+            tree.rebase([node]);
+
             expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), g)).to.eql([]);
             expect(tree.intersects(iD.geo.Extent([0, 0], [11, 11]), g)).to.eql([node_]);
+        });
+
+        it("does not error on self-referencing relations", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                relation = iD.Relation();
+
+            relation = relation.addMember({id: node.id});
+            relation = relation.addMember({id: relation.id});
+
+            graph.rebase([node, relation], [graph]);
+            tree.rebase([relation]);
+
+            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), graph)).to.eql([relation]);
         });
     });
 
     describe("#intersects", function() {
-        it("excludes entities with missing children, adds them when all are present", function() {
-            var way = iD.Way({id: 'w1', nodes: ['n']});
-            var g = tree.graph().replace(way);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([]);
-            var node = iD.Node({id: 'n', loc: [0.5, 0.5]});
-            g = tree.graph().replace(node);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([node, way]);
-        });
-
-        it("includes entities that used to have missing children, after rebase added them", function() {
-            var base = tree.graph();
-            var way = iD.Way({id: 'w1', nodes: ['n']});
-            var g = base.replace(way);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([]);
-            var node = iD.Node({id: 'n', loc: [0.5, 0.5]});
-            base.rebase({ 'n': node });
-            tree.rebase(['n']);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [1, 1]), g)).to.eql([node, way]);
-        });
-
         it("includes entities within extent, excludes those without", function() {
-            var n1 = iD.Node({ id: 'n1', loc: [1, 1]});
-            var n2 = iD.Node({ id: 'n2', loc: [3, 3]});
-            var g = tree.graph().replace(n1).replace(n2);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [1.1, 1.1]), g)).to.eql([n1]);
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                n1 = iD.Node({loc: [1, 1]}),
+                n2 = iD.Node({loc: [3, 3]}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            graph = graph.replace(n1).replace(n2);
+            expect(tree.intersects(extent, graph)).to.eql([n1]);
+        });
+
+        it("includes intersecting relations after incomplete members are loaded", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                n1 = iD.Node({id: 'n1', loc: [0, 0]}),
+                n2 = iD.Node({id: 'n2', loc: [1, 1]}),
+                relation = iD.Relation({id: 'r', members: [{id: 'n1'}, {id: 'n2'}]}),
+                extent = iD.geo.Extent([0.5, 0.5], [1.5, 1.5]);
+
+            graph.rebase([relation, n1], [graph]);
+            tree.rebase([relation, n1]);
+            expect(tree.intersects(extent, graph)).to.eql([]);
+
+            graph.rebase([n2], [graph]);
+            tree.rebase([n2]);
+            expect(tree.intersects(extent, graph)).to.eql([n2, relation]);
+        });
+
+        // This happens when local storage includes a changed way but not its nodes.
+        it("includes intersecting ways after missing nodes are loaded", function() {
+            var base = iD.Graph(),
+                tree = iD.Tree(base),
+                node = iD.Node({id: 'n', loc: [0.5, 0.5]}),
+                way = iD.Way({nodes: ['n']}),
+                graph = base.replace(way),
+                extent = iD.geo.Extent([0, 0], [1, 1]);
+
+            expect(tree.intersects(extent, graph)).to.eql([]);
+
+            base.rebase([node], [base, graph]);
+            tree.rebase([node]);
+            expect(tree.intersects(extent, graph)).to.eql([node, way]);
+        });
+
+        it("adjusts parent ways when a member node is moved", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                way = iD.Way({nodes: ['n']}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            graph = graph.replace(node).replace(way);
+            expect(tree.intersects(extent, graph)).to.eql([node, way]);
+
+            graph = graph.replace(node.move([3, 3]));
+            expect(tree.intersects(extent, graph)).to.eql([]);
+        });
+
+        it("adjusts parent relations when a member node is moved", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                relation = iD.Relation({members: [{type: 'node', id: 'n'}]}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            graph = graph.replace(node).replace(relation);
+            expect(tree.intersects(extent, graph)).to.eql([node, relation]);
+
+            graph = graph.replace(node.move([3, 3]));
+            expect(tree.intersects(extent, graph)).to.eql([]);
+        });
+
+        it("adjusts parent ways when a member node is removed", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                n1 = iD.Node({id: 'n1', loc: [1, 1]}),
+                n2 = iD.Node({id: 'n2', loc: [3, 3]}),
+                way = iD.Way({nodes: ['n1', 'n2']}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            graph = graph.replace(n1).replace(n2).replace(way);
+            expect(tree.intersects(extent, graph)).to.eql([n1, way]);
+
+            graph = graph.replace(way.removeNode('n1'));
+            expect(tree.intersects(extent, graph)).to.eql([n1]);
+        });
+
+        it("don't include parent way multiple times when multiple child nodes are moved", function() {
+            // checks against the following regression: https://github.com/openstreetmap/iD/issues/1978
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                n1 = iD.Node({id: 'n1', loc: [1, 1]}),
+                n2 = iD.Node({id: 'n2', loc: [3, 3]}),
+                way = iD.Way({nodes: ['n1', 'n2']}),
+                extent = iD.geo.Extent([0, 0], [4, 4]);
+
+            graph = graph.replace(n1).replace(n2).replace(way);
+            expect(tree.intersects(extent, graph)).to.eql([n1, n2, way]);
+
+            graph = graph.replace(n1.move([1.1,1.1])).replace(n2.move([2.1,2.1]));
+            expect(
+                _.pluck(tree.intersects(extent, graph),'id').sort()
+            ).to.eql(
+                _.pluck([n1, n2, way],'id').sort()
+            );
         });
 
         it("doesn't include removed entities", function() {
-            var n1 = iD.Node({ id: 'n1', loc: [1, 1]});
-            var g = tree.graph().replace(n1);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), g)).to.eql([n1]);
-            g = g.remove(n1);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), g)).to.eql([]);
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({loc: [1, 1]}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            graph = graph.replace(node);
+            expect(tree.intersects(extent, graph)).to.eql([node]);
+
+            graph = graph.remove(node);
+            expect(tree.intersects(extent, graph)).to.eql([]);
         });
 
-        it("works with extents with dimensions that are very small", function() {
-            var m = 1000 * 1000 * 100;
-            var n1 = iD.Node({ id: 'n1', loc: [1, 1]});
-            var n2 = iD.Node({ id: 'n2', loc: [1 + 0.1/m, 2]});
-            var way = iD.Way({id: 'w1', nodes: ['n1', 'n2']});
-            var g = tree.graph().replace(n1).replace(n2).replace(way);
-            g = g.remove(way).remove(n1).remove(n2);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [3, 3]), g)).to.eql([]);
+        it("doesn't include removed entities after rebase", function() {
+            var base = iD.Graph(),
+                tree = iD.Tree(base),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            var graph = base.replace(node).remove(node);
+            expect(tree.intersects(extent, graph)).to.eql([]);
+
+            base.rebase([node], [base]);
+            tree.rebase([node]);
+            expect(tree.intersects(extent, graph)).to.eql([]);
+        });
+
+        it("handles recursive relations", function() {
+            var base = iD.Graph(),
+                tree = iD.Tree(base),
+                node = iD.Node({id: 'n', loc: [1, 1]}),
+                r1   = iD.Relation({id: 'r1', members: [{id: 'n'}]}),
+                r2   = iD.Relation({id: 'r2', members: [{id: 'r1'}]}),
+                extent = iD.geo.Extent([0, 0], [2, 2]);
+
+            var graph = base.replace(r1).replace(r2);
+            expect(tree.intersects(extent, graph)).to.eql([]);
+
+            base.rebase([node], [base, graph]);
+            tree.rebase([node]);
+            expect(tree.intersects(extent, graph)).to.eql([node, r1, r2]);
         });
     });
 });

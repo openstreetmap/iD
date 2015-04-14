@@ -16,7 +16,7 @@ iD.ui.PresetIcon = function() {
         $fill.enter().append('div');
 
         $fill.attr('class', function() {
-            var s = 'preset-icon-fill icon-' + geom;
+            var s = 'preset-icon-fill preset-icon-fill-' + geom;
             for (var i in p.tags) {
                 s += ' tag-' + i + ' tag-' + i + '-' + p.tags[i];
             }

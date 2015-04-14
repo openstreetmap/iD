@@ -4,6 +4,8 @@ all: \
 	dist/iD.css \
 	dist/iD.js \
 	dist/iD.min.js \
+	dist/presets.js \
+	dist/imagery.js \
 	dist/img/line-presets.png \
 	dist/img/relation-presets.png
 
@@ -27,16 +29,19 @@ dist/iD.js: \
 	js/lib/d3.typeahead.js \
 	js/lib/d3.curtain.js \
 	js/lib/d3.value.js \
+	js/lib/diff3.js \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
 	js/lib/osmauth.js \
 	js/lib/rbush.js \
+	js/lib/sexagesimal.js \
 	js/lib/togeojson.js \
 	js/lib/marked.js \
 	js/id/start.js \
 	js/id/id.js \
 	js/id/services/*.js \
 	js/id/util.js \
+	js/id/util/*.js \
 	js/id/geo.js \
 	js/id/geo/*.js \
 	js/id/actions.js \
@@ -87,6 +92,10 @@ translations:
 imagery:
 	npm install editor-imagery-index@git://github.com/osmlab/editor-imagery-index.git#gh-pages && node data/update_imagery
 
+suggestions:
+	npm install name-suggestion-index@git://github.com/osmlab/name-suggestion-index.git
+	cp node_modules/name-suggestion-index/name-suggestions.json data/name-suggestions.json
+
 SPRITE = inkscape --export-area-page
 
 dist/img/line-presets.png: svg/line-presets.svg
@@ -95,7 +104,8 @@ dist/img/line-presets.png: svg/line-presets.svg
 dist/img/relation-presets.png: svg/relation-presets.svg
 	if [ `which inkscape` ]; then $(SPRITE) --export-png=$@ $<; else echo "Inkscape is not installed"; fi;
 
-dist/img/maki-sprite.png: $(wildcard node_modules/maki/renders/*.png)
+dist/img/maki-sprite.png: ./node_modules/maki/www/images/maki-sprite.png
+	cp $< $@
 	node data/maki_sprite
 
 D3_FILES = \
@@ -109,6 +119,7 @@ D3_FILES = \
 	node_modules/d3/src/geo/path.js \
 	node_modules/d3/src/geo/stream.js \
 	node_modules/d3/src/geom/polygon.js \
+	node_modules/d3/src/geom/hull.js \
 	node_modules/d3/src/selection/index.js \
 	node_modules/d3/src/transition/index.js \
 	node_modules/d3/src/xhr/index.js \
@@ -117,3 +128,6 @@ D3_FILES = \
 js/lib/d3.v3.js: $(D3_FILES)
 	node_modules/.bin/smash $(D3_FILES) > $@
 	@echo 'd3 rebuilt. Please reapply 7e2485d, 4da529f, and 223974d'
+
+js/lib/lodash.js:
+	node_modules/.bin/lodash --debug --output $@ include="any,assign,bind,clone,compact,contains,debounce,difference,each,every,extend,filter,find,first,forEach,groupBy,indexOf,intersection,isEmpty,isEqual,isFunction,keys,last,map,omit,pairs,pluck,reject,some,throttle,union,uniq,unique,values,without,flatten,value,chain,cloneDeep,merge,pick,reduce" exports="global,node"

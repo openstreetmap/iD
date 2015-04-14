@@ -10,5 +10,6 @@
     "tags": {
         "amenity": "*"
     },
+    "searchable": false,
     "name": "Amenity"
 }

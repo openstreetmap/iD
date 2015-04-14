@@ -38,13 +38,16 @@ iD.operations.Merge = function(selectedIDs, context) {
         if (j === 'restriction' && m && p)
             return t('operations.merge.restriction', {relation: context.presets().item('type/restriction').name()});
 
+        if (p === 'incomplete_relation' && j && m)
+            return t('operations.merge.incomplete_relation');
+
         if (j && m && p)
             return t('operations.merge.' + j);
 
         return t('operations.merge.description');
     };
 
-    operation.id = "merge";
+    operation.id = 'merge';
     operation.keys = [t('operations.merge.key')];
     operation.title = t('operations.merge.title');
 

@@ -1,0 +1,21 @@
+{
+    "icon": "building",
+    "fields": [
+        "address",
+        "levels"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "academy",
+        "elementary school",
+        "middle school",
+        "high school"
+    ],
+    "tags": {
+        "building": "school"
+    },
+    "name": "School Building"
+}

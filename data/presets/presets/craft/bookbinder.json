@@ -1,0 +1,20 @@
+{
+    "icon": "library",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "book repair"
+    ],
+    "tags": {
+        "craft": "bookbinder"
+    },
+    "name": "Bookbinder"
+}

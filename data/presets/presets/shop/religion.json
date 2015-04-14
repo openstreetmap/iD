@@ -1,0 +1,19 @@
+{
+    "icon": "shop",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "religion",
+        "denomination"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "religion"
+    },
+    "name": "Religious Store"
+}

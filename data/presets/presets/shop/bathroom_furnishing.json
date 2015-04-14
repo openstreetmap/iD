@@ -1,0 +1,17 @@
+{
+    "icon": "shop",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "bathroom_furnishing"
+    },
+    "name": "Bathroom Furnishing Store"
+}

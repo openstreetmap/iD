@@ -12,7 +12,7 @@ iD.ui.FeatureList = function(context) {
             var q = search.property('value'),
                 items = list.selectAll('.feature-list-item');
             if (d3.event.keyCode === 13 && q.length && items.size()) {
-                click(items.datum().entity);
+                click(items.datum());
             }
         }
 
@@ -56,6 +56,30 @@ iD.ui.FeatureList = function(context) {
 
             if (!q) return result;
 
+            var idMatch = q.match(/^([nwr])([0-9]+)$/);
+
+            if (idMatch) {
+                result.push({
+                    id: idMatch[0],
+                    geometry: idMatch[1] === 'n' ? 'point' : idMatch[1] === 'w' ? 'line' : 'relation',
+                    type: idMatch[1] === 'n' ? t('inspector.node') : idMatch[1] === 'w' ? t('inspector.way') : t('inspector.relation'),
+                    name: idMatch[2]
+                });
+            }
+
+            var locationMatch = sexagesimal.pair(q.toUpperCase()) || q.match(/^(-?\d+\.?\d*)\s+(-?\d+\.?\d*)$/);
+
+            if (locationMatch) {
+                var loc = [parseFloat(locationMatch[0]), parseFloat(locationMatch[1])];
+                result.push({
+                    id: -1,
+                    geometry: 'point',
+                    type: t('inspector.location'),
+                    name: loc[0].toFixed(6) + ', ' + loc[1].toFixed(6),
+                    location: loc
+                });
+            }
+
             function addEntity(entity) {
                 if (entity.id in entities || result.length > 200)
                     return;
@@ -84,15 +108,19 @@ iD.ui.FeatureList = function(context) {
             }
 
             (geocodeResults || []).forEach(function(d) {
-                result.push({
-                    id: iD.Entity.id.fromOSM(d.osm_type, d.osm_id),
-                    geometry: d.osm_type === 'relation' ? 'relation' : d.osm_type === 'way' ? 'line' : 'point',
-                    type: (d.type.charAt(0).toUpperCase() + d.type.slice(1)).replace('_', ' '),
-                    name: d.display_name,
-                    extent: new iD.geo.Extent(
-                        [parseFloat(d.boundingbox[3]), parseFloat(d.boundingbox[0])],
-                        [parseFloat(d.boundingbox[2]), parseFloat(d.boundingbox[1])])
-                })
+                // https://github.com/openstreetmap/iD/issues/1890
+                if (d.osm_type && d.osm_id) {
+                    result.push({
+                        id: iD.Entity.id.fromOSM(d.osm_type, d.osm_id),
+                        geometry: d.osm_type === 'relation' ? 'relation' : d.osm_type === 'way' ? 'line' : 'point',
+                        type: d.type !== 'yes' ? (d.type.charAt(0).toUpperCase() + d.type.slice(1)).replace('_', ' ')
+                                               : (d.class.charAt(0).toUpperCase() + d.class.slice(1)).replace('_', ' '),
+                        name: d.display_name,
+                        extent: new iD.geo.Extent(
+                            [parseFloat(d.boundingbox[3]), parseFloat(d.boundingbox[0])],
+                            [parseFloat(d.boundingbox[2]), parseFloat(d.boundingbox[1])])
+                    });
+                }
             });
 
             return result;
@@ -138,6 +166,10 @@ iD.ui.FeatureList = function(context) {
             list.selectAll('.geocode-item')
                 .style('display', (value && geocodeResults === undefined) ? 'block' : 'none');
 
+            list.selectAll('.feature-list-item')
+                .data([-1])
+                .remove();
+
             var items = list.selectAll('.feature-list-item')
                 .data(results, function(d) { return d.id; });
 
@@ -172,6 +204,8 @@ iD.ui.FeatureList = function(context) {
         }
 
         function mouseover(d) {
+            if (d.id === -1) return;
+
             context.surface().selectAll(iD.util.entityOrMemberSelector([d.id], context.graph()))
                 .classed('hover', true);
         }
@@ -182,10 +216,14 @@ iD.ui.FeatureList = function(context) {
         }
 
         function click(d) {
-            if (d.entity) {
+            d3.event.preventDefault();
+            if (d.location) {
+                context.map().centerZoom([d.location[1], d.location[0]], 20);
+            }
+            else if (d.entity) {
                 context.enter(iD.modes.Select(context, [d.entity.id]));
             } else {
-                context.loadEntity(d.id);
+                context.zoomToEntity(d.id);
             }
         }
 

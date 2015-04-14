@@ -1,0 +1,20 @@
+{
+    "icon": "clothing-store",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "seamstress"
+    ],
+    "tags": {
+        "craft": "dressmaker"
+    },
+    "name": "Dressmaker"
+}

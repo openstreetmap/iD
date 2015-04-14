@@ -1,5 +1,5 @@
 {
     "key": "building",
-    "type": "combo",
+    "type": "typeCombo",
     "label": "Building"
 }

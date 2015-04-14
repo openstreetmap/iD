@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "fields": [
+        "ref"
+    ],
+    "tags": {
+        "aerialway": "pylon"
+    },
+    "name": "Aerialway Pylon"
+}

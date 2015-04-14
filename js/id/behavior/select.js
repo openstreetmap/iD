@@ -14,10 +14,12 @@ iD.behavior.Select = function(context) {
     }
 
     function click() {
-        var datum = d3.event.target.__data__;
-        var lasso = d3.select('#surface .lasso').node();
+        var datum = d3.event.target.__data__,
+            lasso = d3.select('#surface .lasso').node(),
+            mode = context.mode();
+
         if (!(datum instanceof iD.Entity)) {
-            if (!d3.event.shiftKey && !lasso)
+            if (!d3.event.shiftKey && !lasso && mode.id !== 'browse')
                 context.enter(iD.modes.Browse(context));
 
         } else if (!d3.event.shiftKey && !lasso) {
@@ -25,7 +27,7 @@ iD.behavior.Select = function(context) {
             if (context.selectedIDs().length !== 1 || context.selectedIDs()[0] !== datum.id) {
                 context.enter(iD.modes.Select(context, [datum.id]));
             } else {
-                context.mode().reselect();
+                mode.suppressMenu(false).reselect();
             }
         } else if (context.selectedIDs().indexOf(datum.id) >= 0) {
             var selectedIDs = _.without(context.selectedIDs(), datum.id);

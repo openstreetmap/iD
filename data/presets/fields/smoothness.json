@@ -1,0 +1,18 @@
+{
+    "key": "smoothness",
+    "type": "combo",
+    "label": "Smoothness",
+    "placeholder": "Thin Rollers, Wheels, Off-Road...",
+    "strings": {
+        "options": {
+            "excellent": "Thin Rollers: rollerblade, skateboard",
+            "good": "Thin Wheels: racing bike",
+            "intermediate": "Wheels: city bike, wheelchair, scooter",
+            "bad": "Robust Wheels: trekking bike, car, rickshaw",
+            "very_bad": "High Clearance: light duty off-road vehicle",
+            "horrible": "Off-Road: heavy duty off-road vehicle",
+            "very_horrible": "Specialized off-road: tractor, ATV",
+            "impassable": "Impassable / No wheeled vehicle"
+        }
+    }
+}

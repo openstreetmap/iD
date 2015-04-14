@@ -1,9 +1,11 @@
 {
     "icon": "parking",
     "fields": [
+        "operator",
         "parking",
         "capacity",
         "fee",
+        "access_simple",
         "supervised",
         "park_ride",
         "address"
@@ -17,5 +19,5 @@
         "amenity": "parking"
     },
     "terms": [],
-    "name": "Parking"
+    "name": "Car Parking"
 }

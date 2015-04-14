@@ -1,0 +1,6 @@
+{
+    "key": "par",
+    "type": "number",
+    "label": "Par",
+    "placeholder": "3, 4, 5..."
+}

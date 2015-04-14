@@ -1,0 +1,18 @@
+{
+    "fields": [
+        "crossing",
+        "access",
+        "surface",
+        "sloped_curb",
+        "tactile_paving"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "footway",
+        "footway": "crossing"
+    },
+    "terms": [],
+    "name": "Crossing"
+}

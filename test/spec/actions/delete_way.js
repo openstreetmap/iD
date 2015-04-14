@@ -68,4 +68,32 @@ describe("iD.actions.DeleteWay", function() {
             graph    = iD.Graph([way, relation]).update(action);
         expect(graph.hasEntity(relation.id)).to.be.undefined;
     });
+
+    describe("#disabled", function () {
+        it("returns 'part_of_relation' for members of route and boundary relations", function () {
+            var a        = iD.Way({id: 'a'}),
+                b        = iD.Way({id: 'b'}),
+                route    = iD.Relation({members: [{id: 'a'}], tags: {type: 'route'}}),
+                boundary = iD.Relation({members: [{id: 'b'}], tags: {type: 'boundary'}}),
+                graph    = iD.Graph([a, b, route, boundary]);
+            expect(iD.actions.DeleteWay('a').disabled(graph)).to.equal('part_of_relation');
+            expect(iD.actions.DeleteWay('b').disabled(graph)).to.equal('part_of_relation');
+        });
+
+        it("returns 'part_of_relation' for outer members of multipolygons", function () {
+            var way      = iD.Way({id: 'w'}),
+                relation = iD.Relation({members: [{id: 'w', role: 'outer'}], tags: {type: 'multipolygon'}}),
+                graph    = iD.Graph([way, relation]),
+                action   = iD.actions.DeleteWay(way.id);
+            expect(action.disabled(graph)).to.equal('part_of_relation');
+        });
+
+        it("returns falsy for inner members of multipolygons", function () {
+            var way      = iD.Way({id: 'w'}),
+                relation = iD.Relation({members: [{id: 'w', role: 'inner'}], tags: {type: 'multipolygon'}}),
+                graph    = iD.Graph([way, relation]),
+                action   = iD.actions.DeleteWay(way.id);
+            expect(action.disabled(graph)).not.ok;
+        });
+    });
 });

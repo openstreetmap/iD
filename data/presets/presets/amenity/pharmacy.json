@@ -2,17 +2,21 @@
     "icon": "pharmacy",
     "fields": [
         "operator",
+        "address",
         "building_area",
-        "address"
+        "opening_hours",
+        "drive_through"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "amenity": "pharmacy"
     },
-    "terms": [],
+    "terms": [
+        "drug",
+        "medicine"
+    ],
     "name": "Pharmacy"
 }

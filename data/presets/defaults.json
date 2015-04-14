@@ -1,9 +1,9 @@
 {
     "area": [
         "category-landuse",
-        "building",
+        "category-building",
+        "category-water-area",
         "leisure/park",
-        "natural/water",
         "amenity/hospital",
         "amenity/place_of_worship",
         "amenity/cafe",
@@ -14,7 +14,7 @@
         "category-road",
         "category-rail",
         "category-path",
-        "category-water",
+        "category-water-line",
         "power/line",
         "line"
     ],
@@ -24,13 +24,14 @@
         "amenity/place_of_worship",
         "amenity/cafe",
         "amenity/restaurant",
+        "amenity/fast_food",
         "amenity/bar",
         "amenity/bank",
         "shop/supermarket",
         "point"
     ],
     "vertex": [
-        "highway/crossing",
+        "highway/crosswalk",
         "railway/level_crossing",
         "highway/traffic_signals",
         "highway/turning_circle",
@@ -40,8 +41,8 @@
     ],
     "relation": [
         "category-route",
+        "category-restriction",
         "type/boundary",
-        "type/restriction",
         "type/multipolygon",
         "relation"
     ]

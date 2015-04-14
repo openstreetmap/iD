@@ -68,6 +68,8 @@ iD.TileLayer = function() {
         if (source.validZoom(z)) {
             tile().forEach(function(d) {
                 addSource(d);
+                if (d[3] === '') return;
+                if (typeof d[3] !== 'string') return; // Workaround for chrome crash https://github.com/openstreetmap/iD/issues/2295
                 requests.push(d);
                 if (cache[d[3]] === false && lookUp(d)) {
                     requests.push(addSource(lookUp(d)));

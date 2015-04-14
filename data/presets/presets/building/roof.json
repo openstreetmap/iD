@@ -1,0 +1,14 @@
+{
+    "icon": "building",
+    "fields": [
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "building": "roof"
+    },
+    "name": "Roof"
+}

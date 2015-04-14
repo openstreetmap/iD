@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "junction": "roundabout"
+    },
+    "name": "Roundabout",
+    "searchable": false
+}

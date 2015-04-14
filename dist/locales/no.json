@@ -24,7 +24,8 @@
         "add": {
             "annotation": {
                 "point": "Legg til et punkt.",
-                "vertex": "Legg til et punkt til veien."
+                "vertex": "Legg til et punkt til veien.",
+                "relation": "La til en relasjo"
             }
         },
         "start": {
@@ -34,6 +35,8 @@
             }
         },
         "continue": {
+            "key": "A",
+            "title": "Fortsett",
             "annotation": {
                 "line": "Videreførte en linje.",
                 "area": "Videreførte et areal."
@@ -54,14 +57,17 @@
             }
         },
         "orthogonalize": {
+            "key": "S",
             "annotation": {
                 "line": "Laget hjørnene på linjen vinkelrette.",
                 "area": "Laget hjørnene på arealet vinkelrette."
             }
         },
+        "straighten": {
+            "key": "S"
+        },
         "delete": {
             "title": "Fjern",
-            "description": "Fjern dette fra kartet.",
             "annotation": {
                 "point": "Fjern et punkt.",
                 "vertex": "Fjernet en node fra veien.",
@@ -70,6 +76,12 @@
                 "relation": "Fjernet en relasjon.",
                 "multiple": "Fjernet {n} objekter."
             }
+        },
+        "add_member": {
+            "annotation": "La et medlem til i en relasjon"
+        },
+        "delete_member": {
+            "annotation": "Fjernet et medlem fra en relasjon"
         },
         "connect": {
             "annotation": {
@@ -81,13 +93,15 @@
         },
         "disconnect": {
             "title": "Kobl fra",
+            "description": "Koble disse linjene/areane fra hverandre",
             "key": "D"
         },
         "merge": {
             "title": "Knytt sammen",
             "description": "Knytt disse linjene sammen.",
             "key": "C",
-            "annotation": "Knyttet {n} linjer sammen."
+            "annotation": "Knyttet {n} linjer sammen.",
+            "incomplete_relation": "Disse funksjonene kan ikke bli knyttet sammen fordi hvertfall én av dem er ikke ferdig nedlastet."
         },
         "move": {
             "title": "Flytt",
@@ -117,16 +131,25 @@
         },
         "split": {
             "title": "Del",
-            "key": "X"
+            "key": "X",
+            "annotation": {
+                "line": "Splitt en linje"
+            }
         }
     },
     "undo": {
         "nothing": "Ingen ting å gjøre."
     },
     "redo": {
+        "tooltip": "Omgjør: {action}",
         "nothing": "Ingen ting å gjøre tilbake."
     },
     "browser_notice": "Denne editor er støttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og høyere. Vennligst oppgrader din nettleser eller bruk Potlatch 2 for å redigere kartet.",
+    "translate": {
+        "translate": "Oversett",
+        "localized_translation_language": "Velg språk",
+        "localized_translation_name": "Navn"
+    },
     "logout": "logg ut",
     "loading_auth": "Kobler til OpenStreetMap...",
     "report_a_bug": "meld en programvarefeil",
@@ -141,6 +164,9 @@
         "deleted": "Fjernet",
         "created": "Opprettet"
     },
+    "geocoder": {
+        "no_results_worldwide": "Ingen resultater funnet"
+    },
     "geolocate": {
         "title": "Vis min posisjon"
     },
@@ -148,19 +174,29 @@
         "no_documentation_combination": "Det finnes ingen dokumentasjon for denne tag-kombinasjonen",
         "no_documentation_key": "Det finnes ingen dokumentasjon tilgjengelig for denne nøkkelen",
         "show_more": "Vis mer",
+        "all_members": "Alle medlemmer",
+        "new_relation": "Ny relasjon...",
+        "role": "Rolle",
         "choose": "Velg egenskapstype",
         "results": "{n} resultater for {search}",
-        "remove": "Fjern"
+        "back_tooltip": "Endre funksjon",
+        "remove": "Fjern",
+        "search": "Søk",
+        "unknown": "Ukjent",
+        "edit": "Endre funksjon",
+        "way": "Vei",
+        "relation": "Relasjon",
+        "location": "Sted"
     },
     "background": {
         "title": "Bakgrunn",
         "description": "Bakgrunnsinnstillinger",
         "percent_brightness": "{opacity}% lysstyrke",
-        "fix_misalignment": "Rett opp skjevstilling",
         "reset": "tilbakestill"
     },
     "restore": {
-        "heading": "Du har ulagrede endringer"
+        "heading": "Du har ulagrede endringer",
+        "reset": "Tilbakestill"
     },
     "save": {
         "title": "Lagre",
@@ -171,7 +207,11 @@
         "unsaved_changes": "Du har ulagrede endringer"
     },
     "success": {
-        "just_edited": "Du har akkurat endret OpenStreetMap!"
+        "just_edited": "Du har akkurat endret OpenStreetMap!",
+        "view_on_osm": "Vis på OSM",
+        "facebook": "Del på Facebook",
+        "twitter": "Del på Twitter",
+        "google": "Del på Google+"
     },
     "splash": {
         "welcome": "Velkommen til iD OpenStreetMap editor",
@@ -198,19 +238,31 @@
         "out": "Forminsk"
     },
     "gpx": {
-        "local_layer": "Lokal GPX-fil",
-        "drag_drop": "Dra og slipp en .gpx-fil på denne siden"
+        "local_layer": "Lokal GPX-fil"
     },
     "help": {
         "title": "Hjelp"
     },
     "intro": {
         "navigation": {
+            "title": "Navigasjon",
             "drag": "Hovedkartet viser data fra OpenstreetMap lagt over en bakgrunn. Du kan navigere ved å dra eller scrolle, slik som et vanlig nettkart. **Dra kartet!**"
+        },
+        "areas": {
+            "search": "**Søk etter '{name}'.**"
+        },
+        "lines": {
+            "title": "Linjer"
         }
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Bygning"
+            },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Arealbruk"
             },
@@ -226,7 +278,10 @@
             "category-route": {
                 "name": "Rute"
             },
-            "category-water": {
+            "category-water-area": {
+                "name": "Vann"
+            },
+            "category-water-line": {
                 "name": "Vann"
             }
         },
@@ -269,15 +324,25 @@
             "address": {
                 "label": "Adresse",
                 "placeholders": {
-                    "housename": "Husnavn",
-                    "number": "123",
                     "street": "Gate",
-                    "city": "By",
-                    "postcode": "Postkode"
+                    "city": "By"
                 }
             },
             "admin_level": {
                 "label": "Administrasjonsnivå"
+            },
+            "aerialway": {
+                "label": "Type"
+            },
+            "aerialway/capacity": {
+                "label": "Kapasitet (per time)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/occupancy": {
+                "placeholder": "2, 4, 8..."
             },
             "aeroway": {
                 "label": "Type"
@@ -301,9 +366,6 @@
                 "label": "Bygning"
             },
             "building_area": {
-                "label": "Bygning"
-            },
-            "building_yes": {
                 "label": "Bygning"
             },
             "capacity": {
@@ -354,8 +416,20 @@
             "fee": {
                 "label": "Avgift"
             },
+            "fire_hydrant/type": {
+                "label": "Type"
+            },
             "fixme": {
                 "label": "Fiks meg"
+            },
+            "generator/method": {
+                "label": "Metode"
+            },
+            "generator/source": {
+                "label": "Kilde"
+            },
+            "generator/type": {
+                "label": "Type"
             },
             "highway": {
                 "label": "Type"
@@ -371,6 +445,9 @@
             },
             "incline": {
                 "label": "Stigning"
+            },
+            "information": {
+                "label": "Type"
             },
             "internet_access": {
                 "label": "Internettilgang",
@@ -461,16 +538,7 @@
                 "label": "Type"
             },
             "religion": {
-                "label": "Religion",
-                "options": {
-                    "christian": "Kristen",
-                    "muslim": "Muslim",
-                    "buddhist": "Buddhist",
-                    "jewish": "Jøde",
-                    "hindu": "Hindu",
-                    "shinto": "Shinto",
-                    "taoist": "Taoist"
-                }
+                "label": "Religion"
             },
             "restriction": {
                 "label": "Type"
@@ -481,10 +549,10 @@
             "route_master": {
                 "label": "Type"
             },
-            "sac_scale": {
-                "label": "Stiens vanskelighetsgrad"
-            },
             "service": {
+                "label": "Type"
+            },
+            "shelter_type": {
                 "label": "Type"
             },
             "shop": {
@@ -496,6 +564,9 @@
             "sport": {
                 "label": "Sport"
             },
+            "sport_ice": {
+                "label": "Sport"
+            },
             "structure": {
                 "label": "Struktur",
                 "placeholder": "Ukjent",
@@ -503,6 +574,9 @@
                     "bridge": "Bru",
                     "tunnel": "Tunnel"
                 }
+            },
+            "studio_type": {
+                "label": "Type"
             },
             "surface": {
                 "label": "Overflate"
@@ -513,8 +587,8 @@
             "towertype": {
                 "label": "Tårntype"
             },
-            "tracktype": {
-                "label": "Type"
+            "tunnel": {
+                "label": "Tunnel"
             },
             "water": {
                 "label": "Type"
@@ -534,9 +608,6 @@
             },
             "wikipedia": {
                 "label": "Wikipedia"
-            },
-            "wood": {
-                "label": "Type"
             }
         },
         "presets": {
@@ -603,8 +674,11 @@
             "amenity/cinema": {
                 "name": "Kino"
             },
-            "amenity/college": {
-                "name": "Videregående skole"
+            "amenity/clock": {
+                "name": "Klokke"
+            },
+            "amenity/doctor": {
+                "name": "Doktor"
             },
             "amenity/drinking_water": {
                 "name": "Drikkevann"
@@ -624,20 +698,14 @@
             "amenity/grave_yard": {
                 "name": "Kirkegård"
             },
-            "amenity/hospital": {
-                "name": "Sykehus"
-            },
-            "amenity/kindergarten": {
-                "name": "Barnehage"
-            },
             "amenity/library": {
                 "name": "Bibliotek"
             },
             "amenity/marketplace": {
                 "name": "Markedsplass"
             },
-            "amenity/parking": {
-                "name": "Parkering"
+            "amenity/nightclub": {
+                "name": "Nattklubb"
             },
             "amenity/pharmacy": {
                 "name": "Apotek"
@@ -672,9 +740,6 @@
             "amenity/restaurant": {
                 "name": "Restaurant"
             },
-            "amenity/school": {
-                "name": "Skole"
-            },
             "amenity/swimming_pool": {
                 "name": "Svømmebasseng"
             },
@@ -689,9 +754,6 @@
             },
             "amenity/townhall": {
                 "name": "Rådhus"
-            },
-            "amenity/university": {
-                "name": "Universitet"
             },
             "amenity/waste_basket": {
                 "name": "Søppel"
@@ -732,17 +794,14 @@
             "building/apartments": {
                 "name": "Leiligheter"
             },
-            "building/entrance": {
-                "name": "Inngang"
-            },
             "building/house": {
                 "name": "Hus"
             },
+            "craft/optician": {
+                "name": "Optiker"
+            },
             "emergency/phone": {
                 "name": "Nødtelefon"
-            },
-            "entrance": {
-                "name": "Inngang"
             },
             "highway": {
                 "name": "Vei"
@@ -767,9 +826,6 @@
             },
             "highway/motorway": {
                 "name": "Motorvei"
-            },
-            "highway/motorway_junction": {
-                "name": "Motorveikrysning"
             },
             "highway/motorway_link": {
                 "name": "Motorveirampe"
@@ -846,14 +902,8 @@
             "landuse/cemetery": {
                 "name": "Kirkegård"
             },
-            "landuse/commercial": {
-                "name": "Kommersielt"
-            },
             "landuse/construction": {
                 "name": "Konstruksjon"
-            },
-            "landuse/farm": {
-                "name": "Gård"
             },
             "landuse/farmyard": {
                 "name": "Gårdsplass"
@@ -864,9 +914,6 @@
             "landuse/grass": {
                 "name": "Gress"
             },
-            "landuse/industrial": {
-                "name": "Industrielt"
-            },
             "landuse/meadow": {
                 "name": "Blomstereng"
             },
@@ -876,17 +923,14 @@
             "landuse/quarry": {
                 "name": "Steinbrudd"
             },
-            "landuse/residential": {
-                "name": "Boligområde"
-            },
-            "landuse/retail": {
-                "name": "Handel"
-            },
             "landuse/vineyard": {
                 "name": "Vingård"
             },
             "leisure": {
                 "name": "Fritid"
+            },
+            "leisure/dog_park": {
+                "name": "Hundepark"
             },
             "leisure/garden": {
                 "name": "Hage"
@@ -954,9 +998,6 @@
             "man_made/water_tower": {
                 "name": "Vanntårn"
             },
-            "man_made/water_well": {
-                "name": "brønn"
-            },
             "man_made/water_works": {
                 "name": "Vannfiltreringsanlegg"
             },
@@ -1010,6 +1051,9 @@
             },
             "office": {
                 "name": "Kontor"
+            },
+            "office/architect": {
+                "name": "Arkitekt"
             },
             "place": {
                 "name": "Sted"
@@ -1089,9 +1133,6 @@
             "shop/bicycle": {
                 "name": "Sykkelbutikk"
             },
-            "shop/books": {
-                "name": "Bokhandler"
-            },
             "shop/butcher": {
                 "name": "Slakter"
             },
@@ -1137,9 +1178,6 @@
             "shop/jewelry": {
                 "name": "Smykkeforhandler"
             },
-            "shop/kiosk": {
-                "name": "Kiosk"
-            },
             "shop/laundry": {
                 "name": "Vaskeri"
             },
@@ -1154,9 +1192,6 @@
             },
             "shop/music": {
                 "name": "Musikkforretning"
-            },
-            "shop/newsagent": {
-                "name": "Avisutsalg"
             },
             "shop/optician": {
                 "name": "Optiker"

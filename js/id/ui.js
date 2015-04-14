@@ -1,7 +1,6 @@
 iD.ui = function(context) {
     function render(container) {
-        var history = context.history(),
-            map = context.map();
+        var map = context.map();
 
         if (iD.detect().opera) container.classed('opera', true);
 
@@ -12,6 +11,10 @@ iD.ui = function(context) {
         if (!hash.hadHash) {
             map.centerZoom([-77.02271, 38.90085], 20);
         }
+
+        container.append('svg')
+            .attr('id', 'defs')
+            .call(iD.svg.Defs(context));
 
         container.append('div')
             .attr('id', 'sidebar')
@@ -29,7 +32,12 @@ iD.ui = function(context) {
             .attr('id', 'map')
             .call(map);
 
-        var spacer = bar.append('div')
+        content.append('div')
+            .attr('class', 'map-in-map')
+            .style('display', 'none')
+            .call(iD.ui.MapInMap(context));
+
+        bar.append('div')
             .attr('class', 'spacer col4');
 
         var limiter = bar.append('div')
@@ -51,15 +59,6 @@ iD.ui = function(context) {
             .attr('class', 'spinner')
             .call(iD.ui.Spinner(context));
 
-        content.append('div')
-            .attr('class', 'attribution')
-            .attr('tabindex', -1)
-            .call(iD.ui.Attribution(context));
-
-        content.append('div')
-            .style('display', 'none')
-            .attr('class', 'help-wrap fillL col5 content');
-
         var controls = bar.append('div')
             .attr('class', 'map-controls');
 
@@ -76,38 +75,53 @@ iD.ui = function(context) {
             .call(iD.ui.Background(context));
 
         controls.append('div')
+            .attr('class', 'map-control map-data-control')
+            .call(iD.ui.MapData(context));
+
+        controls.append('div')
             .attr('class', 'map-control help-control')
             .call(iD.ui.Help(context));
 
         var about = content.append('div')
-            .attr('class','col12 about-block fillD');
+            .attr('id', 'about');
 
         about.append('div')
+            .attr('id', 'attrib')
+            .call(iD.ui.Attribution(context));
+
+        var footer = about.append('div')
+            .attr('id', 'footer')
+            .attr('class', 'fillD');
+
+        footer.append('div')
             .attr('class', 'api-status')
             .call(iD.ui.Status(context));
 
+        footer.append('div')
+            .attr('id', 'scale-block')
+            .call(iD.ui.Scale(context));
+
+        var aboutList = footer.append('div')
+            .attr('id', 'info-block')
+            .append('ul')
+            .attr('id', 'about-list');
+
         if (!context.embed()) {
-            about.append('div')
-                .attr('class', 'account')
-                .call(iD.ui.Account(context));
+            aboutList.call(iD.ui.Account(context));
         }
 
-        var linkList = about.append('ul')
-            .attr('id', 'about')
-            .attr('class', 'link-list');
-
-        linkList.append('li')
+        aboutList.append('li')
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .attr('href', 'http://github.com/systemed/iD')
+            .attr('href', 'http://github.com/openstreetmap/iD')
             .text(iD.version);
 
-        var bugReport = linkList.append('li')
+        var bugReport = aboutList.append('li')
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .attr('href', 'https://github.com/systemed/iD/issues');
+            .attr('href', 'https://github.com/openstreetmap/iD/issues');
 
         bugReport.append('span')
             .attr('class','icon bug light');
@@ -117,13 +131,22 @@ iD.ui = function(context) {
                 .placement('top')
             );
 
-        linkList.append('li')
+        aboutList.append('li')
+            .attr('class', 'feature-warning')
+            .attr('tabindex', -1)
+            .call(iD.ui.FeatureInfo(context));
+
+        aboutList.append('li')
             .attr('class', 'user-list')
             .attr('tabindex', -1)
             .call(iD.ui.Contributors(context));
 
         window.onbeforeunload = function() {
             return context.save();
+        };
+
+        window.onunload = function() {
+            context.history().unlock();
         };
 
         d3.select(window).on('resize.editor', function() {
@@ -181,5 +204,11 @@ iD.ui = function(context) {
 };
 
 iD.ui.tooltipHtml = function(text, key) {
-    return '<span>' + text + '</span>' + '<div class="keyhint-wrap">' + '<span> ' + (t('tooltip_keyhint')) + ' </span>' + '<span class="keyhint"> ' + key + '</span></div>';
+    var s = '<span>' + text + '</span>';
+    if (key) {
+        s += '<div class="keyhint-wrap">' +
+            '<span> ' + (t('tooltip_keyhint')) + ' </span>' +
+            '<span class="keyhint"> ' + key + '</span></div>';
+    }
+    return s;
 };

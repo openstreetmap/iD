@@ -1,4 +1,4 @@
-iD.GpxLayer = function(context, dispatch) {
+iD.GpxLayer = function(context) {
     var projection,
         gj = {},
         enable = true,
@@ -40,7 +40,7 @@ iD.GpxLayer = function(context, dispatch) {
                 .append('text')
                 .attr('class', 'gpx')
                 .text(function(d) {
-                    return d.properties.name;
+                    return d.properties.desc || d.properties.name;
                 })
                 .attr('x', function(d) {
                     var centroid = path.centroid(d);
@@ -51,10 +51,6 @@ iD.GpxLayer = function(context, dispatch) {
                     return centroid[1];
                 });
         }
-    }
-
-    function toDom(x) {
-        return (new DOMParser()).parseFromString(x, 'text/xml');
     }
 
     render.projection = function(_) {
@@ -95,16 +91,7 @@ iD.GpxLayer = function(context, dispatch) {
             d3.event.stopPropagation();
             d3.event.preventDefault();
             if (!iD.detect().filedrop) return;
-            var f = d3.event.dataTransfer.files[0],
-                reader = new FileReader();
-
-            reader.onload = function(e) {
-                render.geojson(toGeoJSON.gpx(toDom(e.target.result)));
-                dispatch.change();
-                context.map().pan([0, 0]);
-            };
-
-            reader.readAsText(f);
+            context.background().gpxLayerFiles(d3.event.dataTransfer.files);
         })
         .on('dragenter.localgpx', over)
         .on('dragexit.localgpx', over)

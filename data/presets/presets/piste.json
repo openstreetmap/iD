@@ -1,0 +1,28 @@
+{
+    "icon": "skiing",
+    "fields": [
+        "piste/type",
+        "piste/difficulty",
+        "piste/grooming",
+        "oneway",
+        "lit"
+    ],
+    "geometry": [
+        "point",
+        "line",
+        "area"
+    ],
+    "terms": [
+        "ski",
+        "sled",
+        "sleigh",
+        "snowboard",
+        "nordic",
+        "downhill",
+        "snowmobile"
+    ],
+    "tags": {
+        "piste:type": "*"
+    },
+    "name": "Piste/Ski Trail"
+}

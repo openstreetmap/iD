@@ -1,0 +1,5 @@
+{
+    "key": "fuel:diesel",
+    "type": "check",
+    "label": "Sells Diesel"
+}

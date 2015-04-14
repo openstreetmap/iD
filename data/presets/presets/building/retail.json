@@ -1,0 +1,16 @@
+{
+    "icon": "building",
+    "fields": [
+        "address",
+        "levels",
+        "smoking"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "building": "retail"
+    },
+    "name": "Retail Building"
+}

@@ -1,0 +1,14 @@
+{
+    "geometry": "area",
+    "name": "Golf",
+    "icon": "golf",
+    "members": [
+        "golf/fairway",
+        "golf/green",
+        "golf/lateral_water_hazard",
+        "golf/rough",
+        "golf/bunker",
+        "golf/tee",
+        "golf/water_hazard"
+    ]
+}

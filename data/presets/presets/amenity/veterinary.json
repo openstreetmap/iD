@@ -1,0 +1,23 @@
+{
+    "icon": "dog-park",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "pet clinic",
+        "veterinarian",
+        "animal hospital",
+        "pet doctor"
+    ],
+    "tags": {
+        "amenity": "veterinary"
+    },
+    "name": "Veterinary"
+}

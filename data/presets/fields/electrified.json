@@ -1,0 +1,14 @@
+{
+    "key": "electrified",
+    "type": "combo",
+    "label": "Electrification",
+    "placeholder": "Contact Line, Electrified Rail...",
+    "strings": {
+        "options": {
+            "contact_line": "Contact Line",
+            "rail": "Electrified Rail",
+            "yes": "Yes (unspecified)",
+            "no": "No"
+        }
+    }
+}

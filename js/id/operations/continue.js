@@ -23,7 +23,8 @@ iD.operations.Continue = function(selectedIDs, context) {
     };
 
     operation.available = function() {
-        return geometries.vertex.length === 1 && geometries.line.length <= 1;
+        return geometries.vertex.length === 1 && geometries.line.length <= 1 &&
+            !context.features().hasHiddenConnections(vertex, context.graph());
     };
 
     operation.disabled = function() {
@@ -41,7 +42,7 @@ iD.operations.Continue = function(selectedIDs, context) {
             t('operations.continue.description');
     };
 
-    operation.id = "continue";
+    operation.id = 'continue';
     operation.keys = [t('operations.continue.key')];
     operation.title = t('operations.continue.title');
 

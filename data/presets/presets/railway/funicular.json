@@ -1,0 +1,22 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "venicular",
+        "cliff railway",
+        "cable car",
+        "cable railway",
+        "funicular railway"
+    ],
+    "fields": [
+        "structure",
+        "gauge",
+        "service_rail"
+    ],
+    "tags": {
+        "railway": "funicular"
+    },
+    "icon": "railway-rail",
+    "name": "Funicular"
+}

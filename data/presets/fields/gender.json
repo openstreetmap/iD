@@ -1,0 +1,17 @@
+{
+    "type": "radio",
+    "keys": [
+        "male",
+        "female",
+        "unisex"
+    ],
+    "label": "Gender",
+    "placeholder": "Unknown",
+    "strings": {
+        "options": {
+            "male": "Male",
+            "female": "Female",
+            "unisex": "Unisex"
+        }
+    }
+}

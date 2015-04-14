@@ -1,0 +1,5 @@
+{
+    "key": "shelter_type",
+    "type": "combo",
+    "label": "Type"
+}

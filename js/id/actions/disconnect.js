@@ -17,41 +17,52 @@ iD.actions.Disconnect = function(nodeId, newNodeId) {
 
     var action = function(graph) {
         var node = graph.entity(nodeId),
-            replacements = action.replacements(graph);
+            connections = action.connections(graph);
 
-        replacements.forEach(function(replacement) {
-            var newNode = iD.Node({id: newNodeId, loc: node.loc, tags: node.tags});
+        connections.forEach(function(connection) {
+            var way = graph.entity(connection.wayID),
+                newNode = iD.Node({id: newNodeId, loc: node.loc, tags: node.tags});
+
             graph = graph.replace(newNode);
-            graph = graph.replace(replacement.way.updateNode(newNode.id, replacement.index));
+            if (connection.index === 0 && way.isArea()) {
+                // replace shared node with shared node..
+                graph = graph.replace(way.replaceNode(way.nodes[0], newNode.id));
+            } else {
+                // replace shared node with multiple new nodes..
+                graph = graph.replace(way.updateNode(newNode.id, connection.index));
+            }
         });
 
         return graph;
     };
 
-    action.replacements = function(graph) {
+    action.connections = function(graph) {
         var candidates = [],
             keeping = false,
-            parents = graph.parentWays(graph.entity(nodeId));
+            parentWays = graph.parentWays(graph.entity(nodeId));
 
-        parents.forEach(function(parent) {
-            if (wayIds && wayIds.indexOf(parent.id) === -1) {
+        parentWays.forEach(function(way) {
+            if (wayIds && wayIds.indexOf(way.id) === -1) {
                 keeping = true;
                 return;
             }
-
-            parent.nodes.forEach(function(waynode, index) {
-                if (waynode === nodeId) {
-                    candidates.push({way: parent, index: index});
-                }
-            });
+            if (way.isArea() && (way.nodes[0] === nodeId)) {
+                candidates.push({wayID: way.id, index: 0});
+            } else {
+                way.nodes.forEach(function(waynode, index) {
+                    if (waynode === nodeId) {
+                        candidates.push({wayID: way.id, index: index});
+                    }
+                });
+            }
         });
 
         return keeping ? candidates : candidates.slice(1);
     };
 
     action.disabled = function(graph) {
-        var replacements = action.replacements(graph);
-        if (replacements.length === 0 || (wayIds && wayIds.length !== replacements.length))
+        var connections = action.connections(graph);
+        if (connections.length === 0 || (wayIds && wayIds.length !== connections.length))
             return 'not_connected';
     };
 

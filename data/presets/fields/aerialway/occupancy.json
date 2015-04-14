@@ -1,0 +1,6 @@
+{
+    "key": "aerialway:occupancy",
+    "type": "number",
+    "label": "Occupancy",
+    "placeholder": "2, 4, 8..."
+}

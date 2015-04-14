@@ -1,0 +1,14 @@
+{
+    "icon": "warehouse",
+    "fields": [
+        "capacity"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "building": "garages"
+    },
+    "name": "Garages"
+}

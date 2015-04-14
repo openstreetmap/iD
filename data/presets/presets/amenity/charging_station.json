@@ -1,0 +1,19 @@
+{
+    "icon": "car",
+    "fields": [
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "charging_station"
+    },
+    "terms": [
+        "EV",
+        "Electric Vehicle",
+        "Supercharger"
+    ],
+    "name": "Charging Station"
+}

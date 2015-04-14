@@ -1,0 +1,25 @@
+{
+    "icon": "highway-unclassified",
+    "fields": [
+        "oneway",
+        "surface",
+        "sport_racing",
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "raceway"
+    },
+    "addTags": {
+        "highway": "raceway",
+        "sport": "motor"
+    },
+    "terms": [
+        "auto*",
+        "race*",
+        "nascar"
+    ],
+    "name": "Motor Raceway"
+}

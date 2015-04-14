@@ -12,13 +12,12 @@ iD.Map = function(context) {
         transformStart,
         transformed = false,
         minzoom = 0,
-        transformProp = iD.util.prefixCSSProperty('Transform'),
         points = iD.svg.Points(roundedProjection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
         lines = iD.svg.Lines(projection),
-        areas = iD.svg.Areas(roundedProjection),
+        areas = iD.svg.Areas(projection),
         midpoints = iD.svg.Midpoints(roundedProjection, context),
-        labels = iD.svg.Labels(roundedProjection, context),
+        labels = iD.svg.Labels(projection, context),
         supersurface, surface,
         mouse,
         mousemove;
@@ -28,13 +27,15 @@ iD.Map = function(context) {
             .on('change.map', redraw);
         context.background()
             .on('change.map', redraw);
+        context.features()
+            .on('redraw.map', redraw);
 
-        selection.call(zoom);
+        selection
+            .on('dblclick.map', dblClick)
+            .call(zoom);
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface');
-
-        supersurface.call(context.background());
 
         // Need a wrapper div because Opera can't cope with an absolutely positioned
         // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
@@ -43,7 +44,7 @@ iD.Map = function(context) {
 
         map.surface = surface = dataLayer.append('svg')
             .on('mousedown.zoom', function() {
-                if (d3.event.button == 2) {
+                if (d3.event.button === 2) {
                     d3.event.stopPropagation();
                 }
             }, true)
@@ -52,6 +53,8 @@ iD.Map = function(context) {
             })
             .attr('id', 'surface')
             .call(iD.svg.Surface(context));
+
+        supersurface.call(context.background());
 
         surface.on('mousemove.map', function() {
             mousemove = d3.event;
@@ -77,10 +80,11 @@ iD.Map = function(context) {
             if (map.editable() && !transformed) {
                 var all = context.intersects(map.extent()),
                     filter = d3.functor(true),
-                    extent = map.extent(),
                     graph = context.graph();
-                surface.call(vertices, graph, all, filter, extent, map.zoom());
-                surface.call(midpoints, graph, all, filter, extent);
+
+                all = context.features().filter(all, graph);
+                surface.call(vertices, graph, all, filter, map.extent(), map.zoom());
+                surface.call(midpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.drawn({full: false});
             }
         });
@@ -93,82 +97,71 @@ iD.Map = function(context) {
     function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
 
     function drawVector(difference, extent) {
-        var filter, all,
-            graph = context.graph();
+        var graph = context.graph(),
+            features = context.features(),
+            all = context.intersects(map.extent()),
+            data, filter;
 
         if (difference) {
             var complete = difference.complete(map.extent());
-            all = _.compact(_.values(complete));
-            filter = function(d) {
-                if (d.type === 'midpoint') {
-
-                    var a = d.edge[0],
-                        b = d.edge[1];
-
-                    // redraw a midpoint if it needs to be
-                    // - moved (either edge node moved)
-                    // - deleted (edge nodes not consecutive in any parent way)
-                    if (a in complete || b in complete) return true;
-
-                    var parentsWays = graph.parentWays({ id: a });
-                    for (var i = 0; i < parentsWays.length; i++) {
-                        var nodes = parentsWays[i].nodes;
-                        for (var n = 0; n < nodes.length; n++) {
-                            if (nodes[n] === a && (nodes[n - 1] === b || nodes[n + 1] === b)) return false;
-                        }
-                    }
-                    return true;
-
-                } else {
-                    return d.id in complete;
-                }
-            };
-
-        } else if (extent) {
-            all = context.intersects(map.extent().intersection(extent));
-            var set = d3.set(_.pluck(all, 'id'));
-            filter = function(d) { return set.has(d.id); };
+            data = _.compact(_.values(complete));
+            filter = function(d) { return d.id in complete; };
+            features.clear(data);
 
         } else {
-            all = context.intersects(map.extent());
-            filter = d3.functor(true);
+            // force a full redraw if gatherStats detects that a feature
+            // should be auto-hidden (e.g. points or buildings)..
+            if (features.gatherStats(all, graph, dimensions)) {
+                extent = undefined;
+            }
+
+            if (extent) {
+                data = context.intersects(map.extent().intersection(extent));
+                var set = d3.set(_.pluck(data, 'id'));
+                filter = function(d) { return set.has(d.id); };
+
+            } else {
+                data = all;
+                filter = d3.functor(true);
+            }
         }
+
+        data = features.filter(data, graph);
 
         surface
-            .call(vertices, graph, all, filter, map.extent(), map.zoom())
-            .call(lines, graph, all, filter)
-            .call(areas, graph, all, filter)
-            .call(midpoints, graph, all, filter, map.extent())
-            .call(labels, graph, all, filter, dimensions, !difference && !extent);
-
-        if (points.points(context.intersects(map.extent()), 100).length >= 100) {
-            surface.select('.layer-hit').selectAll('g.point').remove();
-        } else {
-            surface.call(points, points.points(all), filter);
-        }
+            .call(vertices, graph, data, filter, map.extent(), map.zoom())
+            .call(lines, graph, data, filter)
+            .call(areas, graph, data, filter)
+            .call(midpoints, graph, data, filter, map.trimmedExtent())
+            .call(labels, graph, data, filter, dimensions, !difference && !extent)
+            .call(points, data, filter);
 
         dispatch.drawn({full: true});
     }
 
     function editOff() {
+        context.features().resetStats();
         surface.selectAll('.layer *').remove();
         dispatch.drawn({full: true});
     }
 
-    function zoomPan() {
-        if (d3.event && d3.event.sourceEvent.type === 'dblclick') {
-            if (!dblclickEnabled) {
-                zoom.scale(projection.scale() * 2 * Math.PI)
-                    .translate(projection.translate());
-                return d3.event.sourceEvent.preventDefault();
-            }
+    function dblClick() {
+        if (!dblclickEnabled) {
+            d3.event.preventDefault();
+            d3.event.stopImmediatePropagation();
         }
+    }
 
-        if (Math.log(d3.event.scale / Math.LN2 - 8) < minzoom + 1) {
+    function zoomPan() {
+        if (Math.log(d3.event.scale) / Math.LN2 - 8 < minzoom) {
+            surface.interrupt();
             iD.ui.flash(context.container())
                 .select('.content')
                 .text(t('cannot_zoom'));
-            return setZoom(16, true);
+            setZoom(context.minEditableZoom(), true);
+            queueRedraw();
+            dispatch.move(map);
+            return;
         }
 
         projection
@@ -176,17 +169,11 @@ iD.Map = function(context) {
             .scale(d3.event.scale / (2 * Math.PI));
 
         var scale = d3.event.scale / transformStart[0],
-            tX = Math.round(d3.event.translate[0] / scale - transformStart[1][0]),
-            tY = Math.round(d3.event.translate[1] / scale - transformStart[1][1]);
-
-        var transform =
-            'scale(' + scale + ')' +
-            (iD.detect().opera ?
-                'translate(' + tX + 'px,' + tY + 'px)' :
-                'translate3d(' + tX + 'px,' + tY + 'px, 0)');
+            tX = Math.round((d3.event.translate[0] / scale - transformStart[1][0]) * scale),
+            tY = Math.round((d3.event.translate[1] / scale - transformStart[1][1]) * scale);
 
         transformed = true;
-        supersurface.style(transformProp, transform);
+        iD.util.setTransform(supersurface, tX, tY, scale);
         queueRedraw();
 
         dispatch.move(map);
@@ -194,7 +181,7 @@ iD.Map = function(context) {
 
     function resetTransform() {
         if (!transformed) return false;
-        supersurface.style(transformProp, '');
+        iD.util.setTransform(supersurface, 0, 0);
         transformed = false;
         return true;
     }
@@ -214,7 +201,8 @@ iD.Map = function(context) {
 
         var zoom = String(~~map.zoom());
         if (surface.attr('data-zoom') !== zoom) {
-            surface.attr('data-zoom', zoom);
+            surface.attr('data-zoom', zoom)
+                .classed('low-zoom', zoom <= 16);
         }
 
         if (!difference) {
@@ -222,7 +210,7 @@ iD.Map = function(context) {
         }
 
         if (map.editable()) {
-            context.connection().loadTiles(projection, dimensions);
+            context.loadTiles(projection, dimensions);
             drawVector(difference, extent);
         } else {
             editOff();
@@ -255,7 +243,7 @@ iD.Map = function(context) {
 
     map.mouse = function() {
         var e = mousemove || d3.event, s;
-        while (s = e.sourceEvent) e = s;
+        while ((s = e.sourceEvent)) e = s;
         return mouse(e);
     };
 
@@ -269,10 +257,26 @@ iD.Map = function(context) {
         return map;
     };
 
-    function setZoom(z, force) {
-        if (z === map.zoom() && !force)
+    function interpolateZoom(_) {
+        var k = projection.scale(),
+            t = projection.translate();
+
+        surface.node().__chart__ = {
+            x: t[0],
+            y: t[1],
+            k: k * 2 * Math.PI
+        };
+
+        setZoom(_);
+        projection.scale(k).translate(t);  // undo setZoom projection changes
+
+        zoom.event(surface.transition());
+    }
+
+    function setZoom(_, force) {
+        if (_ === map.zoom() && !force)
             return false;
-        var scale = 256 * Math.pow(2, z),
+        var scale = 256 * Math.pow(2, _),
             center = pxCenter(),
             l = pointLocation(center);
         scale = Math.max(1024, Math.min(256 * Math.pow(2, 24), scale));
@@ -287,15 +291,16 @@ iD.Map = function(context) {
         return true;
     }
 
-    function setCenter(loc) {
-        var t = projection.translate(),
-            c = pxCenter(),
-            ll = projection(loc);
-        if (ll[0] === c[0] && ll[1] === c[1])
+    function setCenter(_) {
+        var c = map.center();
+        if (_[0] === c[0] && _[1] === c[1])
             return false;
+        var t = projection.translate(),
+            pxC = pxCenter(),
+            ll = projection(_);
         projection.translate([
-            t[0] - ll[0] + c[0],
-            t[1] - ll[1] + c[1]]);
+            t[0] - ll[0] + pxC[0],
+            t[1] - ll[1] + pxC[1]]);
         zoom.translate(projection.translate());
         return true;
     }
@@ -322,8 +327,8 @@ iD.Map = function(context) {
         return redraw();
     };
 
-    map.zoomIn = function() { return map.zoom(Math.ceil(map.zoom() + 1)); };
-    map.zoomOut = function() { return map.zoom(Math.floor(map.zoom() - 1)); };
+    map.zoomIn = function() { interpolateZoom(~~map.zoom() + 1); };
+    map.zoomOut = function() { interpolateZoom(~~map.zoom() - 1); };
 
     map.center = function(loc) {
         if (!arguments.length) {
@@ -342,6 +347,14 @@ iD.Map = function(context) {
             return Math.max(Math.log(projection.scale() * 2 * Math.PI) / Math.LN2 - 8, 0);
         }
 
+        if (z < minzoom) {
+            surface.interrupt();
+            iD.ui.flash(context.container())
+                .select('.content')
+                .text(t('cannot_zoom'));
+            z = context.minEditableZoom();
+        }
+
         if (setZoom(z)) {
             dispatch.move(map);
         }
@@ -350,9 +363,11 @@ iD.Map = function(context) {
     };
 
     map.zoomTo = function(entity, zoomLimits) {
-        var extent = entity.extent(context.graph()),
-            zoom = map.extentZoom(extent);
-        zoomLimits = zoomLimits || [16, 20];
+        var extent = entity.extent(context.graph());
+        if (!isFinite(extent.area())) return;
+
+        var zoom = map.trimmedExtentZoom(extent);
+        zoomLimits = zoomLimits || [context.minEditableZoom(), 20];
         map.centerZoom(extent.center(), Math.min(Math.max(zoom, zoomLimits[0]), zoomLimits[1]));
     };
 
@@ -379,7 +394,7 @@ iD.Map = function(context) {
         d3.timer(function() {
             if (stop) return true;
             map.center(iD.geo.interp(from, loc, (t += 1) / 10));
-            return t == 10;
+            return t === 10;
         }, 20);
         return map;
     };
@@ -394,23 +409,38 @@ iD.Map = function(context) {
         }
     };
 
-    map.extentZoom = function(_) {
-        var extent = iD.geo.Extent(_),
-            tl = projection([extent[0][0], extent[1][1]]),
+    map.trimmedExtent = function() {
+        var headerY = 60, footerY = 30, pad = 10;
+        return new iD.geo.Extent(projection.invert([pad, dimensions[1] - footerY - pad]),
+                projection.invert([dimensions[0] - pad, headerY + pad]));
+    };
+
+    function calcZoom(extent, dim) {
+        var tl = projection([extent[0][0], extent[1][1]]),
             br = projection([extent[1][0], extent[0][1]]);
 
         // Calculate maximum zoom that fits extent
-        var hFactor = (br[0] - tl[0]) / dimensions[0],
-            vFactor = (br[1] - tl[1]) / dimensions[1],
+        var hFactor = (br[0] - tl[0]) / dim[0],
+            vFactor = (br[1] - tl[1]) / dim[1],
             hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2,
             vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
             newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
 
         return newZoom;
+    }
+
+    map.extentZoom = function(_) {
+        return calcZoom(iD.geo.Extent(_), dimensions);
+    };
+
+    map.trimmedExtentZoom = function(_) {
+        var trimY = 120, trimX = 40,
+            trimmed = [dimensions[0] - trimX, dimensions[1] - trimY];
+        return calcZoom(iD.geo.Extent(_), trimmed);
     };
 
     map.editable = function() {
-        return map.zoom() >= 16;
+        return map.zoom() >= context.minEditableZoom();
     };
 
     map.minzoom = function(_) {

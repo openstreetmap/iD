@@ -1,5 +1,11 @@
 [
     {
+        "old": { "amenity": "firepit" },
+        "replace": {
+            "leisure": "firepit"
+        }
+    },
+    {
         "old": { "barrier": "wire_fence" },
         "replace": {
             "barrier": "fence",
@@ -61,13 +67,6 @@
         }
     },
     {
-        "old": { "shop": "organic" },
-        "replace": {
-            "shop": "supermarket",
-            "organic": "only"
-        }
-    },
-    {
         "old": { "power_source": "*" },
         "replace": {
             "generator:source": "$1"
@@ -77,6 +76,13 @@
         "old": { "power_rating": "*" },
         "replace": {
             "generator:output": "$1"
+        }
+    },
+    {
+        "old": { "shop": "organic" },
+        "replace": {
+            "shop": "supermarket",
+            "organic": "only"
         }
     }
 ]

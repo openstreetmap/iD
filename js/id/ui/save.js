@@ -34,7 +34,7 @@ iD.ui.Save = function(context) {
             .text('0');
 
         var keybinding = d3.keybinding('undo-redo')
-            .on(key, save);
+            .on(key, save, true);
 
         d3.select(document)
             .call(keybinding);
@@ -42,13 +42,13 @@ iD.ui.Save = function(context) {
         var numChanges = 0;
 
         context.history().on('change.save', function() {
-            var _ = history.numChanges();
+            var _ = history.difference().summary().length;
             if (_ === numChanges)
                 return;
             numChanges = _;
 
             tooltip.title(iD.ui.tooltipHtml(t(numChanges > 0 ?
-                    'save.help' : 'save.no_changes'), key))
+                    'save.help' : 'save.no_changes'), key));
 
             button
                 .classed('disabled', numChanges === 0)

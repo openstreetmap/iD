@@ -2,6 +2,7 @@ iD.ui.RawMemberEditor = function(context) {
     var id;
 
     function selectMember(d) {
+        d3.event.preventDefault();
         context.enter(iD.modes.Select(context, [d.id]));
     }
 
@@ -16,6 +17,10 @@ iD.ui.RawMemberEditor = function(context) {
         context.perform(
             iD.actions.DeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation'));
+
+        if (!context.hasEntity(d.relation.id)) {
+            context.enter(iD.modes.Browse(context));
+        }
     }
 
     function rawMemberEditor(selection) {
@@ -58,7 +63,8 @@ iD.ui.RawMemberEditor = function(context) {
                 });
 
             var $enter = $items.enter().append('li')
-                .attr('class', 'member-row form-field');
+                .attr('class', 'member-row form-field')
+                .classed('member-incomplete', function(d) { return !d.member; });
 
             $enter.each(function(d) {
                 if (d.member) {
@@ -78,7 +84,7 @@ iD.ui.RawMemberEditor = function(context) {
 
                 } else {
                     d3.select(this).append('label')
-                        .attr('class', 'form-label member-incomplete')
+                        .attr('class', 'form-label')
                         .text(t('inspector.incomplete'));
                 }
             });

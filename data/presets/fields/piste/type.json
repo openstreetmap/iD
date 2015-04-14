@@ -1,0 +1,18 @@
+{
+    "key": "piste:type",
+    "type": "typeCombo",
+    "label": "Type",
+    "strings": {
+        "options": {
+            "downhill": "Downhill",
+            "nordic": "Nordic",
+            "skitour": "Skitour",
+            "sled": "Sled",
+            "hike": "Hike",
+            "sleigh": "Sleigh",
+            "ice_skate": "Ice Skate",
+            "snow_park": "Snow Park",
+            "playground": "Playground"
+        }
+    }
+}

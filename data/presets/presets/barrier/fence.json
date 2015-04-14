@@ -1,7 +1,6 @@
 {
     "geometry": [
-        "line",
-        "area"
+        "line"
     ],
     "tags": {
         "barrier": "fence"

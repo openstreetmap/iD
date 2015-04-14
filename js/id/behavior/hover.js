@@ -7,7 +7,7 @@
    Only one of these elements can have the :hover pseudo-class, but all of them will
    have the .hover class.
  */
-iD.behavior.Hover = function(context) {
+iD.behavior.Hover = function() {
     var dispatch = d3.dispatch('hover'),
         selection,
         altDisables,
@@ -81,7 +81,7 @@ iD.behavior.Hover = function(context) {
         function mousedown() {
             down = true;
             d3.select(window)
-                .on('mouseup.hover', mouseup)
+                .on('mouseup.hover', mouseup);
         }
 
         function mouseup() {
@@ -114,7 +114,7 @@ iD.behavior.Hover = function(context) {
         d3.select(window)
             .on('keydown.hover', null)
             .on('keyup.hover', null)
-            .on('mouseup.hover', null)
+            .on('mouseup.hover', null);
     };
 
     hover.altDisables = function(_) {

@@ -22,4 +22,12 @@ describe("iD.actions.DiscardTags", function() {
             action = iD.actions.DiscardTags(iD.Difference(base, head));
         expect(action(head).entity(way.id)).to.equal(way);
     });
+
+    it("discards tags with empty values", function() {
+        var way    = iD.Way({tags: {lmnop: ''}}),
+            base   = iD.Graph(),
+            head   = base.replace(way),
+            action = iD.actions.DiscardTags(iD.Difference(base, head));
+        expect(action(head).entity(way.id).tags).to.eql({});
+    });
 });

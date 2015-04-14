@@ -2,35 +2,29 @@
     "icon": "bank",
     "fields": [
         "atm",
+        "operator",
+        "address",
         "building_area",
-        "address"
+        "opening_hours",
+        "drive_through"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [
-        "coffer",
-        "countinghouse",
         "credit union",
-        "depository",
-        "exchequer",
+        "check",
+        "deposit",
         "fund",
-        "hoard",
-        "investment firm",
+        "investment",
         "repository",
         "reserve",
-        "reservoir",
         "safe",
         "savings",
         "stock",
-        "stockpile",
-        "store",
-        "storehouse",
-        "thrift",
         "treasury",
-        "trust company",
+        "trust",
         "vault"
     ],
     "tags": {

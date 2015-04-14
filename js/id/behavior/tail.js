@@ -2,38 +2,35 @@ iD.behavior.Tail = function() {
     var text,
         container,
         xmargin = 25,
-        tooltip_size = [0, 0],
-        selection_size = [0, 0],
-        transformProp = iD.util.prefixCSSProperty('Transform');
+        tooltipSize = [0, 0],
+        selectionSize = [0, 0];
 
     function tail(selection) {
         if (!text) return;
 
         d3.select(window)
-            .on('resize.tail', function() { selection_size = selection.dimensions(); });
+            .on('resize.tail', function() { selectionSize = selection.dimensions(); });
 
         function show() {
             container.style('display', 'block');
-            tooltip_size = container.dimensions();
+            tooltipSize = container.dimensions();
         }
 
         function mousemove() {
             if (container.style('display') === 'none') show();
-            var xoffset = ((d3.event.clientX + tooltip_size[0] + xmargin) > selection_size[0]) ?
-                -tooltip_size[0] - xmargin : xmargin;
+            var xoffset = ((d3.event.clientX + tooltipSize[0] + xmargin) > selectionSize[0]) ?
+                -tooltipSize[0] - xmargin : xmargin;
             container.classed('left', xoffset > 0);
-            container.style(transformProp, 'translate(' +
-                (~~d3.event.clientX + xoffset) + 'px,' +
-                ~~d3.event.clientY + 'px)');
+            iD.util.setTransform(container, d3.event.clientX + xoffset, d3.event.clientY);
         }
 
-        function mouseout() {
+        function mouseleave() {
             if (d3.event.relatedTarget !== container.node()) {
                 container.style('display', 'none');
             }
         }
 
-        function mouseover() {
+        function mouseenter() {
             if (d3.event.relatedTarget !== container.node()) {
                 show();
             }
@@ -49,14 +46,14 @@ iD.behavior.Tail = function() {
 
         selection
             .on('mousemove.tail', mousemove)
-            .on('mouseover.tail', mouseover)
-            .on('mouseout.tail', mouseout);
+            .on('mouseenter.tail', mouseenter)
+            .on('mouseleave.tail', mouseleave);
 
         container
             .on('mousemove.tail', mousemove);
 
-        tooltip_size = container.dimensions();
-        selection_size = selection.dimensions();
+        tooltipSize = container.dimensions();
+        selectionSize = selection.dimensions();
     }
 
     tail.off = function(selection) {
@@ -68,8 +65,8 @@ iD.behavior.Tail = function() {
 
         selection
             .on('mousemove.tail', null)
-            .on('mouseover.tail', null)
-            .on('mouseout.tail', null);
+            .on('mouseenter.tail', null)
+            .on('mouseleave.tail', null);
 
         d3.select(window)
             .on('resize.tail', null);

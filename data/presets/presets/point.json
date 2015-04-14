@@ -1,5 +1,6 @@
 {
     "name": "Point",
     "tags": {},
-    "geometry": ["point"]
+    "geometry": ["point"],
+    "matchScore": 0.1
 }

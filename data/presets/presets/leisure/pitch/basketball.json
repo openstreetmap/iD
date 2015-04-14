@@ -1,7 +1,9 @@
 {
     "icon": "basketball",
     "fields": [
-        "surface"
+        "surface",
+        "hoops",
+        "lit"
     ],
     "geometry": [
         "point",

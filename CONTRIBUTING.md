@@ -8,14 +8,14 @@ so that you can write code that fits in perfectly.
 We'd love to hear what you think about iD, about any specific problems or
 concerns you have. Here's a quick list of things to consider:
 
-Please [search for your issue before filing it: many bugs and improvements have already been reported](https://github.com/search?l=&q=repo%3Asystemed%2FiD&type=Issues)
+Please [search for your issue before filing it: many bugs and improvements have already been reported](https://github.com/search?l=&q=repo%3Aopenstreetmap%2FiD&type=Issues)
 
 To report a bug:
 
 * Write specifically what browser (type and version, like Firefox 22), OS, and browser extensions you have installed
 * Write steps to replicate the error: when did it happen? What did you expect to happen? What happened instead?
 * Please keep bug reports professional and straightforward: trust us, we share your dismay at software breaking.
-* If you can, [enable web developer extensions](http://macwright.org/enable-web-developer-extensions/) and report the
+* If you can, [enable web developer extensions](http://debugbrowser.com/) and report the
   Javascript error message.
 
 When in doubt, be over-descriptive of the bug and how you discovered it.
@@ -64,7 +64,7 @@ project** button near the bottom of the project page. You can edit your
 getting too many notifications.
 
 Translations are licensed under
-[WTFPL](https://raw.github.com/systemed/iD/master/LICENSE), the same license
+[WTFPL](https://raw.github.com/openstreetmap/iD/master/LICENSE), the same license
 as iD.
 
 **Why are there so many duplicate "Type" translations?** There are multiple
@@ -194,4 +194,4 @@ So let's say you've changed `js/ui/confirm.js`.
 1. Run `jshint js/id` to make sure your code is clean
 2. Run tests with `npm test`
 3. Commit your changes with an informative commit message
-4. [Submit a pull request](https://help.github.com/articles/using-pull-requests) to the `systemed/iD` project.
+4. [Submit a pull request](https://help.github.com/articles/using-pull-requests) to the `openstreetmap/iD` project.

@@ -1,0 +1,22 @@
+{
+    "icon": "cemetery",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "religion",
+        "denomination"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "undertaker",
+        "memorial home"
+    ],
+    "tags": {
+        "shop": "funeral_directors"
+    },
+    "name": "Funeral Home"
+}

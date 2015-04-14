@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "embankment": "yes"
+    },
+    "name": "Embankment",
+    "matchScore": 0.2
+}

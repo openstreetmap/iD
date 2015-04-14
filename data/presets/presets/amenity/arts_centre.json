@@ -1,19 +1,18 @@
 {
-    "name": "Arts Center",
+    "icon": "theatre",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "arts",
-        "arts centre"
     ],
     "tags": {
         "amenity": "arts_centre"
     },
-    "icon": "theatre",
-    "fields": [
-        "building_area",
-        "address"
-    ]
+    "name": "Arts Center"
 }

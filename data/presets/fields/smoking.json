@@ -1,0 +1,16 @@
+{
+    "key": "smoking",
+    "type": "combo",
+    "label": "Smoking",
+    "placeholder": "No, Separated, Yes...",
+    "strings": {
+        "options": {
+            "no": "No smoking anywhere",
+            "separated": "In smoking areas, not physically isolated",
+            "isolated": "In smoking areas, physically isolated",
+            "outside": "Allowed outside",
+            "yes": "Allowed everywhere",
+            "dedicated": "Dedicated to smokers (e.g. smokers' club)"
+        }
+    }
+}

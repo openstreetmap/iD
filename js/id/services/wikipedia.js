@@ -1,6 +1,6 @@
 iD.wikipedia  = function() {
     var wiki = {},
-        endpoint = 'http://en.wikipedia.org/w/api.php?';
+        endpoint = 'https://en.wikipedia.org/w/api.php?';
 
     wiki.search = function(lang, query, callback) {
         lang = lang || 'en';

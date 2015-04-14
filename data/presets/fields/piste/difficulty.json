@@ -1,0 +1,17 @@
+{
+    "key": "piste:difficulty",
+    "type": "combo",
+    "label": "Difficulty",
+    "placeholder": "Easy, Intermediate, Advanced...",
+    "strings": {
+        "options": {
+            "novice": "Novice (instructional)",
+            "easy": "Easy (green circle)",
+            "intermediate": "Intermediate (blue square)",
+            "advanced": "Advanced (black diamond)",
+            "expert": "Expert (double black diamond)",
+            "freeride": "Freeride (off-piste)",
+            "extreme": "Extreme (climbing equipment required)"
+        }
+    }
+}

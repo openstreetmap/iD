@@ -16,8 +16,6 @@ iD.behavior.Lasso = function(context) {
                     .on('mouseup.lasso', mouseup);
 
                 d3.event.stopPropagation();
-                d3.event.preventDefault();
-
             }
         }
 

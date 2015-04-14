@@ -1,11 +1,17 @@
 {
     "icon": "bank",
     "fields": [
-        "operator"
+        "operator",
+        "drive_through"
     ],
     "geometry": [
         "point",
         "vertex"
+    ],
+    "terms": [
+        "money",
+        "cash",
+        "machine"
     ],
     "tags": {
         "amenity": "atm"

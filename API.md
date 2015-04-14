@@ -1,4 +1,4 @@
-This file documents effors toward establishing a public API for iD, one that
+This file documents efforts toward establishing a public API for iD, one that
 can support plugin development.
 
 ## URL parameters
@@ -13,12 +13,15 @@ in the hash portion of the URL:
    way or relation, respectively. Selects the specified entity, and, unless
    a `map` parameter is also provided, centers the map on it.
 * `background` - The value from a `sourcetag` property in iD's
-  [imagery list](https://github.com/systemed/iD/blob/master/data/imagery.json),
+  [imagery list](https://github.com/openstreetmap/iD/blob/master/data/imagery.json),
   or a custom tile URL. A custom URL is specified in the format `custom:<url>`,
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
   DNS multiplexing. Example:
   `background=custom:http://{switch:a,b,c}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png`
+* `comment` - Prefills the changeset comment box, for use when integrating iD with
+  external task management or quality assurance tools. Example:
+  `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon%20%23hotosm-task-592`.
 
 When constructing a URL to an instance of iD embedded in the OpenStreetMap Rails
 Port (e.g. `http://www.openstreetmap.org/edit?editor=id`), the following parameters
@@ -91,3 +94,64 @@ Elements that are currently active (being clicked or dragged) shall have the `.a
 class. (TODO)
 
 Elements that are currently selected shall have the `.selected` class.
+
+## Customized Deployments
+
+iD is used to edit data outside of the OpenStreetMap environment. There are some basic configuration steps to introduce custom presets, imagery and tag information.
+
+### Presets
+
+iD can use external presets exclusively or along with the default OpenStreetMap presets. This is configured using the `iD().presets` accessor. To use external presets alone, initialize iD in index.html with the Presets object.
+
+```js
+
+var iD = iD()
+  .presets(customPresets)
+  .taginfo(iD.taginfo())
+  .imagery(iD.data.imagery);
+
+```
+
+The format of the Preset object is [documented here](https://github.com/openstreetmap/iD/tree/master/data/presets#custom-presets).
+
+### Imagery
+
+Just like Presets, Imagery can be configured using the `iD().imagery` accessor.
+
+```js
+
+var iD = iD()
+  .presets(customPresets)
+  .taginfo(iD.taginfo())
+  .imagery(customImagery);
+
+```
+
+The Imagery object should follow the structure defined by [editor-imagery-index](https://github.com/osmlab/editor-imagery-index/blob/gh-pages/schema.json)
+
+
+### Taginfo
+
+[Taginfo](http://taginfo.openstreetmap.org/) is a service that provides comprehensive documentation about the tags used in OpenStreetMap. iD uses Taginfo to display description and also autocomplete keys and values. This can be completely disabled by removing the `iD().taginfo` accessor. To point iD to a different instance of Taginfo other than the default OpenStreetMap instance
+
+```js
+
+var iD = iD()
+  .presets(customPresets)
+  .taginfo(iD.taginfo().endpoint('url'))
+  .imagery(customImagery);
+
+```
+
+### Minimum Editable Zoom
+
+The minimum zoom at which iD enters the edit mode is configured using the `iD().minEditableZoom()` accessor. The default value is 16. To change this initialise iD as
+
+```js
+
+var iD = iD().
+  .minEditableZoom(zoom_level)
+
+```
+
+This should be set with caution for performance reasons. The OpenStreetMap API has a limitation of 50000 nodes per request.

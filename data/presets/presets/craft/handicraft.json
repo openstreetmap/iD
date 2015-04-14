@@ -1,0 +1,17 @@
+{
+    "icon": "art-gallery",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "craft": "handicraft"
+    },
+    "name": "Handicraft"
+}

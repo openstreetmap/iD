@@ -1,0 +1,20 @@
+{
+    "icon": "town-hall",
+    "fields": [
+        "operator",
+        "address",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "event",
+        "hall"
+    ],
+    "tags": {
+        "amenity": "community_centre"
+    },
+    "name": "Community Center"
+}

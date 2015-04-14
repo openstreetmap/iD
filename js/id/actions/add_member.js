@@ -25,5 +25,5 @@ iD.actions.AddMember = function(relationId, member, memberIndex) {
         }
 
         return graph.replace(relation.addMember(member, memberIndex));
-    }
+    };
 };

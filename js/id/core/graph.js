@@ -6,28 +6,17 @@ iD.Graph = function(other, mutable) {
         this.entities = _.assign(Object.create(base.entities), other.entities);
         this._parentWays = _.assign(Object.create(base.parentWays), other._parentWays);
         this._parentRels = _.assign(Object.create(base.parentRels), other._parentRels);
-        this.inherited = true;
 
     } else {
-        if (Array.isArray(other)) {
-            var entities = {};
-            for (var i = 0; i < other.length; i++) {
-                entities[other[i].id] = other[i];
-            }
-            other = entities;
-        }
         this.entities = Object.create({});
         this._parentWays = Object.create({});
         this._parentRels = Object.create({});
-        this.rebase(other || {});
+        this.rebase(other || [], [this]);
     }
 
     this.transients = {};
     this._childNodes = {};
-
-    if (!mutable) {
-        this.freeze();
-    }
+    this.frozen = !mutable;
 };
 
 iD.Graph.prototype = {
@@ -58,7 +47,15 @@ iD.Graph.prototype = {
     },
 
     parentWays: function(entity) {
-        return _.map(this._parentWays[entity.id], this.entity, this);
+        var parents = this._parentWays[entity.id],
+            result = [];
+
+        if (parents) {
+            for (var i = 0; i < parents.length; i++) {
+                result.push(this.entity(parents[i]));
+            }
+        }
+        return result;
     },
 
     isPoi: function(entity) {
@@ -72,7 +69,15 @@ iD.Graph.prototype = {
     },
 
     parentRelations: function(entity) {
-        return _.map(this._parentRels[entity.id], this.entity, this);
+        var parents = this._parentRels[entity.id],
+            result = [];
+
+        if (parents) {
+            for (var i = 0; i < parents.length; i++) {
+                result.push(this.entity(parents[i]));
+            }
+        }
+        return result;
     },
 
     childNodes: function(entity) {
@@ -80,8 +85,10 @@ iD.Graph.prototype = {
             return this._childNodes[entity.id];
 
         var nodes = [];
-        for (var i = 0, l = entity.nodes.length; i < l; i++) {
-            nodes[i] = this.entity(entity.nodes[i]);
+        if (entity.nodes) {
+            for (var i = 0; i < entity.nodes.length; i++) {
+                nodes[i] = this.entity(entity.nodes[i]);
+            }
         }
 
         if (iD.debug) Object.freeze(nodes);
@@ -102,20 +109,42 @@ iD.Graph.prototype = {
     // is used only during the history operation that merges newly downloaded
     // data into each state. To external consumers, it should appear as if the
     // graph always contained the newly downloaded data.
-    rebase: function(entities) {
+    rebase: function(entities, stack, force) {
         var base = this.base(),
-            i, k, child, id, keys;
+            i, j, k, id;
 
-        // Merging of data only needed if graph is the base graph
-        if (!this.inherited) {
-            for (i in entities) {
-                if (!base.entities[i]) {
-                    base.entities[i] = entities[i];
-                    this._updateCalculated(undefined, entities[i],
-                            base.parentWays, base.parentRels);
+        for (i = 0; i < entities.length; i++) {
+            var entity = entities[i];
+
+            if (!entity.visible || (!force && base.entities[entity.id]))
+                continue;
+
+            // Merging data into the base graph
+            base.entities[entity.id] = entity;
+            this._updateCalculated(undefined, entity, base.parentWays, base.parentRels);
+
+            // Restore provisionally-deleted nodes that are discovered to have an extant parent
+            if (entity.type === 'way') {
+                for (j = 0; j < entity.nodes.length; j++) {
+                    id = entity.nodes[j];
+                    for (k = 1; k < stack.length; k++) {
+                        var ents = stack[k].entities;
+                        if (ents.hasOwnProperty(id) && ents[id] === undefined) {
+                            delete ents[id];
+                        }
+                    }
                 }
             }
         }
+
+        for (i = 0; i < stack.length; i++) {
+            stack[i]._updateRebased();
+        }
+    },
+
+    _updateRebased: function() {
+        var base = this.base(),
+            i, k, child, id, keys;
 
         keys = Object.keys(this._parentWays);
         for (i = 0; i < keys.length; i++) {
@@ -180,7 +209,6 @@ iD.Graph.prototype = {
                 ways.push(entity.id);
                 parentWays[added[i]] = ways;
             }
-        } else if (type === 'node') {
 
         } else if (type === 'relation') {
 
@@ -230,35 +258,9 @@ iD.Graph.prototype = {
             arguments[i].call(graph, graph);
         }
 
-        return this.frozen ? graph.freeze() : this;
-    },
+        if (this.frozen) graph.frozen = true;
 
-    freeze: function() {
-        this.frozen = true;
-
-        if (iD.debug) {
-            Object.freeze(this.entities);
-        }
-
-        return this;
-    },
-
-    hasAllChildren: function(entity) {
-        // we're only checking changed entities, since we assume fetched data
-        // must have all children present
-        var i;
-        if (this.entities.hasOwnProperty(entity.id)) {
-            if (entity.type === 'way') {
-                for (i = 0; i < entity.nodes.length; i++) {
-                    if (!this.entities[entity.nodes[i]]) return false;
-                }
-            } else if (entity.type === 'relation') {
-                for (i = 0; i < entity.members.length; i++) {
-                    if (!this.entities[entity.members[i].id]) return false;
-                }
-            }
-        }
-        return true;
+        return graph;
     },
 
     // Obliterates any existing entities

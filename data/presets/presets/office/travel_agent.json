@@ -1,0 +1,19 @@
+{
+    "icon": "suitcase",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "office": "travel_agent"
+    },
+    "terms": [],
+    "name": "Travel Agency",
+    "searchable": false
+}

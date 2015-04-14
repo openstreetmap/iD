@@ -1,0 +1,16 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "fields": [
+        "aerialway/occupancy",
+        "aerialway/capacity",
+        "aerialway/duration",
+        "aerialway/bubble",
+        "aerialway/heating"
+    ],
+    "tags": {
+        "aerialway": "gondola"
+    },
+    "name": "Gondola"
+}

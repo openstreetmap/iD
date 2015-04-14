@@ -8,20 +8,60 @@ iD.Relation = iD.Entity.relation = function iD_Relation() {
 
 iD.Relation.prototype = Object.create(iD.Entity.prototype);
 
+iD.Relation.creationOrder = function(a, b) {
+    var aId = parseInt(iD.Entity.id.toOSM(a.id), 10);
+    var bId = parseInt(iD.Entity.id.toOSM(b.id), 10);
+
+    if (aId < 0 || bId < 0) return aId - bId;
+    return bId - aId;
+};
+
 _.extend(iD.Relation.prototype, {
-    type: "relation",
+    type: 'relation',
     members: [],
 
-    extent: function(resolver) {
+    copy: function(deep, resolver, replacements) {
+        var copy = iD.Entity.prototype.copy.call(this);
+        if (!deep || !resolver || !this.isComplete(resolver)) {
+            return copy;
+        }
+
+        var members = [],
+            i, oldmember, oldid, newid, children;
+
+        replacements = replacements || {};
+        replacements[this.id] = copy[0].id;
+
+        for (i = 0; i < this.members.length; i++) {
+            oldmember = this.members[i];
+            oldid = oldmember.id;
+            newid = replacements[oldid];
+            if (!newid) {
+                children = resolver.entity(oldid).copy(true, resolver, replacements);
+                newid = replacements[oldid] = children[0].id;
+                copy = copy.concat(children);
+            }
+            members.push({id: newid, type: oldmember.type, role: oldmember.role});
+        }
+
+        copy[0] = copy[0].update({members: members});
+        return copy;
+    },
+
+    extent: function(resolver, memo) {
         return resolver.transient(this, 'extent', function() {
-            return this.members.reduce(function(extent, member) {
-                member = resolver.hasEntity(member.id);
+            if (memo && memo[this.id]) return iD.geo.Extent();
+            memo = memo || {};
+            memo[this.id] = true;
+
+            var extent = iD.geo.Extent();
+            for (var i = 0; i < this.members.length; i++) {
+                var member = resolver.hasEntity(this.members[i].id);
                 if (member) {
-                    return extent.extend(member.extent(resolver));
-                } else {
-                    return extent;
+                    extent._extend(member.extent(resolver, memo));
                 }
-            }, iD.geo.Extent());
+            }
+            return extent;
         });
     },
 
@@ -40,7 +80,7 @@ _.extend(iD.Relation.prototype, {
     indexedMembers: function() {
         var result = new Array(this.members.length);
         for (var i = 0; i < this.members.length; i++) {
-            result[i] = _.extend({}, this.members[i], {index: i})
+            result[i] = _.extend({}, this.members[i], {index: i});
         }
         return result;
     },
@@ -141,12 +181,8 @@ _.extend(iD.Relation.prototype, {
         return resolver.transient(this, 'GeoJSON', function () {
             if (this.isMultipolygon()) {
                 return {
-                    type: 'Feature',
-                    properties: this.tags,
-                    geometry: {
-                        type: 'MultiPolygon',
-                        coordinates: this.multipolygon(resolver)
-                    }
+                    type: 'MultiPolygon',
+                    coordinates: this.multipolygon(resolver)
                 };
             } else {
                 return {
@@ -157,6 +193,12 @@ _.extend(iD.Relation.prototype, {
                     })
                 };
             }
+        });
+    },
+
+    area: function(resolver) {
+        return resolver.transient(this, 'area', function() {
+            return d3.geo.area(this.asGeoJSON(resolver));
         });
     },
 

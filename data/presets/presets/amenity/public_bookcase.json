@@ -1,0 +1,21 @@
+{
+    "icon": "library",
+    "fields": [
+        "name",
+        "operator",
+        "capacity",
+        "website"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "library",
+        "bookcrossing"
+    ],
+    "tags": {
+        "amenity": "public_bookcase"
+    },
+    "name": "Public Bookcase"
+}

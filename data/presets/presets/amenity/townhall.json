@@ -1,21 +1,20 @@
 {
     "icon": "town-hall",
     "fields": [
-        "building_area",
-        "address"
+        "operator",
+        "address",
+        "building_area"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "terms": [
-        "village hall",
-        "city government",
+        "village",
+        "city",
+        "government",
         "courthouse",
-        "municipal building",
-        "municipal center",
-        "municipal centre"
+        "municipal"
     ],
     "tags": {
         "amenity": "townhall"

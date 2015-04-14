@@ -1,6 +1,5 @@
 iD.Connection = function() {
-
-    var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'load', 'loaded'),
+    var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'loaded'),
         url = 'http://www.openstreetmap.org',
         connection = {},
         inflight = {},
@@ -22,26 +21,30 @@ iD.Connection = function() {
         off;
 
     connection.changesetURL = function(changesetId) {
-        return url + '/browse/changeset/' + changesetId;
+        return url + '/changeset/' + changesetId;
     };
 
-    connection.changesetsURL = function(extent) {
-        return url + '/browse/changesets?bbox=' + extent.toParam();
+    connection.changesetsURL = function(center, zoom) {
+        var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
+        return url + '/history#map=' +
+            Math.floor(zoom) + '/' +
+            center[1].toFixed(precision) + '/' +
+            center[0].toFixed(precision);
     };
 
     connection.entityURL = function(entity) {
-        return url + '/browse/' + entity.type + '/' + entity.osmId();
+        return url + '/' + entity.type + '/' + entity.osmId();
     };
 
     connection.userURL = function(username) {
-        return url + "/user/" + username;
+        return url + '/user/' + username;
     };
 
     connection.loadFromURL = function(url, callback) {
-        function done(dom) {
-            return callback(null, parse(dom));
+        function done(err, dom) {
+            return callback(err, parse(dom));
         }
-        return d3.xml(url).get().on('load', done);
+        return d3.xml(url).get(done);
     };
 
     connection.loadEntity = function(id, callback) {
@@ -51,9 +54,32 @@ iD.Connection = function() {
         connection.loadFromURL(
             url + '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
             function(err, entities) {
-                event.load(err, {data: entities});
-                if (callback) callback(err, entities && entities[id]);
+                if (callback) callback(err, {data: entities});
             });
+    };
+
+    connection.loadMultiple = function(ids, callback) {
+        // TODO: upgrade lodash and just use _.chunk
+        function chunk(arr, chunkSize) {
+            var result = [];
+            for (var i = 0; i < arr.length; i += chunkSize) {
+                result.push(arr.slice(i, i + chunkSize));
+            }
+            return result;
+        }
+
+        _.each(_.groupBy(ids, iD.Entity.id.type), function(v, k) {
+            var type = k + 's',
+                osmIDs = _.map(v, iD.Entity.id.toOSM);
+
+            _.each(chunk(osmIDs, 150), function(arr) {
+                connection.loadFromURL(
+                    url + '/api/0.6/' + type + '?' + type + '=' + arr.join(),
+                    function(err, entities) {
+                        if (callback) callback(err, {data: entities});
+                    });
+            });
+        });
     };
 
     function authenticating() {
@@ -64,11 +90,17 @@ iD.Connection = function() {
         event.authenticated();
     }
 
+    function getLoc(attrs) {
+        var lon = attrs.lon && attrs.lon.value,
+            lat = attrs.lat && attrs.lat.value;
+        return [parseFloat(lon), parseFloat(lat)];
+    }
+
     function getNodes(obj) {
         var elems = obj.getElementsByTagName(ndStr),
             nodes = new Array(elems.length);
         for (var i = 0, l = elems.length; i < l; i++) {
-            nodes[i] = 'n' + elems[i].attributes.ref.nodeValue;
+            nodes[i] = 'n' + elems[i].attributes.ref.value;
         }
         return nodes;
     }
@@ -78,7 +110,7 @@ iD.Connection = function() {
             tags = {};
         for (var i = 0, l = elems.length; i < l; i++) {
             var attrs = elems[i].attributes;
-            tags[attrs.k.nodeValue] = attrs.v.nodeValue;
+            tags[attrs.k.value] = attrs.v.value;
         }
         return tags;
     }
@@ -89,63 +121,68 @@ iD.Connection = function() {
         for (var i = 0, l = elems.length; i < l; i++) {
             var attrs = elems[i].attributes;
             members[i] = {
-                id: attrs.type.nodeValue[0] + attrs.ref.nodeValue,
-                type: attrs.type.nodeValue,
-                role: attrs.role.nodeValue
+                id: attrs.type.value[0] + attrs.ref.value,
+                type: attrs.type.value,
+                role: attrs.role.value
             };
         }
         return members;
+    }
+
+    function getVisible(attrs) {
+        return (!attrs.visible || attrs.visible.value !== 'false');
     }
 
     var parsers = {
         node: function nodeData(obj) {
             var attrs = obj.attributes;
             return new iD.Node({
-                id: iD.Entity.id.fromOSM(nodeStr, attrs.id.nodeValue),
-                loc: [parseFloat(attrs.lon.nodeValue), parseFloat(attrs.lat.nodeValue)],
-                version: attrs.version.nodeValue,
-                user: attrs.user && attrs.user.nodeValue,
-                tags: getTags(obj)
+                id: iD.Entity.id.fromOSM(nodeStr, attrs.id.value),
+                loc: getLoc(attrs),
+                version: attrs.version.value,
+                user: attrs.user && attrs.user.value,
+                tags: getTags(obj),
+                visible: getVisible(attrs)
             });
         },
 
         way: function wayData(obj) {
             var attrs = obj.attributes;
             return new iD.Way({
-                id: iD.Entity.id.fromOSM(wayStr, attrs.id.nodeValue),
-                version: attrs.version.nodeValue,
-                user: attrs.user && attrs.user.nodeValue,
+                id: iD.Entity.id.fromOSM(wayStr, attrs.id.value),
+                version: attrs.version.value,
+                user: attrs.user && attrs.user.value,
                 tags: getTags(obj),
-                nodes: getNodes(obj)
+                nodes: getNodes(obj),
+                visible: getVisible(attrs)
             });
         },
 
         relation: function relationData(obj) {
             var attrs = obj.attributes;
             return new iD.Relation({
-                id: iD.Entity.id.fromOSM(relationStr, attrs.id.nodeValue),
-                version: attrs.version.nodeValue,
-                user: attrs.user && attrs.user.nodeValue,
+                id: iD.Entity.id.fromOSM(relationStr, attrs.id.value),
+                version: attrs.version.value,
+                user: attrs.user && attrs.user.value,
                 tags: getTags(obj),
-                members: getMembers(obj)
+                members: getMembers(obj),
+                visible: getVisible(attrs)
             });
         }
     };
 
     function parse(dom) {
-        if (!dom || !dom.childNodes) return new Error('Bad request');
+        if (!dom || !dom.childNodes) return;
 
         var root = dom.childNodes[0],
             children = root.childNodes,
-            entities = {};
+            entities = [];
 
-        var i, o, l;
-        for (i = 0, l = children.length; i < l; i++) {
+        for (var i = 0, l = children.length; i < l; i++) {
             var child = children[i],
                 parser = parsers[child.nodeName];
             if (parser) {
-                o = parser(child);
-                entities[o.id] = o;
+                entities.push(parser(child));
             }
         }
 
@@ -204,13 +241,18 @@ iD.Connection = function() {
     };
 
     connection.changesetTags = function(comment, imageryUsed) {
-        var tags = {
-            imagery_used: imageryUsed.join(';'),
-            created_by: 'iD ' + iD.version
-        };
+        var detected = iD.detect(),
+            tags = {
+                created_by: 'iD ' + iD.version,
+                imagery_used: imageryUsed.join(';').substr(0, 255),
+                host: (window.location.origin + window.location.pathname).substr(0, 255),
+                locale: detected.locale,
+                browser: detected.browser + ' ' + detected.version,
+                platform: detected.platform
+            };
 
         if (comment) {
-            tags.comment = comment;
+            tags.comment = comment.substr(0, 255);
         }
 
         return tags;
@@ -261,9 +303,9 @@ iD.Connection = function() {
             }
 
             userDetails = {
-                display_name: u.attributes.display_name.nodeValue,
+                display_name: u.attributes.display_name.value,
                 image_url: image_url,
-                id: u.attributes.id.nodeValue
+                id: u.attributes.id.value
             };
 
             callback(undefined, userDetails);
@@ -290,7 +332,7 @@ iD.Connection = function() {
         return connection;
     };
 
-    connection.loadTiles = function(projection, dimensions) {
+    connection.loadTiles = function(projection, dimensions, callback) {
 
         if (off) return;
 
@@ -315,7 +357,7 @@ iD.Connection = function() {
                     extent: iD.geo.Extent(
                         projection.invert([x, y + ts]),
                         projection.invert([x + ts, y]))
-                }
+                };
             });
 
         function bboxUrl(tile) {
@@ -343,7 +385,7 @@ iD.Connection = function() {
                 loadedTiles[id] = true;
                 delete inflight[id];
 
-                event.load(err, _.extend({data: parsed}, tile));
+                if (callback) callback(err, _.extend({data: parsed}, tile));
 
                 if (_.isEmpty(inflight)) {
                     event.loaded();

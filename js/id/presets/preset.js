@@ -34,8 +34,14 @@ iD.presets.Preset = function(id, preset, fields) {
         return t('presets.presets.' + id + '.' + scope, options);
     };
 
+    var name = preset.name;
     preset.name = function() {
-        return preset.t('name', {'default': id});
+        if (preset.suggestion) {
+            id = id.split('/');
+            id = id[0] + '/' + id[1];
+            return name + ' - ' + t('presets.presets.' + id + '.name');
+        }
+        return preset.t('name', {'default': name});
     };
 
     preset.terms = function() {
@@ -46,14 +52,17 @@ iD.presets.Preset = function(id, preset, fields) {
         return Object.keys(preset.tags).length === 0;
     };
 
-    preset.reference = function() {
-        var reference = {key: Object.keys(preset.tags)[0]};
+    preset.reference = function(geometry) {
+        var key = Object.keys(preset.tags)[0],
+            value = preset.tags[key];
 
-        if (preset.tags[reference.key] !== '*') {
-            reference.value = preset.tags[reference.key];
+        if (geometry === 'relation' && key === 'type') {
+            return { rtype: value };
+        } else if (value === '*') {
+            return { key: key };
+        } else {
+            return { key: key, value: value };
         }
-
-        return reference;
     };
 
     var removeTags = preset.removeTags || preset.tags;
@@ -70,16 +79,25 @@ iD.presets.Preset = function(id, preset, fields) {
         return tags;
     };
 
-    var applyTags = preset.applyTags || preset.tags;
+    var applyTags = preset.addTags || preset.tags;
     preset.applyTags = function(tags, geometry) {
+        var k;
+
         tags = _.clone(tags);
 
-        for (var k in applyTags) {
+        for (k in applyTags) {
             if (applyTags[k] === '*') {
                 tags[k] = 'yes';
             } else {
                 tags[k] = applyTags[k];
             }
+        }
+
+        // Add area=yes if necessary
+        for (k in applyTags) {
+            if (geometry === 'area' && !(k in iD.areaKeys))
+                tags.area = 'yes';
+            break;
         }
 
         for (var f in preset.fields) {

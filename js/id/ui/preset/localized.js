@@ -2,7 +2,8 @@ iD.ui.preset.localized = function(field, context) {
 
     var event = d3.dispatch('change'),
         wikipedia = iD.wikipedia(),
-        input, localizedInputs, wikiTitles;
+        input, localizedInputs, wikiTitles,
+        entity;
 
     function i(selection) {
         input = selection.selectAll('.localized-main')
@@ -13,6 +14,13 @@ iD.ui.preset.localized = function(field, context) {
             .attr('id', 'preset-input-' + field.id)
             .attr('class', 'localized-main')
             .attr('placeholder', field.placeholder());
+
+        if (field.id === 'name') {
+            var preset = context.presets().match(entity, context.graph());
+            input.call(d3.combobox().fetcher(
+                iD.util.SuggestNames(preset, iD.data.suggestions)
+            ));
+        }
 
         input
             .on('blur', change)
@@ -55,35 +63,38 @@ iD.ui.preset.localized = function(field, context) {
     function key(lang) { return field.key + ':' + lang; }
 
     function changeLang(d) {
-        var value = d3.select(this).value(),
+        var lang = d3.select(this).value(),
             t = {},
             language = _.find(iD.data.wikipedia, function(d) {
-                return d[0].toLowerCase() === value.toLowerCase() ||
-                    d[1].toLowerCase() === value.toLowerCase();
+                return d[0].toLowerCase() === lang.toLowerCase() ||
+                    d[1].toLowerCase() === lang.toLowerCase();
             });
 
-        if (language) value = language[2];
+        if (language) lang = language[2];
 
-        if (d.lang) {
-            t[key(d.lang)] = '';
+        if (d.lang && d.lang !== lang) {
+            t[key(d.lang)] = undefined;
         }
 
-        if (d.value) {
-            t[key(value)] = d.value;
-        } else if (wikiTitles && wikiTitles[d.lang]) {
-            t[key(value)] = wikiTitles[d.lang];
+        var value = d3.select(this.parentNode)
+            .selectAll('.localized-value')
+            .value();
+
+        if (lang && value) {
+            t[key(lang)] = value;
+        } else if (lang && wikiTitles && wikiTitles[d.lang]) {
+            t[key(lang)] = wikiTitles[d.lang];
         }
 
+        d.lang = lang;
         event.change(t);
-
-        d.lang = value;
     }
 
     function changeValue(d) {
+        if (!d.lang) return;
         var t = {};
-        t[key(d.lang)] = d3.select(this).value() || '';
+        t[key(d.lang)] = d3.select(this).value() || undefined;
         event.change(t);
-
     }
 
     function fetcher(value, cb) {
@@ -110,10 +121,27 @@ iD.ui.preset.localized = function(field, context) {
                 var wrap = d3.select(this);
                 var langcombo = d3.combobox().fetcher(fetcher);
 
-                wrap.append('label')
+                var label = wrap.append('label')
                     .attr('class','form-label')
                     .text(t('translate.localized_translation_label'))
                     .attr('for','localized-lang');
+
+                label.append('button')
+                    .attr('class', 'minor remove')
+                    .on('click', function(d){
+                        d3.event.preventDefault();
+                        var t = {};
+                        t[key(d.lang)] = undefined;
+                        event.change(t);
+                        d3.select(this.parentNode.parentNode)
+                            .style('top','0')
+                            .style('max-height','240px')
+                            .transition()
+                            .style('opacity', '0')
+                            .style('max-height','0px')
+                            .remove();
+                    })
+                    .append('span').attr('class', 'icon delete');
 
                 wrap.append('input')
                     .attr('class', 'localized-lang')
@@ -129,23 +157,6 @@ iD.ui.preset.localized = function(field, context) {
                     .attr('type', 'text')
                     .attr('placeholder', t('translate.localized_translation_name'))
                     .attr('class', 'localized-value');
-
-                wrap.append('button')
-                    .attr('class', 'minor button-input-action remove')
-                    .on('click', function(d) {
-                        d3.event.preventDefault();
-                        var t = {};
-                        t[key(d.lang)] = undefined;
-                        event.change(t);
-                        d3.select(this.parentNode)
-                            .style('top','0')
-                            .style('max-height','240px')
-                            .transition()
-                            .style('opacity', '0')
-                            .style('max-height','0px')
-                            .remove();
-                    })
-                    .append('span').attr('class', 'icon delete');
             });
 
         innerWrap
@@ -171,16 +182,16 @@ iD.ui.preset.localized = function(field, context) {
             .style('top','-10px')
             .remove();
 
-        selection.selectAll('.entry').select('.localized-lang').value(function(d) {
-            var lang = _.find(iD.data.wikipedia, function(lang) {
-                return lang[2] === d.lang;
-            });
-            return lang ? lang[1] : d.lang;
-        });
+        var entry = selection.selectAll('.entry');
 
-        selection.selectAll('.entry').select('.localized-value').value(function(d) {
-            return d.value;
-        });
+        entry.select('.localized-lang')
+            .value(function(d) {
+                var lang = _.find(iD.data.wikipedia, function(lang) { return lang[2] === d.lang; });
+                return lang ? lang[1] : d.lang;
+            });
+
+        entry.select('.localized-value')
+            .value(function(d) { return d.value; });
     }
 
     i.tags = function(tags) {
@@ -210,7 +221,11 @@ iD.ui.preset.localized = function(field, context) {
     };
 
     i.focus = function() {
-        title.node().focus();
+        input.node().focus();
+    };
+
+    i.entity = function(_) {
+        entity = _;
     };
 
     return d3.rebind(i, event, 'on');

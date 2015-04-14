@@ -1,7 +1,7 @@
 iD.ui.preset.radio = function(field) {
 
     var event = d3.dispatch('change'),
-        labels, radios;
+        labels, radios, placeholder;
 
     function radio(selection) {
         selection.classed('preset-radio', true);
@@ -11,6 +11,11 @@ iD.ui.preset.radio = function(field) {
 
         var buttonWrap = wrap.enter().append('div')
             .attr('class', 'preset-input-wrap toggle-list');
+
+        buttonWrap.append('span')
+            .attr('class', 'placeholder');
+
+        placeholder = selection.selectAll('.placeholder');
 
         labels = wrap.selectAll('label')
             .data(field.options || field.keys);
@@ -28,29 +33,6 @@ iD.ui.preset.radio = function(field) {
 
         radios = labels.selectAll('input')
             .on('change', change);
-
-        buttonWrap.append('span')
-            .attr('class', 'placeholder')
-            .text(field.placeholder());
-
-        var remove = wrap.selectAll('label.remove')
-            .data([0]);
-
-        var removeButton = remove.enter().append('label')
-            .attr('class', 'remove');
-
-        removeButton.append('span')
-            .attr('class', 'icon remove');
-
-        removeButton.append('span')
-            .text(t('inspector.remove'));
-
-        remove
-            .on('click', function() {
-                d3.event.preventDefault();
-                radios.property('checked', false);
-                change();
-            });
     }
 
     function change() {
@@ -78,6 +60,12 @@ iD.ui.preset.radio = function(field) {
 
         labels.classed('active', checked);
         radios.property('checked', checked);
+        var selection = radios.filter(function() { return this.checked; });
+        if (selection.empty()) {
+            placeholder.text(t('inspector.none'));
+        } else {
+            placeholder.text(selection.attr('value'));
+        }
     };
 
     radio.focus = function() {

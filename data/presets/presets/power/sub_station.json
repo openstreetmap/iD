@@ -1,5 +1,6 @@
 {
     "fields": [
+        "substation",
         "operator",
         "building"
     ],
@@ -10,5 +11,6 @@
     "tags": {
         "power": "sub_station"
     },
-    "name": "Substation"
+    "name": "Substation",
+    "searchable": false
 }

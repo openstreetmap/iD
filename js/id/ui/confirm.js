@@ -6,21 +6,26 @@ iD.ui.confirm = function(selection) {
 
     var section = modal.select('.content');
 
-    var modalHeader = section.append('div')
+    section.append('div')
         .attr('class', 'modal-section header');
 
-    var description = section.append('div')
+    section.append('div')
         .attr('class', 'modal-section message-text');
 
-    var buttonwrap = section.append('div')
+    var buttons = section.append('div')
         .attr('class', 'modal-section buttons cf');
 
-    var okbutton = buttonwrap.append('button')
-        .attr('class', 'col2 action')
-        .on('click.confirm', function() {
-            modal.remove();
-        })
-        .text(t('confirm.okay'));
+    modal.okButton = function() {
+        buttons
+            .append('button')
+            .attr('class', 'action col4')
+            .on('click.confirm', function() {
+                modal.remove();
+            })
+            .text(t('confirm.okay'));
+
+        return modal;
+    };
 
     return modal;
 };

@@ -5,7 +5,7 @@ iD.ui.Notice = function(context) {
 
         var button = div.append('button')
             .attr('class', 'zoom-to notice')
-            .on('click', function() { context.map().zoom(16); });
+            .on('click', function() { context.map().zoom(context.minEditableZoom()); });
 
         button.append('span')
             .attr('class', 'icon zoom-in-invert');
@@ -15,7 +15,7 @@ iD.ui.Notice = function(context) {
             .text(t('zoom_in_edit'));
 
         function disableTooHigh() {
-            div.style('display', context.map().editable() ? 'none' : 'block');
+            div.style('display', context.editable() ? 'none' : 'block');
         }
 
         context.map()

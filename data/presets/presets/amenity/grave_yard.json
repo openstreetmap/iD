@@ -1,11 +1,11 @@
 {
     "icon": "cemetery",
     "fields": [
-        "religion"
+        "religion",
+        "denomination"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

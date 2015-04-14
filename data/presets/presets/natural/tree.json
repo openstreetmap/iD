@@ -1,5 +1,7 @@
 {
     "fields": [
+        "leaf_type",
+        "leaf_cycle",
         "denotation"
     ],
     "icon": "park",

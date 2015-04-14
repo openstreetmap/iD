@@ -1,8 +1,10 @@
 describe('iD.Map', function() {
-    var map;
+    var context, map;
 
     beforeEach(function() {
-        map = iD().map();
+        context = iD().imagery(iD.data.imagery);
+        context.container(d3.select(document.createElement('div')));
+        map = context.map();
         d3.select(document.createElement('div'))
             .call(map);
     });
@@ -28,21 +30,33 @@ describe('iD.Map', function() {
             map.zoom(4);
             expect(spy).not.to.have.been.called;
         });
+
+        it('respects minzoom', function() {
+            map.minzoom(16);
+            map.zoom(15);
+            expect(map.zoom()).to.equal(16);
+        });
     });
 
     describe('#zoomIn', function() {
-        it('increments zoom', function() {
+        it('increments zoom', function(done) {
             expect(map.zoom(4)).to.equal(map);
-            expect(map.zoomIn()).to.equal(map);
-            expect(map.zoom()).to.equal(5);
+            map.zoomIn();
+            window.setTimeout(function() {
+                expect(map.zoom()).to.equal(5);
+                done();
+            }, 500);
         });
     });
 
     describe('#zoomOut', function() {
-        it('decrements zoom', function() {
+        it('decrements zoom', function(done) {
             expect(map.zoom(4)).to.equal(map);
-            expect(map.zoomOut()).to.equal(map);
-            expect(map.zoom()).to.equal(3);
+            map.zoomOut();
+            window.setTimeout(function() {
+                expect(map.zoom()).to.equal(3);
+                done();
+            }, 500);
         });
     });
 

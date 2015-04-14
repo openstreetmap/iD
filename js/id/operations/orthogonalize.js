@@ -1,15 +1,16 @@
 iD.operations.Orthogonalize = function(selectedIDs, context) {
     var entityId = selectedIDs[0],
+        entity = context.entity(entityId),
+        extent = entity.extent(context.graph()),
         geometry = context.geometry(entityId),
         action = iD.actions.Orthogonalize(entityId, context.projection);
 
-    function operation() {
+    var operation = function() {
         var annotation = t('operations.orthogonalize.annotation.' + geometry);
         context.perform(action, annotation);
-    }
+    };
 
     operation.available = function() {
-        var entity = context.entity(entityId);
         return selectedIDs.length === 1 &&
             entity.type === 'way' &&
             entity.isClosed() &&
@@ -17,7 +18,13 @@ iD.operations.Orthogonalize = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        return action.disabled(context.graph());
+        var reason;
+        if (extent.percentContainedIn(context.extent()) < 0.8) {
+            reason = 'too_large';
+        } else if (context.hasHiddenConnections(entityId)) {
+            reason = 'connected_to_hidden';
+        }
+        return action.disabled(context.graph()) || reason;
     };
 
     operation.tooltip = function() {
@@ -27,7 +34,7 @@ iD.operations.Orthogonalize = function(selectedIDs, context) {
             t('operations.orthogonalize.description.' + geometry);
     };
 
-    operation.id = "orthogonalize";
+    operation.id = 'orthogonalize';
     operation.keys = [t('operations.orthogonalize.key')];
     operation.title = t('operations.orthogonalize.title');
 

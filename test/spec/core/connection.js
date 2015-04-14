@@ -11,7 +11,7 @@ describe('iD.Connection', function () {
 
     describe('#changesetUrl', function() {
         it('provides a changeset url', function() {
-            expect(c.changesetURL(2)).to.eql('http://www.openstreetmap.org/browse/changeset/2');
+            expect(c.changesetURL(2)).to.eql('http://www.openstreetmap.org/changeset/2');
         });
     });
 
@@ -32,7 +32,7 @@ describe('iD.Connection', function () {
             c.switch({
                 url: "http://example.com"
             });
-            expect(c.changesetURL(1)).to.equal("http://example.com/browse/changeset/1")
+            expect(c.changesetURL(1)).to.equal("http://example.com/changeset/1")
         });
 
         it("emits an auth event", function(done) {
@@ -59,15 +59,15 @@ describe('iD.Connection', function () {
         });
 
         it('parses a node', function (done) {
-            c.loadFromURL('data/node.xml', function (err, graph) {
-                expect(graph.n356552551).to.be.instanceOf(iD.Entity);
+            c.loadFromURL('data/node.xml', function (err, entities) {
+                expect(entities[0]).to.be.instanceOf(iD.Entity);
                 done();
             });
         });
 
         it('parses a way', function (done) {
-            c.loadFromURL('data/way.xml', function (err, graph) {
-                expect(graph.w19698713).to.be.instanceOf(iD.Entity);
+            c.loadFromURL('data/way.xml', function (err, entities) {
+                expect(entities[0]).to.be.instanceOf(iD.Entity);
                 done();
             });
         });
@@ -90,9 +90,10 @@ describe('iD.Connection', function () {
         });
 
         it('loads a node', function(done) {
-            c.loadEntity('n1', function(error, entity) {
+            var id = 'n1';
+            c.loadEntity(id, function(err, result) {
+                var entity = _.find(result.data, function(e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.Node);
-                expect(entity.id).to.eql('n1');
                 done();
             });
 
@@ -102,9 +103,10 @@ describe('iD.Connection', function () {
         });
 
         it('loads a way', function(done) {
-            c.loadEntity('w1', function(error, entity) {
+            var id = 'w1';
+            c.loadEntity(id, function(err, result) {
+                var entity = _.find(result.data, function(e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.Way);
-                expect(entity.id).to.eql('w1');
                 done();
             });
 
@@ -112,19 +114,22 @@ describe('iD.Connection', function () {
                 [200, { "Content-Type": "text/xml" }, wayXML]);
             server.respond();
         });
-
-        it('emits a load event', function(done) {
-            c.loadEntity('n1');
-            c.on('load', function(error, result) {
-                expect(result.data.n1).to.be.an.instanceOf(iD.Node);
-                done();
-            });
-
-            server.respondWith("GET", "http://www.openstreetmap.org/api/0.6/node/1",
-                [200, { "Content-Type": "text/xml" }, nodeXML]);
-            server.respond();
-        });
     });
+
+    describe('#loadMultiple', function () {
+        beforeEach(function() {
+            server = sinon.fakeServer.create();
+        });
+
+        afterEach(function() {
+            server.restore();
+        });
+
+        it('loads nodes');
+        it('loads ways');
+
+    });
+
 
     describe('#osmChangeJXON', function() {
         it('converts change data to JXON', function() {

@@ -1,0 +1,21 @@
+{
+    "icon": "camera",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "camera",
+        "film"
+    ],
+    "tags": {
+        "shop": "photo"
+    },
+    "name": "Photography Store"
+}

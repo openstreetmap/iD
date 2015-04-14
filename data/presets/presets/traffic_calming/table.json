@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "surface"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway":"crossing",
+        "traffic_calming": "table"
+    },
+    "terms": [
+        "speed table",
+        "flat top hump"
+    ],
+    "name": "Raised Pedestrian Crossing"
+}
