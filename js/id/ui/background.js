@@ -215,7 +215,7 @@ iD.ui.Background = function(context) {
                 .placement('left'))
             .append('div')
             .attr('class', 'opacity')
-            .style('opacity', String);
+            .style('opacity', function(d) { return 1.25 - d; });
 
         var backgroundList = content.append('ul')
             .attr('class', 'layer-list');
