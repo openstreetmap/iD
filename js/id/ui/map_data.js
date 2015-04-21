@@ -127,6 +127,7 @@ iD.ui.MapData = function(context) {
                 d3.event.stopPropagation();
             }
             setFill((fillSelected === 'wireframe' ? fillDefault : 'wireframe'));
+            context.map().pan([0,0]);  // trigger a redraw
         }
 
         function setVisible(show) {

@@ -12,7 +12,10 @@ iD.svg.Points = function(projection, context) {
 
     return function drawPoints(surface, entities, filter) {
         var graph = context.graph(),
-            points = _.filter(entities, function(e) { return e.geometry(graph) === 'point'; });
+            wireframe = surface.classed('fill-wireframe'),
+            points = wireframe ? [] : _.filter(entities, function(e) {
+                return e.geometry(graph) === 'point';
+            });
 
         points.sort(sortY);
 

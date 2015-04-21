@@ -138,12 +138,19 @@ iD.svg.Vertices = function(projection, context) {
 
     function drawVertices(surface, graph, entities, filter, extent, zoom) {
         var selected = siblingAndChildVertices(context.selectedIDs(), graph, extent),
+            wireframe = surface.classed('fill-wireframe'),
             vertices = [];
 
         for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+            var entity = entities[i],
+                geometry = entity.geometry(graph);
 
-            if (entity.geometry(graph) !== 'vertex')
+            if (wireframe && geometry === 'point') {
+                vertices.push(entity);
+                continue;
+            }
+
+            if (geometry !== 'vertex')
                 continue;
 
             if (entity.id in selected ||
