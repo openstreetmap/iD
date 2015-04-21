@@ -803,6 +803,19 @@ path.casing.tag-boundary-national_park {
     stroke: #b0e298;
 }
 
+/* barriers */
+
+path.stroke.tag-barrier {
+    stroke: #ddd;
+    stroke-width: 3px;
+    stroke-linecap: round;
+    stroke-dasharray: 15, 5, 1, 5;
+}
+.low-zoom path.stroke.tag-barrier {
+    stroke-width: 2px;
+    stroke-linecap: butt;
+    stroke-dasharray: 8, 2, 2, 2;
+}
 
 /* bridges */
 
