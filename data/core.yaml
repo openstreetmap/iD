@@ -191,7 +191,7 @@ en:
   commit:
     title: Save Changes
     description_placeholder: Brief description of your contributions
-    message_label: Commit message
+    message_label: Changeset comment
     upload_explanation: "The changes you upload will be visible on all maps that use OpenStreetMap data."
     upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
     save: Save
