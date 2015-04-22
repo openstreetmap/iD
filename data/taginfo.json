@@ -1499,6 +1499,10 @@
             "key": "place",
             "value": "city"
         },
+		{
+            "key": "place",
+            "value": "farm"
+        },
         {
             "key": "place",
             "value": "hamlet"
