@@ -133,14 +133,24 @@ iD.ui.EntityEditor = function(context) {
     }
 
     function clean(o) {
+        function isOpeningHours(k) {
+            return _.any(['opening_hours', 'service_times', 'collection_times',
+                'operating_times', 'smoking_hours', 'happy_hours'], function(s) {
+                    return k.indexOf(s) !== -1;
+            });
+        }
+        function cleanVal(k, v) {
+            return v.split(';')
+                .map(function(s) { return s.trim(); })
+                .join(isOpeningHours(k) ? '; ' : ';');
+        }
+
         var out = {}, k, v;
-        /*jshint -W083 */
         for (k in o) {
             if (k && (v = o[k]) !== undefined) {
-                out[k] = v.split(';').map(function(s) { return s.trim(); }).join(';');
+                out[k] = cleanVal(k, v);
             }
         }
-        /*jshint +W083 */
         return out;
     }
 
