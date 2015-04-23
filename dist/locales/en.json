@@ -2863,6 +2863,10 @@
                 "name": "City",
                 "terms": ""
             },
+            "place/farm": {
+                "name": "Farm",
+                "terms": ""
+            },
             "place/hamlet": {
                 "name": "Hamlet",
                 "terms": ""

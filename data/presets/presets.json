@@ -6306,6 +6306,17 @@
         },
         "name": "City"
     },
+    "place/farm": {
+        "icon": "farm",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "place": "farm"
+        },
+        "name": "Farm"
+    },
     "place/hamlet": {
         "icon": "triangle-stroked",
         "fields": [
