@@ -1738,6 +1738,9 @@ en:
       place/city:
         name: City
         terms: "<translate with synonyms or related terms for 'City', separated by commas>"
+      place/farm:
+        name: Farm
+        terms: "<translate with synonyms or related terms for 'Farm', separated by commas>"
       place/hamlet:
         name: Hamlet
         terms: "<translate with synonyms or related terms for 'Hamlet', separated by commas>"
