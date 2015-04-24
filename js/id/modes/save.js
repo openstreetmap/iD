@@ -103,8 +103,8 @@ iD.modes.Save = function(context) {
 
                 history.replace(merge);
 
-                var conflicts = merge.conflicts();
-                if (!conflicts.length) return;  // merged safely
+                var mergeConflicts = merge.conflicts();
+                if (!mergeConflicts.length) return;  // merged safely
 
                 var forceLocal = action(id, localGraph, remoteGraph).withOption('force_local'),
                     forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote'),
@@ -114,7 +114,7 @@ iD.modes.Save = function(context) {
                 conflicts.push({
                     id: id,
                     name: entityName(local),
-                    details: conflicts,
+                    details: mergeConflicts,
                     chosen: 1,
                     choices: [
                         choice(id, keepMine, forceLocal),
