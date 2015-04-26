@@ -251,6 +251,16 @@ iD.Graph.prototype = {
         });
     },
 
+    revert: function(entity) {
+        if (this.entities[entity.id] === this.base().entities[entity.id])
+            return this;
+
+        return this.update(function() {
+            this._updateCalculated(entity, this.base().entities[entity.id]);
+            delete this.entities[entity.id];
+        });
+    },
+
     update: function() {
         var graph = this.frozen ? iD.Graph(this, true) : this;
 
