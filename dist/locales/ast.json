@@ -238,7 +238,6 @@
         "title": "Guardar",
         "help": "Guardar cambios a OpenStreetMap, faciendolos visibles a otros usuarios.",
         "no_changes": "Nun hai cambios que guardar.",
-        "error": "Hebo un error al intentar guardar",
         "uploading": "Xubiendo cambios a OpenStreetMap.",
         "unsaved_changes": "Tien cambios ensin guardar"
     },

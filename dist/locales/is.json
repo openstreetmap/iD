@@ -219,6 +219,7 @@
         "upload_explanation_with_user": "Breytingarnar sem þú gerir sem {user} verða sýnilegar á öllum kortum sem nota OpenStreetMap gögn.",
         "save": "Vista",
         "cancel": "Hætta við",
+        "changes": "{count} breytingar",
         "warnings": "Aðvaranir",
         "modified": "Breytt",
         "deleted": "Eytt",
@@ -261,7 +262,8 @@
         "node": "Hnútur",
         "way": "Ferill",
         "relation": "Vensl",
-        "location": "Staðsetning"
+        "location": "Staðsetning",
+        "add_fields": "Bæta við svæði:"
     },
     "background": {
         "title": "Bakgrunnur",
@@ -272,11 +274,16 @@
     },
     "map_data": {
         "description": "Kortagögn",
+        "data_layers": "Gagnalög",
         "fill_area": "Fylla svæði"
     },
     "feature": {
+        "points": {
+            "tooltip": "Áhugaverðir staðir"
+        },
         "major_roads": {
-            "description": "Aðalvegir"
+            "description": "Aðalvegir",
+            "tooltip": "Þjóðvegir, götur, osfrv."
         },
         "minor_roads": {
             "description": "Minni vegir"
@@ -295,6 +302,9 @@
         "rail": {
             "description": "Lestareigindi"
         },
+        "power": {
+            "description": "Flóknari möguleikar"
+        },
         "past_future": {
             "tooltip": "Tillaga,  í byggingu, í eyði, niðurrif oþh"
         }
@@ -309,10 +319,12 @@
         "title": "Vista",
         "help": "Vista breytingar á OpenStreetMap, þær verða sýnilegar öðrum notendum.",
         "no_changes": "Engar breytingar til að vista.",
-        "error": "Villa kom upp þegar reynt var að vista",
         "unknown_error_details": "Aðgættu hvort að nettengingin er í lagi.",
         "uploading": "Hleð breytingum inn á OpenStreetMap.",
-        "unsaved_changes": "Þú átt óvistaðar breytingar"
+        "unsaved_changes": "Þú átt óvistaðar breytingar",
+        "conflict": {
+            "next": "Næst >"
+        }
     },
     "success": {
         "edited_osm": "Þú breyttir OSM!",
@@ -357,6 +369,7 @@
     "gpx": {
         "local_layer": "Staðvær GPX-skrá",
         "drag_drop": "Dragðu og slepptu .gpx skrá á síðuna eða smelltu á takkann til hægri til að fletta",
+        "zoom": "Þysja að GPX-slóð",
         "browse": "Finna .gpx skrá"
     },
     "mapillary": {

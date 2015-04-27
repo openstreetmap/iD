@@ -296,7 +296,6 @@
         "title": "Gardar",
         "help": "Gardar os cambios en OpenStreetMap, facéndoos visibles aos demáis usuarios.",
         "no_changes": "Non hai cambios para gardar.",
-        "error": "Ocorreu un erro mentras se intentaba gardar",
         "uploading": "Subindo cambios a OpenStreetMap.",
         "unsaved_changes": "Tes cambios sen gardar"
     },
@@ -355,8 +354,7 @@
         "title": "Superposición de fotos (Mapillary)"
     },
     "help": {
-        "title": "Axuda",
-        "help": "# Axuda\n\nEste é un editor para [OpenStreetMap](http://www.openstreetmap.org/), o\nmapa mundial libre e editable. Podes usalo para engadir e actualizar datos\nna túa zona, facendo un mellor mapa mundial de código e datos abertos\nmellor para todos.\n\nAs edicións que fagas neste mapa serán visibles a todos os que usen\nOpenStreetMap. Para facer unha edición, necesitarás unha\n[conta de OpenStreetMap gratuíta](https://www.openstreetmap.org/user/new).\n\nO [editor iD](http://ideditor.com/) é un proxecto colaborativo con [código\nfonte dispoñible en GitHub](https://github.com/openstreetmap/iD).\n"
+        "title": "Axuda"
     },
     "intro": {
         "navigation": {

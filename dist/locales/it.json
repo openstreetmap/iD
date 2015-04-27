@@ -110,6 +110,7 @@
                 "multiple": "Cancellati {n} oggetti."
             },
             "incomplete_relation": "Questo elemento non può essere cancellato perché non è stato completamente scaricato.",
+            "part_of_relation": "Questo elemento non può essere eliminato perché fa parte di una relazione. Devi prima rimuoverlo dalla relazione.",
             "connected_to_hidden": "Questo elemento non può essere cancellato perché è connesso ad un elemento nascosto."
         },
         "add_member": {
@@ -386,10 +387,33 @@
         "title": "Salva",
         "help": "Salva i cambiamenti su OpenStreetMap, rendendoli visibili ad altri utenti.",
         "no_changes": "Nessuna modifica da salvare.",
-        "error": "E' accaduto un errore mentre veniva tentato il salvataggio",
+        "error": "Si sono verificati errori nel tentato di salvataggio",
+        "status_code": "Il server ha risposto con codice {code}",
         "unknown_error_details": "Assicurati di essere connesso ad internet.",
         "uploading": "Caricamento delle modifiche su OpenStreetMap.",
-        "unsaved_changes": "Hai modifiche non salvate"
+        "unsaved_changes": "Hai modifiche non salvate",
+        "conflict": {
+            "header": "Risolvi conflitti di modifica",
+            "count": "Conflitto {num} di {total}",
+            "previous": "< Precedente",
+            "next": "Successivo >",
+            "keep_local": "Mantieni il mio",
+            "keep_remote": "Usa il loro",
+            "restore": "Ripristina",
+            "delete": "Lascia Cancellato",
+            "download_changes": "O scarica le tue modifiche.",
+            "done": "Risolti tutti i conflitti!",
+            "help": "Un altro utente ha modificato qualcuno degli elementi che hai modificato tu.\nClicca su ogni elemento sottostante per avere più dettagli sul conflitto e scegliere se mantenere la tua versione o quella dell'altro utente.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "Questo oggetto è stato cancellato da {user}.",
+            "location": "Questo oggetto è stato spostato sia da te che da {user}.",
+            "nodelist": "Nodi modificati sia da te che da {user}.",
+            "memberlist": "Membri di relazioni modificati sia da te che da {user}.",
+            "tags": "Hai modificato il tag <b>{tag}</b> in \"{local}\" e {user} l'ha modificato in \"{remote}\"."
+        }
     },
     "success": {
         "edited_osm": "OSMI Modificato",
@@ -401,7 +425,8 @@
         "help_html": "Le tue modifiche appariranno nel livello \"Standard\" tra qualche minuto. Per gli altri livelli e per certi elementi potrebbe essere necessario più tempo.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>dettagli</a>).\n"
     },
     "confirm": {
-        "okay": "Okay"
+        "okay": "Okay",
+        "cancel": "Cancella"
     },
     "splash": {
         "welcome": "Benvenuti nell'editor OpenStreetMap iD",
@@ -448,7 +473,7 @@
     },
     "help": {
         "title": "Aiuto",
-        "help": "# Aiuto\n\nQuesto è un editor per [OpenStreetMap](http://www.openstreetmap.org/), la\nmappa del mondo gratuita e modificabile. Puoi usarlo per aggiungere ed aggiornare\ndati nella tua area, creando una mappa del mondo open-source e open-data\nmigliore per tutti.\n\nLe modifiche che fai a questa mappa saranno visibili a chiunque usa\nOpenStreetMap. Per fare una modifica, avrai bisogno di un\n[account gratuito OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) è un progetto collaborativo il cui [codice\nsorgente è disponibile su GitHub](https://github.com/openstreetmap/iD).\n",
+        "help": "# Aiuto\n\nQuesto è un editor per [OpenStreetMap](http://www.openstreetmap.org/), la\nmappa del mondo gratuita e modificabile. Puoi usarlo per aggiungere ed aggiornare\ndati nella tua area, creando una mappa del mondo open-source e open-data\nmigliore per tutti.\n\nLe modifiche che fai a questa mappa saranno visibili a chiunque usa\nOpenStreetMap. Per fare una modifica, avrai bisogno di [accedere](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) è un progetto collaborativo il cui [codice\nsorgente è disponibile su GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Modifica & salvataggio\n\nQuesto editor è stato pensato per funzionare principalmente online\ned anche in questo momento lo stai utilizzando tramite browser web.\n\n### Selezione degli Elementi\n\nPer selezionare un elemento della mappa, come ad esempio una strada o\nun punto di interesse, clicca su di esso sulla mappa. Questo farà in modo\nche l'elemento selezionato venga evidenziato, che si apra un pannello con\ni dettagli e che si apra un menu di azioni che è possibile fare con l'elemento\nstesso.\n\nPer selezionare più elementi tenendo premuto il tasto 'Maiusc' clicca su ogni\nelemento o trascina il mouse disegnando un riquadro sulla mappa. Questo\nfarà sì che tutti gli elementi all'interno del riquadro vengano selezionati\nconsentendo di compiere azioni su più elementi in una volta sola.\n\n### Salvataggio delle modifiche\n\nQuando si fanno dei cambiamenti, come modifiche alle strade, agli edifici e\nai luoghi, queste vengono memorizzate localmente fino a che non si effettua\nil salvataggio sul server. Non preoccuparti se fai un errore, puoi annullare\nla modifica premento il tasto 'Annulla' e rieffettuare la modifica cliccando\nsul tasto 'Ripeti'.\n\nSe ad esempio hai completato un'area della città e vuoi iniziare un'altra\narea clicca su 'Salva' e porre fine ad un gruppo di modifiche. Avrai comunque\nla possibilità di revisionare ciò che hai modificato inoltre l'editor fornirà\nsuggerimenti e avvertimenti se qualcosa nelle tue modifiche non sembra\nandare bene.\n\nSe tutto è a posto puoi aggiungere un piccolo commento per spiegare la\nmodifica effettuata e cliccare su 'Salva' di nuovo per caricare le modifiche su\n[OpenStreetMap.org](http://www.openstreetmap.org/), dove saranno visibili\na tutti gli utenti e disponibili agli altri per consentire di costruirci sopra o\nmigliorarle ulteriormente.\n\nSe non riesci a finire le modifiche in una seduta, puoi abbandonare la\nfinestra dell'editor e tornarci più tardi (utilizzando lo stesso browser e lo\nstesso computer): l'editor ti offrirà infatti la possibiltà di recuperare il tuo lavoro.\n",
         "roads": "# Strade\n\nE' possibile creare, aggiustare ed eliminare le strade con questo editor. Le strade possono essere di tutti i tipi: percorsi, autostrade, cammini, piste ciclabili o altro. E' possibile mappare ogni segmento calpestabile.\n\n### Selezione\n\nCliccare su una strada per selezionarla. Verranno visualizzati un contorno e un piccolo menu strumenti sulla mappa oltre ad una barra laterale che mostra informazioni dettagliate sulla strada.\n\n### Modifica\n\nVi capiterà spesso di vedere strade non combacianti con le immagini sullo sfondo o con il tracciato GPS. E' possibile allineare queste strada in modo che si trovino nella giusta posizione.\n\nPer prima cosa cliccare sulla strada che si vuole modificare. Questo farà in modo che la strada venga evidenziata e che vengano visualizzati i punti di controllo lungo di essa che possono essere spostati in luoghi più consoni. Se si vuole aggiungere nuovi punti di controllo per aggiungere maggiori dettagli, basta fare doppio clic su parte della strada senza nodi.\n\nSe la strada è connessa ad un'altra strada ma non è ben connessa sulla mappa, è possibile spostare uno di questi punti di controllo sull'altra strada in modo da unirli. E' importante per la mappa che le strade siano correttamente connesse  anche per garantire giuste indicazioni di guida.\n\nE' possibile cliccare sullo strumento 'Sposta' o premere il tasto rapido `M` per muovere l'intera strada in una volta sola. Cliccare nuovamente per memorizzare lo spostamento.\n\n### Eliminizione\n\nSe la strada è completamente sbagliata, ovvero non compare sulle immagini satellitari e non viene rilevata nella realtà, è possibile eliminarla eliminandola dalla mappa. Attenzione ad effettuare questa operazione di eliminazione poiché, come per ogni altra modifica, i risultati vengono visti da tutti. Considera che le immagini satellitari sono spesso vecchie quindi è possibile che la strada sia stata costruita solo di recente.\n\nE' possibile eliminare una strada cliccando prima su di essa per selezionarla e poi sull'icona cestino o premendo il tasto 'Canc' della tastiera.\n\n### Creazione\n\nHai notato che in un punto della mappa dovrebbe esserci una strada ma non c'è ? Clicca sull'incona 'Linea' in alto a sinistra nell'editor o premi il tasto `2` per iniziare a disegnare una linea.\n\nCliccare sull'inizio della strada sulla mappa per iniziare a disegnarla. Se la strada  è unita ad una strada già esistente, iniziare cliccando nel punto dove sono connesse.\n\nQuindi cliccare i nuovi punti lungo la strada in modo che segua il percorso giusto dettato dall'immagine satellitare o dai dati del GPS. Se la strada che stai disegnando attraversa un'altra strada, collegala cliccando sul punto di intersezione. Quando hai finito di disegnare fai doppio clic o premi 'Invio' o 'Enter' sulla tua tastiera.\n",
         "gps": "# GPS\n\nI dati provenienti dal GPS sono la sorgente dati più fidata per OpenStreetMap.\nQuesto editor supporta i tracciati locali - i file `.gpx` che si trovano sul tuo\ncomputer.  È possibile raccogliere questo tipo di tracciati GPS con un gran\nnumero di applicazioni per smartphone o tramite dispositivi GPS personali.\n\nPer informazioni su come effettuare un rilevamento GPS è possibile leggere\n[Rilevamenti con un GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPer utilizzare un tracciato GPX al fine di effettuare una mappatura, trascina il\nfile GPX sull'editor di mappe. Se viene riconosciuto verrà aggiunto alla mappa\ned evidenziato tramite una linea violetta. Cliccare sul menu 'Dati mappa' che si trova sulla sinitra per abilitare, disabilitare o zoomare il livello creato dal file GPX.\n\nIl tracciato GPX non viene caricato direttamente su OpenStreetMap - il modo\nmigliore di utilizzarlo è quello di disegnare sulla mappa usando il tracciato\ncome guida per i nuovi elementi che vuoi aggiungere e [caricarlo comunque\nsu OpenStreetMap](http://www.openstreetmap.org/trace/create) per renderlo\npoi disponibile agli altri utenti.\n",
@@ -750,6 +775,9 @@
             "description": {
                 "label": "Descrizione"
             },
+            "drive_through": {
+                "label": "Drive-through"
+            },
             "electrified": {
                 "label": "Elettrificata",
                 "placeholder": "Linea Aerea, Rotaia Elettrificata...",
@@ -868,6 +896,13 @@
             },
             "incline": {
                 "label": "Pendenza"
+            },
+            "incline_steps": {
+                "label": "Pendenza",
+                "options": {
+                    "up": "Su",
+                    "down": "Giù"
+                }
             },
             "information": {
                 "label": "Tipo"
@@ -1135,7 +1170,7 @@
             "service": {
                 "label": "Tipo"
             },
-            "service/bicycle/chaintool": {
+            "service/bicycle/chain_tool": {
                 "label": "Smagliacatene",
                 "options": {
                     "undefined": "No (ipotesi)",
@@ -1149,6 +1184,13 @@
                     "undefined": "No (ipotesi)",
                     "yes": "Sì",
                     "no": "No"
+                }
+            },
+            "service_rail": {
+                "label": "Tipo di servizio",
+                "options": {
+                    "spur": "Accesso",
+                    "yard": "Smistamento"
                 }
             },
             "shelter": {
@@ -1527,6 +1569,10 @@
             "amenity/grave_yard": {
                 "name": "Cimitero",
                 "terms": "Cimitero"
+            },
+            "amenity/grit_bin": {
+                "name": "Cestino del sale",
+                "terms": "spandisale,sale,ghiaccio,inverno,salare"
             },
             "amenity/hospital": {
                 "name": "Area Ospedaliera",
@@ -2754,6 +2800,9 @@
                 "name": "Sottostazione elettrica",
                 "terms": "Sottostazione elettrica,centralina,trasformatore"
             },
+            "power/substation": {
+                "name": "Sottostazione"
+            },
             "power/tower": {
                 "name": "Traliccio ad alta tensione",
                 "terms": "Torre ad alta tensione"
@@ -2829,6 +2878,10 @@
             "relation": {
                 "name": "Relazione",
                 "terms": "Relazione"
+            },
+            "roundabout": {
+                "name": "Rotatoria",
+                "terms": "rotonda,rotatoria"
             },
             "route/ferry": {
                 "name": "Rotta",
@@ -2909,6 +2962,9 @@
                 "name": "Drogheria",
                 "terms": "Articoli di pulizia e bellezza"
             },
+            "shop/chocolate": {
+                "name": "Cioccolateria"
+            },
             "shop/clothes": {
                 "name": "Negozio di abbigliamento",
                 "terms": "Negozio vestiti"
@@ -2920,6 +2976,9 @@
             "shop/convenience": {
                 "name": "Minimarket",
                 "terms": "Drogheria"
+            },
+            "shop/cosmetics": {
+                "name": "Negozio di cosmetici"
             },
             "shop/curtain": {
                 "name": "Negozio di tende"
@@ -3032,6 +3091,9 @@
                 "name": "Ottico",
                 "terms": "Ottico"
             },
+            "shop/pawnbroker": {
+                "name": "Banco dei pegni"
+            },
             "shop/pet": {
                 "name": "Negozio di animali",
                 "terms": "Negozio di animali"
@@ -3064,6 +3126,10 @@
                 "name": "Sartoria",
                 "terms": "sarto,vestiti,abiti"
             },
+            "shop/tobacco": {
+                "name": "Tabacchino",
+                "terms": "Tabaccheria"
+            },
             "shop/toys": {
                 "name": "Negozio di giocattoli",
                 "terms": "Negozio giocattoli"
@@ -3087,6 +3153,9 @@
             "shop/video": {
                 "name": "Videoteca",
                 "terms": "Videoteca"
+            },
+            "shop/weapons": {
+                "name": "Armeria"
             },
             "shop/wine": {
                 "name": "Enoteca",

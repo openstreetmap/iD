@@ -195,7 +195,6 @@
         "title": "Salveaza",
         "help": "Salvează modificările pe OpenSteetMap, făcându-le disponibile către alți utilizatori.",
         "no_changes": "Nici o modificare de salvat.",
-        "error": "A apărut o eroare in timp ce salvai.",
         "uploading": "Încarcă modificările in OpenStreetMap",
         "unsaved_changes": "Ai modificări nesalvate."
     },

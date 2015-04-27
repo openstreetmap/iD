@@ -86,6 +86,9 @@
         "disconnect": {
             "title": "Malkonekti"
         },
+        "move": {
+            "key": "M"
+        },
         "rotate": {
             "title": "Rotacio",
             "description": "Rotacii tiu objekto ĉirkaŭ ĝia centra punkto.",
@@ -94,12 +97,35 @@
             }
         },
         "reverse": {
-            "title": "dorsflanko"
+            "title": "dorsflanko",
+            "key": "V"
+        },
+        "split": {
+            "key": "X"
         }
     },
     "translate": {
         "translate": "Traduki",
         "localized_translation_label": "Multlingva nomon"
+    },
+    "commit": {
+        "changes": "{count} ŝanĝoj"
+    },
+    "inspector": {
+        "reference": "Vidi en la vikio de OpenStreetMap",
+        "check": {
+            "yes": "Jes",
+            "no": "Ne"
+        },
+        "way": "Vojo"
+    },
+    "feature": {
+        "others": {
+            "description": "Aliaj"
+        }
+    },
+    "help": {
+        "title": "Helpo"
     },
     "intro": {
         "navigation": {

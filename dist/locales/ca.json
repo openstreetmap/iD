@@ -110,6 +110,7 @@
                 "multiple": "Heu eliminat {n} objectes."
             },
             "incomplete_relation": "No es pot eliminar aquesta característica ja que no s'ha baixat completament.",
+            "part_of_relation": "Aquesta característica no es pot eliminar perquè forma part d'una relació més extensa. Heu d'eliminar-la de la relació primer.",
             "connected_to_hidden": "No es pot esborrar perquè està connectat a una característica oculta."
         },
         "add_member": {
@@ -386,10 +387,33 @@
         "title": "Desa",
         "help": "Desa els canvis a l'OpenStreetMap, fent-los visibles per als altres usuaris.",
         "no_changes": "No hi ha canvis a desar.",
-        "error": "Hi ha hagut un error en intentar desar",
+        "error": "Ha hagut un error en intentar desar",
+        "status_code": "El servidor ha expedit el codi d'estat {code}",
         "unknown_error_details": "Assegureu-vos d'estar connectats a Internet",
         "uploading": "Pujant els canvis a l'OpenStreetMap.",
-        "unsaved_changes": "Teniu canvis sense desar."
+        "unsaved_changes": "Teniu canvis sense desar.",
+        "conflict": {
+            "header": "Resoldre les edicions conflictives",
+            "count": "Conflicte {num} de {total}",
+            "previous": "< Anterior",
+            "next": "Següent >",
+            "keep_local": "Mantenir els meus",
+            "keep_remote": "Utilitzar els seus",
+            "restore": "Restaurar",
+            "delete": "Deixar eliminat",
+            "download_changes": "O bé descarregueu els vostres canvis.",
+            "done": "Tots els conflictes resolts!",
+            "help": "Un altre usuari ha canviat algunes característiques del mapa que també heu canviat.\nCliqueu a cada ítem dels d'aquí sota per saber més detalls dels conflictes, i escolliu si manteniu\nels vostres canvis o bé els canvis de l'altre usuari.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "Aquest objecte ha estat eliminat per {user}.",
+            "location": "Tant tu com {user} vau moure aquest objecte.",
+            "nodelist": "Tant tu com {user} vau canviar els nodes.",
+            "memberlist": "Tant tu com {user} vau canviar els membres de la relació.",
+            "tags": "Heu canviat l'etiqueta <b>{tag}</b> a \"{local}\" i {user} ho ha canviat  a \"{remote}\"."
+        }
     },
     "success": {
         "edited_osm": "Heu editat l'OSM!",
@@ -401,7 +425,8 @@
         "help_html": "Els canvis haurien d'aparèixer a la capa \"Estàndard\" en pocs minuts. Altres capes i algunes característiques, poden trigar més temps.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detalls</a>).\n"
     },
     "confirm": {
-        "okay": "D'acord"
+        "okay": "D'acord",
+        "cancel": "Cancel·lar"
     },
     "splash": {
         "welcome": "Benvinguts a l'editor iD per a l'OpenStreetMap",
@@ -448,7 +473,7 @@
     },
     "help": {
         "title": "Ajuda",
-        "help": "# Ajuda\n\nAixò és un editor per al [OpenStreetMap](http://www.openstreetmap.org/), el mapa lliure i editable del món. Podeu utilitzar-lo per afegir i actualitzar\nles dades a la vostra àrea, contibuint així a fer un mapa de codi obert i amb dades lliures del món\nmillor per a tothom.\n\nLes edicions que feu en aquest mapa seran visibles per tothom que faci servir OpenStreetMap. per tal de començar a editar, necessitareu un\n[compte gratuït d'OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n L'[Editor iD](http://ideditor.com/) iés un projecte cooperatiu que té el [codi font\ndisponible a GitHub](https://github.com/openstreetmap/iD).\n",
+        "help": "# Ajuda\n\nAixò és un editor per al [OpenStreetMap](http://www.openstreetmap.org/), el mapa lliure i editable del món. Podeu utilitzar-lo per afegir i actualitzar\nles dades a la vostra àrea, contibuint així a fer un mapa de codi obert i amb dades lliures del món\nmillor per a tothom.\n\nLes edicions que feu en aquest mapa seran visibles per tothom que faci servir OpenStreetMap. per tal de començar a editar, necessitareu\n[iniciar sessió](https://www.openstreetmap.org/login).\n\n L'[Editor iD](http://ideditor.com/) és un projecte cooperatiu que té el [codi font\ndisponible a GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Edició i desat\n\nAquest editor està dissenyat per treballar principalment en línia, i hi heu accedit mitjançant una pàgina web.\n\n### Selecció de característiques\n\nPer selecionar una característica del mapa, com ara una carretera o un punt d'interès, cliqueu-hi a sobre. Això ressaltarà la característica, obrirà un panell amb els detalls sobre aquesta, i un menú amb les coses que hi podeu fer .\n\nPodeu seleccionar múltiples característiques, prement la tecla 'Shift' i clicant-les per separat, o bé clicant i arrossegant el cursor. Això seleccionarà totes les característiques que englobi el requadre que es dibuixarà i permetrà modificar totes les característiques seleccionades en un sol cop.\n\n### Desant les edicions\n\nQuan feu canvis com ara editar carreteres, edificis, o llocs, aquests canvis es desen localment fins que els deseu al servidor. No us preocupeu si cometeu algun error- podeu desfer els canvis clicant el botó de desfer, i podeu refer els canvis clicant el botó de refer.\n\nCliqueu 'Desa' per acabar un grup d'edicions - per exemple, si heu acabat de delimitar l'àrea d'una ciutat i voleu començar a fer-ne una altra. Tindreu la oportunitat de revisar la feina feta,\ni l'editor proporcionarà suggeriments que us podran ajudar\ni també mostrarà alertes si alguna cosa no està del tot bé als vostres canvis.\n\nSi tot sembla correcte, podeu escriure un breu comentari explicant el canvis\nque heu fet, i clicar desa un altre cop per publicar els canvis\na [OpenStreetMap.org](http://www.openstreetmap.org/), on seran visibles\nper a tots els altres usuaris i disponibles per a altres editors per refer-los o bé millorar-los.\n\nSi no podeu acabar les vostres edicions en una sessió, podeu sortir de la finestra d'edició i tornar més tard (al mateix navegador i ordinador), i l'aplicació d'edició\npreguntarà si voleu restaurar els canvis anteriors.\n",
         "roads": "# Carreteres\n\nPodeu crear, ajustar i eliminar carreteres amb aquest editor. Les carreteres poden ser\nde molts tipus: pistes, autovies, camins, carrils bici, i molts més - tots els segments\nmés comuns han de ser cartografiables.\n\n### Selecció\n\nCliqueu a la carretera per seleccionar-la. Al fer això els seus contorns es faran visibles, \ncom també un petit menú d'eines i una barra lateral que mostrarà més informació\nsobre la carretera.\n\n### Modificació\n\nDe vegades veureu carreteres que no estan alineades amb la imatge del darrere \no amb una traça de GPS. Podeu ajustar aquestes carreteres per tal que estiguin al lloc\ncorrecte.\n\nPrimer cliqueu a la carretera que voleu canviar. Això la ressaltarà i mostrarà els punts de control\nque podeu arrossegar a les ubicacions desitjades. Si el que\nvoleu és afegir nous punts per obtenir un grau de detall més alt, feu doble clic en una part de la carretera sense cap punt, i se'n afegirà un.\n\nSi la carretera es connecta amb una altra, però no es reflecteix al mapa, \npodeu arrossegar un dels punts de control cap a l'altra carretera \nper tal d'unir-les. Fer que les carreteres es connectin és molt important \nper al mapa i essencial per proveir direccions per a la conducció.\n\nTambé podeu clicar l'eina «Moure» o prémer la tecla «M» per moure la carretera sencera, tota de cop, i llavors clicar altra vegada per guardar aquest moviment.\n\n### Eliminació\n\nSi una carretera està totalment malament -podeu apreciar que no existeix a la imatge per satèl·lit\ni a més a més, els veïns ens han confirmat que no existeix - la podeu eliminar, cosa que la treurà del mapa. Aneu amb molt de compte a l'hora d'eliminar característiques -\ncom ara altres edicions; els resultats podran ser vistos per tothom i moltes vegades la imatgeria per satèl·lit no està actualitzada, per tant la carretera es pot haver estat construida recentment.\n\nPodeu eliminar una carretera clicant-la, i llavors clicant la icona de la paperera o bé prement la tecla «Suprimir».\n\n### Creació\n\nHeu trobat que en algun lloc hi hauria d'haver una carretera però no hi és? Cliqueu la icona «Línia»\nal marge superior esquerre de la zona del mapa o bé prem la tecla «2» per començar a dibuixar\nuna línia.\n\nCliqueu a l'inici de la carretera al mapa per començar a dibuixar. Si la carretera comença amb una bifurcació en una carretera existent, cliqueu al lloc a on connecten.\n\nA continuació cliqueu a diferents punts al llarg de la carretera per tal que segueixi el traçat correcte, d'acord  amb la imatge del satèl·lit o la traça del GPS. Si la carretera que esteu dibuixant s'encreua amb una altra carretera, connecteu-les clicant al punt d'intersecció. Quan acabeu el dibuix, feu doble clic o premeu «Retorn» del teclat.\n",
         "gps": "# GPS\n\nLes dades de GPS són la font més fiable de dades per a l'OpenStreetMap. Aquest editor \nés compatible amb les traces locals - fitxers`.gpx`al vostre ordinador. Pots recollir aquest tipus de traça GPS amb algunes aplicacions per a smartphones com també \ndispositius personals de GPS.\n\nPer a més informació sobre com recollir dades amb GPS, llegeix\n[Recollir dades amb GPS](http://learnosm.org/en/beginner/using-gps/).\n\nper fer servir una traça GPX per editar el mapa, arrossega i deixa el fitxer GPX a l'editor. \nSi es detecta, s'afegirà el mapa com una línia verda llampant. \nClica a 'Dades del mapa'  al cantó dret per activar,\ndesactivar, o per ajustar la vista a aquesta capa GPX.\n\nLa traça GPX no és pujada directament a OpenStreetMap - la millor manera de \nfer-la servir és dibuixar tu el mapa, fent-la servir com a guia per a les noves característiques que afegiràs. també les pots [pujar a l'OpenStreetMap] \n(http://www.openstreetmap.org/trace/create)\nperquè d'altres persones les utilitzin.\n",
@@ -750,6 +775,9 @@
             "description": {
                 "label": "Descripció"
             },
+            "drive_through": {
+                "label": "Via dins una propietat."
+            },
             "electrified": {
                 "label": "Electrificació",
                 "placeholder": "Catenària, 3r rail...",
@@ -824,6 +852,15 @@
             "gauge": {
                 "label": "Ample"
             },
+            "gender": {
+                "label": "Gènere",
+                "placeholder": "Desconegut",
+                "options": {
+                    "male": "Masculí",
+                    "female": "Femení",
+                    "unisex": "Unisex"
+                }
+            },
             "generator/method": {
                 "label": "Mètode"
             },
@@ -859,6 +896,13 @@
             },
             "incline": {
                 "label": "Pendent"
+            },
+            "incline_steps": {
+                "label": "Inclinar",
+                "options": {
+                    "up": "Amunt",
+                    "down": "Avall"
+                }
             },
             "information": {
                 "label": "Tipus"
@@ -1126,10 +1170,10 @@
             "service": {
                 "label": "Tipus"
             },
-            "service/bicycle/chaintool": {
+            "service/bicycle/chain_tool": {
                 "label": "Eina de cadena",
                 "options": {
-                    "undefined": "Entès que no",
+                    "undefined": "Sobreentès que és no",
                     "yes": "Sí",
                     "no": "No"
                 }
@@ -1140,6 +1184,15 @@
                     "undefined": "Entès que no",
                     "yes": "Sí",
                     "no": "No"
+                }
+            },
+            "service_rail": {
+                "label": "Tipus de servei de la via",
+                "options": {
+                    "spur": "Canvi d'agulles",
+                    "yard": "Platja",
+                    "siding": "Apartador",
+                    "crossover": "Intercambiador"
                 }
             },
             "shelter": {
@@ -1176,7 +1229,8 @@
                     "bad": "Rodes robustes: bicicleta de muntanya, cotxe, carruatge oriental",
                     "very_bad": "Gran altura: vehicle utilitari lleuger tot terreny",
                     "horrible": "Tot terreny : vehicle utilitari pesant tot terreny",
-                    "very_horrible": "Tot terreny especialitzades: tractors, Quads"
+                    "very_horrible": "Tot terreny especialitzades: tractors, Quads",
+                    "impassable": "Impassable / Vehicles sense rodes"
                 }
             },
             "social_facility_for": {
@@ -2248,9 +2302,18 @@
             "landuse/churchyard": {
                 "name": "Terrenys d'església"
             },
+            "landuse/commercial": {
+                "name": "Zona Comercial"
+            },
             "landuse/construction": {
                 "name": "Zona en construcció",
                 "terms": "En construcció"
+            },
+            "landuse/farm": {
+                "name": "Zona Agrícola"
+            },
+            "landuse/farmland": {
+                "name": "Zona Agrícola"
             },
             "landuse/farmyard": {
                 "name": "Edificis de Granja",
@@ -2267,12 +2330,18 @@
                 "name": "Herba",
                 "terms": "Herba,Gespa"
             },
+            "landuse/industrial": {
+                "name": "Zona Industrial"
+            },
             "landuse/landfill": {
                 "name": "Abocador"
             },
             "landuse/meadow": {
                 "name": "Prat",
                 "terms": "Prat,Prada,Natural"
+            },
+            "landuse/military": {
+                "name": "Zona Militar"
             },
             "landuse/orchard": {
                 "name": "Verger",
@@ -2281,6 +2350,12 @@
             "landuse/quarry": {
                 "name": "Mina a cel obert",
                 "terms": "Pedrera"
+            },
+            "landuse/residential": {
+                "name": "Zona Residencial"
+            },
+            "landuse/retail": {
+                "name": "Zona de Comerç minorista"
             },
             "landuse/vineyard": {
                 "name": "Vinya",
@@ -2722,6 +2797,9 @@
                 "name": "Relació",
                 "terms": "Relació"
             },
+            "roundabout": {
+                "name": "Rotonda"
+            },
             "route/ferry": {
                 "name": "Ruta de ferri"
             },
@@ -2919,6 +2997,9 @@
             },
             "shop/hifi": {
                 "name": "Botiga d'alta fidelitat"
+            },
+            "shop/houseware": {
+                "name": "Botiga de la llar"
             },
             "shop/interior_decoration": {
                 "name": "Botiga d'Interiorisme"

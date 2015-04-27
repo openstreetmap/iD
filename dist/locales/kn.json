@@ -161,17 +161,138 @@
         "deleted": "ಅಳಿಸಲಾಯಿತು",
         "created": "ರಚಿಸಲಾಯಿತು"
     },
+    "contributors": {
+        "list": "ಸಂಪಾದನೆಗಳು {ಬಳಕೆದಾರ ಮೂಲಕ}"
+    },
     "geocoder": {
-        "search": "ಪ್ರಪಂಚದಾದ್ಯಂತ ಹುಡುಕು......"
+        "search": "ಪ್ರಪಂಚದಾದ್ಯಂತ ಹುಡುಕು......",
+        "no_results_worldwide": "ಯಾವುದೇ ಫಲಿತಾಂಶಗಳು ಕಂಡುಬರಲಿಲ್ಲ"
+    },
+    "geolocate": {
+        "title": "ನನ್ನ ಸ್ಥಳವನ್ನು ತೋರಿಸಿ"
     },
     "inspector": {
+        "role": "ಪಾತ್ರ",
         "back_tooltip": "ಲಕ್ಷಣವನ್ನು ಬದಲಿಸು",
         "remove": "ತೆಗೆದುಹಾಕು",
         "search": "ಹುಡುಕು",
-        "multiselect": "ಆಯ್ಕೆಮಾಡಿದ ವಸ್ತುಗಳು"
+        "multiselect": "ಆಯ್ಕೆಮಾಡಿದ ವಸ್ತುಗಳು",
+        "unknown": "ತಿಳಿಯದ",
+        "incomplete": "<not downloaded>",
+        "check": {
+            "yes": "ಹೌದು",
+            "no": "ಇಲ್ಲ"
+        },
+        "none": "‍ಯಾವುದೂ ಇಲ್ಲದ",
+        "node": "‍‍ಯಾವುದೂ ಇಲ್ಲದ",
+        "way": "ದಾರಿ",
+        "location": "ಸ್ಥಳ"
+    },
+    "background": {
+        "title": "ಹಿನ್ನೆಲೆ",
+        "none": "‍‍ಯಾವುದೂ ಇಲ್ಲದ"
+    },
+    "feature": {
+        "points": {
+            "description": "ಬಿಂದುಗಳು"
+        },
+        "major_roads": {
+            "description": "‍ಪ್ರಮುಖ ರಸ್ತೆಗಳು",
+            "tooltip": "ಹೆದ್ದಾರಿಗಳು, ಬೀದಿಗಳು ಇತ್ಯಾದಿಗಳು"
+        },
+        "minor_roads": {
+            "description": "ಸಣ್ಣ ರಸ್ತೆಗಳು",
+            "tooltip": "ಸೇವೆ ರಸ್ತೆಗಳು, ನಿಲುಗಡೆ ನಡುದಾರಿಗಳು, ಟ್ರ್ಯಾಕ್ಸ್, ಇತ್ಯಾದಿ"
+        },
+        "paths": {
+            "description": "ಪಥ",
+            "tooltip": "ಪಾದಚಾರಿ ಮಾರ್ಗಗಳು, ಕಾಲುದಾರಿಗಳು, ಸೈಕ‍ಲ್ ಮಾರ್ಗಗಳು, ಇತ್ಯಾದಿ"
+        },
+        "buildings": {
+            "description": "ಕಟ್ಟಡಗಳು",
+            "tooltip": "ಕಟ್ಟಡಗಳು, ತಂಗುದಾಣಗಳು, ಗ್ಯಾರೇಜುಗಳು, ಇತ್ಯಾದಿ"
+        },
+        "landuse": {
+            "tooltip": "‍ಕಾಡುಗಳು, ಕೃಷಿಭೂಮಿ, ಉದ್ಯಾನಗಳು, ಗೃಹ, ವಾಣಿಜ್ಯ, ಇತ್ಯಾದಿ"
+        },
+        "boundaries": {
+            "description": "ಗಡಿಗಳು",
+            "tooltip": "ಆಡಳಿತಾತ್ಮಕ ಗಡಿರೇಖೆಗಳು"
+        },
+        "water": {
+            "description": "ನೀರಿನ ಲಕ್ಷಣಗಳು",
+            "tooltip": "ನದಿಗಳು, ಸರೋವರಗಳು, ಕೊಳಗಳು, ಹೊಂಡಗಳು, ಇತ್ಯಾದಿ"
+        },
+        "rail": {
+            "description": "ರೈಲಿನ ಲಕ್ಷಣಗಳು",
+            "tooltip": "ರೈಲ್ವೆ"
+        },
+        "power": {
+            "description": "ವಿದ್ಯುತ್ ಲಕ್ಷಣಗಳು",
+            "tooltip": "ವಿದ್ಯುತ್ ಸಂಪರ್ಕಗಳು, ವಿದ್ಯುತ್ ಉತ್ಪಾದನಾ ಘಟಕಗಳು, ಉಪಕೇಂದ್ರಗಳು ಇತ್ಯಾದಿ"
+        },
+        "past_future": {
+            "tooltip": "ಪ್ರ‍ಸ್ತಾವಿಸಿದ, ನಿರ್ಮಾ‍ಣ ಹಂತದ, ಕೈಬಿಟ್ಟ, ಕೆಡವ‍ಲಾದ ಇತ್ಯಾದಿ"
+        },
+        "others": {
+            "description": "ಇತರೆ",
+            "tooltip": "ಇನ್ನಿತರೆ"
+        }
+    },
+    "area_fill": {
+        "partial": {
+            "description": "‍"
+        }
+    },
+    "restore": {
+        "restore": "ಪುನಃಸ್ಥಾಪನೆ",
+        "reset": "ಮರುಹೊಂದಿಸು"
+    },
+    "save": {
+        "title": "ಉಳಿಸು",
+        "conflict": {
+            "previous": "<‍ಹಿಂದಿನ",
+            "next": "‍ಮುಂದಿನ>",
+            "restore": "ಪುನಃಸ್ಥಾಪನೆ"
+        }
+    },
+    "success": {
+        "just_edited": "ನೀವು ಈಗ ಓಪನ್‍ ಸ್ಟ್ರೀಟ್ ಮ್ಯಾಪ್ ಸಂಪಾದಿಸಿದಿರಿ.",
+        "facebook": "ಫೇಸ್ ಬುಕ್ ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿರಿ",
+        "twitter": "ಟ್ವಿಟರ ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿರಿ",
+        "google": "ಗೂಗಲ್+ ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿರಿ"
+    },
+    "confirm": {
+        "okay": "ಸರಿ",
+        "cancel": "ರದ್ದು ಮಾಡು"
+    },
+    "splash": {
+        "start": "ಸಂಪಾದಿಸಿ"
+    },
+    "tag_reference": {
+        "description": "ವಿವರಣೆ"
+    },
+    "zoom": {
+        "in": "ಹಿಗ್ಗಿಸು",
+        "out": "ಕುಗ್ಗಿಸು"
     },
     "help": {
         "title": "ಸಹಾಯ"
+    },
+    "intro": {
+        "navigation": {
+            "title": "ಸಂಚರಣೆ"
+        },
+        "areas": {
+            "title": "ಪ್ರದೇಶ"
+        },
+        "lines": {
+            "title": "ರೇಖೆಗಳು"
+        },
+        "startediting": {
+            "title": "ಸಂಪಾದನೆ ಪ್ರಾರಂಭಿಸು",
+            "start": "ನಕ್ಷೆ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿ!"
+        }
     },
     "presets": {
         "categories": {
@@ -334,6 +455,9 @@
             "boundary": {
                 "label": "ವಿಧ"
             },
+            "brand": {
+                "label": "ಬ್ರ್ಯಾಂಡ್"
+            },
             "building": {
                 "label": "ಕಟ್ಟಡ"
             },
@@ -384,6 +508,9 @@
             "craft": {
                 "label": "ವಿಧ"
             },
+            "crop": {
+                "label": "ಬೆಳೆ"
+            },
             "crossing": {
                 "label": "ವಿಧ"
             },
@@ -395,6 +522,9 @@
             },
             "denomination": {
                 "label": "ವರ್ಗನಾಮ"
+            },
+            "denotation": {
+                "label": "ಉಪಲಕ್ಷಣ"
             },
             "description": {
                 "label": "ವಿವರಣೆ"
@@ -431,6 +561,7 @@
             "fire_hydrant/type": {
                 "label": "ವಿಧ",
                 "options": {
+                    "underground": "ನೆಲದಡಿಯಲ್ಲಿ",
                     "wall": "ಗೋಡೆ",
                     "pond": "ಕೊಳ"
                 }
@@ -441,8 +572,32 @@
             "fuel": {
                 "label": "ಇಂಧನ"
             },
+            "fuel/biodiesel": {
+                "label": "ಜೈವಿಕ ಡೀಸಲ್ ಮಾರುತ್ತಾರೆ "
+            },
+            "fuel/diesel": {
+                "label": "ಡೀಸಲ್ ಮಾರುತ್ತಾರೆ "
+            },
+            "fuel/e10": {
+                "label": "E10 ಮಾರುತ್ತಾರೆ  "
+            },
+            "fuel/e85": {
+                "label": "E85 ಮಾರುತ್ತಾರೆ "
+            },
+            "fuel/lpg": {
+                "label": "ಪ್ರೋಪೇನ್ ಮಾರುತ್ತಾರೆ "
+            },
             "gauge": {
                 "label": "ಗೇಜ್"
+            },
+            "gender": {
+                "label": "ಲಿಂಗ",
+                "placeholder": "ಅಪರಿಚಿತ",
+                "options": {
+                    "male": "ಗಂಡು",
+                    "female": "ಹೆಣ್ಣು",
+                    "unisex": "ಒಂದೇಲಿಂಗ"
+                }
             },
             "generator/method": {
                 "label": "ವಿಧಾನ"
@@ -454,7 +609,8 @@
                 "label": "ವಿಧ"
             },
             "golf_hole": {
-                "label": "ಉಲ್ಲೇಖ"
+                "label": "ಉಲ್ಲೇಖ",
+                "placeholder": "‍ರಂಧ್ರಗಳ ಸಂಖ್ಯೆ (1-18)"
             },
             "handicap": {
                 "label": "ಅಂಗವಿಕಲ",
@@ -477,6 +633,13 @@
             },
             "incline": {
                 "label": "ಬಾಗಿಸು"
+            },
+            "incline_steps": {
+                "label": "ವಾಲಿಕೆ",
+                "options": {
+                    "up": "ಮೇಲೆ",
+                    "down": "ಕೆಳಗೆ"
+                }
             },
             "information": {
                 "label": "ವಿಧ"
@@ -503,6 +666,22 @@
             "layer": {
                 "label": "ಪದರ"
             },
+            "leaf_cycle": {
+                "options": {
+                    "semi_evergreen": "ಅರೆ ಹರಿದ್ವರ್ಣ",
+                    "semi_deciduous": "ಅರೆ-ಪತನಶೀಲ",
+                    "mixed": "ಮಿಶ್ರಿತ"
+                }
+            },
+            "leaf_type": {
+                "label": "ಎಲೆಯ ವಿಧ",
+                "options": {
+                    "broadleaved": "ಅಗಲವಾದ ಎಲೆ",
+                    "needleleaved": "ಚುಪಾದ ಎಲೆ",
+                    "mixed": "ಮಿಶ್ರಿತ",
+                    "leafless": "ಎಲೆಯಿಲ್ಲದ"
+                }
+            },
             "leisure": {
                 "label": "ವಿಧ"
             },
@@ -524,7 +703,10 @@
                 "placeholder": "40, 50, 60..."
             },
             "mtb/scale": {
-                "placeholder": "0, 1, 2, 3..."
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "4": "‍"
+                }
             },
             "mtb/scale/imba": {
                 "placeholder": "ಸುಲಭ, ಸಾಧಾರಣ, ಕಷ್ಟ ... ",
@@ -608,12 +790,15 @@
             },
             "piste/grooming": {
                 "options": {
-                    "classic": "ಶ್ರೇಷ್ಠ"
+                    "classic": "ಶ್ರೇಷ್ಠ",
+                    "mogul": "ಮೊಗುಲ್",
+                    "skating": "ಸ್ಕೇಟಿಂಗ್"
                 }
             },
             "piste/type": {
                 "label": "ವಿಧ",
                 "options": {
+                    "sled": "ಸ್ಲೆಡ್",
                     "snow_park": "ಮಂಜಿನ ಉದ್ಯಾನವನ",
                     "playground": "ಆಟದ ಮೈದಾನ"
                 }
@@ -654,6 +839,18 @@
             "service": {
                 "label": "ವಿಧ"
             },
+            "service/bicycle/chain_tool": {
+                "options": {
+                    "yes": "ಹೌದು",
+                    "no": "ಇಲ್ಲ"
+                }
+            },
+            "service/bicycle/pump": {
+                "options": {
+                    "yes": "ಹೌದು",
+                    "no": "ಇಲ್ಲ"
+                }
+            },
             "shelter": {
                 "label": "ಆಶ್ರಯ"
             },
@@ -679,6 +876,7 @@
                 "label": "ಕ್ರೀಡೆ"
             },
             "structure": {
+                "placeholder": "ತಿಳಿಯದ",
                 "options": {
                     "bridge": "ಸೇತುವೆ",
                     "tunnel": "ಸುರಂಗ",
@@ -699,11 +897,87 @@
                     "yes": "ಹೌದು",
                     "no": "ಇಲ್ಲ"
                 }
+            },
+            "tourism": {
+                "label": "ವಿಧ"
+            },
+            "trail_visibility": {
+                "placeholder": "ಅತ್ಯುತ್ತಮ, ಉತ್ತಮ, ಕಳಪೆ"
+            },
+            "trees": {
+                "label": "ಮರಗಳು"
+            },
+            "tunnel": {
+                "label": "ಸುರಂಗ"
+            },
+            "water": {
+                "label": "ವಿಧ"
+            },
+            "waterway": {
+                "label": "ವಿಧ"
+            },
+            "website": {
+                "label": "ಜಾಲತಾಣ",
+                "placeholder": "http://example.com/"
+            },
+            "wetland": {
+                "label": "ವಿಧ"
+            },
+            "wikipedia": {
+                "label": "ವಿಕಿಪೀಡಿಯಾ"
             }
         },
         "presets": {
+            "address": {
+                "name": "ವಿಳಾಸ"
+            },
+            "aeroway/aerodrome": {
+                "name": "ವಿಮಾನ ನಿಲ್ದಾಣ"
+            },
+            "aeroway/gate": {
+                "name": "ವಿಮಾನ ನಿಲ್ದಾಣ ಗೇಟ್",
+                "terms": "<translate with synonyms or related terms for 'Airport gate', separated by commas>"
+            },
+            "aeroway/hangar": {
+                "terms": "<translate with synonyms or related terms for 'Hangar', separated by commas>"
+            },
+            "aeroway/helipad": {
+                "terms": "<translate with synonyms or related terms for 'Helipad', separated by commas>"
+            },
+            "aeroway/runway": {
+                "name": "ಓಡುದಾರಿ",
+                "terms": "<translate with synonyms or related terms for 'Runway', separated by commas>"
+            },
+            "aeroway/taxiway": {
+                "terms": "<translate with synonyms or related terms for 'Taxiway', separated by commas>"
+            },
+            "aeroway/terminal": {
+                "terms": "<translate with synonyms or related terms for 'Airport terminal', separated by commas>"
+            },
+            "amenity": {
+                "name": "ಸೌಕರ್ಯ",
+                "terms": "<translate with synonyms or related terms for 'Amenity', separated by commas>"
+            },
+            "amenity/arts_centre": {
+                "terms": "<translate with synonyms or related terms for 'Arts Center', separated by commas>"
+            },
+            "amenity/atm": {
+                "name": "ATM"
+            },
             "amenity/bank": {
                 "name": "ಬ್ಯಾಂಕ್"
+            },
+            "amenity/bar": {
+                "terms": "<translate with synonyms or related terms for 'Bar', separated by commas>"
+            },
+            "amenity/bbq": {
+                "terms": "<translate with synonyms or related terms for 'Barbecue/Grill', separated by commas>"
+            },
+            "amenity/bench": {
+                "terms": "<translate with synonyms or related terms for 'Bench', separated by commas>"
+            },
+            "amenity/bicycle_parking": {
+                "terms": "<translate with synonyms or related terms for 'Bicycle Parking', separated by commas>"
             },
             "amenity/cinema": {
                 "name": "ಸಿನಿಮಾ"

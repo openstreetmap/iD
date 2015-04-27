@@ -95,7 +95,7 @@
             "description": "Rendre cette ligne droite.",
             "key": "S",
             "annotation": "Rendre une ligne droite.",
-            "too_bendy": "Ne peux être redressé car il courbe trop.",
+            "too_bendy": "Cela ne peut pas être redressé, car la courbe est trop importante.",
             "connected_to_hidden": "Cette ligne ne peut être rendue droite parce qu'elle est connecté à un élément caché."
         },
         "delete": {
@@ -110,6 +110,7 @@
                 "multiple": "{n} objets supprimés."
             },
             "incomplete_relation": "Cet élément ne peut pas être supprimé car il n'a pas été téléchargé dans son intégralité.",
+            "part_of_relation": "Cet élément ne peut pas être effacé parce qu'il fait partie d'une relation. Vous devez d'abord le retirer de la relation.",
             "connected_to_hidden": "Ceci ne peut être supprimé parce que c'est connecté à un élément caché."
         },
         "add_member": {
@@ -287,7 +288,7 @@
             "no": "Non"
         },
         "none": "Aucun",
-        "node": "Noeud",
+        "node": "Nœud",
         "way": "Chemin",
         "relation": "Relation",
         "location": "Endroit",
@@ -386,10 +387,33 @@
         "title": "Sauvegarder",
         "help": "Envoi des modifications au serveur OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
         "no_changes": "Aucune modification à sauvegarder",
-        "error": "Une erreur est survenue lors de l'enregistrement des données",
+        "error": "Des erreurs sont survenues en tentant de sauvegarder",
+        "status_code": "Le serveur a renvoyé le code de statut {code}",
         "unknown_error_details": "S'il vous plaît, assurez-vous d'être connecté à l'internet.",
         "uploading": "Envoi des modifications vers OpenStreetMap.",
-        "unsaved_changes": "Vous avez des modifications non enregistrées"
+        "unsaved_changes": "Vous avez des modifications non enregistrées",
+        "conflict": {
+            "header": "Résoudre les modifications conflictuelles",
+            "count": "Conflit {num} de {total}",
+            "previous": "Précédent",
+            "next": "Suivant",
+            "keep_local": "Garder la mienne",
+            "keep_remote": "Utiliser la leur",
+            "restore": "Restaurer",
+            "delete": "Laisser la suppression",
+            "download_changes": "Ou télécharger vos changements",
+            "done": "Tous les conflits sont résolus !",
+            "help": "Un autre utilisateur a modifié certains éléments de la carte que vous aviez modifiés changés.\nCliquez sur chaque élément ci-dessous pour plus de détails à propos du conflit, et choisissez si vous conservez vos modifications ou celles de l'autre utilisateur.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "Cet objet a été supprimé par {user}",
+            "location": "Cet objet a été déplacé à la fois par vous et {user}",
+            "nodelist": "Les nœuds ont été changés à la fois par vous et {user}",
+            "memberlist": "Les membres de la relation  ont été changés à la fois par vous et {user}",
+            "tags": "Vous avez changé le tag <b>{tag}</b> en \"{local}\" et {user} l'a changé en \"{remote}\"."
+        }
     },
     "success": {
         "edited_osm": "OSM Edité!",
@@ -401,7 +425,8 @@
         "help_html": "Vos changements doivent apparaitre sur la couche \"Standard\" dans quelques minutes. Les autres couches, et certains éléments nécessiteront plus de temps\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>détails</a>).\n"
     },
     "confirm": {
-        "okay": "OK"
+        "okay": "OK",
+        "cancel": "Annuler"
     },
     "splash": {
         "welcome": "Bienvenue sur ID, l'éditeur en ligne d'OpenStreetMap",
@@ -448,7 +473,7 @@
     },
     "help": {
         "title": "Aide",
-        "help": "#Aide\n\n Ceci est un éditeur pour [OpenStreetMap](http://www.openstreetmap.org/), la carte du\n monde gratuite et éditable. Vous pouvez l'utiliser pour ajouter ou corriger les données\n dans votre zone, et participer ainsi à la réalisation d'une carte du monde libre de droits.\n\n Les modifications que vous réaliserez seront visibles de tout le monde. Pour commencer\n à éditer, vous devez créer un [compte gratuit sur OpenStreetMap](https://www.openstreetmap.org/user/new).\n\n [iD editor](http://ideditor.com/) est un projet collaboratif dont le [code source est\n disponible sur GitHub](https://github.com/openstreetmap/iD).\n",
+        "help": "# Aide\n\nCeci est un éditeur pour [OpenStreetMap](http://www.openstreetmap.org/), la \ncarte du monde libre et éditable. Vous pouvez l'utiliser pour ajouter ou mettre à jour\nles données dans votre zone, et participer ainsi à la réalisation d'une carte du monde libre et à données ouvertes\nmeilleure pour tout le monde.\n\nLes modifications que vous réaliserez sur cette carte seront visibles par tous les utilisateurs d'\nOpenStreetMap.  Pour commencer à éditer, vous devez vous\n[connecter](https://www.openstreetmap.org/login).\n\nL'[éditeur iD](http://ideditor.com/) est un projet collaboratif dont le [code\nsource est disponible sur GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Éditer et sauvegarder⏎\n⏎\nCet éditeur est conçu principalement pour travailler en mode connecté, et vous l'accéder depuis un site Web en ce moment.⏎\n⏎\n### Sélectionner un élément de la carte⏎\n⏎\nPour sélection un élément de la carte, tel qu'une rue ou un point d'intérêt, cliquez sur ce dernier⏎\nsur la carte. Cette action mettra l'élément en surbrillance, et ouvrira le panneau latéral⏎\nqui affiche les propriétés de l'élément. Un menu apparaîtra également sur la carte,⏎\npermettant de poser des actions sur l'élément (telles que le déplacer, repositionner⏎\nses points constituants, etc).\n⏎\nPour sélectionner plusieurs éléments, appuyez sur la touche 'Majuscule'. Puis, cliquez⏎\nun à un sur les éléments à sélectionner. Alternativement, il est possible de dessinez un rectangle⏎\nsur la carte (toujours en appuyant sur 'Majuscule) pour effectuer la sélection multiple.⏎\nles points à sélectionner.⏎\n⏎\n### Enregistrer les modifications⏎\n⏎\nL'éditeur enregistre localement (sur votre ordinateur) toutes les modifications⏎\nque vous effectuez sur les éléments de la carte (les rues, les bâtiments, etc.).⏎\nCes modifications seront envoyées au serveur OpenStreetMap uniquement⏎\nlorsque vous appuierez sur \"Sauvegarder\".⏎\n⏎\nNe vous faites donc pas de souci si vous faites une erreur. Vous pouvez annuler⏎\ntout changement effectué en appuyant sur le bouton d'annulation (la flèche de demi-tour⏎\npointant vers la gauche).⏎\n⏎\nLorsque vous avez terminé un groupe de modifications - par exemple, vous avez⏎\ncomplété une partie de la ville et vous voulez en débuter une nouvelle,⏎\nil suffit d'appuyer sur le bouton \"Sauvegarder\". Vos changements ne seront pas⏎\nenvoyés immédiatement - vous avez l'occasion de réviser le travail effectué⏎\navant de confirmer les changements. ⏎\n⏎\nSi tout semble bon, entrez un commentaire décrivant vos changements⏎\n(par exemple: \"Ajout d'une boulangerie\" ou \"Ajout de commerces du quartier\"),⏎\npuis appuyez à nouveau sur le bouton 'Sauvegarder' (qui, cette fois-ci, apparaîtra\nen bleu dans le panneau latéral). Vos changements seront alors envoyés à⏎\n[OpenStreetMap.org](http://www.openstreetmap.org/), où il seront partagés et rendus⏎\nvisibles à tous les autres utilisateurs.\n⏎\nSi vous ne pouvez pas terminer vos changements en une seule séance, vous pouvez⏎\nfermer la fenêtre de l'éditeur. Vos changements seront enregistrés localement.⏎\nLorsque vous ouvrirez à nouveau l'éditeur, sur le même ordinateur et avec le même⏎\nnavigateur Web, l'éditeur vous proposera de récupérer le travail de la séance précédente.⏎\n",
         "roads": "# Routes\n\nVous pouvez créer, mettre à jour et supprimer des routes à l'aide de l'éditeur. Il peut s'agir de tous types de routes : chemins, autoroutes, pistes cyclables, et plus encore : toute voie régulièrement fréquentée peut être cartographiée.\n\n### Sélection\n\nCliquez sur une route pour la sélectionner. Elle sera alors surlignée et un menu 'outils' apparaîtra sur la carte, ainsi qu'une barre d'état affichant des informations supplémentaires.\n\n### Modification\n\nIl est fréquent que les routes ne soient pas bien alignées avec l'imagerie satellite ou avec les traces GPS. Vous pouvez ajuster et corriger la position des routes.\n\nCliquez d'abord sur la route à modifier. Elle est alors surlignée et des points de contrôle apparaissent qui permettent de corriger sa position. Pour ajouter des points de contrôle, double-cliquez sur un segment de la route sans nœuds.\n\nSi la route est connectée à une autre, mais que la connexion est incorrecte, vous pouvez déplacer un de ses points de contrôle sur la seconde route pour corriger la connexion. Des routes bien connectées sont essentielles pour la carte et pour fournir de bonnes informations d'itinéraire.\n\nVous pouvez également cliquer sur l'outil 'Déplacer' ou appuyer sur le raccourci `M` pour déplacer l'ensemble de la route en une fois, puis cliquer de nouveau une fois pour sauvegarder le déplacement.\n\n### Suppression\n\nSi une route est complètement fausse - c'est-à-dire qu'elle n'apparaît pas sur l'image satellite, et que dans l'idéal, vous avez confirmé qu'elle n'existe pas sur le terrain - vous pouvez la supprimer, ce qui l'enlèvera de la carte. Faites attention lorsque vous supprimez des éléments : comme n'importe quelle autre modification, le résultat sera visible par tout le monde sur la carte. Les photos aériennes sont souvent dépassées et la route est peut-être tout simplement récente.\n\nPour supprimer une route, sélectionnez-la en cliquant dessus, puis cliquez sur l'icône 'Poubelle' ou appuyez sur la touche 'Suppr'.\n\n### Création\n\nVous avez constaté qu'une route de votre connaissance manque à la carte ? Cliquez sur l'icône 'Ligne' en haut à gauche de l'éditeur ou appuyez sur le raccourci `2` pour dessiner une route. \n\nPour commencer le dessin, cliquez sur l'endroit où commence la route. Si elle commence à l'embranchement d'une autre route, commencez le dessin en cliquant à l'endroit de la connexion.\n\nCliquez ensuite régulièrement le long de la route pour ajouter des points, en utilisant l'imagerie satellite comme référence. Si la route que vous dessinez croise une autre route, connectez les deux en cliquant à l'endroit de l'intersection. Lorsque vous avez terminé le dessin, double-cliquez ou appuyez sur 'Entrée'.\n",
         "gps": "# GPS\n\nLa donnée GPS est la source la plus fiable de données pour OpenStreetMap. Cet éditeur\nsupporte les traces en local - fichiers `.gpx` sur votre ordinateur. Vous pouvez collecter\nce genre de trace GPS à l'aide de nombreuses applications pour smartphones ainsi qu'avec\ndu matériel GPS personnel.\n\nPour de la documentation sur la manière de faire un relevé GPS, lisez\n[Sur le terrain avec un GPS](http://learnosm.org/fr/beginner/using-gps/).\n\nPour utiliser un tracé GPX pour cartographier, effectuer un \"glissé-déposé\" du fichier GPX dans l'éditeur de cartes.\nS'il est reconnu, il sera ajouté à la carte comme une ligne violette en surbrillance.\nCliquez dans le menu \"Données de la carte\" sur le côté droit pour activer,\ndésactiver, ou zoomer dans ce nouveau calque GPX.\n\nLe tracé GPX n'est pas directement chargé vers OpenStreetMap - le meilleur moyen de\nl'utiliser est de dessiner sur la carte, en l'utilisant comme guide pour les nouveaux éléments que\nvous ajoutez, et aussi de le [charger dans OpenStreetMap](http://www.openstreetmap.org/trace/create) pour que les autres utilisateurs puissent s'en servir.\n",
@@ -750,6 +775,9 @@
             "description": {
                 "label": "Description"
             },
+            "drive_through": {
+                "label": "Point-retrait"
+            },
             "electrified": {
                 "label": "Électrification",
                 "placeholder": "Ligne de contact, Lignes électriques",
@@ -868,6 +896,13 @@
             },
             "incline": {
                 "label": "Pente"
+            },
+            "incline_steps": {
+                "label": "Inclinaison",
+                "options": {
+                    "up": "En haut",
+                    "down": "En bas"
+                }
             },
             "information": {
                 "label": "Type"
@@ -1009,7 +1044,7 @@
                 "label": "Heures"
             },
             "operator": {
-                "label": "Opérateur"
+                "label": "Exploitant"
             },
             "par": {
                 "label": "Par",
@@ -1135,7 +1170,7 @@
             "service": {
                 "label": "Type"
             },
-            "service/bicycle/chaintool": {
+            "service/bicycle/chain_tool": {
                 "label": "Outil de réparation de chaînes de vélo",
                 "options": {
                     "undefined": "Supposé être Non",
@@ -1149,6 +1184,15 @@
                     "undefined": "Supposé être Non",
                     "yes": "Oui",
                     "no": "Non"
+                }
+            },
+            "service_rail": {
+                "label": "Type de voie de service",
+                "options": {
+                    "spur": "Embranchement particulier court permettant à une compagnie ou une entité d'accéder au réseau principal.",
+                    "yard": "Voie interne à la compagnie utilisée pour le triage ou la maintenance.",
+                    "siding": "Voie parallèle",
+                    "crossover": "Voie de traversée"
                 }
             },
             "shelter": {
@@ -2892,7 +2936,7 @@
                 "terms": "Transformateur"
             },
             "public_transport/platform": {
-                "name": "Plateforme",
+                "name": "Plateforme d'attente",
                 "terms": "Quai"
             },
             "public_transport/stop_position": {
@@ -2958,6 +3002,10 @@
             "relation": {
                 "name": "Relation",
                 "terms": "Relation"
+            },
+            "roundabout": {
+                "name": "Carrefour giratoire ",
+                "terms": "Rond-point"
             },
             "route/ferry": {
                 "name": "Trajet de ferry",

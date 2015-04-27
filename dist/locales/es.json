@@ -110,6 +110,7 @@
                 "multiple": "{n} objetos eliminados."
             },
             "incomplete_relation": "Está característica no puede ser borrada porque no se ha descargado completa.",
+            "part_of_relation": "Esta característica no se puede eliminar porque es parte de una relación más grande. Usted debe eliminarlo de la relación primero.",
             "connected_to_hidden": "Esto no puede ser borrado porque está conectado a un elemento oculto."
         },
         "add_member": {
@@ -386,10 +387,33 @@
         "title": "Guardar",
         "help": "Guardar los cambios en OpenStreetMap haciéndolos visibles a otros usuarios.",
         "no_changes": "No hay cambios que guardar.",
-        "error": "Ocurrió un error mientras se trataba de guardar",
+        "error": "Se han producido errores al tratar de guardar",
+        "status_code": "El servidor devolvió código de estado {code}",
         "unknown_error_details": "Asegúrese de que está conectado a Internet.",
         "uploading": "Subiendo cambios a OpenStreetMap.",
-        "unsaved_changes": "Tiene cambios sin guardar"
+        "unsaved_changes": "Tiene cambios sin guardar",
+        "conflict": {
+            "header": "Resolver las ediciones conflictivas",
+            "count": "Conflicto {num} de {total}",
+            "previous": "< Anterior",
+            "next": "Siguiente >",
+            "keep_local": "Mantener el mío",
+            "keep_remote": "Usar el suyo",
+            "restore": "Restaurar",
+            "delete": "Dejar Borrado",
+            "download_changes": "O descargar los cambios.",
+            "done": "¡Todos los conflictos resueltos!",
+            "help": "Otro usuario cambió algunas de las características del mapa que usted modificó.\nHaga clic en cada ítem para más detalles sobre el conflicto, y elija si desea mantener\nsus cambios o los cambios del otro usuario.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "Este objeto ha sido borrado por {user}.",
+            "location": "Este objeto fue movido por usted y por {user}.",
+            "nodelist": "Los nodos fueron cambiados por usted y por {user}.",
+            "memberlist": "Los miembros de la relación fueron cambiados por usted y por {user}.",
+            "tags": "Ha cambiado la etiqueta <b>{tag}</b> a \"{local}\" y {user} la cambió a \"{remote}\"."
+        }
     },
     "success": {
         "edited_osm": "¡OSM editado!",
@@ -401,7 +425,8 @@
         "help_html": "Los cambios deben aparecer en la capa «Estándar» en pocos minutos. Otras capas, y ciertas características, podría tomar más tiempo\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>ver detalles</a>).\n"
     },
     "confirm": {
-        "okay": "De acuerdo"
+        "okay": "De acuerdo",
+        "cancel": "Cancelar"
     },
     "splash": {
         "welcome": "Bienvenido al editor iD de OpenStreetMap",
@@ -448,7 +473,7 @@
     },
     "help": {
         "title": "Ayuda",
-        "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa del mundo libre y editable. Puedes usarlo para agregar y actualizar\ndatos en tu región, haciendo un mapa del mundo de código y datos abiertos\nmejor para todos.\n\nLas ediciones que haces en este mapa serán visibles para todos quienes usen\nOpenStreetMap. Para hacer una edición, necesitarás una\n[cuenta gratuita de OpenStreetMap](https://www.openstreetmap.org/user/new).\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con [código\nfuente disponible en GitHub](https://github.com/openstreetmap/iD).\n",
+        "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa libre y editable del mundo. Se puede utilizar para agregar y actualizar\ndatos en su área, haciendo el mapa de fuente abierto y de datos abiertos del mundo\nmejor para todos.\n\nLas ediciones que realice en este mapa serán visible a todos los que usen\nOpenStreetMap. Con el fin de hacer una edición, tendrá que\n[Iniciar sesión](https://www.openstreetmap.org/login).\n\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con [código\nfuente disponible en GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Editar & Guardar\n\nEste editor está diseñado para trabajar en línea principalmente, ya que en estos momentos esta accediendo a través de un sitio web.\n\n### Seleccionar elementos gráficos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de interés, simplemente haz clic sobre él. Esto resaltará el elemento seleccionado, abriendo un panel con sus características, y  mostrará un menú de cosas que puedes hacer con ese elemento.\n\nSe pueden seleccionar múltiples elementos de una vez manteniendo pulsada la tecla 'Mayús' y haciendo clic y arrastrando el ratón sobre el mapa. Esto seleccionará todas los elementos que están dentro del recuadro que se dibuja, lo que le permite realizar acciones con todos ellos al mismo tiempo.\n\n### Guardar ediciones\n\nCuando haga cambios -como editar carreteras, edificios o lugares- estos se  almacenan localmente en tu ordenador hasta que decidas guardarlos en el servidor. No se preocupe si cometes un error - puede deshacer los cambios haciendo clic en el botón 'Deshacer', y rehacerlos de nuevo haciendo clic en el botón 'Rehacer'.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones (por ejemplo, si ha completado una zona de la ciudad y quisiera empezar en una nueva área).  Antes de subir los cambios al servidor tendrás oportunidad de revisar lo que has hecho, y el editor proporciona avisos y sugerencias útiles si algo parece que no es correcto en los cambios.\n\nSi ve que todo es correcto escriba un breve comentario explicando el cambio que ha hecho y haga clic en 'Guardar' de nuevo para registrar los cambios en [OpenStreetMap.org](http:\\/\\/www.openstreetmap.org\\/), donde serán visibles para todos los demás usuarios y estarán disponible para que otros colaboradores del proyecto puedan seguir construyendo y mejorando el mapa.\n\nSi aún no ha terminado sus ediciones en una sesión, puede dejar la ventana del editor abierta y volver más tarde (en el mismo navegador y ordenador), y el editor le permitirá retomar tu trabajo.\n",
         "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formada por nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía. \n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar uno de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para los navegadores GPS.\n\n### Eliminar\n\nSi un camino es totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa. Como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido. \n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado que es el acceso rápido para comenzar a dibujar una línea. \n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
         "gps": "# GPS\n\nLos datos provenientes de un GPS son la fuente de información más fiable para OpenStreetMap. Este editor soporta el uso de trazas GPS locales: archivos con la extensión \".gpx\" ubicados en su equipo. Usted puede capturar este tipo de trazas GPS mediante numerosas aplicaciones que existen para teléfonos inteligentes, así como con dispositivos GPS de uso personal.\n\nPara obtener información sobre cómo realizar un levantamiento de información mediante GPS lea [Tomando datos con un GPS] (http://learnosm.org/es/beginner/using-gps/) .\n\nPara utilizar una traza GPX que le ayude a cartografiar, arrastre y suelte el archivo GPX sobre el editor del mapa editor. Si se reconoce el tipo de archivo la traza aparecerá en el mapa en un color púrpura brillante. Haga clic en el menú \"Configuración del fondo\" del lado derecho para activar,  desactivar o poder hacer zoom sobre esta nueva capa GPX.\n\nTenga en cuenta que el archivo GPX no está subido a OpenStreetMap. La mejor manera de utilizar esta traza es dibujar en el mapa usándola como guía para añadir nuevas características al mapa, así como [subirla a los servidores de OpenStreetMap] (http://www.openstreetmap.org/trace/create) para que otros usuarios puedan también utilizarla en sus ediciones.\n",
@@ -528,7 +553,7 @@
                 "name": "Restricción"
             },
             "category-road": {
-                "name": "Carretera"
+                "name": "Camino"
             },
             "category-route": {
                 "name": "Ruta"
@@ -750,6 +775,9 @@
             "description": {
                 "label": "Descripción"
             },
+            "drive_through": {
+                "label": "Ventanilla de autoservicio"
+            },
             "electrified": {
                 "label": "Electrificación",
                 "placeholder": "Línea de contacto, Riel electrificada...",
@@ -869,6 +897,13 @@
             "incline": {
                 "label": "Pendiente"
             },
+            "incline_steps": {
+                "label": "Pendiente",
+                "options": {
+                    "up": "Arriba",
+                    "down": "Abajo"
+                }
+            },
             "information": {
                 "label": "Tipo"
             },
@@ -952,7 +987,7 @@
             },
             "mtb/scale/imba": {
                 "label": "Dificultad de pista IMBA",
-                "placeholder": "Fácil, Medio, Difícil...",
+                "placeholder": "Fácil, medio, difícil...",
                 "options": {
                     "0": "Más fácil (círculo blanco)",
                     "1": "Fácil (círculo verde)",
@@ -965,11 +1000,11 @@
                 "label": "Dificultad de ciclismo de montaña cuesta arriba",
                 "placeholder": "0, 1, 2, 3...",
                 "options": {
-                    "0": "0: Promedio de inclinación <10%, grava/tierra apisonada, sin obstáculos",
-                    "1": "1: Promedio de inclinación <15%, grava/tierra compactada, pocos objetos pequeños",
-                    "2": "2: Promedio de inclinación <20%, superficie estable, rocas del tamaño del puño/raíces",
-                    "3": "3: Promedio de inclinación <25%, superficie variable, rocas del tamaño del puño/ramas",
-                    "4": "4: Promedio de inclinación <30%, mal estado, rocas grandes/ramas",
+                    "0": "0: Promedio de pendiente <10%, grava/tierra apisonada, sin obstáculos",
+                    "1": "1: Promedio de pendiente <15%, grava/tierra compactada, pocos objetos pequeños",
+                    "2": "2: Promedio de pendiente <20%, superficie estable, rocas del tamaño del puño/raíces",
+                    "3": "3: Promedio de pendiente <25%, superficie variable, rocas del tamaño del puño/ramas",
+                    "4": "4: Promedio de pendiente <30%, mal estado, rocas grandes/ramas",
                     "5": "5: Muy empinado, la bicicleta generalmente necesita ser empujada o llevada"
                 }
             },
@@ -1040,7 +1075,7 @@
                 "options": {
                     "novice": "Novato (instrucción)",
                     "easy": "Fácil (círculo verde)",
-                    "intermediate": "Intermediate (blue square)",
+                    "intermediate": "Intermedio (cuadrado azul)",
                     "advanced": "Avanzado (diamante negro)",
                     "expert": "Experto (doble diamante negro)",
                     "freeride": "Paseo libre (fuera de pista)",
@@ -1052,7 +1087,7 @@
                 "options": {
                     "classic": "Clásico",
                     "mogul": "Mogul",
-                    "backcountry": "Backcountry",
+                    "backcountry": "Campo abierto",
                     "classic+skating": "Clásico y patinaje",
                     "scooter": "Ciclomotor/Motonieve",
                     "skating": "Patinaje"
@@ -1119,14 +1154,14 @@
             },
             "sac_scale": {
                 "label": "Dificultad de senderismo",
-                "placeholder": "Caminata de montaña, Caminata Alpina...",
+                "placeholder": "Caminata de montaña, caminata alpina...",
                 "options": {
                     "hiking": "T1: Senderismo",
-                    "mountain_hiking": "T2: Senderismo de Montaña",
-                    "demanding_mountain_hiking": "T3: Senderismo de Montaña Exigente",
-                    "alpine_hiking": "T4: Senderismo Alpino",
-                    "demanding_alpine_hiking": "T5: Senderismo Alpino Exigente",
-                    "difficult_alpine_hiking": "T6: Senderismo Alpino Difícil"
+                    "mountain_hiking": "T2: Senderismo de montaña",
+                    "demanding_mountain_hiking": "T3: Senderismo de montaña exigente",
+                    "alpine_hiking": "T4: Senderismo alpino",
+                    "demanding_alpine_hiking": "T5: Senderismo alpino exigente",
+                    "difficult_alpine_hiking": "T6: Senderismo alpino difícil"
                 }
             },
             "seasonal": {
@@ -1135,10 +1170,10 @@
             "service": {
                 "label": "Tipo"
             },
-            "service/bicycle/chaintool": {
-                "label": "Tronchacadenas",
+            "service/bicycle/chain_tool": {
+                "label": "Trochacadena",
                 "options": {
-                    "undefined": "Se asume que es No",
+                    "undefined": "Asume que es No",
                     "yes": "Si",
                     "no": "No"
                 }
@@ -1149,6 +1184,15 @@
                     "undefined": "Se asume que es Si",
                     "yes": "Sí",
                     "no": "No"
+                }
+            },
+            "service_rail": {
+                "label": "Tipo de servicio",
+                "options": {
+                    "spur": "Ramal corto",
+                    "yard": "Patio de maniobra",
+                    "siding": "Ramal paralelo",
+                    "crossover": "Ramal de cruce"
                 }
             },
             "shelter": {
@@ -1177,15 +1221,15 @@
             },
             "smoothness": {
                 "label": "Rugosidad",
-                "placeholder": "Ruedas delgadas, todoterreno,...",
+                "placeholder": "Ruedas delgadas, todo terreno...",
                 "options": {
                     "excellent": "Ruedas delgadas: patines, monotopatín",
                     "good": "Ruedas finas: bicicletas de competición",
                     "intermediate": "Ruedas: bicicleta urbana, silla de ruedas, ciclomotor",
                     "bad": "Ruedas robustas: bicicleta de montaña, automóvil, carreta",
-                    "very_bad": "Gran Despeje: vehículo todoterreno de trabajo livianos",
-                    "horrible": "Todoterreno: vehículo todoterreno de trabajo pesado",
-                    "very_horrible": "Todoterreno especializado: tractor, cuatriciclos",
+                    "very_bad": "Gran despeje: vehículo todo terreno de trabajo livianos",
+                    "horrible": "Todo terreno: vehículo todo terreno de trabajo pesado",
+                    "very_horrible": "Todo terreno especializado: tractor, vehículo todo terreno",
                     "impassable": "Impasable / Ningún vehículo con ruedas"
                 }
             },
@@ -1260,7 +1304,7 @@
                 "placeholder": "Sólido, mayormente sólido, suave...",
                 "options": {
                     "grade1": "Pavimentada o de superficie compacta y dura",
-                    "grade2": "De áridos: ripio, zahorra, grava, etc.",
+                    "grade2": "Mayormente sólido: grava/roca con algún material suave mezclado",
                     "grade3": "De áridos con vegetación entre rodaduras",
                     "grade4": "De tierra con vegetación entre rodaduras",
                     "grade5": "De tierra o hierba con rodaduras apenas visibles"
@@ -1268,7 +1312,7 @@
             },
             "trail_visibility": {
                 "label": "Visibilidad de la senda",
-                "placeholder": "Excelente, Bueno, Malo...",
+                "placeholder": "Excelente, bueno, malo...",
                 "options": {
                     "excellent": "Excelente: sendero sin ambigüedades o marcadores en todas partes",
                     "good": "Bueno: marcadores visibles, a veces requiere buscar",
@@ -2265,11 +2309,11 @@
             },
             "highway/service/drive-through": {
                 "name": "Ventanilla de autoservicio",
-                "terms": "Parada sin bajar del vehiculo"
+                "terms": "ventanilla, autoservicio, autobanco, autofarmacia"
             },
             "highway/service/driveway": {
-                "name": "Vía privada de acceso",
-                "terms": "calle, carril, pista, trayecto, avenida, carretera, vía de servicio, vía"
+                "name": "Vía privada de entrada",
+                "terms": "calle, carril, avenida, carretera, vía de servicio, entrada, privada, acceso, garaje"
             },
             "highway/service/emergency_access": {
                 "name": "Acceso de emergencia",
@@ -2388,8 +2432,8 @@
                 "terms": "cementerio, camposanto, tumbas"
             },
             "landuse/commercial": {
-                "name": "Área Comercial",
-                "terms": "Zona Comercial"
+                "name": "Área comercial",
+                "terms": "área comercial, comercio, negocio, tiendas"
             },
             "landuse/construction": {
                 "name": "Construcción",
@@ -2397,11 +2441,11 @@
             },
             "landuse/farm": {
                 "name": "Tierras de cultivo",
-                "terms": "Tierras agrícolas, Tierras de labranza"
+                "terms": "tierras de cultivo, tierras agrícolas, tierras de labranza, terreno agrícola"
             },
             "landuse/farmland": {
                 "name": "Tierras de cultivo",
-                "terms": "Tierras agrícolas, Tierras de labranza"
+                "terms": "tierras de cultivo, tierras agrícolas, tierras de labranza, terreno agrícola"
             },
             "landuse/farmyard": {
                 "name": "Edificio de granja",
@@ -2420,8 +2464,8 @@
                 "terms": "herbazal, pradera, pradería, prado, pasto, majada, monte, dehesa"
             },
             "landuse/industrial": {
-                "name": "Área Industrial",
-                "terms": "Zona Industrial"
+                "name": "Área industrial",
+                "terms": "área industrial, parque industrial, industria, fábrica"
             },
             "landuse/landfill": {
                 "name": "Vertedero",
@@ -2432,8 +2476,8 @@
                 "terms": "prado, pradera, campo, mies, braniza, braña"
             },
             "landuse/military": {
-                "name": "Área Militar",
-                "terms": "Zona Militar"
+                "name": "Área militar",
+                "terms": "área militar"
             },
             "landuse/orchard": {
                 "name": "Huerta",
@@ -2444,12 +2488,12 @@
                 "terms": "cantera, mina"
             },
             "landuse/residential": {
-                "name": "Área Residencial",
-                "terms": "Barrio Residencial"
+                "name": "Área residencial",
+                "terms": "área residencial"
             },
             "landuse/retail": {
-                "name": "Área Comercial",
-                "terms": "Zona Comercial"
+                "name": "Área comercial",
+                "terms": "área comercial, comercio, negocio, tienda"
             },
             "landuse/vineyard": {
                 "name": "Viñedo",
@@ -2959,6 +3003,10 @@
                 "name": "Relación",
                 "terms": "Relación, Vínculo, Asociación"
             },
+            "roundabout": {
+                "name": "Rotonda",
+                "terms": " rotonda, glorieta, óvalo, redoma, redondel"
+            },
             "route/ferry": {
                 "name": "Ruta de ferry",
                 "terms": "ruta, ferry, transbordador, lancha, embarcación"
@@ -3192,8 +3240,8 @@
                 "terms": "sonido, hifi, alta fidelidad, electrónica, altavoz, amplificador, tienda, almacén, negocio"
             },
             "shop/houseware": {
-                "name": "Tienda de Artículos para el Hogar ",
-                "terms": "Tienda de Electrodomésticos"
+                "name": "Tienda de artículos del hogar ",
+                "terms": "artículos del hogar, enseres del hogar, hogar, casa, almacén, comercio, negocio, tienda"
             },
             "shop/interior_decoration": {
                 "name": "Tienda de decoración de interiores",

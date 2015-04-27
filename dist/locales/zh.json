@@ -236,7 +236,6 @@
         "title": "保存",
         "help": "保存更改到OpenStreetMap上，使其他用户可以看见。",
         "no_changes": "没有可以保存的更改。",
-        "error": "保存发生错误",
         "uploading": "正在向OpenStreetMap上传更改。",
         "unsaved_changes": "您有未保存的更改"
     },

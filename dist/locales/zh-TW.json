@@ -72,7 +72,8 @@
                 "area": "將一區域製成環形。"
             },
             "not_closed": "非圈狀物件，不能環形化。",
-            "too_large": "因物件尚未有足夠部份正在顯示，不能環形化。"
+            "too_large": "因物件尚未有足夠部份正在顯示，不能環形化。",
+            "connected_to_hidden": "這個沒辦法圓形化，因為與其他隱藏的圖徵相連"
         },
         "orthogonalize": {
             "title": "方角化",
@@ -86,14 +87,16 @@
                 "area": "已將區域的彎角換成直角。"
             },
             "not_squarish": "物件無法被方角化，因為它並非近似方形。",
-            "too_large": "因物件尚未有足夠部份正在顯示，不能被方角化。"
+            "too_large": "因物件尚未有足夠部份正在顯示，不能被方角化。",
+            "connected_to_hidden": "這個沒辦法方形化，因為與其他隱藏的圖徵相連"
         },
         "straighten": {
             "title": "拉直",
             "description": "拉直此線段",
             "key": "S",
             "annotation": "拉直一條線段。",
-            "too_bendy": "這條線段無法被拉直，因為有過多彎折。"
+            "too_bendy": "這條線段無法被拉直，因為有過多彎折。",
+            "connected_to_hidden": "這個沒辦法直線化，因為與其他隱藏的圖徵相連"
         },
         "delete": {
             "title": "刪除",
@@ -106,7 +109,9 @@
                 "relation": "刪除了一關係",
                 "multiple": "刪除了 {n} 個物件。"
             },
-            "incomplete_relation": "物件未完全下載，不能刪除。"
+            "incomplete_relation": "物件未完全下載，不能刪除。",
+            "part_of_relation": "這個圖徵沒辦法刪除，因為是屬於比較大關係的一部分。你必須從關係裡移除。",
+            "connected_to_hidden": "這個沒辦法刪除，因為與其他隱藏的圖徵相連"
         },
         "add_member": {
             "annotation": "給關係添加了一成員。"
@@ -270,6 +275,10 @@
         "incomplete": "<未下載>",
         "feature_list": "搜尋物件",
         "edit": "編輯特徵",
+        "check": {
+            "yes": "是",
+            "no": "否"
+        },
         "none": "無",
         "node": "節點",
         "way": "路徑",
@@ -292,7 +301,7 @@
         "title": "地圖圖資",
         "description": "地圖圖資",
         "data_layers": "資料圖層",
-        "fill_area": "填土區",
+        "fill_area": "填充選項",
         "map_features": "地圖圖徵"
     },
     "feature": {
@@ -304,8 +313,25 @@
             "description": "主要道路",
             "tooltip": "公路、街道等"
         },
+        "minor_roads": {
+            "description": "非主要道路",
+            "tooltip": "服務道路、停車場通道、路徑等"
+        },
+        "paths": {
+            "description": "通道",
+            "tooltip": "人行道、步行徑、單車道等。"
+        },
         "buildings": {
-            "description": "建築物"
+            "description": "建築物",
+            "tooltip": "建築、亭子、倉庫等。"
+        },
+        "landuse": {
+            "description": "土地利用圖徵",
+            "tooltip": "森林、農莊、公園、住宅區、商業區等。"
+        },
+        "boundaries": {
+            "description": "邊界",
+            "tooltip": "行政邊界"
         },
         "water": {
             "description": "水域圖徵",
@@ -315,11 +341,30 @@
             "description": "鐵路圖徵",
             "tooltip": "鐵路"
         },
+        "power": {
+            "description": "電力設施",
+            "tooltip": "輸電線、發電廠、變電所等。"
+        },
         "past_future": {
-            "description": "過去/未來"
+            "description": "過去/未來",
+            "tooltip": "預定地，施工中，廢棄，拆除等。"
         },
         "others": {
-            "description": "其他"
+            "description": "其他",
+            "tooltip": "其他東西"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "不填充 (線條顯示)"
+        },
+        "partial": {
+            "description": "部分填充",
+            "tooltip": "區域只有外框部分有顏色填充。(新手畫圖者推薦選項)"
+        },
+        "full": {
+            "description": "全部填充",
+            "tooltip": "區域全部用顏色填充"
         }
     },
     "restore": {
@@ -332,10 +377,20 @@
         "title": "儲存",
         "help": "儲存修改至OpenStreetMap，讓其他用戶看見。",
         "no_changes": "沒有修改需要儲存。",
-        "error": "儲存編輯時發生錯誤",
         "unknown_error_details": "請確定你已經連上網路。",
         "uploading": "正在上載修改至OpenStreetMap。",
-        "unsaved_changes": "你有未儲存的編輯"
+        "unsaved_changes": "你有未儲存的編輯",
+        "conflict": {
+            "header": "解決編輯衝突",
+            "previous": "< 上一個",
+            "next": "下一個 >",
+            "keep_local": "保留我的",
+            "keep_remote": "使用他們的",
+            "restore": "復原",
+            "delete": "放棄資料",
+            "download_changes": "下載你做的變動",
+            "done": "所有衝突解決！"
+        }
     },
     "success": {
         "edited_osm": "已編輯了OSM！",
@@ -394,7 +449,7 @@
     },
     "help": {
         "title": "說明文件",
-        "help": "# 幫助\n\n這是[開放街圖](http://www.openstreetmap.org/)的編輯器。\n開放街圖是自由及可編輯的世界地圖。您可以用這個編輯器來添加和更新您所在區域的地圖資料，令這個開源和開放資料的世界地圖變得更好。\n\n您在地圖上所做的編輯，將會讓所有使用開放街圖的人看到。為了進行編輯，您需要一個[免費的開放街圖帳戶](https://www.openstreetmap.org/user/new)。\n\n[iD編輯器](http://ideditor.com/) 是採用開源方式合作開發的專案， [原始碼可在GitHub找到](https://github.com/openstreetmap/iD)。\n",
+        "help": "# 幫助\n\n這是[開放街圖](http://www.openstreetmap.org/)的編輯器。\n開放街圖是自由及可編輯的世界地圖。您可以用這個編輯器來添加和更新您所在區域的地圖資料，令這個開源和開放資料的世界地圖變得更好。\n\n您在地圖上所做的編輯，將會讓所有使用開放街圖的人看到。為了編輯，您需要先[登入](https://www.openstreetmap.org/login)。\n\n[iD編輯器](http://ideditor.com/) 採用開源方式合作開發的專案， [原始碼可在GitHub找到](https://github.com/openstreetmap/iD)。\n",
         "editing_saving": "# 編輯和儲存\n\n這個編輯器主要為線上編輯而設計，而你現在透過網站使用它。\n\n### 選擇物件\n\n要選擇地圖上一個物件，如道路或興趣點，可於地圖上按該物件。這將令所選取的物件以高亮顯示，並開啟詳情的側邊欄，以及顯示可進行操作的功能選單。\n\n要選擇多個物件，可以按住'Shift'鍵，在地圖上按下並拖曳。這將選擇所顯示的方框內的所有物件，讓您可同時操作多個物件。\n\n### 儲存編輯\n\n當您修改地圖，如編輯道路，建築物和場所，這些修改都會先儲存在本機上而未被上傳，直到您將它們上傳到伺服器為止。如果您在這段時間做出錯誤的修改，也不用擔心，您可以按下“撤消”按鈕修改，亦可按下“重做”按鈕，重做經撤消的修改。\n\n按下“儲存”按鈕以完成編輯 － 例如，如果您已經完成了某市鎮的一個區域，而想開始一個新區域。您將有機會覆核你做了什麼編輯，而如果看起來您作出了一些不適當的改變，編輯器將會提供有用的建議及警告。\n\n如果一切看起來不錯，您可以輸入簡短的註釋，解釋您作出的修改，並再按下“儲存”以向[OpenStreetMap.org](http://www.openstreetmap.org/)發布這些修改。這些修改將可被其他OpenStreetMap用戶看見，並可供其他用戶在其上作進一步修訂及完善。\n\n如果您不能一次就完成您的編輯，您可以離開編輯器視窗，日後(在相同的瀏覽器和電腦上)回來，編輯器將讓你選擇是否希望恢復上一次未完成的編輯。\n",
         "roads": "# 道路\n\n您可以利用這個編輯器創建，修復，及刪除道路。道路可以有很多種：行人路徑，公路，步道，單車路線等等 － 任何經常使用的路段都可製圖。\n\n### 選擇道路\n\n按圖上的道路以選擇該道路。道路的輪廓會以高亮度顯示，而同時地圖上會出現小工具選單，旁邊亦會彈出面板，顯示有關該道路的資訊。\n\n### 修改道路\n\n您或會經常注意到，道路並非對齊在背景中顯示的衛星圖像或GPS軌跡。您可以調整這些道路，讓他們位於正確的位置。\n\n首先，按您想修訂的道路。這會將道路以高亮度顯示，並顯示沿著這道路的節點，你可以拖曳這些節點到更好的位置。如果您想增加細節，可以為道路添加新的節點，點擊兩下道路上沒有節點的部分，便可在該處増加節點。\n\n如果道路連接到另一條道路，但在地圖上並未妥善連接，你可以拖曳道路的其中一個節點到另一條道路上，以連接兩條道路。連接好道路，對地圖非常重要，特別是對提供駕駛指示的應用程序而言，是必要的。\n\n您也可以按下'移動'工具或按`M`快速鍵，來移動整條道路，然後按一下以完成移動的動作。\n\n### 刪除道路\n\n如果一條道路完全不正確 － 您看到它在衛星圖像上不存在，並最好實地證實它根本不存在 － 您可以將道路刪除，這會從地圖中將之移除。刪除物件時務必要小心 － 像任何其他的編輯，結果會被大家看見，而衛星圖像往往會過時，因此該道路或許只是新建的。\n\n要刪除道路，您可以按住它以選擇，然後按下垃圾桶圖標，或按 ’Delete’ 鍵。\n\n### 繪製新道路\n\n發現某處應有一條道路，但地圖上沒有？按編輯器左上方的'線'按鈕，或按下`2`快速鍵，以開始繪製線段。\n\n在地圖上點擊道路的開端，以開始繪製道路。如果道路從一條現有的道路分支出來，應點擊兩者連接的地方，以開始繪製。\n\n然後按住沿著道路的點，以根據衛星影像或GPS軌跡，正確地繪製道路。如果您繪製的道路如果與另一條道路交匯，請點擊相交點以將它們連接起來。當您完成繪製後，可按兩下滑鼠或按鍵盤上的 'Return' 或 ’Enter’ 鍵。\n",
         "imagery": "# 圖像\n\n空照圖是繪製地圖重要的資料來源。在畫面右方的'背景圖像設定'選單中，可選擇使用的圖像，\n他們分別為空照圖、衛星影像和其他可自由編輯的圖像資源。\n\n編輯器預設使用[Bing Maps](http://www.bing.com/maps/)的衛星圖層，\n但當您平移或縮放地圖至一個新的地理區域，或可使用新的資源。\n在一些國家，像美國、法國和丹麥，部分區域有非常高品質的圖像。\n\n圖像會與地圖數據有所偏移。如果你看見很多的道路與背景有偏移，請不要立刻將它們全部搬移以與背景刎合。相反，你可以在「背景設定」選單中，點擊下方的「校準底圖」，以調整圖像以配合現有地圖數據。 \n\n圖像有時候或會因為圖像提供者方面的誤差，與地圖資料有所偏移。\n如果您看到有很多路與背景是平移錯位的，請不要立刻將它們全部搬移以與背景刎合。\n您只需要點擊圖像設定介面底部的'校準'來調整圖像，讓它符合現有資料。\n",
@@ -683,6 +738,9 @@
             "cuisine": {
                 "label": "食物種類"
             },
+            "delivery": {
+                "label": "外送"
+            },
             "denomination": {
                 "label": "教派"
             },
@@ -691,6 +749,9 @@
             },
             "description": {
                 "label": "描述"
+            },
+            "drive_through": {
+                "label": "得來速"
             },
             "electrified": {
                 "label": "電氣化",
@@ -766,6 +827,15 @@
             "gauge": {
                 "label": "軌距"
             },
+            "gender": {
+                "label": "性別",
+                "placeholder": "未知",
+                "options": {
+                    "male": "男性",
+                    "female": "有性",
+                    "unisex": "男女通用"
+                }
+            },
             "generator/method": {
                 "label": "方法"
             },
@@ -802,6 +872,13 @@
             "incline": {
                 "label": "斜度"
             },
+            "incline_steps": {
+                "label": "斜坡",
+                "options": {
+                    "up": "上坡",
+                    "down": "下坡"
+                }
+            },
             "information": {
                 "label": "種類"
             },
@@ -829,7 +906,23 @@
                 "label": "層"
             },
             "leaf_cycle": {
-                "label": "落葉期"
+                "label": "落葉期",
+                "options": {
+                    "evergreen": "長青樹",
+                    "deciduous": "落葉林",
+                    "semi_evergreen": "半長青林",
+                    "semi_deciduous": "半落葉林",
+                    "mixed": "混合林"
+                }
+            },
+            "leaf_type": {
+                "label": "葉子種類",
+                "options": {
+                    "broadleaved": "闊葉林",
+                    "needleleaved": "針葉林",
+                    "mixed": "混合林",
+                    "leafless": "落葉林"
+                }
             },
             "leisure": {
                 "label": "種類"
@@ -1052,12 +1145,29 @@
             "service": {
                 "label": "種類"
             },
+            "service/bicycle/chain_tool": {
+                "label": "固定架",
+                "options": {
+                    "undefined": "預設為否",
+                    "yes": "是",
+                    "no": "否"
+                }
+            },
             "service/bicycle/pump": {
                 "label": "打氣設備",
                 "options": {
                     "undefined": "預設沒有",
                     "yes": "有",
                     "no": "沒有"
+                }
+            },
+            "service_rail": {
+                "label": "服務類型",
+                "options": {
+                    "spur": "支線",
+                    "yard": "調度軌",
+                    "siding": "側線",
+                    "crossover": "橫渡線"
                 }
             },
             "shelter": {
@@ -1094,7 +1204,8 @@
                     "bad": "強化輪胎：休旅自行車、汽車、人力車",
                     "very_bad": "輕量化：低負重越野車輛",
                     "horrible": "越野：高負重越野車輛",
-                    "very_horrible": "越野專用：拖拉機、全地形越野車"
+                    "very_horrible": "越野專用：拖拉機、全地形越野車",
+                    "impassable": "無法通行 /  輪車無法通行"
                 }
             },
             "social_facility_for": {
@@ -1584,8 +1695,8 @@
                 "terms": "便所,公廁,洗手間,盥洗室"
             },
             "amenity/townhall": {
-                "name": "區公所",
-                "terms": "鄉公所,鎮公所,市公所"
+                "name": "政府辦公大樓",
+                "terms": "市政廳,市政府,縣政府,區公所,鄉公所,鎮公所,市公所"
             },
             "amenity/university": {
                 "name": "大學用地",
@@ -2271,6 +2382,10 @@
                 "name": "路邊神祠",
                 "terms": "路邊小廟"
             },
+            "junction": {
+                "name": "路口",
+                "terms": "槽化車道,道路交叉,十字路口,丁字路,路"
+            },
             "landuse": {
                 "name": "土地用途",
                 "terms": "土地使用"
@@ -2291,9 +2406,21 @@
                 "name": "教堂院落",
                 "terms": "教堂用地"
             },
+            "landuse/commercial": {
+                "name": "商業區",
+                "terms": "商業區"
+            },
             "landuse/construction": {
                 "name": "建築工地",
                 "terms": "建築工程"
+            },
+            "landuse/farm": {
+                "name": "農田",
+                "terms": "農田,稻田,農地,田,耕地"
+            },
+            "landuse/farmland": {
+                "name": "農田",
+                "terms": "農田,稻田,農地,田,耕地"
             },
             "landuse/farmyard": {
                 "name": "農莊",
@@ -2311,6 +2438,10 @@
                 "name": "草地",
                 "terms": "草地"
             },
+            "landuse/industrial": {
+                "name": "工業區",
+                "terms": "工業區"
+            },
             "landuse/landfill": {
                 "name": "埯埋場",
                 "terms": "堆填區"
@@ -2319,6 +2450,10 @@
                 "name": "牧場",
                 "terms": "牧場"
             },
+            "landuse/military": {
+                "name": "軍事用地",
+                "terms": "營區,軍營"
+            },
             "landuse/orchard": {
                 "name": "果園",
                 "terms": "果園"
@@ -2326,6 +2461,14 @@
             "landuse/quarry": {
                 "name": "礦區",
                 "terms": "礦場"
+            },
+            "landuse/residential": {
+                "name": "住宅區",
+                "terms": "住宅用地"
+            },
+            "landuse/retail": {
+                "name": "零售",
+                "terms": "零售區域"
             },
             "landuse/vineyard": {
                 "name": "酒莊",
@@ -2362,6 +2505,10 @@
             "leisure/marina": {
                 "name": "遊艇碼頭",
                 "terms": "遊艇碼頭"
+            },
+            "leisure/nature_reserve": {
+                "name": "自然保留區",
+                "terms": "自然保護區"
             },
             "leisure/park": {
                 "name": "公園",
@@ -2831,6 +2978,10 @@
                 "name": "關係",
                 "terms": "關係"
             },
+            "roundabout": {
+                "name": "圓環",
+                "terms": "圓環"
+            },
             "route/ferry": {
                 "name": "渡輪航線",
                 "terms": "渡輪航線"
@@ -3062,6 +3213,10 @@
             "shop/hifi": {
                 "name": "音響店",
                 "terms": "音響店"
+            },
+            "shop/houseware": {
+                "name": "家庭用品店",
+                "terms": "家居用品店"
             },
             "shop/interior_decoration": {
                 "name": "室內設計店",

@@ -196,7 +196,6 @@
         "title": "Stoor",
         "help": "Stoor veranderinge na OpenStreetMap, en maak dit sigbaar vir ander gebruikers.",
         "no_changes": "Geen verandering om te stoor.",
-        "error": "'n Fout het ingekruip toe jy probeer stoor het",
         "uploading": "Laai verandering op na OpenStreetMap.",
         "unsaved_changes": "Jy het ongestoorde veranderinge"
     },

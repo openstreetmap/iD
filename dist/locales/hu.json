@@ -92,7 +92,7 @@
         },
         "straighten": {
             "title": "Kiegyenesít",
-            "description": "Vonal kiegyenesítése",
+            "description": "Vonal kiegyenesítése.",
             "key": "S",
             "annotation": "Vonal kiegyenesítve.",
             "too_bendy": "Nem lehet kiegyenesíteni, mert túl nagy ívben hajlik.",
@@ -110,6 +110,7 @@
                 "multiple": "{n} objektum törlése."
             },
             "incomplete_relation": "Az elem nem törölhető, mert nem lett teljesen letöltve.",
+            "part_of_relation": "Ezt az elemet nem lehet törölni, mert egy nagyobb kapcsolat része. Elsőként el kell távolítanod a kapcsolatból.",
             "connected_to_hidden": "Nem törölhető, mert egy rejtett elemhez csatlakozik."
         },
         "add_member": {
@@ -386,10 +387,31 @@
         "title": "Mentés",
         "help": "Változtatások mentése OpenStreetMapre, és láthatóvá tétele más szerkesztők számára.",
         "no_changes": "Nincs mit elmenteni.",
-        "error": "Mentés közben hiba történt",
+        "error": "Mentés közben több hiba történt",
+        "status_code": "A szerver a(z) {code} státuszkóddal válaszolt",
         "unknown_error_details": "Győződjön meg arról, hogy csatlakozik-e az internethez.",
         "uploading": "Változtatások mentése OpenStreetMapre.",
-        "unsaved_changes": "Elmentetlen változtatásaid vannak"
+        "unsaved_changes": "Elmentetlen változtatásaid vannak",
+        "conflict": {
+            "header": "Ütköző módosítások feloldása",
+            "count": "{num}. ütközés (összesen: {total})",
+            "previous": "< Előző",
+            "next": "Következő >",
+            "keep_local": "Enyém megtartása",
+            "keep_remote": "Övé használata",
+            "restore": "Visszaállítás",
+            "delete": "Hagyja törölve",
+            "download_changes": "Vagy töltsd le változtatásaidat.",
+            "done": "Minden ütközés feloldva!",
+            "help": "Valaki más is változtatott azon a térképrészleten, amin te is dolgoztál.\nKattints az alábbi elemekre, hogy megtudj többet az ütközésekről és eldöntsd, hogy a te vagy\naz ő változtatásait szeretnéd-e megtartani.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "Ezt az objektumot törölte {user}.",
+            "location": "Ezt az objektumot te és {user} is áthelyezte.",
+            "tags": "Te megváltoztattad a(z) <b>{tag}</b> címkét erre: \"{local}\", {user} pedig erre: \"{remote}\"."
+        }
     },
     "success": {
         "edited_osm": "OSM szerkesztve!",
@@ -401,7 +423,8 @@
         "help_html": "Módosításaid néhány perc múlva megjelennek a \"Standard\" rétegen. Más rétegeken ez tovább tarthat\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).\n"
     },
     "confirm": {
-        "okay": "Oké"
+        "okay": "Oké",
+        "cancel": "Mégsem"
     },
     "splash": {
         "welcome": "Üdvözöl az iD OpenStreetMap szerkesztőprogram",
@@ -448,7 +471,6 @@
     },
     "help": {
         "title": "Súgó",
-        "help": "# Súgó\n\nEz egy szerkesztő az [OpenStreetMap](http://www.openstreetmap.org/)-hoz, az ingyenes és szerkeszthető világtérképhez. A környezetedről tölthetsz fel, vagy frissíthetsz adatokat, ezáltal mindenki számára jobbá téve egy ingyenes térképet.\n\nAmit ezen a térképen alkotsz, mindenki számára látható lesz, aki használja az OpenStreetMap-ot. A szerkesztéshez mindösszesen egy [ingyenes OpenStreetMap fiókra](https://www.openstreetmap.org/user/new) lesz szükséged.\n\nAz [iD szerkesztő](http://ideditor.com/) egy együttműködésen alapuló projekt, a [GitHub-on elérhető forráskóddal](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Szerkesztés és Mentés\n\nA szerkesztőt elsődlegesen online munkára tervezték és te jelenleg\negy weblapon éred el.\n\n### Elemek kiválasztása\n\nEgy térképelem, mint út vagy érdekes hely kiválasztásához kattints rá a térképen.\nEttől a kiválasztott elem kiemelődik és megnyílik egy panel az adataival,\nés egy menüvel, ami mutatja, miket tudsz az elemmel csinálni.\n\nTöbb elemet a 'Shift' gomb nyomva tartása közbeni kattintással, vagy\nhúzással tudsz kiválasztani. A húzással kijelölöd a bekeretezett részen lévő\nösszes elemet, lehetővé téve, hogy egyszerre több mindent változtass.\n\n### Szerkesztések mentése\n\nAmikor utakat, épületeket, helyeket szerkesztesz, ezek a változások\nhelyileg lesznek tárolva, amíg nem mented őket a szerverre. Ne aggódj, ha \nelrontasz valamit - vissza tudod vonni a változtatásaidat a visszavonás gombra\nkattintva, a mégis gombra kattintva pedig a korábban visszavont változtatásaidat\nállíthatod vissza.\n\nKattints a 'Mentés' gombra, ha végeztél egy terület szerkesztésével - például,\nha befejezted egy város részletének szerkesztését és egy másik területet szeretnél\nszerkeszteni. Lehetőséged lesz visszanézni, hogy mit csináltál. A szerkesztő hasznos\ntanácsokat biztosít és figyelmeztet ha valami nem tűnik megfelelőnek  a változtatásaiddal.\n\nHa minden rendben van, beírhatsz egy rövid ismertetést a szerkesztéseiddel kapcsolatban\nés újból a 'Mentés' gombra kattintva közzéteheted a változtatásaidat és az információkat\nvelük kapcsolatban az [OpenStreetMap.org](http://www.openstreetmap.org/) webhelyen,\nahol az összes felhasználónak láthatóak és elérhetőek lesznek, hogy azokra építhessenek,\nfejleszthessék azokat.\n\nHa nem tudod befejezni a szerkesztéseidet egyszerre, elhagyhatod a szerkesztő ablakot, mert\namikor visszatérsz (ugyanazzal a böngészővel és számítógéppel), a szerkesztő fel fogja ajánlani,\nhogy visszaállítsa-e a korábbi munkádat.\n",
         "roads": "# Utak\n\nA szerkesztőprogrammal tudsz utakat létrehozni, javítani és törölni. Az utak \nsokfélék lehetnek: ösvények, közutak, kerékpárutak, stb. – minden gyakran \nkeresztezett szakaszt térképezni kell.\n\n### Kiválasztás\n\nÚt kiválasztásához kattints rá. Meg fog jelenni kiemelve, mellette egy kis eszköztár \nmenüvel és egy oldalsávval, ami további információkat mutat az útról.\n\n### Módosítás\n\nGyakran láthatod, hogy az út nincs a mögötte lévő légifelvételhez, vagy GPS \nnyomvonalhoz igazítva. Ha megbizonyosodtál arról, hogy nem a légifelvétel téved, \nhelyreigazíthatod az utakat.\n\nElőször is kattints a módosítandó útra. Ettől kiemelődik az út és megjelennek a\nkezelőpontjai, amiket mozgatni tudsz a megfelelő helyre. Ha új kezelőpontot \nszeretnél hozzáadni, hogy részletesebb utat kapj, kattints duplán az útnak egy \nolyan részére, ahol még nincs pont.\n\nHa egy út egy másik útba csatlakozik, de a térképen nincsenek összekapcsolva, \nhúzd az egyik út kezelőpontját a másik útra, és össze fognak kapcsolódni. \nAz utak megfelelő összekapcsolása a térképen nagyon fontos, útvonaltervezéshez \nlétfontosságú.\n\nHasználhatod a 'Mozgatás' eszközt is, vagy megnyomhatod az 'M' gyorsbillentyűt, ha az \naz egész utat szeretnéd mozgatni. Mozgatás után kattintással rögzítheted az új helyén.\n\n### Törlés\n\nHa egy út teljesen hibás – ha azt látod, hogy egyáltalán nincs rajta a légifelvételen, \nés biztos vagy benne, hogy nem is létezik –, törölheted, amivel eltávolítod a térképről. \nLegyél óvatos elemek törlésekor, akárcsak bármilyen más szerkesztésnél, a mindenki \náltal látható eredmény és a légifelvétel gyakran elavult, lehet, hogy az utat nemrég építették.\n\nAz út törléséhez előbb válaszd ki, majd kattints a kuka ikonra, vagy nyomd meg a Delete \nbillentyűt.\n\n### Létrehozás\n\nTaláltál egy utat, ami még nincs rajta a térképen? Kattints a bal felső eszköztár 'Vonal' \nikonjára vagy nyomd meg a '2'-es billentyűt és kezdd el rajzolni a vonalat.\n\nA rajzolás megkezdéséhez kattints a térképen az út elejére. Ha az út \negy másik meglévő útból ágazik ki, arra a helyre kattints, ahol csatlakoznak.\n\nEzután kattintással hozz létre pontokat a műholdkép vagy GPS nyomvonal alapján, \nhogy a vonal az út középvonalát kövesse. Ha az utad keresztez egy másik utat, kapcsold \nössze őket a metszéspontjukra kattintva. Ha kész vagy a rajzolással, kattints duplán, \nvagy nyomj a billentyűzeten egy 'Enter'-t.\n",
         "gps": "# GPS\n\nA GPS adatok az OpenStreetMap adatainak legmegbízhatóbb forrásai. Ez a\nszerkesztő támogatja a helyi nyomvonalakat - a helyi számítógépen lévő\n„.gpx” fájlokat. Az ilyen fajta GPS nyomvonalakat begyűjtheti számos\nokostelefon alkalmazással, valamint személyes GPS hardverrel.\n\nHa információt szeretne arról, hogy hogyan végezhet GPS felmérést, olvassa\nel [felmérés GPS eszközzel](http://learnosm.org/en/beginner/using-gps/) tájékoztatót.\n\nA GPX nyomvonal térképezéshez való használatához fogja meg és ejtse a GPX\nfájlt a térképszerkesztőre. Ha sikerült felismerni, akkor világos lila\nvonallal lesz hozzáadva a térképhez. Kattintson a jobb oldalon lévő\n„Térképadatok” menüre ennek az új GPX-alapú rétegnek az engedélyezéshez,\nletiltáshoz vagy a nagyításhoz.\n\nA GPX nyomvonal nem kerül közvetlenül feltöltésre az OpenStreetMap\nadatbázisba - a használatának legjobb módja a térképre rajzolás. Használja\nútmutatóként új elemek hozzáadásához, és [töltse fel az OpenStreetMap](http://www.openstreetmap.org/trace/create)\nadatbázisába, hogy más felhasználók is használhassák.\n",
@@ -561,7 +583,7 @@
                         "description": "Behajtás semmilyen forgalomnak nem engedélyezett"
                     },
                     "permissive": {
-                        "title": "Engedélyköteles",
+                        "title": "Megengedett.",
                         "description": "Behajtás engedélyezett, amíg a tulajdonos vissza nem vonja az engedélyt"
                     },
                     "private": {
@@ -727,7 +749,7 @@
                 "label": "Lefedett"
             },
             "craft": {
-                "label": "Typus"
+                "label": "Típus"
             },
             "crop": {
                 "label": "Termés"
@@ -843,8 +865,8 @@
                 "label": "Típus"
             },
             "golf_hole": {
-                "label": "Golf lyuk azonosító",
-                "placeholder": "Golf lyuk száma (1-18)"
+                "label": "Golflyuk-azonosító",
+                "placeholder": "Golflyuk száma (1-18)"
             },
             "handicap": {
                 "label": "Hátrány",
@@ -868,6 +890,13 @@
             },
             "incline": {
                 "label": "Lejtés"
+            },
+            "incline_steps": {
+                "label": "Lejtő",
+                "options": {
+                    "up": "Fel",
+                    "down": "Le"
+                }
             },
             "information": {
                 "label": "Típus"
@@ -947,7 +976,7 @@
                     "3": "3: Csúszós felület, nagy akadályok, éles hajtűkanyarok",
                     "4": "4: Nagyon laza vagy sziklás rész, veszélyes hajtűkanyarok",
                     "5": "5: Maximális nehézség, földcsuszamlások",
-                    "6": "6: Járhatatlan, kivéve a legjobb mounten bicikliseknek."
+                    "6": "6: Járhatatlan, kivéve a legügyesebb mountain bike-osokat."
                 }
             },
             "mtb/scale/imba": {
@@ -1012,7 +1041,7 @@
                 "label": "Üzemeltető"
             },
             "par": {
-                "label": "Golf pálya par száma",
+                "label": "Golfpálya par száma",
                 "placeholder": "3, 4, 5..."
             },
             "park_ride": {
@@ -1135,10 +1164,10 @@
             "service": {
                 "label": "Típus"
             },
-            "service/bicycle/chaintool": {
-                "label": "láncbontó, lánc eszközök",
+            "service/bicycle/chain_tool": {
+                "label": "Láncbontó, lánc eszközök",
                 "options": {
-                    "undefined": "Feltételezzük, hogy nincs",
+                    "undefined": "Feltételezhető, hogy nincs",
                     "yes": "Igen",
                     "no": "Nem"
                 }
@@ -1165,32 +1194,33 @@
             },
             "smoking": {
                 "label": "Dohányzó",
-                "placeholder": "Nem, Elkülönített helyen, Igen",
+                "placeholder": "Nem, elkülönített helyen, igen",
                 "options": {
                     "no": "Mindenhol tilos",
                     "separated": "Egy légtérben dohányzó és nemdohányzó részek",
                     "isolated": "Teljesen elkülönített dohányzórész",
                     "outside": "Az épületen kívül engedélyezett",
                     "yes": "Mindenhol engedélyezett",
-                    "dedicated": "Dohányzóknak ( pl. Dohányzó Klub, Közösségi dohányzóhely) "
+                    "dedicated": "Dohányzóknak ( pl. dohányzóklub, közösségi dohányzóhely) "
                 }
             },
             "smoothness": {
                 "label": "Felület egyenletessége",
-                "placeholder": "Gördeszkás, Kerekes, Terepjárós",
+                "placeholder": "Gördeszkás, kerekes, terepjárós",
                 "options": {
-                    "excellent": "Kiváló : Görkorcsolyázni és gördeszkázni lehet rajta",
+                    "excellent": "Kiváló: görkorcsolyázni és gördeszkázni lehet rajta",
                     "good": "Jó: vékony kerékkel, versenymotorral járható",
                     "intermediate": "Közepes: városi kerékpárral, kerekesszékkel, robogóval járható",
                     "bad": "Rossz: vastagabb kerékkel, terepbiciklivel, autóval, riksával járható",
                     "very_bad": "Nagyon rossz:  Könnyű terepjárós út",
-                    "horrible": "Borzalmas: Off-Road - nagy teherbírású terepjáróval járható",
-                    "very_horrible": "Extrém borzalmas: Traktor ajánlott."
+                    "horrible": "Borzalmas: off-road - nagy teherbírású terepjáróval járható",
+                    "very_horrible": "Extrém borzalmas: traktor ajánlott.",
+                    "impassable": "Lehetetlen kerekes járművel közlekedni"
                 }
             },
             "social_facility_for": {
                 "label": "Szociálisan rászorultak",
-                "placeholder": "Hajléktalanok,Sérültek, Gyermekek, stb."
+                "placeholder": "Hajléktalanok, sérültek, gyermekek, stb."
             },
             "source": {
                 "label": "Forrás"
@@ -1228,7 +1258,7 @@
                 "label": "Felület"
             },
             "tactile_paving": {
-                "label": "Taktilis útburkolati jel - Vakok és gyengénlátók számára"
+                "label": "Taktilis útburkolati jel - vakok és gyengénlátók számára"
             },
             "takeaway": {
                 "label": "Ételek elvitelre ",
@@ -1240,7 +1270,7 @@
                 }
             },
             "toilets/disposal": {
-                "label": "WC Kezelés",
+                "label": "WC kezelés",
                 "options": {
                     "flush": "Vízöblitéses",
                     "pitlatrine": "Emésztőgödrös",
@@ -1256,11 +1286,11 @@
             },
             "tracktype": {
                 "label": "Úttípus",
-                "placeholder": "Szilárd, Vegyes, Laza, ...",
+                "placeholder": "Szilárd, vegyes, laza, ...",
                 "options": {
                     "grade1": "Szilárd: burkolt vagy tömör felületű makadámút",
                     "grade2": "Főképp szilárd: murvával/kővel tömörített földút",
-                    "grade3": "Vegyes: Köves földút",
+                    "grade3": "Vegyes: köves földút",
                     "grade4": "Nagyrészt laza: föld-, homok- vagy füves út némi kővel",
                     "grade5": "Laza: föld-, homok- vagy füves út"
                 }
@@ -1274,7 +1304,7 @@
                     "intermediate": "Közepes: néhány jelző, az útvonal többnyire látható",
                     "bad": "Rossz: nincsenek jelzők, az útvonal néha láthatatlan / úttalan",
                     "horrible": "Borzalmas: gyakran úttalan, tájékozódási képességek szükségesek",
-                    "no": "Nincs:  úttalan, kitünő tájékozódási képességek szükségesek"
+                    "no": "Nincs:  úttalan, kitűnő tájékozódási képességek szükségesek"
                 }
             },
             "trees": {
@@ -1408,7 +1438,7 @@
             },
             "amenity/bar": {
                 "name": "Bár",
-                "terms": "bár,kocsma, éjszaki szórakozó"
+                "terms": "bár, kocsma, éjszakai szórakozó"
             },
             "amenity/bbq": {
                 "name": "Közösségi grillező - szallonasütő",
@@ -1427,7 +1457,7 @@
                 "terms": "bicaj - bringa - bicikli - kétkerekű kölcsönző "
             },
             "amenity/bicycle_repair_station": {
-                "name": "Kerékpárjavító állomás",
+                "name": "Kerékpárszerelő pont",
                 "terms": "Biciklijavító állomás"
             },
             "amenity/boat_rental": {
@@ -1436,10 +1466,10 @@
             },
             "amenity/bureau_de_change": {
                 "name": "Pénzváltó",
-                "terms": "Valuta váltás, EURO váltó"
+                "terms": "Valutaváltás, EURO váltó"
             },
             "amenity/bus_station": {
-                "name": "busz állomás",
+                "name": "Buszállomás",
                 "terms": "busz, autóbusz"
             },
             "amenity/cafe": {
@@ -1487,7 +1517,7 @@
                 "terms": "Közösségi központ"
             },
             "amenity/compressed_air": {
-                "name": "Sűrített levegő és kompresszor állomás",
+                "name": "Sűrítettlevegő- és kompresszorállomás",
                 "terms": "gumi"
             },
             "amenity/courthouse": {
@@ -1531,11 +1561,11 @@
                 "terms": "töltőállomás,shell,bp,agip,oil,lukoil,tesco,e85,esso,omv,kagyló,mol,benzin,gázolaj,benzinkút,üzemanyag,petrol,autógáz,motorbenzin,adalékanyag,kenőanyag,dízel,diesel,bioetanol"
             },
             "amenity/grave_yard": {
-                "name": "Templomi Sírkert",
+                "name": "Templomkert",
                 "terms": "Temető, "
             },
             "amenity/grit_bin": {
-                "name": "Úti sótároló ",
+                "name": "Útmenti sótároló ",
                 "terms": "grit bin"
             },
             "amenity/hospital": {
@@ -1555,7 +1585,7 @@
                 "terms": "piac, üzlet"
             },
             "amenity/nightclub": {
-                "name": "Night Club - Éjszakai bár - diszkó",
+                "name": "Night club - Éjszakai bár - diszkó",
                 "terms": "Night Club, Éjszakai bár, Diszkó"
             },
             "amenity/parking": {
@@ -1647,7 +1677,7 @@
                 "terms": "Idősek szociális gondozója"
             },
             "amenity/social_facility/homeless_shelter": {
-                "name": "Hajléktalan menedék",
+                "name": "Hajléktalanszálló",
                 "terms": "Hajléktalan menedék"
             },
             "amenity/studio": {
@@ -1799,7 +1829,7 @@
                 "terms": "Kápolna, Imaház"
             },
             "building/church": {
-                "name": "Templom épület",
+                "name": "Templomépület",
                 "terms": "Templom, Plébánia, Imaház"
             },
             "building/college": {
@@ -1843,7 +1873,7 @@
                 "terms": "Kórházi épület, Klinika épület, Gyógyintézet épület"
             },
             "building/hotel": {
-                "name": "Szálloda",
+                "name": "Szállodaépület",
                 "terms": "Hotel, szálloda"
             },
             "building/house": {
@@ -1883,11 +1913,11 @@
                 "terms": "Iskolaépület"
             },
             "building/shed": {
-                "name": "Kunyhó",
+                "name": "Fészer",
                 "terms": "Kunyhó, Fészer, Pajta,csűr,raktár,viskó"
             },
             "building/stable": {
-                "name": "Istálló épület",
+                "name": "Istállóépület",
                 "terms": "Istálló"
             },
             "building/static_caravan": {
@@ -1911,7 +1941,7 @@
                 "terms": "Raktár, Lerakat"
             },
             "craft": {
-                "name": "Valamilyen mester ember műhelye ",
+                "name": "Valamilyen mesterember műhelye ",
                 "terms": "kézműves, iparos, iparművész"
             },
             "craft/basket_maker": {
@@ -1947,7 +1977,7 @@
                 "terms": "szőnyegpadló, padlóburkolat"
             },
             "craft/caterer": {
-                "name": "Catering-Partyszerviz",
+                "name": "Catering-partyszerviz",
                 "terms": "Catering, Partyszerviz, Rendezvényszervező "
             },
             "craft/clockmaker": {
@@ -2087,7 +2117,7 @@
                 "terms": "Bútor felújító,Antik bútor javító"
             },
             "craft/watchmaker": {
-                "name": "Órás műhely",
+                "name": "Órásműhely",
                 "terms": "Órakészítő és javító műhely"
             },
             "craft/window_construction": {
@@ -2099,8 +2129,8 @@
                 "terms": "Borászat"
             },
             "embankment": {
-                "name": "Töltés",
-                "terms": "Töltés"
+                "name": "Rakpart",
+                "terms": "rakpart"
             },
             "emergency/ambulance_station": {
                 "name": "Mentőállomás",
@@ -2207,11 +2237,11 @@
                 "terms": "Autópálya"
             },
             "highway/motorway_junction": {
-                "name": "Autópálya csomópont / kijárat",
+                "name": "Autópálya-csomópont / -kijárat",
                 "terms": "autópálya lehajtó, autópálya felhajtó, elágazás, leágazás"
             },
             "highway/motorway_link": {
-                "name": "Autópálya felhajtó",
+                "name": "Autópálya-felhajtó",
                 "terms": "autópálya lehajtó, autópálya leágazás"
             },
             "highway/path": {
@@ -2227,20 +2257,20 @@
                 "terms": "Elsőrendű főút"
             },
             "highway/primary_link": {
-                "name": "Főút felhajtó",
-                "terms": "Elsőrendű főút csatlakozás"
+                "name": "Főútfelhajtó",
+                "terms": "Elsőrendű főútcsatlakozás"
             },
             "highway/raceway": {
-                "name": "Motorsport pálya",
-                "terms": "Motorsport pály"
+                "name": "Motorsportpálya",
+                "terms": "Motorsport pálya"
             },
             "highway/residential": {
                 "name": "Lakóút",
                 "terms": "Lakóút"
             },
             "highway/rest_area": {
-                "name": "Pihenő terület",
-                "terms": "Pihenő terület"
+                "name": "Pihenőhely",
+                "terms": "Pihenőhely"
             },
             "highway/road": {
                 "name": "Ismeretlen út",
@@ -2251,7 +2281,7 @@
                 "terms": "Másodrendű főút"
             },
             "highway/secondary_link": {
-                "name": "Összekötőút felhajtó",
+                "name": "Összekötőút-felhajtó",
                 "terms": "Másodrendű főút csatlakozás"
             },
             "highway/service": {
@@ -2271,7 +2301,7 @@
                 "terms": "Kocsibejáró"
             },
             "highway/service/emergency_access": {
-                "name": "Vészhelyzeti behajtó",
+                "name": "Tűzoltási felvonulási útvonal",
                 "terms": "Vészhelyzeti bejárat"
             },
             "highway/service/parking_aisle": {
@@ -2315,7 +2345,7 @@
                 "terms": "Autóút"
             },
             "highway/trunk_link": {
-                "name": "Autóút felhajtó",
+                "name": "Autóútfelhajtó",
                 "terms": "Autóút csatlakozás"
             },
             "highway/turning_circle": {
@@ -2407,7 +2437,7 @@
                 "terms": "Tanyaudvar"
             },
             "landuse/forest": {
-                "name": "Telepített Erdő",
+                "name": "Telepített erdő",
                 "terms": "Erdő,akácos,erdősített terület"
             },
             "landuse/garages": {
@@ -2467,7 +2497,7 @@
                 "terms": "Kutyasétáltató"
             },
             "leisure/firepit": {
-                "name": "Tűzrakó hely",
+                "name": "Tűzrakóhely",
                 "terms": "Tűzrakó hely"
             },
             "leisure/garden": {
@@ -2524,7 +2554,7 @@
             },
             "leisure/pitch/tennis": {
                 "name": "Teniszpálya",
-                "terms": "Tenispály"
+                "terms": "Teniszpálya"
             },
             "leisure/pitch/volleyball": {
                 "name": "Röplabdapálya",
@@ -2575,7 +2605,7 @@
                 "terms": "Irtás"
             },
             "man_made/embankment": {
-                "name": "Töltés",
+                "name": "Rakpart",
                 "terms": "Töltés"
             },
             "man_made/flagpole": {
@@ -2775,7 +2805,7 @@
                 "terms": "ügyvéd, bíróság, közjegyző, ügyész"
             },
             "office/newspaper": {
-                "name": "Újságos",
+                "name": "Újságszekesztőség",
                 "terms": "Újság"
             },
             "office/ngo": {
@@ -2958,6 +2988,10 @@
                 "name": "Kapcsolat",
                 "terms": "Kapcsolat"
             },
+            "roundabout": {
+                "name": "Körforgalom",
+                "terms": "körforgalom"
+            },
             "route/ferry": {
                 "name": "Komp",
                 "terms": "Kompút"
@@ -2987,7 +3021,7 @@
                 "terms": "babruha - babakocsi - babaágy - babjáték bolt"
             },
             "shop/bag": {
-                "name": "Táska- és böröndbolt",
+                "name": "Táska- és bőröndbolt",
                 "terms": "bőrdíszmű és táskabolt,koffer,utazótáska "
             },
             "shop/bakery": {
@@ -3039,7 +3073,7 @@
                 "terms": "Autó szalon és márkakereskedés, Személygépkocsi- automobil - jármű és verda árúk bemutatóhelye"
             },
             "shop/car_parts": {
-                "name": "Autóalkatrész üzlet",
+                "name": "Autóalkatrész-üzlet",
                 "terms": "gépkocsi alkatrész bolt,  gépjármű alkatrész szaküzlet, személygépkocsi  alkatrész szaküzlet, személygépjármű  alkatrész szaküzlet,  automobil - jármű és verda  alkatrészek szaküzlete"
             },
             "shop/car_repair": {

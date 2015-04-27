@@ -110,6 +110,7 @@
                 "multiple": "Excluídos {n} objetos."
             },
             "incomplete_relation": "Este elemento não pode ser excluído porque não foi ainda totalmente baixado.",
+            "part_of_relation": "Este recurso não pode ser excluído porque ele é parte de uma relação maior. Você deve removê-lo da primeira relação",
             "connected_to_hidden": "Não pode ser deletado por estar conectado a um elemento oculto."
         },
         "add_member": {
@@ -386,10 +387,33 @@
         "title": "Salvar",
         "help": "Salvar alterações no OpenStreetMap, tornando-as visíveis para outros usuários.",
         "no_changes": "Sem alterações para salvar.",
-        "error": "Ocorreu um erro ao tentar salvar",
+        "error": "Ocorreram erros ao tentar salvar",
+        "status_code": "O servidor retornou o status {code}",
         "unknown_error_details": "Por favor, verifique sua conexão com a internet.",
         "uploading": "Enviando alterações para o OpenStreetMap.",
-        "unsaved_changes": "Você tem alterações não salvas."
+        "unsaved_changes": "Você tem alterações não salvas.",
+        "conflict": {
+            "header": "Resolver edições conflitantes",
+            "count": "Conflito {num} de {total}",
+            "previous": "< Anterior",
+            "next": "Próximo >",
+            "keep_local": "Manter o meu",
+            "keep_remote": "Usar o dele",
+            "restore": "Restaurar",
+            "delete": "Manter removido",
+            "download_changes": "Ou baixar suas alterações.",
+            "done": "Todos os conflitos foram resolvidos!",
+            "help": "Outro usuário alterou alguns dos mesmos itens do mapa que você alterou.\nClique em cada item abaixo para mais detalhes sobre o conflito, e escolha se quer manter as suas alterações ou as do outro usuário.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "Este objeto foi excluído por {user}.",
+            "location": "Este objeto foi movido tanto por você quanto pelo(a) {user}",
+            "nodelist": "Os pontos foram modificados tanto por você quanto pelo(a) {user}.",
+            "memberlist": "Os membros da relação foram modificados tanto por você quanto por {user}.",
+            "tags": "Você mudou a etiqueta <b>{tag}</b> para \"{local}\" e o/a {user} mudou-a para \"{remote}\"."
+        }
     },
     "success": {
         "edited_osm": "OSM editado!",
@@ -401,7 +425,8 @@
         "help_html": "Suas mudanças devem aparecer na camada \"Padrão\" do OSM em poucos minutos. Outras camadas e certos elementos podem demorar mais\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detalhes</a>).\n"
     },
     "confirm": {
-        "okay": "O.K."
+        "okay": "O.K.",
+        "cancel": "Cancelar"
     },
     "splash": {
         "welcome": "Bem vindo ao editor iD do OpenStreetMap",
@@ -448,7 +473,7 @@
     },
     "help": {
         "title": "Ajuda",
-        "help": "# Ajuda\n\nEste é um editor para OpenStreetMap (http://www.openstreetmap.org/), o mapa mundial livre e editavel. Você pode usá-lo para adicionar e atualizar de dados em sua área,  tornando um mapa mundi de codigo aberto melhor para todos.\nAs edições que você fizer nesse mapa serão visíveis para todos que usam OpenStreetMap. Para fazer uma edição você precisará de uma conta gratuita OpenStreetMap(https://www.openstreetmap.org/user/new).\n\nO editor iD (http://ideditor.com/) é um projeto colaborativo com o código fonte disponível no GitHub(https://github.com/openstreetmap/iD).\n",
+        "help": "# Ajuda\n\nEste é um editor para [OpenStreetMap](http://www.openstreetmap.org/), o mapa mundial livre e editável. Você pode usá-lo para adicionar e atualizar de dados em sua área,  tornando um mapa mundi de código aberto melhor para todos.\n\nAs edições que você fizer nesse mapa serão visíveis para todos que usam OpenStreetMap. Para fazer uma edição você precisará se [identificar](https://www.openstreetmap.org/login).\n\nO [editor iD](http://ideditor.com/) é um projeto colaborativo com o [código fonte disponível no GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Editando e Salvando\n\nEsse editor é feito para trabalhar primariamente online e você está\nneste momento acessando-o através de um sítio eletrônico.\n\n### Selecionando Elementos\n\nPara selecionar um elemento do mapa, como uma estrada ou \num ponto de interesse, clique sobre ele. Isso vai pôr o elemento\nselecionado em destaque, abrir um painel com detalhes sobre\nele e mostrar um menu de coisas que podem ser feitas com ele.\n\nMúltiplos elementos podem ser selecionados segurando a tecla\n\"Shift\", clicando e arrastando no mapa. Isso vai selecionar todos\nos elementos que estiverem dentro da caixa que foi desenhada,\npermitindo você fazer coisas com vários objetos de uma vez\nsó.\n\n### Salvando as Alterações\n\nQuando você faz alterações como editar ruas, prédios e lugares, elas\nsão guardadas localmente até que você as envie para o servidor. Não\nse preocupe se você cometer algum deslize: você pode desfazer\nalterações clicando no botão de desfazer e também refazer as\nalterações clicando no botão de refazer.\n\nClique em \"Salvar\" para salvar um conjunto de alterações. Por exemplo,\nvocê completou uma área de uma cidade e gostaria de começar a\neditar uma outra área. Você terá a chance de revisar o que foi feito\naté o momento e o editor mostrará sugestões e dicas se alguma coisa\nparecer estar errada com as suas alterações.\n\nSe tudo parecer estar OK, você pode inserir um breve comentário\nexplicando as mudanças que você fez e clicar em \"Salvar\" de novo\npara lançar as mudanças para o [OpenStreetMap](http://www.openstreetmap.org/),\nonde elas estarão visíveis para todos os outros usuários.\n\nSe você não conseguir concluir uma sessão de edição, você pode\ndeixar a janela do seu editor aberta e voltar mais tarde (no mesmo\nnavegador e computador) que o editor irá oferecer a possibilidade\nde restaurar o seu trabalho.\n",
         "roads": "# Estradas \n\nVocê pode criar, corrigir e excluir estradas com este editor. Estradas\npodem ser de vários tipos: caminhos, estradas, trilhas, ciclovias e \nmuito mais - qualquer segmento onde se passa, mesmo que às vezes, \npode ser mapeado. \n\n### Selecionando \n\nClique em uma estrada para selecioná-la. Um esboço deve tornar-se \nvisível, junto com um pequeno menu de ferramentas no mapa e uma \nbarra lateral mostrando mais informações sobre a estrada. \n\n### Modificando \n\nMuitas vezes você vai encontrar estradas que não estão alinhadas \ncom as imagens por trás delas ou com uma faixa de GPS. Você \npode ajustar estas estradas para que elas fiquem no lugar certo. \n\nPrimeiro clique no caminho que você deseja alterar. Isso irá \ndestacá-lo e mostrar pontos de controle ao longo dela que você \npode arrastar para locais melhores. Se o que você deseja é \nadicionar novos pontos de controle para obter mais detalhes, \nclique duas vezes em uma parte da estrada sem um ponto, e \num ponto será adicionado.\n\nSe a estrada se conecta a uma outra estrada, mas não está \ncorretamente conectada no mapa, você pode arrastar um de \nseus pontos de controle para a outra estrada a fim de juntá-las. \nTer estradas que se conectam é importante para o mapa e \nessencial para fornecer instruções de direção. \n\nVocê também pode clicar na ferramenta 'Mover' ou pressione a \ntecla 'M' para mover o caminho inteiro de uma vez, e em seguida, \nclique novamente para salvar esse movimento. \n\n### Apagando \n\nSe uma estrada está completamente errada - você pode ver que ela \nnão existe nas imagens de satélite e, junto a isso, ter confirmado \nlocalmente que ela não existe - você pode apagá-la do mapa.\nSeja cauteloso ao excluir objetos - como qualquer outra edição, os \nresultados são vistos por todos, e como as imagens de satélite \npodem estar desatualizadas, a estrada pode simplesmente ser \nrecém-construída. \n\nVocê pode excluir um caminho, clicando sobre ele para selecioná-lo, em \nseguida, clicar no ícone de lixeira ou pressionando a tecla 'Delete'.\n\n### Criando \n\nEncontrou um lugar onde deveria ter uma estrada, mas não tem? Clique \nno botão 'Linha' no canto superior esquerdo do editor ou pressione a \ntecla de atalho '2' para começar a desenhar uma linha. \n\nClique no início da estrada no mapa para começar a desenhar. Se a \nestrada se ramifica de uma estrada existente, comece clicando sobre \no lugar onde eles se conectam. \n\nEm seguida, clique em pontos ao longo da estrada para que ela siga \no caminho certo, de acordo com imagens de satélite ou GPS. Se a \nestrada que você está desenhando atravessa outra estrada, ligue-as \nclicando sobre o ponto de intersecção. Quando você terminar de \ndesenhar, clique duas vezes ou pressione 'Voltar' ou 'Enter' no seu teclado.\n",
         "gps": "# GPS\n\nOs dados de GPS são as fontes mais confiáveis do OpenStreetMap. Este\neditor suporta traçados locais - arquivos '.gpx'. Você pode utilizar aplicativos de celulares ou aparelhos de GPS para coletar esse tipo de traçado.\n\nPara informações sobre como realizar levantamento com GPS, leia\n[Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPara usar um traçado GPX para mapeamento, arraste e solte o arquivo GPX\nno editor de mapa. Caso seja reconhecido, será adicionado ao mapa como \nlinhas roxo claras. Clique no menu 'Dados do Mapa', no lado direito, para \nativar, desativas ou dar zoom nesta nova camada alimentada pelo GPX.\n\nO traçado GPX não é diretamente subido ao OpenStreetMap - o melhor \ncaminho para usá-lo é desenhar no mapa, usando-o como uma guia \npara os novos elementos que você adicionar, e [subi-lo no OpenStreetMap](http://www.openstreetmap.org/trace/create) para outros usuários utilizá-lo.\n",
@@ -510,7 +535,7 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Edifício"
+                "name": "Edificação"
             },
             "category-golf": {
                 "name": "Golfe"
@@ -750,6 +775,9 @@
             "description": {
                 "label": "Descrição"
             },
+            "drive_through": {
+                "label": "Drive-Thru"
+            },
             "electrified": {
                 "label": "Eletrificação",
                 "placeholder": "Linha de contato, trilho eletrificado...",
@@ -868,6 +896,13 @@
             },
             "incline": {
                 "label": "Declividade"
+            },
+            "incline_steps": {
+                "label": "Inclinação",
+                "options": {
+                    "up": "Para cima",
+                    "down": "Para baixo"
+                }
             },
             "information": {
                 "label": "Tipo"
@@ -1135,10 +1170,10 @@
             "service": {
                 "label": "Tipo"
             },
-            "service/bicycle/chaintool": {
+            "service/bicycle/chain_tool": {
                 "label": "Ferramenta de corrente",
                 "options": {
-                    "undefined": "Assumindo ser Não",
+                    "undefined": "Presume-se que não",
                     "yes": "Sim",
                     "no": "Não"
                 }
@@ -1149,6 +1184,15 @@
                     "undefined": "Assumindo ser Não",
                     "yes": "Sim",
                     "no": "Não"
+                }
+            },
+            "service_rail": {
+                "label": "Tipo de serviço",
+                "options": {
+                    "spur": "Ramal de inserção",
+                    "yard": "Pátio de manobra",
+                    "siding": "Linha de ultrapassagem",
+                    "crossover": "Linha de serviço"
                 }
             },
             "shelter": {
@@ -1185,7 +1229,8 @@
                     "bad": "Rodas resistentes: trekking bike, carro, riquixá",
                     "very_bad": "Alta desobstrução: veículo fora de estrada para serviço leve",
                     "horrible": "Fora de estrada:  veículo fora de estrada para serviço pesado.",
-                    "very_horrible": "Especializado em fora de estrada: trator, quadriciclo"
+                    "very_horrible": "Especializado em fora de estrada: trator, quadriciclo",
+                    "impassable": "Intransponível / Nenhum veículo sobre rodas"
                 }
             },
             "social_facility_for": {
@@ -2195,12 +2240,12 @@
                 "terms": "Via de Pedestre, Caminho de Pedestre, Passeio, Calçada"
             },
             "highway/living_street": {
-                "name": "Via de Espaço Compartilhado",
-                "terms": "Rua Viva, Rua Preferencial a Pedestres"
+                "name": "Via Compartilhada",
+                "terms": "Rua de Convivência, Rua Preferencial a Pedestres"
             },
             "highway/mini_roundabout": {
                 "name": "Mini-Rotatória",
-                "terms": "Mini-Rotatória"
+                "terms": "Mini-Rotatória, Balão, Mini-Rotunda"
             },
             "highway/motorway": {
                 "name": "Autoestrada",
@@ -2958,6 +3003,10 @@
                 "name": "Relação",
                 "terms": "Relação"
             },
+            "roundabout": {
+                "name": "Rotatória",
+                "terms": "Rotatória, Rotunda, Rótula, Bolacha, Girador, Balão"
+            },
             "route/ferry": {
                 "name": "Rota de Balsa",
                 "terms": "Rota de Barco, Rota de Balsa"
@@ -3203,8 +3252,8 @@
                 "terms": "Joalheria"
             },
             "shop/kiosk": {
-                "name": "Banca de Revistas",
-                "terms": "Banca de Jornais, Jornaleiro"
+                "name": "Quiosque",
+                "terms": "Kiosk, kioske"
             },
             "shop/kitchen": {
                 "name": "Loja de Cozinhas",

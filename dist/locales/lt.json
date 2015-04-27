@@ -110,6 +110,7 @@
                 "multiple": "Pašalinta {n} objektų."
             },
             "incomplete_relation": "Šio objekto negalima panaikinti, nes jis nebuvo pilnai atsiųstas.",
+            "part_of_relation": "Šis objektas negali būti ištrintas, nes jis yra didesnio ryšio dalis. Visų pirma turite jį pašalinti iš ryšio.",
             "connected_to_hidden": "Tai negali būti panaikinta, nes yra prijungta prie paslėpto objekto."
         },
         "add_member": {
@@ -386,10 +387,33 @@
         "title": "Išsaugoti",
         "help": "Įrašyti pakeitimus į OpenStreetMap, kad jie būtų matomi kitiems naudotojams.",
         "no_changes": "Nėra pakeitimų.",
-        "error": "Bandant įrašyti įvyko klaida.",
+        "error": "Bandant įrašyti įvyko klaidos.",
+        "status_code": "Serveris grąžino būsenos kodą {code}",
         "unknown_error_details": "Prašome įsitikinti, kad esate prisijungęs prie interneto.",
         "uploading": "Pakeitimai įkeliami į OpenStreetMap.",
-        "unsaved_changes": "Turite neįrašytų pakeitimų"
+        "unsaved_changes": "Turite neįrašytų pakeitimų",
+        "conflict": {
+            "header": "Sutvarkykite konfliktuojančius pakeitimus",
+            "count": "Konfliktas {num} iš {total}",
+            "previous": "< Ankstesnis",
+            "next": "Kitas >",
+            "keep_local": "Palikti mano",
+            "keep_remote": "Naudoti jų",
+            "restore": "Atstatyti",
+            "delete": "Palikti ištrintus",
+            "download_changes": "Arba atsisiųskite jūsų pakeitimus.",
+            "done": "Visi konfliktai išspręsti!",
+            "help": "Kitas naudotojas pakeitė kai kuriuos žemėlapio objektus, kuriuos ir jūs keitėte. Spauskite kiekvieną žemiau esantį elementą, kad gautumėte daugiau informacijos apie konfliktą ir parinkite ar palikti\njūsų pakeitimus, ar naudoti kito naudotojo pakeitimus.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "Šį objektą ištrynė {user}.",
+            "location": "Objektą perkėlėte ir jūs, ir {user}.",
+            "nodelist": "Taškus pakeitėte ir jūs, ir {user}.",
+            "memberlist": "Ryšio narius pakeitėte ir jūs, ir {user}.",
+            "tags": "Jūs pakeitėte <b>{tag}</b> žymą į „{local}“, o {user} pakeitė ją į „{remote}“."
+        }
     },
     "success": {
         "edited_osm": "Pakeitėte OSM!",
@@ -401,7 +425,8 @@
         "help_html": "Jūsų pakeitimai turėtų pasirodyti „Standartiniame“ sluoksnyje po kelių minučių. Kiti sluoksniai ar konkretūs objektai gali pasirodyti vėliau\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>daugiau informacijos</a>).\n"
     },
     "confirm": {
-        "okay": "Gerai"
+        "okay": "Gerai",
+        "cancel": "Nutraukti"
     },
     "splash": {
         "welcome": "Jus sveikina iD OpenStreetMap redaktorius",
@@ -448,7 +473,7 @@
     },
     "help": {
         "title": "Pagalba",
-        "help": "# Pagalba\n\nTai yra [OpenStreetMap](http://www.openstreetmap.org/) redaktorius.\nOpenStreetMap - atviras, redaguojamas pasaulio žemėlapis. Galite jį naudoti\nbei keisti duomenis, taip tobulindami atviro kodo ir atvirų duomenų pasaulio\nžemėlapį ir padėdami visiems.\n\nJūsų pakeitimai bus matomi visiems, kas naudoja OpenStreetMap. Norėdami\ndaryti pakeitimus, turėsite susikurti [nemokamą OpenStreetMap paskyrą](https://www.openstreetmap.org/user/new).\n\n[iD redaktorius](http://ideditor.com/) - tai bendruomenės projektas. Programos\nkodas yra atviras, jį galite rasti [GitHub](https://github.com/openstreetmap/iD).\n",
+        "help": "# Help\n\nTai [OpenStreetMap](http://www.openstreetmap.org/), laisvo ir keičiamo pasaulio žemėlapio redaktorius. Šiuo redaktoriumi galite pridėti ir keisti duomenis savo vietovėje, taip visiems pagerindami atviro kodo ir atvirų duomenų pasaulio žemėlapį.\n\nPakeitimai, kuriuos darote šiame žemėlapyje bus matomi visiems, kas naudoja OpenStreetMap. Kad padarytumėte pakeitimą, jums reikia [prisijungti](https://www.openstreetmap.org/login).\n\n[iD redaktorius](http://ideditor.com/) - tai bendruomenės projektas, kurio [kodas atvirai prieinamas GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Keitimas ir įrašymas\n\nŠis redaktorius sukurtas visų pirma darbui prisijungus, todėl jūs jį paleidžiate per svetainę.\n\n### Objektų žymėjimas\n\nNorėdami pažymėti objektą, tokį kaip kelią ar lankytiną vietą, pažymėkite jį žemėlapyje. Taip pažymėtas objektus bus paryškintas ir bus atidaryta panelė su objekto informacija bei meniu veiksmų, kuriuos galite atlikti su pažymėtu objektu.\n\nNorėdami pažymėti kelis objektus, laikykite paspaudę klavišą „Shift“. Tada arba spauskite ant kitų objektų, kuriuos norite pažymėti, arba tempkite pele per žemėlapį, kad nupaišytumėte stačiakampį.\nTaip bus pažymėti visi taškai, esantys stačiakampio viduje.\n\n### Pakeitimų įrašymas\n\nKai padarote tarkim kelių, pastatų ar vietovių pakeitimų, jie saugomi vietoje tol, kol jūs neįrašote jų į serverį. Nesijaudinkite jei padarote klaidą, visada galite atstatyti pakeitimus su atstatymo mygtuku ir pakartotinai juos padaryti paspaudę pakartojimo mygtuką.\n\nSpauskite mygtuką „Įrašyti“, jei norite įrašyti grupę pakeitimų, pavyzdžiui jei baigėte vienos vietos pakeitimus ir dabar norėtumėte pradėti keisti kitoje vietoje. Galėsite peržiūrėti, ką padarėte, o redaktorius pateiks naudingus patarimus ar įspėjimus, jei kažkas atrodo ne visai teisingai.\n\nJei viskas gerai, galite įvesti trumpą komentarą, paaiškinantį jūsų pakeitimus ir tada vėl spausti „Įrašyti“, kad įkeltumėte pakeitimus į\n[OpenStreetMap.org](http://www.openstreetmap.org/), kur visi kiti naudotojai juos matys ir galės toliau tobulinti.\n\nJei negalite baigti savo pakeitimų vienu prisėdimu, galite palikti redaktoriaus langą ir grįžti vėliau (toje pačioje naršyklėje ir tame pačiame kompiuteryje), redaktorius jums pasiūlys tęsti jūsų darbą.\n",
         "roads": "# Keliai\n\nJūs galite kurti, taisyti ir naikinti kelius redaktoriaus pagalba. Keliai gali būti įvairių\ntipų: takai, vieškeliai, maršrutai, dviračių takai ir daug kitų, dažnai susikertančių,\njuos visus galima pažymėti.\n\n### Parinkimas\n\nNorėdami parinkti kelią - spauskite ant jo. Kelio kontūras bus paryškintas, taipogi\nbus rodomas mažas įrankių meniu ir šonine skiltimi, rodančia daugiau informacijos\napie kelią.\n\n### Keitimas\n\nDažnai pastebėsite kelius, kurių pozicija neatitinka fone esančios ortofotonuotraukos arba\njūsų GPS pėdsako. Galie pataisyti kelio poziciją, kad kelias būtų teisingoje vietoje.\n\nVisų pirma spauskite ant kelio, kurį norite keisti. Kelias bus paryškintas ir bus matomi\nkontroliniai taškai, kuriuos jūs galite pertempti į teisingesnes pozicijas. Jei norite pridėti\npapildomų kontrolinių taškų - du kartus spauskite ant kelio segmento, kuriame\ndar nėra taško - bus pridėtas naujas taškas.\n\nJei kelias jungiasi su kitu keliu, bet nėra teisingai sujungtas žemėlapyje, jūs galite\ntempti vieną iš kelio kontrolinių taškų ant kito kelio, kad juos sujungtumėte. Labai\nsvarbu teisingai sujungti kelius, nes tai naudojama maršrutizavimui.\n\nTaipogi galite naudoti įrankį „Perkelti“ arba spausti mygtuką „M“, jei norite perkelti\nvisą kelią iš karto, tada vėl spauskite „M“, kad patvirtintumėte perkėlimą.\n\n### Naikinimas\n\nJei kelias yra visiškai neteisingas - jūs matote, kad tokio kelio apskritai nėra ortofoto\nir jūs žinote, kad jo ir realybėje nėra - galite kelią ištrinti, kad jo nebeliktų žemėlapyje.\nNaikindami objektus būkite atidūs, kaip ir bet kuris kitas keitimas, naikinimas matomas\nvisiems naudotojams, o ortofotografijos dažnai būna pasenusios, tagi naujai\nnutiestas kelias gali būti tiesiog nematomas.\n\nKelią galite panaikinti pažymėję jį ir paspaudę šiukšlių dėžės piktogramą arba\npaspaudę mygtuką „Trinti“.\n\n### Kūrimas\n\nRadote vietą, kur turėtų būti kelias, bet jo nėra? Spauskite mygtuką „Linija“\narba klavišą „2“, kad pradėtumėte linijos piešimą.\n\nSpauskite žemėlapyje ant vietos, kur turi prasidėti jūsų kelias. Jeigu kelias atsišakoja\nnuo jau esamo kelio - pradėkite naujo kelio piešimą paspaudę ant atsišakojimo vietos.\n\nTada dėliokite kelio taškus taip, kad jo kontūras maksimaliai atitiktų realų kelią pagal\npalydovinę nuotrauką ar GPS pėdsakus. Jei jūsų piešiamas kelias kerta kitą kelią,\nsujunkite juos spaudžiant ties susikirtimo tašku. Kai baigsite braižyti, du kartus\nspauskite pele arba spauskite klaviatūros mygtuką „Enter“.\n",
         "gps": "# GPS\n\nGPS duomenys - patikimiausias duomenų šaltinis atvirame žemėlapyje. Šis redaktorius palaiko vietinius pėdsakus - „.gpx“ failus jūsų kompiuteryje. Jūs galite surinkti tokius GPS pėdsakus eile išmaniųjų telefonų aplikacijų arba asmenine GPS įranga.\n\nDaugiau informacijos apie tai, kaip daryti GPS apžiūrą rasite [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nNorint panaudoti GPX pėdsaką žymėjimui, atitempkite GPX failą ant žemėlapio. Jei jis bus atpažintas - pamatysite jį žemėlapyje kaip ryškią purpurinę liniją. Spauskite dešinėje esantį meniu „Žemėlapio duomenys“, norėdami įjungti, išjungti ar priartinti šį naują GPX valdomą sluoksnį.\n\nGPX pėdsakas nekeliamas tiesiogiai į OpenStreetMap - geriausias naudojimo būdas - naudoti pėdsaką kaip orientyrą braižant naujus žemėlapio objektus. Vėliau pėdsaką patartina įkelti, kad jį galėtų naudoti kiti braižytojai [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create).\n",
@@ -593,8 +618,8 @@
                     "street": "Gatvė",
                     "city": "Miestas",
                     "postcode": "Pašto kodas",
-                    "place": "Vieta",
-                    "hamlet": "Kaimelis",
+                    "place": "Vietovė",
+                    "hamlet": "Viensėdis",
                     "suburb": "Priemiestis",
                     "subdistrict": "Seniūnija",
                     "district": "Rajonas",
@@ -750,6 +775,9 @@
             "description": {
                 "label": "Aprašymas"
             },
+            "drive_through": {
+                "label": "Pravažiavimas"
+            },
             "electrified": {
                 "label": "Elektrifikacija",
                 "placeholder": "Kontaktinė linija, elektrifikuoti bėgiai...",
@@ -782,6 +810,7 @@
             "fire_hydrant/type": {
                 "label": "Tipas",
                 "options": {
+                    "pillar": "Kolona/antžeminė",
                     "underground": "Požeminis",
                     "wall": "Siena",
                     "pond": "Kūdra"
@@ -828,7 +857,8 @@
                 "placeholder": "Nežinoma",
                 "options": {
                     "male": "Vyras",
-                    "female": "Moteris"
+                    "female": "Moteris",
+                    "unisex": "Abiejų lyčių"
                 }
             },
             "generator/method": {
@@ -845,6 +875,7 @@
                 "placeholder": "Duobutės numeris (1-18)"
             },
             "handicap": {
+                "label": "Neįgaliesiems",
                 "placeholder": "1-18"
             },
             "highway": {
@@ -857,8 +888,21 @@
                 "label": "Ratlankiai",
                 "placeholder": "1, 2, 4..."
             },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
             "incline": {
                 "label": "Nuolydis"
+            },
+            "incline_steps": {
+                "label": "Įkalnė",
+                "options": {
+                    "up": "Aukštyn",
+                    "down": "Žemyn"
+                }
             },
             "information": {
                 "label": "Tipas"
@@ -933,7 +977,12 @@
                 "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Kietas žvyrius/suspaustos žemės, jokių kliūčių, platūs vingiai",
-                    "1": "1: Šiek tiek pairusi danga , mažos kliūtys, platūs vingiai"
+                    "1": "1: Šiek tiek pairusi danga , mažos kliūtys, platūs vingiai",
+                    "2": "2: Daug netvirto paviršiaus, didelės kliūtys, lengvi posūkiai",
+                    "3": "3: Slidus paviršius, didelės kliūtys, siauri posūkiai",
+                    "4": "4: Netvirtas paviršius ar rieduliai, pavojingi posūkiai",
+                    "5": "5: Didžiausias sudėtingumas, riedulių laukai, nuošliaužos",
+                    "6": "6: Pravažiuojama tik patiems geriausiems kalnų dviratininkams"
                 }
             },
             "mtb/scale/imba": {
@@ -949,7 +998,15 @@
             },
             "mtb/scale/uphill": {
                 "label": "Kalnų dviračių sudėtingumas",
-                "placeholder": "0, 1, 2, 3..."
+                "placeholder": "0, 1, 2, 3...",
+                "options": {
+                    "0": "0: Vid. kilimas <10%, gruntas, suspausta žemė, be kliūčių",
+                    "1": "1. Vid. kilimas <15%, gruntas, suspausta žemė, keli smulkūs objektai",
+                    "2": "2. Vid. kilimas <20%, stabilus paviršius, kumščio dydžio akmenys/šaknys",
+                    "3": "3: Vid. kilimas <25%, kintantis paviršius, kumščio dydžio akmenys/šaknys",
+                    "4": "4: Vid. įkalnė <30%, prastos būklės, dideli akmenys/šaknys",
+                    "5": "5: Labai status, dviratį pagrinde reikia stumti arba nešti"
+                }
             },
             "name": {
                 "label": "Pavadinimas",
@@ -990,6 +1047,7 @@
                 "label": "Operatorius"
             },
             "par": {
+                "label": "Par",
                 "placeholder": "3, 4, 5..."
             },
             "park_ride": {
@@ -999,8 +1057,12 @@
                 "label": "Tipas",
                 "options": {
                     "surface": "Danga",
+                    "multi-storey": "Daugiaaukštis",
                     "underground": "Požeminis",
-                    "sheds": "Pašiūrės"
+                    "sheds": "Pašiūrės",
+                    "carports": "Stoginės",
+                    "garage_boxes": "Garažai",
+                    "lane": "Kelkraštis"
                 }
             },
             "phone": {
@@ -1016,10 +1078,12 @@
                     "intermediate": "Vidutinis (mėlynas kvadratas)",
                     "advanced": "Sudėtingas (juodas deimantas)",
                     "expert": "Eksperto (dvigubas juodas deimantas)",
+                    "freeride": "Laisvas (ne maršrutu)",
                     "extreme": "Ekstremalus (būtina kopimo įranga)"
                 }
             },
             "piste/grooming": {
+                "label": "Priežiūra",
                 "options": {
                     "classic": "Klasikinis",
                     "skating": "Čiuožimas"
@@ -1028,6 +1092,9 @@
             "piste/type": {
                 "label": "Tipas",
                 "options": {
+                    "sled": "Rogės",
+                    "hike": "Žygis",
+                    "ice_skate": "Ledo čiuožimas",
                     "snow_park": "Sniego parkas",
                     "playground": "Vaikų žaidimų aikštelė"
                 }
@@ -1077,15 +1144,27 @@
             "route_master": {
                 "label": "Tipas"
             },
+            "sac_scale": {
+                "label": "Žygio sudėtingumas",
+                "placeholder": "Kalnų žygiai, Alpių žygiai...",
+                "options": {
+                    "hiking": "T1: Žygiai",
+                    "mountain_hiking": "T2: Kalnų žygiai",
+                    "demanding_mountain_hiking": "T3: Varginantys kalnų žygiai",
+                    "alpine_hiking": "T4: Alpių žygiai",
+                    "demanding_alpine_hiking": "T5: Varginantys alpių žygiai",
+                    "difficult_alpine_hiking": "T6: Sudėtingi alpių žygiai"
+                }
+            },
             "seasonal": {
                 "label": "Sezoninis"
             },
             "service": {
                 "label": "Tipas"
             },
-            "service/bicycle/chaintool": {
+            "service/bicycle/chain_tool": {
                 "options": {
-                    "undefined": "Manoma, kad Ne",
+                    "undefined": "Numatytai, kad Ne",
                     "yes": "Taip",
                     "no": "Ne"
                 }
@@ -1096,6 +1175,14 @@
                     "undefined": "Manoma, kad Ne",
                     "yes": "Taip",
                     "no": "Ne"
+                }
+            },
+            "service_rail": {
+                "label": "Tarnybos tipas",
+                "options": {
+                    "spur": "Atšaka",
+                    "yard": "Kiemas",
+                    "siding": "Atsarginis kelias"
                 }
             },
             "shelter": {
@@ -1123,7 +1210,10 @@
                 }
             },
             "smoothness": {
-                "label": "Tikslumas"
+                "label": "Tikslumas",
+                "options": {
+                    "impassable": "Nepravažiuojama / jokiam ratuotam transportui"
+                }
             },
             "social_facility_for": {
                 "label": "Aptarnaujama žmonių",
@@ -1147,6 +1237,7 @@
                 "options": {
                     "bridge": "Tiltas",
                     "tunnel": "Tunelis",
+                    "embankment": "Pylimas",
                     "ford": "Brasta"
                 }
             },
@@ -1219,7 +1310,7 @@
                 "label": "Tipas"
             },
             "wheelchair": {
-                "label": "Važimėlio prieiga"
+                "label": "Prieiga vežimėliu"
             },
             "width": {
                 "label": "Plotis (Metrais)"
@@ -1236,6 +1327,10 @@
             "aerialway": {
                 "name": "Oro transporto kelias",
                 "terms": "pakilimo takas,lėktuvų privažiavimas"
+            },
+            "aerialway/cable_car": {
+                "name": "Funikulierius",
+                "terms": "funikulierius,keltuvas"
             },
             "aerialway/gondola": {
                 "name": "Gondola",
@@ -2401,7 +2496,7 @@
                 "terms": "kelionių agentūra"
             },
             "place": {
-                "name": "Vieta",
+                "name": "Vietovė",
                 "terms": "gyvenvietė,vietovė"
             },
             "place/city": {
@@ -2409,8 +2504,8 @@
                 "terms": "didmiestis"
             },
             "place/hamlet": {
-                "name": "Kaimelis",
-                "terms": "viensėdis"
+                "name": "Viensėdis",
+                "terms": "viensėdis,kaimelis"
             },
             "place/island": {
                 "name": "Sala",

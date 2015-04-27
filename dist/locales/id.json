@@ -314,7 +314,6 @@
         "title": "Simpan",
         "help": "Simpan perubahan ke OpenStreetMap, jadikan mereka terlihat oleh pengguna lain.",
         "no_changes": "Tak ada perubahan yang bisa disimpan.",
-        "error": "Sebuah kesalahan terjadi ketika penyimpanan.",
         "uploading": "Mengunggah perubahan ke OpenStreetMap.",
         "unsaved_changes": "Anda mememiliki perubahan yang belum tersimpan"
     },
@@ -374,8 +373,7 @@
         "view_on_mapillary": "Lihat gambar ini di Mapillary"
     },
     "help": {
-        "title": "Bantuan",
-        "help": "#Bantuan\n\nIni adalah editor untuk [OpenStreetMap] (http://www.openstreetmap.org/), \npeta dunia gratis dan bisa disunting. Anda dapat menggunakannya dengan menambahkan dan memperbarui\n data di area anda, membangun sebuah peta sumber-terbuka dan data-terbuka di seluruh dunia\n yang lebih baik untuk semua orang.\n\nPerubahan yang anda buat akan terlihat ke semua orang yang menggunakan \nOpenStreetMap. Untuk melakukan penyutingan, anda membutuhkan \n[free OpenStreetMap account] (https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) adalah proyek kolaborasi dengan [kode sumber tersedia di GitHub](https://github.com/openstreetmap/iD).\n"
+        "title": "Bantuan"
     },
     "intro": {
         "navigation": {

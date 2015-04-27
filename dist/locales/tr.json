@@ -344,7 +344,6 @@
         "title": "Kaydet",
         "help": "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz.",
         "no_changes": "Kaydedilecek bir değişiklik yok",
-        "error": "Kaydederken bir hata oluştu",
         "unknown_error_details": "Lütfen internete bağlı olduğunuzdan emin olun.",
         "uploading": "Değişiklikleriniz OpenStreetMap'e gönderiliyor.",
         "unsaved_changes": "Kaydedilmemiş değişiklikleriniz var"
@@ -403,8 +402,7 @@
         "view_on_mapillary": "Bu resmi Mapillary'de görüntüle"
     },
     "help": {
-        "title": "Yardım",
-        "help": "# Yardım\n\nBu, dünyanın özgür ve düzenlenebilir haritası [OpenStreetMap](http://www.openstreetmap.org/)\niçin bir düzenleyici. Bunu bulunduğunuz bölgeyle ilgili bir veri\neklemek ya da güncellemek, böylece herkes için daha iyi bir açık kaynak\nve açık veri  bir dünya haritası oluşturmak için kullanabilirsiniz\n\nBu haritada yaptığınız düzenlemeler OpenStreetMap kullanan herkesçe\ngörülebilir olacak. Düzenleyebilek için bir \n[ücretsiz OpenStreetMap kullanıcısına](https://www.openstreetmap.org/user/new)\ngereksiniminiz var.\n\n[iD düzenleyicisi](http://ideditor.com/) ortak çaba ürünü bir proje ya da başka deyişle tasarı ve [kaynak kodu GitHub üzerinden erişilebilir](https://github.com/openstreetmap/iD).\n"
+        "title": "Yardım"
     },
     "intro": {
         "navigation": {

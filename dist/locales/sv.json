@@ -110,6 +110,7 @@
                 "multiple": "Tagit bort {n} objekt."
             },
             "incomplete_relation": "Detta objekt kan inte raderas, då det inte är komplett hämtad.",
+            "part_of_relation": "Detta objekt kan inte raderas då det är del i en större relation. Du måste ta bort det från relationen först. ",
             "connected_to_hidden": "Detta kan inte tas bort då det är kopplat till ett dolt objekt."
         },
         "add_member": {
@@ -387,9 +388,32 @@
         "help": "Spara ändringar till OpenStreetMap så att andra användare kan se dem.",
         "no_changes": "Inga ändringar att spara.",
         "error": "Något gick fel vid sparandet",
+        "status_code": "Server returnerade statuskoden {code}",
         "unknown_error_details": "Kontrollera att du är ansluten till Internet.",
         "uploading": "Dina ändringar sparas nu till OpenStreetMap.",
-        "unsaved_changes": "Du har icke-sparade ändringar."
+        "unsaved_changes": "Du har icke-sparade ändringar.",
+        "conflict": {
+            "header": "Lös motstridiga ändringar",
+            "count": "Konflikt {num} av {total}",
+            "previous": "< Föregående",
+            "next": "Nästa >",
+            "keep_local": "Behåll min",
+            "keep_remote": "Använd deras",
+            "restore": "Återställ",
+            "delete": "Låt vara borttagen",
+            "download_changes": "Eller ladda ner dina ändringar.",
+            "done": "Alla konflikter lösta!",
+            "help": "En annan användare har ändrat på samma objekt som du har ändrat.\nKlicka på vardera objekt nedan för ytterligare detaljer om respektive konflikt, och välj om dina eller\nden andra användarens ändringar ska behållas.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "Detta objekt har tagits bort av {user}.",
+            "location": "Detta objekt har flyttats av både dig och {user}.",
+            "nodelist": "Nod har ändrats av både dig och {user}.",
+            "memberlist": "Relationsmedlem har ändrats av både dig och {user}.",
+            "tags": "Du ändrade taggen <b>{tag}</b> till \"{local}\" och {user} ändrade den till \"{remote}\"."
+        }
     },
     "success": {
         "edited_osm": "Redigerat OSM!",
@@ -401,7 +425,8 @@
         "help_html": "Dina ändringar bör synas på \"Standard\"-lagret innom några minuter. Andra lager, och vissa egenskaper kan ta längre tid. \n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detaljer</a>).\n"
     },
     "confirm": {
-        "okay": "Ok"
+        "okay": "Ok",
+        "cancel": "Avbryt"
     },
     "splash": {
         "welcome": "Välkommen till iD OpenStreetMap-redigeraren",
@@ -448,7 +473,7 @@
     },
     "help": {
         "title": "Hjälp",
-        "help": "# Hjälp\n\nDetta är en redigerare för [OpenStreetMap](http://www.openstreetmap.org/), den\nfri och redigerbara världskartan. Du kan använda den för att lägga till och uppdatera\ndata i ditt närområde, allt för att ytterligare förbättra en världskarta för alla baserad på öppen källkod och data.\n\nÄndringar du gör i den här kartan kommer att visas för alla som använder\nOpenStreetMap. För att göra en ändring behöver du ett\n[gratis OpenStreetMap-konto](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) är ett samarbetsprojekt med [källkodkod \ntillgänglig på GitHub](https://github.com/openstreetmap/iD).\n",
+        "help": "# Hjälp\n\nDetta är en redigerare för [OpenStreetMap](http://www.openstreetmap.org/), \nen gratis och redigerbar karta över världen. Du kan använda den för att lägga till och ändra \ndata i ditt område, allt för att göra en världsomspännande karta baserad på \nöppen källkod och öppen data bättre för alla.\n\nRedigeringar du gör på kartan kommer att visas för alla som använder \nOpenStreetMap. För att göra en redigering måste du\n[log in](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) är ett gemensammt projekt med [källkod \ntillgänglig på GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Redigera & spara\n\nDenna redigerare är designad att främst fungera online, och du använder den via en webbsida just nu.\n\n### Välj objekt\n\nFör att välja ett kartobjekt, t.ex. en väg eller en punkt, klicka på den på kartan. Detta kommer att markera det valda objektet, öppna en panel med detaljer om det, och visa en meny med saker du kan göra med det.\n\nFör att välja flera objekt, håll ner Skift-tangenten. Klicka sedan på objekten du vill välja eller dra på kartan för att rita en rektangel. Detta kommer att rita en ruta och markera punkterna inuti den.\n\n### Spara redigeringar\n\nNär du gör ändringar som att ändra på en väg, byggnad eller plats är detta sparat lokalt fram tills att du spara det på servern. Oroa dig inte om du gör ett misstag, du kan alltid ångra en ändring genom att klicka på Ånga-knappen och göra om din förändring genom att klicka på Gör om-knappen.\n\nKlicka på Spara för att slutföra en grupp att förändringar, t.ex. om du fullfört ett område i en stad och vill börja ändra i ett annat område. Du får möjlighet att granska vad du gjort och redigeraren ger dig hjälpsamma förslag och varningar om någon ändring inte verka korrekt.\n\nOm allt ser bra ut kan du ange en kort kommentar som förklarar vad du gjort och sedan klicka på Spara igen för att skicka iväg ändringarna till [OpenStreetMap.org](http://www.openstreetmap.org/) där de blir synliga för alla andra användare och tillgängliga för andra att bygga sina förbättringar på.\n\nOm du inte kan slutföra din ändring på en gång kan du lämna redigeringsfönstret öppet och komma tillbaka (i samma webbläsare på samma dator) och redigeringsprogrammet kommer att ge dig möjlighet att återställa ditt arbete.\n",
         "roads": "# Vägar\n\nDu kan skapa, fixa och ta bort vägar med denna redigerare. Vägar kan vara alla typer av: stigar, bilvägar, spår, cykelvägar m.m - alla välanvända segment ska mappas.\n\n### Markering\n\nKlicka på en väg för att välja den. En markering blir då synlig tillsammans med en liten verktygsmeny på kartan och ett sidofällt visar mer information om vägen.\n\n### Modifiering\n\nOfta ser du vägar som inte är justerade till bakgrundsbilden eller till ett GPS-spår. Du kan justera dessa vägar så att de är på korrekt plats.\n\nKlicka först på vägen du vill ändra. Detta kommer att markera den och visa kontrollpunkt längst den som du kan dra i för att justera den. Om du vill lägga till en ny kontrollpunkt för högre detaljrikedom, dubbelklicka på en del av vägen utan en punkt så kommer en kontrollpunkt läggas till.\n\nOm vägen är ansluten till en annan väg, men är inte det på kartan, kan du dra en av dess kontrollpunkt till den andra vägen för att koppla dem tillsammans. Att vägarna är kopplade till varandra är viktigt för kartan och avgörande för att kunna ge korrekta körinstruktioner.\n\nDu kan också klicka på verktyget 'Flytta' eller trycka på tangenten 'M' på tangentbordet för att flytta en hel väg på en gång, och sedan klicka igen för att spara flytten.\n\n### Borttagning\n\nOm hela vägen är helt fel - du kan se att den inte existerar på satellitbilderna och har helst bekräftat i verkligheten att den inte finns - kan du ta bort den, vilket tar bort den från kartan. Var försiktigt när du ta bort objekt - precis som vi all redigering kan alla se resultatet och satellitbilderna är oftast gamla, så vägen kan helt enkelt vara nybyggd.\n\nDu kan ta bort en väg genom att klicka på den för att markera den och sedan klicka på ikonen soptunna eller klicka på knappen 'Delete' på tangentbordet.\n\n### Skapa\n\nHittat någonstans att det borde finnas en väg där de inte finns en? Klicka på ikonen 'Linje'  högst upp till vänster i redigeringsfönstret eller klicka på knappen '2' på tangentbordet för att börja rita en linje.\n\nKlicka på början av vägen på kartan för att påbörja ritningen. Om vägen viker av från en existerande väg, starta genom att klicka där de ansluter till varandra. \n\nKlicka sedan på punkter längst vägen så att den följer vägens sträckning enligt satellitbilder eller GPS-spår. Om vägen du ritar korsar en annan väg, anslut dem tillsammans genom att klicka där de korsar. När du är klar med att rita in vägen, dubbelklicka eller tryck 'Enter' på tangentbordet.\n",
         "gps": "# GPS\n\nGPS-data är den mest tillförlitliga källan för data till OpenStreetMap. Denna redigeraren stöder lokala spår - .gpx-filer på din lokala dator. Du kan samla in denna typ av GPS-spår med ett antal olika appar till din smartphone eller en GPS-enhet.\n\nFör information om du du gör en GPS-uppmätning, läs [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nFör att använda ett GPX-spår för att kartlägga, dra och släpp GPX-filen på kartredigeraren. Om det accepteras kommer det att läggas till på kartan som en ljuslila linje. Klicka på menyn Kartdata till höger för att aktivera, avaktivera eller zooma in till detta nya GPX-skapade lager.\n\nGPX-spåret laddas inte direkt upp till OpenStreetMap - bästa sätet att använda det är att rita på kartan och använda det som en guide för att lägga till ny information, men också för att [ladda upp det till OpenStreetMap] (http://www.openstreetmap.org/trace/create) så att andra kan använda det. \n",
@@ -750,6 +775,9 @@
             "description": {
                 "label": "Beskrivning"
             },
+            "drive_through": {
+                "label": "Genomkörning (Drive-through)"
+            },
             "electrified": {
                 "label": "Elförsörjning",
                 "placeholder": "Kontaktledning, elektrifierad räls...",
@@ -868,6 +896,13 @@
             },
             "incline": {
                 "label": "Lutning"
+            },
+            "incline_steps": {
+                "label": "Lutning",
+                "options": {
+                    "up": "Upp",
+                    "down": "Ner"
+                }
             },
             "information": {
                 "label": "Typ"
@@ -1135,7 +1170,7 @@
             "service": {
                 "label": "Typ"
             },
-            "service/bicycle/chaintool": {
+            "service/bicycle/chain_tool": {
                 "label": "Kedjebrytare",
                 "options": {
                     "undefined": "Förväntas vara Nej",
@@ -1149,6 +1184,15 @@
                     "undefined": "Förväntas vara Nej",
                     "yes": "Ja",
                     "no": "Nej"
+                }
+            },
+            "service_rail": {
+                "label": "Användningsområde ",
+                "options": {
+                    "spur": "Industrispår",
+                    "yard": "Bangård",
+                    "siding": "Sidospår",
+                    "crossover": "Växelförbindelse"
                 }
             },
             "shelter": {
@@ -2396,8 +2440,8 @@
                 "terms": "Byggarbetsplats, bygge, Byggnad under konstruktion, Byggnad under uppförande, byggarbete,  byggnation, byggnadsplats"
             },
             "landuse/farm": {
-                "name": "Gård",
-                "terms": "Bondgård, gård, jordbruk, lantbruk, lantegendom, lantgård"
+                "name": "Åkermark",
+                "terms": "Åker, åkerjord, åkerfält, fält, gärde, teg, åkerlapp, inäga, odling, odlingsfält, lantbruk"
             },
             "landuse/farmland": {
                 "name": "Åkermark",
@@ -2958,6 +3002,10 @@
             "relation": {
                 "name": "Relation",
                 "terms": "Relation, relaterat, förbindelse, förhållande, samband, anknytning, koppling, kontext"
+            },
+            "roundabout": {
+                "name": "Rondell",
+                "terms": "Rondell, cirkulationsplats, trafikrondell"
             },
             "route/ferry": {
                 "name": "Färjerutt",

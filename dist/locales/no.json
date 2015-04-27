@@ -202,7 +202,6 @@
         "title": "Lagre",
         "help": "Lagre endringene i OpenStreetMap, slik at de blir synlige for andre brukere.",
         "no_changes": "Ingen endringer å lagre.",
-        "error": "Det oppstod en feil ved forsøk på å lagre",
         "uploading": "Laster opp endringer til OpenStreetMap.",
         "unsaved_changes": "Du har ulagrede endringer"
     },

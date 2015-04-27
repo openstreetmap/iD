@@ -218,6 +218,7 @@
         "upload_explanation_with_user": "تفییراتی که شما به عنوان {user} بارگذاری میکنید در همه ی نقشه هایی که از داده های OpenStreetMap استفاده میکنند پدیدار میشوند.",
         "save": "ذخیره",
         "cancel": "لغو",
+        "changes": "{count} تغییر",
         "warnings": "اخطارها",
         "modified": "اصلاح شد",
         "deleted": "حذف شد",
@@ -256,6 +257,10 @@
         "incomplete": "<دانلود نشده>",
         "feature_list": "جستجوی ویژگی ها",
         "edit": "ویرایش ویژگی",
+        "check": {
+            "yes": "بله",
+            "no": "خیر"
+        },
         "none": "هیچ",
         "node": "گره",
         "way": "راه",
@@ -272,6 +277,28 @@
         "fix_misalignment": "تعمیر تراز",
         "reset": "باز نشاندن"
     },
+    "map_data": {
+        "title": "نقشه داده",
+        "description": "نقشه داده",
+        "data_layers": "لایها داده ها"
+    },
+    "feature": {
+        "points": {
+            "description": "نقاط"
+        },
+        "paths": {
+            "description": "مسیرها"
+        },
+        "buildings": {
+            "description": "ساختمانها"
+        },
+        "boundaries": {
+            "description": "مرزها"
+        },
+        "rail": {
+            "tooltip": "راه آهن"
+        }
+    },
     "restore": {
         "heading": "شما تغییرات ذخیره نشده دارید",
         "description": "آیا مایلید تغییرات ذخیره نشده جلسه قبل را بازیابی کنید؟",
@@ -282,9 +309,12 @@
         "title": "ذخیره",
         "help": "ذخیره تغییرات در OpenStreetMap, آنها را برای دیگران قابل نمایش می سازد.",
         "no_changes": "تغییراتی برای دخیره نیست.",
-        "error": "هنگام تلاش برای ذخیره خطایی رخ داده است",
         "uploading": "در حال بارگذاری تغییرات در OpenStreetMap.",
-        "unsaved_changes": "شما تغییرات ذخیره نشده دارید"
+        "unsaved_changes": "شما تغییرات ذخیره نشده دارید",
+        "conflict": {
+            "previous": "قبلی >",
+            "next": "< بعد"
+        }
     },
     "success": {
         "edited_osm": "OSMویرایش شد!",
@@ -296,7 +326,8 @@
         "help_html": "تغییرات شما در نمای \"استاندارد\" در چند دقیقه قابل رؤیت است. سایر نما ها، و ویژگی های خاص، ممکن است بیشتر طول کشد\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>جزییات</a>).\n"
     },
     "confirm": {
-        "okay": "باشه"
+        "okay": "باشه",
+        "cancel": "لغو"
     },
     "splash": {
         "welcome": "به ویرایشگر ID OpenStreetMap خوش آمدید",
