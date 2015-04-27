@@ -218,7 +218,11 @@ iD.ui.Conflicts = function(context) {
 
         var entity = context.graph().hasEntity(id);
         if (entity) {
-            context.map().trimmedExtent(extent);
+            if (extent) {
+                context.map().trimmedExtent(extent);
+            } else {
+                context.map().zoomTo(entity);
+            }
             context.surface().selectAll(
                 iD.util.entityOrMemberSelector([entity.id], context.graph()))
                 .classed('hover', true);
