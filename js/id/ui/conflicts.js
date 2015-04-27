@@ -198,17 +198,31 @@ iD.ui.Conflicts = function(context) {
             .selectAll('input')
             .property('checked', function(d) { return d === datum; });
 
+        var extent = iD.geo.Extent(),
+            entity;
+
+        entity = context.graph().hasEntity(datum.id);
+        if (entity) extent._extend(entity.extent(context.graph()));
+
         datum.action();
-        zoomToEntity(datum.id);
+
+        entity = context.graph().hasEntity(datum.id);
+        if (entity) extent._extend(entity.extent(context.graph()));
+
+        zoomToEntity(datum.id, extent);
     }
 
-    function zoomToEntity(id) {
+    function zoomToEntity(id, extent) {
         context.surface().selectAll('.hover')
             .classed('hover', false);
 
         var entity = context.graph().hasEntity(id);
         if (entity) {
-            context.map().zoomTo(entity);
+            if (extent) {
+                context.map().trimmedExtent(extent);
+            } else {
+                context.map().zoomTo(entity);
+            }
             context.surface().selectAll(
                 iD.util.entityOrMemberSelector([entity.id], context.graph()))
                 .classed('hover', true);
