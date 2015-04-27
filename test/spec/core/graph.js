@@ -378,7 +378,7 @@ describe('iD.Graph', function() {
             expect(graph.entity(n2.id)).to.equal(n2);
         });
 
-        it("reverts the entity to the base version", function () {
+        it("reverts an updated entity to the base version", function () {
             var n1 = iD.Node({id: 'n' }),
                 n2 = n1.update({}),
                 graph = iD.Graph([n1]).replace(n2);
@@ -388,7 +388,16 @@ describe('iD.Graph', function() {
             expect(graph.entity('n')).to.equal(n1);
         });
 
-        it("reverts parentWays",  function () {
+        it("removes a new entity", function () {
+            var n1 = iD.Node({id: 'n' }),
+                graph = iD.Graph().replace(n1);
+
+            expect(graph.entity('n')).to.equal(n1);
+            graph = graph.revert(n1);
+            expect(graph.hasEntity('n')).to.be.undefined;
+        });
+
+        it("reverts updated parentWays",  function () {
             var n1 = iD.Node({id: 'n' }),
                 w1 = iD.Way({id: 'w', nodes: ['n']}),
                 w2 = w1.removeNode('n'),
@@ -399,7 +408,7 @@ describe('iD.Graph', function() {
             expect(graph.parentWays(graph.entity('n'))).to.eql([w1]);
         });
 
-        it("reverts parentRelations",  function () {
+        it("reverts updated parentRelations",  function () {
             var n1 = iD.Node({id: 'n' }),
                 r1 = iD.Relation({id: 'r', members: [{id: 'n'}]}),
                 r2 = r1.removeMembersWithID('n'),
@@ -408,6 +417,26 @@ describe('iD.Graph', function() {
             expect(graph.parentRelations(graph.entity('n'))).to.eql([]);
             graph = graph.revert(r2);
             expect(graph.parentRelations(graph.entity('n'))).to.eql([r1]);
+        });
+
+        it("removes new parentWays",  function () {
+            var n1 = iD.Node({id: 'n' }),
+                w1 = iD.Way({id: 'w', nodes: ['n']}),
+                graph = iD.Graph().replace(n1).replace(w1);
+
+            expect(graph.parentWays(graph.entity('n'))).to.eql([w1]);
+            graph = graph.revert(w1);
+            expect(graph.parentWays(graph.entity('n'))).to.eql([]);
+        });
+
+        it("removes new parentRelations",  function () {
+            var n1 = iD.Node({id: 'n' }),
+                r1 = iD.Relation({id: 'r', members: [{id: 'n'}]}),
+                graph = iD.Graph().replace(n1).replace(r1);
+
+            expect(graph.parentRelations(graph.entity('n'))).to.eql([r1]);
+            graph = graph.revert(r1);
+            expect(graph.parentRelations(graph.entity('n'))).to.eql([]);
         });
     });
 
