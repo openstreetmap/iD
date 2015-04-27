@@ -134,23 +134,30 @@ iD.modes.Save = function(context) {
             } else if (errors.length) {
                 showErrors();
             } else {
-                context.connection().putChangeset(
-                    history.changes(iD.actions.DiscardTags(history.difference())),
-                    e.comment,
-                    history.imageryUsed(),
-                    function(err, changeset_id) {
-                        if (err) {
-                            errors.push({
-                                msg: err.responseText,
-                                details: [ t('save.status_code', { code: err.status }) ]
-                            });
-                            showErrors();
-                        } else {
-                            loading.close();
-                            context.flush();
-                            success(e, changeset_id);
-                        }
-                    });
+                var changes = history.changes(iD.actions.DiscardTags(history.difference()));
+                if (changes.modified.length || changes.created.length || changes.deleted.length) {
+                    context.connection().putChangeset(
+                        changes,
+                        e.comment,
+                        history.imageryUsed(),
+                        function(err, changeset_id) {
+                            if (err) {
+                                errors.push({
+                                    msg: err.responseText,
+                                    details: [ t('save.status_code', { code: err.status }) ]
+                                });
+                                showErrors();
+                            } else {
+                                loading.close();
+                                context.flush();
+                                success(e, changeset_id);
+                            }
+                        });
+                } else {        // changes were insignificant or reverted by user
+                    loading.close();
+                    context.flush();
+                    cancel();
+                }
             }
         }
 
