@@ -251,13 +251,16 @@ iD.Graph.prototype = {
         });
     },
 
-    revert: function(entity) {
-        if (this.entities[entity.id] === this.base().entities[entity.id])
+    revert: function(id) {
+        var baseEntity = this.base().entities[id],
+            headEntity = this.entities[id];
+
+        if (headEntity === baseEntity)
             return this;
 
         return this.update(function() {
-            this._updateCalculated(entity, this.base().entities[entity.id]);
-            delete this.entities[entity.id];
+            this._updateCalculated(headEntity, baseEntity);
+            delete this.entities[id];
         });
     },
 

@@ -184,15 +184,14 @@ iD.modes.Save = function(context) {
                 .on('save', function() {
                     for (var i = 0; i < conflicts.length; i++) {
                         if (conflicts[i].chosen === 1) {  // user chose "keep theirs"
-                            var entity = context.entity(conflicts[i].id);
-                            if (entity.type === 'way') {
+                            var entity = context.hasEntity(conflicts[i].id);
+                            if (entity && entity.type === 'way') {
                                 var children = _.uniq(entity.nodes);
                                 for (var j = 0; j < children.length; j++) {
-                                    var child = context.entity(children[j]);
-                                    history.replace(iD.actions.Revert(child));
+                                    history.replace(iD.actions.Revert(children[j]));
                                 }
                             }
-                            history.replace(iD.actions.Revert(entity));
+                            history.replace(iD.actions.Revert(conflicts[i].id));
                         }
                     }
 
