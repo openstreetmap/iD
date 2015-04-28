@@ -85,7 +85,7 @@ iD.modes.Save = function(context) {
                         var a = localGraph.hasEntity(children[i]),
                             b = remoteGraph.hasEntity(children[i]);
 
-                        if (!a || !b || a.version !== b.version) return false;
+                        if (a && b && a.version !== b.version) return false;
                     }
                 }
 
