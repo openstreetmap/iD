@@ -1272,6 +1272,10 @@
             "value": "lighthouse"
         },
         {
+            "key": "man_made",
+            "value": "mast"
+        },
+        {
             "key": "tower:type",
             "value": "observation"
         },

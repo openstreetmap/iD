@@ -1,0 +1,21 @@
+{
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "broadcast tower",
+        "cell phone tower",
+        "cell tower",
+        "guyed tower",
+        "mobile phone tower",
+        "radio tower",
+        "television tower",
+        "transmission mast",
+        "transmission tower",
+        "tv tower"
+    ],
+    "tags": {
+        "man_made": "mast"
+    },
+    "name": "Radio Mast"
+}
