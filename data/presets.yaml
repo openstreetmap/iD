@@ -1564,6 +1564,9 @@ en:
       man_made/lighthouse:
         name: Lighthouse
         terms: "<translate with synonyms or related terms for 'Lighthouse', separated by commas>"
+      man_made/mast:
+        name: Radio Mast
+        terms: "<translate with synonyms or related terms for 'Radio Mast', separated by commas>"
       man_made/observation:
         name: Observation Tower
         terms: "<translate with synonyms or related terms for 'Observation Tower', separated by commas>"
@@ -1738,6 +1741,9 @@ en:
       place/city:
         name: City
         terms: "<translate with synonyms or related terms for 'City', separated by commas>"
+      place/farm:
+        name: Farm
+        terms: "<translate with synonyms or related terms for 'Farm', separated by commas>"
       place/hamlet:
         name: Hamlet
         terms: "<translate with synonyms or related terms for 'Hamlet', separated by commas>"

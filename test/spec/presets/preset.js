@@ -77,7 +77,7 @@ describe('iD.presets.Preset', function() {
         it("adds default tags of fields with matching geometry", function() {
             var field = iD.presets.Field('field', {key: 'building', geometry: 'area', default: 'yes'}),
                 preset = iD.presets.Preset('test', {fields: ['field']}, {field: field});
-            expect(preset.applyTags({}, 'area')).to.eql({building: 'yes'});
+            expect(preset.applyTags({}, 'area')).to.eql({area: 'yes', building: 'yes'});
         });
 
         it("adds no default tags of fields with non-matching geometry", function() {
@@ -86,15 +86,22 @@ describe('iD.presets.Preset', function() {
             expect(preset.applyTags({}, 'point')).to.eql({});
         });
 
-        context("with an area preset whose primary tag is not in areaKeys", function() {
-            var preset = iD.presets.Preset('test', {geometry: ['line', 'area'], tags: {highway: 'pedestrian'}});
+        context("for a preset with no tag in areaKeys", function() {
+            var preset = iD.presets.Preset('test', {geometry: ['line', 'area'], tags: {name: 'testname', highway: 'pedestrian'}});
 
-            it("adds no area=yes to non-areas", function() {
-                expect(preset.applyTags({}, 'line')).to.eql({highway: 'pedestrian'});
+            it("doesn't add area=yes to non-areas", function() {
+                expect(preset.applyTags({}, 'line')).to.eql({name: 'testname', highway: 'pedestrian'});
             });
 
             it("adds area=yes to areas", function() {
-                expect(preset.applyTags({}, 'area')).to.eql({highway: 'pedestrian', area: 'yes'});
+                expect(preset.applyTags({}, 'area')).to.eql({name: 'testname', highway: 'pedestrian', area: 'yes'});
+            });
+        });
+
+        context("for a preset with a tag in areaKeys", function() {
+            var preset = iD.presets.Preset('test', {geometry: ['area'], tags: {name: 'testname', natural: 'water'}});
+            it("doesn't add area=yes", function() {
+                expect(preset.applyTags({}, 'area')).to.eql({name: 'testname', natural: 'water'});
             });
         });
     });
@@ -109,6 +116,11 @@ describe('iD.presets.Preset', function() {
             var field = iD.presets.Field('field', {key: 'building', geometry: 'area', default: 'yes'}),
                 preset = iD.presets.Preset('test', {fields: ['field']}, {field: field});
             expect(preset.removeTags({building: 'yes'}, 'area')).to.eql({});
+        });
+
+        it('removes area=yes', function() {
+            var preset = iD.presets.Preset('test', {tags: {highway: 'pedestrian'}});
+            expect(preset.removeTags({highway: 'pedestrian', area: 'yes'}, 'area')).to.eql({});
         });
 
         it('preserves tags that do not match field default tags', function() {

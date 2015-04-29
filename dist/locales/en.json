@@ -2631,6 +2631,10 @@
                 "name": "Lighthouse",
                 "terms": ""
             },
+            "man_made/mast": {
+                "name": "Radio Mast",
+                "terms": "broadcast tower,cell phone tower,cell tower,guyed tower,mobile phone tower,radio tower,television tower,transmission mast,transmission tower,tv tower"
+            },
             "man_made/observation": {
                 "name": "Observation Tower",
                 "terms": "lookout tower,fire tower"
@@ -2861,6 +2865,10 @@
             },
             "place/city": {
                 "name": "City",
+                "terms": ""
+            },
+            "place/farm": {
+                "name": "Farm",
                 "terms": ""
             },
             "place/hamlet": {

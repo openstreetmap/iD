@@ -5398,6 +5398,27 @@
         },
         "name": "Lighthouse"
     },
+    "man_made/mast": {
+        "geometry": [
+            "point"
+        ],
+        "terms": [
+            "broadcast tower",
+            "cell phone tower",
+            "cell tower",
+            "guyed tower",
+            "mobile phone tower",
+            "radio tower",
+            "television tower",
+            "transmission mast",
+            "transmission tower",
+            "tv tower"
+        ],
+        "tags": {
+            "man_made": "mast"
+        },
+        "name": "Radio Mast"
+    },
     "man_made/observation": {
         "geometry": [
             "point",
@@ -6305,6 +6326,17 @@
             "place": "city"
         },
         "name": "City"
+    },
+    "place/farm": {
+        "icon": "farm",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "place": "farm"
+        },
+        "name": "Farm"
     },
     "place/hamlet": {
         "icon": "triangle-stroked",

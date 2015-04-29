@@ -1272,6 +1272,10 @@
             "value": "lighthouse"
         },
         {
+            "key": "man_made",
+            "value": "mast"
+        },
+        {
             "key": "tower:type",
             "value": "observation"
         },
@@ -1498,6 +1502,10 @@
         {
             "key": "place",
             "value": "city"
+        },
+        {
+            "key": "place",
+            "value": "farm"
         },
         {
             "key": "place",
