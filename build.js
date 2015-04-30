@@ -177,8 +177,6 @@ function validateCategoryPresets(categories, presets) {
 }
 
 function validatePresetFields(presets, fields) {
-    var presets = rp('presets.json'),
-        fields = rp('fields.json');
     _.forEach(presets, function(preset) {
         if (preset.fields) {
             preset.fields.forEach(function(field) {
