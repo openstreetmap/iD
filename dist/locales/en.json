@@ -2641,7 +2641,7 @@
             },
             "man_made/petroleum_well": {
                 "name": "Oil Well",
-                "terms": "drilling rig,oil derrick,oil drill,oil horse,oil rig,oil pump,pumpjack"
+                "terms": "drilling rig,oil derrick,oil drill,oil horse,oil rig,oil pump,petroleum well,pumpjack"
             },
             "man_made/pier": {
                 "name": "Pier",
