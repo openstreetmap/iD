@@ -23,8 +23,19 @@ TODO: turn this into a script.
 
 ### Update openstreetmap-website
 
+#### Setup remotes (one time only)
+
+- [ ] git remote add osmlab git@github.com:osmlab/openstreetmap-website.git
+- [ ] git remote add upstream git@github.com:openstreetmap/openstreetmap-website.git
+
+#### Sync master and update iD (every time)
+
+- [ ] git fetch --all
+- [ ] git checkout master
+- [ ] git reset --hard upstream/master
 - [ ] git checkout -b iD-A.B.C
 - [ ] rm -rf vendor/assets/iD/* && vendorer
-- [ ] git commit -a -m 'Update to iD vA.B.C'
+- [ ] git add .
+- [ ] git commit -m 'Update to iD vA.B.C'
 - [ ] git push osmlab
 - [ ] Open pull request
