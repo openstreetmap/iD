@@ -5434,6 +5434,25 @@
         },
         "name": "Observation Tower"
     },
+    "man_made/petroleum_well": {
+        "icon": "oil-well",
+        "geometry": [
+            "point"
+        ],
+        "terms": [
+            "drilling rig",
+            "oil derrick",
+            "oil drill",
+            "oil horse",
+            "oil rig",
+            "oil pump",
+            "pumpjack"
+        ],
+        "tags": {
+            "man_made": "petroleum_well"
+        },
+        "name": "Oil Well"
+    },
     "man_made/pier": {
         "geometry": [
             "line",

@@ -1570,6 +1570,9 @@ en:
       man_made/observation:
         name: Observation Tower
         terms: "<translate with synonyms or related terms for 'Observation Tower', separated by commas>"
+      man_made/petroleum_well:
+        name: Oil Well
+        terms: "<translate with synonyms or related terms for 'Oil Well', separated by commas>"
       man_made/pier:
         name: Pier
         terms: "<translate with synonyms or related terms for 'Pier', separated by commas>"

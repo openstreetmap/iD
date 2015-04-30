@@ -2639,6 +2639,10 @@
                 "name": "Observation Tower",
                 "terms": "lookout tower,fire tower"
             },
+            "man_made/petroleum_well": {
+                "name": "Oil Well",
+                "terms": "drilling rig,oil derrick,oil drill,oil horse,oil rig,oil pump,pumpjack"
+            },
             "man_made/pier": {
                 "name": "Pier",
                 "terms": ""
