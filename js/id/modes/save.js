@@ -52,10 +52,27 @@ iD.modes.Save = function(context) {
                 showErrors();
 
             } else {
+                var loadMore = [];
                 _.each(result.data, function(entity) {
                     remoteGraph.replace(entity);
                     toLoad = _.without(toLoad, entity.id);
+
+                    // Because loadMultiple doesn't download /full like loadEntity,
+                    // need to also load children that aren't already being checked..
+                    if (!entity.visible) return;
+                    if (entity.type === 'way') {
+                        loadMore.push.apply(loadMore,
+                            _.difference(entity.nodes, toCheck, toLoad, loadMore));
+                    } else if (entity.type === 'relation' && entity.isMultipolygon()) {
+                        loadMore.push.apply(loadMore,
+                            _.difference(_.pluck(entity.members, 'id'), toCheck, toLoad, loadMore));
+                    }
                 });
+
+                if (loadMore.length) {
+                    toLoad.push.apply(toLoad, loadMore);
+                    context.connection().loadMultiple(loadMore, loaded);
+                }
 
                 if (!toLoad.length) {
                     checkConflicts();
