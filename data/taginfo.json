@@ -1281,6 +1281,10 @@
         },
         {
             "key": "man_made",
+            "value": "mast"
+        },
+        {
+            "key": "man_made",
             "value": "pier"
         },
         {

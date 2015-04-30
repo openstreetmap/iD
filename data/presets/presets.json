@@ -5435,7 +5435,6 @@
         "name": "Observation Tower"
     },
     "man_made/petroleum_well": {
-        "icon": "oil-well",
         "geometry": [
             "point"
         ],
@@ -5450,7 +5449,7 @@
             "pumpjack"
         ],
         "tags": {
-            "man_made": "petroleum_well"
+            "man_made": "mast"
         },
         "name": "Oil Well"
     },
