@@ -10,13 +10,27 @@ iD.behavior.Draw = function(context) {
         closeTolerance = 4,
         tolerance = 12;
 
+
+    function keydown() {
+        if (d3.event && d3.event.shiftKey) {
+            context.surface()
+                .classed('behavior-draworthogonal', true);
+        }
+    }
+
+    function keyup() {
+        if (!d3.event || !d3.event.shiftKey) {
+            context.surface()
+                .classed('behavior-draworthogonal', false);
+        }
+    }
+
     function datum() {
         if (d3.event.altKey) return {};
         else return d3.event.target.__data__ || {};
     }
 
     function mousedown() {
-
         function point() {
             var p = context.container().node();
             return touchId !== null ? d3.touches(p).filter(function(p) {
@@ -112,6 +126,12 @@ iD.behavior.Draw = function(context) {
         d3.select(document)
             .call(keybinding);
 
+        d3.select(window)
+            .on('keydown.select', keydown)
+            .on('keyup.select', keyup);
+
+        keydown();
+
         return draw;
     }
 
@@ -129,8 +149,13 @@ iD.behavior.Draw = function(context) {
             .on('mousedown.draw', null)
             .on('mousemove.draw', null);
 
+        keyup();
+
         d3.select(window)
-            .on('mouseup.draw', null);
+            .on('mouseup.draw', null)
+            .on('keydown.select', null)
+            .on('keyup.select', null);
+
 
         d3.select(document)
             .call(keybinding.off);

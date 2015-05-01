@@ -1451,6 +1451,12 @@ g.turn circle {
     cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
 }
 
+.mode-add-line  .behavior-draworthogonal,
+.mode-add-area  .behavior-draworthogonal {
+    cursor: crosshair; /* Opera */
+    cursor: url(img/cursor-draw-square.png) 9 9, crosshair; /* FF */
+}
+
 .mode-draw-line .way.hover,
 .mode-draw-area .way.hover,
 .mode-add-line  .way.hover,
