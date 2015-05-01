@@ -170,6 +170,22 @@ input[type=email] {
     text-overflow: ellipsis;
 }
 
+option {
+    background-color: white;
+    border:1px solid #ccc;
+    padding:5px 15px;
+    height:20px;
+    width: 100%;
+    border-radius:4px;
+    text-overflow: ellipsis;
+}
+
+select {
+    width: 100%;
+}
+
+.hidden { display: none; }
+
 textarea:focus,
 input:focus {
     background-color: #F1F1F1;

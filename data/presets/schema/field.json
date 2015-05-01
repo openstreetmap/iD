@@ -64,7 +64,8 @@
                 "localized",
                 "wikipedia",
                 "typeCombo",
-                "restrictions"
+                "restrictions",
+                "mcombo"
             ],
             "required": true
         },
