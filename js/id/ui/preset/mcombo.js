@@ -7,9 +7,9 @@ iD.ui.preset.typeMCombo = function(field, context) {
         input;
 
     function mcombo(selection) {
-        console.log("!mcombo!");
-        
-        var combobox = d3.combobox();
+        console.log("!mcombo");
+
+        // var combobox = d3.combobox();
 
         input = selection.selectAll('input')
             .data([0]);
@@ -22,7 +22,7 @@ iD.ui.preset.typeMCombo = function(field, context) {
         if (optstrings) { enter.attr('readonly', 'readonly'); }
 
         input
-            .call(combobox)
+            //.call(combobox)
             .on('change', change)
             .on('blur', change)
             .each(function() {
@@ -48,11 +48,14 @@ iD.ui.preset.typeMCombo = function(field, context) {
                 }
             });
 
+
+
         function stringsLoaded() {
             var keys = _.keys(strings),
                 strs = [],
                 placeholders;
 
+            /*    
             combobox.data(keys.map(function(k) {
                 var s = strings[k],
                     o = {};
@@ -60,10 +63,49 @@ iD.ui.preset.typeMCombo = function(field, context) {
                 if (s.length < 20) { strs.push(s); }
                 return o;
             }));
+            */
+
+            var data=keys.map(function(k) {
+                var s = strings[k],
+                    o = {};
+                o.title = o.value = s;
+                if (s.length < 20) { strs.push(s); }
+                return o;
+            });
 
             placeholders = strs.length > 1 ? strs : keys;
             input.attr('placeholder', field.placeholder() ||
                 (placeholders.slice(0, 3).join(', ') + '...'));
+
+            var combobox = $("<select class='hidden' multiple='multiple'></select>").attr("id","blabla");
+             // .attr("id", id).attr("name", name);
+
+            $.each(keys, function (i, o) {
+                combobox.append("<option>" + o + "</option>");
+            });
+
+            input.on('focus', function() {
+                console.log("input focus");
+                $(combobox).removeClass("hidden");
+                combobox.focus();
+            });
+
+
+            $(selection[0]).append(combobox);
+
+            console.log("cbox",combobox);
+      
+            console.log("keys",keys);
+            console.log("data",data);
+
+            combobox.on("blur",function() {
+                console.log("combobox blur");
+                $(combobox).addClass("hidden");
+            }).on("change",function() {
+                console.log("combobox changed");
+            }).SumoSelect();
+
+
         }
     }
 
