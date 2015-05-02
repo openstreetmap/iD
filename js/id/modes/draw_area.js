@@ -1,7 +1,8 @@
-iD.modes.DrawArea = function(context, wayId, baseGraph) {
+iD.modes.DrawArea = function(context, wayId, baseGraph, option) {
     var mode = {
         button: 'area',
-        id: 'draw-area'
+        id: 'draw-area',
+        option: option
     };
 
     var behavior;

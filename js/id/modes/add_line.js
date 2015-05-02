@@ -1,10 +1,11 @@
-iD.modes.AddLine = function(context) {
+iD.modes.AddLine = function(context, option) {
     var mode = {
         id: 'add-line',
         button: 'line',
         title: t('modes.add_line.title'),
         description: t('modes.add_line.description'),
-        key: '2'
+        key: '2',
+        option: option
     };
 
     var behavior = iD.behavior.AddWay(context)
@@ -23,7 +24,7 @@ iD.modes.AddLine = function(context) {
             iD.actions.AddEntity(way),
             iD.actions.AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawLine(context, way.id, baseGraph));
+        context.enter(iD.modes.DrawLine(context, way.id, baseGraph, mode.option));
     }
 
     function startFromWay(loc, edge) {
@@ -37,7 +38,7 @@ iD.modes.AddLine = function(context) {
             iD.actions.AddVertex(way.id, node.id),
             iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
 
-        context.enter(iD.modes.DrawLine(context, way.id, baseGraph));
+        context.enter(iD.modes.DrawLine(context, way.id, baseGraph, mode.option));
     }
 
     function startFromNode(node) {
@@ -48,7 +49,7 @@ iD.modes.AddLine = function(context) {
             iD.actions.AddEntity(way),
             iD.actions.AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawLine(context, way.id, baseGraph));
+        context.enter(iD.modes.DrawLine(context, way.id, baseGraph, mode.option));
     }
 
     mode.enter = function() {

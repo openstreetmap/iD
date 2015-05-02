@@ -1,7 +1,8 @@
-iD.modes.DrawLine = function(context, wayId, baseGraph, affix) {
+iD.modes.DrawLine = function(context, wayId, baseGraph, affix, option) {
     var mode = {
         button: 'line',
-        id: 'draw-line'
+        id: 'draw-line',
+        option: option
     };
 
     var behavior;

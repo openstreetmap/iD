@@ -7,6 +7,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             'operations.continue.annotation.') + context.geometry(wayId)),
         draw = iD.behavior.Draw(context);
 
+
     var startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0,
         start = iD.Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
         end = iD.Node({loc: context.map().mouseCoordinates()}),
@@ -105,6 +106,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     // Accept the current position of the temporary node and continue drawing.
     drawWay.add = function(loc) {
+console.log('behavior.DrawWay.add: got click');
 
         // prevent duplicate nodes
         var last = context.hasEntity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);

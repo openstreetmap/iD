@@ -1,10 +1,11 @@
-iD.modes.AddArea = function(context) {
+iD.modes.AddArea = function(context, option) {
     var mode = {
         id: 'add-area',
         button: 'area',
         title: t('modes.add_area.title'),
         description: t('modes.add_area.description'),
-        key: '3'
+        key: '3',
+        option: option
     };
 
     var behavior = iD.behavior.AddWay(context)
@@ -25,7 +26,7 @@ iD.modes.AddArea = function(context) {
             iD.actions.AddVertex(way.id, node.id),
             iD.actions.AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawArea(context, way.id, graph));
+        context.enter(iD.modes.DrawArea(context, way.id, graph, mode.option));
     }
 
     function startFromWay(loc, edge) {
@@ -40,7 +41,7 @@ iD.modes.AddArea = function(context) {
             iD.actions.AddVertex(way.id, node.id),
             iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
 
-        context.enter(iD.modes.DrawArea(context, way.id, graph));
+        context.enter(iD.modes.DrawArea(context, way.id, graph, mode.option));
     }
 
     function startFromNode(node) {
@@ -52,7 +53,7 @@ iD.modes.AddArea = function(context) {
             iD.actions.AddVertex(way.id, node.id),
             iD.actions.AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawArea(context, way.id, graph));
+        context.enter(iD.modes.DrawArea(context, way.id, graph, mode.option));
     }
 
     mode.enter = function() {
