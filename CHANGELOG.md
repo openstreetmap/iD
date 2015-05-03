@@ -1,3 +1,7 @@
+## 1.7.2
+* Fix for 404 Error caused by duplicates in multi-fetch node request (#2626)
+* Fix oil well preset (#2621)
+
 ## 1.7.1
 * Add oil well preset (#2618)
 * Add radio mast preset (#2613)
