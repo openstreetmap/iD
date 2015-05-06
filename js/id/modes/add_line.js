@@ -9,22 +9,30 @@ iD.modes.AddLine = function(context, option) {
     };
 
     var behavior = iD.behavior.AddWay(context)
-        .tail(t('modes.add_line.tail'))
-        .on('start', start)
-        .on('startFromWay', startFromWay)
-        .on('startFromNode', startFromNode);
+            .tail(t('modes.add_line.tail'))
+            .on('start', start)
+            .on('startFromWay', startFromWay)
+            .on('startFromNode', startFromNode);
 
     function start(loc) {
         var baseGraph = context.graph(),
             node = iD.Node({loc: loc}),
             way = iD.Way();
 
-        context.perform(
-            iD.actions.AddEntity(node),
-            iD.actions.AddEntity(way),
-            iD.actions.AddVertex(way.id, node.id));
-
-        context.enter(iD.modes.DrawLine(context, way.id, baseGraph, mode.option));
+        if (mode.option === 'orthogonal') {
+            context.perform(
+                iD.actions.AddEntity(node),
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(way.id, node.id));
+            context.enter(iD.modes.DrawArea(context, way.id, baseGraph, mode.option));
+        } else {
+            context.perform(
+                iD.actions.AddEntity(node),
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id));
+            context.enter(iD.modes.DrawLine(context, way.id, baseGraph, undefined, mode.option));
+        }
     }
 
     function startFromWay(loc, edge) {
@@ -32,24 +40,40 @@ iD.modes.AddLine = function(context, option) {
             node = iD.Node({loc: loc}),
             way = iD.Way();
 
-        context.perform(
-            iD.actions.AddEntity(node),
-            iD.actions.AddEntity(way),
-            iD.actions.AddVertex(way.id, node.id),
-            iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
-
-        context.enter(iD.modes.DrawLine(context, way.id, baseGraph, mode.option));
+        if (mode.option === 'orthogonal') {
+            context.perform(
+                iD.actions.AddEntity(node),
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
+            context.enter(iD.modes.DrawArea(context, way.id, baseGraph, mode.option));
+        } else {
+            context.perform(
+                iD.actions.AddEntity(node),
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
+            context.enter(iD.modes.DrawLine(context, way.id, baseGraph, undefined, mode.option));
+        }
     }
 
     function startFromNode(node) {
-        var baseGraph = context.graph(),
+        var graph = context.graph(),
             way = iD.Way();
 
-        context.perform(
-            iD.actions.AddEntity(way),
-            iD.actions.AddVertex(way.id, node.id));
-
-        context.enter(iD.modes.DrawLine(context, way.id, baseGraph, mode.option));
+        if (mode.option === 'orthogonal') {
+            context.perform(
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id),
+                iD.actions.AddVertex(way.id, node.id));
+            context.enter(iD.modes.DrawArea(context, way.id, baseGraph, mode.option));
+        } else {
+            context.perform(
+                iD.actions.AddEntity(way),
+                iD.actions.AddVertex(way.id, node.id));
+            context.enter(iD.modes.DrawLine(context, way.id, baseGraph, undefined, mode.option));
+        }
     }
 
     mode.enter = function() {
@@ -57,6 +81,7 @@ iD.modes.AddLine = function(context, option) {
     };
 
     mode.exit = function() {
+        mode.option = option;  // reset
         context.uninstall(behavior);
     };
 

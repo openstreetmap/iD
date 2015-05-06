@@ -61,6 +61,7 @@ iD.modes.AddArea = function(context, option) {
     };
 
     mode.exit = function() {
+        mode.option = option;  // reset
         context.uninstall(behavior);
     };
 

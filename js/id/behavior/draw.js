@@ -7,6 +7,7 @@ iD.behavior.Draw = function(context) {
             .on('hover', context.ui().sidebar.hover),
         tail = iD.behavior.Tail(),
         edit = iD.behavior.Edit(context),
+        startSegment = [],
         closeTolerance = 4,
         tolerance = 12;
 
@@ -25,9 +26,10 @@ iD.behavior.Draw = function(context) {
         }
     }
 
-    function datum() {
+    function datum(p) {
         if (d3.event.altKey) return {};
-        else return d3.event.target.__data__ || {};
+        var target = p ? document.elementFromPoint(p[0], p[1]) : d3.event.target;
+        return (target && target.__data__) || {};
     }
 
     function mousedown() {
@@ -38,8 +40,9 @@ iD.behavior.Draw = function(context) {
             })[0] : d3.mouse(p);
         }
 
-        if (d3.event.shiftKey) {
-            context.mode().option = 'orthogonal';
+        var mode = context.mode();
+        if (d3.event.shiftKey && (mode.id === 'add-area' || mode.id === 'add-line')) {
+            mode.option = 'orthogonal';
             d3.event.preventDefault();
             d3.event.stopPropagation();
             click();
@@ -83,8 +86,12 @@ iD.behavior.Draw = function(context) {
         event.move(datum());
     }
 
+    function needsSegment() {
+        return context.mode().option === 'orthogonal' && startSegment.length < 2;
+    }
+
     function mouseup() {
-        if (context.mode().option === 'orthogonal') click();
+        if (needsSegment()) click();
     }
 
     function click() {
@@ -92,13 +99,17 @@ iD.behavior.Draw = function(context) {
         if (d.type === 'way') {
             var choice = iD.geo.chooseEdge(context.childNodes(d), context.mouse(), context.projection),
                 edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
+            if (needsSegment()) startSegment.push(choice.loc);
             event.clickWay(choice.loc, edge);
 
         } else if (d.type === 'node') {
+            if (needsSegment()) startSegment.push(d.loc);
             event.clickNode(d);
 
         } else {
-            event.click(context.map().mouseCoordinates());
+            var loc = context.map().mouseCoordinates();
+            if (needsSegment()) startSegment.push(loc);
+            event.click(loc);
         }
     }
 
@@ -175,6 +186,12 @@ iD.behavior.Draw = function(context) {
 
     draw.tail = function(_) {
         tail.text(_);
+        return draw;
+    };
+
+    draw.startSegment = function(_) {
+        if (!arguments.length) return startSegment;
+        startSegment = _ || [];
         return draw;
     };
 

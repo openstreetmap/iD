@@ -1,6 +1,6 @@
 iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     var way = context.entity(wayId),
-        isArea = context.geometry(wayId) === 'area',
+        isArea = context.geometry(wayId) === 'area' || mode.option === 'orthogonal',
         finished = false,
         annotation = t((way.isDegenerate() ?
             'operations.start.annotation.' :
@@ -52,13 +52,23 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     }
 
     var drawWay = function(surface) {
-        draw.on('move', move)
+        draw
+            .on('move', move)
             .on('click', drawWay.add)
             .on('clickWay', drawWay.addWay)
             .on('clickNode', drawWay.addNode)
             .on('undo', context.undo)
             .on('cancel', drawWay.cancel)
             .on('finish', drawWay.finish);
+
+        if (mode.option === 'orthogonal') {
+            var seg = [start.loc];
+            if (way.nodes.length > 2) {
+                var next = context.entity(way.nodes[1]);
+                seg.push(next.loc);
+            }
+            draw.startSegment(seg);
+        }
 
         context.map()
             .dblclickEnable(false)
@@ -106,8 +116,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     // Accept the current position of the temporary node and continue drawing.
     drawWay.add = function(loc) {
-console.log('behavior.DrawWay.add: got click');
-
         // prevent duplicate nodes
         var last = context.hasEntity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
         if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
