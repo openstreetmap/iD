@@ -982,7 +982,7 @@
                     "3": "3: Rutschige Oberfläche, große Hindernisse, enge Haarnadelkurven",
                     "4": "4: Lockere Oberfläche oder Felsbrocken, gefährliche Haarnadelkurven",
                     "5": "5: Maximale Schwierigkeit, Geröllfelder, Erdrutsche",
-                    "6": "6: Nicht befahrbar ausgenommen durch die allerbesten Mountain Biker"
+                    "6": "6: Nicht befahrbar, außer durch die allerbesten Mountain-Biker"
                 }
             },
             "mtb/scale/imba": {
@@ -990,7 +990,7 @@
                 "placeholder": "Einfach, Mittel, Schwierig ...",
                 "options": {
                     "0": "Am Einfachsten (weißer Kreis)",
-                    "1": "einfach (grüner Kreis)",
+                    "1": "Einfach (grüner Kreis)",
                     "2": "Mittel (blaues Quadrat)",
                     "3": "Schwierig (schwarze Raute)",
                     "4": "Sehr schwierig (doppelte schwarze Raute)"
@@ -1000,9 +1000,9 @@
                 "label": "Mountain Bike Bergauf-Hinderniss",
                 "placeholder": "0, 1, 2, 3 ...",
                 "options": {
-                    "0": "0: Durschnittliche Steigung <10%, Kies/verdichtete Erde, keine Hindernisse",
+                    "0": "0: Durchschnittliche Steigung <10%, Kies/verdichtete Erde, keine Hindernisse",
                     "1": "1: Durchschnittliche Steigung <15%, Kies/verdichtete Erde, wenige kleine Hindernisse",
-                    "2": "2: Durchschnittliche Steigung <20%, stabiel Oberfläche, fautgroße Steine/Wurzeln",
+                    "2": "2: Durchschnittliche Steigung <20%, stabile Oberfläche, faustgroße Steine/Wurzeln",
                     "3": "3: Durchschnittliche Steigung <25%, unterschiedliche Oberfläche, faustgroße Steine/Wurzeln",
                     "4": "4: Durchschnittliche Steigung <30%, schlechter Zustand, große Steine/Zweige",
                     "5": "5: sehr steig, Fahrrad muss generell geschoben oder getragen werden"
@@ -1076,7 +1076,7 @@
                     "novice": "Anfänger (Unterricht)",
                     "easy": "Einfach (grüner Kreis)",
                     "intermediate": "Mittel (blaues Quadrat)",
-                    "advanced": "fortgeschritten (schwarze Raute)",
+                    "advanced": "Fortgeschritten (schwarze Raute)",
                     "expert": "Experte (doppelte schwarze Raute)",
                     "freeride": "Variantenabfahrt (abseits der Piste)",
                     "extreme": "Extrem (Kletterausrüstung benötigt)"
@@ -1216,7 +1216,7 @@
                     "isolated": "In Raucherzonen, baulich getrennt",
                     "outside": "Im Freien erlaubt",
                     "yes": "Überall erlaubt",
-                    "dedicated": "Für Raucher besteimmt (z.B.: Raucherklub)"
+                    "dedicated": "Für Raucher bestimmt (z.B.: Raucherklub)"
                 }
             },
             "smoothness": {
@@ -1305,7 +1305,7 @@
                 "options": {
                     "grade1": "Fest: befestigt oder sehr kompakte harte Oberfläche",
                     "grade2": "Großteils Fest: Kies/Stein gemischt mit etwas weichem Material",
-                    "grade3": "Gleichmäßige Mischung von harten und weichem Material",
+                    "grade3": "Gleichmäßige Mischung von hartem und weichem Material",
                     "grade4": "Großteils weich: Erde/Sand/Gras gemischt mit etwas hartem Material",
                     "grade5": "Weiche: Erde/Sand/Gras"
                 }
@@ -1315,7 +1315,7 @@
                 "placeholder": "Ausgezeichnet, Gut, Schlecht ...",
                 "options": {
                     "excellent": "Ausgezeichnet: unmissverständlicher Weg oder überall Markierungen",
-                    "good": "Gut: sicherbare Markierungen, müssen teilweise gesucht werden",
+                    "good": "Gut: sichtbare Markierungen, müssen teilweise gesucht werden",
                     "intermediate": "Mittelmäßig: Wenige Markierungen, Weg großteils sichtbar",
                     "bad": "Schlecht: Keine Markierungen, Weg teilweise unsichtbar oder nicht vorhanden",
                     "horrible": "Schrecklich: oft kein Weg, teilweise Orientierungserfahrung benötigt",
