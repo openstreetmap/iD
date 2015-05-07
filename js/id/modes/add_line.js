@@ -25,14 +25,13 @@ iD.modes.AddLine = function(context, option) {
                 iD.actions.AddEntity(way),
                 iD.actions.AddVertex(way.id, node.id),
                 iD.actions.AddVertex(way.id, node.id));
-            context.enter(iD.modes.DrawArea(context, way.id, baseGraph, mode.option));
         } else {
             context.perform(
                 iD.actions.AddEntity(node),
                 iD.actions.AddEntity(way),
                 iD.actions.AddVertex(way.id, node.id));
-            context.enter(iD.modes.DrawLine(context, way.id, baseGraph, undefined, mode.option));
         }
+        context.enter(iD.modes.DrawLine(context, way.id, baseGraph, undefined, mode.option));
     }
 
     function startFromWay(loc, edge) {
@@ -47,15 +46,14 @@ iD.modes.AddLine = function(context, option) {
                 iD.actions.AddVertex(way.id, node.id),
                 iD.actions.AddVertex(way.id, node.id),
                 iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
-            context.enter(iD.modes.DrawArea(context, way.id, baseGraph, mode.option));
         } else {
             context.perform(
                 iD.actions.AddEntity(node),
                 iD.actions.AddEntity(way),
                 iD.actions.AddVertex(way.id, node.id),
                 iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
-            context.enter(iD.modes.DrawLine(context, way.id, baseGraph, undefined, mode.option));
         }
+        context.enter(iD.modes.DrawLine(context, way.id, baseGraph, undefined, mode.option));
     }
 
     function startFromNode(node) {
@@ -67,13 +65,12 @@ iD.modes.AddLine = function(context, option) {
                 iD.actions.AddEntity(way),
                 iD.actions.AddVertex(way.id, node.id),
                 iD.actions.AddVertex(way.id, node.id));
-            context.enter(iD.modes.DrawArea(context, way.id, baseGraph, mode.option));
         } else {
             context.perform(
                 iD.actions.AddEntity(way),
                 iD.actions.AddVertex(way.id, node.id));
-            context.enter(iD.modes.DrawLine(context, way.id, baseGraph, undefined, mode.option));
         }
+        context.enter(iD.modes.DrawLine(context, way.id, baseGraph, undefined, mode.option));
     }
 
     mode.enter = function() {

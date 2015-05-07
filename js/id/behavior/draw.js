@@ -26,10 +26,25 @@ iD.behavior.Draw = function(context) {
         }
     }
 
-    function datum(p) {
-        if (d3.event.altKey) return {};
-        var target = p ? document.elementFromPoint(p[0], p[1]) : d3.event.target;
-        return (target && target.__data__) || {};
+    // Depending on mode option, return an array of touch targets:
+    //   [{ entity: entity, loc: [lon,lat] }]
+    // There will normally be a singular touch target at mouseLoc,
+    //   unless we're in a special drawing mode.
+    function getTargets() {
+        var mouseLoc = context.map().mouseCoordinates();
+        if (d3.event.altKey) return [{ entity: null, loc: mouseLoc }];
+
+        var points;
+        if (context.mode().option === 'orthogonal' && startSegment.length === 2) {
+            points = [[300, 300], [250,300]];
+            return _.map(points, function(p) {
+                var target = document.elementFromPoint(p[0], p[1]);
+                return { entity: target && target.__data__, loc: context.projection.invert(p) };
+            });
+
+        } else {
+            return [{ entity: d3.event.target.__data__, loc: mouseLoc }];
+        }
     }
 
     function mousedown() {
@@ -83,7 +98,7 @@ iD.behavior.Draw = function(context) {
     }
 
     function mousemove() {
-        event.move(datum());
+        event.move(getTargets());
     }
 
     function needsSegment() {
@@ -95,21 +110,26 @@ iD.behavior.Draw = function(context) {
     }
 
     function click() {
-        var d = datum();
-        if (d.type === 'way') {
-            var choice = iD.geo.chooseEdge(context.childNodes(d), context.mouse(), context.projection),
-                edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
-            if (needsSegment()) startSegment.push(choice.loc);
-            event.clickWay(choice.loc, edge);
+        var targets = getTargets();
+        for (var i = 0; i < targets.length; i++) {
+            var more = (i !== targets.length - 1),
+                d = targets[i],
+                e = d.entity;
 
-        } else if (d.type === 'node') {
-            if (needsSegment()) startSegment.push(d.loc);
-            event.clickNode(d);
+            if (e && e.type === 'way') {
+                var choice = iD.geo.chooseEdge(context.childNodes(e), context.mouse(), context.projection),
+                    edge = [e.nodes[choice.index - 1], e.nodes[choice.index]];
+                if (needsSegment()) startSegment.push(choice.loc);
+                event.clickWay(choice.loc, edge, more);
 
-        } else {
-            var loc = context.map().mouseCoordinates();
-            if (needsSegment()) startSegment.push(loc);
-            event.click(loc);
+            } else if (e && e.type === 'node') {
+                if (needsSegment()) startSegment.push(e.loc);
+                event.clickNode(e, more);
+
+            } else {
+                if (needsSegment()) startSegment.push(d.loc);
+                event.click(d.loc, more);
+            }
         }
     }
 

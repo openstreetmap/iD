@@ -1,23 +1,48 @@
 iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     var way = context.entity(wayId),
-        isArea = context.geometry(wayId) === 'area' || mode.option === 'orthogonal',
+        isClosed = way.isClosed(),
+        isDegenerate = way.isDegenerate(),
+        isReverse = typeof index !== 'undefined',
         finished = false,
-        annotation = t((way.isDegenerate() ?
+        annotation = t((isDegenerate ?
             'operations.start.annotation.' :
             'operations.continue.annotation.') + context.geometry(wayId)),
         draw = iD.behavior.Draw(context);
 
 
-    var startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0,
+    // var startIndex = isReverse ? 0 : way.nodes.length - 1,
+    //     endIndex = isReverse ? way.nodes.length - 1 : 0,
+    //     // start = iD.Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
+    //     startNode = context.entity(way.nodes[startIndex]),
+    //     endNode = isClosed ? context.entity(way.nodes[endIndex]) : null,
+    //     addNodes = [ iD.Node({ loc: context.map().mouseCoordinates() }) ];
+    //     // segment;
+
+    // if (endNode && mode.option === 'orthogonal' && way.nodes.length > 2) {
+    //     addNodes.push(iD.Node({ loc: endNode.loc }));
+    // }
+
+    // var f = context[isDegenerate ? 'replace' : 'perform'],
+    //     actions = [];
+
+    // _.each(addNodes, function(node) {
+    //     actions.push(iD.actions.AddEntity(node));
+    //     actions.push(iD.actions.AddVertex(wayId, node.id, index));
+    // });
+    // actions.push(annotation);
+    // f.apply(context, actions);
+
+
+    var startIndex = isReverse ? 0 : way.nodes.length - 1,
         start = iD.Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
         end = iD.Node({loc: context.map().mouseCoordinates()}),
         segment = iD.Way({
-            nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
-            tags: _.clone(way.tags)
+            nodes: isReverse ? [end.id, start.id] : [start.id, end.id]
+            // tags: _.clone(way.tags)
         });
 
     var f = context[way.isDegenerate() ? 'replace' : 'perform'];
-    if (isArea) {
+    if (isClosed) {
         f(iD.actions.AddEntity(end),
             iD.actions.AddVertex(wayId, end.id, index));
     } else {
@@ -26,15 +51,33 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             iD.actions.AddEntity(segment));
     }
 
-    function move(datum) {
-        var loc;
 
-        if (datum.type === 'node' && datum.id !== end.id) {
-            loc = datum.loc;
-        } else if (datum.type === 'way' && datum.id !== segment.id) {
-            loc = iD.geo.chooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
-        } else {
-            loc = context.map().mouseCoordinates();
+
+    function move(targets) {
+        // // for (var i = 0; i < targets.length && i < addNodes.length; i++) {
+        //     var snapTo = targets[0].entity,
+        //         loc = targets[0].loc;
+
+        //     // if (snapTo) {
+        //     //     if (datum.type === 'node' && datum.id !== id) {
+        //     //         loc = datum.loc;
+        //     //     } else if (datum.type === 'way' && datum.id !== segment.id) {
+        //     //         loc = iD.geo.chooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
+        //     //     }
+        //     // }
+
+        //     context.replace(iD.actions.MoveNode(id, loc));
+        // // }
+
+        var datum = targets[0].entity,
+            loc = targets[0].loc;
+
+        if (datum) {
+            if (datum.type === 'node' && datum.id !== end.id) {
+                loc = datum.loc;
+            } else if (datum.type === 'way' && datum.id !== segment.id) {
+                loc = iD.geo.chooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
+            }
         }
 
         context.replace(iD.actions.MoveNode(end.id, loc));
@@ -42,13 +85,16 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     function undone() {
         finished = true;
+        context.pop();
         context.enter(iD.modes.Browse(context));
     }
 
     function setActiveElements() {
-        var active = isArea ? [wayId, end.id] : [segment.id, start.id, end.id];
+        var active = isClosed ? [wayId, end.id] : [segment.id, start.id, end.id];
         context.surface().selectAll(iD.util.entitySelector(active))
             .classed('active', true);
+        // context.surface().selectAll(iD.util.entitySelector([way.id]))
+            // .classed('active', true);
     }
 
     var drawWay = function(surface) {
@@ -99,7 +145,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     function ReplaceTemporaryNode(newNode) {
         return function(graph) {
-            if (isArea) {
+            if (isClosed) {
                 return graph
                     .replace(way.addNode(newNode.id, index))
                     .remove(end);
@@ -115,9 +161,9 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     }
 
     // Accept the current position of the temporary node and continue drawing.
-    drawWay.add = function(loc) {
+    drawWay.add = function(loc, more) {
         // prevent duplicate nodes
-        var last = context.hasEntity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
+        var last = context.hasEntity(way.nodes[way.nodes.length - (isClosed ? 2 : 1)]);
         if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
 
         var newNode = iD.Node({loc: loc});
@@ -127,19 +173,20 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             ReplaceTemporaryNode(newNode),
             annotation);
 
-        finished = true;
-        context.enter(mode);
+        if (!more) {
+            finished = true;
+            context.enter(mode);
+        }
     };
 
     // Connect the way to an existing way.
-    drawWay.addWay = function(loc, edge) {
+    drawWay.addWay = function(loc, edge, more) {
         var previousEdge = startIndex ?
             [way.nodes[startIndex], way.nodes[startIndex - 1]] :
             [way.nodes[0], way.nodes[1]];
 
         // Avoid creating duplicate segments
-        if (!isArea && iD.geo.edgeEqual(edge, previousEdge))
-            return;
+        if (!isClosed && iD.geo.edgeEqual(edge, previousEdge)) return;
 
         var newNode = iD.Node({ loc: loc });
 
@@ -148,12 +195,14 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             ReplaceTemporaryNode(newNode),
             annotation);
 
-        finished = true;
-        context.enter(mode);
+        if (!more) {
+            finished = true;
+            context.enter(mode);
+        }
     };
 
     // Connect the way to an existing node and continue drawing.
-    drawWay.addNode = function(node) {
+    drawWay.addNode = function(node, more) {
 
         // Avoid creating duplicate segments
         if (way.areAdjacent(node.id, way.nodes[way.nodes.length - 1])) return;
@@ -162,12 +211,12 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             ReplaceTemporaryNode(node),
             annotation);
 
-        finished = true;
-        context.enter(mode);
+        if (!more) {
+            finished = true;
+            context.enter(mode);
+        }
     };
 
-    // Finish the draw operation, removing the temporary node. If the way has enough
-    // nodes to be valid, it's selected. Otherwise, return to browse mode.
     drawWay.finish = function() {
         context.pop();
         finished = true;

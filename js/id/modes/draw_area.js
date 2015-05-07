@@ -17,11 +17,11 @@ iD.modes.DrawArea = function(context, wayId, baseGraph, option) {
 
         var addNode = behavior.addNode;
 
-        behavior.addNode = function(node) {
+        behavior.addNode = function(node, more) {
             if (node.id === headId || node.id === tailId) {
                 behavior.finish();
             } else {
-                addNode(node);
+                addNode(node, more);
             }
         };
 

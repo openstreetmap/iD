@@ -12,16 +12,16 @@ iD.modes.DrawLine = function(context, wayId, baseGraph, affix, option) {
             index = (affix === 'prefix') ? 0 : undefined,
             headId = (affix === 'prefix') ? way.first() : way.last();
 
-        behavior = iD.behavior.DrawWay(context, wayId, index, mode, baseGraph)
+        behavior = iD.behavior.DrawWay(context, wayId, (option === 'orthogonal' ? -1 : index), mode, baseGraph)
             .tail(t('modes.draw_line.tail'));
 
         var addNode = behavior.addNode;
 
-        behavior.addNode = function(node) {
+        behavior.addNode = function(node, more) {
             if (node.id === headId) {
                 behavior.finish();
             } else {
-                addNode(node);
+                addNode(node, more);
             }
         };
 
