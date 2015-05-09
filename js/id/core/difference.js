@@ -10,7 +10,7 @@ iD.Difference = function(base, head) {
     var changes = {}, length = 0;
 
     function changed(h, b) {
-        return !_.isEqual(_.omit(h, 'v'), _.omit(b, 'v'));
+        return h !== b && !_.isEqual(_.omit(h, 'v'), _.omit(b, 'v'));
     }
 
     _.each(head.entities, function(h, id) {
