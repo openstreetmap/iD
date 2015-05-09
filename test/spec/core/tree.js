@@ -56,6 +56,21 @@ describe("iD.Tree", function() {
 
             expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), graph)).to.eql([relation]);
         });
+
+        it("adjusts entities that are force-rebased", function() {
+            var graph = iD.Graph(),
+                tree = iD.Tree(graph),
+                node = iD.Node({id: 'n', loc: [1, 1]});
+
+            graph.rebase([node], [graph]);
+            tree.rebase([node]);
+
+            node = node.move([-1, -1]);
+            graph.rebase([node], [graph], true);
+            tree.rebase([node], true);
+
+            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), graph)).to.eql([]);
+        });
     });
 
     describe("#intersects", function() {
