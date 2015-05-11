@@ -43,7 +43,7 @@ iD.svg = {
                 i = 0,
                 offset = dt,
                 segments = [],
-                viewport = iD.geo.Extent(projection.clipExtent()),
+                clip = d3.geo.clipExtent().extent(projection.clipExtent()).stream,
                 coordinates = graph.childNodes(entity).map(function(n) {
                     return n.loc;
                 });
@@ -53,7 +53,7 @@ iD.svg = {
             d3.geo.stream({
                 type: 'LineString',
                 coordinates: coordinates
-            }, projection.stream({
+            }, projection.stream(clip({
                 lineStart: function() {},
                 lineEnd: function() {
                     a = null;
@@ -62,10 +62,9 @@ iD.svg = {
                     b = [x, y];
 
                     if (a) {
-                        var extent = iD.geo.Extent(a).extend(b),
-                            span = iD.geo.euclideanDistance(a, b) - offset;
+                        var span = iD.geo.euclideanDistance(a, b) - offset;
 
-                        if (extent.intersects(viewport) && span >= 0) {
+                        if (span >= 0) {
                             var angle = Math.atan2(b[1] - a[1], b[0] - a[0]),
                                 dx = dt * Math.cos(angle),
                                 dy = dt * Math.sin(angle),
@@ -91,7 +90,7 @@ iD.svg = {
 
                     a = b;
                 }
-            }));
+            })));
 
             return segments;
         };
