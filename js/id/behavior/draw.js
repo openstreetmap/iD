@@ -31,12 +31,34 @@ iD.behavior.Draw = function(context) {
     // There will normally be a singular touch target at mouseLoc,
     //   unless we're in a special drawing mode.
     function getTargets() {
+        function vecAdd(a, b) { return [a[0] + b[0], a[1] + b[1]]; }
+        function perpendicular(a, b, dist) {
+            var len = iD.geo.euclideanDistance(a, b);
+            return len === 0 ? [0, 0] : [
+                ((b[1] - a[1]) / len) * dist,
+                ((b[0] - a[0]) / len) * dist * -1
+            ];
+            return [
+                [a[0] + pvec[0], a[1] + pvec[1]],
+                [b[0] + pvec[0], b[1] + pvec[1]]
+            ];
+        }
+
         var mouseLoc = context.map().mouseCoordinates();
         if (d3.event.altKey) return [{ entity: null, loc: mouseLoc }];
 
-        var points;
         if (context.mode().option === 'orthogonal' && startSegment.length === 2) {
-            points = [[300, 300], [250,300]];
+            var p0 = context.projection(startSegment[0]),
+                p1 = context.projection(startSegment[1]),
+                pMouse = context.map().mouse(),
+                theta = Math.atan2(p1[1] - pMouse[1], p1[0] - pMouse[0]) -
+                    Math.atan2(p1[1] - p0[1], p1[0] - p0[0]),
+                height = iD.geo.euclideanDistance(p1, pMouse) * Math.sin(theta),
+                perp = perpendicular(p0, p1, height),
+                q0 = vecAdd(p0, perp),
+                q1 = vecAdd(p1, perp);
+
+            var points = [q1, q0];
             return _.map(points, function(p) {
                 var target = document.elementFromPoint(p[0], p[1]);
                 return { entity: target && target.__data__, loc: context.projection.invert(p) };
@@ -110,7 +132,8 @@ iD.behavior.Draw = function(context) {
     }
 
     function click() {
-        var targets = getTargets();
+        var targets = [getTargets()[0]]; // only one target for now
+
         for (var i = 0; i < targets.length; i++) {
             var more = (i !== targets.length - 1),
                 d = targets[i],

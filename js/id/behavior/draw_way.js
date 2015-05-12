@@ -69,6 +69,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         //     context.replace(iD.actions.MoveNode(id, loc));
         // // }
 
+        // only one target for now..
         var datum = targets[0].entity,
             loc = targets[0].loc;
 
