@@ -249,8 +249,6 @@ iD.Connection = function() {
                 imagery_used: imageryUsed.join(';').substr(0, 255),
                 host: (window.location.origin + window.location.pathname).substr(0, 255),
                 locale: detected.locale,
-                browser: detected.browser + ' ' + detected.version,
-                platform: detected.platform
             };
 
         if (comment) {
