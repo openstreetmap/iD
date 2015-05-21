@@ -1491,6 +1491,44 @@ text.gpx {
 .layer-mapillary g path.viewfield {
     stroke-width: 0;
     fill-opacity: 0.6;
+
+/* Mapillary sign Layer */
+
+.node {
+    border: 1px solid green;
+    //background-color: white;
+}
+
+.node body {
+    min-width: 20px;
+}
+
+.layer-mapillary-signs {
+    pointer-events: none;
+}
+
+.layer-mapillary-signs g {
+    pointer-events: visible;
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
+}
+
+.layer-mapillary-signs g * {
+    stroke-width: 2;
+    stroke: red;
+    fill: red;
+}
+
+.layer-mapillary-signs g:hover * {
+    stroke-width: 2;
+    stroke: red;
+    fill: red;
+}
+
+.layer-mapillary-signs g.selected * {
+    stroke-width: 4;
+    stroke: red;
+    fill: red;
 }
 
 /* Modes */
