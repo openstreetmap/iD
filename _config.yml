@@ -1,2 +1,0 @@
-source: .
-exclude: ['node_modules','test']
