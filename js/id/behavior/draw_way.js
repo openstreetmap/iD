@@ -3,46 +3,43 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         isClosed = way.isClosed(),
         isDegenerate = way.isDegenerate(),
         isReverse = typeof index !== 'undefined',
+        isOrthogonal = (mode.option === 'orthogonal' && way.nodes.length > 2),
         finished = false,
         annotation = t((isDegenerate ?
             'operations.start.annotation.' :
             'operations.continue.annotation.') + context.geometry(wayId)),
         draw = iD.behavior.Draw(context);
 
+    var mouseCoord = context.map().mouseCoordinates(),
+        startIndex = isReverse ? 0 : way.nodes.length - 1,
+        start, end, ortho1, ortho2, segment;
 
-    // var startIndex = isReverse ? 0 : way.nodes.length - 1,
-    //     endIndex = isReverse ? way.nodes.length - 1 : 0,
-    //     // start = iD.Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
-    //     startNode = context.entity(way.nodes[startIndex]),
-    //     endNode = isClosed ? context.entity(way.nodes[endIndex]) : null,
-    //     addNodes = [ iD.Node({ loc: context.map().mouseCoordinates() }) ];
-    //     // segment;
-
-    // if (endNode && mode.option === 'orthogonal' && way.nodes.length > 2) {
-    //     addNodes.push(iD.Node({ loc: endNode.loc }));
-    // }
-
-    // var f = context[isDegenerate ? 'replace' : 'perform'],
-    //     actions = [];
-
-    // _.each(addNodes, function(node) {
-    //     actions.push(iD.actions.AddEntity(node));
-    //     actions.push(iD.actions.AddVertex(wayId, node.id, index));
-    // });
-    // actions.push(annotation);
-    // f.apply(context, actions);
-
-
-    var startIndex = isReverse ? 0 : way.nodes.length - 1,
-        start = iD.Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
-        end = iD.Node({loc: context.map().mouseCoordinates()}),
+    if (isOrthogonal) {
+        start = iD.Node({ loc: context.graph().entity(way.nodes[1]).loc }),
+        ortho1 = iD.Node({ loc: start.loc });
+        ortho2 = iD.Node({ loc: context.graph().entity(way.nodes[0]).loc });
+        end = iD.Node({ loc: ortho2.loc });
         segment = iD.Way({
-            nodes: isReverse ? [end.id, start.id] : [start.id, end.id]
-            // tags: _.clone(way.tags)
+            nodes: [start.id, ortho1.id, ortho2.id, end.id],
+            tags: _.clone(way.tags)
         });
+    } else {
+        start = iD.Node({ loc: context.graph().entity(way.nodes[startIndex]).loc }),
+        end = iD.Node({ loc: mouseCoord });
+        segment = iD.Way({
+            nodes: isReverse ? [end.id, start.id] : [start.id, end.id],
+            tags: _.clone(way.tags)
+        });
+    }
 
     var f = context[way.isDegenerate() ? 'replace' : 'perform'];
-    if (isClosed) {
+    if (isOrthogonal) {
+        f(iD.actions.AddEntity(start),
+            iD.actions.AddEntity(ortho1),
+            iD.actions.AddEntity(ortho2),
+            iD.actions.AddEntity(end),
+            iD.actions.AddEntity(segment));
+    } else if (isClosed) {
         f(iD.actions.AddEntity(end),
             iD.actions.AddVertex(wayId, end.id, index));
     } else {
@@ -52,36 +49,23 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     }
 
 
-
     function move(targets) {
-        // // for (var i = 0; i < targets.length && i < addNodes.length; i++) {
-        //     var snapTo = targets[0].entity,
-        //         loc = targets[0].loc;
+        for (var i = 0; i < targets.length; i++) {
+            var entity = targets[i].entity,
+                loc = targets[i].loc,
+                point = targets[i].point,
+                which = isOrthogonal ? [ortho1.id, ortho2.id][i] : end.id;
 
-        //     // if (snapTo) {
-        //     //     if (datum.type === 'node' && datum.id !== id) {
-        //     //         loc = datum.loc;
-        //     //     } else if (datum.type === 'way' && datum.id !== segment.id) {
-        //     //         loc = iD.geo.chooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
-        //     //     }
-        //     // }
-
-        //     context.replace(iD.actions.MoveNode(id, loc));
-        // // }
-
-        // only one target for now..
-        var datum = targets[0].entity,
-            loc = targets[0].loc;
-
-        if (datum) {
-            if (datum.type === 'node' && datum.id !== end.id) {
-                loc = datum.loc;
-            } else if (datum.type === 'way' && datum.id !== segment.id) {
-                loc = iD.geo.chooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
+            if (entity) {
+                if (entity.type === 'node' && entity.id !== which) {
+                    loc = entity.loc;
+                } else if (entity.type === 'way' && entity.id !== segment.id) {
+                    loc = iD.geo.chooseEdge(context.childNodes(entity), point, context.projection).loc;
+                }
             }
-        }
 
-        context.replace(iD.actions.MoveNode(end.id, loc));
+            context.replace(iD.actions.MoveNode(which, loc));
+        }
     }
 
     function undone() {

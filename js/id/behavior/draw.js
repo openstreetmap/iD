@@ -27,45 +27,44 @@ iD.behavior.Draw = function(context) {
     }
 
     // Depending on mode option, return an array of touch targets:
-    //   [{ entity: entity, loc: [lon,lat] }]
-    // There will normally be a singular touch target at mouseLoc,
+    //   [{ entity: entity, point: [x,y], loc: [lon,lat] }]
+    // There will normally be a singular touch target at mousePoint,
     //   unless we're in a special drawing mode.
     function getTargets() {
         function vecAdd(a, b) { return [a[0] + b[0], a[1] + b[1]]; }
-        function perpendicular(a, b, dist) {
+        function perpendicularVector(a, b, mag) {
             var len = iD.geo.euclideanDistance(a, b);
             return len === 0 ? [0, 0] : [
-                ((b[1] - a[1]) / len) * dist,
-                ((b[0] - a[0]) / len) * dist * -1
-            ];
-            return [
-                [a[0] + pvec[0], a[1] + pvec[1]],
-                [b[0] + pvec[0], b[1] + pvec[1]]
+                ((b[1] - a[1]) / len) * mag,
+                ((b[0] - a[0]) / len) * mag * -1
             ];
         }
 
-        var mouseLoc = context.map().mouseCoordinates();
-        if (d3.event.altKey) return [{ entity: null, loc: mouseLoc }];
+        var altKey = d3.event.altKey,
+            mousePoint = context.map().mouse(),
+            mouseLoc = context.map().mouseCoordinates();
 
         if (context.mode().option === 'orthogonal' && startSegment.length === 2) {
             var p0 = context.projection(startSegment[0]),
                 p1 = context.projection(startSegment[1]),
-                pMouse = context.map().mouse(),
-                theta = Math.atan2(p1[1] - pMouse[1], p1[0] - pMouse[0]) -
+                surface = context.surfaceRect(),
+                theta = Math.atan2(p1[1] - mousePoint[1], p1[0] - mousePoint[0]) -
                     Math.atan2(p1[1] - p0[1], p1[0] - p0[0]),
-                height = iD.geo.euclideanDistance(p1, pMouse) * Math.sin(theta),
-                perp = perpendicular(p0, p1, height),
-                q0 = vecAdd(p0, perp),
-                q1 = vecAdd(p1, perp);
+                height = iD.geo.euclideanDistance(p1, mousePoint) * Math.sin(theta),
+                perpVec = perpendicularVector(p0, p1, height),
+                q0 = iD.geo.roundCoords(vecAdd(p0, perpVec)),
+                q1 = iD.geo.roundCoords(vecAdd(p1, perpVec)),
+                points = [q0, q1];
 
-            var points = [q1, q0];
             return _.map(points, function(p) {
-                var target = document.elementFromPoint(p[0], p[1]);
-                return { entity: target && target.__data__, loc: context.projection.invert(p) };
+                var target = document.elementFromPoint(p[0] + surface.left, p[1] + surface.top),
+                    data = target && target.__data__,
+                    entity = data instanceof iD.Entity ? data : null;
+                return { entity: altKey ? null : entity, point: p, loc: context.projection.invert(p) };
             });
 
         } else {
-            return [{ entity: d3.event.target.__data__, loc: mouseLoc }];
+            return [{ entity: altKey ? null : d3.event.target.__data__, point: mousePoint, loc: mouseLoc }];
         }
     }
 

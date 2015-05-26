@@ -7,7 +7,8 @@ iD.behavior.AddWay = function(context) {
             .on('clickWay', event.startFromWay)
             .on('clickNode', event.startFromNode)
             .on('cancel', addWay.cancel)
-            .on('finish', addWay.cancel);
+            .on('finish', addWay.cancel)
+            .startSegment(null);
 
         context.map()
             .dblclickEnable(false);
