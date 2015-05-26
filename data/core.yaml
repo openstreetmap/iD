@@ -205,7 +205,6 @@ en:
     list: "Edits by {users}"
     truncated_list: "Edits by {users} and {count} others"
   infobox:
-    key: I
     selected: "{n} selected"
     geometry: Geometry
     closed: closed
