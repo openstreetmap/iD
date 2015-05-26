@@ -372,7 +372,7 @@ iD.version = '1.7.2';
     // Added due to incomplete svg style support. See #715
     detected.opera = (detected.browser.toLowerCase() === 'opera' && parseFloat(detected.version) < 15 );
 
-    detected.locale = navigator.language || navigator.userLanguage;
+    detected.locale = navigator.language || navigator.userLanguage || 'en-US';
 
     detected.filedrop = (window.FileReader && 'ondrop' in window);
 
