@@ -1,5 +1,5 @@
 iD.ui.Info = function(context) {
-    var key = t('infobox.key'),
+    var key = iD.ui.cmd('⌘I'),
         imperial = (iD.detect().locale.toLowerCase() === 'en-us');
 
     function info(selection) {
