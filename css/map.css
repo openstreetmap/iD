@@ -1552,9 +1552,8 @@ text.gpx {
 
 /* Mapillary sign Layer */
 
-.node {
+.layer-mapillary-signs body {
     border: 1px solid green;
-    //background-color: white;
 }
 
 .node body {
@@ -1565,28 +1564,25 @@ text.gpx {
     pointer-events: none;
 }
 
-.layer-mapillary-signs g {
+.layer-mapillary-signs body {
     pointer-events: visible;
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
 }
 
-.layer-mapillary-signs g * {
-    stroke-width: 2;
-    stroke: red;
-    fill: red;
+
+.layer-mapillary-signs body:hover * {
+    border: 1px solid red;
 }
 
-.layer-mapillary-signs g:hover * {
-    stroke-width: 2;
-    stroke: red;
-    fill: red;
-}
-
-.layer-mapillary-signs g.selected * {
+.layer-mapillary-signs body .selected * {
     stroke-width: 4;
     stroke: red;
     fill: red;
+}
+
+.layer-mapillary-signs .t {
+    position: fixed;
 }
 
 /* Modes */
