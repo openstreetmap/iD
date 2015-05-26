@@ -1,31 +1,33 @@
 iD.MapillarySignsLayer = function (context) {
     var enable = false,
         currentImage,
-        svg, div, request;
+        svg, image_preview_div, request;
 
     function show(image) {
-        svg.selectAll('g')
+        console.log('show',image);
+        svg.selectAll('.node')
             .classed('selected', function(d) {
                 return currentImage && d.key === currentImage.key;
             });
 
-        div.classed('hidden', false)
+        image_preview_div.classed('hidden', false)
             .classed('temp', image !== currentImage);
 
-        div.selectAll('img')
+        image_preview_div.selectAll('img')
             .attr('src', 'https://d1cuyjsrcm0gby.cloudfront.net/' + image.key + '/thumb-320.jpg');
 
-        div.selectAll('a')
+        image_preview_div.selectAll('a')
             .attr('href', 'http://mapillary.com/map/im/' + image.key);
     }
 
     function hide() {
+
         currentImage = undefined;
 
-        svg.selectAll('g')
+        svg.selectAll('.node')
             .classed('selected', false);
 
-        div.classed('hidden', true);
+        image_preview_div.classed('hidden', true);
     }
 
     function transform(image) {
@@ -38,34 +40,16 @@ iD.MapillarySignsLayer = function (context) {
         svg = selection.selectAll('svg')
             .data([0]);
 
-        svg.enter().append('svg')
-            .on('click', function() {
-                var image = d3.event.target.__data__;
-                if (currentImage === image) {
-                    hide();
-                } else {
-                    currentImage = image;
-                    show(image);
-                }
-            })
-            .on('mouseover', function() {
-                show(d3.event.target.__data__);
-            })
-            .on('mouseout', function() {
-                if (currentImage) {
-                    show(currentImage);
-                } else {
-                    hide();
-                }
-            });
+        svg.enter().append('svg');
+
 
         svg.style('display', enable ? 'block' : 'none');
 
-        div = context.container().selectAll('.mapillary-signs')
+        image_preview_div = context.container().selectAll('.mapillary-image')
             .data([0]);
 
-        var enter = div.enter().append('div')
-            .attr('class', 'mapillary-signs');
+        var enter = image_preview_div.enter().append('div')
+            .attr('class', 'mapillary-image');
 
         enter.append('button')
             .on('click', hide)
@@ -87,15 +71,19 @@ iD.MapillarySignsLayer = function (context) {
         if (!enable) {
             hide();
 
-            svg.selectAll('g')
+            svg.selectAll('.node')
                 .remove();
 
             return;
         }
 
         // Update existing images while waiting for new ones to load.
-        svg.selectAll('g')
-            .attr('transform', transform);
+        //svg.selectAll('.node')
+        //    .attr('transform', transform);
+        //
+
+        svg.selectAll('.node')
+            .remove();
 
         var extent = context.map().extent();
 
@@ -124,22 +112,60 @@ iD.MapillarySignsLayer = function (context) {
                     if (images.length >= 1000) break;
                 }
 
-                var g = svg.selectAll('foreignObject')
-                    .data(images, function(d) { return d.key; });
+                var foreignObjects = svg.selectAll('foreignObject')
+                    .data(images, function(d) {
+                        console.log(d);
+                        return d.key;
+                    });
 
-                var enter = g.enter();
+                var enter = foreignObjects.enter();
 
                 var body = enter.append('foreignObject')
                     .attr('x', '0')
                     .attr('y', '0')
                     .attr('class', 'node')
-                    .attr('width', '20')
-                    .attr('height', '20')
+                    .attr('width', '15')
+                    .attr('height', '15')
                     .append('xhtml:body')
-                    .html('<span class="t"><i class="t-circle-bg t-c-white"></i><i class="t-circle-o t-c-red"></i><i class="t-truck t-c-black"></i><i class="t-circle-bar-rounded t-c-red" style="-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);transform:rotate(45deg)"></i></span>');
-                g.attr('transform', transform);
+                    .html(function(d) {
+                        return '<span class="t '+ d.signs[0]['type']+'"><i class="t-circle-bg t-c-white"></i><i class="t-circle-o t-c-red"></i><i class="t-truck t-c-black"></i><i class="t-circle-bar-rounded t-c-red" style="-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);transform:rotate(45deg)"></i></span>';
+                    });
+                foreignObjects.on('click', function(data) {
+                    if(!data) {
+                        d3.event.preventDefault();
+                        return;
+                    }
+                    var image = data;
+                    console.log(image);
+                    if (currentImage === image) {
+                        hide();
+                    } else {
+                        currentImage = image;
+                        show(image);
+                    }
+                })
+                    .on('mouseover', function(data) {
+                        if(!data) {
+                            d3.event.preventDefault();
+                            return;
+                        }
+                        show(data);
+                    })
+                    .on('mouseout', function() {
+                        if(!data) {
+                            d3.event.preventDefault();
+                            return;
+                        }
+                        if (currentImage) {
+                            show(currentImage);
+                        } else {
+                            hide();
+                        }
+                    });
 
-                g.exit()
+                foreignObjects.attr('transform', transform);
+
+                foreignObjects.exit()
                     .remove();
                 console.log(images);
             });
