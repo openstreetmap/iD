@@ -1,0 +1,22 @@
+{
+    "icon": "beer",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours",
+        "smoking"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "biergarten"
+    },
+    "terms": [
+        "beer",
+        "bier",
+        "booze"
+    ],
+    "name": "Beer Garden"
+}

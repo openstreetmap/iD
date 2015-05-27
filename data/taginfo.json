@@ -130,6 +130,10 @@
         },
         {
             "key": "amenity",
+            "value": "biergarten"
+        },
+        {
+            "key": "amenity",
             "value": "boat_rental"
         },
         {
