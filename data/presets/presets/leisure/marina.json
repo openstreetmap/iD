@@ -1,5 +1,14 @@
 {
     "icon": "harbor",
+    "fields": [
+        "operator",
+        "address",
+        "capacity",
+        "fee",
+        "sanitary_dump_station",
+        "power_supply",
+        "internet_access"
+    ],
     "geometry": [
         "point",
         "vertex",

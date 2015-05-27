@@ -1,0 +1,27 @@
+{
+    "fields": [
+        "operator",
+        "access_toilets",
+        "fee",
+        "water_point"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "Motor Home",
+        "Camper",
+        "Sanitary",
+        "Dump Station",
+        "Elsan",
+        "CDP",
+        "CTDP",
+        "Chemical Toilet"
+    ],
+    "tags": {
+        "amenity": "sanitary_dump_station"
+    },
+    "name": "RV Toilet Disposal"
+}

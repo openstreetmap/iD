@@ -330,6 +330,10 @@
         },
         {
             "key": "amenity",
+            "value": "sanitary_dump_station"
+        },
+        {
+            "key": "amenity",
             "value": "school"
         },
         {
@@ -2297,6 +2301,10 @@
         {
             "key": "waterway",
             "value": "riverbank"
+        },
+        {
+            "key": "waterway",
+            "value": "sanitary_dump_station"
         },
         {
             "key": "waterway",
