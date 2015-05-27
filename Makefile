@@ -115,6 +115,7 @@ D3_FILES = \
 	node_modules/d3/src/behavior/zoom.js \
 	node_modules/d3/src/core/index.js \
 	node_modules/d3/src/event/index.js \
+	node_modules/d3/src/geo/length.js \
 	node_modules/d3/src/geo/mercator.js \
 	node_modules/d3/src/geo/path.js \
 	node_modules/d3/src/geo/stream.js \
