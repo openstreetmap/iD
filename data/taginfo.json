@@ -2288,6 +2288,10 @@
         },
         {
             "key": "waterway",
+            "value": "fuel"
+        },
+        {
+            "key": "waterway",
             "value": "river"
         },
         {
