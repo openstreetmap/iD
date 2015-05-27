@@ -264,8 +264,8 @@
         "area": "Area",
         "centroid": "Centroid",
         "location": "Location",
-        "metric": "Switch to metric",
-        "imperial": "Switch to imperial"
+        "metric": "Metric",
+        "imperial": "Imperial"
     },
     "geometry": {
         "point": "point",

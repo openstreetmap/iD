@@ -91,7 +91,8 @@ iD.ui.Info = function(context) {
                 entity;
 
             selection.html('');
-            selection.append('h3')
+            selection.append('h4')
+                .attr('class', 'selection-heading fillD')
                 .text(singular || t('infobox.selected', { n: selected.length }));
 
             if (!selected.length) return;
@@ -141,10 +142,11 @@ iD.ui.Info = function(context) {
                     .text(t('infobox.centroid') + ': ' + centroid[0].toFixed(5) + ', ' + centroid[1].toFixed(5));
 
 
-                var toggle  = imperial ? 'metric' : 'imperial';
-                selection.append('p').append('a')
+                var toggle  = imperial ? 'imperial' : 'metric';
+                selection.append('a')
                     .text(t('infobox.' + toggle))
                     .attr('href', '#')
+                    .attr('class', 'button')
                     .on('click', function() {
                         d3.event.preventDefault();
                         imperial = !imperial;
