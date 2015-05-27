@@ -1141,6 +1141,9 @@
             "power": {
                 "label": "Type"
             },
+            "power_supply": {
+                "label": "Power Supply"
+            },
             "railway": {
                 "label": "Type"
             },
@@ -1188,6 +1191,9 @@
                     "demanding_alpine_hiking": "T5: Demanding Alpine Hiking",
                     "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"
                 }
+            },
+            "sanitary_dump_station": {
+                "label": "Toilet Disposal"
             },
             "seasonal": {
                 "label": "Seasonal"
@@ -1358,6 +1364,9 @@
             },
             "water": {
                 "label": "Type"
+            },
+            "water_point": {
+                "label": "Water Point"
             },
             "waterway": {
                 "label": "Type"
@@ -1699,6 +1708,10 @@
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "bar,breakfast,cafe,café,canteen,coffee,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+            },
+            "amenity/sanitary_dump_station": {
+                "name": "RV Toilet Disposal",
+                "terms": "Motor Home,Camper,Sanitary,Dump Station,Elsan,CDP,CTDP,Chemical Toilet"
             },
             "amenity/school": {
                 "name": "School Grounds",
@@ -3506,11 +3519,11 @@
             },
             "tourism/camp_site": {
                 "name": "Camp Site",
-                "terms": ""
+                "terms": "Tent"
             },
             "tourism/caravan_site": {
                 "name": "RV Park",
-                "terms": ""
+                "terms": "Motor Home,Camper"
             },
             "tourism/chalet": {
                 "name": "Chalet",
@@ -3703,6 +3716,10 @@
             "waterway/riverbank": {
                 "name": "Riverbank",
                 "terms": ""
+            },
+            "waterway/sanitary_dump_station": {
+                "name": "Marine Toilet Disposal",
+                "terms": "Boat,Watercraft,Sanitary,Dump Station,Pumpout,Pump out,Elsan,CDP,CTDP,Chemical Toilet"
             },
             "waterway/stream": {
                 "name": "Stream",

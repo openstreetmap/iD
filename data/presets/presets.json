@@ -1558,6 +1558,33 @@
         },
         "name": "Restaurant"
     },
+    "amenity/sanitary_dump_station": {
+        "fields": [
+            "operator",
+            "access_toilets",
+            "fee",
+            "water_point"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [
+            "Motor Home",
+            "Camper",
+            "Sanitary",
+            "Dump Station",
+            "Elsan",
+            "CDP",
+            "CTDP",
+            "Chemical Toilet"
+        ],
+        "tags": {
+            "amenity": "sanitary_dump_station"
+        },
+        "name": "RV Toilet Disposal"
+    },
     "amenity/school": {
         "icon": "school",
         "fields": [
@@ -5018,6 +5045,15 @@
     },
     "leisure/marina": {
         "icon": "harbor",
+        "fields": [
+            "operator",
+            "address",
+            "capacity",
+            "fee",
+            "sanitary_dump_station",
+            "power_supply",
+            "internet_access"
+        ],
         "geometry": [
             "point",
             "vertex",
@@ -9012,12 +9048,17 @@
         "icon": "campsite",
         "fields": [
             "operator",
-            "address"
+            "address",
+            "capacity",
+            "fee"
         ],
         "geometry": [
             "point",
             "vertex",
             "area"
+        ],
+        "terms": [
+            "Tent"
         ],
         "tags": {
             "tourism": "camp_site"
@@ -9025,15 +9066,24 @@
         "name": "Camp Site"
     },
     "tourism/caravan_site": {
+        "icon": "bus",
         "fields": [
             "operator",
             "address",
-            "smoking"
+            "capacity",
+            "fee",
+            "sanitary_dump_station",
+            "power_supply",
+            "internet_access"
         ],
         "geometry": [
             "point",
             "vertex",
             "area"
+        ],
+        "terms": [
+            "Motor Home",
+            "Camper"
         ],
         "tags": {
             "tourism": "caravan_site"
@@ -9779,6 +9829,35 @@
             "waterway": "riverbank"
         },
         "name": "Riverbank"
+    },
+    "waterway/sanitary_dump_station": {
+        "fields": [
+            "operator",
+            "access_toilets",
+            "fee",
+            "water_point"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [
+            "Boat",
+            "Watercraft",
+            "Sanitary",
+            "Dump Station",
+            "Pumpout",
+            "Pump out",
+            "Elsan",
+            "CDP",
+            "CTDP",
+            "Chemical Toilet"
+        ],
+        "tags": {
+            "waterway": "sanitary_dump_station"
+        },
+        "name": "Marine Toilet Disposal"
     },
     "waterway/stream": {
         "icon": "waterway-stream",

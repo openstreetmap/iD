@@ -431,6 +431,8 @@ en:
         label: Population
       power:
         label: Type
+      power_supply:
+        label: Power Supply
       railway:
         label: Type
       recycling/cans:
@@ -465,6 +467,8 @@ en:
           alpine_hiking: "T4: Alpine Hiking"
           demanding_alpine_hiking: "T5: Demanding Alpine Hiking"
           difficult_alpine_hiking: "T6: Difficult Alpine Hiking"
+      sanitary_dump_station:
+        label: Toilet Disposal
       seasonal:
         label: Seasonal
       service:
@@ -593,6 +597,8 @@ en:
         label: Type of Goods
       water:
         label: Type
+      water_point:
+        label: Water Point
       waterway:
         label: Type
       website:
@@ -847,6 +853,9 @@ en:
       amenity/restaurant:
         name: Restaurant
         terms: "<translate with synonyms or related terms for 'Restaurant', separated by commas>"
+      amenity/sanitary_dump_station:
+        name: RV Toilet Disposal
+        terms: "<translate with synonyms or related terms for 'RV Toilet Disposal', separated by commas>"
       amenity/school:
         name: School Grounds
         terms: "<translate with synonyms or related terms for 'School Grounds', separated by commas>"
@@ -2350,6 +2359,9 @@ en:
       waterway/riverbank:
         name: Riverbank
         terms: "<translate with synonyms or related terms for 'Riverbank', separated by commas>"
+      waterway/sanitary_dump_station:
+        name: Marine Toilet Disposal
+        terms: "<translate with synonyms or related terms for 'Marine Toilet Disposal', separated by commas>"
       waterway/stream:
         name: Stream
         terms: "<translate with synonyms or related terms for 'Stream', separated by commas>"
