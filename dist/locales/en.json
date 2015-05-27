@@ -1495,6 +1495,10 @@
                 "name": "Bicycle Repair Station",
                 "terms": "bike"
             },
+            "amenity/biergarten": {
+                "name": "Beer Garden",
+                "terms": "beer,bier,booze"
+            },
             "amenity/boat_rental": {
                 "name": "Boat Rental",
                 "terms": ""

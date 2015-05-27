@@ -697,6 +697,9 @@ en:
       amenity/bicycle_repair_station:
         name: Bicycle Repair Station
         terms: "<translate with synonyms or related terms for 'Bicycle Repair Station', separated by commas>"
+      amenity/biergarten:
+        name: Beer Garden
+        terms: "<translate with synonyms or related terms for 'Beer Garden', separated by commas>"
       amenity/boat_rental:
         name: Boat Rental
         terms: "<translate with synonyms or related terms for 'Boat Rental', separated by commas>"
