@@ -2341,6 +2341,9 @@ en:
       waterway/drain:
         name: Drain
         terms: "<translate with synonyms or related terms for 'Drain', separated by commas>"
+      waterway/fuel:
+        name: Marine Fuel Station
+        terms: "<translate with synonyms or related terms for 'Marine Fuel Station', separated by commas>"
       waterway/river:
         name: River
         terms: "<translate with synonyms or related terms for 'River', separated by commas>"

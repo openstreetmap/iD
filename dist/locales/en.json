@@ -3692,6 +3692,10 @@
                 "name": "Drain",
                 "terms": ""
             },
+            "waterway/fuel": {
+                "name": "Marine Fuel Station",
+                "terms": "petrol,gas,diesel,boat"
+            },
             "waterway/river": {
                 "name": "River",
                 "terms": "beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse"
