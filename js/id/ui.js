@@ -38,7 +38,7 @@ iD.ui = function(context) {
             .call(iD.ui.MapInMap(context));
 
         content.append('div')
-            .attr('class', 'infobox')
+            .attr('class', 'infobox fillD2')
             .style('display', 'none')
             .call(iD.ui.Info(context));
 
