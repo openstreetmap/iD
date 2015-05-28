@@ -2702,7 +2702,7 @@
             },
             "man_made/storage_tank": {
                 "name": "Storage Tank",
-                "terms": "oil,gas,petrol"
+                "terms": "water,oil,gas,petrol"
             },
             "man_made/survey_point": {
                 "name": "Survey Point",
