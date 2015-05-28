@@ -1301,6 +1301,14 @@
         },
         {
             "key": "man_made",
+            "value": "silo"
+        },
+        {
+            "key": "man_made",
+            "value": "storage_tank"
+        },
+        {
+            "key": "man_made",
             "value": "survey_point"
         },
         {

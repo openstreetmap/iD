@@ -770,6 +770,9 @@
             "construction": {
                 "label": "Type"
             },
+            "content": {
+                "label": "Contents"
+            },
             "country": {
                 "label": "Country"
             },
@@ -2692,6 +2695,14 @@
             "man_made/pipeline": {
                 "name": "Pipeline",
                 "terms": ""
+            },
+            "man_made/silo": {
+                "name": "Silo",
+                "terms": "grain,corn,wheat"
+            },
+            "man_made/storage_tank": {
+                "name": "Storage Tank",
+                "terms": "oil,gas,petrol"
             },
             "man_made/survey_point": {
                 "name": "Survey Point",

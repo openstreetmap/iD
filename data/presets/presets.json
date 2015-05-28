@@ -5538,6 +5538,44 @@
         },
         "name": "Pipeline"
     },
+    "man_made/silo": {
+        "fields": [
+            "building_area",
+            "crop"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "grain",
+            "corn",
+            "wheat"
+        ],
+        "tags": {
+            "man_made": "silo"
+        },
+        "name": "Silo"
+    },
+    "man_made/storage_tank": {
+        "fields": [
+            "building_area",
+            "content"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "oil",
+            "gas",
+            "petrol"
+        ],
+        "tags": {
+            "man_made": "storage_tank"
+        },
+        "name": "Storage Tank"
+    },
     "man_made/survey_point": {
         "icon": "monument",
         "fields": [

@@ -286,6 +286,11 @@
         "type": "combo",
         "label": "Type"
     },
+    "content": {
+        "key": "content",
+        "type": "combo",
+        "label": "Contents"
+    },
     "country": {
         "key": "country",
         "type": "combo",
