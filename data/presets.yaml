@@ -157,6 +157,8 @@ en:
         label: Collection Times
       construction:
         label: Type
+      content:
+        label: Contents
       country:
         label: Country
       covered:
@@ -1591,6 +1593,12 @@ en:
       man_made/pipeline:
         name: Pipeline
         terms: "<translate with synonyms or related terms for 'Pipeline', separated by commas>"
+      man_made/silo:
+        name: Silo
+        terms: "<translate with synonyms or related terms for 'Silo', separated by commas>"
+      man_made/storage_tank:
+        name: Storage Tank
+        terms: "<translate with synonyms or related terms for 'Storage Tank', separated by commas>"
       man_made/survey_point:
         name: Survey Point
         terms: "<translate with synonyms or related terms for 'Survey Point', separated by commas>"

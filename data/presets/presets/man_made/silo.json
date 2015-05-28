@@ -1,0 +1,19 @@
+{
+    "fields": [
+        "building_area",
+        "crop"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "grain",
+        "corn",
+        "wheat"
+    ],
+    "tags": {
+        "man_made": "silo"
+    },
+    "name": "Silo"
+}
