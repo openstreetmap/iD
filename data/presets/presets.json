@@ -5447,6 +5447,9 @@
     },
     "man_made/lighthouse": {
         "icon": "lighthouse",
+        "fields": [
+            "building_area"
+        ],
         "geometry": [
             "point",
             "area"
