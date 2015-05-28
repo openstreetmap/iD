@@ -3,8 +3,7 @@
 var request = require('request'),
     yaml = require('js-yaml'),
     fs = require('fs'),
-    _ = require('../js/lib/lodash.js'),
-    delve = require('delve');
+    _ = require('../js/lib/lodash.js');
 
 var resources = ['core', 'presets'];
 var outdir = './dist/locales/';
