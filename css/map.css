@@ -1552,12 +1552,13 @@ text.gpx {
 
 /* Mapillary sign Layer */
 
-.layer-mapillary-signs body {
-    border: 1px solid green;
+.t {
+    font-size: 28px;
+    z-index: 100;
 }
 
 .node body {
-    min-width: 20px;
+    min-width: 30px;
 }
 
 .layer-mapillary-signs {
@@ -1571,18 +1572,17 @@ text.gpx {
 }
 
 
-.layer-mapillary-signs body:hover * {
+.layer-mapillary-signs body:hover {
     border: 1px solid red;
 }
 
-.layer-mapillary-signs body .selected * {
+.layer-mapillary-signs .node.selected {
     stroke-width: 4;
-    stroke: red;
-    fill: red;
+    border: 1px solid yellow;
 }
 
 .layer-mapillary-signs .t {
-    position: fixed;
+    position: absolute;
 }
 
 /* Modes */
