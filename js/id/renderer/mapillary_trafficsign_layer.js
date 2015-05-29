@@ -1,12 +1,22 @@
 iD.MapillarySignsLayer = function (context) {
     var enable = false,
         currentImage,
-        svg, image_preview_div, request;
-
+        svg, image_preview_div, request, eu_signs, us_signs;
+    request = d3.json('/europe.json',
+        function (error, data) {
+            console.error(arguments);
+            if (error) return;
+            eu_signs=data;
+        });
+    request = d3.json('/europe.json',
+        function (error, data) {
+            console.error(arguments);
+            if (error) return;
+            us_signs=data;
+        });
     function show(image) {
-        console.log('show',image);
         svg.selectAll('.node')
-            .classed('selected', function(d) {
+            .classed('selected', function (d) {
                 return currentImage && d.key === currentImage.key;
             });
 
@@ -32,7 +42,6 @@ iD.MapillarySignsLayer = function (context) {
 
     function transform(image) {
         var t = 'translate(' + context.projection(image.loc) + ')';
-        if (image.ca) t += 'rotate(' + image.ca + ',0,0)';
         return t;
     }
 
@@ -77,11 +86,6 @@ iD.MapillarySignsLayer = function (context) {
             return;
         }
 
-        // Update existing images while waiting for new ones to load.
-        //svg.selectAll('.node')
-        //    .attr('transform', transform);
-        //
-
         svg.selectAll('.node')
             .remove();
 
@@ -96,7 +100,7 @@ iD.MapillarySignsLayer = function (context) {
             '&min_score=2&' +
             'client_id=NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzoxNjQ3MDY4ZTUxY2QzNGI2&min_lat=' +
             extent[0][1] + '&max_lat=' + extent[1][1] + '&min_lon=' +
-            extent[0][0] + '&max_lon=' + extent[1][0] + '&max_results=100&geojson=true',
+            extent[0][0] + '&max_lon=' + extent[1][0] + '&max_results=1000&geojson=true',
             function (error, data) {
                 if (error) return;
                 console.log(data);
@@ -113,8 +117,7 @@ iD.MapillarySignsLayer = function (context) {
                 }
 
                 var foreignObjects = svg.selectAll('foreignObject')
-                    .data(images, function(d) {
-                        console.log(d);
+                    .data(images, function (d) {
                         return d.key;
                     });
 
@@ -123,20 +126,20 @@ iD.MapillarySignsLayer = function (context) {
                 var body = enter.append('foreignObject')
                     .attr('x', '0')
                     .attr('y', '0')
+                    .attr('width', '30px')
+                    .attr('height', '30px')
                     .attr('class', 'node')
-                    .attr('width', '15')
-                    .attr('height', '15')
                     .append('xhtml:body')
-                    .html(function(d) {
-                        return '<span class="t '+ d.signs[0]['type']+'"><i class="t-circle-bg t-c-white"></i><i class="t-circle-o t-c-red"></i><i class="t-truck t-c-black"></i><i class="t-circle-bar-rounded t-c-red" style="-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);transform:rotate(45deg)"></i></span>';
+                    .html(function (d) {
+                        var sign_html = eu_signs[d.signs[0]['type']];
+                        return sign_html;
                     });
-                foreignObjects.on('click', function(data) {
-                    if(!data) {
+                foreignObjects.on('click', function (data) {
+                    if (!data) {
                         d3.event.preventDefault();
                         return;
                     }
                     var image = data;
-                    console.log(image);
                     if (currentImage === image) {
                         hide();
                     } else {
@@ -144,15 +147,15 @@ iD.MapillarySignsLayer = function (context) {
                         show(image);
                     }
                 })
-                    .on('mouseover', function(data) {
-                        if(!data) {
+                    .on('mouseover', function (data) {
+                        if (!data) {
                             d3.event.preventDefault();
                             return;
                         }
                         show(data);
                     })
-                    .on('mouseout', function() {
-                        if(!data) {
+                    .on('mouseout', function (data) {
+                        if (!data) {
                             d3.event.preventDefault();
                             return;
                         }
@@ -171,13 +174,13 @@ iD.MapillarySignsLayer = function (context) {
             });
     }
 
-    render.enable = function(_) {
+    render.enable = function (_) {
         if (!arguments.length) return enable;
         enable = _;
         return render;
     };
 
-    render.dimensions = function(_) {
+    render.dimensions = function (_) {
         if (!arguments.length) return svg.dimensions();
         svg.dimensions(_);
         return render;
