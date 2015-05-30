@@ -3,7 +3,6 @@ var fs = require('fs'),
     glob = require('glob'),
     YAML = require('js-yaml'),
     _ = require('./js/lib/lodash'),
-    d3 = require('d3'),
     jsonschema = require('jsonschema'),
     fieldSchema = require('./data/presets/schema/field.json'),
     presetSchema = require('./data/presets/schema/preset.json'),
@@ -151,16 +150,50 @@ function generatePresets() {
     });
 
     presets = _.merge(presets, suggestionsToPresets(presets));
+    return presets;
 
-    var presetsYaml = _.cloneDeep(translations);
-    _.forEach(presetsYaml.presets, function(preset) {
-        preset.terms = "<translate with synonyms or related terms for '" + preset.name + "', separated by commas>"
+}
+
+function generateTranslate(fields, presets) {
+    var translate = _.cloneDeep(translations);
+
+    _.forEach(translate.fields, function(field, id) {
+        var f = fields[id];
+        if (f.keys) {
+            field['label#'] = _.each(f.keys).map(function(key) { return key + '=*'; }).join(', ');
+            if (!_.isEmpty(field.options)) {
+                _.each(field.options, function(v,k) {
+                    if (id === 'access') {
+                        field.options[k]['title#'] = field.options[k]['description#'] = 'access=' + k;
+                    } else {
+                        field.options[k + '#'] = k + '=yes';
+                    }
+                });
+            }
+        } else if (f.key) {
+            field['label#'] = f.key + '=*';
+            if (!_.isEmpty(field.options)) {
+                _.each(field.options, function(v,k) {
+                    field.options[k + '#'] = f.key + '=' + k;
+                });
+            }
+        }
+
+        if (f.placeholder) {
+            field['placeholder#'] = id + ' field placeholder';
+        }
     });
 
-    return {
-        presets: presets,
-        presetsYaml: presetsYaml
-    };
+    _.forEach(translate.presets, function(preset, id) {
+        var p = presets[id];
+        if (!_.isEmpty(p.tags))
+            preset['name#'] = _.pairs(p.tags).map(function(pair) { return pair[0] + '=' + pair[1]; }).join(', ');
+        if (p.terms && p.terms.length)
+            preset['terms#'] = 'terms: ' + p.terms.join();
+        preset.terms = "<translate with synonyms or related terms for '" + preset.name + "', separated by commas>";
+    });
+
+    return translate;
 }
 
 function validateCategoryPresets(categories, presets) {
@@ -189,19 +222,30 @@ function validatePresetFields(presets, fields) {
     });
 }
 
+// comment keys end with '#' and should sort immediately before their related key.
+function sortKeys(a, b) {
+    return (a === b + '#') ? -1
+        : (b === a + '#') ? 1
+        : (a > b ? 1 : a < b ? -1 : 0);
+}
+
 var categories = generateCategories(),
     fields = generateFields(),
-    presets = generatePresets();
+    presets = generatePresets(),
+    translate = generateTranslate(fields, presets);
 
 // additional consistency checks
-validateCategoryPresets(categories, presets.presets);
-validatePresetFields(presets.presets, fields);
+validateCategoryPresets(categories, presets);
+validatePresetFields(presets, fields);
 
 // Save individual data files
 fs.writeFileSync('data/presets/categories.json', stringify(categories));
 fs.writeFileSync('data/presets/fields.json', stringify(fields));
-fs.writeFileSync('data/presets/presets.json', stringify(presets.presets));
-fs.writeFileSync('data/presets.yaml', YAML.dump({en: {presets: presets.presetsYaml}}));
+fs.writeFileSync('data/presets/presets.json', stringify(presets));
+fs.writeFileSync('data/presets.yaml',
+    YAML.dump({en: {presets: translate}}, {sortKeys: sortKeys})
+        .replace(/\'.*#\':/g, '#')
+);
 
 // Write taginfo data
 var taginfo = {
@@ -220,7 +264,7 @@ var taginfo = {
     "tags": []
 };
 
-_.forEach(presets.presets, function(preset) {
+_.forEach(presets, function(preset) {
     if (preset.suggestion)
         return;
 
