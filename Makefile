@@ -19,7 +19,7 @@ MAKI_SOURCES = \
 	node_modules/maki/www/maki-sprite.json \
 	dist/img/maki-sprite.png
 
-$(MAKI_TARGETS): $(MAKI_SOURCES)
+$(MAKI_TARGETS): $(MAKI_SOURCES) data/maki_sprite.js
 	node data/maki_sprite.js
 
 dist/img/maki-sprite.png: ./node_modules/maki/www/images/maki-sprite.png
@@ -40,7 +40,7 @@ BUILDJS_SOURCES = \
 	$(filter-out $(BUILDJS_TARGETS), $(shell find data -type f -name '*.json')) \
 	data/core.yaml
 
-$(BUILDJS_TARGETS): $(BUILDJS_SOURCES)
+$(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 	node build.js
 
 dist/iD.js: \
