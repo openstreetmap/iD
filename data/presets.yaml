@@ -23,2356 +23,3502 @@ en:
         name: Water
     fields:
       access:
+        # 'access=*, foot=*, motor_vehicle=*, bicycle=*, horse=*'
         label: Access
+        options:
+          designated:
+            # access=designated
+            description: Access permitted according to signs or specific local laws
+            # access=designated
+            title: Designated
+          destination:
+            # access=destination
+            description: Access permitted only to reach a destination
+            # access=destination
+            title: Destination
+          'no':
+            # access=no
+            description: Access not permitted to the general public
+            # access=no
+            title: Prohibited
+          permissive:
+            # access=permissive
+            description: Access permitted until such time as the owner revokes the permission
+            # access=permissive
+            title: Permissive
+          private:
+            # access=private
+            description: Access permitted only with permission of the owner on an individual basis
+            # access=private
+            title: Private
+          'yes':
+            # access=yes
+            description: Access permitted by law; a right of way
+            # access=yes
+            title: Allowed
+        # access field placeholder
         placeholder: Unknown
         types:
           access: General
-          foot: Foot
-          motor_vehicle: Motor Vehicles
           bicycle: Bicycles
+          foot: Foot
           horse: Horses
-        options:
-          "yes":
-            title: Allowed
-            description: Access permitted by law; a right of way
-          "no":
-            title: Prohibited
-            description: Access not permitted to the general public
-          permissive:
-            title: Permissive
-            description: Access permitted until such time as the owner revokes the permission
-          private:
-            title: Private
-            description: Access permitted only with permission of the owner on an individual basis
-          designated:
-            title: Designated
-            description: Access permitted according to signs or specific local laws
-          destination:
-            title: Destination
-            description: Access permitted only to reach a destination
+          motor_vehicle: Motor Vehicles
       access_simple:
+        # 'access=*'
         label: Access
-        placeholder: "yes"
+        # access_simple field placeholder
+        placeholder: 'yes'
       access_toilets:
+        # 'access=*'
         label: Access
       address:
+        # 'addr:housename=*, addr:housenumber=*, addr:street=*, addr:city=*, addr:postcode=*'
         label: Address
         placeholders:
-          housename: Housename
-          housenumber: "123"
-          street: Street
           city: City
-          postcode: Postcode
-          place: Place
-          hamlet: Hamlet
-          suburb: Suburb
-          subdistrict: Subdistrict
+          country: Country
           district: District
+          hamlet: Hamlet
+          housename: Housename
+          housenumber: '123'
+          place: Place
+          postcode: Postcode
           province: Province
           state: State
-          country: Country
+          street: Street
+          subdistrict: Subdistrict
+          suburb: Suburb
       admin_level:
+        # 'admin_level=*'
         label: Admin Level
       aerialway:
+        # 'aerialway=*'
         label: Type
       aerialway/access:
+        # 'aerialway:access=*'
         label: Access
         options:
-          entry: Entry
-          exit: Exit
+          # 'aerialway:access=both'
           both: Both
+          # 'aerialway:access=entry'
+          entry: Entry
+          # 'aerialway:access=exit'
+          exit: Exit
       aerialway/bubble:
+        # 'aerialway:bubble=*'
         label: Bubble
       aerialway/capacity:
+        # 'aerialway:capacity=*'
         label: Capacity (per hour)
-        placeholder: "500, 2500, 5000..."
+        # aerialway/capacity field placeholder
+        placeholder: '500, 2500, 5000...'
       aerialway/duration:
+        # 'aerialway:duration=*'
         label: Duration (minutes)
-        placeholder: "1, 2, 3..."
+        # aerialway/duration field placeholder
+        placeholder: '1, 2, 3...'
       aerialway/heating:
+        # 'aerialway:heating=*'
         label: Heated
       aerialway/occupancy:
+        # 'aerialway:occupancy=*'
         label: Occupancy
-        placeholder: "2, 4, 8..."
+        # aerialway/occupancy field placeholder
+        placeholder: '2, 4, 8...'
       aerialway/summer/access:
+        # 'aerialway:summer:access=*'
         label: Access (summer)
         options:
-          entry: Entry
-          exit: Exit
+          # 'aerialway:summer:access=both'
           both: Both
+          # 'aerialway:summer:access=entry'
+          entry: Entry
+          # 'aerialway:summer:access=exit'
+          exit: Exit
       aeroway:
+        # 'aeroway=*'
         label: Type
       amenity:
+        # 'amenity=*'
         label: Type
       artist:
+        # 'artist_name=*'
         label: Artist
       artwork_type:
+        # 'artwork_type=*'
         label: Type
       atm:
+        # 'atm=*'
         label: ATM
       backrest:
+        # 'backrest=*'
         label: Backrest
       barrier:
+        # 'barrier=*'
         label: Type
       bench:
+        # 'bench=*'
         label: Bench
       bicycle_parking:
+        # 'bicycle_parking=*'
         label: Type
       boundary:
+        # 'boundary=*'
         label: Type
       brand:
+        # 'brand=*'
         label: Brand
       building:
+        # 'building=*'
         label: Building
       building_area:
+        # 'building=*'
         label: Building
       capacity:
+        # 'capacity=*'
         label: Capacity
-        placeholder: "50, 100, 200..."
+        # capacity field placeholder
+        placeholder: '50, 100, 200...'
       cardinal_direction:
+        # 'direction=*'
         label: Direction
         options:
-          "N": North
+          # direction=E
           E: East
-          S: South
-          W: West
-          NE: Northeast
-          SE: Southeast
-          SW: Southwest
-          NW: Northwest
-          NNE: North-northeast
+          # direction=ENE
           ENE: East-northeast
+          # direction=ESE
           ESE: East-southeast
-          SSE: South-southeast
-          SSW: South-southwest
-          WSW: West-southwest
-          WNW: West-northwest
+          # direction=N
+          'N': North
+          # direction=NE
+          NE: Northeast
+          # direction=NNE
+          NNE: North-northeast
+          # direction=NNW
           NNW: North-northwest
+          # direction=NW
+          NW: Northwest
+          # direction=S
+          S: South
+          # direction=SE
+          SE: Southeast
+          # direction=SSE
+          SSE: South-southeast
+          # direction=SSW
+          SSW: South-southwest
+          # direction=SW
+          SW: Southwest
+          # direction=W
+          W: West
+          # direction=WNW
+          WNW: West-northwest
+          # direction=WSW
+          WSW: West-southwest
       clock_direction:
+        # 'direction=*'
         label: Direction
         options:
-          clockwise: Clockwise
+          # direction=anticlockwise
           anticlockwise: Counterclockwise
+          # direction=clockwise
+          clockwise: Clockwise
       collection_times:
+        # 'collection_times=*'
         label: Collection Times
       construction:
+        # 'construction=*'
         label: Type
       content:
+        # 'content=*'
         label: Contents
       country:
+        # 'country=*'
         label: Country
       covered:
+        # 'covered=*'
         label: Covered
       craft:
+        # 'craft=*'
         label: Type
       crop:
+        # 'crop=*'
         label: Crop
       crossing:
+        # 'crossing=*'
         label: Type
       cuisine:
+        # 'cuisine=*'
         label: Cuisine
       delivery:
+        # 'delivery=*'
         label: Delivery
       denomination:
+        # 'denomination=*'
         label: Denomination
       denotation:
+        # 'denotation=*'
         label: Denotation
       description:
+        # 'description=*'
         label: Description
       drive_through:
+        # 'drive_through=*'
         label: Drive-Through
       electrified:
+        # 'electrified=*'
         label: Electrification
-        placeholder: "Contact Line, Electrified Rail..."
         options:
+          # electrified=contact_line
           contact_line: Contact Line
+          # electrified=no
+          'no': 'No'
+          # electrified=rail
           rail: Electrified Rail
-          "yes": Yes (unspecified)
-          "no": "No"
+          # electrified=yes
+          'yes': Yes (unspecified)
+        # electrified field placeholder
+        placeholder: 'Contact Line, Electrified Rail...'
       elevation:
+        # 'ele=*'
         label: Elevation
       emergency:
+        # 'emergency=*'
         label: Emergency
       entrance:
+        # 'entrance=*'
         label: Type
       except:
+        # 'except=*'
         label: Exceptions
       fax:
+        # 'fax=*'
         label: Fax
+        # fax field placeholder
         placeholder: +31 42 123 4567
       fee:
+        # 'fee=*'
         label: Fee
       fire_hydrant/type:
+        # 'fire_hydrant:type=*'
         label: Type
         options:
+          # 'fire_hydrant:type=pillar'
           pillar: Pillar/Aboveground
-          underground: Underground
-          wall: Wall
+          # 'fire_hydrant:type=pond'
           pond: Pond
+          # 'fire_hydrant:type=underground'
+          underground: Underground
+          # 'fire_hydrant:type=wall'
+          wall: Wall
       fixme:
+        # 'fixme=*'
         label: Fix Me
       fuel:
+        # 'fuel=*'
         label: Fuel
       fuel/biodiesel:
+        # 'fuel:biodiesel=*'
         label: Sells Biodiesel
       fuel/diesel:
+        # 'fuel:diesel=*'
         label: Sells Diesel
       fuel/e10:
+        # 'fuel:e10=*'
         label: Sells E10
       fuel/e85:
+        # 'fuel:e85=*'
         label: Sells E85
       fuel/lpg:
+        # 'fuel:lpg=*'
         label: Sells Propane
       fuel/octane_100:
+        # 'fuel:octane_100=*'
         label: Sells Racing Gasoline
       fuel/octane_91:
+        # 'fuel:octane_91=*'
         label: Sells Regular Gasoline
       fuel/octane_95:
+        # 'fuel:octane_95=*'
         label: Sells Midgrade Gasoline
       fuel/octane_98:
+        # 'fuel:octane_98=*'
         label: Sells Premium Gasoline
       gauge:
+        # 'gauge=*'
         label: Gauge
       gender:
+        # 'male=*, female=*, unisex=*'
         label: Gender
-        placeholder: Unknown
         options:
-          male: Male
+          # female=yes
           female: Female
+          # male=yes
+          male: Male
+          # unisex=yes
           unisex: Unisex
+        # gender field placeholder
+        placeholder: Unknown
       generator/method:
+        # 'generator:method=*'
         label: Method
       generator/source:
+        # 'generator:source=*'
         label: Source
       generator/type:
+        # 'generator:type=*'
         label: Type
       golf_hole:
+        # 'ref=*'
         label: Reference
+        # golf_hole field placeholder
         placeholder: Hole number (1-18)
       handicap:
+        # 'handicap=*'
         label: Handicap
+        # handicap field placeholder
         placeholder: 1-18
       highway:
+        # 'highway=*'
         label: Type
       historic:
+        # 'historic=*'
         label: Type
       hoops:
+        # 'hoops=*'
         label: Hoops
-        placeholder: "1, 2, 4..."
+        # hoops field placeholder
+        placeholder: '1, 2, 4...'
       iata:
+        # 'iata=*'
         label: IATA
       icao:
+        # 'icao=*'
         label: ICAO
       incline:
+        # 'incline=*'
         label: Incline
       incline_steps:
+        # 'incline=*'
         label: Incline
         options:
-          up: Up
+          # incline=down
           down: Down
+          # incline=up
+          up: Up
       information:
+        # 'information=*'
         label: Type
       internet_access:
+        # 'internet_access=*'
         label: Internet Access
         options:
-          "yes": "Yes"
-          "no": "No"
-          wlan: Wifi
-          wired: Wired
+          # internet_access=no
+          'no': 'No'
+          # internet_access=terminal
           terminal: Terminal
+          # internet_access=wired
+          wired: Wired
+          # internet_access=wlan
+          wlan: Wifi
+          # internet_access=yes
+          'yes': 'Yes'
       lamp_type:
+        # 'lamp_type=*'
         label: Type
       landuse:
+        # 'landuse=*'
         label: Type
       lanes:
+        # 'lanes=*'
         label: Lanes
-        placeholder: "1, 2, 3..."
+        # lanes field placeholder
+        placeholder: '1, 2, 3...'
       layer:
+        # 'layer=*'
         label: Layer
       leaf_cycle:
+        # 'leaf_cycle=*'
         label: Leaf Cycle
         options:
-          evergreen: Evergreen
+          # leaf_cycle=deciduous
           deciduous: Deciduous
-          semi_evergreen: Semi-Evergreen
-          semi_deciduous: Semi-Deciduous
+          # leaf_cycle=evergreen
+          evergreen: Evergreen
+          # leaf_cycle=mixed
           mixed: Mixed
+          # leaf_cycle=semi_deciduous
+          semi_deciduous: Semi-Deciduous
+          # leaf_cycle=semi_evergreen
+          semi_evergreen: Semi-Evergreen
       leaf_type:
+        # 'leaf_type=*'
         label: Leaf Type
         options:
+          # leaf_type=broadleaved
           broadleaved: Broadleaved
-          needleleaved: Needleleaved
-          mixed: Mixed
+          # leaf_type=leafless
           leafless: Leafless
+          # leaf_type=mixed
+          mixed: Mixed
+          # leaf_type=needleleaved
+          needleleaved: Needleleaved
       leisure:
+        # 'leisure=*'
         label: Type
       length:
+        # 'length=*'
         label: Length (Meters)
       levels:
+        # 'building:levels=*'
         label: Levels
-        placeholder: "2, 4, 6..."
+        # levels field placeholder
+        placeholder: '2, 4, 6...'
       lit:
+        # 'lit=*'
         label: Lit
       location:
+        # 'location=*'
         label: Location
       man_made:
+        # 'man_made=*'
         label: Type
       maxspeed:
+        # 'maxspeed=*'
         label: Speed Limit
-        placeholder: "40, 50, 60..."
+        # maxspeed field placeholder
+        placeholder: '40, 50, 60...'
       mtb/scale:
+        # 'mtb:scale=*'
         label: Mountain Biking Difficulty
-        placeholder: "0, 1, 2, 3..."
         options:
-          "0": "0: Solid gravel/packed earth, no obstacles, wide curves"
-          "1": "1: Some loose surface, small obstacles, wide curves"
-          "2": "2: Much loose surface, large obstacles, easy hairpins"
-          "3": "3: Slippery surface, large obstacles, tight hairpins"
-          "4": "4: Loose surface or boulders, dangerous hairpins"
-          "5": "5: Maximum difficulty, boulder fields, landslides"
-          "6": "6: Not rideable except by the very best mountain bikers"
+          # 'mtb:scale=0'
+          '0': '0: Solid gravel/packed earth, no obstacles, wide curves'
+          # 'mtb:scale=1'
+          '1': '1: Some loose surface, small obstacles, wide curves'
+          # 'mtb:scale=2'
+          '2': '2: Much loose surface, large obstacles, easy hairpins'
+          # 'mtb:scale=3'
+          '3': '3: Slippery surface, large obstacles, tight hairpins'
+          # 'mtb:scale=4'
+          '4': '4: Loose surface or boulders, dangerous hairpins'
+          # 'mtb:scale=5'
+          '5': '5: Maximum difficulty, boulder fields, landslides'
+          # 'mtb:scale=6'
+          '6': '6: Not rideable except by the very best mountain bikers'
+        # mtb/scale field placeholder
+        placeholder: '0, 1, 2, 3...'
       mtb/scale/imba:
+        # 'mtb:scale:imba=*'
         label: IMBA Trail Difficulty
-        placeholder: "Easy, Medium, Difficult..."
         options:
-          "0": Easiest (white circle)
-          "1": Easy (green circle)
-          "2": Medium (blue square)
-          "3": Difficult (black diamond)
-          "4": Extremely Difficult (double black diamond)
+          # 'mtb:scale:imba=0'
+          '0': Easiest (white circle)
+          # 'mtb:scale:imba=1'
+          '1': Easy (green circle)
+          # 'mtb:scale:imba=2'
+          '2': Medium (blue square)
+          # 'mtb:scale:imba=3'
+          '3': Difficult (black diamond)
+          # 'mtb:scale:imba=4'
+          '4': Extremely Difficult (double black diamond)
+        # mtb/scale/imba field placeholder
+        placeholder: 'Easy, Medium, Difficult...'
       mtb/scale/uphill:
+        # 'mtb:scale:uphill=*'
         label: Mountain Biking Uphill Difficulty
-        placeholder: "0, 1, 2, 3..."
         options:
-          "0": "0: Avg. incline <10%, gravel/packed earth, no obstacles"
-          "1": "1: Avg. incline <15%, gravel/packed earth, few small objects"
-          "2": "2: Avg. incline <20%, stable surface, fistsize rocks/roots"
-          "3": "3: Avg. incline <25%, variable surface, fistsize rocks/branches"
-          "4": "4: Avg. incline <30%, poor condition, big rocks/branches"
-          "5": "5: Very steep, bike generally needs to be pushed or carried"
+          # 'mtb:scale:uphill=0'
+          '0': '0: Avg. incline <10%, gravel/packed earth, no obstacles'
+          # 'mtb:scale:uphill=1'
+          '1': '1: Avg. incline <15%, gravel/packed earth, few small objects'
+          # 'mtb:scale:uphill=2'
+          '2': '2: Avg. incline <20%, stable surface, fistsize rocks/roots'
+          # 'mtb:scale:uphill=3'
+          '3': '3: Avg. incline <25%, variable surface, fistsize rocks/branches'
+          # 'mtb:scale:uphill=4'
+          '4': '4: Avg. incline <30%, poor condition, big rocks/branches'
+          # 'mtb:scale:uphill=5'
+          '5': '5: Very steep, bike generally needs to be pushed or carried'
+        # mtb/scale/uphill field placeholder
+        placeholder: '0, 1, 2, 3...'
       name:
+        # 'name=*'
         label: Name
+        # name field placeholder
         placeholder: Common name (if any)
       natural:
+        # 'natural=*'
         label: Natural
       network:
+        # 'network=*'
         label: Network
       note:
+        # 'note=*'
         label: Note
       office:
+        # 'office=*'
         label: Type
       oneway:
+        # 'oneway=*'
         label: One Way
         options:
+          # oneway=no
+          'no': 'No'
+          # oneway=undefined
           undefined: Assumed to be No
-          "yes": "Yes"
-          "no": "No"
+          # oneway=yes
+          'yes': 'Yes'
       oneway_yes:
+        # 'oneway=*'
         label: One Way
         options:
+          # oneway=no
+          'no': 'No'
+          # oneway=undefined
           undefined: Assumed to be Yes
-          "yes": "Yes"
-          "no": "No"
+          # oneway=yes
+          'yes': 'Yes'
       opening_hours:
+        # 'opening_hours=*'
         label: Hours
       operator:
+        # 'operator=*'
         label: Operator
       par:
+        # 'par=*'
         label: Par
-        placeholder: "3, 4, 5..."
+        # par field placeholder
+        placeholder: '3, 4, 5...'
       park_ride:
+        # 'park_ride=*'
         label: Park and Ride
       parking:
+        # 'parking=*'
         label: Type
         options:
-          surface: Surface
-          multi-storey: Multilevel
-          underground: Underground
-          sheds: Sheds
+          # parking=carports
           carports: Carports
+          # parking=garage_boxes
           garage_boxes: Garage Boxes
+          # parking=lane
           lane: Roadside Lane
+          # parking=multi-storey
+          multi-storey: Multilevel
+          # parking=sheds
+          sheds: Sheds
+          # parking=surface
+          surface: Surface
+          # parking=underground
+          underground: Underground
       phone:
+        # 'phone=*'
         label: Phone
+        # phone field placeholder
         placeholder: +31 42 123 4567
       piste/difficulty:
+        # 'piste:difficulty=*'
         label: Difficulty
-        placeholder: "Easy, Intermediate, Advanced..."
         options:
-          novice: Novice (instructional)
-          easy: Easy (green circle)
-          intermediate: Intermediate (blue square)
+          # 'piste:difficulty=advanced'
           advanced: Advanced (black diamond)
+          # 'piste:difficulty=easy'
+          easy: Easy (green circle)
+          # 'piste:difficulty=expert'
           expert: Expert (double black diamond)
-          freeride: Freeride (off-piste)
+          # 'piste:difficulty=extreme'
           extreme: Extreme (climbing equipment required)
+          # 'piste:difficulty=freeride'
+          freeride: Freeride (off-piste)
+          # 'piste:difficulty=intermediate'
+          intermediate: Intermediate (blue square)
+          # 'piste:difficulty=novice'
+          novice: Novice (instructional)
+        # piste/difficulty field placeholder
+        placeholder: 'Easy, Intermediate, Advanced...'
       piste/grooming:
+        # 'piste:grooming=*'
         label: Grooming
         options:
-          classic: Classic
-          mogul: Mogul
+          # 'piste:grooming=backcountry'
           backcountry: Backcountry
+          # 'piste:grooming=classic'
+          classic: Classic
+          # 'piste:grooming=classic+skating'
           classic+skating: Classic and Skating
+          # 'piste:grooming=mogul'
+          mogul: Mogul
+          # 'piste:grooming=scooter'
           scooter: Scooter/Snowmobile
+          # 'piste:grooming=skating'
           skating: Skating
       piste/type:
+        # 'piste:type=*'
         label: Type
         options:
+          # 'piste:type=downhill'
           downhill: Downhill
-          nordic: Nordic
-          skitour: Skitour
-          sled: Sled
+          # 'piste:type=hike'
           hike: Hike
-          sleigh: Sleigh
+          # 'piste:type=ice_skate'
           ice_skate: Ice Skate
-          snow_park: Snow Park
+          # 'piste:type=nordic'
+          nordic: Nordic
+          # 'piste:type=playground'
           playground: Playground
+          # 'piste:type=skitour'
+          skitour: Skitour
+          # 'piste:type=sled'
+          sled: Sled
+          # 'piste:type=sleigh'
+          sleigh: Sleigh
+          # 'piste:type=snow_park'
+          snow_park: Snow Park
       place:
+        # 'place=*'
         label: Type
       population:
+        # 'population=*'
         label: Population
       power:
+        # 'power=*'
         label: Type
       power_supply:
+        # 'power_supply=*'
         label: Power Supply
       railway:
+        # 'railway=*'
         label: Type
       recycling/cans:
+        # 'recycling:cans=*'
         label: Accepts Cans
       recycling/clothes:
+        # 'recycling:clothes=*'
         label: Accepts Clothes
       recycling/glass:
+        # 'recycling:glass=*'
         label: Accepts Glass
       recycling/paper:
+        # 'recycling:paper=*'
         label: Accepts Paper
       ref:
+        # 'ref=*'
         label: Reference
       relation:
+        # 'type=*'
         label: Type
       religion:
+        # 'religion=*'
         label: Religion
       restriction:
+        # 'restriction=*'
         label: Type
       restrictions:
         label: Turn Restrictions
       route:
+        # 'route=*'
         label: Type
       route_master:
+        # 'route_master=*'
         label: Type
       sac_scale:
+        # 'sac_scale=*'
         label: Hiking Difficulty
-        placeholder: "Mountain Hiking, Alpine Hiking..."
         options:
-          hiking: "T1: Hiking"
-          mountain_hiking: "T2: Mountain Hiking"
-          demanding_mountain_hiking: "T3: Demanding Mountain Hiking"
-          alpine_hiking: "T4: Alpine Hiking"
-          demanding_alpine_hiking: "T5: Demanding Alpine Hiking"
-          difficult_alpine_hiking: "T6: Difficult Alpine Hiking"
+          # sac_scale=alpine_hiking
+          alpine_hiking: 'T4: Alpine Hiking'
+          # sac_scale=demanding_alpine_hiking
+          demanding_alpine_hiking: 'T5: Demanding Alpine Hiking'
+          # sac_scale=demanding_mountain_hiking
+          demanding_mountain_hiking: 'T3: Demanding Mountain Hiking'
+          # sac_scale=difficult_alpine_hiking
+          difficult_alpine_hiking: 'T6: Difficult Alpine Hiking'
+          # sac_scale=hiking
+          hiking: 'T1: Hiking'
+          # sac_scale=mountain_hiking
+          mountain_hiking: 'T2: Mountain Hiking'
+        # sac_scale field placeholder
+        placeholder: 'Mountain Hiking, Alpine Hiking...'
       sanitary_dump_station:
+        # 'sanitary_dump_station=*'
         label: Toilet Disposal
       seasonal:
+        # 'seasonal=*'
         label: Seasonal
       service:
+        # 'service=*'
         label: Type
       service/bicycle/chain_tool:
+        # 'service:bicycle:chain_tool=*'
         label: Chain Tool
         options:
+          # 'service:bicycle:chain_tool=no'
+          'no': 'No'
+          # 'service:bicycle:chain_tool=undefined'
           undefined: Assumed to be No
-          "yes": "Yes"
-          "no": "No"
+          # 'service:bicycle:chain_tool=yes'
+          'yes': 'Yes'
       service/bicycle/pump:
+        # 'service:bicycle:pump=*'
         label: Air Pump
         options:
+          # 'service:bicycle:pump=no'
+          'no': 'No'
+          # 'service:bicycle:pump=undefined'
           undefined: Assumed to be No
-          "yes": "Yes"
-          "no": "No"
+          # 'service:bicycle:pump=yes'
+          'yes': 'Yes'
       service_rail:
+        # 'service=*'
         label: Service Type
         options:
-          spur: Spur
-          yard: Yard
-          siding: Siding
+          # service=crossover
           crossover: Crossover
+          # service=siding
+          siding: Siding
+          # service=spur
+          spur: Spur
+          # service=yard
+          yard: Yard
       shelter:
+        # 'shelter=*'
         label: Shelter
       shelter_type:
+        # 'shelter_type=*'
         label: Type
       shop:
+        # 'shop=*'
         label: Type
       sloped_curb:
+        # 'sloped_curb=*'
         label: Sloped Curb
       smoking:
+        # 'smoking=*'
         label: Smoking
-        placeholder: "No, Separated, Yes..."
         options:
-          "no": No smoking anywhere
-          separated: "In smoking areas, not physically isolated"
-          isolated: "In smoking areas, physically isolated"
-          outside: Allowed outside
-          "yes": Allowed everywhere
+          # smoking=dedicated
           dedicated: "Dedicated to smokers (e.g. smokers' club)"
+          # smoking=isolated
+          isolated: 'In smoking areas, physically isolated'
+          # smoking=no
+          'no': No smoking anywhere
+          # smoking=outside
+          outside: Allowed outside
+          # smoking=separated
+          separated: 'In smoking areas, not physically isolated'
+          # smoking=yes
+          'yes': Allowed everywhere
+        # smoking field placeholder
+        placeholder: 'No, Separated, Yes...'
       smoothness:
+        # 'smoothness=*'
         label: Smoothness
-        placeholder: "Thin Rollers, Wheels, Off-Road..."
         options:
-          excellent: "Thin Rollers: rollerblade, skateboard"
-          good: "Thin Wheels: racing bike"
-          intermediate: "Wheels: city bike, wheelchair, scooter"
-          bad: "Robust Wheels: trekking bike, car, rickshaw"
-          very_bad: "High Clearance: light duty off-road vehicle"
-          horrible: "Off-Road: heavy duty off-road vehicle"
-          very_horrible: "Specialized off-road: tractor, ATV"
+          # smoothness=bad
+          bad: 'Robust Wheels: trekking bike, car, rickshaw'
+          # smoothness=excellent
+          excellent: 'Thin Rollers: rollerblade, skateboard'
+          # smoothness=good
+          good: 'Thin Wheels: racing bike'
+          # smoothness=horrible
+          horrible: 'Off-Road: heavy duty off-road vehicle'
+          # smoothness=impassable
           impassable: Impassable / No wheeled vehicle
+          # smoothness=intermediate
+          intermediate: 'Wheels: city bike, wheelchair, scooter'
+          # smoothness=very_bad
+          very_bad: 'High Clearance: light duty off-road vehicle'
+          # smoothness=very_horrible
+          very_horrible: 'Specialized off-road: tractor, ATV'
+        # smoothness field placeholder
+        placeholder: 'Thin Rollers, Wheels, Off-Road...'
       social_facility_for:
+        # 'social_facility:for=*'
         label: People served
-        placeholder: "Homeless, Disabled, Child, etc"
+        # social_facility_for field placeholder
+        placeholder: 'Homeless, Disabled, Child, etc'
       source:
+        # 'source=*'
         label: Source
       sport:
+        # 'sport=*'
         label: Sport
       sport_ice:
+        # 'sport=*'
         label: Sport
       sport_racing:
+        # 'sport=*'
         label: Sport
       structure:
+        # 'bridge=*, tunnel=*, embankment=*, cutting=*, ford=*'
         label: Structure
-        placeholder: Unknown
         options:
+          # bridge=yes
           bridge: Bridge
-          tunnel: Tunnel
-          embankment: Embankment
+          # cutting=yes
           cutting: Cutting
+          # embankment=yes
+          embankment: Embankment
+          # ford=yes
           ford: Ford
+          # tunnel=yes
+          tunnel: Tunnel
+        # structure field placeholder
+        placeholder: Unknown
       studio_type:
+        # 'type=*'
         label: Type
       substation:
+        # 'substation=*'
         label: Type
       supervised:
+        # 'supervised=*'
         label: Supervised
       surface:
+        # 'surface=*'
         label: Surface
       tactile_paving:
+        # 'tactile_paving=*'
         label: Tactile Paving
       takeaway:
+        # 'takeaway=*'
         label: Takeaway
-        placeholder: "Yes, No, Takeaway Only..."
         options:
-          "yes": "Yes"
-          "no": "No"
+          # takeaway=no
+          'no': 'No'
+          # takeaway=only
           only: Takeaway Only
+          # takeaway=yes
+          'yes': 'Yes'
+        # takeaway field placeholder
+        placeholder: 'Yes, No, Takeaway Only...'
       toilets/disposal:
+        # 'toilets:disposal=*'
         label: Disposal
         options:
-          flush: Flush
-          pitlatrine: Pit/Latrine
-          chemical: Chemical
+          # 'toilets:disposal=bucket'
           bucket: Bucket
+          # 'toilets:disposal=chemical'
+          chemical: Chemical
+          # 'toilets:disposal=flush'
+          flush: Flush
+          # 'toilets:disposal=pitlatrine'
+          pitlatrine: Pit/Latrine
       tourism:
+        # 'tourism=*'
         label: Type
       towertype:
+        # 'tower:type=*'
         label: Tower type
       tracktype:
+        # 'tracktype=*'
         label: Track Type
-        placeholder: "Solid, Mostly Solid, Soft..."
         options:
-          grade1: "Solid: paved or heavily compacted hardcore surface"
-          grade2: "Mostly Solid: gravel/rock with some soft material mixed in"
+          # tracktype=grade1
+          grade1: 'Solid: paved or heavily compacted hardcore surface'
+          # tracktype=grade2
+          grade2: 'Mostly Solid: gravel/rock with some soft material mixed in'
+          # tracktype=grade3
           grade3: Even mixture of hard and soft materials
-          grade4: "Mostly Soft: soil/sand/grass with some hard material mixed in"
-          grade5: "Soft: soil/sand/grass"
+          # tracktype=grade4
+          grade4: 'Mostly Soft: soil/sand/grass with some hard material mixed in'
+          # tracktype=grade5
+          grade5: 'Soft: soil/sand/grass'
+        # tracktype field placeholder
+        placeholder: 'Solid, Mostly Solid, Soft...'
       trail_visibility:
+        # 'trail_visibility=*'
         label: Trail Visibility
-        placeholder: "Excellent, Good, Bad..."
         options:
-          excellent: "Excellent: unambiguous path or markers everywhere"
-          good: "Good: markers visible, sometimes require searching"
-          intermediate: "Intermediate: few markers, path mostly visible"
-          bad: "Bad: no markers, path sometimes invisible/pathless"
-          horrible: "Horrible: often pathless, some orientation skills required"
-          "no": "No: pathless, excellent orientation skills required"
+          # trail_visibility=bad
+          bad: 'Bad: no markers, path sometimes invisible/pathless'
+          # trail_visibility=excellent
+          excellent: 'Excellent: unambiguous path or markers everywhere'
+          # trail_visibility=good
+          good: 'Good: markers visible, sometimes require searching'
+          # trail_visibility=horrible
+          horrible: 'Horrible: often pathless, some orientation skills required'
+          # trail_visibility=intermediate
+          intermediate: 'Intermediate: few markers, path mostly visible'
+          # trail_visibility=no
+          'no': 'No: pathless, excellent orientation skills required'
+        # trail_visibility field placeholder
+        placeholder: 'Excellent, Good, Bad...'
       trees:
+        # 'trees=*'
         label: Trees
       tunnel:
+        # 'tunnel=*'
         label: Tunnel
       vending:
+        # 'vending=*'
         label: Type of Goods
       water:
+        # 'water=*'
         label: Type
       water_point:
+        # 'water_point=*'
         label: Water Point
       waterway:
+        # 'waterway=*'
         label: Type
       website:
+        # 'website=*'
         label: Website
-        placeholder: "http://example.com/"
+        # website field placeholder
+        placeholder: 'http://example.com/'
       wetland:
+        # 'wetland=*'
         label: Type
       wheelchair:
+        # 'wheelchair=*'
         label: Wheelchair Access
       width:
+        # 'width=*'
         label: Width (Meters)
       wikipedia:
+        # 'wikipedia=*'
         label: Wikipedia
     presets:
       address:
+        # 'addr:housenumber=*'
         name: Address
         terms: "<translate with synonyms or related terms for 'Address', separated by commas>"
       aerialway:
+        # 'aerialway=*'
         name: Aerialway
+        # 'terms: ski lift,funifor,funitel'
         terms: "<translate with synonyms or related terms for 'Aerialway', separated by commas>"
       aerialway/cable_car:
+        # aerialway=cable_car
         name: Cable Car
+        # 'terms: tramway,ropeway'
         terms: "<translate with synonyms or related terms for 'Cable Car', separated by commas>"
       aerialway/chair_lift:
+        # aerialway=chair_lift
         name: Chair Lift
         terms: "<translate with synonyms or related terms for 'Chair Lift', separated by commas>"
       aerialway/gondola:
+        # aerialway=gondola
         name: Gondola
         terms: "<translate with synonyms or related terms for 'Gondola', separated by commas>"
       aerialway/magic_carpet:
+        # aerialway=magic_carpet
         name: Magic Carpet Lift
         terms: "<translate with synonyms or related terms for 'Magic Carpet Lift', separated by commas>"
       aerialway/platter:
+        # aerialway=platter
         name: Platter Lift
+        # 'terms: button lift,poma lift'
         terms: "<translate with synonyms or related terms for 'Platter Lift', separated by commas>"
       aerialway/pylon:
+        # aerialway=pylon
         name: Aerialway Pylon
         terms: "<translate with synonyms or related terms for 'Aerialway Pylon', separated by commas>"
       aerialway/rope_tow:
+        # aerialway=rope_tow
         name: Rope Tow Lift
+        # 'terms: handle tow,bugel lift'
         terms: "<translate with synonyms or related terms for 'Rope Tow Lift', separated by commas>"
       aerialway/station:
+        # aerialway=station
         name: Aerialway Station
         terms: "<translate with synonyms or related terms for 'Aerialway Station', separated by commas>"
       aerialway/t-bar:
+        # aerialway=t-bar
         name: T-bar Lift
         terms: "<translate with synonyms or related terms for 'T-bar Lift', separated by commas>"
       aeroway:
+        # 'aeroway=*'
         name: Aeroway
         terms: "<translate with synonyms or related terms for 'Aeroway', separated by commas>"
       aeroway/aerodrome:
+        # aeroway=aerodrome
         name: Airport
+        # 'terms: airplane,airport,aerodrome'
         terms: "<translate with synonyms or related terms for 'Airport', separated by commas>"
       aeroway/apron:
+        # aeroway=apron
         name: Apron
+        # 'terms: ramp'
         terms: "<translate with synonyms or related terms for 'Apron', separated by commas>"
       aeroway/gate:
+        # aeroway=gate
         name: Airport gate
         terms: "<translate with synonyms or related terms for 'Airport gate', separated by commas>"
       aeroway/hangar:
+        # aeroway=hangar
         name: Hangar
         terms: "<translate with synonyms or related terms for 'Hangar', separated by commas>"
       aeroway/helipad:
+        # aeroway=helipad
         name: Helipad
+        # 'terms: helicopter,helipad,heliport'
         terms: "<translate with synonyms or related terms for 'Helipad', separated by commas>"
       aeroway/runway:
+        # aeroway=runway
         name: Runway
+        # 'terms: landing strip'
         terms: "<translate with synonyms or related terms for 'Runway', separated by commas>"
       aeroway/taxiway:
+        # aeroway=taxiway
         name: Taxiway
         terms: "<translate with synonyms or related terms for 'Taxiway', separated by commas>"
       aeroway/terminal:
+        # aeroway=terminal
         name: Airport terminal
+        # 'terms: airport,aerodrome'
         terms: "<translate with synonyms or related terms for 'Airport terminal', separated by commas>"
       amenity:
+        # 'amenity=*'
         name: Amenity
         terms: "<translate with synonyms or related terms for 'Amenity', separated by commas>"
       amenity/arts_centre:
+        # amenity=arts_centre
         name: Arts Center
         terms: "<translate with synonyms or related terms for 'Arts Center', separated by commas>"
       amenity/atm:
+        # amenity=atm
         name: ATM
+        # 'terms: money,cash,machine'
         terms: "<translate with synonyms or related terms for 'ATM', separated by commas>"
       amenity/bank:
+        # amenity=bank
         name: Bank
+        # 'terms: credit union,check,deposit,fund,investment,repository,reserve,safe,savings,stock,treasury,trust,vault'
         terms: "<translate with synonyms or related terms for 'Bank', separated by commas>"
       amenity/bar:
+        # amenity=bar
         name: Bar
+        # 'terms: dive,beer,bier,booze'
         terms: "<translate with synonyms or related terms for 'Bar', separated by commas>"
       amenity/bbq:
+        # amenity=bbq
         name: Barbecue/Grill
+        # 'terms: bbq'
         terms: "<translate with synonyms or related terms for 'Barbecue/Grill', separated by commas>"
       amenity/bench:
+        # amenity=bench
         name: Bench
         terms: "<translate with synonyms or related terms for 'Bench', separated by commas>"
       amenity/bicycle_parking:
+        # amenity=bicycle_parking
         name: Bicycle Parking
+        # 'terms: bike'
         terms: "<translate with synonyms or related terms for 'Bicycle Parking', separated by commas>"
       amenity/bicycle_rental:
+        # amenity=bicycle_rental
         name: Bicycle Rental
+        # 'terms: bike'
         terms: "<translate with synonyms or related terms for 'Bicycle Rental', separated by commas>"
       amenity/bicycle_repair_station:
+        # amenity=bicycle_repair_station
         name: Bicycle Repair Station
+        # 'terms: bike'
         terms: "<translate with synonyms or related terms for 'Bicycle Repair Station', separated by commas>"
       amenity/biergarten:
+        # amenity=biergarten
         name: Beer Garden
+        # 'terms: beer,bier,booze'
         terms: "<translate with synonyms or related terms for 'Beer Garden', separated by commas>"
       amenity/boat_rental:
+        # amenity=boat_rental
         name: Boat Rental
         terms: "<translate with synonyms or related terms for 'Boat Rental', separated by commas>"
       amenity/bureau_de_change:
+        # amenity=bureau_de_change
         name: Currency Exchange
+        # 'terms: bureau de change,money changer'
         terms: "<translate with synonyms or related terms for 'Currency Exchange', separated by commas>"
       amenity/bus_station:
+        # amenity=bus_station
         name: Bus Station
         terms: "<translate with synonyms or related terms for 'Bus Station', separated by commas>"
       amenity/cafe:
+        # amenity=cafe
         name: Cafe
+        # 'terms: coffee,tea'
         terms: "<translate with synonyms or related terms for 'Cafe', separated by commas>"
       amenity/car_rental:
+        # amenity=car_rental
         name: Car Rental
         terms: "<translate with synonyms or related terms for 'Car Rental', separated by commas>"
       amenity/car_sharing:
+        # amenity=car_sharing
         name: Car Sharing
         terms: "<translate with synonyms or related terms for 'Car Sharing', separated by commas>"
       amenity/car_wash:
+        # amenity=car_wash
         name: Car Wash
         terms: "<translate with synonyms or related terms for 'Car Wash', separated by commas>"
       amenity/charging_station:
+        # amenity=charging_station
         name: Charging Station
+        # 'terms: EV,Electric Vehicle,Supercharger'
         terms: "<translate with synonyms or related terms for 'Charging Station', separated by commas>"
       amenity/childcare:
+        # amenity=childcare
         name: Nursery/Childcare
+        # 'terms: daycare,orphanage,playgroup'
         terms: "<translate with synonyms or related terms for 'Nursery/Childcare', separated by commas>"
       amenity/cinema:
+        # amenity=cinema
         name: Cinema
+        # 'terms: drive-in,film,flick,movie,theater,picture,show,screen'
         terms: "<translate with synonyms or related terms for 'Cinema', separated by commas>"
       amenity/clinic:
+        # amenity=clinic
         name: Clinic
+        # 'terms: medical,urgentcare'
         terms: "<translate with synonyms or related terms for 'Clinic', separated by commas>"
       amenity/clock:
+        # amenity=clock
         name: Clock
         terms: "<translate with synonyms or related terms for 'Clock', separated by commas>"
       amenity/college:
+        # amenity=college
         name: College Grounds
+        # 'terms: university'
         terms: "<translate with synonyms or related terms for 'College Grounds', separated by commas>"
       amenity/community_centre:
+        # amenity=community_centre
         name: Community Center
+        # 'terms: event,hall'
         terms: "<translate with synonyms or related terms for 'Community Center', separated by commas>"
       amenity/compressed_air:
+        # amenity=compressed_air
         name: Compressed Air
         terms: "<translate with synonyms or related terms for 'Compressed Air', separated by commas>"
       amenity/courthouse:
+        # amenity=courthouse
         name: Courthouse
         terms: "<translate with synonyms or related terms for 'Courthouse', separated by commas>"
       amenity/dentist:
+        # amenity=dentist
         name: Dentist
+        # 'terms: tooth,teeth'
         terms: "<translate with synonyms or related terms for 'Dentist', separated by commas>"
       amenity/doctor:
+        # amenity=doctors
         name: Doctor
+        # 'terms: medic*'
         terms: "<translate with synonyms or related terms for 'Doctor', separated by commas>"
       amenity/dojo:
+        # amenity=dojo
         name: Dojo / Martial Arts Academy
+        # 'terms: martial arts,dojang'
         terms: "<translate with synonyms or related terms for 'Dojo / Martial Arts Academy', separated by commas>"
       amenity/drinking_water:
+        # amenity=drinking_water
         name: Drinking Water
+        # 'terms: fountain,potable'
         terms: "<translate with synonyms or related terms for 'Drinking Water', separated by commas>"
       amenity/embassy:
+        # amenity=embassy
         name: Embassy
         terms: "<translate with synonyms or related terms for 'Embassy', separated by commas>"
       amenity/fast_food:
+        # amenity=fast_food
         name: Fast Food
+        # 'terms: restaurant'
         terms: "<translate with synonyms or related terms for 'Fast Food', separated by commas>"
       amenity/fire_station:
+        # amenity=fire_station
         name: Fire Station
         terms: "<translate with synonyms or related terms for 'Fire Station', separated by commas>"
       amenity/fountain:
+        # amenity=fountain
         name: Fountain
         terms: "<translate with synonyms or related terms for 'Fountain', separated by commas>"
       amenity/fuel:
+        # amenity=fuel
         name: Gas Station
+        # 'terms: petrol,fuel,propane,diesel,lng,cng,biodiesel'
         terms: "<translate with synonyms or related terms for 'Gas Station', separated by commas>"
       amenity/grave_yard:
+        # amenity=grave_yard
         name: Graveyard
         terms: "<translate with synonyms or related terms for 'Graveyard', separated by commas>"
       amenity/grit_bin:
+        # amenity=grit_bin
         name: Grit Bin
+        # 'terms: salt,sand'
         terms: "<translate with synonyms or related terms for 'Grit Bin', separated by commas>"
       amenity/hospital:
+        # amenity=hospital
         name: Hospital Grounds
+        # 'terms: clinic,doctor,emergency room,health service,hospice,infirmary,institution,nursing home,sanatorium,sanitarium,sick,surgery,ward'
         terms: "<translate with synonyms or related terms for 'Hospital Grounds', separated by commas>"
       amenity/kindergarten:
+        # amenity=kindergarten
         name: Preschool/Kindergarten Grounds
+        # 'terms: kindergarden,pre-school'
         terms: "<translate with synonyms or related terms for 'Preschool/Kindergarten Grounds', separated by commas>"
       amenity/library:
+        # amenity=library
         name: Library
+        # 'terms: book'
         terms: "<translate with synonyms or related terms for 'Library', separated by commas>"
       amenity/marketplace:
+        # amenity=marketplace
         name: Marketplace
         terms: "<translate with synonyms or related terms for 'Marketplace', separated by commas>"
       amenity/nightclub:
+        # amenity=nightclub
         name: Nightclub
+        # 'terms: disco*,night club,dancing,dance club'
         terms: "<translate with synonyms or related terms for 'Nightclub', separated by commas>"
       amenity/parking:
+        # amenity=parking
         name: Car Parking
         terms: "<translate with synonyms or related terms for 'Car Parking', separated by commas>"
       amenity/parking_entrance:
+        # amenity=parking_entrance
         name: Parking Garage Entrance/Exit
         terms: "<translate with synonyms or related terms for 'Parking Garage Entrance/Exit', separated by commas>"
       amenity/pharmacy:
+        # amenity=pharmacy
         name: Pharmacy
+        # 'terms: drug,medicine'
         terms: "<translate with synonyms or related terms for 'Pharmacy', separated by commas>"
       amenity/place_of_worship:
+        # amenity=place_of_worship
         name: Place of Worship
+        # 'terms: abbey,basilica,bethel,cathedral,chancel,chantry,chapel,church,fold,house of God,house of prayer,house of worship,minster,mission,mosque,oratory,parish,sacellum,sanctuary,shrine,synagogue,tabernacle,temple'
         terms: "<translate with synonyms or related terms for 'Place of Worship', separated by commas>"
       amenity/place_of_worship/buddhist:
+        # 'amenity=place_of_worship, religion=buddhist'
         name: Buddhist Temple
+        # 'terms: stupa,vihara,monastery,temple,pagoda,zendo,dojo'
         terms: "<translate with synonyms or related terms for 'Buddhist Temple', separated by commas>"
       amenity/place_of_worship/christian:
+        # 'amenity=place_of_worship, religion=christian'
         name: Church
+        # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
         terms: "<translate with synonyms or related terms for 'Church', separated by commas>"
       amenity/place_of_worship/jewish:
+        # 'amenity=place_of_worship, religion=jewish'
         name: Synagogue
+        # 'terms: jewish'
         terms: "<translate with synonyms or related terms for 'Synagogue', separated by commas>"
       amenity/place_of_worship/muslim:
+        # 'amenity=place_of_worship, religion=muslim'
         name: Mosque
+        # 'terms: muslim'
         terms: "<translate with synonyms or related terms for 'Mosque', separated by commas>"
       amenity/police:
+        # amenity=police
         name: Police
+        # 'terms: badge,constable,constabulary,cop,detective,fed,law,enforcement,officer,patrol'
         terms: "<translate with synonyms or related terms for 'Police', separated by commas>"
       amenity/post_box:
+        # amenity=post_box
         name: Mailbox
+        # 'terms: letter,post'
         terms: "<translate with synonyms or related terms for 'Mailbox', separated by commas>"
       amenity/post_office:
+        # amenity=post_office
         name: Post Office
+        # 'terms: letter,mail'
         terms: "<translate with synonyms or related terms for 'Post Office', separated by commas>"
       amenity/pub:
+        # amenity=pub
         name: Pub
+        # 'terms: dive,beer,bier,booze'
         terms: "<translate with synonyms or related terms for 'Pub', separated by commas>"
       amenity/public_bookcase:
+        # amenity=public_bookcase
         name: Public Bookcase
+        # 'terms: library,bookcrossing'
         terms: "<translate with synonyms or related terms for 'Public Bookcase', separated by commas>"
       amenity/ranger_station:
+        # amenity=ranger_station
         name: Ranger Station
+        # 'terms: visitor center,visitor centre,permit center,permit centre,backcountry office,warden office,warden center'
         terms: "<translate with synonyms or related terms for 'Ranger Station', separated by commas>"
       amenity/recycling:
+        # amenity=recycling
         name: Recycling
+        # 'terms: can,bottle,garbage,scrap,trash'
         terms: "<translate with synonyms or related terms for 'Recycling', separated by commas>"
       amenity/register_office:
+        # amenity=register_office
         name: Register Office
         terms: "<translate with synonyms or related terms for 'Register Office', separated by commas>"
       amenity/restaurant:
+        # amenity=restaurant
         name: Restaurant
+        # 'terms: bar,breakfast,cafe,café,canteen,coffee,dine,dining,dinner,drive-in,eat,grill,lunch,table'
         terms: "<translate with synonyms or related terms for 'Restaurant', separated by commas>"
       amenity/sanitary_dump_station:
+        # amenity=sanitary_dump_station
         name: RV Toilet Disposal
+        # 'terms: Motor Home,Camper,Sanitary,Dump Station,Elsan,CDP,CTDP,Chemical Toilet'
         terms: "<translate with synonyms or related terms for 'RV Toilet Disposal', separated by commas>"
       amenity/school:
+        # amenity=school
         name: School Grounds
+        # 'terms: academy,elementary school,middle school,high school'
         terms: "<translate with synonyms or related terms for 'School Grounds', separated by commas>"
       amenity/shelter:
+        # amenity=shelter
         name: Shelter
+        # 'terms: lean-to,gazebo,picnic'
         terms: "<translate with synonyms or related terms for 'Shelter', separated by commas>"
       amenity/social_facility:
+        # amenity=social_facility
         name: Social Facility
         terms: "<translate with synonyms or related terms for 'Social Facility', separated by commas>"
       amenity/social_facility/food_bank:
+        # 'amenity=social_facility, social_facility=food_bank'
         name: Food Bank
         terms: "<translate with synonyms or related terms for 'Food Bank', separated by commas>"
       amenity/social_facility/group_home:
+        # 'amenity=social_facility, social_facility=group_home, social_facility:for=senior'
         name: Elderly Group Home
+        # 'terms: old,senior,living'
         terms: "<translate with synonyms or related terms for 'Elderly Group Home', separated by commas>"
       amenity/social_facility/homeless_shelter:
+        # 'amenity=social_facility, social_facility=shelter, social_facility:for=homeless'
         name: Homeless Shelter
+        # 'terms: houseless,unhoused,displaced'
         terms: "<translate with synonyms or related terms for 'Homeless Shelter', separated by commas>"
       amenity/studio:
+        # amenity=studio
         name: Studio
+        # 'terms: recording,radio,television'
         terms: "<translate with synonyms or related terms for 'Studio', separated by commas>"
       amenity/swimming_pool:
+        # amenity=swimming_pool
         name: Swimming Pool
         terms: "<translate with synonyms or related terms for 'Swimming Pool', separated by commas>"
       amenity/taxi:
+        # amenity=taxi
         name: Taxi Stand
+        # 'terms: cab'
         terms: "<translate with synonyms or related terms for 'Taxi Stand', separated by commas>"
       amenity/telephone:
+        # amenity=telephone
         name: Telephone
+        # 'terms: phone'
         terms: "<translate with synonyms or related terms for 'Telephone', separated by commas>"
       amenity/theatre:
+        # amenity=theatre
         name: Theater
+        # 'terms: theatre,performance,play,musical'
         terms: "<translate with synonyms or related terms for 'Theater', separated by commas>"
       amenity/toilets:
+        # amenity=toilets
         name: Toilets
+        # 'terms: bathroom,restroom,outhouse,privy,head,lavatory,latrine,water closet,WC,W.C.'
         terms: "<translate with synonyms or related terms for 'Toilets', separated by commas>"
       amenity/townhall:
+        # amenity=townhall
         name: Town Hall
+        # 'terms: village,city,government,courthouse,municipal'
         terms: "<translate with synonyms or related terms for 'Town Hall', separated by commas>"
       amenity/university:
+        # amenity=university
         name: University Grounds
+        # 'terms: college'
         terms: "<translate with synonyms or related terms for 'University Grounds', separated by commas>"
       amenity/vending_machine:
+        # amenity=vending_machine
         name: Vending Machine
+        # 'terms: snack,soda,ticket'
         terms: "<translate with synonyms or related terms for 'Vending Machine', separated by commas>"
       amenity/veterinary:
+        # amenity=veterinary
         name: Veterinary
+        # 'terms: pet clinic,veterinarian,animal hospital,pet doctor'
         terms: "<translate with synonyms or related terms for 'Veterinary', separated by commas>"
       amenity/waste_basket:
+        # amenity=waste_basket
         name: Waste Basket
+        # 'terms: rubbish,litter,trash,garbage'
         terms: "<translate with synonyms or related terms for 'Waste Basket', separated by commas>"
       area:
+        # area=yes
         name: Area
         terms: "<translate with synonyms or related terms for 'Area', separated by commas>"
       barrier:
+        # 'barrier=*'
         name: Barrier
         terms: "<translate with synonyms or related terms for 'Barrier', separated by commas>"
       barrier/block:
+        # barrier=block
         name: Block
         terms: "<translate with synonyms or related terms for 'Block', separated by commas>"
       barrier/bollard:
+        # barrier=bollard
         name: Bollard
         terms: "<translate with synonyms or related terms for 'Bollard', separated by commas>"
       barrier/cattle_grid:
+        # barrier=cattle_grid
         name: Cattle Grid
         terms: "<translate with synonyms or related terms for 'Cattle Grid', separated by commas>"
       barrier/city_wall:
+        # barrier=city_wall
         name: City Wall
         terms: "<translate with synonyms or related terms for 'City Wall', separated by commas>"
       barrier/cycle_barrier:
+        # barrier=cycle_barrier
         name: Cycle Barrier
         terms: "<translate with synonyms or related terms for 'Cycle Barrier', separated by commas>"
       barrier/ditch:
+        # barrier=ditch
         name: Ditch
         terms: "<translate with synonyms or related terms for 'Ditch', separated by commas>"
       barrier/entrance:
+        # barrier=entrance
         name: Entrance
         terms: "<translate with synonyms or related terms for 'Entrance', separated by commas>"
       barrier/fence:
+        # barrier=fence
         name: Fence
         terms: "<translate with synonyms or related terms for 'Fence', separated by commas>"
       barrier/gate:
+        # barrier=gate
         name: Gate
         terms: "<translate with synonyms or related terms for 'Gate', separated by commas>"
       barrier/hedge:
+        # barrier=hedge
         name: Hedge
         terms: "<translate with synonyms or related terms for 'Hedge', separated by commas>"
       barrier/kissing_gate:
+        # barrier=kissing_gate
         name: Kissing Gate
         terms: "<translate with synonyms or related terms for 'Kissing Gate', separated by commas>"
       barrier/lift_gate:
+        # barrier=lift_gate
         name: Lift Gate
         terms: "<translate with synonyms or related terms for 'Lift Gate', separated by commas>"
       barrier/retaining_wall:
+        # barrier=retaining_wall
         name: Retaining Wall
         terms: "<translate with synonyms or related terms for 'Retaining Wall', separated by commas>"
       barrier/stile:
+        # barrier=stile
         name: Stile
         terms: "<translate with synonyms or related terms for 'Stile', separated by commas>"
       barrier/toll_booth:
+        # barrier=toll_booth
         name: Toll Booth
         terms: "<translate with synonyms or related terms for 'Toll Booth', separated by commas>"
       barrier/wall:
+        # barrier=wall
         name: Wall
         terms: "<translate with synonyms or related terms for 'Wall', separated by commas>"
       boundary/administrative:
+        # boundary=administrative
         name: Administrative Boundary
         terms: "<translate with synonyms or related terms for 'Administrative Boundary', separated by commas>"
       building:
+        # 'building=*'
         name: Building
         terms: "<translate with synonyms or related terms for 'Building', separated by commas>"
       building/apartments:
+        # building=apartments
         name: Apartments
         terms: "<translate with synonyms or related terms for 'Apartments', separated by commas>"
       building/barn:
+        # building=barn
         name: Barn
         terms: "<translate with synonyms or related terms for 'Barn', separated by commas>"
       building/bunker:
+        # building=bunker
         name: Bunker
         terms: "<translate with synonyms or related terms for 'Bunker', separated by commas>"
       building/cabin:
+        # building=cabin
         name: Cabin
         terms: "<translate with synonyms or related terms for 'Cabin', separated by commas>"
       building/cathedral:
+        # building=cathedral
         name: Cathedral
         terms: "<translate with synonyms or related terms for 'Cathedral', separated by commas>"
       building/chapel:
+        # building=chapel
         name: Chapel
         terms: "<translate with synonyms or related terms for 'Chapel', separated by commas>"
       building/church:
+        # building=church
         name: Church
         terms: "<translate with synonyms or related terms for 'Church', separated by commas>"
       building/college:
+        # building=college
         name: College Building
+        # 'terms: university'
         terms: "<translate with synonyms or related terms for 'College Building', separated by commas>"
       building/commercial:
+        # building=commercial
         name: Commercial Building
         terms: "<translate with synonyms or related terms for 'Commercial Building', separated by commas>"
       building/construction:
+        # building=construction
         name: Building Under Construction
         terms: "<translate with synonyms or related terms for 'Building Under Construction', separated by commas>"
       building/detached:
+        # building=detached
         name: Detached Home
         terms: "<translate with synonyms or related terms for 'Detached Home', separated by commas>"
       building/dormitory:
+        # building=dormitory
         name: Dormitory
         terms: "<translate with synonyms or related terms for 'Dormitory', separated by commas>"
       building/entrance:
+        # building=entrance
         name: Entrance/Exit
         terms: "<translate with synonyms or related terms for 'Entrance/Exit', separated by commas>"
       building/garage:
+        # building=garage
         name: Garage
         terms: "<translate with synonyms or related terms for 'Garage', separated by commas>"
       building/garages:
+        # building=garages
         name: Garages
         terms: "<translate with synonyms or related terms for 'Garages', separated by commas>"
       building/greenhouse:
+        # building=greenhouse
         name: Greenhouse
         terms: "<translate with synonyms or related terms for 'Greenhouse', separated by commas>"
       building/hospital:
+        # building=hospital
         name: Hospital Building
         terms: "<translate with synonyms or related terms for 'Hospital Building', separated by commas>"
       building/hotel:
+        # building=hotel
         name: Hotel Building
         terms: "<translate with synonyms or related terms for 'Hotel Building', separated by commas>"
       building/house:
+        # building=house
         name: House
         terms: "<translate with synonyms or related terms for 'House', separated by commas>"
       building/hut:
+        # building=hut
         name: Hut
         terms: "<translate with synonyms or related terms for 'Hut', separated by commas>"
       building/industrial:
+        # building=industrial
         name: Industrial Building
         terms: "<translate with synonyms or related terms for 'Industrial Building', separated by commas>"
       building/kindergarten:
+        # building=kindergarten
         name: Preschool/Kindergarten Building
+        # 'terms: kindergarden,pre-school'
         terms: "<translate with synonyms or related terms for 'Preschool/Kindergarten Building', separated by commas>"
       building/public:
+        # building=public
         name: Public Building
         terms: "<translate with synonyms or related terms for 'Public Building', separated by commas>"
       building/residential:
+        # building=residential
         name: Residential Building
         terms: "<translate with synonyms or related terms for 'Residential Building', separated by commas>"
       building/retail:
+        # building=retail
         name: Retail Building
         terms: "<translate with synonyms or related terms for 'Retail Building', separated by commas>"
       building/roof:
+        # building=roof
         name: Roof
         terms: "<translate with synonyms or related terms for 'Roof', separated by commas>"
       building/school:
+        # building=school
         name: School Building
+        # 'terms: academy,elementary school,middle school,high school'
         terms: "<translate with synonyms or related terms for 'School Building', separated by commas>"
       building/shed:
+        # building=shed
         name: Shed
         terms: "<translate with synonyms or related terms for 'Shed', separated by commas>"
       building/stable:
+        # building=stable
         name: Stable
         terms: "<translate with synonyms or related terms for 'Stable', separated by commas>"
       building/static_caravan:
+        # building=static_caravan
         name: Static Mobile Home
         terms: "<translate with synonyms or related terms for 'Static Mobile Home', separated by commas>"
       building/terrace:
+        # building=terrace
         name: Row Houses
         terms: "<translate with synonyms or related terms for 'Row Houses', separated by commas>"
       building/train_station:
+        # building=train_station
         name: Train Station
         terms: "<translate with synonyms or related terms for 'Train Station', separated by commas>"
       building/university:
+        # building=university
         name: University Building
+        # 'terms: college'
         terms: "<translate with synonyms or related terms for 'University Building', separated by commas>"
       building/warehouse:
+        # building=warehouse
         name: Warehouse
         terms: "<translate with synonyms or related terms for 'Warehouse', separated by commas>"
       craft:
+        # 'craft=*'
         name: Craft
         terms: "<translate with synonyms or related terms for 'Craft', separated by commas>"
       craft/basket_maker:
+        # craft=basket_maker
         name: Basket Maker
         terms: "<translate with synonyms or related terms for 'Basket Maker', separated by commas>"
       craft/beekeeper:
+        # craft=beekeeper
         name: Beekeeper
         terms: "<translate with synonyms or related terms for 'Beekeeper', separated by commas>"
       craft/blacksmith:
+        # craft=blacksmith
         name: Blacksmith
         terms: "<translate with synonyms or related terms for 'Blacksmith', separated by commas>"
       craft/boatbuilder:
+        # craft=boatbuilder
         name: Boat Builder
         terms: "<translate with synonyms or related terms for 'Boat Builder', separated by commas>"
       craft/bookbinder:
+        # craft=bookbinder
         name: Bookbinder
+        # 'terms: book repair'
         terms: "<translate with synonyms or related terms for 'Bookbinder', separated by commas>"
       craft/brewery:
+        # craft=brewery
         name: Brewery
+        # 'terms: beer,bier'
         terms: "<translate with synonyms or related terms for 'Brewery', separated by commas>"
       craft/carpenter:
+        # craft=carpenter
         name: Carpenter
+        # 'terms: woodworker'
         terms: "<translate with synonyms or related terms for 'Carpenter', separated by commas>"
       craft/carpet_layer:
+        # craft=carpet_layer
         name: Carpet Layer
         terms: "<translate with synonyms or related terms for 'Carpet Layer', separated by commas>"
       craft/caterer:
+        # craft=caterer
         name: Caterer
         terms: "<translate with synonyms or related terms for 'Caterer', separated by commas>"
       craft/clockmaker:
+        # craft=clockmaker
         name: Clockmaker
         terms: "<translate with synonyms or related terms for 'Clockmaker', separated by commas>"
       craft/confectionery:
+        # craft=confectionery
         name: Confectionery
+        # 'terms: sweets,candy'
         terms: "<translate with synonyms or related terms for 'Confectionery', separated by commas>"
       craft/dressmaker:
+        # craft=dressmaker
         name: Dressmaker
+        # 'terms: seamstress'
         terms: "<translate with synonyms or related terms for 'Dressmaker', separated by commas>"
       craft/electrician:
+        # craft=electrician
         name: Electrician
+        # 'terms: power,wire'
         terms: "<translate with synonyms or related terms for 'Electrician', separated by commas>"
       craft/gardener:
+        # craft=gardener
         name: Gardener
+        # 'terms: landscaper,grounds keeper'
         terms: "<translate with synonyms or related terms for 'Gardener', separated by commas>"
       craft/glaziery:
+        # craft=glaziery
         name: Glaziery
+        # 'terms: glass,stained-glass,window'
         terms: "<translate with synonyms or related terms for 'Glaziery', separated by commas>"
       craft/handicraft:
+        # craft=handicraft
         name: Handicraft
         terms: "<translate with synonyms or related terms for 'Handicraft', separated by commas>"
       craft/hvac:
+        # craft=hvac
         name: HVAC
+        # 'terms: heat*,vent*,air conditioning'
         terms: "<translate with synonyms or related terms for 'HVAC', separated by commas>"
       craft/insulator:
+        # craft=insulation
         name: Insulator
         terms: "<translate with synonyms or related terms for 'Insulator', separated by commas>"
       craft/jeweler:
+        # craft=jeweler
         name: Jeweler
         terms: "<translate with synonyms or related terms for 'Jeweler', separated by commas>"
       craft/key_cutter:
+        # craft=key_cutter
         name: Key Cutter
         terms: "<translate with synonyms or related terms for 'Key Cutter', separated by commas>"
       craft/locksmith:
+        # craft=locksmith
         name: Locksmith
         terms: "<translate with synonyms or related terms for 'Locksmith', separated by commas>"
       craft/metal_construction:
+        # craft=metal_construction
         name: Metal Construction
         terms: "<translate with synonyms or related terms for 'Metal Construction', separated by commas>"
       craft/optician:
+        # craft=optician
         name: Optician
         terms: "<translate with synonyms or related terms for 'Optician', separated by commas>"
       craft/painter:
+        # craft=painter
         name: Painter
         terms: "<translate with synonyms or related terms for 'Painter', separated by commas>"
       craft/photographer:
+        # craft=photographer
         name: Photographer
         terms: "<translate with synonyms or related terms for 'Photographer', separated by commas>"
       craft/photographic_laboratory:
+        # craft=photographic_laboratory
         name: Photographic Laboratory
+        # 'terms: film'
         terms: "<translate with synonyms or related terms for 'Photographic Laboratory', separated by commas>"
       craft/plasterer:
+        # craft=plasterer
         name: Plasterer
         terms: "<translate with synonyms or related terms for 'Plasterer', separated by commas>"
       craft/plumber:
+        # craft=plumber
         name: Plumber
+        # 'terms: pipe'
         terms: "<translate with synonyms or related terms for 'Plumber', separated by commas>"
       craft/pottery:
+        # craft=pottery
         name: Pottery
+        # 'terms: ceramic'
         terms: "<translate with synonyms or related terms for 'Pottery', separated by commas>"
       craft/rigger:
+        # craft=rigger
         name: Rigger
         terms: "<translate with synonyms or related terms for 'Rigger', separated by commas>"
       craft/roofer:
+        # craft=roofer
         name: Roofer
         terms: "<translate with synonyms or related terms for 'Roofer', separated by commas>"
       craft/saddler:
+        # craft=saddler
         name: Saddler
         terms: "<translate with synonyms or related terms for 'Saddler', separated by commas>"
       craft/sailmaker:
+        # craft=sailmaker
         name: Sailmaker
         terms: "<translate with synonyms or related terms for 'Sailmaker', separated by commas>"
       craft/sawmill:
+        # craft=sawmill
         name: Sawmill
+        # 'terms: lumber'
         terms: "<translate with synonyms or related terms for 'Sawmill', separated by commas>"
       craft/scaffolder:
+        # craft=scaffolder
         name: Scaffolder
         terms: "<translate with synonyms or related terms for 'Scaffolder', separated by commas>"
       craft/sculpter:
+        # craft=sculpter
         name: Sculpter
         terms: "<translate with synonyms or related terms for 'Sculpter', separated by commas>"
       craft/shoemaker:
+        # craft=shoemaker
         name: Shoemaker
+        # 'terms: cobbler'
         terms: "<translate with synonyms or related terms for 'Shoemaker', separated by commas>"
       craft/stonemason:
+        # craft=stonemason
         name: Stonemason
+        # 'terms: masonry'
         terms: "<translate with synonyms or related terms for 'Stonemason', separated by commas>"
       craft/sweep:
+        # craft=sweep
         name: Chimney Sweep
         terms: "<translate with synonyms or related terms for 'Chimney Sweep', separated by commas>"
       craft/tailor:
+        # craft=tailor
         name: Tailor
+        # 'terms: clothes,suit'
         terms: "<translate with synonyms or related terms for 'Tailor', separated by commas>"
       craft/tiler:
+        # craft=tiler
         name: Tiler
         terms: "<translate with synonyms or related terms for 'Tiler', separated by commas>"
       craft/tinsmith:
+        # craft=tinsmith
         name: Tinsmith
         terms: "<translate with synonyms or related terms for 'Tinsmith', separated by commas>"
       craft/upholsterer:
+        # craft=upholsterer
         name: Upholsterer
         terms: "<translate with synonyms or related terms for 'Upholsterer', separated by commas>"
       craft/watchmaker:
+        # craft=watchmaker
         name: Watchmaker
         terms: "<translate with synonyms or related terms for 'Watchmaker', separated by commas>"
       craft/window_construction:
+        # craft=window_construction
         name: Window Construction
+        # 'terms: glass'
         terms: "<translate with synonyms or related terms for 'Window Construction', separated by commas>"
       craft/winery:
+        # craft=winery
         name: Winery
         terms: "<translate with synonyms or related terms for 'Winery', separated by commas>"
       embankment:
+        # embankment=yes
         name: Embankment
         terms: "<translate with synonyms or related terms for 'Embankment', separated by commas>"
       emergency/ambulance_station:
+        # emergency=ambulance_station
         name: Ambulance Station
+        # 'terms: EMS,EMT,rescue'
         terms: "<translate with synonyms or related terms for 'Ambulance Station', separated by commas>"
       emergency/fire_hydrant:
+        # emergency=fire_hydrant
         name: Fire Hydrant
         terms: "<translate with synonyms or related terms for 'Fire Hydrant', separated by commas>"
       emergency/phone:
+        # emergency=phone
         name: Emergency Phone
         terms: "<translate with synonyms or related terms for 'Emergency Phone', separated by commas>"
       entrance:
+        # 'entrance=*'
         name: Entrance/Exit
         terms: "<translate with synonyms or related terms for 'Entrance/Exit', separated by commas>"
       footway/crossing:
+        # 'highway=footway, footway=crossing'
         name: Crossing
         terms: "<translate with synonyms or related terms for 'Crossing', separated by commas>"
       footway/crosswalk:
+        # 'highway=footway, footway=crossing, crossing=zebra'
         name: Crosswalk
+        # 'terms: zebra crossing'
         terms: "<translate with synonyms or related terms for 'Crosswalk', separated by commas>"
       footway/sidewalk:
+        # 'highway=footway, footway=sidewalk'
         name: Sidewalk
         terms: "<translate with synonyms or related terms for 'Sidewalk', separated by commas>"
       ford:
+        # ford=yes
         name: Ford
         terms: "<translate with synonyms or related terms for 'Ford', separated by commas>"
       golf/bunker:
+        # 'golf=bunker, natural=sand'
         name: Sand Trap
+        # 'terms: hazard,bunker'
         terms: "<translate with synonyms or related terms for 'Sand Trap', separated by commas>"
       golf/fairway:
+        # 'golf=fairway, landuse=grass'
         name: Fairway
         terms: "<translate with synonyms or related terms for 'Fairway', separated by commas>"
       golf/green:
+        # 'golf=green, landuse=grass, leisure=pitch, sport=golf'
         name: Putting Green
         terms: "<translate with synonyms or related terms for 'Putting Green', separated by commas>"
       golf/hole:
+        # golf=hole
         name: Golf Hole
         terms: "<translate with synonyms or related terms for 'Golf Hole', separated by commas>"
       golf/lateral_water_hazard:
+        # 'golf=lateral_water_hazard, natural=water'
         name: Lateral Water Hazard
         terms: "<translate with synonyms or related terms for 'Lateral Water Hazard', separated by commas>"
       golf/rough:
+        # 'golf=rough, landuse=grass'
         name: Rough
         terms: "<translate with synonyms or related terms for 'Rough', separated by commas>"
       golf/tee:
+        # 'golf=tee, landuse=grass'
         name: Tee Box
+        # 'terms: teeing ground'
         terms: "<translate with synonyms or related terms for 'Tee Box', separated by commas>"
       golf/water_hazard:
+        # 'golf=water_hazard, natural=water'
         name: Water Hazard
         terms: "<translate with synonyms or related terms for 'Water Hazard', separated by commas>"
       highway:
+        # 'highway=*'
         name: Highway
         terms: "<translate with synonyms or related terms for 'Highway', separated by commas>"
       highway/bridleway:
+        # highway=bridleway
         name: Bridle Path
+        # 'terms: bridleway,equestrian,horse'
         terms: "<translate with synonyms or related terms for 'Bridle Path', separated by commas>"
       highway/bus_stop:
+        # highway=bus_stop
         name: Bus Stop
         terms: "<translate with synonyms or related terms for 'Bus Stop', separated by commas>"
       highway/crossing:
+        # highway=crossing
         name: Crossing
         terms: "<translate with synonyms or related terms for 'Crossing', separated by commas>"
       highway/crosswalk:
+        # 'highway=crossing, crossing=zebra'
         name: Crosswalk
+        # 'terms: zebra crossing'
         terms: "<translate with synonyms or related terms for 'Crosswalk', separated by commas>"
       highway/cycleway:
+        # highway=cycleway
         name: Cycle Path
+        # 'terms: bike'
         terms: "<translate with synonyms or related terms for 'Cycle Path', separated by commas>"
       highway/footway:
+        # highway=footway
         name: Foot Path
+        # 'terms: hike,hiking,trackway,trail,walk'
         terms: "<translate with synonyms or related terms for 'Foot Path', separated by commas>"
       highway/living_street:
+        # highway=living_street
         name: Living Street
         terms: "<translate with synonyms or related terms for 'Living Street', separated by commas>"
       highway/mini_roundabout:
+        # highway=mini_roundabout
         name: Mini-Roundabout
         terms: "<translate with synonyms or related terms for 'Mini-Roundabout', separated by commas>"
       highway/motorway:
+        # highway=motorway
         name: Motorway
         terms: "<translate with synonyms or related terms for 'Motorway', separated by commas>"
       highway/motorway_junction:
+        # highway=motorway_junction
         name: Motorway Junction / Exit
         terms: "<translate with synonyms or related terms for 'Motorway Junction / Exit', separated by commas>"
       highway/motorway_link:
+        # highway=motorway_link
         name: Motorway Link
+        # 'terms: ramp,on ramp,off ramp'
         terms: "<translate with synonyms or related terms for 'Motorway Link', separated by commas>"
       highway/path:
+        # highway=path
         name: Path
+        # 'terms: hike,hiking,trackway,trail,walk'
         terms: "<translate with synonyms or related terms for 'Path', separated by commas>"
       highway/pedestrian:
+        # highway=pedestrian
         name: Pedestrian
         terms: "<translate with synonyms or related terms for 'Pedestrian', separated by commas>"
       highway/primary:
+        # highway=primary
         name: Primary Road
         terms: "<translate with synonyms or related terms for 'Primary Road', separated by commas>"
       highway/primary_link:
+        # highway=primary_link
         name: Primary Link
+        # 'terms: ramp,on ramp,off ramp'
         terms: "<translate with synonyms or related terms for 'Primary Link', separated by commas>"
       highway/raceway:
+        # highway=raceway
         name: Motor Raceway
+        # 'terms: auto*,race*,nascar'
         terms: "<translate with synonyms or related terms for 'Motor Raceway', separated by commas>"
       highway/residential:
+        # highway=residential
         name: Residential Road
         terms: "<translate with synonyms or related terms for 'Residential Road', separated by commas>"
       highway/rest_area:
+        # highway=rest_area
         name: Rest Area
+        # 'terms: rest stop'
         terms: "<translate with synonyms or related terms for 'Rest Area', separated by commas>"
       highway/road:
+        # highway=road
         name: Unknown Road
         terms: "<translate with synonyms or related terms for 'Unknown Road', separated by commas>"
       highway/secondary:
+        # highway=secondary
         name: Secondary Road
         terms: "<translate with synonyms or related terms for 'Secondary Road', separated by commas>"
       highway/secondary_link:
+        # highway=secondary_link
         name: Secondary Link
+        # 'terms: ramp,on ramp,off ramp'
         terms: "<translate with synonyms or related terms for 'Secondary Link', separated by commas>"
       highway/service:
+        # highway=service
         name: Service Road
         terms: "<translate with synonyms or related terms for 'Service Road', separated by commas>"
       highway/service/alley:
+        # 'highway=service, service=alley'
         name: Alley
         terms: "<translate with synonyms or related terms for 'Alley', separated by commas>"
       highway/service/drive-through:
+        # 'highway=service, service=drive-through'
         name: Drive-Through
         terms: "<translate with synonyms or related terms for 'Drive-Through', separated by commas>"
       highway/service/driveway:
+        # 'highway=service, service=driveway'
         name: Driveway
         terms: "<translate with synonyms or related terms for 'Driveway', separated by commas>"
       highway/service/emergency_access:
+        # 'highway=service, service=emergency_access'
         name: Emergency Access
         terms: "<translate with synonyms or related terms for 'Emergency Access', separated by commas>"
       highway/service/parking_aisle:
+        # 'highway=service, service=parking_aisle'
         name: Parking Aisle
         terms: "<translate with synonyms or related terms for 'Parking Aisle', separated by commas>"
       highway/services:
+        # highway=services
         name: Service Area
+        # 'terms: services,travel plaza,service station'
         terms: "<translate with synonyms or related terms for 'Service Area', separated by commas>"
       highway/steps:
+        # highway=steps
         name: Steps
+        # 'terms: stairs,staircase'
         terms: "<translate with synonyms or related terms for 'Steps', separated by commas>"
       highway/stop:
+        # highway=stop
         name: Stop Sign
+        # 'terms: stop sign'
         terms: "<translate with synonyms or related terms for 'Stop Sign', separated by commas>"
       highway/street_lamp:
+        # highway=street_lamp
         name: Street Lamp
+        # 'terms: streetlight,street light,lamp,light,gaslight'
         terms: "<translate with synonyms or related terms for 'Street Lamp', separated by commas>"
       highway/tertiary:
+        # highway=tertiary
         name: Tertiary Road
         terms: "<translate with synonyms or related terms for 'Tertiary Road', separated by commas>"
       highway/tertiary_link:
+        # highway=tertiary_link
         name: Tertiary Link
+        # 'terms: ramp,on ramp,off ramp'
         terms: "<translate with synonyms or related terms for 'Tertiary Link', separated by commas>"
       highway/track:
+        # highway=track
         name: Track
+        # 'terms: woods road,fire road'
         terms: "<translate with synonyms or related terms for 'Track', separated by commas>"
       highway/traffic_signals:
+        # highway=traffic_signals
         name: Traffic Signals
+        # 'terms: light,stoplight,traffic light'
         terms: "<translate with synonyms or related terms for 'Traffic Signals', separated by commas>"
       highway/trunk:
+        # highway=trunk
         name: Trunk Road
         terms: "<translate with synonyms or related terms for 'Trunk Road', separated by commas>"
       highway/trunk_link:
+        # highway=trunk_link
         name: Trunk Link
+        # 'terms: ramp,on ramp,off ramp'
         terms: "<translate with synonyms or related terms for 'Trunk Link', separated by commas>"
       highway/turning_circle:
+        # highway=turning_circle
         name: Turning Circle
+        # 'terms: cul-de-sac'
         terms: "<translate with synonyms or related terms for 'Turning Circle', separated by commas>"
       highway/unclassified:
+        # highway=unclassified
         name: Unclassified Road
         terms: "<translate with synonyms or related terms for 'Unclassified Road', separated by commas>"
       historic:
+        # 'historic=*'
         name: Historic Site
         terms: "<translate with synonyms or related terms for 'Historic Site', separated by commas>"
       historic/archaeological_site:
+        # historic=archaeological_site
         name: Archaeological Site
         terms: "<translate with synonyms or related terms for 'Archaeological Site', separated by commas>"
       historic/boundary_stone:
+        # historic=boundary_stone
         name: Boundary Stone
         terms: "<translate with synonyms or related terms for 'Boundary Stone', separated by commas>"
       historic/castle:
+        # historic=castle
         name: Castle
         terms: "<translate with synonyms or related terms for 'Castle', separated by commas>"
       historic/memorial:
+        # historic=memorial
         name: Memorial
         terms: "<translate with synonyms or related terms for 'Memorial', separated by commas>"
       historic/monument:
+        # historic=monument
         name: Monument
         terms: "<translate with synonyms or related terms for 'Monument', separated by commas>"
       historic/ruins:
+        # historic=ruins
         name: Ruins
         terms: "<translate with synonyms or related terms for 'Ruins', separated by commas>"
       historic/wayside_cross:
+        # historic=wayside_cross
         name: Wayside Cross
         terms: "<translate with synonyms or related terms for 'Wayside Cross', separated by commas>"
       historic/wayside_shrine:
+        # historic=wayside_shrine
         name: Wayside Shrine
         terms: "<translate with synonyms or related terms for 'Wayside Shrine', separated by commas>"
       junction:
+        # junction=yes
         name: Junction
         terms: "<translate with synonyms or related terms for 'Junction', separated by commas>"
       landuse:
+        # 'landuse=*'
         name: Landuse
         terms: "<translate with synonyms or related terms for 'Landuse', separated by commas>"
       landuse/allotments:
+        # landuse=allotments
         name: Allotments
         terms: "<translate with synonyms or related terms for 'Allotments', separated by commas>"
       landuse/basin:
+        # landuse=basin
         name: Basin
         terms: "<translate with synonyms or related terms for 'Basin', separated by commas>"
       landuse/cemetery:
+        # landuse=cemetery
         name: Cemetery
         terms: "<translate with synonyms or related terms for 'Cemetery', separated by commas>"
       landuse/churchyard:
+        # landuse=churchyard
         name: Churchyard
         terms: "<translate with synonyms or related terms for 'Churchyard', separated by commas>"
       landuse/commercial:
+        # landuse=commercial
         name: Commercial Area
         terms: "<translate with synonyms or related terms for 'Commercial Area', separated by commas>"
       landuse/construction:
+        # landuse=construction
         name: Construction
         terms: "<translate with synonyms or related terms for 'Construction', separated by commas>"
       landuse/farm:
+        # landuse=farm
         name: Farmland
         terms: "<translate with synonyms or related terms for 'Farmland', separated by commas>"
       landuse/farmland:
+        # landuse=farmland
         name: Farmland
         terms: "<translate with synonyms or related terms for 'Farmland', separated by commas>"
       landuse/farmyard:
+        # landuse=farmyard
         name: Farmyard
         terms: "<translate with synonyms or related terms for 'Farmyard', separated by commas>"
       landuse/forest:
+        # landuse=forest
         name: Forest
+        # 'terms: tree'
         terms: "<translate with synonyms or related terms for 'Forest', separated by commas>"
       landuse/garages:
+        # landuse=garages
         name: Garages
         terms: "<translate with synonyms or related terms for 'Garages', separated by commas>"
       landuse/grass:
+        # landuse=grass
         name: Grass
         terms: "<translate with synonyms or related terms for 'Grass', separated by commas>"
       landuse/industrial:
+        # landuse=industrial
         name: Industrial Area
         terms: "<translate with synonyms or related terms for 'Industrial Area', separated by commas>"
       landuse/landfill:
+        # landuse=landfill
         name: Landfill
+        # 'terms: dump'
         terms: "<translate with synonyms or related terms for 'Landfill', separated by commas>"
       landuse/meadow:
+        # landuse=meadow
         name: Meadow
         terms: "<translate with synonyms or related terms for 'Meadow', separated by commas>"
       landuse/military:
+        # landuse=military
         name: Military Area
         terms: "<translate with synonyms or related terms for 'Military Area', separated by commas>"
       landuse/orchard:
+        # landuse=orchard
         name: Orchard
         terms: "<translate with synonyms or related terms for 'Orchard', separated by commas>"
       landuse/quarry:
+        # landuse=quarry
         name: Quarry
         terms: "<translate with synonyms or related terms for 'Quarry', separated by commas>"
       landuse/residential:
+        # landuse=residential
         name: Residential Area
         terms: "<translate with synonyms or related terms for 'Residential Area', separated by commas>"
       landuse/retail:
+        # landuse=retail
         name: Retail Area
         terms: "<translate with synonyms or related terms for 'Retail Area', separated by commas>"
       landuse/vineyard:
+        # landuse=vineyard
         name: Vineyard
         terms: "<translate with synonyms or related terms for 'Vineyard', separated by commas>"
       leisure:
+        # 'leisure=*'
         name: Leisure
         terms: "<translate with synonyms or related terms for 'Leisure', separated by commas>"
       leisure/common:
+        # leisure=common
         name: Common
+        # 'terms: open space'
         terms: "<translate with synonyms or related terms for 'Common', separated by commas>"
       leisure/dog_park:
+        # leisure=dog_park
         name: Dog Park
         terms: "<translate with synonyms or related terms for 'Dog Park', separated by commas>"
       leisure/firepit:
+        # leisure=firepit
         name: Firepit
+        # 'terms: fireplace,campfire'
         terms: "<translate with synonyms or related terms for 'Firepit', separated by commas>"
       leisure/garden:
+        # leisure=garden
         name: Garden
         terms: "<translate with synonyms or related terms for 'Garden', separated by commas>"
       leisure/golf_course:
+        # leisure=golf_course
         name: Golf Course
+        # 'terms: links'
         terms: "<translate with synonyms or related terms for 'Golf Course', separated by commas>"
       leisure/ice_rink:
+        # leisure=ice_rink
         name: Ice Rink
+        # 'terms: hockey,skating,curling'
         terms: "<translate with synonyms or related terms for 'Ice Rink', separated by commas>"
       leisure/marina:
+        # leisure=marina
         name: Marina
+        # 'terms: boat'
         terms: "<translate with synonyms or related terms for 'Marina', separated by commas>"
       leisure/nature_reserve:
+        # leisure=nature_reserve
         name: Nature Reserve
+        # 'terms: protected,wildlife'
         terms: "<translate with synonyms or related terms for 'Nature Reserve', separated by commas>"
       leisure/park:
+        # leisure=park
         name: Park
+        # 'terms: esplanade,estate,forest,garden,grass,green,grounds,lawn,lot,meadow,parkland,place,playground,plaza,pleasure garden,recreation area,square,tract,village green,woodland'
         terms: "<translate with synonyms or related terms for 'Park', separated by commas>"
       leisure/picnic_table:
+        # leisure=picnic_table
         name: Picnic Table
+        # 'terms: bench'
         terms: "<translate with synonyms or related terms for 'Picnic Table', separated by commas>"
       leisure/pitch:
+        # leisure=pitch
         name: Sport Pitch
+        # 'terms: field'
         terms: "<translate with synonyms or related terms for 'Sport Pitch', separated by commas>"
       leisure/pitch/american_football:
+        # 'leisure=pitch, sport=american_football'
         name: American Football Field
         terms: "<translate with synonyms or related terms for 'American Football Field', separated by commas>"
       leisure/pitch/baseball:
+        # 'leisure=pitch, sport=baseball'
         name: Baseball Diamond
         terms: "<translate with synonyms or related terms for 'Baseball Diamond', separated by commas>"
       leisure/pitch/basketball:
+        # 'leisure=pitch, sport=basketball'
         name: Basketball Court
         terms: "<translate with synonyms or related terms for 'Basketball Court', separated by commas>"
       leisure/pitch/skateboard:
+        # 'leisure=pitch, sport=skateboard'
         name: Skate Park
         terms: "<translate with synonyms or related terms for 'Skate Park', separated by commas>"
       leisure/pitch/soccer:
+        # 'leisure=pitch, sport=soccer'
         name: Soccer Field
         terms: "<translate with synonyms or related terms for 'Soccer Field', separated by commas>"
       leisure/pitch/tennis:
+        # 'leisure=pitch, sport=tennis'
         name: Tennis Court
         terms: "<translate with synonyms or related terms for 'Tennis Court', separated by commas>"
       leisure/pitch/volleyball:
+        # 'leisure=pitch, sport=volleyball'
         name: Volleyball Court
         terms: "<translate with synonyms or related terms for 'Volleyball Court', separated by commas>"
       leisure/playground:
+        # leisure=playground
         name: Playground
+        # 'terms: jungle gym,play area'
         terms: "<translate with synonyms or related terms for 'Playground', separated by commas>"
       leisure/running_track:
+        # 'leisure=track, sport=running'
         name: Running Track
         terms: "<translate with synonyms or related terms for 'Running Track', separated by commas>"
       leisure/slipway:
+        # leisure=slipway
         name: Slipway
+        # 'terms: boat launch,boat ramp'
         terms: "<translate with synonyms or related terms for 'Slipway', separated by commas>"
       leisure/sports_center:
+        # leisure=sports_centre
         name: Sports Center / Gym
+        # 'terms: gym'
         terms: "<translate with synonyms or related terms for 'Sports Center / Gym', separated by commas>"
       leisure/stadium:
+        # leisure=stadium
         name: Stadium
         terms: "<translate with synonyms or related terms for 'Stadium', separated by commas>"
       leisure/swimming_pool:
+        # leisure=swimming_pool
         name: Swimming Pool
         terms: "<translate with synonyms or related terms for 'Swimming Pool', separated by commas>"
       leisure/track:
+        # leisure=track
         name: Racetrack (non-Motorsport)
         terms: "<translate with synonyms or related terms for 'Racetrack (non-Motorsport)', separated by commas>"
       line:
         name: Line
         terms: "<translate with synonyms or related terms for 'Line', separated by commas>"
       man_made:
+        # 'man_made=*'
         name: Man Made
         terms: "<translate with synonyms or related terms for 'Man Made', separated by commas>"
       man_made/breakwater:
+        # man_made=breakwater
         name: Breakwater
         terms: "<translate with synonyms or related terms for 'Breakwater', separated by commas>"
       man_made/cutline:
+        # man_made=cutline
         name: Cut line
         terms: "<translate with synonyms or related terms for 'Cut line', separated by commas>"
       man_made/embankment:
+        # man_made=embankment
         name: Embankment
         terms: "<translate with synonyms or related terms for 'Embankment', separated by commas>"
       man_made/flagpole:
+        # man_made=flagpole
         name: Flagpole
         terms: "<translate with synonyms or related terms for 'Flagpole', separated by commas>"
       man_made/lighthouse:
+        # man_made=lighthouse
         name: Lighthouse
         terms: "<translate with synonyms or related terms for 'Lighthouse', separated by commas>"
       man_made/mast:
+        # man_made=mast
         name: Radio Mast
+        # 'terms: broadcast tower,cell phone tower,cell tower,guyed tower,mobile phone tower,radio tower,television tower,transmission mast,transmission tower,tv tower'
         terms: "<translate with synonyms or related terms for 'Radio Mast', separated by commas>"
       man_made/observation:
+        # 'man_made=tower, tower:type=observation'
         name: Observation Tower
+        # 'terms: lookout tower,fire tower'
         terms: "<translate with synonyms or related terms for 'Observation Tower', separated by commas>"
       man_made/petroleum_well:
+        # man_made=petroleum_well
         name: Oil Well
+        # 'terms: drilling rig,oil derrick,oil drill,oil horse,oil rig,oil pump,petroleum well,pumpjack'
         terms: "<translate with synonyms or related terms for 'Oil Well', separated by commas>"
       man_made/pier:
+        # man_made=pier
         name: Pier
         terms: "<translate with synonyms or related terms for 'Pier', separated by commas>"
       man_made/pipeline:
+        # man_made=pipeline
         name: Pipeline
         terms: "<translate with synonyms or related terms for 'Pipeline', separated by commas>"
       man_made/silo:
+        # man_made=silo
         name: Silo
+        # 'terms: grain,corn,wheat'
         terms: "<translate with synonyms or related terms for 'Silo', separated by commas>"
       man_made/storage_tank:
+        # man_made=storage_tank
         name: Storage Tank
+        # 'terms: water,oil,gas,petrol'
         terms: "<translate with synonyms or related terms for 'Storage Tank', separated by commas>"
       man_made/survey_point:
+        # man_made=survey_point
         name: Survey Point
         terms: "<translate with synonyms or related terms for 'Survey Point', separated by commas>"
       man_made/tower:
+        # man_made=tower
         name: Tower
         terms: "<translate with synonyms or related terms for 'Tower', separated by commas>"
       man_made/wastewater_plant:
+        # man_made=wastewater_plant
         name: Wastewater Plant
+        # 'terms: sewage*,water treatment plant,reclamation plant'
         terms: "<translate with synonyms or related terms for 'Wastewater Plant', separated by commas>"
       man_made/water_tower:
+        # man_made=water_tower
         name: Water Tower
         terms: "<translate with synonyms or related terms for 'Water Tower', separated by commas>"
       man_made/water_well:
+        # man_made=water_well
         name: Water Well
         terms: "<translate with synonyms or related terms for 'Water Well', separated by commas>"
       man_made/water_works:
+        # man_made=water_works
         name: Water Works
         terms: "<translate with synonyms or related terms for 'Water Works', separated by commas>"
       military/airfield:
+        # military=airfield
         name: Airfield
         terms: "<translate with synonyms or related terms for 'Airfield', separated by commas>"
       military/barracks:
+        # military=barracks
         name: Barracks
         terms: "<translate with synonyms or related terms for 'Barracks', separated by commas>"
       military/bunker:
+        # military=bunker
         name: Bunker
         terms: "<translate with synonyms or related terms for 'Bunker', separated by commas>"
       military/range:
+        # military=range
         name: Military Range
         terms: "<translate with synonyms or related terms for 'Military Range', separated by commas>"
       natural:
+        # 'natural=*'
         name: Natural
         terms: "<translate with synonyms or related terms for 'Natural', separated by commas>"
       natural/bay:
+        # natural=bay
         name: Bay
         terms: "<translate with synonyms or related terms for 'Bay', separated by commas>"
       natural/beach:
+        # natural=beach
         name: Beach
         terms: "<translate with synonyms or related terms for 'Beach', separated by commas>"
       natural/cave_entrance:
+        # natural=cave_entrance
         name: Cave Entrance
         terms: "<translate with synonyms or related terms for 'Cave Entrance', separated by commas>"
       natural/cliff:
+        # natural=cliff
         name: Cliff
         terms: "<translate with synonyms or related terms for 'Cliff', separated by commas>"
       natural/coastline:
+        # natural=coastline
         name: Coastline
+        # 'terms: shore'
         terms: "<translate with synonyms or related terms for 'Coastline', separated by commas>"
       natural/fell:
+        # natural=fell
         name: Fell
         terms: "<translate with synonyms or related terms for 'Fell', separated by commas>"
       natural/glacier:
+        # natural=glacier
         name: Glacier
         terms: "<translate with synonyms or related terms for 'Glacier', separated by commas>"
       natural/grassland:
+        # natural=grassland
         name: Grassland
         terms: "<translate with synonyms or related terms for 'Grassland', separated by commas>"
       natural/heath:
+        # natural=heath
         name: Heath
         terms: "<translate with synonyms or related terms for 'Heath', separated by commas>"
       natural/peak:
+        # natural=peak
         name: Peak
+        # 'terms: acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top'
         terms: "<translate with synonyms or related terms for 'Peak', separated by commas>"
       natural/scree:
+        # natural=scree
         name: Scree
+        # 'terms: loose rocks'
         terms: "<translate with synonyms or related terms for 'Scree', separated by commas>"
       natural/scrub:
+        # natural=scrub
         name: Scrub
         terms: "<translate with synonyms or related terms for 'Scrub', separated by commas>"
       natural/spring:
+        # natural=spring
         name: Spring
         terms: "<translate with synonyms or related terms for 'Spring', separated by commas>"
       natural/tree:
+        # natural=tree
         name: Tree
         terms: "<translate with synonyms or related terms for 'Tree', separated by commas>"
       natural/water:
+        # natural=water
         name: Water
         terms: "<translate with synonyms or related terms for 'Water', separated by commas>"
       natural/water/lake:
+        # 'natural=water, water=lake'
         name: Lake
+        # 'terms: lakelet,loch,mere'
         terms: "<translate with synonyms or related terms for 'Lake', separated by commas>"
       natural/water/pond:
+        # 'natural=water, water=pond'
         name: Pond
+        # 'terms: lakelet,millpond,tarn,pool,mere'
         terms: "<translate with synonyms or related terms for 'Pond', separated by commas>"
       natural/water/reservoir:
+        # 'natural=water, water=reservoir'
         name: Reservoir
         terms: "<translate with synonyms or related terms for 'Reservoir', separated by commas>"
       natural/wetland:
+        # natural=wetland
         name: Wetland
         terms: "<translate with synonyms or related terms for 'Wetland', separated by commas>"
       natural/wood:
+        # natural=wood
         name: Wood
+        # 'terms: tree'
         terms: "<translate with synonyms or related terms for 'Wood', separated by commas>"
       office:
+        # 'office=*'
         name: Office
         terms: "<translate with synonyms or related terms for 'Office', separated by commas>"
       office/accountant:
+        # office=accountant
         name: Accountant
         terms: "<translate with synonyms or related terms for 'Accountant', separated by commas>"
       office/administrative:
+        # office=administrative
         name: Administrative Office
         terms: "<translate with synonyms or related terms for 'Administrative Office', separated by commas>"
       office/architect:
+        # office=architect
         name: Architect
         terms: "<translate with synonyms or related terms for 'Architect', separated by commas>"
       office/company:
+        # office=company
         name: Company Office
         terms: "<translate with synonyms or related terms for 'Company Office', separated by commas>"
       office/educational_institution:
+        # office=educational_institution
         name: Educational Institution
         terms: "<translate with synonyms or related terms for 'Educational Institution', separated by commas>"
       office/employment_agency:
+        # office=employment_agency
         name: Employment Agency
+        # 'terms: job'
         terms: "<translate with synonyms or related terms for 'Employment Agency', separated by commas>"
       office/estate_agent:
+        # office=estate_agent
         name: Real Estate Office
         terms: "<translate with synonyms or related terms for 'Real Estate Office', separated by commas>"
       office/financial:
+        # office=financial
         name: Financial Office
         terms: "<translate with synonyms or related terms for 'Financial Office', separated by commas>"
       office/government:
+        # office=government
         name: Government Office
         terms: "<translate with synonyms or related terms for 'Government Office', separated by commas>"
       office/insurance:
+        # office=insurance
         name: Insurance Office
         terms: "<translate with synonyms or related terms for 'Insurance Office', separated by commas>"
       office/it:
+        # office=it
         name: IT Office
         terms: "<translate with synonyms or related terms for 'IT Office', separated by commas>"
       office/lawyer:
+        # office=lawyer
         name: Law Office
         terms: "<translate with synonyms or related terms for 'Law Office', separated by commas>"
       office/newspaper:
+        # office=newspaper
         name: Newspaper
         terms: "<translate with synonyms or related terms for 'Newspaper', separated by commas>"
       office/ngo:
+        # office=ngo
         name: NGO Office
         terms: "<translate with synonyms or related terms for 'NGO Office', separated by commas>"
       office/physician:
+        # office=physician
         name: Physician
         terms: "<translate with synonyms or related terms for 'Physician', separated by commas>"
       office/political_party:
+        # office=political_party
         name: Political Party
         terms: "<translate with synonyms or related terms for 'Political Party', separated by commas>"
       office/research:
+        # office=research
         name: Research Office
         terms: "<translate with synonyms or related terms for 'Research Office', separated by commas>"
       office/telecommunication:
+        # office=telecommunication
         name: Telecom Office
         terms: "<translate with synonyms or related terms for 'Telecom Office', separated by commas>"
       office/therapist:
+        # office=therapist
         name: Therapist
         terms: "<translate with synonyms or related terms for 'Therapist', separated by commas>"
       office/travel_agent:
+        # office=travel_agent
         name: Travel Agency
         terms: "<translate with synonyms or related terms for 'Travel Agency', separated by commas>"
       piste:
+        # 'piste:type=*'
         name: Piste/Ski Trail
+        # 'terms: ski,sled,sleigh,snowboard,nordic,downhill,snowmobile'
         terms: "<translate with synonyms or related terms for 'Piste/Ski Trail', separated by commas>"
       place:
+        # 'place=*'
         name: Place
         terms: "<translate with synonyms or related terms for 'Place', separated by commas>"
       place/city:
+        # place=city
         name: City
         terms: "<translate with synonyms or related terms for 'City', separated by commas>"
       place/farm:
+        # place=farm
         name: Farm
         terms: "<translate with synonyms or related terms for 'Farm', separated by commas>"
       place/hamlet:
+        # place=hamlet
         name: Hamlet
         terms: "<translate with synonyms or related terms for 'Hamlet', separated by commas>"
       place/island:
+        # place=island
         name: Island
+        # 'terms: archipelago,atoll,bar,cay,isle,islet,key,reef'
         terms: "<translate with synonyms or related terms for 'Island', separated by commas>"
       place/isolated_dwelling:
+        # place=isolated_dwelling
         name: Isolated Dwelling
         terms: "<translate with synonyms or related terms for 'Isolated Dwelling', separated by commas>"
       place/locality:
+        # place=locality
         name: Locality
         terms: "<translate with synonyms or related terms for 'Locality', separated by commas>"
       place/neighbourhood:
+        # place=neighbourhood
         name: Neighborhood
+        # 'terms: neighbourhood'
         terms: "<translate with synonyms or related terms for 'Neighborhood', separated by commas>"
       place/suburb:
+        # place=suburb
         name: Borough
+        # 'terms: Boro,Quarter'
         terms: "<translate with synonyms or related terms for 'Borough', separated by commas>"
       place/town:
+        # place=town
         name: Town
         terms: "<translate with synonyms or related terms for 'Town', separated by commas>"
       place/village:
+        # place=village
         name: Village
         terms: "<translate with synonyms or related terms for 'Village', separated by commas>"
       point:
         name: Point
         terms: "<translate with synonyms or related terms for 'Point', separated by commas>"
       power:
+        # 'power=*'
         name: Power
         terms: "<translate with synonyms or related terms for 'Power', separated by commas>"
       power/generator:
+        # power=generator
         name: Power Generator
         terms: "<translate with synonyms or related terms for 'Power Generator', separated by commas>"
       power/line:
+        # power=line
         name: Power Line
         terms: "<translate with synonyms or related terms for 'Power Line', separated by commas>"
       power/minor_line:
+        # power=minor_line
         name: Minor Power Line
         terms: "<translate with synonyms or related terms for 'Minor Power Line', separated by commas>"
       power/pole:
+        # power=pole
         name: Power Pole
         terms: "<translate with synonyms or related terms for 'Power Pole', separated by commas>"
       power/sub_station:
+        # power=sub_station
         name: Substation
         terms: "<translate with synonyms or related terms for 'Substation', separated by commas>"
       power/substation:
+        # power=substation
         name: Substation
         terms: "<translate with synonyms or related terms for 'Substation', separated by commas>"
       power/tower:
+        # power=tower
         name: High-Voltage Tower
         terms: "<translate with synonyms or related terms for 'High-Voltage Tower', separated by commas>"
       power/transformer:
+        # power=transformer
         name: Transformer
         terms: "<translate with synonyms or related terms for 'Transformer', separated by commas>"
       public_transport/platform:
+        # public_transport=platform
         name: Platform
         terms: "<translate with synonyms or related terms for 'Platform', separated by commas>"
       public_transport/stop_position:
+        # public_transport=stop_position
         name: Stop Position
         terms: "<translate with synonyms or related terms for 'Stop Position', separated by commas>"
       railway:
+        # 'railway=*'
         name: Railway
         terms: "<translate with synonyms or related terms for 'Railway', separated by commas>"
       railway/abandoned:
+        # railway=abandoned
         name: Abandoned Railway
         terms: "<translate with synonyms or related terms for 'Abandoned Railway', separated by commas>"
       railway/disused:
+        # railway=disused
         name: Disused Railway
         terms: "<translate with synonyms or related terms for 'Disused Railway', separated by commas>"
       railway/funicular:
+        # railway=funicular
         name: Funicular
+        # 'terms: venicular,cliff railway,cable car,cable railway,funicular railway'
         terms: "<translate with synonyms or related terms for 'Funicular', separated by commas>"
       railway/halt:
+        # railway=halt
         name: Railway Halt
+        # 'terms: break,interrupt,rest,wait,interruption'
         terms: "<translate with synonyms or related terms for 'Railway Halt', separated by commas>"
       railway/level_crossing:
+        # railway=level_crossing
         name: Level Crossing
+        # 'terms: crossing,railroad crossing,railway crossing,grade crossing,road through railroad,train crossing'
         terms: "<translate with synonyms or related terms for 'Level Crossing', separated by commas>"
       railway/monorail:
+        # railway=monorail
         name: Monorail
         terms: "<translate with synonyms or related terms for 'Monorail', separated by commas>"
       railway/narrow_gauge:
+        # railway=narrow_gauge
         name: Narrow Gauge Rail
+        # 'terms: narrow gauge railway,narrow gauge railroad'
         terms: "<translate with synonyms or related terms for 'Narrow Gauge Rail', separated by commas>"
       railway/platform:
+        # railway=platform
         name: Railway Platform
         terms: "<translate with synonyms or related terms for 'Railway Platform', separated by commas>"
       railway/rail:
+        # railway=rail
         name: Rail
         terms: "<translate with synonyms or related terms for 'Rail', separated by commas>"
       railway/station:
+        # railway=station
         name: Railway Station
+        # 'terms: train station,station'
         terms: "<translate with synonyms or related terms for 'Railway Station', separated by commas>"
       railway/subway:
+        # railway=subway
         name: Subway
         terms: "<translate with synonyms or related terms for 'Subway', separated by commas>"
       railway/subway_entrance:
+        # railway=subway_entrance
         name: Subway Entrance
         terms: "<translate with synonyms or related terms for 'Subway Entrance', separated by commas>"
       railway/tram:
+        # railway=tram
         name: Tram
+        # 'terms: streetcar'
         terms: "<translate with synonyms or related terms for 'Tram', separated by commas>"
       relation:
         name: Relation
         terms: "<translate with synonyms or related terms for 'Relation', separated by commas>"
       roundabout:
+        # junction=roundabout
         name: Roundabout
         terms: "<translate with synonyms or related terms for 'Roundabout', separated by commas>"
       route/ferry:
+        # route=ferry
         name: Ferry Route
         terms: "<translate with synonyms or related terms for 'Ferry Route', separated by commas>"
       shop:
+        # 'shop=*'
         name: Shop
         terms: "<translate with synonyms or related terms for 'Shop', separated by commas>"
       shop/alcohol:
+        # shop=alcohol
         name: Liquor Store
+        # 'terms: alcohol,beer,booze,wine'
         terms: "<translate with synonyms or related terms for 'Liquor Store', separated by commas>"
       shop/anime:
+        # shop=anime
         name: Anime Shop
         terms: "<translate with synonyms or related terms for 'Anime Shop', separated by commas>"
       shop/antiques:
+        # shop=antiques
         name: Antiques Shop
         terms: "<translate with synonyms or related terms for 'Antiques Shop', separated by commas>"
       shop/art:
+        # shop=art
         name: Art Gallery
         terms: "<translate with synonyms or related terms for 'Art Gallery', separated by commas>"
       shop/baby_goods:
+        # shop=baby_goods
         name: Baby Goods Store
         terms: "<translate with synonyms or related terms for 'Baby Goods Store', separated by commas>"
       shop/bag:
+        # shop=bag
         name: Bag/Luggage Store
+        # 'terms: handbag,purse'
         terms: "<translate with synonyms or related terms for 'Bag/Luggage Store', separated by commas>"
       shop/bakery:
+        # shop=bakery
         name: Bakery
         terms: "<translate with synonyms or related terms for 'Bakery', separated by commas>"
       shop/bathroom_furnishing:
+        # shop=bathroom_furnishing
         name: Bathroom Furnishing Store
         terms: "<translate with synonyms or related terms for 'Bathroom Furnishing Store', separated by commas>"
       shop/beauty:
+        # shop=beauty
         name: Beauty Shop
+        # 'terms: nail spa,spa,salon,tanning'
         terms: "<translate with synonyms or related terms for 'Beauty Shop', separated by commas>"
       shop/bed:
+        # shop=bed
         name: Bedding/Mattress Store
         terms: "<translate with synonyms or related terms for 'Bedding/Mattress Store', separated by commas>"
       shop/beverages:
+        # shop=beverages
         name: Beverage Store
         terms: "<translate with synonyms or related terms for 'Beverage Store', separated by commas>"
       shop/bicycle:
+        # shop=bicycle
         name: Bicycle Shop
         terms: "<translate with synonyms or related terms for 'Bicycle Shop', separated by commas>"
       shop/bookmaker:
+        # shop=bookmaker
         name: Bookmaker
         terms: "<translate with synonyms or related terms for 'Bookmaker', separated by commas>"
       shop/books:
+        # shop=books
         name: Book Store
         terms: "<translate with synonyms or related terms for 'Book Store', separated by commas>"
       shop/boutique:
+        # shop=boutique
         name: Boutique
         terms: "<translate with synonyms or related terms for 'Boutique', separated by commas>"
       shop/butcher:
+        # shop=butcher
         name: Butcher
+        # 'terms: meat'
         terms: "<translate with synonyms or related terms for 'Butcher', separated by commas>"
       shop/candles:
+        # shop=candles
         name: Candle Shop
         terms: "<translate with synonyms or related terms for 'Candle Shop', separated by commas>"
       shop/car:
+        # shop=car
         name: Car Dealership
+        # 'terms: auto'
         terms: "<translate with synonyms or related terms for 'Car Dealership', separated by commas>"
       shop/car_parts:
+        # shop=car_parts
         name: Car Parts Store
+        # 'terms: auto'
         terms: "<translate with synonyms or related terms for 'Car Parts Store', separated by commas>"
       shop/car_repair:
+        # shop=car_repair
         name: Car Repair Shop
+        # 'terms: auto'
         terms: "<translate with synonyms or related terms for 'Car Repair Shop', separated by commas>"
       shop/carpet:
+        # shop=carpet
         name: Carpet Store
+        # 'terms: rug'
         terms: "<translate with synonyms or related terms for 'Carpet Store', separated by commas>"
       shop/cheese:
+        # shop=cheese
         name: Cheese Store
         terms: "<translate with synonyms or related terms for 'Cheese Store', separated by commas>"
       shop/chemist:
+        # shop=chemist
         name: Chemist
         terms: "<translate with synonyms or related terms for 'Chemist', separated by commas>"
       shop/chocolate:
+        # shop=chocolate
         name: Chocolate Store
         terms: "<translate with synonyms or related terms for 'Chocolate Store', separated by commas>"
       shop/clothes:
+        # shop=clothes
         name: Clothing Store
         terms: "<translate with synonyms or related terms for 'Clothing Store', separated by commas>"
       shop/computer:
+        # shop=computer
         name: Computer Store
         terms: "<translate with synonyms or related terms for 'Computer Store', separated by commas>"
       shop/confectionery:
+        # shop=confectionery
         name: Candy Store
         terms: "<translate with synonyms or related terms for 'Candy Store', separated by commas>"
       shop/convenience:
+        # shop=convenience
         name: Convenience Store
         terms: "<translate with synonyms or related terms for 'Convenience Store', separated by commas>"
       shop/copyshop:
+        # shop=copyshop
         name: Copy Store
         terms: "<translate with synonyms or related terms for 'Copy Store', separated by commas>"
       shop/cosmetics:
+        # shop=cosmetics
         name: Cosmetics Store
         terms: "<translate with synonyms or related terms for 'Cosmetics Store', separated by commas>"
       shop/craft:
+        # shop=craft
         name: Arts and Crafts Store
         terms: "<translate with synonyms or related terms for 'Arts and Crafts Store', separated by commas>"
       shop/curtain:
+        # shop=curtain
         name: Curtain Store
+        # 'terms: drape*,window'
         terms: "<translate with synonyms or related terms for 'Curtain Store', separated by commas>"
       shop/dairy:
+        # shop=dairy
         name: Dairy Store
+        # 'terms: milk,egg,cheese'
         terms: "<translate with synonyms or related terms for 'Dairy Store', separated by commas>"
       shop/deli:
+        # shop=deli
         name: Deli
+        # 'terms: lunch,meat,sandwich'
         terms: "<translate with synonyms or related terms for 'Deli', separated by commas>"
       shop/department_store:
+        # shop=department_store
         name: Department Store
         terms: "<translate with synonyms or related terms for 'Department Store', separated by commas>"
       shop/doityourself:
+        # shop=doityourself
         name: DIY Store
         terms: "<translate with synonyms or related terms for 'DIY Store', separated by commas>"
       shop/dry_cleaning:
+        # shop=dry_cleaning
         name: Dry Cleaner
         terms: "<translate with synonyms or related terms for 'Dry Cleaner', separated by commas>"
       shop/electronics:
+        # shop=electronics
         name: Electronics Store
+        # 'terms: appliance,audio,computer,tv'
         terms: "<translate with synonyms or related terms for 'Electronics Store', separated by commas>"
       shop/erotic:
+        # shop=erotic
         name: Erotic Store
+        # 'terms: sex,porn'
         terms: "<translate with synonyms or related terms for 'Erotic Store', separated by commas>"
       shop/fabric:
+        # shop=fabric
         name: Fabric Store
+        # 'terms: sew'
         terms: "<translate with synonyms or related terms for 'Fabric Store', separated by commas>"
       shop/farm:
+        # shop=farm
         name: Produce Stand
+        # 'terms: farm shop,farm stand'
         terms: "<translate with synonyms or related terms for 'Produce Stand', separated by commas>"
       shop/fashion:
+        # shop=fashion
         name: Fashion Store
         terms: "<translate with synonyms or related terms for 'Fashion Store', separated by commas>"
       shop/fishmonger:
+        # shop=fishmonger
         name: Fishmonger
         terms: "<translate with synonyms or related terms for 'Fishmonger', separated by commas>"
       shop/florist:
+        # shop=florist
         name: Florist
+        # 'terms: flower'
         terms: "<translate with synonyms or related terms for 'Florist', separated by commas>"
       shop/frame:
+        # shop=frame
         name: Framing Shop
         terms: "<translate with synonyms or related terms for 'Framing Shop', separated by commas>"
       shop/funeral_directors:
+        # shop=funeral_directors
         name: Funeral Home
+        # 'terms: undertaker,memorial home'
         terms: "<translate with synonyms or related terms for 'Funeral Home', separated by commas>"
       shop/furnace:
+        # shop=furnace
         name: Furnace Store
+        # 'terms: oven,stove'
         terms: "<translate with synonyms or related terms for 'Furnace Store', separated by commas>"
       shop/furniture:
+        # shop=furniture
         name: Furniture Store
+        # 'terms: chair,sofa,table'
         terms: "<translate with synonyms or related terms for 'Furniture Store', separated by commas>"
       shop/garden_centre:
+        # shop=garden_centre
         name: Garden Center
+        # 'terms: landscape,mulch,shrub,tree'
         terms: "<translate with synonyms or related terms for 'Garden Center', separated by commas>"
       shop/gift:
+        # shop=gift
         name: Gift Shop
         terms: "<translate with synonyms or related terms for 'Gift Shop', separated by commas>"
       shop/greengrocer:
+        # shop=greengrocer
         name: Greengrocer
+        # 'terms: fruit,vegetable'
         terms: "<translate with synonyms or related terms for 'Greengrocer', separated by commas>"
       shop/hairdresser:
+        # shop=hairdresser
         name: Hairdresser
         terms: "<translate with synonyms or related terms for 'Hairdresser', separated by commas>"
       shop/hardware:
+        # shop=hardware
         name: Hardware Store
         terms: "<translate with synonyms or related terms for 'Hardware Store', separated by commas>"
       shop/hearing_aids:
+        # shop=hearing_aids
         name: Hearing Aids Store
         terms: "<translate with synonyms or related terms for 'Hearing Aids Store', separated by commas>"
       shop/herbalist:
+        # shop=herbalist
         name: Herbalist
         terms: "<translate with synonyms or related terms for 'Herbalist', separated by commas>"
       shop/hifi:
+        # shop=hifi
         name: Hifi Store
+        # 'terms: stereo,video'
         terms: "<translate with synonyms or related terms for 'Hifi Store', separated by commas>"
       shop/houseware:
+        # shop=houseware
         name: Houseware Store
+        # 'terms: home,household'
         terms: "<translate with synonyms or related terms for 'Houseware Store', separated by commas>"
       shop/interior_decoration:
+        # shop=interior_decoration
         name: Interior Decoration Store
         terms: "<translate with synonyms or related terms for 'Interior Decoration Store', separated by commas>"
       shop/jewelry:
+        # shop=jewelry
         name: Jeweler
+        # 'terms: diamond,gem,ring'
         terms: "<translate with synonyms or related terms for 'Jeweler', separated by commas>"
       shop/kiosk:
+        # shop=kiosk
         name: News Kiosk
         terms: "<translate with synonyms or related terms for 'News Kiosk', separated by commas>"
       shop/kitchen:
+        # shop=kitchen
         name: Kitchen Design Store
         terms: "<translate with synonyms or related terms for 'Kitchen Design Store', separated by commas>"
       shop/laundry:
+        # shop=laundry
         name: Laundry
         terms: "<translate with synonyms or related terms for 'Laundry', separated by commas>"
       shop/leather:
+        # shop=leather
         name: Leather Store
         terms: "<translate with synonyms or related terms for 'Leather Store', separated by commas>"
       shop/locksmith:
+        # shop=locksmith
         name: Locksmith
+        # 'terms: key,lockpick'
         terms: "<translate with synonyms or related terms for 'Locksmith', separated by commas>"
       shop/lottery:
+        # shop=lottery
         name: Lottery Shop
         terms: "<translate with synonyms or related terms for 'Lottery Shop', separated by commas>"
       shop/mall:
+        # shop=mall
         name: Mall
         terms: "<translate with synonyms or related terms for 'Mall', separated by commas>"
       shop/massage:
+        # shop=massage
         name: Massage Shop
         terms: "<translate with synonyms or related terms for 'Massage Shop', separated by commas>"
       shop/medical_supply:
+        # shop=medical_supply
         name: Medical Supply Store
         terms: "<translate with synonyms or related terms for 'Medical Supply Store', separated by commas>"
       shop/mobile_phone:
+        # shop=mobile_phone
         name: Mobile Phone Store
         terms: "<translate with synonyms or related terms for 'Mobile Phone Store', separated by commas>"
       shop/money_lender:
+        # shop=money_lender
         name: Money Lender
         terms: "<translate with synonyms or related terms for 'Money Lender', separated by commas>"
       shop/motorcycle:
+        # shop=motorcycle
         name: Motorcycle Dealership
         terms: "<translate with synonyms or related terms for 'Motorcycle Dealership', separated by commas>"
       shop/music:
+        # shop=music
         name: Music Store
+        # 'terms: CD,vinyl'
         terms: "<translate with synonyms or related terms for 'Music Store', separated by commas>"
       shop/musical_instrument:
+        # shop=musical_instrument
         name: Musical Instrument Store
         terms: "<translate with synonyms or related terms for 'Musical Instrument Store', separated by commas>"
       shop/newsagent:
+        # shop=newsagent
         name: Newspaper/Magazine Shop
         terms: "<translate with synonyms or related terms for 'Newspaper/Magazine Shop', separated by commas>"
       shop/optician:
+        # shop=optician
         name: Optician
+        # 'terms: eye,glasses'
         terms: "<translate with synonyms or related terms for 'Optician', separated by commas>"
       shop/organic:
+        # 'shop=supermarket, organic=only'
         name: Organic Goods Store
         terms: "<translate with synonyms or related terms for 'Organic Goods Store', separated by commas>"
       shop/outdoor:
+        # shop=outdoor
         name: Outdoors Store
+        # 'terms: camping,climbing,hiking'
         terms: "<translate with synonyms or related terms for 'Outdoors Store', separated by commas>"
       shop/paint:
+        # shop=paint
         name: Paint Store
         terms: "<translate with synonyms or related terms for 'Paint Store', separated by commas>"
       shop/pawnbroker:
+        # shop=pawnbroker
         name: Pawn Shop
         terms: "<translate with synonyms or related terms for 'Pawn Shop', separated by commas>"
       shop/pet:
+        # shop=pet
         name: Pet Store
+        # 'terms: cat,dog,fish'
         terms: "<translate with synonyms or related terms for 'Pet Store', separated by commas>"
       shop/photo:
+        # shop=photo
         name: Photography Store
+        # 'terms: camera,film'
         terms: "<translate with synonyms or related terms for 'Photography Store', separated by commas>"
       shop/pyrotechnics:
+        # shop=pyrotechnics
         name: Fireworks Store
         terms: "<translate with synonyms or related terms for 'Fireworks Store', separated by commas>"
       shop/radiotechnics:
+        # shop=radiotechnics
         name: Radio/Electronic Component Store
         terms: "<translate with synonyms or related terms for 'Radio/Electronic Component Store', separated by commas>"
       shop/religion:
+        # shop=religion
         name: Religious Store
         terms: "<translate with synonyms or related terms for 'Religious Store', separated by commas>"
       shop/scuba_diving:
+        # shop=scuba_diving
         name: Scuba Diving Shop
         terms: "<translate with synonyms or related terms for 'Scuba Diving Shop', separated by commas>"
       shop/seafood:
+        # shop=seafood
         name: Seafood Shop
+        # 'terms: fishmonger'
         terms: "<translate with synonyms or related terms for 'Seafood Shop', separated by commas>"
       shop/second_hand:
+        # shop=second_hand
         name: Consignment/Thrift Store
+        # 'terms: secondhand,second hand,resale,thrift,used'
         terms: "<translate with synonyms or related terms for 'Consignment/Thrift Store', separated by commas>"
       shop/shoes:
+        # shop=shoes
         name: Shoe Store
         terms: "<translate with synonyms or related terms for 'Shoe Store', separated by commas>"
       shop/sports:
+        # shop=sports
         name: Sporting Goods Store
         terms: "<translate with synonyms or related terms for 'Sporting Goods Store', separated by commas>"
       shop/stationery:
+        # shop=stationery
         name: Stationery Store
+        # 'terms: card,paper'
         terms: "<translate with synonyms or related terms for 'Stationery Store', separated by commas>"
       shop/supermarket:
+        # shop=supermarket
         name: Supermarket
+        # 'terms: grocery,store,shop'
         terms: "<translate with synonyms or related terms for 'Supermarket', separated by commas>"
       shop/tailor:
+        # shop=tailor
         name: Tailor
+        # 'terms: clothes,suit'
         terms: "<translate with synonyms or related terms for 'Tailor', separated by commas>"
       shop/tattoo:
+        # shop=tattoo
         name: Tattoo Parlor
         terms: "<translate with synonyms or related terms for 'Tattoo Parlor', separated by commas>"
       shop/tea:
+        # shop=tea
         name: Tea Store
         terms: "<translate with synonyms or related terms for 'Tea Store', separated by commas>"
       shop/ticket:
+        # shop=ticket
         name: Ticket Seller
         terms: "<translate with synonyms or related terms for 'Ticket Seller', separated by commas>"
       shop/tobacco:
+        # shop=tobacco
         name: Tobacco Shop
         terms: "<translate with synonyms or related terms for 'Tobacco Shop', separated by commas>"
       shop/toys:
+        # shop=toys
         name: Toy Store
         terms: "<translate with synonyms or related terms for 'Toy Store', separated by commas>"
       shop/travel_agency:
+        # shop=travel_agency
         name: Travel Agency
         terms: "<translate with synonyms or related terms for 'Travel Agency', separated by commas>"
       shop/tyres:
+        # shop=tyres
         name: Tire Store
         terms: "<translate with synonyms or related terms for 'Tire Store', separated by commas>"
       shop/vacant:
+        # shop=vacant
         name: Vacant Shop
         terms: "<translate with synonyms or related terms for 'Vacant Shop', separated by commas>"
       shop/vacuum_cleaner:
+        # shop=vacuum_cleaner
         name: Vacuum Cleaner Store
         terms: "<translate with synonyms or related terms for 'Vacuum Cleaner Store', separated by commas>"
       shop/variety_store:
+        # shop=variety_store
         name: Variety Store
         terms: "<translate with synonyms or related terms for 'Variety Store', separated by commas>"
       shop/video:
+        # shop=video
         name: Video Store
+        # 'terms: DVD'
         terms: "<translate with synonyms or related terms for 'Video Store', separated by commas>"
       shop/video_games:
+        # shop=video_games
         name: Video Game Store
         terms: "<translate with synonyms or related terms for 'Video Game Store', separated by commas>"
       shop/water_sports:
+        # shop=water_sports
         name: Watersport/Swim Shop
         terms: "<translate with synonyms or related terms for 'Watersport/Swim Shop', separated by commas>"
       shop/weapons:
+        # shop=weapons
         name: Weapon Shop
+        # 'terms: ammo,gun,knife,knives'
         terms: "<translate with synonyms or related terms for 'Weapon Shop', separated by commas>"
       shop/window_blind:
+        # shop=window_blind
         name: Window Blind Store
         terms: "<translate with synonyms or related terms for 'Window Blind Store', separated by commas>"
       shop/wine:
+        # shop=wine
         name: Wine Shop
         terms: "<translate with synonyms or related terms for 'Wine Shop', separated by commas>"
       tourism:
+        # 'tourism=*'
         name: Tourism
         terms: "<translate with synonyms or related terms for 'Tourism', separated by commas>"
       tourism/alpine_hut:
+        # tourism=alpine_hut
         name: Alpine Hut
         terms: "<translate with synonyms or related terms for 'Alpine Hut', separated by commas>"
       tourism/artwork:
+        # tourism=artwork
         name: Artwork
+        # 'terms: mural,sculpture,statue'
         terms: "<translate with synonyms or related terms for 'Artwork', separated by commas>"
       tourism/attraction:
+        # tourism=attraction
         name: Tourist Attraction
         terms: "<translate with synonyms or related terms for 'Tourist Attraction', separated by commas>"
       tourism/camp_site:
+        # tourism=camp_site
         name: Camp Site
+        # 'terms: Tent'
         terms: "<translate with synonyms or related terms for 'Camp Site', separated by commas>"
       tourism/caravan_site:
+        # tourism=caravan_site
         name: RV Park
+        # 'terms: Motor Home,Camper'
         terms: "<translate with synonyms or related terms for 'RV Park', separated by commas>"
       tourism/chalet:
+        # tourism=chalet
         name: Chalet
         terms: "<translate with synonyms or related terms for 'Chalet', separated by commas>"
       tourism/guest_house:
+        # tourism=guest_house
         name: Guest House
+        # 'terms: B&B,Bed and Breakfast'
         terms: "<translate with synonyms or related terms for 'Guest House', separated by commas>"
       tourism/hostel:
+        # tourism=hostel
         name: Hostel
         terms: "<translate with synonyms or related terms for 'Hostel', separated by commas>"
       tourism/hotel:
+        # tourism=hotel
         name: Hotel
         terms: "<translate with synonyms or related terms for 'Hotel', separated by commas>"
       tourism/information:
+        # tourism=information
         name: Information
         terms: "<translate with synonyms or related terms for 'Information', separated by commas>"
       tourism/motel:
+        # tourism=motel
         name: Motel
         terms: "<translate with synonyms or related terms for 'Motel', separated by commas>"
       tourism/museum:
+        # tourism=museum
         name: Museum
+        # 'terms: exhibition,foundation,gallery,hall,institution'
         terms: "<translate with synonyms or related terms for 'Museum', separated by commas>"
       tourism/picnic_site:
+        # tourism=picnic_site
         name: Picnic Site
+        # 'terms: camp'
         terms: "<translate with synonyms or related terms for 'Picnic Site', separated by commas>"
       tourism/theme_park:
+        # tourism=theme_park
         name: Theme Park
         terms: "<translate with synonyms or related terms for 'Theme Park', separated by commas>"
       tourism/viewpoint:
+        # tourism=viewpoint
         name: Viewpoint
         terms: "<translate with synonyms or related terms for 'Viewpoint', separated by commas>"
       tourism/zoo:
+        # tourism=zoo
         name: Zoo
         terms: "<translate with synonyms or related terms for 'Zoo', separated by commas>"
       traffic_calming/bump:
+        # traffic_calming=bump
         name: Speed Bump
+        # 'terms: speed hump'
         terms: "<translate with synonyms or related terms for 'Speed Bump', separated by commas>"
       traffic_calming/hump:
+        # traffic_calming=hump
         name: Speed Hump
+        # 'terms: speed bump'
         terms: "<translate with synonyms or related terms for 'Speed Hump', separated by commas>"
       traffic_calming/rumble_strip:
+        # traffic_calming=rumble_strip
         name: Rumble Strip
+        # 'terms: sleeper lines,audible lines,growlers'
         terms: "<translate with synonyms or related terms for 'Rumble Strip', separated by commas>"
       traffic_calming/table:
+        # 'highway=crossing, traffic_calming=table'
         name: Raised Pedestrian Crossing
+        # 'terms: speed table,flat top hump'
         terms: "<translate with synonyms or related terms for 'Raised Pedestrian Crossing', separated by commas>"
       type/boundary:
+        # type=boundary
         name: Boundary
         terms: "<translate with synonyms or related terms for 'Boundary', separated by commas>"
       type/boundary/administrative:
+        # 'type=boundary, boundary=administrative'
         name: Administrative Boundary
         terms: "<translate with synonyms or related terms for 'Administrative Boundary', separated by commas>"
       type/multipolygon:
+        # type=multipolygon
         name: Multipolygon
         terms: "<translate with synonyms or related terms for 'Multipolygon', separated by commas>"
       type/restriction:
+        # type=restriction
         name: Restriction
         terms: "<translate with synonyms or related terms for 'Restriction', separated by commas>"
       type/restriction/no_left_turn:
+        # 'type=restriction, restriction=no_left_turn'
         name: No Left Turn
         terms: "<translate with synonyms or related terms for 'No Left Turn', separated by commas>"
       type/restriction/no_right_turn:
+        # 'type=restriction, restriction=no_right_turn'
         name: No Right Turn
         terms: "<translate with synonyms or related terms for 'No Right Turn', separated by commas>"
       type/restriction/no_straight_on:
+        # 'type=restriction, restriction=no_straight_on'
         name: No Straight On
         terms: "<translate with synonyms or related terms for 'No Straight On', separated by commas>"
       type/restriction/no_u_turn:
+        # 'type=restriction, restriction=no_u_turn'
         name: No U-turn
         terms: "<translate with synonyms or related terms for 'No U-turn', separated by commas>"
       type/restriction/only_left_turn:
+        # 'type=restriction, restriction=only_left_turn'
         name: Left Turn Only
         terms: "<translate with synonyms or related terms for 'Left Turn Only', separated by commas>"
       type/restriction/only_right_turn:
+        # 'type=restriction, restriction=only_right_turn'
         name: Right Turn Only
         terms: "<translate with synonyms or related terms for 'Right Turn Only', separated by commas>"
       type/restriction/only_straight_on:
+        # 'type=restriction, restriction=only_straight_on'
         name: No Turns
         terms: "<translate with synonyms or related terms for 'No Turns', separated by commas>"
       type/route:
+        # type=route
         name: Route
         terms: "<translate with synonyms or related terms for 'Route', separated by commas>"
       type/route/bicycle:
+        # 'type=route, route=bicycle'
         name: Cycle Route
         terms: "<translate with synonyms or related terms for 'Cycle Route', separated by commas>"
       type/route/bus:
+        # 'type=route, route=bus'
         name: Bus Route
         terms: "<translate with synonyms or related terms for 'Bus Route', separated by commas>"
       type/route/detour:
+        # 'type=route, route=detour'
         name: Detour Route
         terms: "<translate with synonyms or related terms for 'Detour Route', separated by commas>"
       type/route/ferry:
+        # 'type=route, route=ferry'
         name: Ferry Route
         terms: "<translate with synonyms or related terms for 'Ferry Route', separated by commas>"
       type/route/foot:
+        # 'type=route, route=foot'
         name: Foot Route
         terms: "<translate with synonyms or related terms for 'Foot Route', separated by commas>"
       type/route/hiking:
+        # 'type=route, route=hiking'
         name: Hiking Route
         terms: "<translate with synonyms or related terms for 'Hiking Route', separated by commas>"
       type/route/pipeline:
+        # 'type=route, route=pipeline'
         name: Pipeline Route
         terms: "<translate with synonyms or related terms for 'Pipeline Route', separated by commas>"
       type/route/power:
+        # 'type=route, route=power'
         name: Power Route
         terms: "<translate with synonyms or related terms for 'Power Route', separated by commas>"
       type/route/road:
+        # 'type=route, route=road'
         name: Road Route
         terms: "<translate with synonyms or related terms for 'Road Route', separated by commas>"
       type/route/train:
+        # 'type=route, route=train'
         name: Train Route
         terms: "<translate with synonyms or related terms for 'Train Route', separated by commas>"
       type/route/tram:
+        # 'type=route, route=tram'
         name: Tram Route
         terms: "<translate with synonyms or related terms for 'Tram Route', separated by commas>"
       type/route_master:
+        # type=route_master
         name: Route Master
         terms: "<translate with synonyms or related terms for 'Route Master', separated by commas>"
       vertex:
         name: Other
         terms: "<translate with synonyms or related terms for 'Other', separated by commas>"
       waterway:
+        # 'waterway=*'
         name: Waterway
         terms: "<translate with synonyms or related terms for 'Waterway', separated by commas>"
       waterway/canal:
+        # waterway=canal
         name: Canal
         terms: "<translate with synonyms or related terms for 'Canal', separated by commas>"
       waterway/dam:
+        # waterway=dam
         name: Dam
         terms: "<translate with synonyms or related terms for 'Dam', separated by commas>"
       waterway/ditch:
+        # waterway=ditch
         name: Ditch
         terms: "<translate with synonyms or related terms for 'Ditch', separated by commas>"
       waterway/drain:
+        # waterway=drain
         name: Drain
         terms: "<translate with synonyms or related terms for 'Drain', separated by commas>"
       waterway/fuel:
+        # waterway=fuel
         name: Marine Fuel Station
+        # 'terms: petrol,gas,diesel,boat'
         terms: "<translate with synonyms or related terms for 'Marine Fuel Station', separated by commas>"
       waterway/river:
+        # waterway=river
         name: River
+        # 'terms: beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse'
         terms: "<translate with synonyms or related terms for 'River', separated by commas>"
       waterway/riverbank:
+        # waterway=riverbank
         name: Riverbank
         terms: "<translate with synonyms or related terms for 'Riverbank', separated by commas>"
       waterway/sanitary_dump_station:
+        # waterway=sanitary_dump_station
         name: Marine Toilet Disposal
+        # 'terms: Boat,Watercraft,Sanitary,Dump Station,Pumpout,Pump out,Elsan,CDP,CTDP,Chemical Toilet'
         terms: "<translate with synonyms or related terms for 'Marine Toilet Disposal', separated by commas>"
       waterway/stream:
+        # waterway=stream
         name: Stream
+        # 'terms: beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse'
         terms: "<translate with synonyms or related terms for 'Stream', separated by commas>"
       waterway/weir:
+        # waterway=weir
         name: Weir
         terms: "<translate with synonyms or related terms for 'Weir', separated by commas>"
