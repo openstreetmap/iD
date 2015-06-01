@@ -1,0 +1,17 @@
+{
+  "name": "Traffico",
+  "version": "0.1.5",
+  "homepage": "https://github.com/mapillary/traffico",
+  "authors": [
+    "Kamil Nikel <knikel@posteo.de>"
+  ],
+  "description": "An Open Source Traffic Sign Font",
+  "main": "stylesheets/traffico.css",
+  "keywords": [
+    "traffic",
+    "signs",
+    "road",
+    "font"
+  ],
+  "license": "MIT"
+}
