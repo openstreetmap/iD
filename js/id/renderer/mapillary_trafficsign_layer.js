@@ -3,7 +3,7 @@ iD.MapillarySignsLayer = function (context) {
         initiated = false,
         currentImage,
         svg, image_preview_div, request, signs_defs;
-    request = d3.json('/css/traffico-release-0.1.5/global-patched.json',
+    request = d3.json('css/traffico-release-0.1.5/global-patched.json',
         function (error, data) {
             console.error(arguments);
             if (error) return;
