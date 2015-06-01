@@ -1,18 +1,13 @@
 iD.MapillarySignsLayer = function (context) {
     var enable = false,
+        initiated = false,
         currentImage,
-        svg, image_preview_div, request, eu_signs, us_signs;
-    request = d3.json('/europe.json',
+        svg, image_preview_div, request, signs_defs;
+    request = d3.json('/css/traffico-release-0.1.5/global-patched.json',
         function (error, data) {
             console.error(arguments);
             if (error) return;
-            eu_signs=data;
-        });
-    request = d3.json('/europe.json',
-        function (error, data) {
-            console.error(arguments);
-            if (error) return;
-            us_signs=data;
+            signs_defs=data;
         });
     function show(image) {
         svg.selectAll('.node')
@@ -31,12 +26,9 @@ iD.MapillarySignsLayer = function (context) {
     }
 
     function hide() {
-
         currentImage = undefined;
-
         svg.selectAll('.node')
             .classed('selected', false);
-
         image_preview_div.classed('hidden', true);
     }
 
@@ -131,7 +123,7 @@ iD.MapillarySignsLayer = function (context) {
                     .attr('class', 'node')
                     .append('xhtml:body')
                     .html(function (d) {
-                        var sign_html = eu_signs[d.signs[0]['type']];
+                        var sign_html = signs_defs[d.signs[0]['type']];
                         return sign_html;
                     });
                 foreignObjects.on('click', function (data) {
@@ -171,6 +163,10 @@ iD.MapillarySignsLayer = function (context) {
                 foreignObjects.exit()
                     .remove();
                 console.log(images);
+                if(!initiated) {
+                    initiated = true;
+                    context.map().zoomOut();
+                }
             });
     }
 
