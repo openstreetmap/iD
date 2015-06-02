@@ -86,7 +86,7 @@ iD.ui.Help = function(context) {
                     .on('click', function() {
                         clickHelp(docs[i + 1], i + 1);
                     });
-                nextLink.append('span').text(docs[i + 1].title);
+                nextLink.append('span').html(docs[i + 1].title);
                 nextLink.append('span').attr('class', 'icon forward blue');
             }
         }
