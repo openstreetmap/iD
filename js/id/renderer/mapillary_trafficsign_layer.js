@@ -87,12 +87,9 @@ iD.MapillarySignsLayer = function (context) {
             request.abort();
 
         request = d3.json('https://a.mapillary.com/v2/search/im/geojson/or?' +
-            'or_classes[]=prohibitory_no' +
-            '&or_classes[]=other_no&or_package=trafficsign_eu_1.0' +
-            '&min_score=2&' +
             'client_id=NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzoxNjQ3MDY4ZTUxY2QzNGI2&min_lat=' +
             extent[0][1] + '&max_lat=' + extent[1][1] + '&min_lon=' +
-            extent[0][0] + '&max_lon=' + extent[1][0] + '&max_results=1000&geojson=true',
+            extent[0][0] + '&max_lon=' + extent[1][0] + '&limit=1000&geojson=true',
             function (error, data) {
                 if (error) return;
                 console.log(data);
@@ -165,7 +162,7 @@ iD.MapillarySignsLayer = function (context) {
                 console.log(images);
                 if(!initiated) {
                     initiated = true;
-                    context.map().zoomOut();
+                    //context.map().zoomOut();
                 }
             });
     }
