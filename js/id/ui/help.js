@@ -61,7 +61,7 @@ iD.ui.Help = function(context) {
 
         function clickHelp(d, i) {
             pane.property('scrollTop', 0);
-            doctitle.text(d.title);
+            doctitle.html(d.title);
             body.html(d.html);
             body.selectAll('a')
                 .attr('target', '_blank');
@@ -78,7 +78,7 @@ iD.ui.Help = function(context) {
                         clickHelp(docs[i - 1], i - 1);
                     });
                 prevLink.append('span').attr('class', 'icon back blue');
-                prevLink.append('span').text(docs[i - 1].title);
+                prevLink.append('span').html(docs[i - 1].title);
             }
             if (i < docs.length - 1) {
                 var nextLink = nav.append('a')
@@ -121,7 +121,7 @@ iD.ui.Help = function(context) {
             .enter()
             .append('li')
             .append('a')
-            .text(function(d) { return d.title; })
+            .html(function(d) { return d.title; })
             .on('click', clickHelp);
 
         toc.append('li')
