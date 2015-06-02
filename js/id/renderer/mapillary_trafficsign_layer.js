@@ -89,7 +89,7 @@ iD.MapillarySignsLayer = function (context) {
         request = d3.json('https://a.mapillary.com/v2/search/im/geojson/or?' +
             'client_id=NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzoxNjQ3MDY4ZTUxY2QzNGI2&min_lat=' +
             extent[0][1] + '&max_lat=' + extent[1][1] + '&min_lon=' +
-            extent[0][0] + '&max_lon=' + extent[1][0] + '&limit=1000&geojson=true',
+            extent[0][0] + '&max_lon=' + extent[1][0] + '&limit=100&geojson=true',
             function (error, data) {
                 if (error) return;
                 console.log(data);
