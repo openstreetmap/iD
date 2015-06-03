@@ -273,12 +273,14 @@ iD.Connection = function() {
                     content: JXON.stringify(connection.osmChangeJXON(changeset_id, changes))
                 }, function(err) {
                     if (err) return callback(err);
+                    // POST was successful, safe to call the callback.
+                    // Still attempt to close changeset, but ignore response.
+                    // see #2667
+                    callback(null, changeset_id);
                     oauth.xhr({
                         method: 'PUT',
                         path: '/api/0.6/changeset/' + changeset_id + '/close'
-                    }, function(err) {
-                        callback(err, changeset_id);
-                    });
+                    }, d3.functor(true));
                 });
             });
     };
