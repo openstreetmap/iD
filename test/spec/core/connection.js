@@ -2,11 +2,23 @@ describe('iD.Connection', function () {
     var c;
 
     beforeEach(function () {
-        c = new iD.Connection({});
+        c = new iD.Connection();
     });
 
     it('is instantiated', function () {
         expect(c).to.be.ok;
+    });
+
+    it('allows insecure connections', function () {
+        expect(c.changesetURL(2)).to.match(/^http:/);
+
+        c = new iD.Connection(false);
+        expect(c.changesetURL(2)).to.match(/^http:/);
+    });
+
+    it('allows secure connections', function () {
+        c = new iD.Connection(true);
+        expect(c.changesetURL(2)).to.match(/^https:/);
     });
 
     describe('#changesetUrl', function() {
