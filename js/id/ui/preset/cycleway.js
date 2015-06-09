@@ -45,11 +45,14 @@ iD.ui.preset.cycleway = function(field) {
     function change(d) {
         var tag = {};
         tag[d] = d3.select(this).value() || undefined;
+        if (tag[d] === 'none') {
+            tag[d] = undefined;
+        }
         event.change(tag);
     }
 
     cycleway.options = function() {
-        var options = ['no', 'lane', 'shared_lane', 'track', 'share_busway', 'opposite_lane', 'opposite'];
+        var options = ['none', 'lane', 'shared_lane', 'track', 'share_busway', 'opposite_lane', 'opposite'];
 
         return options.map(function(option) {
             return {
@@ -65,16 +68,6 @@ iD.ui.preset.cycleway = function(field) {
             .attr('placeholder', function() {
                 return tags.cycleway ? tags.cycleway : field.placeholder();
             });
-
-        items.selectAll('#preset-input-cycleway-cycleway')
-            .attr('placeholder', 'no');
-
-        // Remove "no" values
-        _.forEach(tags, function (value, key) {
-            if (key.indexOf('cycleway') === 0 && value === 'no') {
-                delete tags[key];
-            }
-        });
     };
 
     cycleway.focus = function() {

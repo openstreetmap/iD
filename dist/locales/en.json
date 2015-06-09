@@ -788,14 +788,14 @@
             },
             "cycleway": {
                 "label": "Bike Lanes",
-                "placeholder": "lane, shared lane",
+                "placeholder": "none",
                 "types": {
                     "cycleway": "Both sides",
                     "cycleway:left": "Left side",
                     "cycleway:right": "Right side"
                 },
                 "options": {
-                    "no": {
+                    "none": {
                         "title": "None",
                         "description": "No bike lane"
                     },

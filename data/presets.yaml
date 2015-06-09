@@ -259,8 +259,8 @@ en:
           lane:
             description: A bike lane separated from auto traffic by a painted line
             title: Standard bike lane
-          # no=yes
-          'no':
+          # none=yes
+          none:
             description: No bike lane
             title: None
           # opposite=yes
@@ -284,7 +284,7 @@ en:
             description: A bike lane separated from traffic by a physical barrier
             title: Bike track
         # cycleway field placeholder
-        placeholder: 'lane, shared lane'
+        placeholder: none
         types:
           cycleway: Both sides
           'cycleway:left': Left side
