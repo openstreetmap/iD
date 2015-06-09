@@ -10,7 +10,8 @@
         "smoothness",
         "mtb/scale",
         "mtb/scale/uphill",
-        "mtb/scale/imba"
+        "mtb/scale/imba",
+        "cycleway"
     ],
     "geometry": [
         "line"

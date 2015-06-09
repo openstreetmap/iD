@@ -6,7 +6,8 @@
         "structure",
         "access",
         "surface",
-        "ref"
+        "ref",
+        "cycleway"
     ],
     "geometry": [
         "line"

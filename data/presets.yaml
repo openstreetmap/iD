@@ -251,6 +251,44 @@ en:
       cuisine:
         # 'cuisine=*'
         label: Cuisine
+      cycleway:
+        # 'cycleway=*, cycleway:left=*, cycleway:right=*'
+        label: Bike Lanes
+        options:
+          # lane=yes
+          lane:
+            description: A bike lane separated from auto traffic by a painted line
+            title: Standard bike lane
+          # no=yes
+          'no':
+            description: No bike lane
+            title: None
+          # opposite=yes
+          opposite:
+            description: A bike lane that travels in both directions on a one-way street
+            title: Contraflow bike lane
+          # opposite_lane=yes
+          opposite_lane:
+            description: A bike lane that travels in the opposite direction of traffic
+            title: Opposite bike lane
+          # share_busway=yes
+          share_busway:
+            description: A bike lane shared with a bus lane
+            title: Bike lane shared with bus
+          # shared_lane=yes
+          shared_lane:
+            description: A bike lane with no separation from auto traffic
+            title: Shared bike lane
+          # track=yes
+          track:
+            description: A bike lane separated from traffic by a physical barrier
+            title: Bike track
+        # cycleway field placeholder
+        placeholder: 'lane, shared lane'
+        types:
+          cycleway: Both sides
+          'cycleway:left': Left side
+          'cycleway:right': Right side
       delivery:
         # 'delivery=*'
         label: Delivery

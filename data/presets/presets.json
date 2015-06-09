@@ -3937,7 +3937,8 @@
             "maxspeed",
             "structure",
             "access",
-            "surface"
+            "surface",
+            "cycleway"
         ],
         "geometry": [
             "line"
@@ -4035,7 +4036,8 @@
             "mtb/scale",
             "mtb/scale/uphill",
             "mtb/scale/imba",
-            "ref"
+            "ref",
+            "cycleway"
         ],
         "geometry": [
             "line"
@@ -4080,7 +4082,8 @@
             "access",
             "lanes",
             "surface",
-            "ref"
+            "ref",
+            "cycleway"
         ],
         "geometry": [
             "line"
@@ -4099,7 +4102,8 @@
             "structure",
             "access",
             "surface",
-            "ref"
+            "ref",
+            "cycleway"
         ],
         "geometry": [
             "line"
@@ -4146,7 +4150,8 @@
             "maxspeed",
             "structure",
             "access",
-            "surface"
+            "surface",
+            "cycleway"
         ],
         "geometry": [
             "line"
@@ -4198,7 +4203,8 @@
             "access",
             "lanes",
             "surface",
-            "ref"
+            "ref",
+            "cycleway"
         ],
         "geometry": [
             "line"
@@ -4217,7 +4223,8 @@
             "structure",
             "access",
             "surface",
-            "ref"
+            "ref",
+            "cycleway"
         ],
         "geometry": [
             "line"
@@ -4240,7 +4247,8 @@
             "maxspeed",
             "structure",
             "access",
-            "surface"
+            "surface",
+            "cycleway"
         ],
         "geometry": [
             "line"
@@ -4410,7 +4418,8 @@
             "access",
             "lanes",
             "surface",
-            "ref"
+            "ref",
+            "cycleway"
         ],
         "geometry": [
             "line"
@@ -4429,7 +4438,8 @@
             "structure",
             "access",
             "surface",
-            "ref"
+            "ref",
+            "cycleway"
         ],
         "geometry": [
             "line"
@@ -4456,7 +4466,8 @@
             "smoothness",
             "mtb/scale",
             "mtb/scale/uphill",
-            "mtb/scale/imba"
+            "mtb/scale/imba",
+            "cycleway"
         ],
         "geometry": [
             "line"
@@ -4547,7 +4558,8 @@
             "maxspeed",
             "structure",
             "access",
-            "surface"
+            "surface",
+            "cycleway"
         ],
         "geometry": [
             "line"
