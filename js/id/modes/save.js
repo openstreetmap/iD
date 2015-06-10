@@ -165,6 +165,7 @@ iD.modes.Save = function(context) {
                                 });
                                 showErrors();
                             } else {
+                                history.clearSaved();
                                 success(e, changeset_id);
                                 // Add delay to allow for postgres replication #1646 #2678
                                 window.setTimeout(function() {
