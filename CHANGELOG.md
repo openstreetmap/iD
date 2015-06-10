@@ -1,3 +1,21 @@
+## 1.7.3
+* Add fee field to toilet preset (#2639)
+* Several improvements for more reliable save and post-save data fetch (#2667)
+* Use locale passed in from container iframe instead of detected locale (#2672)
+* Allow html entities in translated documentation titles (#2674)
+* Add presets for `man_made=storage_tank` and `man_made=silo` (#2662)
+* Add presets for RV/Marine toilet disposal and related fields (#2623)
+* Add preset for `waterway=fuel` (#2589)
+* Add preset for `amenity=biergarten` (#2641)
+* Infobox for distance/area measurement and more info, hotkey Cmd-I (#2573)
+* Fallback to 'en-US' when no language detected (#2650)
+* Don't clean description/note/fixme values (#2659)
+* Only urlencode tag values that start with http (#2657)
+* Remove `platform` and `browser` from changeset tags (#2643)
+* Clip oneway markers to viewport (#2638)
+* Performance improvements for iD.Difference
+* Fix error restoring changes after deleting a node (#2637)
+
 ## 1.7.2
 * Fix for 404 Error caused by duplicates in multi-fetch node request (#2626)
 * Fix oil well preset (#2621)
