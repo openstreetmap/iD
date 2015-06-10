@@ -165,9 +165,12 @@ iD.modes.Save = function(context) {
                                 });
                                 showErrors();
                             } else {
-                                loading.close();
-                                context.flush();
                                 success(e, changeset_id);
+                                // Add delay to allow for postgres replication #1646 #2678
+                                window.setTimeout(function() {
+                                    loading.close();
+                                    context.flush();
+                                }, 2500);
                             }
                         });
                 } else {        // changes were insignificant or reverted by user
@@ -293,8 +296,8 @@ iD.modes.Save = function(context) {
                     id: changeset_id,
                     comment: e.comment
                 })
-                .on('cancel', function(ui) {
-                    context.ui().sidebar.hide(ui);
+                .on('cancel', function() {
+                    context.ui().sidebar.hide();
                 })));
     }
 
@@ -309,7 +312,7 @@ iD.modes.Save = function(context) {
     };
 
     mode.exit = function() {
-        context.ui().sidebar.hide(ui);
+        context.ui().sidebar.hide();
     };
 
     return mode;
