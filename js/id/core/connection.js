@@ -61,20 +61,11 @@ iD.Connection = function() {
     };
 
     connection.loadMultiple = function(ids, callback) {
-        // TODO: upgrade lodash and just use _.chunk
-        function chunk(arr, chunkSize) {
-            var result = [];
-            for (var i = 0; i < arr.length; i += chunkSize) {
-                result.push(arr.slice(i, i + chunkSize));
-            }
-            return result;
-        }
-
         _.each(_.groupBy(_.uniq(ids), iD.Entity.id.type), function(v, k) {
             var type = k + 's',
                 osmIDs = _.map(v, iD.Entity.id.toOSM);
 
-            _.each(chunk(osmIDs, 150), function(arr) {
+            _.each(_.chunk(osmIDs, 150), function(arr) {
                 connection.loadFromURL(
                     url + '/api/0.6/' + type + '?' + type + '=' + arr.join(),
                     function(err, entities) {
