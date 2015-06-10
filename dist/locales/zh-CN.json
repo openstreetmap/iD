@@ -239,7 +239,6 @@
     "commit": {
         "title": "保存变更",
         "description_placeholder": "简单说明你的贡献。",
-        "message_label": "提交信息",
         "upload_explanation": "你的修改将会在所有使用OpenStreetMap的数据的地图上看得见。",
         "upload_explanation_with_user": "{user}，你的修改将会在所有使用OpenStreetMap数据的地图上展现。",
         "save": "保存",
@@ -568,39 +567,39 @@
         "fields": {
             "access": {
                 "label": "通行限制",
+                "options": {
+                    "designated": {
+                        "description": "只限标志指定或特定本地法律容许人士进入",
+                        "title": "特定的"
+                    },
+                    "destination": {
+                        "description": "只限前往目的地人士进入",
+                        "title": "目的地"
+                    },
+                    "no": {
+                        "description": "禁止一般公众进入",
+                        "title": "禁止的"
+                    },
+                    "permissive": {
+                        "description": "容许进入，直至拥有者撇回许可",
+                        "title": "获许可进入"
+                    },
+                    "private": {
+                        "description": "须拥有者个别批准，方可进入",
+                        "title": "私人"
+                    },
+                    "yes": {
+                        "description": "按法律及路权，有权使用",
+                        "title": "允许的"
+                    }
+                },
                 "placeholder": "未知",
                 "types": {
                     "access": "普通",
-                    "foot": "步行",
-                    "motor_vehicle": "汽车",
                     "bicycle": "自行车",
-                    "horse": "马匹"
-                },
-                "options": {
-                    "yes": {
-                        "title": "允许的",
-                        "description": "按法律及路权，有权使用"
-                    },
-                    "no": {
-                        "title": "禁止的",
-                        "description": "禁止一般公众进入"
-                    },
-                    "permissive": {
-                        "title": "获许可进入",
-                        "description": "容许进入，直至拥有者撇回许可"
-                    },
-                    "private": {
-                        "title": "私人",
-                        "description": "须拥有者个别批准，方可进入"
-                    },
-                    "designated": {
-                        "title": "特定的",
-                        "description": "只限标志指定或特定本地法律容许人士进入"
-                    },
-                    "destination": {
-                        "title": "目的地",
-                        "description": "只限前往目的地人士进入"
-                    }
+                    "foot": "步行",
+                    "horse": "马匹",
+                    "motor_vehicle": "汽车"
                 }
             },
             "access_simple": {
@@ -613,19 +612,19 @@
             "address": {
                 "label": "地址",
                 "placeholders": {
+                    "city": "城市",
+                    "country": "国家",
+                    "district": "行政区",
+                    "hamlet": "村庄",
                     "housename": "房屋名称",
                     "housenumber": "123号",
-                    "street": "街道",
-                    "city": "城市",
-                    "postcode": "邮政编码",
                     "place": "地方",
-                    "hamlet": "村庄",
-                    "suburb": "地区",
-                    "subdistrict": "街道",
-                    "district": "行政区",
+                    "postcode": "邮政编码",
                     "province": "行政省",
                     "state": "行政州",
-                    "country": "国家"
+                    "street": "街道",
+                    "subdistrict": "街道",
+                    "suburb": "地区"
                 }
             },
             "admin_level": {
@@ -637,9 +636,9 @@
             "aerialway/access": {
                 "label": "通行限制",
                 "options": {
+                    "both": "双向",
                     "entry": "入口",
-                    "exit": "出口",
-                    "both": "双向"
+                    "exit": "出口"
                 }
             },
             "aerialway/bubble": {
@@ -663,9 +662,9 @@
             "aerialway/summer/access": {
                 "label": "通行方向（夏季）",
                 "options": {
+                    "both": "双方",
                     "entry": "入口",
-                    "exit": "出口",
-                    "both": "双方"
+                    "exit": "出口"
                 }
             },
             "aeroway": {
@@ -714,29 +713,29 @@
             "cardinal_direction": {
                 "label": "方向",
                 "options": {
-                    "N": "北",
                     "E": "东",
-                    "S": "南",
-                    "W": "西",
-                    "NE": "东北",
-                    "SE": "东南",
-                    "SW": "西南",
-                    "NW": "西北",
-                    "NNE": "东北偏北",
                     "ENE": "东北偏东",
                     "ESE": "东南偏东",
+                    "N": "北",
+                    "NE": "东北",
+                    "NNE": "东北偏北",
+                    "NNW": "西北偏北",
+                    "NW": "西北",
+                    "S": "南",
+                    "SE": "东南",
                     "SSE": "东南偏南",
                     "SSW": "西南偏南",
-                    "WSW": "西南偏西",
+                    "SW": "西南",
+                    "W": "西",
                     "WNW": "西北偏西",
-                    "NNW": "西北偏北"
+                    "WSW": "西南偏西"
                 }
             },
             "clock_direction": {
                 "label": "方向",
                 "options": {
-                    "clockwise": "顺时针",
-                    "anticlockwise": "逆时针"
+                    "anticlockwise": "逆时针",
+                    "clockwise": "顺时针"
                 }
             },
             "collection_times": {
@@ -780,13 +779,13 @@
             },
             "electrified": {
                 "label": "电气化",
-                "placeholder": "接触线、电气化铁路…",
                 "options": {
                     "contact_line": "接触线",
+                    "no": "否",
                     "rail": "电气化铁路",
-                    "yes": "是(未指明)",
-                    "no": "否"
-                }
+                    "yes": "是(未指明)"
+                },
+                "placeholder": "接触线、电气化铁路…"
             },
             "elevation": {
                 "label": "海拔"
@@ -811,9 +810,9 @@
                 "label": "类型",
                 "options": {
                     "pillar": "支柱/地上",
+                    "pond": "池塘",
                     "underground": "地铁",
-                    "wall": "墙",
-                    "pond": "池塘"
+                    "wall": "墙"
                 }
             },
             "fixme": {
@@ -854,12 +853,12 @@
             },
             "gender": {
                 "label": "性别",
-                "placeholder": "未知",
                 "options": {
-                    "male": "男",
                     "female": "女",
+                    "male": "男",
                     "unisex": "中性"
-                }
+                },
+                "placeholder": "未知"
             },
             "generator/method": {
                 "label": "模式"
@@ -900,8 +899,8 @@
             "incline_steps": {
                 "label": "坡度",
                 "options": {
-                    "up": "上",
-                    "down": "下"
+                    "down": "下",
+                    "up": "上"
                 }
             },
             "information": {
@@ -910,11 +909,11 @@
             "internet_access": {
                 "label": "互联网接入",
                 "options": {
-                    "yes": "是",
                     "no": "否",
-                    "wlan": "Wi-Fi",
+                    "terminal": "终端",
                     "wired": "有线网络",
-                    "terminal": "终端"
+                    "wlan": "Wi-Fi",
+                    "yes": "是"
                 }
             },
             "lamp_type": {
@@ -933,20 +932,20 @@
             "leaf_cycle": {
                 "label": "叶寿命",
                 "options": {
-                    "evergreen": "常绿",
                     "deciduous": "落叶",
-                    "semi_evergreen": "半常绿",
+                    "evergreen": "常绿",
+                    "mixed": "混交林",
                     "semi_deciduous": "半落叶",
-                    "mixed": "混交林"
+                    "semi_evergreen": "半常绿"
                 }
             },
             "leaf_type": {
                 "label": "叶型",
                 "options": {
                     "broadleaved": "阔叶",
-                    "needleleaved": "针叶",
+                    "leafless": "无叶",
                     "mixed": "混交林",
-                    "leafless": "无叶"
+                    "needleleaved": "针叶"
                 }
             },
             "leisure": {
@@ -974,7 +973,6 @@
             },
             "mtb/scale": {
                 "label": "登山車难度",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0：坚实的硕石土路，没有障碍物，大湾曲",
                     "1": "1：铺面部分松散，有小的障碍物，大弯曲",
@@ -983,22 +981,22 @@
                     "4": "4：路面松散或是充满石头，有危险的发夹弯",
                     "5": "5：骑乘等级最困难，路面充满石头，或者是路面坍方",
                     "6": "6：除非是技巧极好的越野车手，否则并不适合骑乘"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "国际登山车协会路径难度",
-                "placeholder": "简单,中等,困难...",
                 "options": {
                     "0": "最简单(白圈)",
                     "1": "容易(绿圈)",
                     "2": "中等(蓝方块)",
                     "3": "困难(黑色钻石型)",
                     "4": "极端困难(双重黑色钻石型)"
-                }
+                },
+                "placeholder": "简单,中等,困难..."
             },
             "mtb/scale/uphill": {
                 "label": "山地自行车上坡难度",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0：平均坡度小于10％时，有碎石/夯实的地面，没有障碍物",
                     "1": "1：平均坡度小于15％，有碎石/夯实的地面，有些许障碍物",
@@ -1006,7 +1004,8 @@
                     "3": "3：平均坡度25％，多变的平面，拳头大的石头/树墙",
                     "4": "4：平均坡度小于30％时，很糟的路面状况，大石头/树墙",
                     "5": "5：很陡，单车得牵行或扛车"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "名称",
@@ -1027,17 +1026,17 @@
             "oneway": {
                 "label": "单行线",
                 "options": {
+                    "no": "否",
                     "undefined": "假定为否",
-                    "yes": "是",
-                    "no": "否"
+                    "yes": "是"
                 }
             },
             "oneway_yes": {
                 "label": "单行线",
                 "options": {
+                    "no": "否",
                     "undefined": "假定为是",
-                    "yes": "是",
-                    "no": "否"
+                    "yes": "是"
                 }
             },
             "opening_hours": {
@@ -1056,13 +1055,13 @@
             "parking": {
                 "label": "类型",
                 "options": {
-                    "surface": "地面",
-                    "multi-storey": "多晨",
-                    "underground": "地下",
-                    "sheds": "单独车库",
                     "carports": "车棚",
                     "garage_boxes": "车库盒",
-                    "lane": "路边"
+                    "lane": "路边",
+                    "multi-storey": "多晨",
+                    "sheds": "单独车库",
+                    "surface": "地面",
+                    "underground": "地下"
                 }
             },
             "phone": {
@@ -1071,24 +1070,24 @@
             },
             "piste/difficulty": {
                 "label": "困难",
-                "placeholder": "容易，中阶，进阶",
                 "options": {
-                    "novice": "新手(教学)",
-                    "easy": "容易(绿圈)",
-                    "intermediate": "中阶(蓝方块)",
                     "advanced": "进阶(黑色钻石型)",
+                    "easy": "容易(绿圈)",
                     "expert": "专家(双重黑色钻石型)",
+                    "extreme": "极端困难(需要攀登工具)",
                     "freeride": "自由滑行(场地外)",
-                    "extreme": "极端困难(需要攀登工具)"
-                }
+                    "intermediate": "中阶(蓝方块)",
+                    "novice": "新手(教学)"
+                },
+                "placeholder": "容易，中阶，进阶"
             },
             "piste/grooming": {
                 "label": "雪道类型",
                 "options": {
-                    "classic": "经典",
-                    "mogul": "蒙古人",
                     "backcountry": "偏远地区",
+                    "classic": "经典",
                     "classic+skating": "经典和滑行",
+                    "mogul": "蒙古人",
                     "scooter": "滑行艇/雪车",
                     "skating": "滑冰"
                 }
@@ -1097,14 +1096,14 @@
                 "label": "类型",
                 "options": {
                     "downhill": "下坡",
+                    "hike": "徒步旅行",
+                    "ice_skate": "冰刀",
                     "nordic": "北欧人",
+                    "playground": "练习场",
                     "skitour": "滑雪旅行",
                     "sled": "雪橇",
-                    "hike": "徒步旅行",
                     "sleigh": "简易雪橇",
-                    "ice_skate": "冰刀",
-                    "snow_park": "滑雪场",
-                    "playground": "练习场"
+                    "snow_park": "滑雪场"
                 }
             },
             "place": {
@@ -1154,15 +1153,15 @@
             },
             "sac_scale": {
                 "label": "远足难度",
-                "placeholder": "登山旅行，越岭行走...",
                 "options": {
-                    "hiking": "T1：徒步旅行",
-                    "mountain_hiking": "T2：登山旅行",
-                    "demanding_mountain_hiking": "T3：进阶登山旅行",
                     "alpine_hiking": "T4：高山旅行",
                     "demanding_alpine_hiking": "T5：进阶高山旅行",
-                    "difficult_alpine_hiking": "T6：艰困高山旅行"
-                }
+                    "demanding_mountain_hiking": "T3：进阶登山旅行",
+                    "difficult_alpine_hiking": "T6：艰困高山旅行",
+                    "hiking": "T1：徒步旅行",
+                    "mountain_hiking": "T2：登山旅行"
+                },
+                "placeholder": "登山旅行，越岭行走..."
             },
             "seasonal": {
                 "label": "具备季节性"
@@ -1172,26 +1171,26 @@
             },
             "service/bicycle/chain_tool": {
                 "options": {
+                    "no": "否",
                     "undefined": "假定为否",
-                    "yes": "是",
-                    "no": "否"
+                    "yes": "是"
                 }
             },
             "service/bicycle/pump": {
                 "label": "气泵",
                 "options": {
+                    "no": "否",
                     "undefined": "假定为否",
-                    "yes": " 是",
-                    "no": "否"
+                    "yes": " 是"
                 }
             },
             "service_rail": {
                 "label": "服务类型",
                 "options": {
-                    "spur": "短途支线",
-                    "yard": "站场线路",
+                    "crossover": "渡线",
                     "siding": "侧线",
-                    "crossover": "渡线"
+                    "spur": "短途支线",
+                    "yard": "站场线路"
                 }
             },
             "shelter": {
@@ -1208,29 +1207,29 @@
             },
             "smoking": {
                 "label": "吸烟",
-                "placeholder": "禁止、隔开、允许...",
                 "options": {
-                    "no": "禁止吸烟",
-                    "separated": "指定区域可使用（布隔开）",
+                    "dedicated": "吸烟专用",
                     "isolated": "指定区域可使用（隔开）",
+                    "no": "禁止吸烟",
                     "outside": "外面可使用",
-                    "yes": "随处可使用",
-                    "dedicated": "吸烟专用"
-                }
+                    "separated": "指定区域可使用（布隔开）",
+                    "yes": "随处可使用"
+                },
+                "placeholder": "禁止、隔开、允许..."
             },
             "smoothness": {
                 "label": "平顺度",
-                "placeholder": "轴承，轮胎，越野",
                 "options": {
+                    "bad": "强化轮胎：休旅自行车，汽车，人力车",
                     "excellent": "轴承：溜冰，滑板",
                     "good": "细轮：竞速自行车",
-                    "intermediate": "轮胎：通勤脚踏车，轮椅，滑板车",
-                    "bad": "强化轮胎：休旅自行车，汽车，人力车",
-                    "very_bad": "轻量化：低负重越野车辆",
                     "horrible": "越野：高负重越野车辆",
-                    "very_horrible": "越野专用：拖拉机，全地形越野车",
-                    "impassable": "禁止通行/禁止轮类交通工具"
-                }
+                    "impassable": "禁止通行/禁止轮类交通工具",
+                    "intermediate": "轮胎：通勤脚踏车，轮椅，滑板车",
+                    "very_bad": "轻量化：低负重越野车辆",
+                    "very_horrible": "越野专用：拖拉机，全地形越野车"
+                },
+                "placeholder": "轴承，轮胎，越野"
             },
             "social_facility_for": {
                 "label": "服务对象",
@@ -1250,14 +1249,14 @@
             },
             "structure": {
                 "label": "结构",
-                "placeholder": "未知种类",
                 "options": {
                     "bridge": "桥",
-                    "tunnel": "隧道",
-                    "embankment": "堤岸",
                     "cutting": "开凿",
-                    "ford": "浅滩"
-                }
+                    "embankment": "堤岸",
+                    "ford": "浅滩",
+                    "tunnel": "隧道"
+                },
+                "placeholder": "未知种类"
             },
             "studio_type": {
                 "label": "类型"
@@ -1276,20 +1275,20 @@
             },
             "takeaway": {
                 "label": "外卖",
-                "placeholder": "是，否，仅限外卖",
                 "options": {
-                    "yes": "是",
                     "no": "否",
-                    "only": "仅限外卖"
-                }
+                    "only": "仅限外卖",
+                    "yes": "是"
+                },
+                "placeholder": "是，否，仅限外卖"
             },
             "toilets/disposal": {
                 "label": "废弃",
                 "options": {
-                    "flush": "冲水式",
-                    "pitlatrine": "旱厕/翼坑",
+                    "bucket": "尿筒",
                     "chemical": "化工",
-                    "bucket": "尿筒"
+                    "flush": "冲水式",
+                    "pitlatrine": "旱厕/翼坑"
                 }
             },
             "tourism": {
@@ -1300,26 +1299,26 @@
             },
             "tracktype": {
                 "label": "产业道路种类",
-                "placeholder": "坚硬地面，硬物铺面，软铺面",
                 "options": {
                     "grade1": "刚性铺面：铺面为柏油，水泥或由刚性材质密实组成",
                     "grade2": "近刚性铺面：砾石与石块混合柔性材质",
                     "grade3": "混合刚性与柔性材质",
                     "grade4": "近柔性铺面：土壤，砂土与草地混合其他刚性材质",
                     "grade5": "柔性铺面：只有土壤，砂土与草地"
-                }
+                },
+                "placeholder": "坚硬地面，硬物铺面，软铺面"
             },
             "trail_visibility": {
                 "label": "路径可见度",
-                "placeholder": "良好，尚可，稍差...",
                 "options": {
+                    "bad": "差劲：没有标示，路径有时候消失",
                     "excellent": "良好：路径明显或标示充分",
                     "good": "尚可：有标示但可能不明显",
-                    "intermediate": "略差：标示稀少，路径大致可见",
-                    "bad": "差劲：没有标示，路径有时候消失",
                     "horrible": "可怕：路径常消失，需要部分定向能力",
+                    "intermediate": "略差：标示稀少，路径大致可见",
                     "no": "无：没有路径，需具备完整的定向能力"
-                }
+                },
+                "placeholder": "良好，尚可，稍差..."
             },
             "trees": {
                 "label": "树林"
@@ -1735,8 +1734,8 @@
                 "terms": "自行车,单车,路障"
             },
             "barrier/ditch": {
-                "name": "水沟",
-                "terms": "沟,沟渠,涧"
+                "name": "壕沟",
+                "terms": "沟坎,壕"
             },
             "barrier/entrance": {
                 "name": "入口",
@@ -3351,8 +3350,8 @@
                 "terms": "水坝"
             },
             "waterway/ditch": {
-                "name": "壕沟",
-                "terms": "沟坎,壕"
+                "name": "水沟",
+                "terms": "沟,沟渠,涧"
             },
             "waterway/drain": {
                 "name": "渠",

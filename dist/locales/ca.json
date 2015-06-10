@@ -239,7 +239,7 @@
     "commit": {
         "title": "Desa els canvis",
         "description_placeholder": "Breu descripció de les vostres contribucions",
-        "message_label": "Afegiu un comentari",
+        "message_label": "Comentari de conjunt de canvis",
         "upload_explanation": "Els canvis que deseu seran visibles a tots els mapes que utilitzin dades d'OpenStreetMap.",
         "upload_explanation_with_user": "Els canvis que deseu com a {user} seran visibles en tots els mapes que utilitzin dades d'OpenStreetMap.",
         "save": "Desa",
@@ -253,6 +253,26 @@
     "contributors": {
         "list": "Edicions fetes per {users}",
         "truncated_list": "Edicions fetes per {users} i {count} més"
+    },
+    "infobox": {
+        "selected": "{n} seleccionats",
+        "geometry": "Geometria",
+        "closed": "tancat",
+        "center": "Centre",
+        "perimeter": "Perímetre",
+        "length": "Llargària",
+        "area": "Àrea",
+        "centroid": "Centroide",
+        "location": "Ubicació",
+        "metric": "Mètric",
+        "imperial": "Imperial"
+    },
+    "geometry": {
+        "point": "punt",
+        "vertex": "vèrtex",
+        "line": "línia",
+        "area": "àrea",
+        "relation": "relació"
     },
     "geocoder": {
         "search": "Cerca mundialment...",
@@ -568,39 +588,39 @@
         "fields": {
             "access": {
                 "label": "Accés",
+                "options": {
+                    "designated": {
+                        "description": "Accés garantit seguint les normes de les senyals o les normes locals específiques.",
+                        "title": "Específic"
+                    },
+                    "destination": {
+                        "description": "Accés permès només per arribar a un destí",
+                        "title": "Destinació"
+                    },
+                    "no": {
+                        "description": "No es permet l'accés al públic en general",
+                        "title": "Prohibit"
+                    },
+                    "permissive": {
+                        "description": "Accés garantit fins que el propietari ho prohibeixi.",
+                        "title": "Permissiu"
+                    },
+                    "private": {
+                        "description": "Accés permès només amb autorització individualitzada del propietari",
+                        "title": "Privat"
+                    },
+                    "yes": {
+                        "description": "Accés garantit per llei; us dona dret de pas",
+                        "title": "Permès"
+                    }
+                },
                 "placeholder": "Desconegut",
                 "types": {
                     "access": "General",
-                    "foot": "A peu",
-                    "motor_vehicle": "Vehicles de motor",
                     "bicycle": "Bicicletes",
-                    "horse": "Cavalls"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Permès",
-                        "description": "Accés garantit per llei; us dona dret de pas"
-                    },
-                    "no": {
-                        "title": "Prohibit",
-                        "description": "No es permet l'accés al públic en general"
-                    },
-                    "permissive": {
-                        "title": "Permissiu",
-                        "description": "Accés garantit fins que el propietari ho prohibeixi."
-                    },
-                    "private": {
-                        "title": "Privat",
-                        "description": "Accés permès només amb autorització individualitzada del propietari"
-                    },
-                    "designated": {
-                        "title": "Específic",
-                        "description": "Accés garantit seguint les normes de les senyals o les normes locals específiques."
-                    },
-                    "destination": {
-                        "title": "Destinació",
-                        "description": "Accés permès només per arribar a un destí"
-                    }
+                    "foot": "A peu",
+                    "horse": "Cavalls",
+                    "motor_vehicle": "Vehicles de motor"
                 }
             },
             "access_simple": {
@@ -613,19 +633,19 @@
             "address": {
                 "label": "Adreça",
                 "placeholders": {
+                    "city": "Ciutat ",
+                    "country": "País",
+                    "district": "Districte",
+                    "hamlet": "Llogaret",
                     "housename": "Nom de la casa",
                     "housenumber": "123",
-                    "street": "Carrer",
-                    "city": "Ciutat ",
-                    "postcode": "Codi postal",
                     "place": "Lloc",
-                    "hamlet": "Llogaret",
-                    "suburb": "Sector",
-                    "subdistrict": "Subdistricte",
-                    "district": "Districte",
+                    "postcode": "Codi postal",
                     "province": "Província",
                     "state": "Estat",
-                    "country": "País"
+                    "street": "Carrer",
+                    "subdistrict": "Subdistricte",
+                    "suburb": "Sector"
                 }
             },
             "admin_level": {
@@ -637,9 +657,9 @@
             "aerialway/access": {
                 "label": "Accés",
                 "options": {
+                    "both": "Ambdues",
                     "entry": "Entrada",
-                    "exit": "Sortida",
-                    "both": "Ambdues"
+                    "exit": "Sortida"
                 }
             },
             "aerialway/bubble": {
@@ -663,9 +683,9 @@
             "aerialway/summer/access": {
                 "label": "Accés (estival)",
                 "options": {
+                    "both": "Ambdues",
                     "entry": "Entrada",
-                    "exit": "Sortida",
-                    "both": "Ambdues"
+                    "exit": "Sortida"
                 }
             },
             "aeroway": {
@@ -714,29 +734,29 @@
             "cardinal_direction": {
                 "label": "Direcció",
                 "options": {
-                    "N": "Nord",
                     "E": "Est",
-                    "S": "Sud",
-                    "W": "Oest",
-                    "NE": "Nord-est",
-                    "SE": "Sud-est",
-                    "SW": "Sud-oest",
-                    "NW": "Nord-oest",
-                    "NNE": "Nord-nord-est",
                     "ENE": "Est-nord-est",
                     "ESE": "Est-sud-est",
+                    "N": "Nord",
+                    "NE": "Nord-est",
+                    "NNE": "Nord-nord-est",
+                    "NNW": "Nord-nord-oest",
+                    "NW": "Nord-oest",
+                    "S": "Sud",
+                    "SE": "Sud-est",
                     "SSE": "Sud-sud-est",
                     "SSW": "Sud-sud-oest",
-                    "WSW": "Oest-sud-oest",
+                    "SW": "Sud-oest",
+                    "W": "Oest",
                     "WNW": "Oest-nord-oest",
-                    "NNW": "Nord-nord-oest"
+                    "WSW": "Oest-sud-oest"
                 }
             },
             "clock_direction": {
                 "label": "Direcció",
                 "options": {
-                    "clockwise": "en sentit de les agulles del rellotge",
-                    "anticlockwise": "en sentit contrari al de les agulles del rellotge"
+                    "anticlockwise": "en sentit contrari al de les agulles del rellotge",
+                    "clockwise": "en sentit de les agulles del rellotge"
                 }
             },
             "collection_times": {
@@ -744,6 +764,9 @@
             },
             "construction": {
                 "label": "Tipus"
+            },
+            "content": {
+                "label": "Continguts"
             },
             "country": {
                 "label": "País"
@@ -780,13 +803,13 @@
             },
             "electrified": {
                 "label": "Electrificació",
-                "placeholder": "Catenària, 3r rail...",
                 "options": {
                     "contact_line": "Catenària",
+                    "no": "No",
                     "rail": "3r rail",
-                    "yes": "Sí (no especificat)",
-                    "no": "No"
-                }
+                    "yes": "Sí (no especificat)"
+                },
+                "placeholder": "Catenària, 3r rail..."
             },
             "elevation": {
                 "label": "Elevació"
@@ -811,9 +834,9 @@
                 "label": "Tipus",
                 "options": {
                     "pillar": "Pilona/visible",
+                    "pond": "Bassa",
                     "underground": "Subterrani",
-                    "wall": "Mur",
-                    "pond": "Bassa"
+                    "wall": "Mur"
                 }
             },
             "fixme": {
@@ -854,12 +877,12 @@
             },
             "gender": {
                 "label": "Gènere",
-                "placeholder": "Desconegut",
                 "options": {
-                    "male": "Masculí",
                     "female": "Femení",
+                    "male": "Masculí",
                     "unisex": "Unisex"
-                }
+                },
+                "placeholder": "Desconegut"
             },
             "generator/method": {
                 "label": "Mètode"
@@ -900,8 +923,8 @@
             "incline_steps": {
                 "label": "Inclinar",
                 "options": {
-                    "up": "Amunt",
-                    "down": "Avall"
+                    "down": "Avall",
+                    "up": "Amunt"
                 }
             },
             "information": {
@@ -910,11 +933,11 @@
             "internet_access": {
                 "label": "Accés a Internet",
                 "options": {
-                    "yes": "Sí",
                     "no": "No",
-                    "wlan": "WiFi",
+                    "terminal": "Mitjançant un terminal",
                     "wired": "Per cable",
-                    "terminal": "Mitjançant un terminal"
+                    "wlan": "WiFi",
+                    "yes": "Sí"
                 }
             },
             "lamp_type": {
@@ -933,20 +956,20 @@
             "leaf_cycle": {
                 "label": "Cicle del fullatge",
                 "options": {
-                    "evergreen": "Perenne",
                     "deciduous": "Caducifoli",
-                    "semi_evergreen": "Semiperenne",
+                    "evergreen": "Perenne",
+                    "mixed": "Barrejat",
                     "semi_deciduous": "Semicaducifoli",
-                    "mixed": "Barrejat"
+                    "semi_evergreen": "Semiperenne"
                 }
             },
             "leaf_type": {
                 "label": "Tipus de fulles",
                 "options": {
                     "broadleaved": "Fulles amples",
-                    "needleleaved": "Fulles primes",
+                    "leafless": "Sense fullatge",
                     "mixed": "Barrejat",
-                    "leafless": "Sense fullatge"
+                    "needleleaved": "Fulles primes"
                 }
             },
             "leisure": {
@@ -974,7 +997,6 @@
             },
             "mtb/scale": {
                 "label": "Dificultat per a bicicletes de muntanya",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Grava sòlida/terra compactada, sense obstacles, corbes de radi ample",
                     "1": "1: Algunes zones amb superfície inestable, petits obstacles, corbes de radi ample",
@@ -983,22 +1005,22 @@
                     "4": "4: Superfície inestable o còdols, corbes en paella perilloses",
                     "5": "5: Dificultat màxima, camps de còdols, esllavissades",
                     "6": "6: No ciclable excepte per als millors ciclistes de muntanya"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "Dificultat del camí segons IMBA",
-                "placeholder": "Fàcil, Mitjana, Difícil...",
                 "options": {
                     "0": "La més fàcil (cercle blanc)",
                     "1": "Fàcil (cercle verd)",
                     "2": "Mitjana (quadrat blau)",
                     "3": "Difícil (diamant negre)",
                     "4": "Extremadament difícil (diamant negre doble)"
-                }
+                },
+                "placeholder": "Fàcil, Mitjana, Difícil..."
             },
             "mtb/scale/uphill": {
                 "label": "Dificultat d'ascens per a ciclistes de muntanya",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Incl. mitjana <10%, grava/terra compactada, sense obstacles",
                     "1": "1: Incl. mitjana <15%. grava/terra compactada, pocs i petits obstacles",
@@ -1006,7 +1028,8 @@
                     "3": "3: Incl. mitjana <25%, superfície variable, roques i banques de la mida d'un puny",
                     "4": "4: Incl. mitjana <30%, condicions pobres, grans roques/branques",
                     "5": "5: Molt empinat, generalment la bicicleta ha de ser empesa."
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Nom",
@@ -1027,17 +1050,17 @@
             "oneway": {
                 "label": "Sentit únic",
                 "options": {
+                    "no": "No",
                     "undefined": "Sobreentès que no",
-                    "yes": "Sí",
-                    "no": "No"
+                    "yes": "Sí"
                 }
             },
             "oneway_yes": {
                 "label": "Sentit únic",
                 "options": {
+                    "no": "No",
                     "undefined": "Sobreentès que sí",
-                    "yes": "Sí",
-                    "no": "No"
+                    "yes": "Sí"
                 }
             },
             "opening_hours": {
@@ -1056,13 +1079,13 @@
             "parking": {
                 "label": "Tipus",
                 "options": {
-                    "surface": "Superfície",
-                    "multi-storey": "Diversos nivells",
-                    "underground": "Subterrani",
-                    "sheds": "Garatges",
                     "carports": "Aixoplucs",
                     "garage_boxes": "Boxs",
-                    "lane": "Adossat a la carretera"
+                    "lane": "Adossat a la carretera",
+                    "multi-storey": "Diversos nivells",
+                    "sheds": "Garatges",
+                    "surface": "Superfície",
+                    "underground": "Subterrani"
                 }
             },
             "phone": {
@@ -1071,24 +1094,24 @@
             },
             "piste/difficulty": {
                 "label": "Dificultat",
-                "placeholder": "Fàcil, Intermedi, avançat...",
                 "options": {
-                    "novice": "Debutants (instrucció)",
-                    "easy": "Fàcil (pista verda)",
-                    "intermediate": "Intermedi (Pista blava)",
                     "advanced": "Avançat (Pista negra nivell I )",
+                    "easy": "Fàcil (pista verda)",
                     "expert": "Expert (Pista negra nivell II)",
+                    "extreme": "Extrem (es necessita equipament d'escalada)",
                     "freeride": "Pista no oficial (fora pistes)",
-                    "extreme": "Extrem (es necessita equipament d'escalada)"
-                }
+                    "intermediate": "Intermedi (Pista blava)",
+                    "novice": "Debutants (instrucció)"
+                },
+                "placeholder": "Fàcil, Intermedi, avançat..."
             },
             "piste/grooming": {
                 "label": "Adequació",
                 "options": {
-                    "classic": "Classic",
-                    "mogul": "Mogul",
                     "backcountry": "Backcountry",
+                    "classic": "Classic",
                     "classic+skating": "Classic i Skating",
+                    "mogul": "Mogul",
                     "scooter": "Retrack petita/moto de neu",
                     "skating": "Skating"
                 }
@@ -1097,14 +1120,14 @@
                 "label": "Tipus",
                 "options": {
                     "downhill": "Descens",
+                    "hike": "Raquetes/senderistes",
+                    "ice_skate": "Patinatge sobre gel",
                     "nordic": "Esquí de fons",
+                    "playground": "Parc infantil",
                     "skitour": "Esquí de muntanya",
                     "sled": "Trineus",
-                    "hike": "Raquetes/senderistes",
                     "sleigh": "Trineus multiplaça",
-                    "ice_skate": "Patinatge sobre gel",
-                    "snow_park": "Parc per a snowboards",
-                    "playground": "Parc infantil"
+                    "snow_park": "Parc per a snowboards"
                 }
             },
             "place": {
@@ -1115,6 +1138,9 @@
             },
             "power": {
                 "label": "Tipus"
+            },
+            "power_supply": {
+                "label": "Abastament elèctric"
             },
             "railway": {
                 "label": "Tipus"
@@ -1154,15 +1180,18 @@
             },
             "sac_scale": {
                 "label": "Dificultat per al senderisme",
-                "placeholder": "Muntanysime, Alpinisme...",
                 "options": {
-                    "hiking": "T1: Senderisme",
-                    "mountain_hiking": "T2: Muntanyisme",
-                    "demanding_mountain_hiking": "T3: Muntanyisme exigent",
                     "alpine_hiking": "T4: Alpinisme",
                     "demanding_alpine_hiking": "T5: Alpinisme exigent",
-                    "difficult_alpine_hiking": "T6: Alpinisme difícil"
-                }
+                    "demanding_mountain_hiking": "T3: Muntanyisme exigent",
+                    "difficult_alpine_hiking": "T6: Alpinisme difícil",
+                    "hiking": "T1: Senderisme",
+                    "mountain_hiking": "T2: Muntanyisme"
+                },
+                "placeholder": "Muntanysime, Alpinisme..."
+            },
+            "sanitary_dump_station": {
+                "label": "Lavabo"
             },
             "seasonal": {
                 "label": "Estacional"
@@ -1173,26 +1202,26 @@
             "service/bicycle/chain_tool": {
                 "label": "Eina de cadena",
                 "options": {
+                    "no": "No",
                     "undefined": "Sobreentès que és no",
-                    "yes": "Sí",
-                    "no": "No"
+                    "yes": "Sí"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Bombament d'aire",
                 "options": {
+                    "no": "No",
                     "undefined": "Entès que no",
-                    "yes": "Sí",
-                    "no": "No"
+                    "yes": "Sí"
                 }
             },
             "service_rail": {
                 "label": "Tipus de servei de la via",
                 "options": {
-                    "spur": "Canvi d'agulles",
-                    "yard": "Platja",
+                    "crossover": "Intercambiador",
                     "siding": "Apartador",
-                    "crossover": "Intercambiador"
+                    "spur": "Canvi d'agulles",
+                    "yard": "Platja"
                 }
             },
             "shelter": {
@@ -1209,29 +1238,29 @@
             },
             "smoking": {
                 "label": "Apte per a fumadors",
-                "placeholder": "No, Separats, Sí...",
                 "options": {
-                    "no": "Prohibit fumar a tot arreu",
-                    "separated": "A les àrees per a fumadors, no aïllades físicament",
+                    "dedicated": "Dedicat a fumadors (ex: club de fumadors)",
                     "isolated": "A les àrees per a fumadors, aïllades físicament",
+                    "no": "Prohibit fumar a tot arreu",
                     "outside": "Permès a fora",
-                    "yes": "Permès a tot arreu",
-                    "dedicated": "Dedicat a fumadors (ex: club de fumadors)"
-                }
+                    "separated": "A les àrees per a fumadors, no aïllades físicament",
+                    "yes": "Permès a tot arreu"
+                },
+                "placeholder": "No, Separats, Sí..."
             },
             "smoothness": {
                 "label": "Uniformitat",
-                "placeholder": "Rodetes, Rodes, Tot terreny...",
                 "options": {
+                    "bad": "Rodes robustes: bicicleta de muntanya, cotxe, carruatge oriental",
                     "excellent": "Rodetes: Patí en línia, skateboard",
                     "good": "Rodes primes: bicicleta de competició",
-                    "intermediate": "Rodes: bicicleta urbana, cadira de rodes, patinet",
-                    "bad": "Rodes robustes: bicicleta de muntanya, cotxe, carruatge oriental",
-                    "very_bad": "Gran altura: vehicle utilitari lleuger tot terreny",
                     "horrible": "Tot terreny : vehicle utilitari pesant tot terreny",
-                    "very_horrible": "Tot terreny especialitzades: tractors, Quads",
-                    "impassable": "Impassable / Vehicles sense rodes"
-                }
+                    "impassable": "Impassable / Vehicles sense rodes",
+                    "intermediate": "Rodes: bicicleta urbana, cadira de rodes, patinet",
+                    "very_bad": "Gran altura: vehicle utilitari lleuger tot terreny",
+                    "very_horrible": "Tot terreny especialitzades: tractors, Quads"
+                },
+                "placeholder": "Rodetes, Rodes, Tot terreny..."
             },
             "social_facility_for": {
                 "label": "Persones ateses",
@@ -1251,14 +1280,14 @@
             },
             "structure": {
                 "label": "Estructura",
-                "placeholder": "Desconegut",
                 "options": {
                     "bridge": "Pont",
-                    "tunnel": "Túnel",
-                    "embankment": "Terraplè ",
                     "cutting": "Trinxera",
-                    "ford": "Ford"
-                }
+                    "embankment": "Terraplè ",
+                    "ford": "Ford",
+                    "tunnel": "Túnel"
+                },
+                "placeholder": "Desconegut"
             },
             "studio_type": {
                 "label": "Tipus"
@@ -1277,20 +1306,20 @@
             },
             "takeaway": {
                 "label": "Per emportar",
-                "placeholder": "Sí, No, Només per emportar...",
                 "options": {
-                    "yes": "Sí",
                     "no": "No",
-                    "only": "Només per emportar"
-                }
+                    "only": "Només per emportar",
+                    "yes": "Sí"
+                },
+                "placeholder": "Sí, No, Només per emportar..."
             },
             "toilets/disposal": {
                 "label": "Contenidor",
                 "options": {
-                    "flush": "Renovació d'aigua",
-                    "pitlatrine": "Latrina",
+                    "bucket": "Cubell",
                     "chemical": "Químic",
-                    "bucket": "Cubell"
+                    "flush": "Renovació d'aigua",
+                    "pitlatrine": "Latrina"
                 }
             },
             "tourism": {
@@ -1301,26 +1330,26 @@
             },
             "tracktype": {
                 "label": "Tipus de pista",
-                "placeholder": "Sòlid, majoritàriament sòlid, tou...",
                 "options": {
                     "grade1": "Sòlid: pavimentat o amb superfície altament compactada",
                     "grade2": "Majoritàriament sòlid: Grava/roca amb materials tous barrejats",
                     "grade3": "Barreja uniforme de materials durs i tous",
                     "grade4": "Majoritàriament tou: terra/sorra/herba amb alguns materials durs barrejats",
                     "grade5": "Tou: terra/sorra/herba"
-                }
+                },
+                "placeholder": "Sòlid, majoritàriament sòlid, tou..."
             },
             "trail_visibility": {
                 "label": "Visibilitat del camí",
-                "placeholder": "Excel·lent, Bona, Dolenta...",
                 "options": {
+                    "bad": "Dolenta: sense marcadors. el camí a vegades no es veu/no hi és",
                     "excellent": "Excel·lent: camí no ambigu o amb presència de marques a tots llocs",
                     "good": "Bona: marcadors visibles, a vegades cal cercar-los",
-                    "intermediate": "Intermedia: pocs marcadors, el camí es majoritàriament visible",
-                    "bad": "Dolenta: sense marcadors. el camí a vegades no es veu/no hi és",
                     "horrible": "Horrible: a vegades sense camí, calen nocions d'orientació",
+                    "intermediate": "Intermedia: pocs marcadors, el camí es majoritàriament visible",
                     "no": "Nul·la: sense camí, calen coneixements experts d'orientació"
-                }
+                },
+                "placeholder": "Excel·lent, Bona, Dolenta..."
             },
             "trees": {
                 "label": "Arbres"
@@ -1333,6 +1362,9 @@
             },
             "water": {
                 "label": "Tipus"
+            },
+            "water_point": {
+                "label": "Punt d'aigua"
             },
             "waterway": {
                 "label": "Tipus"
@@ -1636,6 +1668,9 @@
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "Restaurant, Lloc per menjar, Bistro, Wok, Trattoria, Pizzeria"
+            },
+            "amenity/sanitary_dump_station": {
+                "name": "Estació de buidatge de lavabos"
             },
             "amenity/school": {
                 "name": "Escola",
@@ -2483,8 +2518,14 @@
                 "name": "Far",
                 "terms": "Far"
             },
+            "man_made/mast": {
+                "name": "Torre de ràdio"
+            },
             "man_made/observation": {
                 "name": "Torre de vigilància"
+            },
+            "man_made/petroleum_well": {
+                "name": "Pou petrolífer"
             },
             "man_made/pier": {
                 "name": "Moll de pilons",
@@ -2493,6 +2534,12 @@
             "man_made/pipeline": {
                 "name": "Canonada",
                 "terms": "Gàseoducte,Oleoducte,Canonades"
+            },
+            "man_made/silo": {
+                "name": "Sitja"
+            },
+            "man_made/storage_tank": {
+                "name": "Dipòsit d'emmagatzematge"
             },
             "man_made/survey_point": {
                 "name": "Punt referencial",
@@ -2678,6 +2725,9 @@
             "place/city": {
                 "name": "Ciutat ",
                 "terms": "Ciutat, Municipi"
+            },
+            "place/farm": {
+                "name": "Granja"
             },
             "place/hamlet": {
                 "name": "Llogaret"
@@ -3345,6 +3395,9 @@
                 "name": "Torrent",
                 "terms": "Torrentera, Rambla"
             },
+            "waterway/fuel": {
+                "name": "Benzinera per a embarcacions"
+            },
             "waterway/river": {
                 "name": "Riu",
                 "terms": "Riu"
@@ -3352,6 +3405,9 @@
             "waterway/riverbank": {
                 "name": "Banc fluvial",
                 "terms": "Riba del riu, Ribera"
+            },
+            "waterway/sanitary_dump_station": {
+                "name": "Lavabo per a vaixells"
             },
             "waterway/stream": {
                 "name": "Rierol",

@@ -226,7 +226,6 @@
     "commit": {
         "title": "Shrani spremembe",
         "description_placeholder": "Kratek opis vaših sprememb",
-        "message_label": "Povzetek sprememb",
         "upload_explanation": "Spremembe, ki ji boste naložili, bodo vidne na vseh zemljevidih, ki uporabljajo podatke OpenStreetMap.",
         "upload_explanation_with_user": "Spremembe, ki jih boste naložili kot {user}, bodo vidne na vseh zemljevidih, ki uporabljajo podatke OpenStreetMap.",
         "save": "Shrani",
@@ -443,39 +442,39 @@
         "fields": {
             "access": {
                 "label": "Dostop",
+                "options": {
+                    "designated": {
+                        "description": "Dostop je dovoljen v skladu z znaki ali posebnimi krajevnimi zakoni",
+                        "title": "Namembno"
+                    },
+                    "destination": {
+                        "description": "Dostop je dovoljen samo za dostavo",
+                        "title": "Za dostavo"
+                    },
+                    "no": {
+                        "description": "Dostop za splošno javnosto NI dovoljen",
+                        "title": "Prepovedano"
+                    },
+                    "permissive": {
+                        "description": "Dostop je dovoljen začasno, dokler lastnik dovoljenja ne prekliče",
+                        "title": "Začasno dovoljen"
+                    },
+                    "private": {
+                        "description": "Dostop je dovoljen samo z osebnim dovoljenjem lastnika",
+                        "title": "Zasebno"
+                    },
+                    "yes": {
+                        "description": "Dostopno po zakonu; služnostna pravica",
+                        "title": "Dovoljeno"
+                    }
+                },
                 "placeholder": "Neznano",
                 "types": {
                     "access": "Splošno",
-                    "foot": "Peš",
-                    "motor_vehicle": "Motorna vozila",
                     "bicycle": "Kolesarji",
-                    "horse": "Konji"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Dovoljeno",
-                        "description": "Dostopno po zakonu; služnostna pravica"
-                    },
-                    "no": {
-                        "title": "Prepovedano",
-                        "description": "Dostop za splošno javnosto NI dovoljen"
-                    },
-                    "permissive": {
-                        "title": "Začasno dovoljen",
-                        "description": "Dostop je dovoljen začasno, dokler lastnik dovoljenja ne prekliče"
-                    },
-                    "private": {
-                        "title": "Zasebno",
-                        "description": "Dostop je dovoljen samo z osebnim dovoljenjem lastnika"
-                    },
-                    "designated": {
-                        "title": "Namembno",
-                        "description": "Dostop je dovoljen v skladu z znaki ali posebnimi krajevnimi zakoni"
-                    },
-                    "destination": {
-                        "title": "Za dostavo",
-                        "description": "Dostop je dovoljen samo za dostavo"
-                    }
+                    "foot": "Peš",
+                    "horse": "Konji",
+                    "motor_vehicle": "Motorna vozila"
                 }
             },
             "access_simple": {
@@ -488,19 +487,19 @@
             "address": {
                 "label": "Naslov",
                 "placeholders": {
+                    "city": "Mesto",
+                    "country": "Država",
+                    "district": "Okrožje",
+                    "hamlet": "Zaselek",
                     "housename": "Hišno/domače ime",
                     "housenumber": "123",
-                    "street": "Ulica",
-                    "city": "Mesto",
-                    "postcode": "Poštna številka",
                     "place": "Kraj",
-                    "hamlet": "Zaselek",
-                    "suburb": "Predmestje",
-                    "subdistrict": "Okraj",
-                    "district": "Okrožje",
+                    "postcode": "Poštna številka",
                     "province": "Pokrajina",
                     "state": "Zvezna država",
-                    "country": "Država"
+                    "street": "Ulica",
+                    "subdistrict": "Okraj",
+                    "suburb": "Predmestje"
                 }
             },
             "admin_level": {
@@ -512,9 +511,9 @@
             "aerialway/access": {
                 "label": "Dostop",
                 "options": {
+                    "both": "Oboje",
                     "entry": "Vhod",
-                    "exit": "Izhod",
-                    "both": "Oboje"
+                    "exit": "Izhod"
                 }
             },
             "aerialway/bubble": {
@@ -538,9 +537,9 @@
             "aerialway/summer/access": {
                 "label": "Dostop (poleti)",
                 "options": {
+                    "both": "Oboje",
                     "entry": "Vhod",
-                    "exit": "Izhod",
-                    "both": "Oboje"
+                    "exit": "Izhod"
                 }
             },
             "aeroway": {
@@ -583,29 +582,29 @@
             "cardinal_direction": {
                 "label": "Smer",
                 "options": {
-                    "N": "Sever",
                     "E": "Vzhod",
-                    "S": "Jug",
-                    "W": "Zahod",
-                    "NE": "Severovzhod",
-                    "SE": "Jugovzhod",
-                    "SW": "Jugozahod",
-                    "NW": "Severozahod",
-                    "NNE": "Sever-severovzhod",
                     "ENE": "Vzhod-severovzhod",
                     "ESE": "Vzhod-jugovzhod",
+                    "N": "Sever",
+                    "NE": "Severovzhod",
+                    "NNE": "Sever-severovzhod",
+                    "NNW": "Sever-severozahod",
+                    "NW": "Severozahod",
+                    "S": "Jug",
+                    "SE": "Jugovzhod",
                     "SSE": "Jug-jugovzhod",
                     "SSW": "Jug-jugozahod",
-                    "WSW": "Zahod-jugozahod",
+                    "SW": "Jugozahod",
+                    "W": "Zahod",
                     "WNW": "Zahod-severozahod",
-                    "NNW": "Sever-severozahod"
+                    "WSW": "Zahod-jugozahod"
                 }
             },
             "clock_direction": {
                 "label": "Smer",
                 "options": {
-                    "clockwise": "V smeri urinega kazalca",
-                    "anticlockwise": "Proti smeri urinega kazalca"
+                    "anticlockwise": "Proti smeri urinega kazalca",
+                    "clockwise": "V smeri urinega kazalca"
                 }
             },
             "collection_times": {
@@ -640,13 +639,13 @@
             },
             "electrified": {
                 "label": "Elektrifikacija",
-                "placeholder": "Elektrificiran tir",
                 "options": {
                     "contact_line": "Kontaktni vod",
+                    "no": "Ne",
                     "rail": "Prevodne tračnice",
-                    "yes": "Da (vrsta ni določena)",
-                    "no": "Ne"
-                }
+                    "yes": "Da (vrsta ni določena)"
+                },
+                "placeholder": "Elektrificiran tir"
             },
             "elevation": {
                 "label": "Nadmorska višina"
@@ -671,9 +670,9 @@
                 "label": "Vrsta",
                 "options": {
                     "pillar": "Nadzemni",
+                    "pond": "Črpališče iz ribnika",
                     "underground": "Podzemni",
-                    "wall": "Zidni",
-                    "pond": "Črpališče iz ribnika"
+                    "wall": "Zidni"
                 }
             },
             "fixme": {
@@ -754,11 +753,11 @@
             "internet_access": {
                 "label": "Dostop do interneta",
                 "options": {
-                    "yes": "Da",
                     "no": "Ne",
-                    "wlan": "Wifi - brezžično",
+                    "terminal": "Računalniški terminal",
                     "wired": "Žično",
-                    "terminal": "Računalniški terminal"
+                    "wlan": "Wifi - brezžično",
+                    "yes": "Da"
                 }
             },
             "lamp_type": {
@@ -799,7 +798,6 @@
             },
             "mtb/scale": {
                 "label": "Gorsko-kolesarska zahtevnost",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Trden konglomerat (prodniki)/zbita prst, brez ovir, široki zavoji",
                     "1": "1: Ponekod nestabilna podlaga, majhne ovire, široki zavoji",
@@ -808,22 +806,22 @@
                     "4": "4: Nestabilna podlaga ali večje skale, tvegano obračanje na prednjem kolesu",
                     "5": "5: Največja zahtevnost, večja območja skal, zemeljski plazovi, usadi",
                     "6": "6: Ni mogoče premagati na kolesu, razen za najbolj izurjene gorske kolesarje"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "Zahtevnost po IMBA",
-                "placeholder": "Nezahtevno, srednje zahtevno, zahtevno",
                 "options": {
                     "0": "Najlažje (bel krogec)",
                     "1": "Lahko (zelen krogec)",
                     "2": "Srednje zahtevno (moder kvadratek)",
                     "3": "Zahtevno (črn karo)",
                     "4": "Izjemno zahtevno (dvojni črn karo)"
-                }
+                },
+                "placeholder": "Nezahtevno, srednje zahtevno, zahtevno"
             },
             "mtb/scale/uphill": {
                 "label": "Zahtevnost vzpona na kolesu",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Povprečen naklon <10%, prod/zbita prst, brez ovir",
                     "1": "1: Povprečen naklon <15%, prod/zbita prst, nekaj manjših ovir",
@@ -831,7 +829,8 @@
                     "3": "3: Povprečen naklon <25%, spremenljiva podlaga, kamenje do velikosti pesti, veje",
                     "4": "4: Povprečen naklon <30%, v slabem stanju, veliki kamni, veje",
                     "5": "5: Zelo strmo, kolo je večinoma potrebno potiskati oz. ga nositi"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Ime",
@@ -852,17 +851,17 @@
             "oneway": {
                 "label": "Enosmerna",
                 "options": {
+                    "no": "Ne",
                     "undefined": "Predpostavljeno: NE",
-                    "yes": "Da",
-                    "no": "Ne"
+                    "yes": "Da"
                 }
             },
             "oneway_yes": {
                 "label": "Enosmerna",
                 "options": {
+                    "no": "Ne",
                     "undefined": "Predpostavljeno: DA",
-                    "yes": "Da",
-                    "no": "Ne"
+                    "yes": "Da"
                 }
             },
             "opening_hours": {
@@ -881,13 +880,13 @@
             "parking": {
                 "label": "Vrsta",
                 "options": {
-                    "surface": "Na prostem",
-                    "multi-storey": "V več nadstropjih",
-                    "underground": "Podzemno",
-                    "sheds": "Samostoječa zasebna garaža",
                     "carports": "Nadstrešek",
                     "garage_boxes": "Garažni boks",
-                    "lane": "Pas za parkiranje"
+                    "lane": "Pas za parkiranje",
+                    "multi-storey": "V več nadstropjih",
+                    "sheds": "Samostoječa zasebna garaža",
+                    "surface": "Na prostem",
+                    "underground": "Podzemno"
                 }
             },
             "phone": {
@@ -896,24 +895,24 @@
             },
             "piste/difficulty": {
                 "label": "Zahtevnost",
-                "placeholder": "Lahke, srednje zahtevne, zahtevne...",
                 "options": {
-                    "novice": "Za začetnike",
-                    "easy": "Lahka",
-                    "intermediate": "Srednje zahtevna",
                     "advanced": "Zahtevna",
+                    "easy": "Lahka",
                     "expert": "Zelo zahtevna",
+                    "extreme": "Izjemno zahtevna (za vzpon nujna uporaba plezalnih pripomočkov)",
                     "freeride": "Variantno smučanje - neteptana",
-                    "extreme": "Izjemno zahtevna (za vzpon nujna uporaba plezalnih pripomočkov)"
-                }
+                    "intermediate": "Srednje zahtevna",
+                    "novice": "Za začetnike"
+                },
+                "placeholder": "Lahke, srednje zahtevne, zahtevne..."
             },
             "piste/grooming": {
                 "label": "Teptanje",
                 "options": {
-                    "classic": "Klasično",
-                    "mogul": "Grbine",
                     "backcountry": "Smučarsko pohodništvo",
+                    "classic": "Klasično",
                     "classic+skating": "Tek na smučeh - klasična in drsalna tehnika",
+                    "mogul": "Grbine",
                     "scooter": "Snežne sani",
                     "skating": "Tek na smučeh - drsalna tehnika"
                 }
@@ -922,14 +921,14 @@
                 "label": "Vrsta",
                 "options": {
                     "downhill": "Alpsko smučanje",
+                    "hike": "Zimsko pohodništvo",
+                    "ice_skate": "Drsanje",
                     "nordic": "Nordijsko smučanje",
+                    "playground": "Igrišče",
                     "skitour": "Turno smučanje",
                     "sled": "Sankanje",
-                    "hike": "Zimsko pohodništvo",
                     "sleigh": "Snežna vprega",
-                    "ice_skate": "Drsanje",
-                    "snow_park": "Snežni park",
-                    "playground": "Igrišče"
+                    "snow_park": "Snežni park"
                 }
             },
             "place": {
@@ -979,15 +978,15 @@
             },
             "sac_scale": {
                 "label": "Težavnost hoje",
-                "placeholder": "Različne stopnje težavnosti poti...",
                 "options": {
-                    "hiking": "T1: Hiking",
-                    "mountain_hiking": "T2: Mountain Hiking",
-                    "demanding_mountain_hiking": "T3: Demanding Mountain Hiking",
                     "alpine_hiking": "T4: Alpine Hiking",
                     "demanding_alpine_hiking": "T5: Demanding Alpine Hiking",
-                    "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"
-                }
+                    "demanding_mountain_hiking": "T3: Demanding Mountain Hiking",
+                    "difficult_alpine_hiking": "T6: Difficult Alpine Hiking",
+                    "hiking": "T1: Hiking",
+                    "mountain_hiking": "T2: Mountain Hiking"
+                },
+                "placeholder": "Različne stopnje težavnosti poti..."
             },
             "seasonal": {
                 "label": "Sezonskost"
@@ -1009,28 +1008,28 @@
             },
             "smoking": {
                 "label": "Kajenje",
-                "placeholder": "Ne, ločeno, da...",
                 "options": {
-                    "no": "Prepovedano brez izjem",
-                    "separated": "Prostor za kadilce, ki ni ločen s pregrado",
+                    "dedicated": "Namenjeno kadilcem.",
                     "isolated": "Prostor za kadilce, ki je ločen s pregrado",
+                    "no": "Prepovedano brez izjem",
                     "outside": "Dovoljeno zunaj.",
-                    "yes": "Dovoljeno povsod.",
-                    "dedicated": "Namenjeno kadilcem."
-                }
+                    "separated": "Prostor za kadilce, ki ni ločen s pregrado",
+                    "yes": "Dovoljeno povsod."
+                },
+                "placeholder": "Ne, ločeno, da..."
             },
             "smoothness": {
                 "label": "Gladkost",
-                "placeholder": "Za rolerje, kolesa, terence ...",
                 "options": {
+                    "bad": "Robustna kolesa: za treking kolo, avto, rikšo ipd.",
                     "excellent": "Ozka kolesca - tudi za rolerje, rolke ipd.",
                     "good": "Ozka kolesa: za cestno kolo ipd.",
-                    "intermediate": "Kolesa: za cestno kolo, invalidski voziček, skuter ipd.",
-                    "bad": "Robustna kolesa: za treking kolo, avto, rikšo ipd.",
-                    "very_bad": "Visoko podvozje: za vozila z večjim odmikom od tal, lažje terence",
                     "horrible": "Terenska vozila: za terenska vozila ipd.",
+                    "intermediate": "Kolesa: za cestno kolo, invalidski voziček, skuter ipd.",
+                    "very_bad": "Visoko podvozje: za vozila z večjim odmikom od tal, lažje terence",
                     "very_horrible": "Posebna terenska vozila: traktor, štirikolesnik, tank, gorsko kolo"
-                }
+                },
+                "placeholder": "Za rolerje, kolesa, terence ..."
             },
             "social_facility_for": {
                 "label": "Socialna ustanova - ciljna skupina",
@@ -1050,14 +1049,14 @@
             },
             "structure": {
                 "label": "Premostitveni objekt",
-                "placeholder": "Neznano",
                 "options": {
                     "bridge": "Most",
-                    "tunnel": "Predor",
-                    "embankment": "Nasip",
                     "cutting": "Usek",
-                    "ford": "Plitvina"
-                }
+                    "embankment": "Nasip",
+                    "ford": "Plitvina",
+                    "tunnel": "Predor"
+                },
+                "placeholder": "Neznano"
             },
             "studio_type": {
                 "label": "Vrsta"
@@ -1074,10 +1073,10 @@
             "toilets/disposal": {
                 "label": "Odstranjevanje odpadkov",
                 "options": {
-                    "flush": "Splakovanje",
-                    "pitlatrine": "Štrbunk",
+                    "bucket": "Posoda",
                     "chemical": "Kemično",
-                    "bucket": "Posoda"
+                    "flush": "Splakovanje",
+                    "pitlatrine": "Štrbunk"
                 }
             },
             "tourism": {
@@ -1088,26 +1087,26 @@
             },
             "tracktype": {
                 "label": "Tip kolovoza",
-                "placeholder": "Trdno, pretežno trdno, mehko...",
                 "options": {
                     "grade1": "Trdno: asfaltirano ali močno zbito vozišče",
                     "grade2": "Pretežno trdno: prodniki/kamni, pomešani z mehkejšim materialom",
                     "grade3": "Enakovredna zmes trdnega in mehkega materiala",
                     "grade4": "Pretežno mehko: prst/pesek/traka z dodatki tršega materiala",
                     "grade5": "Mehko: prst/pesek/trava"
-                }
+                },
+                "placeholder": "Trdno, pretežno trdno, mehko..."
             },
             "trail_visibility": {
                 "label": "Vidnost poti",
-                "placeholder": "Odlična, dobra, slaba...",
                 "options": {
+                    "bad": "Slaba: ni oznak poti, pot ponekod ni vidna oz. je sploh ni",
                     "excellent": "Odlična: nedvoumen potek poti ali pa zelo dobro označena",
                     "good": "Dobra: vidne oznake poti, ponekod je lahko potrebno iskanje",
-                    "intermediate": "Srednja: le nekaj oznak poti, pot je večinoma vidna",
-                    "bad": "Slaba: ni oznak poti, pot ponekod ni vidna oz. je sploh ni",
                     "horrible": "Obupna: pogosto brezpotje, terja sposobnost orientacije",
+                    "intermediate": "Srednja: le nekaj oznak poti, pot je večinoma vidna",
                     "no": "Ne: brezpotje, terja zelo dobro sposobnost orientacije"
-                }
+                },
+                "placeholder": "Odlična, dobra, slaba..."
             },
             "trees": {
                 "label": "Drevesa"

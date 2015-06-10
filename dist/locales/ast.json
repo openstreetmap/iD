@@ -179,7 +179,6 @@
     "commit": {
         "title": "Guardar cambios",
         "description_placeholder": "Descripción curtia de les collaboraciones",
-        "message_label": "Mensaxe d'unviu",
         "upload_explanation": "Los cambios que xuba tarán visibles en tolos mapes qu'usen los datos d'OpenStreetMap.",
         "save": "Guardar",
         "cancel": "Encaboxar",
@@ -351,39 +350,39 @@
         "fields": {
             "access": {
                 "label": "Accesu",
+                "options": {
+                    "designated": {
+                        "description": "Accesu permitíu acordies con señales o lleis llocales especifiques",
+                        "title": "Designáu"
+                    },
+                    "destination": {
+                        "description": "Accesu permitíu sólo de pasu a un destín",
+                        "title": "Destín"
+                    },
+                    "no": {
+                        "description": "Accesu nun permitíu al públicu en xeneral",
+                        "title": "Torgáu"
+                    },
+                    "permissive": {
+                        "description": "Accesu permitíu mentanto'l propietariu nun quite'l permisu",
+                        "title": "Permisivu"
+                    },
+                    "private": {
+                        "description": "Accesu permitíu sólo col permisu del propietariu de manera individual",
+                        "title": "Priváu"
+                    },
+                    "yes": {
+                        "description": "Accesu permitíu por llei; un drechu de pasu",
+                        "title": "Permitíu"
+                    }
+                },
                 "placeholder": "Desconocíu",
                 "types": {
                     "access": "Xeneral",
-                    "foot": "A pie",
-                    "motor_vehicle": "Vehículos de motor",
                     "bicycle": "Bicicletes",
-                    "horse": "Caballos"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Permitíu",
-                        "description": "Accesu permitíu por llei; un drechu de pasu"
-                    },
-                    "no": {
-                        "title": "Torgáu",
-                        "description": "Accesu nun permitíu al públicu en xeneral"
-                    },
-                    "permissive": {
-                        "title": "Permisivu",
-                        "description": "Accesu permitíu mentanto'l propietariu nun quite'l permisu"
-                    },
-                    "private": {
-                        "title": "Priváu",
-                        "description": "Accesu permitíu sólo col permisu del propietariu de manera individual"
-                    },
-                    "designated": {
-                        "title": "Designáu",
-                        "description": "Accesu permitíu acordies con señales o lleis llocales especifiques"
-                    },
-                    "destination": {
-                        "title": "Destín",
-                        "description": "Accesu permitíu sólo de pasu a un destín"
-                    }
+                    "foot": "A pie",
+                    "horse": "Caballos",
+                    "motor_vehicle": "Vehículos de motor"
                 }
             },
             "access_simple": {
@@ -392,8 +391,8 @@
             "address": {
                 "label": "Direición",
                 "placeholders": {
-                    "street": "Cai",
-                    "city": "Ciudá"
+                    "city": "Ciudá",
+                    "street": "Cai"
                 }
             },
             "admin_level": {
@@ -463,8 +462,8 @@
             "clock_direction": {
                 "label": "Direición",
                 "options": {
-                    "clockwise": "Sentíu horariu",
-                    "anticlockwise": "Sentíu antihorariu"
+                    "anticlockwise": "Sentíu antihorariu",
+                    "clockwise": "Sentíu horariu"
                 }
             },
             "collection_times": {
@@ -593,9 +592,9 @@
             "internet_access": {
                 "label": "Accesu a Internet",
                 "options": {
-                    "wlan": "Wifi",
+                    "terminal": "Terminal",
                     "wired": "Per cable",
-                    "terminal": "Terminal"
+                    "wlan": "Wifi"
                 }
             },
             "landuse": {
@@ -751,14 +750,14 @@
             },
             "structure": {
                 "label": "Estructura",
-                "placeholder": "Desconocíu",
                 "options": {
                     "bridge": "Ponte",
-                    "tunnel": "Túnel",
-                    "embankment": "Rellenu",
                     "cutting": "Trinchera",
-                    "ford": "Vau"
-                }
+                    "embankment": "Rellenu",
+                    "ford": "Vau",
+                    "tunnel": "Túnel"
+                },
+                "placeholder": "Desconocíu"
             },
             "studio_type": {
                 "label": "Tipu"

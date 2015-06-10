@@ -159,7 +159,6 @@
     "commit": {
         "title": "Bêre veranderinge",
         "description_placeholder": "Kortlikse beskrywing van jou bydraes",
-        "message_label": "Bêre boodskap",
         "save": "Bȇre",
         "cancel": "Kanseleer",
         "warnings": "Waarskuwings",
@@ -296,37 +295,37 @@
         "fields": {
             "access": {
                 "label": "Toegang",
-                "placeholder": "Onbekend",
-                "types": {
-                    "access": "Algemene",
-                    "foot": "Voet",
-                    "motor_vehicle": "Motorvoertuie",
-                    "bicycle": "Fietse",
-                    "horse": "Perde"
-                },
                 "options": {
-                    "yes": {
-                        "title": "Toegelaat"
+                    "designated": {
+                        "description": "Voorgeskrewe toegang",
+                        "title": "Toegewys"
+                    },
+                    "destination": {
+                        "description": "Beperkte toegang",
+                        "title": "Eindbestemming"
                     },
                     "no": {
-                        "title": "Toegang Verbode",
-                        "description": "Geen toegang vir algemene publiek"
+                        "description": "Geen toegang vir algemene publiek",
+                        "title": "Toegang Verbode"
                     },
                     "permissive": {
                         "description": "Voorwaardelike toegang"
                     },
                     "private": {
-                        "title": "Privaat",
-                        "description": "Toegang slegs soos gereël met eienaar"
+                        "description": "Toegang slegs soos gereël met eienaar",
+                        "title": "Privaat"
                     },
-                    "designated": {
-                        "title": "Toegewys",
-                        "description": "Voorgeskrewe toegang"
-                    },
-                    "destination": {
-                        "title": "Eindbestemming",
-                        "description": "Beperkte toegang"
+                    "yes": {
+                        "title": "Toegelaat"
                     }
+                },
+                "placeholder": "Onbekend",
+                "types": {
+                    "access": "Algemene",
+                    "bicycle": "Fietse",
+                    "foot": "Voet",
+                    "horse": "Perde",
+                    "motor_vehicle": "Motorvoertuie"
                 }
             },
             "access_simple": {
@@ -336,11 +335,11 @@
             "address": {
                 "label": "Adres",
                 "placeholders": {
-                    "housename": "Huisnaam",
-                    "street": "Straat",
                     "city": "Tipe",
+                    "housename": "Huisnaam",
+                    "place": "Plek",
                     "postcode": "Poskode",
-                    "place": "Plek"
+                    "street": "Straat"
                 }
             },
             "admin_level": {
@@ -391,21 +390,21 @@
             "cardinal_direction": {
                 "label": "Rigting",
                 "options": {
-                    "N": "Noord",
                     "E": "Oos",
-                    "S": "Suid",
-                    "W": "Wes",
+                    "N": "Noord",
                     "NE": "Noordoos",
+                    "NW": "Noordwes",
+                    "S": "Suid",
                     "SE": "Suidoos",
                     "SW": "Suidwes",
-                    "NW": "Noordwes"
+                    "W": "Wes"
                 }
             },
             "clock_direction": {
                 "label": "Rigting",
                 "options": {
-                    "clockwise": "Kloksgewys",
-                    "anticlockwise": "Antikloksgewys"
+                    "anticlockwise": "Antikloksgewys",
+                    "clockwise": "Kloksgewys"
                 }
             },
             "collection_times": {
@@ -472,9 +471,9 @@
             "internet_access": {
                 "label": "Internet Toegang",
                 "options": {
-                    "wlan": "Wifi",
+                    "terminal": "Terminaal",
                     "wired": "Bedraad",
-                    "terminal": "Terminaal"
+                    "wlan": "Wifi"
                 }
             },
             "landuse": {
@@ -586,13 +585,13 @@
             },
             "structure": {
                 "label": "Struktuur",
-                "placeholder": "Onbekend",
                 "options": {
                     "bridge": "Brug",
-                    "tunnel": "Tonnel",
+                    "cutting": "Uitgrawing",
                     "embankment": "Dyk",
-                    "cutting": "Uitgrawing"
-                }
+                    "tunnel": "Tonnel"
+                },
+                "placeholder": "Onbekend"
             },
             "supervised": {
                 "label": "Onder toesig"

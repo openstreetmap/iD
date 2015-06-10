@@ -202,7 +202,6 @@
     "commit": {
         "title": "إحفظ التغييرات",
         "description_placeholder": "وصف مختصر لمساهماتك",
-        "message_label": "شرح التغيير ",
         "save": "حفظ",
         "cancel": "إلغاء",
         "warnings": "تنبيه",
@@ -382,39 +381,39 @@
         "fields": {
             "access": {
                 "label": "الدخول",
+                "options": {
+                    "designated": {
+                        "description": "الدخول مصرح به وفقا للعلامات أو قوانين محلية مخصصة.",
+                        "title": "مخصص"
+                    },
+                    "destination": {
+                        "description": "الدخول مسموح به فقط للوصل إلى وجهة معينة",
+                        "title": "الوجهة"
+                    },
+                    "no": {
+                        "description": "الدخول ليس مسموحا به للعامة",
+                        "title": "محظور"
+                    },
+                    "permissive": {
+                        "description": "الدخول مسموح به حتى يلغى المالك هذا الترخيص.",
+                        "title": "مرخص"
+                    },
+                    "private": {
+                        "description": "الدخول مسموح به فقط بإذن من المالك على أساس فردي.",
+                        "title": "خاص"
+                    },
+                    "yes": {
+                        "description": "الدخول مسموح به بنص القانون، حق الطريق",
+                        "title": "مسموح"
+                    }
+                },
                 "placeholder": "غير معروف",
                 "types": {
                     "access": "عام",
-                    "foot": "بالقدم",
-                    "motor_vehicle": "مركبات",
                     "bicycle": "درجات هوائية",
-                    "horse": "أحصنة"
-                },
-                "options": {
-                    "yes": {
-                        "title": "مسموح",
-                        "description": "الدخول مسموح به بنص القانون، حق الطريق"
-                    },
-                    "no": {
-                        "title": "محظور",
-                        "description": "الدخول ليس مسموحا به للعامة"
-                    },
-                    "permissive": {
-                        "title": "مرخص",
-                        "description": "الدخول مسموح به حتى يلغى المالك هذا الترخيص."
-                    },
-                    "private": {
-                        "title": "خاص",
-                        "description": "الدخول مسموح به فقط بإذن من المالك على أساس فردي."
-                    },
-                    "designated": {
-                        "title": "مخصص",
-                        "description": "الدخول مصرح به وفقا للعلامات أو قوانين محلية مخصصة."
-                    },
-                    "destination": {
-                        "title": "الوجهة",
-                        "description": "الدخول مسموح به فقط للوصل إلى وجهة معينة"
-                    }
+                    "foot": "بالقدم",
+                    "horse": "أحصنة",
+                    "motor_vehicle": "مركبات"
                 }
             },
             "access_simple": {
@@ -427,13 +426,13 @@
             "address": {
                 "label": "العنوان",
                 "placeholders": {
+                    "city": "المدينة",
+                    "country": "دولة",
                     "housename": "اسم المنزل",
                     "housenumber": "123",
-                    "street": "الشارع",
-                    "city": "المدينة",
                     "postcode": "الرمز البريدي",
                     "state": "ولاية",
-                    "country": "دولة"
+                    "street": "الشارع"
                 }
             },
             "admin_level": {
@@ -445,9 +444,9 @@
             "aerialway/access": {
                 "label": "دخول",
                 "options": {
+                    "both": "كلاهما",
                     "entry": "مدخل",
-                    "exit": "مخرج",
-                    "both": "كلاهما"
+                    "exit": "مخرج"
                 }
             },
             "aerialway/duration": {
@@ -497,8 +496,8 @@
             "clock_direction": {
                 "label": "الاتجاه",
                 "options": {
-                    "clockwise": "باتجاه عقارب الساعة",
-                    "anticlockwise": "عكس عقارب الساعة"
+                    "anticlockwise": "عكس عقارب الساعة",
+                    "clockwise": "باتجاه عقارب الساعة"
                 }
             },
             "collection_times": {
@@ -574,9 +573,9 @@
             "internet_access": {
                 "label": "إنترنت",
                 "options": {
-                    "wlan": "واي فاي",
+                    "terminal": "بوابة",
                     "wired": "سلكي",
-                    "terminal": "بوابة"
+                    "wlan": "واي فاي"
                 }
             },
             "landuse": {
@@ -694,13 +693,13 @@
             },
             "structure": {
                 "label": "بنية",
-                "placeholder": "غير معروف",
                 "options": {
                     "bridge": "جسر",
-                    "tunnel": "نفق",
+                    "cutting": "طريق منخفض",
                     "embankment": "طريق مرتفع",
-                    "cutting": "طريق منخفض"
-                }
+                    "tunnel": "نفق"
+                },
+                "placeholder": "غير معروف"
             },
             "supervised": {
                 "label": "مراقب"

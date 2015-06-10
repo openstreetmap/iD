@@ -184,7 +184,6 @@
     "commit": {
         "title": "保存更改",
         "description_placeholder": "简要说明你的贡献",
-        "message_label": "提交说明",
         "upload_explanation": "你上传的更新将会显示在所有使用 OpenStreetMap 数据的地图上。",
         "upload_explanation_with_user": "你 {user} 上传的更新将会显示在所有使用 OpenStreetMap 数据的地图上。",
         "save": "保存",
@@ -352,46 +351,46 @@
         "fields": {
             "access": {
                 "label": "通行限制",
+                "options": {
+                    "designated": {
+                        "description": "只限标志指定或特定本地法律容许人士进入",
+                        "title": "特定的"
+                    },
+                    "destination": {
+                        "description": "只限前往目的地人士进入",
+                        "title": "目的地"
+                    },
+                    "no": {
+                        "description": "禁止一般公众进入",
+                        "title": "禁止的"
+                    },
+                    "permissive": {
+                        "description": "容许进入，直至拥有者撇回许可",
+                        "title": "获许可进入"
+                    },
+                    "private": {
+                        "description": "须拥有者个别批准，方可进入",
+                        "title": "私人"
+                    },
+                    "yes": {
+                        "description": "按法律及路权，有权使用",
+                        "title": "允许的"
+                    }
+                },
                 "placeholder": "未知种类",
                 "types": {
                     "access": "普通",
-                    "foot": "步行",
-                    "motor_vehicle": "汽车",
                     "bicycle": "自行车",
-                    "horse": "马匹"
-                },
-                "options": {
-                    "yes": {
-                        "title": "允许的",
-                        "description": "按法律及路权，有权使用"
-                    },
-                    "no": {
-                        "title": "禁止的",
-                        "description": "禁止一般公众进入"
-                    },
-                    "permissive": {
-                        "title": "获许可进入",
-                        "description": "容许进入，直至拥有者撇回许可"
-                    },
-                    "private": {
-                        "title": "私人",
-                        "description": "须拥有者个别批准，方可进入"
-                    },
-                    "designated": {
-                        "title": "特定的",
-                        "description": "只限标志指定或特定本地法律容许人士进入"
-                    },
-                    "destination": {
-                        "title": "目的地",
-                        "description": "只限前往目的地人士进入"
-                    }
+                    "foot": "步行",
+                    "horse": "马匹",
+                    "motor_vehicle": "汽车"
                 }
             },
             "address": {
                 "label": "地址",
                 "placeholders": {
-                    "street": "街道",
-                    "city": "城市"
+                    "city": "城市",
+                    "street": "街道"
                 }
             },
             "admin_level": {
@@ -428,8 +427,8 @@
             "clock_direction": {
                 "label": "方向",
                 "options": {
-                    "clockwise": "顺时针",
-                    "anticlockwise": "逆时针"
+                    "anticlockwise": "逆时针",
+                    "clockwise": "顺时针"
                 }
             },
             "collection_times": {
@@ -493,9 +492,9 @@
             "internet_access": {
                 "label": "互联网接入",
                 "options": {
-                    "wlan": "无线网络",
+                    "terminal": "终端",
                     "wired": "有线网络",
-                    "terminal": "终端"
+                    "wlan": "无线网络"
                 }
             },
             "landuse": {
@@ -601,13 +600,13 @@
             },
             "structure": {
                 "label": "结构",
-                "placeholder": "未知种类",
                 "options": {
                     "bridge": "桥",
-                    "tunnel": "隧道",
+                    "cutting": "开凿",
                     "embankment": "堤岸",
-                    "cutting": "开凿"
-                }
+                    "tunnel": "隧道"
+                },
+                "placeholder": "未知种类"
             },
             "supervised": {
                 "label": "监督"

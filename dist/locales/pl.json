@@ -239,7 +239,6 @@
     "commit": {
         "title": "Zapisz zmiany",
         "description_placeholder": "Zwięzły opis twoich zmian",
-        "message_label": "Opis zmian",
         "upload_explanation": "Zmiany, które wyślesz będą widoczne na wszystkich mapach używających danych OpenStreetMap.",
         "upload_explanation_with_user": "Zmiany, które wyślesz jako {user} będą widoczne na wszystkich mapach używających danych OpenStreetMap.",
         "save": "Zapisz",
@@ -568,39 +567,39 @@
         "fields": {
             "access": {
                 "label": "Dostęp",
+                "options": {
+                    "designated": {
+                        "description": "Dostęp jest dozwolony na podstawie znaków lub określonych przepisów lokalnych",
+                        "title": "Wyznaczony"
+                    },
+                    "destination": {
+                        "description": "Dostęp dozwolony tylko by dotrzeć do celu",
+                        "title": "Docelowy"
+                    },
+                    "no": {
+                        "description": "Niedostępne dla ogólnego ruchu",
+                        "title": "Zabroniony"
+                    },
+                    "permissive": {
+                        "description": "Dostęp dozwolony do czasu, gdy właściciel wycofa zgodę",
+                        "title": "Dozwolony"
+                    },
+                    "private": {
+                        "description": "Dostęp jest dozwolony tylko za zgodą właściciela na zasadzie indywidualnej",
+                        "title": "Prywatny"
+                    },
+                    "yes": {
+                        "description": "Dostęp przyznany przez prawo",
+                        "title": "Dozwolony"
+                    }
+                },
                 "placeholder": "Nieznane",
                 "types": {
                     "access": "Ogólny",
-                    "foot": "Piesi",
-                    "motor_vehicle": "Pojazdy silnikowe",
                     "bicycle": "Rowery",
-                    "horse": "Konie"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Dozwolony",
-                        "description": "Dostęp przyznany przez prawo"
-                    },
-                    "no": {
-                        "title": "Zabroniony",
-                        "description": "Niedostępne dla ogólnego ruchu"
-                    },
-                    "permissive": {
-                        "title": "Dozwolony",
-                        "description": "Dostęp dozwolony do czasu, gdy właściciel wycofa zgodę"
-                    },
-                    "private": {
-                        "title": "Prywatny",
-                        "description": "Dostęp jest dozwolony tylko za zgodą właściciela na zasadzie indywidualnej"
-                    },
-                    "designated": {
-                        "title": "Wyznaczony",
-                        "description": "Dostęp jest dozwolony na podstawie znaków lub określonych przepisów lokalnych"
-                    },
-                    "destination": {
-                        "title": "Docelowy",
-                        "description": "Dostęp dozwolony tylko by dotrzeć do celu"
-                    }
+                    "foot": "Piesi",
+                    "horse": "Konie",
+                    "motor_vehicle": "Pojazdy silnikowe"
                 }
             },
             "access_simple": {
@@ -613,19 +612,19 @@
             "address": {
                 "label": "Adres",
                 "placeholders": {
+                    "city": "Miasto",
+                    "country": "Kraj",
+                    "district": "Dystrykt",
+                    "hamlet": "Przysiółek",
                     "housename": "Nazwa domu",
                     "housenumber": "123",
-                    "street": "Ulica",
-                    "city": "Miasto",
-                    "postcode": "Kod pocztowy",
                     "place": "Miejsce",
-                    "hamlet": "Przysiółek",
-                    "suburb": "Dzielnica",
-                    "subdistrict": "Sub-dystrykt",
-                    "district": "Dystrykt",
+                    "postcode": "Kod pocztowy",
                     "province": "Prowincja",
                     "state": "Stan",
-                    "country": "Kraj"
+                    "street": "Ulica",
+                    "subdistrict": "Sub-dystrykt",
+                    "suburb": "Dzielnica"
                 }
             },
             "admin_level": {
@@ -637,9 +636,9 @@
             "aerialway/access": {
                 "label": "Dostęp",
                 "options": {
+                    "both": "Oba",
                     "entry": "Wejście",
-                    "exit": "Wyjście",
-                    "both": "Oba"
+                    "exit": "Wyjście"
                 }
             },
             "aerialway/bubble": {
@@ -663,9 +662,9 @@
             "aerialway/summer/access": {
                 "label": "Dostępność w sezonie letnim",
                 "options": {
+                    "both": "Obydwa",
                     "entry": "Wejście",
-                    "exit": "Wyjście",
-                    "both": "Obydwa"
+                    "exit": "Wyjście"
                 }
             },
             "aeroway": {
@@ -714,29 +713,29 @@
             "cardinal_direction": {
                 "label": "Kierunek",
                 "options": {
-                    "N": "Północ",
                     "E": "Wschód",
-                    "S": "Południe",
-                    "W": "Zachód",
-                    "NE": "Północny wschód",
-                    "SE": "Południowy wschód",
-                    "SW": "Południowy zachód",
-                    "NW": "Północny zachód",
-                    "NNE": "Północny północny wschód",
                     "ENE": "Wschodni północny wschód",
                     "ESE": "Wschodni południowy wschód",
+                    "N": "Północ",
+                    "NE": "Północny wschód",
+                    "NNE": "Północny północny wschód",
+                    "NNW": "Północny północny zachód",
+                    "NW": "Północny zachód",
+                    "S": "Południe",
+                    "SE": "Południowy wschód",
                     "SSE": "Południowy południowy wschód",
                     "SSW": "Południowy południowy zachód",
-                    "WSW": "Zachodni południowy zachód",
+                    "SW": "Południowy zachód",
+                    "W": "Zachód",
                     "WNW": "Zachodni północny zachód",
-                    "NNW": "Północny północny zachód"
+                    "WSW": "Zachodni południowy zachód"
                 }
             },
             "clock_direction": {
                 "label": "Kierunek",
                 "options": {
-                    "clockwise": "Zgodnie ze wskazówkami zegara",
-                    "anticlockwise": "Przeciwnie do wskazówek zegara"
+                    "anticlockwise": "Przeciwnie do wskazówek zegara",
+                    "clockwise": "Zgodnie ze wskazówkami zegara"
                 }
             },
             "collection_times": {
@@ -777,13 +776,13 @@
             },
             "electrified": {
                 "label": "Elektryfikacja",
-                "placeholder": "Linia napowietrzna, Trzecia szyna",
                 "options": {
                     "contact_line": "Linia napowietrzna",
+                    "no": "Nie",
                     "rail": "Trzecia szyna",
-                    "yes": "Tak (nieokreślone)",
-                    "no": "Nie"
-                }
+                    "yes": "Tak (nieokreślone)"
+                },
+                "placeholder": "Linia napowietrzna, Trzecia szyna"
             },
             "elevation": {
                 "label": "Wysokość"
@@ -808,9 +807,9 @@
                 "label": "Typ",
                 "options": {
                     "pillar": "Nadziemny",
+                    "pond": "Staw",
                     "underground": "Podziemny",
-                    "wall": "Mur",
-                    "pond": "Staw"
+                    "wall": "Mur"
                 }
             },
             "fixme": {
@@ -851,12 +850,12 @@
             },
             "gender": {
                 "label": "Płeć",
-                "placeholder": "Nieznana",
                 "options": {
-                    "male": "Mężczyzna",
                     "female": "Kobieta",
+                    "male": "Mężczyzna",
                     "unisex": "Dla obu płci"
-                }
+                },
+                "placeholder": "Nieznana"
             },
             "generator/method": {
                 "label": "Metoda"
@@ -897,8 +896,8 @@
             "incline_steps": {
                 "label": "Nachylenie",
                 "options": {
-                    "up": "W górę",
-                    "down": "W dół"
+                    "down": "W dół",
+                    "up": "W górę"
                 }
             },
             "information": {
@@ -907,11 +906,11 @@
             "internet_access": {
                 "label": "Dostęp do internetu",
                 "options": {
-                    "yes": "Tak",
                     "no": "Nie",
-                    "wlan": "Bezprzewodowy",
+                    "terminal": "Terminal",
                     "wired": "Przewodowy",
-                    "terminal": "Terminal"
+                    "wlan": "Bezprzewodowy",
+                    "yes": "Tak"
                 }
             },
             "lamp_type": {
@@ -930,19 +929,19 @@
             "leaf_cycle": {
                 "label": "Cykl życiowy",
                 "options": {
-                    "evergreen": "Zimozielone",
                     "deciduous": "Zrzucające liście na zimę",
-                    "semi_deciduous": "Zrzucające liście, tropikalne",
-                    "mixed": "Mieszane"
+                    "evergreen": "Zimozielone",
+                    "mixed": "Mieszane",
+                    "semi_deciduous": "Zrzucające liście, tropikalne"
                 }
             },
             "leaf_type": {
                 "label": "Kategoria",
                 "options": {
                     "broadleaved": "Liściaste",
-                    "needleleaved": "Iglaste",
+                    "leafless": "Bezlistne",
                     "mixed": "Mieszane",
-                    "leafless": "Bezlistne"
+                    "needleleaved": "Iglaste"
                 }
             },
             "leisure": {
@@ -970,7 +969,6 @@
             },
             "mtb/scale": {
                 "label": "Skala trudności dla rowerów górskich",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Ubita nawierzchnia żwirowa lub ziemna, brak przeszkód, szerokie zakręty",
                     "1": "1: Trochę luźnej nawierzchni, niewielkie przeszkody, szerokie zakręty",
@@ -979,22 +977,22 @@
                     "4": "4: Piasek lub kamienie, niebezpieczne zakręty",
                     "5": "5: Maksymalnie trudny szlak, gołoborza, lawiniska",
                     "6": "6: Teren praktycznie nieprzejezdny dla rowerów górskich poza wyczynem - trial, ekstremalne dh itp."
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "Skala trudności szlaków dla rowerów górskich IMBA",
-                "placeholder": "Łatwy, Wymagający, Trudny...",
                 "options": {
                     "0": "Najłatwiejszy (biały okrąg)",
                     "1": "Łatwy (zielony okrąg)",
                     "2": "Wymagający (niebieski kwadrat)",
                     "3": "Trudny (czarny romb)",
                     "4": "Ekstremalnie trudny (podwójny czarny romb)"
-                }
+                },
+                "placeholder": "Łatwy, Wymagający, Trudny..."
             },
             "mtb/scale/uphill": {
                 "label": "Skala trudności podjazdów dla rowerów górskich ",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Śr. nachylenie <10%, żwir/ubita ziemia, brak przeszkód",
                     "1": "1: Śr. nachylenie <15%, żwir/ubita ziemia, kilka mniejszych obiektów",
@@ -1002,7 +1000,8 @@
                     "3": "3: Śr. nachylenie <25%, zróżnicowane podłoże, kamienie wielkości pięści/gałęzie",
                     "4": "4: Śr. nachylenie <30%, zły stan, duże kamienie/gałęzie",
                     "5": "5: Bardzo strome, rower zwykle musi być wprowadzony"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Nazwa",
@@ -1023,17 +1022,17 @@
             "oneway": {
                 "label": "Jednokierunkowa",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Domyślnie nie",
-                    "yes": "Tak",
-                    "no": "Nie"
+                    "yes": "Tak"
                 }
             },
             "oneway_yes": {
                 "label": "Jednokierunkowa",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Domyślnie tak",
-                    "yes": "Tak",
-                    "no": "Nie"
+                    "yes": "Tak"
                 }
             },
             "opening_hours": {
@@ -1052,13 +1051,13 @@
             "parking": {
                 "label": "Typ",
                 "options": {
-                    "surface": "Naziemny",
-                    "multi-storey": "Wielopoziomowy",
-                    "underground": "Podziemny",
-                    "sheds": "Garaże",
                     "carports": "Wiaty",
                     "garage_boxes": "Boksy garażowe",
-                    "lane": "Pas na jezdni"
+                    "lane": "Pas na jezdni",
+                    "multi-storey": "Wielopoziomowy",
+                    "sheds": "Garaże",
+                    "surface": "Naziemny",
+                    "underground": "Podziemny"
                 }
             },
             "phone": {
@@ -1132,17 +1131,17 @@
             "service/bicycle/chain_tool": {
                 "label": "Skuwacz łańcucha",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Domyślnie nie",
-                    "yes": "Tak",
-                    "no": "Nie"
+                    "yes": "Tak"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Pompowanie",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Domyślnie nie",
-                    "yes": "Tak",
-                    "no": "Nie"
+                    "yes": "Tak"
                 }
             },
             "shelter": {
@@ -1159,29 +1158,29 @@
             },
             "smoking": {
                 "label": "Dla palących",
-                "placeholder": "Nie, Wydzielone, Tak...",
                 "options": {
-                    "no": "Całkowity zakaz palenia",
-                    "separated": "W miejscach dla palących, nieoddzielonych fizycznie",
+                    "dedicated": "Miejsce dla palących (np. klub palaczy)",
                     "isolated": "W miejscach dla palących, fizycznie oddzielonych",
+                    "no": "Całkowity zakaz palenia",
                     "outside": "Dozwolone na zewnątrz",
-                    "yes": "Dozwolone wszędzie",
-                    "dedicated": "Miejsce dla palących (np. klub palaczy)"
-                }
+                    "separated": "W miejscach dla palących, nieoddzielonych fizycznie",
+                    "yes": "Dozwolone wszędzie"
+                },
+                "placeholder": "Nie, Wydzielone, Tak..."
             },
             "smoothness": {
                 "label": "Gładkość",
-                "placeholder": "Cienkie kółka, Koła, Off-road...",
                 "options": {
+                    "bad": "Solidne koła: rower trekkingowy, samochód, riksza",
                     "excellent": "Cienkie kółka: łyżworolki, skateboard",
                     "good": "Cienkie koła: rower szosowy",
-                    "intermediate": "Koła: rower miejski, wózek inwalidzki, skuter",
-                    "bad": "Solidne koła: rower trekkingowy, samochód, riksza",
-                    "very_bad": "Duży prześwit: lekki pojazd terenowy",
                     "horrible": "Off-road: ciężki pojazd terenowy",
-                    "very_horrible": "Wyspecjalizowany off-road: traktor, ATV (quad)",
-                    "impassable": "Nieprzejezdne / nie dla pojazdów kołowych"
-                }
+                    "impassable": "Nieprzejezdne / nie dla pojazdów kołowych",
+                    "intermediate": "Koła: rower miejski, wózek inwalidzki, skuter",
+                    "very_bad": "Duży prześwit: lekki pojazd terenowy",
+                    "very_horrible": "Wyspecjalizowany off-road: traktor, ATV (quad)"
+                },
+                "placeholder": "Cienkie kółka, Koła, Off-road..."
             },
             "social_facility_for": {
                 "label": "Przeznaczone dla osób",
@@ -1201,14 +1200,14 @@
             },
             "structure": {
                 "label": "Struktura",
-                "placeholder": "Nieznane",
                 "options": {
                     "bridge": "Most",
-                    "tunnel": "Tunel",
-                    "embankment": "Nasyp",
                     "cutting": "Wykop",
-                    "ford": "Bród"
-                }
+                    "embankment": "Nasyp",
+                    "ford": "Bród",
+                    "tunnel": "Tunel"
+                },
+                "placeholder": "Nieznane"
             },
             "studio_type": {
                 "label": "Typ"
@@ -1226,20 +1225,21 @@
                 "label": "Wypustki dla niewidomych"
             },
             "takeaway": {
-                "placeholder": "Tak, Nie, Tylko na wynos...",
+                "label": "Na wynos",
                 "options": {
-                    "yes": "Tak",
                     "no": "Nie",
-                    "only": "Tylko na wynos."
-                }
+                    "only": "Tylko na wynos.",
+                    "yes": "Tak"
+                },
+                "placeholder": "Tak, Nie, Tylko na wynos..."
             },
             "toilets/disposal": {
                 "label": "Opróżnianie",
                 "options": {
-                    "flush": "Spuszczanie wody",
-                    "pitlatrine": "Latryna",
+                    "bucket": "Wiadro",
                     "chemical": "Chemiczne",
-                    "bucket": "Wiadro"
+                    "flush": "Spuszczanie wody",
+                    "pitlatrine": "Latryna"
                 }
             },
             "tourism": {
@@ -1250,14 +1250,14 @@
             },
             "tracktype": {
                 "label": "Typ drogi nieutwardzonej",
-                "placeholder": "Utwardzona, nieubita...",
                 "options": {
                     "grade1": "Utwardzona lub mocna ubita nawierzchnia",
                     "grade2": "Żwirowa z niewielką domieszką piasku, mułu lub gliny",
                     "grade3": "Składająca się z równej ilości twardych i miękkich materiałów",
                     "grade4": "Ziemia/piasek/trawa z domieszką twardych materiałów",
                     "grade5": "Ziemia/piasek/trawa, bez dodatku materiałów utwardzonych, słabo widoczna"
-                }
+                },
+                "placeholder": "Utwardzona, nieubita..."
             },
             "trail_visibility": {
                 "label": "Widoczność szlaku",
@@ -1445,7 +1445,7 @@
                 "terms": "duży ekran,drive-in,film,ruchomy obraz,pokaz zdjęć,zdjęcia,pokaz,silver screen"
             },
             "amenity/clinic": {
-                "name": "Przychodnia lekarska",
+                "name": "Klinika",
                 "terms": "ośrodek zdrowia, zoz, nzoz, opieka zdrowotna"
             },
             "amenity/clock": {
@@ -1470,8 +1470,8 @@
                 "terms": "stomatolog, gabinet stomatologiczny"
             },
             "amenity/doctor": {
-                "name": "Doktor",
-                "terms": "lekarz,doktor,konował,medyk,uzdrowiciel"
+                "name": "Gabinet lub przychodnia lekarska",
+                "terms": "lekarz, doktor, medyk, uzdrowiciel, nzoz, zoz, spzoz, gabinet lekarski"
             },
             "amenity/dojo": {
                 "name": "Dojo/szkoła sztuk walki"
@@ -1583,7 +1583,7 @@
             },
             "amenity/restaurant": {
                 "name": "Restauracja",
-                "terms": "bar,kawiarnia,stołówka,jadalnia,drive-in,knajpa,jadłodajnia,fast food,grill,gospoda,klub nocny,pizzeria"
+                "terms": "bar,kawiarnia,stołówka,jadalnia,drive-in,knajpa,jadłodajnia,fast food,grill,gospoda,klub nocny,pizzeria,karczma,zajazd"
             },
             "amenity/school": {
                 "name": "Teren szkoły"
@@ -2542,7 +2542,7 @@
             },
             "office/accountant": {
                 "name": "Księgowy",
-                "terms": "księgowy"
+                "terms": "biuro rachunkowe, księgowość, rachun"
             },
             "office/administrative": {
                 "name": "Biuro samorządowe"
@@ -2578,7 +2578,8 @@
                 "name": "Biuro branży IT (informatycznej)"
             },
             "office/lawyer": {
-                "name": "Biuro prawnicze"
+                "name": "Biuro prawnicze",
+                "terms": "prawnik, kancelaria, adwokat, radca"
             },
             "office/newspaper": {
                 "name": "Gazeta"
@@ -3134,7 +3135,7 @@
                 "name": "Domek gościnny"
             },
             "tourism/hostel": {
-                "name": "Schronisko",
+                "name": "Schronisko lub hostel",
                 "terms": "Hostel"
             },
             "tourism/hotel": {

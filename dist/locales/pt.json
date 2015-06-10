@@ -239,12 +239,12 @@
     "commit": {
         "title": "Gravar Alterações",
         "description_placeholder": "Breve descrição das suas alterações",
-        "message_label": "Sumário de edição",
+        "message_label": "Comentário de Sumário",
         "upload_explanation": "As alterações que enviar ficarão visíveis em todos os mapas que usem dados do OpenStreetMap.",
         "upload_explanation_with_user": "As alterações que enviar como {user} ficarão visíveis em todos os mapas que usem dados do OpenStreetMap.",
         "save": "Gravar",
         "cancel": "Cancelar",
-        "changes": "{Count} Alterações",
+        "changes": "{count} Alterações",
         "warnings": "Avisos",
         "modified": "Modificado",
         "deleted": "Eliminado",
@@ -252,7 +252,27 @@
     },
     "contributors": {
         "list": "Edições de {users}",
-        "truncated_list": "Edições de {users} e outros {count}"
+        "truncated_list": "Edições feitas por {users} e outros {count} utilizadores"
+    },
+    "infobox": {
+        "selected": "{n} selecionados",
+        "geometry": "Geometria",
+        "closed": "fechado",
+        "center": "Centro",
+        "perimeter": "Perímetro ",
+        "length": "Comprimento",
+        "area": "Área",
+        "centroid": "Centroide ",
+        "location": "Localização",
+        "metric": "Metrico",
+        "imperial": "Imperial"
+    },
+    "geometry": {
+        "point": "ponto",
+        "vertex": "vértice",
+        "line": "lina",
+        "area": "área",
+        "relation": "relaçã"
     },
     "geocoder": {
         "search": "Pesquisar globalmente...",
@@ -473,6 +493,7 @@
     },
     "help": {
         "title": "Ajuda",
+        "help": "#Ajuda\n\nEste é um editor para o [OpenStreetMap](http://www.openstreetmap.org/), o mapa livre e editável do mundo.\nPode usar-lo para adicionar e actualizar dados da tua área, tornando-o num mapa de código e dados abertos mundial melhor para todos.\n\nEdições que faças neste mapa serão visíveis para qualquer pessoa que\ndecida usar o OpenStreetMap. De maneira a fazer uma edição, basta\n[iniciar sessão](https://www.openstreetmap.org/login).\n\nO [editor iD](http://ideditor.com/) é um projeto colaborativo com o seu [código disponível no GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Editar e Gravar\n\nEste editor foi concebido para editar ligado à internet, e está a utilizá-lo\natravés de um site neste momento.\n\n### Selecionar elementos do mapa\n\nPara selecionar um elemento do mapa, como uma estrada ou uma loja,\nclique nesse elemento no mapa. Aparecerá de seguida um painel lateral\ncom informações sobre o elemento onde poderá eliminar, alterar ou\nacrescentar informações.\n\nPara selecionar vários elementos manter premida a tecla 'Shift' (maiúsculas),\nclicar e arrastar com o rato no mapa. Isto irá selecionar todos os elementos\ndentro do retângulo selecionado, permitindo fazer alterações em todos\nos elementos selecionados de uma só vez.\n\n### Gravar Edições\n\nQuando faz alterações como editar estradas, edifícios e locais, as alterações\nsão gravadas no seu computador até que clique no botão Gravar para enviar\nas alterações para o OpenStreetMap. Não se preocupe caso cometa algum\nerro - pode desfazer as alterações clicando no botão de Desfazer, assim\ncomo refazer as alterações desfeitas clicando no botão Refazer que se\nencontram no topo do ecrã.\n\nClique em 'Gravar' para terminar um conjunto de alterações - por exemplo,\nse terminou as alterações num local e quer fazer alterações noutro local.\nTerá oportunidade de rever as alterações que fez e o editor fornece\nsugestões úteis e avisos caso alguma alteração que não pareça correta.\n\nSe tudo estiver bem, pode introduzir uma breve descrição explicando\nas alterações que fez e clicar de seguida em 'Gravar' de novo para enviar\nas alterações para o [OpenStreetMap.org](http://www.openstreetmap.org/)\nonde estarão visíveis para todos e onde outros podem melhorar e completar.\n\nCaso não possa terminar as edições de uma só vez, pode deixar o editor,\nou inclusive fechar o navegador de internet e mais tarde regressar ao site\ndo OpenStreetMap, editando-o novamente . Será mostrado então um aviso\n(caso seja o mesmo computador e mesmo navegador de internet) que tem\nalterações por gravar e se quer recuperar essas alterações, para continuar.\n",
         "roads": "# Estradas\n\nPode criar, corrigir e eliminar estradas com o editor. As estradas podem ser\nde qualquer tipo: caminhos, autoestradas, carreiros florestais ou agrícolas,\nruas pedonais, ciclovias, entre outras. Qualquer local que seja frequentemente\natravessado por pessoas deve ser normalmente colocado no mapa.\n\n### Selecionar\n\nClique numa estrada para a selecionar. Aparece o painel lateral direito para\npoder editar as caraterísticas da estrada e botões em redor da estrada.\n\n### Alterar\n\nClique na estrada que quer alterar. Se quiser adicionar pontos à estrada entre\ndois pontos existentes basta clicar 2 vezes sobre o segmento da estrada.\nPode então deslocar esse ponto acabado de criar.\n\nSe existir uma estrada com ligação a outra no terreno mas que no mapa não\nestão ligadas, basta deslocar um ponto de uma das estradas até à outra estrada\npara ficarem ligadas. É muito importante as estradas estarem corretamente\nligadas umas às outras para que os programas de rotas possam fornecer\ninformações corretas aos utilizadores.\n\nPode também clicar no botão de 'Mover' ou premir a tecla 'M' para mover\na estrada toda de uma só vez. No entanto deve-se ter cuidado ao fazer isso\npois todos os pontos da estrada, incluindo os pontos partilhados com\noutras estradas, serão todos movidos.\n\nPara dividir uma estrada em duas, útil por exemplo quando existe uma estrada\nno mapa que na realidade são 2 estradas diferentes com referências diferentes,\nclique no ponto da estrada onde quer dividir e clique no botão da tesoura que\naparece ao lado do ponto. Esse botão aparece apenas se estiver o ponto\nselecionado e não a linha. Pode também combinar as 2 linhas numa só\nselecionando as duas estradas e clicando no botão + que aparece ao lado.\nSe existirem no mapa 2 estradas ligadas (nas extremidades ou num cruzamento)\nmas que na realidade não se ligam ou cruzam, basta selecionar o ponto comum\ne clicar no botão ao lado de desligar as linhas. Pode então deslocar o ponto\npara outro local.\n\n### Eliminar\n\nSe uma estrada estiver errada - pode-se confirmar pela imagem de satélite (ter em\nconta que a imagem de satélite pode ter alguns anos e a estrada pode ter sido\nconstruida posteriormente) e preferencialmente confirmar presencialmente  - pode\neliminar a estrada toda. É necessária precaução ao eliminar elementos do mapa.\nTal como qualquer outra alteração, os resultados serão visíveis a todos os outros.\n\nPode eliminar uma estrada clicando nela para a selecionar e de seguida\nclicar no ícone do caixote do lixo que aparece ao lado, ou simplesmente\npressionar na tecla 'Del' do teclado.\n\n### Criar\n\nEncontrou alguma estrada que não existe no mapa? Clique no botão 'Linha' que\nestá na parte superior ou pressione a tecla '2' para começar a desenhar a linha.\n\nClique no ponto inicial da estrada para começar a desenhá-la. Se Já existir\numa estrada no mapa, mas que está incompleta, pode continuá-la bastando\npara isso clicar no ponto da extremidade da estrada existente.\n\nAdicione então outros pontos de acordo com as imagens de satélite ou os trilhos\nGPS. Se a estrada que está a desenhar cruzar com outra estrada, crie um ponto\npor cima da outra estrada onde se cruzam. Quando terminar de desenhar\na estrada, clique duas vezes no último ponto da estrada ou pressione as teclas\nde mudança de linha ou 'Enter'.\n",
         "gps": "# GPS\n\nOs dados de GPS são a fonte mais fidedigna de dados no OpenStreetMap.\nEste editor suporta tracejamentos locais - ficheiros `.gpx` que estejam no\nseu computador. Pode também coleccionar este tipo de traços de GPS\natravés das várias aplicações existentes para smartphones assim como\nsistemas pessoais de GPS.\n\nPara mais informações sobre como realizar um exame topográfico com GPS,\nleia [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPara usar um traço GPX para mapear, arraste e coloque o ficheiro GPX no\nmapa do editor. Se for reconhecido com sucesso, o troço será adicionado\nno mapa, aparecendo como uma linha de cor roxa. Clique no menu\n'Dados do Mapa' à direita para ativar, desativar ou enquadrar nesta nova\ncamada onde se situa o GPX.\n\nO troço GPX não é enviado diretamente para o OpenStreetMap -  a melhor\nmaneira de usar-lo é como uma referência para desenhar elementos no\nmapa que precisem de ser mapeados ou alinhados corretamente. Também\npode [enviar os tracejamentos](http://www.openstreetmap.org/trace/create) que faça para o OpenStreetMap de modo a ajudar outros\nutilizadores que podem vir a utilizar esses dados.\n",
@@ -567,39 +588,39 @@
         "fields": {
             "access": {
                 "label": "Acesso",
+                "options": {
+                    "designated": {
+                        "description": "Acesso permitido de acordo com a sinalética e/ou com leis locais específicas; como p. ex. o Código da Estrada",
+                        "title": "Designado"
+                    },
+                    "destination": {
+                        "description": "Acesso permitido apenas para chegar a determinado destino; como p. ex. parques de estacionamento ou centros comerciais",
+                        "title": "Destino"
+                    },
+                    "no": {
+                        "description": "Acesso não permitido ao público em geral",
+                        "title": "Proibido"
+                    },
+                    "permissive": {
+                        "description": "Acesso permitido até o proprietário revogar a permissão",
+                        "title": "Permissivo"
+                    },
+                    "private": {
+                        "description": "Acesso permitido apenas com permissão do proprietário de forma individual",
+                        "title": "Privado"
+                    },
+                    "yes": {
+                        "description": "Acesso permitido por lei",
+                        "title": "Permitido"
+                    }
+                },
                 "placeholder": "Desconhecido",
                 "types": {
                     "access": "Geral",
-                    "foot": "Peões",
-                    "motor_vehicle": "Veículos Motorizados",
                     "bicycle": "Bicicletas",
-                    "horse": "Animais"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Permitido",
-                        "description": "Acesso permitido por lei"
-                    },
-                    "no": {
-                        "title": "Proibido",
-                        "description": "Acesso não permitido ao público em geral"
-                    },
-                    "permissive": {
-                        "title": "Permissivo",
-                        "description": "Acesso permitido até o proprietário revogar a permissão"
-                    },
-                    "private": {
-                        "title": "Privado",
-                        "description": "Acesso permitido apenas com permissão do proprietário de forma individual"
-                    },
-                    "designated": {
-                        "title": "Designado",
-                        "description": "Acesso permitido de acordo com a sinalética e/ou com leis locais específicas; como p. ex. o Código da Estrada"
-                    },
-                    "destination": {
-                        "title": "Destino",
-                        "description": "Acesso permitido apenas para chegar a determinado destino; como p. ex. parques de estacionamento ou centros comerciais"
-                    }
+                    "foot": "Peões",
+                    "horse": "Animais",
+                    "motor_vehicle": "Veículos Motorizados"
                 }
             },
             "access_simple": {
@@ -612,19 +633,19 @@
             "address": {
                 "label": "Morada",
                 "placeholders": {
+                    "city": "Localidade",
+                    "country": "País",
+                    "district": "Distrito",
+                    "hamlet": "Aldeia",
                     "housename": "Nome da Habitação",
                     "housenumber": "123",
-                    "street": "Rua",
-                    "city": "Localidade",
-                    "postcode": "Código Postal",
                     "place": "Sítio",
-                    "hamlet": "Aldeia",
-                    "suburb": "Subúrbio ",
-                    "subdistrict": "Subdistrito",
-                    "district": "Distrito",
+                    "postcode": "Código Postal",
                     "province": "Província",
                     "state": "Estado",
-                    "country": "País"
+                    "street": "Rua",
+                    "subdistrict": "Subdistrito",
+                    "suburb": "Subúrbio "
                 }
             },
             "admin_level": {
@@ -636,9 +657,9 @@
             "aerialway/access": {
                 "label": "Acesso",
                 "options": {
+                    "both": "Ambas",
                     "entry": "Entrada",
-                    "exit": "Saída",
-                    "both": "Ambas"
+                    "exit": "Saída"
                 }
             },
             "aerialway/bubble": {
@@ -662,9 +683,9 @@
             "aerialway/summer/access": {
                 "label": "Acesso (verão)",
                 "options": {
+                    "both": "Ambas",
                     "entry": "Entrada",
-                    "exit": "Saída",
-                    "both": "Ambas"
+                    "exit": "Saída"
                 }
             },
             "aeroway": {
@@ -713,29 +734,29 @@
             "cardinal_direction": {
                 "label": "Direção",
                 "options": {
-                    "N": "Norte",
                     "E": "Este",
-                    "S": "Sul",
-                    "W": "Oeste",
-                    "NE": "Nordeste",
-                    "SE": "Sudeste",
-                    "SW": "Sudoeste",
-                    "NW": "Noroeste",
-                    "NNE": "Nor-nordeste",
                     "ENE": " Lés-nordeste",
                     "ESE": "Lés-sudeste",
+                    "N": "Norte",
+                    "NE": "Nordeste",
+                    "NNE": "Nor-nordeste",
+                    "NNW": "Nor-noroeste",
+                    "NW": "Noroeste",
+                    "S": "Sul",
+                    "SE": "Sudeste",
                     "SSE": "Su-sudeste",
                     "SSW": "Su-sudoeste",
-                    "WSW": "Oés-sudoeste",
+                    "SW": "Sudoeste",
+                    "W": "Oeste",
                     "WNW": "Oés-noroeste",
-                    "NNW": "Nor-noroeste"
+                    "WSW": "Oés-sudoeste"
                 }
             },
             "clock_direction": {
                 "label": "Direção",
                 "options": {
-                    "clockwise": "Sentido dos Ponteiros do Relógio",
-                    "anticlockwise": "Sentido Contrário aos Ponteiros do Relógio."
+                    "anticlockwise": "Sentido Contrário aos Ponteiros do Relógio.",
+                    "clockwise": "Sentido dos Ponteiros do Relógio"
                 }
             },
             "collection_times": {
@@ -743,6 +764,9 @@
             },
             "construction": {
                 "label": "Tipo"
+            },
+            "content": {
+                "label": "Conteúdos"
             },
             "country": {
                 "label": "País"
@@ -779,13 +803,13 @@
             },
             "electrified": {
                 "label": "Eletrificação",
-                "placeholder": "Catenária, Linha Eletrificada...",
                 "options": {
                     "contact_line": "Catenária (Linha de contacto)",
+                    "no": "Não",
                     "rail": "Linha Eletrificada",
-                    "yes": "Sim (não especificada)",
-                    "no": "Não"
-                }
+                    "yes": "Sim (não especificada)"
+                },
+                "placeholder": "Catenária, Linha Eletrificada..."
             },
             "elevation": {
                 "label": "Elevação"
@@ -810,9 +834,9 @@
                 "label": "Tipo",
                 "options": {
                     "pillar": "Superfície ",
+                    "pond": "Poça",
                     "underground": "Subterrâneo ",
-                    "wall": "Muro",
-                    "pond": "Poça"
+                    "wall": "Muro"
                 }
             },
             "fixme": {
@@ -853,12 +877,12 @@
             },
             "gender": {
                 "label": "Género",
-                "placeholder": "Desconhecido",
                 "options": {
-                    "male": "Masculino",
                     "female": "Feminino",
+                    "male": "Masculino",
                     "unisex": "Unisexo"
-                }
+                },
+                "placeholder": "Desconhecido"
             },
             "generator/method": {
                 "label": "Método"
@@ -899,8 +923,8 @@
             "incline_steps": {
                 "label": "Inclinação",
                 "options": {
-                    "up": "Para cima",
-                    "down": "Para baixo"
+                    "down": "Para baixo",
+                    "up": "Para cima"
                 }
             },
             "information": {
@@ -909,11 +933,11 @@
             "internet_access": {
                 "label": "Acesso à Internet",
                 "options": {
-                    "yes": "Sim",
                     "no": "Não",
-                    "wlan": "Wi-Fi",
+                    "terminal": "Terminal de acesso",
                     "wired": "Com fio",
-                    "terminal": "Terminal de acesso"
+                    "wlan": "Wi-Fi",
+                    "yes": "Sim"
                 }
             },
             "lamp_type": {
@@ -932,20 +956,20 @@
             "leaf_cycle": {
                 "label": "Ciclo das Folhas",
                 "options": {
-                    "evergreen": "Persistente",
                     "deciduous": "Caduca",
-                    "semi_evergreen": "Semi-Presistente",
+                    "evergreen": "Persistente",
+                    "mixed": "Mistura",
                     "semi_deciduous": "Semi-Caduca",
-                    "mixed": "Mistura"
+                    "semi_evergreen": "Semi-Presistente"
                 }
             },
             "leaf_type": {
                 "label": "Tipo de Folha",
                 "options": {
                     "broadleaved": "Largas",
-                    "needleleaved": "Agulhas",
+                    "leafless": "Sem folha",
                     "mixed": "Mistura",
-                    "leafless": "Sem folha"
+                    "needleleaved": "Agulhas"
                 }
             },
             "leisure": {
@@ -973,7 +997,6 @@
             },
             "mtb/scale": {
                 "label": "Dificuldade para Bicicletas de Montanha",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Terreno sólido com cascalho ou terra compactada, com nenhum obstáculo, curvas largas, etc.",
                     "1": "1: Algum terreno solto, com pequenos obstáculos, curvas fáceis, etc.",
@@ -982,22 +1005,22 @@
                     "4": "4: Terreno muito solto, com pedregulhos grandes, curvas muito pequenas e perigosas, etc.",
                     "5": "5: Deslizamentos de terra, depressões grandes e profundas, etc.",
                     "6": "6: Não transitável exceto aos melhores ciclistas de montanha"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "Dificuldade de Caminhar definido pela IMBA",
-                "placeholder": "Fácil, Médio, Difícil...",
                 "options": {
                     "0": "Muito fácil (circulo branco)",
                     "1": "Fácil (circulo verde)",
                     "2": "Médio (quadrado azul)",
                     "3": "Difícil (diamante negro)",
                     "4": "Muito Difícil (duplo diamante negro)"
-                }
+                },
+                "placeholder": "Fácil, Médio, Difícil..."
             },
             "mtb/scale/uphill": {
                 "label": "Dificuldade da Subida para Bicicletas de Montanha",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Inclinação média de <10%, superfície de cascalho ou de terra compactada, com nenhum obstáculos, etc.",
                     "1": "1. Inclinação média de <15%, superfície de cascalho ou terra de compactada, com alguns obstáculos, etc.",
@@ -1005,7 +1028,8 @@
                     "3": "3. Inclinação média de <25%, superfície por vezes solta, com pedras/raízes, etc.",
                     "4": "4. Inclinação média de <30%, superfície em más condições, com grandes pedras/raízes, etc.",
                     "5": "5. Muito inclinado, é geralmente necessário empurrar ou levar a bicicleta à mão."
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Nome",
@@ -1026,17 +1050,17 @@
             "oneway": {
                 "label": "Sentido Único?",
                 "options": {
+                    "no": "Não",
                     "undefined": "Assumido que seja Não",
-                    "yes": "Sim",
-                    "no": "Não"
+                    "yes": "Sim"
                 }
             },
             "oneway_yes": {
                 "label": "Sentido Único",
                 "options": {
+                    "no": "Não",
                     "undefined": "Assumido que seja Sim",
-                    "yes": "Sim",
-                    "no": "Não"
+                    "yes": "Sim"
                 }
             },
             "opening_hours": {
@@ -1055,13 +1079,13 @@
             "parking": {
                 "label": "Tipo",
                 "options": {
-                    "surface": "Superfície",
-                    "multi-storey": "Edifício-garagem",
-                    "underground": "Subterrâneo",
-                    "sheds": "Barracões",
                     "carports": "Telheiros",
                     "garage_boxes": "Garagens",
-                    "lane": "Estacionamento Paralelo à Estrada"
+                    "lane": "Estacionamento Paralelo à Estrada",
+                    "multi-storey": "Edifício-garagem",
+                    "sheds": "Barracões",
+                    "surface": "Superfície",
+                    "underground": "Subterrâneo"
                 }
             },
             "phone": {
@@ -1070,24 +1094,24 @@
             },
             "piste/difficulty": {
                 "label": "Dificuldade de Esquiar ",
-                "placeholder": "Fácil, Intermédio, Avançado...",
                 "options": {
-                    "novice": "Muito Fácil (instrucional) ",
-                    "easy": "Fácil (Círculo verde)",
-                    "intermediate": "Médio (quadrado azul)",
                     "advanced": "Difícil (losango negro)",
+                    "easy": "Fácil (Círculo verde)",
                     "expert": "Muito Difícil (duplo losango negro)",
+                    "extreme": "Extremo (material de escalagem é necessário)",
                     "freeride": "Freeride (não supervisionada)",
-                    "extreme": "Extremo (material de escalagem é necessário)"
-                }
+                    "intermediate": "Médio (quadrado azul)",
+                    "novice": "Muito Fácil (instrucional) "
+                },
+                "placeholder": "Fácil, Intermédio, Avançado..."
             },
             "piste/grooming": {
                 "label": "Niveladora de Neve",
                 "options": {
-                    "classic": "Clássico",
-                    "mogul": "Estilo Livre",
                     "backcountry": "Freeride",
+                    "classic": "Clássico",
                     "classic+skating": "Clássico e Patinagem ",
+                    "mogul": "Estilo Livre",
                     "scooter": "Scooter / Mota de Neve",
                     "skating": "Patinagem "
                 }
@@ -1096,14 +1120,14 @@
                 "label": "Tipo",
                 "options": {
                     "downhill": "Downhill",
+                    "hike": "Passeio",
+                    "ice_skate": "Patins no Gelo ",
                     "nordic": "Esqui nórdico",
+                    "playground": "Parque Infantil",
                     "skitour": "Esqui Turístico",
                     "sled": "Trenó ",
-                    "hike": "Passeio",
                     "sleigh": "Trenó",
-                    "ice_skate": "Patins no Gelo ",
-                    "snow_park": "Snowpark",
-                    "playground": "Parque Infantil"
+                    "snow_park": "Snowpark"
                 }
             },
             "place": {
@@ -1114,6 +1138,9 @@
             },
             "power": {
                 "label": "Tipo"
+            },
+            "power_supply": {
+                "label": "Fonte de Energia"
             },
             "railway": {
                 "label": "Tipo"
@@ -1153,15 +1180,15 @@
             },
             "sac_scale": {
                 "label": "Dificuldade de Caminhar",
-                "placeholder": "Caminhada de Montanha, Caminhada Alpina...",
                 "options": {
-                    "hiking": "T1: Caminhada Normal",
-                    "mountain_hiking": "T2: Caminhada de Montanha",
-                    "demanding_mountain_hiking": "T3: Caminhada de Montanha Exigente",
                     "alpine_hiking": "T4: Caminhada Alpina",
                     "demanding_alpine_hiking": "T5: Caminhada Alpina Exigente",
-                    "difficult_alpine_hiking": "T6: Caminhada Muito Difícil"
-                }
+                    "demanding_mountain_hiking": "T3: Caminhada de Montanha Exigente",
+                    "difficult_alpine_hiking": "T6: Caminhada Muito Difícil",
+                    "hiking": "T1: Caminhada Normal",
+                    "mountain_hiking": "T2: Caminhada de Montanha"
+                },
+                "placeholder": "Caminhada de Montanha, Caminhada Alpina..."
             },
             "seasonal": {
                 "label": "Sazonal"
@@ -1172,26 +1199,26 @@
             "service/bicycle/chain_tool": {
                 "label": "Ferramenta para Correia",
                 "options": {
+                    "no": "Não",
                     "undefined": "Assumido que seja Não",
-                    "yes": "Sim",
-                    "no": "Não"
+                    "yes": "Sim"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Bomba de Ar",
                 "options": {
+                    "no": "Não",
                     "undefined": "Assumido que seja Não",
-                    "yes": "Sim",
-                    "no": "Não"
+                    "yes": "Sim"
                 }
             },
             "service_rail": {
                 "label": "Tipo de Serviço",
                 "options": {
-                    "spur": "Ramal de inserção",
-                    "yard": "Linha de manobras",
+                    "crossover": "Linha de serviço",
                     "siding": "Linha de ultrapassagem",
-                    "crossover": "Linha de serviço"
+                    "spur": "Ramal de inserção",
+                    "yard": "Linha de manobras"
                 }
             },
             "shelter": {
@@ -1208,29 +1235,29 @@
             },
             "smoking": {
                 "label": "Fumar",
-                "placeholder": "Não, Separado, Sim",
                 "options": {
-                    "no": "Fumar não é permitido",
-                    "separated": "Em zona de fumadores, não isolada do estabelecimento",
+                    "dedicated": "Dedicado a fumadores (por exemplo, clube de fumadores)",
                     "isolated": "Em zona de fumadores, isolada do estabelecimento ",
+                    "no": "Fumar não é permitido",
                     "outside": "Permitido no exterior",
-                    "yes": "Fumar é permitido em todo o estabelecimento ",
-                    "dedicated": "Dedicado a fumadores (por exemplo, clube de fumadores)"
-                }
+                    "separated": "Em zona de fumadores, não isolada do estabelecimento",
+                    "yes": "Fumar é permitido em todo o estabelecimento "
+                },
+                "placeholder": "Não, Separado, Sim"
             },
             "smoothness": {
                 "label": "Qualidade da Estrada",
-                "placeholder": "Excelente, Boa, Má...",
                 "options": {
+                    "bad": "Intermédia: carros de cidade, camiões, etc.",
                     "excellent": "Excelente: skates, patins em linha, etc.",
                     "good": "Muito boa: bicicletas de corrida, carros desportivos etc.",
-                    "intermediate": "Boa: bicicletas de cidade, cadeira de rodas, scooters, etc.",
-                    "bad": "Intermédia: carros de cidade, camiões, etc.",
-                    "very_bad": "Má: carroças, SUVs, etc.",
                     "horrible": "Muito má: bicicletas de montanha, carros todo-o-terreno, etc.",
-                    "very_horrible": "Péssima: tratores, moto-quatros, etc.",
-                    "impassable": "Intransitável / Veículos sem rodas"
-                }
+                    "impassable": "Intransitável / Veículos sem rodas",
+                    "intermediate": "Boa: bicicletas de cidade, cadeira de rodas, scooters, etc.",
+                    "very_bad": "Má: carroças, SUVs, etc.",
+                    "very_horrible": "Péssima: tratores, moto-quatros, etc."
+                },
+                "placeholder": "Excelente, Boa, Má..."
             },
             "social_facility_for": {
                 "label": "Pessoas Servidas",
@@ -1250,14 +1277,14 @@
             },
             "structure": {
                 "label": "Estrutura",
-                "placeholder": "Desconhecido",
                 "options": {
                     "bridge": "Ponte",
-                    "tunnel": "Túnel",
-                    "embankment": "Elevação no terreno",
                     "cutting": "Corte no terreno",
-                    "ford": "Vau"
-                }
+                    "embankment": "Elevação no terreno",
+                    "ford": "Vau",
+                    "tunnel": "Túnel"
+                },
+                "placeholder": "Desconhecido"
             },
             "studio_type": {
                 "label": "Tipo"
@@ -1276,20 +1303,20 @@
             },
             "takeaway": {
                 "label": "Take Away",
-                "placeholder": "Sim, Não, Apenas Take Away",
                 "options": {
-                    "yes": "Sim",
                     "no": "Não",
-                    "only": "Apenas Take Away"
-                }
+                    "only": "Apenas Take Away",
+                    "yes": "Sim"
+                },
+                "placeholder": "Sim, Não, Apenas Take Away"
             },
             "toilets/disposal": {
                 "label": "Método de Eliminação de Resíduos",
                 "options": {
-                    "flush": "Descarregamento",
-                    "pitlatrine": "Fosso / Latrina",
+                    "bucket": "Balde",
                     "chemical": "Químico ",
-                    "bucket": "Balde"
+                    "flush": "Descarregamento",
+                    "pitlatrine": "Fosso / Latrina"
                 }
             },
             "tourism": {
@@ -1300,26 +1327,26 @@
             },
             "tracktype": {
                 "label": "Qualidade da Superfície ",
-                "placeholder": "Sólido, Intermédio, Macio...",
                 "options": {
                     "grade1": "1 - Sólida: pavimentada ou com material fortemente compactado",
                     "grade2": "2 - Sobretudo sólida: cascalho ou pedras misturadas com algum material macio",
                     "grade3": "3 - Intermédia, mistura de materiais sólidos e macios",
                     "grade4": "4 - Sobretudo macia: terra, erva ou areia misturadas com algum material sólido",
                     "grade5": "5 - Macia: Terra, erva ou areia"
-                }
+                },
+                "placeholder": "Sólido, Intermédio, Macio..."
             },
             "trail_visibility": {
                 "label": "Visibilidade",
-                "placeholder": "Excelente, Boa, Má...",
                 "options": {
+                    "bad": "Má: caminho pouco visível",
                     "excellent": "Excelente: caminho claramente marcado ou com vários marcos de informações",
                     "good": "Boa: caminho muito visível",
-                    "intermediate": "Intermédia: caminho visível ou com poucos marcos de informações",
-                    "bad": "Má: caminho pouco visível",
                     "horrible": "Péssima: por vezes sem caminho ou com nenhum marco de informação",
+                    "intermediate": "Intermédia: caminho visível ou com poucos marcos de informações",
                     "no": "Nenhuma: caminho não é visível, boa habilidade de orientação é necessária"
-                }
+                },
+                "placeholder": "Excelente, Boa, Má..."
             },
             "trees": {
                 "label": "Árvores"
@@ -1332,6 +1359,9 @@
             },
             "water": {
                 "label": "Tipo"
+            },
+            "water_point": {
+                "label": "Bebedouro"
             },
             "waterway": {
                 "label": "Tipo"
@@ -1473,6 +1503,10 @@
             "amenity/bicycle_repair_station": {
                 "name": "Estação de Reparação de Bicicletas",
                 "terms": "Bicycle Repair Station"
+            },
+            "amenity/biergarten": {
+                "name": "Jardim da Cerveja",
+                "terms": "Beer Garden, Biergarten"
             },
             "amenity/boat_rental": {
                 "name": "Aluguer de Barcos",
@@ -2630,9 +2664,17 @@
                 "name": "Farol",
                 "terms": "Faról, Lighthouse"
             },
+            "man_made/mast": {
+                "name": "Torre de Rádio",
+                "terms": "Radio Mast, Mastro de Rádio"
+            },
             "man_made/observation": {
                 "name": "Torre de Observação",
                 "terms": "Observatório Tower, Miradouro"
+            },
+            "man_made/petroleum_well": {
+                "name": "Poço de Petróleo",
+                "terms": "Oil Well"
             },
             "man_made/pier": {
                 "name": "Pontão / Atracadouro",
@@ -2641,6 +2683,12 @@
             "man_made/pipeline": {
                 "name": "Gasoduto / Oleoduto",
                 "terms": "Tubo, Pipeline"
+            },
+            "man_made/silo": {
+                "name": "Silo"
+            },
+            "man_made/storage_tank": {
+                "name": "Depósito de Armazenamento"
             },
             "man_made/survey_point": {
                 "name": "Vértice Geodésico / Talefe",
@@ -2861,6 +2909,10 @@
             "place/city": {
                 "name": "Capital de Distrito",
                 "terms": "City, Cidade, Capital, Distrito"
+            },
+            "place/farm": {
+                "name": "Quinta",
+                "terms": "Farm, Fazenda, Pasto"
             },
             "place/hamlet": {
                 "name": "Aldeia",
@@ -3649,6 +3701,10 @@
             "waterway/drain": {
                 "name": "Vala de Drenagem",
                 "terms": "Drain"
+            },
+            "waterway/fuel": {
+                "name": "Posto de Combustível Marinho",
+                "terms": "Marine Fuel Station"
             },
             "waterway/river": {
                 "name": "Rio",

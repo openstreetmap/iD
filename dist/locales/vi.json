@@ -254,6 +254,26 @@
         "list": "Đóng góp bởi {users}",
         "truncated_list": "Đóng góp bởi {users} và {count} người khác"
     },
+    "infobox": {
+        "selected": "{n} được chọn",
+        "geometry": "Hình dạng",
+        "closed": "đóng",
+        "center": "Trung tâm",
+        "perimeter": "Chu vi",
+        "length": "Chiều dài",
+        "area": "Diện tích",
+        "centroid": "Trọng tâm",
+        "location": "Vị trí",
+        "metric": "Hệ mét",
+        "imperial": "Hệ Anh"
+    },
+    "geometry": {
+        "point": "điểm",
+        "vertex": "đỉnh",
+        "line": "đường kẻ",
+        "area": "vùng",
+        "relation": "quan hệ"
+    },
     "geocoder": {
         "search": "Tìm kiếm trên toàn thế giới…",
         "no_results_visible": "Không tìm thấy kết quả trong khu vực đang xem",
@@ -568,39 +588,39 @@
         "fields": {
             "access": {
                 "label": "Quyền Truy cập",
+                "options": {
+                    "designated": {
+                        "description": "Được xây với mục đích cho phép vận chuyển bằng phương thức này, theo bảng hay luật pháp địa phương",
+                        "title": "Theo mục đích"
+                    },
+                    "destination": {
+                        "description": "Chỉ cho phép truy cập để tới nơi",
+                        "title": "Nơi đến"
+                    },
+                    "no": {
+                        "description": "Công chúng không được phép truy cập",
+                        "title": "Cấm"
+                    },
+                    "permissive": {
+                        "description": "Chủ cho phép rộng rãi nhưng có thể cấm sau",
+                        "title": "Chủ cho phép"
+                    },
+                    "private": {
+                        "description": "Chỉ có những người được chủ cho phép truy cập",
+                        "title": "Tư nhân"
+                    },
+                    "yes": {
+                        "description": "Mọi người được phép truy cập theo luật pháp",
+                        "title": "Cho phép"
+                    }
+                },
                 "placeholder": "Không rõ",
                 "types": {
                     "access": "Tổng quát",
-                    "foot": "Người Đi bộ",
-                    "motor_vehicle": "Xe cộ",
                     "bicycle": "Xe đạp",
-                    "horse": "Ngựa"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Cho phép",
-                        "description": "Mọi người được phép truy cập theo luật pháp"
-                    },
-                    "no": {
-                        "title": "Cấm",
-                        "description": "Công chúng không được phép truy cập"
-                    },
-                    "permissive": {
-                        "title": "Chủ cho phép",
-                        "description": "Chủ cho phép rộng rãi nhưng có thể cấm sau"
-                    },
-                    "private": {
-                        "title": "Tư nhân",
-                        "description": "Chỉ có những người được chủ cho phép truy cập"
-                    },
-                    "designated": {
-                        "title": "Theo mục đích",
-                        "description": "Được xây với mục đích cho phép vận chuyển bằng phương thức này, theo bảng hay luật pháp địa phương"
-                    },
-                    "destination": {
-                        "title": "Nơi đến",
-                        "description": "Chỉ cho phép truy cập để tới nơi"
-                    }
+                    "foot": "Người Đi bộ",
+                    "horse": "Ngựa",
+                    "motor_vehicle": "Xe cộ"
                 }
             },
             "access_simple": {
@@ -613,19 +633,19 @@
             "address": {
                 "label": "Địa chỉ",
                 "placeholders": {
+                    "city": "Thành phố/thị xã",
+                    "country": "Quốc gia",
+                    "district": "Quận/thị xã/huyện",
+                    "hamlet": "Thôn",
                     "housename": "Tên nhà",
                     "housenumber": "123",
-                    "street": "Đường",
-                    "city": "Thành phố/thị xã",
-                    "postcode": "Mã bưu chính",
                     "place": "Địa phương",
-                    "hamlet": "Thôn",
-                    "suburb": "Khu phố",
-                    "subdistrict": "Phường/xã/thị trấn",
-                    "district": "Quận/thị xã/huyện",
+                    "postcode": "Mã bưu chính",
                     "province": "Tỉnh",
                     "state": "Tiểu bang",
-                    "country": "Quốc gia"
+                    "street": "Đường",
+                    "subdistrict": "Phường/xã/thị trấn",
+                    "suburb": "Khu phố"
                 }
             },
             "admin_level": {
@@ -637,9 +657,9 @@
             "aerialway/access": {
                 "label": "Quyền Truy cập",
                 "options": {
+                    "both": "Ra vào",
                     "entry": "Vào",
-                    "exit": "Ra",
-                    "both": "Ra vào"
+                    "exit": "Ra"
                 }
             },
             "aerialway/bubble": {
@@ -663,9 +683,9 @@
             "aerialway/summer/access": {
                 "label": "Quyền Truy cập (Mùa hè)",
                 "options": {
+                    "both": "Ra vào",
                     "entry": "Vào",
-                    "exit": "Ra",
-                    "both": "Ra vào"
+                    "exit": "Ra"
                 }
             },
             "aeroway": {
@@ -714,29 +734,29 @@
             "cardinal_direction": {
                 "label": "Chiều",
                 "options": {
-                    "N": "Bắc",
                     "E": "Đông",
-                    "S": "Nam",
-                    "W": "Tây",
-                    "NE": "Đông Bắc",
-                    "SE": "Đông Nam",
-                    "SW": "Tây Nam",
-                    "NW": "Tây Bắc",
-                    "NNE": "Bắc Đông Bắc",
                     "ENE": "Đông Đông Bắc",
                     "ESE": "Đông Đông Nam",
+                    "N": "Bắc",
+                    "NE": "Đông Bắc",
+                    "NNE": "Bắc Đông Bắc",
+                    "NNW": "Bắc Tây Bắc",
+                    "NW": "Tây Bắc",
+                    "S": "Nam",
+                    "SE": "Đông Nam",
                     "SSE": "Nam Đông Nam",
                     "SSW": "Nam Tây Nam",
-                    "WSW": "Tây Tây Nam",
+                    "SW": "Tây Nam",
+                    "W": "Tây",
                     "WNW": "Tây Tây Bắc",
-                    "NNW": "Bắc Tây Bắc"
+                    "WSW": "Tây Tây Nam"
                 }
             },
             "clock_direction": {
                 "label": "Chiều",
                 "options": {
-                    "clockwise": "Theo Chiều kim Đồng hồ",
-                    "anticlockwise": "Ngược Chiều kim Đồng hồ"
+                    "anticlockwise": "Ngược Chiều kim Đồng hồ",
+                    "clockwise": "Theo Chiều kim Đồng hồ"
                 }
             },
             "collection_times": {
@@ -744,6 +764,9 @@
             },
             "construction": {
                 "label": "Kiểu"
+            },
+            "content": {
+                "label": "Đồ Chứa đựng"
             },
             "country": {
                 "label": "Quốc gia"
@@ -780,13 +803,13 @@
             },
             "electrified": {
                 "label": "Điện khí hóa",
-                "placeholder": "Dây điện Bên trên, Đường ray Điện…",
                 "options": {
                     "contact_line": "Dây điện Bên trên",
+                    "no": "Không có",
                     "rail": "Đường ray Điện",
-                    "yes": "Có (không xác định)",
-                    "no": "Không có"
-                }
+                    "yes": "Có (không xác định)"
+                },
+                "placeholder": "Dây điện Bên trên, Đường ray Điện…"
             },
             "elevation": {
                 "label": "Cao độ"
@@ -811,9 +834,9 @@
                 "label": "Kiểu",
                 "options": {
                     "pillar": "Cột",
+                    "pond": "Ao",
                     "underground": "Dưới đất",
-                    "wall": "Tường",
-                    "pond": "Ao"
+                    "wall": "Tường"
                 }
             },
             "fixme": {
@@ -854,12 +877,12 @@
             },
             "gender": {
                 "label": "Giới tính",
-                "placeholder": "Không rõ",
                 "options": {
-                    "male": "Nam",
                     "female": "Nữ",
+                    "male": "Nam",
                     "unisex": "Chung"
-                }
+                },
+                "placeholder": "Không rõ"
             },
             "generator/method": {
                 "label": "Phương pháp"
@@ -900,8 +923,8 @@
             "incline_steps": {
                 "label": "Độ dốc",
                 "options": {
-                    "up": "Lên",
-                    "down": "Xuống"
+                    "down": "Xuống",
+                    "up": "Lên"
                 }
             },
             "information": {
@@ -910,11 +933,11 @@
             "internet_access": {
                 "label": "Truy cập Internet",
                 "options": {
-                    "yes": "Có",
                     "no": "Không có",
-                    "wlan": "Wi-Fi",
+                    "terminal": "Máy tính công cộng",
                     "wired": "Qua dây điện",
-                    "terminal": "Máy tính công cộng"
+                    "wlan": "Wi-Fi",
+                    "yes": "Có"
                 }
             },
             "lamp_type": {
@@ -933,20 +956,20 @@
             "leaf_cycle": {
                 "label": "Thời gian Mọc Lá",
                 "options": {
-                    "evergreen": "Thường xanh",
                     "deciduous": "Rụng Lá",
-                    "semi_evergreen": "Bán Thường xanh",
+                    "evergreen": "Thường xanh",
+                    "mixed": "Pha trộn",
                     "semi_deciduous": "Bán Rụng Lá",
-                    "mixed": "Pha trộn"
+                    "semi_evergreen": "Bán Thường xanh"
                 }
             },
             "leaf_type": {
                 "label": "Loại Lá",
                 "options": {
                     "broadleaved": "Hình Quạt",
-                    "needleleaved": "Hình Kim",
+                    "leafless": "Không có",
                     "mixed": "Pha trộn",
-                    "leafless": "Không có"
+                    "needleleaved": "Hình Kim"
                 }
             },
             "leisure": {
@@ -974,7 +997,6 @@
             },
             "mtb/scale": {
                 "label": "Độ hiểm trở Đạp xe Leo núi",
-                "placeholder": "0, 1, 2, 3…",
                 "options": {
                     "0": "0: Sỏi/đất chắc, không có trở ngại, uốn từ từ",
                     "1": "1: Mặt có một tí phần không chặt, trở ngại nhỏ, uốn từ từ",
@@ -983,22 +1005,22 @@
                     "4": "4. Mặt không chặt hoặc hòn đá, chữ chi nguy hiểm",
                     "5": "5. Cực hiểm trở, sân đầy hòn đá, lở đất",
                     "6": "6. Không thể đạp xe trừ những người lão luyện nhất"
-                }
+                },
+                "placeholder": "0, 1, 2, 3…"
             },
             "mtb/scale/imba": {
                 "label": "Độ hiểm trở Đường mòn IMBA",
-                "placeholder": "Dễ, Trung bình, Khó…",
                 "options": {
                     "0": "Dễ nhất (hình tròn màu trắng)",
                     "1": "Dễ (hình tròn màu xanh lục)",
                     "2": "Trung bình (hình vuông màu xanh lam)",
                     "3": "Khó (hình thoi màu đen)",
                     "4": "Cực Khó (2 hình thoi màu đen)"
-                }
+                },
+                "placeholder": "Dễ, Trung bình, Khó…"
             },
             "mtb/scale/uphill": {
                 "label": "Độ hiểm trở Đạp xe Leo lên núi",
-                "placeholder": "0, 1, 2, 3…",
                 "options": {
                     "0": "0: Độ dốc trung bình <10%, sỏi/đất chắc, không có trở ngại",
                     "1": "1: Độ dốc trung bình <15%, sỏi/đất chắc, vài thứ nhỏ",
@@ -1006,7 +1028,8 @@
                     "3": "3: Độ dốc trung bình <25%, mặt thay đổi, đá/rễ bằng cỡ tay",
                     "4": "4: Độ dốc trung bình <30%, phẩm chất kém, đá/rễ lớn",
                     "5": "5: Rất dốc, thường phải đẩy hoặc vác xe đạp"
-                }
+                },
+                "placeholder": "0, 1, 2, 3…"
             },
             "name": {
                 "label": "Tên",
@@ -1027,17 +1050,17 @@
             "oneway": {
                 "label": "Một chiều",
                 "options": {
+                    "no": "Không phải",
                     "undefined": "Có lẽ Không phải",
-                    "yes": "Một chiều",
-                    "no": "Không phải"
+                    "yes": "Một chiều"
                 }
             },
             "oneway_yes": {
                 "label": "Một chiều",
                 "options": {
+                    "no": "Không phải",
                     "undefined": "Có lẽ Một chiều",
-                    "yes": "Một chiều",
-                    "no": "Không phải"
+                    "yes": "Một chiều"
                 }
             },
             "opening_hours": {
@@ -1056,13 +1079,13 @@
             "parking": {
                 "label": "Kiểu",
                 "options": {
-                    "surface": "Ngoài trời",
-                    "multi-storey": "Cao tầng",
-                    "underground": "Ngầm",
-                    "sheds": "Lán",
                     "carports": "Nhà xe",
                     "garage_boxes": "Ga ra",
-                    "lane": "Làn đường"
+                    "lane": "Làn đường",
+                    "multi-storey": "Cao tầng",
+                    "sheds": "Lán",
+                    "surface": "Ngoài trời",
+                    "underground": "Ngầm"
                 }
             },
             "phone": {
@@ -1071,24 +1094,24 @@
             },
             "piste/difficulty": {
                 "label": "Độ Hiểm trở",
-                "placeholder": "Dễ, Trung bình, Nâng cao…",
                 "options": {
-                    "novice": "Tập",
-                    "easy": "Dễ (Mỹ: tròn lục; Âu: xanh lục; Nhật: lục)",
-                    "intermediate": "Trung bình (Mỹ: vuông lam; Âu: đỏ; Nhật: đỏ)",
                     "advanced": "Nâng cao (Mỹ: thoi đen; Âu: đen; Nhật: đen)",
+                    "easy": "Dễ (Mỹ: tròn lục; Âu: xanh lục; Nhật: lục)",
                     "expert": "Lão luyện (Mỹ: 2 thoi đen; Âu: cam)",
+                    "extreme": "Cực độ (cần thiết bị leo núi)",
                     "freeride": "Tự do (xa đường; Âu: vàng)",
-                    "extreme": "Cực độ (cần thiết bị leo núi)"
-                }
+                    "intermediate": "Trung bình (Mỹ: vuông lam; Âu: đỏ; Nhật: đỏ)",
+                    "novice": "Tập"
+                },
+                "placeholder": "Dễ, Trung bình, Nâng cao…"
             },
             "piste/grooming": {
                 "label": "Kiểu Ủi Tuyết",
                 "options": {
-                    "classic": "Cổ điển",
-                    "mogul": "Mogul",
                     "backcountry": "Hẻo lánh",
+                    "classic": "Cổ điển",
                     "classic+skating": "Cổ điển và Trượt băng",
+                    "mogul": "Mogul",
                     "scooter": "Xe máy Trượt tuyết",
                     "skating": "Trượt băng"
                 }
@@ -1097,14 +1120,14 @@
                 "label": "Kiểu",
                 "options": {
                     "downhill": "Xuống dốc",
+                    "hike": "Đi bộ đường dài",
+                    "ice_skate": "Trượt băng",
                     "nordic": "Trượt tuyết Bắc Âu",
+                    "playground": "Vui chơi",
                     "skitour": "Skitour",
                     "sled": "Xe Trượt tuyết",
-                    "hike": "Đi bộ đường dài",
                     "sleigh": "Xe trượt tuyết",
-                    "ice_skate": "Trượt băng",
-                    "snow_park": "Vườn Tuyết",
-                    "playground": "Vui chơi"
+                    "snow_park": "Vườn Tuyết"
                 }
             },
             "place": {
@@ -1115,6 +1138,9 @@
             },
             "power": {
                 "label": "Kiểu"
+            },
+            "power_supply": {
+                "label": "Nguồn Điện"
             },
             "railway": {
                 "label": "Kiểu"
@@ -1154,15 +1180,18 @@
             },
             "sac_scale": {
                 "label": "Độ hiểm trở Đi bộ Đường dài",
-                "placeholder": "Đi bộ Đường dài Núi, Đi bộ Đường dài Anpơ…",
                 "options": {
-                    "hiking": "T1: Đi bộ Đường dài",
-                    "mountain_hiking": "T2: Đi bộ Đường dài Núi",
-                    "demanding_mountain_hiking": "T3: Đi bộ Đường dài Núi Rán sức",
                     "alpine_hiking": "T4: Đi bộ Đường dài Anpơ",
                     "demanding_alpine_hiking": "T5: Đi bộ Đường dài Anpơ Rán sức",
-                    "difficult_alpine_hiking": "T6: Đi bộ Đường dài Anpơ Khó"
-                }
+                    "demanding_mountain_hiking": "T3: Đi bộ Đường dài Núi Rán sức",
+                    "difficult_alpine_hiking": "T6: Đi bộ Đường dài Anpơ Khó",
+                    "hiking": "T1: Đi bộ Đường dài",
+                    "mountain_hiking": "T2: Đi bộ Đường dài Núi"
+                },
+                "placeholder": "Đi bộ Đường dài Núi, Đi bộ Đường dài Anpơ…"
+            },
+            "sanitary_dump_station": {
+                "label": "Trạm Đổ Chất thải Vệ sinh"
             },
             "seasonal": {
                 "label": "Tùy Mùa"
@@ -1173,26 +1202,26 @@
             "service/bicycle/chain_tool": {
                 "label": "Dụng cụ Cắt Xích",
                 "options": {
+                    "no": "Không có",
                     "undefined": "Có lẽ Không có",
-                    "yes": "Có",
-                    "no": "Không có"
+                    "yes": "Có"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Bơm",
                 "options": {
+                    "no": "Không có",
                     "undefined": "Có lẽ Không có",
-                    "yes": "Có",
-                    "no": "Không có"
+                    "yes": "Có"
                 }
             },
             "service_rail": {
                 "label": "Kiểu Dịch vụ",
                 "options": {
-                    "spur": "Đường Nhánh",
-                    "yard": "Đường Sân ga",
+                    "crossover": "Đường Xuyên chéo",
                     "siding": "Đường Tránh",
-                    "crossover": "Đường Xuyên chéo"
+                    "spur": "Đường Nhánh",
+                    "yard": "Đường Sân ga"
                 }
             },
             "shelter": {
@@ -1209,29 +1238,29 @@
             },
             "smoking": {
                 "label": "Hút thuốc",
-                "placeholder": "Cấm, Nơi dành riêng, Cho phép…",
                 "options": {
-                    "no": "Hoàn toàn cấm hút thuốc",
-                    "separated": "Ở nơi hút thuốc không có tường",
+                    "dedicated": "Dành riêng cho người hút thuốc (ví dụ quán hút thuốc)",
                     "isolated": "Ở nơi hút thuốc có tường",
+                    "no": "Hoàn toàn cấm hút thuốc",
                     "outside": "Cho phép ở ngoài trời",
-                    "yes": "Cho phép ở bất cứ nơi nào",
-                    "dedicated": "Dành riêng cho người hút thuốc (ví dụ quán hút thuốc)"
-                }
+                    "separated": "Ở nơi hút thuốc không có tường",
+                    "yes": "Cho phép ở bất cứ nơi nào"
+                },
+                "placeholder": "Cấm, Nơi dành riêng, Cho phép…"
             },
             "smoothness": {
                 "label": "Độ nhẵn",
-                "placeholder": "Bánh xe Trượt, Bánh xe, Xa đường…",
                 "options": {
+                    "bad": "Bánh xe Bền: Xe hơi, xích lô, xe đạp dã ngoại",
                     "excellent": "Bánh xe Trượt: Giày patanh, ván trượt",
                     "good": "Bánh xe Mỏng: Xe đạp đua",
-                    "intermediate": "Bánh xe: Xe đạp lai, xe lăn, vét pa",
-                    "bad": "Bánh xe Bền: Xe hơi, xích lô, xe đạp dã ngoại",
-                    "very_bad": "Gầm Cao: Xe xa đường nhẹ",
                     "horrible": "Xa đường: Xe xa đường nặng",
-                    "very_horrible": "Xa đường Chuyên dụng: Máy kéo, ATV",
-                    "impassable": "Không thể qua được bằng bánh xe"
-                }
+                    "impassable": "Không thể qua được bằng bánh xe",
+                    "intermediate": "Bánh xe: Xe đạp lai, xe lăn, vét pa",
+                    "very_bad": "Gầm Cao: Xe xa đường nhẹ",
+                    "very_horrible": "Xa đường Chuyên dụng: Máy kéo, ATV"
+                },
+                "placeholder": "Bánh xe Trượt, Bánh xe, Xa đường…"
             },
             "social_facility_for": {
                 "label": "Dân được phục vụ",
@@ -1251,14 +1280,14 @@
             },
             "structure": {
                 "label": "Cấu trúc",
-                "placeholder": "Không rõ",
                 "options": {
                     "bridge": "Cầu",
-                    "tunnel": "Đường hầm",
-                    "embankment": "Đường đắp cao",
                     "cutting": "Đường xẻ",
-                    "ford": "Nơi Lội qua Sông"
-                }
+                    "embankment": "Đường đắp cao",
+                    "ford": "Nơi Lội qua Sông",
+                    "tunnel": "Đường hầm"
+                },
+                "placeholder": "Không rõ"
             },
             "studio_type": {
                 "label": "Loại"
@@ -1277,20 +1306,20 @@
             },
             "takeaway": {
                 "label": "Mang về",
-                "placeholder": "Có, Không có, Chỉ có Mang về…",
                 "options": {
-                    "yes": "Có",
                     "no": "Không có",
-                    "only": "Chỉ có Mang về"
-                }
+                    "only": "Chỉ có Mang về",
+                    "yes": "Có"
+                },
+                "placeholder": "Có, Không có, Chỉ có Mang về…"
             },
             "toilets/disposal": {
                 "label": "Phương pháp thải",
                 "options": {
-                    "flush": "Bấm",
-                    "pitlatrine": "Mương",
+                    "bucket": "Thùng",
                     "chemical": "Hóa chất",
-                    "bucket": "Thùng"
+                    "flush": "Bấm",
+                    "pitlatrine": "Mương"
                 }
             },
             "tourism": {
@@ -1301,26 +1330,26 @@
             },
             "tracktype": {
                 "label": "Loại Đường mòn",
-                "placeholder": "Rất chắc, Khá Chắc, Mềm…",
                 "options": {
                     "grade1": "Rất Chắc: Mặt lát hoặc bằng cốt liệu chắc",
                     "grade2": "Khá Chắc: Sỏi đá pha một tí nguyên liệu mềm",
                     "grade3": "Pha trộn đều các nguyên liệu cứng mềm",
                     "grade4": "Khá Mềm: Đất/cát/cỏ pha một tí nguyên liệu cứng",
                     "grade5": "Rất Mềm: Đất/cát/cỏ"
-                }
+                },
+                "placeholder": "Rất chắc, Khá Chắc, Mềm…"
             },
             "trail_visibility": {
                 "label": "Tầm nhìn trên Đường mòn",
-                "placeholder": "Tốt, Khá, Trung bình…",
                 "options": {
+                    "bad": "Kém: Không có cắm bảng, đôi khi không thấy được lối đi hoặc không có lối đi",
                     "excellent": "Tốt: Lối đi rõ ràng hoặc có cắm bảng từng quãng một",
                     "good": "Khá: Có bảng thấy được nhưng đôi khi cần phải mò mẫm",
-                    "intermediate": "Trung bình: Ít bảng, lối đi thấy được phần lớn",
-                    "bad": "Kém: Không có cắm bảng, đôi khi không thấy được lối đi hoặc không có lối đi",
                     "horrible": "Tồi: Nhiều khi không có lối đi, cần biết dò đường một chút",
+                    "intermediate": "Trung bình: Ít bảng, lối đi thấy được phần lớn",
                     "no": "Không có lối đi, rất cần biết dò đường"
-                }
+                },
+                "placeholder": "Tốt, Khá, Trung bình…"
             },
             "trees": {
                 "label": "Loại cây"
@@ -1333,6 +1362,9 @@
             },
             "water": {
                 "label": "Loại"
+            },
+            "water_point": {
+                "label": "Trạm Đóng Bình Nước uống"
             },
             "waterway": {
                 "label": "Loại"
@@ -1475,6 +1507,10 @@
                 "name": "Quầy Sửa Xe đạp",
                 "terms": "quầy sửa xe đạp, quay sua xe dap"
             },
+            "amenity/biergarten": {
+                "name": "Vườn Bia",
+                "terms": "vườn bia, vườn uống bia, vườn nhậu, vuon bia, vuon uong bia, vuon nhau"
+            },
             "amenity/boat_rental": {
                 "name": "Cho thuê Tàu",
                 "terms": "dịch vụ cho thuê tàu, chỗ thuê tàu, tiệm thuê tàu, thuê tàu, dịch vụ cho mướn tàu, chỗ mướn tàu, tiệm mướn tàu, mướn tàu, dịch vụ cho thuê thuyền, chỗ thuê thuyền, tiệm thuê thuyền, thuê thuyền, dịch vụ cho mướn thuyền, chỗ mướn thuyền, tiệm mướn thuyền, mướn thuyền, dich vu cho thue tau, cho thue tau, tiem thue tau, thue tau, dich vu cho muon tau, cho muon tau, tiem muon tau, muon tau, dich vu cho thue thuyen, cho thue thuyen, tiem thue thuyen, thue thuyen, dich vu cho muon thuyen, cho muon thuyen, tiem muon thuyen, muon thuyen"
@@ -1573,7 +1609,7 @@
             },
             "amenity/fuel": {
                 "name": "Cây xăng",
-                "terms": "cây xăng, cột xăng, xăng, ét xăng, ét-xăng, nhiên liệu, cay xang, cot xang, xang, et xang, et-xang, nhien lieu"
+                "terms": "cây xăng, cột xăng, xăng, ét xăng, ét-xăng, trạm xăng dầu, nhiên liệu, cay xang, cot xang, xang, et xang, et-xang, tram xang dau, nhien lieu"
             },
             "amenity/grave_yard": {
                 "name": "Nghĩa địa tại Nhà thờ",
@@ -1670,6 +1706,10 @@
             "amenity/restaurant": {
                 "name": "Nhà hàng",
                 "terms": "quán ăn, nhà hàng, tiệm ăn, nhà ăn, phòng ăn, quán ăn nhanh, nhà hàng ăn nhanh, quán ăn qua loa, căng tin, căng-tin, xe đẩy, quán rượu, quán bia, tiệm rượu, hiệu chả cá, quán chả nướng, quán phở, tiệm phở, quán cơm, quán bánh cuốn, tiệm bánh cuốn, quán bánh mì, tiệm bánh mì, quán bánh xèo, tiệm bánh xèo, quán chè, tiệm chè, quán gỏi cuốn, quán bún, quán hải sản, quán gà, quán cà ri, quán cà-ri, tiệm cà ri, tiệm cà-ri, quan an, nha hang, tiem an, nha an, phong an, quan an nhanh, nha hang an nhanh, quan an qua loa, can tin, cang-tin, xe day, quan ruou, quan bia, tiem ruou, hieu cha ca, quan cha nuong, quan pho, tiem pho, quan com, quan banh cuon, tiem banh cuon, quan banh mi, tiem banh mi, quan banh xeo, tiem banh xeo, quan che, tiem che, quan goi cuon, quan bun, quan hai san, quan ga, quan ca ri, quan ca-ri, tiem ca ri, tiem ca-ri"
+            },
+            "amenity/sanitary_dump_station": {
+                "name": "Trạm Đổ Chất thải dành cho Nhà lưu động",
+                "terms": "trạm đổ chất thải dành cho nhà lưu động, trạm đổ chất thải vệ sinh dành cho nhà lưu động, tram do chat thai danh cho nha luu dong, tram do chat thai ve sinh danh cho nha luu dong"
             },
             "amenity/school": {
                 "name": "Sân Trường",
@@ -2631,9 +2671,17 @@
                 "name": "Hải đăng",
                 "terms": "hải đăng, đèn biển, hai dang, den bien"
             },
+            "man_made/mast": {
+                "name": "Cột Radio",
+                "terms": "cột radio, cột rađiô, cột ra-đi-ô, cột vô tuyến, tháp radio, tháp rađiô, tháp ra-đi-ô, tháp vô tuyến, anten radio, anten rađiô, an-ten ra-đi-ô, cột tv, cột tivi, tháp tv, tháp tivi, anten tv, anten tivi, cot radio, cot ra-di-o, cot vo tuyen, thap radio, thap ra-di-o, thap vo tuyen, anten radio, anten ra-di-o, cot tv, cot vivi, thap tv, thap tivi, anten tv, anten tivi"
+            },
             "man_made/observation": {
                 "name": "Tháp Quan sát",
                 "terms": "tháp quan sát, trạm quan sát, tầng quan sát, thap quan sat, tram quan sat, tang quan sat"
+            },
+            "man_made/petroleum_well": {
+                "name": "Giếng Dầu",
+                "terms": "giếng dầu, gieng dau"
             },
             "man_made/pier": {
                 "name": "Cầu tàu",
@@ -2642,6 +2690,14 @@
             "man_made/pipeline": {
                 "name": "Đường ống",
                 "terms": "đường ống, tuyến đường ống, duong ong, tuyen duong ong"
+            },
+            "man_made/silo": {
+                "name": "Xilô",
+                "terms": "xilô, xi-lô, xi lô, xilo, xi-lo, xi lo"
+            },
+            "man_made/storage_tank": {
+                "name": "Thùng Chứa",
+                "terms": "thùng chứa, bể chứa, bình chứa, xi-téc, xi-tẹc, bể nước, thung chua, be chua, binh chua, xi-tec, be nuoc"
             },
             "man_made/survey_point": {
                 "name": "Điểm Khảo sát",
@@ -2862,6 +2918,10 @@
             "place/city": {
                 "name": "Thành phố",
                 "terms": "thành phố, TP, thành thị, đô thị, thanh pho, thanh thi, do thi"
+            },
+            "place/farm": {
+                "name": "Trại",
+                "terms": "trại,nông nghiệp,trang trại,đồn điền,trai,nong nghiep,trang trại,don dien"
             },
             "place/hamlet": {
                 "name": "Thôn",
@@ -3205,7 +3265,7 @@
             },
             "shop/furniture": {
                 "name": "Cửa hàng Nội thất",
-                "terms": "cửa hàng đồ đạc, chỗ đồ đạc, cửa hàng bán đồ đạc, tiệm bán đồ đạc, quầy bán đồ đạc, nơi bán đồ đạc, đồ gỗ, giường, bàn, ghế, đèn, cua hang do dac, cho do dac, cua hang ban do dac, tiem ban do dac, quay ban do dac, noi ban do dac, do go, giuong, ban, ghe, den"
+                "terms": "tiệm nội thất, cửa hàng đồ đạc, chỗ đồ đạc, cửa hàng bán đồ đạc, tiệm bán đồ đạc, quầy bán đồ đạc, nơi bán đồ đạc, đồ gỗ, giường, bàn, ghế, đèn, tiem noi that, cua hang do dac, cho do dac, cua hang ban do dac, tiem ban do dac, quay ban do dac, noi ban do dac, do go, giuong, ban, ghe, den"
             },
             "shop/garden_centre": {
                 "name": "Trung tâm Làm vườn",
@@ -3651,6 +3711,10 @@
                 "name": "Cống",
                 "terms": "cống, cong"
             },
+            "waterway/fuel": {
+                "name": "Trạm Đổ xăng trên Biển",
+                "terms": "trạm đổ xăng trên biển, trạm đổ xăng dành cho tàu thủy, trạm đổ xăng dành cho tàu thuỷ, tram do xang tren bien, tram do xang danh cho tau thuy"
+            },
             "waterway/river": {
                 "name": "Sông",
                 "terms": "sông, dòng sông, song, dong song"
@@ -3658,6 +3722,10 @@
             "waterway/riverbank": {
                 "name": "Bờ sông",
                 "terms": "bờ sông, bo song"
+            },
+            "waterway/sanitary_dump_station": {
+                "name": "Trạm Đổ Chất thải dành cho Tàu thủy",
+                "terms": "trạm đổ chất thải dành cho tàu thủy, trạm đổ chất thải dành cho tàu thuỷ, trạm đổ chất thải ve sinh dành cho tàu thủy, trạm đổ chất thải ve sinh dành cho tàu thuỷ, tram do chat thai danh cho tau thuy, tram do chat thai ve sinh danh cho tau thuy"
             },
             "waterway/stream": {
                 "name": "Dòng suối",

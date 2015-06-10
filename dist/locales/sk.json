@@ -254,6 +254,26 @@
         "list": "Úpravy od {users}",
         "truncated_list": "Úpravy od {users} a {count} ďalších"
     },
+    "infobox": {
+        "selected": "{n} označených",
+        "geometry": "Tvar",
+        "closed": "zatvorené",
+        "center": "Stred",
+        "perimeter": "Obvod",
+        "length": "Dĺžka",
+        "area": "Plocha",
+        "centroid": "Ťažisko",
+        "location": "Poloha",
+        "metric": "Metrické",
+        "imperial": "Imperiálne"
+    },
+    "geometry": {
+        "point": "bod",
+        "vertex": "vrchol",
+        "line": "čiara",
+        "area": "plocha",
+        "relation": "relácia"
+    },
     "geocoder": {
         "search": "Hľadaj celosvetovo...",
         "no_results_visible": "Žiadne výsledky v zobrazenej oblasti",
@@ -568,39 +588,39 @@
         "fields": {
             "access": {
                 "label": "Prístup",
+                "options": {
+                    "designated": {
+                        "description": "Povolenie vstupu je riadené dopravnými značkami alebo miestnymi zákonmi",
+                        "title": "Vyznačené"
+                    },
+                    "destination": {
+                        "description": "Vstup povolený iba dosiahnutie cieľa",
+                        "title": "Prejazd zakázaný"
+                    },
+                    "no": {
+                        "description": "Verejnosti vstup zakázaný",
+                        "title": "Zakázané"
+                    },
+                    "permissive": {
+                        "description": "Vstup povolený pokiaľ majiteľ povolenie neodvolá",
+                        "title": "Povolený"
+                    },
+                    "private": {
+                        "description": "Vstup možný iba s povolením vlastníka na individuálnom základe",
+                        "title": "Súkromné"
+                    },
+                    "yes": {
+                        "description": "Vstup povolený zo zákona",
+                        "title": "Povolené"
+                    }
+                },
                 "placeholder": "Neznámy",
                 "types": {
                     "access": "Všeobecné",
-                    "foot": "Chodci",
-                    "motor_vehicle": "Motorové vozidlá",
                     "bicycle": "Bicykle",
-                    "horse": "Kone"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Povolené",
-                        "description": "Vstup povolený zo zákona"
-                    },
-                    "no": {
-                        "title": "Zakázané",
-                        "description": "Verejnosti vstup zakázaný"
-                    },
-                    "permissive": {
-                        "title": "Povolený",
-                        "description": "Vstup povolený pokiaľ majiteľ povolenie neodvolá"
-                    },
-                    "private": {
-                        "title": "Súkromné",
-                        "description": "Vstup možný iba s povolením vlastníka na individuálnom základe"
-                    },
-                    "designated": {
-                        "title": "Vyznačené",
-                        "description": "Povolenie vstupu je riadené dopravnými značkami alebo miestnymi zákonmi"
-                    },
-                    "destination": {
-                        "title": "Prejazd zakázaný",
-                        "description": "Vstup povolený iba dosiahnutie cieľa"
-                    }
+                    "foot": "Chodci",
+                    "horse": "Kone",
+                    "motor_vehicle": "Motorové vozidlá"
                 }
             },
             "access_simple": {
@@ -613,19 +633,19 @@
             "address": {
                 "label": "Adresa",
                 "placeholders": {
+                    "city": "Mesto",
+                    "country": "Štát",
+                    "district": "Okres",
+                    "hamlet": "Osada/Samota",
                     "housename": "Meno domu",
                     "housenumber": "123",
-                    "street": "Ulica",
-                    "city": "Mesto",
-                    "postcode": "PSČ",
                     "place": "Obec",
-                    "hamlet": "Osada/Samota",
-                    "suburb": "Predmestie",
-                    "subdistrict": "Podoblasť",
-                    "district": "Okres",
+                    "postcode": "PSČ",
                     "province": "Provincia",
                     "state": "Štát",
-                    "country": "Štát"
+                    "street": "Ulica",
+                    "subdistrict": "Podoblasť",
+                    "suburb": "Predmestie"
                 }
             },
             "admin_level": {
@@ -637,9 +657,9 @@
             "aerialway/access": {
                 "label": "Prístup",
                 "options": {
+                    "both": "Obidva",
                     "entry": "Vchod",
-                    "exit": "Východ",
-                    "both": "Obidva"
+                    "exit": "Východ"
                 }
             },
             "aerialway/bubble": {
@@ -663,9 +683,9 @@
             "aerialway/summer/access": {
                 "label": "Prístup (leto)",
                 "options": {
+                    "both": "Obidva",
                     "entry": "Vchod",
-                    "exit": "Východ",
-                    "both": "Obidva"
+                    "exit": "Východ"
                 }
             },
             "aeroway": {
@@ -714,29 +734,29 @@
             "cardinal_direction": {
                 "label": "Smer",
                 "options": {
-                    "N": "Sever",
                     "E": "Východ",
-                    "S": "Juh",
-                    "W": "Západ",
-                    "NE": "Severtovýchod",
-                    "SE": "Juhovýchod",
-                    "SW": "Juhozápad",
-                    "NW": "Severozápad",
-                    "NNE": "Severo-severovýchod",
                     "ENE": "Východo-severovýchod",
                     "ESE": "Východo-juhovýchod",
+                    "N": "Sever",
+                    "NE": "Severtovýchod",
+                    "NNE": "Severo-severovýchod",
+                    "NNW": "Severo-severozápad",
+                    "NW": "Severozápad",
+                    "S": "Juh",
+                    "SE": "Juhovýchod",
                     "SSE": "Juho-juhovýchod",
                     "SSW": "Juho-juhozápad",
-                    "WSW": "Západo-juhozápad",
+                    "SW": "Juhozápad",
+                    "W": "Západ",
                     "WNW": "Západo-severozápad",
-                    "NNW": "Severo-severozápad"
+                    "WSW": "Západo-juhozápad"
                 }
             },
             "clock_direction": {
                 "label": "Smer",
                 "options": {
-                    "clockwise": "V smere hodinových ručičiek",
-                    "anticlockwise": "Proti smeru hodinových ručičiek"
+                    "anticlockwise": "Proti smeru hodinových ručičiek",
+                    "clockwise": "V smere hodinových ručičiek"
                 }
             },
             "collection_times": {
@@ -744,6 +764,9 @@
             },
             "construction": {
                 "label": "Typ"
+            },
+            "content": {
+                "label": "Obsah"
             },
             "country": {
                 "label": "štát"
@@ -780,13 +803,13 @@
             },
             "electrified": {
                 "label": "Elektrifikovaná",
-                "placeholder": "Troleje, elektrifikované koľaje...",
                 "options": {
                     "contact_line": "Troleje",
+                    "no": "Nie",
                     "rail": "Elektrifikované koľaje",
-                    "yes": "Áno (nešpecifikované)",
-                    "no": "Nie"
-                }
+                    "yes": "Áno (nešpecifikované)"
+                },
+                "placeholder": "Troleje, elektrifikované koľaje..."
             },
             "elevation": {
                 "label": "Nadmorská výška"
@@ -811,9 +834,9 @@
                 "label": "Typ",
                 "options": {
                     "pillar": "Stĺpik/Nadzemný",
+                    "pond": "Požiarna nádrž",
                     "underground": "Podzemný",
-                    "wall": "Nastenný",
-                    "pond": "Požiarna nádrž"
+                    "wall": "Nastenný"
                 }
             },
             "fixme": {
@@ -854,12 +877,12 @@
             },
             "gender": {
                 "label": "Pohlavie",
-                "placeholder": "Neznáme",
                 "options": {
-                    "male": "Muži",
                     "female": "Ženy",
+                    "male": "Muži",
                     "unisex": "Unisex"
-                }
+                },
+                "placeholder": "Neznáme"
             },
             "generator/method": {
                 "label": "Metóda"
@@ -900,8 +923,8 @@
             "incline_steps": {
                 "label": "Sklon",
                 "options": {
-                    "up": "Nahor",
-                    "down": "Nadol"
+                    "down": "Nadol",
+                    "up": "Nahor"
                 }
             },
             "information": {
@@ -910,11 +933,11 @@
             "internet_access": {
                 "label": "Prístup k Internetu",
                 "options": {
-                    "yes": "Áno",
                     "no": "Nie",
-                    "wlan": "Wifi",
+                    "terminal": "Terminál",
                     "wired": "Káblom",
-                    "terminal": "Terminál"
+                    "wlan": "Wifi",
+                    "yes": "Áno"
                 }
             },
             "lamp_type": {
@@ -933,20 +956,20 @@
             "leaf_cycle": {
                 "label": "Opadavosť",
                 "options": {
-                    "evergreen": "Neopadavý",
                     "deciduous": "Opadavý",
-                    "semi_evergreen": "Poloopadavý",
+                    "evergreen": "Neopadavý",
+                    "mixed": "Zmiešaný",
                     "semi_deciduous": "Krátkoopadavý",
-                    "mixed": "Zmiešaný"
+                    "semi_evergreen": "Poloopadavý"
                 }
             },
             "leaf_type": {
                 "label": "Typ listov",
                 "options": {
                     "broadleaved": "Širokolisté",
-                    "needleleaved": "Ihličnaté",
+                    "leafless": "Bezlisté",
                     "mixed": "Zmiešané",
-                    "leafless": "Bezlisté"
+                    "needleleaved": "Ihličnaté"
                 }
             },
             "leisure": {
@@ -974,7 +997,6 @@
             },
             "mtb/scale": {
                 "label": "Obtiažnosť pre horské bicykle",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Štrk/zhutnená pôda, bez prekážok, široké zákruty",
                     "1": "1: Miestami nespevnený povrch, malé prekážky, široké zákruty",
@@ -983,22 +1005,22 @@
                     "4": "4: Nespevnený povrch alebo balvany, nebezpečné vlásenky",
                     "5": "5: Najväčšia obtiažnosť, skalné polia, zosuvy pôdy",
                     "6": "6: Nezjazdné okrem najlepších horských bicyklistov"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "Obtiažnosť podľa IMBA",
-                "placeholder": "Lahká, stredná, ťažká...",
                 "options": {
                     "0": "Najľahšia (biely kruh)",
                     "1": "Ľahká (zelený kruh)",
                     "2": "Stredná (modrý štvorec)",
                     "3": "Ťažká (čierny kosoštvorec)",
                     "4": "Veľmi ťažká (dvojitý čierny kosoštvorec)"
-                }
+                },
+                "placeholder": "Lahká, stredná, ťažká..."
             },
             "mtb/scale/uphill": {
                 "label": "Obtiažnosť jazdy do kopca",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Priem. sklon <10%, štrk/udupaná hlina, bez prekážok",
                     "1": "1: Priem. sklon <15%, štrk/udupaná hlina, niekoľko malých objektov",
@@ -1006,7 +1028,8 @@
                     "3": "3: Priem. sklon <25%, premenlivý povrch, kamene/korene veľkosti päste",
                     "4": "4: Priem. sklon <30%, nevhodné podmienky, veľké kamene/konáre",
                     "5": "5: Veľmi strmé, bicykel sa musí tlačiť alebo preniesť"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Názov",
@@ -1027,17 +1050,17 @@
             "oneway": {
                 "label": "Jednosmerná",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Pravdepodobne nie",
-                    "yes": "Áno",
-                    "no": "Nie"
+                    "yes": "Áno"
                 }
             },
             "oneway_yes": {
                 "label": "Jednosmerná",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Pravdepodobne áno",
-                    "yes": "Áno",
-                    "no": "Nie"
+                    "yes": "Áno"
                 }
             },
             "opening_hours": {
@@ -1056,13 +1079,13 @@
             "parking": {
                 "label": "Typ",
                 "options": {
-                    "surface": "Povrch",
-                    "multi-storey": "Viacúrovňové",
-                    "underground": "Podzemné",
-                    "sheds": "Šopy",
                     "carports": "Kryté",
                     "garage_boxes": "Garáže",
-                    "lane": "Postranné"
+                    "lane": "Postranné",
+                    "multi-storey": "Viacúrovňové",
+                    "sheds": "Šopy",
+                    "surface": "Povrch",
+                    "underground": "Podzemné"
                 }
             },
             "phone": {
@@ -1071,24 +1094,24 @@
             },
             "piste/difficulty": {
                 "label": "Obtiažnosť",
-                "placeholder": "Ľahká, stredná, pokročilá...",
                 "options": {
-                    "novice": "Pre začiatočníkov (inštruktážny)",
-                    "easy": "Ľahká (zelený kruh)",
-                    "intermediate": "Stredná (modrý štvorec)",
                     "advanced": "Pokročilá (čierny kosoštvorec)",
+                    "easy": "Ľahká (zelený kruh)",
                     "expert": "Pre expertov (dvojitý čierny kosoštvorec)",
+                    "extreme": "Extrémna (potrebné horolezecké vybavenie)",
                     "freeride": "Voľný zjazd (mimo zjazdovky)",
-                    "extreme": "Extrémna (potrebné horolezecké vybavenie)"
-                }
+                    "intermediate": "Stredná (modrý štvorec)",
+                    "novice": "Pre začiatočníkov (inštruktážny)"
+                },
+                "placeholder": "Ľahká, stredná, pokročilá..."
             },
             "piste/grooming": {
                 "label": "Úprava",
                 "options": {
-                    "classic": "Klasické",
-                    "mogul": "Bubny",
                     "backcountry": "Bežky",
+                    "classic": "Klasické",
                     "classic+skating": "Klasické a korčuľovanie",
+                    "mogul": "Bubny",
                     "scooter": "Snežné skútre",
                     "skating": "Korčuľovanie"
                 }
@@ -1097,14 +1120,14 @@
                 "label": "Typ",
                 "options": {
                     "downhill": "Zjazd",
+                    "hike": "Pešie túry",
+                    "ice_skate": "Korčuľovanie",
                     "nordic": "Severské lyžovanie",
+                    "playground": "Ihrisko",
                     "skitour": "Bežkovanie do kopca",
                     "sled": "Sánky",
-                    "hike": "Pešie túry",
                     "sleigh": "Záprah",
-                    "ice_skate": "Korčuľovanie",
-                    "snow_park": "Snežný park",
-                    "playground": "Ihrisko"
+                    "snow_park": "Snežný park"
                 }
             },
             "place": {
@@ -1115,6 +1138,9 @@
             },
             "power": {
                 "label": "Typ"
+            },
+            "power_supply": {
+                "label": "Elektrický zdoj"
             },
             "railway": {
                 "label": "Typ"
@@ -1154,15 +1180,18 @@
             },
             "sac_scale": {
                 "label": "Obtiažnosť turistickej trasy",
-                "placeholder": "Horská turistika, vysokohorská turistika...",
                 "options": {
-                    "hiking": "T1: Turistika",
-                    "mountain_hiking": "T2: Horská turistika",
-                    "demanding_mountain_hiking": "T3: Náročná horská turistika",
                     "alpine_hiking": "T4: Vysokohorská  turistika",
                     "demanding_alpine_hiking": "T5: Náročná vysokohorská turistika",
-                    "difficult_alpine_hiking": "T6: Obtiažna vysokohorská turistika"
-                }
+                    "demanding_mountain_hiking": "T3: Náročná horská turistika",
+                    "difficult_alpine_hiking": "T6: Obtiažna vysokohorská turistika",
+                    "hiking": "T1: Turistika",
+                    "mountain_hiking": "T2: Horská turistika"
+                },
+                "placeholder": "Horská turistika, vysokohorská turistika..."
+            },
+            "sanitary_dump_station": {
+                "label": "Vyprázdňovanie toaliet"
             },
             "seasonal": {
                 "label": "Sezónne"
@@ -1173,26 +1202,26 @@
             "service/bicycle/chain_tool": {
                 "label": "Oprava reťaze",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Pravdepodobne nie",
-                    "yes": "Áno",
-                    "no": "Nie"
+                    "yes": "Áno"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Vzduchová pumpa",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Pravdepodobne nie",
-                    "yes": "Áno",
-                    "no": "Nie"
+                    "yes": "Áno"
                 }
             },
             "service_rail": {
                 "label": "Typ koľaje",
                 "options": {
-                    "spur": "Vlečka",
-                    "yard": "Zoraďovacia koľaj",
+                    "crossover": "Výhybka",
                     "siding": "Výhybňa",
-                    "crossover": "Výhybka"
+                    "spur": "Vlečka",
+                    "yard": "Zoraďovacia koľaj"
                 }
             },
             "shelter": {
@@ -1209,29 +1238,29 @@
             },
             "smoking": {
                 "label": "Fajčenie",
-                "placeholder": "Nie, odelene, áno...",
                 "options": {
-                    "no": "Zákaz fajčenia",
-                    "separated": "Vo fajčiarskom priestore, bez fyzického oddelenia",
+                    "dedicated": "Určený pre fajčiarov (napr. fajčiarský klub)",
                     "isolated": "Vo fajčiarskom priestore, fyzicky oddelený",
+                    "no": "Zákaz fajčenia",
                     "outside": "Vo vonkajšich priestoroch",
-                    "yes": "Povolené všade",
-                    "dedicated": "Určený pre fajčiarov (napr. fajčiarský klub)"
-                }
+                    "separated": "Vo fajčiarskom priestore, bez fyzického oddelenia",
+                    "yes": "Povolené všade"
+                },
+                "placeholder": "Nie, odelene, áno..."
             },
             "smoothness": {
                 "label": "Rovnosť vozovky",
-                "placeholder": "Malé kolieska, kolesá, off-road...",
                 "options": {
+                    "bad": "Pevné kolesá: trekový bicykel, auto, rikša",
                     "excellent": "Malé kolieska: kolieskové korčule, skateboard",
                     "good": "Tenké kolesá: závodný bicykel",
-                    "intermediate": "Kolesá: mestský bicykel, invalidný vozík, skúter",
-                    "bad": "Pevné kolesá: trekový bicykel, auto, rikša",
-                    "very_bad": "Zvýšený podvozok: ľahké off-road vozidlo",
                     "horrible": "Off-road: výkonné off-road vozidlo",
-                    "very_horrible": "Špecializovaný off-road: traktor, štvorkolka",
-                    "impassable": "Nepriechodné / Nie pre kolesové vozidlá"
-                }
+                    "impassable": "Nepriechodné / Nie pre kolesové vozidlá",
+                    "intermediate": "Kolesá: mestský bicykel, invalidný vozík, skúter",
+                    "very_bad": "Zvýšený podvozok: ľahké off-road vozidlo",
+                    "very_horrible": "Špecializovaný off-road: traktor, štvorkolka"
+                },
+                "placeholder": "Malé kolieska, kolesá, off-road..."
             },
             "social_facility_for": {
                 "label": "Služby poskytované pre",
@@ -1251,14 +1280,14 @@
             },
             "structure": {
                 "label": "Štruktúra",
-                "placeholder": "Neznáme",
                 "options": {
                     "bridge": "Most",
-                    "tunnel": "Tunel",
-                    "embankment": "Násyp",
                     "cutting": "Výkop",
-                    "ford": "Brod"
-                }
+                    "embankment": "Násyp",
+                    "ford": "Brod",
+                    "tunnel": "Tunel"
+                },
+                "placeholder": "Neznáme"
             },
             "studio_type": {
                 "label": "Typ"
@@ -1277,20 +1306,20 @@
             },
             "takeaway": {
                 "label": "Jedlo so sebou",
-                "placeholder": "Áno, Nie, Iba so sebou...",
                 "options": {
-                    "yes": "Áno",
                     "no": "Nie",
-                    "only": "Iba so sebou"
-                }
+                    "only": "Iba so sebou",
+                    "yes": "Áno"
+                },
+                "placeholder": "Áno, Nie, Iba so sebou..."
             },
             "toilets/disposal": {
                 "label": "Odstraňovanie",
                 "options": {
-                    "flush": "Splachovacie",
-                    "pitlatrine": "Latrína",
+                    "bucket": "Suché",
                     "chemical": "Chemické",
-                    "bucket": "Suché"
+                    "flush": "Splachovacie",
+                    "pitlatrine": "Latrína"
                 }
             },
             "tourism": {
@@ -1301,26 +1330,26 @@
             },
             "tracktype": {
                 "label": "Typ lesnej cesty",
-                "placeholder": "Pevná, väčšinou pevná, mäkká...",
                 "options": {
                     "grade1": "Pevná: spevnený alebo silne skompaktnený povrch",
                     "grade2": "Väčšinou pevná: štrk zmiešaný s mäkkými materiálmi",
                     "grade3": "Vyvážená zmes tvrdých a mäkkých materiálov",
                     "grade4": "Väčšinou jemná: pôda/piesok/tráva s zmiešané s tvrdým materiálom",
                     "grade5": "Mäkká: pôda/piesok/tráva"
-                }
+                },
+                "placeholder": "Pevná, väčšinou pevná, mäkká..."
             },
             "trail_visibility": {
                 "label": "Viditeľnosť trasy",
-                "placeholder": "Výborná, dobrá, zlá...",
                 "options": {
+                    "bad": "Zlá: bez značenia, chodník občas nepozorovateľný",
                     "excellent": "Výborná: jednoznačný chodník alebo časté značenie",
                     "good": "Dobrá: značenie viditeľné, občasne vyžaduje hľadanie",
-                    "intermediate": "Stredná: riedke značenie, chodník zväčša viditeľný",
-                    "bad": "Zlá: bez značenia, chodník občas nepozorovateľný",
                     "horrible": "Veľmi zlá: často bez chodníka, čiastočne vyžaduje orientačné zručnosti",
+                    "intermediate": "Stredná: riedke značenie, chodník zväčša viditeľný",
                     "no": "Nie: bez chodníka, vyžaduje výborné orientačné zručnosti"
-                }
+                },
+                "placeholder": "Výborná, dobrá, zlá..."
             },
             "trees": {
                 "label": "Stromy"
@@ -1333,6 +1362,9 @@
             },
             "water": {
                 "label": "Typ"
+            },
+            "water_point": {
+                "label": "Zdroj vody"
             },
             "waterway": {
                 "label": "Typ"
@@ -1474,6 +1506,10 @@
             "amenity/bicycle_repair_station": {
                 "name": "Stojan pre opravu bicyklov",
                 "terms": "stojan,oprava,bicykle,bicykel,reťaz,retaz,pumpa,hustilka,vzduch,koleso,kolesá,kolesa"
+            },
+            "amenity/biergarten": {
+                "name": "Záhradná piváreň",
+                "terms": "zahradna pivaren,pivnica,hostinec,krčma,krcma,vonkajšie posedenie,vonkajsie posedenie"
             },
             "amenity/boat_rental": {
                 "name": "Prenájom lodí",
@@ -1670,6 +1706,10 @@
             "amenity/restaurant": {
                 "name": "Reštaurácia",
                 "terms": "bar,kafetéria,kantýna,jedáleň,pizzeria,jedlo,rýchloobčerstvenie,fastfood,večera,reštaurácia,reštika,jedenie,kantyna,jedalen,rychloobcerstvenie,vecera,restauracia,restika"
+            },
+            "amenity/sanitary_dump_station": {
+                "name": "Vyprázdňovanie karavánových toaliet",
+                "terms": "vyprazdnovanie karavanovych toaliet"
             },
             "amenity/school": {
                 "name": "Školský areál",
@@ -2631,9 +2671,17 @@
                 "name": "Maják",
                 "terms": "majak,výstraha,vystraha"
             },
+            "man_made/mast": {
+                "name": "Telekomunikačný stožiar",
+                "terms": "telekomunikacny stoziar,stlp,veza,veža,stĺp"
+            },
             "man_made/observation": {
                 "name": "Výhliadková veža",
                 "terms": "vyhliadkova veza,veza,veža,výhliadka,vyhliadka"
+            },
+            "man_made/petroleum_well": {
+                "name": "Ropný vrt",
+                "terms": "ropny vrt,ropa"
             },
             "man_made/pier": {
                 "name": "Mólo",
@@ -2642,6 +2690,14 @@
             "man_made/pipeline": {
                 "name": "Potrubie",
                 "terms": "rúra,rura,rúry,rury,transport,vodovod,ropovod,plynovod,kanál,kanal,rozvod"
+            },
+            "man_made/silo": {
+                "name": "Silo",
+                "terms": "siláž,silaz,silazna veza,silážna veža"
+            },
+            "man_made/storage_tank": {
+                "name": "Zásobník",
+                "terms": "zasobnik,rezervoár,rezervoar,cisterna,nádrž,nadrz"
             },
             "man_made/survey_point": {
                 "name": "Triangulačný bod",
@@ -2862,6 +2918,10 @@
             "place/city": {
                 "name": "Veľkomesto",
                 "terms": "velkomesto,mesto"
+            },
+            "place/farm": {
+                "name": "Farma",
+                "terms": "farma"
             },
             "place/hamlet": {
                 "name": "Osada",
@@ -3651,6 +3711,10 @@
                 "name": "Odvodňovací kanál",
                 "terms": "odvodnovaci kanal,kanal,jarok"
             },
+            "waterway/fuel": {
+                "name": "Čerpacia stanica pre lode",
+                "terms": "cerpacia stanica pre lode,benzín,benzin,nafta,palivo"
+            },
             "waterway/river": {
                 "name": "Rieka",
                 "terms": "riečka,potok,potúčik,potocik,bystrina"
@@ -3658,6 +3722,10 @@
             "waterway/riverbank": {
                 "name": "Breh rieky",
                 "terms": "riečny breh,riecny breh,bok,strana,pobrežie,pobrezie,rieky,bok rieky,strana rieky"
+            },
+            "waterway/sanitary_dump_station": {
+                "name": "Vyprázdnovanie lodných toaliet",
+                "terms": "vyprazdnovanie lodnych toaliet"
             },
             "waterway/stream": {
                 "name": "Potok",

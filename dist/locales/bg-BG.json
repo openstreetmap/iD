@@ -209,7 +209,6 @@
     "commit": {
         "title": "Запис на промените",
         "description_placeholder": "Кратко описание на вашия принос",
-        "message_label": "Предайте съобщение",
         "upload_explanation": "Промените, които качвате ще са видими на всички карти използващи данни от OpenStreetMap.",
         "upload_explanation_with_user": "Промените, които качвате като {user} ще са видими на всички карти използващи данни от OpenStreetMap.",
         "save": "Запис",
@@ -387,55 +386,55 @@
         "fields": {
             "access": {
                 "label": "Достъп",
+                "options": {
+                    "designated": {
+                        "description": "Достъпът позволен според указателни табели или специфични местни разпоредби",
+                        "title": "По предназначение"
+                    },
+                    "destination": {
+                        "description": "Достъпът разрешен само за достигане до дестинация",
+                        "title": "До дестинация"
+                    },
+                    "no": {
+                        "description": "Забранен публичният достъп",
+                        "title": "Забранен"
+                    },
+                    "permissive": {
+                        "description": "Достъпът позволен докато собственика позволява",
+                        "title": "Частичен"
+                    },
+                    "private": {
+                        "description": "Достъпът разрешен само с позволение на собственика",
+                        "title": "Частен"
+                    },
+                    "yes": {
+                        "description": "Достъпът позволен с нормативен акт; право на преминаване",
+                        "title": "Разрешен"
+                    }
+                },
                 "placeholder": "Неизвестен",
                 "types": {
                     "access": "Публичен",
-                    "foot": "Пешеходен",
-                    "motor_vehicle": "МПС",
                     "bicycle": "Велосипеди",
-                    "horse": "Коне"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Разрешен",
-                        "description": "Достъпът позволен с нормативен акт; право на преминаване"
-                    },
-                    "no": {
-                        "title": "Забранен",
-                        "description": "Забранен публичният достъп"
-                    },
-                    "permissive": {
-                        "title": "Частичен",
-                        "description": "Достъпът позволен докато собственика позволява"
-                    },
-                    "private": {
-                        "title": "Частен",
-                        "description": "Достъпът разрешен само с позволение на собственика"
-                    },
-                    "designated": {
-                        "title": "По предназначение",
-                        "description": "Достъпът позволен според указателни табели или специфични местни разпоредби"
-                    },
-                    "destination": {
-                        "title": "До дестинация",
-                        "description": "Достъпът разрешен само за достигане до дестинация"
-                    }
+                    "foot": "Пешеходен",
+                    "horse": "Коне",
+                    "motor_vehicle": "МПС"
                 }
             },
             "address": {
                 "label": "Адрес",
                 "placeholders": {
+                    "city": "Град",
+                    "country": "Държава",
+                    "district": "Община",
                     "housename": "Къща",
                     "housenumber": "123",
-                    "street": "Улица",
-                    "city": "Град",
                     "place": "Място",
-                    "suburb": "Квартал",
-                    "subdistrict": "Землище",
-                    "district": "Община",
                     "province": "Област",
                     "state": "Икономически район NUT2",
-                    "country": "Държава"
+                    "street": "Улица",
+                    "subdistrict": "Землище",
+                    "suburb": "Квартал"
                 }
             },
             "admin_level": {
@@ -475,8 +474,8 @@
             "clock_direction": {
                 "label": "Посока",
                 "options": {
-                    "clockwise": "По часовниковата стрелка",
-                    "anticlockwise": "Обратно на часовниковата стрелка"
+                    "anticlockwise": "Обратно на часовниковата стрелка",
+                    "clockwise": "По часовниковата стрелка"
                 }
             },
             "collection_times": {
@@ -540,9 +539,9 @@
             "internet_access": {
                 "label": "Интернет достъп",
                 "options": {
-                    "wlan": "Wifi",
+                    "terminal": "Терминал",
                     "wired": "Кабелен",
-                    "terminal": "Терминал"
+                    "wlan": "Wifi"
                 }
             },
             "lamp_type": {
@@ -657,13 +656,13 @@
             },
             "structure": {
                 "label": "Структура",
-                "placeholder": "Неизвестен",
                 "options": {
                     "bridge": "Мост",
-                    "tunnel": "Тунел",
+                    "cutting": "Изкоп",
                     "embankment": "Насип",
-                    "cutting": "Изкоп"
-                }
+                    "tunnel": "Тунел"
+                },
+                "placeholder": "Неизвестен"
             },
             "supervised": {
                 "label": "Под наблюдение"

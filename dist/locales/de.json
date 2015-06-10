@@ -239,7 +239,7 @@
     "commit": {
         "title": "Änderungen speichern",
         "description_placeholder": "Eine kurze Beschreibung deiner Beiträge",
-        "message_label": "Änderungskommentar",
+        "message_label": "Änderungssatzkommentar",
         "upload_explanation": "Änderungen, die du hoch lädst, werden auf allen Karten sichtbar, die OpenStreetMap nutzen.",
         "upload_explanation_with_user": "Änderungen, die du als {user} hoch lädst, werden auf allen Karten sichtbar, die OpenStreetMap nutzen.",
         "save": "Speichern",
@@ -253,6 +253,22 @@
     "contributors": {
         "list": "Bearbeitet von {users}",
         "truncated_list": "Bearbeitet von {users} und {count} anderen"
+    },
+    "infobox": {
+        "selected": "{n} ausgewählt",
+        "geometry": "Geometrie",
+        "closed": "geschlossen",
+        "length": "Länge",
+        "area": "Fläche",
+        "location": "Standort",
+        "metric": "Metrisch"
+    },
+    "geometry": {
+        "point": "Punkt",
+        "vertex": "Vertex",
+        "line": "Linie",
+        "area": "Fläche",
+        "relation": "Relation"
     },
     "geocoder": {
         "search": "Weltweit suchen …",
@@ -568,39 +584,39 @@
         "fields": {
             "access": {
                 "label": "Zugangsberechtigung",
+                "options": {
+                    "designated": {
+                        "description": "Zugang durch Schilder oder bestimmte lokale Gesetze erlaubt",
+                        "title": "vorgesehen"
+                    },
+                    "destination": {
+                        "description": "Zugang nur erlaubt, um ein Ziel zu erreichen",
+                        "title": "Ziel"
+                    },
+                    "no": {
+                        "description": "Zugang der Allgemeinheit nicht erlaubt",
+                        "title": "Verboten"
+                    },
+                    "permissive": {
+                        "description": "Zugang solange gewährt, bis der Besitzer seine Erlaubnis zurück nimmt.",
+                        "title": "geduldet"
+                    },
+                    "private": {
+                        "description": "Zugang nur mit individueller Erlaubnis des Eigentümers",
+                        "title": "Privat"
+                    },
+                    "yes": {
+                        "description": "Zugang gesetzlich erlaubt; Wegerecht",
+                        "title": "Erlaubt"
+                    }
+                },
                 "placeholder": "Unbekannt",
                 "types": {
                     "access": "Allgemein",
-                    "foot": "zu Fuß",
-                    "motor_vehicle": "Motorfahrzeuge",
                     "bicycle": "Fahrräder",
-                    "horse": "Pferde"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Erlaubt",
-                        "description": "Zugang gesetzlich erlaubt; Wegerecht"
-                    },
-                    "no": {
-                        "title": "Verboten",
-                        "description": "Zugang der Allgemeinheit nicht erlaubt"
-                    },
-                    "permissive": {
-                        "title": "geduldet",
-                        "description": "Zugang solange gewährt, bis der Besitzer seine Erlaubnis zurück nimmt."
-                    },
-                    "private": {
-                        "title": "Privat",
-                        "description": "Zugang nur mit individueller Erlaubnis des Eigentümers"
-                    },
-                    "designated": {
-                        "title": "vorgesehen",
-                        "description": "Zugang durch Schilder oder bestimmte lokale Gesetze erlaubt"
-                    },
-                    "destination": {
-                        "title": "Ziel",
-                        "description": "Zugang nur erlaubt, um ein Ziel zu erreichen"
-                    }
+                    "foot": "zu Fuß",
+                    "horse": "Pferde",
+                    "motor_vehicle": "Motorfahrzeuge"
                 }
             },
             "access_simple": {
@@ -613,19 +629,19 @@
             "address": {
                 "label": "Adresse",
                 "placeholders": {
+                    "city": "Stadt",
+                    "country": "Staat",
+                    "district": "Kreis/Bezirk",
+                    "hamlet": "Weiler",
                     "housename": "Hausname",
                     "housenumber": "123",
-                    "street": "Straße",
-                    "city": "Stadt",
-                    "postcode": "Postleitzahl",
                     "place": "Ort",
-                    "hamlet": "Weiler",
-                    "suburb": "Stadtteil",
-                    "subdistrict": "Stadtbezirk",
-                    "district": "Kreis/Bezirk",
+                    "postcode": "Postleitzahl",
                     "province": "Regierungsbezirk",
                     "state": "Bundesland",
-                    "country": "Staat"
+                    "street": "Straße",
+                    "subdistrict": "Stadtbezirk",
+                    "suburb": "Stadtteil"
                 }
             },
             "admin_level": {
@@ -637,9 +653,9 @@
             "aerialway/access": {
                 "label": "Zugang",
                 "options": {
+                    "both": "Beide",
                     "entry": "Eingang",
-                    "exit": "Ausgang",
-                    "both": "Beide"
+                    "exit": "Ausgang"
                 }
             },
             "aerialway/bubble": {
@@ -663,9 +679,9 @@
             "aerialway/summer/access": {
                 "label": "Zugang (Sommer)",
                 "options": {
+                    "both": "Beide",
                     "entry": "Eingang",
-                    "exit": "Ausgang",
-                    "both": "Beide"
+                    "exit": "Ausgang"
                 }
             },
             "aeroway": {
@@ -714,29 +730,29 @@
             "cardinal_direction": {
                 "label": "Richtung",
                 "options": {
-                    "N": "Nord",
                     "E": "Ost",
-                    "S": "Süd",
-                    "W": "West",
-                    "NE": "Nordost",
-                    "SE": "Südost",
-                    "SW": "Südwest",
-                    "NW": "Nordwest",
-                    "NNE": "Nord-Nordost",
                     "ENE": "Ost-Nordost",
                     "ESE": "Ost-Südost",
+                    "N": "Nord",
+                    "NE": "Nordost",
+                    "NNE": "Nord-Nordost",
+                    "NNW": "Nord-Nordwest",
+                    "NW": "Nordwest",
+                    "S": "Süd",
+                    "SE": "Südost",
                     "SSE": "Süd-Südost",
                     "SSW": "Süd-Südwest",
-                    "WSW": "West-Südwest",
+                    "SW": "Südwest",
+                    "W": "West",
                     "WNW": "West-Nordwest",
-                    "NNW": "Nord-Nordwest"
+                    "WSW": "West-Südwest"
                 }
             },
             "clock_direction": {
                 "label": "Richtung",
                 "options": {
-                    "clockwise": "im Uhrzeigersinn",
-                    "anticlockwise": "gegen den Uhrzeigersinn"
+                    "anticlockwise": "gegen den Uhrzeigersinn",
+                    "clockwise": "im Uhrzeigersinn"
                 }
             },
             "collection_times": {
@@ -780,13 +796,13 @@
             },
             "electrified": {
                 "label": "Elektrifizierung",
-                "placeholder": "Fahrleitung, elektrifizierte Eisenbahn ...",
                 "options": {
                     "contact_line": "Fahrleitung",
+                    "no": "Nein",
                     "rail": "Elektrifizierte Eisenbahn",
-                    "yes": "Ja (unspezifiziert)",
-                    "no": "Nein"
-                }
+                    "yes": "Ja (unspezifiziert)"
+                },
+                "placeholder": "Fahrleitung, elektrifizierte Eisenbahn ..."
             },
             "elevation": {
                 "label": "Höhe über dem Meeresspiegel"
@@ -811,9 +827,9 @@
                 "label": "Typ",
                 "options": {
                     "pillar": "Ständer/Oberirdisch",
+                    "pond": "Teich",
                     "underground": "Unterirdisch",
-                    "wall": "Mauer",
-                    "pond": "Teich"
+                    "wall": "Mauer"
                 }
             },
             "fixme": {
@@ -854,12 +870,12 @@
             },
             "gender": {
                 "label": "Geschlecht",
-                "placeholder": "Unbekannt",
                 "options": {
-                    "male": "Männlich",
                     "female": "Weiblich",
+                    "male": "Männlich",
                     "unisex": "Geschlechtsneutral"
-                }
+                },
+                "placeholder": "Unbekannt"
             },
             "generator/method": {
                 "label": "Methode"
@@ -900,8 +916,8 @@
             "incline_steps": {
                 "label": "Steigung",
                 "options": {
-                    "up": "Hinauf",
-                    "down": "Hinunter"
+                    "down": "Hinunter",
+                    "up": "Hinauf"
                 }
             },
             "information": {
@@ -910,11 +926,11 @@
             "internet_access": {
                 "label": "Internetzugang",
                 "options": {
-                    "yes": "Ja",
                     "no": "Nein",
-                    "wlan": "Wifi",
+                    "terminal": "Terminal",
                     "wired": "kabelgebunden",
-                    "terminal": "Terminal"
+                    "wlan": "Wifi",
+                    "yes": "Ja"
                 }
             },
             "lamp_type": {
@@ -933,20 +949,20 @@
             "leaf_cycle": {
                 "label": "Blätterzyklus",
                 "options": {
-                    "evergreen": "Immergrün",
                     "deciduous": "Sommergrün",
-                    "semi_evergreen": "Halbimmergrün",
+                    "evergreen": "Immergrün",
+                    "mixed": "Gemischt",
                     "semi_deciduous": "Halbimmergrün",
-                    "mixed": "Gemischt"
+                    "semi_evergreen": "Halbimmergrün"
                 }
             },
             "leaf_type": {
                 "label": "Blatttyp",
                 "options": {
                     "broadleaved": "Breitblättrig",
-                    "needleleaved": "Nadelblätter",
+                    "leafless": "Blattlos",
                     "mixed": "Gemischt",
-                    "leafless": "Blattlos"
+                    "needleleaved": "Nadelblätter"
                 }
             },
             "leisure": {
@@ -974,7 +990,6 @@
             },
             "mtb/scale": {
                 "label": "MTB Schwierigkeitsgrad",
-                "placeholder": "0, 1, 2, 3 ...",
                 "options": {
                     "0": "0: Solider Kies/komprimierte Erde, keine Hindernisse, weite Kurven",
                     "1": "1: Teilweise lockerer Untergrund, kleine Hindernisse, weite Kurve",
@@ -983,22 +998,22 @@
                     "4": "4: Lockere Oberfläche oder Felsbrocken, gefährliche Haarnadelkurven",
                     "5": "5: Maximale Schwierigkeit, Geröllfelder, Erdrutsche",
                     "6": "6: Nicht befahrbar ausgenommen durch die allerbesten Mountain Biker"
-                }
+                },
+                "placeholder": "0, 1, 2, 3 ..."
             },
             "mtb/scale/imba": {
                 "label": "IMBA Schwierigkeitsgrad",
-                "placeholder": "Einfach, Mittel, Schwierig ...",
                 "options": {
                     "0": "Am Einfachsten (weißer Kreis)",
                     "1": "einfach (grüner Kreis)",
                     "2": "Mittel (blaues Quadrat)",
                     "3": "Schwierig (schwarze Raute)",
                     "4": "Sehr schwierig (doppelte schwarze Raute)"
-                }
+                },
+                "placeholder": "Einfach, Mittel, Schwierig ..."
             },
             "mtb/scale/uphill": {
                 "label": "Mountain Bike Bergauf-Hinderniss",
-                "placeholder": "0, 1, 2, 3 ...",
                 "options": {
                     "0": "0: Durschnittliche Steigung <10%, Kies/verdichtete Erde, keine Hindernisse",
                     "1": "1: Durchschnittliche Steigung <15%, Kies/verdichtete Erde, wenige kleine Hindernisse",
@@ -1006,7 +1021,8 @@
                     "3": "3: Durchschnittliche Steigung <25%, unterschiedliche Oberfläche, faustgroße Steine/Wurzeln",
                     "4": "4: Durchschnittliche Steigung <30%, schlechter Zustand, große Steine/Zweige",
                     "5": "5: sehr steig, Fahrrad muss generell geschoben oder getragen werden"
-                }
+                },
+                "placeholder": "0, 1, 2, 3 ..."
             },
             "name": {
                 "label": "Name",
@@ -1027,17 +1043,17 @@
             "oneway": {
                 "label": "Einbahnstraße",
                 "options": {
+                    "no": "Nein",
                     "undefined": "Vermutlich Nein",
-                    "yes": "Ja",
-                    "no": "Nein"
+                    "yes": "Ja"
                 }
             },
             "oneway_yes": {
                 "label": "Einbahnstraße",
                 "options": {
+                    "no": "Nein",
                     "undefined": "Vermutlich Ja",
-                    "yes": "Ja",
-                    "no": "Nein"
+                    "yes": "Ja"
                 }
             },
             "opening_hours": {
@@ -1056,13 +1072,13 @@
             "parking": {
                 "label": "Typ",
                 "options": {
-                    "surface": "Ebenerdig",
-                    "multi-storey": "Parkhaus",
-                    "underground": "Tiefgarage",
-                    "sheds": "Schuppen",
                     "carports": "Carport",
                     "garage_boxes": "Garagen",
-                    "lane": "Straßenrand"
+                    "lane": "Straßenrand",
+                    "multi-storey": "Parkhaus",
+                    "sheds": "Schuppen",
+                    "surface": "Ebenerdig",
+                    "underground": "Tiefgarage"
                 }
             },
             "phone": {
@@ -1071,24 +1087,24 @@
             },
             "piste/difficulty": {
                 "label": "Schwierigkeit",
-                "placeholder": "Einfach, Mittel, Fortgeschritten ...",
                 "options": {
-                    "novice": "Anfänger (Unterricht)",
-                    "easy": "Einfach (grüner Kreis)",
-                    "intermediate": "Mittel (blaues Quadrat)",
                     "advanced": "fortgeschritten (schwarze Raute)",
+                    "easy": "Einfach (grüner Kreis)",
                     "expert": "Experte (doppelte schwarze Raute)",
+                    "extreme": "Extrem (Kletterausrüstung benötigt)",
                     "freeride": "Variantenabfahrt (abseits der Piste)",
-                    "extreme": "Extrem (Kletterausrüstung benötigt)"
-                }
+                    "intermediate": "Mittel (blaues Quadrat)",
+                    "novice": "Anfänger (Unterricht)"
+                },
+                "placeholder": "Einfach, Mittel, Fortgeschritten ..."
             },
             "piste/grooming": {
                 "label": "Grooming",
                 "options": {
-                    "classic": "Klassisch",
-                    "mogul": "Buckelpiste",
                     "backcountry": "Hinterland-Skitouren",
+                    "classic": "Klassisch",
                     "classic+skating": "Klassisch oder Skating",
+                    "mogul": "Buckelpiste",
                     "scooter": "Roller/Schneemobil",
                     "skating": "Skating"
                 }
@@ -1097,14 +1113,14 @@
                 "label": "Typ",
                 "options": {
                     "downhill": "Abfahrt",
+                    "hike": "Wandern",
+                    "ice_skate": "Eislaufen",
                     "nordic": "Nordisch",
+                    "playground": "Spielplatz",
                     "skitour": "Skitour",
                     "sled": "Rodeln",
-                    "hike": "Wandern",
                     "sleigh": "Schlitten fahren",
-                    "ice_skate": "Eislaufen",
-                    "snow_park": "Snowpark",
-                    "playground": "Spielplatz"
+                    "snow_park": "Snowpark"
                 }
             },
             "place": {
@@ -1154,15 +1170,15 @@
             },
             "sac_scale": {
                 "label": "Wanderweg Klassifizierung",
-                "placeholder": "Bergwandern, Bergsteigen ...",
                 "options": {
-                    "hiking": "T1: Wandern",
-                    "mountain_hiking": "T2: Bergwandern",
-                    "demanding_mountain_hiking": "T3: Anspruchsvolles Bergwandern",
                     "alpine_hiking": "T4: Bergsteigen",
                     "demanding_alpine_hiking": "T5: Anspruchsvolles Bergsteigen",
-                    "difficult_alpine_hiking": "T6: Schwieriges Bergsteigen"
-                }
+                    "demanding_mountain_hiking": "T3: Anspruchsvolles Bergwandern",
+                    "difficult_alpine_hiking": "T6: Schwieriges Bergsteigen",
+                    "hiking": "T1: Wandern",
+                    "mountain_hiking": "T2: Bergwandern"
+                },
+                "placeholder": "Bergwandern, Bergsteigen ..."
             },
             "seasonal": {
                 "label": "Saisonal"
@@ -1173,26 +1189,26 @@
             "service/bicycle/chain_tool": {
                 "label": "Kettennietdrücker",
                 "options": {
+                    "no": "Nein",
                     "undefined": "Vermutlich Nein",
-                    "yes": "Ja",
-                    "no": "Nein"
+                    "yes": "Ja"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Luftpumpe",
                 "options": {
+                    "no": "Nein",
                     "undefined": "Vermutlich Nein",
-                    "yes": "Ja",
-                    "no": "Nein"
+                    "yes": "Ja"
                 }
             },
             "service_rail": {
                 "label": "Diensttyp",
                 "options": {
-                    "spur": "Spur",
-                    "yard": "Hof",
+                    "crossover": "Gleiskreuzung",
                     "siding": "Abstellgleis",
-                    "crossover": "Gleiskreuzung"
+                    "spur": "Spur",
+                    "yard": "Hof"
                 }
             },
             "shelter": {
@@ -1209,29 +1225,29 @@
             },
             "smoking": {
                 "label": "Rauchen",
-                "placeholder": "Nein, Getrennt, Ja ...",
                 "options": {
-                    "no": "Rauchen überall verboten",
-                    "separated": "In Raucherzonen, nicht baulich getrennt",
+                    "dedicated": "Für Raucher bestimmt (z.B.: Raucherklub)",
                     "isolated": "In Raucherzonen, baulich getrennt",
+                    "no": "Rauchen überall verboten",
                     "outside": "Im Freien erlaubt",
-                    "yes": "Überall erlaubt",
-                    "dedicated": "Für Raucher besteimmt (z.B.: Raucherklub)"
-                }
+                    "separated": "In Raucherzonen, nicht baulich getrennt",
+                    "yes": "Überall erlaubt"
+                },
+                "placeholder": "Nein, Getrennt, Ja ..."
             },
             "smoothness": {
                 "label": "Gleichmäßigkeit",
-                "placeholder": "Schmale Reifen, Räder, Off-Road ...",
                 "options": {
+                    "bad": "Robuste Räder: Trekkingrad, Auto, Rikscha",
                     "excellent": "Schmale Reifen: Rollerblade, Skateboard",
                     "good": "Schmale Reifen: Rennrad",
-                    "intermediate": "Räder: Citybike, Rollstuhl, Roller",
-                    "bad": "Robuste Räder: Trekkingrad, Auto, Rikscha",
-                    "very_bad": "Hoher Radstand: leichtes Off-Road-Fahrzeug",
                     "horrible": "Off-Road: Schweres Off-Road-Fahrzeug",
-                    "very_horrible": "Spezialisiertes Off-Road: Traktor, Quad",
-                    "impassable": "Unpassierbar / Keine Fahrzeuge mit Rädern"
-                }
+                    "impassable": "Unpassierbar / Keine Fahrzeuge mit Rädern",
+                    "intermediate": "Räder: Citybike, Rollstuhl, Roller",
+                    "very_bad": "Hoher Radstand: leichtes Off-Road-Fahrzeug",
+                    "very_horrible": "Spezialisiertes Off-Road: Traktor, Quad"
+                },
+                "placeholder": "Schmale Reifen, Räder, Off-Road ..."
             },
             "social_facility_for": {
                 "label": "Zielgruppe der Einrichtung",
@@ -1251,14 +1267,14 @@
             },
             "structure": {
                 "label": "Struktur",
-                "placeholder": "Unbekannt",
                 "options": {
                     "bridge": "Brücke",
-                    "tunnel": "Tunnel",
-                    "embankment": "Fahrdamm",
                     "cutting": "Senke",
-                    "ford": "Furt"
-                }
+                    "embankment": "Fahrdamm",
+                    "ford": "Furt",
+                    "tunnel": "Tunnel"
+                },
+                "placeholder": "Unbekannt"
             },
             "studio_type": {
                 "label": "Typ"
@@ -1277,20 +1293,20 @@
             },
             "takeaway": {
                 "label": "Takeaway",
-                "placeholder": "Ja, Nein, Nur Takeaway ...",
                 "options": {
-                    "yes": "Ja",
                     "no": "Nein",
-                    "only": "Nur Takeaway"
-                }
+                    "only": "Nur Takeaway",
+                    "yes": "Ja"
+                },
+                "placeholder": "Ja, Nein, Nur Takeaway ..."
             },
             "toilets/disposal": {
                 "label": "Toiletten-Bauart",
                 "options": {
-                    "flush": "Spülung",
-                    "pitlatrine": "Grube/Latrine",
+                    "bucket": "Eimer",
                     "chemical": "Chemisch",
-                    "bucket": "Eimer"
+                    "flush": "Spülung",
+                    "pitlatrine": "Grube/Latrine"
                 }
             },
             "tourism": {
@@ -1301,26 +1317,26 @@
             },
             "tracktype": {
                 "label": "Feld-/Waldweg-Typ",
-                "placeholder": "fest, großteils fest, weich ...",
                 "options": {
                     "grade1": "Fest: befestigt oder sehr kompakte harte Oberfläche",
                     "grade2": "Großteils Fest: Kies/Stein gemischt mit etwas weichem Material",
                     "grade3": "Gleichmäßige Mischung von harten und weichem Material",
                     "grade4": "Großteils weich: Erde/Sand/Gras gemischt mit etwas hartem Material",
                     "grade5": "Weiche: Erde/Sand/Gras"
-                }
+                },
+                "placeholder": "fest, großteils fest, weich ..."
             },
             "trail_visibility": {
                 "label": "Erkennbarkeit des Wanderweges",
-                "placeholder": "Ausgezeichnet, Gut, Schlecht ...",
                 "options": {
+                    "bad": "Schlecht: Keine Markierungen, Weg teilweise unsichtbar oder nicht vorhanden",
                     "excellent": "Ausgezeichnet: unmissverständlicher Weg oder überall Markierungen",
                     "good": "Gut: sicherbare Markierungen, müssen teilweise gesucht werden",
-                    "intermediate": "Mittelmäßig: Wenige Markierungen, Weg großteils sichtbar",
-                    "bad": "Schlecht: Keine Markierungen, Weg teilweise unsichtbar oder nicht vorhanden",
                     "horrible": "Schrecklich: oft kein Weg, teilweise Orientierungserfahrung benötigt",
+                    "intermediate": "Mittelmäßig: Wenige Markierungen, Weg großteils sichtbar",
                     "no": "Nein: Kein Weg, ausgezeichnete Orientierungserfahrung benötigt"
-                }
+                },
+                "placeholder": "Ausgezeichnet, Gut, Schlecht ..."
             },
             "trees": {
                 "label": "Bäume"
@@ -1474,6 +1490,9 @@
             "amenity/bicycle_repair_station": {
                 "name": "Fahrradreperaturstation",
                 "terms": "Fahrradreperaturstation, Fahrradreperaturbox"
+            },
+            "amenity/biergarten": {
+                "name": "Biergarten"
             },
             "amenity/boat_rental": {
                 "name": "Bootvermietung",
@@ -2635,6 +2654,10 @@
                 "name": "Aussichtsturm",
                 "terms": "Ausguck, Ausblick, Beobachtungsstand"
             },
+            "man_made/petroleum_well": {
+                "name": "Erdölpumpe",
+                "terms": "Tiefpumpe"
+            },
             "man_made/pier": {
                 "name": "Steg",
                 "terms": "Anleger, Pier"
@@ -2642,6 +2665,12 @@
             "man_made/pipeline": {
                 "name": "Pipeline",
                 "terms": "Pipeline, Rohrleitung"
+            },
+            "man_made/silo": {
+                "name": "Silo"
+            },
+            "man_made/storage_tank": {
+                "name": "Lagertank"
             },
             "man_made/survey_point": {
                 "name": "Vermessungspunkt",
@@ -2862,6 +2891,9 @@
             "place/city": {
                 "name": "Großstadt",
                 "terms": "Stadt"
+            },
+            "place/farm": {
+                "name": "Bauernhof"
             },
             "place/hamlet": {
                 "name": "Siedlung",

@@ -150,7 +150,6 @@
     "commit": {
         "title": "మార్పులను భద్రపరచు",
         "description_placeholder": "మీ మార్పులకు టూకీ వివరణ",
-        "message_label": "మార్పుని తెలిపే సందేశం",
         "upload_explanation": "మీరు ఎక్కించే మార్పులు ఓపెన్‌స్ట్రీట్‌మ్యాప్ డేటాను వాడే పటాలన్నింటిలోనూ కనిపిస్తాయి.",
         "save": "భద్రపరచు",
         "cancel": "రద్దుచేయి",
@@ -259,22 +258,22 @@
     "presets": {
         "fields": {
             "access": {
-                "types": {
-                    "access": "సాధారణం",
-                    "bicycle": "సైకిళ్ళు",
-                    "horse": "గుర్రాలు"
-                },
                 "options": {
                     "destination": {
                         "title": "గమ్యం"
                     }
+                },
+                "types": {
+                    "access": "సాధారణం",
+                    "bicycle": "సైకిళ్ళు",
+                    "horse": "గుర్రాలు"
                 }
             },
             "address": {
                 "label": "చిరునామా",
                 "placeholders": {
-                    "street": "వీధి",
-                    "city": "నగరం"
+                    "city": "నగరం",
+                    "street": "వీధి"
                 }
             },
             "aeroway": {
