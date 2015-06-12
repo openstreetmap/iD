@@ -15,16 +15,10 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
         start, end, ortho1, ortho2, segment;
 
     if (isOrthogonal) {
-        start = iD.Node({ loc: context.graph().entity(way.nodes[1]).loc }),
-        ortho1 = iD.Node({ loc: start.loc });
+        ortho1 = iD.Node({ loc: context.graph().entity(way.nodes[1]).loc });
         ortho2 = iD.Node({ loc: context.graph().entity(way.nodes[0]).loc });
-        end = iD.Node({ loc: ortho2.loc });
-        segment = iD.Way({
-            nodes: [start.id, ortho1.id, ortho2.id, end.id],
-            tags: _.clone(way.tags)
-        });
     } else {
-        start = iD.Node({ loc: context.graph().entity(way.nodes[startIndex]).loc }),
+        start = iD.Node({ loc: context.graph().entity(way.nodes[startIndex]).loc });
         end = iD.Node({ loc: mouseCoord });
         segment = iD.Way({
             nodes: isReverse ? [end.id, start.id] : [start.id, end.id],
@@ -34,11 +28,10 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     var f = context[way.isDegenerate() ? 'replace' : 'perform'];
     if (isOrthogonal) {
-        f(iD.actions.AddEntity(start),
-            iD.actions.AddEntity(ortho1),
+        f(iD.actions.AddEntity(ortho1),
             iD.actions.AddEntity(ortho2),
-            iD.actions.AddEntity(end),
-            iD.actions.AddEntity(segment));
+            iD.actions.AddVertex(wayId, ortho1.id, -1),
+            iD.actions.AddVertex(wayId, ortho2.id, -1));
     } else if (isClosed) {
         f(iD.actions.AddEntity(end),
             iD.actions.AddVertex(wayId, end.id, index));
@@ -49,6 +42,32 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     }
 
 
+    function ReplaceTemporaryNode(newNode, newNode2) {
+        return function(graph) {
+            if (isOrthogonal) {             // todo: make less hacky
+                var newWay = way
+                    .addNode(newNode.id, -1)
+                    .addNode(newNode2.id, -1);
+                return graph
+                    .replace(newWay)
+                    .remove(ortho1)
+                    .remove(ortho2);
+
+            } else if (isClosed) {
+                return graph
+                    .replace(way.addNode(newNode.id, index))
+                    .remove(end);
+
+            } else {
+                return graph
+                    .replace(graph.entity(wayId).addNode(newNode.id, index))
+                    .remove(end)
+                    .remove(segment)
+                    .remove(start);
+            }
+        };
+    }
+
     function move(targets) {
         for (var i = 0; i < targets.length; i++) {
             var entity = targets[i].entity,
@@ -56,13 +75,15 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
                 point = targets[i].point,
                 which = isOrthogonal ? [ortho1.id, ortho2.id][i] : end.id;
 
-            if (entity) {
-                if (entity.type === 'node' && entity.id !== which) {
-                    loc = entity.loc;
-                } else if (entity.type === 'way' && entity.id !== segment.id) {
-                    loc = iD.geo.chooseEdge(context.childNodes(entity), point, context.projection).loc;
-                }
-            }
+console.log('in move(), targets=' + JSON.stringify(_.pluck(targets,'point')));
+// console.log(' temp segment=' + segment.nodes);
+            // if (entity) {
+            //     if (entity.type === 'node' && entity.id !== which) {
+            //         loc = entity.loc;
+            //     } else if (entity.type === 'way' && entity.id !== segment.id) {
+            //         loc = iD.geo.chooseEdge(context.childNodes(entity), point, context.projection).loc;
+            //     }
+            // }
 
             context.replace(iD.actions.MoveNode(which, loc));
         }
@@ -75,11 +96,12 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     }
 
     function setActiveElements() {
-        var active = isClosed ? [wayId, end.id] : [segment.id, start.id, end.id];
+        var active = isOrthogonal ? [wayId, ortho1.id, ortho2.id]
+            : isClosed ? [wayId, end.id]
+            : [segment.id, start.id, end.id];
+
         context.surface().selectAll(iD.util.entitySelector(active))
             .classed('active', true);
-        // context.surface().selectAll(iD.util.entitySelector([way.id]))
-            // .classed('active', true);
     }
 
     var drawWay = function(surface) {
@@ -88,17 +110,13 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             .on('click', drawWay.add)
             .on('clickWay', drawWay.addWay)
             .on('clickNode', drawWay.addNode)
+            .on('clickTargets', drawWay.addTargets)
             .on('undo', context.undo)
             .on('cancel', drawWay.cancel)
             .on('finish', drawWay.finish);
 
-        if (mode.option === 'orthogonal') {
-            var seg = [start.loc];
-            if (way.nodes.length > 2) {
-                var next = context.entity(way.nodes[1]);
-                seg.push(next.loc);
-            }
-            draw.startSegment(seg);
+        if (isOrthogonal) {
+            draw.startSegment([ortho2.loc, ortho1.loc]);
         }
 
         context.map()
@@ -128,25 +146,26 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             .on('undone.draw', null);
     };
 
-    function ReplaceTemporaryNode(newNode) {
-        return function(graph) {
-            if (isClosed) {
-                return graph
-                    .replace(way.addNode(newNode.id, index))
-                    .remove(end);
 
-            } else {
-                return graph
-                    .replace(graph.entity(wayId).addNode(newNode.id, index))
-                    .remove(end)
-                    .remove(segment)
-                    .remove(start);
-            }
-        };
-    }
+    // For now, orthogonal mode only, assume targets.length === 2
+    // todo: make less hacky..
+    drawWay.addTargets = function(targets) {
+        var newNode1 = iD.Node({loc: targets[0].loc}),
+            newNode2 = iD.Node({loc: targets[1].loc});
+
+        context.replace(
+            iD.actions.AddEntity(newNode1),
+            iD.actions.AddEntity(newNode2),
+            ReplaceTemporaryNode(newNode1, newNode2),
+            iD.actions.ChangeTags(wayId, {building:'yes'}),  // just for show, remove later..
+            annotation);
+
+        finished = true;
+        context.enter(iD.modes.Browse(context));
+    };
 
     // Accept the current position of the temporary node and continue drawing.
-    drawWay.add = function(loc, more) {
+    drawWay.add = function(loc) {
         // prevent duplicate nodes
         var last = context.hasEntity(way.nodes[way.nodes.length - (isClosed ? 2 : 1)]);
         if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
@@ -158,14 +177,12 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             ReplaceTemporaryNode(newNode),
             annotation);
 
-        if (!more) {
-            finished = true;
-            context.enter(mode);
-        }
+        finished = true;
+        context.enter(mode);
     };
 
     // Connect the way to an existing way.
-    drawWay.addWay = function(loc, edge, more) {
+    drawWay.addWay = function(loc, edge) {
         var previousEdge = startIndex ?
             [way.nodes[startIndex], way.nodes[startIndex - 1]] :
             [way.nodes[0], way.nodes[1]];
@@ -180,15 +197,12 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             ReplaceTemporaryNode(newNode),
             annotation);
 
-        if (!more) {
-            finished = true;
-            context.enter(mode);
-        }
+        finished = true;
+        context.enter(mode);
     };
 
     // Connect the way to an existing node and continue drawing.
-    drawWay.addNode = function(node, more) {
-
+    drawWay.addNode = function(node) {
         // Avoid creating duplicate segments
         if (way.areAdjacent(node.id, way.nodes[way.nodes.length - 1])) return;
 
@@ -196,10 +210,8 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             ReplaceTemporaryNode(node),
             annotation);
 
-        if (!more) {
-            finished = true;
-            context.enter(mode);
-        }
+        finished = true;
+        context.enter(mode);
     };
 
     drawWay.finish = function() {

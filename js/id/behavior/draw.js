@@ -1,6 +1,6 @@
 iD.behavior.Draw = function(context) {
     var event = d3.dispatch('move', 'click', 'clickWay',
-            'clickNode', 'undo', 'cancel', 'finish'),
+            'clickNode', 'clickTargets', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
         hover = iD.behavior.Hover(context)
             .altDisables(true)
@@ -54,7 +54,7 @@ iD.behavior.Draw = function(context) {
                 perpVec = perpendicularVector(p0, p1, height),
                 q0 = iD.geo.roundCoords(vecAdd(p0, perpVec)),
                 q1 = iD.geo.roundCoords(vecAdd(p1, perpVec)),
-                points = [q0, q1];
+                points = [q1, q0];
 
             return _.map(points, function(p) {
                 var target = document.elementFromPoint(p[0] + surface.left, p[1] + surface.top),
@@ -131,27 +131,29 @@ iD.behavior.Draw = function(context) {
     }
 
     function click() {
-        var targets = [getTargets()[0]]; // only one target for now
+        var targets = getTargets();
 
-        for (var i = 0; i < targets.length; i++) {
-            var more = (i !== targets.length - 1),
-                d = targets[i],
-                e = d.entity;
+        if (targets.length > 1) {
+            event.clickTargets(targets);
+            return;
+        }
 
-            if (e && e.type === 'way') {
-                var choice = iD.geo.chooseEdge(context.childNodes(e), context.mouse(), context.projection),
-                    edge = [e.nodes[choice.index - 1], e.nodes[choice.index]];
-                if (needsSegment()) startSegment.push(choice.loc);
-                event.clickWay(choice.loc, edge, more);
+        var d = targets[0],
+            e = d.entity;
 
-            } else if (e && e.type === 'node') {
-                if (needsSegment()) startSegment.push(e.loc);
-                event.clickNode(e, more);
+        if (e && e.type === 'way') {
+            var choice = iD.geo.chooseEdge(context.childNodes(e), context.mouse(), context.projection),
+                edge = [e.nodes[choice.index - 1], e.nodes[choice.index]];
+            if (needsSegment()) startSegment.push(choice.loc);
+            event.clickWay(choice.loc, edge);
 
-            } else {
-                if (needsSegment()) startSegment.push(d.loc);
-                event.click(d.loc, more);
-            }
+        } else if (e && e.type === 'node') {
+            if (needsSegment()) startSegment.push(e.loc);
+            event.clickNode(e);
+
+        } else {
+            if (needsSegment()) startSegment.push(d.loc);
+            event.click(d.loc);
         }
     }
 

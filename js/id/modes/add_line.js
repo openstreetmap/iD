@@ -20,7 +20,7 @@ iD.modes.AddLine = function(context, option) {
             way = iD.Way();
 
         if (mode.option === 'orthogonal') {
-            context.perform(
+            context.replace(
                 iD.actions.AddEntity(node),
                 iD.actions.AddEntity(way),
                 iD.actions.AddVertex(way.id, node.id),
@@ -40,7 +40,7 @@ iD.modes.AddLine = function(context, option) {
             way = iD.Way();
 
         if (mode.option === 'orthogonal') {
-            context.perform(
+            context.replace(
                 iD.actions.AddEntity(node),
                 iD.actions.AddEntity(way),
                 iD.actions.AddVertex(way.id, node.id),
@@ -61,7 +61,7 @@ iD.modes.AddLine = function(context, option) {
             way = iD.Way();
 
         if (mode.option === 'orthogonal') {
-            context.perform(
+            context.replace(
                 iD.actions.AddEntity(way),
                 iD.actions.AddVertex(way.id, node.id),
                 iD.actions.AddVertex(way.id, node.id));
