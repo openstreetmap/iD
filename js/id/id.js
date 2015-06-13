@@ -264,6 +264,8 @@ window.iD = function () {
     context.pan = map.pan;
     context.zoomIn = map.zoomIn;
     context.zoomOut = map.zoomOut;
+    context.zoomInFurther = map.zoomInFurther;
+    context.zoomOutFurther = map.zoomOutFurther;
 
     context.surfaceRect = function() {
         // Work around a bug in Firefox.
