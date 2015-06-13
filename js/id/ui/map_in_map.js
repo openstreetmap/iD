@@ -3,6 +3,8 @@ iD.ui.MapInMap = function(context) {
 
     function map_in_map(selection) {
         var backgroundLayer = iD.TileLayer(),
+            gpxLayer = iD.GpxLayer(context)
+                .projection(context.projection),
             overlayLayer = iD.TileLayer(),
             projection = iD.geo.RawMercator(),
             zoom = d3.behavior.zoom()
@@ -134,7 +136,6 @@ iD.ui.MapInMap = function(context) {
                 .append('div')
                 .attr('class', 'map-in-map-tiles');
 
-
             // redraw background
             backgroundLayer
                 .source(context.background().baseLayerSource())
@@ -151,6 +152,10 @@ iD.ui.MapInMap = function(context) {
 
             background
                 .call(backgroundLayer);
+
+            // Add the gpxLayer _somewhere_ here
+            // background
+            //     .call(gpxLayer)
 
             // redraw overlay
             var overlaySources = context.background().overlayLayerSources(),
@@ -261,6 +266,19 @@ iD.ui.MapInMap = function(context) {
                 if (drawn.full === true) redraw();
             });
 
+        function toDom(x) {
+            return (new DOMParser()).parseFromString(x, 'text/xml');
+        }
+
+        var q = iD.util.stringQs(location.hash.substring(1));
+        var gpx = q.gpx;
+        if (gpx) {
+            d3.text(gpx, function(err, gpxTxt) {
+                gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
+                console.log(gpxTxt)
+                queueRedraw();
+            });
+        }
         redraw();
 
         var keybinding = d3.keybinding('map-in-map')

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<gpx xmlns="http://www.topografix.com/GPX/1/1">
+<metadata>
+  <link href="https://github.com/hotosm/osm-tasking-manager2">
+    <text>HOT Tasking Manager</text>
+  </link>
+  <time>2015-06-13T01:58:26.967102</time>
+</metadata>
+<trk>
+  <name>Task for project 1062</name>
+  <trkseg>
+      <trkpt lon="85.8361816252" lat="27.702983731"></trkpt>
+      <trkpt lon="85.8471679534" lat="27.702983731"></trkpt>
+      <trkpt lon="85.8471679534" lat="27.7127102563"></trkpt>
+      <trkpt lon="85.8361816252" lat="27.7127102563"></trkpt>
+      <trkpt lon="85.8361816252" lat="27.702983731"></trkpt>
+  </trkseg>
+</trk>
+</gpx>
