@@ -2136,8 +2136,11 @@ img.wiki-image {
     user-select: none;
 }
 
-.map-in-map-svg {
-    position: relative;
+.map-in-map-svg,
+.map-in-map-gpx {
+    position: absolute;
+    top: 0;
+    left: 0;
     overflow: hidden;
     height: 100%;
     width: 100%;

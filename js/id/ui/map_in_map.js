@@ -3,8 +3,7 @@ iD.ui.MapInMap = function(context) {
 
     function map_in_map(selection) {
         var backgroundLayer = iD.TileLayer(),
-            gpxLayer = iD.GpxLayer(context)
-                .projection(context.projection),
+            gpxLayer = iD.GpxLayer(context),
             overlayLayer = iD.TileLayer(),
             projection = iD.geo.RawMercator(),
             zoom = d3.behavior.zoom()
@@ -153,10 +152,6 @@ iD.ui.MapInMap = function(context) {
             background
                 .call(backgroundLayer);
 
-            // Add the gpxLayer _somewhere_ here
-            // background
-            //     .call(gpxLayer)
-
             // redraw overlay
             var overlaySources = context.background().overlayLayerSources(),
                 hasOverlay = false;
@@ -188,6 +183,20 @@ iD.ui.MapInMap = function(context) {
                 overlay
                     .call(overlayLayer);
             }
+
+            gpxLayer
+                .projection(projection);
+
+            var gpx = tiles
+                .selectAll('.map-in-map-gpx')
+                .data([0]);
+
+            gpx.enter()
+                .append('div')
+                .attr('class', 'map-in-map-gpx');
+
+            gpx.call(gpxLayer);
+            gpx.dimensions(dMini);
 
             // redraw bounding box
             if (!panning) {
@@ -275,7 +284,6 @@ iD.ui.MapInMap = function(context) {
         if (gpx) {
             d3.text(gpx, function(err, gpxTxt) {
                 gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
-                console.log(gpxTxt)
                 queueRedraw();
             });
         }
