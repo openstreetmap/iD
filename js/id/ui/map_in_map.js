@@ -12,7 +12,7 @@ iD.ui.MapInMap = function(context) {
             transformed = false,
             panning = false,
             zDiff = 6,    // by default, minimap renders at (main zoom - 6)
-            tStart, tLast, tCurr, kLast, kCurr, tiles, svg, timeoutId;
+            tStart, tLast, tCurr, kLast, kCurr, tiles, svg, gpx, timeoutId;
 
         function ztok(z) { return 256 * Math.pow(2, z); }
         function ktoz(k) { return Math.log(k) / Math.LN2 - 8; }
@@ -51,6 +51,7 @@ iD.ui.MapInMap = function(context) {
 
             iD.util.setTransform(tiles, tX, tY, scale);
             iD.util.setTransform(svg, 0, 0, scale);
+            iD.util.setTransform(gpx, 0, 0, scale);
             transformed = true;
 
             queueRedraw();
@@ -187,7 +188,7 @@ iD.ui.MapInMap = function(context) {
             gpxLayer
                 .projection(projection);
 
-            var gpx = tiles
+            gpx = tiles
                 .selectAll('.map-in-map-gpx')
                 .data([0]);
 
