@@ -1785,7 +1785,7 @@ img.wiki-image {
     padding-bottom: 10px;
 }
 
-.layer-list {
+.layer-list, .controls-list {
     margin-bottom: 10px;
     border: 1px solid #CCC;
     border-radius: 4px;
@@ -1833,6 +1833,22 @@ img.wiki-image {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.minimap-toggle {
+    display: block;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #7092FF;
+    border-radius: 3px;
+}
+
+.minimap-toggle.active {
+    background: #E8EBFF;
+}
+
+.minimap-toggle:hover {
+    background-color: #ececec;
 }
 
 .hide-toggle {
@@ -2138,12 +2154,20 @@ img.wiki-image {
 
 .map-in-map-svg,
 .map-in-map-gpx {
-    position: absolute;
     top: 0;
     left: 0;
     overflow: hidden;
     height: 100%;
     width: 100%;
+}
+
+.map-in-map-svg {
+    position: absolute;
+}
+
+.map-in-map-gpx {
+  position: relative;
+  /*z-index: 1;*/
 }
 
 .map-in-map-bbox {

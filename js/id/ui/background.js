@@ -252,6 +252,24 @@ iD.ui.Background = function(context) {
         var overlayList = content.append('ul')
             .attr('class', 'layer-list');
 
+        var controls = content.append('div')
+            .attr('class', 'controls-list');
+
+        var label = controls.append('label');
+
+        label.classed('minimap-toggle', true)
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() {
+                var exp = label.classed('active');
+                iD.ui.MapInMap.toggle();
+                label.classed('active', !exp);
+                d3.event.preventDefault();
+            });
+
+        label.append('span')
+            .text(t('background.toggle_minimap'));
+
         var adjustments = content.append('div')
             .attr('class', 'adjustments');
 
