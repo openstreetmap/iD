@@ -9,6 +9,7 @@ iD.Map = function(context) {
             .on('zoom', zoomPan),
         dblclickEnabled = true,
         redrawEnabled = true,
+        vertexHoverEnabled = true,
         transformStart,
         transformed = false,
         minzoom = 0,
@@ -70,14 +71,14 @@ iD.Map = function(context) {
                 mousemove = d3.event;
             })
             .on('mouseover.vertices', function() {
-                if (map.editable() && !transformed) {
+                if (vertexHoverEnabled && map.editable() && !transformed) {
                     var hover = d3.event.target.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
                     dispatch.drawn({full: false});
                 }
             })
             .on('mouseout.vertices', function() {
-                if (map.editable() && !transformed) {
+                if (vertexHoverEnabled && map.editable() && !transformed) {
                     var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
                     dispatch.drawn({full: false});
@@ -87,7 +88,6 @@ iD.Map = function(context) {
 
         supersurface
             .call(context.background());
-
 
         context.on('enter.map', function() {
             if (map.editable() && !transformed) {
@@ -279,6 +279,12 @@ iD.Map = function(context) {
     map.redrawEnable = function(_) {
         if (!arguments.length) return redrawEnabled;
         redrawEnabled = _;
+        return map;
+    };
+
+    map.vertexHoverEnable = function(_) {
+        if (!arguments.length) return vertexHoverEnabled;
+        vertexHoverEnabled = _;
         return map;
     };
 

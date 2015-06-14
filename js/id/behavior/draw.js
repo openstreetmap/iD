@@ -177,7 +177,13 @@ iD.behavior.Draw = function(context) {
     }
 
     function draw(selection) {
-        context.install(hover);
+        if (context.mode().option === 'orthogonal' && startSegment.length === 2) {
+            hover = null;
+            context.map().vertexHoverEnable(false);
+        } else {
+            context.install(hover);
+        }
+
         context.install(edit);
 
         if (!context.inIntro() && !iD.behavior.Draw.usedTails[tail.text()]) {
@@ -209,7 +215,13 @@ iD.behavior.Draw = function(context) {
 
     draw.off = function(selection) {
         context.ui().sidebar.hover.cancel();
-        context.uninstall(hover);
+
+        if (hover) {
+            context.uninstall(hover);
+        } else {
+            context.map().vertexHoverEnable(true);
+        }
+
         context.uninstall(edit);
 
         if (!context.inIntro() && !iD.behavior.Draw.usedTails[tail.text()]) {

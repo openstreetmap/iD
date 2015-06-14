@@ -167,7 +167,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             annotation);
 
         finished = true;
-        context.enter(iD.modes.Browse(context));
+        context.enter(iD.modes.Browse(context));  // just for show, replace with Select later..
     };
 
     // Accept the current position of the temporary node and continue drawing.
