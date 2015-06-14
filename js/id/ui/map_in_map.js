@@ -244,6 +244,8 @@ iD.ui.MapInMap = function(context) {
         function toggle() {
             if (d3.event) d3.event.preventDefault();
 
+            var label = d3.select('.minimap-toggle');
+
             if (hidden()) {
                 selection
                     .style('display', 'block')
@@ -251,6 +253,9 @@ iD.ui.MapInMap = function(context) {
                     .transition()
                     .duration(200)
                     .style('opacity', 1);
+
+                label.classed('active', true)
+                    .select('input').property('checked', true);
 
                 redraw();
 
@@ -264,6 +269,9 @@ iD.ui.MapInMap = function(context) {
                     .each('end', function() {
                         d3.select(this).style('display', 'none');
                     });
+
+                label.classed('active', false)
+                    .select('input').property('checked', false);
             }
         }
 

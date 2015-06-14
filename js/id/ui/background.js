@@ -261,9 +261,7 @@ iD.ui.Background = function(context) {
             .append('input')
             .attr('type', 'checkbox')
             .on('change', function() {
-                var exp = label.classed('active');
                 iD.ui.MapInMap.toggle();
-                label.classed('active', !exp);
                 d3.event.preventDefault();
             });
 
