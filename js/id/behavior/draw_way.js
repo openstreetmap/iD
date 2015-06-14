@@ -73,19 +73,19 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             var entity = targets[i].entity,
                 loc = targets[i].loc,
                 point = targets[i].point,
-                which = isOrthogonal ? [ortho1.id, ortho2.id][i] : end.id;
+                selfNode = isOrthogonal ? [ortho1.id, ortho2.id][i] : end.id,
+                selfWay = (isOrthogonal || isClosed) ? wayId : segment.id;
 
-console.log('in move(), targets=' + JSON.stringify(_.pluck(targets,'point')));
-// console.log(' temp segment=' + segment.nodes);
-            // if (entity) {
-            //     if (entity.type === 'node' && entity.id !== which) {
-            //         loc = entity.loc;
-            //     } else if (entity.type === 'way' && entity.id !== segment.id) {
-            //         loc = iD.geo.chooseEdge(context.childNodes(entity), point, context.projection).loc;
-            //     }
-            // }
+            if (entity) {    // snap to target entity unless it's self..
+                // if (isOrthogonal) debugger;
+                if (entity.type === 'node' && entity.id !== selfNode) {
+                    loc = entity.loc;
+                } else if (entity.type === 'way' && entity.id !== selfWay) {
+                    loc = iD.geo.chooseEdge(context.childNodes(entity), point, context.projection).loc;
+                }
+            }
 
-            context.replace(iD.actions.MoveNode(which, loc));
+            context.replace(iD.actions.MoveNode(selfNode, loc));
         }
     }
 
@@ -149,6 +149,13 @@ console.log('in move(), targets=' + JSON.stringify(_.pluck(targets,'point')));
 
     // For now, orthogonal mode only, assume targets.length === 2
     drawWay.addTargets = function(targets) {
+        // Avoid creating orthogonal shapes with duplicate nodes..
+        for (var i = 0; i < targets.length; i++) {
+            var t = targets[i];
+            if (!t.entity) continue;
+            if (t.entity.id === way.nodes[0] || t.entity.id === way.nodes[1]) return;
+        }
+
         var newNode1 = iD.Node({loc: targets[0].loc}),
             newNode2 = iD.Node({loc: targets[1].loc});
 
