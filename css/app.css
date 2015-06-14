@@ -2166,8 +2166,7 @@ img.wiki-image {
 }
 
 .map-in-map-gpx {
-  position: relative;
-  /*z-index: 1;*/
+    position: relative;
 }
 
 .map-in-map-bbox {
