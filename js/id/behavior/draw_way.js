@@ -27,7 +27,8 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     var f = context[way.isDegenerate() ? 'replace' : 'perform'];
     if (isOrthogonal) {
-        f(iD.actions.AddEntity(ortho1),
+        context.replace(
+            iD.actions.AddEntity(ortho1),
             iD.actions.AddEntity(ortho2),
             iD.actions.AddVertex(wayId, ortho1.id, -1),
             iD.actions.AddVertex(wayId, ortho2.id, -1));
