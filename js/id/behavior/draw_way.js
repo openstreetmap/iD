@@ -1,11 +1,10 @@
 iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     var way = context.entity(wayId),
         isClosed = way.isClosed(),
-        isDegenerate = way.isDegenerate(),
         isReverse = typeof index !== 'undefined',
         isOrthogonal = (mode.option === 'orthogonal' && way.nodes.length > 2),
         finished = false,
-        annotation = t((isDegenerate ?
+        annotation = t((way.isDegenerate() ?
             'operations.start.annotation.' :
             'operations.continue.annotation.') + context.geometry(wayId)),
         draw = iD.behavior.Draw(context);
@@ -44,7 +43,7 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
 
     function ReplaceTemporaryNode(newNode, newNode2) {
         return function(graph) {
-            if (isOrthogonal) {             // todo: make less hacky
+            if (isOrthogonal) {
                 var newWay = way
                     .addNode(newNode.id, -1)
                     .addNode(newNode2.id, -1);
@@ -148,7 +147,6 @@ console.log('in move(), targets=' + JSON.stringify(_.pluck(targets,'point')));
 
 
     // For now, orthogonal mode only, assume targets.length === 2
-    // todo: make less hacky..
     drawWay.addTargets = function(targets) {
         var newNode1 = iD.Node({loc: targets[0].loc}),
             newNode2 = iD.Node({loc: targets[1].loc});

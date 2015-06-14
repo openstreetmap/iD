@@ -52,15 +52,19 @@ iD.behavior.Draw = function(context) {
                     Math.atan2(p1[1] - p0[1], p1[0] - p0[0]),
                 height = iD.geo.euclideanDistance(p1, mousePoint) * Math.sin(theta),
                 perpVec = perpendicularVector(p0, p1, height),
-                q0 = iD.geo.roundCoords(vecAdd(p0, perpVec)),
-                q1 = iD.geo.roundCoords(vecAdd(p1, perpVec)),
+                q0 = vecAdd(p0, perpVec),
+                q1 = vecAdd(p1, perpVec),
                 points = [q1, q0];
 
             return _.map(points, function(p) {
                 var target = document.elementFromPoint(p[0] + surface.left, p[1] + surface.top),
                     data = target && target.__data__,
                     entity = data instanceof iD.Entity ? data : null;
-                return { entity: altKey ? null : entity, point: p, loc: context.projection.invert(p) };
+                return {
+                    entity: altKey ? null : entity,
+                    point: iD.geo.roundCoords(p),
+                    loc: context.projection.invert(p)
+                };
             });
 
         } else {
