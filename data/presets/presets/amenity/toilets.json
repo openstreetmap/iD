@@ -5,7 +5,8 @@
         "operator",
         "building_area",
         "access_toilets",
-        "gender"
+        "gender",
+        "fee"
     ],
     "geometry": [
         "point",

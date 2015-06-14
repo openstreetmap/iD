@@ -334,25 +334,135 @@ describe('iD.Graph', function() {
             expect(graph.replace(w1).parentWays(node)).to.eql([w1]);
         });
 
-        it("adds parentRels",  function () {
+        it("adds parentRelations",  function () {
             var node = iD.Node({id: 'n' }),
-            r1 = iD.Relation({id: 'w', members: [{id: 'n'}]}),
-            graph = iD.Graph([node]);
+                r1 = iD.Relation({id: 'r', members: [{id: 'n'}]}),
+                graph = iD.Graph([node]);
             expect(graph.replace(r1).parentRelations(node)).to.eql([r1]);
         });
 
         it("removes parentRelations",  function () {
             var node = iD.Node({id: 'n' }),
-            r1 = iD.Relation({id: 'w', members: [{id: 'n'}]}),
-            graph = iD.Graph([node, r1]);
+                r1 = iD.Relation({id: 'r', members: [{id: 'n'}]}),
+                graph = iD.Graph([node, r1]);
             expect(graph.remove(r1).parentRelations(node)).to.eql([]);
         });
 
         it("doesn't add duplicate parentRelations",  function () {
             var node = iD.Node({id: 'n' }),
-            r1 = iD.Relation({id: 'w', members: [{id: 'n'}]}),
-            graph = iD.Graph([node, r1]);
+                r1 = iD.Relation({id: 'r', members: [{id: 'n'}]}),
+                graph = iD.Graph([node, r1]);
             expect(graph.replace(r1).parentRelations(node)).to.eql([r1]);
+        });
+    });
+
+    describe("#revert", function () {
+        it("is a no-op if the head entity is identical to the base entity", function () {
+            var n1 = iD.Node({id: 'n'}),
+                graph = iD.Graph([n1]);
+            expect(graph.revert('n')).to.equal(graph);
+        });
+
+        it("returns a new graph", function () {
+            var n1 = iD.Node({id: 'n'}),
+                n2 = n1.update({}),
+                graph = iD.Graph([n1]).replace(n2);
+            expect(graph.revert('n')).not.to.equal(graph);
+        });
+
+        it("doesn't modify the receiver", function () {
+            var n1 = iD.Node({id: 'n'}),
+                n2 = n1.update({}),
+                graph = iD.Graph([n1]).replace(n2);
+            graph.revert('n');
+            expect(graph.hasEntity('n')).to.equal(n2);
+        });
+
+        it("removes a new entity", function () {
+            var n1 = iD.Node({id: 'n'}),
+                graph = iD.Graph().replace(n1);
+
+            graph = graph.revert('n');
+            expect(graph.hasEntity('n')).to.be.undefined;
+        });
+
+        it("reverts an updated entity to the base version", function () {
+            var n1 = iD.Node({id: 'n'}),
+                n2 = n1.update({}),
+                graph = iD.Graph([n1]).replace(n2);
+
+            graph = graph.revert('n');
+            expect(graph.hasEntity('n')).to.equal(n1);
+        });
+
+        it("restores a deleted entity", function () {
+            var n1 = iD.Node({id: 'n'}),
+                graph = iD.Graph([n1]).remove(n1);
+
+            graph = graph.revert('n');
+            expect(graph.hasEntity('n')).to.equal(n1);
+        });
+
+        it("removes new parentWays", function () {
+            var n1 = iD.Node({id: 'n'}),
+                w1 = iD.Way({id: 'w', nodes: ['n']}),
+                graph = iD.Graph().replace(n1).replace(w1);
+
+            graph = graph.revert('w');
+            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.parentWays(n1)).to.eql([]);
+        });
+
+        it("removes new parentRelations", function () {
+            var n1 = iD.Node({id: 'n'}),
+                r1 = iD.Relation({id: 'r', members: [{id: 'n'}]}),
+                graph = iD.Graph().replace(n1).replace(r1);
+
+            graph = graph.revert('r');
+            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.parentRelations(n1)).to.eql([]);
+        });
+
+        it("reverts updated parentWays", function () {
+            var n1 = iD.Node({id: 'n'}),
+                w1 = iD.Way({id: 'w', nodes: ['n']}),
+                w2 = w1.removeNode('n'),
+                graph = iD.Graph([n1, w1]).replace(w2);
+
+            graph = graph.revert('w');
+            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.parentWays(n1)).to.eql([w1]);
+        });
+
+        it("reverts updated parentRelations", function () {
+            var n1 = iD.Node({id: 'n'}),
+                r1 = iD.Relation({id: 'r', members: [{id: 'n'}]}),
+                r2 = r1.removeMembersWithID('n'),
+                graph = iD.Graph([n1, r1]).replace(r2);
+
+            graph = graph.revert('r');
+            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.parentRelations(n1)).to.eql([r1]);
+        });
+
+        it("restores deleted parentWays", function () {
+            var n1 = iD.Node({id: 'n'}),
+                w1 = iD.Way({id: 'w', nodes: ['n']}),
+                graph = iD.Graph([n1, w1]).remove(w1);
+
+            graph = graph.revert('w');
+            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.parentWays(n1)).to.eql([w1]);
+        });
+
+        it("restores deleted parentRelations", function () {
+            var n1 = iD.Node({id: 'n'}),
+                r1 = iD.Relation({id: 'r', members: [{id: 'n'}]}),
+                graph = iD.Graph([n1, r1]).remove(r1);
+
+            graph = graph.revert('r');
+            expect(graph.hasEntity('n')).to.equal(n1);
+            expect(graph.parentRelations(n1)).to.eql([r1]);
         });
     });
 

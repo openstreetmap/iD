@@ -1,19 +1,46 @@
 # See the README for installation instructions.
 
 all: \
+	$(MAKI_TARGETS) \
+	$(BUILDJS_TARGETS) \
 	dist/iD.css \
 	dist/iD.js \
 	dist/iD.min.js \
-	dist/presets.js \
-	dist/imagery.js \
 	dist/img/line-presets.png \
 	dist/img/relation-presets.png
 
-DATA_FILES = $(shell find data -type f -name '*.json' -o -name '*.md')
-data/data.js: $(DATA_FILES) dist/locales/en.json dist/img/maki-sprite.png
-	node build.js
+MAKI_TARGETS = \
+	css/feature-icons.css \
+	data/feature-icons.json
 
-dist/locales/en.json: data/core.yaml data/presets.yaml
+MAKI_SOURCES = \
+	data/line-icons.json \
+	data/relation-icons.json \
+	node_modules/maki/www/maki-sprite.json \
+	dist/img/maki-sprite.png
+
+$(MAKI_TARGETS): $(MAKI_SOURCES) data/maki_sprite.js
+	node data/maki_sprite.js
+
+dist/img/maki-sprite.png: ./node_modules/maki/www/images/maki-sprite.png
+	cp $< $@
+
+BUILDJS_TARGETS = \
+	data/presets/categories.json \
+	data/presets/fields.json \
+	data/presets/presets.json \
+	data/presets.yaml \
+	data/taginfo.json \
+	data/data.js \
+	dist/locales/en.js \
+	dist/presets.js \
+	dist/imagery.js
+
+BUILDJS_SOURCES = \
+	$(filter-out $(BUILDJS_TARGETS), $(shell find data -type f -name '*.json')) \
+	data/core.yaml
+
+$(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 	node build.js
 
 dist/iD.js: \
@@ -77,14 +104,14 @@ dist/iD.min.js: dist/iD.js Makefile
 	@rm -f $@
 	node_modules/.bin/uglifyjs $< -c -m -o $@
 
-dist/iD.css: css/*.css
+dist/iD.css: $(MAKI_TARGETS) css/*.css
 	cat css/reset.css css/map.css css/app.css css/feature-icons.css > $@
 
 node_modules/.install: package.json
 	npm install && touch node_modules/.install
 
 clean:
-	rm -f dist/iD*.js dist/iD.css
+	rm -f $(MAKI_TARGETS) $(BUILDJS_TARGETS) dist/iD*.js dist/iD.css
 
 translations:
 	node data/update_locales
@@ -104,10 +131,6 @@ dist/img/line-presets.png: svg/line-presets.svg
 dist/img/relation-presets.png: svg/relation-presets.svg
 	if [ `which inkscape` ]; then $(SPRITE) --export-png=$@ $<; else echo "Inkscape is not installed"; fi;
 
-dist/img/maki-sprite.png: ./node_modules/maki/www/images/maki-sprite.png
-	cp $< $@
-	node data/maki_sprite
-
 D3_FILES = \
 	node_modules/d3/src/start.js \
 	node_modules/d3/src/arrays/index.js \
@@ -115,6 +138,7 @@ D3_FILES = \
 	node_modules/d3/src/behavior/zoom.js \
 	node_modules/d3/src/core/index.js \
 	node_modules/d3/src/event/index.js \
+	node_modules/d3/src/geo/length.js \
 	node_modules/d3/src/geo/mercator.js \
 	node_modules/d3/src/geo/path.js \
 	node_modules/d3/src/geo/stream.js \
@@ -129,5 +153,5 @@ js/lib/d3.v3.js: $(D3_FILES)
 	node_modules/.bin/smash $(D3_FILES) > $@
 	@echo 'd3 rebuilt. Please reapply 7e2485d, 4da529f, and 223974d'
 
-js/lib/lodash.js:
-	node_modules/.bin/lodash --debug --output $@ include="any,assign,bind,clone,compact,contains,debounce,difference,each,every,extend,filter,find,first,forEach,groupBy,indexOf,intersection,isEmpty,isEqual,isFunction,keys,last,map,omit,pairs,pluck,reject,some,throttle,union,uniq,unique,values,without,flatten,value,chain,cloneDeep,merge,pick,reduce" exports="global,node"
+js/lib/lodash.js: Makefile
+	node_modules/.bin/lodash --development --output $@ include="any,assign,bind,chunk,clone,compact,contains,debounce,difference,each,every,extend,filter,find,first,forEach,forOwn,groupBy,indexOf,intersection,isEmpty,isEqual,isFunction,keys,last,map,omit,pairs,pluck,reject,some,throttle,union,uniq,unique,values,without,flatten,value,chain,cloneDeep,merge,pick,reduce" exports="global,node"

@@ -110,6 +110,7 @@
                 "multiple": "Tagit bort {n} objekt."
             },
             "incomplete_relation": "Detta objekt kan inte raderas, då det inte är komplett hämtad.",
+            "part_of_relation": "Detta objekt kan inte raderas då det är del i en större relation. Du måste ta bort det från relationen först. ",
             "connected_to_hidden": "Detta kan inte tas bort då det är kopplat till ett dolt objekt."
         },
         "add_member": {
@@ -238,7 +239,7 @@
     "commit": {
         "title": "Spara ändringar",
         "description_placeholder": "Kort beskrivning av dina ändringar",
-        "message_label": "Skicka meddelande",
+        "message_label": "Ändringskommentar",
         "upload_explanation": "De redigeringar du bidrar med kommer att synas på alla kartor som använder OpenStreetMaps data.",
         "upload_explanation_with_user": "De redigeringar du bidrar med som {user} kommer att synas på alla kartor som använder OpenStreetMaps data.",
         "save": "Spara",
@@ -252,6 +253,26 @@
     "contributors": {
         "list": "Ändrad av {users}",
         "truncated_list": "Ändrad av {users} och {count} andra"
+    },
+    "infobox": {
+        "selected": "{n} vald(a)",
+        "geometry": "Geometri",
+        "closed": "sluten",
+        "center": "Centrum",
+        "perimeter": "Omkrets",
+        "length": "Längd",
+        "area": "Area",
+        "centroid": "Centrumpunkt",
+        "location": "Positionering",
+        "metric": "Metriskt",
+        "imperial": "Brittiskt"
+    },
+    "geometry": {
+        "point": "Punkt",
+        "vertex": "Hörn",
+        "line": "Linje",
+        "area": "area",
+        "relation": "relation"
     },
     "geocoder": {
         "search": "Sök hela världen...",
@@ -387,9 +408,32 @@
         "help": "Spara ändringar till OpenStreetMap så att andra användare kan se dem.",
         "no_changes": "Inga ändringar att spara.",
         "error": "Något gick fel vid sparandet",
+        "status_code": "Server returnerade statuskoden {code}",
         "unknown_error_details": "Kontrollera att du är ansluten till Internet.",
         "uploading": "Dina ändringar sparas nu till OpenStreetMap.",
-        "unsaved_changes": "Du har icke-sparade ändringar."
+        "unsaved_changes": "Du har icke-sparade ändringar.",
+        "conflict": {
+            "header": "Lös motstridiga ändringar",
+            "count": "Konflikt {num} av {total}",
+            "previous": "< Föregående",
+            "next": "Nästa >",
+            "keep_local": "Behåll min",
+            "keep_remote": "Använd deras",
+            "restore": "Återställ",
+            "delete": "Låt vara borttagen",
+            "download_changes": "Eller ladda ner dina ändringar.",
+            "done": "Alla konflikter lösta!",
+            "help": "En annan användare har ändrat på samma objekt som du har ändrat.\nKlicka på vardera objekt nedan för ytterligare detaljer om respektive konflikt, och välj om dina eller\nden andra användarens ändringar ska behållas.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "Detta objekt har tagits bort av {user}.",
+            "location": "Detta objekt har flyttats av både dig och {user}.",
+            "nodelist": "Nod har ändrats av både dig och {user}.",
+            "memberlist": "Relationsmedlem har ändrats av både dig och {user}.",
+            "tags": "Du ändrade taggen <b>{tag}</b> till \"{local}\" och {user} ändrade den till \"{remote}\"."
+        }
     },
     "success": {
         "edited_osm": "Redigerat OSM!",
@@ -401,7 +445,8 @@
         "help_html": "Dina ändringar bör synas på \"Standard\"-lagret innom några minuter. Andra lager, och vissa egenskaper kan ta längre tid. \n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detaljer</a>).\n"
     },
     "confirm": {
-        "okay": "Ok"
+        "okay": "Ok",
+        "cancel": "Avbryt"
     },
     "splash": {
         "welcome": "Välkommen till iD OpenStreetMap-redigeraren",
@@ -448,7 +493,7 @@
     },
     "help": {
         "title": "Hjälp",
-        "help": "# Hjälp\n\nDetta är en redigerare för [OpenStreetMap](http://www.openstreetmap.org/), den\nfri och redigerbara världskartan. Du kan använda den för att lägga till och uppdatera\ndata i ditt närområde, allt för att ytterligare förbättra en världskarta för alla baserad på öppen källkod och data.\n\nÄndringar du gör i den här kartan kommer att visas för alla som använder\nOpenStreetMap. För att göra en ändring behöver du ett\n[gratis OpenStreetMap-konto](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) är ett samarbetsprojekt med [källkodkod \ntillgänglig på GitHub](https://github.com/openstreetmap/iD).\n",
+        "help": "# Hjälp\n\nDetta är en redigerare för [OpenStreetMap](http://www.openstreetmap.org/), \nen gratis och redigerbar karta över världen. Du kan använda den för att lägga till och ändra \ndata i ditt område, allt för att göra en världsomspännande karta baserad på \nöppen källkod och öppen data bättre för alla.\n\nRedigeringar du gör på kartan kommer att visas för alla som använder \nOpenStreetMap. För att göra en redigering måste du\n[log in](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) är ett gemensammt projekt med [källkod \ntillgänglig på GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Redigera & spara\n\nDenna redigerare är designad att främst fungera online, och du använder den via en webbsida just nu.\n\n### Välj objekt\n\nFör att välja ett kartobjekt, t.ex. en väg eller en punkt, klicka på den på kartan. Detta kommer att markera det valda objektet, öppna en panel med detaljer om det, och visa en meny med saker du kan göra med det.\n\nFör att välja flera objekt, håll ner Skift-tangenten. Klicka sedan på objekten du vill välja eller dra på kartan för att rita en rektangel. Detta kommer att rita en ruta och markera punkterna inuti den.\n\n### Spara redigeringar\n\nNär du gör ändringar som att ändra på en väg, byggnad eller plats är detta sparat lokalt fram tills att du spara det på servern. Oroa dig inte om du gör ett misstag, du kan alltid ångra en ändring genom att klicka på Ånga-knappen och göra om din förändring genom att klicka på Gör om-knappen.\n\nKlicka på Spara för att slutföra en grupp att förändringar, t.ex. om du fullfört ett område i en stad och vill börja ändra i ett annat område. Du får möjlighet att granska vad du gjort och redigeraren ger dig hjälpsamma förslag och varningar om någon ändring inte verka korrekt.\n\nOm allt ser bra ut kan du ange en kort kommentar som förklarar vad du gjort och sedan klicka på Spara igen för att skicka iväg ändringarna till [OpenStreetMap.org](http://www.openstreetmap.org/) där de blir synliga för alla andra användare och tillgängliga för andra att bygga sina förbättringar på.\n\nOm du inte kan slutföra din ändring på en gång kan du lämna redigeringsfönstret öppet och komma tillbaka (i samma webbläsare på samma dator) och redigeringsprogrammet kommer att ge dig möjlighet att återställa ditt arbete.\n",
         "roads": "# Vägar\n\nDu kan skapa, fixa och ta bort vägar med denna redigerare. Vägar kan vara alla typer av: stigar, bilvägar, spår, cykelvägar m.m - alla välanvända segment ska mappas.\n\n### Markering\n\nKlicka på en väg för att välja den. En markering blir då synlig tillsammans med en liten verktygsmeny på kartan och ett sidofällt visar mer information om vägen.\n\n### Modifiering\n\nOfta ser du vägar som inte är justerade till bakgrundsbilden eller till ett GPS-spår. Du kan justera dessa vägar så att de är på korrekt plats.\n\nKlicka först på vägen du vill ändra. Detta kommer att markera den och visa kontrollpunkt längst den som du kan dra i för att justera den. Om du vill lägga till en ny kontrollpunkt för högre detaljrikedom, dubbelklicka på en del av vägen utan en punkt så kommer en kontrollpunkt läggas till.\n\nOm vägen är ansluten till en annan väg, men är inte det på kartan, kan du dra en av dess kontrollpunkt till den andra vägen för att koppla dem tillsammans. Att vägarna är kopplade till varandra är viktigt för kartan och avgörande för att kunna ge korrekta körinstruktioner.\n\nDu kan också klicka på verktyget 'Flytta' eller trycka på tangenten 'M' på tangentbordet för att flytta en hel väg på en gång, och sedan klicka igen för att spara flytten.\n\n### Borttagning\n\nOm hela vägen är helt fel - du kan se att den inte existerar på satellitbilderna och har helst bekräftat i verkligheten att den inte finns - kan du ta bort den, vilket tar bort den från kartan. Var försiktigt när du ta bort objekt - precis som vi all redigering kan alla se resultatet och satellitbilderna är oftast gamla, så vägen kan helt enkelt vara nybyggd.\n\nDu kan ta bort en väg genom att klicka på den för att markera den och sedan klicka på ikonen soptunna eller klicka på knappen 'Delete' på tangentbordet.\n\n### Skapa\n\nHittat någonstans att det borde finnas en väg där de inte finns en? Klicka på ikonen 'Linje'  högst upp till vänster i redigeringsfönstret eller klicka på knappen '2' på tangentbordet för att börja rita en linje.\n\nKlicka på början av vägen på kartan för att påbörja ritningen. Om vägen viker av från en existerande väg, starta genom att klicka där de ansluter till varandra. \n\nKlicka sedan på punkter längst vägen så att den följer vägens sträckning enligt satellitbilder eller GPS-spår. Om vägen du ritar korsar en annan väg, anslut dem tillsammans genom att klicka där de korsar. När du är klar med att rita in vägen, dubbelklicka eller tryck 'Enter' på tangentbordet.\n",
         "gps": "# GPS\n\nGPS-data är den mest tillförlitliga källan för data till OpenStreetMap. Denna redigeraren stöder lokala spår - .gpx-filer på din lokala dator. Du kan samla in denna typ av GPS-spår med ett antal olika appar till din smartphone eller en GPS-enhet.\n\nFör information om du du gör en GPS-uppmätning, läs [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nFör att använda ett GPX-spår för att kartlägga, dra och släpp GPX-filen på kartredigeraren. Om det accepteras kommer det att läggas till på kartan som en ljuslila linje. Klicka på menyn Kartdata till höger för att aktivera, avaktivera eller zooma in till detta nya GPX-skapade lager.\n\nGPX-spåret laddas inte direkt upp till OpenStreetMap - bästa sätet att använda det är att rita på kartan och använda det som en guide för att lägga till ny information, men också för att [ladda upp det till OpenStreetMap] (http://www.openstreetmap.org/trace/create) så att andra kan använda det. \n",
@@ -543,39 +588,39 @@
         "fields": {
             "access": {
                 "label": "Tillgång",
+                "options": {
+                    "designated": {
+                        "description": "Åtkomst tillåten enligt skyltar eller specifika lokala lagar",
+                        "title": "Föredragen"
+                    },
+                    "destination": {
+                        "description": "Åtkomst tillåten endast för att nå en destination",
+                        "title": "Destination"
+                    },
+                    "no": {
+                        "description": "Tillträde ej tillåten för allmänheten",
+                        "title": "Förbjudet"
+                    },
+                    "permissive": {
+                        "description": "Tillträde tillåten fram till dess ägare återkallar tillståndet",
+                        "title": "Påbjuden"
+                    },
+                    "private": {
+                        "description": "Tillträde tillåten endast med tillstånd av ägaren på individuell basis",
+                        "title": "Privat"
+                    },
+                    "yes": {
+                        "description": "Tillträde är tillåtet enligt lag",
+                        "title": "Tillåtna"
+                    }
+                },
                 "placeholder": "Okänt",
                 "types": {
                     "access": "Generell",
-                    "foot": "Fotgängare",
-                    "motor_vehicle": "Motorfordon",
                     "bicycle": "Cyklar",
-                    "horse": "Hästar"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Tillåtna",
-                        "description": "Tillträde är tillåtet enligt lag"
-                    },
-                    "no": {
-                        "title": "Förbjudet",
-                        "description": "Tillträde ej tillåten för allmänheten"
-                    },
-                    "permissive": {
-                        "title": "Påbjuden",
-                        "description": "Tillträde tillåten fram till dess ägare återkallar tillståndet"
-                    },
-                    "private": {
-                        "title": "Privat",
-                        "description": "Tillträde tillåten endast med tillstånd av ägaren på individuell basis"
-                    },
-                    "designated": {
-                        "title": "Föredragen",
-                        "description": "Åtkomst tillåten enligt skyltar eller specifika lokala lagar"
-                    },
-                    "destination": {
-                        "title": "Destination",
-                        "description": "Åtkomst tillåten endast för att nå en destination"
-                    }
+                    "foot": "Fotgängare",
+                    "horse": "Hästar",
+                    "motor_vehicle": "Motorfordon"
                 }
             },
             "access_simple": {
@@ -588,19 +633,19 @@
             "address": {
                 "label": "Adress",
                 "placeholders": {
+                    "city": "Stad",
+                    "country": "Land",
+                    "district": "Distrikt",
+                    "hamlet": "Småort",
                     "housename": "Husnamn",
                     "housenumber": "123",
-                    "street": "Gata",
-                    "city": "Stad",
-                    "postcode": "Postnummer",
                     "place": "Plats",
-                    "hamlet": "Småort",
-                    "suburb": "Stadsdel",
-                    "subdistrict": "Deldistrikt",
-                    "district": "Distrikt",
+                    "postcode": "Postnummer",
                     "province": "Provins",
                     "state": "Stat",
-                    "country": "Land"
+                    "street": "Gata",
+                    "subdistrict": "Deldistrikt",
+                    "suburb": "Stadsdel"
                 }
             },
             "admin_level": {
@@ -612,9 +657,9 @@
             "aerialway/access": {
                 "label": "Tillgång",
                 "options": {
+                    "both": "Båda",
                     "entry": "Ingång",
-                    "exit": "Utgång",
-                    "both": "Båda"
+                    "exit": "Utgång"
                 }
             },
             "aerialway/bubble": {
@@ -638,9 +683,9 @@
             "aerialway/summer/access": {
                 "label": "Tillgång (sommar)",
                 "options": {
+                    "both": "Båda",
                     "entry": "Ingång",
-                    "exit": "Utgång",
-                    "both": "Båda"
+                    "exit": "Utgång"
                 }
             },
             "aeroway": {
@@ -689,29 +734,29 @@
             "cardinal_direction": {
                 "label": "Riktning",
                 "options": {
-                    "N": "Norr",
                     "E": "Öster",
-                    "S": "Söder",
-                    "W": "Väster",
-                    "NE": "Nordost",
-                    "SE": "Sydost",
-                    "SW": "Sydväst",
-                    "NW": "Nordväst",
-                    "NNE": "Nordnordost",
                     "ENE": "Ostnordost",
                     "ESE": "Ostsydost",
+                    "N": "Norr",
+                    "NE": "Nordost",
+                    "NNE": "Nordnordost",
+                    "NNW": "Nordnordväst",
+                    "NW": "Nordväst",
+                    "S": "Söder",
+                    "SE": "Sydost",
                     "SSE": "Sydsydost",
                     "SSW": "Sydsydväst",
-                    "WSW": "Västsydväst",
+                    "SW": "Sydväst",
+                    "W": "Väster",
                     "WNW": "Västnordväst",
-                    "NNW": "Nordnordväst"
+                    "WSW": "Västsydväst"
                 }
             },
             "clock_direction": {
                 "label": "Riktning",
                 "options": {
-                    "clockwise": "Medsols",
-                    "anticlockwise": "Motsols"
+                    "anticlockwise": "Motsols",
+                    "clockwise": "Medsols"
                 }
             },
             "collection_times": {
@@ -719,6 +764,9 @@
             },
             "construction": {
                 "label": "Typ"
+            },
+            "content": {
+                "label": "Innehåll"
             },
             "country": {
                 "label": "Land"
@@ -750,15 +798,18 @@
             "description": {
                 "label": "Beskrivning"
             },
+            "drive_through": {
+                "label": "Genomkörning (Drive-through)"
+            },
             "electrified": {
                 "label": "Elförsörjning",
-                "placeholder": "Kontaktledning, elektrifierad räls...",
                 "options": {
                     "contact_line": "Kontaktledning",
+                    "no": "Nej",
                     "rail": "Elektrifierad räls",
-                    "yes": "Ja (ospecificerad)",
-                    "no": "Nej"
-                }
+                    "yes": "Ja (ospecificerad)"
+                },
+                "placeholder": "Kontaktledning, elektrifierad räls..."
             },
             "elevation": {
                 "label": "Höjd"
@@ -783,9 +834,9 @@
                 "label": "Typ",
                 "options": {
                     "pillar": "Stolpe/Ovan jord",
+                    "pond": "Damm",
                     "underground": "Underjordisk",
-                    "wall": "Vägg",
-                    "pond": "Damm"
+                    "wall": "Vägg"
                 }
             },
             "fixme": {
@@ -826,12 +877,12 @@
             },
             "gender": {
                 "label": "Kön",
-                "placeholder": "Okänt",
                 "options": {
-                    "male": "Man",
                     "female": "Kvinna",
+                    "male": "Man",
                     "unisex": "Unisex"
-                }
+                },
+                "placeholder": "Okänt"
             },
             "generator/method": {
                 "label": "Metod"
@@ -869,17 +920,24 @@
             "incline": {
                 "label": "Lutning"
             },
+            "incline_steps": {
+                "label": "Lutning",
+                "options": {
+                    "down": "Ner",
+                    "up": "Upp"
+                }
+            },
             "information": {
                 "label": "Typ"
             },
             "internet_access": {
                 "label": "Internetaccess",
                 "options": {
-                    "yes": "Ja",
                     "no": "Nej",
-                    "wlan": "Wifi",
+                    "terminal": "Terminal",
                     "wired": "Trådbunden",
-                    "terminal": "Terminal"
+                    "wlan": "Wifi",
+                    "yes": "Ja"
                 }
             },
             "lamp_type": {
@@ -898,20 +956,20 @@
             "leaf_cycle": {
                 "label": "Lövcykel",
                 "options": {
-                    "evergreen": "Vintergröna",
                     "deciduous": "Lövfällande",
-                    "semi_evergreen": "Delvist vintergröna",
+                    "evergreen": "Vintergröna",
+                    "mixed": "Mixat",
                     "semi_deciduous": "Delvist lövfällande",
-                    "mixed": "Mixat"
+                    "semi_evergreen": "Delvist vintergröna"
                 }
             },
             "leaf_type": {
                 "label": "Lövtyp",
                 "options": {
                     "broadleaved": "Löv",
-                    "needleleaved": "Barr",
+                    "leafless": "Utan löv",
                     "mixed": "Blandat",
-                    "leafless": "Utan löv"
+                    "needleleaved": "Barr"
                 }
             },
             "leisure": {
@@ -939,7 +997,6 @@
             },
             "mtb/scale": {
                 "label": "Mountainbike-svårighet",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Fast grus/packad jord, inga hinder, breda kurvor",
                     "1": "1: Delvis löst underlag, små hinder, breda kurvor",
@@ -948,22 +1005,22 @@
                     "4": "4: löst underlag eller stenblock, farliga hårnålar",
                     "5": "5: Maximal svårighet, blockfält, jordskred",
                     "6": "6: Inte körbar förutom för de allra bästa mountainbikecyklisterna"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "Svårighetsgrad enligt IMBA",
-                "placeholder": "Enkel, medel, svår...",
                 "options": {
                     "0": "Enklast (vita cirkel)",
                     "1": "Enkel (gröna cirkel)",
                     "2": "Medium (blå fyrkant)",
                     "3": "Svår (svart diamant)",
                     "4": "Extremt svårt (dubbel svart diamant)"
-                }
+                },
+                "placeholder": "Enkel, medel, svår..."
             },
             "mtb/scale/uphill": {
                 "label": "Mountainbike svårighetsgrad uppför",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Genomsnittlig lutning <10%, grus/packad jord, inga hinder",
                     "1": "1: Genomsnittlig lutning <15%, grus/packad jord, få små hinder",
@@ -971,7 +1028,8 @@
                     "3": "3: Genomsnittlig lutning <25%, varierande underlag, stena/grenar stora som en knytnäve",
                     "4": "4: Genomsnittlig lutning <30%, dåliga förutsättningar, stora stena/grenar",
                     "5": "5: Mycket brant, cykel måste i regel skjutas eller bäras"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Namn",
@@ -992,17 +1050,17 @@
             "oneway": {
                 "label": "Enkelriktat",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Förväntas vara Nej",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
                 }
             },
             "oneway_yes": {
                 "label": "Enkelriktat",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Förväntas vara Ja",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
                 }
             },
             "opening_hours": {
@@ -1021,13 +1079,13 @@
             "parking": {
                 "label": "Typ",
                 "options": {
-                    "surface": "Yta",
-                    "multi-storey": "Flera våningar",
-                    "underground": "Underjordisk",
-                    "sheds": "Skjul",
                     "carports": "Carportar",
                     "garage_boxes": "Garageboxar",
-                    "lane": "Fickparkering"
+                    "lane": "Fickparkering",
+                    "multi-storey": "Flera våningar",
+                    "sheds": "Skjul",
+                    "surface": "Yta",
+                    "underground": "Underjordisk"
                 }
             },
             "phone": {
@@ -1036,24 +1094,24 @@
             },
             "piste/difficulty": {
                 "label": "Svårighetsgrad",
-                "placeholder": "Lätt, Medel, Avancerad...",
                 "options": {
-                    "novice": "Nybörjare (undervisning)",
-                    "easy": "Enkel (grön cirkel)",
-                    "intermediate": "Medel (blå fyrkant)",
                     "advanced": "Avancerad (svart diamant)",
+                    "easy": "Enkel (grön cirkel)",
                     "expert": "Expert (dubbel svart diamant)",
+                    "extreme": "Extrem (klättringsutrustning krävs)",
                     "freeride": "Friåkning (offpist)",
-                    "extreme": "Extrem (klättringsutrustning krävs)"
-                }
+                    "intermediate": "Medel (blå fyrkant)",
+                    "novice": "Nybörjare (undervisning)"
+                },
+                "placeholder": "Lätt, Medel, Avancerad..."
             },
             "piste/grooming": {
                 "label": "Stil",
                 "options": {
-                    "classic": "Klassisk",
-                    "mogul": "Puckelpist",
                     "backcountry": "Off-pist",
+                    "classic": "Klassisk",
                     "classic+skating": "Klassisk och skating",
+                    "mogul": "Puckelpist",
                     "scooter": "Scooter/Snöskoter",
                     "skating": "Skating"
                 }
@@ -1062,14 +1120,14 @@
                 "label": "Typ",
                 "options": {
                     "downhill": "Utförsåkning",
+                    "hike": "Vandringsled",
+                    "ice_skate": "Skridskoåkning",
                     "nordic": "Längdskidåkning",
+                    "playground": "Lekplats",
                     "skitour": "Turåkning",
                     "sled": "Pulkabacke",
-                    "hike": "Vandringsled",
                     "sleigh": "Slädåkning ",
-                    "ice_skate": "Skridskoåkning",
-                    "snow_park": "Snöpark",
-                    "playground": "Lekplats"
+                    "snow_park": "Snöpark"
                 }
             },
             "place": {
@@ -1080,6 +1138,9 @@
             },
             "power": {
                 "label": "Typ"
+            },
+            "power_supply": {
+                "label": "Strömförsörjning"
             },
             "railway": {
                 "label": "Typ"
@@ -1119,15 +1180,18 @@
             },
             "sac_scale": {
                 "label": "Svårighetsgrad",
-                "placeholder": "Bergsvandring, alpin vandring",
                 "options": {
-                    "hiking": "T1: Vandring",
-                    "mountain_hiking": "T2: Bergsvandring",
-                    "demanding_mountain_hiking": "T3: Krävande bergsvandring",
                     "alpine_hiking": "T4: Alpin vandring",
                     "demanding_alpine_hiking": "T5: Krävande alpin vandring",
-                    "difficult_alpine_hiking": "T6: Svår alpin vandring"
-                }
+                    "demanding_mountain_hiking": "T3: Krävande bergsvandring",
+                    "difficult_alpine_hiking": "T6: Svår alpin vandring",
+                    "hiking": "T1: Vandring",
+                    "mountain_hiking": "T2: Bergsvandring"
+                },
+                "placeholder": "Bergsvandring, alpin vandring"
+            },
+            "sanitary_dump_station": {
+                "label": "Latrintömning "
             },
             "seasonal": {
                 "label": "Säsongsöppen"
@@ -1135,20 +1199,29 @@
             "service": {
                 "label": "Typ"
             },
-            "service/bicycle/chaintool": {
+            "service/bicycle/chain_tool": {
                 "label": "Kedjebrytare",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Förväntas vara Nej",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Cykelpump",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Förväntas vara Nej",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
+                }
+            },
+            "service_rail": {
+                "label": "Användningsområde ",
+                "options": {
+                    "crossover": "Växelförbindelse",
+                    "siding": "Sidospår",
+                    "spur": "Industrispår",
+                    "yard": "Bangård"
                 }
             },
             "shelter": {
@@ -1165,29 +1238,29 @@
             },
             "smoking": {
                 "label": "Rökning",
-                "placeholder": "Nej, separat, ja...",
                 "options": {
-                    "no": "Rökning ej tillåtet",
-                    "separated": "I rökområde, ej fysiskt separerat",
+                    "dedicated": "Dedikerat för rökare (t.ex. rökklubb)",
                     "isolated": "I rökområde, fysiskt separerat",
+                    "no": "Rökning ej tillåtet",
                     "outside": "Tillåtet utomhus",
-                    "yes": "Tillåtet överallt",
-                    "dedicated": "Dedikerat för rökare (t.ex. rökklubb)"
-                }
+                    "separated": "I rökområde, ej fysiskt separerat",
+                    "yes": "Tillåtet överallt"
+                },
+                "placeholder": "Nej, separat, ja..."
             },
             "smoothness": {
                 "label": "Jämnhet",
-                "placeholder": "Tunna hjul, hjul, terräng...",
                 "options": {
+                    "bad": "Robusta hjul: trekkingcykel, bil, riksha",
                     "excellent": "Tunna rullar: rollerblade, skateboard",
                     "good": "Tunna Hjul: racercykel",
-                    "intermediate": "Hjul: cykel, rullstol, scooter",
-                    "bad": "Robusta hjul: trekkingcykel, bil, riksha",
-                    "very_bad": "Hög frigång: lätta terrängfordon",
                     "horrible": "Terräng: tunga terrängfordon",
-                    "very_horrible": "Specialiserade för terräng: traktor, fyrhjuling",
-                    "impassable": "Oframkomligt / Inga hjulfordon"
-                }
+                    "impassable": "Oframkomligt / Inga hjulfordon",
+                    "intermediate": "Hjul: cykel, rullstol, scooter",
+                    "very_bad": "Hög frigång: lätta terrängfordon",
+                    "very_horrible": "Specialiserade för terräng: traktor, fyrhjuling"
+                },
+                "placeholder": "Tunna hjul, hjul, terräng..."
             },
             "social_facility_for": {
                 "label": "Människohjälp",
@@ -1207,14 +1280,14 @@
             },
             "structure": {
                 "label": "Struktur",
-                "placeholder": "Okänt",
                 "options": {
                     "bridge": "Bro",
-                    "tunnel": "Tunnel",
-                    "embankment": "Vägbank",
                     "cutting": "Vägsnitt",
-                    "ford": "Vadställe"
-                }
+                    "embankment": "Vägbank",
+                    "ford": "Vadställe",
+                    "tunnel": "Tunnel"
+                },
+                "placeholder": "Okänt"
             },
             "studio_type": {
                 "label": "Typ"
@@ -1233,20 +1306,20 @@
             },
             "takeaway": {
                 "label": "Hämtmat",
-                "placeholder": "Ja, nej, enbart hämtmat",
                 "options": {
-                    "yes": "Ja",
                     "no": "Nej",
-                    "only": "Enbart hämtmat"
-                }
+                    "only": "Enbart hämtmat",
+                    "yes": "Ja"
+                },
+                "placeholder": "Ja, nej, enbart hämtmat"
             },
             "toilets/disposal": {
                 "label": "Omhändertagande",
                 "options": {
-                    "flush": "Spola",
-                    "pitlatrine": "Grop/Latrin",
+                    "bucket": "Behållare",
                     "chemical": "Kemisk",
-                    "bucket": "Behållare"
+                    "flush": "Spola",
+                    "pitlatrine": "Grop/Latrin"
                 }
             },
             "tourism": {
@@ -1257,26 +1330,26 @@
             },
             "tracktype": {
                 "label": "Typ av bruksväg",
-                "placeholder": "Fast, Mestadels fast, Mjuk ...",
                 "options": {
                     "grade1": "Fast: asfalterad eller kraftigt packad hård yta",
                     "grade2": "Mestadels fast: grus/sten med inslag av mjukt material",
                     "grade3": "Jämn blandning av hårda och mjuka material",
                     "grade4": "Mestadels mjukt: jord/sand/gräs med inslag av hårt material",
                     "grade5": "Mjukt: jord/sand/gräs"
-                }
+                },
+                "placeholder": "Fast, Mestadels fast, Mjuk ..."
             },
             "trail_visibility": {
                 "label": "Synlighet",
-                "placeholder": "Utmärkt, bra, dåligt...",
                 "options": {
+                    "bad": "Dåligt: inga markörer, stig ibland osynlig/stiglös",
                     "excellent": "Utmärkt: Tydlig väg eller markörer överallt",
                     "good": "Bra: markörer synliga men ibland svåra att hitta",
-                    "intermediate": "Medel: få markörer, stig mestadels synliga",
-                    "bad": "Dåligt: inga markörer, stig ibland osynlig/stiglös",
                     "horrible": "Hemsk: ofta stiglös, en del orienteringskunskaper krävs",
+                    "intermediate": "Medel: få markörer, stig mestadels synliga",
                     "no": "Ingen: stiglös, utmärkta orienteringskunskaper krävs"
-                }
+                },
+                "placeholder": "Utmärkt, bra, dåligt..."
             },
             "trees": {
                 "label": "Träd"
@@ -1289,6 +1362,9 @@
             },
             "water": {
                 "label": "Typ"
+            },
+            "water_point": {
+                "label": "Vattenpåfyllning"
             },
             "waterway": {
                 "label": "Typ"
@@ -1430,6 +1506,10 @@
             "amenity/bicycle_repair_station": {
                 "name": "Station för cykelreparation ",
                 "terms": "Cykelreparation, kedjebrytare, cykelpump, tryckluft, pumpstation, cykel, "
+            },
+            "amenity/biergarten": {
+                "name": "Ölträdgård",
+                "terms": "ölträdgård, Biergarten, uteservering,ölcafé, utecafé, trädgårdspub"
             },
             "amenity/boat_rental": {
                 "name": "Båtuthyrning",
@@ -1626,6 +1706,9 @@
             "amenity/restaurant": {
                 "name": "Restaurang",
                 "terms": "Restaurang, matservering, matställe, servering, restauration, näringsställe, grillbar, bar, krog, värdshus, pub, bodega, brasserie, rotisseri, pizzeria, kafé, cafeteria, sylta"
+            },
+            "amenity/sanitary_dump_station": {
+                "name": "Latrintömning"
             },
             "amenity/school": {
                 "name": "Skolområde",
@@ -2396,8 +2479,8 @@
                 "terms": "Byggarbetsplats, bygge, Byggnad under konstruktion, Byggnad under uppförande, byggarbete,  byggnation, byggnadsplats"
             },
             "landuse/farm": {
-                "name": "Gård",
-                "terms": "Bondgård, gård, jordbruk, lantbruk, lantegendom, lantgård"
+                "name": "Åkermark",
+                "terms": "Åker, åkerjord, åkerfält, fält, gärde, teg, åkerlapp, inäga, odling, odlingsfält, lantbruk"
             },
             "landuse/farmland": {
                 "name": "Åkermark",
@@ -2958,6 +3041,10 @@
             "relation": {
                 "name": "Relation",
                 "terms": "Relation, relaterat, förbindelse, förhållande, samband, anknytning, koppling, kontext"
+            },
+            "roundabout": {
+                "name": "Rondell",
+                "terms": "Rondell, cirkulationsplats, trafikrondell"
             },
             "route/ferry": {
                 "name": "Färjerutt",

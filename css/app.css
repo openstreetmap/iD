@@ -287,6 +287,11 @@ ul li { list-style: none;}
     color: white;
 }
 
+.fillD2 {
+    background:rgba(0,0,0,.75);
+    color: white;
+}
+
 .fl { float: left;}
 .fr { float: right;}
 
@@ -2147,6 +2152,39 @@ img.wiki-image {
 
 .map-in-map-bbox.thick {
     stroke-width: 5;
+}
+
+/* Info Box
+------------------------------------------------------- */
+.infobox {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 30px;
+    width: 240px;
+    border-radius: 4px 0 0 0;
+    border-bottom: 1px solid black;
+}
+
+.infobox .selection-heading {
+    display: block;
+    border-radius: 4px 0 0 0;
+    padding: 5px 10px;
+    height: 30px;
+}
+
+.infobox ul {
+    padding: 5px 10px;
+}
+
+.infobox .button {
+    position: absolute;
+    background: #7092ff;
+    border-radius: 2px;
+    padding: 0 4px;
+    color: white;
+    top: 40px;
+    right: 10px;
 }
 
 /* About Section

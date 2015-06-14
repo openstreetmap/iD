@@ -254,6 +254,26 @@
         "list": "Edits by {users}",
         "truncated_list": "Edits by {users} and {count} others"
     },
+    "infobox": {
+        "selected": "{n} selected",
+        "geometry": "Geometry",
+        "closed": "closed",
+        "center": "Center",
+        "perimeter": "Perimeter",
+        "length": "Length",
+        "area": "Area",
+        "centroid": "Centroid",
+        "location": "Location",
+        "metric": "Metric",
+        "imperial": "Imperial"
+    },
+    "geometry": {
+        "point": "point",
+        "vertex": "vertex",
+        "line": "line",
+        "area": "area",
+        "relation": "relation"
+    },
     "geocoder": {
         "search": "Search worldwide...",
         "no_results_visible": "No results in visible map area",
@@ -745,6 +765,9 @@
             "construction": {
                 "label": "Type"
             },
+            "content": {
+                "label": "Contents"
+            },
             "country": {
                 "label": "Country"
             },
@@ -1116,6 +1139,9 @@
             "power": {
                 "label": "Type"
             },
+            "power_supply": {
+                "label": "Power Supply"
+            },
             "railway": {
                 "label": "Type"
             },
@@ -1163,6 +1189,9 @@
                     "demanding_alpine_hiking": "T5: Demanding Alpine Hiking",
                     "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"
                 }
+            },
+            "sanitary_dump_station": {
+                "label": "Toilet Disposal"
             },
             "seasonal": {
                 "label": "Seasonal"
@@ -1334,6 +1363,9 @@
             "water": {
                 "label": "Type"
             },
+            "water_point": {
+                "label": "Water Point"
+            },
             "waterway": {
                 "label": "Type"
             },
@@ -1474,6 +1506,10 @@
             "amenity/bicycle_repair_station": {
                 "name": "Bicycle Repair Station",
                 "terms": "bike"
+            },
+            "amenity/biergarten": {
+                "name": "Beer Garden",
+                "terms": "beer,bier,booze"
             },
             "amenity/boat_rental": {
                 "name": "Boat Rental",
@@ -1670,6 +1706,10 @@
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "bar,breakfast,cafe,café,canteen,coffee,dine,dining,dinner,drive-in,eat,grill,lunch,table"
+            },
+            "amenity/sanitary_dump_station": {
+                "name": "RV Toilet Disposal",
+                "terms": "Motor Home,Camper,Sanitary,Dump Station,Elsan,CDP,CTDP,Chemical Toilet"
             },
             "amenity/school": {
                 "name": "School Grounds",
@@ -2631,9 +2671,17 @@
                 "name": "Lighthouse",
                 "terms": ""
             },
+            "man_made/mast": {
+                "name": "Radio Mast",
+                "terms": "broadcast tower,cell phone tower,cell tower,guyed tower,mobile phone tower,radio tower,television tower,transmission mast,transmission tower,tv tower"
+            },
             "man_made/observation": {
                 "name": "Observation Tower",
                 "terms": "lookout tower,fire tower"
+            },
+            "man_made/petroleum_well": {
+                "name": "Oil Well",
+                "terms": "drilling rig,oil derrick,oil drill,oil horse,oil rig,oil pump,petroleum well,pumpjack"
             },
             "man_made/pier": {
                 "name": "Pier",
@@ -2642,6 +2690,14 @@
             "man_made/pipeline": {
                 "name": "Pipeline",
                 "terms": ""
+            },
+            "man_made/silo": {
+                "name": "Silo",
+                "terms": "grain,corn,wheat"
+            },
+            "man_made/storage_tank": {
+                "name": "Storage Tank",
+                "terms": "water,oil,gas,petrol"
             },
             "man_made/survey_point": {
                 "name": "Survey Point",
@@ -2861,6 +2917,10 @@
             },
             "place/city": {
                 "name": "City",
+                "terms": ""
+            },
+            "place/farm": {
+                "name": "Farm",
                 "terms": ""
             },
             "place/hamlet": {
@@ -3465,11 +3525,11 @@
             },
             "tourism/camp_site": {
                 "name": "Camp Site",
-                "terms": ""
+                "terms": "Tent"
             },
             "tourism/caravan_site": {
                 "name": "RV Park",
-                "terms": ""
+                "terms": "Motor Home,Camper"
             },
             "tourism/chalet": {
                 "name": "Chalet",
@@ -3651,6 +3711,10 @@
                 "name": "Drain",
                 "terms": ""
             },
+            "waterway/fuel": {
+                "name": "Marine Fuel Station",
+                "terms": "petrol,gas,diesel,boat"
+            },
             "waterway/river": {
                 "name": "River",
                 "terms": "beck,branch,brook,course,creek,estuary,rill,rivulet,run,runnel,stream,tributary,watercourse"
@@ -3658,6 +3722,10 @@
             "waterway/riverbank": {
                 "name": "Riverbank",
                 "terms": ""
+            },
+            "waterway/sanitary_dump_station": {
+                "name": "Marine Toilet Disposal",
+                "terms": "Boat,Watercraft,Sanitary,Dump Station,Pumpout,Pump out,Elsan,CDP,CTDP,Chemical Toilet"
             },
             "waterway/stream": {
                 "name": "Stream",

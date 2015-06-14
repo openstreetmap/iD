@@ -18,6 +18,12 @@
         "browse": {
             "title": "Sirvi",
             "description": "Nihuta ja suumi kaarti."
+        },
+        "draw_area": {
+            "tail": "Alale punkti lisamiseks tee klikk. Ala lõpetamiseks tee klikk ala esimesele punktile."
+        },
+        "draw_line": {
+            "tail": "Joonele punktide lisamiseks tee hiirega klikk. Tee klikk teiste joonte peale, et jooni ühendada ja topeltklikk, et joont lõpetada."
         }
     },
     "operations": {
@@ -38,6 +44,8 @@
             "key": "A",
             "title": "Jätka",
             "description": "Jätka seda joont.",
+            "not_eligible": "Joont ei saa siit jätkata.",
+            "multiple": "Siit saab jätkata mitut joont. Joone valimiseks hoia all Shift klahvi ja tee klikk joonele.",
             "annotation": {
                 "line": "Joon jätkatud.",
                 "area": "Ala jätkatud."
@@ -63,7 +71,9 @@
                 "line": "Joon tehtud ringikujuliseks.",
                 "area": "Ala tehtud ringikujuliseks."
             },
-            "not_closed": "Seda ei saa teha ringikujuliseks kuna see ei ole silmus."
+            "not_closed": "Seda ei saa teha ringikujuliseks kuna see ei ole silmus.",
+            "too_large": "Seda ei saa teha ringikujuliseks, kuna see ei ole täielikult nähtaval.",
+            "connected_to_hidden": "Seda ei saa teha ringikujuliseks, kuna see on ühendatud peidetud objektiga."
         },
         "orthogonalize": {
             "title": "Nurgad täisnurkseks",
@@ -76,17 +86,21 @@
                 "line": "Joone nurgad täisnurgastatud.",
                 "area": "Ala nurgad täisnurgastatud."
             },
-            "not_squarish": "Seda ei saa teha täisnurkseks kuna see ei ole nurgeline."
+            "not_squarish": "Seda ei saa teha täisnurkseks kuna see ei ole nurgeline.",
+            "too_large": "Seda ei saa teha täisnurkseks, kuna see ei ole täielikult nähtaval.",
+            "connected_to_hidden": "Seda ei saa teha täisnurkseks, kuna see on ühendatud peidetud objektiga."
         },
         "straighten": {
             "title": "Tee sirgeks",
             "description": "Tee see joon sirgeks.",
             "key": "S",
             "annotation": "Joon tehti sirgeks.",
-            "too_bendy": "Seda ei saa sirgeks teha kuna see painduks liiga palju."
+            "too_bendy": "Seda ei saa sirgeks teha kuna see painduks liiga palju.",
+            "connected_to_hidden": "Seda ei saa teha sirgeks, kuna see on ühendatud peidetud objektiga."
         },
         "delete": {
             "title": "Kustuta",
+            "description": "Kustuta objekt lõplikult.",
             "annotation": {
                 "point": "Punkt kustutatud.",
                 "vertex": "Punkt kustutatud joonelt.",
@@ -94,7 +108,10 @@
                 "area": "Ala kustutatud.",
                 "relation": "Seos kustutatud.",
                 "multiple": "{n} objekti kustutatud."
-            }
+            },
+            "incomplete_relation": "Seda objekti ei saa kustutada, kuna see ei ole täielikult laetud.",
+            "part_of_relation": "Seda objekti ei saa kustutada, kuna ta on osa suuremast relatsioonist. Sa pead eelnevalt selle relatsioonist eemaldama.",
+            "connected_to_hidden": "Seda ei saa kustutada, kuna see on ühendatud peidetud objektiga."
         },
         "add_member": {
             "annotation": "Lisatud relatsiooni liige."
@@ -114,7 +131,9 @@
             "title": "Ühenda lahti",
             "description": "Ühenda need jooned/alad üksteisest lahti.",
             "key": "D",
-            "annotation": "Lahtiühendatud jooned/alad."
+            "annotation": "Lahtiühendatud jooned/alad.",
+            "not_connected": "Siin pole piisavalt jooni/alasid lahtiühendamiseks.",
+            "connected_to_hidden": "Seda ei saa lahti ühendada, kuna see on ühendatud peidetud objektiga."
         },
         "merge": {
             "title": "Ühenda",
@@ -122,19 +141,24 @@
             "key": "C",
             "annotation": "{n} joont ühendatud.",
             "not_eligible": "Neid objekte ei saa ühendada.",
-            "not_adjacent": "Neid jooni ei saa ühendada kuna need ei ole üksteisega seotud."
+            "not_adjacent": "Neid jooni ei saa ühendada kuna need ei ole üksteisega seotud.",
+            "restriction": "Neid jooni ei saa ühendada, kuna vähemalt üks neist on \"{relation}\" relatsiooni osa.",
+            "incomplete_relation": "Neid objekte ei saa ühendada, kuna vähemalt üks neist ei ole täielikult laetud."
         },
         "move": {
             "title": "Liiguta",
             "description": "Liiguta see teise asukohta.",
             "key": "M",
             "annotation": {
-                "point": "Punkt liigutatud.",
-                "vertex": "Liigutatud Joone punkti.",
-                "line": "Liigutatud joont.",
-                "area": "Liigutatud ala.",
-                "multiple": "Liigutatud mitut objekti."
-            }
+                "point": "Punkt nihutatud.",
+                "vertex": "Nihutatud Joone punkti.",
+                "line": "Nihutatud joont.",
+                "area": "Nihutatud ala.",
+                "multiple": "Nihutatud mitut objekti."
+            },
+            "incomplete_relation": "Seda objekti ei saa nihutada, kuna ta pole täielikult laetud.",
+            "too_large": "Seda objekti ei saa nihutada, kuna see pole piisavalt nähtav.",
+            "connected_to_hidden": "Seda objekti ei saa nihutada, kuna ta on ühendatud peidetud objektiga."
         },
         "rotate": {
             "title": "Pööra",
@@ -146,7 +170,7 @@
             }
         },
         "reverse": {
-            "title": "Pööra",
+            "title": "Pööra ümber",
             "description": "Pööra tee vastassuunda.",
             "key": "V",
             "annotation": "Tee on pööratud."
@@ -188,7 +212,6 @@
     "commit": {
         "title": "Salvesta muudatused",
         "description_placeholder": "Muudatuste lühikirjeldus",
-        "message_label": "Salvestuse kommentaar",
         "upload_explanation": "Su salvestatavad muudatused on nähtaval kõikidel kaartidel mis kasutavad OpenStreetMap-i andmeid.",
         "upload_explanation_with_user": "Su kasutajana {user} salvestatavad muudatused on nähtaval kõikidel kaartidel, mis kasutavad OpenStreetMap-i andmeid.",
         "save": "Salvesta",
@@ -257,7 +280,6 @@
         "title": "Salvesta",
         "help": "Salvesta muudatused OpenStreetMap'i, tehes need teistele kasutajatele nähtavaks.",
         "no_changes": "Salvestamist vajavad muudatused puuduvad.",
-        "error": "Salvestamisel ilmnes tõrge",
         "uploading": "Muudatuste üleslaadimine OpenStreetMap'i.",
         "unsaved_changes": "Sul on salvestamata muudatusi"
     },
@@ -372,37 +394,37 @@
         "fields": {
             "access": {
                 "label": "Juurdepääs",
-                "placeholder": "Teadmata",
-                "types": {
-                    "access": "Üldine",
-                    "foot": "Jalg",
-                    "motor_vehicle": "Mootorsõidukid",
-                    "bicycle": "Jalgrattad",
-                    "horse": "Hobused"
-                },
                 "options": {
-                    "yes": {
-                        "title": "Lubatud",
-                        "description": "Juurdepääs seaduse alusel; igameheõigus"
-                    },
-                    "no": {
-                        "title": "Keelatud",
-                        "description": "Avalik juurdepääs puudub"
-                    },
-                    "permissive": {
-                        "title": "Soovituslik",
-                        "description": "Juurdepääs on lubatud ajani, mil omanik tühistab loa"
-                    },
-                    "private": {
-                        "title": "Era",
-                        "description": "Juurdepääs lubatud ainult omaniku eriloal"
-                    },
                     "designated": {
                         "title": "Määratud"
                     },
                     "destination": {
                         "title": "Sihtkoht"
+                    },
+                    "no": {
+                        "description": "Avalik juurdepääs puudub",
+                        "title": "Keelatud"
+                    },
+                    "permissive": {
+                        "description": "Juurdepääs on lubatud ajani, mil omanik tühistab loa",
+                        "title": "Soovituslik"
+                    },
+                    "private": {
+                        "description": "Juurdepääs lubatud ainult omaniku eriloal",
+                        "title": "Era"
+                    },
+                    "yes": {
+                        "description": "Juurdepääs seaduse alusel; igameheõigus",
+                        "title": "Lubatud"
                     }
+                },
+                "placeholder": "Teadmata",
+                "types": {
+                    "access": "Üldine",
+                    "bicycle": "Jalgrattad",
+                    "foot": "Jalg",
+                    "horse": "Hobused",
+                    "motor_vehicle": "Mootorsõidukid"
                 }
             },
             "access_simple": {
@@ -415,13 +437,13 @@
             "address": {
                 "label": "Aadress",
                 "placeholders": {
+                    "city": "Linn",
+                    "country": "Riik",
                     "housename": "Maja nimetus",
                     "housenumber": "123",
-                    "street": "Tänav",
-                    "city": "Linn",
-                    "postcode": "Sihtnumber",
                     "place": "Koht",
-                    "country": "Riik"
+                    "postcode": "Sihtnumber",
+                    "street": "Tänav"
                 }
             },
             "aerialway/access": {
@@ -456,8 +478,8 @@
             "clock_direction": {
                 "label": "Suund",
                 "options": {
-                    "clockwise": "Päripäeva",
-                    "anticlockwise": "Vastupäeva"
+                    "anticlockwise": "Vastupäeva",
+                    "clockwise": "Päripäeva"
                 }
             },
             "collection_times": {
@@ -493,9 +515,9 @@
             },
             "internet_access": {
                 "options": {
-                    "wlan": "Wifi",
+                    "terminal": "Terminal",
                     "wired": "Juhtmega",
-                    "terminal": "Terminal"
+                    "wlan": "Wifi"
                 }
             },
             "lanes": {
@@ -555,8 +577,8 @@
             "structure": {
                 "options": {
                     "bridge": "Sild",
-                    "tunnel": "Tunnel",
-                    "embankment": "Tamm"
+                    "embankment": "Tamm",
+                    "tunnel": "Tunnel"
                 }
             },
             "surface": {

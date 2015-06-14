@@ -1,13 +1,22 @@
 {
+    "icon": "bus",
     "fields": [
         "operator",
         "address",
-        "smoking"
+        "capacity",
+        "fee",
+        "sanitary_dump_station",
+        "power_supply",
+        "internet_access"
     ],
     "geometry": [
         "point",
         "vertex",
         "area"
+    ],
+    "terms": [
+        "Motor Home",
+        "Camper"
     ],
     "tags": {
         "tourism": "caravan_site"

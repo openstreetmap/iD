@@ -127,24 +127,24 @@
         },
         "fields": {
             "access": {
+                "options": {
+                    "private": {
+                        "title": "தனியார்"
+                    },
+                    "yes": {
+                        "title": "அனுமதிக்கப்படுகிறது"
+                    }
+                },
                 "placeholder": "அறியப்படவில்லை",
                 "types": {
                     "horse": "குதிரைகள்"
-                },
-                "options": {
-                    "yes": {
-                        "title": "அனுமதிக்கப்படுகிறது"
-                    },
-                    "private": {
-                        "title": "தனியார்"
-                    }
                 }
             },
             "address": {
                 "label": "முகவரி",
                 "placeholders": {
-                    "street": "தெரு",
-                    "city": "மாநகரம்"
+                    "city": "மாநகரம்",
+                    "street": "தெரு"
                 }
             },
             "aerialway": {

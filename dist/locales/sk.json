@@ -110,6 +110,7 @@
                 "multiple": "Odstránenie {n} objektov."
             },
             "incomplete_relation": "Tento objekt nemožno vymazať, pretože nebol úplne stiahnutý.",
+            "part_of_relation": "Tento objekt nemôže byť vymazaný, pretože je súčasťou väčšej relácie. Musíte ho najskôr z tejto relácie odobrať.",
             "connected_to_hidden": "Tento objekt nemožno vymazať, pretože je spojený so skrytým objektom."
         },
         "add_member": {
@@ -238,7 +239,7 @@
     "commit": {
         "title": "Ukladanie zmien",
         "description_placeholder": "Stručný popis vašich úprav",
-        "message_label": "Pripojiť správu",
+        "message_label": "Krátky popis ukladaných zmien",
         "upload_explanation": "Zmeny, ktoré nahráte, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
         "upload_explanation_with_user": "Zmeny, ktoré nahráte ako {user}, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
         "save": "Ulož",
@@ -252,6 +253,26 @@
     "contributors": {
         "list": "Úpravy od {users}",
         "truncated_list": "Úpravy od {users} a {count} ďalších"
+    },
+    "infobox": {
+        "selected": "{n} označených",
+        "geometry": "Tvar",
+        "closed": "zatvorené",
+        "center": "Stred",
+        "perimeter": "Obvod",
+        "length": "Dĺžka",
+        "area": "Plocha",
+        "centroid": "Ťažisko",
+        "location": "Poloha",
+        "metric": "Metrické",
+        "imperial": "Imperiálne"
+    },
+    "geometry": {
+        "point": "bod",
+        "vertex": "vrchol",
+        "line": "čiara",
+        "area": "plocha",
+        "relation": "relácia"
     },
     "geocoder": {
         "search": "Hľadaj celosvetovo...",
@@ -369,7 +390,7 @@
         },
         "partial": {
             "description": "Čiastočná výplň",
-            "tooltip": "Plochy sú vykresné s výplňou iba okolo vnútornych okrajoch. (Odporúčané pre začínajúcich užívateľov)"
+            "tooltip": "Plochy sú vykresné s výplňou iba okolo vnútornych okrajoch. (Odporúčané pre začínajúcich používateľov)"
         },
         "full": {
             "description": "Plná výplň",
@@ -378,7 +399,7 @@
     },
     "restore": {
         "heading": "Máte neuložené zmeny",
-        "description": "Želáte si obnoviť neuložené zmeny z predchádzajúcej relácie?",
+        "description": "Želáte si obnoviť neuložené zmeny z predchádzajúcej návštevy?",
         "restore": "Obnov",
         "reset": "Vymaž"
     },
@@ -386,10 +407,33 @@
         "title": "Ulož",
         "help": "Ulož zmeny do OpenStreetMap a sprístupni ich ďalším užívateľom.",
         "no_changes": "Žiadne zmeny na uloženie.",
-        "error": "Počas ukladania sa vyskytla chyba",
+        "error": "Počas ukladania sa vyskyla chyba",
+        "status_code": "Server vrátil chybový kód {code}",
         "unknown_error_details": "Uistite sa prosím, že ste pripojený k internetu.",
         "uploading": "Nahrávam zmeny do OpenStreetMap.",
-        "unsaved_changes": "Máte neuložené zmeny"
+        "unsaved_changes": "Máte neuložené zmeny",
+        "conflict": {
+            "header": "Vyrieš konfliktné úpravy",
+            "count": "Konflikt {num} z {total}",
+            "previous": "< Predošlý",
+            "next": "Ďaľší >",
+            "keep_local": "Zachovaj moje",
+            "keep_remote": "Použi ich",
+            "restore": "Obnov",
+            "delete": "Ponechaj vymazané",
+            "download_changes": "Alebo stiahni moje zmeny",
+            "done": "Všetky konflikty sú vyriešené!",
+            "help": "Iný používateľ pozmenil niektoré z objektov, ktoré ste zmenili aj vy.\nPre viac detajlov o konflikte, kliknite na každú položku nižšie a vyberte, či chcete ponechať\nvaše zmeny alebo zmeny iných užívateľov.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "Tento objekt bol vymazaný používateľom {user}.",
+            "location": "Tento objekt bol posunutý vami a tiež používateľom {user}.",
+            "nodelist": "Body boli zmenené vami a tiež používateľom {user}.",
+            "memberlist": "Členy relácie boli zmenené vami a tiež používateľom {user}.",
+            "tags": "Zmenili ste označenie <b>{tag}</b> na \"{local}\" a {user} ho zmenil na \"{remote}\"."
+        }
     },
     "success": {
         "edited_osm": "OSM bol upravený!",
@@ -401,7 +445,8 @@
         "help_html": "Vaše zmeny by sa mali objaviť na \"Základnej\" vrstve v priebehu niekoľkých minút. Ostatným vrstvám a niektorým objektom to môže trvať dlhšie\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detaily</a>).\n"
     },
     "confirm": {
-        "okay": "OK"
+        "okay": "OK",
+        "cancel": "Zrušiť"
     },
     "splash": {
         "welcome": "Vitajte v iD editore pre OpenStreetMap",
@@ -448,13 +493,13 @@
     },
     "help": {
         "title": "Pomoc",
-        "help": "# Pomoc\n\nToto je editor pre [OpenStreetMap](http://www.openstreetmap.org/), slobodnú a upravovateľnú mapu sveta. Môžete ho používať na pridávanie a aktualizovanie údajov vo vašom okolí a vylepšiť tak mapu sveta s otvoreným kódom a dátami pre všetkých.\n\nÚpravy, ktoré v tejto mape spravíte, budú viditeľné pre každého, kto používa OpenStreetMap. Na to, aby ste mohli upravovať, budete potrebovať [bezplatný OpenStreetMap účet](https://www.openstreetmap.org/user/new).\n\n[iD editor](http://ideditor.com/) je kolaboratívny projekt so [zdrojovým kódom dostupným na GitHub](https://github.com/openstreetmap/iD).\n",
-        "editing_saving": "# Upravovanie a ukladanie\n\nTento editor je primárne navrhnutý na prácu online, a aj práve teraz ho používate cez internetovú stránku.\n\n### Výber objektov\n\nPre výber objektu, ako napríklad cesta alebo bod záujmu, naň kliknite na mape. Týmto sa vybraný objekt zvýrazní, otvorí sa panel s jeho detajlami a zobrazí sa ponuka s úkonmi, ktoré môžete s objektom urobiť.\n\nViacero objektov je možné vybrať podržaním klávesu \"Shift\". Potom jednoducho kliknite na objekty, ktoré chcete vybrať, alebo pretiahnite po mape akoby ste chceli nakresliť obdĺžnik. Týmto sa zobrazí rám a vyberú sa všetky objekty, ktoré sa v ňom nachádzajú.\n\n### Ukladanie úprav\n\nKed urobíte zmeny ako úpravy ciest, budov a miest, tieto budú lokálne uložené, až pokiaľ ich neuložíte na server. Netrápte sa ak urobíte chybu. Zmeny môžete vrátit späť kliknutím na tlačítko vrátiť a zopakovať kliknutím na tlačitko zopakovať.\n\nKeď chcete ukončit sériu úprav, kliknite na \"Uložiť\". Napríklad  ak ste dokončili časť mesta a chcete začať s inou časťou. Budete mať možnosť si prehliadnuť, čo ste urobili a editor poskytne užitočné návrhy a varovania ak niečo nie je so zmenami vporiadku.\n\nAk všetko vyzerá vporiadku, môžete vyplniť krátky komentár vysvetľujúci, čo ste urobili a kliknite znovu na \"Uložiť\" pre odoslanie zmien na [OpenStreetMap.org](http://www.openstreetmap.org/), kde budú viditeľné pre ostatných používateľov a tak dostupné pre ďalšie vylepšenia.\n\nAk nemôžete dokončiť úpravy počas jedného sedenia, môžete zatvoriť okno prehliadača, vrátiť sa späť (na rovnakom prehliadači a počítači) a editor vám ponúkne obnoviť vašu prácu.\n",
+        "help": "# Pomoc\n\nToto je editor pre [OpenStreetMap](http://www.openstreetmap.org/), slobodnú a upravovateľnú mapu sveta. Môžete ho používať na pridávanie a aktualizovanie údajov vo vašom okolí a vylepšiť tak mapu sveta s otvoreným kódom a dátami pre všetkých.\n\nÚpravy, ktoré v tejto mape spravíte, budú viditeľné pre každého, kto používa OpenStreetMap. Na to, aby ste mohli upravovať, sa budete musieť prihlásiť [prihlásiť](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) je kolaboratívny projekt so [zdrojovým kódom dostupným na GitHub](https://github.com/openstreetmap/iD).\n",
+        "editing_saving": "# Upravovanie a ukladanie\n\nTento editor je primárne navrhnutý na prácu online, a aj práve teraz ho používate cez internetovú stránku.\n\n### Výber objektov\n\nPre výber objektu, ako napríklad cesta alebo bod záujmu, naň kliknite na mape. Týmto sa vybraný objekt zvýrazní, otvorí sa panel s jeho detajlami a zobrazí sa ponuka s úkonmi, ktoré môžete s objektom urobiť.\n\nViacero objektov je možné vybrať podržaním klávesu \"Shift\". Potom jednoducho kliknite na objekty, ktoré chcete vybrať, alebo pretiahnite po mape akoby ste chceli nakresliť obdĺžnik. Týmto sa zobrazí rám a vyberú sa všetky objekty, ktoré sa v ňom nachádzajú.\n\n### Ukladanie úprav\n\nKed urobíte zmeny ako úpravy ciest, budov a miest, tieto budú lokálne uložené, až pokiaľ ich neuložíte na server. Netrápte sa ak urobíte chybu. Zmeny môžete vrátit späť kliknutím na tlačítko vrátiť a zopakovať kliknutím na tlačitko zopakovať.\n\nKeď chcete ukončit sériu úprav, kliknite na \"Ulož\". Napríklad  ak ste dokončili časť mesta a chcete začať s inou časťou. Budete mať možnosť si prehliadnuť, čo ste urobili a editor poskytne užitočné návrhy a varovania ak niečo nie je so zmenami vporiadku.\n\nAk všetko vyzerá vporiadku, môžete vyplniť krátky komentár vysvetľujúci, čo ste urobili a kliknite znovu na \"Ulož\" pre odoslanie zmien na [OpenStreetMap.org](http://www.openstreetmap.org/), kde budú viditeľné pre ostatných používateľov a tak dostupné pre ďalšie vylepšenia.\n\nAk nemôžete dokončiť úpravy počas jedného sedenia, môžete zatvoriť okno prehliadača, vrátiť sa späť (na rovnakom prehliadači a počítači) a editor vám ponúkne obnoviť vašu prácu.\n",
         "roads": "# Cesty\n\nS týmto editorom môžete cesty vytvoriť, opraviť alebo vymazať. Cesty môžu byť rôzneho druhu: chodníky, diaľnice, lesné cestičky, cyklochodníky a iné. Akýkoľvek často prechádzaný úsek by malo byť možné zmapovať.\n\n### Výber\n\nKliknite na cestu pre jej výber. Viditeľným by sa mal stať jej obrys spolu s malou ponukou nástrojov na mape a postranným panelom, ukazujúcim dodatočné informácie o ceste.\n\n### Úprava\n\nČasto krát uvidíte cesty, ktoré nie sú zarovnané so snímkami pod nimi alebo s GPS stopu. Tieto cesty môžete upraviť tak, aby boli na správnom mieste.\n\nNajskôr kliknite na cestu, ktorú chcete zmeniť. Týmto sa zvýrazní a po jej dĺžke sa ukážu kontrolné body, ktoré môžete pretiahnuť na lepšiu pozíciu. Ak chcete pridať nový kontrolný bod pre viac detailov, dva krát kliknite na časť cesty bez uzla a jeden bude pridaný.\n\nAk sa cesta spája s inou cestou, ale nie je správne spojená na mape, môžete pretiahnuť jeden z jej kontrolných bodov na druhú cestu, aby ste ich spojili. Spojenie ciest je dôležité pre mapu a nevyhnutné pre poskytovanie navigácie na cestách.\n\nMôžete tiež kliknúť na nástroj \"Presuň\" alebo stlačiť kláves \"M\" pre posunutie celej cesty naraz a potom kliknite znovu, aby ste uložili presun.\n\n### Vymazávanie\n\nAk je cesta úplne nesprávna - vidíte, že cesta neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam cesta nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný, rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže cesta môže byť jednoducho novopostavená.\n\nCestu môžete vymazať, tak že na ňu kliknete čim ju vyberiete  a potom kliknete na ikonu smetného koša alebo stlačením klávesu \"Delete\".\n\n### Vytváranie\n\nZistili ste, že niekde by mala byť cesta ale ona tam nie je? Kliknite naľavo hore na ikonu \"Čiara\" alebo stlačte kláves \"2\" pre kreslenie čiary.\n\nAby ste začali kresliť, kliknite na začiatok cesty na mape. Ak cesta odbočuje z inej existujúcej cesty, začnite kliknútím na miesto, kde sa spájajú.\n\nPotom kliknite na body pozdĺž cesty tak, aby nasledovali správny smer podľa satelitných snímkov alebo GPS. Ak cesta, ktorú kreslíte, pretína ďalšiu cestu, spojte ich kliknutím v mieste križovatky. Keď ste hotový s skreslením, dva krát kliknite alebo stlačte kláves \"Enter\" na vašej klávesnici.\n",
         "gps": "# GPS\nGPS údaje sú najviac dôveryhodný zdroj dát pre OpenStreetMap. Tento editor podporuje stopy z lokálnych \".gpx\" súborov na vašom počítači. Tento typ GPS stôp môžete zachytiť pomocou rôznych aplikácií pre múdre telefóny ako aj GPS prístrojmi.\n\nPre informácie, ako robiť GPS prieskum, si prečítajte [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby ste použili GPX trasu pre mapovanie, pretiahnite a pustite GPX súbor na mapový editor. Po rozpoznaní, bude pridaný na mapu ako jasná fialová čiara. Kliknite na ponuku \"Mapové údaje\" na ľavej strane pre zapnutie, vypnutie alebo priblíženie na túto novú GPX vrstvu.\n\nGPX trasa nie je priamo nahraná na OpenStreetMap. Najlepší spôsob ako ju využiť je, použiť ju ako predlohu pre zakreslovanie nových objektov a potom ju [nahrať na OpenStreetMap](http://www.openstreetmap.org/trace/create) pre ďalších uživateľov.\n \n",
         "imagery": "# Snímky povrchu\n\nLetecké snímky sú dôležitým zdrojom pre mapovanie. Kombinácia leteckých fotografií, satelitných snímok a voľne skompilovaných zdrojov je v editore dostupná vpravo pod ponukou \"Nastavenia pozadia\".\n\nŠtandardne je v editore predvolená satelitná vrstva z [Bing Maps](http://www.bing.com/maps/), ale ako posuniete a priblížite mapu na nové geografické miesta, dostupnými sa stanú nové zdroje. Niektoré krajiny ako Spojené Štáty, Francúzsko, a Dánsko majú pre niektoré oblasti dostupné veľmi kvalitné snímky.\n\nSnímky môžu byť niekedy posunuté voči mapovým dátam, kvôli chybe na strane poskytovateľa snímkov. Ak uvidíte veľa ciest posunutých voči pozadiu, neposúvajte ich hneď všetky, aby ste ich zarovnali s pozadím. Namiesto toho môžete upraviť snímky, aby odpovedali existujúcim dátam tým, že kliknete na \"Oprav zarovnanie\" naspodku Nastavenia pozadia.\n",
         "addresses": "# Adresy\n\nAdresy sú jedny z najužitočnejších informácií na mape.\n\nHoci sú adresy často znázorňované ako časti ulíc, v OpenStreetMap sú zaznamenávané ako atribúty budov a miest pozdĺž ulíc.\n\nInformáciu o adrese môžete pridať ku miestam znázornených ako obrysy budov, ale aj ku tým, ktoré boli zmapované ako jediný bod. Najvhodnejším zdrojom adresných údajov je miestny prieskum alebo znalosť lokality. Tak ako pri iných objektoch, kopírovanie z komerčných zdrojov ako Google Mapy je prísne zakázané.\n",
-        "inspector": "# Používanie Inšpektora\n\nInšpektor je používateľské rozhranie na ľavej strane stránky, ktoré sa objaví po vybraní objektu a umožní vám upravovať detaily.\n\n### Voľba typu objektu\n\nPo tom ako pridáte bod, čiaru alebo plochu, môžete vybrať aký je to typ objektu. Napríklad či je to diaľnica alebo obytná ulica, či supermarket alebo kaviareň. Inšpektor zobrazí tlačítka pre bežné typy objektov a nájsť ďalšie môžete zadaním toho, čo hľadáte do vyhľadávacieho políčka.\n\nKliknite na \"i\" v pravom dolnom rohu tlačítka pre výber typu objektu, ak sa chcete o ňom dozvedieť viac. Kliknite na tlačítko a vyberte typ objektu.\n\n### Používanie formulárov a upravovanie označenia\n\nPo tom ako zvolíte typ objektu, alebo keď vyberiete objekt, ktorý už má pridelený typ, inšpektor zobrazí polia s detailmi o objekte ako jeho meno a adresa.\n\nPod poliami sú ikony, na ktoré môžete kliknúť a pridať ďalšie detaily ako informácie z [Wikipédie](http://www.wikipedia.org/), prístup pre vozičkárov a ďalšie.\n\nNaspodku inšpektora kliknite na \"Dodatočné označenia\" pre pridanie  ľubovoľných označení pre daný element. [Taginfo](http://taginfo.openstreetmap.org/) je výborný zdroj pre zistenie populárnych kombinácií označení.\n\nZmeny, ktoré spravíte v inšpektorovi, sú automaticky aplikované na mapu. Vrátiť späť ich môžete kedykoľvek kliknutím na tlačítko \"Vrátiť\".\n",
+        "inspector": "# Používanie Inšpektora\n\nInšpektor je používateľské rozhranie na ľavej strane stránky, ktoré sa objaví po vybraní objektu a umožní vám upravovať detaily.\n\n### Voľba typu objektu\n\nPo tom ako pridáte bod, čiaru alebo plochu, môžete vybrať aký je to typ objektu. Napríklad či je to diaľnica alebo obytná ulica, či supermarket alebo kaviareň. Inšpektor zobrazí tlačítka pre bežné typy objektov a nájsť ďalšie môžete zadaním toho, čo hľadáte do vyhľadávacieho poľa.\n\nKliknite na \"i\" v pravom dolnom rohu tlačítka pre výber typu objektu, ak sa chcete o ňom dozvedieť viac. Kliknite na tlačítko a vyberte typ objektu.\n\n### Používanie formulárov a upravovanie označenia\n\nPo tom ako zvolíte typ objektu, alebo keď vyberiete objekt, ktorý už má pridelený typ, inšpektor zobrazí polia s detailmi o objekte ako jeho meno a adresa.\n\nPod poliami sú ikony, na ktoré môžete kliknúť a pridať ďalšie detaily ako informácie z [Wikipédie](http://www.wikipedia.org/), prístup pre vozičkárov a ďalšie.\n\nNaspodku inšpektora kliknite na \"Dodatočné označenia\" pre pridanie  ľubovoľných označení pre daný element. [Taginfo](http://taginfo.openstreetmap.org/) je výborný zdroj pre zistenie populárnych kombinácií označení.\n\nZmeny, ktoré spravíte v inšpektorovi, sú automaticky aplikované na mapu. Vrátiť späť ich môžete kedykoľvek kliknutím na tlačítko \"Vrátiť\".\n",
         "buildings": "# Budovy\n\nOpenStreetMap je najväčšia databáza budov na svete. Práve vy ju môžete tvoriť a vylepšovať.\n\n### Výber\n\nBudovu môžete vybrať kliknutím na jej hranicu. Týmto sa budova zvýrazní a otvorí sa malá ponuka nástrojov a postranný panel, ukazujúcim dodatočné informácie o budove.\n\n### Úprava\n\nNiekedy môžu byť budovy chybne umiestnené alebo mať nesprávne označenia.\n\nPre presun celej budovy ju vyberte, a potom kliknite na nástroj \"Presunúť\". Posuňte vašu myš, aby ste posunuli budovu a kliknite, keď je umiestnená správne.\n\nPre opravu tvaru budovy, kliknite a ťahajte za uzly, ktoré tvoria jej ohraničenie, na lepšie miesto.\n\n### Vytváranie\n\nJeden z hlavných problémov okolo pridávania budov je, že OpenStreetMap zaznamenáva budovy ako útvary aj ako body. Nepísaným pravidlom je mapovať budovy vo forme útvaru vždy, keď je to možné a mapovať firmy, domovy, služby občianskej vybavenosti a ďalšie subjekty, ktoré v budove pôsobia ako body umiestnené vo vnútri útvaru budovy.\n\nZačnite kresliť budovu ako útvar, klinutím na tlačítko \"Plocha\" vľavo hore a ukončite ju buď stlačením \"Enter\" na vašej klávesnici alebo kliknutím na prvý uzol, ktorý ste zakreslili, čím uzavriete útvar.\n\n### Vymazávanie\n\nAk je budova úplne nesprávna - vidíte, že neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný. Rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže budova môže byť jednoducho novopostavená.\n\nBudovu môžete vymazať tak, že na ňu kliknete, čím ju vyberiete, a potom kliknete na ikonu koša alebo stlačením klávesu \"Delete\".\n",
         "relations": "# Relácie\n\nRelácia je zvláštny typ objektu v OpenStreetMap, ktorý zoskupuje dokopy iné objekty. Dva najčastejšie typy relácií  sú *trasy*, ktoré zoskupujú časti cesty patriace určitému cestnému ťahu a *multipolygóny*, ktoré zoskupujú čiary vytvárajúce zložité plochy (pozostávajúce z niekoľko častí alebo otvorov uprostred).\n\nObjekty v relácií sa nazývajú *členy*. V postrannom panely môžete vidieť v akých reláciach sa objekt nachádza a kliknutím na reláciu ju označiť. Keď je relácia označená, môžete vidieť všetky jej členy na postrannom panely a zvýraznené na mape.\n\nVo väčšine prípadov sa iD postará o udržovanie relácií počas vášho upravovania automaticky. Dôležitá vec, na ktorú by ste si mali dávať pozor je, ak vymažete časť cesty, aby ste ju presnejšie nakreslili, že táto časť bude členom rovnakých relácií ako časť pôvodná.\n\n ## Úprava relácií\n\nAk chcete upravovať relácie, tu sú základy.\n\nPre pridanie objektu do relácie, vyberte objekt a kliknite na tlačítko \"+\" v časti postranného panelu s názvom \"Všetky relácie\" a vyberte alebo napíšte meno relácie.\n\nPre vytvorenie novej relácie, vyberte prvý objekt, ktorý by mal byť jej členom a kliknite na tlačítko \"+\" v časti s názvom \"Všetky relácie\" a vyberte \"Nová relácia...\".\n\nPre odstránenie objektu z relácie, vyberte objekt a kliknite na tlačitko smetného koša, vedľa relácie, z ktorej ho chcete odobrať.\n\n Pomocou nástroja \"Zlúč\" môžete vytvoriť multipolygón s dierami. Nakreslite dve plochy (vonkajšiu a vnútornú), stlačte klávesu Shift a kliknite na každú z nich, aby ste ich vybrali a potom kliknite na tlačítko \"Zlúč\" (+).\n"
     },
@@ -462,13 +507,13 @@
         "navigation": {
             "title": "Navigácia",
             "drag": "Hlavná plocha s mapou zobrazuje nad pozadím údaje z OpenStreetMap. Presúvať sa môžete ťahaním za mapu alebo koliečkom myši rovnako, ako u iných webových máp. **Potiahnite za mapu!**",
-            "select": "Objekty na mape sú reprezentované tromi spôsobmi: pomocou bodov, čiar alebo plôch. Všetky objekty môžu byť vybraté tým, že na ne kliknete. **Kliknite na bod, aby ste ho vybrali.**",
+            "select": "Objekty na mape sú reprezentované tromi spôsobmi: pomocou bodov, čiar alebo plôch. Každý objekt môžete vybrať tým, že naň kliknete. **Kliknite na bod, aby ste ho vybrali.**",
             "header": "Hlavička nám ukazuje typ objektu.",
-            "pane": "Keď je objekt vybraný, zobrazí sa editor objektu. Hlavička nám ukazuje typ objektu a hlavný panel zobrazuje atribúty objektu, ako sú jeho meno a adresa. **Zatvorte editor objektu pomocou tlačítka vpravo hore.**"
+            "pane": "Keď je objekt vybraný, zobrazí sa editor objektu. Hlavička nám ukazuje typ objektu a hlavný panel zobrazuje vlastnosti objektu, ako sú jeho meno a adresa. **Zatvorte editor objektu pomocou tlačítka vpravo hore.**"
         },
         "points": {
             "title": "Body",
-            "add": "Body môžu byť použité na znázorňovanie objektov ako sú obchody, reštaurácie a pamätihodnosťi. Označujú špecifickú polohu a popisujú čo sa tam nachádza. **Kliknite na tlačidlo Bod a pridajte nový bod.**",
+            "add": "Body môžu byť použité na znázorňovanie objektov ako sú obchody, reštaurácie a pamätihodnosťi. Označujú špecifickú polohu a popisujú čo sa tam nachádza. **Kliknite na tlačítko Bod a pridajte nový bod.**",
             "place": "Bod môžete umiestniť kliknutím na mapu. **Umiestnite bod na vrch budovy.**",
             "search": "Body môžu znázorňovať veľa rôznych objektov. Bod, ktorý ste práve pridali, je Kaviareň. **Vyhľadajte \"{name}\"**",
             "choose": "**Vyberte Kaviareň zo zoznamu.**",
@@ -481,11 +526,11 @@
         },
         "areas": {
             "title": "Plochy",
-            "add": "Plochy slúžia na zobrazenie hraníc jazier, budov a obytných oblastí. Môžu byť taktiež použité pre podrobnejšie zmapovanie mnohých funkcií, ktoré sú na mape ako normálne body. ** Kliknite na tlačidlo Plocha a pridajte novú oblasť. **",
+            "add": "Plochy slúžia na zobrazenie hraníc jazier, budov a obytných oblastí. Môžu byť taktiež použité pre podrobnejšie zmapovanie mnohých objektov, ktoré by ste normálne mapovali ako bod. ** Kliknite na tlačítko Plocha a pridajte novú oblasť. **",
             "corner": "Plochy sú zakreslované umiestňovaním uzlov, ktoré označujú hranicu plochy. **Umiestnite počiatočný uzol na jeden z rohov ihriska.**",
-            "place": "Nakreslite plochu umiestnením ďalších uzlov. Dokončite plochu kliknutím na počiatočný uzol. **Nakreslite plochu pre ihrisko.**",
+            "place": "Nakreslite plochu umiestnením ďalších uzlov.  Plochu dokončíte kliknutím na počiatočný uzol. **Nakreslite plochu pre ihrisko.**",
             "search": "**Vyhľadajte \"{name}\".**",
-            "choose": "**Vyberte Ihrisko zo zoznamu.**",
+            "choose": "**Vyberte ihrisko zo zoznamu.**",
             "describe": "**Vyplňte názov a zatvorte editor objektu**"
         },
         "lines": {
@@ -543,39 +588,39 @@
         "fields": {
             "access": {
                 "label": "Prístup",
+                "options": {
+                    "designated": {
+                        "description": "Povolenie vstupu je riadené dopravnými značkami alebo miestnymi zákonmi",
+                        "title": "Vyznačené"
+                    },
+                    "destination": {
+                        "description": "Vstup povolený iba dosiahnutie cieľa",
+                        "title": "Prejazd zakázaný"
+                    },
+                    "no": {
+                        "description": "Verejnosti vstup zakázaný",
+                        "title": "Zakázané"
+                    },
+                    "permissive": {
+                        "description": "Vstup povolený pokiaľ majiteľ povolenie neodvolá",
+                        "title": "Povolený"
+                    },
+                    "private": {
+                        "description": "Vstup možný iba s povolením vlastníka na individuálnom základe",
+                        "title": "Súkromné"
+                    },
+                    "yes": {
+                        "description": "Vstup povolený zo zákona",
+                        "title": "Povolené"
+                    }
+                },
                 "placeholder": "Neznámy",
                 "types": {
                     "access": "Všeobecné",
-                    "foot": "Chodci",
-                    "motor_vehicle": "Motorové vozidlá",
                     "bicycle": "Bicykle",
-                    "horse": "Kone"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Povolené",
-                        "description": "Vstup povolený zo zákona"
-                    },
-                    "no": {
-                        "title": "Zakázané",
-                        "description": "Verejnosti vstup zakázaný"
-                    },
-                    "permissive": {
-                        "title": "Povolený",
-                        "description": "Vstup povolený pokiaľ majiteľ povolenie neodvolá"
-                    },
-                    "private": {
-                        "title": "Súkromné",
-                        "description": "Vstup možný iba s povolením vlastníka na individuálnom základe"
-                    },
-                    "designated": {
-                        "title": "Vyznačené",
-                        "description": "Povolenie vstupu je riadené dopravnými značkami alebo miestnymi zákonmi"
-                    },
-                    "destination": {
-                        "title": "Prejazd zakázaný",
-                        "description": "Vstup povolený iba dosiahnutie cieľa"
-                    }
+                    "foot": "Chodci",
+                    "horse": "Kone",
+                    "motor_vehicle": "Motorové vozidlá"
                 }
             },
             "access_simple": {
@@ -588,19 +633,19 @@
             "address": {
                 "label": "Adresa",
                 "placeholders": {
+                    "city": "Mesto",
+                    "country": "Štát",
+                    "district": "Okres",
+                    "hamlet": "Osada/Samota",
                     "housename": "Meno domu",
                     "housenumber": "123",
-                    "street": "Ulica",
-                    "city": "Mesto",
-                    "postcode": "PSČ",
                     "place": "Obec",
-                    "hamlet": "Osada/Samota",
-                    "suburb": "Predmestie",
-                    "subdistrict": "Podoblasť",
-                    "district": "Okres",
+                    "postcode": "PSČ",
                     "province": "Provincia",
                     "state": "Štát",
-                    "country": "Štát"
+                    "street": "Ulica",
+                    "subdistrict": "Podoblasť",
+                    "suburb": "Predmestie"
                 }
             },
             "admin_level": {
@@ -612,9 +657,9 @@
             "aerialway/access": {
                 "label": "Prístup",
                 "options": {
+                    "both": "Obidva",
                     "entry": "Vchod",
-                    "exit": "Východ",
-                    "both": "Obidva"
+                    "exit": "Východ"
                 }
             },
             "aerialway/bubble": {
@@ -638,9 +683,9 @@
             "aerialway/summer/access": {
                 "label": "Prístup (leto)",
                 "options": {
+                    "both": "Obidva",
                     "entry": "Vchod",
-                    "exit": "Východ",
-                    "both": "Obidva"
+                    "exit": "Východ"
                 }
             },
             "aeroway": {
@@ -689,29 +734,29 @@
             "cardinal_direction": {
                 "label": "Smer",
                 "options": {
-                    "N": "Sever",
                     "E": "Východ",
-                    "S": "Juh",
-                    "W": "Západ",
-                    "NE": "Severtovýchod",
-                    "SE": "Juhovýchod",
-                    "SW": "Juhozápad",
-                    "NW": "Severozápad",
-                    "NNE": "Severo-severovýchod",
                     "ENE": "Východo-severovýchod",
                     "ESE": "Východo-juhovýchod",
+                    "N": "Sever",
+                    "NE": "Severtovýchod",
+                    "NNE": "Severo-severovýchod",
+                    "NNW": "Severo-severozápad",
+                    "NW": "Severozápad",
+                    "S": "Juh",
+                    "SE": "Juhovýchod",
                     "SSE": "Juho-juhovýchod",
                     "SSW": "Juho-juhozápad",
-                    "WSW": "Západo-juhozápad",
+                    "SW": "Juhozápad",
+                    "W": "Západ",
                     "WNW": "Západo-severozápad",
-                    "NNW": "Severo-severozápad"
+                    "WSW": "Západo-juhozápad"
                 }
             },
             "clock_direction": {
                 "label": "Smer",
                 "options": {
-                    "clockwise": "V smere hodinových ručičiek",
-                    "anticlockwise": "Proti smeru hodinových ručičiek"
+                    "anticlockwise": "Proti smeru hodinových ručičiek",
+                    "clockwise": "V smere hodinových ručičiek"
                 }
             },
             "collection_times": {
@@ -719,6 +764,9 @@
             },
             "construction": {
                 "label": "Typ"
+            },
+            "content": {
+                "label": "Obsah"
             },
             "country": {
                 "label": "štát"
@@ -750,15 +798,18 @@
             "description": {
                 "label": "Popis"
             },
+            "drive_through": {
+                "label": "Obslúženie z auta"
+            },
             "electrified": {
                 "label": "Elektrifikovaná",
-                "placeholder": "Troleje, elektrifikované koľaje...",
                 "options": {
                     "contact_line": "Troleje",
+                    "no": "Nie",
                     "rail": "Elektrifikované koľaje",
-                    "yes": "Áno (nešpecifikované)",
-                    "no": "Nie"
-                }
+                    "yes": "Áno (nešpecifikované)"
+                },
+                "placeholder": "Troleje, elektrifikované koľaje..."
             },
             "elevation": {
                 "label": "Nadmorská výška"
@@ -783,9 +834,9 @@
                 "label": "Typ",
                 "options": {
                     "pillar": "Stĺpik/Nadzemný",
+                    "pond": "Požiarna nádrž",
                     "underground": "Podzemný",
-                    "wall": "Nastenný",
-                    "pond": "Požiarna nádrž"
+                    "wall": "Nastenný"
                 }
             },
             "fixme": {
@@ -826,12 +877,12 @@
             },
             "gender": {
                 "label": "Pohlavie",
-                "placeholder": "Neznáme",
                 "options": {
-                    "male": "Muži",
                     "female": "Ženy",
+                    "male": "Muži",
                     "unisex": "Unisex"
-                }
+                },
+                "placeholder": "Neznáme"
             },
             "generator/method": {
                 "label": "Metóda"
@@ -869,17 +920,24 @@
             "incline": {
                 "label": "Sklon"
             },
+            "incline_steps": {
+                "label": "Sklon",
+                "options": {
+                    "down": "Nadol",
+                    "up": "Nahor"
+                }
+            },
             "information": {
                 "label": "Typ"
             },
             "internet_access": {
                 "label": "Prístup k Internetu",
                 "options": {
-                    "yes": "Áno",
                     "no": "Nie",
-                    "wlan": "Wifi",
+                    "terminal": "Terminál",
                     "wired": "Káblom",
-                    "terminal": "Terminál"
+                    "wlan": "Wifi",
+                    "yes": "Áno"
                 }
             },
             "lamp_type": {
@@ -898,20 +956,20 @@
             "leaf_cycle": {
                 "label": "Opadavosť",
                 "options": {
-                    "evergreen": "Neopadavý",
                     "deciduous": "Opadavý",
-                    "semi_evergreen": "Poloopadavý",
-                    "semi_deciduous": "Krátkoopadavé",
-                    "mixed": "Zmiešaný"
+                    "evergreen": "Neopadavý",
+                    "mixed": "Zmiešaný",
+                    "semi_deciduous": "Krátkoopadavý",
+                    "semi_evergreen": "Poloopadavý"
                 }
             },
             "leaf_type": {
                 "label": "Typ listov",
                 "options": {
                     "broadleaved": "Širokolisté",
-                    "needleleaved": "Ihličnaté",
+                    "leafless": "Bezlisté",
                     "mixed": "Zmiešané",
-                    "leafless": "Bezlisté"
+                    "needleleaved": "Ihličnaté"
                 }
             },
             "leisure": {
@@ -939,7 +997,6 @@
             },
             "mtb/scale": {
                 "label": "Obtiažnosť pre horské bicykle",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Štrk/zhutnená pôda, bez prekážok, široké zákruty",
                     "1": "1: Miestami nespevnený povrch, malé prekážky, široké zákruty",
@@ -948,22 +1005,22 @@
                     "4": "4: Nespevnený povrch alebo balvany, nebezpečné vlásenky",
                     "5": "5: Najväčšia obtiažnosť, skalné polia, zosuvy pôdy",
                     "6": "6: Nezjazdné okrem najlepších horských bicyklistov"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "Obtiažnosť podľa IMBA",
-                "placeholder": "Lahká, stredná, ťažká...",
                 "options": {
                     "0": "Najľahšia (biely kruh)",
                     "1": "Ľahká (zelený kruh)",
                     "2": "Stredná (modrý štvorec)",
                     "3": "Ťažká (čierny kosoštvorec)",
                     "4": "Veľmi ťažká (dvojitý čierny kosoštvorec)"
-                }
+                },
+                "placeholder": "Lahká, stredná, ťažká..."
             },
             "mtb/scale/uphill": {
                 "label": "Obtiažnosť jazdy do kopca",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Priem. sklon <10%, štrk/udupaná hlina, bez prekážok",
                     "1": "1: Priem. sklon <15%, štrk/udupaná hlina, niekoľko malých objektov",
@@ -971,7 +1028,8 @@
                     "3": "3: Priem. sklon <25%, premenlivý povrch, kamene/korene veľkosti päste",
                     "4": "4: Priem. sklon <30%, nevhodné podmienky, veľké kamene/konáre",
                     "5": "5: Veľmi strmé, bicykel sa musí tlačiť alebo preniesť"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Názov",
@@ -992,17 +1050,17 @@
             "oneway": {
                 "label": "Jednosmerná",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Pravdepodobne nie",
-                    "yes": "Áno",
-                    "no": "Nie"
+                    "yes": "Áno"
                 }
             },
             "oneway_yes": {
                 "label": "Jednosmerná",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Pravdepodobne áno",
-                    "yes": "Áno",
-                    "no": "Nie"
+                    "yes": "Áno"
                 }
             },
             "opening_hours": {
@@ -1021,13 +1079,13 @@
             "parking": {
                 "label": "Typ",
                 "options": {
-                    "surface": "Povrch",
-                    "multi-storey": "Viacúrovňové",
-                    "underground": "Podzemné",
-                    "sheds": "Šopy",
                     "carports": "Kryté",
                     "garage_boxes": "Garáže",
-                    "lane": "Postranné"
+                    "lane": "Postranné",
+                    "multi-storey": "Viacúrovňové",
+                    "sheds": "Šopy",
+                    "surface": "Povrch",
+                    "underground": "Podzemné"
                 }
             },
             "phone": {
@@ -1036,24 +1094,24 @@
             },
             "piste/difficulty": {
                 "label": "Obtiažnosť",
-                "placeholder": "Ľahká, stredná, pokročilá...",
                 "options": {
-                    "novice": "Pre začiatočníkov (inštruktážny)",
-                    "easy": "Ľahká (zelený kruh)",
-                    "intermediate": "Stredná (modrý štvorec)",
                     "advanced": "Pokročilá (čierny kosoštvorec)",
+                    "easy": "Ľahká (zelený kruh)",
                     "expert": "Pre expertov (dvojitý čierny kosoštvorec)",
+                    "extreme": "Extrémna (potrebné horolezecké vybavenie)",
                     "freeride": "Voľný zjazd (mimo zjazdovky)",
-                    "extreme": "Extrémna (potrebné horolezecké vybavenie)"
-                }
+                    "intermediate": "Stredná (modrý štvorec)",
+                    "novice": "Pre začiatočníkov (inštruktážny)"
+                },
+                "placeholder": "Ľahká, stredná, pokročilá..."
             },
             "piste/grooming": {
                 "label": "Úprava",
                 "options": {
-                    "classic": "Klasické",
-                    "mogul": "Bubny",
                     "backcountry": "Bežky",
+                    "classic": "Klasické",
                     "classic+skating": "Klasické a korčuľovanie",
+                    "mogul": "Bubny",
                     "scooter": "Snežné skútre",
                     "skating": "Korčuľovanie"
                 }
@@ -1062,14 +1120,14 @@
                 "label": "Typ",
                 "options": {
                     "downhill": "Zjazd",
+                    "hike": "Pešie túry",
+                    "ice_skate": "Korčuľovanie",
                     "nordic": "Severské lyžovanie",
+                    "playground": "Ihrisko",
                     "skitour": "Bežkovanie do kopca",
                     "sled": "Sánky",
-                    "hike": "Pešie túry",
                     "sleigh": "Záprah",
-                    "ice_skate": "Korčuľovanie",
-                    "snow_park": "Snežný park",
-                    "playground": "Ihrisko"
+                    "snow_park": "Snežný park"
                 }
             },
             "place": {
@@ -1080,6 +1138,9 @@
             },
             "power": {
                 "label": "Typ"
+            },
+            "power_supply": {
+                "label": "Elektrický zdoj"
             },
             "railway": {
                 "label": "Typ"
@@ -1119,15 +1180,18 @@
             },
             "sac_scale": {
                 "label": "Obtiažnosť turistickej trasy",
-                "placeholder": "Horská turistika, vysokohorská turistika...",
                 "options": {
-                    "hiking": "T1: Turistika",
-                    "mountain_hiking": "T2: Horská turistika",
-                    "demanding_mountain_hiking": "T3: Náročná horská turistika",
                     "alpine_hiking": "T4: Vysokohorská  turistika",
                     "demanding_alpine_hiking": "T5: Náročná vysokohorská turistika",
-                    "difficult_alpine_hiking": "T6: Obtiažna vysokohorská turistika"
-                }
+                    "demanding_mountain_hiking": "T3: Náročná horská turistika",
+                    "difficult_alpine_hiking": "T6: Obtiažna vysokohorská turistika",
+                    "hiking": "T1: Turistika",
+                    "mountain_hiking": "T2: Horská turistika"
+                },
+                "placeholder": "Horská turistika, vysokohorská turistika..."
+            },
+            "sanitary_dump_station": {
+                "label": "Vyprázdňovanie toaliet"
             },
             "seasonal": {
                 "label": "Sezónne"
@@ -1135,20 +1199,29 @@
             "service": {
                 "label": "Typ"
             },
-            "service/bicycle/chaintool": {
+            "service/bicycle/chain_tool": {
                 "label": "Oprava reťaze",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Pravdepodobne nie",
-                    "yes": "Áno",
-                    "no": "Nie"
+                    "yes": "Áno"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Vzduchová pumpa",
                 "options": {
+                    "no": "Nie",
                     "undefined": "Pravdepodobne nie",
-                    "yes": "Áno",
-                    "no": "Nie"
+                    "yes": "Áno"
+                }
+            },
+            "service_rail": {
+                "label": "Typ koľaje",
+                "options": {
+                    "crossover": "Výhybka",
+                    "siding": "Výhybňa",
+                    "spur": "Vlečka",
+                    "yard": "Zoraďovacia koľaj"
                 }
             },
             "shelter": {
@@ -1165,28 +1238,29 @@
             },
             "smoking": {
                 "label": "Fajčenie",
-                "placeholder": "Nie, odelene, áno...",
                 "options": {
-                    "no": "Zákaz fajčenia",
-                    "separated": "Vo fajčiarskom priestore, bez fyzického oddelenia",
+                    "dedicated": "Určený pre fajčiarov (napr. fajčiarský klub)",
                     "isolated": "Vo fajčiarskom priestore, fyzicky oddelený",
+                    "no": "Zákaz fajčenia",
                     "outside": "Vo vonkajšich priestoroch",
-                    "yes": "Povolené všade",
-                    "dedicated": "Určený pre fajčiarov (napr. fajčiarský klub)"
-                }
+                    "separated": "Vo fajčiarskom priestore, bez fyzického oddelenia",
+                    "yes": "Povolené všade"
+                },
+                "placeholder": "Nie, odelene, áno..."
             },
             "smoothness": {
                 "label": "Rovnosť vozovky",
-                "placeholder": "Malé kolieska, kolesá, off-road...",
                 "options": {
+                    "bad": "Pevné kolesá: trekový bicykel, auto, rikša",
                     "excellent": "Malé kolieska: kolieskové korčule, skateboard",
                     "good": "Tenké kolesá: závodný bicykel",
-                    "intermediate": "Kolesá: mestský bicykel, invalidný vozík, skúter",
-                    "bad": "Pevné kolesá: trekový bicykel, auto, rikša",
-                    "very_bad": "Zvýšený podvozok: ľahké off-road vozidlo",
                     "horrible": "Off-road: výkonné off-road vozidlo",
+                    "impassable": "Nepriechodné / Nie pre kolesové vozidlá",
+                    "intermediate": "Kolesá: mestský bicykel, invalidný vozík, skúter",
+                    "very_bad": "Zvýšený podvozok: ľahké off-road vozidlo",
                     "very_horrible": "Špecializovaný off-road: traktor, štvorkolka"
-                }
+                },
+                "placeholder": "Malé kolieska, kolesá, off-road..."
             },
             "social_facility_for": {
                 "label": "Služby poskytované pre",
@@ -1206,14 +1280,14 @@
             },
             "structure": {
                 "label": "Štruktúra",
-                "placeholder": "Neznáme",
                 "options": {
                     "bridge": "Most",
-                    "tunnel": "Tunel",
-                    "embankment": "Násyp",
                     "cutting": "Výkop",
-                    "ford": "Brod"
-                }
+                    "embankment": "Násyp",
+                    "ford": "Brod",
+                    "tunnel": "Tunel"
+                },
+                "placeholder": "Neznáme"
             },
             "studio_type": {
                 "label": "Typ"
@@ -1232,20 +1306,20 @@
             },
             "takeaway": {
                 "label": "Jedlo so sebou",
-                "placeholder": "Áno, Nie, Iba so sebou...",
                 "options": {
-                    "yes": "Áno",
                     "no": "Nie",
-                    "only": "Iba so sebou"
-                }
+                    "only": "Iba so sebou",
+                    "yes": "Áno"
+                },
+                "placeholder": "Áno, Nie, Iba so sebou..."
             },
             "toilets/disposal": {
                 "label": "Odstraňovanie",
                 "options": {
-                    "flush": "Splachovacie",
-                    "pitlatrine": "Latrína",
+                    "bucket": "Suché",
                     "chemical": "Chemické",
-                    "bucket": "Suché"
+                    "flush": "Splachovacie",
+                    "pitlatrine": "Latrína"
                 }
             },
             "tourism": {
@@ -1256,26 +1330,26 @@
             },
             "tracktype": {
                 "label": "Typ lesnej cesty",
-                "placeholder": "Pevná, väčšinou pevná, mäkká...",
                 "options": {
                     "grade1": "Pevná: spevnený alebo silne skompaktnený povrch",
                     "grade2": "Väčšinou pevná: štrk zmiešaný s mäkkými materiálmi",
                     "grade3": "Vyvážená zmes tvrdých a mäkkých materiálov",
                     "grade4": "Väčšinou jemná: pôda/piesok/tráva s zmiešané s tvrdým materiálom",
                     "grade5": "Mäkká: pôda/piesok/tráva"
-                }
+                },
+                "placeholder": "Pevná, väčšinou pevná, mäkká..."
             },
             "trail_visibility": {
                 "label": "Viditeľnosť trasy",
-                "placeholder": "Výborná, dobrá, zlá...",
                 "options": {
+                    "bad": "Zlá: bez značenia, chodník občas nepozorovateľný",
                     "excellent": "Výborná: jednoznačný chodník alebo časté značenie",
                     "good": "Dobrá: značenie viditeľné, občasne vyžaduje hľadanie",
-                    "intermediate": "Stredná: riedke značenie, chodník zväčša viditeľný",
-                    "bad": "Zlá: bez značenia, chodník občas nepozorovateľný",
                     "horrible": "Veľmi zlá: často bez chodníka, čiastočne vyžaduje orientačné zručnosti",
+                    "intermediate": "Stredná: riedke značenie, chodník zväčša viditeľný",
                     "no": "Nie: bez chodníka, vyžaduje výborné orientačné zručnosti"
-                }
+                },
+                "placeholder": "Výborná, dobrá, zlá..."
             },
             "trees": {
                 "label": "Stromy"
@@ -1288,6 +1362,9 @@
             },
             "water": {
                 "label": "Typ"
+            },
+            "water_point": {
+                "label": "Zdroj vody"
             },
             "waterway": {
                 "label": "Typ"
@@ -1429,6 +1506,10 @@
             "amenity/bicycle_repair_station": {
                 "name": "Stojan pre opravu bicyklov",
                 "terms": "stojan,oprava,bicykle,bicykel,reťaz,retaz,pumpa,hustilka,vzduch,koleso,kolesá,kolesa"
+            },
+            "amenity/biergarten": {
+                "name": "Záhradná piváreň",
+                "terms": "zahradna pivaren,pivnica,hostinec,krčma,krcma,vonkajšie posedenie,vonkajsie posedenie"
             },
             "amenity/boat_rental": {
                 "name": "Prenájom lodí",
@@ -1625,6 +1706,10 @@
             "amenity/restaurant": {
                 "name": "Reštaurácia",
                 "terms": "bar,kafetéria,kantýna,jedáleň,pizzeria,jedlo,rýchloobčerstvenie,fastfood,večera,reštaurácia,reštika,jedenie,kantyna,jedalen,rychloobcerstvenie,vecera,restauracia,restika"
+            },
+            "amenity/sanitary_dump_station": {
+                "name": "Vyprázdňovanie karavánových toaliet",
+                "terms": "vyprazdnovanie karavanovych toaliet"
             },
             "amenity/school": {
                 "name": "Školský areál",
@@ -2586,9 +2671,17 @@
                 "name": "Maják",
                 "terms": "majak,výstraha,vystraha"
             },
+            "man_made/mast": {
+                "name": "Telekomunikačný stožiar",
+                "terms": "telekomunikacny stoziar,stlp,veza,veža,stĺp"
+            },
             "man_made/observation": {
                 "name": "Výhliadková veža",
                 "terms": "vyhliadkova veza,veza,veža,výhliadka,vyhliadka"
+            },
+            "man_made/petroleum_well": {
+                "name": "Ropný vrt",
+                "terms": "ropny vrt,ropa"
             },
             "man_made/pier": {
                 "name": "Mólo",
@@ -2597,6 +2690,14 @@
             "man_made/pipeline": {
                 "name": "Potrubie",
                 "terms": "rúra,rura,rúry,rury,transport,vodovod,ropovod,plynovod,kanál,kanal,rozvod"
+            },
+            "man_made/silo": {
+                "name": "Silo",
+                "terms": "siláž,silaz,silazna veza,silážna veža"
+            },
+            "man_made/storage_tank": {
+                "name": "Zásobník",
+                "terms": "zasobnik,rezervoár,rezervoar,cisterna,nádrž,nadrz"
             },
             "man_made/survey_point": {
                 "name": "Triangulačný bod",
@@ -2818,6 +2919,10 @@
                 "name": "Veľkomesto",
                 "terms": "velkomesto,mesto"
             },
+            "place/farm": {
+                "name": "Farma",
+                "terms": "farma"
+            },
             "place/hamlet": {
                 "name": "Osada",
                 "terms": "laz,kopanice,kopanica,samota,kolónia,kolonia"
@@ -2957,6 +3062,10 @@
             "relation": {
                 "name": "Relácia",
                 "terms": "relacia,linka,trasa"
+            },
+            "roundabout": {
+                "name": "Kruhový objazd",
+                "terms": "kruhovy objazd, kruhac, kruháč, kruhová križovatka, kruhova krizovatka"
             },
             "route/ferry": {
                 "name": "Trajektová trasa",
@@ -3602,6 +3711,10 @@
                 "name": "Odvodňovací kanál",
                 "terms": "odvodnovaci kanal,kanal,jarok"
             },
+            "waterway/fuel": {
+                "name": "Čerpacia stanica pre lode",
+                "terms": "cerpacia stanica pre lode,benzín,benzin,nafta,palivo"
+            },
             "waterway/river": {
                 "name": "Rieka",
                 "terms": "riečka,potok,potúčik,potocik,bystrina"
@@ -3609,6 +3722,10 @@
             "waterway/riverbank": {
                 "name": "Breh rieky",
                 "terms": "riečny breh,riecny breh,bok,strana,pobrežie,pobrezie,rieky,bok rieky,strana rieky"
+            },
+            "waterway/sanitary_dump_station": {
+                "name": "Vyprázdnovanie lodných toaliet",
+                "terms": "vyprazdnovanie lodnych toaliet"
             },
             "waterway/stream": {
                 "name": "Potok",

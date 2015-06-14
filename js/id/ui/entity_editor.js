@@ -133,22 +133,26 @@ iD.ui.EntityEditor = function(context) {
     }
 
     function clean(o) {
-        function isOpeningHours(k) {
-            return _.any(['opening_hours', 'service_times', 'collection_times',
-                'operating_times', 'smoking_hours', 'happy_hours'], function(s) {
-                    return k.indexOf(s) !== -1;
-            });
-        }
+
         function cleanVal(k, v) {
+            function keepSpaces(k) {
+                var whitelist = ['opening_hours', 'service_times', 'collection_times',
+                    'operating_times', 'smoking_hours', 'happy_hours'];
+                return _.any(whitelist, function(s) { return k.indexOf(s) !== -1; });
+            }
+
+            var blacklist = ['description', 'note', 'fixme'];
+            if (_.any(blacklist, function(s) { return k.indexOf(s) !== -1; })) return v;
+
             var cleaned = v.split(';')
                 .map(function(s) { return s.trim(); })
-                .join(isOpeningHours(k) ? '; ' : ';');
+                .join(keepSpaces(k) ? '; ' : ';');
 
             // The code below is not intended to validate websites and emails.
             // It is only intended to prevent obvious copy-paste errors. (#2323)
 
             // clean website-like tags
-            if (k.indexOf('website') !== -1 || cleaned.indexOf('http') !== -1) {
+            if (k.indexOf('website') !== -1 || cleaned.indexOf('http') === 0) {
                 cleaned = cleaned
                     .replace(/[\u200B-\u200F\uFEFF]/g, '')  // strip LRM and other zero width chars
                     .replace(/[^\w\+\-\.\/\?\[\]\(\)~!@#$%&*',:;=]/g, encodeURIComponent);

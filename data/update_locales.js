@@ -3,8 +3,7 @@
 var request = require('request'),
     yaml = require('js-yaml'),
     fs = require('fs'),
-    _ = require('../js/lib/lodash.js'),
-    delve = require('delve');
+    _ = require('../js/lib/lodash.js');
 
 var resources = ['core', 'presets'];
 var outdir = './dist/locales/';
@@ -29,15 +28,20 @@ var sourceCore = yaml.load(fs.readFileSync('./data/core.yaml', 'utf8')),
 asyncMap(resources, getResource, function(err, locales) {
     if (err) return console.log(err);
 
-    var locale = _.merge(sourceCore, sourcePresets);
+    var locale = _.merge(sourceCore, sourcePresets),
+        codes = [];
+
     locales.forEach(function(l) {
         locale = _.merge(locale, l);
     });
 
     for (var i in locale) {
-        if (i === 'en') continue;
+        if (i === 'en' || _.isEmpty(locale[i])) continue;
+        codes.push(i);
         fs.writeFileSync(outdir + i + '.json', JSON.stringify(locale[i], null, 4));
     }
+
+    fs.writeFileSync('data/locales.json', JSON.stringify(codes, null, 4));
 });
 
 function getResource(resource, callback) {
@@ -54,10 +58,7 @@ function getResource(resource, callback) {
             });
 
             callback(null, locale);
-
         });
-
-        fs.writeFileSync('data/locales.json', JSON.stringify(codes, null, 4));
     });
 }
 

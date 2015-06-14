@@ -37,6 +37,11 @@ iD.ui = function(context) {
             .style('display', 'none')
             .call(iD.ui.MapInMap(context));
 
+        content.append('div')
+            .attr('class', 'infobox fillD2')
+            .style('display', 'none')
+            .call(iD.ui.Info(context));
+
         bar.append('div')
             .attr('class', 'spacer col4');
 

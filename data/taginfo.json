@@ -130,6 +130,10 @@
         },
         {
             "key": "amenity",
+            "value": "biergarten"
+        },
+        {
+            "key": "amenity",
             "value": "boat_rental"
         },
         {
@@ -323,6 +327,10 @@
         {
             "key": "amenity",
             "value": "restaurant"
+        },
+        {
+            "key": "amenity",
+            "value": "sanitary_dump_station"
         },
         {
             "key": "amenity",
@@ -1272,8 +1280,16 @@
             "value": "lighthouse"
         },
         {
+            "key": "man_made",
+            "value": "mast"
+        },
+        {
             "key": "tower:type",
             "value": "observation"
+        },
+        {
+            "key": "man_made",
+            "value": "petroleum_well"
         },
         {
             "key": "man_made",
@@ -1282,6 +1298,14 @@
         {
             "key": "man_made",
             "value": "pipeline"
+        },
+        {
+            "key": "man_made",
+            "value": "silo"
+        },
+        {
+            "key": "man_made",
+            "value": "storage_tank"
         },
         {
             "key": "man_made",
@@ -1499,7 +1523,7 @@
             "key": "place",
             "value": "city"
         },
-		{
+        {
             "key": "place",
             "value": "farm"
         },
@@ -2276,11 +2300,19 @@
         },
         {
             "key": "waterway",
+            "value": "fuel"
+        },
+        {
+            "key": "waterway",
             "value": "river"
         },
         {
             "key": "waterway",
             "value": "riverbank"
+        },
+        {
+            "key": "waterway",
+            "value": "sanitary_dump_station"
         },
         {
             "key": "waterway",

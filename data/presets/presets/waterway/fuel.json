@@ -1,0 +1,23 @@
+{
+    "icon": "fuel",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "petrol",
+        "gas",
+        "diesel",
+        "boat"
+    ],
+    "tags": {
+        "waterway": "fuel"
+    },
+    "name": "Marine Fuel Station"
+}

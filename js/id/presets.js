@@ -53,7 +53,7 @@ iD.presets = function() {
     // and the subkeys form the blacklist.
     all.areaKeys = function() {
         var areaKeys = {},
-            ignore = ['highway', 'footway', 'railway', 'type'],
+            ignore = ['barrier', 'highway', 'footway', 'railway', 'type'],
             presets = _.reject(all.collection, 'suggestion');
 
         // whitelist

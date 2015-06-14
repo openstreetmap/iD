@@ -433,9 +433,6 @@
             "ENEOS": {
                 "count": 736
             },
-            "Stacja paliw": {
-                "count": 94
-            },
             "Bharat Petroleum": {
                 "count": 64
             },
@@ -846,7 +843,10 @@
                 }
             },
             "Taco Bell": {
-                "count": 1423
+                "count": 1423,
+                "tags": {
+                    "cuisine": "mexican"
+                }
             },
             "Pizza Nova": {
                 "count": 63
@@ -863,9 +863,6 @@
             "Mr. Sub": {
                 "count": 103
             },
-            "Kebab": {
-                "count": 182
-            },
             "Макдоналдс": {
                 "count": 324,
                 "tags": {
@@ -874,9 +871,6 @@
             },
             "Asia Imbiss": {
                 "count": 111
-            },
-            "Imbiss": {
-                "count": 199
             },
             "Chipotle": {
                 "count": 290,
@@ -947,7 +941,10 @@
                 }
             },
             "Panda Express": {
-                "count": 238
+                "count": 238,
+                "tags": {
+                    "cuisine": "chinese"
+                }
             },
             "Whataburger": {
                 "count": 364
@@ -1003,7 +1000,10 @@
         },
         "restaurant": {
             "Pizza Hut": {
-                "count": 1180
+                "count": 1180,
+                "tags": {
+                    "cuisine": "pizza"
+                }
             },
             "Little Chef": {
                 "count": 64
@@ -1076,12 +1076,6 @@
             },
             "Hirschen": {
                 "count": 79
-            },
-            "Papa John's": {
-                "count": 67,
-                "tags": {
-                    "cuisine": "pizza"
-                }
             },
             "Denny's": {
                 "count": 450
@@ -1391,9 +1385,6 @@
             },
             "ジョナサン": {
                 "count": 59
-            },
-            "Arby's": {
-                "count": 51
             },
             "Longhorn Steakhouse": {
                 "count": 66
@@ -1961,7 +1952,7 @@
             "Security Bank": {
                 "count": 78
             },
-            "Millenium Bank": {
+            "Millenium": {
                 "count": 60
             },
             "Bankia": {
@@ -2456,9 +2447,6 @@
             "Second Cup": {
                 "count": 193
             },
-            "Eisdiele": {
-                "count": 73
-            },
             "Dunkin Donuts": {
                 "count": 428,
                 "tags": {
@@ -2554,10 +2542,10 @@
                 "count": 547
             },
             "Lidl": {
-                "count": 6208
+                "count": 7130
             },
-            "EDEKA": {
-                "count": 506
+            "Edeka": {
+                "count": 2293
             },
             "Coles": {
                 "count": 400
@@ -2566,7 +2554,7 @@
                 "count": 315
             },
             "Coop": {
-                "count": 1906
+                "count": 2100
             },
             "Tesco": {
                 "count": 1297
@@ -2613,11 +2601,8 @@
             "Netto": {
                 "count": 4379
             },
-            "REWE": {
-                "count": 1474
-            },
             "Rewe": {
-                "count": 1171
+                "count": 2645
             },
             "Aldi Süd": {
                 "count": 594
@@ -2633,9 +2618,6 @@
             },
             "Kiwi": {
                 "count": 167
-            },
-            "Edeka": {
-                "count": 1787
             },
             "Pick n Pay": {
                 "count": 241
@@ -2653,16 +2635,13 @@
                 "count": 258
             },
             "Spar": {
-                "count": 2100
+                "count": 2386
             },
             "Hofer": {
                 "count": 442
             },
             "M-Preis": {
                 "count": 76
-            },
-            "LIDL": {
-                "count": 922
             },
             "tegut": {
                 "count": 210
@@ -2735,9 +2714,6 @@
             },
             "Hoogvliet": {
                 "count": 53
-            },
-            "COOP": {
-                "count": 194
             },
             "Food Basics": {
                 "count": 75
@@ -2866,7 +2842,10 @@
                 "count": 80
             },
             "Whole Foods": {
-                "count": 210
+                "count": 210,
+                "tags": {
+                    "shop": "supermarket"
+                }
             },
             "Pam": {
                 "count": 56
@@ -2985,8 +2964,8 @@
             "Unimarc": {
                 "count": 177
             },
-            "Co-operative Food": {
-                "count": 59
+            "The Co-operative Food": {
+                "count": 190
             },
             "Santa Isabel": {
                 "count": 128
@@ -3069,9 +3048,6 @@
             "Carrefour Contact": {
                 "count": 83
             },
-            "SPAR": {
-                "count": 286
-            },
             "No Frills": {
                 "count": 105
             },
@@ -3086,9 +3062,6 @@
             },
             "Biedronka": {
                 "count": 1335
-            },
-            "The Co-operative Food": {
-                "count": 131
             },
             "Eurospin": {
                 "count": 155
@@ -3311,7 +3284,7 @@
                 "count": 255
             },
             "Spar": {
-                "count": 922
+                "count": 1119
             },
             "McColl's": {
                 "count": 100
@@ -3341,7 +3314,7 @@
                 "count": 135
             },
             "Coop": {
-                "count": 538
+                "count": 678
             },
             "Sale": {
                 "count": 80
@@ -3384,12 +3357,6 @@
             },
             "Valintatalo": {
                 "count": 62
-            },
-            "SPAR": {
-                "count": 197
-            },
-            "COOP": {
-                "count": 140
             },
             "Casino": {
                 "count": 90
@@ -3526,9 +3493,6 @@
             "Гастроном": {
                 "count": 152
             },
-            "Sklep spożywczy": {
-                "count": 318
-            },
             "Centra": {
                 "count": 111
             },
@@ -3595,6 +3559,9 @@
             "Kiosk": {
                 "count": 55
             },
+            "Sklep spożywczy": {
+                "count": 130
+            },
             "24 часа": {
                 "count": 58
             },
@@ -3633,9 +3600,6 @@
             },
             "เซเว่นอีเลฟเว่น": {
                 "count": 185
-            },
-            "Spożywczy": {
-                "count": 78
             },
             "Delikatesy Centrum": {
                 "count": 53
@@ -3798,13 +3762,10 @@
                 "count": 83
             },
             "Kwik Fit": {
-                "count": 75
+                "count": 128
             },
             "ATU": {
                 "count": 261
-            },
-            "Kwik-Fit": {
-                "count": 53
             },
             "Midas": {
                 "count": 202
@@ -3853,9 +3814,6 @@
             },
             "Firestone": {
                 "count": 88
-            },
-            "AutoZone": {
-                "count": 82
             },
             "Автосервис": {
                 "count": 361
@@ -4490,9 +4448,6 @@
             "Backwerk": {
                 "count": 95
             },
-            "Bäcker": {
-                "count": 68
-            },
             "Schäfer's": {
                 "count": 51
             },
@@ -4513,9 +4468,6 @@
             },
             "Хлеб": {
                 "count": 89
-            },
-            "Piekarnia": {
-                "count": 62
             },
             "Пекарня": {
                 "count": 52
@@ -4802,9 +4754,6 @@
             },
             "Стиль": {
                 "count": 51
-            },
-            "Fryzjer": {
-                "count": 56
             },
             "Franck Provost": {
                 "count": 70

@@ -90,16 +90,17 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
                 remote = remoteGraph.hasEntity(id),
                 target;
 
-            if (!remote) continue;
-
-            if (option === 'force_remote' && remote.visible) {
+            if (option === 'force_remote' && remote && remote.visible) {
                 updates.replacements.push(remote);
-            }
-            if (option === 'force_local' && local) {
-                target = iD.Entity(local, { version: remote.version });
+
+            } else if (option === 'force_local' && local) {
+                target = iD.Entity(local);
+                if (remote && remote.visible) {
+                    target = target.update({ version: remote.version });
+                }
                 updates.replacements.push(target);
-            }
-            if (option === 'safe' && local && remote) {
+
+            } else if (option === 'safe' && local && remote) {
                 target = iD.Entity(local, { version: remote.version });
                 if (remote.visible) {
                     target = mergeLocation(remote, target);

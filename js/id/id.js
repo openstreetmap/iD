@@ -58,9 +58,15 @@ window.iD = function () {
         return context;
     };
 
-    context.locale = function(_, path) {
-        locale = _;
+    context.locale = function(loc, path) {
+        locale = loc;
         localePath = path;
+
+        // Also set iD.detect().locale (unless we detected 'en-us' and openstreetmap wants 'en')..
+        if (!(loc.toLowerCase() === 'en' && iD.detect().locale.toLowerCase() === 'en-us')) {
+            iD.detect().locale = loc;
+        }
+
         return context;
     };
 
@@ -325,7 +331,7 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '1.7.0';
+iD.version = '1.7.3';
 
 (function() {
     var detected = {};
@@ -372,7 +378,7 @@ iD.version = '1.7.0';
     // Added due to incomplete svg style support. See #715
     detected.opera = (detected.browser.toLowerCase() === 'opera' && parseFloat(detected.version) < 15 );
 
-    detected.locale = navigator.language || navigator.userLanguage;
+    detected.locale = navigator.language || navigator.userLanguage || 'en-US';
 
     detected.filedrop = (window.FileReader && 'ondrop' in window);
 

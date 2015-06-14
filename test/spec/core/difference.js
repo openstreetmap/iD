@@ -66,6 +66,31 @@ describe("iD.Difference", function () {
                 diff = iD.Difference(base, head);
             expect(diff.changes()).to.eql({});
         });
+
+        it("doesn't include created entities that were subsequently reverted", function () {
+            var node = iD.Node({id: 'n-1'}),
+                base = iD.Graph(),
+                head = base.replace(node).revert('n-1'),
+                diff = iD.Difference(base, head);
+            expect(diff.changes()).to.eql({});
+        });
+
+        it("doesn't include modified entities that were subsequently reverted", function () {
+            var n1 = iD.Node({id: 'n'}),
+                n2 = n1.update({ tags: { yes: 'no' } }),
+                base = iD.Graph([n1]),
+                head = base.replace(n2).revert('n'),
+                diff = iD.Difference(base, head);
+            expect(diff.changes()).to.eql({});
+        });
+
+        it("doesn't include deleted entities that were subsequently reverted", function () {
+            var node = iD.Node({id: 'n'}),
+                base = iD.Graph([node]),
+                head = base.remove(node).revert('n'),
+                diff = iD.Difference(base, head);
+            expect(diff.changes()).to.eql({});
+        });
     });
 
     describe("#extantIDs", function () {

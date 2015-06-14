@@ -2,12 +2,17 @@
     "icon": "campsite",
     "fields": [
         "operator",
-        "address"
+        "address",
+        "capacity",
+        "fee"
     ],
     "geometry": [
         "point",
         "vertex",
         "area"
+    ],
+    "terms": [
+        "Tent"
     ],
     "tags": {
         "tourism": "camp_site"

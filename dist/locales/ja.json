@@ -110,6 +110,7 @@
                 "multiple": "{n} 個のオブジェクトを削除"
             },
             "incomplete_relation": "関連する地物データをすべてダウンロードしていないため、この地物を削除できません。",
+            "part_of_relation": "この地物は範囲外のリレーションの一部となっているため、削除できません。この地物を削除するには、まずリレーションを先に削除してください。",
             "connected_to_hidden": "非表示の地物に接続しているため、削除できません。"
         },
         "add_member": {
@@ -238,7 +239,6 @@
     "commit": {
         "title": "編集結果を保存",
         "description_placeholder": "貢献のための簡単な解説",
-        "message_label": "コミットメッセージ",
         "upload_explanation": "あなたがアップロードした編集内容は、OpenStreetMapを利用しているすべてのユーザが閲覧できるようになります。",
         "upload_explanation_with_user": "編集した内容を {user} アカウントでアップロードし、OpenStreetMapを利用しているすべてのユーザが閲覧できるようにします。",
         "save": "Save",
@@ -290,7 +290,8 @@
         "node": "ノード",
         "way": "ウェイ",
         "relation": "リレーション",
-        "location": "位置"
+        "location": "位置",
+        "add_fields": "項目追加: "
     },
     "background": {
         "title": "背景画像",
@@ -303,6 +304,78 @@
         "fix_misalignment": "背景画像をずらす",
         "reset": "設定リセット"
     },
+    "map_data": {
+        "title": "地図データ",
+        "description": "地図データ",
+        "data_layers": "データレイヤ",
+        "fill_area": "エリアを塗りつぶし",
+        "map_features": "タグ定義一覧",
+        "autohidden": "表示対象となっている地物の数が多すぎます。ズームインしてから編集を行ってください。"
+    },
+    "feature": {
+        "points": {
+            "description": "ポイント",
+            "tooltip": "地点情報"
+        },
+        "major_roads": {
+            "description": "主要道路",
+            "tooltip": "道路、街路など"
+        },
+        "minor_roads": {
+            "description": "市町村道など",
+            "tooltip": "私道、駐車場内経路、農道など"
+        },
+        "paths": {
+            "description": "山道",
+            "tooltip": "歩道、自転車道など"
+        },
+        "buildings": {
+            "description": "建築物",
+            "tooltip": "建築物、避難所、ガレージなど"
+        },
+        "landuse": {
+            "description": "土地利用関連",
+            "tooltip": "森林、農地、公園、住宅地、商業区画など"
+        },
+        "boundaries": {
+            "description": "区域境界",
+            "tooltip": "行政区境"
+        },
+        "water": {
+            "description": "水域関連",
+            "tooltip": "河川、湖沼、沼地など"
+        },
+        "rail": {
+            "description": "鉄道関連",
+            "tooltip": "鉄道"
+        },
+        "power": {
+            "description": "電力関連",
+            "tooltip": "電線、高圧線、発電所、変電所など"
+        },
+        "past_future": {
+            "description": "廃棄消失/建設予定地",
+            "tooltip": "予定地、建設中、廃業、撤去済など"
+        },
+        "others": {
+            "description": "その他",
+            "tooltip": "すべて"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "塗りつぶしなし (ワイヤフレーム)",
+            "tooltip": "ワイヤフレームモードを有効化することで、背景画像の視認性が高まります"
+        },
+        "partial": {
+            "description": "部分的に塗りつぶし",
+            "tooltip": "エリアの内側だけが塗りつぶされます。(初心者オススメ)"
+        },
+        "full": {
+            "description": "完全塗りつぶし",
+            "tooltip": "エリアがすべて塗りつぶされます。"
+        }
+    },
     "restore": {
         "heading": "OSMにアップロードされていない編集内容があります",
         "description": "前回作業した編集内容がアップロードされていません。編集内容を復元しますか？",
@@ -313,10 +386,33 @@
         "title": "保存",
         "help": "編集内容をOpenStreetMapへ保存し、他ユーザへ公開",
         "no_changes": "保存する変更はありません。",
-        "error": "データ保存中にエラーが発生しました",
+        "error": "保存中にエラーが発生しました",
+        "status_code": "サーバが状態コード{code}を返しました",
         "unknown_error_details": "インターネットに接続されているか、確認してください。",
         "uploading": "編集内容をOpenStreetMapへアップロードしています",
-        "unsaved_changes": "編集内容が保存されていません"
+        "unsaved_changes": "編集内容が保存されていません",
+        "conflict": {
+            "header": "競合している編集を解決",
+            "count": "{total}件中{num}件の競合",
+            "previous": "< 前へ",
+            "next": "次へ >",
+            "keep_local": "自分の変更を維持",
+            "keep_remote": "他の変更を採用",
+            "restore": "復元",
+            "delete": "削除したままにする",
+            "download_changes": "または変更をダウンロードしてください。",
+            "done": "すべての競合が解決されました。",
+            "help": "あなたが変更したいくつかの地物を他のユーザーも変更しました。\n以下の各項目をクリックして、競合についての詳細を確認し、自分の変更を維持するか、他のユーザーの変更を採用するかを選択してください。\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "このオブジェクトは{user}さんが削除しました。",
+            "location": "このオブジェクトはあなたと{user}さんがそれぞれ移動しました。",
+            "nodelist": "あなたと{user}さんがそれぞれノードを変更しました。",
+            "memberlist": "あなたと{user}さんがそれぞれリレーションのメンバーを変更しました。",
+            "tags": "あなたが<b>{tag}</b>タグを「{local}」で変更し、{user}さんが「{remote}」で変更しました。"
+        }
     },
     "success": {
         "edited_osm": "OSM編集完了！",
@@ -328,7 +424,8 @@
         "help_html": "あなたが投稿した内容は数分で\"標準\"レイヤーに反映されます。その他のレイヤーへの適用や、記述した地物によっては反映にさらに時間がかかる場合があります。\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>詳細</a>)\n"
     },
     "confirm": {
-        "okay": "OK"
+        "okay": "OK",
+        "cancel": "キャンセル"
     },
     "splash": {
         "welcome": "iD 起動中",
@@ -375,7 +472,7 @@
     },
     "help": {
         "title": "ヘルプ",
-        "help": "# ヘルプ\n\nこのアプリケーションは、自由に編集できる世界地図 [OpenStreetMap](http://www.openstreetmap.org/)のエディターです。このエディターを利用して、あなたの地域のデータを追加したり更新したりして、誰にとってもより便利なオープンソースかつオープンデータの世界地図を作成できます。\n\nあなたが編集した結果は、OpenStreetMapを利用するすべての人が閲覧することができます。編集するためには [無料のOpenStreetMapアカウント](https://www.openstreetmap.org/user/new) が必要です。\n\nこの [iDエディター](http://ideditor.com/) は[GitHub上のソースコード](https://github.com/openstreetmap/iD)による協力型プロジェクトです。\n",
+        "help": "# ヘルプ\n\nこのアプリケーションは、自由に編集できる世界地図 [OpenStreetMap](http://www.openstreetmap.org/)編集用のエディタです。あなたが知っている地域についての情報を追加したり、編集したりして、誰もが使いやすい情報としてデータをオープンに広めましょう。\n\nあなたが編集した結果は、OpenStreetMapを利用するすべての人が閲覧することができます。編集するためには[ログイン](https://www.openstreetmap.org/login) する必要があります。\n\nこの [iD エディタ](http://ideditor.com/) の[ソースコードはGitHubで管理](https://github.com/openstreetmap/iD)されており、誰もが参加できるプロジェクトとして公開されています。\n",
         "editing_saving": "# データの編集と保存\n\nこのエディタはオンライン環境で使用されることを前提としています、現在あなたはブラウザを通じてアクセスしているはずです。\n\n### 地物の選択\n\nポイント情報や道路といった地物情報は、地図上に表示されている対象をクリックすることで選択ができます。選択された地物はハイライトされ、詳細情報が記載されたパネルが表示されます。このパネル内の情報を編集することで、対象の地物の情報を編集できます。\n\n複数の地物を範囲選択するには、キーボードのShiftキーを押しながら地図上をクリックし、ドラッグしてください。ドラッグした範囲が四角形で表示され、その四角形の内の地物がすべて選択されます。\n\n### 編集内容の保存\n\n道路や建物、特定の場所などの追加/編集結果は、OSMサーバに保存されるまではあなたのローカルPC上に格納されます。間違った編集をしてしまっても慌てないでください。巻き戻しボタン(Undo)をクリックすることで、編集作業を巻き戻すことができます。同じ編集をもう一度実施したい場合は、巻き戻しのキャンセルボタン(redo)をクリックしてください。\n\n編集に区切りがついたら、'保存'をクリックして作業を終了してください。例えば街の一区画の編集が終わり、そこから別の場所の編集に移動する場合などです。データを保存する前に、編集した内容をもう一度見直しましょう。データが間違っている可能性がある場所がエディタ上に表示されますので、必要に応じて修正を行なってください。\n\n編集内容に問題がなければ、そのまま保存を行いましょう。あなたの編集内容を簡潔に表すコメントを記入した後、もう一度'保存'をクリックすると、あなたの編集内容が[OpenStreetMap.org](http://www.openstreetmap.org/)に投稿されます。投稿されたデータはあなた以外のすべての利用者に対しても表示されるようになり、そこに情報を追加したり、編集したりすることができるようになります。\n\n編集を一度に完了させることができない場合は、ブラウザのエディタ表示をそのままにして、いったんブラウザを閉じてしまいましょう。同じブラウザとエディタを使えば、後々、作業の続きを実施することができます。\n",
         "roads": "# 道路\n\nこのエディタは道路を作成、修正、削除する機能を備えています。小路、自動車道、山道、自転車道等々、編集対象となる道路の種別に制限はありません。交差する道路を細かく地図に描くことも可能です。\n\n### 選択\n\n対象の道路をクリックすることで、選択することができます。選択された道路は強調表示され、ラインに対する操作を行う小さなツール項目がその近くに表示されます。道路の詳細情報は、サイドバーに一覧表示されます。\n\n### 修正\n\n既に描かれている道路の中には、背景画像の衛星写真やGPSトラックと明らかに位置が異なるものがあります。そうした道路を見つけたら、道路を正しい位置に修正しましょう。\n\nまずは変更対象となる道路をクリックして選択します。対象の道路が強調表示され、操作可能なポイントがラインの上に表示されて、位置の変更が可能となります。ラインとポイントを、より正しいと思われる位置に移動させてください。ライン上のポイントを増やすには、ラインの上でダブルクリックすることで、その位置にポイントを作成することが可能です。\n\n道路の接続状態が誤っている場合は、どちらかの道路の上に表示されているポイントをもう一つのラインの上に移動させ、2つのラインを接続してください。道路の接続は地図にとって非常に重要であり、車輌のナビゲーションを行うためには道路が正しく接続されていることが必須となります。\n\n'移動'ツールをクリックするか、キーボードでショートカットキー 'M' を押すことで、道路全体を一度に移動させることができます。もう一度クリックすることで、その位置へ対象が移動します。\n\n### 削除\n\n描かれている道路が完全に間違っている場合 - 衛星写真に映っておらず、より理想としては実際に現地で道路が無いことを確認できた場合 - その道路のデータそのものを削除し、地図から消すことが可能です。地物を削除する際の注意として、編集結果は他の編集と同様すべての利用者の目に触れること、また、衛星写真は撮影日時が古い可能性があり、道路が新しく敷設されているかもしれないことを意識してください。\n\n道路を削除するには、対象のラインをクリックして選択し、ツール項目からゴミ箱アイコンをクリックするか、'Delete'キーを押してください。\n\n### 新規作成\n\n道路があるはずなのにまだ描かれていない？ エディタ左上に表示されている'ライン'アイコンをクリックするか、ショートカットキー'2'を押すと、ラインの新規描画を行うことができます。\n\n地図をクリックすることで、その地点からラインの描画が開始されます。もし既に描かれている道路から枝分かれした道路の場合は、既存道路で分岐が行われている部分をクリックして、その位置から描画を始めるようにしてください。\n\n衛星画像やGPSログなどで表示されている道路の形に添ってクリックし、ポイントを作成してください。描画している道路が他の道路と交差している場合は、交差している位置でクリックし、ラインを接続してください。描画を終了するには、終了する位置でダブルクリックするか、キーボードの'Return'、あるいは'Enter'キーを押してください。\n",
         "gps": "# GPS\n\nOpenStreetMapにおいて、GPSデータは最も信用できる情報源です。iDエディタはあなたのPC上にある`.gpx`ファイルのトレース機能をサポートしています。GPSログは、スマートフォンのアプリケーションやGPSロガーを使用することで収集することができます。\n\nGPSを使用した現地調査の詳細な進め方については、[GPSによる調査](http://learnosm.org/jp/beginner/using-gps/)を参照してください。\n\nGPXログファイルをエディタの上にドラッグ＆ドロップすることで、ファイルの内容をエディタ上に表示させることができます。ファイル形式の読み込みが正常に完了すると、ログは明るい紫色の線としてエディタ上に表示されます。エディタの左側に配置されている「地図データ」メニューをクリックすると、ログの表示/非表示、GPXが配置されたレイヤーへのズームを設定することができます。\n\nこのGPXログファイルはOpenStreetMapへ直接アップロードされたものではありません。このログを参考情報として地図を描いたり、あなたが追加する地物の配置場所の参考情報とするのがよいでしょう。また、あなた以外のユーザにもGPSログを使ってもらうためには[OpenStreetMapへのアップロード機能](http://www.openstreetmap.org/trace/create)を利用してください。\n",
@@ -470,39 +567,39 @@
         "fields": {
             "access": {
                 "label": "通行制限",
+                "options": {
+                    "designated": {
+                        "description": "特定の地方条例や標識等で通行制限が行われている",
+                        "title": "特定種の通行禁止"
+                    },
+                    "destination": {
+                        "description": "特定の目的地へ移動する用途でのみ通行が許可されている",
+                        "title": "目的外通行の禁止"
+                    },
+                    "no": {
+                        "description": "一般の通行が許可されていない",
+                        "title": "制限あり"
+                    },
+                    "permissive": {
+                        "description": "所有者が通行制限しない限り通行可",
+                        "title": "所有者許諾あり"
+                    },
+                    "private": {
+                        "description": "通行時には所有者の許可を得る必要がある",
+                        "title": "私有"
+                    },
+                    "yes": {
+                        "description": "法律上の許可あり; 正当利用",
+                        "title": "通行可"
+                    }
+                },
                 "placeholder": "その他",
                 "types": {
                     "access": "一般",
-                    "foot": "歩行者",
-                    "motor_vehicle": "オートバイ",
                     "bicycle": "自転車",
-                    "horse": "乗馬"
-                },
-                "options": {
-                    "yes": {
-                        "title": "通行可",
-                        "description": "法律上の許可あり; 正当利用"
-                    },
-                    "no": {
-                        "title": "制限あり",
-                        "description": "一般の通行が許可されていない"
-                    },
-                    "permissive": {
-                        "title": "所有者許諾あり",
-                        "description": "所有者が通行制限しない限り通行可"
-                    },
-                    "private": {
-                        "title": "私有",
-                        "description": "通行時には所有者の許可を得る必要がある"
-                    },
-                    "designated": {
-                        "title": "特定種の通行禁止",
-                        "description": "特定の地方条例や標識等で通行制限が行われている"
-                    },
-                    "destination": {
-                        "title": "目的外通行の禁止",
-                        "description": "特定の目的地へ移動する用途でのみ通行が許可されている"
-                    }
+                    "foot": "歩行者",
+                    "horse": "乗馬",
+                    "motor_vehicle": "オートバイ"
                 }
             },
             "access_simple": {
@@ -515,19 +612,19 @@
             "address": {
                 "label": "住所",
                 "placeholders": {
+                    "city": "市町村名",
+                    "country": "郡",
+                    "district": "District",
+                    "hamlet": "Hamlet",
                     "housename": "地番",
                     "housenumber": "123",
-                    "street": "所属する街路名",
-                    "city": "市町村名",
-                    "postcode": "郵便番号",
                     "place": "地名",
-                    "hamlet": "Hamlet",
-                    "suburb": "区",
-                    "subdistrict": "Subdistrict",
-                    "district": "District",
+                    "postcode": "郵便番号",
                     "province": "県",
                     "state": "州",
-                    "country": "郡"
+                    "street": "所属する街路名",
+                    "subdistrict": "Subdistrict",
+                    "suburb": "区"
                 }
             },
             "admin_level": {
@@ -539,9 +636,9 @@
             "aerialway/access": {
                 "label": "乗降場所",
                 "options": {
+                    "both": "両方",
                     "entry": "入口",
-                    "exit": "出口",
-                    "both": "両方"
+                    "exit": "出口"
                 }
             },
             "aerialway/bubble": {
@@ -565,9 +662,9 @@
             "aerialway/summer/access": {
                 "label": "乗降場所（夏季）",
                 "options": {
+                    "both": "両方",
                     "entry": "入口",
-                    "exit": "出口",
-                    "both": "両方"
+                    "exit": "出口"
                 }
             },
             "aeroway": {
@@ -616,29 +713,29 @@
             "cardinal_direction": {
                 "label": "方向",
                 "options": {
-                    "N": "北",
                     "E": "東",
-                    "S": "南",
-                    "W": "西",
-                    "NE": "北東",
-                    "SE": "南東",
-                    "SW": "南西",
-                    "NW": "北西",
-                    "NNE": "北北東",
                     "ENE": "東北東",
                     "ESE": "東南東",
+                    "N": "北",
+                    "NE": "北東",
+                    "NNE": "北北東",
+                    "NNW": "北北西",
+                    "NW": "北西",
+                    "S": "南",
+                    "SE": "南東",
                     "SSE": "南南東",
                     "SSW": "南南西",
-                    "WSW": "西南西",
+                    "SW": "南西",
+                    "W": "西",
                     "WNW": "西北西",
-                    "NNW": "北北西"
+                    "WSW": "西南西"
                 }
             },
             "clock_direction": {
                 "label": "方向",
                 "options": {
-                    "clockwise": "右回り",
-                    "anticlockwise": "左回り"
+                    "anticlockwise": "左回り",
+                    "clockwise": "右回り"
                 }
             },
             "collection_times": {
@@ -677,15 +774,18 @@
             "description": {
                 "label": "説明"
             },
+            "drive_through": {
+                "label": "ドライブスルー"
+            },
             "electrified": {
                 "label": "電化状態",
-                "placeholder": "架線、集電レール...",
                 "options": {
                     "contact_line": "架線",
+                    "no": "非電化",
                     "rail": "集電レール",
-                    "yes": "電化（未定義）",
-                    "no": "非電化"
-                }
+                    "yes": "電化（未定義）"
+                },
+                "placeholder": "架線、集電レール..."
             },
             "elevation": {
                 "label": "標高"
@@ -710,9 +810,9 @@
                 "label": "タイプ",
                 "options": {
                     "pillar": "柱/地上",
+                    "pond": "池",
                     "underground": "地下",
-                    "wall": "壁",
-                    "pond": "池"
+                    "wall": "壁"
                 }
             },
             "fixme": {
@@ -751,6 +851,15 @@
             "gauge": {
                 "label": "軌間"
             },
+            "gender": {
+                "label": "性別",
+                "options": {
+                    "female": "女性",
+                    "male": "男性",
+                    "unisex": "性別区分なし"
+                },
+                "placeholder": "不明"
+            },
             "generator/method": {
                 "label": "方式"
             },
@@ -787,17 +896,24 @@
             "incline": {
                 "label": "傾斜"
             },
+            "incline_steps": {
+                "label": "傾斜",
+                "options": {
+                    "down": "下",
+                    "up": "上"
+                }
+            },
             "information": {
                 "label": "タイプ"
             },
             "internet_access": {
                 "label": "インターネット環境",
                 "options": {
-                    "yes": "有り",
                     "no": "無し",
-                    "wlan": "Wi-Fi",
+                    "terminal": "情報端末",
                     "wired": "有線LAN",
-                    "terminal": "情報端末"
+                    "wlan": "Wi-Fi",
+                    "yes": "有り"
                 }
             },
             "lamp_type": {
@@ -816,20 +932,20 @@
             "leaf_cycle": {
                 "label": "葉の季節変化",
                 "options": {
-                    "evergreen": "常緑樹",
                     "deciduous": "落葉樹",
-                    "semi_evergreen": "ほぼ常緑樹",
+                    "evergreen": "常緑樹",
+                    "mixed": "混合",
                     "semi_deciduous": "ほぼ落葉樹",
-                    "mixed": "混合"
+                    "semi_evergreen": "ほぼ常緑樹"
                 }
             },
             "leaf_type": {
                 "label": "葉の種類",
                 "options": {
                     "broadleaved": "広葉樹",
-                    "needleleaved": "針葉樹",
+                    "leafless": "葉なし",
                     "mixed": "混合",
-                    "leafless": "葉なし"
+                    "needleleaved": "針葉樹"
                 }
             },
             "leisure": {
@@ -857,7 +973,6 @@
             },
             "mtb/scale": {
                 "label": "マウンテンバイク難易度",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: 硬い砂利/圧縮土、障害物なし、緩いカーブ",
                     "1": "1: いくらか緩んだ表面、小さな障害物、緩いカーブ",
@@ -866,22 +981,22 @@
                     "4": "4: 緩んだ地面や杭、危険なヘアピンカーブ",
                     "5": "5: 最大の難しさ、漂礫地や地滑り",
                     "6": "6: 最上級のマウンテンバイクでなければ乗れない"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "IMBAトレイル難易度",
-                "placeholder": "初級者、中級者、上級者...",
                 "options": {
                     "0": "非常に容易 (白い円)",
                     "1": "容易 (緑色の円)",
                     "2": "中程度 (青い四角形)",
                     "3": "困難 (黒いひし形)",
                     "4": "非常に困難 (黒いひし形2つ)"
-                }
+                },
+                "placeholder": "初級者、中級者、上級者..."
             },
             "mtb/scale/uphill": {
                 "label": "マウンテンバイク登山難易度",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: 平均10%未満の傾斜、地面は舗装/圧縮、障害物なし",
                     "1": "1: 平均15%未満の傾斜、地面は舗装/圧縮、小さな障害物あり",
@@ -889,7 +1004,8 @@
                     "3": "3: 平均25%未満の傾斜、変化のある地面、それなりの石や枝がある",
                     "4": "4: 平均30%未満の傾斜、地面状態は良くない、大きい岩や木の枝がある",
                     "5": "5: 非常に険しく、通常マウンテンバイクを押すか運ぶかする必要がある"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "名称",
@@ -910,17 +1026,17 @@
             "oneway": {
                 "label": "一方通行",
                 "options": {
+                    "no": "いいえ",
                     "undefined": "おそらくいいえ",
-                    "yes": "はい",
-                    "no": "いいえ"
+                    "yes": "はい"
                 }
             },
             "oneway_yes": {
                 "label": "一方通行",
                 "options": {
+                    "no": "いいえ",
                     "undefined": "おそらくはい",
-                    "yes": "はい",
-                    "no": "いいえ"
+                    "yes": "はい"
                 }
             },
             "opening_hours": {
@@ -939,13 +1055,13 @@
             "parking": {
                 "label": "タイプ",
                 "options": {
-                    "surface": "地面",
-                    "multi-storey": "マルチレベル",
-                    "underground": "地下",
-                    "sheds": "納屋",
                     "carports": "カーポート",
                     "garage_boxes": "箱型ガレージ",
-                    "lane": "路側帯"
+                    "lane": "路側帯",
+                    "multi-storey": "マルチレベル",
+                    "sheds": "納屋",
+                    "surface": "地面",
+                    "underground": "地下"
                 }
             },
             "phone": {
@@ -954,24 +1070,24 @@
             },
             "piste/difficulty": {
                 "label": "難易度",
-                "placeholder": "初心者向け、普通、上級者向け",
                 "options": {
-                    "novice": "初心者向け (教習用)",
-                    "easy": "簡単 (緑色の円)",
-                    "intermediate": "普通 (青色の四角)",
                     "advanced": "上級 (黒色のひし形)",
+                    "easy": "簡単 (緑色の円)",
                     "expert": "エキスパート (黒色のひし形2つ)",
+                    "extreme": "エクストリーム (登山装備要)",
                     "freeride": "フリーライド (コース外)",
-                    "extreme": "エクストリーム (登山装備要)"
-                }
+                    "intermediate": "普通 (青色の四角)",
+                    "novice": "初心者向け (教習用)"
+                },
+                "placeholder": "初心者向け、普通、上級者向け"
             },
             "piste/grooming": {
                 "label": "整備状況",
                 "options": {
-                    "classic": "クラシック",
-                    "mogul": "モーグル",
                     "backcountry": "バックカントリー",
+                    "classic": "クラシック",
                     "classic+skating": "クラシックアンドスケーティング",
+                    "mogul": "モーグル",
                     "scooter": "スクーター/スノーモービル",
                     "skating": "スケーティング"
                 }
@@ -980,14 +1096,14 @@
                 "label": "種別",
                 "options": {
                     "downhill": "ダウンヒル",
+                    "hike": "ハイキング",
+                    "ice_skate": "アイススケート",
                     "nordic": "ノルディック",
+                    "playground": "児童公園",
                     "skitour": "スキーツアー",
                     "sled": "小型そり",
-                    "hike": "ハイキング",
                     "sleigh": "そり",
-                    "ice_skate": "アイススケート",
-                    "snow_park": "スキー場",
-                    "playground": "児童公園"
+                    "snow_park": "スキー場"
                 }
             },
             "place": {
@@ -1009,7 +1125,7 @@
                 "label": "古布回収"
             },
             "recycling/glass": {
-                "label": "落ち葉・草回収"
+                "label": "ガラス回収"
             },
             "recycling/paper": {
                 "label": "古紙回収"
@@ -1037,21 +1153,46 @@
             },
             "sac_scale": {
                 "label": "ハイキングの難易度",
-                "placeholder": "山岳ハイキング, 高地登山…",
                 "options": {
-                    "hiking": "T1: ハイキング",
-                    "mountain_hiking": "T2: 山岳ハイキング",
-                    "demanding_mountain_hiking": "T3: 中難度の山岳ハイキング",
                     "alpine_hiking": "T4: 高地登山",
                     "demanding_alpine_hiking": "T5: 中難度の高地登山",
-                    "difficult_alpine_hiking": "T6: 高難度の高地登山"
-                }
+                    "demanding_mountain_hiking": "T3: 中難度の山岳ハイキング",
+                    "difficult_alpine_hiking": "T6: 高難度の高地登山",
+                    "hiking": "T1: ハイキング",
+                    "mountain_hiking": "T2: 山岳ハイキング"
+                },
+                "placeholder": "山岳ハイキング, 高地登山…"
             },
             "seasonal": {
                 "label": "季節限定"
             },
             "service": {
                 "label": "種類"
+            },
+            "service/bicycle/chain_tool": {
+                "label": "チェーンツール",
+                "options": {
+                    "no": "いいえ",
+                    "undefined": "おそらくいいえ",
+                    "yes": "はい"
+                }
+            },
+            "service/bicycle/pump": {
+                "label": "エアパルプ",
+                "options": {
+                    "no": "無し",
+                    "undefined": "たぶん無し",
+                    "yes": "有り"
+                }
+            },
+            "service_rail": {
+                "label": "サービスの種類",
+                "options": {
+                    "crossover": "クロスオーバー",
+                    "siding": "側線",
+                    "spur": "引き込み線",
+                    "yard": "車両基地"
+                }
             },
             "shelter": {
                 "label": "避難所"
@@ -1067,28 +1208,29 @@
             },
             "smoking": {
                 "label": "喫煙の可否",
-                "placeholder": "いいえ、分けた、はい...",
                 "options": {
-                    "no": "禁煙",
-                    "separated": "室内喫煙（未分煙）",
+                    "dedicated": "喫煙者向け（例: スモーカーズクラブ）",
                     "isolated": "室内喫煙（分煙）",
+                    "no": "禁煙",
                     "outside": "屋外のみ喫煙可",
-                    "yes": "喫煙可",
-                    "dedicated": "喫煙者向け（例: スモーカーズクラブ）"
-                }
+                    "separated": "室内喫煙（未分煙）",
+                    "yes": "喫煙可"
+                },
+                "placeholder": "いいえ、分けた、はい..."
             },
             "smoothness": {
                 "label": "スムーズさ",
-                "placeholder": "ローラースケートなど, 二輪車・四輪車, オフロード車…",
                 "options": {
+                    "bad": "二輪車・四輪車：マウンテンバイク・自動車・リキシャ",
                     "excellent": "ローラースケート・スケートボード",
                     "good": "レース用自転車",
-                    "intermediate": "二輪車など：シティバイク・車いす・スクーター",
-                    "bad": "二輪車・四輪車：マウンテンバイク・自動車・リキシャ",
-                    "very_bad": "最低地上高が高い：軽クロカン車",
                     "horrible": "オフロード：重オフロード車",
+                    "impassable": "通りぬけ不可 / 車輌・自転車不可",
+                    "intermediate": "二輪車など：シティバイク・車いす・スクーター",
+                    "very_bad": "最低地上高が高い：軽クロカン車",
                     "very_horrible": "特殊オフロード車：トラクター・ATV（全地形対応車）"
-                }
+                },
+                "placeholder": "ローラースケートなど, 二輪車・四輪車, オフロード車…"
             },
             "social_facility_for": {
                 "label": "施設の対象者",
@@ -1108,16 +1250,19 @@
             },
             "structure": {
                 "label": "構造",
-                "placeholder": "不明",
                 "options": {
                     "bridge": "橋",
-                    "tunnel": "トンネル",
-                    "embankment": "土手",
                     "cutting": "切り通し",
-                    "ford": "洗い越し"
-                }
+                    "embankment": "土手",
+                    "ford": "洗い越し",
+                    "tunnel": "トンネル"
+                },
+                "placeholder": "不明"
             },
             "studio_type": {
+                "label": "タイプ"
+            },
+            "substation": {
                 "label": "タイプ"
             },
             "supervised": {
@@ -1129,13 +1274,22 @@
             "tactile_paving": {
                 "label": "点字ブロック"
             },
+            "takeaway": {
+                "label": "持ち帰り",
+                "options": {
+                    "no": "不可能",
+                    "only": "持ち帰りのみ",
+                    "yes": "可能"
+                },
+                "placeholder": "可、不可、持ち帰りのみ"
+            },
             "toilets/disposal": {
                 "label": "汚物処理",
                 "options": {
-                    "flush": "水洗式",
-                    "pitlatrine": "汲み取り式",
+                    "bucket": "バケツ汲み出し",
                     "chemical": "化学処理",
-                    "bucket": "バスケットゴール"
+                    "flush": "水洗式",
+                    "pitlatrine": "汲み取り式"
                 }
             },
             "tourism": {
@@ -1146,26 +1300,26 @@
             },
             "tracktype": {
                 "label": "トラック種別",
-                "placeholder": "硬質, 大部分が硬質, 軟質…",
                 "options": {
                     "grade1": "硬質: 舗装もしくは煉瓦・砕石の締固め路盤",
                     "grade2": "大部分が硬質: 砂利・岩と柔らかい物質の混合",
                     "grade3": "硬軟の物質の混合",
                     "grade4": "大部分が軟質: 土／砂／草と硬い物質の混合",
                     "grade5": "軟質: 土／砂／草"
-                }
+                },
+                "placeholder": "硬質, 大部分が硬質, 軟質…"
             },
             "trail_visibility": {
                 "label": "道の可視度",
-                "placeholder": "優・良・悪…",
                 "options": {
+                    "bad": "悪: 道はなかったりわからなかったりで，かつ目印なし",
                     "excellent": "優: すべて明確な道・目印あり",
                     "good": "良: 判別可能な目印あり（場合によっては目印の探索が必要）",
-                    "intermediate": "中間: 道の大部分は分かるが目印は少ない",
-                    "bad": "悪: 道はなかったりわからなかったりで，かつ目印なし",
                     "horrible": "劣悪: ほとんど道がなく定位技量が必要",
+                    "intermediate": "中間: 道の大部分は分かるが目印は少ない",
                     "no": "不可: 道はなく，高度な定位技量が必要"
-                }
+                },
+                "placeholder": "優・良・悪…"
             },
             "trees": {
                 "label": "木の数"
@@ -1316,6 +1470,10 @@
                 "name": "レンタサイクル",
                 "terms": "レンタサイクル"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "自転車修理ステーション",
+                "terms": "自転車修理ステーション"
+            },
             "amenity/boat_rental": {
                 "name": "貸しボート",
                 "terms": "貸しボート"
@@ -1420,6 +1578,10 @@
                 "name": "（教会・寺院にある）墓所",
                 "terms": "墓地,霊園,墓場,お墓,墓苑"
             },
+            "amenity/grit_bin": {
+                "name": "砂箱",
+                "terms": "砂箱, 氷結防止"
+            },
             "amenity/hospital": {
                 "name": "病院の敷地",
                 "terms": "病院の敷地"
@@ -1488,6 +1650,10 @@
                 "name": "居酒屋",
                 "terms": "パブ,居酒屋"
             },
+            "amenity/public_bookcase": {
+                "name": "公共の本棚",
+                "terms": "公共の本棚"
+            },
             "amenity/ranger_station": {
                 "name": "レンジャーの詰所",
                 "terms": "レンジャーの詰所, レンジャーステーション"
@@ -1495,6 +1661,10 @@
             "amenity/recycling": {
                 "name": "リサイクルボックス",
                 "terms": "リサイクルボックス"
+            },
+            "amenity/register_office": {
+                "name": "登記所",
+                "terms": "登記所, 法人登記, 登録所"
             },
             "amenity/restaurant": {
                 "name": "レストラン",
@@ -1828,6 +1998,10 @@
                 "name": "時計製造所",
                 "terms": "時計製造所"
             },
+            "craft/confectionery": {
+                "name": "菓子屋",
+                "terms": "駄菓子屋,パシティエ"
+            },
             "craft/dressmaker": {
                 "name": "衣服製造所",
                 "terms": "衣服製造所"
@@ -2069,8 +2243,8 @@
                 "terms": "生活道路, 路地"
             },
             "highway/mini_roundabout": {
-                "name": "小さなロータリー",
-                "terms": "小さなロータリー, ラウンドアバウト"
+                "name": "小さな環状交差点",
+                "terms": "小さな環状交差点"
             },
             "highway/motorway": {
                 "name": "自動車専用道路",
@@ -2232,6 +2406,10 @@
                 "name": "道祖神",
                 "terms": "道祖神"
             },
+            "junction": {
+                "name": "交差点",
+                "terms": "交差点"
+            },
             "landuse": {
                 "name": "土地利用",
                 "terms": "土地利用"
@@ -2252,9 +2430,21 @@
                 "name": "教会の敷地",
                 "terms": "教会, 教会の敷地"
             },
+            "landuse/commercial": {
+                "name": "オフィス街",
+                "terms": "オフィス街"
+            },
             "landuse/construction": {
                 "name": "建設用地",
                 "terms": "工事中用地, 建設用地"
+            },
+            "landuse/farm": {
+                "name": "農地",
+                "terms": "農地"
+            },
+            "landuse/farmland": {
+                "name": "農地",
+                "terms": "農地"
             },
             "landuse/farmyard": {
                 "name": "農業施設用地",
@@ -2264,9 +2454,17 @@
                 "name": "人工林",
                 "terms": "人工林, 二次林, 営林, 保安林, 鉄道林"
             },
+            "landuse/garages": {
+                "name": "車庫",
+                "terms": "ガレージ"
+            },
             "landuse/grass": {
                 "name": "草地",
                 "terms": "草地, 芝生"
+            },
+            "landuse/industrial": {
+                "name": "工業用地",
+                "terms": "工業用地, 工業団地"
             },
             "landuse/landfill": {
                 "name": "最終処分場",
@@ -2276,6 +2474,10 @@
                 "name": "牧草地",
                 "terms": "牧草地"
             },
+            "landuse/military": {
+                "name": "軍用地",
+                "terms": "軍用地"
+            },
             "landuse/orchard": {
                 "name": "果樹園",
                 "terms": "果樹園, 果物畑, リンゴ畑, ミカン畑"
@@ -2283,6 +2485,14 @@
             "landuse/quarry": {
                 "name": "露天掘り鉱山",
                 "terms": "採石場, 石切り場, 露天掘り鉱山"
+            },
+            "landuse/residential": {
+                "name": "住宅地",
+                "terms": "住宅地, 住宅街"
+            },
+            "landuse/retail": {
+                "name": "商業地",
+                "terms": "商業地,ショッピング地区,ショッピング街"
             },
             "landuse/vineyard": {
                 "name": "ぶどう畑",
@@ -2319,6 +2529,9 @@
             "leisure/marina": {
                 "name": "マリーナ",
                 "terms": "マリーナ, ヨットハーバー"
+            },
+            "leisure/nature_reserve": {
+                "name": "自然保護区"
             },
             "leisure/park": {
                 "name": "公園",
@@ -2393,8 +2606,8 @@
                 "terms": "線, ライン"
             },
             "man_made": {
-                "name": "人工物",
-                "terms": "人工物"
+                "name": "建造物",
+                "terms": "人工物, 建造物"
             },
             "man_made/breakwater": {
                 "name": "防波堤",
@@ -2479,6 +2692,9 @@
             "natural/beach": {
                 "name": "砂浜",
                 "terms": "砂浜, ビーチ"
+            },
+            "natural/cave_entrance": {
+                "name": "洞穴入口"
             },
             "natural/cliff": {
                 "name": "崖",
@@ -2784,6 +3000,10 @@
                 "name": "リレーション",
                 "terms": "リレーション, 関連"
             },
+            "roundabout": {
+                "name": "環状交差点",
+                "terms": "環状交差点,ラウンドアバウト"
+            },
             "route/ferry": {
                 "name": "フェリールート",
                 "terms": "フェリールート, 航路"
@@ -2884,9 +3104,21 @@
                 "name": "コンピューター店",
                 "terms": "コンピューター店, パソコン店"
             },
+            "shop/confectionery": {
+                "name": "菓子屋"
+            },
             "shop/convenience": {
                 "name": "コンビニエンスストア",
                 "terms": "コンビニエンスストア, コンビニ"
+            },
+            "shop/copyshop": {
+                "name": "コピー店"
+            },
+            "shop/cosmetics": {
+                "name": "化粧品店"
+            },
+            "shop/curtain": {
+                "name": "カーテン店"
             },
             "shop/deli": {
                 "name": "惣菜屋",
@@ -2900,9 +3132,15 @@
                 "name": "日曜大工用品店",
                 "terms": "日曜大工用品店, 工具店, DIYショップ, ホームセンター"
             },
+            "shop/dry_cleaning": {
+                "name": "クリーニング店"
+            },
             "shop/electronics": {
                 "name": "家電販売店",
                 "terms": "家電販売店"
+            },
+            "shop/fabric": {
+                "name": "ファブリック店"
             },
             "shop/farm": {
                 "name": "農産物直売所",
@@ -2980,9 +3218,15 @@
                 "name": "CD/レコード店",
                 "terms": "CD店, レコード店"
             },
+            "shop/musical_instrument": {
+                "name": "楽器店"
+            },
             "shop/optician": {
                 "name": "メガネ",
                 "terms": "メガネ,眼鏡,メガネ屋,眼鏡屋"
+            },
+            "shop/pawnbroker": {
+                "name": "質店"
             },
             "shop/pet": {
                 "name": "ペットショップ",
@@ -2992,9 +3236,15 @@
                 "name": "写真屋",
                 "terms": "写真屋"
             },
+            "shop/pyrotechnics": {
+                "name": "花火店"
+            },
             "shop/seafood": {
                 "name": "魚屋",
                 "terms": "海鮮食品店,魚屋,魚市場"
+            },
+            "shop/second_hand": {
+                "name": "リサイクルショップ"
             },
             "shop/shoes": {
                 "name": "靴店",
@@ -3015,6 +3265,16 @@
             "shop/tailor": {
                 "name": "仕立て屋",
                 "terms": "仕立て屋,テイラー,洋裁店"
+            },
+            "shop/tattoo": {
+                "name": "タトゥースタジオ"
+            },
+            "shop/tea": {
+                "name": "茶店",
+                "terms": "茶舗"
+            },
+            "shop/tobacco": {
+                "name": "煙草屋"
             },
             "shop/toys": {
                 "name": "玩具店",
@@ -3111,6 +3371,18 @@
             "tourism/zoo": {
                 "name": "動物園",
                 "terms": "動物園"
+            },
+            "traffic_calming/bump": {
+                "name": "減速帯"
+            },
+            "traffic_calming/hump": {
+                "name": "ハンプ"
+            },
+            "traffic_calming/rumble_strip": {
+                "name": "ランブルストリップ"
+            },
+            "traffic_calming/table": {
+                "name": "横断歩道橋"
             },
             "type/boundary": {
                 "name": "境界",

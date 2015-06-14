@@ -286,6 +286,11 @@
         "type": "combo",
         "label": "Type"
     },
+    "content": {
+        "key": "content",
+        "type": "combo",
+        "label": "Contents"
+    },
     "country": {
         "key": "country",
         "type": "combo",
@@ -861,6 +866,11 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "power_supply": {
+        "key": "power_supply",
+        "type": "check",
+        "label": "Power Supply"
+    },
     "railway": {
         "key": "railway",
         "type": "typeCombo",
@@ -940,6 +950,11 @@
                 "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"
             }
         }
+    },
+    "sanitary_dump_station": {
+        "key": "sanitary_dump_station",
+        "type": "check",
+        "label": "Toilet Disposal"
     },
     "seasonal": {
         "key": "seasonal",
@@ -1245,6 +1260,11 @@
         "key": "water",
         "type": "combo",
         "label": "Type"
+    },
+    "water_point": {
+        "key": "water_point",
+        "type": "check",
+        "label": "Water Point"
     },
     "waterway": {
         "key": "waterway",

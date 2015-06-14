@@ -3,6 +3,7 @@ iD.presets.Preset = function(id, preset, fields) {
 
     preset.id = id;
     preset.fields = (preset.fields || []).map(getFields);
+    preset.geometry = (preset.geometry || []);
 
     function getFields(f) {
         return fields[f];
@@ -76,6 +77,7 @@ iD.presets.Preset = function(id, preset, fields) {
             }
         }
 
+        delete tags.area;
         return tags;
     };
 
@@ -93,11 +95,23 @@ iD.presets.Preset = function(id, preset, fields) {
             }
         }
 
-        // Add area=yes if necessary
-        for (k in applyTags) {
-            if (geometry === 'area' && !(k in iD.areaKeys))
+        // Add area=yes if necessary.
+        // This is necessary if the geometry is already an area (e.g. user drew an area) AND any of:
+        // 1. chosen preset could be either an area or a line (`barrier=city_wall`)
+        // 2. chosen preset doesn't have a key in areaKeys (`railway=station`)
+        if (geometry === 'area') {
+            var needsAreaTag = true;
+            if (preset.geometry.indexOf('line') === -1) {
+                for (k in applyTags) {
+                    if (k in iD.areaKeys) {
+                        needsAreaTag = false;
+                        break;
+                    }
+                }
+            }
+            if (needsAreaTag) {
                 tags.area = 'yes';
-            break;
+            }
         }
 
         for (var f in preset.fields) {

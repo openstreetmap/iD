@@ -52,10 +52,27 @@ iD.modes.Save = function(context) {
                 showErrors();
 
             } else {
+                var loadMore = [];
                 _.each(result.data, function(entity) {
                     remoteGraph.replace(entity);
                     toLoad = _.without(toLoad, entity.id);
+
+                    // Because loadMultiple doesn't download /full like loadEntity,
+                    // need to also load children that aren't already being checked..
+                    if (!entity.visible) return;
+                    if (entity.type === 'way') {
+                        loadMore.push.apply(loadMore,
+                            _.difference(entity.nodes, toCheck, toLoad, loadMore));
+                    } else if (entity.type === 'relation' && entity.isMultipolygon()) {
+                        loadMore.push.apply(loadMore,
+                            _.difference(_.pluck(entity.members, 'id'), toCheck, toLoad, loadMore));
+                    }
                 });
+
+                if (loadMore.length) {
+                    toLoad.push.apply(toLoad, loadMore);
+                    context.connection().loadMultiple(loadMore, loaded);
+                }
 
                 if (!toLoad.length) {
                     checkConflicts();
@@ -85,7 +102,7 @@ iD.modes.Save = function(context) {
                         var a = localGraph.hasEntity(children[i]),
                             b = remoteGraph.hasEntity(children[i]);
 
-                        if (!a || !b || a.version !== b.version) return false;
+                        if (a && b && a.version !== b.version) return false;
                     }
                 }
 
@@ -103,8 +120,8 @@ iD.modes.Save = function(context) {
 
                 history.replace(merge);
 
-                var conflicts = merge.conflicts();
-                if (!conflicts.length) return;  // merged safely
+                var mergeConflicts = merge.conflicts();
+                if (!mergeConflicts.length) return;  // merged safely
 
                 var forceLocal = action(id, localGraph, remoteGraph).withOption('force_local'),
                     forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote'),
@@ -114,7 +131,7 @@ iD.modes.Save = function(context) {
                 conflicts.push({
                     id: id,
                     name: entityName(local),
-                    details: conflicts,
+                    details: mergeConflicts,
                     chosen: 1,
                     choices: [
                         choice(id, keepMine, forceLocal),
@@ -134,23 +151,34 @@ iD.modes.Save = function(context) {
             } else if (errors.length) {
                 showErrors();
             } else {
-                context.connection().putChangeset(
-                    history.changes(iD.actions.DiscardTags(history.difference())),
-                    e.comment,
-                    history.imageryUsed(),
-                    function(err, changeset_id) {
-                        if (err) {
-                            errors.push({
-                                msg: err.responseText,
-                                details: [ t('save.status_code', { code: err.status }) ]
-                            });
-                            showErrors();
-                        } else {
-                            loading.close();
-                            context.flush();
-                            success(e, changeset_id);
-                        }
-                    });
+                var changes = history.changes(iD.actions.DiscardTags(history.difference()));
+                if (changes.modified.length || changes.created.length || changes.deleted.length) {
+                    context.connection().putChangeset(
+                        changes,
+                        e.comment,
+                        history.imageryUsed(),
+                        function(err, changeset_id) {
+                            if (err) {
+                                errors.push({
+                                    msg: err.responseText,
+                                    details: [ t('save.status_code', { code: err.status }) ]
+                                });
+                                showErrors();
+                            } else {
+                                history.clearSaved();
+                                success(e, changeset_id);
+                                // Add delay to allow for postgres replication #1646 #2678
+                                window.setTimeout(function() {
+                                    loading.close();
+                                    context.flush();
+                                }, 2500);
+                            }
+                        });
+                } else {        // changes were insignificant or reverted by user
+                    loading.close();
+                    context.flush();
+                    cancel();
+                }
             }
         }
 
@@ -175,6 +203,19 @@ iD.modes.Save = function(context) {
                     selection.remove();
                 })
                 .on('save', function() {
+                    for (var i = 0; i < conflicts.length; i++) {
+                        if (conflicts[i].chosen === 1) {  // user chose "keep theirs"
+                            var entity = context.hasEntity(conflicts[i].id);
+                            if (entity && entity.type === 'way') {
+                                var children = _.uniq(entity.nodes);
+                                for (var j = 0; j < children.length; j++) {
+                                    history.replace(iD.actions.Revert(children[j]));
+                                }
+                            }
+                            history.replace(iD.actions.Revert(conflicts[i].id));
+                        }
+                    }
+
                     selection.remove();
                     save(e, true);
                 })
@@ -256,8 +297,8 @@ iD.modes.Save = function(context) {
                     id: changeset_id,
                     comment: e.comment
                 })
-                .on('cancel', function(ui) {
-                    context.ui().sidebar.hide(ui);
+                .on('cancel', function() {
+                    context.ui().sidebar.hide();
                 })));
     }
 
@@ -272,7 +313,7 @@ iD.modes.Save = function(context) {
     };
 
     mode.exit = function() {
-        context.ui().sidebar.hide(ui);
+        context.ui().sidebar.hide();
     };
 
     return mode;
