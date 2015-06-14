@@ -142,6 +142,7 @@ iD.Background = function(context) {
 
         reader.onload = function(e) {
             gpxLayer.geojson(toGeoJSON.gpx(toDom(e.target.result)));
+            iD.ui.MapInMap.gpxLayer.geojson(toGeoJSON.gpx(toDom(e.target.result)));
             background.zoomToGpxLayer();
             dispatch.change();
         };
@@ -167,6 +168,7 @@ iD.Background = function(context) {
 
     background.toggleGpxLayer = function() {
         gpxLayer.enable(!gpxLayer.enable());
+        iD.ui.MapInMap.gpxLayer.enable(!iD.ui.MapInMap.gpxLayer.enable());
         dispatch.change();
     };
 
@@ -263,6 +265,7 @@ iD.Background = function(context) {
         if (gpx) {
             d3.text(gpx, function(err, gpxTxt) {
                 gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
+                iD.ui.MapInMap.gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
                 dispatch.change();
             });
         }

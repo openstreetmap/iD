@@ -2,8 +2,10 @@ iD.ui.MapInMap = function(context) {
     var key = '/';
 
     function map_in_map(selection) {
+
         var backgroundLayer = iD.TileLayer(),
-            gpxLayer = iD.GpxLayer(context),
+            dispatch = d3.dispatch('change'),
+            gpxLayer = iD.GpxLayer(context, dispatch),
             overlayLayer = iD.TileLayer(),
             projection = iD.geo.RawMercator(),
             zoom = d3.behavior.zoom()
@@ -13,6 +15,8 @@ iD.ui.MapInMap = function(context) {
             panning = false,
             zDiff = 6,    // by default, minimap renders at (main zoom - 6)
             tStart, tLast, tCurr, kLast, kCurr, tiles, svg, gpx, timeoutId;
+
+        iD.ui.MapInMap.gpxLayer = gpxLayer;
 
         function ztok(z) { return 256 * Math.pow(2, z); }
         function ktoz(k) { return Math.log(k) / Math.LN2 - 8; }
@@ -278,18 +282,6 @@ iD.ui.MapInMap = function(context) {
                 if (drawn.full === true) redraw();
             });
 
-        function toDom(x) {
-            return (new DOMParser()).parseFromString(x, 'text/xml');
-        }
-
-        var q = iD.util.stringQs(location.hash.substring(1));
-        var gpx = q.gpx;
-        if (gpx) {
-            d3.text(gpx, function(err, gpxTxt) {
-                gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
-                queueRedraw();
-            });
-        }
         redraw();
 
         var keybinding = d3.keybinding('map-in-map')

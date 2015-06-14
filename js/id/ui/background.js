@@ -255,9 +255,9 @@ iD.ui.Background = function(context) {
         var controls = content.append('div')
             .attr('class', 'controls-list');
 
-        var label = controls.append('label');
+        var minimapLabel = controls.append('label');
 
-        label.classed('minimap-toggle', true)
+        minimapLabel.classed('minimap-toggle', true)
             .append('input')
             .attr('type', 'checkbox')
             .on('change', function() {
@@ -267,7 +267,7 @@ iD.ui.Background = function(context) {
                 d3.event.preventDefault();
             });
 
-        label.append('span')
+        minimapLabel.append('span')
             .text(t('background.toggle_minimap'));
 
         var adjustments = content.append('div')
