@@ -156,12 +156,45 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             if (t.entity.id === way.nodes[0] || t.entity.id === way.nodes[1]) return;
         }
 
-        var newNode1 = iD.Node({loc: targets[0].loc}),
-            newNode2 = iD.Node({loc: targets[1].loc});
+        var entity, newNode1, newNode2, choice, edge;
 
-        context.replace(
-            iD.actions.AddEntity(newNode1),
-            iD.actions.AddEntity(newNode2),
+        // targets[0]
+        entity = targets[0].entity;
+        if (entity) {
+            entity = context.entity(entity.id);
+            if (entity.type === 'node') {
+                newNode1 = entity;
+            } else if (entity.type === 'way') {
+                choice = iD.geo.chooseEdge(context.childNodes(entity), targets[0].point, context.projection);
+                edge = [entity.nodes[choice.index - 1], entity.nodes[choice.index]];
+                newNode1 = iD.Node({loc: choice.loc});
+                context.replace(iD.actions.AddMidpoint({ loc: choice.loc, edge: edge}, newNode1));
+            }
+        } else {
+            newNode1 = iD.Node({loc: targets[0].loc});
+            context.replace(iD.actions.AddEntity(newNode1));
+        }
+
+
+        // targets[1]
+        entity = targets[1].entity;
+        if (entity) {
+            entity = context.entity(entity.id);
+            if (entity.type === 'node') {
+                newNode2 = entity;
+            } else if (entity.type === 'way') {
+                choice = iD.geo.chooseEdge(context.childNodes(entity), targets[1].point, context.projection);
+                edge = [entity.nodes[choice.index - 1], entity.nodes[choice.index]];
+                newNode2 = iD.Node({loc: choice.loc});
+                context.replace(iD.actions.AddMidpoint({ loc: choice.loc, edge: edge}, newNode2));
+            }
+        } else {
+            newNode2 = iD.Node({loc: targets[1].loc});
+            context.replace(iD.actions.AddEntity(newNode2));
+        }
+
+
+        context.perform(
             ReplaceTemporaryNode(newNode1, newNode2),
             iD.actions.ChangeTags(wayId, {building:'yes'}),  // just for show, remove later..
             annotation);
