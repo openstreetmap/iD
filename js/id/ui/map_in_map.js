@@ -55,7 +55,7 @@ iD.ui.MapInMap = function(context) {
 
             iD.util.setTransform(tiles, tX, tY, scale);
             iD.util.setTransform(svg, 0, 0, scale);
-            iD.util.setTransform(gpx, tX, tY, scale);
+            iD.util.setTransform(gpx, 0, 0, scale);
             transformed = true;
 
             queueRedraw();
