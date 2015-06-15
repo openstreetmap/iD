@@ -42,12 +42,31 @@ iD.ui.preset.cycleway = function(field) {
             .on('blur', change);
     }
 
-    function change(d) {
-        var tag = {};
-        tag[d] = d3.select(this).value() || undefined;
-        if (tag[d] === 'none') {
-            tag[d] = undefined;
+    function change() {
+        var inputs = d3.selectAll('.preset-input-cycleway')[0],
+            left = d3.select(inputs[0]).value(),
+            right = d3.select(inputs[1]).value(),
+            tag = {};
+        if (left === 'none' || left === '') { left = undefined; }
+        if (right === 'none' || right === '') { right = undefined; }
+
+        // Always set both left and right as changing one can affect the other
+        tag = {
+            cycleway: undefined,
+            'cycleway:left': left,
+            'cycleway:right': right
+        };
+
+        // If the left and right tags match, use the cycleway tag to tag both
+        // sides the same way
+        if (left === right) {
+            tag = {
+                cycleway: left,
+                'cycleway:left': undefined,
+                'cycleway:right': undefined
+            };
         }
+
         event.change(tag);
     }
 
@@ -64,10 +83,14 @@ iD.ui.preset.cycleway = function(field) {
 
     cycleway.tags = function(tags) {
         items.selectAll('.preset-input-cycleway')
-            .value(function(d) { return tags[d] || ''; })
-            .attr('placeholder', function() {
-                return tags.cycleway ? tags.cycleway : field.placeholder();
-            });
+            .value(function(d) {
+                // If cycleway is set, always return that
+                if (tags.cycleway) {
+                    return tags.cycleway;
+                }
+                return tags[d] || '';
+            })
+            .attr('placeholder', field.placeholder());
     };
 
     cycleway.focus = function() {
