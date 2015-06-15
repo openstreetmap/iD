@@ -11,8 +11,7 @@
         "mtb/scale",
         "mtb/scale/uphill",
         "mtb/scale/imba",
-        "ref",
-        "cycleway"
+        "ref"
     ],
     "geometry": [
         "line"
