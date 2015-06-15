@@ -4036,8 +4036,7 @@
             "mtb/scale",
             "mtb/scale/uphill",
             "mtb/scale/imba",
-            "ref",
-            "cycleway"
+            "ref"
         ],
         "geometry": [
             "line"
@@ -4466,8 +4465,7 @@
             "smoothness",
             "mtb/scale",
             "mtb/scale/uphill",
-            "mtb/scale/imba",
-            "cycleway"
+            "mtb/scale/imba"
         ],
         "geometry": [
             "line"

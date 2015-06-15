@@ -323,7 +323,6 @@
     },
     "cycleway": {
         "keys": [
-            "cycleway",
             "cycleway:left",
             "cycleway:right"
         ],
@@ -335,7 +334,6 @@
         "placeholder": "none",
         "strings": {
             "types": {
-                "cycleway": "Both sides",
                 "cycleway:left": "Left side",
                 "cycleway:right": "Right side"
             },

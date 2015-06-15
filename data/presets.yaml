@@ -252,7 +252,7 @@ en:
         # 'cuisine=*'
         label: Cuisine
       cycleway:
-        # 'cycleway=*, cycleway:left=*, cycleway:right=*'
+        # 'cycleway:left=*, cycleway:right=*'
         label: Bike Lanes
         options:
           # lane=yes
@@ -286,7 +286,6 @@ en:
         # cycleway field placeholder
         placeholder: none
         types:
-          cycleway: Both sides
           'cycleway:left': Left side
           'cycleway:right': Right side
       delivery:

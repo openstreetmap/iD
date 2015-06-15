@@ -790,7 +790,6 @@
                 "label": "Bike Lanes",
                 "placeholder": "none",
                 "types": {
-                    "cycleway": "Both sides",
                     "cycleway:left": "Left side",
                     "cycleway:right": "Right side"
                 },
