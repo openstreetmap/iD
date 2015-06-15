@@ -71,9 +71,7 @@ iD.ui.preset.cycleway = function(field) {
     }
 
     cycleway.options = function() {
-        var options = ['none', 'lane', 'shared_lane', 'track', 'share_busway', 'opposite_lane', 'opposite'];
-
-        return options.map(function(option) {
+        return d3.keys(field.strings.options).map(function(option) {
             return {
                 title: field.t('options.' + option + '.description'),
                 value: option
