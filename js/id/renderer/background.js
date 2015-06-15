@@ -264,9 +264,11 @@ iD.Background = function(context) {
         var gpx = q.gpx;
         if (gpx) {
             d3.text(gpx, function(err, gpxTxt) {
-                gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
-                iD.ui.MapInMap.gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
-                dispatch.change();
+                if (!err) {
+                    gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
+                    iD.ui.MapInMap.gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
+                    dispatch.change();
+                }
             });
         }
     };
