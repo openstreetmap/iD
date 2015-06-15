@@ -98,7 +98,7 @@ iD.ui.preset.wikipedia = function(field, context) {
                 } catch (e) {
                     anchor = decodeURIComponent(m[3]);
                 }
-                value += "#" + anchor.replace(/_/g, ' ');
+                value += '#' + anchor.replace(/_/g, ' ');
             }
             value = value.slice(0, 1).toUpperCase() + value.slice(1);
             lang.value(l[1]);
@@ -120,11 +120,13 @@ iD.ui.preset.wikipedia = function(field, context) {
         if (l) {
             lang.value(l[1]);
             title.value(m[2] + (anchor ? ('#' + anchor) : ''));
-            try {
-                // Best-effort `anchorencode:` implementation
-                anchor = encodeURIComponent(anchor.replace(/ /g, '_')).replace(/%/g, '.');
-            } catch (e) {
-                anchor = anchor.replace(/ /g, '_');
+            if (anchor) {
+                try {
+                    // Best-effort `anchorencode:` implementation
+                    anchor = encodeURIComponent(anchor.replace(/ /g, '_')).replace(/%/g, '.');
+                } catch (e) {
+                    anchor = anchor.replace(/ /g, '_');
+                }
             }
             link.attr('href', 'http://' + m[1] + '.wikipedia.org/wiki/' +
                       m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : ''));
