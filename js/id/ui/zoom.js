@@ -33,10 +33,15 @@ iD.ui.Zoom = function(context) {
         _.each(['=','ffequals','plus','ffplus'], function(key) {
             keybinding.on(key, function() { context.zoomIn(); });
             keybinding.on('⇧' + key, function() { context.zoomIn(); });
+            keybinding.on('ctrl+' + key, function() { context.zoomInFurther(); });
+            keybinding.on('ctrl+⇧' + key, function() { context.zoomInFurther(); });
         });
+
         _.each(['-','ffminus','_','dash'], function(key) {
             keybinding.on(key, function() { context.zoomOut(); });
             keybinding.on('⇧' + key, function() { context.zoomOut(); });
+            keybinding.on('ctrl+' + key, function() { context.zoomOutFurther(); });
+            keybinding.on('ctrl+⇧' + key, function() { context.zoomOutFurther(); });
         });
 
         d3.select(document)

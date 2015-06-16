@@ -327,8 +327,19 @@ iD.Map = function(context) {
         return redraw();
     };
 
-    map.zoomIn = function() { interpolateZoom(~~map.zoom() + 1); };
-    map.zoomOut = function() { interpolateZoom(~~map.zoom() - 1); };
+    function zoomIn(integer) {
+      interpolateZoom(~~map.zoom() + integer);
+    }
+
+    function zoomOut(integer) {
+      interpolateZoom(~~map.zoom() - integer);
+    }
+
+    map.zoomIn = function() { zoomIn(1); };
+    map.zoomInFurther = function() { zoomIn(4); };
+
+    map.zoomOut = function() { zoomOut(1); };
+    map.zoomOutFurther = function() { zoomOut(4); };
 
     map.center = function(loc) {
         if (!arguments.length) {

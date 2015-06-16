@@ -154,7 +154,10 @@ iD.ui = function(context) {
             context.history().unlock();
         };
 
+        var mapDimensions = map.dimensions();
+
         d3.select(window).on('resize.editor', function() {
+            mapDimensions = m.dimensions();
             map.dimensions(m.dimensions());
         });
 
@@ -165,14 +168,18 @@ iD.ui = function(context) {
         }
 
         // pan amount
-        var pa = 5;
+        var pa = 10;
 
         var keybinding = d3.keybinding('main')
             .on('⌫', function() { d3.event.preventDefault(); })
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
-            .on('↓', pan([0, -pa]));
+            .on('↓', pan([0, -pa]))
+            .on('shift+←', pan([mapDimensions[0], 0]))
+            .on('shift+↑', pan([0, mapDimensions[1]]))
+            .on('shift+→', pan([-mapDimensions[0], 0]))
+            .on('shift+↓', pan([0, -mapDimensions[1]]));
 
         d3.select(document)
             .call(keybinding);
