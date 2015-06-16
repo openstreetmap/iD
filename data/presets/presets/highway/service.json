@@ -6,7 +6,8 @@
         "maxspeed",
         "structure",
         "access",
-        "surface"
+        "surface",
+        "cycleway"
     ],
     "geometry": [
         "line"
