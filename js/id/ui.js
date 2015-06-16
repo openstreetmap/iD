@@ -163,6 +163,7 @@ iD.ui = function(context) {
 
         function pan(d) {
             return function() {
+                d3.event.preventDefault();
                 context.pan(d);
             };
         }
@@ -176,10 +177,14 @@ iD.ui = function(context) {
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
             .on('↓', pan([0, -pa]))
-            .on('shift+←', pan([mapDimensions[0], 0]))
-            .on('shift+↑', pan([0, mapDimensions[1]]))
-            .on('shift+→', pan([-mapDimensions[0], 0]))
-            .on('shift+↓', pan([0, -mapDimensions[1]]));
+            .on('⇧←', pan([mapDimensions[0], 0]))
+            .on('⇧↑', pan([0, mapDimensions[1]]))
+            .on('⇧→', pan([-mapDimensions[0], 0]))
+            .on('⇧↓', pan([0, -mapDimensions[1]]))
+            .on(iD.ui.cmd('⌘←'), pan([mapDimensions[0], 0]))
+            .on(iD.ui.cmd('⌘↑'), pan([0, mapDimensions[1]]))
+            .on(iD.ui.cmd('⌘→'), pan([-mapDimensions[0], 0]))
+            .on(iD.ui.cmd('⌘↓'), pan([0, -mapDimensions[1]]));
 
         d3.select(document)
             .call(keybinding);
