@@ -269,7 +269,7 @@ iD.ui.Background = function(context) {
             .on('change', function() {
                 iD.ui.MapInMap.toggle();
                 d3.event.preventDefault();
-            })
+            });
 
         minimapLabel.append('span')
             .text(t('background.minimap.description'));
