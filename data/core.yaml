@@ -267,8 +267,10 @@ en:
     custom_button: Edit custom background
     custom_prompt: "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
     fix_misalignment: Fix alignment
-    toggle_minimap: Minimap
     reset: reset
+    minimap:
+      description: Minimap
+      tooltip: Show a zoomed out map to help locate the area currently displayed.
   map_data:
     title: Map Data
     description: Map Data

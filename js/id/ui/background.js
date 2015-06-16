@@ -255,7 +255,13 @@ iD.ui.Background = function(context) {
         var controls = content.append('div')
             .attr('class', 'controls-list');
 
-        var minimapLabel = controls.append('label');
+        var minimapLabel = controls
+            .append('label')
+            .call(bootstrap.tooltip()
+                .html(true)
+                .title(iD.ui.tooltipHtml(t('background.minimap.tooltip'), '/'))
+                .placement('top')
+            );
 
         minimapLabel.classed('minimap-toggle', true)
             .append('input')
@@ -263,10 +269,10 @@ iD.ui.Background = function(context) {
             .on('change', function() {
                 iD.ui.MapInMap.toggle();
                 d3.event.preventDefault();
-            });
+            })
 
         minimapLabel.append('span')
-            .text(t('background.toggle_minimap'));
+            .text(t('background.minimap.description'));
 
         var adjustments = content.append('div')
             .attr('class', 'adjustments');
