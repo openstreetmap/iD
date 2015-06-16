@@ -1,8 +1,7 @@
 {
 	"fields": [
         "leaf_type",
-        "leaf_cycle",
-        "height"
+        "leaf_cycle"
     ],
     "icon": "park",
     "geometry": [
