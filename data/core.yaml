@@ -267,6 +267,7 @@ en:
     custom_button: Edit custom background
     custom_prompt: "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
     fix_misalignment: Fix alignment
+    toggle_minimap: Minimap
     reset: reset
   map_data:
     title: Map Data

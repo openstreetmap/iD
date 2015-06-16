@@ -2,7 +2,10 @@ iD.ui.MapInMap = function(context) {
     var key = '/';
 
     function map_in_map(selection) {
+
         var backgroundLayer = iD.TileLayer(),
+            dispatch = d3.dispatch('change'),
+            gpxLayer = iD.GpxLayer(context, dispatch),
             overlayLayer = iD.TileLayer(),
             projection = iD.geo.RawMercator(),
             zoom = d3.behavior.zoom()
@@ -11,7 +14,9 @@ iD.ui.MapInMap = function(context) {
             transformed = false,
             panning = false,
             zDiff = 6,    // by default, minimap renders at (main zoom - 6)
-            tStart, tLast, tCurr, kLast, kCurr, tiles, svg, timeoutId;
+            tStart, tLast, tCurr, kLast, kCurr, tiles, svg, gpx, timeoutId;
+
+        iD.ui.MapInMap.gpxLayer = gpxLayer;
 
         function ztok(z) { return 256 * Math.pow(2, z); }
         function ktoz(k) { return Math.log(k) / Math.LN2 - 8; }
@@ -50,6 +55,7 @@ iD.ui.MapInMap = function(context) {
 
             iD.util.setTransform(tiles, tX, tY, scale);
             iD.util.setTransform(svg, 0, 0, scale);
+            iD.util.setTransform(gpx, 0, 0, scale);
             transformed = true;
 
             queueRedraw();
@@ -111,6 +117,7 @@ iD.ui.MapInMap = function(context) {
             if (transformed) {
                 iD.util.setTransform(tiles, 0, 0);
                 iD.util.setTransform(svg, 0, 0);
+                iD.util.setTransform(gpx, 0, 0);
                 transformed = false;
             }
         }
@@ -133,7 +140,6 @@ iD.ui.MapInMap = function(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'map-in-map-tiles');
-
 
             // redraw background
             backgroundLayer
@@ -184,6 +190,20 @@ iD.ui.MapInMap = function(context) {
                     .call(overlayLayer);
             }
 
+            gpxLayer
+                .projection(projection);
+
+            gpx = tiles
+                .selectAll('.map-in-map-gpx')
+                .data([0]);
+
+            gpx.enter()
+                .append('div')
+                .attr('class', 'map-in-map-gpx');
+
+            gpx.call(gpxLayer);
+            gpx.dimensions(dMini);
+
             // redraw bounding box
             if (!panning) {
                 var getPath = d3.geo.path().projection(projection),
@@ -224,6 +244,8 @@ iD.ui.MapInMap = function(context) {
         function toggle() {
             if (d3.event) d3.event.preventDefault();
 
+            var label = d3.select('.minimap-toggle');
+
             if (hidden()) {
                 selection
                     .style('display', 'block')
@@ -231,6 +253,9 @@ iD.ui.MapInMap = function(context) {
                     .transition()
                     .duration(200)
                     .style('opacity', 1);
+
+                label.classed('active', true)
+                    .select('input').property('checked', true);
 
                 redraw();
 
@@ -244,9 +269,13 @@ iD.ui.MapInMap = function(context) {
                     .each('end', function() {
                         d3.select(this).style('display', 'none');
                     });
+
+                label.classed('active', false)
+                    .select('input').property('checked', false);
             }
         }
 
+        iD.ui.MapInMap.toggle = toggle;
 
         selection
             .on('mousedown.map-in-map', startMouse)
