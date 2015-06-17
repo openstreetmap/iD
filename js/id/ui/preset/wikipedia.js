@@ -84,12 +84,22 @@ iD.ui.preset.wikipedia = function(field, context) {
 
     function change() {
         var value = title.value(),
-            m = value.match(/https?:\/\/([a-z]+)\.wikipedia\.org\/wiki\/(.+)/),
-            l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; });
+            m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/),
+            l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; }),
+            anchor;
 
         if (l) {
             // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
-            value = m[2].replace(/_/g, ' ');
+            value = decodeURIComponent(m[2]).replace(/_/g, ' ');
+            if (m[3]) {
+                try {
+                    // Best-effort `anchordecode:` implementation
+                    anchor = decodeURIComponent(m[3].replace(/\.([0-9A-F]{2})/g, '%$1'));
+                } catch (e) {
+                    anchor = decodeURIComponent(m[3]);
+                }
+                value += '#' + anchor.replace(/_/g, ' ');
+            }
             value = value.slice(0, 1).toUpperCase() + value.slice(1);
             lang.value(l[1]);
             title.value(value);
@@ -102,14 +112,24 @@ iD.ui.preset.wikipedia = function(field, context) {
 
     i.tags = function(tags) {
         var value = tags[field.key] || '',
-            m = value.match(/([^:]+):(.+)/),
-            l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; });
+            m = value.match(/([^:]+):([^#]+)(?:#(.+))?/),
+            l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; }),
+            anchor = m && m[3];
 
         // value in correct format
         if (l) {
             lang.value(l[1]);
-            title.value(m[2]);
-            link.attr('href', 'http://' + m[1] + '.wikipedia.org/wiki/' + m[2]);
+            title.value(m[2] + (anchor ? ('#' + anchor) : ''));
+            if (anchor) {
+                try {
+                    // Best-effort `anchorencode:` implementation
+                    anchor = encodeURIComponent(anchor.replace(/ /g, '_')).replace(/%/g, '.');
+                } catch (e) {
+                    anchor = anchor.replace(/ /g, '_');
+                }
+            }
+            link.attr('href', 'http://' + m[1] + '.wikipedia.org/wiki/' +
+                      m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : ''));
 
         // unrecognized value format
         } else {
