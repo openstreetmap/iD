@@ -1195,6 +1195,9 @@
             "recycling/paper": {
                 "label": "Accepts Paper"
             },
+            "recycling/type": {
+                "label": "Recycling Type"
+            },
             "ref": {
                 "label": "Reference"
             },

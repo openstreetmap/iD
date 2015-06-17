@@ -944,6 +944,11 @@
         "type": "check",
         "label": "Accepts Paper"
     },
+    "recycling/type": {
+        "key": "recycling_type",
+        "type": "combo",
+        "label": "Recycling Type"
+    },
     "ref": {
         "key": "ref",
         "type": "text",

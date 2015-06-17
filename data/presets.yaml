@@ -739,6 +739,9 @@ en:
       recycling/paper:
         # 'recycling:paper=*'
         label: Accepts Paper
+      recycling/type:
+        # 'recycling_type=*'
+        label: Recycling Type
       ref:
         # 'ref=*'
         label: Reference
