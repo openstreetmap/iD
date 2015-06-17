@@ -462,6 +462,11 @@ en:
       If you can't finish your edits in one sitting, you can leave the editor
       window and come back (on the same browser and computer), and the
       editor application will offer to restore your work.
+
+      ### Using the editor
+
+      A list of available keyboard shortcuts can be found [here](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).
+
     roads: |
       # Roads
 
