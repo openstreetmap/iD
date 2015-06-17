@@ -42,32 +42,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     }
 
 
-    function ReplaceTemporaryNode(newNode, newNode2) {
-        return function(graph) {
-            if (isOrthogonal) {
-                var newWay = way
-                    .addNode(newNode.id, -1)
-                    .addNode(newNode2.id, -1);
-                return graph
-                    .replace(newWay)
-                    .remove(ortho1)
-                    .remove(ortho2);
-
-            } else if (isClosed) {
-                return graph
-                    .replace(way.addNode(newNode.id, index))
-                    .remove(end);
-
-            } else {
-                return graph
-                    .replace(graph.entity(wayId).addNode(newNode.id, index))
-                    .remove(end)
-                    .remove(segment)
-                    .remove(start);
-            }
-        };
-    }
-
     function move(targets) {
         for (var i = 0; i < targets.length; i++) {
             var entity = targets[i].entity,
@@ -77,7 +51,6 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
                 selfWay = (isOrthogonal || isClosed) ? wayId : segment.id;
 
             if (entity) {    // snap to target entity unless it's self..
-                // if (isOrthogonal) debugger;
                 if (entity.type === 'node' && entity.id !== selfNode) {
                     loc = entity.loc;
                 } else if (entity.type === 'way' && entity.id !== selfWay) {
@@ -147,61 +120,111 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     };
 
 
-    // For now, orthogonal mode only, assume targets.length === 2
+    // Add multiple click targets, snapping to target entities if necessary..
     drawWay.addTargets = function(targets) {
-        // Avoid creating orthogonal shapes with duplicate nodes..
-        for (var i = 0; i < targets.length; i++) {
-            var t = targets[i];
-            if (!t.entity) continue;
-            if (t.entity.id === way.nodes[0] || t.entity.id === way.nodes[1]) return;
+        function vecAdd(a, b) { return [a[0] + b[0], a[1] + b[1]]; }
+
+        var newIds = [],
+            entity, target, choice, edge, newNode, i;
+
+        // Avoid creating orthogonal shapes with duplicate nodes (i.e. a line)..
+        for (i = 0; i < targets.length; i++) {
+            entity = targets[i].entity;
+            if (!entity) continue;
+            // For now, orthogonal mode only..
+            if (entity.id === way.nodes[0] || entity.id === way.nodes[1]) return;
         }
 
-        var entity, newNode1, newNode2, choice, edge;
+        // For each target: create a node, or snap to an existing entity..
+        for (i = 0; i < targets.length; i++) {
+            target = targets[i];
+            entity = target.entity;
 
-        // targets[0]
-        entity = targets[0].entity;
-        if (entity) {
-            entity = context.entity(entity.id);
-            if (entity.type === 'node') {
-                newNode1 = entity;
-            } else if (entity.type === 'way') {
-                choice = iD.geo.chooseEdge(context.childNodes(entity), targets[0].point, context.projection);
-                edge = [entity.nodes[choice.index - 1], entity.nodes[choice.index]];
-                newNode1 = iD.Node({loc: choice.loc});
-                context.replace(iD.actions.AddMidpoint({ loc: choice.loc, edge: edge}, newNode1));
+            if (entity) {
+                // Get latest.. If multiple nodes snap to the same target entity,
+                // it may have been modified during this loop..
+                entity = context.entity(entity.id);
+
+                if (entity.type === 'node') {
+                    newIds.push(entity.id);
+                } else if (entity.type === 'way') {
+                    choice = iD.geo.chooseEdge(context.childNodes(entity), target.point, context.projection);
+                    edge = [entity.nodes[choice.index - 1], entity.nodes[choice.index]];
+                    newNode = iD.Node({loc: choice.loc});
+                    context.replace(iD.actions.AddMidpoint({ loc: choice.loc, edge: edge}, newNode));
+                    newIds.push(newNode.id);
+                }
+
+            } else {
+                newNode = iD.Node({loc: target.loc});
+                context.replace(iD.actions.AddEntity(newNode));
+                newIds.push(newNode.id);
             }
-        } else {
-            newNode1 = iD.Node({loc: targets[0].loc});
-            context.replace(iD.actions.AddEntity(newNode1));
         }
 
-
-        // targets[1]
-        entity = targets[1].entity;
-        if (entity) {
-            entity = context.entity(entity.id);
-            if (entity.type === 'node') {
-                newNode2 = entity;
-            } else if (entity.type === 'way') {
-                choice = iD.geo.chooseEdge(context.childNodes(entity), targets[1].point, context.projection);
-                edge = [entity.nodes[choice.index - 1], entity.nodes[choice.index]];
-                newNode2 = iD.Node({loc: choice.loc});
-                context.replace(iD.actions.AddMidpoint({ loc: choice.loc, edge: edge}, newNode2));
+        // Replace temporary nodes..
+        context.replace(function(graph) {
+                var newWay = way;
+                for (var i = 0; i < newIds.length; i++) {
+                    newWay = newWay.addNode(newIds[i], -1);
+                }
+                // For now, orthogonal mode only..
+                return graph
+                    .replace(newWay)
+                    .remove(ortho1)
+                    .remove(ortho2);
             }
-        } else {
-            newNode2 = iD.Node({loc: targets[1].loc});
-            context.replace(iD.actions.AddEntity(newNode2));
-        }
+        );
 
+        // Try to snap other nearby nodes onto the new shape..
+        if (!d3.event.altKey) {
+            var pad = 3,   // pad extent by a few screen pixels
+                proj = context.projection,
+                newWay = context.entity(wayId),
+                extent = newWay.extent(context.graph()),
+                min = vecAdd( proj(extent[0]), [-pad,  pad] ),
+                max = vecAdd( proj(extent[1]), [ pad, -pad] ),
+                padExtent = iD.geo.Extent(proj.invert(min), proj.invert(max));
+
+            var testNodes = context.intersects(padExtent).filter(function (entity) {
+                return entity.type === 'node' && newWay.nodes.indexOf(entity.id) === -1;
+            });
+
+            for (i = 0; i < testNodes.length; i++) {
+                choice = iD.geo.chooseEdge(context.childNodes(newWay), proj(testNodes[i].loc), proj);
+                if (choice.distance < pad) {
+                    edge = [newWay.nodes[choice.index - 1], newWay.nodes[choice.index]];
+                    context.replace(iD.actions.AddMidpoint({ loc: choice.loc, edge: edge}, testNodes[i]));
+                    newWay = context.entity(wayId);
+                }
+            }
+        }
 
         context.perform(
-            ReplaceTemporaryNode(newNode1, newNode2),
             iD.actions.ChangeTags(wayId, {building:'yes'}),  // just for show, remove later..
             annotation);
 
         finished = true;
         context.enter(iD.modes.Browse(context));  // just for show, replace with Select later..
     };
+
+
+    function ReplaceTemporaryNode(newNode) {
+        return function(graph) {
+            if (isClosed) {
+                return graph
+                    .replace(way.addNode(newNode.id, index))
+                    .remove(end);
+
+            } else {
+                return graph
+                    .replace(graph.entity(wayId).addNode(newNode.id, index))
+                    .remove(end)
+                    .remove(segment)
+                    .remove(start);
+            }
+        };
+    }
 
     // Accept the current position of the temporary node and continue drawing.
     drawWay.add = function(loc) {

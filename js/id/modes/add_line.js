@@ -57,7 +57,7 @@ iD.modes.AddLine = function(context, option) {
     }
 
     function startFromNode(node) {
-        var graph = context.graph(),
+        var baseGraph = context.graph(),
             way = iD.Way();
 
         if (mode.option === 'orthogonal') {
