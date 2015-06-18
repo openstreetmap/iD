@@ -242,7 +242,7 @@ iD.History = function(context) {
             });
         },
 
-        fromJSON: function(json) {
+        fromJSON: function(json, loadChildNodes) {
             var h = JSON.parse(json);
 
             iD.Entity.id.next = h.nextIDs;
@@ -256,7 +256,7 @@ iD.History = function(context) {
                 });
 
                 if (h.version === 3) {
-                    // this merges originals for changed entities into the base of
+                    // This merges originals for changed entities into the base of
                     // the stack even if the current stack doesn't have them (for
                     // example when iD has been restarted in a different region)
                     var baseEntities = h.baseEntities.map(function(entity) {
@@ -264,6 +264,33 @@ iD.History = function(context) {
                     });
                     stack[0].graph.rebase(baseEntities, _.pluck(stack, 'graph'), true);
                     tree.rebase(baseEntities, true);
+
+                    // When we restore a modified way, we also need to fetch any missing
+                    // childnodes that would normally have been downloaded with it.. #2142
+                    if (loadChildNodes) {
+                        var missing =  _(baseEntities)
+                                .filter('type', 'way')
+                                .pluck('nodes')
+                                .flatten()
+                                .uniq()
+                                .reject(function(n) { return stack[0].graph.hasEntity(n); })
+                                .value();
+
+                        if (!_.isEmpty(missing)) {
+                            context.connection().loadMultiple(missing, function(err, result) {
+                                if (err) return;
+
+                                var visible = _.groupBy(result.data, 'visible');
+                                if (!_.isEmpty(visible.true)) {
+                                    stack[0].graph.rebase(visible.true, _.pluck(stack, 'graph'), false);
+                                    tree.rebase(visible.true, false);
+                                }
+                                // if (!_.isEmpty(visible.false)) {
+                                    // todo: something here!
+                                // }
+                            });
+                        }
+                    }
                 }
 
                 stack = h.stack.map(function(d) {
@@ -336,7 +363,7 @@ iD.History = function(context) {
             if (!lock.locked()) return;
 
             var json = context.storage(getKey('saved_history'));
-            if (json) history.fromJSON(json);
+            if (json) history.fromJSON(json, true);
         },
 
         _getKey: getKey

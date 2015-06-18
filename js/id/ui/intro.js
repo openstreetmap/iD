@@ -18,7 +18,7 @@ iD.ui.intro = function(context) {
         // Load semi-real data used in intro
         context.connection().toggle(false).flush();
         context.history().reset();
-        
+
         introGraph = JSON.parse(iD.introGraph);
         for (var key in introGraph) {
             introGraph[key] = iD.Entity(introGraph[key]);
@@ -61,7 +61,7 @@ iD.ui.intro = function(context) {
             context.connection().toggle(true).flush().loadedTiles(loadedTiles);
             context.history().reset().merge(d3.values(baseEntities));
             context.background().baseLayerSource(background);
-            if (history) context.history().fromJSON(history);
+            if (history) context.history().fromJSON(history, false);
             window.location.replace(hash);
             context.inIntro(false);
             d3.select('#bar button.save').on('click', save);
