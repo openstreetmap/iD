@@ -60,6 +60,17 @@ iD.Connection = function() {
             });
     };
 
+    connection.loadEntityVersion = function(id, version, callback) {
+        var type = iD.Entity.id.type(id),
+            osmID = iD.Entity.id.toOSM(id);
+
+        connection.loadFromURL(
+            url + '/api/0.6/' + type + '/' + osmID + '/' + version,
+            function(err, entities) {
+                if (callback) callback(err, {data: entities});
+            });
+    };
+
     connection.loadMultiple = function(ids, callback) {
         _.each(_.groupBy(_.uniq(ids), iD.Entity.id.type), function(v, k) {
             var type = k + 's',

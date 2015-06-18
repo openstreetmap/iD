@@ -75,11 +75,13 @@ describe('iD.Connection', function () {
 
     describe('#loadEntity', function () {
         var server,
-            nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm><node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node></osm>',
+            nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+                '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
+                '</osm>',
             wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
-              '<node id="1" version="1" changeset="2817006" lat="0" lon="0" visible="true" timestamp="2009-10-11T18:03:23Z"/>' +
-              '<way id="1" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559"><nd ref="1"/></way>' +
-              '</osm>';
+                '<node id="1" version="1" changeset="2817006" lat="0" lon="0" visible="true" timestamp="2009-10-11T18:03:23Z"/>' +
+                '<way id="1" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559"><nd ref="1"/></way>' +
+                '</osm>';
 
         beforeEach(function() {
             server = sinon.fakeServer.create();
@@ -111,6 +113,50 @@ describe('iD.Connection', function () {
             });
 
             server.respondWith("GET", "http://www.openstreetmap.org/api/0.6/way/1/full",
+                [200, { "Content-Type": "text/xml" }, wayXML]);
+            server.respond();
+        });
+    });
+
+    describe('#loadEntityVersion', function () {
+        var server,
+            nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+                '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
+                '</osm>',
+            wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+                '<way id="1" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559"><nd ref="1"/></way>' +
+                '</osm>';
+
+        beforeEach(function() {
+            server = sinon.fakeServer.create();
+        });
+
+        afterEach(function() {
+            server.restore();
+        });
+
+        it('loads a node', function(done) {
+            var id = 'n1';
+            c.loadEntityVersion(id, 1, function(err, result) {
+                var entity = _.find(result.data, function(e) { return e.id === id; });
+                expect(entity).to.be.an.instanceOf(iD.Node);
+                done();
+            });
+
+            server.respondWith("GET", "http://www.openstreetmap.org/api/0.6/node/1/1",
+                [200, { "Content-Type": "text/xml" }, nodeXML]);
+            server.respond();
+        });
+
+        it('loads a way', function(done) {
+            var id = 'w1';
+            c.loadEntityVersion(id, 1, function(err, result) {
+                var entity = _.find(result.data, function(e) { return e.id === id; });
+                expect(entity).to.be.an.instanceOf(iD.Way);
+                done();
+            });
+
+            server.respondWith("GET", "http://www.openstreetmap.org/api/0.6/way/1/1",
                 [200, { "Content-Type": "text/xml" }, wayXML]);
             server.respond();
         });
