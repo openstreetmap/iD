@@ -1,0 +1,43 @@
+{
+    "keys": ["cycleway:left", "cycleway:right"],
+    "reference": {"key": "cycleway"},
+    "type": "cycleway",
+    "label": "Bike Lanes",
+    "placeholder": "none",
+    "strings": {
+        "types": {
+            "cycleway:left": "Left side",
+            "cycleway:right": "Right side"
+        },
+        "options": {
+            "none": {
+                "title": "None",
+                "description": "No bike lane"
+            },
+            "lane": {
+                "title": "Standard bike lane",
+                "description": "A bike lane separated from auto traffic by a painted line"
+            },
+            "shared_lane": {
+                "title": "Shared bike lane",
+                "description": "A bike lane with no separation from auto traffic"
+            },
+            "track": {
+                "title": "Bike track",
+                "description": "A bike lane separated from traffic by a physical barrier"
+            },
+            "share_busway": {
+                "title": "Bike lane shared with bus",
+                "description": "A bike lane shared with a bus lane"
+            },
+            "opposite_lane": {
+                "title": "Opposite bike lane",
+                "description": "A bike lane that travels in the opposite direction of traffic"
+            },
+            "opposite": {
+                "title": "Contraflow bike lane",
+                "description": "A bike lane that travels in both directions on a one-way street"
+            }
+        }
+    }
+}

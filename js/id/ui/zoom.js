@@ -11,6 +11,27 @@ iD.ui.Zoom = function(context) {
         key: '-'
     }];
 
+    function zoomIn() {
+        d3.event.preventDefault();
+        context.zoomIn();
+    }
+
+    function zoomOut() {
+        d3.event.preventDefault();
+        context.zoomOut();
+    }
+
+    function zoomInFurther() {
+        d3.event.preventDefault();
+        context.zoomInFurther();
+    }
+
+    function zoomOutFurther() {
+        d3.event.preventDefault();
+        context.zoomOutFurther();
+    }
+
+
     return function(selection) {
         var button = selection.selectAll('button')
             .data(zooms)
@@ -31,12 +52,16 @@ iD.ui.Zoom = function(context) {
         var keybinding = d3.keybinding('zoom');
 
         _.each(['=','ffequals','plus','ffplus'], function(key) {
-            keybinding.on(key, function() { context.zoomIn(); });
-            keybinding.on('⇧' + key, function() { context.zoomIn(); });
+            keybinding.on(key, zoomIn);
+            keybinding.on('⇧' + key, zoomIn);
+            keybinding.on(iD.ui.cmd('⌘' + key), zoomInFurther);
+            keybinding.on(iD.ui.cmd('⌘⇧' + key), zoomInFurther);
         });
         _.each(['-','ffminus','_','dash'], function(key) {
-            keybinding.on(key, function() { context.zoomOut(); });
-            keybinding.on('⇧' + key, function() { context.zoomOut(); });
+            keybinding.on(key, zoomOut);
+            keybinding.on('⇧' + key, zoomOut);
+            keybinding.on(iD.ui.cmd('⌘' + key), zoomOutFurther);
+            keybinding.on(iD.ui.cmd('⌘⇧' + key), zoomOutFurther);
         });
 
         d3.select(document)

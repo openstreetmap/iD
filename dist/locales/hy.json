@@ -46,8 +46,8 @@
             "address": {
                 "label": "Հասցե",
                 "placeholders": {
-                    "street": "Փողոց",
-                    "city": "Քաղաք"
+                    "city": "Քաղաք",
+                    "street": "Փողոց"
                 }
             },
             "atm": {

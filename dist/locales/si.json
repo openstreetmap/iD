@@ -235,7 +235,6 @@
     "commit": {
         "title": "වෙනස්කම් සුරකින්න",
         "description_placeholder": "ඔබේ දායකත්වය පිළිබද කෙටි සටහනක්",
-        "message_label": "තිර කිරීමේ සටහන",
         "upload_explanation": "ඔබ ඇතුලත් කරන ලද වෙනස්කම් OpenStreetMap දත්ත බාවිතා කරන සියලු සිතියම් තුල දිස්වනු ඇත",
         "upload_explanation_with_user": "{user} වශයෙන් ඔබ ඇතුලත් කරන ලද වෙනස්කම් OpenStreetMap දත්ත බාවිතා කරන සියලු සිතියම් තුල දිස්වනු ඇත",
         "save": "සුරකින්න",

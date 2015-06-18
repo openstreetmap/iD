@@ -214,7 +214,6 @@
     "commit": {
         "title": "Vista breytingar",
         "description_placeholder": "Stutt lýsing á breytingum þínum",
-        "message_label": "Staðfesta boð",
         "upload_explanation": "Breytingarnar sem þú gerir verða sýnilegar á öllum kortum sem nota OpenStreetMap gögn.",
         "upload_explanation_with_user": "Breytingarnar sem þú gerir sem {user} verða sýnilegar á öllum kortum sem nota OpenStreetMap gögn.",
         "save": "Vista",
@@ -434,6 +433,9 @@
             "category-building": {
                 "name": "Bygging"
             },
+            "category-golf": {
+                "name": "Golf"
+            },
             "category-landuse": {
                 "name": "Landnotkun"
             },
@@ -443,6 +445,9 @@
             "category-rail": {
                 "name": "Lestarteinar"
             },
+            "category-restriction": {
+                "name": "Takmörkun"
+            },
             "category-road": {
                 "name": "Vegur"
             },
@@ -451,51 +456,63 @@
             },
             "category-water-area": {
                 "name": "Vatn"
+            },
+            "category-water-line": {
+                "name": "Vatn"
             }
         },
         "fields": {
             "access": {
                 "label": "Aðgangur",
+                "options": {
+                    "designated": {
+                        "description": "Aðgangur heimill sökum skilta eða reglna",
+                        "title": "Merking"
+                    },
+                    "destination": {
+                        "description": "Aðgangur leyfður aðeins ef í fararleið",
+                        "title": "Áfangastaður"
+                    },
+                    "no": {
+                        "description": "Aðgangur óheimill almenningi",
+                        "title": "Aðgangur bannaður"
+                    },
+                    "permissive": {
+                        "description": "Aðgangur heimill þar til eigandi dregur leyfi til baka",
+                        "title": "Með leyfi"
+                    },
+                    "private": {
+                        "description": "Aðgangur heimill eingöngu með samþykki landeiganda",
+                        "title": "Einka"
+                    },
+                    "yes": {
+                        "description": "Aðgangur leyfður með lögum",
+                        "title": "Leyft"
+                    }
+                },
                 "placeholder": "Óþekkt",
                 "types": {
                     "access": "Almennt",
-                    "foot": "Fótgangandi",
-                    "motor_vehicle": "Vélknúin ökutæki",
                     "bicycle": "Hjól",
-                    "horse": "Hestar"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Leyft",
-                        "description": "Aðgangur leyfður með lögum"
-                    },
-                    "no": {
-                        "title": "Aðgangur bannaður",
-                        "description": "Aðgangur óheimill almenningi"
-                    },
-                    "permissive": {
-                        "title": "Með leyfi",
-                        "description": "Aðgangur heimill þar til eigandi dregur leyfi til baka"
-                    },
-                    "private": {
-                        "title": "Einka",
-                        "description": "Aðgangur heimill eingöngu með samþykki landeiganda"
-                    },
-                    "designated": {
-                        "title": "Merking",
-                        "description": "Aðgangur heimill sökum skilta eða reglna"
-                    },
-                    "destination": {
-                        "title": "Áfangastaður",
-                        "description": "Aðgangur leyfður aðeins ef í fararleið"
-                    }
+                    "foot": "Fótgangandi",
+                    "horse": "Hestar",
+                    "motor_vehicle": "Vélknúin ökutæki"
                 }
+            },
+            "access_simple": {
+                "label": "Aðgangur",
+                "placeholder": "já"
+            },
+            "access_toilets": {
+                "label": "Aðgangur"
             },
             "address": {
                 "label": "Heimilisfang",
                 "placeholders": {
-                    "street": "Gata",
                     "city": "Sveitarfélag",
+                    "country": "Land",
+                    "housenumber": "123",
+                    "street": "Gata",
                     "subdistrict": "Undirsvæði"
                 }
             },
@@ -504,8 +521,8 @@
             },
             "aerialway/access": {
                 "options": {
-                    "exit": "Útgangur",
-                    "both": "Bæði"
+                    "both": "Bæði",
+                    "exit": "Útgangur"
                 }
             },
             "aerialway/capacity": {
@@ -551,8 +568,8 @@
             "clock_direction": {
                 "label": "Átt",
                 "options": {
-                    "clockwise": "Réttsælis",
-                    "anticlockwise": "Rangsælis"
+                    "anticlockwise": "Rangsælis",
+                    "clockwise": "Réttsælis"
                 }
             },
             "collection_times": {
@@ -629,9 +646,9 @@
                 "label": "Internetaðgangur",
                 "options": {
                     "no": "Nei",
-                    "wlan": "Þráðlaust",
+                    "terminal": "Útstöð",
                     "wired": "Leiðslur",
-                    "terminal": "Útstöð"
+                    "wlan": "Þráðlaust"
                 }
             },
             "landuse": {
@@ -660,6 +677,14 @@
             "maxspeed": {
                 "label": "Hraðatakmörkun",
                 "placeholder": "40, 50, 60..."
+            },
+            "mtb/scale": {
+                "options": {
+                    "2": "2: laust undirlag, stórar hindranir, auðveldar beygjur"
+                }
+            },
+            "mtb/scale/imba": {
+                "placeholder": "Auðvelt, miðlungs, erfitt..."
             },
             "name": {
                 "label": "Nafn",
@@ -706,9 +731,10 @@
                 "placeholder": "+31 42 123 4567"
             },
             "piste/type": {
+                "label": "Tegund",
                 "options": {
-                    "sleigh": "Sleði",
-                    "ice_skate": "Skautar"
+                    "ice_skate": "Skautar",
+                    "sleigh": "Sleði"
                 }
             },
             "place": {
@@ -779,13 +805,13 @@
             },
             "structure": {
                 "label": "Mannvirki",
-                "placeholder": "Óþekkt",
                 "options": {
                     "bridge": "Brú",
-                    "tunnel": "Göng",
+                    "cutting": "Rás",
                     "embankment": "Stallur",
-                    "cutting": "Rás"
-                }
+                    "tunnel": "Göng"
+                },
+                "placeholder": "Óþekkt"
             },
             "supervised": {
                 "label": "Undir stjórn"
@@ -886,6 +912,9 @@
             },
             "amenity/bicycle_rental": {
                 "name": "Hjólaleiga"
+            },
+            "amenity/bicycle_repair_station": {
+                "name": "Hjólaviðgerðastöð"
             },
             "amenity/cafe": {
                 "name": "Kaffihús",
@@ -1564,11 +1593,20 @@
             "office/architect": {
                 "name": "Arkitekt"
             },
+            "office/financial": {
+                "name": "Fjármálafyrirtæki"
+            },
+            "office/government": {
+                "name": "Opinber stofnun"
+            },
             "office/newspaper": {
                 "name": "Fréttablað"
             },
             "office/political_party": {
                 "name": "Stjórnmálaflokkur"
+            },
+            "office/research": {
+                "name": "Rannsóknarstofa"
             },
             "office/travel_agent": {
                 "name": "Ferðaskrifstofa"
@@ -1758,6 +1796,9 @@
             },
             "shop/hardware": {
                 "name": "Byggingavöruverslun"
+            },
+            "shop/herbalist": {
+                "name": "Grasalæknir"
             },
             "shop/hifi": {
                 "name": "Hljómverslun"

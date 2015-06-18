@@ -164,7 +164,6 @@
     "commit": {
         "title": "Saglabāt izmaiņas",
         "description_placeholder": "Īss apraksts par jūsu ieguldījumu",
-        "message_label": "Izmaiņu apraksts",
         "save": "Saglabāt",
         "cancel": "Atcelt",
         "warnings": "Brīdinājumi",
@@ -281,43 +280,43 @@
         "fields": {
             "access": {
                 "label": "Piekļuve",
-                "types": {
-                    "access": "Vispārīgs",
-                    "foot": "Kājām",
-                    "motor_vehicle": "Automašīnas",
-                    "bicycle": "Velosipēdi",
-                    "horse": "Zirgi"
-                },
                 "options": {
-                    "yes": {
-                        "title": "Atļauts",
-                        "description": "Piekļuve atļauta ar likumu"
+                    "designated": {
+                        "description": "Piekļuve atļauta atbilstoši zīmēm vai speciāliem vietējiem likumiem",
+                        "title": "Nozīmēts"
+                    },
+                    "destination": {
+                        "title": "Galamērķis"
                     },
                     "no": {
-                        "title": "Aizliegts",
-                        "description": "Piekļuve nav atļauta bez speciālā atļaujām "
+                        "description": "Piekļuve nav atļauta bez speciālā atļaujām ",
+                        "title": "Aizliegts"
                     },
                     "permissive": {
                         "description": "Piekļuve atļauta līdz īpašnieks atsauc atļauju"
                     },
                     "private": {
-                        "title": "Privāts",
-                        "description": "Piekļuve atļauta tikai ar īpašnieka atļauju"
+                        "description": "Piekļuve atļauta tikai ar īpašnieka atļauju",
+                        "title": "Privāts"
                     },
-                    "designated": {
-                        "title": "Nozīmēts",
-                        "description": "Piekļuve atļauta atbilstoši zīmēm vai speciāliem vietējiem likumiem"
-                    },
-                    "destination": {
-                        "title": "Galamērķis"
+                    "yes": {
+                        "description": "Piekļuve atļauta ar likumu",
+                        "title": "Atļauts"
                     }
+                },
+                "types": {
+                    "access": "Vispārīgs",
+                    "bicycle": "Velosipēdi",
+                    "foot": "Kājām",
+                    "horse": "Zirgi",
+                    "motor_vehicle": "Automašīnas"
                 }
             },
             "address": {
                 "label": "Adrese",
                 "placeholders": {
-                    "street": "Iela",
-                    "city": "Pilsēta"
+                    "city": "Pilsēta",
+                    "street": "Iela"
                 }
             },
             "aeroway": {
@@ -386,9 +385,9 @@
             "internet_access": {
                 "label": "Interneta piekļuve",
                 "options": {
-                    "wlan": "Bezvadu internets",
+                    "terminal": "Termināls",
                     "wired": "Kabeļinternets",
-                    "terminal": "Termināls"
+                    "wlan": "Bezvadu internets"
                 }
             },
             "landuse": {
@@ -479,9 +478,9 @@
                 "label": "Objekts",
                 "options": {
                     "bridge": "Tilts",
-                    "tunnel": "Tunelis",
+                    "cutting": "Izgriezums",
                     "embankment": "Krastmala",
-                    "cutting": "Izgriezums"
+                    "tunnel": "Tunelis"
                 }
             },
             "surface": {

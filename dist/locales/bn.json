@@ -196,7 +196,6 @@
     "commit": {
         "title": "পরিবর্তনগুলিকে সেভ করুন",
         "description_placeholder": "অাপনার সাহায্যের সংক্ষিপ্ত বিবরন",
-        "message_label": "কমিট বার্তা",
         "save": "সেভ করুন",
         "cancel": "বাতিল করুন",
         "warnings": "সতর্ক বার্তাসমুহ",
@@ -368,38 +367,38 @@
         "fields": {
             "access": {
                 "label": "প্রবেশ করা",
-                "placeholder": "অজানা",
-                "types": {
-                    "access": "সাধারণ",
-                    "foot": "পদচালন",
-                    "motor_vehicle": "মোটরগাড়ি",
-                    "bicycle": "সাইকেল",
-                    "horse": "ঘোড়া"
-                },
                 "options": {
-                    "yes": {
-                        "title": "অনুমোদিত",
-                        "description": "অাইনানুসারে প্রবেশ অনুমোদিত"
-                    },
-                    "no": {
-                        "title": "নিষিদ্ধ",
-                        "description": "জনসাধারনের প্রবেশ অনুমোদিত নয়।"
-                    },
-                    "permissive": {
-                        "title": "অনুমতিসূচক",
-                        "description": "প্রবেশ অনুমোদিত, যতক্ষন অব্দি এর মালিক অনুমতি প্রত্যাহার না করছেন।"
-                    },
-                    "private": {
-                        "title": "একান্ত",
-                        "description": "প্রত্যেক ব্যক্তির জন্য মালিক-এর অনুমতি থাকলে প্রবেশ অনুমোদিত।"
-                    },
                     "designated": {
                         "description": "কোন চিহ্ন বা স্থানীয় অাইন অনুযায়ী প্রবেশ অনুমোদিত।"
                     },
                     "destination": {
-                        "title": "গন্তব্য",
-                        "description": "শুধুমাত্র কোন গন্তব্যে পৌছানোর জন্য প্রবেশ অনুমোদিত।"
+                        "description": "শুধুমাত্র কোন গন্তব্যে পৌছানোর জন্য প্রবেশ অনুমোদিত।",
+                        "title": "গন্তব্য"
+                    },
+                    "no": {
+                        "description": "জনসাধারনের প্রবেশ অনুমোদিত নয়।",
+                        "title": "নিষিদ্ধ"
+                    },
+                    "permissive": {
+                        "description": "প্রবেশ অনুমোদিত, যতক্ষন অব্দি এর মালিক অনুমতি প্রত্যাহার না করছেন।",
+                        "title": "অনুমতিসূচক"
+                    },
+                    "private": {
+                        "description": "প্রত্যেক ব্যক্তির জন্য মালিক-এর অনুমতি থাকলে প্রবেশ অনুমোদিত।",
+                        "title": "একান্ত"
+                    },
+                    "yes": {
+                        "description": "অাইনানুসারে প্রবেশ অনুমোদিত",
+                        "title": "অনুমোদিত"
                     }
+                },
+                "placeholder": "অজানা",
+                "types": {
+                    "access": "সাধারণ",
+                    "bicycle": "সাইকেল",
+                    "foot": "পদচালন",
+                    "horse": "ঘোড়া",
+                    "motor_vehicle": "মোটরগাড়ি"
                 }
             },
             "access_simple": {
@@ -412,17 +411,17 @@
             "address": {
                 "label": "ঠিকানা",
                 "placeholders": {
+                    "city": "শহর",
+                    "country": "দেশ",
+                    "district": "জেলা",
                     "housename": "বাড়ির নাম",
                     "housenumber": "১২৩",
-                    "street": "স্ট্রীট",
-                    "city": "শহর",
-                    "postcode": "পিনকোড",
                     "place": "জায়গা",
-                    "suburb": "শহরতলি",
-                    "subdistrict": "উপজেলা",
-                    "district": "জেলা",
+                    "postcode": "পিনকোড",
                     "state": "রাজ্য",
-                    "country": "দেশ"
+                    "street": "স্ট্রীট",
+                    "subdistrict": "উপজেলা",
+                    "suburb": "শহরতলি"
                 }
             },
             "aerialway": {
@@ -431,9 +430,9 @@
             "aerialway/access": {
                 "label": "প্রবেশ করা",
                 "options": {
+                    "both": "উভয়",
                     "entry": "প্রবেশ",
-                    "exit": "প্রস্থাণ",
-                    "both": "উভয়"
+                    "exit": "প্রস্থাণ"
                 }
             },
             "aerialway/capacity": {
@@ -447,9 +446,9 @@
             },
             "aerialway/summer/access": {
                 "options": {
+                    "both": "উভয়",
                     "entry": "প্রবেশ",
-                    "exit": "প্রস্থাণ",
-                    "both": "উভয়"
+                    "exit": "প্রস্থাণ"
                 }
             },
             "aeroway": {
@@ -489,18 +488,18 @@
             "cardinal_direction": {
                 "label": "দিক/অভিমুখ",
                 "options": {
-                    "N": "উত্তর",
                     "E": "পূর্ব",
+                    "N": "উত্তর",
+                    "NE": "উত্তরপূর্ব",
                     "S": "দক্ষিণ",
-                    "W": "পশ্চিম",
-                    "NE": "উত্তরপূর্ব"
+                    "W": "পশ্চিম"
                 }
             },
             "clock_direction": {
                 "label": "দিক/অভিমুখ",
                 "options": {
-                    "clockwise": "ঘড়ির কাটার দিকে",
-                    "anticlockwise": "ঘড়ির কাটার উল্টো দিকে"
+                    "anticlockwise": "ঘড়ির কাটার উল্টো দিকে",
+                    "clockwise": "ঘড়ির কাটার দিকে"
                 }
             },
             "collection_times": {
@@ -540,8 +539,8 @@
             "fire_hydrant/type": {
                 "label": "টাইপ",
                 "options": {
-                    "wall": "দেয়াল",
-                    "pond": "পুকুর"
+                    "pond": "পুকুর",
+                    "wall": "দেয়াল"
                 }
             },
             "fixme": {
@@ -581,11 +580,11 @@
             "internet_access": {
                 "label": "ইন্টারনেট সুবিধা",
                 "options": {
-                    "yes": "হ্যা",
                     "no": "না",
-                    "wlan": "তারবিহীন",
+                    "terminal": "টার্মিনাল",
                     "wired": "তারযুক্ত",
-                    "terminal": "টার্মিনাল"
+                    "wlan": "তারবিহীন",
+                    "yes": "হ্যা"
                 }
             },
             "landuse": {
@@ -697,11 +696,11 @@
             },
             "structure": {
                 "label": "কাঠামো",
-                "placeholder": "অজানা",
                 "options": {
                     "bridge": "সেতু",
                     "tunnel": "সুড়ঙ্গ"
-                }
+                },
+                "placeholder": "অজানা"
             },
             "surface": {
                 "label": "উপরিভাগ"

@@ -168,18 +168,18 @@
         },
         "fields": {
             "access": {
+                "options": {
+                    "no": {
+                        "title": "Malpermesita"
+                    },
+                    "yes": {
+                        "title": "Permesita"
+                    }
+                },
                 "placeholder": "Nekonata",
                 "types": {
                     "bicycle": "Bicikloj",
                     "horse": "Ĉevaloj"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Permesita"
-                    },
-                    "no": {
-                        "title": "Malpermesita"
-                    }
                 }
             },
             "access_simple": {
@@ -188,11 +188,11 @@
             "address": {
                 "label": "Adreso",
                 "placeholders": {
-                    "housenumber": "123",
-                    "street": "Strato",
                     "city": "Urbo",
+                    "country": "Lando",
+                    "housenumber": "123",
                     "province": "Provinco",
-                    "country": "Lando"
+                    "street": "Strato"
                 }
             },
             "aerialway/capacity": {
@@ -238,9 +238,9 @@
             },
             "internet_access": {
                 "options": {
-                    "yes": "Jes",
                     "no": "Ne",
-                    "wlan": "Wi-Fi"
+                    "wlan": "Wi-Fi",
+                    "yes": "Jes"
                 }
             },
             "lanes": {
@@ -268,14 +268,14 @@
             },
             "oneway": {
                 "options": {
-                    "yes": "Jes",
-                    "no": "Ne"
+                    "no": "Ne",
+                    "yes": "Jes"
                 }
             },
             "oneway_yes": {
                 "options": {
-                    "yes": "Jes",
-                    "no": "Ne"
+                    "no": "Ne",
+                    "yes": "Jes"
                 }
             },
             "opening_hours": {

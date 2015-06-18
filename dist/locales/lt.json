@@ -239,7 +239,6 @@
     "commit": {
         "title": "Išsaugoti pakeitimus",
         "description_placeholder": "Trumpas jūsų indėlio aprašymas",
-        "message_label": "Pakeitimo aprašymas",
         "upload_explanation": "Jūsų įkeliami pakeitimai bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
         "upload_explanation_with_user": "Pakeitimai, kuriuos jūs įkeliate kaip naudotojas {user} bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
         "save": "Išsaugoti",
@@ -568,39 +567,39 @@
         "fields": {
             "access": {
                 "label": "Prieiga",
+                "options": {
+                    "designated": {
+                        "description": "Priėjimas galimas remiantis ženklais ir savitais vietos įstatymais",
+                        "title": "Skirtas"
+                    },
+                    "destination": {
+                        "description": "Priėjimas leistinas tik atvykti į tikslą",
+                        "title": "Tikslinis"
+                    },
+                    "no": {
+                        "description": "Priėjimas draudžiamas plačiajai visuomenei",
+                        "title": "Draudžiamas"
+                    },
+                    "permissive": {
+                        "description": "Priėjimas leistinas, kai savininkas konkrečiu laiku panaikina draudimą",
+                        "title": "Leistinas"
+                    },
+                    "private": {
+                        "description": "Priėjimas leistinas tik su savininko leidimu",
+                        "title": "Privatus"
+                    },
+                    "yes": {
+                        "description": "Priėjimas leidžiamas įstatymų; pirmumo teisė",
+                        "title": "Leidžiamas"
+                    }
+                },
                 "placeholder": "Nežinoma",
                 "types": {
                     "access": "Bendra",
-                    "foot": "Pėstieji",
-                    "motor_vehicle": "Motorinis transportas",
                     "bicycle": "Dviračiai",
-                    "horse": "Arkliai"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Leidžiamas",
-                        "description": "Priėjimas leidžiamas įstatymų; pirmumo teisė"
-                    },
-                    "no": {
-                        "title": "Draudžiamas",
-                        "description": "Priėjimas draudžiamas plačiajai visuomenei"
-                    },
-                    "permissive": {
-                        "title": "Leistinas",
-                        "description": "Priėjimas leistinas, kai savininkas konkrečiu laiku panaikina draudimą"
-                    },
-                    "private": {
-                        "title": "Privatus",
-                        "description": "Priėjimas leistinas tik su savininko leidimu"
-                    },
-                    "designated": {
-                        "title": "Skirtas",
-                        "description": "Priėjimas galimas remiantis ženklais ir savitais vietos įstatymais"
-                    },
-                    "destination": {
-                        "title": "Tikslinis",
-                        "description": "Priėjimas leistinas tik atvykti į tikslą"
-                    }
+                    "foot": "Pėstieji",
+                    "horse": "Arkliai",
+                    "motor_vehicle": "Motorinis transportas"
                 }
             },
             "access_simple": {
@@ -613,19 +612,19 @@
             "address": {
                 "label": "Adresas",
                 "placeholders": {
+                    "city": "Miestas",
+                    "country": "Valstybė",
+                    "district": "Rajonas",
+                    "hamlet": "Viensėdis",
                     "housename": "Namo pavadinimas",
                     "housenumber": "123",
-                    "street": "Gatvė",
-                    "city": "Miestas",
-                    "postcode": "Pašto kodas",
                     "place": "Vietovė",
-                    "hamlet": "Viensėdis",
-                    "suburb": "Priemiestis",
-                    "subdistrict": "Seniūnija",
-                    "district": "Rajonas",
+                    "postcode": "Pašto kodas",
                     "province": "Provincija",
                     "state": "Valstija",
-                    "country": "Valstybė"
+                    "street": "Gatvė",
+                    "subdistrict": "Seniūnija",
+                    "suburb": "Priemiestis"
                 }
             },
             "admin_level": {
@@ -637,9 +636,9 @@
             "aerialway/access": {
                 "label": "Prieiga",
                 "options": {
+                    "both": "Abu",
                     "entry": "Įėjimas",
-                    "exit": "Išėjimas",
-                    "both": "Abu"
+                    "exit": "Išėjimas"
                 }
             },
             "aerialway/bubble": {
@@ -663,9 +662,9 @@
             "aerialway/summer/access": {
                 "label": "Prieiga (vasarai)",
                 "options": {
+                    "both": "Abu",
                     "entry": "Įėjimas",
-                    "exit": "Išėjimas",
-                    "both": "Abu"
+                    "exit": "Išėjimas"
                 }
             },
             "aeroway": {
@@ -714,29 +713,29 @@
             "cardinal_direction": {
                 "label": "Kryptis",
                 "options": {
-                    "N": "Šiaurė",
                     "E": "Rytai",
-                    "S": "Pietūs",
-                    "W": "Vakarai",
-                    "NE": "Šiaurės rytai",
-                    "SE": "Pietryčiai",
-                    "SW": "Pietvakariai",
-                    "NW": "Šiaurės vakarai",
-                    "NNE": "Šiaurės-šiaurės rytų",
                     "ENE": "Rytų-šiaurės rytų",
                     "ESE": "Rytų-pietryčių",
+                    "N": "Šiaurė",
+                    "NE": "Šiaurės rytai",
+                    "NNE": "Šiaurės-šiaurės rytų",
+                    "NNW": "Šiaurės-šiaurės vakarų",
+                    "NW": "Šiaurės vakarai",
+                    "S": "Pietūs",
+                    "SE": "Pietryčiai",
                     "SSE": "Pietų-pietryčių",
                     "SSW": "Pietų-pietvakarių",
-                    "WSW": "Vakarų-pietvakarių",
+                    "SW": "Pietvakariai",
+                    "W": "Vakarai",
                     "WNW": "Vakarų-šiaurės vakarų",
-                    "NNW": "Šiaurės-šiaurės vakarų"
+                    "WSW": "Vakarų-pietvakarių"
                 }
             },
             "clock_direction": {
                 "label": "Kryptis",
                 "options": {
-                    "clockwise": "Pagal laikrodžio rodyklę",
-                    "anticlockwise": "Prieš laikrodžio rodyklę"
+                    "anticlockwise": "Prieš laikrodžio rodyklę",
+                    "clockwise": "Pagal laikrodžio rodyklę"
                 }
             },
             "collection_times": {
@@ -780,13 +779,13 @@
             },
             "electrified": {
                 "label": "Elektrifikacija",
-                "placeholder": "Kontaktinė linija, elektrifikuoti bėgiai...",
                 "options": {
                     "contact_line": "Kontaktinė linija",
+                    "no": "Ne",
                     "rail": "Elektrifikuoti bėgiai",
-                    "yes": "Taip (nepatikslinta)",
-                    "no": "Ne"
-                }
+                    "yes": "Taip (nepatikslinta)"
+                },
+                "placeholder": "Kontaktinė linija, elektrifikuoti bėgiai..."
             },
             "elevation": {
                 "label": "Aukštis"
@@ -811,9 +810,9 @@
                 "label": "Tipas",
                 "options": {
                     "pillar": "Kolona/antžeminė",
+                    "pond": "Kūdra",
                     "underground": "Požeminis",
-                    "wall": "Siena",
-                    "pond": "Kūdra"
+                    "wall": "Siena"
                 }
             },
             "fixme": {
@@ -854,12 +853,12 @@
             },
             "gender": {
                 "label": "Lytis",
-                "placeholder": "Nežinoma",
                 "options": {
-                    "male": "Vyras",
                     "female": "Moteris",
+                    "male": "Vyras",
                     "unisex": "Abiejų lyčių"
-                }
+                },
+                "placeholder": "Nežinoma"
             },
             "generator/method": {
                 "label": "Metodas"
@@ -900,8 +899,8 @@
             "incline_steps": {
                 "label": "Įkalnė",
                 "options": {
-                    "up": "Aukštyn",
-                    "down": "Žemyn"
+                    "down": "Žemyn",
+                    "up": "Aukštyn"
                 }
             },
             "information": {
@@ -910,11 +909,11 @@
             "internet_access": {
                 "label": "Interneto prieiga",
                 "options": {
-                    "yes": "Taip",
                     "no": "Ne",
-                    "wlan": "Belaidis internetas",
+                    "terminal": "Terminalas",
                     "wired": "Laidinis internetas",
-                    "terminal": "Terminalas"
+                    "wlan": "Belaidis internetas",
+                    "yes": "Taip"
                 }
             },
             "lamp_type": {
@@ -933,20 +932,20 @@
             "leaf_cycle": {
                 "label": "Lapų ciklas",
                 "options": {
-                    "evergreen": "Amžinai žaliuojantis",
                     "deciduous": "Nukrintantis",
-                    "semi_evergreen": "Pusiau-amžinai žaliuojantis",
+                    "evergreen": "Amžinai žaliuojantis",
+                    "mixed": "Mišrus",
                     "semi_deciduous": "Pusiau-nukrentantis",
-                    "mixed": "Mišrus"
+                    "semi_evergreen": "Pusiau-amžinai žaliuojantis"
                 }
             },
             "leaf_type": {
                 "label": "Lapų tipas",
                 "options": {
                     "broadleaved": "Plačialapiai",
-                    "needleleaved": "Spygliuočiai",
+                    "leafless": "Belapiai",
                     "mixed": "Mišrūs",
-                    "leafless": "Belapiai"
+                    "needleleaved": "Spygliuočiai"
                 }
             },
             "leisure": {
@@ -974,7 +973,6 @@
             },
             "mtb/scale": {
                 "label": "Sudėtingumas kalnų dviračiais",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Kietas žvyrius/suspaustos žemės, jokių kliūčių, platūs vingiai",
                     "1": "1: Šiek tiek pairusi danga , mažos kliūtys, platūs vingiai",
@@ -983,22 +981,22 @@
                     "4": "4: Netvirtas paviršius ar rieduliai, pavojingi posūkiai",
                     "5": "5: Didžiausias sudėtingumas, riedulių laukai, nuošliaužos",
                     "6": "6: Pravažiuojama tik patiems geriausiems kalnų dviratininkams"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "IMBA maršruto sudėtingumas",
-                "placeholder": "Lengvas, vidutinis, sunkus...",
                 "options": {
                     "0": "Lengviausias (baltas apskritimas)",
                     "1": "Lengvas (žalias apskritimas)",
                     "2": "Vidutinis (mėlynas apskritimas)",
                     "3": "Sunkus (juodas rombas)",
                     "4": "Ypač sunkus (dvigubas juodas rombas)"
-                }
+                },
+                "placeholder": "Lengvas, vidutinis, sunkus..."
             },
             "mtb/scale/uphill": {
                 "label": "Kalnų dviračių sudėtingumas",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Vid. kilimas <10%, gruntas, suspausta žemė, be kliūčių",
                     "1": "1. Vid. kilimas <15%, gruntas, suspausta žemė, keli smulkūs objektai",
@@ -1006,7 +1004,8 @@
                     "3": "3: Vid. kilimas <25%, kintantis paviršius, kumščio dydžio akmenys/šaknys",
                     "4": "4: Vid. įkalnė <30%, prastos būklės, dideli akmenys/šaknys",
                     "5": "5: Labai status, dviratį pagrinde reikia stumti arba nešti"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Pavadinimas",
@@ -1027,17 +1026,17 @@
             "oneway": {
                 "label": "Vienpusis eismas",
                 "options": {
+                    "no": "Ne",
                     "undefined": "Numatytai, kad Ne",
-                    "yes": "Taip",
-                    "no": "Ne"
+                    "yes": "Taip"
                 }
             },
             "oneway_yes": {
                 "label": "Vienpusis eismas",
                 "options": {
+                    "no": "Ne",
                     "undefined": "Numatytai, kad Taip",
-                    "yes": "Taip",
-                    "no": "Ne"
+                    "yes": "Taip"
                 }
             },
             "opening_hours": {
@@ -1056,13 +1055,13 @@
             "parking": {
                 "label": "Tipas",
                 "options": {
-                    "surface": "Danga",
-                    "multi-storey": "Daugiaaukštis",
-                    "underground": "Požeminis",
-                    "sheds": "Pašiūrės",
                     "carports": "Stoginės",
                     "garage_boxes": "Garažai",
-                    "lane": "Kelkraštis"
+                    "lane": "Kelkraštis",
+                    "multi-storey": "Daugiaaukštis",
+                    "sheds": "Pašiūrės",
+                    "surface": "Danga",
+                    "underground": "Požeminis"
                 }
             },
             "phone": {
@@ -1071,16 +1070,16 @@
             },
             "piste/difficulty": {
                 "label": "Sudėtingumas",
-                "placeholder": "Lengvas, vidutinis, sudėtingas...",
                 "options": {
-                    "novice": "Naujokams (instrukcijos)",
-                    "easy": "Lengvas (žalias žiedas)",
-                    "intermediate": "Vidutinis (mėlynas kvadratas)",
                     "advanced": "Sudėtingas (juodas deimantas)",
+                    "easy": "Lengvas (žalias žiedas)",
                     "expert": "Eksperto (dvigubas juodas deimantas)",
+                    "extreme": "Ekstremalus (būtina kopimo įranga)",
                     "freeride": "Laisvas (ne maršrutu)",
-                    "extreme": "Ekstremalus (būtina kopimo įranga)"
-                }
+                    "intermediate": "Vidutinis (mėlynas kvadratas)",
+                    "novice": "Naujokams (instrukcijos)"
+                },
+                "placeholder": "Lengvas, vidutinis, sudėtingas..."
             },
             "piste/grooming": {
                 "label": "Priežiūra",
@@ -1092,11 +1091,11 @@
             "piste/type": {
                 "label": "Tipas",
                 "options": {
-                    "sled": "Rogės",
                     "hike": "Žygis",
                     "ice_skate": "Ledo čiuožimas",
-                    "snow_park": "Sniego parkas",
-                    "playground": "Vaikų žaidimų aikštelė"
+                    "playground": "Vaikų žaidimų aikštelė",
+                    "sled": "Rogės",
+                    "snow_park": "Sniego parkas"
                 }
             },
             "place": {
@@ -1146,15 +1145,15 @@
             },
             "sac_scale": {
                 "label": "Žygio sudėtingumas",
-                "placeholder": "Kalnų žygiai, Alpių žygiai...",
                 "options": {
-                    "hiking": "T1: Žygiai",
-                    "mountain_hiking": "T2: Kalnų žygiai",
-                    "demanding_mountain_hiking": "T3: Varginantys kalnų žygiai",
                     "alpine_hiking": "T4: Alpių žygiai",
                     "demanding_alpine_hiking": "T5: Varginantys alpių žygiai",
-                    "difficult_alpine_hiking": "T6: Sudėtingi alpių žygiai"
-                }
+                    "demanding_mountain_hiking": "T3: Varginantys kalnų žygiai",
+                    "difficult_alpine_hiking": "T6: Sudėtingi alpių žygiai",
+                    "hiking": "T1: Žygiai",
+                    "mountain_hiking": "T2: Kalnų žygiai"
+                },
+                "placeholder": "Kalnų žygiai, Alpių žygiai..."
             },
             "seasonal": {
                 "label": "Sezoninis"
@@ -1164,25 +1163,25 @@
             },
             "service/bicycle/chain_tool": {
                 "options": {
+                    "no": "Ne",
                     "undefined": "Numatytai, kad Ne",
-                    "yes": "Taip",
-                    "no": "Ne"
+                    "yes": "Taip"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Oro pompa",
                 "options": {
+                    "no": "Ne",
                     "undefined": "Manoma, kad Ne",
-                    "yes": "Taip",
-                    "no": "Ne"
+                    "yes": "Taip"
                 }
             },
             "service_rail": {
                 "label": "Tarnybos tipas",
                 "options": {
+                    "siding": "Atsarginis kelias",
                     "spur": "Atšaka",
-                    "yard": "Kiemas",
-                    "siding": "Atsarginis kelias"
+                    "yard": "Kiemas"
                 }
             },
             "shelter": {
@@ -1199,15 +1198,15 @@
             },
             "smoking": {
                 "label": "Rūkymas",
-                "placeholder": "Ne, Atskirta, Taip...",
                 "options": {
-                    "no": "Draudžiama rūkyti",
-                    "separated": "Rūkymo vietose, neizoliuota fiziškai",
+                    "dedicated": "Skirta rūkantiems (pvz.: rūkančiųjų klubas)",
                     "isolated": "Rūkymo vietose, fiziškai izoliuota",
+                    "no": "Draudžiama rūkyti",
                     "outside": "Leidžiama lauke",
-                    "yes": "Leidžiama visur",
-                    "dedicated": "Skirta rūkantiems (pvz.: rūkančiųjų klubas)"
-                }
+                    "separated": "Rūkymo vietose, neizoliuota fiziškai",
+                    "yes": "Leidžiama visur"
+                },
+                "placeholder": "Ne, Atskirta, Taip..."
             },
             "smoothness": {
                 "label": "Tikslumas",
@@ -1233,13 +1232,13 @@
             },
             "structure": {
                 "label": "Struktūra",
-                "placeholder": "Nežinoma",
                 "options": {
                     "bridge": "Tiltas",
-                    "tunnel": "Tunelis",
                     "embankment": "Pylimas",
-                    "ford": "Brasta"
-                }
+                    "ford": "Brasta",
+                    "tunnel": "Tunelis"
+                },
+                "placeholder": "Nežinoma"
             },
             "studio_type": {
                 "label": "Tipas"
@@ -1258,12 +1257,12 @@
             },
             "takeaway": {
                 "label": "Išsinešimui",
-                "placeholder": "Taip, ne, tik išsinešimui...",
                 "options": {
-                    "yes": "Taip",
                     "no": "Ne",
-                    "only": "Tik išsinešimui"
-                }
+                    "only": "Tik išsinešimui",
+                    "yes": "Taip"
+                },
+                "placeholder": "Taip, ne, tik išsinešimui..."
             },
             "tourism": {
                 "label": "Tipas"
@@ -1277,15 +1276,15 @@
             },
             "trail_visibility": {
                 "label": "Maršruto matomumas",
-                "placeholder": "Puikus, Geras, Prastas...",
                 "options": {
+                    "bad": "Blogai: nėra žymų, kelio kartais nėra ar jis nesimato",
                     "excellent": "Puiku: nedviprasmiškas kelias arba žymės visur",
                     "good": "Gerai: žymės matomos, kartais reikia paieškoti",
-                    "intermediate": "Vidutiniškai: šiek tiek žymų, kelias daugiausia matomas",
-                    "bad": "Blogai: nėra žymų, kelio kartais nėra ar jis nesimato",
                     "horrible": "Tragiškai: dažnų atkarpų nėra, reikia orientavimosi sugebėjimų",
+                    "intermediate": "Vidutiniškai: šiek tiek žymų, kelias daugiausia matomas",
                     "no": "Nėra: nėra kelio, reikia puikių orientavimosi sugebėjimų"
-                }
+                },
+                "placeholder": "Puikus, Geras, Prastas..."
             },
             "trees": {
                 "label": "Medžiai"
@@ -1486,7 +1485,7 @@
                 "terms": "dujų stotis"
             },
             "amenity/grave_yard": {
-                "name": "Kapinės",
+                "name": "Kapinės prie bažnyčios",
                 "terms": "Kapinės,Kapai"
             },
             "amenity/grit_bin": {

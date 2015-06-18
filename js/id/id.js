@@ -58,9 +58,15 @@ window.iD = function () {
         return context;
     };
 
-    context.locale = function(_, path) {
-        locale = _;
+    context.locale = function(loc, path) {
+        locale = loc;
         localePath = path;
+
+        // Also set iD.detect().locale (unless we detected 'en-us' and openstreetmap wants 'en')..
+        if (!(loc.toLowerCase() === 'en' && iD.detect().locale.toLowerCase() === 'en-us')) {
+            iD.detect().locale = loc;
+        }
+
         return context;
     };
 
@@ -258,6 +264,8 @@ window.iD = function () {
     context.pan = map.pan;
     context.zoomIn = map.zoomIn;
     context.zoomOut = map.zoomOut;
+    context.zoomInFurther = map.zoomInFurther;
+    context.zoomOutFurther = map.zoomOutFurther;
 
     context.surfaceRect = function() {
         // Work around a bug in Firefox.
@@ -325,7 +333,7 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '1.7.2';
+iD.version = '1.7.3';
 
 (function() {
     var detected = {};

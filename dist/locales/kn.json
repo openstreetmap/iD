@@ -152,7 +152,6 @@
     "commit": {
         "title": "ಬದಲಾವಣೆಯನ್ನು ಉಳಿಸು",
         "description_placeholder": "ನಿಮ್ಮ ಕೊಡುಗೆಗಳ ಸಂಕ್ಷಿಪ್ತ ವಿವರಣೆ",
-        "message_label": "ಕಮಿಟ್ ಸಂದೇಶ",
         "save": "ಉಳಿಸು",
         "cancel": "ರದ್ದು ಮಾಡು",
         "changes": "{count} ಬದಲಾವಣೆಗಳು",
@@ -330,21 +329,16 @@
         "fields": {
             "access": {
                 "label": "ಪ್ರವೇಶ",
-                "placeholder": "ತಿಳಿಯದ",
-                "types": {
-                    "access": "ಸಾಧಾರಣ",
-                    "foot": "ಕಾಲು",
-                    "motor_vehicle": "ಮೋಟಾರ್ ವಾಹನ",
-                    "bicycle": "ಸೈಕಲ್",
-                    "horse": "ಕುದುರೆ"
-                },
                 "options": {
-                    "yes": {
-                        "title": "ಅನುಮತಿಸು"
+                    "designated": {
+                        "title": "ನಿಯೋಜಿತ"
+                    },
+                    "destination": {
+                        "title": "ತಲಪುದಾಣ"
                     },
                     "no": {
-                        "title": "ನಿಷೇಧಿಸಲಾಗಿದೆ",
-                        "description": "ಸಾರ್ವಜನಿಕ ಪ್ರವೇಶಕ್ಕೆ ಅನುಮತಿ ಇಲ್ಲ"
+                        "description": "ಸಾರ್ವಜನಿಕ ಪ್ರವೇಶಕ್ಕೆ ಅನುಮತಿ ಇಲ್ಲ",
+                        "title": "ನಿಷೇಧಿಸಲಾಗಿದೆ"
                     },
                     "permissive": {
                         "title": "ಅನುಮತಿದಾಯಕ"
@@ -352,12 +346,17 @@
                     "private": {
                         "title": "ಖಾಸಗಿ"
                     },
-                    "designated": {
-                        "title": "ನಿಯೋಜಿತ"
-                    },
-                    "destination": {
-                        "title": "ತಲಪುದಾಣ"
+                    "yes": {
+                        "title": "ಅನುಮತಿಸು"
                     }
+                },
+                "placeholder": "ತಿಳಿಯದ",
+                "types": {
+                    "access": "ಸಾಧಾರಣ",
+                    "bicycle": "ಸೈಕಲ್",
+                    "foot": "ಕಾಲು",
+                    "horse": "ಕುದುರೆ",
+                    "motor_vehicle": "ಮೋಟಾರ್ ವಾಹನ"
                 }
             },
             "access_simple": {
@@ -370,19 +369,19 @@
             "address": {
                 "label": "ವಿಳಾಸ",
                 "placeholders": {
+                    "city": "ನಗರ",
+                    "country": "ದೇಶ",
+                    "district": "ಜಿಲ್ಲೆ",
+                    "hamlet": "ಕೊಪ್ಪಲು",
                     "housename": "ಮನೆ ಹೆಸರು",
                     "housenumber": "123",
-                    "street": "ಬೀದಿ",
-                    "city": "ನಗರ",
-                    "postcode": "ಅಂಚೆ ಸಂಖ್ಯೆ",
                     "place": "ಸ್ಥಳ",
-                    "hamlet": "ಕೊಪ್ಪಲು",
-                    "suburb": "ಉಪನಗರ",
-                    "subdistrict": "ಉಪಜಿಲ್ಲೆ",
-                    "district": "ಜಿಲ್ಲೆ",
+                    "postcode": "ಅಂಚೆ ಸಂಖ್ಯೆ",
                     "province": "ಪ್ರಾಂತ್ಯ",
                     "state": "ರಾಜ್ಯ",
-                    "country": "ದೇಶ"
+                    "street": "ಬೀದಿ",
+                    "subdistrict": "ಉಪಜಿಲ್ಲೆ",
+                    "suburb": "ಉಪನಗರ"
                 }
             },
             "admin_level": {
@@ -394,9 +393,9 @@
             "aerialway/access": {
                 "label": "ಪ್ರವೇಶ",
                 "options": {
+                    "both": "ಎರಡೂ",
                     "entry": "ಒಳಗೆ",
-                    "exit": "ಹೊರಗೆ",
-                    "both": "ಎರಡೂ"
+                    "exit": "ಹೊರಗೆ"
                 }
             },
             "aerialway/bubble": {
@@ -420,9 +419,9 @@
             "aerialway/summer/access": {
                 "label": "ಪ್ರವೇಶ(ಬೇಸಿಗೆ)",
                 "options": {
+                    "both": "ಎರಡೂ",
                     "entry": "ಒಳಗೆ",
-                    "exit": "ಹೊರಗೆ",
-                    "both": "ಎರಡೂ"
+                    "exit": "ಹೊರಗೆ"
                 }
             },
             "aeroway": {
@@ -471,29 +470,29 @@
             "cardinal_direction": {
                 "label": "ದಿಕ್ಕು",
                 "options": {
-                    "N": "ಉತ್ತರ",
                     "E": "ಪೂರ್ವ",
-                    "S": "ದಕ್ಷಿಣ",
-                    "W": "ಪಶ್ಚಿಮ",
-                    "NE": "ಈಶಾನ್ಯ",
-                    "SE": "ಆಗ್ನೇಯ",
-                    "SW": "ನೈಋತ್ಯ",
-                    "NW": "ವಾಯವ್ಯ",
-                    "NNE": "ಉತ್ತರ - ಈಶಾನ್ಯ",
                     "ENE": "ಪೂರ್ವ - ಈಶಾನ್ಯ",
                     "ESE": "ಪೂರ್ವ - ಆಗ್ನೇಯ",
+                    "N": "ಉತ್ತರ",
+                    "NE": "ಈಶಾನ್ಯ",
+                    "NNE": "ಉತ್ತರ - ಈಶಾನ್ಯ",
+                    "NNW": "ಉತ್ತರ - ವಾಯುವ್ಯ",
+                    "NW": "ವಾಯವ್ಯ",
+                    "S": "ದಕ್ಷಿಣ",
+                    "SE": "ಆಗ್ನೇಯ",
                     "SSE": "ದಕ್ಷಿಣ - ಆಗ್ನೇಯ",
                     "SSW": "ದಕ್ಷಿಣ - ನೈಋತ್ಯ",
-                    "WSW": "ಪಶ್ಚಿಮ - ನೈಋತ್ಯ",
+                    "SW": "ನೈಋತ್ಯ",
+                    "W": "ಪಶ್ಚಿಮ",
                     "WNW": "ಪಶ್ಚಿಮ - ವಾಯುವ್ಯ",
-                    "NNW": "ಉತ್ತರ - ವಾಯುವ್ಯ"
+                    "WSW": "ಪಶ್ಚಿಮ - ನೈಋತ್ಯ"
                 }
             },
             "clock_direction": {
                 "label": "ದಿಕ್ಕು",
                 "options": {
-                    "clockwise": "ಪ್ರದಕ್ಷಿಣವಾಗಿ",
-                    "anticlockwise": "ಅಪ್ರದಕ್ಷಿಣವಾಗಿ"
+                    "anticlockwise": "ಅಪ್ರದಕ್ಷಿಣವಾಗಿ",
+                    "clockwise": "ಪ್ರದಕ್ಷಿಣವಾಗಿ"
                 }
             },
             "construction": {
@@ -531,13 +530,13 @@
             },
             "electrified": {
                 "label": "ವಿದ್ಯುದೀಕರಣ",
-                "placeholder": "ಸಂಪರ್ಕ ರೇಖೆ, ವಿದ್ಯುದೀಕರಿಸಿದ ರೈಲು ",
                 "options": {
                     "contact_line": "ಸಂಪರ್ಕ ರೇಖೆ",
+                    "no": "ಇಲ್ಲ",
                     "rail": "ವಿದ್ಯುದೀಕರಿಸಿದ ರೈಲು",
-                    "yes": "ಹೌದು (ಅನಿರ್ದಿಷ್ಟ)",
-                    "no": "ಇಲ್ಲ"
-                }
+                    "yes": "ಹೌದು (ಅನಿರ್ದಿಷ್ಟ)"
+                },
+                "placeholder": "ಸಂಪರ್ಕ ರೇಖೆ, ವಿದ್ಯುದೀಕರಿಸಿದ ರೈಲು "
             },
             "elevation": {
                 "label": "ಎತ್ತರ"
@@ -561,9 +560,9 @@
             "fire_hydrant/type": {
                 "label": "ವಿಧ",
                 "options": {
+                    "pond": "ಕೊಳ",
                     "underground": "ನೆಲದಡಿಯಲ್ಲಿ",
-                    "wall": "ಗೋಡೆ",
-                    "pond": "ಕೊಳ"
+                    "wall": "ಗೋಡೆ"
                 }
             },
             "fixme": {
@@ -592,12 +591,12 @@
             },
             "gender": {
                 "label": "ಲಿಂಗ",
-                "placeholder": "ಅಪರಿಚಿತ",
                 "options": {
-                    "male": "ಗಂಡು",
                     "female": "ಹೆಣ್ಣು",
+                    "male": "ಗಂಡು",
                     "unisex": "ಒಂದೇಲಿಂಗ"
-                }
+                },
+                "placeholder": "ಅಪರಿಚಿತ"
             },
             "generator/method": {
                 "label": "ವಿಧಾನ"
@@ -637,8 +636,8 @@
             "incline_steps": {
                 "label": "ವಾಲಿಕೆ",
                 "options": {
-                    "up": "ಮೇಲೆ",
-                    "down": "ಕೆಳಗೆ"
+                    "down": "ಕೆಳಗೆ",
+                    "up": "ಮೇಲೆ"
                 }
             },
             "information": {
@@ -647,10 +646,10 @@
             "internet_access": {
                 "label": "ಅಂತರ್ಜಾಲ ಸಂಪರ್ಕ",
                 "options": {
-                    "yes": "ಹೌದು",
                     "no": "ಇಲ್ಲ",
+                    "wired": "ತಂತಿಯುಕ್ತ",
                     "wlan": "ವೈಫೈ",
-                    "wired": "ತಂತಿಯುಕ್ತ"
+                    "yes": "ಹೌದು"
                 }
             },
             "lamp_type": {
@@ -668,18 +667,18 @@
             },
             "leaf_cycle": {
                 "options": {
-                    "semi_evergreen": "ಅರೆ ಹರಿದ್ವರ್ಣ",
+                    "mixed": "ಮಿಶ್ರಿತ",
                     "semi_deciduous": "ಅರೆ-ಪತನಶೀಲ",
-                    "mixed": "ಮಿಶ್ರಿತ"
+                    "semi_evergreen": "ಅರೆ ಹರಿದ್ವರ್ಣ"
                 }
             },
             "leaf_type": {
                 "label": "ಎಲೆಯ ವಿಧ",
                 "options": {
                     "broadleaved": "ಅಗಲವಾದ ಎಲೆ",
-                    "needleleaved": "ಚುಪಾದ ಎಲೆ",
+                    "leafless": "ಎಲೆಯಿಲ್ಲದ",
                     "mixed": "ಮಿಶ್ರಿತ",
-                    "leafless": "ಎಲೆಯಿಲ್ಲದ"
+                    "needleleaved": "ಚುಪಾದ ಎಲೆ"
                 }
             },
             "leisure": {
@@ -703,20 +702,20 @@
                 "placeholder": "40, 50, 60..."
             },
             "mtb/scale": {
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "4": "‍"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
-                "placeholder": "ಸುಲಭ, ಸಾಧಾರಣ, ಕಷ್ಟ ... ",
                 "options": {
                     "0": "ಅತಿ ಸುಲಭ (ಬಿಳಿಯ ವರ್ತುಲ)",
                     "1": "ಸುಲ್ಕಭ(ಹಸಿರು ವರ್ತುಲ)",
                     "2": "ಸಾಧಾರಣ (ನೀಲಿ ವರ್ತುಲ)",
                     "3": "ಕಷ್ಟ (ಕರಿಯ ವರ್ತುಲ)",
                     "4": "ಅತೀ ಕಷ್ಟ (ಎರಡು ಕಪ್ಪು ವಜ್ರಾಕಾರ)"
-                }
+                },
+                "placeholder": "ಸುಲಭ, ಸಾಧಾರಣ, ಕಷ್ಟ ... "
             },
             "mtb/scale/uphill": {
                 "placeholder": "0, 1, 2, 3..."
@@ -740,17 +739,17 @@
             "oneway": {
                 "label": "ಒಮ್ಮುಖ ಸಂಚಾರ",
                 "options": {
+                    "no": "ಇಲ್ಲ",
                     "undefined": "ಇಲ್ಲವೆಂದು ಭಾವಿಸಲಾಗಿದೆ",
-                    "yes": "ಹೌದು",
-                    "no": "ಇಲ್ಲ"
+                    "yes": "ಹೌದು"
                 }
             },
             "oneway_yes": {
                 "label": "ಒಮ್ಮುಖ ಸಂಚಾರ",
                 "options": {
+                    "no": "ಇಲ್ಲ",
                     "undefined": "ಇದೆ ಎಂದು ಭಾವಿದಲಾಗಿದೆ",
-                    "yes": "ಹೌದು",
-                    "no": "ಇಲ್ಲ"
+                    "yes": "ಹೌದು"
                 }
             },
             "opening_hours": {
@@ -769,9 +768,9 @@
             "parking": {
                 "label": "ವಿಧ",
                 "options": {
-                    "surface": "ಮೇಲ್ಮೈ",
                     "multi-storey": "ಬಹುಮಟ್ಟದ",
-                    "sheds": "ತಂಗುದಾಣ"
+                    "sheds": "ತಂಗುದಾಣ",
+                    "surface": "ಮೇಲ್ಮೈ"
                 }
             },
             "phone": {
@@ -780,13 +779,13 @@
             },
             "piste/difficulty": {
                 "label": "ಕಷ್ಟ",
-                "placeholder": "ಸುಲಭ, ಮಧ್ಯಂತರ, ಮುಂದುವರೆದ .....",
                 "options": {
-                    "novice": "ಅನನುಭವಿ (ಸೂಚನಾ)",
+                    "advanced": "ಮುಂದುವರೆದ (ಕಪ್ಪು ವಜ್ರ)",
                     "easy": "ಸುಲಭ (ಹಸಿರು ವರ್ತುಲ)",
                     "intermediate": "ಮಧ್ಯಂತರ (ನೀಲಿ ವರ್ತುಲ)",
-                    "advanced": "ಮುಂದುವರೆದ (ಕಪ್ಪು ವಜ್ರ)"
-                }
+                    "novice": "ಅನನುಭವಿ (ಸೂಚನಾ)"
+                },
+                "placeholder": "ಸುಲಭ, ಮಧ್ಯಂತರ, ಮುಂದುವರೆದ ....."
             },
             "piste/grooming": {
                 "options": {
@@ -798,9 +797,9 @@
             "piste/type": {
                 "label": "ವಿಧ",
                 "options": {
+                    "playground": "ಆಟದ ಮೈದಾನ",
                     "sled": "ಸ್ಲೆಡ್",
-                    "snow_park": "ಮಂಜಿನ ಉದ್ಯಾನವನ",
-                    "playground": "ಆಟದ ಮೈದಾನ"
+                    "snow_park": "ಮಂಜಿನ ಉದ್ಯಾನವನ"
                 }
             },
             "place": {
@@ -841,14 +840,14 @@
             },
             "service/bicycle/chain_tool": {
                 "options": {
-                    "yes": "ಹೌದು",
-                    "no": "ಇಲ್ಲ"
+                    "no": "ಇಲ್ಲ",
+                    "yes": "ಹೌದು"
                 }
             },
             "service/bicycle/pump": {
                 "options": {
-                    "yes": "ಹೌದು",
-                    "no": "ಇಲ್ಲ"
+                    "no": "ಇಲ್ಲ",
+                    "yes": "ಹೌದು"
                 }
             },
             "shelter": {
@@ -876,12 +875,12 @@
                 "label": "ಕ್ರೀಡೆ"
             },
             "structure": {
-                "placeholder": "ತಿಳಿಯದ",
                 "options": {
                     "bridge": "ಸೇತುವೆ",
-                    "tunnel": "ಸುರಂಗ",
-                    "embankment": "ಏರಿ"
-                }
+                    "embankment": "ಏರಿ",
+                    "tunnel": "ಸುರಂಗ"
+                },
+                "placeholder": "ತಿಳಿಯದ"
             },
             "studio_type": {
                 "label": "ವಿಧ"
@@ -894,8 +893,8 @@
             },
             "takeaway": {
                 "options": {
-                    "yes": "ಹೌದು",
-                    "no": "ಇಲ್ಲ"
+                    "no": "ಇಲ್ಲ",
+                    "yes": "ಹೌದು"
                 }
             },
             "tourism": {

@@ -208,7 +208,6 @@
     "commit": {
         "title": "記低修改",
         "description_placeholder": "簡述你爾則稿件",
-        "message_label": "遞交片語",
         "upload_explanation": "你嘅修改，傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
         "upload_explanation_with_user": "你以{user}名義，修改傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
         "save": "記",
@@ -413,39 +412,39 @@
         "fields": {
             "access": {
                 "label": "通",
+                "options": {
+                    "designated": {
+                        "description": "通行與否，按法例或路牌指定",
+                        "title": "指名"
+                    },
+                    "destination": {
+                        "description": "限往目的地",
+                        "title": "目的地"
+                    },
+                    "no": {
+                        "description": "公眾不通",
+                        "title": "禁入"
+                    },
+                    "permissive": {
+                        "description": "可通，直至地主唔畀。",
+                        "title": "放任"
+                    },
+                    "private": {
+                        "description": "要地主批准",
+                        "title": "私家"
+                    },
+                    "yes": {
+                        "description": "按法例可通，通路之權。",
+                        "title": "准許"
+                    }
+                },
                 "placeholder": "未知",
                 "types": {
                     "access": "總體",
-                    "foot": "行",
-                    "motor_vehicle": "車",
                     "bicycle": "單車",
-                    "horse": "馬"
-                },
-                "options": {
-                    "yes": {
-                        "title": "准許",
-                        "description": "按法例可通，通路之權。"
-                    },
-                    "no": {
-                        "title": "禁入",
-                        "description": "公眾不通"
-                    },
-                    "permissive": {
-                        "title": "放任",
-                        "description": "可通，直至地主唔畀。"
-                    },
-                    "private": {
-                        "title": "私家",
-                        "description": "要地主批准"
-                    },
-                    "designated": {
-                        "title": "指名",
-                        "description": "通行與否，按法例或路牌指定"
-                    },
-                    "destination": {
-                        "title": "目的地",
-                        "description": "限往目的地"
-                    }
+                    "foot": "行",
+                    "horse": "馬",
+                    "motor_vehicle": "車"
                 }
             },
             "access_simple": {
@@ -454,8 +453,8 @@
             "address": {
                 "label": "地埗",
                 "placeholders": {
-                    "street": "街",
-                    "city": "城"
+                    "city": "城",
+                    "street": "街"
                 }
             },
             "admin_level": {
@@ -504,8 +503,8 @@
             "clock_direction": {
                 "label": "方向",
                 "options": {
-                    "clockwise": "順時針",
-                    "anticlockwise": "逆時針"
+                    "anticlockwise": "逆時針",
+                    "clockwise": "順時針"
                 }
             },
             "collection_times": {
@@ -595,9 +594,9 @@
             "internet_access": {
                 "label": "用到互聯網",
                 "options": {
-                    "wlan": "無綫上網",
+                    "terminal": "終端機",
                     "wired": "揷綫上網",
-                    "terminal": "終端機"
+                    "wlan": "無綫上網"
                 }
             },
             "landuse": {
@@ -719,13 +718,13 @@
             },
             "structure": {
                 "label": "結構",
-                "placeholder": "未知",
                 "options": {
                     "bridge": "橋",
-                    "tunnel": "隧道",
+                    "cutting": "開山",
                     "embankment": "基堤",
-                    "cutting": "開山"
-                }
+                    "tunnel": "隧道"
+                },
+                "placeholder": "未知"
             },
             "supervised": {
                 "label": "有人睇"

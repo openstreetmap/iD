@@ -239,7 +239,7 @@
     "commit": {
         "title": "Gem ændringer",
         "description_placeholder": "Kort beskrivelse af dine bidrag",
-        "message_label": "Tilføj en besked",
+        "message_label": "Ændringssætskommentar",
         "upload_explanation": "De ændringer du uploader vil blive synlige på alle kort der bruger OpenStreetMap-data.",
         "upload_explanation_with_user": "Ændringer du uploader under brugernavnet {user} vil blive synlige på alle kort der bruger OpenStreetMap-data.",
         "save": "Gem",
@@ -253,6 +253,26 @@
     "contributors": {
         "list": "Redigeringer af {users}",
         "truncated_list": "Redigeringer af {users} og {count} andre"
+    },
+    "infobox": {
+        "selected": "{n} valgte",
+        "geometry": "Geometri",
+        "closed": "lukket",
+        "center": "Center",
+        "perimeter": "Perimeter",
+        "length": "Længde",
+        "area": "Område",
+        "centroid": "Centroid",
+        "location": "Lokalitet",
+        "metric": "Meter",
+        "imperial": "Imperial"
+    },
+    "geometry": {
+        "point": "punkt",
+        "vertex": "hjørne",
+        "line": "linje",
+        "area": "område",
+        "relation": "relation"
     },
     "geocoder": {
         "search": "Søg i hele verden...",
@@ -568,39 +588,39 @@
         "fields": {
             "access": {
                 "label": "Adgang",
+                "options": {
+                    "designated": {
+                        "description": "Adgang tilladt ifølge trafikskilte eller lokale bestemmelser",
+                        "title": "Udpeget til netop dette formål"
+                    },
+                    "destination": {
+                        "description": "Ærindekørsel tilladt",
+                        "title": "Destination"
+                    },
+                    "no": {
+                        "description": "Adgang ikke tilladt for offentligheden",
+                        "title": "Forbudt"
+                    },
+                    "permissive": {
+                        "description": "Adgang tilladt indtil ejer tilbagekalder tilladelsen",
+                        "title": "Adgang efter tilladelse"
+                    },
+                    "private": {
+                        "description": "Adgang kun tilladt ved udstedelse af individuelle tilladelser fra ejer",
+                        "title": "Privat"
+                    },
+                    "yes": {
+                        "description": "Adgang tilladt i følge loven",
+                        "title": "Tilladt"
+                    }
+                },
                 "placeholder": "Ukendt",
                 "types": {
                     "access": "Generelt",
-                    "foot": "Til fods",
-                    "motor_vehicle": "Motorkøretøjer",
                     "bicycle": "Cykler",
-                    "horse": "Heste"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Tilladt",
-                        "description": "Adgang tilladt i følge loven"
-                    },
-                    "no": {
-                        "title": "Forbudt",
-                        "description": "Adgang ikke tilladt for offentligheden"
-                    },
-                    "permissive": {
-                        "title": "Adgang efter tilladelse",
-                        "description": "Adgang tilladt indtil ejer tilbagekalder tilladelsen"
-                    },
-                    "private": {
-                        "title": "Privat",
-                        "description": "Adgang kun tilladt ved udstedelse af individuelle tilladelser fra ejer"
-                    },
-                    "designated": {
-                        "title": "Udpeget til netop dette formål",
-                        "description": "Adgang tilladt ifølge trafikskilte eller lokale bestemmelser"
-                    },
-                    "destination": {
-                        "title": "Destination",
-                        "description": "Ærindekørsel tilladt"
-                    }
+                    "foot": "Til fods",
+                    "horse": "Heste",
+                    "motor_vehicle": "Motorkøretøjer"
                 }
             },
             "access_simple": {
@@ -613,19 +633,19 @@
             "address": {
                 "label": "Adresse",
                 "placeholders": {
+                    "city": "By",
+                    "country": "Land",
+                    "district": "Bydel",
+                    "hamlet": "Lille landsby",
                     "housename": "Husnavn",
                     "housenumber": "123",
-                    "street": "Gade",
-                    "city": "By",
-                    "postcode": "Postnummer",
                     "place": "Sted",
-                    "hamlet": "Lille landsby",
-                    "suburb": "Forstad",
-                    "subdistrict": "Kvarter",
-                    "district": "Bydel",
+                    "postcode": "Postnummer",
                     "province": "Landsdel",
                     "state": "Delstat",
-                    "country": "Land"
+                    "street": "Gade",
+                    "subdistrict": "Kvarter",
+                    "suburb": "Forstad"
                 }
             },
             "admin_level": {
@@ -637,9 +657,9 @@
             "aerialway/access": {
                 "label": "Adgang",
                 "options": {
+                    "both": "Begge",
                     "entry": "Indgang",
-                    "exit": "Udgang",
-                    "both": "Begge"
+                    "exit": "Udgang"
                 }
             },
             "aerialway/bubble": {
@@ -663,9 +683,9 @@
             "aerialway/summer/access": {
                 "label": "Adgang (sommer)",
                 "options": {
+                    "both": "Begge",
                     "entry": "Indgang",
-                    "exit": "Udgang",
-                    "both": "Begge"
+                    "exit": "Udgang"
                 }
             },
             "aeroway": {
@@ -714,29 +734,29 @@
             "cardinal_direction": {
                 "label": "Retning",
                 "options": {
-                    "N": "Nord",
                     "E": "Øst",
-                    "S": "Syd",
-                    "W": "Vest",
-                    "NE": "Nordøst",
-                    "SE": "Sydøst",
-                    "SW": "Sydvest",
-                    "NW": "Nordvest",
-                    "NNE": "Nord-nordøst",
                     "ENE": "Øst-nordøst",
                     "ESE": "Øst-sydøst",
+                    "N": "Nord",
+                    "NE": "Nordøst",
+                    "NNE": "Nord-nordøst",
+                    "NNW": "Nord-nordvest",
+                    "NW": "Nordvest",
+                    "S": "Syd",
+                    "SE": "Sydøst",
                     "SSE": "Syd-sydøst",
                     "SSW": "Syd-sydvest",
-                    "WSW": "Vest-sydvest",
+                    "SW": "Sydvest",
+                    "W": "Vest",
                     "WNW": "Vest-nordvest",
-                    "NNW": "Nord-nordvest"
+                    "WSW": "Vest-sydvest"
                 }
             },
             "clock_direction": {
                 "label": "Retning",
                 "options": {
-                    "clockwise": "Med uret",
-                    "anticlockwise": "Mod uret"
+                    "anticlockwise": "Mod uret",
+                    "clockwise": "Med uret"
                 }
             },
             "collection_times": {
@@ -744,6 +764,9 @@
             },
             "construction": {
                 "label": "Type"
+            },
+            "content": {
+                "label": "Indhold"
             },
             "country": {
                 "label": "Land"
@@ -780,13 +803,13 @@
             },
             "electrified": {
                 "label": "Elektrificering",
-                "placeholder": "Køreledning, elektrificeret jernbane",
                 "options": {
                     "contact_line": "Køreledning",
+                    "no": "Nej",
                     "rail": "Elektrificeret jernbane",
-                    "yes": "Ja (uspecificeret)",
-                    "no": "Nej"
-                }
+                    "yes": "Ja (uspecificeret)"
+                },
+                "placeholder": "Køreledning, elektrificeret jernbane"
             },
             "elevation": {
                 "label": "Højde over havet"
@@ -811,9 +834,9 @@
                 "label": "Type",
                 "options": {
                     "pillar": "Søjle/overjordisk",
+                    "pond": "Dam",
                     "underground": "Underjordisk",
-                    "wall": "Mur",
-                    "pond": "Dam"
+                    "wall": "Mur"
                 }
             },
             "fixme": {
@@ -854,12 +877,12 @@
             },
             "gender": {
                 "label": "Køn",
-                "placeholder": "Ukendt",
                 "options": {
-                    "male": "Mand",
                     "female": "Kvinde",
+                    "male": "Mand",
                     "unisex": "Unisex"
-                }
+                },
+                "placeholder": "Ukendt"
             },
             "generator/method": {
                 "label": "Metode"
@@ -900,8 +923,8 @@
             "incline_steps": {
                 "label": "Stigning",
                 "options": {
-                    "up": "Op",
-                    "down": "Ned"
+                    "down": "Ned",
+                    "up": "Op"
                 }
             },
             "information": {
@@ -910,11 +933,11 @@
             "internet_access": {
                 "label": "Internetadgang",
                 "options": {
-                    "yes": "Ja",
                     "no": "Nej",
-                    "wlan": "Wifi",
+                    "terminal": "Terminal",
                     "wired": "Via kabel",
-                    "terminal": "Terminal"
+                    "wlan": "Wifi",
+                    "yes": "Ja"
                 }
             },
             "lamp_type": {
@@ -933,20 +956,20 @@
             "leaf_cycle": {
                 "label": "Bladcyklus",
                 "options": {
-                    "evergreen": "Stedsegrønt",
                     "deciduous": "Løvfældende",
-                    "semi_evergreen": "Delvist stedsegrønt",
+                    "evergreen": "Stedsegrønt",
+                    "mixed": "Blandet",
                     "semi_deciduous": "Delvist løvfældende",
-                    "mixed": "Blandet"
+                    "semi_evergreen": "Delvist stedsegrønt"
                 }
             },
             "leaf_type": {
                 "label": "Bladtype",
                 "options": {
                     "broadleaved": "Løvtræsblade",
-                    "needleleaved": "Nåleblade",
+                    "leafless": "Bladløs",
                     "mixed": "Blandet",
-                    "leafless": "Bladløs"
+                    "needleleaved": "Nåleblade"
                 }
             },
             "leisure": {
@@ -974,7 +997,6 @@
             },
             "mtb/scale": {
                 "label": "Sværhedsgrad for mountainbike",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Fast grus/ pakket jord, ingen forhindringer, brede kurver",
                     "1": "1: Noget løs overflade, små forhindringer, brede kurver",
@@ -983,22 +1005,22 @@
                     "4": "4: Løs overflade eller kampesten, farlige hårnålesving",
                     "5": "5: Maksimal sværhedsgrad, kampestensområder, jordskred",
                     "6": "6: Ikke farbart undtagen for de allerbedste mountainbikere"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "Sværhedsgrad for IMBA-spor",
-                "placeholder": "Nemt, medium, svært",
                 "options": {
                     "0": "Nemmeste (hvid cirkel)",
                     "1": "Let (grøn cirkel)",
                     "2": "Medium (blå firkant)",
                     "3": "Vanskelig (sort diamant)",
                     "4": "Ekstremt vanskelig (dobbelt sort diamant)"
-                }
+                },
+                "placeholder": "Nemt, medium, svært"
             },
             "mtb/scale/uphill": {
                 "label": "Sværhedsgrad for mountainbike op ad bakke",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Gennemsnitlig hældning < 10 %, grus / hård jord, ingen forhindringer",
                     "1": "1: Gennemsnitlig hældning < 15 %, grus / hård jord, nogle små genstande",
@@ -1006,7 +1028,8 @@
                     "3": "3: Gennemsnitlig hældning < 25 %, variabel overflade, klippestykker/træstykker",
                     "4": "4: Gennemsnitlig  hældning < 30 %, dårlige forhold, store sten/træstykker",
                     "5": "5: Meget stejlt, cyklen skal for det meste skubbes eller bæres"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Navn",
@@ -1027,17 +1050,17 @@
             "oneway": {
                 "label": "Ensrettet",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Antages at være Nej",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
                 }
             },
             "oneway_yes": {
                 "label": "Ensrettet",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Antages at være Ja",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
                 }
             },
             "opening_hours": {
@@ -1056,13 +1079,13 @@
             "parking": {
                 "label": "Type",
                 "options": {
-                    "surface": "Overflade",
-                    "multi-storey": "Multiniveau",
-                    "underground": "Underjordisk",
-                    "sheds": "Læskure",
                     "carports": "Carporte",
                     "garage_boxes": "Garagebokse",
-                    "lane": "Vejsidespor"
+                    "lane": "Vejsidespor",
+                    "multi-storey": "Multiniveau",
+                    "sheds": "Læskure",
+                    "surface": "Overflade",
+                    "underground": "Underjordisk"
                 }
             },
             "phone": {
@@ -1071,24 +1094,24 @@
             },
             "piste/difficulty": {
                 "label": "Sværhedsgrad",
-                "placeholder": "Let, mellemsvær, avanceret...",
                 "options": {
-                    "novice": "Nybegynder (vejledning)",
-                    "easy": "Nemt (grøn cirkel)",
-                    "intermediate": "Mellemsvært (blå firkant)",
                     "advanced": "Avanceret (sort diamant)",
+                    "easy": "Nemt (grøn cirkel)",
                     "expert": "Ekspert (dobbelt sort diamant)",
+                    "extreme": "Ekstremt (klatreudstyr påkrævet)",
                     "freeride": "Freeride (off-piste)",
-                    "extreme": "Ekstremt (klatreudstyr påkrævet)"
-                }
+                    "intermediate": "Mellemsvært (blå firkant)",
+                    "novice": "Nybegynder (vejledning)"
+                },
+                "placeholder": "Let, mellemsvær, avanceret..."
             },
             "piste/grooming": {
                 "label": "Sikkerhed",
                 "options": {
-                    "classic": "Klassisk",
-                    "mogul": "Pukkelpist",
                     "backcountry": "Offpiste",
+                    "classic": "Klassisk",
                     "classic+skating": "Klassisk og skiløb",
+                    "mogul": "Pukkelpist",
                     "scooter": "Snescooter",
                     "skating": "Skøjteløb"
                 }
@@ -1097,14 +1120,14 @@
                 "label": "Type",
                 "options": {
                     "downhill": "Styrtløb",
+                    "hike": "Skivandretur",
+                    "ice_skate": "Skøjter",
                     "nordic": "Nordisk",
+                    "playground": "Legeplads",
                     "skitour": "Skirute",
                     "sled": "Slæde",
-                    "hike": "Skivandretur",
                     "sleigh": "Kælk",
-                    "ice_skate": "Skøjter",
-                    "snow_park": "Snepark",
-                    "playground": "Legeplads"
+                    "snow_park": "Snepark"
                 }
             },
             "place": {
@@ -1115,6 +1138,9 @@
             },
             "power": {
                 "label": "Type"
+            },
+            "power_supply": {
+                "label": "Eltransformator"
             },
             "railway": {
                 "label": "Type"
@@ -1154,15 +1180,18 @@
             },
             "sac_scale": {
                 "label": "Sværhedsgrad for vandrere",
-                "placeholder": "Bjergvandring, alpinvandring...",
                 "options": {
-                    "hiking": "T1: Vandring",
-                    "mountain_hiking": "T2: Bjergvandring",
-                    "demanding_mountain_hiking": "T3: Krævende bjergvandring",
                     "alpine_hiking": "T4: Alpin vandring",
                     "demanding_alpine_hiking": "T5: Udfordrende alpinvandring",
-                    "difficult_alpine_hiking": "T6: Vanskelig alpinvandring"
-                }
+                    "demanding_mountain_hiking": "T3: Krævende bjergvandring",
+                    "difficult_alpine_hiking": "T6: Vanskelig alpinvandring",
+                    "hiking": "T1: Vandring",
+                    "mountain_hiking": "T2: Bjergvandring"
+                },
+                "placeholder": "Bjergvandring, alpinvandring..."
+            },
+            "sanitary_dump_station": {
+                "label": "Toilet funktionsmåde"
             },
             "seasonal": {
                 "label": " Sæsonpræget"
@@ -1173,26 +1202,26 @@
             "service/bicycle/chain_tool": {
                 "label": "Kædeværktøj",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Antages at være Nej",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Luftpumpe",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Antages at være Nej",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
                 }
             },
             "service_rail": {
                 "label": "Servicetype",
                 "options": {
-                    "spur": "Firmaspor",
-                    "yard": "Rangergård",
+                    "crossover": "Kryds",
                     "siding": "Langsomt spor",
-                    "crossover": "Kryds"
+                    "spur": "Firmaspor",
+                    "yard": "Rangergård"
                 }
             },
             "shelter": {
@@ -1209,29 +1238,29 @@
             },
             "smoking": {
                 "label": "Rygning",
-                "placeholder": "Nej, adskilt, ja...",
                 "options": {
-                    "no": "Rygning forbudt overalt",
-                    "separated": "I rygeområder, ikke fysisk adskilte",
+                    "dedicated": "Dedikeret til rygere (fx rygerklub)",
                     "isolated": "I rygeområder, fysisk adskilte",
+                    "no": "Rygning forbudt overalt",
                     "outside": "Tilladt udenfor",
-                    "yes": "Tilladt alle steder",
-                    "dedicated": "Dedikeret til rygere (fx rygerklub)"
-                }
+                    "separated": "I rygeområder, ikke fysisk adskilte",
+                    "yes": "Tilladt alle steder"
+                },
+                "placeholder": "Nej, adskilt, ja..."
             },
             "smoothness": {
                 "label": "Glathed",
-                "placeholder": "Tynde hjul, hjul, offroad...",
                 "options": {
+                    "bad": "Robuste hjul:  mountainbikecykel, bil, rickshaw",
                     "excellent": "Tynde hjul: rulleskøjter, skateboard",
                     "good": "Tynde hjul: racercykel",
-                    "intermediate": "Hjul: citybike, kørestol, scooter",
-                    "bad": "Robuste hjul:  mountainbikecykel, bil, rickshaw",
-                    "very_bad": "Høj frihøjde: lettere terrængående køretøj",
                     "horrible": "Offroad: kraftigt terrængående køretøj",
-                    "very_horrible": "Specialiseret offroad: traktor, ATV",
-                    "impassable": "Ufremkommeligt / intet køretøj på hjul"
-                }
+                    "impassable": "Ufremkommeligt / intet køretøj på hjul",
+                    "intermediate": "Hjul: citybike, kørestol, scooter",
+                    "very_bad": "Høj frihøjde: lettere terrængående køretøj",
+                    "very_horrible": "Specialiseret offroad: traktor, ATV"
+                },
+                "placeholder": "Tynde hjul, hjul, offroad..."
             },
             "social_facility_for": {
                 "label": "Klientel",
@@ -1251,14 +1280,14 @@
             },
             "structure": {
                 "label": "Struktur",
-                "placeholder": "Ukendt",
                 "options": {
                     "bridge": "Bro",
-                    "tunnel": "Tunnel",
-                    "embankment": "Forhøjning til tog, vej",
                     "cutting": "Forsænkning",
-                    "ford": "Vadested"
-                }
+                    "embankment": "Forhøjning til tog, vej",
+                    "ford": "Vadested",
+                    "tunnel": "Tunnel"
+                },
+                "placeholder": "Ukendt"
             },
             "studio_type": {
                 "label": "Type"
@@ -1277,20 +1306,20 @@
             },
             "takeaway": {
                 "label": "Takeaway",
-                "placeholder": "Ja, nej, kun takeaway...",
                 "options": {
-                    "yes": "Ja",
                     "no": "Nej",
-                    "only": "Kun Takeway"
-                }
+                    "only": "Kun Takeway",
+                    "yes": "Ja"
+                },
+                "placeholder": "Ja, nej, kun takeaway..."
             },
             "toilets/disposal": {
                 "label": "Funktionsmåde",
                 "options": {
-                    "flush": "Træk & slip",
-                    "pitlatrine": "Latrin",
+                    "bucket": "Spand",
                     "chemical": "Kemisk",
-                    "bucket": "Spand"
+                    "flush": "Træk & slip",
+                    "pitlatrine": "Latrin"
                 }
             },
             "tourism": {
@@ -1301,26 +1330,26 @@
             },
             "tracktype": {
                 "label": "Sportype",
-                "placeholder": "Fast, overvejende fast, blød …",
                 "options": {
                     "grade1": "Fast: hårdt vejbelagt eller stærkt komprimeret overflade",
                     "grade2": "Overvejende fast: grus / småsten med nogle bløde materiale blandet i",
                     "grade3": "En blanding af hårde og bløde materialer",
                     "grade4": "Overvejende blød: jord / sand / græs med nogle hårde materialer blandet i",
                     "grade5": "Blød: jord/sand/græs"
-                }
+                },
+                "placeholder": "Fast, overvejende fast, blød …"
             },
             "trail_visibility": {
                 "label": "Synlighed af spor",
-                "placeholder": "Fremragende, god, dårlig...",
                 "options": {
+                    "bad": "Dårlig: ​​ingen markører, sti til tider usynlig / sporløs",
                     "excellent": "Fremragende: entydig sti eller markører overalt",
                     "good": "God: markører synlige, undertiden kræves søgning",
-                    "intermediate": "Mellemsvær: kun få markører, sti for det meste synlig",
-                    "bad": "Dårlig: ​​ingen markører, sti til tider usynlig / sporløs",
                     "horrible": "Frygtelig: ofte sporløs, kræver visse orienteringsfærdigheder",
+                    "intermediate": "Mellemsvær: kun få markører, sti for det meste synlig",
                     "no": "Ingen: sporløs, kræver fremragende orienteringsfærdigheder"
-                }
+                },
+                "placeholder": "Fremragende, god, dårlig..."
             },
             "trees": {
                 "label": "Træer"
@@ -1333,6 +1362,9 @@
             },
             "water": {
                 "label": "Type"
+            },
+            "water_point": {
+                "label": "Vandbrønd"
             },
             "waterway": {
                 "label": "Type"
@@ -1474,6 +1506,10 @@
             "amenity/bicycle_repair_station": {
                 "name": "Cykelværktøjlån",
                 "terms": "Cykelværktøjlån, Cykelværktøj"
+            },
+            "amenity/biergarten": {
+                "name": "Ølhave",
+                "terms": "Ølhave, Ølstue"
             },
             "amenity/boat_rental": {
                 "name": "Bådudlejning",
@@ -1670,6 +1706,10 @@
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "Restaurant, Spisested, Spisehus"
+            },
+            "amenity/sanitary_dump_station": {
+                "name": "Tør closettoilet funtionsområde",
+                "terms": "Tør closettoilet funtionsområde"
             },
             "amenity/school": {
                 "name": "Skolegrund",
@@ -2631,9 +2671,17 @@
                 "name": "Fyr (navigation)",
                 "terms": "Fyr (navigation)"
             },
+            "man_made/mast": {
+                "name": "Radiomast",
+                "terms": "Radiomast"
+            },
             "man_made/observation": {
                 "name": "Observationstårn",
                 "terms": "observationstårn, udkigstårn"
+            },
+            "man_made/petroleum_well": {
+                "name": "Oliebrønd",
+                "terms": "Oliebrønd"
             },
             "man_made/pier": {
                 "name": "Bådebro",
@@ -2642,6 +2690,14 @@
             "man_made/pipeline": {
                 "name": "Rørledning",
                 "terms": "Rørledning"
+            },
+            "man_made/silo": {
+                "name": "Silo",
+                "terms": "Silo, Silotank"
+            },
+            "man_made/storage_tank": {
+                "name": "Lagertank",
+                "terms": "Lagertank"
             },
             "man_made/survey_point": {
                 "name": "Geografisk fixpunkt",
@@ -2862,6 +2918,10 @@
             "place/city": {
                 "name": "Storby",
                 "terms": "Storby"
+            },
+            "place/farm": {
+                "name": "Gård",
+                "terms": "Gård, Bondegård"
             },
             "place/hamlet": {
                 "name": "Mindre beboet område",
@@ -3651,6 +3711,10 @@
                 "name": "Drænløb",
                 "terms": "Drænløb"
             },
+            "waterway/fuel": {
+                "name": "Søtankstation",
+                "terms": "Søtankstation"
+            },
             "waterway/river": {
                 "name": "Flod/å",
                 "terms": "Flod, Å"
@@ -3658,6 +3722,10 @@
             "waterway/riverbank": {
                 "name": "Flodbred",
                 "terms": "Flodbred"
+            },
+            "waterway/sanitary_dump_station": {
+                "name": "Søtoilet funktionsområde",
+                "terms": "Søtoilet funktionsområde"
             },
             "waterway/stream": {
                 "name": "Bæk",

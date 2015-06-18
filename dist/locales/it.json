@@ -239,7 +239,7 @@
     "commit": {
         "title": "Salva le modifiche",
         "description_placeholder": "Una breve descrizione delle tue modifiche",
-        "message_label": "Commento",
+        "message_label": "Commento al gruppo di modifiche",
         "upload_explanation": "Le modifiche che carichi saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
         "upload_explanation_with_user": "Le modifiche che carichi come {user} saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
         "save": "Salva",
@@ -253,6 +253,26 @@
     "contributors": {
         "list": "Modifiche di {users}",
         "truncated_list": "Modifiche di {users} e {count} altri"
+    },
+    "infobox": {
+        "selected": "{n} selezionati",
+        "geometry": "Geometria",
+        "closed": "chiuso",
+        "center": "Centro",
+        "perimeter": "Perimetro",
+        "length": "Lunghezza",
+        "area": "Area",
+        "centroid": "Baricentro",
+        "location": "Posizione",
+        "metric": "Metrico",
+        "imperial": "Imperiale"
+    },
+    "geometry": {
+        "point": "punto",
+        "vertex": "vertice",
+        "line": "linea",
+        "area": "area",
+        "relation": "relazione"
     },
     "geocoder": {
         "search": "Cerca in tutto il mondo...",
@@ -568,39 +588,39 @@
         "fields": {
             "access": {
                 "label": "Accesso",
+                "options": {
+                    "designated": {
+                        "description": "Accesso consentito stando ai cartelli stradali od alle norme locali",
+                        "title": "Preferenziale"
+                    },
+                    "destination": {
+                        "description": "Accesso consentito solo se la destinazione coincide con l'elemento stesso",
+                        "title": "Destinazione"
+                    },
+                    "no": {
+                        "description": "Accesso consentito ai soli autorizzati",
+                        "title": "Vietato"
+                    },
+                    "permissive": {
+                        "description": "Accesso consentito fino a quando il proprietario lo consente",
+                        "title": "Permissivo"
+                    },
+                    "private": {
+                        "description": "Accesso consentito solo con il permesso individuale del proprietario",
+                        "title": "Privato"
+                    },
+                    "yes": {
+                        "description": "Accesso consentito a norma di legge; diritto di passaggio",
+                        "title": "Permesso"
+                    }
+                },
                 "placeholder": "Sconosciuto",
                 "types": {
                     "access": "Generale",
-                    "foot": "A piedi",
-                    "motor_vehicle": "Veicoli a Motore",
                     "bicycle": "Biciclette",
-                    "horse": "Cavalli"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Permesso",
-                        "description": "Accesso consentito a norma di legge; diritto di passaggio"
-                    },
-                    "no": {
-                        "title": "Vietato",
-                        "description": "Accesso consentito ai soli autorizzati"
-                    },
-                    "permissive": {
-                        "title": "Permissivo",
-                        "description": "Accesso consentito fino a quando il proprietario lo consente"
-                    },
-                    "private": {
-                        "title": "Privato",
-                        "description": "Accesso consentito solo con il permesso individuale del proprietario"
-                    },
-                    "designated": {
-                        "title": "Preferenziale",
-                        "description": "Accesso consentito stando ai cartelli stradali od alle norme locali"
-                    },
-                    "destination": {
-                        "title": "Destinazione",
-                        "description": "Accesso consentito solo se la destinazione coincide con l'elemento stesso"
-                    }
+                    "foot": "A piedi",
+                    "horse": "Cavalli",
+                    "motor_vehicle": "Veicoli a Motore"
                 }
             },
             "access_simple": {
@@ -613,19 +633,19 @@
             "address": {
                 "label": "Indirizzo",
                 "placeholders": {
+                    "city": "Città",
+                    "country": "Nazione",
+                    "district": "Distretto",
+                    "hamlet": "Località",
                     "housename": "Numero civico",
                     "housenumber": "123",
-                    "street": "Strada",
-                    "city": "Città",
-                    "postcode": "Codice postale",
                     "place": "Luogo",
-                    "hamlet": "Località",
-                    "suburb": "Circoscrizione",
-                    "subdistrict": "Sottodistretto",
-                    "district": "Distretto",
+                    "postcode": "Codice postale",
                     "province": "Provincia",
                     "state": "Stato/Regione",
-                    "country": "Nazione"
+                    "street": "Strada",
+                    "subdistrict": "Sottodistretto",
+                    "suburb": "Circoscrizione"
                 }
             },
             "admin_level": {
@@ -637,9 +657,9 @@
             "aerialway/access": {
                 "label": "Accesso",
                 "options": {
+                    "both": "Entrambe",
                     "entry": "Ingresso",
-                    "exit": "Uscita",
-                    "both": "Entrambe"
+                    "exit": "Uscita"
                 }
             },
             "aerialway/bubble": {
@@ -663,9 +683,9 @@
             "aerialway/summer/access": {
                 "label": "Accesso (estate)",
                 "options": {
+                    "both": "Entrambe",
                     "entry": "Ingresso",
-                    "exit": "Uscita",
-                    "both": "Entrambe"
+                    "exit": "Uscita"
                 }
             },
             "aeroway": {
@@ -714,29 +734,29 @@
             "cardinal_direction": {
                 "label": "Direzione",
                 "options": {
-                    "N": "Nord",
                     "E": "Est",
-                    "S": "Sud",
-                    "W": "Ovest",
-                    "NE": "Nordest",
-                    "SE": "Sudest",
-                    "SW": "Sudovest",
-                    "NW": "Nordovest",
-                    "NNE": "Nord-nordest",
                     "ENE": "Est-nordest",
                     "ESE": "Est-sudest",
+                    "N": "Nord",
+                    "NE": "Nordest",
+                    "NNE": "Nord-nordest",
+                    "NNW": "Nord-nordovest",
+                    "NW": "Nordovest",
+                    "S": "Sud",
+                    "SE": "Sudest",
                     "SSE": "Sud-sudest",
                     "SSW": "Sud-sudovest",
-                    "WSW": "Ovest-sudovest",
+                    "SW": "Sudovest",
+                    "W": "Ovest",
                     "WNW": "Ovest-nordovest",
-                    "NNW": "Nord-nordovest"
+                    "WSW": "Ovest-sudovest"
                 }
             },
             "clock_direction": {
                 "label": "Direzione",
                 "options": {
-                    "clockwise": "Senso orario",
-                    "anticlockwise": "Senso antiorario"
+                    "anticlockwise": "Senso antiorario",
+                    "clockwise": "Senso orario"
                 }
             },
             "collection_times": {
@@ -744,6 +764,9 @@
             },
             "construction": {
                 "label": "Tipo"
+            },
+            "content": {
+                "label": "Contenuto"
             },
             "country": {
                 "label": "Stato"
@@ -780,13 +803,13 @@
             },
             "electrified": {
                 "label": "Elettrificata",
-                "placeholder": "Linea Aerea, Rotaia Elettrificata...",
                 "options": {
                     "contact_line": "Linea Aerea di Contatto",
+                    "no": "No",
                     "rail": "Rotaia Elettrificata",
-                    "yes": "Sì (non specificato)",
-                    "no": "No"
-                }
+                    "yes": "Sì (non specificato)"
+                },
+                "placeholder": "Linea Aerea, Rotaia Elettrificata..."
             },
             "elevation": {
                 "label": "Altitudine"
@@ -811,9 +834,9 @@
                 "label": "Tipo",
                 "options": {
                     "pillar": "Colonnina/Fuoriterra",
+                    "pond": "Stagno",
                     "underground": "Sotterraneo",
-                    "wall": "A muro",
-                    "pond": "Stagno"
+                    "wall": "A muro"
                 }
             },
             "fixme": {
@@ -854,12 +877,12 @@
             },
             "gender": {
                 "label": "Genere",
-                "placeholder": "Sconosciuto",
                 "options": {
-                    "male": "Maschile",
                     "female": "Femminile",
+                    "male": "Maschile",
                     "unisex": "Unisex"
-                }
+                },
+                "placeholder": "Sconosciuto"
             },
             "generator/method": {
                 "label": "Metodo"
@@ -900,8 +923,8 @@
             "incline_steps": {
                 "label": "Pendenza",
                 "options": {
-                    "up": "Su",
-                    "down": "Giù"
+                    "down": "Giù",
+                    "up": "Su"
                 }
             },
             "information": {
@@ -910,11 +933,11 @@
             "internet_access": {
                 "label": "Accesso ad Internet",
                 "options": {
-                    "yes": "Sì",
                     "no": "No",
-                    "wlan": "Wifi",
+                    "terminal": "Terminale",
                     "wired": "Via cavo",
-                    "terminal": "Terminale"
+                    "wlan": "Wifi",
+                    "yes": "Sì"
                 }
             },
             "lamp_type": {
@@ -933,20 +956,20 @@
             "leaf_cycle": {
                 "label": "Fogliame",
                 "options": {
-                    "evergreen": "Sempreverde",
                     "deciduous": "Deciduo",
-                    "semi_evergreen": "Semi-sempreverde",
+                    "evergreen": "Sempreverde",
+                    "mixed": "Misto",
                     "semi_deciduous": "Semi-deciduo",
-                    "mixed": "Misto"
+                    "semi_evergreen": "Semi-sempreverde"
                 }
             },
             "leaf_type": {
                 "label": "Tipo di foglia",
                 "options": {
                     "broadleaved": "Latifoglia",
-                    "needleleaved": "Aghifoglia",
+                    "leafless": "Senza foglie",
                     "mixed": "Misto",
-                    "leafless": "Senza foglie"
+                    "needleleaved": "Aghifoglia"
                 }
             },
             "leisure": {
@@ -974,7 +997,6 @@
             },
             "mtb/scale": {
                 "label": "Difficoltà Mountain Bike",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Ghiaia solida/terra battuta, nessun ostacolo, curve ampie",
                     "1": "1: Un po' di terriccio, piccoli ostacoli, curve ampie",
@@ -983,22 +1005,22 @@
                     "4": "4: Terriccio o macigni, tornanti pericolosi",
                     "5": "5: Difficoltà massima, massi sparsi, frane",
                     "6": "6: Impraticabile tranne dai ciclisti più esperti"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "Difficoltà IMBA del tracciato",
-                "placeholder": "Facile, Medio, Difficile...",
                 "options": {
                     "0": "Più semplice (cerchio bianco)",
                     "1": "Semplice (cerchio verde)",
                     "2": "Medio (quadrato blu)",
                     "3": "Difficile (rombo nero)",
                     "4": "Estremamente difficile (rombo nero doppio)"
-                }
+                },
+                "placeholder": "Facile, Medio, Difficile..."
             },
             "mtb/scale/uphill": {
                 "label": "Difficoltà in salita per mountain bike",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Pendenza media <10%, ghiaia/terra battuta, nessun ostacolo",
                     "1": "1: Pendenza media <15%, ghiaia/terra battuta, ostacoli rari e piccoli",
@@ -1006,7 +1028,8 @@
                     "3": "3: Pendenza media <25%, superficie varia, rami/roccie grandi come un pugno",
                     "4": "4: Pendenza media <30%, in cattive condizioni, rami/roccie grandi",
                     "5": "5: Pendenza estrema, in genere è necessario spigere o sollevare la bici"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Nome",
@@ -1027,17 +1050,17 @@
             "oneway": {
                 "label": "Senso unico",
                 "options": {
+                    "no": "No",
                     "undefined": "No (ipotesi)",
-                    "yes": "Sì",
-                    "no": "No"
+                    "yes": "Sì"
                 }
             },
             "oneway_yes": {
                 "label": "Senso unico",
                 "options": {
+                    "no": "No",
                     "undefined": "Si (ipotesi)",
-                    "yes": "Sì",
-                    "no": "No"
+                    "yes": "Sì"
                 }
             },
             "opening_hours": {
@@ -1056,13 +1079,13 @@
             "parking": {
                 "label": "Tipo",
                 "options": {
-                    "surface": "Superficie",
-                    "multi-storey": "Più piani",
-                    "underground": "Sotterraneo",
-                    "sheds": "Capanno",
                     "carports": "Tettoia",
                     "garage_boxes": "Box garage",
-                    "lane": "Corsia"
+                    "lane": "Corsia",
+                    "multi-storey": "Più piani",
+                    "sheds": "Capanno",
+                    "surface": "Superficie",
+                    "underground": "Sotterraneo"
                 }
             },
             "phone": {
@@ -1071,24 +1094,24 @@
             },
             "piste/difficulty": {
                 "label": "Difficoltà",
-                "placeholder": "Facile, Intermedia, Avanzata...",
                 "options": {
-                    "novice": "Neofita (verde)",
-                    "easy": "Facile (blu)",
-                    "intermediate": "Media (rossa)",
                     "advanced": "Avanzata (nera)",
+                    "easy": "Facile (blu)",
                     "expert": "Esperto (arancione)",
+                    "extreme": "Estrema (equipaggiamento da scalata richiesto)",
                     "freeride": "Fuoripista (gialla)",
-                    "extreme": "Estrema (equipaggiamento da scalata richiesto)"
-                }
+                    "intermediate": "Media (rossa)",
+                    "novice": "Neofita (verde)"
+                },
+                "placeholder": "Facile, Intermedia, Avanzata..."
             },
             "piste/grooming": {
                 "label": "Terreno",
                 "options": {
-                    "classic": "Classico",
-                    "mogul": "Gobbe",
                     "backcountry": "Fuoripista",
+                    "classic": "Classico",
                     "classic+skating": "Classico e sci di fondo",
+                    "mogul": "Gobbe",
                     "scooter": "Scooter/Motoslitta",
                     "skating": "Sci di fondo"
                 }
@@ -1097,14 +1120,14 @@
                 "label": "Tipo",
                 "options": {
                     "downhill": "Discesa libera",
+                    "hike": "Escursionismo",
+                    "ice_skate": "Pattinaggio sul ghiaccio",
                     "nordic": "Combinata nordica",
+                    "playground": "Parco giochi",
                     "skitour": "Sci alpinismo",
                     "sled": "Slittino",
-                    "hike": "Escursionismo",
                     "sleigh": "Slitta",
-                    "ice_skate": "Pattinaggio sul ghiaccio",
-                    "snow_park": "Snow Park",
-                    "playground": "Parco giochi"
+                    "snow_park": "Snow Park"
                 }
             },
             "place": {
@@ -1115,6 +1138,9 @@
             },
             "power": {
                 "label": "Tipo"
+            },
+            "power_supply": {
+                "label": "Alimentazione"
             },
             "railway": {
                 "label": "Tipo"
@@ -1154,15 +1180,18 @@
             },
             "sac_scale": {
                 "label": "Difficoltà escurione",
-                "placeholder": " Escursionismo in Montagna , Sentiero Alpino...",
                 "options": {
-                    "hiking": "T1: Escursionismo",
-                    "mountain_hiking": "T2: Escursionismo in montagna ",
-                    "demanding_mountain_hiking": "T3: Escursionismo impegnativo in montagna",
                     "alpine_hiking": "T4: Sentiero alpino",
                     "demanding_alpine_hiking": "T5: Sentiero alpino impegnativo",
-                    "difficult_alpine_hiking": "T6: Sentiero alpino difficile"
-                }
+                    "demanding_mountain_hiking": "T3: Escursionismo impegnativo in montagna",
+                    "difficult_alpine_hiking": "T6: Sentiero alpino difficile",
+                    "hiking": "T1: Escursionismo",
+                    "mountain_hiking": "T2: Escursionismo in montagna "
+                },
+                "placeholder": " Escursionismo in Montagna , Sentiero Alpino..."
+            },
+            "sanitary_dump_station": {
+                "label": "Smaltimento reflui"
             },
             "seasonal": {
                 "label": "Stagionale"
@@ -1173,17 +1202,17 @@
             "service/bicycle/chain_tool": {
                 "label": "Smagliacatene",
                 "options": {
+                    "no": "No",
                     "undefined": "No (ipotesi)",
-                    "yes": "Sì",
-                    "no": "No"
+                    "yes": "Sì"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Pompa",
                 "options": {
+                    "no": "No",
                     "undefined": "No (ipotesi)",
-                    "yes": "Sì",
-                    "no": "No"
+                    "yes": "Sì"
                 }
             },
             "service_rail": {
@@ -1207,29 +1236,29 @@
             },
             "smoking": {
                 "label": "Zona fumatori",
-                "placeholder": "No, Separato, Sì...",
                 "options": {
-                    "no": "Vietato fumare",
-                    "separated": "In zone fumatori, non fisicamente isolate",
+                    "dedicated": "Dedicato ai soli fumatori (es. circolo fumatori)",
                     "isolated": "In zone fumatori, fisicamente isolate",
+                    "no": "Vietato fumare",
                     "outside": "Permesso all'esterno",
-                    "yes": "Permesso ovunque",
-                    "dedicated": "Dedicato ai soli fumatori (es. circolo fumatori)"
-                }
+                    "separated": "In zone fumatori, non fisicamente isolate",
+                    "yes": "Permesso ovunque"
+                },
+                "placeholder": "No, Separato, Sì..."
             },
             "smoothness": {
                 "label": "Percorribilità",
-                "placeholder": "Rotelle, Ruote, Fuoristrada...",
                 "options": {
+                    "bad": " Ruote robuste: biciclette per cicloturismo, auto, risciò e simili",
                     "excellent": "Rotelle: pattini in linea, skateboard e simili",
                     "good": "Ruote sottili: biciclette da corsa e simili",
-                    "intermediate": "Ruote: biciclette da città, sedie a rotelle, scooter e simili",
-                    "bad": " Ruote robuste: biciclette per cicloturismo, auto, risciò e simili",
-                    "very_bad": "Altezza da terra elevata: veicoli fuoristrada leggeri e simili",
                     "horrible": "Fuoristrada: veicoli fuoristrada pesanti e simili. ",
-                    "very_horrible": "Fuoristrada speciali: trattori agricoli, quad-bike, autoblindo e simili",
-                    "impassable": "Nessun veicolo ruotato"
-                }
+                    "impassable": "Nessun veicolo ruotato",
+                    "intermediate": "Ruote: biciclette da città, sedie a rotelle, scooter e simili",
+                    "very_bad": "Altezza da terra elevata: veicoli fuoristrada leggeri e simili",
+                    "very_horrible": "Fuoristrada speciali: trattori agricoli, quad-bike, autoblindo e simili"
+                },
+                "placeholder": "Rotelle, Ruote, Fuoristrada..."
             },
             "social_facility_for": {
                 "label": "Tipo di utenza",
@@ -1249,14 +1278,14 @@
             },
             "structure": {
                 "label": "Struttura",
-                "placeholder": "Sconosciuto",
                 "options": {
                     "bridge": "Ponte",
-                    "tunnel": "Tunnel",
-                    "embankment": "Argine",
                     "cutting": "Infossato",
-                    "ford": "Guado"
-                }
+                    "embankment": "Argine",
+                    "ford": "Guado",
+                    "tunnel": "Tunnel"
+                },
+                "placeholder": "Sconosciuto"
             },
             "studio_type": {
                 "label": "Tipo"
@@ -1275,20 +1304,20 @@
             },
             "takeaway": {
                 "label": "Asporto",
-                "placeholder": "Sì, no, solo da asporto...",
                 "options": {
-                    "yes": "Sì",
                     "no": "No",
-                    "only": "Solo da asporto"
-                }
+                    "only": "Solo da asporto",
+                    "yes": "Sì"
+                },
+                "placeholder": "Sì, no, solo da asporto..."
             },
             "toilets/disposal": {
                 "label": "Smaltimento",
                 "options": {
-                    "flush": "Sciaquone",
-                    "pitlatrine": "Fossa/Latrina",
+                    "bucket": "Contenitore",
                     "chemical": "Chimico",
-                    "bucket": "Contenitore"
+                    "flush": "Sciaquone",
+                    "pitlatrine": "Fossa/Latrina"
                 }
             },
             "tourism": {
@@ -1299,26 +1328,26 @@
             },
             "tracktype": {
                 "label": "Tipo di strada",
-                "placeholder": "Solido, Soprattutto Solido, Morbido...",
                 "options": {
                     "grade1": "Solido: strada asfaltata o con superficie dura e ben compattata",
                     "grade2": "Soprattutto solido: superficie in ghiaia o di terra/sabbia ben compattata",
                     "grade3": "Superficie mista di materiali duri e cedevoli",
                     "grade4": "Soprattutto Morbido: terra, sabbia, erba mista ad una componente dura",
                     "grade5": "Morbido: erba, sabbia o terreno"
-                }
+                },
+                "placeholder": "Solido, Soprattutto Solido, Morbido..."
             },
             "trail_visibility": {
                 "label": "Visibilità del Tracciato",
-                "placeholder": "Eccellente, Buona, Cattiva...",
                 "options": {
+                    "bad": "Cattiva: tracciato visibile a stento",
                     "excellent": "Eccellente: tracciato evidente o segnavia sempre presenti",
                     "good": "Buona: segnavia visibili, ma talvolta difficile da individuare",
-                    "intermediate": "Media: tracciato non sempre visibile",
-                    "bad": "Cattiva: tracciato visibile a stento",
                     "horrible": "Orribile:  spesso non tracciato",
+                    "intermediate": "Media: tracciato non sempre visibile",
                     "no": "Nessuna:  perlopiù non tracciato"
-                }
+                },
+                "placeholder": "Eccellente, Buona, Cattiva..."
             },
             "trees": {
                 "label": "Alberi"
@@ -1331,6 +1360,9 @@
             },
             "water": {
                 "label": "Tipo"
+            },
+            "water_point": {
+                "label": "Approvvigionamento Idrico"
             },
             "waterway": {
                 "label": "Tipo"
@@ -1473,6 +1505,10 @@
                 "name": "Stazione di riparazione biciclette",
                 "terms": "riparazione,bibiclette,meccanico,bici,cicli"
             },
+            "amenity/biergarten": {
+                "name": "Birreria all'aperto",
+                "terms": "birreria,distesa"
+            },
             "amenity/boat_rental": {
                 "name": "Noleggio barche",
                 "terms": "noleggio barche,noleggio,barche,porto,negozio"
@@ -1519,6 +1555,9 @@
             "amenity/clock": {
                 "name": "Orologio",
                 "terms": "ora,orario,orologio"
+            },
+            "amenity/college": {
+                "name": "Area di un College"
             },
             "amenity/community_centre": {
                 "name": "Centro sociale"
@@ -1662,6 +1701,10 @@
                 "name": "Ristorante",
                 "terms": "bar,caffetteria,caffè,ristorante self-service,braceria,trattoria,negozio di ciambelle,bettola,griglieria,venditore di hamburger,venditore di hotdog,pizzeria"
             },
+            "amenity/sanitary_dump_station": {
+                "name": "Smaltimento reflui camper",
+                "terms": "smaltimento,rifiuti,toilet,wc,camper,escrementi"
+            },
             "amenity/school": {
                 "name": "Area Scolastica",
                 "terms": "scuola,accademia,alma mater,lavagna,collegio,dipartimento,disciplina,classe,facoltà,aula,istituto,istituzione,riformatorio,scuola,edificio scolastico,seminario,università"
@@ -1677,6 +1720,9 @@
             "amenity/social_facility/food_bank": {
                 "name": "Banco alimentare",
                 "terms": "mensa del povero,mensa caritas"
+            },
+            "amenity/social_facility/group_home": {
+                "name": "Casa di riposo per anziani"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Dormitorio",
@@ -1833,6 +1879,9 @@
                 "name": "Chiesa",
                 "terms": "cristiano,abbazia,basilica,cattedrale,presbiterio,cappella,chiesa,casa di Dio,luogo di preghiera,luogo di culto,missione,oratorio,parrocchia,sacello,edicola votiva,tabernacolo,tempio"
             },
+            "building/college": {
+                "name": "Edificio di un College"
+            },
             "building/commercial": {
                 "name": "Edificio commerciale",
                 "terms": "Edificio commerciale"
@@ -1884,6 +1933,9 @@
             "building/industrial": {
                 "name": "Edificio industriale",
                 "terms": "Edifico industriale"
+            },
+            "building/kindergarten": {
+                "name": "Edificio di una Scuola d'Infanzia"
             },
             "building/public": {
                 "name": "Edificio pubblico",
@@ -1953,12 +2005,18 @@
                 "name": "Carpentiere",
                 "terms": "carpenteria,legno"
             },
+            "craft/carpet_layer": {
+                "name": "Posatori di Moquette"
+            },
             "craft/caterer": {
                 "name": "Fornitore di catering"
             },
             "craft/clockmaker": {
                 "name": "Costruttore di orologi",
                 "terms": "orologi"
+            },
+            "craft/confectionery": {
+                "name": "Negozio per dolciumi"
             },
             "craft/dressmaker": {
                 "name": "Sartoria",
@@ -1977,6 +2035,9 @@
             },
             "craft/handicraft": {
                 "name": "Artigiano"
+            },
+            "craft/insulator": {
+                "name": "Isolanti"
             },
             "craft/jeweler": {
                 "name": "Gioielliere",
@@ -2004,6 +2065,9 @@
             "craft/plumber": {
                 "name": "Idraulico"
             },
+            "craft/saddler": {
+                "name": "Sellaio"
+            },
             "craft/sailmaker": {
                 "name": "Velaio"
             },
@@ -2024,6 +2088,9 @@
             "craft/stonemason": {
                 "name": "Tagliapietre"
             },
+            "craft/sweep": {
+                "name": "Spazzacamino"
+            },
             "craft/tailor": {
                 "name": "Sarto"
             },
@@ -2039,6 +2106,9 @@
             "craft/watchmaker": {
                 "name": "Orologiaio",
                 "terms": "orologi,riparazione"
+            },
+            "craft/window_construction": {
+                "name": "Infissi"
             },
             "craft/winery": {
                 "name": "Cantina vinicola",
@@ -2102,6 +2172,9 @@
             },
             "golf/rough": {
                 "name": "Irregolare, grezzo"
+            },
+            "golf/tee": {
+                "name": "Tee di Partenza"
             },
             "golf/water_hazard": {
                 "name": "Ostacolo d'acqua",
@@ -2519,9 +2592,17 @@
                 "name": "Faro",
                 "terms": "Faro"
             },
+            "man_made/mast": {
+                "name": "Antenna radio",
+                "terms": "antenna,torre,wireless,radio,telefonia,antenne"
+            },
             "man_made/observation": {
                 "name": "Torre di osservazione",
                 "terms": "torre,osservazione,osservatorio,piattaforma,osservativa,antincendio,panorama"
+            },
+            "man_made/petroleum_well": {
+                "name": "Pozzo petrolifero",
+                "terms": "petrolio,bitume,pozzo"
             },
             "man_made/pier": {
                 "name": "Molo",
@@ -2530,6 +2611,14 @@
             "man_made/pipeline": {
                 "name": "Conduttura",
                 "terms": "Conduttura"
+            },
+            "man_made/silo": {
+                "name": "Silo",
+                "terms": "silos,cisterna,botte"
+            },
+            "man_made/storage_tank": {
+                "name": "Cisterna",
+                "terms": "silos,cisterna,botte,contenitore"
             },
             "man_made/survey_point": {
                 "name": "Punto geodetico",
@@ -2741,6 +2830,10 @@
                 "name": "Città",
                 "terms": "Città"
             },
+            "place/farm": {
+                "name": "Azienda agricola",
+                "terms": "fattoria,campi,campo,agricoltura,agricolo,contadino"
+            },
             "place/hamlet": {
                 "name": "Paese",
                 "terms": "Borgo"
@@ -2914,6 +3007,9 @@
                 "name": "Negozio di articoli di bellezza",
                 "terms": "Salone di bellezza"
             },
+            "shop/bed": {
+                "name": "Negozio di Materassi"
+            },
             "shop/beverages": {
                 "name": "Negozio di bevande",
                 "terms": "Negozio di bevande"
@@ -2937,6 +3033,9 @@
             "shop/butcher": {
                 "name": "Macellaio",
                 "terms": "Macellaio"
+            },
+            "shop/candles": {
+                "name": "Negozio di Candele"
             },
             "shop/car": {
                 "name": "Concessionario",
@@ -2976,6 +3075,9 @@
             "shop/convenience": {
                 "name": "Minimarket",
                 "terms": "Drogheria"
+            },
+            "shop/copyshop": {
+                "name": "Copisteria"
             },
             "shop/cosmetics": {
                 "name": "Negozio di cosmetici"
@@ -3349,6 +3451,10 @@
                 "name": "Canale di scolo",
                 "terms": " Canale di scolo "
             },
+            "waterway/fuel": {
+                "name": "Stazione di rifornimento marittima",
+                "terms": "distributore,gas, benzina,diesel,gpl,carburante,benzinaio,gasolio,nafta,barca,barche"
+            },
             "waterway/river": {
                 "name": "Fiume",
                 "terms": "ruscello,affluente,corso d'acqua,torrente,estuario,rivolo,rigagnolo,immissario"
@@ -3356,6 +3462,10 @@
             "waterway/riverbank": {
                 "name": "Argine",
                 "terms": "Argine"
+            },
+            "waterway/sanitary_dump_station": {
+                "name": "Smaltimento reflui marittimi",
+                "terms": "smaltimento,rifiuti,toilet,wc,camper,escrementi"
             },
             "waterway/stream": {
                 "name": "Torrente",

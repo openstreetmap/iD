@@ -239,7 +239,6 @@
     "commit": {
         "title": "바뀜 저장",
         "description_placeholder": "기여에 대한 간단한 설명",
-        "message_label": "커밋 메시지",
         "upload_explanation": "올린 바뀜은 OpenStreetMap 데이터를 사용하는 모든 지도에 보여집니다.",
         "upload_explanation_with_user": "{user} 사용자로 올린 바뀜은 OpenStreetMap 데이터를 사용하는 모든 지도에 보여집니다.",
         "save": "저장",
@@ -542,39 +541,39 @@
         "fields": {
             "access": {
                 "label": "통행",
+                "options": {
+                    "designated": {
+                        "description": "표지판이나 특정 지역 법률에 따라 통행이 허가됨",
+                        "title": "지정 차종만 통행 허가"
+                    },
+                    "destination": {
+                        "description": "목적지에 갈 때에만 통행이 허가됨",
+                        "title": "목적 외 통행 금지"
+                    },
+                    "no": {
+                        "description": "통행이 일반 대중에게 허가되지 않음",
+                        "title": "제한됨"
+                    },
+                    "permissive": {
+                        "description": "소유자가 권한을 해제할 때까지 통행이 허가됨",
+                        "title": "소유자 허가 필요"
+                    },
+                    "private": {
+                        "description": "개별적으로 소유자의 허가로만 통행이 허가됨",
+                        "title": "사유"
+                    },
+                    "yes": {
+                        "description": "통행이 법적으로 허가됨; 정당한 이용",
+                        "title": "허가됨"
+                    }
+                },
                 "placeholder": "알 수 없음",
                 "types": {
                     "access": "일반",
-                    "foot": "도보",
-                    "motor_vehicle": "이륜차",
                     "bicycle": "자전거",
-                    "horse": "말"
-                },
-                "options": {
-                    "yes": {
-                        "title": "허가됨",
-                        "description": "통행이 법적으로 허가됨; 정당한 이용"
-                    },
-                    "no": {
-                        "title": "제한됨",
-                        "description": "통행이 일반 대중에게 허가되지 않음"
-                    },
-                    "permissive": {
-                        "title": "소유자 허가 필요",
-                        "description": "소유자가 권한을 해제할 때까지 통행이 허가됨"
-                    },
-                    "private": {
-                        "title": "사유",
-                        "description": "개별적으로 소유자의 허가로만 통행이 허가됨"
-                    },
-                    "designated": {
-                        "title": "지정 차종만 통행 허가",
-                        "description": "표지판이나 특정 지역 법률에 따라 통행이 허가됨"
-                    },
-                    "destination": {
-                        "title": "목적 외 통행 금지",
-                        "description": "목적지에 갈 때에만 통행이 허가됨"
-                    }
+                    "foot": "도보",
+                    "horse": "말",
+                    "motor_vehicle": "이륜차"
                 }
             },
             "access_simple": {
@@ -587,19 +586,19 @@
             "address": {
                 "label": "주소",
                 "placeholders": {
+                    "city": "도시",
+                    "country": "국가",
+                    "district": "구",
+                    "hamlet": "작은 마을",
                     "housename": "집이름",
                     "housenumber": "123",
-                    "street": "거리",
-                    "city": "도시",
-                    "postcode": "우편 번호",
                     "place": "장소",
-                    "hamlet": "작은 마을",
-                    "suburb": "교외",
-                    "subdistrict": "가도",
-                    "district": "구",
+                    "postcode": "우편 번호",
                     "province": "성",
                     "state": "주",
-                    "country": "국가"
+                    "street": "거리",
+                    "subdistrict": "가도",
+                    "suburb": "교외"
                 }
             },
             "admin_level": {
@@ -611,9 +610,9 @@
             "aerialway/access": {
                 "label": "접근",
                 "options": {
+                    "both": "둘 다",
                     "entry": "입구",
-                    "exit": "출구",
-                    "both": "둘 다"
+                    "exit": "출구"
                 }
             },
             "aerialway/capacity": {
@@ -631,9 +630,9 @@
             "aerialway/summer/access": {
                 "label": "접근 (여름)",
                 "options": {
+                    "both": "둘 다",
                     "entry": "입구",
-                    "exit": "출구",
-                    "both": "둘 다"
+                    "exit": "출구"
                 }
             },
             "aeroway": {
@@ -682,29 +681,29 @@
             "cardinal_direction": {
                 "label": "방향",
                 "options": {
-                    "N": "북",
                     "E": "동",
-                    "S": "남",
-                    "W": "서",
-                    "NE": "북동",
-                    "SE": "남동",
-                    "SW": "남서",
-                    "NW": "북서",
-                    "NNE": "북북동",
                     "ENE": "동북동",
                     "ESE": "동남동",
+                    "N": "북",
+                    "NE": "북동",
+                    "NNE": "북북동",
+                    "NNW": "북북서",
+                    "NW": "북서",
+                    "S": "남",
+                    "SE": "남동",
                     "SSE": "남남동",
                     "SSW": "남남서",
-                    "WSW": "서남서",
+                    "SW": "남서",
+                    "W": "서",
                     "WNW": "서북서",
-                    "NNW": "북북서"
+                    "WSW": "서남서"
                 }
             },
             "clock_direction": {
                 "label": "방향",
                 "options": {
-                    "clockwise": "시계 방향",
-                    "anticlockwise": "시계 반대 방향"
+                    "anticlockwise": "시계 반대 방향",
+                    "clockwise": "시계 방향"
                 }
             },
             "collection_times": {
@@ -745,13 +744,13 @@
             },
             "electrified": {
                 "label": "전력화",
-                "placeholder": "연결로, 전철...",
                 "options": {
                     "contact_line": "연결로",
+                    "no": "아니오",
                     "rail": "전철",
-                    "yes": "예 (지정되지 않음)",
-                    "no": "아니오"
-                }
+                    "yes": "예 (지정되지 않음)"
+                },
+                "placeholder": "연결로, 전철..."
             },
             "elevation": {
                 "label": "고도"
@@ -776,9 +775,9 @@
                 "label": "유형",
                 "options": {
                     "pillar": "기둥/지상",
+                    "pond": "연못",
                     "underground": "지하",
-                    "wall": "벽",
-                    "pond": "연못"
+                    "wall": "벽"
                 }
             },
             "fixme": {
@@ -819,12 +818,12 @@
             },
             "gender": {
                 "label": "성별",
-                "placeholder": "알 수 없음",
                 "options": {
-                    "male": "남자",
                     "female": "여자",
+                    "male": "남자",
                     "unisex": "남녀 공용"
-                }
+                },
+                "placeholder": "알 수 없음"
             },
             "generator/method": {
                 "label": "방식"
@@ -865,8 +864,8 @@
             "incline_steps": {
                 "label": "경사",
                 "options": {
-                    "up": "올라감",
-                    "down": "내려감"
+                    "down": "내려감",
+                    "up": "올라감"
                 }
             },
             "information": {
@@ -875,11 +874,11 @@
             "internet_access": {
                 "label": "인터넷 액세스",
                 "options": {
-                    "yes": "예",
                     "no": "아니오",
-                    "wlan": "와이파이",
+                    "terminal": "단말기",
                     "wired": "유선",
-                    "terminal": "단말기"
+                    "wlan": "와이파이",
+                    "yes": "예"
                 }
             },
             "lamp_type": {
@@ -898,20 +897,20 @@
             "leaf_cycle": {
                 "label": "잎이 떨어지는 주기",
                 "options": {
-                    "evergreen": "상록수",
                     "deciduous": "낙엽성",
-                    "semi_evergreen": "반상록",
+                    "evergreen": "상록수",
+                    "mixed": "섞인",
                     "semi_deciduous": "준낙엽성",
-                    "mixed": "섞인"
+                    "semi_evergreen": "반상록"
                 }
             },
             "leaf_type": {
                 "label": "잎의 종류",
                 "options": {
                     "broadleaved": "활엽수",
-                    "needleleaved": "침엽수",
+                    "leafless": "잎이 없는",
                     "mixed": "섞인",
-                    "leafless": "잎이 없는"
+                    "needleleaved": "침엽수"
                 }
             },
             "leisure": {
@@ -939,22 +938,22 @@
             },
             "mtb/scale": {
                 "label": "산악 자전거 난이도",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: 자갈/단단한 흙,  장애물이 없고 커브가 넓음",
                     "1": "1: 약간의 부드러운 표면, 장애물이 약간 있고 커브가 넒음."
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "IMBA 트레일 어려움",
-                "placeholder": "쉬움, 중간, 어려움...",
                 "options": {
                     "0": "매우 쉬움 (하얀 동그라미)",
                     "1": "쉬움 (초록 동그라미)",
                     "2": "중간 (파란 네모)",
                     "3": "어려움 (검은 마름모)",
                     "4": "매우 어려움 (두 검은 마름모)"
-                }
+                },
+                "placeholder": "쉬움, 중간, 어려움..."
             },
             "mtb/scale/uphill": {
                 "label": "산악 자전거 오르막 난이도",
@@ -979,17 +978,17 @@
             "oneway": {
                 "label": "일방통행",
                 "options": {
+                    "no": "아니오",
                     "undefined": "아니오로 간주",
-                    "yes": "예",
-                    "no": "아니오"
+                    "yes": "예"
                 }
             },
             "oneway_yes": {
                 "label": "일방통행",
                 "options": {
+                    "no": "아니오",
                     "undefined": "예로 간주",
-                    "yes": "예",
-                    "no": "아니오"
+                    "yes": "예"
                 }
             },
             "opening_hours": {
@@ -1008,9 +1007,9 @@
             "parking": {
                 "label": "유형",
                 "options": {
-                    "surface": "노면",
                     "garage_boxes": "차고 상자",
-                    "lane": "도로변 차선"
+                    "lane": "도로변 차선",
+                    "surface": "노면"
                 }
             },
             "phone": {
@@ -1019,15 +1018,15 @@
             },
             "piste/difficulty": {
                 "label": "어려움",
-                "placeholder": "초급, 중급, 고급...",
                 "options": {
-                    "novice": "새내기 (교육용)",
-                    "easy": "초급 (초록 동그라미)",
-                    "intermediate": "중급 (파란 네모)",
                     "advanced": "고급 (검은 마름모)",
+                    "easy": "초급 (초록 동그라미)",
                     "expert": "숙련자 (두 검은 마름모)",
-                    "freeride": "프리라이드 (off-piste)"
-                }
+                    "freeride": "프리라이드 (off-piste)",
+                    "intermediate": "중급 (파란 네모)",
+                    "novice": "새내기 (교육용)"
+                },
+                "placeholder": "초급, 중급, 고급..."
             },
             "piste/grooming": {
                 "options": {
@@ -1038,8 +1037,8 @@
                 "label": "유형",
                 "options": {
                     "ice_skate": "아이스 스케이트",
-                    "snow_park": "스노우 파크",
-                    "playground": "놀이터"
+                    "playground": "놀이터",
+                    "snow_park": "스노우 파크"
                 }
             },
             "place": {
@@ -1089,15 +1088,15 @@
             },
             "sac_scale": {
                 "label": "하이킹 어려움",
-                "placeholder": "등산, 알파인 하이킹...",
                 "options": {
-                    "hiking": "T1: 하이킹",
-                    "mountain_hiking": "T2: 등산",
-                    "demanding_mountain_hiking": "T3: 까다로운 등산",
                     "alpine_hiking": "T4: 알파인 하이킹",
                     "demanding_alpine_hiking": "T5: 까다로운 알파인 하이킹",
-                    "difficult_alpine_hiking": "T6: 어려운 알파인 하이킹"
-                }
+                    "demanding_mountain_hiking": "T3: 까다로운 등산",
+                    "difficult_alpine_hiking": "T6: 어려운 알파인 하이킹",
+                    "hiking": "T1: 하이킹",
+                    "mountain_hiking": "T2: 등산"
+                },
+                "placeholder": "등산, 알파인 하이킹..."
             },
             "seasonal": {
                 "label": "계절 한정"
@@ -1108,17 +1107,17 @@
             "service/bicycle/chain_tool": {
                 "label": "체인 공구",
                 "options": {
+                    "no": "아니오",
                     "undefined": "아니오로 간주",
-                    "yes": "예",
-                    "no": "아니오"
+                    "yes": "예"
                 }
             },
             "service/bicycle/pump": {
                 "label": "공기 펌프",
                 "options": {
+                    "no": "아니오",
                     "undefined": "아니오로 간주",
-                    "yes": "예",
-                    "no": "아니오"
+                    "yes": "예"
                 }
             },
             "shelter": {
@@ -1135,28 +1134,28 @@
             },
             "smoking": {
                 "label": "흡연",
-                "placeholder": "아니오, 분리됨, 예...",
                 "options": {
-                    "no": "이디서든 금연",
-                    "separated": "흡연 구역이나, 격리되지 않음",
+                    "dedicated": "흡연자 전용 (예 흡연자 클럽)",
                     "isolated": "흡연 구역이고, 격리됨",
+                    "no": "이디서든 금연",
                     "outside": "밖에서 허용",
-                    "yes": "어디서나 허용",
-                    "dedicated": "흡연자 전용 (예 흡연자 클럽)"
-                }
+                    "separated": "흡연 구역이나, 격리되지 않음",
+                    "yes": "어디서나 허용"
+                },
+                "placeholder": "아니오, 분리됨, 예..."
             },
             "smoothness": {
                 "label": "평활도",
-                "placeholder": "얇은 롤러, 바퀴, 오프로드...",
                 "options": {
+                    "bad": "견고한 바퀴: 트래킹 자전거, 자동차, 인력거",
                     "excellent": "얇은 롤러: 롤러브레이드, 스케이트보드",
                     "good": "얇은 바퀴: 경주용 자전거",
-                    "intermediate": "바퀴: 도시 자전거, 휠체어, 스쿠터",
-                    "bad": "견고한 바퀴: 트래킹 자전거, 자동차, 인력거",
-                    "very_bad": "High Clearance: light duty 오프로드 차종",
                     "horrible": "오프로드: heavy duty 오프로드 차종",
-                    "impassable": "지나갈 수 없거나 / 안되는 바퀴가 있는 차종"
-                }
+                    "impassable": "지나갈 수 없거나 / 안되는 바퀴가 있는 차종",
+                    "intermediate": "바퀴: 도시 자전거, 휠체어, 스쿠터",
+                    "very_bad": "High Clearance: light duty 오프로드 차종"
+                },
+                "placeholder": "얇은 롤러, 바퀴, 오프로드..."
             },
             "source": {
                 "label": "참조 정보"
@@ -1172,14 +1171,14 @@
             },
             "structure": {
                 "label": "구조물",
-                "placeholder": "알 수 없음",
                 "options": {
                     "bridge": "다리",
-                    "tunnel": "터널",
-                    "embankment": "둑",
                     "cutting": "절토",
-                    "ford": "여울"
-                }
+                    "embankment": "둑",
+                    "ford": "여울",
+                    "tunnel": "터널"
+                },
+                "placeholder": "알 수 없음"
             },
             "studio_type": {
                 "label": "유형"
@@ -1192,17 +1191,17 @@
             },
             "takeaway": {
                 "options": {
-                    "yes": "예",
-                    "no": "아니오"
+                    "no": "아니오",
+                    "yes": "예"
                 }
             },
             "toilets/disposal": {
                 "label": "처리장",
                 "options": {
-                    "flush": "수세식",
-                    "pitlatrine": "재래식",
+                    "bucket": "양동이",
                     "chemical": "화학식",
-                    "bucket": "양동이"
+                    "flush": "수세식",
+                    "pitlatrine": "재래식"
                 }
             },
             "tourism": {

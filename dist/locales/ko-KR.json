@@ -4,8 +4,8 @@
             "address": {
                 "label": "주소",
                 "placeholders": {
-                    "street": "길",
-                    "city": "도시"
+                    "city": "도시",
+                    "street": "길"
                 }
             },
             "aeroway": {
@@ -47,8 +47,8 @@
             "internet_access": {
                 "label": "인터넷 이용 가능 여부",
                 "options": {
-                    "wlan": "Wifi",
-                    "terminal": "터미널"
+                    "terminal": "터미널",
+                    "wlan": "Wifi"
                 }
             },
             "landuse": {

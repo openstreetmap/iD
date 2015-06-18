@@ -156,7 +156,6 @@
     "commit": {
         "title": "Lagre endringer",
         "description_placeholder": "Kort beskrivelse av dine bidrag",
-        "message_label": "Lagre beskjed",
         "save": "Lagre",
         "cancel": "Avbryt",
         "warnings": "Advarsler",
@@ -287,44 +286,44 @@
         "fields": {
             "access": {
                 "label": "Tilgang",
-                "placeholder": "Ukjent",
-                "types": {
-                    "foot": "Fot",
-                    "motor_vehicle": "Motorkjøretøy",
-                    "bicycle": "Sykler",
-                    "horse": "Hester"
-                },
                 "options": {
-                    "yes": {
-                        "title": "Tillatt",
-                        "description": "Tilgang gitt av lov; fri tilgang"
-                    },
-                    "no": {
-                        "title": "Forbudt",
-                        "description": "Tilgang ikke tillatt for allmennheten"
-                    },
-                    "permissive": {
-                        "title": "Begrenset",
-                        "description": "Tilgang tillatt frem til eieren trekker tillatelsen tilbake"
-                    },
-                    "private": {
-                        "title": "Privat",
-                        "description": "Tilgang tillatt kun ved tillatelse fra eieren på individuell basis"
-                    },
                     "designated": {
                         "description": "Tilgang tillatt i henhold til skilt eller spesifike lokale lover"
                     },
                     "destination": {
-                        "title": "Mål",
-                        "description": "Tilgang kun tillatt for å nå et mål"
+                        "description": "Tilgang kun tillatt for å nå et mål",
+                        "title": "Mål"
+                    },
+                    "no": {
+                        "description": "Tilgang ikke tillatt for allmennheten",
+                        "title": "Forbudt"
+                    },
+                    "permissive": {
+                        "description": "Tilgang tillatt frem til eieren trekker tillatelsen tilbake",
+                        "title": "Begrenset"
+                    },
+                    "private": {
+                        "description": "Tilgang tillatt kun ved tillatelse fra eieren på individuell basis",
+                        "title": "Privat"
+                    },
+                    "yes": {
+                        "description": "Tilgang gitt av lov; fri tilgang",
+                        "title": "Tillatt"
                     }
+                },
+                "placeholder": "Ukjent",
+                "types": {
+                    "bicycle": "Sykler",
+                    "foot": "Fot",
+                    "horse": "Hester",
+                    "motor_vehicle": "Motorkjøretøy"
                 }
             },
             "address": {
                 "label": "Adresse",
                 "placeholders": {
-                    "street": "Gate",
-                    "city": "By"
+                    "city": "By",
+                    "street": "Gate"
                 }
             },
             "admin_level": {
@@ -377,8 +376,8 @@
             "clock_direction": {
                 "label": "Retning",
                 "options": {
-                    "clockwise": "Med klokken",
-                    "anticlockwise": "Mot klokken"
+                    "anticlockwise": "Mot klokken",
+                    "clockwise": "Med klokken"
                 }
             },
             "collection_times": {
@@ -451,9 +450,9 @@
             "internet_access": {
                 "label": "Internettilgang",
                 "options": {
-                    "wlan": "Trådløs",
+                    "terminal": "Terminal",
                     "wired": "Kablet",
-                    "terminal": "Terminal"
+                    "wlan": "Trådløs"
                 }
             },
             "landuse": {
@@ -568,11 +567,11 @@
             },
             "structure": {
                 "label": "Struktur",
-                "placeholder": "Ukjent",
                 "options": {
                     "bridge": "Bru",
                     "tunnel": "Tunnel"
-                }
+                },
+                "placeholder": "Ukjent"
             },
             "studio_type": {
                 "label": "Type"

@@ -239,7 +239,7 @@
     "commit": {
         "title": "Spara ändringar",
         "description_placeholder": "Kort beskrivning av dina ändringar",
-        "message_label": "Skicka meddelande",
+        "message_label": "Ändringskommentar",
         "upload_explanation": "De redigeringar du bidrar med kommer att synas på alla kartor som använder OpenStreetMaps data.",
         "upload_explanation_with_user": "De redigeringar du bidrar med som {user} kommer att synas på alla kartor som använder OpenStreetMaps data.",
         "save": "Spara",
@@ -253,6 +253,26 @@
     "contributors": {
         "list": "Ändrad av {users}",
         "truncated_list": "Ändrad av {users} och {count} andra"
+    },
+    "infobox": {
+        "selected": "{n} vald(a)",
+        "geometry": "Geometri",
+        "closed": "sluten",
+        "center": "Centrum",
+        "perimeter": "Omkrets",
+        "length": "Längd",
+        "area": "Area",
+        "centroid": "Centrumpunkt",
+        "location": "Positionering",
+        "metric": "Metriskt",
+        "imperial": "Brittiskt"
+    },
+    "geometry": {
+        "point": "Punkt",
+        "vertex": "Hörn",
+        "line": "Linje",
+        "area": "area",
+        "relation": "relation"
     },
     "geocoder": {
         "search": "Sök hela världen...",
@@ -568,39 +588,39 @@
         "fields": {
             "access": {
                 "label": "Tillgång",
+                "options": {
+                    "designated": {
+                        "description": "Åtkomst tillåten enligt skyltar eller specifika lokala lagar",
+                        "title": "Föredragen"
+                    },
+                    "destination": {
+                        "description": "Åtkomst tillåten endast för att nå en destination",
+                        "title": "Destination"
+                    },
+                    "no": {
+                        "description": "Tillträde ej tillåten för allmänheten",
+                        "title": "Förbjudet"
+                    },
+                    "permissive": {
+                        "description": "Tillträde tillåten fram till dess ägare återkallar tillståndet",
+                        "title": "Påbjuden"
+                    },
+                    "private": {
+                        "description": "Tillträde tillåten endast med tillstånd av ägaren på individuell basis",
+                        "title": "Privat"
+                    },
+                    "yes": {
+                        "description": "Tillträde är tillåtet enligt lag",
+                        "title": "Tillåtna"
+                    }
+                },
                 "placeholder": "Okänt",
                 "types": {
                     "access": "Generell",
-                    "foot": "Fotgängare",
-                    "motor_vehicle": "Motorfordon",
                     "bicycle": "Cyklar",
-                    "horse": "Hästar"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Tillåtna",
-                        "description": "Tillträde är tillåtet enligt lag"
-                    },
-                    "no": {
-                        "title": "Förbjudet",
-                        "description": "Tillträde ej tillåten för allmänheten"
-                    },
-                    "permissive": {
-                        "title": "Påbjuden",
-                        "description": "Tillträde tillåten fram till dess ägare återkallar tillståndet"
-                    },
-                    "private": {
-                        "title": "Privat",
-                        "description": "Tillträde tillåten endast med tillstånd av ägaren på individuell basis"
-                    },
-                    "designated": {
-                        "title": "Föredragen",
-                        "description": "Åtkomst tillåten enligt skyltar eller specifika lokala lagar"
-                    },
-                    "destination": {
-                        "title": "Destination",
-                        "description": "Åtkomst tillåten endast för att nå en destination"
-                    }
+                    "foot": "Fotgängare",
+                    "horse": "Hästar",
+                    "motor_vehicle": "Motorfordon"
                 }
             },
             "access_simple": {
@@ -613,19 +633,19 @@
             "address": {
                 "label": "Adress",
                 "placeholders": {
+                    "city": "Stad",
+                    "country": "Land",
+                    "district": "Distrikt",
+                    "hamlet": "Småort",
                     "housename": "Husnamn",
                     "housenumber": "123",
-                    "street": "Gata",
-                    "city": "Stad",
-                    "postcode": "Postnummer",
                     "place": "Plats",
-                    "hamlet": "Småort",
-                    "suburb": "Stadsdel",
-                    "subdistrict": "Deldistrikt",
-                    "district": "Distrikt",
+                    "postcode": "Postnummer",
                     "province": "Provins",
                     "state": "Stat",
-                    "country": "Land"
+                    "street": "Gata",
+                    "subdistrict": "Deldistrikt",
+                    "suburb": "Stadsdel"
                 }
             },
             "admin_level": {
@@ -637,9 +657,9 @@
             "aerialway/access": {
                 "label": "Tillgång",
                 "options": {
+                    "both": "Båda",
                     "entry": "Ingång",
-                    "exit": "Utgång",
-                    "both": "Båda"
+                    "exit": "Utgång"
                 }
             },
             "aerialway/bubble": {
@@ -663,9 +683,9 @@
             "aerialway/summer/access": {
                 "label": "Tillgång (sommar)",
                 "options": {
+                    "both": "Båda",
                     "entry": "Ingång",
-                    "exit": "Utgång",
-                    "both": "Båda"
+                    "exit": "Utgång"
                 }
             },
             "aeroway": {
@@ -714,29 +734,29 @@
             "cardinal_direction": {
                 "label": "Riktning",
                 "options": {
-                    "N": "Norr",
                     "E": "Öster",
-                    "S": "Söder",
-                    "W": "Väster",
-                    "NE": "Nordost",
-                    "SE": "Sydost",
-                    "SW": "Sydväst",
-                    "NW": "Nordväst",
-                    "NNE": "Nordnordost",
                     "ENE": "Ostnordost",
                     "ESE": "Ostsydost",
+                    "N": "Norr",
+                    "NE": "Nordost",
+                    "NNE": "Nordnordost",
+                    "NNW": "Nordnordväst",
+                    "NW": "Nordväst",
+                    "S": "Söder",
+                    "SE": "Sydost",
                     "SSE": "Sydsydost",
                     "SSW": "Sydsydväst",
-                    "WSW": "Västsydväst",
+                    "SW": "Sydväst",
+                    "W": "Väster",
                     "WNW": "Västnordväst",
-                    "NNW": "Nordnordväst"
+                    "WSW": "Västsydväst"
                 }
             },
             "clock_direction": {
                 "label": "Riktning",
                 "options": {
-                    "clockwise": "Medsols",
-                    "anticlockwise": "Motsols"
+                    "anticlockwise": "Motsols",
+                    "clockwise": "Medsols"
                 }
             },
             "collection_times": {
@@ -744,6 +764,9 @@
             },
             "construction": {
                 "label": "Typ"
+            },
+            "content": {
+                "label": "Innehåll"
             },
             "country": {
                 "label": "Land"
@@ -780,13 +803,13 @@
             },
             "electrified": {
                 "label": "Elförsörjning",
-                "placeholder": "Kontaktledning, elektrifierad räls...",
                 "options": {
                     "contact_line": "Kontaktledning",
+                    "no": "Nej",
                     "rail": "Elektrifierad räls",
-                    "yes": "Ja (ospecificerad)",
-                    "no": "Nej"
-                }
+                    "yes": "Ja (ospecificerad)"
+                },
+                "placeholder": "Kontaktledning, elektrifierad räls..."
             },
             "elevation": {
                 "label": "Höjd"
@@ -811,9 +834,9 @@
                 "label": "Typ",
                 "options": {
                     "pillar": "Stolpe/Ovan jord",
+                    "pond": "Damm",
                     "underground": "Underjordisk",
-                    "wall": "Vägg",
-                    "pond": "Damm"
+                    "wall": "Vägg"
                 }
             },
             "fixme": {
@@ -854,12 +877,12 @@
             },
             "gender": {
                 "label": "Kön",
-                "placeholder": "Okänt",
                 "options": {
-                    "male": "Man",
                     "female": "Kvinna",
+                    "male": "Man",
                     "unisex": "Unisex"
-                }
+                },
+                "placeholder": "Okänt"
             },
             "generator/method": {
                 "label": "Metod"
@@ -900,8 +923,8 @@
             "incline_steps": {
                 "label": "Lutning",
                 "options": {
-                    "up": "Upp",
-                    "down": "Ner"
+                    "down": "Ner",
+                    "up": "Upp"
                 }
             },
             "information": {
@@ -910,11 +933,11 @@
             "internet_access": {
                 "label": "Internetaccess",
                 "options": {
-                    "yes": "Ja",
                     "no": "Nej",
-                    "wlan": "Wifi",
+                    "terminal": "Terminal",
                     "wired": "Trådbunden",
-                    "terminal": "Terminal"
+                    "wlan": "Wifi",
+                    "yes": "Ja"
                 }
             },
             "lamp_type": {
@@ -933,20 +956,20 @@
             "leaf_cycle": {
                 "label": "Lövcykel",
                 "options": {
-                    "evergreen": "Vintergröna",
                     "deciduous": "Lövfällande",
-                    "semi_evergreen": "Delvist vintergröna",
+                    "evergreen": "Vintergröna",
+                    "mixed": "Mixat",
                     "semi_deciduous": "Delvist lövfällande",
-                    "mixed": "Mixat"
+                    "semi_evergreen": "Delvist vintergröna"
                 }
             },
             "leaf_type": {
                 "label": "Lövtyp",
                 "options": {
                     "broadleaved": "Löv",
-                    "needleleaved": "Barr",
+                    "leafless": "Utan löv",
                     "mixed": "Blandat",
-                    "leafless": "Utan löv"
+                    "needleleaved": "Barr"
                 }
             },
             "leisure": {
@@ -974,7 +997,6 @@
             },
             "mtb/scale": {
                 "label": "Mountainbike-svårighet",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Fast grus/packad jord, inga hinder, breda kurvor",
                     "1": "1: Delvis löst underlag, små hinder, breda kurvor",
@@ -983,22 +1005,22 @@
                     "4": "4: löst underlag eller stenblock, farliga hårnålar",
                     "5": "5: Maximal svårighet, blockfält, jordskred",
                     "6": "6: Inte körbar förutom för de allra bästa mountainbikecyklisterna"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "Svårighetsgrad enligt IMBA",
-                "placeholder": "Enkel, medel, svår...",
                 "options": {
                     "0": "Enklast (vita cirkel)",
                     "1": "Enkel (gröna cirkel)",
                     "2": "Medium (blå fyrkant)",
                     "3": "Svår (svart diamant)",
                     "4": "Extremt svårt (dubbel svart diamant)"
-                }
+                },
+                "placeholder": "Enkel, medel, svår..."
             },
             "mtb/scale/uphill": {
                 "label": "Mountainbike svårighetsgrad uppför",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Genomsnittlig lutning <10%, grus/packad jord, inga hinder",
                     "1": "1: Genomsnittlig lutning <15%, grus/packad jord, få små hinder",
@@ -1006,7 +1028,8 @@
                     "3": "3: Genomsnittlig lutning <25%, varierande underlag, stena/grenar stora som en knytnäve",
                     "4": "4: Genomsnittlig lutning <30%, dåliga förutsättningar, stora stena/grenar",
                     "5": "5: Mycket brant, cykel måste i regel skjutas eller bäras"
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Namn",
@@ -1027,17 +1050,17 @@
             "oneway": {
                 "label": "Enkelriktat",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Förväntas vara Nej",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
                 }
             },
             "oneway_yes": {
                 "label": "Enkelriktat",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Förväntas vara Ja",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
                 }
             },
             "opening_hours": {
@@ -1056,13 +1079,13 @@
             "parking": {
                 "label": "Typ",
                 "options": {
-                    "surface": "Yta",
-                    "multi-storey": "Flera våningar",
-                    "underground": "Underjordisk",
-                    "sheds": "Skjul",
                     "carports": "Carportar",
                     "garage_boxes": "Garageboxar",
-                    "lane": "Fickparkering"
+                    "lane": "Fickparkering",
+                    "multi-storey": "Flera våningar",
+                    "sheds": "Skjul",
+                    "surface": "Yta",
+                    "underground": "Underjordisk"
                 }
             },
             "phone": {
@@ -1071,24 +1094,24 @@
             },
             "piste/difficulty": {
                 "label": "Svårighetsgrad",
-                "placeholder": "Lätt, Medel, Avancerad...",
                 "options": {
-                    "novice": "Nybörjare (undervisning)",
-                    "easy": "Enkel (grön cirkel)",
-                    "intermediate": "Medel (blå fyrkant)",
                     "advanced": "Avancerad (svart diamant)",
+                    "easy": "Enkel (grön cirkel)",
                     "expert": "Expert (dubbel svart diamant)",
+                    "extreme": "Extrem (klättringsutrustning krävs)",
                     "freeride": "Friåkning (offpist)",
-                    "extreme": "Extrem (klättringsutrustning krävs)"
-                }
+                    "intermediate": "Medel (blå fyrkant)",
+                    "novice": "Nybörjare (undervisning)"
+                },
+                "placeholder": "Lätt, Medel, Avancerad..."
             },
             "piste/grooming": {
                 "label": "Stil",
                 "options": {
-                    "classic": "Klassisk",
-                    "mogul": "Puckelpist",
                     "backcountry": "Off-pist",
+                    "classic": "Klassisk",
                     "classic+skating": "Klassisk och skating",
+                    "mogul": "Puckelpist",
                     "scooter": "Scooter/Snöskoter",
                     "skating": "Skating"
                 }
@@ -1097,14 +1120,14 @@
                 "label": "Typ",
                 "options": {
                     "downhill": "Utförsåkning",
+                    "hike": "Vandringsled",
+                    "ice_skate": "Skridskoåkning",
                     "nordic": "Längdskidåkning",
+                    "playground": "Lekplats",
                     "skitour": "Turåkning",
                     "sled": "Pulkabacke",
-                    "hike": "Vandringsled",
                     "sleigh": "Slädåkning ",
-                    "ice_skate": "Skridskoåkning",
-                    "snow_park": "Snöpark",
-                    "playground": "Lekplats"
+                    "snow_park": "Snöpark"
                 }
             },
             "place": {
@@ -1115,6 +1138,9 @@
             },
             "power": {
                 "label": "Typ"
+            },
+            "power_supply": {
+                "label": "Strömförsörjning"
             },
             "railway": {
                 "label": "Typ"
@@ -1154,15 +1180,18 @@
             },
             "sac_scale": {
                 "label": "Svårighetsgrad",
-                "placeholder": "Bergsvandring, alpin vandring",
                 "options": {
-                    "hiking": "T1: Vandring",
-                    "mountain_hiking": "T2: Bergsvandring",
-                    "demanding_mountain_hiking": "T3: Krävande bergsvandring",
                     "alpine_hiking": "T4: Alpin vandring",
                     "demanding_alpine_hiking": "T5: Krävande alpin vandring",
-                    "difficult_alpine_hiking": "T6: Svår alpin vandring"
-                }
+                    "demanding_mountain_hiking": "T3: Krävande bergsvandring",
+                    "difficult_alpine_hiking": "T6: Svår alpin vandring",
+                    "hiking": "T1: Vandring",
+                    "mountain_hiking": "T2: Bergsvandring"
+                },
+                "placeholder": "Bergsvandring, alpin vandring"
+            },
+            "sanitary_dump_station": {
+                "label": "Latrintömning "
             },
             "seasonal": {
                 "label": "Säsongsöppen"
@@ -1173,26 +1202,26 @@
             "service/bicycle/chain_tool": {
                 "label": "Kedjebrytare",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Förväntas vara Nej",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Cykelpump",
                 "options": {
+                    "no": "Nej",
                     "undefined": "Förväntas vara Nej",
-                    "yes": "Ja",
-                    "no": "Nej"
+                    "yes": "Ja"
                 }
             },
             "service_rail": {
                 "label": "Användningsområde ",
                 "options": {
-                    "spur": "Industrispår",
-                    "yard": "Bangård",
+                    "crossover": "Växelförbindelse",
                     "siding": "Sidospår",
-                    "crossover": "Växelförbindelse"
+                    "spur": "Industrispår",
+                    "yard": "Bangård"
                 }
             },
             "shelter": {
@@ -1209,29 +1238,29 @@
             },
             "smoking": {
                 "label": "Rökning",
-                "placeholder": "Nej, separat, ja...",
                 "options": {
-                    "no": "Rökning ej tillåtet",
-                    "separated": "I rökområde, ej fysiskt separerat",
+                    "dedicated": "Dedikerat för rökare (t.ex. rökklubb)",
                     "isolated": "I rökområde, fysiskt separerat",
+                    "no": "Rökning ej tillåtet",
                     "outside": "Tillåtet utomhus",
-                    "yes": "Tillåtet överallt",
-                    "dedicated": "Dedikerat för rökare (t.ex. rökklubb)"
-                }
+                    "separated": "I rökområde, ej fysiskt separerat",
+                    "yes": "Tillåtet överallt"
+                },
+                "placeholder": "Nej, separat, ja..."
             },
             "smoothness": {
                 "label": "Jämnhet",
-                "placeholder": "Tunna hjul, hjul, terräng...",
                 "options": {
+                    "bad": "Robusta hjul: trekkingcykel, bil, riksha",
                     "excellent": "Tunna rullar: rollerblade, skateboard",
                     "good": "Tunna Hjul: racercykel",
-                    "intermediate": "Hjul: cykel, rullstol, scooter",
-                    "bad": "Robusta hjul: trekkingcykel, bil, riksha",
-                    "very_bad": "Hög frigång: lätta terrängfordon",
                     "horrible": "Terräng: tunga terrängfordon",
-                    "very_horrible": "Specialiserade för terräng: traktor, fyrhjuling",
-                    "impassable": "Oframkomligt / Inga hjulfordon"
-                }
+                    "impassable": "Oframkomligt / Inga hjulfordon",
+                    "intermediate": "Hjul: cykel, rullstol, scooter",
+                    "very_bad": "Hög frigång: lätta terrängfordon",
+                    "very_horrible": "Specialiserade för terräng: traktor, fyrhjuling"
+                },
+                "placeholder": "Tunna hjul, hjul, terräng..."
             },
             "social_facility_for": {
                 "label": "Människohjälp",
@@ -1251,14 +1280,14 @@
             },
             "structure": {
                 "label": "Struktur",
-                "placeholder": "Okänt",
                 "options": {
                     "bridge": "Bro",
-                    "tunnel": "Tunnel",
-                    "embankment": "Vägbank",
                     "cutting": "Vägsnitt",
-                    "ford": "Vadställe"
-                }
+                    "embankment": "Vägbank",
+                    "ford": "Vadställe",
+                    "tunnel": "Tunnel"
+                },
+                "placeholder": "Okänt"
             },
             "studio_type": {
                 "label": "Typ"
@@ -1277,20 +1306,20 @@
             },
             "takeaway": {
                 "label": "Hämtmat",
-                "placeholder": "Ja, nej, enbart hämtmat",
                 "options": {
-                    "yes": "Ja",
                     "no": "Nej",
-                    "only": "Enbart hämtmat"
-                }
+                    "only": "Enbart hämtmat",
+                    "yes": "Ja"
+                },
+                "placeholder": "Ja, nej, enbart hämtmat"
             },
             "toilets/disposal": {
                 "label": "Omhändertagande",
                 "options": {
-                    "flush": "Spola",
-                    "pitlatrine": "Grop/Latrin",
+                    "bucket": "Behållare",
                     "chemical": "Kemisk",
-                    "bucket": "Behållare"
+                    "flush": "Spola",
+                    "pitlatrine": "Grop/Latrin"
                 }
             },
             "tourism": {
@@ -1301,26 +1330,26 @@
             },
             "tracktype": {
                 "label": "Typ av bruksväg",
-                "placeholder": "Fast, Mestadels fast, Mjuk ...",
                 "options": {
                     "grade1": "Fast: asfalterad eller kraftigt packad hård yta",
                     "grade2": "Mestadels fast: grus/sten med inslag av mjukt material",
                     "grade3": "Jämn blandning av hårda och mjuka material",
                     "grade4": "Mestadels mjukt: jord/sand/gräs med inslag av hårt material",
                     "grade5": "Mjukt: jord/sand/gräs"
-                }
+                },
+                "placeholder": "Fast, Mestadels fast, Mjuk ..."
             },
             "trail_visibility": {
                 "label": "Synlighet",
-                "placeholder": "Utmärkt, bra, dåligt...",
                 "options": {
+                    "bad": "Dåligt: inga markörer, stig ibland osynlig/stiglös",
                     "excellent": "Utmärkt: Tydlig väg eller markörer överallt",
                     "good": "Bra: markörer synliga men ibland svåra att hitta",
-                    "intermediate": "Medel: få markörer, stig mestadels synliga",
-                    "bad": "Dåligt: inga markörer, stig ibland osynlig/stiglös",
                     "horrible": "Hemsk: ofta stiglös, en del orienteringskunskaper krävs",
+                    "intermediate": "Medel: få markörer, stig mestadels synliga",
                     "no": "Ingen: stiglös, utmärkta orienteringskunskaper krävs"
-                }
+                },
+                "placeholder": "Utmärkt, bra, dåligt..."
             },
             "trees": {
                 "label": "Träd"
@@ -1333,6 +1362,9 @@
             },
             "water": {
                 "label": "Typ"
+            },
+            "water_point": {
+                "label": "Vattenpåfyllning"
             },
             "waterway": {
                 "label": "Typ"
@@ -1474,6 +1506,10 @@
             "amenity/bicycle_repair_station": {
                 "name": "Station för cykelreparation ",
                 "terms": "Cykelreparation, kedjebrytare, cykelpump, tryckluft, pumpstation, cykel, "
+            },
+            "amenity/biergarten": {
+                "name": "Ölträdgård",
+                "terms": "ölträdgård, Biergarten, uteservering,ölcafé, utecafé, trädgårdspub"
             },
             "amenity/boat_rental": {
                 "name": "Båtuthyrning",
@@ -1670,6 +1706,9 @@
             "amenity/restaurant": {
                 "name": "Restaurang",
                 "terms": "Restaurang, matservering, matställe, servering, restauration, näringsställe, grillbar, bar, krog, värdshus, pub, bodega, brasserie, rotisseri, pizzeria, kafé, cafeteria, sylta"
+            },
+            "amenity/sanitary_dump_station": {
+                "name": "Latrintömning"
             },
             "amenity/school": {
                 "name": "Skolområde",

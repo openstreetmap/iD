@@ -239,7 +239,6 @@
     "commit": {
         "title": "Módosítások Mentése",
         "description_placeholder": "A közreműködésed rövid összefoglalója",
-        "message_label": "Módosítási üzenet",
         "upload_explanation": "Az általad feltöltött változtatások minden OpenStreetMapet használó térképen láthatóak lesznek.",
         "upload_explanation_with_user": "Az általad {user} néven feltöltött változtatások minden OpenStreetMapet használó térképen láthatóak lesznek.",
         "save": "Mentés",
@@ -565,39 +564,39 @@
         "fields": {
             "access": {
                 "label": "Behajtás",
+                "options": {
+                    "designated": {
+                        "description": "Behajtást engedélyező tábla, vagy helyi jogszabály",
+                        "title": "Kijelölt"
+                    },
+                    "destination": {
+                        "description": "A behajtás csak a célpont eléréséhez engedélyezett",
+                        "title": "Célforgalom"
+                    },
+                    "no": {
+                        "description": "Behajtás semmilyen forgalomnak nem engedélyezett",
+                        "title": "Tiltott"
+                    },
+                    "permissive": {
+                        "description": "Behajtás engedélyezett, amíg a tulajdonos vissza nem vonja az engedélyt",
+                        "title": "Megengedett."
+                    },
+                    "private": {
+                        "description": "Behajtás csak a tulajdonos engedélyével, vagy egyedi elbírálás alapján",
+                        "title": "Privát"
+                    },
+                    "yes": {
+                        "description": "Jogilag engedélyezett; szolgalmi jog",
+                        "title": "Engedélyezett"
+                    }
+                },
                 "placeholder": "Ismeretlen",
                 "types": {
                     "access": "Általános",
-                    "foot": "Gyalog",
-                    "motor_vehicle": "Gépjárművek",
                     "bicycle": "Kerékpár",
-                    "horse": "Ló"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Engedélyezett",
-                        "description": "Jogilag engedélyezett; szolgalmi jog"
-                    },
-                    "no": {
-                        "title": "Tiltott",
-                        "description": "Behajtás semmilyen forgalomnak nem engedélyezett"
-                    },
-                    "permissive": {
-                        "title": "Megengedett.",
-                        "description": "Behajtás engedélyezett, amíg a tulajdonos vissza nem vonja az engedélyt"
-                    },
-                    "private": {
-                        "title": "Privát",
-                        "description": "Behajtás csak a tulajdonos engedélyével, vagy egyedi elbírálás alapján"
-                    },
-                    "designated": {
-                        "title": "Kijelölt",
-                        "description": "Behajtást engedélyező tábla, vagy helyi jogszabály"
-                    },
-                    "destination": {
-                        "title": "Célforgalom",
-                        "description": "A behajtás csak a célpont eléréséhez engedélyezett"
-                    }
+                    "foot": "Gyalog",
+                    "horse": "Ló",
+                    "motor_vehicle": "Gépjárművek"
                 }
             },
             "access_simple": {
@@ -610,19 +609,19 @@
             "address": {
                 "label": "Cím",
                 "placeholders": {
+                    "city": "város",
+                    "country": "Ország",
+                    "district": "Kerület",
+                    "hamlet": "Falucska",
                     "housename": "Háznév",
                     "housenumber": "123",
-                    "street": "utca",
-                    "city": "város",
-                    "postcode": "írányítószám",
                     "place": "Hely",
-                    "hamlet": "Falucska",
-                    "suburb": "Külváros",
-                    "subdistrict": "Városrész",
-                    "district": "Kerület",
+                    "postcode": "írányítószám",
                     "province": "Tartomány",
                     "state": "Régió",
-                    "country": "Ország"
+                    "street": "utca",
+                    "subdistrict": "Városrész",
+                    "suburb": "Külváros"
                 }
             },
             "admin_level": {
@@ -634,9 +633,9 @@
             "aerialway/access": {
                 "label": "Be- és kiszállás",
                 "options": {
+                    "both": "Mindkettő",
                     "entry": "Bejárat",
-                    "exit": "Kijárat",
-                    "both": "Mindkettő"
+                    "exit": "Kijárat"
                 }
             },
             "aerialway/bubble": {
@@ -660,9 +659,9 @@
             "aerialway/summer/access": {
                 "label": "Be- és kiszállás (nyáron)",
                 "options": {
+                    "both": "Mindkettő",
                     "entry": "Bejárat",
-                    "exit": "Kijárat",
-                    "both": "Mindkettő"
+                    "exit": "Kijárat"
                 }
             },
             "aeroway": {
@@ -711,29 +710,29 @@
             "cardinal_direction": {
                 "label": "Irány",
                 "options": {
-                    "N": "Észak",
                     "E": "Kelet",
-                    "S": "Dél",
-                    "W": "Nyugat",
-                    "NE": "Északkelet",
-                    "SE": "Délkelet",
-                    "SW": "Délnyugat",
-                    "NW": "Északnyugat",
-                    "NNE": "Észak-északkelet",
                     "ENE": "Kelet-északkelet",
                     "ESE": "Kelet-délkelet",
+                    "N": "Észak",
+                    "NE": "Északkelet",
+                    "NNE": "Észak-északkelet",
+                    "NNW": "Észak-északnyugat",
+                    "NW": "Északnyugat",
+                    "S": "Dél",
+                    "SE": "Délkelet",
                     "SSE": "Dél-délkelet",
                     "SSW": "Dél-délnyugat",
-                    "WSW": "Nyugat-délnyugat",
+                    "SW": "Délnyugat",
+                    "W": "Nyugat",
                     "WNW": "Nyugat-északnyugat",
-                    "NNW": "Észak-északnyugat"
+                    "WSW": "Nyugat-délnyugat"
                 }
             },
             "clock_direction": {
                 "label": "Irány",
                 "options": {
-                    "clockwise": "Óramutató szerint",
-                    "anticlockwise": "Óramutatóval ellentétesen"
+                    "anticlockwise": "Óramutatóval ellentétesen",
+                    "clockwise": "Óramutató szerint"
                 }
             },
             "collection_times": {
@@ -774,13 +773,13 @@
             },
             "electrified": {
                 "label": "Villamosítottság",
-                "placeholder": "Felső-vezetékes, sínes áramfelvétel, ...",
                 "options": {
                     "contact_line": "Felsővezeték",
+                    "no": "Nem",
                     "rail": "Sínes áramfelvétel pl. metróban  ",
-                    "yes": "Igen (nem részletezett)",
-                    "no": "Nem"
-                }
+                    "yes": "Igen (nem részletezett)"
+                },
+                "placeholder": "Felső-vezetékes, sínes áramfelvétel, ..."
             },
             "elevation": {
                 "label": "Tengerszint feletti magasság"
@@ -805,9 +804,9 @@
                 "label": "Típus",
                 "options": {
                     "pillar": "Felszini tűzcsap",
+                    "pond": "Tó víznyerő csapja",
                     "underground": "Föld alatti tűzcsap",
-                    "wall": "Fali tűzcsap",
-                    "pond": "Tó víznyerő csapja"
+                    "wall": "Fali tűzcsap"
                 }
             },
             "fixme": {
@@ -848,12 +847,12 @@
             },
             "gender": {
                 "label": "Nem",
-                "placeholder": "Ismeretlen",
                 "options": {
-                    "male": "Férfi",
                     "female": "Nő",
+                    "male": "Férfi",
                     "unisex": "Uniszex"
-                }
+                },
+                "placeholder": "Ismeretlen"
             },
             "generator/method": {
                 "label": "Módszer"
@@ -894,8 +893,8 @@
             "incline_steps": {
                 "label": "Lejtő",
                 "options": {
-                    "up": "Fel",
-                    "down": "Le"
+                    "down": "Le",
+                    "up": "Fel"
                 }
             },
             "information": {
@@ -904,11 +903,11 @@
             "internet_access": {
                 "label": "Internetelérés",
                 "options": {
-                    "yes": "Igen",
                     "no": "Nem",
-                    "wlan": "WiFi",
+                    "terminal": "Munkaállomás",
                     "wired": "Vezetékes",
-                    "terminal": "Munkaállomás"
+                    "wlan": "WiFi",
+                    "yes": "Igen"
                 }
             },
             "lamp_type": {
@@ -927,20 +926,20 @@
             "leaf_cycle": {
                 "label": "Levélváltási ciklus",
                 "options": {
-                    "evergreen": "Örökzöld",
                     "deciduous": "Lombhullató",
-                    "semi_evergreen": "Félörökzöld ",
+                    "evergreen": "Örökzöld",
+                    "mixed": "Kevert, vegyes",
                     "semi_deciduous": "Félig lombhullató",
-                    "mixed": "Kevert, vegyes"
+                    "semi_evergreen": "Félörökzöld "
                 }
             },
             "leaf_type": {
                 "label": "Levél és lomb típusa ",
                 "options": {
                     "broadleaved": "Lombos",
-                    "needleleaved": "Tűlevelű",
+                    "leafless": "Lombtalan",
                     "mixed": "Kevert, vegyes",
-                    "leafless": "Lombtalan"
+                    "needleleaved": "Tűlevelű"
                 }
             },
             "leisure": {
@@ -968,7 +967,6 @@
             },
             "mtb/scale": {
                 "label": "Mountainbike nehézség",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: Szilárd kavicsos / döngölt földes, akadálymentes, széles kanyarok",
                     "1": "1: Kevésbé szilárd felület, kisebb akadályokkal, széles kanyarok",
@@ -977,22 +975,22 @@
                     "4": "4: Nagyon laza vagy sziklás rész, veszélyes hajtűkanyarok",
                     "5": "5: Maximális nehézség, földcsuszamlások",
                     "6": "6: Járhatatlan, kivéve a legügyesebb mountain bike-osokat."
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
                 "label": "IMBA útvonal nehézség",
-                "placeholder": "Egyszerű, közepes, nehéz",
                 "options": {
                     "0": "Legyegyszerűbb (fehér kör)",
                     "1": "Egyszerű (zöld kör)",
                     "2": "Közepes (kék négyzet)",
                     "3": "Nehéz (fekete gyémánt)",
                     "4": "Extrém nehéz (dupla fekete gyémánt)"
-                }
+                },
+                "placeholder": "Egyszerű, közepes, nehéz"
             },
             "mtb/scale/uphill": {
                 "label": "Mountainbike emelkedős nehézség",
-                "placeholder": "0, 1, 2, 3...",
                 "options": {
                     "0": "0: átlagos emelkedés < 10 % , szilárd, akadálymentes",
                     "1": "1: átlagos emelkedés < 15%, szilárd,  kisebb akadályokkal",
@@ -1000,7 +998,8 @@
                     "3": "3: átlagos emelkedés < 25%, változó felszín, öklömnyi kövekkel, gyökerekkel",
                     "4": "4: átlagos emelkedés < 30%, rossz felszín, nagy sziklás/ágas",
                     "5": "5: extrém meredek, a biciklit tolni vagy cipelni kell."
-                }
+                },
+                "placeholder": "0, 1, 2, 3..."
             },
             "name": {
                 "label": "Név",
@@ -1021,17 +1020,17 @@
             "oneway": {
                 "label": "Egyirányú",
                 "options": {
+                    "no": "Nem",
                     "undefined": "Feltételezzük, hogy nem egyirányú",
-                    "yes": "Igen",
-                    "no": "Nem"
+                    "yes": "Igen"
                 }
             },
             "oneway_yes": {
                 "label": "Egyirányú",
                 "options": {
+                    "no": "Nem",
                     "undefined": "Feltételezzük, hogy egyirányú",
-                    "yes": "Igen",
-                    "no": "Nem"
+                    "yes": "Igen"
                 }
             },
             "opening_hours": {
@@ -1050,13 +1049,13 @@
             "parking": {
                 "label": "Típus",
                 "options": {
-                    "surface": "Kültéri - felszini parkoló",
-                    "multi-storey": "Többszintű parkoló - parkolóház",
-                    "underground": "Földalatti parkoló",
-                    "sheds": "Fedett  parkoló",
                     "carports": "Fedett - de nyitott oldalú parkoló",
                     "garage_boxes": "Garázs parkoló",
-                    "lane": "Útmenti sávos parkoló"
+                    "lane": "Útmenti sávos parkoló",
+                    "multi-storey": "Többszintű parkoló - parkolóház",
+                    "sheds": "Fedett  parkoló",
+                    "surface": "Kültéri - felszini parkoló",
+                    "underground": "Földalatti parkoló"
                 }
             },
             "phone": {
@@ -1065,24 +1064,24 @@
             },
             "piste/difficulty": {
                 "label": "Nehézség",
-                "placeholder": "Kezdő, középhaladó, haladó",
                 "options": {
-                    "novice": "Kezdő",
-                    "easy": "Egyszerű (zöld kör)",
-                    "intermediate": "Közepes (kék négyzet)",
                     "advanced": "Haladó (fekete gyémánt)",
+                    "easy": "Egyszerű (zöld kör)",
                     "expert": "Profi (dupla fekete gyémánt)",
+                    "extreme": "Extrém (hegymászófelszerelés szükséges)",
                     "freeride": "Pályán kívüli (off-piste)",
-                    "extreme": "Extrém (hegymászófelszerelés szükséges)"
-                }
+                    "intermediate": "Közepes (kék négyzet)",
+                    "novice": "Kezdő"
+                },
+                "placeholder": "Kezdő, középhaladó, haladó"
             },
             "piste/grooming": {
                 "label": "Kezelés",
                 "options": {
-                    "classic": "Klasszikus",
-                    "mogul": "Buckasízés - mogul",
                     "backcountry": "Sziklás - szakadékos - fás - backcountry",
+                    "classic": "Klasszikus",
                     "classic+skating": "Klasszikus és Skating sífutópálya",
+                    "mogul": "Buckasízés - mogul",
                     "scooter": "Motoros szánozos pálya-  Scooter/Snowmobile",
                     "skating": "Skating sífutó pálya "
                 }
@@ -1091,14 +1090,14 @@
                 "label": "Típus",
                 "options": {
                     "downhill": "Lesiklás",
+                    "hike": "Kirándulós, Nordikus pálya ( Hike )",
+                    "ice_skate": "Jégkorcsolya",
                     "nordic": "Nordic",
+                    "playground": "Hó és sí játszótér ",
                     "skitour": "Sítúra",
                     "sled": "Szánkó - Sled",
-                    "hike": "Kirándulós, Nordikus pálya ( Hike )",
                     "sleigh": "Nem önjáró szánkós ( Sleigh )",
-                    "ice_skate": "Jégkorcsolya",
-                    "snow_park": "Hópark",
-                    "playground": "Hó és sí játszótér "
+                    "snow_park": "Hópark"
                 }
             },
             "place": {
@@ -1148,15 +1147,15 @@
             },
             "sac_scale": {
                 "label": "Túraútvonal nehézsége",
-                "placeholder": "Túraút, Magashegyi túraút...",
                 "options": {
-                    "hiking": "T1: Jól kiépített túraút",
-                    "mountain_hiking": "T2: Magashegyi túraút",
-                    "demanding_mountain_hiking": "T3: Magashegyi túraút kitett vagy biztosított szakaszokkal",
                     "alpine_hiking": "T4: Kitett magashegyi túraút, csak tapasztaltaknak",
                     "demanding_alpine_hiking": "T5: Kitett magashegyi túraút hegymászó szakaszokkal, csak tapasztaltaknak",
-                    "difficult_alpine_hiking": "T6: Hegymászó technikát igénylő kitett magashegyi túraút, csak nagyon tapasztaltaknak"
-                }
+                    "demanding_mountain_hiking": "T3: Magashegyi túraút kitett vagy biztosított szakaszokkal",
+                    "difficult_alpine_hiking": "T6: Hegymászó technikát igénylő kitett magashegyi túraút, csak nagyon tapasztaltaknak",
+                    "hiking": "T1: Jól kiépített túraút",
+                    "mountain_hiking": "T2: Magashegyi túraút"
+                },
+                "placeholder": "Túraút, Magashegyi túraút..."
             },
             "seasonal": {
                 "label": "Időszakos"
@@ -1167,17 +1166,17 @@
             "service/bicycle/chain_tool": {
                 "label": "Láncbontó, lánc eszközök",
                 "options": {
+                    "no": "Nem",
                     "undefined": "Feltételezhető, hogy nincs",
-                    "yes": "Igen",
-                    "no": "Nem"
+                    "yes": "Igen"
                 }
             },
             "service/bicycle/pump": {
                 "label": "Levegő pumpa",
                 "options": {
+                    "no": "Nem",
                     "undefined": "Feltételezzük, hogy nincs",
-                    "yes": "Igen",
-                    "no": "Nem"
+                    "yes": "Igen"
                 }
             },
             "shelter": {
@@ -1194,29 +1193,29 @@
             },
             "smoking": {
                 "label": "Dohányzó",
-                "placeholder": "Nem, elkülönített helyen, igen",
                 "options": {
-                    "no": "Mindenhol tilos",
-                    "separated": "Egy légtérben dohányzó és nemdohányzó részek",
+                    "dedicated": "Dohányzóknak ( pl. dohányzóklub, közösségi dohányzóhely) ",
                     "isolated": "Teljesen elkülönített dohányzórész",
+                    "no": "Mindenhol tilos",
                     "outside": "Az épületen kívül engedélyezett",
-                    "yes": "Mindenhol engedélyezett",
-                    "dedicated": "Dohányzóknak ( pl. dohányzóklub, közösségi dohányzóhely) "
-                }
+                    "separated": "Egy légtérben dohányzó és nemdohányzó részek",
+                    "yes": "Mindenhol engedélyezett"
+                },
+                "placeholder": "Nem, elkülönített helyen, igen"
             },
             "smoothness": {
                 "label": "Felület egyenletessége",
-                "placeholder": "Gördeszkás, kerekes, terepjárós",
                 "options": {
+                    "bad": "Rossz: vastagabb kerékkel, terepbiciklivel, autóval, riksával járható",
                     "excellent": "Kiváló: görkorcsolyázni és gördeszkázni lehet rajta",
                     "good": "Jó: vékony kerékkel, versenymotorral járható",
-                    "intermediate": "Közepes: városi kerékpárral, kerekesszékkel, robogóval járható",
-                    "bad": "Rossz: vastagabb kerékkel, terepbiciklivel, autóval, riksával járható",
-                    "very_bad": "Nagyon rossz:  Könnyű terepjárós út",
                     "horrible": "Borzalmas: off-road - nagy teherbírású terepjáróval járható",
-                    "very_horrible": "Extrém borzalmas: traktor ajánlott.",
-                    "impassable": "Lehetetlen kerekes járművel közlekedni"
-                }
+                    "impassable": "Lehetetlen kerekes járművel közlekedni",
+                    "intermediate": "Közepes: városi kerékpárral, kerekesszékkel, robogóval járható",
+                    "very_bad": "Nagyon rossz:  Könnyű terepjárós út",
+                    "very_horrible": "Extrém borzalmas: traktor ajánlott."
+                },
+                "placeholder": "Gördeszkás, kerekes, terepjárós"
             },
             "social_facility_for": {
                 "label": "Szociálisan rászorultak",
@@ -1236,14 +1235,14 @@
             },
             "structure": {
                 "label": "Szerkezet",
-                "placeholder": "Ismeretlen",
                 "options": {
                     "bridge": "Híd",
-                    "tunnel": "Alagút",
-                    "embankment": "Töltés",
                     "cutting": "Bevágás",
-                    "ford": "Gázló"
-                }
+                    "embankment": "Töltés",
+                    "ford": "Gázló",
+                    "tunnel": "Alagút"
+                },
+                "placeholder": "Ismeretlen"
             },
             "studio_type": {
                 "label": "Típus"
@@ -1262,20 +1261,20 @@
             },
             "takeaway": {
                 "label": "Ételek elvitelre ",
-                "placeholder": "Igen, nem, csak elvitel ",
                 "options": {
-                    "yes": "Igen",
                     "no": "Nem",
-                    "only": "Csak elvitel"
-                }
+                    "only": "Csak elvitel",
+                    "yes": "Igen"
+                },
+                "placeholder": "Igen, nem, csak elvitel "
             },
             "toilets/disposal": {
                 "label": "WC kezelés",
                 "options": {
-                    "flush": "Vízöblitéses",
-                    "pitlatrine": "Emésztőgödrös",
+                    "bucket": "Konténeres üritésű",
                     "chemical": "Vegyi anyagos semlegesítésű",
-                    "bucket": "Konténeres üritésű"
+                    "flush": "Vízöblitéses",
+                    "pitlatrine": "Emésztőgödrös"
                 }
             },
             "tourism": {
@@ -1286,26 +1285,26 @@
             },
             "tracktype": {
                 "label": "Úttípus",
-                "placeholder": "Szilárd, vegyes, laza, ...",
                 "options": {
                     "grade1": "Szilárd: burkolt vagy tömör felületű makadámút",
                     "grade2": "Főképp szilárd: murvával/kővel tömörített földút",
                     "grade3": "Vegyes: köves földút",
                     "grade4": "Nagyrészt laza: föld-, homok- vagy füves út némi kővel",
                     "grade5": "Laza: föld-, homok- vagy füves út"
-                }
+                },
+                "placeholder": "Szilárd, vegyes, laza, ..."
             },
             "trail_visibility": {
                 "label": "Ösvény láthatósága",
-                "placeholder": "Kiváló, jó, rossz ...",
                 "options": {
+                    "bad": "Rossz: nincsenek jelzők, az útvonal néha láthatatlan / úttalan",
                     "excellent": "Kiváló: egyértelmű utak és jelzők mindenhol",
                     "good": "Jó: jelzők láthatóak, néha keresni kell őket",
-                    "intermediate": "Közepes: néhány jelző, az útvonal többnyire látható",
-                    "bad": "Rossz: nincsenek jelzők, az útvonal néha láthatatlan / úttalan",
                     "horrible": "Borzalmas: gyakran úttalan, tájékozódási képességek szükségesek",
+                    "intermediate": "Közepes: néhány jelző, az útvonal többnyire látható",
                     "no": "Nincs:  úttalan, kitűnő tájékozódási képességek szükségesek"
-                }
+                },
+                "placeholder": "Kiváló, jó, rossz ..."
             },
             "trees": {
                 "label": "Fák"

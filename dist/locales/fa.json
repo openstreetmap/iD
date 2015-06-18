@@ -213,7 +213,6 @@
     "commit": {
         "title": "ذخیره تغییرات",
         "description_placeholder": "شرح مختصری از کمک های شما",
-        "message_label": "پیام تعهد",
         "upload_explanation": "تغییراتی که بارگذاری میکنید در همه ی نقشه هایی که از داده های OpenStreetMap استفاده میکنند پدیدار میشوند.",
         "upload_explanation_with_user": "تفییراتی که شما به عنوان {user} بارگذاری میکنید در همه ی نقشه هایی که از داده های OpenStreetMap استفاده میکنند پدیدار میشوند.",
         "save": "ذخیره",
@@ -451,39 +450,39 @@
         "fields": {
             "access": {
                 "label": "دسترسي",
+                "options": {
+                    "designated": {
+                        "description": "دسترسی با توجه به علائم و قوانین محلی مجاز است",
+                        "title": "تعیین شده"
+                    },
+                    "destination": {
+                        "description": "دسترسی فقط برای رسیدن به مقصدی مجاز است",
+                        "title": "مقصد"
+                    },
+                    "no": {
+                        "description": "دسترسی برای عموم مردم مجاز نیست",
+                        "title": "ممنوع"
+                    },
+                    "permissive": {
+                        "description": "دسترسی تا وقتی صاحبش مجوز را لغو نکند مجاز است",
+                        "title": "مجاز"
+                    },
+                    "private": {
+                        "description": "دسترسی فقط با اجازه از صاحب بصورت انفرادی مجاز است",
+                        "title": "خصوصی"
+                    },
+                    "yes": {
+                        "description": "دسترسی مجاز طبق قانون: حق از راه",
+                        "title": "مجاز"
+                    }
+                },
                 "placeholder": "ناشناخته",
                 "types": {
                     "access": "عمومی",
-                    "foot": "پیاده",
-                    "motor_vehicle": "وسایل نقلیه موتوری",
                     "bicycle": "دوچرخه ها",
-                    "horse": "اسب ها"
-                },
-                "options": {
-                    "yes": {
-                        "title": "مجاز",
-                        "description": "دسترسی مجاز طبق قانون: حق از راه"
-                    },
-                    "no": {
-                        "title": "ممنوع",
-                        "description": "دسترسی برای عموم مردم مجاز نیست"
-                    },
-                    "permissive": {
-                        "title": "مجاز",
-                        "description": "دسترسی تا وقتی صاحبش مجوز را لغو نکند مجاز است"
-                    },
-                    "private": {
-                        "title": "خصوصی",
-                        "description": "دسترسی فقط با اجازه از صاحب بصورت انفرادی مجاز است"
-                    },
-                    "designated": {
-                        "title": "تعیین شده",
-                        "description": "دسترسی با توجه به علائم و قوانین محلی مجاز است"
-                    },
-                    "destination": {
-                        "title": "مقصد",
-                        "description": "دسترسی فقط برای رسیدن به مقصدی مجاز است"
-                    }
+                    "foot": "پیاده",
+                    "horse": "اسب ها",
+                    "motor_vehicle": "وسایل نقلیه موتوری"
                 }
             },
             "access_simple": {
@@ -492,8 +491,8 @@
             "address": {
                 "label": "ادرس",
                 "placeholders": {
-                    "street": "خيابان",
-                    "city": "شهر"
+                    "city": "شهر",
+                    "street": "خيابان"
                 }
             },
             "admin_level": {
@@ -569,8 +568,8 @@
             "clock_direction": {
                 "label": "جهت",
                 "options": {
-                    "clockwise": "ساعتگرد",
-                    "anticlockwise": "پاد ساعتگرد"
+                    "anticlockwise": "پاد ساعتگرد",
+                    "clockwise": "ساعتگرد"
                 }
             },
             "collection_times": {
@@ -675,9 +674,9 @@
             "internet_access": {
                 "label": "دسترسی اینترنت",
                 "options": {
-                    "wlan": "واي فاي",
+                    "terminal": "پايانه",
                     "wired": "سيمي",
-                    "terminal": "پايانه"
+                    "wlan": "واي فاي"
                 }
             },
             "landuse": {
@@ -820,13 +819,13 @@
             },
             "structure": {
                 "label": "ساختاری",
-                "placeholder": "ناشناخته",
                 "options": {
                     "bridge": "پل",
-                    "tunnel": "تونل",
+                    "cutting": "برش",
                     "embankment": "خاکریز",
-                    "cutting": "برش"
-                }
+                    "tunnel": "تونل"
+                },
+                "placeholder": "ناشناخته"
             },
             "studio_type": {
                 "label": "نوع"

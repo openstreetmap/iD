@@ -129,12 +129,14 @@ iD.MapillaryLayer = function (context) {
                     .attr('class', 'image');
 
                 enter.append('path')
-                    .attr('d', 'M 0,-5 l 0,-20 l -5,30 l 10,0 l -5,-30');
+                    .attr('class', 'viewfield')
+                    .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
+                    .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z');
 
                 enter.append('circle')
                     .attr('dx', '0')
                     .attr('dy', '0')
-                    .attr('r', '8');
+                    .attr('r', '6');
 
                 g.attr('transform', transform);
 

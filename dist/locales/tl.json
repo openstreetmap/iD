@@ -224,7 +224,6 @@
     "commit": {
         "title": "I-save ang mga binago.",
         "description_placeholder": "Maikling paglalarawan ng iyong mga ambag o edits",
-        "message_label": "Mag-commit mensahe",
         "upload_explanation": "Ang mga pagbabagong na-upload ay makikita sa lahat ng mapang gumagamit ng datos ng OpenStreetMap.",
         "upload_explanation_with_user": "Ang mga pagbabagong na-upload bilang {user} ay makikita sa lahat ng mapang gumagamit ng datos ng OpenStreetMap.",
         "save": "I-save",
@@ -413,8 +412,8 @@
             "address": {
                 "label": "Address",
                 "placeholders": {
-                    "street": "Kalsada",
-                    "city": "Siyudad"
+                    "city": "Siyudad",
+                    "street": "Kalsada"
                 }
             },
             "aerialway": {

@@ -226,7 +226,6 @@
     "commit": {
         "title": "Gardar Cambios",
         "description_placeholder": "Breve descrición das túas contribucións",
-        "message_label": "Mensaxe de envío",
         "upload_explanation": "Os cambios que subas serán visibles en tódolos mapas que usen os datos de OpenStreetMap.",
         "upload_explanation_with_user": "Os cambios que subas como {user} serán visibles en tódolos mapas que usen os datos de OpenStreetMap.",
         "save": "Gardar",
@@ -441,39 +440,39 @@
         "fields": {
             "access": {
                 "label": "Acceso",
+                "options": {
+                    "designated": {
+                        "description": "Acceso permitido segundo sinais ou ordenanzas locais específicas",
+                        "title": "Designado"
+                    },
+                    "destination": {
+                        "description": "Acceso permitido só para chegar a un destino determinado",
+                        "title": "Destino"
+                    },
+                    "no": {
+                        "description": "Acceso non permitido ao público en xeral",
+                        "title": "Prohibido"
+                    },
+                    "permissive": {
+                        "description": "Acceso permitido ata que o propietario revogue o permiso",
+                        "title": "Permisivo"
+                    },
+                    "private": {
+                        "description": "Acceso permitido só coa autorización do propietario de forma individual",
+                        "title": "Privado"
+                    },
+                    "yes": {
+                        "description": "Acceso permitido pola lei; un dereito de paso",
+                        "title": "Permitido"
+                    }
+                },
                 "placeholder": "Descoñecido",
                 "types": {
                     "access": "Xeral",
-                    "foot": "A pé",
-                    "motor_vehicle": "Automóbiles",
                     "bicycle": "Bicicletas",
-                    "horse": "Cabalos"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Permitido",
-                        "description": "Acceso permitido pola lei; un dereito de paso"
-                    },
-                    "no": {
-                        "title": "Prohibido",
-                        "description": "Acceso non permitido ao público en xeral"
-                    },
-                    "permissive": {
-                        "title": "Permisivo",
-                        "description": "Acceso permitido ata que o propietario revogue o permiso"
-                    },
-                    "private": {
-                        "title": "Privado",
-                        "description": "Acceso permitido só coa autorización do propietario de forma individual"
-                    },
-                    "designated": {
-                        "title": "Designado",
-                        "description": "Acceso permitido segundo sinais ou ordenanzas locais específicas"
-                    },
-                    "destination": {
-                        "title": "Destino",
-                        "description": "Acceso permitido só para chegar a un destino determinado"
-                    }
+                    "foot": "A pé",
+                    "horse": "Cabalos",
+                    "motor_vehicle": "Automóbiles"
                 }
             },
             "access_simple": {
@@ -486,15 +485,15 @@
             "address": {
                 "label": "Enderezo",
                 "placeholders": {
+                    "city": "Cidade",
+                    "country": "País",
+                    "hamlet": "Aldea",
                     "housename": "Nome da casa",
                     "housenumber": "123",
-                    "street": "Rúa",
-                    "city": "Cidade",
-                    "postcode": "Código postal",
                     "place": "Lugar",
-                    "hamlet": "Aldea",
-                    "suburb": "Barrio",
-                    "country": "País"
+                    "postcode": "Código postal",
+                    "street": "Rúa",
+                    "suburb": "Barrio"
                 }
             },
             "admin_level": {
@@ -540,29 +539,29 @@
             "cardinal_direction": {
                 "label": "Sentido",
                 "options": {
-                    "N": "Norte",
                     "E": "Leste",
-                    "S": "Sur",
-                    "W": "Oeste",
-                    "NE": "Nordeste",
-                    "SE": "Sueste",
-                    "SW": "Suroeste",
-                    "NW": "Noroeste",
-                    "NNE": "Nor-nordeste",
                     "ENE": "Les-nordeste",
                     "ESE": "Les-sueste",
+                    "N": "Norte",
+                    "NE": "Nordeste",
+                    "NNE": "Nor-nordeste",
+                    "NNW": "Nor-noroeste",
+                    "NW": "Noroeste",
+                    "S": "Sur",
+                    "SE": "Sueste",
                     "SSE": "Sur-sueste",
                     "SSW": "Sur-suroeste",
-                    "WSW": "Oés-suroeste",
+                    "SW": "Suroeste",
+                    "W": "Oeste",
                     "WNW": "Oés-noroeste",
-                    "NNW": "Nor-noroeste"
+                    "WSW": "Oés-suroeste"
                 }
             },
             "clock_direction": {
                 "label": "Sentido",
                 "options": {
-                    "clockwise": "Sentido horario",
-                    "anticlockwise": "Sentido antihorario"
+                    "anticlockwise": "Sentido antihorario",
+                    "clockwise": "Sentido horario"
                 }
             },
             "collection_times": {
@@ -644,11 +643,11 @@
             "internet_access": {
                 "label": "Acceso a internet",
                 "options": {
-                    "yes": "Si",
                     "no": "Non",
-                    "wlan": "Wi-Fi",
+                    "terminal": "Terminal",
                     "wired": "Por cable",
-                    "terminal": "Terminal"
+                    "wlan": "Wi-Fi",
+                    "yes": "Si"
                 }
             },
             "lamp_type": {
@@ -710,17 +709,17 @@
             "oneway": {
                 "label": "Sentido único",
                 "options": {
+                    "no": "Non",
                     "undefined": "Suponse Non",
-                    "yes": "Si",
-                    "no": "Non"
+                    "yes": "Si"
                 }
             },
             "oneway_yes": {
                 "label": "Sentido único",
                 "options": {
+                    "no": "Non",
                     "undefined": "Suponse Si",
-                    "yes": "Si",
-                    "no": "Non"
+                    "yes": "Si"
                 }
             },
             "opening_hours": {
@@ -786,13 +785,13 @@
             },
             "structure": {
                 "label": "Estructura",
-                "placeholder": "Descoñecido",
                 "options": {
                     "bridge": "Ponte",
-                    "tunnel": "Túnel",
+                    "cutting": "Desmonte",
                     "embankment": "Terraplén",
-                    "cutting": "Desmonte"
-                }
+                    "tunnel": "Túnel"
+                },
+                "placeholder": "Descoñecido"
             },
             "supervised": {
                 "label": "Vixiado"

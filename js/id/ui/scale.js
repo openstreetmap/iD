@@ -1,11 +1,11 @@
 iD.ui.Scale = function(context) {
     var projection = context.projection,
-        imperial = (iD.detect().locale.toLowerCase() === 'en-us'),
         maxLength = 180,
         tickHeight = 8;
 
     function scaleDefs(loc1, loc2) {
         var lat = (loc2[1] + loc1[1]) / 2,
+            imperial = (iD.detect().locale.toLowerCase() === 'en-us'),
             conversion = (imperial ? 3.28084 : 1),
             dist = iD.geo.lonToMeters(loc2[0] - loc1[0], lat) * conversion,
             scale = { dist: 0, px: 0, text: '' },

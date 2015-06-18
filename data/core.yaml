@@ -268,6 +268,9 @@ en:
     custom_prompt: "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
     fix_misalignment: Fix alignment
     reset: reset
+    minimap:
+      description: Minimap
+      tooltip: Show a zoomed out map to help locate the area currently displayed.
   map_data:
     title: Map Data
     description: Map Data
@@ -463,6 +466,11 @@ en:
       If you can't finish your edits in one sitting, you can leave the editor
       window and come back (on the same browser and computer), and the
       editor application will offer to restore your work.
+
+      ### Using the editor
+
+      A list of available keyboard shortcuts can be found [here](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).
+
     roads: |
       # Roads
 

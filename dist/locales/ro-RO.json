@@ -138,7 +138,6 @@
     "commit": {
         "title": "Salveaza modificarile",
         "description_placeholder": "O scurtă descriere a contribuției tale.",
-        "message_label": "Consemnează mesaj.",
         "save": "Salveaza",
         "cancel": "Renunță",
         "warnings": "Atenționări",
@@ -265,8 +264,8 @@
             "address": {
                 "label": "Adresă",
                 "placeholders": {
-                    "street": "Stradă",
-                    "city": "Oraș"
+                    "city": "Oraș",
+                    "street": "Stradă"
                 }
             },
             "aeroway": {
@@ -320,9 +319,9 @@
             "internet_access": {
                 "label": "Acces internet",
                 "options": {
-                    "wlan": "Wifi",
+                    "terminal": "Terminal",
                     "wired": "Conectat",
-                    "terminal": "Terminal"
+                    "wlan": "Wifi"
                 }
             },
             "landuse": {

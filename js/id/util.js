@@ -139,7 +139,7 @@ iD.util.editDistance = function(a, b) {
 // 1. Only works on HTML elements, not SVG
 // 2. Does not cause style recalculation
 iD.util.fastMouse = function(container) {
-    var rect = _.clone(container.getBoundingClientRect()),
+    var rect = container.getBoundingClientRect(),
         rectLeft = rect.left,
         rectTop = rect.top,
         clientLeft = +container.clientLeft,

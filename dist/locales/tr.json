@@ -226,7 +226,6 @@
     "commit": {
         "title": "Değişiklikleri kaydet",
         "description_placeholder": "Katkı sağlayanlar hakkında kısa açıklama",
-        "message_label": "Mesajı işle",
         "upload_explanation": "Yüklediğin değişiklikler OpenStreetMap verilerini kullanan bütün haritalarda görülebilecek. ",
         "upload_explanation_with_user": "{user} olarak yüklediğin değişiklikler OpenStreetMap verilerini kullanan bütün haritalarda görülebilecek. ",
         "save": "Kaydet",
@@ -487,39 +486,39 @@
         "fields": {
             "access": {
                 "label": "Ulaşım",
+                "options": {
+                    "designated": {
+                        "description": "Giriş, imlere ya da yerel yasalara göre olurlanmış",
+                        "title": "Ayrılmış"
+                    },
+                    "destination": {
+                        "description": "Giriş, yalnız varılacak yere ulaşmak için olurlu",
+                        "title": "Hedef"
+                    },
+                    "no": {
+                        "description": "Giriş kamuya açık değildir",
+                        "title": "Yasak"
+                    },
+                    "permissive": {
+                        "description": "Sahibi geri çekene kadar giriş açık",
+                        "title": "İzin veren"
+                    },
+                    "private": {
+                        "description": "Giriş, sahibinin oluruna bağlı",
+                        "title": "Özel"
+                    },
+                    "yes": {
+                        "description": "Yasaca girişe izin verilmiş; geçme önceliği",
+                        "title": "Serbest"
+                    }
+                },
                 "placeholder": "Bilinmeyen",
                 "types": {
                     "access": "Genel",
-                    "foot": "Yürüyerek",
-                    "motor_vehicle": "Motorlu araçlar",
                     "bicycle": "Bisikletler",
-                    "horse": "Atlar"
-                },
-                "options": {
-                    "yes": {
-                        "title": "Serbest",
-                        "description": "Yasaca girişe izin verilmiş; geçme önceliği"
-                    },
-                    "no": {
-                        "title": "Yasak",
-                        "description": "Giriş kamuya açık değildir"
-                    },
-                    "permissive": {
-                        "title": "İzin veren",
-                        "description": "Sahibi geri çekene kadar giriş açık"
-                    },
-                    "private": {
-                        "title": "Özel",
-                        "description": "Giriş, sahibinin oluruna bağlı"
-                    },
-                    "designated": {
-                        "title": "Ayrılmış",
-                        "description": "Giriş, imlere ya da yerel yasalara göre olurlanmış"
-                    },
-                    "destination": {
-                        "title": "Hedef",
-                        "description": "Giriş, yalnız varılacak yere ulaşmak için olurlu"
-                    }
+                    "foot": "Yürüyerek",
+                    "horse": "Atlar",
+                    "motor_vehicle": "Motorlu araçlar"
                 }
             },
             "access_simple": {
@@ -532,16 +531,16 @@
             "address": {
                 "label": "Adres",
                 "placeholders": {
+                    "city": "Şehir",
+                    "country": "Ülke",
+                    "hamlet": "Küçük köy",
                     "housename": "Ev adı",
                     "housenumber": "123",
-                    "street": "Sokak",
-                    "city": "Şehir",
-                    "postcode": "Posta kodu",
                     "place": "Yer",
-                    "hamlet": "Küçük köy",
+                    "postcode": "Posta kodu",
                     "province": "İl",
                     "state": "Uçbeylik",
-                    "country": "Ülke"
+                    "street": "Sokak"
                 }
             },
             "admin_level": {
@@ -553,9 +552,9 @@
             "aerialway/access": {
                 "label": "Erişim",
                 "options": {
+                    "both": "İkisi",
                     "entry": "Giriş",
-                    "exit": "Çıkış",
-                    "both": "İkisi"
+                    "exit": "Çıkış"
                 }
             },
             "aerialway/bubble": {
@@ -579,9 +578,9 @@
             "aerialway/summer/access": {
                 "label": "Erişim (yaz)",
                 "options": {
+                    "both": "İkisi",
                     "entry": "Giriş",
-                    "exit": "Çıkış",
-                    "both": "İkisi"
+                    "exit": "Çıkış"
                 }
             },
             "aeroway": {
@@ -702,11 +701,11 @@
             "internet_access": {
                 "label": "İnternet Bağlantısı",
                 "options": {
-                    "yes": "Evet",
                     "no": "Hayır",
-                    "wlan": "Wifi",
+                    "terminal": "Terminal",
                     "wired": "Kablolu",
-                    "terminal": "Terminal"
+                    "wlan": "Wifi",
+                    "yes": "Evet"
                 }
             },
             "lamp_type": {
@@ -829,11 +828,11 @@
             },
             "structure": {
                 "label": "Yapı",
-                "placeholder": "Bilinmeyen",
                 "options": {
                     "bridge": "Köprü",
                     "tunnel": "Tünel"
-                }
+                },
+                "placeholder": "Bilinmeyen"
             },
             "supervised": {
                 "label": "Gözetimli"
