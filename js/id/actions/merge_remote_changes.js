@@ -95,7 +95,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
 
             } else if (option === 'force_local' && local) {
                 target = iD.Entity(local);
-                if (remote && remote.visible) {
+                if (remote) {
                     target = target.update({ version: remote.version });
                 }
                 updates.replacements.push(target);
