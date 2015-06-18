@@ -277,7 +277,7 @@ iD.History = function(context) {
                                 .value();
 
                         if (!_.isEmpty(missing)) {
-                            context.connection().loadMultiple(missing, function(err, result) {
+                            var childNodesLoaded = function(err, result) {
                                 if (err) return;
 
                                 var visible = _.groupBy(result.data, 'visible');
@@ -285,10 +285,15 @@ iD.History = function(context) {
                                     stack[0].graph.rebase(visible.true, _.pluck(stack, 'graph'), false);
                                     tree.rebase(visible.true, false);
                                 }
-                                // if (!_.isEmpty(visible.false)) {
-                                    // todo: something here!
-                                // }
-                            });
+
+                                // fetch older versions of nodes that were deleted..
+                                _.each(visible.false, function(entity) {
+                                    context.connection()
+                                        .loadEntityVersion(entity.id, +entity.version - 1, childNodesLoaded);
+                                });
+                            };
+
+                            context.connection().loadMultiple(missing, childNodesLoaded);
                         }
                     }
                 }
