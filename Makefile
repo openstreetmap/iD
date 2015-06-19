@@ -89,7 +89,8 @@ dist/iD.js: \
 	js/id/ui/intro/*.js \
 	js/id/presets.js \
 	js/id/presets/*.js \
-	js/id/validate.js \
+	js/id/validations.js \
+	js/id/validations/*.js \
 	js/id/end.js \
 	js/lib/locale.js \
 	data/introGraph.js

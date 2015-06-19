@@ -164,6 +164,13 @@ iD.History = function(context) {
             };
         },
 
+        validate: function(changes) {
+            return _(iD.validations)
+                .map(function(fn) { return fn()(changes, stack[index].graph); })
+                .flatten()
+                .value();
+        },
+
         hasChanges: function() {
             return this.difference().length() > 0;
         },

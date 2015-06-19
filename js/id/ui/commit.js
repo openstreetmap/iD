@@ -52,7 +52,7 @@ iD.ui.Commit = function(context) {
 
         // Warnings
         var warnings = body.selectAll('div.warning-section')
-            .data([iD.validate(changes, context.graph())])
+            .data([context.history().validate(changes)])
             .enter()
             .append('div')
             .attr('class', 'modal-section warning-section fillL2')
