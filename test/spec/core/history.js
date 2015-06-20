@@ -272,6 +272,13 @@ describe("iD.History", function () {
     });
 
     describe("#toJSON", function() {
+        it("doesn't generate unsaveable changes", function() {
+            var node_1 = iD.Node({id: 'n-1'});
+            history.perform(iD.actions.AddEntity(node_1));
+            history.perform(iD.actions.DeleteNode('n-1'));
+            expect(history.toJSON()).to.be.not.ok;
+        });
+
         it("generates v3 JSON", function() {
             var node_1 = iD.Node({id: 'n-1'}),
                 node1 = iD.Node({id: 'n1'}),

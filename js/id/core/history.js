@@ -198,7 +198,7 @@ iD.History = function(context) {
         },
 
         toJSON: function() {
-            if (stack.length <= 1) return;
+            if (!this.hasChanges()) return;
 
             var allEntities = {},
                 baseEntities = {},
