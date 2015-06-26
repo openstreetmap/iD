@@ -468,6 +468,13 @@
         "on_wiki": "{tag} on wiki.osm.org",
         "used_with": "used with {type}"
     },
+    "restrictions": {
+        "restrict_edit": "You may not edit because",
+        "restrict_tag": "You may not change tags because",
+        "this_is": "this feature is",
+        "these_are": "these features are",
+        "connected_to_hidden": "connected to other hidden features."
+    },
     "validations": {
         "untagged_point": "Untagged point",
         "untagged_line": "Untagged line",
