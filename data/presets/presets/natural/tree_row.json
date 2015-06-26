@@ -1,0 +1,15 @@
+{
+	"fields": [
+        "leaf_type",
+        "leaf_cycle"
+    ],
+    "icon": "park",
+    "geometry": [
+        "line"
+    ],
+    "terms": [],
+    "tags": {
+        "natural": "tree_row"
+    },
+    "name": "Tree row"
+}
