@@ -2651,6 +2651,10 @@
                 "name": "Estructura artificial",
                 "terms": "manufactura, industrial, fabricado, manufacturado, fábrica, industria, hecho por el hombre"
             },
+            "man_made/adit": {
+                "name": "Entrada a una mina",
+                "terms": "boca,cueva,entrada,mina"
+            },
             "man_made/breakwater": {
                 "name": "Rompeolas",
                 "terms": "rompeolas, escollera, dique, malecón, espigón, andén, muelle, desembarcadero"
@@ -2674,6 +2678,10 @@
             "man_made/mast": {
                 "name": "Mástil de radio",
                 "terms": "mástil, torre, estructura, radio, telefonía, telecomunicación"
+            },
+            "man_made/monitoring_station": {
+                "name": "Estación de medidas",
+                "terms": "Estación,medidas,monitor"
             },
             "man_made/observation": {
                 "name": "Torre de Observación",
@@ -2717,7 +2725,7 @@
             },
             "man_made/water_well": {
                 "name": "Pozo de Agua",
-                "terms": "Pozo de Agua"
+                "terms": "agua,pozo,pozo de agua"
             },
             "man_made/water_works": {
                 "name": "Abastecimiento de agua potable",
@@ -2753,7 +2761,7 @@
             },
             "natural/cave_entrance": {
                 "name": "Entrada de la cueva",
-                "terms": "cueva, gruta, caverna, entrada"
+                "terms": "cueva, gruta, caverna, entrada,boca"
             },
             "natural/cliff": {
                 "name": "Acantilado",
@@ -2783,13 +2791,21 @@
                 "name": "Pico",
                 "terms": "pico, montaña, cresta, cima, cúspide, cumbre, picacho, aguja"
             },
+            "natural/saddle": {
+                "name": "Collado",
+                "terms": "coll,collado,puerto de montaña,punto de silla,silla"
+            },
+            "natural/sand": {
+                "name": "Arena",
+                "terms": "banco de arena,duna,desierto"
+            },
             "natural/scree": {
                 "name": "Acumulación de piedras y rocas",
                 "terms": "conglomeráticos, pedregal"
             },
             "natural/scrub": {
                 "name": "Matorral",
-                "terms": "monte bajo, maleza, matorral, mata, monte"
+                "terms": "monte bajo,maleza,matorral,mata,monte"
             },
             "natural/spring": {
                 "name": "Manantial",
@@ -2798,6 +2814,14 @@
             "natural/tree": {
                 "name": "Árbol",
                 "terms": "árbol, arbusto"
+            },
+            "natural/tree_row": {
+                "name": "Hilera de árboles",
+                "terms": "árboles,hilera,seto"
+            },
+            "natural/volcano": {
+                "name": "Volcán",
+                "terms": "volcán"
             },
             "natural/water": {
                 "name": "Lámina de agua",
