@@ -1,0 +1,19 @@
+{
+    "icon": "triangle",
+    "fields": [
+        "elevation",
+        "status"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "natural": "volcano"
+    },
+    "terms": [
+        "mountain",
+        "crater"
+    ],
+    "name": "Volcano"
+}
