@@ -1,8 +1,7 @@
 {
     "icon": "triangle",
     "fields": [
-        "elevation",
-        "status"
+        "elevation"
     ],
     "geometry": [
         "point",
