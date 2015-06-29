@@ -7,7 +7,7 @@
         "fee",
         "access_simple"
     ],
-    "terms": [],
+    "terms": ["cavern","hollow","grotto","shelter","cavity"],
     "tags": {
         "natural": "cave_entrance"
     },
