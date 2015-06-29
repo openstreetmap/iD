@@ -5,7 +5,6 @@
     ],
     "fields": [
         "operator",
-        "resource",
         "depth"
     ],
     "terms": ["entrance",
