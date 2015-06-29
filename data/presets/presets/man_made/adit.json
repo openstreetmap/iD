@@ -4,8 +4,7 @@
         "area"
     ],
     "fields": [
-        "operator",
-        "depth"
+        "operator"
     ],
     "terms": ["entrance",
         "underground",
