@@ -1482,6 +1482,7 @@
         "fields": [
             "operator",
             "address",
+            "recycling/type",
             "recycling/cans",
             "recycling/glass",
             "recycling/paper",
