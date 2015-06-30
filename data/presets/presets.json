@@ -5417,6 +5417,25 @@
         },
         "name": "Man Made"
     },
+    "man_made/adit": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "fields": [
+            "operator"
+        ],
+        "terms": [
+            "entrance",
+            "underground",
+            "mine",
+            "cave"
+        ],
+        "tags": {
+            "man_made": "adit"
+        },
+        "name": "Adit"
+    },
     "man_made/breakwater": {
         "geometry": [
             "line",
@@ -5774,7 +5793,13 @@
             "fee",
             "access_simple"
         ],
-        "terms": [],
+        "terms": [
+            "cavern",
+            "hollow",
+            "grotto",
+            "shelter",
+            "cavity"
+        ],
         "tags": {
             "natural": "cave_entrance"
         },
@@ -5875,6 +5900,25 @@
         ],
         "name": "Peak"
     },
+    "natural/saddle": {
+        "icon": "triangle-stroked",
+        "fields": [
+            "elevation"
+        ],
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "natural": "saddle"
+        },
+        "terms": [
+            "pass",
+            "mountain pass",
+            "top"
+        ],
+        "name": "Saddle"
+    },
     "natural/scree": {
         "geometry": [
             "area"
@@ -5894,7 +5938,10 @@
         "tags": {
             "natural": "scrub"
         },
-        "terms": [],
+        "terms": [
+            "bush",
+            "shrubs"
+        ],
         "name": "Scrub"
     },
     "natural/spring": {
@@ -5924,6 +5971,40 @@
             "natural": "tree"
         },
         "name": "Tree"
+    },
+    "natural/tree_row": {
+        "fields": [
+            "leaf_type",
+            "leaf_cycle",
+            "denotation"
+        ],
+        "icon": "park",
+        "geometry": [
+            "line"
+        ],
+        "terms": [],
+        "tags": {
+            "natural": "tree_row"
+        },
+        "name": "Tree row"
+    },
+    "natural/volcano": {
+        "icon": "triangle",
+        "fields": [
+            "elevation"
+        ],
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "natural": "volcano"
+        },
+        "terms": [
+            "mountain",
+            "crater"
+        ],
+        "name": "Volcano"
     },
     "natural/water": {
         "fields": [

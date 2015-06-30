@@ -2404,6 +2404,11 @@ en:
         # 'man_made=*'
         name: Man Made
         terms: "<translate with synonyms or related terms for 'Man Made', separated by commas>"
+      man_made/adit:
+        # man_made=adit
+        name: Adit
+        # 'terms: entrance,underground,mine,cave'
+        terms: "<translate with synonyms or related terms for 'Adit', separated by commas>"
       man_made/breakwater:
         # man_made=breakwater
         name: Breakwater
@@ -2513,6 +2518,7 @@ en:
       natural/cave_entrance:
         # natural=cave_entrance
         name: Cave Entrance
+        # 'terms: cavern,hollow,grotto,shelter,cavity'
         terms: "<translate with synonyms or related terms for 'Cave Entrance', separated by commas>"
       natural/cliff:
         # natural=cliff
@@ -2544,6 +2550,11 @@ en:
         name: Peak
         # 'terms: acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top'
         terms: "<translate with synonyms or related terms for 'Peak', separated by commas>"
+      natural/saddle:
+        # natural=saddle
+        name: Saddle
+        # 'terms: pass,mountain pass,top'
+        terms: "<translate with synonyms or related terms for 'Saddle', separated by commas>"
       natural/scree:
         # natural=scree
         name: Scree
@@ -2552,6 +2563,7 @@ en:
       natural/scrub:
         # natural=scrub
         name: Scrub
+        # 'terms: bush,shrubs'
         terms: "<translate with synonyms or related terms for 'Scrub', separated by commas>"
       natural/spring:
         # natural=spring
@@ -2561,6 +2573,15 @@ en:
         # natural=tree
         name: Tree
         terms: "<translate with synonyms or related terms for 'Tree', separated by commas>"
+      natural/tree_row:
+        # natural=tree_row
+        name: Tree row
+        terms: "<translate with synonyms or related terms for 'Tree row', separated by commas>"
+      natural/volcano:
+        # natural=volcano
+        name: Volcano
+        # 'terms: mountain,crater'
+        terms: "<translate with synonyms or related terms for 'Volcano', separated by commas>"
       natural/water:
         # natural=water
         name: Water

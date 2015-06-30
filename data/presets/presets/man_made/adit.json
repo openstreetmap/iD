@@ -1,0 +1,17 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+        "operator"
+    ],
+    "terms": ["entrance",
+        "underground",
+        "mine",
+        "cave"],
+    "tags": {
+        "man_made": "adit"
+    },
+    "name": "Adit"
+}

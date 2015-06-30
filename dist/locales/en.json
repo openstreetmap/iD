@@ -2693,6 +2693,10 @@
                 "name": "Man Made",
                 "terms": ""
             },
+            "man_made/adit": {
+                "name": "Adit",
+                "terms": "entrance,underground,mine,cave"
+            },
             "man_made/breakwater": {
                 "name": "Breakwater",
                 "terms": ""
@@ -2795,7 +2799,7 @@
             },
             "natural/cave_entrance": {
                 "name": "Cave Entrance",
-                "terms": ""
+                "terms": "cavern,hollow,grotto,shelter,cavity"
             },
             "natural/cliff": {
                 "name": "Cliff",
@@ -2825,13 +2829,17 @@
                 "name": "Peak",
                 "terms": "acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top"
             },
+            "natural/saddle": {
+                "name": "Saddle",
+                "terms": "pass,mountain pass,top"
+            },
             "natural/scree": {
                 "name": "Scree",
                 "terms": "loose rocks"
             },
             "natural/scrub": {
                 "name": "Scrub",
-                "terms": ""
+                "terms": "bush,shrubs"
             },
             "natural/spring": {
                 "name": "Spring",
@@ -2840,6 +2848,14 @@
             "natural/tree": {
                 "name": "Tree",
                 "terms": ""
+            },
+            "natural/tree_row": {
+                "name": "Tree row",
+                "terms": ""
+            },
+            "natural/volcano": {
+                "name": "Volcano",
+                "terms": "mountain,crater"
             },
             "natural/water": {
                 "name": "Water",
