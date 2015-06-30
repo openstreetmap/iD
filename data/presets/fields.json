@@ -947,7 +947,13 @@
     "recycling/type": {
         "key": "recycling_type",
         "type": "combo",
-        "label": "Recycling Type"
+        "label": "Recycling Type",
+        "strings": {
+            "options": {
+                "container": "Container",
+                "centre": "Recycling Center"
+            }
+        }
     },
     "ref": {
         "key": "ref",

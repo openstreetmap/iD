@@ -1200,7 +1200,11 @@
                 "label": "Accepts Paper"
             },
             "recycling/type": {
-                "label": "Recycling Type"
+                "label": "Recycling Type",
+                "options": {
+                    "container": "Container",
+                    "centre": "Recycling Center"
+                }
             },
             "ref": {
                 "label": "Reference"

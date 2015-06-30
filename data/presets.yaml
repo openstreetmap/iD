@@ -742,6 +742,11 @@ en:
       recycling/type:
         # 'recycling_type=*'
         label: Recycling Type
+        options:
+          # recycling_type=centre
+          centre: Recycling Center
+          # recycling_type=container
+          container: Container
       ref:
         # 'ref=*'
         label: Reference

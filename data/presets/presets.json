@@ -1478,7 +1478,7 @@
         "name": "Ranger Station"
     },
     "amenity/recycling": {
-        "icon": "recycling",
+        "icon": "waste-basket",
         "fields": [
             "operator",
             "address",
