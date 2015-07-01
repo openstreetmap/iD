@@ -25,11 +25,11 @@ iD.presets.Collection = function(collection) {
             value = value.toLowerCase();
 
             var searchable = _.filter(collection, function(a) {
-                return a.searchable !== false && a.suggestion !== true;
-            }),
-            suggestions = _.filter(collection, function(a) {
-                return a.suggestion === true;
-            });
+                    return a.searchable !== false && a.suggestion !== true;
+                }),
+                suggestions = _.filter(collection, function(a) {
+                    return a.suggestion === true;
+                });
 
             // matches value to preset.name
             var leading_name = _.filter(searchable, function(a) {
@@ -42,8 +42,13 @@ iD.presets.Collection = function(collection) {
 
             // matches value to preset.terms values
             var leading_terms = _.filter(searchable, function(a) {
-                return _.any(a.terms() || [], leading);
-            });
+                    return _.any(a.terms() || [], leading);
+                });
+
+            // matches value to preset.tags values
+            var leading_tag_values = _.filter(searchable, function(a) {
+                    return _.any(_.without(_.values(a.tags || {}), '*'), leading);
+                });
 
             function leading(a) {
                 var index = a.indexOf(value);
@@ -106,6 +111,7 @@ iD.presets.Collection = function(collection) {
 
             var results = leading_name.concat(
                             leading_terms,
+                            leading_tag_values,
                             leading_suggestions.slice(0, maxSuggestionResults+5),
                             levenstein_name,
                             leventstein_terms,
