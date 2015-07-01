@@ -881,6 +881,10 @@
         },
         {
             "key": "highway",
+            "value": "corridor"
+        },
+        {
+            "key": "highway",
             "value": "crossing"
         },
         {

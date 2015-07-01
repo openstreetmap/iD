@@ -27,7 +27,8 @@ iD.Features = function(context) {
         'cycleway': true,
         'bridleway': true,
         'steps': true,
-        'pedestrian': true
+        'pedestrian': true,
+        'corridor': true
     };
 
     var past_futures = {

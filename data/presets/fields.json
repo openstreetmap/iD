@@ -677,6 +677,12 @@
         "type": "number",
         "label": "Length (Meters)"
     },
+    "level": {
+        "key": "level",
+        "type": "combo",
+        "label": "Level",
+        "universal": true
+    },
     "levels": {
         "key": "building:levels",
         "type": "number",

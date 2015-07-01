@@ -507,6 +507,9 @@ en:
       length:
         # 'length=*'
         label: Length (Meters)
+      level:
+        # 'level=*'
+        label: Level
       levels:
         # 'building:levels=*'
         label: Levels
@@ -1993,6 +1996,11 @@ en:
         # highway=bus_stop
         name: Bus Stop
         terms: "<translate with synonyms or related terms for 'Bus Stop', separated by commas>"
+      highway/corridor:
+        # highway=corridor
+        name: Indoor Corridor
+        # 'terms: indoor'
+        terms: "<translate with synonyms or related terms for 'Indoor Corridor', separated by commas>"
       highway/crossing:
         # highway=crossing
         name: Crossing

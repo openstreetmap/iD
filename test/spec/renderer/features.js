@@ -119,6 +119,7 @@ describe('iD.Features', function() {
             iD.Way({id: 'bridleway', tags: {highway: 'bridleway'}, version: 1}),
             iD.Way({id: 'steps', tags: {highway: 'steps'}, version: 1}),
             iD.Way({id: 'pedestrian', tags: {highway: 'pedestrian'}, version: 1}),
+            iD.Way({id: 'corridor', tags: {highway: 'corridor'}, version: 1}),
 
             // Buildings
             iD.Way({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
@@ -266,7 +267,7 @@ describe('iD.Features', function() {
 
             doMatch([
                 'path', 'footway', 'cycleway', 'bridleway',
-                'steps', 'pedestrian'
+                'steps', 'pedestrian', 'corridor'
             ]);
 
             dontMatch([
