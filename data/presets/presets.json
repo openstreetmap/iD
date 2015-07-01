@@ -3645,9 +3645,10 @@
             "footway": "crossing"
         },
         "terms": [],
-        "name": "Crossing"
+        "name": "Street Crossing"
     },
     "footway/crosswalk": {
+        "icon": "highway-footway",
         "fields": [
             "crossing",
             "access",
@@ -3666,7 +3667,7 @@
         "terms": [
             "zebra crossing"
         ],
-        "name": "Crosswalk"
+        "name": "Pedestrian Crosswalk"
     },
     "footway/sidewalk": {
         "fields": [
@@ -3884,7 +3885,7 @@
             "highway": "crossing"
         },
         "terms": [],
-        "name": "Crossing"
+        "name": "Street Crossing"
     },
     "highway/crosswalk": {
         "fields": [
@@ -3902,7 +3903,7 @@
         "terms": [
             "zebra crossing"
         ],
-        "name": "Crosswalk"
+        "name": "Pedestrian Crosswalk"
     },
     "highway/cycleway": {
         "icon": "highway-cycleway",
@@ -4091,7 +4092,7 @@
             "highway": "pedestrian"
         },
         "terms": [],
-        "name": "Pedestrian"
+        "name": "Pedestrian Street"
     },
     "highway/primary": {
         "icon": "highway-primary",
@@ -6939,12 +6940,12 @@
         "terms": [
             "crossing",
             "railroad crossing",
-            "railway crossing",
+            "level crossing",
             "grade crossing",
             "road through railroad",
             "train crossing"
         ],
-        "name": "Level Crossing"
+        "name": "Railway Crossing"
     },
     "railway/monorail": {
         "icon": "railway-monorail",

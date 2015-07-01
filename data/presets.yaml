@@ -1934,13 +1934,13 @@ en:
         terms: "<translate with synonyms or related terms for 'Entrance/Exit', separated by commas>"
       footway/crossing:
         # 'highway=footway, footway=crossing'
-        name: Crossing
-        terms: "<translate with synonyms or related terms for 'Crossing', separated by commas>"
+        name: Street Crossing
+        terms: "<translate with synonyms or related terms for 'Street Crossing', separated by commas>"
       footway/crosswalk:
         # 'highway=footway, footway=crossing, crossing=zebra'
-        name: Crosswalk
+        name: Pedestrian Crosswalk
         # 'terms: zebra crossing'
-        terms: "<translate with synonyms or related terms for 'Crosswalk', separated by commas>"
+        terms: "<translate with synonyms or related terms for 'Pedestrian Crosswalk', separated by commas>"
       footway/sidewalk:
         # 'highway=footway, footway=sidewalk'
         name: Sidewalk
@@ -2003,13 +2003,13 @@ en:
         terms: "<translate with synonyms or related terms for 'Indoor Corridor', separated by commas>"
       highway/crossing:
         # highway=crossing
-        name: Crossing
-        terms: "<translate with synonyms or related terms for 'Crossing', separated by commas>"
+        name: Street Crossing
+        terms: "<translate with synonyms or related terms for 'Street Crossing', separated by commas>"
       highway/crosswalk:
         # 'highway=crossing, crossing=zebra'
-        name: Crosswalk
+        name: Pedestrian Crosswalk
         # 'terms: zebra crossing'
-        terms: "<translate with synonyms or related terms for 'Crosswalk', separated by commas>"
+        terms: "<translate with synonyms or related terms for 'Pedestrian Crosswalk', separated by commas>"
       highway/cycleway:
         # highway=cycleway
         name: Cycle Path
@@ -2048,8 +2048,8 @@ en:
         terms: "<translate with synonyms or related terms for 'Path', separated by commas>"
       highway/pedestrian:
         # highway=pedestrian
-        name: Pedestrian
-        terms: "<translate with synonyms or related terms for 'Pedestrian', separated by commas>"
+        name: Pedestrian Street
+        terms: "<translate with synonyms or related terms for 'Pedestrian Street', separated by commas>"
       highway/primary:
         # highway=primary
         name: Primary Road
@@ -2833,9 +2833,9 @@ en:
         terms: "<translate with synonyms or related terms for 'Railway Halt', separated by commas>"
       railway/level_crossing:
         # railway=level_crossing
-        name: Level Crossing
-        # 'terms: crossing,railroad crossing,railway crossing,grade crossing,road through railroad,train crossing'
-        terms: "<translate with synonyms or related terms for 'Level Crossing', separated by commas>"
+        name: Railway Crossing
+        # 'terms: crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing'
+        terms: "<translate with synonyms or related terms for 'Railway Crossing', separated by commas>"
       railway/monorail:
         # railway=monorail
         name: Monorail
