@@ -3,9 +3,18 @@
     "keys": [
         "addr:housename",
         "addr:housenumber",
+        "addr:conscriptionnumber",
         "addr:street",
         "addr:city",
-        "addr:postcode"
+        "addr:postcode",
+        "addr:place",
+        "addr:hamlet",
+        "addr:suburb",
+        "addr:subdistrict",
+        "addr:district",
+        "addr:province",
+        "addr:state",
+        "addr:country"
     ],
     "reference": {"key": "addr"},
     "icon": "address",
@@ -15,6 +24,7 @@
         "placeholders": {
           "housename": "Housename",
           "housenumber": "123",
+          "conscriptionnumber": "123",
           "street": "Street",
           "city": "City",
           "postcode": "Postcode",

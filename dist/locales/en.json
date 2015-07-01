@@ -639,6 +639,7 @@
                 "placeholders": {
                     "housename": "Housename",
                     "housenumber": "123",
+                    "conscriptionnumber": "123",
                     "street": "Street",
                     "city": "City",
                     "postcode": "Postcode",
