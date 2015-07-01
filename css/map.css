@@ -1207,6 +1207,40 @@ text.gpx {
     fill: #ff5800;
 }
 
+/* Mapillary sign Layer */
+
+.t {
+    font-size: 28px;
+    z-index: 100;
+}
+
+.node body {
+    min-width: 30px;
+}
+
+.layer-mapillary-signs {
+    pointer-events: none;
+}
+
+.layer-mapillary-signs body {
+    pointer-events: visible;
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
+}
+
+
+.layer-mapillary-signs body:hover {
+    border: 1px solid red;
+}
+
+.layer-mapillary-signs .node.selected {
+    stroke-width: 4;
+    border: 1px solid yellow;
+}
+
+.layer-mapillary-signs .t {
+    position: absolute;
+
 .layer-mapillary g:hover path.viewfield,
 .layer-mapillary g.selected path.viewfield,
 .layer-mapillary g path.viewfield {

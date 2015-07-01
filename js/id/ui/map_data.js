@@ -46,6 +46,10 @@ iD.ui.MapData = function(context) {
             context.background().toggleMapillaryLayer();
             update();
         }
+        function clickMapillarySigns() {
+            context.background().toggleMapillarySignsLayer();
+            update();
+        }
 
         function drawList(selection, data, type, name, change, active) {
             var items = selection.selectAll('li')
@@ -99,7 +103,8 @@ iD.ui.MapData = function(context) {
 
             var hasGpx = context.background().hasGpxLayer(),
                 showsGpx = context.background().showsGpxLayer(),
-                showsMapillary = context.background().showsMapillaryLayer();
+                showsMapillary = context.background().showsMapillaryLayer(),
+                showsMapillarySigns = context.background().showsMapillarySignsLayer();
 
             gpxLayerItem
                 .classed('active', showsGpx)
@@ -111,6 +116,11 @@ iD.ui.MapData = function(context) {
                 .classed('active', showsMapillary)
                 .selectAll('input')
                 .property('checked', showsMapillary);
+
+            mapillarySignsLayerItem
+                .classed('active', showsMapillarySigns)
+                .selectAll('input')
+                .property('checked', showsMapillarySigns);
         }
 
         function hidePanel() { setVisible(false); }
@@ -212,7 +222,24 @@ iD.ui.MapData = function(context) {
         label.append('span')
             .text(t('mapillary.title'));
 
-        // gpx
+        // mapillary signs
+        var mapillarySignsLayerItem = layerContainer.append('ul')
+            .attr('class', 'layer-list')
+            .append('li');
+
+        var label_signs = mapillarySignsLayerItem.append('label')
+            .call(bootstrap.tooltip()
+                .title(t('mapillary_signs.tooltip'))
+                .placement('top'));
+
+        label_signs.append('input')
+            .attr('type', 'checkbox')
+            .on('change', clickMapillarySigns);
+
+        label_signs.append('span')
+            .text(t('mapillary_signs.title'));
+
+         //gpx
         var gpxLayerItem = layerContainer.append('ul')
             .style('display', iD.detect().filedrop ? 'block' : 'none')
             .attr('class', 'layer-list')
