@@ -1,17 +1,18 @@
-iD.MapillarySignsLayer = function (context) {
+iD.MapillarySignsLayer = function(context) {
     var enable = false,
         initiated = false,
         currentImage,
         svg, image_preview_div, request, signs_defs;
-    request = d3.json('css/traffico-release-0.1.5/global-patched.json',
-        function (error, data) {
-            console.error(arguments);
-            if (error) return;
-            signs_defs=data;
-        });
+
+    request = d3.json('css/traffico-release-0.1.5/global-patched.json', function(error, data) {
+        // console.error(arguments);
+        if (error) return;
+        signs_defs = data;
+    });
+
     function show(image) {
         svg.selectAll('.node')
-            .classed('selected', function (d) {
+            .classed('selected', function(d) {
                 return currentImage && d.key === currentImage.key;
             });
 
@@ -42,7 +43,6 @@ iD.MapillarySignsLayer = function (context) {
             .data([0]);
 
         svg.enter().append('svg');
-
 
         svg.style('display', enable ? 'block' : 'none');
 
@@ -90,9 +90,9 @@ iD.MapillarySignsLayer = function (context) {
             'client_id=NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzoxNjQ3MDY4ZTUxY2QzNGI2&min_lat=' +
             extent[0][1] + '&max_lat=' + extent[1][1] + '&min_lon=' +
             extent[0][0] + '&max_lon=' + extent[1][0] + '&limit=100&geojson=true',
-            function (error, data) {
+            function(error, data) {
                 if (error) return;
-                console.log(data);
+                // console.log(data);
                 var images = [];
 
                 for (var i = 0; i < data.features.length; i++) {
@@ -106,24 +106,25 @@ iD.MapillarySignsLayer = function (context) {
                 }
 
                 var foreignObjects = svg.selectAll('foreignObject')
-                    .data(images, function (d) {
+                    .data(images, function(d) {
                         return d.key;
                     });
 
                 var enter = foreignObjects.enter();
 
-                var body = enter.append('foreignObject')
+                enter.append('foreignObject')
                     .attr('x', '0')
                     .attr('y', '0')
                     .attr('width', '30px')
                     .attr('height', '30px')
                     .attr('class', 'node')
                     .append('xhtml:body')
-                    .html(function (d) {
-                        var sign_html = signs_defs[d.signs[0]['type']];
+                    .html(function(d) {
+                        var sign_html = signs_defs[d.signs[0].type];
                         return sign_html;
                     });
-                foreignObjects.on('click', function (data) {
+
+                foreignObjects.on('click', function(data) {
                     if (!data) {
                         d3.event.preventDefault();
                         return;
@@ -136,14 +137,14 @@ iD.MapillarySignsLayer = function (context) {
                         show(image);
                     }
                 })
-                    .on('mouseover', function (data) {
+                    .on('mouseover', function(data) {
                         if (!data) {
                             d3.event.preventDefault();
                             return;
                         }
                         show(data);
                     })
-                    .on('mouseout', function (data) {
+                    .on('mouseout', function(data) {
                         if (!data) {
                             d3.event.preventDefault();
                             return;
@@ -159,7 +160,7 @@ iD.MapillarySignsLayer = function (context) {
 
                 foreignObjects.exit()
                     .remove();
-                console.log(images);
+                // console.log(images);
                 if(!initiated) {
                     initiated = true;
                     //context.map().zoomOut();
@@ -167,13 +168,13 @@ iD.MapillarySignsLayer = function (context) {
             });
     }
 
-    render.enable = function (_) {
+    render.enable = function(_) {
         if (!arguments.length) return enable;
         enable = _;
         return render;
     };
 
-    render.dimensions = function (_) {
+    render.dimensions = function(_) {
         if (!arguments.length) return svg.dimensions();
         svg.dimensions(_);
         return render;
