@@ -1,5 +1,10 @@
-iD.MapillaryLayer = function (context) {
-    var enable = false,
+iD.MapillaryImageLayer = function (context) {
+    var roundedProjection = iD.svg.RoundProjection(context.projection),
+        urlSearch = 'https://a.mapillary.com/v2/search/s/geojson',
+        urlImage = 'http://mapillary.com/map/im/',
+        urlThumb = 'https://d1cuyjsrcm0gby.cloudfront.net/',
+        clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzoxNjQ3MDY4ZTUxY2QzNGI2',
+        enable = false,
         currentImage,
         svg, div, request;
 
@@ -13,10 +18,10 @@ iD.MapillaryLayer = function (context) {
             .classed('temp', image !== currentImage);
 
         div.selectAll('img')
-            .attr('src', 'https://d1cuyjsrcm0gby.cloudfront.net/' + image.key + '/thumb-320.jpg');
+            .attr('src', urlThumb + image.key + '/thumb-320.jpg');
 
         div.selectAll('a')
-            .attr('href', 'http://mapillary.com/map/im/' + image.key);
+            .attr('href', urlImage + image.key);
     }
 
     function hide() {
@@ -28,9 +33,9 @@ iD.MapillaryLayer = function (context) {
         div.classed('hidden', true);
     }
 
-    function transform(image) {
-        var t = 'translate(' + context.projection(image.loc) + ')';
-        if (image.ca) t += 'rotate(' + image.ca + ',0,0)';
+    function transform(d) {
+        var t = iD.svg.PointTransform(roundedProjection)(d);
+        if (d.ca) t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
         return t;
     }
 
@@ -80,7 +85,7 @@ iD.MapillaryLayer = function (context) {
             .attr('target', '_blank')
             .call(iD.svg.Icon('#icon-out-link', 'inline'))
             .append('span')
-            .text(t('mapillary.view_on_mapillary'));
+            .text(t('mapillary_images.view_on_mapillary'));
 
         if (!enable) {
             hide();
@@ -100,7 +105,7 @@ iD.MapillaryLayer = function (context) {
         if (request)
             request.abort();
 
-        request = d3.json('https://a.mapillary.com/v2/search/s/geojson?client_id=NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzoxNjQ3MDY4ZTUxY2QzNGI2&min_lat=' +
+        request = d3.json(urlSearch + '?client_id=' + clientId + '&min_lat=' +
             extent[0][1] + '&max_lat=' + extent[1][1] + '&min_lon=' +
             extent[0][0] + '&max_lon=' + extent[1][0] + '&max_results=100&geojson=true',
             function (error, data) {

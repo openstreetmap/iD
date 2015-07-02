@@ -1456,74 +1456,73 @@ text.gpx {
     fill: #FF26D4;
 }
 
-/* Mapillary Layer */
+/* Mapillary Image Layer */
 
-.layer-mapillary {
+.layer-mapillary-images {
     pointer-events: none;
 }
 
-.layer-mapillary g {
+.layer-mapillary-images g {
     pointer-events: visible;
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
 }
 
-.layer-mapillary g * {
+.layer-mapillary-images g * {
     stroke-width: 1;
     stroke: #444;
     fill: #ffc600;
 }
 
-.layer-mapillary g:hover * {
+.layer-mapillary-images g:hover * {
     stroke-width: 1;
     stroke: #333;
     fill: #ff9900;
 }
 
-.layer-mapillary g.selected  * {
+.layer-mapillary-images g.selected  * {
     stroke-width: 2;
     stroke: #222;
     fill: #ff5800;
 }
 
-.layer-mapillary g:hover path.viewfield,
-.layer-mapillary g.selected path.viewfield,
-.layer-mapillary g path.viewfield {
+.layer-mapillary-images g:hover path.viewfield,
+.layer-mapillary-images g.selected path.viewfield,
+.layer-mapillary-images g path.viewfield {
     stroke-width: 0;
     fill-opacity: 0.6;
-
-/* Mapillary sign Layer */
-
-.t {
-    font-size: 28px;
-    z-index: 100;
 }
 
-.node body {
-    min-width: 30px;
-}
+/* Mapillary Sign Layer */
 
 .layer-mapillary-signs {
     pointer-events: none;
 }
 
 .layer-mapillary-signs body {
+    min-width: 30px;
     pointer-events: visible;
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
 }
 
+.layer-mapillary-signs .icon-sign {
+    height: 30px;
+    width: 30px;
+}
 
 .layer-mapillary-signs body:hover {
     border: 1px solid red;
 }
 
-.layer-mapillary-signs .node.selected {
+.layer-mapillary-signs .icon-sign.selected {
     stroke-width: 4;
     border: 1px solid yellow;
 }
 
 .layer-mapillary-signs .t {
+    font-size: 28px;
+    z-index: 100;
     position: absolute;
 }
 
