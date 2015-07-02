@@ -42,12 +42,12 @@ iD.ui.MapData = function(context) {
             update();
         }
 
-        function clickMapillary() {
-            context.background().toggleMapillaryLayer();
+        function clickMapillaryImages() {
+            context.background().toggleMapillaryImageLayer();
             update();
         }
         function clickMapillarySigns() {
-            context.background().toggleMapillarySignsLayer();
+            context.background().toggleMapillarySignLayer();
             update();
         }
 
@@ -103,8 +103,8 @@ iD.ui.MapData = function(context) {
 
             var hasGpx = context.background().hasGpxLayer(),
                 showsGpx = context.background().showsGpxLayer(),
-                showsMapillary = context.background().showsMapillaryLayer(),
-                showsMapillarySigns = context.background().showsMapillarySignsLayer();
+                showsMapillaryImages = context.background().showsMapillaryImageLayer(),
+                showsMapillarySigns = context.background().showsMapillarySignLayer();
 
             gpxLayerItem
                 .classed('active', showsGpx)
@@ -112,12 +112,12 @@ iD.ui.MapData = function(context) {
                 .property('disabled', !hasGpx)
                 .property('checked', showsGpx);
 
-            mapillaryLayerItem
-                .classed('active', showsMapillary)
+            mapillaryImageLayerItem
+                .classed('active', showsMapillaryImages)
                 .selectAll('input')
-                .property('checked', showsMapillary);
+                .property('checked', showsMapillaryImages);
 
-            mapillarySignsLayerItem
+            mapillarySignLayerItem
                 .classed('active', showsMapillarySigns)
                 .selectAll('input')
                 .property('checked', showsMapillarySigns);
@@ -203,41 +203,44 @@ iD.ui.MapData = function(context) {
             .attr('class', 'filters')
             .style('display', 'block');
 
-        // mapillary
-        var mapillaryLayerItem = layerContainer.append('ul')
+
+        // Mapillary Image Layer
+        var mapillaryImageLayerItem = layerContainer.append('ul')
             .attr('class', 'layer-list')
             .append('li');
 
-        var label = mapillaryLayerItem.append('label')
+        var labelImage = mapillaryImageLayerItem.append('label')
             .call(bootstrap.tooltip()
-                .title(t('mapillary.tooltip'))
+                .title(t('mapillary_images.tooltip'))
                 .placement('top'));
 
-        label.append('input')
+        labelImage.append('input')
             .attr('type', 'checkbox')
-            .on('change', clickMapillary);
+            .on('change', clickMapillaryImages);
 
-        label.append('span')
-            .text(t('mapillary.title'));
+        labelImage.append('span')
+            .text(t('mapillary_images.title'));
 
-        // mapillary signs
-        var mapillarySignsLayerItem = layerContainer.append('ul')
+
+        // Mapillary Sign Layer
+        var mapillarySignLayerItem = layerContainer.append('ul')
             .attr('class', 'layer-list')
             .append('li');
 
-        var label_signs = mapillarySignsLayerItem.append('label')
+        var labelSigns = mapillarySignLayerItem.append('label')
             .call(bootstrap.tooltip()
                 .title(t('mapillary_signs.tooltip'))
                 .placement('top'));
 
-        label_signs.append('input')
+        labelSigns.append('input')
             .attr('type', 'checkbox')
             .on('change', clickMapillarySigns);
 
-        label_signs.append('span')
+        labelSigns.append('span')
             .text(t('mapillary_signs.title'));
 
-         //gpx
+
+        // GPX Layer
         var gpxLayerItem = layerContainer.append('ul')
             .style('display', iD.detect().filedrop ? 'block' : 'none')
             .attr('class', 'layer-list')
@@ -271,17 +274,17 @@ iD.ui.MapData = function(context) {
             })
             .call(iD.svg.Icon('#icon-geolocate'));
 
-        label = gpxLayerItem.append('label')
+        var labelGpx = gpxLayerItem.append('label')
             .call(bootstrap.tooltip()
                 .title(t('gpx.drag_drop'))
                 .placement('top'));
 
-        label.append('input')
+        labelGpx.append('input')
             .attr('type', 'checkbox')
             .property('disabled', true)
             .on('change', clickGpx);
 
-        label.append('span')
+        labelGpx.append('span')
             .text(t('gpx.local_layer'));
 
 
