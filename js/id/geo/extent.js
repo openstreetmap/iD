@@ -45,6 +45,10 @@ _.extend(iD.geo.Extent.prototype, {
                 (this[0][1] + this[1][1]) / 2];
     },
 
+    rectangle: function() {
+        return [this[0][0], this[0][1], this[1][0], this[1][1]];
+    },
+
     polygon: function() {
         return [
             [this[0][0], this[0][1]],
@@ -100,7 +104,7 @@ _.extend(iD.geo.Extent.prototype, {
     },
 
     toParam: function() {
-        return [this[0][0], this[0][1], this[1][0], this[1][1]].join(',');
+        return this.rectangle().join(',');
     }
 
 });

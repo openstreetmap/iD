@@ -57,7 +57,20 @@ describe("iD.geo.Extent", function () {
 
     describe("#center", function () {
         it("returns the center point", function () {
-           expect(iD.geo.Extent([0, 0], [5, 10]).center()).to.eql([2.5, 5]);
+            expect(iD.geo.Extent([0, 0], [5, 10]).center()).to.eql([2.5, 5]);
+        });
+    });
+
+    describe("#rectangle", function () {
+        it("returns the extent as a rectangle", function () {
+            expect(iD.geo.Extent([0, 0], [5, 10]).rectangle()).to.eql([0, 0, 5, 10]);
+        });
+    });
+
+    describe("#polygon", function () {
+        it("returns the extent as a polygon", function () {
+            expect(iD.geo.Extent([0, 0], [5, 10]).polygon())
+                .to.eql([[0, 0], [0, 10], [5, 10], [5, 0], [0, 0]]);
         });
     });
 

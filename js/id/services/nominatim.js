@@ -24,7 +24,7 @@ iD.services.nominatim  = function() {
 
                 var extent = iD.geo.Extent(location).padByMeters(1000);
 
-                cache.insert([extent[0][0], extent[0][1], extent[1][0], extent[1][1], result.address.country_code]);
+                cache.insert(extent.rectangle().concat(result.address.country_code));
 
                 callback(null, result.address.country_code);
             });
