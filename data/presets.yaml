@@ -2000,7 +2000,7 @@ en:
       highway/corridor:
         # highway=corridor
         name: Indoor Corridor
-        # 'terms: indoor'
+        # 'terms: gallery,hall,hallway,indoor,passage,passageway'
         terms: "<translate with synonyms or related terms for 'Indoor Corridor', separated by commas>"
       highway/crossing:
         # highway=crossing

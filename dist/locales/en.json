@@ -2318,7 +2318,7 @@
             },
             "highway/corridor": {
                 "name": "Indoor Corridor",
-                "terms": "indoor"
+                "terms": "gallery,hall,hallway,indoor,passage,passageway"
             },
             "highway/crossing": {
                 "name": "Street Crossing",

@@ -12,7 +12,12 @@
         "highway": "corridor"
     },
     "terms": [
-        "indoor"
+        "gallery",
+        "hall",
+        "hallway",
+        "indoor",
+        "passage",
+        "passageway"
     ],
     "name": "Indoor Corridor"
 }
