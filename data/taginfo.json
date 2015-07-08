@@ -1150,6 +1150,10 @@
         },
         {
             "key": "landuse",
+            "value": "plant_nursery"
+        },
+        {
+            "key": "landuse",
             "value": "quarry"
         },
         {

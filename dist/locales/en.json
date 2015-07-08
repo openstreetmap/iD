@@ -2591,6 +2591,10 @@
                 "name": "Orchard",
                 "terms": ""
             },
+            "landuse/plant_nursery": {
+                "name": "Plant Nursery",
+                "terms": "vivero"
+            },
             "landuse/quarry": {
                 "name": "Quarry",
                 "terms": ""

@@ -1,8 +1,7 @@
 {
-    "icon": "farm",
+    "icon": "garden",
     "fields": [
-        "name",
-        "plant"
+        "name"
     ],
     "geometry": [
         "point",
