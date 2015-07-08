@@ -1,5 +1,5 @@
 iD.ui.Commit = function(context) {
-    var event = d3.dispatch('cancel', 'save');
+    var dispatch = d3.dispatch('cancel', 'save');
 
     function commit(selection) {
         var changes = context.history().changes(),
@@ -22,7 +22,7 @@ iD.ui.Commit = function(context) {
 
         header.append('button')
             .attr('class', 'fr')
-            .on('click', event.cancel)
+            .on('click.commit', function() { dispatch.cancel(); })
             .append('span')
             .attr('class', 'icon close');
 
@@ -119,7 +119,7 @@ iD.ui.Commit = function(context) {
         var saveButton = saveSection.append('button')
             .attr('class', 'action col6 button')
             .on('click.save', function() {
-                event.save({
+                dispatch.save({
                     comment: commentField.node().value
                 });
             });
@@ -204,5 +204,5 @@ iD.ui.Commit = function(context) {
         }
     }
 
-    return d3.rebind(commit, event, 'on');
+    return d3.rebind(commit, dispatch, 'on');
 };

@@ -1478,10 +1478,11 @@
         "name": "Ranger Station"
     },
     "amenity/recycling": {
-        "icon": "recycling",
+        "icon": "waste-basket",
         "fields": [
             "operator",
             "address",
+            "recycling/type",
             "recycling/cans",
             "recycling/glass",
             "recycling/paper",
@@ -3644,9 +3645,10 @@
             "footway": "crossing"
         },
         "terms": [],
-        "name": "Crossing"
+        "name": "Street Crossing"
     },
     "footway/crosswalk": {
+        "icon": "highway-footway",
         "fields": [
             "crossing",
             "access",
@@ -3665,7 +3667,7 @@
         "terms": [
             "zebra crossing"
         ],
-        "name": "Crosswalk"
+        "name": "Pedestrian Crosswalk"
     },
     "footway/sidewalk": {
         "fields": [
@@ -3852,6 +3854,29 @@
         "terms": [],
         "name": "Bus Stop"
     },
+    "highway/corridor": {
+        "icon": "highway-footway",
+        "fields": [
+            "width",
+            "level",
+            "access_simple"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "corridor"
+        },
+        "terms": [
+            "gallery",
+            "hall",
+            "hallway",
+            "indoor",
+            "passage",
+            "passageway"
+        ],
+        "name": "Indoor Corridor"
+    },
     "highway/crossing": {
         "fields": [
             "crossing",
@@ -3865,7 +3890,7 @@
             "highway": "crossing"
         },
         "terms": [],
-        "name": "Crossing"
+        "name": "Street Crossing"
     },
     "highway/crosswalk": {
         "fields": [
@@ -3883,7 +3908,7 @@
         "terms": [
             "zebra crossing"
         ],
-        "name": "Crosswalk"
+        "name": "Pedestrian Crosswalk"
     },
     "highway/cycleway": {
         "icon": "highway-cycleway",
@@ -4055,6 +4080,7 @@
         "name": "Path"
     },
     "highway/pedestrian": {
+        "icon": "highway-footway",
         "fields": [
             "surface",
             "lit",
@@ -4071,7 +4097,7 @@
             "highway": "pedestrian"
         },
         "terms": [],
-        "name": "Pedestrian"
+        "name": "Pedestrian Street"
     },
     "highway/primary": {
         "icon": "highway-primary",
@@ -5417,6 +5443,25 @@
         },
         "name": "Man Made"
     },
+    "man_made/adit": {
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "fields": [
+            "operator"
+        ],
+        "terms": [
+            "entrance",
+            "underground",
+            "mine",
+            "cave"
+        ],
+        "tags": {
+            "man_made": "adit"
+        },
+        "name": "Adit"
+    },
     "man_made/breakwater": {
         "geometry": [
             "line",
@@ -5774,7 +5819,13 @@
             "fee",
             "access_simple"
         ],
-        "terms": [],
+        "terms": [
+            "cavern",
+            "hollow",
+            "grotto",
+            "shelter",
+            "cavity"
+        ],
         "tags": {
             "natural": "cave_entrance"
         },
@@ -5875,6 +5926,25 @@
         ],
         "name": "Peak"
     },
+    "natural/saddle": {
+        "icon": "triangle-stroked",
+        "fields": [
+            "elevation"
+        ],
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "natural": "saddle"
+        },
+        "terms": [
+            "pass",
+            "mountain pass",
+            "top"
+        ],
+        "name": "Saddle"
+    },
     "natural/scree": {
         "geometry": [
             "area"
@@ -5894,7 +5964,10 @@
         "tags": {
             "natural": "scrub"
         },
-        "terms": [],
+        "terms": [
+            "bush",
+            "shrubs"
+        ],
         "name": "Scrub"
     },
     "natural/spring": {
@@ -5924,6 +5997,40 @@
             "natural": "tree"
         },
         "name": "Tree"
+    },
+    "natural/tree_row": {
+        "fields": [
+            "leaf_type",
+            "leaf_cycle",
+            "denotation"
+        ],
+        "icon": "park",
+        "geometry": [
+            "line"
+        ],
+        "terms": [],
+        "tags": {
+            "natural": "tree_row"
+        },
+        "name": "Tree row"
+    },
+    "natural/volcano": {
+        "icon": "triangle",
+        "fields": [
+            "elevation"
+        ],
+        "geometry": [
+            "point",
+            "vertex"
+        ],
+        "tags": {
+            "natural": "volcano"
+        },
+        "terms": [
+            "mountain",
+            "crater"
+        ],
+        "name": "Volcano"
     },
     "natural/water": {
         "fields": [
@@ -6838,12 +6945,12 @@
         "terms": [
             "crossing",
             "railroad crossing",
-            "railway crossing",
+            "level crossing",
             "grade crossing",
             "road through railroad",
             "train crossing"
         ],
-        "name": "Level Crossing"
+        "name": "Railway Crossing"
     },
     "railway/monorail": {
         "icon": "railway-monorail",

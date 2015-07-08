@@ -96,6 +96,7 @@ g.midpoint .fill {
     opacity: .7;
 }
 
+g.midpoint.tag-highway-corridor .fill,
 g.midpoint.tag-highway-pedestrian .fill,
 g.midpoint.tag-highway-steps .fill,
 g.midpoint.tag-highway-path .fill,
@@ -560,15 +561,18 @@ path.casing.tag-highway-living_street {
     stroke-width:6;
 }
 
+path.stroke.tag-highway-corridor,
 path.stroke.tag-highway-pedestrian {
     stroke:#fff;
     stroke-dasharray: 2, 8;
     stroke-width:4;
 }
+path.casing.tag-highway-corridor,
 path.casing.tag-highway-pedestrian {
     stroke:#8cd05f;
     stroke-width:6;
 }
+path.stroke.area.tag-highway-corridor,
 path.stroke.area.tag-highway-pedestrian {
     stroke:#fff;
     stroke-dasharray: none;
@@ -833,6 +837,7 @@ path.shadow.tag-bridge {
 path.casing.line.tag-railway.tag-bridge,
 path.casing.tag-highway-living_street.tag-bridge,
 path.casing.tag-highway-path.tag-bridge,
+path.casing.tag-highway-corridor.tag-bridge,
 path.casing.line.tag-highway-pedestrian.tag-bridge,
 path.casing.tag-highway-service.tag-bridge,
 path.casing.tag-highway-track.tag-bridge,
@@ -846,6 +851,7 @@ path.casing.tag-highway-bridleway.tag-bridge {
 path.shadow.line.tag-railway.tag-bridge,
 path.shadow.tag-highway-living_street.tag-bridge,
 path.shadow.tag-highway-path.tag-bridge,
+path.shadow.tag-highway-corridor.tag-bridge,
 path.shadow.line.tag-highway-pedestrian.tag-bridge,
 path.shadow.tag-highway-service.tag-bridge,
 path.shadow.tag-highway-track.tag-bridge,
@@ -871,6 +877,7 @@ path.shadow.tag-highway-bridleway.tag-bridge {
 .low-zoom path.casing.line.tag-railway.tag-bridge,
 .low-zoom path.casing.tag-highway-living_street.tag-bridge,
 .low-zoom path.casing.tag-highway-path.tag-bridge,
+.low-zoom path.casing.tag-highway-corridor.tag-bridge,
 .low-zoom path.casing.line.tag-highway-pedestrian.tag-bridge,
 .low-zoom path.casing.tag-highway-service.tag-bridge,
 .low-zoom path.casing.tag-highway-track.tag-bridge,
@@ -884,6 +891,7 @@ path.shadow.tag-highway-bridleway.tag-bridge {
 .low-zoom path.shadow.line.tag-railway.tag-bridge,
 .low-zoom path.shadow.tag-highway-living_street.tag-bridge,
 .low-zoom path.shadow.tag-highway-path.tag-bridge,
+.low-zoom path.shadow.tag-highway-corridor.tag-bridge,
 .low-zoom path.shadow.line.tag-highway-pedestrian.tag-bridge,
 .low-zoom path.shadow.tag-highway-service.tag-bridge,
 .low-zoom path.shadow.tag-highway-track.tag-bridge,

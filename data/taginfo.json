@@ -881,6 +881,10 @@
         },
         {
             "key": "highway",
+            "value": "corridor"
+        },
+        {
+            "key": "highway",
             "value": "crossing"
         },
         {
@@ -1261,6 +1265,10 @@
         },
         {
             "key": "man_made",
+            "value": "adit"
+        },
+        {
+            "key": "man_made",
             "value": "breakwater"
         },
         {
@@ -1392,6 +1400,10 @@
         },
         {
             "key": "natural",
+            "value": "saddle"
+        },
+        {
+            "key": "natural",
             "value": "scree"
         },
         {
@@ -1405,6 +1417,14 @@
         {
             "key": "natural",
             "value": "tree"
+        },
+        {
+            "key": "natural",
+            "value": "tree_row"
+        },
+        {
+            "key": "natural",
+            "value": "volcano"
         },
         {
             "key": "natural",

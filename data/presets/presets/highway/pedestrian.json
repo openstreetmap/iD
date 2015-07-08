@@ -1,4 +1,5 @@
 {
+    "icon": "highway-footway",
     "fields": [
         "surface",
         "lit",
@@ -8,11 +9,12 @@
         "access"
     ],
     "geometry": [
-        "line", "area"
+        "line",
+        "area"
     ],
     "tags": {
         "highway": "pedestrian"
     },
     "terms": [],
-    "name": "Pedestrian"
+    "name": "Pedestrian Street"
 }

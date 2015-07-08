@@ -1,5 +1,5 @@
 iD.ui.Success = function(context) {
-    var event = d3.dispatch('cancel'),
+    var dispatch = d3.dispatch('cancel'),
         changeset;
 
     function success(selection) {
@@ -11,9 +11,9 @@ iD.ui.Success = function(context) {
 
         header.append('button')
             .attr('class', 'fr')
+            .on('click', function() { dispatch.cancel(); })
             .append('span')
-            .attr('class', 'icon close')
-            .on('click', function() { event.cancel(success); });
+            .attr('class', 'icon close');
 
         header.append('h3')
             .text(t('success.just_edited'));
@@ -55,5 +55,5 @@ iD.ui.Success = function(context) {
         return success;
     };
 
-    return d3.rebind(success, event, 'on');
+    return d3.rebind(success, dispatch, 'on');
 };

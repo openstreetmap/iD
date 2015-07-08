@@ -1,8 +1,9 @@
 {
-    "icon": "recycling",
+    "icon": "waste-basket",
     "fields": [
         "operator",
         "address",
+        "recycling/type",
         "recycling/cans",
         "recycling/glass",
         "recycling/paper",
