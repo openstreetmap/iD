@@ -1,0 +1,18 @@
+{
+    "icon": "farm",
+    "fields": [
+        "name",
+        "plant"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "plant_nursery"
+    },
+    "terms": [
+        "vivero"
+    ],
+    "name": "Plant Nursery"
+}
