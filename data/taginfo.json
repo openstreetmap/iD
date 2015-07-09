@@ -162,6 +162,10 @@
         },
         {
             "key": "amenity",
+            "value": "casino"
+        },
+        {
+            "key": "amenity",
             "value": "charging_station"
         },
         {
@@ -1159,6 +1163,10 @@
         },
         {
             "key": "leisure"
+        },
+        {
+            "key": "leisure",
+            "value": "adult_gaming_centre"
         },
         {
             "key": "leisure",

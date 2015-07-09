@@ -1201,6 +1201,11 @@ en:
         # amenity=car_wash
         name: Car Wash
         terms: "<translate with synonyms or related terms for 'Car Wash', separated by commas>"
+      amenity/casino:
+        # amenity=casino
+        name: Casino
+        # 'terms: gambling,roulette,craps,poker,blackjack'
+        terms: "<translate with synonyms or related terms for 'Casino', separated by commas>"
       amenity/charging_station:
         # amenity=charging_station
         name: Charging Station
@@ -2302,6 +2307,11 @@ en:
         # 'leisure=*'
         name: Leisure
         terms: "<translate with synonyms or related terms for 'Leisure', separated by commas>"
+      leisure/adult_gaming_centre:
+        # leisure=adult_gaming_centre
+        name: Adult Gaming Center
+        # 'terms: gambling,slot machine'
+        terms: "<translate with synonyms or related terms for 'Adult Gaming Center', separated by commas>"
       leisure/common:
         # leisure=common
         name: Common

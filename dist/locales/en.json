@@ -1592,6 +1592,10 @@
                 "name": "Car Wash",
                 "terms": ""
             },
+            "amenity/casino": {
+                "name": "Casino",
+                "terms": "gambling,roulette,craps,poker,blackjack"
+            },
             "amenity/charging_station": {
                 "name": "Charging Station",
                 "terms": "EV,Electric Vehicle,Supercharger"
@@ -2599,6 +2603,10 @@
             "leisure": {
                 "name": "Leisure",
                 "terms": ""
+            },
+            "leisure/adult_gaming_centre": {
+                "name": "Adult Gaming Center",
+                "terms": "gambling,slot machine"
             },
             "leisure/common": {
                 "name": "Common",

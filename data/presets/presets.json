@@ -660,6 +660,30 @@
         },
         "name": "Car Wash"
     },
+    "amenity/casino": {
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours",
+            "smoking"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "gambling",
+            "roulette",
+            "craps",
+            "poker",
+            "blackjack"
+        ],
+        "tags": {
+            "amenity": "casino"
+        },
+        "name": "Casino"
+    },
     "amenity/charging_station": {
         "icon": "car",
         "fields": [
@@ -4985,6 +5009,27 @@
             "leisure": "*"
         },
         "name": "Leisure"
+    },
+    "leisure/adult_gaming_centre": {
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours",
+            "smoking"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "gambling",
+            "slot machine"
+        ],
+        "tags": {
+            "leisure": "adult_gaming_centre"
+        },
+        "name": "Adult Gaming Center"
     },
     "leisure/common": {
         "geometry": [

@@ -1,0 +1,21 @@
+{
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "smoking"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "gambling",
+        "slot machine"
+    ],
+    "tags": {
+        "leisure": "adult_gaming_centre"
+    },
+    "name": "Adult Gaming Center"
+}
