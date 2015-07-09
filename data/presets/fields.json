@@ -187,6 +187,11 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "area/highway": {
+        "key": "area:highway",
+        "type": "typeCombo",
+        "label": "Type"
+    },
     "artist": {
         "key": "artist_name",
         "type": "text",

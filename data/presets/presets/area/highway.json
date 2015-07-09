@@ -1,0 +1,12 @@
+{
+    "fields": [
+        "area/highway"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "area:highway": "*"
+    },
+    "name": "Road Surface"
+}

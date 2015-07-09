@@ -1968,6 +1968,18 @@
         ],
         "matchScore": 0.1
     },
+    "area/highway": {
+        "fields": [
+            "area/highway"
+        ],
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "area:highway": "*"
+        },
+        "name": "Road Surface"
+    },
     "barrier": {
         "geometry": [
             "point",

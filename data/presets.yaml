@@ -143,6 +143,9 @@ en:
       amenity:
         # 'amenity=*'
         label: Type
+      area/highway:
+        # 'area:highway=*'
+        label: Type
       artist:
         # 'artist_name=*'
         label: Artist
@@ -1496,6 +1499,10 @@ en:
         # area=yes
         name: Area
         terms: "<translate with synonyms or related terms for 'Area', separated by commas>"
+      area/highway:
+        # 'area:highway=*'
+        name: Road Surface
+        terms: "<translate with synonyms or related terms for 'Road Surface', separated by commas>"
       barrier:
         # 'barrier=*'
         name: Barrier

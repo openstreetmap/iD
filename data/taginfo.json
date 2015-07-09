@@ -409,6 +409,9 @@
             "value": "yes"
         },
         {
+            "key": "area:highway"
+        },
+        {
             "key": "barrier"
         },
         {

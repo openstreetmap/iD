@@ -699,6 +699,9 @@
             "amenity": {
                 "label": "Type"
             },
+            "area/highway": {
+                "label": "Type"
+            },
             "artist": {
                 "label": "Artist"
             },
@@ -1838,6 +1841,10 @@
             },
             "area": {
                 "name": "Area",
+                "terms": ""
+            },
+            "area/highway": {
+                "name": "Road Surface",
                 "terms": ""
             },
             "barrier": {
