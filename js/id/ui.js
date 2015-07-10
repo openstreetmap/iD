@@ -60,6 +60,10 @@ iD.ui = function(context) {
             .attr('class', 'button-wrap col1')
             .call(iD.ui.Save(context));
 
+        limiter.append('div')
+          .attr('class', 'button-wrap col1')
+          .call(iD.ui.FullScreen(context));
+
         bar.append('div')
             .attr('class', 'spinner')
             .call(iD.ui.Spinner(context));
