@@ -48,7 +48,7 @@ iD.ui.FullScreen = function(context) {
             return;
 
         var tooltip = bootstrap.tooltip()
-            .placement('bottom')
+            .placement('left')
             .html(true)
             .title(iD.ui.tooltipHtml(t('full_screen.tooltip')));
 

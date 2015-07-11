@@ -60,13 +60,13 @@ iD.ui = function(context) {
             .attr('class', 'button-wrap col1')
             .call(iD.ui.Save(context));
 
-        limiter.append('div')
-          .attr('class', 'button-wrap col1')
-          .call(iD.ui.FullScreen(context));
-
         bar.append('div')
             .attr('class', 'spinner')
             .call(iD.ui.Spinner(context));
+
+        bar.append('div')
+            .attr('class', 'full-screen')
+            .call(iD.ui.FullScreen(context));
 
         var controls = bar.append('div')
             .attr('class', 'map-controls');

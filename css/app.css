@@ -63,11 +63,18 @@ body {
     position: absolute;
     height: 40px;
     width: 40px;
-    right: 10px;
+    right: 50px;
     top: 10px;
     border-radius: 4px;
     margin-right: 10px;
     background: black;
+}
+
+.full-screen {
+    position: absolute;
+    width: 40px;
+    right: 10px;
+    top: 10px;
 }
 
 div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
