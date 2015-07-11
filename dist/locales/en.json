@@ -431,7 +431,8 @@
         }
     },
     "full_screen": {
-        "title": "Full Screen"
+        "title": "Full Screen",
+        "tooltip": "Go to Full Screen mode"
     },
     "merge_remote_changes": {
         "conflict": {
