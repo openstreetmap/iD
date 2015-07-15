@@ -77,7 +77,7 @@ iD.ui.preset.wikipedia = function(field, context) {
             return d[0].toLowerCase() === value ||
                 d[1].toLowerCase() === value ||
                 d[2] === value;
-        }) || localeLanguage || ["English", "English", "en"];
+        }) || localeLanguage || ['English', 'English', 'en'];
     }
 
     function changeLang() {
