@@ -2294,6 +2294,11 @@ en:
         # landuse=orchard
         name: Orchard
         terms: "<translate with synonyms or related terms for 'Orchard', separated by commas>"
+      landuse/plant_nursery:
+        # landuse=plant_nursery
+        name: Plant Nursery
+        # 'terms: vivero'
+        terms: "<translate with synonyms or related terms for 'Plant Nursery', separated by commas>"
       landuse/quarry:
         # landuse=quarry
         name: Quarry

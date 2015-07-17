@@ -4967,6 +4967,23 @@
         "terms": [],
         "name": "Orchard"
     },
+    "landuse/plant_nursery": {
+        "icon": "garden",
+        "fields": [
+            "name"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "landuse": "plant_nursery"
+        },
+        "terms": [
+            "vivero"
+        ],
+        "name": "Plant Nursery"
+    },
     "landuse/quarry": {
         "geometry": [
             "area"
