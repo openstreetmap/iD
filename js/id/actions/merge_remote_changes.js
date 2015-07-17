@@ -100,7 +100,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
                 }
                 updates.replacements.push(target);
 
-            } else if (option === 'safe' && local && remote) {
+            } else if (option === 'safe' && local && remote && local.version !== remote.version) {
                 target = iD.Entity(local, { version: remote.version });
                 if (remote.visible) {
                     target = mergeLocation(remote, target);
