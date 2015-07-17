@@ -1,12 +1,17 @@
-iD.Connection = function() {
+iD.Connection = function(useHttps) {
+    if (typeof useHttps !== 'boolean') {
+      useHttps = window.location.protocol === 'https:';
+    }
+
     var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'loaded'),
-        url = 'http://www.openstreetmap.org',
+        protocol = useHttps ? 'https:' : 'http:',
+        url = protocol + '//www.openstreetmap.org',
         connection = {},
         inflight = {},
         loadedTiles = {},
         tileZoom = 16,
         oauth = osmAuth({
-            url: 'http://www.openstreetmap.org',
+            url: protocol + '//www.openstreetmap.org',
             oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
             oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
             loading: authenticating,
