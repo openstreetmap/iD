@@ -27,7 +27,9 @@ describe('iD.ui.preset.wikipedia', function() {
         happen.once(selection.selectAll('.wiki-lang').node(), {type: 'change'});
 
         wikipedia.on('change', function(tags) {
-            expect(tags).to.eql({wikipedia: 'de:Title'});
+            expect(tags).to.satisfy(function (tags) {
+                return tags.wikipedia === 'de:Title' || 'wikidata' in tags;
+            });
         });
 
         selection.selectAll('.wiki-title').value('Title');
