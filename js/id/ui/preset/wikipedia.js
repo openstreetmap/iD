@@ -113,11 +113,15 @@ iD.ui.preset.wikipedia = function(field, context) {
         if (value && language()[2]) {
             wikidata.itemsByTitle(language()[2], value, function (title, entities) {
                 var qids = entities && Object.keys(entities),
-                    asyncTags = {};
-                asyncTags.wikidata = qids && _.find(qids, function (id) {
+                    qid = qids && _.find(qids, function (id) {
                     return id.match(/^Q\d+$/);
-                });
-                event.change(asyncTags);
+                }),
+                    selectedIDs = context.selectedIDs();
+                if (selectedIDs.length === 1 && selectedIDs[0] === entity.id) {
+                    event.change({wikidata: qid});
+                } else {
+                    context.entity(entity.id).tags.wikidata = qid;
+                }
             });
         }
     }
