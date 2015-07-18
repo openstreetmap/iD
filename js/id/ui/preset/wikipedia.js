@@ -2,6 +2,7 @@ iD.ui.preset.wikipedia = function(field, context) {
 
     var event = d3.dispatch('change'),
         wikipedia = iD.wikipedia(),
+        wikidata = iD.wikidata(),
         link, entity, lang, title;
 
     function i(selection) {
@@ -86,7 +87,8 @@ iD.ui.preset.wikipedia = function(field, context) {
         var value = title.value(),
             m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/),
             l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; }),
-            anchor;
+            anchor,
+            syncTags = {};
 
         if (l) {
             // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
@@ -105,9 +107,19 @@ iD.ui.preset.wikipedia = function(field, context) {
             title.value(value);
         }
 
-        var t = {};
-        t[field.key] = value ? language()[2] + ':' + value : undefined;
-        event.change(t);
+        syncTags[field.key] = value ? language()[2] + ':' + value : undefined;
+        event.change(syncTags);
+        
+        if (value && language()[2]) {
+            wikidata.itemsByTitle(language()[2], value, function (title, entities) {
+                var qids = entities && Object.keys(entities),
+                    asyncTags = {};
+                asyncTags.wikidata = qids && _.find(qids, function (id) {
+                    return id.match(/^Q\d+$/);
+                });
+                event.change(asyncTags);
+            });
+        }
     }
 
     i.tags = function(tags) {
