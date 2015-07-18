@@ -117,7 +117,7 @@ iD.ui.preset.wikipedia = function(field, context) {
                     return id.match(/^Q\d+$/);
                 }),
                     selectedIDs = context.selectedIDs && context.selectedIDs();
-                if (selectedIDs.length === 1 && selectedIDs[0] === entity.id) {
+                if (selectedIDs && selectedIDs.length === 1 && selectedIDs[0] === entity.id) {
                     event.change({wikidata: qid});
                 } else {
                     context.entity(entity.id).tags.wikidata = qid;
