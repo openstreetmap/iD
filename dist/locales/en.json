@@ -431,8 +431,7 @@
         }
     },
     "full_screen": {
-        "title": "FS",
-        "tooltip": "Toggle Full Screen mode"
+        "tooltip": "Toggle Full Screen"
     },
     "merge_remote_changes": {
         "conflict": {

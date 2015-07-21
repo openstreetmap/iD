@@ -70,11 +70,30 @@ body {
     background: black;
 }
 
-.full-screen {
+div.full-screen {
     position: absolute;
     width: 40px;
     right: 10px;
     top: 10px;
+}
+
+button.full-screen {
+    width: 100%;
+    position: relative;
+}
+
+button.full-screen, button.full-screen.active {
+    width: 40px;
+    height: 40px;
+    background: transparent url(img/fullscreen_request.svg) no-repeat center;
+}
+
+button.full-screen.active {
+    background-image: url(img/fullscreen_exit.svg);
+}
+
+button.full-screen:hover, button.full-screen:focus {
+    background-color: rgba(0, 0, 0, .8);
 }
 
 div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {

@@ -1,5 +1,5 @@
 iD.ui.FullScreen = function(context) {
-    var element = context.container().node();
+    var element = context.container().node(), button;
 
     function getFullScreenFn() {
         if (element.requestFullscreen) {
@@ -37,8 +37,10 @@ iD.ui.FullScreen = function(context) {
     function fullScreen() {
         d3.event.preventDefault();
         if (!isFullScreen()) {
+            button.classed('active', true);
             getFullScreenFn().apply(element);
         } else {
+            button.classed('active', false);
             getExitFullScreenFn().apply(document);
         }
     }
@@ -48,18 +50,13 @@ iD.ui.FullScreen = function(context) {
             return;
 
         var tooltip = bootstrap.tooltip()
-            .placement('left')
-            .html(true)
-            .title(iD.ui.tooltipHtml(t('full_screen.tooltip')));
+            .placement('left');
 
-        var button = selection.append('button')
-            .attr('class', 'save col12')
+        button = selection.append('button')
+            .attr('class', 'full-screen')
+            .attr('title', t('full_screen.tooltip'))
             .attr('tabindex', -1)
             .on('click', fullScreen)
             .call(tooltip);
-
-        button.append('span')
-            .attr('class', 'label')
-            .text(t('full_screen.title'));
     };
 };
