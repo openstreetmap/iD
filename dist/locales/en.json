@@ -430,9 +430,7 @@
             "help": "Another user changed some of the same map features you changed.\nClick on each item below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"
         }
     },
-    "full_screen": {
-        "tooltip": "Toggle Full Screen"
-    },
+    "full_screen": "Toggle Fullscreen",
     "merge_remote_changes": {
         "conflict": {
             "deleted": "This object has been deleted by {user}.",

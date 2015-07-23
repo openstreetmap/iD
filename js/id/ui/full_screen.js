@@ -26,8 +26,8 @@ iD.ui.FullScreen = function(context) {
     }
 
     function isFullScreen() {
-        return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement
-            || document.msFullscreenElement;
+        return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement ||
+            document.msFullscreenElement;
     }
 
     function is_supported() {
@@ -53,10 +53,12 @@ iD.ui.FullScreen = function(context) {
             .placement('left');
 
         button = selection.append('button')
-            .attr('class', 'full-screen')
-            .attr('title', t('full_screen.tooltip'))
+            .attr('title', t('full_screen'))
             .attr('tabindex', -1)
             .on('click', fullScreen)
             .call(tooltip);
+
+        button.append('span')
+            .attr('class', 'icon full-screen');
     };
 };

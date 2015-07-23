@@ -57,43 +57,15 @@ body {
 
 .spinner {
     opacity: .5;
+    float: right;
 }
 
 .spinner img {
-    position: absolute;
     height: 40px;
     width: 40px;
-    right: 50px;
-    top: 10px;
     border-radius: 4px;
     margin-right: 10px;
     background: black;
-}
-
-div.full-screen {
-    position: absolute;
-    width: 40px;
-    right: 10px;
-    top: 10px;
-}
-
-button.full-screen {
-    width: 100%;
-    position: relative;
-}
-
-button.full-screen, button.full-screen.active {
-    width: 40px;
-    height: 40px;
-    background: transparent url(img/fullscreen_request.svg) no-repeat center;
-}
-
-button.full-screen.active {
-    background-image: url(img/fullscreen_exit.svg);
-}
-
-button.full-screen:hover, button.full-screen:focus {
-    background-color: rgba(0, 0, 0, .8);
 }
 
 div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
@@ -579,6 +551,9 @@ button.save.has-count .count::before {
 
 .icon.back.blue        { background-position: -420px -20px;}
 .icon.forward.blue     { background-position: -440px -20px;}
+
+.icon.full-screen              { background-position: -620px -20px;}
+.active .icon.full-screen      { background-position: -640px -20px;}
 
 button[disabled] .icon.alert      { background-position:   0 -40px;}
 button[disabled] .icon.add-point  { background-position: -20px -40px;}
@@ -1763,6 +1738,27 @@ img.wiki-image {
 
 .add-relation:hover {
     background: rgba(0,0,0,.8);
+}
+
+/* Fullscreen button */
+div.full-screen {
+    float: right;
+    width: 40px;
+    margin-right: 10px;
+}
+
+div.full-screen .tooltip {
+    min-width: 160px;
+}
+
+div.full-screen > button, div.full-screen > button.active {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+}
+
+div.full-screen > button:hover {
+    background-color: rgba(0, 0, 0, .8);
 }
 
 /* Map Controls */
