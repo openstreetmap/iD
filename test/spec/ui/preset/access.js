@@ -16,10 +16,17 @@ describe('iD.ui.preset.access', function() {
         expect(selection.selectAll('.preset-access-horse')[0].length).to.equal(1);
     });
 
-    it('does not include a "yes" or "designated" option for general access (#934), (#2213)', function() {
+    it('does not include "yes", "designated", "dismount" options for general access (#934), (#2213)', function() {
         var access = iD.ui.preset.access(field);
         expect(_.pluck(access.options('access'), 'value')).not.to.include('yes');
         expect(_.pluck(access.options('access'), 'value')).not.to.include('designated');
+        expect(_.pluck(access.options('access'), 'value')).not.to.include('dismount');
+    });
+
+    it('does include a "dismount" option for bicycles (#2726)', function() {
+        var access = iD.ui.preset.access(field);
+        expect(_.pluck(access.options('bicycle'), 'value')).to.include('dismount');
+        expect(_.pluck(access.options('foot'), 'value')).not.to.include('dismount');
     });
 
     it('sets foot placeholder to "yes" for steps and pedestrian', function() {

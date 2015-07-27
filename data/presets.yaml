@@ -36,6 +36,11 @@ en:
             description: Access permitted only to reach a destination
             # access=destination
             title: Destination
+          dismount:
+            # access=dismount
+            description: Access permitted but rider must dismount
+            # access=dismount
+            title: Dismount
           'no':
             # access=no
             description: Access not permitted to the general public

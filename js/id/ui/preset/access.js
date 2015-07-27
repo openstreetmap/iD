@@ -56,6 +56,10 @@ iD.ui.preset.access = function(field) {
             options.push('designated');
         }
 
+        if (type === 'bicycle') {
+            options.push('dismount');
+        }
+
         return options.map(function(option) {
             return {
                 title: field.t('options.' + option + '.description'),
