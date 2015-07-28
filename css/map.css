@@ -347,10 +347,10 @@ path.fill.tag-landuse-landfill {
 .pattern-color-construction {
     fill: rgba(196, 189, 25, 0.2);
 }
-path.stroke.tag-landuse-construction {
+path.stroke.tag-landuse.tag-ephemeral {
     stroke: rgb(196, 189, 25);
 }
-.preset-icon-fill-area.tag-landuse-construction {
+.preset-icon-fill-area.tag-landuse.tag-ephemeral {
     border-color: rgb(196, 189, 25);
     background-color: rgba(196, 189, 25, 0.2);
 }
@@ -939,18 +939,18 @@ path.shadow.tag-cutting {
 }
 
 
-/* construction */
+/* Ephemeral */
 
-path.stroke.tag-highway-construction,
-path.casing.tag-highway-construction {
+path.stroke.tag-ephemeral,
+path.casing.tag-ephemeral {
     stroke-linecap: butt;
-    stroke-dasharray: 7, 7;
+    stroke-dasharray: 7, 3;
 }
 
-.low-zoom path.stroke.tag-highway-construction,
-.low-zoom path.casing.tag-highway-construction {
+.low-zoom path.stroke.tag-ephemeral,
+.low-zoom path.casing.tag-ephemeral {
     stroke-linecap: butt;
-    stroke-dasharray: 5, 5;
+    stroke-dasharray: 5, 2;
 }
 
 text {

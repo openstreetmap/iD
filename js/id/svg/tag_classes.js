@@ -1,18 +1,24 @@
 iD.svg.TagClasses = function() {
-    var primary = [
+    var primaries = [
             'building', 'highway', 'railway', 'waterway', 'aeroway',
             'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
             'leisure', 'place'
         ],
-        secondary = [
-            'oneway', 'bridge', 'tunnel', 'construction', 'embankment', 'cutting', 'barrier'
+        statuses = [
+            'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
+            'razed', 'demolished', 'obliterated'
+        ],
+        secondaries = [
+            'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier'
         ],
         tagClassRe = /^tag-/,
         tags = function(entity) { return entity.tags; };
 
+
     var tagClasses = function(selection) {
         selection.each(function tagClassesEach(entity) {
-            var classes, value = this.className;
+            var value = this.className,
+                classes, primary, status;
 
             if (value.baseVal !== undefined) value = value.baseVal;
 
@@ -22,16 +28,52 @@ iD.svg.TagClasses = function() {
 
             var t = tags(entity), i, k, v;
 
-            for (i = 0; i < primary.length; i++) {
-                k = primary[i];
+            // pick at most one primary classification tag..
+            for (i = 0; i < primaries.length; i++) {
+                k = primaries[i];
                 v = t[k];
                 if (!v || v === 'no') continue;
-                classes += ' tag-' + k + ' tag-' + k + '-' + v;
+
+                primary = k;
+                if (statuses.indexOf(v) !== -1) {   // e.g. `railway=abandoned`
+                    status = v;
+                    classes += ' tag-' + k;
+                } else {
+                    classes += ' tag-' + k + ' tag-' + k + '-' + v;
+                }
+
                 break;
             }
 
-            for (i = 0; i < secondary.length; i++) {
-                k = secondary[i];
+            // add at most one ephemeral status tag, only if relates to primary tag..
+            if (!status) {
+                for (i = 0; i < statuses.length; i++) {
+                    k = statuses[i];
+                    v = t[k];
+                    if (!v || v === 'no') continue;
+
+                    if (v === 'yes') {   // e.g. `railway=rail + abandoned=yes`
+                        status = k;
+                    }
+                    else if (primary && primary === v) {  // e.g. `railway=rail + abandoned=railway`
+                        status = k;
+                    } else if (!primary && primaries.indexOf(v) !== -1) {  // e.g. `abandoned=railway`
+                        status = k;
+                        primary = v;
+                        classes += ' tag-' + v;
+                    }  // else ignore e.g.  `highway=path + abandoned=railway`
+
+                    if (status) break;
+                }
+            }
+
+            if (status) {
+                classes += ' tag-ephemeral';
+            }
+
+            // add any secondary (structure) tags
+            for (i = 0; i < secondaries.length; i++) {
+                k = secondaries[i];
                 v = t[k];
                 if (!v || v === 'no') continue;
                 classes += ' tag-' + k + ' tag-' + k + '-' + v;
