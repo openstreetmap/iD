@@ -1,0 +1,16 @@
+{
+    "icon": "highway-road",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "road"
+    },
+    "terms": [],
+    "name": "Unknown Road (Under Construction)",
+    "matchScore": 0.8
+}

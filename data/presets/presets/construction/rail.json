@@ -1,0 +1,16 @@
+{
+    "icon": "railway-rail",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "construction",
+        "construction": "rail"
+    },
+    "terms": [],
+    "name": "Rail (Under Construction)",
+    "matchScore": 0.8
+}

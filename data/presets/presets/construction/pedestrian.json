@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "pedestrian"
+    },
+    "terms": [],
+    "name": "Pedestrian Way (Under Construction)",
+    "matchScore": 0.8
+}

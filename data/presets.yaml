@@ -1724,6 +1724,93 @@ en:
         # building=warehouse
         name: Warehouse
         terms: "<translate with synonyms or related terms for 'Warehouse', separated by commas>"
+      construction/bridleway:
+        name: Bridle Path (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Bridle Path (Under Construction)', separated by commas>"
+      construction/cycleway:
+        name: Cycle Path (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Cycle Path (Under Construction)', separated by commas>"
+      construction/footway:
+        name: Foot Path (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Foot Path (Under Construction)', separated by commas>"
+      construction/funicular:
+        name: Funicular (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Funicular (Under Construction)', separated by commas>"
+      construction/living_street:
+        name: Living Street (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Living Street (Under Construction)', separated by commas>"
+      construction/monorail:
+        name: Monorail (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Monorail (Under Construction)', separated by commas>"
+      construction/motorway:
+        name: Motorway (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Motorway (Under Construction)', separated by commas>"
+      construction/motorway_link:
+        name: Motorway Link (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Motorway Link (Under Construction)', separated by commas>"
+      construction/narrow_gauge:
+        name: Narrow Gauge Rail (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Narrow Gauge Rail (Under Construction)', separated by commas>"
+      construction/path:
+        name: Path (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Path (Under Construction)', separated by commas>"
+      construction/pedestrian:
+        name: Pedestrian Way (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Pedestrian Way (Under Construction)', separated by commas>"
+      construction/platform:
+        name: Railway Platform (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Railway Platform (Under Construction)', separated by commas>"
+      construction/primary:
+        name: Primary Road (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Primary Road (Under Construction)', separated by commas>"
+      construction/primary_link:
+        name: Primary Link (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Primary Link (Under Construction)', separated by commas>"
+      construction/rail:
+        name: Rail (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Rail (Under Construction)', separated by commas>"
+      construction/residential:
+        name: Residential Road (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Residential Road (Under Construction)', separated by commas>"
+      construction/road:
+        name: Unknown Road (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Unknown Road (Under Construction)', separated by commas>"
+      construction/secondary:
+        name: Secondary Road (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Secondary Road (Under Construction)', separated by commas>"
+      construction/secondary_link:
+        name: Secondary Link (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Secondary Link (Under Construction)', separated by commas>"
+      construction/service:
+        name: Service Road (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Service Road (Under Construction)', separated by commas>"
+      construction/steps:
+        name: Steps (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Steps (Under Construction)', separated by commas>"
+      construction/subway:
+        name: Subway (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Subway (Under Construction)', separated by commas>"
+      construction/tertiary:
+        name: Tertiary Road (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Tertiary Road (Under Construction)', separated by commas>"
+      construction/tertiary_link:
+        name: Tertiary Link (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Tertiary Link (Under Construction)', separated by commas>"
+      construction/track:
+        name: Track (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Track (Under Construction)', separated by commas>"
+      construction/tram:
+        name: Tram (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Tram (Under Construction)', separated by commas>"
+      construction/trunk:
+        name: Trunk Road (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Trunk Road (Under Construction)', separated by commas>"
+      construction/trunk_link:
+        name: Trunk Link (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Trunk Link (Under Construction)', separated by commas>"
+      construction/unclassified:
+        name: Unclassified Road (Under Construction)
+        terms: "<translate with synonyms or related terms for 'Unclassified Road (Under Construction)', separated by commas>"
       craft:
         # 'craft=*'
         name: Craft

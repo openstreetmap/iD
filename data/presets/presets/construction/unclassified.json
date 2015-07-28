@@ -1,0 +1,16 @@
+{
+    "icon": "highway-unclassified",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "unclassified"
+    },
+    "terms": [],
+    "name": "Unclassified Road (Under Construction)",
+    "matchScore": 0.8
+}

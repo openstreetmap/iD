@@ -1,0 +1,21 @@
+{
+    "icon": "highway-primary-link",
+    "fields": [
+        "structure",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "primary_link"
+    },
+    "terms": [
+        "ramp",
+        "on ramp",
+        "off ramp"
+    ],
+    "name": "Primary Link (Under Construction)",
+    "matchScore": 0.8
+}

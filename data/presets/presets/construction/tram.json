@@ -1,0 +1,18 @@
+{
+    "icon": "railway-light-rail",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "construction",
+        "construction": "tram"
+    },
+    "terms": [
+        "streetcar"
+    ],
+    "name": "Tram (Under Construction)",
+    "matchScore": 0.8
+}

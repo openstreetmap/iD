@@ -1,0 +1,20 @@
+{
+    "icon": "highway-bridleway",
+    "fields": [
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "bridleway"
+    },
+    "terms": [
+        "bridleway",
+        "equestrian",
+        "horse"
+    ],
+    "name": "Bridle Path (Under Construction)",
+    "matchScore": 0.8
+}
