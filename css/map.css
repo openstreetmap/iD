@@ -454,7 +454,15 @@ path.fill.tag-boundary {
     fill: none;
 }
 
-/* highways */
+/* highway areas */
+
+path.stroke.area.tag-highway {
+    stroke:#fff;
+    stroke-dasharray: none;
+    stroke-width: 2;
+}
+
+/* wide highways */
 
 path.shadow.tag-highway {
     stroke-width:16;
@@ -480,173 +488,251 @@ path.stroke.tag-highway {
 
 path.stroke.tag-highway-motorway,
 path.stroke.tag-highway-motorway_link,
-path.stroke.tag-construction-motorway {
+path.stroke.tag-motorway {
     stroke:#58a9ed;
 }
 
 path.casing.tag-highway-motorway,
 path.casing.tag-highway-motorway_link,
-path.casing.tag-construction-motorway {
+path.casing.tag-motorway {
     stroke:#2c5476;
 }
 
 path.stroke.tag-highway-trunk,
 path.stroke.tag-highway-trunk_link,
-path.stroke.tag-construction-trunk {
+path.stroke.tag-trunk {
     stroke:#8cd05f;
 }
 path.casing.tag-highway-trunk,
 path.casing.tag-highway-trunk_link,
-path.casing.tag-construction-trunk {
+path.casing.tag-trunk {
     stroke:#46682f;
 }
 
 path.stroke.tag-highway-primary,
 path.stroke.tag-highway-primary_link,
-path.stroke.tag-construction-primary {
+path.stroke.tag-primary {
     stroke:#e06d5f;
 }
 path.casing.tag-highway-primary,
 path.casing.tag-highway-primary_link,
-path.casing.tag-construction-primary {
+path.casing.tag-primary {
     stroke:#70372f;
 }
 
 path.stroke.tag-highway-secondary,
 path.stroke.tag-highway-secondary_link,
-path.stroke.tag-construction-secondary {
+path.stroke.tag-secondary {
     stroke:#eab056;
 }
 path.casing.tag-highway-secondary,
 path.casing.tag-highway-secondary_link,
-path.casing.tag-construction-secondary {
+path.casing.tag-secondary {
     stroke:#75582b;
 }
 
 path.stroke.tag-highway-tertiary,
 path.stroke.tag-highway-tertiary_link,
-path.stroke.tag-construction-tertiary {
+path.stroke.tag-tertiary {
     stroke:#ffff7e;
 }
 path.casing.tag-highway-tertiary,
 path.casing.tag-highway-tertiary_link,
-path.casing.tag-construction-tertiary {
+path.casing.tag-tertiary {
     stroke:#7f7f3f;
 }
 
 path.stroke.tag-highway-unclassified,
-path.stroke.tag-construction-unclassified {
+path.stroke.tag-unclassified {
     stroke:#eaeaea;
 }
 path.casing.tag-highway-unclassified,
-path.casing.tag-construction-unclassified {
+path.casing.tag-unclassified {
     stroke:#444;
 }
 
 path.stroke.tag-highway-residential,
-path.stroke.tag-construction-residential {
+path.stroke.tag-residential {
     stroke:#fff;
 }
 path.casing.tag-highway-residential,
-path.casing.tag-construction-residential {
+path.casing.tag-residential {
     stroke:#444;
 }
 
-path.stroke.tag-highway-living_street {
-    stroke:#ccc;
+/* narrow highways */
+path.stroke.tag-highway-living_street,
+path.stroke.tag-highway-service,
+path.stroke.tag-highway-track,
+path.stroke.tag-highway-path,
+path.stroke.tag-highway-footway,
+path.stroke.tag-highway-cycleway,
+path.stroke.tag-highway-bridleway,
+path.stroke.tag-highway-corridor,
+path.stroke.tag-highway-pedestrian,
+path.stroke.tag-highway-steps,
+path.stroke.tag-highway-road,
+path.stroke.tag-living_street,
+path.stroke.tag-service,
+path.stroke.tag-track,
+path.stroke.tag-path,
+path.stroke.tag-footway,
+path.stroke.tag-cycleway,
+path.stroke.tag-bridleway,
+path.stroke.tag-corridor,
+path.stroke.tag-pedestrian,
+path.stroke.tag-steps,
+path.stroke.tag-road {
     stroke-width:4;
 }
-path.casing.tag-highway-living_street {
-    stroke:#fff;
+path.casing.tag-highway-living_street,
+path.casing.tag-highway-service,
+path.casing.tag-highway-track,
+path.casing.tag-highway-path,
+path.casing.tag-highway-footway,
+path.casing.tag-highway-cycleway,
+path.casing.tag-highway-bridleway,
+path.casing.tag-highway-corridor,
+path.casing.tag-highway-pedestrian,
+path.casing.tag-highway-steps,
+path.casing.tag-highway-road,
+path.casing.tag-living_street,
+path.casing.tag-service,
+path.casing.tag-track,
+path.casing.tag-path,
+path.casing.tag-footway,
+path.casing.tag-cycleway,
+path.casing.tag-bridleway,
+path.casing.tag-corridor,
+path.casing.tag-pedestrian,
+path.casing.tag-steps,
+path.casing.tag-road {
     stroke-width:6;
+}
+
+.low-zoom path.stroke.tag-highway-living_street,
+.low-zoom path.stroke.tag-highway-service,
+.low-zoom path.stroke.tag-highway-track,
+.low-zoom path.stroke.tag-highway-path,
+.low-zoom path.stroke.tag-highway-footway,
+.low-zoom path.stroke.tag-highway-cycleway,
+.low-zoom path.stroke.tag-highway-bridleway,
+.low-zoom path.stroke.tag-highway-corridor,
+.low-zoom path.stroke.tag-highway-pedestrian,
+.low-zoom path.stroke.tag-highway-steps,
+.low-zoom path.stroke.tag-highway-road,
+.low-zoom path.stroke.tag-living_street,
+.low-zoom path.stroke.tag-service,
+.low-zoom path.stroke.tag-track,
+.low-zoom path.stroke.tag-path,
+.low-zoom path.stroke.tag-footway,
+.low-zoom path.stroke.tag-cycleway,
+.low-zoom path.stroke.tag-bridleway,
+.low-zoom path.stroke.tag-corridor,
+.low-zoom path.stroke.tag-pedestrian,
+.low-zoom path.stroke.tag-steps,
+.low-zoom path.stroke.tag-road {
+    stroke-width:2;
+}
+.low-zoom path.casing.tag-highway-living_street,
+.low-zoom path.casing.tag-highway-service,
+.low-zoom path.casing.tag-highway-track,
+.low-zoom path.casing.tag-highway-path,
+.low-zoom path.casing.tag-highway-footway,
+.low-zoom path.casing.tag-highway-cycleway,
+.low-zoom path.casing.tag-highway-bridleway,
+.low-zoom path.casing.tag-highway-corridor,
+.low-zoom path.casing.tag-highway-pedestrian,
+.low-zoom path.casing.tag-highway-steps,
+.low-zoom path.casing.tag-highway-road,
+.low-zoom path.casing.tag-living_street,
+.low-zoom path.casing.tag-service,
+.low-zoom path.casing.tag-track,
+.low-zoom path.casing.tag-path,
+.low-zoom path.casing.tag-footway,
+.low-zoom path.casing.tag-cycleway,
+.low-zoom path.casing.tag-bridleway,
+.low-zoom path.casing.tag-corridor,
+.low-zoom path.casing.tag-pedestrian,
+.low-zoom path.casing.tag-steps,
+.low-zoom path.casing.tag-road {
+    stroke-width:4;
+}
+
+
+path.stroke.tag-highway-living_street,
+path.stroke.tag-living_street {
+    stroke:#ccc;
+}
+path.casing.tag-highway-living_street,
+path.casing.tag-living_street {
+    stroke:#fff;
 }
 
 path.stroke.tag-highway-corridor,
-path.stroke.tag-highway-pedestrian {
+path.stroke.tag-highway-pedestrian,
+path.stroke.tag-corridor,
+path.stroke.tag-pedestrian {
     stroke:#fff;
     stroke-dasharray: 2, 8;
-    stroke-width:4;
 }
 path.casing.tag-highway-corridor,
-path.casing.tag-highway-pedestrian {
+path.casing.tag-highway-pedestrian,
+path.casing.tag-corridor,
+path.casing.tag-pedestrian {
     stroke:#8cd05f;
-    stroke-width:6;
-}
-path.stroke.area.tag-highway-corridor,
-path.stroke.area.tag-highway-pedestrian {
-    stroke:#fff;
-    stroke-dasharray: none;
-    stroke-width: 2;
 }
 
-path.stroke.tag-highway-service {
-    stroke:#fff;
-    stroke-width:4;
+path.stroke.tag-highway-road,
+path.stroke.tag-road {
+    stroke:#9e9e9e;
 }
-path.casing.tag-highway-service {
+path.casing.tag-highway-road,
+path.casing.tag-road {
+    stroke:#444;
+}
+
+path.stroke.tag-highway-service,
+path.stroke.tag-service {
+    stroke:#fff;
+}
+path.casing.tag-highway-service,
+path.casing.tag-service {
     stroke:#666;
-    stroke-width:6;
-}
-.low-zoom path.stroke.tag-highway-service {
-    stroke-width:2;
-}
-.low-zoom path.casing.tag-highway-service {
-    stroke-width:4;
 }
 
-path.stroke.tag-highway-track {
-    stroke: #fff;
-    stroke-width: 4;
+path.stroke.tag-highway-track,
+path.stroke.tag-track {
+    stroke: #ccc;
 }
-path.casing.tag-highway-track {
+path.casing.tag-highway-track,
+path.casing.tag-track {
     stroke: #996600;
-    stroke-width: 6;
     stroke-linecap: butt;
     stroke-dasharray: 6, 6;
-}
-.low-zoom path.stroke.tag-highway-track {
-    stroke-width:2;
-}
-.low-zoom path.casing.tag-highway-track {
-    stroke-width:4;
+    stroke-width:7;
 }
 
-path.stroke.tag-highway-path {
-    stroke: #000;
-    stroke-width: 1 !important;
-    stroke-linecap: butt;
-    stroke-dasharray: 8, 4;
-}
-path.casing.tag-highway-path {
-    stroke-width: 1 !important;
-    stroke: #fff;
-}
-
+path.stroke.tag-highway-path,
 path.stroke.tag-highway-footway,
 path.stroke.tag-highway-cycleway,
 path.stroke.tag-highway-bridleway {
-    stroke-width: 4;
     stroke-linecap: butt;
     stroke-dasharray: 6, 6;
+}
+
+path.casing.tag-highway-path{
+    stroke: #c5b59f;
 }
 path.casing.tag-highway-footway,
 path.casing.tag-highway-cycleway,
 path.casing.tag-highway-bridleway {
-    stroke-width: 6;
     stroke: #fff;
 }
 
-.low-zoom path.stroke.tag-highway-footway,
-.low-zoom path.stroke.tag-highway-cycleway,
-.low-zoom path.stroke.tag-highway-bridleway {
-    stroke-width: 2;
+path.stroke.tag-highway-path {
+    stroke: #746f6f;
 }
-.low-zoom path.casing.tag-highway-footway,
-.low-zoom path.casing.tag-highway-cycleway,
-.low-zoom path.casing.tag-highway-bridleway {
-    stroke-width: 4;
-}
-
 path.stroke.tag-highway-footway {
     stroke: #ae8681;
 }
@@ -659,12 +745,10 @@ path.stroke.tag-highway-bridleway {
 
 path.stroke.tag-highway-steps {
     stroke: #81d25c;
-    stroke-width: 4;
     stroke-linecap: butt;
     stroke-dasharray: 3, 3;
 }
 path.casing.tag-highway-steps {
-    stroke-width: 6;
     stroke: #fff;
 }
 
