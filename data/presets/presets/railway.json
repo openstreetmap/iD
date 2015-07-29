@@ -11,5 +11,6 @@
     "tags": {
         "railway": "*"
     },
+    "searchable": false,
     "name": "Railway"
 }

@@ -2227,8 +2227,8 @@ en:
         terms: "<translate with synonyms or related terms for 'Junction', separated by commas>"
       landuse:
         # 'landuse=*'
-        name: Landuse
-        terms: "<translate with synonyms or related terms for 'Landuse', separated by commas>"
+        name: Land Use
+        terms: "<translate with synonyms or related terms for 'Land Use', separated by commas>"
       landuse/allotments:
         # landuse=allotments
         name: Allotments

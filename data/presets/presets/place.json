@@ -10,5 +10,6 @@
     "tags": {
         "place": "*"
     },
+    "searchable": false,
     "name": "Place"
 }

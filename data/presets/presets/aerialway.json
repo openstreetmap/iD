@@ -15,5 +15,6 @@
         "funifor",
         "funitel"
     ],
+    "searchable": false,
     "name": "Aerialway"
 }

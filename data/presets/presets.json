@@ -31,6 +31,7 @@
             "funifor",
             "funitel"
         ],
+        "searchable": false,
         "name": "Aerialway"
     },
     "aerialway/cable_car": {
@@ -187,6 +188,7 @@
         "tags": {
             "aeroway": "*"
         },
+        "searchable": false,
         "name": "Aeroway"
     },
     "aeroway/aerodrome": {
@@ -3848,6 +3850,7 @@
         "tags": {
             "highway": "*"
         },
+        "searchable": false,
         "name": "Highway"
     },
     "highway/bridleway": {
@@ -4753,7 +4756,7 @@
         "tags": {
             "landuse": "*"
         },
-        "name": "Landuse"
+        "name": "Land Use"
     },
     "landuse/allotments": {
         "geometry": [
@@ -6622,6 +6625,7 @@
         "tags": {
             "place": "*"
         },
+        "searchable": false,
         "name": "Place"
     },
     "place/city": {
@@ -6791,6 +6795,7 @@
         "fields": [
             "power"
         ],
+        "searchable": false,
         "name": "Power"
     },
     "power/generator": {
@@ -6936,6 +6941,7 @@
         "tags": {
             "railway": "*"
         },
+        "searchable": false,
         "name": "Railway"
     },
     "railway/abandoned": {
@@ -9948,6 +9954,7 @@
         "tags": {
             "waterway": "*"
         },
+        "searchable": false,
         "name": "Waterway"
     },
     "waterway/canal": {

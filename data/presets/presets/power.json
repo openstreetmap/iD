@@ -11,5 +11,6 @@
     "fields": [
         "power"
     ],
+    "searchable": false,
     "name": "Power"
 }

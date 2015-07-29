@@ -11,5 +11,6 @@
     "tags": {
         "waterway": "*"
     },
+    "searchable": false,
     "name": "Waterway"
 }
