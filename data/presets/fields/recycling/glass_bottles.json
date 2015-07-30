@@ -1,0 +1,5 @@
+{
+    "key": "recycling:glass_bottles",
+    "type": "check",
+    "label": "Accepts Glass Bottles"
+}

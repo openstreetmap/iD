@@ -1,0 +1,5 @@
+{
+    "key": "recycling:plastic",
+    "type": "check",
+    "label": "Accepts Plastic"
+}

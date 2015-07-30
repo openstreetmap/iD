@@ -1207,8 +1207,14 @@
             "recycling/glass": {
                 "label": "Accepts Glass"
             },
+            "recycling/glass_bottles": {
+                "label": "Accepts Glass Bottles"
+            },
             "recycling/paper": {
                 "label": "Accepts Paper"
+            },
+            "recycling/plastic": {
+                "label": "Accepts Plastic"
             },
             "recycling/type": {
                 "label": "Recycling Type",

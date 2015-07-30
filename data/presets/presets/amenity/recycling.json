@@ -5,8 +5,10 @@
         "address",
         "recycling/type",
         "recycling/cans",
-        "recycling/glass",
+        "recycling/glass_bottles",
         "recycling/paper",
+        "recycling/glass",
+        "recycling/plastic",
         "recycling/clothes"
     ],
     "geometry": [
