@@ -1177,6 +1177,10 @@
         },
         {
             "key": "leisure",
+            "value": "bowling_alley"
+        },
+        {
+            "key": "leisure",
             "value": "common"
         },
         {

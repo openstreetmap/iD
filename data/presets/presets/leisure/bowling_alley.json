@@ -1,0 +1,19 @@
+{
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "smoking"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+    ],
+    "tags": {
+        "leisure": "bowling_alley"
+    },
+    "name": "Bowling Alley"
+}

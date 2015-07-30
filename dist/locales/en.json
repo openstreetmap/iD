@@ -2623,6 +2623,10 @@
                 "name": "Adult Gaming Center",
                 "terms": "gambling,slot machine"
             },
+            "leisure/bowling_alley": {
+                "name": "Bowling Alley",
+                "terms": ""
+            },
             "leisure/common": {
                 "name": "Common",
                 "terms": "open space"

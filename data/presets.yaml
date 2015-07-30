@@ -2329,6 +2329,10 @@ en:
         name: Adult Gaming Center
         # 'terms: gambling,slot machine'
         terms: "<translate with synonyms or related terms for 'Adult Gaming Center', separated by commas>"
+      leisure/bowling_alley:
+        # leisure=bowling_alley
+        name: Bowling Alley
+        terms: "<translate with synonyms or related terms for 'Bowling Alley', separated by commas>"
       leisure/common:
         # leisure=common
         name: Common
