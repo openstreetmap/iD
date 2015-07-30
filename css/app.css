@@ -2427,6 +2427,13 @@ img.wiki-image {
     vertical-align: middle;
 }
 
+.save-section .buttons .action {
+    display: inline-block;
+    margin: 0 20px 0 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
 .loading-modal {
     text-align: center;
 }

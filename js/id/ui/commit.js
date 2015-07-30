@@ -6,7 +6,6 @@ iD.ui.Commit = function(context) {
             summary = context.history().difference().summary();
 
         function zoomToEntity(change) {
-
             var entity = change.entity;
             if (change.changeType !== 'deleted' &&
                 context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
@@ -20,17 +19,12 @@ iD.ui.Commit = function(context) {
         var header = selection.append('div')
             .attr('class', 'header fillL');
 
-        header.append('button')
-            .attr('class', 'fr')
-            .on('click.commit', function() { dispatch.cancel(); })
-            .append('span')
-            .attr('class', 'icon close');
-
         header.append('h3')
             .text(t('commit.title'));
 
         var body = selection.append('div')
             .attr('class', 'body');
+
 
         // Comment Section
         var commentSection = body.append('div')
@@ -49,6 +43,7 @@ iD.ui.Commit = function(context) {
             });
 
         commentField.node().select();
+
 
         // Warnings
         var warnings = body.selectAll('div.warning-section')
@@ -86,9 +81,10 @@ iD.ui.Commit = function(context) {
                 .placement('top')
             );
 
-        // Save Section
+
+        // Upload Explanation
         var saveSection = body.append('div')
-            .attr('class','modal-section fillL cf');
+            .attr('class','modal-section save-section fillL cf');
 
         var prose = saveSection.append('p')
             .attr('class', 'commit-info')
@@ -115,9 +111,13 @@ iD.ui.Commit = function(context) {
             prose.html(t('commit.upload_explanation_with_user', {user: userLink.html()}));
         });
 
-        // Confirm Button
-        var saveButton = saveSection.append('button')
-            .attr('class', 'action col6 button')
+
+        // Buttons
+        var buttonSection = saveSection.append('div')
+            .attr('class','buttons fillL cf');
+
+        var saveButton = buttonSection.append('button')
+            .attr('class', 'action col5 button')
             .on('click.save', function() {
                 dispatch.save({
                     comment: commentField.node().value
@@ -128,6 +128,16 @@ iD.ui.Commit = function(context) {
             .attr('class', 'label')
             .text(t('commit.save'));
 
+        var cancelButton = buttonSection.append('button')
+            .attr('class', 'action col5 button')
+            .on('click.cancel', function() { dispatch.cancel(); });
+
+        cancelButton.append('span')
+            .attr('class', 'label')
+            .text(t('commit.cancel'));
+
+
+        // Changes
         var changeSection = body.selectAll('div.commit-section')
             .data([0])
             .enter()
