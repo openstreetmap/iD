@@ -255,7 +255,7 @@ iD.Connection = function(useHttps) {
                 created_by: 'iD ' + iD.version,
                 imagery_used: imageryUsed.join(';').substr(0, 255),
                 host: (window.location.origin + window.location.pathname).substr(0, 255),
-                locale: detected.locale,
+                locale: detected.locale
             };
 
         if (comment) {

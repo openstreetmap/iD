@@ -19,7 +19,7 @@
 [![translation chart](https://www.transifex.com/projects/p/id-editor/chart/image_png)](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
 ## Installation
 
-To run the current development version, fork this project and serve it locally.
+To run the current development version, fork this project, run `make`, and serve it locally.
 If you have Python handy, just `cd` into the project root directory and run
 
      python -m SimpleHTTPServer

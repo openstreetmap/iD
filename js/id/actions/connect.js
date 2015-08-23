@@ -19,7 +19,7 @@ iD.actions.Connect = function(nodeIds) {
         for (var i = 0; i < nodeIds.length - 1; i++) {
             var node = graph.entity(nodeIds[i]);
 
-            /*jshint -W083 */
+            /* eslint-disable no-loop-func */
             graph.parentWays(node).forEach(function(parent) {
                 if (!parent.areAdjacent(node.id, survivor.id)) {
                     graph = graph.replace(parent.replaceNode(node.id, survivor.id));
@@ -29,7 +29,7 @@ iD.actions.Connect = function(nodeIds) {
             graph.parentRelations(node).forEach(function(parent) {
                 graph = graph.replace(parent.replaceMember(node, survivor));
             });
-            /*jshint +W083 */
+            /* eslint-enable no-loop-func */
 
             survivor = survivor.mergeTags(node.tags);
             graph = iD.actions.DeleteNode(node.id)(graph);

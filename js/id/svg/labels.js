@@ -182,7 +182,7 @@ iD.svg.Labels = function(projection, context) {
 
     function reverse(p) {
         var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]);
-        return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > - Math.PI/2);
+        return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > -Math.PI/2);
     }
 
     function lineString(nodes) {
@@ -279,7 +279,7 @@ iD.svg.Labels = function(projection, context) {
             if (!icon && !iD.util.displayName(entity))
                 continue;
 
-            for (k = 0; k < label_stack.length; k ++) {
+            for (k = 0; k < label_stack.length; k++) {
                 if (geometry === label_stack[k][0] && entity.tags[label_stack[k][1]]) {
                     labelable[k].push(entity);
                     break;
@@ -302,7 +302,7 @@ iD.svg.Labels = function(projection, context) {
         // Try and find a valid label for labellable entities
         for (k = 0; k < labelable.length; k++) {
             var font_size = font_sizes[k];
-            for (i = 0; i < labelable[k].length; i ++) {
+            for (i = 0; i < labelable[k].length; i++) {
                 entity = labelable[k][i];
                 var name = iD.util.displayName(entity),
                     width = name && textWidth(name, font_size),
@@ -343,7 +343,7 @@ iD.svg.Labels = function(projection, context) {
                 length = iD.geo.pathLength(nodes);
             if (length < width + 20) return;
 
-            for (var i = 0; i < lineOffsets.length; i ++) {
+            for (var i = 0; i < lineOffsets.length; i++) {
                 var offset = lineOffsets[i],
                     middle = offset / 100 * length,
                     start = middle - width/2;

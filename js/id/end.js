@@ -1,2 +1,1 @@
-/* jshint ignore:start */
 })();

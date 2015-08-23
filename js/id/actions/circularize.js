@@ -106,16 +106,16 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
                 var startIndex1 = way.nodes.lastIndexOf(startNode.id),
                     endIndex1 = way.nodes.lastIndexOf(endNode.id),
                     wayDirection1 = (endIndex1 - startIndex1);
-                if (wayDirection1 < -1) { wayDirection1 = 1;}
+                if (wayDirection1 < -1) { wayDirection1 = 1; }
 
-                /*jshint -W083 */
+                /* eslint-disable no-loop-func */
                 _.each(_.without(graph.parentWays(keyNodes[i]), way), function(sharedWay) {
                     if (sharedWay.areAdjacent(startNode.id, endNode.id)) {
                         var startIndex2 = sharedWay.nodes.lastIndexOf(startNode.id),
                             endIndex2 = sharedWay.nodes.lastIndexOf(endNode.id),
                             wayDirection2 = (endIndex2 - startIndex2),
                             insertAt = endIndex2;
-                        if (wayDirection2 < -1) { wayDirection2 = 1;}
+                        if (wayDirection2 < -1) { wayDirection2 = 1; }
 
                         if (wayDirection1 !== wayDirection2) {
                             inBetweenNodes.reverse();
@@ -127,7 +127,7 @@ iD.actions.Circularize = function(wayId, projection, maxAngle) {
                         graph = graph.replace(sharedWay);
                     }
                 });
-                /*jshint +W083 */
+                /* eslint-enable no-loop-func */
             }
 
         }
