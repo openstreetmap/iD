@@ -48,8 +48,7 @@ iD.modes.DragNode = function(context) {
     }
 
     function start(entity) {
-        cancelled = d3.event.sourceEvent.shiftKey ||
-            context.features().hasHiddenConnections(entity, context.graph());
+        cancelled = d3.event.sourceEvent.shiftKey || context.geometryLocked([entity.id]);
 
         if (cancelled) return behavior.cancel();
 

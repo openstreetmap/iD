@@ -24,7 +24,7 @@ iD.operations.Continue = function(selectedIDs, context) {
 
     operation.available = function() {
         return geometries.vertex.length === 1 && geometries.line.length <= 1 &&
-            !context.features().hasHiddenConnections(vertex, context.graph());
+            !context.geometryLocked([vertex]);
     };
 
     operation.disabled = function() {

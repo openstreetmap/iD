@@ -13,20 +13,21 @@ iD.operations.Move = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        var reason;
+        var reason = context.geometryLocked(selectedIDs);
+        if (reason) return reason;
+
+        reason = action.disabled(context.graph());
+        if (reason) return t('operations.move.' + reason);
+
         if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
-            reason = 'too_large';
-        } else if (_.any(selectedIDs, context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
+            return t('operations.move.too_large');
         }
-        return iD.actions.Move(selectedIDs).disabled(context.graph()) || reason;
+
+        return false;
     };
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
-        return disable ?
-            t('operations.move.' + disable) :
-            t('operations.move.description');
+        return operation.disabled() || t('operations.move.description');
     };
 
     operation.id = 'move';

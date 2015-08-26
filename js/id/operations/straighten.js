@@ -16,18 +16,17 @@ iD.operations.Straighten = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        var reason;
-        if (context.hasHiddenConnections(entityId)) {
-            reason = 'connected_to_hidden';
-        }
-        return action.disabled(context.graph()) || reason;
+        var reason = context.geometryLocked(selectedIDs);
+        if (reason) return reason;
+
+        reason = action.disabled(context.graph());
+        if (reason) return t('operations.straighten.' + reason);
+
+        return false;
     };
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
-        return disable ?
-            t('operations.straighten.' + disable) :
-            t('operations.straighten.description');
+        return operation.disabled() || t('operations.straighten.description');
     };
 
     operation.id = 'straighten';

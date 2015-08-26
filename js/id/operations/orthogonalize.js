@@ -18,20 +18,21 @@ iD.operations.Orthogonalize = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        var reason;
+        var reason = context.geometryLocked(selectedIDs);
+        if (reason) return reason;
+
+        reason = action.disabled(context.graph());
+        if (reason) return t('operations.orthogonalize.' + reason);
+
         if (extent.percentContainedIn(context.extent()) < 0.8) {
-            reason = 'too_large';
-        } else if (context.hasHiddenConnections(entityId)) {
-            reason = 'connected_to_hidden';
+            return t('operations.orthogonalize.too_large');
         }
-        return action.disabled(context.graph()) || reason;
+
+        return false;
     };
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
-        return disable ?
-            t('operations.orthogonalize.' + disable) :
-            t('operations.orthogonalize.description.' + geometry);
+        return operation.disabled() || t('operations.orthogonalize.description.' + geometry);
     };
 
     operation.id = 'orthogonalize';

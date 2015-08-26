@@ -33,6 +33,7 @@ iD.behavior.Paste = function(context) {
             i, j;
 
         if (!oldIDs.length) return;
+        if (context.editingLocked(oldIDs)) return;
 
         for (i = 0; i < oldIDs.length; i++) {
             var oldEntity = oldGraph.entity(oldIDs[i]),

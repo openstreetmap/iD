@@ -72,8 +72,7 @@
                 "area": "Made an area circular."
             },
             "not_closed": "This can't be made circular because it's not a loop.",
-            "too_large": "This can't be made circular because not enough of it is currently visible.",
-            "connected_to_hidden": "This can't be made circular because it is connected to a hidden feature."
+            "too_large": "This can't be made circular because not enough of it is currently visible."
         },
         "orthogonalize": {
             "title": "Square",
@@ -87,16 +86,14 @@
                 "area": "Squared the corners of an area."
             },
             "not_squarish": "This can't be made square because it is not squarish.",
-            "too_large": "This can't be made square because not enough of it is currently visible.",
-            "connected_to_hidden": "This can't be made square because it is connected to a hidden feature."
+            "too_large": "This can't be made square because not enough of it is currently visible."
         },
         "straighten": {
             "title": "Straighten",
             "description": "Straighten this line.",
             "key": "S",
             "annotation": "Straightened a line.",
-            "too_bendy": "This can't be straightened because it bends too much.",
-            "connected_to_hidden": "This line can't be straightened because it is connected to a hidden feature."
+            "too_bendy": "This can't be straightened because it bends too much."
         },
         "delete": {
             "title": "Delete",
@@ -110,8 +107,7 @@
                 "multiple": "Deleted {n} objects."
             },
             "incomplete_relation": "This feature can't be deleted because it hasn't been fully downloaded.",
-            "part_of_relation": "This feature can't be deleted because it's part of a larger relation. You must remove it from the relation first.",
-            "connected_to_hidden": "This can't be deleted because it is connected to a hidden feature."
+            "part_of_relation": "This feature can't be deleted because it's part of a larger relation. You must remove it from the relation first."
         },
         "add_member": {
             "annotation": "Added a member to a relation."
@@ -132,8 +128,7 @@
             "description": "Disconnect these lines/areas from each other.",
             "key": "D",
             "annotation": "Disconnected lines/areas.",
-            "not_connected": "There aren't enough lines/areas here to disconnect.",
-            "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature."
+            "not_connected": "There aren't enough lines/areas here to disconnect."
         },
         "merge": {
             "title": "Merge",
@@ -157,8 +152,7 @@
                 "multiple": "Moved multiple objects."
             },
             "incomplete_relation": "This feature can't be moved because it hasn't been fully downloaded.",
-            "too_large": "This can't be moved because not enough of it is currently visible.",
-            "connected_to_hidden": "This can't be moved because it is connected to a hidden feature."
+            "too_large": "This can't be moved because not enough of it is currently visible."
         },
         "rotate": {
             "title": "Rotate",
@@ -168,8 +162,7 @@
                 "line": "Rotated a line.",
                 "area": "Rotated an area."
             },
-            "too_large": "This can't be rotated because not enough of it is currently visible.",
-            "connected_to_hidden": "This can't be rotated because it is connected to a hidden feature."
+            "too_large": "This can't be rotated because not enough of it is currently visible."
         },
         "reverse": {
             "title": "Reverse",
@@ -191,8 +184,7 @@
                 "multiple": "Split {n} lines/area boundaries."
             },
             "not_eligible": "Lines can't be split at their beginning or end.",
-            "multiple_ways": "There are too many lines here to split.",
-            "connected_to_hidden": "This can't be split because it is connected to a hidden feature."
+            "multiple_ways": "There are too many lines here to split."
         },
         "restriction": {
             "help": {
@@ -469,11 +461,9 @@
         "used_with": "used with {type}"
     },
     "restrictions": {
-        "restrict_edit": "You may not edit because",
-        "restrict_tag": "You may not change tags because",
-        "this_is": "this feature is",
-        "these_are": "these features are",
-        "connected_to_hidden": "connected to other hidden features."
+        "restrict_edit": "You may not edit because {reason}.",
+        "restrict_tag": "You may not change tags because {reason}.",
+        "connected_to_hidden": "this feature is connected to a hidden feature"
     },
     "validations": {
         "untagged_point": "Untagged point",

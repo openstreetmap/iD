@@ -19,18 +19,17 @@ iD.operations.Disconnect = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        var reason;
-        if (_.any(selectedIDs, context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
-        }
-        return action.disabled(context.graph()) || reason;
+        var reason = context.geometryLocked(selectedIDs);
+        if (reason) return reason;
+
+        reason = action.disabled(context.graph());
+        if (reason) return t('operations.disconnect.' + reason);
+
+        return false;
     };
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
-        return disable ?
-            t('operations.disconnect.' + disable) :
-            t('operations.disconnect.description');
+        return operation.disabled() || t('operations.disconnect.description');
     };
 
     operation.id = 'disconnect';

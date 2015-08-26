@@ -20,20 +20,18 @@ iD.operations.Rotate = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
+        var reason = context.geometryLocked(selectedIDs);
+        if (reason) return reason;
+
         if (extent.percentContainedIn(context.extent()) < 0.8) {
-            return 'too_large';
-        } else if (context.hasHiddenConnections(entityId)) {
-            return 'connected_to_hidden';
-        } else {
-            return false;
+            return t('operations.rotate.too_large');
         }
+
+        return false;
     };
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
-        return disable ?
-            t('operations.rotate.' + disable) :
-            t('operations.rotate.description');
+        return operation.disabled() || t('operations.rotate.description');
     };
 
     operation.id = 'rotate';

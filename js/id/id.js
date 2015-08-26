@@ -247,41 +247,13 @@ window.iD = function () {
     /* Features */
     var features = iD.Features(context);
     context.features = function() { return features; };
-    context.hasHiddenConnections = function(id) {
-        // var graph = history.graph(),
-        //     entity = graph.entity(id);
-        // return features.hasHiddenConnections(entity, graph);
-        return context.geometryLocked([id]);
-    };
 
     /* Editing Restrictions */
-    var restrict = {};
-    context.restrictions = {
-        all: function() { return restrict.all; },
-        geometry: function() { return restrict.geometry; },
-        tags: function() { return restrict.tags; },
-        reload: function() {
-            restrict.all = _.map(iD.restrictions, function(fn) { return fn(context); });
-            restrict.geometry = _.filter(restrict.all, 'lockGeometry');
-            restrict.tags = _.filter(restrict.all, 'lockTags');
-        },
-        test: function(ruleset, ids) {
-            return _.reduce(ruleset, function(result, restriction) {
-                return result || restriction.test(ids);
-            }, false);
-        }
-    };
-    context.restrictions.reload();
-
-    context.editingLocked = function(ids) {
-        return context.restrictions.test(restrict.all, ids);
-    };
-    context.geometryLocked = function(ids) {
-        return context.restrictions.test(restrict.geometry, ids);
-    };
-    context.tagsLocked = function(ids) {
-        return context.restrictions.test(restrict.tags, ids);
-    };
+    var restrictions = iD.Restrictions(context);
+    context.restrictions = function() { return restrictions; }
+    context.editingLocked = function(ids) { return restrictions.editingLocked(ids); };
+    context.geometryLocked = function(ids) { return restrictions.geometryLocked(ids); };
+    context.tagsLocked = function(ids) { return restrictions.tagsLocked(ids); };
 
     /* Map */
     var map = iD.Map(context);

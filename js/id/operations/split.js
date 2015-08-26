@@ -29,18 +29,18 @@ iD.operations.Split = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        var reason;
-        if (_.any(selectedIDs, context.hasHiddenConnections)) {
-            reason = 'connected_to_hidden';
-        }
-        return action.disabled(context.graph()) || reason;
+        var reason = context.geometryLocked(selectedIDs);
+        if (reason) return reason;
+
+        reason = action.disabled(context.graph());
+        if (reason) return t('operations.split.' + reason);
+
+        return false;
     };
 
     operation.tooltip = function() {
         var disable = operation.disabled();
-        if (disable) {
-            return t('operations.split.' + disable);
-        }
+        if (disable) return disable;
 
         var ways = action.ways(context.graph());
         if (ways.length === 1) {

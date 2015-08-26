@@ -13,11 +13,12 @@ iD.operations.Reverse = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        return false;
+        var reason = context.editingLocked(selectedIDs);
+        return reason || false;
     };
 
     operation.tooltip = function() {
-        return t('operations.reverse.description');
+        return operation.disabled() || t('operations.reverse.description');
     };
 
     operation.id = 'reverse';

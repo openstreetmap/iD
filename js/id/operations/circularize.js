@@ -17,20 +17,21 @@ iD.operations.Circularize = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        var reason;
+        var reason = context.geometryLocked(selectedIDs);
+        if (reason) return reason;
+
+        reason = action.disabled(context.graph());
+        if (reason) return t('operations.circularize.' + reason);
+
         if (extent.percentContainedIn(context.extent()) < 0.8) {
-            reason = 'too_large';
-        } else if (context.hasHiddenConnections(entityId)) {
-            reason = 'connected_to_hidden';
+            return t('operations.circularize.too_large');
         }
-        return action.disabled(context.graph()) || reason;
+
+        return false;
     };
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
-        return disable ?
-            t('operations.circularize.' + disable) :
-            t('operations.circularize.description.' + geometry);
+        return operation.disabled() || t('operations.circularize.description.' + geometry);
     };
 
     operation.id = 'circularize';

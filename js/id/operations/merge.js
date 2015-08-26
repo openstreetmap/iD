@@ -25,12 +25,9 @@ iD.operations.Merge = function(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        return join.disabled(context.graph()) &&
-            merge.disabled(context.graph()) &&
-            mergePolygon.disabled(context.graph());
-    };
+        var reason = context.editingLocked(selectedIDs);
+        if (reason) return reason;
 
-    operation.tooltip = function() {
         var j = join.disabled(context.graph()),
             m = merge.disabled(context.graph()),
             p = mergePolygon.disabled(context.graph());
@@ -44,7 +41,11 @@ iD.operations.Merge = function(selectedIDs, context) {
         if (j && m && p)
             return t('operations.merge.' + j);
 
-        return t('operations.merge.description');
+        return false;
+    };
+
+    operation.tooltip = function() {
+        return operation.disabled() || t('operations.merge.description');
     };
 
     operation.id = 'merge';
