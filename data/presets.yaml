@@ -24,7 +24,7 @@ en:
     fields:
       access:
         # 'access=*, foot=*, motor_vehicle=*, bicycle=*, horse=*'
-        label: Access
+        label: Legal access
         options:
           designated:
             # access=designated
