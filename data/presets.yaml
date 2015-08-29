@@ -71,7 +71,7 @@ en:
           motor_vehicle: Motor Vehicles
       access_simple:
         # 'access=*'
-        label: Access
+        label: Legal access
         # access_simple field placeholder
         placeholder: 'yes'
       access_toilets:
