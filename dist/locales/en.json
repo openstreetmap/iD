@@ -1013,7 +1013,26 @@
                     "mixed": "Mixed"
                 }
             },
+            "leaf_cycle_singular": {
+                "label": "Leaf Cycle",
+                "options": {
+                    "evergreen": "Evergreen",
+                    "deciduous": "Deciduous",
+                    "semi_evergreen": "Semi-Evergreen",
+                    "semi_deciduous": "Semi-Deciduous",
+                    "mixed": "Mixed"
+                }
+            },
             "leaf_type": {
+                "label": "Leaf Type",
+                "options": {
+                    "broadleaved": "Broadleaved",
+                    "needleleaved": "Needleleaved",
+                    "mixed": "Mixed",
+                    "leafless": "Leafless"
+                }
+            },
+            "leaf_type_singular": {
                 "label": "Leaf Type",
                 "options": {
                     "broadleaved": "Broadleaved",

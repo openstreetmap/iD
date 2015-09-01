@@ -6080,8 +6080,8 @@
     },
     "natural/tree": {
         "fields": [
-            "leaf_type",
-            "leaf_cycle",
+            "leaf_type_singular",
+            "leaf_cycle_singular",
             "denotation"
         ],
         "icon": "park",
