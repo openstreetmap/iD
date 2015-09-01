@@ -1,7 +1,8 @@
 {
     "fields": [
         "vending",
-        "operator"
+        "operator",
+        "level"
     ],
     "geometry": [
         "point"
