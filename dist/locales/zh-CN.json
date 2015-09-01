@@ -239,6 +239,7 @@
     "commit": {
         "title": "保存变更",
         "description_placeholder": "简单说明你的贡献。",
+        "message_label": "修改集合注释",
         "upload_explanation": "你的修改将会在所有使用OpenStreetMap的数据的地图上看得见。",
         "upload_explanation_with_user": "{user}，你的修改将会在所有使用OpenStreetMap数据的地图上展现。",
         "save": "保存",
@@ -252,6 +253,26 @@
     "contributors": {
         "list": "{users}编辑",
         "truncated_list": "{users}及另外{count}人编辑"
+    },
+    "infobox": {
+        "selected": "已选择{n}个",
+        "geometry": "几何",
+        "closed": "已关闭",
+        "center": "中心",
+        "perimeter": "周长",
+        "length": "长度",
+        "area": "面积",
+        "centroid": "重心",
+        "location": "位置",
+        "metric": "公制",
+        "imperial": "英制"
+    },
+    "geometry": {
+        "point": "点",
+        "vertex": "顶点",
+        "line": "线",
+        "area": "面",
+        "relation": "关系"
     },
     "geocoder": {
         "search": "在全球搜索...",
@@ -302,7 +323,11 @@
         "custom_button": "编辑自定义背景",
         "custom_prompt": "输入瓦片模板。Z/X/Y方案的有效标记是{z}，{x}，{y}，quadtile方案的有效标记是{u}。",
         "fix_misalignment": "修复对齐",
-        "reset": "重置"
+        "reset": "重置",
+        "minimap": {
+            "description": "小地图",
+            "tooltip": "显示一个大范围的地图来帮助定位当前显示的区域"
+        }
     },
     "map_data": {
         "title": "地图数据",
@@ -473,7 +498,7 @@
     "help": {
         "title": "帮助",
         "help": "#帮助\n\n这是一个免费且可编辑的世界地图[OpenStreetMap](http://www.openstreetmap.org/)\n的编辑器，你可以用它来增加和更新你所在地区的数据，\n为全世界将这个开源、开放数据的世界地图变得更好。\n\n你在这张地图上的编辑将会被使用OpenStreetMap的所有人看到。\n你需要[登录](https://www.openstreetmap.org/login)才能编辑。\n\n本编辑器名为[iD](http://ideditor.com/)，是一个[源码在GitHub上共享](https://github.com/openstreetmap/iD)\n的协作项目。\n",
-        "editing_saving": "# 编辑和保存\n\n本编辑器为在线使用设计，您先在也是通过一个网站访问它的。\n\n### 选择特征\n\n在地图上点击可以选择一个地图特征，比如道路或景点，并使得所选的特征高亮显示、打开包含它详情的面板、以及显示一个包含您可以对这个特征所做操作的菜单。\n\n按住 Shift 键并点击您想选择的特征或在地图上拖拽方框可以选择多个特征。\n\n### 保存编辑\n\n当您做了比如编辑道路、建筑物或地点的更改后，这些更改在您将它们保存到服务器之前都只会保存在本地。不要担心犯错，您可以点击撤销或重做按钮撤销或重做更改。\n\n点击「保存」按钮结束一组编辑，比方说，当您完成了城镇一个区域并想要开始一个新区域。您会有一次检查您所做的更改的机会，此时编辑器会提供一些有帮助的建议并对看起来有问题的更改作出警告。\n\n如果一切正常，您可以输入一段简短的文字说明您所做的更改，并再次点击「保存」将更改提交到 [OpenStreetMap.org](http://www.openstreetmap.org/)，让所有用户都可以浏览或继续改进。\n\n如果您不能一次完成您的编辑，您可以离开编辑器窗口，并随时回来(同一台电脑，同一个浏览器)继续编辑。编辑器会为您保留上一次的状态。\n",
+        "editing_saving": "# 编辑和保存\n\n本编辑器为在线使用设计，您也正在经由一个网站使用该编辑器。\n\n### 选择特征\n\n您可以在地图上单击以选中一个特征，如道路或一个感兴趣的位置。\n被选中的特征将被高亮显示，同时弹出一个显示其详细信息的面板，\n以及一个列出了可对该特征进行之操作的菜单。\n\n如需同时选中多个特征，您需要先按住 Shift 键。然后请多次点击选择全部的特征，\n或者在地图上画出一个长方形以圈出并选中长方形中所有的点。\n\n### 保存编辑内容\n\n当您做了比如编辑道路、建筑物或地点的更改后，\n这些更改在您将它们保存到服务器之前都只会保存在本地。\n无需担心犯错：您随时可以点击撤销按钮或重做按钮以撤销或重做更改。\n\n请点击“保存”按钮以结束一组编辑内容。例如，如果您刚完成了城镇的一个区域，\n正打算开始下一个区域的工作，这时您有机会重新检查之前完成的工作，\n同时编辑器会自动给出有用的建议。如果您的更改有一些问题，编辑器也会给出警告。\n\n如果一切正常，您可以在保存时写入一小段注释以解释上一阶段的工作内容，\n然后再次点击“保存”按钮以向\n[OpenStreetMap.org](http://www.openstreetmap.org/) 提交更改。\n在此之后，您的更改将对所有其它用户可见，其它用户也将以此为基础继续改进地图。\n\n如果您一时无法完成编辑内容，您可以关闭编辑器窗口。\n待稍后您返回 (至同一台计算机的同一个网页浏览器) 时，\n重新打开编辑器将会恢复您的工作进度。\n\n## 使用编辑器\n\n编辑器可用的键盘快捷键列表可以 [在此](http://wiki.openstreetmap.org/wiki/ID/Shortcuts) 找到。\n",
         "roads": "# 道路\n\n您可以利用这个编辑器创建，修复，及删除道路。道路可以有很多种：路径，公路，郊游径，单车径，和更多－ 任何经常使用的路段都可制图。\n\n### 选择道路\n\n点击图上的道路以选择该道路。道路的轮廓会以高亮度显示，而同时地图上会出现小工具选单，旁边亦会弹出面板，显示有关该道路的信息。\n\n### 编辑道路\n\n您或会经常注意到，道路并非对齐在背景中显示的卫星图像或GPS轨迹。您可以调整这些道路，让他们位于正确的位置。\n\n首先，点击您想编辑的道路。这会将道路以高亮度显示，并显示沿着这道路的节点，你可以拖曳这些节点到更好的位置。如果您想增加细节，可以为道路添加新的节点，点击两下道路上没有节点的部分，便可在该处増加节点。\n\n如果道路连接到另一条道路，但在地图上并未妥善连接，你可以拖曳道路的其中一个节点到另一条道路上，以连接两条道路。连接好道路，对地图非常重要，特别是对提供驾驶指示的应用程序而言，是必要的。\n\n您也可以点击'移动'工具或按`M`快速键，来移动整条道路，然后点击一下以完成移动的动作。\n\n### 删除道路\n\n如果一条道路完全不正确－ 您看到它在卫星图像上不存在，并最好实地证实它根本不存在－ 您可以将道路删除，这会从地图中将之移除。删除物件时务必要小心－ 像任何其他的编辑，结果会被大家看见，而卫星图像往往会过时，因此该道路或许只是新建的。\n\n要删除道路，您可以点击它以选择，然后点击垃圾桶图标，或按'Delete' 键。\n\n### 绘制新道路\n\n发现某处应有一条道路，但地图上没有？点击编辑器左上方的'线'图标，或按下`2`快速键，以开始绘制线段。\n\n在地图上点击道路的开端，以开始绘制道路。如果道路从一条现有的道路分支出来，应点击两者连接的地方，以开始绘制。\n\n然后点击沿着道路的点，以根据卫星影像或GPS轨迹，正确地绘制道路。如果您绘制的道路如果与另一条道路交汇，请点击相交点以将它们连接起来。当您完成绘制后，可点击两下或按键盘上的'Return' 或'Enter' 键。\n",
         "gps": "# GPS\n\nGPS数据是OpenStreetMap最信任的数据源。本编辑器\n支持本地轨迹（即本地计算机中的GPX文件）。你可以\n用各种智能手机或者用个人手持GPS硬件收集此类数据。\n\n关于如何进行GPS测绘，请参见\n[用GPS测绘](http://learnosm.org/en/beginner/using-gps/).\n\n要利用GPX轨迹绘图，请将GPX文件拖曳至地图编辑器。\n如果能被识别，其将以亮紫色线条显示于图中。点击右侧\n地图数据菜单开启、关闭或缩放至该新增的GPX图层。\n\nGPX轨迹未被直接上传至OpenStreetMap，轨迹的最佳用\n法是在地图上显示，引导你绘制新的地图要素。也可以[上传\n至OpenStreetMap](http://www.openstreetmap.org/trace/create)\n供其他用户使用。\n",
         "imagery": "# 影像\n\n航拍影像是绘制地图的一个重要资源。编辑器右侧「背景设置」菜单里提供了一组飞机航拍、卫星影像及自由编译的来源。\n\n默认情况下编辑器显示的是[必应地图](http://www.bing.com/maps/)的卫星图层，但当您移动或缩放地图到一个新的地理区域会得到新的来源。一些国家，比如美国、法国和丹麦，会在一些区域提供非常高质量的影像。\n\n影像有时会因为影像提供商的错误和地图数据存在偏移。如果您看到许多道路偏离背景，请不要立刻移动它们来匹配背景，您可以点击背景设置界面底部的「修复对齐」来调整影像以使它和已有数据吻合。\n",
@@ -761,6 +786,13 @@
             },
             "cuisine": {
                 "label": "菜肴"
+            },
+            "cycleway": {
+                "label": "自行车道",
+                "types": {
+                    "cycleway:left": "左侧",
+                    "cycleway:right": "右侧"
+                }
             },
             "delivery": {
                 "label": "邮寄"
@@ -1115,6 +1147,9 @@
             "power": {
                 "label": "类型"
             },
+            "power_supply": {
+                "label": "供电"
+            },
             "railway": {
                 "label": "类型"
             },
@@ -1170,6 +1205,7 @@
                 "label": "类型"
             },
             "service/bicycle/chain_tool": {
+                "label": "链条维修工具",
                 "options": {
                     "no": "否",
                     "undefined": "假定为否",
@@ -1332,6 +1368,9 @@
             "water": {
                 "label": "类型"
             },
+            "water_point": {
+                "label": "饮水点"
+            },
             "waterway": {
                 "label": "类型"
             },
@@ -1363,7 +1402,7 @@
             },
             "aerialway/cable_car": {
                 "name": "缆车",
-                "terms": "缆车, 索道车"
+                "terms": "缆车,索道车"
             },
             "aerialway/chair_lift": {
                 "name": "登山吊椅",
@@ -1431,7 +1470,7 @@
             },
             "amenity/atm": {
                 "name": "ATM",
-                "terms": "ATM,提款机,自动提款机"
+                "terms": "atm,提款机,自动提款机"
             },
             "amenity/bank": {
                 "name": "银行",
@@ -1486,6 +1525,9 @@
                 "name": "洗车",
                 "terms": "洗车店,洗车"
             },
+            "amenity/casino": {
+                "name": "赌场"
+            },
             "amenity/charging_station": {
                 "name": "充电站",
                 "terms": "充电站"
@@ -1530,7 +1572,7 @@
             },
             "amenity/dojo": {
                 "name": "Dojo /武术学院",
-                "terms": "Dojo /武术学院"
+                "terms": "dojo /武术学院"
             },
             "amenity/drinking_water": {
                 "name": "饮水处",
@@ -1709,6 +1751,9 @@
                 "name": "区域",
                 "terms": "区域"
             },
+            "area/highway": {
+                "name": "道路表面"
+            },
             "barrier": {
                 "name": "屏障",
                 "terms": "屏障,阻挡"
@@ -1879,7 +1924,7 @@
                 "terms": "校舍,学校建筑"
             },
             "building/shed": {
-                "terms": "储物间, 小木屋"
+                "terms": "储物间,小木屋"
             },
             "building/train_station": {
                 "name": "火车站",
@@ -1962,7 +2007,8 @@
                 "name": "油漆匠"
             },
             "craft/photographer": {
-                "name": "照相店"
+                "name": "照相店",
+                "terms": "摄影师"
             },
             "craft/photographic_laboratory": {
                 "name": "照片冲洗店"
@@ -2053,13 +2099,8 @@
                 "name": "入口/出口",
                 "terms": "入口/出口,出入口"
             },
-            "footway/crossing": {
-                "name": "路口",
-                "terms": "路口"
-            },
             "footway/crosswalk": {
-                "name": "人行横道",
-                "terms": "人行横道"
+                "name": "人行横道"
             },
             "footway/sidewalk": {
                 "name": "人行道",
@@ -2104,14 +2145,6 @@
                 "name": "公交车站",
                 "terms": "公交车站,巴士站"
             },
-            "highway/crossing": {
-                "name": "路口",
-                "terms": "路口"
-            },
-            "highway/crosswalk": {
-                "name": "人行横道",
-                "terms": "人行横道"
-            },
             "highway/cycleway": {
                 "name": "自行车道",
                 "terms": "自行车,单车"
@@ -2145,8 +2178,7 @@
                 "terms": "路径"
             },
             "highway/pedestrian": {
-                "name": "步行街",
-                "terms": "行人专用路"
+                "name": "步行街"
             },
             "highway/primary": {
                 "name": "主要道路",
@@ -2290,10 +2322,6 @@
                 "name": "交叉口",
                 "terms": "交通枢纽,路口"
             },
-            "landuse": {
-                "name": "土地用途",
-                "terms": "土地用途"
-            },
             "landuse/allotments": {
                 "name": "菜地",
                 "terms": "菜地,社区花园"
@@ -2329,7 +2357,8 @@
                 "terms": "森林"
             },
             "landuse/garages": {
-                "name": "车库"
+                "name": "车库",
+                "terms": "车库,停车间"
             },
             "landuse/grass": {
                 "name": "草坪",
@@ -2346,7 +2375,8 @@
                 "terms": "牧场,草场"
             },
             "landuse/military": {
-                "name": "军事区"
+                "name": "军事区",
+                "terms": "军事用地,军事区域"
             },
             "landuse/orchard": {
                 "name": "果园",
@@ -2524,7 +2554,8 @@
                 "terms": "水塔"
             },
             "man_made/water_well": {
-                "name": "水井"
+                "name": "水井",
+                "terms": "水井,取水点"
             },
             "man_made/water_works": {
                 "name": "供水厂",
@@ -2605,6 +2636,9 @@
                 "name": "树",
                 "terms": "树"
             },
+            "natural/volcano": {
+                "name": "火山"
+            },
             "natural/water": {
                 "name": "水",
                 "terms": "水"
@@ -2675,7 +2709,7 @@
             },
             "office/it": {
                 "name": "IT公司",
-                "terms": "IT公司"
+                "terms": "it公司"
             },
             "office/lawyer": {
                 "name": "律师事务所",
@@ -2723,6 +2757,9 @@
             "place/city": {
                 "name": "城市",
                 "terms": "城市"
+            },
+            "place/farm": {
+                "name": "农场"
             },
             "place/hamlet": {
                 "name": "小村庄",
@@ -2824,10 +2861,6 @@
                 "name": "小火车站",
                 "terms": "小火车站"
             },
-            "railway/level_crossing": {
-                "name": "平交道口",
-                "terms": "平交道口"
-            },
             "railway/monorail": {
                 "name": "单轨铁路",
                 "terms": "单轨铁路"
@@ -2887,10 +2920,12 @@
                 "terms": "美术馆,艺术馆"
             },
             "shop/baby_goods": {
-                "name": "婴儿用品店"
+                "name": "婴儿用品店",
+                "terms": "母婴用品店,婴幼儿用品店"
             },
             "shop/bag": {
-                "name": "箱包店"
+                "name": "箱包店",
+                "terms": "箱包店"
             },
             "shop/bakery": {
                 "name": "面包店",
@@ -2919,7 +2954,8 @@
                 "name": "书商"
             },
             "shop/books": {
-                "name": "书店"
+                "name": "书店",
+                "terms": "书店,书城"
             },
             "shop/boutique": {
                 "name": "精品店",
@@ -2999,7 +3035,7 @@
             },
             "shop/doityourself": {
                 "name": "DIY店",
-                "terms": "DIY商店"
+                "terms": "diy商店"
             },
             "shop/dry_cleaning": {
                 "name": "干洗店"
@@ -3101,6 +3137,9 @@
             "shop/musical_instrument": {
                 "name": "乐器店"
             },
+            "shop/newsagent": {
+                "name": "报摊"
+            },
             "shop/optician": {
                 "name": "眼镜店",
                 "terms": "眼镜店"
@@ -3164,6 +3203,12 @@
             "shop/video": {
                 "name": "影像店",
                 "terms": "影像店"
+            },
+            "shop/video_games": {
+                "name": "视频游戏店"
+            },
+            "shop/weapons": {
+                "name": "武器店"
             },
             "shop/wine": {
                 "name": "酒店",

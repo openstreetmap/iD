@@ -323,7 +323,11 @@
         "custom_button": "Uredi prilagođenu pozadinu",
         "custom_prompt": "Unesi URL predložak za popločavanje. Ispravni znakovi su {z}, {x}, {y} za Z/X/Y shemu i {u} za quadtile shemu.",
         "fix_misalignment": "Popravi odstupanje",
-        "reset": "resetiraj"
+        "reset": "resetiraj",
+        "minimap": {
+            "description": "Mini-karta",
+            "tooltip": "Prikaži odzumiranu kartu za lakše lociranje trenutno prikazanog područja."
+        }
     },
     "map_data": {
         "title": "Podaci karte",
@@ -494,7 +498,7 @@
     "help": {
         "title": "Pomoć",
         "help": "# Pomoć\n\niD je mrežna aplikacija za uređivanje [OpenStreetMap-a](http://www.openstreetmap.org/), \nbesplatne karte svijeta. Možeš ju koristiti za dodavanje \ni obnavljanje podataka u svojoj okolini, čime stvaraš bolju otvorenu kartu svijeta dostupnu svima, uključujući izvorne podatke karte. \n\nIspravke i sadržaj koji napraviš na karti biti će vidljive svakome tko koristi \nOpenStreetMap. Da bi mogao/la uređivati kartu, trebaš se \n[prijaviti] (https://www.openstreetmap.org/login). \n\n[iD editor](http://ideditor.com/) je suradnički projekt sa [izvornim kôdom \ndostupnim na GitHub-u](https://github.com/openstreetmap/iD).\n",
-        "editing_saving": "# Uređivanje i spremanje promjena\n\nOvaj uređivač je primarno dizajniran za uređivanje na mreži i trenutačno ga\nkoristiš kroz internet preglednik kao web stranicu.\n\n### Odabir značajki\n\nZa odabir značajke karte, npr. ceste ili točke od interesa, klikni na nju na karti.\nPojaviti će se obrub oko značajke, otvoriti će se bočno okno koje prikazuje više\ndetalja o značajki i prikazati će se alatni izbornik sa mogućnostima koje možeš\nnapraviti na značajki.\n\nZa odabir nekoliko značajki istovremeno, drži tipku \"Shift\". Zatim ili klikni na\nznačajke koje želiš odabrati ili klikni i povuci za crtanje četverokuta. Time ćeš\nodabrati sve točke unutar četverokuta.\n\n### Spremanje uređivanja\n\nKada napraviš promjene na karti, npr. urediš ulice, zgrade i mjesta, one su\nspremljene lokalno sve dok ih ne spremiš na server. Nemoraš se briniti ukoliko\nnapraviš pogrešku - možeš poništiti promjene klikom na tipku \"Opovrgni\" i\nponoviti promjene klikom na tipku \"Ponovi\".\n\nKlikni na tipku \"Spremi\" da završiš grupu promjena - na primjer ako si završio/la\npodručje grada i želiš početi uređivati novo područje. Nakon što stisneš \"Spremi\"\nmoći ćeš pregledati sve promjene koje si napravio/la i uređivač će ti dati korisne\nprijedloge i upozorenja ako je nešto neuobičajeno među promjenama.\n\nAko je sve u redu, možeš ostaviti kratak komentar u kojem ćeš opisati napravljenu\npromjenu na karti. Ponovno klikni \"Spremi\" za postavljanje promjena na\n[OpenStreetMap.org](http://www.openstreetmap.org/), gdje će biti vidljive svim\ndrugim korisnicima i dostupne drugima za dopunu i nadogradnju.\n\nAko ne možeš završiti sve planirane promjene odjednom, možeš ugasiti prozor\nuređivača i kasnije se vratiti (na isti internet preglednik i isto računalo) i uređivač\nće ti ponuditi da nastaviš gdje si stao/la. \n",
+        "editing_saving": "# Uređivanje i pohranjivanje\n\nOvaj uređivač je primarno dizajniran za korištenje na mreži, i pristupaš mu\nkroz web stranicu.\n\n### Selektiranje značajki\n\nZa selektiranje značajke na karti, npr. ceste ili točke interesa, klikni\nna nju na karti. To će istaknuti značajku, otvoriti okno\ns detaljima o njoj, i prikazati izbornik s mogućnostima koje možeš napraviti na značajki.\n\nZa selektiranje više značajki, pritisni i drži 'Shift' tipku. Tada ili klikni na\nznačajke koje želiš selektirati ili povuci po karti za crtanje pravokutnika.\nTime će se nacrtati pravokutnik i selektirati sve točke unutar njega.\n\n### Pohranjivanje promjena\n\nKada napraviš promjenu poput uređenja ceste, zgrada i mjesta, one su\npohranjene lokalno dok ih ne spremiš na server. Ne moraš se brinuti ako pogriješiš\n- možeš poništiti promjene klikom na tipku \"Opovrgni\" i vratiti\npromjene klikom na tipku \"Ponovi\".\n\nKlikni 'Spremi' za završavanje skupa uređivanja - npr. ako završiš jedno područje grada\ni želiš početi novo područje. Imaš mogućnost, pogledati popis promjena koju si napravio/la,\ni uređivač će ti dati korisne prijedloge i upozorenja\nako je promjena nešto nije u redu.\n\nAko je sve u redu, možeš unijeti kratak komentar za objašnjenje napravljenih promjena\nkoje si napravio/la i ponovno kliknuti 'Spremi' za postavljanje promjena\nna [OpenStreetMap.org](http://www.openstreetmap.org/), gdje će biti vidljive\nza sve ostale korisnike i dostupne drugima za dogradnju i unaprijeđenje podataka.\n\nAko nisi zavšio/la sve promjene u jednom uređivanju, možeš ostaviti prozor\nuređivača i doći kasnije (na isto računalo i isti internet preglednik) i\naplikacija za uređivanje će ti ponuditi vraćanje tvojih započetih promjena.\n\n### Korištenje uređivača\n\nPopis dostupnih kratica na tipkovnici mogu se pronaći[ovdje](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
         "roads": "# Ceste\n\nMožeš stvarati, popraviti/urediti i obrisati ceste pomoću ovog uređivača. Ceste\nmogu biti svih vrsta: puteljci, ceste, poljski putovi, biciklističke staze i drugo -\nsve staze preko kojih se često prolazi bi se trebale kartirati.\n\n### Odabir\n\nKlikni na cestu da ju odabereš. Pojaviti će se obrub oko ceste, zajedno s\nmalim alatnim izbornikom na karti i bočnim oknom koji prikazuje dodatne\ninformacije o selektiranoj cesti.\n\n### Uređivanje\n\nČesto ćeš vidjeti ceste koje se ne podudaraju s pozadinskim snimcima ili s\nGNSS tragom. Možeš urediti te ceste tako da se nalaze na ispravnom mjestu.\n\nPrvo klikni na cestu koju želiš urediti. To će ju označiti i prikazati kontrolne\ntočke unutar nje koje možeš premjestiti na točnije lokacije. Ako želiš dodati\nnove kontrolne točke za precizniju putanju, klikni dvoklikom na dio ceste gdje\nnema točke kako bi dodao/la novu.\n\nAko se cesta spaja s drugom cestom, ali nije ispravno spojena na karti, možeš\npovući kontrolnu točku na drugu cestu kako bi ih spojio/la. Spojene ceste su\nvrlo važne za kartu i osnova za omogućavanje uputa za navigaciju.\n\nTakođer možeš kliknuti alat \"Premjesti\" ili pritisnuti kraticu - tipku `M` za\npomak cijele ceste odjednom i zatim kliknuti ponovno za spremanje tog\npomaka.\n\n### Brisanje\n\nAko je cesta potpuno krivo ucrtana - ne vidi se na satelitskim snimkama i ako\nsi utvrdio/la da zbilja ne postoji uvidom na terenu možeš ju obrisati, što će ju\nobrisati s karte. Budi oprezan/na kada brišeš značajke - kao i kod svakog\ndrugog uređivanja rezultati su vidljivi svima, a satelitske snimke su često\nzastarjele, pa je moguće da je cesta nedavno sagrađena.\n\nZa brisanje ceste najprije ju označi, a zatim klikni na ikonicu kante za smeće ili\npritisni tipku \"Delete\".\n\n### Stvaranje\n\nAko si pronašao/la cestu koja bi trebala biti ucrtana ali nije, klikni ikonicu\n\"Linija\" na gornjem lijevom dijelu uređivača ili pritisni kraticu - tipku `2` da\nzapočneš crtanje linije.\n\nKlikni na početak ceste na karti da započneš crtanje. Ako se cesta odvaja od\npostojeće ceste, klikni na mjesto gdje se spajaju.\n\nZatim klikni na točke duž ceste tako da prate ispravnu putanju ceste, prema\npodacima satelitske snimke ili GNSS traga. Ako se cesta koju crtaš križa s\ndrugom cestom, spoji ih klikom na mjestu raskrižja. Kada si završio/la s\ncrtanjem, klikni dvoklikom sastrane ili pritisni tipku \"Return\" ili \"Enter\" na\ntipkovnici.\n",
         "gps": "# GNSS \n\nGNSS podaci su najpouzdaniji izvor podataka za OpenStreetMap. Ovaj uređivač podržava lokalne tragove - `.gpx` datoteteke s tvog računala. Takav oblik GNSS traga možeš prikupiti s raznim aplikacijama za pametne telefone kao i s drugim GNSS/GPS uređajima.\n\nZa više informacija o postupku izmjere pomoću GNSS satelita, pročitaj članak [\"Mjerenje sa GPS-om\"](http://learnosm.org/en/beginner/using-gps/).\n\nKako bi koristio GPX tragove za kartiranje, povuci i ispusti GPX datoteku na uređivač karte. Ako se datoteka ispravno učita, biti će dodana na kartu kao linija svjetlo ljubičaste boje. Klikni na izbornik \"Podaci karte\" s desne strane za uključivanje, isključivanje ili povećanje na taj novi GPX sloj.\n\nGPX trag nije direktno postavljen na OpenStreetMap, samo je prikazan na karti. Da bi ga iskoristio/la na najbolji način, preko njega crtaj na karti koristeći ga kao vodilju za dodavanje novih značajki. Trag možeš također [postaviti na OpenStreetMap](http://www.openstreetmap.org/trace/create) kako bi ga i drugi\nkorisnici mogli koristiti.\n",
         "imagery": "# Fotografski snimci\n\nZračni snimci su važan izvor za kartiranje. Kombinacija snimaka iz aviona,\nsatelitskih snimaka i drugih besplatno prikupljenih izvornika je dostupna s\ndesne strane u izborniku \"Postavke pozadine\".\n\nPočetno je u pozadini prikazan sloj satelitskih snimaka [karte Bing Maps](http://www.bing.com/maps/). Novi izvornici postaju dostupni pomicanjem\ni povećanjem karte na novo geografsko područje. Neke države, poput SAD-a,\nFrancuske i Danske imaju dostupne vrlo kvalitetne snimke za određena\npodručja.\n\nSnimke su ponekad pomaknute u odnosu na podatke karte zbog pogreške\nna koordinatama izvornih snimaka. Ako vidiš puno cesta izmaknutih u\nodnosu na pozadinu, nemoj ih odmah pomicati da se poklope sa pozadinom.\nUmjesto toga, možeš podesiti snimke da odgovaraju postojećim podacima\ntako da klikneš \"Popravi odstupanje\" na dnu izbornika \"Postavke pozadine\".\n",
@@ -555,7 +559,7 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Zgrada"
+                "name": "Građevina"
             },
             "category-golf": {
                 "name": "Golf"
@@ -634,6 +638,7 @@
                 "label": "Adresa",
                 "placeholders": {
                     "city": "Grad",
+                    "conscriptionnumber": "123",
                     "country": "Država",
                     "district": "Oblast",
                     "hamlet": "Zaseok",
@@ -765,6 +770,9 @@
             "construction": {
                 "label": "Vrsta"
             },
+            "content": {
+                "label": "Sadržaj"
+            },
             "country": {
                 "label": "Država"
             },
@@ -783,6 +791,44 @@
             "cuisine": {
                 "label": "Kuhinja"
             },
+            "cycleway": {
+                "label": "Biciklističke staze",
+                "options": {
+                    "lane": {
+                        "description": "Biciklistička staza odvojena od automobila nacrtanom linijom",
+                        "title": "Standardna biciklistička staza"
+                    },
+                    "none": {
+                        "description": "Nema biciklističke staze",
+                        "title": "Nijedna"
+                    },
+                    "opposite": {
+                        "description": "Biciklistička staza obostranog smjera kretanja u jedosmjernoj ulici",
+                        "title": "Biciklistička staza suprotnog smjera"
+                    },
+                    "opposite_lane": {
+                        "description": "Biciklistička staza suprotnog smjera kretanja u odnosu na promet",
+                        "title": "Biciklistička staza suprotnog smjera"
+                    },
+                    "share_busway": {
+                        "description": "Biciklistička staza dijeljena s autobusnom trakom",
+                        "title": "Biciklistička staza dijeljena s autobusima"
+                    },
+                    "shared_lane": {
+                        "description": "Biciklistička staza nije razdvojena od motornog prometa",
+                        "title": "Dijeljena biciklistička staza "
+                    },
+                    "track": {
+                        "description": "Biciklistička staza razdvojena fizičkom preprekom od motornog prometa",
+                        "title": "Biciklistička staza"
+                    }
+                },
+                "placeholder": "nijedna",
+                "types": {
+                    "cycleway:left": "Lijeva strana",
+                    "cycleway:right": "Desna strana"
+                }
+            },
             "delivery": {
                 "label": "Dostava"
             },
@@ -794,6 +840,9 @@
             },
             "description": {
                 "label": "Opis"
+            },
+            "drive_through": {
+                "label": "Provezi-kroz"
             },
             "electrified": {
                 "label": "Elektrifikacija",
@@ -952,6 +1001,9 @@
             },
             "length": {
                 "label": "Duljina (u metrima)"
+            },
+            "level": {
+                "label": "Razina"
             },
             "levels": {
                 "label": "Razina",
@@ -1129,6 +1181,12 @@
             "recycling/paper": {
                 "label": "Prima papir"
             },
+            "recycling/type": {
+                "options": {
+                    "centre": "Reciklažni centar",
+                    "container": "Kontejner"
+                }
+            },
             "ref": {
                 "label": "Broj ceste"
             },
@@ -1151,6 +1209,7 @@
                 "label": "Vrsta"
             },
             "sac_scale": {
+                "label": "Težina planinarske staze",
                 "options": {
                     "alpine_hiking": "T4: Alpinističko planinarenje",
                     "demanding_alpine_hiking": "T5: Zahtjevno alpinističko planinarenje",
@@ -1158,12 +1217,17 @@
                     "difficult_alpine_hiking": "T6: Teško alpinističko planinarenje",
                     "hiking": "T1: Pješačenje",
                     "mountain_hiking": "T2: Planinarenje"
-                }
+                },
+                "placeholder": "Planinsko planinarenje, Alpsko planinarenje..."
+            },
+            "seasonal": {
+                "label": "Sezonski"
             },
             "service": {
                 "label": "Vrsta"
             },
             "service/bicycle/chain_tool": {
+                "label": "Alat za lanac",
                 "options": {
                     "no": "Ne",
                     "undefined": "Pretpostavlja se da je Ne",
@@ -1171,6 +1235,7 @@
                 }
             },
             "service/bicycle/pump": {
+                "label": "Zračna pumpa",
                 "options": {
                     "no": "Ne",
                     "undefined": "Pretpostavlja se da je Ne",
@@ -1240,7 +1305,8 @@
                 "label": "Vrsta tornja"
             },
             "trail_visibility": {
-                "label": "Vidljivost staze"
+                "label": "Vidljivost staze",
+                "placeholder": "Odlična, dobra, loša..."
             },
             "trees": {
                 "label": "Drveće"
@@ -1293,7 +1359,7 @@
             },
             "aerialway/gondola": {
                 "name": "Kabinska žičara",
-                "terms": "Gondola"
+                "terms": "gondola"
             },
             "aerialway/magic_carpet": {
                 "name": "Skijaški tepih"
@@ -1392,7 +1458,7 @@
                 "name": "Mjenjačnica"
             },
             "amenity/bus_station": {
-                "name": "Autobusna stanica"
+                "name": "Autobusni kolodvor"
             },
             "amenity/cafe": {
                 "name": "Kafić",
@@ -1429,6 +1495,9 @@
             },
             "amenity/college": {
                 "name": "Fakultetsko zemljište"
+            },
+            "amenity/community_centre": {
+                "name": "Društveni centar"
             },
             "amenity/compressed_air": {
                 "name": "Komprimirani zrak"
@@ -1583,7 +1652,7 @@
             },
             "amenity/toilets": {
                 "name": "Toalet",
-                "terms": "WC,toalet,nužnik,sanitarni čvor"
+                "terms": "wc,toalet,nužnik,sanitarni čvor"
             },
             "amenity/townhall": {
                 "name": "Gradska vijećnica",
@@ -1674,7 +1743,7 @@
             },
             "building/barn": {
                 "name": "Ambar",
-                "terms": "žitnica, štagalj"
+                "terms": "žitnica,štagalj"
             },
             "building/bunker": {
                 "name": "Bunker"
@@ -1714,7 +1783,7 @@
             },
             "building/greenhouse": {
                 "name": "Staklenik",
-                "terms": "Plastenik"
+                "terms": "plastenik"
             },
             "building/hospital": {
                 "name": "Zgrada bolnice"
@@ -1807,6 +1876,10 @@
             },
             "craft/handicraft": {
                 "name": "Ručni rad"
+            },
+            "craft/hvac": {
+                "name": "HVAC",
+                "terms": "rashladni sustav,klimatizacija,ventilacija,klima,vanjski rashladni sustav,vanjski sustav za grijanje,klimatizacijsko grijaći sustav"
             },
             "craft/jeweler": {
                 "name": "Draguljar"
@@ -1909,12 +1982,6 @@
             "entrance": {
                 "name": "Ulaz/izlaz"
             },
-            "footway/crossing": {
-                "name": "Pružni prijelaz za pješake"
-            },
-            "footway/crosswalk": {
-                "name": "Pješački prijelaz"
-            },
             "footway/sidewalk": {
                 "name": "Pločnik"
             },
@@ -1930,10 +1997,6 @@
             "highway/bus_stop": {
                 "name": "Autobusna stanica",
                 "terms": "bus stanica,stanica za bus,autobusna stanica,busna stanica"
-            },
-            "highway/crossing": {
-                "name": "Pješački prijelaz",
-                "terms": "zebra,pješački prijelaz"
             },
             "highway/cycleway": {
                 "name": "Biciklistička staza"
@@ -1959,9 +2022,6 @@
             },
             "highway/path": {
                 "name": "Staza"
-            },
-            "highway/pedestrian": {
-                "name": "Pješačka zona"
             },
             "highway/primary": {
                 "name": "Državna cesta"
@@ -2067,9 +2127,6 @@
             "historic/wayside_shrine": {
                 "name": "Svetište uz cestu",
                 "terms": "svetište uz cestu,svetište uz put"
-            },
-            "landuse": {
-                "name": "Korištenje"
             },
             "landuse/allotments": {
                 "name": "Vrtovi",
@@ -2243,7 +2300,7 @@
             },
             "man_made/survey_point": {
                 "name": "Geodetska točka",
-                "terms": "geodetska točka,poligonska točka,trigonometrijska točka,trigonometar,poligon,GPS točka,GNSS točka,geodetska oznaka"
+                "terms": "geodetska točka,poligonska točka,trigonometrijska točka,trigonometar,poligon,gps točka,gnss točka,geodetska oznaka"
             },
             "man_made/tower": {
                 "name": "Toranj",
@@ -2316,7 +2373,7 @@
             },
             "natural/scrub": {
                 "name": "Makija",
-                "terms": "šikara,zaraslo zemljište,gust šibljak,guštara,guštik,šiprag,šipražje,gustiš,šiblje, samoniklo šiblje,šibljar,šibljik,makija"
+                "terms": "šikara,zaraslo zemljište,gust šibljak,guštara,guštik,šiprag,šipražje,gustiš,šiblje,samoniklo šiblje,šibljar,šibljik,makija"
             },
             "natural/spring": {
                 "name": "Izvor",
@@ -2440,7 +2497,7 @@
             },
             "power/transformer": {
                 "name": "Transformator",
-                "terms": "transformator, transformator el. energije,transformator struje"
+                "terms": "transformator,transformator el. energije,transformator struje"
             },
             "public_transport/platform": {
                 "name": "Stajalište",
@@ -2467,10 +2524,6 @@
             "railway/halt": {
                 "name": "Željeznička stanica",
                 "terms": "željeznička stanica,željeznička postaja,stanica za vlak"
-            },
-            "railway/level_crossing": {
-                "name": "Željeznično-cestovni prijelaz",
-                "terms": "žcp,prijelaz preko željezničke pruge,križanje ceste i pruge,križanje pruge i ceste"
             },
             "railway/monorail": {
                 "name": "Jednotračna željeznička pruga",
@@ -2578,7 +2631,7 @@
             },
             "shop/chemist": {
                 "name": "Drogerija",
-                "terms": "ljekarna, farmacija, apoteka"
+                "terms": "ljekarna,farmacija,apoteka"
             },
             "shop/chocolate": {
                 "name": "Prodavaonica čokolade"
@@ -2596,7 +2649,7 @@
             },
             "shop/convenience": {
                 "name": "Trgovina mješovitom robom",
-                "terms": "dućan,trgovina,prodavaonica,samoposluga,kvartovska trgovina,trgovina mješovitom robom, prodavaonica mješovite robe"
+                "terms": "dućan,trgovina,prodavaonica,samoposluga,kvartovska trgovina,trgovina mješovitom robom,prodavaonica mješovite robe"
             },
             "shop/cosmetics": {
                 "name": "Prodavaonica kozmetike"
@@ -2625,7 +2678,7 @@
             },
             "shop/erotic": {
                 "name": "Prodavaonica erotskih pomagala",
-                "terms": "erotika, eros, pornjava,sexy shop"
+                "terms": "erotika,eros,pornjava,sexy shop"
             },
             "shop/farm": {
                 "name": "Prodavaonica proizvoda farme"
@@ -2782,7 +2835,7 @@
             },
             "shop/video_games": {
                 "name": "Prodavaonica video igara",
-                "terms": "računalne igre, igrice"
+                "terms": "računalne igre,igrice"
             },
             "shop/wine": {
                 "name": "Vinarija"
@@ -2809,7 +2862,7 @@
             },
             "tourism/caravan_site": {
                 "name": "Parkiralište za kamp kućice",
-                "terms": "park za rekreativna vozila,park za kamp-prikolice,RV park,kamp,kamp za kamp kućice,kamp za kamp prikolice,kamp prikolica,park za kamp prikolice,kamp za kamp-prikolice"
+                "terms": "park za rekreativna vozila,park za kamp-prikolice,rv park,kamp,kamp za kamp kućice,kamp za kamp prikolice,kamp prikolica,park za kamp prikolice,kamp za kamp-prikolice"
             },
             "tourism/chalet": {
                 "name": "Bungalov",

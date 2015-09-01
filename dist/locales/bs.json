@@ -323,7 +323,6 @@
     },
     "help": {
         "title": "Pomoć",
-        "editing_saving": "# Uređivanje i spremanje\n\nOvaj editor je dizajniran da primarno radi online, i pristupate mu\nkroz web stranicu upravo sada.\n\n### Odabir značajki\n\nDa odaberete značajku na karti, kao npr. cestu ili tačku od interesa, kliknite\nna istu na karti. Ovo će osvijetliti odabranu značajku, otvoriti panel sa\ndetaljima o istoj, i pokazati izbor stvari koje možete uraditi sa značajkom.\n\nDa odaberete više značajki odjednom, držite tipku 'Shift'. Onda ili kliknite\nna značajke koje želite odabrati, ili povucite na karti da nacrtate pravougaonik.\nOvo će nacrtati kutiju i odabrati sve tačke unutar iste.\n\n### Spremanje uređivanja\n\nKada uradite promjene kao što su uređivanje cesta, zgrada i mjesta, isti se\npohranjuju lokalno sve dok ih ne spremite na server. Ne brinite ako napravite\ngrešku - možete poništiti promjene klikom na dugme \"Poništiti\", i vratiti\npromjene klikom na dugme \"Vratiti\".\n\nKliknite na 'Spremiti' da završite grupu uređivanja - npr, ako ste završili\ndio grada i želite započeti uređivanje na novom području. Imaćete priliku\nda pregledate šta ste uradili, a editor daje prijedloge od pomoći\ni upozorenja ako se nešto ne čini uredu sa promjenama.\n\nAko sve izgleda uredno, možete unijeti kratak komentar kojim objašnjavate promjene\nkoje ste napravili, i kliknite na 'Spremiti' opet kako bi postavili promjene\nna [OpenStreetMap.org](http://www.openstreetmap.org/), gdje su one vidljive\nsvim drugim korisnicima i dostupne za druge da ih dalje uređuju i poboljšavaju.\n\nAko ne možete završiti vaša uređivanja u jednom sjedenju, možete napustiti prozor\neditora i vratiti se (na istom pregledniku i računaru), i\naplikacija editora će ponuditi da vratite vaš rad.\n",
         "roads": "# Putevi\n\nMožete crtati, popravljati, i brisati puteve sa ovim uređivačem. Putevi mogu biti svih\nvrsta: staze, ceste, tragovi, biciklističke staze, i više - bilo koji često prelaženi\nsegment bi trebao biti moguć za ucrtavanje.\n\n### Odabir\n\nKliknite na put da ga odaberete. vanjska linija bi trebala postati vidljiva, zajedno\nsa malim menijem alata na karti i bočnom trakom koja pokazuje više informacija\no putu.\n\n### Izmjena\n\nČesto ćete vidjeti puteve koji nisu poravnati da satelistskim slikama iza njih\nili sa GPS trasom. Možete podesiti ove puteve tako da su na pravom\nmjestu.\n\nPrvi klik na put koji želite mijenjati. Ovo će ga označiti i pokazati\nkontrolne tačke uz njega koje možete pomjerati na bolje lokacije. Ukoliko\nželite dodati nove kontrolne tačke za više detalja, dva puta kliknite na dio\nputa bez čvora, i jedan će biti dodan.\n\nUkoliko se put povezuje na drugi put, ali se neprikladno povezuje na\nkartu, možete povući jednu od njegovih kontnrolnih tačaka na drugi put u\nnamjeri da ih spojite. Održavanje puteva povezanim je važno za kartu\ni od vitalnoj je značaja za obezbjeđivanje uputa za vožnju.\n\nMožete takođe kliknuti na alat 'Pomjeriti' ili pritisnuti 'M' tipku koja je prečica da pomičete cijeli put\nistovremeno, i onda kliknete opet da spasite to pomicanje. \n\n### Brisanje\n\nUkoliko je put u potpunosti netačan - možete vidjeti da ne postoji na satelitskoj\nslici i idealno bi bilo da potvrdite da nije prisutan lokalno - možete ga izbrisati,\nšto ga uklanja sa karte. Budite pažljivi kada brišete značajke -\nkao i svako drugo uređivanje, rezultati su vidljivi svima i satelitske slike\nsu često stare, tako da bi put mogao ustvari biti novoizgrađeni.\n\nMožete izbrisati put klikom na njega da ga odaberete, i onda klikajući na\nikonu kante za smeće ili pritiskom na tipku 'Delete'.\n\n### Pravljenje\n\nNašli ste negdje da bi tu trebao biti put ali ga nema? Kliknite ikonu 'Linija'\nu donjem lijevom uglu uređivača ili pritisnite tipku`2` da bi započeli crtanje\nlinije.\n\nKliknite na početak puta na kartu da započnete crtanje. Ukoliko se put\ngranan sa postojećeg puta, započnite sa mjesta gdje se povezuju.\n\nOnda kliknite na tačke uzduž puta tako da slijedi pravu putanju, prema\nsatelitskim slikama ili prema GPS-u. Ukoliko se put koji crtate križa sa drugim putem, povežite\nga klikom na tačku križanja. Kada završite crtanje, dva puta kliknite\nili pritisnite 'Backspace' ili 'Enter' na Vašoj tastaturi.\n",
         "imagery": "# Satelitske slike\n\nSatelitske slike su važan resurs za mapiranje. Kombinacija\npreleta avionom, satelitski pogledi i slobodno sastavljeni izvorisu dostupni\nu uređivaču pod menijem 'Podešavanja pozadine' na desnoj strani.\n\nU početnik postavkama satelitski sloj [Bing Maps] (http://www.bing.com/maps/) je\nprezentiran u uređivaču, ali kako pomičete i uvećavate kartu na nova geografska\npodručja, novi će izvori postati dostupni. Neke zemlje, poput Sjedinjenih\nDržava, Francuske i Danske imaju slike vrlo visoke kvalitete na raspolaganju za neka područja.\n\nSatelitske slike ponekad odstupaju od podataka karte, zbog greške na\nstrani davatelja satelitskih slika. Ako vidite puno cesta pomjerenih u pozadini.\nnemojte ih odmah sve premještati kako bi se slagale sa pozadinom. Umjesto toga možete podesiti\nsatelitske slike tako da odgovaraju postojećim podacima klikom na 'Popravljanje poravnanja', na\ndnu interfejsa Podešavanja pozadine.\n",
         "addresses": "# Addrese\n\nAddrese su neke od najkorisnijih informacija na karti.\n\nIako su adrese često predstavljene kao dijelovi ulica, na karti OpenStreetMap\nsu one spremljene kao atributi građevina i mjesta uz ulice.\n\nMožete dodati informaciju o adresama mjesta koja su ucrtana kao i vanjske linije građevina takođe\nkao i onih koja su ucrtana kao obične tačke. Optimalni izvor podataka adresa\nse dobija iz istraživanja na licu mjesta ili ličnim znanjem- kao što je slučaj sam bilo kojom drugom značajkom,\nkopiranje iz komercijalnih izvora kao što je Google Maps je striktno\nzabranjeno.\n",
@@ -895,7 +894,7 @@
             },
             "amenity/car_rental": {
                 "name": "Rent-a-car",
-                "terms": "Iznajmljivanje automobila,najam automobila,rent-a-car"
+                "terms": "iznajmljivanje automobila,najam automobila,rent-a-car"
             },
             "amenity/car_sharing": {
                 "name": "\"Car Sharing\"",
@@ -970,7 +969,7 @@
             },
             "amenity/place_of_worship": {
                 "name": "Bogomolja",
-                "terms": "Božja kuća,bogomolja,mjesto za molitvu,hram"
+                "terms": "božja kuća,bogomolja,mjesto za molitvu,hram"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Budistički hram",
@@ -1129,7 +1128,7 @@
             },
             "boundary/administrative": {
                 "name": "Admninistrativna granica",
-                "terms": "administrativna granica, administrativna linija"
+                "terms": "administrativna granica,administrativna linija"
             },
             "building": {
                 "name": "Građevina",
@@ -1264,10 +1263,6 @@
                 "name": "Telefon za hitne slučajeve",
                 "terms": "telefon za hitne slučajeve,hitna telefonska linija"
             },
-            "footway/crossing": {
-                "name": "Prelaz",
-                "terms": "prelaz,pješački prelaz"
-            },
             "footway/sidewalk": {
                 "name": "Trotoar",
                 "terms": "trotoar"
@@ -1278,7 +1273,7 @@
             },
             "golf/fairway": {
                 "name": "Fairway",
-                "terms": "osnovni dio golf terena, glavni teren za golf"
+                "terms": "osnovni dio golf terena,glavni teren za golf"
             },
             "golf/green": {
                 "name": "Putting Green",
@@ -1298,7 +1293,7 @@
             },
             "golf/tee": {
                 "name": "Tee Box",
-                "terms": "\"Tee\" kutija,kutija područja na početku rupe"
+                "terms": "\"tee\" kutija,kutija područja na početku rupe"
             },
             "golf/water_hazard": {
                 "name": "Vodena opasnost",
@@ -1315,10 +1310,6 @@
             "highway/bus_stop": {
                 "name": "Bus stanica",
                 "terms": "autobuska stanica,autobusko stajalište"
-            },
-            "highway/crossing": {
-                "name": "Prelaz",
-                "terms": "pješački prelaz,zebra"
             },
             "highway/cycleway": {
                 "name": "Biciklistička staza",
@@ -1347,10 +1338,6 @@
             "highway/path": {
                 "name": "Staza",
                 "terms": "staza,puteljak"
-            },
-            "highway/pedestrian": {
-                "name": "Pješački",
-                "terms": "pješački,za pješake"
             },
             "highway/primary": {
                 "name": "Primarna cesta",
@@ -1476,10 +1463,6 @@
                 "name": "Hram pored puta",
                 "terms": "znamenje kraj puta,kapelica"
             },
-            "landuse": {
-                "name": "Upotreba zemljišta",
-                "terms": "upotreba zemljišta,namjena zemljišta"
-            },
             "landuse/allotments": {
                 "name": "Parcele",
                 "terms": "parcele,zemlja za vrtlarstvo"
@@ -1558,7 +1541,7 @@
             },
             "leisure/pitch/american_football": {
                 "name": "Polje za američki fudbal",
-                "terms": "Polje za američki fudbal,igralište za američki fudbal"
+                "terms": "polje za američki fudbal,igralište za američki fudbal"
             },
             "leisure/pitch/baseball": {
                 "name": "Bejzbol teren",
@@ -1802,7 +1785,7 @@
             },
             "office/it": {
                 "name": "IT ured",
-                "terms": "IT ured,informatički ured,IT kancelarija"
+                "terms": "it ured,informatički ured,it kancelarija"
             },
             "office/lawyer": {
                 "name": "Pravni ured",
@@ -1814,7 +1797,7 @@
             },
             "office/ngo": {
                 "name": "Ured NVO",
-                "terms": "Nevladin ured,ured NVO,NVO kancelarija"
+                "terms": "nevladin ured,ured nvo,nvo kancelarija"
             },
             "office/physician": {
                 "name": "Ljekar",
@@ -1870,7 +1853,7 @@
             },
             "place/village": {
                 "name": "Selo",
-                "terms": "selo, veće selo"
+                "terms": "selo,veće selo"
             },
             "point": {
                 "name": "Tačka",
@@ -1932,10 +1915,6 @@
                 "name": "Željeznička ustava",
                 "terms": "željeznička ustava,željezničko zaustavljanje,željeznički zastoj"
             },
-            "railway/level_crossing": {
-                "name": "Prelaz u nivou",
-                "terms": "prelaz u nivou,ukrštanje željeznice i puta"
-            },
             "railway/monorail": {
                 "name": "Pruga sa jednim kolosijekom",
                 "terms": "pruga sa jednim kolosijekom,jednošinska pruga"
@@ -1958,7 +1937,7 @@
             },
             "railway/subway_entrance": {
                 "name": "Ulaz u podzemnu željeznicu",
-                "terms": "ulaz u podzemnu željeznicu, ulaz podzemne željeznice"
+                "terms": "ulaz u podzemnu željeznicu,ulaz podzemne željeznice"
             },
             "railway/tram": {
                 "name": "Tramvaj",
@@ -2086,7 +2065,7 @@
             },
             "shop/hifi": {
                 "name": "HiFi prodavnica",
-                "terms": "HiFi prodavnica,radnja za prodaju HiFi uređaja"
+                "terms": "hifi prodavnica,radnja za prodaju hifi uređaja"
             },
             "shop/jewelry": {
                 "name": "Zlatar",
@@ -2146,7 +2125,7 @@
             },
             "shop/toys": {
                 "name": "Prodavnica igračaka",
-                "terms": "prodavnica igračaka, radnja za prodaju igračaka"
+                "terms": "prodavnica igračaka,radnja za prodaju igračaka"
             },
             "shop/travel_agency": {
                 "name": "Putnička agencija",
@@ -2154,7 +2133,7 @@
             },
             "shop/tyres": {
                 "name": "Prodavnica guma",
-                "terms": "prodavnica guma, radnja za prodaju auto-guma"
+                "terms": "prodavnica guma,radnja za prodaju auto-guma"
             },
             "shop/vacant": {
                 "name": "Prodavnica za iznajmljivanje",

@@ -807,9 +807,6 @@
             "highway/bus_stop": {
                 "name": "Busstopp"
             },
-            "highway/crossing": {
-                "name": "Overgang"
-            },
             "highway/cycleway": {
                 "name": "Sykkelvei"
             },
@@ -830,9 +827,6 @@
             },
             "highway/path": {
                 "name": "Sti"
-            },
-            "highway/pedestrian": {
-                "name": "Gående"
             },
             "highway/primary": {
                 "name": "Primær hovedvei"
@@ -890,9 +884,6 @@
             },
             "historic/ruins": {
                 "name": "Ruiner"
-            },
-            "landuse": {
-                "name": "Arealbruk"
             },
             "landuse/allotments": {
                 "name": "Kolonihage"
@@ -1085,9 +1076,6 @@
             },
             "railway": {
                 "name": "Jernbane"
-            },
-            "railway/level_crossing": {
-                "name": "Jernbaneovergang"
             },
             "railway/monorail": {
                 "name": "Monorail"

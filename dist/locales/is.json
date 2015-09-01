@@ -977,7 +977,7 @@
             },
             "amenity/place_of_worship": {
                 "name": "Tilbeiðsluhús",
-                "terms": "musteri, kirkja, kapella, bænahús"
+                "terms": "musteri,kirkja,kapella,bænahús"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Búddistamusteri"
@@ -1115,7 +1115,7 @@
             },
             "building/cabin": {
                 "name": "Sumarhús",
-                "terms": "Sumarbústaður, kofi"
+                "terms": "sumarbústaður,kofi"
             },
             "building/cathedral": {
                 "name": "Dómkirkja"
@@ -1268,9 +1268,6 @@
             "highway/bus_stop": {
                 "name": "Stoppistöð"
             },
-            "highway/crossing": {
-                "name": "Þverun"
-            },
             "highway/cycleway": {
                 "name": "Hjólastígur"
             },
@@ -1291,9 +1288,6 @@
             },
             "highway/path": {
                 "name": "Stígur"
-            },
-            "highway/pedestrian": {
-                "name": "Fótgangandi"
             },
             "highway/primary": {
                 "name": "Stofnbraut"
@@ -1327,7 +1321,7 @@
             },
             "highway/service/driveway": {
                 "name": "Innkeyrsla",
-                "terms": "Heimreið"
+                "terms": "heimreið"
             },
             "highway/service/emergency_access": {
                 "name": "Neyðaraðgangur"
@@ -1391,9 +1385,6 @@
             },
             "historic/wayside_shrine": {
                 "name": "Tilbeiðsluskríni"
-            },
-            "landuse": {
-                "name": "Landnotkun"
             },
             "landuse/allotments": {
                 "name": "Ræktunargarðar"
@@ -1673,9 +1664,6 @@
             },
             "railway/funicular": {
                 "name": "Toglest"
-            },
-            "railway/level_crossing": {
-                "name": "Jöfn vegamót"
             },
             "railway/monorail": {
                 "name": "Monorail"

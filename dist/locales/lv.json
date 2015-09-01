@@ -722,9 +722,6 @@
             "historic/ruins": {
                 "name": "Pilsdrupas"
             },
-            "landuse": {
-                "name": "Zemes pielietojums"
-            },
             "landuse/basin": {
                 "name": "Baseins"
             },
