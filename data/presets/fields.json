@@ -11,7 +11,7 @@
             "key": "access"
         },
         "type": "access",
-        "label": "Access",
+        "label": "Allowed Access",
         "placeholder": "Unknown",
         "strings": {
             "types": {
