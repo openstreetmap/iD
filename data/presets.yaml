@@ -506,8 +506,6 @@ en:
           deciduous: Deciduous
           # leaf_cycle=evergreen
           evergreen: Evergreen
-          # leaf_cycle=mixed
-          mixed: Mixed
           # leaf_cycle=semi_deciduous
           semi_deciduous: Semi-Deciduous
           # leaf_cycle=semi_evergreen
@@ -532,8 +530,6 @@ en:
           broadleaved: Broadleaved
           # leaf_type=leafless
           leafless: Leafless
-          # leaf_type=mixed
-          mixed: Mixed
           # leaf_type=needleleaved
           needleleaved: Needleleaved
       leisure:

@@ -288,25 +288,31 @@ describe('iD.geo', function() {
     });
 
     describe('.polygonIntersectsPolygon', function() {
-        it('says a polygon in a polygon intersects it', function() {
+        it('returns true when outer polygon fully contains inner', function() {
             var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
             var inner = [[1, 1], [1, 2], [2, 2], [2, 1], [1, 1]];
             expect(iD.geo.polygonIntersectsPolygon(outer, inner)).to.be.true;
         });
 
-        it('says a polygon that partially intersects does when some points are contained', function() {
+        it('returns true when outer polygon partially contains inner (some vertices contained)', function() {
             var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
             var inner = [[-1, -1], [1, 2], [2, 2], [2, 1], [1, 1]];
             expect(iD.geo.polygonIntersectsPolygon(outer, inner)).to.be.true;
         });
 
-        it('says a polygon that partially intersects does when no points are contained', function() {
+        it('returns false when outer polygon partially contains inner (no vertices contained - lax test)', function() {
             var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
             var inner = [[1, -1], [1, 4], [2, 4], [2, -1], [1, -1]];
-            expect(iD.geo.polygonIntersectsPolygon(outer, inner)).to.be.true;
+            expect(iD.geo.polygonIntersectsPolygon(outer, inner)).to.be.false;
         });
 
-        it('says totally disjoint polygons do not intersect', function() {
+        it('returns true when outer polygon partially contains inner (no vertices contained - strict test)', function() {
+            var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
+            var inner = [[1, -1], [1, 4], [2, 4], [2, -1], [1, -1]];
+            expect(iD.geo.polygonIntersectsPolygon(outer, inner, true)).to.be.true;
+        });
+
+        it('returns false when outer and inner are fully disjoint', function() {
             var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
             var inner = [[-1, -1], [-1, -2], [-2, -2], [-2, -1], [-1, -1]];
             expect(iD.geo.polygonIntersectsPolygon(outer, inner)).to.be.false;

@@ -192,7 +192,7 @@ iD.geo.polygonContainsPolygon = function(outer, inner) {
     });
 };
 
-iD.geo.polygonIntersectsPolygon = function(outer, inner) {
+iD.geo.polygonIntersectsPolygon = function(outer, inner, checkSegments) {
     function testSegments(outer, inner) {
         for (var i = 0; i < outer.length - 1; i++) {
             for (var j = 0; j < inner.length - 1; j++) {
@@ -204,9 +204,13 @@ iD.geo.polygonIntersectsPolygon = function(outer, inner) {
         return false;
     }
 
-    return _.some(inner, function(point) {
-        return iD.geo.pointInPolygon(point, outer);
-    }) || testSegments(outer, inner);
+    function testPoints(outer, inner) {
+        return _.some(inner, function(point) {
+            return iD.geo.pointInPolygon(point, outer);
+        });
+    }
+
+   return testPoints(outer, inner) || (!!checkSegments && testSegments(outer, inner));
 };
 
 iD.geo.pathLength = function(path) {

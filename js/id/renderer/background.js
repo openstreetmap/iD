@@ -159,7 +159,7 @@ iD.Background = function(context) {
                     return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
                 }, []);
 
-            if (!iD.geo.polygonIntersectsPolygon(viewport, coords)) {
+            if (!iD.geo.polygonIntersectsPolygon(viewport, coords, true)) {
                 var extent = iD.geo.Extent(d3.geo.bounds(gpxLayer.geojson()));
                 map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
             }

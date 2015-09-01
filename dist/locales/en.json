@@ -1019,8 +1019,7 @@
                     "evergreen": "Evergreen",
                     "deciduous": "Deciduous",
                     "semi_evergreen": "Semi-Evergreen",
-                    "semi_deciduous": "Semi-Deciduous",
-                    "mixed": "Mixed"
+                    "semi_deciduous": "Semi-Deciduous"
                 }
             },
             "leaf_type": {
@@ -1037,7 +1036,6 @@
                 "options": {
                     "broadleaved": "Broadleaved",
                     "needleleaved": "Needleleaved",
-                    "mixed": "Mixed",
                     "leafless": "Leafless"
                 }
             },
