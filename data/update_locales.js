@@ -25,6 +25,23 @@ var auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
 var sourceCore = yaml.load(fs.readFileSync('./data/core.yaml', 'utf8')),
     sourcePresets = yaml.load(fs.readFileSync('./data/presets.yaml', 'utf8'));
 
+/*
+ * Lowercase all values with key 'terms' in-place in the given
+ * collection, no matter how deep they are. While we're at it, we also
+ * replace comma-space separators by just comma separators
+ *
+ * Usage: lowerMyTermsOrMyChilds(collection)
+ * */
+var deepNormalizeTerms = function(value, key, collection) {
+    if (_.isObject(value)) {
+        _.forEach(value, deepNormalizeTerms)
+    } else {
+        if (key === 'terms') {
+            collection[key] = value.toLowerCase().replace(/, /g, ',');
+        }
+    }
+}
+
 asyncMap(resources, getResource, function(err, locales) {
     if (err) return console.log(err);
 
@@ -37,6 +54,11 @@ asyncMap(resources, getResource, function(err, locales) {
 
     for (var i in locale) {
         if (i === 'en' || _.isEmpty(locale[i])) continue;
+
+        if (locale[i]['presets'] !== undefined && locale[i]['presets']['presets'] !== undefined) {
+            deepNormalizeTerms(locale[i]['presets']['presets']);
+        }
+
         codes.push(i);
         fs.writeFileSync(outdir + i + '.json', JSON.stringify(locale[i], null, 4));
     }
