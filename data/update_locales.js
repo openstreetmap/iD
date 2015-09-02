@@ -28,16 +28,16 @@ var sourceCore = yaml.load(fs.readFileSync('./data/core.yaml', 'utf8')),
 /*
  * Lowercase all values with key 'terms' in-place in the given
  * collection, no matter how deep they are. While we're at it, we also
- * replace comma-space separators by just comma separators
+ * replace "comma space combination" separators by just comma separators
  *
  * Usage: lowerMyTermsOrMyChilds(collection)
  * */
-var deepNormalizeTerms = function(value, key, collection) {
+function deepNormalizeTerms(value, key, collection) {
     if (_.isObject(value)) {
         _.forEach(value, deepNormalizeTerms)
     } else {
         if (key === 'terms') {
-            collection[key] = value.toLowerCase().replace(/, /g, ',');
+            collection[key] = value.toLowerCase().replace(/\s*,+\s*/g, ',');
         }
     }
 }
